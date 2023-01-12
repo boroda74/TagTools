@@ -8,7 +8,7 @@ $Char(hexadecimal code), which returns Unicode character with given hexadecimal 
 Use these functions like native MusicBee functions (i.e. without any initial setup required by $ALR() and $ASR() functions). 
 Everywhere you can use either literals or MusicBee tags of appropriate types as function parameters, e.g. $NumberOfDays(&lt;Year&gt;,&lt;Original Year&gt;) or $SubDateTime(&lt;Date Added&gt;,01/01/2000). 
 
-```
+<pre>
 $Random(max_number): random integer number between 0 
 &nbsp;&nbsp;&nbsp;&nbsp;and max_number (including them)
 
@@ -80,4 +80,4 @@ $TagContainsAnyString(&lt;URL&gt;,tag_name,string1|string2|etc.): returns "T" if
 
 $TagContainsAllStrings(&lt;URL&gt;,tag_name,string1|string2|etc.): returns "T" if tag 
 &nbsp;&nbsp;&nbsp;&nbsp;contains all strings separated by |, otherwise returns "F". 
-```
+</pre>
