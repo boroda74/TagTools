@@ -289,7 +289,7 @@ Excepted words will be unchanged, not lowercased! To lowercase them, use: \@tc[[
 \@eval[[virtual tag expression]] : returns result of calculation of virtual tag expression, e.g. \@eval[[$Sub(<Play Count>,<Skip Count>)]]
 
 \@repunct[[string]] : changes Unicode punctuation marks to ASCII analogs, e.g. « to <<
-<pre>
+</pre>
 
 ---
 
