@@ -1,0 +1,472 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F5D46BA1-6F21-40EF-9695-46105CCACD08}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MusicBeePlugin</RootNamespace>
+    <AssemblyName>mb_TagTools</AssemblyName>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>D:\Архив\.Портативные программы\MusicBee\Plugins\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>D:\Архив\.Портативные программы\MusicBee\Plugins\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Wrench.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <OutputPath>D:\Архив\.Портативные программы\MusicBee\Plugins\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>D:\Архив\.Портативные программы\MusicBee\Plugins\</OutputPath>
+    <DefineConstants>CODE_ANALYSIS;TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <PlatformTarget>x86</PlatformTarget>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdvancedSearchAndReplace.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdvancedSearchAndReplace.Designer.cs">
+      <DependentUpon>AdvancedSearchAndReplace.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ASRPresetEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ASRPresetEditor.Designer.cs">
+      <DependentUpon>ASRPresetEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AutoRate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AutoRate.Designer.cs">
+      <DependentUpon>AutoRate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BackupRestore.cs" />
+    <Compile Include="CalculateAverageAlbumRating.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CalculateAverageAlbumRating.Designer.cs">
+      <DependentUpon>CalculateAverageAlbumRating.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChangeCase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangeCase.Designer.cs">
+      <DependentUpon>ChangeCase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AutoBackupSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AutoBackupSettings.Designer.cs">
+      <DependentUpon>AutoBackupSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ASRPresetConfirmation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ASRPresetConfirmation.Designer.cs">
+      <DependentUpon>ASRPresetConfirmation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MultipleSearchAndReplace.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MultipleSearchAndReplace.Designer.cs">
+      <DependentUpon>MultipleSearchAndReplace.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReencodeTag.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReencodeTag.designer.cs">
+      <DependentUpon>ReencodeTag.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SelectTags.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectTags.Designer.cs">
+      <DependentUpon>SelectTags.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CompareTracks.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CompareTracks.Designer.cs">
+      <DependentUpon>CompareTracks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SaveLastSkipped.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SaveLastSkipped.Designer.cs">
+      <DependentUpon>SaveLastSkipped.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TagHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TagHistory.Designer.cs">
+      <DependentUpon>TagHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MultiplePastingQuestion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MultiplePastingQuestion.Designer.cs">
+      <DependentUpon>MultiplePastingQuestion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PasteTagsFromClipboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PasteTagsFromClipboard.Designer.cs">
+      <DependentUpon>PasteTagsFromClipboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CopyTagsToClipboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CopyTagsToClipboard.Designer.cs">
+      <DependentUpon>CopyTagsToClipboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CopyTag.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CopyTag.Designer.cs">
+      <DependentUpon>CopyTag.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AutoLibraryReports.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AutoLibraryReports.Designer.cs">
+      <DependentUpon>AutoLibraryReports.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DatagridViewCheckBoxHeaderCell.cs" />
+    <Compile Include="FillTagNames.cs" />
+    <Compile Include="LibraryReports.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LibraryReports.Designer.cs">
+      <DependentUpon>LibraryReports.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MusicBeeInterface.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="ReencodeTags.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReencodeTags.Designer.cs">
+      <DependentUpon>ReencodeTags.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Settings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Settings.Designer.cs">
+      <DependentUpon>Settings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SwapTags.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SwapTags.Designer.cs">
+      <DependentUpon>SwapTags.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TagTools.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PluginWindowTemplate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PluginWindowTemplate.Designer.cs">
+      <DependentUpon>PluginWindowTemplate.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="AdvancedSearchAndReplace.resx">
+      <DependentUpon>AdvancedSearchAndReplace.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdvancedSearchAndReplace.ru.resx">
+      <DependentUpon>AdvancedSearchAndReplace.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ASRPresetConfirmation.ru.resx">
+      <DependentUpon>ASRPresetConfirmation.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ASRPresetEditor.resx">
+      <DependentUpon>ASRPresetEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ASRPresetEditor.ru.resx">
+      <DependentUpon>ASRPresetEditor.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AutoBackupSettings.ru.resx">
+      <DependentUpon>AutoBackupSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AutoRate.resx">
+      <DependentUpon>AutoRate.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AutoRate.ru.resx">
+      <DependentUpon>AutoRate.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CalculateAverageAlbumRating.resx">
+      <DependentUpon>CalculateAverageAlbumRating.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CalculateAverageAlbumRating.ru.resx">
+      <DependentUpon>CalculateAverageAlbumRating.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangeCase.resx">
+      <DependentUpon>ChangeCase.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangeCase.ru.resx">
+      <DependentUpon>ChangeCase.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AutoBackupSettings.resx">
+      <DependentUpon>AutoBackupSettings.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ASRPresetConfirmation.resx">
+      <DependentUpon>ASRPresetConfirmation.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MultipleSearchAndReplace.resx">
+      <DependentUpon>MultipleSearchAndReplace.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MultipleSearchAndReplace.ru.resx">
+      <DependentUpon>MultipleSearchAndReplace.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReencodeTag.resx">
+      <DependentUpon>ReencodeTag.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReencodeTag.ru.resx">
+      <DependentUpon>ReencodeTag.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectTags.resx">
+      <DependentUpon>SelectTags.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectTags.ru.resx">
+      <DependentUpon>SelectTags.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CompareTracks.resx">
+      <DependentUpon>CompareTracks.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CompareTracks.ru.resx">
+      <DependentUpon>CompareTracks.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SaveLastSkipped.resx">
+      <DependentUpon>SaveLastSkipped.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SaveLastSkipped.ru.resx">
+      <DependentUpon>SaveLastSkipped.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TagHistory.resx">
+      <DependentUpon>TagHistory.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TagHistory.ru.resx">
+      <DependentUpon>TagHistory.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MultiplePastingQuestion.resx">
+      <DependentUpon>MultiplePastingQuestion.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CopyTagsToClipboard.ru.resx">
+      <DependentUpon>CopyTagsToClipboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MultiplePastingQuestion.ru.resx">
+      <DependentUpon>MultiplePastingQuestion.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PasteTagsFromClipboard.resx">
+      <DependentUpon>PasteTagsFromClipboard.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CopyTagsToClipboard.resx">
+      <DependentUpon>CopyTagsToClipboard.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CopyTag.resx">
+      <DependentUpon>CopyTag.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CopyTag.ru.resx">
+      <DependentUpon>CopyTag.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AutoLibraryReports.resx">
+      <DependentUpon>AutoLibraryReports.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AutoLibraryReports.ru.resx">
+      <DependentUpon>AutoLibraryReports.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LibraryReports.resx">
+      <DependentUpon>LibraryReports.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LibraryReports.ru.resx">
+      <DependentUpon>LibraryReports.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PasteTagsFromClipboard.ru.resx">
+      <DependentUpon>PasteTagsFromClipboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReencodeTags.resx">
+      <DependentUpon>ReencodeTags.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReencodeTags.ru.resx">
+      <DependentUpon>ReencodeTags.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Settings.resx">
+      <DependentUpon>Settings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Settings.ru.resx">
+      <DependentUpon>Settings.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SwapTags.resx">
+      <DependentUpon>SwapTags.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SwapTags.ru.resx">
+      <DependentUpon>SwapTags.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PluginWindowTemplate.resx">
+      <DependentUpon>PluginWindowTemplate.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 и x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>Клиентский профиль .NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Установщик Windows 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Search.png" />
+    <None Include="Resources\Xion20.png" />
+    <None Include="Resources\Lightning.png" />
+    <None Include="Resources\Window.png" />
+    <None Include="Resources\MissingArtwork.png" />
+    <Content Include="Wrench.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
