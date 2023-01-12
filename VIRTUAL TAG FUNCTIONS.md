@@ -1,4 +1,5 @@
 **VIRTUAL TAG FUNCTIONS**
+<br/>
 
 This plugin introduces several new virtual tag functions (they also can be used in various filename templates, e.g. in the file organizer) like 
 $Char(hexadecimal code), which returns Unicode character with given hexadecimal code, e.g. $Char(a7) returns Unicode character "§" (U+00A7)

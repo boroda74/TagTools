@@ -1,7 +1,9 @@
 **ADDITIONAL TAGGING & REPORTING TOOLS PLUGIN**
 <br/>
 
-*Note:* Pay attention to tool tips over buttons/fields in plugin windows.
+*Note:* 
+
+Pay attention to tool tips over buttons/fields in plugin windows.
 <br/>
 
 **Plugin adding/updating/removing**
@@ -174,9 +176,10 @@ Plugin strictly follows MusicBee convention of what is "skipped track".
 
 To define date type of custom tag, open MusicBee menu> Edit> Preferences> Tags (1)> Define New Tags> Configure Fields. Find "Custom1" tag (or some other custom tag), change type to "Date".
 
----
+----
 
 **BACKUP & RESTORE**
+<br/>
 
 These commands allow to (auto)backup tags of all tracks in your library and restore them. First create full backup manually. You can do manual or auto incremental backups after this.
 
@@ -184,9 +187,10 @@ These commands allow to (auto)backup tags of all tracks in your library and rest
 
 "Tag History" is available in track context menu only. 
 
----
+----
 
 **VIRTUAL TAG FUNCTIONS**
+<br/>
 
 This plugin introduces several new virtual tag functions (they also can be used in various filename templates, e.g. in the file organizer).
 
@@ -269,7 +273,10 @@ $TagContainsAllStrings(&lt;URL&gt;,tag_name,string1|string2|etc.): returns "T" i
 &nbsp;&nbsp;&nbsp;&nbsp;contains all strings separated by |, otherwise returns "F". 
 </pre>
 
+----
+
 **ASR SPECIAL FUNCTIONS**
+<br/>
 
 You can use special functions in substitution fields of "Advanced Search & Replace" and "Multiple Search & Replace" commands:
 
@@ -291,7 +298,7 @@ Excepted words will be unchanged, not lowercased! To lowercase them, use: \@tc[[
 \@repunct[[string]] : changes Unicode punctuation marks to ASCII analogs, e.g. « to <<
 </pre>
 
----
+----
 
 **APPENDIX**
 <br/>

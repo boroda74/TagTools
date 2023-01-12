@@ -1,4 +1,5 @@
 **ASR SPECIAL FUNCTIONS**
+<br/>
 
 You can use special functions in substitution fields of "Advanced Search & Replace" and "Multiple Search & Replace" commands:
 
