@@ -11,6 +11,8 @@ Pay attention to tool tips over buttons/fields in plugin windows.
 Extract content of the downloaded archive to a temporary folder of your choice. See the "README FIRST!" file inside this folder for instructions on adding/updating/removing the plugin.
 <br/>
 
+----
+
 **TAGGING & REPORTING TOOLS**
 <br/>
 
