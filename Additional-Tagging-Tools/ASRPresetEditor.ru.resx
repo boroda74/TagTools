@@ -606,7 +606,7 @@
     <value>139, 17</value>
   </data>
   <data name="userPresetCheckBox.Text" xml:space="preserve">
-    <value>Шаблон пользователя</value>
+    <value>Пресет пользователя</value>
   </data>
   <data name="userPresetCheckBox.ToolTip" xml:space="preserve">
     <value />

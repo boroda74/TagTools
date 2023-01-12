@@ -138,13 +138,13 @@
     <value>Bottom, Right</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>759, 214</value>
+    <value>709, 214</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>70, 13</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>Свой пресет</value>
+    <value>Пресет пользователя</value>
   </data>
   <data name="customizedPresetLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -156,7 +156,7 @@
     <value>Bottom, Right</value>
   </data>
   <data name="userPresetLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>746, 213</value>
+    <value>696, 213</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
     <value>1, 347</value>
