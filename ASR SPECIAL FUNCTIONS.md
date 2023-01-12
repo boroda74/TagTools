@@ -12,7 +12,7 @@ You can use special functions in substitution fields of "Advanced Search & Repla
 &nbsp;&nbsp;&nbsp;&nbsp;captured in search pattern string, and \@tc[[$1]] will return title cased string without 
 &nbsp;&nbsp;&nbsp;&nbsp;any excepted words
 
-Excepted words will be unchanged, not lowercased! To lowercase them, use: \@tc[[\@lc[[string]];;excepted words]]
+Excepted words will be unchanged, not become lowercased! To lowercase them, use: \@tc[[\@lc[[string]];;excepted words]]
 
 \@lc[[string;;excepted words]] : returns lower cased string except for given words
 
