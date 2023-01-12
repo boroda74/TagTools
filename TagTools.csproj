@@ -58,7 +58,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Wrench.ico</ApplicationIcon>
+    <ApplicationIcon>Additional-Tagging-Tools\Wrench.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
@@ -93,124 +93,124 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdvancedSearchAndReplace.cs">
+    <Compile Include="Additional-Tagging-Tools\AdvancedSearchAndReplace.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AdvancedSearchAndReplace.Designer.cs">
+    <Compile Include="Additional-Tagging-Tools\AdvancedSearchAndReplace.Designer.cs">
       <DependentUpon>AdvancedSearchAndReplace.cs</DependentUpon>
     </Compile>
-    <Compile Include="ASRPresetEditor.cs">
+    <Compile Include="Additional-Tagging-Tools\ASRPresetEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ASRPresetEditor.Designer.cs">
+    <Compile Include="Additional-Tagging-Tools\ASRPresetEditor.Designer.cs">
       <DependentUpon>ASRPresetEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="AutoRate.cs">
+    <Compile Include="Additional-Tagging-Tools\AutoRate.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AutoRate.Designer.cs">
+    <Compile Include="Additional-Tagging-Tools\AutoRate.Designer.cs">
       <DependentUpon>AutoRate.cs</DependentUpon>
     </Compile>
-    <Compile Include="BackupRestore.cs" />
-    <Compile Include="CalculateAverageAlbumRating.cs">
+    <Compile Include="Additional-Tagging-Tools\BackupRestore.cs" />
+    <Compile Include="Additional-Tagging-Tools\CalculateAverageAlbumRating.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CalculateAverageAlbumRating.Designer.cs">
+    <Compile Include="Additional-Tagging-Tools\CalculateAverageAlbumRating.Designer.cs">
       <DependentUpon>CalculateAverageAlbumRating.cs</DependentUpon>
     </Compile>
-    <Compile Include="ChangeCase.cs">
+    <Compile Include="Additional-Tagging-Tools\ChangeCase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChangeCase.Designer.cs">
+    <Compile Include="Additional-Tagging-Tools\ChangeCase.Designer.cs">
       <DependentUpon>ChangeCase.cs</DependentUpon>
     </Compile>
-    <Compile Include="AutoBackupSettings.cs">
+    <Compile Include="Additional-Tagging-Tools\AutoBackupSettings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AutoBackupSettings.Designer.cs">
+    <Compile Include="Additional-Tagging-Tools\AutoBackupSettings.Designer.cs">
       <DependentUpon>AutoBackupSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="ASRPresetConfirmation.cs">
+    <Compile Include="Additional-Tagging-Tools\ASRPresetConfirmation.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ASRPresetConfirmation.Designer.cs">
+    <Compile Include="Additional-Tagging-Tools\ASRPresetConfirmation.Designer.cs">
       <DependentUpon>ASRPresetConfirmation.cs</DependentUpon>
     </Compile>
-    <Compile Include="MultipleSearchAndReplace.cs">
+    <Compile Include="Additional-Tagging-Tools\MultipleSearchAndReplace.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MultipleSearchAndReplace.Designer.cs">
+    <Compile Include="Additional-Tagging-Tools\MultipleSearchAndReplace.Designer.cs">
       <DependentUpon>MultipleSearchAndReplace.cs</DependentUpon>
     </Compile>
-    <Compile Include="ReencodeTag.cs">
+    <Compile Include="Additional-Tagging-Tools\ReencodeTag.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ReencodeTag.designer.cs">
+    <Compile Include="Additional-Tagging-Tools\ReencodeTag.designer.cs">
       <DependentUpon>ReencodeTag.cs</DependentUpon>
     </Compile>
-    <Compile Include="SelectTags.cs">
+    <Compile Include="Additional-Tagging-Tools\SelectTags.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SelectTags.Designer.cs">
+    <Compile Include="Additional-Tagging-Tools\SelectTags.Designer.cs">
       <DependentUpon>SelectTags.cs</DependentUpon>
     </Compile>
-    <Compile Include="CompareTracks.cs">
+    <Compile Include="Additional-Tagging-Tools\CompareTracks.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CompareTracks.Designer.cs">
+    <Compile Include="Additional-Tagging-Tools\CompareTracks.Designer.cs">
       <DependentUpon>CompareTracks.cs</DependentUpon>
     </Compile>
-    <Compile Include="SaveLastSkipped.cs">
+    <Compile Include="Additional-Tagging-Tools\SaveLastSkipped.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SaveLastSkipped.Designer.cs">
+    <Compile Include="Additional-Tagging-Tools\SaveLastSkipped.Designer.cs">
       <DependentUpon>SaveLastSkipped.cs</DependentUpon>
     </Compile>
-    <Compile Include="TagHistory.cs">
+    <Compile Include="Additional-Tagging-Tools\TagHistory.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TagHistory.Designer.cs">
+    <Compile Include="Additional-Tagging-Tools\TagHistory.Designer.cs">
       <DependentUpon>TagHistory.cs</DependentUpon>
     </Compile>
-    <Compile Include="MultiplePastingQuestion.cs">
+    <Compile Include="Additional-Tagging-Tools\MultiplePastingQuestion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MultiplePastingQuestion.Designer.cs">
+    <Compile Include="Additional-Tagging-Tools\MultiplePastingQuestion.Designer.cs">
       <DependentUpon>MultiplePastingQuestion.cs</DependentUpon>
     </Compile>
-    <Compile Include="PasteTagsFromClipboard.cs">
+    <Compile Include="Additional-Tagging-Tools\PasteTagsFromClipboard.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PasteTagsFromClipboard.Designer.cs">
+    <Compile Include="Additional-Tagging-Tools\PasteTagsFromClipboard.Designer.cs">
       <DependentUpon>PasteTagsFromClipboard.cs</DependentUpon>
     </Compile>
-    <Compile Include="CopyTagsToClipboard.cs">
+    <Compile Include="Additional-Tagging-Tools\CopyTagsToClipboard.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CopyTagsToClipboard.Designer.cs">
+    <Compile Include="Additional-Tagging-Tools\CopyTagsToClipboard.Designer.cs">
       <DependentUpon>CopyTagsToClipboard.cs</DependentUpon>
     </Compile>
-    <Compile Include="CopyTag.cs">
+    <Compile Include="Additional-Tagging-Tools\CopyTag.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CopyTag.Designer.cs">
+    <Compile Include="Additional-Tagging-Tools\CopyTag.Designer.cs">
       <DependentUpon>CopyTag.cs</DependentUpon>
     </Compile>
-    <Compile Include="AutoLibraryReports.cs">
+    <Compile Include="Additional-Tagging-Tools\AutoLibraryReports.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AutoLibraryReports.Designer.cs">
+    <Compile Include="Additional-Tagging-Tools\AutoLibraryReports.Designer.cs">
       <DependentUpon>AutoLibraryReports.cs</DependentUpon>
     </Compile>
-    <Compile Include="DatagridViewCheckBoxHeaderCell.cs" />
-    <Compile Include="FillTagNames.cs" />
-    <Compile Include="LibraryReports.cs">
+    <Compile Include="Additional-Tagging-Tools\DatagridViewCheckBoxHeaderCell.cs" />
+    <Compile Include="Additional-Tagging-Tools\FillTagNames.cs" />
+    <Compile Include="Additional-Tagging-Tools\LibraryReports.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LibraryReports.Designer.cs">
+    <Compile Include="Additional-Tagging-Tools\LibraryReports.Designer.cs">
       <DependentUpon>LibraryReports.cs</DependentUpon>
     </Compile>
-    <Compile Include="MusicBeeInterface.cs" />
+    <Compile Include="Additional-Tagging-Tools\MusicBeeInterface.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -221,183 +221,184 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="ReencodeTags.cs">
+    <Compile Include="Additional-Tagging-Tools\ReencodeTags.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ReencodeTags.Designer.cs">
+    <Compile Include="Additional-Tagging-Tools\ReencodeTags.Designer.cs">
       <DependentUpon>ReencodeTags.cs</DependentUpon>
     </Compile>
-    <Compile Include="Settings.cs">
+    <Compile Include="Additional-Tagging-Tools\Settings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Settings.Designer.cs">
+    <Compile Include="Additional-Tagging-Tools\Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
-    <Compile Include="SwapTags.cs">
+    <Compile Include="Additional-Tagging-Tools\SwapTags.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SwapTags.Designer.cs">
+    <Compile Include="Additional-Tagging-Tools\SwapTags.Designer.cs">
       <DependentUpon>SwapTags.cs</DependentUpon>
     </Compile>
-    <Compile Include="TagTools.cs" />
+    <Compile Include="Additional-Tagging-Tools\TagTools.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PluginWindowTemplate.cs">
+    <Compile Include="Additional-Tagging-Tools\PluginWindowTemplate.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PluginWindowTemplate.Designer.cs">
+    <Compile Include="Additional-Tagging-Tools\PluginWindowTemplate.Designer.cs">
       <DependentUpon>PluginWindowTemplate.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="Additional-Tagging-Tools-Plugin.zip" />
+    <None Include="Additional-Tagging-Tools\app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AdvancedSearchAndReplace.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\AdvancedSearchAndReplace.resx">
       <DependentUpon>AdvancedSearchAndReplace.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="AdvancedSearchAndReplace.ru.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\AdvancedSearchAndReplace.ru.resx">
       <DependentUpon>AdvancedSearchAndReplace.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="ASRPresetConfirmation.ru.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\ASRPresetConfirmation.ru.resx">
       <DependentUpon>ASRPresetConfirmation.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="ASRPresetEditor.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\ASRPresetEditor.resx">
       <DependentUpon>ASRPresetEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ASRPresetEditor.ru.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\ASRPresetEditor.ru.resx">
       <DependentUpon>ASRPresetEditor.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="AutoBackupSettings.ru.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\AutoBackupSettings.ru.resx">
       <DependentUpon>AutoBackupSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AutoRate.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\AutoRate.resx">
       <DependentUpon>AutoRate.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="AutoRate.ru.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\AutoRate.ru.resx">
       <DependentUpon>AutoRate.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="CalculateAverageAlbumRating.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\CalculateAverageAlbumRating.resx">
       <DependentUpon>CalculateAverageAlbumRating.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CalculateAverageAlbumRating.ru.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\CalculateAverageAlbumRating.ru.resx">
       <DependentUpon>CalculateAverageAlbumRating.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="ChangeCase.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\ChangeCase.resx">
       <DependentUpon>ChangeCase.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="ChangeCase.ru.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\ChangeCase.ru.resx">
       <DependentUpon>ChangeCase.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="AutoBackupSettings.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\AutoBackupSettings.resx">
       <DependentUpon>AutoBackupSettings.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="ASRPresetConfirmation.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\ASRPresetConfirmation.resx">
       <DependentUpon>ASRPresetConfirmation.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="MultipleSearchAndReplace.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\MultipleSearchAndReplace.resx">
       <DependentUpon>MultipleSearchAndReplace.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="MultipleSearchAndReplace.ru.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\MultipleSearchAndReplace.ru.resx">
       <DependentUpon>MultipleSearchAndReplace.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="ReencodeTag.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\ReencodeTag.resx">
       <DependentUpon>ReencodeTag.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ReencodeTag.ru.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\ReencodeTag.ru.resx">
       <DependentUpon>ReencodeTag.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="SelectTags.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\SelectTags.resx">
       <DependentUpon>SelectTags.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="SelectTags.ru.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\SelectTags.ru.resx">
       <DependentUpon>SelectTags.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CompareTracks.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\CompareTracks.resx">
       <DependentUpon>CompareTracks.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="CompareTracks.ru.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\CompareTracks.ru.resx">
       <DependentUpon>CompareTracks.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="SaveLastSkipped.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\SaveLastSkipped.resx">
       <DependentUpon>SaveLastSkipped.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="SaveLastSkipped.ru.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\SaveLastSkipped.ru.resx">
       <DependentUpon>SaveLastSkipped.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TagHistory.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\TagHistory.resx">
       <DependentUpon>TagHistory.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="TagHistory.ru.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\TagHistory.ru.resx">
       <DependentUpon>TagHistory.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="MultiplePastingQuestion.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\MultiplePastingQuestion.resx">
       <DependentUpon>MultiplePastingQuestion.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="CopyTagsToClipboard.ru.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\CopyTagsToClipboard.ru.resx">
       <DependentUpon>CopyTagsToClipboard.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MultiplePastingQuestion.ru.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\MultiplePastingQuestion.ru.resx">
       <DependentUpon>MultiplePastingQuestion.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PasteTagsFromClipboard.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\PasteTagsFromClipboard.resx">
       <DependentUpon>PasteTagsFromClipboard.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="CopyTagsToClipboard.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\CopyTagsToClipboard.resx">
       <DependentUpon>CopyTagsToClipboard.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="CopyTag.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\CopyTag.resx">
       <DependentUpon>CopyTag.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="CopyTag.ru.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\CopyTag.ru.resx">
       <DependentUpon>CopyTag.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="AutoLibraryReports.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\AutoLibraryReports.resx">
       <DependentUpon>AutoLibraryReports.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="AutoLibraryReports.ru.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\AutoLibraryReports.ru.resx">
       <DependentUpon>AutoLibraryReports.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="LibraryReports.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\LibraryReports.resx">
       <DependentUpon>LibraryReports.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="LibraryReports.ru.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\LibraryReports.ru.resx">
       <DependentUpon>LibraryReports.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PasteTagsFromClipboard.ru.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\PasteTagsFromClipboard.ru.resx">
       <DependentUpon>PasteTagsFromClipboard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -405,29 +406,29 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="ReencodeTags.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\ReencodeTags.resx">
       <DependentUpon>ReencodeTags.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="ReencodeTags.ru.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\ReencodeTags.ru.resx">
       <DependentUpon>ReencodeTags.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Settings.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\Settings.resx">
       <DependentUpon>Settings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Settings.ru.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\Settings.ru.resx">
       <DependentUpon>Settings.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="SwapTags.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\SwapTags.resx">
       <DependentUpon>SwapTags.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="SwapTags.ru.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\SwapTags.ru.resx">
       <DependentUpon>SwapTags.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PluginWindowTemplate.resx">
+    <EmbeddedResource Include="Additional-Tagging-Tools\PluginWindowTemplate.resx">
       <DependentUpon>PluginWindowTemplate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
@@ -454,12 +455,12 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Search.png" />
-    <None Include="Resources\Xion20.png" />
-    <None Include="Resources\Lightning.png" />
-    <None Include="Resources\Window.png" />
-    <None Include="Resources\MissingArtwork.png" />
-    <Content Include="Wrench.ico" />
+    <None Include="Additional-Tagging-Tools\Resources\Search.png" />
+    <None Include="Additional-Tagging-Tools\Resources\Xion20.png" />
+    <None Include="Additional-Tagging-Tools\Resources\Lightning.png" />
+    <None Include="Additional-Tagging-Tools\Resources\Window.png" />
+    <None Include="Additional-Tagging-Tools\Resources\MissingArtwork.png" />
+    <Content Include="Additional-Tagging-Tools\Wrench.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
