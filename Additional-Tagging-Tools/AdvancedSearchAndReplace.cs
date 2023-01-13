@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -11,8 +12,8 @@ namespace MusicBeePlugin
     public partial class AdvancedSearchAndReplaceCommand : PluginWindowTemplate
     {
         private static string CustomText1;
-        private static System.Drawing.Color UntickedColor = System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor.ControlText);
-        private static System.Drawing.Color TickedColor = System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor.HotTrack);
+        private static Color UntickedColor = Color.FromKnownColor(KnownColor.ControlText);
+        private static Color TickedColor = Color.FromKnownColor(KnownColor.HotTrack);
 
         private bool ignoreCheckedPresetEvent = true;
         private int autoAppliedPresetCount;
@@ -49,6 +50,9 @@ namespace MusicBeePlugin
 
         private string assignHotkeyCheckBoxText;
         private bool processPresetCheckBoxCheckedEvent = true;
+
+        public const string checkedStateText = "";
+        public const string uncheckedStateText = "";
 
         private string newValueText;
 
@@ -2726,6 +2730,20 @@ namespace MusicBeePlugin
             }
         }
 
+        private void setCheckedState(Label label, bool flag)
+        {
+            if (flag)
+            {
+                label.Text = checkedStateText;
+                label.ForeColor = Color.FromKnownColor(KnownColor.ControlText);
+            }
+            else
+            {
+                label.Text = uncheckedStateText;
+                label.ForeColor = Color.FromKnownColor(KnownColor.GrayText);
+            }
+        }
+
         private void presetList_SelectedIndexChanged(object sender, EventArgs e)
         {
             processPresetCheckBoxCheckedEvent = false;
@@ -2798,8 +2816,8 @@ namespace MusicBeePlugin
 
                 descriptionBox.Text = GetDictValue(preset.descriptions, Plugin.Language);
 
-                userPresetLabel.Text = preset.userPreset? "" : "";
-                customizedPresetLabel.Text = preset.customizedByUser ? "" : "";
+                setCheckedState(userPresetLabel, preset.userPreset);
+                setCheckedState(customizedPresetLabel, preset.customizedByUser);
 
                 preserveValuesTextBox.Enabled = true;
                 preserveValuesTextBox.Text = preset.preserveValues;
@@ -3406,7 +3424,7 @@ namespace MusicBeePlugin
             preset.parameterTagId = getTagId(parameterTagList.Text);
             nameColumns();
             preset.setCustomizationsFlag(backupedPreset);
-            customizedPresetLabel.Text = preset.customizedByUser ? "" : "";
+            setCheckedState(customizedPresetLabel, preset.customizedByUser);
         }
 
         private void parameterTag2_SelectedIndexChanged(object sender, EventArgs e)
@@ -3414,7 +3432,7 @@ namespace MusicBeePlugin
             preset.parameterTag2Id = getTagId(parameterTag2List.Text);
             nameColumns();
             preset.setCustomizationsFlag(backupedPreset);
-            customizedPresetLabel.Text = preset.customizedByUser ? "" : "";
+            setCheckedState(customizedPresetLabel, preset.customizedByUser);
         }
 
         private void parameterTag3_SelectedIndexChanged(object sender, EventArgs e)
@@ -3422,7 +3440,7 @@ namespace MusicBeePlugin
             preset.parameterTag3Id = getTagId(parameterTag3List.Text);
             nameColumns();
             preset.setCustomizationsFlag(backupedPreset);
-            customizedPresetLabel.Text = preset.customizedByUser ? "" : "";
+            setCheckedState(customizedPresetLabel, preset.customizedByUser);
         }
 
         private void parameterTag4List_SelectedIndexChanged(object sender, EventArgs e)
@@ -3430,7 +3448,7 @@ namespace MusicBeePlugin
             preset.parameterTag4Id = getTagId(parameterTag4List.Text);
             nameColumns();
             preset.setCustomizationsFlag(backupedPreset);
-            customizedPresetLabel.Text = preset.customizedByUser ? "" : "";
+            setCheckedState(customizedPresetLabel, preset.customizedByUser);
         }
 
         private void parameterTag5List_SelectedIndexChanged(object sender, EventArgs e)
@@ -3438,7 +3456,7 @@ namespace MusicBeePlugin
             preset.parameterTag5Id = getTagId(parameterTag5List.Text);
             nameColumns();
             preset.setCustomizationsFlag(backupedPreset);
-            customizedPresetLabel.Text = preset.customizedByUser ? "" : "";
+            setCheckedState(customizedPresetLabel, preset.customizedByUser);
         }
 
         private void parameterTag6List_SelectedIndexChanged(object sender, EventArgs e)
@@ -3446,7 +3464,7 @@ namespace MusicBeePlugin
             preset.parameterTag6Id = getTagId(parameterTag6List.Text);
             nameColumns();
             preset.setCustomizationsFlag(backupedPreset);
-            customizedPresetLabel.Text = preset.customizedByUser ? "" : "";
+            setCheckedState(customizedPresetLabel, preset.customizedByUser);
         }
 
         private void customText_TextChanged(object sender, EventArgs e)
@@ -3454,7 +3472,7 @@ namespace MusicBeePlugin
             preset.customText = customTextBox.Text;
             nameColumns();
             preset.setCustomizationsFlag(backupedPreset);
-            customizedPresetLabel.Text = preset.customizedByUser ? "" : "";
+            setCheckedState(customizedPresetLabel, preset.customizedByUser);
         }
 
         private void customText2Box_TextChanged(object sender, EventArgs e)
@@ -3462,7 +3480,7 @@ namespace MusicBeePlugin
             preset.customText2 = customText2Box.Text;
             nameColumns();
             preset.setCustomizationsFlag(backupedPreset);
-            customizedPresetLabel.Text = preset.customizedByUser ? "" : "";
+            setCheckedState(customizedPresetLabel, preset.customizedByUser);
         }
 
         private void customText3Box_TextChanged(object sender, EventArgs e)
@@ -3470,7 +3488,7 @@ namespace MusicBeePlugin
             preset.customText3 = customText3Box.Text;
             nameColumns();
             preset.setCustomizationsFlag(backupedPreset);
-            customizedPresetLabel.Text = preset.customizedByUser ? "" : "";
+            setCheckedState(customizedPresetLabel, preset.customizedByUser);
         }
 
         private void customText4Box_TextChanged(object sender, EventArgs e)
@@ -3478,7 +3496,7 @@ namespace MusicBeePlugin
             preset.customText4 = customText4Box.Text;
             nameColumns();
             preset.setCustomizationsFlag(backupedPreset);
-            customizedPresetLabel.Text = preset.customizedByUser ? "" : "";
+            setCheckedState(customizedPresetLabel, preset.customizedByUser);
         }
 
         private void preserveValuesTextBox_TextChanged(object sender, EventArgs e)
