@@ -844,7 +844,7 @@ namespace MusicBeePlugin
 
             protected override string calculate(string currentFile, string parameter0, string parameter1 = null)
             {
-                uint charcode = uint.Parse(parameter0, System.Globalization.NumberStyles.HexNumber);
+                ushort charcode = ushort.Parse(parameter0, System.Globalization.NumberStyles.HexNumber);
                 return ((char)charcode).ToString();
             }
         }

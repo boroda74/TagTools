@@ -4453,7 +4453,7 @@ namespace MusicBeePlugin
 
         public string CustomFunc_Char(string code)
         {
-            uint charcode = uint.Parse(code, System.Globalization.NumberStyles.HexNumber);
+            ushort charcode = ushort.Parse(code, System.Globalization.NumberStyles.HexNumber);
             return ((char)charcode).ToString();
         }
 
