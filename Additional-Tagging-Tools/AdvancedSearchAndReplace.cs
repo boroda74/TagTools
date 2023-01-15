@@ -283,6 +283,9 @@ namespace MusicBeePlugin
                     userPreset = true;
                 }
 
+                if (userPreset)
+                    customizedByUser = false;
+
                 foreach (string key in originalPreset.names.Keys)
                 {
                     originalPreset.names.TryGetValue(key, out string value);
@@ -431,6 +434,8 @@ namespace MusicBeePlugin
             public void setCustomizationsFlag(Preset referencePreset)
             {
                 if (referencePreset == null)
+                    return;
+                else if (userPreset)
                     return;
 
 

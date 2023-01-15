@@ -2754,10 +2754,10 @@ namespace MusicBeePlugin
                 "If you have changed very much tags incremental backups may become too large. This command will delete ALL incremental backups of CURRENT library and will create new backup baseline if you continue. ";
 
             MsgGiveNameToASRpreset = "Give a name to preset!";
-            MsgAreYouSureYouWantToSaveASRpreset = "Are you sure you want to save ASR preset named \"%PRESETNAME%\"?";
-            MsgAreYouSureYouWantToOverwriteASRpreset = "Are you sure you want to overwrite ASR preset \"%PRESETNAME%\"?";
-            MsgAreYouSureYouWantToOverwriteRenameASRpreset = "Are you sure you want to overwrite ASR preset \"%PRESETNAME%\", and rename it to \"%NEWPRESETNAME%\"?";
-            MsgAreYouSureYouWantToDeleteASRpreset = "Are you sure you want to delete ASR preset \"%PRESETNAME%\"?";
+            MsgAreYouSureYouWantToSaveASRpreset = "Do you want to save ASR preset named \"%PRESETNAME%\"?";
+            MsgAreYouSureYouWantToOverwriteASRpreset = "Do you want to overwrite ASR preset \"%PRESETNAME%\"?";
+            MsgAreYouSureYouWantToOverwriteRenameASRpreset = "Do you want to overwrite ASR preset \"%PRESETNAME%\", and rename it to \"%NEWPRESETNAME%\"?";
+            MsgAreYouSureYouWantToDeleteASRpreset = "Do you want to delete ASR preset \"%PRESETNAME%\"?";
             MsgPredefinedPresetsCantBeChanged = "Predefined presets can't be changed. Preset editor will open in read-only mode.\n\n"
                 + "Do you want to disable this warning?";
             MsgSavePreset = "Save Preset";
@@ -3271,10 +3271,10 @@ namespace MusicBeePlugin
                     "Если было изменено очень много тегов, то разностные архивы могут стать очень большими. Эта команда удалит ВСЕ разностные архивы ТЕКУЩЕЙ библиотеки и создаст новый опорный архив. ";
 
                 MsgGiveNameToASRpreset = "Задайте название пресета!";
-                MsgAreYouSureYouWantToSaveASRpreset = "Вы уверены, что хотите сохранить пресет дополнительного поиска и замены под названием \"%PRESETNAME%\"?";
-                MsgAreYouSureYouWantToOverwriteASRpreset = "Вы уверены, что хотите перезаписать пресет дополнительного поиска и замены \"%PRESETNAME%\"?";
-                MsgAreYouSureYouWantToOverwriteRenameASRpreset = "Вы уверены, что хотите перезаписать пресет дополнительного поиска и замены \"%PRESETNAME%\", переименовав его в \"%NEWPRESETNAME%\"?";
-                MsgAreYouSureYouWantToDeleteASRpreset = "Вы уверены, что хотите удалить пресет дополнительного поиска и замены \"%PRESETNAME%\"?";
+                MsgAreYouSureYouWantToSaveASRpreset = "Cохранить пресет дополнительного поиска и замены под названием \"%PRESETNAME%\"?";
+                MsgAreYouSureYouWantToOverwriteASRpreset = "Перезаписать пресет дополнительного поиска и замены \"%PRESETNAME%\"?";
+                MsgAreYouSureYouWantToOverwriteRenameASRpreset = "Перезаписать пресет дополнительного поиска и замены \"%PRESETNAME%\", переименовав его в \"%NEWPRESETNAME%\"?";
+                MsgAreYouSureYouWantToDeleteASRpreset = "Удалить пресет дополнительного поиска и замены \"%PRESETNAME%\"?";
                 MsgPredefinedPresetsCantBeChanged = "Стандартные пресеты нельзя изменять. Редактор пресетов будет открыт в режиме просмотра.\n\n"
                     + "Отключить показ этого предупреждения?";
                 MsgSavePreset = "Сохранить пресет";

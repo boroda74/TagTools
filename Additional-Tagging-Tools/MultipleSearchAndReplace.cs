@@ -101,6 +101,7 @@ namespace MusicBeePlugin
 
             customMSR = null;
 
+            loadComboBox.Sorted = false;
             loadComboBox.Items.Add(Plugin.CtlNewASRPreset);
             foreach (var preset in Presets)
             {
