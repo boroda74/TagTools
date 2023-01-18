@@ -393,7 +393,7 @@ namespace MusicBeePlugin
 
             public string getSafeFileName()
             {
-                string presetSafeFileName = getName().Replace('\\', '-').Replace('/', '-').Replace('<', '[').Replace('>', ']')//*****
+                string presetSafeFileName = getName().Replace('\\', '-').Replace('/', '-').Replace('<', '[').Replace('>', ']')
                     .Replace(" : ", " - ").Replace(": ", " - ").Replace(":", "-")
                     .Replace("\"", "\'\'")
                     .Replace('*', '#').Replace('?', '#').Replace('|', '#');
