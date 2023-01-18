@@ -581,17 +581,24 @@ namespace MusicBeePlugin
         public static string MsgImportingConfirmation;
         public static string MsgDoYouWantToUpdateYourCustomizedPredefinedPresets;
         public static string MsgDoYouWantToImportExistingPresetsAsCopies;
+
         public static string MsgPresetsWereImported;
         public static string MsgPresetsWereImportedAsCopies;
         public static string MsgPresetsFailedToImport;
+
         public static string MsgPresetsWereInstalled;
+        public static string MsgPresetsCustomizedWereReinstalled;
+        public static string MsgPresetsWereReinstalled;
         public static string MsgPresetsWereUpdated;
         public static string MsgPresetsCustomizedWereUpdated;
+        public static string MsgCustomizedPresetsWereSkipped;
         public static string MsgPresetsWereNotChanged;
-        public static string MsgPresetsWereSkipped;
         public static string MsgPresetsFailedToUpdate;
+
         public static string MsgPresetsNotFound;
+
         public static string MsgDeletingConfirmation;
+
         public static string MsgNoPresetsDeleted;
         public static string MsgPresetsWereDeleted;
         public static string MsgFailedToDelete;
@@ -2684,21 +2691,24 @@ namespace MusicBeePlugin
                 + "Do you want to import them as new presets, and keep your current presets?\n\n"
                 + "OTHERWISE, EXISTING PRESETS WILL BE OVERWRITTEN!";
 
-            MsgPresetsWereImported = " preset{;s;s} {was;were;were} successfully imported.\n";
-            MsgPresetsWereImportedAsCopies = " preset{;s;s} {was;were;were} successfully imported as new preset{;s;s}.\n";
+            MsgPresetsWereImported = " preset{;s;s} {was;were;were} imported.\n";
+            MsgPresetsWereImportedAsCopies = " preset{;s;s} {was;were;were} imported as new preset{;s;s}.\n";
             MsgPresetsFailedToImport = " preset{;s;s} failed to import due to file\n" + AddLeadingSpaces(0, 4, 0)  + " read error{;s;s} or wrong format.";
 
-            MsgPresetsWereInstalled = " preset{;s;s} {was;were;were} successfully installed.\n";
-            MsgPresetsWereUpdated = " presets {was;were;were} successfully updated or reinstalled.\n\n";
+            MsgPresetsWereInstalled = " preset{;s;s} {was;were;were} installed.\n";
+            MsgPresetsCustomizedWereReinstalled = " preset{;s;s} customized by you {was;were;were} reinstalled.\n";
+            MsgPresetsWereReinstalled = " preset{;s;s} {was;were;were} reinstalled.\n";
+            MsgPresetsWereUpdated = " presets {was;were;were} updated.\n";
             MsgPresetsCustomizedWereUpdated = " preset{;s;s} customized by you {was;were;were} updated.\n";
+            MsgCustomizedPresetsWereSkipped = " preset{;s;s} {was;were;were} customized by you, and skipped.\n";
             MsgPresetsWereNotChanged = " preset{;s;s} {was;were;were} not changed since\n" + AddLeadingSpaces(0, 4, 0)  + " last update, and skipped.\n\n";
-            MsgPresetsWereSkipped = " preset{;s;s} {was;were;were} customized by you, and skipped.\n";
             MsgPresetsFailedToUpdate = " preset{;s;s} failed to install due to file\n" + AddLeadingSpaces(0, 4, 0)  + " read error{;s;s} or wrong format.";
+            
             MsgPresetsNotFound = "No presets for installing found in expected directory!";
 
             MsgDeletingConfirmation = "Do you want to delete all predefined presets?";
             MsgNoPresetsDeleted = "No presets were deleted. ";
-            MsgPresetsWereDeleted = " preset{;s;s} {was;were;were} successfully deleted.";
+            MsgPresetsWereDeleted = " preset{;s;s} {was;were;were} deleted.";
             MsgFailedToDelete = " preset{;s;s} failed to delete.";
 
             MsgNumberOfTagsInTextFile = "Number of tags in text file (";
@@ -3209,11 +3219,14 @@ namespace MusicBeePlugin
                 MsgPresetsFailedToImport = " пресет{;а;ов} не удалось импортировать из-за ошиб{ки;ок;ок}\n" + AddLeadingSpaces(0, 4, 0)  + " чтения файл{а;ов;ов} или {его;их;их} неверного формата.";
 
                 MsgPresetsWereInstalled = " пресет{;а;ов} был{;и;и} устновлен{;ы;ы}.\n\n";
+                MsgPresetsCustomizedWereReinstalled = " пресет{;а;ов}, настроенн{ый;ых;ых} вами, был{;и;и} переустановлен{;ы;ы}.\n\n";
+                MsgPresetsWereReinstalled = " пресет{;а;ов} был{;и;и} переустновлен{;ы;ы}.\n\n";
                 MsgPresetsWereUpdated = " пресет{;а;ов} был{;и;и} обновлен{;ы;ы}.\n\n";
-                MsgPresetsCustomizedWereUpdated = " пресет{;а;ов}, настроенн{ый;ых;ых} вами, был{;и;и} обновлен{;ы;ы} или переустановлен{;ы;ы}.\n\n";
+                MsgPresetsCustomizedWereUpdated = " пресет{;а;ов}, настроенн{ый;ых;ых} вами, был{;и;и} обновлен{;ы;ы}.\n\n";
+                MsgCustomizedPresetsWereSkipped = " пресет{;а;ов} был{;и;и} настроен{;ы;ы} вами\n" + AddLeadingSpaces(0, 4, 0) + " и был{;и;и} пропущен{;ы;ы}.\n\n";
                 MsgPresetsWereNotChanged = " пресет{;а;ов} не изменил{ся;ись;ись} с последнего \n" + AddLeadingSpaces(0, 4, 0)  + " обновления и был{;и;и} пропущен{;ы;ы}.\n\n";
-                MsgPresetsWereSkipped = " пресет{;а;ов} был{;и;и} настроен{;ы;ы} вами\n" + AddLeadingSpaces(0, 4, 0)  + " и был{;и;и} пропущен{;ы;ы}.\n\n";
                 MsgPresetsFailedToUpdate = " пресет{;а;ов} не удалось обновить из-за ошиб{ки;ок;ок}\n" + AddLeadingSpaces(0, 4, 0)  + " чтения файл{а;ов;ов} или {его;их;их} неверного формата.";
+
                 MsgPresetsNotFound = "Не найдены пресеты для установки в ожидаемом каталоге!";
 
                 MsgDeletingConfirmation = "Вы действительно хотите удалить все стандартные пресеты?";
