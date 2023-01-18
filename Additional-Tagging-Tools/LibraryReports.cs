@@ -583,7 +583,7 @@ namespace MusicBeePlugin
 
             if (files.Length == 0)
             {
-                MessageBox.Show(this, Plugin.MsgNoFilesInCurrentView, null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, Plugin.MsgNoFilesInCurrentView, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
 
@@ -1126,7 +1126,7 @@ namespace MusicBeePlugin
             catch (Exception ex)
             {
                 stream.Close();
-                MessageBox.Show(this, ex.Message, null, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -1395,13 +1395,13 @@ namespace MusicBeePlugin
 
             if (previewTable.Rows.Count == 0)
             {
-                MessageBox.Show(this, Plugin.MsgPreviewIsNotGeneratedNothingToSave, null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, Plugin.MsgPreviewIsNotGeneratedNothingToSave, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
 
             if (checkForFunctions && fieldComboBox.SelectedIndex == -1)
             {
-                MessageBox.Show(this, Plugin.MsgNoAggregateFunctionNothingToSave, null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, Plugin.MsgNoAggregateFunctionNothingToSave, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
 

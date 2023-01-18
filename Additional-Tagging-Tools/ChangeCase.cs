@@ -414,7 +414,7 @@ namespace MusicBeePlugin
 
             if (files.Length == 0)
             {
-                MessageBox.Show(this, Plugin.MsgNoFilesSelected, null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, Plugin.MsgNoFilesSelected, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
             else
@@ -520,7 +520,7 @@ namespace MusicBeePlugin
 
             if (previewTable.Rows.Count == 0)
             {
-                MessageBox.Show(this, Plugin.MsgPreviewIsNotGeneratedNothingToChange, null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, Plugin.MsgPreviewIsNotGeneratedNothingToChange, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 

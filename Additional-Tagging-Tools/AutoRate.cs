@@ -340,7 +340,7 @@ namespace MusicBeePlugin
 
             Plugin.SetStatusbarTextForFileOperations(Plugin.AutoRateCommandSbText, false, files.Length - 1, files.Length, null, true);
 
-            if (Plugin.SavedSettings.notifyWhenAutoratingCompleted) MessageBox.Show(this, Plugin.MsgBackgroundTaskIsCompleted, null, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (Plugin.SavedSettings.notifyWhenAutoratingCompleted) MessageBox.Show(this, Plugin.MsgBackgroundTaskIsCompleted, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private bool prepareBackgroundTask()
@@ -354,7 +354,7 @@ namespace MusicBeePlugin
 
             if (files.Length == 0)
             {
-                MessageBox.Show(this, Plugin.MsgNoFilesSelected, null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, Plugin.MsgNoFilesSelected, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
             else
@@ -692,7 +692,7 @@ namespace MusicBeePlugin
         {
             if (sumOfPercentage() > 100)
             {
-                MessageBox.Show(this, Plugin.MsgIncorrectSumOfWeights, null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, Plugin.MsgIncorrectSumOfWeights, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
 

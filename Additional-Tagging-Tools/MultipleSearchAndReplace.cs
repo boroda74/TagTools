@@ -185,12 +185,12 @@ namespace MusicBeePlugin
 
             if (files.Length == 0 && searchOnly)
             {
-                MessageBox.Show(this, Plugin.MsgNoFilesDisplayed, null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, Plugin.MsgNoFilesDisplayed, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
             else if (files.Length == 0 && !searchOnly)
             {
-                MessageBox.Show(this, Plugin.MsgNoFilesSelected, null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, Plugin.MsgNoFilesSelected, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
             else
@@ -687,13 +687,13 @@ namespace MusicBeePlugin
         {
             if (Plugin.MSR == null)
             {
-                MessageBox.Show(this, Plugin.MsgYouMustImportStandardASRPresetsFirst, null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, Plugin.MsgYouMustImportStandardASRPresetsFirst, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
             if (templateNameTextBox.Text == Plugin.CtlMSR)
             {
-                MessageBox.Show(this, Plugin.MsgGiveNameToASRpreset, null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, Plugin.MsgGiveNameToASRpreset, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
                 templateNameTextBox.Focus();
                 templateNameTextBox.SelectionStart = Plugin.CtlMSR.Length;

@@ -275,7 +275,7 @@ namespace MusicBeePlugin
             {
                 if (!System.IO.Directory.Exists(folder))
                 {
-                    MessageBox.Show(this, Plugin.MsgFolderDoesntExists, null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show(this, Plugin.MsgFolderDoesntExists, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
 
@@ -646,7 +646,7 @@ namespace MusicBeePlugin
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, null, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Close();
             }
         }

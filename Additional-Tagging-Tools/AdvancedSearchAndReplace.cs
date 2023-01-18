@@ -2027,7 +2027,7 @@ namespace MusicBeePlugin
             {
                 if (!Clipboard.ContainsText())
                 {
-                    MessageBox.Show(this, Plugin.MsgClipboardDesntContainText, null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show(this, Plugin.MsgClipboardDesntContainText, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return false;
                 }
 
@@ -2045,7 +2045,7 @@ namespace MusicBeePlugin
 
             if (files.Length == 0)
             {
-                MessageBox.Show(this, Plugin.MsgNoFilesSelected, null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, Plugin.MsgNoFilesSelected, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
             else
@@ -2425,7 +2425,7 @@ namespace MusicBeePlugin
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show(this, Plugin.MsgDeletePresetConfirmation, null, MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+            DialogResult result = MessageBox.Show(this, Plugin.MsgDeletePresetConfirmation, "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
 
             if (result == DialogResult.No)
                 return;
@@ -2819,6 +2819,12 @@ namespace MusicBeePlugin
                 presetsWorkingCopy.TryGetValue(((Preset)presetList.SelectedItem).guid, out preset);
                 backupedPreset = new Preset(preset);
 
+                if (!preset.userPreset && !Plugin.DeveloperMode)
+                    editButtonEnabled = false;
+                else
+                    editButtonEnabled = true;
+
+
                 descriptionBox.Text = GetDictValue(preset.descriptions, Plugin.Language);
 
                 setCheckedState(userPresetLabel, preset.userPreset);
@@ -2827,14 +2833,6 @@ namespace MusicBeePlugin
                 preserveValuesTextBox.Enabled = true;
                 preserveValuesTextBox.Text = preset.preserveValues;
                 label2.Enabled = true;
-
-                if (!preset.userPreset && !Plugin.DeveloperMode)
-                    editButtonEnabled = false;
-                else
-                    editButtonEnabled = true;
-
-                buttonEdit.Enabled = editButtonEnabled;
-                buttonExport.Enabled = editButtonEnabled;
 
                 fillParameterTagList(preset.parameterTagType, parameterTagList, labelTag);
                 parameterTagList.Text = getTagName(preset.parameterTagId);
@@ -2884,9 +2882,9 @@ namespace MusicBeePlugin
                 idTextBox.Enabled = true;
                 clearIdButton.Enabled = true;
 
-                buttonExport.Enabled = true;
+                buttonExport.Enabled = editButtonEnabled || preset.customizedByUser;
                 buttonCopy.Enabled = true;
-                buttonEdit.Enabled = true;
+                buttonEdit.Enabled = editButtonEnabled;
                 buttonDelete.Enabled = true;
                 buttonPreview.Enabled = true;
                 buttonOK.Enabled = true;
@@ -3063,7 +3061,7 @@ namespace MusicBeePlugin
             if (numberOfErrors > 0)
                 message += AddLeadingSpaces(numberOfErrors, 4, 1) + GetPluralForm(Plugin.MsgPresetsFailedToImport, numberOfErrors);
 
-            MessageBox.Show(this, message, null, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(this, message, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public static string GetPluralForm(string sentence, int number)
@@ -3162,7 +3160,7 @@ namespace MusicBeePlugin
                 selectedPresetGuid = ((Preset)presetList.SelectedItem).guid;
 
 
-            if (MessageBox.Show(this, Plugin.MsgImportingConfirmation, null,
+            if (MessageBox.Show(this, Plugin.MsgImportingConfirmation, "", 
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) 
                 == DialogResult.No)
                 return;
@@ -3196,7 +3194,7 @@ namespace MusicBeePlugin
                                 {
                                     if (askToUpdateCustomizedByUser && currentPreset.customizedByUser)
                                     {
-                                        if (MessageBox.Show(this, Plugin.MsgDoYouWantToUpdateYourCustomizedPredefinedPresets, null, MessageBoxButtons.YesNo,
+                                        if (MessageBox.Show(this, Plugin.MsgDoYouWantToUpdateYourCustomizedPredefinedPresets, "", MessageBoxButtons.YesNo,
                                             MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.No)
                                         {
                                             askToUpdateCustomizedByUser = false;
@@ -3236,7 +3234,7 @@ namespace MusicBeePlugin
                                 {
                                     if (askToUpdateCustomizedByUser && currentPreset.customizedByUser)
                                     {
-                                        if (MessageBox.Show(this, Plugin.MsgDoYouWantToUpdateYourCustomizedPredefinedPresets, null, MessageBoxButtons.YesNo,
+                                        if (MessageBox.Show(this, Plugin.MsgDoYouWantToUpdateYourCustomizedPredefinedPresets, "", MessageBoxButtons.YesNo,
                                             MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.No)
                                         {
                                             askToUpdateCustomizedByUser = false;
@@ -3326,7 +3324,7 @@ namespace MusicBeePlugin
                 message = Plugin.MsgPresetsNotFound;
 
 
-            MessageBox.Show(this, message, null, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(this, message, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public void deleteAll()
@@ -3334,7 +3332,7 @@ namespace MusicBeePlugin
             int numberOfDeletedPresets = 0;
             int numberOfErrors = 0;
 
-            DialogResult result = MessageBox.Show(this, Plugin.MsgDeletingConfirmation, null, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+            DialogResult result = MessageBox.Show(this, Plugin.MsgDeletingConfirmation, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
 
             if (result == DialogResult.No)
                 return;
@@ -3381,7 +3379,7 @@ namespace MusicBeePlugin
                 message += "\n" + numberOfErrors + GetPluralForm(Plugin.MsgFailedToDelete, numberOfErrors);
 
 
-            MessageBox.Show(this, message, null, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(this, message, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             searchTextBox.Text = "";
             tickedOnlyCheckBox.Checked = false;
@@ -3911,7 +3909,7 @@ namespace MusicBeePlugin
 
             if (allowedRemoved != "")
             {
-                MessageBox.Show(this, Plugin.MsgNotAllowedSymbols, null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, Plugin.MsgNotAllowedSymbols, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 idTextBox.Text = "";
 
                 if (asrIdsPresetGuids.TryGetValue(preset.id, out _))
@@ -3926,7 +3924,7 @@ namespace MusicBeePlugin
                 {
                     if (idTextBox.Text == tempPreset.id && preset.guid != tempPreset.guid)
                     {
-                        MessageBox.Show(this, Plugin.MsgPresetExists.Replace("%ID%", idTextBox.Text), null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        MessageBox.Show(this, Plugin.MsgPresetExists.Replace("%ID%", idTextBox.Text), "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         idTextBox.Text = "";
 
                         if (asrIdsPresetGuids.TryGetValue(preset.id, out _))

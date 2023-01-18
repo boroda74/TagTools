@@ -773,7 +773,7 @@ namespace MusicBeePlugin
 
             if (fieldName == Plugin.ArtworkName && type != FunctionType.Grouping)
             {
-                MessageBox.Show(this, Plugin.MsgPleaseUseGroupingFunctionForArtworkTag, null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, Plugin.MsgPleaseUseGroupingFunctionForArtworkTag, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
 
@@ -947,7 +947,7 @@ namespace MusicBeePlugin
 
             if (files.Length == 0)
             {
-                MessageBox.Show(this, Plugin.MsgNoFilesInCurrentView, null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, Plugin.MsgNoFilesInCurrentView, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
 
@@ -1194,13 +1194,13 @@ namespace MusicBeePlugin
 
             if (previewTable.Rows.Count == 0)
             {
-                MessageBox.Show(this, Plugin.MsgPreviewIsNotGeneratedNothingToSave, null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, Plugin.MsgPreviewIsNotGeneratedNothingToSave, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
 
             if (checkForFunctions && sourceFieldComboBox.SelectedIndex == -1)
             {
-                MessageBox.Show(this, Plugin.MsgNoAggregateFunctionNothingToSave, null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, Plugin.MsgNoAggregateFunctionNothingToSave, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
 
@@ -1749,7 +1749,7 @@ namespace MusicBeePlugin
             {
                 if (idTextBox.Text != "")
                 {
-                    MessageBox.Show(this, Plugin.MsgFirstSelectWhichFieldYouWantToAssignFunctionIdTo, null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show(this, Plugin.MsgFirstSelectWhichFieldYouWantToAssignFunctionIdTo, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     idTextBox.Text = "";
                 }
 
@@ -1772,7 +1772,7 @@ namespace MusicBeePlugin
 
             if (allowedRemoved != "")
             {
-                MessageBox.Show(this, Plugin.MsgNotAllowedSymbols, null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, Plugin.MsgNotAllowedSymbols, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 savedIds[sourceFieldComboBox.SelectedIndex] = "";
                 idTextBox.Text = "";
             }
@@ -1784,7 +1784,7 @@ namespace MusicBeePlugin
                     {
                         if (idTextBox.Text == id && tempPreset != (AutoLibraryReportsPreset)presetsBox.SelectedItem)
                         {
-                            MessageBox.Show(this, Plugin.MsgPresetExists.Replace("%ID%", idTextBox.Text), null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            MessageBox.Show(this, Plugin.MsgPresetExists.Replace("%ID%", idTextBox.Text), "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             savedIds[sourceFieldComboBox.SelectedIndex] = "";
                             idTextBox.Text = "";
                             return;
@@ -1798,7 +1798,7 @@ namespace MusicBeePlugin
 
                     if (idTextBox.Text == id && i != sourceFieldComboBox.SelectedIndex)
                     {
-                        MessageBox.Show(this, Plugin.MsgPresetExists.Replace("%ID%", idTextBox.Text), null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        MessageBox.Show(this, Plugin.MsgPresetExists.Replace("%ID%", idTextBox.Text), "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         savedIds[sourceFieldComboBox.SelectedIndex] = "";
                         idTextBox.Text = "";
                         return;

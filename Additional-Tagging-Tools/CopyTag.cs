@@ -133,7 +133,7 @@ namespace MusicBeePlugin
 
             if (fileNameTextBox.Enabled && !System.IO.File.Exists(fileNameTextBox.Text))
             {
-                MessageBox.Show(this, Plugin.MsgFileNotFound, null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, Plugin.MsgFileNotFound, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
 
@@ -221,7 +221,7 @@ namespace MusicBeePlugin
 
             if (files.Length == 0)
             {
-                MessageBox.Show(this, Plugin.MsgNoFilesSelected, null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, Plugin.MsgNoFilesSelected, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
             else
@@ -410,7 +410,7 @@ namespace MusicBeePlugin
         {
             if (sourceTagList.Text == destinationTagList.Text)
             {
-                MessageBox.Show(this, Plugin.MsgSourceAndDestinationTagsAreTheSame, null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, Plugin.MsgSourceAndDestinationTagsAreTheSame, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
@@ -423,7 +423,7 @@ namespace MusicBeePlugin
         {
             if (sourceTagList.Text == destinationTagList.Text)
             {
-                MessageBox.Show(this, Plugin.MsgSourceAndDestinationTagsAreTheSame, null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, Plugin.MsgSourceAndDestinationTagsAreTheSame, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
