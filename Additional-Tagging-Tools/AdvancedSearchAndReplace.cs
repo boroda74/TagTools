@@ -3173,11 +3173,13 @@ namespace MusicBeePlugin
         public void import(bool importAll)
         {
             string[] newPresetNames;
-            int numberOfImportedPresets = 0;
+            int numberOfInstalledPresets = 0;
+            int numberOfReinstalledPresets = 0;
             int numberOfUpdatedPresets = 0;
-            int numberOfImportedCustomizedPresets = 0;
+            int numberOfUpdatedCustomizedPresets = 0;
+            int numberOfReinstalledCustomizedPresets = 0;
             int numberOfSkippedCustomizedPresets = 0;
-            int numberOfSkippedPresets = 0;
+            int numberOfNotChangedSkippedPresets = 0;
             int numberOfErrors = 0;
 
 
@@ -3240,7 +3242,10 @@ namespace MusicBeePlugin
 
                                         presetsWorkingCopy.Remove(newPreset.guid);
                                         presetsWorkingCopy.Add(newPreset.guid, newPreset);
-                                        numberOfUpdatedPresets++;
+                                        if (newPreset.modifiedUtc > currentPreset.modifiedUtc) //Updating
+                                            numberOfUpdatedPresets++;
+                                        else
+                                            numberOfReinstalledPresets++;
                                     }
                                     else if (updateCustomizedByUser)
                                     {
@@ -3249,7 +3254,10 @@ namespace MusicBeePlugin
 
                                         presetsWorkingCopy.Remove(newPreset.guid);
                                         presetsWorkingCopy.Add(newPreset.guid, newPreset);
-                                        numberOfImportedCustomizedPresets++;
+                                        if (newPreset.modifiedUtc > currentPreset.modifiedUtc) //Updating
+                                            numberOfUpdatedCustomizedPresets++;
+                                        else
+                                            numberOfReinstalledCustomizedPresets++;
                                     }
                                     else //if (currentPreset.customizedByUser && !updateCustomizedByUser)
                                     {
@@ -3289,7 +3297,7 @@ namespace MusicBeePlugin
 
                                         presetsWorkingCopy.Remove(newPreset.guid);
                                         presetsWorkingCopy.Add(newPreset.guid, newPreset);
-                                        numberOfImportedCustomizedPresets++;
+                                        numberOfUpdatedCustomizedPresets++;
                                     }
                                     else //if (currentPreset.customizedByUser && !updateCustomizedByUser)
                                     {
@@ -3298,7 +3306,7 @@ namespace MusicBeePlugin
                                 }
                                 else //if (!importAll && (newPreset.modifiedUtc <= currentPreset.modifiedUtc || newPreset.modifiedUtc <= Plugin.SavedSettings.lastAsrImportDateUtc))
                                 {
-                                    numberOfSkippedPresets++;
+                                    numberOfNotChangedSkippedPresets++;
                                 }
                             }
                             else
@@ -3306,11 +3314,11 @@ namespace MusicBeePlugin
                                 if (importAll || newPreset.modifiedUtc > Plugin.SavedSettings.lastAsrImportDateUtc)
                                 {
                                     presetsWorkingCopy.Add(newPreset.guid, newPreset);
-                                    numberOfImportedPresets++;
+                                    numberOfInstalledPresets++;
                                 }
                                 else
                                 {
-                                    numberOfSkippedPresets++;
+                                    numberOfNotChangedSkippedPresets++;
                                 }
                             }
                         }
@@ -3326,23 +3334,28 @@ namespace MusicBeePlugin
                 }
             }
 
-            if (numberOfImportedPresets > 0)
+            if (numberOfInstalledPresets > 0)
                 Plugin.SavedSettings.lastAsrImportDateUtc = DateTime.UtcNow;
 
 
             refreshPresetList(selectedPresetGuid);
 
+
             string message = "";
-            if (numberOfImportedPresets > 0)
-                message += AddLeadingSpaces(numberOfImportedPresets, 4, 1) + GetPluralForm(Plugin.MsgPresetsWereInstalled, numberOfImportedPresets);
+            if (numberOfInstalledPresets > 0)
+                message += AddLeadingSpaces(numberOfInstalledPresets, 4, 1) + GetPluralForm(Plugin.MsgPresetsWereInstalled, numberOfInstalledPresets);
+            if (numberOfReinstalledCustomizedPresets > 0)
+                message += AddLeadingSpaces(numberOfReinstalledCustomizedPresets, 4, 1) + GetPluralForm(Plugin.MsgPresetsCustomizedWereReinstalled, numberOfReinstalledCustomizedPresets);
+            if (numberOfReinstalledPresets > 0)
+                message += AddLeadingSpaces(numberOfReinstalledPresets, 4, 1) + GetPluralForm(Plugin.MsgPresetsWereReinstalled, numberOfReinstalledPresets);
             if (numberOfUpdatedPresets > 0)
                 message += AddLeadingSpaces(numberOfUpdatedPresets, 4, 1) + GetPluralForm(Plugin.MsgPresetsWereUpdated, numberOfUpdatedPresets);
-            if (numberOfImportedCustomizedPresets > 0)
-                message += AddLeadingSpaces(numberOfImportedCustomizedPresets, 4, 1) + GetPluralForm(Plugin.MsgPresetsCustomizedWereUpdated, numberOfImportedCustomizedPresets);
-            if (numberOfSkippedPresets > 0)
-                message += AddLeadingSpaces(numberOfSkippedPresets, 4, 1) + GetPluralForm(Plugin.MsgPresetsWereNotChanged, numberOfSkippedPresets);
+            if (numberOfUpdatedCustomizedPresets > 0)
+                message += AddLeadingSpaces(numberOfUpdatedCustomizedPresets, 4, 1) + GetPluralForm(Plugin.MsgPresetsCustomizedWereUpdated, numberOfUpdatedCustomizedPresets);
             if (numberOfSkippedCustomizedPresets > 0)
-                message += AddLeadingSpaces(numberOfSkippedCustomizedPresets, 4, 1) + GetPluralForm(Plugin.MsgPresetsWereSkipped, numberOfSkippedCustomizedPresets);
+                message += AddLeadingSpaces(numberOfSkippedCustomizedPresets, 4, 1) + GetPluralForm(Plugin.MsgCustomizedPresetsWereSkipped, numberOfSkippedCustomizedPresets);
+            if (numberOfNotChangedSkippedPresets > 0)
+                message += AddLeadingSpaces(numberOfNotChangedSkippedPresets, 4, 1) + GetPluralForm(Plugin.MsgPresetsWereNotChanged, numberOfNotChangedSkippedPresets);
             if (numberOfErrors > 0)
                 message += AddLeadingSpaces(numberOfErrors, 4, 1) + GetPluralForm(Plugin.MsgPresetsFailedToUpdate, numberOfErrors);
 
