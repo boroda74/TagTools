@@ -391,6 +391,7 @@ namespace MusicBeePlugin
             public Guid[] asrPresetsWithHotkeysGuids = new Guid[MaximumNumberOfASRHotkeys];
 
             public bool dontShowPredefinedPresetsCantBeChangedMessage;
+            public string defaultAsrPresetsExportFolder;
 
             public int lastSkippedTagId;
             public int lastSkippedDateFormat;
@@ -2688,7 +2689,7 @@ namespace MusicBeePlugin
             MsgPresetsFailedToImport = " preset{;s;s} failed to import due to file\n" + AddLeadingSpaces(0, 4, 0)  + " read error{;s;s} or wrong format.";
 
             MsgPresetsWereInstalled = " preset{;s;s} {was;were;were} successfully installed.\n";
-            MsgPresetsWereUpdated = " presets {was;were;were} successfully updated.\n\n";
+            MsgPresetsWereUpdated = " presets {was;were;were} successfully updated or reinstalled.\n\n";
             MsgPresetsCustomizedWereUpdated = " preset{;s;s} customized by you {was;were;were} updated.\n";
             MsgPresetsWereNotChanged = " preset{;s;s} {was;were;were} not changed since\n" + AddLeadingSpaces(0, 4, 0)  + " last update, and skipped.\n\n";
             MsgPresetsWereSkipped = " preset{;s;s} {was;were;were} customized by you, and skipped.\n";
@@ -2986,10 +2987,14 @@ namespace MusicBeePlugin
 
                 ChangedStyle.SelectionForeColor = Color.FromArgb(r, g, b);
             }
+
+            if (SavedSettings.defaultAsrPresetsExportFolder == null)
+                SavedSettings.defaultAsrPresetsExportFolder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
             #endregion
 
 
-            #region Localizations
+                #region Localizations
             Language = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
 
             PluginsPath = Path.Combine(Application.StartupPath, "Plugins");
@@ -3205,7 +3210,7 @@ namespace MusicBeePlugin
 
                 MsgPresetsWereInstalled = " пресет{;а;ов} был{;и;и} устновлен{;ы;ы}.\n\n";
                 MsgPresetsWereUpdated = " пресет{;а;ов} был{;и;и} обновлен{;ы;ы}.\n\n";
-                MsgPresetsCustomizedWereUpdated = " пресет{;а;ов}, настроенн{ый;ых;ых} вами, был{;и;и} обновлен{;ы;ы}.\n\n";
+                MsgPresetsCustomizedWereUpdated = " пресет{;а;ов}, настроенн{ый;ых;ых} вами, был{;и;и} обновлен{;ы;ы} или переустановлен{;ы;ы}.\n\n";
                 MsgPresetsWereNotChanged = " пресет{;а;ов} не изменил{ся;ись;ись} с последнего \n" + AddLeadingSpaces(0, 4, 0)  + " обновления и был{;и;и} пропущен{;ы;ы}.\n\n";
                 MsgPresetsWereSkipped = " пресет{;а;ов} был{;и;и} настроен{;ы;ы} вами\n" + AddLeadingSpaces(0, 4, 0)  + " и был{;и;и} пропущен{;ы;ы}.\n\n";
                 MsgPresetsFailedToUpdate = " пресет{;а;ов} не удалось обновить из-за ошиб{ки;ок;ок}\n" + AddLeadingSpaces(0, 4, 0)  + " чтения файл{а;ов;ов} или {его;их;их} неверного формата.";

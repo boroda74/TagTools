@@ -383,14 +383,17 @@ namespace MusicBeePlugin
                 return GetDictValue(names, Plugin.Language) + (hotkeyAssigned ? " ★" : "");
             }
 
-            public string getName()
+            public string getName(bool getEnglishName = false)
             {
-                return GetDictValue(names, Plugin.Language);
+                if (getEnglishName)
+                    return GetDictValue(names, "en");
+                else
+                    return GetDictValue(names, Plugin.Language);
             }
 
             public string getSafeFileName()
             {
-                string presetSafeFileName = getName().Replace('\\', '-').Replace('/', '-').Replace('<', '[').Replace('>', ']')
+                string presetSafeFileName = getName().Replace('\\', '-').Replace('/', '-').Replace('<', '[').Replace('>', ']')//*****
                     .Replace(" : ", " - ").Replace(": ", " - ").Replace(":", "-")
                     .Replace("\"", "\'\'")
                     .Replace('*', '#').Replace('?', '#').Replace('|', '#');
@@ -2945,23 +2948,46 @@ namespace MusicBeePlugin
 
         private void buttonExportCustom_Click(object sender, EventArgs e)
         {
+            bool developerExport = false;
+            if (Plugin.DeveloperMode && ModifierKeys == Keys.Control)
+            {
+                developerExport = true;
+            }
+
             FolderBrowserDialog dialog = new FolderBrowserDialog
             {
                 //Description = "Save user ASR presets",
-                SelectedPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
+                SelectedPath = Plugin.SavedSettings.defaultAsrPresetsExportFolder,
             };
 
             if (dialog.ShowDialog() == DialogResult.Cancel) return;
+            Plugin.SavedSettings.defaultAsrPresetsExportFolder = dialog.SelectedPath;
 
             SortedDictionary<string, int> countedPresetFileNames = new SortedDictionary<string, int>();
             foreach (var currentPresetKVPair in presetsWorkingCopy)
             {
-                if (currentPresetKVPair.Value.userPreset)
+                if (currentPresetKVPair.Value.userPreset ^ developerExport)
                 {
-                    string presetFilename = getCountedPresetFilename(countedPresetFileNames, currentPresetKVPair.Value.getSafeFileName());
+                    string presetFilename;
+
+                    if (developerExport)
+                    {
+                        presetFilename = currentPresetKVPair.Value.guid.ToString();
+                    }
+                    else
+                    {
+                        presetFilename = getCountedPresetFilename(countedPresetFileNames, currentPresetKVPair.Value.getSafeFileName());
+                    }
+
                     string presetFilePath = @"\\?\" + Path.Combine(dialog.SelectedPath, presetFilename + Plugin.ASRPresetExtension);
                     exportPreset(currentPresetKVPair.Value, presetFilePath);
                 }
+            }
+
+            if (developerExport && Plugin.MSR != null)
+            {
+                string presetFilePath = @"\\?\" + Path.Combine(dialog.SelectedPath, Plugin.MSR.guid.ToString() + Plugin.ASRPresetExtension);
+                exportPreset(Plugin.MSR, presetFilePath);
             }
         }
 
