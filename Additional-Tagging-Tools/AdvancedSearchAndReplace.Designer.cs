@@ -52,6 +52,7 @@
             this.clearIdButton = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.searchTextBox = new System.Windows.Forms.TextBox();
             this.presetList = new System.Windows.Forms.CheckedListBox();
             this.previewTable = new System.Windows.Forms.DataGridView();
             this.File = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -78,7 +79,6 @@
             this.userPresetLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.clearSearchButton = new System.Windows.Forms.Button();
-            this.searchTextBox = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.descriptionBox = new System.Windows.Forms.TextBox();
@@ -262,6 +262,13 @@
             resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
             this.toolTip1.SetToolTip(this.label2, resources.GetString("label2.ToolTip"));
+            // 
+            // searchTextBox
+            // 
+            resources.ApplyResources(this.searchTextBox, "searchTextBox");
+            this.searchTextBox.Name = "searchTextBox";
+            this.toolTip1.SetToolTip(this.searchTextBox, resources.GetString("searchTextBox.ToolTip"));
+            this.searchTextBox.TextChanged += new System.EventHandler(this.searchTextBox_TextChanged);
             // 
             // presetList
             // 
@@ -504,12 +511,6 @@
             this.clearSearchButton.Name = "clearSearchButton";
             this.clearSearchButton.UseVisualStyleBackColor = true;
             this.clearSearchButton.Click += new System.EventHandler(this.clearSearchButton_Click);
-            // 
-            // searchTextBox
-            // 
-            resources.ApplyResources(this.searchTextBox, "searchTextBox");
-            this.searchTextBox.Name = "searchTextBox";
-            this.searchTextBox.TextChanged += new System.EventHandler(this.searchTextBox_TextChanged);
             // 
             // pictureBox1
             // 

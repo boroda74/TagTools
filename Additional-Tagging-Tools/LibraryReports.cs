@@ -965,7 +965,7 @@ namespace MusicBeePlugin
                 dialog.Filter = Plugin.ExportedFormats;
                 dialog.FilterIndex = Plugin.SavedSettings.filterIndex;
 
-                if (dialog.ShowDialog() == DialogResult.Cancel) return;
+                if (dialog.ShowDialog(this) == DialogResult.Cancel) return;
 
                 Plugin.SavedSettings.filterIndex = dialog.FilterIndex;
                 formatComboBox.SelectedIndex = dialog.FilterIndex - 1;

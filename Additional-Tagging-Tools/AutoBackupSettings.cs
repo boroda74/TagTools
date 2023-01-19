@@ -81,7 +81,7 @@ namespace MusicBeePlugin
             FolderBrowserDialog dialog = new FolderBrowserDialog();
             dialog.SelectedPath = autobackupFolderTextBox.Text;
 
-            if (dialog.ShowDialog() == DialogResult.Cancel) return;
+            if (dialog.ShowDialog(this) == DialogResult.Cancel) return;
 
             autobackupFolderTextBox.Text = dialog.SelectedPath;
         }

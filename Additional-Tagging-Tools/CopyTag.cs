@@ -615,7 +615,7 @@ namespace MusicBeePlugin
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = "Text files|*.txt";
             dialog.FilterIndex = 0;
-            if (dialog.ShowDialog() == DialogResult.Cancel) return;
+            if (dialog.ShowDialog(this) == DialogResult.Cancel) return;
 
             fileNameTextBox.Text = dialog.FileName;
         }

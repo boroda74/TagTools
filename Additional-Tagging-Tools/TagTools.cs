@@ -579,7 +579,7 @@ namespace MusicBeePlugin
         public static string MsgIncorrectPresetName;
         public static string MsgDeletePresetConfirmation;
         public static string MsgImportingConfirmation;
-        public static string MsgDoYouWantToUpdateYourCustomizedPredefinedPresets;
+        public static string MsgDoYouWantToResetYourCustomizedPredefinedPresets;
         public static string MsgDoYouWantToImportExistingPresetsAsCopies;
 
         public static string MsgPresetsWereImported;
@@ -591,7 +591,6 @@ namespace MusicBeePlugin
         public static string MsgPresetsWereReinstalled;
         public static string MsgPresetsWereUpdated;
         public static string MsgPresetsCustomizedWereUpdated;
-        public static string MsgCustomizedPresetsWereSkipped;
         public static string MsgPresetsWereNotChanged;
         public static string MsgPresetsFailedToUpdate;
 
@@ -2184,7 +2183,7 @@ namespace MusicBeePlugin
                 FileName = GetDefaultBackupFilename(BackupDefaultPrefix)
             };
 
-            if (dialog.ShowDialog() == DialogResult.Cancel) return;
+            if (dialog.ShowDialog(MbForm) == DialogResult.Cancel) return;
 
             MbApiInterface.MB_SetBackgroundTaskMessage(SbMakingTagBackup);
 
@@ -2206,7 +2205,7 @@ namespace MusicBeePlugin
                 InitialDirectory = GetAutobackupDirectory(SavedSettings.autobackupDirectory)
             };
 
-            if (dialog.ShowDialog() == DialogResult.Cancel) return;
+            if (dialog.ShowDialog(MbForm) == DialogResult.Cancel) return;
 
             MbApiInterface.MB_SetBackgroundTaskMessage(SbRestoringTagsFromBackup);
 
@@ -2223,7 +2222,7 @@ namespace MusicBeePlugin
                 InitialDirectory = GetAutobackupDirectory(SavedSettings.autobackupDirectory)
             };
 
-            if (dialog.ShowDialog() == DialogResult.Cancel) return;
+            if (dialog.ShowDialog(MbForm) == DialogResult.Cancel) return;
 
             MbApiInterface.MB_SetBackgroundTaskMessage(SbRestoringTagsFromBackup);
 
@@ -2240,7 +2239,7 @@ namespace MusicBeePlugin
                 InitialDirectory = GetAutobackupDirectory(SavedSettings.autobackupDirectory)
             };
 
-            if (openDialog.ShowDialog() == DialogResult.Cancel) return;
+            if (openDialog.ShowDialog(MbForm) == DialogResult.Cancel) return;
 
             SaveFileDialog saveDialog = new SaveFileDialog
             {
@@ -2250,7 +2249,7 @@ namespace MusicBeePlugin
                 FileName = openDialog.SafeFileName
             };
 
-            if (saveDialog.ShowDialog() == DialogResult.Cancel) return;
+            if (saveDialog.ShowDialog(MbForm) == DialogResult.Cancel) return;
 
             if (openDialog.FileName == saveDialog.FileName) return;
 
@@ -2279,7 +2278,7 @@ namespace MusicBeePlugin
                 Multiselect = true
             };
 
-            if (openDialog.ShowDialog() == DialogResult.Cancel) return;
+            if (openDialog.ShowDialog(MbForm) == DialogResult.Cancel) return;
 
             SaveFileDialog saveDialog = new SaveFileDialog
             {
@@ -2289,7 +2288,7 @@ namespace MusicBeePlugin
                 FileName = CtlSelectThisFolder
             };
 
-            if (saveDialog.ShowDialog() == DialogResult.Cancel) return;
+            if (saveDialog.ShowDialog(MbForm) == DialogResult.Cancel) return;
 
             string sourceFolder = Regex.Replace(openDialog.FileNames[0], @"(.*)\\.*", "$1");
             string destinationFolder = Regex.Replace(saveDialog.FileName, @"(.*)\\.*", "$1");
@@ -2327,7 +2326,7 @@ namespace MusicBeePlugin
                 FileName = GetDefaultBackupFilename(BackupDefaultPrefix)
             };
 
-            if (dialog.ShowDialog() == DialogResult.Cancel) return;
+            if (dialog.ShowDialog(MbForm) == DialogResult.Cancel) return;
 
 
             lock (AutobackupLocker)
@@ -2380,7 +2379,7 @@ namespace MusicBeePlugin
                 Multiselect = true
             };
 
-            if (dialog.ShowDialog() == DialogResult.Cancel) return;
+            if (dialog.ShowDialog(MbForm) == DialogResult.Cancel) return;
 
             MbApiInterface.MB_SetBackgroundTaskMessage(SbDeletingBackups);
 
@@ -2684,25 +2683,30 @@ namespace MusicBeePlugin
 
             MsgDeletePresetConfirmation = "Do you want to delete selected preset?";
             MsgImportingConfirmation = "Do you want to install predefined presets?";
-            MsgDoYouWantToUpdateYourCustomizedPredefinedPresets = "One or more predefined presets customized by you have been changed by developer.\n"
-                + "Do you want to update your customized predefined presets by new versions from developer?\n\n"
-                + "ALL YOUR CUSTOMIZATIONS WILL BE LOST!";
             MsgDoYouWantToImportExistingPresetsAsCopies = "One or more imported presets already exist.\n"
                 + "Do you want to import them as new presets, and keep your current presets?\n\n"
                 + "OTHERWISE, EXISTING PRESETS WILL BE OVERWRITTEN!";
+            MsgDoYouWantToResetYourCustomizedPredefinedPresets = "You have customized one or more predefined presets.\n"
+                + "Do you want to reinstall your customized predefined presets, and replace them by latest versions from developer?\n\n"
+                + "ALL YOUR CUSTOMIZATIONS WILL BE LOST!\n\n"
+                + "Otherwise, customized presets will be updated to latest versions, but all their customizations will be preserved.";
 
             MsgPresetsWereImported = " preset{;s;s} {was;were;were} imported.\n";
             MsgPresetsWereImportedAsCopies = " preset{;s;s} {was;were;were} imported as new preset{;s;s}.\n";
-            MsgPresetsFailedToImport = " preset{;s;s} failed to import due to file\n" + AddLeadingSpaces(0, 4, 0)  + " read error{;s;s} or wrong format.";
+            MsgPresetsFailedToImport = " preset{;s;s} failed to import due to file\n" + AddLeadingSpaces(0, 4, 0)  + 
+                " read error{;s;s} or wrong format.";
 
             MsgPresetsWereInstalled = " preset{;s;s} {was;were;were} installed.\n";
-            MsgPresetsCustomizedWereReinstalled = " preset{;s;s} customized by you {was;were;were} reinstalled.\n";
+            MsgPresetsCustomizedWereReinstalled = " preset{;s;s} customized by you {was;were;were} reinstalled,\n" + AddLeadingSpaces(0, 4, 0)  
+                + " but {its;their;their} customizations were preserved.\n";
             MsgPresetsWereReinstalled = " preset{;s;s} {was;were;were} reinstalled.\n";
             MsgPresetsWereUpdated = " presets {was;were;were} updated.\n";
-            MsgPresetsCustomizedWereUpdated = " preset{;s;s} customized by you {was;were;were} updated.\n";
-            MsgCustomizedPresetsWereSkipped = " preset{;s;s} {was;were;were} customized by you, and skipped.\n";
-            MsgPresetsWereNotChanged = " preset{;s;s} {was;were;were} not changed since\n" + AddLeadingSpaces(0, 4, 0)  + " last update, and skipped.\n\n";
-            MsgPresetsFailedToUpdate = " preset{;s;s} failed to install due to file\n" + AddLeadingSpaces(0, 4, 0)  + " read error{;s;s} or wrong format.";
+            MsgPresetsCustomizedWereUpdated = " preset{;s;s} customized by you {was;were;were} updated,\n" + AddLeadingSpaces(0, 4, 0) 
+                + " but {its;their;their} customizations were peserved.\n";
+            MsgPresetsWereNotChanged = " preset{;s;s} {was;were;were} not changed since\n" + AddLeadingSpaces(0, 4, 0) 
+                + " last update, and skipped.\n\n";
+            MsgPresetsFailedToUpdate = " preset{;s;s} failed to install due to file\n" + AddLeadingSpaces(0, 4, 0) 
+                + " read error{;s;s} or wrong format.";
             
             MsgPresetsNotFound = "No presets for installing found in expected directory!";
 
@@ -3206,26 +3210,30 @@ namespace MusicBeePlugin
 
                 MsgDeletePresetConfirmation = "Вы действительно хотите удалить выбранный пресет?";
                 MsgImportingConfirmation = "Вы действительно хотите установить стандартные пресеты?";
-                MsgDoYouWantToUpdateYourCustomizedPredefinedPresets = "Некоторые стандартные пресеты, которые вы настроили, "
-                    + "были изменены разработчиком.\n"
-                    + "Вы хотите обновить настроенные стандартные пресеты новыми версиями от разработчика?\n\n"
-                    + "ВСЕ ВАШИ НАСТРОЙКИ БУДУТ УТЕРЯНЫ!";
                 MsgDoYouWantToImportExistingPresetsAsCopies = "Некоторые импортируемые пресеты уже существуют.\n"
                     + "Импортировать их как новые пресеты, сохранив существующие?\n\n"
                     + "В ПРОТИВНОМ СЛУЧАЕ СУЩЕСТВУЮЩИЕ ПРЕСЕТЫ БУДУТ ПЕРЕЗАПИСАНЫ!\n";
+                MsgDoYouWantToResetYourCustomizedPredefinedPresets = "Вы настроили некоторые стандартные пресеты.\n"
+                    + "Вы хотите переустановить настроенные стандартные пресеты, заменив их последними версиями от разработчика?\n\n"
+                    + "ВСЕ ВАШИ НАСТРОЙКИ БУДУТ УТЕРЯНЫ!\n\n"
+                    + "В противном случае настроенные пресеты будут обновлены до последних версий, но все их настройки будут сохранены.";
 
                 MsgPresetsWereImported = " пресет{;а;ов} был{;и;и} импортирован{;ы;ы}.\n";
                 MsgPresetsWereImportedAsCopies = " пресет{;а;ов} был{;и;и} импортирован{;ы;ы} как новы{й;ые;ые} пресет{;ы;ы}.\n";
-                MsgPresetsFailedToImport = " пресет{;а;ов} не удалось импортировать из-за ошиб{ки;ок;ок}\n" + AddLeadingSpaces(0, 4, 0)  + " чтения файл{а;ов;ов} или {его;их;их} неверного формата.";
+                MsgPresetsFailedToImport = " пресет{;а;ов} не удалось импортировать из-за ошиб{ки;ок;ок}\n" + AddLeadingSpaces(0, 4, 0) 
+                    + " чтения файл{а;ов;ов} или {его;их;их} неверного формата.";
 
                 MsgPresetsWereInstalled = " пресет{;а;ов} был{;и;и} устновлен{;ы;ы}.\n\n";
-                MsgPresetsCustomizedWereReinstalled = " пресет{;а;ов}, настроенн{ый;ых;ых} вами, был{;и;и} переустановлен{;ы;ы}.\n\n";
+                MsgPresetsCustomizedWereReinstalled = " пресет{;а;ов}, настроенн{ый;ых;ых} вами, был{;и;и}\n" + AddLeadingSpaces(0, 4, 0) 
+                    + " переустановлен{;ы;ы}, но {его;их;их} настройки были сохранены.\n\n";
                 MsgPresetsWereReinstalled = " пресет{;а;ов} был{;и;и} переустновлен{;ы;ы}.\n\n";
                 MsgPresetsWereUpdated = " пресет{;а;ов} был{;и;и} обновлен{;ы;ы}.\n\n";
-                MsgPresetsCustomizedWereUpdated = " пресет{;а;ов}, настроенн{ый;ых;ых} вами, был{;и;и} обновлен{;ы;ы}.\n\n";
-                MsgCustomizedPresetsWereSkipped = " пресет{;а;ов} был{;и;и} настроен{;ы;ы} вами\n" + AddLeadingSpaces(0, 4, 0) + " и был{;и;и} пропущен{;ы;ы}.\n\n";
-                MsgPresetsWereNotChanged = " пресет{;а;ов} не изменил{ся;ись;ись} с последнего \n" + AddLeadingSpaces(0, 4, 0)  + " обновления и был{;и;и} пропущен{;ы;ы}.\n\n";
-                MsgPresetsFailedToUpdate = " пресет{;а;ов} не удалось обновить из-за ошиб{ки;ок;ок}\n" + AddLeadingSpaces(0, 4, 0)  + " чтения файл{а;ов;ов} или {его;их;их} неверного формата.";
+                MsgPresetsCustomizedWereUpdated = " пресет{;а;ов}, настроенн{ый;ых;ых} вами, был{;и;и} обновлен{;ы;ы},\n" + AddLeadingSpaces(0, 4, 0) 
+                    + " но {его;их;их} настройки были сохранены.\n\n";
+                MsgPresetsWereNotChanged = " пресет{;а;ов} не изменил{ся;ись;ись} с последнего \n" + AddLeadingSpaces(0, 4, 0) 
+                    + " обновления и был{;и;и} пропущен{;ы;ы}.\n\n";
+                MsgPresetsFailedToUpdate = " пресет{;а;ов} не удалось обновить из-за ошиб{ки;ок;ок}\n" + AddLeadingSpaces(0, 4, 0) 
+                    + " чтения файл{а;ов;ов} или {его;их;их} неверного формата.";
 
                 MsgPresetsNotFound = "Не найдены пресеты для установки в ожидаемом каталоге!";
 
@@ -3821,7 +3829,7 @@ namespace MusicBeePlugin
         // uninstall this plugin - clean up any persisted files
         public void Uninstall()
         {
-            //Delete backups
+            //Lets delete backups
             if (Directory.Exists(GetAutobackupDirectory(SavedSettings.autobackupDirectory)))
             {
                 if (PeriodicAutobackupTimer != null)
@@ -3836,19 +3844,33 @@ namespace MusicBeePlugin
                 }
             }
 
-            //Delete settings file
+
+            //Lets delete settings file
             if (File.Exists(PluginSettingsFilePath))
             {
                 File.Delete(PluginSettingsFilePath);
             }
 
-            //Delete presets files
-            string presetsPath = Path.Combine(MbApiInterface.Setting_GetPersistentStoragePath(), AsrPresetsDirectory);
 
-            if (Directory.Exists(presetsPath))
+            //Lets delete working presets files
+            if (Directory.Exists(PresetsPath))
             {
-                Directory.Delete(presetsPath, true);
+                Directory.Delete(PresetsPath, true);
             }
+
+
+            //Lets try to delete predefined presets files (this can't be done by plugin if it's
+            // installed to "C:\Program Files (x86)\MusicBee\Plugins" folder)
+            string presetsPath = Path.Combine(PluginsPath, AsrPresetsDirectory);
+
+            try
+            {
+                if (Directory.Exists(presetsPath))
+                {
+                    Directory.Delete(presetsPath, true);
+                }
+            }
+            catch { };
 
             Uninstalled = true;
         }

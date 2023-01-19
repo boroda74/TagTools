@@ -464,13 +464,27 @@ namespace MusicBeePlugin
                     customizedByUser = true;
             }
 
-            public void copyCustomizationsFrom(Preset referencePreset)
+            public void copyBasicCustomizationsFrom(Preset referencePreset)
             {
                 applyToPlayingTrack = referencePreset.applyToPlayingTrack;
                 condition = referencePreset.condition;
                 playlist = referencePreset.playlist;
                 preserveValues = referencePreset.preserveValues;
                 id = referencePreset.id;
+            }
+
+            public void copyExtendedCustomizationsFrom(Preset referencePreset)
+            {
+                customText = referencePreset.customText;
+                customText2 = referencePreset.customText2;
+                customText3 = referencePreset.customText3;
+                customText4 = referencePreset.customText4;
+                parameterTagId = referencePreset.parameterTagId;
+                parameterTag2Id = referencePreset.parameterTag2Id;
+                parameterTag3Id = referencePreset.parameterTag3Id;
+                parameterTag4Id = referencePreset.parameterTag4Id;
+                parameterTag5Id = referencePreset.parameterTag5Id;
+                parameterTag6Id = referencePreset.parameterTag6Id;
             }
 
             public string savePreset(string pathName = null)
@@ -2941,7 +2955,7 @@ namespace MusicBeePlugin
                 FileName = presetSafeFileName
             };
 
-            if (dialog.ShowDialog() == DialogResult.Cancel) return;
+            if (dialog.ShowDialog(this) == DialogResult.Cancel) return;
 
             exportPreset(preset, dialog.FileName);
         }
@@ -2960,7 +2974,7 @@ namespace MusicBeePlugin
                 SelectedPath = Plugin.SavedSettings.defaultAsrPresetsExportFolder,
             };
 
-            if (dialog.ShowDialog() == DialogResult.Cancel) return;
+            if (dialog.ShowDialog(this) == DialogResult.Cancel) return;
             Plugin.SavedSettings.defaultAsrPresetsExportFolder = dialog.SelectedPath;
 
             SortedDictionary<string, int> countedPresetFileNames = new SortedDictionary<string, int>();
@@ -2972,7 +2986,7 @@ namespace MusicBeePlugin
 
                     if (developerExport)
                     {
-                        presetFilename = currentPresetKVPair.Value.guid.ToString();
+                        presetFilename = "口" + currentPresetKVPair.Value.guid.ToString();
                     }
                     else
                     {
@@ -2986,7 +3000,7 @@ namespace MusicBeePlugin
 
             if (developerExport && Plugin.MSR != null)
             {
-                string presetFilePath = @"\\?\" + Path.Combine(dialog.SelectedPath, Plugin.MSR.guid.ToString() + Plugin.ASRPresetExtension);
+                string presetFilePath = @"\\?\" + Path.Combine(dialog.SelectedPath, "口" + Plugin.MSR.guid.ToString() + Plugin.ASRPresetExtension);
                 exportPreset(Plugin.MSR, presetFilePath);
             }
         }
@@ -3001,7 +3015,7 @@ namespace MusicBeePlugin
                 Multiselect = true
             };
 
-            if (dialog.ShowDialog() == DialogResult.Cancel) return;
+            if (dialog.ShowDialog(this) == DialogResult.Cancel) return;
 
 
             Guid selectedPresetGuid = Guid.Empty;
@@ -3057,7 +3071,7 @@ namespace MusicBeePlugin
                         }
                         else
                         {
-                            newPreset.copyCustomizationsFrom(currentPreset);
+                            newPreset.copyBasicCustomizationsFrom(currentPreset);
                             newPreset.hotkeyAssigned = asrPresetsWithHotkeysGuids.Contains(newPreset.guid);
 
                             presetsWorkingCopy.Remove(newPreset.guid);
@@ -3178,7 +3192,6 @@ namespace MusicBeePlugin
             int numberOfUpdatedPresets = 0;
             int numberOfUpdatedCustomizedPresets = 0;
             int numberOfReinstalledCustomizedPresets = 0;
-            int numberOfSkippedCustomizedPresets = 0;
             int numberOfNotChangedSkippedPresets = 0;
             int numberOfErrors = 0;
 
@@ -3203,8 +3216,8 @@ namespace MusicBeePlugin
                 System.Xml.Serialization.XmlSerializer presetSerializer = new System.Xml.Serialization.XmlSerializer(typeof(Preset));
                 System.Xml.Serialization.XmlSerializer presetSerializerOld = new System.Xml.Serialization.XmlSerializer(typeof(SavedPreset));//***
 
-                bool askToUpdateCustomizedByUser = true;
-                bool updateCustomizedByUser = true;
+                bool askToResetCustomizedByUser = true;
+                bool resetCustomizedByUser = true;
                 foreach (string newPresetName in newPresetNames)
                 {
                     try
@@ -3220,24 +3233,24 @@ namespace MusicBeePlugin
                             {
                                 if (importAll)
                                 {
-                                    if (askToUpdateCustomizedByUser && currentPreset.customizedByUser)
+                                    if (askToResetCustomizedByUser && currentPreset.customizedByUser)
                                     {
-                                        if (MessageBox.Show(this, Plugin.MsgDoYouWantToUpdateYourCustomizedPredefinedPresets, "", MessageBoxButtons.YesNo,
+                                        if (MessageBox.Show(this, Plugin.MsgDoYouWantToResetYourCustomizedPredefinedPresets, "", MessageBoxButtons.YesNo,
                                             MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.No)
                                         {
-                                            askToUpdateCustomizedByUser = false;
-                                            updateCustomizedByUser = false;
+                                            askToResetCustomizedByUser = false;
+                                            resetCustomizedByUser = false;
                                         }
                                         else
                                         {
-                                            askToUpdateCustomizedByUser = false;
+                                            askToResetCustomizedByUser = false;
                                         }
                                     }
 
 
-                                    if (!currentPreset.customizedByUser)
+                                    if (!currentPreset.customizedByUser || resetCustomizedByUser)
                                     {
-                                        newPreset.copyCustomizationsFrom(currentPreset);
+                                        newPreset.copyBasicCustomizationsFrom(currentPreset);
                                         newPreset.hotkeyAssigned = asrPresetsWithHotkeysGuids.Contains(newPreset.guid);
 
                                         presetsWorkingCopy.Remove(newPreset.guid);
@@ -3247,9 +3260,11 @@ namespace MusicBeePlugin
                                         else
                                             numberOfReinstalledPresets++;
                                     }
-                                    else if (updateCustomizedByUser)
+                                    else //Update preset to latest version, and copy *all* customizations
                                     {
-                                        newPreset.copyCustomizationsFrom(currentPreset);
+                                        newPreset.copyBasicCustomizationsFrom(currentPreset);
+                                        newPreset.copyExtendedCustomizationsFrom(currentPreset);
+                                        newPreset.customizedByUser = true;
                                         newPreset.hotkeyAssigned = asrPresetsWithHotkeysGuids.Contains(newPreset.guid);
 
                                         presetsWorkingCopy.Remove(newPreset.guid);
@@ -3259,49 +3274,28 @@ namespace MusicBeePlugin
                                         else
                                             numberOfReinstalledCustomizedPresets++;
                                     }
-                                    else //if (currentPreset.customizedByUser && !updateCustomizedByUser)
-                                    {
-                                        numberOfSkippedCustomizedPresets++;
-                                    }
                                 }
-                                else if (newPreset.modifiedUtc > currentPreset.modifiedUtc) //Import only new
+                                else if (newPreset.modifiedUtc > currentPreset.modifiedUtc) //Install only new presets
                                 {
-                                    if (askToUpdateCustomizedByUser && currentPreset.customizedByUser)
-                                    {
-                                        if (MessageBox.Show(this, Plugin.MsgDoYouWantToUpdateYourCustomizedPredefinedPresets, "", MessageBoxButtons.YesNo,
-                                            MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.No)
-                                        {
-                                            askToUpdateCustomizedByUser = false;
-                                            updateCustomizedByUser = false;
-                                        }
-                                        else
-                                        {
-                                            askToUpdateCustomizedByUser = false;
-                                        }
-                                    }
-
-
                                     if (!currentPreset.customizedByUser)
                                     {
-                                        newPreset.copyCustomizationsFrom(currentPreset);
+                                        newPreset.copyBasicCustomizationsFrom(currentPreset);
                                         newPreset.hotkeyAssigned = asrPresetsWithHotkeysGuids.Contains(newPreset.guid);
 
                                         presetsWorkingCopy.Remove(newPreset.guid);
                                         presetsWorkingCopy.Add(newPreset.guid, newPreset);
                                         numberOfUpdatedPresets++;
                                     }
-                                    else if (updateCustomizedByUser)
+                                    else //Update preset to latest version, and copy *all* customizations
                                     {
-                                        newPreset.copyCustomizationsFrom(currentPreset);
+                                        newPreset.copyBasicCustomizationsFrom(currentPreset);
+                                        newPreset.copyExtendedCustomizationsFrom(currentPreset);
+                                        newPreset.customizedByUser = true;
                                         newPreset.hotkeyAssigned = asrPresetsWithHotkeysGuids.Contains(newPreset.guid);
 
                                         presetsWorkingCopy.Remove(newPreset.guid);
                                         presetsWorkingCopy.Add(newPreset.guid, newPreset);
                                         numberOfUpdatedCustomizedPresets++;
-                                    }
-                                    else //if (currentPreset.customizedByUser && !updateCustomizedByUser)
-                                    {
-                                        numberOfSkippedCustomizedPresets++;
                                     }
                                 }
                                 else //if (!importAll && (newPreset.modifiedUtc <= currentPreset.modifiedUtc || newPreset.modifiedUtc <= Plugin.SavedSettings.lastAsrImportDateUtc))
@@ -3352,8 +3346,6 @@ namespace MusicBeePlugin
                 message += AddLeadingSpaces(numberOfUpdatedPresets, 4, 1) + GetPluralForm(Plugin.MsgPresetsWereUpdated, numberOfUpdatedPresets);
             if (numberOfUpdatedCustomizedPresets > 0)
                 message += AddLeadingSpaces(numberOfUpdatedCustomizedPresets, 4, 1) + GetPluralForm(Plugin.MsgPresetsCustomizedWereUpdated, numberOfUpdatedCustomizedPresets);
-            if (numberOfSkippedCustomizedPresets > 0)
-                message += AddLeadingSpaces(numberOfSkippedCustomizedPresets, 4, 1) + GetPluralForm(Plugin.MsgCustomizedPresetsWereSkipped, numberOfSkippedCustomizedPresets);
             if (numberOfNotChangedSkippedPresets > 0)
                 message += AddLeadingSpaces(numberOfNotChangedSkippedPresets, 4, 1) + GetPluralForm(Plugin.MsgPresetsWereNotChanged, numberOfNotChangedSkippedPresets);
             if (numberOfErrors > 0)

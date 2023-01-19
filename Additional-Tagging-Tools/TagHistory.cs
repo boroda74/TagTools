@@ -457,7 +457,7 @@ namespace MusicBeePlugin
             FolderBrowserDialog dialog = new FolderBrowserDialog();
             dialog.SelectedPath = searchFolderTextBox.Text;
 
-            if (dialog.ShowDialog() == DialogResult.Cancel) return;
+            if (dialog.ShowDialog(this) == DialogResult.Cancel) return;
 
             lastSelectedFolder = dialog.SelectedPath;
 
