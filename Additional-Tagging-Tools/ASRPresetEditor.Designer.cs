@@ -128,6 +128,7 @@
             this.replacedTag5List = new System.Windows.Forms.ComboBox();
             this.searchedTag5List = new System.Windows.Forms.ComboBox();
             this.customizedByUserCheckBox = new System.Windows.Forms.CheckBox();
+            this.removePresetCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -909,12 +910,20 @@
             this.toolTip1.SetToolTip(this.customizedByUserCheckBox, resources.GetString("customizedByUserCheckBox.ToolTip"));
             this.customizedByUserCheckBox.UseVisualStyleBackColor = true;
             // 
+            // removePresetCheckBox
+            // 
+            resources.ApplyResources(this.removePresetCheckBox, "removePresetCheckBox");
+            this.removePresetCheckBox.Name = "removePresetCheckBox";
+            this.toolTip1.SetToolTip(this.removePresetCheckBox, resources.GetString("removePresetCheckBox.ToolTip"));
+            this.removePresetCheckBox.UseVisualStyleBackColor = true;
+            // 
             // ASRPresetEditor
             // 
             this.AcceptButton = this.buttonApply;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
+            this.Controls.Add(this.removePresetCheckBox);
             this.Controls.Add(this.customizedByUserCheckBox);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
@@ -1087,5 +1096,6 @@
         private System.Windows.Forms.CheckBox append4CheckBox;
         private System.Windows.Forms.CheckBox append5CheckBox;
         private System.Windows.Forms.CheckBox customizedByUserCheckBox;
+        private System.Windows.Forms.CheckBox removePresetCheckBox;
     }
 }

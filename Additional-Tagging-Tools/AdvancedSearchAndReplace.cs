@@ -255,6 +255,7 @@ namespace MusicBeePlugin
                 modifiedUtc = DateTime.UtcNow;
                 userPreset = false;
                 customizedByUser = false;
+                removePreset = false;
                 guid = Guid.NewGuid();
                 id = "";
                 preserveValues = "";
@@ -285,6 +286,8 @@ namespace MusicBeePlugin
 
                 if (userPreset)
                     customizedByUser = false;
+
+                removePreset = originalPreset.removePreset;
 
                 foreach (string key in originalPreset.names.Keys)
                 {
@@ -380,7 +383,7 @@ namespace MusicBeePlugin
 
             public override string ToString()
             {
-                return GetDictValue(names, Plugin.Language) + (hotkeyAssigned ? " ★" : "");
+                return GetDictValue(names, Plugin.Language) + (hotkeyAssigned ? " ★" : "") + (id != "" ? " " : "");//****
             }
 
             public string getName(bool getEnglishName = false)
@@ -507,6 +510,7 @@ namespace MusicBeePlugin
             public DateTime modifiedUtc;
             public bool userPreset;
             public bool customizedByUser;
+            public bool removePreset;
             public Guid guid;
             public string id;
             public bool hotkeyAssigned;
@@ -2308,7 +2312,7 @@ namespace MusicBeePlugin
             bool presetChanged;
             using (ASRPresetEditor tagToolsForm = new ASRPresetEditor(TagToolsPlugin, this))
             {
-                presetChanged = tagToolsForm.editPreset(tempPreset, readOnly);
+                presetChanged = tagToolsForm.editPreset(ref tempPreset, readOnly);
             }
 
             if (presetChanged)
@@ -2428,7 +2432,6 @@ namespace MusicBeePlugin
         private void buttonSaveClose_Click(object sender, EventArgs e)
         {
             saveSettings();
-            //Init();
             RegisterASRPresetsHotkeysAndMenuItems(TagToolsPlugin);
             Close();
         }
@@ -2436,8 +2439,47 @@ namespace MusicBeePlugin
         private void buttonSave_Click(object sender, EventArgs e)
         {
             saveSettings();
-            //Init();
             RegisterASRPresetsHotkeysAndMenuItems(TagToolsPlugin);
+        }
+
+        private void deletePreset(Preset presetToRemove)
+        {
+            if (autoAppliedAsrPresetGuids.Contains(presetToRemove.guid))
+            {
+                autoAppliedPresetCount--;
+                autoAppliedAsrPresetGuids.Remove(presetToRemove.guid);
+            }
+
+
+
+            idTextBox.Text = "";
+            if (asrIdsPresetGuids.TryGetValue(presetToRemove.id, out _))
+            {
+                asrIdsPresetGuids.Remove(presetToRemove.id);
+            }
+
+
+            if (presetList.SelectedItem == presetToRemove)
+            {
+                assignHotkeyCheckBox.Checked = false;
+            }
+            else
+            {
+                for (int j = 0; j < asrPresetsWithHotkeysGuids.Length; j++)
+                {
+                    if (asrPresetsWithHotkeysGuids[j] == presetToRemove.guid)
+                    {
+                        asrPresetsWithHotkeysGuids[j] = Guid.Empty;
+                        asrPresetsWithHotkeysCount--;
+                        break;
+                    }
+                }
+            }
+
+
+            presetsWorkingCopy.Remove(presetToRemove.guid);
+            if (presetList.Items.Contains(presetToRemove))
+                presetList.Items.Remove(presetToRemove);
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)
@@ -2447,17 +2489,8 @@ namespace MusicBeePlugin
             if (result == DialogResult.No)
                 return;
 
-            if (autoAppliedAsrPresetGuids.Contains(((Preset)presetList.SelectedItem).guid))
-            {
-                ignoreCheckedPresetEvent = false;
-                presetList.SetItemChecked(presetList.SelectedIndex, false);
-                ignoreCheckedPresetEvent = true;
-            }
-
-            assignHotkeyCheckBox.Checked = false;
-
-            presetsWorkingCopy.Remove(((Preset)presetList.SelectedItem).guid);
-            presetList.Items.RemoveAt(presetList.SelectedIndex);
+            deletePreset((Preset)presetList.SelectedItem);
+            presetListItemChecked();
         }
 
         private void buttonCopy_Click(object sender, EventArgs e)
@@ -3177,7 +3210,7 @@ namespace MusicBeePlugin
             presetList.Sorted = true;
 
 
-            if (selectedPresetGuid == Guid.Empty)
+            if (!presetsWorkingCopy.TryGetValue(selectedPresetGuid, out _))
                 presetList.SelectedIndex = -1;
             else
                 presetList.SelectedItem = presetsWorkingCopy[selectedPresetGuid];
@@ -3193,6 +3226,7 @@ namespace MusicBeePlugin
             int numberOfUpdatedCustomizedPresets = 0;
             int numberOfReinstalledCustomizedPresets = 0;
             int numberOfNotChangedSkippedPresets = 0;
+            int numberOfRemovedPresets = 0;
             int numberOfErrors = 0;
 
 
@@ -3218,6 +3252,8 @@ namespace MusicBeePlugin
 
                 bool askToResetCustomizedByUser = true;
                 bool resetCustomizedByUser = true;
+                bool askToRemovePresets = true;
+                bool removePresets = true;
                 foreach (string newPresetName in newPresetNames)
                 {
                     try
@@ -3235,7 +3271,7 @@ namespace MusicBeePlugin
                                 {
                                     if (askToResetCustomizedByUser && currentPreset.customizedByUser)
                                     {
-                                        if (MessageBox.Show(this, Plugin.MsgDoYouWantToResetYourCustomizedPredefinedPresets, "", MessageBoxButtons.YesNo,
+                                        if (MessageBox.Show(this, Plugin.MsgDoYouWantToResetYourCustomizedPredefinedPresets, "", MessageBoxButtons.YesNo, 
                                             MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.No)
                                         {
                                             askToResetCustomizedByUser = false;
@@ -3247,8 +3283,27 @@ namespace MusicBeePlugin
                                         }
                                     }
 
+                                    if (askToRemovePresets && newPreset.removePreset)
+                                    {
+                                        if (MessageBox.Show(this, Plugin.MsgDoYouWantToRemovePredefinedPresets, "", MessageBoxButtons.YesNo, 
+                                            MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.No)
+                                        {
+                                            askToResetCustomizedByUser = false;
+                                            removePresets = false;
+                                        }
+                                        else
+                                        {
+                                            askToResetCustomizedByUser = false;
+                                        }
+                                    }
 
-                                    if (!currentPreset.customizedByUser || resetCustomizedByUser)
+
+                                    if (newPreset.removePreset && removePresets)
+                                    {
+                                        deletePreset(currentPreset);
+                                        numberOfRemovedPresets++;
+                                    }
+                                    else if (!currentPreset.customizedByUser || resetCustomizedByUser)
                                     {
                                         newPreset.copyBasicCustomizationsFrom(currentPreset);
                                         newPreset.hotkeyAssigned = asrPresetsWithHotkeysGuids.Contains(newPreset.guid);
@@ -3273,6 +3328,28 @@ namespace MusicBeePlugin
                                             numberOfUpdatedCustomizedPresets++;
                                         else
                                             numberOfReinstalledCustomizedPresets++;
+                                    }
+                                }
+                                else if (newPreset.removePreset && newPreset.modifiedUtc > Plugin.SavedSettings.lastAsrImportDateUtc)
+                                {
+                                    if (askToRemovePresets && newPreset.removePreset)
+                                    {
+                                        if (MessageBox.Show(this, Plugin.MsgDoYouWantToResetYourCustomizedPredefinedPresets, "", MessageBoxButtons.YesNo, 
+                                            MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.No)
+                                        {
+                                            askToResetCustomizedByUser = false;
+                                            removePresets = false;
+                                        }
+                                        else
+                                        {
+                                            askToResetCustomizedByUser = false;
+                                        }
+                                    }
+
+                                    if (removePresets)
+                                    {
+                                        deletePreset(currentPreset);
+                                        numberOfRemovedPresets++;
                                     }
                                 }
                                 else if (newPreset.modifiedUtc > currentPreset.modifiedUtc) //Install only new presets
@@ -3303,7 +3380,7 @@ namespace MusicBeePlugin
                                     numberOfNotChangedSkippedPresets++;
                                 }
                             }
-                            else
+                            else if (!newPreset.removePreset)
                             {
                                 if (importAll || newPreset.modifiedUtc > Plugin.SavedSettings.lastAsrImportDateUtc)
                                 {
@@ -3348,6 +3425,8 @@ namespace MusicBeePlugin
                 message += AddLeadingSpaces(numberOfUpdatedCustomizedPresets, 4, 1) + GetPluralForm(Plugin.MsgPresetsCustomizedWereUpdated, numberOfUpdatedCustomizedPresets);
             if (numberOfNotChangedSkippedPresets > 0)
                 message += AddLeadingSpaces(numberOfNotChangedSkippedPresets, 4, 1) + GetPluralForm(Plugin.MsgPresetsWereNotChanged, numberOfNotChangedSkippedPresets);
+            if (numberOfRemovedPresets > 0)
+                message += AddLeadingSpaces(numberOfRemovedPresets, 4, 1) + GetPluralForm(Plugin.MsgPresetsRemoved, numberOfRemovedPresets);
             if (numberOfErrors > 0)
                 message += AddLeadingSpaces(numberOfErrors, 4, 1) + GetPluralForm(Plugin.MsgPresetsFailedToUpdate, numberOfErrors);
 
@@ -3380,37 +3459,9 @@ namespace MusicBeePlugin
 
             foreach (var tempPreset in predefinedPresets)
             {
-                presetsWorkingCopy.Remove(tempPreset.guid);
-
-                if (autoAppliedAsrPresetGuids.Contains(tempPreset.guid))
-                    autoAppliedAsrPresetGuids.Remove(tempPreset.guid);
-
-                for (int j = 0; j < asrPresetsWithHotkeysGuids.Length; j++)
-                { 
-                    if (asrPresetsWithHotkeysGuids[j] == tempPreset.guid)
-                    {
-                        asrPresetsWithHotkeysGuids[j] = Guid.Empty;
-                        asrPresetsWithHotkeysCount--;
-                        break;
-                    }
-                }
-
+                deletePreset(tempPreset);
                 numberOfDeletedPresets++;
             }
-
-
-            string message = "";
-
-            if (numberOfDeletedPresets == 0 && numberOfErrors == 0)
-                message = Plugin.MsgNoPresetsDeleted;
-            else
-                message += numberOfDeletedPresets + GetPluralForm(Plugin.MsgPresetsWereDeleted, numberOfDeletedPresets);
-
-            if (numberOfErrors > 0)
-                message += "\n" + numberOfErrors + GetPluralForm(Plugin.MsgFailedToDelete, numberOfErrors);
-
-
-            MessageBox.Show(this, message, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             searchTextBox.Text = "";
             tickedOnlyCheckBox.Checked = false;
@@ -3431,6 +3482,20 @@ namespace MusicBeePlugin
             presetListItemChecked();
             ignoreCheckedPresetEvent = true;
             presetList.Sorted = true;
+
+
+            string message = "";
+
+            if (numberOfDeletedPresets == 0 && numberOfErrors == 0)
+                message = Plugin.MsgNoPresetsDeleted;
+            else
+                message += numberOfDeletedPresets + GetPluralForm(Plugin.MsgPresetsWereDeleted, numberOfDeletedPresets);
+
+            if (numberOfErrors > 0)
+                message += "\n" + numberOfErrors + GetPluralForm(Plugin.MsgFailedToDelete, numberOfErrors);
+
+
+            MessageBox.Show(this, message, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void buttonImportNew_Click(object sender, EventArgs e)
@@ -3928,6 +3993,7 @@ namespace MusicBeePlugin
                     asrIdsPresetGuids.Remove(preset.id);
 
                 preset.id = "";
+                presetList.Refresh();
                 return;
             }
 
@@ -3947,6 +4013,7 @@ namespace MusicBeePlugin
                     asrIdsPresetGuids.Remove(preset.id);
 
                 preset.id = "";
+                presetList.Refresh();
                 return;
             }
             else
@@ -3962,6 +4029,7 @@ namespace MusicBeePlugin
                             asrIdsPresetGuids.Remove(preset.id);
 
                         preset.id = "";
+                        presetList.Refresh();
                         return;
                     }
                 }
@@ -3971,6 +4039,7 @@ namespace MusicBeePlugin
 
                 preset.id = idTextBox.Text;
                 asrIdsPresetGuids.Add(preset.id, preset.guid);
+                presetList.Refresh();
                 return;
             }
         }
@@ -4054,6 +4123,11 @@ namespace MusicBeePlugin
                 tickedOnlyCheckBox.Checked = true;
                 tickedOnlyCheckBox_CheckedChanged(null, null);
             }
+        }
+
+        private void idCharButton_Click(object sender, EventArgs e)
+        {
+            searchTextBox.Text += " ";
         }
     }
 

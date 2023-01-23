@@ -570,7 +570,7 @@
     <value>12, 162</value>
   </data>
   <data name="label15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 13</value>
+    <value>81, 13</value>
   </data>
   <data name="label15.Text" xml:space="preserve">
     <value>GUID пресета:</value>
@@ -603,7 +603,7 @@
     <value>772, 136</value>
   </data>
   <data name="userPresetCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>139, 17</value>
+    <value>137, 17</value>
   </data>
   <data name="userPresetCheckBox.Text" xml:space="preserve">
     <value>Пресет пользователя</value>
@@ -1305,6 +1305,18 @@
     <value>Настроен пользователем</value>
   </data>
   <data name="customizedByUserCheckBox.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="removePresetCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>772, 158</value>
+  </data>
+  <data name="removePresetCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>107, 17</value>
+  </data>
+  <data name="removePresetCheckBox.Text" xml:space="preserve">
+    <value>Удалить пресет</value>
+  </data>
+  <data name="removePresetCheckBox.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">

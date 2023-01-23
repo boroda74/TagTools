@@ -59,7 +59,7 @@ namespace MusicBeePlugin
             }
         }
 
-        public bool editPreset(AdvancedSearchAndReplaceCommand.Preset presetParam, bool readOnly)
+        public bool editPreset(ref AdvancedSearchAndReplaceCommand.Preset presetParam, bool readOnly)
         {
             preset = presetParam;
 
@@ -75,6 +75,8 @@ namespace MusicBeePlugin
             modifiedBox.Text = preset.modifiedUtc.ToLocalTime().ToString();
             userPresetCheckBox.Checked = preset.userPreset;
             userPresetCheckBox.Enabled = Plugin.DeveloperMode;
+            removePresetCheckBox.Checked = preset.removePreset;
+            removePresetCheckBox.Visible = Plugin.DeveloperMode;
             customizedByUserCheckBox.Checked = preset.customizedByUser;
             customizedByUserCheckBox.Enabled = Plugin.DeveloperMode;
 
@@ -198,6 +200,7 @@ namespace MusicBeePlugin
             AdvancedSearchAndReplaceCommand.SetDictValue(preset.descriptions, currentLanguage, descriptionBox.Text);
 
             preset.userPreset = userPresetCheckBox.Checked;
+            preset.removePreset = removePresetCheckBox.Checked;
             preset.customizedByUser = customizedByUserCheckBox.Checked;
             preset.ignoreCase = ignoreCaseCheckBox.Checked;
 

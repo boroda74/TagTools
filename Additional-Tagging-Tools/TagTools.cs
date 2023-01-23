@@ -580,6 +580,7 @@ namespace MusicBeePlugin
         public static string MsgDeletePresetConfirmation;
         public static string MsgImportingConfirmation;
         public static string MsgDoYouWantToResetYourCustomizedPredefinedPresets;
+        public static string MsgDoYouWantToRemovePredefinedPresets;
         public static string MsgDoYouWantToImportExistingPresetsAsCopies;
 
         public static string MsgPresetsWereImported;
@@ -592,6 +593,7 @@ namespace MusicBeePlugin
         public static string MsgPresetsWereUpdated;
         public static string MsgPresetsCustomizedWereUpdated;
         public static string MsgPresetsWereNotChanged;
+        public static string MsgPresetsRemoved;
         public static string MsgPresetsFailedToUpdate;
 
         public static string MsgPresetsNotFound;
@@ -2690,6 +2692,8 @@ namespace MusicBeePlugin
                 + "Do you want to reinstall your customized predefined presets, and replace them by latest versions from developer?\n\n"
                 + "ALL YOUR CUSTOMIZATIONS WILL BE LOST!\n\n"
                 + "Otherwise, customized presets will be updated to latest versions, but all their customizations will be preserved.";
+            MsgDoYouWantToRemovePredefinedPresets = "Some predefined presets are obsolete and have been removed from the plugin package.\n\n"
+                + "Do you want to delete these presets?";
 
             MsgPresetsWereImported = " preset{;s;s} {was;were;were} imported.\n";
             MsgPresetsWereImportedAsCopies = " preset{;s;s} {was;were;were} imported as new preset{;s;s}.\n";
@@ -2703,8 +2707,9 @@ namespace MusicBeePlugin
             MsgPresetsWereUpdated = " presets {was;were;were} updated.\n";
             MsgPresetsCustomizedWereUpdated = " preset{;s;s} customized by you {was;were;were} updated,\n" + AddLeadingSpaces(0, 4, 0) 
                 + " but {its;their;their} customizations were peserved.\n";
-            MsgPresetsWereNotChanged = " preset{;s;s} {was;were;were} not changed since\n" + AddLeadingSpaces(0, 4, 0) 
+            MsgPresetsWereNotChanged = " preset{;s;s} {was;were;were} not changed since\n" + AddLeadingSpaces(0, 4, 0)
                 + " last update, and skipped.\n\n";
+            MsgPresetsRemoved = " predefined preset{;s;s} {was;were;were} deleted.\n";
             MsgPresetsFailedToUpdate = " preset{;s;s} failed to install due to file\n" + AddLeadingSpaces(0, 4, 0) 
                 + " read error{;s;s} or wrong format.";
             
@@ -3217,6 +3222,9 @@ namespace MusicBeePlugin
                     + "Вы хотите переустановить настроенные стандартные пресеты, заменив их последними версиями от разработчика?\n\n"
                     + "ВСЕ ВАШИ НАСТРОЙКИ БУДУТ УТЕРЯНЫ!\n\n"
                     + "В противном случае настроенные пресеты будут обновлены до последних версий, но все их настройки будут сохранены.";
+                MsgDoYouWantToRemovePredefinedPresets = "Некоторые стандартные пресеты устарели и были удалены из поставки плагина.\n\n"
+                    + "Вы хотите удалить эти пресеты?";
+
 
                 MsgPresetsWereImported = " пресет{;а;ов} был{;и;и} импортирован{;ы;ы}.\n";
                 MsgPresetsWereImportedAsCopies = " пресет{;а;ов} был{;и;и} импортирован{;ы;ы} как новы{й;ые;ые} пресет{;ы;ы}.\n";
@@ -3226,12 +3234,13 @@ namespace MusicBeePlugin
                 MsgPresetsWereInstalled = " пресет{;а;ов} был{;и;и} устновлен{;ы;ы}.\n\n";
                 MsgPresetsCustomizedWereReinstalled = " пресет{;а;ов}, настроенн{ый;ых;ых} вами, был{;и;и}\n" + AddLeadingSpaces(0, 4, 0) 
                     + " переустановлен{;ы;ы}, но {его;их;их} настройки были сохранены.\n\n";
-                MsgPresetsWereReinstalled = " пресет{;а;ов} был{;и;и} переустновлен{;ы;ы}.\n\n";
+                MsgPresetsWereReinstalled = " пресет{;а;ов} был{;и;и} переустановлен{;ы;ы}.\n\n";
                 MsgPresetsWereUpdated = " пресет{;а;ов} был{;и;и} обновлен{;ы;ы}.\n\n";
                 MsgPresetsCustomizedWereUpdated = " пресет{;а;ов}, настроенн{ый;ых;ых} вами, был{;и;и} обновлен{;ы;ы},\n" + AddLeadingSpaces(0, 4, 0) 
                     + " но {его;их;их} настройки были сохранены.\n\n";
                 MsgPresetsWereNotChanged = " пресет{;а;ов} не изменил{ся;ись;ись} с последнего \n" + AddLeadingSpaces(0, 4, 0) 
                     + " обновления и был{;и;и} пропущен{;ы;ы}.\n\n";
+                MsgPresetsRemoved = " пресет{;а;ов} был{;и;и} удален{;ы;ы}.\n\n";
                 MsgPresetsFailedToUpdate = " пресет{;а;ов} не удалось обновить из-за ошиб{ки;ок;ок}\n" + AddLeadingSpaces(0, 4, 0) 
                     + " чтения файл{а;ов;ов} или {его;их;их} неверного формата.";
 
