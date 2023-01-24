@@ -3235,7 +3235,7 @@ namespace MusicBeePlugin
 
         }
 
-        public void install(bool importAll)
+        public void install(bool installAll)
         {
             string[] newPresetNames;
             int numberOfInstalledPresets = 0;
@@ -3285,7 +3285,7 @@ namespace MusicBeePlugin
 
                             if (currentPreset != null)
                             {
-                                if (importAll)
+                                if (installAll)
                                 {
                                     if (askToResetCustomizedByUser && currentPreset.customizedByUser)
                                     {
@@ -3400,7 +3400,7 @@ namespace MusicBeePlugin
                             }
                             else if (!newPreset.removePreset)
                             {
-                                if (importAll || newPreset.modifiedUtc > Plugin.SavedSettings.lastAsrImportDateUtc)
+                                if (installAll || newPreset.modifiedUtc > Plugin.SavedSettings.lastAsrImportDateUtc)
                                 {
                                     presetsWorkingCopy.Add(newPreset.guid, newPreset);
                                     numberOfInstalledPresets++;
