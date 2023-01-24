@@ -63,6 +63,8 @@ namespace MusicBeePlugin
         private string clickHereText;
         private string nowTickedText;
 
+        private string additionalSearchText = "";
+
         private const int PropMetaDataThreshold = 1000;
         private enum ServiceMetaData
         {
@@ -1346,23 +1348,33 @@ namespace MusicBeePlugin
         {
             base.initializeForm();
 
-            float chanelScale = 0.5f;//***
-            float avgScale = 0.3f;
+
+            float highlightWeight = 0.8f;//***
+
+            Color controlBack = Color.FromKnownColor(KnownColor.Control);
+            float controlBackAvg = (controlBack.R + controlBack.G + controlBack.B) / 3.0f;
 
             Color highlight = Color.FromKnownColor(KnownColor.Highlight);
             float highlightAvg = (highlight.R + highlight.G + highlight.B) / 3.0f;
-            float highlightR = chanelScale * (highlight.R - highlightAvg);
-            float highlightG = chanelScale * (highlight.G - highlightAvg);
-            float highlightB = chanelScale * (highlight.B - highlightAvg);
 
-            Color controlText = Color.FromKnownColor(KnownColor.ControlText);
-            float controlTextAvg = controlText.R + controlText.G + controlText.B / 3.0f;
+            float weigthedBrightness = highlightWeight * highlightAvg / 256 + (1 - highlightWeight) * (256 - controlBackAvg) / 256;
 
-            highlightR += controlTextAvg + avgScale * (highlightAvg - controlTextAvg);
-            highlightG += controlTextAvg + avgScale * (highlightAvg - controlTextAvg);
-            highlightB += controlTextAvg + avgScale * (highlightAvg - controlTextAvg);
+            float highlightR = highlight.R * weigthedBrightness;
+            float highlightG = highlight.G * weigthedBrightness;
+            float highlightB = highlight.B * weigthedBrightness;
 
+            highlightR = highlightR < 0 ? 0 : highlightR;
+            highlightG = highlightG < 0 ? 0 : highlightG;
+            highlightB = highlightB < 0 ? 0 : highlightB;
+
+            highlightR = highlightR > 255 ? 255 : highlightR;
+            highlightG = highlightG > 255 ? 255 : highlightG;
+            highlightB = highlightB > 255 ? 255 : highlightB;
+
+            descriptionBox.Enabled = true;
+            descriptionBox.ReadOnly = true;
             descriptionBox.ForeColor = Color.FromArgb((int)highlightR, (int)highlightG, (int)highlightB);
+
 
             presetsWorkingCopy = new SortedDictionary<Guid, Preset>();
             foreach (var tempPreset in Presets.Values)
@@ -3208,6 +3220,9 @@ namespace MusicBeePlugin
         public void refreshPresetList(Guid selectedPresetGuid)
         {
             searchTextBox.Text = "";
+            playlistCheckBox.Checked = false;
+            idCheckBox.Checked = false;
+            hotkeyCheckBox.Checked = false;
             tickedOnlyCheckBox.Checked = false;
 
             presetList.Items.Clear();
@@ -3482,6 +3497,10 @@ namespace MusicBeePlugin
             }
 
             searchTextBox.Text = "";
+            additionalSearchText = "";
+            playlistCheckBox.Checked = false;
+            idCheckBox.Checked = false;
+            hotkeyCheckBox.Checked = false;
             tickedOnlyCheckBox.Checked = false;
 
             presetList.Items.Clear();
@@ -3849,7 +3868,7 @@ namespace MusicBeePlugin
 
         private void searchTextBox_TextChanged(object sender, EventArgs e)
         {
-            string[] searchStrings = searchTextBox.Text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] searchStrings = (searchTextBox.Text + additionalSearchText).Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
             presetList.Items.Clear();
             presetList.Sorted = false;
@@ -4149,43 +4168,46 @@ namespace MusicBeePlugin
             }
         }
 
-        private void starButton_Click(object sender, EventArgs e)
+        private void playlistCheckBox_CheckedChanged(object sender, EventArgs e)//***
         {
-            if (searchTextBox.Text.Contains("★"))
+            if (additionalSearchText.Contains(" "))
             {
-                searchTextBox.Text = searchTextBox.Text.Replace("★", "");
-                searchTextBox.Text = searchTextBox.Text.Replace("  ", " ");
+                additionalSearchText = additionalSearchText.Replace(" ", "");
             }
             else
             {
-                searchTextBox.Text += " ★";
+                additionalSearchText += " ";
             }
+
+            searchTextBox_TextChanged(null, null);
         }
 
-        private void idCharButton_Click(object sender, EventArgs e)
+        private void idCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (searchTextBox.Text.Contains(""))
+            if (additionalSearchText.Contains(" "))
             {
-                searchTextBox.Text = searchTextBox.Text.Replace("", "");
-                searchTextBox.Text = searchTextBox.Text.Replace("  ", " ");
+                additionalSearchText = additionalSearchText.Replace(" ", "");
             }
             else
             {
-                searchTextBox.Text += " ";
+                additionalSearchText += " ";
             }
+
+            searchTextBox_TextChanged(null, null);
         }
 
-        private void playlistCharButton_Click(object sender, EventArgs e)//***
+        private void hotkeyCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (searchTextBox.Text.Contains(""))
+            if (additionalSearchText.Contains(" ★"))
             {
-                searchTextBox.Text = searchTextBox.Text.Replace("", "");
-                searchTextBox.Text = searchTextBox.Text.Replace("  ", " ");
+                additionalSearchText = additionalSearchText.Replace(" ★", "");
             }
             else
             {
-                searchTextBox.Text += " ";
+                additionalSearchText += " ★";
             }
+
+            searchTextBox_TextChanged(null, null);
         }
     }
 
