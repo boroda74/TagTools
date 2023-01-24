@@ -383,7 +383,7 @@ namespace MusicBeePlugin
 
             public override string ToString()
             {
-                return GetDictValue(names, Plugin.Language) + (hotkeyAssigned ? " ★" : "") + (id != "" ? " " : "");//****
+                return GetDictValue(names, Plugin.Language) + (condition ? " " : "") + (id != "" ? " " : "") + (hotkeyAssigned ? " ★" : "");
             }
 
             public string getName(bool getEnglishName = false)
@@ -1345,6 +1345,24 @@ namespace MusicBeePlugin
         protected new void initializeForm()
         {
             base.initializeForm();
+
+            float chanelScale = 0.5f;//***
+            float avgScale = 0.3f;
+
+            Color highlight = Color.FromKnownColor(KnownColor.Highlight);
+            float highlightAvg = (highlight.R + highlight.G + highlight.B) / 3.0f;
+            float highlightR = chanelScale * (highlight.R - highlightAvg);
+            float highlightG = chanelScale * (highlight.G - highlightAvg);
+            float highlightB = chanelScale * (highlight.B - highlightAvg);
+
+            Color controlText = Color.FromKnownColor(KnownColor.ControlText);
+            float controlTextAvg = controlText.R + controlText.G + controlText.B / 3.0f;
+
+            highlightR += controlTextAvg + avgScale * (highlightAvg - controlTextAvg);
+            highlightG += controlTextAvg + avgScale * (highlightAvg - controlTextAvg);
+            highlightB += controlTextAvg + avgScale * (highlightAvg - controlTextAvg);
+
+            descriptionBox.ForeColor = Color.FromArgb((int)highlightR, (int)highlightG, (int)highlightB);
 
             presetsWorkingCopy = new SortedDictionary<Guid, Preset>();
             foreach (var tempPreset in Presets.Values)
@@ -3217,7 +3235,7 @@ namespace MusicBeePlugin
 
         }
 
-        public void import(bool importAll)
+        public void install(bool importAll)
         {
             string[] newPresetNames;
             int numberOfInstalledPresets = 0;
@@ -3500,12 +3518,12 @@ namespace MusicBeePlugin
 
         private void buttonImportNew_Click(object sender, EventArgs e)
         {
-            import(false);
+            install(false);
         }
 
         private void buttonImportAll_Click(object sender, EventArgs e)
         {
-            import(true);
+            install(true);
         }
 
         private void buttonImport_Click(object sender, EventArgs e)
@@ -3605,8 +3623,19 @@ namespace MusicBeePlugin
 
         private void conditionCheckBox_CheckedChanged(object sender, EventArgs e)
         {
+            if (conditionCheckBox.Checked && playlistComboBox.SelectedIndex == -1 && playlistComboBox.Items.Count > 0)
+            {
+                playlistComboBox.SelectedIndex = 0;
+            }
+            else if (conditionCheckBox.Checked && playlistComboBox.Items.Count == 0)
+            {
+                conditionCheckBox.Checked = false;
+            }
+
             playlistComboBox.Enabled = conditionCheckBox.Checked;
             preset.condition = playlistComboBox.Enabled;
+
+            presetList.Refresh();
         }
 
         private void playlistComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -3919,11 +3948,6 @@ namespace MusicBeePlugin
             assignHotkeyCheckBox.Text = assignHotkeyCheckBoxText + (Plugin.MaximumNumberOfASRHotkeys - asrPresetsWithHotkeysCount) + "/" + Plugin.MaximumNumberOfASRHotkeys;
         }
 
-        private void starButton_Click(object sender, EventArgs e)
-        {
-            searchTextBox.Text += " ★";
-        }
-
         private void presetListItemChecked()
         {
             if (autoAppliedPresetCount == 0)
@@ -4125,9 +4149,43 @@ namespace MusicBeePlugin
             }
         }
 
+        private void starButton_Click(object sender, EventArgs e)
+        {
+            if (searchTextBox.Text.Contains("★"))
+            {
+                searchTextBox.Text = searchTextBox.Text.Replace("★", "");
+                searchTextBox.Text = searchTextBox.Text.Replace("  ", " ");
+            }
+            else
+            {
+                searchTextBox.Text += " ★";
+            }
+        }
+
         private void idCharButton_Click(object sender, EventArgs e)
         {
-            searchTextBox.Text += " ";
+            if (searchTextBox.Text.Contains(""))
+            {
+                searchTextBox.Text = searchTextBox.Text.Replace("", "");
+                searchTextBox.Text = searchTextBox.Text.Replace("  ", " ");
+            }
+            else
+            {
+                searchTextBox.Text += " ";
+            }
+        }
+
+        private void playlistCharButton_Click(object sender, EventArgs e)//***
+        {
+            if (searchTextBox.Text.Contains(""))
+            {
+                searchTextBox.Text = searchTextBox.Text.Replace("", "");
+                searchTextBox.Text = searchTextBox.Text.Replace("  ", " ");
+            }
+            else
+            {
+                searchTextBox.Text += " ";
+            }
         }
     }
 
