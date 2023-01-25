@@ -1,0 +1,390 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>493, 695</value>
+  </data>
+  <data name="buttonCancel.Text" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
+    <value>412, 695</value>
+  </data>
+  <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 12</value>
+  </data>
+  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>255, 13</value>
+  </data>
+  <data name="label6.Text" xml:space="preserve">
+    <value>Настройте дополнительные инструменты</value>
+  </data>
+  <data name="versionLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 700</value>
+  </data>
+  <data name="versionLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 13</value>
+  </data>
+  <data name="versionLabel.Text" xml:space="preserve">
+    <value>Версия: </value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="groupBox3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 453</value>
+  </data>
+  <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>554, 116</value>
+  </data>
+  <data name="groupBox3.Text" xml:space="preserve">
+    <value>Звуки</value>
+  </data>
+  <data name="playTickedAsrPresetSoundCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 88</value>
+  </data>
+  <data name="playTickedAsrPresetSoundCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>243, 17</value>
+  </data>
+  <data name="playTickedAsrPresetSoundCheckBox.Text" xml:space="preserve">
+    <value>Проиграть звук при отметке пресета ДПЗ</value>
+  </data>
+  <data name="playStoppedSoundCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>451, 17</value>
+  </data>
+  <data name="playStoppedSoundCheckBox.Text" xml:space="preserve">
+    <value>Проиграть системный звук 'Стоп', когда фоновая задача отменена пользователем</value>
+  </data>
+  <data name="playStartedSoundCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>421, 17</value>
+  </data>
+  <data name="playStartedSoundCheckBox.Text" xml:space="preserve">
+    <value>Проиграть системный звук 'Восклицание', когда фоновая задача начинается</value>
+  </data>
+  <data name="playCompletedSoundCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>487, 17</value>
+  </data>
+  <data name="playCompletedSoundCheckBox.Text" xml:space="preserve">
+    <value>Проиграть системный звук 'Звездочка', когда фоновая задача завершается/остановлена</value>
+  </data>
+  <data name="groupBox4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="groupBox4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 575</value>
+  </data>
+  <data name="groupBox4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>554, 111</value>
+  </data>
+  <data name="groupBox4.Text" xml:space="preserve">
+    <value>Команда 'Отчеты по библиотеке' (не нужно для русской локализации Windows, регистр не важен)</value>
+  </data>
+  <data name="unitGBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>318, 78</value>
+  </data>
+  <data name="unitMBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>318, 50</value>
+  </data>
+  <data name="unitKBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>318, 22</value>
+  </data>
+  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 81</value>
+  </data>
+  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>303, 13</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Единица измерения миллиардов (например, 'Г' для 'Гига'):</value>
+  </data>
+  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 53</value>
+  </data>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>303, 13</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>Единица измерения миллионов (например, 'М' для 'Мега'):</value>
+  </data>
+  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 25</value>
+  </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>274, 13</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Единица измерения тысяч (например, 'К' для 'Кило'):</value>
+  </data>
+  <data name="saveLastSkippedButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>146, 695</value>
+  </data>
+  <data name="saveLastSkippedButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>260, 23</value>
+  </data>
+  <data name="saveLastSkippedButton.Text" xml:space="preserve">
+    <value>Сохранять дату последнего пропуска трека...</value>
+  </data>
+  <data name="useSkinColorsCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>211, 17</value>
+  </data>
+  <data name="useSkinColorsCheckBox.Text" xml:space="preserve">
+    <value>Использовать цвета темы MusicBee</value>
+  </data>
+  <data name="closeHiddenCommandWindowsRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>450, 17</value>
+  </data>
+  <data name="closeHiddenCommandWindowsRadioButton.Text" xml:space="preserve">
+    <value>Закрывать скрытое окно плагина, когда его фоновая задача завершена/прервана</value>
+  </data>
+  <data name="showHiddenCommandWindowsRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>457, 17</value>
+  </data>
+  <data name="showHiddenCommandWindowsRadioButton.Text" xml:space="preserve">
+    <value>Показывать скрытое окно плагина, когда его фоновая задача завершена/прервана</value>
+  </data>
+  <data name="highlightChangedTagsCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="highlightChangedTagsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>267, 19</value>
+  </data>
+  <data name="highlightChangedTagsCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>190, 17</value>
+  </data>
+  <data name="highlightChangedTagsCheckBox.Text" xml:space="preserve">
+    <value>Подсвечивать измененные теги</value>
+  </data>
+  <data name="groupBox2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 348</value>
+  </data>
+  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>554, 99</value>
+  </data>
+  <data name="groupBox2.Text" xml:space="preserve">
+    <value>Оформление</value>
+  </data>
+  <data name="showRencodeTagCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>314, 17</value>
+  </data>
+  <data name="showRencodeTagCheckBox.Text" xml:space="preserve">
+    <value>Показывать в меню команду 'Изменить кодировку тега'</value>
+  </data>
+  <data name="showChangeCaseCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>301, 17</value>
+  </data>
+  <data name="showChangeCaseCheckBox.Text" xml:space="preserve">
+    <value>Показывать в меню команду 'Изменить регистр тега'</value>
+  </data>
+  <data name="showLibraryReportsCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>513, 17</value>
+  </data>
+  <data name="showLibraryReportsCheckBox.Text" xml:space="preserve">
+    <value>Показывать в меню команды 'Отчеты по библиотеке' / 'Автоматические отчеты по библиотеке'
+</value>
+  </data>
+  <data name="showCopyTagCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>261, 17</value>
+  </data>
+  <data name="showCopyTagCheckBox.Text" xml:space="preserve">
+    <value>Показывать в меню команду 'Копировать тег'</value>
+  </data>
+  <data name="showAutorateCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>369, 17</value>
+  </data>
+  <data name="showAutorateCheckBox.Text" xml:space="preserve">
+    <value>Показывать в меню команду 'Автоматически установить рейтинги'</value>
+  </data>
+  <data name="showSwapTagsCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>327, 17</value>
+  </data>
+  <data name="showSwapTagsCheckBox.Text" xml:space="preserve">
+    <value>Показывать в меню команду 'Поменять местами два тега'</value>
+  </data>
+  <data name="showASRCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>538, 17</value>
+  </data>
+  <data name="showASRCheckBox.Text" xml:space="preserve">
+    <value>Показывать в меню команды 'Дополнительные поиск и замена' / 'Множественный поиск и замена'</value>
+  </data>
+  <data name="showShowHiddenWindowsCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>350, 17</value>
+  </data>
+  <data name="showShowHiddenWindowsCheckBox.Text" xml:space="preserve">
+    <value>Показывать в меню команду 'Показать скрытые окна плагина'</value>
+  </data>
+  <data name="showCARCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>381, 17</value>
+  </data>
+  <data name="showCARCheckBox.Text" xml:space="preserve">
+    <value>Показывать в меню команду 'Рассчитать средний рейтинг альбомов'</value>
+  </data>
+  <data name="showBackupRestoreCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>329, 17</value>
+  </data>
+  <data name="showBackupRestoreCheckBox.Text" xml:space="preserve">
+    <value>Показывать в меню команды архивации и воостановления</value>
+  </data>
+  <data name="contextMenuCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left</value>
+  </data>
+  <data name="contextMenuCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="contextMenuCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 276</value>
+  </data>
+  <data name="contextMenuCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>247, 17</value>
+  </data>
+  <data name="contextMenuCheckBox.Text" xml:space="preserve">
+    <value>Показывать команды в контекстном меню</value>
+  </data>
+  <data name="showCTCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>262, 17</value>
+  </data>
+  <data name="showCTCheckBox.Text" xml:space="preserve">
+    <value>Показывать в меню команду 'Сравнить треки'</value>
+  </data>
+  <data name="groupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 35</value>
+  </data>
+  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>554, 307</value>
+  </data>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>Выберите команды</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>580, 727</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+</root>
