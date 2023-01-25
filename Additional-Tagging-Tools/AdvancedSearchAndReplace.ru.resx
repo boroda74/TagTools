@@ -125,11 +125,7 @@
     <value>Microsoft Sans Serif, 10.25pt</value>
   </data>
   <data name="hotkeyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-<<<<<<< HEAD
-    <value>952, 36</value>
-=======
     <value>950, 34</value>
->>>>>>> bug fixes
   </data>
   <data name="hotkeyCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>37, 21</value>
@@ -141,9 +137,6 @@
     <value>Microsoft Sans Serif, 10.25pt</value>
   </data>
   <data name="idCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-<<<<<<< HEAD
-    <value>911, 34</value>
-=======
     <value>912, 34</value>
   </data>
   <data name="idCheckBox.Size" type="System.Drawing.Size, System.Drawing">
@@ -151,7 +144,6 @@
   </data>
   <data name="idCheckBox.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
->>>>>>> bug fixes
   </data>
   <data name="idCheckBox.ToolTip" xml:space="preserve">
     <value>Показывать только пресеты с назначенными id-ми функций виртуальных тегов</value>
@@ -165,13 +157,8 @@
   <data name="playlistCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>37, 17</value>
   </data>
-<<<<<<< HEAD
-  <data name="playlistCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>870, 36</value>
-=======
   <data name="playlistCheckBox.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
->>>>>>> bug fixes
   </data>
   <data name="playlistCheckBox.ToolTip" xml:space="preserve">
     <value>Показывать только пресеты, ограниченные плейлистом</value>
