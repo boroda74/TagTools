@@ -63,8 +63,6 @@ namespace MusicBeePlugin
         private string clickHereText;
         private string nowTickedText;
 
-        private string additionalSearchText = "";
-
         private const int PropMetaDataThreshold = 1000;
         private enum ServiceMetaData
         {
@@ -2940,9 +2938,6 @@ namespace MusicBeePlugin
                 customText4Box.Enabled = preset.customText4Checked;
                 customText4Label.Enabled = preset.customText4Checked;
 
-                conditionCheckBox.Enabled = true;
-                conditionCheckBox.Checked = preset.condition;
-
                 bool hotkeyAssigned = preset.hotkeyAssigned;
                 if (asrPresetsWithHotkeysCount >= Plugin.MaximumNumberOfASRHotkeys && !hotkeyAssigned)
                 {
@@ -2972,19 +2967,36 @@ namespace MusicBeePlugin
                 idTextBox.Text = preset.id;
 
 
-                bool playlistFound = false;
-                foreach (Playlist tempPreset in playlistComboBox.Items)
+                if (playlistComboBox.Items.Count == 0)
                 {
-                    if (tempPreset.playlist == preset.playlist)
+                    conditionCheckBox.Enabled = false;
+                    conditionCheckBox.Checked = false;
+                }
+                else
+                {
+                    conditionCheckBox.Enabled = true;
+
+                    if (preset.condition)
                     {
-                        playlistComboBox.SelectedItem = tempPreset;
-                        playlistFound = true;
-                        break;
+                        bool playlistFound = false;
+                        foreach (Playlist tempPreset in playlistComboBox.Items)
+                        {
+                            if (tempPreset.playlist == preset.playlist)
+                            {
+                                playlistComboBox.SelectedItem = tempPreset;
+                                conditionCheckBox.Checked = true;
+                                playlistFound = true;
+                                break;
+                            }
+                        }
+
+                        if (!playlistFound)
+                        {
+                            conditionCheckBox.Checked = false;
+                            playlistComboBox.SelectedIndex = -1;
+                        }
                     }
                 }
-                if (!playlistFound)
-                    playlistComboBox.SelectedIndex = -1;
-
 
 
                 //Lets deal with preview table
@@ -3497,7 +3509,6 @@ namespace MusicBeePlugin
             }
 
             searchTextBox.Text = "";
-            additionalSearchText = "";
             playlistCheckBox.Checked = false;
             idCheckBox.Checked = false;
             hotkeyCheckBox.Checked = false;
@@ -3866,9 +3877,9 @@ namespace MusicBeePlugin
             buttonPreview.Enabled = false;
         }
 
-        private void searchTextBox_TextChanged(object sender, EventArgs e)
+        private void filterPresetList()
         {
-            string[] searchStrings = (searchTextBox.Text + additionalSearchText).Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] searchStrings = searchTextBox.Text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
             presetList.Items.Clear();
             presetList.Sorted = false;
@@ -3878,17 +3889,32 @@ namespace MusicBeePlugin
             {
                 string presetName = tempPreset.ToString();
 
-                bool allStringsFound = true;
+                bool filteringCriteriaAreMeet = true;
                 foreach (string searchString in searchStrings)
                 {
                     if (!Regex.IsMatch(presetName, Regex.Escape(searchString), RegexOptions.IgnoreCase))
                     {
-                        allStringsFound = false;
+                        filteringCriteriaAreMeet = false;
                         break;
                     }
                 }
 
-                if (allStringsFound)
+
+                if (hotkeyCheckBox.Checked && !tempPreset.hotkeyAssigned)
+                {
+                    filteringCriteriaAreMeet = false;
+                }
+                else if (idCheckBox.Checked && string.IsNullOrEmpty(tempPreset.id))
+                {
+                    filteringCriteriaAreMeet = false;
+                }
+                else if (playlistCheckBox.Checked && !tempPreset.condition)
+                {
+                    filteringCriteriaAreMeet = false;
+                }
+
+
+                if (filteringCriteriaAreMeet)
                 {
                     bool autoApply = autoAppliedAsrPresetGuids.Contains(tempPreset.guid);
                     if (!tickedOnlyCheckBox.Checked || autoApply)
@@ -3907,30 +3933,14 @@ namespace MusicBeePlugin
             presetList.Sorted = true;
         }
 
+        private void searchTextBox_TextChanged(object sender, EventArgs e)
+        {
+            filterPresetList();
+        }
+
         private void clearSearchButton_Click(object sender, EventArgs e)
         {
             searchTextBox.Text = "";
-
-            presetList.Items.Clear();
-            presetList.Sorted = false;
-            ignoreCheckedPresetEvent = false;
-            int i = 0;
-            foreach (Preset tempPreset in presetsWorkingCopy.Values)
-            {
-                bool autoApply = autoAppliedAsrPresetGuids.Contains(tempPreset.guid);
-                if (!tickedOnlyCheckBox.Checked || autoApply)
-                {
-                    presetList.Items.Add(tempPreset);
-                    presetList.SetItemChecked(i, autoApply);
-                    if (autoApply)
-                        autoAppliedPresetCount--;
-
-                    i++;
-                }
-            }
-            presetListItemChecked();
-            ignoreCheckedPresetEvent = true;
-            presetList.Sorted = true;
         }
 
         private void assignHotkeyCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -4104,8 +4114,7 @@ namespace MusicBeePlugin
             //{
             //    tickedOnlyCheckBox.Checked = false;
             //}
-
-            searchTextBox_TextChanged(null, null);
+            filterPresetList();
         }
 
         private void previewTable_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
@@ -4170,44 +4179,17 @@ namespace MusicBeePlugin
 
         private void playlistCheckBox_CheckedChanged(object sender, EventArgs e)//***
         {
-            if (additionalSearchText.Contains(" "))
-            {
-                additionalSearchText = additionalSearchText.Replace(" ", "");
-            }
-            else
-            {
-                additionalSearchText += " ";
-            }
-
-            searchTextBox_TextChanged(null, null);
+            filterPresetList();
         }
 
         private void idCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (additionalSearchText.Contains(" "))
-            {
-                additionalSearchText = additionalSearchText.Replace(" ", "");
-            }
-            else
-            {
-                additionalSearchText += " ";
-            }
-
-            searchTextBox_TextChanged(null, null);
+            filterPresetList();
         }
 
         private void hotkeyCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (additionalSearchText.Contains(" ★"))
-            {
-                additionalSearchText = additionalSearchText.Replace(" ★", "");
-            }
-            else
-            {
-                additionalSearchText += " ★";
-            }
-
-            searchTextBox_TextChanged(null, null);
+            filterPresetList();
         }
     }
 

@@ -429,8 +429,8 @@
   <data name="groupBox2.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="conditionCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>44</value>
+  <data name="labelTag2.TabIndex" type="System.Int32, mscorlib">
+    <value>66</value>
   </data>
   <data name="buttonExport.ToolTip" xml:space="preserve">
     <value>Export selected user or customized predefined preset to share it with other people</value>
@@ -738,6 +738,9 @@
   <data name="labelTag2.Text" xml:space="preserve">
     <value>&lt;Tag 2&gt;:</value>
   </data>
+  <data name="parameterTag6List.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
   <data name="labelTag6.TabIndex" type="System.Int32, mscorlib">
     <value>74</value>
   </data>
@@ -795,8 +798,8 @@
   <data name="customText4Box.Location" type="System.Drawing.Point, System.Drawing">
     <value>503, 303</value>
   </data>
-  <data name="buttonSave.Text" xml:space="preserve">
-    <value>Save All</value>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="clearIdButton.Text" xml:space="preserve">
     <value>✖</value>
@@ -1783,8 +1786,8 @@ If you have deleted some predefined presets, then they won't be reinstalled</val
   <data name="&gt;&gt;labelTag2.ZOrder" xml:space="preserve">
     <value>35</value>
   </data>
-  <data name="labelTag2.TabIndex" type="System.Int32, mscorlib">
-    <value>66</value>
+  <data name="buttonSave.Text" xml:space="preserve">
+    <value>Save All</value>
   </data>
   <data name="applyToPlayingTrackCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1932,6 +1935,9 @@ If you have deleted some predefined presets, then they won't be reinstalled</val
   </data>
   <data name="buttonImport.Error" xml:space="preserve">
     <value />
+  </data>
+  <data name="customText4Label.TabIndex" type="System.Int32, mscorlib">
+    <value>82</value>
   </data>
   <data name="&gt;&gt;NewTag2.Name" xml:space="preserve">
     <value>NewTag2</value>
@@ -2317,8 +2323,8 @@ If you have deleted some predefined presets, then they won't be reinstalled</val
   <data name="hotkeyCheckBox.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;customText4Label.Parent" xml:space="preserve">
-    <value>panel1</value>
+  <data name="tickedOnlyCheckBox.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopLeft</value>
   </data>
   <data name="&gt;&gt;customizedPresetLabel.Name" xml:space="preserve">
     <value>customizedPresetLabel</value>
@@ -2398,8 +2404,8 @@ If you have deleted some predefined presets, then they won't be reinstalled</val
   <data name="&gt;&gt;playlistComboBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;parameterTag2List.ZOrder" xml:space="preserve">
-    <value>36</value>
+  <data name="&gt;&gt;customText4Label.Parent" xml:space="preserve">
+    <value>panel1</value>
   </data>
   <data name="&gt;&gt;buttonExportCustom.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2997,9 +3003,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="label4.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="&gt;&gt;buttonExportCustom.Parent" xml:space="preserve">
     <value>groupBox2</value>
   </data>
@@ -3240,6 +3243,9 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="customText2Label.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="conditionCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>44</value>
+  </data>
   <data name="parameterTag3List.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
@@ -3264,11 +3270,14 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="panel1.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="parameterTag6List.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
+  <data name="hotkeyCheckBox.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopLeft</value>
   </data>
   <data name="&gt;&gt;conditionCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="playlistCheckBox.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopLeft</value>
   </data>
   <data name="customizedPresetLabel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI Semibold, 8.25pt, style=Bold</value>
@@ -3387,8 +3396,8 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="&gt;&gt;buttonImportAll.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="customText4Label.TabIndex" type="System.Int32, mscorlib">
-    <value>82</value>
+  <data name="&gt;&gt;parameterTag2List.ZOrder" xml:space="preserve">
+    <value>36</value>
   </data>
   <data name="&gt;&gt;tickedOnlyCheckBox.Parent" xml:space="preserve">
     <value>panel1</value>
@@ -3590,6 +3599,9 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   </data>
   <data name="buttonImport.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
+  </data>
+  <data name="idCheckBox.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopLeft</value>
   </data>
   <data name="labelTag2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>

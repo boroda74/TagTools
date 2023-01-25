@@ -133,7 +133,7 @@
     <value>0</value>
   </data>
   <data name="hotkeyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>952, 37</value>
+    <value>952, 36</value>
   </data>
   <data name="idCheckBox.Error" xml:space="preserve">
     <value />
@@ -145,7 +145,7 @@
     <value>0</value>
   </data>
   <data name="idCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>911, 35</value>
+    <value>911, 34</value>
   </data>
   <data name="idCheckBox.ToolTip" xml:space="preserve">
     <value>Показывать только пресеты с назначенными id-ми функций виртуальных тегов</value>
@@ -160,7 +160,7 @@
     <value>0</value>
   </data>
   <data name="playlistCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>870, 37</value>
+    <value>870, 36</value>
   </data>
   <data name="playlistCheckBox.ToolTip" xml:space="preserve">
     <value>Показывать только пресеты, ограниченные плейлистом</value>
@@ -286,7 +286,7 @@
     <value>0</value>
   </data>
   <data name="tickedOnlyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>687, 37</value>
+    <value>687, 36</value>
   </data>
   <data name="tickedOnlyCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>175, 17</value>
