@@ -117,14 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>36, 9</value>
-  </metadata>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="buttonDeleteAll.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonDeleteAll.Location" type="System.Drawing.Point, System.Drawing">
     <value>423, 12</value>
   </data>
@@ -892,7 +892,7 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
     <value>❎</value>
   </data>
   <data name="untickAllCheckBox.ToolTip" xml:space="preserve">
-    <value>Untick all</value>
+    <value>Uncheck all filters</value>
   </data>
   <data name="&gt;&gt;untickAllCheckBox.Name" xml:space="preserve">
     <value>untickAllCheckBox</value>
@@ -942,9 +942,9 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="previewTable.ColumnHeadersHeight" type="System.Int32, mscorlib">
     <value>29</value>
   </data>
-  <metadata name="File.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="File.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="File.HeaderText" xml:space="preserve">
     <value>File</value>
   </data>
@@ -954,18 +954,18 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="File.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="Track.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="Track.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="Track.HeaderText" xml:space="preserve">
     <value>Track</value>
   </data>
   <data name="Track.MinimumWidth" type="System.Int32, mscorlib">
     <value>50</value>
   </data>
-  <metadata name="OriginalTag1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="OriginalTag1.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="OriginalTag1.HeaderText" xml:space="preserve">
     <value>Original tag 1</value>
   </data>
@@ -975,9 +975,9 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="OriginalTag1.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="NewTag1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="NewTag1.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="NewTag1.HeaderText" xml:space="preserve">
     <value>New tag value</value>
   </data>
@@ -987,9 +987,9 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="NewTag1.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="OriginalTag2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="OriginalTag2.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="OriginalTag2.HeaderText" xml:space="preserve">
     <value>Original tag 2</value>
   </data>
@@ -999,9 +999,9 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="OriginalTag2.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="NewTag2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="NewTag2.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="NewTag2.HeaderText" xml:space="preserve">
     <value>New tag value</value>
   </data>
@@ -1011,9 +1011,9 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="NewTag2.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="OriginalTag3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="OriginalTag3.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="OriginalTag3.HeaderText" xml:space="preserve">
     <value>Original tag 3</value>
   </data>
@@ -1023,9 +1023,9 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="OriginalTag3.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="NewTag3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="NewTag3.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="NewTag3.HeaderText" xml:space="preserve">
     <value>New tag value</value>
   </data>
@@ -1035,9 +1035,9 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="NewTag3.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="OriginalTag4.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="OriginalTag4.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="OriginalTag4.HeaderText" xml:space="preserve">
     <value>Original tag 4</value>
   </data>
@@ -1047,9 +1047,9 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="OriginalTag4.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="NewTag4.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="NewTag4.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="NewTag4.HeaderText" xml:space="preserve">
     <value>New tag value</value>
   </data>
@@ -1059,9 +1059,9 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="NewTag4.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="OriginalTag5.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="OriginalTag5.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="OriginalTag5.HeaderText" xml:space="preserve">
     <value>Original tag 5</value>
   </data>
@@ -1071,9 +1071,9 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="OriginalTag5.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="NewTag5.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="NewTag5.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="NewTag5.HeaderText" xml:space="preserve">
     <value>New tag value</value>
   </data>
@@ -1107,15 +1107,15 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="&gt;&gt;previewTable.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <metadata name="dirtyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="dirtyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>133, 9</value>
-  </metadata>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <data name="$this.Localizable" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
-  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <data name="$this.TrayHeight" type="System.Int32, mscorlib">
     <value>48</value>
-  </metadata>
+  </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
