@@ -15,6 +15,8 @@ namespace MusicBeePlugin
         private static Color UntickedColor;
         private static Color TickedColor;
 
+        private static bool ignoreUntickAllCheckBoxCheckStateChanged = false;
+
         private bool ignoreCheckedPresetEvent = true;
         private int autoAppliedPresetCount;
 
@@ -381,9 +383,10 @@ namespace MusicBeePlugin
                 append5 = originalPreset.append5;
             }
 
-            public override string ToString()
+            public override string ToString()//***
             {
-                return GetDictValue(names, Plugin.Language) + (condition ? " " : "") + (id != "" ? " " : "") + (hotkeyAssigned ? " ★" : "");
+                return GetDictValue(names, Plugin.Language) + (customizedByUser ? " " : "") + (userPreset ? " " : "") 
+                    + (condition ? " " : "") + (id != "" ? " " : "") + (hotkeyAssigned ? " ★" : "");
             }
 
             public string getName(bool getEnglishName = false)
@@ -467,9 +470,14 @@ namespace MusicBeePlugin
                     customizedByUser = true;
             }
 
+            public void copyCoreCustomizationsFrom(Preset referencePreset)
+            {
+                id = referencePreset.id;
+            }
+
             public void copyBasicCustomizationsFrom(Preset referencePreset)
             {
-                applyToPlayingTrack = referencePreset.applyToPlayingTrack;
+                applyToPlayingTrack = referencePreset.applyToPlayingTrack; //***
                 condition = referencePreset.condition;
                 playlist = referencePreset.playlist;
                 preserveValues = referencePreset.preserveValues;
@@ -3024,6 +3032,10 @@ namespace MusicBeePlugin
                             playlistComboBox.SelectedIndex = -1;
                         }
                     }
+                    else
+                    {
+                        conditionCheckBox.Checked = false;
+                    }
                 }
 
 
@@ -3342,7 +3354,11 @@ namespace MusicBeePlugin
                             {
                                 if (installAll)
                                 {
-                                    if (askToResetCustomizedByUser && currentPreset.customizedByUser)
+                                    bool anyCustomization = currentPreset.customizedByUser;
+                                    if (currentPreset.condition || currentPreset.applyToPlayingTrack)
+                                        anyCustomization = true;
+
+                                    if (askToResetCustomizedByUser && anyCustomization)
                                     {
                                         if (MessageBox.Show(this, Plugin.MsgDoYouWantToResetYourCustomizedPredefinedPresets, "", MessageBoxButtons.YesNo, 
                                             MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.No)
@@ -3376,9 +3392,9 @@ namespace MusicBeePlugin
                                         deletePreset(currentPreset);
                                         numberOfRemovedPresets++;
                                     }
-                                    else if (!currentPreset.customizedByUser || resetCustomizedByUser)
+                                    else if (!anyCustomization || resetCustomizedByUser)
                                     {
-                                        newPreset.copyBasicCustomizationsFrom(currentPreset);
+                                        newPreset.copyCoreCustomizationsFrom(currentPreset);
                                         newPreset.hotkeyAssigned = asrPresetsWithHotkeysGuids.Contains(newPreset.guid);
 
                                         presetsWorkingCopy.Remove(newPreset.guid);
@@ -3392,7 +3408,7 @@ namespace MusicBeePlugin
                                     {
                                         newPreset.copyBasicCustomizationsFrom(currentPreset);
                                         newPreset.copyExtendedCustomizationsFrom(currentPreset);
-                                        newPreset.customizedByUser = true;
+                                        newPreset.customizedByUser = currentPreset.customizedByUser;
                                         newPreset.hotkeyAssigned = asrPresetsWithHotkeysGuids.Contains(newPreset.guid);
 
                                         presetsWorkingCopy.Remove(newPreset.guid);
@@ -3912,20 +3928,13 @@ namespace MusicBeePlugin
             presetList.Items.Clear();
             presetList.Sorted = false;
             ignoreCheckedPresetEvent = false;
+
+            setUntickAllCheckBoxState();
+
             int i = 0;
             foreach (Preset tempPreset in presetsWorkingCopy.Values)
             {
-                string presetName = tempPreset.ToString();
-
                 bool filteringCriteriaAreMeet = true;
-                foreach (string searchString in searchStrings)
-                {
-                    if (!Regex.IsMatch(presetName, Regex.Escape(searchString), RegexOptions.IgnoreCase))
-                    {
-                        filteringCriteriaAreMeet = false;
-                        break;
-                    }
-                }
 
 
                 if (hotkeyCheckBox.Checked && !tempPreset.hotkeyAssigned)
@@ -3944,9 +3953,28 @@ namespace MusicBeePlugin
                 {
                     filteringCriteriaAreMeet = false;
                 }
+                else if (customizedPresetsCheckBox.Checked && !tempPreset.customizedByUser)
+                {
+                    filteringCriteriaAreMeet = false;
+                }
                 else if (predefinedPresetsCheckBox.Checked && tempPreset.userPreset)
                 {
                     filteringCriteriaAreMeet = false;
+                }
+
+
+                if (filteringCriteriaAreMeet)
+                {
+                    string presetName = tempPreset.ToString();
+
+                    foreach (string searchString in searchStrings)
+                    {
+                        if (!Regex.IsMatch(presetName, Regex.Escape(searchString), RegexOptions.IgnoreCase))
+                        {
+                            filteringCriteriaAreMeet = false;
+                            break;
+                        }
+                    }
                 }
 
 
@@ -4213,7 +4241,7 @@ namespace MusicBeePlugin
             }
         }
 
-        private void playlistCheckBox_CheckedChanged(object sender, EventArgs e)//***
+        private void hotkeyCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             filterPresetList();
         }
@@ -4223,15 +4251,34 @@ namespace MusicBeePlugin
             filterPresetList();
         }
 
-        private void hotkeyCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void playlistCheckBox_CheckedChanged(object sender, EventArgs e)//***
         {
             filterPresetList();
         }
 
         private void userPresetsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (predefinedPresetsCheckBox.Checked && userPresetsCheckBox.Checked)
+            if (customizedPresetsCheckBox.Checked && userPresetsCheckBox.Checked)
+            {
+                customizedPresetsCheckBox.Checked = false;
                 predefinedPresetsCheckBox.Checked = false;
+            }
+            else if (predefinedPresetsCheckBox.Checked && userPresetsCheckBox.Checked)
+            {
+                predefinedPresetsCheckBox.Checked = false;
+            }
+            else
+            {
+                filterPresetList();
+            }
+        }
+
+        private void customizedPresetsCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            predefinedPresetsCheckBox.Enabled = !customizedPresetsCheckBox.Checked;
+
+            if (customizedPresetsCheckBox.Checked && userPresetsCheckBox.Checked)
+                userPresetsCheckBox.Checked = false;
             else
                 filterPresetList();
         }
@@ -4242,6 +4289,60 @@ namespace MusicBeePlugin
                 userPresetsCheckBox.Checked = false;
             else
                 filterPresetList();
+        }
+
+        private void setUntickAllCheckBoxState()
+        {
+            int checkedCount = 0;
+
+            if (hotkeyCheckBox.Checked)
+                checkedCount++;
+
+            if (idCheckBox.Checked)
+                checkedCount++;
+
+            if (playlistCheckBox.Checked)
+                checkedCount++;
+
+            if (userPresetsCheckBox.Checked)
+                checkedCount++;
+
+            if (customizedPresetsCheckBox.Checked)
+                checkedCount++;
+
+            if (predefinedPresetsCheckBox.Checked)
+                checkedCount++;
+
+            if (tickedOnlyCheckBox.Checked)
+                checkedCount++;
+
+            ignoreUntickAllCheckBoxCheckStateChanged = true;
+
+            if (checkedCount == 0)
+                untickAllCheckBox.CheckState = CheckState.Unchecked;
+            else if (checkedCount == 7)
+                untickAllCheckBox.CheckState = CheckState.Checked;
+            else
+                untickAllCheckBox.CheckState = CheckState.Indeterminate;
+
+            ignoreUntickAllCheckBoxCheckStateChanged = false;
+        }
+
+        private void untickAllCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ignoreUntickAllCheckBoxCheckStateChanged)
+                return;
+
+            untickAllCheckBox.CheckState = CheckState.Unchecked;
+
+            hotkeyCheckBox.Checked = false;
+            idCheckBox.Checked = false;
+            playlistCheckBox.Checked = false;
+            userPresetsCheckBox.Checked = false;
+            customizedPresetsCheckBox.Checked = false;
+            predefinedPresetsCheckBox.Checked = false;
+
+            tickedOnlyCheckBox.Checked = false;
         }
     }
 
