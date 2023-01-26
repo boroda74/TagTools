@@ -12,8 +12,8 @@ namespace MusicBeePlugin
     public partial class AdvancedSearchAndReplaceCommand : PluginWindowTemplate
     {
         private static string CustomText1;
-        private static Color UntickedColor = Color.FromKnownColor(KnownColor.ControlText);
-        private static Color TickedColor = Color.FromKnownColor(KnownColor.HotTrack);
+        private static Color UntickedColor;
+        private static Color TickedColor;
 
         private bool ignoreCheckedPresetEvent = true;
         private int autoAppliedPresetCount;
@@ -1349,17 +1349,18 @@ namespace MusicBeePlugin
 
             float highlightWeight = 0.8f;//***
 
-            Color controlBack = Color.FromKnownColor(KnownColor.Control);
+            //Color controlBack = Color.FromKnownColor(KnownColor.Control);
+            Color controlBack = BackColor;
             float controlBackAvg = (controlBack.R + controlBack.G + controlBack.B) / 3.0f;
 
             Color highlight = Color.FromKnownColor(KnownColor.Highlight);
             float highlightAvg = (highlight.R + highlight.G + highlight.B) / 3.0f;
 
-            float weigthedBrightness = highlightWeight * highlightAvg / 256 + (1 - highlightWeight) * (256 - controlBackAvg) / 256;
+            float highlightBrightness = highlightWeight * highlightAvg / 256 + (1 - highlightWeight) * (256 - controlBackAvg) / 256;
 
-            float highlightR = highlight.R * weigthedBrightness;
-            float highlightG = highlight.G * weigthedBrightness;
-            float highlightB = highlight.B * weigthedBrightness;
+            float highlightR = highlight.R * highlightBrightness;
+            float highlightG = highlight.G * highlightBrightness;
+            float highlightB = highlight.B * highlightBrightness;
 
             highlightR = highlightR < 0 ? 0 : highlightR;
             highlightG = highlightG < 0 ? 0 : highlightG;
@@ -1372,7 +1373,34 @@ namespace MusicBeePlugin
             descriptionBox.Enabled = true;
             descriptionBox.ReadOnly = true;
             descriptionBox.ForeColor = Color.FromArgb((int)highlightR, (int)highlightG, (int)highlightB);
+            descriptionBox.BackColor = BackColor;
 
+
+            float hotTrackWeight = 0.8f;//***
+
+            //Color controlBack = Color.FromKnownColor(KnownColor.Control);
+            //Color hotTrack = Color.FromKnownColor(KnownColor.HotTrack);
+            Color hotTrack = Color.FromKnownColor(KnownColor.Highlight);
+            float hotTrackAvg = (hotTrack.R + hotTrack.G + hotTrack.B) / 3.0f;
+
+            float hotTrackBrightness = hotTrackWeight * hotTrackAvg / 256 + (1 - hotTrackWeight) * (256 - controlBackAvg) / 256;
+
+            float hotTrackR = hotTrack.R * hotTrackBrightness;
+            float hotTrackG = hotTrack.G * hotTrackBrightness;
+            float hotTrackB = hotTrack.B * hotTrackBrightness;
+
+            hotTrackR = hotTrackR < 0 ? 0 : hotTrackR;
+            hotTrackG = hotTrackG < 0 ? 0 : hotTrackG;
+            hotTrackB = hotTrackB < 0 ? 0 : hotTrackB;
+
+            hotTrackR = hotTrackR > 255 ? 255 : hotTrackR;
+            hotTrackG = hotTrackG > 255 ? 255 : hotTrackG;
+            hotTrackB = hotTrackB > 255 ? 255 : hotTrackB;
+
+            //UntickedColor = Color.FromKnownColor(KnownColor.ControlText);
+            //TickedColor = Color.FromKnownColor(KnownColor.HotTrack);
+            UntickedColor = ForeColor;
+            TickedColor = Color.FromArgb((int)hotTrackR, (int)hotTrackG, (int)hotTrackB);
 
             presetsWorkingCopy = new SortedDictionary<Guid, Preset>();
             foreach (var tempPreset in Presets.Values)

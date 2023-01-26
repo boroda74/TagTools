@@ -85,6 +85,17 @@ namespace MusicBeePlugin
             taskStarted = taskStartedMethod;
 
             TagToolsPlugin.fillTagNames();
+
+
+            //return; //For debbuging
+
+            if (Plugin.SavedSettings.useSkinColors)
+            {
+                BackColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputPanel, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentBackground));
+                ForeColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputPanel, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentForeground));
+
+                skinControls(this);
+            }
         }
 
         public static void Display(PluginWindowTemplate newForm, bool modalForm = false)
@@ -626,15 +637,6 @@ namespace MusicBeePlugin
         private void PluginWindowTemplate_Load(object sender, EventArgs e)
         {
             //return; //For debbuging
-
-            if (Plugin.SavedSettings.useSkinColors)
-            {
-                BackColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputPanel, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentBackground));
-                ForeColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputPanel, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentForeground));
-
-                skinControls(this);
-            }
-
 
             loadWindowSizesPositions(false, out _, out _, out _, out _, out _, out _);
         }
