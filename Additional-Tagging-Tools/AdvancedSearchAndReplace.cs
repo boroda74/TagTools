@@ -3940,6 +3940,14 @@ namespace MusicBeePlugin
                 {
                     filteringCriteriaAreMeet = false;
                 }
+                else if (userPresetsCheckBox.Checked && !tempPreset.userPreset)
+                {
+                    filteringCriteriaAreMeet = false;
+                }
+                else if (predefinedPresetsCheckBox.Checked && tempPreset.userPreset)
+                {
+                    filteringCriteriaAreMeet = false;
+                }
 
 
                 if (filteringCriteriaAreMeet)
@@ -4218,6 +4226,22 @@ namespace MusicBeePlugin
         private void hotkeyCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             filterPresetList();
+        }
+
+        private void userPresetsCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (predefinedPresetsCheckBox.Checked && userPresetsCheckBox.Checked)
+                predefinedPresetsCheckBox.Checked = false;
+            else
+                filterPresetList();
+        }
+
+        private void predefinedPresetsCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (predefinedPresetsCheckBox.Checked && userPresetsCheckBox.Checked)
+                userPresetsCheckBox.Checked = false;
+            else
+                filterPresetList();
         }
     }
 

@@ -121,44 +121,29 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>1001, 678</value>
   </data>
-  <data name="hotkeyCheckBox.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10.25pt</value>
+  <data name="predefinedPresetsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>782, 36</value>
+  </data>
+  <data name="predefinedPresetsCheckBox.ToolTip" xml:space="preserve">
+    <value>Показывать только стандартные пресеты</value>
+  </data>
+  <data name="userPresetsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>825, 36</value>
+  </data>
+  <data name="userPresetsCheckBox.ToolTip" xml:space="preserve">
+    <value>Показывать только пресеты пользователя</value>
   </data>
   <data name="hotkeyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>950, 34</value>
   </data>
-  <data name="hotkeyCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 21</value>
-  </data>
-  <data name="hotkeyCheckBox.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="idCheckBox.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10.25pt</value>
-  </data>
   <data name="idCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>912, 34</value>
-  </data>
-  <data name="idCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 21</value>
-  </data>
-  <data name="idCheckBox.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
   </data>
   <data name="idCheckBox.ToolTip" xml:space="preserve">
     <value>Показывать только пресеты с назначенными id-ми функций виртуальных тегов</value>
   </data>
-  <data name="playlistCheckBox.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
   <data name="playlistCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>868, 36</value>
-  </data>
-  <data name="playlistCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 17</value>
-  </data>
-  <data name="playlistCheckBox.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
   </data>
   <data name="playlistCheckBox.ToolTip" xml:space="preserve">
     <value>Показывать только пресеты, ограниченные плейлистом</value>
@@ -208,20 +193,14 @@
   <data name="preserveValuesTextBox.ToolTip" xml:space="preserve">
     <value>Все теги, равные одному из перечисленных в этом поле значений, не будут как либо изменяться</value>
   </data>
-  <data name="tickedOnlyCheckBox.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
   <data name="tickedOnlyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>687, 36</value>
+    <value>602, 36</value>
   </data>
   <data name="tickedOnlyCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>175, 17</value>
   </data>
   <data name="tickedOnlyCheckBox.Text" xml:space="preserve">
     <value> Только автоприменяемые</value>
-  </data>
-  <data name="tickedOnlyCheckBox.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
   </data>
   <data name="tickedOnlyCheckBox.ToolTip" xml:space="preserve">
     <value>Показывать только автоприменяемые пресеты</value>
@@ -273,7 +252,7 @@
 откройте настройки горячих клавиш: Правка&gt; Настройки&gt; Горячие клавиш.</value>
   </data>
   <data name="clearSearchButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>660, 33</value>
+    <value>575, 33</value>
   </data>
   <data name="clearSearchButton.ToolTip" xml:space="preserve">
     <value>Очистить текст поиска</value>
@@ -282,7 +261,7 @@
     <value>31, 33</value>
   </data>
   <data name="searchTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>623, 20</value>
+    <value>538, 20</value>
   </data>
   <data name="searchTextBox.ToolTip" xml:space="preserve">
     <value>Введите часть имени пресета или просто несколько слов из имени пресета, чтобы отфильтровать список</value>
