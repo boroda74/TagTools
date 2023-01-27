@@ -470,22 +470,29 @@ namespace MusicBeePlugin
                     customizedByUser = true;
             }
 
-            public void copyCoreCustomizationsFrom(Preset referencePreset)
-            {
-                id = referencePreset.id;
-            }
-
             public void copyBasicCustomizationsFrom(Preset referencePreset)
             {
-                applyToPlayingTrack = referencePreset.applyToPlayingTrack; //***
-                condition = referencePreset.condition;
-                playlist = referencePreset.playlist;
-                preserveValues = referencePreset.preserveValues;
+                userPreset = referencePreset.userPreset;
+                hotkeyAssigned = referencePreset.hotkeyAssigned;
                 id = referencePreset.id;
             }
 
             public void copyExtendedCustomizationsFrom(Preset referencePreset)
             {
+                copyBasicCustomizationsFrom(referencePreset);
+
+                customizedByUser = referencePreset.customizedByUser;
+
+                applyToPlayingTrack = referencePreset.applyToPlayingTrack; //***
+                condition = referencePreset.condition;
+                playlist = referencePreset.playlist;
+                preserveValues = referencePreset.preserveValues;
+            }
+
+            public void copyAdvancedCustomizationsFrom(Preset referencePreset)
+            {
+                copyExtendedCustomizationsFrom(referencePreset);
+
                 customText = referencePreset.customText;
                 customText2 = referencePreset.customText2;
                 customText3 = referencePreset.customText3;
@@ -3186,15 +3193,14 @@ namespace MusicBeePlugin
                         }
                         else
                         {
-                            newPreset.copyBasicCustomizationsFrom(currentPreset);
-                            newPreset.hotkeyAssigned = asrPresetsWithHotkeysGuids.Contains(newPreset.guid);
+                            newPreset.copyExtendedCustomizationsFrom(currentPreset);
 
                             presetsWorkingCopy.Remove(newPreset.guid);
                             presetsWorkingCopy.Add(newPreset.guid, newPreset);
                             numberOfImportedPresets++;
                         }
                     }
-                    else if (currentPreset == null)
+                    else //if (currentPreset == null)
                     {
                         presetsWorkingCopy.Add(newPreset.guid, newPreset);
                         numberOfImportedPresets++;
@@ -3352,12 +3358,12 @@ namespace MusicBeePlugin
 
                             if (currentPreset != null)
                             {
+                                bool anyCustomization = currentPreset.customizedByUser;
+                                if (currentPreset.condition || currentPreset.applyToPlayingTrack)
+                                    anyCustomization = true;
+
                                 if (installAll)
                                 {
-                                    bool anyCustomization = currentPreset.customizedByUser;
-                                    if (currentPreset.condition || currentPreset.applyToPlayingTrack)
-                                        anyCustomization = true;
-
                                     if (askToResetCustomizedByUser && anyCustomization)
                                     {
                                         if (MessageBox.Show(this, Plugin.MsgDoYouWantToResetYourCustomizedPredefinedPresets, "", MessageBoxButtons.YesNo, 
@@ -3394,8 +3400,7 @@ namespace MusicBeePlugin
                                     }
                                     else if (!anyCustomization || resetCustomizedByUser)
                                     {
-                                        newPreset.copyCoreCustomizationsFrom(currentPreset);
-                                        newPreset.hotkeyAssigned = asrPresetsWithHotkeysGuids.Contains(newPreset.guid);
+                                        newPreset.copyBasicCustomizationsFrom(currentPreset);
 
                                         presetsWorkingCopy.Remove(newPreset.guid);
                                         presetsWorkingCopy.Add(newPreset.guid, newPreset);
@@ -3406,10 +3411,7 @@ namespace MusicBeePlugin
                                     }
                                     else //Update preset to latest version, and copy *all* customizations
                                     {
-                                        newPreset.copyBasicCustomizationsFrom(currentPreset);
-                                        newPreset.copyExtendedCustomizationsFrom(currentPreset);
-                                        newPreset.customizedByUser = currentPreset.customizedByUser;
-                                        newPreset.hotkeyAssigned = asrPresetsWithHotkeysGuids.Contains(newPreset.guid);
+                                        newPreset.copyAdvancedCustomizationsFrom(currentPreset);
 
                                         presetsWorkingCopy.Remove(newPreset.guid);
                                         presetsWorkingCopy.Add(newPreset.guid, newPreset);
@@ -3443,10 +3445,9 @@ namespace MusicBeePlugin
                                 }
                                 else if (newPreset.modifiedUtc > currentPreset.modifiedUtc) //Install only new presets
                                 {
-                                    if (!currentPreset.customizedByUser)
+                                    if (!anyCustomization)
                                     {
-                                        newPreset.copyBasicCustomizationsFrom(currentPreset);
-                                        newPreset.hotkeyAssigned = asrPresetsWithHotkeysGuids.Contains(newPreset.guid);
+                                        newPreset.copyExtendedCustomizationsFrom(currentPreset);
 
                                         presetsWorkingCopy.Remove(newPreset.guid);
                                         presetsWorkingCopy.Add(newPreset.guid, newPreset);
@@ -3454,10 +3455,7 @@ namespace MusicBeePlugin
                                     }
                                     else //Update preset to latest version, and copy *all* customizations
                                     {
-                                        newPreset.copyBasicCustomizationsFrom(currentPreset);
-                                        newPreset.copyExtendedCustomizationsFrom(currentPreset);
-                                        newPreset.customizedByUser = true;
-                                        newPreset.hotkeyAssigned = asrPresetsWithHotkeysGuids.Contains(newPreset.guid);
+                                        newPreset.copyAdvancedCustomizationsFrom(currentPreset);
 
                                         presetsWorkingCopy.Remove(newPreset.guid);
                                         presetsWorkingCopy.Add(newPreset.guid, newPreset);
