@@ -472,7 +472,7 @@ namespace MusicBeePlugin
 
             public void copyBasicCustomizationsFrom(Preset referencePreset)
             {
-                userPreset = referencePreset.userPreset;
+                //userPreset = referencePreset.userPreset;
                 hotkeyAssigned = referencePreset.hotkeyAssigned;
                 id = referencePreset.id;
             }
