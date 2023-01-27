@@ -121,6 +121,18 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>1001, 678</value>
   </data>
+  <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>533, 38</value>
+  </data>
+  <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 13</value>
+  </data>
+  <data name="label8.Text" xml:space="preserve">
+    <value>Только автоприменяемые</value>
+  </data>
+  <data name="label8.ToolTip" xml:space="preserve">
+    <value>Показывать только автоприменяемые пресеты</value>
+  </data>
   <data name="untickAllCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>944, 36</value>
   </data>
@@ -152,7 +164,7 @@
     <value>Показывать только пресеты с назначенными комбинациями клавиш</value>
   </data>
   <data name="idCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>856, 34</value>
+    <value>856, 30</value>
   </data>
   <data name="idCheckBox.ToolTip" xml:space="preserve">
     <value>Показывать только пресеты с назначенными id-ми функций виртуальных тегов</value>
@@ -209,13 +221,7 @@
     <value>Все теги, равные одному из перечисленных в этом поле значений, не будут как либо изменяться</value>
   </data>
   <data name="tickedOnlyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>501, 36</value>
-  </data>
-  <data name="tickedOnlyCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 17</value>
-  </data>
-  <data name="tickedOnlyCheckBox.Text" xml:space="preserve">
-    <value> Только автоприменяемые</value>
+    <value>500, 36</value>
   </data>
   <data name="tickedOnlyCheckBox.ToolTip" xml:space="preserve">
     <value>Показывать только автоприменяемые пресеты</value>

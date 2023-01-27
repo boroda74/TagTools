@@ -60,6 +60,7 @@
             this.predefinedPresetsCheckBox = new System.Windows.Forms.CheckBox();
             this.customizedPresetsCheckBox = new System.Windows.Forms.CheckBox();
             this.untickAllCheckBox = new System.Windows.Forms.CheckBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.presetList = new System.Windows.Forms.CheckedListBox();
             this.previewTable = new System.Windows.Forms.DataGridView();
             this.File = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -341,6 +342,13 @@
             this.untickAllCheckBox.UseVisualStyleBackColor = false;
             this.untickAllCheckBox.CheckedChanged += new System.EventHandler(this.untickAllCheckBox_CheckedChanged);
             // 
+            // label8
+            // 
+            resources.ApplyResources(this.label8, "label8");
+            this.label8.BackColor = System.Drawing.Color.Transparent;
+            this.label8.Name = "label8";
+            this.toolTip1.SetToolTip(this.label8, resources.GetString("label8.ToolTip"));
+            // 
             // presetList
             // 
             resources.ApplyResources(this.presetList, "presetList");
@@ -508,6 +516,7 @@
             // panel1
             // 
             resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.untickAllCheckBox);
             this.panel1.Controls.Add(this.customizedPresetsCheckBox);
             this.panel1.Controls.Add(this.predefinedPresetsCheckBox);
@@ -931,5 +940,6 @@
         private System.Windows.Forms.CheckBox predefinedPresetsCheckBox;
         private System.Windows.Forms.CheckBox customizedPresetsCheckBox;
         private System.Windows.Forms.CheckBox untickAllCheckBox;
+        private System.Windows.Forms.Label label8;
     }
 }

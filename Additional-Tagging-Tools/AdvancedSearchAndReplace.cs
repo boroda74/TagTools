@@ -2868,6 +2868,8 @@ namespace MusicBeePlugin
                 label.Text = uncheckedStateText;
                 label.ForeColor = Color.FromKnownColor(KnownColor.GrayText);
             }
+
+            presetList.Refresh();
         }
 
         private void presetList_SelectedIndexChanged(object sender, EventArgs e)
