@@ -75,7 +75,12 @@ namespace MusicBeePlugin
             columnTemplate = (DataGridViewColumn)previewTable.Columns[1].Clone();
             artworkCellTemplate = previewTable.Columns[2].CellTemplate;
 
-            noBackupDataCellForeColor = SystemColors.HotTrack;
+
+            float highlightWeight = 0.8f;//***
+            Color highlightColor = SystemColors.HotTrack;
+
+            noBackupDataCellForeColor = Plugin.GetHighlightColor(highlightColor, BackColor, highlightWeight);
+
 
 
             if (Plugin.SavedSettings.lastSelectedFolders == null)

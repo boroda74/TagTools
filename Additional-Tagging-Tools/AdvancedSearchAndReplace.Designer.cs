@@ -61,6 +61,7 @@
             this.customizedPresetsCheckBox = new System.Windows.Forms.CheckBox();
             this.untickAllCheckBox = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.buttonClose = new System.Windows.Forms.Button();
             this.presetList = new System.Windows.Forms.CheckedListBox();
             this.previewTable = new System.Windows.Forms.DataGridView();
             this.File = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -76,7 +77,6 @@
             this.OriginalTag5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NewTag5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buttonPreview = new System.Windows.Forms.Button();
-            this.buttonSave = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCreate = new System.Windows.Forms.Button();
             this.buttonEdit = new System.Windows.Forms.Button();
@@ -349,6 +349,16 @@
             this.label8.Name = "label8";
             this.toolTip1.SetToolTip(this.label8, resources.GetString("label8.ToolTip"));
             // 
+            // buttonClose
+            // 
+            this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.buttonClose.Image = global::MusicBeePlugin.Properties.Resources.UnsavedChanges_14;
+            resources.ApplyResources(this.buttonClose, "buttonClose");
+            this.buttonClose.Name = "buttonClose";
+            this.toolTip1.SetToolTip(this.buttonClose, resources.GetString("buttonClose.ToolTip"));
+            this.buttonClose.UseVisualStyleBackColor = true;
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
+            // 
             // presetList
             // 
             resources.ApplyResources(this.presetList, "presetList");
@@ -484,14 +494,6 @@
             this.buttonPreview.UseVisualStyleBackColor = true;
             this.buttonPreview.Click += new System.EventHandler(this.buttonPreview_Click);
             // 
-            // buttonSave
-            // 
-            this.buttonSave.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            resources.ApplyResources(this.buttonSave, "buttonSave");
-            this.buttonSave.Name = "buttonSave";
-            this.buttonSave.UseVisualStyleBackColor = true;
-            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
-            // 
             // buttonOK
             // 
             resources.ApplyResources(this.buttonOK, "buttonOK");
@@ -593,7 +595,6 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::MusicBeePlugin.Properties.Resources.Search;
             resources.ApplyResources(this.pictureBox1, "pictureBox1");
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.TabStop = false;
@@ -773,7 +774,7 @@
             this.groupBox3.Controls.Add(this.buttonSaveClose);
             this.groupBox3.Controls.Add(this.buttonOK);
             this.groupBox3.Controls.Add(this.buttonPreview);
-            this.groupBox3.Controls.Add(this.buttonSave);
+            this.groupBox3.Controls.Add(this.buttonClose);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
             // 
@@ -835,10 +836,13 @@
             // 
             // AdvancedSearchAndReplaceCommand
             // 
+            this.AcceptButton = this.buttonPreview;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.buttonClose;
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "AdvancedSearchAndReplaceCommand";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AdvancedSearchAndReplaceCommand_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -906,7 +910,7 @@
         private System.Windows.Forms.CheckedListBox presetList;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.Button buttonPreview;
         private System.Windows.Forms.Button buttonCopy;
         private System.Windows.Forms.Button buttonOK;

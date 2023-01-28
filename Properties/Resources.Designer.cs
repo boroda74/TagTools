@@ -63,6 +63,16 @@ namespace MusicBeePlugin.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Empty_14 {
+            get {
+                object obj = ResourceManager.GetObject("Empty_14", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Lightning {
             get {
                 object obj = ResourceManager.GetObject("Lightning", resourceCulture);
@@ -86,6 +96,16 @@ namespace MusicBeePlugin.Properties {
         internal static System.Drawing.Bitmap Search {
             get {
                 object obj = ResourceManager.GetObject("Search", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap UnsavedChanges_14 {
+            get {
+                object obj = ResourceManager.GetObject("UnsavedChanges_14", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

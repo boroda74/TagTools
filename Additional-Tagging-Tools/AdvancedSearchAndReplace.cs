@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MusicBeePlugin.Properties;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -64,6 +65,10 @@ namespace MusicBeePlugin
         private string autoApplyText;
         private string clickHereText;
         private string nowTickedText;
+
+        private bool customizationsMade = false;
+        private bool presetsChanged = false;
+        private string buttonCloseToolTip;
 
         private const int PropMetaDataThreshold = 1000;
         private enum ServiceMetaData
@@ -440,34 +445,67 @@ namespace MusicBeePlugin
                 return savedPreset;
             }
 
-            public void setCustomizationsFlag(Preset referencePreset)
+            public bool areFineCustomizationsMade(Preset referencePreset)
+            {
+                bool areFineCustomizationsMade = false;
+
+                if (hotkeyAssigned != referencePreset.hotkeyAssigned)
+                    areFineCustomizationsMade = true;
+                else if (id != referencePreset.id)
+                    areFineCustomizationsMade = true;
+                else if (applyToPlayingTrack != referencePreset.applyToPlayingTrack)
+                    areFineCustomizationsMade = true;
+                else if (condition != referencePreset.condition)
+                    areFineCustomizationsMade = true;
+                else if (playlist != referencePreset.playlist)
+                    areFineCustomizationsMade = true;
+                else if (preserveValues != referencePreset.preserveValues)
+                    areFineCustomizationsMade = true;
+
+                return areFineCustomizationsMade;
+            }
+
+            public void setCustomizationsFlag(AdvancedSearchAndReplaceCommand form, Preset referencePreset)
             {
                 if (referencePreset == null)
                     return;
-                else if (userPreset)
-                    return;
 
+                bool customized = false;
 
                 if (customText != referencePreset.customText)
-                    customizedByUser = true;
+                    customized = true;
                 else if (customText2 != referencePreset.customText2)
-                    customizedByUser = true;
+                    customized = true;
                 else if (customText3 != referencePreset.customText3)
-                    customizedByUser = true;
+                    customized = true;
                 else if (customText4 != referencePreset.customText4)
-                    customizedByUser = true;
+                    customized = true;
                 else if (parameterTagId != referencePreset.parameterTagId)
-                    customizedByUser = true;
+                    customized = true;
                 else if (parameterTag2Id != referencePreset.parameterTag2Id)
-                    customizedByUser = true;
+                    customized = true;
                 else if (parameterTag3Id != referencePreset.parameterTag3Id)
-                    customizedByUser = true;
+                    customized = true;
                 else if (parameterTag4Id != referencePreset.parameterTag4Id)
-                    customizedByUser = true;
+                    customized = true;
                 else if (parameterTag5Id != referencePreset.parameterTag5Id)
-                    customizedByUser = true;
+                    customized = true;
                 else if (parameterTag6Id != referencePreset.parameterTag6Id)
-                    customizedByUser = true;
+                    customized = true;
+
+                if (!userPreset)
+                    customizedByUser |= customized;
+
+                if (form != null)
+                {
+                    if (customized || areFineCustomizationsMade(referencePreset))
+                    {
+                        form.customizationsMade = true;
+                        form.setCheckedState(form.customizedPresetLabel, customized);
+                        form.buttonClose.Image = Resources.UnsavedChanges_14;
+                        form.toolTip1.SetToolTip(form.buttonClose, form.buttonCloseToolTip);
+                    }
+                }
             }
 
             public void copyBasicCustomizationsFrom(Preset referencePreset)
@@ -1362,60 +1400,24 @@ namespace MusicBeePlugin
             base.initializeForm();
 
 
-            float highlightWeight = 0.8f;//***
-
-            //Color controlBack = Color.FromKnownColor(KnownColor.Control);
-            Color controlBack = BackColor;
-            float controlBackAvg = (controlBack.R + controlBack.G + controlBack.B) / 3.0f;
-
-            Color highlight = Color.FromKnownColor(KnownColor.Highlight);
-            float highlightAvg = (highlight.R + highlight.G + highlight.B) / 3.0f;
-
-            float highlightBrightness = highlightWeight * highlightAvg / 256 + (1 - highlightWeight) * (256 - controlBackAvg) / 256;
-
-            float highlightR = highlight.R * highlightBrightness;
-            float highlightG = highlight.G * highlightBrightness;
-            float highlightB = highlight.B * highlightBrightness;
-
-            highlightR = highlightR < 0 ? 0 : highlightR;
-            highlightG = highlightG < 0 ? 0 : highlightG;
-            highlightB = highlightB < 0 ? 0 : highlightB;
-
-            highlightR = highlightR > 255 ? 255 : highlightR;
-            highlightG = highlightG > 255 ? 255 : highlightG;
-            highlightB = highlightB > 255 ? 255 : highlightB;
+            Color highlightColor = SystemColors.Highlight;
 
             descriptionBox.Enabled = true;
             descriptionBox.ReadOnly = true;
-            descriptionBox.ForeColor = Color.FromArgb((int)highlightR, (int)highlightG, (int)highlightB);
+
+            float highlightWeight = 0.8f;//***
+            descriptionBox.ForeColor = Plugin.GetHighlightColor(highlightColor, BackColor, highlightWeight);
             descriptionBox.BackColor = BackColor;
 
 
             float hotTrackWeight = 0.8f;//***
 
-            //Color controlBack = Color.FromKnownColor(KnownColor.Control);
-            //Color hotTrack = Color.FromKnownColor(KnownColor.HotTrack);
-            Color hotTrack = Color.FromKnownColor(KnownColor.Highlight);
-            float hotTrackAvg = (hotTrack.R + hotTrack.G + hotTrack.B) / 3.0f;
+            //Color hotTrack = SystemColors.HotTrack;
+            Color hotTrack = SystemColors.Highlight;
 
-            float hotTrackBrightness = hotTrackWeight * hotTrackAvg / 256 + (1 - hotTrackWeight) * (256 - controlBackAvg) / 256;
-
-            float hotTrackR = hotTrack.R * hotTrackBrightness;
-            float hotTrackG = hotTrack.G * hotTrackBrightness;
-            float hotTrackB = hotTrack.B * hotTrackBrightness;
-
-            hotTrackR = hotTrackR < 0 ? 0 : hotTrackR;
-            hotTrackG = hotTrackG < 0 ? 0 : hotTrackG;
-            hotTrackB = hotTrackB < 0 ? 0 : hotTrackB;
-
-            hotTrackR = hotTrackR > 255 ? 255 : hotTrackR;
-            hotTrackG = hotTrackG > 255 ? 255 : hotTrackG;
-            hotTrackB = hotTrackB > 255 ? 255 : hotTrackB;
-
-            //UntickedColor = Color.FromKnownColor(KnownColor.ControlText);
-            //TickedColor = Color.FromKnownColor(KnownColor.HotTrack);
             UntickedColor = ForeColor;
-            TickedColor = Color.FromArgb((int)hotTrackR, (int)hotTrackG, (int)hotTrackB);
+            TickedColor = Plugin.GetHighlightColor(hotTrack, BackColor, hotTrackWeight);
+
 
             presetsWorkingCopy = new SortedDictionary<Guid, Preset>();
             foreach (var tempPreset in Presets.Values)
@@ -1474,7 +1476,7 @@ namespace MusicBeePlugin
                 presetList.SetItemChecked(i, autoAppliedAsrPresetGuids.Contains(tempPreset.guid));
                 i++;
             }
-            presetListItemChecked();
+            presetListItemCheckChanged();
             ignoreCheckedPresetEvent = true;
             presetList.Sorted = true;
 
@@ -1530,6 +1532,10 @@ namespace MusicBeePlugin
             }
 
             presetList_SelectedIndexChanged(null, null);
+
+            buttonClose.Image = Resources.Empty_14;
+            buttonCloseToolTip = toolTip1.GetToolTip(buttonClose);
+            toolTip1.SetToolTip(buttonClose, "");
 
             addRowToTable = previewList_AddRowToTable;
             processRowOfTable = previewList_ProcessRowOfTable;
@@ -2389,7 +2395,17 @@ namespace MusicBeePlugin
             if (presetChanged)
             {
                 if (!readOnly)
+                {
                     tempPreset.modifiedUtc = DateTime.UtcNow;
+                    presetsChanged = true;
+
+                    buttonClose.Image = Resources.UnsavedChanges_14;
+                    toolTip1.SetToolTip(buttonClose, buttonCloseToolTip);
+                }
+                else
+                {
+                    tempPreset.setCustomizationsFlag(this, backupedPreset);
+                }
 
                 if (itsNewPreset)
                 {
@@ -2400,9 +2416,7 @@ namespace MusicBeePlugin
                 }
                 else
                 {
-                    Preset tempBackupedPreset = backupedPreset;
                     presetList_SelectedIndexChanged(null, null);
-                    backupedPreset = tempBackupedPreset;
                 }
             }
         }
@@ -2513,6 +2527,11 @@ namespace MusicBeePlugin
             RegisterASRPresetsHotkeysAndMenuItems(TagToolsPlugin);
         }
 
+        private void buttonClose_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
         private void deletePreset(Preset presetToRemove)
         {
             if (autoAppliedAsrPresetGuids.Contains(presetToRemove.guid))
@@ -2561,7 +2580,7 @@ namespace MusicBeePlugin
                 return;
 
             deletePreset((Preset)presetList.SelectedItem);
-            presetListItemChecked();
+            presetListItemCheckChanged();
         }
 
         private void buttonCopy_Click(object sender, EventArgs e)
@@ -2861,12 +2880,12 @@ namespace MusicBeePlugin
             if (flag)
             {
                 label.Text = checkedStateText;
-                label.ForeColor = Color.FromKnownColor(KnownColor.ControlText);
+                label.ForeColor = SystemColors.ControlText;
             }
             else
             {
                 label.Text = uncheckedStateText;
-                label.ForeColor = Color.FromKnownColor(KnownColor.GrayText);
+                label.ForeColor = SystemColors.GrayText;
             }
 
             presetList.Refresh();
@@ -3298,7 +3317,7 @@ namespace MusicBeePlugin
             }
             presetList.SelectedIndex = -1;
             presetList_SelectedIndexChanged(null, null);
-            presetListItemChecked();
+            presetListItemCheckChanged();
             ignoreCheckedPresetEvent = true;
             presetList.Sorted = true;
 
@@ -3328,7 +3347,7 @@ namespace MusicBeePlugin
                 selectedPresetGuid = ((Preset)presetList.SelectedItem).guid;
 
 
-            if (MessageBox.Show(this, Plugin.MsgImportingConfirmation, "", 
+            if (MessageBox.Show(this, Plugin.MsgInstallingConfirmation, "", 
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) 
                 == DialogResult.No)
                 return;
@@ -3571,7 +3590,7 @@ namespace MusicBeePlugin
             }
             presetList.SelectedIndex = -1;
             presetList_SelectedIndexChanged(null, null);
-            presetListItemChecked();
+            presetListItemCheckChanged();
             ignoreCheckedPresetEvent = true;
             presetList.Sorted = true;
 
@@ -3614,85 +3633,76 @@ namespace MusicBeePlugin
         {
             preset.parameterTagId = getTagId(parameterTagList.Text);
             nameColumns();
-            preset.setCustomizationsFlag(backupedPreset);
-            setCheckedState(customizedPresetLabel, preset.customizedByUser);
+            preset.setCustomizationsFlag(this, backupedPreset);
         }
 
         private void parameterTag2_SelectedIndexChanged(object sender, EventArgs e)
         {
             preset.parameterTag2Id = getTagId(parameterTag2List.Text);
             nameColumns();
-            preset.setCustomizationsFlag(backupedPreset);
-            setCheckedState(customizedPresetLabel, preset.customizedByUser);
+            preset.setCustomizationsFlag(this, backupedPreset);
         }
 
         private void parameterTag3_SelectedIndexChanged(object sender, EventArgs e)
         {
             preset.parameterTag3Id = getTagId(parameterTag3List.Text);
             nameColumns();
-            preset.setCustomizationsFlag(backupedPreset);
-            setCheckedState(customizedPresetLabel, preset.customizedByUser);
+            preset.setCustomizationsFlag(this, backupedPreset);
         }
 
         private void parameterTag4List_SelectedIndexChanged(object sender, EventArgs e)
         {
             preset.parameterTag4Id = getTagId(parameterTag4List.Text);
             nameColumns();
-            preset.setCustomizationsFlag(backupedPreset);
-            setCheckedState(customizedPresetLabel, preset.customizedByUser);
+            preset.setCustomizationsFlag(this, backupedPreset);
         }
 
         private void parameterTag5List_SelectedIndexChanged(object sender, EventArgs e)
         {
             preset.parameterTag5Id = getTagId(parameterTag5List.Text);
             nameColumns();
-            preset.setCustomizationsFlag(backupedPreset);
-            setCheckedState(customizedPresetLabel, preset.customizedByUser);
+            preset.setCustomizationsFlag(this, backupedPreset);
         }
 
         private void parameterTag6List_SelectedIndexChanged(object sender, EventArgs e)
         {
             preset.parameterTag6Id = getTagId(parameterTag6List.Text);
             nameColumns();
-            preset.setCustomizationsFlag(backupedPreset);
-            setCheckedState(customizedPresetLabel, preset.customizedByUser);
+            preset.setCustomizationsFlag(this, backupedPreset);
         }
 
         private void customText_TextChanged(object sender, EventArgs e)
         {
             preset.customText = customTextBox.Text;
             nameColumns();
-            preset.setCustomizationsFlag(backupedPreset);
-            setCheckedState(customizedPresetLabel, preset.customizedByUser);
+            preset.setCustomizationsFlag(this, backupedPreset);
         }
 
         private void customText2Box_TextChanged(object sender, EventArgs e)
         {
             preset.customText2 = customText2Box.Text;
             nameColumns();
-            preset.setCustomizationsFlag(backupedPreset);
-            setCheckedState(customizedPresetLabel, preset.customizedByUser);
+            preset.setCustomizationsFlag(this, backupedPreset);
         }
 
         private void customText3Box_TextChanged(object sender, EventArgs e)
         {
             preset.customText3 = customText3Box.Text;
             nameColumns();
-            preset.setCustomizationsFlag(backupedPreset);
-            setCheckedState(customizedPresetLabel, preset.customizedByUser);
+            preset.setCustomizationsFlag(this, backupedPreset);
         }
 
         private void customText4Box_TextChanged(object sender, EventArgs e)
         {
             preset.customText4 = customText4Box.Text;
             nameColumns();
-            preset.setCustomizationsFlag(backupedPreset);
-            setCheckedState(customizedPresetLabel, preset.customizedByUser);
+            preset.setCustomizationsFlag(this, backupedPreset);
         }
 
         private void preserveValuesTextBox_TextChanged(object sender, EventArgs e)
         {
             preset.preserveValues = preserveValuesTextBox.Text;
+            preset.setCustomizationsFlag(this, backupedPreset);
         }
 
         private void conditionCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -3708,8 +3718,7 @@ namespace MusicBeePlugin
 
             playlistComboBox.Enabled = conditionCheckBox.Checked;
             preset.condition = playlistComboBox.Enabled;
-
-            presetList.Refresh();
+            preset.setCustomizationsFlag(this, backupedPreset);
         }
 
         private void playlistComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -3718,6 +3727,8 @@ namespace MusicBeePlugin
                 preset.playlist = ((Playlist)(playlistComboBox.SelectedItem)).playlist;
             else
                 preset.playlist = "";
+
+            preset.setCustomizationsFlag(this, backupedPreset);
         }
 
         private void cbHeader_OnCheckBoxClicked(bool state)
@@ -3992,7 +4003,7 @@ namespace MusicBeePlugin
                     }
                 }
             }
-            presetListItemChecked();
+            presetListItemCheckChanged();
             ignoreCheckedPresetEvent = true;
             presetList.Sorted = true;
         }
@@ -4035,13 +4046,12 @@ namespace MusicBeePlugin
                 applyToPlayingTrackCheckBox.Checked = false;
             }
 
-            presetList.Refresh();
-
+            preset.setCustomizationsFlag(this, backupedPreset);
 
             assignHotkeyCheckBox.Text = assignHotkeyCheckBoxText + (Plugin.MaximumNumberOfASRHotkeys - asrPresetsWithHotkeysCount) + "/" + Plugin.MaximumNumberOfASRHotkeys;
         }
 
-        private void presetListItemChecked()
+        private void presetListItemCheckChanged()
         {
             if (autoAppliedPresetCount == 0)
             {
@@ -4099,18 +4109,24 @@ namespace MusicBeePlugin
                 }
             }
 
-            presetListItemChecked();
+            presetListItemCheckChanged();
+            preset.setCustomizationsFlag(this, backupedPreset);
         }
 
         private void idTextBox_Leave(object sender, EventArgs e)
         {
-            if (idTextBox.Text == "")
+            if (idTextBox.Text == preset.id)
+            {
+                return;
+            }
+            else if (idTextBox.Text == "")
             {
                 if (asrIdsPresetGuids.TryGetValue(preset.id, out _))
                     asrIdsPresetGuids.Remove(preset.id);
 
                 preset.id = "";
-                presetList.Refresh();
+                preset.setCustomizationsFlag(this, backupedPreset);
+
                 return;
             }
 
@@ -4124,39 +4140,40 @@ namespace MusicBeePlugin
             if (allowedRemoved != "")
             {
                 MessageBox.Show(this, Plugin.MsgNotAllowedSymbols, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                idTextBox.Text = "";
 
-                if (asrIdsPresetGuids.TryGetValue(preset.id, out _))
-                    asrIdsPresetGuids.Remove(preset.id);
+                if (presetList.SelectedItem == preset)
+                    idTextBox.Text = preset.id;
 
-                preset.id = "";
-                presetList.Refresh();
+                idTextBox.Focus();
+
                 return;
             }
             else
             {
-                foreach (var tempPreset in presetsWorkingCopy.Values)
+                foreach (var idGuid in asrIdsPresetGuids)
                 {
-                    if (idTextBox.Text == tempPreset.id && preset.guid != tempPreset.guid)
+                    if (idTextBox.Text == idGuid.Key && preset.guid != idGuid.Value)
                     {
                         MessageBox.Show(this, Plugin.MsgPresetExists.Replace("%ID%", idTextBox.Text), "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        idTextBox.Text = "";
 
-                        if (asrIdsPresetGuids.TryGetValue(preset.id, out _))
-                            asrIdsPresetGuids.Remove(preset.id);
+                        if (presetList.SelectedItem == preset)
+                            idTextBox.Text = preset.id;
 
-                        preset.id = "";
-                        presetList.Refresh();
+                        idTextBox.Focus();
+
                         return;
                     }
                 }
+
 
                 if (asrIdsPresetGuids.TryGetValue(preset.id, out _))
                     asrIdsPresetGuids.Remove(preset.id);
 
                 preset.id = idTextBox.Text;
                 asrIdsPresetGuids.Add(preset.id, preset.guid);
-                presetList.Refresh();
+
+                preset.setCustomizationsFlag(this, backupedPreset);
+
                 return;
             }
         }
@@ -4170,6 +4187,7 @@ namespace MusicBeePlugin
         private void applyToPlayingTrackCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             ((Preset)presetList.SelectedItem).applyToPlayingTrack = applyToPlayingTrackCheckBox.Checked;
+            preset.setCustomizationsFlag(this, backupedPreset);
         }
 
         private void tickedOnlyCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -4227,7 +4245,6 @@ namespace MusicBeePlugin
                 };
 
                 editPreset(preset, false, true);
-                preset.setCustomizationsFlag(backupedPreset);
             }
         }
 
@@ -4343,6 +4360,19 @@ namespace MusicBeePlugin
             predefinedPresetsCheckBox.Checked = false;
 
             tickedOnlyCheckBox.Checked = false;
+        }
+
+        private void AdvancedSearchAndReplaceCommand_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (customizationsMade || presetsChanged)
+            {
+                if (MessageBox.Show(this, Plugin.MsgDoYouWantToCloseWindowAndLoseAllChanges, 
+                    "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) 
+                    == DialogResult.No)
+                {
+                    e.Cancel = true;
+                }
+            }
         }
     }
 

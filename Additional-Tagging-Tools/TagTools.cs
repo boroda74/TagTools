@@ -578,7 +578,8 @@ namespace MusicBeePlugin
 
         public static string MsgIncorrectPresetName;
         public static string MsgDeletePresetConfirmation;
-        public static string MsgImportingConfirmation;
+        public static string MsgInstallingConfirmation;
+        public static string MsgDoYouWantToCloseWindowAndLoseAllChanges;
         public static string MsgDoYouWantToResetYourCustomizedPredefinedPresets;
         public static string MsgDoYouWantToRemovePredefinedPresets;
         public static string MsgDoYouWantToImportExistingPresetsAsCopies;
@@ -687,6 +688,28 @@ namespace MusicBeePlugin
 
 
         #region Common methods/functions
+        public static Color GetHighlightColor(Color highlightColor, Color backColor, float highlightWeight)
+        {
+            float controlBackAvg = (backColor.R + backColor.G + backColor.B) / 3.0f;
+            float highlightAvg = (highlightColor.R + highlightColor.G + highlightColor.B) / 3.0f;
+
+            float highlightBrightness = highlightWeight * highlightAvg / 256 + (1 - highlightWeight) * (256 - controlBackAvg) / 256;
+
+            float highlightR = highlightColor.R * highlightBrightness;
+            float highlightG = highlightColor.G * highlightBrightness;
+            float highlightB = highlightColor.B * highlightBrightness;
+
+            highlightR = highlightR < 0 ? 0 : highlightR;
+            highlightG = highlightG < 0 ? 0 : highlightG;
+            highlightB = highlightB < 0 ? 0 : highlightB;
+
+            highlightR = highlightR > 255 ? 255 : highlightR;
+            highlightG = highlightG > 255 ? 255 : highlightG;
+            highlightB = highlightB > 255 ? 255 : highlightB;
+
+            return Color.FromArgb((int)highlightR, (int)highlightG, (int)highlightB);
+        }
+
         public struct SwappedTags
         {
             public string newDestinationTagValue;
@@ -2684,7 +2707,8 @@ namespace MusicBeePlugin
             MsgIncorrectPresetName = "Incorrect preset name or duplicated preset names.";
 
             MsgDeletePresetConfirmation = "Do you want to delete selected preset?";
-            MsgImportingConfirmation = "Do you want to install predefined presets?";
+            MsgInstallingConfirmation = "Do you want to install predefined presets?";
+            MsgDoYouWantToCloseWindowAndLoseAllChanges = "One or more presets have been customized or changed. Do you still want to close the window and lose all changes?";
             MsgDoYouWantToImportExistingPresetsAsCopies = "One or more imported presets already exist.\n"
                 + "Do you want to import them as new presets, and keep your current presets?\n\n"
                 + "OTHERWISE, EXISTING PRESETS WILL BE OVERWRITTEN!";
@@ -2821,8 +2845,8 @@ namespace MusicBeePlugin
             MsgFirstSelectWhichFieldYouWantToAssignFunctionIdTo = "First select, which field you want to assign function id to (leftmost combobox on function id line)!";
 
             //Defaults for controls
-            UnchangedStyle.ForeColor = Color.FromKnownColor(KnownColor.ControlText);
-            UnchangedStyle.SelectionForeColor = Color.FromKnownColor(KnownColor.HighlightText);
+            UnchangedStyle.ForeColor = SystemColors.ControlText;
+            UnchangedStyle.SelectionForeColor = SystemColors.HighlightText;
 
             SavedSettings = new SavedSettingsType
             {
@@ -2994,7 +3018,7 @@ namespace MusicBeePlugin
             }
             else
             {
-                ChangedStyle.ForeColor = Color.FromKnownColor(KnownColor.Highlight);
+                ChangedStyle.ForeColor = SystemColors.Highlight;
 
                 int r = UnchangedStyle.SelectionForeColor.R;
                 int g = UnchangedStyle.SelectionForeColor.G;
@@ -3013,7 +3037,7 @@ namespace MusicBeePlugin
             #endregion
 
 
-                #region Localizations
+            #region Localizations
             Language = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
 
             PluginsPath = Path.Combine(Application.StartupPath, "Plugins");
@@ -3214,7 +3238,8 @@ namespace MusicBeePlugin
                 MsgIncorrectPresetName = "Некорректное название пресета или пресет с таким названием уже существует.";
 
                 MsgDeletePresetConfirmation = "Вы действительно хотите удалить выбранный пресет?";
-                MsgImportingConfirmation = "Вы действительно хотите установить стандартные пресеты?";
+                MsgInstallingConfirmation = "Вы действительно хотите установить стандартные пресеты?";
+                MsgDoYouWantToCloseWindowAndLoseAllChanges = "Один или несколько пресетов были настроены или изменены. Вы все равно хотите закрыть текущее окно и потерять все изменения?";
                 MsgDoYouWantToImportExistingPresetsAsCopies = "Некоторые импортируемые пресеты уже существуют.\n"
                     + "Импортировать их как новые пресеты, сохранив существующие?\n\n"
                     + "В ПРОТИВНОМ СЛУЧАЕ СУЩЕСТВУЮЩИЕ ПРЕСЕТЫ БУДУТ ПЕРЕЗАПИСАНЫ!\n";

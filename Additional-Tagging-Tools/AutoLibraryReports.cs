@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -673,6 +674,13 @@ namespace MusicBeePlugin
         protected new void initializeForm()
         {
             base.initializeForm();
+
+
+            float highlightWeight = 0.8f;//***
+            Color highlightColor = SystemColors.Highlight;
+
+            labelNotSaved.ForeColor = Plugin.GetHighlightColor(highlightColor, BackColor, highlightWeight);
+
 
             functionComboBox.Items.Add(Plugin.GroupingName);
             functionComboBox.Items.Add(Plugin.CountName);
