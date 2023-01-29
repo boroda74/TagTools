@@ -454,6 +454,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\Resources\clear-button.png" />
     <None Include="Properties\Resources\auto-applied-presets.png" />
     <None Include="Properties\Resources\hotkey-presets.png" />
     <None Include="Properties\Resources\function-id-presets.png" />

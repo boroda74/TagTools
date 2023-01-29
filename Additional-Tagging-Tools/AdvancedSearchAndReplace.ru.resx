@@ -238,17 +238,6 @@
   <data name="preserveValuesTextBox.ToolTip" xml:space="preserve">
     <value>Все теги, равные одному из перечисленных в этом поле значений, не будут как либо изменяться</value>
   </data>
-  <data name="tickedOnlyCheckBox.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAu
-        IgAALiIBquLdkgAAATJJREFUOE+dkT1KBEEQhXf8CQQDEWQ0GRzEnu7XoILgzw003nQDDTTwL/EMxoJn
-        EDQ3MVJMPIIIHsDE0FTaV7PW0t1MsBh8Tb+qetNVNb0Qwr/pDI5LZ3BcOoMxwPKSt3ZQ1/VcnkuEUBTF
-        pHPu2Dv3St493DcJHvYxr00EjdM0PLDwRl6UGI0ff+anuFZIRFmWs3y1H8estTVgT9j2IrBi4lx78MWC
-        pgOgOeJ1Ii6IAdw9sLqruj24kP1ha4TL0WQOP37KsS5Ut4c3ZpvGHzGzzT1N5tB4zg7PVI8STdNs0PxW
-        VdW8xnJkmTRvqs6Th+QunhswO5z1mvHL/HeNLgo3e8XCZ3ayLprdfLa7gPsyxizEtYlRoXGLs6/Jna++
-        DM32Nq9LRBfcwYx8jKNMpbnQ+wWvvRG4i/MMJgAAAABJRU5ErkJggg==
-</value>
-  </data>
   <data name="tickedOnlyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>500, 32</value>
   </data>
@@ -301,8 +290,15 @@
     <value>Сначала включите комбинации клавиш для одного или нескольких пресетов, потом сохраните изменения и 
 откройте настройки горячих клавиш: Правка&gt; Настройки&gt; Горячие клавиш.</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="clearSearchButton.Font" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="clearSearchButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>474, 33</value>
+    <value>474, 32</value>
+  </data>
+  <data name="clearSearchButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 23</value>
   </data>
   <data name="clearSearchButton.ToolTip" xml:space="preserve">
     <value>Очистить текст поиска</value>
