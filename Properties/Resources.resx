@@ -130,13 +130,37 @@
   <data name="Xion20" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\Xion20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="UnsavedChanges_14" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\UnsavedChanges-14.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Window" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\Window.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Empty_14" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\Empty-14.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="UnsavedChanges_14" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\UnsavedChanges-14.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="auto_applied_presets" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\auto-applied-presets.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="customized_presets" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\customized-presets.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="function_id_presets" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\function-id-presets.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="hotkey_presets" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\hotkey-presets.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="playlist_presets" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\playlist-presets.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="predefined_presets" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\predefined-presets.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="uncheck_all_preset_filters" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\uncheck-all-preset-filters.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="user_presets" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\user-presets.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -454,20 +454,21 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\Resources\auto-applied-presets.png" />
+    <None Include="Properties\Resources\hotkey-presets.png" />
+    <None Include="Properties\Resources\function-id-presets.png" />
+    <None Include="Properties\Resources\customized-presets.png" />
+    <None Include="Properties\Resources\user-presets.png" />
+    <None Include="Properties\Resources\uncheck-all-preset-filters.png" />
+    <None Include="Properties\Resources\predefined-presets.png" />
+    <None Include="Properties\Resources\playlist-presets.png" />
     <None Include="Properties\Resources\Empty-14.png" />
     <None Include="Properties\Resources\UnsavedChanges-14.png" />
-    <None Include="Resources\Warning.png" />
     <None Include="Properties\Resources\Xion20.png" />
     <None Include="Properties\Resources\Window.png" />
     <None Include="Properties\Resources\Search.png" />
     <None Include="Properties\Resources\MissingArtwork.png" />
     <None Include="Properties\Resources\Lightning.png" />
-    <None Include="Resources\Xion20.png" />
-    <None Include="Resources\Window.png" />
-    <None Include="Resources\Search.png" />
-    <None Include="Resources\MissingArtwork.png" />
-    <None Include="Resources\Lightning.png" />
-    <None Include="Resources\Warning.ico" />
     <Content Include="Additional-Tagging-Tools\Wrench.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

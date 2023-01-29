@@ -152,43 +152,43 @@
     <value>Показывать только автоприменяемые пресеты</value>
   </data>
   <data name="untickAllCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>944, 36</value>
+    <value>944, 32</value>
   </data>
   <data name="untickAllCheckBox.ToolTip" xml:space="preserve">
     <value>Снять отметки со всех фильтров</value>
   </data>
   <data name="customizedPresetsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>724, 34</value>
+    <value>724, 32</value>
   </data>
   <data name="customizedPresetsCheckBox.ToolTip" xml:space="preserve">
     <value>Показывать только настроенные пресеты</value>
   </data>
   <data name="predefinedPresetsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>680, 31</value>
+    <value>680, 32</value>
   </data>
   <data name="predefinedPresetsCheckBox.ToolTip" xml:space="preserve">
     <value>Показывать только стандартные пресеты</value>
   </data>
   <data name="userPresetsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>768, 36</value>
+    <value>768, 32</value>
   </data>
   <data name="userPresetsCheckBox.ToolTip" xml:space="preserve">
     <value>Показывать только пресеты пользователя</value>
   </data>
   <data name="hotkeyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>900, 34</value>
+    <value>900, 32</value>
   </data>
   <data name="hotkeyCheckBox.ToolTip" xml:space="preserve">
     <value>Показывать только пресеты с назначенными комбинациями клавиш</value>
   </data>
   <data name="idCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>856, 30</value>
+    <value>856, 32</value>
   </data>
   <data name="idCheckBox.ToolTip" xml:space="preserve">
     <value>Показывать только пресеты с назначенными id-ми функций виртуальных тегов</value>
   </data>
   <data name="playlistCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>812, 36</value>
+    <value>812, 32</value>
   </data>
   <data name="playlistCheckBox.ToolTip" xml:space="preserve">
     <value>Показывать только пресеты, ограниченные плейлистом</value>
@@ -238,8 +238,19 @@
   <data name="preserveValuesTextBox.ToolTip" xml:space="preserve">
     <value>Все теги, равные одному из перечисленных в этом поле значений, не будут как либо изменяться</value>
   </data>
+  <data name="tickedOnlyCheckBox.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAALiIAAC4iAari3ZIAAAEySURBVDhPnZE9SgRBEIV3/AkEAxFkNBkcxJ7u16CC4M8N
+        NN50Aw008C/xDMaCZxA0NzFSTDyCCB7AxNBU2lez1tLdTLAYfE2/qnrTVTW9EMK/6QyOS2dwXDqDMcDy
+        krd2UNf1XJ5LhFAUxaRz7tg790rePdw3CR72Ma9NBI3TNDyw8EZelBiNH3/mp7hWSERZlrN8tR/HrLU1
+        YE/Y9iKwYuJce/DFgqYDoDnidSIuiAHcPbC6q7o9uJD9YWuEy9FkDj9+yrEuVLeHN2abxh8xs809TebQ
+        eM4Oz1SPEk3TbND8VlXVvMZyZJk0b6rOk4fkLp4bMDuc9Zrxy/x3jS4KN3vFwmd2si6a3Xy2u4D7MsYs
+        xLWJUaFxi7OvyZ2vvgzN9javS0QX3MGMfIyjTKW50PsFr70RuIvzDCYAAAAASUVORK5CYII=
+</value>
+  </data>
   <data name="tickedOnlyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>500, 36</value>
+    <value>500, 32</value>
   </data>
   <data name="tickedOnlyCheckBox.ToolTip" xml:space="preserve">
     <value>Показывать только автоприменяемые пресеты</value>
@@ -695,9 +706,6 @@
   </data>
   <data name="conditionCheckBox.Text" xml:space="preserve">
     <value>Автоматически применять пресет, только если трек есть в плейлисте:</value>
-  </data>
-  <data name="presetList.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
   </data>
   <data name="presetList.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 61</value>

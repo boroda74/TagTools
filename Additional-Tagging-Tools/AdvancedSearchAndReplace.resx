@@ -405,45 +405,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="&gt;&gt;applyToPlayingTrackCheckBox.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
-  <data name="tickedOnlyCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="tickedOnlyCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="tickedOnlyCheckBox.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 8.25pt</value>
-  </data>
-  <data name="tickedOnlyCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="tickedOnlyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>316, 31</value>
-  </data>
-  <data name="tickedOnlyCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 17</value>
-  </data>
-  <data name="tickedOnlyCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="tickedOnlyCheckBox.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="tickedOnlyCheckBox.ToolTip" xml:space="preserve">
-    <value>Show only auto-applied presets</value>
-  </data>
-  <data name="&gt;&gt;tickedOnlyCheckBox.Name" xml:space="preserve">
-    <value>tickedOnlyCheckBox</value>
-  </data>
-  <data name="&gt;&gt;tickedOnlyCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tickedOnlyCheckBox.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;tickedOnlyCheckBox.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
   <data name="preserveValuesTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left, Right</value>
   </data>
@@ -665,261 +626,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   </data>
   <data name="&gt;&gt;clearSearchButton.ZOrder" xml:space="preserve">
     <value>20</value>
-  </data>
-  <data name="playlistCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="playlistCheckBox.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 8.25pt</value>
-  </data>
-  <data name="playlistCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="playlistCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>573, 31</value>
-  </data>
-  <data name="playlistCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 17</value>
-  </data>
-  <data name="playlistCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>107</value>
-  </data>
-  <data name="playlistCheckBox.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="playlistCheckBox.ToolTip" xml:space="preserve">
-    <value>Show only presets constrained by playlist</value>
-  </data>
-  <data name="&gt;&gt;playlistCheckBox.Name" xml:space="preserve">
-    <value>playlistCheckBox</value>
-  </data>
-  <data name="&gt;&gt;playlistCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;playlistCheckBox.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;playlistCheckBox.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="idCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="idCheckBox.CheckAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>BottomLeft</value>
-  </data>
-  <data name="idCheckBox.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 12.25pt</value>
-  </data>
-  <data name="idCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="idCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>617, 25</value>
-  </data>
-  <data name="idCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 21</value>
-  </data>
-  <data name="idCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>108</value>
-  </data>
-  <data name="idCheckBox.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="idCheckBox.ToolTip" xml:space="preserve">
-    <value>Show only presets with assigned virtual tag function ids</value>
-  </data>
-  <data name="&gt;&gt;idCheckBox.Name" xml:space="preserve">
-    <value>idCheckBox</value>
-  </data>
-  <data name="&gt;&gt;idCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;idCheckBox.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;idCheckBox.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="hotkeyCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="hotkeyCheckBox.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 8.25pt</value>
-  </data>
-  <data name="hotkeyCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="hotkeyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>661, 29</value>
-  </data>
-  <data name="hotkeyCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 21</value>
-  </data>
-  <data name="hotkeyCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>109</value>
-  </data>
-  <data name="hotkeyCheckBox.Text" xml:space="preserve">
-    <value>★</value>
-  </data>
-  <data name="hotkeyCheckBox.ToolTip" xml:space="preserve">
-    <value>Show only presets with assigned hotkeys</value>
-  </data>
-  <data name="&gt;&gt;hotkeyCheckBox.Name" xml:space="preserve">
-    <value>hotkeyCheckBox</value>
-  </data>
-  <data name="&gt;&gt;hotkeyCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;hotkeyCheckBox.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;hotkeyCheckBox.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="userPresetsCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="userPresetsCheckBox.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 8.25pt</value>
-  </data>
-  <data name="userPresetsCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="userPresetsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>529, 31</value>
-  </data>
-  <data name="userPresetsCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 17</value>
-  </data>
-  <data name="userPresetsCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>110</value>
-  </data>
-  <data name="userPresetsCheckBox.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="userPresetsCheckBox.ToolTip" xml:space="preserve">
-    <value>Show only user presets</value>
-  </data>
-  <data name="&gt;&gt;userPresetsCheckBox.Name" xml:space="preserve">
-    <value>userPresetsCheckBox</value>
-  </data>
-  <data name="&gt;&gt;userPresetsCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;userPresetsCheckBox.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;userPresetsCheckBox.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="predefinedPresetsCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="predefinedPresetsCheckBox.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 12.25pt</value>
-  </data>
-  <data name="predefinedPresetsCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="predefinedPresetsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>441, 26</value>
-  </data>
-  <data name="predefinedPresetsCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 26</value>
-  </data>
-  <data name="predefinedPresetsCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>111</value>
-  </data>
-  <data name="predefinedPresetsCheckBox.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="predefinedPresetsCheckBox.ToolTip" xml:space="preserve">
-    <value>Show only predefined presets</value>
-  </data>
-  <data name="&gt;&gt;predefinedPresetsCheckBox.Name" xml:space="preserve">
-    <value>predefinedPresetsCheckBox</value>
-  </data>
-  <data name="&gt;&gt;predefinedPresetsCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;predefinedPresetsCheckBox.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;predefinedPresetsCheckBox.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="customizedPresetsCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="customizedPresetsCheckBox.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 11.25pt</value>
-  </data>
-  <data name="customizedPresetsCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="customizedPresetsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>485, 29</value>
-  </data>
-  <data name="customizedPresetsCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 21</value>
-  </data>
-  <data name="customizedPresetsCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>112</value>
-  </data>
-  <data name="customizedPresetsCheckBox.Text" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="customizedPresetsCheckBox.ToolTip" xml:space="preserve">
-    <value>Show only customized presets</value>
-  </data>
-  <data name="&gt;&gt;customizedPresetsCheckBox.Name" xml:space="preserve">
-    <value>customizedPresetsCheckBox</value>
-  </data>
-  <data name="&gt;&gt;customizedPresetsCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;customizedPresetsCheckBox.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;customizedPresetsCheckBox.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="untickAllCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="untickAllCheckBox.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 8.25pt</value>
-  </data>
-  <data name="untickAllCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="untickAllCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>705, 31</value>
-  </data>
-  <data name="untickAllCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 17</value>
-  </data>
-  <data name="untickAllCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>113</value>
-  </data>
-  <data name="untickAllCheckBox.Text" xml:space="preserve">
-    <value>❎</value>
-  </data>
-  <data name="untickAllCheckBox.ToolTip" xml:space="preserve">
-    <value>Uncheck all filters</value>
-  </data>
-  <data name="&gt;&gt;untickAllCheckBox.Name" xml:space="preserve">
-    <value>untickAllCheckBox</value>
-  </data>
-  <data name="&gt;&gt;untickAllCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;untickAllCheckBox.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;untickAllCheckBox.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="label8.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1221,6 +927,216 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="panel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
+  <data name="untickAllCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="untickAllCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="untickAllCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>705, 27</value>
+  </data>
+  <data name="untickAllCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>42, 24</value>
+  </data>
+  <data name="untickAllCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>113</value>
+  </data>
+  <data name="untickAllCheckBox.ToolTip" xml:space="preserve">
+    <value>Uncheck all filters</value>
+  </data>
+  <data name="&gt;&gt;untickAllCheckBox.Name" xml:space="preserve">
+    <value>untickAllCheckBox</value>
+  </data>
+  <data name="&gt;&gt;untickAllCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;untickAllCheckBox.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;untickAllCheckBox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="customizedPresetsCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="customizedPresetsCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="customizedPresetsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>485, 27</value>
+  </data>
+  <data name="customizedPresetsCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>42, 24</value>
+  </data>
+  <data name="customizedPresetsCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>112</value>
+  </data>
+  <data name="customizedPresetsCheckBox.ToolTip" xml:space="preserve">
+    <value>Show only customized presets</value>
+  </data>
+  <data name="&gt;&gt;customizedPresetsCheckBox.Name" xml:space="preserve">
+    <value>customizedPresetsCheckBox</value>
+  </data>
+  <data name="&gt;&gt;customizedPresetsCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;customizedPresetsCheckBox.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;customizedPresetsCheckBox.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="predefinedPresetsCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="predefinedPresetsCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="predefinedPresetsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>441, 27</value>
+  </data>
+  <data name="predefinedPresetsCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>42, 24</value>
+  </data>
+  <data name="predefinedPresetsCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>111</value>
+  </data>
+  <data name="predefinedPresetsCheckBox.ToolTip" xml:space="preserve">
+    <value>Show only predefined presets</value>
+  </data>
+  <data name="&gt;&gt;predefinedPresetsCheckBox.Name" xml:space="preserve">
+    <value>predefinedPresetsCheckBox</value>
+  </data>
+  <data name="&gt;&gt;predefinedPresetsCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;predefinedPresetsCheckBox.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;predefinedPresetsCheckBox.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="userPresetsCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="userPresetsCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="userPresetsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>529, 27</value>
+  </data>
+  <data name="userPresetsCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>42, 24</value>
+  </data>
+  <data name="userPresetsCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>110</value>
+  </data>
+  <data name="userPresetsCheckBox.ToolTip" xml:space="preserve">
+    <value>Show only user presets</value>
+  </data>
+  <data name="&gt;&gt;userPresetsCheckBox.Name" xml:space="preserve">
+    <value>userPresetsCheckBox</value>
+  </data>
+  <data name="&gt;&gt;userPresetsCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;userPresetsCheckBox.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;userPresetsCheckBox.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="hotkeyCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="hotkeyCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="hotkeyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>661, 27</value>
+  </data>
+  <data name="hotkeyCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>42, 24</value>
+  </data>
+  <data name="hotkeyCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>109</value>
+  </data>
+  <data name="hotkeyCheckBox.ToolTip" xml:space="preserve">
+    <value>Show only presets with assigned hotkeys</value>
+  </data>
+  <data name="&gt;&gt;hotkeyCheckBox.Name" xml:space="preserve">
+    <value>hotkeyCheckBox</value>
+  </data>
+  <data name="&gt;&gt;hotkeyCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;hotkeyCheckBox.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;hotkeyCheckBox.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="idCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="idCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="idCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>617, 27</value>
+  </data>
+  <data name="idCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>42, 24</value>
+  </data>
+  <data name="idCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>108</value>
+  </data>
+  <data name="idCheckBox.ToolTip" xml:space="preserve">
+    <value>Show only presets with assigned virtual tag function ids</value>
+  </data>
+  <data name="&gt;&gt;idCheckBox.Name" xml:space="preserve">
+    <value>idCheckBox</value>
+  </data>
+  <data name="&gt;&gt;idCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;idCheckBox.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;idCheckBox.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="playlistCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="playlistCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="playlistCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>573, 27</value>
+  </data>
+  <data name="playlistCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>42, 24</value>
+  </data>
+  <data name="playlistCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>107</value>
+  </data>
+  <data name="playlistCheckBox.ToolTip" xml:space="preserve">
+    <value>Show only presets constrained by playlist</value>
+  </data>
+  <data name="&gt;&gt;playlistCheckBox.Name" xml:space="preserve">
+    <value>playlistCheckBox</value>
+  </data>
+  <data name="&gt;&gt;playlistCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;playlistCheckBox.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;playlistCheckBox.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
   <data name="label4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
@@ -1358,6 +1274,36 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   </data>
   <data name="&gt;&gt;userPresetLabel.ZOrder" xml:space="preserve">
     <value>11</value>
+  </data>
+  <data name="tickedOnlyCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="tickedOnlyCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="tickedOnlyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>314, 27</value>
+  </data>
+  <data name="tickedOnlyCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>42, 24</value>
+  </data>
+  <data name="tickedOnlyCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tickedOnlyCheckBox.ToolTip" xml:space="preserve">
+    <value>Show only auto-applied presets</value>
+  </data>
+  <data name="&gt;&gt;tickedOnlyCheckBox.Name" xml:space="preserve">
+    <value>tickedOnlyCheckBox</value>
+  </data>
+  <data name="&gt;&gt;tickedOnlyCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tickedOnlyCheckBox.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;tickedOnlyCheckBox.ZOrder" xml:space="preserve">
+    <value>14</value>
   </data>
   <data name="label1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
