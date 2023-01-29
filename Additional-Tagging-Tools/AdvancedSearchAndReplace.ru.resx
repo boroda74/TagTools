@@ -140,7 +140,7 @@
     <value>1001, 678</value>
   </data>
   <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>533, 38</value>
+    <value>533, 36</value>
   </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>142, 13</value>
@@ -240,13 +240,13 @@
   </data>
   <data name="tickedOnlyCheckBox.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAALiIAAC4iAari3ZIAAAEySURBVDhPnZE9SgRBEIV3/AkEAxFkNBkcxJ7u16CC4M8N
-        NN50Aw008C/xDMaCZxA0NzFSTDyCCB7AxNBU2lez1tLdTLAYfE2/qnrTVTW9EMK/6QyOS2dwXDqDMcDy
-        krd2UNf1XJ5LhFAUxaRz7tg790rePdw3CR72Ma9NBI3TNDyw8EZelBiNH3/mp7hWSERZlrN8tR/HrLU1
-        YE/Y9iKwYuJce/DFgqYDoDnidSIuiAHcPbC6q7o9uJD9YWuEy9FkDj9+yrEuVLeHN2abxh8xs809TebQ
-        eM4Oz1SPEk3TbND8VlXVvMZyZJk0b6rOk4fkLp4bMDuc9Zrxy/x3jS4KN3vFwmd2si6a3Xy2u4D7MsYs
-        xLWJUaFxi7OvyZ2vvgzN9javS0QX3MGMfIyjTKW50PsFr70RuIvzDCYAAAAASUVORK5CYII=
+        iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAu
+        IgAALiIBquLdkgAAATJJREFUOE+dkT1KBEEQhXf8CQQDEWQ0GRzEnu7XoILgzw003nQDDTTwL/EMxoJn
+        EDQ3MVJMPIIIHsDE0FTaV7PW0t1MsBh8Tb+qetNVNb0Qwr/pDI5LZ3BcOoMxwPKSt3ZQ1/VcnkuEUBTF
+        pHPu2Dv3St493DcJHvYxr00EjdM0PLDwRl6UGI0ff+anuFZIRFmWs3y1H8estTVgT9j2IrBi4lx78MWC
+        pgOgOeJ1Ii6IAdw9sLqruj24kP1ha4TL0WQOP37KsS5Ut4c3ZpvGHzGzzT1N5tB4zg7PVI8STdNs0PxW
+        VdW8xnJkmTRvqs6Th+QunhswO5z1mvHL/HeNLgo3e8XCZ3ayLprdfLa7gPsyxizEtYlRoXGLs6/Jna++
+        DM32Nq9LRBfcwYx8jKNMpbnQ+wWvvRG4i/MMJgAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="tickedOnlyCheckBox.Location" type="System.Drawing.Point, System.Drawing">

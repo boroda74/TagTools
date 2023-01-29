@@ -117,14 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>36, 9</value>
-  </metadata>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="buttonDeleteAll.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonDeleteAll.Location" type="System.Drawing.Point, System.Drawing">
     <value>423, 12</value>
   </data>
@@ -637,7 +637,7 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
     <value>NoControl</value>
   </data>
   <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>347, 33</value>
+    <value>347, 31</value>
   </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 13</value>
@@ -972,42 +972,42 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="&gt;&gt;presetList.ZOrder" xml:space="preserve">
     <value>46</value>
   </data>
-  <metadata name="File.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="File.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
-  <metadata name="Track.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <data name="Track.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
-  <metadata name="OriginalTag1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <data name="OriginalTag1.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
-  <metadata name="NewTag1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <data name="NewTag1.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
-  <metadata name="OriginalTag2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <data name="OriginalTag2.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
-  <metadata name="NewTag2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <data name="NewTag2.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
-  <metadata name="OriginalTag3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <data name="OriginalTag3.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
-  <metadata name="NewTag3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <data name="NewTag3.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
-  <metadata name="OriginalTag4.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <data name="OriginalTag4.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
-  <metadata name="NewTag4.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <data name="NewTag4.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
-  <metadata name="OriginalTag5.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <data name="OriginalTag5.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
-  <metadata name="NewTag5.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <data name="NewTag5.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="previewTable.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
@@ -1038,9 +1038,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="&gt;&gt;previewTable.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <metadata name="File.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <data name="File.HeaderText" xml:space="preserve">
     <value>File</value>
   </data>
@@ -1050,18 +1047,12 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="File.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="Track.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <data name="Track.HeaderText" xml:space="preserve">
     <value>Track</value>
   </data>
   <data name="Track.MinimumWidth" type="System.Int32, mscorlib">
     <value>50</value>
   </data>
-  <metadata name="OriginalTag1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <data name="OriginalTag1.HeaderText" xml:space="preserve">
     <value>Original tag 1</value>
   </data>
@@ -1071,9 +1062,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="OriginalTag1.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="NewTag1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <data name="NewTag1.HeaderText" xml:space="preserve">
     <value>New tag value</value>
   </data>
@@ -1083,9 +1071,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="NewTag1.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="OriginalTag2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <data name="OriginalTag2.HeaderText" xml:space="preserve">
     <value>Original tag 2</value>
   </data>
@@ -1095,9 +1080,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="OriginalTag2.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="NewTag2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <data name="NewTag2.HeaderText" xml:space="preserve">
     <value>New tag value</value>
   </data>
@@ -1107,9 +1089,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="NewTag2.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="OriginalTag3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <data name="OriginalTag3.HeaderText" xml:space="preserve">
     <value>Original tag 3</value>
   </data>
@@ -1119,9 +1098,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="OriginalTag3.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="NewTag3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <data name="NewTag3.HeaderText" xml:space="preserve">
     <value>New tag value</value>
   </data>
@@ -1131,9 +1107,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="NewTag3.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="OriginalTag4.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <data name="OriginalTag4.HeaderText" xml:space="preserve">
     <value>Original tag 4</value>
   </data>
@@ -1143,9 +1116,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="OriginalTag4.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="NewTag4.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <data name="NewTag4.HeaderText" xml:space="preserve">
     <value>New tag value</value>
   </data>
@@ -1155,9 +1125,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="NewTag4.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="OriginalTag5.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <data name="OriginalTag5.HeaderText" xml:space="preserve">
     <value>Original tag 5</value>
   </data>
@@ -1167,9 +1134,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="OriginalTag5.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="NewTag5.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <data name="NewTag5.HeaderText" xml:space="preserve">
     <value>New tag value</value>
   </data>
@@ -1179,18 +1143,18 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="NewTag5.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="dirtyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="dirtyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>133, 9</value>
-  </metadata>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <data name="$this.Language" type="System.Globalization.CultureInfo, mscorlib">
     <value>ru</value>
-  </metadata>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <data name="$this.Localizable" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
-  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <data name="$this.TrayHeight" type="System.Int32, mscorlib">
     <value>48</value>
-  </metadata>
+  </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
@@ -2433,18 +2397,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>42</value>
   </data>
-  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="label4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
@@ -2466,18 +2418,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="label4.Text" xml:space="preserve">
     <value>Customized by user</value>
   </data>
-  <data name="&gt;&gt;label4.Name" xml:space="preserve">
-    <value>label4</value>
-  </data>
-  <data name="&gt;&gt;label4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
   <data name="label3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
@@ -2498,18 +2438,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>User preset</value>
-  </data>
-  <data name="&gt;&gt;label3.Name" xml:space="preserve">
-    <value>label3</value>
-  </data>
-  <data name="&gt;&gt;label3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>9</value>
   </data>
   <data name="customizedPresetLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -2535,18 +2463,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="customizedPresetLabel.Text" xml:space="preserve">
     <value></value>
   </data>
-  <data name="&gt;&gt;customizedPresetLabel.Name" xml:space="preserve">
-    <value>customizedPresetLabel</value>
-  </data>
-  <data name="&gt;&gt;customizedPresetLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;customizedPresetLabel.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;customizedPresetLabel.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
   <data name="userPresetLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
@@ -2571,18 +2487,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="userPresetLabel.Text" xml:space="preserve">
     <value></value>
   </data>
-  <data name="&gt;&gt;userPresetLabel.Name" xml:space="preserve">
-    <value>userPresetLabel</value>
-  </data>
-  <data name="&gt;&gt;userPresetLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;userPresetLabel.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;userPresetLabel.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
   <data name="label1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
@@ -2603,18 +2507,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>Assign virtual tag function id:</value>
-  </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
-  </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>18</value>
   </data>
   <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -2842,18 +2734,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
     <value>85</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
-    <value>pictureBox1</value>
-  </data>
-  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
-    <value>22</value>
-  </data>
   <data name="groupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left, Right</value>
   </data>
@@ -2881,18 +2761,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="groupBox1.Text" xml:space="preserve">
     <value>Preset description</value>
   </data>
-  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
-    <value>23</value>
-  </data>
   <data name="descriptionBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
@@ -2909,18 +2777,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
     <value>739, 71</value>
   </data>
   <data name="descriptionBox.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;descriptionBox.Name" xml:space="preserve">
-    <value>descriptionBox</value>
-  </data>
-  <data name="&gt;&gt;descriptionBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;descriptionBox.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;descriptionBox.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="customText4Label.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -2947,18 +2803,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="customText4Label.Text" xml:space="preserve">
     <value>&lt;Custom text 4&gt;:</value>
   </data>
-  <data name="&gt;&gt;customText4Label.Name" xml:space="preserve">
-    <value>customText4Label</value>
-  </data>
-  <data name="&gt;&gt;customText4Label.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;customText4Label.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;customText4Label.ZOrder" xml:space="preserve">
-    <value>24</value>
-  </data>
   <data name="customText2Label.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
@@ -2983,18 +2827,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="customText2Label.Text" xml:space="preserve">
     <value>&lt;Custom text 2&gt;:</value>
   </data>
-  <data name="&gt;&gt;customText2Label.Name" xml:space="preserve">
-    <value>customText2Label</value>
-  </data>
-  <data name="&gt;&gt;customText2Label.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;customText2Label.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;customText2Label.ZOrder" xml:space="preserve">
-    <value>25</value>
-  </data>
   <data name="customText4Box.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
@@ -3010,18 +2842,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="customText4Box.TabIndex" type="System.Int32, mscorlib">
     <value>83</value>
   </data>
-  <data name="&gt;&gt;customText4Box.Name" xml:space="preserve">
-    <value>customText4Box</value>
-  </data>
-  <data name="&gt;&gt;customText4Box.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;customText4Box.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;customText4Box.ZOrder" xml:space="preserve">
-    <value>26</value>
-  </data>
   <data name="customText2Box.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
@@ -3036,18 +2856,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   </data>
   <data name="customText2Box.TabIndex" type="System.Int32, mscorlib">
     <value>81</value>
-  </data>
-  <data name="&gt;&gt;customText2Box.Name" xml:space="preserve">
-    <value>customText2Box</value>
-  </data>
-  <data name="&gt;&gt;customText2Box.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;customText2Box.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;customText2Box.ZOrder" xml:space="preserve">
-    <value>27</value>
   </data>
   <data name="customText3Label.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -3073,18 +2881,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="customText3Label.Text" xml:space="preserve">
     <value>&lt;Custom text 3&gt;:</value>
   </data>
-  <data name="&gt;&gt;customText3Label.Name" xml:space="preserve">
-    <value>customText3Label</value>
-  </data>
-  <data name="&gt;&gt;customText3Label.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;customText3Label.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;customText3Label.ZOrder" xml:space="preserve">
-    <value>28</value>
-  </data>
   <data name="labelTag6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
@@ -3109,18 +2905,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="labelTag6.Text" xml:space="preserve">
     <value>&lt;Tag 6&gt;:</value>
   </data>
-  <data name="&gt;&gt;labelTag6.Name" xml:space="preserve">
-    <value>labelTag6</value>
-  </data>
-  <data name="&gt;&gt;labelTag6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelTag6.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;labelTag6.ZOrder" xml:space="preserve">
-    <value>29</value>
-  </data>
   <data name="customText3Box.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
@@ -3136,18 +2920,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="customText3Box.TabIndex" type="System.Int32, mscorlib">
     <value>79</value>
   </data>
-  <data name="&gt;&gt;customText3Box.Name" xml:space="preserve">
-    <value>customText3Box</value>
-  </data>
-  <data name="&gt;&gt;customText3Box.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;customText3Box.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;customText3Box.ZOrder" xml:space="preserve">
-    <value>30</value>
-  </data>
   <data name="parameterTag6List.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
@@ -3162,18 +2934,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   </data>
   <data name="parameterTag6List.TabIndex" type="System.Int32, mscorlib">
     <value>75</value>
-  </data>
-  <data name="&gt;&gt;parameterTag6List.Name" xml:space="preserve">
-    <value>parameterTag6List</value>
-  </data>
-  <data name="&gt;&gt;parameterTag6List.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;parameterTag6List.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;parameterTag6List.ZOrder" xml:space="preserve">
-    <value>31</value>
   </data>
   <data name="labelTag5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom</value>
@@ -3199,18 +2959,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="labelTag5.Text" xml:space="preserve">
     <value>&lt;Tag 5&gt;:</value>
   </data>
-  <data name="&gt;&gt;labelTag5.Name" xml:space="preserve">
-    <value>labelTag5</value>
-  </data>
-  <data name="&gt;&gt;labelTag5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelTag5.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;labelTag5.ZOrder" xml:space="preserve">
-    <value>32</value>
-  </data>
   <data name="parameterTag5List.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom</value>
   </data>
@@ -3225,18 +2973,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   </data>
   <data name="parameterTag5List.TabIndex" type="System.Int32, mscorlib">
     <value>73</value>
-  </data>
-  <data name="&gt;&gt;parameterTag5List.Name" xml:space="preserve">
-    <value>parameterTag5List</value>
-  </data>
-  <data name="&gt;&gt;parameterTag5List.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;parameterTag5List.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;parameterTag5List.ZOrder" xml:space="preserve">
-    <value>33</value>
   </data>
   <data name="labelTag4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -3262,18 +2998,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="labelTag4.Text" xml:space="preserve">
     <value>&lt;Tag 4&gt;:</value>
   </data>
-  <data name="&gt;&gt;labelTag4.Name" xml:space="preserve">
-    <value>labelTag4</value>
-  </data>
-  <data name="&gt;&gt;labelTag4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelTag4.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;labelTag4.ZOrder" xml:space="preserve">
-    <value>34</value>
-  </data>
   <data name="parameterTag4List.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
@@ -3288,18 +3012,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   </data>
   <data name="parameterTag4List.TabIndex" type="System.Int32, mscorlib">
     <value>71</value>
-  </data>
-  <data name="&gt;&gt;parameterTag4List.Name" xml:space="preserve">
-    <value>parameterTag4List</value>
-  </data>
-  <data name="&gt;&gt;parameterTag4List.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;parameterTag4List.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;parameterTag4List.ZOrder" xml:space="preserve">
-    <value>35</value>
   </data>
   <data name="customTextLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -3325,18 +3037,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="customTextLabel.Text" xml:space="preserve">
     <value>&lt;Custom text 1&gt;:</value>
   </data>
-  <data name="&gt;&gt;customTextLabel.Name" xml:space="preserve">
-    <value>customTextLabel</value>
-  </data>
-  <data name="&gt;&gt;customTextLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;customTextLabel.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;customTextLabel.ZOrder" xml:space="preserve">
-    <value>36</value>
-  </data>
   <data name="customTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
@@ -3351,18 +3051,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   </data>
   <data name="customTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>77</value>
-  </data>
-  <data name="&gt;&gt;customTextBox.Name" xml:space="preserve">
-    <value>customTextBox</value>
-  </data>
-  <data name="&gt;&gt;customTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;customTextBox.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;customTextBox.ZOrder" xml:space="preserve">
-    <value>37</value>
   </data>
   <data name="labelTag3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -3388,18 +3076,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="labelTag3.Text" xml:space="preserve">
     <value>&lt;Tag 3&gt;:</value>
   </data>
-  <data name="&gt;&gt;labelTag3.Name" xml:space="preserve">
-    <value>labelTag3</value>
-  </data>
-  <data name="&gt;&gt;labelTag3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelTag3.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;labelTag3.ZOrder" xml:space="preserve">
-    <value>38</value>
-  </data>
   <data name="parameterTag3List.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
@@ -3414,18 +3090,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   </data>
   <data name="parameterTag3List.TabIndex" type="System.Int32, mscorlib">
     <value>69</value>
-  </data>
-  <data name="&gt;&gt;parameterTag3List.Name" xml:space="preserve">
-    <value>parameterTag3List</value>
-  </data>
-  <data name="&gt;&gt;parameterTag3List.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;parameterTag3List.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;parameterTag3List.ZOrder" xml:space="preserve">
-    <value>39</value>
   </data>
   <data name="labelTag2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom</value>
@@ -3451,18 +3115,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="labelTag2.Text" xml:space="preserve">
     <value>&lt;Tag 2&gt;:</value>
   </data>
-  <data name="&gt;&gt;labelTag2.Name" xml:space="preserve">
-    <value>labelTag2</value>
-  </data>
-  <data name="&gt;&gt;labelTag2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelTag2.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;labelTag2.ZOrder" xml:space="preserve">
-    <value>40</value>
-  </data>
   <data name="parameterTag2List.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom</value>
   </data>
@@ -3477,18 +3129,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   </data>
   <data name="parameterTag2List.TabIndex" type="System.Int32, mscorlib">
     <value>67</value>
-  </data>
-  <data name="&gt;&gt;parameterTag2List.Name" xml:space="preserve">
-    <value>parameterTag2List</value>
-  </data>
-  <data name="&gt;&gt;parameterTag2List.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;parameterTag2List.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;parameterTag2List.ZOrder" xml:space="preserve">
-    <value>41</value>
   </data>
   <data name="labelTag.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -3514,18 +3154,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="labelTag.Text" xml:space="preserve">
     <value>&lt;Tag 1&gt;:</value>
   </data>
-  <data name="&gt;&gt;labelTag.Name" xml:space="preserve">
-    <value>labelTag</value>
-  </data>
-  <data name="&gt;&gt;labelTag.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelTag.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;labelTag.ZOrder" xml:space="preserve">
-    <value>42</value>
-  </data>
   <data name="parameterTagList.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
@@ -3541,18 +3169,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="parameterTagList.TabIndex" type="System.Int32, mscorlib">
     <value>65</value>
   </data>
-  <data name="&gt;&gt;parameterTagList.Name" xml:space="preserve">
-    <value>parameterTagList</value>
-  </data>
-  <data name="&gt;&gt;parameterTagList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;parameterTagList.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;parameterTagList.ZOrder" xml:space="preserve">
-    <value>43</value>
-  </data>
   <data name="playlistComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left, Right</value>
   </data>
@@ -3567,18 +3183,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   </data>
   <data name="playlistComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>45</value>
-  </data>
-  <data name="&gt;&gt;playlistComboBox.Name" xml:space="preserve">
-    <value>playlistComboBox</value>
-  </data>
-  <data name="&gt;&gt;playlistComboBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;playlistComboBox.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;playlistComboBox.ZOrder" xml:space="preserve">
-    <value>44</value>
   </data>
   <data name="conditionCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -3601,18 +3205,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="conditionCheckBox.Text" xml:space="preserve">
     <value>Auto-apply preset only if track is contained in playlist:</value>
   </data>
-  <data name="&gt;&gt;conditionCheckBox.Name" xml:space="preserve">
-    <value>conditionCheckBox</value>
-  </data>
-  <data name="&gt;&gt;conditionCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;conditionCheckBox.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;conditionCheckBox.ZOrder" xml:space="preserve">
-    <value>45</value>
-  </data>
   <data name="label5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
@@ -3633,18 +3225,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
     <value>Select preset below to edit it or apply it to selected tracks. Tick presets to automatically apply them if track tags are edited/updated or new tracks are added to library. Click here to see ticked presets only. Presets ticked for auto-applying: %TICKED-PRESETS%</value>
-  </data>
-  <data name="&gt;&gt;label5.Name" xml:space="preserve">
-    <value>label5</value>
-  </data>
-  <data name="&gt;&gt;label5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label5.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
-    <value>47</value>
   </data>
   <data name="groupBox3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -3672,18 +3252,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   </data>
   <data name="&gt;&gt;buttonSaveClose.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="&gt;&gt;buttonOK.Name" xml:space="preserve">
-    <value>buttonOK</value>
-  </data>
-  <data name="&gt;&gt;buttonOK.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;buttonOK.Parent" xml:space="preserve">
-    <value>groupBox3</value>
-  </data>
-  <data name="&gt;&gt;buttonOK.ZOrder" xml:space="preserve">
-    <value>2</value>
   </data>
   <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
     <value>534, 6</value>
@@ -3727,18 +3295,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="label7.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
   </data>
-  <data name="&gt;&gt;label7.Name" xml:space="preserve">
-    <value>label7</value>
-  </data>
-  <data name="&gt;&gt;label7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label7.Parent" xml:space="preserve">
-    <value>groupBox3</value>
-  </data>
-  <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="buttonSaveClose.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -3754,32 +3310,8 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="buttonSaveClose.Text" xml:space="preserve">
     <value>Save All &amp;&amp; Close</value>
   </data>
-  <data name="&gt;&gt;buttonSaveClose.Name" xml:space="preserve">
-    <value>buttonSaveClose</value>
-  </data>
-  <data name="&gt;&gt;buttonSaveClose.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;buttonSaveClose.Parent" xml:space="preserve">
-    <value>groupBox3</value>
-  </data>
-  <data name="&gt;&gt;buttonSaveClose.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="panel2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="&gt;&gt;groupBox3.Name" xml:space="preserve">
-    <value>groupBox3</value>
-  </data>
-  <data name="&gt;&gt;groupBox3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox3.Parent" xml:space="preserve">
-    <value>panel2</value>
-  </data>
-  <data name="&gt;&gt;groupBox3.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
     <value>groupBox2</value>
@@ -3802,18 +3334,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="panel2.TabIndex" type="System.Int32, mscorlib">
     <value>43</value>
   </data>
-  <data name="&gt;&gt;panel2.Name" xml:space="preserve">
-    <value>panel2</value>
-  </data>
-  <data name="&gt;&gt;panel2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panel2.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;panel2.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="&gt;&gt;label6.Name" xml:space="preserve">
     <value>label6</value>
   </data>
@@ -3826,30 +3346,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;buttonEdit.Name" xml:space="preserve">
-    <value>buttonEdit</value>
-  </data>
-  <data name="&gt;&gt;buttonEdit.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;buttonEdit.Parent" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="&gt;&gt;buttonEdit.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;buttonCreate.Name" xml:space="preserve">
-    <value>buttonCreate</value>
-  </data>
-  <data name="&gt;&gt;buttonCreate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;buttonCreate.Parent" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="&gt;&gt;buttonCreate.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
   <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 6</value>
   </data>
@@ -3858,18 +3354,6 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   </data>
   <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>55</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
-    <value>panel2</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -3888,17 +3372,5 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   </data>
   <data name="label6.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
-  </data>
-  <data name="&gt;&gt;label6.Name" xml:space="preserve">
-    <value>label6</value>
-  </data>
-  <data name="&gt;&gt;label6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label6.Parent" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
 </root>
