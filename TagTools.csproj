@@ -454,6 +454,18 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\Resources\uncheck-mark-gray.png" />
+    <None Include="Properties\Resources\check-mark.png" />
+    <None Include="Properties\Resources\check-mark-light.png" />
+    <None Include="Properties\Resources\clear-button-light.png" />
+    <None Include="Properties\Resources\auto-applied-presets-light.png" />
+    <None Include="Properties\Resources\user-presets-light.png" />
+    <None Include="Properties\Resources\uncheck-all-preset-filters-light.png" />
+    <None Include="Properties\Resources\predefined-presets-light.png" />
+    <None Include="Properties\Resources\playlist-presets-light.png" />
+    <None Include="Properties\Resources\hotkey-presets-light.png" />
+    <None Include="Properties\Resources\function-id-presets-light.png" />
+    <None Include="Properties\Resources\customized-presets-light.png" />
     <None Include="Properties\Resources\clear-button.png" />
     <None Include="Properties\Resources\auto-applied-presets.png" />
     <None Include="Properties\Resources\hotkey-presets.png" />

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MusicBeePlugin.Properties;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text.RegularExpressions;
@@ -675,6 +676,12 @@ namespace MusicBeePlugin
         {
             base.initializeForm();
 
+            float avgForeBrightness = (ForeColor.R + ForeColor.G + ForeColor.B) / 3.0f;
+            if (avgForeBrightness > 0.5f)
+            {
+                clearIdButton.Image = Resources.clear_button_light;
+            }
+
 
             float highlightWeight = 0.8f;//***
             Color highlightColor = SystemColors.Highlight;
@@ -717,7 +724,6 @@ namespace MusicBeePlugin
             previewTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 
             presetsBox_SelectedIndexChanged(null, null);
-            fieldComboBox_SelectedIndexChanged(null, null);
 
             recalculateOnNumberOfTagsChangesCheckBox.Checked = Plugin.SavedSettings.recalculateOnNumberOfTagsChanges;
             numberOfTagsToRecalculateNumericUpDown.Value = Plugin.SavedSettings.numberOfTagsToRecalculate;
@@ -1515,6 +1521,10 @@ namespace MusicBeePlugin
                 buttonUpdatePreset.Enabled = false;
                 buttonDeletePreset.Enabled = false;
 
+                idTextBox.Enabled = false;
+
+                fieldComboBox_SelectedIndexChanged(null, null);
+
                 return;
             }
             else
@@ -1622,6 +1632,12 @@ namespace MusicBeePlugin
                 destinationTagList.SelectedValue = savedDestinationTagList[0];
                 idTextBox.Text = savedIds[0];
             }
+            else
+            {
+                idTextBox.Enabled = false;
+            }
+
+            fieldComboBox_SelectedIndexChanged(null, null);
 
             labelNotSaved.Visible = false;
         }
@@ -1632,7 +1648,6 @@ namespace MusicBeePlugin
             {
                 destinationTagList.Enabled = false;
                 idTextBox.Enabled = false;
-                buttonIdOK.Enabled = false;
                 clearIdButton.Enabled = false;
                 return;
             }
@@ -1640,7 +1655,6 @@ namespace MusicBeePlugin
             {
                 destinationTagList.Enabled = true;
                 idTextBox.Enabled = true;
-                buttonIdOK.Enabled = true;
                 clearIdButton.Enabled = true;
             }
 
@@ -1748,7 +1762,7 @@ namespace MusicBeePlugin
             labelNotSaved.Visible = true;
         }
 
-        private void idTextBox_Leave(object sender, EventArgs e)
+        private void idTextBox_Leave(object sender, EventArgs e)//*****
         {
             if (presetsBox.SelectedIndex == -1)
                 return;

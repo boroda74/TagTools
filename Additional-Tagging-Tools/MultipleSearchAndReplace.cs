@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MusicBeePlugin.Properties;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
@@ -50,6 +51,14 @@ namespace MusicBeePlugin
         protected new void initializeForm()
         {
             base.initializeForm();
+
+            float avgForeBrightness = (ForeColor.R + ForeColor.G + ForeColor.B) / 3.0f;
+            if (avgForeBrightness > 0.5f)
+            {
+                autoApplyCheckBox.Image = Resources.auto_applied_presets_light;
+                buttonDeleteSaved.Image = Resources.clear_button_light;
+            }
+
 
             Plugin.FillList(destinationTagList.Items, false, false, false);
             destinationTagList.Text = Plugin.SavedSettings.copyDestinationTagName;

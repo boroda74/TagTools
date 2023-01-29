@@ -54,8 +54,8 @@ namespace MusicBeePlugin
         private string assignHotkeyCheckBoxText;
         private bool processPresetCheckBoxCheckedEvent = true;
 
-        public const string checkedStateText = "";
-        public const string uncheckedStateText = "";
+        public Image checkedState;
+        public Image uncheckedState;
 
         private string newValueText;
 
@@ -66,7 +66,6 @@ namespace MusicBeePlugin
         private string clickHereText;
         private string nowTickedText;
 
-        private bool customizationsMade = false;
         private bool presetsChanged = false;
         private string buttonCloseToolTip;
 
@@ -500,7 +499,7 @@ namespace MusicBeePlugin
                 {
                     if (customized || areFineCustomizationsMade(referencePreset))
                     {
-                        form.customizationsMade = true;
+                        form.presetsChanged = true;
                         form.setCheckedState(form.customizedPresetLabel, customized);
                         form.buttonClose.Image = Resources.UnsavedChanges_14;
                         form.toolTip1.SetToolTip(form.buttonClose, form.buttonCloseToolTip);
@@ -1398,6 +1397,34 @@ namespace MusicBeePlugin
         protected new void initializeForm()
         {
             base.initializeForm();
+
+
+            float avgForeButtonBrightness = (clearSearchButton.ForeColor.R + clearSearchButton.ForeColor.G + clearSearchButton.ForeColor.B) / 3.0f;//****
+            if (avgForeButtonBrightness > 0.5f)
+            {
+                clearSearchButton.Image = Resources.clear_button_light;
+            }
+
+            float avgForeBrightness = (ForeColor.R + ForeColor.G + ForeColor.B) / 3.0f;
+            if (avgForeBrightness > 0.5f)
+            {
+                tickedOnlyCheckBox.Image = Resources.auto_applied_presets_light;
+                predefinedPresetsCheckBox.Image = Resources.playlist_presets_light;
+                customizedPresetsCheckBox.Image = Resources.customized_presets_light;
+                userPresetsCheckBox.Image = Resources.user_presets_light;
+                playlistCheckBox.Image = Resources.playlist_presets_light;
+                idCheckBox.Image = Resources.function_id_presets_light;
+                hotkeyCheckBox.Image = Resources.hotkey_presets_light;
+                untickAllCheckBox.Image = Resources.uncheck_all_preset_filters_light;//****
+
+                checkedState = Resources.check_mark_light;
+                uncheckedState = Resources.uncheck_mark_gray;
+            }
+            else
+            {
+                checkedState = Resources.check_mark;
+                uncheckedState = Resources.uncheck_mark_gray;
+            }
 
 
             Color highlightColor = SystemColors.Highlight;
@@ -2501,6 +2528,10 @@ namespace MusicBeePlugin
 
 
             TagToolsPlugin.SaveSettings();
+
+            presetsChanged = false;
+            buttonClose.Image = Resources.Empty_14;
+            toolTip1.SetToolTip(buttonClose, "");
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
@@ -2570,6 +2601,10 @@ namespace MusicBeePlugin
             presetsWorkingCopy.Remove(presetToRemove.guid);
             if (presetList.Items.Contains(presetToRemove))
                 presetList.Items.Remove(presetToRemove);
+
+            presetsChanged = true;
+            buttonClose.Image = Resources.UnsavedChanges_14;
+            toolTip1.SetToolTip(buttonClose, buttonCloseToolTip);
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)
@@ -2879,13 +2914,13 @@ namespace MusicBeePlugin
         {
             if (flag)
             {
-                label.Text = checkedStateText;
-                label.ForeColor = SystemColors.ControlText;
+                label.Image = checkedState;
+                //label.ForeColor = SystemColors.ControlText;
             }
             else
             {
-                label.Text = uncheckedStateText;
-                label.ForeColor = SystemColors.GrayText;
+                label.Image = uncheckedState;
+                //label.ForeColor = SystemColors.GrayText;
             }
 
             presetList.Refresh();
@@ -3243,6 +3278,13 @@ namespace MusicBeePlugin
             if (numberOfErrors > 0)
                 message += AddLeadingSpaces(numberOfErrors, 4, 1) + GetPluralForm(Plugin.MsgPresetsFailedToImport, numberOfErrors);
 
+            if (numberOfImportedPresets + numberOfImportedAsCopyPresets > 0)
+            {
+                presetsChanged = true;
+                buttonClose.Image = Resources.UnsavedChanges_14;
+                toolTip1.SetToolTip(buttonClose, buttonCloseToolTip);
+            }
+
             MessageBox.Show(this, message, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -3539,7 +3581,15 @@ namespace MusicBeePlugin
                 message += AddLeadingSpaces(numberOfErrors, 4, 1) + GetPluralForm(Plugin.MsgPresetsFailedToUpdate, numberOfErrors);
 
             if (message == "")
+            {
                 message = Plugin.MsgPresetsNotFound;
+            }
+            else
+            {
+                presetsChanged = true;
+                buttonClose.Image = Resources.UnsavedChanges_14;
+                toolTip1.SetToolTip(buttonClose, buttonCloseToolTip);
+            }
 
 
             MessageBox.Show(this, message, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -4364,7 +4414,7 @@ namespace MusicBeePlugin
 
         private void AdvancedSearchAndReplaceCommand_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (customizationsMade || presetsChanged)
+            if (presetsChanged)
             {
                 if (MessageBox.Show(this, Plugin.MsgDoYouWantToCloseWindowAndLoseAllChanges, 
                     "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) 

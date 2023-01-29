@@ -127,11 +127,11 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>814, 535</value>
   </data>
-  <data name="buttonIdOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>758, 209</value>
-  </data>
   <data name="clearIdButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>786, 209</value>
+    <value>786, 208</value>
+  </data>
+  <data name="clearIdButton.ToolTip" xml:space="preserve">
+    <value>Удалить назначение id-а функции виртуальных тегов агрегатной функции</value>
   </data>
   <data name="idTextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>636, 209</value>
@@ -149,7 +149,7 @@
     <value>Назначить id функции вирт. тегов:</value>
   </data>
   <data name="labelNotSaved.Size" type="System.Drawing.Size, System.Drawing">
-    <value>129, 13</value>
+    <value>127, 13</value>
   </data>
   <data name="labelNotSaved.Text" xml:space="preserve">
     <value>Пресет не сохранен</value>
@@ -918,11 +918,5 @@
   </data>
   <data name="sourceTagList.Size" type="System.Drawing.Size, System.Drawing">
     <value>200, 267</value>
-  </data>
-  <data name="buttonIdOK.ToolTip" xml:space="preserve">
-    <value>Назначить введенный id функции виртуальных тегов агрегатной функции</value>
-  </data>
-  <data name="clearIdButton.ToolTip" xml:space="preserve">
-    <value>Удалить назначение id-а функции виртуальных тегов агрегатной функции</value>
   </data>
 </root>

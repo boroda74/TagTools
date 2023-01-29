@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MusicBeePlugin.Properties;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -49,6 +50,12 @@ namespace MusicBeePlugin
         protected new void initializeForm()
         {
             base.initializeForm();
+
+            float avgForeBrightness = (ForeColor.R + ForeColor.G + ForeColor.B) / 3.0f;
+            if (avgForeBrightness > 0.5f)
+            {
+                removeExceptionButton.Image = Resources.clear_button_light;
+            }
 
             Plugin.FillList(sourceTagList.Items);
             sourceTagList.Text = Plugin.SavedSettings.changeCaseSourceTagName;
