@@ -163,7 +163,7 @@
     <value>0</value>
   </data>
   <data name="buttonDeleteSaved.Location" type="System.Drawing.Point, System.Drawing">
-    <value>857, 32</value>
+    <value>857, 33</value>
   </data>
   <data name="buttonDeleteSaved.ToolTip" xml:space="preserve">
     <value>Удалить пресет дополнительного поиска и замены</value>
@@ -296,7 +296,7 @@
     <value>0</value>
   </data>
   <data name="buttonDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>34, 32</value>
+    <value>34, 33</value>
   </data>
   <data name="buttonDown.ToolTip" xml:space="preserve">
     <value />
@@ -308,7 +308,7 @@
     <value>0</value>
   </data>
   <data name="buttonUp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 32</value>
+    <value>10, 33</value>
   </data>
   <data name="buttonUp.ToolTip" xml:space="preserve">
     <value />
@@ -320,7 +320,7 @@
     <value>0</value>
   </data>
   <data name="buttonDelete.Location" type="System.Drawing.Point, System.Drawing">
-    <value>141, 32</value>
+    <value>141, 33</value>
   </data>
   <data name="buttonDelete.Text" xml:space="preserve">
     <value>Удалить</value>
@@ -335,7 +335,7 @@
     <value>0</value>
   </data>
   <data name="buttonAdd.Location" type="System.Drawing.Point, System.Drawing">
-    <value>60, 32</value>
+    <value>60, 33</value>
   </data>
   <data name="buttonAdd.Text" xml:space="preserve">
     <value>Добавить</value>
@@ -416,7 +416,7 @@
     <value>0</value>
   </data>
   <data name="buttonSave.Location" type="System.Drawing.Point, System.Drawing">
-    <value>562, 32</value>
+    <value>562, 33</value>
   </data>
   <data name="buttonSave.Text" xml:space="preserve">
     <value>Сохранить</value>

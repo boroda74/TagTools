@@ -690,10 +690,10 @@ namespace MusicBeePlugin
         #region Common methods/functions
         public static Color GetHighlightColor(Color highlightColor, Color backColor, float highlightWeight)
         {
-            float controlBackAvg = (backColor.R + backColor.G + backColor.B) / 3.0f;
-            float highlightAvg = (highlightColor.R + highlightColor.G + highlightColor.B) / 3.0f;
+            float controlBackAvg = (backColor.R + backColor.G + backColor.B) / 3.0f / 256;
+            float highlightAvg = (highlightColor.R + highlightColor.G + highlightColor.B) / 3.0f / 256;
 
-            float highlightBrightness = highlightWeight * highlightAvg / 256 + (1 - highlightWeight) * (256 - controlBackAvg) / 256;
+            float highlightBrightness = highlightWeight * highlightAvg + (1 - highlightWeight) * (1 - controlBackAvg);
 
             float highlightR = highlightColor.R * highlightBrightness;
             float highlightG = highlightColor.G * highlightBrightness;

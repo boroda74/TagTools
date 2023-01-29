@@ -52,10 +52,15 @@ namespace MusicBeePlugin
         {
             base.initializeForm();
 
-            float avgForeBrightness = (ForeColor.R + ForeColor.G + ForeColor.B) / 3.0f;
+            float avgForeBrightness = (ForeColor.R + ForeColor.G + ForeColor.B) / 3.0f / 256;
             if (avgForeBrightness > 0.5f)
             {
                 autoApplyCheckBox.Image = Resources.auto_applied_presets_light;
+            }
+
+            float avgForeButtonBrightness = (buttonDeleteSaved.ForeColor.R + buttonDeleteSaved.ForeColor.G + buttonDeleteSaved.ForeColor.B) / 3.0f / 256;
+            if (avgForeButtonBrightness > 0.5f)
+            {
                 buttonDeleteSaved.Image = Resources.clear_button_light;
             }
 

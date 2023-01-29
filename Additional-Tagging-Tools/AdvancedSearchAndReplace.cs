@@ -1399,13 +1399,14 @@ namespace MusicBeePlugin
             base.initializeForm();
 
 
-            float avgForeButtonBrightness = (clearSearchButton.ForeColor.R + clearSearchButton.ForeColor.G + clearSearchButton.ForeColor.B) / 3.0f;//****
+            float avgForeButtonBrightness = (clearSearchButton.ForeColor.R + clearSearchButton.ForeColor.G + clearSearchButton.ForeColor.B) / 3.0f / 256;//****
             if (avgForeButtonBrightness > 0.5f)
             {
+                clearIdButton.Image = Resources.clear_button_light;
                 clearSearchButton.Image = Resources.clear_button_light;
             }
 
-            float avgForeBrightness = (ForeColor.R + ForeColor.G + ForeColor.B) / 3.0f;
+            float avgForeBrightness = (ForeColor.R + ForeColor.G + ForeColor.B) / 3.0f / 256;
             if (avgForeBrightness > 0.5f)
             {
                 tickedOnlyCheckBox.Image = Resources.auto_applied_presets_light;

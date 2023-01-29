@@ -163,20 +163,8 @@
   <data name="user_presets" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\user-presets.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="clear_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\clear-button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="auto_applied_presets_light" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\auto-applied-presets-light.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="check_mark" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\check-mark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="check_mark_light" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\check-mark-light.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="clear_button_light" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\clear-button-light.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="customized_presets_light" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\customized-presets-light.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -196,10 +184,22 @@
   <data name="uncheck_all_preset_filters_light" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\uncheck-all-preset-filters-light.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="user_presets_light" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\user-presets-light.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="check_mark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\check-mark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="check_mark_light" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\check-mark-light.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="uncheck_mark_gray" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\uncheck-mark-gray.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="user_presets_light" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\user-presets-light.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="clear_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\clear-button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="clear_button_light" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\clear-button-light.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

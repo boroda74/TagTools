@@ -334,7 +334,7 @@
     <value>0</value>
   </data>
   <data name="customizedPresetLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>662, 213</value>
+    <value>658, 214</value>
   </data>
   <data name="customizedPresetLabel.ToolTip" xml:space="preserve">
     <value />
@@ -349,7 +349,7 @@
     <value>0</value>
   </data>
   <data name="userPresetLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>853, 213</value>
+    <value>849, 214</value>
   </data>
   <data name="userPresetLabel.ToolTip" xml:space="preserve">
     <value />
@@ -436,7 +436,7 @@
     <value>0</value>
   </data>
   <data name="clearIdButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>969, 185</value>
+    <value>967, 185</value>
   </data>
   <data name="clearIdButton.ToolTip" xml:space="preserve">
     <value>Удалить назначение id-а функции виртуальных тегов пресету</value>
@@ -515,7 +515,7 @@
     <value>0</value>
   </data>
   <data name="clearSearchButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>474, 32</value>
+    <value>470, 33</value>
   </data>
   <data name="clearSearchButton.ToolTip" xml:space="preserve">
     <value>Очистить текст поиска</value>

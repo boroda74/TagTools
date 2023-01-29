@@ -51,8 +51,8 @@ namespace MusicBeePlugin
         {
             base.initializeForm();
 
-            float avgForeBrightness = (ForeColor.R + ForeColor.G + ForeColor.B) / 3.0f;
-            if (avgForeBrightness > 0.5f)
+            float avgForeButtonBrightness = (removeExceptionButton.ForeColor.R + removeExceptionButton.ForeColor.G + removeExceptionButton.ForeColor.B) / 3.0f / 256;
+            if (avgForeButtonBrightness > 0.5f)
             {
                 removeExceptionButton.Image = Resources.clear_button_light;
             }

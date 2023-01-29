@@ -151,7 +151,7 @@
     <value>0</value>
   </data>
   <data name="buttonASRWordSplitters.Location" type="System.Drawing.Point, System.Drawing">
-    <value>754, 80</value>
+    <value>754, 82</value>
   </data>
   <data name="buttonASRWordSplitters.Text" xml:space="preserve">
     <value>ДПЗ</value>
@@ -171,7 +171,7 @@
     <value>0</value>
   </data>
   <data name="buttonASRExceptWordsAfterSymbols.Location" type="System.Drawing.Point, System.Drawing">
-    <value>754, 57</value>
+    <value>754, 58</value>
   </data>
   <data name="buttonASRExceptWordsAfterSymbols.Text" xml:space="preserve">
     <value>ДПЗ</value>
