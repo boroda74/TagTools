@@ -30,11 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdvancedSearchAndReplaceCommand));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.buttonDeleteAll = new System.Windows.Forms.Button();
             this.buttonImportNew = new System.Windows.Forms.Button();
@@ -54,6 +54,14 @@
             this.clearSearchButton = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.buttonClose = new System.Windows.Forms.Button();
+            this.untickAllCheckBox = new System.Windows.Forms.CheckBox();
+            this.customizedPresetsCheckBox = new System.Windows.Forms.CheckBox();
+            this.predefinedPresetsCheckBox = new System.Windows.Forms.CheckBox();
+            this.userPresetsCheckBox = new System.Windows.Forms.CheckBox();
+            this.hotkeyCheckBox = new System.Windows.Forms.CheckBox();
+            this.idCheckBox = new System.Windows.Forms.CheckBox();
+            this.playlistCheckBox = new System.Windows.Forms.CheckBox();
+            this.tickedOnlyCheckBox = new System.Windows.Forms.CheckBox();
             this.presetList = new System.Windows.Forms.CheckedListBox();
             this.previewTable = new System.Windows.Forms.DataGridView();
             this.File = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -73,18 +81,10 @@
             this.buttonCreate = new System.Windows.Forms.Button();
             this.buttonEdit = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.untickAllCheckBox = new System.Windows.Forms.CheckBox();
-            this.customizedPresetsCheckBox = new System.Windows.Forms.CheckBox();
-            this.predefinedPresetsCheckBox = new System.Windows.Forms.CheckBox();
-            this.userPresetsCheckBox = new System.Windows.Forms.CheckBox();
-            this.hotkeyCheckBox = new System.Windows.Forms.CheckBox();
-            this.idCheckBox = new System.Windows.Forms.CheckBox();
-            this.playlistCheckBox = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.customizedPresetLabel = new System.Windows.Forms.Label();
             this.userPresetLabel = new System.Windows.Forms.Label();
-            this.tickedOnlyCheckBox = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -285,6 +285,87 @@
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
+            // untickAllCheckBox
+            // 
+            resources.ApplyResources(this.untickAllCheckBox, "untickAllCheckBox");
+            this.untickAllCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.untickAllCheckBox.Image = global::MusicBeePlugin.Properties.Resources.uncheck_all_preset_filters;
+            this.untickAllCheckBox.Name = "untickAllCheckBox";
+            this.untickAllCheckBox.ThreeState = true;
+            this.toolTip1.SetToolTip(this.untickAllCheckBox, resources.GetString("untickAllCheckBox.ToolTip"));
+            this.untickAllCheckBox.UseVisualStyleBackColor = false;
+            this.untickAllCheckBox.CheckedChanged += new System.EventHandler(this.untickAllCheckBox_CheckedChanged);
+            // 
+            // customizedPresetsCheckBox
+            // 
+            resources.ApplyResources(this.customizedPresetsCheckBox, "customizedPresetsCheckBox");
+            this.customizedPresetsCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.customizedPresetsCheckBox.Image = global::MusicBeePlugin.Properties.Resources.customized_presets;
+            this.customizedPresetsCheckBox.Name = "customizedPresetsCheckBox";
+            this.toolTip1.SetToolTip(this.customizedPresetsCheckBox, resources.GetString("customizedPresetsCheckBox.ToolTip"));
+            this.customizedPresetsCheckBox.UseVisualStyleBackColor = false;
+            this.customizedPresetsCheckBox.CheckedChanged += new System.EventHandler(this.customizedPresetsCheckBox_CheckedChanged);
+            // 
+            // predefinedPresetsCheckBox
+            // 
+            resources.ApplyResources(this.predefinedPresetsCheckBox, "predefinedPresetsCheckBox");
+            this.predefinedPresetsCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.predefinedPresetsCheckBox.Image = global::MusicBeePlugin.Properties.Resources.predefined_presets;
+            this.predefinedPresetsCheckBox.Name = "predefinedPresetsCheckBox";
+            this.toolTip1.SetToolTip(this.predefinedPresetsCheckBox, resources.GetString("predefinedPresetsCheckBox.ToolTip"));
+            this.predefinedPresetsCheckBox.UseVisualStyleBackColor = false;
+            this.predefinedPresetsCheckBox.CheckedChanged += new System.EventHandler(this.predefinedPresetsCheckBox_CheckedChanged);
+            // 
+            // userPresetsCheckBox
+            // 
+            resources.ApplyResources(this.userPresetsCheckBox, "userPresetsCheckBox");
+            this.userPresetsCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.userPresetsCheckBox.Image = global::MusicBeePlugin.Properties.Resources.user_presets;
+            this.userPresetsCheckBox.Name = "userPresetsCheckBox";
+            this.toolTip1.SetToolTip(this.userPresetsCheckBox, resources.GetString("userPresetsCheckBox.ToolTip"));
+            this.userPresetsCheckBox.UseVisualStyleBackColor = false;
+            this.userPresetsCheckBox.CheckedChanged += new System.EventHandler(this.userPresetsCheckBox_CheckedChanged);
+            // 
+            // hotkeyCheckBox
+            // 
+            resources.ApplyResources(this.hotkeyCheckBox, "hotkeyCheckBox");
+            this.hotkeyCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.hotkeyCheckBox.Image = global::MusicBeePlugin.Properties.Resources.hotkey_presets;
+            this.hotkeyCheckBox.Name = "hotkeyCheckBox";
+            this.toolTip1.SetToolTip(this.hotkeyCheckBox, resources.GetString("hotkeyCheckBox.ToolTip"));
+            this.hotkeyCheckBox.UseVisualStyleBackColor = false;
+            this.hotkeyCheckBox.CheckedChanged += new System.EventHandler(this.hotkeyCheckBox_CheckedChanged);
+            // 
+            // idCheckBox
+            // 
+            resources.ApplyResources(this.idCheckBox, "idCheckBox");
+            this.idCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.idCheckBox.Image = global::MusicBeePlugin.Properties.Resources.function_id_presets;
+            this.idCheckBox.Name = "idCheckBox";
+            this.toolTip1.SetToolTip(this.idCheckBox, resources.GetString("idCheckBox.ToolTip"));
+            this.idCheckBox.UseVisualStyleBackColor = false;
+            this.idCheckBox.CheckedChanged += new System.EventHandler(this.idCheckBox_CheckedChanged);
+            // 
+            // playlistCheckBox
+            // 
+            resources.ApplyResources(this.playlistCheckBox, "playlistCheckBox");
+            this.playlistCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.playlistCheckBox.Image = global::MusicBeePlugin.Properties.Resources.playlist_presets;
+            this.playlistCheckBox.Name = "playlistCheckBox";
+            this.toolTip1.SetToolTip(this.playlistCheckBox, resources.GetString("playlistCheckBox.ToolTip"));
+            this.playlistCheckBox.UseVisualStyleBackColor = false;
+            this.playlistCheckBox.CheckedChanged += new System.EventHandler(this.playlistCheckBox_CheckedChanged);
+            // 
+            // tickedOnlyCheckBox
+            // 
+            resources.ApplyResources(this.tickedOnlyCheckBox, "tickedOnlyCheckBox");
+            this.tickedOnlyCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.tickedOnlyCheckBox.Image = global::MusicBeePlugin.Properties.Resources.auto_applied_presets;
+            this.tickedOnlyCheckBox.Name = "tickedOnlyCheckBox";
+            this.toolTip1.SetToolTip(this.tickedOnlyCheckBox, resources.GetString("tickedOnlyCheckBox.ToolTip"));
+            this.tickedOnlyCheckBox.UseVisualStyleBackColor = false;
+            this.tickedOnlyCheckBox.CheckedChanged += new System.EventHandler(this.tickedOnlyCheckBox_CheckedChanged);
+            // 
             // presetList
             // 
             resources.ApplyResources(this.presetList, "presetList");
@@ -344,9 +425,9 @@
             // 
             // NewTag1
             // 
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.NewTag1.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.NewTag1.DefaultCellStyle = dataGridViewCellStyle6;
             this.NewTag1.FillWeight = 25F;
             resources.ApplyResources(this.NewTag1, "NewTag1");
             this.NewTag1.Name = "NewTag1";
@@ -359,9 +440,9 @@
             // 
             // NewTag2
             // 
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.NewTag2.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.NewTag2.DefaultCellStyle = dataGridViewCellStyle7;
             this.NewTag2.FillWeight = 25F;
             resources.ApplyResources(this.NewTag2, "NewTag2");
             this.NewTag2.Name = "NewTag2";
@@ -374,9 +455,9 @@
             // 
             // NewTag3
             // 
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.NewTag3.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.NewTag3.DefaultCellStyle = dataGridViewCellStyle8;
             this.NewTag3.FillWeight = 25F;
             resources.ApplyResources(this.NewTag3, "NewTag3");
             this.NewTag3.Name = "NewTag3";
@@ -389,9 +470,9 @@
             // 
             // NewTag4
             // 
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.NewTag4.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.NewTag4.DefaultCellStyle = dataGridViewCellStyle9;
             this.NewTag4.FillWeight = 25F;
             resources.ApplyResources(this.NewTag4, "NewTag4");
             this.NewTag4.Name = "NewTag4";
@@ -404,9 +485,9 @@
             // 
             // NewTag5
             // 
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.NewTag5.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.NewTag5.DefaultCellStyle = dataGridViewCellStyle10;
             this.NewTag5.FillWeight = 25F;
             resources.ApplyResources(this.NewTag5, "NewTag5");
             this.NewTag5.Name = "NewTag5";
@@ -494,77 +575,6 @@
             this.panel1.Controls.Add(this.label5);
             this.panel1.Name = "panel1";
             // 
-            // untickAllCheckBox
-            // 
-            resources.ApplyResources(this.untickAllCheckBox, "untickAllCheckBox");
-            this.untickAllCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.untickAllCheckBox.Image = global::MusicBeePlugin.Properties.Resources.uncheck_all_preset_filters;
-            this.untickAllCheckBox.Name = "untickAllCheckBox";
-            this.untickAllCheckBox.ThreeState = true;
-            this.toolTip1.SetToolTip(this.untickAllCheckBox, resources.GetString("untickAllCheckBox.ToolTip"));
-            this.untickAllCheckBox.UseVisualStyleBackColor = false;
-            this.untickAllCheckBox.CheckedChanged += new System.EventHandler(this.untickAllCheckBox_CheckedChanged);
-            // 
-            // customizedPresetsCheckBox
-            // 
-            resources.ApplyResources(this.customizedPresetsCheckBox, "customizedPresetsCheckBox");
-            this.customizedPresetsCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.customizedPresetsCheckBox.Image = global::MusicBeePlugin.Properties.Resources.customized_presets;
-            this.customizedPresetsCheckBox.Name = "customizedPresetsCheckBox";
-            this.toolTip1.SetToolTip(this.customizedPresetsCheckBox, resources.GetString("customizedPresetsCheckBox.ToolTip"));
-            this.customizedPresetsCheckBox.UseVisualStyleBackColor = false;
-            this.customizedPresetsCheckBox.CheckedChanged += new System.EventHandler(this.customizedPresetsCheckBox_CheckedChanged);
-            // 
-            // predefinedPresetsCheckBox
-            // 
-            resources.ApplyResources(this.predefinedPresetsCheckBox, "predefinedPresetsCheckBox");
-            this.predefinedPresetsCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.predefinedPresetsCheckBox.Image = global::MusicBeePlugin.Properties.Resources.predefined_presets;
-            this.predefinedPresetsCheckBox.Name = "predefinedPresetsCheckBox";
-            this.toolTip1.SetToolTip(this.predefinedPresetsCheckBox, resources.GetString("predefinedPresetsCheckBox.ToolTip"));
-            this.predefinedPresetsCheckBox.UseVisualStyleBackColor = false;
-            this.predefinedPresetsCheckBox.CheckedChanged += new System.EventHandler(this.predefinedPresetsCheckBox_CheckedChanged);
-            // 
-            // userPresetsCheckBox
-            // 
-            resources.ApplyResources(this.userPresetsCheckBox, "userPresetsCheckBox");
-            this.userPresetsCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.userPresetsCheckBox.Image = global::MusicBeePlugin.Properties.Resources.user_presets;
-            this.userPresetsCheckBox.Name = "userPresetsCheckBox";
-            this.toolTip1.SetToolTip(this.userPresetsCheckBox, resources.GetString("userPresetsCheckBox.ToolTip"));
-            this.userPresetsCheckBox.UseVisualStyleBackColor = false;
-            this.userPresetsCheckBox.CheckedChanged += new System.EventHandler(this.userPresetsCheckBox_CheckedChanged);
-            // 
-            // hotkeyCheckBox
-            // 
-            resources.ApplyResources(this.hotkeyCheckBox, "hotkeyCheckBox");
-            this.hotkeyCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.hotkeyCheckBox.Image = global::MusicBeePlugin.Properties.Resources.hotkey_presets;
-            this.hotkeyCheckBox.Name = "hotkeyCheckBox";
-            this.toolTip1.SetToolTip(this.hotkeyCheckBox, resources.GetString("hotkeyCheckBox.ToolTip"));
-            this.hotkeyCheckBox.UseVisualStyleBackColor = false;
-            this.hotkeyCheckBox.CheckedChanged += new System.EventHandler(this.hotkeyCheckBox_CheckedChanged);
-            // 
-            // idCheckBox
-            // 
-            resources.ApplyResources(this.idCheckBox, "idCheckBox");
-            this.idCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.idCheckBox.Image = global::MusicBeePlugin.Properties.Resources.function_id_presets;
-            this.idCheckBox.Name = "idCheckBox";
-            this.toolTip1.SetToolTip(this.idCheckBox, resources.GetString("idCheckBox.ToolTip"));
-            this.idCheckBox.UseVisualStyleBackColor = false;
-            this.idCheckBox.CheckedChanged += new System.EventHandler(this.idCheckBox_CheckedChanged);
-            // 
-            // playlistCheckBox
-            // 
-            resources.ApplyResources(this.playlistCheckBox, "playlistCheckBox");
-            this.playlistCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.playlistCheckBox.Image = global::MusicBeePlugin.Properties.Resources.playlist_presets;
-            this.playlistCheckBox.Name = "playlistCheckBox";
-            this.toolTip1.SetToolTip(this.playlistCheckBox, resources.GetString("playlistCheckBox.ToolTip"));
-            this.playlistCheckBox.UseVisualStyleBackColor = false;
-            this.playlistCheckBox.CheckedChanged += new System.EventHandler(this.playlistCheckBox_CheckedChanged);
-            // 
             // label4
             // 
             resources.ApplyResources(this.label4, "label4");
@@ -584,16 +594,6 @@
             // 
             resources.ApplyResources(this.userPresetLabel, "userPresetLabel");
             this.userPresetLabel.Name = "userPresetLabel";
-            // 
-            // tickedOnlyCheckBox
-            // 
-            resources.ApplyResources(this.tickedOnlyCheckBox, "tickedOnlyCheckBox");
-            this.tickedOnlyCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.tickedOnlyCheckBox.Image = global::MusicBeePlugin.Properties.Resources.auto_applied_presets;
-            this.tickedOnlyCheckBox.Name = "tickedOnlyCheckBox";
-            this.toolTip1.SetToolTip(this.tickedOnlyCheckBox, resources.GetString("tickedOnlyCheckBox.ToolTip"));
-            this.tickedOnlyCheckBox.UseVisualStyleBackColor = false;
-            this.tickedOnlyCheckBox.CheckedChanged += new System.EventHandler(this.tickedOnlyCheckBox_CheckedChanged);
             // 
             // label1
             // 
