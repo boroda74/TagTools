@@ -1519,7 +1519,7 @@ namespace MusicBeePlugin
 
                 idTextBox.Enabled = false;
 
-                fieldComboBox_SelectedIndexChanged(null, null);
+                sourceFieldComboBox_SelectedIndexChanged(null, null);
 
                 return;
             }
@@ -1633,18 +1633,22 @@ namespace MusicBeePlugin
                 idTextBox.Enabled = false;
             }
 
-            fieldComboBox_SelectedIndexChanged(null, null);
+            sourceFieldComboBox_SelectedIndexChanged(null, null);
 
             labelNotSaved.Visible = false;
         }
 
-        private void fieldComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void sourceFieldComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (sourceFieldComboBox.SelectedIndex == -1)
             {
                 destinationTagList.Enabled = false;
                 idTextBox.Enabled = false;
                 clearIdButton.Enabled = false;
+
+                destinationTagList.SelectedIndex = -1;
+                idTextBox.Text = "";
+
                 return;
             }
             else

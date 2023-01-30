@@ -485,7 +485,7 @@
             this.dirtyErrorProvider.SetError(this.autoApplyPictureBox, resources.GetString("autoApplyPictureBox.Error"));
             this.dirtyErrorProvider.SetIconAlignment(this.autoApplyPictureBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("autoApplyPictureBox.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.autoApplyPictureBox, ((int)(resources.GetObject("autoApplyPictureBox.IconPadding"))));
-            this.autoApplyPictureBox.Image = global::MusicBeePlugin.Properties.Resources.auto_applied_presets_centered;
+            this.autoApplyPictureBox.Image = global::MusicBeePlugin.Properties.Resources.auto_applied_presets;
             this.autoApplyPictureBox.Name = "autoApplyPictureBox";
             this.autoApplyPictureBox.TabStop = false;
             this.toolTip1.SetToolTip(this.autoApplyPictureBox, resources.GetString("autoApplyPictureBox.ToolTip"));

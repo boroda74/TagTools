@@ -83,10 +83,10 @@ namespace MusicBeePlugin
             this.buttonCreate = new System.Windows.Forms.Button();
             this.buttonEdit = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.userPresetPictureBox = new System.Windows.Forms.PictureBox();
+            this.customizedPresetPictureBox = new System.Windows.Forms.PictureBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.customizedPresetLabel = new System.Windows.Forms.Label();
-            this.userPresetLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -132,6 +132,8 @@ namespace MusicBeePlugin
             ((System.ComponentModel.ISupportInitialize)(this.functionIdPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.userPresetPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.customizedPresetPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -151,6 +153,14 @@ namespace MusicBeePlugin
             this.preserveValuesTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
 
             InterpolationMode defaultInterpolationMode = InterpolationMode.HighQualityBicubic;
+
+
+            this.customizedPresetPictureBox = new InterpolatedBox();
+            ((InterpolatedBox)customizedPresetPictureBox).Interpolation = defaultInterpolationMode;
+
+            this.userPresetPictureBox = new InterpolatedBox();
+            ((InterpolatedBox)userPresetPictureBox).Interpolation = defaultInterpolationMode;
+
 
             this.tickedOnlyPictureBox = new InterpolatedBox();
             ((InterpolatedBox)tickedOnlyPictureBox).Interpolation = defaultInterpolationMode;
@@ -374,7 +384,7 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetError(this.hotkeyPictureBox, resources.GetString("hotkeyPictureBox.Error"));
             this.dirtyErrorProvider.SetIconAlignment(this.hotkeyPictureBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("hotkeyPictureBox.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.hotkeyPictureBox, ((int)(resources.GetObject("hotkeyPictureBox.IconPadding"))));
-            this.hotkeyPictureBox.Image = global::MusicBeePlugin.Properties.Resources.hotkey_presets_centered;
+            this.hotkeyPictureBox.Image = global::MusicBeePlugin.Properties.Resources.hotkey_presets;
             this.hotkeyPictureBox.Name = "hotkeyPictureBox";
             this.hotkeyPictureBox.TabStop = false;
             this.toolTip1.SetToolTip(this.hotkeyPictureBox, resources.GetString("hotkeyPictureBox.ToolTip"));
@@ -387,7 +397,7 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetError(this.playlistPictureBox, resources.GetString("playlistPictureBox.Error"));
             this.dirtyErrorProvider.SetIconAlignment(this.playlistPictureBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("playlistPictureBox.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.playlistPictureBox, ((int)(resources.GetObject("playlistPictureBox.IconPadding"))));
-            this.playlistPictureBox.Image = global::MusicBeePlugin.Properties.Resources.playlist_presets_centered;
+            this.playlistPictureBox.Image = global::MusicBeePlugin.Properties.Resources.playlist_presets;
             this.playlistPictureBox.Name = "playlistPictureBox";
             this.playlistPictureBox.TabStop = false;
             this.toolTip1.SetToolTip(this.playlistPictureBox, resources.GetString("playlistPictureBox.ToolTip"));
@@ -400,7 +410,7 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetError(this.userPictureBox, resources.GetString("userPictureBox.Error"));
             this.dirtyErrorProvider.SetIconAlignment(this.userPictureBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("userPictureBox.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.userPictureBox, ((int)(resources.GetObject("userPictureBox.IconPadding"))));
-            this.userPictureBox.Image = global::MusicBeePlugin.Properties.Resources.user_presets_centered;
+            this.userPictureBox.Image = global::MusicBeePlugin.Properties.Resources.user_presets;
             this.userPictureBox.Name = "userPictureBox";
             this.userPictureBox.TabStop = false;
             this.toolTip1.SetToolTip(this.userPictureBox, resources.GetString("userPictureBox.ToolTip"));
@@ -413,7 +423,7 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetError(this.customizedPictureBox, resources.GetString("customizedPictureBox.Error"));
             this.dirtyErrorProvider.SetIconAlignment(this.customizedPictureBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("customizedPictureBox.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.customizedPictureBox, ((int)(resources.GetObject("customizedPictureBox.IconPadding"))));
-            this.customizedPictureBox.Image = global::MusicBeePlugin.Properties.Resources.customized_presets_centered;
+            this.customizedPictureBox.Image = global::MusicBeePlugin.Properties.Resources.customized_presets;
             this.customizedPictureBox.Name = "customizedPictureBox";
             this.customizedPictureBox.TabStop = false;
             this.toolTip1.SetToolTip(this.customizedPictureBox, resources.GetString("customizedPictureBox.ToolTip"));
@@ -426,7 +436,7 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetError(this.predefinedPictureBox, resources.GetString("predefinedPictureBox.Error"));
             this.dirtyErrorProvider.SetIconAlignment(this.predefinedPictureBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("predefinedPictureBox.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.predefinedPictureBox, ((int)(resources.GetObject("predefinedPictureBox.IconPadding"))));
-            this.predefinedPictureBox.Image = global::MusicBeePlugin.Properties.Resources.predefined_presets_centered;
+            this.predefinedPictureBox.Image = global::MusicBeePlugin.Properties.Resources.predefined_presets;
             this.predefinedPictureBox.Name = "predefinedPictureBox";
             this.predefinedPictureBox.TabStop = false;
             this.toolTip1.SetToolTip(this.predefinedPictureBox, resources.GetString("predefinedPictureBox.ToolTip"));
@@ -439,7 +449,7 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetError(this.tickedOnlyPictureBox, resources.GetString("tickedOnlyPictureBox.Error"));
             this.dirtyErrorProvider.SetIconAlignment(this.tickedOnlyPictureBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("tickedOnlyPictureBox.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.tickedOnlyPictureBox, ((int)(resources.GetObject("tickedOnlyPictureBox.IconPadding"))));
-            this.tickedOnlyPictureBox.Image = global::MusicBeePlugin.Properties.Resources.auto_applied_presets_centered;
+            this.tickedOnlyPictureBox.Image = global::MusicBeePlugin.Properties.Resources.auto_applied_presets;
             this.tickedOnlyPictureBox.Name = "tickedOnlyPictureBox";
             this.tickedOnlyPictureBox.TabStop = false;
             this.toolTip1.SetToolTip(this.tickedOnlyPictureBox, resources.GetString("tickedOnlyPictureBox.ToolTip"));
@@ -476,7 +486,7 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetError(this.uncheckAllFiltersPictureBox, resources.GetString("uncheckAllFiltersPictureBox.Error"));
             this.dirtyErrorProvider.SetIconAlignment(this.uncheckAllFiltersPictureBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("uncheckAllFiltersPictureBox.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.uncheckAllFiltersPictureBox, ((int)(resources.GetObject("uncheckAllFiltersPictureBox.IconPadding"))));
-            this.uncheckAllFiltersPictureBox.Image = global::MusicBeePlugin.Properties.Resources.uncheck_all_preset_filters_centered;
+            this.uncheckAllFiltersPictureBox.Image = global::MusicBeePlugin.Properties.Resources.uncheck_all_preset_filters;
             this.uncheckAllFiltersPictureBox.Name = "uncheckAllFiltersPictureBox";
             this.uncheckAllFiltersPictureBox.TabStop = false;
             this.toolTip1.SetToolTip(this.uncheckAllFiltersPictureBox, resources.GetString("uncheckAllFiltersPictureBox.ToolTip"));
@@ -489,7 +499,7 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetError(this.functionIdPictureBox, resources.GetString("functionIdPictureBox.Error"));
             this.dirtyErrorProvider.SetIconAlignment(this.functionIdPictureBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("functionIdPictureBox.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.functionIdPictureBox, ((int)(resources.GetObject("functionIdPictureBox.IconPadding"))));
-            this.functionIdPictureBox.Image = global::MusicBeePlugin.Properties.Resources.function_id_presets_centered;
+            this.functionIdPictureBox.Image = global::MusicBeePlugin.Properties.Resources.function_id_presets;
             this.functionIdPictureBox.Name = "functionIdPictureBox";
             this.functionIdPictureBox.TabStop = false;
             this.toolTip1.SetToolTip(this.functionIdPictureBox, resources.GetString("functionIdPictureBox.ToolTip"));
@@ -676,6 +686,8 @@ namespace MusicBeePlugin
             // panel1
             // 
             resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.Controls.Add(this.userPresetPictureBox);
+            this.panel1.Controls.Add(this.customizedPresetPictureBox);
             this.panel1.Controls.Add(this.uncheckAllFiltersPictureBox);
             this.panel1.Controls.Add(this.hotkeyPictureBox);
             this.panel1.Controls.Add(this.functionIdPictureBox);
@@ -687,8 +699,6 @@ namespace MusicBeePlugin
             this.panel1.Controls.Add(this.filterComboBox);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.customizedPresetLabel);
-            this.panel1.Controls.Add(this.userPresetLabel);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.preserveValuesTextBox);
             this.panel1.Controls.Add(this.applyToPlayingTrackCheckBox);
@@ -730,6 +740,30 @@ namespace MusicBeePlugin
             this.panel1.Name = "panel1";
             this.toolTip1.SetToolTip(this.panel1, resources.GetString("panel1.ToolTip"));
             // 
+            // userPresetPictureBox
+            // 
+            resources.ApplyResources(this.userPresetPictureBox, "userPresetPictureBox");
+            this.userPresetPictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.dirtyErrorProvider.SetError(this.userPresetPictureBox, resources.GetString("userPresetPictureBox.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.userPresetPictureBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("userPresetPictureBox.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.userPresetPictureBox, ((int)(resources.GetObject("userPresetPictureBox.IconPadding"))));
+            this.userPresetPictureBox.Image = global::MusicBeePlugin.Properties.Resources.uncheck_mark;
+            this.userPresetPictureBox.Name = "userPresetPictureBox";
+            this.userPresetPictureBox.TabStop = false;
+            this.toolTip1.SetToolTip(this.userPresetPictureBox, resources.GetString("userPresetPictureBox.ToolTip"));
+            // 
+            // customizedPresetPictureBox
+            // 
+            resources.ApplyResources(this.customizedPresetPictureBox, "customizedPresetPictureBox");
+            this.customizedPresetPictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.dirtyErrorProvider.SetError(this.customizedPresetPictureBox, resources.GetString("customizedPresetPictureBox.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.customizedPresetPictureBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("customizedPresetPictureBox.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.customizedPresetPictureBox, ((int)(resources.GetObject("customizedPresetPictureBox.IconPadding"))));
+            this.customizedPresetPictureBox.Image = global::MusicBeePlugin.Properties.Resources.uncheck_mark;
+            this.customizedPresetPictureBox.Name = "customizedPresetPictureBox";
+            this.customizedPresetPictureBox.TabStop = false;
+            this.toolTip1.SetToolTip(this.customizedPresetPictureBox, resources.GetString("customizedPresetPictureBox.ToolTip"));
+            // 
             // label4
             // 
             resources.ApplyResources(this.label4, "label4");
@@ -747,26 +781,6 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconPadding(this.label3, ((int)(resources.GetObject("label3.IconPadding"))));
             this.label3.Name = "label3";
             this.toolTip1.SetToolTip(this.label3, resources.GetString("label3.ToolTip"));
-            // 
-            // customizedPresetLabel
-            // 
-            resources.ApplyResources(this.customizedPresetLabel, "customizedPresetLabel");
-            this.dirtyErrorProvider.SetError(this.customizedPresetLabel, resources.GetString("customizedPresetLabel.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.customizedPresetLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("customizedPresetLabel.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.customizedPresetLabel, ((int)(resources.GetObject("customizedPresetLabel.IconPadding"))));
-            this.customizedPresetLabel.Image = global::MusicBeePlugin.Properties.Resources.uncheck_mark;
-            this.customizedPresetLabel.Name = "customizedPresetLabel";
-            this.toolTip1.SetToolTip(this.customizedPresetLabel, resources.GetString("customizedPresetLabel.ToolTip"));
-            // 
-            // userPresetLabel
-            // 
-            resources.ApplyResources(this.userPresetLabel, "userPresetLabel");
-            this.dirtyErrorProvider.SetError(this.userPresetLabel, resources.GetString("userPresetLabel.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.userPresetLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("userPresetLabel.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.userPresetLabel, ((int)(resources.GetObject("userPresetLabel.IconPadding"))));
-            this.userPresetLabel.Image = global::MusicBeePlugin.Properties.Resources.uncheck_mark;
-            this.userPresetLabel.Name = "userPresetLabel";
-            this.toolTip1.SetToolTip(this.userPresetLabel, resources.GetString("userPresetLabel.ToolTip"));
             // 
             // label1
             // 
@@ -1171,6 +1185,8 @@ namespace MusicBeePlugin
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.userPresetPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.customizedPresetPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -1253,8 +1269,6 @@ namespace MusicBeePlugin
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox preserveValuesTextBox;
         private System.Windows.Forms.Button buttonSaveClose;
-        private System.Windows.Forms.Label customizedPresetLabel;
-        private System.Windows.Forms.Label userPresetLabel;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.GroupBox groupBox2;
@@ -1270,5 +1284,7 @@ namespace MusicBeePlugin
         private System.Windows.Forms.PictureBox functionIdPictureBox;
         private System.Windows.Forms.PictureBox hotkeyPictureBox;
         private System.Windows.Forms.PictureBox uncheckAllFiltersPictureBox;
+        private System.Windows.Forms.PictureBox userPresetPictureBox;
+        private System.Windows.Forms.PictureBox customizedPresetPictureBox;
     }
 }

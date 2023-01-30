@@ -249,7 +249,7 @@
             this.dirtyErrorProvider.SetIconPadding(this.sourceFieldComboBox, ((int)(resources.GetObject("sourceFieldComboBox.IconPadding"))));
             this.sourceFieldComboBox.Name = "sourceFieldComboBox";
             this.toolTip.SetToolTip(this.sourceFieldComboBox, resources.GetString("sourceFieldComboBox.ToolTip"));
-            this.sourceFieldComboBox.SelectedIndexChanged += new System.EventHandler(this.fieldComboBox_SelectedIndexChanged);
+            this.sourceFieldComboBox.SelectedIndexChanged += new System.EventHandler(this.sourceFieldComboBox_SelectedIndexChanged);
             // 
             // label5
             // 

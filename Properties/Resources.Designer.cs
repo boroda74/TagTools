@@ -63,9 +63,9 @@ namespace MusicBeePlugin.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap auto_applied_presets_centered {
+        internal static System.Drawing.Bitmap auto_applied_presets {
             get {
-                object obj = ResourceManager.GetObject("auto_applied_presets_centered", resourceCulture);
+                object obj = ResourceManager.GetObject("auto_applied_presets", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +93,9 @@ namespace MusicBeePlugin.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap customized_presets_centered {
+        internal static System.Drawing.Bitmap customized_presets {
             get {
-                object obj = ResourceManager.GetObject("customized_presets_centered", resourceCulture);
+                object obj = ResourceManager.GetObject("customized_presets", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -113,9 +113,9 @@ namespace MusicBeePlugin.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap function_id_presets_centered {
+        internal static System.Drawing.Bitmap function_id_presets {
             get {
-                object obj = ResourceManager.GetObject("function_id_presets_centered", resourceCulture);
+                object obj = ResourceManager.GetObject("function_id_presets", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -123,9 +123,9 @@ namespace MusicBeePlugin.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap hotkey_presets_centered {
+        internal static System.Drawing.Bitmap hotkey_presets {
             get {
-                object obj = ResourceManager.GetObject("hotkey_presets_centered", resourceCulture);
+                object obj = ResourceManager.GetObject("hotkey_presets", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -143,9 +143,9 @@ namespace MusicBeePlugin.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap playlist_presets_centered {
+        internal static System.Drawing.Bitmap playlist_presets {
             get {
-                object obj = ResourceManager.GetObject("playlist_presets_centered", resourceCulture);
+                object obj = ResourceManager.GetObject("playlist_presets", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -153,9 +153,9 @@ namespace MusicBeePlugin.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap predefined_presets_centered {
+        internal static System.Drawing.Bitmap predefined_presets {
             get {
-                object obj = ResourceManager.GetObject("predefined_presets_centered", resourceCulture);
+                object obj = ResourceManager.GetObject("predefined_presets", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -173,9 +173,9 @@ namespace MusicBeePlugin.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap uncheck_all_preset_filters_centered {
+        internal static System.Drawing.Bitmap uncheck_all_preset_filters {
             get {
-                object obj = ResourceManager.GetObject("uncheck_all_preset_filters_centered", resourceCulture);
+                object obj = ResourceManager.GetObject("uncheck_all_preset_filters", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -203,9 +203,9 @@ namespace MusicBeePlugin.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap user_presets_centered {
+        internal static System.Drawing.Bitmap user_presets {
             get {
-                object obj = ResourceManager.GetObject("user_presets_centered", resourceCulture);
+                object obj = ResourceManager.GetObject("user_presets", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -15,12 +15,8 @@ namespace MusicBeePlugin
     class InterpolatedBox : PictureBox
     {
         #region Interpolation Property
-        /// <summary>Backing Field</summary>
         private InterpolationMode interpolation = InterpolationMode.Default;
 
-        /// <summary>
-        /// The interpolation used to render the image.
-        /// </summary>
         [DefaultValue(typeof(InterpolationMode), "Default"),
         Description("The interpolation used to render the image.")]
         public InterpolationMode Interpolation
@@ -37,10 +33,6 @@ namespace MusicBeePlugin
         }
         #endregion
 
-        /// <summary>
-        /// Overridden to modify rendering behavior.
-        /// </summary>
-        /// <param name="pe">Painting event args.</param>
         protected override void OnPaint(PaintEventArgs pe)
         {
             // Before the PictureBox renders the image, we modify the

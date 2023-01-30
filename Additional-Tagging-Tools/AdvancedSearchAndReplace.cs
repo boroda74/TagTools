@@ -538,7 +538,7 @@ namespace MusicBeePlugin
                     if (form.presetsChanged || customized || areFineCustomizationsMade(referencePreset))
                     {
                         form.presetsChanged = true;
-                        form.setCheckedState(form.customizedPresetLabel, customized);
+                        form.setCheckedState(form.customizedPresetPictureBox, customized);
                         form.buttonClose.Image = Resources.UnsavedChanges_14;
                         form.toolTip1.SetToolTip(form.buttonClose, form.buttonCloseToolTip);
                     }
@@ -1444,7 +1444,7 @@ namespace MusicBeePlugin
 
             var addedHeight = 3; // Some appropriate value, greater than the field's default of 2
 
-            heightField.SetValue(presetList, addedHeight); // Where "clb" is your CheckedListBox
+            heightField.SetValue(presetList, addedHeight); // Where "presetList" is your CheckedListBox
 
 
             uncheckedState = Plugin.GetSolidImageByBitmapMask(ForeColor, BackColor, Resources.uncheck_mark, 0.5f);
@@ -1462,29 +1462,29 @@ namespace MusicBeePlugin
             float dimmedWeight = 0.2f;
 
 
-            AutoAppliedPresetsAccent = Plugin.GetSolidImageByBitmapMask(accentColor, BackColor, Resources.auto_applied_presets_centered, accentWeight);
-            AutoAppliedPresetsDimmed = Plugin.GetSolidImageByBitmapMask(dimmedColor, BackColor, Resources.auto_applied_presets_centered, dimmedWeight);
+            AutoAppliedPresetsAccent = Plugin.GetSolidImageByBitmapMask(accentColor, BackColor, Resources.auto_applied_presets, accentWeight);
+            AutoAppliedPresetsDimmed = Plugin.GetSolidImageByBitmapMask(dimmedColor, BackColor, Resources.auto_applied_presets, dimmedWeight);
 
-            PredefinedPresetsAccent = Plugin.GetSolidImageByBitmapMask(accentColor, BackColor, Resources.predefined_presets_centered, accentWeight);
-            PredefinedPresetsDimmed = Plugin.GetSolidImageByBitmapMask(dimmedColor, BackColor, Resources.predefined_presets_centered, dimmedWeight);
+            PredefinedPresetsAccent = Plugin.GetSolidImageByBitmapMask(accentColor, BackColor, Resources.predefined_presets, accentWeight);
+            PredefinedPresetsDimmed = Plugin.GetSolidImageByBitmapMask(dimmedColor, BackColor, Resources.predefined_presets, dimmedWeight);
 
-            CustomizedPresetsAccent = Plugin.GetSolidImageByBitmapMask(accentColor, BackColor, Resources.customized_presets_centered, accentWeight);
-            CustomizedPresetsDimmed = Plugin.GetSolidImageByBitmapMask(dimmedColor, BackColor, Resources.customized_presets_centered, dimmedWeight);
+            CustomizedPresetsAccent = Plugin.GetSolidImageByBitmapMask(accentColor, BackColor, Resources.customized_presets, accentWeight);
+            CustomizedPresetsDimmed = Plugin.GetSolidImageByBitmapMask(dimmedColor, BackColor, Resources.customized_presets, dimmedWeight);
 
-            UserPresetsAccent = Plugin.GetSolidImageByBitmapMask(accentColor, BackColor, Resources.user_presets_centered, accentWeight);
-            UserPresetsDimmed = Plugin.GetSolidImageByBitmapMask(dimmedColor, BackColor, Resources.user_presets_centered, dimmedWeight);
+            UserPresetsAccent = Plugin.GetSolidImageByBitmapMask(accentColor, BackColor, Resources.user_presets, accentWeight);
+            UserPresetsDimmed = Plugin.GetSolidImageByBitmapMask(dimmedColor, BackColor, Resources.user_presets, dimmedWeight);
 
-            PlaylistPresetsAccent = Plugin.GetSolidImageByBitmapMask(accentColor, BackColor, Resources.playlist_presets_centered, accentWeight);
-            PlaylistPresetsDimmed = Plugin.GetSolidImageByBitmapMask(dimmedColor, BackColor, Resources.playlist_presets_centered, dimmedWeight);
+            PlaylistPresetsAccent = Plugin.GetSolidImageByBitmapMask(accentColor, BackColor, Resources.playlist_presets, accentWeight);
+            PlaylistPresetsDimmed = Plugin.GetSolidImageByBitmapMask(dimmedColor, BackColor, Resources.playlist_presets, dimmedWeight);
 
-            FunctionIdPresetsAccent = Plugin.GetSolidImageByBitmapMask(accentColor, BackColor, Resources.function_id_presets_centered, accentWeight);
-            FunctionIdPresetsDimmed = Plugin.GetSolidImageByBitmapMask(dimmedColor, BackColor, Resources.function_id_presets_centered, dimmedWeight);
+            FunctionIdPresetsAccent = Plugin.GetSolidImageByBitmapMask(accentColor, BackColor, Resources.function_id_presets, accentWeight);
+            FunctionIdPresetsDimmed = Plugin.GetSolidImageByBitmapMask(dimmedColor, BackColor, Resources.function_id_presets, dimmedWeight);
 
-            HotkeyPresetsAccent = Plugin.GetSolidImageByBitmapMask(accentColor, BackColor, Resources.hotkey_presets_centered, accentWeight);
-            HotkeyPresetsDimmed = Plugin.GetSolidImageByBitmapMask(dimmedColor, BackColor, Resources.hotkey_presets_centered, dimmedWeight);
+            HotkeyPresetsAccent = Plugin.GetSolidImageByBitmapMask(accentColor, BackColor, Resources.hotkey_presets, accentWeight);
+            HotkeyPresetsDimmed = Plugin.GetSolidImageByBitmapMask(dimmedColor, BackColor, Resources.hotkey_presets, dimmedWeight);
 
-            UncheckAllFiltersAccent = Plugin.GetSolidImageByBitmapMask(accentColor, BackColor, Resources.uncheck_all_preset_filters_centered, accentWeight);
-            UncheckAllFiltersDimmed = Plugin.GetSolidImageByBitmapMask(dimmedColor, BackColor, Resources.uncheck_all_preset_filters_centered, dimmedWeight);
+            UncheckAllFiltersAccent = Plugin.GetSolidImageByBitmapMask(accentColor, BackColor, Resources.uncheck_all_preset_filters, accentWeight);
+            UncheckAllFiltersDimmed = Plugin.GetSolidImageByBitmapMask(dimmedColor, BackColor, Resources.uncheck_all_preset_filters, dimmedWeight);
 
             tickedOnlyPictureBox.Image = AutoAppliedPresetsDimmed;
             predefinedPictureBox.Image = PredefinedPresetsDimmed;
@@ -1495,7 +1495,9 @@ namespace MusicBeePlugin
             hotkeyPictureBox.Image = HotkeyPresetsDimmed;
 
 
+            ignorefFlterComboBoxSelectedIndexChanged = true;
             filterComboBox.SelectedIndex = 0;
+            ignorefFlterComboBoxSelectedIndexChanged = false;
 
 
             Color highlightColor = SystemColors.Highlight;
@@ -2978,7 +2980,7 @@ namespace MusicBeePlugin
             }
         }
 
-        private void setCheckedState(Label label, bool flag)
+        private void setCheckedState(PictureBox label, bool flag)
         {
             if (flag)
             {
@@ -3002,8 +3004,8 @@ namespace MusicBeePlugin
 
                 descriptionBox.Text = "";
 
-                userPresetLabel.Image = uncheckedState; ;
-                customizedPresetLabel.Image = uncheckedState;
+                userPresetPictureBox.Image = uncheckedState; ;
+                customizedPresetPictureBox.Image = uncheckedState;
 
                 preserveValuesTextBox.Enabled = false;
                 label2.Enabled = false;
@@ -3070,8 +3072,8 @@ namespace MusicBeePlugin
 
                 descriptionBox.Text = GetDictValue(preset.descriptions, Plugin.Language);
 
-                setCheckedState(userPresetLabel, preset.userPreset);
-                setCheckedState(customizedPresetLabel, preset.customizedByUser);
+                setCheckedState(userPresetPictureBox, preset.userPreset);
+                setCheckedState(customizedPresetPictureBox, preset.customizedByUser);
 
                 preserveValuesTextBox.Enabled = true;
                 preserveValuesTextBox.Text = preset.preserveValues;
@@ -4575,7 +4577,7 @@ namespace MusicBeePlugin
             }
 
 
-            setCheckedPicturesStates();
+            filterPresetList();
         }
 
         private void tickedOnlyPictureBox_Click(object sender, EventArgs e)

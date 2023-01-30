@@ -55,7 +55,7 @@ namespace MusicBeePlugin
 
 
             buttonDeleteSaved.Image = Plugin.GetSolidImageByBitmapMask(buttonDeleteSaved.ForeColor, BackColor, Resources.clear_button, 1.0f);
-            autoApplyPictureBox.Image = Plugin.GetSolidImageByBitmapMask(ForeColor, BackColor, Resources.auto_applied_presets_centered, 1.0f);
+            autoApplyPictureBox.Image = Plugin.GetSolidImageByBitmapMask(ForeColor, BackColor, Resources.auto_applied_presets, 1.0f);
 
 
             Plugin.FillList(destinationTagList.Items, false, false, false);
@@ -761,6 +761,10 @@ namespace MusicBeePlugin
 
             query = query.Remove(query.Length - 1);
 
+
+            string oldSafeFileName = customMSR.getSafeFileName();
+
+
             List<string> names = new List<string>();
             foreach (var name in customMSR.names)
             {
@@ -789,6 +793,9 @@ namespace MusicBeePlugin
             customMSR.isMSRPreset = true;
             customMSR.userPreset = true;
 
+            if (File.Exists(Path.Combine(PresetsPath, oldSafeFileName + Plugin.ASRPresetExtension)))
+                File.Delete(Path.Combine(PresetsPath, oldSafeFileName + Plugin.ASRPresetExtension));
+
             customMSR.savePreset(Path.Combine(PresetsPath, customMSR.getSafeFileName() + Plugin.ASRPresetExtension));
 
             if (autoApplyCheckBox.Checked && !Plugin.SavedSettings.autoAppliedAsrPresetGuids.Contains(customMSR.guid))
@@ -804,7 +811,7 @@ namespace MusicBeePlugin
 
             if (!presetExists)
             { 
-                Presets.Add(customMSR.guid, customMSR);
+                Presets.Remove(customMSR.guid);
             }
 
             if (loadComboBox.SelectedIndex > 0)
@@ -1036,7 +1043,13 @@ namespace MusicBeePlugin
                 }
             }
 
-            File.Delete(Path.Combine(PresetsPath, customMSR.guid + Plugin.ASRPresetExtension));
+            foreach (var pair in Plugin.AsrIdsPresets)
+            {
+                if (pair.Value == customMSR)
+                    Plugin.AsrIdsPresets.Remove(pair.Key);
+            }
+
+            File.Delete(Path.Combine(PresetsPath, customMSR.getSafeFileName() + Plugin.ASRPresetExtension));
 
             Presets.Remove(customMSR.guid);
             loadComboBox.Items.Remove(customMSR);

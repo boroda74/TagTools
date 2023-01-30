@@ -458,14 +458,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\Resources\uncheck-mark.png" />
-    <None Include="Properties\Resources\uncheck-all-preset-filters-centered.png" />
-    <None Include="Properties\Resources\hotkey-presets-centered.png" />
-    <None Include="Properties\Resources\function-id-presets-centered.png" />
-    <None Include="Properties\Resources\playlist-presets-centered.png" />
-    <None Include="Properties\Resources\user-presets-centered.png" />
-    <None Include="Properties\Resources\customized-presets-centered.png" />
-    <None Include="Properties\Resources\predefined-presets-centered.png" />
-    <None Include="Properties\Resources\auto-applied-presets-centered.png" />
+    <None Include="Properties\Resources\uncheck-all-preset-filters.png" />
+    <None Include="Properties\Resources\hotkey-presets.png" />
+    <None Include="Properties\Resources\function-id-presets.png" />
+    <None Include="Properties\Resources\playlist-presets.png" />
+    <None Include="Properties\Resources\user-presets.png" />
+    <None Include="Properties\Resources\customized-presets.png" />
+    <None Include="Properties\Resources\predefined-presets.png" />
+    <None Include="Properties\Resources\auto-applied-presets.png" />
     <None Include="Properties\Resources\check-mark.png" />
     <None Include="Properties\Resources\clear-button.png" />
     <None Include="Properties\Resources\Empty-14.png" />
