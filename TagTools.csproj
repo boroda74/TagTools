@@ -99,6 +99,9 @@
     <Compile Include="Additional-Tagging-Tools\AdvancedSearchAndReplace.Designer.cs">
       <DependentUpon>AdvancedSearchAndReplace.cs</DependentUpon>
     </Compile>
+    <Compile Include="Additional-Tagging-Tools\Imaging-And-Coloring.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Additional-Tagging-Tools\ASRPresetEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -454,34 +457,22 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Resources\uncheck-mark-gray.png" />
+    <None Include="Properties\Resources\uncheck-mark.png" />
+    <None Include="Properties\Resources\uncheck-all-preset-filters-centered.png" />
+    <None Include="Properties\Resources\hotkey-presets-centered.png" />
+    <None Include="Properties\Resources\function-id-presets-centered.png" />
+    <None Include="Properties\Resources\playlist-presets-centered.png" />
+    <None Include="Properties\Resources\user-presets-centered.png" />
+    <None Include="Properties\Resources\customized-presets-centered.png" />
+    <None Include="Properties\Resources\predefined-presets-centered.png" />
+    <None Include="Properties\Resources\auto-applied-presets-centered.png" />
     <None Include="Properties\Resources\check-mark.png" />
-    <None Include="Properties\Resources\check-mark-light.png" />
-    <None Include="Properties\Resources\clear-button-light.png" />
-    <None Include="Properties\Resources\auto-applied-presets-light.png" />
-    <None Include="Properties\Resources\user-presets-light.png" />
-    <None Include="Properties\Resources\uncheck-all-preset-filters-light.png" />
-    <None Include="Properties\Resources\predefined-presets-light.png" />
-    <None Include="Properties\Resources\playlist-presets-light.png" />
-    <None Include="Properties\Resources\hotkey-presets-light.png" />
-    <None Include="Properties\Resources\function-id-presets-light.png" />
-    <None Include="Properties\Resources\customized-presets-light.png" />
     <None Include="Properties\Resources\clear-button.png" />
-    <None Include="Properties\Resources\auto-applied-presets.png" />
-    <None Include="Properties\Resources\hotkey-presets.png" />
-    <None Include="Properties\Resources\function-id-presets.png" />
-    <None Include="Properties\Resources\customized-presets.png" />
-    <None Include="Properties\Resources\user-presets.png" />
-    <None Include="Properties\Resources\uncheck-all-preset-filters.png" />
-    <None Include="Properties\Resources\predefined-presets.png" />
-    <None Include="Properties\Resources\playlist-presets.png" />
     <None Include="Properties\Resources\Empty-14.png" />
     <None Include="Properties\Resources\UnsavedChanges-14.png" />
-    <None Include="Properties\Resources\Xion20.png" />
     <None Include="Properties\Resources\Window.png" />
     <None Include="Properties\Resources\Search.png" />
     <None Include="Properties\Resources\MissingArtwork.png" />
-    <None Include="Properties\Resources\Lightning.png" />
     <Content Include="Additional-Tagging-Tools\Wrench.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -72,7 +72,7 @@ namespace MusicBeePlugin
 
         public const int MaximumNumberOfASRHotkeys = 20;
 
-        public static char LocalizedDecimalPoint = (0.5).ToString()[1];
+        public static readonly char LocalizedDecimalPoint = (0.5).ToString()[1];
         public static Bitmap MissingArtwork;
         private static readonly Random RandomGenerator = new Random();
 
@@ -688,28 +688,6 @@ namespace MusicBeePlugin
 
 
         #region Common methods/functions
-        public static Color GetHighlightColor(Color highlightColor, Color backColor, float highlightWeight)
-        {
-            float controlBackAvg = (backColor.R + backColor.G + backColor.B) / 3.0f / 256;
-            float highlightAvg = (highlightColor.R + highlightColor.G + highlightColor.B) / 3.0f / 256;
-
-            float highlightBrightness = highlightWeight * highlightAvg + (1 - highlightWeight) * (1 - controlBackAvg);
-
-            float highlightR = highlightColor.R * highlightBrightness;
-            float highlightG = highlightColor.G * highlightBrightness;
-            float highlightB = highlightColor.B * highlightBrightness;
-
-            highlightR = highlightR < 0 ? 0 : highlightR;
-            highlightG = highlightG < 0 ? 0 : highlightG;
-            highlightB = highlightB < 0 ? 0 : highlightB;
-
-            highlightR = highlightR > 255 ? 255 : highlightR;
-            highlightG = highlightG > 255 ? 255 : highlightG;
-            highlightB = highlightB > 255 ? 255 : highlightB;
-
-            return Color.FromArgb((int)highlightR, (int)highlightG, (int)highlightB);
-        }
-
         public struct SwappedTags
         {
             public string newDestinationTagValue;

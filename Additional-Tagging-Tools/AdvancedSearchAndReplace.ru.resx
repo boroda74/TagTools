@@ -156,131 +156,181 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>1001, 678</value>
   </data>
-  <data name="label8.Error" xml:space="preserve">
+  <data name="uncheckAllFiltersPictureBox.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="label8.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+  <data name="uncheckAllFiltersPictureBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="label8.IconPadding" type="System.Int32, mscorlib">
+  <data name="uncheckAllFiltersPictureBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>533, 36</value>
+  <data name="uncheckAllFiltersPictureBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>717, 34</value>
   </data>
-  <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 13</value>
+  <data name="uncheckAllFiltersPictureBox.ToolTip" xml:space="preserve">
+    <value>Отключить все фильтры</value>
   </data>
-  <data name="label8.Text" xml:space="preserve">
-    <value>Только автоприменяемые</value>
-  </data>
-  <data name="label8.ToolTip" xml:space="preserve">
-    <value>Показывать только автоприменяемые пресеты</value>
-  </data>
-  <data name="untickAllCheckBox.Error" xml:space="preserve">
+  <data name="hotkeyPictureBox.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="untickAllCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+  <data name="hotkeyPictureBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="untickAllCheckBox.IconPadding" type="System.Int32, mscorlib">
+  <data name="hotkeyPictureBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="untickAllCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>944, 32</value>
+  <data name="hotkeyPictureBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>693, 34</value>
   </data>
-  <data name="untickAllCheckBox.ToolTip" xml:space="preserve">
-    <value>Снять отметки со всех фильтров</value>
+  <data name="hotkeyPictureBox.ToolTip" xml:space="preserve">
+    <value>Щелкните, чтобы видеть только пресеты с назначенными комбинациями клавиш
+Щелкните, удерживая клавишу Ctrl, чтобы добавить этот фильтр к существующим или отключить его</value>
   </data>
-  <data name="customizedPresetsCheckBox.Error" xml:space="preserve">
+  <data name="functionIdPictureBox.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="customizedPresetsCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+  <data name="functionIdPictureBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="customizedPresetsCheckBox.IconPadding" type="System.Int32, mscorlib">
+  <data name="functionIdPictureBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="customizedPresetsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>724, 32</value>
+  <data name="functionIdPictureBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>669, 34</value>
   </data>
-  <data name="customizedPresetsCheckBox.ToolTip" xml:space="preserve">
-    <value>Показывать только настроенные пресеты</value>
-  </data>
-  <data name="predefinedPresetsCheckBox.Error" xml:space="preserve">
+  <data name="functionIdPictureBox.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="predefinedPresetsCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="predefinedPresetsCheckBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="predefinedPresetsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>680, 32</value>
-  </data>
-  <data name="predefinedPresetsCheckBox.ToolTip" xml:space="preserve">
-    <value>Показывать только стандартные пресеты</value>
-  </data>
-  <data name="userPresetsCheckBox.Error" xml:space="preserve">
+  <data name="playlistPictureBox.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="userPresetsCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+  <data name="playlistPictureBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="userPresetsCheckBox.IconPadding" type="System.Int32, mscorlib">
+  <data name="playlistPictureBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="userPresetsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>768, 32</value>
+  <data name="playlistPictureBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>645, 34</value>
   </data>
-  <data name="userPresetsCheckBox.ToolTip" xml:space="preserve">
-    <value>Показывать только пресеты пользователя</value>
+  <data name="playlistPictureBox.ToolTip" xml:space="preserve">
+    <value>Щелкните, чтобы видеть только пресеты, ограниченные плейлистом
+Щелкните, удерживая клавишу Ctrl, чтобы добавить этот фильтр к существующим или отключить его
+</value>
   </data>
-  <data name="hotkeyCheckBox.Error" xml:space="preserve">
+  <data name="userPictureBox.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="hotkeyCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+  <data name="userPictureBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="hotkeyCheckBox.IconPadding" type="System.Int32, mscorlib">
+  <data name="userPictureBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="hotkeyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>900, 32</value>
+  <data name="userPictureBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>621, 34</value>
   </data>
-  <data name="hotkeyCheckBox.ToolTip" xml:space="preserve">
-    <value>Показывать только пресеты с назначенными комбинациями клавиш</value>
+  <data name="userPictureBox.ToolTip" xml:space="preserve">
+    <value>Щелкните, чтобы видеть только пресеты пользователя
+Щелкните, удерживая клавишу Ctrl, чтобы добавить этот фильтр к существующим или отключить его
+</value>
   </data>
-  <data name="idCheckBox.Error" xml:space="preserve">
+  <data name="customizedPictureBox.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="idCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+  <data name="customizedPictureBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="idCheckBox.IconPadding" type="System.Int32, mscorlib">
+  <data name="customizedPictureBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="idCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>856, 32</value>
+  <data name="customizedPictureBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>597, 34</value>
   </data>
-  <data name="idCheckBox.ToolTip" xml:space="preserve">
-    <value>Показывать только пресеты с назначенными id-ми функций виртуальных тегов</value>
+  <data name="customizedPictureBox.ToolTip" xml:space="preserve">
+    <value>Щелкните, чтобы видеть только настроенные пресеты
+Щелкните, удерживая клавишу Ctrl, чтобы добавить этот фильтр к существующим или отключить его
+</value>
   </data>
-  <data name="playlistCheckBox.Error" xml:space="preserve">
+  <data name="predefinedPictureBox.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="playlistCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+  <data name="predefinedPictureBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="playlistCheckBox.IconPadding" type="System.Int32, mscorlib">
+  <data name="predefinedPictureBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="playlistCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>812, 32</value>
+  <data name="predefinedPictureBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>573, 34</value>
   </data>
-  <data name="playlistCheckBox.ToolTip" xml:space="preserve">
-    <value>Показывать только пресеты, ограниченные плейлистом</value>
+  <data name="predefinedPictureBox.ToolTip" xml:space="preserve">
+    <value>Щелкните, чтобы видеть только стандартные пресеты
+Щелкните, удерживая клавишу Ctrl, чтобы добавить этот фильтр к существующим или отключить его
+</value>
+  </data>
+  <data name="tickedOnlyPictureBox.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tickedOnlyPictureBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="tickedOnlyPictureBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tickedOnlyPictureBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>549, 34</value>
+  </data>
+  <data name="tickedOnlyPictureBox.ToolTip" xml:space="preserve">
+    <value>Щелкните, чтобы видеть только автоприменяемые пресеты
+Щелкните, удерживая клавишу Ctrl, чтобы добавить этот фильтр к существующим или отключить его
+</value>
+  </data>
+  <data name="filterComboBox.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="filterComboBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="filterComboBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="filterComboBox.Items" xml:space="preserve">
+    <value>(Без фильтра)</value>
+  </data>
+  <data name="filterComboBox.Items1" xml:space="preserve">
+    <value>Автоматически применяемые</value>
+  </data>
+  <data name="filterComboBox.Items2" xml:space="preserve">
+    <value>Стандартные</value>
+  </data>
+  <data name="filterComboBox.Items3" xml:space="preserve">
+    <value>Настроенные пользователем</value>
+  </data>
+  <data name="filterComboBox.Items4" xml:space="preserve">
+    <value>Пресеты пользователя</value>
+  </data>
+  <data name="filterComboBox.Items5" xml:space="preserve">
+    <value>Ограниченные плейлистом</value>
+  </data>
+  <data name="filterComboBox.Items6" xml:space="preserve">
+    <value>С назначенными id-ми функций</value>
+  </data>
+  <data name="filterComboBox.Items7" xml:space="preserve">
+    <value>С назначенными комбинациями клавиш</value>
+  </data>
+  <data name="filterComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>741, 33</value>
+  </data>
+  <data name="filterComboBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 21</value>
+  </data>
+  <data name="filterComboBox.ToolTip" xml:space="preserve">
+    <value>Выберите один из фильтров пресетов
+
+Щелкните с нажатой клавишей Ctrl, чтобы 
+добавить фильтр к существующим или отключить его</value>
   </data>
   <data name="label4.Error" xml:space="preserve">
     <value />
@@ -292,7 +342,7 @@
     <value>0</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>675, 214</value>
+    <value>675, 190</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 13</value>
@@ -313,7 +363,7 @@
     <value>0</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>866, 214</value>
+    <value>866, 190</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>118, 13</value>
@@ -334,7 +384,7 @@
     <value>0</value>
   </data>
   <data name="customizedPresetLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>658, 214</value>
+    <value>658, 190</value>
   </data>
   <data name="customizedPresetLabel.ToolTip" xml:space="preserve">
     <value />
@@ -349,7 +399,7 @@
     <value>0</value>
   </data>
   <data name="userPresetLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>849, 214</value>
+    <value>849, 190</value>
   </data>
   <data name="userPresetLabel.ToolTip" xml:space="preserve">
     <value />
@@ -364,7 +414,7 @@
     <value>0</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 347</value>
+    <value>1, 323</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>304, 13</value>
@@ -385,28 +435,13 @@
     <value>0</value>
   </data>
   <data name="preserveValuesTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>311, 344</value>
+    <value>311, 320</value>
   </data>
   <data name="preserveValuesTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>678, 20</value>
   </data>
   <data name="preserveValuesTextBox.ToolTip" xml:space="preserve">
     <value>Все теги, равные одному из перечисленных в этом поле значений, не будут как либо изменяться</value>
-  </data>
-  <data name="tickedOnlyCheckBox.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tickedOnlyCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="tickedOnlyCheckBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="tickedOnlyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>500, 32</value>
-  </data>
-  <data name="tickedOnlyCheckBox.ToolTip" xml:space="preserve">
-    <value>Показывать только автоприменяемые пресеты</value>
   </data>
   <data name="applyToPlayingTrackCheckBox.Error" xml:space="preserve">
     <value />
@@ -418,7 +453,7 @@
     <value>0</value>
   </data>
   <data name="applyToPlayingTrackCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>296, 213</value>
+    <value>296, 189</value>
   </data>
   <data name="applyToPlayingTrackCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>214, 17</value>
@@ -436,7 +471,7 @@
     <value>0</value>
   </data>
   <data name="clearIdButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>967, 185</value>
+    <value>967, 161</value>
   </data>
   <data name="clearIdButton.ToolTip" xml:space="preserve">
     <value>Удалить назначение id-а функции виртуальных тегов пресету</value>
@@ -451,7 +486,7 @@
     <value>0</value>
   </data>
   <data name="idTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>868, 185</value>
+    <value>868, 161</value>
   </data>
   <data name="idTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>97, 20</value>
@@ -469,7 +504,7 @@
     <value>0</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>699, 189</value>
+    <value>699, 165</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>163, 13</value>
@@ -490,7 +525,7 @@
     <value>0</value>
   </data>
   <data name="assignHotkeyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 211</value>
+    <value>4, 187</value>
   </data>
   <data name="assignHotkeyCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>286, 20</value>
@@ -515,7 +550,7 @@
     <value>0</value>
   </data>
   <data name="clearSearchButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>470, 33</value>
+    <value>524, 33</value>
   </data>
   <data name="clearSearchButton.ToolTip" xml:space="preserve">
     <value>Очистить текст поиска</value>
@@ -533,7 +568,7 @@
     <value>31, 33</value>
   </data>
   <data name="searchTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>437, 20</value>
+    <value>491, 20</value>
   </data>
   <data name="searchTextBox.ToolTip" xml:space="preserve">
     <value>Введите часть имени пресета или просто несколько слов из имени пресета, чтобы отфильтровать список</value>
@@ -774,7 +809,7 @@
     <value>0</value>
   </data>
   <data name="descriptionBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>977, 50</value>
+    <value>980, 59</value>
   </data>
   <data name="descriptionBox.ToolTip" xml:space="preserve">
     <value />
@@ -789,10 +824,10 @@
     <value>0</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 367</value>
+    <value>0, 340</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>989, 71</value>
+    <value>989, 77</value>
   </data>
   <data name="groupBox1.Text" xml:space="preserve">
     <value>Описание пресета</value>
@@ -810,7 +845,7 @@
     <value>0</value>
   </data>
   <data name="customText4Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>511, 321</value>
+    <value>511, 297</value>
   </data>
   <data name="customText4Label.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 13</value>
@@ -831,7 +866,7 @@
     <value>0</value>
   </data>
   <data name="customText2Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>511, 295</value>
+    <value>511, 271</value>
   </data>
   <data name="customText2Label.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 13</value>
@@ -852,7 +887,7 @@
     <value>0</value>
   </data>
   <data name="customText4Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>604, 318</value>
+    <value>604, 294</value>
   </data>
   <data name="customText4Box.Size" type="System.Drawing.Size, System.Drawing">
     <value>385, 20</value>
@@ -870,7 +905,7 @@
     <value>0</value>
   </data>
   <data name="customText2Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>604, 292</value>
+    <value>604, 268</value>
   </data>
   <data name="customText2Box.Size" type="System.Drawing.Size, System.Drawing">
     <value>385, 20</value>
@@ -888,7 +923,7 @@
     <value>0</value>
   </data>
   <data name="customText3Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 321</value>
+    <value>0, 297</value>
   </data>
   <data name="customText3Label.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 13</value>
@@ -909,7 +944,7 @@
     <value>0</value>
   </data>
   <data name="labelTag6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>694, 268</value>
+    <value>694, 244</value>
   </data>
   <data name="labelTag6.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 13</value>
@@ -930,7 +965,7 @@
     <value>0</value>
   </data>
   <data name="customText3Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>102, 318</value>
+    <value>102, 294</value>
   </data>
   <data name="customText3Box.Size" type="System.Drawing.Size, System.Drawing">
     <value>385, 20</value>
@@ -948,7 +983,7 @@
     <value>0</value>
   </data>
   <data name="parameterTag6List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>749, 265</value>
+    <value>749, 241</value>
   </data>
   <data name="parameterTag6List.Size" type="System.Drawing.Size, System.Drawing">
     <value>240, 21</value>
@@ -966,7 +1001,7 @@
     <value>0</value>
   </data>
   <data name="labelTag5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>372, 268</value>
+    <value>372, 244</value>
   </data>
   <data name="labelTag5.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 13</value>
@@ -987,7 +1022,7 @@
     <value>0</value>
   </data>
   <data name="parameterTag5List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>427, 265</value>
+    <value>427, 241</value>
   </data>
   <data name="parameterTag5List.Size" type="System.Drawing.Size, System.Drawing">
     <value>240, 21</value>
@@ -1005,7 +1040,7 @@
     <value>0</value>
   </data>
   <data name="labelTag4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>38, 268</value>
+    <value>38, 244</value>
   </data>
   <data name="labelTag4.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 13</value>
@@ -1026,7 +1061,7 @@
     <value>0</value>
   </data>
   <data name="parameterTag4List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>102, 265</value>
+    <value>102, 241</value>
   </data>
   <data name="parameterTag4List.Size" type="System.Drawing.Size, System.Drawing">
     <value>240, 21</value>
@@ -1044,7 +1079,7 @@
     <value>0</value>
   </data>
   <data name="customTextLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 295</value>
+    <value>0, 271</value>
   </data>
   <data name="customTextLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 13</value>
@@ -1065,7 +1100,7 @@
     <value>0</value>
   </data>
   <data name="customTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>102, 292</value>
+    <value>102, 268</value>
   </data>
   <data name="customTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>385, 20</value>
@@ -1083,7 +1118,7 @@
     <value>0</value>
   </data>
   <data name="labelTag3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>694, 241</value>
+    <value>694, 217</value>
   </data>
   <data name="labelTag3.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 13</value>
@@ -1104,7 +1139,7 @@
     <value>0</value>
   </data>
   <data name="parameterTag3List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>749, 238</value>
+    <value>749, 214</value>
   </data>
   <data name="parameterTag3List.Size" type="System.Drawing.Size, System.Drawing">
     <value>240, 21</value>
@@ -1122,7 +1157,7 @@
     <value>0</value>
   </data>
   <data name="labelTag2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>372, 241</value>
+    <value>372, 217</value>
   </data>
   <data name="labelTag2.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 13</value>
@@ -1143,7 +1178,7 @@
     <value>0</value>
   </data>
   <data name="parameterTag2List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>427, 238</value>
+    <value>427, 214</value>
   </data>
   <data name="parameterTag2List.Size" type="System.Drawing.Size, System.Drawing">
     <value>240, 21</value>
@@ -1161,7 +1196,7 @@
     <value>0</value>
   </data>
   <data name="labelTag.Location" type="System.Drawing.Point, System.Drawing">
-    <value>38, 241</value>
+    <value>38, 217</value>
   </data>
   <data name="labelTag.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 13</value>
@@ -1182,7 +1217,7 @@
     <value>0</value>
   </data>
   <data name="parameterTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>102, 238</value>
+    <value>102, 214</value>
   </data>
   <data name="parameterTagList.Size" type="System.Drawing.Size, System.Drawing">
     <value>240, 21</value>
@@ -1200,7 +1235,7 @@
     <value>0</value>
   </data>
   <data name="playlistComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>398, 186</value>
+    <value>398, 162</value>
   </data>
   <data name="playlistComboBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>269, 21</value>
@@ -1218,7 +1253,7 @@
     <value>0</value>
   </data>
   <data name="conditionCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 188</value>
+    <value>4, 164</value>
   </data>
   <data name="conditionCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>388, 17</value>
@@ -1239,10 +1274,10 @@
     <value>0</value>
   </data>
   <data name="presetList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 61</value>
+    <value>4, 59</value>
   </data>
   <data name="presetList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>985, 119</value>
+    <value>985, 99</value>
   </data>
   <data name="presetList.ToolTip" xml:space="preserve">
     <value />
@@ -1276,7 +1311,7 @@
     <value>0</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>990, 438</value>
+    <value>990, 416</value>
   </data>
   <data name="panel1.ToolTip" xml:space="preserve">
     <value />
@@ -1351,7 +1386,7 @@
     <value>0</value>
   </data>
   <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>708, 6</value>
+    <value>708, 2</value>
   </data>
   <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
     <value>281, 72</value>
@@ -1614,10 +1649,10 @@
     <value>0</value>
   </data>
   <data name="previewTable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 84</value>
+    <value>3, 80</value>
   </data>
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>986, 129</value>
+    <value>986, 160</value>
   </data>
   <data name="previewTable.ToolTip" xml:space="preserve">
     <value />
@@ -1632,10 +1667,10 @@
     <value>0</value>
   </data>
   <data name="panel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 447</value>
+    <value>3, 425</value>
   </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>990, 216</value>
+    <value>990, 243</value>
   </data>
   <data name="panel2.ToolTip" xml:space="preserve">
     <value />
@@ -1650,7 +1685,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>996, 666</value>
+    <value>996, 671</value>
   </data>
   <data name="tableLayoutPanel1.ToolTip" xml:space="preserve">
     <value />

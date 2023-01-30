@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -13,10 +14,37 @@ namespace MusicBeePlugin
     public partial class AdvancedSearchAndReplaceCommand : PluginWindowTemplate
     {
         private static string CustomText1;
+
+
         private static Color UntickedColor;
         private static Color TickedColor;
 
-        private static bool ignoreUntickAllCheckBoxCheckStateChanged = false;
+        private static Bitmap AutoAppliedPresetsAccent;
+        private static Bitmap AutoAppliedPresetsDimmed;
+
+        private static Bitmap PredefinedPresetsAccent;
+        private static Bitmap PredefinedPresetsDimmed;
+
+        private static Bitmap CustomizedPresetsAccent;
+        private static Bitmap CustomizedPresetsDimmed;
+
+        private static Bitmap UserPresetsAccent;
+        private static Bitmap UserPresetsDimmed;
+
+        private static Bitmap PlaylistPresetsAccent;
+        private static Bitmap PlaylistPresetsDimmed;
+
+        private static Bitmap FunctionIdPresetsAccent;
+        private static Bitmap FunctionIdPresetsDimmed;
+
+        private static Bitmap HotkeyPresetsAccent;
+        private static Bitmap HotkeyPresetsDimmed;
+
+        private static Bitmap UncheckAllFiltersAccent;
+        private static Bitmap UncheckAllFiltersDimmed;
+
+
+        private static bool ignorefFlterComboBoxSelectedIndexChanged = false;
 
         private bool ignoreCheckedPresetEvent = true;
         private int autoAppliedPresetCount;
@@ -65,6 +93,16 @@ namespace MusicBeePlugin
         private string autoApplyText;
         private string clickHereText;
         private string nowTickedText;
+
+        private bool tickedOnlyChecked;
+        private bool predefinedChecked;
+        private bool customizedChecked;
+        private bool userChecked;
+        private bool playlistChecked;
+        private bool functionIdChecked;
+        private bool hotkeyChecked;
+
+        private bool untickAllChecked;
 
         private bool presetsChanged = false;
         private string buttonCloseToolTip;
@@ -387,7 +425,7 @@ namespace MusicBeePlugin
                 append5 = originalPreset.append5;
             }
 
-            public override string ToString()//***
+            public override string ToString()
             {
                 return GetDictValue(names, Plugin.Language) + (customizedByUser ? " " : "") + (userPreset ? " " : "") 
                     + (condition ? " " : "") + (id != "" ? " " : "") + (hotkeyAssigned ? " ★" : "");
@@ -497,7 +535,7 @@ namespace MusicBeePlugin
 
                 if (form != null)
                 {
-                    if (customized || areFineCustomizationsMade(referencePreset))
+                    if (form.presetsChanged || customized || areFineCustomizationsMade(referencePreset))
                     {
                         form.presetsChanged = true;
                         form.setCheckedState(form.customizedPresetLabel, customized);
@@ -1399,46 +1437,75 @@ namespace MusicBeePlugin
             base.initializeForm();
 
 
-            float avgForeButtonBrightness = (clearSearchButton.ForeColor.R + clearSearchButton.ForeColor.G + clearSearchButton.ForeColor.B) / 3.0f / 256;//****
-            if (avgForeButtonBrightness > 0.5f)
-            {
-                clearIdButton.Image = Resources.clear_button_light;
-                clearSearchButton.Image = Resources.clear_button_light;
-            }
+            var heightField = typeof(CheckedListBox).GetField(
+                "scaledListItemBordersHeight",
+                BindingFlags.NonPublic | BindingFlags.Instance
+            );
 
-            float avgForeBrightness = (ForeColor.R + ForeColor.G + ForeColor.B) / 3.0f / 256;
-            if (avgForeBrightness > 0.5f)
-            {
-                tickedOnlyCheckBox.Image = Resources.auto_applied_presets_light;
-                predefinedPresetsCheckBox.Image = Resources.playlist_presets_light;
-                customizedPresetsCheckBox.Image = Resources.customized_presets_light;
-                userPresetsCheckBox.Image = Resources.user_presets_light;
-                playlistCheckBox.Image = Resources.playlist_presets_light;
-                idCheckBox.Image = Resources.function_id_presets_light;
-                hotkeyCheckBox.Image = Resources.hotkey_presets_light;
-                untickAllCheckBox.Image = Resources.uncheck_all_preset_filters_light;//****
+            var addedHeight = 3; // Some appropriate value, greater than the field's default of 2
 
-                checkedState = Resources.check_mark_light;
-                uncheckedState = Resources.uncheck_mark_gray;
-            }
-            else
-            {
-                checkedState = Resources.check_mark;
-                uncheckedState = Resources.uncheck_mark_gray;
-            }
+            heightField.SetValue(presetList, addedHeight); // Where "clb" is your CheckedListBox
+
+
+            uncheckedState = Plugin.GetSolidImageByBitmapMask(ForeColor, BackColor, Resources.uncheck_mark, 0.5f);
+            checkedState = Plugin.GetSolidImageByBitmapMask(ForeColor, BackColor, Resources.check_mark, 1.0f);
+
+
+            clearIdButton.Image = Plugin.GetSolidImageByBitmapMask(clearIdButton.ForeColor, clearIdButton.BackColor, Resources.clear_button, 1.0f);
+            clearSearchButton.Image = Plugin.GetSolidImageByBitmapMask(clearSearchButton.ForeColor, clearSearchButton.BackColor, Resources.clear_button, 1.0f);
+
+            //Color accentColor = SystemColors.Highlight;
+            Color accentColor = ForeColor;
+            float accentWeight = 1.0f;
+
+            Color dimmedColor = ForeColor;
+            float dimmedWeight = 0.2f;
+
+
+            AutoAppliedPresetsAccent = Plugin.GetSolidImageByBitmapMask(accentColor, BackColor, Resources.auto_applied_presets_centered, accentWeight);
+            AutoAppliedPresetsDimmed = Plugin.GetSolidImageByBitmapMask(dimmedColor, BackColor, Resources.auto_applied_presets_centered, dimmedWeight);
+
+            PredefinedPresetsAccent = Plugin.GetSolidImageByBitmapMask(accentColor, BackColor, Resources.predefined_presets_centered, accentWeight);
+            PredefinedPresetsDimmed = Plugin.GetSolidImageByBitmapMask(dimmedColor, BackColor, Resources.predefined_presets_centered, dimmedWeight);
+
+            CustomizedPresetsAccent = Plugin.GetSolidImageByBitmapMask(accentColor, BackColor, Resources.customized_presets_centered, accentWeight);
+            CustomizedPresetsDimmed = Plugin.GetSolidImageByBitmapMask(dimmedColor, BackColor, Resources.customized_presets_centered, dimmedWeight);
+
+            UserPresetsAccent = Plugin.GetSolidImageByBitmapMask(accentColor, BackColor, Resources.user_presets_centered, accentWeight);
+            UserPresetsDimmed = Plugin.GetSolidImageByBitmapMask(dimmedColor, BackColor, Resources.user_presets_centered, dimmedWeight);
+
+            PlaylistPresetsAccent = Plugin.GetSolidImageByBitmapMask(accentColor, BackColor, Resources.playlist_presets_centered, accentWeight);
+            PlaylistPresetsDimmed = Plugin.GetSolidImageByBitmapMask(dimmedColor, BackColor, Resources.playlist_presets_centered, dimmedWeight);
+
+            FunctionIdPresetsAccent = Plugin.GetSolidImageByBitmapMask(accentColor, BackColor, Resources.function_id_presets_centered, accentWeight);
+            FunctionIdPresetsDimmed = Plugin.GetSolidImageByBitmapMask(dimmedColor, BackColor, Resources.function_id_presets_centered, dimmedWeight);
+
+            HotkeyPresetsAccent = Plugin.GetSolidImageByBitmapMask(accentColor, BackColor, Resources.hotkey_presets_centered, accentWeight);
+            HotkeyPresetsDimmed = Plugin.GetSolidImageByBitmapMask(dimmedColor, BackColor, Resources.hotkey_presets_centered, dimmedWeight);
+
+            UncheckAllFiltersAccent = Plugin.GetSolidImageByBitmapMask(accentColor, BackColor, Resources.uncheck_all_preset_filters_centered, accentWeight);
+            UncheckAllFiltersDimmed = Plugin.GetSolidImageByBitmapMask(dimmedColor, BackColor, Resources.uncheck_all_preset_filters_centered, dimmedWeight);
+
+            tickedOnlyPictureBox.Image = AutoAppliedPresetsDimmed;
+            predefinedPictureBox.Image = PredefinedPresetsDimmed;
+            customizedPictureBox.Image = CustomizedPresetsDimmed;
+            userPictureBox.Image = UserPresetsDimmed;
+            playlistPictureBox.Image = PlaylistPresetsDimmed;
+            functionIdPictureBox.Image = FunctionIdPresetsDimmed;
+            hotkeyPictureBox.Image = HotkeyPresetsDimmed;
+
+
+            filterComboBox.SelectedIndex = 0;
 
 
             Color highlightColor = SystemColors.Highlight;
 
-            descriptionBox.Enabled = true;
-            descriptionBox.ReadOnly = true;
-
-            float highlightWeight = 0.8f;//***
+            float highlightWeight = 0.65f;//***
             descriptionBox.ForeColor = Plugin.GetHighlightColor(highlightColor, BackColor, highlightWeight);
             descriptionBox.BackColor = BackColor;
 
 
-            float hotTrackWeight = 0.8f;//***
+            float hotTrackWeight = 0.8f;
 
             //Color hotTrack = SystemColors.HotTrack;
             Color hotTrack = SystemColors.Highlight;
@@ -1492,7 +1559,6 @@ namespace MusicBeePlugin
 
             processPresetCheckBoxCheckedEvent = true;
 
-            //tickedOnlyCheckBox.Enabled = false;
             presetList.Items.Clear();
             presetList.Sorted = false;
             ignoreCheckedPresetEvent = false;
@@ -1500,6 +1566,7 @@ namespace MusicBeePlugin
             int i = 0;
             foreach (Preset tempPreset in presetsWorkingCopy.Values)
             {
+                preset = tempPreset;
                 presetList.Items.Add(tempPreset);
                 presetList.SetItemChecked(i, autoAppliedAsrPresetGuids.Contains(tempPreset.guid));
                 i++;
@@ -2916,12 +2983,10 @@ namespace MusicBeePlugin
             if (flag)
             {
                 label.Image = checkedState;
-                //label.ForeColor = SystemColors.ControlText;
             }
             else
             {
                 label.Image = uncheckedState;
-                //label.ForeColor = SystemColors.GrayText;
             }
 
             presetList.Refresh();
@@ -2937,8 +3002,8 @@ namespace MusicBeePlugin
 
                 descriptionBox.Text = "";
 
-                userPresetLabel.Text = "";
-                customizedPresetLabel.Text = "";
+                userPresetLabel.Image = uncheckedState; ;
+                customizedPresetLabel.Image = uncheckedState;
 
                 preserveValuesTextBox.Enabled = false;
                 label2.Enabled = false;
@@ -3273,11 +3338,11 @@ namespace MusicBeePlugin
 
             string message = "";
             //if (numberOfImportedPresets > 0)
-                message += AddLeadingSpaces(numberOfImportedPresets, 4, 1) + GetPluralForm(Plugin.MsgPresetsWereImported, numberOfImportedPresets);
+                message += AddLeadingSpaces(numberOfImportedPresets, 4) + GetPluralForm(Plugin.MsgPresetsWereImported, numberOfImportedPresets);
             if (numberOfImportedAsCopyPresets > 0)
-                message += AddLeadingSpaces(numberOfImportedAsCopyPresets, 4, 1) + GetPluralForm(Plugin.MsgPresetsWereImportedAsCopies, numberOfImportedAsCopyPresets);
+                message += AddLeadingSpaces(numberOfImportedAsCopyPresets, 4) + GetPluralForm(Plugin.MsgPresetsWereImportedAsCopies, numberOfImportedAsCopyPresets);
             if (numberOfErrors > 0)
-                message += AddLeadingSpaces(numberOfErrors, 4, 1) + GetPluralForm(Plugin.MsgPresetsFailedToImport, numberOfErrors);
+                message += AddLeadingSpaces(numberOfErrors, 4) + GetPluralForm(Plugin.MsgPresetsFailedToImport, numberOfErrors);
 
             if (numberOfImportedPresets + numberOfImportedAsCopyPresets > 0)
             {
@@ -3323,7 +3388,7 @@ namespace MusicBeePlugin
             return sentence;
         }
 
-        public static string AddLeadingSpaces(int number, int spacesCount, int zerosCount)
+        public static string AddLeadingSpaces(int number, int spacesCount, int zerosCount = 1)
         {
             string leadingZerosNumber = number.ToString("D" + spacesCount);
             string leadingSpaces = "";
@@ -3342,10 +3407,10 @@ namespace MusicBeePlugin
         public void refreshPresetList(Guid selectedPresetGuid)
         {
             searchTextBox.Text = "";
-            playlistCheckBox.Checked = false;
-            idCheckBox.Checked = false;
-            hotkeyCheckBox.Checked = false;
-            tickedOnlyCheckBox.Checked = false;
+            playlistChecked = false;
+            functionIdChecked = false;
+            hotkeyChecked = false;
+            tickedOnlyChecked = false;
 
             presetList.Items.Clear();
             presetList.Sorted = false;
@@ -3565,21 +3630,21 @@ namespace MusicBeePlugin
 
             string message = "";
             if (numberOfInstalledPresets > 0)
-                message += AddLeadingSpaces(numberOfInstalledPresets, 4, 1) + GetPluralForm(Plugin.MsgPresetsWereInstalled, numberOfInstalledPresets);
+                message += AddLeadingSpaces(numberOfInstalledPresets, 4) + GetPluralForm(Plugin.MsgPresetsWereInstalled, numberOfInstalledPresets);
             if (numberOfReinstalledCustomizedPresets > 0)
-                message += AddLeadingSpaces(numberOfReinstalledCustomizedPresets, 4, 1) + GetPluralForm(Plugin.MsgPresetsCustomizedWereReinstalled, numberOfReinstalledCustomizedPresets);
+                message += AddLeadingSpaces(numberOfReinstalledCustomizedPresets, 4) + GetPluralForm(Plugin.MsgPresetsCustomizedWereReinstalled, numberOfReinstalledCustomizedPresets);
             if (numberOfReinstalledPresets > 0)
-                message += AddLeadingSpaces(numberOfReinstalledPresets, 4, 1) + GetPluralForm(Plugin.MsgPresetsWereReinstalled, numberOfReinstalledPresets);
+                message += AddLeadingSpaces(numberOfReinstalledPresets, 4) + GetPluralForm(Plugin.MsgPresetsWereReinstalled, numberOfReinstalledPresets);
             if (numberOfUpdatedPresets > 0)
-                message += AddLeadingSpaces(numberOfUpdatedPresets, 4, 1) + GetPluralForm(Plugin.MsgPresetsWereUpdated, numberOfUpdatedPresets);
+                message += AddLeadingSpaces(numberOfUpdatedPresets, 4) + GetPluralForm(Plugin.MsgPresetsWereUpdated, numberOfUpdatedPresets);
             if (numberOfUpdatedCustomizedPresets > 0)
-                message += AddLeadingSpaces(numberOfUpdatedCustomizedPresets, 4, 1) + GetPluralForm(Plugin.MsgPresetsCustomizedWereUpdated, numberOfUpdatedCustomizedPresets);
+                message += AddLeadingSpaces(numberOfUpdatedCustomizedPresets, 4) + GetPluralForm(Plugin.MsgPresetsCustomizedWereUpdated, numberOfUpdatedCustomizedPresets);
             if (numberOfNotChangedSkippedPresets > 0)
-                message += AddLeadingSpaces(numberOfNotChangedSkippedPresets, 4, 1) + GetPluralForm(Plugin.MsgPresetsWereNotChanged, numberOfNotChangedSkippedPresets);
+                message += AddLeadingSpaces(numberOfNotChangedSkippedPresets, 4) + GetPluralForm(Plugin.MsgPresetsWereNotChanged, numberOfNotChangedSkippedPresets);
             if (numberOfRemovedPresets > 0)
-                message += AddLeadingSpaces(numberOfRemovedPresets, 4, 1) + GetPluralForm(Plugin.MsgPresetsRemoved, numberOfRemovedPresets);
+                message += AddLeadingSpaces(numberOfRemovedPresets, 4) + GetPluralForm(Plugin.MsgPresetsRemoved, numberOfRemovedPresets);
             if (numberOfErrors > 0)
-                message += AddLeadingSpaces(numberOfErrors, 4, 1) + GetPluralForm(Plugin.MsgPresetsFailedToUpdate, numberOfErrors);
+                message += AddLeadingSpaces(numberOfErrors, 4) + GetPluralForm(Plugin.MsgPresetsFailedToUpdate, numberOfErrors);
 
             if (message == "")
             {
@@ -3623,10 +3688,10 @@ namespace MusicBeePlugin
             }
 
             searchTextBox.Text = "";
-            playlistCheckBox.Checked = false;
-            idCheckBox.Checked = false;
-            hotkeyCheckBox.Checked = false;
-            tickedOnlyCheckBox.Checked = false;
+            playlistChecked = false;
+            functionIdChecked = false;
+            hotkeyChecked = false;
+            tickedOnlyChecked = false;
 
             presetList.Items.Clear();
             presetList.Sorted = false;
@@ -3991,7 +4056,7 @@ namespace MusicBeePlugin
             presetList.Sorted = false;
             ignoreCheckedPresetEvent = false;
 
-            setUntickAllCheckBoxState();
+            setCheckedPicturesStates();
 
             int i = 0;
             foreach (Preset tempPreset in presetsWorkingCopy.Values)
@@ -3999,27 +4064,27 @@ namespace MusicBeePlugin
                 bool filteringCriteriaAreMeet = true;
 
 
-                if (hotkeyCheckBox.Checked && !tempPreset.hotkeyAssigned)
+                if (hotkeyChecked && !tempPreset.hotkeyAssigned)
                 {
                     filteringCriteriaAreMeet = false;
                 }
-                else if (idCheckBox.Checked && string.IsNullOrEmpty(tempPreset.id))
+                else if (functionIdChecked && string.IsNullOrEmpty(tempPreset.id))
                 {
                     filteringCriteriaAreMeet = false;
                 }
-                else if (playlistCheckBox.Checked && !tempPreset.condition)
+                else if (playlistChecked && !tempPreset.condition)
                 {
                     filteringCriteriaAreMeet = false;
                 }
-                else if (userPresetsCheckBox.Checked && !tempPreset.userPreset)
+                else if (userChecked && !tempPreset.userPreset)
                 {
                     filteringCriteriaAreMeet = false;
                 }
-                else if (customizedPresetsCheckBox.Checked && !tempPreset.customizedByUser)
+                else if (customizedChecked && !tempPreset.customizedByUser)
                 {
                     filteringCriteriaAreMeet = false;
                 }
-                else if (predefinedPresetsCheckBox.Checked && tempPreset.userPreset)
+                else if (predefinedChecked && tempPreset.userPreset)
                 {
                     filteringCriteriaAreMeet = false;
                 }
@@ -4043,7 +4108,7 @@ namespace MusicBeePlugin
                 if (filteringCriteriaAreMeet)
                 {
                     bool autoApply = autoAppliedAsrPresetGuids.Contains(tempPreset.guid);
-                    if (!tickedOnlyCheckBox.Checked || autoApply)
+                    if (!tickedOnlyChecked || autoApply)
                     {
                         presetList.Items.Add(tempPreset);
                         presetList.SetItemChecked(i, autoApply);
@@ -4112,7 +4177,7 @@ namespace MusicBeePlugin
                     + nowTickedText.ToUpper().Replace("%TICKED-PRESETS%", autoAppliedPresetCount.ToString()));
 
                 label5.ForeColor = UntickedColor;
-                //tickedOnlyCheckBox.Checked = false;
+                //tickedOnlyChecked = false;
                 //tickedOnlyCheckBox.Enabled = false;
             }
             else
@@ -4147,6 +4212,7 @@ namespace MusicBeePlugin
                 if (presetList.SelectedIndex != -1)
                 {
                     autoAppliedAsrPresetGuids.Add(((Preset)presetList.SelectedItem).guid);
+                    presetsChanged = true;
                     if (!Plugin.SavedSettings.dontPlayTickedAsrPresetSound)
                         System.Media.SystemSounds.Exclamation.Play();
                 }
@@ -4157,6 +4223,7 @@ namespace MusicBeePlugin
                 if (presetList.SelectedIndex != -1)
                 {
                     autoAppliedAsrPresetGuids.Remove(((Preset)presetList.SelectedItem).guid);
+                    presetsChanged = true;
                 }
             }
 
@@ -4241,15 +4308,6 @@ namespace MusicBeePlugin
             preset.setCustomizationsFlag(this, backupedPreset);
         }
 
-        private void tickedOnlyCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            //if (autoAppliedPresetCount == 0)
-            //{
-            //    tickedOnlyCheckBox.Checked = false;
-            //}
-            filterPresetList();
-        }
-
         private void previewTable_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
         {
             if (preset == null)
@@ -4301,116 +4359,123 @@ namespace MusicBeePlugin
 
         private void label5_Click(object sender, EventArgs e)
         {
-            //if (tickedOnlyCheckBox.Enabled && !tickedOnlyCheckBox.Checked)
             if (autoAppliedPresetCount > 0)
             {
-                tickedOnlyCheckBox.Checked = true;
-                tickedOnlyCheckBox_CheckedChanged(null, null);
-            }
-        }
+                tickedOnlyChecked = true;
 
-        private void hotkeyCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            filterPresetList();
-        }
-
-        private void idCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            filterPresetList();
-        }
-
-        private void playlistCheckBox_CheckedChanged(object sender, EventArgs e)//***
-        {
-            filterPresetList();
-        }
-
-        private void userPresetsCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (customizedPresetsCheckBox.Checked && userPresetsCheckBox.Checked)
-            {
-                customizedPresetsCheckBox.Checked = false;
-                predefinedPresetsCheckBox.Checked = false;
-            }
-            else if (predefinedPresetsCheckBox.Checked && userPresetsCheckBox.Checked)
-            {
-                predefinedPresetsCheckBox.Checked = false;
-            }
-            else
-            {
                 filterPresetList();
             }
         }
 
-        private void customizedPresetsCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            predefinedPresetsCheckBox.Enabled = !customizedPresetsCheckBox.Checked;
-
-            if (customizedPresetsCheckBox.Checked && userPresetsCheckBox.Checked)
-                userPresetsCheckBox.Checked = false;
-            else
-                filterPresetList();
-        }
-
-        private void predefinedPresetsCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (predefinedPresetsCheckBox.Checked && userPresetsCheckBox.Checked)
-                userPresetsCheckBox.Checked = false;
-            else
-                filterPresetList();
-        }
-
-        private void setUntickAllCheckBoxState()
+        private void setCheckedPicturesStates()
         {
             int checkedCount = 0;
+            int checkedFilter = 0;
 
-            if (hotkeyCheckBox.Checked)
+            if (hotkeyChecked)
+            {
+                hotkeyPictureBox.Image = HotkeyPresetsAccent;
                 checkedCount++;
+                checkedFilter = 7;
+            }
+            else
+            {
+                hotkeyPictureBox.Image = HotkeyPresetsDimmed;
+            }
 
-            if (idCheckBox.Checked)
+            if (functionIdChecked)
+            {
+                functionIdPictureBox.Image = FunctionIdPresetsAccent;
                 checkedCount++;
+                checkedFilter = 6;
+            }
+            else
+            {
+                functionIdPictureBox.Image = FunctionIdPresetsDimmed;
+            }
 
-            if (playlistCheckBox.Checked)
+            if (playlistChecked)
+            {
+                playlistPictureBox.Image = PlaylistPresetsAccent;
                 checkedCount++;
+                checkedFilter = 5;
+            }
+            else
+            {
+                playlistPictureBox.Image = PlaylistPresetsDimmed;
+            }
 
-            if (userPresetsCheckBox.Checked)
+            if (userChecked)
+            {
+                userPictureBox.Image = UserPresetsAccent;
                 checkedCount++;
+                checkedFilter = 4;
+            }
+            else
+            {
+                userPictureBox.Image = UserPresetsDimmed;
+            }
 
-            if (customizedPresetsCheckBox.Checked)
+            if (customizedChecked)
+            {
+                customizedPictureBox.Image = CustomizedPresetsAccent;
                 checkedCount++;
+                checkedFilter = 3;
+            }
+            else
+            {
+                customizedPictureBox.Image = CustomizedPresetsDimmed;
+            }
 
-            if (predefinedPresetsCheckBox.Checked)
+            if (predefinedChecked)
+            {
+                predefinedPictureBox.Image = PredefinedPresetsAccent;
                 checkedCount++;
+                checkedFilter = 2;
+            }
+            else
+            {
+                predefinedPictureBox.Image = PredefinedPresetsDimmed;
+            }
 
-            if (tickedOnlyCheckBox.Checked)
+            if (tickedOnlyChecked)
+            {
+                tickedOnlyPictureBox.Image = AutoAppliedPresetsAccent;
                 checkedCount++;
+                checkedFilter = 1;
+            }
+            else
+            {
+                tickedOnlyPictureBox.Image = AutoAppliedPresetsDimmed;
+            }
 
-            ignoreUntickAllCheckBoxCheckStateChanged = true;
+
+            ignorefFlterComboBoxSelectedIndexChanged = true;
 
             if (checkedCount == 0)
-                untickAllCheckBox.CheckState = CheckState.Unchecked;
-            else if (checkedCount == 7)
-                untickAllCheckBox.CheckState = CheckState.Checked;
+            {
+                untickAllChecked = false;
+                filterComboBox.SelectedIndex = 0;
+            }
             else
-                untickAllCheckBox.CheckState = CheckState.Indeterminate;
+            {
+                untickAllChecked = true;
 
-            ignoreUntickAllCheckBoxCheckStateChanged = false;
-        }
+                if (checkedCount > 1)
+                    filterComboBox.SelectedIndex = -1;
+                else
+                    filterComboBox.SelectedIndex = checkedFilter;
+            }
 
-        private void untickAllCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (ignoreUntickAllCheckBoxCheckStateChanged)
-                return;
+            ignorefFlterComboBoxSelectedIndexChanged = false;
 
-            untickAllCheckBox.CheckState = CheckState.Unchecked;
 
-            hotkeyCheckBox.Checked = false;
-            idCheckBox.Checked = false;
-            playlistCheckBox.Checked = false;
-            userPresetsCheckBox.Checked = false;
-            customizedPresetsCheckBox.Checked = false;
-            predefinedPresetsCheckBox.Checked = false;
 
-            tickedOnlyCheckBox.Checked = false;
+            if (untickAllChecked)
+                uncheckAllFiltersPictureBox.Image = UncheckAllFiltersAccent;
+            else
+                uncheckAllFiltersPictureBox.Image = UncheckAllFiltersDimmed;
+
         }
 
         private void AdvancedSearchAndReplaceCommand_FormClosing(object sender, FormClosingEventArgs e)
@@ -4424,6 +4489,244 @@ namespace MusicBeePlugin
                     e.Cancel = true;
                 }
             }
+        }
+
+        private void filterComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ignorefFlterComboBoxSelectedIndexChanged)
+                return;
+
+
+            if (ModifierKeys == Keys.Control && filterComboBox.SelectedIndex > 0)
+            {
+                switch (filterComboBox.SelectedIndex)
+                {
+                    case 1:
+                        tickedOnlyChecked = !tickedOnlyChecked;
+
+                        break;
+                    case 2:
+                        predefinedChecked = !predefinedChecked;
+
+                        break;
+                    case 3:
+                        customizedChecked = !customizedChecked;
+
+                        break;
+                    case 4:
+                        userChecked = !userChecked;
+
+                        break;
+                    case 5:
+                        playlistChecked = !playlistChecked;
+
+                        break;
+                    case 6:
+                        functionIdChecked = !functionIdChecked;
+
+                        break;
+                    case 7:
+                        hotkeyChecked = !hotkeyChecked;
+
+                        break;
+                }
+            }
+            else if (filterComboBox.SelectedIndex >= 0)
+            {
+                tickedOnlyChecked = false;
+                predefinedChecked = false;
+                customizedChecked = false;
+                userChecked = false;
+                playlistChecked = false;
+                functionIdChecked = false;
+                hotkeyChecked = false;
+
+                switch (filterComboBox.SelectedIndex)
+                {
+                    case 1:
+                        tickedOnlyChecked = true;
+
+                        break;
+                    case 2:
+                        predefinedChecked = true;
+
+                        break;
+                    case 3:
+                        customizedChecked = true;
+
+                        break;
+                    case 4:
+                        userChecked = true;
+
+                        break;
+                    case 5:
+                        playlistChecked = true;
+
+                        break;
+                    case 6:
+                        functionIdChecked = true;
+
+                        break;
+                    case 7:
+                        hotkeyChecked = true;
+
+                        break;
+                }
+            }
+
+
+            setCheckedPicturesStates();
+        }
+
+        private void tickedOnlyPictureBox_Click(object sender, EventArgs e)
+        {
+            tickedOnlyChecked = !tickedOnlyChecked;
+
+            if (tickedOnlyChecked && ModifierKeys != Keys.Control)
+            {
+                predefinedChecked = false;
+                customizedChecked = false;
+                userChecked = false;
+                playlistChecked = false;
+                functionIdChecked = false;
+                hotkeyChecked = false;
+            }
+
+            filterPresetList();
+        }
+
+        private void predefinedPictureBox_Click(object sender, EventArgs e)
+        {
+            predefinedChecked = !predefinedChecked;
+
+            if (predefinedChecked && ModifierKeys != Keys.Control)
+            {
+                tickedOnlyChecked = false;
+                customizedChecked = false;
+                userChecked = false;
+                playlistChecked = false;
+                functionIdChecked = false;
+                hotkeyChecked = false;
+            }
+            else if (predefinedChecked && userChecked)
+            {
+                userChecked = false;
+            }
+
+            filterPresetList();
+        }
+
+        private void customizedPictureBox_Click(object sender, EventArgs e)
+        {
+            customizedChecked = !customizedChecked;
+
+            if (customizedChecked && ModifierKeys != Keys.Control)
+            {
+                tickedOnlyChecked = false;
+                predefinedChecked = false;
+                userChecked = false;
+                playlistChecked = false;
+                functionIdChecked = false;
+                hotkeyChecked = false;
+            }
+            else if (customizedChecked && userChecked)
+            {
+                userChecked = false;
+            }
+
+            filterPresetList();
+        }
+
+        private void userPictureBox_Click(object sender, EventArgs e)
+        {
+            userChecked = !userChecked;
+
+            if (userChecked && ModifierKeys != Keys.Control)
+            {
+                tickedOnlyChecked = false;
+                predefinedChecked = false;
+                customizedChecked = false;
+                playlistChecked = false;
+                functionIdChecked = false;
+                hotkeyChecked = false;
+            }
+            else if (customizedChecked && userChecked)
+            {
+                customizedChecked = false;
+                predefinedChecked = false;
+            }
+            else if (predefinedChecked && userChecked)
+            {
+                predefinedChecked = false;
+            }
+
+            filterPresetList();
+        }
+
+        private void playlistPictureBox_Click(object sender, EventArgs e)
+        {
+            playlistChecked = !playlistChecked;
+
+            if (playlistChecked && ModifierKeys != Keys.Control)
+            {
+                tickedOnlyChecked = false;
+                predefinedChecked = false;
+                customizedChecked = false;
+                userChecked = false;
+                functionIdChecked = false;
+                hotkeyChecked = false;
+            }
+
+            filterPresetList();
+        }
+
+        private void functionIdPictureBox_Click(object sender, EventArgs e)
+        {
+            functionIdChecked = !functionIdChecked;
+
+            if (functionIdChecked && ModifierKeys != Keys.Control)
+            {
+                tickedOnlyChecked = false;
+                predefinedChecked = false;
+                customizedChecked = false;
+                userChecked = false;
+                playlistChecked = false;
+                hotkeyChecked = false;
+            }
+
+            filterPresetList();
+        }
+
+        private void hotkeyPictureBox_Click(object sender, EventArgs e)
+        {
+            hotkeyChecked = !hotkeyChecked;
+
+            if (hotkeyChecked && ModifierKeys != Keys.Control)
+            {
+                tickedOnlyChecked = false;
+                predefinedChecked = false;
+                customizedChecked = false;
+                userChecked = false;
+                playlistChecked = false;
+                functionIdChecked = false;
+            }
+
+            filterPresetList();
+        }
+
+        private void uncheckAllFiltersPictureBox_Click(object sender, EventArgs e)
+        {
+            untickAllChecked = false;
+
+            hotkeyChecked = false;
+            functionIdChecked = false;
+            playlistChecked = false;
+            userChecked = false;
+            customizedChecked = false;
+            predefinedChecked = false;
+            tickedOnlyChecked = false;
+
+            filterPresetList();
         }
     }
 

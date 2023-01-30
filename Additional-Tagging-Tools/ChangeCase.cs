@@ -51,11 +51,7 @@ namespace MusicBeePlugin
         {
             base.initializeForm();
 
-            float avgForeButtonBrightness = (removeExceptionButton.ForeColor.R + removeExceptionButton.ForeColor.G + removeExceptionButton.ForeColor.B) / 3.0f / 256;
-            if (avgForeButtonBrightness > 0.5f)
-            {
-                removeExceptionButton.Image = Resources.clear_button_light;
-            }
+            removeExceptionButton.Image = Plugin.GetSolidImageByBitmapMask(removeExceptionButton.ForeColor, removeExceptionButton.BackColor, Resources.clear_button, 1.0f);
 
             Plugin.FillList(sourceTagList.Items);
             sourceTagList.Text = Plugin.SavedSettings.changeCaseSourceTagName;

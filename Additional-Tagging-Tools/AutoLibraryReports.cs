@@ -676,11 +676,7 @@ namespace MusicBeePlugin
         {
             base.initializeForm();
 
-            float avgForeButtonBrightness = (clearIdButton.ForeColor.R + clearIdButton.ForeColor.G + clearIdButton.ForeColor.B) / 3.0f / 256;
-            if (avgForeButtonBrightness > 0.5f)
-            {
-                clearIdButton.Image = Resources.clear_button_light;
-            }
+            clearIdButton.Image = Plugin.GetSolidImageByBitmapMask(clearIdButton.ForeColor, clearIdButton.BackColor, Resources.clear_button, 1.0f);
 
 
             float highlightWeight = 0.8f;//***
@@ -1762,7 +1758,7 @@ namespace MusicBeePlugin
             labelNotSaved.Visible = true;
         }
 
-        private void idTextBox_Leave(object sender, EventArgs e)//*****
+        private void idTextBox_Leave(object sender, EventArgs e)
         {
             if (presetsBox.SelectedIndex == -1)
                 return;

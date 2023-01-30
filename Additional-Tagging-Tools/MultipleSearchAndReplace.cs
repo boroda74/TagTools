@@ -1,6 +1,7 @@
 ﻿using MusicBeePlugin.Properties;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -52,17 +53,9 @@ namespace MusicBeePlugin
         {
             base.initializeForm();
 
-            float avgForeBrightness = (ForeColor.R + ForeColor.G + ForeColor.B) / 3.0f / 256;
-            if (avgForeBrightness > 0.5f)
-            {
-                autoApplyCheckBox.Image = Resources.auto_applied_presets_light;
-            }
 
-            float avgForeButtonBrightness = (buttonDeleteSaved.ForeColor.R + buttonDeleteSaved.ForeColor.G + buttonDeleteSaved.ForeColor.B) / 3.0f / 256;
-            if (avgForeButtonBrightness > 0.5f)
-            {
-                buttonDeleteSaved.Image = Resources.clear_button_light;
-            }
+            buttonDeleteSaved.Image = Plugin.GetSolidImageByBitmapMask(buttonDeleteSaved.ForeColor, BackColor, Resources.clear_button, 1.0f);
+            autoApplyPictureBox.Image = Plugin.GetSolidImageByBitmapMask(ForeColor, BackColor, Resources.auto_applied_presets_centered, 1.0f);
 
 
             Plugin.FillList(destinationTagList.Items, false, false, false);

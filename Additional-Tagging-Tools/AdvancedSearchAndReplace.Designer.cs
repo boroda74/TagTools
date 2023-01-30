@@ -1,4 +1,6 @@
-﻿namespace MusicBeePlugin
+﻿using System.Drawing.Drawing2D;
+
+namespace MusicBeePlugin
 {
     partial class AdvancedSearchAndReplaceCommand
     {
@@ -47,21 +49,21 @@
             this.applyToPlayingTrackCheckBox = new System.Windows.Forms.CheckBox();
             this.preserveValuesTextBox = new System.Windows.Forms.TextBox();
             this.buttonCopy = new System.Windows.Forms.Button();
-            this.clearIdButton = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.searchTextBox = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
             this.buttonClose = new System.Windows.Forms.Button();
-            this.untickAllCheckBox = new System.Windows.Forms.CheckBox();
-            this.customizedPresetsCheckBox = new System.Windows.Forms.CheckBox();
-            this.predefinedPresetsCheckBox = new System.Windows.Forms.CheckBox();
-            this.userPresetsCheckBox = new System.Windows.Forms.CheckBox();
-            this.hotkeyCheckBox = new System.Windows.Forms.CheckBox();
-            this.idCheckBox = new System.Windows.Forms.CheckBox();
-            this.playlistCheckBox = new System.Windows.Forms.CheckBox();
-            this.tickedOnlyCheckBox = new System.Windows.Forms.CheckBox();
+            this.filterComboBox = new System.Windows.Forms.ComboBox();
+            this.hotkeyPictureBox = new System.Windows.Forms.PictureBox();
+            this.playlistPictureBox = new System.Windows.Forms.PictureBox();
+            this.userPictureBox = new System.Windows.Forms.PictureBox();
+            this.customizedPictureBox = new System.Windows.Forms.PictureBox();
+            this.predefinedPictureBox = new System.Windows.Forms.PictureBox();
+            this.tickedOnlyPictureBox = new System.Windows.Forms.PictureBox();
+            this.clearIdButton = new System.Windows.Forms.Button();
             this.clearSearchButton = new System.Windows.Forms.Button();
+            this.uncheckAllFiltersPictureBox = new System.Windows.Forms.PictureBox();
+            this.functionIdPictureBox = new System.Windows.Forms.PictureBox();
             this.presetList = new System.Windows.Forms.CheckedListBox();
             this.previewTable = new System.Windows.Forms.DataGridView();
             this.File = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -120,6 +122,14 @@
             this.label6 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dirtyErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.hotkeyPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.playlistPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.customizedPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.predefinedPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tickedOnlyPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.uncheckAllFiltersPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.functionIdPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -130,6 +140,7 @@
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).BeginInit();
             this.SuspendLayout();
+
             //MusicBee
             this.searchTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
             this.customTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
@@ -138,7 +149,34 @@
             this.customText4Box = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
             this.idTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
             this.preserveValuesTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
+
+            InterpolationMode defaultInterpolationMode = InterpolationMode.HighQualityBicubic;
+
+            this.tickedOnlyPictureBox = new InterpolatedBox();
+            ((InterpolatedBox)tickedOnlyPictureBox).Interpolation = defaultInterpolationMode;
+
+            this.predefinedPictureBox = new InterpolatedBox();
+            ((InterpolatedBox)predefinedPictureBox).Interpolation = defaultInterpolationMode;
+
+            this.customizedPictureBox = new InterpolatedBox();
+            ((InterpolatedBox)customizedPictureBox).Interpolation = defaultInterpolationMode;
+
+            this.userPictureBox = new InterpolatedBox();
+            ((InterpolatedBox)userPictureBox).Interpolation = defaultInterpolationMode;
+
+            this.playlistPictureBox = new InterpolatedBox();
+            ((InterpolatedBox)playlistPictureBox).Interpolation = defaultInterpolationMode;
+
+            this.functionIdPictureBox = new InterpolatedBox();
+            ((InterpolatedBox)functionIdPictureBox).Interpolation = defaultInterpolationMode;
+
+            this.hotkeyPictureBox = new InterpolatedBox();
+            ((InterpolatedBox)hotkeyPictureBox).Interpolation = defaultInterpolationMode;
+
+            this.uncheckAllFiltersPictureBox = new InterpolatedBox();
+            ((InterpolatedBox)uncheckAllFiltersPictureBox).Interpolation = defaultInterpolationMode;
             //~MusicBee
+
             // 
             // toolTip1
             // 
@@ -265,18 +303,6 @@
             this.buttonCopy.UseVisualStyleBackColor = true;
             this.buttonCopy.Click += new System.EventHandler(this.buttonCopy_Click);
             // 
-            // clearIdButton
-            // 
-            resources.ApplyResources(this.clearIdButton, "clearIdButton");
-            this.dirtyErrorProvider.SetError(this.clearIdButton, resources.GetString("clearIdButton.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.clearIdButton, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("clearIdButton.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.clearIdButton, ((int)(resources.GetObject("clearIdButton.IconPadding"))));
-            this.clearIdButton.Image = global::MusicBeePlugin.Properties.Resources.clear_button;
-            this.clearIdButton.Name = "clearIdButton";
-            this.toolTip1.SetToolTip(this.clearIdButton, resources.GetString("clearIdButton.ToolTip"));
-            this.clearIdButton.UseVisualStyleBackColor = true;
-            this.clearIdButton.Click += new System.EventHandler(this.clearIdButton_Click);
-            // 
             // buttonDelete
             // 
             resources.ApplyResources(this.buttonDelete, "buttonDelete");
@@ -307,16 +333,6 @@
             this.toolTip1.SetToolTip(this.searchTextBox, resources.GetString("searchTextBox.ToolTip"));
             this.searchTextBox.TextChanged += new System.EventHandler(this.searchTextBox_TextChanged);
             // 
-            // label8
-            // 
-            resources.ApplyResources(this.label8, "label8");
-            this.label8.BackColor = System.Drawing.Color.Transparent;
-            this.dirtyErrorProvider.SetError(this.label8, resources.GetString("label8.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.label8, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("label8.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.label8, ((int)(resources.GetObject("label8.IconPadding"))));
-            this.label8.Name = "label8";
-            this.toolTip1.SetToolTip(this.label8, resources.GetString("label8.ToolTip"));
-            // 
             // buttonClose
             // 
             resources.ApplyResources(this.buttonClose, "buttonClose");
@@ -329,110 +345,117 @@
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
-            // untickAllCheckBox
+            // filterComboBox
             // 
-            resources.ApplyResources(this.untickAllCheckBox, "untickAllCheckBox");
-            this.untickAllCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.dirtyErrorProvider.SetError(this.untickAllCheckBox, resources.GetString("untickAllCheckBox.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.untickAllCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("untickAllCheckBox.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.untickAllCheckBox, ((int)(resources.GetObject("untickAllCheckBox.IconPadding"))));
-            this.untickAllCheckBox.Image = global::MusicBeePlugin.Properties.Resources.uncheck_all_preset_filters;
-            this.untickAllCheckBox.Name = "untickAllCheckBox";
-            this.untickAllCheckBox.ThreeState = true;
-            this.toolTip1.SetToolTip(this.untickAllCheckBox, resources.GetString("untickAllCheckBox.ToolTip"));
-            this.untickAllCheckBox.UseVisualStyleBackColor = false;
-            this.untickAllCheckBox.CheckedChanged += new System.EventHandler(this.untickAllCheckBox_CheckedChanged);
+            resources.ApplyResources(this.filterComboBox, "filterComboBox");
+            this.filterComboBox.CausesValidation = false;
+            this.filterComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.dirtyErrorProvider.SetError(this.filterComboBox, resources.GetString("filterComboBox.Error"));
+            this.filterComboBox.FormattingEnabled = true;
+            this.dirtyErrorProvider.SetIconAlignment(this.filterComboBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("filterComboBox.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.filterComboBox, ((int)(resources.GetObject("filterComboBox.IconPadding"))));
+            this.filterComboBox.Items.AddRange(new object[] {
+            resources.GetString("filterComboBox.Items"),
+            resources.GetString("filterComboBox.Items1"),
+            resources.GetString("filterComboBox.Items2"),
+            resources.GetString("filterComboBox.Items3"),
+            resources.GetString("filterComboBox.Items4"),
+            resources.GetString("filterComboBox.Items5"),
+            resources.GetString("filterComboBox.Items6"),
+            resources.GetString("filterComboBox.Items7")});
+            this.filterComboBox.Name = "filterComboBox";
+            this.toolTip1.SetToolTip(this.filterComboBox, resources.GetString("filterComboBox.ToolTip"));
+            this.filterComboBox.SelectedIndexChanged += new System.EventHandler(this.filterComboBox_SelectedIndexChanged);
             // 
-            // customizedPresetsCheckBox
+            // hotkeyPictureBox
             // 
-            resources.ApplyResources(this.customizedPresetsCheckBox, "customizedPresetsCheckBox");
-            this.customizedPresetsCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.dirtyErrorProvider.SetError(this.customizedPresetsCheckBox, resources.GetString("customizedPresetsCheckBox.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.customizedPresetsCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("customizedPresetsCheckBox.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.customizedPresetsCheckBox, ((int)(resources.GetObject("customizedPresetsCheckBox.IconPadding"))));
-            this.customizedPresetsCheckBox.Image = global::MusicBeePlugin.Properties.Resources.customized_presets;
-            this.customizedPresetsCheckBox.Name = "customizedPresetsCheckBox";
-            this.toolTip1.SetToolTip(this.customizedPresetsCheckBox, resources.GetString("customizedPresetsCheckBox.ToolTip"));
-            this.customizedPresetsCheckBox.UseVisualStyleBackColor = false;
-            this.customizedPresetsCheckBox.CheckedChanged += new System.EventHandler(this.customizedPresetsCheckBox_CheckedChanged);
+            resources.ApplyResources(this.hotkeyPictureBox, "hotkeyPictureBox");
+            this.hotkeyPictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.dirtyErrorProvider.SetError(this.hotkeyPictureBox, resources.GetString("hotkeyPictureBox.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.hotkeyPictureBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("hotkeyPictureBox.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.hotkeyPictureBox, ((int)(resources.GetObject("hotkeyPictureBox.IconPadding"))));
+            this.hotkeyPictureBox.Image = global::MusicBeePlugin.Properties.Resources.hotkey_presets_centered;
+            this.hotkeyPictureBox.Name = "hotkeyPictureBox";
+            this.hotkeyPictureBox.TabStop = false;
+            this.toolTip1.SetToolTip(this.hotkeyPictureBox, resources.GetString("hotkeyPictureBox.ToolTip"));
+            this.hotkeyPictureBox.Click += new System.EventHandler(this.hotkeyPictureBox_Click);
             // 
-            // predefinedPresetsCheckBox
+            // playlistPictureBox
             // 
-            resources.ApplyResources(this.predefinedPresetsCheckBox, "predefinedPresetsCheckBox");
-            this.predefinedPresetsCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.dirtyErrorProvider.SetError(this.predefinedPresetsCheckBox, resources.GetString("predefinedPresetsCheckBox.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.predefinedPresetsCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("predefinedPresetsCheckBox.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.predefinedPresetsCheckBox, ((int)(resources.GetObject("predefinedPresetsCheckBox.IconPadding"))));
-            this.predefinedPresetsCheckBox.Image = global::MusicBeePlugin.Properties.Resources.predefined_presets;
-            this.predefinedPresetsCheckBox.Name = "predefinedPresetsCheckBox";
-            this.toolTip1.SetToolTip(this.predefinedPresetsCheckBox, resources.GetString("predefinedPresetsCheckBox.ToolTip"));
-            this.predefinedPresetsCheckBox.UseVisualStyleBackColor = false;
-            this.predefinedPresetsCheckBox.CheckedChanged += new System.EventHandler(this.predefinedPresetsCheckBox_CheckedChanged);
+            resources.ApplyResources(this.playlistPictureBox, "playlistPictureBox");
+            this.playlistPictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.dirtyErrorProvider.SetError(this.playlistPictureBox, resources.GetString("playlistPictureBox.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.playlistPictureBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("playlistPictureBox.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.playlistPictureBox, ((int)(resources.GetObject("playlistPictureBox.IconPadding"))));
+            this.playlistPictureBox.Image = global::MusicBeePlugin.Properties.Resources.playlist_presets_centered;
+            this.playlistPictureBox.Name = "playlistPictureBox";
+            this.playlistPictureBox.TabStop = false;
+            this.toolTip1.SetToolTip(this.playlistPictureBox, resources.GetString("playlistPictureBox.ToolTip"));
+            this.playlistPictureBox.Click += new System.EventHandler(this.playlistPictureBox_Click);
             // 
-            // userPresetsCheckBox
+            // userPictureBox
             // 
-            resources.ApplyResources(this.userPresetsCheckBox, "userPresetsCheckBox");
-            this.userPresetsCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.dirtyErrorProvider.SetError(this.userPresetsCheckBox, resources.GetString("userPresetsCheckBox.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.userPresetsCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("userPresetsCheckBox.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.userPresetsCheckBox, ((int)(resources.GetObject("userPresetsCheckBox.IconPadding"))));
-            this.userPresetsCheckBox.Image = global::MusicBeePlugin.Properties.Resources.user_presets;
-            this.userPresetsCheckBox.Name = "userPresetsCheckBox";
-            this.toolTip1.SetToolTip(this.userPresetsCheckBox, resources.GetString("userPresetsCheckBox.ToolTip"));
-            this.userPresetsCheckBox.UseVisualStyleBackColor = false;
-            this.userPresetsCheckBox.CheckedChanged += new System.EventHandler(this.userPresetsCheckBox_CheckedChanged);
+            resources.ApplyResources(this.userPictureBox, "userPictureBox");
+            this.userPictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.dirtyErrorProvider.SetError(this.userPictureBox, resources.GetString("userPictureBox.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.userPictureBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("userPictureBox.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.userPictureBox, ((int)(resources.GetObject("userPictureBox.IconPadding"))));
+            this.userPictureBox.Image = global::MusicBeePlugin.Properties.Resources.user_presets_centered;
+            this.userPictureBox.Name = "userPictureBox";
+            this.userPictureBox.TabStop = false;
+            this.toolTip1.SetToolTip(this.userPictureBox, resources.GetString("userPictureBox.ToolTip"));
+            this.userPictureBox.Click += new System.EventHandler(this.userPictureBox_Click);
             // 
-            // hotkeyCheckBox
+            // customizedPictureBox
             // 
-            resources.ApplyResources(this.hotkeyCheckBox, "hotkeyCheckBox");
-            this.hotkeyCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.dirtyErrorProvider.SetError(this.hotkeyCheckBox, resources.GetString("hotkeyCheckBox.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.hotkeyCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("hotkeyCheckBox.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.hotkeyCheckBox, ((int)(resources.GetObject("hotkeyCheckBox.IconPadding"))));
-            this.hotkeyCheckBox.Image = global::MusicBeePlugin.Properties.Resources.hotkey_presets;
-            this.hotkeyCheckBox.Name = "hotkeyCheckBox";
-            this.toolTip1.SetToolTip(this.hotkeyCheckBox, resources.GetString("hotkeyCheckBox.ToolTip"));
-            this.hotkeyCheckBox.UseVisualStyleBackColor = false;
-            this.hotkeyCheckBox.CheckedChanged += new System.EventHandler(this.hotkeyCheckBox_CheckedChanged);
+            resources.ApplyResources(this.customizedPictureBox, "customizedPictureBox");
+            this.customizedPictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.dirtyErrorProvider.SetError(this.customizedPictureBox, resources.GetString("customizedPictureBox.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.customizedPictureBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("customizedPictureBox.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.customizedPictureBox, ((int)(resources.GetObject("customizedPictureBox.IconPadding"))));
+            this.customizedPictureBox.Image = global::MusicBeePlugin.Properties.Resources.customized_presets_centered;
+            this.customizedPictureBox.Name = "customizedPictureBox";
+            this.customizedPictureBox.TabStop = false;
+            this.toolTip1.SetToolTip(this.customizedPictureBox, resources.GetString("customizedPictureBox.ToolTip"));
+            this.customizedPictureBox.Click += new System.EventHandler(this.customizedPictureBox_Click);
             // 
-            // idCheckBox
+            // predefinedPictureBox
             // 
-            resources.ApplyResources(this.idCheckBox, "idCheckBox");
-            this.idCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.dirtyErrorProvider.SetError(this.idCheckBox, resources.GetString("idCheckBox.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.idCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("idCheckBox.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.idCheckBox, ((int)(resources.GetObject("idCheckBox.IconPadding"))));
-            this.idCheckBox.Image = global::MusicBeePlugin.Properties.Resources.function_id_presets;
-            this.idCheckBox.Name = "idCheckBox";
-            this.toolTip1.SetToolTip(this.idCheckBox, resources.GetString("idCheckBox.ToolTip"));
-            this.idCheckBox.UseVisualStyleBackColor = false;
-            this.idCheckBox.CheckedChanged += new System.EventHandler(this.idCheckBox_CheckedChanged);
+            resources.ApplyResources(this.predefinedPictureBox, "predefinedPictureBox");
+            this.predefinedPictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.dirtyErrorProvider.SetError(this.predefinedPictureBox, resources.GetString("predefinedPictureBox.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.predefinedPictureBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("predefinedPictureBox.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.predefinedPictureBox, ((int)(resources.GetObject("predefinedPictureBox.IconPadding"))));
+            this.predefinedPictureBox.Image = global::MusicBeePlugin.Properties.Resources.predefined_presets_centered;
+            this.predefinedPictureBox.Name = "predefinedPictureBox";
+            this.predefinedPictureBox.TabStop = false;
+            this.toolTip1.SetToolTip(this.predefinedPictureBox, resources.GetString("predefinedPictureBox.ToolTip"));
+            this.predefinedPictureBox.Click += new System.EventHandler(this.predefinedPictureBox_Click);
             // 
-            // playlistCheckBox
+            // tickedOnlyPictureBox
             // 
-            resources.ApplyResources(this.playlistCheckBox, "playlistCheckBox");
-            this.playlistCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.dirtyErrorProvider.SetError(this.playlistCheckBox, resources.GetString("playlistCheckBox.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.playlistCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("playlistCheckBox.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.playlistCheckBox, ((int)(resources.GetObject("playlistCheckBox.IconPadding"))));
-            this.playlistCheckBox.Image = global::MusicBeePlugin.Properties.Resources.playlist_presets;
-            this.playlistCheckBox.Name = "playlistCheckBox";
-            this.toolTip1.SetToolTip(this.playlistCheckBox, resources.GetString("playlistCheckBox.ToolTip"));
-            this.playlistCheckBox.UseVisualStyleBackColor = false;
-            this.playlistCheckBox.CheckedChanged += new System.EventHandler(this.playlistCheckBox_CheckedChanged);
+            resources.ApplyResources(this.tickedOnlyPictureBox, "tickedOnlyPictureBox");
+            this.tickedOnlyPictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.dirtyErrorProvider.SetError(this.tickedOnlyPictureBox, resources.GetString("tickedOnlyPictureBox.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.tickedOnlyPictureBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("tickedOnlyPictureBox.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.tickedOnlyPictureBox, ((int)(resources.GetObject("tickedOnlyPictureBox.IconPadding"))));
+            this.tickedOnlyPictureBox.Image = global::MusicBeePlugin.Properties.Resources.auto_applied_presets_centered;
+            this.tickedOnlyPictureBox.Name = "tickedOnlyPictureBox";
+            this.tickedOnlyPictureBox.TabStop = false;
+            this.toolTip1.SetToolTip(this.tickedOnlyPictureBox, resources.GetString("tickedOnlyPictureBox.ToolTip"));
+            this.tickedOnlyPictureBox.Click += new System.EventHandler(this.tickedOnlyPictureBox_Click);
             // 
-            // tickedOnlyCheckBox
+            // clearIdButton
             // 
-            resources.ApplyResources(this.tickedOnlyCheckBox, "tickedOnlyCheckBox");
-            this.tickedOnlyCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.dirtyErrorProvider.SetError(this.tickedOnlyCheckBox, resources.GetString("tickedOnlyCheckBox.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.tickedOnlyCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("tickedOnlyCheckBox.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.tickedOnlyCheckBox, ((int)(resources.GetObject("tickedOnlyCheckBox.IconPadding"))));
-            this.tickedOnlyCheckBox.Image = global::MusicBeePlugin.Properties.Resources.auto_applied_presets;
-            this.tickedOnlyCheckBox.Name = "tickedOnlyCheckBox";
-            this.toolTip1.SetToolTip(this.tickedOnlyCheckBox, resources.GetString("tickedOnlyCheckBox.ToolTip"));
-            this.tickedOnlyCheckBox.UseVisualStyleBackColor = false;
-            this.tickedOnlyCheckBox.CheckedChanged += new System.EventHandler(this.tickedOnlyCheckBox_CheckedChanged);
+            resources.ApplyResources(this.clearIdButton, "clearIdButton");
+            this.dirtyErrorProvider.SetError(this.clearIdButton, resources.GetString("clearIdButton.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.clearIdButton, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("clearIdButton.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.clearIdButton, ((int)(resources.GetObject("clearIdButton.IconPadding"))));
+            this.clearIdButton.Image = global::MusicBeePlugin.Properties.Resources.clear_button;
+            this.clearIdButton.Name = "clearIdButton";
+            this.toolTip1.SetToolTip(this.clearIdButton, resources.GetString("clearIdButton.ToolTip"));
+            this.clearIdButton.UseVisualStyleBackColor = true;
+            this.clearIdButton.Click += new System.EventHandler(this.clearIdButton_Click);
             // 
             // clearSearchButton
             // 
@@ -445,6 +468,32 @@
             this.toolTip1.SetToolTip(this.clearSearchButton, resources.GetString("clearSearchButton.ToolTip"));
             this.clearSearchButton.UseVisualStyleBackColor = true;
             this.clearSearchButton.Click += new System.EventHandler(this.clearSearchButton_Click);
+            // 
+            // uncheckAllFiltersPictureBox
+            // 
+            resources.ApplyResources(this.uncheckAllFiltersPictureBox, "uncheckAllFiltersPictureBox");
+            this.uncheckAllFiltersPictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.dirtyErrorProvider.SetError(this.uncheckAllFiltersPictureBox, resources.GetString("uncheckAllFiltersPictureBox.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.uncheckAllFiltersPictureBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("uncheckAllFiltersPictureBox.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.uncheckAllFiltersPictureBox, ((int)(resources.GetObject("uncheckAllFiltersPictureBox.IconPadding"))));
+            this.uncheckAllFiltersPictureBox.Image = global::MusicBeePlugin.Properties.Resources.uncheck_all_preset_filters_centered;
+            this.uncheckAllFiltersPictureBox.Name = "uncheckAllFiltersPictureBox";
+            this.uncheckAllFiltersPictureBox.TabStop = false;
+            this.toolTip1.SetToolTip(this.uncheckAllFiltersPictureBox, resources.GetString("uncheckAllFiltersPictureBox.ToolTip"));
+            this.uncheckAllFiltersPictureBox.Click += new System.EventHandler(this.uncheckAllFiltersPictureBox_Click);
+            // 
+            // functionIdPictureBox
+            // 
+            resources.ApplyResources(this.functionIdPictureBox, "functionIdPictureBox");
+            this.functionIdPictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.dirtyErrorProvider.SetError(this.functionIdPictureBox, resources.GetString("functionIdPictureBox.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.functionIdPictureBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("functionIdPictureBox.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.functionIdPictureBox, ((int)(resources.GetObject("functionIdPictureBox.IconPadding"))));
+            this.functionIdPictureBox.Image = global::MusicBeePlugin.Properties.Resources.function_id_presets_centered;
+            this.functionIdPictureBox.Name = "functionIdPictureBox";
+            this.functionIdPictureBox.TabStop = false;
+            this.toolTip1.SetToolTip(this.functionIdPictureBox, resources.GetString("functionIdPictureBox.ToolTip"));
+            this.functionIdPictureBox.Click += new System.EventHandler(this.functionIdPictureBox_Click);
             // 
             // presetList
             // 
@@ -627,21 +676,21 @@
             // panel1
             // 
             resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.Controls.Add(this.label8);
-            this.panel1.Controls.Add(this.untickAllCheckBox);
-            this.panel1.Controls.Add(this.customizedPresetsCheckBox);
-            this.panel1.Controls.Add(this.predefinedPresetsCheckBox);
-            this.panel1.Controls.Add(this.userPresetsCheckBox);
-            this.panel1.Controls.Add(this.hotkeyCheckBox);
-            this.panel1.Controls.Add(this.idCheckBox);
-            this.panel1.Controls.Add(this.playlistCheckBox);
+            this.panel1.Controls.Add(this.uncheckAllFiltersPictureBox);
+            this.panel1.Controls.Add(this.hotkeyPictureBox);
+            this.panel1.Controls.Add(this.functionIdPictureBox);
+            this.panel1.Controls.Add(this.playlistPictureBox);
+            this.panel1.Controls.Add(this.userPictureBox);
+            this.panel1.Controls.Add(this.customizedPictureBox);
+            this.panel1.Controls.Add(this.predefinedPictureBox);
+            this.panel1.Controls.Add(this.tickedOnlyPictureBox);
+            this.panel1.Controls.Add(this.filterComboBox);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.customizedPresetLabel);
             this.panel1.Controls.Add(this.userPresetLabel);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.preserveValuesTextBox);
-            this.panel1.Controls.Add(this.tickedOnlyCheckBox);
             this.panel1.Controls.Add(this.applyToPlayingTrackCheckBox);
             this.panel1.Controls.Add(this.clearIdButton);
             this.panel1.Controls.Add(this.idTextBox);
@@ -705,7 +754,7 @@
             this.dirtyErrorProvider.SetError(this.customizedPresetLabel, resources.GetString("customizedPresetLabel.Error"));
             this.dirtyErrorProvider.SetIconAlignment(this.customizedPresetLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("customizedPresetLabel.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.customizedPresetLabel, ((int)(resources.GetObject("customizedPresetLabel.IconPadding"))));
-            this.customizedPresetLabel.Image = global::MusicBeePlugin.Properties.Resources.uncheck_mark_gray;
+            this.customizedPresetLabel.Image = global::MusicBeePlugin.Properties.Resources.uncheck_mark;
             this.customizedPresetLabel.Name = "customizedPresetLabel";
             this.toolTip1.SetToolTip(this.customizedPresetLabel, resources.GetString("customizedPresetLabel.ToolTip"));
             // 
@@ -715,7 +764,7 @@
             this.dirtyErrorProvider.SetError(this.userPresetLabel, resources.GetString("userPresetLabel.Error"));
             this.dirtyErrorProvider.SetIconAlignment(this.userPresetLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("userPresetLabel.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.userPresetLabel, ((int)(resources.GetObject("userPresetLabel.IconPadding"))));
-            this.userPresetLabel.Image = global::MusicBeePlugin.Properties.Resources.uncheck_mark_gray;
+            this.userPresetLabel.Image = global::MusicBeePlugin.Properties.Resources.uncheck_mark;
             this.userPresetLabel.Name = "userPresetLabel";
             this.toolTip1.SetToolTip(this.userPresetLabel, resources.GetString("userPresetLabel.ToolTip"));
             // 
@@ -1111,6 +1160,14 @@
             this.Name = "AdvancedSearchAndReplaceCommand";
             this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AdvancedSearchAndReplaceCommand_FormClosing);
+            ((System.ComponentModel.ISupportInitialize)(this.hotkeyPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.playlistPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.customizedPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.predefinedPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tickedOnlyPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.uncheckAllFiltersPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.functionIdPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -1193,7 +1250,6 @@
         private System.Windows.Forms.TextBox idTextBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox applyToPlayingTrackCheckBox;
-        private System.Windows.Forms.CheckBox tickedOnlyCheckBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox preserveValuesTextBox;
         private System.Windows.Forms.Button buttonSaveClose;
@@ -1205,13 +1261,14 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.CheckBox hotkeyCheckBox;
-        private System.Windows.Forms.CheckBox idCheckBox;
-        private System.Windows.Forms.CheckBox playlistCheckBox;
-        private System.Windows.Forms.CheckBox userPresetsCheckBox;
-        private System.Windows.Forms.CheckBox predefinedPresetsCheckBox;
-        private System.Windows.Forms.CheckBox customizedPresetsCheckBox;
-        private System.Windows.Forms.CheckBox untickAllCheckBox;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox filterComboBox;
+        private System.Windows.Forms.PictureBox tickedOnlyPictureBox;
+        private System.Windows.Forms.PictureBox predefinedPictureBox;
+        private System.Windows.Forms.PictureBox customizedPictureBox;
+        private System.Windows.Forms.PictureBox userPictureBox;
+        private System.Windows.Forms.PictureBox playlistPictureBox;
+        private System.Windows.Forms.PictureBox functionIdPictureBox;
+        private System.Windows.Forms.PictureBox hotkeyPictureBox;
+        private System.Windows.Forms.PictureBox uncheckAllFiltersPictureBox;
     }
 }
