@@ -310,7 +310,7 @@
     <value>0</value>
   </data>
   <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>495, 41</value>
+    <value>506, 41</value>
   </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>94, 13</value>
@@ -331,7 +331,7 @@
     <value>0</value>
   </data>
   <data name="numberOfTagsToRecalculateNumericUpDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>369, 39</value>
+    <value>380, 39</value>
   </data>
   <data name="numberOfTagsToRecalculateNumericUpDown.ToolTip" xml:space="preserve">
     <value />
@@ -346,10 +346,10 @@
     <value>0</value>
   </data>
   <data name="recalculateOnNumberOfTagsChangesCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>344, 17</value>
+    <value>374, 17</value>
   </data>
   <data name="recalculateOnNumberOfTagsChangesCheckBox.Text" xml:space="preserve">
-    <value>Вычислять агрегатные функции и сохранять их в теги каждые</value>
+    <value>Применять отмеченные пресеты к выбранным тегам после каждых</value>
   </data>
   <data name="recalculateOnNumberOfTagsChangesCheckBox.ToolTip" xml:space="preserve">
     <value />
@@ -691,7 +691,7 @@
     <value>803, 28</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Вычисление выбранных пресетов при запуске и сохранение всех агрегатных функций в (свои) теги. Таблица сортируется по группирующим тегам слева направо после нажатия кнопки 'Просмотр'. </value>
+    <value>Отмеченные пресеты будут применяться к выбранным тегам при запуске MusicBee. Таблица сортируется по группирующим тегам слева направо после нажатия кнопки 'Просмотр'. </value>
   </data>
   <data name="label1.ToolTip" xml:space="preserve">
     <value />

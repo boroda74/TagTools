@@ -458,7 +458,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Resources\Transparent.png" />
+    <None Include="Properties\Resources\transparent-15.png" />
     <None Include="Properties\Resources\set-button-15.png" />
     <None Include="Properties\Resources\clear-button-15.png" />
     <None Include="Properties\Resources\Warning-15-Flat.png" />

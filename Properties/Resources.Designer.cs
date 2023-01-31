@@ -173,9 +173,9 @@ namespace MusicBeePlugin.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Transparent {
+        internal static System.Drawing.Bitmap transparent_15 {
             get {
-                object obj = ResourceManager.GetObject("Transparent", resourceCulture);
+                object obj = ResourceManager.GetObject("transparent_15", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

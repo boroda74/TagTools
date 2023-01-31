@@ -343,7 +343,7 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
     <value>Bottom, Right</value>
   </data>
   <data name="idTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>660, 173</value>
+    <value>659, 173</value>
   </data>
   <data name="idTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 20</value>
@@ -412,7 +412,7 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
     <value>263, 322</value>
   </data>
   <data name="preserveValuesTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>488, 20</value>
+    <value>487, 20</value>
   </data>
   <data name="preserveValuesTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>98</value>
@@ -535,7 +535,7 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
     <value>33, 28</value>
   </data>
   <data name="searchTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>365, 20</value>
+    <value>364, 20</value>
   </data>
   <data name="searchTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -583,7 +583,7 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
     <value>Hotkey assigned</value>
   </data>
   <data name="filterComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>598, 28</value>
+    <value>597, 28</value>
   </data>
   <data name="filterComboBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>151, 21</value>
@@ -652,7 +652,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="uncheckAllFiltersPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>574, 30</value>
+    <value>573, 30</value>
   </data>
   <data name="uncheckAllFiltersPictureBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>16, 16</value>
@@ -685,7 +685,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="hotkeyPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>547, 30</value>
+    <value>546, 30</value>
   </data>
   <data name="hotkeyPictureBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>16, 16</value>
@@ -721,7 +721,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="playlistPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>509, 30</value>
+    <value>508, 30</value>
   </data>
   <data name="playlistPictureBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>16, 16</value>
@@ -757,7 +757,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="userPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>490, 30</value>
+    <value>489, 30</value>
   </data>
   <data name="userPictureBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>16, 16</value>
@@ -793,7 +793,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="customizedPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>471, 30</value>
+    <value>470, 30</value>
   </data>
   <data name="customizedPictureBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>16, 16</value>
@@ -829,7 +829,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="predefinedPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>452, 30</value>
+    <value>451, 30</value>
   </data>
   <data name="predefinedPictureBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>16, 16</value>
@@ -865,7 +865,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="tickedOnlyPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>433, 30</value>
+    <value>432, 30</value>
   </data>
   <data name="tickedOnlyPictureBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>16, 16</value>
@@ -904,7 +904,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="clearIdButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>727, 172</value>
+    <value>726, 172</value>
   </data>
   <data name="clearIdButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>22, 22</value>
@@ -937,7 +937,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="clearSearchButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>401, 28</value>
+    <value>400, 28</value>
   </data>
   <data name="clearSearchButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>22, 22</value>
@@ -967,7 +967,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="functionIdPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>528, 30</value>
+    <value>527, 30</value>
   </data>
   <data name="functionIdPictureBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>16, 16</value>
@@ -1012,7 +1012,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>True</value>
   </data>
   <data name="presetList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>748, 119</value>
+    <value>747, 119</value>
   </data>
   <data name="presetList.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1183,7 +1183,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>51</value>
   </data>
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>749, 161</value>
+    <value>748, 161</value>
   </data>
   <data name="previewTable.TabIndex" type="System.Int32, mscorlib">
     <value>53</value>
@@ -1213,7 +1213,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>771, 682</value>
+    <value>761, 682</value>
   </data>
   <data name="tableLayoutPanel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -1231,7 +1231,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="userPresetPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>677, 199</value>
+    <value>676, 199</value>
   </data>
   <data name="userPresetPictureBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>13, 13</value>
@@ -1261,7 +1261,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="customizedPresetPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>540, 199</value>
+    <value>539, 199</value>
   </data>
   <data name="customizedPresetPictureBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>13, 13</value>
@@ -1294,7 +1294,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>554, 199</value>
+    <value>553, 199</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 13</value>
@@ -1327,7 +1327,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>690, 199</value>
+    <value>689, 199</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>61, 13</value>
@@ -1360,7 +1360,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>512, 177</value>
+    <value>511, 177</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>142, 13</value>
@@ -1640,7 +1640,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>Vertical</value>
   </data>
   <data name="descriptionBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>742, 55</value>
+    <value>741, 55</value>
   </data>
   <data name="descriptionBox.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1661,7 +1661,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>0, 341</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>751, 74</value>
+    <value>750, 74</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>84</value>
@@ -1694,7 +1694,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="customText4Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>411, 298</value>
+    <value>410, 298</value>
   </data>
   <data name="customText4Label.Size" type="System.Drawing.Size, System.Drawing">
     <value>86, 13</value>
@@ -1730,7 +1730,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="customText2Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>411, 272</value>
+    <value>410, 272</value>
   </data>
   <data name="customText2Label.Size" type="System.Drawing.Size, System.Drawing">
     <value>86, 13</value>
@@ -1760,7 +1760,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>False</value>
   </data>
   <data name="customText4Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>503, 296</value>
+    <value>502, 296</value>
   </data>
   <data name="customText4Box.Size" type="System.Drawing.Size, System.Drawing">
     <value>248, 20</value>
@@ -1787,7 +1787,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>False</value>
   </data>
   <data name="customText2Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>503, 270</value>
+    <value>502, 270</value>
   </data>
   <data name="customText2Box.Size" type="System.Drawing.Size, System.Drawing">
     <value>248, 20</value>
@@ -1856,7 +1856,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="labelTag6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>534, 248</value>
+    <value>533, 248</value>
   </data>
   <data name="labelTag6.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 13</value>
@@ -1913,7 +1913,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>False</value>
   </data>
   <data name="parameterTag6List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>590, 245</value>
+    <value>589, 245</value>
   </data>
   <data name="parameterTag6List.Size" type="System.Drawing.Size, System.Drawing">
     <value>160, 21</value>
@@ -2135,7 +2135,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="labelTag3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>534, 221</value>
+    <value>533, 221</value>
   </data>
   <data name="labelTag3.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 13</value>
@@ -2165,7 +2165,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>False</value>
   </data>
   <data name="parameterTag3List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>590, 218</value>
+    <value>589, 218</value>
   </data>
   <data name="parameterTag3List.Size" type="System.Drawing.Size, System.Drawing">
     <value>160, 21</value>
@@ -2321,7 +2321,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>283, 174</value>
   </data>
   <data name="playlistComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>223, 21</value>
+    <value>222, 21</value>
   </data>
   <data name="playlistComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>45</value>
@@ -2384,7 +2384,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>3, 0</value>
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>748, 30</value>
+    <value>747, 30</value>
   </data>
   <data name="label5.TabIndex" type="System.Int32, mscorlib">
     <value>42</value>
@@ -2408,7 +2408,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>3, 3</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>751, 417</value>
+    <value>750, 417</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>42</value>
@@ -2519,7 +2519,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>2</value>
   </data>
   <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>534, 2</value>
+    <value>533, 2</value>
   </data>
   <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
     <value>216, 72</value>
@@ -2648,7 +2648,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>3, 426</value>
   </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>751, 243</value>
+    <value>750, 243</value>
   </data>
   <data name="panel2.TabIndex" type="System.Int32, mscorlib">
     <value>43</value>
@@ -2672,7 +2672,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>2</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>757, 672</value>
+    <value>756, 672</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -2693,7 +2693,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="panel1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panel2" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Percent,63,Percent,37" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>779, 709</value>
+    <value>769, 709</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Advanced Search &amp; Replace</value>

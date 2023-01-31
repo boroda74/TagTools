@@ -1558,7 +1558,7 @@ namespace MusicBeePlugin
 
             presetList_SelectedIndexChanged(null, null);
 
-            buttonClose.Image = Resources.Transparent;
+            buttonClose.Image = Resources.transparent_15;
             buttonCloseToolTip = toolTip1.GetToolTip(buttonClose);
             toolTip1.SetToolTip(buttonClose, "");
 
@@ -2531,7 +2531,7 @@ namespace MusicBeePlugin
             TagToolsPlugin.SaveSettings();
 
             presetsChanged = false;
-            buttonClose.Image = Resources.Transparent;
+            buttonClose.Image = Resources.transparent_15;
             toolTip1.SetToolTip(buttonClose, "");
         }
 

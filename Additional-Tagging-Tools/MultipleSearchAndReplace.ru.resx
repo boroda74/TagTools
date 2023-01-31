@@ -117,13 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="buttonCancel.Error" xml:space="preserve">
-    <value />
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="buttonCancel.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
     <value>805, 3</value>
@@ -131,37 +124,19 @@
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Закрыть</value>
   </data>
-  <data name="buttonCancel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>891, 394</value>
   </data>
-  <data name="autoApplyPictureBox.Error" xml:space="preserve">
-    <value />
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="autoApplyPictureBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="autoApplyPictureBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="autoApplyPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>536, 34</value>
+    <value>536, 37</value>
+  </data>
+  <data name="autoApplyPictureBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 16</value>
   </data>
   <data name="autoApplyPictureBox.ToolTip" xml:space="preserve">
     <value>Сохранить пресет дополнительного поиска и замены как автоматически применяемый</value>
   </data>
-  <data name="autoApplyCheckBox.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="autoApplyCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="autoApplyCheckBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="autoApplyCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -171,23 +146,11 @@
   <data name="autoApplyCheckBox.ToolTip" xml:space="preserve">
     <value>Сохранить пресет дополнительного поиска и замены как автоматически применяемый</value>
   </data>
-  <data name="buttonDeleteSaved.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonDeleteSaved.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="buttonDeleteSaved.Location" type="System.Drawing.Point, System.Drawing">
     <value>857, 33</value>
   </data>
   <data name="buttonDeleteSaved.ToolTip" xml:space="preserve">
     <value>Удалить пресет дополнительного поиска и замены</value>
-  </data>
-  <data name="searchOnlyCheckBox.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="searchOnlyCheckBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="searchOnlyCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -205,23 +168,11 @@
     <value>В режиме «ТОЛЬКО ПОИСК» вы можете ввести несколько критериев 
 поиска, все из которых должны подходить для результатов поиска.</value>
   </data>
-  <data name="autoDestinationTagCheckBox.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="autoDestinationTagCheckBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="autoDestinationTagCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="autoDestinationTagCheckBox.ToolTip" xml:space="preserve">
     <value>Устанавливать тег назначения такой же, как тег источника</value>
-  </data>
-  <data name="loadComboBox.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="loadComboBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="loadComboBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>643, 34</value>
@@ -241,20 +192,11 @@
   <data name="NewTag.HeaderText" xml:space="preserve">
     <value>Новое значение</value>
   </data>
-  <data name="previewTable.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="previewTable.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="previewTable.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 118</value>
   </data>
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
     <value>870, 208</value>
-  </data>
-  <data name="previewTable.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="SearchTag.HeaderText" xml:space="preserve">
     <value>Искать в теге</value>
@@ -268,6 +210,7 @@
   <data name="dataGridViewTextBoxColumn14.HeaderText" xml:space="preserve">
     <value>Искать</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="dataGridViewTextBoxColumn14.MinimumWidth" type="System.Int32, mscorlib">
     <value>50</value>
   </data>
@@ -277,23 +220,8 @@
   <data name="dataGridViewTextBoxColumn16.MinimumWidth" type="System.Int32, mscorlib">
     <value>50</value>
   </data>
-  <data name="templateTable.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="templateTable.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="templateTable.Size" type="System.Drawing.Size, System.Drawing">
     <value>870, 109</value>
-  </data>
-  <data name="templateTable.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tableLayoutPanel1.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tableLayoutPanel1.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 60</value>
@@ -301,38 +229,11 @@
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>876, 329</value>
   </data>
-  <data name="tableLayoutPanel1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonDown.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonDown.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="buttonDown.Location" type="System.Drawing.Point, System.Drawing">
     <value>34, 33</value>
   </data>
-  <data name="buttonDown.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonUp.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonUp.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="buttonUp.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 33</value>
-  </data>
-  <data name="buttonUp.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonDelete.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonDelete.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="buttonDelete.Location" type="System.Drawing.Point, System.Drawing">
     <value>141, 33</value>
@@ -340,41 +241,14 @@
   <data name="buttonDelete.Text" xml:space="preserve">
     <value>Удалить</value>
   </data>
-  <data name="buttonDelete.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonAdd.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonAdd.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="buttonAdd.Location" type="System.Drawing.Point, System.Drawing">
     <value>60, 33</value>
   </data>
   <data name="buttonAdd.Text" xml:space="preserve">
     <value>Добавить</value>
   </data>
-  <data name="buttonAdd.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="destinationTagList.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="destinationTagList.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="destinationTagList.Location" type="System.Drawing.Point, System.Drawing">
     <value>282, 5</value>
-  </data>
-  <data name="destinationTagList.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label2.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label2.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 13</value>
@@ -382,38 +256,11 @@
   <data name="label2.Text" xml:space="preserve">
     <value>в тег</value>
   </data>
-  <data name="label2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="sourceTagList.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="sourceTagList.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="sourceTagList.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label1.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label1.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 13</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>Из тега</value>
-  </data>
-  <data name="label1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="templateNameTextBox.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="templateNameTextBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="templateNameTextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>282, 34</value>
@@ -423,12 +270,6 @@
   </data>
   <data name="templateNameTextBox.ToolTip" xml:space="preserve">
     <value>Название пресета</value>
-  </data>
-  <data name="buttonSave.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonSave.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="buttonSave.Location" type="System.Drawing.Point, System.Drawing">
     <value>562, 33</value>
@@ -441,12 +282,6 @@
 поиска и замены, чтобы позже отметить его для автоматического 
 применения или назначить ему комбинацию клавиш</value>
   </data>
-  <data name="label3.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label3.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>47, 13</value>
   </data>
@@ -456,26 +291,17 @@
   <data name="label3.ToolTip" xml:space="preserve">
     <value>Название пресета</value>
   </data>
-  <data name="buttonPreview.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="buttonPreview.Location" type="System.Drawing.Point, System.Drawing">
     <value>643, 3</value>
   </data>
   <data name="buttonPreview.Text" xml:space="preserve">
     <value>Просмотр</value>
   </data>
-  <data name="buttonPreview.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>899, 423</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Множественный поиск и замена</value>
-  </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="dirtyErrorProvider.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1074,19 +900,10 @@
         AaxBwAOsQeAHrEHwD6xB//+sQQ==
 </value>
   </data>
-  <data name="buttonOK.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonOK.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
     <value>724, 3</value>
   </data>
   <data name="buttonOK.Text" xml:space="preserve">
     <value>Применить</value>
-  </data>
-  <data name="buttonOK.ToolTip" xml:space="preserve">
-    <value />
   </data>
 </root>

@@ -137,7 +137,7 @@
     <value>Есть несохраненные изменения</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1011, 682</value>
+    <value>1000, 682</value>
   </data>
   <data name="userPresetPictureBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>853, 199</value>
@@ -947,7 +947,7 @@
     <value>996, 675</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>1019, 705</value>
+    <value>1008, 705</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Дополнительный поиск и замена</value>

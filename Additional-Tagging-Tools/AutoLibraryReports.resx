@@ -141,6 +141,9 @@
   <data name="setIdButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>742, 216</value>
   </data>
+  <data name="&gt;&gt;buttonPreview.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
   <data name="labelNotSaved.Text" xml:space="preserve">
     <value>Preset not saved</value>
   </data>
@@ -175,7 +178,7 @@
     <value>29</value>
   </data>
   <data name="recalculateOnNumberOfTagsChangesCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>409, 17</value>
+    <value>238, 17</value>
   </data>
   <data name="label2.Error" xml:space="preserve">
     <value />
@@ -370,7 +373,7 @@
     <value>794, 533</value>
   </data>
   <data name="recalculateOnNumberOfTagsChangesCheckBox.Text" xml:space="preserve">
-    <value>Calculate aggregated functions and save them to tags for ticked presets on every</value>
+    <value>Apply ticked presets to chosen tags on every</value>
   </data>
   <data name="recalculateOnNumberOfTagsChangesCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -409,7 +412,7 @@
     <value>616, 242</value>
   </data>
   <data name="numberOfTagsToRecalculateNumericUpDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>429, 37</value>
+    <value>246, 37</value>
   </data>
   <data name="&gt;&gt;clearIdButton.Parent" xml:space="preserve">
     <value>$this</value>
@@ -434,9 +437,6 @@
   </data>
   <data name="functionComboBox.Error" xml:space="preserve">
     <value />
-  </data>
-  <data name="label7.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
   </data>
   <data name="numberOfTagsToRecalculateNumericUpDown.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1276,7 +1276,7 @@
     <value>12</value>
   </data>
   <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>555, 41</value>
+    <value>372, 41</value>
   </data>
   <data name="&gt;&gt;buttonUncheckAll.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1446,8 +1446,8 @@
   <data name="&gt;&gt;conditionFieldList.Name" xml:space="preserve">
     <value>conditionFieldList</value>
   </data>
-  <data name="&gt;&gt;buttonPreview.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="label7.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;buttonDiscardPresetChanges.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1681,7 +1681,7 @@
     <value>42</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Calculate ticked presets at startup and save all aggregated functions to (custom) tags. Table is sorted by grouping tags left to right when 'Preview' button is clicked.</value>
+    <value>Apply ticked presets to chosen tags on MusicBee startup. Table is sorted by grouping tags from left to right, when 'Preview' button is clicked.</value>
   </data>
   <data name="buttonPreview.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -1953,6 +1953,9 @@
   <data name="buttonDiscardPresetChanges.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="label1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="&gt;&gt;numberOfTagsToRecalculateNumericUpDown.Name" xml:space="preserve">
     <value>numberOfTagsToRecalculateNumericUpDown</value>
   </data>
@@ -2013,16 +2016,13 @@
   <data name="clearIdButton.ToolTip" xml:space="preserve">
     <value>Remove assignment of virtual tag function ID to aggregated function</value>
   </data>
-  <data name="$this.Localizable" type="System.Boolean, mscorlib">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
-  <data name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing">
+  </metadata>
+  <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>157, 9</value>
-  </data>
-  <data name="dirtyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing">
+  </metadata>
+  <metadata name="dirtyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>9, 9</value>
-  </data>
-  <data name="$this.Language" type="System.Globalization.CultureInfo, mscorlib">
-    <value>ru</value>
-  </data>
+  </metadata>
 </root>

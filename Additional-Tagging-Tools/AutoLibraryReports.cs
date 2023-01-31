@@ -690,7 +690,7 @@ namespace MusicBeePlugin
 
             labelNotSaved.ForeColor = Plugin.GetHighlightColor(highlightColor, sampleColor, BackColor);
 
-            buttonClose.Image = Resources.Transparent;
+            buttonClose.Image = Resources.transparent_15;
             buttonCloseToolTip = toolTip.GetToolTip(buttonClose);
             toolTip.SetToolTip(buttonClose, "");
 
@@ -1395,7 +1395,7 @@ namespace MusicBeePlugin
             else if (!flag && presetChanged)
             {
                 presetChanged = false;
-                buttonClose.Image = Resources.Transparent;
+                buttonClose.Image = Resources.transparent_15;
                 toolTip.SetToolTip(buttonClose, "");
                 labelNotSaved.Visible = false;
 
