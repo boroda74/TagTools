@@ -114,7 +114,9 @@ namespace MusicBeePlugin
         public static System.Threading.Timer PeriodicAutobackupTimer = null;
         public static object AutobackupLocker = new object();
 
-        public static Button EmptyButton = new Button();
+        public static Button EmptyButton;
+        public static TextBox EmptyTextBox;
+        public static Form EmptyForm;
 
         public static string[] ReadonlyTagsNames;
         private static string[] Conditions;
@@ -165,6 +167,40 @@ namespace MusicBeePlugin
         public static ToolStripMenuItem ASRPresetsContextMenuItem = null;
 
         private int InitialSkipCount;
+
+
+        //Themed bitmaps 
+        public static Bitmap CrossImage;
+        public static Bitmap SetImage;
+
+        public static Bitmap CheckedState;
+        public static Bitmap UncheckedState;
+
+        public static Bitmap Warning;
+
+        public static Bitmap AutoAppliedPresetsAccent;
+        public static Bitmap AutoAppliedPresetsDimmed;
+
+        public static Bitmap PredefinedPresetsAccent;
+        public static Bitmap PredefinedPresetsDimmed;
+
+        public static Bitmap CustomizedPresetsAccent;
+        public static Bitmap CustomizedPresetsDimmed;
+
+        public static Bitmap UserPresetsAccent;
+        public static Bitmap UserPresetsDimmed;
+
+        public static Bitmap PlaylistPresetsAccent;
+        public static Bitmap PlaylistPresetsDimmed;
+
+        public static Bitmap FunctionIdPresetsAccent;
+        public static Bitmap FunctionIdPresetsDimmed;
+
+        public static Bitmap HotkeyPresetsAccent;
+        public static Bitmap HotkeyPresetsDimmed;
+
+        public static Bitmap UncheckAllFiltersAccent;
+        public static Bitmap UncheckAllFiltersDimmed;
         #endregion
 
         #region Localized strings
@@ -576,10 +612,12 @@ namespace MusicBeePlugin
         public static string MsgTracks;
         public static string MsgActualPercent;
 
+        public static string MsgAlrDoYouWantToCloseWindowAndLoseAllChanges;
+        public static string MsgAsrDoYouWantToCloseWindowAndLoseAllChanges;
+
         public static string MsgIncorrectPresetName;
         public static string MsgDeletePresetConfirmation;
         public static string MsgInstallingConfirmation;
-        public static string MsgDoYouWantToCloseWindowAndLoseAllChanges;
         public static string MsgDoYouWantToResetYourCustomizedPredefinedPresets;
         public static string MsgDoYouWantToRemovePredefinedPresets;
         public static string MsgDoYouWantToImportExistingPresetsAsCopies;
@@ -682,6 +720,8 @@ namespace MusicBeePlugin
         public static string CtlMSR;
 
         public static string CtlUnknown;
+
+        public static string CtlMixedFilters;
 
         public static string MsgFirstSelectWhichFieldYouWantToAssignFunctionIdTo = "First select, which field you want to assign function id to (leftmost combobox on function id line)!";
         #endregion
@@ -2684,9 +2724,12 @@ namespace MusicBeePlugin
             MsgActualPercent = "% / Act.: ";
             MsgIncorrectPresetName = "Incorrect preset name or duplicated preset names.";
 
+            MsgAlrDoYouWantToCloseWindowAndLoseAllChanges = "Preset has been changed. Do you still want to close the window and lose all changes?";
+
+            MsgAsrDoYouWantToCloseWindowAndLoseAllChanges = "One or more presets have been customized or changed. Do you still want to close the window and lose all changes?";
+
             MsgDeletePresetConfirmation = "Do you want to delete selected preset?";
             MsgInstallingConfirmation = "Do you want to install predefined presets?";
-            MsgDoYouWantToCloseWindowAndLoseAllChanges = "One or more presets have been customized or changed. Do you still want to close the window and lose all changes?";
             MsgDoYouWantToImportExistingPresetsAsCopies = "One or more imported presets already exist.\n"
                 + "Do you want to import them as new presets, and keep your current presets?\n\n"
                 + "OTHERWISE, EXISTING PRESETS WILL BE OVERWRITTEN!";
@@ -2819,6 +2862,8 @@ namespace MusicBeePlugin
             CtlMSR = "MSR: ";
 
             CtlUnknown = MbApiInterface.MB_GetLocalisation("dSum.msg.Unknown", "Unknown");
+
+            CtlMixedFilters = "(Mixed filters)";
 
             MsgFirstSelectWhichFieldYouWantToAssignFunctionIdTo = "First select, which field you want to assign function id to (leftmost combobox on function id line)!";
 
@@ -3215,9 +3260,12 @@ namespace MusicBeePlugin
                 MsgActualPercent = "% / Действ.: ";
                 MsgIncorrectPresetName = "Некорректное название пресета или пресет с таким названием уже существует.";
 
+                MsgAlrDoYouWantToCloseWindowAndLoseAllChanges = "Пресет был изменен. Вы все равно хотите закрыть это окно и потерять все изменения?";
+
+                MsgAsrDoYouWantToCloseWindowAndLoseAllChanges = "Один или несколько пресетов были настроены или изменены. Вы все равно хотите закрыть это окно и потерять все изменения?";
+
                 MsgDeletePresetConfirmation = "Вы действительно хотите удалить выбранный пресет?";
                 MsgInstallingConfirmation = "Вы действительно хотите установить стандартные пресеты?";
-                MsgDoYouWantToCloseWindowAndLoseAllChanges = "Один или несколько пресетов были настроены или изменены. Вы все равно хотите закрыть это окно и потерять все изменения?";
                 MsgDoYouWantToImportExistingPresetsAsCopies = "Некоторые импортируемые пресеты уже существуют.\n"
                     + "Импортировать их как новые пресеты, сохранив существующие?\n\n"
                     + "В ПРОТИВНОМ СЛУЧАЕ СУЩЕСТВУЮЩИЕ ПРЕСЕТЫ БУДУТ ПЕРЕЗАПИСАНЫ!\n";
@@ -3349,6 +3397,8 @@ namespace MusicBeePlugin
                 CtlWholeCuesheetWillBeReencoded = "ВНИМАНИЕ: ОДИН ИЛИ НЕСКЛЬКО ТРЕКОВ ОТНОСЯТСЯ К ФАЙЛУ РАЗМЕТКИ. КОДИРОВКА БУДЕТ ИЗМЕНЕНА ДЛЯ ВСЕГО ФАЙЛА РАЗМЕТКИ!";
 
                 CtlMSR = "МПЗ: ";
+
+                CtlMixedFilters = "(Несколько фильтров)";
 
                 MsgFirstSelectWhichFieldYouWantToAssignFunctionIdTo = "Сначала выберите, какому полю вы хотите назначить id функции вирт. тегов (самый левый выпадающий список на линии idа функции)!";
 
@@ -3823,7 +3873,9 @@ namespace MusicBeePlugin
                 PeriodicAutobackupTimer = null;
             }
 
-            EmptyButton.Dispose();
+            EmptyButton?.Dispose();
+            EmptyTextBox?.Dispose();
+            EmptyForm?.Dispose();
 
 
             lock (OpenedForms)
@@ -3899,6 +3951,66 @@ namespace MusicBeePlugin
                 return null;
             else
                 return (ToolStripMenuItem)menuItem;
+        }
+
+        public static void PrepareThemedBitmaps()
+        {
+            //Skin controls
+            EmptyButton?.Dispose();
+            EmptyTextBox?.Dispose();
+            EmptyForm?.Dispose();
+
+            EmptyButton = (Button)PluginWindowTemplate.SkinControl(new Button());
+            EmptyTextBox = (TextBox)PluginWindowTemplate.SkinControl(new TextBox());
+            EmptyForm = PluginWindowTemplate.SkinForm(new Form());
+
+
+            //Making themed bitmaps
+            UncheckedState = GetSolidImageByBitmapMask(GetWeightedColor(EmptyForm.ForeColor, EmptyForm.BackColor), Resources.uncheck_mark);
+            CheckedState = GetSolidImageByBitmapMask(EmptyForm.ForeColor, Resources.check_mark);
+
+            CrossImage = GetSolidImageByBitmapMask(EmptyButton.ForeColor, Resources.clear_button);
+            SetImage = GetSolidImageByBitmapMask(EmptyButton.ForeColor, Resources.set_button);
+
+            if (EmptyButton.FlatStyle == FlatStyle.Flat)
+            {
+                Warning = Resources.Warning_15_Flat;
+            }
+            else
+            {
+                Warning = Resources.Warning_15;
+            }
+
+
+            //Color accentColor = SystemColors.Highlight;
+            Color accentColor = EmptyForm.ForeColor;
+            Color dimmedColor = EmptyForm.BackColor;
+            float dimmedWeight = 0.5f;
+
+
+            AutoAppliedPresetsAccent = GetSolidImageByBitmapMask(accentColor, Resources.auto_applied_presets);
+            AutoAppliedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(accentColor, dimmedColor, dimmedWeight), Resources.auto_applied_presets);
+
+            PredefinedPresetsAccent = GetSolidImageByBitmapMask(accentColor, Resources.predefined_presets);
+            PredefinedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(accentColor, dimmedColor, dimmedWeight), Resources.predefined_presets);
+
+            CustomizedPresetsAccent = GetSolidImageByBitmapMask(accentColor, Resources.customized_presets);
+            CustomizedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(accentColor, dimmedColor, dimmedWeight), Resources.customized_presets);
+
+            UserPresetsAccent = GetSolidImageByBitmapMask(accentColor, Resources.user_presets);
+            UserPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(accentColor, dimmedColor, dimmedWeight), Resources.user_presets);
+
+            PlaylistPresetsAccent = GetSolidImageByBitmapMask(accentColor, Resources.playlist_presets);
+            PlaylistPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(accentColor, dimmedColor, dimmedWeight), Resources.playlist_presets);
+
+            FunctionIdPresetsAccent = GetSolidImageByBitmapMask(accentColor, Resources.function_id_presets);
+            FunctionIdPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(accentColor, dimmedColor, dimmedWeight), Resources.function_id_presets);
+
+            HotkeyPresetsAccent = GetSolidImageByBitmapMask(accentColor, Resources.hotkey_presets);
+            HotkeyPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(accentColor, dimmedColor, dimmedWeight), Resources.hotkey_presets);
+
+            UncheckAllFiltersAccent = GetSolidImageByBitmapMask(accentColor, Resources.uncheck_all_preset_filters);
+            UncheckAllFiltersDimmed = GetSolidImageByBitmapMask(GetWeightedColor(accentColor, dimmedColor, dimmedWeight), Resources.uncheck_all_preset_filters);
         }
 
         // receive event notifications from MusicBee
@@ -3990,6 +4102,9 @@ namespace MusicBeePlugin
 
                     //Let's refresh UI
                     MbApiInterface.MB_InvokeCommand((Command)4, null);
+
+                    //Let's prepare themed bitmaps for controls
+                    PrepareThemedBitmaps();
 
                     break;
                 case NotificationType.TrackChanged:

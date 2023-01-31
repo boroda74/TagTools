@@ -138,6 +138,9 @@
   <data name="labelTag4.Text" xml:space="preserve">
     <value>&lt;Tag 4&gt;:</value>
   </data>
+  <data name="labelTag2.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="&gt;&gt;conditionCheckBox.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
@@ -201,6 +204,9 @@
   <data name="labelTag3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
+  <data name="buttonPreview.Error" xml:space="preserve">
+    <value>Error!</value>
+  </data>
   <data name="label2.ToolTip" xml:space="preserve">
     <value>Always preserve these tag values, no matter what tags these values occur in</value>
   </data>
@@ -240,8 +246,8 @@
   <data name="&gt;&gt;Track.Name" xml:space="preserve">
     <value>Track</value>
   </data>
-  <data name="&gt;&gt;clearIdButton.Parent" xml:space="preserve">
-    <value>panel1</value>
+  <data name="parameterTagList.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
   </data>
   <data name="customText4Label.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -252,8 +258,8 @@
   <data name="pictureBox1.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;NewTag3.Name" xml:space="preserve">
-    <value>NewTag3</value>
+  <data name="buttonImportNew.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 23</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>User preset</value>
@@ -279,8 +285,8 @@
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
     <value>749, 161</value>
   </data>
-  <data name="filterComboBox.Items5" xml:space="preserve">
-    <value>Constrained by playlist</value>
+  <data name="buttonCopy.Error" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;buttonExport.Parent" xml:space="preserve">
     <value>groupBox2</value>
@@ -327,8 +333,8 @@
   <data name="filterComboBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>151, 21</value>
   </data>
-  <data name="clearIdButton.ToolTip" xml:space="preserve">
-    <value>Remove assignment of virtual tag function ID to preset</value>
+  <data name="labelTag2.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="buttonImport.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 23</value>
@@ -351,8 +357,8 @@
   <data name="labelTag6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
-  <data name="functionIdPictureBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="&gt;&gt;clearIdButton.Parent" xml:space="preserve">
+    <value>panel1</value>
   </data>
   <data name="playlistComboBox.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -366,8 +372,8 @@
   <data name="customTextLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 272</value>
   </data>
-  <data name="labelTag.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="parameterTag6List.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="buttonExport.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -376,13 +382,10 @@
     <value>panel1</value>
   </data>
   <data name="userPresetPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>678, 196</value>
+    <value>677, 199</value>
   </data>
   <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>
-  </data>
-  <data name="customTextLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
   </data>
   <data name="customText2Label.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -396,8 +399,8 @@
   <data name="&gt;&gt;groupBox3.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="customTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
   </data>
   <data name="&gt;&gt;predefinedPictureBox.ZOrder" xml:space="preserve">
     <value>8</value>
@@ -414,9 +417,6 @@
   <data name="buttonExport.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 23</value>
   </data>
-  <data name="&gt;&gt;groupBox2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 28</value>
   </data>
@@ -432,6 +432,9 @@
   <data name="label5.TabIndex" type="System.Int32, mscorlib">
     <value>42</value>
   </data>
+  <data name="parameterTag3List.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="clearSearchButton.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -440,9 +443,6 @@
   </data>
   <data name="buttonOK.Error" xml:space="preserve">
     <value />
-  </data>
-  <data name="buttonPreview.Text" xml:space="preserve">
-    <value>Preview</value>
   </data>
   <data name="customizedPictureBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -470,9 +470,6 @@
   </data>
   <data name="searchTextBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
-  </data>
-  <data name="pictureBox1.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="parameterTag6List.Error" xml:space="preserve">
     <value />
@@ -504,11 +501,20 @@
   <data name="&gt;&gt;playlistPictureBox.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
+  <data name="filterComboBox.Items2" xml:space="preserve">
+    <value>Predefined</value>
+  </data>
   <data name="customText3Box.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="clearSearchButton.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
+  </data>
+  <data name="label2.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;NewTag4.Name" xml:space="preserve">
+    <value>NewTag4</value>
   </data>
   <data name="preserveValuesTextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>263, 322</value>
@@ -523,7 +529,7 @@
     <value>55</value>
   </data>
   <data name="conditionCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 174</value>
+    <value>4, 177</value>
   </data>
   <data name="buttonImportAll.Text" xml:space="preserve">
     <value>Install All</value>
@@ -538,13 +544,13 @@
     <value>9</value>
   </data>
   <data name="clearIdButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>727, 170</value>
+    <value>727, 172</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="NewTag2.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
-  </data>
-  <data name="&gt;&gt;filterComboBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="parameterTag2List.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom</value>
@@ -570,9 +576,6 @@
   <data name="applyToPlayingTrackCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="customizedPictureBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>91</value>
   </data>
@@ -582,8 +585,8 @@
   <data name="&gt;&gt;customText2Label.Name" xml:space="preserve">
     <value>customText2Label</value>
   </data>
-  <data name="buttonImport.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;playlistComboBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="predefinedPictureBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>431, 30</value>
@@ -621,6 +624,9 @@
   <data name="customText3Label.Text" xml:space="preserve">
     <value>&lt;Custom text 3&gt;:</value>
   </data>
+  <data name="playlistPictureBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="&gt;&gt;conditionCheckBox.Name" xml:space="preserve">
     <value>conditionCheckBox</value>
   </data>
@@ -642,7 +648,7 @@
   <data name="&gt;&gt;preserveValuesTextBox.Name" xml:space="preserve">
     <value>preserveValuesTextBox</value>
   </data>
-  <data name="label2.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+  <data name="buttonSaveClose.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
   <data name="buttonDeleteAll.ToolTip" xml:space="preserve">
@@ -690,9 +696,6 @@
   <data name="customText2Box.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="&gt;&gt;buttonOK.Name" xml:space="preserve">
-    <value>buttonOK</value>
-  </data>
   <data name="&gt;&gt;customText2Box.ZOrder" xml:space="preserve">
     <value>27</value>
   </data>
@@ -724,7 +727,7 @@
     <value>NoControl</value>
   </data>
   <data name="customizedPresetPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>540, 196</value>
+    <value>540, 199</value>
   </data>
   <data name="customText4Label.Location" type="System.Drawing.Point, System.Drawing">
     <value>411, 298</value>
@@ -807,9 +810,6 @@
   <data name="conditionCheckBox.Text" xml:space="preserve">
     <value>Auto-apply preset only if track is contained in playlist:</value>
   </data>
-  <data name="&gt;&gt;customTextBox.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
   <data name="assignHotkeyCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
@@ -834,8 +834,8 @@
   <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
     <value>85</value>
   </data>
-  <data name="buttonClose.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
+  <data name="&gt;&gt;labelTag4.ZOrder" xml:space="preserve">
+    <value>34</value>
   </data>
   <data name="&gt;&gt;tickedOnlyPictureBox.ZOrder" xml:space="preserve">
     <value>9</value>
@@ -858,11 +858,17 @@
   <data name="tickedOnlyPictureBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="&gt;&gt;buttonEdit.Name" xml:space="preserve">
-    <value>buttonEdit</value>
+  <data name="presetList.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
   </data>
   <data name="&gt;&gt;label6.Parent" xml:space="preserve">
     <value>groupBox2</value>
+  </data>
+  <data name="buttonClose.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;buttonSaveClose.Name" xml:space="preserve">
+    <value>buttonSaveClose</value>
   </data>
   <data name="clearSearchButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -967,7 +973,7 @@
     <value>Auto-applied</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>690, 196</value>
+    <value>690, 199</value>
   </data>
   <data name="clearIdButton.Error" xml:space="preserve">
     <value />
@@ -975,14 +981,14 @@
   <data name="predefinedPictureBox.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;buttonDeleteAll.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="customTextLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
   </data>
   <data name="label7.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="clearSearchButton.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 8.25pt</value>
+  <data name="&gt;&gt;customTextBox.Parent" xml:space="preserve">
+    <value>panel1</value>
   </data>
   <data name="&gt;&gt;parameterTag4List.Parent" xml:space="preserve">
     <value>panel1</value>
@@ -996,14 +1002,8 @@
   <data name="labelTag.Text" xml:space="preserve">
     <value>&lt;Tag 1&gt;:</value>
   </data>
-  <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>207, -2</value>
-  </data>
   <data name="&gt;&gt;applyToPlayingTrackCheckBox.Parent" xml:space="preserve">
     <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;OriginalTag1.Name" xml:space="preserve">
-    <value>OriginalTag1</value>
   </data>
   <data name="customText3Label.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1044,6 +1044,9 @@
   <data name="parameterTag5List.Size" type="System.Drawing.Size, System.Drawing">
     <value>160, 21</value>
   </data>
+  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
   <data name="&gt;&gt;buttonPreview.Parent" xml:space="preserve">
     <value>groupBox3</value>
   </data>
@@ -1053,8 +1056,8 @@
   <data name="customText4Box.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
-    <value>panel1</value>
+  <data name="labelTag5.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
   </data>
   <data name="parameterTag6List.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1068,8 +1071,8 @@
   <data name="tickedOnlyPictureBox.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;OriginalTag2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;hotkeyPictureBox.Name" xml:space="preserve">
+    <value>hotkeyPictureBox</value>
   </data>
   <data name="customText4Box.Error" xml:space="preserve">
     <value />
@@ -1078,7 +1081,7 @@
     <value>6</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>769, 709</value>
+    <value>779, 709</value>
   </data>
   <data name="customText3Box.Error" xml:space="preserve">
     <value />
@@ -1088,6 +1091,9 @@
   </data>
   <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
     <value>23</value>
+  </data>
+  <data name="label5.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="applyToPlayingTrackCheckBox.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1114,8 +1120,8 @@
     <value>Click to show only customized presets
 Ctrl+click to add/remove this filter to/from existing ones</value>
   </data>
-  <data name="buttonPreview.Error" xml:space="preserve">
-    <value>Error!</value>
+  <data name="parameterTag6List.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
   </data>
   <data name="buttonCopy.TabIndex" type="System.Int32, mscorlib">
     <value>47</value>
@@ -1717,8 +1723,8 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
         AaxBwAOsQeAHrEHwD6xB//+sQQ==
 </value>
   </data>
-  <data name="buttonEdit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 23</value>
+  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="playlistPictureBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1765,17 +1771,14 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="groupBox2.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
   <data name="&gt;&gt;panel2.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;buttonCopy.Parent" xml:space="preserve">
     <value>groupBox2</value>
   </data>
-  <data name="buttonExport.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="buttonDeleteAll.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
   </data>
   <data name="labelTag5.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 13</value>
@@ -1804,8 +1807,8 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="&gt;&gt;buttonImportAll.Parent" xml:space="preserve">
     <value>groupBox2</value>
   </data>
-  <data name="customizedPictureBox.TabIndex" type="System.Int32, mscorlib">
-    <value>119</value>
+  <data name="parameterTag3List.TabIndex" type="System.Int32, mscorlib">
+    <value>69</value>
   </data>
   <data name="buttonCreate.ToolTip" xml:space="preserve">
     <value />
@@ -1813,11 +1816,14 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="playlistComboBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="&gt;&gt;parameterTag4List.ZOrder" xml:space="preserve">
-    <value>35</value>
+  <data name="&gt;&gt;buttonEdit.Name" xml:space="preserve">
+    <value>buttonEdit</value>
   </data>
   <data name="&gt;&gt;idTextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="clearSearchButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 8.25pt</value>
   </data>
   <data name="applyToPlayingTrackCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -1842,6 +1848,9 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   </data>
   <data name="filterComboBox.Error" xml:space="preserve">
     <value />
+  </data>
+  <data name="&gt;&gt;customText4Box.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
     <value>panel1</value>
@@ -1894,6 +1903,9 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="buttonExport.TabIndex" type="System.Int32, mscorlib">
     <value>39</value>
   </data>
+  <data name="buttonExport.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 341</value>
   </data>
@@ -1924,8 +1936,8 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="&gt;&gt;labelTag6.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name="buttonImportAll.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+  <data name="playlistPictureBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>502, 30</value>
   </data>
   <data name="&gt;&gt;clearSearchButton.ZOrder" xml:space="preserve">
     <value>20</value>
@@ -1938,6 +1950,9 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>114, 13</value>
+  </data>
+  <data name="&gt;&gt;buttonDeleteAll.Name" xml:space="preserve">
+    <value>buttonDeleteAll</value>
   </data>
   <data name="previewTable.TabIndex" type="System.Int32, mscorlib">
     <value>53</value>
@@ -1978,8 +1993,8 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="&gt;&gt;parameterTag4List.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonOK.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="clearIdButton.ToolTip" xml:space="preserve">
+    <value>Remove assignment of virtual tag function ID to preset</value>
   </data>
   <data name="parameterTag5List.Error" xml:space="preserve">
     <value />
@@ -1987,8 +2002,8 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="tickedOnlyPictureBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="buttonCreate.TabIndex" type="System.Int32, mscorlib">
-    <value>46</value>
+  <data name="&gt;&gt;buttonDelete.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="buttonCreate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2022,7 +2037,7 @@ If you have deleted some predefined presets, then they won't be reinstalled</val
     <value>Bottom, Right</value>
   </data>
   <data name="presetList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>748, 113</value>
+    <value>748, 119</value>
   </data>
   <data name="label1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -2042,8 +2057,8 @@ If you have deleted some predefined presets, then they won't be reinstalled</val
   <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
     <value>534, 2</value>
   </data>
-  <data name="customTextLabel.Text" xml:space="preserve">
-    <value>&lt;Custom text 1&gt;:</value>
+  <data name="customTextLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="NewTag5.HeaderText" xml:space="preserve">
     <value>New tag value</value>
@@ -2075,8 +2090,8 @@ If you have deleted some predefined presets, then they won't be reinstalled</val
   <data name="&gt;&gt;parameterTag6List.ZOrder" xml:space="preserve">
     <value>31</value>
   </data>
-  <data name="playlistPictureBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="&gt;&gt;filterComboBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonImport.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2099,9 +2114,6 @@ If you have deleted some predefined presets, then they won't be reinstalled</val
   <data name="label6.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
   </data>
-  <data name="buttonDeleteAll.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
   <data name="userPictureBox.ToolTip" xml:space="preserve">
     <value>Click to show only user presets
 Ctrl+click to add/remove this filter to/from existing ones</value>
@@ -2111,6 +2123,9 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   </data>
   <data name="customText2Label.Size" type="System.Drawing.Size, System.Drawing">
     <value>86, 13</value>
+  </data>
+  <data name="customText3Box.TabIndex" type="System.Int32, mscorlib">
+    <value>79</value>
   </data>
   <data name="&gt;&gt;customText2Label.Parent" xml:space="preserve">
     <value>panel1</value>
@@ -2150,9 +2165,6 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   </data>
   <data name="buttonEdit.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
-  </data>
-  <data name="OriginalTag3.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
   </data>
   <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
     <value>22</value>
@@ -2204,6 +2216,9 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   </data>
   <data name="applyToPlayingTrackCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>95</value>
+  </data>
+  <data name="&gt;&gt;functionIdPictureBox.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="assignHotkeyCheckBox.Text" xml:space="preserve">
     <value>Assign hotkey for this preset. Left: </value>
@@ -2259,8 +2274,11 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="uncheckAllFiltersPictureBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>574, 30</value>
   </data>
-  <data name="&gt;&gt;hotkeyPictureBox.Name" xml:space="preserve">
-    <value>hotkeyPictureBox</value>
+  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="buttonDelete.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="userPictureBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -2289,14 +2307,20 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="customText2Box.TabIndex" type="System.Int32, mscorlib">
     <value>81</value>
   </data>
-  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
+  <data name="parameterTagList.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="panel2.TabIndex" type="System.Int32, mscorlib">
+    <value>43</value>
   </data>
   <data name="preserveValuesTextBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="playlistComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left, Right</value>
+  </data>
+  <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
+    <value>111, 41</value>
   </data>
   <data name="descriptionBox.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2308,7 +2332,7 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
     <value />
   </data>
   <data name="playlistComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>283, 172</value>
+    <value>283, 174</value>
   </data>
   <data name="filterComboBox.Items4" xml:space="preserve">
     <value>User</value>
@@ -2316,8 +2340,8 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="buttonPreview.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 41</value>
   </data>
-  <data name="&gt;&gt;buttonDelete.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="filterComboBox.Items6" xml:space="preserve">
+    <value>Function id assigned</value>
   </data>
   <data name="filterComboBox.Items7" xml:space="preserve">
     <value>Hotkey assigned</value>
@@ -2533,17 +2557,14 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
         LQZvyDDp7mLyalUGkXdgVgaRd2BWBpFXkPKn/wcMDd38jH7nYgAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="filterComboBox.Items2" xml:space="preserve">
-    <value>Predefined</value>
+  <data name="labelTag4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>49, 248</value>
   </data>
   <data name="&gt;&gt;clearIdButton.Name" xml:space="preserve">
     <value>clearIdButton</value>
   </data>
   <data name="labelTag3.Text" xml:space="preserve">
     <value>&lt;Tag 3&gt;:</value>
-  </data>
-  <data name="customText2Label.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
   </data>
   <data name="clearSearchButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>22, 22</value>
@@ -2583,7 +2604,7 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="applyToPlayingTrackCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>226, 195</value>
+    <value>226, 198</value>
   </data>
   <data name="labelTag.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2617,6 +2638,9 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   </data>
   <data name="buttonDelete.Error" xml:space="preserve">
     <value />
+  </data>
+  <data name="buttonOK.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="buttonImportAll.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 23</value>
@@ -2669,14 +2693,11 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="labelTag5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom</value>
   </data>
-  <data name="panel2.TabIndex" type="System.Int32, mscorlib">
-    <value>43</value>
+  <data name="label5.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="&gt;&gt;toolTip1.Name" xml:space="preserve">
     <value>toolTip1</value>
-  </data>
-  <data name="&gt;&gt;playlistComboBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="customizedPictureBox.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>Zoom</value>
@@ -2732,8 +2753,11 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="previewTable.RowHeadersWidth" type="System.Int32, mscorlib">
     <value>51</value>
   </data>
-  <data name="&gt;&gt;groupBox3.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="buttonSaveClose.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 12</value>
+  </data>
+  <data name="customizedPictureBox.TabIndex" type="System.Int32, mscorlib">
+    <value>119</value>
   </data>
   <data name="hotkeyPictureBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -2741,8 +2765,8 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 0</value>
   </data>
-  <data name="&gt;&gt;NewTag4.Name" xml:space="preserve">
-    <value>NewTag4</value>
+  <data name="&gt;&gt;groupBox2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label3.Error" xml:space="preserve">
     <value />
@@ -2768,6 +2792,9 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="parameterTag5List.Location" type="System.Drawing.Point, System.Drawing">
     <value>346, 244</value>
   </data>
+  <data name="filterComboBox.Items5" xml:space="preserve">
+    <value>Constrained by playlist</value>
+  </data>
   <data name="buttonCopy.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 23</value>
   </data>
@@ -2792,11 +2819,8 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="groupBox3.TabIndex" type="System.Int32, mscorlib">
     <value>56</value>
   </data>
-  <data name="playlistPictureBox.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>Zoom</value>
-  </data>
-  <data name="buttonOK.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="parameterTagList.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="hotkeyPictureBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2810,20 +2834,17 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 2</value>
   </data>
-  <data name="label5.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="assignHotkeyCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
-  </data>
-  <data name="&gt;&gt;labelTag4.ZOrder" xml:space="preserve">
-    <value>34</value>
   </data>
   <data name="customText4Label.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="previewTable.Error" xml:space="preserve">
-    <value />
+  <data name="functionIdPictureBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="customTextLabel.Text" xml:space="preserve">
+    <value>&lt;Custom text 1&gt;:</value>
   </data>
   <data name="customText2Label.TabIndex" type="System.Int32, mscorlib">
     <value>80</value>
@@ -2846,9 +2867,6 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="buttonExportCustom.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 41</value>
   </data>
-  <data name="buttonDelete.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="buttonDeleteAll.Location" type="System.Drawing.Point, System.Drawing">
     <value>423, 12</value>
   </data>
@@ -2870,23 +2888,20 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="customTextBox.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;buttonSaveClose.Name" xml:space="preserve">
-    <value>buttonSaveClose</value>
+  <data name="customText2Label.Text" xml:space="preserve">
+    <value>&lt;Custom text 2&gt;:</value>
   </data>
   <data name="&gt;&gt;assignHotkeyCheckBox.ZOrder" xml:space="preserve">
     <value>19</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>512, 175</value>
+    <value>512, 177</value>
   </data>
   <data name="buttonDelete.ToolTip" xml:space="preserve">
     <value>Delete selected preset</value>
   </data>
   <data name="&gt;&gt;label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="userPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>479, 30</value>
   </data>
   <data name="customText2Box.Error" xml:space="preserve">
     <value />
@@ -2913,8 +2928,8 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
     <value>Install all predefined presets, updating already installed predefined presets to the latest version
 If you have deleted some preinstalled presets, they will be reinstalled</value>
   </data>
-  <data name="customText3Box.TabIndex" type="System.Int32, mscorlib">
-    <value>79</value>
+  <data name="&gt;&gt;File.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="idTextBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2931,8 +2946,8 @@ If you have deleted some preinstalled presets, they will be reinstalled</value>
   <data name="&gt;&gt;parameterTag3List.ZOrder" xml:space="preserve">
     <value>39</value>
   </data>
-  <data name="&gt;&gt;customTextLabel.Parent" xml:space="preserve">
-    <value>panel1</value>
+  <data name="&gt;&gt;OriginalTag1.Name" xml:space="preserve">
+    <value>OriginalTag1</value>
   </data>
   <data name="applyToPlayingTrackCheckBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2961,8 +2976,8 @@ If you have deleted some preinstalled presets, they will be reinstalled</value>
   <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="parameterTag3List.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="buttonClose.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
   </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
     <value>751, 243</value>
@@ -2973,14 +2988,11 @@ If you have deleted some preinstalled presets, they will be reinstalled</value>
   <data name="labelTag6.TabIndex" type="System.Int32, mscorlib">
     <value>74</value>
   </data>
-  <data name="customTextLabel.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="buttonExport.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
   </data>
   <data name="&gt;&gt;Track.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="buttonExport.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
     <value>Select preset below to edit it or apply it to selected tracks. Tick presets to automatically apply them if track tags are edited/updated or new tracks are added to library. Click here to see ticked presets only. Presets ticked for auto-applying: %TICKED-PRESETS%</value>
@@ -3006,8 +3018,8 @@ If you have deleted some preinstalled presets, they will be reinstalled</value>
   <data name="&gt;&gt;label4.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;NewTag5.Name" xml:space="preserve">
-    <value>NewTag5</value>
+  <data name="label5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="descriptionBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 13</value>
@@ -3030,14 +3042,14 @@ If you have deleted some preinstalled presets, they will be reinstalled</value>
   <data name="parameterTagList.TabIndex" type="System.Int32, mscorlib">
     <value>65</value>
   </data>
-  <data name="pictureBox1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+  <data name="labelTag5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="labelTag2.Location" type="System.Drawing.Point, System.Drawing">
     <value>288, 221</value>
   </data>
-  <data name="label5.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>528, 72</value>
   </data>
   <data name="&gt;&gt;buttonCopy.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -3084,12 +3096,6 @@ If you have deleted some preinstalled presets, they will be reinstalled</value>
   <data name="OriginalTag4.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="buttonCopy.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="filterComboBox.Items6" xml:space="preserve">
-    <value>Function id assigned</value>
-  </data>
   <data name="parameterTag6List.TabIndex" type="System.Int32, mscorlib">
     <value>75</value>
   </data>
@@ -3117,6 +3123,9 @@ If you have deleted some preinstalled presets, they will be reinstalled</value>
   <data name="groupBox3.Error" xml:space="preserve">
     <value />
   </data>
+  <data name="customTextLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>76</value>
+  </data>
   <data name="hotkeyPictureBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>550, 30</value>
   </data>
@@ -3138,17 +3147,20 @@ If you have deleted some preinstalled presets, they will be reinstalled</value>
   <data name="clearSearchButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>375, 28</value>
   </data>
+  <data name="parameterTag4List.Error" xml:space="preserve">
+    <value />
+  </data>
   <data name="hotkeyPictureBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;buttonCreate.Name" xml:space="preserve">
-    <value>buttonCreate</value>
+  <data name="buttonSaveClose.TabIndex" type="System.Int32, mscorlib">
+    <value>54</value>
   </data>
   <data name="label6.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="playlistPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>502, 30</value>
+  <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
   <data name="label3.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -3158,6 +3170,9 @@ If you have deleted some preinstalled presets, they will be reinstalled</value>
   </data>
   <data name="preserveValuesTextBox.Error" xml:space="preserve">
     <value />
+  </data>
+  <data name="parameterTag3List.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
   </data>
   <data name="groupBox3.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3189,14 +3204,14 @@ If you have deleted some preinstalled presets, they will be reinstalled</value>
   <data name="buttonExport.Text" xml:space="preserve">
     <value>Export...</value>
   </data>
+  <data name="buttonImportAll.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
   <data name="&gt;&gt;labelTag5.ZOrder" xml:space="preserve">
     <value>32</value>
   </data>
   <data name="labelTag6.Location" type="System.Drawing.Point, System.Drawing">
     <value>534, 248</value>
-  </data>
-  <data name="&gt;&gt;customText3Box.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="parameterTag4List.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -3231,14 +3246,14 @@ If you have deleted some preinstalled presets, they will be reinstalled</value>
   <data name="customTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>77</value>
   </data>
-  <data name="label5.ToolTip" xml:space="preserve">
-    <value />
+  <data name="customizedPictureBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;buttonSaveClose.Parent" xml:space="preserve">
     <value>groupBox3</value>
   </data>
-  <data name="uncheckAllFiltersPictureBox.ToolTip" xml:space="preserve">
-    <value>Remove all filters</value>
+  <data name="playlistPictureBox.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>Zoom</value>
   </data>
   <data name="label1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -3252,8 +3267,8 @@ If you have deleted some preinstalled presets, they will be reinstalled</value>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>244, 13</value>
   </data>
-  <data name="customText4Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>503, 296</value>
+  <data name="&gt;&gt;buttonOK.Name" xml:space="preserve">
+    <value>buttonOK</value>
   </data>
   <data name="&gt;&gt;groupBox3.Parent" xml:space="preserve">
     <value>panel2</value>
@@ -3286,8 +3301,8 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="buttonImportNew.Location" type="System.Drawing.Point, System.Drawing">
     <value>215, 12</value>
   </data>
-  <data name="labelTag2.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="userPictureBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="parameterTag4List.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -3331,20 +3346,11 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="buttonOK.Text" xml:space="preserve">
     <value>Apply</value>
   </data>
-  <data name="&gt;&gt;customText3Box.ZOrder" xml:space="preserve">
-    <value>30</value>
-  </data>
-  <data name="uncheckAllFiltersPictureBox.TabIndex" type="System.Int32, mscorlib">
-    <value>124</value>
-  </data>
   <data name="buttonPreview.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="parameterTag4List.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
-  </data>
-  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>528, 72</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>142, 13</value>
@@ -3376,14 +3382,8 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="&gt;&gt;parameterTag6List.Name" xml:space="preserve">
     <value>parameterTag6List</value>
   </data>
-  <data name="parameterTag6List.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="buttonExportCustom.ToolTip" xml:space="preserve">
     <value>Export all user presets</value>
-  </data>
-  <data name="presetList.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
   </data>
   <data name="&gt;&gt;searchTextBox.ZOrder" xml:space="preserve">
     <value>21</value>
@@ -3394,8 +3394,8 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="customText2Label.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="parameterTagList.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="userPresetPictureBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
   </data>
   <data name="buttonImport.Text" xml:space="preserve">
     <value>Import...</value>
@@ -3409,11 +3409,8 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="&gt;&gt;NewTag1.Name" xml:space="preserve">
     <value>NewTag1</value>
   </data>
-  <data name="userPresetPictureBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="buttonSaveClose.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+  <data name="&gt;&gt;buttonCreate.Name" xml:space="preserve">
+    <value>buttonCreate</value>
   </data>
   <data name="File.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
@@ -3428,7 +3425,7 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
     <value>29</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>554, 196</value>
+    <value>554, 199</value>
   </data>
   <data name="customTextBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -3439,9 +3436,6 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="groupBox1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="parameterTagList.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="customText4Label.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -3451,8 +3445,8 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="label6.TabIndex" type="System.Int32, mscorlib">
     <value>56</value>
   </data>
-  <data name="labelTag5.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+  <data name="tableLayoutPanel1.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -3465,9 +3459,6 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   </data>
   <data name="label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
-  </data>
-  <data name="userPictureBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="pictureBox1.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>StretchImage</value>
@@ -3494,7 +3485,7 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
     <value>86, 13</value>
   </data>
   <data name="idTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>660, 170</value>
+    <value>660, 173</value>
   </data>
   <data name="&gt;&gt;playlistPictureBox.Name" xml:space="preserve">
     <value>playlistPictureBox</value>
@@ -3511,9 +3502,6 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="label1.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
-    <value>47</value>
-  </data>
   <data name="&gt;&gt;parameterTagList.ZOrder" xml:space="preserve">
     <value>43</value>
   </data>
@@ -3529,17 +3517,20 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="previewTable.Location" type="System.Drawing.Point, System.Drawing">
     <value>2, 80</value>
   </data>
-  <data name="buttonClose.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+  <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>207, -2</value>
   </data>
-  <data name="labelTag4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>49, 248</value>
+  <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;label5.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="parameterTag6List.Location" type="System.Drawing.Point, System.Drawing">
     <value>590, 245</value>
+  </data>
+  <data name="buttonEdit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 23</value>
   </data>
   <data name="buttonExportCustom.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -3549,6 +3540,9 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   </data>
   <data name="uncheckAllFiltersPictureBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>18, 18</value>
+  </data>
+  <data name="&gt;&gt;buttonOK.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="userPictureBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -3571,10 +3565,10 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="&gt;&gt;customText3Label.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>111, 41</value>
+  <data name="&gt;&gt;NewTag3.Name" xml:space="preserve">
+    <value>NewTag3</value>
   </data>
-  <data name="buttonExportCustom.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+  <data name="pictureBox1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
   <data name="panel1.IconPadding" type="System.Int32, mscorlib">
@@ -3590,7 +3584,7 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
     <value>0</value>
   </data>
   <data name="assignHotkeyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 195</value>
+    <value>4, 198</value>
   </data>
   <data name="&gt;&gt;buttonClose.Name" xml:space="preserve">
     <value>buttonClose</value>
@@ -3598,8 +3592,11 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="&gt;&gt;labelTag3.Name" xml:space="preserve">
     <value>labelTag3</value>
   </data>
-  <data name="&gt;&gt;File.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="uncheckAllFiltersPictureBox.TabIndex" type="System.Int32, mscorlib">
+    <value>124</value>
+  </data>
+  <data name="customTextLabel.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="applyToPlayingTrackCheckBox.ToolTip" xml:space="preserve">
     <value>Apply to playing track</value>
@@ -3626,8 +3623,8 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="customText3Label.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="parameterTagList.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
+  <data name="&gt;&gt;buttonDeleteAll.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="&gt;&gt;searchTextBox.Parent" xml:space="preserve">
     <value>panel1</value>
@@ -3638,8 +3635,8 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="parameterTag3List.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
+  <data name="userPictureBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>479, 30</value>
   </data>
   <data name="&gt;&gt;parameterTag6List.Parent" xml:space="preserve">
     <value>panel1</value>
@@ -3656,11 +3653,11 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="labelTag3.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="buttonSaveClose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 12</value>
+  <data name="&gt;&gt;OriginalTag2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="parameterTag6List.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+  <data name="uncheckAllFiltersPictureBox.ToolTip" xml:space="preserve">
+    <value>Remove all filters</value>
   </data>
   <data name="&gt;&gt;panel2.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -3674,8 +3671,8 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 325</value>
   </data>
-  <data name="&gt;&gt;playlistComboBox.ZOrder" xml:space="preserve">
-    <value>44</value>
+  <data name="&gt;&gt;customText3Box.ZOrder" xml:space="preserve">
+    <value>30</value>
   </data>
   <data name="userPresetPictureBox.ToolTip" xml:space="preserve">
     <value />
@@ -3699,6 +3696,9 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="customText3Label.Error" xml:space="preserve">
     <value />
   </data>
+  <data name="&gt;&gt;parameterTag4List.ZOrder" xml:space="preserve">
+    <value>35</value>
+  </data>
   <data name="labelTag3.ToolTip" xml:space="preserve">
     <value />
   </data>
@@ -3708,17 +3708,20 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="labelTag.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <data name="functionIdPictureBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="presetList.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="parameterTagList.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="customTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
+  <data name="customText2Label.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
   </data>
-  <data name="label5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="labelTag.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;label3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -3732,8 +3735,8 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="label7.TabIndex" type="System.Int32, mscorlib">
     <value>57</value>
   </data>
-  <data name="labelTag.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 13</value>
+  <data name="labelTag2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="filterComboBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3766,8 +3769,8 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="&gt;&gt;buttonClose.Parent" xml:space="preserve">
     <value>groupBox3</value>
   </data>
-  <data name="&gt;&gt;buttonDeleteAll.Name" xml:space="preserve">
-    <value>buttonDeleteAll</value>
+  <data name="customText4Box.Location" type="System.Drawing.Point, System.Drawing">
+    <value>503, 296</value>
   </data>
   <data name="labelTag6.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -3799,14 +3802,20 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
   <data name="tickedOnlyPictureBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>18, 18</value>
   </data>
-  <data name="labelTag5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
+    <value>47</value>
   </data>
   <data name="labelTag.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
   <data name="buttonDelete.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
+  </data>
+  <data name="labelTag.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 13</value>
+  </data>
+  <data name="&gt;&gt;NewTag5.Name" xml:space="preserve">
+    <value>NewTag5</value>
   </data>
   <data name="&gt;&gt;NewTag2.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -3824,11 +3833,11 @@ and go to Edit&gt; Preferences&gt; Hotkeys.</value>
     <value>Select one of preset filters
 Ctrl+click to add/remove this filter to/from existing ones</value>
   </data>
-  <data name="&gt;&gt;functionIdPictureBox.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="buttonCreate.TabIndex" type="System.Int32, mscorlib">
+    <value>46</value>
   </data>
-  <data name="buttonImportNew.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 23</value>
+  <data name="OriginalTag3.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
   <data name="customizedPictureBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>18, 18</value>
@@ -3851,9 +3860,6 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="parameterTag4List.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="customText2Label.Text" xml:space="preserve">
-    <value>&lt;Custom text 2&gt;:</value>
-  </data>
   <data name="&gt;&gt;tickedOnlyPictureBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -3865,6 +3871,9 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   </data>
   <data name="labelTag6.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 13</value>
+  </data>
+  <data name="&gt;&gt;playlistComboBox.ZOrder" xml:space="preserve">
+    <value>44</value>
   </data>
   <data name="&gt;&gt;presetList.Name" xml:space="preserve">
     <value>presetList</value>
@@ -3902,6 +3911,9 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="label7.Error" xml:space="preserve">
     <value />
   </data>
+  <data name="buttonImport.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="customTextBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -3911,8 +3923,8 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="buttonDelete.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="labelTag2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="label5.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;buttonImportAll.ZOrder" xml:space="preserve">
     <value>8</value>
@@ -3950,8 +3962,8 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="customizedPresetPictureBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="labelTag2.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="pictureBox1.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="buttonPreview.TabIndex" type="System.Int32, mscorlib">
     <value>50</value>
@@ -3965,20 +3977,17 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="buttonOK.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>12</value>
+  <data name="buttonExportCustom.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
   </data>
   <data name="searchTextBox.Error" xml:space="preserve">
     <value />
-  </data>
-  <data name="parameterTag3List.TabIndex" type="System.Int32, mscorlib">
-    <value>69</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 13</value>
   </data>
   <data name="presetList.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 9pt</value>
+    <value>Microsoft Sans Serif, 9.4pt</value>
   </data>
   <data name="customText3Label.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -3989,8 +3998,8 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="buttonClose.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="customTextLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>76</value>
+  <data name="&gt;&gt;customText3Box.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="buttonImport.Location" type="System.Drawing.Point, System.Drawing">
     <value>111, 12</value>
@@ -4034,8 +4043,8 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="previewTable.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="buttonPreview.Text" xml:space="preserve">
+    <value>Preview</value>
   </data>
   <data name="label7.Text" xml:space="preserve">
     <value>Settings &amp;&amp; processing</value>
@@ -4046,9 +4055,6 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="groupBox1.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="tableLayoutPanel1.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="&gt;&gt;label7.Name" xml:space="preserve">
     <value>label7</value>
   </data>
@@ -4058,8 +4064,8 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="preserveValuesTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>98</value>
   </data>
-  <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="previewTable.Error" xml:space="preserve">
+    <value />
   </data>
   <data name="buttonOK.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 23</value>
@@ -4071,10 +4077,10 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
     <value>14</value>
   </data>
   <data name="presetList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 54</value>
+    <value>3, 52</value>
   </data>
-  <data name="&gt;&gt;customText4Box.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
+    <value>panel1</value>
   </data>
   <data name="customizedPresetPictureBox.ToolTip" xml:space="preserve">
     <value />
@@ -4082,8 +4088,8 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="tickedOnlyPictureBox.TabIndex" type="System.Int32, mscorlib">
     <value>117</value>
   </data>
-  <data name="parameterTag4List.Error" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;customTextLabel.Parent" xml:space="preserve">
+    <value>panel1</value>
   </data>
   <data name="labelTag4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -4112,14 +4118,11 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   <data name="userPictureBox.TabIndex" type="System.Int32, mscorlib">
     <value>120</value>
   </data>
-  <data name="customTextLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
-  </data>
   <data name="&gt;&gt;parameterTag2List.Name" xml:space="preserve">
     <value>parameterTag2List</value>
   </data>
-  <data name="buttonSaveClose.TabIndex" type="System.Int32, mscorlib">
-    <value>54</value>
+  <data name="&gt;&gt;groupBox3.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="NewTag2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -4129,6 +4132,9 @@ Ctrl+click to add/remove this filter to/from existing ones</value>
   </metadata>
   <metadata name="OriginalTag2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
+  </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>ru</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>48</value>

@@ -99,9 +99,10 @@
     <Compile Include="Additional-Tagging-Tools\AdvancedSearchAndReplace.Designer.cs">
       <DependentUpon>AdvancedSearchAndReplace.cs</DependentUpon>
     </Compile>
-    <Compile Include="Additional-Tagging-Tools\Imaging-And-Coloring.cs">
+    <Compile Include="Additional-Tagging-Tools\CustomControls.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Additional-Tagging-Tools\ImagingAndColoring.cs" />
     <Compile Include="Additional-Tagging-Tools\ASRPresetEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -457,6 +458,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\Resources\Warning-15-Flat.png" />
+    <None Include="Properties\Resources\Transparent-15.png" />
+    <None Include="Properties\Resources\Warning-15.png" />
+    <None Include="Properties\Resources\set-button.png" />
     <None Include="Properties\Resources\uncheck-mark.png" />
     <None Include="Properties\Resources\uncheck-all-preset-filters.png" />
     <None Include="Properties\Resources\hotkey-presets.png" />
@@ -468,8 +473,6 @@
     <None Include="Properties\Resources\auto-applied-presets.png" />
     <None Include="Properties\Resources\check-mark.png" />
     <None Include="Properties\Resources\clear-button.png" />
-    <None Include="Properties\Resources\Empty-14.png" />
-    <None Include="Properties\Resources\UnsavedChanges-14.png" />
     <None Include="Properties\Resources\Window.png" />
     <None Include="Properties\Resources\Search.png" />
     <None Include="Properties\Resources\MissingArtwork.png" />

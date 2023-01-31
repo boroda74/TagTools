@@ -54,8 +54,8 @@ namespace MusicBeePlugin
             base.initializeForm();
 
 
-            buttonDeleteSaved.Image = Plugin.GetSolidImageByBitmapMask(buttonDeleteSaved.ForeColor, BackColor, Resources.clear_button, 1.0f);
-            autoApplyPictureBox.Image = Plugin.GetSolidImageByBitmapMask(ForeColor, BackColor, Resources.auto_applied_presets, 1.0f);
+            buttonDeleteSaved.Image = Plugin.CrossImage;
+            autoApplyPictureBox.Image = Plugin.AutoAppliedPresetsAccent;
 
 
             Plugin.FillList(destinationTagList.Items, false, false, false);

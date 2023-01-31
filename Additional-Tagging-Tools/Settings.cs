@@ -80,6 +80,8 @@ namespace MusicBeePlugin
 
         private void saveSettings()
         {
+            bool previousUseSkinColors = Plugin.SavedSettings.useSkinColors;
+
             Plugin.SavedSettings.dontShowContextMenu = !contextMenuCheckBox.Checked;
 
             Plugin.SavedSettings.dontShowCopyTag = !showCopyTagCheckBox.Checked;
@@ -110,6 +112,9 @@ namespace MusicBeePlugin
 
             TagToolsPlugin.addPluginMenuItems();
             TagToolsPlugin.addPluginContextMenuItems();
+
+            if (previousUseSkinColors != Plugin.SavedSettings.useSkinColors)
+                Plugin.PrepareThemedBitmaps();
         }
 
         private void buttonOK_Click(object sender, EventArgs e)

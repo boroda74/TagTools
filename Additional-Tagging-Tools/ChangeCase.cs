@@ -51,7 +51,7 @@ namespace MusicBeePlugin
         {
             base.initializeForm();
 
-            removeExceptionButton.Image = Plugin.GetSolidImageByBitmapMask(removeExceptionButton.ForeColor, removeExceptionButton.BackColor, Resources.clear_button, 1.0f);
+            removeExceptionButton.Image = Plugin.CrossImage;
 
             Plugin.FillList(sourceTagList.Items);
             sourceTagList.Text = Plugin.SavedSettings.changeCaseSourceTagName;

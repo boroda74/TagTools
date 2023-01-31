@@ -137,13 +137,13 @@
     <value>Есть несохраненные изменения</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1001, 678</value>
+    <value>1001, 682</value>
   </data>
   <data name="userPresetPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>853, 190</value>
+    <value>853, 199</value>
   </data>
   <data name="customizedPresetPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>662, 190</value>
+    <value>662, 199</value>
   </data>
   <data name="uncheckAllFiltersPictureBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>717, 34</value>
@@ -238,7 +238,7 @@
 добавить фильтр к существующим или отключить его</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>675, 190</value>
+    <value>675, 199</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 13</value>
@@ -247,7 +247,7 @@
     <value>Настроен пользователем</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>866, 190</value>
+    <value>866, 199</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>118, 13</value>
@@ -256,7 +256,7 @@
     <value>Пресет пользователя</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 323</value>
+    <value>1, 328</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>304, 13</value>
@@ -268,7 +268,7 @@
     <value>Никогда не изменять эти значения тегов, независимо от того, в каких тегах они встречаются</value>
   </data>
   <data name="preserveValuesTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>311, 320</value>
+    <value>311, 325</value>
   </data>
   <data name="preserveValuesTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>678, 20</value>
@@ -277,7 +277,7 @@
     <value>Все теги, равные одному из перечисленных в этом поле значений, не будут как либо изменяться</value>
   </data>
   <data name="applyToPlayingTrackCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>296, 189</value>
+    <value>296, 198</value>
   </data>
   <data name="applyToPlayingTrackCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>214, 17</value>
@@ -286,13 +286,13 @@
     <value>Применить к проигрываемому треку</value>
   </data>
   <data name="clearIdButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>967, 161</value>
+    <value>967, 173</value>
   </data>
   <data name="clearIdButton.ToolTip" xml:space="preserve">
     <value>Удалить назначение id-а функции виртуальных тегов пресету</value>
   </data>
   <data name="idTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>868, 161</value>
+    <value>868, 173</value>
   </data>
   <data name="idTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>97, 20</value>
@@ -301,16 +301,13 @@
     <value>Разрешены только латинские буквы, цифры и символы - : _ .</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>699, 165</value>
+    <value>699, 176</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>163, 13</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>id функции виртуальных тегов:</value>
-  </data>
-  <data name="assignHotkeyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 187</value>
   </data>
   <data name="assignHotkeyCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>286, 20</value>
@@ -555,20 +552,26 @@
   <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 33</value>
   </data>
+  <data name="descriptionBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
+  <data name="descriptionBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 14</value>
+  </data>
   <data name="descriptionBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>980, 59</value>
+    <value>980, 55</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 340</value>
+    <value>0, 346</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>989, 77</value>
+    <value>989, 74</value>
   </data>
   <data name="groupBox1.Text" xml:space="preserve">
     <value>Описание пресета</value>
   </data>
   <data name="customText4Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>511, 297</value>
+    <value>511, 302</value>
   </data>
   <data name="customText4Label.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 13</value>
@@ -577,7 +580,7 @@
     <value>&lt;Свой текст 4&gt;:</value>
   </data>
   <data name="customText2Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>511, 271</value>
+    <value>511, 276</value>
   </data>
   <data name="customText2Label.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 13</value>
@@ -586,19 +589,19 @@
     <value>&lt;Свой текст 2&gt;:</value>
   </data>
   <data name="customText4Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>604, 294</value>
+    <value>604, 299</value>
   </data>
   <data name="customText4Box.Size" type="System.Drawing.Size, System.Drawing">
     <value>385, 20</value>
   </data>
   <data name="customText2Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>604, 268</value>
+    <value>604, 273</value>
   </data>
   <data name="customText2Box.Size" type="System.Drawing.Size, System.Drawing">
     <value>385, 20</value>
   </data>
   <data name="customText3Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 297</value>
+    <value>0, 302</value>
   </data>
   <data name="customText3Label.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 13</value>
@@ -607,7 +610,7 @@
     <value>&lt;Свой текст 3&gt;:</value>
   </data>
   <data name="labelTag6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>694, 244</value>
+    <value>694, 249</value>
   </data>
   <data name="labelTag6.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 13</value>
@@ -616,19 +619,19 @@
     <value>&lt;Тег 6&gt;:</value>
   </data>
   <data name="customText3Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>102, 294</value>
+    <value>102, 299</value>
   </data>
   <data name="customText3Box.Size" type="System.Drawing.Size, System.Drawing">
     <value>385, 20</value>
   </data>
   <data name="parameterTag6List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>749, 241</value>
+    <value>749, 246</value>
   </data>
   <data name="parameterTag6List.Size" type="System.Drawing.Size, System.Drawing">
     <value>240, 21</value>
   </data>
   <data name="labelTag5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>372, 244</value>
+    <value>372, 249</value>
   </data>
   <data name="labelTag5.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 13</value>
@@ -637,13 +640,13 @@
     <value>&lt;Тег 5&gt;:</value>
   </data>
   <data name="parameterTag5List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>427, 241</value>
+    <value>427, 246</value>
   </data>
   <data name="parameterTag5List.Size" type="System.Drawing.Size, System.Drawing">
     <value>240, 21</value>
   </data>
   <data name="labelTag4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>38, 244</value>
+    <value>38, 249</value>
   </data>
   <data name="labelTag4.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 13</value>
@@ -652,13 +655,13 @@
     <value>&lt;Тег 4&gt;:</value>
   </data>
   <data name="parameterTag4List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>102, 241</value>
+    <value>102, 246</value>
   </data>
   <data name="parameterTag4List.Size" type="System.Drawing.Size, System.Drawing">
     <value>240, 21</value>
   </data>
   <data name="customTextLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 271</value>
+    <value>0, 276</value>
   </data>
   <data name="customTextLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 13</value>
@@ -667,13 +670,13 @@
     <value>&lt;Свой текст 1&gt;:</value>
   </data>
   <data name="customTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>102, 268</value>
+    <value>102, 273</value>
   </data>
   <data name="customTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>385, 20</value>
   </data>
   <data name="labelTag3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>694, 217</value>
+    <value>694, 222</value>
   </data>
   <data name="labelTag3.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 13</value>
@@ -682,13 +685,13 @@
     <value>&lt;Тег 3&gt;:</value>
   </data>
   <data name="parameterTag3List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>749, 214</value>
+    <value>749, 219</value>
   </data>
   <data name="parameterTag3List.Size" type="System.Drawing.Size, System.Drawing">
     <value>240, 21</value>
   </data>
   <data name="labelTag2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>372, 217</value>
+    <value>372, 222</value>
   </data>
   <data name="labelTag2.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 13</value>
@@ -697,13 +700,13 @@
     <value>&lt;Тег 2&gt;:</value>
   </data>
   <data name="parameterTag2List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>427, 214</value>
+    <value>427, 219</value>
   </data>
   <data name="parameterTag2List.Size" type="System.Drawing.Size, System.Drawing">
     <value>240, 21</value>
   </data>
   <data name="labelTag.Location" type="System.Drawing.Point, System.Drawing">
-    <value>38, 217</value>
+    <value>38, 222</value>
   </data>
   <data name="labelTag.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 13</value>
@@ -712,19 +715,19 @@
     <value>&lt;Тег 1&gt;:</value>
   </data>
   <data name="parameterTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>102, 214</value>
+    <value>102, 219</value>
   </data>
   <data name="parameterTagList.Size" type="System.Drawing.Size, System.Drawing">
     <value>240, 21</value>
   </data>
   <data name="playlistComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>398, 162</value>
+    <value>398, 173</value>
   </data>
   <data name="playlistComboBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>269, 21</value>
   </data>
   <data name="conditionCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 164</value>
+    <value>4, 175</value>
   </data>
   <data name="conditionCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>388, 17</value>
@@ -733,10 +736,10 @@
     <value>Автоматически применять пресет, только если трек есть в плейлисте:</value>
   </data>
   <data name="presetList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 59</value>
+    <value>4, 58</value>
   </data>
   <data name="presetList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>985, 99</value>
+    <value>985, 111</value>
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>986, 30</value>
@@ -746,16 +749,16 @@
 </value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>990, 416</value>
+    <value>990, 419</value>
   </data>
   <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>63, -2</value>
+    <value>63, -1</value>
   </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 13</value>
   </data>
   <data name="label7.Text" xml:space="preserve">
-    <value> Настройка и применение</value>
+    <value> настройка и применение</value>
   </data>
   <data name="buttonSaveClose.Size" type="System.Drawing.Size, System.Drawing">
     <value>131, 23</value>
@@ -773,19 +776,19 @@
     <value>Применить</value>
   </data>
   <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>708, 2</value>
+    <value>708, -2</value>
   </data>
   <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
     <value>281, 72</value>
   </data>
   <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>282, -2</value>
+    <value>282, -1</value>
   </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>148, 13</value>
   </data>
   <data name="label6.Text" xml:space="preserve">
-    <value> Управление пресетами</value>
+    <value> управление пресетами</value>
   </data>
   <data name="buttonExport.Size" type="System.Drawing.Size, System.Drawing">
     <value>141, 23</value>
@@ -888,6 +891,9 @@
   <data name="buttonCopy.ToolTip" xml:space="preserve">
     <value>Скопировать выбранный пресет в новый пресет пользователя (новый пресет можно будет редактировать)</value>
   </data>
+  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, -2</value>
+  </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
     <value>702, 72</value>
   </data>
@@ -913,22 +919,22 @@
     <value>Новое значение</value>
   </data>
   <data name="previewTable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 80</value>
+    <value>3, 73</value>
   </data>
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>986, 160</value>
+    <value>986, 169</value>
   </data>
   <data name="panel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 425</value>
+    <value>3, 428</value>
   </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>990, 243</value>
+    <value>990, 244</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>996, 671</value>
+    <value>996, 675</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>1009, 705</value>
+    <value>1019, 705</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Дополнительный поиск и замена</value>

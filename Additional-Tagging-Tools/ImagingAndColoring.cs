@@ -2,98 +2,14 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 
-using System.Windows.Forms;
-using System.Drawing.Drawing2D;
-using System.ComponentModel;
-
 
 namespace MusicBeePlugin
 {
-    /// <summary>
-    /// A PictureBox control extended to allow a variety of interpolations.
-    /// </summary>
-    class InterpolatedBox : PictureBox
-    {
-        #region Interpolation Property
-        private InterpolationMode interpolation = InterpolationMode.Default;
-
-        [DefaultValue(typeof(InterpolationMode), "Default"),
-        Description("The interpolation used to render the image.")]
-        public InterpolationMode Interpolation
-        {
-            get { return interpolation; }
-            set
-            {
-                if (value == InterpolationMode.Invalid)
-                    throw new ArgumentException("\"Invalid\" is not a valid value."); // (Duh!)
-
-                interpolation = value;
-                Invalidate(); // Image should be redrawn when a different interpolation is selected
-            }
-        }
-        #endregion
-
-        protected override void OnPaint(PaintEventArgs pe)
-        {
-            // Before the PictureBox renders the image, we modify the
-            // graphics object to change the interpolation.
-
-            // Set the selected interpolation.
-            pe.Graphics.InterpolationMode = interpolation;
-            // Certain interpolation modes (such as nearest neighbor) need
-            // to be offset by half a pixel to render correctly.
-            pe.Graphics.PixelOffsetMode = PixelOffsetMode.Half;
-
-            // Allow the PictureBox to draw.
-            base.OnPaint(pe);
-        }
-    }
-
-    partial class Plugin
-    {
-        public static Color GetHighlightColor(Color highlightColor, Color backColor, float highlightWeight)
-        {
-            float controlBackAvg = (backColor.R + backColor.G + backColor.B) / 3.0f;
-
-            float highlightR = highlightColor.R * highlightWeight + controlBackAvg * (1 - highlightWeight);
-            float highlightG = highlightColor.G * highlightWeight + controlBackAvg * (1 - highlightWeight);
-            float highlightB = highlightColor.B * highlightWeight + controlBackAvg * (1 - highlightWeight);
-
-            highlightR = highlightR < 0 ? 0 : highlightR;
-            highlightG = highlightG < 0 ? 0 : highlightG;
-            highlightB = highlightB < 0 ? 0 : highlightB;
-
-            highlightR = highlightR > 255 ? 255 : highlightR;
-            highlightG = highlightG > 255 ? 255 : highlightG;
-            highlightB = highlightB > 255 ? 255 : highlightB;
-
-            return Color.FromArgb((int)highlightR, (int)highlightG, (int)highlightB);
-        }
-
-        public static Bitmap GetSolidImageByBitmapMask(Color accentColor, Color backColor, Bitmap maskBitmap, float accentWeight)
-        {
-            Color activeColor = Plugin.GetHighlightColor(accentColor, backColor, accentWeight);
-
-            Bitmap templateBitmap = new Bitmap(maskBitmap.Width, maskBitmap.Height, maskBitmap.PixelFormat);
-
-            using (Graphics gfx = Graphics.FromImage(templateBitmap))
-            {
-                gfx.Clear(activeColor);
-            }
-
-            AlphaBlendedImage alphaBlendedImage = new AlphaBlendedImage(templateBitmap, maskBitmap);
-
-            return  alphaBlendedImage.AlphaBlendImages();
-
-        }
-    }
-
     public class AlphaBlendedImage
     {
         Bitmap _image;
         Bitmap _mask;
         Bitmap preparedMask;
-        Bitmap preparedImage;
         Bitmap finalMaskedImage;
 
         public AlphaBlendedImage(Bitmap image, Bitmap mask)
@@ -217,5 +133,147 @@ namespace MusicBeePlugin
             return returnedImage;
         }
         #endregion
+    }
+
+    partial class Plugin
+    {
+        public static Color HsBtoRgb(double h, double s, double b, int a = 255)
+        {
+            const double tolerance = 0.000000000000001;
+
+
+            h = Math.Max(0D, Math.Min(360D, h));
+            s = Math.Max(0D, Math.Min(1D, s));
+            b = Math.Max(0D, Math.Min(1D, b));
+            a = Math.Max(0, Math.Min(255, a));
+
+            double r = 0D;
+            double g = 0D;
+            double bl = 0D;
+
+            if (Math.Abs(s) < tolerance)
+                r = g = bl = b;
+            else
+            {
+                // the argb wheel consists of 6 sectors. Figure out which sector
+                // you're in.
+                double sectorPos = h / 60D;
+                int sectorNumber = (int)Math.Floor(sectorPos);
+                // get the fractional part of the sector
+                double fractionalSector = sectorPos - sectorNumber;
+
+                // calculate values for the three axes of the argb.
+                double p = b * (1D - s);
+                double q = b * (1D - (s * fractionalSector));
+                double t = b * (1D - (s * (1D - fractionalSector)));
+
+                // assign the fractional colors to r, g, and b based on the sector
+                // the angle is in.
+                switch (sectorNumber)
+                {
+                    case 0:
+                        r = b;
+                        g = t;
+                        bl = p;
+                        break;
+                    case 1:
+                        r = q;
+                        g = b;
+                        bl = p;
+                        break;
+                    case 2:
+                        r = p;
+                        g = b;
+                        bl = t;
+                        break;
+                    case 3:
+                        r = p;
+                        g = q;
+                        bl = b;
+                        break;
+                    case 4:
+                        r = t;
+                        g = p;
+                        bl = b;
+                        break;
+                    case 5:
+                        r = b;
+                        g = p;
+                        bl = q;
+                        break;
+                }
+            }
+
+            return Color.FromArgb(
+                    a,
+                    Math.Max(0, Math.Min(255, Convert.ToInt32(double.Parse($"{r * 255D:0.00}")))),
+                    Math.Max(0, Math.Min(255, Convert.ToInt32(double.Parse($"{g * 255D:0.00}")))),
+                    Math.Max(0, Math.Min(255, Convert.ToInt32(double.Parse($"{bl * 250D:0.00}")))));
+        }
+
+        public static Color GetHighlightColor(Color highlightColor, Color sampleColor, Color backColor, float highlightWeight = 0.80f)//***
+        {
+            float highlightHue = highlightColor.GetHue();
+            float highlightSat = highlightColor.GetSaturation();
+            float highlightBr = highlightColor.GetBrightness();
+
+            float sampleHue = sampleColor.GetHue();
+            float sampleSat = sampleColor.GetSaturation();
+            float sampleBr = sampleColor.GetBrightness();
+
+            float backBr = backColor.GetBrightness();
+
+            float resultHue = (highlightHue * highlightWeight * highlightSat * highlightBr + sampleHue * (1 - highlightWeight) * sampleSat * sampleBr) 
+                / (highlightWeight * highlightSat * highlightBr + (1 - highlightWeight) * sampleSat * sampleBr);
+            float resultSat = highlightSat * 0.5f + sampleSat * 0.5f;
+            float resultBr = highlightBr * highlightWeight + sampleBr * (1 - highlightWeight);
+
+            if (Math.Abs(resultBr - backBr) < 0.3)
+            {
+                if (backBr > 0.5)
+                    resultBr = resultBr - Math.Abs(resultBr - backBr);
+                else
+                    resultBr = resultBr + Math.Abs(resultBr - backBr);
+            }
+
+            Color resultColor = HsBtoRgb(resultHue, resultSat, resultBr);
+
+            return resultColor;
+        }
+
+        public static Color GetWeightedColor(Color sampleColor1, Color sampleColor2, float sampleColor1Weight = 0.5f)//***
+        {
+            int resultR = (int)(sampleColor1.R * sampleColor1Weight + sampleColor2.R * (1 - sampleColor1Weight));
+            int resultG = (int)(sampleColor1.G * sampleColor1Weight + sampleColor2.G * (1 - sampleColor1Weight));
+            int resultB = (int)(sampleColor1.B * sampleColor1Weight + sampleColor2.B * (1 - sampleColor1Weight));
+
+            resultR = resultR > 255 ? 255 : resultR;
+            resultG = resultG > 255 ? 255 : resultG;
+            resultB = resultB > 255 ? 255 : resultB;
+
+            Color resultColor = Color.FromArgb(resultR, resultG, resultB);
+
+            return resultColor;
+        }
+
+        public static Color GetInvertedColor(Color sampleColor)
+        {
+            return Color.FromArgb(255 - sampleColor.R, 255 - sampleColor.G, 255 - sampleColor.B);
+        }
+
+        public static Bitmap GetSolidImageByBitmapMask(Color accentColor, Bitmap maskBitmap)
+        {
+            Bitmap templateBitmap = new Bitmap(maskBitmap.Width, maskBitmap.Height, maskBitmap.PixelFormat);
+
+            using (Graphics gfx = Graphics.FromImage(templateBitmap))
+            {
+                gfx.Clear(accentColor);
+            }
+
+            AlphaBlendedImage alphaBlendedImage = new AlphaBlendedImage(templateBitmap, maskBitmap);
+
+            return  alphaBlendedImage.AlphaBlendImages();
+
+        }
     }
 }

@@ -40,7 +40,7 @@
             this.buttonCheckAll = new System.Windows.Forms.Button();
             this.previewTable = new System.Windows.Forms.DataGridView();
             this.buttonPreview = new System.Windows.Forms.Button();
-            this.buttonCancel = new System.Windows.Forms.Button();
+            this.buttonClose = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.comparedFieldList = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -58,9 +58,11 @@
             this.buttonUpdatePreset = new System.Windows.Forms.Button();
             this.buttonDeletePreset = new System.Windows.Forms.Button();
             this.labelNotSaved = new System.Windows.Forms.Label();
-            this.clearIdButton = new System.Windows.Forms.Button();
             this.idTextBox = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.clearIdButton = new System.Windows.Forms.Button();
+            this.setIdButton = new System.Windows.Forms.Button();
+            this.buttonDiscardPresetChanges = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).BeginInit();
@@ -196,17 +198,18 @@
             this.buttonPreview.UseVisualStyleBackColor = true;
             this.buttonPreview.Click += new System.EventHandler(this.buttonPreview_Click);
             // 
-            // buttonCancel
+            // buttonClose
             // 
-            resources.ApplyResources(this.buttonCancel, "buttonCancel");
-            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.dirtyErrorProvider.SetError(this.buttonCancel, resources.GetString("buttonCancel.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.buttonCancel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonCancel.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.buttonCancel, ((int)(resources.GetObject("buttonCancel.IconPadding"))));
-            this.buttonCancel.Name = "buttonCancel";
-            this.toolTip.SetToolTip(this.buttonCancel, resources.GetString("buttonCancel.ToolTip"));
-            this.buttonCancel.UseVisualStyleBackColor = true;
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            resources.ApplyResources(this.buttonClose, "buttonClose");
+            this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.dirtyErrorProvider.SetError(this.buttonClose, resources.GetString("buttonClose.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.buttonClose, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonClose.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.buttonClose, ((int)(resources.GetObject("buttonClose.IconPadding"))));
+            this.buttonClose.Image = global::MusicBeePlugin.Properties.Resources.Warning_15;
+            this.buttonClose.Name = "buttonClose";
+            this.toolTip.SetToolTip(this.buttonClose, resources.GetString("buttonClose.ToolTip"));
+            this.buttonClose.UseVisualStyleBackColor = true;
+            this.buttonClose.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // label1
             // 
@@ -402,18 +405,6 @@
             this.labelNotSaved.Name = "labelNotSaved";
             this.toolTip.SetToolTip(this.labelNotSaved, resources.GetString("labelNotSaved.ToolTip"));
             // 
-            // clearIdButton
-            // 
-            resources.ApplyResources(this.clearIdButton, "clearIdButton");
-            this.dirtyErrorProvider.SetError(this.clearIdButton, resources.GetString("clearIdButton.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.clearIdButton, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("clearIdButton.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.clearIdButton, ((int)(resources.GetObject("clearIdButton.IconPadding"))));
-            this.clearIdButton.Image = global::MusicBeePlugin.Properties.Resources.clear_button;
-            this.clearIdButton.Name = "clearIdButton";
-            this.toolTip.SetToolTip(this.clearIdButton, resources.GetString("clearIdButton.ToolTip"));
-            this.clearIdButton.UseVisualStyleBackColor = true;
-            this.clearIdButton.Click += new System.EventHandler(this.clearIdButton_Click);
-            // 
             // idTextBox
             // 
             resources.ApplyResources(this.idTextBox, "idTextBox");
@@ -433,11 +424,47 @@
             this.label8.Name = "label8";
             this.toolTip.SetToolTip(this.label8, resources.GetString("label8.ToolTip"));
             // 
+            // clearIdButton
+            // 
+            resources.ApplyResources(this.clearIdButton, "clearIdButton");
+            this.dirtyErrorProvider.SetError(this.clearIdButton, resources.GetString("clearIdButton.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.clearIdButton, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("clearIdButton.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.clearIdButton, ((int)(resources.GetObject("clearIdButton.IconPadding"))));
+            this.clearIdButton.Image = global::MusicBeePlugin.Properties.Resources.clear_button;
+            this.clearIdButton.Name = "clearIdButton";
+            this.toolTip.SetToolTip(this.clearIdButton, resources.GetString("clearIdButton.ToolTip"));
+            this.clearIdButton.UseVisualStyleBackColor = true;
+            this.clearIdButton.Click += new System.EventHandler(this.clearIdButton_Click);
+            // 
+            // setIdButton
+            // 
+            resources.ApplyResources(this.setIdButton, "setIdButton");
+            this.dirtyErrorProvider.SetError(this.setIdButton, resources.GetString("setIdButton.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.setIdButton, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("setIdButton.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.setIdButton, ((int)(resources.GetObject("setIdButton.IconPadding"))));
+            this.setIdButton.Image = global::MusicBeePlugin.Properties.Resources.set_button;
+            this.setIdButton.Name = "setIdButton";
+            this.toolTip.SetToolTip(this.setIdButton, resources.GetString("setIdButton.ToolTip"));
+            this.setIdButton.UseVisualStyleBackColor = true;
+            // 
+            // buttonDiscardPresetChanges
+            // 
+            resources.ApplyResources(this.buttonDiscardPresetChanges, "buttonDiscardPresetChanges");
+            this.dirtyErrorProvider.SetError(this.buttonDiscardPresetChanges, resources.GetString("buttonDiscardPresetChanges.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.buttonDiscardPresetChanges, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonDiscardPresetChanges.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.buttonDiscardPresetChanges, ((int)(resources.GetObject("buttonDiscardPresetChanges.IconPadding"))));
+            this.buttonDiscardPresetChanges.Name = "buttonDiscardPresetChanges";
+            this.toolTip.SetToolTip(this.buttonDiscardPresetChanges, resources.GetString("buttonDiscardPresetChanges.ToolTip"));
+            this.buttonDiscardPresetChanges.UseVisualStyleBackColor = true;
+            this.buttonDiscardPresetChanges.Click += new System.EventHandler(this.buttonDiscardPresetChanges_Click);
+            // 
             // AutoLibraryReportCommand
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.buttonCancel;
+            this.CancelButton = this.buttonClose;
+            this.Controls.Add(this.buttonDiscardPresetChanges);
+            this.Controls.Add(this.setIdButton);
             this.Controls.Add(this.clearIdButton);
             this.Controls.Add(this.idTextBox);
             this.Controls.Add(this.label8);
@@ -466,10 +493,11 @@
             this.Controls.Add(this.buttonCheckAll);
             this.Controls.Add(this.previewTable);
             this.Controls.Add(this.buttonPreview);
-            this.Controls.Add(this.buttonCancel);
+            this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.label1);
             this.Name = "AutoLibraryReportCommand";
             this.toolTip.SetToolTip(this, resources.GetString("$this.ToolTip"));
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AutoLibraryReportCommand_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfTagsToRecalculateNumericUpDown)).EndInit();
@@ -482,7 +510,7 @@
 
         private System.Windows.Forms.DataGridView previewTable;
         private System.Windows.Forms.Button buttonPreview;
-        private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonCheckAll;
         private System.Windows.Forms.CheckedListBox sourceTagList;
@@ -512,5 +540,7 @@
         private System.Windows.Forms.TextBox idTextBox;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ToolTip toolTip;
+        private System.Windows.Forms.Button setIdButton;
+        private System.Windows.Forms.Button buttonDiscardPresetChanges;
     }
 }

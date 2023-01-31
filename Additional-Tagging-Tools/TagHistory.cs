@@ -76,10 +76,10 @@ namespace MusicBeePlugin
             artworkCellTemplate = previewTable.Columns[2].CellTemplate;
 
 
-            float highlightWeight = 0.8f;//***
-            Color highlightColor = SystemColors.HotTrack;
+            Color sampleColor = SystemColors.HotTrack;
 
-            noBackupDataCellForeColor = Plugin.GetHighlightColor(highlightColor, BackColor, highlightWeight);
+            //noBackupDataCellForeColor = sampleColor;
+            noBackupDataCellForeColor = Plugin.GetWeightedColor(Plugin.EmptyTextBox.ForeColor, sampleColor);//***
 
 
 

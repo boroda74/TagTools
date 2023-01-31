@@ -66,6 +66,87 @@ namespace MusicBeePlugin
             initializeForm();
         }
 
+        public static Control SkinControl(Control control)
+        {
+            if (!Plugin.SavedSettings.useSkinColors)
+                return control;
+
+
+            if (control.GetType() == typeof(Button))
+            {
+                control.BackColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputControl, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentBackground));
+                control.ForeColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputControl, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentForeground));
+
+                ((Button)control).FlatStyle = FlatStyle.Flat;
+                ((Button)control).FlatAppearance.BorderSize = 1;
+                ((Button)control).FlatAppearance.BorderColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputControl, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentBorder));
+            }
+            else if (control.GetType().IsSubclassOf(typeof(TextBox)) || control.GetType() == typeof(TextBox))
+            {
+                control.BackColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputControl, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentBackground));
+                control.ForeColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputControl, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentForeground));
+
+                //((TextBox)control).BorderStyle = BorderStyle.FixedSingle;
+            }
+            else if (control.GetType().IsSubclassOf(typeof(ComboBox)) || control.GetType() == typeof(ComboBox))
+            {
+                control.BackColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputControl, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentBackground));
+                control.ForeColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputControl, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentForeground));
+
+                ((ComboBox)control).FlatStyle = FlatStyle.Flat;
+            }
+            else if (control.GetType().IsSubclassOf(typeof(ListBox)) || control.GetType() == typeof(ListBox))
+            {
+                control.BackColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputControl, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentBackground));
+                control.ForeColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputControl, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentForeground));
+            }
+            else if (control.GetType() == typeof(DataGridView))
+            {
+                control.BackColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputControl, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentBackground));
+                control.ForeColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputControl, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentForeground));
+
+                ((DataGridView)control).BackgroundColor = control.BackColor;
+                ((DataGridView)control).DefaultCellStyle.BackColor = control.BackColor;
+                //((DataGridView)control).ColumnHeadersDefaultCellStyle.BackColor = control.BackColor;
+            }
+            else
+            {
+                control.BackColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputPanel, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentBackground));
+                control.ForeColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputPanel, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentForeground));
+            }
+
+            return control;
+        }
+
+        public static Control SkinChildrenControls(Control parentControl)
+        {
+            if (!Plugin.SavedSettings.useSkinColors)
+                return parentControl;
+
+
+            foreach (Control control in parentControl.Controls)
+            {
+
+                SkinControl(control);
+                SkinChildrenControls(control);
+            }
+
+            return parentControl;
+        }
+
+        public static Form SkinForm(Form form)
+        {
+            if (Plugin.SavedSettings.useSkinColors)
+            {
+                form.BackColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputPanel, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentBackground));
+                form.ForeColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputPanel, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentForeground));
+
+                SkinChildrenControls(form);
+            }
+
+            return form;
+        }
+
         protected void initializeForm()
         {
             Plugin.MbForm = Plugin.MbForm.IsDisposed ? (Form)FromHandle(Plugin.MbApiInterface.MB_GetWindowHandle()) : Plugin.MbForm;
@@ -89,13 +170,7 @@ namespace MusicBeePlugin
 
             //return; //For debbuging
 
-            if (Plugin.SavedSettings.useSkinColors)
-            {
-                BackColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputPanel, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentBackground));
-                ForeColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputPanel, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentForeground));
-
-                skinControls(this);
-            }
+            SkinForm(this);
         }
 
         public static void Display(PluginWindowTemplate newForm, bool modalForm = false)
@@ -583,57 +658,6 @@ namespace MusicBeePlugin
             }
         }
 
-        private void skinControls(Control currentControl)
-        {
-            foreach (Control control in currentControl.Controls)
-            {
-                if (control.GetType() == typeof(Button))
-                {
-                    control.BackColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputControl, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentBackground));
-                    control.ForeColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputControl, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentForeground));
-
-                    ((Button)control).FlatStyle = FlatStyle.Flat;
-                    ((Button)control).FlatAppearance.BorderSize = 1;
-                    ((Button)control).FlatAppearance.BorderColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputControl, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentBorder));
-                }
-                else if (control.GetType().IsSubclassOf(typeof(TextBox)) || control.GetType() == typeof(TextBox))
-                {
-                    control.BackColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputControl, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentBackground));
-                    control.ForeColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputControl, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentForeground));
-
-                    //((TextBox)control).BorderStyle = BorderStyle.FixedSingle;
-                }
-                else if (control.GetType().IsSubclassOf(typeof(ComboBox)) || control.GetType() == typeof(ComboBox))
-                {
-                    control.BackColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputControl, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentBackground));
-                    control.ForeColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputControl, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentForeground));
-
-                    ((ComboBox)control).FlatStyle = FlatStyle.Flat;
-                }
-                else if (control.GetType().IsSubclassOf(typeof(ListBox)) || control.GetType() == typeof(ListBox))
-                {
-                    control.BackColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputControl, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentBackground));
-                    control.ForeColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputControl, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentForeground));
-                }
-                else if (control.GetType() == typeof(DataGridView))
-                {
-                    control.BackColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputControl, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentBackground));
-                    control.ForeColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputControl, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentForeground));
-
-                    ((DataGridView)control).BackgroundColor = control.BackColor;
-                    ((DataGridView)control).DefaultCellStyle.BackColor = control.BackColor;
-                    //((DataGridView)control).ColumnHeadersDefaultCellStyle.BackColor = control.BackColor;
-                }
-                else
-                {
-                    control.BackColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputPanel, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentBackground));
-                    control.ForeColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputPanel, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentForeground));
-                }
-
-
-                skinControls(control);
-            }
-        }
         private void PluginWindowTemplate_Load(object sender, EventArgs e)
         {
             //return; //For debbuging

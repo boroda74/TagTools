@@ -216,6 +216,10 @@ namespace MusicBeePlugin
             }
         }
 
+        private bool presetChanged = false;
+        private string buttonCloseToolTip;
+        private int presetsBoxLastSelectedIndex = -2;
+
         private delegate void AddRowToTable(string[] row);
         private delegate void UpdateTable();
         private AddRowToTable addRowToTable;
@@ -242,6 +246,7 @@ namespace MusicBeePlugin
         private readonly List<string> savedDestinationTagList = new List<string>();
         private readonly List<string> savedIds = new List<string>();
 
+        private bool presetIsLoaded = false;
         private bool ignorePresetChangedEvent = false;
         private bool completelyIgnoreItemCheckEvent = false;
         private bool completelyIgnoreFunctionChangedEvent = false;
@@ -676,13 +681,18 @@ namespace MusicBeePlugin
         {
             base.initializeForm();
 
-            clearIdButton.Image = Plugin.GetSolidImageByBitmapMask(clearIdButton.ForeColor, clearIdButton.BackColor, Resources.clear_button, 1.0f);
+            setIdButton.Image = Plugin.SetImage;
+            clearIdButton.Image = Plugin.CrossImage;
 
 
-            float highlightWeight = 0.8f;//***
-            Color highlightColor = SystemColors.Highlight;
+            Color highlightColor = Color.Red;//***
+            Color sampleColor = SystemColors.Highlight;
 
-            labelNotSaved.ForeColor = Plugin.GetHighlightColor(highlightColor, BackColor, highlightWeight);
+            labelNotSaved.ForeColor = Plugin.GetHighlightColor(highlightColor, sampleColor, BackColor);
+
+            buttonClose.Image = Resources.Transparent_15;
+            buttonCloseToolTip = toolTip.GetToolTip(buttonClose);
+            toolTip.SetToolTip(buttonClose, "");
 
 
             functionComboBox.Items.Add(Plugin.GroupingName);
@@ -714,11 +724,12 @@ namespace MusicBeePlugin
             }
 
             presetsBox.SelectedIndex = -1;
+            buttonUpdatePreset.Enabled = false;
+            buttonDiscardPresetChanges.Enabled = false;
 
             Plugin.FillList(destinationTagList.Items);
 
             previewTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-
             presetsBox_SelectedIndexChanged(null, null);
 
             recalculateOnNumberOfTagsChangesCheckBox.Checked = Plugin.SavedSettings.recalculateOnNumberOfTagsChanges;
@@ -836,7 +847,7 @@ namespace MusicBeePlugin
 
 
             if (previewTable.Rows.Count > 0)
-                clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewTrackList, buttonPreview, Plugin.EmptyButton, buttonCancel);
+                clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewTrackList, buttonPreview, Plugin.EmptyButton, buttonClose);
 
             return true;
         }
@@ -886,14 +897,14 @@ namespace MusicBeePlugin
                     previewTable.Columns.RemoveAt(column.Index);
 
                     if (previewTable.Columns.Count == 0)
-                        clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewTrackList, buttonPreview, Plugin.EmptyButton, buttonCancel);
+                        clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewTrackList, buttonPreview, Plugin.EmptyButton, buttonClose);
 
                     return;
                 }
             }
 
             if (previewTable.Columns.Count == 0)
-                clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewTrackList, buttonPreview, Plugin.EmptyButton, buttonCancel);
+                clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewTrackList, buttonPreview, Plugin.EmptyButton, buttonClose);
         }
 
         private void clearList()
@@ -925,7 +936,7 @@ namespace MusicBeePlugin
 
             functionComboBox.SelectedIndex = 0;
 
-            clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewTrackList, Plugin.EmptyButton, buttonPreview, buttonCancel);
+            clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewTrackList, Plugin.EmptyButton, buttonPreview, buttonClose);
         }
 
         private void addAllTags()
@@ -1334,7 +1345,7 @@ namespace MusicBeePlugin
             if (functionNames.Count == 0)
                 return;
 
-            clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewTrackList, (Button)sender, Plugin.EmptyButton, buttonCancel);
+            clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewTrackList, (Button)sender, Plugin.EmptyButton, buttonClose);
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -1364,6 +1375,37 @@ namespace MusicBeePlugin
             buttonPreview.Enabled = false;
         }
 
+        private void setPresetChanged(bool flag)
+        {
+            if (presetIsLoaded)
+                return;
+
+            if (flag && !presetChanged)
+            {
+                presetChanged = true;
+                buttonClose.Image = Plugin.Warning;
+                toolTip.SetToolTip(buttonClose, buttonCloseToolTip);
+                labelNotSaved.Visible = true;
+
+                buttonUpdatePreset.Enabled = true;
+                buttonDiscardPresetChanges.Enabled = true;
+                presetsBox.Enabled = false;
+                buttonAddPreset.Enabled = false;
+            }
+            else if (!flag && presetChanged)
+            {
+                presetChanged = false;
+                buttonClose.Image = Resources.Transparent_15;
+                toolTip.SetToolTip(buttonClose, "");
+                labelNotSaved.Visible = false;
+
+                buttonUpdatePreset.Enabled = false;
+                buttonDiscardPresetChanges.Enabled = false;
+                presetsBox.Enabled = true;
+                buttonAddPreset.Enabled = true;
+            }
+        }
+
         private void sourceTagList_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             if (completelyIgnoreItemCheckEvent)
@@ -1385,10 +1427,9 @@ namespace MusicBeePlugin
             }
 
 
+            setPresetChanged(true);
 
             ignorePresetChangedEvent = false;
-
-            labelNotSaved.Visible = true;
         }
 
         private void buttonUncheckAll_Click(object sender, EventArgs e)
@@ -1401,7 +1442,7 @@ namespace MusicBeePlugin
         {
             addAllTags();
 
-            labelNotSaved.Visible = true;
+            setPresetChanged(true);
         }
 
         private void functionComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -1469,7 +1510,7 @@ namespace MusicBeePlugin
             conditionList.Enabled = conditionCheckBox.Checked;
             comparedFieldList.Enabled = conditionCheckBox.Checked;
 
-            labelNotSaved.Visible = true;
+            setPresetChanged(true);
         }
 
         private void previewList_DataError(object sender, DataGridViewDataErrorEventArgs e)
@@ -1498,7 +1539,21 @@ namespace MusicBeePlugin
 
         private void presetsBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (presetsBox.SelectedIndex == -1)
+            if (presetsBoxLastSelectedIndex == presetsBox.SelectedIndex)
+                return;
+
+            presetIsLoaded = true;
+            presetsBoxSelectedIndexChanged(presetsBox.SelectedIndex);
+            presetsBoxLastSelectedIndex = presetsBox.SelectedIndex;
+            presetIsLoaded = false;
+
+            buttonUpdatePreset.Enabled = false;
+            buttonDiscardPresetChanges.Enabled = false;
+        }
+
+        private void presetsBoxSelectedIndexChanged(int index)
+        {
+            if (index == -1)
             {
                 conditionCheckBox.Enabled = false;
                 conditionFieldList.Enabled = false;
@@ -1514,31 +1569,24 @@ namespace MusicBeePlugin
                 sourceTagList.Enabled = false;
                 previewTable.Enabled = false;
 
-                buttonUpdatePreset.Enabled = false;
-                buttonDeletePreset.Enabled = false;
-
                 idTextBox.Enabled = false;
 
                 sourceFieldComboBox_SelectedIndexChanged(null, null);
 
                 return;
             }
-            else
-            {
-                conditionCheckBox.Enabled = true;
-                buttonPreview.Enabled = true;
-                sourceFieldComboBox.Enabled = true;
-                destinationTagList.Enabled = true;
-                buttonCheckAll.Enabled = true;
-                buttonUncheckAll.Enabled = true;
-                functionComboBox.Enabled = true;
-                parameter2ComboBox.Enabled = true;
-                sourceTagList.Enabled = true;
-                previewTable.Enabled = true;
 
-                buttonUpdatePreset.Enabled = true;
-                buttonDeletePreset.Enabled = true;
-            }
+
+            conditionCheckBox.Enabled = true;
+            buttonPreview.Enabled = true;
+            sourceFieldComboBox.Enabled = true;
+            destinationTagList.Enabled = true;
+            buttonCheckAll.Enabled = true;
+            buttonUncheckAll.Enabled = true;
+            functionComboBox.Enabled = true;
+            parameter2ComboBox.Enabled = true;
+            sourceTagList.Enabled = true;
+            previewTable.Enabled = true;
 
             if (ignorePresetChangedEvent)
                 return;
@@ -1635,7 +1683,7 @@ namespace MusicBeePlugin
 
             sourceFieldComboBox_SelectedIndexChanged(null, null);
 
-            labelNotSaved.Visible = false;
+            setPresetChanged(false);
         }
 
         private void sourceFieldComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -1644,6 +1692,7 @@ namespace MusicBeePlugin
             {
                 destinationTagList.Enabled = false;
                 idTextBox.Enabled = false;
+                setIdButton.Enabled = false;
                 clearIdButton.Enabled = false;
 
                 destinationTagList.SelectedIndex = -1;
@@ -1655,13 +1704,14 @@ namespace MusicBeePlugin
             {
                 destinationTagList.Enabled = true;
                 idTextBox.Enabled = true;
+                setIdButton.Enabled = true;
                 clearIdButton.Enabled = true;
             }
 
             destinationTagList.Text = savedDestinationTagList[sourceFieldComboBox.SelectedIndex];
             idTextBox.Text = savedIds[sourceFieldComboBox.SelectedIndex];
 
-            labelNotSaved.Visible = true;
+            setPresetChanged(true);
         }
 
         private void destinationTagList_SelectedIndexChanged(object sender, EventArgs e)
@@ -1670,17 +1720,26 @@ namespace MusicBeePlugin
             {
                 savedDestinationTagList[sourceFieldComboBox.SelectedIndex] = destinationTagList.Text;
 
-                labelNotSaved.Visible = true;
+                setPresetChanged(true);
             }
         }
 
         private void buttonAddPreset_Click(object sender, EventArgs e)
         {
             presetsBox.Items.Add(new AutoLibraryReportsPreset());
+            presetsBox.SelectedIndex = presetsBox.Items.Count - 1;
+            setPresetChanged(true);
         }
 
         private void buttonDeletePreset_Click(object sender, EventArgs e)
         {
+            DialogResult result = MessageBox.Show(this, Plugin.MsgDeletePresetConfirmation, "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+
+            if (result == DialogResult.No)
+                return;
+
+            presetsBoxSelectedIndexChanged(presetsBox.SelectedIndex);
+
             if (presetsBox.SelectedIndex >= 0)
             {
                 int presetsBoxSelectedIndex = presetsBox.SelectedIndex;
@@ -1738,7 +1797,7 @@ namespace MusicBeePlugin
 
                 presetsBox.Refresh();
 
-                labelNotSaved.Visible = false;
+                setPresetChanged(false);
             }
         }
 
@@ -1749,17 +1808,17 @@ namespace MusicBeePlugin
 
         private void conditionFieldList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            labelNotSaved.Visible = true;
+            setPresetChanged(true);
         }
 
         private void conditionList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            labelNotSaved.Visible = true;
+            setPresetChanged(true);
         }
 
         private void comparedFieldList_TextUpdate(object sender, EventArgs e)
         {
-            labelNotSaved.Visible = true;
+            setPresetChanged(true);
         }
 
         private void idTextBox_Leave(object sender, EventArgs e)
@@ -1781,7 +1840,9 @@ namespace MusicBeePlugin
             if (idTextBox.Text == "")
             {
                 savedIds[sourceFieldComboBox.SelectedIndex] = "";
-                labelNotSaved.Visible = true;
+
+                setPresetChanged(true);
+
                 return;
             }
 
@@ -1828,7 +1889,8 @@ namespace MusicBeePlugin
                 }
 
                 savedIds[sourceFieldComboBox.SelectedIndex] = idTextBox.Text;
-                labelNotSaved.Visible = true;
+
+                setPresetChanged(true);
             }
         }
 
@@ -1836,6 +1898,38 @@ namespace MusicBeePlugin
         {
             idTextBox.Text = "";
             idTextBox_Leave(null, null);
+        }
+
+        private bool continueAndloseUnsavedChangesIfAnyConfirmation()
+        {
+            if (presetChanged)
+            {
+                if (MessageBox.Show(this, Plugin.MsgAlrDoYouWantToCloseWindowAndLoseAllChanges, 
+                    "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+                    == DialogResult.No)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+
+            return true;
+        }
+
+        private void AutoLibraryReportCommand_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!continueAndloseUnsavedChangesIfAnyConfirmation())
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void buttonDiscardPresetChanges_Click(object sender, EventArgs e)
+        {
+            presetsBoxSelectedIndexChanged(presetsBox.SelectedIndex);
         }
     }
 }

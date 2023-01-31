@@ -15,33 +15,8 @@ namespace MusicBeePlugin
     {
         private static string CustomText1;
 
-
         private static Color UntickedColor;
         private static Color TickedColor;
-
-        private static Bitmap AutoAppliedPresetsAccent;
-        private static Bitmap AutoAppliedPresetsDimmed;
-
-        private static Bitmap PredefinedPresetsAccent;
-        private static Bitmap PredefinedPresetsDimmed;
-
-        private static Bitmap CustomizedPresetsAccent;
-        private static Bitmap CustomizedPresetsDimmed;
-
-        private static Bitmap UserPresetsAccent;
-        private static Bitmap UserPresetsDimmed;
-
-        private static Bitmap PlaylistPresetsAccent;
-        private static Bitmap PlaylistPresetsDimmed;
-
-        private static Bitmap FunctionIdPresetsAccent;
-        private static Bitmap FunctionIdPresetsDimmed;
-
-        private static Bitmap HotkeyPresetsAccent;
-        private static Bitmap HotkeyPresetsDimmed;
-
-        private static Bitmap UncheckAllFiltersAccent;
-        private static Bitmap UncheckAllFiltersDimmed;
 
 
         private static bool ignorefFlterComboBoxSelectedIndexChanged = false;
@@ -81,9 +56,6 @@ namespace MusicBeePlugin
 
         private string assignHotkeyCheckBoxText;
         private bool processPresetCheckBoxCheckedEvent = true;
-
-        public Image checkedState;
-        public Image uncheckedState;
 
         private string newValueText;
 
@@ -427,7 +399,7 @@ namespace MusicBeePlugin
 
             public override string ToString()
             {
-                return GetDictValue(names, Plugin.Language) + (customizedByUser ? " " : "") + (userPreset ? " " : "") 
+                return GetDictValue(names, Plugin.Language) + (customizedByUser ? " " : "") + (userPreset ? " " : "")
                     + (condition ? " " : "") + (id != "" ? " " : "") + (hotkeyAssigned ? " ★" : "");
             }
 
@@ -539,7 +511,7 @@ namespace MusicBeePlugin
                     {
                         form.presetsChanged = true;
                         form.setCheckedState(form.customizedPresetPictureBox, customized);
-                        form.buttonClose.Image = Resources.UnsavedChanges_14;
+                        form.buttonClose.Image = Plugin.Warning;
                         form.toolTip1.SetToolTip(form.buttonClose, form.buttonCloseToolTip);
                     }
                 }
@@ -1311,7 +1283,7 @@ namespace MusicBeePlugin
                 if (tempPreset != null)
                 {
                     switch (i)
-                    { 
+                    {
                         case 0:
                             Plugin.MbApiInterface.MB_RegisterCommand(Plugin.AsrHotkeyDescription + tempPreset.getName(), tagToolsPlugin.ASRPreset1EventHandler);
                             Plugin.ASRPresetsMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset1EventHandler);
@@ -1437,6 +1409,7 @@ namespace MusicBeePlugin
             base.initializeForm();
 
 
+            //Setting control not standard properties
             var heightField = typeof(CheckedListBox).GetField(
                 "scaledListItemBordersHeight",
                 BindingFlags.NonPublic | BindingFlags.Instance
@@ -1447,75 +1420,30 @@ namespace MusicBeePlugin
             heightField.SetValue(presetList, addedHeight); // Where "presetList" is your CheckedListBox
 
 
-            uncheckedState = Plugin.GetSolidImageByBitmapMask(ForeColor, BackColor, Resources.uncheck_mark, 0.5f);
-            checkedState = Plugin.GetSolidImageByBitmapMask(ForeColor, BackColor, Resources.check_mark, 1.0f);
+            //Setting themed colors
+            clearIdButton.Image = Plugin.CrossImage;
+            clearSearchButton.Image = Plugin.CrossImage;
+
+            tickedOnlyPictureBox.Image = Plugin.AutoAppliedPresetsDimmed;
+            predefinedPictureBox.Image = Plugin.PredefinedPresetsDimmed;
+            customizedPictureBox.Image = Plugin.CustomizedPresetsDimmed;
+            userPictureBox.Image = Plugin.UserPresetsDimmed;
+            playlistPictureBox.Image = Plugin.PlaylistPresetsDimmed;
+            functionIdPictureBox.Image = Plugin.FunctionIdPresetsDimmed;
+            hotkeyPictureBox.Image = Plugin.HotkeyPresetsDimmed;
 
 
-            clearIdButton.Image = Plugin.GetSolidImageByBitmapMask(clearIdButton.ForeColor, clearIdButton.BackColor, Resources.clear_button, 1.0f);
-            clearSearchButton.Image = Plugin.GetSolidImageByBitmapMask(clearSearchButton.ForeColor, clearSearchButton.BackColor, Resources.clear_button, 1.0f);
+            Color highlightColor = Color.Red;//***
+            Color sampleColor = SystemColors.Highlight;
 
-            //Color accentColor = SystemColors.Highlight;
-            Color accentColor = ForeColor;
-            float accentWeight = 1.0f;
-
-            Color dimmedColor = ForeColor;
-            float dimmedWeight = 0.2f;
-
-
-            AutoAppliedPresetsAccent = Plugin.GetSolidImageByBitmapMask(accentColor, BackColor, Resources.auto_applied_presets, accentWeight);
-            AutoAppliedPresetsDimmed = Plugin.GetSolidImageByBitmapMask(dimmedColor, BackColor, Resources.auto_applied_presets, dimmedWeight);
-
-            PredefinedPresetsAccent = Plugin.GetSolidImageByBitmapMask(accentColor, BackColor, Resources.predefined_presets, accentWeight);
-            PredefinedPresetsDimmed = Plugin.GetSolidImageByBitmapMask(dimmedColor, BackColor, Resources.predefined_presets, dimmedWeight);
-
-            CustomizedPresetsAccent = Plugin.GetSolidImageByBitmapMask(accentColor, BackColor, Resources.customized_presets, accentWeight);
-            CustomizedPresetsDimmed = Plugin.GetSolidImageByBitmapMask(dimmedColor, BackColor, Resources.customized_presets, dimmedWeight);
-
-            UserPresetsAccent = Plugin.GetSolidImageByBitmapMask(accentColor, BackColor, Resources.user_presets, accentWeight);
-            UserPresetsDimmed = Plugin.GetSolidImageByBitmapMask(dimmedColor, BackColor, Resources.user_presets, dimmedWeight);
-
-            PlaylistPresetsAccent = Plugin.GetSolidImageByBitmapMask(accentColor, BackColor, Resources.playlist_presets, accentWeight);
-            PlaylistPresetsDimmed = Plugin.GetSolidImageByBitmapMask(dimmedColor, BackColor, Resources.playlist_presets, dimmedWeight);
-
-            FunctionIdPresetsAccent = Plugin.GetSolidImageByBitmapMask(accentColor, BackColor, Resources.function_id_presets, accentWeight);
-            FunctionIdPresetsDimmed = Plugin.GetSolidImageByBitmapMask(dimmedColor, BackColor, Resources.function_id_presets, dimmedWeight);
-
-            HotkeyPresetsAccent = Plugin.GetSolidImageByBitmapMask(accentColor, BackColor, Resources.hotkey_presets, accentWeight);
-            HotkeyPresetsDimmed = Plugin.GetSolidImageByBitmapMask(dimmedColor, BackColor, Resources.hotkey_presets, dimmedWeight);
-
-            UncheckAllFiltersAccent = Plugin.GetSolidImageByBitmapMask(accentColor, BackColor, Resources.uncheck_all_preset_filters, accentWeight);
-            UncheckAllFiltersDimmed = Plugin.GetSolidImageByBitmapMask(dimmedColor, BackColor, Resources.uncheck_all_preset_filters, dimmedWeight);
-
-            tickedOnlyPictureBox.Image = AutoAppliedPresetsDimmed;
-            predefinedPictureBox.Image = PredefinedPresetsDimmed;
-            customizedPictureBox.Image = CustomizedPresetsDimmed;
-            userPictureBox.Image = UserPresetsDimmed;
-            playlistPictureBox.Image = PlaylistPresetsDimmed;
-            functionIdPictureBox.Image = FunctionIdPresetsDimmed;
-            hotkeyPictureBox.Image = HotkeyPresetsDimmed;
-
-
-            ignorefFlterComboBoxSelectedIndexChanged = true;
-            filterComboBox.SelectedIndex = 0;
-            ignorefFlterComboBoxSelectedIndexChanged = false;
-
-
-            Color highlightColor = SystemColors.Highlight;
-
-            float highlightWeight = 0.65f;//***
-            descriptionBox.ForeColor = Plugin.GetHighlightColor(highlightColor, BackColor, highlightWeight);
+            descriptionBox.ForeColor = Plugin.GetHighlightColor(sampleColor, ForeColor, BackColor);
             descriptionBox.BackColor = BackColor;
 
-
-            float hotTrackWeight = 0.8f;
-
-            //Color hotTrack = SystemColors.HotTrack;
-            Color hotTrack = SystemColors.Highlight;
-
             UntickedColor = ForeColor;
-            TickedColor = Plugin.GetHighlightColor(hotTrack, BackColor, hotTrackWeight);
+            TickedColor = Plugin.GetHighlightColor(highlightColor, ForeColor, BackColor);
 
 
+            //Initialization
             presetsWorkingCopy = new SortedDictionary<Guid, Preset>();
             foreach (var tempPreset in Presets.Values)
             {
@@ -1630,12 +1558,15 @@ namespace MusicBeePlugin
 
             presetList_SelectedIndexChanged(null, null);
 
-            buttonClose.Image = Resources.Empty_14;
+            buttonClose.Image = Resources.Transparent_15;
             buttonCloseToolTip = toolTip1.GetToolTip(buttonClose);
             toolTip1.SetToolTip(buttonClose, "");
 
             addRowToTable = previewList_AddRowToTable;
             processRowOfTable = previewList_ProcessRowOfTable;
+
+
+            filterComboBox.SelectedIndex = 0;
         }
 
         private static int FindFirstSlot(Guid[] presetGuids, Guid searchedGuid)
@@ -2496,7 +2427,7 @@ namespace MusicBeePlugin
                     tempPreset.modifiedUtc = DateTime.UtcNow;
                     presetsChanged = true;
 
-                    buttonClose.Image = Resources.UnsavedChanges_14;
+                    buttonClose.Image = Plugin.Warning;
                     toolTip1.SetToolTip(buttonClose, buttonCloseToolTip);
                 }
                 else
@@ -2600,7 +2531,7 @@ namespace MusicBeePlugin
             TagToolsPlugin.SaveSettings();
 
             presetsChanged = false;
-            buttonClose.Image = Resources.Empty_14;
+            buttonClose.Image = Resources.Transparent_15;
             toolTip1.SetToolTip(buttonClose, "");
         }
 
@@ -2673,7 +2604,7 @@ namespace MusicBeePlugin
                 presetList.Items.Remove(presetToRemove);
 
             presetsChanged = true;
-            buttonClose.Image = Resources.UnsavedChanges_14;
+            buttonClose.Image = Plugin.Warning;
             toolTip1.SetToolTip(buttonClose, buttonCloseToolTip);
         }
 
@@ -2984,11 +2915,11 @@ namespace MusicBeePlugin
         {
             if (flag)
             {
-                label.Image = checkedState;
+                label.Image = Plugin.CheckedState;
             }
             else
             {
-                label.Image = uncheckedState;
+                label.Image = Plugin.UncheckedState;
             }
 
             presetList.Refresh();
@@ -3004,8 +2935,8 @@ namespace MusicBeePlugin
 
                 descriptionBox.Text = "";
 
-                userPresetPictureBox.Image = uncheckedState; ;
-                customizedPresetPictureBox.Image = uncheckedState;
+                userPresetPictureBox.Image = Plugin.UncheckedState; ;
+                customizedPresetPictureBox.Image = Plugin.UncheckedState;
 
                 preserveValuesTextBox.Enabled = false;
                 label2.Enabled = false;
@@ -3349,7 +3280,7 @@ namespace MusicBeePlugin
             if (numberOfImportedPresets + numberOfImportedAsCopyPresets > 0)
             {
                 presetsChanged = true;
-                buttonClose.Image = Resources.UnsavedChanges_14;
+                buttonClose.Image = Plugin.Warning;
                 toolTip1.SetToolTip(buttonClose, buttonCloseToolTip);
             }
 
@@ -3655,7 +3586,7 @@ namespace MusicBeePlugin
             else
             {
                 presetsChanged = true;
-                buttonClose.Image = Resources.UnsavedChanges_14;
+                buttonClose.Image = Plugin.Warning;
                 toolTip1.SetToolTip(buttonClose, buttonCloseToolTip);
             }
 
@@ -4376,79 +4307,79 @@ namespace MusicBeePlugin
 
             if (hotkeyChecked)
             {
-                hotkeyPictureBox.Image = HotkeyPresetsAccent;
+                hotkeyPictureBox.Image = Plugin.HotkeyPresetsAccent;
                 checkedCount++;
                 checkedFilter = 7;
             }
             else
             {
-                hotkeyPictureBox.Image = HotkeyPresetsDimmed;
+                hotkeyPictureBox.Image = Plugin.HotkeyPresetsDimmed;
             }
 
             if (functionIdChecked)
             {
-                functionIdPictureBox.Image = FunctionIdPresetsAccent;
+                functionIdPictureBox.Image = Plugin.FunctionIdPresetsAccent;
                 checkedCount++;
                 checkedFilter = 6;
             }
             else
             {
-                functionIdPictureBox.Image = FunctionIdPresetsDimmed;
+                functionIdPictureBox.Image = Plugin.FunctionIdPresetsDimmed;
             }
 
             if (playlistChecked)
             {
-                playlistPictureBox.Image = PlaylistPresetsAccent;
+                playlistPictureBox.Image = Plugin.PlaylistPresetsAccent;
                 checkedCount++;
                 checkedFilter = 5;
             }
             else
             {
-                playlistPictureBox.Image = PlaylistPresetsDimmed;
+                playlistPictureBox.Image = Plugin.PlaylistPresetsDimmed;
             }
 
             if (userChecked)
             {
-                userPictureBox.Image = UserPresetsAccent;
+                userPictureBox.Image = Plugin.UserPresetsAccent;
                 checkedCount++;
                 checkedFilter = 4;
             }
             else
             {
-                userPictureBox.Image = UserPresetsDimmed;
+                userPictureBox.Image = Plugin.UserPresetsDimmed;
             }
 
             if (customizedChecked)
             {
-                customizedPictureBox.Image = CustomizedPresetsAccent;
+                customizedPictureBox.Image = Plugin.CustomizedPresetsAccent;
                 checkedCount++;
                 checkedFilter = 3;
             }
             else
             {
-                customizedPictureBox.Image = CustomizedPresetsDimmed;
+                customizedPictureBox.Image = Plugin.CustomizedPresetsDimmed;
             }
 
             if (predefinedChecked)
             {
-                predefinedPictureBox.Image = PredefinedPresetsAccent;
+                predefinedPictureBox.Image = Plugin.PredefinedPresetsAccent;
                 checkedCount++;
                 checkedFilter = 2;
             }
             else
             {
-                predefinedPictureBox.Image = PredefinedPresetsDimmed;
+                predefinedPictureBox.Image = Plugin.PredefinedPresetsDimmed;
             }
 
             if (tickedOnlyChecked)
             {
-                tickedOnlyPictureBox.Image = AutoAppliedPresetsAccent;
+                tickedOnlyPictureBox.Image = Plugin.AutoAppliedPresetsAccent;
                 checkedCount++;
                 checkedFilter = 1;
             }
             else
             {
-                tickedOnlyPictureBox.Image = AutoAppliedPresetsDimmed;
+                tickedOnlyPictureBox.Image = Plugin.AutoAppliedPresetsDimmed;
             }
 
 
@@ -4464,19 +4395,23 @@ namespace MusicBeePlugin
                 untickAllChecked = true;
 
                 if (checkedCount > 1)
+                {
                     filterComboBox.SelectedIndex = -1;
+                }
                 else
+                { 
                     filterComboBox.SelectedIndex = checkedFilter;
+                    ((ComboBoxPlus)filterComboBox).Placeholder = Plugin.CtlMixedFilters;
+                }
             }
 
             ignorefFlterComboBoxSelectedIndexChanged = false;
 
 
-
             if (untickAllChecked)
-                uncheckAllFiltersPictureBox.Image = UncheckAllFiltersAccent;
+                uncheckAllFiltersPictureBox.Image = Plugin.UncheckAllFiltersAccent;
             else
-                uncheckAllFiltersPictureBox.Image = UncheckAllFiltersDimmed;
+                uncheckAllFiltersPictureBox.Image = Plugin.UncheckAllFiltersDimmed;
 
         }
 
@@ -4484,7 +4419,7 @@ namespace MusicBeePlugin
         {
             if (presetsChanged)
             {
-                if (MessageBox.Show(this, Plugin.MsgDoYouWantToCloseWindowAndLoseAllChanges, 
+                if (MessageBox.Show(this, Plugin.MsgAsrDoYouWantToCloseWindowAndLoseAllChanges, 
                     "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) 
                     == DialogResult.No)
                 {

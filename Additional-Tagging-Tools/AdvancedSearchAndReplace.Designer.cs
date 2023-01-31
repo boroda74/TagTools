@@ -52,8 +52,9 @@ namespace MusicBeePlugin
             this.buttonDelete = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.searchTextBox = new System.Windows.Forms.TextBox();
-            this.buttonClose = new System.Windows.Forms.Button();
             this.filterComboBox = new System.Windows.Forms.ComboBox();
+            this.buttonClose = new System.Windows.Forms.Button();
+            this.uncheckAllFiltersPictureBox = new System.Windows.Forms.PictureBox();
             this.hotkeyPictureBox = new System.Windows.Forms.PictureBox();
             this.playlistPictureBox = new System.Windows.Forms.PictureBox();
             this.userPictureBox = new System.Windows.Forms.PictureBox();
@@ -62,8 +63,6 @@ namespace MusicBeePlugin
             this.tickedOnlyPictureBox = new System.Windows.Forms.PictureBox();
             this.clearIdButton = new System.Windows.Forms.Button();
             this.clearSearchButton = new System.Windows.Forms.Button();
-            this.uncheckAllFiltersPictureBox = new System.Windows.Forms.PictureBox();
-            this.functionIdPictureBox = new System.Windows.Forms.PictureBox();
             this.presetList = new System.Windows.Forms.CheckedListBox();
             this.previewTable = new System.Windows.Forms.DataGridView();
             this.File = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -85,6 +84,7 @@ namespace MusicBeePlugin
             this.panel1 = new System.Windows.Forms.Panel();
             this.userPresetPictureBox = new System.Windows.Forms.PictureBox();
             this.customizedPresetPictureBox = new System.Windows.Forms.PictureBox();
+            this.functionIdPictureBox = new System.Windows.Forms.PictureBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -122,18 +122,18 @@ namespace MusicBeePlugin
             this.label6 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dirtyErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.uncheckAllFiltersPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hotkeyPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.playlistPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.userPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.customizedPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.predefinedPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tickedOnlyPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.uncheckAllFiltersPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.functionIdPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userPresetPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.customizedPresetPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.functionIdPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -151,6 +151,9 @@ namespace MusicBeePlugin
             this.customText4Box = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
             this.idTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
             this.preserveValuesTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
+
+            this.filterComboBox = new ComboBoxPlus();
+
 
             InterpolationMode defaultInterpolationMode = InterpolationMode.HighQualityBicubic;
 
@@ -343,18 +346,6 @@ namespace MusicBeePlugin
             this.toolTip1.SetToolTip(this.searchTextBox, resources.GetString("searchTextBox.ToolTip"));
             this.searchTextBox.TextChanged += new System.EventHandler(this.searchTextBox_TextChanged);
             // 
-            // buttonClose
-            // 
-            resources.ApplyResources(this.buttonClose, "buttonClose");
-            this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.dirtyErrorProvider.SetError(this.buttonClose, resources.GetString("buttonClose.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.buttonClose, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonClose.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.buttonClose, ((int)(resources.GetObject("buttonClose.IconPadding"))));
-            this.buttonClose.Name = "buttonClose";
-            this.toolTip1.SetToolTip(this.buttonClose, resources.GetString("buttonClose.ToolTip"));
-            this.buttonClose.UseVisualStyleBackColor = true;
-            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
-            // 
             // filterComboBox
             // 
             resources.ApplyResources(this.filterComboBox, "filterComboBox");
@@ -376,6 +367,32 @@ namespace MusicBeePlugin
             this.filterComboBox.Name = "filterComboBox";
             this.toolTip1.SetToolTip(this.filterComboBox, resources.GetString("filterComboBox.ToolTip"));
             this.filterComboBox.SelectedIndexChanged += new System.EventHandler(this.filterComboBox_SelectedIndexChanged);
+            // 
+            // buttonClose
+            // 
+            resources.ApplyResources(this.buttonClose, "buttonClose");
+            this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.dirtyErrorProvider.SetError(this.buttonClose, resources.GetString("buttonClose.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.buttonClose, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonClose.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.buttonClose, ((int)(resources.GetObject("buttonClose.IconPadding"))));
+            this.buttonClose.Image = global::MusicBeePlugin.Properties.Resources.Warning_15;
+            this.buttonClose.Name = "buttonClose";
+            this.toolTip1.SetToolTip(this.buttonClose, resources.GetString("buttonClose.ToolTip"));
+            this.buttonClose.UseVisualStyleBackColor = true;
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
+            // 
+            // uncheckAllFiltersPictureBox
+            // 
+            resources.ApplyResources(this.uncheckAllFiltersPictureBox, "uncheckAllFiltersPictureBox");
+            this.uncheckAllFiltersPictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.dirtyErrorProvider.SetError(this.uncheckAllFiltersPictureBox, resources.GetString("uncheckAllFiltersPictureBox.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.uncheckAllFiltersPictureBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("uncheckAllFiltersPictureBox.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.uncheckAllFiltersPictureBox, ((int)(resources.GetObject("uncheckAllFiltersPictureBox.IconPadding"))));
+            this.uncheckAllFiltersPictureBox.Image = global::MusicBeePlugin.Properties.Resources.uncheck_all_preset_filters;
+            this.uncheckAllFiltersPictureBox.Name = "uncheckAllFiltersPictureBox";
+            this.uncheckAllFiltersPictureBox.TabStop = false;
+            this.toolTip1.SetToolTip(this.uncheckAllFiltersPictureBox, resources.GetString("uncheckAllFiltersPictureBox.ToolTip"));
+            this.uncheckAllFiltersPictureBox.Click += new System.EventHandler(this.uncheckAllFiltersPictureBox_Click);
             // 
             // hotkeyPictureBox
             // 
@@ -478,32 +495,6 @@ namespace MusicBeePlugin
             this.toolTip1.SetToolTip(this.clearSearchButton, resources.GetString("clearSearchButton.ToolTip"));
             this.clearSearchButton.UseVisualStyleBackColor = true;
             this.clearSearchButton.Click += new System.EventHandler(this.clearSearchButton_Click);
-            // 
-            // uncheckAllFiltersPictureBox
-            // 
-            resources.ApplyResources(this.uncheckAllFiltersPictureBox, "uncheckAllFiltersPictureBox");
-            this.uncheckAllFiltersPictureBox.BackColor = System.Drawing.Color.Transparent;
-            this.dirtyErrorProvider.SetError(this.uncheckAllFiltersPictureBox, resources.GetString("uncheckAllFiltersPictureBox.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.uncheckAllFiltersPictureBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("uncheckAllFiltersPictureBox.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.uncheckAllFiltersPictureBox, ((int)(resources.GetObject("uncheckAllFiltersPictureBox.IconPadding"))));
-            this.uncheckAllFiltersPictureBox.Image = global::MusicBeePlugin.Properties.Resources.uncheck_all_preset_filters;
-            this.uncheckAllFiltersPictureBox.Name = "uncheckAllFiltersPictureBox";
-            this.uncheckAllFiltersPictureBox.TabStop = false;
-            this.toolTip1.SetToolTip(this.uncheckAllFiltersPictureBox, resources.GetString("uncheckAllFiltersPictureBox.ToolTip"));
-            this.uncheckAllFiltersPictureBox.Click += new System.EventHandler(this.uncheckAllFiltersPictureBox_Click);
-            // 
-            // functionIdPictureBox
-            // 
-            resources.ApplyResources(this.functionIdPictureBox, "functionIdPictureBox");
-            this.functionIdPictureBox.BackColor = System.Drawing.Color.Transparent;
-            this.dirtyErrorProvider.SetError(this.functionIdPictureBox, resources.GetString("functionIdPictureBox.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.functionIdPictureBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("functionIdPictureBox.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.functionIdPictureBox, ((int)(resources.GetObject("functionIdPictureBox.IconPadding"))));
-            this.functionIdPictureBox.Image = global::MusicBeePlugin.Properties.Resources.function_id_presets;
-            this.functionIdPictureBox.Name = "functionIdPictureBox";
-            this.functionIdPictureBox.TabStop = false;
-            this.toolTip1.SetToolTip(this.functionIdPictureBox, resources.GetString("functionIdPictureBox.ToolTip"));
-            this.functionIdPictureBox.Click += new System.EventHandler(this.functionIdPictureBox_Click);
             // 
             // presetList
             // 
@@ -763,6 +754,19 @@ namespace MusicBeePlugin
             this.customizedPresetPictureBox.Name = "customizedPresetPictureBox";
             this.customizedPresetPictureBox.TabStop = false;
             this.toolTip1.SetToolTip(this.customizedPresetPictureBox, resources.GetString("customizedPresetPictureBox.ToolTip"));
+            // 
+            // functionIdPictureBox
+            // 
+            resources.ApplyResources(this.functionIdPictureBox, "functionIdPictureBox");
+            this.functionIdPictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.dirtyErrorProvider.SetError(this.functionIdPictureBox, resources.GetString("functionIdPictureBox.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.functionIdPictureBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("functionIdPictureBox.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.functionIdPictureBox, ((int)(resources.GetObject("functionIdPictureBox.IconPadding"))));
+            this.functionIdPictureBox.Image = global::MusicBeePlugin.Properties.Resources.function_id_presets;
+            this.functionIdPictureBox.Name = "functionIdPictureBox";
+            this.functionIdPictureBox.TabStop = false;
+            this.toolTip1.SetToolTip(this.functionIdPictureBox, resources.GetString("functionIdPictureBox.ToolTip"));
+            this.functionIdPictureBox.Click += new System.EventHandler(this.functionIdPictureBox_Click);
             // 
             // label4
             // 
@@ -1174,19 +1178,19 @@ namespace MusicBeePlugin
             this.Name = "AdvancedSearchAndReplaceCommand";
             this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AdvancedSearchAndReplaceCommand_FormClosing);
+            ((System.ComponentModel.ISupportInitialize)(this.uncheckAllFiltersPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.hotkeyPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.playlistPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.userPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.customizedPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.predefinedPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tickedOnlyPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.uncheckAllFiltersPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.functionIdPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userPresetPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.customizedPresetPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.functionIdPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
