@@ -130,9 +130,6 @@
   <data name="check_mark" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\check-mark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="clear_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\clear-button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="uncheck_mark" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\uncheck-mark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -160,16 +157,19 @@
   <data name="user_presets" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>resources\user-presets.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="set_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\set-button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Warning_15" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\Warning-15.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Transparent_15" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\Transparent-15.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Warning_15_Flat" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\Warning-15-Flat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="clear_button_15" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\clear-button-15.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="set_button_15" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\set-button-15.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Transparent" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\Transparent.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

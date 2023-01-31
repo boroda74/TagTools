@@ -391,7 +391,7 @@
             this.dirtyErrorProvider.SetError(this.removeExceptionButton, resources.GetString("removeExceptionButton.Error"));
             this.dirtyErrorProvider.SetIconAlignment(this.removeExceptionButton, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("removeExceptionButton.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.removeExceptionButton, ((int)(resources.GetObject("removeExceptionButton.IconPadding"))));
-            this.removeExceptionButton.Image = global::MusicBeePlugin.Properties.Resources.clear_button;
+            this.removeExceptionButton.Image = global::MusicBeePlugin.Properties.Resources.clear_button_15;
             this.removeExceptionButton.Name = "removeExceptionButton";
             this.toolTip1.SetToolTip(this.removeExceptionButton, resources.GetString("removeExceptionButton.ToolTip"));
             this.removeExceptionButton.UseVisualStyleBackColor = true;

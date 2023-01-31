@@ -37,11 +37,11 @@ namespace MusicBeePlugin
                 {
                     this.finalMaskedImage = Create32bppImageAndClearAlpha(this._image);
 
-                    BitmapData bmpData1 = finalMaskedImage.LockBits(new Rectangle(0, 0, finalMaskedImage.Width, finalMaskedImage.Height), System.Drawing.Imaging.ImageLockMode.ReadWrite, finalMaskedImage.PixelFormat);
+                    BitmapData bmpData1 = finalMaskedImage.LockBits(new Rectangle(0, 0, finalMaskedImage.Width, finalMaskedImage.Height), ImageLockMode.ReadWrite, finalMaskedImage.PixelFormat);
                     byte[] finalMaskedImageRGBAData = new byte[bmpData1.Stride * bmpData1.Height];
                     System.Runtime.InteropServices.Marshal.Copy(bmpData1.Scan0, finalMaskedImageRGBAData, 0, finalMaskedImageRGBAData.Length);
 
-                    BitmapData bmpData2 = preparedMask.LockBits(new Rectangle(0, 0, preparedMask.Width, preparedMask.Height), System.Drawing.Imaging.ImageLockMode.ReadOnly, preparedMask.PixelFormat);
+                    BitmapData bmpData2 = preparedMask.LockBits(new Rectangle(0, 0, preparedMask.Width, preparedMask.Height), ImageLockMode.ReadOnly, preparedMask.PixelFormat);
                     byte[] preparedMaskRGBAData = new byte[bmpData2.Stride * bmpData2.Height];
                     System.Runtime.InteropServices.Marshal.Copy(bmpData2.Scan0, preparedMaskRGBAData, 0, preparedMaskRGBAData.Length);
 
@@ -65,7 +65,7 @@ namespace MusicBeePlugin
 
                 this.preparedMask = Create32bppImageAndClearAlpha(_mask);
 
-                BitmapData bmpData = preparedMask.LockBits(new Rectangle(0, 0, preparedMask.Width, preparedMask.Height), System.Drawing.Imaging.ImageLockMode.ReadWrite, preparedMask.PixelFormat);
+                BitmapData bmpData = preparedMask.LockBits(new Rectangle(0, 0, preparedMask.Width, preparedMask.Height), ImageLockMode.ReadWrite, preparedMask.PixelFormat);
 
                 byte[] preparedMaskRGBData = new byte[bmpData.Stride * bmpData.Height];
 

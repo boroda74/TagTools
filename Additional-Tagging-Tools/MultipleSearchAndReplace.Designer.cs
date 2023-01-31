@@ -455,7 +455,7 @@
             this.dirtyErrorProvider.SetError(this.buttonDeleteSaved, resources.GetString("buttonDeleteSaved.Error"));
             this.dirtyErrorProvider.SetIconAlignment(this.buttonDeleteSaved, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonDeleteSaved.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.buttonDeleteSaved, ((int)(resources.GetObject("buttonDeleteSaved.IconPadding"))));
-            this.buttonDeleteSaved.Image = global::MusicBeePlugin.Properties.Resources.clear_button;
+            this.buttonDeleteSaved.Image = global::MusicBeePlugin.Properties.Resources.clear_button_15;
             this.buttonDeleteSaved.Name = "buttonDeleteSaved";
             this.toolTip1.SetToolTip(this.buttonDeleteSaved, resources.GetString("buttonDeleteSaved.ToolTip"));
             this.buttonDeleteSaved.UseVisualStyleBackColor = true;

@@ -3969,8 +3969,8 @@ namespace MusicBeePlugin
             UncheckedState = GetSolidImageByBitmapMask(GetWeightedColor(EmptyForm.ForeColor, EmptyForm.BackColor), Resources.uncheck_mark);
             CheckedState = GetSolidImageByBitmapMask(EmptyForm.ForeColor, Resources.check_mark);
 
-            CrossImage = GetSolidImageByBitmapMask(EmptyButton.ForeColor, Resources.clear_button);
-            SetImage = GetSolidImageByBitmapMask(EmptyButton.ForeColor, Resources.set_button);
+            CrossImage = GetSolidImageByBitmapMask(EmptyButton.ForeColor, Resources.clear_button_15);
+            SetImage = GetSolidImageByBitmapMask(EmptyButton.ForeColor, Resources.set_button_15);
 
             if (EmptyButton.FlatStyle == FlatStyle.Flat)
             {

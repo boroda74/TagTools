@@ -430,7 +430,7 @@
             this.dirtyErrorProvider.SetError(this.clearIdButton, resources.GetString("clearIdButton.Error"));
             this.dirtyErrorProvider.SetIconAlignment(this.clearIdButton, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("clearIdButton.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.clearIdButton, ((int)(resources.GetObject("clearIdButton.IconPadding"))));
-            this.clearIdButton.Image = global::MusicBeePlugin.Properties.Resources.clear_button;
+            this.clearIdButton.Image = global::MusicBeePlugin.Properties.Resources.clear_button_15;
             this.clearIdButton.Name = "clearIdButton";
             this.toolTip.SetToolTip(this.clearIdButton, resources.GetString("clearIdButton.ToolTip"));
             this.clearIdButton.UseVisualStyleBackColor = true;
@@ -442,7 +442,7 @@
             this.dirtyErrorProvider.SetError(this.setIdButton, resources.GetString("setIdButton.Error"));
             this.dirtyErrorProvider.SetIconAlignment(this.setIdButton, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("setIdButton.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.setIdButton, ((int)(resources.GetObject("setIdButton.IconPadding"))));
-            this.setIdButton.Image = global::MusicBeePlugin.Properties.Resources.set_button;
+            this.setIdButton.Image = global::MusicBeePlugin.Properties.Resources.set_button_15;
             this.setIdButton.Name = "setIdButton";
             this.toolTip.SetToolTip(this.setIdButton, resources.GetString("setIdButton.ToolTip"));
             this.setIdButton.UseVisualStyleBackColor = true;

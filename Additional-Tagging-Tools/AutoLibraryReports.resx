@@ -1339,7 +1339,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonDiscardPresetChanges.Text" xml:space="preserve">
-    <value>Discard changes</value>
+    <value>Undo Changes</value>
   </data>
   <data name="buttonUncheckAll.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 23</value>
@@ -1498,7 +1498,7 @@
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="buttonUncheckAll.Text" xml:space="preserve">
-    <value>Uncheck all</value>
+    <value>Uncheck All</value>
   </data>
   <data name="conditionList.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1651,7 +1651,7 @@
     <value>5, 106</value>
   </data>
   <data name="buttonDeletePreset.Text" xml:space="preserve">
-    <value>Delete preset</value>
+    <value>Delete Preset</value>
   </data>
   <data name="label1.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1873,7 +1873,7 @@
     <value>True</value>
   </data>
   <data name="buttonAddPreset.Text" xml:space="preserve">
-    <value>New preset</value>
+    <value>New Preset</value>
   </data>
   <data name="&gt;&gt;conditionCheckBox.Name" xml:space="preserve">
     <value>conditionCheckBox</value>
@@ -1957,7 +1957,7 @@
     <value>numberOfTagsToRecalculateNumericUpDown</value>
   </data>
   <data name="buttonCheckAll.Text" xml:space="preserve">
-    <value>Check all</value>
+    <value>Check All</value>
   </data>
   <data name="buttonClose.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1984,7 +1984,7 @@
     <value>26</value>
   </data>
   <data name="buttonUpdatePreset.Text" xml:space="preserve">
-    <value>Save preset</value>
+    <value>Save Preset</value>
   </data>
   <data name="&gt;&gt;buttonAddPreset.Parent" xml:space="preserve">
     <value>$this</value>
@@ -2013,16 +2013,16 @@
   <data name="clearIdButton.ToolTip" xml:space="preserve">
     <value>Remove assignment of virtual tag function ID to aggregated function</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="$this.Localizable" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
-  <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  </data>
+  <data name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>157, 9</value>
-  </metadata>
-  <metadata name="dirtyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  </data>
+  <data name="dirtyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>9, 9</value>
-  </metadata>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <data name="$this.Language" type="System.Globalization.CultureInfo, mscorlib">
     <value>ru</value>
-  </metadata>
+  </data>
 </root>

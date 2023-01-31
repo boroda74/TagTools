@@ -458,10 +458,11 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\Resources\Transparent.png" />
+    <None Include="Properties\Resources\set-button-15.png" />
+    <None Include="Properties\Resources\clear-button-15.png" />
     <None Include="Properties\Resources\Warning-15-Flat.png" />
-    <None Include="Properties\Resources\Transparent-15.png" />
     <None Include="Properties\Resources\Warning-15.png" />
-    <None Include="Properties\Resources\set-button.png" />
     <None Include="Properties\Resources\uncheck-mark.png" />
     <None Include="Properties\Resources\uncheck-all-preset-filters.png" />
     <None Include="Properties\Resources\hotkey-presets.png" />
@@ -472,7 +473,6 @@
     <None Include="Properties\Resources\predefined-presets.png" />
     <None Include="Properties\Resources\auto-applied-presets.png" />
     <None Include="Properties\Resources\check-mark.png" />
-    <None Include="Properties\Resources\clear-button.png" />
     <None Include="Properties\Resources\Window.png" />
     <None Include="Properties\Resources\Search.png" />
     <None Include="Properties\Resources\MissingArtwork.png" />

@@ -83,9 +83,9 @@ namespace MusicBeePlugin.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap clear_button {
+        internal static System.Drawing.Bitmap clear_button_15 {
             get {
-                object obj = ResourceManager.GetObject("clear_button", resourceCulture);
+                object obj = ResourceManager.GetObject("clear_button_15", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -163,9 +163,9 @@ namespace MusicBeePlugin.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap set_button {
+        internal static System.Drawing.Bitmap set_button_15 {
             get {
-                object obj = ResourceManager.GetObject("set_button", resourceCulture);
+                object obj = ResourceManager.GetObject("set_button_15", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -173,9 +173,9 @@ namespace MusicBeePlugin.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Transparent_15 {
+        internal static System.Drawing.Bitmap Transparent {
             get {
-                object obj = ResourceManager.GetObject("Transparent_15", resourceCulture);
+                object obj = ResourceManager.GetObject("Transparent", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

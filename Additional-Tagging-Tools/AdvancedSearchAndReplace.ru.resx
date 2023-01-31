@@ -137,7 +137,7 @@
     <value>Есть несохраненные изменения</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1001, 682</value>
+    <value>1011, 682</value>
   </data>
   <data name="userPresetPictureBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>853, 199</value>
@@ -146,60 +146,73 @@
     <value>662, 199</value>
   </data>
   <data name="uncheckAllFiltersPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>717, 34</value>
+    <value>720, 35</value>
   </data>
   <data name="uncheckAllFiltersPictureBox.ToolTip" xml:space="preserve">
     <value>Отключить все фильтры</value>
   </data>
   <data name="hotkeyPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>693, 34</value>
+    <value>693, 35</value>
   </data>
   <data name="hotkeyPictureBox.ToolTip" xml:space="preserve">
     <value>Щелкните, чтобы видеть только пресеты с назначенными комбинациями клавиш
-Щелкните, удерживая клавишу Ctrl, чтобы добавить этот фильтр к существующим или отключить его</value>
+Щелкните, удерживая клавишу Ctrl, чтобы добавить этот фильтр к существующим или отключить его
+
+Пресеты должны соответствовать ВСЕМ выбранным фильтрам ОДНОВРЕМЕННО</value>
   </data>
   <data name="functionIdPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>669, 34</value>
+    <value>674, 35</value>
+  </data>
+  <data name="functionIdPictureBox.ToolTip" xml:space="preserve">
+    <value>Щелкните, чтобы видеть только пресеты с назначенными id-ми функций виртуальных тегов
+Щелкните, удерживая клавишу Ctrl, чтобы добавить этот фильтр к существующим или отключить его
+
+Пресеты должны соответствовать ВСЕМ выбранным фильтрам ОДНОВРЕМЕННО</value>
   </data>
   <data name="playlistPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>645, 34</value>
+    <value>655, 35</value>
   </data>
   <data name="playlistPictureBox.ToolTip" xml:space="preserve">
     <value>Щелкните, чтобы видеть только пресеты, ограниченные плейлистом
 Щелкните, удерживая клавишу Ctrl, чтобы добавить этот фильтр к существующим или отключить его
-</value>
+
+Пресеты должны соответствовать ВСЕМ выбранным фильтрам ОДНОВРЕМЕННО</value>
   </data>
   <data name="userPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>621, 34</value>
+    <value>636, 35</value>
   </data>
   <data name="userPictureBox.ToolTip" xml:space="preserve">
     <value>Щелкните, чтобы видеть только пресеты пользователя
 Щелкните, удерживая клавишу Ctrl, чтобы добавить этот фильтр к существующим или отключить его
-</value>
+
+Пресеты должны соответствовать ВСЕМ выбранным фильтрам ОДНОВРЕМЕННО</value>
   </data>
   <data name="customizedPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>597, 34</value>
+    <value>617, 35</value>
   </data>
   <data name="customizedPictureBox.ToolTip" xml:space="preserve">
     <value>Щелкните, чтобы видеть только настроенные пресеты
 Щелкните, удерживая клавишу Ctrl, чтобы добавить этот фильтр к существующим или отключить его
-</value>
+
+Пресеты должны соответствовать ВСЕМ выбранным фильтрам ОДНОВРЕМЕННО</value>
   </data>
   <data name="predefinedPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>573, 34</value>
+    <value>598, 35</value>
   </data>
   <data name="predefinedPictureBox.ToolTip" xml:space="preserve">
     <value>Щелкните, чтобы видеть только стандартные пресеты
 Щелкните, удерживая клавишу Ctrl, чтобы добавить этот фильтр к существующим или отключить его
-</value>
+
+Пресеты должны соответствовать ВСЕМ выбранным фильтрам ОДНОВРЕМЕННО</value>
   </data>
   <data name="tickedOnlyPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>549, 34</value>
+    <value>579, 35</value>
   </data>
   <data name="tickedOnlyPictureBox.ToolTip" xml:space="preserve">
     <value>Щелкните, чтобы видеть только автоприменяемые пресеты
 Щелкните, удерживая клавишу Ctrl, чтобы добавить этот фильтр к существующим или отключить его
-</value>
+
+Пресеты должны соответствовать ВСЕМ выбранным фильтрам ОДНОВРЕМЕННО</value>
   </data>
   <data name="filterComboBox.Items" xml:space="preserve">
     <value>(Без фильтра)</value>
@@ -324,7 +337,7 @@
     <value />
   </data>
   <data name="clearSearchButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>524, 33</value>
+    <value>547, 33</value>
   </data>
   <data name="clearSearchButton.ToolTip" xml:space="preserve">
     <value>Очистить текст поиска</value>
@@ -333,7 +346,7 @@
     <value>31, 33</value>
   </data>
   <data name="searchTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>491, 20</value>
+    <value>513, 20</value>
   </data>
   <data name="searchTextBox.ToolTip" xml:space="preserve">
     <value>Введите часть имени пресета или просто несколько слов из имени пресета, чтобы отфильтровать список</value>
