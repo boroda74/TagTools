@@ -178,6 +178,9 @@ Plugin has the option to store "last skipped date/time" in any writable tag (e.g
 Plugin strictly follows MusicBee convention of what is "skipped track".
 
 To define date type of custom tag, open MusicBee menu> Edit> Preferences> Tags (1)> Define New Tags> Configure Fields. Find "Custom1" tag (or some other custom tag), change type to "Date".
+<br/>
+
+[See here screenshot of this setting.][5]
 
 ----
 
@@ -327,3 +330,4 @@ Do all you want with plugin binary and source code at your own risk.
   [2]: https://github.com/boroda74/TagTools/blob/master/Docs/LR-AUTO-APPLYING-FILTERING.md
   [3]: https://github.com/boroda74/TagTools/blob/master/Docs/ASR-AUTO-APPLYING-FILTERING.md
   [4]: https://www.mediafire.com/file/h2t08o9562efboi/mb_TagTools_latest.zip/file
+  [5]: https://i.imgur.com/C1gPwaK.png
