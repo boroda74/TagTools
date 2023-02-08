@@ -1,8 +1,13 @@
 All presets are unchecked:
+
 ![alt text][4]
+
 Some presets are checked:
+
 ![alt text][5]
+
 Preset list showing auto-applied presets only:
+
 ![alt text][6]
 
   [4]: https://i.imgur.com/4paAAWO.png
