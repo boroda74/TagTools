@@ -3,6 +3,10 @@
 
 *Note:* 
 
+If you are familiar with plugin update process, you can always download latest plugin version [here][4]. Copy the file "mb_TagTools.dll" from the archive "mb_TagTools_latest.zip" to MusicBee  "Plugins" folder, and overwrite the existing file.
+
+*Note:* 
+
 Pay attention to tool tips over buttons/fields in plugin windows.
 <br/>
 
@@ -54,36 +58,21 @@ Allows to export some library statistics for currently displayed tracks to exter
 - Command supports for two types of exported fields: grouping tags and aggregated functions. Every aggregated function is calculated for every unique combination of grouping tags. "Count" function counts the number of *different* values of a given tag. Other functions are obvious and should be applied only to numeric or duration tags (e.g. "Time", "File size", etc.).
 - Any aggregated function can be saved to physically stored custom tag (of course this custom tag wont be updated automatically), so that this aggregated function could be used by MusicBee for sorting/filtering.
 - For all aggregated functions except for "Count" function please make sure that all tag values used by function have the same measurement units (KB, MB, etc.) or adjust units in "Edit> Preferences> Plugins" window (not required if both MusicBee and Windows localizations are English or Russian).
+- If you want just to export some tags then define only grouping fields in preview table (don't use aggregated functions and uncheck "Calculate subgrouping totals" checkbox, which is senseless in this case).
 
-*Example 1*
+Also, "Library Reports" allows to calculate one or more presets and save results to (custom) tags at startup/after a given number of tag changes/or manually. Useful for *autosaving* or manual saving such values as "Summary play counts of albums" or "Number of tracks for each artist", etc. to (custom) tags, i.e. it's some analog of virtual tags with the ability to operate not only on tags of current track, but on tags of all tracks.
 
-If you want just to export some tags then define only grouping fields in preview table (don't use aggregated functions and untick "Calculate subgrouping totals" checkbox, which is senseless in this case).
+"Library Reports" command adds new virtual tag function:
 
-*Example 2*
+<pre>$LR(&lt;URL&gt;,function_id)</pre>
 
-If you want to get the number of albums of each artist, i.e. the number of albums (function "Count" of tag "Album") per artist (tag "Album Artist"), you should add grouping tag "Album Artist" in the table and required function "Count(Album)".
+To use this function open library reports window, create one or several presets, each with one or several aggregate functions and assign a function id (any string containing a-z chars, numbers and symbols . : - _ ) to functions. Probably you will want to write all aggregate functions to &lt;Null&gt; tag (i.e. do not write them to any tags at all if you use these functions only for virtual tags).
 
-*Example 3*
-
-If you want to get the total duration of all tracks of every artist, i.e. the sum of track durations (function "Sum" of tag "Time") per artist (tag "Album Artist"), you should add grouping tag "Album Artist" and function "Sum(Time)".
-<br/>
-
-**Auto Library Reports**
-
-Mostly the same command as "Library Reports", but allows to calculate several presets and save results to (custom) tags at startup and/or after a given number of tag changes. Useful for *autosaving* such values as "Summary play counts of albums" or "Number of tracks for each artist", etc. to (custom) tags, i.e. it's some analog of virtual tags with the ability to operate not only on tags of current track, but on tags of all tracks.
-
-"Auto Library Reports" command adds new virtual tag function:
-
-<pre>$ALR(&lt;URL&gt;,function_id)</pre>
-
-To use this function open auto-library reports window, create one or several presets, each with one or several aggregate functions and assign a function id (any string containing a-z chars, numbers and symbols . : - _ ) for functions. Probably you will want to write all aggregate functions to &lt;Null&gt; tag (i.e. do not write them to any tags at all if you use these functions only for virtual tags).
-
-ALR virtual tag functions allow to gather and display in the main panel some library statistics for currently displayed tracks.
+"Library Reports"  virtual tag functions allow to gather and display in the main panel some library statistics for currently displayed tracks.
 
 *Notes:*
 
-- Main ALR window supports for two types of fields: grouping tags and aggregated functions. Every aggregated function is calculated for every unique combination of grouping tags. "Count" function counts the number of different values of a given (function parameter, not grouping) tag. Other functions are obvious and should be applied only to numeric or duration (function parameter) tags (e.g. "Time", "File size", etc.).
-- All ALR virtual tag function are calculated, updated and displayed dynamically.
+- All $LR virtual tag functions are calculated, updated and displayed dynamically.
 - For all aggregated functions except for "Count" function please make sure that all (parameter) tag values used by function have the same measurement units (KB, MB, etc.) or adjust units in "Edit> Preferences> Plugins" window (not required if both MusicBee and Windows localisations are English or Russian).
 
 *Example 1*
@@ -98,9 +87,13 @@ If you want to get the number of releases of artist (of displayed track) per yea
 
 If you want to get the total duration of all tracks of artist of displayed track, i.e. the sum of track durations (function "Sum" of tag "Time") per artist (tag "Album Artist"), you should add grouping tag "Album Artist" and function "Sum(Time)".
 
-See two predefined presets "LIBRARY TOTALS" and "LIBRARY AVERAGES" of (not auto) "Library Reports" command for more examples.
+See two predefined presets "LIBRARY TOTALS" and "LIBRARY AVERAGES" of "Library Reports" command for more examples.
 
-*ALR virtual tag functions may be even more useful if they are used in grouping header in "Albums and Tracks" view.*
+*LR virtual tag functions may be even more useful if they are used in grouping header in "Albums and Tracks" view.*
+
+Make sure that you haven't *accidentally* checked some "Library Reports" presets for auto-applying. You will see warning message at the top of "Library Reports" window if any presets are marked as auto-applied:
+
+[Auto-applied preset view example][2]
 <br/>
 
 **Auto Rate**
@@ -130,14 +123,22 @@ Command to re-encode all tags of selected tracks at ones. Cuesheets are supporte
 
 *Notes:*
 
-- You need to import any new presets to ASR command using "Import new" or "Import all" buttons (including presets unpacked to "Plugins<br/>ASR Presets" folder from "official" plugin's .zip).
-- You cannot *edit* "official" presets, but you can *copy them* and *edit the copy* and/or *delete* them.
+- You can install/update predefined ASR presets by clicking "Install All"/"Install New" buttons.
+- You cannot *edit* predefined presets, but you can *copy them* and *edit the copy* and/or *delete* them.
 
 "Advanced Search & Replace" command adds new virtual tag function:
 
 <pre>$ASR(&lt;URL&gt;,preset_id)</pre>
 
 To use this function go to main ASR window, select preset and define preset id (any string containing a-z chars, numbers and symbols . : - _ ). Then use function in virtual tags, file organization templates, etc., where preset_id is the id entered in ASR window. ASR preset function will return last written in preset tag. To see last written tag click "Edit/Rename" button in ASR window or (if "Edit/Rename" is disabled) click "Copy" button and view the content of preset copy. *Most preset functions* will return exactly what *you expect*.
+
+*Note:*
+
+- All $ASR virtual tag functions are calculated, updated and displayed dynamically.
+
+Make sure that you haven't *accidentally* checked some "Advanced Search & Replace" presets for auto-applying. You will see warning message at the top of "Advanced Search & Replace" window if any presets are marked as auto-applied:
+
+[Auto-applied preset view example][3]
 <br/>
 
 **Multiple Search & Replace**
@@ -320,7 +321,9 @@ Do all you want with plugin binary and source code at your own risk.
 
 **Backup download**
 
-[Google Drive, all my plugins and their sources][2]
+[Google Drive, all my plugins and their sources][1]
 
-  [1]: https://www.mediafire.com/file/r163m0cygg1826h/TagTools+2023-01-09.zip/file
-  [2]: https://drive.google.com/drive/folders/0B-D1MoIY406HMzlJVWprYXF1Q0k?usp=sharing
+  [1]: https://drive.google.com/drive/folders/0B-D1MoIY406HMzlJVWprYXF1Q0k?usp=sharing
+  [2]: https://github.com/boroda74/TagTools/blob/master/Docs/LR-AUTO-APPLYING-FILTERING.md
+  [3]: https://github.com/boroda74/TagTools/blob/master/Docs/ASR-AUTO-APPLYING-FILTERING.md
+  [4]: https://www.mediafire.com/file/h2t08o9562efboi/mb_TagTools_latest.zip/file
