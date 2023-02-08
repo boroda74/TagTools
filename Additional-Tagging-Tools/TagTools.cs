@@ -3328,8 +3328,8 @@ namespace MusicBeePlugin
 
                 MsgAsrDoYouWantToCloseWindowAndLoseAllChanges = "Один или несколько пресетов были настроены или изменены. Вы все равно хотите закрыть это окно и потерять все изменения?";
 
-                MsgDeletePresetConfirmation = "Вы действительно хотите удалить выбранный пресет?";
-                MsgInstallingConfirmation = "Вы действительно хотите установить стандартные пресеты?";
+                MsgDeletePresetConfirmation = "Удалить выбранный пресет?";
+                MsgInstallingConfirmation = "Установить стандартные пресеты?";
                 MsgDoYouWantToImportExistingPresetsAsCopies = "Некоторые импортируемые пресеты уже существуют.\n"
                     + "Импортировать их как новые пресеты, сохранив существующие?\n\n"
                     + "В ПРОТИВНОМ СЛУЧАЕ СУЩЕСТВУЮЩИЕ ПРЕСЕТЫ БУДУТ ПЕРЕЗАПИСАНЫ!\n";
@@ -3361,7 +3361,7 @@ namespace MusicBeePlugin
 
                 MsgPresetsNotFound = "Не найдены пресеты для установки в ожидаемом каталоге!";
 
-                MsgDeletingConfirmation = "Вы действительно хотите удалить все стандартные пресеты?";
+                MsgDeletingConfirmation = "Удалить все стандартные пресеты?";
                 MsgNoPresetsDeleted = "Пресет не были удалены.";
                 MsgPresetsWereDeleted = " пресет{;а;ов} был{;и;и} удален{;ы;ы}.";
                 MsgFailedToDelete = " пресет{;а;ов} не удалось удалить.";
@@ -4081,32 +4081,32 @@ namespace MusicBeePlugin
             //Color accentColor = SystemColors.Highlight;
             Color accentColor = EmptyForm.ForeColor;
             Color dimmedColor = EmptyForm.BackColor;
-            float dimmedWeight = 0.5f;
+            float accentWeight = 0.35f;
 
 
             AutoAppliedPresetsAccent = GetSolidImageByBitmapMask(accentColor, Resources.auto_applied_presets);
-            AutoAppliedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(accentColor, dimmedColor, dimmedWeight), Resources.auto_applied_presets);
+            AutoAppliedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(accentColor, dimmedColor, accentWeight), Resources.auto_applied_presets);
 
             PredefinedPresetsAccent = GetSolidImageByBitmapMask(accentColor, Resources.predefined_presets);
-            PredefinedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(accentColor, dimmedColor, dimmedWeight), Resources.predefined_presets);
+            PredefinedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(accentColor, dimmedColor, accentWeight), Resources.predefined_presets);
 
             CustomizedPresetsAccent = GetSolidImageByBitmapMask(accentColor, Resources.customized_presets);
-            CustomizedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(accentColor, dimmedColor, dimmedWeight), Resources.customized_presets);
+            CustomizedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(accentColor, dimmedColor, accentWeight), Resources.customized_presets);
 
             UserPresetsAccent = GetSolidImageByBitmapMask(accentColor, Resources.user_presets);
-            UserPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(accentColor, dimmedColor, dimmedWeight), Resources.user_presets);
+            UserPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(accentColor, dimmedColor, accentWeight), Resources.user_presets);
 
             PlaylistPresetsAccent = GetSolidImageByBitmapMask(accentColor, Resources.playlist_presets);
-            PlaylistPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(accentColor, dimmedColor, dimmedWeight), Resources.playlist_presets);
+            PlaylistPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(accentColor, dimmedColor, accentWeight), Resources.playlist_presets);
 
             FunctionIdPresetsAccent = GetSolidImageByBitmapMask(accentColor, Resources.function_id_presets);
-            FunctionIdPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(accentColor, dimmedColor, dimmedWeight), Resources.function_id_presets);
+            FunctionIdPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(accentColor, dimmedColor, accentWeight), Resources.function_id_presets);
 
             HotkeyPresetsAccent = GetSolidImageByBitmapMask(accentColor, Resources.hotkey_presets);
-            HotkeyPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(accentColor, dimmedColor, dimmedWeight), Resources.hotkey_presets);
+            HotkeyPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(accentColor, dimmedColor, accentWeight), Resources.hotkey_presets);
 
             UncheckAllFiltersAccent = GetSolidImageByBitmapMask(accentColor, Resources.uncheck_all_preset_filters);
-            UncheckAllFiltersDimmed = GetSolidImageByBitmapMask(GetWeightedColor(accentColor, dimmedColor, dimmedWeight), Resources.uncheck_all_preset_filters);
+            UncheckAllFiltersDimmed = GetSolidImageByBitmapMask(GetWeightedColor(accentColor, dimmedColor, accentWeight), Resources.uncheck_all_preset_filters);
         }
 
         // receive event notifications from MusicBee
@@ -4126,7 +4126,7 @@ namespace MusicBeePlugin
                     // perform startup initialisation
 
                     //ASR init
-                    Init();
+                    InitASR();
 
 
                     //Let's create plugin main and context menu items

@@ -1210,7 +1210,7 @@ namespace MusicBeePlugin
                 dict.Add("en", newValue);
         }
 
-        public static void Init()
+        public static void InitASR()
         {
             if (Plugin.SavedSettings.dontShowASR)
                 return;
@@ -1235,8 +1235,10 @@ namespace MusicBeePlugin
                 System.Xml.Serialization.XmlSerializer presetSerializer = new System.Xml.Serialization.XmlSerializer(typeof(Preset));
                 System.Xml.Serialization.XmlSerializer presetSerializerOld = new System.Xml.Serialization.XmlSerializer(typeof(SavedPreset));//***
 
-                foreach (string presetName in presetNames)
+                for (int i = presetNames.Length - 1; i >= 0; i--)
                 {
+                    string presetName = presetNames[i];
+                        
                     try
                     {
                         Preset tempPreset = Preset.Load(presetName, presetSerializer, presetSerializerOld);
@@ -1245,11 +1247,14 @@ namespace MusicBeePlugin
                         {
                             if (Presets.TryGetValue(tempPreset.guid, out Preset existingPreset))
                             {
-                                Presets.Remove(tempPreset.guid);
-                                if (Plugin.SavedSettings.autoAppliedAsrPresetGuids.Contains(tempPreset.guid))
-                                    Plugin.AsrAutoAppliedPresets.Remove(existingPreset);
-                                if (Plugin.IdsAsrPresets.TryGetValue(tempPreset.id, out _))
-                                    Plugin.IdsAsrPresets.Remove(tempPreset.id);
+                                if (tempPreset.modifiedUtc >= existingPreset.modifiedUtc)
+                                {
+                                    Presets.Remove(tempPreset.guid);
+                                    if (Plugin.SavedSettings.autoAppliedAsrPresetGuids.Contains(tempPreset.guid))
+                                        Plugin.AsrAutoAppliedPresets.Remove(existingPreset);
+                                    if (Plugin.IdsAsrPresets.TryGetValue(tempPreset.id, out _))
+                                        Plugin.IdsAsrPresets.Remove(tempPreset.id);
+                                }
                             }
 
                             Presets.Add(tempPreset.guid, tempPreset);
@@ -3185,7 +3190,7 @@ namespace MusicBeePlugin
 
                     if (developerExport)
                     {
-                        presetFilename = "口" + currentPresetKVPair.Value.guid.ToString();
+                        presetFilename = currentPresetKVPair.Value.guid.ToString("B");
                     }
                     else
                     {
@@ -3429,8 +3434,10 @@ namespace MusicBeePlugin
                 bool resetCustomizedByUser = true;
                 bool askToRemovePresets = true;
                 bool removePresets = true;
-                foreach (string newPresetName in newPresetNames)
+                for (int i = newPresetNames.Length - 1; i >= 0; i--)
                 {
+                    string newPresetName = newPresetNames[i];
+                    
                     try
                     {
                         Preset newPreset = Preset.Load(newPresetName, presetSerializer, presetSerializerOld);
