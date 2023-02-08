@@ -3,6 +3,10 @@
 
 *Note:* 
 
+If you are familiar with plugin update process, you can always download latest plugin version [here][4]. Copy the file "mb_TagTools.dll" from the archive "mb_TagTools_latest.zip" to MusicBee  "Plugins" folder, and overwrite the existing file.
+
+*Note:* 
+
 Pay attention to tool tips over buttons/fields in plugin windows.
 <br/>
 
@@ -56,7 +60,7 @@ Allows to export some library statistics for currently displayed tracks to exter
 - For all aggregated functions except for "Count" function please make sure that all tag values used by function have the same measurement units (KB, MB, etc.) or adjust units in "Edit> Preferences> Plugins" window (not required if both MusicBee and Windows localizations are English or Russian).
 - If you want just to export some tags then define only grouping fields in preview table (don't use aggregated functions and uncheck "Calculate subgrouping totals" checkbox, which is senseless in this case).
 
-Also, "Library Reports" allows to calculate several presets and save results to (custom) tags at startup and/after a given number of tag changes/or manually. Useful for *autosaving* or manual saving such values as "Summary play counts of albums" or "Number of tracks for each artist", etc. to (custom) tags, i.e. it's some analog of virtual tags with the ability to operate not only on tags of current track, but on tags of all tracks.
+Also, "Library Reports" allows to calculate one or more presets and save results to (custom) tags at startup/after a given number of tag changes/or manually. Useful for *autosaving* or manual saving such values as "Summary play counts of albums" or "Number of tracks for each artist", etc. to (custom) tags, i.e. it's some analog of virtual tags with the ability to operate not only on tags of current track, but on tags of all tracks.
 
 "Library Reports" command adds new virtual tag function:
 
@@ -68,7 +72,7 @@ To use this function open library reports window, create one or several presets,
 
 *Notes:*
 
-- All $LR virtual tag function are calculated, updated and displayed dynamically.
+- All $LR virtual tag functions are calculated, updated and displayed dynamically.
 - For all aggregated functions except for "Count" function please make sure that all (parameter) tag values used by function have the same measurement units (KB, MB, etc.) or adjust units in "Edit> Preferences> Plugins" window (not required if both MusicBee and Windows localisations are English or Russian).
 
 *Example 1*
@@ -89,10 +93,7 @@ See two predefined presets "LIBRARY TOTALS" and "LIBRARY AVERAGES" of "Library R
 
 Make sure that you haven't *accidentally* checked some "Library Reports" presets for auto-applying. You will see warning message at the top of "Library Reports" window if any presets are marked as auto-applied:
 
-All presets are unchecked:
-###
-Some presets are checked:
-###
+[Auto-applied preset view example][2]
 <br/>
 
 **Auto Rate**
@@ -122,8 +123,8 @@ Command to re-encode all tags of selected tracks at ones. Cuesheets are supporte
 
 *Notes:*
 
-- You need to import any new presets to ASR command using "Import new" or "Import all" buttons (including presets unpacked to "Plugins<br/>ASR Presets" folder from "official" plugin's .zip).
-- You cannot *edit* "official" presets, but you can *copy them* and *edit the copy* and/or *delete* them.
+- You can install/update predefined ASR presets by clicking "Install All"/"Install New" buttons.
+- You cannot *edit* predefined presets, but you can *copy them* and *edit the copy* and/or *delete* them.
 
 "Advanced Search & Replace" command adds new virtual tag function:
 
@@ -131,14 +132,13 @@ Command to re-encode all tags of selected tracks at ones. Cuesheets are supporte
 
 To use this function go to main ASR window, select preset and define preset id (any string containing a-z chars, numbers and symbols . : - _ ). Then use function in virtual tags, file organization templates, etc., where preset_id is the id entered in ASR window. ASR preset function will return last written in preset tag. To see last written tag click "Edit/Rename" button in ASR window or (if "Edit/Rename" is disabled) click "Copy" button and view the content of preset copy. *Most preset functions* will return exactly what *you expect*.
 
+*Note:*
+
+- All $ASR virtual tag functions are calculated, updated and displayed dynamically.
+
 Make sure that you haven't *accidentally* checked some "Advanced Search & Replace" presets for auto-applying. You will see warning message at the top of "Advanced Search & Replace" window if any presets are marked as auto-applied:
 
-All presets are unchecked:
-###
-Some presets are checked:
-###
-Preset list showing auto-applied presets only:
-###
+[Auto-applied preset view example][3]
 <br/>
 
 **Multiple Search & Replace**
@@ -321,7 +321,9 @@ Do all you want with plugin binary and source code at your own risk.
 
 **Backup download**
 
-[Google Drive, all my plugins and their sources][2]
+[Google Drive, all my plugins and their sources][1]
 
-  [1]: https://www.mediafire.com/file/r163m0cygg1826h/TagTools+2023-01-09.zip/file
-  [2]: https://drive.google.com/drive/folders/0B-D1MoIY406HMzlJVWprYXF1Q0k?usp=sharing
+  [1]: https://drive.google.com/drive/folders/0B-D1MoIY406HMzlJVWprYXF1Q0k?usp=sharing
+  [2]: https://github.com/boroda74/TagTools/blob/master/Docs/LR-AUTO-APPLYING-FILTERING.md
+  [3]: https://github.com/boroda74/TagTools/blob/master/Docs/ASR-AUTO-APPLYING-FILTERING.md
+  [4]: https://www.mediafire.com/file/h2t08o9562efboi/mb_TagTools_latest.zip/file
