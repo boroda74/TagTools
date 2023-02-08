@@ -144,7 +144,7 @@
     <value>643, 17</value>
   </data>
   <data name="smartOperationCheckBox.Text" xml:space="preserve">
-    <value>Умный обмен (играет роль только при работе с тегами 'Исполнитель'/'Композитор', содержащими несколько значений)</value>
+    <value>Умный обмен (играет роль только при работе с тегами "Исполнитель"/"Композитор", содержащими несколько значений)</value>
   </data>
   <data name="label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>

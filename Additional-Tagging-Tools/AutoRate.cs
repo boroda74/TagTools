@@ -338,7 +338,7 @@ namespace MusicBeePlugin
 
             Plugin.RefreshPanels(true);
 
-            Plugin.SetStatusbarTextForFileOperations(Plugin.AutoRateCommandSbText, false, files.Length - 1, files.Length, null, true);
+            Plugin.SetResultingSbText();
 
             if (Plugin.SavedSettings.notifyWhenAutoratingCompleted) MessageBox.Show(this, Plugin.MsgBackgroundTaskIsCompleted, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
@@ -379,7 +379,7 @@ namespace MusicBeePlugin
                 AutoRateLive(TagToolsPlugin, currentFile);
             }
 
-            Plugin.SetStatusbarTextForFileOperations(Plugin.AutoRateCommandSbText, false, files.Length - 1, files.Length, null, true);
+            Plugin.SetResultingSbText();
         }
 
         private static double GetPlaysPerDay(Plugin tagToolsPlugin, string currentFile)
@@ -965,7 +965,7 @@ namespace MusicBeePlugin
         public override void enableQueryingButtons()
         {
             dirtyErrorProvider.SetError(buttonCalculate, " ");
-            dirtyErrorProvider.SetError(buttonCalculate, String.Empty);
+            dirtyErrorProvider.SetError(buttonCalculate, string.Empty);
         }
 
         public override void disableQueryingButtons()

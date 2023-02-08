@@ -258,7 +258,7 @@ namespace MusicBeePlugin
                 }
 
                 if (clickedButton != Plugin.EmptyButton)
-                    Invoke(stopButtonClicked, new Object[] { this, null });
+                    Invoke(stopButtonClicked, new object[] { this, null });
 
                 Plugin.RefreshPanels(true);
 
@@ -355,7 +355,7 @@ namespace MusicBeePlugin
             else if (Plugin.NumberOfNativeMbBackgroundTasks > 1)
                 return Plugin.CtlDirtyError1mf + Plugin.NumberOfNativeMbBackgroundTasks + Plugin.CtlDirtyError2mf;
             else
-                return String.Empty;
+                return string.Empty;
         }
 
         public virtual void enableDisablePreviewOptionControls(bool enable)

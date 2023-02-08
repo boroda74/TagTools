@@ -1951,21 +1951,21 @@
     <value>133</value>
   </data>
   <data name="sinceAddedCheckBox.Text" xml:space="preserve">
-    <value>Calculate 'Plays per days in library' instead of 'Plays per day'</value>
+    <value>Calculate "Plays per days in library" instead of "Plays per day"</value>
   </data>
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
   <data name="sinceAddedCheckBox.ToolTip" xml:space="preserve">
-    <value>Usually 'Plays per day' means the average number of times you played track since it was added to 
+    <value>Usually "Plays per day" means the average number of times you played track since it was added to 
 the library and till the day it was last played. So if you played track frequently in past and didn't 
-play it for a long time then it will have high 'Plays per day' value. 
+play it for a long time then it will have high "Plays per day" value. 
 
-Sometimes it's better to use this option which will treat 'Plays per day' as average number of times 
+Sometimes it's better to use this option which will treat "Plays per day" as average number of times 
 track was played since it was added to the library till today (no matter when it was last played). 
 
-It's recommended to 'Auto rate on startup' your tracks if you want to use this option because 
-'Plays per days in library' value depends on 'today' date which is dynamic value and auto rating 
+It's recommended to "Auto rate on startup" your tracks if you want to use this option because 
+"Plays per days in library" value depends on "today" date which is dynamic value and auto rating 
 should change every day for each track in this case. </value>
   </data>
   <data name="&gt;&gt;sinceAddedCheckBox.Name" xml:space="preserve">

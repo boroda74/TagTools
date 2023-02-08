@@ -223,8 +223,8 @@ namespace MusicBeePlugin
             checkedSourceTagList.Items.Clear();
             sourceTagList.Items.Clear();
 
-            Plugin.FillList(sourceTagList.Items, true, true, false, true);
-            Plugin.FillListWithProps(sourceTagList.Items, true);
+            Plugin.FillListByTagNames(sourceTagList.Items, true, true, false, true);
+            Plugin.FillListByPropNames(sourceTagList.Items, true);
 
 
             for (int i = 0; i < Plugin.SavedSettings.copyTagsTagSets[Plugin.SavedSettings.lastInteractiveTagSet].tagIds.Length; i++)

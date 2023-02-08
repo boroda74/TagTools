@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 using static MusicBeePlugin.AdvancedSearchAndReplaceCommand;
+using static MusicBeePlugin.LibraryReportsCommand;
 
 namespace MusicBeePlugin
 {
@@ -71,6 +72,7 @@ namespace MusicBeePlugin
         private static readonly PluginInfo About = new PluginInfo();
 
         public const int MaximumNumberOfASRHotkeys = 20;
+        public const int MaximumNumberOfLRHotkeys = 20;
 
         public static readonly char LocalizedDecimalPoint = (0.5).ToString()[1];
         public static Bitmap MissingArtwork;
@@ -80,7 +82,7 @@ namespace MusicBeePlugin
         public static List<PluginWindowTemplate> OpenedForms = new List<PluginWindowTemplate>();
         public static int NumberOfNativeMbBackgroundTasks = 0;
 
-        private static bool PrioritySet = false; //Plugin's background thread priority must be set to 'lower'
+        private static bool PrioritySet = false; //Plugin's background thread priority must be set to "lower"
 
         public static int NumberOfTagChanges = 0;
 
@@ -100,12 +102,14 @@ namespace MusicBeePlugin
         public static Dictionary<FilePropertyType, string> PropIdsNames = new Dictionary<FilePropertyType, string>();
 
         private delegate void AutoApplyDelegate(object currentFileObj, object tagToolsPluginObj);
-        private readonly AutoApplyDelegate autoApplyDelegate = AutoApply;
+        private readonly AutoApplyDelegate autoApplyDelegate = AsrAutoApplyPresets;
 
         private static readonly List<string> FilesUpdatedByPlugin = new List<string>();
         private static readonly List<string> ChangedFiles = new List<string>();
 
         private static System.Threading.Timer PeriodicUI_RefreshTimer = null;
+        private static System.Threading.Timer DelayedStatusbarTextClearingTimer = null;
+        private static TimerCallback DelayedStatusbarTextClearingDelegate; 
         private static bool UiRefreshingIsNeeded = false;
         private static TimeSpan RefreshUI_Delay = new TimeSpan(0, 0, 5);
         public static DateTime LastUI_Refresh = DateTime.MinValue;
@@ -119,7 +123,6 @@ namespace MusicBeePlugin
         public static Form EmptyForm;
 
         public static string[] ReadonlyTagsNames;
-        private static string[] Conditions;
 
         public static string Language;
         private static string PluginSettingsFileName = "mb_TagTools.settings.xml";
@@ -131,7 +134,7 @@ namespace MusicBeePlugin
         public const int StatusbarTextUpdateInterval = 50;
         public static char[] FilesSeparators = { '\0' };
 
-        public static List<Preset> AutoAppliedPresets = new List<Preset>();
+        public static List<Preset> AsrAutoAppliedPresets = new List<Preset>();
         public const string AsrPresetsDirectory = "ASR Presets";
         public static string PluginsPath;
         public const string OldASRPresetExtension = ".ASR Preset.xml";//***
@@ -140,8 +143,17 @@ namespace MusicBeePlugin
         public static Preset[] AsrPresetsWithHotkeys = new Preset[MaximumNumberOfASRHotkeys];
         public static int ASRPresetsWithHotkeysCount = 0;
 
-        public static SortedDictionary<string, Preset> AsrIdsPresets = new SortedDictionary<string, Preset>();
+        public static SortedDictionary<string, Preset> IdsAsrPresets = new SortedDictionary<string, Preset>();
         public static Preset MSR;
+
+        public static LibraryReportsCommand LibraryReportsCommandForAutoApplying = new LibraryReportsCommand(true);
+
+        public static LibraryReportsCommand LibraryReportsCommandForHotkeys = new LibraryReportsCommand(true);
+        public static ReportPreset[] ReportPresetsWithHotkeys = new ReportPreset[MaximumNumberOfLRHotkeys];
+
+        public static LibraryReportsCommand LibraryReportsCommandForFunctionIds = new LibraryReportsCommand(true);
+        public static SortedDictionary<string, ReportPreset> IdsReportPresets = new SortedDictionary<string, ReportPreset>();
+        public static bool ReportPresetIdsAreInitialized = false;
 
         public const char MultipleItemsSplitterId = '\0';
         public const char GuestId = '\x01';
@@ -150,13 +162,12 @@ namespace MusicBeePlugin
         public const char EndOfStringId = '\x08';
 
         public const string TotalsString = "\u0001";
-        public const int NumberOfPredefinedPresets = 5;
 
         public static string LastCommandSbText;
         private static bool LastPreview;
         private static int LastFileCounter;
-
-        public static LibraryReportsCommand.LibraryReportsPreset LibraryReportsPreset = new LibraryReportsCommand.LibraryReportsPreset();
+        private static int LastFileCounterThreshold;
+        private static int LastFileCounterTotal;
 
         public static ToolStripMenuItem TagToolsSubmenu;
         public static ToolStripMenuItem TagToolsContextSubmenu;
@@ -169,9 +180,16 @@ namespace MusicBeePlugin
         private int InitialSkipCount;
 
 
+        //Themed colors for ASR/LR
+        public static Color HighlightColor;
+
+        public static Color UntickedColor;
+        public static Color TickedColor;
+
+
         //Themed bitmaps 
-        public static Bitmap CrossImage;
-        public static Bitmap SetImage;
+        public static Bitmap ButtonRemoveImage;
+        public static Bitmap ButtonSetImage;
 
         public static Bitmap CheckedState;
         public static Bitmap UncheckedState;
@@ -273,7 +291,7 @@ namespace MusicBeePlugin
             public bool dontPlayCompletedSound;
             public bool playStartedSound;
             public bool playCanceledSound;
-            public bool dontPlayTickedAsrPresetSound;
+            public bool dontPlayTickedAutoApplyingAsrLrPresetSound;
 
             public string copySourceTagName;
             public string changeCaseSourceTagName;
@@ -308,17 +326,10 @@ namespace MusicBeePlugin
             public bool alwaysCapitalize1stWord;
             public bool alwaysCapitalizeLastWord;
 
-            public LibraryReportsCommand.LibraryReportsPreset[] libraryReportsPresets;
-            public int libraryReportsPresetNumber;
-            public string savedFieldName;
-            public string destinationTagOfSavedFieldName;
-            public bool conditionIsChecked;
-            public string conditionTagName;
-            public string condition;
-            public string comparedField;
+            public ReportPreset[] reportsPresets;
             public int filterIndex;
 
-            public AutoLibraryReportCommand.AutoLibraryReportsPreset[] autoLibraryReportsPresets;
+            public int autoAppliedReportPresetsCount;
             public bool recalculateOnNumberOfTagsChanges;
             public decimal numberOfTagsToRecalculate;
 
@@ -457,7 +468,6 @@ namespace MusicBeePlugin
         public static string ReencodeTagCommandName;
         public static string ReencodeTagsCommandName;
         public static string LibraryReportsCommandName;
-        public static string AutoLibraryReportsCommandName;
         public static string AutoRateCommandName;
         public static string AsrCommandName;
         public static string CarCommandName;
@@ -474,10 +484,10 @@ namespace MusicBeePlugin
         private static string ReencodeTagCommandDescription;
         private static string ReencodeTagsCommandDescription;
         private static string LibraryReportsCommandDescription;
-        private static string AutoLibraryReportsCommandDescription;
         private static string AutoRateCommandDescription;
         private static string AsrCommandDescription;
         public static string AsrHotkeyDescription;
+        public static string ReportPresetHotkeyDescription;
         private static string CarCommandDescription;
         private static string CtCommandDescription;
         private static string CopyTagsToClipboardCommandDescription;
@@ -514,10 +524,13 @@ namespace MusicBeePlugin
         public static string ReencodeTagCommandSbText;
         public static string LibraryReportsCommandSbText;
         public static string LibraryReportsGneratingPreviewCommandSbText;
+        public static string ApplyingLibraryReportSbText;
         public static string AutoRateCommandSbText;
         public static string AsrCommandSbText;
         public static string CarCommandSbText;
         public static string MsrCommandSbText;
+
+        public static string AnotherLrPresetIsRunningSbText;
 
         //Other localizable strings
         public static string AlbumTagName;
@@ -544,7 +557,6 @@ namespace MusicBeePlugin
         public static string ParameterTagName;
         public static string TempTagName;
 
-        public static string CustomTagsPresetName;
         public static string LibraryTotalsPresetName;
         public static string LibraryAveragesPresetName;
         public static string CDBookletPresetName;
@@ -580,8 +592,13 @@ namespace MusicBeePlugin
         public static string SbUpdated;
         public static string SbRead;
         public static string SbFiles;
+        public static string SbItems;
+        public static string SbItemNames;
         public static string SbAsrPresetIsApplied;
         public static string SbAsrPresetsAreApplied;
+
+        public static string SbLrHotkeysAreAssignedIncorrectly;
+        public static string SbIncorrectLrFunctionId;
 
         public static string MsgFileNotFound;
         public static string MsgNoFilesSelected;
@@ -612,7 +629,7 @@ namespace MusicBeePlugin
         public static string MsgTracks;
         public static string MsgActualPercent;
 
-        public static string MsgAlrDoYouWantToCloseWindowAndLoseAllChanges;
+        public static string MsgLrDoYouWantToCloseWindowAndLoseAllChanges;
         public static string MsgAsrDoYouWantToCloseWindowAndLoseAllChanges;
 
         public static string MsgIncorrectPresetName;
@@ -659,8 +676,6 @@ namespace MusicBeePlugin
         public static string MsgFirstThreeGroupingFieldsInPreviewTableShouldBe;
         public static string MsgFirstSixGroupingFieldsInPreviewTableShouldBe;
 
-        public static string MsgBackgroundAutoLibraryReportIsExecuted;
-
         public static string MsgYouMustImportStandardASRPresetsFirst;
 
         public static string CtlDirtyError1sf;
@@ -687,8 +702,11 @@ namespace MusicBeePlugin
         public static string MsgPredefinedPresetsCantBeChanged;
         public static string MsgSavePreset;
         public static string MsgDeletePreset;
-
+        public static string MsgRefershUi;
+        public static string MsgIncorrectReportPresetId;
         public static string CtlNewASRPreset;
+
+        public static string CtlAutoLRPresetName;
 
         public static string SbAutobackuping;
         public static string SbMovingBackupsToNewFolder;
@@ -723,7 +741,7 @@ namespace MusicBeePlugin
 
         public static string CtlMixedFilters;
 
-        public static string MsgFirstSelectWhichFieldYouWantToAssignFunctionIdTo = "First select, which field you want to assign function id to (leftmost combobox on function id line)!";
+        public static string MsgFirstSelectWhichFieldYouWantToAssignFunctionIdTo;
         #endregion
 
 
@@ -747,8 +765,8 @@ namespace MusicBeePlugin
             public string result1s;
             public string result2s;
 
-            public SortedDictionary<string, object> items;
-            public SortedDictionary<string, object> items1;
+            public SortedDictionary<string, bool> items;
+            public SortedDictionary<string, bool> items1;
 
             public ConvertStringsResults(int typeParam)
             {
@@ -757,19 +775,19 @@ namespace MusicBeePlugin
                 result2f = 0;
                 result1s = null;
                 result2s = null;
-                items = new SortedDictionary<string, object>();
-                items1 = new SortedDictionary<string, object>();
+                items = new SortedDictionary<string, bool>();
+                items1 = new SortedDictionary<string, bool>();
             }
 
             public string getResult()
             {
-                if (items1.Count != 0) //Its 'average count' function
+                if (items1.Count != 0) //Its "average count" function
                     return "" + Math.Round((double)items1.Count / items.Count, 2);
                 else if (type == 0)
                 {
                     if (items.Count == 0)
                         return "" + result1s;
-                    else //Its 'average' function
+                    else //Its "average" function
                         return "" + Math.Round(result1f / items.Count, 2);
                 }
                 else if (type == 1)
@@ -780,21 +798,21 @@ namespace MusicBeePlugin
                 {
                     if (items.Count == 0)
                         return "" + result1f;
-                    else //Its 'average' function
+                    else //Its "average" function
                         return "" + Math.Round(result1f / items.Count, 2);
                 }
                 else if (type == 3)
                 {
                     if (items.Count == 0)
-                        return "" + TimeSpan.FromSeconds(result1f);
-                    else //Its 'average' function
-                        return "" + TimeSpan.FromSeconds(result1f / items.Count);
+                        return "" + TimeSpan.FromSeconds(result1f).ToString("g");//***
+                    else //Its "average" function
+                        return "" + TimeSpan.FromSeconds(result1f / items.Count).ToString("g");
                 }
                 else //if (type == 4)
                 {
                     if (items.Count == 0)
                         return "" + (DateTime.MinValue + TimeSpan.FromSeconds(result1f));
-                    else //Its 'average' function
+                    else //Its "average" function
                         return "" + (DateTime.MinValue + TimeSpan.FromSeconds(result1f / items.Count));
                 }
             }
@@ -975,7 +993,7 @@ namespace MusicBeePlugin
                         return 0;
 
                 default:
-                    return String.Compare(xstring, ystring);
+                    return string.Compare(xstring, ystring);
             }
         }
 
@@ -1262,28 +1280,28 @@ namespace MusicBeePlugin
             comboBox.Text = comboBoxText;
         }
 
-        public static void SetItemInComboBox(ComboBox comboBox, object item)
-        {
-            bool itemIsFound = false;
+        //public static void SetIReportPreset1stInListBoxByGuid(ListBox listBox, ReportPreset preset)
+        //{
+        //    bool itemIsFound = false;
 
-            for (int i = 0; i < comboBox.Items.Count; i++)
-            {
-                if (("" + comboBox.Items[i]) == ("" + item))
-                {
-                    comboBox.Items.RemoveAt(i);
-                    itemIsFound = true;
-                    break;
-                }
-            }
+        //    for (int i = 0; i < listBox.Items.Count; i++)
+        //    {
+        //        if (((ReportPreset)listBox.Items[i]).guid == preset.guid)
+        //        {
+        //            listBox.Items.RemoveAt(i);
+        //            itemIsFound = true;
+        //            break;
+        //        }
+        //    }
 
-            if (!itemIsFound)
-                comboBox.Items.RemoveAt(9);
+        //    if (!itemIsFound)
+        //        listBox.Items.RemoveAt(listBox.Items.Count - 1);
 
-            comboBox.Items.Insert(NumberOfPredefinedPresets, item);
-            comboBox.SelectedItem = item;
-        }
+        //    listBox.Items.Insert(NumberOfPredefinedPresets, preset);
+        //    listBox.SelectedItem = preset;
+        //}
 
-        public static string GetFileTag(string sourceFileUrl, MetaDataType tagId, bool autoAlbumArtist = false, bool normalizeTrackRatingTo0_100Range = false)
+        public static string GetFileTag(string sourceFileUrl, MetaDataType tagId, bool normalizeTrackRatingTo0_100Range = false)
         {
             string tag = "";
             string rawArtist = "";
@@ -1401,7 +1419,7 @@ namespace MusicBeePlugin
             return tag;
         }
 
-        public static string[] GetFileTags(string sourceFileUrl, List<MetaDataType> tagIds, bool autoAlbumArtist = false)
+        public static string[] GetFileTags(string sourceFileUrl, List<MetaDataType> tagIds)
         {
             MetaDataType[] tagIds2 = tagIds.ToArray();
 
@@ -1528,7 +1546,7 @@ namespace MusicBeePlugin
             return tags;
         }
 
-        //Method returns 'true' if tag was really changed and 'false' otherwise
+        //Method returns "true" if tag was really changed and "false" otherwise
         public static bool SetFileTag(string sourceFileUrl, MetaDataType tagId, string value, bool updateOnlyChangedTags = false)
         {
             string multiArtist = "";
@@ -1686,7 +1704,7 @@ namespace MusicBeePlugin
             return result;
         }
 
-        public static void RefreshPanels(bool immediateRefresh = false)
+        public static void RefreshPanels(bool immediateRefresh = false, bool quickRefresh = false)
         {
             if (immediateRefresh)
             {
@@ -1695,10 +1713,14 @@ namespace MusicBeePlugin
                     UiRefreshingIsNeeded = false;
                     lock (LastUI_RefreshLocker)
                     {
-                        LastUI_Refresh = DateTime.Now;
+                        LastUI_Refresh = DateTime.UtcNow;
                     }
 
-                    MbApiInterface.MB_RefreshPanels();
+                    if (quickRefresh)
+                        MbApiInterface.MB_InvokeCommand((Command)4, null);
+                    else
+                        MbApiInterface.MB_RefreshPanels();
+
                     MbApiInterface.MB_SetBackgroundTaskMessage(LastMessage);
                 }
             }
@@ -1708,9 +1730,9 @@ namespace MusicBeePlugin
 
                 lock (LastUI_RefreshLocker)
                 {
-                    if (DateTime.Now - LastUI_Refresh >= RefreshUI_Delay)
+                    if (DateTime.UtcNow - LastUI_Refresh >= RefreshUI_Delay)
                     {
-                        LastUI_Refresh = DateTime.Now;
+                        LastUI_Refresh = DateTime.UtcNow;
                         refresh = true;
                     }
                 }
@@ -1719,7 +1741,12 @@ namespace MusicBeePlugin
                 if (refresh)
                 {
                     UiRefreshingIsNeeded = false;
-                    MbApiInterface.MB_RefreshPanels();
+
+                    if (quickRefresh)
+                        MbApiInterface.MB_InvokeCommand((Command)4, null);
+                    else
+                        MbApiInterface.MB_RefreshPanels();
+
                     MbApiInterface.MB_SetBackgroundTaskMessage(LastMessage);
                 }
                 else
@@ -1731,26 +1758,24 @@ namespace MusicBeePlugin
 
         public static void SetStatusbarText(string newMessage, bool autoClear)
         {
-            if (LastMessage != newMessage)
+            if (autoClear)
+            {
+                if (LastMessage != newMessage)
+                    MbApiInterface.MB_SetBackgroundTaskMessage(newMessage);
+
+                DelayedStatusbarTextClearingTimer = new System.Threading.Timer(DelayedStatusbarTextClearingDelegate, null, (int)RefreshUI_Delay.TotalMilliseconds * 2, 0);
+            }
+            else if (LastMessage != newMessage)
             {
                 MbApiInterface.MB_SetBackgroundTaskMessage(newMessage);
-
-                if (autoClear)
-                {
-                    LastMessage = "";
-                    new System.Threading.Timer(DelayedClearingStatusbarText, null, (int)RefreshUI_Delay.TotalMilliseconds * 2, 0);
-                }
-                else
-                {
-                    LastMessage = newMessage;
-                }
+                LastMessage = newMessage;
             }
         }
 
-        private static void DelayedClearingStatusbarText(object state)
+        private void DelayedStatusbarTextClearing(object state)
         {
-            if (LastMessage == "")
-                MbApiInterface.MB_SetBackgroundTaskMessage(LastMessage);
+            MbApiInterface.MB_SetBackgroundTaskMessage("");
+            DelayedStatusbarTextClearingTimer.Dispose();
         }
 
         public static string RemoveMSIdAtTheEndOfString(string value)
@@ -1851,15 +1876,15 @@ namespace MusicBeePlugin
             }
         }
 
-        public static void FillList(System.Collections.IList list, bool addReadOnlyTagsAlso = false, bool addArtworkAlso = false, bool addNullAlso = true, bool addTagMarkers = false)
+        public static void FillListByTagNames(System.Collections.IList list, bool addReadOnlyTagsAlso = false, bool addArtworkAlso = false, bool addNullAlso = true, bool addTagMarkers = false)
         {
-            foreach (string element in TagNamesIds.Keys)
+            foreach (string tagName in TagNamesIds.Keys)
             {
                 string marker = "";
 
                 if (addTagMarkers)
                 {
-                    MetaDataType id = TagNamesIds[element];
+                    MetaDataType id = TagNamesIds[tagName];
 
                     switch (id)
                     {
@@ -1921,7 +1946,7 @@ namespace MusicBeePlugin
 
                         default:
 
-                            if (ChangeCaseCommand.IsItemContainedInList(element, ReadonlyTagsNames))
+                            if (ChangeCaseCommand.IsItemContainedInList(tagName, ReadonlyTagsNames))
                                 marker = "✪";
                             else
                                 marker = "☆";
@@ -1931,16 +1956,16 @@ namespace MusicBeePlugin
                     marker = "" + marker + " ";
                 }
 
-                if (element == ArtworkName)
+                if (tagName == ArtworkName)
                 {
                     if (addArtworkAlso)
-                        list.Add(marker + element);
+                        list.Add(marker + tagName);
                 }
                 else
                 {
-                    if (addNullAlso || element != NullTagName)
-                        if (addReadOnlyTagsAlso || !ChangeCaseCommand.IsItemContainedInList(element, ReadonlyTagsNames))
-                            list.Add(marker + element);
+                    if (addNullAlso || tagName != NullTagName)
+                        if (addReadOnlyTagsAlso || !ChangeCaseCommand.IsItemContainedInList(tagName, ReadonlyTagsNames))
+                            list.Add(marker + tagName);
                 }
             }
         }
@@ -1969,16 +1994,16 @@ namespace MusicBeePlugin
             }
         }
 
-        public static void FillListWithProps(System.Collections.IList list, bool addTagMarker = false)
+        public static void FillListByPropNames(System.Collections.IList list, bool addTagMarker = false)
         {
             string marker = "";
 
             if (addTagMarker)
                 marker = "❏ ";
 
-            foreach (string element in PropNamesIds.Keys)
+            foreach (string propName in PropNamesIds.Keys)
             {
-                list.Add(marker + element);
+                list.Add(marker + propName);
             };
         }
 
@@ -1987,11 +2012,15 @@ namespace MusicBeePlugin
             LastCommandSbText = "";
             LastPreview = true;
             LastFileCounter = 0;
+            LastFileCounterTotal = 0;
 
         }
 
-        public static void SetResultingSbText()
+        public static void SetResultingSbText(string finalStatus = null, bool autoClear = true, bool sbSetFilesAsItems = false)
         {
+            if (sbSetFilesAsItems)
+                SbItemNames = SbItems;
+
             if (LastCommandSbText == "")
             {
                 SetStatusbarText("", false);
@@ -2003,43 +2032,77 @@ namespace MusicBeePlugin
                 SetStatusbarText(CtlWholeCuesheetWillBeReencoded, false);
                 return;
             }
+            else if (finalStatus == null)
+            {
+                string sbText;
 
-            string sbText;
+                if (LastPreview)
+                    sbText = LastCommandSbText + ": " + "100% (" + LastFileCounter + " " + SbItemNames + ") " + SbRead;
+                else
+                    sbText = LastCommandSbText + ": " + "100% (" + LastFileCounter + " " + SbItemNames + ") " + SbUpdated;
 
-            if (LastPreview)
-                sbText = LastCommandSbText + ": " + "100% (" + LastFileCounter + " " + SbFiles + ") " + SbRead;
+                //if (lastPreview)
+                //    sbText = LastCommandSbText + ": 100% " + sbRead;
+                //else
+                //    sbText = LastCommandSbText + ": 100% " + sbUpdated;
+
+                SetStatusbarText(sbText, autoClear);
+            }
             else
-                sbText = LastCommandSbText + ": " + "100% (" + LastFileCounter + " " + SbFiles + ") " + SbUpdated;
+            {
+                SetStatusbarText(GenegateStatusbarTextForFileOperations(LastCommandSbText, LastPreview, LastFileCounter, LastFileCounterTotal, finalStatus), autoClear);
+            }
 
-            //if (lastPreview)
-            //    sbText = LastCommandSbText + ": 100% " + sbRead;
-            //else
-            //    sbText = LastCommandSbText + ": 100% " + sbUpdated;
 
-            SetStatusbarText(sbText, false);
+            if (!sbSetFilesAsItems)
+                SbItemNames = SbFiles;
         }
 
-        public static void SetStatusbarTextForFileOperations(string commandSbText, bool preview, int fileCounter, int filesTotal, string currentFile = null, bool immediateDisplaying = false)
+        public static string GenegateStatusbarTextForFileOperations(string commandSbText, bool preview, int fileCounter1Based, int filesTotal, string currentFile = null)
         {
             string sbText;
 
-            LastCommandSbText = commandSbText;
-            LastPreview = preview;
-            LastFileCounter = fileCounter + 1;
-
-            fileCounter++;
-
-            if (immediateDisplaying || fileCounter % StatusbarTextUpdateInterval == 0)
+            if (filesTotal == 0)
             {
                 if (preview)
-                    sbText = commandSbText + " (" + SbReading + "): " + Math.Round((double)100 * LastFileCounter / filesTotal, 0) + "%";
+                    sbText = commandSbText + " (" + SbReading + "): " + fileCounter1Based + "/" + filesTotal + " ???";
                 else
-                    sbText = commandSbText + " (" + SbUpdating + "): " + Math.Round((double)100 * LastFileCounter / filesTotal, 0) + "%";
+                    sbText = commandSbText + " (" + SbUpdating + "): " + fileCounter1Based + "/" + filesTotal + " ???";
+            }
+            else
+            {
+                if (preview)
+                    sbText = commandSbText + " (" + SbReading + "): " + Math.Round(100d * fileCounter1Based / filesTotal, 0) + "%";
+                else
+                    sbText = commandSbText + " (" + SbUpdating + "): " + Math.Round(100d * fileCounter1Based / filesTotal, 0) + "%";
+            }
 
-                if (currentFile != null)
-                    sbText += " (" + currentFile + ")";
+            if (currentFile != null)
+                sbText += " (" + currentFile + ")";
 
-                SetStatusbarText(sbText, false);
+            return sbText;
+        }
+
+        public static void SetStatusbarTextForFileOperations(string commandSbText, bool preview, int fileCounter0Based, int filesTotal, string currentFile = null, int updatePercentage = 10)
+        {
+            LastCommandSbText = commandSbText;
+            LastPreview = preview;
+            LastFileCounter = ++fileCounter0Based; //Let's make fileCounter0Based 1-BASED!
+            LastFileCounterTotal = filesTotal;
+
+            if (fileCounter0Based < 2)
+                LastFileCounterThreshold = 0;
+
+            bool update = false;
+            if (filesTotal == 0 || (fileCounter0Based - LastFileCounterThreshold) / (float)filesTotal >= updatePercentage / 100f)
+            {
+                update = true;
+                LastFileCounterThreshold = fileCounter0Based;
+            }
+
+            if (updatePercentage == 0 || update || fileCounter0Based % StatusbarTextUpdateInterval == 0)
+            {
+                SetStatusbarText(GenegateStatusbarTextForFileOperations(commandSbText, preview, fileCounter0Based, filesTotal, currentFile), false);
             }
         }
 
@@ -2049,7 +2112,7 @@ namespace MusicBeePlugin
             {
                 lock (LastUI_RefreshLocker)
                 {
-                    LastUI_Refresh = DateTime.Now;
+                    LastUI_Refresh = DateTime.UtcNow;
                 }
 
                 UiRefreshingIsNeeded = false;
@@ -2092,7 +2155,7 @@ namespace MusicBeePlugin
 
 
             List<string> backupsToDelete = new List<string>();
-            DateTime now = DateTime.Now;
+            DateTime now = DateTime.UtcNow;
 
             foreach (var fileWithNegativeDate in filesWithNegativeDates)
             {
@@ -2159,12 +2222,6 @@ namespace MusicBeePlugin
         public void libraryReportsEventHandler(object sender, EventArgs e)
         {
             LibraryReportsCommand tagToolsForm = new LibraryReportsCommand(this);
-            PluginWindowTemplate.Display(tagToolsForm);
-        }
-
-        public void autoLibraryReportsEventHandler(object sender, EventArgs e)
-        {
-            AutoLibraryReportCommand tagToolsForm = new AutoLibraryReportCommand(this);
             PluginWindowTemplate.Display(tagToolsForm);
         }
 
@@ -2516,7 +2573,6 @@ namespace MusicBeePlugin
             ReencodeTagCommandName = "Reencode Tag...";
             ReencodeTagsCommandName = "Reencode Tags...";
             LibraryReportsCommandName = "Library Reports...";
-            AutoLibraryReportsCommandName = "Auto Library Reports...";
             AutoRateCommandName = "Auto Rate Tracks...";
             AsrCommandName = "Advanced Search && Replace...";
             CarCommandName = "Calculate Average Album Rating...";
@@ -2533,10 +2589,10 @@ namespace MusicBeePlugin
             ReencodeTagCommandDescription = TagToolsHotkeyDescription + "Reencode Tag";
             ReencodeTagsCommandDescription = TagToolsHotkeyDescription + "Reencode Tags";
             LibraryReportsCommandDescription = TagToolsHotkeyDescription + "Library Reports";
-            AutoLibraryReportsCommandDescription = TagToolsHotkeyDescription + "Auto Library Reports";
+            ReportPresetHotkeyDescription = TagToolsHotkeyDescription;
             AutoRateCommandDescription = TagToolsHotkeyDescription + "Auto Rate Tracks";
             AsrCommandDescription = TagToolsHotkeyDescription + "Advanced Search & Replace";
-            AsrHotkeyDescription = TagToolsHotkeyDescription + "⌕: ";
+            AsrHotkeyDescription = TagToolsHotkeyDescription;
             CarCommandDescription = TagToolsHotkeyDescription + "Calculate Average Album Rating";
             CtCommandDescription = TagToolsHotkeyDescription + "Compare Tracks";
             CopyTagsToClipboardCommandDescription = TagToolsHotkeyDescription + "Copy Tags to Clipboard";
@@ -2573,10 +2629,13 @@ namespace MusicBeePlugin
             ReencodeTagCommandSbText = "Reencoding tags";
             LibraryReportsCommandSbText = "Generating report";
             LibraryReportsGneratingPreviewCommandSbText = "Generating preview";
+            ApplyingLibraryReportSbText = "Applying LR preset";
             AutoRateCommandSbText = "Auto rating tracks";
             AsrCommandSbText = "Advanced searching and replacing";
             CarCommandSbText = "Calculating average album rating";
             MsrCommandSbText = "Multiple searching and replacing";
+
+            AnotherLrPresetIsRunningSbText = "Another library reports preset is running. Can't proceed!";
 
             //Other localizable strings
             AlbumTagName = MbApiInterface.Setting_GetFieldName(MetaDataType.Album);
@@ -2608,7 +2667,6 @@ namespace MusicBeePlugin
             ParameterTagName = "Tag";
             TempTagName = "Temp";
 
-            CustomTagsPresetName = "<Unsaved tags>";
             LibraryTotalsPresetName = "Library totals";
             LibraryAveragesPresetName = "Library averages";
             CDBookletPresetName = "CD Booklet";
@@ -2635,11 +2693,10 @@ namespace MusicBeePlugin
             DisplayedComposerName = ChangeCaseCommand.ChangeWordsCase(DisplayedComposerName, changeCaseMode, 
                 null, false, null, null);
             DisplayedComposerName = DisplayedComposerName.Remove(DisplayedComposerName.Length - 1);
-
-            DisplayedAlbumArtsistName = MbApiInterface.MB_GetLocalisation("aSplit.msg.diar", "display {0}:").Replace("{0}", MbApiInterface.Setting_GetFieldName(MetaDataType.AlbumArtist));
-            DisplayedAlbumArtsistName = ChangeCaseCommand.ChangeWordsCase(DisplayedAlbumArtsistName, changeCaseMode, 
-                null, false, null, null);
-            DisplayedAlbumArtsistName = DisplayedAlbumArtsistName.Remove(DisplayedAlbumArtsistName.Length - 1);
+            
+            string localizedDisplayedAlbumArtist = MbApiInterface.MB_GetLocalisation("aSplit.msg.diar", "display {0}:");
+            localizedDisplayedAlbumArtist = Regex.Replace(localizedDisplayedAlbumArtist, @"^(.*?)\s?\{0\}\:?\s?(.*)", " ($1$2)");
+            DisplayedAlbumArtsistName = MbApiInterface.Setting_GetFieldName(MetaDataType.AlbumArtist) + localizedDisplayedAlbumArtist;
 
 
             ArtworkName = MbApiInterface.Setting_GetFieldName(MetaDataType.Artwork);
@@ -2687,33 +2744,33 @@ namespace MusicBeePlugin
             MsgNoFilesDisplayed = "No files displayed.";
             MsgSourceAndDestinationTagsAreTheSame = "Both tags are the same. Nothing done.";
             MsgSwapTagsSourceAndDestinationTagsAreTheSame = "Using the same " +
-                "source and destination tags may be useful only for 'Artist'/'Composer' tags for conversion of ';' delimited tag to the list of artists/composers and vice versa. Nothing done.";
+                "source and destination tags may be useful only for \"Artist\"/\"Composer\" tags for conversion of \";\" delimited tag to the list of artists/composers and vice versa. Nothing done.";
             MsgNoTagsSelected = "No tags selected. Nothing to preview.";
             MsgNoFilesInCurrentView = "No files in current view.";
-            MsgTracklistIsEmpty = "Track list is empty. Nothing to export. Click 'Preview' first.";
-            MsgForExportingPlaylistsURLfieldMustBeIncludedInTagList = "For exporting playlists '" + UrlTagName + "' field must be included in tag list.";
+            MsgTracklistIsEmpty = "Track list is empty. Nothing to export. Click \"Preview\" first.";
+            MsgForExportingPlaylistsURLfieldMustBeIncludedInTagList = "For exporting playlists \"" + UrlTagName + "\" field must be included in tag list.";
             MsgPreviewIsNotGeneratedNothingToSave = "Preview is not generated. Nothing to save.";
             MsgPreviewIsNotGeneratedNothingToChange = "Preview is not generated. Nothing to change.";
             MsgNoAggregateFunctionNothingToSave = "No aggregate function in the table. Nothing to save.";
             MsgPleaseUseGroupingFunctionForArtworkTag = "Please use <Grouping> function for artwork tag!";
             MsgAllTags = "ALL TAGS";
-            MsgNoURLcolumnUnableToSave = "No '" + UrlTagName + "' tag in the table. Unable to save.";
-            MsgEmptyURL = "Empty '" + UrlTagName + "' in row ";
+            MsgNoURLcolumnUnableToSave = "No \"" + UrlTagName + "\" tag in the table. Unable to save.";
+            MsgEmptyURL = "Empty \"" + UrlTagName + "\" in row ";
             MsgUnableToSave = "Unable to save. ";
             MsgUsingEmptyValueAsSourceTagMayBeUsefulOnlyForAppendingStaticTextToDestinationtag = "Using '" + EmptyValueTagName +
-                "' as source tag is useful only with option 'Append source tag to the end of destination tag' for adding some static text to the destination tag. Nothing done.";
+                "\" as source tag is useful only with option \"Append source tag to the end of destination tag' for adding some static text to the destination tag. Nothing done.";
             MsgBackgroundTaskIsCompleted = "Additional tagging tools background task is completed.";
             MsgThresholdsDescription = "Auto ratings are based on the average number of times track is played every day \n" +
-                "or 'plays per day' virtual tag. You should set 'plays per day' threshold values for every rating number \n" +
+                "or \"plays per day\" virtual tag. You should set \"plays per day\" threshold values for every rating number \n" +
                 "you want to be assigned to tracks. Thresholds are evaluated for track in descending order: from 5 star rating \n" +
-                "to 0.5 star rating. 'Plays per day' virtual tag can be evaluated for every track independent of rest of library, \n" +
+                "to 0.5 star rating. \"Plays per day\" virtual tag can be evaluated for every track independent of rest of library, \n" +
                 "so its possible to automatically update auto rating if playing track is changed. \n" +
                 "Also its possible to update auto rating manually for selected files or automatically for entire library \n" +
                 "on MusicBee startup. ";
             MsgAutoCalculationOfThresholdsDescription = "Auto calculation of thresholds is another way to set up auto ratings. This option allows you to set desirable weights \n" +
                 "of auto rating values in your library. Actual weights may differ from desirable values because its not always possible \n" +
-                "to satisfy desirable weights (suppose all your tracks have the same 'plays per day' value, its obvious that there is no way to split \n" +
-                "your library into several parts on the basis of 'plays per day' value). Actual weights are displayed next to desired weights after calculation is made. \n" +
+                "to satisfy desirable weights (suppose all your tracks have the same \"plays per day\" value, its obvious that there is no way to split \n" +
+                "your library into several parts on the basis of \"plays per day\" value). Actual weights are displayed next to desired weights after calculation is made. \n" +
                 "Because calculation of thresholds is time consuming operation it cannot be done automatically on any event except for MusicBee startup. ";
 
             MsgNumberOfPlayedTracks = "Ever played tracks in your library: ";
@@ -2724,7 +2781,7 @@ namespace MusicBeePlugin
             MsgActualPercent = "% / Act.: ";
             MsgIncorrectPresetName = "Incorrect preset name or duplicated preset names.";
 
-            MsgAlrDoYouWantToCloseWindowAndLoseAllChanges = "Preset has been changed. Do you still want to close the window and lose all changes?";
+            MsgLrDoYouWantToCloseWindowAndLoseAllChanges = "There are unsaved changes. Do you still want to close the window and lose all changes?";
 
             MsgAsrDoYouWantToCloseWindowAndLoseAllChanges = "One or more presets have been customized or changed. Do you still want to close the window and lose all changes?";
 
@@ -2778,14 +2835,12 @@ namespace MusicBeePlugin
             MsgMessageEndC = ")!";
             MsgDoYouWantToPasteAnyway = " Do you want to paste tags anyway?";
 
-            MsgFirstThreeGroupingFieldsInPreviewTableShouldBe = "First three grouping fields in preview table should be '" + DisplayedAlbumArtsistName + "', '" + AlbumTagName + "' and '" + ArtworkName + "' to export to HTML Document (grouped by album)";
+            MsgFirstThreeGroupingFieldsInPreviewTableShouldBe = "First three grouping fields in preview table should be \"" + DisplayedAlbumArtsistName + "\", \"" + AlbumTagName + "\" and \"" + ArtworkName + "\" to export to HTML Document (grouped by album)";
             MsgFirstSixGroupingFieldsInPreviewTableShouldBe = "First six grouping fields in preview table should be '" + SequenceNumberName 
-                + "', '" + DisplayedAlbumArtsistName + "', '" + AlbumTagName + "', '" + ArtworkName + "', '" 
-                + MbApiInterface.Setting_GetFieldName(MetaDataType.TrackTitle) + "' and '" 
+                + "\", \"" + DisplayedAlbumArtsistName + "\", \"" + AlbumTagName + "\", \"" + ArtworkName + "\", \"" 
+                + MbApiInterface.Setting_GetFieldName(MetaDataType.TrackTitle) + "\" and \"" 
                 + MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Duration) 
                 + "' to export to HTML Document (CD Booklet)";
-
-            MsgBackgroundAutoLibraryReportIsExecuted = "Background auto library report is executed! Please wait until it is finished!";
 
             MsgYouMustImportStandardASRPresetsFirst = "You must import standard ASR presets first!";
 
@@ -2795,8 +2850,14 @@ namespace MusicBeePlugin
             SbUpdated = "updated";
             SbRead = "read";
             SbFiles = "file(s)";
-            SbAsrPresetIsApplied = "ASR preset is applied: %PRESETNAME%";
-            SbAsrPresetsAreApplied = "ASR presets are applied: %PRESETCOUNT%";
+            SbItems = "record(s)";
+            SbItemNames = SbFiles;
+
+            SbAsrPresetIsApplied = "ASR preset is applied: %%PRESETNAME%%";
+            SbAsrPresetsAreApplied = "ASR presets are applied: %%PRESETCOUNT%%";
+
+            SbLrHotkeysAreAssignedIncorrectly = "LR hotkey is assigned incorrectly!";
+            SbIncorrectLrFunctionId = "Incorrect LR function ID!";
 
             CtlDirtyError1sf = "";
             CtlDirtyError1mf = "";
@@ -2806,29 +2867,33 @@ namespace MusicBeePlugin
                 "Preview results may be not accurate. ";
 
 
-            MsgMasterBackupIndexIsCorrupted = "Master tag backup index is corrupted! All existing at the moment backups are not available any more in 'Tag history' command.";
-            MsgBackupIsCorrupted = "Backup '%%FILENAME%%' is corrupted or is not valid MusicBee backup!";
+            MsgMasterBackupIndexIsCorrupted = "Master tag backup index is corrupted! All existing at the moment backups are not available any more in \"Tag history\" command.";
+            MsgBackupIsCorrupted = "Backup \"%%FILENAME%%\" is corrupted or is not valid MusicBee backup!";
             MsgFolderDoesntExists = "Folder doesn't exist!";
             MsgSelectOneTrackOnly = "Select one track only!";
             MsgSelectTrack = "Select a track!";
             MsgSelectAtLeast2Tracks = "Select at least 2 tracks to compare!";
-            MsgBackupBaselineFileDoesntExist1 = "Backup baseline file '";
-            MsgBackupBaselineFileDoesntExist2 = "' doesn't exist!";
+            MsgBackupBaselineFileDoesntExist1 = "Backup baseline file\"'";
+            MsgBackupBaselineFileDoesntExist2 = "\" doesn't exist!";
             MsgThisIsTheBackupOfDifferentLibrary = "This is the backup of different library!";
             MsgCreateBaselineWarning = "When you create the first backup of given library, a backup baseline is created. All further backups are incremental relative to baseline. " +
                 "If you have changed very much tags incremental backups may become too large. This command will delete ALL incremental backups of CURRENT library and will create new backup baseline if you continue. ";
 
             MsgGiveNameToASRpreset = "Give a name to preset!";
-            MsgAreYouSureYouWantToSaveASRpreset = "Do you want to save ASR preset named \"%PRESETNAME%\"?";
-            MsgAreYouSureYouWantToOverwriteASRpreset = "Do you want to overwrite ASR preset \"%PRESETNAME%\"?";
-            MsgAreYouSureYouWantToOverwriteRenameASRpreset = "Do you want to overwrite ASR preset \"%PRESETNAME%\", and rename it to \"%NEWPRESETNAME%\"?";
-            MsgAreYouSureYouWantToDeleteASRpreset = "Do you want to delete ASR preset \"%PRESETNAME%\"?";
+            MsgAreYouSureYouWantToSaveASRpreset = "Do you want to save ASR preset named \"%%PRESETNAME%%\"?";
+            MsgAreYouSureYouWantToOverwriteASRpreset = "Do you want to overwrite ASR preset \"%%PRESETNAME%%\"?";
+            MsgAreYouSureYouWantToOverwriteRenameASRpreset = "Do you want to overwrite ASR preset \"%%PRESETNAME%%\", and rename it to \"%%NEWPRESETNAME%%\"?";
+            MsgAreYouSureYouWantToDeleteASRpreset = "Do you want to delete ASR preset \"%%PRESETNAME%%\"?";
             MsgPredefinedPresetsCantBeChanged = "Predefined presets can't be changed. Preset editor will open in read-only mode.\n\n"
                 + "Do you want to disable this warning?";
             MsgSavePreset = "Save Preset";
             MsgDeletePreset = "Delete Preset";
+            MsgRefershUi = "Refersh UI!";
+            MsgIncorrectReportPresetId = "Incorrect $LR() ID!";
 
             CtlNewASRPreset = "<New ASR Preset>";
+
+            CtlAutoLRPresetName = "(Auto preset name)";
 
 
             SbAutobackuping = "Autosaving tag backup...";
@@ -2843,19 +2908,19 @@ namespace MusicBeePlugin
 
             CtlWarning = "WARNING!";
             CtlMusicBeeBackupType = "MusicBee Tag Backup|*.xml";
-            CtlSaveBackupTitle = "NAVIGATE TO DESIRED FOLDER, TYPE BACKUP NAME AT THE BOTTOM OF THE WINDOW AND CLICK 'SAVE'";
-            CtlRestoreBackupTitle = "NAVIGATE TO DESIRED FOLDER, SELECT BACKUP AND CLICK 'OPEN'";
-            CtlRenameSelectBackupTitle = "NAVIGATE TO DESIRED FOLDER, SELECT BACKUP TO BE RENAMED/MOVED AND CLICK 'OPEN'";
-            CtlRenameSaveBackupTitle = "NAVIGATE TO DESIRED FOLDER, TYPE NEW BACKUP NAME AT THE BOTTOM OF THE WINDOW AND CLICK 'SAVE'";
-            CtlMoveSelectBackupsTitle = "NAVIGATE TO DESIRED FOLDER, SELECT BACKUPS TO BE MOVED AND CLICK 'OPEN'";
-            CtlMoveSaveBackupsTitle = "NAVIGATE TO DESTINATION FOLDER AND CLICK 'SAVE'";
-            CtlDeleteBackupsTitle = "NAVIGATE TO DESIRED FOLDER, SELECT BACKUP(S) TO DELETE AND CLICK 'OPEN'";
+            CtlSaveBackupTitle = "NAVIGATE TO DESIRED FOLDER, TYPE BACKUP NAME AT THE BOTTOM OF THE WINDOW AND CLICK \"SAVE\"";
+            CtlRestoreBackupTitle = "NAVIGATE TO DESIRED FOLDER, SELECT BACKUP AND CLICK \"OPEN\"";
+            CtlRenameSelectBackupTitle = "NAVIGATE TO DESIRED FOLDER, SELECT BACKUP TO BE RENAMED/MOVED AND CLICK \"OPEN\"";
+            CtlRenameSaveBackupTitle = "NAVIGATE TO DESIRED FOLDER, TYPE NEW BACKUP NAME AT THE BOTTOM OF THE WINDOW AND CLICK \"SAVE\"";
+            CtlMoveSelectBackupsTitle = "NAVIGATE TO DESIRED FOLDER, SELECT BACKUPS TO BE MOVED AND CLICK \"OPEN\"";
+            CtlMoveSaveBackupsTitle = "NAVIGATE TO DESTINATION FOLDER AND CLICK \"SAVE\"";
+            CtlDeleteBackupsTitle = "NAVIGATE TO DESIRED FOLDER, SELECT BACKUP(S) TO DELETE AND CLICK \"OPEN\"";
             CtlSelectThisFolder = "[SELECT THIS FOLDER]";
             CtlNoBackupData = "<No backup data>";
             CtlNoDifferences = "<No differences>";
 
             MsgNotAllowedSymbols = "Only ASCII letters, numbers and symbols - : _ . are allowed!";
-            MsgPresetExists = "Preset with id %ID% already exists!";
+            MsgPresetExists = "Preset with ID %%ID%% already exists!";
 
             CtlWholeCuesheetWillBeReencoded = "IMPORTANT NOTE: ONE OR SEVERAL TRACKS BELONG TO CUESHEET. THE ALL CUESHEET TRACKS WILL BE REENCODED!";
 
@@ -2865,7 +2930,7 @@ namespace MusicBeePlugin
 
             CtlMixedFilters = "(Mixed filters)";
 
-            MsgFirstSelectWhichFieldYouWantToAssignFunctionIdTo = "First select, which field you want to assign function id to (leftmost combobox on function id line)!";
+            MsgFirstSelectWhichFieldYouWantToAssignFunctionIdTo = "First select, which field you want to assign function ID to (leftmost combobox on function ID line)!";
 
             //Defaults for controls
             UnchangedStyle.ForeColor = SystemColors.ControlText;
@@ -2875,7 +2940,7 @@ namespace MusicBeePlugin
             {
 
                 //Lets set initial defaults
-                libraryReportsPresets = null,
+                reportsPresets = null,
 
                 smartOperation = true,
                 appendSource = false,
@@ -2885,8 +2950,6 @@ namespace MusicBeePlugin
 
                 useExceptionChars = false,
                 useWordSplitters = false,
-
-                comparedField = "1"
             };
             #endregion
 
@@ -3090,7 +3153,6 @@ namespace MusicBeePlugin
                 ReencodeTagCommandName = "Изменить кодировку тега...";
                 ReencodeTagsCommandName = "Изменить кодировку тегов...";
                 LibraryReportsCommandName = "Отчеты по библиотеке...";
-                AutoLibraryReportsCommandName = "Автоматические отчеты по библиотеке...";
                 AutoRateCommandName = "Автоматически установить рейтинги...";
                 AsrCommandName = "Дополнительный поиск и замена...";
                 CarCommandName = "Рассчитать средний рейтинг альбомов...";
@@ -3107,10 +3169,10 @@ namespace MusicBeePlugin
                 ReencodeTagCommandDescription = TagToolsHotkeyDescription + "Изменить кодировку тега";
                 ReencodeTagsCommandDescription = TagToolsHotkeyDescription + "Изменить кодировку тегов";
                 LibraryReportsCommandDescription = TagToolsHotkeyDescription + "Отчеты по библиотеке";
-                AutoLibraryReportsCommandDescription = TagToolsHotkeyDescription + "Автоматические отчеты по библиотеке";
+                ReportPresetHotkeyDescription = TagToolsHotkeyDescription;
                 AutoRateCommandDescription = TagToolsHotkeyDescription + "Автоматически установить рейтинги";
                 AsrCommandDescription = TagToolsHotkeyDescription + "Дополнительный поиск и замена";
-                AsrHotkeyDescription = TagToolsHotkeyDescription + "⌕: ";
+                AsrHotkeyDescription = TagToolsHotkeyDescription;
                 CarCommandDescription = TagToolsHotkeyDescription + "Рассчитать средний рейтинг альбомов";
                 CtCommandDescription = TagToolsHotkeyDescription + "Сравнить треки";
                 CopyTagsToClipboardCommandDescription = TagToolsHotkeyDescription + "Копировать теги в буфер обмена";
@@ -3147,10 +3209,13 @@ namespace MusicBeePlugin
                 ReencodeTagCommandSbText = "Изменение кодировки тегов";
                 LibraryReportsCommandSbText = "Формирование отчета";
                 LibraryReportsGneratingPreviewCommandSbText = "Формирование предварительного просмотра";
+                ApplyingLibraryReportSbText = "Применение пресета ОБ";
                 AutoRateCommandSbText = "Автоматическая установка рейтингов";
                 AsrCommandSbText = "Дополнительный поиск и замена";
                 CarCommandSbText = "Расчет среднего рейтинга альбомов";
                 MsrCommandSbText = "Множественный поиск и замена";
+
+                AnotherLrPresetIsRunningSbText = "Другой отчет ОБ уже запущен. Невозможно применить отчет!";
 
                 GroupingName = "<Группировка>";
                 CountName = "Количество";
@@ -3177,7 +3242,6 @@ namespace MusicBeePlugin
                 ParameterTagName = "Тег";
                 //tempTagName = "Врем";
 
-                CustomTagsPresetName = "<Несохраненные теги>";
                 LibraryTotalsPresetName = "Итоги по библиотеке";
                 LibraryAveragesPresetName = "В среднем по библиотеке";
                 CDBookletPresetName = "Буклет компакт-диска";
@@ -3221,34 +3285,34 @@ namespace MusicBeePlugin
                 MsgNoFilesDisplayed = "Нет отображаемых фалйов.";
                 MsgSourceAndDestinationTagsAreTheSame = "Оба тега одинаковые. Обработка не выполнена.";
                 MsgSwapTagsSourceAndDestinationTagsAreTheSame = "Использовать один и тот же " +
-                    "тег-источник и тег-получатель имеет смысл только для тегов 'Исполнитель'/'Композитор' для преобразования строки, разделенной символами ';', в список исполнителей/композиторов и " +
+                    "тег-источник и тег-получатель имеет смысл только для тегов \"Исполнитель\"/\"Композитор\" для преобразования строки, разделенной символами \";\", в список исполнителей/композиторов и " +
                     "наоборот. Обработка не выполнена.";
                 MsgNoTagsSelected = "Теги не выбраны. Обработка не выполнена.";
                 MsgNoFilesInCurrentView = "Нет файлов в текущем режиме отображения.";
-                MsgTracklistIsEmpty = "Список треков пуст. Сначала нажмите кнопку 'Просмотр'.";
-                MsgForExportingPlaylistsURLfieldMustBeIncludedInTagList = "Для экпортирования плейлистов тег '" + UrlTagName + "' должен быть обязательно включен в таблицу.";
+                MsgTracklistIsEmpty = "Список треков пуст. Сначала нажмите кнопку \"Просмотр\".";
+                MsgForExportingPlaylistsURLfieldMustBeIncludedInTagList = "Для экпортирования плейлистов тег \"" + UrlTagName + "\" должен быть обязательно включен в таблицу.";
                 MsgPreviewIsNotGeneratedNothingToSave = "Таблица не сгенерирована. Нечего сохранять.";
                 MsgPreviewIsNotGeneratedNothingToChange = "Таблица не сгенерирована. Нечего изменять.";
                 MsgNoAggregateFunctionNothingToSave = "В таблице нет ни одной агрегатной функции. Нечего сохранять.";
-                MsgPleaseUseGroupingFunctionForArtworkTag = "Пожалуйста, используйте функцию <Группировка> для тега 'Обложка'!";
+                MsgPleaseUseGroupingFunctionForArtworkTag = "Пожалуйста, используйте функцию <Группировка> для тега \"Обложка\"!";
                 MsgAllTags = "ВСЕ ТЕГИ";
-                MsgNoURLcolumnUnableToSave = "В таблице нет тега '" + UrlTagName + "'. Невозможно сохранить результаты.";
-                MsgEmptyURL = "Пустой тег '" + UrlTagName + "' в строке ";
+                MsgNoURLcolumnUnableToSave = "В таблице нет тега \"" + UrlTagName + "\". Невозможно сохранить результаты.";
+                MsgEmptyURL = "Пустой тег \"" + UrlTagName + "\" в строке ";
                 MsgUnableToSave = "Невозможно сохранить результаты. ";
                 MsgUsingEmptyValueAsSourceTagMayBeUsefulOnlyForAppendingStaticTextToDestinationtag = "Использование псевдотега '" + EmptyValueTagName +
-                    "' в качестве тега-источника имеет смысл только при включенной опции 'Добавить тег источника в конец тега получателя' для добавления какого-то " +
+                    "\" в качестве тега-источника имеет смысл только при включенной опции \"Добавить тег источника в конец тега получателя' для добавления какого-то " +
                     "текста  к тегу-получателю. Обработка не выполнена.";
-                MsgBackgroundTaskIsCompleted = "Фоновая задача плагина 'Дополнительные инструменты' завершена.";
+                MsgBackgroundTaskIsCompleted = "Фоновая задача плагина \"Дополнительные инструменты\" завершена.";
                 MsgThresholdsDescription = "Автоматическая установка рейтингов основана на среднем числе воспроизведений композиции в день \n" +
-                    "(на виртуальном теге 'число воспроизведений в день'). Вам следует установить пороговые значения 'числа воспроизведений в день' для каждого значения рейтинга, \n" +
+                    "(на виртуальном теге \"число воспроизведений в день\"). Вам следует установить пороговые значения \"числа воспроизведений в день\" для каждого значения рейтинга, \n" +
                     "которое может быть назаначено композициям. Пороговые значения оцениваются в убывающем порядке: от рейтинга 5 звездочек \n" +
-                    "до рейтинга 0.5 звездочки. Тег 'число воспроизведений в день' может быть рассчитан для каждой композиции независимо от остальной библиотеки, \n" +
+                    "до рейтинга 0.5 звездочки. Тег \"число воспроизведений в день\" может быть рассчитан для каждой композиции независимо от остальной библиотеки, \n" +
                     "так что возможно автоматическое обновление рейтинга при смене композиции. Также возможно рассчитать рейтинги для выбранных композиций \n" +
-                    "коммандой 'Установить рейтинги' или для всех композиций библиотеки при запуске MusicBee. ";
-                MsgAutoCalculationOfThresholdsDescription = "Автоматический расчет пороговых значений 'числа воспроизведений в день' - это еще один способ установки авто-рейтингов. \n" +
+                    "коммандой \"Установить рейтинги\" или для всех композиций библиотеки при запуске MusicBee. ";
+                MsgAutoCalculationOfThresholdsDescription = "Автоматический расчет пороговых значений \"числа воспроизведений в день\" - это еще один способ установки авто-рейтингов. \n" +
                     "Эта опция позволяет вам установить желаемый процент каждого значения рейтинга в библиотеке. Действительные проценты значений рейтингов могут отличаться \n" +
                     "от желаемых, поскольку не всегда можно разбить композиции библиотеки на несколько групп (предположим все композиции библитеки имеют одинаковое \n" +
-                    "значение 'числа воспроизведений в день', очевидно не существует способа разбить все композиции на группы, исходя из значений 'числа воспроизведений в день'. \n" +
+                    "значение \"числа воспроизведений в день\", очевидно не существует способа разбить все композиции на группы, исходя из значений \"числа воспроизведений в день\". \n" +
                     "Действительные проценты отображаются справа от желаемых процентов после вычисления пороговых значений. Поскольку вычисление пороговых значений требует заметного \n" +
                     "времени, то оно не может производиться автоматически, кроме как при запуске MusicBee. ";
 
@@ -3260,7 +3324,7 @@ namespace MusicBeePlugin
                 MsgActualPercent = "% / Действ.: ";
                 MsgIncorrectPresetName = "Некорректное название пресета или пресет с таким названием уже существует.";
 
-                MsgAlrDoYouWantToCloseWindowAndLoseAllChanges = "Пресет был изменен. Вы все равно хотите закрыть это окно и потерять все изменения?";
+                MsgLrDoYouWantToCloseWindowAndLoseAllChanges = "Есть несохраненные изменения. Все равно закрыть это окно и потерять все изменения?";
 
                 MsgAsrDoYouWantToCloseWindowAndLoseAllChanges = "Один или несколько пресетов были настроены или изменены. Вы все равно хотите закрыть это окно и потерять все изменения?";
 
@@ -3315,15 +3379,13 @@ namespace MusicBeePlugin
                 MsgMessageEndC = ")!";
                 MsgDoYouWantToPasteAnyway = " Вставить теги все равно?";
 
-                MsgFirstThreeGroupingFieldsInPreviewTableShouldBe = "Первые три поля группировок в таблице должны быть '" + DisplayedAlbumArtsistName + "', '" 
-                    + AlbumTagName + "' и '" + ArtworkName + "' для того, чтобы экспортировать теги в формат 'Документ HTML (по альбомам)'";
-                MsgFirstSixGroupingFieldsInPreviewTableShouldBe = "Первые шесть полей группировок в таблице должны быть '" + SequenceNumberName
-                    + "', '" + DisplayedAlbumArtsistName + "', '" + AlbumTagName + "', '" + ArtworkName + "', '"
-                    + MbApiInterface.Setting_GetFieldName(MetaDataType.TrackTitle) + "' and '"
+                MsgFirstThreeGroupingFieldsInPreviewTableShouldBe = "Первые три поля группировок в таблице должны быть \"" + DisplayedAlbumArtsistName + "\", '" 
+                    + AlbumTagName + "\" и \"" + ArtworkName + "\" для того, чтобы экспортировать теги в формат \"Документ HTML (по альбомам)'";
+                MsgFirstSixGroupingFieldsInPreviewTableShouldBe = "Первые шесть полей группировок в таблице должны быть \"" + SequenceNumberName
+                    + "\", \"" + DisplayedAlbumArtsistName + "\", \"" + AlbumTagName + "\", \"" + ArtworkName + "\", \""
+                    + MbApiInterface.Setting_GetFieldName(MetaDataType.TrackTitle) + "\" and \""
                     + MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Duration)
-                    + "' для того, чтобы экспортировать теги в формат 'Документ HTML (буклет компакт-диска)'";
-
-                MsgBackgroundAutoLibraryReportIsExecuted = "Исполняется фоновая задача автоматических отчетов по библиотеке! Подождите пока она завершится!";
+                    + "\" для того, чтобы экспортировать теги в формат \"Документ HTML (буклет компакт-диска)\"";
 
                 MsgYouMustImportStandardASRPresetsFirst = "Сначала надо импортировать стандартные пресеты дополнительного поиска и замены!";
 
@@ -3333,8 +3395,14 @@ namespace MusicBeePlugin
                 SbUpdated = "записан(о)";
                 SbRead = "прочитан(о)";
                 SbFiles = "файл(ов)";
-                SbAsrPresetIsApplied = "Применен пресет дополнительного поиска и замены: %PRESETNAME%";
-                SbAsrPresetsAreApplied = "Применены пресеты дополнительного поиска и замены: %PRESETCOUNT%";
+                SbItems = "записей";
+                SbItemNames = SbFiles;
+
+                SbAsrPresetIsApplied = "Применен пресет дополнительного поиска и замены: %%PRESETNAME%%";
+                SbAsrPresetsAreApplied = "Применены пресеты дополнительного поиска и замены: %%PRESETCOUNT%%";
+
+                SbLrHotkeysAreAssignedIncorrectly = "Комбинация клавиш пресета ОБ назначена некорректно!";
+                SbIncorrectLrFunctionId = "Неверный ID функции ОБ!";
 
                 CtlDirtyError1sf = "Работает/запланирована ";
                 CtlDirtyError1mf = "Работают/запланированы ";
@@ -3344,8 +3412,8 @@ namespace MusicBeePlugin
                     "Результаты предварительного просмотра могут быть не точны. ";
 
 
-                MsgMasterBackupIndexIsCorrupted = "Основной индекс архива тегов поврежден! Все существующие на данный момент архивы будут не доступны в команде 'История тегов'.";
-                MsgBackupIsCorrupted = "Архив '%%FILENAME%%' или поврежден, или не является архивом MusicBee!";
+                MsgMasterBackupIndexIsCorrupted = "Основной индекс архива тегов поврежден! Все существующие на данный момент архивы будут не доступны в команде \"История тегов\".";
+                MsgBackupIsCorrupted = "Архив \"%%FILENAME%%\" или поврежден, или не является архивом MusicBee!";
                 MsgFolderDoesntExists = "Папка не существует!";
                 MsgSelectOneTrackOnly = "Выберите только один трек!";
                 MsgSelectTrack = "Выберите трек!";
@@ -3357,16 +3425,20 @@ namespace MusicBeePlugin
                     "Если было изменено очень много тегов, то разностные архивы могут стать очень большими. Эта команда удалит ВСЕ разностные архивы ТЕКУЩЕЙ библиотеки и создаст новый опорный архив. ";
 
                 MsgGiveNameToASRpreset = "Задайте название пресета!";
-                MsgAreYouSureYouWantToSaveASRpreset = "Cохранить пресет дополнительного поиска и замены под названием \"%PRESETNAME%\"?";
-                MsgAreYouSureYouWantToOverwriteASRpreset = "Перезаписать пресет дополнительного поиска и замены \"%PRESETNAME%\"?";
-                MsgAreYouSureYouWantToOverwriteRenameASRpreset = "Перезаписать пресет дополнительного поиска и замены \"%PRESETNAME%\", переименовав его в \"%NEWPRESETNAME%\"?";
-                MsgAreYouSureYouWantToDeleteASRpreset = "Удалить пресет дополнительного поиска и замены \"%PRESETNAME%\"?";
+                MsgAreYouSureYouWantToSaveASRpreset = "Cохранить пресет дополнительного поиска и замены под названием \"%%PRESETNAME%%\"?";
+                MsgAreYouSureYouWantToOverwriteASRpreset = "Перезаписать пресет дополнительного поиска и замены \"%%PRESETNAME%%\"?";
+                MsgAreYouSureYouWantToOverwriteRenameASRpreset = "Перезаписать пресет дополнительного поиска и замены \"%%PRESETNAME%%\", переименовав его в \"%%NEWPRESETNAME%%\"?";
+                MsgAreYouSureYouWantToDeleteASRpreset = "Удалить пресет дополнительного поиска и замены \"%%PRESETNAME%%\"?";
                 MsgPredefinedPresetsCantBeChanged = "Стандартные пресеты нельзя изменять. Редактор пресетов будет открыт в режиме просмотра.\n\n"
                     + "Отключить показ этого предупреждения?";
                 MsgSavePreset = "Сохранить пресет";
                 MsgDeletePreset = "Удалить пресет";
+                MsgRefershUi = "Обновите панель!";
+                MsgIncorrectReportPresetId = "Неверный ID $LR()!";
 
                 CtlNewASRPreset = "<Новый пресет ДПЗ>";
+
+                CtlAutoLRPresetName = "(Автоматическое имя)";
 
                 SbAutobackuping = "Автосохранение архива тегов...";
                 SbMovingBackupsToNewFolder = "Идет перемещение архивов в новую папку...";
@@ -3380,19 +3452,19 @@ namespace MusicBeePlugin
 
                 CtlWarning = "ПРЕДУПРЕЖДЕНИЕ!";
                 CtlMusicBeeBackupType = "Архив тегов MusicBee|*.xml";
-                CtlSaveBackupTitle = "ПЕРЕЙДИТЕ В НУЖНУЮ ПАПКУ, НАПИШИТЕ НАЗВАНИЕ АРХИВА ВНИЗУ ОКНА И НАЖМИТЕ 'СОХРАНИТЬ'";
-                CtlRestoreBackupTitle = "ПЕРЕЙДИТЕ В НУЖНУЮ ПАПКУ, ВЫБЕРИТЕ АРХИВ И НАЖМИТЕ 'ОТКРЫТЬ'";
-                CtlRenameSelectBackupTitle = "ПЕРЕЙДИТЕ В НУЖНУЮ ПАПКУ, ВЫБЕРИТЕ АРХИВ, КОТОРЫЙ ХОТИТЕ ПЕРЕИМЕНОВАТЬ/ПЕРЕМЕСТИТЬ И НАЖМИТЕ 'ОТКРЫТЬ'";
-                CtlRenameSaveBackupTitle = "ПЕРЕЙДИТЕ В НУЖНУЮ ПАПКУ, НАПИШИТЕ НОВОЕ НАЗВАНИЕ АРХИВА ВНИЗУ ОКНА И НАЖМИТЕ 'СОХРАНИТЬ'";
-                CtlMoveSelectBackupsTitle = "ПЕРЕЙДИТЕ В НУЖНУЮ ПАПКУ, ВЫБЕРИТЕ АРХИВЫ, КОТОРЫЕ ХОТИТЕ ПЕРЕМЕСТИТЬ И НАЖМИТЕ 'ОТКРЫТЬ'";
-                CtlMoveSaveBackupsTitle = "ПЕРЕЙДИТЕ В ПАПКУ, В КОТОРУЮ ХОТИТЕ ПЕРЕМЕСТИТЬ АРХИВЫ И НАЖМИТЕ 'СОХРАНИТЬ'";
-                CtlDeleteBackupsTitle = "ПЕРЕЙДИТЕ В НУЖНУЮ ПАПКУ, ВЫБЕРИТЕ АРХИВ(Ы) ДЛЯ УДАЛЕНИЯ И НАЖМИТЕ 'ОТКРЫТЬ'";
+                CtlSaveBackupTitle = "ПЕРЕЙДИТЕ В НУЖНУЮ ПАПКУ, НАПИШИТЕ НАЗВАНИЕ АРХИВА ВНИЗУ ОКНА И НАЖМИТЕ \"СОХРАНИТЬ\"";
+                CtlRestoreBackupTitle = "ПЕРЕЙДИТЕ В НУЖНУЮ ПАПКУ, ВЫБЕРИТЕ АРХИВ И НАЖМИТЕ \"ОТКРЫТЬ\"";
+                CtlRenameSelectBackupTitle = "ПЕРЕЙДИТЕ В НУЖНУЮ ПАПКУ, ВЫБЕРИТЕ АРХИВ, КОТОРЫЙ ХОТИТЕ ПЕРЕИМЕНОВАТЬ/ПЕРЕМЕСТИТЬ И НАЖМИТЕ \"ОТКРЫТЬ\"";
+                CtlRenameSaveBackupTitle = "ПЕРЕЙДИТЕ В НУЖНУЮ ПАПКУ, НАПИШИТЕ НОВОЕ НАЗВАНИЕ АРХИВА ВНИЗУ ОКНА И НАЖМИТЕ \"СОХРАНИТЬ\"";
+                CtlMoveSelectBackupsTitle = "ПЕРЕЙДИТЕ В НУЖНУЮ ПАПКУ, ВЫБЕРИТЕ АРХИВЫ, КОТОРЫЕ ХОТИТЕ ПЕРЕМЕСТИТЬ И НАЖМИТЕ \"ОТКРЫТЬ\"";
+                CtlMoveSaveBackupsTitle = "ПЕРЕЙДИТЕ В ПАПКУ, В КОТОРУЮ ХОТИТЕ ПЕРЕМЕСТИТЬ АРХИВЫ И НАЖМИТЕ \"СОХРАНИТЬ\"";
+                CtlDeleteBackupsTitle = "ПЕРЕЙДИТЕ В НУЖНУЮ ПАПКУ, ВЫБЕРИТЕ АРХИВ(Ы) ДЛЯ УДАЛЕНИЯ И НАЖМИТЕ \"ОТКРЫТЬ\"";
                 CtlSelectThisFolder = "[ВЫБРАТЬ ЭТУ ПАПКУ]";
                 CtlNoBackupData = "<Нет архивных данных>";
                 CtlNoDifferences = "<Нет отличий>";
 
                 MsgNotAllowedSymbols = "Разрешены только буквы ASCII, числа и символы - : _ .!";
-                MsgPresetExists = "Пресет с id-ом %ID% уже существует!";
+                MsgPresetExists = "Пресет с ID-ом %%ID%% уже существует!";
 
                 CtlWholeCuesheetWillBeReencoded = "ВНИМАНИЕ: ОДИН ИЛИ НЕСКЛЬКО ТРЕКОВ ОТНОСЯТСЯ К ФАЙЛУ РАЗМЕТКИ. КОДИРОВКА БУДЕТ ИЗМЕНЕНА ДЛЯ ВСЕГО ФАЙЛА РАЗМЕТКИ!";
 
@@ -3400,7 +3472,7 @@ namespace MusicBeePlugin
 
                 CtlMixedFilters = "(Несколько фильтров)";
 
-                MsgFirstSelectWhichFieldYouWantToAssignFunctionIdTo = "Сначала выберите, какому полю вы хотите назначить id функции вирт. тегов (самый левый выпадающий список на линии idа функции)!";
+                MsgFirstSelectWhichFieldYouWantToAssignFunctionIdTo = "Сначала выберите, какому полю вы хотите назначить ID функции вирт. тегов (самый левый выпадающий список на линии ID-а функции)!";
 
                 ////Defaults for controls
                 //charBox = "";
@@ -3426,215 +3498,230 @@ namespace MusicBeePlugin
                 SavedSettings.autobackupPrefix = "Tag Autobackup ";
 
 
-            string[] noTags = new string[0];
-            FunctionType[] noTypes = new FunctionType[0];
-            LibraryReportsCommand.LibraryReportsPreset tempLibraryReportsPreset;
-
-            if (SavedSettings.libraryReportsPresets == null || SavedSettings.libraryReportsPresets.Length < 10)
+            if (SavedSettings.reportsPresets == null || SavedSettings.reportsPresets.Length < 4)
             {
-                SavedSettings.libraryReportsPresets = new LibraryReportsCommand.LibraryReportsPreset[10];
+                SavedSettings.reportsPresets = new ReportPreset[4];
 
+                ReportPreset tempLibraryReportsPreset;
 
+                string[] tempGroupings = new string[3];
+                string[] tempFunctions = new string[9];
+                FunctionType[] tempFunctionTypes = new FunctionType[9];
+                string[] tempParameters = new string[9];
+                string[] tempParameters2 = new string[9];
 
-                tempLibraryReportsPreset = new LibraryReportsCommand.LibraryReportsPreset
+                string[] tempDestinationTags;
+                string[] tempFunctionIds;
+
+                tempGroupings[0] = MbApiInterface.Setting_GetFieldName(MetaDataType.Genre);
+                tempGroupings[1] = DisplayedAlbumArtsistName;
+                tempGroupings[2] = MbApiInterface.Setting_GetFieldName(MetaDataType.Album);
+
+                tempParameters[0] = DisplayedAlbumArtsistName;
+                tempParameters[1] = MbApiInterface.Setting_GetFieldName(MetaDataType.Genre);
+                tempParameters[2] = MbApiInterface.Setting_GetFieldName(MetaDataType.Year);
+                tempParameters[3] = MbApiInterface.Setting_GetFieldName(MetaDataType.Album);
+                tempParameters[4] = MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url);
+                tempParameters[5] = MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Duration);
+                tempParameters[6] = MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Size);
+                tempParameters[7] = MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.PlayCount);
+                tempParameters[8] = MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.SkipCount);
+
+                tempFunctionTypes[0] = FunctionType.Count;
+                tempFunctionTypes[1] = FunctionType.Count;
+                tempFunctionTypes[2] = FunctionType.Count;
+                tempFunctionTypes[3] = FunctionType.Count;
+                tempFunctionTypes[4] = FunctionType.Count;
+                tempFunctionTypes[5] = FunctionType.Sum;
+                tempFunctionTypes[6] = FunctionType.Sum;
+                tempFunctionTypes[7] = FunctionType.Sum;
+                tempFunctionTypes[8] = FunctionType.Sum;
+
+                for (int i = 0; i < tempParameters.Length; i++)
+                    tempFunctions[i] = GetColumnName(tempParameters[i], null, tempFunctionTypes[i]);
+
+                tempFunctionIds = new string[tempFunctions.Length];
+
+                tempDestinationTags = new string[tempFunctions.Length];
+                for (int i = 0; i < tempDestinationTags.Length; i++)
+                    tempDestinationTags[i] = NullTagName;
+
+                tempLibraryReportsPreset = new ReportPreset
                 {
-                    groupingNames = noTags,
-                    functionNames = noTags,
-                    functionTypes = noTypes,
-                    parameterNames = noTags
+                    groupingNames = tempGroupings,
+                    functionNames = tempFunctions,
+                    functionTypes = tempFunctionTypes,
+                    parameterNames = tempParameters,
+                    parameter2Names = tempParameters2,
+                    totals = true,
+                    name = LibraryTotalsPresetName.ToUpper(),
+                    userPreset = false,
+
+                    sourceTags = tempFunctions,
+                    destinationTags = tempDestinationTags,
+                    functionIds = tempFunctionIds,
+                    conditionField = tempGroupings[0],
+                    conditionText = ListItemConditionIsGreater
                 };
 
-
-
-                SavedSettings.libraryReportsPresets[5] = tempLibraryReportsPreset;
-                SavedSettings.libraryReportsPresets[6] = tempLibraryReportsPreset;
-                SavedSettings.libraryReportsPresets[7] = tempLibraryReportsPreset;
-                SavedSettings.libraryReportsPresets[8] = tempLibraryReportsPreset;
-                SavedSettings.libraryReportsPresets[9] = tempLibraryReportsPreset;
-            }
+                SavedSettings.reportsPresets[0] = tempLibraryReportsPreset;
 
 
 
-            LibraryReportsPreset = new LibraryReportsCommand.LibraryReportsPreset
-            {
-                groupingNames = noTags,
-                functionNames = noTags,
-                functionTypes = noTypes,
-                parameterNames = noTags,
-                name = CustomTagsPresetName.ToUpper()
+                tempGroupings = new string[3];
+                tempFunctions = new string[10];
+                tempFunctionTypes = new FunctionType[10];
+                tempParameters = new string[10];
+                tempParameters2 = new string[10];
+
+                tempGroupings[0] = MbApiInterface.Setting_GetFieldName(MetaDataType.Genre);
+                tempGroupings[1] = DisplayedAlbumArtsistName;
+                tempGroupings[2] = MbApiInterface.Setting_GetFieldName(MetaDataType.Album);
+
+                tempParameters[0] = MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url);
+                tempParameters[1] = MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url);
+                tempParameters[2] = MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url);
+                tempParameters[3] = MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url);
+                tempParameters[4] = MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Bitrate);
+                tempParameters[5] = MbApiInterface.Setting_GetFieldName(MetaDataType.Rating);
+                tempParameters[6] = MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Duration);
+                tempParameters[7] = MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Size);
+                tempParameters[8] = MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.PlayCount);
+                tempParameters[9] = MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.SkipCount);
+
+                tempParameters2[0] = MbApiInterface.Setting_GetFieldName(MetaDataType.Artist);
+                tempParameters2[1] = MbApiInterface.Setting_GetFieldName(MetaDataType.Album);
+                tempParameters2[2] = MbApiInterface.Setting_GetFieldName(MetaDataType.Genre);
+                tempParameters2[3] = MbApiInterface.Setting_GetFieldName(MetaDataType.Year);
+                tempParameters2[4] = MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url);
+                tempParameters2[5] = MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url);
+                tempParameters2[6] = MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url);
+                tempParameters2[7] = MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url);
+                tempParameters2[8] = MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url);
+                tempParameters2[9] = MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url);
+
+                tempFunctionTypes[0] = FunctionType.AverageCount;
+                tempFunctionTypes[1] = FunctionType.AverageCount;
+                tempFunctionTypes[2] = FunctionType.AverageCount;
+                tempFunctionTypes[3] = FunctionType.AverageCount;
+                tempFunctionTypes[4] = FunctionType.Average;
+                tempFunctionTypes[5] = FunctionType.Average;
+                tempFunctionTypes[6] = FunctionType.Average;
+                tempFunctionTypes[7] = FunctionType.Average;
+                tempFunctionTypes[8] = FunctionType.Average;
+                tempFunctionTypes[9] = FunctionType.Average;
+
+                for (int i = 0; i < tempParameters.Length; i++)
+                    tempFunctions[i] = GetColumnName(tempParameters[i], tempParameters2[i], tempFunctionTypes[i]);
+
+                tempFunctionIds = new string[tempFunctions.Length];
+
+                tempDestinationTags = new string[tempFunctions.Length];
+                for (int i = 0; i < tempDestinationTags.Length; i++)
+                    tempDestinationTags[i] = NullTagName;
+
+                tempLibraryReportsPreset = new ReportPreset
+                {
+                    groupingNames = tempGroupings,
+                    functionNames = tempFunctions,
+                    functionTypes = tempFunctionTypes,
+                    parameterNames = tempParameters,
+                    parameter2Names = tempParameters2,
+                    totals = true,
+                    name = LibraryAveragesPresetName.ToUpper(),
+                    userPreset = false,
+
+                    sourceTags = tempFunctions,
+                    destinationTags = tempDestinationTags,
+                    functionIds = tempFunctionIds,
+                    conditionField = tempGroupings[0],
+                    conditionText = ListItemConditionIsGreater
+                };
+
+                SavedSettings.reportsPresets[1] = tempLibraryReportsPreset;
+
+
+
+                tempGroupings = new string[6];
+                tempFunctions = new string[0];
+                tempFunctionTypes = new FunctionType[0];
+                tempParameters = new string[0];
+                tempParameters2 = new string[0];
+
+                tempGroupings[0] = SequenceNumberName;
+                tempGroupings[1] = DisplayedAlbumArtsistName;
+                tempGroupings[2] = MbApiInterface.Setting_GetFieldName(MetaDataType.Album);
+                tempGroupings[3] = MbApiInterface.Setting_GetFieldName(MetaDataType.Artwork);
+                tempGroupings[4] = MbApiInterface.Setting_GetFieldName(MetaDataType.TrackTitle);
+                tempGroupings[5] = MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Duration);
+
+                tempFunctionIds = new string[tempFunctions.Length];
+
+                tempDestinationTags = new string[tempFunctions.Length];
+                for (int i = 0; i < tempDestinationTags.Length; i++)
+                    tempDestinationTags[i] = NullTagName;
+
+                tempLibraryReportsPreset = new ReportPreset
+                {
+                    groupingNames = tempGroupings,
+                    functionNames = tempFunctions,
+                    functionTypes = tempFunctionTypes,
+                    parameterNames = tempParameters,
+                    parameter2Names = tempParameters2,
+                    totals = false,
+                    name = CDBookletPresetName.ToUpper(),
+                    userPreset = false,
+
+                    sourceTags = tempFunctions,
+                    destinationTags = tempDestinationTags,
+                    functionIds = tempFunctionIds,
+                    conditionField = tempGroupings[0],
+                    conditionText = ListItemConditionIsGreater
+                };
+
+                SavedSettings.reportsPresets[2] = tempLibraryReportsPreset;
+
+
+
+                tempGroupings = new string[4];
+                tempFunctions = new string[0];
+                tempFunctionTypes = new FunctionType[0];
+                tempParameters = new string[0];
+                tempParameters2 = new string[0];
+
+                tempGroupings[0] = DisplayedAlbumArtsistName;
+                tempGroupings[1] = MbApiInterface.Setting_GetFieldName(MetaDataType.Album);
+                tempGroupings[2] = MbApiInterface.Setting_GetFieldName(MetaDataType.Artwork);
+                tempGroupings[3] = MbApiInterface.Setting_GetFieldName(MetaDataType.TrackTitle);
+
+                tempFunctionIds = new string[tempFunctions.Length];
+
+                tempDestinationTags = new string[tempFunctions.Length];
+                for (int i = 0; i < tempDestinationTags.Length; i++)
+                    tempDestinationTags[i] = NullTagName;
+
+                tempLibraryReportsPreset = new ReportPreset
+                {
+                    groupingNames = tempGroupings,
+                    functionNames = tempFunctions,
+                    functionTypes = tempFunctionTypes,
+                    parameterNames = tempParameters,
+                    parameter2Names = tempParameters2,
+                    totals = false,
+                    name = AlbumsAndTracksPresetName.ToUpper(),
+                    userPreset = false,
+
+                    sourceTags = tempFunctions,
+                    destinationTags = tempDestinationTags,
+                    functionIds = tempFunctionIds,
+                    conditionField = tempGroupings[0],
+                    conditionText = ListItemConditionIsGreater
+                };
+
+                SavedSettings.reportsPresets[3] = tempLibraryReportsPreset;
             };
 
-            SavedSettings.libraryReportsPresets[0] = LibraryReportsPreset;
 
-
-            string[] tempGroupings = new string[3];
-            string[] tempFunctions = new string[9];
-            FunctionType[] tempFunctionTypes = new FunctionType[9];
-            string[] tempParameters = new string[9];
-            string[] tempParameters2 = new string[9];
-
-            tempGroupings[0] = MbApiInterface.Setting_GetFieldName(MetaDataType.Genre);
-            tempGroupings[1] = DisplayedAlbumArtsistName;
-            tempGroupings[2] = MbApiInterface.Setting_GetFieldName(MetaDataType.Album);
-
-            tempParameters[0] = DisplayedAlbumArtsistName;
-            tempParameters[1] = MbApiInterface.Setting_GetFieldName(MetaDataType.Genre);
-            tempParameters[2] = MbApiInterface.Setting_GetFieldName(MetaDataType.Year);
-            tempParameters[3] = MbApiInterface.Setting_GetFieldName(MetaDataType.Album);
-            tempParameters[4] = MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url);
-            tempParameters[5] = MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Duration);
-            tempParameters[6] = MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Size);
-            tempParameters[7] = MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.PlayCount);
-            tempParameters[8] = MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.SkipCount);
-
-            tempFunctionTypes[0] = FunctionType.Count;
-            tempFunctionTypes[1] = FunctionType.Count;
-            tempFunctionTypes[2] = FunctionType.Count;
-            tempFunctionTypes[3] = FunctionType.Count;
-            tempFunctionTypes[4] = FunctionType.Count;
-            tempFunctionTypes[5] = FunctionType.Sum;
-            tempFunctionTypes[6] = FunctionType.Sum;
-            tempFunctionTypes[7] = FunctionType.Sum;
-            tempFunctionTypes[8] = FunctionType.Sum;
-
-            for (int i = 0; i < tempParameters.Length; i++)
-                tempFunctions[i] = LibraryReportsCommand.GetColumnName(tempParameters[i], null, tempFunctionTypes[i]);
-
-            tempLibraryReportsPreset = new LibraryReportsCommand.LibraryReportsPreset
-            {
-                groupingNames = tempGroupings,
-                functionNames = tempFunctions,
-                functionTypes = tempFunctionTypes,
-                parameterNames = tempParameters,
-                parameter2Names = tempParameters2,
-                totals = true,
-                name = LibraryTotalsPresetName.ToUpper()
-            };
-
-            SavedSettings.libraryReportsPresets[1] = tempLibraryReportsPreset;
-
-
-
-            tempGroupings = new string[3];
-            tempFunctions = new string[10];
-            tempFunctionTypes = new FunctionType[10];
-            tempParameters = new string[10];
-            tempParameters2 = new string[10];
-
-            tempGroupings[0] = MbApiInterface.Setting_GetFieldName(MetaDataType.Genre);
-            tempGroupings[1] = DisplayedAlbumArtsistName;
-            tempGroupings[2] = MbApiInterface.Setting_GetFieldName(MetaDataType.Album);
-
-            tempParameters[0] = MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url);
-            tempParameters[1] = MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url);
-            tempParameters[2] = MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url);
-            tempParameters[3] = MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url);
-            tempParameters[4] = MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Bitrate);
-            tempParameters[5] = MbApiInterface.Setting_GetFieldName(MetaDataType.Rating);
-            tempParameters[6] = MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Duration);
-            tempParameters[7] = MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Size);
-            tempParameters[8] = MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.PlayCount);
-            tempParameters[9] = MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.SkipCount);
-
-            tempParameters2[0] = MbApiInterface.Setting_GetFieldName(MetaDataType.Artist);
-            tempParameters2[1] = MbApiInterface.Setting_GetFieldName(MetaDataType.Album);
-            tempParameters2[2] = MbApiInterface.Setting_GetFieldName(MetaDataType.Genre);
-            tempParameters2[3] = MbApiInterface.Setting_GetFieldName(MetaDataType.Year);
-            tempParameters2[4] = MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url);
-            tempParameters2[5] = MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url);
-            tempParameters2[6] = MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url);
-            tempParameters2[7] = MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url);
-            tempParameters2[8] = MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url);
-            tempParameters2[9] = MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url);
-
-            tempFunctionTypes[0] = FunctionType.AverageCount;
-            tempFunctionTypes[1] = FunctionType.AverageCount;
-            tempFunctionTypes[2] = FunctionType.AverageCount;
-            tempFunctionTypes[3] = FunctionType.AverageCount;
-            tempFunctionTypes[4] = FunctionType.Average;
-            tempFunctionTypes[5] = FunctionType.Average;
-            tempFunctionTypes[6] = FunctionType.Average;
-            tempFunctionTypes[7] = FunctionType.Average;
-            tempFunctionTypes[8] = FunctionType.Average;
-            tempFunctionTypes[9] = FunctionType.Average;
-
-            for (int i = 0; i < tempParameters.Length; i++)
-                tempFunctions[i] = LibraryReportsCommand.GetColumnName(tempParameters[i], tempParameters2[i], tempFunctionTypes[i]);
-
-            tempLibraryReportsPreset = new LibraryReportsCommand.LibraryReportsPreset
-            {
-                groupingNames = tempGroupings,
-                functionNames = tempFunctions,
-                functionTypes = tempFunctionTypes,
-                parameterNames = tempParameters,
-                parameter2Names = tempParameters2,
-                totals = true,
-                name = LibraryAveragesPresetName.ToUpper()
-            };
-
-            SavedSettings.libraryReportsPresets[2] = tempLibraryReportsPreset;
-
-
-
-            tempGroupings = new string[6];
-            tempFunctions = new string[0];
-            tempFunctionTypes = new FunctionType[0];
-            tempParameters = new string[0];
-            tempParameters2 = new string[0];
-
-            tempGroupings[0] = SequenceNumberName;
-            tempGroupings[1] = DisplayedAlbumArtsistName;
-            tempGroupings[2] = MbApiInterface.Setting_GetFieldName(MetaDataType.Album);
-            tempGroupings[3] = MbApiInterface.Setting_GetFieldName(MetaDataType.Artwork);
-            tempGroupings[4] = MbApiInterface.Setting_GetFieldName(MetaDataType.TrackTitle);
-            tempGroupings[5] = MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Duration);
-
-            tempLibraryReportsPreset = new LibraryReportsCommand.LibraryReportsPreset
-            {
-                groupingNames = tempGroupings,
-                functionNames = tempFunctions,
-                functionTypes = tempFunctionTypes,
-                parameterNames = tempParameters,
-                parameter2Names = tempParameters2,
-                totals = false,
-                name = CDBookletPresetName.ToUpper()
-            };
-
-            SavedSettings.libraryReportsPresets[3] = tempLibraryReportsPreset;
-
-
-
-            tempGroupings = new string[4];
-            tempFunctions = new string[0];
-            tempFunctionTypes = new FunctionType[0];
-            tempParameters = new string[0];
-            tempParameters2 = new string[0];
-
-            tempGroupings[0] = DisplayedAlbumArtsistName;
-            tempGroupings[1] = MbApiInterface.Setting_GetFieldName(MetaDataType.Album);
-            tempGroupings[2] = MbApiInterface.Setting_GetFieldName(MetaDataType.Artwork);
-            tempGroupings[3] = MbApiInterface.Setting_GetFieldName(MetaDataType.TrackTitle);
-
-            tempLibraryReportsPreset = new LibraryReportsCommand.LibraryReportsPreset
-            {
-                groupingNames = tempGroupings,
-                functionNames = tempFunctions,
-                functionTypes = tempFunctionTypes,
-                parameterNames = tempParameters,
-                parameter2Names = tempParameters2,
-                totals = false,
-                name = AlbumsAndTracksPresetName.ToUpper()
-            };
-
-            SavedSettings.libraryReportsPresets[4] = tempLibraryReportsPreset;
-
-
-
-            Conditions = new string[4];
-            Conditions[0] = ListItemConditionIs;
-            Conditions[1] = ListItemConditionIsNot;
-            Conditions[2] = ListItemConditionIsGreater;
-            Conditions[3] = ListItemConditionIsLess;
 
             //Lets reset invalid defaults for controls
             if (SavedSettings.closeShowHiddenWindows == 0)
@@ -3645,11 +3732,11 @@ namespace MusicBeePlugin
             if (SavedSettings.defaultRating == 0) SavedSettings.defaultRating = 5;
 
             if (SavedSettings.numberOfTagsToRecalculate == 0) SavedSettings.numberOfTagsToRecalculate = 100;
-            if (SavedSettings.autoLibraryReportsPresets == null) SavedSettings.autoLibraryReportsPresets = new AutoLibraryReportCommand.AutoLibraryReportsPreset[0];
+            if (SavedSettings.reportsPresets == null) SavedSettings.reportsPresets = new ReportPreset[0];
 
             fillTagNames();
 
-            //Again lets reset invalid defaults for controls
+            //Again let's reset invalid defaults for controls
             if (GetTagId(SavedSettings.copySourceTagName) == 0)
                 SavedSettings.copySourceTagName = ArtistArtistsName;
             if (GetTagId(SavedSettings.changeCaseSourceTagName) == 0)
@@ -3657,20 +3744,14 @@ namespace MusicBeePlugin
             if (GetTagId(SavedSettings.swapTagsSourceTagName) == 0)
                 SavedSettings.swapTagsSourceTagName = ArtistArtistsName;
 
-            //if (getTagId(SavedSettings.conditionTagName) == 0) SavedSettings.conditionTagName = tagCounterTagName;
-            if (!ChangeCaseCommand.IsItemContainedInList(SavedSettings.condition, Conditions))
-                SavedSettings.condition = ListItemConditionIsGreater;
-            if (GetTagId(SavedSettings.destinationTagOfSavedFieldName) == 0)
-                SavedSettings.destinationTagOfSavedFieldName = Custom9TagName;
             if (SavedSettings.filterIndex == 0)
                 SavedSettings.filterIndex = 1;
-            if ("" + SavedSettings.multipleItemsSplitterChar2 == "")
+            if (string.IsNullOrEmpty(SavedSettings.multipleItemsSplitterChar2))
             {
                 SavedSettings.multipleItemsSplitterChar1 = ";";
                 SavedSettings.multipleItemsSplitterChar2 = "; ";
             }
-            SavedSettings.multipleItemsSplitterChar1 = "" + SavedSettings.multipleItemsSplitterChar1;
-            if ("" + SavedSettings.exportedTrackListName == "")
+            if (string.IsNullOrEmpty(SavedSettings.exportedTrackListName))
                 SavedSettings.exportedTrackListName = exportedTrackList;
 
             if (GetTagId(SavedSettings.copyDestinationTagName) == 0)
@@ -3698,7 +3779,7 @@ namespace MusicBeePlugin
             if (SavedSettings.copyTagsTagSets == null)
             {
                 List<string> tagNameList = new List<string>();
-                FillList(tagNameList, false, true, false);
+                FillListByTagNames(tagNameList, false, true, false);
                 //FillListWithProps(tagNameList);
 
                 if (tagNameList.Contains("Sort Artist"))
@@ -3864,7 +3945,7 @@ namespace MusicBeePlugin
         // MusicBee is closing the plugin (plugin is being disabled by user or MusicBee is shutting down)
         public void Close(PluginCloseReason reason)
         {
-            PeriodicUI_RefreshTimer.Dispose();
+            PeriodicUI_RefreshTimer?.Dispose();
             PeriodicUI_RefreshTimer = null;
 
             if (PeriodicAutobackupTimer != null)
@@ -3885,6 +3966,10 @@ namespace MusicBeePlugin
                     form.backgroundTaskIsCanceled = true;
                 }
             }
+
+            LibraryReportsCommandForAutoApplying?.Dispose();
+            LibraryReportsCommandForHotkeys?.Dispose();
+            LibraryReportsCommandForFunctionIds?.Dispose();
 
             if (!Uninstalled)
                 SaveSettings();
@@ -3965,12 +4050,23 @@ namespace MusicBeePlugin
             EmptyForm = PluginWindowTemplate.SkinForm(new Form());
 
 
+            //Setting default & making themed colors
+            HighlightColor = Color.Red;
+            UntickedColor = EmptyForm.ForeColor;
+
+            TickedColor = GetHighlightColor(HighlightColor, SystemColors.Highlight, EmptyForm.BackColor);
+
+
             //Making themed bitmaps
             UncheckedState = GetSolidImageByBitmapMask(GetWeightedColor(EmptyForm.ForeColor, EmptyForm.BackColor), Resources.uncheck_mark);
             CheckedState = GetSolidImageByBitmapMask(EmptyForm.ForeColor, Resources.check_mark);
 
-            CrossImage = GetSolidImageByBitmapMask(EmptyButton.ForeColor, Resources.clear_button_15);
-            SetImage = GetSolidImageByBitmapMask(EmptyButton.ForeColor, Resources.set_button_15);
+            InterpolatedBox pictureBox = new InterpolatedBox();
+            pictureBox.Interpolation = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+            pictureBox.Image = Resources.clear_button_15;
+
+            ButtonRemoveImage = GetSolidImageByBitmapMask(EmptyButton.ForeColor, Resources.uncheck_mark, 15, 15);//***
+            ButtonSetImage = GetSolidImageByBitmapMask(EmptyButton.ForeColor, Resources.check_mark, 15, 15);
 
             if (EmptyButton.FlatStyle == FlatStyle.Flat)
             {
@@ -4038,10 +4134,13 @@ namespace MusicBeePlugin
                     MbForm.Invoke((MethodInvoker)delegate { addPluginContextMenuItems(); });
 
 
-                    //Let's register ASR presets hotkeys and quick menu items 
+                    //Let's register ASR/LR presets hotkeys and quick menu items 
                     MbForm.Invoke((MethodInvoker)delegate { RegisterASRPresetsHotkeysAndMenuItems(this); });
+                    MbForm.Invoke((MethodInvoker)delegate { RegisterLRPresetsHotkeys(this); });
 
                     PeriodicUI_RefreshTimer = new System.Threading.Timer(regularUI_Refresh, null, RefreshUI_Delay, RefreshUI_Delay);
+
+                    DelayedStatusbarTextClearingDelegate = DelayedStatusbarTextClearing;
 
                     //(Auto)backup init
                     if (!SavedSettings.dontShowBackupRestore)
@@ -4092,19 +4191,20 @@ namespace MusicBeePlugin
                         }
                     }
 
-                    ResourceManager resourceManager = Resources.ResourceManager;
-                    MissingArtwork = (Bitmap)resourceManager.GetObject("MissingArtwork");
+                    MissingArtwork = Resources.MissingArtwork;
+                    DefaultArtwork = MissingArtwork;
 
 
-                    //Auto library reports on startup
-                    AutoLibraryReportCommand.AutoCalculate(this);
+                    //Apply library reports on startup
+                    InitReportPresetFunctionIds();
+                    AutoApplyReportPresets();
 
-
-                    //Let's refresh UI
-                    MbApiInterface.MB_InvokeCommand((Command)4, null);
 
                     //Let's prepare themed bitmaps for controls
                     PrepareThemedBitmaps();
+
+                    //Let's refresh UI
+                    RefreshPanels(true, true);
 
                     break;
                 case NotificationType.TrackChanged:
@@ -4147,7 +4247,7 @@ namespace MusicBeePlugin
                         }
 
                         if (autoApply)
-                            AutoApply(sourceFileUrl, this);
+                            AsrAutoApplyPresets(sourceFileUrl, this);
                     }
 
                     if (SavedSettings.autoRateOnTrackProperties)
@@ -4180,7 +4280,7 @@ namespace MusicBeePlugin
                         }
 
                         if (autoApply)
-                            AutoApply(sourceFileUrl, this);
+                            AsrAutoApplyPresets(sourceFileUrl, this);
                     }
 
                     NumberOfTagChanges++;
@@ -4206,7 +4306,7 @@ namespace MusicBeePlugin
                         }
 
                         if (autoApply)
-                            AutoApply(sourceFileUrl, this);
+                            AsrAutoApplyPresets(sourceFileUrl, this);
                     }
 
                     if (!SavedSettings.dontShowCAR)
@@ -4238,7 +4338,7 @@ namespace MusicBeePlugin
                         }
 
                         if (autoApply)
-                            AutoApply(sourceFileUrl, this);
+                            AsrAutoApplyPresets(sourceFileUrl, this);
                     }
 
                     NumberOfTagChanges++;
@@ -4253,12 +4353,12 @@ namespace MusicBeePlugin
             }
 
 
-            //Auto library reports
+            //Auto-apply library reports
             if (NumberOfTagChanges >= SavedSettings.numberOfTagsToRecalculate)
                 NumberOfTagChanges = -1;
 
             if (SavedSettings.recalculateOnNumberOfTagsChanges && NumberOfTagChanges == -1)
-                AutoLibraryReportCommand.AutoCalculate(this);
+                AutoApplyReportPresets();
         }
 
         public void addPluginMenuItems()
@@ -4276,7 +4376,6 @@ namespace MusicBeePlugin
                 AddMenuItem(TagToolsSubmenu, ReencodeTagsCommandName, ReencodeTagsCommandDescription, reencodeTagsEventHandler);
             }
             if (!SavedSettings.dontShowLibraryReports) AddMenuItem(TagToolsSubmenu, LibraryReportsCommandName, LibraryReportsCommandDescription, libraryReportsEventHandler);
-            if (!SavedSettings.dontShowLibraryReports) AddMenuItem(TagToolsSubmenu, AutoLibraryReportsCommandName, AutoLibraryReportsCommandDescription, autoLibraryReportsEventHandler);
             if (!SavedSettings.dontShowAutorate) AddMenuItem(TagToolsSubmenu, AutoRateCommandName, AutoRateCommandDescription, autoRateEventHandler);
             if (!SavedSettings.dontShowASR)
             {
@@ -4413,15 +4512,15 @@ namespace MusicBeePlugin
             if (presetId == "")
                 return "";
 
-            return GetLastReplacedTag(url, AsrIdsPresets[presetId]) ?? "";
+            return GetLastReplacedTag(url, IdsAsrPresets[presetId]) ?? "";
         }
 
-        public string CustomFunc_ALR(string url, string functionId)
+        public string CustomFunc_LR(string url, string functionId)
         {
             if (functionId == "")
                 return "";
 
-            return AutoLibraryReportCommand.AutoCalculatePresetFunction(this, url, functionId) ?? "";
+            return AutoCalculateReportPresetFunction(url, functionId) ?? "";
         }
 
         public string CustomFunc_Random(string max_number)

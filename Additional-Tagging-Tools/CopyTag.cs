@@ -49,7 +49,7 @@ namespace MusicBeePlugin
         {
             base.initializeForm();
 
-            Plugin.FillList(destinationTagList.Items);
+            Plugin.FillListByTagNames(destinationTagList.Items);
             destinationTagList.Text = Plugin.SavedSettings.copyDestinationTagName;
 
             sourceTagList.Text = Plugin.SavedSettings.copySourceTagName;
@@ -343,14 +343,14 @@ namespace MusicBeePlugin
                     row[8] = row[6];
                 }
 
-                Invoke(addRowToTable, new Object[] { row });
+                Invoke(addRowToTable, new object[] { row });
 
                 tags.Add(tag);
 
                 previewIsGenerated = true;
             }
 
-            Plugin.SetStatusbarTextForFileOperations(Plugin.CopyTagCommandSbText, true, files.Length - 1, files.Length, null, true);
+            Plugin.SetResultingSbText();
         }
 
         private void applyChanges()
@@ -377,7 +377,7 @@ namespace MusicBeePlugin
 
                     tags[i][0] = "";
 
-                    Invoke(processRowOfTable, new Object[] { i });
+                    Invoke(processRowOfTable, new object[] { i });
 
                     Plugin.SetStatusbarTextForFileOperations(Plugin.CopyTagCommandSbText, false, i, tags.Count, currentFile);
 
@@ -388,7 +388,7 @@ namespace MusicBeePlugin
 
             Plugin.RefreshPanels(true);
 
-            Plugin.SetStatusbarTextForFileOperations(Plugin.CopyTagCommandSbText, false, tags.Count - 1, tags.Count, null, true);
+            Plugin.SetResultingSbText();
         }
 
         private void saveSettings()
@@ -404,6 +404,8 @@ namespace MusicBeePlugin
             fileNameTextBox.Items.CopyTo(Plugin.SavedSettings.customText, 0);
             appendedTextBox.Items.CopyTo(Plugin.SavedSettings.appendedText, 0);
             addedTextBox.Items.CopyTo(Plugin.SavedSettings.addedText, 0);
+
+            TagToolsPlugin.SaveSettings();
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
@@ -474,8 +476,8 @@ namespace MusicBeePlugin
 
                 sourceTagList.Items.Clear();
 
-                Plugin.FillList(sourceTagList.Items, true);
-                Plugin.FillListWithProps(sourceTagList.Items);
+                Plugin.FillListByTagNames(sourceTagList.Items, true);
+                Plugin.FillListByPropNames(sourceTagList.Items);
                 //sourceTagList.Items.Add(Plugin.emptyValueTagName);
                 sourceTagList.Items.Add(Plugin.ClipboardTagName);
                 sourceTagList.Items.Add(Plugin.TextFileTagName);
@@ -567,7 +569,7 @@ namespace MusicBeePlugin
         public override void enableQueryingButtons()
         {
             dirtyErrorProvider.SetError(buttonPreview, " ");
-            dirtyErrorProvider.SetError(buttonPreview, String.Empty);
+            dirtyErrorProvider.SetError(buttonPreview, string.Empty);
         }
 
         public override void disableQueryingButtons()

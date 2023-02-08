@@ -339,7 +339,7 @@
     <value>27</value>
   </data>
   <data name="customTextBox.ToolTip" xml:space="preserve">
-    <value>Символы '\@№' будут заменены на &lt;Свой текст №&gt; в пресета поиска и замены</value>
+    <value>Символы "\@№" будут заменены на &lt;Свой текст №&gt; в пресета поиска и замены</value>
   </data>
   <data name="append2CheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>700, 44</value>
@@ -732,7 +732,7 @@
     <value>&lt;Свой текст 1&gt;:</value>
   </data>
   <data name="customTextCheckBox.ToolTip" xml:space="preserve">
-    <value>Символы '\@№' будут заменены на &lt;Свой текст №&gt; в пресетах поиска и замены</value>
+    <value>Символы "\@№" будут заменены на &lt;Свой текст №&gt; в пресетах поиска и замены</value>
   </data>
   <data name="customText2CheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>487, 273</value>
@@ -747,7 +747,7 @@
     <value>&lt;Свой текст 2&gt;:</value>
   </data>
   <data name="customText2CheckBox.ToolTip" xml:space="preserve">
-    <value>Символы '\@№' будут заменены на &lt;Свой текст №&gt; в пресетах поиска и замены</value>
+    <value>Символы "\@№" будут заменены на &lt;Свой текст №&gt; в пресетах поиска и замены</value>
   </data>
   <data name="customText2Box.Location" type="System.Drawing.Point, System.Drawing">
     <value>623, 271</value>
@@ -759,7 +759,7 @@
     <value>29</value>
   </data>
   <data name="customText2Box.ToolTip" xml:space="preserve">
-    <value>Символы '\@№' будут заменены на &lt;Свой текст №&gt; в пресетах поиска и замены</value>
+    <value>Символы "\@№" будут заменены на &lt;Свой текст №&gt; в пресетах поиска и замены</value>
   </data>
   <data name="customText4CheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>487, 299</value>
@@ -774,7 +774,7 @@
     <value>&lt;Свой текст 4&gt;:</value>
   </data>
   <data name="customText4CheckBox.ToolTip" xml:space="preserve">
-    <value>Символы '\@№' будут заменены на &lt;Свой текст №&gt; в пресетах поиска и замены</value>
+    <value>Символы "\@№" будут заменены на &lt;Свой текст №&gt; в пресетах поиска и замены</value>
   </data>
   <data name="customText4Box.Location" type="System.Drawing.Point, System.Drawing">
     <value>623, 297</value>
@@ -786,7 +786,7 @@
     <value>33</value>
   </data>
   <data name="customText4Box.ToolTip" xml:space="preserve">
-    <value>Символы '\@№' будут заменены на &lt;Свой текст №&gt; в пресетах поиска и замены</value>
+    <value>Символы "\@№" будут заменены на &lt;Свой текст №&gt; в пресетах поиска и замены</value>
   </data>
   <data name="customText3CheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 299</value>
@@ -801,7 +801,7 @@
     <value>&lt;Свой текст 3&gt;:</value>
   </data>
   <data name="customText3CheckBox.ToolTip" xml:space="preserve">
-    <value>Символы '\@№' будут заменены на &lt;Свой текст №&gt; в пресетах поиска и замены</value>
+    <value>Символы "\@№" будут заменены на &lt;Свой текст №&gt; в пресетах поиска и замены</value>
   </data>
   <data name="customText3Box.Location" type="System.Drawing.Point, System.Drawing">
     <value>151, 297</value>
@@ -813,7 +813,7 @@
     <value>31</value>
   </data>
   <data name="customText3Box.ToolTip" xml:space="preserve">
-    <value>Символы '\@№' будут заменены на &lt;Свой текст №&gt; в пресетах поиска и замены</value>
+    <value>Символы "\@№" будут заменены на &lt;Свой текст №&gt; в пресетах поиска и замены</value>
   </data>
   <data name="append4CheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>700, 46</value>

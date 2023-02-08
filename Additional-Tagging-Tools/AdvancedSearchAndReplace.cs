@@ -15,9 +15,6 @@ namespace MusicBeePlugin
     {
         private static string CustomText1;
 
-        private static Color UntickedColor;
-        private static Color TickedColor;
-
 
         private static bool ignorefFlterComboBoxSelectedIndexChanged = false;
 
@@ -397,10 +394,35 @@ namespace MusicBeePlugin
                 append5 = originalPreset.append5;
             }
 
+            public string getHotkeyChar()
+            {
+                if (!hotkeyAssigned)
+                    return "";
+                else if (!applyToPlayingTrack)
+                    return "";
+                else
+                    return "";
+            }
+
+            public string getHotkeyPostfix()
+            {
+                string hotkeyChar = getHotkeyChar();
+
+                if (hotkeyChar == "")
+                    return hotkeyChar;
+                else
+                    return " " + hotkeyChar;
+            }
+
+            public string getHotkeyDescription()
+            {
+                return Plugin.AsrHotkeyDescription + "⌕: " + getName() + getHotkeyPostfix();
+            }
+
             public override string ToString()
             {
                 return GetDictValue(names, Plugin.Language) + (customizedByUser ? " " : "") + (userPreset ? " " : "")
-                    + (condition ? " " : "") + (id != "" ? " " : "") + (hotkeyAssigned ? " ★" : "");
+                    + (condition ? " " : "") + (id != "" ? " " : "") + getHotkeyPostfix();
             }
 
             public string getName(bool getEnglishName = false)
@@ -576,12 +598,12 @@ namespace MusicBeePlugin
             public Guid guid;
             public string id;
             public bool hotkeyAssigned;
+            public bool applyToPlayingTrack;
 
             public SerializableDictionary<string, string> names;
             public SerializableDictionary<string, string> descriptions;
 
             public bool ignoreCase;
-            public bool applyToPlayingTrack;
             public bool condition;
             public string playlist;
 
@@ -1193,7 +1215,7 @@ namespace MusicBeePlugin
             if (Plugin.SavedSettings.dontShowASR)
                 return;
 
-            lock (Plugin.AutoAppliedPresets)
+            lock (Plugin.AsrAutoAppliedPresets)
             {
                 Encoding Unicode = Encoding.UTF8;
 
@@ -1203,7 +1225,7 @@ namespace MusicBeePlugin
                 Presets = new SortedDictionary<Guid, Preset>();
                 string[] presetNames;
 
-                Plugin.AutoAppliedPresets.Clear();
+                Plugin.AsrAutoAppliedPresets.Clear();
                 Plugin.ASRPresetsWithHotkeysCount = 0;
 
                 if (!Directory.Exists(PresetsPath))
@@ -1225,15 +1247,15 @@ namespace MusicBeePlugin
                             {
                                 Presets.Remove(tempPreset.guid);
                                 if (Plugin.SavedSettings.autoAppliedAsrPresetGuids.Contains(tempPreset.guid))
-                                    Plugin.AutoAppliedPresets.Remove(existingPreset);
-                                if (Plugin.AsrIdsPresets.TryGetValue(tempPreset.id, out _))
-                                    Plugin.AsrIdsPresets.Remove(tempPreset.id);
+                                    Plugin.AsrAutoAppliedPresets.Remove(existingPreset);
+                                if (Plugin.IdsAsrPresets.TryGetValue(tempPreset.id, out _))
+                                    Plugin.IdsAsrPresets.Remove(tempPreset.id);
                             }
 
                             Presets.Add(tempPreset.guid, tempPreset);
 
                             if (Plugin.SavedSettings.autoAppliedAsrPresetGuids.Contains(tempPreset.guid))
-                                Plugin.AutoAppliedPresets.Add(tempPreset);
+                                Plugin.AsrAutoAppliedPresets.Add(tempPreset);
 
                             if (Plugin.SavedSettings.asrPresetsWithHotkeysGuids.Contains(tempPreset.guid))
                             {
@@ -1254,7 +1276,7 @@ namespace MusicBeePlugin
 
                             if (!string.IsNullOrEmpty(tempPreset.id))
                             {
-                                Plugin.AsrIdsPresets.Add(tempPreset.id, tempPreset);
+                                Plugin.IdsAsrPresets.Add(tempPreset.id, tempPreset);
                             }
                         }
                         else
@@ -1285,101 +1307,102 @@ namespace MusicBeePlugin
                     switch (i)
                     {
                         case 0:
-                            Plugin.MbApiInterface.MB_RegisterCommand(Plugin.AsrHotkeyDescription + tempPreset.getName(), tagToolsPlugin.ASRPreset1EventHandler);
+                            Plugin.MbApiInterface.MB_RegisterCommand(tempPreset.getHotkeyDescription(), tagToolsPlugin.ASRPreset1EventHandler);
                             Plugin.ASRPresetsMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset1EventHandler);
                             Plugin.ASRPresetsContextMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset1EventHandler);
                             break;
                         case 1:
-                            Plugin.MbApiInterface.MB_RegisterCommand(Plugin.AsrHotkeyDescription + tempPreset.getName(), tagToolsPlugin.ASRPreset2EventHandler);
+                            Plugin.MbApiInterface.MB_RegisterCommand(tempPreset.getHotkeyDescription(), tagToolsPlugin.ASRPreset2EventHandler);
                             Plugin.ASRPresetsMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset2EventHandler);
                             Plugin.ASRPresetsContextMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset2EventHandler);
                             break;
                         case 2:
-                            Plugin.MbApiInterface.MB_RegisterCommand(Plugin.AsrHotkeyDescription + tempPreset.getName(), tagToolsPlugin.ASRPreset3EventHandler);
+                            Plugin.MbApiInterface.MB_RegisterCommand(tempPreset.getHotkeyDescription(), tagToolsPlugin.ASRPreset3EventHandler);
                             Plugin.ASRPresetsMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset3EventHandler);
                             Plugin.ASRPresetsContextMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset3EventHandler);
                             break;
                         case 3:
-                            Plugin.MbApiInterface.MB_RegisterCommand(Plugin.AsrHotkeyDescription + tempPreset.getName(), tagToolsPlugin.ASRPreset4EventHandler);
+                            Plugin.MbApiInterface.MB_RegisterCommand(tempPreset.getHotkeyDescription(), tagToolsPlugin.ASRPreset4EventHandler);
                             Plugin.ASRPresetsMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset4EventHandler);
                             Plugin.ASRPresetsContextMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset4EventHandler);
                             break;
                         case 4:
-                            Plugin.MbApiInterface.MB_RegisterCommand(Plugin.AsrHotkeyDescription + tempPreset.getName(), tagToolsPlugin.ASRPreset5EventHandler);
+                            Plugin.MbApiInterface.MB_RegisterCommand(tempPreset.getHotkeyDescription(), tagToolsPlugin.ASRPreset5EventHandler);
                             Plugin.ASRPresetsMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset5EventHandler);
                             Plugin.ASRPresetsContextMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset5EventHandler);
                             break;
                         case 5:
-                            Plugin.MbApiInterface.MB_RegisterCommand(Plugin.AsrHotkeyDescription + tempPreset.getName(), tagToolsPlugin.ASRPreset6EventHandler);
+                            Plugin.MbApiInterface.MB_RegisterCommand(tempPreset.getHotkeyDescription(), tagToolsPlugin.ASRPreset6EventHandler);
                             Plugin.ASRPresetsMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset6EventHandler);
                             Plugin.ASRPresetsContextMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset6EventHandler);
                             break;
                         case 6:
-                            Plugin.MbApiInterface.MB_RegisterCommand(Plugin.AsrHotkeyDescription + tempPreset.getName(), tagToolsPlugin.ASRPreset7EventHandler);
+                            Plugin.MbApiInterface.MB_RegisterCommand(tempPreset.getHotkeyDescription(), tagToolsPlugin.ASRPreset7EventHandler);
                             Plugin.ASRPresetsMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset7EventHandler);
                             Plugin.ASRPresetsContextMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset7EventHandler);
                             break;
                         case 7:
-                            Plugin.MbApiInterface.MB_RegisterCommand(Plugin.AsrHotkeyDescription + tempPreset.getName(), tagToolsPlugin.ASRPreset8EventHandler);
+                            Plugin.MbApiInterface.MB_RegisterCommand(tempPreset.getHotkeyDescription(), tagToolsPlugin.ASRPreset8EventHandler);
                             Plugin.ASRPresetsMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset8EventHandler);
                             Plugin.ASRPresetsContextMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset8EventHandler);
                             break;
                         case 8:
-                            Plugin.MbApiInterface.MB_RegisterCommand(Plugin.AsrHotkeyDescription + tempPreset.getName(), tagToolsPlugin.ASRPreset9EventHandler);
+                            Plugin.MbApiInterface.MB_RegisterCommand(tempPreset.getHotkeyDescription(), tagToolsPlugin.ASRPreset9EventHandler);
                             Plugin.ASRPresetsMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset9EventHandler);
                             Plugin.ASRPresetsContextMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset9EventHandler);
                             break;
                         case 9:
-                            Plugin.MbApiInterface.MB_RegisterCommand(Plugin.AsrHotkeyDescription + tempPreset.getName(), tagToolsPlugin.ASRPreset10EventHandler);
+                            Plugin.MbApiInterface.MB_RegisterCommand(tempPreset.getHotkeyDescription(), tagToolsPlugin.ASRPreset10EventHandler);
                             Plugin.ASRPresetsMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset10EventHandler);
                             Plugin.ASRPresetsContextMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset10EventHandler);
                             break;
                         case 10:
-                            Plugin.MbApiInterface.MB_RegisterCommand(Plugin.AsrHotkeyDescription + tempPreset.getName(), tagToolsPlugin.ASRPreset11EventHandler);
+                            Plugin.MbApiInterface.MB_RegisterCommand(tempPreset.getHotkeyDescription(), tagToolsPlugin.ASRPreset11EventHandler);
                             Plugin.ASRPresetsMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset11EventHandler);
                             Plugin.ASRPresetsContextMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset11EventHandler);
                             break;
                         case 11:
-                            Plugin.MbApiInterface.MB_RegisterCommand(Plugin.AsrHotkeyDescription + tempPreset.getName(), tagToolsPlugin.ASRPreset12EventHandler);
+                            Plugin.MbApiInterface.MB_RegisterCommand(tempPreset.getHotkeyDescription(), tagToolsPlugin.ASRPreset12EventHandler);
                             Plugin.ASRPresetsMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset12EventHandler);
                             Plugin.ASRPresetsContextMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset12EventHandler);
                             break;
                         case 12:
-                            Plugin.MbApiInterface.MB_RegisterCommand(Plugin.AsrHotkeyDescription + tempPreset.getName(), tagToolsPlugin.ASRPreset13EventHandler);
+                            Plugin.MbApiInterface.MB_RegisterCommand(tempPreset.getHotkeyDescription(), tagToolsPlugin.ASRPreset13EventHandler);
                             Plugin.ASRPresetsMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset13EventHandler);
                             Plugin.ASRPresetsContextMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset13EventHandler);
                             break;
                         case 13:
-                            Plugin.MbApiInterface.MB_RegisterCommand(Plugin.AsrHotkeyDescription + tempPreset.getName(), tagToolsPlugin.ASRPreset14EventHandler);
+                            Plugin.MbApiInterface.MB_RegisterCommand(tempPreset.getHotkeyDescription(), tagToolsPlugin.ASRPreset14EventHandler);
                             Plugin.ASRPresetsMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset14EventHandler);
                             Plugin.ASRPresetsContextMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset14EventHandler);
                             break;
                         case 14:
-                            Plugin.MbApiInterface.MB_RegisterCommand(Plugin.AsrHotkeyDescription + tempPreset.getName(), tagToolsPlugin.ASRPreset15EventHandler);
+                            Plugin.MbApiInterface.MB_RegisterCommand(tempPreset.getHotkeyDescription(), tagToolsPlugin.ASRPreset15EventHandler);
                             Plugin.ASRPresetsMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset15EventHandler);
                             Plugin.ASRPresetsContextMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset15EventHandler);
                             break;
                         case 15:
-                            Plugin.MbApiInterface.MB_RegisterCommand(Plugin.AsrHotkeyDescription + tempPreset.getName(), tagToolsPlugin.ASRPreset16EventHandler);
+                            Plugin.MbApiInterface.MB_RegisterCommand(tempPreset.getHotkeyDescription(), tagToolsPlugin.ASRPreset16EventHandler);
                             Plugin.ASRPresetsMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset16EventHandler);
                             Plugin.ASRPresetsContextMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset16EventHandler);
                             break;
                         case 16:
-                            Plugin.MbApiInterface.MB_RegisterCommand(Plugin.AsrHotkeyDescription + tempPreset.getName(), tagToolsPlugin.ASRPreset17EventHandler);
+                            Plugin.MbApiInterface.MB_RegisterCommand(tempPreset.getHotkeyDescription(), tagToolsPlugin.ASRPreset17EventHandler);
                             Plugin.ASRPresetsMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset17EventHandler);
                             Plugin.ASRPresetsContextMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset17EventHandler);
                             break;
                         case 17:
-                            Plugin.MbApiInterface.MB_RegisterCommand(Plugin.AsrHotkeyDescription + tempPreset.getName(), tagToolsPlugin.ASRPreset18EventHandler);
+                            Plugin.MbApiInterface.MB_RegisterCommand(tempPreset.getHotkeyDescription(), tagToolsPlugin.ASRPreset18EventHandler);
                             Plugin.ASRPresetsMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset18EventHandler);
+                            Plugin.ASRPresetsContextMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset18EventHandler);
                             break;
                         case 18:
-                            Plugin.MbApiInterface.MB_RegisterCommand(Plugin.AsrHotkeyDescription + tempPreset.getName(), tagToolsPlugin.ASRPreset19EventHandler);
+                            Plugin.MbApiInterface.MB_RegisterCommand(tempPreset.getHotkeyDescription(), tagToolsPlugin.ASRPreset19EventHandler);
                             Plugin.ASRPresetsMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset19EventHandler);
                             Plugin.ASRPresetsContextMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset19EventHandler);
                             break;
                         case 19:
-                            Plugin.MbApiInterface.MB_RegisterCommand(Plugin.AsrHotkeyDescription + tempPreset.getName(), tagToolsPlugin.ASRPreset20EventHandler);
+                            Plugin.MbApiInterface.MB_RegisterCommand(tempPreset.getHotkeyDescription(), tagToolsPlugin.ASRPreset20EventHandler);
                             Plugin.ASRPresetsMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset20EventHandler);
                             Plugin.ASRPresetsContextMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset20EventHandler);
                             break;
@@ -1420,9 +1443,9 @@ namespace MusicBeePlugin
             heightField.SetValue(presetList, addedHeight); // Where "presetList" is your CheckedListBox
 
 
-            //Setting themed colors
-            clearIdButton.Image = Plugin.CrossImage;
-            clearSearchButton.Image = Plugin.CrossImage;
+            //Setting themed images
+            clearIdButton.Image = Plugin.ButtonRemoveImage;
+            clearSearchButton.Image = Plugin.ButtonRemoveImage;
 
             tickedOnlyPictureBox.Image = Plugin.AutoAppliedPresetsDimmed;
             predefinedPictureBox.Image = Plugin.PredefinedPresetsDimmed;
@@ -1433,14 +1456,10 @@ namespace MusicBeePlugin
             hotkeyPictureBox.Image = Plugin.HotkeyPresetsDimmed;
 
 
-            Color highlightColor = Color.Red;//***
+            //Setting themed colors
             Color sampleColor = SystemColors.Highlight;
-
             descriptionBox.ForeColor = Plugin.GetHighlightColor(sampleColor, ForeColor, BackColor);
             descriptionBox.BackColor = BackColor;
-
-            UntickedColor = ForeColor;
-            TickedColor = Plugin.GetHighlightColor(highlightColor, ForeColor, BackColor);
 
 
             //Initialization
@@ -1470,13 +1489,13 @@ namespace MusicBeePlugin
             }
 
             asrIdsPresetGuids = new SortedDictionary<string, Guid>();
-            foreach (var pair in Plugin.AsrIdsPresets)
+            foreach (var pair in Plugin.IdsAsrPresets)
             {
                 asrIdsPresetGuids.Add(pair.Key, pair.Value.guid);
             }
 
 
-            string entireText = label5.Text;
+            string entireText = autoApplyPresetslabel.Text;
             editApplyText = Regex.Replace(entireText, @"(.*?\.\s).*", "$1").TrimEnd('\n');
             autoApplyText = Regex.Replace(entireText, @".*?\.\s(.*?\.\s).*", "$1").TrimEnd('\n');
             clickHereText = Regex.Replace(entireText, @".*?\.\s.*?\.\s(.*?\.\s).*", "$1").TrimEnd('\n');
@@ -1486,6 +1505,9 @@ namespace MusicBeePlugin
 
             assignHotkeyCheckBox.Enabled = false;
             assignHotkeyCheckBox.Checked = false;
+
+
+            CueProvider.SetComboBoxCue(filterComboBox, Plugin.CtlMixedFilters);
 
             processPresetCheckBoxCheckedEvent = true;
 
@@ -1956,18 +1978,18 @@ namespace MusicBeePlugin
             }
         }
 
-        public static void AutoApply(object currentFileObj, object tagToolsPluginObj)
+        public static void AsrAutoApplyPresets(object currentFileObj, object tagToolsPluginObj)
         {
             string currentFile = (string)currentFileObj;
             Plugin tagToolsPluginParam = (Plugin)tagToolsPluginObj;
 
             SortedDictionary<Guid, bool> appliedPresets = new SortedDictionary<Guid, bool>();
 
-            lock (Plugin.AutoAppliedPresets)
+            lock (Plugin.AsrAutoAppliedPresets)
             {
-                if (Plugin.AutoAppliedPresets.Count > 0)
+                if (Plugin.AsrAutoAppliedPresets.Count > 0)
                 {
-                    foreach (Preset tempPreset in Plugin.AutoAppliedPresets)
+                    foreach (Preset tempPreset in Plugin.AsrAutoAppliedPresets)
                     {
                         bool conditionSatisfied = true;
 
@@ -2000,9 +2022,9 @@ namespace MusicBeePlugin
                     }
 
                     if (appliedPresets.Count > 1)
-                        Plugin.SetStatusbarText(Plugin.SbAsrPresetsAreApplied.Replace("%PRESETCOUNT%", appliedPresets.Count.ToString()), true);
+                        Plugin.SetStatusbarText(Plugin.SbAsrPresetsAreApplied.Replace("%%PRESETCOUNT%%", appliedPresets.Count.ToString()), true);
                     else if (appliedPresets.Count == 1)
-                        Plugin.SetStatusbarText(Plugin.SbAsrPresetIsApplied.Replace("%PRESETNAME%", Presets[appliedPresets.ElementAt(0).Key].getName()), true);
+                        Plugin.SetStatusbarText(Plugin.SbAsrPresetIsApplied.Replace("%%PRESETNAME%%", Presets[appliedPresets.ElementAt(0).Key].getName()), true);
 
                     Plugin.RefreshPanels(true);
                 }
@@ -2041,9 +2063,9 @@ namespace MusicBeePlugin
             return "";
         }
 
-        public static void Apply(int hotkeySlot)
+        public static void ApplyPreset(int presetIndex)
         {
-            Preset tempPreset = Plugin.AsrPresetsWithHotkeys[hotkeySlot - 1];
+            Preset tempPreset = Plugin.AsrPresetsWithHotkeys[presetIndex - 1];
 
             if (tempPreset == null)
                 return;
@@ -2086,7 +2108,7 @@ namespace MusicBeePlugin
                         if (conditionSatisfied)
                         {
                             ReplaceTags(currentFile, tempPreset);
-                            Plugin.SetStatusbarText(Plugin.SbAsrPresetIsApplied.Replace("%PRESETNAME%", tempPreset.getName()), true);
+                            Plugin.SetStatusbarText(Plugin.SbAsrPresetIsApplied.Replace("%%PRESETNAME%%", tempPreset.getName()), true);
                         }
                     }
                 }
@@ -2119,7 +2141,7 @@ namespace MusicBeePlugin
                     if (conditionSatisfied)
                     {
                         ReplaceTags(currentFile, tempPreset);
-                        Plugin.SetStatusbarText(Plugin.SbAsrPresetIsApplied.Replace("%PRESETNAME%", tempPreset.getName()), true);
+                        Plugin.SetStatusbarText(Plugin.SbAsrPresetIsApplied.Replace("%%PRESETNAME%%", tempPreset.getName()), true);
                     }
                 }
             }
@@ -2272,7 +2294,7 @@ namespace MusicBeePlugin
                         row[11] = SearchedAndReplacedTags.originalReplacedTag5Value;
                         row[12] = SearchedAndReplacedTags.replacedTag5Value;
 
-                        Invoke(addRowToTable, new Object[] { row });
+                        Invoke(addRowToTable, new object[] { row });
 
                         tags.Add(tag);
 
@@ -2281,7 +2303,7 @@ namespace MusicBeePlugin
                 }
             }
 
-            Plugin.SetStatusbarTextForFileOperations(Plugin.AsrCommandSbText, true, files.Length - 1, files.Length, null, true);
+            Plugin.SetResultingSbText();
         }
 
         private void applyToSelected()
@@ -2315,7 +2337,7 @@ namespace MusicBeePlugin
                         SaveReplacedTags(currentFile, preset, this);
                     }
 
-                    Invoke(processRowOfTable, new Object[] { i });
+                    Invoke(processRowOfTable, new object[] { i });
                 }
 
                 Plugin.SetStatusbarTextForFileOperations(Plugin.AsrCommandSbText, false, i, tags.Count, currentFile);
@@ -2334,7 +2356,7 @@ namespace MusicBeePlugin
 
             Plugin.RefreshPanels(true);
 
-            Plugin.SetStatusbarTextForFileOperations(Plugin.AsrCommandSbText, false, tags.Count - 1, tags.Count, null, true);
+            Plugin.SetResultingSbText();
         }
 
         public string getTagName(int tagId)
@@ -2514,21 +2536,23 @@ namespace MusicBeePlugin
             }
 
             Plugin.SavedSettings.autoAppliedAsrPresetGuids = new List<Guid>();
-            Plugin.AutoAppliedPresets = new List<Preset>();
+            Plugin.AsrAutoAppliedPresets = new List<Preset>();
             foreach (Guid guid in autoAppliedAsrPresetGuids)
             {
                 Plugin.SavedSettings.autoAppliedAsrPresetGuids.Add(guid);
-                Plugin.AutoAppliedPresets.Add(Presets[guid]);
+                Plugin.AsrAutoAppliedPresets.Add(Presets[guid]);
             }
 
-            Plugin.AsrIdsPresets = new SortedDictionary<string, Preset>();
+            Plugin.IdsAsrPresets = new SortedDictionary<string, Preset>();
             foreach (var pair in asrIdsPresetGuids)
             {
-                Plugin.AsrIdsPresets.Add(pair.Key, Presets[pair.Value]);
+                Plugin.IdsAsrPresets.Add(pair.Key, Presets[pair.Value]);
             }
 
 
             TagToolsPlugin.SaveSettings();
+
+            RegisterASRPresetsHotkeysAndMenuItems(TagToolsPlugin);
 
             presetsChanged = false;
             buttonClose.Image = Resources.transparent_15;
@@ -2549,14 +2573,12 @@ namespace MusicBeePlugin
         private void buttonSaveClose_Click(object sender, EventArgs e)
         {
             saveSettings();
-            RegisterASRPresetsHotkeysAndMenuItems(TagToolsPlugin);
             Close();
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
             saveSettings();
-            RegisterASRPresetsHotkeysAndMenuItems(TagToolsPlugin);
         }
 
         private void buttonClose_Click(object sender, EventArgs e)
@@ -2657,14 +2679,14 @@ namespace MusicBeePlugin
             }
             else if (parameterTagType == 1) //Writable
             {
-                Plugin.FillList(parameterTagListParam.Items);
+                Plugin.FillListByTagNames(parameterTagListParam.Items);
                 parameterTagListParam.Enabled = true;
                 parameterTagLabelParam.Enabled = true;
             }
             else if (parameterTagType == 2) //Read only
             {
-                Plugin.FillList(parameterTagListParam.Items, true);
-                Plugin.FillListWithProps(parameterTagListParam.Items);
+                Plugin.FillListByTagNames(parameterTagListParam.Items, true);
+                Plugin.FillListByPropNames(parameterTagListParam.Items);
                 parameterTagListParam.Enabled = true;
                 parameterTagLabelParam.Enabled = true;
             }
@@ -3961,7 +3983,7 @@ namespace MusicBeePlugin
         public override void enableQueryingButtons()
         {
             dirtyErrorProvider.SetError(buttonPreview, " ");
-            dirtyErrorProvider.SetError(buttonPreview, String.Empty);
+            dirtyErrorProvider.SetError(buttonPreview, string.Empty);
         }
 
         public override void disableQueryingButtons()
@@ -4104,24 +4126,24 @@ namespace MusicBeePlugin
         {
             if (autoAppliedPresetCount == 0)
             {
-                label5.Text = editApplyText + autoApplyText;
+                autoApplyPresetslabel.Text = editApplyText + autoApplyText;
 
-                toolTip1.SetToolTip(label5, editApplyText + "\n" + autoApplyText + "\n\n"
-                    + nowTickedText.ToUpper().Replace("%TICKED-PRESETS%", autoAppliedPresetCount.ToString()));
+                toolTip1.SetToolTip(autoApplyPresetslabel, editApplyText + "\n" + autoApplyText + "\n\n"
+                    + nowTickedText.ToUpper().Replace("%%TICKEDPRESETS%%", autoAppliedPresetCount.ToString()));
 
-                label5.ForeColor = UntickedColor;
+                autoApplyPresetslabel.ForeColor = Plugin.UntickedColor;
                 //tickedOnlyChecked = false;
                 //tickedOnlyCheckBox.Enabled = false;
             }
             else
             {
-                label5.Text = editApplyText + autoApplyText + "\n"
-                    + nowTickedText.ToUpper().Replace("%TICKED-PRESETS%", autoAppliedPresetCount.ToString());
+                autoApplyPresetslabel.Text = editApplyText + autoApplyText + "\n"
+                    + nowTickedText.ToUpper().Replace("%%TICKEDPRESETS%%", autoAppliedPresetCount.ToString());
 
-                toolTip1.SetToolTip(label5, editApplyText + "\n" + autoApplyText + "\n\n"
-                    + clickHereText.ToUpper() + "\n" + nowTickedText.ToUpper().Replace("%TICKED-PRESETS%", autoAppliedPresetCount.ToString()));
+                toolTip1.SetToolTip(autoApplyPresetslabel, editApplyText + "\n" + autoApplyText + "\n\n"
+                    + clickHereText.ToUpper() + "\n" + nowTickedText.ToUpper().Replace("%%TICKEDPRESETS%%", autoAppliedPresetCount.ToString()));
 
-                label5.ForeColor = TickedColor;
+                autoApplyPresetslabel.ForeColor = Plugin.TickedColor;
                 //tickedOnlyCheckBox.Enabled = true;
             }
         }
@@ -4146,7 +4168,8 @@ namespace MusicBeePlugin
                 {
                     autoAppliedAsrPresetGuids.Add(((Preset)presetList.SelectedItem).guid);
                     presetsChanged = true;
-                    if (!Plugin.SavedSettings.dontPlayTickedAsrPresetSound)
+                    
+                    if (!Plugin.SavedSettings.dontPlayTickedAutoApplyingAsrLrPresetSound)
                         System.Media.SystemSounds.Exclamation.Play();
                 }
             }
@@ -4205,7 +4228,7 @@ namespace MusicBeePlugin
                 {
                     if (idTextBox.Text == idGuid.Key && preset.guid != idGuid.Value)
                     {
-                        MessageBox.Show(this, Plugin.MsgPresetExists.Replace("%ID%", idTextBox.Text), "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        MessageBox.Show(this, Plugin.MsgPresetExists.Replace("%%ID%%", idTextBox.Text), "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
                         if (presetList.SelectedItem == preset)
                             idTextBox.Text = preset.id;
@@ -4390,19 +4413,15 @@ namespace MusicBeePlugin
                 untickAllChecked = false;
                 filterComboBox.SelectedIndex = 0;
             }
-            else
+            else if (checkedCount == 1)
             {
                 untickAllChecked = true;
-
-                if (checkedCount > 1)
-                {
-                    filterComboBox.SelectedIndex = -1;
-                }
-                else
-                { 
-                    filterComboBox.SelectedIndex = checkedFilter;
-                    ((ComboBoxPlus)filterComboBox).Placeholder = Plugin.CtlMixedFilters;
-                }
+                filterComboBox.SelectedIndex = checkedFilter;
+            }
+            else //if (checkedCount > 1)
+            {
+                untickAllChecked = true;
+                filterComboBox.SelectedIndex = -1;
             }
 
             ignorefFlterComboBoxSelectedIndexChanged = false;
@@ -4671,102 +4690,102 @@ namespace MusicBeePlugin
     {
         public void ASRPreset1EventHandler(object sender, EventArgs e)
         {
-            AdvancedSearchAndReplaceCommand.Apply(1);
+            AdvancedSearchAndReplaceCommand.ApplyPreset(1);
         }
 
         public void ASRPreset2EventHandler(object sender, EventArgs e)
         {
-            AdvancedSearchAndReplaceCommand.Apply(2);
+            AdvancedSearchAndReplaceCommand.ApplyPreset(2);
         }
 
         public void ASRPreset3EventHandler(object sender, EventArgs e)
         {
-            AdvancedSearchAndReplaceCommand.Apply(3);
+            AdvancedSearchAndReplaceCommand.ApplyPreset(3);
         }
 
         public void ASRPreset4EventHandler(object sender, EventArgs e)
         {
-            AdvancedSearchAndReplaceCommand.Apply(4);
+            AdvancedSearchAndReplaceCommand.ApplyPreset(4);
         }
 
         public void ASRPreset5EventHandler(object sender, EventArgs e)
         {
-            AdvancedSearchAndReplaceCommand.Apply(5);
+            AdvancedSearchAndReplaceCommand.ApplyPreset(5);
         }
 
         public void ASRPreset6EventHandler(object sender, EventArgs e)
         {
-            AdvancedSearchAndReplaceCommand.Apply(6);
+            AdvancedSearchAndReplaceCommand.ApplyPreset(6);
         }
 
         public void ASRPreset7EventHandler(object sender, EventArgs e)
         {
-            AdvancedSearchAndReplaceCommand.Apply(7);
+            AdvancedSearchAndReplaceCommand.ApplyPreset(7);
         }
 
         public void ASRPreset8EventHandler(object sender, EventArgs e)
         {
-            AdvancedSearchAndReplaceCommand.Apply(8);
+            AdvancedSearchAndReplaceCommand.ApplyPreset(8);
         }
 
         public void ASRPreset9EventHandler(object sender, EventArgs e)
         {
-            AdvancedSearchAndReplaceCommand.Apply(9);
+            AdvancedSearchAndReplaceCommand.ApplyPreset(9);
         }
 
         public void ASRPreset10EventHandler(object sender, EventArgs e)
         {
-            AdvancedSearchAndReplaceCommand.Apply(10);
+            AdvancedSearchAndReplaceCommand.ApplyPreset(10);
         }
 
         public void ASRPreset11EventHandler(object sender, EventArgs e)
         {
-            AdvancedSearchAndReplaceCommand.Apply(11);
+            AdvancedSearchAndReplaceCommand.ApplyPreset(11);
         }
 
         public void ASRPreset12EventHandler(object sender, EventArgs e)
         {
-            AdvancedSearchAndReplaceCommand.Apply(12);
+            AdvancedSearchAndReplaceCommand.ApplyPreset(12);
         }
 
         public void ASRPreset13EventHandler(object sender, EventArgs e)
         {
-            AdvancedSearchAndReplaceCommand.Apply(13);
+            AdvancedSearchAndReplaceCommand.ApplyPreset(13);
         }
 
         public void ASRPreset14EventHandler(object sender, EventArgs e)
         {
-            AdvancedSearchAndReplaceCommand.Apply(14);
+            AdvancedSearchAndReplaceCommand.ApplyPreset(14);
         }
 
         public void ASRPreset15EventHandler(object sender, EventArgs e)
         {
-            AdvancedSearchAndReplaceCommand.Apply(15);
+            AdvancedSearchAndReplaceCommand.ApplyPreset(15);
         }
 
         public void ASRPreset16EventHandler(object sender, EventArgs e)
         {
-            AdvancedSearchAndReplaceCommand.Apply(16);
+            AdvancedSearchAndReplaceCommand.ApplyPreset(16);
         }
 
         public void ASRPreset17EventHandler(object sender, EventArgs e)
         {
-            AdvancedSearchAndReplaceCommand.Apply(17);
+            AdvancedSearchAndReplaceCommand.ApplyPreset(17);
         }
 
         public void ASRPreset18EventHandler(object sender, EventArgs e)
         {
-            AdvancedSearchAndReplaceCommand.Apply(18);
+            AdvancedSearchAndReplaceCommand.ApplyPreset(18);
         }
 
         public void ASRPreset19EventHandler(object sender, EventArgs e)
         {
-            AdvancedSearchAndReplaceCommand.Apply(19);
+            AdvancedSearchAndReplaceCommand.ApplyPreset(19);
         }
 
         public void ASRPreset20EventHandler(object sender, EventArgs e)
         {
-            AdvancedSearchAndReplaceCommand.Apply(20);
+            AdvancedSearchAndReplaceCommand.ApplyPreset(20);
         }
     }
 }

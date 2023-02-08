@@ -262,7 +262,7 @@
     <value>60</value>
   </data>
   <data name="playTickedAsrPresetSoundCheckBox.Text" xml:space="preserve">
-    <value>Play sound on ticking ASR preset</value>
+    <value>Play sound on ticking ASR/LR preset for auto-applying</value>
   </data>
   <data name="&gt;&gt;playTickedAsrPresetSoundCheckBox.Name" xml:space="preserve">
     <value>playTickedAsrPresetSoundCheckBox</value>
@@ -292,7 +292,7 @@
     <value>59</value>
   </data>
   <data name="playStoppedSoundCheckBox.Text" xml:space="preserve">
-    <value>Play system 'Stop' sound when background task is canceled</value>
+    <value>Play system "Stop" sound when background task is canceled</value>
   </data>
   <data name="&gt;&gt;playStoppedSoundCheckBox.Name" xml:space="preserve">
     <value>playStoppedSoundCheckBox</value>
@@ -322,7 +322,7 @@
     <value>58</value>
   </data>
   <data name="playStartedSoundCheckBox.Text" xml:space="preserve">
-    <value>Play system 'Exclamation' sound when background task is started</value>
+    <value>Play system "Exclamation" sound when background task is started</value>
   </data>
   <data name="&gt;&gt;playStartedSoundCheckBox.Name" xml:space="preserve">
     <value>playStartedSoundCheckBox</value>
@@ -352,7 +352,7 @@
     <value>57</value>
   </data>
   <data name="playCompletedSoundCheckBox.Text" xml:space="preserve">
-    <value>Play system 'Asterisk' sound when background task is completed/stopped</value>
+    <value>Play system "Asterisk" sound when background task is completed/stopped</value>
   </data>
   <data name="&gt;&gt;playCompletedSoundCheckBox.Name" xml:space="preserve">
     <value>playCompletedSoundCheckBox</value>
@@ -472,7 +472,7 @@
     <value>65</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
-    <value>Unit of billions (e.g. 'G' for 'Giga'):</value>
+    <value>Unit of billions (e.g. "G" for "Giga"):</value>
   </data>
   <data name="&gt;&gt;label4.Name" xml:space="preserve">
     <value>label4</value>
@@ -502,7 +502,7 @@
     <value>65</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>Unit of millions (e.g. 'M' for 'Mega'):</value>
+    <value>Unit of millions (e.g. "M" for "Mega"):</value>
   </data>
   <data name="&gt;&gt;label3.Name" xml:space="preserve">
     <value>label3</value>
@@ -532,7 +532,7 @@
     <value>64</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>Unit of thousands (e.g. 'K' for 'Kilo'):</value>
+    <value>Unit of thousands (e.g. "K" for "Kilo"):</value>
   </data>
   <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>
@@ -556,7 +556,7 @@
     <value>62</value>
   </data>
   <data name="groupBox4.Text" xml:space="preserve">
-    <value>'Library reports' command (not required for English Windows localization, case insensitive)</value>
+    <value>"Library reports" command (not required for English Windows localization, case insensitive)</value>
   </data>
   <data name="&gt;&gt;groupBox4.Name" xml:space="preserve">
     <value>groupBox4</value>
@@ -757,7 +757,7 @@
     <value>54</value>
   </data>
   <data name="showRencodeTagCheckBox.Text" xml:space="preserve">
-    <value>Show 'Reencode Tag' command in menu</value>
+    <value>Show "Reencode Tag" command in menu</value>
   </data>
   <data name="&gt;&gt;showRencodeTagCheckBox.Name" xml:space="preserve">
     <value>showRencodeTagCheckBox</value>
@@ -787,7 +787,7 @@
     <value>53</value>
   </data>
   <data name="showChangeCaseCheckBox.Text" xml:space="preserve">
-    <value>Show 'Change Case' command in menu</value>
+    <value>Show "Change Case" command in menu</value>
   </data>
   <data name="&gt;&gt;showChangeCaseCheckBox.Name" xml:space="preserve">
     <value>showChangeCaseCheckBox</value>
@@ -817,7 +817,7 @@
     <value>55</value>
   </data>
   <data name="showLibraryReportsCheckBox.Text" xml:space="preserve">
-    <value>Show 'Library Reports' / 'Auto Library Reports' commands in menu</value>
+    <value>Show "Library Reports" commands in menu</value>
   </data>
   <data name="&gt;&gt;showLibraryReportsCheckBox.Name" xml:space="preserve">
     <value>showLibraryReportsCheckBox</value>
@@ -847,7 +847,7 @@
     <value>51</value>
   </data>
   <data name="showCopyTagCheckBox.Text" xml:space="preserve">
-    <value>Show 'Copy Tag' command in menu</value>
+    <value>Show "Copy Tag" command in menu</value>
   </data>
   <data name="&gt;&gt;showCopyTagCheckBox.Name" xml:space="preserve">
     <value>showCopyTagCheckBox</value>
@@ -877,7 +877,7 @@
     <value>56</value>
   </data>
   <data name="showAutorateCheckBox.Text" xml:space="preserve">
-    <value>Show 'Auto Rate' command in menu</value>
+    <value>Show "Auto Rate" command in menu</value>
   </data>
   <data name="&gt;&gt;showAutorateCheckBox.Name" xml:space="preserve">
     <value>showAutorateCheckBox</value>
@@ -907,7 +907,7 @@
     <value>52</value>
   </data>
   <data name="showSwapTagsCheckBox.Text" xml:space="preserve">
-    <value>Show 'Swap Tags' command in menu</value>
+    <value>Show "Swap Tags" command in menu</value>
   </data>
   <data name="&gt;&gt;showSwapTagsCheckBox.Name" xml:space="preserve">
     <value>showSwapTagsCheckBox</value>
@@ -937,7 +937,7 @@
     <value>57</value>
   </data>
   <data name="showASRCheckBox.Text" xml:space="preserve">
-    <value>Show 'Advanced Search &amp;&amp; Replace' / 'Multiple Search &amp;&amp; Replace' commands in menu</value>
+    <value>Show "Advanced Search &amp;&amp; Replace" / "Multiple Search &amp;&amp; Replace" commands in menu</value>
   </data>
   <data name="&gt;&gt;showASRCheckBox.Name" xml:space="preserve">
     <value>showASRCheckBox</value>
@@ -967,7 +967,7 @@
     <value>58</value>
   </data>
   <data name="showShowHiddenWindowsCheckBox.Text" xml:space="preserve">
-    <value>Show 'Show hidden plugin windows' command in menu</value>
+    <value>Show "Show hidden plugin windows" command in menu</value>
   </data>
   <data name="&gt;&gt;showShowHiddenWindowsCheckBox.Name" xml:space="preserve">
     <value>showShowHiddenWindowsCheckBox</value>
@@ -997,7 +997,7 @@
     <value>59</value>
   </data>
   <data name="showCARCheckBox.Text" xml:space="preserve">
-    <value>Show 'Calculate Average Album Ratings' command in menu</value>
+    <value>Show "Calculate Average Album Ratings" command in menu</value>
   </data>
   <data name="&gt;&gt;showCARCheckBox.Name" xml:space="preserve">
     <value>showCARCheckBox</value>
@@ -1084,7 +1084,7 @@
     <value>61</value>
   </data>
   <data name="showCTCheckBox.Text" xml:space="preserve">
-    <value>Show 'Compare Tracks' command in menu</value>
+    <value>Show "Compare Tracks" command in menu</value>
   </data>
   <data name="&gt;&gt;showCTCheckBox.Name" xml:space="preserve">
     <value>showCTCheckBox</value>
@@ -1125,9 +1125,9 @@
   <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="$this.Localizable" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>

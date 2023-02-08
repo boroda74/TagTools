@@ -52,17 +52,18 @@ namespace MusicBeePlugin
             base.initializeForm();
 
 
-            buttonDeleteSaved.Image = Plugin.CrossImage;
+            //Setting themed images
+            buttonDeleteSaved.Image = Plugin.ButtonRemoveImage;
             autoApplyPictureBox.Image = Plugin.AutoAppliedPresetsAccent;
 
 
-            Plugin.FillList(destinationTagList.Items, false, false, false);
+            Plugin.FillListByTagNames(destinationTagList.Items, false, false, false);
             destinationTagList.Text = Plugin.SavedSettings.copyDestinationTagName;
 
-            Plugin.FillList(sourceTagList.Items, true, false, false);
+            Plugin.FillListByTagNames(sourceTagList.Items, true, false, false);
             sourceTagList.Text = Plugin.SavedSettings.copySourceTagName;
 
-            Plugin.FillList(((DataGridViewComboBoxColumn)templateTable.Columns[0]).Items, true, false, false);
+            Plugin.FillListByTagNames(((DataGridViewComboBoxColumn)templateTable.Columns[0]).Items, true, false, false);
 
 
             DatagridViewCheckBoxHeaderCell cbHeader = new DatagridViewCheckBoxHeaderCell();
@@ -343,7 +344,7 @@ namespace MusicBeePlugin
                             row[3] = "";
                             row[4] = currentFile;
 
-                            Invoke(addRowToTable, new Object[] { row });
+                            Invoke(addRowToTable, new object[] { row });
                             tags.Add(row);
                         }
                         else
@@ -354,7 +355,7 @@ namespace MusicBeePlugin
                             row[3] = "";
                             row[4] = currentFile;
 
-                            Invoke(addRowToTable, new Object[] { row });
+                            Invoke(addRowToTable, new object[] { row });
                             tags.Add(row);
 
                             for (int j = 0; j < tagValues.Count; j++)
@@ -366,7 +367,7 @@ namespace MusicBeePlugin
                                     row[3] = "";
                                     row[4] = "";
 
-                                    Invoke(addRowToTable, new Object[] { row });
+                                    Invoke(addRowToTable, new object[] { row });
                                     tags.Add(row);
                                 }
                             }
@@ -441,14 +442,14 @@ namespace MusicBeePlugin
                     row[3] = newDestinationTagValue1;
                     row[4] = currentFile;
 
-                    Invoke(addRowToTable, new Object[] { row });
+                    Invoke(addRowToTable, new object[] { row });
                     tags.Add(row);
                 }
 
                 previewIsGenerated = true;
             }
 
-            Plugin.SetStatusbarTextForFileOperations(Plugin.MsrCommandSbText, true, files.Length - 1, files.Length, null, true);
+            Plugin.SetResultingSbText();
         }
 
         private void applyChanges()
@@ -476,7 +477,7 @@ namespace MusicBeePlugin
                     {
                         tags[i][0] = "";
 
-                        Invoke(processRowOfTable, new Object[] { i });
+                        Invoke(processRowOfTable, new object[] { i });
 
                         Plugin.SetStatusbarTextForFileOperations(Plugin.MsrCommandSbText, false, i, tags.Count, currentFile);
 
@@ -488,7 +489,7 @@ namespace MusicBeePlugin
 
             Plugin.RefreshPanels(true);
 
-            Plugin.SetStatusbarTextForFileOperations(Plugin.MsrCommandSbText, false, tags.Count - 1, tags.Count, null, true);
+            Plugin.SetResultingSbText();
         }
 
         private void saveSettings()
@@ -497,6 +498,8 @@ namespace MusicBeePlugin
 
             Plugin.SavedSettings.copySourceTagName = sourceTagList.Text;
             Plugin.SavedSettings.copyDestinationTagName = destinationTagList.Text;
+
+            TagToolsPlugin.SaveSettings();
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
@@ -633,7 +636,7 @@ namespace MusicBeePlugin
         public override void enableQueryingButtons()
         {
             dirtyErrorProvider.SetError(buttonPreview, " ");
-            dirtyErrorProvider.SetError(buttonPreview, String.Empty);
+            dirtyErrorProvider.SetError(buttonPreview, string.Empty);
         }
 
         public override void disableQueryingButtons()
@@ -731,22 +734,22 @@ namespace MusicBeePlugin
             if (!presetExists)
             {
                 if (MessageBox.Show(this, Plugin.MsgAreYouSureYouWantToSaveASRpreset
-                    .Replace("%PRESETNAME%", templateNameTextBox.Text), 
+                    .Replace("%%PRESETNAME%%", templateNameTextBox.Text), 
                         Plugin.MsgSavePreset, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                     return;
             }
             else if (templateNameTextBox.Text == customMSR.getName())
             {
                 if (MessageBox.Show(this, Plugin.MsgAreYouSureYouWantToOverwriteASRpreset
-                    .Replace("%PRESETNAME%", templateNameTextBox.Text),
+                    .Replace("%%PRESETNAME%%", templateNameTextBox.Text),
                         Plugin.MsgSavePreset, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                     return;
             }
             else
             {
                 if (MessageBox.Show(this, Plugin.MsgAreYouSureYouWantToOverwriteRenameASRpreset
-                    .Replace("%PRESETNAME%", customMSR.getName())
-                    .Replace("%NEWPRESETNAME%", templateNameTextBox.Text),
+                    .Replace("%%PRESETNAME%%", customMSR.getName())
+                    .Replace("%%NEWPRESETNAME%%", templateNameTextBox.Text),
                         Plugin.MsgSavePreset, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                     return;
             }
@@ -798,12 +801,12 @@ namespace MusicBeePlugin
 
             if (autoApplyCheckBox.Checked && !Plugin.SavedSettings.autoAppliedAsrPresetGuids.Contains(customMSR.guid))
             {
-                Plugin.AutoAppliedPresets.Add(customMSR);
+                Plugin.AsrAutoAppliedPresets.Add(customMSR);
                 Plugin.SavedSettings.autoAppliedAsrPresetGuids.Add(customMSR.guid);
             }
             else if (!autoApplyCheckBox.Checked && Plugin.SavedSettings.autoAppliedAsrPresetGuids.Contains(customMSR.guid))
             {
-                Plugin.AutoAppliedPresets.Remove(customMSR);
+                Plugin.AsrAutoAppliedPresets.Remove(customMSR);
                 Plugin.SavedSettings.autoAppliedAsrPresetGuids.Remove(customMSR.guid);
             }
 
@@ -1021,7 +1024,7 @@ namespace MusicBeePlugin
 
         private void buttonDeleteSaved_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show(this, Plugin.MsgAreYouSureYouWantToDeleteASRpreset.Replace("%PRESETNAME%", templateNameTextBox.Text), 
+            if (MessageBox.Show(this, Plugin.MsgAreYouSureYouWantToDeleteASRpreset.Replace("%%PRESETNAME%%", templateNameTextBox.Text), 
                     Plugin.MsgDeletePreset, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                 return;
 
@@ -1041,10 +1044,10 @@ namespace MusicBeePlugin
                 }
             }
 
-            foreach (var pair in Plugin.AsrIdsPresets)
+            foreach (var pair in Plugin.IdsAsrPresets)
             {
                 if (pair.Value == customMSR)
-                    Plugin.AsrIdsPresets.Remove(pair.Key);
+                    Plugin.IdsAsrPresets.Remove(pair.Key);
             }
 
             File.Delete(Path.Combine(PresetsPath, customMSR.getSafeFileName() + Plugin.ASRPresetExtension));

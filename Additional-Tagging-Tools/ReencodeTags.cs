@@ -233,7 +233,7 @@ namespace MusicBeePlugin
                 row[2] = Plugin.GetTrackRepresentation(currentTags, newTags, tagNames, previewSortTags);
                 row[3] = Plugin.GetTrackRepresentation(newTags, currentTags, tagNames, previewSortTags);
 
-                Invoke(addRowToTable, new Object[] { row });
+                Invoke(addRowToTable, new object[] { row });
 
                 currentTracks.Add(currentTags);
                 newTracks.Add(newTags);
@@ -247,7 +247,7 @@ namespace MusicBeePlugin
             }
             else
             {
-                Plugin.SetStatusbarTextForFileOperations(Plugin.ReencodeTagCommandSbText, true, files.Length - 1, files.Length, null, true);
+                Plugin.SetResultingSbText();
             }
         }
 
@@ -274,7 +274,7 @@ namespace MusicBeePlugin
 
                     currentTracks[i][0] = "";
 
-                    Invoke(processRowOfTable, new Object[] { i });
+                    Invoke(processRowOfTable, new object[] { i });
 
                     Plugin.SetStatusbarTextForFileOperations(Plugin.ReencodeTagCommandSbText, false, i, newTracks.Count, currentFile);
 
@@ -313,7 +313,7 @@ namespace MusicBeePlugin
 
             Plugin.RefreshPanels(true);
 
-            Plugin.SetStatusbarTextForFileOperations(Plugin.ReencodeTagCommandSbText, false, newTracks.Count - 1, newTracks.Count, null, true);
+            Plugin.SetResultingSbText();
         }
 
         private void saveSettings()
@@ -322,6 +322,8 @@ namespace MusicBeePlugin
 
             Plugin.SavedSettings.initialEncodingName = initialEncodingsList.Text;
             //Plugin.savedSettings.usedEncodingName = usedEncodingsList.Text;
+
+            TagToolsPlugin.SaveSettings();
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
@@ -399,7 +401,7 @@ namespace MusicBeePlugin
 
         public override void enableQueryingButtons()
         {
-            dirtyErrorProvider.SetError(buttonPreview, String.Empty);
+            dirtyErrorProvider.SetError(buttonPreview, string.Empty);
         }
 
         public override void disableQueryingButtons()

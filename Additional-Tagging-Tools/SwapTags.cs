@@ -27,10 +27,10 @@ namespace MusicBeePlugin
         {
             base.initializeForm();
 
-            Plugin.FillList(sourceTagList.Items);
+            Plugin.FillListByTagNames(sourceTagList.Items);
             sourceTagList.Text = Plugin.SavedSettings.swapTagsSourceTagName;
 
-            Plugin.FillList(destinationTagList.Items);
+            Plugin.FillListByTagNames(destinationTagList.Items);
             destinationTagList.Text = Plugin.SavedSettings.swapTagsDestinationTagName;
 
             smartOperationCheckBox.Checked = Plugin.SavedSettings.smartOperation;
@@ -89,7 +89,7 @@ namespace MusicBeePlugin
 
             Plugin.RefreshPanels(true);
 
-            Plugin.SetStatusbarTextForFileOperations(Plugin.SwapTagsCommandSbText, false, files.Length - 1, files.Length, null, true);
+            Plugin.SetResultingSbText();
         }
 
         private void saveSettings()
@@ -97,6 +97,8 @@ namespace MusicBeePlugin
             Plugin.SavedSettings.swapTagsSourceTagName = sourceTagList.Text;
             Plugin.SavedSettings.swapTagsDestinationTagName = destinationTagList.Text;
             Plugin.SavedSettings.smartOperation = smartOperationCheckBox.Checked;
+
+            TagToolsPlugin.SaveSettings();
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
@@ -122,7 +124,7 @@ namespace MusicBeePlugin
         public override void enableQueryingButtons()
         {
             dirtyErrorProvider.SetError(buttonOK, " ");
-            dirtyErrorProvider.SetError(buttonOK, String.Empty);
+            dirtyErrorProvider.SetError(buttonOK, string.Empty);
         }
 
         public override void enableQueryingOrUpdatingButtons()

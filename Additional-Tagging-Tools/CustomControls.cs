@@ -6,22 +6,32 @@ using System.Windows.Forms;
 
 namespace MusicBeePlugin
 {
-    public class ComboBoxPlus : ComboBox
+    public static class CueProvider
     {
+        private const int EM_SETCUEBANNER = 0x1501;
         private const int CB_SETCUEBANNER = 0x1703;
 
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern int SendMessage(IntPtr hWnd, int msg, int wParam, [MarshalAs(UnmanagedType.LPWStr)] string lParam);
 
-        private string placeholder = string.Empty;
-        public string Placeholder
+        public static void SetTextBoxCue(TextBox textBox, string cue)
         {
-            get { return placeholder; }
-            set
-            {
-                placeholder = value;
-                SendMessage(Handle, CB_SETCUEBANNER, 0, Placeholder);
-            }
+            SendMessage(textBox.Handle, EM_SETCUEBANNER, 0, cue);
+        }
+
+        public static void ClearTextBoxCue(TextBox textBox)
+        {
+            SendMessage(textBox.Handle, EM_SETCUEBANNER, 0, string.Empty);
+        }
+
+        public static void SetComboBoxCue(ComboBox comboBox, string cue)
+        {
+            SendMessage(comboBox.Handle, CB_SETCUEBANNER, 0, cue);
+        }
+
+        public static void ClearComboBoxCue(ComboBox comboBox)
+        {
+            SendMessage(comboBox.Handle, CB_SETCUEBANNER, 0, string.Empty);
         }
     }
 

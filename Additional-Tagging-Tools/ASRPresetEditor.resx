@@ -199,7 +199,7 @@
     <value>4</value>
   </data>
   <data name="customText4Box.ToolTip" xml:space="preserve">
-    <value>'\@#' chars in searched and/or replaced patterns will be substituted with &lt;Custom text #&gt;</value>
+    <value>"\@#" chars in searched and/or replaced patterns will be substituted with &lt;Custom text #&gt;</value>
   </data>
   <data name="label13.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -424,7 +424,7 @@
     <value />
   </data>
   <data name="customText3CheckBox.ToolTip" xml:space="preserve">
-    <value>'\@#' chars in searched and/or replaced patterns will be substituted with &lt;Custom text #&gt;</value>
+    <value>"\@#" chars in searched and/or replaced patterns will be substituted with &lt;Custom text #&gt;</value>
   </data>
   <data name="searchedTag2List.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -442,7 +442,7 @@
     <value>groupBox5</value>
   </data>
   <data name="customText3Box.ToolTip" xml:space="preserve">
-    <value>'\@#' chars in searched and/or replaced patterns will be substituted with &lt;Custom text #&gt;</value>
+    <value>"\@#" chars in searched and/or replaced patterns will be substituted with &lt;Custom text #&gt;</value>
   </data>
   <data name="&gt;&gt;label22.Name" xml:space="preserve">
     <value>label22</value>
@@ -724,7 +724,7 @@
     <value>0</value>
   </data>
   <data name="customText2Box.ToolTip" xml:space="preserve">
-    <value>'\@#' chars in searched and/or replaced patterns will be substituted with &lt;Custom text #&gt;</value>
+    <value>"\@#" chars in searched and/or replaced patterns will be substituted with &lt;Custom text #&gt;</value>
   </data>
   <data name="replacedPattern4Box.Size" type="System.Drawing.Size, System.Drawing">
     <value>342, 20</value>
@@ -1147,7 +1147,7 @@
     <value>152, 209</value>
   </data>
   <data name="customTextBox.ToolTip" xml:space="preserve">
-    <value>'\@#' chars in searched and/or replaced patterns will be substituted with &lt;Custom text #&gt;</value>
+    <value>"\@#" chars in searched and/or replaced patterns will be substituted with &lt;Custom text #&gt;</value>
   </data>
   <data name="&gt;&gt;label18.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1873,7 +1873,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="customText2CheckBox.ToolTip" xml:space="preserve">
-    <value>'\@#' chars in searched and/or replaced patterns will be substituted with &lt;Custom text #&gt;</value>
+    <value>"\@#" chars in searched and/or replaced patterns will be substituted with &lt;Custom text #&gt;</value>
   </data>
   <data name="&gt;&gt;label35.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2542,13 +2542,13 @@
     <value>&lt;Tag 3&gt; is</value>
   </data>
   <data name="customText4CheckBox.ToolTip" xml:space="preserve">
-    <value>'\@#' chars in searched and/or replaced patterns will be substituted with &lt;Custom text #&gt;</value>
+    <value>"\@#" chars in searched and/or replaced patterns will be substituted with &lt;Custom text #&gt;</value>
   </data>
   <data name="&gt;&gt;customText3Box.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="customTextCheckBox.ToolTip" xml:space="preserve">
-    <value>'\@#' chars in searched and/or replaced patterns will be substituted with &lt;Custom text #&gt;</value>
+    <value>"\@#" chars in searched and/or replaced patterns will be substituted with &lt;Custom text #&gt;</value>
   </data>
   <data name="&gt;&gt;replacedPattern3Box.Name" xml:space="preserve">
     <value>replacedPattern3Box</value>

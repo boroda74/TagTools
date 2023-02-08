@@ -164,7 +164,7 @@
     <value>674, 35</value>
   </data>
   <data name="functionIdPictureBox.ToolTip" xml:space="preserve">
-    <value>Щелкните, чтобы видеть только пресеты с назначенными id-ми функций виртуальных тегов
+    <value>Щелкните, чтобы видеть только пресеты с назначенными ID-ми функций виртуальных тегов
 Щелкните, удерживая клавишу Ctrl, чтобы добавить этот фильтр к существующим или отключить его
 
 Пресеты должны соответствовать ВСЕМ выбранным фильтрам ОДНОВРЕМЕННО</value>
@@ -233,7 +233,7 @@
     <value>Ограниченные плейлистом</value>
   </data>
   <data name="filterComboBox.Items6" xml:space="preserve">
-    <value>С назначенными id-ми функций</value>
+    <value>С назначенными ID-ми функций</value>
   </data>
   <data name="filterComboBox.Items7" xml:space="preserve">
     <value>С назначенными комбинациями клавиш</value>
@@ -302,7 +302,7 @@
     <value>967, 173</value>
   </data>
   <data name="clearIdButton.ToolTip" xml:space="preserve">
-    <value>Удалить назначение id-а функции виртуальных тегов пресету</value>
+    <value>Удалить назначение ID-а функции виртуальных тегов пресету</value>
   </data>
   <data name="idTextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>868, 173</value>
@@ -320,7 +320,7 @@
     <value>163, 13</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>id функции виртуальных тегов:</value>
+    <value>ID функции виртуальных тегов:</value>
   </data>
   <data name="assignHotkeyCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>286, 20</value>
@@ -329,8 +329,10 @@
     <value>Назначить комбинацию клавиш. Осталось: </value>
   </data>
   <data name="assignHotkeyCheckBox.ToolTip" xml:space="preserve">
-    <value>Сначала включите комбинации клавиш для одного или нескольких пресетов, потом сохраните изменения и 
-откройте настройки горячих клавиш: Правка&gt; Настройки&gt; Горячие клавиш.</value>
+    <value>Сначала включите комбинацию клавиш для одного или нескольких пресетов, потом сохраните изменения и 
+откройте настройки горячих клавиш MusicBee: Правка&gt; Настройки&gt; Горячие клавиши
+
+Потребуется заново назначить комбинацию клавиш, если изменится название пресета</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="clearSearchButton.Font" type="System.Resources.ResXNullRef, System.Windows.Forms">
@@ -758,7 +760,7 @@
     <value>986, 30</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
-    <value>Выберите пресет, чтобы изменить его или применить к выбранным трекам. Отметьте пресеты, чтобы они автоматически применялись при редактировании/обновлении тегов или при добавлении треков в библиотеку. Щелкните здесь, чтобы увидеть только отмеченные пресеты. Отмечено для автоматического применения: %TICKED-PRESETS%
+    <value>Выберите пресет, чтобы изменить его или применить к выбранным трекам. Отметьте пресеты, чтобы они автоматически применялись при редактировании/обновлении тегов или при добавлении треков в библиотеку. Щелкните здесь, чтобы увидеть только отмеченные пресеты. Отмечено для автоматического применения: %%TICKEDPRESETS%%
 </value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">

@@ -99,9 +99,7 @@
     <Compile Include="Additional-Tagging-Tools\AdvancedSearchAndReplace.Designer.cs">
       <DependentUpon>AdvancedSearchAndReplace.cs</DependentUpon>
     </Compile>
-    <Compile Include="Additional-Tagging-Tools\CustomControls.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Additional-Tagging-Tools\CustomControls.cs" />
     <Compile Include="Additional-Tagging-Tools\ImagingAndColoring.cs" />
     <Compile Include="Additional-Tagging-Tools\ASRPresetEditor.cs">
       <SubType>Form</SubType>
@@ -200,12 +198,6 @@
     <Compile Include="Additional-Tagging-Tools\CopyTag.Designer.cs">
       <DependentUpon>CopyTag.cs</DependentUpon>
     </Compile>
-    <Compile Include="Additional-Tagging-Tools\AutoLibraryReports.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Additional-Tagging-Tools\AutoLibraryReports.Designer.cs">
-      <DependentUpon>AutoLibraryReports.cs</DependentUpon>
-    </Compile>
     <Compile Include="Additional-Tagging-Tools\DatagridViewCheckBoxHeaderCell.cs" />
     <Compile Include="Additional-Tagging-Tools\FillTagNames.cs" />
     <Compile Include="Additional-Tagging-Tools\LibraryReports.cs">
@@ -274,6 +266,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Additional-Tagging-Tools\ASRPresetEditor.resx">
       <DependentUpon>ASRPresetEditor.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Additional-Tagging-Tools\ASRPresetEditor.ru.resx">
       <DependentUpon>ASRPresetEditor.cs</DependentUpon>
@@ -312,6 +305,9 @@
     <EmbeddedResource Include="Additional-Tagging-Tools\ASRPresetConfirmation.resx">
       <DependentUpon>ASRPresetConfirmation.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Additional-Tagging-Tools\LibraryReports.ru.resx">
+      <DependentUpon>LibraryReports.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Additional-Tagging-Tools\MultipleSearchAndReplace.resx">
       <DependentUpon>MultipleSearchAndReplace.cs</DependentUpon>
@@ -385,19 +381,7 @@
       <DependentUpon>CopyTag.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Additional-Tagging-Tools\AutoLibraryReports.resx">
-      <DependentUpon>AutoLibraryReports.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Additional-Tagging-Tools\AutoLibraryReports.ru.resx">
-      <DependentUpon>AutoLibraryReports.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Additional-Tagging-Tools\LibraryReports.resx">
-      <DependentUpon>LibraryReports.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Additional-Tagging-Tools\LibraryReports.ru.resx">
       <DependentUpon>LibraryReports.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -419,6 +403,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Additional-Tagging-Tools\Settings.resx">
       <DependentUpon>Settings.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Additional-Tagging-Tools\Settings.ru.resx">
       <DependentUpon>Settings.cs</DependentUpon>
@@ -430,6 +415,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Additional-Tagging-Tools\SwapTags.ru.resx">
       <DependentUpon>SwapTags.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Additional-Tagging-Tools\PluginWindowTemplate.resx">
       <DependentUpon>PluginWindowTemplate.cs</DependentUpon>

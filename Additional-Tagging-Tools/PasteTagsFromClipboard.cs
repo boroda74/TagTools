@@ -27,7 +27,7 @@ namespace MusicBeePlugin
         {
             base.initializeForm();
 
-            Plugin.FillList(destinationTagNames, false, false, false);
+            Plugin.FillListByTagNames(destinationTagNames, false, false, false);
         }
 
         private bool pasteTagsFromClipboard()

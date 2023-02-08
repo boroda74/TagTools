@@ -165,25 +165,25 @@
     <value>243, 17</value>
   </data>
   <data name="playTickedAsrPresetSoundCheckBox.Text" xml:space="preserve">
-    <value>Проиграть звук при отметке пресета ДПЗ</value>
+    <value>Проиграть звук при отметке пресета ДПЗ/ОБ для автоматического применения</value>
   </data>
   <data name="playStoppedSoundCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>451, 17</value>
   </data>
   <data name="playStoppedSoundCheckBox.Text" xml:space="preserve">
-    <value>Проиграть системный звук 'Стоп', когда фоновая задача отменена пользователем</value>
+    <value>Проиграть системный звук "Стоп", когда фоновая задача отменена пользователем</value>
   </data>
   <data name="playStartedSoundCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>421, 17</value>
   </data>
   <data name="playStartedSoundCheckBox.Text" xml:space="preserve">
-    <value>Проиграть системный звук 'Восклицание', когда фоновая задача начинается</value>
+    <value>Проиграть системный звук "Восклицание", когда фоновая задача начинается</value>
   </data>
   <data name="playCompletedSoundCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>487, 17</value>
   </data>
   <data name="playCompletedSoundCheckBox.Text" xml:space="preserve">
-    <value>Проиграть системный звук 'Звездочка', когда фоновая задача завершается/остановлена</value>
+    <value>Проиграть системный звук "Звездочка", когда фоновая задача завершается/остановлена</value>
   </data>
   <data name="groupBox4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -195,7 +195,7 @@
     <value>554, 111</value>
   </data>
   <data name="groupBox4.Text" xml:space="preserve">
-    <value>Команда 'Отчеты по библиотеке' (не нужно для русской локализации Windows, регистр не важен)</value>
+    <value>Команда "Отчеты по библиотеке" (не нужно для русской локализации Windows, регистр не важен)</value>
   </data>
   <data name="unitGBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>318, 78</value>
@@ -213,7 +213,7 @@
     <value>303, 13</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
-    <value>Единица измерения миллиардов (например, 'Г' для 'Гига'):</value>
+    <value>Единица измерения миллиардов (например, "Г" для "Гига"):</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 53</value>
@@ -222,7 +222,7 @@
     <value>303, 13</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>Единица измерения миллионов (например, 'М' для 'Мега'):</value>
+    <value>Единица измерения миллионов (например, "М" для "Мега"):</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 25</value>
@@ -231,7 +231,7 @@
     <value>274, 13</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>Единица измерения тысяч (например, 'К' для 'Кило'):</value>
+    <value>Единица измерения тысяч (например, "К" для "Кило"):</value>
   </data>
   <data name="saveLastSkippedButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>146, 695</value>
@@ -288,56 +288,56 @@
     <value>314, 17</value>
   </data>
   <data name="showRencodeTagCheckBox.Text" xml:space="preserve">
-    <value>Показывать в меню команду 'Изменить кодировку тега'</value>
+    <value>Показывать в меню команду "Изменить кодировку тега"</value>
   </data>
   <data name="showChangeCaseCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>301, 17</value>
   </data>
   <data name="showChangeCaseCheckBox.Text" xml:space="preserve">
-    <value>Показывать в меню команду 'Изменить регистр тега'</value>
+    <value>Показывать в меню команду "Изменить регистр тега"</value>
   </data>
   <data name="showLibraryReportsCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>513, 17</value>
   </data>
   <data name="showLibraryReportsCheckBox.Text" xml:space="preserve">
-    <value>Показывать в меню команды 'Отчеты по библиотеке' / 'Автоматические отчеты по библиотеке'
+    <value>Показывать в меню команды "Отчеты по библиотеке"
 </value>
   </data>
   <data name="showCopyTagCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>261, 17</value>
   </data>
   <data name="showCopyTagCheckBox.Text" xml:space="preserve">
-    <value>Показывать в меню команду 'Копировать тег'</value>
+    <value>Показывать в меню команду "Копировать тег"</value>
   </data>
   <data name="showAutorateCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>369, 17</value>
   </data>
   <data name="showAutorateCheckBox.Text" xml:space="preserve">
-    <value>Показывать в меню команду 'Автоматически установить рейтинги'</value>
+    <value>Показывать в меню команду "Автоматически установить рейтинги"</value>
   </data>
   <data name="showSwapTagsCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>327, 17</value>
   </data>
   <data name="showSwapTagsCheckBox.Text" xml:space="preserve">
-    <value>Показывать в меню команду 'Поменять местами два тега'</value>
+    <value>Показывать в меню команду "Поменять местами два тега"</value>
   </data>
   <data name="showASRCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>538, 17</value>
   </data>
   <data name="showASRCheckBox.Text" xml:space="preserve">
-    <value>Показывать в меню команды 'Дополнительные поиск и замена' / 'Множественный поиск и замена'</value>
+    <value>Показывать в меню команды "Дополнительные поиск и замена" / "Множественный поиск и замена"</value>
   </data>
   <data name="showShowHiddenWindowsCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>350, 17</value>
   </data>
   <data name="showShowHiddenWindowsCheckBox.Text" xml:space="preserve">
-    <value>Показывать в меню команду 'Показать скрытые окна плагина'</value>
+    <value>Показывать в меню команду "Показать скрытые окна плагина"</value>
   </data>
   <data name="showCARCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>381, 17</value>
   </data>
   <data name="showCARCheckBox.Text" xml:space="preserve">
-    <value>Показывать в меню команду 'Рассчитать средний рейтинг альбомов'</value>
+    <value>Показывать в меню команду "Рассчитать средний рейтинг альбомов"</value>
   </data>
   <data name="showBackupRestoreCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>329, 17</value>
@@ -364,7 +364,7 @@
     <value>262, 17</value>
   </data>
   <data name="showCTCheckBox.Text" xml:space="preserve">
-    <value>Показывать в меню команду 'Сравнить треки'</value>
+    <value>Показывать в меню команду "Сравнить треки"</value>
   </data>
   <data name="groupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>

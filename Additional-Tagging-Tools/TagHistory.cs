@@ -65,7 +65,7 @@ namespace MusicBeePlugin
             base.initializeForm();
 
             tagNames = new List<string>();
-            Plugin.FillList(tagNames, false, true, false);
+            Plugin.FillListByTagNames(tagNames, false, true, false);
 
             tagIds = new List<Plugin.MetaDataType>();
             for (int i = 0; i < tagNames.Count; i++)
@@ -285,7 +285,7 @@ namespace MusicBeePlugin
                 }
 
 
-                SortedDictionary<string, object> backupGuids = new SortedDictionary<string, object>();
+                SortedDictionary<string, bool> backupGuids = new SortedDictionary<string, bool>();
 
                 foreach (var tempTrackId in trackIds)
                 {
@@ -294,7 +294,7 @@ namespace MusicBeePlugin
                     foreach (var tempBackupGuid in tempBackupGuids)
                     {
                         if (!backupGuids.TryGetValue(tempBackupGuid.Key, out _))
-                            backupGuids.Add(tempBackupGuid.Key, null);
+                            backupGuids.Add(tempBackupGuid.Key, false);
                     }
                 }
 
@@ -435,6 +435,8 @@ namespace MusicBeePlugin
             //Plugin.SavedSettings.DontAutoSelectDisplayedTags = !AutoSelectTagsCheckBox.Checked;
 
             searchFolderTextBox.Items.CopyTo(Plugin.SavedSettings.lastSelectedFolders, 0);
+
+            TagToolsPlugin.SaveSettings();
         }
 
         private void buttonOK_Click(object sender, EventArgs e)

@@ -124,7 +124,7 @@
     <value>Нет</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Применить пресет '%%preset%%' к треку '%%track%%'?</value>
+    <value>Применить пресет "%%preset%%" к треку "%%track%%"?</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Подтвердите применение пресета дополнительного поиска и замены</value>

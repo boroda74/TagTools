@@ -27,7 +27,7 @@ namespace MusicBeePlugin
         {
             base.initializeForm();
 
-            Plugin.FillList(uncheckedTagsList.Items, false, true, false);
+            Plugin.FillListByTagNames(uncheckedTagsList.Items, false, true, false);
 
             for (int i = 0; i < displayedTags.Length; i++)
             {

@@ -29,7 +29,7 @@ namespace MusicBeePlugin
             lastSkippedDateFormatTagList.Items.Add(sampleDateTime.ToString("G"));
             lastSkippedDateFormatTagList.SelectedIndex = SavedSettings.lastSkippedDateFormat;
 
-            FillList(lastSkippedTagList.Items);
+            FillListByTagNames(lastSkippedTagList.Items);
             if (SavedSettings.lastSkippedTagId == 0)
             {
                 lastSkippedTagList.Text = GetTagName(MetaDataType.Custom1);
@@ -50,6 +50,8 @@ namespace MusicBeePlugin
                 SavedSettings.lastSkippedTagId = (int)GetTagId(lastSkippedTagList.Text);
             else
                 SavedSettings.lastSkippedTagId = 0;
+
+            TagToolsPlugin.SaveSettings();
         }
 
         private void buttonOK_Click(object sender, EventArgs e)

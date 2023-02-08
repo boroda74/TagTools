@@ -237,7 +237,7 @@ namespace MusicBeePlugin
 
 
                 List<string> tagNames = new List<string>();
-                Plugin.FillList(tagNames, false, true, false);
+                Plugin.FillListByTagNames(tagNames, false, true, false);
 
                 List<Plugin.MetaDataType> tagIds = new List<Plugin.MetaDataType>();
                 for (int i = 0; i < tagNames.Count; i++)
@@ -605,7 +605,7 @@ namespace MusicBeePlugin
                 lock (Plugin.AutobackupLocker)
                 {
                     List<string> tagNames = new List<string>();
-                    Plugin.FillList(tagNames, false, true, false);
+                    Plugin.FillListByTagNames(tagNames, false, true, false);
 
                     List<Plugin.MetaDataType> tagIds = new List<Plugin.MetaDataType>();
                     for (int i = 0; i < tagNames.Count; i++)
@@ -741,7 +741,7 @@ namespace MusicBeePlugin
 
 
                 List<string> tagNames = new List<string>();
-                Plugin.FillList(tagNames, false, true, false);
+                Plugin.FillListByTagNames(tagNames, false, true, false);
 
                 List<Plugin.MetaDataType> tagIds = new List<Plugin.MetaDataType>();
                 for (int i = 0; i < tagNames.Count; i++)

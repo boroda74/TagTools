@@ -12,6 +12,13 @@ namespace MusicBeePlugin
         Bitmap preparedMask;
         Bitmap finalMaskedImage;
 
+        ~AlphaBlendedImage()
+        {
+            _image?.Dispose();
+            _mask?.Dispose();
+            preparedMask?.Dispose();
+        }
+
         public AlphaBlendedImage(Bitmap image, Bitmap mask)
         {
             _image = Create32bppImageAndClearAlpha(image);
@@ -27,15 +34,15 @@ namespace MusicBeePlugin
         #region This is ugly stuff
         private void PrepareMaskedImage()
         {
-            if (this._image != null && this.preparedMask != null)
+            if (_image != null && preparedMask != null)
             {
-                if (this._image.Width != this.preparedMask.Width || this._image.Height != this.preparedMask.Height)
+                if (_image.Width != preparedMask.Width || _image.Height != preparedMask.Height)
                 {
                     throw new BadImageFormatException("Mask and image must be the same size");
                 }
                 else
                 {
-                    this.finalMaskedImage = Create32bppImageAndClearAlpha(this._image);
+                    finalMaskedImage = Create32bppImageAndClearAlpha(_image);
 
                     BitmapData bmpData1 = finalMaskedImage.LockBits(new Rectangle(0, 0, finalMaskedImage.Width, finalMaskedImage.Height), ImageLockMode.ReadWrite, finalMaskedImage.PixelFormat);
                     byte[] finalMaskedImageRGBAData = new byte[bmpData1.Stride * bmpData1.Height];
@@ -52,8 +59,8 @@ namespace MusicBeePlugin
 
                     }
                     System.Runtime.InteropServices.Marshal.Copy(finalMaskedImageRGBAData, 0, bmpData1.Scan0, finalMaskedImageRGBAData.Length);
-                    this.finalMaskedImage.UnlockBits(bmpData1);
-                    this.preparedMask.UnlockBits(bmpData2);
+                    finalMaskedImage.UnlockBits(bmpData1);
+                    preparedMask.UnlockBits(bmpData2);
                 }
             }
         }
@@ -63,7 +70,7 @@ namespace MusicBeePlugin
             if (_mask != null)
             {
 
-                this.preparedMask = Create32bppImageAndClearAlpha(_mask);
+                preparedMask = Create32bppImageAndClearAlpha(_mask);
 
                 BitmapData bmpData = preparedMask.LockBits(new Rectangle(0, 0, preparedMask.Width, preparedMask.Height), ImageLockMode.ReadWrite, preparedMask.PixelFormat);
 
@@ -96,10 +103,10 @@ namespace MusicBeePlugin
 
                 }
                 System.Runtime.InteropServices.Marshal.Copy(preparedMaskRGBData, 0, bmpData.Scan0, preparedMaskRGBData.Length);
-                this.preparedMask.UnlockBits(bmpData);
+                preparedMask.UnlockBits(bmpData);
                 //this.spriteMask.Image = preparedMask;
                 // if the loaded image is available, we have everything to compute the masked image
-                if (this._image != null)
+                if (_image != null)
                 {
                     PrepareMaskedImage();
                 }
@@ -261,6 +268,37 @@ namespace MusicBeePlugin
             return Color.FromArgb(255 - sampleColor.R, 255 - sampleColor.G, 255 - sampleColor.B);
         }
 
+        public static Color GetBitmapAverageColor(Bitmap img)
+        {
+            int avgR = 0, avgG = 0, avgB = 0;
+            int blurPixelCount = 0;
+
+            for (int y = 0; y < img.Height; y++)
+            {
+                for (int x = 0; x < img.Width; x++)
+                {
+                    Color pixel = img.GetPixel(x, y);
+                    avgR += pixel.R;
+                    avgG += pixel.G;
+                    avgB += pixel.B;
+
+                    blurPixelCount++;
+                }
+            }
+
+            avgR = avgR * 3 / 2 / blurPixelCount;
+            avgR = avgR > 255 ? 255 : avgR;
+
+            avgG = avgG * 3 / 2 / blurPixelCount;
+            avgG = avgG > 255 ? 255 : avgG;
+
+            avgB = avgB * 3 / 2 / blurPixelCount;
+            avgB = avgB > 255 ? 255 : avgB;
+
+
+            return Color.FromArgb(avgR, avgG, avgB);
+        }
+
         public static Bitmap GetSolidImageByBitmapMask(Color accentColor, Bitmap maskBitmap)
         {
             Bitmap templateBitmap = new Bitmap(maskBitmap.Width, maskBitmap.Height, maskBitmap.PixelFormat);
@@ -272,8 +310,32 @@ namespace MusicBeePlugin
 
             AlphaBlendedImage alphaBlendedImage = new AlphaBlendedImage(templateBitmap, maskBitmap);
 
-            return  alphaBlendedImage.AlphaBlendImages();
+            return alphaBlendedImage.AlphaBlendImages();
+        }
 
+        public static Bitmap GetSolidImageByBitmapMask(Color accentColor, Bitmap maskBitmap, int newWidth, int newHeight)
+        {
+
+            Bitmap scaledBitmap = new Bitmap(newWidth, newHeight, maskBitmap.PixelFormat);
+            using (Graphics gfx = Graphics.FromImage(scaledBitmap))
+            {
+                gfx.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                gfx.Clear(accentColor);
+            }
+
+            Bitmap scaledMaskedBitmap = new Bitmap(newWidth, newHeight, maskBitmap.PixelFormat);
+            using (Graphics gfx = Graphics.FromImage(scaledMaskedBitmap))
+            {
+                gfx.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                gfx.DrawImage(maskBitmap, -1, -1, newWidth + 1, newHeight + 1);
+            }
+
+            AlphaBlendedImage alphaBlendedImage = new AlphaBlendedImage(scaledBitmap, scaledMaskedBitmap);
+
+            scaledBitmap.Dispose();
+            scaledMaskedBitmap.Dispose();
+
+            return alphaBlendedImage.AlphaBlendImages();
         }
     }
 }

@@ -274,7 +274,7 @@
     <value>675, 17</value>
   </data>
   <data name="smartOperationCheckBox.Text" xml:space="preserve">
-    <value>Умное копирование (играет роль только при работе с тегами 'Исполнитель'/'Композитор', содержащими несколько значений)</value>
+    <value>Умное копирование (играет роль только при работе с тегами "Исполнитель"/"Композитор", содержащими несколько значений)</value>
   </data>
   <data name="Track.HeaderText" xml:space="preserve">
     <value>Трек</value>

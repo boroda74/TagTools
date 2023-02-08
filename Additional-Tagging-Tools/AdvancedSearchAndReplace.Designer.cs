@@ -113,7 +113,7 @@ namespace MusicBeePlugin
             this.parameterTagList = new System.Windows.Forms.ComboBox();
             this.playlistComboBox = new System.Windows.Forms.ComboBox();
             this.conditionCheckBox = new System.Windows.Forms.CheckBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.autoApplyPresetslabel = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
             this.buttonSaveClose = new System.Windows.Forms.Button();
@@ -151,8 +151,6 @@ namespace MusicBeePlugin
             this.customText4Box = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
             this.idTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
             this.preserveValuesTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-
-            this.filterComboBox = new ComboBoxPlus();
 
 
             InterpolationMode defaultInterpolationMode = InterpolationMode.HighQualityBicubic;
@@ -637,7 +635,7 @@ namespace MusicBeePlugin
             this.panel1.Controls.Add(this.playlistComboBox);
             this.panel1.Controls.Add(this.conditionCheckBox);
             this.panel1.Controls.Add(this.presetList);
-            this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.autoApplyPresetslabel);
             this.panel1.Name = "panel1";
             // 
             // userPresetPictureBox
@@ -838,12 +836,12 @@ namespace MusicBeePlugin
             this.conditionCheckBox.UseVisualStyleBackColor = true;
             this.conditionCheckBox.CheckedChanged += new System.EventHandler(this.conditionCheckBox_CheckedChanged);
             // 
-            // label5
+            // autoApplyPresetslabel
             // 
-            resources.ApplyResources(this.label5, "label5");
-            this.label5.AutoEllipsis = true;
-            this.label5.Name = "label5";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
+            resources.ApplyResources(this.autoApplyPresetslabel, "autoApplyPresetslabel");
+            this.autoApplyPresetslabel.AutoEllipsis = true;
+            this.autoApplyPresetslabel.Name = "autoApplyPresetslabel";
+            this.autoApplyPresetslabel.Click += new System.EventHandler(this.label5_Click);
             // 
             // groupBox3
             // 
@@ -996,7 +994,7 @@ namespace MusicBeePlugin
         private System.Windows.Forms.ComboBox playlistComboBox;
         private System.Windows.Forms.CheckBox conditionCheckBox;
         private System.Windows.Forms.CheckedListBox presetList;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label autoApplyPresetslabel;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.Button buttonPreview;

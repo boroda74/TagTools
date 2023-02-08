@@ -38,7 +38,7 @@ namespace MusicBeePlugin
         {
             base.initializeForm();
 
-            Plugin.FillList(sourceTagList.Items, false, false, false, false);
+            Plugin.FillListByTagNames(sourceTagList.Items, false, false, false, false);
             sourceTagList.Text = Plugin.SavedSettings.reencodeTagSourceTagName;
 
             defaultEncoding = Encoding.Default;
@@ -228,14 +228,14 @@ namespace MusicBeePlugin
                 row[3] = sourceTagValue;
                 row[4] = newTagValue;
 
-                Invoke(addRowToTable, new Object[] { row });
+                Invoke(addRowToTable, new object[] { row });
 
                 tags.Add(tag);
 
                 previewIsGenerated = true;
             }
 
-            Plugin.SetStatusbarTextForFileOperations(Plugin.ReencodeTagCommandSbText, true, files.Length - 1, files.Length, null, true);
+            Plugin.SetResultingSbText();
         }
 
         private void applyChanges()
@@ -261,7 +261,7 @@ namespace MusicBeePlugin
 
                     tags[i][0] = "";
 
-                    Invoke(processRowOfTable, new Object[] { i });
+                    Invoke(processRowOfTable, new object[] { i });
 
                     Plugin.SetStatusbarTextForFileOperations(Plugin.ReencodeTagCommandSbText, false, i, tags.Count, currentFile);
 
@@ -272,7 +272,7 @@ namespace MusicBeePlugin
 
             Plugin.RefreshPanels(true);
 
-            Plugin.SetStatusbarTextForFileOperations(Plugin.ReencodeTagCommandSbText, false, tags.Count - 1, tags.Count, null, true);
+            Plugin.SetResultingSbText();
         }
 
         private void saveSettings()
@@ -368,7 +368,7 @@ namespace MusicBeePlugin
 
         public override void enableQueryingButtons()
         {
-            dirtyErrorProvider.SetError(buttonPreview, String.Empty);
+            dirtyErrorProvider.SetError(buttonPreview, string.Empty);
         }
 
         public override void disableQueryingButtons()

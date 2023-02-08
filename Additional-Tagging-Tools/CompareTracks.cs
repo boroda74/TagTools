@@ -54,7 +54,7 @@ namespace MusicBeePlugin
             base.initializeForm();
 
             tagNames = new List<string>();
-            Plugin.FillList(tagNames, false, true, false);
+            Plugin.FillListByTagNames(tagNames, false, true, false);
 
             tagIds = new List<Plugin.MetaDataType>();
             for (int i = 0; i < tagNames.Count; i++)

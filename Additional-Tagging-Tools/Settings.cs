@@ -71,7 +71,7 @@ namespace MusicBeePlugin
             playCompletedSoundCheckBox.Checked = !Plugin.SavedSettings.dontPlayCompletedSound;
             playStartedSoundCheckBox.Checked = Plugin.SavedSettings.playStartedSound;
             playStoppedSoundCheckBox.Checked = Plugin.SavedSettings.playCanceledSound;
-            playTickedAsrPresetSoundCheckBox.Checked = !Plugin.SavedSettings.dontPlayTickedAsrPresetSound;
+            playTickedAsrPresetSoundCheckBox.Checked = !Plugin.SavedSettings.dontPlayTickedAutoApplyingAsrLrPresetSound;
 
             unitKBox.Text = Plugin.SavedSettings.unitK;
             unitMBox.Text = Plugin.SavedSettings.unitM;
@@ -104,11 +104,13 @@ namespace MusicBeePlugin
             Plugin.SavedSettings.dontPlayCompletedSound = !playCompletedSoundCheckBox.Checked;
             Plugin.SavedSettings.playStartedSound = playStartedSoundCheckBox.Checked;
             Plugin.SavedSettings.playCanceledSound = playStoppedSoundCheckBox.Checked;
-            Plugin.SavedSettings.dontPlayTickedAsrPresetSound = !playTickedAsrPresetSoundCheckBox.Checked;
+            Plugin.SavedSettings.dontPlayTickedAutoApplyingAsrLrPresetSound = !playTickedAsrPresetSoundCheckBox.Checked;
 
             Plugin.SavedSettings.unitK = unitKBox.Text;
             Plugin.SavedSettings.unitM = unitMBox.Text;
             Plugin.SavedSettings.unitG = unitGBox.Text;
+
+            TagToolsPlugin.SaveSettings();
 
             TagToolsPlugin.addPluginMenuItems();
             TagToolsPlugin.addPluginContextMenuItems();

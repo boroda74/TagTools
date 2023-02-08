@@ -319,9 +319,9 @@ namespace MusicBeePlugin
             tagList.Items.Add("<" + Plugin.TempTagName + " 3>");
             tagList.Items.Add("<" + Plugin.TempTagName + " 4>");
 
-            Plugin.FillList(tagList.Items, tagType); // tagType: true - read only, false - writable
+            Plugin.FillListByTagNames(tagList.Items, tagType); // tagType: true - read only, false - writable
             if (tagType)
-                Plugin.FillListWithProps(tagList.Items);
+                Plugin.FillListByPropNames(tagList.Items);
 
             tagList.Items.Add(Plugin.ClipboardTagName);
 

@@ -51,9 +51,9 @@ namespace MusicBeePlugin
         {
             base.initializeForm();
 
-            removeExceptionButton.Image = Plugin.CrossImage;
+            removeExceptionButton.Image = Plugin.ButtonRemoveImage;
 
-            Plugin.FillList(sourceTagList.Items);
+            Plugin.FillListByTagNames(sourceTagList.Items);
             sourceTagList.Text = Plugin.SavedSettings.changeCaseSourceTagName;
 
             setChangeCaseOptionsRadioButtons(Plugin.SavedSettings.changeCaseFlag);
@@ -506,14 +506,14 @@ namespace MusicBeePlugin
                 row[5] = newTagValue;
                 row[6] = newTagTValue;
 
-                Invoke(addRowToTable, new Object[] { row });
+                Invoke(addRowToTable, new object[] { row });
 
                 tags.Add(tag);
 
                 previewIsGenerated = true;
             }
 
-            Plugin.SetStatusbarTextForFileOperations(Plugin.ChangeCaseCommandSbText, true, files.Length - 1, files.Length, null, true);
+            Plugin.SetResultingSbText();
         }
 
         private void reapplyRules()
@@ -582,7 +582,7 @@ namespace MusicBeePlugin
 
                     tags[i][0] = "";
 
-                    Invoke(processRowOfTable, new Object[] { i });
+                    Invoke(processRowOfTable, new object[] { i });
 
                     Plugin.SetStatusbarTextForFileOperations(Plugin.ChangeCaseCommandSbText, false, i, tags.Count, currentFile);
 
@@ -593,7 +593,7 @@ namespace MusicBeePlugin
 
             Plugin.RefreshPanels(true);
 
-            Plugin.SetStatusbarTextForFileOperations(Plugin.ChangeCaseCommandSbText, false, tags.Count - 1, tags.Count, null, true);
+            Plugin.SetResultingSbText();
         }
 
         private void saveSettings()
@@ -611,6 +611,8 @@ namespace MusicBeePlugin
             Plugin.SavedSettings.wordSplitters = wordSplittersBox.Text;
             Plugin.SavedSettings.alwaysCapitalize1stWord = alwaysCapitalize1stWordCheckBox.Checked;
             Plugin.SavedSettings.alwaysCapitalizeLastWord = alwaysCapitalizeLastWordCheckBox.Checked;
+
+            TagToolsPlugin.SaveSettings();
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
@@ -752,7 +754,7 @@ namespace MusicBeePlugin
         public override void enableQueryingButtons()
         {
             dirtyErrorProvider.SetError(buttonPreview, " ");
-            dirtyErrorProvider.SetError(buttonPreview, String.Empty);
+            dirtyErrorProvider.SetError(buttonPreview, string.Empty);
         }
 
         public override void disableQueryingButtons()

@@ -186,7 +186,7 @@
     <value>False</value>
   </data>
   <data name="exceptionWordsCheckBox.ToolTip" xml:space="preserve">
-    <value>This will exclude excepted words for any change at all. So 'UB40' will stay 'UB40', etc.</value>
+    <value>This will exclude excepted words for any change at all. So "UB40" will stay "UB40", etc.</value>
   </data>
   <data name="lowerCaseRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1829,7 +1829,7 @@
   </data>
   <data name="buttonReapply.ToolTip" xml:space="preserve">
     <value>This command will reapply casing rules (including exceptions) to 
-already generated, but not yet saved 'New tag'</value>
+already generated, but not yet saved "New tag"</value>
   </data>
   <data name="upperCaseRadioButton.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>

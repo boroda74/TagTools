@@ -31,10 +31,10 @@ namespace MusicBeePlugin
             notifyWhenCalculationCompletedCheckBox.Checked = Plugin.SavedSettings.notifyWhenCalculationCompleted;
             considerUnratedCheckBox.Checked = Plugin.SavedSettings.considerUnrated;
 
-            Plugin.FillList(trackRatingTagList.Items);
+            Plugin.FillListByTagNames(trackRatingTagList.Items);
             trackRatingTagList.Text = Plugin.SavedSettings.trackRatingTagName;
 
-            Plugin.FillList(albumRatingTagList.Items);
+            Plugin.FillListByTagNames(albumRatingTagList.Items);
             albumRatingTagList.Text = Plugin.SavedSettings.albumRatingTagName;
         }
 
@@ -57,7 +57,7 @@ namespace MusicBeePlugin
 
                 row[0] = Plugin.GetFileTag(currentFile, Plugin.MetaDataType.AlbumArtist);
                 row[1] = Plugin.GetFileTag(currentFile, Plugin.MetaDataType.Album);
-                row[2] = Plugin.GetFileTag(currentFile, Plugin.GetTagId(Plugin.SavedSettings.trackRatingTagName), false, true);
+                row[2] = Plugin.GetFileTag(currentFile, Plugin.GetTagId(Plugin.SavedSettings.trackRatingTagName), true);
                 row[3] = currentFile;
 
                 tags.Add(row);
@@ -158,7 +158,7 @@ namespace MusicBeePlugin
 
             Plugin.RefreshPanels(true);
 
-            Plugin.SetStatusbarTextForFileOperations(Plugin.CarCommandSbText, false, tags.Count - 1, tags.Count, null, true);
+            Plugin.SetResultingSbText();
 
             if (Plugin.SavedSettings.notifyWhenCalculationCompleted) MessageBox.Show(Plugin.MbForm, Plugin.MsgBackgroundTaskIsCompleted, 
                 null, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -202,7 +202,7 @@ namespace MusicBeePlugin
 
                 string albumArtist = Plugin.GetFileTag(file, Plugin.MetaDataType.AlbumArtist);
                 string album = Plugin.GetFileTag(file, Plugin.MetaDataType.Album);
-                string rating = Plugin.GetFileTag(file, Plugin.GetTagId(Plugin.SavedSettings.trackRatingTagName), false, true);
+                string rating = Plugin.GetFileTag(file, Plugin.GetTagId(Plugin.SavedSettings.trackRatingTagName), true);
 
                 if (currentAlbumArtist == albumArtist && currentAlbum == album)
                 {
@@ -259,6 +259,8 @@ namespace MusicBeePlugin
 
             Plugin.SavedSettings.trackRatingTagName = trackRatingTagList.Text;
             Plugin.SavedSettings.albumRatingTagName = albumRatingTagList.Text;
+
+            TagToolsPlugin.SaveSettings();
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
