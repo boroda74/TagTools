@@ -70,7 +70,7 @@ namespace MusicBeePlugin
 
                 sourceTags = (string[])sourcePreset.sourceTags.Clone();
                 destinationTags = (string[])sourcePreset.destinationTags.Clone();
-                functionIds = new string[sourcePreset.functionIds.Length];
+                functionIds = (string[])sourcePreset.functionIds.Clone();
 
                 conditionIsChecked = sourcePreset.conditionIsChecked;
                 conditionField = sourcePreset.conditionField;

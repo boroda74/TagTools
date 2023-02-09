@@ -6,7 +6,7 @@ $Char(hexadecimal code), which returns Unicode character with given hexadecimal 
 
 *Note:*
 
-Use these functions like native MusicBee functions (i.e. without any initial setup required by $ALR() and $ASR() functions). 
+Use these functions like native MusicBee functions (i.e. without any initial setup required by $LR() and $ASR() functions). 
 Everywhere you can use either literals or MusicBee tags of appropriate types as function parameters, e.g. $NumberOfDays(&lt;Year&gt;,&lt;Original Year&gt;) or $SubDateTime(&lt;Date Added&gt;,01/01/2000). 
 
 <pre>
