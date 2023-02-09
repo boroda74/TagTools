@@ -1,11 +1,12 @@
 **ADDITIONAL TAGGING & REPORTING TOOLS PLUGIN**
 <br/>
 
-*Note:* 
+*Note:*
 
 If you are familiar with plugin update process, you can always download *latest plugin version [here][4]*. Copy the file "mb_TagTools.dll" from the archive "mb_TagTools_latest.zip" to MusicBee  "Plugins" folder, and overwrite the existing file.
+<br/>
 
-*Note:* 
+*Note:*
 
 Pay attention to tool tips over buttons/fields in plugin windows.
 <br/>
@@ -26,7 +27,7 @@ Allows you to copy one tag to another for selected files. Its possible to append
 
 *Note:*
 
-There are a number of source pseudo tags which can be copied to (for example) custom tags, e.g. &lt;Date Created&gt; is file creation date.
+- There are a number of source pseudo tags which can be copied to (for example) custom tags, e.g. &lt;Date Created&gt; is file creation date.
 <br/>
 
 **Swap Tags**
@@ -91,6 +92,7 @@ See two predefined presets "LIBRARY TOTALS" and "LIBRARY AVERAGES" of "Library R
 *LR virtual tag functions may be even more useful if they are used in grouping header in "Albums and Tracks" view.*
 
 Make sure that you haven't *accidentally* checked some "Library Reports" presets for auto-applying. You will see warning message at the top of "Library Reports" window if any presets are marked as auto-applied:
+<br/>
 
 [Auto-applied preset view example][2]
 <br/>
@@ -136,6 +138,7 @@ To use this function go to main ASR window, select preset and define preset id (
 - All $ASR virtual tag functions are calculated, updated and displayed dynamically.
 
 Make sure that you haven't *accidentally* checked some "Advanced Search & Replace" presets for auto-applying. You will see warning message at the top of "Advanced Search & Replace" window if any presets are marked as auto-applied:
+<br/>
 
 [Auto-applied preset view example][3]
 <br/>
@@ -190,7 +193,7 @@ These commands allow to (auto)backup tags of all tracks in your library and rest
 
 *Note:*
 
-"Tag History" is available in track context menu only. 
+- "Tag History" is available in track context menu only. 
 
 ----
 
@@ -198,6 +201,7 @@ These commands allow to (auto)backup tags of all tracks in your library and rest
 <br/>
 
 This plugin introduces several new virtual tag functions (they also can be used in various filename templates, e.g. in the file organizer).
+<br/>
 
 *Note:*
 
