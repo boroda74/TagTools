@@ -3190,7 +3190,7 @@ namespace MusicBeePlugin
 
                     if (developerExport)
                     {
-                        presetFilename = currentPresetKVPair.Value.guid.ToString("B");
+                        presetFilename = "!" + currentPresetKVPair.Value.guid.ToString("B");
                     }
                     else
                     {
@@ -3204,7 +3204,7 @@ namespace MusicBeePlugin
 
             if (developerExport && Plugin.MSR != null)
             {
-                string presetFilePath = @"\\?\" + Path.Combine(dialog.SelectedPath, "口" + Plugin.MSR.guid.ToString() + Plugin.ASRPresetExtension);
+                string presetFilePath = @"\\?\" + Path.Combine(dialog.SelectedPath, "!" + Plugin.MSR.guid.ToString("B") + Plugin.ASRPresetExtension);
                 exportPreset(Plugin.MSR, presetFilePath);
             }
         }
