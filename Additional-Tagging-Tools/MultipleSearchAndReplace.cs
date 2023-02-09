@@ -799,6 +799,11 @@ namespace MusicBeePlugin
 
             customMSR.savePreset(Path.Combine(PresetsPath, customMSR.getSafeFileName() + Plugin.ASRPresetExtension));
 
+            if (Presets.TryGetValue(customMSR.guid, out _))
+                Presets.Remove(customMSR.guid);
+
+            Presets.Add(customMSR.guid, customMSR);
+
             if (autoApplyCheckBox.Checked && !Plugin.SavedSettings.autoAppliedAsrPresetGuids.Contains(customMSR.guid))
             {
                 Plugin.AsrAutoAppliedPresets.Add(customMSR);
@@ -808,11 +813,6 @@ namespace MusicBeePlugin
             {
                 Plugin.AsrAutoAppliedPresets.Remove(customMSR);
                 Plugin.SavedSettings.autoAppliedAsrPresetGuids.Remove(customMSR.guid);
-            }
-
-            if (!presetExists)
-            { 
-                Presets.Remove(customMSR.guid);
             }
 
             if (loadComboBox.SelectedIndex > 0)
