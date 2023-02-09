@@ -22,6 +22,7 @@ Extract content of the downloaded archive to a temporary folder of your choice. 
 <br/>
 
 **Copy Tag**
+<br/>
 
 Allows you to copy one tag to another for selected files. Its possible to append one tag to the end of another tag or add one tag to the beginning of another tag placing custom text between them. Also its possible to use &lt;Null&gt; pseudo tag as the source to append static text to the destination tag.
 
@@ -31,6 +32,7 @@ Allows you to copy one tag to another for selected files. Its possible to append
 <br/>
 
 **Swap Tags**
+<br/>
 
 Swaps any two tags for selected files.
 
@@ -41,6 +43,7 @@ Swaps any two tags for selected files.
 <br/>
 
 **Change Case**
+<br/>
 
 Changes letter case of a tag according to rather sophisticated rules for selected tracks.
 
@@ -51,6 +54,7 @@ Changes letter case of a tag according to rather sophisticated rules for selecte
 <br/>
 
 **Library Reports**
+<br/>
 
 Allows to export some library statistics for currently displayed tracks to external file: HTML document (as a table), M3U playlist (its only possible to export file paths to playlists, but considering filtering capability of command this option may be useful), CSV file. This may be used for reimporting table in spreadsheet editor (including HTML table - its the easiest way to import track list to MS Excel) for printing statistics or just content of your library, filtered content of library or your playlists.
 
@@ -98,6 +102,7 @@ Make sure that you haven't *accidentally* checked some "Library Reports" presets
 <br/>
 
 **Auto Rate**
+<br/>
 
 Calculates auto rating on the basis of the number of plays per day for selected tracks. Also its possible to auto rate all tracks of your library on MusicBee startup or update auto rating if currently played track is changed.
 
@@ -105,16 +110,19 @@ Another option is to calculate auto ratings defining the percentage of tracks of
 <br/>
 
 **Reencode Tag**
+<br/>
 
 Even ID3V2 tags are usually stored not in UTF encoding (which is independent of language), but sometimes they are stored using national code pages. In this case reading ID3 tags is correct only if tags use the same encoding (in general - language) as your windows default encoding (code page). This command allows you to convert any incorrectly interpreted not UTF tags to UTF tags. In this command "initial encoding" is the suggested actual encoding of tag and the "used encoding" is incorrectly interpreted encoding of tag (Usually it's your default windows encoding. The only sense to change "used encoding" is if you get music file from another computer with different regional settings).
 <br/>
 
 **Reencode Tags**
+<br/>
 
 Command to re-encode all tags of selected tracks at ones. Cuesheets are supported.
 <br/>
 
 **Advanced Search & Replace**
+<br/>
 
 - "Advanced Search and Replace" works only with regular expressions.
 - "Advanced Search and Replace" has savable/customizable presets.
@@ -144,16 +152,19 @@ Make sure that you haven't *accidentally* checked some "Advanced Search & Replac
 <br/>
 
 **Multiple Search & Replace**
+<br/>
 
 Multi-step search and replace. You can make unlimited number of replacements in the same source tag and write result to a given destination tag. MSR presets can be saved as special ASR presets and can be ticked in ASR for auto-applying if any tags are changed or if new tracks are added to the library. 
 <br/>
 
 **Calculate Average Album Ratings**
+<br/>
 
 Command averages all the ratings of the individual tracks on the album writing result in an Album rating. Any tags can be used as album and track ratings. This may be useful for calculating average album rating for *auto rating* stored in custom tag.
 <br/>
 
 **Compare Tracks**
+<br/>
 
 Command provides easy way to compare tags of 2 (or more) tracks.
 <br/>
@@ -164,6 +175,7 @@ Copies specified tags from selected files to clipboard.
 <br/>
 
 **Paste Tags from Clipboard**
+<br/>
 
 Pastes copied to clipboard tags to selected files from clipboard.
 
@@ -172,8 +184,10 @@ Pastes copied to clipboard tags to selected files from clipboard.
 - It's possible to copy tags from one file and paste them to more than one file.
 - It's impossible to copy tags from several files and paste them to another number of files.
 - It's possible to copy tags in MusicBee and paste them to another application like Microsoft Excel or Notepad++.
+<br/>
 
 **Last Skipped Date/Time**
+<br/>
 
 Plugin has the option to store "last skipped date/time" in any writable tag (e.g. some custom tag). Go to MusicBee menu> Edit> Preferences> Plugins> Additional Tagging Tools> Configure. Click the button "Save last skipped date..." at the bottom of plugin settings window.
 
@@ -321,11 +335,13 @@ Excepted words will be unchanged, not become lowercased! To lowercase them,
 <br/>
 
 **License**
+<br/>
 
 Do all you want with plugin binary and source code at your own risk.
 <br/>
 
 **Backup download**
+<br/>
 
 [Google Drive, all my plugins and their sources][1]
 
