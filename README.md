@@ -70,10 +70,9 @@ To use this function open library reports window, create one or several presets,
 
 "Library Reports"  virtual tag functions allow to gather and display in the main panel some library statistics for currently displayed tracks.
 
-*Notes:*
+*Note:*
 
 - All $LR virtual tag functions are calculated, updated and displayed dynamically.
-- For all aggregated functions except for "Count" function please make sure that all (parameter) tag values used by function have the same measurement units (KB, MB, etc.) or adjust units in "Edit> Preferences> Plugins" window (not required if both MusicBee and Windows localisations are English or Russian).
 
 *Example 1*
 
