@@ -1910,8 +1910,9 @@ namespace MusicBeePlugin
                     parameter2Names.Add(null);
 
 
+                destinationTagList.SelectedItem = Plugin.NullTagName;
                 savedFunctionIds.Add("");
-                savedDestinationTagsNames.Add((string)destinationTagList.Items[0]);
+                savedDestinationTagsNames.Add((string)destinationTagList.SelectedItem);
 
                 sourceFieldComboBox.Items.Add(column.HeaderText);
                 if (sourceFieldComboBox.SelectedIndex == -1)
