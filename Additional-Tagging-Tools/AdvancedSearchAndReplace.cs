@@ -1589,6 +1589,15 @@ namespace MusicBeePlugin
             buttonCloseToolTip = toolTip1.GetToolTip(buttonClose);
             toolTip1.SetToolTip(buttonClose, "");
 
+            int splitterDistance;
+
+            loadWindowSizesPositions(true, out _, out _, out _, out _, out _, out _, out splitterDistance);
+
+            if (splitterDistance > 0)
+            {
+                splitContainer1.SplitterDistance = splitterDistance;
+            }
+
             addRowToTable = previewList_AddRowToTable;
             processRowOfTable = previewList_ProcessRowOfTable;
 
@@ -3164,7 +3173,7 @@ namespace MusicBeePlugin
             exportPreset(preset, dialog.FileName);
         }
 
-        private void buttonExportCustom_Click(object sender, EventArgs e)
+        private void buttonExportUser_Click(object sender, EventArgs e)
         {
             bool developerExport = false;
             if (Plugin.DeveloperMode && ModifierKeys == Keys.Control)
@@ -3687,12 +3696,12 @@ namespace MusicBeePlugin
             MessageBox.Show(this, message, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void buttonImportNew_Click(object sender, EventArgs e)
+        private void buttonInstallNew_Click(object sender, EventArgs e)
         {
             install(false);
         }
 
-        private void buttonImportAll_Click(object sender, EventArgs e)
+        private void buttonInstallAll_Click(object sender, EventArgs e)
         {
             install(true);
         }
@@ -3728,28 +3737,28 @@ namespace MusicBeePlugin
             preset.setCustomizationsFlag(this, backupedPreset);
         }
 
-        private void parameterTag4List_SelectedIndexChanged(object sender, EventArgs e)
+        private void parameterTag4_SelectedIndexChanged(object sender, EventArgs e)
         {
             preset.parameterTag4Id = getTagId(parameterTag4List.Text);
             nameColumns();
             preset.setCustomizationsFlag(this, backupedPreset);
         }
 
-        private void parameterTag5List_SelectedIndexChanged(object sender, EventArgs e)
+        private void parameterTag5_SelectedIndexChanged(object sender, EventArgs e)
         {
             preset.parameterTag5Id = getTagId(parameterTag5List.Text);
             nameColumns();
             preset.setCustomizationsFlag(this, backupedPreset);
         }
 
-        private void parameterTag6List_SelectedIndexChanged(object sender, EventArgs e)
+        private void parameterTag6_SelectedIndexChanged(object sender, EventArgs e)
         {
             preset.parameterTag6Id = getTagId(parameterTag6List.Text);
             nameColumns();
             preset.setCustomizationsFlag(this, backupedPreset);
         }
 
-        private void customText_TextChanged(object sender, EventArgs e)
+        private void customTextBox_TextChanged(object sender, EventArgs e)
         {
             preset.customText = customTextBox.Text;
             nameColumns();
@@ -4450,8 +4459,11 @@ namespace MusicBeePlugin
                     == DialogResult.No)
                 {
                     e.Cancel = true;
+                    return;
                 }
             }
+
+            saveWindowSizesPositions(0, 0, 0, 0, 0, 0, splitContainer1.SplitterDistance);
         }
 
         private void filterComboBox_SelectedIndexChanged(object sender, EventArgs e)

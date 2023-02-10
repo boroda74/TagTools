@@ -555,7 +555,7 @@ namespace MusicBeePlugin
             }
         }
 
-        protected void loadWindowSizesPositions(bool loadColumnWidthsOnly, out int column1Width, out int column2Width, out int column3Width, out int table2column1Width, out int table2column2Width, out int table2column3Width)
+        protected void loadWindowSizesPositions(bool dontLoadWindowPositionSizeState, out int column1Width, out int column2Width, out int column3Width, out int table2column1Width, out int table2column2Width, out int table2column3Width, out int splitterDistance)
         {
             string fullName = GetType().FullName;
             foreach (var commandWindow in Plugin.SavedSettings.commandWindows)
@@ -564,7 +564,7 @@ namespace MusicBeePlugin
                 {
                     if (commandWindow.w != 0)
                     {
-                        if (!loadColumnWidthsOnly)
+                        if (!dontLoadWindowPositionSizeState)
                         {
                             DesktopLocation = new Point(commandWindow.x, commandWindow.y);
 
@@ -581,6 +581,8 @@ namespace MusicBeePlugin
                         column2Width = commandWindow.column2Width;
                         column3Width = commandWindow.column3Width;
 
+                        splitterDistance = commandWindow.splitterDistance;
+
                         table2column1Width = commandWindow.table2column1Width;
                         table2column2Width = commandWindow.table2column2Width;
                         table2column3Width = commandWindow.table2column3Width;
@@ -594,12 +596,14 @@ namespace MusicBeePlugin
             column2Width = 0;
             column3Width = 0;
 
+            splitterDistance = 0;
+
             table2column1Width = 0;
             table2column2Width = 0;
             table2column3Width = 0;
         }
 
-        protected void saveWindowSizesPositions(int column1Width = 0, int column2Width = 0, int column3Width = 0, int table2column1Width = 0, int table2column2Width = 0, int table2column3Width = 0)
+        protected void saveWindowSizesPositions(int column1Width = 0, int column2Width = 0, int column3Width = 0, int table2column1Width = 0, int table2column2Width = 0, int table2column3Width = 0, int splitterDistance = 0)
         {
             lock (Plugin.OpenedForms)
             {
@@ -644,17 +648,22 @@ namespace MusicBeePlugin
                 currentCommandWindow.w = Size.Width;
                 currentCommandWindow.h = Size.Height;
                 currentCommandWindow.max = false;
+            }
 
-                if (column1Width > 0)
-                {
-                    currentCommandWindow.column1Width = column1Width;
-                    currentCommandWindow.column2Width = column2Width;
-                    currentCommandWindow.column3Width = column3Width;
+            if (column1Width > 0)
+            {
+                currentCommandWindow.column1Width = column1Width;
+                currentCommandWindow.column2Width = column2Width;
+                currentCommandWindow.column3Width = column3Width;
 
-                    currentCommandWindow.table2column1Width = table2column1Width;
-                    currentCommandWindow.table2column2Width = table2column2Width;
-                    currentCommandWindow.table2column3Width = table2column3Width;
-                }
+                currentCommandWindow.table2column1Width = table2column1Width;
+                currentCommandWindow.table2column2Width = table2column2Width;
+                currentCommandWindow.table2column3Width = table2column3Width;
+            }
+
+            if (splitterDistance > 0)
+            {
+                currentCommandWindow.splitterDistance = splitterDistance;
             }
         }
 
@@ -662,7 +671,7 @@ namespace MusicBeePlugin
         {
             //return; //For debbuging
 
-            loadWindowSizesPositions(false, out _, out _, out _, out _, out _, out _);
+            loadWindowSizesPositions(false, out _, out _, out _, out _, out _, out _, out _);
         }
     }
 }

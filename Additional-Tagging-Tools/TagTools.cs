@@ -27,6 +27,8 @@ namespace MusicBeePlugin
         public int column2Width;
         public int column3Width;
 
+        public int splitterDistance;
+
         public int table2column1Width;
         public int table2column2Width;
         public int table2column3Width;

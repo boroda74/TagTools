@@ -1321,7 +1321,7 @@ namespace MusicBeePlugin
             Plugin.SetResultingSbText(appliedPreset.getName(), true, true);
         }
 
-        public void autoApplyPresetsOnStartup()
+        public void autoApplyReportPresetsOnStartup()
         {
             lock (Plugin.SavedSettings.reportsPresets)
             {
@@ -1376,7 +1376,7 @@ namespace MusicBeePlugin
             Plugin.RefreshPanels(true);
         }
 
-        public void applyPresetToLibrary()
+        public void applyReportPresetToLibrary()
         {
             lock (Plugin.SavedSettings.reportsPresets)
             {
@@ -1397,7 +1397,7 @@ namespace MusicBeePlugin
             Plugin.RefreshPanels(true);
         }
 
-        public void applyPresetToSelectedTracks()
+        public void applyReportPresetToSelectedTracks()
         {
             lock (Plugin.SavedSettings.reportsPresets)
             {
@@ -1446,7 +1446,7 @@ namespace MusicBeePlugin
                 BackgroundTaskIsInProgress = true;
             }
 
-            Plugin.MbApiInterface.MB_CreateBackgroundTask(Plugin.LibraryReportsCommandForAutoApplying.autoApplyPresetsOnStartup, null);
+            Plugin.MbApiInterface.MB_CreateBackgroundTask(Plugin.LibraryReportsCommandForAutoApplying.autoApplyReportPresetsOnStartup, null);
         }
 
         public static void ApplyReportPreset(ReportPreset preset)
@@ -1466,12 +1466,12 @@ namespace MusicBeePlugin
             Plugin.LibraryReportsCommandForHotkeys.appliedPreset = preset;
             if (preset.applyToSelectedTracks)
             {
-                Plugin.MbApiInterface.MB_CreateBackgroundTask(Plugin.LibraryReportsCommandForHotkeys.applyPresetToSelectedTracks, null);
+                Plugin.MbApiInterface.MB_CreateBackgroundTask(Plugin.LibraryReportsCommandForHotkeys.applyReportPresetToSelectedTracks, null);
             }
             else
             {
 
-                Plugin.MbApiInterface.MB_CreateBackgroundTask(Plugin.LibraryReportsCommandForHotkeys.applyPresetToLibrary, null);
+                Plugin.MbApiInterface.MB_CreateBackgroundTask(Plugin.LibraryReportsCommandForHotkeys.applyReportPresetToLibrary, null);
             }
         }
 
@@ -1656,7 +1656,6 @@ namespace MusicBeePlugin
 
 
             //Setting themed images
-            setIdButton.Image = Plugin.ButtonSetImage;
             clearIdButton.Image = Plugin.ButtonRemoveImage;
 
 
@@ -1768,6 +1767,15 @@ namespace MusicBeePlugin
             formatComboBox.SelectedIndex = Plugin.SavedSettings.filterIndex - 1;
 
             previewTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+
+            int splitterDistance;
+
+            loadWindowSizesPositions(true, out _, out _, out _, out _, out _, out _, out splitterDistance);
+
+            if (splitterDistance > 0)
+            {
+                splitContainer1.SplitterDistance = splitterDistance;
+            }
 
             addRowToTable = previewList_AddRowToTable;
             updateTable = previewList_updateTable;
@@ -2882,7 +2890,10 @@ namespace MusicBeePlugin
             if (!continueAndloseUnsavedChangesIfAnyConfirmation())
             {
                 e.Cancel = true;
+                return;
             }
+
+            saveWindowSizesPositions(0, 0, 0, 0, 0, 0, splitContainer1.SplitterDistance);
         }
 
         private void sourceTagList_ItemCheck(object sender, ItemCheckEventArgs e)
@@ -3344,7 +3355,6 @@ namespace MusicBeePlugin
                 sourceFieldComboBox.Enabled = false;
                 destinationTagList.Enabled = false;
                 idTextBox.Enabled = false;
-                setIdButton.Enabled = false;
                 clearIdButton.Enabled = false;
 
                 destinationTagList.SelectedIndex = -1;
@@ -3357,7 +3367,6 @@ namespace MusicBeePlugin
                 sourceFieldComboBox.Enabled = true;
                 destinationTagList.Enabled = true;
                 idTextBox.Enabled = true;
-                setIdButton.Enabled = true;
                 clearIdButton.Enabled = true;
             }
 

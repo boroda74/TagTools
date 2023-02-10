@@ -86,11 +86,7 @@ namespace MusicBeePlugin
             int column2Width;
             int column3Width;
 
-            int table2column1Width;
-            int table2column2Width;
-            int table2column3Width;
-
-            loadWindowSizesPositions(true, out column1Width, out column2Width, out column3Width, out table2column1Width, out table2column2Width, out table2column3Width);
+            loadWindowSizesPositions(true, out column1Width, out column2Width, out column3Width, out _, out _, out _, out _);
 
             if (column1Width > 0)
             {

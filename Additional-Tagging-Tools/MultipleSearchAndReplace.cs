@@ -88,11 +88,13 @@ namespace MusicBeePlugin
             int column2Width;
             int column3Width;
 
+            int splitterDistance;
+
             int table2column1Width;
             int table2column2Width;
             int table2column3Width;
 
-            loadWindowSizesPositions(true, out column1Width, out column2Width, out column3Width, out table2column1Width, out table2column2Width, out table2column3Width);
+            loadWindowSizesPositions(true, out column1Width, out column2Width, out column3Width, out table2column1Width, out table2column2Width, out table2column3Width, out splitterDistance);
 
             if (column1Width > 0)
             {
@@ -103,6 +105,11 @@ namespace MusicBeePlugin
                 templateTable.Columns[0].Width = table2column1Width;
                 templateTable.Columns[3].Width = table2column2Width;
                 templateTable.Columns[4].Width = table2column3Width;
+            }
+
+            if (splitterDistance > 0)
+            {
+                splitContainer1.SplitterDistance = splitterDistance;
             }
 
             customMSR = null;
@@ -494,8 +501,6 @@ namespace MusicBeePlugin
 
         private void saveSettings()
         {
-            saveWindowSizesPositions(previewTable.Columns[1].Width, previewTable.Columns[2].Width, previewTable.Columns[3].Width, templateTable.Columns[0].Width, templateTable.Columns[3].Width, templateTable.Columns[4].Width);
-
             Plugin.SavedSettings.copySourceTagName = sourceTagList.Text;
             Plugin.SavedSettings.copyDestinationTagName = destinationTagList.Text;
 
@@ -1060,6 +1065,13 @@ namespace MusicBeePlugin
 
 
             TagToolsPlugin.SaveSettings();
+        }
+
+        private void MultipleSearchAndReplaceCommand_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            saveWindowSizesPositions(previewTable.Columns[1].Width, previewTable.Columns[2].Width, previewTable.Columns[3].Width, 
+                templateTable.Columns[0].Width, templateTable.Columns[3].Width, templateTable.Columns[4].Width,
+                splitContainer1.SplitterDistance);
         }
     }
 }
