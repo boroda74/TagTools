@@ -1653,6 +1653,7 @@ namespace MusicBeePlugin
             var addedHeight = 3; // Some appropriate value, greater than the field's default of 2
 
             heightField.SetValue(presetsBox, addedHeight); // Where "presetsBox" is your CheckedListBox
+            heightField.SetValue(sourceTagList, 5); // Where "sourceTagList" is your CheckedListBox
 
 
             //Setting themed images
