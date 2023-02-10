@@ -46,7 +46,7 @@ namespace MusicBeePlugin
         {
             base.initializeForm();
 
-            versionLabel.Text += about.VersionMajor + "." + about.VersionMinor + "." + about.Revision;
+            versionLabel.Text = Plugin.PluginVersion;
 
             contextMenuCheckBox.Checked = !Plugin.SavedSettings.dontShowContextMenu;
 
