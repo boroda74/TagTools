@@ -119,14 +119,14 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1000, 661</value>
+    <value>998, 661</value>
   </data>
   <data name="uncheckAllFiltersPictureBox.Error" xml:space="preserve">
     <value />
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="uncheckAllFiltersPictureBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="uncheckAllFiltersPictureBox.IconPadding" type="System.Int32, mscorlib">
@@ -142,7 +142,7 @@
     <value />
   </data>
   <data name="hotkeyPictureBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="hotkeyPictureBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -160,7 +160,7 @@
     <value />
   </data>
   <data name="functionIdPictureBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="functionIdPictureBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -178,7 +178,7 @@
     <value />
   </data>
   <data name="playlistPictureBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="playlistPictureBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -196,7 +196,7 @@
     <value />
   </data>
   <data name="userPictureBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="userPictureBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -214,7 +214,7 @@
     <value />
   </data>
   <data name="customizedPictureBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="customizedPictureBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -232,7 +232,7 @@
     <value />
   </data>
   <data name="predefinedPictureBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="predefinedPictureBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -250,7 +250,7 @@
     <value />
   </data>
   <data name="tickedOnlyPictureBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="tickedOnlyPictureBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -268,7 +268,7 @@
     <value />
   </data>
   <data name="filterComboBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="filterComboBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -316,7 +316,7 @@
     <value />
   </data>
   <data name="clearSearchButton.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="clearSearchButton.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -331,7 +331,7 @@
     <value />
   </data>
   <data name="searchTextBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="searchTextBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -349,7 +349,7 @@
     <value />
   </data>
   <data name="pictureBox1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="pictureBox1.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -575,7 +575,7 @@
     <value />
   </data>
   <data name="autoApplyPresetslabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="autoApplyPresetslabel.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -590,7 +590,7 @@
     <value />
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>1008, 690</value>
+    <value>1006, 690</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Дополнительный поиск и замена</value>
@@ -1208,7 +1208,7 @@
     <value />
   </data>
   <data name="userPresetPictureBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="userPresetPictureBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1223,7 +1223,7 @@
     <value />
   </data>
   <data name="customizedPresetPictureBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="customizedPresetPictureBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1238,7 +1238,7 @@
     <value />
   </data>
   <data name="label4.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="label4.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1259,7 +1259,7 @@
     <value />
   </data>
   <data name="label3.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="label3.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1280,7 +1280,7 @@
     <value />
   </data>
   <data name="label2.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="label2.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1301,7 +1301,7 @@
     <value />
   </data>
   <data name="preserveValuesTextBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="preserveValuesTextBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1319,7 +1319,7 @@
     <value />
   </data>
   <data name="applyToPlayingTrackCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="applyToPlayingTrackCheckBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1337,7 +1337,7 @@
     <value />
   </data>
   <data name="clearIdButton.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="clearIdButton.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1352,7 +1352,7 @@
     <value />
   </data>
   <data name="idTextBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="idTextBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1370,7 +1370,7 @@
     <value />
   </data>
   <data name="label1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="label1.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1391,7 +1391,7 @@
     <value />
   </data>
   <data name="assignHotkeyCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="assignHotkeyCheckBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1415,7 +1415,7 @@
     <value />
   </data>
   <data name="descriptionBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="descriptionBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1424,7 +1424,7 @@
     <value>4, 14</value>
   </data>
   <data name="descriptionBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>980, 55</value>
+    <value>976, 55</value>
   </data>
   <data name="descriptionBox.ToolTip" xml:space="preserve">
     <value />
@@ -1433,16 +1433,16 @@
     <value />
   </data>
   <data name="groupBox1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="groupBox1.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 291</value>
+    <value>4, 291</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>989, 74</value>
+    <value>985, 74</value>
   </data>
   <data name="groupBox1.Text" xml:space="preserve">
     <value>Описание пресета</value>
@@ -1454,7 +1454,7 @@
     <value />
   </data>
   <data name="customText4Label.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="customText4Label.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1475,7 +1475,7 @@
     <value />
   </data>
   <data name="customText2Label.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="customText2Label.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1496,7 +1496,7 @@
     <value />
   </data>
   <data name="customText4Box.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="customText4Box.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1514,7 +1514,7 @@
     <value />
   </data>
   <data name="customText2Box.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="customText2Box.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1532,7 +1532,7 @@
     <value />
   </data>
   <data name="customText3Label.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="customText3Label.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1553,7 +1553,7 @@
     <value />
   </data>
   <data name="labelTag6.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="labelTag6.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1574,7 +1574,7 @@
     <value />
   </data>
   <data name="customText3Box.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="customText3Box.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1592,7 +1592,7 @@
     <value />
   </data>
   <data name="parameterTag6List.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="parameterTag6List.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1610,7 +1610,7 @@
     <value />
   </data>
   <data name="labelTag5.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="labelTag5.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1631,7 +1631,7 @@
     <value />
   </data>
   <data name="parameterTag5List.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="parameterTag5List.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1649,7 +1649,7 @@
     <value />
   </data>
   <data name="labelTag4.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="labelTag4.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1670,7 +1670,7 @@
     <value />
   </data>
   <data name="parameterTag4List.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="parameterTag4List.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1688,7 +1688,7 @@
     <value />
   </data>
   <data name="customTextLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="customTextLabel.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1709,7 +1709,7 @@
     <value />
   </data>
   <data name="customTextBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="customTextBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1727,7 +1727,7 @@
     <value />
   </data>
   <data name="labelTag3.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="labelTag3.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1748,7 +1748,7 @@
     <value />
   </data>
   <data name="parameterTag3List.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="parameterTag3List.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1766,7 +1766,7 @@
     <value />
   </data>
   <data name="labelTag2.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="labelTag2.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1787,7 +1787,7 @@
     <value />
   </data>
   <data name="parameterTag2List.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="parameterTag2List.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1805,7 +1805,7 @@
     <value />
   </data>
   <data name="labelTag.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="labelTag.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1826,7 +1826,7 @@
     <value />
   </data>
   <data name="parameterTagList.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="parameterTagList.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1844,7 +1844,7 @@
     <value />
   </data>
   <data name="playlistComboBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="playlistComboBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1862,7 +1862,7 @@
     <value />
   </data>
   <data name="conditionCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="conditionCheckBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1883,7 +1883,7 @@
     <value />
   </data>
   <data name="presetList.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="presetList.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1937,16 +1937,16 @@
     <value />
   </data>
   <data name="previewTable.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="previewTable.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="previewTable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 73</value>
+    <value>4, 73</value>
   </data>
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>986, 152</value>
+    <value>985, 152</value>
   </data>
   <data name="previewTable.ToolTip" xml:space="preserve">
     <value />
@@ -1955,7 +1955,7 @@
     <value />
   </data>
   <data name="label7.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="label7.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1976,7 +1976,7 @@
     <value />
   </data>
   <data name="buttonSaveClose.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="buttonSaveClose.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1994,7 +1994,7 @@
     <value />
   </data>
   <data name="buttonOK.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="buttonOK.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2027,7 +2027,7 @@
     <value />
   </data>
   <data name="buttonClose.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="buttonClose.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2048,7 +2048,7 @@
     <value />
   </data>
   <data name="groupBox3.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="groupBox3.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2066,7 +2066,7 @@
     <value />
   </data>
   <data name="label6.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="label6.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2087,7 +2087,7 @@
     <value />
   </data>
   <data name="buttonExport.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="buttonExport.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2105,7 +2105,7 @@
     <value />
   </data>
   <data name="buttonDeleteAll.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="buttonDeleteAll.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2126,7 +2126,7 @@
     <value />
   </data>
   <data name="buttonDelete.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="buttonDelete.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2147,7 +2147,7 @@
     <value />
   </data>
   <data name="buttonEdit.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="buttonEdit.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2168,7 +2168,7 @@
     <value />
   </data>
   <data name="buttonCreate.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="buttonCreate.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2189,7 +2189,7 @@
     <value />
   </data>
   <data name="buttonImport.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="buttonImport.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2210,7 +2210,7 @@
     <value />
   </data>
   <data name="buttonImportNew.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="buttonImportNew.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2234,7 +2234,7 @@
     <value />
   </data>
   <data name="buttonImportAll.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="buttonImportAll.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2257,7 +2257,7 @@
     <value />
   </data>
   <data name="buttonExportCustom.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="buttonExportCustom.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2275,7 +2275,7 @@
     <value />
   </data>
   <data name="buttonCopy.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="buttonCopy.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2296,16 +2296,16 @@
     <value />
   </data>
   <data name="groupBox2.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>TopLeft</value>
   </data>
   <data name="groupBox2.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, -2</value>
+    <value>4, -2</value>
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>702, 72</value>
+    <value>698, 72</value>
   </data>
   <data name="groupBox2.ToolTip" xml:space="preserve">
     <value />
@@ -2323,7 +2323,7 @@
     <value />
   </data>
   <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>994, 600</value>
+    <value>993, 600</value>
   </data>
   <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
     <value>368</value>

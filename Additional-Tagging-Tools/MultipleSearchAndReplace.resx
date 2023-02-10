@@ -210,6 +210,9 @@
   <metadata name="dirtyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>ru</value>
+  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -283,7 +286,7 @@
     <value>19</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>873, 409</value>
+    <value>873, 421</value>
   </data>
   <data name="autoApplyPictureBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -888,7 +891,7 @@ later for auto-applying or assign hotkey to it</value>
     <value>18</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>881, 438</value>
+    <value>881, 450</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Multiple Search &amp; Replace</value>
@@ -1578,7 +1581,7 @@ later for auto-applying or assign hotkey to it</value>
     <value>51</value>
   </data>
   <data name="templateTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>861, 167</value>
+    <value>861, 168</value>
   </data>
   <data name="templateTable.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -1665,7 +1668,7 @@ later for auto-applying or assign hotkey to it</value>
     <value>51</value>
   </data>
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>857, 160</value>
+    <value>861, 177</value>
   </data>
   <data name="previewTable.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -1698,7 +1701,7 @@ later for auto-applying or assign hotkey to it</value>
     <value>100</value>
   </data>
   <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>867, 346</value>
+    <value>867, 358</value>
   </data>
   <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
     <value>172</value>
