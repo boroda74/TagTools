@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LibraryReportsCommand));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.buttonAddPreset = new System.Windows.Forms.Button();
             this.clearIdButton = new System.Windows.Forms.Button();
             this.buttonExport = new System.Windows.Forms.Button();
             this.idTextBox = new System.Windows.Forms.TextBox();
@@ -46,11 +45,8 @@
             this.conditionCheckBox = new System.Windows.Forms.CheckBox();
             this.assignHotkeyCheckBox = new System.Windows.Forms.CheckBox();
             this.conditionFieldList = new System.Windows.Forms.ComboBox();
-            this.buttonCopyPreset = new System.Windows.Forms.Button();
             this.conditionList = new System.Windows.Forms.ComboBox();
-            this.presetNameTextBox = new System.Windows.Forms.TextBox();
             this.labelSaveField = new System.Windows.Forms.Label();
-            this.buttonDeletePreset = new System.Windows.Forms.Button();
             this.destinationTagList = new System.Windows.Forms.ComboBox();
             this.comparedFieldList = new System.Windows.Forms.ComboBox();
             this.presetsBox = new System.Windows.Forms.CheckedListBox();
@@ -71,6 +67,10 @@
             this.labelXxY = new System.Windows.Forms.Label();
             this.previewTable = new System.Windows.Forms.DataGridView();
             this.sourceTagList = new System.Windows.Forms.CheckedListBox();
+            this.buttonAddPreset = new System.Windows.Forms.Button();
+            this.buttonCopyPreset = new System.Windows.Forms.Button();
+            this.presetNameTextBox = new System.Windows.Forms.TextBox();
+            this.buttonDeletePreset = new System.Windows.Forms.Button();
             this.autoApplyInfoLabel = new System.Windows.Forms.Label();
             this.dirtyErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.label1 = new System.Windows.Forms.Label();
@@ -104,7 +104,6 @@
             // splitContainer1.Panel1
             // 
             resources.ApplyResources(this.splitContainer1.Panel1, "splitContainer1.Panel1");
-            this.splitContainer1.Panel1.Controls.Add(this.buttonAddPreset);
             this.splitContainer1.Panel1.Controls.Add(this.clearIdButton);
             this.splitContainer1.Panel1.Controls.Add(this.buttonExport);
             this.splitContainer1.Panel1.Controls.Add(this.idTextBox);
@@ -119,11 +118,8 @@
             this.splitContainer1.Panel1.Controls.Add(this.conditionCheckBox);
             this.splitContainer1.Panel1.Controls.Add(this.assignHotkeyCheckBox);
             this.splitContainer1.Panel1.Controls.Add(this.conditionFieldList);
-            this.splitContainer1.Panel1.Controls.Add(this.buttonCopyPreset);
             this.splitContainer1.Panel1.Controls.Add(this.conditionList);
-            this.splitContainer1.Panel1.Controls.Add(this.presetNameTextBox);
             this.splitContainer1.Panel1.Controls.Add(this.labelSaveField);
-            this.splitContainer1.Panel1.Controls.Add(this.buttonDeletePreset);
             this.splitContainer1.Panel1.Controls.Add(this.destinationTagList);
             this.splitContainer1.Panel1.Controls.Add(this.comparedFieldList);
             this.splitContainer1.Panel1.Controls.Add(this.presetsBox);
@@ -157,17 +153,6 @@
             this.dirtyErrorProvider.SetIconPadding(this.splitContainer1.Panel2, ((int)(resources.GetObject("splitContainer1.Panel2.IconPadding"))));
             this.toolTip1.SetToolTip(this.splitContainer1.Panel2, resources.GetString("splitContainer1.Panel2.ToolTip"));
             this.toolTip1.SetToolTip(this.splitContainer1, resources.GetString("splitContainer1.ToolTip"));
-            // 
-            // buttonAddPreset
-            // 
-            resources.ApplyResources(this.buttonAddPreset, "buttonAddPreset");
-            this.dirtyErrorProvider.SetError(this.buttonAddPreset, resources.GetString("buttonAddPreset.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.buttonAddPreset, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonAddPreset.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.buttonAddPreset, ((int)(resources.GetObject("buttonAddPreset.IconPadding"))));
-            this.buttonAddPreset.Name = "buttonAddPreset";
-            this.toolTip1.SetToolTip(this.buttonAddPreset, resources.GetString("buttonAddPreset.ToolTip"));
-            this.buttonAddPreset.UseVisualStyleBackColor = true;
-            this.buttonAddPreset.Click += new System.EventHandler(this.buttonAddPreset_Click);
             // 
             // clearIdButton
             // 
@@ -327,17 +312,6 @@
             this.toolTip1.SetToolTip(this.conditionFieldList, resources.GetString("conditionFieldList.ToolTip"));
             this.conditionFieldList.SelectedIndexChanged += new System.EventHandler(this.conditionFieldList_SelectedIndexChanged);
             // 
-            // buttonCopyPreset
-            // 
-            resources.ApplyResources(this.buttonCopyPreset, "buttonCopyPreset");
-            this.dirtyErrorProvider.SetError(this.buttonCopyPreset, resources.GetString("buttonCopyPreset.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.buttonCopyPreset, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonCopyPreset.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.buttonCopyPreset, ((int)(resources.GetObject("buttonCopyPreset.IconPadding"))));
-            this.buttonCopyPreset.Name = "buttonCopyPreset";
-            this.toolTip1.SetToolTip(this.buttonCopyPreset, resources.GetString("buttonCopyPreset.ToolTip"));
-            this.buttonCopyPreset.UseVisualStyleBackColor = true;
-            this.buttonCopyPreset.Click += new System.EventHandler(this.buttonCopyPreset_Click);
-            // 
             // conditionList
             // 
             resources.ApplyResources(this.conditionList, "conditionList");
@@ -350,16 +324,6 @@
             this.toolTip1.SetToolTip(this.conditionList, resources.GetString("conditionList.ToolTip"));
             this.conditionList.SelectedIndexChanged += new System.EventHandler(this.conditionList_SelectedIndexChanged);
             // 
-            // presetNameTextBox
-            // 
-            resources.ApplyResources(this.presetNameTextBox, "presetNameTextBox");
-            this.dirtyErrorProvider.SetError(this.presetNameTextBox, resources.GetString("presetNameTextBox.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.presetNameTextBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("presetNameTextBox.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.presetNameTextBox, ((int)(resources.GetObject("presetNameTextBox.IconPadding"))));
-            this.presetNameTextBox.Name = "presetNameTextBox";
-            this.toolTip1.SetToolTip(this.presetNameTextBox, resources.GetString("presetNameTextBox.ToolTip"));
-            this.presetNameTextBox.Leave += new System.EventHandler(this.presetNameTextBox_Leave);
-            // 
             // labelSaveField
             // 
             resources.ApplyResources(this.labelSaveField, "labelSaveField");
@@ -368,17 +332,6 @@
             this.dirtyErrorProvider.SetIconPadding(this.labelSaveField, ((int)(resources.GetObject("labelSaveField.IconPadding"))));
             this.labelSaveField.Name = "labelSaveField";
             this.toolTip1.SetToolTip(this.labelSaveField, resources.GetString("labelSaveField.ToolTip"));
-            // 
-            // buttonDeletePreset
-            // 
-            resources.ApplyResources(this.buttonDeletePreset, "buttonDeletePreset");
-            this.dirtyErrorProvider.SetError(this.buttonDeletePreset, resources.GetString("buttonDeletePreset.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.buttonDeletePreset, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonDeletePreset.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.buttonDeletePreset, ((int)(resources.GetObject("buttonDeletePreset.IconPadding"))));
-            this.buttonDeletePreset.Name = "buttonDeletePreset";
-            this.toolTip1.SetToolTip(this.buttonDeletePreset, resources.GetString("buttonDeletePreset.ToolTip"));
-            this.buttonDeletePreset.UseVisualStyleBackColor = true;
-            this.buttonDeletePreset.Click += new System.EventHandler(this.buttonDeletePreset_Click);
             // 
             // destinationTagList
             // 
@@ -637,6 +590,49 @@
             this.toolTip1.SetToolTip(this.sourceTagList, resources.GetString("sourceTagList.ToolTip"));
             this.sourceTagList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.sourceTagList_ItemCheck);
             // 
+            // buttonAddPreset
+            // 
+            resources.ApplyResources(this.buttonAddPreset, "buttonAddPreset");
+            this.dirtyErrorProvider.SetError(this.buttonAddPreset, resources.GetString("buttonAddPreset.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.buttonAddPreset, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonAddPreset.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.buttonAddPreset, ((int)(resources.GetObject("buttonAddPreset.IconPadding"))));
+            this.buttonAddPreset.Name = "buttonAddPreset";
+            this.toolTip1.SetToolTip(this.buttonAddPreset, resources.GetString("buttonAddPreset.ToolTip"));
+            this.buttonAddPreset.UseVisualStyleBackColor = true;
+            this.buttonAddPreset.Click += new System.EventHandler(this.buttonAddPreset_Click);
+            // 
+            // buttonCopyPreset
+            // 
+            resources.ApplyResources(this.buttonCopyPreset, "buttonCopyPreset");
+            this.dirtyErrorProvider.SetError(this.buttonCopyPreset, resources.GetString("buttonCopyPreset.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.buttonCopyPreset, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonCopyPreset.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.buttonCopyPreset, ((int)(resources.GetObject("buttonCopyPreset.IconPadding"))));
+            this.buttonCopyPreset.Name = "buttonCopyPreset";
+            this.toolTip1.SetToolTip(this.buttonCopyPreset, resources.GetString("buttonCopyPreset.ToolTip"));
+            this.buttonCopyPreset.UseVisualStyleBackColor = true;
+            this.buttonCopyPreset.Click += new System.EventHandler(this.buttonCopyPreset_Click);
+            // 
+            // presetNameTextBox
+            // 
+            resources.ApplyResources(this.presetNameTextBox, "presetNameTextBox");
+            this.dirtyErrorProvider.SetError(this.presetNameTextBox, resources.GetString("presetNameTextBox.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.presetNameTextBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("presetNameTextBox.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.presetNameTextBox, ((int)(resources.GetObject("presetNameTextBox.IconPadding"))));
+            this.presetNameTextBox.Name = "presetNameTextBox";
+            this.toolTip1.SetToolTip(this.presetNameTextBox, resources.GetString("presetNameTextBox.ToolTip"));
+            this.presetNameTextBox.Leave += new System.EventHandler(this.presetNameTextBox_Leave);
+            // 
+            // buttonDeletePreset
+            // 
+            resources.ApplyResources(this.buttonDeletePreset, "buttonDeletePreset");
+            this.dirtyErrorProvider.SetError(this.buttonDeletePreset, resources.GetString("buttonDeletePreset.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.buttonDeletePreset, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonDeletePreset.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.buttonDeletePreset, ((int)(resources.GetObject("buttonDeletePreset.IconPadding"))));
+            this.buttonDeletePreset.Name = "buttonDeletePreset";
+            this.toolTip1.SetToolTip(this.buttonDeletePreset, resources.GetString("buttonDeletePreset.ToolTip"));
+            this.buttonDeletePreset.UseVisualStyleBackColor = true;
+            this.buttonDeletePreset.Click += new System.EventHandler(this.buttonDeletePreset_Click);
+            // 
             // autoApplyInfoLabel
             // 
             resources.ApplyResources(this.autoApplyInfoLabel, "autoApplyInfoLabel");
@@ -708,11 +704,15 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonClose;
+            this.Controls.Add(this.buttonAddPreset);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.numberOfTagsToRecalculateNumericUpDown);
             this.Controls.Add(this.recalculateOnNumberOfTagsChangesCheckBox);
             this.Controls.Add(this.autoApplyInfoLabel);
+            this.Controls.Add(this.buttonDeletePreset);
+            this.Controls.Add(this.buttonCopyPreset);
+            this.Controls.Add(this.presetNameTextBox);
             this.Name = "LibraryReportsCommand";
             this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LibraryReportsCommand_FormClosing);
