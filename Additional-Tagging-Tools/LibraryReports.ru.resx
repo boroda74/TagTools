@@ -119,7 +119,7 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>881, 113</value>
+    <value>881, 190</value>
   </data>
   <data name="buttonClose.Size" type="System.Drawing.Size, System.Drawing">
     <value>125, 23</value>
@@ -131,16 +131,10 @@
     <value>Есть не сохраненные изменения</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1018, 625</value>
-  </data>
-  <data name="buttonAddPreset.Location" type="System.Drawing.Point, System.Drawing">
-    <value>601, 70</value>
-  </data>
-  <data name="buttonAddPreset.Text" xml:space="preserve">
-    <value>Новый пресет</value>
+    <value>1018, 671</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>410, 51</value>
+    <value>410, 53</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>94, 13</value>
@@ -149,10 +143,10 @@
     <value>изменений тегов</value>
   </data>
   <data name="numberOfTagsToRecalculateNumericUpDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>283, 47</value>
+    <value>283, 49</value>
   </data>
   <data name="recalculateOnNumberOfTagsChangesCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 50</value>
+    <value>8, 52</value>
   </data>
   <data name="recalculateOnNumberOfTagsChangesCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>269, 17</value>
@@ -161,35 +155,14 @@
     <value>Применять отмеченные пресеты после каждых</value>
   </data>
   <data name="autoApplyInfoLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1010, 40</value>
+    <value>1001, 40</value>
   </data>
   <data name="autoApplyInfoLabel.Text" xml:space="preserve">
     <value>Экспорт тегов в файл для использования в сторонних приложениях. Таблица сортируется по группирующим тегам слева направо после нажатия кнопки "Просмотр". Отмеченные пресеты автоматически применятются при запуске MusicBee. 
 Отмечено для автоматического применения: %%TICKEDPRESETS%%</value>
   </data>
-  <data name="buttonDeletePreset.Location" type="System.Drawing.Point, System.Drawing">
-    <value>877, 70</value>
-  </data>
-  <data name="buttonDeletePreset.Text" xml:space="preserve">
-    <value>Удалить пресет</value>
-  </data>
-  <data name="buttonCopyPreset.Location" type="System.Drawing.Point, System.Drawing">
-    <value>739, 70</value>
-  </data>
-  <data name="buttonCopyPreset.Text" xml:space="preserve">
-    <value>Копировать пресет</value>
-  </data>
-  <data name="presetNameTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 72</value>
-  </data>
-  <data name="presetNameTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>587, 20</value>
-  </data>
-  <data name="presetNameTextBox.ToolTip" xml:space="preserve">
-    <value>Введите название пресета (в противном случае оно будет сформировано автоматически)</value>
-  </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>1026, 654</value>
+    <value>1026, 700</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Отчеты по библиотеке</value>
@@ -792,16 +765,25 @@
 </value>
   </data>
   <data name="splitContainer1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 94</value>
+    <value>3, 73</value>
+  </data>
+  <data name="buttonAddPreset.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 190</value>
+  </data>
+  <data name="buttonAddPreset.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 23</value>
+  </data>
+  <data name="buttonAddPreset.Text" xml:space="preserve">
+    <value>Новый пресет</value>
   </data>
   <data name="clearIdButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>984, 217</value>
+    <value>984, 294</value>
   </data>
   <data name="clearIdButton.ToolTip" xml:space="preserve">
     <value>Удалить назначение ID-а функции виртуальных тегов агрегатной функции</value>
   </data>
   <data name="buttonExport.Location" type="System.Drawing.Point, System.Drawing">
-    <value>881, 165</value>
+    <value>881, 242</value>
   </data>
   <data name="buttonExport.Size" type="System.Drawing.Size, System.Drawing">
     <value>125, 23</value>
@@ -810,13 +792,56 @@
     <value>Экспортировать</value>
   </data>
   <data name="idTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>776, 216</value>
+    <value>776, 293</value>
   </data>
   <data name="idTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>204, 20</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="useHotkeyForSelectedTracksCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="useHotkeyForSelectedTracksCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>811, 168</value>
+  </data>
+  <data name="useHotkeyForSelectedTracksCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>195, 17</value>
+  </data>
+  <data name="useHotkeyForSelectedTracksCheckBox.Text" xml:space="preserve">
+    <value>Применять к выбранным трекам</value>
+  </data>
+  <data name="useHotkeyForSelectedTracksCheckBox.ToolTip" xml:space="preserve">
+    <value>Назначить комбинацию клавиш для применения к выделенным трекам, или в противном случае, ко всей библиотеке</value>
+  </data>
+  <data name="presetNameTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 166</value>
+  </data>
+  <data name="presetNameTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>387, 20</value>
+  </data>
+  <data name="presetNameTextBox.ToolTip" xml:space="preserve">
+    <value>Введите название пресета (в противном случае оно будет сформировано автоматически)</value>
+  </data>
+  <data name="assignHotkeyCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="assignHotkeyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>494, 168</value>
+  </data>
+  <data name="assignHotkeyCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>311, 17</value>
+  </data>
+  <data name="assignHotkeyCheckBox.Text" xml:space="preserve">
+    <value>Назначить комбинацию клавиш. Осталось: </value>
+  </data>
+  <data name="assignHotkeyCheckBox.ToolTip" xml:space="preserve">
+    <value>Сначала включите комбинацию клавиш для одного или нескольких пресетов, потом закройте это окно и 
+откройте настройки горячих клавиш MusicBee: Правка&gt; Настройки&gt; Горячие клавиши
+
+Потребуется заново назначить комбинацию клавиш, если изменится название пресета</value>
+  </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>586, 221</value>
+    <value>586, 298</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>184, 13</value>
@@ -824,8 +849,17 @@
   <data name="label3.Text" xml:space="preserve">
     <value>Назначить ID функции вирт. тегов:</value>
   </data>
+  <data name="buttonDeletePreset.Location" type="System.Drawing.Point, System.Drawing">
+    <value>267, 190</value>
+  </data>
+  <data name="buttonDeletePreset.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 23</value>
+  </data>
+  <data name="buttonDeletePreset.Text" xml:space="preserve">
+    <value>Удалить пресет</value>
+  </data>
   <data name="buttonPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>494, 113</value>
+    <value>494, 190</value>
   </data>
   <data name="buttonPreview.Size" type="System.Drawing.Size, System.Drawing">
     <value>125, 23</value>
@@ -836,8 +870,17 @@
   <data name="buttonPreview.ToolTip" xml:space="preserve">
     <value>Сформировать отчет для ОТОБРАЖАЕМЫХ треков</value>
   </data>
+  <data name="buttonCopyPreset.Location" type="System.Drawing.Point, System.Drawing">
+    <value>136, 190</value>
+  </data>
+  <data name="buttonCopyPreset.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 23</value>
+  </data>
+  <data name="buttonCopyPreset.Text" xml:space="preserve">
+    <value>Копировать пресет</value>
+  </data>
   <data name="buttonApply.Location" type="System.Drawing.Point, System.Drawing">
-    <value>623, 113</value>
+    <value>623, 190</value>
   </data>
   <data name="buttonApply.Size" type="System.Drawing.Size, System.Drawing">
     <value>125, 23</value>
@@ -849,13 +892,13 @@
     <value>Применить пресет к ВЫБРАННЫМ трекам</value>
   </data>
   <data name="buttonCheckAll.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 242</value>
+    <value>5, 319</value>
   </data>
   <data name="buttonCheckAll.Text" xml:space="preserve">
     <value>Отметить все</value>
   </data>
   <data name="buttonSave.Location" type="System.Drawing.Point, System.Drawing">
-    <value>752, 113</value>
+    <value>752, 190</value>
   </data>
   <data name="buttonSave.Size" type="System.Drawing.Size, System.Drawing">
     <value>125, 23</value>
@@ -864,25 +907,13 @@
     <value>Сохранить и закрыть</value>
   </data>
   <data name="buttonUncheckAll.Location" type="System.Drawing.Point, System.Drawing">
-    <value>105, 242</value>
+    <value>105, 319</value>
   </data>
   <data name="buttonUncheckAll.Text" xml:space="preserve">
     <value>Снять пометки</value>
   </data>
-  <data name="useHotkeyForSelectedTracksCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>289, 117</value>
-  </data>
-  <data name="useHotkeyForSelectedTracksCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 17</value>
-  </data>
-  <data name="useHotkeyForSelectedTracksCheckBox.Text" xml:space="preserve">
-    <value>Применять к выбранным трекам</value>
-  </data>
-  <data name="useHotkeyForSelectedTracksCheckBox.ToolTip" xml:space="preserve">
-    <value>Назначить комбинацию клавиш для применения к выделенным трекам, или в противном случае, ко всей библиотеке</value>
-  </data>
   <data name="conditionCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 193</value>
+    <value>5, 270</value>
   </data>
   <data name="conditionCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>253, 17</value>
@@ -890,29 +921,14 @@
   <data name="conditionCheckBox.Text" xml:space="preserve">
     <value>Экспортировать/сохранять только, если тег</value>
   </data>
-  <data name="assignHotkeyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 117</value>
-  </data>
-  <data name="assignHotkeyCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>249, 17</value>
-  </data>
-  <data name="assignHotkeyCheckBox.Text" xml:space="preserve">
-    <value>Назначить комбинацию клавиш. Осталось: </value>
-  </data>
-  <data name="assignHotkeyCheckBox.ToolTip" xml:space="preserve">
-    <value>Сначала включите комбинацию клавиш для одного или нескольких пресетов, потом закройте это окно и 
-откройте настройки горячих клавиш MusicBee: Правка&gt; Настройки&gt; Горячие клавиши
-
-Потребуется заново назначить комбинацию клавиш, если изменится название пресета</value>
-  </data>
   <data name="conditionFieldList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>264, 191</value>
+    <value>264, 268</value>
   </data>
   <data name="conditionList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>490, 191</value>
+    <value>490, 268</value>
   </data>
   <data name="labelSaveField.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 221</value>
+    <value>4, 298</value>
   </data>
   <data name="labelSaveField.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 13</value>
@@ -924,10 +940,10 @@
     <value>TopRight</value>
   </data>
   <data name="destinationTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>360, 217</value>
+    <value>360, 294</value>
   </data>
   <data name="comparedFieldList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>615, 191</value>
+    <value>615, 268</value>
   </data>
   <data name="comparedFieldList.Size" type="System.Drawing.Size, System.Drawing">
     <value>391, 21</value>
@@ -936,10 +952,10 @@
     <value>5, 3</value>
   </data>
   <data name="presetsBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1001, 107</value>
+    <value>1001, 159</value>
   </data>
   <data name="labelSaveToTag.Location" type="System.Drawing.Point, System.Drawing">
-    <value>323, 221</value>
+    <value>323, 298</value>
   </data>
   <data name="labelSaveToTag.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 13</value>
@@ -948,10 +964,10 @@
     <value>в тег</value>
   </data>
   <data name="sourceFieldComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>97, 217</value>
+    <value>97, 294</value>
   </data>
   <data name="labelFunction.Location" type="System.Drawing.Point, System.Drawing">
-    <value>209, 247</value>
+    <value>209, 324</value>
   </data>
   <data name="labelFunction.Size" type="System.Drawing.Size, System.Drawing">
     <value>144, 13</value>
@@ -960,10 +976,10 @@
     <value>Функция для новых полей:</value>
   </data>
   <data name="functionComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>360, 243</value>
+    <value>360, 320</value>
   </data>
   <data name="labelFormat.Location" type="System.Drawing.Point, System.Drawing">
-    <value>39, 144</value>
+    <value>39, 221</value>
   </data>
   <data name="labelFormat.Size" type="System.Drawing.Size, System.Drawing">
     <value>52, 13</value>
@@ -975,7 +991,7 @@
     <value>TopRight</value>
   </data>
   <data name="totalsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 165</value>
+    <value>5, 242</value>
   </data>
   <data name="totalsCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>220, 23</value>
@@ -984,7 +1000,7 @@
     <value>Вычислять итоги по подгруппировкам</value>
   </data>
   <data name="formatComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>97, 140</value>
+    <value>97, 217</value>
   </data>
   <data name="formatComboBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>909, 21</value>
@@ -993,7 +1009,7 @@
     <value>Формат экспортируемого отчета</value>
   </data>
   <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>496, 247</value>
+    <value>496, 324</value>
   </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>127, 13</value>
@@ -1002,7 +1018,7 @@
     <value>выбранного тега на тег</value>
   </data>
   <data name="openReportCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>624, 165</value>
+    <value>624, 242</value>
   </data>
   <data name="openReportCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>253, 23</value>
@@ -1015,10 +1031,10 @@
 и открыть его в приложении по умолчанию, например, для печати</value>
   </data>
   <data name="parameter2ComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>631, 243</value>
+    <value>631, 320</value>
   </data>
   <data name="labelPx.Location" type="System.Drawing.Point, System.Drawing">
-    <value>556, 168</value>
+    <value>556, 245</value>
   </data>
   <data name="labelPx.Size" type="System.Drawing.Size, System.Drawing">
     <value>25, 13</value>
@@ -1027,7 +1043,7 @@
     <value>пкс</value>
   </data>
   <data name="resizeArtworkCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>231, 165</value>
+    <value>231, 242</value>
   </data>
   <data name="resizeArtworkCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>183, 23</value>
@@ -1036,27 +1052,33 @@
     <value>Изменить размер обложек на:</value>
   </data>
   <data name="yArworkSizeUpDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>494, 166</value>
+    <value>494, 243</value>
   </data>
   <data name="xArworkSizeUpDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>419, 166</value>
+    <value>419, 243</value>
   </data>
   <data name="labelXxY.Location" type="System.Drawing.Point, System.Drawing">
-    <value>480, 168</value>
+    <value>480, 245</value>
+  </data>
+  <data name="splitContainer1.Panel1MinSize" type="System.Int32, mscorlib">
+    <value>345</value>
   </data>
   <data name="previewTable.Location" type="System.Drawing.Point, System.Drawing">
     <value>204, 5</value>
   </data>
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>802, 247</value>
+    <value>802, 238</value>
   </data>
   <data name="sourceTagList.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 5</value>
   </data>
   <data name="sourceTagList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>194, 247</value>
+    <value>194, 238</value>
   </data>
   <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1012, 528</value>
+    <value>1012, 595</value>
+  </data>
+  <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
+    <value>345</value>
   </data>
 </root>

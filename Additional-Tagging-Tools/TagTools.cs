@@ -77,6 +77,7 @@ namespace MusicBeePlugin
 
         public const int MaximumNumberOfASRHotkeys = 20;
         public const int MaximumNumberOfLRHotkeys = 20;
+        public const int PredefinedReportPresetCount = 4;
 
         public static readonly char LocalizedDecimalPoint = (0.5).ToString()[1];
         public static Bitmap MissingArtwork;
@@ -3504,9 +3505,9 @@ namespace MusicBeePlugin
                 SavedSettings.autobackupPrefix = "Tag Autobackup ";
 
 
-            if (SavedSettings.reportsPresets == null || SavedSettings.reportsPresets.Length < 4)
+            if (SavedSettings.reportsPresets == null || SavedSettings.reportsPresets.Length < PredefinedReportPresetCount)
             {
-                SavedSettings.reportsPresets = new ReportPreset[4];
+                SavedSettings.reportsPresets = new ReportPreset[PredefinedReportPresetCount];
 
                 ReportPreset tempLibraryReportsPreset;
 
@@ -3724,7 +3725,7 @@ namespace MusicBeePlugin
                     conditionText = ListItemConditionIsGreater
                 };
 
-                SavedSettings.reportsPresets[3] = tempLibraryReportsPreset;
+                SavedSettings.reportsPresets[PredefinedReportPresetCount - 1] = tempLibraryReportsPreset;
             };
 
 

@@ -2639,8 +2639,13 @@ namespace MusicBeePlugin
 
         private void buttonCopyPreset_Click(object sender, EventArgs e)
         {
+            int currentIndex = presetsBox.SelectedIndex;
             ReportPreset reportsPreset = new ReportPreset((ReportPreset)presetsBox.SelectedItem, false);
-            presetsBox.Items.Add(reportsPreset);
+            if (currentIndex <= Plugin.PredefinedReportPresetCount - 1)
+                presetsBox.Items.Add(reportsPreset);
+            else
+                presetsBox.Items.Insert(currentIndex + 1, reportsPreset);
+
             presetsBox.SelectedItem = reportsPreset;
             setUnsavedChanges(true);
         }

@@ -207,7 +207,7 @@
     <value>в тег</value>
   </data>
   <data name="sourceTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>53, 6</value>
+    <value>55, 6</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>1, 8</value>
@@ -882,7 +882,7 @@
     <value>50</value>
   </data>
   <data name="templateTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>881, 168</value>
+    <value>881, 172</value>
   </data>
   <data name="Column3.HeaderText" xml:space="preserve">
     <value>Трек</value>
@@ -894,15 +894,9 @@
     <value>Новое значение</value>
   </data>
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>881, 177</value>
+    <value>881, 172</value>
   </data>
   <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
     <value>886, 358</value>
-  </data>
-  <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
-    <value>172</value>
-  </data>
-  <data name="splitContainer1.SplitterWidth" type="System.Int32, mscorlib">
-    <value>4</value>
   </data>
 </root>
