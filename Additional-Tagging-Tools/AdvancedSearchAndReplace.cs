@@ -1589,13 +1589,11 @@ namespace MusicBeePlugin
             buttonCloseToolTip = toolTip1.GetToolTip(buttonClose);
             toolTip1.SetToolTip(buttonClose, "");
 
-            int splitterDistance;
+            (int, int, int, int, int, int, int) value = loadWindowLayout();
 
-            loadWindowSizesPositions(true, out _, out _, out _, out _, out _, out _, out splitterDistance);
-
-            if (splitterDistance > 0)
+            if (value.Item4 > 0)
             {
-                splitContainer1.SplitterDistance = splitterDistance;
+                splitContainer1.SplitterDistance = value.Item4;
             }
 
             addRowToTable = previewList_AddRowToTable;
@@ -4463,7 +4461,7 @@ namespace MusicBeePlugin
                 }
             }
 
-            saveWindowSizesPositions(0, 0, 0, 0, 0, 0, splitContainer1.SplitterDistance);
+            saveWindowLayout(0, 0, 0, splitContainer1.SplitterDistance);
         }
 
         private void filterComboBox_SelectedIndexChanged(object sender, EventArgs e)

@@ -84,32 +84,22 @@ namespace MusicBeePlugin
             addRowToTable = previewList_AddRowToTable;
             processRowOfTable = previewList_ProcessRowOfTable;
 
-            int column1Width;
-            int column2Width;
-            int column3Width;
+            (int, int, int, int, int, int, int) value = loadWindowLayout();
 
-            int splitterDistance;
-
-            int table2column1Width;
-            int table2column2Width;
-            int table2column3Width;
-
-            loadWindowSizesPositions(true, out column1Width, out column2Width, out column3Width, out table2column1Width, out table2column2Width, out table2column3Width, out splitterDistance);
-
-            if (column1Width > 0)
+            if (value.Item1 > 0)
             {
-                previewTable.Columns[1].Width = column1Width;
-                previewTable.Columns[2].Width = column2Width;
-                previewTable.Columns[3].Width = column3Width;
+                previewTable.Columns[1].Width = value.Item1;
+                previewTable.Columns[2].Width = value.Item2;
+                previewTable.Columns[3].Width = value.Item3;
 
-                templateTable.Columns[0].Width = table2column1Width;
-                templateTable.Columns[3].Width = table2column2Width;
-                templateTable.Columns[4].Width = table2column3Width;
+                templateTable.Columns[0].Width = value.Item5;
+                templateTable.Columns[3].Width = value.Item6;
+                templateTable.Columns[4].Width = value.Item7;
             }
 
-            if (splitterDistance > 0)
+            if (value.Item4 > 0)
             {
-                splitContainer1.SplitterDistance = splitterDistance;
+                splitContainer1.SplitterDistance = value.Item4;
             }
 
             customMSR = null;
@@ -1069,9 +1059,9 @@ namespace MusicBeePlugin
 
         private void MultipleSearchAndReplaceCommand_FormClosing(object sender, FormClosingEventArgs e)
         {
-            saveWindowSizesPositions(previewTable.Columns[1].Width, previewTable.Columns[2].Width, previewTable.Columns[3].Width, 
-                templateTable.Columns[0].Width, templateTable.Columns[3].Width, templateTable.Columns[4].Width,
-                splitContainer1.SplitterDistance);
+            saveWindowLayout(previewTable.Columns[1].Width, previewTable.Columns[2].Width, previewTable.Columns[3].Width,
+                splitContainer1.SplitterDistance, 
+                templateTable.Columns[0].Width, templateTable.Columns[3].Width, templateTable.Columns[4].Width);
         }
     }
 }

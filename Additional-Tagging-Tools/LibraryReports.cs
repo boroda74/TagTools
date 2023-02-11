@@ -1769,13 +1769,11 @@ namespace MusicBeePlugin
 
             previewTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 
-            int splitterDistance;
+            (int, int, int, int, int, int, int) value = loadWindowLayout();
 
-            loadWindowSizesPositions(true, out _, out _, out _, out _, out _, out _, out splitterDistance);
-
-            if (splitterDistance > 0)
+            if (value.Item4 > 0)
             {
-                splitContainer1.SplitterDistance = splitterDistance;
+                splitContainer1.SplitterDistance = value.Item4;
             }
 
             addRowToTable = previewList_AddRowToTable;
@@ -2900,7 +2898,7 @@ namespace MusicBeePlugin
                 return;
             }
 
-            saveWindowSizesPositions(0, 0, 0, 0, 0, 0, splitContainer1.SplitterDistance);
+            saveWindowLayout(0, 0, 0, splitContainer1.SplitterDistance);
         }
 
         private void sourceTagList_ItemCheck(object sender, ItemCheckEventArgs e)

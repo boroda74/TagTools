@@ -97,17 +97,13 @@ namespace MusicBeePlugin
             addRowToTable = previewList_AddRowToTable;
             processRowOfTable = previewList_ProcessRowOfTable;
 
-            int column1Width;
-            int column2Width;
-            int column3Width;
+            (int, int, int, int, int, int, int) value = loadWindowLayout();
 
-            loadWindowSizesPositions(true, out column1Width, out column2Width, out column3Width, out _, out _, out _, out _);
-
-            if (column1Width > 0)
+            if (value.Item1 > 0)
             {
-                previewTable.Columns[1].Width = column1Width;
-                previewTable.Columns[2].Width = column2Width;
-                previewTable.Columns[3].Width = column3Width;
+                previewTable.Columns[1].Width = value.Item1;
+                previewTable.Columns[2].Width = value.Item2;
+                previewTable.Columns[3].Width = value.Item3;
             }
         }
 
@@ -594,7 +590,7 @@ namespace MusicBeePlugin
 
         private void saveSettings()
         {
-            saveWindowSizesPositions(previewTable.Columns[1].Width, previewTable.Columns[2].Width, previewTable.Columns[3].Width);
+            saveWindowLayout(previewTable.Columns[1].Width, previewTable.Columns[2].Width, previewTable.Columns[3].Width);
 
             Plugin.SavedSettings.changeCaseSourceTagName = sourceTagList.Text;
             Plugin.SavedSettings.changeCaseFlag = getChangeCaseOptionsRadioButtons();

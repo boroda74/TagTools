@@ -14,7 +14,7 @@ using static MusicBeePlugin.LibraryReportsCommand;
 namespace MusicBeePlugin
 {
     #region Custom types
-    public class SizePositionType
+    public class WindowSettingsType
     {
         public string className;
         public int x;
@@ -415,7 +415,7 @@ namespace MusicBeePlugin
 
             public DateTime lastAsrImportDateUtc;
 
-            public List<SizePositionType> commandWindows;
+            public List<WindowSettingsType> windowsSettings;
 
             public int lastInteractiveTagSet = 0;
             public int lastTagSet = 0;
@@ -2995,8 +2995,8 @@ namespace MusicBeePlugin
             if (SavedSettings == null)
                 SavedSettings = new SavedSettingsType();
 
-            if (SavedSettings.commandWindows == null)
-                SavedSettings.commandWindows = new List<SizePositionType>();
+            if (SavedSettings.windowsSettings == null)
+                SavedSettings.windowsSettings = new List<WindowSettingsType>();
 
             if (SavedSettings.exceptionWords == null || SavedSettings.exceptionWords.Length < 10)
             {

@@ -551,59 +551,59 @@ namespace MusicBeePlugin
                 Width = windowWidth;
                 Height = windowHeight;
 
-                windowWidth = 0;
+                //windowWidth = 0;
             }
         }
 
-        protected void loadWindowSizesPositions(bool dontLoadWindowPositionSizeState, out int column1Width, out int column2Width, out int column3Width, out int table2column1Width, out int table2column2Width, out int table2column3Width, out int splitterDistance)
+        protected (int, int, int, int, int, int, int) loadWindowLayout()
         {
-            string fullName = GetType().FullName;
-            foreach (var commandWindow in Plugin.SavedSettings.commandWindows)
+            int column1Width = 0;
+            int column2Width = 0;
+            int column3Width = 0;
+            int splitterDistance = 0;
+            int table2column1Width = 0;
+            int table2column2Width = 0; 
+            int table2column3Width = 0;
+
+            var windowSettings = findCreateSavedWindowSettings(false);
+
+            if (windowSettings != null)
+            { 
+                column1Width = windowSettings.column1Width;
+                column2Width = windowSettings.column2Width;
+                column3Width = windowSettings.column3Width;
+
+                splitterDistance = windowSettings.splitterDistance;
+
+                table2column1Width = windowSettings.table2column1Width;
+                table2column2Width = windowSettings.table2column2Width;
+                table2column3Width = windowSettings.table2column3Width;
+            }
+
+            return (column1Width, column2Width, column3Width, 
+                splitterDistance, 
+                table2column1Width, table2column2Width, table2column3Width);
+        }
+
+        protected void loadWindowSizesPositions()
+        {
+            var windowSettings = findCreateSavedWindowSettings(false);
+
+            if (windowSettings != null)
             {
-                if (commandWindow.className == fullName)
+                DesktopLocation = new Point(windowSettings.x, windowSettings.y);
+
+                if (FormBorderStyle != FormBorderStyle.FixedDialog)
                 {
-                    if (commandWindow.w != 0)
-                    {
-                        if (!dontLoadWindowPositionSizeState)
-                        {
-                            DesktopLocation = new Point(commandWindow.x, commandWindow.y);
+                    Size = new Size(windowSettings.w, windowSettings.h);
 
-                            if (FormBorderStyle != FormBorderStyle.FixedDialog)
-                            {
-                                Size = new Size(commandWindow.w, commandWindow.h);
-
-                                if (commandWindow.max)
-                                    WindowState = FormWindowState.Maximized;
-                            }
-                        }
-
-                        column1Width = commandWindow.column1Width;
-                        column2Width = commandWindow.column2Width;
-                        column3Width = commandWindow.column3Width;
-
-                        splitterDistance = commandWindow.splitterDistance;
-
-                        table2column1Width = commandWindow.table2column1Width;
-                        table2column2Width = commandWindow.table2column2Width;
-                        table2column3Width = commandWindow.table2column3Width;
-
-                        return;
-                    }
+                    if (windowSettings.max)
+                        WindowState = FormWindowState.Maximized;
                 }
             }
-
-            column1Width = 0;
-            column2Width = 0;
-            column3Width = 0;
-
-            splitterDistance = 0;
-
-            table2column1Width = 0;
-            table2column2Width = 0;
-            table2column3Width = 0;
         }
 
-        protected void saveWindowSizesPositions(int column1Width = 0, int column2Width = 0, int column3Width = 0, int table2column1Width = 0, int table2column2Width = 0, int table2column3Width = 0, int splitterDistance = 0)
+        protected WindowSettingsType findCreateSavedWindowSettings(bool createIfAbsent)
         {
             lock (Plugin.OpenedForms)
             {
@@ -611,31 +611,37 @@ namespace MusicBeePlugin
             }
 
             string fullName = GetType().FullName;
-            SizePositionType currentCommandWindow = null;
+            WindowSettingsType currentWindowSettings = null;
 
-            foreach (var commandWindow in Plugin.SavedSettings.commandWindows)
+            foreach (var windowSettings in Plugin.SavedSettings.windowsSettings)
             {
-                if (commandWindow.className == fullName)
+                if (windowSettings.className == fullName)
                 {
-                    currentCommandWindow = commandWindow;
+                    currentWindowSettings = windowSettings;
                     break;
                 }
             }
 
-            if (currentCommandWindow == null)
+            if (currentWindowSettings == null && createIfAbsent)
             {
-                currentCommandWindow = new SizePositionType
+                currentWindowSettings = new WindowSettingsType
                 {
                     className = fullName
                 };
 
-                Plugin.SavedSettings.commandWindows.Add(currentCommandWindow);
+                Plugin.SavedSettings.windowsSettings.Add(currentWindowSettings);
             }
 
+            return currentWindowSettings;
+        }
+
+        protected void saveWindowSizesPositions()
+        {
+            var currentWindowSettings = findCreateSavedWindowSettings(true);
 
             if (windowState == FormWindowState.Maximized)
             {
-                currentCommandWindow.max = true;
+                currentWindowSettings.max = true;
             }
             else if (windowState == FormWindowState.Minimized)
             {
@@ -643,27 +649,35 @@ namespace MusicBeePlugin
             }
             else
             {
-                currentCommandWindow.x = DesktopLocation.X;
-                currentCommandWindow.y = DesktopLocation.Y;
-                currentCommandWindow.w = Size.Width;
-                currentCommandWindow.h = Size.Height;
-                currentCommandWindow.max = false;
+                currentWindowSettings.x = DesktopLocation.X;
+                currentWindowSettings.y = DesktopLocation.Y;
+                currentWindowSettings.w = Size.Width;
+                currentWindowSettings.h = Size.Height;
+                currentWindowSettings.max = false;
             }
+        }
+
+        protected void saveWindowLayout(int column1Width = 0, int column2Width = 0, int column3Width = 0, int splitterDistance = 0, int table2column1Width = 0, int table2column2Width = 0, int table2column3Width = 0)
+        {
+            var currentWindowSettings = findCreateSavedWindowSettings(true);
 
             if (column1Width > 0)
             {
-                currentCommandWindow.column1Width = column1Width;
-                currentCommandWindow.column2Width = column2Width;
-                currentCommandWindow.column3Width = column3Width;
+                currentWindowSettings.column1Width = column1Width;
+                currentWindowSettings.column2Width = column2Width;
+                currentWindowSettings.column3Width = column3Width;
+            }
 
-                currentCommandWindow.table2column1Width = table2column1Width;
-                currentCommandWindow.table2column2Width = table2column2Width;
-                currentCommandWindow.table2column3Width = table2column3Width;
+            if (table2column1Width > 0)
+            {
+                currentWindowSettings.table2column1Width = table2column1Width;
+                currentWindowSettings.table2column2Width = table2column2Width;
+                currentWindowSettings.table2column3Width = table2column3Width;
             }
 
             if (splitterDistance > 0)
             {
-                currentCommandWindow.splitterDistance = splitterDistance;
+                currentWindowSettings.splitterDistance = splitterDistance;
             }
         }
 
@@ -671,7 +685,7 @@ namespace MusicBeePlugin
         {
             //return; //For debbuging
 
-            loadWindowSizesPositions(false, out _, out _, out _, out _, out _, out _, out _);
+            loadWindowSizesPositions();
         }
     }
 }
