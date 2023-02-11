@@ -2637,14 +2637,21 @@ namespace MusicBeePlugin
 
         private void buttonCopyPreset_Click(object sender, EventArgs e)
         {
-            int currentIndex = presetsBox.SelectedIndex;
-            ReportPreset reportsPreset = new ReportPreset((ReportPreset)presetsBox.SelectedItem, false);
-            if (currentIndex <= Plugin.PredefinedReportPresetCount - 1)
-                presetsBox.Items.Add(reportsPreset);
-            else
-                presetsBox.Items.Insert(currentIndex + 1, reportsPreset);
+            int firstPredefinedPresetIndex;
+            for (firstPredefinedPresetIndex = 0; firstPredefinedPresetIndex < presetsBox.Items.Count; firstPredefinedPresetIndex++)
+            {
+                if (!((ReportPreset)presetsBox.Items[firstPredefinedPresetIndex]).userPreset)
+                    break;
+            }
 
-            presetsBox.SelectedItem = reportsPreset;
+            int currentIndex = presetsBox.SelectedIndex;
+            ReportPreset reportsPresetCopy = new ReportPreset((ReportPreset)presetsBox.SelectedItem, false);
+            if (currentIndex < firstPredefinedPresetIndex)
+                presetsBox.Items.Insert(currentIndex + 1, reportsPresetCopy);
+            else
+                presetsBox.Items.Insert(0, reportsPresetCopy);
+
+            presetsBox.SelectedItem = reportsPresetCopy;
             setUnsavedChanges(true);
         }
 
