@@ -2630,8 +2630,8 @@ namespace MusicBeePlugin
 
         private void buttonAddPreset_Click(object sender, EventArgs e)
         {
-            presetsBox.Items.Add(new ReportPreset());
-            presetsBox.SelectedIndex = presetsBox.Items.Count - 1;
+            presetsBox.Items.Insert(0, new ReportPreset());
+            presetsBox.SelectedIndex = 0;
             setUnsavedChanges(true);
         }
 
