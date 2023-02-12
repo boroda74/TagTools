@@ -50,7 +50,7 @@ namespace MusicBeePlugin
 
         public static string GetPersistentTrackId(string currentFile)
         {
-            string id = MbApiInterface.Library_GetDevicePersistentId(currentFile, (DeviceIdType)0);
+            string id = MbApiInterface.Library_GetDevicePersistentId(currentFile, DeviceIdType.MusicBeeNativeId);
 
             if (id == null)
                 id = "-1";

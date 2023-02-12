@@ -3,7 +3,7 @@
 
 *Note:*
 
-If you are familiar with plugin update process, you can always download *latest plugin version [here][4]*. Copy the file "mb_TagTools.dll" from the archive "mb_TagTools_latest.zip" to MusicBee  "Plugins" folder, and overwrite the existing file.
+If you are familiar with plugin quick update process, you can always download *latest plugin version [here][4]*. Copy the file "mb_TagTools.dll" from the archive "mb_TagTools_latest.zip" to MusicBee  "Plugins" folder, and overwrite the existing file.
 <br/>
 
 *Note:*
@@ -205,9 +205,10 @@ To define date type of custom tag, open MusicBee menu> Edit> Preferences> Tags (
 
 These commands allow to (auto)backup tags of all tracks in your library and restore them. First create full backup manually. You can do manual or auto incremental backups after this.
 
-*Note:*
+*Notes:*
 
-- "Tag History" is available in track context menu only. 
+- "Tag History" is available in track context menu only.
+- The plugin backs up tags using tack unique IDs, which are stored in MusicBee library (database) only. So, it's some kind of "Time machine" only. THE PLUGIN WON'T BE ABLE TO RESTORE TAGS IF YOU HAVE CREATED A NEW MUSICBEE LIBRARY FROM SCRATCH, E.G. ON A NEW PC (EVEN IF YOU HAVE ADDED THE SAME TRACKS TO THE NEW LIBRARY)!
 
 ----
 
