@@ -346,6 +346,7 @@ namespace MusicBeePlugin
             public string multipleItemsSplitterChar2;
 
             public string exportedTrackListName;
+            public string exportedLastFolder;
 
             public MetaDataType autoRateTagId;
             public bool storePlaysPerDay;

@@ -384,7 +384,7 @@ namespace MusicBeePlugin
         private SortedDictionary<string, bool>[] cachedQueriedActualGroupingValues = null;
         private SortedDictionary<string, string> cachedQueriedFilesActualComposedGroupingValues = new SortedDictionary<string, string>(); //<url, composed groupings>
 
-        private readonly AggregatedTags tags = new AggregatedTags();
+        private AggregatedTags tags = new AggregatedTags();
 
         private string conditionText;
         private string comparedFieldText;
@@ -651,6 +651,31 @@ namespace MusicBeePlugin
             }
         }
 
+        public static string ReplaceLeadingZerosBySpaces(int i)
+        {
+            string oldSequenceNumber = i.ToString("D9");
+            //return oldSequenceNumber; //Not sure what's better
+
+            string sequenceNumber = "";
+
+            int j = 0;
+            for (j = 0; j < 8; j++)
+            {
+                if (oldSequenceNumber[j] == '0')
+                    sequenceNumber += '\u2007';
+                else
+                    break;
+            }
+
+            while (j < 9)
+            {
+                sequenceNumber += oldSequenceNumber[j];
+                j++;
+            }
+
+            return sequenceNumber;
+        }
+
         private string executePreset(string[] queriedFiles, bool interactive, bool saveResultsToTags, string functionId)
         {
             if (functionId != null && string.IsNullOrWhiteSpace(functionId))
@@ -662,6 +687,7 @@ namespace MusicBeePlugin
             string query;
             string tagValue;
 
+            int sequenceNumberGrouping = -1;
 
             //Let's cache tag/prop ids
             Plugin.MetaDataType[] queriedGroupingsTagIds = new Plugin.MetaDataType[groupingNames.Count];
@@ -689,7 +715,10 @@ namespace MusicBeePlugin
 
                 if (groupingNames[i] == Plugin.SequenceNumberName)
                 {
-                    tagId = 0; //Will ignore this grouping...
+                    nativeTagName = null;
+                    tagId = (Plugin.MetaDataType)(-99);
+                    queriedActualGroupingsTagIds[i] = tagId;
+                    sequenceNumberGrouping = i;
                 }
                 else
                 {
@@ -768,7 +797,11 @@ namespace MusicBeePlugin
                             if (tagId == 0)
                                 propId = queriedActualGroupingsPropIds[i];
 
-                            if (tagId == 0 && propId == 0)
+                            if (tagId == (Plugin.MetaDataType)(-99))
+                            {
+                                tagValue = "xXxXxXxXx"; //Let's reserve space for future numbers
+                            }
+                            else if (tagId == 0 && propId == 0)
                             {
                                 tagValue = ""; //Will ignore this grouping...
                             }
@@ -850,6 +883,22 @@ namespace MusicBeePlugin
 
                 if (queryOnlyGroupings)
                 {
+                    if (sequenceNumberGrouping != -1)
+                    {
+                        AggregatedTags tags2 = new AggregatedTags();
+
+                        int i = 1;
+                        foreach (KeyValuePair<string, Plugin.ConvertStringsResults[]> keyValue in tags)
+                        {
+                            string sequenceNumber = ReplaceLeadingZerosBySpaces(i);
+                            tags2.Add(keyValue.Key.Replace("xXxXxXxXx", sequenceNumber), keyValue.Value);
+                            i++;
+                        }
+
+                        tags = tags2;
+                    }
+
+
                     cachedAppliedPresetGuid = appliedPreset.guid;
                     applyOnlyGroupingsPresetResults();
                     return "...";
@@ -930,11 +979,11 @@ namespace MusicBeePlugin
                     if (queriedFiles.Length == 0)
                         return "";
 
-                    return applyPresetResults(queriedFiles, interactive, saveResultsToTags, functionId);
+                    return applyPresetResults(queriedFiles, interactive, saveResultsToTags, functionId, sequenceNumberGrouping);
                 }
                 else
                 {
-                    return applyPresetResults(queriedFiles, interactive, saveResultsToTags, functionId);
+                    return applyPresetResults(queriedFiles, interactive, saveResultsToTags, functionId, sequenceNumberGrouping);
                 }
             }
 
@@ -982,7 +1031,11 @@ namespace MusicBeePlugin
                     Plugin.MetaDataType tagId = queriedActualGroupingsTagIds[i];
                     Plugin.FilePropertyType propId = queriedActualGroupingsPropIds[i];
 
-                    if (tagId == 0 && propId == 0)
+                    if (tagId == (Plugin.MetaDataType)(-99))
+                    {
+                        tagValue = "xXxXxXxXx"; //Let's reserve space for future numbers
+                    }
+                    else if (tagId == 0 && propId == 0)
                     {
                         tagValue = ""; //Will ignore this grouping...
                     }
@@ -1098,15 +1151,32 @@ namespace MusicBeePlugin
 
             cachedAppliedPresetGuid = appliedPreset.guid;
             if (queriedFiles == null)
-                return applyPresetResults(files, interactive, saveResultsToTags, functionId);
+                return applyPresetResults(files, interactive, saveResultsToTags, functionId, sequenceNumberGrouping);
             else
-                return applyPresetResults(queriedFiles, interactive, saveResultsToTags, functionId);
+                return applyPresetResults(queriedFiles, interactive, saveResultsToTags, functionId, sequenceNumberGrouping);
         }
 
-        private string applyPresetResults(string[] queriedFiles, bool interactive, bool saveResultsToTags, string functionId)
+        private string applyPresetResults(string[] queriedFiles, bool interactive, bool saveResultsToTags, string functionId, int sequenceNumberGrouping)
         {
             if (functionId != null)
                 return getFunctionResult(queriedFiles[0], cachedQueriedFilesActualComposedGroupingValues, functionId);
+
+
+            if (sequenceNumberGrouping != -1)
+            {
+                AggregatedTags tags2 = new AggregatedTags();
+
+                int i = 1;
+                foreach (KeyValuePair<string, Plugin.ConvertStringsResults[]> keyValue in tags)
+                {
+                    string sequenceNumber = ReplaceLeadingZerosBySpaces(i);
+                    tags2.Add(keyValue.Key.Replace("xXxXxXxXx", sequenceNumber), keyValue.Value);
+                    i++;
+                }
+
+                tags = tags2;
+            }
+
 
             List<string[]> rows = new List<string[]>();
 
@@ -1139,13 +1209,13 @@ namespace MusicBeePlugin
                     }
                     rows.Add(row);
 
-                    Plugin.SetStatusbarTextForFileOperations(Plugin.LibraryReportsGneratingPreviewCommandSbText, true, groupingsCount, totalGroupingsCount, appliedPreset.getName());
-                    //if (groupingsCount % 100 == 0)
-                    //{
-                    //    Plugin.SetStatusbarTextForFileOperations(Plugin.LibraryReportsGneratingPreviewCommandSbText, true, groupingsCount, totalGroupingsCount, appliedPreset.getName(), 0);
-                    //    Invoke(addRowToTable, rows);
-                    //    rows.Clear();
-                    //}
+                    //Plugin.SetStatusbarTextForFileOperations(Plugin.LibraryReportsGneratingPreviewCommandSbText, true, groupingsCount, totalGroupingsCount, appliedPreset.getName());
+                    if (groupingsCount % 100 == 0)
+                    {
+                        Plugin.SetStatusbarTextForFileOperations(Plugin.LibraryReportsGneratingPreviewCommandSbText, true, groupingsCount, totalGroupingsCount, appliedPreset.getName(), 0);
+                        Invoke(addRowToTable, rows);
+                        rows.Clear();
+                    }
 
                     groupingsCount++;
 
@@ -1194,13 +1264,13 @@ namespace MusicBeePlugin
                 string[] row = AggregatedTags.GetGroupings(keyValue, groupingNames);
                 rows.Add(row);
 
-                Plugin.SetStatusbarTextForFileOperations(Plugin.LibraryReportsGneratingPreviewCommandSbText, true, groupingsCount, totalGroupingsCount, appliedPreset.getName());
-                //if (groupingsCount % 100 == 0)
-                //{
-                //    Plugin.SetStatusbarTextForFileOperations(Plugin.LibraryReportsGneratingPreviewCommandSbText, true, groupingsCount, totalGroupingsCount, appliedPreset.getName(), 0);
-                //    Invoke(addRowToTable, rows);
-                //    rows.Clear();
-                //}
+                //Plugin.SetStatusbarTextForFileOperations(Plugin.LibraryReportsGneratingPreviewCommandSbText, true, groupingsCount, totalGroupingsCount, appliedPreset.getName());
+                if (groupingsCount % 100 == 0)
+                {
+                    Plugin.SetStatusbarTextForFileOperations(Plugin.LibraryReportsGneratingPreviewCommandSbText, true, groupingsCount, totalGroupingsCount, appliedPreset.getName(), 0);
+                    Invoke(addRowToTable, rows);
+                    rows.Clear();
+                }
 
                 groupingsCount++;
 
@@ -2063,7 +2133,10 @@ namespace MusicBeePlugin
             }
             else
             {
-                fileDirectoryPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\";
+                if (Plugin.SavedSettings.exportedLastFolder == null)
+                    Plugin.SavedSettings.exportedLastFolder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\";
+
+                fileDirectoryPath = Plugin.SavedSettings.exportedLastFolder;
             }
 
             if (!openReport)
@@ -2086,6 +2159,7 @@ namespace MusicBeePlugin
 
                 Plugin.SavedSettings.filterIndex = dialog.FilterIndex;
                 Plugin.SavedSettings.exportedTrackListName = reportOnlyFileName;
+                Plugin.SavedSettings.exportedLastFolder = fileDirectoryPath;
             }
             else
             {
