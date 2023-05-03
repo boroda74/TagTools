@@ -654,8 +654,6 @@ namespace MusicBeePlugin
         public static string ReplaceLeadingZerosBySpaces(int i)
         {
             string oldSequenceNumber = i.ToString("D9");
-            //return oldSequenceNumber; //Not sure what's better
-
             string sequenceNumber = "";
 
             int j = 0;
@@ -707,6 +705,9 @@ namespace MusicBeePlugin
             for (int l = 0; l < queriedActualGroupingsTagIds.Length; l++)
                 queriedActualGroupingsTagIds[l] = 0;
 
+            int lastSeqNumInOrder = 1;
+            SortedDictionary<string, int> seqNumInOrder = null;
+
 
             for (int i = 0; i < groupingNames.Count; i++)
             {
@@ -719,6 +720,8 @@ namespace MusicBeePlugin
                     tagId = (Plugin.MetaDataType)(-99);
                     queriedActualGroupingsTagIds[i] = tagId;
                     sequenceNumberGrouping = i;
+
+                    seqNumInOrder = new SortedDictionary<string, int>();
                 }
                 else
                 {
@@ -877,6 +880,14 @@ namespace MusicBeePlugin
                         else //if (functionId == null)
                             Plugin.SetStatusbarTextForFileOperations(Plugin.ApplyingLibraryReportSbText, true, n, queriedFiles.Length, appliedPreset.getName());
 
+
+                        if (sequenceNumberGrouping != -1)
+                        {
+                            string composedGroupingValues = AggregatedTags.GetComposedGroupingValues(currentFileGroupingValues);
+                            if (!seqNumInOrder.TryGetValue(composedGroupingValues, out _))
+                                seqNumInOrder.Add(composedGroupingValues, lastSeqNumInOrder++);
+                        }
+
                         tags.add(null, currentFileGroupingValues, null, null, null, appliedPreset.totals);
                     }
                 }
@@ -887,12 +898,11 @@ namespace MusicBeePlugin
                     {
                         AggregatedTags tags2 = new AggregatedTags();
 
-                        int i = 1;
                         foreach (KeyValuePair<string, Plugin.ConvertStringsResults[]> keyValue in tags)
                         {
-                            string sequenceNumber = ReplaceLeadingZerosBySpaces(i);
+                            int seqNum = seqNumInOrder[keyValue.Key];
+                            string sequenceNumber = ReplaceLeadingZerosBySpaces(seqNum);
                             tags2.Add(keyValue.Key.Replace("xXxXxXxXx", sequenceNumber), keyValue.Value);
-                            i++;
                         }
 
                         tags = tags2;
@@ -1072,8 +1082,15 @@ namespace MusicBeePlugin
                 if (skipFile)
                     continue; //Continue file loop
 
+                string composedGroupingValues = AggregatedTags.GetComposedGroupingValues(groupingValues);
 
-                cachedQueriedFilesActualComposedGroupingValues.Add(currentFile, AggregatedTags.GetComposedGroupingValues(groupingValues));
+                if (sequenceNumberGrouping != -1)
+                {
+                    if (!seqNumInOrder.TryGetValue(composedGroupingValues, out _))
+                        seqNumInOrder.Add(composedGroupingValues, lastSeqNumInOrder++);
+                }
+
+                cachedQueriedFilesActualComposedGroupingValues.Add(currentFile, composedGroupingValues);
 
                 functionValues = new string[functionNames.Count];
                 parameter2Values = new string[functionNames.Count];
@@ -1087,7 +1104,7 @@ namespace MusicBeePlugin
 
                     if (parameterNames[i] == Plugin.SequenceNumberName)
                     {
-                        tagValue = fileCounter.ToString();
+                        tagValue = ReplaceLeadingZerosBySpaces(fileCounter);
                     }
                     else if (tagId == Plugin.ArtistArtistsId || tagId == Plugin.ComposerComposersId) //Lets make smart conversion of list of artists/composers
                     {
@@ -1148,6 +1165,22 @@ namespace MusicBeePlugin
                 else
                     tags.add(null, groupingValues, functionValues, functionTypes, parameter2Values, appliedPreset.totals);
             }
+
+
+            if (sequenceNumberGrouping != -1)
+            {
+                AggregatedTags tags2 = new AggregatedTags();
+
+                foreach (KeyValuePair<string, Plugin.ConvertStringsResults[]> keyValue in tags)
+                {
+                    int seqNum = seqNumInOrder[keyValue.Key];
+                    string sequenceNumber = ReplaceLeadingZerosBySpaces(seqNum);
+                    tags2.Add(keyValue.Key.Replace("xXxXxXxXx", sequenceNumber), keyValue.Value);
+                }
+
+                tags = tags2;
+            }
+
 
             cachedAppliedPresetGuid = appliedPreset.guid;
             if (queriedFiles == null)
