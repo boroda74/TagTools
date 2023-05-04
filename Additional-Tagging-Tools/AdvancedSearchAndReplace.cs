@@ -705,9 +705,24 @@ namespace MusicBeePlugin
         {
             protected string functionName = "null";
 
-            protected virtual string calculate(string currentFile, string parameter0, string parameter1 = null)
+            protected virtual string calculateInternal(string currentFile, string parameter0, string parameter1 = null)
             {
                 return "\u0000";
+            }
+
+            protected string calculate(string currentFile, string parameter0, string parameter1 = null)
+            {
+                if (parameter0 != null)
+                    parameter0 = parameter0.Replace(",", "``");
+
+                if (parameter1 != null)
+                    parameter1 = parameter1.Replace(",", "``");
+
+                string result = calculateInternal(currentFile, parameter0, parameter1);
+
+                result = result.Replace("``", ",");
+
+                return result;
             }
 
             public virtual void multiEvaluate1(string currentFile, ref string tagValue)
@@ -757,7 +772,7 @@ namespace MusicBeePlugin
                 functionName = "rg2sc";
             }
 
-            protected override string calculate(string currentFile, string parameter0, string parameter1 = null)
+            protected override string calculateInternal(string currentFile, string parameter0, string parameter1 = null)
             {
                 parameter0 = Regex.Replace(parameter0, @"(.*)\s.*", "$1");
 
@@ -830,9 +845,9 @@ namespace MusicBeePlugin
                 functionName = "rg2sc4mp3";
             }
 
-            protected override string calculate(string currentFile, string parameter0, string parameter1 = null)
+            protected override string calculateInternal(string currentFile, string parameter0, string parameter1 = null)
             {
-                return base.calculate(currentFile, parameter0) + "\u0000";
+                return base.calculateInternal(currentFile, parameter0) + "\u0000";
             }
         }
 
@@ -843,7 +858,7 @@ namespace MusicBeePlugin
                 functionName = "tc";
             }
 
-            protected override string calculate(string currentFile, string parameter0, string parameter1 = null)
+            protected override string calculateInternal(string currentFile, string parameter0, string parameter1 = null)
             {
                 string[] exceptionWords;
 
@@ -868,7 +883,7 @@ namespace MusicBeePlugin
                 functionName = "lc";
             }
 
-            protected override string calculate(string currentFile, string parameter0, string parameter1 = null)
+            protected override string calculateInternal(string currentFile, string parameter0, string parameter1 = null)
             {
                 string[] exceptionWords;
 
@@ -891,7 +906,7 @@ namespace MusicBeePlugin
                 functionName = "uc";
             }
 
-            protected override string calculate(string currentFile, string parameter0, string parameter1 = null)
+            protected override string calculateInternal(string currentFile, string parameter0, string parameter1 = null)
             {
                 string[] exceptionWords;
 
@@ -914,7 +929,7 @@ namespace MusicBeePlugin
                 functionName = "sc";
             }
 
-            protected override string calculate(string currentFile, string parameter0, string parameter1 = null)
+            protected override string calculateInternal(string currentFile, string parameter0, string parameter1 = null)
             {
                 string[] exceptionWords;
 
@@ -939,7 +954,7 @@ namespace MusicBeePlugin
                 functionName = "eval";
             }
 
-            protected override string calculate(string currentFile, string parameter0, string parameter1 = null)
+            protected override string calculateInternal(string currentFile, string parameter0, string parameter1 = null)
             {
                 return Plugin.MbApiInterface.MB_Evaluate(parameter0, currentFile);
             }
@@ -952,7 +967,7 @@ namespace MusicBeePlugin
                 functionName = "char";
             }
 
-            protected override string calculate(string currentFile, string parameter0, string parameter1 = null)
+            protected override string calculateInternal(string currentFile, string parameter0, string parameter1 = null)
             {
                 ushort charcode = ushort.Parse(parameter0, System.Globalization.NumberStyles.HexNumber);
                 return ((char)charcode).ToString();
@@ -966,7 +981,7 @@ namespace MusicBeePlugin
                 functionName = "repunct";
             }
 
-            protected override string calculate(string currentFile, string parameter0, string parameter1 = null)
+            protected override string calculateInternal(string currentFile, string parameter0, string parameter1 = null)
             {
                 parameter0 = Regex.Replace(parameter0, "\u013F", "L");
                 parameter0 = Regex.Replace(parameter0, "\u0140", "l");
@@ -1062,7 +1077,7 @@ namespace MusicBeePlugin
                 }
             }
 
-            protected override string calculate(string currentFile, string parameter0, string parameter1 = null)
+            protected override string calculateInternal(string currentFile, string parameter0, string parameter1 = null)
             {
                 CustomText1 = Regex.Replace(CustomText1, "; ", ";");
                 string[] artists = parameter0.Replace("\u000E", "[").Replace("\u000F", "]").Split(new string[] { "\u0000" }, StringSplitOptions.RemoveEmptyEntries);
@@ -1130,7 +1145,7 @@ namespace MusicBeePlugin
                 functionName = "replace";
             }
 
-            protected override string calculate(string currentFile, string parameter0, string parameter1 = null)
+            protected override string calculateInternal(string currentFile, string parameter0, string parameter1 = null)
             {
                 string[] secondParameter = parameter1.Split('|');
 
