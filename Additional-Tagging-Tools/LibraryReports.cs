@@ -20,6 +20,7 @@ namespace MusicBeePlugin
             public string name = null;
             public bool userPreset = true;
             public Guid guid = Guid.NewGuid();
+            public Guid permanentGuid = Guid.NewGuid();
 
             public bool hotkeyAssigned = false;
             public bool applyToSelectedTracks = true;
@@ -41,6 +42,8 @@ namespace MusicBeePlugin
             public string conditionText = null;
             public string comparedField = null;
 
+            public string exportedTrackListName = "Exported Track List";
+
             public ReportPreset()
             {
                 //Nothing to do...
@@ -59,6 +62,8 @@ namespace MusicBeePlugin
                     functionIds = (string[])sourcePreset.functionIds.Clone();
                 }
 
+                permanentGuid = sourcePreset.permanentGuid;
+
                 applyToSelectedTracks = sourcePreset.applyToSelectedTracks;
 
                 groupingNames = (string[])sourcePreset.groupingNames.Clone();
@@ -76,6 +81,8 @@ namespace MusicBeePlugin
                 conditionField = sourcePreset.conditionField;
                 conditionText = sourcePreset.conditionText;
                 comparedField = sourcePreset.comparedField;
+
+                exportedTrackListName = sourcePreset.exportedTrackListName;
             }
 
             public string getHotkeyChar()
@@ -2172,11 +2179,13 @@ namespace MusicBeePlugin
                 fileDirectoryPath = Plugin.SavedSettings.exportedLastFolder;
             }
 
+            ReportPreset selectedPreset = (ReportPreset)presetsBox.SelectedItem;
+
             if (!openReport)
             {
                 SaveFileDialog dialog = new SaveFileDialog();
                 dialog.InitialDirectory = fileDirectoryPath;
-                dialog.FileName = Plugin.SavedSettings.exportedTrackListName;
+                dialog.FileName = selectedPreset.exportedTrackListName;
                 dialog.Filter = Plugin.ExportedFormats;
                 dialog.FilterIndex = Plugin.SavedSettings.filterIndex;
 
@@ -2191,12 +2200,25 @@ namespace MusicBeePlugin
                 reportOnlyFileName = Regex.Replace(dialog.FileName, @"^.*\\(.*)\..*", "$1"); //Filename without path to file and extension
 
                 Plugin.SavedSettings.filterIndex = dialog.FilterIndex;
-                Plugin.SavedSettings.exportedTrackListName = reportOnlyFileName;
+                selectedPreset.exportedTrackListName = reportOnlyFileName;
+
+                if (Plugin.SavedSettings.reportsPresets != null)
+                {
+                    foreach (ReportPreset preset in Plugin.SavedSettings.reportsPresets)
+                    {
+                        if (preset.permanentGuid == selectedPreset.permanentGuid)
+                        {
+                            preset.exportedTrackListName = reportOnlyFileName;
+                            break;
+                        }
+                    }
+                }
+                
                 Plugin.SavedSettings.exportedLastFolder = fileDirectoryPath;
             }
             else
             {
-                reportOnlyFileName = Plugin.SavedSettings.exportedTrackListName;
+                reportOnlyFileName = selectedPreset.exportedTrackListName;
                 reportFullFileName = fileDirectoryPath + reportOnlyFileName + Plugin.ExportedFormats
                     .Split('|')[(Plugin.SavedSettings.filterIndex - 1) * 2 + 1].Substring(1);
             }

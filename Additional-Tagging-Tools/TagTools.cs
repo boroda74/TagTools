@@ -345,7 +345,6 @@ namespace MusicBeePlugin
             public string multipleItemsSplitterChar1;
             public string multipleItemsSplitterChar2;
 
-            public string exportedTrackListName;
             public string exportedLastFolder;
 
             public MetaDataType autoRateTagId;
@@ -3569,7 +3568,9 @@ namespace MusicBeePlugin
                     destinationTags = tempDestinationTags,
                     functionIds = tempFunctionIds,
                     conditionField = tempGroupings[0],
-                    conditionText = ListItemConditionIsGreater
+                    conditionText = ListItemConditionIsGreater,
+
+                    exportedTrackListName = exportedTrackList
                 };
 
                 SavedSettings.reportsPresets[0] = tempLibraryReportsPreset;
@@ -3643,7 +3644,9 @@ namespace MusicBeePlugin
                     destinationTags = tempDestinationTags,
                     functionIds = tempFunctionIds,
                     conditionField = tempGroupings[0],
-                    conditionText = ListItemConditionIsGreater
+                    conditionText = ListItemConditionIsGreater,
+
+                    exportedTrackListName = exportedTrackList
                 };
 
                 SavedSettings.reportsPresets[1] = tempLibraryReportsPreset;
@@ -3684,7 +3687,9 @@ namespace MusicBeePlugin
                     destinationTags = tempDestinationTags,
                     functionIds = tempFunctionIds,
                     conditionField = tempGroupings[0],
-                    conditionText = ListItemConditionIsGreater
+                    conditionText = ListItemConditionIsGreater,
+
+                    exportedTrackListName = exportedTrackList
                 };
 
                 SavedSettings.reportsPresets[2] = tempLibraryReportsPreset;
@@ -3723,7 +3728,9 @@ namespace MusicBeePlugin
                     destinationTags = tempDestinationTags,
                     functionIds = tempFunctionIds,
                     conditionField = tempGroupings[0],
-                    conditionText = ListItemConditionIsGreater
+                    conditionText = ListItemConditionIsGreater,
+
+                    exportedTrackListName = exportedTrackList
                 };
 
                 SavedSettings.reportsPresets[PredefinedReportPresetCount - 1] = tempLibraryReportsPreset;
@@ -3759,8 +3766,6 @@ namespace MusicBeePlugin
                 SavedSettings.multipleItemsSplitterChar1 = ";";
                 SavedSettings.multipleItemsSplitterChar2 = "; ";
             }
-            if (string.IsNullOrEmpty(SavedSettings.exportedTrackListName))
-                SavedSettings.exportedTrackListName = exportedTrackList;
 
             if (GetTagId(SavedSettings.copyDestinationTagName) == 0)
                 SavedSettings.copyDestinationTagName = GetTagName(MetaDataType.TrackTitle);
