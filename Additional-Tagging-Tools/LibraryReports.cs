@@ -42,7 +42,7 @@ namespace MusicBeePlugin
             public string conditionText = null;
             public string comparedField = null;
 
-            public string exportedTrackListName = "Exported Track List";
+            public string exportedTrackListName = null;
 
             public ReportPreset()
             {

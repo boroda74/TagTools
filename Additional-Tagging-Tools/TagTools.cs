@@ -3736,6 +3736,11 @@ namespace MusicBeePlugin
                 SavedSettings.reportsPresets[PredefinedReportPresetCount - 1] = tempLibraryReportsPreset;
             };
 
+            foreach (var reportPreset in SavedSettings.reportsPresets)
+            {
+                if (reportPreset != null && reportPreset.exportedTrackListName == null)
+                    reportPreset.exportedTrackListName = exportedTrackList;
+            }
 
 
             //Lets reset invalid defaults for controls
