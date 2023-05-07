@@ -458,6 +458,7 @@ namespace MusicBeePlugin
 
         //Supported exported file formats
         public static string ExportedFormats;
+        public static string ExportedTrackList;
 
         //Plugin localizable strings
         public static string PluginName;
@@ -2720,7 +2721,7 @@ namespace MusicBeePlugin
 
             //Supported exported file formats
             ExportedFormats = "HTML Document (grouped by albums)|*.htm|HTML Document|*.htm|Simple HTML table|*.htm|Tab delimited text|*.txt|M3U Playlist|*.m3u|CSV file|*.csv|HTML Document (CD Booklet)|*.htm";
-            string exportedTrackList = "Exported Track List";
+            ExportedTrackList = "Exported Track List";
 
 
             //Displayed text
@@ -3264,7 +3265,7 @@ namespace MusicBeePlugin
 
                 //Supported exported file formats
                 ExportedFormats = "Документ HTML (по альбомам)|*.htm|Документ HTML|*.htm|Простая таблица HTML|*.htm|Текст, разделенный табуляциями|*.txt|Плейлист M3U|*.m3u|Файл CSV|*.csv|Документ HTML (буклет компакт-диска)|*.htm";
-                exportedTrackList = "Список экпортированных треков";
+                ExportedTrackList = "Список экпортированных треков";
 
                 //Displayed text
                 ListItemConditionIs = "равен";
@@ -3570,7 +3571,7 @@ namespace MusicBeePlugin
                     conditionField = tempGroupings[0],
                     conditionText = ListItemConditionIsGreater,
 
-                    exportedTrackListName = exportedTrackList
+                    exportedTrackListName = ExportedTrackList
                 };
 
                 SavedSettings.reportsPresets[0] = tempLibraryReportsPreset;
@@ -3646,7 +3647,7 @@ namespace MusicBeePlugin
                     conditionField = tempGroupings[0],
                     conditionText = ListItemConditionIsGreater,
 
-                    exportedTrackListName = exportedTrackList
+                    exportedTrackListName = ExportedTrackList
                 };
 
                 SavedSettings.reportsPresets[1] = tempLibraryReportsPreset;
@@ -3689,7 +3690,7 @@ namespace MusicBeePlugin
                     conditionField = tempGroupings[0],
                     conditionText = ListItemConditionIsGreater,
 
-                    exportedTrackListName = exportedTrackList
+                    exportedTrackListName = ExportedTrackList
                 };
 
                 SavedSettings.reportsPresets[2] = tempLibraryReportsPreset;
@@ -3730,7 +3731,7 @@ namespace MusicBeePlugin
                     conditionField = tempGroupings[0],
                     conditionText = ListItemConditionIsGreater,
 
-                    exportedTrackListName = exportedTrackList
+                    exportedTrackListName = ExportedTrackList
                 };
 
                 SavedSettings.reportsPresets[PredefinedReportPresetCount - 1] = tempLibraryReportsPreset;
@@ -3739,7 +3740,7 @@ namespace MusicBeePlugin
             foreach (var reportPreset in SavedSettings.reportsPresets)
             {
                 if (reportPreset != null && reportPreset.exportedTrackListName == null)
-                    reportPreset.exportedTrackListName = exportedTrackList;
+                    reportPreset.exportedTrackListName = ExportedTrackList;
             }
 
 

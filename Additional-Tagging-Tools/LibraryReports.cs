@@ -49,6 +49,11 @@ namespace MusicBeePlugin
                 //Nothing to do...
             }
 
+            public ReportPreset(string exportedTrackList)
+            {
+                exportedTrackListName = exportedTrackList;
+            }
+
             public ReportPreset(ReportPreset sourcePreset, bool fullCopy)
             {
                 if (fullCopy)
@@ -2759,7 +2764,7 @@ namespace MusicBeePlugin
 
         private void buttonAddPreset_Click(object sender, EventArgs e)
         {
-            presetsBox.Items.Insert(0, new ReportPreset());
+            presetsBox.Items.Insert(0, new ReportPreset(Plugin.ExportedTrackList));
             presetsBox.SelectedIndex = 0;
             setUnsavedChanges(true);
         }
@@ -2982,7 +2987,7 @@ namespace MusicBeePlugin
 
         private void buttonExport_Click(object sender, EventArgs e)
         {
-            saveSettings();
+            //saveSettings();
             exportTrackList(openReportCheckBox.Checked);
         }
 
