@@ -172,7 +172,7 @@ namespace MusicBeePlugin
                 return composedGroupings;
             }
 
-            public void add(string url, string[] groupingValues, string[] functionValues, List<FunctionType> functionTypes, string[] parameter2Values, bool totals)
+            public void add(string url, string[] groupingValues, string[] functionValues, List<FunctionType> functionTypes, string[] parameter2Values, ref int[] resultTypes, bool totals)
             {
                 string composedGroupings;
                 Plugin.ConvertStringsResults[] aggregatedValues;
@@ -190,7 +190,7 @@ namespace MusicBeePlugin
                         for (int i = groupingValues.Length - 1; i >= 0; i--)
                         {
                             groupingValues[i] = Plugin.TotalsString;
-                            add(null, groupingValues, functionValues, functionTypes, parameter2Values, false);
+                            add(null, groupingValues, functionValues, functionTypes, parameter2Values, ref resultTypes, false);
                         }
                 }
 
@@ -211,9 +211,15 @@ namespace MusicBeePlugin
                             aggregatedValues[i] = new Plugin.ConvertStringsResults(1);
 
                             if (functionTypes[i] == FunctionType.Minimum)
+                            {
                                 aggregatedValues[i].result1f = double.MaxValue;
+                                aggregatedValues[i].result1s = "口";
+                            }
                             else if (functionTypes[i] == FunctionType.Maximum)
+                            {
                                 aggregatedValues[i].result1f = double.MinValue;
+                                aggregatedValues[i].result1s = "";
+                            }
                         }
 
                         aggregatedValues[functionValues.Length] = new Plugin.ConvertStringsResults(1);
@@ -257,10 +263,34 @@ namespace MusicBeePlugin
                         {
                             currentFunctionValue = Plugin.ConvertStrings(functionValues[i]);
 
+                            if (currentFunctionValue.type == 0)
+                            {
+                                resultTypes[i] = 0;
+                            }
+                            else if (resultTypes[i] == 0)
+                            {
+                                currentFunctionValue.type = 0;
+                            }
+                            else if (currentFunctionValue.type > resultTypes[i])
+                            {
+                                resultTypes[i] = currentFunctionValue.type;
+                            }
+                            else
+                            {
+                                currentFunctionValue.type = resultTypes[i];
+                            }
+
                             if (currentFunctionValue.type != 0)
                             {
                                 if (aggregatedValues[i].result1f > currentFunctionValue.result1f)
                                     aggregatedValues[i].result1f = currentFunctionValue.result1f;
+
+                                aggregatedValues[i].type = currentFunctionValue.type;
+                            }
+                            else
+                            {
+                                if (Plugin.CompareStrings(aggregatedValues[i].result1s, currentFunctionValue.result1s) == 1)
+                                    aggregatedValues[i].result1s = currentFunctionValue.result1s;
 
                                 aggregatedValues[i].type = currentFunctionValue.type;
                             }
@@ -269,10 +299,34 @@ namespace MusicBeePlugin
                         {
                             currentFunctionValue = Plugin.ConvertStrings(functionValues[i]);
 
+                            if (currentFunctionValue.type == 0)
+                            {
+                                resultTypes[i] = 0;
+                            }
+                            else if (resultTypes[i] == 0)
+                            {
+                                currentFunctionValue.type = 0;
+                            }
+                            else if (currentFunctionValue.type < resultTypes[i])
+                            {
+                                resultTypes[i] = currentFunctionValue.type;
+                            }
+                            else
+                            {
+                                currentFunctionValue.type = resultTypes[i];
+                            }
+
                             if (currentFunctionValue.type != 0)
                             {
                                 if (aggregatedValues[i].result1f < currentFunctionValue.result1f)
                                     aggregatedValues[i].result1f = currentFunctionValue.result1f;
+
+                                aggregatedValues[i].type = currentFunctionValue.type;
+                            }
+                            else
+                            {
+                                if (Plugin.CompareStrings(aggregatedValues[i].result1s, currentFunctionValue.result1s) == -1)
+                                    aggregatedValues[i].result1s = currentFunctionValue.result1s;
 
                                 aggregatedValues[i].type = currentFunctionValue.type;
                             }
@@ -717,6 +771,15 @@ namespace MusicBeePlugin
             for (int l = 0; l < queriedActualGroupingsTagIds.Length; l++)
                 queriedActualGroupingsTagIds[l] = 0;
 
+            
+            int[] resultTypes = new int[functionNames.Count];
+
+            for (int l = 0; l < functionNames.Count; l++)
+            {
+                resultTypes[l] = -1;
+            }
+
+
             int lastSeqNumInOrder = 1;
             SortedDictionary<string, int> seqNumInOrder = null;
 
@@ -900,7 +963,7 @@ namespace MusicBeePlugin
                                 seqNumInOrder.Add(composedGroupingValues, lastSeqNumInOrder++);
                         }
 
-                        tags.add(null, currentFileGroupingValues, null, null, null, appliedPreset.totals);
+                        tags.add(null, currentFileGroupingValues, null, null, null, ref resultTypes, appliedPreset.totals);
                     }
                 }
 
@@ -1173,9 +1236,9 @@ namespace MusicBeePlugin
                 }
 
                 if (queriedFiles == null || queriedFiles.Contains(currentFile))
-                    tags.add(currentFile, groupingValues, functionValues, functionTypes, parameter2Values, appliedPreset.totals);
+                    tags.add(currentFile, groupingValues, functionValues, functionTypes, parameter2Values, ref resultTypes, appliedPreset.totals);
                 else
-                    tags.add(null, groupingValues, functionValues, functionTypes, parameter2Values, appliedPreset.totals);
+                    tags.add(null, groupingValues, functionValues, functionTypes, parameter2Values, ref resultTypes, appliedPreset.totals);
             }
 
 
@@ -2766,6 +2829,13 @@ namespace MusicBeePlugin
         {
             presetsBox.Items.Insert(0, new ReportPreset(Plugin.ExportedTrackList));
             presetsBox.SelectedIndex = 0;
+            
+            if (presetsBoxLastSelectedIndex == 0)
+            {
+                presetsBoxLastSelectedIndex = -1;
+                presetsBox_SelectedIndexChanged(null, null);
+            }
+            
             setUnsavedChanges(true);
         }
 
@@ -2786,6 +2856,13 @@ namespace MusicBeePlugin
                 presetsBox.Items.Insert(0, reportsPresetCopy);
 
             presetsBox.SelectedItem = reportsPresetCopy;
+
+            if (presetsBoxLastSelectedIndex == presetsBox.SelectedIndex)
+            {
+                presetsBoxLastSelectedIndex = -1;
+                presetsBox_SelectedIndexChanged(null, null);
+            }
+
             setUnsavedChanges(true);
         }
 

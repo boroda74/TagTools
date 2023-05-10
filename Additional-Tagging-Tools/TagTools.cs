@@ -10,6 +10,8 @@ using System.Threading;
 using System.Windows.Forms;
 using static MusicBeePlugin.AdvancedSearchAndReplaceCommand;
 using static MusicBeePlugin.LibraryReportsCommand;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace MusicBeePlugin
 {
@@ -765,7 +767,7 @@ namespace MusicBeePlugin
 
         public struct ConvertStringsResults
         {
-            public int type; // 4 - date-time, 3 - timespan, 2 - double, 1 - items count, 0 - unknown/string
+            public int type; // 4 - date-time, 3 - timespan, 2 - double, 1 - items count, 0 - unknown/string, -1 - use other results to get type
 
             public double result1f;
             public double result2f;
@@ -775,7 +777,7 @@ namespace MusicBeePlugin
             public SortedDictionary<string, bool> items;
             public SortedDictionary<string, bool> items1;
 
-            public ConvertStringsResults(int typeParam)
+            public ConvertStringsResults(int typeParam) //typeParam: 4 - date-time, 3 - timespan, 2 - double, 1 - items count, 0 - unknown/string, -1 - use other results to get type
             {
                 type = typeParam;
                 result1f = 0;
@@ -789,8 +791,10 @@ namespace MusicBeePlugin
             public string getResult()
             {
                 if (items1.Count != 0) //Its "average count" function
+                {
                     return "" + Math.Round((double)items1.Count / items.Count, 2);
-                else if (type == 0)
+                }
+                else if (type <= 0)
                 {
                     if (items.Count == 0)
                         return "" + result1s;
@@ -833,11 +837,16 @@ namespace MusicBeePlugin
                 ystring = xstring;
 
 
+            results.result1s = xstring;
+            results.result2s = ystring;
+
             if (xstring == CtlUnknown)
             {
                 results.result1f = 0;
                 results.result2f = 0;
-                results.type = 4;
+                results.result1s = CtlUnknown;
+                results.result2s = CtlUnknown;
+                results.type = -1; //Use other results to get type
 
                 return results;
             }
@@ -845,21 +854,26 @@ namespace MusicBeePlugin
 
             if (replacements)
             {
-                string additionalUnitK = "";
-                string additionalUnitM = "";
-                string additionalUnitG = "";
+                string unitsK = "(k|к";
+                string unitsM = "(m|м";
+                string unitsG = "(g|г";
 
                 if (!string.IsNullOrWhiteSpace(SavedSettings.unitK))
-                    additionalUnitK = "|" + SavedSettings.unitK;
+                    unitsK = "|" + SavedSettings.unitK;
 
                 if (!string.IsNullOrWhiteSpace(SavedSettings.unitM))
-                    additionalUnitM = "|" + SavedSettings.unitM;
+                    unitsM = "|" + SavedSettings.unitM;
 
                 if (!string.IsNullOrWhiteSpace(SavedSettings.unitG))
-                    additionalUnitG = "|" + SavedSettings.unitG;
+                    unitsG = "|" + SavedSettings.unitG;
 
-                xstring = Regex.Replace(xstring, @"^(\d+)(\.|\,)?(\d)?(\d)?(\d)?.*?(g|г" + additionalUnitG + ").*$", "$1`$3$4$5~000000000", RegexOptions.IgnoreCase);
-                ystring = Regex.Replace(ystring, @"^(\d+)(\.|\,)?(\d)?(\d)?(\d)?.*?(g|г" + additionalUnitG + ").*$", "$1`$3$4$5~000000000", RegexOptions.IgnoreCase);
+                unitsK += ")";
+                unitsM += ")";
+                unitsG += ")";
+
+
+                xstring = Regex.Replace(xstring, @"^(\d+)(\.|\,)?(\d)?(\d)?(\d)?.*?" + unitsG + ".*$", "$1`$3$4$5~000000000", RegexOptions.IgnoreCase);
+                ystring = Regex.Replace(ystring, @"^(\d+)(\.|\,)?(\d)?(\d)?(\d)?.*?" + unitsG + ".*$", "$1`$3$4$5~000000000", RegexOptions.IgnoreCase);
 
                 xstring = Regex.Replace(xstring, @"~", "", RegexOptions.IgnoreCase);
                 ystring = Regex.Replace(ystring, @"~", "", RegexOptions.IgnoreCase);
@@ -868,8 +882,8 @@ namespace MusicBeePlugin
                 ystring = Regex.Replace(ystring, @"^(.*?)`(.{9}).*$", "$1$2", RegexOptions.IgnoreCase);
 
 
-                xstring = Regex.Replace(xstring, @"^(\d+)(\.|\,)?(\d)?(\d)?(\d)?.*?(m|м" + additionalUnitM + ").*$", "$1`$3$4$5~000000", RegexOptions.IgnoreCase);
-                ystring = Regex.Replace(ystring, @"^(\d+)(\.|\,)?(\d)?(\d)?(\d)?.*?(m|м" + additionalUnitM + ").*$", "$1`$3$4$5~000000", RegexOptions.IgnoreCase);
+                xstring = Regex.Replace(xstring, @"^(\d+)(\.|\,)?(\d)?(\d)?(\d)?.*?" + unitsM + ".*$", "$1`$3$4$5~000000", RegexOptions.IgnoreCase);
+                ystring = Regex.Replace(ystring, @"^(\d+)(\.|\,)?(\d)?(\d)?(\d)?.*?" + unitsM + ".*$", "$1`$3$4$5~000000", RegexOptions.IgnoreCase);
 
                 xstring = Regex.Replace(xstring, @"~", "", RegexOptions.IgnoreCase);
                 ystring = Regex.Replace(ystring, @"~", "", RegexOptions.IgnoreCase);
@@ -878,8 +892,8 @@ namespace MusicBeePlugin
                 ystring = Regex.Replace(ystring, @"^(.*?)`(.{6}).*$", "$1$2", RegexOptions.IgnoreCase);
 
 
-                xstring = Regex.Replace(xstring, @"^(\d+)(\.|\,)?(\d)?(\d)?(\d)?.*?(k|к" + additionalUnitK + ").*$", "$1`$3$4$5~000", RegexOptions.IgnoreCase);
-                ystring = Regex.Replace(ystring, @"^(\d+)(\.|\,)?(\d)?(\d)?(\d)?.*?(k|к" + additionalUnitK + ").*$", "$1`$3$4$5~000", RegexOptions.IgnoreCase);
+                xstring = Regex.Replace(xstring, @"^(\d+)(\.|\,)?(\d)?(\d)?(\d)?.*?" + unitsK + ".*$", "$1`$3$4$5~000", RegexOptions.IgnoreCase);
+                ystring = Regex.Replace(ystring, @"^(\d+)(\.|\,)?(\d)?(\d)?(\d)?.*?" + unitsK + ".*$", "$1`$3$4$5~000", RegexOptions.IgnoreCase);
 
                 xstring = Regex.Replace(xstring, @"~", "", RegexOptions.IgnoreCase);
                 ystring = Regex.Replace(ystring, @"~", "", RegexOptions.IgnoreCase);
@@ -888,8 +902,8 @@ namespace MusicBeePlugin
                 ystring = Regex.Replace(ystring, @"^(.*?)`(.{3}).*$", "$1$2", RegexOptions.IgnoreCase);
 
 
-                xstring = Regex.Replace(xstring, @"^(\d+).*$", "$1", RegexOptions.IgnoreCase);
-                ystring = Regex.Replace(ystring, @"^(\d+).*$", "$1", RegexOptions.IgnoreCase);
+                xstring = Regex.Replace(xstring, @"^(\d+)\s?[^\s]*$", "$1", RegexOptions.IgnoreCase);
+                ystring = Regex.Replace(ystring, @"^(\d+)\s?[^\s]*$", "$1", RegexOptions.IgnoreCase);
             }
 
 
@@ -897,7 +911,7 @@ namespace MusicBeePlugin
             {
                 results.result1f = double.Parse(xstring);
                 results.result2f = double.Parse(ystring);
-                results.type = 2;
+                results.type = 2; //double
 
                 return results;
             }
@@ -926,7 +940,7 @@ namespace MusicBeePlugin
                     results.result2f = time.TotalSeconds;
 
 
-                    results.type = 3;
+                    results.type = 3; //timespan
 
                     return results;
                 }
@@ -936,7 +950,7 @@ namespace MusicBeePlugin
                     {
                         results.result1f = (DateTime.Parse(xstring) - DateTime.MinValue).TotalSeconds;
                         results.result2f = (DateTime.Parse(ystring) - DateTime.MinValue).TotalSeconds;
-                        results.type = 4;
+                        results.type = 4; //date - time
 
                         return results;
                     }
@@ -948,9 +962,7 @@ namespace MusicBeePlugin
                         }
                         else
                         {
-                            results.result1s = xstring;
-                            results.result2s = ystring;
-                            results.type = 0;
+                            results.type = 0; //unknown / string
 
                             return results;
                         }
@@ -959,7 +971,7 @@ namespace MusicBeePlugin
             }
         }
 
-        public static int CompareStrings(string xstring, string ystring)
+        public static int CompareStrings(string xstring, string ystring) //Returns: +1 - xstring > ystring, 0 - xstring > ystring, -1 - xstring < ystring
         {
             ConvertStringsResults results;
 
