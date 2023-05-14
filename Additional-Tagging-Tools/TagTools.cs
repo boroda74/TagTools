@@ -902,8 +902,8 @@ namespace MusicBeePlugin
                 ystring = Regex.Replace(ystring, @"^(.*?)`(.{3}).*$", "$1$2", RegexOptions.IgnoreCase);
 
 
-                xstring = Regex.Replace(xstring, @"^(\d+)\s?[^\s0-9]+[^\s]*$", "$1", RegexOptions.IgnoreCase);
-                ystring = Regex.Replace(ystring, @"^(\d+)\s?[^\s0-9]+[^\s]*$", "$1", RegexOptions.IgnoreCase);
+                xstring = Regex.Replace(xstring, @"^(\d+)\s*[^\s0-9]+[^\s]*$", "$1", RegexOptions.IgnoreCase);
+                ystring = Regex.Replace(ystring, @"^(\d+)\s*[^\s0-9]+[^\s]*$", "$1", RegexOptions.IgnoreCase);
             }
 
 

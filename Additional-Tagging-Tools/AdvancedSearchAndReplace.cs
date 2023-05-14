@@ -712,32 +712,7 @@ namespace MusicBeePlugin
 
             protected string calculate(string currentFile, string parameter0, string parameter1 = null)
             {
-                if (parameter0 != null)
-                    parameter0 = parameter0.Replace(",,", "~~");
-
-                if (parameter1 != null)
-                    parameter1 = parameter1.Replace(",,", "~~");
-
-
-                if (parameter0 != null)
-                    parameter0 = parameter0.Replace(",", "``");
-
-                if (parameter1 != null)
-                    parameter1 = parameter1.Replace(",", "``");
-
-
-                if (parameter0 != null)
-                    parameter0 = parameter0.Replace("~~", ",");
-
-                if (parameter1 != null)
-                    parameter1 = parameter1.Replace("~~", ",");
-
-
-                string result = calculateInternal(currentFile, parameter0, parameter1);
-
-                result = result.Replace("``", ",");
-
-                return result;
+                return calculateInternal(currentFile, parameter0, parameter1);
             }
 
             public virtual void multiEvaluate1(string currentFile, ref string tagValue)
@@ -971,7 +946,32 @@ namespace MusicBeePlugin
 
             protected override string calculateInternal(string currentFile, string parameter0, string parameter1 = null)
             {
-                return Plugin.MbApiInterface.MB_Evaluate(parameter0, currentFile);
+                //parameter0 = Regex.Replace(parameter0, @"(\$\w+)\(""", "$1(^^");
+                //parameter0 = Regex.Replace(parameter0, @"(\$\w+.*?)"",,", "$1^^,,");
+                //parameter0 = Regex.Replace(parameter0, @"(\$\w+.*?)""\)", "$1^^)");
+                //parameter0 = parameter0.Replace("\"", "''");
+
+                parameter0 = parameter0.Replace("\"\"", "^^");
+                parameter0 = parameter0.Replace("\"", "&&&");
+                parameter0 = parameter0.Replace("^^", "\"");
+
+                parameter0 = parameter0.Replace(",,", "~~");
+                parameter0 = parameter0.Replace(",", "\",\"");
+                parameter0 = parameter0.Replace("~~", ",");
+
+
+                parameter0 = Plugin.MbApiInterface.MB_Evaluate(parameter0, currentFile);
+
+
+                //parameter0 = parameter0.Replace("``", ",");
+
+                parameter0 = parameter0.Replace("(^^", "(\"");
+                parameter0 = parameter0.Replace("^^,,", "\",,");
+                parameter0 = parameter0.Replace("^^)", "\")");
+
+                parameter0 = parameter0.Replace("&&&", "\"");
+
+                return parameter0;
             }
         }
 
