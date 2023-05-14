@@ -713,10 +713,25 @@ namespace MusicBeePlugin
             protected string calculate(string currentFile, string parameter0, string parameter1 = null)
             {
                 if (parameter0 != null)
+                    parameter0 = parameter0.Replace(",,", "~~");
+
+                if (parameter1 != null)
+                    parameter1 = parameter1.Replace(",,", "~~");
+
+
+                if (parameter0 != null)
                     parameter0 = parameter0.Replace(",", "``");
 
                 if (parameter1 != null)
                     parameter1 = parameter1.Replace(",", "``");
+
+
+                if (parameter0 != null)
+                    parameter0 = parameter0.Replace("~~", ",");
+
+                if (parameter1 != null)
+                    parameter1 = parameter1.Replace("~~", ",");
+
 
                 string result = calculateInternal(currentFile, parameter0, parameter1);
 
