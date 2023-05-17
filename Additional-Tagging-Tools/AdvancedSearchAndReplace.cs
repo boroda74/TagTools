@@ -946,16 +946,14 @@ namespace MusicBeePlugin
                 parameter0 = parameter0.Replace("^^", "\"");
 
                 parameter0 = parameter0.Replace(",,", "~~");
-                parameter0 = parameter0.Replace(",", "\",\"");
+                parameter0 = parameter0.Replace(",", "``");
                 parameter0 = parameter0.Replace("~~", ",");
 
 
                 parameter0 = Plugin.MbApiInterface.MB_Evaluate(parameter0, currentFile);
 
 
-                parameter0 = parameter0.Replace("(^^", "(\"");
-                parameter0 = parameter0.Replace("^^,,", "\",,");
-                parameter0 = parameter0.Replace("^^)", "\")");
+                parameter0 = parameter0.Replace("``", ",");
 
                 parameter0 = parameter0.Replace("&&&", "\"");
 
