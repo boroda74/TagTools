@@ -962,7 +962,7 @@ namespace MusicBeePlugin
         }
 
         private class Char1 : Function
-        {
+        { 
             public Char1()
             {
                 functionName = "char";
