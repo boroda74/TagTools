@@ -325,7 +325,7 @@ Excepted words will be unchanged, not become lowercased! To lowercase them,
 \@sc[[string;;excepted words]] : returns Sentence cased string except for given words
 
 \@eval[[virtual tag expression]] : returns result of calculation of virtual tag expression, 
-    e.g. \@eval[[$Sub(<<Play Count>>,<<Skip Count>>)]]
+    e.g. \@eval[[$Sub(<Play Count>,<Skip Count>)]]
 
 \@repunct[[string]] : changes Unicode punctuation marks to ASCII analogs, e.g. « to <<
 </pre>
