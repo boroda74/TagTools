@@ -35,8 +35,8 @@ namespace MusicBeePlugin
         protected string closeButtonText;
 
 
-        private FormWindowState windowState;
         private bool modal;
+        private FormWindowState windowState;
         private int left;
         private int top;
         private int width;
@@ -174,6 +174,16 @@ namespace MusicBeePlugin
             //return; //For debbuging
 
             SkinForm(this);
+
+            int maximizedHeight = MaximumSize.Height;
+            if (maximizedHeight != 0)
+            {
+                if (maximizedHeight > Screen.FromControl(this).WorkingArea.Height)
+                    maximizedHeight = Screen.FromControl(this).WorkingArea.Height;
+
+                MaximizedBounds = new Rectangle(Screen.FromControl(this).WorkingArea.Left, Screen.FromControl(this).WorkingArea.Top, 
+                    Screen.FromControl(this).WorkingArea.Width, maximizedHeight);
+            }
         }
 
         public static void Display(PluginWindowTemplate newForm, bool modalForm = false)
@@ -569,11 +579,27 @@ namespace MusicBeePlugin
             }
             else
             {
-                left = Left;
-                top = Top;
-                width = RestoreBounds.Width;
-                height = RestoreBounds.Height;
-                windowState = WindowState;
+                if (WindowState == FormWindowState.Maximized)
+                {
+                    left = RestoreBounds.Left;
+                    top = RestoreBounds.Top;
+                    width = RestoreBounds.Width;
+                    height = RestoreBounds.Height;
+                    windowState = WindowState;
+                }
+                else
+                {
+                    if (MaximumSize.Height != 0 && Height > MaximumSize.Height)
+                    {
+                        Height = MaximumSize.Height;
+                    }
+
+                    left = Left;
+                    top = Top;
+                    width = Width;
+                    height = Height;
+                    windowState = WindowState;
+                }
             }
         }
 
@@ -581,11 +607,11 @@ namespace MusicBeePlugin
         {
             if (Visible && width != 0)
             {
+                WindowState = windowState;
                 Left = left;
                 Top = top;
                 Width = width;
                 Height = height;
-                WindowState = windowState;
 
                 //windowWidth = 0;
             }
@@ -685,10 +711,18 @@ namespace MusicBeePlugin
 
             if (!Visible || WindowState == FormWindowState.Minimized)
             {
-                //Nothing changing in saved settings...
+                currentWindowSettings.x = left;
+                currentWindowSettings.y = top;
+                currentWindowSettings.w = width;
+                currentWindowSettings.h = height;
+                currentWindowSettings.max = (windowState == FormWindowState.Maximized ? true : false);
             }
             else if (windowState == FormWindowState.Maximized)
             {
+                currentWindowSettings.x = left;
+                currentWindowSettings.y = top;
+                currentWindowSettings.w = width;
+                currentWindowSettings.h = height;
                 currentWindowSettings.max = true;
             }
             else
