@@ -36,8 +36,11 @@ namespace MusicBeePlugin
 
 
         private FormWindowState windowState;
-        private int windowWidth;
-        private int windowHeight;
+        private bool modal;
+        private int left;
+        private int top;
+        private int width;
+        private int height;
 
         public bool backgroundTaskIsWorking()
         {
@@ -179,20 +182,40 @@ namespace MusicBeePlugin
             {
                 foreach (PluginWindowTemplate form in Plugin.OpenedForms)
                 {
-                    if (form.GetType() == newForm.GetType())
+                    if (newForm == null || form.GetType() == newForm.GetType())
                     {
-                        newForm.Dispose();
+                        newForm?.Dispose();
 
-                        if (form.Visible)
+                        if (form.Visible && form.WindowState != FormWindowState.Minimized)
                         {
                             form.Activate();
                         }
                         else
                         {
-                            if (modalForm)
+                            form.Left = form.left;
+                            form.Top = form.top;
+                            form.Width = form.width;
+                            form.Height = form.height;
+                            form.WindowState = form.windowState;
+
+                            if (newForm != null && modalForm)
+                            {
+                                form.modal = true;
                                 form.ShowDialog();
-                            else
+                            }
+                            else if (newForm != null)
+                            {
+                                form.modal = false;
                                 form.Show();
+                            }
+                            else if (form.modal)
+                            {
+                                form.ShowDialog();
+                            }
+                            else //if (!form.modal)
+                            {
+                                form.Show();
+                            }
                         }
 
                         return;
@@ -525,6 +548,11 @@ namespace MusicBeePlugin
             else
             {
                 saveWindowSizesPositions();
+
+                lock (Plugin.OpenedForms)
+                {
+                    Plugin.OpenedForms.Remove(this);
+                }
             }
         }
 
@@ -532,24 +560,32 @@ namespace MusicBeePlugin
         {
             if (WindowState == FormWindowState.Minimized)
             {
-                windowWidth = RestoreBounds.Width;
-                windowHeight = RestoreBounds.Height;
+                left = RestoreBounds.Left;
+                top = RestoreBounds.Top;
+                width = RestoreBounds.Width;
+                height = RestoreBounds.Height;
 
                 Hide();
             }
             else
             {
+                left = Left;
+                top = Top;
+                width = RestoreBounds.Width;
+                height = RestoreBounds.Height;
                 windowState = WindowState;
             }
         }
 
         private void ToolsPluginTemplate_VisibleChanged(object sender, EventArgs e)
         {
-            if (Visible && windowWidth != 0)
+            if (Visible && width != 0)
             {
+                Left = left;
+                Top = top;
+                Width = width;
+                Height = height;
                 WindowState = windowState;
-                Width = windowWidth;
-                Height = windowHeight;
 
                 //windowWidth = 0;
             }
@@ -591,25 +627,33 @@ namespace MusicBeePlugin
 
             if (windowSettings != null)
             {
-                DesktopLocation = new Point(windowSettings.x, windowSettings.y);
+                Left = windowSettings.x;
+                left = windowSettings.x;
+
+                Top = windowSettings.y;
+                top = windowSettings.y;
 
                 if (FormBorderStyle != FormBorderStyle.FixedDialog)
                 {
-                    Size = new Size(windowSettings.w, windowSettings.h);
+                    Width = windowSettings.w;
+                    Height = windowSettings.h;
 
                     if (windowSettings.max)
+                    {
                         WindowState = FormWindowState.Maximized;
+                        windowState = FormWindowState.Maximized;
+                    }
+                    else
+                    {
+                        WindowState = FormWindowState.Normal;
+                        windowState = FormWindowState.Normal;
+                    }
                 }
             }
         }
 
         protected WindowSettingsType findCreateSavedWindowSettings(bool createIfAbsent)
         {
-            lock (Plugin.OpenedForms)
-            {
-                Plugin.OpenedForms.Remove(this);
-            }
-
             string fullName = GetType().FullName;
             WindowSettingsType currentWindowSettings = null;
 
@@ -639,20 +683,20 @@ namespace MusicBeePlugin
         {
             var currentWindowSettings = findCreateSavedWindowSettings(true);
 
-            if (windowState == FormWindowState.Maximized)
-            {
-                currentWindowSettings.max = true;
-            }
-            else if (windowState == FormWindowState.Minimized)
+            if (!Visible || WindowState == FormWindowState.Minimized)
             {
                 //Nothing changing in saved settings...
             }
+            else if (windowState == FormWindowState.Maximized)
+            {
+                currentWindowSettings.max = true;
+            }
             else
             {
-                currentWindowSettings.x = DesktopLocation.X;
-                currentWindowSettings.y = DesktopLocation.Y;
-                currentWindowSettings.w = Size.Width;
-                currentWindowSettings.h = Size.Height;
+                currentWindowSettings.x = Left;
+                currentWindowSettings.y = Top;
+                currentWindowSettings.w = width;
+                currentWindowSettings.h = height;
                 currentWindowSettings.max = false;
             }
         }

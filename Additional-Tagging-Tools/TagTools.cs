@@ -10,6 +10,7 @@ using System.Threading;
 using System.Windows.Forms;
 using static MusicBeePlugin.AdvancedSearchAndReplaceCommand;
 using static MusicBeePlugin.LibraryReportsCommand;
+using static MusicBeePlugin.Plugin;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
@@ -2284,10 +2285,10 @@ namespace MusicBeePlugin
         {
             lock (OpenedForms)
             {
-                foreach (PluginWindowTemplate form in OpenedForms)
+                foreach (PluginWindowTemplate form in Plugin.OpenedForms)
                 {
-                    if (!form.Visible)
-                        form.Visible = true;
+                    if (!form.Visible || form.WindowState == FormWindowState.Minimized)
+                        PluginWindowTemplate.Display(null);
                 }
             }
         }

@@ -5,7 +5,7 @@ using System.Windows.Forms;
 namespace MusicBeePlugin
 {
     public partial class ASRPresetEditor : PluginWindowTemplate
-    {
+    { 
         private AdvancedSearchAndReplaceCommand.Preset preset;
         private bool settingsSaved = false;
         private string currentLanguage = "";

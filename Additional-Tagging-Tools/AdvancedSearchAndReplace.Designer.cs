@@ -38,6 +38,28 @@ namespace MusicBeePlugin
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.customTextLabel = new System.Windows.Forms.Label();
+            this.customTextBox = new System.Windows.Forms.TextBox();
+            this.customText2Label = new System.Windows.Forms.Label();
+            this.customText2Box = new System.Windows.Forms.TextBox();
+            this.customText3Label = new System.Windows.Forms.Label();
+            this.customText3Box = new System.Windows.Forms.TextBox();
+            this.customText4Label = new System.Windows.Forms.Label();
+            this.customText4Box = new System.Windows.Forms.TextBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.parameterTagList = new System.Windows.Forms.ComboBox();
+            this.labelTag = new System.Windows.Forms.Label();
+            this.labelTag2 = new System.Windows.Forms.Label();
+            this.parameterTag2List = new System.Windows.Forms.ComboBox();
+            this.labelTag3 = new System.Windows.Forms.Label();
+            this.parameterTag3List = new System.Windows.Forms.ComboBox();
+            this.labelTag4 = new System.Windows.Forms.Label();
+            this.parameterTag4List = new System.Windows.Forms.ComboBox();
+            this.labelTag5 = new System.Windows.Forms.Label();
+            this.parameterTag5List = new System.Windows.Forms.ComboBox();
+            this.labelTag6 = new System.Windows.Forms.Label();
+            this.parameterTag6List = new System.Windows.Forms.ComboBox();
             this.userPresetPictureBox = new System.Windows.Forms.PictureBox();
             this.customizedPresetPictureBox = new System.Windows.Forms.PictureBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -51,26 +73,6 @@ namespace MusicBeePlugin
             this.assignHotkeyCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.descriptionBox = new System.Windows.Forms.TextBox();
-            this.customText4Label = new System.Windows.Forms.Label();
-            this.customText2Label = new System.Windows.Forms.Label();
-            this.customText4Box = new System.Windows.Forms.TextBox();
-            this.customText2Box = new System.Windows.Forms.TextBox();
-            this.customText3Label = new System.Windows.Forms.Label();
-            this.labelTag6 = new System.Windows.Forms.Label();
-            this.customText3Box = new System.Windows.Forms.TextBox();
-            this.parameterTag6List = new System.Windows.Forms.ComboBox();
-            this.labelTag5 = new System.Windows.Forms.Label();
-            this.parameterTag5List = new System.Windows.Forms.ComboBox();
-            this.labelTag4 = new System.Windows.Forms.Label();
-            this.parameterTag4List = new System.Windows.Forms.ComboBox();
-            this.customTextLabel = new System.Windows.Forms.Label();
-            this.customTextBox = new System.Windows.Forms.TextBox();
-            this.labelTag3 = new System.Windows.Forms.Label();
-            this.parameterTag3List = new System.Windows.Forms.ComboBox();
-            this.labelTag2 = new System.Windows.Forms.Label();
-            this.parameterTag2List = new System.Windows.Forms.ComboBox();
-            this.labelTag = new System.Windows.Forms.Label();
-            this.parameterTagList = new System.Windows.Forms.ComboBox();
             this.playlistComboBox = new System.Windows.Forms.ComboBox();
             this.conditionCheckBox = new System.Windows.Forms.CheckBox();
             this.presetList = new System.Windows.Forms.CheckedListBox();
@@ -124,6 +126,8 @@ namespace MusicBeePlugin
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userPresetPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.customizedPresetPictureBox)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -192,6 +196,7 @@ namespace MusicBeePlugin
             // 
             resources.ApplyResources(this.splitContainer1, "splitContainer1");
             this.dirtyErrorProvider.SetError(this.splitContainer1, resources.GetString("splitContainer1.Error"));
+            this.splitContainer1.ForeColor = System.Drawing.Color.Transparent;
             this.dirtyErrorProvider.SetIconAlignment(this.splitContainer1, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("splitContainer1.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.splitContainer1, ((int)(resources.GetObject("splitContainer1.IconPadding"))));
             this.splitContainer1.Name = "splitContainer1";
@@ -199,6 +204,9 @@ namespace MusicBeePlugin
             // splitContainer1.Panel1
             // 
             resources.ApplyResources(this.splitContainer1.Panel1, "splitContainer1.Panel1");
+            this.splitContainer1.Panel1.BackColor = System.Drawing.Color.Transparent;
+            this.splitContainer1.Panel1.Controls.Add(this.tableLayoutPanel2);
+            this.splitContainer1.Panel1.Controls.Add(this.tableLayoutPanel1);
             this.splitContainer1.Panel1.Controls.Add(this.userPresetPictureBox);
             this.splitContainer1.Panel1.Controls.Add(this.customizedPresetPictureBox);
             this.splitContainer1.Panel1.Controls.Add(this.label4);
@@ -211,26 +219,6 @@ namespace MusicBeePlugin
             this.splitContainer1.Panel1.Controls.Add(this.label1);
             this.splitContainer1.Panel1.Controls.Add(this.assignHotkeyCheckBox);
             this.splitContainer1.Panel1.Controls.Add(this.groupBox1);
-            this.splitContainer1.Panel1.Controls.Add(this.customText4Label);
-            this.splitContainer1.Panel1.Controls.Add(this.customText2Label);
-            this.splitContainer1.Panel1.Controls.Add(this.customText4Box);
-            this.splitContainer1.Panel1.Controls.Add(this.customText2Box);
-            this.splitContainer1.Panel1.Controls.Add(this.customText3Label);
-            this.splitContainer1.Panel1.Controls.Add(this.labelTag6);
-            this.splitContainer1.Panel1.Controls.Add(this.customText3Box);
-            this.splitContainer1.Panel1.Controls.Add(this.parameterTag6List);
-            this.splitContainer1.Panel1.Controls.Add(this.labelTag5);
-            this.splitContainer1.Panel1.Controls.Add(this.parameterTag5List);
-            this.splitContainer1.Panel1.Controls.Add(this.labelTag4);
-            this.splitContainer1.Panel1.Controls.Add(this.parameterTag4List);
-            this.splitContainer1.Panel1.Controls.Add(this.customTextLabel);
-            this.splitContainer1.Panel1.Controls.Add(this.customTextBox);
-            this.splitContainer1.Panel1.Controls.Add(this.labelTag3);
-            this.splitContainer1.Panel1.Controls.Add(this.parameterTag3List);
-            this.splitContainer1.Panel1.Controls.Add(this.labelTag2);
-            this.splitContainer1.Panel1.Controls.Add(this.parameterTag2List);
-            this.splitContainer1.Panel1.Controls.Add(this.labelTag);
-            this.splitContainer1.Panel1.Controls.Add(this.parameterTagList);
             this.splitContainer1.Panel1.Controls.Add(this.playlistComboBox);
             this.splitContainer1.Panel1.Controls.Add(this.conditionCheckBox);
             this.splitContainer1.Panel1.Controls.Add(this.presetList);
@@ -250,6 +238,252 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconPadding(this.splitContainer1.Panel2, ((int)(resources.GetObject("splitContainer1.Panel2.IconPadding"))));
             this.toolTip1.SetToolTip(this.splitContainer1.Panel2, resources.GetString("splitContainer1.Panel2.ToolTip"));
             this.toolTip1.SetToolTip(this.splitContainer1, resources.GetString("splitContainer1.ToolTip"));
+            // 
+            // tableLayoutPanel2
+            // 
+            resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
+            this.tableLayoutPanel2.Controls.Add(this.customTextLabel, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.customTextBox, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.customText2Label, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.customText2Box, 3, 0);
+            this.tableLayoutPanel2.Controls.Add(this.customText3Label, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.customText3Box, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.customText4Label, 2, 1);
+            this.tableLayoutPanel2.Controls.Add(this.customText4Box, 3, 1);
+            this.dirtyErrorProvider.SetError(this.tableLayoutPanel2, resources.GetString("tableLayoutPanel2.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.tableLayoutPanel2, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("tableLayoutPanel2.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.tableLayoutPanel2, ((int)(resources.GetObject("tableLayoutPanel2.IconPadding"))));
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.toolTip1.SetToolTip(this.tableLayoutPanel2, resources.GetString("tableLayoutPanel2.ToolTip"));
+            // 
+            // customTextLabel
+            // 
+            resources.ApplyResources(this.customTextLabel, "customTextLabel");
+            this.dirtyErrorProvider.SetError(this.customTextLabel, resources.GetString("customTextLabel.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.customTextLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("customTextLabel.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.customTextLabel, ((int)(resources.GetObject("customTextLabel.IconPadding"))));
+            this.customTextLabel.Name = "customTextLabel";
+            this.toolTip1.SetToolTip(this.customTextLabel, resources.GetString("customTextLabel.ToolTip"));
+            // 
+            // customTextBox
+            // 
+            resources.ApplyResources(this.customTextBox, "customTextBox");
+            this.dirtyErrorProvider.SetError(this.customTextBox, resources.GetString("customTextBox.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.customTextBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("customTextBox.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.customTextBox, ((int)(resources.GetObject("customTextBox.IconPadding"))));
+            this.customTextBox.Name = "customTextBox";
+            this.toolTip1.SetToolTip(this.customTextBox, resources.GetString("customTextBox.ToolTip"));
+            this.customTextBox.TextChanged += new System.EventHandler(this.customTextBox_TextChanged);
+            // 
+            // customText2Label
+            // 
+            resources.ApplyResources(this.customText2Label, "customText2Label");
+            this.dirtyErrorProvider.SetError(this.customText2Label, resources.GetString("customText2Label.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.customText2Label, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("customText2Label.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.customText2Label, ((int)(resources.GetObject("customText2Label.IconPadding"))));
+            this.customText2Label.Name = "customText2Label";
+            this.toolTip1.SetToolTip(this.customText2Label, resources.GetString("customText2Label.ToolTip"));
+            // 
+            // customText2Box
+            // 
+            resources.ApplyResources(this.customText2Box, "customText2Box");
+            this.dirtyErrorProvider.SetError(this.customText2Box, resources.GetString("customText2Box.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.customText2Box, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("customText2Box.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.customText2Box, ((int)(resources.GetObject("customText2Box.IconPadding"))));
+            this.customText2Box.Name = "customText2Box";
+            this.toolTip1.SetToolTip(this.customText2Box, resources.GetString("customText2Box.ToolTip"));
+            this.customText2Box.TextChanged += new System.EventHandler(this.customText2Box_TextChanged);
+            // 
+            // customText3Label
+            // 
+            resources.ApplyResources(this.customText3Label, "customText3Label");
+            this.dirtyErrorProvider.SetError(this.customText3Label, resources.GetString("customText3Label.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.customText3Label, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("customText3Label.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.customText3Label, ((int)(resources.GetObject("customText3Label.IconPadding"))));
+            this.customText3Label.Name = "customText3Label";
+            this.toolTip1.SetToolTip(this.customText3Label, resources.GetString("customText3Label.ToolTip"));
+            // 
+            // customText3Box
+            // 
+            resources.ApplyResources(this.customText3Box, "customText3Box");
+            this.dirtyErrorProvider.SetError(this.customText3Box, resources.GetString("customText3Box.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.customText3Box, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("customText3Box.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.customText3Box, ((int)(resources.GetObject("customText3Box.IconPadding"))));
+            this.customText3Box.Name = "customText3Box";
+            this.toolTip1.SetToolTip(this.customText3Box, resources.GetString("customText3Box.ToolTip"));
+            this.customText3Box.TextChanged += new System.EventHandler(this.customText3Box_TextChanged);
+            // 
+            // customText4Label
+            // 
+            resources.ApplyResources(this.customText4Label, "customText4Label");
+            this.dirtyErrorProvider.SetError(this.customText4Label, resources.GetString("customText4Label.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.customText4Label, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("customText4Label.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.customText4Label, ((int)(resources.GetObject("customText4Label.IconPadding"))));
+            this.customText4Label.Name = "customText4Label";
+            this.toolTip1.SetToolTip(this.customText4Label, resources.GetString("customText4Label.ToolTip"));
+            // 
+            // customText4Box
+            // 
+            resources.ApplyResources(this.customText4Box, "customText4Box");
+            this.dirtyErrorProvider.SetError(this.customText4Box, resources.GetString("customText4Box.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.customText4Box, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("customText4Box.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.customText4Box, ((int)(resources.GetObject("customText4Box.IconPadding"))));
+            this.customText4Box.Name = "customText4Box";
+            this.toolTip1.SetToolTip(this.customText4Box, resources.GetString("customText4Box.ToolTip"));
+            this.customText4Box.TextChanged += new System.EventHandler(this.customText4Box_TextChanged);
+            // 
+            // tableLayoutPanel1
+            // 
+            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.parameterTagList, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.labelTag, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.labelTag2, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.parameterTag2List, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.labelTag3, 4, 0);
+            this.tableLayoutPanel1.Controls.Add(this.parameterTag3List, 5, 0);
+            this.tableLayoutPanel1.Controls.Add(this.labelTag4, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.parameterTag4List, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.labelTag5, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.parameterTag5List, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.labelTag6, 4, 1);
+            this.tableLayoutPanel1.Controls.Add(this.parameterTag6List, 5, 1);
+            this.dirtyErrorProvider.SetError(this.tableLayoutPanel1, resources.GetString("tableLayoutPanel1.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.tableLayoutPanel1, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("tableLayoutPanel1.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.tableLayoutPanel1, ((int)(resources.GetObject("tableLayoutPanel1.IconPadding"))));
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.toolTip1.SetToolTip(this.tableLayoutPanel1, resources.GetString("tableLayoutPanel1.ToolTip"));
+            // 
+            // parameterTagList
+            // 
+            resources.ApplyResources(this.parameterTagList, "parameterTagList");
+            this.parameterTagList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.parameterTagList.DropDownWidth = 250;
+            this.dirtyErrorProvider.SetError(this.parameterTagList, resources.GetString("parameterTagList.Error"));
+            this.parameterTagList.FormattingEnabled = true;
+            this.dirtyErrorProvider.SetIconAlignment(this.parameterTagList, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("parameterTagList.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.parameterTagList, ((int)(resources.GetObject("parameterTagList.IconPadding"))));
+            this.parameterTagList.Name = "parameterTagList";
+            this.toolTip1.SetToolTip(this.parameterTagList, resources.GetString("parameterTagList.ToolTip"));
+            this.parameterTagList.SelectedIndexChanged += new System.EventHandler(this.parameterTag_SelectedIndexChanged);
+            // 
+            // labelTag
+            // 
+            resources.ApplyResources(this.labelTag, "labelTag");
+            this.dirtyErrorProvider.SetError(this.labelTag, resources.GetString("labelTag.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.labelTag, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("labelTag.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.labelTag, ((int)(resources.GetObject("labelTag.IconPadding"))));
+            this.labelTag.Name = "labelTag";
+            this.toolTip1.SetToolTip(this.labelTag, resources.GetString("labelTag.ToolTip"));
+            // 
+            // labelTag2
+            // 
+            resources.ApplyResources(this.labelTag2, "labelTag2");
+            this.dirtyErrorProvider.SetError(this.labelTag2, resources.GetString("labelTag2.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.labelTag2, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("labelTag2.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.labelTag2, ((int)(resources.GetObject("labelTag2.IconPadding"))));
+            this.labelTag2.Name = "labelTag2";
+            this.toolTip1.SetToolTip(this.labelTag2, resources.GetString("labelTag2.ToolTip"));
+            // 
+            // parameterTag2List
+            // 
+            resources.ApplyResources(this.parameterTag2List, "parameterTag2List");
+            this.parameterTag2List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.parameterTag2List.DropDownWidth = 250;
+            this.dirtyErrorProvider.SetError(this.parameterTag2List, resources.GetString("parameterTag2List.Error"));
+            this.parameterTag2List.FormattingEnabled = true;
+            this.dirtyErrorProvider.SetIconAlignment(this.parameterTag2List, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("parameterTag2List.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.parameterTag2List, ((int)(resources.GetObject("parameterTag2List.IconPadding"))));
+            this.parameterTag2List.Name = "parameterTag2List";
+            this.toolTip1.SetToolTip(this.parameterTag2List, resources.GetString("parameterTag2List.ToolTip"));
+            this.parameterTag2List.SelectedIndexChanged += new System.EventHandler(this.parameterTag2_SelectedIndexChanged);
+            // 
+            // labelTag3
+            // 
+            resources.ApplyResources(this.labelTag3, "labelTag3");
+            this.dirtyErrorProvider.SetError(this.labelTag3, resources.GetString("labelTag3.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.labelTag3, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("labelTag3.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.labelTag3, ((int)(resources.GetObject("labelTag3.IconPadding"))));
+            this.labelTag3.Name = "labelTag3";
+            this.toolTip1.SetToolTip(this.labelTag3, resources.GetString("labelTag3.ToolTip"));
+            // 
+            // parameterTag3List
+            // 
+            resources.ApplyResources(this.parameterTag3List, "parameterTag3List");
+            this.parameterTag3List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.parameterTag3List.DropDownWidth = 250;
+            this.dirtyErrorProvider.SetError(this.parameterTag3List, resources.GetString("parameterTag3List.Error"));
+            this.parameterTag3List.FormattingEnabled = true;
+            this.dirtyErrorProvider.SetIconAlignment(this.parameterTag3List, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("parameterTag3List.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.parameterTag3List, ((int)(resources.GetObject("parameterTag3List.IconPadding"))));
+            this.parameterTag3List.Name = "parameterTag3List";
+            this.toolTip1.SetToolTip(this.parameterTag3List, resources.GetString("parameterTag3List.ToolTip"));
+            this.parameterTag3List.SelectedIndexChanged += new System.EventHandler(this.parameterTag3_SelectedIndexChanged);
+            // 
+            // labelTag4
+            // 
+            resources.ApplyResources(this.labelTag4, "labelTag4");
+            this.dirtyErrorProvider.SetError(this.labelTag4, resources.GetString("labelTag4.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.labelTag4, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("labelTag4.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.labelTag4, ((int)(resources.GetObject("labelTag4.IconPadding"))));
+            this.labelTag4.Name = "labelTag4";
+            this.toolTip1.SetToolTip(this.labelTag4, resources.GetString("labelTag4.ToolTip"));
+            // 
+            // parameterTag4List
+            // 
+            resources.ApplyResources(this.parameterTag4List, "parameterTag4List");
+            this.parameterTag4List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.parameterTag4List.DropDownWidth = 250;
+            this.dirtyErrorProvider.SetError(this.parameterTag4List, resources.GetString("parameterTag4List.Error"));
+            this.parameterTag4List.FormattingEnabled = true;
+            this.dirtyErrorProvider.SetIconAlignment(this.parameterTag4List, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("parameterTag4List.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.parameterTag4List, ((int)(resources.GetObject("parameterTag4List.IconPadding"))));
+            this.parameterTag4List.Name = "parameterTag4List";
+            this.toolTip1.SetToolTip(this.parameterTag4List, resources.GetString("parameterTag4List.ToolTip"));
+            this.parameterTag4List.SelectedIndexChanged += new System.EventHandler(this.parameterTag4_SelectedIndexChanged);
+            // 
+            // labelTag5
+            // 
+            resources.ApplyResources(this.labelTag5, "labelTag5");
+            this.dirtyErrorProvider.SetError(this.labelTag5, resources.GetString("labelTag5.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.labelTag5, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("labelTag5.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.labelTag5, ((int)(resources.GetObject("labelTag5.IconPadding"))));
+            this.labelTag5.Name = "labelTag5";
+            this.toolTip1.SetToolTip(this.labelTag5, resources.GetString("labelTag5.ToolTip"));
+            // 
+            // parameterTag5List
+            // 
+            resources.ApplyResources(this.parameterTag5List, "parameterTag5List");
+            this.parameterTag5List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.parameterTag5List.DropDownWidth = 250;
+            this.dirtyErrorProvider.SetError(this.parameterTag5List, resources.GetString("parameterTag5List.Error"));
+            this.parameterTag5List.FormattingEnabled = true;
+            this.dirtyErrorProvider.SetIconAlignment(this.parameterTag5List, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("parameterTag5List.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.parameterTag5List, ((int)(resources.GetObject("parameterTag5List.IconPadding"))));
+            this.parameterTag5List.Name = "parameterTag5List";
+            this.toolTip1.SetToolTip(this.parameterTag5List, resources.GetString("parameterTag5List.ToolTip"));
+            this.parameterTag5List.SelectedIndexChanged += new System.EventHandler(this.parameterTag5_SelectedIndexChanged);
+            // 
+            // labelTag6
+            // 
+            resources.ApplyResources(this.labelTag6, "labelTag6");
+            this.dirtyErrorProvider.SetError(this.labelTag6, resources.GetString("labelTag6.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.labelTag6, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("labelTag6.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.labelTag6, ((int)(resources.GetObject("labelTag6.IconPadding"))));
+            this.labelTag6.Name = "labelTag6";
+            this.toolTip1.SetToolTip(this.labelTag6, resources.GetString("labelTag6.ToolTip"));
+            // 
+            // parameterTag6List
+            // 
+            resources.ApplyResources(this.parameterTag6List, "parameterTag6List");
+            this.parameterTag6List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.parameterTag6List.DropDownWidth = 250;
+            this.dirtyErrorProvider.SetError(this.parameterTag6List, resources.GetString("parameterTag6List.Error"));
+            this.parameterTag6List.FormattingEnabled = true;
+            this.dirtyErrorProvider.SetIconAlignment(this.parameterTag6List, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("parameterTag6List.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.parameterTag6List, ((int)(resources.GetObject("parameterTag6List.IconPadding"))));
+            this.parameterTag6List.Name = "parameterTag6List";
+            this.toolTip1.SetToolTip(this.parameterTag6List, resources.GetString("parameterTag6List.ToolTip"));
+            this.parameterTag6List.SelectedIndexChanged += new System.EventHandler(this.parameterTag6_SelectedIndexChanged);
             // 
             // userPresetPictureBox
             // 
@@ -368,7 +602,7 @@ namespace MusicBeePlugin
             // groupBox1
             // 
             resources.ApplyResources(this.groupBox1, "groupBox1");
-            this.groupBox1.BackColor = System.Drawing.SystemColors.Control;
+            this.groupBox1.BackColor = System.Drawing.Color.Transparent;
             this.groupBox1.Controls.Add(this.descriptionBox);
             this.dirtyErrorProvider.SetError(this.groupBox1, resources.GetString("groupBox1.Error"));
             this.groupBox1.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -389,214 +623,6 @@ namespace MusicBeePlugin
             this.descriptionBox.Name = "descriptionBox";
             this.descriptionBox.ReadOnly = true;
             this.toolTip1.SetToolTip(this.descriptionBox, resources.GetString("descriptionBox.ToolTip"));
-            // 
-            // customText4Label
-            // 
-            resources.ApplyResources(this.customText4Label, "customText4Label");
-            this.dirtyErrorProvider.SetError(this.customText4Label, resources.GetString("customText4Label.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.customText4Label, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("customText4Label.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.customText4Label, ((int)(resources.GetObject("customText4Label.IconPadding"))));
-            this.customText4Label.Name = "customText4Label";
-            this.toolTip1.SetToolTip(this.customText4Label, resources.GetString("customText4Label.ToolTip"));
-            // 
-            // customText2Label
-            // 
-            resources.ApplyResources(this.customText2Label, "customText2Label");
-            this.dirtyErrorProvider.SetError(this.customText2Label, resources.GetString("customText2Label.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.customText2Label, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("customText2Label.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.customText2Label, ((int)(resources.GetObject("customText2Label.IconPadding"))));
-            this.customText2Label.Name = "customText2Label";
-            this.toolTip1.SetToolTip(this.customText2Label, resources.GetString("customText2Label.ToolTip"));
-            // 
-            // customText4Box
-            // 
-            resources.ApplyResources(this.customText4Box, "customText4Box");
-            this.dirtyErrorProvider.SetError(this.customText4Box, resources.GetString("customText4Box.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.customText4Box, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("customText4Box.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.customText4Box, ((int)(resources.GetObject("customText4Box.IconPadding"))));
-            this.customText4Box.Name = "customText4Box";
-            this.toolTip1.SetToolTip(this.customText4Box, resources.GetString("customText4Box.ToolTip"));
-            this.customText4Box.TextChanged += new System.EventHandler(this.customText4Box_TextChanged);
-            // 
-            // customText2Box
-            // 
-            resources.ApplyResources(this.customText2Box, "customText2Box");
-            this.dirtyErrorProvider.SetError(this.customText2Box, resources.GetString("customText2Box.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.customText2Box, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("customText2Box.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.customText2Box, ((int)(resources.GetObject("customText2Box.IconPadding"))));
-            this.customText2Box.Name = "customText2Box";
-            this.toolTip1.SetToolTip(this.customText2Box, resources.GetString("customText2Box.ToolTip"));
-            this.customText2Box.TextChanged += new System.EventHandler(this.customText2Box_TextChanged);
-            // 
-            // customText3Label
-            // 
-            resources.ApplyResources(this.customText3Label, "customText3Label");
-            this.dirtyErrorProvider.SetError(this.customText3Label, resources.GetString("customText3Label.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.customText3Label, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("customText3Label.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.customText3Label, ((int)(resources.GetObject("customText3Label.IconPadding"))));
-            this.customText3Label.Name = "customText3Label";
-            this.toolTip1.SetToolTip(this.customText3Label, resources.GetString("customText3Label.ToolTip"));
-            // 
-            // labelTag6
-            // 
-            resources.ApplyResources(this.labelTag6, "labelTag6");
-            this.dirtyErrorProvider.SetError(this.labelTag6, resources.GetString("labelTag6.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.labelTag6, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("labelTag6.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.labelTag6, ((int)(resources.GetObject("labelTag6.IconPadding"))));
-            this.labelTag6.Name = "labelTag6";
-            this.toolTip1.SetToolTip(this.labelTag6, resources.GetString("labelTag6.ToolTip"));
-            // 
-            // customText3Box
-            // 
-            resources.ApplyResources(this.customText3Box, "customText3Box");
-            this.dirtyErrorProvider.SetError(this.customText3Box, resources.GetString("customText3Box.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.customText3Box, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("customText3Box.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.customText3Box, ((int)(resources.GetObject("customText3Box.IconPadding"))));
-            this.customText3Box.Name = "customText3Box";
-            this.toolTip1.SetToolTip(this.customText3Box, resources.GetString("customText3Box.ToolTip"));
-            this.customText3Box.TextChanged += new System.EventHandler(this.customText3Box_TextChanged);
-            // 
-            // parameterTag6List
-            // 
-            resources.ApplyResources(this.parameterTag6List, "parameterTag6List");
-            this.parameterTag6List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.parameterTag6List.DropDownWidth = 250;
-            this.dirtyErrorProvider.SetError(this.parameterTag6List, resources.GetString("parameterTag6List.Error"));
-            this.parameterTag6List.FormattingEnabled = true;
-            this.dirtyErrorProvider.SetIconAlignment(this.parameterTag6List, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("parameterTag6List.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.parameterTag6List, ((int)(resources.GetObject("parameterTag6List.IconPadding"))));
-            this.parameterTag6List.Name = "parameterTag6List";
-            this.toolTip1.SetToolTip(this.parameterTag6List, resources.GetString("parameterTag6List.ToolTip"));
-            this.parameterTag6List.SelectedIndexChanged += new System.EventHandler(this.parameterTag6_SelectedIndexChanged);
-            // 
-            // labelTag5
-            // 
-            resources.ApplyResources(this.labelTag5, "labelTag5");
-            this.dirtyErrorProvider.SetError(this.labelTag5, resources.GetString("labelTag5.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.labelTag5, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("labelTag5.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.labelTag5, ((int)(resources.GetObject("labelTag5.IconPadding"))));
-            this.labelTag5.Name = "labelTag5";
-            this.toolTip1.SetToolTip(this.labelTag5, resources.GetString("labelTag5.ToolTip"));
-            // 
-            // parameterTag5List
-            // 
-            resources.ApplyResources(this.parameterTag5List, "parameterTag5List");
-            this.parameterTag5List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.parameterTag5List.DropDownWidth = 250;
-            this.dirtyErrorProvider.SetError(this.parameterTag5List, resources.GetString("parameterTag5List.Error"));
-            this.parameterTag5List.FormattingEnabled = true;
-            this.dirtyErrorProvider.SetIconAlignment(this.parameterTag5List, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("parameterTag5List.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.parameterTag5List, ((int)(resources.GetObject("parameterTag5List.IconPadding"))));
-            this.parameterTag5List.Name = "parameterTag5List";
-            this.toolTip1.SetToolTip(this.parameterTag5List, resources.GetString("parameterTag5List.ToolTip"));
-            this.parameterTag5List.SelectedIndexChanged += new System.EventHandler(this.parameterTag5_SelectedIndexChanged);
-            // 
-            // labelTag4
-            // 
-            resources.ApplyResources(this.labelTag4, "labelTag4");
-            this.dirtyErrorProvider.SetError(this.labelTag4, resources.GetString("labelTag4.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.labelTag4, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("labelTag4.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.labelTag4, ((int)(resources.GetObject("labelTag4.IconPadding"))));
-            this.labelTag4.Name = "labelTag4";
-            this.toolTip1.SetToolTip(this.labelTag4, resources.GetString("labelTag4.ToolTip"));
-            // 
-            // parameterTag4List
-            // 
-            resources.ApplyResources(this.parameterTag4List, "parameterTag4List");
-            this.parameterTag4List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.parameterTag4List.DropDownWidth = 250;
-            this.dirtyErrorProvider.SetError(this.parameterTag4List, resources.GetString("parameterTag4List.Error"));
-            this.parameterTag4List.FormattingEnabled = true;
-            this.dirtyErrorProvider.SetIconAlignment(this.parameterTag4List, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("parameterTag4List.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.parameterTag4List, ((int)(resources.GetObject("parameterTag4List.IconPadding"))));
-            this.parameterTag4List.Name = "parameterTag4List";
-            this.toolTip1.SetToolTip(this.parameterTag4List, resources.GetString("parameterTag4List.ToolTip"));
-            this.parameterTag4List.SelectedIndexChanged += new System.EventHandler(this.parameterTag4_SelectedIndexChanged);
-            // 
-            // customTextLabel
-            // 
-            resources.ApplyResources(this.customTextLabel, "customTextLabel");
-            this.dirtyErrorProvider.SetError(this.customTextLabel, resources.GetString("customTextLabel.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.customTextLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("customTextLabel.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.customTextLabel, ((int)(resources.GetObject("customTextLabel.IconPadding"))));
-            this.customTextLabel.Name = "customTextLabel";
-            this.toolTip1.SetToolTip(this.customTextLabel, resources.GetString("customTextLabel.ToolTip"));
-            // 
-            // customTextBox
-            // 
-            resources.ApplyResources(this.customTextBox, "customTextBox");
-            this.dirtyErrorProvider.SetError(this.customTextBox, resources.GetString("customTextBox.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.customTextBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("customTextBox.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.customTextBox, ((int)(resources.GetObject("customTextBox.IconPadding"))));
-            this.customTextBox.Name = "customTextBox";
-            this.toolTip1.SetToolTip(this.customTextBox, resources.GetString("customTextBox.ToolTip"));
-            this.customTextBox.TextChanged += new System.EventHandler(this.customTextBox_TextChanged);
-            // 
-            // labelTag3
-            // 
-            resources.ApplyResources(this.labelTag3, "labelTag3");
-            this.dirtyErrorProvider.SetError(this.labelTag3, resources.GetString("labelTag3.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.labelTag3, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("labelTag3.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.labelTag3, ((int)(resources.GetObject("labelTag3.IconPadding"))));
-            this.labelTag3.Name = "labelTag3";
-            this.toolTip1.SetToolTip(this.labelTag3, resources.GetString("labelTag3.ToolTip"));
-            // 
-            // parameterTag3List
-            // 
-            resources.ApplyResources(this.parameterTag3List, "parameterTag3List");
-            this.parameterTag3List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.parameterTag3List.DropDownWidth = 250;
-            this.dirtyErrorProvider.SetError(this.parameterTag3List, resources.GetString("parameterTag3List.Error"));
-            this.parameterTag3List.FormattingEnabled = true;
-            this.dirtyErrorProvider.SetIconAlignment(this.parameterTag3List, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("parameterTag3List.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.parameterTag3List, ((int)(resources.GetObject("parameterTag3List.IconPadding"))));
-            this.parameterTag3List.Name = "parameterTag3List";
-            this.toolTip1.SetToolTip(this.parameterTag3List, resources.GetString("parameterTag3List.ToolTip"));
-            this.parameterTag3List.SelectedIndexChanged += new System.EventHandler(this.parameterTag3_SelectedIndexChanged);
-            // 
-            // labelTag2
-            // 
-            resources.ApplyResources(this.labelTag2, "labelTag2");
-            this.dirtyErrorProvider.SetError(this.labelTag2, resources.GetString("labelTag2.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.labelTag2, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("labelTag2.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.labelTag2, ((int)(resources.GetObject("labelTag2.IconPadding"))));
-            this.labelTag2.Name = "labelTag2";
-            this.toolTip1.SetToolTip(this.labelTag2, resources.GetString("labelTag2.ToolTip"));
-            // 
-            // parameterTag2List
-            // 
-            resources.ApplyResources(this.parameterTag2List, "parameterTag2List");
-            this.parameterTag2List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.parameterTag2List.DropDownWidth = 250;
-            this.dirtyErrorProvider.SetError(this.parameterTag2List, resources.GetString("parameterTag2List.Error"));
-            this.parameterTag2List.FormattingEnabled = true;
-            this.dirtyErrorProvider.SetIconAlignment(this.parameterTag2List, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("parameterTag2List.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.parameterTag2List, ((int)(resources.GetObject("parameterTag2List.IconPadding"))));
-            this.parameterTag2List.Name = "parameterTag2List";
-            this.toolTip1.SetToolTip(this.parameterTag2List, resources.GetString("parameterTag2List.ToolTip"));
-            this.parameterTag2List.SelectedIndexChanged += new System.EventHandler(this.parameterTag2_SelectedIndexChanged);
-            // 
-            // labelTag
-            // 
-            resources.ApplyResources(this.labelTag, "labelTag");
-            this.dirtyErrorProvider.SetError(this.labelTag, resources.GetString("labelTag.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.labelTag, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("labelTag.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.labelTag, ((int)(resources.GetObject("labelTag.IconPadding"))));
-            this.labelTag.Name = "labelTag";
-            this.toolTip1.SetToolTip(this.labelTag, resources.GetString("labelTag.ToolTip"));
-            // 
-            // parameterTagList
-            // 
-            resources.ApplyResources(this.parameterTagList, "parameterTagList");
-            this.parameterTagList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.parameterTagList.DropDownWidth = 250;
-            this.dirtyErrorProvider.SetError(this.parameterTagList, resources.GetString("parameterTagList.Error"));
-            this.parameterTagList.FormattingEnabled = true;
-            this.dirtyErrorProvider.SetIconAlignment(this.parameterTagList, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("parameterTagList.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.parameterTagList, ((int)(resources.GetObject("parameterTagList.IconPadding"))));
-            this.parameterTagList.Name = "parameterTagList";
-            this.toolTip1.SetToolTip(this.parameterTagList, resources.GetString("parameterTagList.ToolTip"));
-            this.parameterTagList.SelectedIndexChanged += new System.EventHandler(this.parameterTag_SelectedIndexChanged);
             // 
             // playlistComboBox
             // 
@@ -759,6 +785,7 @@ namespace MusicBeePlugin
             // groupBox3
             // 
             resources.ApplyResources(this.groupBox3, "groupBox3");
+            this.groupBox3.BackColor = System.Drawing.Color.Transparent;
             this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Controls.Add(this.buttonSaveClose);
             this.groupBox3.Controls.Add(this.buttonOK);
@@ -774,6 +801,7 @@ namespace MusicBeePlugin
             // label7
             // 
             resources.ApplyResources(this.label7, "label7");
+            this.label7.BackColor = System.Drawing.SystemColors.Control;
             this.dirtyErrorProvider.SetError(this.label7, resources.GetString("label7.Error"));
             this.dirtyErrorProvider.SetIconAlignment(this.label7, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("label7.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.label7, ((int)(resources.GetObject("label7.IconPadding"))));
@@ -830,6 +858,7 @@ namespace MusicBeePlugin
             // groupBox2
             // 
             resources.ApplyResources(this.groupBox2, "groupBox2");
+            this.groupBox2.BackColor = System.Drawing.Color.Transparent;
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.buttonExport);
             this.groupBox2.Controls.Add(this.buttonDeleteAll);
@@ -851,6 +880,7 @@ namespace MusicBeePlugin
             // label6
             // 
             resources.ApplyResources(this.label6, "label6");
+            this.label6.BackColor = System.Drawing.SystemColors.Control;
             this.dirtyErrorProvider.SetError(this.label6, resources.GetString("label6.Error"));
             this.dirtyErrorProvider.SetIconAlignment(this.label6, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("label6.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.label6, ((int)(resources.GetObject("label6.IconPadding"))));
@@ -1174,6 +1204,10 @@ namespace MusicBeePlugin
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userPresetPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.customizedPresetPictureBox)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -1281,5 +1315,7 @@ namespace MusicBeePlugin
         private System.Windows.Forms.DataGridViewTextBoxColumn NewTag4;
         private System.Windows.Forms.DataGridViewTextBoxColumn OriginalTag5;
         private System.Windows.Forms.DataGridViewTextBoxColumn NewTag5;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
     }
 }
