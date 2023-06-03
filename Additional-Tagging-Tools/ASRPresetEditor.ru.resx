@@ -132,10 +132,10 @@
     <value>Название:</value>
   </data>
   <data name="nameBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>152, 9</value>
+    <value>111, 9</value>
   </data>
   <data name="nameBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>757, 20</value>
+    <value>798, 20</value>
   </data>
   <data name="nameBox.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -153,10 +153,10 @@
     <value>Описание:</value>
   </data>
   <data name="descriptionBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>152, 32</value>
+    <value>111, 32</value>
   </data>
   <data name="descriptionBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>757, 102</value>
+    <value>798, 81</value>
   </data>
   <data name="descriptionBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -210,7 +210,7 @@
     <value>Заменить на:</value>
   </data>
   <data name="buttonApply.Location" type="System.Drawing.Point, System.Drawing">
-    <value>725, 704</value>
+    <value>725, 684</value>
   </data>
   <data name="buttonApply.Size" type="System.Drawing.Size, System.Drawing">
     <value>89, 23</value>
@@ -219,7 +219,7 @@
     <value>40</value>
   </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>820, 704</value>
+    <value>820, 684</value>
   </data>
   <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>89, 23</value>
@@ -231,7 +231,7 @@
     <value>Отмена</value>
   </data>
   <data name="ignoreCaseCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 708</value>
+    <value>12, 688</value>
   </data>
   <data name="ignoreCaseCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>124, 17</value>
@@ -243,7 +243,7 @@
     <value>Без учета регистра</value>
   </data>
   <data name="linkLabel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>149, 137</value>
+    <value>149, 117</value>
   </data>
   <data name="linkLabel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>339, 13</value>
@@ -261,10 +261,10 @@
     <value>890, 52</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 315</value>
+    <value>12, 292</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>897, 73</value>
+    <value>897, 75</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>34</value>
@@ -280,6 +280,21 @@
   </data>
   <data name="customTextBox.ToolTip" xml:space="preserve">
     <value>Символы "\@№" будут заменены на &lt;Свой текст №&gt; в пресета поиска и замены</value>
+  </data>
+  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 370</value>
+  </data>
+  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>897, 75</value>
+  </data>
+  <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
+    <value>35</value>
+  </data>
+  <data name="groupBox2.Text" xml:space="preserve">
+    <value>Шаг 2 (необязательный)</value>
+  </data>
+  <data name="tableLayoutPanel4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>890, 52</value>
   </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 13</value>
@@ -335,20 +350,20 @@
   <data name="searchedTag2List.Size" type="System.Drawing.Size, System.Drawing">
     <value>171, 21</value>
   </data>
-  <data name="tableLayoutPanel4.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 448</value>
+  </data>
+  <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>897, 75</value>
+  </data>
+  <data name="groupBox3.TabIndex" type="System.Int32, mscorlib">
+    <value>36</value>
+  </data>
+  <data name="groupBox3.Text" xml:space="preserve">
+    <value>Шаг 3 (необязательный)</value>
+  </data>
+  <data name="tableLayoutPanel5.Size" type="System.Drawing.Size, System.Drawing">
     <value>890, 52</value>
-  </data>
-  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 393</value>
-  </data>
-  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>897, 73</value>
-  </data>
-  <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
-    <value>35</value>
-  </data>
-  <data name="groupBox2.Text" xml:space="preserve">
-    <value>Шаг 2 (необязательный)</value>
   </data>
   <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 13</value>
@@ -404,32 +419,17 @@
   <data name="searchedPattern3Box.Size" type="System.Drawing.Size, System.Drawing">
     <value>522, 20</value>
   </data>
-  <data name="tableLayoutPanel5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>890, 52</value>
-  </data>
-  <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 471</value>
-  </data>
-  <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>897, 73</value>
-  </data>
-  <data name="groupBox3.TabIndex" type="System.Int32, mscorlib">
-    <value>36</value>
-  </data>
-  <data name="groupBox3.Text" xml:space="preserve">
-    <value>Шаг 3 (необязательный)</value>
-  </data>
   <data name="languages.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 116</value>
+    <value>14, 91</value>
   </data>
   <data name="languages.Size" type="System.Drawing.Size, System.Drawing">
     <value>91, 21</value>
   </data>
   <data name="guidBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>151, 156</value>
+    <value>111, 134</value>
   </data>
   <data name="label15.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 159</value>
+    <value>12, 137</value>
   </data>
   <data name="label15.Size" type="System.Drawing.Size, System.Drawing">
     <value>81, 13</value>
@@ -438,7 +438,7 @@
     <value>GUID пресета:</value>
   </data>
   <data name="label16.Location" type="System.Drawing.Point, System.Drawing">
-    <value>389, 159</value>
+    <value>338, 137</value>
   </data>
   <data name="label16.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 13</value>
@@ -447,13 +447,13 @@
     <value>Изменен:</value>
   </data>
   <data name="modifiedBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>451, 156</value>
+    <value>400, 134</value>
   </data>
   <data name="modifiedBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 20</value>
   </data>
   <data name="userPresetCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>772, 136</value>
+    <value>772, 116</value>
   </data>
   <data name="userPresetCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 17</value>
@@ -812,6 +812,21 @@
   <data name="parameterTag4TypeList.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
   </data>
+  <data name="groupBox4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 526</value>
+  </data>
+  <data name="groupBox4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>897, 75</value>
+  </data>
+  <data name="groupBox4.TabIndex" type="System.Int32, mscorlib">
+    <value>37</value>
+  </data>
+  <data name="groupBox4.Text" xml:space="preserve">
+    <value>Шаг 4 (необязательный)</value>
+  </data>
+  <data name="tableLayoutPanel6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>890, 52</value>
+  </data>
   <data name="label29.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 13</value>
   </data>
@@ -860,20 +875,20 @@
   <data name="searchedPattern4Box.Size" type="System.Drawing.Size, System.Drawing">
     <value>522, 20</value>
   </data>
-  <data name="tableLayoutPanel6.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="groupBox5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 604</value>
+  </data>
+  <data name="groupBox5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>897, 75</value>
+  </data>
+  <data name="groupBox5.TabIndex" type="System.Int32, mscorlib">
+    <value>38</value>
+  </data>
+  <data name="groupBox5.Text" xml:space="preserve">
+    <value>Шаг 5 (необязательный)</value>
+  </data>
+  <data name="tableLayoutPanel7.Size" type="System.Drawing.Size, System.Drawing">
     <value>890, 52</value>
-  </data>
-  <data name="groupBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 549</value>
-  </data>
-  <data name="groupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>897, 73</value>
-  </data>
-  <data name="groupBox4.TabIndex" type="System.Int32, mscorlib">
-    <value>37</value>
-  </data>
-  <data name="groupBox4.Text" xml:space="preserve">
-    <value>Шаг 4 (необязательный)</value>
   </data>
   <data name="label33.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 13</value>
@@ -923,23 +938,8 @@
   <data name="searchedPattern5Box.Size" type="System.Drawing.Size, System.Drawing">
     <value>522, 20</value>
   </data>
-  <data name="tableLayoutPanel7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>890, 52</value>
-  </data>
-  <data name="groupBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 627</value>
-  </data>
-  <data name="groupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>897, 73</value>
-  </data>
-  <data name="groupBox5.TabIndex" type="System.Int32, mscorlib">
-    <value>38</value>
-  </data>
-  <data name="groupBox5.Text" xml:space="preserve">
-    <value>Шаг 5 (необязательный)</value>
-  </data>
   <data name="customizedByUserCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>609, 136</value>
+    <value>609, 116</value>
   </data>
   <data name="customizedByUserCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>157, 17</value>
@@ -948,7 +948,7 @@
     <value>Настроен пользователем</value>
   </data>
   <data name="removePresetCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>772, 158</value>
+    <value>772, 136</value>
   </data>
   <data name="removePresetCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>107, 17</value>
@@ -957,25 +957,25 @@
     <value>Удалить пресет</value>
   </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 182</value>
+    <value>15, 156</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>894, 78</value>
   </data>
   <data name="tableLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 260</value>
+    <value>15, 234</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
     <value>894, 52</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>923, 732</value>
+    <value>923, 713</value>
   </data>
   <data name="$this.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>10000, 759</value>
+    <value>10000, 740</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>931, 759</value>
+    <value>931, 740</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Редактор пресета</value>

@@ -131,7 +131,7 @@
     <value>Закрыть</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>891, 421</value>
+    <value>891, 423</value>
   </data>
   <data name="autoApplyPictureBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>541, 37</value>

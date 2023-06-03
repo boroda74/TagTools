@@ -125,9 +125,6 @@
   <data name="searchOnlyCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="buttonOK.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="&gt;&gt;dataGridViewTextBoxColumn16.Name" xml:space="preserve">
     <value>dataGridViewTextBoxColumn16</value>
   </data>
@@ -143,8 +140,8 @@
   <data name="&gt;&gt;toolTip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonOK.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="autoApplyPictureBox.ToolTip" xml:space="preserve">
+    <value>Save ASR preset as auto-applied</value>
   </data>
   <data name="buttonUp.ToolTip" xml:space="preserve">
     <value />
@@ -250,8 +247,8 @@ later for auto-applying or assign hotkey to it</value>
   <data name="dataGridViewTextBoxColumn16.HeaderText" xml:space="preserve">
     <value>Replace with</value>
   </data>
-  <data name="&gt;&gt;autoApplyCheckBox.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="autoApplyCheckBox.Error" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;buttonOK.ZOrder" xml:space="preserve">
     <value>20</value>
@@ -265,8 +262,8 @@ later for auto-applying or assign hotkey to it</value>
   <data name="sourceTagList.Location" type="System.Drawing.Point, System.Drawing">
     <value>58, 6</value>
   </data>
-  <data name="searchOnlyCheckBox.Text" xml:space="preserve">
-    <value>SEARCH ONLY</value>
+  <data name="&gt;&gt;previewTable.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel2</value>
   </data>
   <data name="&gt;&gt;buttonSave.Name" xml:space="preserve">
     <value>buttonSave</value>
@@ -406,8 +403,8 @@ later for auto-applying or assign hotkey to it</value>
   <data name="&gt;&gt;previewTable.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="autoApplyPictureBox.TabIndex" type="System.Int32, mscorlib">
-    <value>118</value>
+  <data name="searchOnlyCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
   </data>
   <data name="buttonCancel.ToolTip" xml:space="preserve">
     <value />
@@ -419,11 +416,8 @@ later for auto-applying or assign hotkey to it</value>
     <value>In SEARCH ONLY mode, you can enter multiple search 
 criteria, all of which must match the search results.</value>
   </data>
-  <data name="searchOnlyCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>TopLeft</value>
-  </data>
-  <data name="searchOnlyCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 17</value>
+  <data name="label1.Text" xml:space="preserve">
+    <value>From tag</value>
   </data>
   <data name="&gt;&gt;destinationTagList.Name" xml:space="preserve">
     <value>destinationTagList</value>
@@ -443,8 +437,8 @@ criteria, all of which must match the search results.</value>
   <data name="buttonUp.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 33</value>
   </data>
-  <data name="&gt;&gt;previewTable.Parent" xml:space="preserve">
-    <value>splitContainer1.Panel2</value>
+  <data name="&gt;&gt;autoApplyCheckBox.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;buttonDelete.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -482,11 +476,14 @@ criteria, all of which must match the search results.</value>
   <data name="buttonDeleteSaved.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="buttonDeleteSaved.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="previewTable.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="buttonDeleteSaved.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="splitContainer1.TabIndex" type="System.Int32, mscorlib">
+    <value>119</value>
   </data>
   <data name="&gt;&gt;autoDestinationTagCheckBox.Name" xml:space="preserve">
     <value>autoDestinationTagCheckBox</value>
@@ -527,11 +524,8 @@ criteria, all of which must match the search results.</value>
   <data name="&gt;&gt;destinationTagList.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="autoApplyCheckBox.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="autoApplyPictureBox.ToolTip" xml:space="preserve">
-    <value>Save ASR preset as auto-applied</value>
+  <data name="searchOnlyCheckBox.Text" xml:space="preserve">
+    <value>SEARCH ONLY</value>
   </data>
   <data name="&gt;&gt;buttonAdd.ZOrder" xml:space="preserve">
     <value>10</value>
@@ -1223,8 +1217,14 @@ criteria, all of which must match the search results.</value>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 13</value>
   </data>
+  <data name="&gt;&gt;buttonOK.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
     <value>19</value>
+  </data>
+  <data name="autoApplyPictureBox.TabIndex" type="System.Int32, mscorlib">
+    <value>118</value>
   </data>
   <data name="buttonAdd.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
@@ -1301,8 +1301,8 @@ criteria, all of which must match the search results.</value>
   <data name="&gt;&gt;Column2.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="templateNameTextBox.ToolTip" xml:space="preserve">
-    <value>Preset name</value>
+  <data name="buttonOK.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="buttonDelete.Location" type="System.Drawing.Point, System.Drawing">
     <value>138, 33</value>
@@ -1607,20 +1607,20 @@ criteria, all of which must match the search results.</value>
   <data name="sourceTagList.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>From tag</value>
-  </data>
   <data name="&gt;&gt;Column3.Name" xml:space="preserve">
     <value>Column3</value>
   </data>
   <data name="buttonSave.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="splitContainer1.TabIndex" type="System.Int32, mscorlib">
-    <value>119</value>
+  <data name="searchOnlyCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 17</value>
   </data>
   <data name="&gt;&gt;toolTip1.Name" xml:space="preserve">
     <value>toolTip1</value>
+  </data>
+  <data name="templateNameTextBox.ToolTip" xml:space="preserve">
+    <value>Preset name</value>
   </data>
   <data name="buttonDeleteSaved.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
