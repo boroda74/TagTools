@@ -119,7 +119,7 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 11</value>
+    <value>9, 8</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>69, 13</value>
@@ -131,8 +131,11 @@
   <data name="label1.Text" xml:space="preserve">
     <value>Название:</value>
   </data>
+  <data name="label1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="nameBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>111, 9</value>
+    <value>111, 5</value>
   </data>
   <data name="nameBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>798, 20</value>
@@ -140,8 +143,11 @@
   <data name="nameBox.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
+  <data name="nameBox.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 34</value>
+    <value>10, 35</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 13</value>
@@ -152,32 +158,41 @@
   <data name="label2.Text" xml:space="preserve">
     <value>Описание:</value>
   </data>
+  <data name="label2.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="descriptionBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>111, 32</value>
+    <value>111, 34</value>
   </data>
   <data name="descriptionBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>798, 81</value>
+    <value>798, 58</value>
   </data>
   <data name="descriptionBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 13</value>
+  <data name="descriptionBox.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>Найти:</value>
   </data>
+  <data name="label3.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="searchedPatternBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>522, 20</value>
   </data>
-  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>619, 7</value>
+  <data name="searchedPatternBox.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 13</value>
+  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>619, 6</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
     <value>в теге:</value>
+  </data>
+  <data name="label4.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="searchedTagList.Location" type="System.Drawing.Point, System.Drawing">
     <value>716, 3</value>
@@ -185,32 +200,47 @@
   <data name="searchedTagList.Size" type="System.Drawing.Size, System.Drawing">
     <value>171, 21</value>
   </data>
+  <data name="searchedTagList.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="replacedTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>716, 29</value>
+    <value>716, 33</value>
   </data>
   <data name="replacedTagList.Size" type="System.Drawing.Size, System.Drawing">
     <value>171, 21</value>
   </data>
-  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>619, 33</value>
+  <data name="replacedTagList.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 13</value>
+  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>619, 36</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
     <value>в теге:</value>
   </data>
+  <data name="label5.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="replacedPatternBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>88, 33</value>
+  </data>
   <data name="replacedPatternBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>522, 20</value>
   </data>
-  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 13</value>
+  <data name="replacedPatternBox.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 36</value>
   </data>
   <data name="label6.Text" xml:space="preserve">
     <value>Заменить на:</value>
   </data>
+  <data name="label6.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="buttonApply.Location" type="System.Drawing.Point, System.Drawing">
-    <value>725, 684</value>
+    <value>725, 707</value>
   </data>
   <data name="buttonApply.Size" type="System.Drawing.Size, System.Drawing">
     <value>89, 23</value>
@@ -218,8 +248,11 @@
   <data name="buttonApply.TabIndex" type="System.Int32, mscorlib">
     <value>40</value>
   </data>
+  <data name="buttonApply.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>820, 684</value>
+    <value>820, 707</value>
   </data>
   <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>89, 23</value>
@@ -230,8 +263,11 @@
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Отмена</value>
   </data>
+  <data name="buttonCancel.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="ignoreCaseCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 688</value>
+    <value>12, 711</value>
   </data>
   <data name="ignoreCaseCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>124, 17</value>
@@ -242,8 +278,11 @@
   <data name="ignoreCaseCheckBox.Text" xml:space="preserve">
     <value>Без учета регистра</value>
   </data>
+  <data name="ignoreCaseCheckBox.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="linkLabel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>149, 117</value>
+    <value>149, 97</value>
   </data>
   <data name="linkLabel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>339, 13</value>
@@ -251,20 +290,26 @@
   <data name="linkLabel1.Text" xml:space="preserve">
     <value>Руководство Microsoft по использованию регулярных выражений</value>
   </data>
+  <data name="linkLabel1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="appendCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>669, 32</value>
+    <value>669, 36</value>
   </data>
   <data name="appendCheckBox.ToolTip" xml:space="preserve">
     <value>Добавить замененное значение в конец тега:</value>
   </data>
   <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>890, 52</value>
+    <value>890, 60</value>
+  </data>
+  <data name="tableLayoutPanel3.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 292</value>
+    <value>12, 290</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>897, 75</value>
+    <value>897, 80</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>34</value>
@@ -272,8 +317,11 @@
   <data name="groupBox1.Text" xml:space="preserve">
     <value>Шаг 1</value>
   </data>
+  <data name="groupBox1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="customTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 20</value>
+    <value>330, 20</value>
   </data>
   <data name="customTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
@@ -281,35 +329,23 @@
   <data name="customTextBox.ToolTip" xml:space="preserve">
     <value>Символы "\@№" будут заменены на &lt;Свой текст №&gt; в пресета поиска и замены</value>
   </data>
-  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 370</value>
-  </data>
-  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>897, 75</value>
-  </data>
-  <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
-    <value>35</value>
-  </data>
-  <data name="groupBox2.Text" xml:space="preserve">
-    <value>Шаг 2 (необязательный)</value>
-  </data>
-  <data name="tableLayoutPanel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>890, 52</value>
-  </data>
-  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 13</value>
-  </data>
   <data name="label7.Text" xml:space="preserve">
     <value>Найти:</value>
   </data>
+  <data name="label7.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="replacedTag2List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>716, 29</value>
+    <value>716, 33</value>
   </data>
   <data name="replacedTag2List.Size" type="System.Drawing.Size, System.Drawing">
     <value>171, 21</value>
   </data>
+  <data name="replacedTag2List.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="append2CheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>669, 32</value>
+    <value>669, 36</value>
   </data>
   <data name="append2CheckBox.ToolTip" xml:space="preserve">
     <value>Добавить замененное значение в конец тега:</value>
@@ -317,32 +353,44 @@
   <data name="searchedPattern2Box.Size" type="System.Drawing.Size, System.Drawing">
     <value>522, 20</value>
   </data>
+  <data name="searchedPattern2Box.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="replacedPattern2Box.Location" type="System.Drawing.Point, System.Drawing">
+    <value>88, 33</value>
+  </data>
   <data name="replacedPattern2Box.Size" type="System.Drawing.Size, System.Drawing">
     <value>522, 20</value>
   </data>
-  <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>619, 33</value>
+  <data name="replacedPattern2Box.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 13</value>
+  <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>619, 36</value>
   </data>
   <data name="label10.Text" xml:space="preserve">
     <value>в теге:</value>
   </data>
-  <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 13</value>
+  <data name="label10.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 36</value>
   </data>
   <data name="label8.Text" xml:space="preserve">
     <value>Заменить на:</value>
   </data>
-  <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>619, 7</value>
+  <data name="label8.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 13</value>
+  <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>619, 6</value>
   </data>
   <data name="label9.Text" xml:space="preserve">
     <value>в теге:</value>
+  </data>
+  <data name="label9.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="searchedTag2List.Location" type="System.Drawing.Point, System.Drawing">
     <value>716, 3</value>
@@ -350,35 +398,47 @@
   <data name="searchedTag2List.Size" type="System.Drawing.Size, System.Drawing">
     <value>171, 21</value>
   </data>
-  <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 448</value>
+  <data name="searchedTag2List.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>897, 75</value>
+  <data name="tableLayoutPanel4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>890, 60</value>
   </data>
-  <data name="groupBox3.TabIndex" type="System.Int32, mscorlib">
-    <value>36</value>
+  <data name="tableLayoutPanel4.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="groupBox3.Text" xml:space="preserve">
-    <value>Шаг 3 (необязательный)</value>
+  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 373</value>
   </data>
-  <data name="tableLayoutPanel5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>890, 52</value>
+  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>897, 80</value>
   </data>
-  <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 13</value>
+  <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
+    <value>35</value>
+  </data>
+  <data name="groupBox2.Text" xml:space="preserve">
+    <value>Шаг 2 (необязательный)</value>
+  </data>
+  <data name="groupBox2.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="label11.Text" xml:space="preserve">
     <value>Найти:</value>
   </data>
+  <data name="label11.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="replacedTag3List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>716, 29</value>
+    <value>716, 33</value>
   </data>
   <data name="replacedTag3List.Size" type="System.Drawing.Size, System.Drawing">
     <value>171, 21</value>
   </data>
+  <data name="replacedTag3List.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="append3CheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>669, 32</value>
+    <value>669, 36</value>
   </data>
   <data name="append3CheckBox.ToolTip" xml:space="preserve">
     <value>Добавить замененное значение в конец тега:</value>
@@ -389,47 +449,86 @@
   <data name="searchedTag3List.Size" type="System.Drawing.Size, System.Drawing">
     <value>171, 21</value>
   </data>
-  <data name="label12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 13</value>
+  <data name="searchedTag3List.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 36</value>
   </data>
   <data name="label12.Text" xml:space="preserve">
     <value>Заменить на:</value>
   </data>
-  <data name="label14.Location" type="System.Drawing.Point, System.Drawing">
-    <value>619, 33</value>
+  <data name="label12.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="label14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 13</value>
+  <data name="label14.Location" type="System.Drawing.Point, System.Drawing">
+    <value>619, 36</value>
   </data>
   <data name="label14.Text" xml:space="preserve">
     <value>в теге:</value>
   </data>
+  <data name="label14.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="replacedPattern3Box.Location" type="System.Drawing.Point, System.Drawing">
+    <value>88, 33</value>
+  </data>
   <data name="replacedPattern3Box.Size" type="System.Drawing.Size, System.Drawing">
     <value>522, 20</value>
   </data>
-  <data name="label13.Location" type="System.Drawing.Point, System.Drawing">
-    <value>619, 7</value>
+  <data name="replacedPattern3Box.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="label13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 13</value>
+  <data name="label13.Location" type="System.Drawing.Point, System.Drawing">
+    <value>619, 6</value>
   </data>
   <data name="label13.Text" xml:space="preserve">
     <value>в теге:</value>
   </data>
+  <data name="label13.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="searchedPattern3Box.Size" type="System.Drawing.Size, System.Drawing">
     <value>522, 20</value>
   </data>
-  <data name="languages.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 91</value>
+  <data name="searchedPattern3Box.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tableLayoutPanel5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>890, 60</value>
+  </data>
+  <data name="tableLayoutPanel5.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 456</value>
+  </data>
+  <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>897, 80</value>
+  </data>
+  <data name="groupBox3.TabIndex" type="System.Int32, mscorlib">
+    <value>36</value>
+  </data>
+  <data name="groupBox3.Text" xml:space="preserve">
+    <value>Шаг 3 (необязательный)</value>
+  </data>
+  <data name="groupBox3.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="languages.Size" type="System.Drawing.Size, System.Drawing">
     <value>91, 21</value>
   </data>
+  <data name="languages.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="guidBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>111, 134</value>
+    <value>111, 111</value>
+  </data>
+  <data name="guidBox.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="label15.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 137</value>
+    <value>12, 117</value>
   </data>
   <data name="label15.Size" type="System.Drawing.Size, System.Drawing">
     <value>81, 13</value>
@@ -437,8 +536,11 @@
   <data name="label15.Text" xml:space="preserve">
     <value>GUID пресета:</value>
   </data>
+  <data name="label15.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="label16.Location" type="System.Drawing.Point, System.Drawing">
-    <value>338, 137</value>
+    <value>338, 117</value>
   </data>
   <data name="label16.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 13</value>
@@ -446,20 +548,29 @@
   <data name="label16.Text" xml:space="preserve">
     <value>Изменен:</value>
   </data>
+  <data name="label16.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="modifiedBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>400, 134</value>
+    <value>400, 114</value>
   </data>
   <data name="modifiedBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 20</value>
   </data>
+  <data name="modifiedBox.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="userPresetCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>772, 116</value>
+    <value>772, 96</value>
   </data>
   <data name="userPresetCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 17</value>
   </data>
   <data name="userPresetCheckBox.Text" xml:space="preserve">
     <value>Пресет пользователя</value>
+  </data>
+  <data name="userPresetCheckBox.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="parameterTagTypeList.Items" xml:space="preserve">
     <value>не используется</value>
@@ -473,8 +584,8 @@
   <data name="parameterTagTypeList.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="label17.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 13</value>
+  <data name="parameterTagTypeList.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="label17.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -482,17 +593,20 @@
   <data name="label17.Text" xml:space="preserve">
     <value>&lt;Тег 1&gt;:</value>
   </data>
-  <data name="label18.Location" type="System.Drawing.Point, System.Drawing">
-    <value>453, 7</value>
+  <data name="label17.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="label18.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 13</value>
+  <data name="label18.Location" type="System.Drawing.Point, System.Drawing">
+    <value>454, 6</value>
   </data>
   <data name="label18.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
   <data name="label18.Text" xml:space="preserve">
     <value>&lt;Тег 2&gt;:</value>
+  </data>
+  <data name="label18.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="parameterTag2TypeList.Items" xml:space="preserve">
     <value>не используется</value>
@@ -504,19 +618,22 @@
     <value>только для чтения</value>
   </data>
   <data name="parameterTag2TypeList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>520, 3</value>
+    <value>521, 3</value>
   </data>
   <data name="parameterTag2TypeList.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="label19.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 13</value>
+  <data name="parameterTag2TypeList.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="label19.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
   <data name="label19.Text" xml:space="preserve">
     <value>&lt;Тег 3&gt;:</value>
+  </data>
+  <data name="label19.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="parameterTag3TypeList.Items" xml:space="preserve">
     <value>не используется</value>
@@ -530,8 +647,8 @@
   <data name="parameterTag3TypeList.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
   </data>
-  <data name="customTextCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>106, 17</value>
+  <data name="parameterTag3TypeList.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="customTextCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
@@ -543,10 +660,7 @@
     <value>Символы "\@№" будут заменены на &lt;Свой текст №&gt; в пресетах поиска и замены</value>
   </data>
   <data name="customText2CheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>450, 6</value>
-  </data>
-  <data name="customText2CheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>106, 17</value>
+    <value>451, 5</value>
   </data>
   <data name="customText2CheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
@@ -558,10 +672,10 @@
     <value>Символы "\@№" будут заменены на &lt;Свой текст №&gt; в пресетах поиска и замены</value>
   </data>
   <data name="customText2Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>562, 3</value>
+    <value>563, 3</value>
   </data>
   <data name="customText2Box.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 20</value>
+    <value>331, 20</value>
   </data>
   <data name="customText2Box.TabIndex" type="System.Int32, mscorlib">
     <value>29</value>
@@ -570,10 +684,7 @@
     <value>Символы "\@№" будут заменены на &lt;Свой текст №&gt; в пресетах поиска и замены</value>
   </data>
   <data name="customText4CheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>450, 32</value>
-  </data>
-  <data name="customText4CheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>106, 17</value>
+    <value>451, 35</value>
   </data>
   <data name="customText4CheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
@@ -585,19 +696,16 @@
     <value>Символы "\@№" будут заменены на &lt;Свой текст №&gt; в пресетах поиска и замены</value>
   </data>
   <data name="customText4Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>562, 29</value>
+    <value>563, 33</value>
   </data>
   <data name="customText4Box.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 20</value>
+    <value>331, 20</value>
   </data>
   <data name="customText4Box.TabIndex" type="System.Int32, mscorlib">
     <value>33</value>
   </data>
   <data name="customText4Box.ToolTip" xml:space="preserve">
     <value>Символы "\@№" будут заменены на &lt;Свой текст №&gt; в пресетах поиска и замены</value>
-  </data>
-  <data name="customText3CheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>106, 17</value>
   </data>
   <data name="customText3CheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>30</value>
@@ -609,7 +717,7 @@
     <value>Символы "\@№" будут заменены на &lt;Свой текст №&gt; в пресетах поиска и замены</value>
   </data>
   <data name="customText3Box.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 20</value>
+    <value>330, 20</value>
   </data>
   <data name="customText3Box.TabIndex" type="System.Int32, mscorlib">
     <value>31</value>
@@ -618,25 +726,25 @@
     <value>Символы "\@№" будут заменены на &lt;Свой текст №&gt; в пресетах поиска и замены</value>
   </data>
   <data name="append4CheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>669, 32</value>
+    <value>669, 36</value>
   </data>
   <data name="append4CheckBox.ToolTip" xml:space="preserve">
     <value>Добавить замененное значение в конец тега:</value>
   </data>
   <data name="append5CheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>669, 32</value>
+    <value>669, 36</value>
   </data>
   <data name="append5CheckBox.ToolTip" xml:space="preserve">
     <value>Добавить замененное значение в конец тега:</value>
   </data>
   <data name="parameterTag3List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 21</value>
+    <value>159, 21</value>
   </data>
   <data name="parameterTag3List.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
-  <data name="label21.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 13</value>
+  <data name="parameterTag3List.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="label21.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -644,20 +752,23 @@
   <data name="label21.Text" xml:space="preserve">
     <value>соответствует</value>
   </data>
+  <data name="label21.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="parameterTag2List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>733, 3</value>
+    <value>734, 3</value>
   </data>
   <data name="parameterTag2List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 21</value>
+    <value>160, 21</value>
   </data>
   <data name="parameterTag2List.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="label22.Location" type="System.Drawing.Point, System.Drawing">
-    <value>646, 7</value>
+  <data name="parameterTag2List.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="label22.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 13</value>
+  <data name="label22.Location" type="System.Drawing.Point, System.Drawing">
+    <value>647, 6</value>
   </data>
   <data name="label22.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -665,14 +776,17 @@
   <data name="label22.Text" xml:space="preserve">
     <value>соответствует</value>
   </data>
+  <data name="label22.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="parameterTagList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 21</value>
+    <value>159, 21</value>
   </data>
   <data name="parameterTagList.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="label23.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 13</value>
+  <data name="parameterTagList.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="label23.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -680,11 +794,11 @@
   <data name="label23.Text" xml:space="preserve">
     <value>соответствует</value>
   </data>
-  <data name="label20.Location" type="System.Drawing.Point, System.Drawing">
-    <value>646, 59</value>
+  <data name="label23.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="label20.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 13</value>
+  <data name="label20.Location" type="System.Drawing.Point, System.Drawing">
+    <value>647, 66</value>
   </data>
   <data name="label20.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
@@ -692,20 +806,23 @@
   <data name="label20.Text" xml:space="preserve">
     <value>соответствует</value>
   </data>
+  <data name="label20.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="parameterTag6List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>733, 55</value>
+    <value>734, 63</value>
   </data>
   <data name="parameterTag6List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 21</value>
+    <value>160, 21</value>
   </data>
   <data name="parameterTag6List.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
   </data>
-  <data name="label24.Location" type="System.Drawing.Point, System.Drawing">
-    <value>646, 33</value>
+  <data name="parameterTag6List.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="label24.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 13</value>
+  <data name="label24.Location" type="System.Drawing.Point, System.Drawing">
+    <value>647, 36</value>
   </data>
   <data name="label24.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -713,14 +830,17 @@
   <data name="label24.Text" xml:space="preserve">
     <value>соответствует</value>
   </data>
+  <data name="label24.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="parameterTag5List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 21</value>
+    <value>159, 21</value>
   </data>
   <data name="parameterTag5List.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
   </data>
-  <data name="label25.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 13</value>
+  <data name="parameterTag5List.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="label25.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -728,26 +848,32 @@
   <data name="label25.Text" xml:space="preserve">
     <value>соответствует</value>
   </data>
+  <data name="label25.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="parameterTag4List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>733, 29</value>
+    <value>734, 33</value>
   </data>
   <data name="parameterTag4List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 21</value>
+    <value>160, 21</value>
   </data>
   <data name="parameterTag4List.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
   </data>
-  <data name="label26.Location" type="System.Drawing.Point, System.Drawing">
-    <value>453, 59</value>
+  <data name="parameterTag4List.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="label26.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 13</value>
+  <data name="label26.Location" type="System.Drawing.Point, System.Drawing">
+    <value>454, 66</value>
   </data>
   <data name="label26.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
   </data>
   <data name="label26.Text" xml:space="preserve">
     <value>&lt;Тег 6&gt;:</value>
+  </data>
+  <data name="label26.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="parameterTag6TypeList.Items" xml:space="preserve">
     <value>не используется</value>
@@ -759,19 +885,22 @@
     <value>только для чтения</value>
   </data>
   <data name="parameterTag6TypeList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>520, 55</value>
+    <value>521, 63</value>
   </data>
   <data name="parameterTag6TypeList.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
   </data>
-  <data name="label27.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 13</value>
+  <data name="parameterTag6TypeList.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="label27.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
   </data>
   <data name="label27.Text" xml:space="preserve">
     <value>&lt;Тег 5&gt;:</value>
+  </data>
+  <data name="label27.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="parameterTag5TypeList.Items" xml:space="preserve">
     <value>не используется</value>
@@ -785,17 +914,20 @@
   <data name="parameterTag5TypeList.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
   </data>
-  <data name="label28.Location" type="System.Drawing.Point, System.Drawing">
-    <value>453, 33</value>
+  <data name="parameterTag5TypeList.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="label28.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 13</value>
+  <data name="label28.Location" type="System.Drawing.Point, System.Drawing">
+    <value>454, 36</value>
   </data>
   <data name="label28.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
   <data name="label28.Text" xml:space="preserve">
     <value>&lt;Тег 4&gt;:</value>
+  </data>
+  <data name="label28.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="parameterTag4TypeList.Items" xml:space="preserve">
     <value>не используется</value>
@@ -807,37 +939,28 @@
     <value>только для чтения</value>
   </data>
   <data name="parameterTag4TypeList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>520, 29</value>
+    <value>521, 33</value>
   </data>
   <data name="parameterTag4TypeList.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
   </data>
-  <data name="groupBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 526</value>
-  </data>
-  <data name="groupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>897, 75</value>
-  </data>
-  <data name="groupBox4.TabIndex" type="System.Int32, mscorlib">
-    <value>37</value>
-  </data>
-  <data name="groupBox4.Text" xml:space="preserve">
-    <value>Шаг 4 (необязательный)</value>
-  </data>
-  <data name="tableLayoutPanel6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>890, 52</value>
-  </data>
-  <data name="label29.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 13</value>
+  <data name="parameterTag4TypeList.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="label29.Text" xml:space="preserve">
     <value>Найти:</value>
   </data>
+  <data name="label29.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="replacedTag4List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>716, 29</value>
+    <value>716, 33</value>
   </data>
   <data name="replacedTag4List.Size" type="System.Drawing.Size, System.Drawing">
     <value>171, 21</value>
+  </data>
+  <data name="replacedTag4List.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="searchedTag4List.Location" type="System.Drawing.Point, System.Drawing">
     <value>716, 3</value>
@@ -845,62 +968,86 @@
   <data name="searchedTag4List.Size" type="System.Drawing.Size, System.Drawing">
     <value>171, 21</value>
   </data>
-  <data name="label30.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 13</value>
+  <data name="searchedTag4List.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="label30.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 36</value>
   </data>
   <data name="label30.Text" xml:space="preserve">
     <value>Заменить на:</value>
   </data>
-  <data name="label31.Location" type="System.Drawing.Point, System.Drawing">
-    <value>619, 33</value>
+  <data name="label30.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="label31.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 13</value>
+  <data name="label31.Location" type="System.Drawing.Point, System.Drawing">
+    <value>619, 36</value>
   </data>
   <data name="label31.Text" xml:space="preserve">
     <value>в теге:</value>
   </data>
+  <data name="label31.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="replacedPattern4Box.Location" type="System.Drawing.Point, System.Drawing">
+    <value>88, 33</value>
+  </data>
   <data name="replacedPattern4Box.Size" type="System.Drawing.Size, System.Drawing">
     <value>522, 20</value>
   </data>
-  <data name="label32.Location" type="System.Drawing.Point, System.Drawing">
-    <value>619, 7</value>
+  <data name="replacedPattern4Box.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="label32.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 13</value>
+  <data name="label32.Location" type="System.Drawing.Point, System.Drawing">
+    <value>619, 6</value>
   </data>
   <data name="label32.Text" xml:space="preserve">
     <value>в теге:</value>
   </data>
+  <data name="label32.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="searchedPattern4Box.Size" type="System.Drawing.Size, System.Drawing">
     <value>522, 20</value>
   </data>
-  <data name="groupBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 604</value>
+  <data name="searchedPattern4Box.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="groupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>897, 75</value>
+  <data name="tableLayoutPanel6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>890, 60</value>
   </data>
-  <data name="groupBox5.TabIndex" type="System.Int32, mscorlib">
-    <value>38</value>
+  <data name="tableLayoutPanel6.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="groupBox5.Text" xml:space="preserve">
-    <value>Шаг 5 (необязательный)</value>
+  <data name="groupBox4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 539</value>
   </data>
-  <data name="tableLayoutPanel7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>890, 52</value>
+  <data name="groupBox4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>897, 80</value>
   </data>
-  <data name="label33.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 13</value>
+  <data name="groupBox4.TabIndex" type="System.Int32, mscorlib">
+    <value>37</value>
+  </data>
+  <data name="groupBox4.Text" xml:space="preserve">
+    <value>Шаг 4 (необязательный)</value>
+  </data>
+  <data name="groupBox4.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="label33.Text" xml:space="preserve">
     <value>Найти:</value>
   </data>
+  <data name="label33.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="replacedTag5List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>716, 29</value>
+    <value>716, 33</value>
   </data>
   <data name="replacedTag5List.Size" type="System.Drawing.Size, System.Drawing">
     <value>171, 21</value>
+  </data>
+  <data name="replacedTag5List.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="searchedTag5List.Location" type="System.Drawing.Point, System.Drawing">
     <value>716, 3</value>
@@ -908,38 +1055,78 @@
   <data name="searchedTag5List.Size" type="System.Drawing.Size, System.Drawing">
     <value>171, 21</value>
   </data>
-  <data name="label34.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 13</value>
+  <data name="searchedTag5List.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="label34.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 36</value>
   </data>
   <data name="label34.Text" xml:space="preserve">
     <value>Заменить на:</value>
   </data>
-  <data name="label35.Location" type="System.Drawing.Point, System.Drawing">
-    <value>619, 33</value>
+  <data name="label34.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="label35.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 13</value>
+  <data name="label35.Location" type="System.Drawing.Point, System.Drawing">
+    <value>619, 36</value>
   </data>
   <data name="label35.Text" xml:space="preserve">
     <value>в теге:</value>
   </data>
+  <data name="label35.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="replacedPattern5Box.Location" type="System.Drawing.Point, System.Drawing">
+    <value>88, 33</value>
+  </data>
   <data name="replacedPattern5Box.Size" type="System.Drawing.Size, System.Drawing">
     <value>522, 20</value>
   </data>
-  <data name="label36.Location" type="System.Drawing.Point, System.Drawing">
-    <value>619, 7</value>
+  <data name="replacedPattern5Box.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="label36.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 13</value>
+  <data name="label36.Location" type="System.Drawing.Point, System.Drawing">
+    <value>619, 6</value>
   </data>
   <data name="label36.Text" xml:space="preserve">
     <value>в теге:</value>
   </data>
+  <data name="label36.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="searchedPattern5Box.Size" type="System.Drawing.Size, System.Drawing">
     <value>522, 20</value>
   </data>
+  <data name="searchedPattern5Box.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tableLayoutPanel7.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 0</value>
+  </data>
+  <data name="tableLayoutPanel7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>890, 60</value>
+  </data>
+  <data name="tableLayoutPanel7.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="groupBox5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 622</value>
+  </data>
+  <data name="groupBox5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>897, 80</value>
+  </data>
+  <data name="groupBox5.TabIndex" type="System.Int32, mscorlib">
+    <value>38</value>
+  </data>
+  <data name="groupBox5.Text" xml:space="preserve">
+    <value>Шаг 5 (необязательный)</value>
+  </data>
+  <data name="groupBox5.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="customizedByUserCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>609, 116</value>
+    <value>609, 96</value>
   </data>
   <data name="customizedByUserCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>157, 17</value>
@@ -947,8 +1134,11 @@
   <data name="customizedByUserCheckBox.Text" xml:space="preserve">
     <value>Настроен пользователем</value>
   </data>
+  <data name="customizedByUserCheckBox.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="removePresetCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>772, 136</value>
+    <value>772, 116</value>
   </data>
   <data name="removePresetCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>107, 17</value>
@@ -956,28 +1146,37 @@
   <data name="removePresetCheckBox.Text" xml:space="preserve">
     <value>Удалить пресет</value>
   </data>
+  <data name="removePresetCheckBox.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 156</value>
+    <value>12, 136</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>894, 78</value>
+    <value>897, 90</value>
+  </data>
+  <data name="tableLayoutPanel1.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="tableLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 234</value>
+    <value>12, 227</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>894, 52</value>
+    <value>897, 60</value>
+  </data>
+  <data name="tableLayoutPanel2.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>923, 713</value>
-  </data>
-  <data name="$this.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>10000, 740</value>
+    <value>923, 736</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>931, 740</value>
+    <value>931, 763</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Редактор пресета</value>
+  </data>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value />
   </data>
 </root>

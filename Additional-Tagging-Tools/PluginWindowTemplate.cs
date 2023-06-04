@@ -589,10 +589,10 @@ namespace MusicBeePlugin
                 }
                 else
                 {
-                    if (MaximumSize.Height != 0 && Height > MaximumSize.Height)
-                    {
-                        Height = MaximumSize.Height;
-                    }
+                    //if (MaximumSize.Height != 0 && Height > MaximumSize.Height)
+                    //{
+                    //    Height = MaximumSize.Height;
+                    //}
 
                     left = Left;
                     top = Top;
