@@ -150,6 +150,26 @@ namespace MusicBeePlugin
             return form;
         }
 
+        protected void setFormMaximizedBounds()
+        {
+            int maximizedHeight = MaximumSize.Height;
+
+            if (maximizedHeight != 0)
+            {
+                if (modal)
+                {
+                    Height = MinimumSize.Height;
+                    maximizedHeight = Height;
+                }
+
+                if (maximizedHeight > Screen.FromControl(this).WorkingArea.Height)
+                    maximizedHeight = Screen.FromControl(this).WorkingArea.Height;
+
+                MaximizedBounds = new Rectangle(Screen.FromControl(this).WorkingArea.Left, Screen.FromControl(this).WorkingArea.Top,
+                    Screen.FromControl(this).WorkingArea.Width, maximizedHeight);
+            }
+        }
+
         protected void initializeForm()
         {
             Plugin.MbForm = Plugin.MbForm.IsDisposed ? (Form)FromHandle(Plugin.MbApiInterface.MB_GetWindowHandle()) : Plugin.MbForm;
@@ -174,16 +194,6 @@ namespace MusicBeePlugin
             //return; //For debbuging
 
             SkinForm(this);
-
-            int maximizedHeight = MaximumSize.Height;
-            if (maximizedHeight != 0)
-            {
-                if (maximizedHeight > Screen.FromControl(this).WorkingArea.Height)
-                    maximizedHeight = Screen.FromControl(this).WorkingArea.Height;
-
-                MaximizedBounds = new Rectangle(Screen.FromControl(this).WorkingArea.Left, Screen.FromControl(this).WorkingArea.Top, 
-                    Screen.FromControl(this).WorkingArea.Width, maximizedHeight);
-            }
         }
 
         public static void Display(PluginWindowTemplate newForm, bool modalForm = false)
@@ -211,11 +221,13 @@ namespace MusicBeePlugin
                             if (newForm != null && modalForm)
                             {
                                 form.modal = true;
+                                form.setFormMaximizedBounds();
                                 form.ShowDialog();
                             }
                             else if (newForm != null)
                             {
                                 form.modal = false;
+                                form.setFormMaximizedBounds();
                                 form.Show();
                             }
                             else if (form.modal)
@@ -236,9 +248,17 @@ namespace MusicBeePlugin
             }
 
             if (modalForm)
+            {
+                newForm.modal = true;
+                newForm.setFormMaximizedBounds();
                 newForm.ShowDialog();
+            }
             else
+            {
+                newForm.modal = false;
+                newForm.setFormMaximizedBounds();
                 newForm.Show();
+            }
         }
 
         private void serializedOperation()

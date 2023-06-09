@@ -190,7 +190,8 @@ namespace MusicBeePlugin
                 customText4Box.ReadOnly = !customText4CheckBox.Checked;
             }
 
-            ShowDialog();
+            Display(this, true);
+
             return settingsSaved;
         }
 

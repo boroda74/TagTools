@@ -321,9 +321,6 @@
   <data name="label34.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 35</value>
   </data>
-  <data name="append5CheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="&gt;&gt;append3CheckBox.Name" xml:space="preserve">
     <value>append3CheckBox</value>
   </data>
@@ -377,9 +374,6 @@
   </data>
   <data name="label14.Location" type="System.Drawing.Point, System.Drawing">
     <value>598, 35</value>
-  </data>
-  <data name="ignoreCaseCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
   </data>
   <data name="label2.ToolTip" xml:space="preserve">
     <value />
@@ -558,8 +552,8 @@
   <data name="&gt;&gt;label8.Parent" xml:space="preserve">
     <value>tableLayoutPanel4</value>
   </data>
-  <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="searchedTag5List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 10</value>
   </data>
   <data name="&gt;&gt;searchedTagList.Parent" xml:space="preserve">
     <value>tableLayoutPanel3</value>
@@ -717,8 +711,8 @@
   <data name="label29.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="label12.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+  <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="label33.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 13</value>
@@ -808,7 +802,7 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="$this.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>10000, 763</value>
+    <value>10000, 800</value>
   </data>
   <data name="label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1323,9 +1317,6 @@
   <data name="label22.Size" type="System.Drawing.Size, System.Drawing">
     <value>81, 13</value>
   </data>
-  <data name="searchedTag5List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 10</value>
-  </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
@@ -1731,6 +1722,9 @@
   <data name="removePresetCheckBox.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="&gt;&gt;label7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;label28.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
@@ -1934,9 +1928,6 @@
   </data>
   <data name="&gt;&gt;customText3Box.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
-  </data>
-  <data name="replacedTag2List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 10</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -2206,7 +2197,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="buttonCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
+    <value>Top, Right</value>
   </data>
   <data name="&gt;&gt;buttonApply.ZOrder" xml:space="preserve">
     <value>17</value>
@@ -2496,6 +2487,9 @@
   <data name="customTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 10</value>
   </data>
+  <data name="label12.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
   <data name="customizedByUserCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>493, 94</value>
   </data>
@@ -2604,8 +2598,8 @@
   <data name="label24.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;label14.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="append5CheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="descriptionBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>114, 34</value>
@@ -2894,6 +2888,9 @@
   </data>
   <data name="searchedPattern2Box.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 10</value>
+  </data>
+  <data name="&gt;&gt;label14.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label16.ZOrder" xml:space="preserve">
     <value>7</value>
@@ -3324,8 +3321,8 @@
   <data name="label14.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;label7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="replacedTag2List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 10</value>
   </data>
   <data name="customText4CheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 17</value>
@@ -3760,7 +3757,7 @@
     <value>117, 21</value>
   </data>
   <data name="buttonApply.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
+    <value>Top, Right</value>
   </data>
   <data name="parameterTag5TypeList.Items2" xml:space="preserve">
     <value>read only</value>

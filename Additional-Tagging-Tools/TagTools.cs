@@ -3956,7 +3956,7 @@ namespace MusicBeePlugin
             // if about.ConfigurationPanelHeight is set to 0, you can display your own popup window
 
             PluginSettings tagToolsForm = new PluginSettings(this, About);
-            tagToolsForm.ShowDialog();
+            PluginSettings.Display(tagToolsForm, true);
 
             SaveSettings();
 
