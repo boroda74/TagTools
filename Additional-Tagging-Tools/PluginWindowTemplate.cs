@@ -150,6 +150,16 @@ namespace MusicBeePlugin
             return form;
         }
 
+        protected void setInitialFormMaximizedBounds()
+        {
+            if (modal && MaximumSize.Height != 0)
+            {
+                Height = MinimumSize.Height;
+            }
+
+            setFormMaximizedBounds();
+        }
+
         protected void setFormMaximizedBounds()
         {
             int maximizedHeight = MaximumSize.Height;
@@ -158,7 +168,6 @@ namespace MusicBeePlugin
             {
                 if (modal)
                 {
-                    Height = MinimumSize.Height;
                     maximizedHeight = Height;
                 }
 
@@ -221,13 +230,13 @@ namespace MusicBeePlugin
                             if (newForm != null && modalForm)
                             {
                                 form.modal = true;
-                                form.setFormMaximizedBounds();
+                                form.setInitialFormMaximizedBounds();
                                 form.ShowDialog();
                             }
                             else if (newForm != null)
                             {
                                 form.modal = false;
-                                form.setFormMaximizedBounds();
+                                form.setInitialFormMaximizedBounds();
                                 form.Show();
                             }
                             else if (form.modal)
@@ -250,13 +259,13 @@ namespace MusicBeePlugin
             if (modalForm)
             {
                 newForm.modal = true;
-                newForm.setFormMaximizedBounds();
+                newForm.setInitialFormMaximizedBounds();
                 newForm.ShowDialog();
             }
             else
             {
                 newForm.modal = false;
-                newForm.setFormMaximizedBounds();
+                newForm.setInitialFormMaximizedBounds();
                 newForm.Show();
             }
         }
@@ -609,10 +618,7 @@ namespace MusicBeePlugin
                 }
                 else
                 {
-                    //if (MaximumSize.Height != 0 && Height > MaximumSize.Height)
-                    //{
-                    //    Height = MaximumSize.Height;
-                    //}
+                    setFormMaximizedBounds();
 
                     left = Left;
                     top = Top;
