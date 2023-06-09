@@ -58,7 +58,7 @@ namespace MusicBeePlugin
             if (fileTags.Length == 1 && files.Length > 1)
             {
                 MultiplePastingQuestion question = new MultiplePastingQuestion(TagToolsPlugin, fileTags.Length, files.Length);
-                question.ShowDialog();
+                PluginWindowTemplate.Display(question, true);
 
                 if (question.PasteAnyway)
                     multiplePasting = true;
@@ -105,6 +105,7 @@ namespace MusicBeePlugin
 
         private void PasteTagsFromClipboardPlugin_Shown(object sender, EventArgs e)
         {
+            Visible = false;
             pasteTagsFromClipboard();
             Close();
         }
