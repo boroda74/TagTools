@@ -766,73 +766,189 @@ namespace MusicBeePlugin
             public string sourceTagTValue;
         }
 
-        public struct ConvertStringsResults
+        public static int GetMulDivFactor(string representation)
+        {
+            switch (representation)
+            {
+                case null:
+                case "1 (ignore)":
+                case "1 (игнорировать)":
+                    return 1;
+                case "1000 (K)":
+                    return 1000;
+                case "1000000 (M)":
+                    return 1000000;
+                case "1024 (K)":
+                    return 1024;
+                case "1048576 (M)":
+                    return 1048576;
+                default:
+                    return int.Parse(representation);
+            }
+        }
+
+        public static int GetPrecisionDigits(string representation)
+        {
+            switch (representation)
+            {
+                case null:
+                case "(don't round)":
+                case "(не округлять)":
+                    return -1;
+                default:
+                    return int.Parse(representation);
+            }
+
+        }
+
+        public struct ConvertStringsResult
         {
             public int type; // 4 - date-time, 3 - timespan, 2 - double, 1 - items count, 0 - unknown/string, -1 - use other results to get type
 
-            public double result1f;
+            public double result1f;//****
+            public string result1fPrefix;
+            public string result1fSpace;
+            public string result1fPostfix;
+
             public double result2f;
+            public string result2fPrefix;
+            public string result2fSpace;
+            public string result2fPostfix;
+
             public string result1s;
             public string result2s;
 
             public SortedDictionary<string, bool> items;
             public SortedDictionary<string, bool> items1;
 
-            public ConvertStringsResults(int typeParam) //typeParam: 4 - date-time, 3 - timespan, 2 - double, 1 - items count, 0 - unknown/string, -1 - use other results to get type
+            public ConvertStringsResult(int typeParam) //typeParam: 4 - date-time, 3 - timespan, 2 - double, 1 - items count, 0 - unknown/string, -1 - use other results to get type
             {
                 type = typeParam;
+
                 result1f = 0;
+                result1fPrefix = null;
+                result1fSpace = null;
+                result1fPostfix = null;
+
                 result2f = 0;
-                result1s = null;
-                result2s = null;
+                result2fPrefix = null;
+                result2fSpace = null;
+                result2fPostfix = null;
+
+                result1s = "";
+                result2s = "";
+
                 items = new SortedDictionary<string, bool>();
                 items1 = new SortedDictionary<string, bool>();
             }
 
-            public string getResult()
+            public double getResult() //Returns double for any numeric result or NaN for any not numeric one
             {
                 if (items1.Count != 0) //Its "average count" function
                 {
-                    return "" + Math.Round((double)items1.Count / items.Count, 2);
+                    return (double)items1.Count / items.Count;
                 }
                 else if (type <= 0)
                 {
                     if (items.Count == 0)
-                        return "" + result1s;
+                        return double.NegativeInfinity;
                     else //Its "average" function
-                        return "" + Math.Round(result1f / items.Count, 2);
+                        return result1f / items.Count;
                 }
                 else if (type == 1)
                 {
-                    return "" + items.Count;
+                    return (double)items.Count;
                 }
                 else if (type == 2)
                 {
                     if (items.Count == 0)
-                        return "" + result1f;
+                        return result1f;
                     else //Its "average" function
-                        return "" + Math.Round(result1f / items.Count, 2);
+                        return result1f / items.Count;
+                }
+                else //if (type == 3)
+                {
+                    return double.NegativeInfinity;
+                }
+                //else //if (type == 4)
+                //{
+                //    return double.NegativeInfinity;
+                //}
+            }
+
+            public string getFormattedResult(int operation, string mulDivFactorRepr, string precisionDigitsRepr, string appendedText)
+            {
+                double result = getResult();
+
+                if (type == 2 && result != double.NegativeInfinity && mulDivFactorRepr != null) //It's numeric result. Let's format it.
+                {
+                    int mulDivFactor = GetMulDivFactor(mulDivFactorRepr);
+                    if (mulDivFactor != 1 && operation == 0)
+                        result /= mulDivFactor;
+                    else if (mulDivFactor != 1 && operation == 1)
+                        result *= mulDivFactor;
+
+                    int precisionDigits = GetPrecisionDigits(precisionDigitsRepr);
+                    if (precisionDigits >= 0)
+                        return result1fPrefix + Math.Round((decimal)result, precisionDigits).ToString("F" + precisionDigits) + result1fSpace + appendedText + result1fPostfix;
+                    else
+                        return result1fPrefix + result.ToString() + result1fSpace + appendedText + result1fPostfix;
+                }
+                //****else if (type == 2)
+                //{
+                //    return result1f.ToString();
+                //}
+                else if (type <= 0)
+                {
+                    return result1s;
                 }
                 else if (type == 3)
                 {
                     if (items.Count == 0)
-                        return "" + TimeSpan.FromSeconds(result1f).ToString("g");//***
+                        return TimeSpan.FromSeconds(result1f).ToString("g");//***
                     else //Its "average" function
-                        return "" + TimeSpan.FromSeconds(result1f / items.Count).ToString("g");
+                        return TimeSpan.FromSeconds(result1f / items.Count).ToString("g");
                 }
                 else //if (type == 4)
                 {
                     if (items.Count == 0)
-                        return "" + (DateTime.MinValue + TimeSpan.FromSeconds(result1f));
+                        return (DateTime.MinValue + TimeSpan.FromSeconds(result1f)).ToString();
                     else //Its "average" function
-                        return "" + (DateTime.MinValue + TimeSpan.FromSeconds(result1f / items.Count));
+                        return (DateTime.MinValue + TimeSpan.FromSeconds(result1f / items.Count)).ToString();
                 }
             }
         }
 
-        public static ConvertStringsResults ConvertStrings(string xstring, string ystring = null, bool replacements = false)
+        public static (double, string, string, string) ReplaceMeasurementUnits(string input, string units, double multiplicator) //Returns normalized number & string postfix
         {
-            ConvertStringsResults results = new ConvertStringsResults();
+            string prefix = Regex.Replace(input, @"^(\D*?)(\d+)(\.|\,)?(\d*?)(\s)*?" + units + "(.*)$", "$1", RegexOptions.IgnoreCase);
+            string stringnumber = Regex.Replace(input, @"^(\D*?)(\d+)(\.|\,)?(\d*?)(\s)*?" + units + "(.*)$", "$2" + LocalizedDecimalPoint + "$4", RegexOptions.IgnoreCase);
+            string space = Regex.Replace(input, @"^(\D*?)(\d+)(\.|\,)?(\d*?)(\s)*?" + units + "(.*)$", "$5", RegexOptions.IgnoreCase);
+            string postfix = Regex.Replace(input, @"^(\D*?)(\d+)(\.|\,)?(\d*?)(\s)*?" + units + "(.*)$", "$7", RegexOptions.IgnoreCase);
+
+            double number = 0;
+            if (double.TryParse(stringnumber, out number))
+                return ((number * multiplicator), prefix, space, postfix);
+            else
+                return (double.NegativeInfinity, null, null, null);
+        }
+
+        public static (double, string, string) ReplaceMeasurementUnits(string input) //Returns normalized number & string postfix
+        {
+            string prefix = Regex.Replace(input, @"^(\D*?)(\d+)(\.|\,)?(\d*?)(\D*)$", "$1", RegexOptions.IgnoreCase);
+            string stringnumber = Regex.Replace(input, @"^(\D*?)(\d+)(\.|\,)?(\d*?)(\D*)$", "$2" + LocalizedDecimalPoint + "$4", RegexOptions.IgnoreCase);
+            string postfix = Regex.Replace(input, @"^(\D*?)(\d+)(\.|\,)?(\d*?)(\D*)$", "$5", RegexOptions.IgnoreCase);
+
+            double number = 0;
+            if (double.TryParse(stringnumber, out number))
+                return (number, prefix, postfix);
+            else
+                return (double.NegativeInfinity, null, null);
+        }
+
+        public static ConvertStringsResult ConvertStrings(string xstring, string ystring = null, bool replacements = false)
+        {
+            ConvertStringsResult results = new ConvertStringsResult();
 
             if (ystring == null)
                 ystring = xstring;
@@ -872,51 +988,139 @@ namespace MusicBeePlugin
                 unitsM += ")";
                 unitsG += ")";
 
+                double xnumber = double.NegativeInfinity;
+                double ynumber = double.NegativeInfinity;
 
-                xstring = Regex.Replace(xstring, @"^(\d+)(\.|\,)?(\d)?(\d)?(\d)?.*?" + unitsG + ".*$", "$1`$3$4$5~000000000", RegexOptions.IgnoreCase);
-                ystring = Regex.Replace(ystring, @"^(\d+)(\.|\,)?(\d)?(\d)?(\d)?.*?" + unitsG + ".*$", "$1`$3$4$5~000000000", RegexOptions.IgnoreCase);
+                string xnumberprefix = null;
+                string xnumberspace = null;
+                string xnumberpostfix = null;
 
-                xstring = Regex.Replace(xstring, @"~", "", RegexOptions.IgnoreCase);
-                ystring = Regex.Replace(ystring, @"~", "", RegexOptions.IgnoreCase);
+                string ynumberprefix = null;
+                string ynumberspace = null;
+                string ynumberpostfix = null;
 
-                xstring = Regex.Replace(xstring, @"^(.*?)`(.{9}).*$", "$1$2", RegexOptions.IgnoreCase);
-                ystring = Regex.Replace(ystring, @"^(.*?)`(.{9}).*$", "$1$2", RegexOptions.IgnoreCase);
-
-
-                xstring = Regex.Replace(xstring, @"^(\d+)(\.|\,)?(\d)?(\d)?(\d)?.*?" + unitsM + ".*$", "$1`$3$4$5~000000", RegexOptions.IgnoreCase);
-                ystring = Regex.Replace(ystring, @"^(\d+)(\.|\,)?(\d)?(\d)?(\d)?.*?" + unitsM + ".*$", "$1`$3$4$5~000000", RegexOptions.IgnoreCase);
-
-                xstring = Regex.Replace(xstring, @"~", "", RegexOptions.IgnoreCase);
-                ystring = Regex.Replace(ystring, @"~", "", RegexOptions.IgnoreCase);
-
-                xstring = Regex.Replace(xstring, @"^(.*?)`(.{6}).*$", "$1$2", RegexOptions.IgnoreCase);
-                ystring = Regex.Replace(ystring, @"^(.*?)`(.{6}).*$", "$1$2", RegexOptions.IgnoreCase);
+                double numbertemp;
+                string numberprefixtemp;
+                string numberspacetemp;
+                string numberpostfixtemp;
 
 
-                xstring = Regex.Replace(xstring, @"^(\d+)(\.|\,)?(\d)?(\d)?(\d)?.*?" + unitsK + ".*$", "$1`$3$4$5~000", RegexOptions.IgnoreCase);
-                ystring = Regex.Replace(ystring, @"^(\d+)(\.|\,)?(\d)?(\d)?(\d)?.*?" + unitsK + ".*$", "$1`$3$4$5~000", RegexOptions.IgnoreCase);
+                (numbertemp, numberprefixtemp, numberspacetemp, numberpostfixtemp) = ReplaceMeasurementUnits(xstring, unitsG, 1_099_511_627_776);
+                if (numbertemp != double.NegativeInfinity)
+                {
+                    xnumber = numbertemp;
+                    xnumberprefix = numberprefixtemp;
+                    xnumberspace = numberspacetemp;
+                    xnumberpostfix = numberpostfixtemp;
+                }
 
-                xstring = Regex.Replace(xstring, @"~", "", RegexOptions.IgnoreCase);
-                ystring = Regex.Replace(ystring, @"~", "", RegexOptions.IgnoreCase);
+                (numbertemp, numberprefixtemp, numberspacetemp, numberpostfixtemp) = ReplaceMeasurementUnits(ystring, unitsG, 1_099_511_627_776);
+                if (numbertemp != double.NegativeInfinity)
+                {
+                    ynumber = numbertemp;
+                    ynumberprefix = numberprefixtemp;
+                    ynumberspace = numberspacetemp;
+                    ynumberpostfix = numberpostfixtemp;
+                }
 
-                xstring = Regex.Replace(xstring, @"^(.*?)`(.{3}).*$", "$1$2", RegexOptions.IgnoreCase);
-                ystring = Regex.Replace(ystring, @"^(.*?)`(.{3}).*$", "$1$2", RegexOptions.IgnoreCase);
 
 
-                xstring = Regex.Replace(xstring, @"^(\d+)\s*[^\s0-9]+", "$1", RegexOptions.IgnoreCase);
-                ystring = Regex.Replace(ystring, @"^(\d+)\s*[^\s0-9]+", "$1", RegexOptions.IgnoreCase);
+                (numbertemp, numberprefixtemp, numberspacetemp, numberpostfixtemp) = ReplaceMeasurementUnits(xstring, unitsM, 1_048_576);
+                if (numbertemp != double.NegativeInfinity)
+                {
+                    xnumber = numbertemp;
+                    xnumberprefix = numberprefixtemp;
+                    xnumberspace = numberspacetemp;
+                    xnumberpostfix = numberpostfixtemp;
+                }
+
+                (numbertemp, numberprefixtemp, numberspacetemp, numberpostfixtemp) = ReplaceMeasurementUnits(ystring, unitsM, 1_048_576);
+                if (numbertemp != double.NegativeInfinity)
+                {
+                    ynumber = numbertemp;
+                    ynumberprefix = numberprefixtemp;
+                    ynumberspace = numberspacetemp;
+                    ynumberpostfix = numberpostfixtemp;
+                }
+
+
+
+                (numbertemp, numberprefixtemp, numberspacetemp, numberpostfixtemp) = ReplaceMeasurementUnits(xstring, unitsK, 1024);
+                if (numbertemp != double.NegativeInfinity)
+                {
+                    xnumber = numbertemp;
+                    xnumberprefix = numberprefixtemp;
+                    xnumberspace = numberspacetemp;
+                    xnumberpostfix = numberpostfixtemp;
+                }
+
+                (numbertemp, numberprefixtemp, numberspacetemp, numberpostfixtemp) = ReplaceMeasurementUnits(ystring, unitsK, 1024);
+                if (numbertemp != double.NegativeInfinity)
+                {
+                    ynumber = numbertemp;
+                    ynumberprefix = numberprefixtemp;
+                    ynumberspace = numberspacetemp;
+                    ynumberpostfix = numberpostfixtemp;
+                }
+
+
+
+                if (xnumber == double.NegativeInfinity)
+                {
+                    (numbertemp, numberprefixtemp, numberpostfixtemp) = ReplaceMeasurementUnits(xstring);
+                    if (numbertemp != double.NegativeInfinity)
+                    {
+                        xnumber = numbertemp;
+                        xnumberprefix = numberprefixtemp;
+                        xnumberspace = "";
+                        xnumberpostfix = numberpostfixtemp;
+                    }
+                }
+
+                if (ynumber == double.NegativeInfinity)
+                { 
+                    (numbertemp, numberprefixtemp, numberpostfixtemp) = ReplaceMeasurementUnits(ystring);
+                    if (numbertemp != double.NegativeInfinity)
+                    {
+                        ynumber = numbertemp;
+                        ynumberprefix = numberprefixtemp;
+                        ynumberspace = "";
+                        ynumberpostfix = numberpostfixtemp;
+                    }
+                }
+
+
+
+                if (xnumber != double.NegativeInfinity && ynumber != double.NegativeInfinity)
+                {
+                    results.result1f = xnumber;
+                    results.result1fPrefix = xnumberprefix;
+                    results.result1fSpace = xnumberspace;
+                    results.result1fPostfix = xnumberpostfix;
+                    results.result1s = xstring;
+
+                    results.result2f = ynumber;
+                    results.result2fPrefix = ynumberprefix;
+                    results.result2fSpace = ynumberspace;
+                    results.result2fPostfix = ynumberpostfix;
+                    results.result2s = ystring;
+
+                    results.type = 2; //double
+
+                    return results;
+                }
             }
 
 
-            try
-            {
-                results.result1f = double.Parse(xstring);
-                results.result2f = double.Parse(ystring);
-                results.type = 2; //double
+            //**** try
+            //{
+            //    results.result1f = double.Parse(xstring);
+            //    results.result2f = double.Parse(ystring);
+            //    results.type = 2; //double
 
-                return results;
-            }
-            catch
+            //    return results;
+            //}
+            //catch
             {
                 try
                 {
@@ -974,7 +1178,7 @@ namespace MusicBeePlugin
 
         public static int CompareStrings(string xstring, string ystring) //Returns: +1 - xstring > ystring, 0 - xstring > ystring, -1 - xstring < ystring
         {
-            ConvertStringsResults results;
+            ConvertStringsResult results;
 
             results = ConvertStrings(xstring, ystring);
 
@@ -3754,6 +3958,18 @@ namespace MusicBeePlugin
             {
                 if (reportPreset != null && reportPreset.exportedTrackListName == null)
                     reportPreset.exportedTrackListName = ExportedTrackList;
+
+                if (reportPreset != null && (reportPreset.operations == null || reportPreset.operations.Length < reportPreset.functionNames.Length))
+                    reportPreset.operations = new int[reportPreset.functionNames.Length];
+
+                if (reportPreset != null && (reportPreset.mulDivFactors == null || reportPreset.mulDivFactors.Length < reportPreset.functionNames.Length))
+                    reportPreset.mulDivFactors = new string[reportPreset.functionNames.Length];
+
+                if (reportPreset != null && (reportPreset.precisionDigits == null || reportPreset.precisionDigits.Length < reportPreset.functionNames.Length))
+                    reportPreset.precisionDigits = new string[reportPreset.functionNames.Length];
+
+                if (reportPreset != null && (reportPreset.appendTexts == null || reportPreset.appendTexts.Length < reportPreset.functionNames.Length))
+                    reportPreset.appendTexts = new string[reportPreset.functionNames.Length];
             }
 
 
