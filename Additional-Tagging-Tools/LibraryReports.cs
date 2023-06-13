@@ -2189,8 +2189,8 @@ namespace MusicBeePlugin
                 savedDestinationTagsNames.Add((string)destinationTagList.SelectedItem);
 
                 operations.Add(0);
-                mulDivFactors.Add("");
-                precisionDigits.Add("");
+                mulDivFactors.Add((string)mulDivFactorComboBox.Items[0]);
+                precisionDigits.Add((string)precisionDigitsComboBox.Items[0]);
                 appendTexts.Add("");
 
                 sourceFieldComboBox.Items.Add(column.HeaderText);
@@ -3027,7 +3027,7 @@ namespace MusicBeePlugin
 
                 preset.autoApply = presetsBox.GetItemChecked(presetsBox.SelectedIndex);
 
-                preset.destinationTags = new string[sourceFieldComboBox.Items.Count];
+                preset.destinationTags = new string[savedDestinationTagsNames.Count];
 
                 savedDestinationTagsNames.CopyTo(preset.destinationTags, 0);
 
@@ -3767,7 +3767,11 @@ namespace MusicBeePlugin
 
         private void operationComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (sourceFieldComboBox.Items.Count != 0)
+            if (sourceFieldComboBox.SelectedIndex == -1)
+            {
+                operationComboBox.SelectedIndex = 0;
+            }
+            else
             {
                 operations[sourceFieldComboBox.SelectedIndex] = operationComboBox.SelectedIndex;
 
@@ -3778,10 +3782,16 @@ namespace MusicBeePlugin
 
         private void mulDivFactorComboBox_TextChanged(object sender, EventArgs e)
         {
-            switch (mulDivFactorComboBox.Text)
+            if (sourceFieldComboBox.SelectedIndex == -1)
+            {
+                mulDivFactorComboBox.SelectedIndex = 0;
+            }
+            else switch (mulDivFactorComboBox.Text)
             {
                 case "":
                     mulDivFactorComboBox.SelectedIndex = 0;
+                    mulDivFactors[sourceFieldComboBox.SelectedIndex] = (string)mulDivFactorComboBox.Items[0];
+
                     break;
                 case "1 (ignore)":
                 case "1 (игнорировать)":
@@ -3789,7 +3799,9 @@ namespace MusicBeePlugin
                 case "1000000 (M)":
                 case "1024 (K)":
                 case "1048576 (M)":
-                    break;
+                        mulDivFactors[sourceFieldComboBox.SelectedIndex] = mulDivFactorComboBox.Text;
+
+                        break;
                 default:
                     uint mulDivFactor = 1;
                     if (!uint.TryParse(mulDivFactorComboBox.Text, out mulDivFactor))
@@ -3798,10 +3810,11 @@ namespace MusicBeePlugin
                     string mulDivFactorText = mulDivFactor.ToString("F0");
                     if (mulDivFactorComboBox.Text != mulDivFactorText)
                         mulDivFactorComboBox.Text = mulDivFactorText;
+
+                    mulDivFactors[sourceFieldComboBox.SelectedIndex] = mulDivFactorComboBox.Text;
+
                     break;
             }
-
-            mulDivFactors[sourceFieldComboBox.SelectedIndex] = mulDivFactorComboBox.Text;
 
             if (!sourceFieldComboBoxIndexChanging)
                 setPresetChanged();
@@ -3809,26 +3822,35 @@ namespace MusicBeePlugin
 
         private void precisionDigitsComboBox_TextChanged(object sender, EventArgs e)
         {
-            switch (precisionDigitsComboBox.Text)
+            if (sourceFieldComboBox.SelectedIndex == -1)
+            {
+                precisionDigitsComboBox.SelectedIndex = 0;
+            }
+            else switch (precisionDigitsComboBox.Text)
             {
                 case "":
-                    precisionDigitsComboBox.SelectedIndex = 0; 
+                    precisionDigitsComboBox.SelectedIndex = 0;
+                    precisionDigits[sourceFieldComboBox.SelectedIndex] = (string)precisionDigitsComboBox.Items[0];
+
                     break;
                 case "(don't round)":
                 case "(не округлять)":
+                    precisionDigits[sourceFieldComboBox.SelectedIndex] = (string)precisionDigitsComboBox.Items[0];
+
                     break;
                 default:
-                    uint precisionDigits = 0;
-                    if (!uint.TryParse(precisionDigitsComboBox.Text, out precisionDigits)) 
-                        precisionDigits = 0;
+                    uint precisionDigitsInt = 0;
+                    if (!uint.TryParse(precisionDigitsComboBox.Text, out precisionDigitsInt)) 
+                        precisionDigitsInt = 0;
 
-                    string precisionDigitsText = precisionDigits.ToString("F0");
+                    string precisionDigitsText = precisionDigitsInt.ToString("F0");
                     if (precisionDigitsComboBox.Text != precisionDigitsText)
                         precisionDigitsComboBox.Text = precisionDigitsText;
+
+                    precisionDigits[sourceFieldComboBox.SelectedIndex] = precisionDigitsComboBox.Text;
+
                     break;
             }
-
-            precisionDigits[sourceFieldComboBox.SelectedIndex] = precisionDigitsComboBox.Text;
 
             if (!sourceFieldComboBoxIndexChanging)
                 setPresetChanged();
@@ -3836,13 +3858,17 @@ namespace MusicBeePlugin
 
         private void appendTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (sourceFieldComboBox.Items.Count != 0)
+            if (sourceFieldComboBox.SelectedIndex == -1)
+            {
+                appendTextBox.Text = "";
+            }
+            else
             {
                 appendTexts[sourceFieldComboBox.SelectedIndex] = appendTextBox.Text;
-
-                if (!sourceFieldComboBoxIndexChanging)
-                    setPresetChanged();
             }
+
+            if (!sourceFieldComboBoxIndexChanging)
+                setPresetChanged();
         }
     }
 
