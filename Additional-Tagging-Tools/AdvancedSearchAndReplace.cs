@@ -266,6 +266,7 @@ namespace MusicBeePlugin
             public Preset()
             {
                 modifiedUtc = DateTime.UtcNow;
+                favorite = false;
                 userPreset = false;
                 customizedByUser = false;
                 removePreset = false;
@@ -285,6 +286,7 @@ namespace MusicBeePlugin
                 if (fullCopy)
                 {
                     modifiedUtc = originalPreset.modifiedUtc;
+                    favorite = originalPreset.favorite;
                     userPreset = originalPreset.userPreset;
                     customizedByUser = originalPreset.customizedByUser;
                     if (copyGuid)
@@ -421,7 +423,7 @@ namespace MusicBeePlugin
 
             public override string ToString()
             {
-                return GetDictValue(names, Plugin.Language) + (customizedByUser ? " " : "") + (userPreset ? " " : "")
+                return (favorite ? "♥ " : "") + GetDictValue(names, Plugin.Language) + (customizedByUser ? " " : "") + (userPreset ? " " : "")
                     + (condition ? " " : "") + (id != "" ? " " : "") + getHotkeyPostfix();
             }
 
@@ -492,6 +494,8 @@ namespace MusicBeePlugin
                     areFineCustomizationsMade = true;
                 else if (preserveValues != referencePreset.preserveValues)
                     areFineCustomizationsMade = true;
+                else if (favorite != referencePreset.favorite)
+                    areFineCustomizationsMade = true;
 
                 return areFineCustomizationsMade;
             }
@@ -542,6 +546,7 @@ namespace MusicBeePlugin
             public void copyBasicCustomizationsFrom(Preset referencePreset)
             {
                 //userPreset = referencePreset.userPreset;
+                favorite = referencePreset.favorite;
                 hotkeyAssigned = referencePreset.hotkeyAssigned;
                 id = referencePreset.id;
             }
@@ -592,6 +597,9 @@ namespace MusicBeePlugin
             }
 
             public DateTime modifiedUtc;
+
+            public bool favorite;
+
             public bool userPreset;
             public bool customizedByUser;
             public bool removePreset;
@@ -3033,6 +3041,9 @@ namespace MusicBeePlugin
                 idTextBox.Enabled = false;
                 clearIdButton.Enabled = false;
 
+                favoriteCheckBox.Enabled = false;
+                favoriteCheckBox.Checked = false;
+
                 buttonExport.Enabled = false;
                 buttonCopy.Enabled = false;
                 buttonEdit.Enabled = false;
@@ -3104,6 +3115,9 @@ namespace MusicBeePlugin
 
                 idTextBox.Enabled = true;
                 clearIdButton.Enabled = true;
+
+                favoriteCheckBox.Enabled = true;
+                favoriteCheckBox.Checked = preset.favorite;
 
                 buttonExport.Enabled = editButtonEnabled || preset.customizedByUser;
                 buttonCopy.Enabled = true;
@@ -4292,6 +4306,18 @@ namespace MusicBeePlugin
         {
             ((Preset)presetList.SelectedItem).applyToPlayingTrack = applyToPlayingTrackCheckBox.Checked;
             preset.setCustomizationsFlag(this, backupedPreset);
+        }
+
+        private void favoriteCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (presetList.SelectedItem == null)
+                return;
+            else if (((Preset)presetList.SelectedItem).favorite == favoriteCheckBox.Checked)
+                return;
+
+            ((Preset)presetList.SelectedItem).favorite = favoriteCheckBox.Checked;
+            preset.setCustomizationsFlag(this, backupedPreset);
+            refreshPresetList(preset.guid);
         }
 
         private void previewTable_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
