@@ -122,8 +122,8 @@
     <value>0</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="conditionList.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+  <data name="resizeArtworkCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="roundToLabel.TabIndex" type="System.Int32, mscorlib">
     <value>123</value>
@@ -137,6 +137,9 @@
   <data name="&gt;&gt;buttonExport.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
+  <data name="&gt;&gt;buttonDeletePreset.Name" xml:space="preserve">
+    <value>buttonDeletePreset</value>
+  </data>
   <data name="&gt;&gt;formatComboBox.Name" xml:space="preserve">
     <value>formatComboBox</value>
   </data>
@@ -146,20 +149,23 @@
   <data name="buttonPreview.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="parameter2ComboBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;buttonCopyPreset.Name" xml:space="preserve">
-    <value>buttonCopyPreset</value>
+  <data name="precisionDigitsComboBox.Items" xml:space="preserve">
+    <value>(don't round)</value>
   </data>
   <data name="&gt;&gt;previewTable.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="labelFunction.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="comparedFieldList.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
   </data>
   <data name="conditionCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="labelXxY.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="labelSaveField.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="conditionCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -180,14 +186,14 @@
   <data name="resizeArtworkCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>111, 25</value>
   </data>
-  <data name="&gt;&gt;buttonAddPreset.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
   <data name="digitsLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
   <data name="&gt;&gt;labelFormat.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="comparedFieldList.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="buttonUncheckAll.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -219,8 +225,8 @@
   <data name="autoApplyInfoLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>803, 28</value>
   </data>
-  <data name="formatComboBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+  <data name="appendTextBox.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>Assign virtual tag function ID:</value>
@@ -234,8 +240,8 @@
   <data name="labelFunction.TabIndex" type="System.Int32, mscorlib">
     <value>41</value>
   </data>
-  <data name="&gt;&gt;buttonAddPreset.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;comparedFieldList.ZOrder" xml:space="preserve">
+    <value>28</value>
   </data>
   <data name="appendLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -243,8 +249,8 @@
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
     <value>604, 230</value>
   </data>
-  <data name="labelXxY.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;buttonExport.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
   </data>
   <data name="comparedFieldList.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -264,6 +270,9 @@
   <data name="&gt;&gt;mulDivFactorComboBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="clearIdButton.TabIndex" type="System.Int32, mscorlib">
+    <value>119</value>
+  </data>
   <data name="buttonCheckAll.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
@@ -279,8 +288,8 @@
   <data name="mulDivFactorComboBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="&gt;&gt;conditionList.ZOrder" xml:space="preserve">
-    <value>25</value>
+  <data name="&gt;&gt;buttonDeletePreset.ZOrder" xml:space="preserve">
+    <value>16</value>
   </data>
   <data name="&gt;&gt;sourceFieldComboBox.ZOrder" xml:space="preserve">
     <value>31</value>
@@ -291,14 +300,17 @@
   <data name="label3.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="formatComboBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="operationComboBox.Error" xml:space="preserve">
+    <value />
   </data>
   <data name="mulDivFactorComboBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>140, 312</value>
   </data>
   <data name="splitContainer1.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
+  </data>
+  <data name="&gt;&gt;buttonCheckAll.Name" xml:space="preserve">
+    <value>buttonCheckAll</value>
   </data>
   <data name="&gt;&gt;splitContainer1.Panel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -327,20 +339,17 @@
   <data name="appendLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="&gt;&gt;yArworkSizeUpDown.Parent" xml:space="preserve">
-    <value>splitContainer1.Panel1</value>
-  </data>
   <data name="buttonDeletePreset.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;formatComboBox.Parent" xml:space="preserve">
-    <value>splitContainer1.Panel1</value>
+  <data name="buttonClose.Text" xml:space="preserve">
+    <value>  Close       </value>
   </data>
   <data name="buttonExport.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 23</value>
   </data>
-  <data name="openReportCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>514, 234</value>
+  <data name="autoApplyInfoLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
   </data>
   <data name="buttonCheckAll.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
@@ -351,9 +360,6 @@
   <data name="&gt;&gt;operationComboBox.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="precisionDigitsComboBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
   <data name="&gt;&gt;roundToLabel.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
@@ -363,8 +369,8 @@
   <data name="buttonExport.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="assignHotkeyCheckBox.Error" xml:space="preserve">
-    <value />
+  <data name="openReportCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="labelXxY.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -377,9 +383,6 @@
   </data>
   <data name="&gt;&gt;labelXxY.Name" xml:space="preserve">
     <value>labelXxY</value>
-  </data>
-  <data name="&gt;&gt;buttonExport.Parent" xml:space="preserve">
-    <value>splitContainer1.Panel1</value>
   </data>
   <data name="buttonClose.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -396,23 +399,29 @@
   <data name="sourceFieldComboBox.Error" xml:space="preserve">
     <value />
   </data>
+  <data name="label3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
   <data name="&gt;&gt;conditionFieldList.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;formatComboBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="previewTable.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
   <data name="&gt;&gt;buttonUncheckAll.ZOrder" xml:space="preserve">
     <value>22</value>
   </data>
-  <data name="splitContainer1.Panel1.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="conditionCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>60, 264</value>
   </data>
   <data name="idTextBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="conditionFieldList.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="labelFormat.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="buttonUncheckAll.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -426,29 +435,20 @@
   <data name="operationComboBox.Items" xml:space="preserve">
     <value>Divide by</value>
   </data>
-  <data name="buttonClose.Text" xml:space="preserve">
-    <value>     Close   </value>
-  </data>
-  <data name="&gt;&gt;buttonSave.ZOrder" xml:space="preserve">
-    <value>21</value>
-  </data>
   <data name="labelFormat.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="conditionList.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="labelXxY.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>58</value>
   </data>
   <data name="&gt;&gt;sourceTagList.Parent" xml:space="preserve">
     <value>splitContainer1.Panel2</value>
-  </data>
-  <data name="buttonAddPreset.Text" xml:space="preserve">
-    <value>New Preset</value>
-  </data>
-  <data name="precisionDigitsComboBox.Error" xml:space="preserve">
-    <value />
   </data>
   <data name="numberOfTagsToRecalculateNumericUpDown.Location" type="System.Drawing.Point, System.Drawing">
     <value>249, 36</value>
@@ -465,14 +465,14 @@
   <data name="precisionDigitsComboBox.Items3" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="buttonApply.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
+  <data name="&gt;&gt;buttonAddPreset.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="labelXxY.Size" type="System.Drawing.Size, System.Drawing">
     <value>12, 13</value>
   </data>
-  <data name="&gt;&gt;precisionDigitsComboBox.Name" xml:space="preserve">
-    <value>precisionDigitsComboBox</value>
+  <data name="precisionDigitsComboBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
   </data>
   <data name="&gt;&gt;xArworkSizeUpDown.Type" xml:space="preserve">
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -480,11 +480,14 @@
   <data name="buttonCheckAll.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="operationComboBox.Error" xml:space="preserve">
+  <data name="buttonSave.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="appendLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopRight</value>
+  </data>
+  <data name="presetNameTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
   </data>
   <data name="&gt;&gt;totalsCheckBox.Name" xml:space="preserve">
     <value>totalsCheckBox</value>
@@ -498,8 +501,8 @@
   <data name="conditionCheckBox.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="labelFormat.Error" xml:space="preserve">
-    <value />
+  <data name="recalculateOnNumberOfTagsChangesCheckBox.Text" xml:space="preserve">
+    <value>Apply ticked presets to chosen tags on every</value>
   </data>
   <data name="useHotkeyForSelectedTracksCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -516,8 +519,8 @@
   <data name="&gt;&gt;labelPx.ZOrder" xml:space="preserve">
     <value>40</value>
   </data>
-  <data name="&gt;&gt;buttonApply.Name" xml:space="preserve">
-    <value>buttonApply</value>
+  <data name="label1.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="conditionFieldList.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -534,11 +537,14 @@
   <data name="&gt;&gt;presetsBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckedListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="labelXxY.Error" xml:space="preserve">
+    <value />
+  </data>
   <data name="labelSaveField.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="buttonApply.ToolTip" xml:space="preserve">
-    <value>Apply preset to SELECTED tracks</value>
+  <data name="&gt;&gt;destinationTagList.ZOrder" xml:space="preserve">
+    <value>27</value>
   </data>
   <data name="digitsLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>377, 316</value>
@@ -546,8 +552,8 @@
   <data name="labelSaveField.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="recalculateOnNumberOfTagsChangesCheckBox.ToolTip" xml:space="preserve">
-    <value />
+  <data name="resizeArtworkCheckBox.Text" xml:space="preserve">
+    <value>Resize artwork to:</value>
   </data>
   <data name="buttonSave.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -579,14 +585,11 @@
   <data name="resizeArtworkCheckBox.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;presetsBox.ZOrder" xml:space="preserve">
-    <value>29</value>
-  </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>145, 13</value>
   </data>
-  <data name="sourceTagList.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left</value>
+  <data name="&gt;&gt;conditionList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="mulDivFactorComboBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -630,6 +633,9 @@
   <data name="assignHotkeyCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
+  <data name="parameter2ComboBox.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="&gt;&gt;previewTable.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -639,8 +645,14 @@
   <data name="splitContainer1.TabIndex" type="System.Int32, mscorlib">
     <value>120</value>
   </data>
+  <data name="splitContainer1.Panel1.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="splitContainer1.Panel1.Error" xml:space="preserve">
     <value />
+  </data>
+  <data name="formatComboBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
   </data>
   <data name="$this.ToolTip" xml:space="preserve">
     <value />
@@ -648,8 +660,8 @@
   <data name="sourceFieldComboBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>220, 21</value>
   </data>
-  <data name="presetNameTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
+  <data name="buttonClose.Error" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;buttonApply.ZOrder" xml:space="preserve">
     <value>19</value>
@@ -659,6 +671,9 @@
   </data>
   <data name="buttonCopyPreset.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="assignHotkeyCheckBox.Error" xml:space="preserve">
+    <value />
   </data>
   <data name="openReportCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -678,6 +693,9 @@
   <data name="&gt;&gt;functionComboBox.ZOrder" xml:space="preserve">
     <value>33</value>
   </data>
+  <data name="totalsCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
   <data name="destinationTagList.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
@@ -693,11 +711,11 @@
   <data name="clearIdButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="buttonCheckAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 23</value>
+  <data name="&gt;&gt;labelXxY.ZOrder" xml:space="preserve">
+    <value>44</value>
   </data>
-  <data name="&gt;&gt;parameter2ComboBox.Name" xml:space="preserve">
-    <value>parameter2ComboBox</value>
+  <data name="openReportCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
   </data>
   <data name="parameter2ComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>47</value>
@@ -717,11 +735,20 @@
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
     <value>555, 291</value>
   </data>
-  <data name="labelXxY.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+  <data name="clearIdButton.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;totalsCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="labelXxY.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;sourceFieldComboBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="buttonDeletePreset.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="xArworkSizeUpDown.TabIndex" type="System.Int32, mscorlib">
     <value>49</value>
@@ -735,9 +762,6 @@
   <data name="&gt;&gt;resizeArtworkCheckBox.ZOrder" xml:space="preserve">
     <value>41</value>
   </data>
-  <data name="buttonPreview.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="labelXxY.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
@@ -750,11 +774,11 @@
   <data name="appendTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>125</value>
   </data>
-  <data name="resizeArtworkCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>48</value>
+  <data name="labelSaveToTag.Location" type="System.Drawing.Point, System.Drawing">
+    <value>286, 291</value>
   </data>
-  <data name="conditionFieldList.ToolTip" xml:space="preserve">
-    <value />
+  <data name="operationComboBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;idTextBox.Name" xml:space="preserve">
     <value>idTextBox</value>
@@ -768,8 +792,8 @@
   <data name="numberOfTagsToRecalculateNumericUpDown.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="autoApplyInfoLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+  <data name="&gt;&gt;buttonCopyPreset.Name" xml:space="preserve">
+    <value>buttonCopyPreset</value>
   </data>
   <data name="buttonPreview.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -786,14 +810,17 @@
   <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
     <value>366</value>
   </data>
-  <data name="formatComboBox.Error" xml:space="preserve">
-    <value />
+  <data name="conditionFieldList.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="appendLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>167, 13</value>
   </data>
   <data name="digitsLabel.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
+  </data>
+  <data name="buttonSave.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
   </data>
   <data name="autoApplyInfoLabel.Error" xml:space="preserve">
     <value />
@@ -806,9 +833,6 @@
   </data>
   <data name="buttonApply.Location" type="System.Drawing.Point, System.Drawing">
     <value>498, 183</value>
-  </data>
-  <data name="&gt;&gt;comparedFieldList.ZOrder" xml:space="preserve">
-    <value>28</value>
   </data>
   <data name="buttonCheckAll.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 336</value>
@@ -851,6 +875,12 @@
   </data>
   <data name="yArworkSizeUpDown.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 20</value>
+  </data>
+  <data name="assignHotkeyCheckBox.ToolTip" xml:space="preserve">
+    <value>First enable hotkeys for one or several presets, save presets, then this window, 
+and go to Edit&gt; Preferences&gt; Hotkeys
+
+You will need to reassign hotkey if the preset name is changed</value>
   </data>
   <data name="dirtyErrorProvider.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1449,8 +1479,8 @@
         AaxBwAOsQeAHrEHwD6xB//+sQQ==
 </value>
   </data>
-  <data name="appendTextBox.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;conditionList.ZOrder" xml:space="preserve">
+    <value>25</value>
   </data>
   <data name="&gt;&gt;clearIdButton.ZOrder" xml:space="preserve">
     <value>8</value>
@@ -1458,8 +1488,8 @@
   <data name="clearIdButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>22, 22</value>
   </data>
-  <data name="labelFormat.TabIndex" type="System.Int32, mscorlib">
-    <value>55</value>
+  <data name="&gt;&gt;parameter2ComboBox.Name" xml:space="preserve">
+    <value>parameter2ComboBox</value>
   </data>
   <data name="functionComboBox.Error" xml:space="preserve">
     <value />
@@ -1488,8 +1518,8 @@
   <data name="buttonApply.Text" xml:space="preserve">
     <value>Apply</value>
   </data>
-  <data name="buttonExport.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="&gt;&gt;destinationTagList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="labelPx.Size" type="System.Drawing.Size, System.Drawing">
     <value>18, 13</value>
@@ -1506,12 +1536,6 @@
   <data name="&gt;&gt;yArworkSizeUpDown.Type" xml:space="preserve">
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="yArworkSizeUpDown.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
-  </data>
-  <data name="totalsCheckBox.Text" xml:space="preserve">
-    <value>Calculate subgrouping totals</value>
-  </data>
   <data name="openReportCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>53</value>
   </data>
@@ -1521,8 +1545,8 @@
   <data name="conditionCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>168, 17</value>
   </data>
-  <data name="labelSaveField.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+  <data name="&gt;&gt;assignHotkeyCheckBox.Name" xml:space="preserve">
+    <value>assignHotkeyCheckBox</value>
   </data>
   <data name="&gt;&gt;xArworkSizeUpDown.ZOrder" xml:space="preserve">
     <value>43</value>
@@ -1536,9 +1560,6 @@
   <data name="conditionCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
-  <data name="label1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="functionComboBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>129, 21</value>
   </data>
@@ -1548,8 +1569,8 @@
   <data name="&gt;&gt;numberOfTagsToRecalculateNumericUpDown.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="openReportCheckBox.Error" xml:space="preserve">
-    <value />
+  <data name="buttonPreview.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="mulDivFactorComboBox.Items6" xml:space="preserve">
     <value>1048576 (M)</value>
@@ -1557,8 +1578,8 @@
   <data name="buttonExport.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
   </data>
-  <data name="&gt;&gt;splitContainer1.Panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="buttonExport.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;totalsCheckBox.ZOrder" xml:space="preserve">
     <value>35</value>
@@ -1581,9 +1602,6 @@
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>115, 13</value>
   </data>
-  <data name="precisionDigitsComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 21</value>
-  </data>
   <data name="sourceTagList.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
   </data>
@@ -1596,8 +1614,8 @@
   <data name="&gt;&gt;operationComboBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="presetsBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="buttonCheckAll.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="label6.Error" xml:space="preserve">
     <value />
@@ -1611,14 +1629,20 @@
   <data name="label6.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <data name="sourceTagList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
   <data name="roundToLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
   <data name="&gt;&gt;buttonUncheckAll.Name" xml:space="preserve">
     <value>buttonUncheckAll</value>
   </data>
-  <data name="&gt;&gt;buttonDeletePreset.ZOrder" xml:space="preserve">
-    <value>16</value>
+  <data name="&gt;&gt;digitsLabel.Name" xml:space="preserve">
+    <value>digitsLabel</value>
+  </data>
+  <data name="&gt;&gt;buttonCheckAll.ZOrder" xml:space="preserve">
+    <value>20</value>
   </data>
   <data name="&gt;&gt;sourceTagList.Name" xml:space="preserve">
     <value>sourceTagList</value>
@@ -1644,6 +1668,9 @@
   <data name="&gt;&gt;label3.Name" xml:space="preserve">
     <value>label3</value>
   </data>
+  <data name="labelSaveToTag.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="appendTextBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -1656,8 +1683,8 @@
   <data name="autoApplyInfoLabel.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="buttonDeletePreset.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="buttonCheckAll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 23</value>
   </data>
   <data name="&gt;&gt;functionComboBox.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
@@ -1665,8 +1692,11 @@
   <data name="labelSaveToTag.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="conditionCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>60, 264</value>
+  <data name="buttonDeletePreset.Text" xml:space="preserve">
+    <value>Delete Preset</value>
+  </data>
+  <data name="buttonApply.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 23</value>
   </data>
   <data name="labelPx.TabIndex" type="System.Int32, mscorlib">
     <value>52</value>
@@ -1689,23 +1719,14 @@
   <data name="buttonCheckAll.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="label3.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="&gt;&gt;buttonCopyPreset.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="labelXxY.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonSave.ToolTip" xml:space="preserve">
-    <value />
+  <data name="buttonSave.Location" type="System.Drawing.Point, System.Drawing">
+    <value>603, 183</value>
   </data>
   <data name="precisionDigitsComboBox.Text" xml:space="preserve">
     <value>(don't round)</value>
-  </data>
-  <data name="labelFormat.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
   </data>
   <data name="&gt;&gt;clearIdButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1719,11 +1740,8 @@
   <data name="&gt;&gt;presetsBox.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
-  <data name="buttonPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>393, 183</value>
-  </data>
-  <data name="precisionDigitsComboBox.Items" xml:space="preserve">
-    <value>(don't round)</value>
+  <data name="sourceTagList.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left</value>
   </data>
   <data name="roundToLabel.Error" xml:space="preserve">
     <value />
@@ -1755,8 +1773,8 @@
   <data name="&gt;&gt;appendLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="previewTable.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+  <data name="&gt;&gt;splitContainer1.Panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="buttonCopyPreset.ToolTip" xml:space="preserve">
     <value />
@@ -1764,8 +1782,8 @@
   <data name="labelPx.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
-  <data name="openReportCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+  <data name="&gt;&gt;buttonAddPreset.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
   <data name="appendTextBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -1778,6 +1796,9 @@
   </data>
   <data name="appendLabel.ToolTip" xml:space="preserve">
     <value>Append text at the end of number, but before text postfix of number (if any), e.g. "M" for "MB" (Megabyte)</value>
+  </data>
+  <data name="buttonCopyPreset.Location" type="System.Drawing.Point, System.Drawing">
+    <value>108, 183</value>
   </data>
   <data name="&gt;&gt;formatComboBox.ZOrder" xml:space="preserve">
     <value>36</value>
@@ -1815,9 +1836,6 @@
   <data name="digitsLabel.Text" xml:space="preserve">
     <value>digit(s)</value>
   </data>
-  <data name="useHotkeyForSelectedTracksCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 17</value>
-  </data>
   <data name="formatComboBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>60, 210</value>
   </data>
@@ -1845,6 +1863,9 @@
   <data name="buttonSave.Text" xml:space="preserve">
     <value>Save All &amp;&amp; Close</value>
   </data>
+  <data name="totalsCheckBox.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="&gt;&gt;mulDivFactorComboBox.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
@@ -1866,8 +1887,8 @@
   <data name="label1.Text" xml:space="preserve">
     <value>tag changes</value>
   </data>
-  <data name="sourceFieldComboBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="buttonPreview.Location" type="System.Drawing.Point, System.Drawing">
+    <value>393, 183</value>
   </data>
   <data name="conditionList.Error" xml:space="preserve">
     <value />
@@ -1896,9 +1917,6 @@
   <data name="&gt;&gt;conditionCheckBox.ZOrder" xml:space="preserve">
     <value>23</value>
   </data>
-  <data name="operationComboBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="useHotkeyForSelectedTracksCheckBox.ToolTip" xml:space="preserve">
     <value>Assign hotkey to apply preset to selected tracks only, or to entire library if this option is unchecked</value>
   </data>
@@ -1908,8 +1926,8 @@
   <data name="&gt;&gt;buttonClose.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonCheckAll.ZOrder" xml:space="preserve">
-    <value>20</value>
+  <data name="yArworkSizeUpDown.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
   </data>
   <data name="buttonUncheckAll.Error" xml:space="preserve">
     <value />
@@ -1917,17 +1935,11 @@
   <data name="openReportCheckBox.ToolTip" xml:space="preserve">
     <value>Save exported report to Windows temporary directory and open it in default application, e.g. for printing</value>
   </data>
-  <data name="&gt;&gt;label6.Name" xml:space="preserve">
-    <value>label6</value>
-  </data>
-  <data name="conditionFieldList.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
   <data name="numberOfTagsToRecalculateNumericUpDown.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="label3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
+  <data name="buttonApply.ToolTip" xml:space="preserve">
+    <value>Apply preset to SELECTED tracks</value>
   </data>
   <data name="resizeArtworkCheckBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1956,8 +1968,8 @@
   <data name="&gt;&gt;autoApplyInfoLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;buttonCheckAll.Name" xml:space="preserve">
-    <value>buttonCheckAll</value>
+  <data name="idTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
   </data>
   <data name="labelXxY.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1965,14 +1977,14 @@
   <data name="&gt;&gt;mulDivFactorComboBox.Name" xml:space="preserve">
     <value>mulDivFactorComboBox</value>
   </data>
-  <data name="clearIdButton.TabIndex" type="System.Int32, mscorlib">
-    <value>119</value>
+  <data name="&gt;&gt;label6.Name" xml:space="preserve">
+    <value>label6</value>
   </data>
   <data name="buttonUncheckAll.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
   </data>
-  <data name="yArworkSizeUpDown.Error" xml:space="preserve">
-    <value />
+  <data name="buttonSave.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
   </data>
   <data name="&gt;&gt;buttonCheckAll.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1985,6 +1997,9 @@
   </data>
   <data name="splitContainer1.Error" xml:space="preserve">
     <value />
+  </data>
+  <data name="sourceTagList.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
   </data>
   <data name="presetsBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -2001,8 +2016,8 @@
   <data name="&gt;&gt;functionComboBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="buttonCopyPreset.Location" type="System.Drawing.Point, System.Drawing">
-    <value>108, 183</value>
+  <data name="buttonAddPreset.Text" xml:space="preserve">
+    <value>New Preset</value>
   </data>
   <data name="destinationTagList.ToolTip" xml:space="preserve">
     <value />
@@ -2013,8 +2028,8 @@
   <data name="&gt;&gt;precisionDigitsComboBox.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;presetNameTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="mulDivFactorComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
   </data>
   <data name="&gt;&gt;appendTextBox.Name" xml:space="preserve">
     <value>appendTextBox</value>
@@ -2024,6 +2039,9 @@
   </data>
   <data name="&gt;&gt;buttonSave.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="formatComboBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="buttonDeletePreset.Error" xml:space="preserve">
     <value />
@@ -2055,14 +2073,14 @@
   <data name="buttonSave.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;totalsCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;autoApplyInfoLabel.Name" xml:space="preserve">
     <value>autoApplyInfoLabel</value>
   </data>
   <data name="parameter2ComboBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>222, 21</value>
+  </data>
+  <data name="recalculateOnNumberOfTagsChangesCheckBox.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="xArworkSizeUpDown.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -2076,8 +2094,8 @@
   <data name="buttonAddPreset.TabIndex" type="System.Int32, mscorlib">
     <value>106</value>
   </data>
-  <data name="resizeArtworkCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;presetsBox.ZOrder" xml:space="preserve">
+    <value>29</value>
   </data>
   <data name="labelSaveField.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2100,17 +2118,26 @@
   <data name="presetNameTextBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
+  <data name="sourceTagList.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="previewTable.Error" xml:space="preserve">
     <value />
+  </data>
+  <data name="labelFormat.TabIndex" type="System.Int32, mscorlib">
+    <value>55</value>
   </data>
   <data name="&gt;&gt;useHotkeyForSelectedTracksCheckBox.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
+  <data name="&gt;&gt;presetNameTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="parameter2ComboBox.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="buttonDeletePreset.Text" xml:space="preserve">
-    <value>Delete Preset</value>
+  <data name="labelXxY.Location" type="System.Drawing.Point, System.Drawing">
+    <value>412, 238</value>
   </data>
   <data name="&gt;&gt;buttonApply.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
@@ -2136,20 +2163,17 @@
   <data name="&gt;&gt;label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="comparedFieldList.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonSave.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
+  <data name="labelFormat.Size" type="System.Drawing.Size, System.Drawing">
+    <value>42, 13</value>
   </data>
   <data name="sourceFieldComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
-  <data name="labelSaveToTag.Location" type="System.Drawing.Point, System.Drawing">
-    <value>286, 291</value>
-  </data>
-  <data name="labelSaveField.ToolTip" xml:space="preserve">
+  <data name="conditionFieldList.ToolTip" xml:space="preserve">
     <value />
+  </data>
+  <data name="labelSaveField.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
   </data>
   <data name="buttonClose.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 23</value>
@@ -2180,9 +2204,6 @@
   </data>
   <data name="label6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
-  </data>
-  <data name="totalsCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
   </data>
   <data name="labelFormat.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2253,14 +2274,14 @@
   <data name="totalsCheckBox.Error" xml:space="preserve">
     <value />
   </data>
+  <data name="&gt;&gt;formatComboBox.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
   <data name="labelFormat.Text" xml:space="preserve">
     <value>Format:</value>
   </data>
   <data name="splitContainer1.Panel2.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="comparedFieldList.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
   </data>
   <data name="appendTextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>585, 313</value>
@@ -2301,6 +2322,9 @@ Presets ticked for auto-applying: %%TICKEDPRESETS%%</value>
   </data>
   <data name="&gt;&gt;resizeArtworkCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;precisionDigitsComboBox.Name" xml:space="preserve">
+    <value>precisionDigitsComboBox</value>
   </data>
   <data name="labelFunction.Location" type="System.Drawing.Point, System.Drawing">
     <value>203, 342</value>
@@ -2356,6 +2380,9 @@ Presets ticked for auto-applying: %%TICKEDPRESETS%%</value>
   <data name="idTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>118</value>
   </data>
+  <data name="formatComboBox.Error" xml:space="preserve">
+    <value />
+  </data>
   <data name="&gt;&gt;recalculateOnNumberOfTagsChangesCheckBox.Name" xml:space="preserve">
     <value>recalculateOnNumberOfTagsChangesCheckBox</value>
   </data>
@@ -2374,17 +2401,11 @@ Presets ticked for auto-applying: %%TICKEDPRESETS%%</value>
   <data name="&gt;&gt;labelXxY.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
-  <data name="resizeArtworkCheckBox.Error" xml:space="preserve">
-    <value />
+  <data name="autoApplyInfoLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
   </data>
-  <data name="buttonClose.Error" xml:space="preserve">
+  <data name="presetNameTextBox.Error" xml:space="preserve">
     <value />
-  </data>
-  <data name="assignHotkeyCheckBox.ToolTip" xml:space="preserve">
-    <value>First enable hotkeys for one or several presets, save presets, then this window, 
-and go to Edit&gt; Preferences&gt; Hotkeys
-
-You will need to reassign hotkey if the preset name is changed</value>
   </data>
   <data name="buttonDeletePreset.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -2425,6 +2446,9 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="numberOfTagsToRecalculateNumericUpDown.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
+  <data name="roundToLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="functionComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
@@ -2455,9 +2479,6 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name="&gt;&gt;conditionFieldList.ZOrder" xml:space="preserve">
-    <value>24</value>
-  </data>
   <data name="conditionFieldList.Error" xml:space="preserve">
     <value />
   </data>
@@ -2467,26 +2488,26 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="&gt;&gt;presetNameTextBox.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 13</value>
-  </data>
   <data name="&gt;&gt;destinationTagList.Name" xml:space="preserve">
     <value>destinationTagList</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="buttonSave.Location" type="System.Drawing.Point, System.Drawing">
-    <value>603, 183</value>
+  <data name="resizeArtworkCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>48</value>
   </data>
   <data name="&gt;&gt;resizeArtworkCheckBox.Name" xml:space="preserve">
     <value>resizeArtworkCheckBox</value>
   </data>
+  <data name="yArworkSizeUpDown.Error" xml:space="preserve">
+    <value />
+  </data>
   <data name="mulDivFactorComboBox.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;conditionList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="buttonSave.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2499,9 +2520,6 @@ You will need to reassign hotkey if the preset name is changed</value>
   </data>
   <data name="buttonAddPreset.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 183</value>
-  </data>
-  <data name="buttonApply.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 23</value>
   </data>
   <data name="parameter2ComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -2521,6 +2539,9 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="assignHotkeyCheckBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
+  <data name="conditionList.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
   <data name="previewTable.ColumnHeadersHeight" type="System.Int32, mscorlib">
     <value>29</value>
   </data>
@@ -2529,6 +2550,9 @@ You will need to reassign hotkey if the preset name is changed</value>
   </data>
   <data name="autoApplyInfoLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="labelFunction.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="label6.TabIndex" type="System.Int32, mscorlib">
     <value>44</value>
@@ -2545,8 +2569,8 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;destinationTagList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="totalsCheckBox.Text" xml:space="preserve">
+    <value>Calculate subgrouping totals</value>
   </data>
   <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
     <value>811, 606</value>
@@ -2568,9 +2592,6 @@ You will need to reassign hotkey if the preset name is changed</value>
   </data>
   <data name="label1.Error" xml:space="preserve">
     <value />
-  </data>
-  <data name="&gt;&gt;numberOfTagsToRecalculateNumericUpDown.Name" xml:space="preserve">
-    <value>numberOfTagsToRecalculateNumericUpDown</value>
   </data>
   <data name="&gt;&gt;roundToLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2601,12 +2622,6 @@ You will need to reassign hotkey if the preset name is changed</value>
   </data>
   <data name="buttonAddPreset.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 23</value>
-  </data>
-  <data name="buttonSave.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="presetNameTextBox.Error" xml:space="preserve">
-    <value />
   </data>
   <data name="sourceTagList.Size" type="System.Drawing.Size, System.Drawing">
     <value>194, 230</value>
@@ -2641,6 +2656,9 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="roundToLabel.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="sourceFieldComboBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="&gt;&gt;precisionDigitsComboBox.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
@@ -2656,6 +2674,9 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="numberOfTagsToRecalculateNumericUpDown.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 20</value>
   </data>
+  <data name="presetsBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="buttonCopyPreset.TabIndex" type="System.Int32, mscorlib">
     <value>112</value>
   </data>
@@ -2668,8 +2689,14 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="resizeArtworkCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
+  <data name="resizeArtworkCheckBox.Error" xml:space="preserve">
+    <value />
+  </data>
   <data name="operationComboBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>74, 21</value>
+  </data>
+  <data name="openReportCheckBox.Error" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;labelPx.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
@@ -2683,9 +2710,6 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="xArworkSizeUpDown.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="buttonCheckAll.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="xArworkSizeUpDown.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -2695,17 +2719,14 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="labelFunction.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;labelXxY.ZOrder" xml:space="preserve">
-    <value>44</value>
-  </data>
-  <data name="digitsLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 13</value>
+  <data name="&gt;&gt;buttonApply.Name" xml:space="preserve">
+    <value>buttonApply</value>
   </data>
   <data name="&gt;&gt;previewTable.Name" xml:space="preserve">
     <value>previewTable</value>
   </data>
-  <data name="buttonSave.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+  <data name="sourceFieldComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>60, 287</value>
   </data>
   <data name="totalsCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>43</value>
@@ -2722,11 +2743,8 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="digitsLabel.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="labelFormat.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 13</value>
-  </data>
-  <data name="clearIdButton.Error" xml:space="preserve">
-    <value />
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>66, 13</value>
   </data>
   <data name="&gt;&gt;label3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2737,11 +2755,11 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="&gt;&gt;labelSaveToTag.Name" xml:space="preserve">
     <value>labelSaveToTag</value>
   </data>
-  <data name="openReportCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+  <data name="digitsLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 13</value>
   </data>
-  <data name="mulDivFactorComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
+  <data name="sourceFieldComboBox.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="buttonCopyPreset.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2751,6 +2769,9 @@ You will need to reassign hotkey if the preset name is changed</value>
   </data>
   <data name="operationComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>120</value>
+  </data>
+  <data name="labelFormat.Error" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;operationComboBox.Name" xml:space="preserve">
     <value>operationComboBox</value>
@@ -2773,9 +2794,6 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="&gt;&gt;conditionCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;destinationTagList.ZOrder" xml:space="preserve">
-    <value>27</value>
-  </data>
   <data name="buttonDeletePreset.Location" type="System.Drawing.Point, System.Drawing">
     <value>213, 183</value>
   </data>
@@ -2785,8 +2803,8 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="functionComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>42</value>
   </data>
-  <data name="&gt;&gt;digitsLabel.Name" xml:space="preserve">
-    <value>digitsLabel</value>
+  <data name="useHotkeyForSelectedTracksCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 17</value>
   </data>
   <data name="appendLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2797,8 +2815,8 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="labelSaveToTag.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="labelSaveToTag.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="conditionFieldList.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
   </data>
   <data name="splitContainer1.Panel2.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -2815,9 +2833,6 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="&gt;&gt;buttonCheckAll.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
-  <data name="buttonDeletePreset.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="&gt;&gt;presetNameTextBox.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
@@ -2833,26 +2848,23 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="destinationTagList.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="recalculateOnNumberOfTagsChangesCheckBox.Text" xml:space="preserve">
-    <value>Apply ticked presets to chosen tags on every</value>
+  <data name="precisionDigitsComboBox.Error" xml:space="preserve">
+    <value />
   </data>
-  <data name="totalsCheckBox.ToolTip" xml:space="preserve">
+  <data name="label3.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="formatComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left, Right</value>
   </data>
-  <data name="idTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left, Right</value>
+  <data name="&gt;&gt;buttonSave.ZOrder" xml:space="preserve">
+    <value>21</value>
   </data>
   <data name="&gt;&gt;splitContainer1.Panel1.Parent" xml:space="preserve">
     <value>splitContainer1</value>
   </data>
   <data name="&gt;&gt;splitContainer1.Panel2.Parent" xml:space="preserve">
     <value>splitContainer1</value>
-  </data>
-  <data name="sourceFieldComboBox.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="labelFormat.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -2863,14 +2875,11 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="buttonCheckAll.Text" xml:space="preserve">
     <value>Check All</value>
   </data>
-  <data name="autoApplyInfoLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+  <data name="buttonDeletePreset.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;useHotkeyForSelectedTracksCheckBox.Name" xml:space="preserve">
     <value>useHotkeyForSelectedTracksCheckBox</value>
-  </data>
-  <data name="&gt;&gt;assignHotkeyCheckBox.Name" xml:space="preserve">
-    <value>assignHotkeyCheckBox</value>
   </data>
   <data name="recalculateOnNumberOfTagsChangesCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>238, 17</value>
@@ -2883,9 +2892,6 @@ You will need to reassign hotkey if the preset name is changed</value>
   </data>
   <data name="functionComboBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>325, 338</value>
-  </data>
-  <data name="resizeArtworkCheckBox.Text" xml:space="preserve">
-    <value>Resize artwork to:</value>
   </data>
   <data name="&gt;&gt;autoApplyInfoLabel.ZOrder" xml:space="preserve">
     <value>4</value>
@@ -2914,8 +2920,8 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="formatComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>54</value>
   </data>
-  <data name="sourceTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
+  <data name="&gt;&gt;numberOfTagsToRecalculateNumericUpDown.Name" xml:space="preserve">
+    <value>numberOfTagsToRecalculateNumericUpDown</value>
   </data>
   <data name="buttonClose.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2929,20 +2935,17 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="&gt;&gt;parameter2ComboBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="sourceTagList.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+  <data name="&gt;&gt;conditionFieldList.ZOrder" xml:space="preserve">
+    <value>24</value>
   </data>
-  <data name="labelXxY.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;yArworkSizeUpDown.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
   </data>
-  <data name="&gt;&gt;buttonDeletePreset.Name" xml:space="preserve">
-    <value>buttonDeletePreset</value>
+  <data name="precisionDigitsComboBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 21</value>
   </data>
   <data name="presetNameTextBox.ToolTip" xml:space="preserve">
     <value>Type preset name (otherwise, it will be automatically generated)</value>
-  </data>
-  <data name="sourceFieldComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>60, 287</value>
   </data>
   <data name="previewTable.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2962,17 +2965,14 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="comparedFieldList.TabIndex" type="System.Int32, mscorlib">
     <value>35</value>
   </data>
-  <data name="sourceTagList.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="labelXxY.Location" type="System.Drawing.Point, System.Drawing">
-    <value>412, 238</value>
+  <data name="buttonApply.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
   </data>
   <data name="totalsCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
-  <data name="roundToLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="openReportCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>514, 234</value>
   </data>
   <data name="precisionDigitsComboBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>283, 312</value>
@@ -3018,5 +3018,8 @@ You will need to reassign hotkey if the preset name is changed</value>
   </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
+  </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>ru</value>
   </metadata>
 </root>

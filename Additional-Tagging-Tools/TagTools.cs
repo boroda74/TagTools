@@ -30,7 +30,7 @@ namespace MusicBeePlugin
         public int column2Width;
         public int column3Width;
 
-        public int splitterDistance;
+        public float splitterDistancePercent;
 
         public int table2column1Width;
         public int table2column2Width;
@@ -880,7 +880,7 @@ namespace MusicBeePlugin
             {
                 double result = getResult();
 
-                if (type == 2 && result != double.NegativeInfinity && mulDivFactorRepr != null) //It's numeric result. Let's format it.
+                if (type == 2 && result != double.NegativeInfinity) //It's numeric result. Let's format it.
                 {
                     int mulDivFactor = GetMulDivFactor(mulDivFactorRepr);
                     if (mulDivFactor != 1 && operation == 0)

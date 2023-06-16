@@ -504,6 +504,8 @@ namespace MusicBeePlugin
         private string buttonCloseToolTip;
         private int presetsBoxLastSelectedIndex = -2;
 
+        private bool ignoreSplitterMovedEvent = true;
+
         private bool presetIsLoaded = false;
         private bool ignorePresetChangedEvent = false;
         private bool completelyIgnoreItemCheckEvent = false;
@@ -2045,13 +2047,6 @@ namespace MusicBeePlugin
 
             previewTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 
-            (int, int, int, int, int, int, int) value = loadWindowLayout();
-
-            if (value.Item4 > 0)
-            {
-                splitContainer1.SplitterDistance = value.Item4;
-            }
-
             addRowToTable = previewList_AddRowToTable;
             updateTable = previewList_updateTable;
         }
@@ -3207,7 +3202,7 @@ namespace MusicBeePlugin
             Close();
         }
 
-        private bool continueAndloseUnsavedChangesIfAnyConfirmation()
+        private void LibraryReportsCommand_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (unsavedChanges)
             {
@@ -3215,26 +3210,29 @@ namespace MusicBeePlugin
                     "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
                     == DialogResult.No)
                 {
-                    return false;
-                }
-                else
-                {
-                    return true;
+                    e.Cancel = true;
+                    return;
                 }
             }
-
-            return true;
         }
 
-        private void LibraryReportsCommand_FormClosing(object sender, FormClosingEventArgs e)
+        private void LibraryReportsCommand_Load(object sender, EventArgs e)
         {
-            if (!continueAndloseUnsavedChangesIfAnyConfirmation())
+            (int, int, int, float, int, int, int) value = loadWindowLayout();
+
+            if (value.Item4 != 0)
             {
-                e.Cancel = true;
-                return;
+                ignoreSplitterMovedEvent = true;
+                splitContainer1.SplitterDistance = (int)(value.Item4 * (float)splitContainer1.Size.Height);
             }
 
-            saveWindowLayout(0, 0, 0, splitContainer1.SplitterDistance);
+            ignoreSplitterMovedEvent = false;
+        }
+
+        private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+            if (!ignoreSplitterMovedEvent)
+                saveWindowLayout(0, 0, 0, (float)splitContainer1.SplitterDistance / (float)splitContainer1.Size.Height);
         }
 
         private void sourceTagList_ItemCheck(object sender, ItemCheckEventArgs e)

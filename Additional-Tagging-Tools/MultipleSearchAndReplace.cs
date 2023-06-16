@@ -27,6 +27,7 @@ namespace MusicBeePlugin
         private List<string[]> tags = new List<string[]>();
         private List<string[]> templates = new List<string[]>();
 
+        private bool ignoreSplitterMovedEvent = true;
         //private bool ignoreTemplateNameTextBoxTextChanged = false;
 
         private Preset customMSR;
@@ -83,24 +84,6 @@ namespace MusicBeePlugin
 
             addRowToTable = previewList_AddRowToTable;
             processRowOfTable = previewList_ProcessRowOfTable;
-
-            (int, int, int, int, int, int, int) value = loadWindowLayout();
-
-            if (value.Item1 > 0)
-            {
-                previewTable.Columns[1].Width = value.Item1;
-                previewTable.Columns[2].Width = value.Item2;
-                previewTable.Columns[3].Width = value.Item3;
-
-                templateTable.Columns[0].Width = value.Item5;
-                templateTable.Columns[3].Width = value.Item6;
-                templateTable.Columns[4].Width = value.Item7;
-            }
-
-            if (value.Item4 > 0)
-            {
-                splitContainer1.SplitterDistance = value.Item4;
-            }
 
             customMSR = null;
 
@@ -1060,8 +1043,38 @@ namespace MusicBeePlugin
         private void MultipleSearchAndReplaceCommand_FormClosing(object sender, FormClosingEventArgs e)
         {
             saveWindowLayout(previewTable.Columns[1].Width, previewTable.Columns[2].Width, previewTable.Columns[3].Width,
-                splitContainer1.SplitterDistance, 
+                0, 
                 templateTable.Columns[0].Width, templateTable.Columns[3].Width, templateTable.Columns[4].Width);
+        }
+
+        private void MultipleSearchAndReplaceCommand_Load(object sender, EventArgs e)
+        {
+            (int, int, int, float, int, int, int) value = loadWindowLayout();
+
+            if (value.Item1 != 0)
+            {
+                previewTable.Columns[1].Width = value.Item1;
+                previewTable.Columns[2].Width = value.Item2;
+                previewTable.Columns[3].Width = value.Item3;
+
+                templateTable.Columns[0].Width = value.Item5;
+                templateTable.Columns[3].Width = value.Item6;
+                templateTable.Columns[4].Width = value.Item7;
+            }
+
+            if (value.Item4 != 0)
+            {
+                ignoreSplitterMovedEvent = true;
+                splitContainer1.SplitterDistance = (int)(value.Item4 * (float)splitContainer1.Size.Height);
+            }
+
+            ignoreSplitterMovedEvent = false;
+        }
+
+        private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+            if (!ignoreSplitterMovedEvent)
+                saveWindowLayout(0, 0, 0, (float)splitContainer1.SplitterDistance / (float)splitContainer1.Size.Height);
         }
     }
 }

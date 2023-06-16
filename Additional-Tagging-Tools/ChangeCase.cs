@@ -97,9 +97,9 @@ namespace MusicBeePlugin
             addRowToTable = previewList_AddRowToTable;
             processRowOfTable = previewList_ProcessRowOfTable;
 
-            (int, int, int, int, int, int, int) value = loadWindowLayout();
+            (int, int, int, float, int, int, int) value = loadWindowLayout();
 
-            if (value.Item1 > 0)
+            if (value.Item1 != 0)
             {
                 previewTable.Columns[1].Width = value.Item1;
                 previewTable.Columns[2].Width = value.Item2;

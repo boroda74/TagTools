@@ -643,12 +643,12 @@ namespace MusicBeePlugin
             }
         }
 
-        protected (int, int, int, int, int, int, int) loadWindowLayout()
+        protected (int, int, int, float, int, int, int) loadWindowLayout()
         {
             int column1Width = 0;
             int column2Width = 0;
             int column3Width = 0;
-            int splitterDistance = 0;
+            float splitterDistancePercent = 0;
             int table2column1Width = 0;
             int table2column2Width = 0; 
             int table2column3Width = 0;
@@ -661,7 +661,7 @@ namespace MusicBeePlugin
                 column2Width = windowSettings.column2Width;
                 column3Width = windowSettings.column3Width;
 
-                splitterDistance = windowSettings.splitterDistance;
+                splitterDistancePercent = windowSettings.splitterDistancePercent;
 
                 table2column1Width = windowSettings.table2column1Width;
                 table2column2Width = windowSettings.table2column2Width;
@@ -669,7 +669,7 @@ namespace MusicBeePlugin
             }
 
             return (column1Width, column2Width, column3Width, 
-                splitterDistance, 
+                splitterDistancePercent, 
                 table2column1Width, table2column2Width, table2column3Width);
         }
 
@@ -761,7 +761,7 @@ namespace MusicBeePlugin
             }
         }
 
-        protected void saveWindowLayout(int column1Width = 0, int column2Width = 0, int column3Width = 0, int splitterDistance = 0, int table2column1Width = 0, int table2column2Width = 0, int table2column3Width = 0)
+        protected void saveWindowLayout(int column1Width = 0, int column2Width = 0, int column3Width = 0, float splitterDistancePercent = 0, int table2column1Width = 0, int table2column2Width = 0, int table2column3Width = 0)
         {
             var currentWindowSettings = findCreateSavedWindowSettings(true);
 
@@ -779,9 +779,9 @@ namespace MusicBeePlugin
                 currentWindowSettings.table2column3Width = table2column3Width;
             }
 
-            if (splitterDistance > 0)
+            if (splitterDistancePercent > 0)
             {
-                currentWindowSettings.splitterDistance = splitterDistance;
+                currentWindowSettings.splitterDistancePercent = splitterDistancePercent;
             }
         }
 

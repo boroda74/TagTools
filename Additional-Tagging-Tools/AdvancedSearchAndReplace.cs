@@ -18,6 +18,7 @@ namespace MusicBeePlugin
 
         private static bool ignorefFlterComboBoxSelectedIndexChanged = false;
 
+        private bool ignoreSplitterMovedEvent = true;
         private bool ignoreCheckedPresetEvent = true;
         private int autoAppliedPresetCount;
 
@@ -1612,13 +1613,6 @@ namespace MusicBeePlugin
             buttonClose.Image = Resources.transparent_15;
             buttonCloseToolTip = toolTip1.GetToolTip(buttonClose);
             toolTip1.SetToolTip(buttonClose, "");
-
-            (int, int, int, int, int, int, int) value = loadWindowLayout();
-
-            if (value.Item4 > 0)
-            {
-                splitContainer1.SplitterDistance = value.Item4;
-            }
 
             addRowToTable = previewList_AddRowToTable;
             processRowOfTable = previewList_ProcessRowOfTable;
@@ -4502,8 +4496,25 @@ namespace MusicBeePlugin
                     return;
                 }
             }
+        }
 
-            saveWindowLayout(0, 0, 0, splitContainer1.SplitterDistance);
+        private void AdvancedSearchAndReplaceCommand_Load(object sender, EventArgs e)
+        {
+            (int, int, int, float, int, int, int) value = loadWindowLayout();
+
+            if (value.Item4 != 0)
+            {
+                ignoreSplitterMovedEvent = true;
+                splitContainer1.SplitterDistance = (int)(value.Item4 * (float)splitContainer1.Size.Height);
+            }
+
+            ignoreSplitterMovedEvent = false;
+        }
+
+        private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+            if (!ignoreSplitterMovedEvent)
+                saveWindowLayout(0, 0, 0, (float)splitContainer1.SplitterDistance / (float)splitContainer1.Size.Height);
         }
 
         private void filterComboBox_SelectedIndexChanged(object sender, EventArgs e)
