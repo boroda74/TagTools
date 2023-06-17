@@ -136,7 +136,7 @@
     <value>125, 23</value>
   </data>
   <data name="buttonClose.Text" xml:space="preserve">
-    <value>    Закрыть         </value>
+    <value>     Закрыть         </value>
   </data>
   <data name="buttonClose.ToolTip" xml:space="preserve">
     <value>Есть не сохраненные изменения</value>
