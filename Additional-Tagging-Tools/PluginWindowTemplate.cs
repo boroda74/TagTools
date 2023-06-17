@@ -643,12 +643,12 @@ namespace MusicBeePlugin
             }
         }
 
-        protected (int, int, int, float, int, int, int) loadWindowLayout()
+        protected (int, int, int, int, int, int, int) loadWindowLayout()
         {
             int column1Width = 0;
             int column2Width = 0;
             int column3Width = 0;
-            float splitterDistancePercent = 0;
+            int splitterDistance = 0;
             int table2column1Width = 0;
             int table2column2Width = 0; 
             int table2column3Width = 0;
@@ -661,7 +661,7 @@ namespace MusicBeePlugin
                 column2Width = windowSettings.column2Width;
                 column3Width = windowSettings.column3Width;
 
-                splitterDistancePercent = windowSettings.splitterDistancePercent;
+                splitterDistance = windowSettings.splitterDistance;
 
                 table2column1Width = windowSettings.table2column1Width;
                 table2column2Width = windowSettings.table2column2Width;
@@ -669,7 +669,7 @@ namespace MusicBeePlugin
             }
 
             return (column1Width, column2Width, column3Width, 
-                splitterDistancePercent, 
+                splitterDistance, 
                 table2column1Width, table2column2Width, table2column3Width);
         }
 
@@ -761,27 +761,27 @@ namespace MusicBeePlugin
             }
         }
 
-        protected void saveWindowLayout(int column1Width = 0, int column2Width = 0, int column3Width = 0, float splitterDistancePercent = 0, int table2column1Width = 0, int table2column2Width = 0, int table2column3Width = 0)
+        protected void saveWindowLayout(int column1Width = 0, int column2Width = 0, int column3Width = 0, int splitterDistance = 0, int table2column1Width = 0, int table2column2Width = 0, int table2column3Width = 0)
         {
             var currentWindowSettings = findCreateSavedWindowSettings(true);
 
-            if (column1Width > 0)
+            if (column1Width != 0)
             {
                 currentWindowSettings.column1Width = column1Width;
                 currentWindowSettings.column2Width = column2Width;
                 currentWindowSettings.column3Width = column3Width;
             }
 
-            if (table2column1Width > 0)
+            if (table2column1Width != 0)
             {
                 currentWindowSettings.table2column1Width = table2column1Width;
                 currentWindowSettings.table2column2Width = table2column2Width;
                 currentWindowSettings.table2column3Width = table2column3Width;
             }
 
-            if (splitterDistancePercent > 0)
+            if (splitterDistance != 0)
             {
-                currentWindowSettings.splitterDistancePercent = splitterDistancePercent;
+                currentWindowSettings.splitterDistance = splitterDistance;
             }
         }
 

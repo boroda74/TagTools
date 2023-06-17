@@ -3218,12 +3218,12 @@ namespace MusicBeePlugin
 
         private void LibraryReportsCommand_Load(object sender, EventArgs e)
         {
-            (int, int, int, float, int, int, int) value = loadWindowLayout();
+            (int, int, int, int, int, int, int) value = loadWindowLayout();
 
             if (value.Item4 != 0)
             {
                 ignoreSplitterMovedEvent = true;
-                splitContainer1.SplitterDistance = (int)(value.Item4 * (float)splitContainer1.Size.Height);
+                splitContainer1.SplitterDistance = value.Item4;
             }
 
             ignoreSplitterMovedEvent = false;
@@ -3232,7 +3232,7 @@ namespace MusicBeePlugin
         private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
         {
             if (!ignoreSplitterMovedEvent)
-                saveWindowLayout(0, 0, 0, (float)splitContainer1.SplitterDistance / (float)splitContainer1.Size.Height);
+                saveWindowLayout(0, 0, 0, splitContainer1.SplitterDistance);
         }
 
         private void sourceTagList_ItemCheck(object sender, ItemCheckEventArgs e)

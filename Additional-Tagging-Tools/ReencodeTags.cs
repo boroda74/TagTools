@@ -82,7 +82,7 @@ namespace MusicBeePlugin
             addRowToTable = previewList_AddRowToTable;
             processRowOfTable = previewList_ProcessRowOfTable;
 
-            (int, int, int, float, int, int, int) value = loadWindowLayout();
+            (int, int, int, int, int, int, int) value = loadWindowLayout();
 
             if (value.Item1 != 0)
             {
