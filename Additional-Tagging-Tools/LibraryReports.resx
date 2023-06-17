@@ -343,7 +343,7 @@
     <value>0</value>
   </data>
   <data name="buttonClose.Text" xml:space="preserve">
-    <value>    Close       </value>
+    <value>      Close    </value>
   </data>
   <data name="buttonExport.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 23</value>
