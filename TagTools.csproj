@@ -255,6 +255,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Sources\ASR-icons-mod.cdr" />
+    <None Include="Sources\ASR-icons.cdr" />
+    <None Include="Sources\separator.cpt" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Additional-Tagging-Tools\AdvancedSearchAndReplace.resx">
@@ -450,6 +453,109 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Docs\OnSelectedFilesChanged Event.txt" />
+    <Content Include="Sources\Ready Icons 16x16px\auto-applied-presets.png" />
+    <Content Include="Sources\Ready Icons 16x16px\check-mark.png" />
+    <Content Include="Sources\Ready Icons 16x16px\clear-button-15.png" />
+    <Content Include="Sources\Ready Icons 16x16px\customized-presets.png" />
+    <Content Include="Sources\Ready Icons 16x16px\function-id-presets.png" />
+    <Content Include="Sources\Ready Icons 16x16px\hotkey-presets.png" />
+    <Content Include="Sources\Ready Icons 16x16px\MissingArtwork.png" />
+    <Content Include="Sources\Ready Icons 16x16px\playlist-presets.png" />
+    <Content Include="Sources\Ready Icons 16x16px\predefined-presets.png" />
+    <Content Include="Sources\Ready Icons 16x16px\Search.png" />
+    <Content Include="Sources\Ready Icons 16x16px\set-button-15.png" />
+    <Content Include="Sources\Ready Icons 16x16px\Transparent-24x24 !.png" />
+    <Content Include="Sources\Ready Icons 16x16px\uncheck-all-preset-filters.png" />
+    <Content Include="Sources\Ready Icons 16x16px\uncheck-mark.png" />
+    <Content Include="Sources\Ready Icons 16x16px\user-presets.png" />
+    <Content Include="Sources\Ready Icons 16x16px\Warning-15-Flat.png" />
+    <Content Include="Sources\Ready Icons 16x16px\Warning-15.png" />
+    <Content Include="Sources\Ready Icons 16x16px\Window.png" />
+    <Content Include="Sources\Ready Icons 24x24px\auto-applied-presets.png" />
+    <Content Include="Sources\Ready Icons 24x24px\check-mark.png" />
+    <Content Include="Sources\Ready Icons 24x24px\clear-button-15.png" />
+    <Content Include="Sources\Ready Icons 24x24px\customized-presets.png" />
+    <Content Include="Sources\Ready Icons 24x24px\function-id-presets.png" />
+    <Content Include="Sources\Ready Icons 24x24px\hotkey-presets.png" />
+    <Content Include="Sources\Ready Icons 24x24px\MissingArtwork.png" />
+    <Content Include="Sources\Ready Icons 24x24px\playlist-presets.png" />
+    <Content Include="Sources\Ready Icons 24x24px\predefined-presets.png" />
+    <Content Include="Sources\Ready Icons 24x24px\Search.png" />
+    <Content Include="Sources\Ready Icons 24x24px\set-button-15.png" />
+    <Content Include="Sources\Ready Icons 24x24px\Transparent-24x24 !.png" />
+    <Content Include="Sources\Ready Icons 24x24px\uncheck-all-preset-filters.png" />
+    <Content Include="Sources\Ready Icons 24x24px\uncheck-mark.png" />
+    <Content Include="Sources\Ready Icons 24x24px\user-presets.png" />
+    <Content Include="Sources\Ready Icons 24x24px\Warning-15-Flat.png" />
+    <Content Include="Sources\Ready Icons 24x24px\Warning-15.png" />
+    <Content Include="Sources\Ready Icons 24x24px\Window.png" />
+    <Content Include="Sources\Ready Icons 32x32px\auto-applied-presets.png" />
+    <Content Include="Sources\Ready Icons 32x32px\check-mark.png" />
+    <Content Include="Sources\Ready Icons 32x32px\clear-button-15.png" />
+    <Content Include="Sources\Ready Icons 32x32px\customized-presets.png" />
+    <Content Include="Sources\Ready Icons 32x32px\function-id-presets.png" />
+    <Content Include="Sources\Ready Icons 32x32px\hotkey-presets.png" />
+    <Content Include="Sources\Ready Icons 32x32px\MissingArtwork.png" />
+    <Content Include="Sources\Ready Icons 32x32px\playlist-presets.png" />
+    <Content Include="Sources\Ready Icons 32x32px\predefined-presets.png" />
+    <Content Include="Sources\Ready Icons 32x32px\Search.png" />
+    <Content Include="Sources\Ready Icons 32x32px\set-button-15.png" />
+    <Content Include="Sources\Ready Icons 32x32px\Transparent-32x32 !.png" />
+    <Content Include="Sources\Ready Icons 32x32px\uncheck-all-preset-filters.png" />
+    <Content Include="Sources\Ready Icons 32x32px\uncheck-mark.png" />
+    <Content Include="Sources\Ready Icons 32x32px\user-presets.png" />
+    <Content Include="Sources\Ready Icons 32x32px\Warning-15-Flat.png" />
+    <Content Include="Sources\Ready Icons 32x32px\Warning-15.png" />
+    <Content Include="Sources\Ready Icons 32x32px\Window.png" />
+    <Content Include="Sources\Ready Icons 40x40px !\auto-applied-presets.png" />
+    <Content Include="Sources\Ready Icons 40x40px !\check-mark.png" />
+    <Content Include="Sources\Ready Icons 40x40px !\clear-button-15.png" />
+    <Content Include="Sources\Ready Icons 40x40px !\customized-presets.png" />
+    <Content Include="Sources\Ready Icons 40x40px !\function-id-presets.png" />
+    <Content Include="Sources\Ready Icons 40x40px !\hotkey-presets.png" />
+    <Content Include="Sources\Ready Icons 40x40px !\MissingArtwork.png" />
+    <Content Include="Sources\Ready Icons 40x40px !\playlist-presets.png" />
+    <Content Include="Sources\Ready Icons 40x40px !\predefined-presets.png" />
+    <Content Include="Sources\Ready Icons 40x40px !\Search.png" />
+    <Content Include="Sources\Ready Icons 40x40px !\separator.png" />
+    <Content Include="Sources\Ready Icons 40x40px !\set-button-15.png" />
+    <Content Include="Sources\Ready Icons 40x40px !\transparent-15.png" />
+    <Content Include="Sources\Ready Icons 40x40px !\uncheck-all-preset-filters.png" />
+    <Content Include="Sources\Ready Icons 40x40px !\uncheck-mark.png" />
+    <Content Include="Sources\Ready Icons 40x40px !\user-presets.png" />
+    <Content Include="Sources\Ready Icons 40x40px !\variants\customized-presets - middle !.png" />
+    <Content Include="Sources\Ready Icons 40x40px !\variants\customized-presets - up.png" />
+    <Content Include="Sources\Ready Icons 40x40px !\variants\customized-presets-down.png" />
+    <Content Include="Sources\Ready Icons 40x40px !\variants\predefined-presets - down-down.png" />
+    <Content Include="Sources\Ready Icons 40x40px !\variants\predefined-presets - down.png" />
+    <Content Include="Sources\Ready Icons 40x40px !\variants\predefined-presets - middle !.png" />
+    <Content Include="Sources\Ready Icons 40x40px !\variants\predefined-presets - up.png" />
+    <Content Include="Sources\Ready Icons 40x40px !\Warning-15-Flat.png" />
+    <Content Include="Sources\Ready Icons 40x40px !\Warning-15.png" />
+    <Content Include="Sources\Ready Icons 40x40px !\Window.png" />
+    <Content Include="Sources\Ready Icons 90x90px\auto-applied-presets.png" />
+    <Content Include="Sources\Ready Icons 90x90px\check-mark.png" />
+    <Content Include="Sources\Ready Icons 90x90px\clear-button-15.png" />
+    <Content Include="Sources\Ready Icons 90x90px\customized-presets.png" />
+    <Content Include="Sources\Ready Icons 90x90px\function-id-presets.png" />
+    <Content Include="Sources\Ready Icons 90x90px\hotkey-presets.png" />
+    <Content Include="Sources\Ready Icons 90x90px\MissingArtwork.png" />
+    <Content Include="Sources\Ready Icons 90x90px\playlist-presets.png" />
+    <Content Include="Sources\Ready Icons 90x90px\predefined-presets.png" />
+    <Content Include="Sources\Ready Icons 90x90px\Search.png" />
+    <Content Include="Sources\Ready Icons 90x90px\set-button-15.png" />
+    <Content Include="Sources\Ready Icons 90x90px\transparent-15.png" />
+    <Content Include="Sources\Ready Icons 90x90px\uncheck-all-preset-filters.png" />
+    <Content Include="Sources\Ready Icons 90x90px\uncheck-mark.png" />
+    <Content Include="Sources\Ready Icons 90x90px\user-presets.png" />
+    <Content Include="Sources\Ready Icons 90x90px\Warning-15-Flat.png" />
+    <Content Include="Sources\Ready Icons 90x90px\Warning-15.png" />
+    <Content Include="Sources\Ready Icons 90x90px\Window.png" />
+    <Content Include="Sources\UnsavedChanges-14.png" />
+    <Content Include="Sources\Warning-15-Flat.png" />
+    <Content Include="Sources\Warning-15.png" />
+    <Content Include="Sources\Warning-48.png" />
+    <Content Include="Sources\Warning.ico" />
     <None Include="Properties\Resources\transparent-15.png" />
     <None Include="Properties\Resources\set-button-15.png" />
     <None Include="Properties\Resources\clear-button-15.png" />
@@ -470,9 +576,7 @@
     <None Include="Properties\Resources\MissingArtwork.png" />
     <Content Include="Additional-Tagging-Tools\Wrench.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Sources\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
