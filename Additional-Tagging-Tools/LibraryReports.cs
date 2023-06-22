@@ -3778,6 +3778,18 @@ namespace MusicBeePlugin
             }
         }
 
+        public static string TryParseUint(string textValue, uint defaultValue)
+        {
+            if (textValue.Length == 0)
+                return defaultValue.ToString("F0");
+
+            uint value = defaultValue;
+            if (!uint.TryParse(textValue, out value))
+                return TryParseUint(textValue.Substring(0, textValue.Length - 1), defaultValue);
+            else
+                return value.ToString("F0");
+        }
+
         private void mulDivFactorComboBox_TextChanged(object sender, EventArgs e)
         {
             if (sourceFieldComboBox.SelectedIndex == -1)
@@ -3797,17 +3809,17 @@ namespace MusicBeePlugin
                 case "1000000 (M)":
                 case "1024 (K)":
                 case "1048576 (M)":
-                        mulDivFactors[sourceFieldComboBox.SelectedIndex] = mulDivFactorComboBox.Text;
+                    mulDivFactors[sourceFieldComboBox.SelectedIndex] = mulDivFactorComboBox.Text;
 
-                        break;
+                    break;
                 default:
-                    uint mulDivFactor = 1;
-                    if (!uint.TryParse(mulDivFactorComboBox.Text, out mulDivFactor))
-                        mulDivFactor = 1;
-
-                    string mulDivFactorText = mulDivFactor.ToString("F0");
+                    string mulDivFactorText = TryParseUint(mulDivFactorComboBox.Text, 1);
                     if (mulDivFactorComboBox.Text != mulDivFactorText)
+                    {
                         mulDivFactorComboBox.Text = mulDivFactorText;
+                        mulDivFactorComboBox.SelectionStart = mulDivFactorText.Length;
+                        mulDivFactorComboBox.SelectionLength = 0;
+                    }
 
                     mulDivFactors[sourceFieldComboBox.SelectedIndex] = mulDivFactorComboBox.Text;
 
@@ -3837,13 +3849,13 @@ namespace MusicBeePlugin
 
                     break;
                 default:
-                    uint precisionDigitsInt = 0;
-                    if (!uint.TryParse(precisionDigitsComboBox.Text, out precisionDigitsInt)) 
-                        precisionDigitsInt = 0;
-
-                    string precisionDigitsText = precisionDigitsInt.ToString("F0");
+                    string precisionDigitsText = TryParseUint(precisionDigitsComboBox.Text, 0);
                     if (precisionDigitsComboBox.Text != precisionDigitsText)
+                    {
                         precisionDigitsComboBox.Text = precisionDigitsText;
+                        precisionDigitsComboBox.SelectionStart = precisionDigitsText.Length;
+                        precisionDigitsComboBox.SelectionLength = 0;
+                    }
 
                     precisionDigits[sourceFieldComboBox.SelectedIndex] = precisionDigitsComboBox.Text;
 
