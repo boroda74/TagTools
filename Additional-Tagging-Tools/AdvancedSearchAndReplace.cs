@@ -2493,11 +2493,12 @@ namespace MusicBeePlugin
                     presetsWorkingCopy.Add(tempPreset.guid, tempPreset);
 
                     presetList.Items.Add(tempPreset);
-                    presetList.SelectedItem = tempPreset;
+
+                    refreshPresetList(tempPreset.guid);
                 }
                 else
                 {
-                    presetList_SelectedIndexChanged(null, null);
+                    refreshPresetList(tempPreset.guid);
                 }
             }
         }
