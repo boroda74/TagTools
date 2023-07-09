@@ -4491,8 +4491,8 @@ namespace MusicBeePlugin
             if (presetsChanged)
             {
                 if (MessageBox.Show(this, Plugin.MsgAsrDoYouWantToCloseWindowAndLoseAllChanges, 
-                    "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) 
-                    == DialogResult.No)
+                    "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) 
+                    == DialogResult.Cancel)
                 {
                     e.Cancel = true;
                     return;
