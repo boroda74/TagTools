@@ -448,6 +448,9 @@ namespace MusicBeePlugin
             public bool dontShowPredefinedPresetsCantBeChangedMessage;
             public string defaultAsrPresetsExportFolder;
 
+            public MessageBoxDefaultButton asrUnsavedChangesLastAnswer = MessageBoxDefaultButton.Button3;
+            public MessageBoxDefaultButton lrUnsavedChangesLastAnswer = MessageBoxDefaultButton.Button3;
+
             public int lastSkippedTagId;
             public int lastSkippedDateFormat;
         }
@@ -639,8 +642,8 @@ namespace MusicBeePlugin
         public static string MsgTracks;
         public static string MsgActualPercent;
 
-        public static string MsgLrDoYouWantToCloseWindowAndLoseAllChanges;
-        public static string MsgAsrDoYouWantToCloseWindowAndLoseAllChanges;
+        public static string MsgLrDoYouWantToSaveChangesBeforeClosingTheWindow;
+        public static string MsgAsrDoYouWantToSaveChangesBeforeClosingTheWindow;
 
         public static string MsgIncorrectPresetName;
         public static string MsgDeletePresetConfirmation;
@@ -3006,9 +3009,9 @@ namespace MusicBeePlugin
             MsgActualPercent = "% / Act.: ";
             MsgIncorrectPresetName = "Incorrect preset name or duplicated preset names.";
 
-            MsgLrDoYouWantToCloseWindowAndLoseAllChanges = "There are unsaved changes. Do you still want to close the window and lose all changes?";
+            MsgLrDoYouWantToSaveChangesBeforeClosingTheWindow = "There are unsaved changes. Do you want to save changes before closing the window?";
 
-            MsgAsrDoYouWantToCloseWindowAndLoseAllChanges = "One or more presets have been customized or changed. Do you still want to close the window and lose all changes?";
+            MsgAsrDoYouWantToSaveChangesBeforeClosingTheWindow = "One or more presets have been customized or changed. Do you want to save changes before closing the window?";
 
             MsgDeletePresetConfirmation = "Do you want to delete selected preset?";
             MsgInstallingConfirmation = "Do you want to install predefined presets?";
@@ -3549,9 +3552,9 @@ namespace MusicBeePlugin
                 MsgActualPercent = "% / Действ.: ";
                 MsgIncorrectPresetName = "Некорректное название пресета или пресет с таким названием уже существует.";
 
-                MsgLrDoYouWantToCloseWindowAndLoseAllChanges = "Есть несохраненные изменения. Все равно закрыть это окно и потерять все изменения?";
+                MsgLrDoYouWantToSaveChangesBeforeClosingTheWindow = "Есть несохраненные изменения. Сохранить изменения, прежде чем закрыть окно?";
 
-                MsgAsrDoYouWantToCloseWindowAndLoseAllChanges = "Один или несколько пресетов были настроены или изменены. Вы все равно хотите закрыть это окно и потерять все изменения?";
+                MsgAsrDoYouWantToSaveChangesBeforeClosingTheWindow = "Один или несколько пресетов были настроены или изменены. Сохранить изменения, прежде чем закрыть окно?";
 
                 MsgDeletePresetConfirmation = "Удалить выбранный пресет?";
                 MsgInstallingConfirmation = "Установить стандартные пресеты?";

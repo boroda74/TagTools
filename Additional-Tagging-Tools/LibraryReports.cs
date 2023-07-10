@@ -3206,10 +3206,22 @@ namespace MusicBeePlugin
         {
             if (unsavedChanges)
             {
-                if (MessageBox.Show(this, Plugin.MsgLrDoYouWantToCloseWindowAndLoseAllChanges,
-                    "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
-                    == DialogResult.Cancel)
+                MessageBoxDefaultButton lastAnswer = Plugin.SavedSettings.lrUnsavedChangesLastAnswer;
+                DialogResult result = MessageBox.Show(this, Plugin.MsgLrDoYouWantToSaveChangesBeforeClosingTheWindow,
+                    "", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, lastAnswer);
+
+                if (result == DialogResult.Yes)
                 {
+                    Plugin.SavedSettings.lrUnsavedChangesLastAnswer = MessageBoxDefaultButton.Button1;
+                    saveSettings();
+                }
+                else if (result == DialogResult.No)
+                {
+                    Plugin.SavedSettings.lrUnsavedChangesLastAnswer = MessageBoxDefaultButton.Button2;
+                }
+                else if (result == DialogResult.Cancel)
+                {
+                    Plugin.SavedSettings.lrUnsavedChangesLastAnswer = MessageBoxDefaultButton.Button3;
                     e.Cancel = true;
                     return;
                 }
