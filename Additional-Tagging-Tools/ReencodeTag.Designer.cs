@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReencodeTagPlugin));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonPreview = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
@@ -40,10 +39,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.initialEncodingsList = new System.Windows.Forms.ComboBox();
             this.previewTable = new System.Windows.Forms.DataGridView();
-            this.File = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Track = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OriginalTag = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NewTag = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.usedEncodingsList = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,6 +46,10 @@
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dirtyErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.File = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Track = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OriginalTag = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NewTag = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).BeginInit();
             this.SuspendLayout();
@@ -128,35 +127,7 @@
             this.previewTable.Name = "previewTable";
             this.previewTable.RowHeadersVisible = false;
             this.previewTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.previewTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.previewList_CellContentClick);
-            this.previewTable.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.previewTable_CellFormatting);
-            // 
-            // File
-            // 
-            this.File.FillWeight = 1F;
-            resources.ApplyResources(this.File, "File");
-            this.File.Name = "File";
-            // 
-            // Track
-            // 
-            this.Track.FillWeight = 75F;
-            resources.ApplyResources(this.Track, "Track");
-            this.Track.Name = "Track";
-            // 
-            // OriginalTag
-            // 
-            this.OriginalTag.FillWeight = 25F;
-            resources.ApplyResources(this.OriginalTag, "OriginalTag");
-            this.OriginalTag.Name = "OriginalTag";
-            // 
-            // NewTag
-            // 
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.NewTag.DefaultCellStyle = dataGridViewCellStyle1;
-            this.NewTag.FillWeight = 25F;
-            resources.ApplyResources(this.NewTag, "NewTag");
-            this.NewTag.Name = "NewTag";
+            this.previewTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.previewTable_CellContentClick);
             // 
             // usedEncodingsList
             // 
@@ -201,6 +172,30 @@
             this.dirtyErrorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.dirtyErrorProvider.ContainerControl = this;
             resources.ApplyResources(this.dirtyErrorProvider, "dirtyErrorProvider");
+            // 
+            // File
+            // 
+            this.File.FillWeight = 1F;
+            resources.ApplyResources(this.File, "File");
+            this.File.Name = "File";
+            // 
+            // Track
+            // 
+            this.Track.FillWeight = 75F;
+            resources.ApplyResources(this.Track, "Track");
+            this.Track.Name = "Track";
+            // 
+            // OriginalTag
+            // 
+            this.OriginalTag.FillWeight = 25F;
+            resources.ApplyResources(this.OriginalTag, "OriginalTag");
+            this.OriginalTag.Name = "OriginalTag";
+            // 
+            // NewTag
+            // 
+            this.NewTag.FillWeight = 25F;
+            resources.ApplyResources(this.NewTag, "NewTag");
+            this.NewTag.Name = "NewTag";
             // 
             // ReencodeTagPlugin
             // 

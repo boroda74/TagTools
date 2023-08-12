@@ -10,16 +10,10 @@ namespace MusicBeePlugin
 
         public bool apply = false;
 
-        public ASRPresetConfirmation()
-        {
-            InitializeComponent();
-        }
-
         public ASRPresetConfirmation(Plugin tagToolsPluginParam, string presetNameParam, string trackUrlParam)
         {
             InitializeComponent();
 
-            TagToolsPlugin = tagToolsPluginParam;
             presetName = presetNameParam;
             trackUrl = trackUrlParam;
 

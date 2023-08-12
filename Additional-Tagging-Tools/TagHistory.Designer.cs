@@ -131,7 +131,7 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.ImageCellTemplate.DefaultCellStyle = dataGridViewCellStyle2;
             resources.ApplyResources(this.ImageCellTemplate, "ImageCellTemplate");
-            this.ImageCellTemplate.Image = global::MusicBeePlugin.Properties.Resources.Search;
+            this.ImageCellTemplate.Image = global::MusicBeePlugin.Properties.Resources.search;
             this.ImageCellTemplate.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
             this.ImageCellTemplate.Name = "ImageCellTemplate";
             this.ImageCellTemplate.ReadOnly = true;

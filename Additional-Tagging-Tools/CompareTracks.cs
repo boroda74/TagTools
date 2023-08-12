@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+using static MusicBeePlugin.Plugin;
 
 namespace MusicBeePlugin
 {
@@ -11,7 +12,7 @@ namespace MusicBeePlugin
         private string[] trackUrls;
 
         private List<string> tagNames;
-        private List<Plugin.MetaDataType> tagIds;
+        private List<MetaDataType> tagIds;
         private int[] displayedTags;
         private List<int> reallyDisplayedTags;
 
@@ -34,16 +35,10 @@ namespace MusicBeePlugin
         private Dictionary<int, object> buffer = new Dictionary<int, object>();
         private Bitmap Artwork;
 
-        public CompareTracksCommand()
-        {
-            InitializeComponent();
-        }
-
-        public CompareTracksCommand(Plugin tagToolsPluginParam, string[] files)
+        public CompareTracksCommand(Plugin tagToolsPluginParam, string[] files) : base(tagToolsPluginParam)
         {
             InitializeComponent();
 
-            TagToolsPlugin = tagToolsPluginParam;
             trackUrls = files;
 
             initializeForm();
@@ -54,11 +49,11 @@ namespace MusicBeePlugin
             base.initializeForm();
 
             tagNames = new List<string>();
-            Plugin.FillListByTagNames(tagNames, false, true, false);
+            FillListByTagNames(tagNames, false, true, false);
 
-            tagIds = new List<Plugin.MetaDataType>();
+            tagIds = new List<MetaDataType>();
             for (int i = 0; i < tagNames.Count; i++)
-                tagIds.Add(Plugin.GetTagId(tagNames[i]));
+                tagIds.Add(GetTagId(tagNames[i]));
 
 
             columnTemplate = (DataGridViewColumn)previewTable.Columns[0].Clone();
@@ -67,26 +62,26 @@ namespace MusicBeePlugin
             noBackupDataCellForeColor = SystemColors.HotTrack;
 
 
-            if (!Plugin.SavedSettings.DontAutoSelectDisplayedTags || Plugin.SavedSettings.displayedTags == null)
+            if (!SavedSettings.DontAutoSelectDisplayedTags || SavedSettings.displayedTags == null)
             {
                 displayedTags = new int[tagIds.Count];
                 for (int i = 0; i < tagIds.Count; i++)
                     displayedTags[i] = (int)tagIds[i];
 
-                Plugin.SavedSettings.displayedTags = displayedTags;
+                SavedSettings.displayedTags = displayedTags;
             }
             else
             {
-                displayedTags = Plugin.SavedSettings.displayedTags;
+                displayedTags = SavedSettings.displayedTags;
             }
 
             ignoreAutoSelectTagsCheckBoxCheckedEvent = true;
-            AutoSelectTagsCheckBox.Checked = !Plugin.SavedSettings.DontAutoSelectDisplayedTags;
+            AutoSelectTagsCheckBox.Checked = !SavedSettings.DontAutoSelectDisplayedTags;
             ignoreAutoSelectTagsCheckBoxCheckedEvent = false;
 
 
-            rowHeadersWidth = Plugin.SavedSettings.rowHeadersWidth;
-            defaultColumnWidth = Plugin.SavedSettings.defaultColumnWidth;
+            rowHeadersWidth = SavedSettings.rowHeadersWidth;
+            defaultColumnWidth = SavedSettings.defaultColumnWidth;
 
             if (rowHeadersWidth < 5)
                 rowHeadersWidth = 150;
@@ -109,9 +104,9 @@ namespace MusicBeePlugin
 
             for (int j = 0; j < reallyDisplayedTags.Count; j++)
             {
-                previewTable.Rows[j].HeaderCell.Value = Plugin.GetTagName((Plugin.MetaDataType)reallyDisplayedTags[j]);
+                previewTable.Rows[j].HeaderCell.Value = GetTagName((MetaDataType)reallyDisplayedTags[j]);
 
-                if ((Plugin.MetaDataType)reallyDisplayedTags[j] == Plugin.MetaDataType.Artwork)
+                if ((MetaDataType)reallyDisplayedTags[j] == MetaDataType.Artwork)
                 {
                     artworkRow = j;
                 }
@@ -137,11 +132,11 @@ namespace MusicBeePlugin
 
                     previewTable.RowCount = 1;
 
-                    previewTable.Rows[0].HeaderCell.Value = Plugin.CtlNoDifferences;
+                    previewTable.Rows[0].HeaderCell.Value = CtlNoDifferences;
 
                     if (artworkRow != 0)
                     {
-                        previewTable.Rows[0].Cells[0].Value = "";
+                        previewTable.Rows[0].Cells[0].Value = null;
                     }
                     else
                     {
@@ -217,7 +212,7 @@ namespace MusicBeePlugin
 
                     for (int j = 0; j < displayedTags.Length; j++)
                     {
-                        cachedTrack.Add(Plugin.GetFileTag(trackUrls[i], (Plugin.MetaDataType)displayedTags[j]));
+                        cachedTrack.Add(GetFileTag(trackUrls[i], (MetaDataType)displayedTags[j]));
                     }
                 }
 
@@ -227,7 +222,7 @@ namespace MusicBeePlugin
 
                 fillTable(true);
 
-                if (!Plugin.SavedSettings.dontPlayCompletedSound)
+                if (!SavedSettings.dontPlayCompletedSound)
                     System.Media.SystemSounds.Asterisk.Play();
             }
         }
@@ -236,7 +231,7 @@ namespace MusicBeePlugin
         {
             reallyDisplayedTags = new List<int>();
 
-            if (!Plugin.SavedSettings.DontAutoSelectDisplayedTags)
+            if (!SavedSettings.DontAutoSelectDisplayedTags)
             {
                 List<int> reallyDisplayedTags2 = new List<int>();
 
@@ -270,7 +265,7 @@ namespace MusicBeePlugin
             }
 
 
-            if (!Plugin.SavedSettings.DontAutoSelectDisplayedTags)
+            if (!SavedSettings.DontAutoSelectDisplayedTags)
             {
                 for (int i = cachedTracks.Count - 1; i >= 0; i--)
                 {
@@ -299,10 +294,10 @@ namespace MusicBeePlugin
 
         private void saveSettings()
         {
-            Plugin.SavedSettings.displayedTags = displayedTags;
-            Plugin.SavedSettings.rowHeadersWidth = rowHeadersWidth;
-            Plugin.SavedSettings.defaultColumnWidth = defaultColumnWidth;
-            Plugin.SavedSettings.DontAutoSelectDisplayedTags = !AutoSelectTagsCheckBox.Checked;
+            SavedSettings.displayedTags = displayedTags;
+            SavedSettings.rowHeadersWidth = rowHeadersWidth;
+            SavedSettings.defaultColumnWidth = defaultColumnWidth;
+            SavedSettings.DontAutoSelectDisplayedTags = !AutoSelectTagsCheckBox.Checked;
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
@@ -312,15 +307,15 @@ namespace MusicBeePlugin
                 for (int j = 0; j < reallyDisplayedTags.Count; j++)
                 {
                     if (j == artworkRow)
-                        Plugin.SetFileTag(trackUrls[i], (Plugin.MetaDataType)reallyDisplayedTags[j], (string)previewTable.Rows[j].Cells[i].Tag);
+                        SetFileTag(trackUrls[i], (MetaDataType)reallyDisplayedTags[j], (string)previewTable.Rows[j].Cells[i].Tag);
                     else
-                        Plugin.SetFileTag(trackUrls[i], (Plugin.MetaDataType)reallyDisplayedTags[j], (string)previewTable.Rows[j].Cells[i].Value);
+                        SetFileTag(trackUrls[i], (MetaDataType)reallyDisplayedTags[j], (string)previewTable.Rows[j].Cells[i].Value);
                 }
 
-                Plugin.CommitTagsToFile(trackUrls[i]);
+                CommitTagsToFile(trackUrls[i]);
             }
 
-            Plugin.MbApiInterface.MB_RefreshPanels();
+            MbApiInterface.MB_RefreshPanels();
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -332,11 +327,7 @@ namespace MusicBeePlugin
         private void selectTagsButton_Click(object sender, EventArgs e)
         {
             buffer.Clear();
-
-            SelectTagsPlugin selectTagsForm = new SelectTagsPlugin(TagToolsPlugin, displayedTags);
-            Display(selectTagsForm, true);
-            displayedTags = selectTagsForm.displayedTags;
-
+            displayedTags = CopyTagsToClipboardCommand.SelectTags(TagToolsPlugin, SelectDisplayedTagsWindowTitle, SelectButtonName, displayedTags, true);
             fillTable(false);
         }
 
@@ -428,7 +419,7 @@ namespace MusicBeePlugin
         {
             buffer.Clear();
 
-            Plugin.SavedSettings.DontAutoSelectDisplayedTags = !AutoSelectTagsCheckBox.Checked;
+            SavedSettings.DontAutoSelectDisplayedTags = !AutoSelectTagsCheckBox.Checked;
 
             if (AutoSelectTagsCheckBox.Checked)
             {
@@ -442,7 +433,7 @@ namespace MusicBeePlugin
             {
                 selectTagsButton.Enabled = true;
 
-                displayedTags = Plugin.SavedSettings.displayedTags;
+                displayedTags = SavedSettings.displayedTags;
             }
 
 
@@ -517,7 +508,7 @@ namespace MusicBeePlugin
                         }
                         else
                         {
-                            previewTable.Rows[j].Cells[i].Value = "";
+                            previewTable.Rows[j].Cells[i].Value = null;
                         }
                     }
                 }

@@ -6,7 +6,7 @@ Some presets are checked:
 
 ![alt text][5]
 
-Preset list showing auto-applied presets only:
+Preset list showing auto-executed presets only:
 
 ![alt text][6]
 

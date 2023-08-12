@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using static MusicBeePlugin.Plugin;
 
 namespace MusicBeePlugin
 {
@@ -23,7 +24,7 @@ namespace MusicBeePlugin
 
         private string[] files = new string[0];
         private List<string[]> tags = new List<string[]>();
-        private Plugin.MetaDataType sourceTagId;
+        private MetaDataType sourceTagId;
 
         private int changeCaseFlag;
         private bool useWhiteList;
@@ -33,17 +34,9 @@ namespace MusicBeePlugin
         private bool alwaysCapitalize1stWord;
         private bool alwaysCapitalizeLastWord;
 
-        public ChangeCaseCommand()
+        public ChangeCaseCommand(Plugin tagToolsPluginParam) : base(tagToolsPluginParam)
         {
             InitializeComponent();
-        }
-
-        public ChangeCaseCommand(Plugin tagToolsPluginParam)
-        {
-            InitializeComponent();
-
-            TagToolsPlugin = tagToolsPluginParam;
-
             initializeForm();
         }
 
@@ -51,40 +44,43 @@ namespace MusicBeePlugin
         {
             base.initializeForm();
 
-            removeExceptionButton.Image = Plugin.ButtonRemoveImage;
+            removeExceptionButton.Image = ButtonRemoveImage;
+            buttonSettings.Image = Gear;
 
-            Plugin.FillListByTagNames(sourceTagList.Items);
-            sourceTagList.Text = Plugin.SavedSettings.changeCaseSourceTagName;
+            FillListByTagNames(sourceTagList.Items);
+            sourceTagList.Text = SavedSettings.changeCaseSourceTagName;
 
-            setChangeCaseOptionsRadioButtons(Plugin.SavedSettings.changeCaseFlag);
-            exceptionWordsCheckBox.Checked = Plugin.SavedSettings.useExceptionWords;
-            onlyWordsCheckBox.Checked = Plugin.SavedSettings.useOnlyWords;
-            exceptionWordsBox.Items.AddRange(Plugin.SavedSettings.exceptionWords);
-            exceptionWordsBox.Text = Plugin.SavedSettings.exceptionWords[0];
-            exceptionCharsCheckBox.Checked = Plugin.SavedSettings.useExceptionChars;
-            exceptionCharsBox.Text = Plugin.SavedSettings.exceptionChars;
-            wordSplittersCheckBox.Checked = Plugin.SavedSettings.useWordSplitters;
-            wordSplittersBox.Text = Plugin.SavedSettings.wordSplitters;
-            alwaysCapitalize1stWordCheckBox.Checked = Plugin.SavedSettings.alwaysCapitalize1stWord;
-            alwaysCapitalizeLastWordCheckBox.Checked = Plugin.SavedSettings.alwaysCapitalizeLastWord;
+            setChangeCaseOptionsRadioButtons(SavedSettings.changeCaseFlag);
+            exceptionWordsCheckBox.Checked = SavedSettings.useExceptionWords;
+            onlyWordsCheckBox.Checked = SavedSettings.useOnlyWords;
+            exceptionWordsBox.Items.AddRange(SavedSettings.exceptionWords);
+            exceptionWordsBox.Text = SavedSettings.exceptionWords[0];
+            exceptionCharsCheckBox.Checked = SavedSettings.useExceptionChars;
+            exceptionCharsBox.Text = SavedSettings.exceptionChars;
+            wordSplittersCheckBox.Checked = SavedSettings.useWordSplitters;
+            wordSplittersBox.Text = SavedSettings.wordSplitters;
+            alwaysCapitalize1stWordCheckBox.Checked = SavedSettings.alwaysCapitalize1stWord;
+            alwaysCapitalizeLastWordCheckBox.Checked = SavedSettings.alwaysCapitalizeLastWord;
 
             exceptWordsCheckBox_CheckedChanged(null, null);
             exceptCharsCheckBox_CheckedChanged(null, null);
             wordSplittersCheckBox_CheckedChanged(null, null);
-            sentenceCaseRadioButton_CheckedChanged(null, null);
+            casingRuleRadioButton_CheckedChanged(null, null);
 
             DatagridViewCheckBoxHeaderCell cbHeader = new DatagridViewCheckBoxHeaderCell();
             cbHeader.setState(true);
             cbHeader.OnCheckBoxClicked += new CheckBoxClickedHandler(cbHeader_OnCheckBoxClicked);
 
-            DataGridViewCheckBoxColumn colCB = new DataGridViewCheckBoxColumn();
-            colCB.HeaderCell = cbHeader;
-            colCB.ThreeState = true;
-            colCB.FalseValue = "False";
-            colCB.TrueValue = "True";
-            colCB.IndeterminateValue = "";
-            colCB.Width = 25;
-            colCB.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            DataGridViewCheckBoxColumn colCB = new DataGridViewCheckBoxColumn
+            {
+                HeaderCell = cbHeader,
+                ThreeState = true,
+                FalseValue = "F",
+                TrueValue = "T",
+                IndeterminateValue = "",
+                Width = 25,
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+            };
 
             previewTable.Columns.Insert(0, colCB);
 
@@ -94,8 +90,8 @@ namespace MusicBeePlugin
 
             previewTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 
-            addRowToTable = previewList_AddRowToTable;
-            processRowOfTable = previewList_ProcessRowOfTable;
+            addRowToTable = previewTable_AddRowToTable;
+            processRowOfTable = previewTable_ProcessRowOfTable;
 
             (int, int, int, int, int, int, int) value = loadWindowLayout();
 
@@ -105,6 +101,8 @@ namespace MusicBeePlugin
                 previewTable.Columns[2].Width = value.Item2;
                 previewTable.Columns[3].Width = value.Item3;
             }
+
+            enableDisablePreviewOptionControls(true);
         }
 
         private void setChangeCaseOptionsRadioButtons(int pos)
@@ -138,14 +136,16 @@ namespace MusicBeePlugin
             else return 5;
         }
 
-        private void previewList_AddRowToTable(string[] row)
+        private void previewTable_AddRowToTable(string[] row)
         {
             previewTable.Rows.Add(row);
+            previewTableFormatRow(previewTable.RowCount - 1);
         }
 
-        private void previewList_ProcessRowOfTable(int row)
+        private void previewTable_ProcessRowOfTable(int rowIndex)
         {
-            previewTable.Rows[row].Cells[0].Value = "";
+            previewTable.Rows[rowIndex].Cells[0].Value = null;
+            previewTableFormatRow(rowIndex);
         }
 
         public static string ChangeSubstringCase(string substring, ChangeCaseOptions changeCaseOption, bool isTheFirstWord)
@@ -253,9 +253,9 @@ namespace MusicBeePlugin
 
             foreach (char currentChar in source)
             {
-                if (IsItemContainedInList(currentChar, wordSplitters) || currentChar == ' ' || currentChar == Plugin.MultipleItemsSplitterId) //Possible end of word
+                if (IsItemContainedInList(currentChar, wordSplitters) || currentChar == ' ' || currentChar == MultipleItemsSplitterId) //Possible end of word
                 {
-                    if (!IsItemContainedInList(prevChar, wordSplitters) && prevChar != ' ' && prevChar != Plugin.MultipleItemsSplitterId) //End of word
+                    if (!IsItemContainedInList(prevChar, wordSplitters) && prevChar != ' ' && prevChar != MultipleItemsSplitterId) //End of word
                     {
                         if (alwaysCapitalize1stWord && isTheFirstWord) //Always Capitalize 1st word in tag if this option is checked
                         {
@@ -335,7 +335,7 @@ namespace MusicBeePlugin
 
             foreach (char currentChar in source)
             {
-                if ((prevChar == '.' && currentChar == ' ') || currentChar == Plugin.MultipleItemsSplitterId) //Beginning of new sentence
+                if ((prevChar == '.' && currentChar == ' ') || currentChar == MultipleItemsSplitterId) //Beginning of new sentence
                 {
                     newString = newString + ChangeWordsCase(currentSentence, ChangeCaseOptions.sentenceCase, exceptionWords, useWhiteList, exceptionChars, wordSplitters);
                     currentSentence = "" + currentChar;
@@ -401,15 +401,15 @@ namespace MusicBeePlugin
             if (wordSplittersCheckBox.Enabled && wordSplittersCheckBox.Checked)
                 wordSplitters = wordSplittersBox.Text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-            sourceTagId = Plugin.GetTagId(sourceTagList.Text);
+            sourceTagId = GetTagId(sourceTagList.Text);
 
             files = null;
-            if (!Plugin.MbApiInterface.Library_QueryFilesEx("domain=SelectedFiles", out files))
+            if (!MbApiInterface.Library_QueryFilesEx("domain=SelectedFiles", out files))
                 files = new string[0];
 
             if (files.Length == 0)
             {
-                MessageBox.Show(this, Plugin.MsgNoFilesSelected, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, MsgNoFilesSelected, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
             else
@@ -455,6 +455,8 @@ namespace MusicBeePlugin
 
             string isChecked;
 
+            bool stripNotChangedLines = SavedSettings.dontIncludeInPreviewLinesWithoutChangedTags;
+
             string track;
             string[] row = { "Checked", "File", "Track", "OriginalTag", "OriginalTagT", "NewTag", "NewTagT" };
             string[] tag = { "Checked", "file", "newTag" };
@@ -466,20 +468,22 @@ namespace MusicBeePlugin
 
                 currentFile = files[fileCounter];
 
-                Plugin.SetStatusbarTextForFileOperations(Plugin.ChangeCaseCommandSbText, true, fileCounter, files.Length, currentFile);
+                SetStatusbarTextForFileOperations(ChangeCaseCommandSbText, true, fileCounter, files.Length, currentFile);
 
-                sourceTagValue = Plugin.GetFileTag(currentFile, sourceTagId);
-                sourceTagTValue = Plugin.GetTagRepresentation(sourceTagValue);
+                sourceTagValue = GetFileTag(currentFile, sourceTagId);
+                sourceTagTValue = GetTagRepresentation(sourceTagValue);
                 newTagValue = changeCase(sourceTagValue, changeCaseFlag, exceptionWords, useWhiteList, exceptionChars, wordSplitters, alwaysCapitalize1stWord, alwaysCapitalizeLastWord);
-                newTagTValue = Plugin.GetTagRepresentation(newTagValue);
+                newTagTValue = GetTagRepresentation(newTagValue);
 
-                track = Plugin.GetTrackRepresentation(currentFile);
+                track = GetTrackRepresentation(currentFile);
 
 
-                if (sourceTagValue == newTagValue)
-                    isChecked = "False";
+                if (sourceTagValue == newTagValue && stripNotChangedLines)
+                    continue;
+                else if (sourceTagValue == newTagValue)
+                    isChecked = "F";
                 else
-                    isChecked = "True";
+                    isChecked = "T";
 
                 tag = new string[3];
 
@@ -505,7 +509,7 @@ namespace MusicBeePlugin
                 previewIsGenerated = true;
             }
 
-            Plugin.SetResultingSbText();
+            SetResultingSbText();
         }
 
         private void reapplyRules()
@@ -515,7 +519,7 @@ namespace MusicBeePlugin
 
             if (previewTable.Rows.Count == 0)
             {
-                MessageBox.Show(this, Plugin.MsgPreviewIsNotGeneratedNothingToChange, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, MsgPreviewIsNotGeneratedNothingToChange, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
@@ -540,10 +544,10 @@ namespace MusicBeePlugin
 
             for (int i = 0; i < previewTable.Rows.Count; i++)
             {
-                if ((string)previewTable.Rows[i].Cells[0].Value == "True")
+                if ((string)previewTable.Rows[i].Cells[0].Value == "T")
                 {
                     newTagValue = changeCase((string)previewTable.Rows[i].Cells[5].Value, changeCaseFlag, exceptionWords, useWhiteList, exceptionChars, wordSplitters);
-                    newTagTValue = Plugin.GetTagRepresentation(newTagValue);
+                    newTagTValue = GetTagRepresentation(newTagValue);
 
                     previewTable.Rows[i].Cells[5].Value = newTagValue;
                     previewTable.Rows[i].Cells[6].Value = newTagTValue;
@@ -567,7 +571,7 @@ namespace MusicBeePlugin
 
                 isChecked = tags[i][0];
 
-                if (isChecked == "True")
+                if (isChecked == "T")
                 {
                     currentFile = tags[i][1];
                     newTagValue = tags[i][2];
@@ -576,33 +580,33 @@ namespace MusicBeePlugin
 
                     Invoke(processRowOfTable, new object[] { i });
 
-                    Plugin.SetStatusbarTextForFileOperations(Plugin.ChangeCaseCommandSbText, false, i, tags.Count, currentFile);
+                    SetStatusbarTextForFileOperations(ChangeCaseCommandSbText, false, i, tags.Count, currentFile);
 
-                    Plugin.SetFileTag(currentFile, sourceTagId, newTagValue);
-                    Plugin.CommitTagsToFile(currentFile);
+                    SetFileTag(currentFile, sourceTagId, newTagValue);
+                    CommitTagsToFile(currentFile);
                 }
             }
 
-            Plugin.RefreshPanels(true);
+            RefreshPanels(true);
 
-            Plugin.SetResultingSbText();
+            SetResultingSbText();
         }
 
         private void saveSettings()
         {
             saveWindowLayout(previewTable.Columns[1].Width, previewTable.Columns[2].Width, previewTable.Columns[3].Width);
 
-            Plugin.SavedSettings.changeCaseSourceTagName = sourceTagList.Text;
-            Plugin.SavedSettings.changeCaseFlag = getChangeCaseOptionsRadioButtons();
-            Plugin.SavedSettings.useExceptionWords = exceptionWordsCheckBox.Checked;
-            Plugin.SavedSettings.useOnlyWords = onlyWordsCheckBox.Checked;
-            exceptionWordsBox.Items.CopyTo(Plugin.SavedSettings.exceptionWords, 0);
-            Plugin.SavedSettings.useExceptionChars = exceptionCharsCheckBox.Checked;
-            Plugin.SavedSettings.exceptionChars = exceptionCharsBox.Text;
-            Plugin.SavedSettings.useWordSplitters = wordSplittersCheckBox.Checked;
-            Plugin.SavedSettings.wordSplitters = wordSplittersBox.Text;
-            Plugin.SavedSettings.alwaysCapitalize1stWord = alwaysCapitalize1stWordCheckBox.Checked;
-            Plugin.SavedSettings.alwaysCapitalizeLastWord = alwaysCapitalizeLastWordCheckBox.Checked;
+            SavedSettings.changeCaseSourceTagName = sourceTagList.Text;
+            SavedSettings.changeCaseFlag = getChangeCaseOptionsRadioButtons();
+            SavedSettings.useExceptionWords = exceptionWordsCheckBox.Checked;
+            SavedSettings.useOnlyWords = onlyWordsCheckBox.Checked;
+            exceptionWordsBox.Items.CopyTo(SavedSettings.exceptionWords, 0);
+            SavedSettings.useExceptionChars = exceptionCharsCheckBox.Checked;
+            SavedSettings.exceptionChars = exceptionCharsBox.Text;
+            SavedSettings.useWordSplitters = wordSplittersCheckBox.Checked;
+            SavedSettings.wordSplitters = wordSplittersBox.Text;
+            SavedSettings.alwaysCapitalize1stWord = alwaysCapitalize1stWordCheckBox.Checked;
+            SavedSettings.alwaysCapitalizeLastWord = alwaysCapitalizeLastWordCheckBox.Checked;
 
             TagToolsPlugin.SaveSettings();
         }
@@ -621,7 +625,7 @@ namespace MusicBeePlugin
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
-            exceptionWordsBox.Items.CopyTo(Plugin.SavedSettings.exceptionWords, 0);
+            exceptionWordsBox.Items.CopyTo(SavedSettings.exceptionWords, 0);
             Close();
         }
 
@@ -633,6 +637,8 @@ namespace MusicBeePlugin
         private void exceptWordsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             exceptionWordsBox.Enabled = exceptionWordsCheckBox.Checked || onlyWordsCheckBox.Checked;
+            removeExceptionButton.Enabled = exceptionWordsCheckBox.Checked || onlyWordsCheckBox.Checked;
+
             if (exceptionWordsCheckBox.Checked)
                 onlyWordsCheckBox.Checked = false;
         }
@@ -640,6 +646,8 @@ namespace MusicBeePlugin
         private void onlyWordsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             exceptionWordsBox.Enabled = exceptionWordsCheckBox.Checked || onlyWordsCheckBox.Checked;
+            removeExceptionButton.Enabled = exceptionWordsCheckBox.Checked || onlyWordsCheckBox.Checked;
+
             if (onlyWordsCheckBox.Checked)
                 exceptionWordsCheckBox.Checked = false;
         }
@@ -647,39 +655,67 @@ namespace MusicBeePlugin
         private void exceptCharsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             exceptionCharsBox.Enabled = exceptionCharsCheckBox.Checked;
+            buttonASRExceptWordsAfterSymbols.Enabled = exceptionCharsCheckBox.Checked;
         }
 
         private void wordSplittersCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             wordSplittersBox.Enabled = wordSplittersCheckBox.Checked;
+            buttonASRWordSplitters.Enabled = wordSplittersCheckBox.Checked;
         }
 
         private void cbHeader_OnCheckBoxClicked(bool state)
         {
             foreach (DataGridViewRow row in previewTable.Rows)
             {
-                if ((string)row.Cells[0].Value == "")
+                if ((string)row.Cells[0].Value == null)
                     continue;
 
                 if (state)
-                    row.Cells[0].Value = "False";
+                    row.Cells[0].Value = "F";
                 else
-                    row.Cells[0].Value = "True";
+                    row.Cells[0].Value = "T";
 
                 DataGridViewCellEventArgs e = new DataGridViewCellEventArgs(0, row.Index);
-                previewList_CellContentClick(null, e);
+                previewTable_CellContentClick(null, e);
             }
         }
 
-        private void previewList_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void previewTableFormatRow(int rowIndex)
         {
-            if ((string)previewTable.Rows[e.RowIndex].Cells[3].Value == (string)previewTable.Rows[e.RowIndex].Cells[5].Value)
-                previewTable.Rows[e.RowIndex].Cells[6].Style = Plugin.UnchangedStyle;
-            else
-                previewTable.Rows[e.RowIndex].Cells[6].Style = Plugin.ChangedStyle;
+            if (SavedSettings.dontHighlightChangedTags)
+                return;
+
+            if ((string)previewTable.Rows[rowIndex].Cells[0].Value != "T")
+            {
+                for (int columnIndex = 1; columnIndex < previewTable.ColumnCount; columnIndex++)
+                {
+                    if (previewTable.Columns[columnIndex].Visible)
+                        previewTable.Rows[rowIndex].Cells[columnIndex].Style = DimmedCellStyle;
+                }
+
+                return;
+            }
+
+
+            for (int columnIndex = 1; columnIndex < previewTable.ColumnCount; columnIndex++)
+            {
+                if (columnIndex == 6)
+                {
+                    if ((string)previewTable.Rows[rowIndex].Cells[3].Value == (string)previewTable.Rows[rowIndex].Cells[5].Value)
+                        previewTable.Rows[rowIndex].Cells[6].Style = UnchangedCellStyle;
+                    else
+                        previewTable.Rows[rowIndex].Cells[6].Style = ChangedCellStyle;
+                }
+                else
+                {
+                    previewTable.Rows[rowIndex].Cells[columnIndex].Style = UnchangedCellStyle;
+                }
+            }
+
         }
 
-        private void previewList_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void previewTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 0)
             {
@@ -690,9 +726,9 @@ namespace MusicBeePlugin
 
                 string isChecked = (string)previewTable.Rows[e.RowIndex].Cells[0].Value;
 
-                if (isChecked == "True")
+                if (isChecked == "T")
                 {
-                    previewTable.Rows[e.RowIndex].Cells[0].Value = "False";
+                    previewTable.Rows[e.RowIndex].Cells[0].Value = "F";
 
                     sourceTagValue = (string)previewTable.Rows[e.RowIndex].Cells[3].Value;
                     sourceTagTValue = (string)previewTable.Rows[e.RowIndex].Cells[4].Value;
@@ -700,7 +736,7 @@ namespace MusicBeePlugin
                     previewTable.Rows[e.RowIndex].Cells[5].Value = sourceTagValue;
                     previewTable.Rows[e.RowIndex].Cells[6].Value = sourceTagTValue;
                 }
-                else if (isChecked == "False")
+                else if (isChecked == "F")
                 {
                     changeCaseFlag = getChangeCaseOptionsRadioButtons();
 
@@ -721,22 +757,26 @@ namespace MusicBeePlugin
                     if (wordSplittersCheckBox.Enabled && wordSplittersCheckBox.Checked)
                         wordSplitters = wordSplittersBox.Text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-                    previewTable.Rows[e.RowIndex].Cells[0].Value = "True";
+                    previewTable.Rows[e.RowIndex].Cells[0].Value = "T";
 
                     sourceTagValue = (string)previewTable.Rows[e.RowIndex].Cells[3].Value;
                     sourceTagTValue = (string)previewTable.Rows[e.RowIndex].Cells[4].Value;
 
                     newTagValue = changeCase(sourceTagValue, changeCaseFlag, exceptionWords, useWhiteList, exceptionChars, wordSplitters);
-                    newTagTValue = Plugin.GetTagRepresentation(newTagValue);
+                    newTagTValue = GetTagRepresentation(newTagValue);
 
                     previewTable.Rows[e.RowIndex].Cells[5].Value = newTagValue;
                     previewTable.Rows[e.RowIndex].Cells[6].Value = newTagTValue;
                 }
+
+                previewTableFormatRow(e.RowIndex);
             }
         }
 
         public override void enableDisablePreviewOptionControls(bool enable)
         {
+            buttonReapply.Enabled = enable && previewIsGenerated;
+
             if (enable && previewIsGenerated)
                 return;
 
@@ -770,20 +810,20 @@ namespace MusicBeePlugin
 
         private void exceptionWordsBox_Leave(object sender, EventArgs e)
         {
-            Plugin.ComboBoxLeave(exceptionWordsBox);
+            ComboBoxLeave(exceptionWordsBox);
         }
 
-        private void sentenceCaseRadioButton_CheckedChanged(object sender, EventArgs e)
+        private void casingRuleRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            if (sentenceCaseRadioButton.Checked)
-            {
-                alwaysCapitalize1stWordCheckBox.Enabled = false;
-                alwaysCapitalizeLastWordCheckBox.Enabled = false;
-            }
-            else
+            if (titleCaseRadioButton.Checked || toggleCaseRadioButton.Checked)
             {
                 alwaysCapitalize1stWordCheckBox.Enabled = true;
                 alwaysCapitalizeLastWordCheckBox.Enabled = true;
+            }
+            else
+            {
+                alwaysCapitalize1stWordCheckBox.Enabled = false;
+                alwaysCapitalizeLastWordCheckBox.Enabled = false;
             }
         }
 
@@ -805,17 +845,23 @@ namespace MusicBeePlugin
 
         private void buttonASR_Click(object sender, EventArgs e)
         {
-            Plugin.SavedSettings.exceptionWordsASR = exceptionWordsBox.Text;
+            SavedSettings.exceptionWordsASR = exceptionWordsBox.Text;
         }
 
         private void buttonASRExceptWordsAfterSymbols_Click(object sender, EventArgs e)
         {
-            Plugin.SavedSettings.exceptionCharsASR = exceptionCharsBox.Text;
+            SavedSettings.exceptionCharsASR = exceptionCharsBox.Text;
         }
 
         private void buttonASRWordSplitters_Click(object sender, EventArgs e)
         {
-            Plugin.SavedSettings.wordSplittersASR = buttonASRWordSplitters.Text;
+            SavedSettings.wordSplittersASR = buttonASRWordSplitters.Text;
+        }
+
+        private void buttonSettings_Click(object sender, EventArgs e)
+        {
+            PluginQuickSettings settings = new PluginQuickSettings(TagToolsPlugin);
+            PluginWindowTemplate.Display(settings, true);
         }
     }
 }

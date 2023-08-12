@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using static MusicBeePlugin.Plugin;
 
 namespace MusicBeePlugin
 {
@@ -8,17 +9,9 @@ namespace MusicBeePlugin
     {
         private string[] files = new string[0];
 
-        public CalculateAverageAlbumRatingCommand()
+        public CalculateAverageAlbumRatingCommand(Plugin tagToolsPluginParam) : base(tagToolsPluginParam)
         {
             InitializeComponent();
-        }
-
-        public CalculateAverageAlbumRatingCommand(Plugin tagToolsPluginParam)
-        {
-            InitializeComponent();
-
-            TagToolsPlugin = tagToolsPluginParam;
-
             initializeForm();
         }
 
@@ -26,16 +19,16 @@ namespace MusicBeePlugin
         {
             base.initializeForm();
 
-            calculateAlbumRatingAtStartUpCheckBox.Checked = Plugin.SavedSettings.calculateAlbumRatingAtStartUp;
-            calculateAlbumRatingAtTagsChangedCheckBox.Checked = Plugin.SavedSettings.calculateAlbumRatingAtTagsChanged;
-            notifyWhenCalculationCompletedCheckBox.Checked = Plugin.SavedSettings.notifyWhenCalculationCompleted;
-            considerUnratedCheckBox.Checked = Plugin.SavedSettings.considerUnrated;
+            calculateAlbumRatingAtStartUpCheckBox.Checked = SavedSettings.calculateAlbumRatingAtStartUp;
+            calculateAlbumRatingAtTagsChangedCheckBox.Checked = SavedSettings.calculateAlbumRatingAtTagsChanged;
+            notifyWhenCalculationCompletedCheckBox.Checked = SavedSettings.notifyWhenCalculationCompleted;
+            considerUnratedCheckBox.Checked = SavedSettings.considerUnrated;
 
-            Plugin.FillListByTagNames(trackRatingTagList.Items);
-            trackRatingTagList.Text = Plugin.SavedSettings.trackRatingTagName;
+            FillListByTagNames(trackRatingTagList.Items);
+            trackRatingTagList.Text = SavedSettings.trackRatingTagName;
 
-            Plugin.FillListByTagNames(albumRatingTagList.Items);
-            albumRatingTagList.Text = Plugin.SavedSettings.albumRatingTagName;
+            FillListByTagNames(albumRatingTagList.Items);
+            albumRatingTagList.Text = SavedSettings.albumRatingTagName;
         }
 
         public void calculateAlbumRating()
@@ -51,22 +44,24 @@ namespace MusicBeePlugin
 
                 currentFile = files[fileCounter];
 
-                Plugin.SetStatusbarTextForFileOperations(Plugin.CarCommandSbText, true, fileCounter, files.Length, currentFile);
+                SetStatusbarTextForFileOperations(CarCommandSbText, true, fileCounter, files.Length, currentFile);
 
                 row = new string[4];
 
-                row[0] = Plugin.GetFileTag(currentFile, Plugin.MetaDataType.AlbumArtist);
-                row[1] = Plugin.GetFileTag(currentFile, Plugin.MetaDataType.Album);
-                row[2] = Plugin.GetFileTag(currentFile, Plugin.GetTagId(Plugin.SavedSettings.trackRatingTagName), true);
+                row[0] = GetFileTag(currentFile, MetaDataType.AlbumArtist);
+                row[1] = GetFileTag(currentFile, MetaDataType.Album);
+                row[2] = GetFileTag(currentFile, GetTagId(SavedSettings.trackRatingTagName), true);
                 row[3] = currentFile;
 
                 tags.Add(row);
             }
 
-            Plugin.SetStatusbarText(Plugin.CarCommandSbText + " (" + Plugin.SbSorting + ")", false);
+            SetStatusbarText(CarCommandSbText + " (" + SbSorting + ")", false);
 
-            Plugin.TextTableComparer textTableComparator = new Plugin.TextTableComparer();
-            textTableComparator.tagCounterIndex = 2;
+            TextTableComparer textTableComparator = new TextTableComparer
+            {
+                tagCounterIndex = 2
+            };
             tags.Sort(textTableComparator);
 
             string currentAlbumArtsist;
@@ -101,9 +96,9 @@ namespace MusicBeePlugin
 
                     for (int j = prevRow; j < i; j++)
                     {
-                        if ("" + tags[j][2] != "" || Plugin.SavedSettings.considerUnrated)
+                        if ("" + tags[j][2] != "" || SavedSettings.considerUnrated)
                         {
-                            sumRating += Plugin.ConvertStrings(tags[j][2]).result1f;
+                            sumRating += ConvertStrings(tags[j][2]).result1f;
                             numberOfTracks++;
                         }
                     }
@@ -117,10 +112,10 @@ namespace MusicBeePlugin
                     {
                         currentFile = tags[j][3];
 
-                        Plugin.SetFileTag(currentFile, Plugin.GetTagId(Plugin.SavedSettings.albumRatingTagName), avgRating.ToString(), true);
-                        Plugin.CommitTagsToFile(currentFile, false, true);
+                        SetFileTag(currentFile, GetTagId(SavedSettings.albumRatingTagName), avgRating.ToString(), true);
+                        CommitTagsToFile(currentFile, false, true);
 
-                        Plugin.SetStatusbarTextForFileOperations(Plugin.CarCommandSbText, false, j, tags.Count, currentFile);
+                        SetStatusbarTextForFileOperations(CarCommandSbText, false, j, tags.Count, currentFile);
                     }
 
                     prevAlbumArtsist = currentAlbumArtsist;
@@ -134,9 +129,9 @@ namespace MusicBeePlugin
 
             for (int j = prevRow; j < tags.Count; j++)
             {
-                if ("" + tags[j][2] != "" || Plugin.SavedSettings.considerUnrated)
+                if ("" + tags[j][2] != "" || SavedSettings.considerUnrated)
                 {
-                    sumRating += Plugin.ConvertStrings(tags[j][2]).result1f;
+                    sumRating += ConvertStrings(tags[j][2]).result1f;
                     numberOfTracks++;
                 }
             }
@@ -150,47 +145,47 @@ namespace MusicBeePlugin
             {
                 currentFile = tags[j][3];
 
-                Plugin.SetFileTag(currentFile, Plugin.GetTagId(Plugin.SavedSettings.albumRatingTagName), avgRating.ToString(), true);
-                Plugin.CommitTagsToFile(currentFile, false, true);
+                SetFileTag(currentFile, GetTagId(SavedSettings.albumRatingTagName), avgRating.ToString(), true);
+                CommitTagsToFile(currentFile, false, true);
 
-                Plugin.SetStatusbarTextForFileOperations(Plugin.CarCommandSbText, false, j, tags.Count, currentFile);
+                SetStatusbarTextForFileOperations(CarCommandSbText, false, j, tags.Count, currentFile);
             }
 
-            Plugin.RefreshPanels(true);
+            RefreshPanels(true);
 
-            Plugin.SetResultingSbText();
+            SetResultingSbText();
 
-            if (Plugin.SavedSettings.notifyWhenCalculationCompleted) MessageBox.Show(Plugin.MbForm, Plugin.MsgBackgroundTaskIsCompleted, 
-                null, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (SavedSettings.notifyWhenCalculationCompleted) MessageBox.Show(this, MsgBackgroundTaskIsCompleted, 
+                "", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public void calculateAlbumRatingForDisplayedTracks()
         {
             files = null;
-            if (!Plugin.MbApiInterface.Library_QueryFilesEx("domain=DisplayedFiles", out files))
+            if (!MbApiInterface.Library_QueryFilesEx("domain=DisplayedFiles", out files))
                 files = new string[0];
 
-            switchOperation(calculateAlbumRating, buttonOK, Plugin.EmptyButton, Plugin.EmptyButton, buttonCancel, true, null);
+            switchOperation(calculateAlbumRating, buttonOK, EmptyButton, EmptyButton, buttonCancel, true, null);
         }
 
         public void calculateAlbumRatingForAllTracks()
         {
             files = null;
-            if (!Plugin.MbApiInterface.Library_QueryFilesEx("domain=Library", out files))
+            if (!MbApiInterface.Library_QueryFilesEx("domain=Library", out files))
                 files = new string[0];
 
-            switchOperation(calculateAlbumRating, buttonOK, Plugin.EmptyButton, Plugin.EmptyButton, Plugin.EmptyButton, true, null);
+            switchOperation(calculateAlbumRating, buttonOK, EmptyButton, EmptyButton, EmptyButton, true, null);
         }
 
         public static void CalculateAlbumRatingForAlbum(Plugin tagToolsPluginParam, string currentFile)
         {
             string[] localFiles = null;
 
-            if (!Plugin.MbApiInterface.Library_QueryFilesEx("domain=Library", out localFiles))
+            if (!MbApiInterface.Library_QueryFilesEx("domain=Library", out localFiles))
                 localFiles = new string[0];
 
-            string currentAlbumArtist = Plugin.GetFileTag(currentFile, Plugin.MetaDataType.AlbumArtist);
-            string currentAlbum = Plugin.GetFileTag(currentFile, Plugin.MetaDataType.Album);
+            string currentAlbumArtist = GetFileTag(currentFile, MetaDataType.AlbumArtist);
+            string currentAlbum = GetFileTag(currentFile, MetaDataType.Album);
 
             List<string[]> tags = new List<string[]>();
             string[] row;
@@ -200,9 +195,9 @@ namespace MusicBeePlugin
             {
                 file = localFiles[fileCounter];
 
-                string albumArtist = Plugin.GetFileTag(file, Plugin.MetaDataType.AlbumArtist);
-                string album = Plugin.GetFileTag(file, Plugin.MetaDataType.Album);
-                string rating = Plugin.GetFileTag(file, Plugin.GetTagId(Plugin.SavedSettings.trackRatingTagName), true);
+                string albumArtist = GetFileTag(file, MetaDataType.AlbumArtist);
+                string album = GetFileTag(file, MetaDataType.Album);
+                string rating = GetFileTag(file, GetTagId(SavedSettings.trackRatingTagName), true);
 
                 if (currentAlbumArtist == albumArtist && currentAlbum == album)
                 {
@@ -227,9 +222,9 @@ namespace MusicBeePlugin
 
             for (int j = 0; j < tags.Count; j++)
             {
-                if ("" + tags[j][2] != "" || Plugin.SavedSettings.considerUnrated)
+                if ("" + tags[j][2] != "" || SavedSettings.considerUnrated)
                 {
-                    sumRating += Plugin.ConvertStrings(tags[j][2]).result1f;
+                    sumRating += ConvertStrings(tags[j][2]).result1f;
                     numberOfTracks++;
                 }
             }
@@ -243,22 +238,22 @@ namespace MusicBeePlugin
             {
                 file = tags[j][3];
 
-                Plugin.SetFileTag(file, Plugin.GetTagId(Plugin.SavedSettings.albumRatingTagName), avgRating.ToString(), true);
-                Plugin.CommitTagsToFile(file, false, true);
+                SetFileTag(file, GetTagId(SavedSettings.albumRatingTagName), avgRating.ToString(), true);
+                CommitTagsToFile(file, false, true);
             }
 
-            Plugin.RefreshPanels(true);
+            RefreshPanels(true);
         }
 
         private void saveSettings()
         {
-            Plugin.SavedSettings.calculateAlbumRatingAtStartUp = calculateAlbumRatingAtStartUpCheckBox.Checked;
-            Plugin.SavedSettings.calculateAlbumRatingAtTagsChanged = calculateAlbumRatingAtTagsChangedCheckBox.Checked;
-            Plugin.SavedSettings.notifyWhenCalculationCompleted = notifyWhenCalculationCompletedCheckBox.Checked;
-            Plugin.SavedSettings.considerUnrated = considerUnratedCheckBox.Checked;
+            SavedSettings.calculateAlbumRatingAtStartUp = calculateAlbumRatingAtStartUpCheckBox.Checked;
+            SavedSettings.calculateAlbumRatingAtTagsChanged = calculateAlbumRatingAtTagsChangedCheckBox.Checked;
+            SavedSettings.notifyWhenCalculationCompleted = notifyWhenCalculationCompletedCheckBox.Checked;
+            SavedSettings.considerUnrated = considerUnratedCheckBox.Checked;
 
-            Plugin.SavedSettings.trackRatingTagName = trackRatingTagList.Text;
-            Plugin.SavedSettings.albumRatingTagName = albumRatingTagList.Text;
+            SavedSettings.trackRatingTagName = trackRatingTagList.Text;
+            SavedSettings.albumRatingTagName = albumRatingTagList.Text;
 
             TagToolsPlugin.SaveSettings();
         }

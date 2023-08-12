@@ -5,17 +5,9 @@ namespace MusicBeePlugin
 {
     public partial class SaveLastSkippedCommand : PluginWindowTemplate
     {
-        public SaveLastSkippedCommand()
+        public SaveLastSkippedCommand(Plugin tagToolsPluginParam) : base(tagToolsPluginParam)
         {
             InitializeComponent();
-        }
-
-        public SaveLastSkippedCommand(Plugin tagToolsPluginParam)
-        {
-            InitializeComponent();
-
-            TagToolsPlugin = tagToolsPluginParam;
-
             initializeForm();
         }
 
