@@ -116,6 +116,9 @@ namespace MusicBeePlugin
 
         private SortedDictionary<string, bool>[] cachedQueriedActualGroupingValues = null;
         private SortedDictionary<string, string> cachedQueriedFilesActualComposedGroupingValues = new SortedDictionary<string, string>(); //<url, composed groupings>
+        
+        private int[] resultTypes;
+
 
         private AggregatedTags tags = new AggregatedTags();
         private string[] lastFiles = null;
@@ -1173,6 +1176,8 @@ namespace MusicBeePlugin
                                         aggregatedValues[i].items.Add(url, false);
 
                                     aggregatedValues[i].type = 1;
+                                    
+                                    resultTypes[i] = 1;
                                 }
                             }
                             else if (functionTypes[i] == FunctionType.Count)
@@ -1181,6 +1186,8 @@ namespace MusicBeePlugin
                                     aggregatedValues[i].items.Add(currentFunctionValue, false);
 
                                 aggregatedValues[i].type = 1;
+                                
+                                resultTypes[i] = 1;
                             }
                             else if (functionTypes[i] == FunctionType.Sum)
                             {
@@ -1207,6 +1214,8 @@ namespace MusicBeePlugin
 
                                     aggregatedValues[i].type = currentFunctionResult.type;
                                 }
+
+                                resultTypes[i] = currentFunctionResult.type;
                             }
                             else if (functionTypes[i] == FunctionType.Minimum)
                             {
@@ -1334,6 +1343,8 @@ namespace MusicBeePlugin
 
                                     aggregatedValues[i].type = currentFunctionResult.type;
                                 }
+
+                                resultTypes[i] = currentFunctionResult.type;
                             }
                             else if (functionTypes[i] == FunctionType.AverageCount)
                             {
@@ -1342,6 +1353,8 @@ namespace MusicBeePlugin
 
                                 if (!aggregatedValues[i].items1.TryGetValue(currentFunctionValue, out _))
                                     aggregatedValues[i].items1.Add(currentFunctionValue, false);
+
+                                resultTypes[i] = 1;
                             }
                         }
                     }
@@ -1466,12 +1479,47 @@ namespace MusicBeePlugin
 
         private void previewTable_AddRowsToTable(List<string[]> rows)
         {
+            if (previewTable.RowCount == 0) // There are no rows in preview table yet, so let's adjust column text alignment according to data type
+            {
+                int j = -1;
+                foreach (var attribs in groupingsDict.Values)
+                {
+                    j++;
+
+                    if (attribs.parameterName == SequenceNumberName || attribs.parameterName == DateCreatedTagName) // It's a number. Let's right-align the column.
+                    {
+                        previewTable.Columns[j].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    }
+                    else
+                    {
+                        DataType columnType = MbApiInterface.Setting_GetDataType(GetTagId(attribs.parameterName));
+                        if (columnType == DataType.Number || columnType == DataType.DateTime) // Let's right-align the column.
+                        {
+                            previewTable.Columns[j].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                        }
+                        else // It's either string or rating, or internal plugin pseudo-tag like "Filename". Let's left-align the column.
+                        {
+                            previewTable.Columns[j].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+                        }
+                    }
+
+                }
+
+                for (int i = 0; i < functionsDict.Count; i++)
+                {
+                    if (resultTypes[i] > 0) // It's either number or date/time/duration. Let's right-align the column.
+                        previewTable.Columns[groupingsDict.Count + i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    else
+                        previewTable.Columns[groupingsDict.Count + i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+                }
+            }
+
+
             foreach (var row in rows)
             {
                 previewTable.Rows.Add(row);
                 previewTable.Rows[previewTable.RowCount - 1].Resizable = DataGridViewTriState.True;
-
-
+                
                 for (int i = 0; i < previewTable.ColumnCount; i++)
                 {
                     if (i != artworkField)
@@ -2017,7 +2065,7 @@ namespace MusicBeePlugin
                 queriedActualGroupingsTagIds[l] = 0;
 
 
-            int[] resultTypes = new int[functionsDict.Count];
+            resultTypes = new int[functionsDict.Count];
 
             for (int l = 0; l < resultTypes.Length; l++)
                 resultTypes[l] = -1;
