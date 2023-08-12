@@ -172,44 +172,37 @@
             // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            this.toolTip1.SetToolTip(this.label1, resources.GetString("label1.ToolTip"));
             // 
             // nameBox
             // 
             resources.ApplyResources(this.nameBox, "nameBox");
             this.nameBox.Name = "nameBox";
-            this.toolTip1.SetToolTip(this.nameBox, resources.GetString("nameBox.ToolTip"));
             // 
             // label2
             // 
             resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
-            this.toolTip1.SetToolTip(this.label2, resources.GetString("label2.ToolTip"));
             // 
             // descriptionBox
             // 
             resources.ApplyResources(this.descriptionBox, "descriptionBox");
             this.descriptionBox.Name = "descriptionBox";
-            this.toolTip1.SetToolTip(this.descriptionBox, resources.GetString("descriptionBox.ToolTip"));
             // 
             // label3
             // 
             resources.ApplyResources(this.label3, "label3");
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Name = "label3";
-            this.toolTip1.SetToolTip(this.label3, resources.GetString("label3.ToolTip"));
             // 
             // searchedPatternBox
             // 
             resources.ApplyResources(this.searchedPatternBox, "searchedPatternBox");
             this.searchedPatternBox.Name = "searchedPatternBox";
-            this.toolTip1.SetToolTip(this.searchedPatternBox, resources.GetString("searchedPatternBox.ToolTip"));
             // 
             // label4
             // 
             resources.ApplyResources(this.label4, "label4");
             this.label4.Name = "label4";
-            this.toolTip1.SetToolTip(this.label4, resources.GetString("label4.ToolTip"));
             // 
             // searchedTagList
             // 
@@ -218,7 +211,6 @@
             this.searchedTagList.DropDownWidth = 250;
             this.searchedTagList.FormattingEnabled = true;
             this.searchedTagList.Name = "searchedTagList";
-            this.toolTip1.SetToolTip(this.searchedTagList, resources.GetString("searchedTagList.ToolTip"));
             // 
             // replacedTagList
             // 
@@ -227,31 +219,26 @@
             this.replacedTagList.DropDownWidth = 250;
             this.replacedTagList.FormattingEnabled = true;
             this.replacedTagList.Name = "replacedTagList";
-            this.toolTip1.SetToolTip(this.replacedTagList, resources.GetString("replacedTagList.ToolTip"));
             // 
             // label5
             // 
             resources.ApplyResources(this.label5, "label5");
             this.label5.Name = "label5";
-            this.toolTip1.SetToolTip(this.label5, resources.GetString("label5.ToolTip"));
             // 
             // replacedPatternBox
             // 
             resources.ApplyResources(this.replacedPatternBox, "replacedPatternBox");
             this.replacedPatternBox.Name = "replacedPatternBox";
-            this.toolTip1.SetToolTip(this.replacedPatternBox, resources.GetString("replacedPatternBox.ToolTip"));
             // 
             // label6
             // 
             resources.ApplyResources(this.label6, "label6");
             this.label6.Name = "label6";
-            this.toolTip1.SetToolTip(this.label6, resources.GetString("label6.ToolTip"));
             // 
             // buttonApply
             // 
             resources.ApplyResources(this.buttonApply, "buttonApply");
             this.buttonApply.Name = "buttonApply";
-            this.toolTip1.SetToolTip(this.buttonApply, resources.GetString("buttonApply.ToolTip"));
             this.buttonApply.UseVisualStyleBackColor = true;
             this.buttonApply.Click += new System.EventHandler(this.buttonOK_Click);
             // 
@@ -260,7 +247,6 @@
             resources.ApplyResources(this.buttonCancel, "buttonCancel");
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Name = "buttonCancel";
-            this.toolTip1.SetToolTip(this.buttonCancel, resources.GetString("buttonCancel.ToolTip"));
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
@@ -268,7 +254,6 @@
             // 
             resources.ApplyResources(this.ignoreCaseCheckBox, "ignoreCaseCheckBox");
             this.ignoreCaseCheckBox.Name = "ignoreCaseCheckBox";
-            this.toolTip1.SetToolTip(this.ignoreCaseCheckBox, resources.GetString("ignoreCaseCheckBox.ToolTip"));
             this.ignoreCaseCheckBox.UseVisualStyleBackColor = true;
             // 
             // linkLabel1
@@ -276,7 +261,6 @@
             resources.ApplyResources(this.linkLabel1, "linkLabel1");
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.TabStop = true;
-            this.toolTip1.SetToolTip(this.linkLabel1, resources.GetString("linkLabel1.ToolTip"));
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // groupBox1
@@ -285,7 +269,6 @@
             this.groupBox1.Controls.Add(this.tableLayoutPanel3);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
-            this.toolTip1.SetToolTip(this.groupBox1, resources.GetString("groupBox1.ToolTip"));
             // 
             // tableLayoutPanel3
             // 
@@ -301,7 +284,6 @@
             this.tableLayoutPanel3.Controls.Add(this.searchedTagList, 4, 0);
             this.tableLayoutPanel3.Controls.Add(this.searchedPatternBox, 1, 0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.toolTip1.SetToolTip(this.tableLayoutPanel3, resources.GetString("tableLayoutPanel3.ToolTip"));
             // 
             // appendCheckBox
             // 
@@ -322,7 +304,6 @@
             this.groupBox2.Controls.Add(this.tableLayoutPanel4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
-            this.toolTip1.SetToolTip(this.groupBox2, resources.GetString("groupBox2.ToolTip"));
             // 
             // tableLayoutPanel4
             // 
@@ -338,14 +319,12 @@
             this.tableLayoutPanel4.Controls.Add(this.label9, 2, 0);
             this.tableLayoutPanel4.Controls.Add(this.searchedTag2List, 4, 0);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.toolTip1.SetToolTip(this.tableLayoutPanel4, resources.GetString("tableLayoutPanel4.ToolTip"));
             // 
             // label7
             // 
             resources.ApplyResources(this.label7, "label7");
             this.label7.BackColor = System.Drawing.Color.Transparent;
             this.label7.Name = "label7";
-            this.toolTip1.SetToolTip(this.label7, resources.GetString("label7.ToolTip"));
             // 
             // replacedTag2List
             // 
@@ -354,7 +333,6 @@
             this.replacedTag2List.DropDownWidth = 250;
             this.replacedTag2List.FormattingEnabled = true;
             this.replacedTag2List.Name = "replacedTag2List";
-            this.toolTip1.SetToolTip(this.replacedTag2List, resources.GetString("replacedTag2List.ToolTip"));
             // 
             // append2CheckBox
             // 
@@ -367,31 +345,26 @@
             // 
             resources.ApplyResources(this.searchedPattern2Box, "searchedPattern2Box");
             this.searchedPattern2Box.Name = "searchedPattern2Box";
-            this.toolTip1.SetToolTip(this.searchedPattern2Box, resources.GetString("searchedPattern2Box.ToolTip"));
             // 
             // replacedPattern2Box
             // 
             resources.ApplyResources(this.replacedPattern2Box, "replacedPattern2Box");
             this.replacedPattern2Box.Name = "replacedPattern2Box";
-            this.toolTip1.SetToolTip(this.replacedPattern2Box, resources.GetString("replacedPattern2Box.ToolTip"));
             // 
             // label10
             // 
             resources.ApplyResources(this.label10, "label10");
             this.label10.Name = "label10";
-            this.toolTip1.SetToolTip(this.label10, resources.GetString("label10.ToolTip"));
             // 
             // label8
             // 
             resources.ApplyResources(this.label8, "label8");
             this.label8.Name = "label8";
-            this.toolTip1.SetToolTip(this.label8, resources.GetString("label8.ToolTip"));
             // 
             // label9
             // 
             resources.ApplyResources(this.label9, "label9");
             this.label9.Name = "label9";
-            this.toolTip1.SetToolTip(this.label9, resources.GetString("label9.ToolTip"));
             // 
             // searchedTag2List
             // 
@@ -400,7 +373,6 @@
             this.searchedTag2List.DropDownWidth = 250;
             this.searchedTag2List.FormattingEnabled = true;
             this.searchedTag2List.Name = "searchedTag2List";
-            this.toolTip1.SetToolTip(this.searchedTag2List, resources.GetString("searchedTag2List.ToolTip"));
             // 
             // groupBox3
             // 
@@ -408,7 +380,6 @@
             this.groupBox3.Controls.Add(this.tableLayoutPanel5);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
-            this.toolTip1.SetToolTip(this.groupBox3, resources.GetString("groupBox3.ToolTip"));
             // 
             // tableLayoutPanel5
             // 
@@ -424,13 +395,11 @@
             this.tableLayoutPanel5.Controls.Add(this.label13, 2, 0);
             this.tableLayoutPanel5.Controls.Add(this.searchedPattern3Box, 1, 0);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
-            this.toolTip1.SetToolTip(this.tableLayoutPanel5, resources.GetString("tableLayoutPanel5.ToolTip"));
             // 
             // label11
             // 
             resources.ApplyResources(this.label11, "label11");
             this.label11.Name = "label11";
-            this.toolTip1.SetToolTip(this.label11, resources.GetString("label11.ToolTip"));
             // 
             // replacedTag3List
             // 
@@ -439,7 +408,6 @@
             this.replacedTag3List.DropDownWidth = 250;
             this.replacedTag3List.FormattingEnabled = true;
             this.replacedTag3List.Name = "replacedTag3List";
-            this.toolTip1.SetToolTip(this.replacedTag3List, resources.GetString("replacedTag3List.ToolTip"));
             // 
             // append3CheckBox
             // 
@@ -455,45 +423,38 @@
             this.searchedTag3List.DropDownWidth = 250;
             this.searchedTag3List.FormattingEnabled = true;
             this.searchedTag3List.Name = "searchedTag3List";
-            this.toolTip1.SetToolTip(this.searchedTag3List, resources.GetString("searchedTag3List.ToolTip"));
             // 
             // label12
             // 
             resources.ApplyResources(this.label12, "label12");
             this.label12.Name = "label12";
-            this.toolTip1.SetToolTip(this.label12, resources.GetString("label12.ToolTip"));
             // 
             // label14
             // 
             resources.ApplyResources(this.label14, "label14");
             this.label14.Name = "label14";
-            this.toolTip1.SetToolTip(this.label14, resources.GetString("label14.ToolTip"));
             // 
             // replacedPattern3Box
             // 
             resources.ApplyResources(this.replacedPattern3Box, "replacedPattern3Box");
             this.replacedPattern3Box.Name = "replacedPattern3Box";
-            this.toolTip1.SetToolTip(this.replacedPattern3Box, resources.GetString("replacedPattern3Box.ToolTip"));
             // 
             // label13
             // 
             resources.ApplyResources(this.label13, "label13");
             this.label13.Name = "label13";
-            this.toolTip1.SetToolTip(this.label13, resources.GetString("label13.ToolTip"));
             // 
             // searchedPattern3Box
             // 
             resources.ApplyResources(this.searchedPattern3Box, "searchedPattern3Box");
             this.searchedPattern3Box.Name = "searchedPattern3Box";
-            this.toolTip1.SetToolTip(this.searchedPattern3Box, resources.GetString("searchedPattern3Box.ToolTip"));
             // 
             // languages
             // 
-            resources.ApplyResources(this.languages, "languages");
             this.languages.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.languages.FormattingEnabled = true;
+            resources.ApplyResources(this.languages, "languages");
             this.languages.Name = "languages";
-            this.toolTip1.SetToolTip(this.languages, resources.GetString("languages.ToolTip"));
             this.languages.SelectedIndexChanged += new System.EventHandler(this.languages_SelectedIndexChanged);
             // 
             // guidBox
@@ -501,32 +462,27 @@
             resources.ApplyResources(this.guidBox, "guidBox");
             this.guidBox.Name = "guidBox";
             this.guidBox.ReadOnly = true;
-            this.toolTip1.SetToolTip(this.guidBox, resources.GetString("guidBox.ToolTip"));
             // 
             // label15
             // 
             resources.ApplyResources(this.label15, "label15");
             this.label15.Name = "label15";
-            this.toolTip1.SetToolTip(this.label15, resources.GetString("label15.ToolTip"));
             // 
             // label16
             // 
             resources.ApplyResources(this.label16, "label16");
             this.label16.Name = "label16";
-            this.toolTip1.SetToolTip(this.label16, resources.GetString("label16.ToolTip"));
             // 
             // modifiedBox
             // 
             resources.ApplyResources(this.modifiedBox, "modifiedBox");
             this.modifiedBox.Name = "modifiedBox";
             this.modifiedBox.ReadOnly = true;
-            this.toolTip1.SetToolTip(this.modifiedBox, resources.GetString("modifiedBox.ToolTip"));
             // 
             // userPresetCheckBox
             // 
             resources.ApplyResources(this.userPresetCheckBox, "userPresetCheckBox");
             this.userPresetCheckBox.Name = "userPresetCheckBox";
-            this.toolTip1.SetToolTip(this.userPresetCheckBox, resources.GetString("userPresetCheckBox.ToolTip"));
             this.userPresetCheckBox.UseVisualStyleBackColor = true;
             // 
             // parameterTagTypeList
@@ -537,22 +493,20 @@
             this.parameterTagTypeList.Items.AddRange(new object[] {
             resources.GetString("parameterTagTypeList.Items"),
             resources.GetString("parameterTagTypeList.Items1"),
-            resources.GetString("parameterTagTypeList.Items2")});
+            resources.GetString("parameterTagTypeList.Items2"),
+            resources.GetString("parameterTagTypeList.Items3")});
             this.parameterTagTypeList.Name = "parameterTagTypeList";
-            this.toolTip1.SetToolTip(this.parameterTagTypeList, resources.GetString("parameterTagTypeList.ToolTip"));
             this.parameterTagTypeList.SelectedIndexChanged += new System.EventHandler(this.parameterTagTypeList_SelectedIndexChanged);
             // 
             // label17
             // 
             resources.ApplyResources(this.label17, "label17");
             this.label17.Name = "label17";
-            this.toolTip1.SetToolTip(this.label17, resources.GetString("label17.ToolTip"));
             // 
             // label18
             // 
             resources.ApplyResources(this.label18, "label18");
             this.label18.Name = "label18";
-            this.toolTip1.SetToolTip(this.label18, resources.GetString("label18.ToolTip"));
             // 
             // parameterTag2TypeList
             // 
@@ -562,16 +516,15 @@
             this.parameterTag2TypeList.Items.AddRange(new object[] {
             resources.GetString("parameterTag2TypeList.Items"),
             resources.GetString("parameterTag2TypeList.Items1"),
-            resources.GetString("parameterTag2TypeList.Items2")});
+            resources.GetString("parameterTag2TypeList.Items2"),
+            resources.GetString("parameterTag2TypeList.Items3")});
             this.parameterTag2TypeList.Name = "parameterTag2TypeList";
-            this.toolTip1.SetToolTip(this.parameterTag2TypeList, resources.GetString("parameterTag2TypeList.ToolTip"));
             this.parameterTag2TypeList.SelectedIndexChanged += new System.EventHandler(this.parameterTag2TypeList_SelectedIndexChanged);
             // 
             // label19
             // 
             resources.ApplyResources(this.label19, "label19");
             this.label19.Name = "label19";
-            this.toolTip1.SetToolTip(this.label19, resources.GetString("label19.ToolTip"));
             // 
             // parameterTag3TypeList
             // 
@@ -581,9 +534,9 @@
             this.parameterTag3TypeList.Items.AddRange(new object[] {
             resources.GetString("parameterTag3TypeList.Items"),
             resources.GetString("parameterTag3TypeList.Items1"),
-            resources.GetString("parameterTag3TypeList.Items2")});
+            resources.GetString("parameterTag3TypeList.Items2"),
+            resources.GetString("parameterTag3TypeList.Items3")});
             this.parameterTag3TypeList.Name = "parameterTag3TypeList";
-            this.toolTip1.SetToolTip(this.parameterTag3TypeList, resources.GetString("parameterTag3TypeList.ToolTip"));
             this.parameterTag3TypeList.SelectedIndexChanged += new System.EventHandler(this.parameterTag3TypeList_SelectedIndexChanged);
             // 
             // customTextCheckBox
@@ -663,13 +616,11 @@
             this.parameterTag3List.DropDownWidth = 250;
             this.parameterTag3List.FormattingEnabled = true;
             this.parameterTag3List.Name = "parameterTag3List";
-            this.toolTip1.SetToolTip(this.parameterTag3List, resources.GetString("parameterTag3List.ToolTip"));
             // 
             // label21
             // 
             resources.ApplyResources(this.label21, "label21");
             this.label21.Name = "label21";
-            this.toolTip1.SetToolTip(this.label21, resources.GetString("label21.ToolTip"));
             // 
             // parameterTag2List
             // 
@@ -678,13 +629,11 @@
             this.parameterTag2List.DropDownWidth = 250;
             this.parameterTag2List.FormattingEnabled = true;
             this.parameterTag2List.Name = "parameterTag2List";
-            this.toolTip1.SetToolTip(this.parameterTag2List, resources.GetString("parameterTag2List.ToolTip"));
             // 
             // label22
             // 
             resources.ApplyResources(this.label22, "label22");
             this.label22.Name = "label22";
-            this.toolTip1.SetToolTip(this.label22, resources.GetString("label22.ToolTip"));
             // 
             // parameterTagList
             // 
@@ -693,19 +642,16 @@
             this.parameterTagList.DropDownWidth = 250;
             this.parameterTagList.FormattingEnabled = true;
             this.parameterTagList.Name = "parameterTagList";
-            this.toolTip1.SetToolTip(this.parameterTagList, resources.GetString("parameterTagList.ToolTip"));
             // 
             // label23
             // 
             resources.ApplyResources(this.label23, "label23");
             this.label23.Name = "label23";
-            this.toolTip1.SetToolTip(this.label23, resources.GetString("label23.ToolTip"));
             // 
             // label20
             // 
             resources.ApplyResources(this.label20, "label20");
             this.label20.Name = "label20";
-            this.toolTip1.SetToolTip(this.label20, resources.GetString("label20.ToolTip"));
             // 
             // parameterTag6List
             // 
@@ -714,13 +660,11 @@
             this.parameterTag6List.DropDownWidth = 250;
             this.parameterTag6List.FormattingEnabled = true;
             this.parameterTag6List.Name = "parameterTag6List";
-            this.toolTip1.SetToolTip(this.parameterTag6List, resources.GetString("parameterTag6List.ToolTip"));
             // 
             // label24
             // 
             resources.ApplyResources(this.label24, "label24");
             this.label24.Name = "label24";
-            this.toolTip1.SetToolTip(this.label24, resources.GetString("label24.ToolTip"));
             // 
             // parameterTag5List
             // 
@@ -729,13 +673,11 @@
             this.parameterTag5List.DropDownWidth = 250;
             this.parameterTag5List.FormattingEnabled = true;
             this.parameterTag5List.Name = "parameterTag5List";
-            this.toolTip1.SetToolTip(this.parameterTag5List, resources.GetString("parameterTag5List.ToolTip"));
             // 
             // label25
             // 
             resources.ApplyResources(this.label25, "label25");
             this.label25.Name = "label25";
-            this.toolTip1.SetToolTip(this.label25, resources.GetString("label25.ToolTip"));
             // 
             // parameterTag4List
             // 
@@ -744,13 +686,11 @@
             this.parameterTag4List.DropDownWidth = 250;
             this.parameterTag4List.FormattingEnabled = true;
             this.parameterTag4List.Name = "parameterTag4List";
-            this.toolTip1.SetToolTip(this.parameterTag4List, resources.GetString("parameterTag4List.ToolTip"));
             // 
             // label26
             // 
             resources.ApplyResources(this.label26, "label26");
             this.label26.Name = "label26";
-            this.toolTip1.SetToolTip(this.label26, resources.GetString("label26.ToolTip"));
             // 
             // parameterTag6TypeList
             // 
@@ -760,16 +700,15 @@
             this.parameterTag6TypeList.Items.AddRange(new object[] {
             resources.GetString("parameterTag6TypeList.Items"),
             resources.GetString("parameterTag6TypeList.Items1"),
-            resources.GetString("parameterTag6TypeList.Items2")});
+            resources.GetString("parameterTag6TypeList.Items2"),
+            resources.GetString("parameterTag6TypeList.Items3")});
             this.parameterTag6TypeList.Name = "parameterTag6TypeList";
-            this.toolTip1.SetToolTip(this.parameterTag6TypeList, resources.GetString("parameterTag6TypeList.ToolTip"));
             this.parameterTag6TypeList.SelectedIndexChanged += new System.EventHandler(this.parameterTag6TypeList_SelectedIndexChanged);
             // 
             // label27
             // 
             resources.ApplyResources(this.label27, "label27");
             this.label27.Name = "label27";
-            this.toolTip1.SetToolTip(this.label27, resources.GetString("label27.ToolTip"));
             // 
             // parameterTag5TypeList
             // 
@@ -779,16 +718,15 @@
             this.parameterTag5TypeList.Items.AddRange(new object[] {
             resources.GetString("parameterTag5TypeList.Items"),
             resources.GetString("parameterTag5TypeList.Items1"),
-            resources.GetString("parameterTag5TypeList.Items2")});
+            resources.GetString("parameterTag5TypeList.Items2"),
+            resources.GetString("parameterTag5TypeList.Items3")});
             this.parameterTag5TypeList.Name = "parameterTag5TypeList";
-            this.toolTip1.SetToolTip(this.parameterTag5TypeList, resources.GetString("parameterTag5TypeList.ToolTip"));
             this.parameterTag5TypeList.SelectedIndexChanged += new System.EventHandler(this.parameterTag5TypeList_SelectedIndexChanged);
             // 
             // label28
             // 
             resources.ApplyResources(this.label28, "label28");
             this.label28.Name = "label28";
-            this.toolTip1.SetToolTip(this.label28, resources.GetString("label28.ToolTip"));
             // 
             // parameterTag4TypeList
             // 
@@ -798,9 +736,9 @@
             this.parameterTag4TypeList.Items.AddRange(new object[] {
             resources.GetString("parameterTag4TypeList.Items"),
             resources.GetString("parameterTag4TypeList.Items1"),
-            resources.GetString("parameterTag4TypeList.Items2")});
+            resources.GetString("parameterTag4TypeList.Items2"),
+            resources.GetString("parameterTag4TypeList.Items3")});
             this.parameterTag4TypeList.Name = "parameterTag4TypeList";
-            this.toolTip1.SetToolTip(this.parameterTag4TypeList, resources.GetString("parameterTag4TypeList.ToolTip"));
             this.parameterTag4TypeList.SelectedIndexChanged += new System.EventHandler(this.parameterTag4TypeList_SelectedIndexChanged);
             // 
             // groupBox4
@@ -809,7 +747,6 @@
             this.groupBox4.Controls.Add(this.tableLayoutPanel6);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.TabStop = false;
-            this.toolTip1.SetToolTip(this.groupBox4, resources.GetString("groupBox4.ToolTip"));
             // 
             // tableLayoutPanel6
             // 
@@ -825,13 +762,11 @@
             this.tableLayoutPanel6.Controls.Add(this.label32, 2, 0);
             this.tableLayoutPanel6.Controls.Add(this.searchedPattern4Box, 1, 0);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
-            this.toolTip1.SetToolTip(this.tableLayoutPanel6, resources.GetString("tableLayoutPanel6.ToolTip"));
             // 
             // label29
             // 
             resources.ApplyResources(this.label29, "label29");
             this.label29.Name = "label29";
-            this.toolTip1.SetToolTip(this.label29, resources.GetString("label29.ToolTip"));
             // 
             // replacedTag4List
             // 
@@ -840,7 +775,6 @@
             this.replacedTag4List.DropDownWidth = 250;
             this.replacedTag4List.FormattingEnabled = true;
             this.replacedTag4List.Name = "replacedTag4List";
-            this.toolTip1.SetToolTip(this.replacedTag4List, resources.GetString("replacedTag4List.ToolTip"));
             // 
             // searchedTag4List
             // 
@@ -849,37 +783,31 @@
             this.searchedTag4List.DropDownWidth = 250;
             this.searchedTag4List.FormattingEnabled = true;
             this.searchedTag4List.Name = "searchedTag4List";
-            this.toolTip1.SetToolTip(this.searchedTag4List, resources.GetString("searchedTag4List.ToolTip"));
             // 
             // label30
             // 
             resources.ApplyResources(this.label30, "label30");
             this.label30.Name = "label30";
-            this.toolTip1.SetToolTip(this.label30, resources.GetString("label30.ToolTip"));
             // 
             // label31
             // 
             resources.ApplyResources(this.label31, "label31");
             this.label31.Name = "label31";
-            this.toolTip1.SetToolTip(this.label31, resources.GetString("label31.ToolTip"));
             // 
             // replacedPattern4Box
             // 
             resources.ApplyResources(this.replacedPattern4Box, "replacedPattern4Box");
             this.replacedPattern4Box.Name = "replacedPattern4Box";
-            this.toolTip1.SetToolTip(this.replacedPattern4Box, resources.GetString("replacedPattern4Box.ToolTip"));
             // 
             // label32
             // 
             resources.ApplyResources(this.label32, "label32");
             this.label32.Name = "label32";
-            this.toolTip1.SetToolTip(this.label32, resources.GetString("label32.ToolTip"));
             // 
             // searchedPattern4Box
             // 
             resources.ApplyResources(this.searchedPattern4Box, "searchedPattern4Box");
             this.searchedPattern4Box.Name = "searchedPattern4Box";
-            this.toolTip1.SetToolTip(this.searchedPattern4Box, resources.GetString("searchedPattern4Box.ToolTip"));
             // 
             // groupBox5
             // 
@@ -887,7 +815,6 @@
             this.groupBox5.Controls.Add(this.tableLayoutPanel7);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.TabStop = false;
-            this.toolTip1.SetToolTip(this.groupBox5, resources.GetString("groupBox5.ToolTip"));
             // 
             // tableLayoutPanel7
             // 
@@ -903,13 +830,11 @@
             this.tableLayoutPanel7.Controls.Add(this.label36, 2, 0);
             this.tableLayoutPanel7.Controls.Add(this.searchedPattern5Box, 1, 0);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
-            this.toolTip1.SetToolTip(this.tableLayoutPanel7, resources.GetString("tableLayoutPanel7.ToolTip"));
             // 
             // label33
             // 
             resources.ApplyResources(this.label33, "label33");
             this.label33.Name = "label33";
-            this.toolTip1.SetToolTip(this.label33, resources.GetString("label33.ToolTip"));
             // 
             // replacedTag5List
             // 
@@ -918,7 +843,6 @@
             this.replacedTag5List.DropDownWidth = 250;
             this.replacedTag5List.FormattingEnabled = true;
             this.replacedTag5List.Name = "replacedTag5List";
-            this.toolTip1.SetToolTip(this.replacedTag5List, resources.GetString("replacedTag5List.ToolTip"));
             // 
             // searchedTag5List
             // 
@@ -927,50 +851,42 @@
             this.searchedTag5List.DropDownWidth = 250;
             this.searchedTag5List.FormattingEnabled = true;
             this.searchedTag5List.Name = "searchedTag5List";
-            this.toolTip1.SetToolTip(this.searchedTag5List, resources.GetString("searchedTag5List.ToolTip"));
             // 
             // label34
             // 
             resources.ApplyResources(this.label34, "label34");
             this.label34.Name = "label34";
-            this.toolTip1.SetToolTip(this.label34, resources.GetString("label34.ToolTip"));
             // 
             // label35
             // 
             resources.ApplyResources(this.label35, "label35");
             this.label35.Name = "label35";
-            this.toolTip1.SetToolTip(this.label35, resources.GetString("label35.ToolTip"));
             // 
             // replacedPattern5Box
             // 
             resources.ApplyResources(this.replacedPattern5Box, "replacedPattern5Box");
             this.replacedPattern5Box.Name = "replacedPattern5Box";
-            this.toolTip1.SetToolTip(this.replacedPattern5Box, resources.GetString("replacedPattern5Box.ToolTip"));
             // 
             // label36
             // 
             resources.ApplyResources(this.label36, "label36");
             this.label36.Name = "label36";
-            this.toolTip1.SetToolTip(this.label36, resources.GetString("label36.ToolTip"));
             // 
             // searchedPattern5Box
             // 
             resources.ApplyResources(this.searchedPattern5Box, "searchedPattern5Box");
             this.searchedPattern5Box.Name = "searchedPattern5Box";
-            this.toolTip1.SetToolTip(this.searchedPattern5Box, resources.GetString("searchedPattern5Box.ToolTip"));
             // 
             // customizedByUserCheckBox
             // 
             resources.ApplyResources(this.customizedByUserCheckBox, "customizedByUserCheckBox");
             this.customizedByUserCheckBox.Name = "customizedByUserCheckBox";
-            this.toolTip1.SetToolTip(this.customizedByUserCheckBox, resources.GetString("customizedByUserCheckBox.ToolTip"));
             this.customizedByUserCheckBox.UseVisualStyleBackColor = true;
             // 
             // removePresetCheckBox
             // 
             resources.ApplyResources(this.removePresetCheckBox, "removePresetCheckBox");
             this.removePresetCheckBox.Name = "removePresetCheckBox";
-            this.toolTip1.SetToolTip(this.removePresetCheckBox, resources.GetString("removePresetCheckBox.ToolTip"));
             this.removePresetCheckBox.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel1
@@ -1001,7 +917,6 @@
             this.tableLayoutPanel1.Controls.Add(this.label27, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.parameterTag5TypeList, 1, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.toolTip1.SetToolTip(this.tableLayoutPanel1, resources.GetString("tableLayoutPanel1.ToolTip"));
             // 
             // tableLayoutPanel2
             // 
@@ -1015,7 +930,6 @@
             this.tableLayoutPanel2.Controls.Add(this.customText4Box, 3, 1);
             this.tableLayoutPanel2.Controls.Add(this.customText4CheckBox, 2, 1);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.toolTip1.SetToolTip(this.tableLayoutPanel2, resources.GetString("tableLayoutPanel2.ToolTip"));
             // 
             // ASRPresetEditor
             // 
@@ -1023,6 +937,7 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
+            this.Controls.Add(this.nameBox);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.removePresetCheckBox);
@@ -1044,11 +959,9 @@
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.descriptionBox);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.nameBox);
             this.Controls.Add(this.label1);
             this.MinimizeBox = false;
             this.Name = "ASRPresetEditor";
-            this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.groupBox1.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();

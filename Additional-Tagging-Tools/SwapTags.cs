@@ -1,25 +1,18 @@
 ﻿using System;
 using System.Windows.Forms;
+using static MusicBeePlugin.Plugin;
 
 namespace MusicBeePlugin
 {
     public partial class SwapTagsCommand : PluginWindowTemplate
     {
-        private Plugin.MetaDataType sourceTagId;
-        private Plugin.MetaDataType destinationTagId;
+        private MetaDataType sourceTagId;
+        private MetaDataType destinationTagId;
         private string[] files = new string[0];
 
-        public SwapTagsCommand()
+        public SwapTagsCommand(Plugin tagToolsPluginParam) : base(tagToolsPluginParam)
         {
             InitializeComponent();
-        }
-
-        public SwapTagsCommand(Plugin tagToolsPluginParam)
-        {
-            InitializeComponent();
-
-            TagToolsPlugin = tagToolsPluginParam;
-
             initializeForm();
         }
 
@@ -27,13 +20,13 @@ namespace MusicBeePlugin
         {
             base.initializeForm();
 
-            Plugin.FillListByTagNames(sourceTagList.Items);
-            sourceTagList.Text = Plugin.SavedSettings.swapTagsSourceTagName;
+            FillListByTagNames(sourceTagList.Items);
+            sourceTagList.Text = SavedSettings.swapTagsSourceTagName;
 
-            Plugin.FillListByTagNames(destinationTagList.Items);
-            destinationTagList.Text = Plugin.SavedSettings.swapTagsDestinationTagName;
+            FillListByTagNames(destinationTagList.Items);
+            destinationTagList.Text = SavedSettings.swapTagsDestinationTagName;
 
-            smartOperationCheckBox.Checked = Plugin.SavedSettings.smartOperation;
+            smartOperationCheckBox.Checked = SavedSettings.smartOperation;
         }
 
         private bool prepareBackgroundTask()
@@ -41,16 +34,16 @@ namespace MusicBeePlugin
             if (backgroundTaskIsWorking())
                 return true;
 
-            sourceTagId = Plugin.GetTagId(sourceTagList.Text);
-            destinationTagId = Plugin.GetTagId(destinationTagList.Text);
+            sourceTagId = GetTagId(sourceTagList.Text);
+            destinationTagId = GetTagId(destinationTagList.Text);
 
             files = null;
-            if (!Plugin.MbApiInterface.Library_QueryFilesEx("domain=SelectedFiles", out files))
+            if (!MbApiInterface.Library_QueryFilesEx("domain=SelectedFiles", out files))
                 files = new string[0];
 
             if (files.Length == 0)
             {
-                MessageBox.Show(this, Plugin.MsgNoFilesSelected, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, MsgNoFilesSelected, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
             else
@@ -64,7 +57,7 @@ namespace MusicBeePlugin
             string currentFile;
             string sourceTagValue;
             string destinationTagValue;
-            Plugin.SwappedTags swappedTags;
+            SwappedTags swappedTags;
 
             for (int fileCounter = 0; fileCounter < files.Length; fileCounter++)
             {
@@ -73,30 +66,30 @@ namespace MusicBeePlugin
 
                 currentFile = files[fileCounter];
 
-                Plugin.SetStatusbarTextForFileOperations(Plugin.SwapTagsCommandSbText, false, fileCounter, files.Length, currentFile);
+                SetStatusbarTextForFileOperations(SwapTagsCommandSbText, false, fileCounter, files.Length, currentFile);
 
-                sourceTagValue = Plugin.GetFileTag(currentFile, sourceTagId);
-                destinationTagValue = Plugin.GetFileTag(currentFile, destinationTagId);
+                sourceTagValue = GetFileTag(currentFile, sourceTagId);
+                destinationTagValue = GetFileTag(currentFile, destinationTagId);
 
-                swappedTags = Plugin.SwapTags(sourceTagValue, destinationTagValue, sourceTagId, destinationTagId, smartOperationCheckBox.Checked);
+                swappedTags = SwapTags(sourceTagValue, destinationTagValue, sourceTagId, destinationTagId, smartOperationCheckBox.Checked);
 
                 if (sourceTagId != destinationTagId)
-                    Plugin.SetFileTag(currentFile, destinationTagId, swappedTags.newDestinationTagValue);
+                    SetFileTag(currentFile, destinationTagId, swappedTags.newDestinationTagValue);
 
-                Plugin.SetFileTag(currentFile, sourceTagId, swappedTags.newSourceTagValue);
-                Plugin.CommitTagsToFile(currentFile);
+                SetFileTag(currentFile, sourceTagId, swappedTags.newSourceTagValue);
+                CommitTagsToFile(currentFile);
             }
 
-            Plugin.RefreshPanels(true);
+            RefreshPanels(true);
 
-            Plugin.SetResultingSbText();
+            SetResultingSbText();
         }
 
         private void saveSettings()
         {
-            Plugin.SavedSettings.swapTagsSourceTagName = sourceTagList.Text;
-            Plugin.SavedSettings.swapTagsDestinationTagName = destinationTagList.Text;
-            Plugin.SavedSettings.smartOperation = smartOperationCheckBox.Checked;
+            SavedSettings.swapTagsSourceTagName = sourceTagList.Text;
+            SavedSettings.swapTagsDestinationTagName = destinationTagList.Text;
+            SavedSettings.smartOperation = smartOperationCheckBox.Checked;
 
             TagToolsPlugin.SaveSettings();
         }
@@ -104,16 +97,16 @@ namespace MusicBeePlugin
         private void buttonOK_Click(object sender, EventArgs e)
         {
             if (sourceTagList.Text == destinationTagList.Text)
-                if (!smartOperationCheckBox.Checked || !(Plugin.GetTagId(sourceTagList.Text) == Plugin.ArtistArtistsId || Plugin.GetTagId(sourceTagList.Text) == Plugin.ComposerComposersId))
+                if (!smartOperationCheckBox.Checked || !(GetTagId(sourceTagList.Text) == ArtistArtistsId || GetTagId(sourceTagList.Text) == ComposerComposersId))
                 {
-                    MessageBox.Show(this, Plugin.MsgSwapTagsSourceAndDestinationTagsAreTheSame, 
+                    MessageBox.Show(this, MsgSwapTagsSourceAndDestinationTagsAreTheSame, 
                         null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
 
             saveSettings();
             if (prepareBackgroundTask())
-                switchOperation(swapTags, (Button)sender, buttonOK, Plugin.EmptyButton, buttonCancel, true, null);
+                switchOperation(swapTags, (Button)sender, buttonOK, EmptyButton, buttonCancel, true, null);
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)

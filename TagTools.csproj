@@ -99,6 +99,7 @@
     <Compile Include="Additional-Tagging-Tools\AdvancedSearchAndReplace.Designer.cs">
       <DependentUpon>AdvancedSearchAndReplace.cs</DependentUpon>
     </Compile>
+    <Compile Include="Additional-Tagging-Tools\PasteTagsFromClipboard.cs" />
     <Compile Include="Additional-Tagging-Tools\CustomControls.cs" />
     <Compile Include="Additional-Tagging-Tools\ImagingAndColoring.cs" />
     <Compile Include="Additional-Tagging-Tools\ASRPresetEditor.cs">
@@ -150,12 +151,6 @@
     <Compile Include="Additional-Tagging-Tools\ReencodeTag.designer.cs">
       <DependentUpon>ReencodeTag.cs</DependentUpon>
     </Compile>
-    <Compile Include="Additional-Tagging-Tools\SelectTags.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Additional-Tagging-Tools\SelectTags.Designer.cs">
-      <DependentUpon>SelectTags.cs</DependentUpon>
-    </Compile>
     <Compile Include="Additional-Tagging-Tools\CompareTracks.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -168,6 +163,12 @@
     <Compile Include="Additional-Tagging-Tools\SaveLastSkipped.Designer.cs">
       <DependentUpon>SaveLastSkipped.cs</DependentUpon>
     </Compile>
+    <Compile Include="Additional-Tagging-Tools\SettingsQuick.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Additional-Tagging-Tools\SettingsQuick.Designer.cs">
+      <DependentUpon>SettingsQuick.cs</DependentUpon>
+    </Compile>
     <Compile Include="Additional-Tagging-Tools\TagHistory.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -179,12 +180,6 @@
     </Compile>
     <Compile Include="Additional-Tagging-Tools\MultiplePastingQuestion.Designer.cs">
       <DependentUpon>MultiplePastingQuestion.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Additional-Tagging-Tools\PasteTagsFromClipboard.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Additional-Tagging-Tools\PasteTagsFromClipboard.Designer.cs">
-      <DependentUpon>PasteTagsFromClipboard.cs</DependentUpon>
     </Compile>
     <Compile Include="Additional-Tagging-Tools\CopyTagsToClipboard.cs">
       <SubType>Form</SubType>
@@ -332,13 +327,6 @@
       <DependentUpon>ReencodeTag.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Additional-Tagging-Tools\SelectTags.resx">
-      <DependentUpon>SelectTags.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Additional-Tagging-Tools\SelectTags.ru.resx">
-      <DependentUpon>SelectTags.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Additional-Tagging-Tools\CompareTracks.resx">
       <DependentUpon>CompareTracks.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -353,6 +341,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Additional-Tagging-Tools\SaveLastSkipped.ru.resx">
       <DependentUpon>SaveLastSkipped.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Additional-Tagging-Tools\SettingsQuick.resx">
+      <DependentUpon>SettingsQuick.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Additional-Tagging-Tools\SettingsQuick.ru.resx">
+      <DependentUpon>SettingsQuick.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Additional-Tagging-Tools\TagHistory.resx">
       <DependentUpon>TagHistory.cs</DependentUpon>
@@ -373,10 +369,6 @@
       <DependentUpon>MultiplePastingQuestion.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Additional-Tagging-Tools\PasteTagsFromClipboard.resx">
-      <DependentUpon>PasteTagsFromClipboard.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Additional-Tagging-Tools\CopyTagsToClipboard.resx">
       <DependentUpon>CopyTagsToClipboard.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -392,9 +384,6 @@
     <EmbeddedResource Include="Additional-Tagging-Tools\LibraryReports.resx">
       <DependentUpon>LibraryReports.cs</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Additional-Tagging-Tools\PasteTagsFromClipboard.ru.resx">
-      <DependentUpon>PasteTagsFromClipboard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -453,6 +442,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Docs\OnSelectedFilesChanged Event.txt" />
+    <None Include="Properties\Resources\warning-12b.png" />
+    <None Include="Properties\Resources\gear-15.png" />
+    <None Include="Properties\Resources\gear-15-flat.png" />
+    <None Include="Properties\Resources\clear-button-15-flat.png" />
     <Content Include="Sources\Ready Icons 16x16px\auto-applied-presets.png" />
     <Content Include="Sources\Ready Icons 16x16px\check-mark.png" />
     <Content Include="Sources\Ready Icons 16x16px\clear-button-15.png" />
@@ -462,15 +455,15 @@
     <Content Include="Sources\Ready Icons 16x16px\MissingArtwork.png" />
     <Content Include="Sources\Ready Icons 16x16px\playlist-presets.png" />
     <Content Include="Sources\Ready Icons 16x16px\predefined-presets.png" />
-    <Content Include="Sources\Ready Icons 16x16px\Search.png" />
+    <Content Include="Sources\Ready Icons 16x16px\search.png" />
     <Content Include="Sources\Ready Icons 16x16px\set-button-15.png" />
-    <Content Include="Sources\Ready Icons 16x16px\Transparent-24x24 !.png" />
+    <Content Include="Sources\Ready Icons 16x16px\transparent-24x24 !.png" />
     <Content Include="Sources\Ready Icons 16x16px\uncheck-all-preset-filters.png" />
     <Content Include="Sources\Ready Icons 16x16px\uncheck-mark.png" />
     <Content Include="Sources\Ready Icons 16x16px\user-presets.png" />
-    <Content Include="Sources\Ready Icons 16x16px\Warning-15-Flat.png" />
-    <Content Include="Sources\Ready Icons 16x16px\Warning-15.png" />
-    <Content Include="Sources\Ready Icons 16x16px\Window.png" />
+    <Content Include="Sources\Ready Icons 16x16px\warning-15-flat.png" />
+    <Content Include="Sources\Ready Icons 16x16px\warning-15.png" />
+    <Content Include="Sources\Ready Icons 16x16px\window.png" />
     <Content Include="Sources\Ready Icons 24x24px\auto-applied-presets.png" />
     <Content Include="Sources\Ready Icons 24x24px\check-mark.png" />
     <Content Include="Sources\Ready Icons 24x24px\clear-button-15.png" />
@@ -480,15 +473,15 @@
     <Content Include="Sources\Ready Icons 24x24px\MissingArtwork.png" />
     <Content Include="Sources\Ready Icons 24x24px\playlist-presets.png" />
     <Content Include="Sources\Ready Icons 24x24px\predefined-presets.png" />
-    <Content Include="Sources\Ready Icons 24x24px\Search.png" />
+    <Content Include="Sources\Ready Icons 24x24px\search.png" />
     <Content Include="Sources\Ready Icons 24x24px\set-button-15.png" />
-    <Content Include="Sources\Ready Icons 24x24px\Transparent-24x24 !.png" />
+    <Content Include="Sources\Ready Icons 24x24px\transparent-24x24 !.png" />
     <Content Include="Sources\Ready Icons 24x24px\uncheck-all-preset-filters.png" />
     <Content Include="Sources\Ready Icons 24x24px\uncheck-mark.png" />
     <Content Include="Sources\Ready Icons 24x24px\user-presets.png" />
-    <Content Include="Sources\Ready Icons 24x24px\Warning-15-Flat.png" />
-    <Content Include="Sources\Ready Icons 24x24px\Warning-15.png" />
-    <Content Include="Sources\Ready Icons 24x24px\Window.png" />
+    <Content Include="Sources\Ready Icons 24x24px\warning-15-flat.png" />
+    <Content Include="Sources\Ready Icons 24x24px\warning-15.png" />
+    <Content Include="Sources\Ready Icons 24x24px\window.png" />
     <Content Include="Sources\Ready Icons 32x32px\auto-applied-presets.png" />
     <Content Include="Sources\Ready Icons 32x32px\check-mark.png" />
     <Content Include="Sources\Ready Icons 32x32px\clear-button-15.png" />
@@ -498,15 +491,15 @@
     <Content Include="Sources\Ready Icons 32x32px\MissingArtwork.png" />
     <Content Include="Sources\Ready Icons 32x32px\playlist-presets.png" />
     <Content Include="Sources\Ready Icons 32x32px\predefined-presets.png" />
-    <Content Include="Sources\Ready Icons 32x32px\Search.png" />
+    <Content Include="Sources\Ready Icons 32x32px\search.png" />
     <Content Include="Sources\Ready Icons 32x32px\set-button-15.png" />
-    <Content Include="Sources\Ready Icons 32x32px\Transparent-32x32 !.png" />
+    <Content Include="Sources\Ready Icons 32x32px\transparent-32x32 !.png" />
     <Content Include="Sources\Ready Icons 32x32px\uncheck-all-preset-filters.png" />
     <Content Include="Sources\Ready Icons 32x32px\uncheck-mark.png" />
     <Content Include="Sources\Ready Icons 32x32px\user-presets.png" />
-    <Content Include="Sources\Ready Icons 32x32px\Warning-15-Flat.png" />
-    <Content Include="Sources\Ready Icons 32x32px\Warning-15.png" />
-    <Content Include="Sources\Ready Icons 32x32px\Window.png" />
+    <Content Include="Sources\Ready Icons 32x32px\warning-15-flat.png" />
+    <Content Include="Sources\Ready Icons 32x32px\warning-15.png" />
+    <Content Include="Sources\Ready Icons 32x32px\window.png" />
     <Content Include="Sources\Ready Icons 40x40px !\auto-applied-presets.png" />
     <Content Include="Sources\Ready Icons 40x40px !\check-mark.png" />
     <Content Include="Sources\Ready Icons 40x40px !\clear-button-15.png" />
@@ -516,7 +509,7 @@
     <Content Include="Sources\Ready Icons 40x40px !\MissingArtwork.png" />
     <Content Include="Sources\Ready Icons 40x40px !\playlist-presets.png" />
     <Content Include="Sources\Ready Icons 40x40px !\predefined-presets.png" />
-    <Content Include="Sources\Ready Icons 40x40px !\Search.png" />
+    <Content Include="Sources\Ready Icons 40x40px !\search.png" />
     <Content Include="Sources\Ready Icons 40x40px !\separator.png" />
     <Content Include="Sources\Ready Icons 40x40px !\set-button-15.png" />
     <Content Include="Sources\Ready Icons 40x40px !\transparent-15.png" />
@@ -530,9 +523,9 @@
     <Content Include="Sources\Ready Icons 40x40px !\variants\predefined-presets - down.png" />
     <Content Include="Sources\Ready Icons 40x40px !\variants\predefined-presets - middle !.png" />
     <Content Include="Sources\Ready Icons 40x40px !\variants\predefined-presets - up.png" />
-    <Content Include="Sources\Ready Icons 40x40px !\Warning-15-Flat.png" />
-    <Content Include="Sources\Ready Icons 40x40px !\Warning-15.png" />
-    <Content Include="Sources\Ready Icons 40x40px !\Window.png" />
+    <Content Include="Sources\Ready Icons 40x40px !\warning-15-flat.png" />
+    <Content Include="Sources\Ready Icons 40x40px !\warning-15.png" />
+    <Content Include="Sources\Ready Icons 40x40px !\window.png" />
     <Content Include="Sources\Ready Icons 90x90px\auto-applied-presets.png" />
     <Content Include="Sources\Ready Icons 90x90px\check-mark.png" />
     <Content Include="Sources\Ready Icons 90x90px\clear-button-15.png" />
@@ -542,25 +535,26 @@
     <Content Include="Sources\Ready Icons 90x90px\MissingArtwork.png" />
     <Content Include="Sources\Ready Icons 90x90px\playlist-presets.png" />
     <Content Include="Sources\Ready Icons 90x90px\predefined-presets.png" />
-    <Content Include="Sources\Ready Icons 90x90px\Search.png" />
+    <Content Include="Sources\Ready Icons 90x90px\search.png" />
     <Content Include="Sources\Ready Icons 90x90px\set-button-15.png" />
     <Content Include="Sources\Ready Icons 90x90px\transparent-15.png" />
     <Content Include="Sources\Ready Icons 90x90px\uncheck-all-preset-filters.png" />
     <Content Include="Sources\Ready Icons 90x90px\uncheck-mark.png" />
     <Content Include="Sources\Ready Icons 90x90px\user-presets.png" />
-    <Content Include="Sources\Ready Icons 90x90px\Warning-15-Flat.png" />
-    <Content Include="Sources\Ready Icons 90x90px\Warning-15.png" />
-    <Content Include="Sources\Ready Icons 90x90px\Window.png" />
-    <Content Include="Sources\UnsavedChanges-14.png" />
-    <Content Include="Sources\Warning-15-Flat.png" />
-    <Content Include="Sources\Warning-15.png" />
-    <Content Include="Sources\Warning-48.png" />
-    <Content Include="Sources\Warning.ico" />
+    <Content Include="Sources\Ready Icons 90x90px\warning-15-flat.png" />
+    <Content Include="Sources\Ready Icons 90x90px\warning-15.png" />
+    <Content Include="Sources\Ready Icons 90x90px\window.png" />
+    <Content Include="Sources\unsaved-changes-14.png" />
+    <Content Include="Sources\warning-12b.png" />
+    <Content Include="Sources\warning-15-flat.png" />
+    <Content Include="Sources\warning-15.png" />
+    <Content Include="Sources\warning-48.png" />
+    <Content Include="Sources\warning.ico" />
     <None Include="Properties\Resources\transparent-15.png" />
     <None Include="Properties\Resources\set-button-15.png" />
     <None Include="Properties\Resources\clear-button-15.png" />
-    <None Include="Properties\Resources\Warning-15-Flat.png" />
-    <None Include="Properties\Resources\Warning-15.png" />
+    <None Include="Properties\Resources\warning-15-flat.png" />
+    <None Include="Properties\Resources\warning-15.png" />
     <None Include="Properties\Resources\uncheck-mark.png" />
     <None Include="Properties\Resources\uncheck-all-preset-filters.png" />
     <None Include="Properties\Resources\hotkey-presets.png" />
@@ -571,8 +565,8 @@
     <None Include="Properties\Resources\predefined-presets.png" />
     <None Include="Properties\Resources\auto-applied-presets.png" />
     <None Include="Properties\Resources\check-mark.png" />
-    <None Include="Properties\Resources\Window.png" />
-    <None Include="Properties\Resources\Search.png" />
+    <None Include="Properties\Resources\window.png" />
+    <None Include="Properties\Resources\search.png" />
     <None Include="Properties\Resources\MissingArtwork.png" />
     <Content Include="Additional-Tagging-Tools\Wrench.ico" />
   </ItemGroup>

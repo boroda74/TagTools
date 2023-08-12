@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChangeCaseCommand));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
             this.mainLabel = new System.Windows.Forms.Label();
@@ -59,6 +58,7 @@
             this.wordSplittersCheckBox = new System.Windows.Forms.CheckBox();
             this.onlyWordsCheckBox = new System.Windows.Forms.CheckBox();
             this.dirtyErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.buttonSettings = new System.Windows.Forms.Button();
             this.exceptionWordsBox = new System.Windows.Forms.ComboBox();
             this.alwaysCapitalize1stWordCheckBox = new System.Windows.Forms.CheckBox();
             this.alwaysCapitalizeLastWordCheckBox = new System.Windows.Forms.CheckBox();
@@ -145,7 +145,7 @@
             this.sentenceCaseRadioButton.TabStop = true;
             this.toolTip1.SetToolTip(this.sentenceCaseRadioButton, resources.GetString("sentenceCaseRadioButton.ToolTip"));
             this.sentenceCaseRadioButton.UseVisualStyleBackColor = true;
-            this.sentenceCaseRadioButton.CheckedChanged += new System.EventHandler(this.sentenceCaseRadioButton_CheckedChanged);
+            this.sentenceCaseRadioButton.CheckedChanged += new System.EventHandler(this.casingRuleRadioButton_CheckedChanged);
             // 
             // lowerCaseRadioButton
             // 
@@ -156,6 +156,7 @@
             this.lowerCaseRadioButton.Name = "lowerCaseRadioButton";
             this.toolTip1.SetToolTip(this.lowerCaseRadioButton, resources.GetString("lowerCaseRadioButton.ToolTip"));
             this.lowerCaseRadioButton.UseVisualStyleBackColor = true;
+            this.lowerCaseRadioButton.CheckedChanged += new System.EventHandler(this.casingRuleRadioButton_CheckedChanged);
             // 
             // upperCaseRadioButton
             // 
@@ -166,6 +167,7 @@
             this.upperCaseRadioButton.Name = "upperCaseRadioButton";
             this.toolTip1.SetToolTip(this.upperCaseRadioButton, resources.GetString("upperCaseRadioButton.ToolTip"));
             this.upperCaseRadioButton.UseVisualStyleBackColor = true;
+            this.upperCaseRadioButton.CheckedChanged += new System.EventHandler(this.casingRuleRadioButton_CheckedChanged);
             // 
             // titleCaseRadioButton
             // 
@@ -176,6 +178,7 @@
             this.titleCaseRadioButton.Name = "titleCaseRadioButton";
             this.toolTip1.SetToolTip(this.titleCaseRadioButton, resources.GetString("titleCaseRadioButton.ToolTip"));
             this.titleCaseRadioButton.UseVisualStyleBackColor = true;
+            this.titleCaseRadioButton.CheckedChanged += new System.EventHandler(this.casingRuleRadioButton_CheckedChanged);
             // 
             // toggleCaseRadioButton
             // 
@@ -186,6 +189,7 @@
             this.toggleCaseRadioButton.Name = "toggleCaseRadioButton";
             this.toolTip1.SetToolTip(this.toggleCaseRadioButton, resources.GetString("toggleCaseRadioButton.ToolTip"));
             this.toggleCaseRadioButton.UseVisualStyleBackColor = true;
+            this.toggleCaseRadioButton.CheckedChanged += new System.EventHandler(this.casingRuleRadioButton_CheckedChanged);
             // 
             // exceptionCharsBox
             // 
@@ -249,8 +253,7 @@
             this.previewTable.RowHeadersVisible = false;
             this.previewTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.toolTip1.SetToolTip(this.previewTable, resources.GetString("previewTable.ToolTip"));
-            this.previewTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.previewList_CellContentClick);
-            this.previewTable.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.previewList_CellFormatting);
+            this.previewTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.previewTable_CellContentClick);
             // 
             // File
             // 
@@ -284,9 +287,6 @@
             // 
             // NewTagT
             // 
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.NewTagT.DefaultCellStyle = dataGridViewCellStyle1;
             this.NewTagT.FillWeight = 25F;
             resources.ApplyResources(this.NewTagT, "NewTagT");
             this.NewTagT.Name = "NewTagT";
@@ -351,6 +351,18 @@
             this.dirtyErrorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.dirtyErrorProvider.ContainerControl = this;
             resources.ApplyResources(this.dirtyErrorProvider, "dirtyErrorProvider");
+            // 
+            // buttonSettings
+            // 
+            resources.ApplyResources(this.buttonSettings, "buttonSettings");
+            this.dirtyErrorProvider.SetError(this.buttonSettings, resources.GetString("buttonSettings.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.buttonSettings, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonSettings.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.buttonSettings, ((int)(resources.GetObject("buttonSettings.IconPadding"))));
+            this.buttonSettings.Image = global::MusicBeePlugin.Properties.Resources.gear_15;
+            this.buttonSettings.Name = "buttonSettings";
+            this.toolTip1.SetToolTip(this.buttonSettings, resources.GetString("buttonSettings.ToolTip"));
+            this.buttonSettings.UseVisualStyleBackColor = true;
+            this.buttonSettings.Click += new System.EventHandler(this.buttonSettings_Click);
             // 
             // exceptionWordsBox
             // 
@@ -468,9 +480,9 @@
             // 
             // dataGridViewTextBoxColumn6
             // 
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewTextBoxColumn6.FillWeight = 25F;
             resources.ApplyResources(this.dataGridViewTextBoxColumn6, "dataGridViewTextBoxColumn6");
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
@@ -481,6 +493,7 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
+            this.Controls.Add(this.buttonSettings);
             this.Controls.Add(this.buttonASRWordSplitters);
             this.Controls.Add(this.buttonASRExceptWordsAfterSymbols);
             this.Controls.Add(this.buttonASRExceptedWords);
@@ -550,15 +563,16 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.Button removeExceptionButton;
+        private System.Windows.Forms.Button buttonASRExceptedWords;
+        private System.Windows.Forms.Button buttonASRExceptWordsAfterSymbols;
+        private System.Windows.Forms.Button buttonASRWordSplitters;
         private System.Windows.Forms.DataGridViewTextBoxColumn File;
         private System.Windows.Forms.DataGridViewTextBoxColumn Track;
         private System.Windows.Forms.DataGridViewTextBoxColumn OriginalTag;
         private System.Windows.Forms.DataGridViewTextBoxColumn OriginalTagT;
         private System.Windows.Forms.DataGridViewTextBoxColumn NewTag;
         private System.Windows.Forms.DataGridViewTextBoxColumn NewTagT;
-        private System.Windows.Forms.Button removeExceptionButton;
-        private System.Windows.Forms.Button buttonASRExceptedWords;
-        private System.Windows.Forms.Button buttonASRExceptWordsAfterSymbols;
-        private System.Windows.Forms.Button buttonASRWordSplitters;
+        private System.Windows.Forms.Button buttonSettings;
     }
 }

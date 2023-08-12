@@ -122,7 +122,7 @@
             this.previewTable.Name = "previewTable";
             this.previewTable.RowHeadersVisible = false;
             this.previewTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.previewTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.previewList_CellContentClick);
+            this.previewTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.previewTable_CellContentClick);
             this.previewTable.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.previewTable_CellContentDoubleClick);
             // 
             // File

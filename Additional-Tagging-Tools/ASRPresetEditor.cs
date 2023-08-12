@@ -1,29 +1,37 @@
-﻿using System;
+﻿using MusicBeePlugin.Properties;
+using System;
 using System.Diagnostics;
 using System.Windows.Forms;
+using static MusicBeePlugin.AdvancedSearchAndReplaceCommand;
+using static MusicBeePlugin.Plugin;
 
 namespace MusicBeePlugin
 {
     public partial class ASRPresetEditor : PluginWindowTemplate
     { 
-        private AdvancedSearchAndReplaceCommand.Preset preset;
+        private Preset preset;
         private bool settingsSaved = false;
-        private string currentLanguage = "";
-        private AdvancedSearchAndReplaceCommand asrPlugin;
+        private string currentLanguage;
+        private static string WritableAllTagsLocalizedItem;
 
-        public ASRPresetEditor()
-        {
-            InitializeComponent();
-        }
-
-        public ASRPresetEditor(Plugin tagToolsPluginParam, AdvancedSearchAndReplaceCommand asrPluginParam)
+        public ASRPresetEditor(Plugin tagToolsPluginParam) : base(tagToolsPluginParam)
         {
             InitializeComponent();
 
-            TagToolsPlugin = tagToolsPluginParam;
-            asrPlugin = asrPluginParam;
+            WritableAllTagsLocalizedItem = parameterTagTypeList.Items[3].ToString();
 
             initializeForm();
+        }
+
+        protected new void initializeForm()
+        {
+            base.initializeForm();
+
+            if (Language == "ru")
+            {
+                tableLayoutPanel1.ColumnStyles[1].Width = 167;
+                tableLayoutPanel1.ColumnStyles[5].Width = 167;
+            }
         }
 
         private void makeReadonly(Control parent)
@@ -59,7 +67,7 @@ namespace MusicBeePlugin
             }
         }
 
-        public bool editPreset(ref AdvancedSearchAndReplaceCommand.Preset presetParam, bool readOnly)
+        public bool editPreset(Preset presetParam, bool readOnly)
         {
             preset = presetParam;
 
@@ -74,11 +82,14 @@ namespace MusicBeePlugin
             guidBox.Text = preset.guid.ToString();
             modifiedBox.Text = preset.modifiedUtc.ToLocalTime().ToString();
             userPresetCheckBox.Checked = preset.userPreset;
-            userPresetCheckBox.Enabled = Plugin.DeveloperMode;
+            userPresetCheckBox.Enabled = DeveloperMode;
             removePresetCheckBox.Checked = preset.removePreset;
-            removePresetCheckBox.Visible = Plugin.DeveloperMode;
+            removePresetCheckBox.Visible = DeveloperMode;
             customizedByUserCheckBox.Checked = preset.customizedByUser;
-            customizedByUserCheckBox.Enabled = Plugin.DeveloperMode;
+            customizedByUserCheckBox.Enabled = DeveloperMode;
+
+
+            currentLanguage = null;
 
             bool englishIsAvailable = false;
             bool nativeLanguageIsAvailable = false;
@@ -87,39 +98,46 @@ namespace MusicBeePlugin
             {
                 languages.Items.Add(language);
 
-                if (language == Plugin.Language)
+                if (language == Language)
                     nativeLanguageIsAvailable = true;
 
                 if (language == "en")
                     englishIsAvailable = true;
             }
 
+            if (!nativeLanguageIsAvailable)
+                languages.Items.Add(Language);
+
             if (!englishIsAvailable)
-            {
                 languages.Items.Add("en");
 
-                if (Plugin.Language == "en")
-                    nativeLanguageIsAvailable = true;
-            }
+            if (nativeLanguageIsAvailable)
+                currentLanguage = Language;
+            else if (englishIsAvailable)
+                currentLanguage = "en";
+            else
+                currentLanguage = (string)languages.Items[0];
 
-            if (!nativeLanguageIsAvailable)
-                languages.Items.Add(Plugin.Language);
+            nameBox.Text = GetDictValue(preset.names, currentLanguage);
+            descriptionBox.Text = GetDictValue(preset.descriptions, currentLanguage);
 
-
-            parameterTagTypeList.SelectedIndex = preset.parameterTagType;
-            parameterTag2TypeList.SelectedIndex = preset.parameterTag2Type;
-            parameterTag3TypeList.SelectedIndex = preset.parameterTag3Type;
-            parameterTag4TypeList.SelectedIndex = preset.parameterTag4Type;
-            parameterTag5TypeList.SelectedIndex = preset.parameterTag5Type;
-            parameterTag6TypeList.SelectedIndex = preset.parameterTag6Type;
+            languages.SelectedItem = currentLanguage;
 
 
-            parameterTagList.Text = asrPlugin.getTagName(preset.parameterTagId);
-            parameterTag2List.Text = asrPlugin.getTagName(preset.parameterTag2Id);
-            parameterTag3List.Text = asrPlugin.getTagName(preset.parameterTag3Id);
-            parameterTag4List.Text = asrPlugin.getTagName(preset.parameterTag4Id);
-            parameterTag5List.Text = asrPlugin.getTagName(preset.parameterTag5Id);
-            parameterTag6List.Text = asrPlugin.getTagName(preset.parameterTag6Id);
+            parameterTagTypeList.SelectedIndex = (int)preset.parameterTagTypeNew;
+            parameterTag2TypeList.SelectedIndex = (int)preset.parameterTag2TypeNew;
+            parameterTag3TypeList.SelectedIndex = (int)preset.parameterTag3TypeNew;
+            parameterTag4TypeList.SelectedIndex = (int)preset.parameterTag4TypeNew;
+            parameterTag5TypeList.SelectedIndex = (int)preset.parameterTag5TypeNew;
+            parameterTag6TypeList.SelectedIndex = (int)preset.parameterTag6TypeNew;
+
+
+            parameterTagList.Text = AsrGetTagName(preset.parameterTagId);
+            parameterTag2List.Text = AsrGetTagName(preset.parameterTag2Id);
+            parameterTag3List.Text = AsrGetTagName(preset.parameterTag3Id);
+            parameterTag4List.Text = AsrGetTagName(preset.parameterTag4Id);
+            parameterTag5List.Text = AsrGetTagName(preset.parameterTag5Id);
+            parameterTag6List.Text = AsrGetTagName(preset.parameterTag6Id);
 
 
             customTextBox.Text = preset.customText;
@@ -148,18 +166,18 @@ namespace MusicBeePlugin
             replacedPattern5Box.Text = preset.replacedPattern5;
 
 
-            searchedTagList.Text = asrPlugin.getTagName(preset.searchedTagId);
-            searchedTag2List.Text = asrPlugin.getTagName(preset.searchedTag2Id);
-            searchedTag3List.Text = asrPlugin.getTagName(preset.searchedTag3Id);
-            searchedTag4List.Text = asrPlugin.getTagName(preset.searchedTag4Id);
-            searchedTag5List.Text = asrPlugin.getTagName(preset.searchedTag5Id);
+            searchedTagList.Text = AsrGetTagName(preset.searchedTagId);
+            searchedTag2List.Text = AsrGetTagName(preset.searchedTag2Id);
+            searchedTag3List.Text = AsrGetTagName(preset.searchedTag3Id);
+            searchedTag4List.Text = AsrGetTagName(preset.searchedTag4Id);
+            searchedTag5List.Text = AsrGetTagName(preset.searchedTag5Id);
 
 
-            replacedTagList.Text = asrPlugin.getTagName(preset.replacedTagId);
-            replacedTag2List.Text = asrPlugin.getTagName(preset.replacedTag2Id);
-            replacedTag3List.Text = asrPlugin.getTagName(preset.replacedTag3Id);
-            replacedTag4List.Text = asrPlugin.getTagName(preset.replacedTag4Id);
-            replacedTag5List.Text = asrPlugin.getTagName(preset.replacedTag5Id);
+            replacedTagList.Text = AsrGetTagName(preset.replacedTagId);
+            replacedTag2List.Text = AsrGetTagName(preset.replacedTag2Id);
+            replacedTag3List.Text = AsrGetTagName(preset.replacedTag3Id);
+            replacedTag4List.Text = AsrGetTagName(preset.replacedTag4Id);
+            replacedTag5List.Text = AsrGetTagName(preset.replacedTag5Id);
 
             appendCheckBox.Checked = preset.append;
             append2CheckBox.Checked = preset.append2;
@@ -167,7 +185,7 @@ namespace MusicBeePlugin
             append4CheckBox.Checked = preset.append4;
             append5CheckBox.Checked = preset.append5;
 
-            languages.Text = Plugin.Language;
+            languages.Text = Language;
 
             if (readOnly)
             {
@@ -197,8 +215,8 @@ namespace MusicBeePlugin
 
         private bool saveSettings()
         {
-            AdvancedSearchAndReplaceCommand.SetDictValue(preset.names, currentLanguage, nameBox.Text);
-            AdvancedSearchAndReplaceCommand.SetDictValue(preset.descriptions, currentLanguage, descriptionBox.Text);
+            SetDictValue(preset.names, currentLanguage, nameBox.Text);
+            SetDictValue(preset.descriptions, currentLanguage, descriptionBox.Text);
 
             preset.userPreset = userPresetCheckBox.Checked;
             preset.removePreset = removePresetCheckBox.Checked;
@@ -212,11 +230,11 @@ namespace MusicBeePlugin
             preset.searchedPattern4 = searchedPattern4Box.Text;
             preset.searchedPattern5 = searchedPattern5Box.Text;
 
-            preset.searchedTagId = asrPlugin.getTagId(searchedTagList.Text);
-            preset.searchedTag2Id = asrPlugin.getTagId(searchedTag2List.Text);
-            preset.searchedTag3Id = asrPlugin.getTagId(searchedTag3List.Text);
-            preset.searchedTag4Id = asrPlugin.getTagId(searchedTag4List.Text);
-            preset.searchedTag5Id = asrPlugin.getTagId(searchedTag5List.Text);
+            preset.searchedTagId = AsrGetTagId(searchedTagList.Text);
+            preset.searchedTag2Id = AsrGetTagId(searchedTag2List.Text);
+            preset.searchedTag3Id = AsrGetTagId(searchedTag3List.Text);
+            preset.searchedTag4Id = AsrGetTagId(searchedTag4List.Text);
+            preset.searchedTag5Id = AsrGetTagId(searchedTag5List.Text);
 
 
             preset.replacedPattern = replacedPatternBox.Text;
@@ -225,27 +243,27 @@ namespace MusicBeePlugin
             preset.replacedPattern4 = replacedPattern4Box.Text;
             preset.replacedPattern5 = replacedPattern5Box.Text;
 
-            preset.replacedTagId = asrPlugin.getTagId(replacedTagList.Text);
-            preset.replacedTag2Id = asrPlugin.getTagId(replacedTag2List.Text);
-            preset.replacedTag3Id = asrPlugin.getTagId(replacedTag3List.Text);
-            preset.replacedTag4Id = asrPlugin.getTagId(replacedTag4List.Text);
-            preset.replacedTag5Id = asrPlugin.getTagId(replacedTag5List.Text);
+            preset.replacedTagId = AsrGetTagId(replacedTagList.Text);
+            preset.replacedTag2Id = AsrGetTagId(replacedTag2List.Text);
+            preset.replacedTag3Id = AsrGetTagId(replacedTag3List.Text);
+            preset.replacedTag4Id = AsrGetTagId(replacedTag4List.Text);
+            preset.replacedTag5Id = AsrGetTagId(replacedTag5List.Text);
 
 
-            preset.parameterTagType = parameterTagTypeList.SelectedIndex;
-            preset.parameterTag2Type = parameterTag2TypeList.SelectedIndex;
-            preset.parameterTag3Type = parameterTag3TypeList.SelectedIndex;
-            preset.parameterTag4Type = parameterTag4TypeList.SelectedIndex;
-            preset.parameterTag5Type = parameterTag5TypeList.SelectedIndex;
-            preset.parameterTag6Type = parameterTag6TypeList.SelectedIndex;
+            preset.parameterTagTypeNew = (TagType)parameterTagTypeList.SelectedIndex;
+            preset.parameterTag2TypeNew = (TagType)parameterTag2TypeList.SelectedIndex;
+            preset.parameterTag3TypeNew = (TagType)parameterTag3TypeList.SelectedIndex;
+            preset.parameterTag4TypeNew = (TagType)parameterTag4TypeList.SelectedIndex;
+            preset.parameterTag5TypeNew = (TagType)parameterTag5TypeList.SelectedIndex;
+            preset.parameterTag6TypeNew = (TagType)parameterTag6TypeList.SelectedIndex;
 
 
-            preset.parameterTagId = asrPlugin.getTagId(parameterTagList.Text);
-            preset.parameterTag2Id = asrPlugin.getTagId(parameterTag2List.Text);
-            preset.parameterTag3Id = asrPlugin.getTagId(parameterTag3List.Text);
-            preset.parameterTag4Id = asrPlugin.getTagId(parameterTag4List.Text);
-            preset.parameterTag5Id = asrPlugin.getTagId(parameterTag5List.Text);
-            preset.parameterTag6Id = asrPlugin.getTagId(parameterTag6List.Text);
+            preset.parameterTagId = AsrGetTagId(parameterTagList.Text);
+            preset.parameterTag2Id = AsrGetTagId(parameterTag2List.Text);
+            preset.parameterTag3Id = AsrGetTagId(parameterTag3List.Text);
+            preset.parameterTag4Id = AsrGetTagId(parameterTag4List.Text);
+            preset.parameterTag5Id = AsrGetTagId(parameterTag5List.Text);
+            preset.parameterTag6Id = AsrGetTagId(parameterTag6List.Text);
 
 
             preset.customText = customTextBox.Text;
@@ -285,22 +303,20 @@ namespace MusicBeePlugin
 
         private void languages_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string prevName = "";
-            string prevDescription = "";
-
-            if (currentLanguage != "")
-            {
-                prevName = nameBox.Text;
-                prevDescription = descriptionBox.Text;
-
-                AdvancedSearchAndReplaceCommand.SetDictValue(preset.names, currentLanguage, prevName);
-                AdvancedSearchAndReplaceCommand.SetDictValue(preset.descriptions, currentLanguage, prevDescription);
-            }
+            if (currentLanguage == null || currentLanguage == (string)languages.SelectedItem)
+                return;
 
 
-            currentLanguage = languages.Text;
-            nameBox.Text = AdvancedSearchAndReplaceCommand.GetDictValue(preset.names, languages.Text);
-            descriptionBox.Text = AdvancedSearchAndReplaceCommand.GetDictValue(preset.descriptions, languages.Text);
+            string prevName = nameBox.Text;
+            string prevDescription = descriptionBox.Text;
+
+            SetDictValue(preset.names, currentLanguage, prevName);
+            SetDictValue(preset.descriptions, currentLanguage, prevDescription);
+
+
+            currentLanguage = (string)languages.SelectedItem;
+            nameBox.Text = GetDictValue(preset.names, currentLanguage);
+            descriptionBox.Text = GetDictValue(preset.descriptions, currentLanguage);
 
             if (nameBox.Text == "")
                 nameBox.Text = prevName;
@@ -309,42 +325,92 @@ namespace MusicBeePlugin
                 descriptionBox.Text = prevDescription;
         }
 
-        private void fillTagList(ComboBox tagList, bool tagType, int parameterType, int parameter2Type, int parameter3Type, int parameter4Type, int parameter5Type, int parameter6Type)
+        private static void FillParameterTagTypeList(TagType prevTagType, ComboBox tagTypeList)
         {
+            if (tagTypeList == null)
+                return;
+
+
+            if (prevTagType == TagType.NotUsed)
+            {
+                if (tagTypeList.SelectedIndex != 0)
+                    tagTypeList.SelectedIndex = 0;
+
+                if (tagTypeList.Items.Count == 4)
+                    tagTypeList.Items.RemoveAt(3);
+
+                tagTypeList.Enabled = false;
+            }
+            else
+            {
+                if (prevTagType == TagType.WritableAllowAllTags)
+                {
+                    if (tagTypeList.Items.Count == 3)
+                        tagTypeList.Items.Add(WritableAllTagsLocalizedItem);
+                }
+                else
+                {
+                    if (tagTypeList.SelectedIndex == 3)
+                        tagTypeList.SelectedIndex = 2;
+
+                    if (tagTypeList.Items.Count == 4)
+                        tagTypeList.Items.RemoveAt(3);
+                }
+
+                tagTypeList.Enabled = true;
+            }
+        }
+
+        private void FillTagCombobox(ComboBox tagList, bool isSearchTag) // isSearchTag: 0 - replaced tag, 1 - searched tag//*****
+        {
+            int searchFlag = isSearchTag ? 1 : 0;
             string tagName = tagList.Text;
 
             tagList.Items.Clear();
 
-            tagList.Items.Add("<" + Plugin.TempTagName + " 1>");
-            tagList.Items.Add("<" + Plugin.TempTagName + " 2>");
-            tagList.Items.Add("<" + Plugin.TempTagName + " 3>");
-            tagList.Items.Add("<" + Plugin.TempTagName + " 4>");
 
-            Plugin.FillListByTagNames(tagList.Items, tagType); // tagType: true - read only, false - writable
-            if (tagType)
-                Plugin.FillListByPropNames(tagList.Items);
+            // Let's add <Tag #> if either filled tag list is for search or <Tag #> is writable
+            if (parameterTagTypeList.SelectedIndex >= (int)TagType.Writable - searchFlag)
+                tagList.Items.Add("<" + ParameterTagName + " 1>");
 
-            tagList.Items.Add(Plugin.ClipboardTagName);
+            // Let's add <Tag #> if either filled tag list is for search or <Tag #> is writable
+            if (parameterTag2TypeList.SelectedIndex >= (int)TagType.Writable - searchFlag)
+                tagList.Items.Add("<" + ParameterTagName + " 2>");
 
-            if (parameterType == 1 || (parameterType == 2 && tagType))
-                tagList.Items.Add("<" + Plugin.ParameterTagName + " 1>");
+            // Let's add <Tag #> if either filled tag list is for search or <Tag #> is writable
+            if (parameterTag3TypeList.SelectedIndex >= (int)TagType.Writable - searchFlag)
+                tagList.Items.Add("<" + ParameterTagName + " 3>");
 
-            if (parameter2Type == 1 || (parameter2Type == 2 && tagType))
-                tagList.Items.Add("<" + Plugin.ParameterTagName + " 2>");
+            // Let's add <Tag #> if either filled tag list is for search or <Tag #> is writable
+            if (parameterTag4TypeList.SelectedIndex >= (int)TagType.Writable - searchFlag)
+                tagList.Items.Add("<" + ParameterTagName + " 4>");
 
-            if (parameter3Type == 1 || (parameter3Type == 2 && tagType))
-                tagList.Items.Add("<" + Plugin.ParameterTagName + " 3>");
+            // Let's add <Tag #> if either filled tag list is for search or <Tag #> is writable
+            if (parameterTag5TypeList.SelectedIndex >= (int)TagType.Writable - searchFlag)
+                tagList.Items.Add("<" + ParameterTagName + " 5>");
 
-            if (parameter4Type == 1 || (parameter4Type == 2 && tagType))
-                tagList.Items.Add("<" + Plugin.ParameterTagName + " 4>");
+            // Let's add <Tag #> if either filled tag list is for search or <Tag #> is writable
+            if (parameterTag6TypeList.SelectedIndex >= (int)TagType.Writable - searchFlag)
+                tagList.Items.Add("<" + ParameterTagName + " 6>");
 
-            if (parameter5Type == 1 || (parameter5Type == 2 && tagType))
-                tagList.Items.Add("<" + Plugin.ParameterTagName + " 5>");
 
-            if (parameter6Type == 1 || (parameter6Type == 2 && tagType))
-                tagList.Items.Add("<" + Plugin.ParameterTagName + " 6>");
+            tagList.Items.Add("<" + TempTagName + " 1>");
+            tagList.Items.Add("<" + TempTagName + " 2>");
+            tagList.Items.Add("<" + TempTagName + " 3>");
+            tagList.Items.Add("<" + TempTagName + " 4>");
 
-            tagList.Text = tagName;
+            if (isSearchTag) // It's read-only operation
+            {
+                FillListByTagNames(tagList.Items, true); // true: add read-only tags too
+                FillListByPropNames(tagList.Items);
+            }
+            else  // It's writable operation
+            {
+                FillListByTagNames(tagList.Items);
+            }
+
+            tagList.Items.Add(ClipboardTagName);
+
 
             if (tagList.Items.Contains(tagName))
                 tagList.Text = tagName;
@@ -352,75 +418,67 @@ namespace MusicBeePlugin
                 tagList.SelectedIndex = 0;
         }
 
-        private void parameterTagTypeChanged(ComboBox parameterTagTypeListParam, ComboBox parameterTagListParam, Label label, ComboBox parameterTagTypeListParam2 = null)
+        private void parameterTagTypeChanged(ComboBox parameterTagTypeListParam, Label typeLabel, ComboBox parameterTagListParam, 
+            Label label, ComboBox parameterTagTypeListParam2 = null)
         {
             string parameterTagName = parameterTagListParam.Text;
 
-            asrPlugin.fillParameterTagList(parameterTagTypeListParam.SelectedIndex, parameterTagListParam, label);
+            TagType tagType = (TagType)parameterTagTypeListParam.SelectedIndex;
 
-            if (parameterTagListParam.Items.Contains(parameterTagName))
-                parameterTagListParam.Text = parameterTagName;
-            else if (parameterTagListParam.Items.Count > 0)
-                parameterTagListParam.SelectedIndex = 0;
+            if (tagType == TagType.WritableAllowAllTags)
+                typeLabel.Image = Resources.warning_12b;
             else
-                parameterTagListParam.SelectedIndex = -1;
+                typeLabel.Image = Resources.transparent_15;
 
 
-            if (parameterTagTypeListParam2 != null)
-            {
-                if (parameterTagTypeListParam.SelectedIndex == 0) //Not used
-                {
-                    parameterTagTypeListParam2.SelectedIndex = 0;
-                    parameterTagTypeListParam2.Enabled = false;
-                }
-                else
-                {
-                    parameterTagTypeListParam2.Enabled = true;
-                }
-            }
+            FillParameterTagTypeList(tagType, parameterTagTypeListParam2);
+
+            if (tagType == TagType.WritableAllowAllTags) //Let's disable entering <ALL TAGS> pseudo-tag directly in preset editor for safety reasons !!!
+                tagType = TagType.Writable;
+            FillParameterTagList(tagType, parameterTagName, parameterTagListParam, label);
 
 
-            fillTagList(searchedTagList, true, parameterTagTypeList.SelectedIndex, parameterTag2TypeList.SelectedIndex, parameterTag3TypeList.SelectedIndex, parameterTag4TypeList.SelectedIndex, parameterTag5TypeList.SelectedIndex, parameterTag6TypeList.SelectedIndex);
-            fillTagList(searchedTag2List, true, parameterTagTypeList.SelectedIndex, parameterTag2TypeList.SelectedIndex, parameterTag3TypeList.SelectedIndex, parameterTag4TypeList.SelectedIndex, parameterTag5TypeList.SelectedIndex, parameterTag6TypeList.SelectedIndex);
-            fillTagList(searchedTag3List, true, parameterTagTypeList.SelectedIndex, parameterTag2TypeList.SelectedIndex, parameterTag3TypeList.SelectedIndex, parameterTag4TypeList.SelectedIndex, parameterTag5TypeList.SelectedIndex, parameterTag6TypeList.SelectedIndex);
-            fillTagList(searchedTag4List, true, parameterTagTypeList.SelectedIndex, parameterTag2TypeList.SelectedIndex, parameterTag3TypeList.SelectedIndex, parameterTag4TypeList.SelectedIndex, parameterTag5TypeList.SelectedIndex, parameterTag6TypeList.SelectedIndex);
-            fillTagList(searchedTag5List, true, parameterTagTypeList.SelectedIndex, parameterTag2TypeList.SelectedIndex, parameterTag3TypeList.SelectedIndex, parameterTag4TypeList.SelectedIndex, parameterTag5TypeList.SelectedIndex, parameterTag6TypeList.SelectedIndex);
+            FillTagCombobox(searchedTagList, true);
+            FillTagCombobox(searchedTag2List, true);
+            FillTagCombobox(searchedTag3List, true);
+            FillTagCombobox(searchedTag4List, true);
+            FillTagCombobox(searchedTag5List, true);
 
-            fillTagList(replacedTagList, false, parameterTagTypeList.SelectedIndex, parameterTag2TypeList.SelectedIndex, parameterTag3TypeList.SelectedIndex, parameterTag4TypeList.SelectedIndex, parameterTag5TypeList.SelectedIndex, parameterTag6TypeList.SelectedIndex);
-            fillTagList(replacedTag2List, false, parameterTagTypeList.SelectedIndex, parameterTag2TypeList.SelectedIndex, parameterTag3TypeList.SelectedIndex, parameterTag4TypeList.SelectedIndex, parameterTag5TypeList.SelectedIndex, parameterTag6TypeList.SelectedIndex);
-            fillTagList(replacedTag3List, false, parameterTagTypeList.SelectedIndex, parameterTag2TypeList.SelectedIndex, parameterTag3TypeList.SelectedIndex, parameterTag4TypeList.SelectedIndex, parameterTag5TypeList.SelectedIndex, parameterTag6TypeList.SelectedIndex);
-            fillTagList(replacedTag4List, false, parameterTagTypeList.SelectedIndex, parameterTag2TypeList.SelectedIndex, parameterTag3TypeList.SelectedIndex, parameterTag4TypeList.SelectedIndex, parameterTag5TypeList.SelectedIndex, parameterTag6TypeList.SelectedIndex);
-            fillTagList(replacedTag5List, false, parameterTagTypeList.SelectedIndex, parameterTag2TypeList.SelectedIndex, parameterTag3TypeList.SelectedIndex, parameterTag4TypeList.SelectedIndex, parameterTag5TypeList.SelectedIndex, parameterTag6TypeList.SelectedIndex);
+            FillTagCombobox(replacedTagList, false);
+            FillTagCombobox(replacedTag2List, false);
+            FillTagCombobox(replacedTag3List, false);
+            FillTagCombobox(replacedTag4List, false);
+            FillTagCombobox(replacedTag5List, false);
         }
 
         private void parameterTagTypeList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            parameterTagTypeChanged(parameterTagTypeList, parameterTagList, label21, parameterTag2TypeList);
+            parameterTagTypeChanged(parameterTagTypeList, label17, parameterTagList, label21, parameterTag2TypeList);
         }
 
         private void parameterTag2TypeList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            parameterTagTypeChanged(parameterTag2TypeList, parameterTag2List, label22, parameterTag3TypeList);
+            parameterTagTypeChanged(parameterTag2TypeList, label18, parameterTag2List, label22, parameterTag3TypeList);
         }
 
         private void parameterTag3TypeList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            parameterTagTypeChanged(parameterTag3TypeList, parameterTag3List, label23, parameterTag4TypeList);
+            parameterTagTypeChanged(parameterTag3TypeList, label19, parameterTag3List, label23, parameterTag4TypeList);
         }
 
         private void parameterTag4TypeList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            parameterTagTypeChanged(parameterTag4TypeList, parameterTag4List, label24, parameterTag5TypeList);
+            parameterTagTypeChanged(parameterTag4TypeList, label28, parameterTag4List, label24, parameterTag5TypeList);
         }
 
         private void parameterTag5TypeList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            parameterTagTypeChanged(parameterTag5TypeList, parameterTag5List, label25, parameterTag6TypeList);
+            parameterTagTypeChanged(parameterTag5TypeList, label27, parameterTag5List, label25, parameterTag6TypeList);
         }
 
         private void parameterTag6TypeList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            parameterTagTypeChanged(parameterTag6TypeList, parameterTag6List, label20);
+            parameterTagTypeChanged(parameterTag6TypeList, label26, parameterTag6List, label20);
         }
 
         private void customTextChecked_CheckedChanged(object sender, EventArgs e)

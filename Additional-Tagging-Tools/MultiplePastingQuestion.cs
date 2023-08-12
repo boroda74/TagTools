@@ -9,16 +9,10 @@ namespace MusicBeePlugin
         private int _filesLength = 0;
         public bool PasteAnyway = false;
 
-        public MultiplePastingQuestion()
-        {
-            InitializeComponent();
-        }
-
-        public MultiplePastingQuestion(Plugin tagToolsPluginParam, int fileTagsLength, int filesLength)
+        public MultiplePastingQuestion(Plugin tagToolsPluginParam, int fileTagsLength, int filesLength) : base(tagToolsPluginParam)
         {
             InitializeComponent();
 
-            TagToolsPlugin = tagToolsPluginParam;
             _fileTagsLength = fileTagsLength;
             _filesLength = filesLength;
 

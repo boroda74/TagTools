@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CopyTagCommand));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.sourceTagList = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -59,6 +58,7 @@
             this.appendedTextBox = new System.Windows.Forms.ComboBox();
             this.addedTextBox = new System.Windows.Forms.ComboBox();
             this.browseButton = new System.Windows.Forms.Button();
+            this.buttonSettings = new System.Windows.Forms.Button();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -67,6 +67,7 @@
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).BeginInit();
             this.SuspendLayout();
@@ -83,6 +84,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.label1, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("label1.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.label1, ((int)(resources.GetObject("label1.IconPadding"))));
             this.label1.Name = "label1";
+            this.toolTip1.SetToolTip(this.label1, resources.GetString("label1.ToolTip"));
             // 
             // sourceTagList
             // 
@@ -94,6 +96,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.sourceTagList, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("sourceTagList.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.sourceTagList, ((int)(resources.GetObject("sourceTagList.IconPadding"))));
             this.sourceTagList.Name = "sourceTagList";
+            this.toolTip1.SetToolTip(this.sourceTagList, resources.GetString("sourceTagList.ToolTip"));
             this.sourceTagList.SelectedIndexChanged += new System.EventHandler(this.sourceTagList_SelectedIndexChanged);
             // 
             // label2
@@ -103,6 +106,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.label2, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("label2.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.label2, ((int)(resources.GetObject("label2.IconPadding"))));
             this.label2.Name = "label2";
+            this.toolTip1.SetToolTip(this.label2, resources.GetString("label2.ToolTip"));
             // 
             // destinationTagList
             // 
@@ -114,6 +118,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.destinationTagList, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("destinationTagList.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.destinationTagList, ((int)(resources.GetObject("destinationTagList.IconPadding"))));
             this.destinationTagList.Name = "destinationTagList";
+            this.toolTip1.SetToolTip(this.destinationTagList, resources.GetString("destinationTagList.ToolTip"));
             this.destinationTagList.SelectedIndexChanged += new System.EventHandler(this.destinationTagList_SelectedIndexChanged);
             // 
             // mainLabel
@@ -123,6 +128,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.mainLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("mainLabel.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.mainLabel, ((int)(resources.GetObject("mainLabel.IconPadding"))));
             this.mainLabel.Name = "mainLabel";
+            this.toolTip1.SetToolTip(this.mainLabel, resources.GetString("mainLabel.ToolTip"));
             // 
             // buttonOK
             // 
@@ -131,6 +137,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.buttonOK, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonOK.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.buttonOK, ((int)(resources.GetObject("buttonOK.IconPadding"))));
             this.buttonOK.Name = "buttonOK";
+            this.toolTip1.SetToolTip(this.buttonOK, resources.GetString("buttonOK.ToolTip"));
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
@@ -142,6 +149,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.buttonCancel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonCancel.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.buttonCancel, ((int)(resources.GetObject("buttonCancel.IconPadding"))));
             this.buttonCancel.Name = "buttonCancel";
+            this.toolTip1.SetToolTip(this.buttonCancel, resources.GetString("buttonCancel.ToolTip"));
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
@@ -152,6 +160,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.appendCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("appendCheckBox.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.appendCheckBox, ((int)(resources.GetObject("appendCheckBox.IconPadding"))));
             this.appendCheckBox.Name = "appendCheckBox";
+            this.toolTip1.SetToolTip(this.appendCheckBox, resources.GetString("appendCheckBox.ToolTip"));
             this.appendCheckBox.UseVisualStyleBackColor = true;
             this.appendCheckBox.CheckedChanged += new System.EventHandler(this.appendCheckBox_CheckedChanged);
             // 
@@ -162,6 +171,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.buttonPreview, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonPreview.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.buttonPreview, ((int)(resources.GetObject("buttonPreview.IconPadding"))));
             this.buttonPreview.Name = "buttonPreview";
+            this.toolTip1.SetToolTip(this.buttonPreview, resources.GetString("buttonPreview.ToolTip"));
             this.buttonPreview.UseVisualStyleBackColor = true;
             this.buttonPreview.Click += new System.EventHandler(this.buttonPreview_Click);
             // 
@@ -190,8 +200,8 @@
             this.previewTable.Name = "previewTable";
             this.previewTable.RowHeadersVisible = false;
             this.previewTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.previewTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.previewList_CellContentClick);
-            this.previewTable.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.previewTable_CellFormatting);
+            this.toolTip1.SetToolTip(this.previewTable, resources.GetString("previewTable.ToolTip"));
+            this.previewTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.previewTable_CellContentClick);
             // 
             // File
             // 
@@ -234,9 +244,6 @@
             // 
             // NewTagT
             // 
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.NewTagT.DefaultCellStyle = dataGridViewCellStyle1;
             this.NewTagT.FillWeight = 25F;
             resources.ApplyResources(this.NewTagT, "NewTagT");
             this.NewTagT.Name = "NewTagT";
@@ -248,6 +255,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.smartOperationCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("smartOperationCheckBox.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.smartOperationCheckBox, ((int)(resources.GetObject("smartOperationCheckBox.IconPadding"))));
             this.smartOperationCheckBox.Name = "smartOperationCheckBox";
+            this.toolTip1.SetToolTip(this.smartOperationCheckBox, resources.GetString("smartOperationCheckBox.ToolTip"));
             this.smartOperationCheckBox.UseVisualStyleBackColor = true;
             // 
             // dirtyErrorProvider
@@ -263,6 +271,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.onlyIfDestinationEmptyCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("onlyIfDestinationEmptyCheckBox.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.onlyIfDestinationEmptyCheckBox, ((int)(resources.GetObject("onlyIfDestinationEmptyCheckBox.IconPadding"))));
             this.onlyIfDestinationEmptyCheckBox.Name = "onlyIfDestinationEmptyCheckBox";
+            this.toolTip1.SetToolTip(this.onlyIfDestinationEmptyCheckBox, resources.GetString("onlyIfDestinationEmptyCheckBox.ToolTip"));
             this.onlyIfDestinationEmptyCheckBox.UseVisualStyleBackColor = true;
             // 
             // addCheckBox
@@ -272,6 +281,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.addCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("addCheckBox.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.addCheckBox, ((int)(resources.GetObject("addCheckBox.IconPadding"))));
             this.addCheckBox.Name = "addCheckBox";
+            this.toolTip1.SetToolTip(this.addCheckBox, resources.GetString("addCheckBox.ToolTip"));
             this.addCheckBox.UseVisualStyleBackColor = true;
             this.addCheckBox.CheckedChanged += new System.EventHandler(this.addCheckBox_CheckedChanged);
             // 
@@ -282,6 +292,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.label3, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("label3.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.label3, ((int)(resources.GetObject("label3.IconPadding"))));
             this.label3.Name = "label3";
+            this.toolTip1.SetToolTip(this.label3, resources.GetString("label3.ToolTip"));
             // 
             // fileNameTextBox
             // 
@@ -293,6 +304,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.fileNameTextBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("fileNameTextBox.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.fileNameTextBox, ((int)(resources.GetObject("fileNameTextBox.IconPadding"))));
             this.fileNameTextBox.Name = "fileNameTextBox";
+            this.toolTip1.SetToolTip(this.fileNameTextBox, resources.GetString("fileNameTextBox.ToolTip"));
             this.fileNameTextBox.Leave += new System.EventHandler(this.filenameTextBox_Leave);
             // 
             // appendedTextBox
@@ -305,6 +317,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.appendedTextBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("appendedTextBox.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.appendedTextBox, ((int)(resources.GetObject("appendedTextBox.IconPadding"))));
             this.appendedTextBox.Name = "appendedTextBox";
+            this.toolTip1.SetToolTip(this.appendedTextBox, resources.GetString("appendedTextBox.ToolTip"));
             this.appendedTextBox.Leave += new System.EventHandler(this.appendedTextBox_Leave);
             // 
             // addedTextBox
@@ -317,6 +330,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.addedTextBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("addedTextBox.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.addedTextBox, ((int)(resources.GetObject("addedTextBox.IconPadding"))));
             this.addedTextBox.Name = "addedTextBox";
+            this.toolTip1.SetToolTip(this.addedTextBox, resources.GetString("addedTextBox.ToolTip"));
             this.addedTextBox.Leave += new System.EventHandler(this.addedTextBox_Leave);
             // 
             // browseButton
@@ -327,8 +341,21 @@
             this.dirtyErrorProvider.SetIconAlignment(this.browseButton, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("browseButton.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.browseButton, ((int)(resources.GetObject("browseButton.IconPadding"))));
             this.browseButton.Name = "browseButton";
+            this.toolTip1.SetToolTip(this.browseButton, resources.GetString("browseButton.ToolTip"));
             this.browseButton.UseVisualStyleBackColor = true;
             this.browseButton.Click += new System.EventHandler(this.browseButton_Click);
+            // 
+            // buttonSettings
+            // 
+            resources.ApplyResources(this.buttonSettings, "buttonSettings");
+            this.dirtyErrorProvider.SetError(this.buttonSettings, resources.GetString("buttonSettings.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.buttonSettings, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonSettings.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.buttonSettings, ((int)(resources.GetObject("buttonSettings.IconPadding"))));
+            this.buttonSettings.Image = global::MusicBeePlugin.Properties.Resources.gear_15;
+            this.buttonSettings.Name = "buttonSettings";
+            this.toolTip1.SetToolTip(this.buttonSettings, resources.GetString("buttonSettings.ToolTip"));
+            this.buttonSettings.UseVisualStyleBackColor = true;
+            this.buttonSettings.Click += new System.EventHandler(this.buttonSettings_Click);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -374,9 +401,9 @@
             // 
             // dataGridViewTextBoxColumn8
             // 
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewTextBoxColumn8.FillWeight = 25F;
             resources.ApplyResources(this.dataGridViewTextBoxColumn8, "dataGridViewTextBoxColumn8");
             this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
@@ -387,6 +414,7 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
+            this.Controls.Add(this.buttonSettings);
             this.Controls.Add(this.browseButton);
             this.Controls.Add(this.addedTextBox);
             this.Controls.Add(this.appendedTextBox);
@@ -406,6 +434,7 @@
             this.Controls.Add(this.sourceTagList);
             this.Controls.Add(this.label1);
             this.Name = "CopyTagCommand";
+            this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).EndInit();
             this.ResumeLayout(false);
@@ -450,5 +479,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn OriginalDestinationTagT;
         private System.Windows.Forms.DataGridViewTextBoxColumn NewTag;
         private System.Windows.Forms.DataGridViewTextBoxColumn NewTagT;
+        private System.Windows.Forms.Button buttonSettings;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

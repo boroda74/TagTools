@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using static MusicBeePlugin.Plugin;
 
 
 namespace MusicBeePlugin
@@ -9,17 +10,9 @@ namespace MusicBeePlugin
         private decimal initialAutobackupInterval;
         private string initialAutobackupDirectory;
 
-        public AutoBackupSettings()
+        public AutoBackupSettings(Plugin tagToolsPluginParam) : base(tagToolsPluginParam)
         {
             InitializeComponent();
-        }
-
-        public AutoBackupSettings(Plugin tagToolsPluginParam)
-        {
-            InitializeComponent();
-
-            TagToolsPlugin = tagToolsPluginParam;
-
             initializeForm();
         }
 
@@ -27,29 +20,29 @@ namespace MusicBeePlugin
         {
             base.initializeForm();
 
-            initialAutobackupInterval = Plugin.SavedSettings.autobackupInterval;
-            initialAutobackupDirectory = Plugin.SavedSettings.autobackupDirectory;
+            initialAutobackupInterval = SavedSettings.autobackupInterval;
+            initialAutobackupDirectory = SavedSettings.autobackupDirectory;
 
-            autobackupFolderTextBox.Text = Plugin.GetAutobackupDirectory(Plugin.SavedSettings.autobackupDirectory);
-            autobackupPrefixTextBox.Text = Plugin.SavedSettings.autobackupPrefix;
+            autobackupFolderTextBox.Text = GetAutobackupDirectory(SavedSettings.autobackupDirectory);
+            autobackupPrefixTextBox.Text = SavedSettings.autobackupPrefix;
 
-            autobackupNumericUpDown.Value = Plugin.SavedSettings.autobackupInterval;
-            numberOfDaysNumericUpDown.Value = Plugin.SavedSettings.autodeleteKeepNumberOfDays;
-            numberOfFilesNumericUpDown.Value = Plugin.SavedSettings.autodeleteKeepNumberOfFiles;
+            autobackupNumericUpDown.Value = SavedSettings.autobackupInterval;
+            numberOfDaysNumericUpDown.Value = SavedSettings.autodeleteKeepNumberOfDays;
+            numberOfFilesNumericUpDown.Value = SavedSettings.autodeleteKeepNumberOfFiles;
 
-            if (Plugin.SavedSettings.autobackupInterval != 0)
+            if (SavedSettings.autobackupInterval != 0)
                 autobackupCheckBox.Checked = true;
 
-            if (Plugin.SavedSettings.autodeleteKeepNumberOfDays != 0)
+            if (SavedSettings.autodeleteKeepNumberOfDays != 0)
                 autodeleteOldCheckBox.Checked = true;
 
-            if (Plugin.SavedSettings.autodeleteKeepNumberOfFiles != 0)
+            if (SavedSettings.autodeleteKeepNumberOfFiles != 0)
                 autodeleteManyCheckBox.Checked = true;
 
-            DontSkipAutobackupsIfPlayCountsChangedCheckBox.Checked = Plugin.SavedSettings.dontSkipAutobackupsIfPlayCountsChanged;
+            DontSkipAutobackupsIfPlayCountsChangedCheckBox.Checked = SavedSettings.dontSkipAutobackupsIfOnlyPlayCountsChanged;
 
-            backupArtworksCheckBox.Checked = Plugin.SavedSettings.backupArtworks;
-            dontTryToGuessLibraryNameCheckBox.Checked = Plugin.SavedSettings.dontTryToGuessLibraryName;
+            backupArtworksCheckBox.Checked = SavedSettings.backupArtworks;
+            dontTryToGuessLibraryNameCheckBox.Checked = SavedSettings.dontTryToGuessLibraryName;
         }
 
         private void autobackupCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -78,8 +71,10 @@ namespace MusicBeePlugin
 
         private void browseButton_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog dialog = new FolderBrowserDialog();
-            dialog.SelectedPath = autobackupFolderTextBox.Text;
+            FolderBrowserDialog dialog = new FolderBrowserDialog
+            {
+                SelectedPath = autobackupFolderTextBox.Text
+            };
 
             if (dialog.ShowDialog(this) == DialogResult.Cancel) return;
 
@@ -88,68 +83,68 @@ namespace MusicBeePlugin
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            string driveLetter = Plugin.MbApiInterface.Setting_GetPersistentStoragePath().Substring(0, 2);
+            string driveLetter = MbApiInterface.Setting_GetPersistentStoragePath().Substring(0, 2);
 
-            Plugin.SavedSettings.autobackupDirectory = autobackupFolderTextBox.Text.Replace(Plugin.MbApiInterface.Setting_GetPersistentStoragePath(), "").Replace(driveLetter, "");
-            Plugin.SavedSettings.autobackupPrefix = autobackupPrefixTextBox.Text;
+            SavedSettings.autobackupDirectory = autobackupFolderTextBox.Text.Replace(MbApiInterface.Setting_GetPersistentStoragePath(), "").Replace(driveLetter, "");
+            SavedSettings.autobackupPrefix = autobackupPrefixTextBox.Text;
 
             if (autobackupCheckBox.Checked)
-                Plugin.SavedSettings.autobackupInterval = autobackupNumericUpDown.Value;
+                SavedSettings.autobackupInterval = autobackupNumericUpDown.Value;
             else
-                Plugin.SavedSettings.autobackupInterval = 0;
+                SavedSettings.autobackupInterval = 0;
 
             if (autodeleteOldCheckBox.Checked)
-                Plugin.SavedSettings.autodeleteKeepNumberOfDays = numberOfDaysNumericUpDown.Value;
+                SavedSettings.autodeleteKeepNumberOfDays = numberOfDaysNumericUpDown.Value;
             else
-                Plugin.SavedSettings.autodeleteKeepNumberOfDays = 0;
+                SavedSettings.autodeleteKeepNumberOfDays = 0;
 
             if (autodeleteManyCheckBox.Checked)
-                Plugin.SavedSettings.autodeleteKeepNumberOfFiles = numberOfFilesNumericUpDown.Value;
+                SavedSettings.autodeleteKeepNumberOfFiles = numberOfFilesNumericUpDown.Value;
             else
-                Plugin.SavedSettings.autodeleteKeepNumberOfFiles = 0;
+                SavedSettings.autodeleteKeepNumberOfFiles = 0;
 
-            Plugin.SavedSettings.dontSkipAutobackupsIfPlayCountsChanged = DontSkipAutobackupsIfPlayCountsChangedCheckBox.Checked;
+            SavedSettings.dontSkipAutobackupsIfOnlyPlayCountsChanged = DontSkipAutobackupsIfPlayCountsChangedCheckBox.Checked;
 
 
-            Plugin.PeriodicAutobackupTimer?.Dispose();
+            PeriodicAutobackupTimer?.Dispose();
 
-            Plugin.PeriodicAutobackupTimer = null;
+            PeriodicAutobackupTimer = null;
 
-            if (initialAutobackupDirectory != Plugin.SavedSettings.autobackupDirectory)
+            if (initialAutobackupDirectory != SavedSettings.autobackupDirectory)
             {
-                Plugin.MbApiInterface.MB_SetBackgroundTaskMessage(Plugin.SbMovingBackupsToNewFolder);
+                MbApiInterface.MB_SetBackgroundTaskMessage(SbMovingBackupsToNewFolder);
 
-                lock (Plugin.AutobackupLocker)
+                lock (AutobackupLocker)
                 {
-                    if (!System.IO.Directory.Exists(Plugin.GetAutobackupDirectory(Plugin.SavedSettings.autobackupDirectory)))
-                        System.IO.Directory.CreateDirectory(Plugin.GetAutobackupDirectory(Plugin.SavedSettings.autobackupDirectory));
+                    if (!System.IO.Directory.Exists(GetAutobackupDirectory(SavedSettings.autobackupDirectory)))
+                        System.IO.Directory.CreateDirectory(GetAutobackupDirectory(SavedSettings.autobackupDirectory));
 
-                    string[] files = System.IO.Directory.GetFileSystemEntries(Plugin.GetAutobackupDirectory(initialAutobackupDirectory));
+                    string[] files = System.IO.Directory.GetFileSystemEntries(GetAutobackupDirectory(initialAutobackupDirectory));
                     for (int i = 0; i < files.Length; i++)
                         try
                         {
-                            System.IO.Directory.Move(files[i], Plugin.GetAutobackupDirectory(Plugin.SavedSettings.autobackupDirectory) + @"\" + Plugin.GetBackupSafeFilename(files[i]));
+                            System.IO.Directory.Move(files[i], GetAutobackupDirectory(SavedSettings.autobackupDirectory) + @"\" + GetBackupSafeFilename(files[i]));
                         }
                         catch { };
 
 
                     try
                     {
-                        System.IO.Directory.Delete(Plugin.GetAutobackupDirectory(initialAutobackupDirectory));
+                        System.IO.Directory.Delete(GetAutobackupDirectory(initialAutobackupDirectory));
                     }
                     catch { };
                 }
 
-                Plugin.MbApiInterface.MB_SetBackgroundTaskMessage("");
+                MbApiInterface.MB_SetBackgroundTaskMessage("");
             }
 
-            if (initialAutobackupInterval != Plugin.SavedSettings.autobackupInterval && Plugin.SavedSettings.autobackupInterval != 0)
+            if (initialAutobackupInterval != SavedSettings.autobackupInterval && SavedSettings.autobackupInterval != 0)
             {
-                Plugin.PeriodicAutobackupTimer = new System.Threading.Timer(TagToolsPlugin.regularAutobackup, null, new TimeSpan(0, 0, (int)Plugin.SavedSettings.autobackupInterval * 60), new TimeSpan(0, 0, (int)Plugin.SavedSettings.autobackupInterval * 60));
+                PeriodicAutobackupTimer = new System.Threading.Timer(TagToolsPlugin.regularAutobackup, null, new TimeSpan(0, 0, (int)SavedSettings.autobackupInterval * 60), new TimeSpan(0, 0, (int)SavedSettings.autobackupInterval * 60));
             }
 
-            Plugin.SavedSettings.backupArtworks = backupArtworksCheckBox.Checked;
-            Plugin.SavedSettings.dontTryToGuessLibraryName = dontTryToGuessLibraryNameCheckBox.Checked;
+            SavedSettings.backupArtworks = backupArtworksCheckBox.Checked;
+            SavedSettings.dontTryToGuessLibraryName = dontTryToGuessLibraryNameCheckBox.Checked;
 
 
             Close();

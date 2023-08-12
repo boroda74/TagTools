@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
+using static MusicBeePlugin.Plugin;
 
 namespace MusicBeePlugin
 {
@@ -11,64 +12,154 @@ namespace MusicBeePlugin
         private bool ignoreCheckUncheckAllCheckBoxChecked = false;
         private bool ignoreTagSetComboBoxTextChanged = false;
 
-        public CopyTagsToClipboardCommand()
+        private bool returnSelectedTags = false;
+        private string[] selectedTags = null;
+
+        public CopyTagsToClipboardCommand(Plugin tagToolsPluginParam) : base(tagToolsPluginParam)
         {
             InitializeComponent();
-        }
-
-        public CopyTagsToClipboardCommand(Plugin tagToolsPluginParam)
-        {
-            InitializeComponent();
-
-            TagToolsPlugin = tagToolsPluginParam;
-
             initializeForm();
         }
+
+        public CopyTagsToClipboardCommand(Plugin tagToolsPluginParam, string formTitle, string copyButtonName) : base(tagToolsPluginParam)
+        {
+            InitializeComponent();
+
+            tagSetComboBox.Visible = false;
+            Text = formTitle;
+            buttonOK.Text = copyButtonName;
+            returnSelectedTags = true;
+
+            MbForm = MbForm.IsDisposed ? (Form)FromHandle(MbApiInterface.MB_GetWindowHandle()) : MbForm;
+            MbForm.AddOwnedForm(this);
+        }
+
 
         protected new void initializeForm()
         {
             //base.initializeForm();
 
-            Plugin.MbForm = Plugin.MbForm.IsDisposed ? (Form)FromHandle(Plugin.MbApiInterface.MB_GetWindowHandle()) : Plugin.MbForm;
-            Plugin.MbForm.AddOwnedForm(this);
+            MbForm = MbForm.IsDisposed ? (Form)FromHandle(MbApiInterface.MB_GetWindowHandle()) : MbForm;
+            MbForm.AddOwnedForm(this);
 
-            tagSetComboBox.Items.Add(Plugin.SavedSettings.copyTagsTagSets[0].setName);
-            tagSetComboBox.Items.Add(Plugin.SavedSettings.copyTagsTagSets[1].setName);
-            tagSetComboBox.Items.Add(Plugin.SavedSettings.copyTagsTagSets[2].setName);
-            tagSetComboBox.Items.Add(Plugin.SavedSettings.copyTagsTagSets[3].setName);
-            tagSetComboBox.Items.Add(Plugin.SavedSettings.copyTagsTagSets[4].setName);
-            tagSetComboBox.Items.Add(Plugin.SavedSettings.copyTagsTagSets[5].setName);
-            tagSetComboBox.Items.Add(Plugin.SavedSettings.copyTagsTagSets[6].setName);
-            tagSetComboBox.Items.Add(Plugin.SavedSettings.copyTagsTagSets[7].setName);
-            tagSetComboBox.Items.Add(Plugin.SavedSettings.copyTagsTagSets[8].setName);
-            tagSetComboBox.Items.Add(Plugin.SavedSettings.copyTagsTagSets[9].setName);
+            tagSetComboBox.Items.Add(SavedSettings.copyTagsTagSets[0].setName);
+            tagSetComboBox.Items.Add(SavedSettings.copyTagsTagSets[1].setName);
+            tagSetComboBox.Items.Add(SavedSettings.copyTagsTagSets[2].setName);
+            tagSetComboBox.Items.Add(SavedSettings.copyTagsTagSets[3].setName);
+            tagSetComboBox.Items.Add(SavedSettings.copyTagsTagSets[4].setName);
+            tagSetComboBox.Items.Add(SavedSettings.copyTagsTagSets[5].setName);
+            tagSetComboBox.Items.Add(SavedSettings.copyTagsTagSets[6].setName);
+            tagSetComboBox.Items.Add(SavedSettings.copyTagsTagSets[7].setName);
+            tagSetComboBox.Items.Add(SavedSettings.copyTagsTagSets[8].setName);
+            tagSetComboBox.Items.Add(SavedSettings.copyTagsTagSets[9].setName);
 
             tagSetComboBox_DropDownClosed(null, null);
+        }
+
+        public static string[] SelectTags(Plugin tagToolsPluginParam, string formTitle, string copyButtonName, string[] preselectedTags, bool addArtworkAlso)
+        {
+            CopyTagsToClipboardCommand form = new CopyTagsToClipboardCommand(tagToolsPluginParam, formTitle, copyButtonName);
+
+            form.selectedTags = (string[])preselectedTags.Clone();
+            form.fillTags(false, addArtworkAlso);
+            Display(form, true);
+
+            return form.selectedTags;
+        }
+
+        public static int[] SelectTags(Plugin tagToolsPluginParam, string formTitle, string copyButtonName, int[] preselectedTags, bool addArtworkAlso)
+        {
+            CopyTagsToClipboardCommand form = new CopyTagsToClipboardCommand(tagToolsPluginParam, formTitle, copyButtonName);
+
+            form.selectedTags = new string[preselectedTags.Length];
+            for (int i = 0; i < preselectedTags.Length; i++)
+                form.selectedTags[i] = GetTagName((MetaDataType)preselectedTags[i]);
+
+            form.fillTags(false, addArtworkAlso);
+            Display(form, true);
+
+            int[] selectedTagIds = new int[form.selectedTags.Length];
+            for (int i = 0; i < form.selectedTags.Length; i++)
+                selectedTagIds[i] = (int)GetTagId(form.selectedTags[i]);
+
+            return selectedTagIds;
+        }
+
+        private void processCheckedTags()
+        {
+            selectedTags = new string[checkedSourceTagList.Items.Count];
+
+            for (int i = 0; i < checkedSourceTagList.Items.Count; i++)
+                selectedTags[i] = checkedSourceTagList.Items[i].ToString().Substring(2);
+        }
+
+        private void fillTags(bool addReadonlyTagsAlso, bool addArtworkAlso)
+        {
+            checkedSourceTagList.Items.Clear();
+            sourceTagList.Items.Clear();
+
+            FillListByTagNames(sourceTagList.Items, addReadonlyTagsAlso, addArtworkAlso, false, true);
+
+            if (addReadonlyTagsAlso)
+                FillListByPropNames(sourceTagList.Items, true);
+
+
+            for (int i = 0; i < selectedTags.Length; i++)
+            {
+                for (int j = 0; j < sourceTagList.Items.Count; j++)
+                {
+                    if (((string)sourceTagList.Items[j]).Substring(2) == selectedTags[i])
+                    {
+                        sourceTagList.SetItemChecked(j, true);
+                        break;
+                    }
+                }
+            }
+
+            for (int i = 0; i < sourceTagList.Items.Count;)
+                if (sourceTagList.GetItemChecked(i))
+                    sourceTagList.SelectedIndex = i;
+                else
+                    i++;
+
+        }
+
+        private void fillTagsFromTagSet(int tagSetId)
+        {
+            selectedTags = new string[SavedSettings.copyTagsTagSets[tagSetId].tagIds.Length];
+
+            for (int i = 0; i < SavedSettings.copyTagsTagSets[SavedSettings.lastInteractiveTagSet].tagIds.Length; i++)
+            {
+                string tagName = GetTagName((MetaDataType)SavedSettings.copyTagsTagSets[SavedSettings.lastInteractiveTagSet].tagIds[i]);
+                selectedTags[i] = tagName;
+            }
+
+            fillTags(true, true);
         }
 
         public static bool CopyTagsToClipboard(int tagSet)
         {
             string[] files = null;
 
-            if (!Plugin.MbApiInterface.Library_QueryFilesEx("domain=SelectedFiles", out files))
+            if (!MbApiInterface.Library_QueryFilesEx("domain=SelectedFiles", out files))
                 files = new string[0];
 
 
             if (files.Length == 0)
             {
-                MessageBox.Show(Plugin.MbForm, Plugin.MsgNoFilesSelected, null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(MbForm, MsgNoFilesSelected, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
 
-            Plugin.SavedSettings.lastTagSet = tagSet;
+            SavedSettings.lastTagSet = tagSet;
 
             string clipboardText = "";
             foreach (string file in files)
             {
                 string tags = "";
-                for (int i = 0; i < Plugin.SavedSettings.copyTagsTagSets[tagSet].tagIds.Length; i++)
+                for (int i = 0; i < SavedSettings.copyTagsTagSets[tagSet].tagIds.Length; i++)
                 {
-                    string tag = Plugin.GetFileTag(file, (Plugin.MetaDataType)Plugin.SavedSettings.copyTagsTagSets[tagSet].tagIds[i]);
+                    string tag = GetFileTag(file, (MetaDataType)SavedSettings.copyTagsTagSets[tagSet].tagIds[i]);
                     tag = tag.Replace("\u0000", "\u0006").Replace("\u000D", "\u0007").Replace("\u000A", "\u0008");
                     tag += "\t";
 
@@ -103,11 +194,11 @@ namespace MusicBeePlugin
 
             for (int i = 0; i < checkedSourceTagList.Items.Count; i++)
             {
-                int id = (int)Plugin.GetTagId((string)checkedSourceTagList.Items[i]);
+                int id = (int)GetTagId((string)checkedSourceTagList.Items[i]);
 
                 checkedIds.Add(id);
 
-                if (((string)checkedSourceTagList.Items[i]).Substring(2) == Plugin.DisplayedArtistName) //Displayed artist should be copied to clipboard the first or second
+                if (((string)checkedSourceTagList.Items[i]).Substring(2) == DisplayedArtistName) //Displayed artist should be copied to clipboard the first or second
                 {
                     if (displayedArtistOffset == 0)
                         displayedComposerOffset = 1;
@@ -115,7 +206,7 @@ namespace MusicBeePlugin
                     checkedIds[checkedIds.Count - 1] = checkedIds[displayedArtistOffset];
                     checkedIds[displayedArtistOffset] = id;
                 }
-                else if (((string)checkedSourceTagList.Items[i]).Substring(2) == Plugin.DisplayedComposerName) //Displayed composer should be copied to clipboard the first or second
+                else if (((string)checkedSourceTagList.Items[i]).Substring(2) == DisplayedComposerName) //Displayed composer should be copied to clipboard the first or second
                 {
                     if (displayedComposerOffset == 0)
                         displayedArtistOffset = 1;
@@ -125,13 +216,17 @@ namespace MusicBeePlugin
                 }
             }
 
-            Plugin.SavedSettings.copyTagsTagSets[Plugin.SavedSettings.lastInteractiveTagSet].tagIds = new int[checkedIds.Count];
-            checkedIds.CopyTo(Plugin.SavedSettings.copyTagsTagSets[Plugin.SavedSettings.lastInteractiveTagSet].tagIds);
+            SavedSettings.copyTagsTagSets[SavedSettings.lastInteractiveTagSet].tagIds = new int[checkedIds.Count];
+            checkedIds.CopyTo(SavedSettings.copyTagsTagSets[SavedSettings.lastInteractiveTagSet].tagIds);
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            CopyTagsToClipboard(Plugin.SavedSettings.lastInteractiveTagSet);
+            if (returnSelectedTags)
+                processCheckedTags();
+            else
+                CopyTagsToClipboard(SavedSettings.lastInteractiveTagSet);
+
             Close();
         }
 
@@ -163,7 +258,7 @@ namespace MusicBeePlugin
 
 
             if (checkedSourceTagList.Items.Count == 0)
-                buttonOK.Enabled = false;
+                buttonOK.Enabled = returnSelectedTags;
             else
                 buttonOK.Enabled = true;
         }
@@ -191,28 +286,28 @@ namespace MusicBeePlugin
 
 
             if (checkedSourceTagList.Items.Count == 0)
-                buttonOK.Enabled = false;
+                buttonOK.Enabled = returnSelectedTags;
             else
                 buttonOK.Enabled = true;
         }
 
         private void tagSetComboBox_DropDownClosed(object sender, EventArgs e)
         {
-            if (tagSetComboBox.SelectedIndex == Plugin.SavedSettings.lastInteractiveTagSet)
+            if (tagSetComboBox.SelectedIndex == SavedSettings.lastInteractiveTagSet)
                 return;
 
 
             if (tagSetComboBox.SelectedIndex == -1)
             {
-                tagSetComboBox.SelectedIndex = Plugin.SavedSettings.lastInteractiveTagSet;
+                tagSetComboBox.SelectedIndex = SavedSettings.lastInteractiveTagSet;
             }
-            else if (tagSetComboBox.SelectedIndex == Plugin.SavedSettings.lastInteractiveTagSet)
+            else if (tagSetComboBox.SelectedIndex == SavedSettings.lastInteractiveTagSet)
             {
                 return;
             }
             else
             {
-                Plugin.SavedSettings.lastInteractiveTagSet = tagSetComboBox.SelectedIndex;
+                SavedSettings.lastInteractiveTagSet = tagSetComboBox.SelectedIndex;
             }
 
 
@@ -220,32 +315,7 @@ namespace MusicBeePlugin
             //sourceTagList.SuspendPainting();
 
 
-            checkedSourceTagList.Items.Clear();
-            sourceTagList.Items.Clear();
-
-            Plugin.FillListByTagNames(sourceTagList.Items, true, true, false, true);
-            Plugin.FillListByPropNames(sourceTagList.Items, true);
-
-
-            for (int i = 0; i < Plugin.SavedSettings.copyTagsTagSets[Plugin.SavedSettings.lastInteractiveTagSet].tagIds.Length; i++)
-            {
-                for (int j = 0; j < sourceTagList.Items.Count; j++)
-                {
-                    string tagName = Plugin.GetTagName((Plugin.MetaDataType)Plugin.SavedSettings.copyTagsTagSets[Plugin.SavedSettings.lastInteractiveTagSet].tagIds[i]);
-
-                    if (((string)sourceTagList.Items[j]).Substring(2) == tagName)
-                    {
-                        sourceTagList.SetItemChecked(j, true);
-                        break;
-                    }
-                }
-            }
-
-            for (int i = 0; i < sourceTagList.Items.Count;)
-                if (sourceTagList.GetItemChecked(i))
-                    sourceTagList.SelectedIndex = i;
-                else
-                    i++;
+            fillTagsFromTagSet(SavedSettings.lastInteractiveTagSet);
 
 
             //checkedSourceTagList.Repaint();
@@ -260,7 +330,7 @@ namespace MusicBeePlugin
 
             ignoreTagSetComboBoxTextChanged = true;
 
-            string prefix = Plugin.SavedSettings.copyTagsTagSets[Plugin.SavedSettings.lastInteractiveTagSet].getPrefix();
+            string prefix = SavedSettings.copyTagsTagSets[SavedSettings.lastInteractiveTagSet].getPrefix();
 
             if (!tagSetComboBox.Text.StartsWith(prefix))
             {
@@ -286,8 +356,8 @@ namespace MusicBeePlugin
                 }
             }
 
-            tagSetComboBox.Items[Plugin.SavedSettings.lastInteractiveTagSet] = tagSetComboBox.Text;
-            Plugin.SavedSettings.copyTagsTagSets[Plugin.SavedSettings.lastInteractiveTagSet].setName = tagSetComboBox.Text;
+            tagSetComboBox.Items[SavedSettings.lastInteractiveTagSet] = tagSetComboBox.Text;
+            SavedSettings.copyTagsTagSets[SavedSettings.lastInteractiveTagSet].setName = tagSetComboBox.Text;
 
             ignoreTagSetComboBoxTextChanged = false;
         }

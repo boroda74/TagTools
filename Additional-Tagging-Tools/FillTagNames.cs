@@ -75,6 +75,16 @@ namespace MusicBeePlugin
 
             try
             {
+                file1.WriteLine("Adding " + AllTagsPseudoTagName + " / " + AllTagsPseudoTagId);
+                TagNamesIds.Add(AllTagsPseudoTagName, AllTagsPseudoTagId);
+            }
+            catch (ArgumentException)
+            {
+                wereErrors = true;
+                file1.WriteLine("Cant add " + AllTagsPseudoTagName + " / " + AllTagsPseudoTagId);
+            }
+            try
+            {
                 file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.TrackTitle) + " / " + MetaDataType.TrackTitle);
                 TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.TrackTitle), MetaDataType.TrackTitle);
             }
@@ -1221,8 +1231,10 @@ namespace MusicBeePlugin
 
             if (wereErrors)
             {
-                MessageBox.Show(MbForm, "Some tag names are duplicated. See \"" + System.IO.Path.Combine(MbApiInterface.Setting_GetPersistentStoragePath(), "TagTools.TagNamesErrorLog.txt") + "\" file for details. Plugin is not properly initialized.", 
-                    null, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(MbForm, "Some tag names are duplicated. See \"" + 
+                    System.IO.Path.Combine(MbApiInterface.Setting_GetPersistentStoragePath(), "TagTools.TagNamesErrorLog.txt")
+                    + "\" file for details. Plugin is not properly initialized.", 
+                    "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             file1.Close();
@@ -1298,6 +1310,7 @@ namespace MusicBeePlugin
             TagIdsNames.Add(SynchronisedLyricsId, SynchronisedLyricsName);
             TagIdsNames.Add(UnsynchronisedLyricsId, UnsynchronisedLyricsName);
 
+            TagIdsNames.Add(AllTagsPseudoTagId, AllTagsPseudoTagName);
             TagIdsNames.Add(NullTagId, NullTagName);
 
             TagIdsNames.Add(MetaDataType.Custom1, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom1));
@@ -1482,8 +1495,10 @@ namespace MusicBeePlugin
 
             if (wereErrors)
             {
-                MessageBox.Show(MbForm, "Some track property names are duplicated. See \"" + System.IO.Path.Combine(MbApiInterface.Setting_GetPersistentStoragePath(), "TagTools.PropNamesErrorLog.txt") + "\" file for details. Plugin is not properly initialized.", 
-                    null, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(MbForm, "Some track property names are duplicated. See \"" + 
+                    System.IO.Path.Combine(MbApiInterface.Setting_GetPersistentStoragePath(), "TagTools.PropNamesErrorLog.txt") 
+                    + "\" file for details. Plugin is not properly initialized.", 
+                    "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             file2.Close();

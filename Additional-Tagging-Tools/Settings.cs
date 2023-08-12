@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using static MusicBeePlugin.Plugin;
 
 namespace MusicBeePlugin
 {
     public partial class PluginSettings : PluginWindowTemplate
     {
-        protected Plugin.PluginInfo about;
+        private bool selectedLineColors;
+        private string changedLegendText;
+        private string selectedChangedLegendText;
 
         protected void setCloseShowWindowsRadioButtons(int pos)
         {
@@ -27,18 +30,41 @@ namespace MusicBeePlugin
             else return 2;
         }
 
-        public PluginSettings()
+        private void reSkinLegend()
         {
-            InitializeComponent();
+            selectedLineColors = !selectedLineColors;
+
+            if (selectedLineColors)
+            {
+                toolTip1.SetToolTip(groupBox6, selectedChangedLegendText);
+
+                toolTip1.SetToolTip(changedLegendTextBox, selectedChangedLegendText);
+                toolTip1.SetToolTip(preservedTagsLegendTextBox, selectedChangedLegendText);
+                toolTip1.SetToolTip(preservedTagValuesLegendTextBox, selectedChangedLegendText);
+            }
+            else
+            {
+                toolTip1.SetToolTip(groupBox6, changedLegendText);
+
+                toolTip1.SetToolTip(changedLegendTextBox, changedLegendText);
+                toolTip1.SetToolTip(preservedTagsLegendTextBox, changedLegendText);
+                toolTip1.SetToolTip(preservedTagValuesLegendTextBox, changedLegendText);
+            }
+
+
+            changedLegendTextBox.ForeColor = selectedLineColors ? ChangedCellStyle.SelectionForeColor : ChangedCellStyle.ForeColor;
+            changedLegendTextBox.BackColor = selectedLineColors ? ChangedCellStyle.SelectionBackColor : ChangedCellStyle.BackColor;
+
+            preservedTagsLegendTextBox.ForeColor = selectedLineColors ? PreservedTagCellStyle.SelectionForeColor : PreservedTagCellStyle.ForeColor;
+            preservedTagsLegendTextBox.BackColor = selectedLineColors ? PreservedTagCellStyle.SelectionBackColor : PreservedTagCellStyle.BackColor;
+
+            preservedTagValuesLegendTextBox.ForeColor = selectedLineColors ? PreservedTagValueCellStyle.SelectionForeColor : PreservedTagValueCellStyle.ForeColor;
+            preservedTagValuesLegendTextBox.BackColor = selectedLineColors ? PreservedTagValueCellStyle.SelectionBackColor : PreservedTagValueCellStyle.BackColor;
         }
 
-        public PluginSettings(Plugin TagToolsPluginParam, Plugin.PluginInfo aboutParam)
+        public PluginSettings(Plugin TagToolsPluginParam) : base(TagToolsPluginParam)
         {
             InitializeComponent();
-
-            TagToolsPlugin = TagToolsPluginParam;
-            about = aboutParam;
-
             initializeForm();
         }
 
@@ -46,77 +72,92 @@ namespace MusicBeePlugin
         {
             base.initializeForm();
 
-            versionLabel.Text = Plugin.PluginVersion;
+            versionLabel.Text = PluginVersion;
 
-            contextMenuCheckBox.Checked = !Plugin.SavedSettings.dontShowContextMenu;
+            selectedChangedLegendText = Regex.Replace(toolTip1.GetToolTip(changedLegendTextBox), @"^(.*)\:(.*)", "$2");
+            changedLegendText = Regex.Replace(toolTip1.GetToolTip(changedLegendTextBox), @"^(.*)\:(.*)", "$1");
 
-            showCopyTagCheckBox.Checked = !Plugin.SavedSettings.dontShowCopyTag;
-            showSwapTagsCheckBox.Checked = !Plugin.SavedSettings.dontShowSwapTags;
-            showChangeCaseCheckBox.Checked = !Plugin.SavedSettings.dontShowChangeCase;
-            showRencodeTagCheckBox.Checked = !Plugin.SavedSettings.dontShowRencodeTag;
-            showLibraryReportsCheckBox.Checked = !Plugin.SavedSettings.dontShowLibraryReports;
-            showAutorateCheckBox.Checked = !Plugin.SavedSettings.dontShowAutorate;
-            showASRCheckBox.Checked = !Plugin.SavedSettings.dontShowASR;
-            showCARCheckBox.Checked = !Plugin.SavedSettings.dontShowCAR;
-            showCTCheckBox.Checked = !Plugin.SavedSettings.dontShowCT;
-            showShowHiddenWindowsCheckBox.Checked = !Plugin.SavedSettings.dontShowShowHiddenWindows;
+            selectedLineColors = true;
+            reSkinLegend();
 
-            showBackupRestoreCheckBox.Checked = !Plugin.SavedSettings.dontShowBackupRestore;
+            contextMenuCheckBox.Checked = !SavedSettings.dontShowContextMenu;
 
-            useSkinColorsCheckBox.Checked = Plugin.SavedSettings.useSkinColors;
-            highlightChangedTagsCheckBox.Checked = !Plugin.SavedSettings.dontHighlightChangedTags;
+            showCopyTagCheckBox.Checked = !SavedSettings.dontShowCopyTag;
+            showSwapTagsCheckBox.Checked = !SavedSettings.dontShowSwapTags;
+            showChangeCaseCheckBox.Checked = !SavedSettings.dontShowChangeCase;
+            showRencodeTagCheckBox.Checked = !SavedSettings.dontShowRencodeTag;
+            showLibraryReportsCheckBox.Checked = !SavedSettings.dontShowLibraryReports;
+            showAutorateCheckBox.Checked = !SavedSettings.dontShowAutorate;
+            showASRCheckBox.Checked = !SavedSettings.dontShowASR;
+            showCARCheckBox.Checked = !SavedSettings.dontShowCAR;
+            showCTCheckBox.Checked = !SavedSettings.dontShowCT;
+            showShowHiddenWindowsCheckBox.Checked = !SavedSettings.dontShowShowHiddenWindows;
 
-            setCloseShowWindowsRadioButtons(Plugin.SavedSettings.closeShowHiddenWindows);
+            showBackupRestoreCheckBox.Checked = !SavedSettings.dontShowBackupRestore;
 
-            playCompletedSoundCheckBox.Checked = !Plugin.SavedSettings.dontPlayCompletedSound;
-            playStartedSoundCheckBox.Checked = Plugin.SavedSettings.playStartedSound;
-            playStoppedSoundCheckBox.Checked = Plugin.SavedSettings.playCanceledSound;
-            playTickedAsrPresetSoundCheckBox.Checked = !Plugin.SavedSettings.dontPlayTickedAutoApplyingAsrLrPresetSound;
+            useSkinColorsCheckBox.Checked = SavedSettings.useSkinColors;
+            highlightChangedTagsCheckBox.Checked = !SavedSettings.dontHighlightChangedTags;
 
-            unitKBox.Text = Plugin.SavedSettings.unitK;
-            unitMBox.Text = Plugin.SavedSettings.unitM;
-            unitGBox.Text = Plugin.SavedSettings.unitG;
+            includeNotChangedTagsCheckBox.Checked = !SavedSettings.dontIncludeInPreviewLinesWithoutChangedTags;
+            includePreservedTagsCheckBox.Checked = !SavedSettings.dontIncludeInPreviewLinesWithPreservedTagsAsr;
+            includePreservedTagValuesCheckBox.Checked = !SavedSettings.dontIncludeInPreviewLinesWithPreservedTagValuesAsr;
+
+            setCloseShowWindowsRadioButtons(SavedSettings.closeShowHiddenWindows);
+
+            playCompletedSoundCheckBox.Checked = !SavedSettings.dontPlayCompletedSound;
+            playStartedSoundCheckBox.Checked = SavedSettings.playStartedSound;
+            playStoppedSoundCheckBox.Checked = SavedSettings.playCanceledSound;
+            playTickedAsrPresetSoundCheckBox.Checked = !SavedSettings.dontPlayTickedAutoApplyingAsrLrPresetSound;
+
+            unitKBox.Text = SavedSettings.unitK;
+            unitMBox.Text = SavedSettings.unitM;
+            unitGBox.Text = SavedSettings.unitG;
         }
 
         private void saveSettings()
         {
-            bool previousUseSkinColors = Plugin.SavedSettings.useSkinColors;
+            bool previousUseSkinColors = SavedSettings.useSkinColors;
 
-            Plugin.SavedSettings.dontShowContextMenu = !contextMenuCheckBox.Checked;
+            SavedSettings.dontShowContextMenu = !contextMenuCheckBox.Checked;
 
-            Plugin.SavedSettings.dontShowCopyTag = !showCopyTagCheckBox.Checked;
-            Plugin.SavedSettings.dontShowSwapTags = !showSwapTagsCheckBox.Checked;
-            Plugin.SavedSettings.dontShowChangeCase = !showChangeCaseCheckBox.Checked;
-            Plugin.SavedSettings.dontShowRencodeTag = !showRencodeTagCheckBox.Checked;
-            Plugin.SavedSettings.dontShowLibraryReports = !showLibraryReportsCheckBox.Checked;
-            Plugin.SavedSettings.dontShowAutorate = !showAutorateCheckBox.Checked;
-            Plugin.SavedSettings.dontShowASR = !showASRCheckBox.Checked;
-            Plugin.SavedSettings.dontShowCAR = !showCARCheckBox.Checked;
-            Plugin.SavedSettings.dontShowCT = !showCTCheckBox.Checked;
-            Plugin.SavedSettings.dontShowShowHiddenWindows = !showShowHiddenWindowsCheckBox.Checked;
+            SavedSettings.dontShowCopyTag = !showCopyTagCheckBox.Checked;
+            SavedSettings.dontShowSwapTags = !showSwapTagsCheckBox.Checked;
+            SavedSettings.dontShowChangeCase = !showChangeCaseCheckBox.Checked;
+            SavedSettings.dontShowRencodeTag = !showRencodeTagCheckBox.Checked;
+            SavedSettings.dontShowLibraryReports = !showLibraryReportsCheckBox.Checked;
+            SavedSettings.dontShowAutorate = !showAutorateCheckBox.Checked;
+            SavedSettings.dontShowASR = !showASRCheckBox.Checked;
+            SavedSettings.dontShowCAR = !showCARCheckBox.Checked;
+            SavedSettings.dontShowCT = !showCTCheckBox.Checked;
+            SavedSettings.dontShowShowHiddenWindows = !showShowHiddenWindowsCheckBox.Checked;
 
-            Plugin.SavedSettings.dontShowBackupRestore = !showBackupRestoreCheckBox.Checked;
+            SavedSettings.dontShowBackupRestore = !showBackupRestoreCheckBox.Checked;
 
-            Plugin.SavedSettings.useSkinColors = useSkinColorsCheckBox.Checked;
-            Plugin.SavedSettings.dontHighlightChangedTags = !highlightChangedTagsCheckBox.Checked;
-            Plugin.SavedSettings.closeShowHiddenWindows = getCloseShowWindowsRadioButtons();
+            SavedSettings.useSkinColors = useSkinColorsCheckBox.Checked;
+            SavedSettings.dontHighlightChangedTags = !highlightChangedTagsCheckBox.Checked;
 
-            Plugin.SavedSettings.dontPlayCompletedSound = !playCompletedSoundCheckBox.Checked;
-            Plugin.SavedSettings.playStartedSound = playStartedSoundCheckBox.Checked;
-            Plugin.SavedSettings.playCanceledSound = playStoppedSoundCheckBox.Checked;
-            Plugin.SavedSettings.dontPlayTickedAutoApplyingAsrLrPresetSound = !playTickedAsrPresetSoundCheckBox.Checked;
+            SavedSettings.dontIncludeInPreviewLinesWithoutChangedTags = !includeNotChangedTagsCheckBox.Checked;
+            SavedSettings.dontIncludeInPreviewLinesWithPreservedTagsAsr = !includePreservedTagsCheckBox.Checked;
+            SavedSettings.dontIncludeInPreviewLinesWithPreservedTagValuesAsr = !includePreservedTagValuesCheckBox.Checked;
 
-            Plugin.SavedSettings.unitK = unitKBox.Text;
-            Plugin.SavedSettings.unitM = unitMBox.Text;
-            Plugin.SavedSettings.unitG = unitGBox.Text;
+            SavedSettings.closeShowHiddenWindows = getCloseShowWindowsRadioButtons();
+
+            SavedSettings.dontPlayCompletedSound = !playCompletedSoundCheckBox.Checked;
+            SavedSettings.playStartedSound = playStartedSoundCheckBox.Checked;
+            SavedSettings.playCanceledSound = playStoppedSoundCheckBox.Checked;
+            SavedSettings.dontPlayTickedAutoApplyingAsrLrPresetSound = !playTickedAsrPresetSoundCheckBox.Checked;
+
+            SavedSettings.unitK = unitKBox.Text;
+            SavedSettings.unitM = unitMBox.Text;
+            SavedSettings.unitG = unitGBox.Text;
 
             TagToolsPlugin.SaveSettings();
 
             TagToolsPlugin.addPluginMenuItems();
             TagToolsPlugin.addPluginContextMenuItems();
 
-            if (previousUseSkinColors != Plugin.SavedSettings.useSkinColors)
-                Plugin.PrepareThemedBitmaps();
+            if (previousUseSkinColors != SavedSettings.useSkinColors)
+                PrepareThemedBitmaps();
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
@@ -134,6 +175,21 @@ namespace MusicBeePlugin
         {
             SaveLastSkippedCommand tagToolsForm = new SaveLastSkippedCommand(TagToolsPlugin);
             Display(tagToolsForm, true);
+        }
+
+        private void changedLegendTextBox_MouseClick(object sender, MouseEventArgs e)
+        {
+            reSkinLegend();
+        }
+
+        private void preservedTagsLegendTextBox_MouseClick(object sender, MouseEventArgs e)
+        {
+            reSkinLegend();
+        }
+
+        private void preservedTagValuesLegendTextBox_MouseClick(object sender, MouseEventArgs e)
+        {
+            reSkinLegend();
         }
     }
 }

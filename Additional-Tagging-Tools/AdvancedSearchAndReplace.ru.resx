@@ -119,29 +119,22 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>998, 663</value>
+    <value>999, 663</value>
   </data>
-  <data name="uncheckAllFiltersPictureBox.Error" xml:space="preserve">
-    <value />
+  <data name="buttonSettings.Location" type="System.Drawing.Point, System.Drawing">
+    <value>547, 32</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="uncheckAllFiltersPictureBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="buttonSettings.ToolTip" xml:space="preserve">
+    <value>Открыть быстрые настройки</value>
   </data>
   <data name="uncheckAllFiltersPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>720, 35</value>
+    <value>721, 35</value>
   </data>
   <data name="uncheckAllFiltersPictureBox.ToolTip" xml:space="preserve">
     <value>Отключить все фильтры</value>
   </data>
-  <data name="hotkeyPictureBox.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="hotkeyPictureBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="hotkeyPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>693, 35</value>
+    <value>694, 35</value>
   </data>
   <data name="hotkeyPictureBox.ToolTip" xml:space="preserve">
     <value>Щелкните, чтобы видеть только пресеты с назначенными комбинациями клавиш
@@ -149,14 +142,8 @@
 
 Пресеты должны соответствовать ВСЕМ выбранным фильтрам ОДНОВРЕМЕННО</value>
   </data>
-  <data name="functionIdPictureBox.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="functionIdPictureBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="functionIdPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>674, 35</value>
+    <value>675, 35</value>
   </data>
   <data name="functionIdPictureBox.ToolTip" xml:space="preserve">
     <value>Щелкните, чтобы видеть только пресеты с назначенными ID-ми функций виртуальных тегов
@@ -164,14 +151,8 @@
 
 Пресеты должны соответствовать ВСЕМ выбранным фильтрам ОДНОВРЕМЕННО</value>
   </data>
-  <data name="playlistPictureBox.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="playlistPictureBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="playlistPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>655, 35</value>
+    <value>656, 35</value>
   </data>
   <data name="playlistPictureBox.ToolTip" xml:space="preserve">
     <value>Щелкните, чтобы видеть только пресеты, ограниченные плейлистом
@@ -179,14 +160,8 @@
 
 Пресеты должны соответствовать ВСЕМ выбранным фильтрам ОДНОВРЕМЕННО</value>
   </data>
-  <data name="userPictureBox.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="userPictureBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="userPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>636, 35</value>
+    <value>637, 35</value>
   </data>
   <data name="userPictureBox.ToolTip" xml:space="preserve">
     <value>Щелкните, чтобы видеть только пресеты пользователя
@@ -194,14 +169,8 @@
 
 Пресеты должны соответствовать ВСЕМ выбранным фильтрам ОДНОВРЕМЕННО</value>
   </data>
-  <data name="customizedPictureBox.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="customizedPictureBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="customizedPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>617, 35</value>
+    <value>618, 35</value>
   </data>
   <data name="customizedPictureBox.ToolTip" xml:space="preserve">
     <value>Щелкните, чтобы видеть только настроенные пресеты
@@ -209,14 +178,8 @@
 
 Пресеты должны соответствовать ВСЕМ выбранным фильтрам ОДНОВРЕМЕННО</value>
   </data>
-  <data name="predefinedPictureBox.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="predefinedPictureBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="predefinedPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>598, 35</value>
+    <value>599, 35</value>
   </data>
   <data name="predefinedPictureBox.ToolTip" xml:space="preserve">
     <value>Щелкните, чтобы видеть только стандартные пресеты
@@ -224,26 +187,14 @@
 
 Пресеты должны соответствовать ВСЕМ выбранным фильтрам ОДНОВРЕМЕННО</value>
   </data>
-  <data name="tickedOnlyPictureBox.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tickedOnlyPictureBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="tickedOnlyPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>579, 35</value>
+    <value>580, 35</value>
   </data>
   <data name="tickedOnlyPictureBox.ToolTip" xml:space="preserve">
     <value>Щелкните, чтобы видеть только автоприменяемые пресеты
 Щелкните, удерживая клавишу Ctrl, чтобы добавить этот фильтр к существующим или отключить его
 
 Пресеты должны соответствовать ВСЕМ выбранным фильтрам ОДНОВРЕМЕННО</value>
-  </data>
-  <data name="filterComboBox.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="filterComboBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="filterComboBox.Items" xml:space="preserve">
     <value>(Без фильтра)</value>
@@ -270,7 +221,7 @@
     <value>С назначенными комбинациями клавиш</value>
   </data>
   <data name="filterComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>741, 33</value>
+    <value>742, 33</value>
   </data>
   <data name="filterComboBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>250, 21</value>
@@ -281,42 +232,24 @@
 Щелкните с нажатой клавишей Ctrl, чтобы 
 добавить фильтр к существующим или отключить его</value>
   </data>
-  <data name="clearSearchButton.Error" xml:space="preserve">
-    <value />
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="clearSearchButton.Font" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="clearSearchButton.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="clearSearchButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>547, 33</value>
+    <value>518, 32</value>
   </data>
   <data name="clearSearchButton.ToolTip" xml:space="preserve">
     <value>Очистить текст поиска</value>
-  </data>
-  <data name="searchTextBox.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="searchTextBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="searchTextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>31, 33</value>
   </data>
   <data name="searchTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>513, 20</value>
+    <value>481, 20</value>
   </data>
   <data name="searchTextBox.ToolTip" xml:space="preserve">
     <value>Введите часть имени пресета или просто несколько слов из имени пресета, чтобы отфильтровать список</value>
-  </data>
-  <data name="pictureBox1.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="pictureBox1.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -532,32 +465,19 @@
   <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 33</value>
   </data>
-  <data name="pictureBox1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="autoApplyPresetslabel.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="autoApplyPresetslabel.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="autoApplyPresetslabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>991, 30</value>
+    <value>992, 30</value>
   </data>
   <data name="autoApplyPresetslabel.Text" xml:space="preserve">
-    <value>Выберите пресет, чтобы изменить его или применить к выбранным трекам. Отметьте пресеты, чтобы они автоматически применялись при редактировании/обновлении тегов или при добавлении треков в библиотеку. Щелкните здесь, чтобы увидеть только отмеченные пресеты. Отмечено для автоматического применения: %%TICKEDPRESETS%%</value>
-  </data>
-  <data name="autoApplyPresetslabel.ToolTip" xml:space="preserve">
-    <value />
+    <value>Выберите пресет, чтобы изменить его или применить к выбранным трекам. Отметьте пресеты, чтобы они автоматически применялись при редактировании/обновлении тегов или при добавлении треков в библиотеку. Щелкните здесь, чтобы увидеть только отмеченные пресеты. Отмечено для автоматического применения: %%TICKEDPRESETS%%
+Пресеты, использующие псевдо-тег &lt;ВСЕ ТЕГИ&gt;, не могут быть отмечены для автоматического применения, и им не могут быть назначены комбинации клавиш
+</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>1006, 690</value>
+    <value>1007, 690</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Дополнительный поиск и замена</value>
-  </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="dirtyErrorProvider.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1156,23 +1076,58 @@
         AaxBwAOsQeAHrEHwD6xB//+sQQ==
 </value>
   </data>
-  <data name="splitContainer1.Error" xml:space="preserve">
-    <value />
+  <data name="buttonSelectPreservedTags.Location" type="System.Drawing.Point, System.Drawing">
+    <value>463, 2</value>
   </data>
-  <data name="splitContainer1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+  <data name="labelPreserveTagValues.Location" type="System.Drawing.Point, System.Drawing">
+    <value>485, 1</value>
   </data>
-  <data name="splitContainer1.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="labelPreserveTagValues.Size" type="System.Drawing.Size, System.Drawing">
+    <value>154, 22</value>
   </data>
-  <data name="favoriteCheckBox.Error" xml:space="preserve">
-    <value />
+  <data name="labelPreserveTagValues.Text" xml:space="preserve">
+    <value>Не изменять значения тегов</value>
   </data>
-  <data name="favoriteCheckBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="labelPreserveTagValues.ToolTip" xml:space="preserve">
+    <value>Никогда не изменять эти значения тегов (разделенные ;;), независимо от того, в каких тегах они встречаютя</value>
   </data>
-  <data name="favoriteCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="buttonProcessPreserveTags.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 22</value>
+  </data>
+  <data name="buttonProcessPreserveTags.Text" xml:space="preserve">
+    <value>Обрабатывать теги</value>
+  </data>
+  <data name="buttonProcessPreserveTags.ToolTip" xml:space="preserve">
+    <value>Обрабатывать только указанные теги (если указаны, иначе - все) ИЛИ вегда пропускать указанные. Разделяйте названия тегов ;;
+
+Щелчок по флажкам при нажатой клавише Ctrl в левой части предварительного просмотра добавит/удалит тег, указанный в строке, к списку/из списка обрабатываемых/исключенных тегов</value>
+  </data>
+  <data name="processPreserveTagsTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>119, 3</value>
+  </data>
+  <data name="processPreserveTagsTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>341, 20</value>
+  </data>
+  <data name="processPreserveTagsTextBox.ToolTip" xml:space="preserve">
+    <value>Обрабатывать только указанные теги (если указаны, иначе - все) ИЛИ вегда пропускать указанные. Разделяйте названия тегов ;;
+
+Щелчок по флажкам при нажатой клавише Ctrl в левой части предварительного просмотра добавит/удалит тег, указанный в строке, к списку/из списка обрабатываемых/исключенных тегов
+</value>
+  </data>
+  <data name="preserveTagValuesTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>642, 3</value>
+  </data>
+  <data name="preserveTagValuesTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>342, 20</value>
+  </data>
+  <data name="preserveTagValuesTextBox.ToolTip" xml:space="preserve">
+    <value>Указанные значения тегов никогда не будут изменяться. Разделяйте значения тегов ;; </value>
+  </data>
+  <data name="tableLayoutPanel3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 269</value>
+  </data>
+  <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>987, 26</value>
   </data>
   <data name="favoriteCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>536, 145</value>
@@ -1186,41 +1141,17 @@
   <data name="favoriteCheckBox.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="customTextLabel.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="customTextLabel.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="customTextLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 13</value>
   </data>
   <data name="customTextLabel.Text" xml:space="preserve">
     <value>&lt;Свой текст 1&gt;:</value>
   </data>
-  <data name="customTextLabel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="customTextBox.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="customTextBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="customTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>387, 20</value>
   </data>
-  <data name="customTextBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="customText2Label.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="customText2Label.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="customText2Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>499, 6</value>
+    <value>495, 6</value>
   </data>
   <data name="customText2Label.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 13</value>
@@ -1228,29 +1159,11 @@
   <data name="customText2Label.Text" xml:space="preserve">
     <value>&lt;Свой текст 2&gt;:</value>
   </data>
-  <data name="customText2Label.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="customText2Box.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="customText2Box.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="customText2Box.Location" type="System.Drawing.Point, System.Drawing">
     <value>596, 3</value>
   </data>
   <data name="customText2Box.Size" type="System.Drawing.Size, System.Drawing">
-    <value>387, 20</value>
-  </data>
-  <data name="customText2Box.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="customText3Label.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="customText3Label.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>388, 20</value>
   </data>
   <data name="customText3Label.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 13</value>
@@ -1258,29 +1171,11 @@
   <data name="customText3Label.Text" xml:space="preserve">
     <value>&lt;Свой текст 3&gt;:</value>
   </data>
-  <data name="customText3Label.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="customText3Box.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="customText3Box.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="customText3Box.Size" type="System.Drawing.Size, System.Drawing">
     <value>387, 20</value>
   </data>
-  <data name="customText3Box.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="customText4Label.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="customText4Label.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="customText4Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>499, 33</value>
+    <value>495, 33</value>
   </data>
   <data name="customText4Label.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 13</value>
@@ -1288,278 +1183,113 @@
   <data name="customText4Label.Text" xml:space="preserve">
     <value>&lt;Свой текст 4&gt;:</value>
   </data>
-  <data name="customText4Label.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="customText4Box.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="customText4Box.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="customText4Box.Location" type="System.Drawing.Point, System.Drawing">
     <value>596, 29</value>
   </data>
   <data name="customText4Box.Size" type="System.Drawing.Size, System.Drawing">
-    <value>387, 20</value>
-  </data>
-  <data name="customText4Box.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tableLayoutPanel2.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tableLayoutPanel2.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="tableLayoutPanel2.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>388, 20</value>
   </data>
   <data name="tableLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 217</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>986, 52</value>
-  </data>
-  <data name="tableLayoutPanel2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="parameterTagList.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="parameterTagList.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>987, 52</value>
   </data>
   <data name="parameterTagList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>258, 21</value>
-  </data>
-  <data name="parameterTagList.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="labelTag.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="labelTag.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>247, 21</value>
   </data>
   <data name="labelTag.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 13</value>
+    <value>65, 13</value>
   </data>
   <data name="labelTag.Text" xml:space="preserve">
-    <value>&lt;Тег 1&gt;:</value>
+    <value>    &lt;Тег 1&gt;:</value>
   </data>
   <data name="labelTag.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="labelTag2.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="labelTag2.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>Этот пресет использует псевдо-тег &lt;ВСЕ ТЕГИ&gt;. БУДЬТЕ ОСТОРОЖНЫ!</value>
   </data>
   <data name="labelTag2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>334, 7</value>
+    <value>330, 7</value>
   </data>
   <data name="labelTag2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 13</value>
+    <value>65, 13</value>
   </data>
   <data name="labelTag2.Text" xml:space="preserve">
-    <value>&lt;Тег 2&gt;:</value>
-  </data>
-  <data name="labelTag2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="parameterTag2List.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="parameterTag2List.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>    &lt;Тег 2&gt;:</value>
   </data>
   <data name="parameterTag2List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>395, 3</value>
+    <value>406, 3</value>
   </data>
   <data name="parameterTag2List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>258, 21</value>
-  </data>
-  <data name="parameterTag2List.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="labelTag3.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="labelTag3.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>248, 21</value>
   </data>
   <data name="labelTag3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>662, 7</value>
+    <value>659, 7</value>
   </data>
   <data name="labelTag3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 13</value>
+    <value>65, 13</value>
   </data>
   <data name="labelTag3.Text" xml:space="preserve">
-    <value>&lt;Тег 3&gt;:</value>
-  </data>
-  <data name="labelTag3.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="parameterTag3List.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="parameterTag3List.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>    &lt;Тег 3&gt;:</value>
   </data>
   <data name="parameterTag3List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>723, 3</value>
+    <value>735, 3</value>
   </data>
   <data name="parameterTag3List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>260, 21</value>
-  </data>
-  <data name="parameterTag3List.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="labelTag4.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="labelTag4.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>249, 21</value>
   </data>
   <data name="labelTag4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 13</value>
+    <value>65, 13</value>
   </data>
   <data name="labelTag4.Text" xml:space="preserve">
-    <value>&lt;Тег 4&gt;:</value>
-  </data>
-  <data name="labelTag4.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="parameterTag4List.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="parameterTag4List.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>    &lt;Тег 4&gt;:</value>
   </data>
   <data name="parameterTag4List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>258, 21</value>
-  </data>
-  <data name="parameterTag4List.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="labelTag5.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="labelTag5.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>247, 21</value>
   </data>
   <data name="labelTag5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>334, 35</value>
+    <value>330, 35</value>
   </data>
   <data name="labelTag5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 13</value>
+    <value>65, 13</value>
   </data>
   <data name="labelTag5.Text" xml:space="preserve">
-    <value>&lt;Тег 5&gt;:</value>
-  </data>
-  <data name="labelTag5.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="parameterTag5List.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="parameterTag5List.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>    &lt;Тег 5&gt;:</value>
   </data>
   <data name="parameterTag5List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>395, 30</value>
+    <value>406, 30</value>
   </data>
   <data name="parameterTag5List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>258, 21</value>
-  </data>
-  <data name="parameterTag5List.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="labelTag6.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="labelTag6.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>248, 21</value>
   </data>
   <data name="labelTag6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>662, 35</value>
+    <value>659, 35</value>
   </data>
   <data name="labelTag6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 13</value>
+    <value>65, 13</value>
   </data>
   <data name="labelTag6.Text" xml:space="preserve">
-    <value>&lt;Тег 6&gt;:</value>
-  </data>
-  <data name="labelTag6.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="parameterTag6List.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="parameterTag6List.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>    &lt;Тег 6&gt;:</value>
   </data>
   <data name="parameterTag6List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>723, 30</value>
+    <value>735, 30</value>
   </data>
   <data name="parameterTag6List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>260, 21</value>
-  </data>
-  <data name="parameterTag6List.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tableLayoutPanel1.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tableLayoutPanel1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="tableLayoutPanel1.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>249, 21</value>
   </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 164</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>986, 54</value>
-  </data>
-  <data name="tableLayoutPanel1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="userPresetPictureBox.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="userPresetPictureBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>987, 54</value>
   </data>
   <data name="userPresetPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>853, 147</value>
-  </data>
-  <data name="userPresetPictureBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="customizedPresetPictureBox.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="customizedPresetPictureBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>854, 147</value>
   </data>
   <data name="customizedPresetPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>690, 147</value>
-  </data>
-  <data name="customizedPresetPictureBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label4.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label4.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>691, 147</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>703, 146</value>
+    <value>704, 146</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 13</value>
@@ -1567,65 +1297,14 @@
   <data name="label4.Text" xml:space="preserve">
     <value>Настроен пользователем</value>
   </data>
-  <data name="label4.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label3.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label3.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>866, 146</value>
+    <value>867, 146</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>118, 13</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>Пресет пользователя</value>
-  </data>
-  <data name="label3.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label2.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label2.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 274</value>
-  </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>304, 13</value>
-  </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>Никогда не изменять эти значения тегов (разделенные ;;)</value>
-  </data>
-  <data name="label2.ToolTip" xml:space="preserve">
-    <value>Никогда не изменять эти значения тегов, независимо от того, в каких тегах они встречаются</value>
-  </data>
-  <data name="preserveValuesTextBox.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="preserveValuesTextBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="preserveValuesTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>311, 271</value>
-  </data>
-  <data name="preserveValuesTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>675, 20</value>
-  </data>
-  <data name="preserveValuesTextBox.ToolTip" xml:space="preserve">
-    <value>Все теги, равные одному из перечисленных в этом поле значений, не будут как либо изменяться</value>
-  </data>
-  <data name="applyToPlayingTrackCheckBox.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="applyToPlayingTrackCheckBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="applyToPlayingTrackCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>296, 145</value>
@@ -1636,26 +1315,14 @@
   <data name="applyToPlayingTrackCheckBox.Text" xml:space="preserve">
     <value>Применить к проигрываемому треку</value>
   </data>
-  <data name="clearIdButton.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="clearIdButton.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="clearIdButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>967, 120</value>
+    <value>968, 120</value>
   </data>
   <data name="clearIdButton.ToolTip" xml:space="preserve">
     <value>Удалить назначение ID-а функции виртуальных тегов пресету</value>
   </data>
-  <data name="idTextBox.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="idTextBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="idTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>835, 120</value>
+    <value>836, 120</value>
   </data>
   <data name="idTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>130, 20</value>
@@ -1663,29 +1330,14 @@
   <data name="idTextBox.ToolTip" xml:space="preserve">
     <value>Разрешены только латинские буквы, цифры и символы - : _ .</value>
   </data>
-  <data name="label1.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label1.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>663, 123</value>
+    <value>664, 123</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>166, 13</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>ID функции виртуальных тегов:</value>
-  </data>
-  <data name="label1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="assignHotkeyCheckBox.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="assignHotkeyCheckBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="assignHotkeyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 145</value>
@@ -1702,59 +1354,26 @@
 
 Потребуется заново назначить комбинацию клавиш, если изменится название пресета</value>
   </data>
-  <data name="descriptionBox.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="descriptionBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="descriptionBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 14</value>
   </data>
   <data name="descriptionBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>976, 57</value>
-  </data>
-  <data name="descriptionBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="groupBox1.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="groupBox1.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>977, 58</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 291</value>
+    <value>4, 294</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>985, 76</value>
+    <value>986, 77</value>
   </data>
   <data name="groupBox1.Text" xml:space="preserve">
     <value>Описание пресета</value>
-  </data>
-  <data name="groupBox1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="playlistComboBox.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="playlistComboBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="playlistComboBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>398, 120</value>
   </data>
   <data name="playlistComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>258, 21</value>
-  </data>
-  <data name="playlistComboBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="conditionCheckBox.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="conditionCheckBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>259, 21</value>
   </data>
   <data name="conditionCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 122</value>
@@ -1765,83 +1384,120 @@
   <data name="conditionCheckBox.Text" xml:space="preserve">
     <value>Автоматически применять пресет, только если трек есть в плейлисте:</value>
   </data>
-  <data name="conditionCheckBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="presetList.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="presetList.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="presetList.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 3</value>
   </data>
   <data name="presetList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>985, 113</value>
+    <value>986, 113</value>
   </data>
-  <data name="presetList.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="splitContainer1.Panel1.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="splitContainer1.Panel1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="splitContainer1.Panel1.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="splitContainer1.Panel1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="splitContainer1.Panel1MinSize" type="System.Int32, mscorlib">
     <value>368</value>
   </data>
   <data name="Track.HeaderText" xml:space="preserve">
     <value>Трек</value>
   </data>
+  <data name="Track.ToolTipText" xml:space="preserve">
+    <value>Представление трека</value>
+  </data>
+  <data name="TagName1.HeaderText" xml:space="preserve">
+    <value>Тег</value>
+  </data>
+  <data name="TagName1.ToolTipText" xml:space="preserve">
+    <value>Название тега</value>
+  </data>
   <data name="OriginalTag1.HeaderText" xml:space="preserve">
-    <value>Исходный тег 1</value>
+    <value>Исх. значение</value>
+  </data>
+  <data name="OriginalTag1.ToolTipText" xml:space="preserve">
+    <value>Исходное значение тега</value>
   </data>
   <data name="NewTag1.HeaderText" xml:space="preserve">
-    <value>Новое значение</value>
+    <value>Нов. значение</value>
+  </data>
+  <data name="NewTag1.ToolTipText" xml:space="preserve">
+    <value>Новое значение тега</value>
+  </data>
+  <data name="TagName2.HeaderText" xml:space="preserve">
+    <value>Тег</value>
+  </data>
+  <data name="TagName2.ToolTipText" xml:space="preserve">
+    <value>Название тега</value>
   </data>
   <data name="OriginalTag2.HeaderText" xml:space="preserve">
-    <value>Исходный тег 2</value>
+    <value>Исх. значение</value>
+  </data>
+  <data name="OriginalTag2.ToolTipText" xml:space="preserve">
+    <value>Исходное значение тега</value>
   </data>
   <data name="NewTag2.HeaderText" xml:space="preserve">
-    <value>Новое значение</value>
+    <value>Нов. значение</value>
+  </data>
+  <data name="NewTag2.ToolTipText" xml:space="preserve">
+    <value>Новое значение тега</value>
+  </data>
+  <data name="TagName3.HeaderText" xml:space="preserve">
+    <value>Тег</value>
+  </data>
+  <data name="TagName3.ToolTipText" xml:space="preserve">
+    <value>Название тега</value>
   </data>
   <data name="OriginalTag3.HeaderText" xml:space="preserve">
-    <value>Исходный тег 3</value>
+    <value>Исх. значение</value>
+  </data>
+  <data name="OriginalTag3.ToolTipText" xml:space="preserve">
+    <value>Исходное значение тега</value>
   </data>
   <data name="NewTag3.HeaderText" xml:space="preserve">
-    <value>Новое значение</value>
+    <value>Нов. значение</value>
   </data>
-  <data name="previewTable.Error" xml:space="preserve">
-    <value />
+  <data name="NewTag3.ToolTipText" xml:space="preserve">
+    <value>Новое значение тега</value>
   </data>
-  <data name="previewTable.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="TagName4.HeaderText" xml:space="preserve">
+    <value>Тег</value>
+  </data>
+  <data name="TagName4.ToolTipText" xml:space="preserve">
+    <value>Название тега</value>
+  </data>
+  <data name="OriginalTag4.HeaderText" xml:space="preserve">
+    <value>Исх. значение</value>
+  </data>
+  <data name="OriginalTag4.ToolTipText" xml:space="preserve">
+    <value>Исходное значение тега</value>
+  </data>
+  <data name="NewTag4.HeaderText" xml:space="preserve">
+    <value>Нов. значение</value>
+  </data>
+  <data name="NewTag4.ToolTipText" xml:space="preserve">
+    <value>Новое значение тега</value>
+  </data>
+  <data name="TagName5.HeaderText" xml:space="preserve">
+    <value>Тег</value>
+  </data>
+  <data name="OriginalTag5.HeaderText" xml:space="preserve">
+    <value>Исх. значение</value>
+  </data>
+  <data name="OriginalTag5.ToolTipText" xml:space="preserve">
+    <value>Исходное значение тега</value>
+  </data>
+  <data name="NewTag5.HeaderText" xml:space="preserve">
+    <value>Нов. значение</value>
+  </data>
+  <data name="NewTag5.ToolTipText" xml:space="preserve">
+    <value>Новое значение тега</value>
+  </data>
+  <data name="OddEven.ToolTipText" xml:space="preserve">
+    <value>Нечетные/четные треки</value>
   </data>
   <data name="previewTable.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 76</value>
   </data>
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>985, 150</value>
-  </data>
-  <data name="previewTable.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label7.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label7.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>986, 150</value>
   </data>
   <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>63, -2</value>
+    <value>62, -2</value>
   </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 13</value>
@@ -1849,59 +1505,34 @@
   <data name="label7.Text" xml:space="preserve">
     <value> настройка и применение</value>
   </data>
-  <data name="label7.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonSaveClose.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonSaveClose.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="buttonSaveClose.Size" type="System.Drawing.Size, System.Drawing">
-    <value>131, 23</value>
+    <value>130, 23</value>
   </data>
   <data name="buttonSaveClose.Text" xml:space="preserve">
     <value>Сохранить и закрыть</value>
   </data>
   <data name="buttonSaveClose.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonOK.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonOK.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>Сохранить все новые/измененные определения пресетов и закрыть это окно
+
+Щелкните мышкой с нажатой клавишей Ctrl, чтобы сохранить определения пресетов без закрытия этого окна</value>
   </data>
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
     <value>143, 43</value>
   </data>
   <data name="buttonOK.Size" type="System.Drawing.Size, System.Drawing">
-    <value>131, 23</value>
+    <value>130, 23</value>
   </data>
   <data name="buttonOK.Text" xml:space="preserve">
     <value>Применить</value>
   </data>
   <data name="buttonOK.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonPreview.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>Применить пресет к выбранным трекам</value>
   </data>
   <data name="buttonPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>131, 23</value>
+    <value>130, 23</value>
   </data>
   <data name="buttonPreview.Text" xml:space="preserve">
     <value>Просмотр</value>
-  </data>
-  <data name="buttonPreview.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonClose.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonClose.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
     <value>143, 14</value>
@@ -1915,26 +1546,11 @@
   <data name="buttonClose.ToolTip" xml:space="preserve">
     <value>Есть несохраненные изменения</value>
   </data>
-  <data name="groupBox3.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="groupBox3.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>708, -2</value>
+    <value>710, -2</value>
   </data>
   <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>281, 75</value>
-  </data>
-  <data name="groupBox3.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label6.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label6.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>280, 75</value>
   </data>
   <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
     <value>282, -2</value>
@@ -1945,15 +1561,6 @@
   <data name="label6.Text" xml:space="preserve">
     <value> управление пресетами</value>
   </data>
-  <data name="label6.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonExport.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonExport.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="buttonExport.Size" type="System.Drawing.Size, System.Drawing">
     <value>141, 23</value>
   </data>
@@ -1963,17 +1570,11 @@
   <data name="buttonExport.ToolTip" xml:space="preserve">
     <value>Экспортировать выбранный пользовательский или настроенный стандартный пресет для обмена с другими людьми</value>
   </data>
-  <data name="buttonDeleteAll.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonDeleteAll.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="buttonDeleteAll.Location" type="System.Drawing.Point, System.Drawing">
-    <value>565, 14</value>
+    <value>562, 14</value>
   </data>
   <data name="buttonDeleteAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>131, 23</value>
+    <value>130, 23</value>
   </data>
   <data name="buttonDeleteAll.Text" xml:space="preserve">
     <value>Удалить все</value>
@@ -1981,17 +1582,11 @@
   <data name="buttonDeleteAll.ToolTip" xml:space="preserve">
     <value>Удалить все стандартные пресеты</value>
   </data>
-  <data name="buttonDelete.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonDelete.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="buttonDelete.Location" type="System.Drawing.Point, System.Drawing">
-    <value>565, 43</value>
+    <value>562, 43</value>
   </data>
   <data name="buttonDelete.Size" type="System.Drawing.Size, System.Drawing">
-    <value>131, 23</value>
+    <value>130, 23</value>
   </data>
   <data name="buttonDelete.Text" xml:space="preserve">
     <value>Удалить</value>
@@ -1999,53 +1594,29 @@
   <data name="buttonDelete.ToolTip" xml:space="preserve">
     <value>Удалить выбранный пресет</value>
   </data>
-  <data name="buttonEdit.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonEdit.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="buttonEdit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>428, 43</value>
+    <value>426, 43</value>
   </data>
   <data name="buttonEdit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>131, 23</value>
+    <value>130, 23</value>
   </data>
   <data name="buttonEdit.Text" xml:space="preserve">
     <value>Изменить</value>
-  </data>
-  <data name="buttonEdit.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonCreate.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonCreate.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="buttonCreate.Location" type="System.Drawing.Point, System.Drawing">
     <value>154, 43</value>
   </data>
   <data name="buttonCreate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>131, 23</value>
+    <value>130, 23</value>
   </data>
   <data name="buttonCreate.Text" xml:space="preserve">
     <value>Создать</value>
-  </data>
-  <data name="buttonCreate.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonImport.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonImport.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="buttonImport.Location" type="System.Drawing.Point, System.Drawing">
     <value>154, 14</value>
   </data>
   <data name="buttonImport.Size" type="System.Drawing.Size, System.Drawing">
-    <value>131, 23</value>
+    <value>130, 23</value>
   </data>
   <data name="buttonImport.Text" xml:space="preserve">
     <value>Импортировать...</value>
@@ -2053,17 +1624,11 @@
   <data name="buttonImport.ToolTip" xml:space="preserve">
     <value>Импортировать пресет(ы), ранее экспортированный(ые) вами или другим человеком</value>
   </data>
-  <data name="buttonImportNew.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonImportNew.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="buttonImportNew.Location" type="System.Drawing.Point, System.Drawing">
-    <value>291, 14</value>
+    <value>290, 14</value>
   </data>
   <data name="buttonImportNew.Size" type="System.Drawing.Size, System.Drawing">
-    <value>131, 23</value>
+    <value>130, 23</value>
   </data>
   <data name="buttonImportNew.Text" xml:space="preserve">
     <value>Установить новые</value>
@@ -2074,17 +1639,11 @@
 
 Если вы удалили какие-то стандартные пресеты, то они не будут переустановлены</value>
   </data>
-  <data name="buttonImportAll.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonImportAll.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="buttonImportAll.Location" type="System.Drawing.Point, System.Drawing">
-    <value>428, 14</value>
+    <value>426, 14</value>
   </data>
   <data name="buttonImportAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>131, 23</value>
+    <value>130, 23</value>
   </data>
   <data name="buttonImportAll.Text" xml:space="preserve">
     <value>Установить все</value>
@@ -2093,12 +1652,6 @@
     <value>Установить все стандартные пресеты, обновив уже установленные стандартные пресеты до последней версии
 
 Если вы удалили какие-то стандартные пресеты, они будут переустановлены</value>
-  </data>
-  <data name="buttonExportCustom.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonExportCustom.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="buttonExportCustom.Size" type="System.Drawing.Size, System.Drawing">
     <value>141, 23</value>
@@ -2109,17 +1662,11 @@
   <data name="buttonExportCustom.ToolTip" xml:space="preserve">
     <value>Экспортировать все пользовательские пресеты</value>
   </data>
-  <data name="buttonCopy.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonCopy.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="buttonCopy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>291, 43</value>
+    <value>290, 43</value>
   </data>
   <data name="buttonCopy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>131, 23</value>
+    <value>130, 23</value>
   </data>
   <data name="buttonCopy.Text" xml:space="preserve">
     <value>Копировать</value>
@@ -2127,40 +1674,16 @@
   <data name="buttonCopy.ToolTip" xml:space="preserve">
     <value>Скопировать выбранный пресет в новый пресет пользователя (новый пресет можно будет редактировать)</value>
   </data>
-  <data name="groupBox2.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="groupBox2.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, -2</value>
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>698, 75</value>
-  </data>
-  <data name="groupBox2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="splitContainer1.Panel2.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="splitContainer1.Panel2.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="splitContainer1.Panel2.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="splitContainer1.Panel2.ToolTip" xml:space="preserve">
-    <value />
+    <value>699, 75</value>
   </data>
   <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>993, 604</value>
+    <value>994, 604</value>
   </data>
   <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
     <value>370</value>
-  </data>
-  <data name="splitContainer1.ToolTip" xml:space="preserve">
-    <value />
   </data>
 </root>

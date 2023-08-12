@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
+using static MusicBeePlugin.Plugin;
 
 namespace MusicBeePlugin
 {
@@ -57,7 +58,6 @@ namespace MusicBeePlugin
 
         public PluginWindowTemplate()
         {
-            InitializeComponent();
         }
 
         public PluginWindowTemplate(Plugin tagToolsPluginParam)
@@ -65,48 +65,46 @@ namespace MusicBeePlugin
             InitializeComponent();
 
             TagToolsPlugin = tagToolsPluginParam;
-
-            initializeForm();
         }
 
         public static Control SkinControl(Control control)
         {
-            if (!Plugin.SavedSettings.useSkinColors)
+            if (!SavedSettings.useSkinColors)
                 return control;
 
 
             if (control.GetType() == typeof(Button))
             {
-                control.BackColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputControl, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentBackground));
-                control.ForeColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputControl, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentForeground));
+                control.BackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
+                control.ForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
 
                 ((Button)control).FlatStyle = FlatStyle.Flat;
                 ((Button)control).FlatAppearance.BorderSize = 1;
-                ((Button)control).FlatAppearance.BorderColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputControl, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentBorder));
+                ((Button)control).FlatAppearance.BorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentBorder));
             }
             else if (control.GetType().IsSubclassOf(typeof(TextBox)) || control.GetType() == typeof(TextBox))
             {
-                control.BackColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputControl, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentBackground));
-                control.ForeColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputControl, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentForeground));
+                control.BackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
+                control.ForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
 
                 //((TextBox)control).BorderStyle = BorderStyle.FixedSingle;
             }
             else if (control.GetType().IsSubclassOf(typeof(ComboBox)) || control.GetType() == typeof(ComboBox))
             {
-                control.BackColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputControl, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentBackground));
-                control.ForeColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputControl, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentForeground));
+                control.BackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
+                control.ForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
 
                 ((ComboBox)control).FlatStyle = FlatStyle.Flat;
             }
             else if (control.GetType().IsSubclassOf(typeof(ListBox)) || control.GetType() == typeof(ListBox))
             {
-                control.BackColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputControl, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentBackground));
-                control.ForeColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputControl, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentForeground));
+                control.BackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
+                control.ForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
             }
             else if (control.GetType() == typeof(DataGridView))
             {
-                control.BackColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputControl, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentBackground));
-                control.ForeColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputControl, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentForeground));
+                control.BackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
+                control.ForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
 
                 ((DataGridView)control).BackgroundColor = control.BackColor;
                 ((DataGridView)control).DefaultCellStyle.BackColor = control.BackColor;
@@ -114,8 +112,8 @@ namespace MusicBeePlugin
             }
             else
             {
-                control.BackColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputPanel, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentBackground));
-                control.ForeColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputPanel, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentForeground));
+                control.BackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
+                control.ForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
             }
 
             return control;
@@ -123,7 +121,7 @@ namespace MusicBeePlugin
 
         public static Control SkinChildrenControls(Control parentControl)
         {
-            if (!Plugin.SavedSettings.useSkinColors)
+            if (!SavedSettings.useSkinColors)
                 return parentControl;
 
 
@@ -139,10 +137,10 @@ namespace MusicBeePlugin
 
         public static Form SkinForm(Form form)
         {
-            if (Plugin.SavedSettings.useSkinColors)
+            if (SavedSettings.useSkinColors)
             {
-                form.BackColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputPanel, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentBackground));
-                form.ForeColor = Color.FromArgb(Plugin.MbApiInterface.Setting_GetSkinElementColour(Plugin.SkinElement.SkinInputPanel, Plugin.ElementState.ElementStateDefault, Plugin.ElementComponent.ComponentForeground));
+                form.BackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
+                form.ForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
 
                 SkinChildrenControls(form);
             }
@@ -181,14 +179,14 @@ namespace MusicBeePlugin
 
         protected void initializeForm()
         {
-            Plugin.MbForm = Plugin.MbForm.IsDisposed ? (Form)FromHandle(Plugin.MbApiInterface.MB_GetWindowHandle()) : Plugin.MbForm;
-            Plugin.MbForm.AddOwnedForm(this);
+            MbForm = MbForm.IsDisposed ? (Form)FromHandle(MbApiInterface.MB_GetWindowHandle()) : MbForm;
+            MbForm.AddOwnedForm(this);
 
-            clickedButton = Plugin.EmptyButton;
+            clickedButton = EmptyButton;
 
-            lock (Plugin.OpenedForms)
+            lock (OpenedForms)
             {
-                if (Plugin.NumberOfNativeMbBackgroundTasks > 0)
+                if (NumberOfNativeMbBackgroundTasks > 0)
                     disableQueryingButtons();
                 else
                     enableQueryingButtons();
@@ -200,16 +198,16 @@ namespace MusicBeePlugin
             TagToolsPlugin.fillTagNames();
 
 
-            //return; //For debbuging
+            //return; //For debugging
 
             SkinForm(this);
         }
 
         public static void Display(PluginWindowTemplate newForm, bool modalForm = false)
         {
-            lock (Plugin.OpenedForms)
+            lock (OpenedForms)
             {
-                foreach (PluginWindowTemplate form in Plugin.OpenedForms)
+                foreach (PluginWindowTemplate form in OpenedForms)
                 {
                     if (newForm == null || form.GetType() == newForm.GetType())
                     {
@@ -253,7 +251,7 @@ namespace MusicBeePlugin
                     }
                 }
 
-                Plugin.OpenedForms.Add(newForm);
+                OpenedForms.Add(newForm);
             }
 
             if (modalForm)
@@ -261,6 +259,7 @@ namespace MusicBeePlugin
                 newForm.modal = true;
                 newForm.setInitialFormMaximizedBounds();
                 newForm.ShowDialog();
+                newForm.Dispose();
             }
             else
             {
@@ -274,25 +273,29 @@ namespace MusicBeePlugin
         {
             bool taskWasStarted = false;
 
-            Plugin.InitializeSbText();
+            InitializeSbText();
 
             try
             {
                 if (backgroundTaskIsCanceled)
                 {
-                    if (Plugin.SavedSettings.playCanceledSound)
+                    if (DisablePlaySoundOnce)
+                        DisablePlaySoundOnce = false;
+                    else if (SavedSettings.playCanceledSound)
                         System.Media.SystemSounds.Hand.Play();
                 }
                 else
                 {
-                    if (Plugin.SavedSettings.playStartedSound)
+                    if (DisablePlaySoundOnce)
+                        DisablePlaySoundOnce = false;
+                    else if (SavedSettings.playStartedSound)
                         System.Media.SystemSounds.Exclamation.Play();
 
                     backgroundThread = Thread.CurrentThread;
                     backgroundThread.Priority = ThreadPriority.BelowNormal;
 
 
-                    if (clickedButton != Plugin.EmptyButton)
+                    if (clickedButton != EmptyButton)
                         Invoke(taskStarted);
 
                     taskWasStarted = true;
@@ -307,7 +310,9 @@ namespace MusicBeePlugin
             {
                 lock (taskStarted)
                 {
-                    if (!Plugin.SavedSettings.dontPlayCompletedSound)
+                    if (DisablePlaySoundOnce)
+                        DisablePlaySoundOnce = false;
+                    else if (!SavedSettings.dontPlayCompletedSound)
                         System.Media.SystemSounds.Asterisk.Play();
 
                     backgroundTaskIsScheduled = false;
@@ -315,20 +320,20 @@ namespace MusicBeePlugin
 
                     if (backgroundTaskIsNativeMB && taskWasStarted)
                     {
-                        Plugin.NumberOfNativeMbBackgroundTasks--;
+                        NumberOfNativeMbBackgroundTasks--;
                     }
                 }
 
-                if (clickedButton != Plugin.EmptyButton)
+                if (clickedButton != EmptyButton)
                     Invoke(stopButtonClicked, new object[] { this, null });
 
-                Plugin.RefreshPanels(true);
+                RefreshPanels(true);
 
-                Plugin.SetResultingSbText();
+                SetResultingSbText();
 
                 if (!Visible)
                 {
-                    if (Plugin.SavedSettings.closeShowHiddenWindows == 1)
+                    if (SavedSettings.closeShowHiddenWindows == 1)
                         Close();
                     else
                         Visible = true;
@@ -344,11 +349,11 @@ namespace MusicBeePlugin
                 {
                     backgroundTaskIsCanceled = false;
 
-                    lock (Plugin.OpenedForms)
+                    lock (OpenedForms)
                     {
                         if (backgroundTaskIsNativeMB)
                         {
-                            Plugin.NumberOfNativeMbBackgroundTasks++;
+                            NumberOfNativeMbBackgroundTasks++;
                         }
                     }
 
@@ -358,11 +363,11 @@ namespace MusicBeePlugin
                 {
                     backgroundTaskIsCanceled = true;
 
-                    lock (Plugin.OpenedForms)
+                    lock (OpenedForms)
                     {
                         if (backgroundTaskIsNativeMB)
                         {
-                            Plugin.NumberOfNativeMbBackgroundTasks--;
+                            NumberOfNativeMbBackgroundTasks--;
                         }
                     }
 
@@ -389,12 +394,12 @@ namespace MusicBeePlugin
 
                 if (backgroundTaskIsNativeMB)
                 {
-                    lock (Plugin.OpenedForms)
+                    lock (OpenedForms)
                     {
-                        Plugin.NumberOfNativeMbBackgroundTasks++;
+                        NumberOfNativeMbBackgroundTasks++;
                     }
 
-                    Plugin.MbApiInterface.MB_CreateBackgroundTask(serializedOperation, this);
+                    MbApiInterface.MB_CreateBackgroundTask(serializedOperation, this);
                 }
                 else
                 {
@@ -412,10 +417,10 @@ namespace MusicBeePlugin
 
         protected string getBackgroundTasksWarning()
         {
-            if (Plugin.NumberOfNativeMbBackgroundTasks == 1)
-                return Plugin.CtlDirtyError1sf + Plugin.NumberOfNativeMbBackgroundTasks + Plugin.CtlDirtyError2sf;
-            else if (Plugin.NumberOfNativeMbBackgroundTasks > 1)
-                return Plugin.CtlDirtyError1mf + Plugin.NumberOfNativeMbBackgroundTasks + Plugin.CtlDirtyError2mf;
+            if (NumberOfNativeMbBackgroundTasks == 1)
+                return CtlDirtyError1sf + NumberOfNativeMbBackgroundTasks + CtlDirtyError2sf;
+            else if (NumberOfNativeMbBackgroundTasks > 1)
+                return CtlDirtyError1mf + NumberOfNativeMbBackgroundTasks + CtlDirtyError2mf;
             else
                 return string.Empty;
         }
@@ -442,9 +447,9 @@ namespace MusicBeePlugin
 
         public void queryingOrUpdatingButtonClick(PluginWindowTemplate clickedForm)
         {
-            lock (Plugin.OpenedForms)
+            lock (OpenedForms)
             {
-                foreach (PluginWindowTemplate form in Plugin.OpenedForms)
+                foreach (PluginWindowTemplate form in OpenedForms)
                 {
                     if (backgroundTaskIsNativeMB && form != clickedForm && !(form.backgroundTaskIsNativeMB && form.backgroundTaskIsScheduled && !form.backgroundTaskIsCanceled))
                     {
@@ -458,18 +463,18 @@ namespace MusicBeePlugin
                     clickedForm.disableQueryingOrUpdatingButtons();
 
                     okButtonText = clickedButton.Text;
-                    clickedButton.Text = Plugin.CancelButtonName;
+                    clickedButton.Text = CancelButtonName;
                     clickedButton.Enabled = true;
 
                     closeButtonText = closeButton.Text;
-                    closeButton.Text = Plugin.HideButtonName;
+                    closeButton.Text = HideButtonName;
                     closeButton.Enabled = true;
                 }
                 else //Querying operation
                 {
                     clickedForm.disableQueryingOrUpdatingButtons();
 
-                    clickedButton.Text = Plugin.StopButtonName;
+                    clickedButton.Text = StopButtonName;
                     clickedButton.Enabled = true;
 
                     closeButton.Enabled = false;
@@ -481,13 +486,13 @@ namespace MusicBeePlugin
 
         public void stopButtonClickedMethod(PluginWindowTemplate clickedForm, PrepareOperation prepareOperation)
         {
-            lock (Plugin.OpenedForms)
+            lock (OpenedForms)
             {
-                foreach (PluginWindowTemplate form in Plugin.OpenedForms)
+                foreach (PluginWindowTemplate form in OpenedForms)
                 {
                     if (backgroundTaskIsNativeMB && form != clickedForm) //Updating operation
                     {
-                        if (Plugin.NumberOfNativeMbBackgroundTasks > 0 && !(form.backgroundTaskIsNativeMB && form.backgroundTaskIsScheduled && !form.backgroundTaskIsCanceled))
+                        if (NumberOfNativeMbBackgroundTasks > 0 && !(form.backgroundTaskIsNativeMB && form.backgroundTaskIsScheduled && !form.backgroundTaskIsCanceled))
                         {
                             form.disableQueryingButtons();
                         }
@@ -506,9 +511,9 @@ namespace MusicBeePlugin
                     clickedButton.Text = okButtonText;
 
                     if (previewIsGenerated)
-                        previewButton.Text = Plugin.ClearButtonName;
+                        previewButton.Text = ClearButtonName;
                     else
-                        previewButton.Text = Plugin.PreviewButtonName;
+                        previewButton.Text = PreviewButtonName;
 
                     if (backgroundTaskIsScheduled)
                         previewButton.Enabled = false;
@@ -522,7 +527,7 @@ namespace MusicBeePlugin
                         previewIsGenerated = false;
                         prepareOperation();
                         backgroundTaskIsCanceled = true;
-                        clickedButton.Text = Plugin.PreviewButtonName;
+                        clickedButton.Text = PreviewButtonName;
                         previewIsStopped = true;
                     }
                     else
@@ -531,7 +536,7 @@ namespace MusicBeePlugin
 
                         if (previewIsGenerated && !previewIsStopped)
                         {
-                            clickedButton.Text = Plugin.ClearButtonName;
+                            clickedButton.Text = ClearButtonName;
                         }
                         else
                         {
@@ -549,21 +554,22 @@ namespace MusicBeePlugin
 
         private void taskStartedMethod()
         {
-            lock (Plugin.OpenedForms)
+            lock (OpenedForms)
             {
                 if (backgroundTaskIsNativeMB) //Updating operation
                 {
                     enableQueryingButtons();
 
-                    clickedButton.Text = Plugin.StopButtonName;
+                    clickedButton.Text = StopButtonName;
                 }
             }
         }
 
         // clearPreview = 0: 
-        protected void clickOnPreviewButton(DataGridView previewList, PrepareOperation prepareOperation, ThreadStart operation, Button clickedButtonParam, Button okButtonParam, Button closeButtonParam, int clearPreview = 0)
+        protected void clickOnPreviewButton(DataGridView previewTable, PrepareOperation prepareOperation, ThreadStart operation, 
+            Button clickedButtonParam, Button okButtonParam, Button closeButtonParam, int clearPreview = 0)
         {
-            if ((previewList.Rows.Count == 0 || backgroundTaskIsWorking() || clearPreview == 2) && clearPreview != 1)
+            if ((previewTable.Rows.Count == 0 || backgroundTaskIsWorking() || clearPreview == 2) && clearPreview != 1)
             {
                 if (prepareOperation())
                     switchOperation(operation, clickedButtonParam, okButtonParam, clickedButtonParam, closeButtonParam, false, prepareOperation);
@@ -572,7 +578,7 @@ namespace MusicBeePlugin
             {
                 previewIsGenerated = false;
                 prepareOperation();
-                clickedButtonParam.Text = Plugin.PreviewButtonName;
+                clickedButtonParam.Text = PreviewButtonName;
                 enableDisablePreviewOptionControls(true);
             }
         }
@@ -588,9 +594,9 @@ namespace MusicBeePlugin
             {
                 saveWindowSizesPositions();
 
-                lock (Plugin.OpenedForms)
+                lock (OpenedForms)
                 {
-                    Plugin.OpenedForms.Remove(this);
+                    OpenedForms.Remove(this);
                 }
             }
         }
@@ -709,7 +715,7 @@ namespace MusicBeePlugin
             string fullName = GetType().FullName;
             WindowSettingsType currentWindowSettings = null;
 
-            foreach (var windowSettings in Plugin.SavedSettings.windowsSettings)
+            foreach (var windowSettings in SavedSettings.windowsSettings)
             {
                 if (windowSettings.className == fullName)
                 {
@@ -725,7 +731,7 @@ namespace MusicBeePlugin
                     className = fullName
                 };
 
-                Plugin.SavedSettings.windowsSettings.Add(currentWindowSettings);
+                SavedSettings.windowsSettings.Add(currentWindowSettings);
             }
 
             return currentWindowSettings;

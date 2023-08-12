@@ -2,52 +2,29 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-
 namespace MusicBeePlugin
 {
-    public partial class PasteTagsFromClipboardCommand : PluginWindowTemplate
+    public partial class Plugin
     {
-        private List<string> destinationTagNames = new List<string>();
-
-        public PasteTagsFromClipboardCommand()
+        public static bool PasteTagsFromClipboard(Plugin tagToolsPluginParam)
         {
-            InitializeComponent();
-        }
-
-        public PasteTagsFromClipboardCommand(Plugin tagToolsPluginParam)
-        {
-            InitializeComponent();
-
-            TagToolsPlugin = tagToolsPluginParam;
-
-            initializeForm();
-        }
-
-        protected new void initializeForm()
-        {
-            base.initializeForm();
-
-            Plugin.FillListByTagNames(destinationTagNames, false, false, false);
-        }
-
-        private bool pasteTagsFromClipboard()
-        {
+            List<string> destinationTagNames = new List<string>();
             string[] files = null;
 
-            if (!Plugin.MbApiInterface.Library_QueryFilesEx("domain=SelectedFiles", out files))
+            if (!MbApiInterface.Library_QueryFilesEx("domain=SelectedFiles", out files))
                 files = new string[0];
 
 
             if (files.Length == 0)
             {
-                MessageBox.Show(Plugin.MbForm, Plugin.MsgNoFilesSelected, null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(MbForm, MsgNoFilesSelected, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
 
 
             if (!Clipboard.ContainsText())
             {
-                MessageBox.Show(Plugin.MbForm, Plugin.MsgClipboardDesntContainText, null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(MbForm, MsgClipboardDoesntContainText, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
 
@@ -57,7 +34,7 @@ namespace MusicBeePlugin
             bool multiplePasting = false;
             if (fileTags.Length == 1 && files.Length > 1)
             {
-                MultiplePastingQuestion question = new MultiplePastingQuestion(TagToolsPlugin, fileTags.Length, files.Length);
+                MultiplePastingQuestion question = new MultiplePastingQuestion(tagToolsPluginParam, fileTags.Length, files.Length);
                 PluginWindowTemplate.Display(question, true);
 
                 if (question.PasteAnyway)
@@ -68,8 +45,8 @@ namespace MusicBeePlugin
             }
             else if (fileTags.Length != files.Length)
             {
-                MessageBox.Show(Plugin.MbForm, Plugin.MsgNumberOfTracksInClipboard + fileTags.Length + Plugin.MsgDoesntCorrespondToNumberOfSelectedTracksC + files.Length + Plugin.MsgMessageEndC, 
-                    null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(MbForm, MsgNumberOfTracksInClipboard + fileTags.Length + MsgDoesntCorrespondToNumberOfSelectedTracksC + files.Length + MsgMessageEndC,
+                    "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
 
@@ -79,35 +56,28 @@ namespace MusicBeePlugin
                 string file = files[i];
                 string[] tags = fileTags[multiplePasting ? 0 : i].Split(new char[] { '\t' }, StringSplitOptions.None);
 
-                if (tags.Length != Plugin.SavedSettings.copyTagsTagSets[Plugin.SavedSettings.lastTagSet].tagIds.Length)
+                if (tags.Length != SavedSettings.copyTagsTagSets[SavedSettings.lastTagSet].tagIds.Length)
                 {
-                    MessageBox.Show(Plugin.MbForm, Plugin.MsgNumberOfTagsInClipboard + tags.Length + Plugin.MsgDoesntCorrespondToNumberOfCopiedTagsC 
-                        + Plugin.SavedSettings.copyTagsTagSets[Plugin.SavedSettings.lastTagSet].tagIds.Length + Plugin.MsgMessageEndC, 
-                        null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show(MbForm, MsgNumberOfTagsInClipboard + tags.Length + MsgDoesntCorrespondToNumberOfCopiedTagsC
+                        + SavedSettings.copyTagsTagSets[SavedSettings.lastTagSet].tagIds.Length + MsgMessageEndC,
+                        "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return false;
                 }
 
-                for (int j = 0; j < Plugin.SavedSettings.copyTagsTagSets[Plugin.SavedSettings.lastTagSet].tagIds.Length; j++)
+                for (int j = 0; j < SavedSettings.copyTagsTagSets[SavedSettings.lastTagSet].tagIds.Length; j++)
                 {
                     if (tags[j].Length > 0 && tags[j][tags[j].Length - 1] == '\r')
                         tags[j] = tags[j].Remove(tags[j].Length - 1);
-                    
+
                     string tag = tags[j].Replace("\u0006", "\u0000").Replace("\u0007", "\u000D").Replace("\u0008", "\u000A");
-                    Plugin.SetFileTag(file, (Plugin.MetaDataType)Plugin.SavedSettings.copyTagsTagSets[Plugin.SavedSettings.lastTagSet].tagIds[j], tag);
+                    SetFileTag(file, (MetaDataType)SavedSettings.copyTagsTagSets[SavedSettings.lastTagSet].tagIds[j], tag);
                 }
-                Plugin.CommitTagsToFile(file);
+                CommitTagsToFile(file);
             }
 
-            Plugin.MbApiInterface.MB_RefreshPanels();
+            MbApiInterface.MB_RefreshPanels();
 
             return true;
-        }
-
-        private void PasteTagsFromClipboardPlugin_Shown(object sender, EventArgs e)
-        {
-            Visible = false;
-            pasteTagsFromClipboard();
-            Close();
         }
     }
 }

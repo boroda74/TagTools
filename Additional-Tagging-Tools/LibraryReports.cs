@@ -9,28 +9,799 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using static MusicBeePlugin.Plugin;
 
 namespace MusicBeePlugin
 {
     public partial class LibraryReportsCommand : PluginWindowTemplate
     {
+        private delegate void AddRowsToTable(List<string[]> rows);
+        private delegate void UpdateTable();
+        private AddRowsToTable addRowsToTable;
+        private UpdateTable updateTable;
+
+        private System.Threading.Timer periodicCacheClearingTimer;
+
+        private void periodicCacheClearing(object state)
+        {
+            cachedAppliedPresetGuid = Guid.NewGuid();
+            cachedQueriedActualGroupingValues = null;
+            cachedQueriedFilesActualComposedGroupingValues.Clear();
+            tags.Clear();
+
+            foreach (var artPair in artworks)
+            {
+                artPair.Value.Dispose();
+            }
+            artworks.Clear();
+        }
+
+        private static List<string> ProcessedReportDeletions = new List<string>();
+
+        //Cached UI and events workarounds
+        public static Bitmap DefaultArtwork;
+        public static string DefaultArtworkHash;
+        public SortedDictionary<string, Bitmap> artworks = new SortedDictionary<string, Bitmap>();
+        private Bitmap artwork; //For CD booklet export
+
+        private static Font TotalsFont; // Preview table font for "Totals" cells
+        private int[] maxWidths = null;
+
+        private const int MaxColumnRepresentationLength = 80; //***
+        private const int MaxExprRepresentationLength = 40;
+
+        private const int PreviewTableColumnMinimumWidth = 75;
+        private const int PreviewTableArtworkSize = 200;
+
+        private static string AutoApplyText;
+        private static string NowTickedText;
+
+        private static string UseAnotherPresetAsSourceToolTip;
+        private static string UseAnotherPresetAsSourceIsSenselessToolTip;
+        private static string UseAnotherPresetAsSourceIsInBrokenChainToolTip;
+
+        private static string ButtonFilterResultsText;
+        private static string ButtonFilterResultsToolTip;
+
+        private static string ButtonAddFunctionCreateText;
+        private static string ButtonAddFunctionCreateToolTip;
+        private static string ButtonAddFunctionDiscardText;
+        private static string ButtonAddFunctionDiscardToolTip;
+
+        private static string ButtonUpdateFunctionSaveText;
+        private static string ButtonUpdateFunctionUpdateText;
+
+        private static string ButtonUpdateFunctionSaveToolTip;
+        private static string ButtonUpdateFunctionUpdateToolTip;
+
+        private static string HelpMsg;
+
+        private static string TagsDataGridViewCheckBoxToolTip;
+        private static string ExpressionsDataGridViewCheckBoxToolTip;
+
+        private static string DoYouWantToDeleteTheFieldMsg;
+        private static string DoYouWantToReplaceTheFieldMsg;
+
+        private static string NoExpressionText;
+
+        private bool ignoreCheckedPresetEvent = true;
+        private bool ignorePresetChangedEvent = false;
+        private int autoAppliedPresetCount;
+
+        private string assignHotkeyCheckBoxText;
+        private int reportPresetsWithHotkeysCount;
+        private bool[] reportPresetHotkeyUsedSlots = new bool[MaximumNumberOfLRHotkeys];
+
+        private bool unsavedChanges = false;
+        private string buttonCloseToolTip;
+        private int presetsBoxLastSelectedIndex = -2;
+
+        private bool ignoreSplitterMovedEvent = true;
+
+        private ReportPreset selectedPreset = null;
+
+        private bool presetIsLoaded = false;
+        private bool sourceFieldComboBoxIndexChanging = false;
+
+        private static bool BackgroundTaskIsInProgress = false;
+
+        private bool resultsAreFiltered = false;
+        private bool? lastSelectedRefCheckStatus;
+
+        //Working locals
+        public ReportPreset appliedPreset;
+        private Guid cachedAppliedPresetGuid;
+        private ReportPreset[] reportPresets = null;
+
+
+        private SortedDictionary<string, bool>[] cachedQueriedActualGroupingValues = null;
+        private SortedDictionary<string, string> cachedQueriedFilesActualComposedGroupingValues = new SortedDictionary<string, string>(); //<url, composed groupings>
+
+        private AggregatedTags tags = new AggregatedTags();
+        private string[] lastFiles = null;
+
+        private Comparison comparison;
+        private string comparedFieldText;
+
+        private int conditionField = -1;
+        private int comparedField = -1;
+
+        private int artworkField = -1;
+        private int sequenceNumberField = -1;
+
+        private readonly List<MetaDataType> destinationTagIds = new List<MetaDataType>();
+
+        public static string PresetName = "";
+
+        private string expressionBackup = "";
+        private string splitterBackup = "";
+        private bool trimValuesBackup = false;
+
+        private bool? newColumn = false;
+        private int tagsDataGridViewSelectedRow = -1;
+
+        private SortedDictionary<string, PresetColumnAttributes> groupings = new SortedDictionary<string, PresetColumnAttributes>(); // Short ids, attributes (various expressions)
+
+
+        //Working locals & UI preset caching
+        private List<string> sortedShortIds = new List<string>(); // Short Ids
+        private Dictionary<string, List<string>> shortIdsExprs = new Dictionary<string, List<string>>(); // Short ids, expressions
+
+        private ColumnAttributesDict groupingsDict = new ColumnAttributesDict();
+        private ColumnAttributesDict functionsDict = new ColumnAttributesDict();
+
+        private readonly List<string> savedFunctionIds = new List<string>();
+
+        private List<int> operations = new List<int>();
+        private List<string> mulDivFactors = new List<string>();
+        private List<string> precisionDigits = new List<string>();
+        private List<string> appendTexts = new List<string>();
+
+        //UI preset caching
+        private readonly List<string> savedDestinationTagsNames = new List<string>();
+        private bool smartOperation;
+
+
+        public LibraryReportsCommand(bool setTimer)
+        {
+            //It's not GUI control, not a Form in this case
+            //InitializeComponent();
+
+            periodicCacheClearingTimer = new System.Threading.Timer(periodicCacheClearing, null, 5 * 60 * 1000, 5 * 60 * 1000); //Every 5 mins.
+        }
+
+        public LibraryReportsCommand(Plugin tagToolsPluginParam) : base(tagToolsPluginParam)
+        {
+            InitializeComponent();
+            initializeForm();
+        }
+
+        protected new void initializeForm()
+        {
+            base.initializeForm();
+
+            //Setting control not standard properties
+            var heightField = typeof(CheckedListBox).GetField(
+                "scaledListItemBordersHeight",
+                BindingFlags.NonPublic | BindingFlags.Instance
+            );
+
+            var addedHeight = 4; // Some appropriate value, greater than the field's default of 2
+
+            heightField.SetValue(presetsBox, addedHeight); // Where "presetsBox" is your CheckedListBox
+
+            previewTable.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
+
+
+            //"Totals" font
+            float tagNameFontSize = previewTable.DefaultCellStyle.Font.Size * 0.7f; //Maybe it's worth to adjust fine size !!!
+            TotalsFont = new Font(previewTable.DefaultCellStyle.Font.FontFamily, tagNameFontSize, FontStyle.Bold);
+
+
+            //Moving some controls to their proper places (they are moved initially for easy editing in Form Editor to not overlap other controls)
+            multipleItemsSplitterLabel.Location = new Point(multipleItemsSplitterLabel.Location.X, parameter2ComboBox.Location.Y);
+            multipleItemsSplitterComboBox.Location = new Point(multipleItemsSplitterComboBox.Location.X, parameter2ComboBox.Location.Y);
+            multipleItemsSplitterTrimCheckBox.Location = new Point(multipleItemsSplitterTrimCheckBox.Location.X, parameter2ComboBox.Location.Y);
+
+
+            //Setting themed images
+            clearIdButton.Image = ButtonRemoveImage;
+
+
+            //Setting themed colors
+            //Color sampleColor = SystemColors.Highlight;
+
+
+            //Clearing "unsaved changes" button image
+            buttonClose.Image = Resources.transparent_15;
+            buttonCloseToolTip = toolTip1.GetToolTip(buttonClose);
+            toolTip1.SetToolTip(buttonClose, "");
+
+
+            //Preparing "ticked presets" label text
+            string entireText = autoApplyInfoLabel.Text;
+            AutoApplyText = Regex.Replace(entireText, @"^(.*?)\n(.*)", "$1").TrimEnd('\n').TrimEnd('\r');
+            NowTickedText = Regex.Replace(entireText, @"^(.*?)\n(.*)", "\n$2").TrimEnd('\n').TrimEnd('\r');
+
+            autoApplyInfoLabel.Text = AutoApplyText;
+
+
+            //Clearing "source preset is missing" check box image
+            useAnotherPresetAsSourceCheckBox.Image = Resources.transparent_15;
+
+
+            //Saving buttonFilterResults tool tip & button label
+            ButtonFilterResultsText = buttonFilterResults.Text;
+            ButtonFilterResultsToolTip = toolTip1.GetToolTip(buttonFilterResults);
+
+
+            //Saving useAnotherPresetAsSourceCheckBox tool tip
+            string useAnotherPresetAsSourceFullToolTip = toolTip1.GetToolTip(useAnotherPresetAsSourceCheckBox);
+            UseAnotherPresetAsSourceToolTip = Regex.Replace(useAnotherPresetAsSourceFullToolTip, @"^((?:[^:]|\r|\n)*)\:\r\n((?:[^:]|\r|\n)*)\:\r\n((?:[^:]|\r|\n)*)", "$1");
+            UseAnotherPresetAsSourceIsSenselessToolTip = Regex.Replace(useAnotherPresetAsSourceFullToolTip, @"^((?:[^:]|\r|\n)*)\:\r\n((?:[^:]|\r|\n)*)\:\r\n((?:[^:]|\r|\n)*)", "$2");
+            UseAnotherPresetAsSourceIsInBrokenChainToolTip = Regex.Replace(useAnotherPresetAsSourceFullToolTip, @"^((?:[^:]|\r|\n)*)\:\r\n((?:[^:]|\r|\n)*)\:\r\n((?:[^:]|\r|\n)*)", "$3");
+
+
+            //Saving Create/Discard new field button labels & tool tip
+            string buttonAddFunctionText = buttonAddFunction.Text;
+            ButtonAddFunctionCreateText = Regex.Replace(buttonAddFunctionText, @"^(.*?)\:(.*)", "$1");
+            ButtonAddFunctionDiscardText = Regex.Replace(buttonAddFunctionText, @"^(.*?)\:(.*)", "$2");
+            buttonAddFunction.Text = ButtonAddFunctionCreateText;
+
+            string buttonAddFunctionToolTip = toolTip1.GetToolTip(buttonAddFunction);
+            ButtonAddFunctionCreateToolTip = Regex.Replace(buttonAddFunctionToolTip, @"^(.*?)\:(.*)", "$1");
+            ButtonAddFunctionDiscardToolTip = Regex.Replace(buttonAddFunctionToolTip, @"^(.*?)\:(.*)", "$2");
+            toolTip1.SetToolTip(buttonAddFunction, ButtonAddFunctionCreateToolTip);
+
+
+            //Saving Save/Update field button labels & tool tip
+            string buttonUpdateFunctionText = buttonUpdateFunction.Text;
+            ButtonUpdateFunctionSaveText = Regex.Replace(buttonUpdateFunctionText, @"^(.*?)\:(.*)", "$1");
+            ButtonUpdateFunctionUpdateText = Regex.Replace(buttonUpdateFunctionText, @"^(.*?)\:(.*)", "$2");
+            buttonUpdateFunction.Text = ButtonUpdateFunctionSaveText;
+
+            string buttonUpdateFunctionToolTip = toolTip1.GetToolTip(buttonUpdateFunction);
+            ButtonUpdateFunctionSaveToolTip = Regex.Replace(buttonUpdateFunctionToolTip, @"^(.*?)\:(.*)", "$1");
+            ButtonUpdateFunctionUpdateToolTip = Regex.Replace(buttonUpdateFunctionToolTip, @"^(.*?)\:(.*)", "$2");
+            toolTip1.SetToolTip(buttonUpdateFunction, ButtonUpdateFunctionSaveToolTip);
+
+
+            //Saving Help button tool tip
+            string buttonHelpInitialToolTip = toolTip1.GetToolTip(buttonHelp);
+            string buttonHelpToolTip = Regex.Replace(buttonHelpInitialToolTip, @"^(.*?)\r\n\r\n((.|\r|\n)*)", "$1");
+            HelpMsg = Regex.Replace(buttonHelpInitialToolTip, @"^(.*?)\r\n\r\n((.|\r|\n)*)", "$2");//***** Create HELP!!!!
+            toolTip1.SetToolTip(buttonHelp, buttonHelpToolTip);
+
+
+            // Saving field & expression tables tooltips for check boxes
+            TagsDataGridViewCheckBoxToolTip = tagsDataGridView.Columns[0].HeaderCell.ToolTipText;
+            tagsDataGridView.Columns[0].HeaderCell.ToolTipText = null;
+
+            ExpressionsDataGridViewCheckBoxToolTip = expressionsDataGridView.Columns[0].HeaderCell.ToolTipText;
+            expressionsDataGridView.Columns[0].HeaderCell.ToolTipText = null;
+
+
+            // Saving text for message box shown on last expression removing
+            DoYouWantToDeleteTheFieldMsg = expressionsDataGridView.Columns[1].HeaderCell.ToolTipText;
+            expressionsDataGridView.Columns[1].HeaderCell.ToolTipText = null;
+
+
+            // Saving text for message box shown on field replacing
+            DoYouWantToReplaceTheFieldMsg = tagsDataGridView.Columns[1].HeaderCell.ToolTipText;
+            tagsDataGridView.Columns[1].HeaderCell.ToolTipText = null;
+
+
+            //Initialization
+            smartOperationCheckBox.Checked = SavedSettings.smartOperation;
+
+            foreach (var fname in LrFunctionNames)
+                functionComboBox.Items.Add(fname);
+
+            FillListByTagNames(sourceTagList.Items, true, true, false);
+            FillListByPropNames(sourceTagList.Items);
+            sourceTagList.Items.Add(SequenceNumberName);
+
+            FillListByTagNames(parameter2ComboBox.Items, true, false, false);
+            FillListByPropNames(parameter2ComboBox.Items);
+
+            conditionList.Items.Add(ListItemConditionIs);
+            conditionList.Items.Add(ListItemConditionIsNot);
+            conditionList.Items.Add(ListItemConditionIsGreater);
+            conditionList.Items.Add(ListItemConditionIsGreaterOrEqual);
+            conditionList.Items.Add(ListItemConditionIsLess);
+            conditionList.Items.Add(ListItemConditionIsLessOrEqual);
+
+
+            CueProvider.SetCue(presetNameTextBox, CtlAutoLrPresetName);
+            CueProvider.SetCue(multipleItemsSplitterComboBox, (string)multipleItemsSplitterComboBox.Items[0]);
+
+            NoExpressionText = expressionTextBox.Text;
+            CueProvider.SetCue(expressionTextBox, NoExpressionText);
+
+
+            ignoreCheckedPresetEvent = false;
+            autoAppliedPresetCount = 0;
+            reportPresetsWithHotkeysCount = 0;
+            for (int i = 0; i < SavedSettings.reportsPresets.Length; i++)
+            {
+                ReportPreset autoLibraryReportsPreset = new ReportPreset(SavedSettings.reportsPresets[i], true);
+
+                presetsBox.Items.Add(autoLibraryReportsPreset, autoLibraryReportsPreset.autoApply);
+
+                if (autoLibraryReportsPreset.hotkeyAssigned)
+                {
+                    reportPresetsWithHotkeysCount++;
+                    reportPresetHotkeyUsedSlots[autoLibraryReportsPreset.hotkeySlot] = true;
+                }
+            }
+            ignoreCheckedPresetEvent = true;
+
+
+            assignHotkeyCheckBoxText = assignHotkeyCheckBox.Text;
+            assignHotkeyCheckBox.Text = assignHotkeyCheckBoxText + (MaximumNumberOfLRHotkeys - reportPresetsWithHotkeysCount) + "/" + MaximumNumberOfLRHotkeys;
+
+
+            FillListByTagNames(destinationTagList.Items);
+
+            presetsBox.SelectedIndex = -1;
+
+            previewTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            presetsBox_SelectedIndexChanged(null, null);
+
+
+            resizeArtworkCheckBox.Checked = SavedSettings.resizeArtwork;
+            xArworkSizeUpDown.Value = SavedSettings.xArtworkSize == 0 ? 300 : SavedSettings.xArtworkSize;
+            yArworkSizeUpDown.Value = SavedSettings.yArtworkSize == 0 ? 300 : SavedSettings.yArtworkSize;
+
+            openReportCheckBox.Checked = SavedSettings.openReportAfterExporting;
+
+            recalculateOnNumberOfTagsChangesCheckBox.Checked = SavedSettings.recalculateOnNumberOfTagsChanges;
+            numberOfTagsToRecalculateNumericUpDown.Value = SavedSettings.numberOfTagsToRecalculate;
+
+            string[] formats = ExportedFormats.Split('|');
+            for (int i = 0; i < formats.Length; i += 2)
+            {
+                formatComboBox.Items.Add(formats[i]);
+            }
+            formatComboBox.SelectedIndex = SavedSettings.filterIndex - 1;
+
+
+            addRowsToTable = previewTable_AddRowsToTable;
+            updateTable = previewTable_UpdateTable;
+        }
+
+        public class ColumnAttributesBase
+        {
+            public FunctionType type;
+            public string parameterName;
+            public string parameter2Name = null;
+            public string splitter = null;
+            public bool trimValues = false;
+
+            public ColumnAttributesBase()
+            {
+                //Nothing to do...
+            }
+
+            public ColumnAttributesBase(FunctionType typeParam, string parameterNameParam, string parameter2NameParam,
+                string splitterParam, bool trimValuesParam)
+            {
+                type = typeParam;
+                parameterName = parameterNameParam;
+                parameter2Name = parameter2NameParam;
+                splitter = splitterParam;
+                trimValues = trimValuesParam;
+            }
+
+            public ColumnAttributesBase(ColumnAttributesBase sourceAttribs)
+            {
+                type = sourceAttribs.type;
+                parameterName = sourceAttribs.parameterName;
+                parameter2Name = sourceAttribs.parameter2Name;
+                splitter = sourceAttribs.splitter;
+                trimValues = sourceAttribs.trimValues;
+            }
+
+            public override int GetHashCode()
+            {
+                return base.GetHashCode();
+            }
+
+            public string getShortId()
+            {
+                return ((int)type).ToString("D2") + "\u0007" + ((int)GetTagId(parameterName)).ToString("D4")
+                    + "\u0007" + ((int)GetTagId(parameter2Name)).ToString("D4");
+            }
+
+            public override bool Equals(object obj)
+            {
+                ColumnAttributesBase colAttrs = obj as ColumnAttributesBase;
+
+                if (colAttrs == null)
+                    return false;
+
+                if (type != colAttrs.type)
+                    return false;
+                else if (parameterName != colAttrs.parameterName)
+                    return false;
+                else if (parameter2Name != colAttrs.parameter2Name)
+                    return false;
+                else if (splitter != colAttrs.splitter)
+                    return false;
+                else if (trimValues != colAttrs.trimValues)
+                    return false;
+
+                return true;
+            }
+        }
+
+        public class ColumnAttributes : ColumnAttributesBase
+        {
+            public string expression = "";
+
+            public ColumnAttributes() : base()
+            {
+                //Nothing to do...
+            }
+
+            public ColumnAttributes(FunctionType typeParam, string expressionParam, string parameterNameParam, string parameter2NameParam,
+                string splitterParam, bool trimValuesParam)
+                : base(typeParam, parameterNameParam, parameter2NameParam,
+                    splitterParam, trimValuesParam)
+            {
+                expression = expressionParam;
+            }
+
+            public ColumnAttributes(ColumnAttributes sourceAttribs) : base(sourceAttribs)
+            {
+                expression = sourceAttribs.expression;
+            }
+
+            public override int GetHashCode()
+            {
+                return base.GetHashCode();
+            }
+
+            public string getUniqueId()
+            {
+                return ((int)type).ToString("D2") + "\u0007" + ((int)GetTagId(parameterName)).ToString("D4")
+                    + "\u0007" + ((int)GetTagId(parameter2Name)).ToString("D4") + "\u0007" + expression ?? "";
+            }
+
+            public override bool Equals(object obj)
+            {
+                if (!base.Equals(obj))
+                    return false;
+
+
+                ColumnAttributes colAttrs = obj as ColumnAttributes;
+
+                if (colAttrs == null)
+                    return false;
+                else if (expression != colAttrs.expression)
+                    return false;
+
+                return true;
+            }
+
+            public string getColumnName(bool trimName, bool includeSplitterTrimInfo, bool includeExpression)
+            {
+                return GetColumnName(parameterName, parameter2Name, type, splitter, trimValues, expression, trimName, 
+                    includeSplitterTrimInfo, includeExpression);
+            }
+
+            public string evaluateExpression(string url, string tagValue)
+            {
+                if (string.IsNullOrWhiteSpace(expression))
+                {
+                    return tagValue;
+                }
+                else
+                {
+                    tagValue = tagValue.Replace('\"', '\u0007');
+                    string workingExpression = expression.Replace("\\@", "\"" + tagValue + "\"");
+                    tagValue = MbApiInterface.MB_Evaluate(workingExpression, url);
+                    tagValue = tagValue.Replace('\u0007', '\"');
+
+                    return tagValue;
+                }
+            }
+        }
+
+        public struct ColumnIndexTagValue
+        {
+            public int index;
+            public string value;
+        }
+
+        public class PresetColumnAttributes : ColumnAttributesBase
+        {
+            public string[] expressions = new string[] { "" };
+            public int[] columnIndices = new int[0]; // per expression for current grouping/function
+
+            public PresetColumnAttributes() : base()
+            {
+                //Nothing to do...
+            }
+
+            public PresetColumnAttributes(FunctionType typeParam, string[] expressionsParam, string parameterNameParam, string parameter2NameParam,
+                string splitterParam, bool trimValuesParam)
+                : base(typeParam, parameterNameParam, parameter2NameParam,
+                    splitterParam, trimValuesParam)
+            {
+                expressions = expressionsParam;
+            }
+
+            public PresetColumnAttributes(ColumnAttributesBase sourceAttribs) : base(sourceAttribs)
+            {
+                // Nothing to do...
+            }
+
+            public PresetColumnAttributes(PresetColumnAttributes sourceAttribs) : base(sourceAttribs)
+            {
+                expressions = (string[])sourceAttribs.expressions.Clone();
+                columnIndices = (int[])sourceAttribs.columnIndices.Clone();
+            }
+
+            public override int GetHashCode()
+            {
+                return base.GetHashCode();
+            }
+
+            public string getUniqueId(int exprIndex)
+            {
+                string expression = "";
+                if (exprIndex >= 0)
+                    expression = expressions[exprIndex];
+
+                return ((int)type).ToString("D2") + "\u0007" + ((int)GetTagId(parameterName)).ToString("D4")
+                    + "\u0007" + ((int)GetTagId(parameter2Name)).ToString("D4") + "\u0007" + expression ?? "";
+            }
+
+            public override bool Equals(object obj)
+            {
+                if (!base.Equals(obj))
+                    return false;
+
+
+                ColumnAttributes colAttrs = obj as ColumnAttributes;
+
+                if (colAttrs == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    foreach (var expression in expressions)
+                        if (expression != colAttrs.expression)
+                            return false;
+                }
+
+                return true;
+            }
+
+            // returns {columnIndex, resulting tag value}, accepts int[] columnIndices: per expression for current grouping/function
+            public List<ColumnIndexTagValue> evaluateExpressions(string url, string tagValue)
+            {
+                tagValue = tagValue.Replace('\"', '\u0007');
+
+                var tagExprValues = new List<ColumnIndexTagValue>();
+                for (int i = 0; i < expressions.Length; i++)
+                {
+                    if (string.IsNullOrWhiteSpace(expressions[i]))
+                    {
+                        tagExprValues.Add(new ColumnIndexTagValue { index = columnIndices[i], value = tagValue }) ;
+                    }
+                    else
+                    {
+                        string workingExpression = expressions[i].Replace("\\@", "\"" + tagValue + "\"");
+                        string result = MbApiInterface.MB_Evaluate(workingExpression, url);
+                        result = result.Replace('\u0007', '\"');
+
+                        tagExprValues.Add(new ColumnIndexTagValue { index = columnIndices[i], value = result });
+                    }
+                }
+
+                return tagExprValues;
+            }
+
+            // <columnIndex, resulting tag value>, int[] columnIndices: per expression for current grouping/function
+            public List<ColumnIndexTagValue> getSplitValues(string url, string tagValue)
+            {
+                var results = new List<ColumnIndexTagValue>();
+
+                if (string.IsNullOrWhiteSpace(splitter))
+                {
+                    results.AddRange(evaluateExpressions(url, tagValue));
+                }
+                else
+                {
+                    string workingSplitter = splitter.Replace("\\0", "\0");
+                    string[] splitValues = tagValue.Split(new string[] { workingSplitter }, StringSplitOptions.None);
+                    for (int i = 0; i < splitValues.Length; i++)
+                    {
+                        if (trimValues)
+                            splitValues[i] = splitValues[i].Trim();
+
+                        results.AddRange(evaluateExpressions(url, splitValues[i]));
+                    }
+                }
+
+                return results;
+            }
+        }
+
+        public class ColumnAttributesDict : Dictionary<string, ColumnAttributes> // Column unique ID (string), Column settings
+        {
+            public ColumnAttributesDict() : base()
+            {
+                //Nothing to do...
+            }
+
+            public ColumnAttributesDict(ColumnAttributes[] attribCollection) : base()
+            {
+                foreach (var attribs in attribCollection)
+                    Add(attribs.getUniqueId(), attribs);
+            }
+
+            // Returns PresetColumnAttributes[], column count
+            public (PresetColumnAttributes[], int) valuesToPresetArray(int startingColumnIndex)
+            {
+                var presetAttribListRef = new List<PresetColumnAttributes>();
+                int columnCount = 0;
+
+                var shortIdsRef = new List<string>();
+                var columnIndicesRef = new List<List<int>>();
+                var expressionsRef = new List<List<string>>();  
+
+                int i = startingColumnIndex - 1;
+                foreach (var attribs in Values)
+                {
+                    i++;
+
+                    LoadPresetColumnAttributes(presetAttribListRef, shortIdsRef, columnIndicesRef, expressionsRef, attribs, i);
+                }
+
+                for (int j = 0; j < presetAttribListRef.Count; j++)
+                {
+                    presetAttribListRef[j].expressions = expressionsRef[j].ToArray();
+                    presetAttribListRef[j].columnIndices = new int[columnIndicesRef[j].Count];
+                    columnIndicesRef[j].CopyTo(presetAttribListRef[j].columnIndices);
+                    columnCount += columnIndicesRef[j].Count;
+                }
+
+                return (presetAttribListRef.ToArray(), columnCount);
+            }
+
+            public int indexOf(string searchedKey)
+            {
+                int i = 0;
+                foreach (var key in Keys)
+                {
+                    if (key == searchedKey)
+                        return i;
+                }
+
+                return -1;
+            }
+
+            public List<string> idsToSortedList(bool getUniqueIds, List<string> list = null)
+            {
+                if (list == null)
+                    list = new List<string>();
+
+                if (getUniqueIds)
+                {
+                    foreach (var key in Keys)
+                        list.Add(key);
+                }
+                else
+                {
+                    foreach (var attribs in Values)
+                    {
+                        string shortId = attribs.getShortId();
+                        if (!list.Contains(shortId))
+                            list.Add(shortId);
+                    }
+                }
+
+                list.Sort();
+
+                return list;
+            }
+
+            public List<string> getAllIdsByShortId(string shortId)
+            {
+                var longIdsList = new List<string>();
+
+                foreach (var pair in this)
+                {
+                    if (pair.Value.getShortId() == shortId)
+                        longIdsList.Add(pair.Key);
+                }
+
+                return longIdsList;
+            }
+
+            public void remove(List<string> longIdsList)
+            {
+                foreach (var longId in longIdsList)
+                    Remove(longId);
+            }
+        }
+
+        public struct ReportPresetReference
+        {
+            public string name;
+            public Guid permanentGuid;
+
+            //public ReportPresetReference()
+            //{
+            //    name = null;
+            //    permanentGuid = Guid.NewGuid();
+            //}
+
+            public ReportPresetReference(ReportPreset referencePreset)
+            {
+                name = referencePreset.getName();
+                permanentGuid = referencePreset.permanentGuid;
+            }
+
+            public ReportPreset findPreset(ReportPreset[] reportsPresets)
+            {
+                foreach (var preset in reportsPresets)
+                {
+                    if (preset.permanentGuid == permanentGuid)
+                    {
+                        if (preset.conditionIsChecked)
+                            return preset;
+                        else
+                            return null;
+                    }
+                }
+
+                return null;
+            }
+
+            public override string ToString()
+            {
+                return name;
+            }
+        }
+
+        public enum Comparison
+        {
+            Is = 0,
+            IsNot = 1,
+            IsGreater = 2,
+            IsGreaterOrEqual = 3,
+            IsLess = 4,
+            IsLessOrEqual = 5
+        }
+
         public class ReportPreset
         {
             public bool autoApply = false;
             public string name = null;
+            public string autoname = null;
             public bool userPreset = true;
-            public Guid guid = Guid.NewGuid();
-            public Guid permanentGuid = Guid.NewGuid();
+            public Guid guid = Guid.NewGuid(); // guid is reset on every preset update in UI
+            public Guid permanentGuid = Guid.NewGuid(); // permanentGuid is reset on preset copying in UI
 
             public bool hotkeyAssigned = false;
             public bool applyToSelectedTracks = true;
             public int hotkeySlot = -1; //0..Plugin.MaximumNumberOfLRHotkeys - 1
 
-            public string[] groupingNames = new string[0];
-            public string[] functionNames = new string[0];
-            public FunctionType[] functionTypes = new FunctionType[0];
-            public string[] parameterNames = new string[0];
-            public string[] parameter2Names = new string[0];
+            public PresetColumnAttributes[] groupings = new PresetColumnAttributes[0];
+
+            public string[] groupingNames = new string[0];//**** remove later !!!!
+
+            public PresetColumnAttributes[] functions = new PresetColumnAttributes[0];
+
+            public FunctionType[] functionTypes = new FunctionType[0];//**** remove later !!!!
+            public string[] parameterNames = new string[0];//**** remove later !!!!
+            public string[] parameter2Names = new string[0];//**** remove later !!!!
+
             public bool totals;
 
             public string[] sourceTags = new string[0];
@@ -42,9 +813,12 @@ namespace MusicBeePlugin
             public string[] precisionDigits = new string[0];
             public string[] appendTexts = new string[0];
 
+            public bool useAnotherPresetAsSource = false;
+            public ReportPresetReference anotherPresetAsSource;
+
             public bool conditionIsChecked = false;
             public string conditionField = null;
-            public string conditionText = null;
+            public Comparison comparison = Comparison.Is;
             public string comparedField = null;
 
             public string exportedTrackListName = null;
@@ -67,6 +841,7 @@ namespace MusicBeePlugin
                     autoApply = sourcePreset.autoApply;
                     userPreset = sourcePreset.userPreset;
                     guid = sourcePreset.guid;
+                    permanentGuid = sourcePreset.permanentGuid;
                     hotkeyAssigned = sourcePreset.hotkeyAssigned;
                     hotkeySlot = sourcePreset.hotkeySlot; //0..Plugin.MaximumNumberOfLRHotkeys - 1
                     functionIds = (string[])sourcePreset.functionIds.Clone();
@@ -76,15 +851,20 @@ namespace MusicBeePlugin
                     functionIds = new string[sourcePreset.functionIds.Length];
                 }
 
-                permanentGuid = sourcePreset.permanentGuid;
+                autoname = sourcePreset.autoname;
 
                 applyToSelectedTracks = sourcePreset.applyToSelectedTracks;
 
-                groupingNames = (string[])sourcePreset.groupingNames.Clone();
-                functionNames = (string[])sourcePreset.functionNames.Clone();
-                functionTypes = (FunctionType[])sourcePreset.functionTypes.Clone();
-                parameterNames = (string[])sourcePreset.parameterNames.Clone();
-                parameter2Names = (string[])sourcePreset.parameter2Names.Clone();
+                groupings = (PresetColumnAttributes[])sourcePreset.groupings.Clone();
+
+                groupingNames = (string[])sourcePreset.groupingNames.Clone();//**** remove later !!!!
+
+                functions = (PresetColumnAttributes[])sourcePreset.functions.Clone();
+
+                functionTypes = (FunctionType[])sourcePreset.functionTypes.Clone();//**** remove later !!!!
+                parameterNames = (string[])sourcePreset.parameterNames.Clone();//**** remove later !!!!
+                parameter2Names = (string[])sourcePreset.parameter2Names.Clone();//**** remove later !!!!
+
                 totals = sourcePreset.totals;
 
                 sourceTags = (string[])sourcePreset.sourceTags.Clone();
@@ -95,9 +875,12 @@ namespace MusicBeePlugin
                 precisionDigits = (string[])sourcePreset.precisionDigits.Clone();
                 appendTexts = (string[])sourcePreset.appendTexts.Clone();
 
+                useAnotherPresetAsSource = sourcePreset.useAnotherPresetAsSource;
+                anotherPresetAsSource = sourcePreset.anotherPresetAsSource;
+
                 conditionIsChecked = sourcePreset.conditionIsChecked;
                 conditionField = sourcePreset.conditionField;
-                conditionText = sourcePreset.conditionText;
+                comparison = sourcePreset.comparison;
                 comparedField = sourcePreset.comparedField;
 
                 exportedTrackListName = sourcePreset.exportedTrackListName;
@@ -125,7 +908,7 @@ namespace MusicBeePlugin
 
             public string getHotkeyDescription()
             {
-                return Plugin.ReportPresetHotkeyDescription + ": " + ToString();
+                return ReportPresetHotkeyDescription + ": " + ToString();
             }
 
             public override string ToString()
@@ -137,313 +920,472 @@ namespace MusicBeePlugin
             {
                 if (!string.IsNullOrWhiteSpace(name))
                     return name;
+                else if (autoname == null)
+                    generateAutoname(null, null);
 
-                string representation = "";
+                return autoname;
+            }
 
-                if (groupingNames.Length > 0)
-                    representation = groupingNames[0];
+            public void generateAutoname(ColumnAttributesDict grDictRef, ColumnAttributesDict fnDictRef)
+            {
+                autoname = "";
 
-                for (int i = 1; i < groupingNames.Length; i++)
+                if (grDictRef == null && fnDictRef == null)
                 {
-                    representation += ", " + groupingNames[i];
+                    grDictRef = new ColumnAttributesDict();
+                    fnDictRef = new ColumnAttributesDict();
+                    int ColumnCount = prepareDict(grDictRef, null, groupings, 0);
+                    prepareDict(fnDictRef, null, groupings, ColumnCount);
                 }
 
+                foreach (var attribs in grDictRef.Values)
+                    autoname += (autoname == "" ? "" : ", ") + attribs.getColumnName(true, true, true);
 
-                if (representation == "" && functionNames.Length > 0)
-                    representation = functionNames[0];
-                else if (functionNames.Length > 0)
-                    representation += ", " + functionNames[0];
+                foreach (var attribs in fnDictRef.Values)
+                    autoname += (autoname == "" ? "" : ", ") + attribs.getColumnName(true, true, true);
 
-                for (int i = 1; i < functionNames.Length; i++)
-                {
-                    representation += ", " + functionNames[i];
-                }
-
-                if (representation == "")
-                    representation = Plugin.EmptyPresetName;
-
-
-                return representation;
+                if (autoname == "")
+                    autoname = EmptyPresetName;
             }
         }
 
-        public class AggregatedTags : SortedDictionary<string, Plugin.ConvertStringsResult[]>
+        public static void LoadPresetColumnAttributes(List<PresetColumnAttributes> presetAttribsListRef, List<string> shortIdsRef, List<List<int>> columnIndicesRef,  
+            List<List<string>> expressionsRef, ColumnAttributes attribs, int columnIndex) 
         {
-            public static string GetComposedGroupingValues(string[] groupingValues)
-            {
-                string composedGroupings;
+            PresetColumnAttributes presetAttribs;
 
-                if (groupingValues.Length == 0)
+            string shortId = attribs.getShortId();
+            int index = shortIdsRef.IndexOf(shortId);
+            if (index == -1)
+            {
+                shortIdsRef.Add(shortId);
+
+                index = shortIdsRef.Count - 1;
+
+                presetAttribs = new PresetColumnAttributes(attribs);
+                presetAttribsListRef.Add(presetAttribs);
+                expressionsRef.Add(new List<string>());
+                columnIndicesRef.Add(new List<int>());
+            }
+
+            expressionsRef[index].Add(attribs.expression);
+            columnIndicesRef[index].Add(columnIndex);
+        }
+
+        // Helper for Iterate()
+        private static void MoveDependent(IEnumerator<string>[] enumerators, int[] dependentGroupingColumns, string[] lastValues, int currentLoopIndex, bool reset)
+        {
+            for (int j = dependentGroupingColumns.Length - 1; j >= 0; j--)
+            {
+                if (currentLoopIndex != j && dependentGroupingColumns[currentLoopIndex] == dependentGroupingColumns[j]) // Let's move all dependent groupings
                 {
-                    composedGroupings = "";
+                    if (reset)
+                        enumerators[j].Reset();
+
+                    enumerators[j].MoveNext();
+                    lastValues[j] = enumerators[j].Current;
+                }
+            }
+        }
+
+        // Let's iterate through all possible split grouping values (but not repeating the same groupings for different expressions)
+        //
+        // Accepts IEnumerator<split grouping values>[grouping column count],
+        //
+        // int[grouping column count] dependentGroupingColumns: indices of groupings
+        //     in global dictionary "groupings" (which doesn't include expressions)
+        //
+        // Returns false when iteration completed, and string[grouping column count] lastValues on every iteration
+        private static bool Iterate(IEnumerator<string>[] enumerators, int[] dependentGroupingColumns, string[] lastValues, ref int minimalLoopIndex, ref int currentLoopIndex)
+        {
+            bool movedThis = enumerators[currentLoopIndex].MoveNext();
+
+            int currentGroupingIndex = dependentGroupingColumns[currentLoopIndex];
+
+            if (movedThis)
+            {
+                lastValues[currentLoopIndex] = enumerators[currentLoopIndex].Current;
+
+                MoveDependent(enumerators, dependentGroupingColumns, lastValues, currentLoopIndex, false);
+
+                return true;
+            }
+            else if (currentLoopIndex == 0)
+            {
+                return false;
+            }
+            else 
+            {
+                int oldCurrentLoopIndex = currentLoopIndex;
+
+                if (currentLoopIndex == minimalLoopIndex + 1)
+                {
+                    if (enumerators[minimalLoopIndex].MoveNext())
+                    {
+                        lastValues[minimalLoopIndex] = enumerators[minimalLoopIndex].Current;
+
+                        MoveDependent(enumerators, dependentGroupingColumns, lastValues, minimalLoopIndex, false);
+                    }
+                    else
+                    {
+                        enumerators[minimalLoopIndex].Reset();
+                        enumerators[minimalLoopIndex].MoveNext();
+                        lastValues[minimalLoopIndex] = enumerators[minimalLoopIndex].Current;
+
+                        MoveDependent(enumerators, dependentGroupingColumns, lastValues, minimalLoopIndex, true);
+
+                        minimalLoopIndex--;
+                        if (minimalLoopIndex < 0)
+                            return false;
+                    }
+
+                    currentLoopIndex = enumerators.Length - 1;
                 }
                 else
                 {
-                    composedGroupings = string.Join(Plugin.MultipleItemsSplitterId.ToString(), groupingValues);
+                    currentLoopIndex--;
+                }
+
+                for (int i = oldCurrentLoopIndex; i < enumerators.Length; i++)
+                {
+                    enumerators[i].Reset();
+                    if (i != currentLoopIndex)
+                    {
+                        enumerators[i].MoveNext();
+                        lastValues[i] = enumerators[i].Current;
+                    }
+
+                    MoveDependent(enumerators, dependentGroupingColumns, lastValues, i, true);
+                }
+
+                return Iterate(enumerators, dependentGroupingColumns, lastValues, ref minimalLoopIndex, ref currentLoopIndex);
+            }
+        }
+
+        public class AggregatedTags : SortedDictionary<string, ConvertStringsResult[]>
+        {
+            // Accepts List<split grouping values>[grouping column count],
+            //     returns List<string -> composed groupings> for every split grouping
+            // int[grouping column count] dependentGroupingColumns: indices of groupings
+            //     in global dictionary "groupings" (which doesn't include expressions)
+            public static List<string> GetComposedGroupingValues(List<string>[] groupingValuesLists, int[] dependentGroupingColumns, bool totals)
+            {
+                var composedGroupings = new List<string>();
+                var groupingValues = new string[groupingValuesLists.Length];
+
+                if (groupingValuesLists.Length == 0)
+                {
+                    composedGroupings.Add("");
+                }
+                else
+                {
+                    string[] lastValues = new string[groupingValuesLists.Length]; // This array will store all grouping values of last iteration
+                    int minimalLoopIndex = groupingValuesLists.Length - 2;
+                    int currentLoopIndex = groupingValuesLists.Length - 1;
+
+                    // Neither of the lists in groupingValuesLists array can be empty, so let's get 1st value of every list
+                    var enumerators = new IEnumerator<string>[groupingValuesLists.Length];
+                    for (int i = 0; i < groupingValuesLists.Length; i++)
+                    {
+                        (enumerators[i] = groupingValuesLists[i].GetEnumerator()).MoveNext();
+                        lastValues[i] = enumerators[i].Current;
+                    }
+
+                    do
+                    {
+                        for (int i = 0; i < enumerators.Length; i++)
+                            groupingValues[i] = lastValues[i];
+
+                        composedGroupings.Add(string.Join(MultipleItemsSplitterId.ToString(), groupingValues));
+
+
+                        if (totals)
+                        {
+                            for (int j = groupingValues.Length - 1; j >= 0; j--)
+                            {
+                                groupingValues[j] = TotalsString;
+                                composedGroupings.Add(string.Join(MultipleItemsSplitterId.ToString(), groupingValues));
+                            }
+                        }
+                    }
+                    while (Iterate(enumerators, dependentGroupingColumns, lastValues, ref minimalLoopIndex, ref currentLoopIndex));
                 }
 
                 return composedGroupings;
             }
 
-            public void add(string url, string[] groupingValues, string[] functionValues, List<FunctionType> functionTypes, string[] parameter2Values, ref int[] resultTypes, bool totals)
+            public void add(string url, List<string> composedGroupingsList, ColumnAttributesDict functions, 
+                string[] functionValues, List<FunctionType> functionTypes, string[] parameter2Values, ref int[] resultTypes)
             {
-                string composedGroupings;
-                Plugin.ConvertStringsResult[] aggregatedValues;
-
-
-                if (groupingValues.Length == 0)
-                {
-                    composedGroupings = "";
-                }
-                else
-                {
-                    composedGroupings = GetComposedGroupingValues(groupingValues);
-
-                    if (totals)
-                        for (int i = groupingValues.Length - 1; i >= 0; i--)
-                        {
-                            groupingValues[i] = Plugin.TotalsString;
-                            add(null, groupingValues, functionValues, functionTypes, parameter2Values, ref resultTypes, false);
-                        }
-                }
-
-
                 if (functionValues == null)
                 {
-                    if (!TryGetValue(composedGroupings, out _))
-                        Add(composedGroupings, null);
+                    foreach (var composedGroupings in composedGroupingsList)
+                    {
+                        if (!TryGetValue(composedGroupings, out _))
+                            Add(composedGroupings, null);
+                    }
                 }
                 else
                 {
-                    if (!TryGetValue(composedGroupings, out aggregatedValues))
+                    foreach (var composedGroupings in composedGroupingsList)
                     {
-                        aggregatedValues = new Plugin.ConvertStringsResult[functionValues.Length + 1];
+                        ConvertStringsResult[] aggregatedValues;
 
-                        for (int i = 0; i < functionValues.Length; i++)
+                        if (!TryGetValue(composedGroupings, out aggregatedValues))
                         {
-                            aggregatedValues[i] = new Plugin.ConvertStringsResult(1);
+                            aggregatedValues = new ConvertStringsResult[functionValues.Length + 1];
 
-                            if (functionTypes[i] == FunctionType.Minimum)
+                            for (int j = 0; j < functionValues.Length; j++)
                             {
-                                aggregatedValues[i].result1f = double.MaxValue;
-                                aggregatedValues[i].result1s = "口";
+                                aggregatedValues[j] = new ConvertStringsResult(1);
+
+                                if (functionTypes[j] == FunctionType.Minimum)
+                                {
+                                    aggregatedValues[j].result1f = double.MaxValue;
+                                    aggregatedValues[j].result1s = "口";
+                                }
+                                else if (functionTypes[j] == FunctionType.Maximum)
+                                {
+                                    aggregatedValues[j].result1f = double.MinValue;
+                                    aggregatedValues[j].result1s = "";
+                                }
                             }
-                            else if (functionTypes[i] == FunctionType.Maximum)
-                            {
-                                aggregatedValues[i].result1f = double.MinValue;
-                                aggregatedValues[i].result1s = "";
-                            }
+
+                            aggregatedValues[functionValues.Length] = new ConvertStringsResult(1); //This are URLs (SortedDictionary<url, false>)
+
+                            Add(composedGroupings, aggregatedValues);
                         }
 
-                        aggregatedValues[functionValues.Length] = new Plugin.ConvertStringsResult(1);
+                        ConvertStringsResult currentFunctionResult;
 
-                        Add(composedGroupings, aggregatedValues);
-                    }
-
-                    Plugin.ConvertStringsResult currentFunctionValue;
-
-                    for (int i = 0; i < functionValues.Length + 1; i++)
-                    {
-                        if (i == functionValues.Length) //It are URLs
+                        int i = -1;
+                        foreach (var function in functions.Values)
                         {
-                            if (url != null)
+                            i++;
+
+                            string currentFunctionValue = function.evaluateExpression(url, functionValues[i]);
+
+                            if (i == functionValues.Length) //This are URLs (SortedDictionary<url, false>)
                             {
-                                if (!aggregatedValues[i].items.TryGetValue(url, out _))
-                                    aggregatedValues[i].items.Add(url, false);
+                                if (url != null)
+                                {
+                                    if (!aggregatedValues[i].items.TryGetValue(url, out _))
+                                        aggregatedValues[i].items.Add(url, false);
+
+                                    aggregatedValues[i].type = 1;
+                                }
+                            }
+                            else if (functionTypes[i] == FunctionType.Count)
+                            {
+                                if (!aggregatedValues[i].items.TryGetValue(currentFunctionValue, out _))
+                                    aggregatedValues[i].items.Add(currentFunctionValue, false);
 
                                 aggregatedValues[i].type = 1;
                             }
-                        }
-                        else if (functionTypes[i] == FunctionType.Count)
-                        {
-                            if (!aggregatedValues[i].items.TryGetValue(functionValues[i], out _))
-                                aggregatedValues[i].items.Add(functionValues[i], false);
-
-                            aggregatedValues[i].type = 1;
-                        }
-                        else if (functionTypes[i] == FunctionType.Sum)
-                        {
-                            currentFunctionValue = Plugin.ConvertStrings(functionValues[i]);
-
-                            if (currentFunctionValue.type != 0)
+                            else if (functionTypes[i] == FunctionType.Sum)
                             {
-                                aggregatedValues[i].result1f += currentFunctionValue.result1f;
+                                currentFunctionResult = ConvertStrings(currentFunctionValue);
 
-                                if (aggregatedValues[i].result1fPrefix == null)
-                                    aggregatedValues[i].result1fPrefix = currentFunctionValue.result1fPrefix;
-                                else if (aggregatedValues[i].result1fPrefix != currentFunctionValue.result1fPrefix)
-                                    aggregatedValues[i].result1fPrefix = "";
+                                if (currentFunctionResult.type != 0)
+                                {
+                                    aggregatedValues[i].result1f += currentFunctionResult.result1f;
 
-                                if (aggregatedValues[i].result1fSpace == null)
-                                    aggregatedValues[i].result1fSpace = currentFunctionValue.result1fSpace;
-                                else if (aggregatedValues[i].result1fSpace != currentFunctionValue.result1fSpace)
-                                    aggregatedValues[i].result1fSpace = "";
+                                    if (aggregatedValues[i].result1fPrefix == null)
+                                        aggregatedValues[i].result1fPrefix = currentFunctionResult.result1fPrefix;
+                                    else if (aggregatedValues[i].result1fPrefix != currentFunctionResult.result1fPrefix)
+                                        aggregatedValues[i].result1fPrefix = "";
 
-                                if (aggregatedValues[i].result1fPostfix == null)
-                                    aggregatedValues[i].result1fPostfix = currentFunctionValue.result1fPostfix;
-                                else if (aggregatedValues[i].result1fPostfix != currentFunctionValue.result1fPostfix)
-                                    aggregatedValues[i].result1fPostfix = "";
+                                    if (aggregatedValues[i].result1fSpace == null)
+                                        aggregatedValues[i].result1fSpace = currentFunctionResult.result1fSpace;
+                                    else if (aggregatedValues[i].result1fSpace != currentFunctionResult.result1fSpace)
+                                        aggregatedValues[i].result1fSpace = "";
 
-                                aggregatedValues[i].type = currentFunctionValue.type;
+                                    if (aggregatedValues[i].result1fPostfix == null)
+                                        aggregatedValues[i].result1fPostfix = currentFunctionResult.result1fPostfix;
+                                    else if (aggregatedValues[i].result1fPostfix != currentFunctionResult.result1fPostfix)
+                                        aggregatedValues[i].result1fPostfix = "";
+
+                                    aggregatedValues[i].type = currentFunctionResult.type;
+                                }
                             }
-                        }
-                        else if (functionTypes[i] == FunctionType.Minimum)
-                        {
-                            currentFunctionValue = Plugin.ConvertStrings(functionValues[i]);
-
-                            if (currentFunctionValue.type == 0)
+                            else if (functionTypes[i] == FunctionType.Minimum)
                             {
-                                resultTypes[i] = 0;
+                                currentFunctionResult = ConvertStrings(currentFunctionValue);
+
+                                if (currentFunctionResult.type == 0)
+                                {
+                                    resultTypes[i] = 0;
+                                }
+                                else if (resultTypes[i] == 0)
+                                {
+                                    currentFunctionResult.type = 0;
+                                }
+                                else if (currentFunctionResult.type > resultTypes[i])
+                                {
+                                    resultTypes[i] = currentFunctionResult.type;
+                                }
+                                else
+                                {
+                                    currentFunctionResult.type = resultTypes[i];
+                                }
+
+                                if (currentFunctionResult.type != 0)
+                                {
+                                    if (aggregatedValues[i].result1f > currentFunctionResult.result1f)
+                                        aggregatedValues[i].result1f = currentFunctionResult.result1f;
+
+                                    if (aggregatedValues[i].result1fPrefix == null)
+                                        aggregatedValues[i].result1fPrefix = currentFunctionResult.result1fPrefix;
+                                    else if (aggregatedValues[i].result1fPrefix != currentFunctionResult.result1fPrefix)
+                                        aggregatedValues[i].result1fPrefix = "";
+
+                                    if (aggregatedValues[i].result1fSpace == null)
+                                        aggregatedValues[i].result1fSpace = currentFunctionResult.result1fSpace;
+                                    else if (aggregatedValues[i].result1fSpace != currentFunctionResult.result1fSpace)
+                                        aggregatedValues[i].result1fSpace = "";
+
+                                    if (aggregatedValues[i].result1fPostfix == null)
+                                        aggregatedValues[i].result1fPostfix = currentFunctionResult.result1fPostfix;
+                                    else if (aggregatedValues[i].result1fPostfix != currentFunctionResult.result1fPostfix)
+                                        aggregatedValues[i].result1fPostfix = "";
+                                }
+                                else
+                                {
+                                    if (CompareStrings(aggregatedValues[i].result1s, currentFunctionResult.result1s) == 1)
+                                        aggregatedValues[i].result1s = currentFunctionResult.result1s;
+                                }
+
+                                aggregatedValues[i].type = currentFunctionResult.type;
                             }
-                            else if (resultTypes[i] == 0)
+                            else if (functionTypes[i] == FunctionType.Maximum)
                             {
-                                currentFunctionValue.type = 0;
+                                currentFunctionResult = ConvertStrings(currentFunctionValue);
+
+                                if (currentFunctionResult.type == 0)
+                                {
+                                    resultTypes[i] = 0;
+                                }
+                                else if (resultTypes[i] == 0)
+                                {
+                                    currentFunctionResult.type = 0;
+                                }
+                                else if (currentFunctionResult.type < resultTypes[i])
+                                {
+                                    resultTypes[i] = currentFunctionResult.type;
+                                }
+                                else
+                                {
+                                    currentFunctionResult.type = resultTypes[i];
+                                }
+
+                                if (currentFunctionResult.type != 0)
+                                {
+                                    if (aggregatedValues[i].result1f < currentFunctionResult.result1f)
+                                        aggregatedValues[i].result1f = currentFunctionResult.result1f;
+
+                                    if (aggregatedValues[i].result1fPrefix == null)
+                                        aggregatedValues[i].result1fPrefix = currentFunctionResult.result1fPrefix;
+                                    else if (aggregatedValues[i].result1fPrefix != currentFunctionResult.result1fPrefix)
+                                        aggregatedValues[i].result1fPrefix = "";
+
+                                    if (aggregatedValues[i].result1fSpace == null)
+                                        aggregatedValues[i].result1fSpace = currentFunctionResult.result1fSpace;
+                                    else if (aggregatedValues[i].result1fSpace != currentFunctionResult.result1fSpace)
+                                        aggregatedValues[i].result1fSpace = "";
+
+                                    if (aggregatedValues[i].result1fPostfix == null)
+                                        aggregatedValues[i].result1fPostfix = currentFunctionResult.result1fPostfix;
+                                    else if (aggregatedValues[i].result1fPostfix != currentFunctionResult.result1fPostfix)
+                                        aggregatedValues[i].result1fPostfix = "";
+                                }
+                                else
+                                {
+                                    if (CompareStrings(aggregatedValues[i].result1s, currentFunctionResult.result1s) == -1)
+                                        aggregatedValues[i].result1s = currentFunctionResult.result1s;
+                                }
+
+                                aggregatedValues[i].type = currentFunctionResult.type;
                             }
-                            else if (currentFunctionValue.type > resultTypes[i])
+                            else if (functionTypes[i] == FunctionType.Average)
                             {
-                                resultTypes[i] = currentFunctionValue.type;
+                                if (!aggregatedValues[i].items.TryGetValue(parameter2Values[i], out _))
+                                    aggregatedValues[i].items.Add(parameter2Values[i], false);
+
+                                currentFunctionResult = ConvertStrings(functionValues[i]);
+
+                                if (currentFunctionResult.type != 0)
+                                {
+                                    aggregatedValues[i].result1f += currentFunctionResult.result1f;
+
+                                    if (aggregatedValues[i].result1fPrefix == null)
+                                        aggregatedValues[i].result1fPrefix = currentFunctionResult.result1fPrefix;
+                                    else if (aggregatedValues[i].result1fPrefix != currentFunctionResult.result1fPrefix)
+                                        aggregatedValues[i].result1fPrefix = "";
+
+                                    if (aggregatedValues[i].result1fSpace == null)
+                                        aggregatedValues[i].result1fSpace = currentFunctionResult.result1fSpace;
+                                    else if (aggregatedValues[i].result1fSpace != currentFunctionResult.result1fSpace)
+                                        aggregatedValues[i].result1fSpace = "";
+
+                                    if (aggregatedValues[i].result1fPostfix == null)
+                                        aggregatedValues[i].result1fPostfix = currentFunctionResult.result1fPostfix;
+                                    else if (aggregatedValues[i].result1fPostfix != currentFunctionResult.result1fPostfix)
+                                        aggregatedValues[i].result1fPostfix = "";
+
+                                    aggregatedValues[i].type = currentFunctionResult.type;
+                                }
                             }
-                            else
+                            else if (functionTypes[i] == FunctionType.AverageCount)
                             {
-                                currentFunctionValue.type = resultTypes[i];
+                                if (!aggregatedValues[i].items.TryGetValue(parameter2Values[i], out _))
+                                    aggregatedValues[i].items.Add(parameter2Values[i], false);
+
+                                if (!aggregatedValues[i].items1.TryGetValue(currentFunctionValue, out _))
+                                    aggregatedValues[i].items1.Add(currentFunctionValue, false);
                             }
-
-                            if (currentFunctionValue.type != 0)
-                            {
-                                if (aggregatedValues[i].result1f > currentFunctionValue.result1f)
-                                    aggregatedValues[i].result1f = currentFunctionValue.result1f;
-
-                                if (aggregatedValues[i].result1fPrefix == null)
-                                    aggregatedValues[i].result1fPrefix = currentFunctionValue.result1fPrefix;
-                                else if (aggregatedValues[i].result1fPrefix != currentFunctionValue.result1fPrefix)
-                                    aggregatedValues[i].result1fPrefix = "";
-
-                                if (aggregatedValues[i].result1fSpace == null)
-                                    aggregatedValues[i].result1fSpace = currentFunctionValue.result1fSpace;
-                                else if (aggregatedValues[i].result1fSpace != currentFunctionValue.result1fSpace)
-                                    aggregatedValues[i].result1fSpace = "";
-
-                                if (aggregatedValues[i].result1fPostfix == null)
-                                    aggregatedValues[i].result1fPostfix = currentFunctionValue.result1fPostfix;
-                                else if (aggregatedValues[i].result1fPostfix != currentFunctionValue.result1fPostfix)
-                                    aggregatedValues[i].result1fPostfix = "";
-                            }
-                            else
-                            {
-                                if (Plugin.CompareStrings(aggregatedValues[i].result1s, currentFunctionValue.result1s) == 1)
-                                    aggregatedValues[i].result1s = currentFunctionValue.result1s;
-                            }
-
-                            aggregatedValues[i].type = currentFunctionValue.type;
-                        }
-                        else if (functionTypes[i] == FunctionType.Maximum)
-                        {
-                            currentFunctionValue = Plugin.ConvertStrings(functionValues[i]);
-
-                            if (currentFunctionValue.type == 0)
-                            {
-                                resultTypes[i] = 0;
-                            }
-                            else if (resultTypes[i] == 0)
-                            {
-                                currentFunctionValue.type = 0;
-                            }
-                            else if (currentFunctionValue.type < resultTypes[i])
-                            {
-                                resultTypes[i] = currentFunctionValue.type;
-                            }
-                            else
-                            {
-                                currentFunctionValue.type = resultTypes[i];
-                            }
-
-                            if (currentFunctionValue.type != 0)
-                            {
-                                if (aggregatedValues[i].result1f < currentFunctionValue.result1f)
-                                    aggregatedValues[i].result1f = currentFunctionValue.result1f;
-
-                                if (aggregatedValues[i].result1fPrefix == null)
-                                    aggregatedValues[i].result1fPrefix = currentFunctionValue.result1fPrefix;
-                                else if (aggregatedValues[i].result1fPrefix != currentFunctionValue.result1fPrefix)
-                                    aggregatedValues[i].result1fPrefix = "";
-
-                                if (aggregatedValues[i].result1fSpace == null)
-                                    aggregatedValues[i].result1fSpace = currentFunctionValue.result1fSpace;
-                                else if (aggregatedValues[i].result1fSpace != currentFunctionValue.result1fSpace)
-                                    aggregatedValues[i].result1fSpace = "";
-
-                                if (aggregatedValues[i].result1fPostfix == null)
-                                    aggregatedValues[i].result1fPostfix = currentFunctionValue.result1fPostfix;
-                                else if (aggregatedValues[i].result1fPostfix != currentFunctionValue.result1fPostfix)
-                                    aggregatedValues[i].result1fPostfix = "";
-                            }
-                            else
-                            {
-                                if (Plugin.CompareStrings(aggregatedValues[i].result1s, currentFunctionValue.result1s) == -1)
-                                    aggregatedValues[i].result1s = currentFunctionValue.result1s;
-                            }
-
-                            aggregatedValues[i].type = currentFunctionValue.type;
-                        }
-                        else if (functionTypes[i] == FunctionType.Average)
-                        {
-                            if (!aggregatedValues[i].items.TryGetValue(parameter2Values[i], out _))
-                                aggregatedValues[i].items.Add(parameter2Values[i], false);
-
-                            currentFunctionValue = Plugin.ConvertStrings(functionValues[i]);
-
-                            if (currentFunctionValue.type != 0)
-                            {
-                                aggregatedValues[i].result1f += currentFunctionValue.result1f;
-
-                                if (aggregatedValues[i].result1fPrefix == null)
-                                    aggregatedValues[i].result1fPrefix = currentFunctionValue.result1fPrefix;
-                                else if (aggregatedValues[i].result1fPrefix != currentFunctionValue.result1fPrefix)
-                                    aggregatedValues[i].result1fPrefix = "";
-
-                                if (aggregatedValues[i].result1fSpace == null)
-                                    aggregatedValues[i].result1fSpace = currentFunctionValue.result1fSpace;
-                                else if (aggregatedValues[i].result1fSpace != currentFunctionValue.result1fSpace)
-                                    aggregatedValues[i].result1fSpace = "";
-
-                                if (aggregatedValues[i].result1fPostfix == null)
-                                    aggregatedValues[i].result1fPostfix = currentFunctionValue.result1fPostfix;
-                                else if (aggregatedValues[i].result1fPostfix != currentFunctionValue.result1fPostfix)
-                                    aggregatedValues[i].result1fPostfix = "";
-
-                                aggregatedValues[i].type = currentFunctionValue.type;
-                            }
-                        }
-                        else if (functionTypes[i] == FunctionType.AverageCount)
-                        {
-                            if (!aggregatedValues[i].items.TryGetValue(parameter2Values[i], out _))
-                                aggregatedValues[i].items.Add(parameter2Values[i], false);
-
-                            if (!aggregatedValues[i].items1.TryGetValue(functionValues[i], out _))
-                                aggregatedValues[i].items1.Add(functionValues[i], false);
                         }
                     }
                 }
             }
 
-            public static string GetField(string composedGroupings, Plugin.ConvertStringsResult[] convertResults, int fieldNumber, List<string> groupingNames, int operation, string mulDivFactorRepr, string precisionDigitsRepr, string appendedText)
+            public static int CompareField(string composedGroupings, ConvertStringsResult[] convertResults, int fieldNumber, ColumnAttributesDict groupings, string comparedValue)
             {
-                if (fieldNumber < groupingNames.Count)
+                if (fieldNumber < groupings.Count)
                 {
-                    string field = composedGroupings.Split(Plugin.MultipleItemsSplitterId)[fieldNumber];
+                    string field = composedGroupings.Split(MultipleItemsSplitterId)[fieldNumber];
 
-                    if (field == Plugin.TotalsString)
-                        field = (Plugin.MsgAllTags + " \"" + groupingNames[fieldNumber] + "\"").ToUpper();
+                    if (field == TotalsString)
+                        field = (MsgAllTags + " \"" + groupings.ElementAt(fieldNumber).Value.getColumnName(true, true, true) + "\"").ToUpper();
+
+                    return field.CompareTo(comparedValue);
+                }
+                else
+                {
+                    ConvertStringsResult currentFunctionResult = convertResults[fieldNumber - groupings.Count];
+                    ConvertStringsResult comparedFunctionValue = ConvertStrings(comparedValue);
+
+                    return currentFunctionResult.compare(comparedFunctionValue);
+                }
+            }
+
+            public static string GetField(string composedGroupings, ConvertStringsResult[] convertResults, int fieldNumber, ColumnAttributesDict groupings, int operation, string mulDivFactorRepr, string precisionDigitsRepr, string appendedText)
+            {
+                if (fieldNumber < groupings.Count)
+                {
+                    string field = composedGroupings.Split(MultipleItemsSplitterId)[fieldNumber];
+
+                    if (field == TotalsString)
+                        field = (MsgAllTags + " \"" + groupings.ElementAt(fieldNumber).Value.getColumnName(true, true, true) + "\"").ToUpper();
 
                     return field;
                 }
                 else
                 {
-                    return convertResults[fieldNumber - groupingNames.Count].getFormattedResult(operation, mulDivFactorRepr, precisionDigitsRepr, appendedText);
+                    return convertResults[fieldNumber - groupings.Count].getFormattedResult(operation, mulDivFactorRepr, precisionDigitsRepr, appendedText);
                 }
             }
 
-            public static string[] GetGroupings(KeyValuePair<string, Plugin.ConvertStringsResult[]> keyValue, List<string> groupingNames)
+            public static string[] GetGroupings(KeyValuePair<string, ConvertStringsResult[]> keyValue, ColumnAttributesDict groupings)
             {
                 if (keyValue.Key == "")
                 {
@@ -451,105 +1393,16 @@ namespace MusicBeePlugin
                 }
                 else
                 {
-                    string[] fields = keyValue.Key.Split(Plugin.MultipleItemsSplitterId);
+                    string[] fields = keyValue.Key.Split(MultipleItemsSplitterId);
 
                     for (int i = 0; i < fields.Length; i++)
-                        if (fields[i] == Plugin.TotalsString)
-                            fields[i] = (Plugin.MsgAllTags + " '" + groupingNames[i] + "'").ToUpper();
+                        if (fields[i] == TotalsString)
+                            fields[i] = (MsgAllTags + " '" + groupings.ElementAt(i).Value.getColumnName(true, true, true) + "'").ToUpper();
 
                     return fields;
                 }
             }
         }
-
-        private delegate void AddRowToTable(List<string[]> rows);
-        private delegate void UpdateTable();
-        private AddRowToTable addRowToTable;
-        private UpdateTable updateTable;
-
-        private System.Threading.Timer periodicCacheClearingTimer;
-        private void periodicCacheClearing(object state)
-        {
-            cachedAppliedPresetGuid = Guid.NewGuid();
-            cachedQueriedActualGroupingValues = null;
-            cachedQueriedFilesActualComposedGroupingValues.Clear();
-            tags.Clear();
-
-            foreach (var artPair in artworks)
-            {
-                artPair.Value.Dispose();
-            }
-            artworks.Clear();
-        }
-
-        private static List<string> ProccessedReportDeletions = new List<string>();
-
-        //Cached UI and events workrounds
-        public static Bitmap DefaultArtwork;
-        public static string DefaultArtworkHash;
-        public SortedDictionary<string, Bitmap> artworks = new SortedDictionary<string, Bitmap>();
-        private Bitmap artwork; //For CD booklet export
-
-        private string autoApplyText;
-        private string nowTickedText;
-
-        private bool ignoreCheckedPresetEvent = true;
-        private int autoAppliedPresetCount;
-
-        private string assignHotkeyCheckBoxText;
-        private int reportPresetsWithHotkeysCount;
-        private bool[] reportPresetHotkeyUsedSlots = new bool[Plugin.MaximumNumberOfLRHotkeys];
-
-        private bool unsavedChanges = false;
-        private string buttonCloseToolTip;
-        private int presetsBoxLastSelectedIndex = -2;
-
-        private bool ignoreSplitterMovedEvent = true;
-
-        private bool presetIsLoaded = false;
-        private bool ignorePresetChangedEvent = false;
-        private bool completelyIgnoreItemCheckEvent = false;
-        private bool completelyIgnoreFunctionChangedEvent = false;
-        private bool sourceFieldComboBoxIndexChanging = false;
-        private static bool BackgroundTaskIsInProgress = false;
-
-        //Working locals
-        public ReportPreset appliedPreset;
-        private Guid cachedAppliedPresetGuid;
-
-
-        private SortedDictionary<string, bool>[] cachedQueriedActualGroupingValues = null;
-        private SortedDictionary<string, string> cachedQueriedFilesActualComposedGroupingValues = new SortedDictionary<string, string>(); //<url, composed groupings>
-
-        private AggregatedTags tags = new AggregatedTags();
-
-        private string conditionText;
-        private string comparedFieldText;
-
-        private int conditionField = -1;
-        private int comparedField = -1;
-        private int artworkField = -1;
-
-        private readonly List<Plugin.MetaDataType> destinationTagIds = new List<Plugin.MetaDataType>();
-
-        public static string PresetName = "";
-
-        //Working locals & UI preset caching
-        private readonly List<string> groupingNames = new List<string>();
-        private readonly List<string> functionNames = new List<string>();
-        private readonly List<FunctionType> functionTypes = new List<FunctionType>();
-        private readonly List<string> parameterNames = new List<string>();
-        private readonly List<string> parameter2Names = new List<string>();
-
-        private readonly List<string> savedFunctionIds = new List<string>();
-
-        private List<int> operations = new List<int>();
-        private List<string> mulDivFactors = new List<string>();
-        private List<string> precisionDigits = new List<string>();
-        private List<string> appendTexts = new List<string>();
-
-        //UI preset caching
-        private readonly List<string> savedDestinationTagsNames = new List<string>();
 
         public new void Dispose()
         {
@@ -557,67 +1410,331 @@ namespace MusicBeePlugin
             periodicCacheClearing(null);
         }
 
-        public LibraryReportsCommand()
+        public static string GetSplitterRepresentation(string splitter, bool trimValues, bool addSpacePrefix)
         {
-            //It's not GUI control, not a Form (if constructed without parameters)
-            //InitializeComponent();
+            string representation = "";
+
+            if (!string.IsNullOrEmpty(splitter) && addSpacePrefix)
+                representation += " [" + splitter + "]";
+            else if (!string.IsNullOrEmpty(splitter))
+                representation += "[" + splitter + "]";
+
+            if (!string.IsNullOrEmpty(splitter) && trimValues)
+                representation += " *";
+
+            return representation;
         }
 
-        public LibraryReportsCommand(bool setTimer)
+        public static string GetColumnName(string tagName, string tag2Name, FunctionType type, string splitter, bool trimValues,
+            string expression, bool trimName, bool includeSplitterTrimInfo, bool includeExpression)
         {
-            //It's not GUI control, not a Form (if constructed without parameters)
-            //InitializeComponent();
+            string columnName = tagName;
 
-            periodicCacheClearingTimer = new System.Threading.Timer(periodicCacheClearing, null, 5 * 60 * 1000, 5 * 60 * 1000); //Every 5 mins.
+            if (includeSplitterTrimInfo)
+                columnName += GetSplitterRepresentation(splitter, trimValues, true);
+
+            if (type == FunctionType.Average || type == FunctionType.AverageCount)
+                columnName = LrFunctionNames[(int)type] + "(" + columnName + "/" + tag2Name + ")";
+            else if (type != FunctionType.Grouping)
+                columnName = LrFunctionNames[(int)type] + "(" + columnName + ")";
+
+            if (includeExpression && !string.IsNullOrWhiteSpace(expression))
+            {
+                if (trimName && expression.Length > MaxExprRepresentationLength)
+                {
+                    int exprRepresentationMiddle = MaxExprRepresentationLength / 2;
+                    int exprRepresentationTailStart = expression.Length - exprRepresentationMiddle;
+
+                    columnName += " : " + expression.Substring(0, exprRepresentationMiddle) + "…"
+                        + expression.Substring(exprRepresentationTailStart);                        ;
+                }
+                else
+                {
+                    columnName += " : " + expression;
+                }
+            }
+
+            if (trimName && columnName.Length > MaxColumnRepresentationLength)
+            {
+                columnName = columnName.Substring(0, MaxColumnRepresentationLength);
+                if (columnName[columnName.Length - 1] != '…')
+                    columnName += "…";
+            }
+
+            return columnName;
         }
 
-        public LibraryReportsCommand(Plugin tagToolsPluginParam)
+        private void previewTable_AddRowsToTable(List<string[]> rows)
         {
-            InitializeComponent();
+            foreach (var row in rows)
+            {
+                previewTable.Rows.Add(row);
+                previewTable.Rows[previewTable.RowCount - 1].Resizable = DataGridViewTriState.True;
 
-            TagToolsPlugin = tagToolsPluginParam;
 
-            initializeForm();
+                for (int i = 0; i < previewTable.ColumnCount; i++)
+                {
+                    if (i != artworkField)
+                    {
+                        if (row[i].StartsWith(MsgAllTags))
+                            previewTable.Rows[previewTable.RowCount - 1].Cells[i].Style.Font = TotalsFont;
+
+                        previewTable.Rows[previewTable.RowCount - 1].Cells[i].ToolTipText = row[i] + "\n\n" + LrCellToolTip;
+
+                        if (maxWidths[i] < row[i].Length)
+                            maxWidths[i] = row[i].Length;
+                    }
+                }
+
+                if (artworkField != -1)
+                {
+                    //Lets replace string hashes in the Artwork column with images.
+                    string stringHash = row[artworkField];
+                    Bitmap pic;
+
+                    if (!artworks.TryGetValue(stringHash, out pic))
+                        pic = artworks[DefaultArtworkHash];
+
+                    previewTable.Rows[previewTable.RowCount - 1].Cells[artworkField].ValueType = typeof(Bitmap);
+                    previewTable.Rows[previewTable.RowCount - 1].Cells[artworkField].Value = pic;
+                    previewTable.Rows[previewTable.RowCount - 1].MinimumHeight = PreviewTableArtworkSize;
+
+                    int width = Math.Max(pic.Height, pic.Width) / 10;
+                    if (maxWidths[artworkField] < width)
+                        maxWidths[artworkField] = width;
+                }
+            }
+        }
+
+        private void previewTable_UpdateTable()
+        {
+            for (int i = 0; i < previewTable.ColumnCount; i++)
+            {
+                if (i != artworkField && maxWidths[i] > 0)
+                    previewTable.Columns[i].FillWeight = maxWidths[i] * 100;
+            }
+
+
+            if (previewTable.RowCount > 0)
+                previewTable.CurrentCell = previewTable.Rows[0].Cells[0];
+        }
+
+        private void adjustPresetAsSourceUI(ComboBox foundPresetRefs, ReportPresetReference selectedPresetRef, bool? selectedRefCheckStatus)
+        {
+            if (selectedRefCheckStatus == true)
+            {
+                toolTip1.SetToolTip(useAnotherPresetAsSourceCheckBox, UseAnotherPresetAsSourceToolTip);
+                useAnotherPresetAsSourceCheckBox.Image = Resources.transparent_15;
+                CueProvider.SetCue(foundPresetRefs, "");
+
+                foundPresetRefs.SelectedItem = selectedPresetRef;
+            }
+            else if (selectedRefCheckStatus == null)
+            {
+                toolTip1.SetToolTip(useAnotherPresetAsSourceCheckBox, UseAnotherPresetAsSourceToolTip + "\n\n" + UseAnotherPresetAsSourceIsSenselessToolTip.ToUpper());
+                useAnotherPresetAsSourceCheckBox.Image = Warning;
+                CueProvider.SetCue(foundPresetRefs, selectedPresetRef.name);
+
+                foundPresetRefs.SelectedIndex = -1;
+            }
+            else //if(selectedRefCheckStatus == false)
+            {
+                toolTip1.SetToolTip(useAnotherPresetAsSourceCheckBox, UseAnotherPresetAsSourceToolTip + "\n\n" + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper());
+                useAnotherPresetAsSourceCheckBox.Image = Warning;
+                CueProvider.SetCue(foundPresetRefs, selectedPresetRef.name);
+
+                foundPresetRefs.SelectedIndex = -1;
+            }
+        }
+
+        private bool? checkPresetReference(ReportPreset[] presetList, SortedDictionary<Guid, bool> referredPresetGuids,
+            bool useAnotherPresetAsSource, ReportPresetReference presetReference)
+        // Returns: true - reference chain is good, null - reference chain is senseless (there is !conditionIsChecked), false - reference chain is bad (looped references)
+        {
+            if (!useAnotherPresetAsSource)
+                return true;
+            else if (presetReference.permanentGuid == Guid.Empty)
+                return null;
+
+
+            foreach (var preset in presetList)
+            {
+                if (preset.permanentGuid == presetReference.permanentGuid)
+                {
+                    if (!referredPresetGuids.TryGetValue(preset.permanentGuid, out _))
+                    {
+                        referredPresetGuids.Add(preset.permanentGuid, false);
+                        bool? checkStatus = checkPresetReference(presetList, referredPresetGuids, preset.useAnotherPresetAsSource, preset.anotherPresetAsSource);
+
+                        if (checkStatus == false)
+                            return false;
+                        else if (checkStatus == null)
+                            return null;
+                        else if (!preset.conditionIsChecked)
+                            return null;
+                        else //if (preset.conditionIsChecked)
+                            return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        private void findFilteringPresetsUI(ComboBox foundPresetRefs, CheckedListBox presetList, ReportPreset currentPreset, ReportPresetReference selectedPresetRef)
+        {
+            bool? selectedRefCheckStatus = (selectedPresetRef.permanentGuid == Guid.Empty ? true : false);
+            foundPresetRefs.Items.Clear();
+
+            var referredPresetGuids = new SortedDictionary<Guid, bool>();
+            var currentPresets = getReportPresetsArrayUI();
+
+            foreach (var item in presetList.Items)
+            {
+                ReportPreset preset = (ReportPreset)item;
+
+                if (preset != currentPreset)
+                {
+                    referredPresetGuids.Clear();
+                    referredPresetGuids.Add(currentPreset.permanentGuid, false);
+
+                    var presetAsReference = new ReportPresetReference(preset);
+                    bool? checkStatus = checkPresetReference(currentPresets, referredPresetGuids, true, presetAsReference);
+
+                    if (preset.permanentGuid == selectedPresetRef.permanentGuid)
+                    {
+                        selectedRefCheckStatus = checkStatus;
+                        selectedPresetRef.name = preset.getName();
+
+                        if (checkStatus == true)
+                            foundPresetRefs.Items.Add(selectedPresetRef);
+                    }
+                    else if (checkStatus == true)
+                    {
+                        foundPresetRefs.Items.Add(presetAsReference);
+                    }
+                }
+            }
+
+            adjustPresetAsSourceUI(foundPresetRefs, selectedPresetRef, selectedRefCheckStatus);
+            lastSelectedRefCheckStatus = selectedRefCheckStatus;
         }
 
         private void resetLocalsAndUiControls()
         {
             cachedAppliedPresetGuid = Guid.NewGuid();
 
-            completelyIgnoreItemCheckEvent = true;
-
-            while (previewTable.Columns.Count > 0)
+            while (previewTable.ColumnCount > 0)
                 previewTable.Columns.RemoveAt(0);
 
-            for (int i = 0; i < sourceTagList.Items.Count; i++)
-            {
-                sourceTagList.SetItemChecked(i, false);
-            }
+            tagsDataGridView.Rows.Clear();
+            tagsDataGridViewSelectedRow = -1;
+            expressionsDataGridView.Rows.Clear();
+            
+            expressionBackup = "";
+            splitterBackup = "";
+            trimValuesBackup = false;
 
             conditionField = -1;
             comparedField = -1;
+
             artworkField = -1;
+            sequenceNumberField = -1;
 
             sourceFieldComboBox.Items.Clear();
             conditionFieldList.Items.Clear();
             comparedFieldList.Items.Clear();
 
-            groupingNames.Clear();
-            functionNames.Clear();
-            functionTypes.Clear();
-            parameterNames.Clear();
-            parameter2Names.Clear();
+            groupings.Clear();
+            groupingsDict.Clear();
+            functionsDict.Clear();
 
             operations.Clear();
             mulDivFactors.Clear();
             precisionDigits.Clear();
             appendTexts.Clear();
 
-            completelyIgnoreItemCheckEvent = false;
-
             functionComboBox.SelectedIndex = 0;
 
             clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewTrackList, buttonPreview, buttonExport, buttonClose);
+        }
+
+        // Returns column count
+        private static int prepareDict(ColumnAttributesDict dictRef, SortedDictionary<string, PresetColumnAttributes> presetDictRef, 
+            PresetColumnAttributes[] attribsSet, int startingColumnIndex)
+        {
+            int columnIndex = startingColumnIndex;
+            int maxColumnIndex = startingColumnIndex - 1;
+            for (int i = 0; i < attribsSet.Length; i++)
+                maxColumnIndex += attribsSet[i].expressions.Length;
+
+            if (presetDictRef != null)
+                for (int i = 0; i < attribsSet.Length; i++)
+                    presetDictRef.Add(attribsSet[i].getShortId(), attribsSet[i]);
+
+
+            repeat_again:
+            if (columnIndex <= maxColumnIndex)
+            {
+                for (int i = 0; i < attribsSet.Length; i++)
+                {
+                    for (int j = 0; j < attribsSet[i].expressions.Length; j++)
+                    {
+                        if (columnIndex == attribsSet[i].columnIndices[j])
+                        {
+                            dictRef.Add(attribsSet[i].getUniqueId(j), 
+                                new ColumnAttributes(attribsSet[i].type, attribsSet[i].expressions[j], attribsSet[i].parameterName, 
+                                attribsSet[i].parameter2Name, attribsSet[i].splitter, attribsSet[i].trimValues));
+
+                            columnIndex++;
+                            goto repeat_again;
+                        }
+                    }
+                }
+            }
+
+            return maxColumnIndex + 1 - startingColumnIndex;
+        }
+
+        private void prepareConditionRelatedLocals()
+        {
+            comparison = appliedPreset.comparison;
+            comparedFieldText = appliedPreset.comparedField;
+
+            conditionField = -1;
+            comparedField = -1;
+
+            if (appliedPreset.conditionIsChecked)
+            {
+                int i = -1;
+                foreach (var attribs in groupingsDict.Values)
+                {
+                    i++;
+
+                    if (attribs.getColumnName(false, false, true) == appliedPreset.conditionField)
+                        conditionField = i;
+
+                    if (attribs.getColumnName(false, false, true) == comparedFieldText)
+                        comparedField = i;
+                }
+
+
+                i = -1;
+                foreach (var attribs in functionsDict.Values)
+                {
+                    i++;
+
+                    if (attribs.getColumnName(false, false, true) == appliedPreset.conditionField)
+                        conditionField = groupingsDict.Count + i;
+
+                    if (attribs.getColumnName(false, false, true) == comparedFieldText)
+                        comparedField = groupingsDict.Count + i;
+                }
+            }
         }
 
         private void prepareLocals()
@@ -625,18 +1742,15 @@ namespace MusicBeePlugin
             if (cachedAppliedPresetGuid == appliedPreset.guid)
                 return;
 
-            groupingNames.Clear();
-            groupingNames.AddRange(appliedPreset.groupingNames);
-            functionNames.Clear();
-            functionNames.AddRange(appliedPreset.functionNames);
+            groupings.Clear();
+            groupingsDict.Clear();
+            int columnCount = prepareDict(groupingsDict, groupings, appliedPreset.groupings, 0);
+
+            functionsDict.Clear();
+            prepareDict(functionsDict, null, appliedPreset.functions, columnCount);
+
             savedFunctionIds.Clear();
             savedFunctionIds.AddRange(appliedPreset.functionIds);
-            functionTypes.Clear();
-            functionTypes.AddRange(appliedPreset.functionTypes);
-            parameterNames.Clear();
-            parameterNames.AddRange(appliedPreset.parameterNames);
-            parameter2Names.Clear();
-            parameter2Names.AddRange(appliedPreset.parameter2Names);
 
 
             operations.Clear();
@@ -650,49 +1764,26 @@ namespace MusicBeePlugin
 
 
             destinationTagIds.Clear();
-            for (int i = 0; i < appliedPreset.destinationTags.Length; i++)
-            {
-                destinationTagIds.Add(Plugin.GetTagId(appliedPreset.destinationTags[i]));
-            }
-
-            conditionText = appliedPreset.conditionText;
-            comparedFieldText = appliedPreset.comparedField;
-
-            conditionField = -1;
-            comparedField = -1;
+            for (int j = 0; j < appliedPreset.destinationTags.Length; j++)
+                destinationTagIds.Add(GetTagId(appliedPreset.destinationTags[j]));
 
             artworks.Clear();
             artworkField = -1;
 
+            sequenceNumberField = -1;
 
-            for (int i = 0; i < groupingNames.Count; i++)
+            int i = 0;
+            foreach (var attribs in groupingsDict.Values)
             {
-                if (groupingNames[i] == Plugin.ArtworkName)
+                if (attribs.parameterName == ArtworkName)
                     artworkField = i;
+                else if (attribs.parameterName == SequenceNumberName)
+                    sequenceNumberField = i;
+
+                i++;
             }
 
-
-            if (appliedPreset.conditionIsChecked)
-            {
-                for (int i = 0; i < groupingNames.Count; i++)
-                {
-                    if (groupingNames[i] == appliedPreset.conditionField)
-                        conditionField = i;
-
-                    if (groupingNames[i] == comparedFieldText)
-                        comparedField = i;
-                }
-
-
-                for (int i = 0; i < functionNames.Count; i++)
-                {
-                    if (functionNames[i] == appliedPreset.conditionField)
-                        conditionField = groupingNames.Count + i;
-
-                    if (functionNames[i] == comparedFieldText)
-                        comparedField = groupingNames.Count + i;
-                }
-            }
+            prepareConditionRelatedLocals();
         }
 
         private void setUnsavedChanges(bool flagUnsavedChanges)
@@ -700,7 +1791,7 @@ namespace MusicBeePlugin
             if (flagUnsavedChanges && !unsavedChanges)
             {
                 unsavedChanges = true;
-                buttonClose.Image = Plugin.Warning;
+                buttonClose.Image = Warning;
                 toolTip1.SetToolTip(buttonClose, buttonCloseToolTip);
             }
             else if (!flagUnsavedChanges && unsavedChanges)
@@ -716,12 +1807,12 @@ namespace MusicBeePlugin
             if (presetIsLoaded)
                 return;
 
-            if (presetsBox.SelectedIndex == -1)
+            if (selectedPreset == null)
                 return;
 
-            assignHotkeyCheckBox.Text = assignHotkeyCheckBoxText + (Plugin.MaximumNumberOfLRHotkeys - reportPresetsWithHotkeysCount) + "/" + Plugin.MaximumNumberOfLRHotkeys;
+            assignHotkeyCheckBox.Text = assignHotkeyCheckBoxText + (MaximumNumberOfLRHotkeys - reportPresetsWithHotkeysCount) + "/" + MaximumNumberOfLRHotkeys;
 
-            UpdatePreset();
+            updatePreset();
             setUnsavedChanges(true);
         }
 
@@ -752,10 +1843,10 @@ namespace MusicBeePlugin
 
             public static string GetResizedArtworkBase64Hash(Bitmap pic)
             {
-                if (Plugin.SavedSettings.resizeArtwork)
+                if (SavedSettings.resizeArtwork)
                 {
-                    float xSF = (float)Plugin.SavedSettings.xArtworkSize / (float)pic.Width;
-                    float ySF = (float)Plugin.SavedSettings.yArtworkSize / (float)pic.Height;
+                    float xSF = (float)SavedSettings.xArtworkSize / (float)pic.Width;
+                    float ySF = (float)SavedSettings.yArtworkSize / (float)pic.Height;
                     float SF;
 
                     if (xSF >= ySF)
@@ -832,78 +1923,140 @@ namespace MusicBeePlugin
             return sequenceNumber;
         }
 
-        private string executePreset(string[] queriedFiles, bool interactive, bool saveResultsToTags, string functionId)
-        {
-            if (functionId != null && string.IsNullOrWhiteSpace(functionId))
-                return Plugin.SbIncorrectLrFunctionId;
+        private string executePreset(string[] queriedFiles, bool interactive, bool saveResultsToTags, string functionId,
+            bool? filterResults) // filterResults: null - proceed as usual (filter results on tag saving only, any "interactive" is allowed),
+                                 // true & "!interactive" - update lastFiles by filtered file list
+                                 // ALL OTHER COMBINATIONS OF filterResults AND interactive ARE PROHIBITED!
+                                 // NOT NULL filterResults MUST BE USED ONLY FOR FILTERING PRESET CHAIN INVOKED INSIDE THIS FUNCTION
 
-            if (functionId != null && functionNames.Count == 0)
+        {
+            string parameterCombinationErrorMessage = "Prohibited parameter combination: interactive = " + interactive + ", filterResults = " + filterResults;
+            if (!interactive)
+            {
+                if (filterResults == false)
+                    throw new Exception(parameterCombinationErrorMessage);
+            }
+            else
+            {
+                if (filterResults != null)
+                    throw new Exception(parameterCombinationErrorMessage);
+            }
+
+
+            if (functionId != null && string.IsNullOrWhiteSpace(functionId))
+                return SbIncorrectLrFunctionId;
+
+            if (functionId != null && functionsDict.Count == 0)
                 return "???";
+
+
+            //LET'S DEAL WITH ANOTHER PRESET AS A SOURCE
+            if (appliedPreset.useAnotherPresetAsSource)
+            {
+                var checkStatus = checkPresetReference(reportPresets, new SortedDictionary<Guid, bool>(), true, appliedPreset.anotherPresetAsSource);
+                if (checkStatus != true)
+                {
+                    if (functionId == null)
+                    {
+                        SetStatusbarText(SbBrokenPresetRetrievalChain.Replace("%%PRESETNAME%%", appliedPreset.getName()), true);
+                        System.Media.SystemSounds.Question.Play();
+                        DisablePlaySoundOnce = true;
+                    }
+
+                    return "!!!";
+                }
+                ReportPreset anotherPresetAsSource = appliedPreset.anotherPresetAsSource.findPreset(reportPresets);
+
+                var appliedPresetInUse = appliedPreset;
+                appliedPreset = anotherPresetAsSource;
+                executePreset(queriedFiles, false, false, null, true);
+                queriedFiles = lastFiles;
+                appliedPreset = appliedPresetInUse;
+            }
+
+
+            //MAIN PROCESSING
+            prepareLocals();
 
             string query;
             string tagValue;
 
-            int sequenceNumberGrouping = -1;
+
+            // int[] dependentGroupingColumns will be used several time below, let's cache it
+            // 
+            // int[grouping column count] dependentGroupingColumns: indices of groupings
+            //     in global dictionary "groupings" (which doesn't include expressions),
+            //     but -1 for groupings having only one column 
+            int[] dependentGroupingColumns = new int[groupingsDict.Count];
+            int p = -1;
+            foreach (var grouping in groupings.Values)
+            {
+                p++;
+
+                for (int l = 0; l < grouping.columnIndices.Length; l++)
+                    dependentGroupingColumns[grouping.columnIndices[l]] = p;
+            }
+
 
             //Let's cache tag/prop ids
-            Plugin.MetaDataType[] queriedGroupingsTagIds = new Plugin.MetaDataType[groupingNames.Count];
+            MetaDataType[] queriedGroupingsTagIds = new MetaDataType[groupings.Count];
             for (int l = 0; l < queriedGroupingsTagIds.Length; l++)
                 queriedGroupingsTagIds[l] = 0;
 
-            Plugin.FilePropertyType[] queriedGroupingsPropIds = new Plugin.FilePropertyType[groupingNames.Count];
-            for (int l = 0; l < queriedGroupingsTagIds.Length; l++)
-                queriedGroupingsTagIds[l] = 0;
+            FilePropertyType[] queriedGroupingsPropIds = new FilePropertyType[groupings.Count];
+            for (int l = 0; l < queriedGroupingsPropIds.Length; l++)
+                queriedGroupingsPropIds[l] = 0;
 
 
-            Plugin.MetaDataType[] queriedActualGroupingsTagIds = new Plugin.MetaDataType[groupingNames.Count];
+            MetaDataType[] queriedActualGroupingsTagIds = new MetaDataType[groupings.Count];
             for (int l = 0; l < queriedActualGroupingsTagIds.Length; l++)
                 queriedActualGroupingsTagIds[l] = 0;
 
-            Plugin.FilePropertyType[] queriedActualGroupingsPropIds = new Plugin.FilePropertyType[groupingNames.Count];
+            FilePropertyType[] queriedActualGroupingsPropIds = new FilePropertyType[groupings.Count];
             for (int l = 0; l < queriedActualGroupingsTagIds.Length; l++)
                 queriedActualGroupingsTagIds[l] = 0;
 
-            
-            int[] resultTypes = new int[functionNames.Count];
 
-            for (int l = 0; l < functionNames.Count; l++)
-            {
+            int[] resultTypes = new int[functionsDict.Count];
+
+            for (int l = 0; l < resultTypes.Length; l++)
                 resultTypes[l] = -1;
-            }
 
 
             int lastSeqNumInOrder = 1;
             SortedDictionary<string, int> seqNumInOrder = null;
 
 
-            for (int i = 0; i < groupingNames.Count; i++)
+            int i = -1;
+            foreach (var attribs in groupings.Values)
             {
-                Plugin.MetaDataType tagId = Plugin.GetTagId(groupingNames[i]);
-                string nativeTagName = Plugin.MbApiInterface.Setting_GetFieldName(tagId);
+                i++;
 
-                if (groupingNames[i] == Plugin.SequenceNumberName)
+                MetaDataType tagId = GetTagId(attribs.parameterName);
+                string nativeTagName = MbApiInterface.Setting_GetFieldName(tagId);
+
+                if (attribs.parameterName == SequenceNumberName)
                 {
                     nativeTagName = null;
-                    tagId = (Plugin.MetaDataType)(-99);
+                    tagId = (MetaDataType)(-99);
                     queriedActualGroupingsTagIds[i] = tagId;
-                    sequenceNumberGrouping = i;
 
                     seqNumInOrder = new SortedDictionary<string, int>();
                 }
                 else
                 {
                     if (tagId == 0)
-                        queriedActualGroupingsPropIds[i] = Plugin.GetPropId(groupingNames[i]);
+                        queriedActualGroupingsPropIds[i] = GetPropId(attribs.parameterName);
                     else
                         queriedActualGroupingsTagIds[i] = tagId;
                 }
 
 
-                //MusicBee doesn't support these tags for quering, so let's skip them in query
-                if (tagId != Plugin.MetaDataType.AlbumArtistRaw && nativeTagName != null && nativeTagName != Plugin.ArtworkName)
+                //MusicBee doesn't support these tags for querying, so let's skip them in query
+                if (tagId != MetaDataType.AlbumArtistRaw && nativeTagName != null && nativeTagName != ArtworkName)
                 {
                     if (tagId == 0)
-                        queriedGroupingsPropIds[i] = Plugin.GetPropId(groupingNames[i]);
+                        queriedGroupingsPropIds[i] = GetPropId(attribs.parameterName);
                     else
                         queriedGroupingsTagIds[i] = tagId;
                 }
@@ -916,11 +2069,11 @@ namespace MusicBeePlugin
                 cachedValuesAreRelevant = false;
 
 
-            SortedDictionary<string, bool>[] queriedGroupingValues = new SortedDictionary<string, bool>[groupingNames.Count];
+            SortedDictionary<string, bool>[] queriedGroupingValues = new SortedDictionary<string, bool>[groupings.Count];
             for (int l = 0; l < queriedGroupingValues.Length; l++)
                 queriedGroupingValues[l] = new SortedDictionary<string, bool>();
 
-            SortedDictionary<string, bool>[] queriedActualGroupingValues = new SortedDictionary<string, bool>[groupingNames.Count];
+            SortedDictionary<string, bool>[] queriedActualGroupingValues = new SortedDictionary<string, bool>[groupings.Count];
             for (int l = 0; l < queriedActualGroupingValues.Length; l++)
                 queriedActualGroupingValues[l] = new SortedDictionary<string, bool>();
 
@@ -930,7 +2083,7 @@ namespace MusicBeePlugin
 
 
             bool queryOnlyGroupings = false;
-            if (functionNames.Count == 0)
+            if (functionsDict.Count == 0)
                 queryOnlyGroupings = true;
 
             if (queriedFiles == null && !queryOnlyGroupings)
@@ -941,7 +2094,7 @@ namespace MusicBeePlugin
             {
                 if (queriedFiles == null && queryOnlyGroupings)
                 {
-                    if (!Plugin.MbApiInterface.Library_QueryFilesEx("domain=Library", out queriedFiles))
+                    if (!MbApiInterface.Library_QueryFilesEx("domain=Library", out queriedFiles))
                         return "";
 
                     if (queriedFiles.Length == 0)
@@ -953,21 +2106,28 @@ namespace MusicBeePlugin
 
                 for (int n = 0; n < queriedFiles.Length; n++)
                 {
-                    string[] currentFileGroupingValues = null;
+                    List<string>[] currentFileGroupingValues = null; // array (size of grouping count) of list of split values
 
                     if (queryOnlyGroupings)
-                        currentFileGroupingValues = new string[groupingNames.Count];
-
-                    for (int i = 0; i < groupingNames.Count; i++)
                     {
+                        currentFileGroupingValues = new List<string>[groupingsDict.Count];
+                        for (int f = 0; f < currentFileGroupingValues.Length; f++)
+                            currentFileGroupingValues[f] = new List<string>();
+                    }
+
+                    i = -1;
+                    foreach (var attribs in groupings.Values)
+                    {
+                        i++;
+
                         {
                             //Let's remember actual grouping values for future reuse
-                            Plugin.MetaDataType tagId = queriedActualGroupingsTagIds[i];
-                            Plugin.FilePropertyType propId = 0;
+                            MetaDataType tagId = queriedActualGroupingsTagIds[i];
+                            FilePropertyType propId = 0;
                             if (tagId == 0)
                                 propId = queriedActualGroupingsPropIds[i];
 
-                            if (tagId == (Plugin.MetaDataType)(-99))
+                            if (tagId == (MetaDataType)(-99))
                             {
                                 tagValue = "xXxXxXxXx"; //Let's reserve space for future numbers
                             }
@@ -975,30 +2135,31 @@ namespace MusicBeePlugin
                             {
                                 tagValue = ""; //Will ignore this grouping...
                             }
-                            else if (tagId == Plugin.ArtistArtistsId || tagId == Plugin.ComposerComposersId) //Lets make smart conversion of list of artists/composers
+                            else if (tagId == ArtistArtistsId || tagId == ComposerComposersId) //Lets make smart conversion of list of artists/composers
                             {
-                                tagValue = Plugin.GetFileTag(queriedFiles[n], tagId);
-                                tagValue = Plugin.GetTagRepresentation(tagValue);
+                                tagValue = GetFileTag(queriedFiles[n], tagId);
+                                if (smartOperation)
+                                    tagValue = GetTagRepresentation(tagValue);
+                                else
+                                    tagValue = RemoveRoleIds(tagValue);
                             }
-                            else if (i == artworkField) //It's artwork image. Lets fill cell with hash codes. 
+                            else if (attribs.parameterName == ArtworkName) //It's artwork image. Lets fill cell with hash codes. 
                             {
-                                tagValue = ResizedArtworkProvider.GetBase64ArtworkBase64Hash(Plugin.GetFileTag(queriedFiles[n], Plugin.MetaDataType.Artwork), artworks, out Bitmap pic);
+                                tagValue = ResizedArtworkProvider.GetBase64ArtworkBase64Hash(
+                                    GetFileTag(queriedFiles[n], MetaDataType.Artwork), artworks, out Bitmap pic);
                                 artwork = pic; //For CD booklet export
                             }
                             else
                             {
                                 if (tagId == 0)
                                 {
-                                    tagValue = Plugin.MbApiInterface.Library_GetFileProperty(queriedFiles[n], propId);
+                                    tagValue = MbApiInterface.Library_GetFileProperty(queriedFiles[n], propId);
                                 }
                                 else
                                 {
-                                    tagValue = Plugin.GetFileTag(queriedFiles[n], tagId, true);
+                                    tagValue = GetFileTag(queriedFiles[n], tagId, true);
                                 }
                             }
-
-                            if (tagValue == "")
-                                tagValue = " ";
 
                             if (!queryOnlyGroupings)
                             {
@@ -1008,30 +2169,32 @@ namespace MusicBeePlugin
                         }
 
                         if (queryOnlyGroupings)
-                            currentFileGroupingValues[i] = tagValue;
-
-
-                        if (!queryOnlyGroupings)
+                        {
+                            var columnIndicesTagValues = attribs.getSplitValues(queriedFiles[n], tagValue);
+                            foreach (var columnIndexTag in columnIndicesTagValues)
+                                currentFileGroupingValues[columnIndexTag.index].Add(columnIndexTag.value);
+                        }
+                        else
                         {
                             //Let's remember only grouping values, which can be used in query in Library_QueryFilesEx function
-                            Plugin.MetaDataType tagId = queriedGroupingsTagIds[i];
-                            Plugin.FilePropertyType propId = 0;
+                            MetaDataType tagId = queriedGroupingsTagIds[i];
+                            FilePropertyType propId = 0;
                             if (tagId == 0)
                                 propId = queriedGroupingsPropIds[i];
 
                             if (tagId == 0 && propId == 0)
                             {
-                                //MusicBee doesn't support for quering these tags, so let's skip them in query
+                                //MusicBee doesn't support for querying these tags, so let's skip them in query
                             }
                             else
                             {
                                 if (tagId == 0)
                                 {
-                                    tagValue = Plugin.MbApiInterface.Library_GetFileProperty(queriedFiles[n], propId);
+                                    tagValue = MbApiInterface.Library_GetFileProperty(queriedFiles[n], propId);
                                 }
                                 else
                                 {
-                                    tagValue = Plugin.GetFileTag(queriedFiles[n], tagId, true);
+                                    tagValue = GetFileTag(queriedFiles[n], tagId, true);
                                 }
 
                                 if (!queriedGroupingValues[i].TryGetValue(tagValue, out _))
@@ -1043,29 +2206,31 @@ namespace MusicBeePlugin
                     if (queryOnlyGroupings)
                     {
                         if (interactive)
-                            Plugin.SetStatusbarTextForFileOperations(Plugin.LibraryReportsCommandSbText, true, n, queriedFiles.Length, appliedPreset.getName());
+                            SetStatusbarTextForFileOperations(LibraryReportsCommandSbText, true, n, queriedFiles.Length, appliedPreset.getName());
                         else //if (functionId == null)
-                            Plugin.SetStatusbarTextForFileOperations(Plugin.ApplyingLibraryReportSbText, true, n, queriedFiles.Length, appliedPreset.getName());
+                            SetStatusbarTextForFileOperations(ApplyingLibraryReportSbText, true, n, queriedFiles.Length, appliedPreset.getName());
 
-
-                        if (sequenceNumberGrouping != -1)
+                        List<string> composedGroupingValuesList = AggregatedTags.GetComposedGroupingValues(currentFileGroupingValues, dependentGroupingColumns, appliedPreset.totals);
+                        foreach (var composedGroupingValues in composedGroupingValuesList)
                         {
-                            string composedGroupingValues = AggregatedTags.GetComposedGroupingValues(currentFileGroupingValues);
-                            if (!seqNumInOrder.TryGetValue(composedGroupingValues, out _))
-                                seqNumInOrder.Add(composedGroupingValues, lastSeqNumInOrder++);
+                            if (sequenceNumberField != -1)
+                            {
+                                if (!seqNumInOrder.TryGetValue(composedGroupingValues, out _))
+                                    seqNumInOrder.Add(composedGroupingValues, lastSeqNumInOrder++);
+                            }
                         }
 
-                        tags.add(null, currentFileGroupingValues, null, null, null, ref resultTypes, appliedPreset.totals);
+                        tags.add(null, composedGroupingValuesList, null, null, null, null, ref resultTypes);
                     }
                 }
 
                 if (queryOnlyGroupings)
                 {
-                    if (sequenceNumberGrouping != -1)
+                    if (sequenceNumberField != -1)
                     {
                         AggregatedTags tags2 = new AggregatedTags();
 
-                        foreach (KeyValuePair<string, Plugin.ConvertStringsResult[]> keyValue in tags)
+                        foreach (KeyValuePair<string, ConvertStringsResult[]> keyValue in tags)
                         {
                             int seqNum = seqNumInOrder[keyValue.Key];
                             string sequenceNumber = ReplaceLeadingZerosBySpaces(seqNum);
@@ -1084,10 +2249,13 @@ namespace MusicBeePlugin
 
                 query = @"<SmartPlaylist><Source Type=""1""><Conditions CombineMethod=""All"">";
 
-                for (int i = 0; i < groupingNames.Count; i++)
+                i = -1;
+                foreach (var attribs in groupings.Values)
                 {
-                    Plugin.MetaDataType tagId = queriedGroupingsTagIds[i];
-                    Plugin.FilePropertyType propId = queriedGroupingsPropIds[i];
+                    i++;
+
+                    MetaDataType tagId = queriedGroupingsTagIds[i];
+                    FilePropertyType propId = queriedGroupingsPropIds[i];
 
                     if (tagId == 0 && propId == 0)
                     {
@@ -1095,7 +2263,7 @@ namespace MusicBeePlugin
                     }
                     else
                     {
-                        string nativeTagName = Plugin.MbApiInterface.Setting_GetFieldName(tagId);
+                        string nativeTagName = MbApiInterface.Setting_GetFieldName(tagId);
 
                         query += @"<Condition Field=""" + nativeTagName + @""" Comparison=""IsIn""";
 
@@ -1119,7 +2287,7 @@ namespace MusicBeePlugin
 
                 if (cachedQueriedActualGroupingValues != null && cachedQueriedActualGroupingValues.Length == queriedActualGroupingValues.Length)
                 {
-                    for (int i = 0; i < cachedQueriedActualGroupingValues.Length; i++)
+                    for (i = 0; i < cachedQueriedActualGroupingValues.Length; i++)
                     {
                         if (cachedQueriedActualGroupingValues[i].Count == queriedActualGroupingValues[i].Count)
                         {
@@ -1132,7 +2300,7 @@ namespace MusicBeePlugin
                                     if (cachedPair.Key != pair.Key)
                                     {
                                         cachedValuesAreRelevant = false;
-                                        goto loopexit;
+                                        goto loop_exit;
                                     }
                                 }
                             }
@@ -1141,7 +2309,7 @@ namespace MusicBeePlugin
                 }
             }
 
-        loopexit:
+        loop_exit:
             if (cachedValuesAreRelevant)
             {
                 cachedAppliedPresetGuid = appliedPreset.guid;
@@ -1150,22 +2318,22 @@ namespace MusicBeePlugin
 
                 if (queriedFiles == null)
                 {
-                    if (!Plugin.MbApiInterface.Library_QueryFilesEx(query, out queriedFiles))
+                    if (!MbApiInterface.Library_QueryFilesEx(query, out queriedFiles))
                         return "";
 
                     if (queriedFiles.Length == 0)
                         return "";
 
-                    return applyPresetResults(queriedFiles, interactive, saveResultsToTags, functionId, sequenceNumberGrouping);
+                    return applyPresetResults(queriedFiles, interactive, saveResultsToTags, functionId, sequenceNumberField, filterResults);
                 }
                 else
                 {
-                    return applyPresetResults(queriedFiles, interactive, saveResultsToTags, functionId, sequenceNumberGrouping);
+                    return applyPresetResults(queriedFiles, interactive, saveResultsToTags, functionId, sequenceNumberField, filterResults);
                 }
             }
 
 
-            if (!Plugin.MbApiInterface.Library_QueryFilesEx(query, out string[] files))
+            if (!MbApiInterface.Library_QueryFilesEx(query, out string[] files))
                 return "";
 
             if (files.Length == 0)
@@ -1190,25 +2358,32 @@ namespace MusicBeePlugin
                 }
 
                 string currentFile = files[fileCounter];
-                string[] groupingValues;
+                List<string>[] groupingValuesList;
+                List<FunctionType> functionTypes;
                 string[] functionValues;
                 string[] parameter2Values;
 
 
                 if (interactive)
-                    Plugin.SetStatusbarTextForFileOperations(Plugin.LibraryReportsCommandSbText, true, fileCounter, files.Length, appliedPreset.getName());
+                    SetStatusbarTextForFileOperations(LibraryReportsCommandSbText, true, fileCounter, files.Length, appliedPreset.getName());
                 else if (functionId == null)
-                    Plugin.SetStatusbarTextForFileOperations(Plugin.ApplyingLibraryReportSbText, true, fileCounter, files.Length, appliedPreset.getName());
+                    SetStatusbarTextForFileOperations(ApplyingLibraryReportSbText, true, fileCounter, files.Length, appliedPreset.getName());
 
 
-                groupingValues = new string[groupingNames.Count];
+                groupingValuesList = new List<string>[groupingsDict.Count];
+                for (int f = 0; f < groupingValuesList.Length; f++)
+                    groupingValuesList[f] = new List<string>();
 
-                for (int i = 0; i < groupingNames.Count; i++)
+
+                i = -1;
+                foreach (var attribs in groupings.Values)
                 {
-                    Plugin.MetaDataType tagId = queriedActualGroupingsTagIds[i];
-                    Plugin.FilePropertyType propId = queriedActualGroupingsPropIds[i];
+                    i++;
 
-                    if (tagId == (Plugin.MetaDataType)(-99))
+                    MetaDataType tagId = queriedActualGroupingsTagIds[i];
+                    FilePropertyType propId = queriedActualGroupingsPropIds[i];
+
+                    if (tagId == (MetaDataType)(-99))
                     {
                         tagValue = "xXxXxXxXx"; //Let's reserve space for future numbers
                     }
@@ -1216,26 +2391,26 @@ namespace MusicBeePlugin
                     {
                         tagValue = ""; //Will ignore this grouping...
                     }
-                    else if (tagId == Plugin.ArtistArtistsId || tagId == Plugin.ComposerComposersId) //Let's make smart conversion of list of artists/composers
+                    else if (tagId == ArtistArtistsId || tagId == ComposerComposersId) //Let's make smart conversion of list of artists/composers
                     {
-                        tagValue = Plugin.GetFileTag(currentFile, tagId);
-                        tagValue = Plugin.GetTagRepresentation(tagValue);
+                        tagValue = GetFileTag(currentFile, tagId);
+                        if (smartOperation)
+                            tagValue = GetTagRepresentation(tagValue);
+                        else
+                            tagValue = RemoveRoleIds(tagValue);
                     }
                     else
                     {
                         if (tagId == 0)
                         {
-                            tagValue = Plugin.MbApiInterface.Library_GetFileProperty(currentFile, propId);
+                            tagValue = MbApiInterface.Library_GetFileProperty(currentFile, propId);
                         }
                         else
                         {
-                            tagValue = Plugin.GetFileTag(currentFile, tagId, true);
+                            tagValue = GetFileTag(currentFile, tagId, true);
                         }
                     }
 
-
-                    if (tagValue == "")
-                        tagValue = " ";
 
                     if (queriedFiles != null && !queriedActualGroupingValues[i].TryGetValue(tagValue, out _))
                     {
@@ -1243,103 +2418,114 @@ namespace MusicBeePlugin
                         break; //Break grouping loop
                     }
 
-                    groupingValues[i] = tagValue;
+                    var columnIndicesTags = attribs.getSplitValues(currentFile, tagValue);
+                    foreach (var columnIndexTag in columnIndicesTags)
+                        groupingValuesList[columnIndexTag.index].Add(columnIndexTag.value); 
                 }
 
                 if (skipFile)
                     continue; //Continue file loop
 
-                string composedGroupingValues = AggregatedTags.GetComposedGroupingValues(groupingValues);
+                List<string> composedGroupingValuesList = AggregatedTags.GetComposedGroupingValues(groupingValuesList, dependentGroupingColumns, appliedPreset.totals);
 
-                if (sequenceNumberGrouping != -1)
+                foreach (var composedGroupingValues in composedGroupingValuesList)
                 {
-                    if (!seqNumInOrder.TryGetValue(composedGroupingValues, out _))
-                        seqNumInOrder.Add(composedGroupingValues, lastSeqNumInOrder++);
+                    if (sequenceNumberField != -1)
+                    {
+                        if (!seqNumInOrder.TryGetValue(composedGroupingValues, out _))
+                            seqNumInOrder.Add(composedGroupingValues, lastSeqNumInOrder++);
+                    }
+
+                    if (!cachedQueriedFilesActualComposedGroupingValues.TryGetValue(currentFile, out _))
+                        cachedQueriedFilesActualComposedGroupingValues.Add(currentFile, composedGroupingValues);
                 }
 
-                if (!cachedQueriedFilesActualComposedGroupingValues.TryGetValue(currentFile, out _))
-                    cachedQueriedFilesActualComposedGroupingValues.Add(currentFile, composedGroupingValues);
+                functionTypes = new List<FunctionType>();
+                functionValues = new string[functionsDict.Count];
+                parameter2Values = new string[functionsDict.Count];
 
-                functionValues = new string[functionNames.Count];
-                parameter2Values = new string[functionNames.Count];
-
-
-                for (int i = 0; i < functionNames.Count; i++)
+                int j = -1;
+                foreach (var attribs in functionsDict.Values)
                 {
-                    int parameterIndex = functionNames.IndexOf(parameterNames[i]);
+                    j++;
 
-                    Plugin.MetaDataType tagId = Plugin.GetTagId(parameterNames[i]);
+                    MetaDataType tagId = GetTagId(attribs.parameterName);
 
-                    if (parameterNames[i] == Plugin.SequenceNumberName)
+                    if (attribs.parameterName == SequenceNumberName)
                     {
                         tagValue = ReplaceLeadingZerosBySpaces(fileCounter);
                     }
-                    else if (tagId == Plugin.ArtistArtistsId || tagId == Plugin.ComposerComposersId) //Lets make smart conversion of list of artists/composers
+                    else if (tagId == ArtistArtistsId || tagId == ComposerComposersId) //Lets make smart conversion of list of artists/composers
                     {
 
-                        tagValue = Plugin.GetFileTag(currentFile, tagId);
-                        tagValue = Plugin.GetTagRepresentation(tagValue);
+                        tagValue = GetFileTag(currentFile, tagId);
+                        if (smartOperation)
+                            tagValue = GetTagRepresentation(tagValue);
+                        else
+                            tagValue = RemoveRoleIds(tagValue);
                     }
                     else
                     {
                         if (tagId == 0)
                         {
-                            Plugin.FilePropertyType propId = Plugin.GetPropId(parameterNames[i]);
-                            tagValue = Plugin.MbApiInterface.Library_GetFileProperty(currentFile, propId);
+                            FilePropertyType propId = GetPropId(attribs.parameterName);
+                            tagValue = MbApiInterface.Library_GetFileProperty(currentFile, propId);
                         }
                         else
                         {
-                            tagValue = Plugin.GetFileTag(currentFile, tagId, true);
+                            tagValue = GetFileTag(currentFile, tagId, true);
                         }
                     }
 
-                    functionValues[i] = tagValue;
+                    functionTypes.Add(attribs.type);
+                    functionValues[j] = tagValue;
 
-                    if (functionTypes[i] == FunctionType.Average || functionTypes[i] == FunctionType.AverageCount)
+                    if (attribs.type == FunctionType.Average || attribs.type == FunctionType.AverageCount)
                     {
-                        parameterIndex = functionNames.IndexOf(parameter2Names[i]);
+                        tagId = GetTagId(attribs.parameter2Name);
 
-                        tagId = Plugin.GetTagId(parameter2Names[i]);
-
-                        if (tagId == Plugin.ArtistArtistsId || tagId == Plugin.ComposerComposersId) //Lets make smart conversion of list of artists/composers
+                        if (tagId == ArtistArtistsId || tagId == ComposerComposersId) //Lets make smart conversion of list of artists/composers
                         {
 
-                            tagValue = Plugin.GetFileTag(currentFile, tagId);
-                            tagValue = Plugin.GetTagRepresentation(tagValue);
+                            tagValue = GetFileTag(currentFile, tagId);
+                            if (smartOperation)
+                                tagValue = GetTagRepresentation(tagValue);
+                            else
+                                tagValue = RemoveRoleIds(tagValue);
                         }
                         else
                         {
                             if (tagId == 0)
                             {
-                                Plugin.FilePropertyType propId = Plugin.GetPropId(parameter2Names[i]);
-                                tagValue = Plugin.MbApiInterface.Library_GetFileProperty(currentFile, propId);
+                                FilePropertyType propId = GetPropId(attribs.parameter2Name);
+                                tagValue = MbApiInterface.Library_GetFileProperty(currentFile, propId);
                             }
                             else
                             {
-                                tagValue = Plugin.GetFileTag(currentFile, tagId, true);
+                                tagValue = GetFileTag(currentFile, tagId, true);
                             }
                         }
 
-                        parameter2Values[i] = tagValue;
+                        parameter2Values[j] = tagValue;
                     }
                     else
                     {
-                        parameter2Values[i] = null;
+                        parameter2Values[j] = null;
                     }
                 }
 
                 if (queriedFiles == null || queriedFiles.Contains(currentFile))
-                    tags.add(currentFile, groupingValues, functionValues, functionTypes, parameter2Values, ref resultTypes, appliedPreset.totals);
+                    tags.add(currentFile, composedGroupingValuesList, functionsDict, functionValues, functionTypes, parameter2Values, ref resultTypes);
                 else
-                    tags.add(null, groupingValues, functionValues, functionTypes, parameter2Values, ref resultTypes, appliedPreset.totals);
+                    tags.add(null, composedGroupingValuesList, functionsDict, functionValues, functionTypes, parameter2Values, ref resultTypes);
             }
 
 
-            if (sequenceNumberGrouping != -1)
+            if (sequenceNumberField != -1)
             {
                 AggregatedTags tags2 = new AggregatedTags();
 
-                foreach (KeyValuePair<string, Plugin.ConvertStringsResult[]> keyValue in tags)
+                foreach (KeyValuePair<string, ConvertStringsResult[]> keyValue in tags)
                 {
                     int seqNum = seqNumInOrder[keyValue.Key];
                     string sequenceNumber = ReplaceLeadingZerosBySpaces(seqNum);
@@ -1352,13 +2538,20 @@ namespace MusicBeePlugin
 
             cachedAppliedPresetGuid = appliedPreset.guid;
             if (queriedFiles == null)
-                return applyPresetResults(files, interactive, saveResultsToTags, functionId, sequenceNumberGrouping);
+                return applyPresetResults(files, interactive, saveResultsToTags, functionId, sequenceNumberField, filterResults);
             else
-                return applyPresetResults(queriedFiles, interactive, saveResultsToTags, functionId, sequenceNumberGrouping);
+                return applyPresetResults(queriedFiles, interactive, saveResultsToTags, functionId, sequenceNumberField, filterResults);
         }
 
-        private string applyPresetResults(string[] queriedFiles, bool interactive, bool saveResultsToTags, string functionId, int sequenceNumberGrouping)
+        private string applyPresetResults(string[] queriedFiles, bool interactive, bool saveResultsToTags, string functionId, int sequenceNumberGrouping,
+            bool? filterResults) // filterResults: true - filter queriedFiles list by condition, false - undo filtering of queriedFiles,
+                                 // null - skip filtering, proceed as usual, true & !interactive - update lastFiles by filtered file list
         {
+            if (queriedFiles == null)
+                queriedFiles = lastFiles;
+            else
+                lastFiles = (string[])queriedFiles.Clone();
+
             if (functionId != null)
                 return getFunctionResult(queriedFiles[0], cachedQueriedFilesActualComposedGroupingValues, functionId);
 
@@ -1368,7 +2561,7 @@ namespace MusicBeePlugin
                 AggregatedTags tags2 = new AggregatedTags();
 
                 int i = 1;
-                foreach (KeyValuePair<string, Plugin.ConvertStringsResult[]> keyValue in tags)
+                foreach (KeyValuePair<string, ConvertStringsResult[]> keyValue in tags)
                 {
                     string sequenceNumber = ReplaceLeadingZerosBySpaces(i);
                     tags2.Add(keyValue.Key.Replace("xXxXxXxXx", sequenceNumber), keyValue.Value);
@@ -1381,17 +2574,40 @@ namespace MusicBeePlugin
 
             List<string[]> rows = new List<string[]>();
 
-            if (interactive)
+            if (!interactive && filterResults == true) // Only for filtering by another preset
             {
-                int filesCount = 0;
-                int groupingsCount = 0;
-                int totalGroupingsCount = tags.Count;
-                foreach (KeyValuePair<string, Plugin.ConvertStringsResult[]> keyValue in tags)
+                var filteredFiles = new List<string>();
+
+                for (int i = 0; i < queriedFiles.Length; i++)
                 {
                     if (backgroundTaskIsCanceled)
                     {
-                        if (interactive)
-                            Invoke(updateTable);
+                        cachedAppliedPresetGuid = Guid.NewGuid();
+                        return "";
+                    }
+
+                    string composedGroupingValues = cachedQueriedFilesActualComposedGroupingValues[queriedFiles[i]];
+                    ConvertStringsResult[] functionValues = tags[composedGroupingValues];
+
+                    if (checkCondition(composedGroupingValues, functionValues))
+                        filteredFiles.Add(queriedFiles[i]);
+                }
+
+                lastFiles = new string[filteredFiles.Count];
+                filteredFiles.CopyTo(lastFiles);
+            }
+            else if (interactive)
+            {
+                bool showRow = true;
+
+                int filesCount = 0;
+                int groupingsCount = 0;
+                int totalGroupingsCount = tags.Count;
+                foreach (KeyValuePair<string, ConvertStringsResult[]> keyValue in tags)
+                {
+                    if (backgroundTaskIsCanceled && filterResults == null)
+                    {
+                        Invoke(updateTable);
 
                         cachedAppliedPresetGuid = Guid.NewGuid();
                         return "";
@@ -1399,50 +2615,72 @@ namespace MusicBeePlugin
 
                     filesCount += keyValue.Value[keyValue.Value.Length - 1].items.Count;
 
-                    string[] groupingsRow = AggregatedTags.GetGroupings(keyValue, groupingNames);
+                    string[] groupingsRow = AggregatedTags.GetGroupings(keyValue, groupingsDict); 
                     string[] row = new string[groupingsRow.Length + keyValue.Value.Length];
 
                     groupingsRow.CopyTo(row, 0);
 
                     for (int i = groupingsRow.Length; i < row.Length - 1; i++)
                     {
-                        row[i] = AggregatedTags.GetField(keyValue.Key, keyValue.Value, i, groupingNames, 
+                        string composedGroupingValues = keyValue.Key;
+                        string functionValue = AggregatedTags.GetField(composedGroupingValues, keyValue.Value, i, groupingsDict,
                             operations[i - groupingsRow.Length], mulDivFactors[i - groupingsRow.Length], precisionDigits[i - groupingsRow.Length], appendTexts[i - groupingsRow.Length]);
-                    }
-                    row[row.Length - 1] = AggregatedTags.GetField(keyValue.Key, keyValue.Value, row.Length - 1, groupingNames, 
-                        0, null, null, null);
-                    rows.Add(row);
 
-                    //Plugin.SetStatusbarTextForFileOperations(Plugin.LibraryReportsGneratingPreviewCommandSbText, true, groupingsCount, totalGroupingsCount, appliedPreset.getName());
-                    if (groupingsCount % 100 == 0)
+                        ConvertStringsResult[] functionValues = tags[composedGroupingValues];
+
+                        if (filterResults == true)
+                        {
+                            string comparedValue;
+
+                            if (comparedField == -1)
+                                comparedValue = comparedFieldText;
+                            else
+                                comparedValue = AggregatedTags.GetField(composedGroupingValues, functionValues, comparedField, groupingsDict,
+                                    0, null, null, null);
+
+                            showRow = checkCondition(composedGroupingValues, functionValues);
+                        }
+
+
+                        row[i] = functionValue;
+                    }
+
+
+                    if (showRow)
                     {
-                        Plugin.SetStatusbarTextForFileOperations(Plugin.LibraryReportsGneratingPreviewCommandSbText, true, groupingsCount, totalGroupingsCount, appliedPreset.getName(), 0);
-                        Invoke(addRowToTable, rows);
-                        rows.Clear();
-                    }
+                        rows.Add(row);
 
-                    groupingsCount++;
+                        //SetStatusbarTextForFileOperations(LibraryReportsGeneratingPreviewCommandSbText, true, groupingsCount, totalGroupingsCount, appliedPreset.getName());
+                        if (groupingsCount % 100 == 0)
+                        {
+                            SetStatusbarTextForFileOperations(LibraryReportsGeneratingPreviewCommandSbText, true, groupingsCount, totalGroupingsCount, appliedPreset.getName(), 0);
+                            Invoke(addRowsToTable, rows);
+                            rows.Clear();
+                        }
+
+                        groupingsCount++;
+                    }
 
                     previewIsGenerated = true;
                 }
 
-                Plugin.SetStatusbarTextForFileOperations(Plugin.LibraryReportsGneratingPreviewCommandSbText, true, --filesCount, filesCount, appliedPreset.getName());
+                SetStatusbarTextForFileOperations(LibraryReportsGeneratingPreviewCommandSbText, true, --filesCount, filesCount, appliedPreset.getName());
             }
 
 
             if (saveResultsToTags)
             {
-                Plugin.SetResultingSbText(appliedPreset.getName(), false, true);
+                SetResultingSbText(appliedPreset.getName(), false, true);
                 saveFields(interactive, queriedFiles, cachedQueriedFilesActualComposedGroupingValues);
             }
             else
             {
-                Plugin.SetResultingSbText(appliedPreset.getName(), true, true);
+                SetResultingSbText(appliedPreset.getName(), true, true);
             }
 
             if (interactive)
             {
-                Invoke(addRowToTable, rows);
+                Invoke(addRowsToTable, rows);
                 Invoke(updateTable);
             }
 
@@ -1455,7 +2693,7 @@ namespace MusicBeePlugin
 
             int groupingsCount = 0;
             int totalGroupingsCount = tags.Count;
-            foreach (KeyValuePair<string, Plugin.ConvertStringsResult[]> keyValue in tags)
+            foreach (KeyValuePair<string, ConvertStringsResult[]> keyValue in tags)
             {
                 if (backgroundTaskIsCanceled)
                 {
@@ -1465,14 +2703,14 @@ namespace MusicBeePlugin
                     return;
                 }
 
-                string[] row = AggregatedTags.GetGroupings(keyValue, groupingNames);
+                string[] row = AggregatedTags.GetGroupings(keyValue, groupingsDict);
                 rows.Add(row);
 
-                //Plugin.SetStatusbarTextForFileOperations(Plugin.LibraryReportsGneratingPreviewCommandSbText, true, groupingsCount, totalGroupingsCount, appliedPreset.getName());
+                //Plugin.SetStatusbarTextForFileOperations(LibraryReportsGeneratingPreviewCommandSbText, true, groupingsCount, totalGroupingsCount, appliedPreset.getName());
                 if (groupingsCount % 100 == 0)
                 {
-                    Plugin.SetStatusbarTextForFileOperations(Plugin.LibraryReportsGneratingPreviewCommandSbText, true, groupingsCount, totalGroupingsCount, appliedPreset.getName(), 0);
-                    Invoke(addRowToTable, rows);
+                    SetStatusbarTextForFileOperations(LibraryReportsGeneratingPreviewCommandSbText, true, groupingsCount, totalGroupingsCount, appliedPreset.getName(), 0);
+                    Invoke(addRowsToTable, rows);
                     rows.Clear();
                 }
 
@@ -1482,56 +2720,59 @@ namespace MusicBeePlugin
             }
 
 
-            Plugin.SetStatusbarTextForFileOperations(Plugin.LibraryReportsGneratingPreviewCommandSbText, true, --groupingsCount, totalGroupingsCount, appliedPreset.getName(), 0);
-            Plugin.SetResultingSbText(appliedPreset.getName(), true, true);
+            SetStatusbarTextForFileOperations(LibraryReportsGeneratingPreviewCommandSbText, true, --groupingsCount, totalGroupingsCount, appliedPreset.getName(), 0);
+            SetResultingSbText(appliedPreset.getName(), true, true);
 
-            Invoke(addRowToTable, rows);
+            Invoke(addRowsToTable, rows);
             Invoke(updateTable);
 
             return;
         }
 
-        private bool checkCondition(string composedGroupings, Plugin.ConvertStringsResult[] convertResults)
+        private bool checkCondition(int comparisonResult)
         {
             if (conditionField == -1)
                 return true;
 
-            string value = AggregatedTags.GetField(composedGroupings, convertResults, conditionField, groupingNames, 
-                0, null, null, null);
-            string comparedValue;
 
-
-            if (comparedField == -1)
-                comparedValue = comparedFieldText;
-            else
-                comparedValue = AggregatedTags.GetField(composedGroupings, convertResults, comparedField, groupingNames, 
-                    0, null, null, null);
-
-
-            if (conditionText == Plugin.ListItemConditionIs)
+            if (comparison == Comparison.Is)
             {
-                if (value == comparedValue)
+                if (comparisonResult == 0)
                     return true;
                 else
                     return false;
             }
-            else if (conditionText == Plugin.ListItemConditionIsNot)
+            else if (comparison == Comparison.IsNot)
             {
-                if (value != comparedValue)
+                if (comparisonResult != 0)
                     return true;
                 else
                     return false;
             }
-            else if (conditionText == Plugin.ListItemConditionIsGreater)
+            else if (comparison == Comparison.IsGreater)
             {
-                if (Plugin.CompareStrings(value, comparedValue) == 1)
+                if (comparisonResult == 1)
                     return true;
                 else
                     return false;
             }
-            else if (conditionText == Plugin.ListItemConditionIsLess)
+            else if (comparison == Comparison.IsGreaterOrEqual)
             {
-                if (Plugin.CompareStrings(value, comparedValue) == -1)
+                if (comparisonResult >= 0)
+                    return true;
+                else
+                    return false;
+            }
+            else if (comparison == Comparison.IsLess)
+            {
+                if (comparisonResult == -1)
+                    return true;
+                else
+                    return false;
+            }
+            else if (comparison == Comparison.IsLessOrEqual)
+            {
+                if (comparisonResult <= 0)
                     return true;
                 else
                     return false;
@@ -1540,18 +2781,40 @@ namespace MusicBeePlugin
             return true;
         }
 
+        private bool checkCondition(string composedGroupings, ConvertStringsResult[] convertResults)
+        {
+            if (conditionField == -1)
+                return true;
+
+            string value = AggregatedTags.GetField(composedGroupings, convertResults, conditionField, groupingsDict,
+                0, null, null, null);
+            string comparedValue;
+
+
+            if (comparedField == -1)
+                comparedValue = comparedFieldText;
+            else
+                comparedValue = AggregatedTags.GetField(composedGroupings, convertResults, comparedField, groupingsDict,
+                    0, null, null, null);
+
+            return checkCondition(AggregatedTags.CompareField(composedGroupings, convertResults, conditionField, groupingsDict, comparedValue));
+        }
+
         private string getFunctionResult(string queriedFile, SortedDictionary<string, string> queriedFilesActualComposedGroupingValues, string functionId)
         {
-            string composedFroupingValues = queriedFilesActualComposedGroupingValues[queriedFile];
-            Plugin.ConvertStringsResult[] functionValues = tags[composedFroupingValues];
+            string composedGroupingValues = queriedFilesActualComposedGroupingValues[queriedFile];
+            ConvertStringsResult[] functionValues = tags[composedGroupingValues];
 
-            for (int i = 0; i < functionNames.Count; i++)
+            int i = 0;
+            foreach (var attribs in functionsDict.Values)
             {
                 if (savedFunctionIds[i] == functionId)
                 {
-                    return AggregatedTags.GetField(composedFroupingValues, functionValues, groupingNames.Count + i, groupingNames, 
+                    return AggregatedTags.GetField(composedGroupingValues, functionValues, groupingsDict.Count + i, groupingsDict,
                         operations[i], mulDivFactors[i], precisionDigits[i], appendTexts[i]);
                 }
+
+                i++;
             }
 
             return "???";
@@ -1568,53 +2831,51 @@ namespace MusicBeePlugin
                 }
 
                 if (interactive)
-                    Plugin.SetStatusbarTextForFileOperations(Plugin.LibraryReportsCommandSbText, false, i, queriedFiles.Length, appliedPreset.getName());
+                    SetStatusbarTextForFileOperations(LibraryReportsCommandSbText, false, i, queriedFiles.Length, appliedPreset.getName());
                 else
-                    Plugin.SetStatusbarTextForFileOperations(Plugin.ApplyingLibraryReportSbText, false, i, queriedFiles.Length, appliedPreset.getName());
+                    SetStatusbarTextForFileOperations(ApplyingLibraryReportSbText, false, i, queriedFiles.Length, appliedPreset.getName());
 
 
-                string composedFroupingValues = queriedFilesActualComposedGroupingValues[queriedFiles[i]];
-                Plugin.ConvertStringsResult[] functionValues = tags[composedFroupingValues];
+                string composedGroupingValues = queriedFilesActualComposedGroupingValues[queriedFiles[i]];
+                ConvertStringsResult[] functionValues = tags[composedGroupingValues];
 
-                for (int j = 0; j < functionNames.Count; j++)
+                if (checkCondition(composedGroupingValues, functionValues))
                 {
-                    if (destinationTagIds[j] > 0)
+                    int j = 0;
+                    foreach (var attribs in functionsDict.Values)
                     {
-                        if (checkCondition(composedFroupingValues, functionValues))
+                        if (destinationTagIds[j] > 0)
                         {
-                            string resultValue = AggregatedTags.GetField(composedFroupingValues, functionValues, groupingNames.Count + j, groupingNames, 
+                            string resultValue = AggregatedTags.GetField(composedGroupingValues, functionValues, groupingsDict.Count + j, groupingsDict,
                                 operations[j], mulDivFactors[j], precisionDigits[j], appendTexts[j]);
-                            Plugin.SetFileTag(queriedFiles[i], destinationTagIds[j], resultValue);
+                            SetFileTag(queriedFiles[i], destinationTagIds[j], resultValue);
                         }
                     }
-                }
 
-                Plugin.CommitTagsToFile(queriedFiles[i], false, false);
+                    CommitTagsToFile(queriedFiles[i], false, false);
+                }
             }
 
 
-            if (interactive)
-                Invoke(updateTable);
-
-            Plugin.SetResultingSbText(appliedPreset.getName(), true, true);
+            SetResultingSbText(appliedPreset.getName(), true, true);
         }
 
         public void autoApplyReportPresetsOnStartup()
         {
-            lock (Plugin.SavedSettings.reportsPresets)
+            lock (SavedSettings.reportsPresets)
             {
                 try
                 {
                     System.Threading.Thread.CurrentThread.Priority = System.Threading.ThreadPriority.Lowest;
 
-                    if (Plugin.SavedSettings.reportsPresets.Length == 0)
+                    if (SavedSettings.reportsPresets.Length == 0)
                     {
                         BackgroundTaskIsInProgress = false;
                         return;
                     }
 
 
-                    if (!Plugin.MbApiInterface.Library_QueryFilesEx("domain=Library", out string[] files))
+                    if (!MbApiInterface.Library_QueryFilesEx("domain=Library", out string[] files))
                         files = new string[0];
 
 
@@ -1625,19 +2886,19 @@ namespace MusicBeePlugin
                     }
 
                     int appliedAsrPresetsCount = 0;
-                    lock (Plugin.SavedSettings.reportsPresets)
+                    lock (SavedSettings.reportsPresets)
                     {
-                        foreach (var autoLibraryReportsPreset in Plugin.SavedSettings.reportsPresets)
+                        foreach (var autoLibraryReportsPreset in SavedSettings.reportsPresets)
                         {
                             if (!autoLibraryReportsPreset.autoApply)
                                 continue;
 
+                            reportPresets = SavedSettings.reportsPresets;
                             appliedPreset = autoLibraryReportsPreset;
-                            prepareLocals();
-                            executePreset(null, false, true, null);
+                            executePreset(null, false, true, null, null);
 
                             appliedAsrPresetsCount++;
-                            if (appliedAsrPresetsCount >= Plugin.SavedSettings.autoAppliedReportPresetsCount)
+                            if (appliedAsrPresetsCount >= SavedSettings.autoAppliedReportPresetsCount)
                                 break;
                         }
                     }
@@ -1648,22 +2909,21 @@ namespace MusicBeePlugin
                 }
             }
 
-            Plugin.NumberOfTagChanges = 0;
+            NumberOfTagChanges = 0;
 
             BackgroundTaskIsInProgress = false;
-            Plugin.RefreshPanels(true);
+            RefreshPanels(true);
         }
 
         public void applyReportPresetToLibrary()
         {
-            lock (Plugin.SavedSettings.reportsPresets)
+            lock (SavedSettings.reportsPresets)
             {
                 try
                 {
                     System.Threading.Thread.CurrentThread.Priority = System.Threading.ThreadPriority.Lowest;
 
-                    prepareLocals();
-                    executePreset(null, false, true, null);
+                    executePreset(null, false, true, null, null);
                 }
                 catch (System.Threading.ThreadAbortException)
                 {
@@ -1672,28 +2932,27 @@ namespace MusicBeePlugin
             }
 
             BackgroundTaskIsInProgress = false;
-            Plugin.RefreshPanels(true);
+            RefreshPanels(true);
         }
 
         public void applyReportPresetToSelectedTracks()
         {
-            lock (Plugin.SavedSettings.reportsPresets)
+            lock (SavedSettings.reportsPresets)
             {
                 try
                 {
                     System.Threading.Thread.CurrentThread.Priority = System.Threading.ThreadPriority.Lowest;
 
-                    if (Plugin.MbApiInterface.Library_QueryFilesEx("domain=SelectedFiles", out string[] selectedFiles))
+                    if (MbApiInterface.Library_QueryFilesEx("domain=SelectedFiles", out string[] selectedFiles))
                     {
                         if (selectedFiles.Length == 0)
                         {
-                            Plugin.SetStatusbarText(Plugin.MsgNoFilesSelected, true);
+                            SetStatusbarText(MsgNoFilesSelected, true);
                             System.Media.SystemSounds.Exclamation.Play();
                         }
                         else
                         {
-                            prepareLocals();
-                            executePreset(selectedFiles, false, true, null);
+                            executePreset(selectedFiles, false, true, null, null);
                         }
                     }
                 }
@@ -1704,17 +2963,17 @@ namespace MusicBeePlugin
             }
 
             BackgroundTaskIsInProgress = false;
-            Plugin.RefreshPanels(true);
+            RefreshPanels(true);
         }
 
         public static void AutoApplyReportPresets()
         {
-            if (Plugin.SavedSettings.autoAppliedReportPresetsCount == 0)
+            if (SavedSettings.autoAppliedReportPresetsCount == 0)
                 return;
 
             if (BackgroundTaskIsInProgress)
             {
-                Plugin.SetStatusbarText(Plugin.AnotherLrPresetIsRunningSbText, false);
+                SetStatusbarText(AnotherLrPresetIsRunningSbText, false);
                 System.Media.SystemSounds.Exclamation.Play();
 
                 return;
@@ -1724,14 +2983,14 @@ namespace MusicBeePlugin
                 BackgroundTaskIsInProgress = true;
             }
 
-            Plugin.MbApiInterface.MB_CreateBackgroundTask(Plugin.LibraryReportsCommandForAutoApplying.autoApplyReportPresetsOnStartup, null);
+            MbApiInterface.MB_CreateBackgroundTask(LibraryReportsCommandForAutoApplying.autoApplyReportPresetsOnStartup, null);
         }
 
-        public static void ApplyReportPreset(ReportPreset preset)
+        public static void ApplyReportPreset(ReportPreset preset, ReportPreset[] reportPresets)
         {
             if (BackgroundTaskIsInProgress)
             {
-                Plugin.SetStatusbarText(Plugin.AnotherLrPresetIsRunningSbText, false);
+                SetStatusbarText(AnotherLrPresetIsRunningSbText, false);
                 System.Media.SystemSounds.Exclamation.Play();
 
                 return;
@@ -1741,46 +3000,47 @@ namespace MusicBeePlugin
                 BackgroundTaskIsInProgress = true;
             }
 
-            Plugin.LibraryReportsCommandForHotkeys.appliedPreset = preset;
+            LibraryReportsCommandForHotkeys.reportPresets = reportPresets;
+            LibraryReportsCommandForHotkeys.appliedPreset = preset;
             if (preset.applyToSelectedTracks)
             {
-                Plugin.MbApiInterface.MB_CreateBackgroundTask(Plugin.LibraryReportsCommandForHotkeys.applyReportPresetToSelectedTracks, null);
+                MbApiInterface.MB_CreateBackgroundTask(LibraryReportsCommandForHotkeys.applyReportPresetToSelectedTracks, null);
             }
             else
             {
 
-                Plugin.MbApiInterface.MB_CreateBackgroundTask(Plugin.LibraryReportsCommandForHotkeys.applyReportPresetToLibrary, null);
+                MbApiInterface.MB_CreateBackgroundTask(LibraryReportsCommandForHotkeys.applyReportPresetToLibrary, null);
             }
         }
 
         public static void ApplyReportPresetByHotkey(int presetIndex)
         {
-            ReportPreset preset = Plugin.ReportPresetsWithHotkeys[presetIndex - 1];
+            ReportPreset preset = ReportPresetsWithHotkeys[presetIndex - 1];
 
             if (preset.hotkeySlot != presetIndex - 1)
             {
-                MessageBox.Show(Plugin.MbForm, Plugin.SbLrHotkeysAreAssignedIncorrectly, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(MbForm, SbLrHotkeysAreAssignedIncorrectly, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            ApplyReportPreset(preset);
+            ApplyReportPreset(preset, SavedSettings.reportsPresets);
         }
 
         public static string AutoCalculateReportPresetFunction(string calculatedFile, string functionId)
         {
-            if (!Plugin.ReportPresetIdsAreInitialized)
+            if (!ReportPresetIdsAreInitialized)
             {
-                return Plugin.MsgRefershUi;
+                return MsgRefreshUi;
             }
 
-            if (!Plugin.IdsReportPresets.TryGetValue(functionId, out ReportPreset preset))
-                return Plugin.MsgIncorrectReportPresetId;
+            if (!IdsReportPresets.TryGetValue(functionId, out ReportPreset preset))
+                return MsgIncorrectReportPresetId;
 
-            Plugin.LibraryReportsCommandForFunctionIds.appliedPreset = preset;
+            LibraryReportsCommandForFunctionIds.reportPresets = SavedSettings.reportsPresets;
+            LibraryReportsCommandForFunctionIds.appliedPreset = preset;
 
             string[] selectedFiles = new string[] { calculatedFile };
-            Plugin.LibraryReportsCommandForFunctionIds.prepareLocals();
-            string functionValue = Plugin.LibraryReportsCommandForFunctionIds.executePreset(selectedFiles, false, false, functionId);
+            string functionValue = LibraryReportsCommandForFunctionIds.executePreset(selectedFiles, false, false, functionId, null);
 
             return functionValue;
         }
@@ -1798,15 +3058,15 @@ namespace MusicBeePlugin
 
         public static void FillReportPresetsWithHotkeysArray()
         {
-            for (int i = 0; i < Plugin.ReportPresetsWithHotkeys.Length; i++)
+            for (int i = 0; i < ReportPresetsWithHotkeys.Length; i++)
             {
-                Plugin.ReportPresetsWithHotkeys[i] = null;
+                ReportPresetsWithHotkeys[i] = null;
             }
 
-            for (int i = 0; i < Plugin.SavedSettings.reportsPresets.Length; i++)
+            for (int i = 0; i < SavedSettings.reportsPresets.Length; i++)
             {
-                if (Plugin.SavedSettings.reportsPresets[i].hotkeyAssigned)
-                    Plugin.ReportPresetsWithHotkeys[Plugin.SavedSettings.reportsPresets[i].hotkeySlot] = Plugin.SavedSettings.reportsPresets[i];
+                if (SavedSettings.reportsPresets[i].hotkeyAssigned)
+                    ReportPresetsWithHotkeys[SavedSettings.reportsPresets[i].hotkeySlot] = SavedSettings.reportsPresets[i];
             }
         }
 
@@ -1819,64 +3079,64 @@ namespace MusicBeePlugin
             switch (slot)
             {
                 case 0:
-                    Plugin.MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), tagToolsPlugin.LRPreset1EventHandler);
+                    MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), tagToolsPlugin.LRPreset1EventHandler);
                     break;
                 case 1:
-                    Plugin.MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), tagToolsPlugin.LRPreset2EventHandler);
+                    MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), tagToolsPlugin.LRPreset2EventHandler);
                     break;
                 case 2:
-                    Plugin.MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), tagToolsPlugin.LRPreset3EventHandler);
+                    MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), tagToolsPlugin.LRPreset3EventHandler);
                     break;
                 case 3:
-                    Plugin.MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), tagToolsPlugin.LRPreset4EventHandler);
+                    MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), tagToolsPlugin.LRPreset4EventHandler);
                     break;
                 case 4:
-                    Plugin.MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), tagToolsPlugin.LRPreset5EventHandler);
+                    MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), tagToolsPlugin.LRPreset5EventHandler);
                     break;
                 case 5:
-                    Plugin.MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), tagToolsPlugin.LRPreset6EventHandler);
+                    MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), tagToolsPlugin.LRPreset6EventHandler);
                     break;
                 case 6:
-                    Plugin.MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), tagToolsPlugin.LRPreset7EventHandler);
+                    MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), tagToolsPlugin.LRPreset7EventHandler);
                     break;
                 case 7:
-                    Plugin.MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), tagToolsPlugin.LRPreset8EventHandler);
+                    MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), tagToolsPlugin.LRPreset8EventHandler);
                     break;
                 case 8:
-                    Plugin.MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), tagToolsPlugin.LRPreset9EventHandler);
+                    MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), tagToolsPlugin.LRPreset9EventHandler);
                     break;
                 case 9:
-                    Plugin.MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), tagToolsPlugin.LRPreset10EventHandler);
+                    MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), tagToolsPlugin.LRPreset10EventHandler);
                     break;
                 case 10:
-                    Plugin.MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), tagToolsPlugin.LRPreset11EventHandler);
+                    MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), tagToolsPlugin.LRPreset11EventHandler);
                     break;
                 case 11:
-                    Plugin.MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), tagToolsPlugin.LRPreset12EventHandler);
+                    MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), tagToolsPlugin.LRPreset12EventHandler);
                     break;
                 case 12:
-                    Plugin.MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), tagToolsPlugin.LRPreset13EventHandler);
+                    MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), tagToolsPlugin.LRPreset13EventHandler);
                     break;
                 case 13:
-                    Plugin.MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), tagToolsPlugin.LRPreset14EventHandler);
+                    MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), tagToolsPlugin.LRPreset14EventHandler);
                     break;
                 case 14:
-                    Plugin.MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), tagToolsPlugin.LRPreset15EventHandler);
+                    MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), tagToolsPlugin.LRPreset15EventHandler);
                     break;
                 case 15:
-                    Plugin.MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), tagToolsPlugin.LRPreset16EventHandler);
+                    MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), tagToolsPlugin.LRPreset16EventHandler);
                     break;
                 case 16:
-                    Plugin.MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), tagToolsPlugin.LRPreset17EventHandler);
+                    MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), tagToolsPlugin.LRPreset17EventHandler);
                     break;
                 case 17:
-                    Plugin.MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), tagToolsPlugin.LRPreset18EventHandler);
+                    MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), tagToolsPlugin.LRPreset18EventHandler);
                     break;
                 case 18:
-                    Plugin.MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), tagToolsPlugin.LRPreset19EventHandler);
+                    MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), tagToolsPlugin.LRPreset19EventHandler);
                     break;
                 case 19:
-                    Plugin.MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), tagToolsPlugin.LRPreset20EventHandler);
+                    MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), tagToolsPlugin.LRPreset20EventHandler);
                     break;
                 default:
                     break;
@@ -1885,301 +3145,192 @@ namespace MusicBeePlugin
 
         public static void RegisterLRPresetsHotkeys(Plugin tagToolsPlugin)
         {
-            if (Plugin.SavedSettings.dontShowLibraryReports)
+            if (SavedSettings.dontShowLibraryReports)
                 return;
 
             FillReportPresetsWithHotkeysArray();
 
-            for (int i = 0; i < Plugin.ReportPresetsWithHotkeys.Length; i += 2)
+            for (int i = 0; i < ReportPresetsWithHotkeys.Length; i += 2)
             {
-                RegisterPresetHotkey(tagToolsPlugin, Plugin.ReportPresetsWithHotkeys[i], i);
+                RegisterPresetHotkey(tagToolsPlugin, ReportPresetsWithHotkeys[i], i);
             }
         }
 
         public static void InitReportPresetFunctionIds()
         {
-            Plugin.ReportPresetIdsAreInitialized = false;
+            ReportPresetIdsAreInitialized = false;
 
-            Plugin.IdsReportPresets.Clear();
+            IdsReportPresets.Clear();
 
-            for (int i = 0; i < Plugin.SavedSettings.reportsPresets.Length; i++)
+            for (int i = 0; i < SavedSettings.reportsPresets.Length; i++)
             {
-                ReportPreset autoLibraryReportsPreset = new ReportPreset(Plugin.SavedSettings.reportsPresets[i], true);
+                ReportPreset autoLibraryReportsPreset = new ReportPreset(SavedSettings.reportsPresets[i], true);
 
                 for (int j = 0; j < autoLibraryReportsPreset.functionIds.Length; j++)
                 {
                     if (!string.IsNullOrWhiteSpace(autoLibraryReportsPreset.functionIds[j]))
                     {
-                        Plugin.IdsReportPresets.Add(autoLibraryReportsPreset.functionIds[j], autoLibraryReportsPreset);
+                        IdsReportPresets.Add(autoLibraryReportsPreset.functionIds[j], autoLibraryReportsPreset);
                     }
                 }
             }
 
-            Plugin.ReportPresetIdsAreInitialized = true;
+            ReportPresetIdsAreInitialized = true;
         }
 
-        protected new void initializeForm()
+        private int getSelectedRow(DataGridView table)
         {
-            base.initializeForm();
-
-            //Setting control not standard properties
-            var heightField = typeof(CheckedListBox).GetField(
-                "scaledListItemBordersHeight",
-                BindingFlags.NonPublic | BindingFlags.Instance
-            );
-
-            var addedHeight = 4; // Some appropriate value, greater than the field's default of 2
-
-            heightField.SetValue(presetsBox, addedHeight); // Where "presetsBox" is your CheckedListBox
-            heightField.SetValue(sourceTagList, 5); // Where "sourceTagList" is your CheckedListBox
-
-
-            //Setting themed images
-            clearIdButton.Image = Plugin.ButtonRemoveImage;
-
-
-            //Setting themed colors
-            //Color sampleColor = SystemColors.Highlight;
-
-
-            //Clear "unsaved changes" button image
-            buttonClose.Image = Resources.transparent_15;
-            buttonCloseToolTip = toolTip1.GetToolTip(buttonClose);
-            toolTip1.SetToolTip(buttonClose, "");
-
-
-            //Preparing "ticked presets" label text
-            string entireText = autoApplyInfoLabel.Text;
-            autoApplyText = Regex.Replace(entireText, @"^(.*?)\n(.*)", "$1").TrimEnd('\n').TrimEnd('\r');
-            nowTickedText = Regex.Replace(entireText, @"^(.*?)\n(.*)", "\n$2").TrimEnd('\n').TrimEnd('\r');
-
-            autoApplyInfoLabel.Text = autoApplyText;
-
-
-            //Initialization
-            functionComboBox.Items.Add(Plugin.GroupingName);
-            functionComboBox.Items.Add(Plugin.CountName);
-            functionComboBox.Items.Add(Plugin.SumName);
-            functionComboBox.Items.Add(Plugin.MinimumName);
-            functionComboBox.Items.Add(Plugin.MaximumName);
-            functionComboBox.Items.Add(Plugin.AverageName);
-            functionComboBox.Items.Add(Plugin.AverageCountName);
-
-            Plugin.FillListByTagNames(sourceTagList.Items, true, true);
-            Plugin.FillListByPropNames(sourceTagList.Items);
-            sourceTagList.Items.Add(Plugin.SequenceNumberName);
-
-            Plugin.FillListByTagNames(parameter2ComboBox.Items, true, false);
-            Plugin.FillListByPropNames(parameter2ComboBox.Items);
-
-            conditionList.Items.Add(Plugin.ListItemConditionIs);
-            conditionList.Items.Add(Plugin.ListItemConditionIsNot);
-            conditionList.Items.Add(Plugin.ListItemConditionIsGreater);
-            conditionList.Items.Add(Plugin.ListItemConditionIsLess);
-
-
-            CueProvider.SetTextBoxCue(presetNameTextBox, Plugin.CtlAutoLRPresetName);
-
-
-            ignoreCheckedPresetEvent = false;
-            autoAppliedPresetCount = 0;
-            reportPresetsWithHotkeysCount = 0;
-            for (int i = 0; i < Plugin.SavedSettings.reportsPresets.Length; i++)
-            {
-                ReportPreset autoLibraryReportsPreset = new ReportPreset(Plugin.SavedSettings.reportsPresets[i], true);
-
-                presetsBox.Items.Add(autoLibraryReportsPreset);
-
-                if (autoLibraryReportsPreset.autoApply)
-                    presetsBox.SetItemChecked(i, true);
-
-                if (autoLibraryReportsPreset.hotkeyAssigned)
-                {
-                    reportPresetsWithHotkeysCount++;
-                    reportPresetHotkeyUsedSlots[autoLibraryReportsPreset.hotkeySlot] = true;
-                }
-            }
-            ignoreCheckedPresetEvent = true;
-
-
-            assignHotkeyCheckBoxText = assignHotkeyCheckBox.Text;
-            assignHotkeyCheckBox.Text = assignHotkeyCheckBoxText + (Plugin.MaximumNumberOfLRHotkeys - reportPresetsWithHotkeysCount) + "/" + Plugin.MaximumNumberOfLRHotkeys;
-
-
-            Plugin.FillListByTagNames(destinationTagList.Items);
-
-            presetsBox.SelectedIndex = -1;
-            buttonCopyPreset.Enabled = false;
-            buttonDeletePreset.Enabled = false;
-
-            previewTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            presetsBox_SelectedIndexChanged(null, null);
-
-
-            buttonExport.Enabled = false;
-            labelFormat.Enabled = false;
-            formatComboBox.Enabled = false;
-            resizeArtworkCheckBox.Enabled = false;
-            xArworkSizeUpDown.Enabled = false;
-            yArworkSizeUpDown.Enabled = false;
-            labelXxY.Enabled = false;
-            labelPx.Enabled = false;
-            openReportCheckBox.Enabled = false;
-
-            buttonApply.Enabled = false;
-
-
-            resizeArtworkCheckBox.Checked = Plugin.SavedSettings.resizeArtwork;
-            xArworkSizeUpDown.Value = Plugin.SavedSettings.xArtworkSize == 0 ? 300 : Plugin.SavedSettings.xArtworkSize;
-            yArworkSizeUpDown.Value = Plugin.SavedSettings.yArtworkSize == 0 ? 300 : Plugin.SavedSettings.yArtworkSize;
-
-            openReportCheckBox.Checked = Plugin.SavedSettings.openReportAfterExporting;
-
-            recalculateOnNumberOfTagsChangesCheckBox.Checked = Plugin.SavedSettings.recalculateOnNumberOfTagsChanges;
-            numberOfTagsToRecalculateNumericUpDown.Value = Plugin.SavedSettings.numberOfTagsToRecalculate;
-
-            string[] formats = Plugin.ExportedFormats.Split('|');
-            for (int i = 0; i < formats.Length; i+=2)
-            {
-                formatComboBox.Items.Add(formats[i]);
-            }
-            formatComboBox.SelectedIndex = Plugin.SavedSettings.filterIndex - 1;
-
-            previewTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-
-            addRowToTable = previewList_AddRowToTable;
-            updateTable = previewList_updateTable;
+            if (table.SelectedRows.Count > 0)
+                return table.SelectedRows[0].Index;
+            else
+                return -1;
         }
 
-        public static string GetColumnName(string tagName, string tag2Name, FunctionType type)
+        private void selectRow(DataGridView table, int index)
         {
-            if (type == FunctionType.Count)
+            deselectAllRows(table);
+            table.Rows[index].Selected = true;
+
+            if (table == tagsDataGridView)
             {
-                return Plugin.CountName + "(" + tagName + ")";
-            }
-            else if (type == FunctionType.Sum)
-            {
-                return Plugin.SumName + "(" + tagName + ")";
-            }
-            else if (type == FunctionType.Minimum)
-            {
-                return Plugin.MinimumName + "(" + tagName + ")";
-            }
-            else if (type == FunctionType.Maximum)
-            {
-                return Plugin.MaximumName + "(" + tagName + ")";
-            }
-            else if (type == FunctionType.Average)
-            {
-                return Plugin.AverageName + "(" + tagName + "/" + tag2Name + ")";
-            }
-            else if (type == FunctionType.AverageCount)
-            {
-                return Plugin.AverageCountName + "(" + tagName + "/" + tag2Name + ")";
-            }
-            else //Its grouping
-            {
-                return tagName;
+                tagsDataGridViewSelectedRow = index;
+                tagsDataGridViewRowSelected(index);
             }
         }
 
-        private void previewList_AddRowToTable(List<string[]> rows)
+        private void deselectAllRows(DataGridView table)
         {
-            foreach (var row in rows)
-            {
-                previewTable.Rows.Add(row);
+            foreach (DataGridViewRow row in table.SelectedRows)
+                row.Selected = false;
 
-                if (artworkField != -1)
-                {
-                    //Replace string hashes in the Artwork column with images.
-                    string stringHash = (string)previewTable.Rows[previewTable.Rows.Count - 1].Cells[artworkField].Value;
-                    Bitmap pic;
-
-                    try
-                    {
-                        pic = artworks[stringHash];
-                    }
-                    catch
-                    {
-                        pic = artworks[DefaultArtworkHash];
-                    }
-
-                    previewTable.Rows[previewTable.Rows.Count - 1].Cells[artworkField].ValueType = typeof(Bitmap);
-                    previewTable.Rows[previewTable.Rows.Count - 1].Cells[artworkField].Value = pic;
-                }
-            }
+            if (table == tagsDataGridView)
+                tagsDataGridViewSelectedRow = -1;
         }
 
-        private void previewList_updateTable()
-        {
-            if (previewTable.Rows.Count > 0)
-            {
-                previewTable.CurrentCell = previewTable.Rows[0].Cells[0];
-            }
-        }
-
-        private bool addColumn(string fieldName, string parameter2Name, FunctionType type)
+        private bool addColumn(string fieldName, string parameter2Name, FunctionType type, string splitter, bool trimValues, string expression)
         {
             DataGridViewColumn column;
 
-            if (fieldName == Plugin.ArtworkName && type != FunctionType.Grouping)
+            if (fieldName == ArtworkName || fieldName == SequenceNumberName)
             {
-                MessageBox.Show(this, Plugin.MsgPleaseUseGroupingFunctionForArtworkTag, 
-                    null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return false;
+                if (type != FunctionType.Grouping)
+                {
+                    if (presetIsLoaded)
+                        throw new Exception(MsgPleaseUseGroupingFunction);
+                    else
+                        MessageBox.Show(this, MsgPleaseUseGroupingFunction,
+                                "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                    return false;
+                }
+
+                expression = null;
+            }
+
+            ColumnAttributes columnAttributes = new ColumnAttributes(type, expression, fieldName, parameter2Name, splitter, trimValues);
+
+
+            string uniqueId = columnAttributes.getUniqueId();
+            string shortId = columnAttributes.getShortId();
+
+            string columnName = GetColumnName(fieldName, parameter2Name, type, splitter, trimValues, expression, true, true, true);
+            string fullFieldName = GetColumnName(fieldName, parameter2Name, type, splitter, trimValues, expression, false, true, true);
+
+            // Some column attributes are not unique, they can be replaced, and must not be included in column name
+            string simpleColumnName = GetColumnName(fieldName, parameter2Name, type, null, false, expression, true, false, true);
+
+            int oldSortedShortIdsIndex = sortedShortIds.IndexOf(shortId);
+            int oldExpressionIndex = -1;
+            if (shortIdsExprs.TryGetValue(shortId, out var exprs1))
+                oldExpressionIndex = exprs1.IndexOf(expressionBackup);
+
+            // Let's check if the column exists already
+            int replacedColumnIndex = -1;
+
+            if (newColumn == null) // Updating splitter, trim or expression. Let's silently replace old column 
+            {
+                updateColumns(shortId, fieldName, parameter2Name, type, splitter, trimValues, expression);
+                expressionBackup = expression;
+                splitterBackup = splitter;
+                trimValuesBackup = trimValues;
+
+                return true;
+            }
+            else if (groupingsDict.TryGetValue(uniqueId, out _) || functionsDict.TryGetValue(uniqueId, out _))
+            {
+                if (presetIsLoaded)
+                    throw new Exception("This field already exists in preset!");
+                else
+                {
+                    if (MessageBox.Show(this, DoYouWantToReplaceTheFieldMsg.Replace(@"\\", "\n\n").Replace("%%FIELDNAME%%", simpleColumnName), 
+                    "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                        return false;
+                    else // Confirmed replacement
+                        replacedColumnIndex = removeColumn(fieldName, parameter2Name, type, splitter, trimValues, expression);
+                }
             }
 
 
             DataGridViewTextBoxColumn textColumnTemplate = new DataGridViewTextBoxColumn();
-            column = new DataGridViewColumn(textColumnTemplate.CellTemplate);
-            column.SortMode = DataGridViewColumnSortMode.Programmatic;
+            column = new DataGridViewColumn(textColumnTemplate.CellTemplate)
+            {
+                SortMode = DataGridViewColumnSortMode.Programmatic
+            };
 
             column.HeaderCell.Style.WrapMode = DataGridViewTriState.True;
+            column.HeaderText = columnName;
+            column.HeaderCell.Tag = uniqueId;
+            column.Resizable = DataGridViewTriState.True;
+            column.MinimumWidth = PreviewTableColumnMinimumWidth;
+            column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
-
-            column.HeaderText = GetColumnName(fieldName, parameter2Name, type);
-
-            conditionFieldList.Items.Add(column.HeaderText);
+            conditionFieldList.Items.Add(fullFieldName);
             if (conditionFieldList.SelectedIndex == -1)
                 conditionFieldList.SelectedIndex = 0;
 
-            comparedFieldList.Items.Add(column.HeaderText);
+            comparedFieldList.Items.Add(fullFieldName);
 
             conditionCheckBox.Enabled = true;
             conditionCheckBox_CheckedChanged(null, null);
 
-            if (fieldName == Plugin.ArtworkName)
+            if (fieldName == ArtworkName)
             {
-                DataGridViewImageColumn imageColumnTemplate = new DataGridViewImageColumn();
-                imageColumnTemplate.ImageLayout = DataGridViewImageCellLayout.Zoom;
-                imageColumnTemplate.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCellsExceptHeader;
-                column = new DataGridViewColumn(imageColumnTemplate.CellTemplate);
-                column.HeaderText = fieldName;
+                DataGridViewImageColumn imageColumn = new DataGridViewImageColumn
+                {
+                    ImageLayout = DataGridViewImageCellLayout.Zoom,
+                    HeaderText = fieldName,
+                    AutoSizeMode = DataGridViewAutoSizeColumnMode.None,
+                    Resizable = DataGridViewTriState.True,
+                    Width = PreviewTableArtworkSize,
+                    SortMode = DataGridViewColumnSortMode.Programmatic,
+                };
+                imageColumn.HeaderCell.Tag = uniqueId;
 
-                previewTable.Columns.Insert(groupingNames.Count, column);
-                groupingNames.Add(fieldName);
+                if (replacedColumnIndex == -1)
+                    replacedColumnIndex = groupingsDict.Count;
 
-                artworkField = groupingNames.Count - 1;
+                previewTable.Columns.Insert(replacedColumnIndex, imageColumn);
+                groupingsDict.Add(uniqueId, columnAttributes);
             }
             else if (type == FunctionType.Grouping)
             {
-                previewTable.Columns.Insert(groupingNames.Count, column);
-                groupingNames.Add(fieldName);
+                if (replacedColumnIndex == -1)
+                    replacedColumnIndex = groupingsDict.Count;
+
+                previewTable.Columns.Insert(replacedColumnIndex, column);
+                groupingsDict.Add(uniqueId, columnAttributes);
             }
             else
             {
-                previewTable.Columns.Add(column);
-                functionNames.Add(column.HeaderText);
-                functionTypes.Add(type);
-                parameterNames.Add(fieldName);
-
-                if (type == FunctionType.Average || type == FunctionType.AverageCount)
-                    parameter2Names.Add(parameter2Name);
+                if (replacedColumnIndex == -1)
+                    previewTable.Columns.Add(column);
                 else
-                    parameter2Names.Add(null);
+                    previewTable.Columns.Insert(replacedColumnIndex, column);
+
+                functionsDict.Add(uniqueId, columnAttributes);
 
 
-                destinationTagList.SelectedItem = Plugin.NullTagName;
+                destinationTagList.SelectedItem = NullTagName;
                 savedFunctionIds.Add("");
                 savedDestinationTagsNames.Add((string)destinationTagList.SelectedItem);
 
@@ -2188,36 +3339,176 @@ namespace MusicBeePlugin
                 precisionDigits.Add((string)precisionDigitsComboBox.Items[0]);
                 appendTexts.Add("");
 
-                sourceFieldComboBox.Items.Add(column.HeaderText);
+                sourceFieldComboBox.Items.Add(fullFieldName);
                 if (sourceFieldComboBox.SelectedIndex == -1)
                     sourceFieldComboBox.SelectedIndex = 0;
             }
 
 
-            if (previewTable.Rows.Count > 0)
+            sortedShortIds = groupingsDict.idsToSortedList(false);
+            sortedShortIds = functionsDict.idsToSortedList(false, sortedShortIds);
+            int newSortedShortIdsIndex = sortedShortIds.IndexOf(shortId);
+
+            expressionBackup = expression;
+            splitterBackup = splitter;
+            trimValuesBackup = trimValues;
+
+            if (oldSortedShortIdsIndex == -1 || !shortIdsExprs.TryGetValue(shortId, out _)) // New column, even not considering expressions, OR replaced (and removed above) LAST expression
+            {
+                shortIdsExprs.Add(shortId, new List<string> { expression });
+
+                tagsDataGridView.Rows.Insert(newSortedShortIdsIndex, 1);
+                tagsDataGridView.Rows[newSortedShortIdsIndex].Cells[0].Value = "T";
+                tagsDataGridView.Rows[newSortedShortIdsIndex].Cells[0].Tag = shortId;
+
+                if (selectedPreset?.userPreset == true)
+                    tagsDataGridView.Rows[newSortedShortIdsIndex].Cells[0].ToolTipText = TagsDataGridViewCheckBoxToolTip;
+
+                tagsDataGridView.Rows[newSortedShortIdsIndex].Cells[1].Value = LrFunctionNames[(int)columnAttributes.type];
+                tagsDataGridView.Rows[newSortedShortIdsIndex].Cells[1].Tag = columnAttributes;
+                tagsDataGridView.Rows[newSortedShortIdsIndex].Cells[2].Value = columnAttributes.parameterName;
+
+                if (columnAttributes.type == FunctionType.Grouping)
+                    tagsDataGridView.Rows[newSortedShortIdsIndex].Cells[3].Value = GetSplitterRepresentation(columnAttributes.splitter, columnAttributes.trimValues, false);
+                else if (columnAttributes.parameter2Name != null)
+                    tagsDataGridView.Rows[newSortedShortIdsIndex].Cells[3].Value = columnAttributes.parameter2Name;
+
+                if (!presetIsLoaded) // Interactive
+                {
+                    selectRow(tagsDataGridView, newSortedShortIdsIndex);
+                    fillExpressionsDataGridView(shortId, true); // New expression will be added from shortIdsExprs
+                }
+                else
+                {
+                    deselectAllRows(tagsDataGridView);
+                    if (expressionsDataGridView.RowCount > 0)
+                        expressionsDataGridView.Rows.Clear();
+                }
+            }
+            else // Updating existing column (which may not be selected/current)
+            {
+                tagsDataGridView.Rows[oldSortedShortIdsIndex].Cells[1].Tag = columnAttributes;
+                tagsDataGridView.Rows[oldSortedShortIdsIndex].Cells[2].Value = columnAttributes.parameterName;
+                if (columnAttributes.type == FunctionType.Grouping)
+                    tagsDataGridView.Rows[newSortedShortIdsIndex].Cells[3].Value = GetSplitterRepresentation(columnAttributes.splitter, columnAttributes.trimValues, false);
+
+                if (oldSortedShortIdsIndex != tagsDataGridViewSelectedRow) // Updating tag column which is not current
+                    selectRow(tagsDataGridView, oldSortedShortIdsIndex);
+
+                var exprs = shortIdsExprs[shortId];
+
+                if (oldExpressionIndex == -1) // It's new expression, let's add it to the end of list
+                    exprs.Add(expression);
+                else // It's replaced expression (already removed above, but it wasn't last one) 
+                    exprs.Insert(oldExpressionIndex, expression);
+
+                if (!presetIsLoaded) // Interactive
+                    fillExpressionsDataGridView(shortId, null); // New expression will be added from shortIdsExprs
+            }
+
+
+
+            if (previewTable.RowCount > 0)
                 clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewTrackList, buttonPreview, buttonExport, buttonClose);
 
             return true;
         }
 
-        private void removeColumn(string fieldName, string parameter2Name, FunctionType type)
+        private void updateColumns(string shortId, string fieldName, string parameter2Name, FunctionType type, string splitter, bool trimValues, string expression)
         {
-            string columnHeader = GetColumnName(fieldName, parameter2Name, type);
+            string fullFieldName = GetColumnName(fieldName, parameter2Name, type, splitter, trimValues, expression, false, true, true);
 
-            if (groupingNames.Contains(columnHeader))
+            var columnAttributes = new ColumnAttributes(type, expression, fieldName, parameter2Name, splitter, trimValues);
+
+            for (int i = 0; i < previewTable.ColumnCount; i++)
             {
-                groupingNames.Remove(columnHeader);
-                if (fieldName == Plugin.ArtworkName)
-                    artworkField = -1;
+                var colUniqueId = (string)previewTable.Columns[i].HeaderCell.Tag;
+
+                ColumnAttributesDict currentDict;
+                if (type == FunctionType.Grouping)
+                    currentDict = groupingsDict;
+                else
+                    currentDict = functionsDict;
+
+                // If the current column doesn't correspond to the type of currentDict, let's skip it
+                if (!currentDict.TryGetValue(colUniqueId, out var currentAttributes))
+                    continue;
+
+
+                if (shortId == currentAttributes.getShortId())
+                {
+                    string newBackup;
+                    if (currentAttributes.expression == expressionBackup) // Let's replace it
+                    {
+                        newBackup = expression;
+
+                        int exprIndex = shortIdsExprs[shortId].IndexOf(expressionBackup);
+                        if (exprIndex != -1)
+                            shortIdsExprs[shortId][exprIndex] = expression;
+                    }
+                    else
+                    {
+                        newBackup = currentAttributes.expression; // Let's keep it as is
+                    }
+
+                    var newAttributes = new ColumnAttributes(type, newBackup, fieldName, parameter2Name, splitter, trimValues);
+
+                    currentDict.Remove(colUniqueId);
+                    currentDict.Add(newAttributes.getUniqueId(), newAttributes);
+
+                    string newColumnName = GetColumnName(fieldName, parameter2Name, type, splitter, trimValues, expression, true, true, true);
+
+                    previewTable.Columns[i].HeaderText = newColumnName;
+                    previewTable.Columns[i].HeaderCell.Tag = newAttributes.getUniqueId();
+
+                    int tagIndex = getSelectedRow(tagsDataGridView);
+                    tagsDataGridView.Rows[tagIndex].Cells[1].Tag = columnAttributes;
+                    if (type == FunctionType.Grouping)
+                        tagsDataGridView.Rows[tagIndex].Cells[3].Value = GetSplitterRepresentation(splitter, trimValues, false);
+
+                    for (int j = 0; j < expressionsDataGridView.ColumnCount; j++)
+                    {
+                        if ((string)expressionsDataGridView.Rows[j].Cells[1].Tag == expressionBackup)
+                        {
+                            expressionsDataGridView.Rows[j].Cells[1].Value = (expression == "" ? NoExpressionText : expression);
+                            expressionsDataGridView.Rows[j].Cells[1].Tag = expression;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        private int removeColumn(string fieldName, string parameter2Name, FunctionType type, string splitter, bool trimValues, string expression)
+        {
+            string fullFieldName = GetColumnName(fieldName, parameter2Name, type, splitter, trimValues, expression, false, true, true);
+
+            var columnAttributes = new ColumnAttributes(type, expression, fieldName, parameter2Name, splitter, trimValues);
+
+            var uniqueId = columnAttributes.getUniqueId();
+            var shortId = columnAttributes.getShortId();
+
+            int columnIndex = -1;
+            for (int i = 0; i < previewTable.ColumnCount; i++)
+            {
+                var colUniqueId = (string)previewTable.Columns[i].HeaderCell.Tag;
+
+                if (colUniqueId == uniqueId)
+                {
+                    columnIndex = i;
+                    break;
+                }
+            }
+
+            if (type == FunctionType.Grouping)
+            {
+                groupingsDict.Remove(uniqueId);
             }
             else
             {
-                int index = functionNames.IndexOf(columnHeader);
+                int index = functionsDict.indexOf(uniqueId);
 
-                functionNames.RemoveAt(index);
-                functionTypes.RemoveAt(index);
-                parameterNames.RemoveAt(index);
-                parameter2Names.RemoveAt(index);
+                functionsDict.Remove(uniqueId);
 
                 int currentSourceFieldComboBoxSelectedIndex = sourceFieldComboBox.SelectedIndex;
 
@@ -2237,7 +3528,7 @@ namespace MusicBeePlugin
             }
 
 
-            conditionFieldList.Items.Remove(columnHeader);
+            conditionFieldList.Items.Remove(fullFieldName);
             if (conditionFieldList.SelectedIndex == -1 && conditionFieldList.Items.Count > 0)
                 conditionFieldList.SelectedIndex = 0;
 
@@ -2245,7 +3536,7 @@ namespace MusicBeePlugin
             if (comparedFieldList.Text == (string)comparedFieldList.SelectedValue)
                 comparedFieldList.Text = "";
 
-            comparedFieldList.Items.Remove(columnHeader);
+            comparedFieldList.Items.Remove(fullFieldName);
 
             if (conditionFieldList.Items.Count == 0)
             {
@@ -2254,67 +3545,92 @@ namespace MusicBeePlugin
             }
 
 
-            foreach (DataGridViewColumn column in previewTable.Columns)
+            previewTable.Columns.RemoveAt(columnIndex);
+
+
+            // Now let's deal with field & expression tables
+            int sortedShortIdsIndex = sortedShortIds.IndexOf(shortId);
+
+            var exprs = shortIdsExprs[shortId];
+            exprs.Remove(expression);
+            if (exprs.Count == 0)
             {
-                if (column.HeaderText == columnHeader)
-                {
-                    previewTable.Columns.RemoveAt(column.Index);
+                shortIdsExprs.Remove(shortId);
+                sortedShortIds.Remove(shortId);
 
-                    if (previewTable.Columns.Count == 0)
-                        clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewTrackList, buttonPreview, buttonExport, buttonClose);
+                tagsDataGridView.Rows.RemoveAt(sortedShortIdsIndex);
 
-                    return;
-                }
+                string newShortId = null;
+                tagsDataGridViewSelectedRow = getSelectedRow(tagsDataGridView);
+                if (tagsDataGridViewSelectedRow != -1)
+                    newShortId = (string)tagsDataGridView.Rows[tagsDataGridViewSelectedRow].Cells[0].Tag;
+
+                fillExpressionsDataGridView(newShortId, false);
+            }
+            else
+            {
+                fillExpressionsDataGridView(shortId, false);
             }
 
-            if (previewTable.Columns.Count == 0)
+
+            if (previewTable.ColumnCount == 0)
                 clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewTrackList, buttonPreview, buttonExport, buttonClose);
+
+            if (!presetIsLoaded)
+                setPresetChanged();
+
+            return columnIndex;
         }
 
-        private void addAllTags()
+        private ReportPreset[] getReportPresetsArrayUI()
         {
-            for (int i = 0; i < sourceTagList.Items.Count; i++)
-            {
-                if ((string)sourceTagList.Items[i] != Plugin.ArtworkName)
-                    sourceTagList.SetItemChecked(i, true);
-            }
+            var reportPresetsLocal = new ReportPreset[presetsBox.Items.Count];
+            for (int i = 0; i < presetsBox.Items.Count; i++)
+                reportPresetsLocal[i] = (ReportPreset)presetsBox.Items[i];
+
+            return reportPresetsLocal;
         }
 
         private bool prepareBackgroundPreview()
         {
+            smartOperation = smartOperationCheckBox.Checked;
+
+            resultsAreFiltered = false;
+            buttonFilterResultsChangeLabel();
+
+            if (!presetIsLoaded && previewTable.RowCount == 0)
+                presetTabControl.SelectedTab = tabPage1;
+
             previewTable.Rows.Clear();
             previewIsGenerated = false;
 
             if (backgroundTaskIsWorking())
                 return true;
 
-            if (previewTable.Columns.Count == 0)
+            if (previewTable.ColumnCount == 0)
             {
                 //MessageBox.Show(this, tagToolsPlugin.msgNoTagsSelected);
                 return false;
             }
 
-            appliedPreset = (ReportPreset)presetsBox.SelectedItem;
-            prepareLocals();
+            maxWidths = new int[previewTable.ColumnCount];
 
-
-            sourceTagList.Enabled = false;
-            buttonCheckAll.Enabled = false;
-            buttonUncheckAll.Enabled = false;
+            reportPresets = getReportPresetsArrayUI();
+            appliedPreset = selectedPreset;
 
             return true;
         }
 
         private void previewTrackList()
         {
-            if (!Plugin.MbApiInterface.Library_QueryFilesEx("domain=DisplayedFiles", out string[] files) || files.Length == 0)
+            if (!MbApiInterface.Library_QueryFilesEx("domain=DisplayedFiles", out string[] files) || files.Length == 0)
             {
-                Plugin.SetStatusbarText(Plugin.MsgNoFilesInCurrentView, false);
+                SetStatusbarText(MsgNoFilesInCurrentView, false);
                 System.Media.SystemSounds.Exclamation.Play();
                 return;
             }
 
-            executePreset(files, true, false, null);
+            executePreset(files, true, false, null, null);
         }
 
         private void exportTrackList(bool openReport)
@@ -2326,7 +3642,6 @@ namespace MusicBeePlugin
 
             ExportedDocument document = null;
             int seqNumField = -1;
-            int urlField = -1;
             int albumArtistField = -1;
             int albumField = -1;
             int titleField = -1;
@@ -2335,7 +3650,7 @@ namespace MusicBeePlugin
 
             backgroundTaskIsCanceled = false;
 
-            if (!prepareBackgroundTask(false))
+            if (!checkPreview())
                 return;
 
             if (openReport)
@@ -2344,25 +3659,25 @@ namespace MusicBeePlugin
             }
             else
             {
-                if (Plugin.SavedSettings.exportedLastFolder == null)
-                    Plugin.SavedSettings.exportedLastFolder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\";
+                if (SavedSettings.exportedLastFolder == null)
+                    SavedSettings.exportedLastFolder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\";
 
-                fileDirectoryPath = Plugin.SavedSettings.exportedLastFolder;
+                fileDirectoryPath = SavedSettings.exportedLastFolder;
             }
-
-            ReportPreset selectedPreset = (ReportPreset)presetsBox.SelectedItem;
 
             if (!openReport)
             {
-                SaveFileDialog dialog = new SaveFileDialog();
-                dialog.InitialDirectory = fileDirectoryPath;
-                dialog.FileName = selectedPreset.exportedTrackListName;
-                dialog.Filter = Plugin.ExportedFormats;
-                dialog.FilterIndex = Plugin.SavedSettings.filterIndex;
+                SaveFileDialog dialog = new SaveFileDialog
+                {
+                    InitialDirectory = fileDirectoryPath,
+                    FileName = selectedPreset.exportedTrackListName,
+                    Filter = ExportedFormats,
+                    FilterIndex = SavedSettings.filterIndex
+                };
 
                 if (dialog.ShowDialog(this) == DialogResult.Cancel) return;
 
-                Plugin.SavedSettings.filterIndex = dialog.FilterIndex;
+                SavedSettings.filterIndex = dialog.FilterIndex;
                 formatComboBox.SelectedIndex = dialog.FilterIndex - 1;
 
                 reportFullFileName = dialog.FileName;
@@ -2370,12 +3685,12 @@ namespace MusicBeePlugin
                 fileDirectoryPath = Regex.Replace(dialog.FileName, @"^(.*\\).*\..*", "$1"); //File directory path including ending \
                 reportOnlyFileName = Regex.Replace(dialog.FileName, @"^.*\\(.*)\..*", "$1"); //Filename without path to file and extension
 
-                Plugin.SavedSettings.filterIndex = dialog.FilterIndex;
+                SavedSettings.filterIndex = dialog.FilterIndex;
                 selectedPreset.exportedTrackListName = reportOnlyFileName;
 
-                if (Plugin.SavedSettings.reportsPresets != null)
+                if (SavedSettings.reportsPresets != null)
                 {
-                    foreach (ReportPreset preset in Plugin.SavedSettings.reportsPresets)
+                    foreach (ReportPreset preset in SavedSettings.reportsPresets)
                     {
                         if (preset.permanentGuid == selectedPreset.permanentGuid)
                         {
@@ -2384,54 +3699,49 @@ namespace MusicBeePlugin
                         }
                     }
                 }
-                
-                Plugin.SavedSettings.exportedLastFolder = fileDirectoryPath;
+
+                SavedSettings.exportedLastFolder = fileDirectoryPath;
             }
             else
             {
                 reportOnlyFileName = selectedPreset.exportedTrackListName;
-                reportFullFileName = fileDirectoryPath + reportOnlyFileName + Plugin.ExportedFormats
-                    .Split('|')[(Plugin.SavedSettings.filterIndex - 1) * 2 + 1].Substring(1);
+                reportFullFileName = fileDirectoryPath + reportOnlyFileName + ExportedFormats
+                    .Split('|')[(SavedSettings.filterIndex - 1) * 2 + 1].Substring(1);
             }
 
 
             string imagesDirectoryName = reportOnlyFileName + ".files";
 
 
-            for (int j = 0; j < groupingNames.Count; j++)
+            int j = -1;
+            foreach (var attribs in groupingsDict.Values)
             {
-                if (groupingNames[j] == Plugin.UrlTagName)
-                    urlField = j;
-                else if (groupingNames[j] == Plugin.DisplayedAlbumArtsistName)
+                j++;
+
+                if (attribs.getColumnName(false, false, false) == DisplayedAlbumArtsistName)
                     albumArtistField = j;
-                else if (groupingNames[j] == Plugin.MbApiInterface.Setting_GetFieldName(Plugin.MetaDataType.Album))
+                else if (attribs.getColumnName(false, false, false) == MbApiInterface.Setting_GetFieldName(MetaDataType.Album))
                     albumField = j;
-                else if (groupingNames[j] == Plugin.SequenceNumberName)
+                else if (attribs.getColumnName(false, false, false) == SequenceNumberName)
                     seqNumField = j;
-                else if (groupingNames[j] == Plugin.MbApiInterface.Setting_GetFieldName(Plugin.MetaDataType.TrackTitle))
+                else if (attribs.getColumnName(false, false, false) == MbApiInterface.Setting_GetFieldName(MetaDataType.TrackTitle))
                     titleField = j;
-                else if (groupingNames[j] == Plugin.MbApiInterface.Setting_GetFieldName((Plugin.MetaDataType)Plugin.FilePropertyType.Duration))
+                else if (attribs.getColumnName(false, false, false) == MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Duration))
                     durationField = j;
             }
 
 
-            if (Plugin.SavedSettings.filterIndex == 1 && (albumArtistField != 0 || albumField != 1 || artworkField != 2))
+            if (SavedSettings.filterIndex == 1 && (albumArtistField != 0 || albumField != 1 || artworkField != 2))
             {
-                MessageBox.Show(this, Plugin.MsgFirstThreeGroupingFieldsInPreviewTableShouldBe, 
-                    null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, MsgFirstThreeGroupingFieldsInPreviewTableShouldBe,
+                    "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
-            else if (Plugin.SavedSettings.filterIndex == 7 && (seqNumField != 0 || albumArtistField != 1 || albumField != 2 
+            else if (SavedSettings.filterIndex == 7 && (seqNumField != 0 || albumArtistField != 1 || albumField != 2
             || artworkField != 3 || titleField != 4 || durationField != 5))
             {
-                MessageBox.Show(this, Plugin.MsgFirstSixGroupingFieldsInPreviewTableShouldBe, 
-                    null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
-            }
-            else if (Plugin.SavedSettings.filterIndex == 5 && urlField == -1)
-            {
-                MessageBox.Show(this, Plugin.MsgForExportingPlaylistsURLfieldMustBeIncludedInTagList, 
-                    null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, MsgFirstSixGroupingFieldsInPreviewTableShouldBe,
+                    "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
@@ -2445,24 +3755,24 @@ namespace MusicBeePlugin
 
             try
             {
-                if (Plugin.SavedSettings.filterIndex == 1 || Plugin.SavedSettings.filterIndex == 7)
+                if (SavedSettings.filterIndex == 1 || SavedSettings.filterIndex == 7)
                 {
                     if (System.IO.Directory.Exists(fileDirectoryPath + imagesDirectoryName))
                         System.IO.Directory.Delete(fileDirectoryPath + imagesDirectoryName, true);
 
                     System.IO.Directory.CreateDirectory(fileDirectoryPath + imagesDirectoryName);
                 }
-                else if (Plugin.SavedSettings.filterIndex == 2 || Plugin.SavedSettings.filterIndex == 3)
+                else if (SavedSettings.filterIndex == 2 || SavedSettings.filterIndex == 3)
                 {
                     if (System.IO.Directory.Exists(fileDirectoryPath + imagesDirectoryName))
                         System.IO.Directory.Delete(fileDirectoryPath + imagesDirectoryName, true);
 
-                    if (Plugin.SavedSettings.filterIndex == 2 || artworkField != -1)
+                    if (SavedSettings.filterIndex == 2 || artworkField != -1)
                         System.IO.Directory.CreateDirectory(fileDirectoryPath + imagesDirectoryName);
                 }
 
 
-                switch (Plugin.SavedSettings.filterIndex)
+                switch (SavedSettings.filterIndex)
                 {
                     case 1:
                     case 7:
@@ -2471,11 +3781,11 @@ namespace MusicBeePlugin
                         string prevAlbumArtist1 = null;
 
                         int trackCount = 0;
-                        foreach (KeyValuePair<string, Plugin.ConvertStringsResult[]> keyValue in tags)
+                        foreach (KeyValuePair<string, ConvertStringsResult[]> keyValue in tags)
                         {
-                            if (Plugin.SavedSettings.filterIndex == 7)
+                            if (SavedSettings.filterIndex == 7)
                             {
-                                string[] groupingsValues = AggregatedTags.GetGroupings(keyValue, groupingNames);
+                                string[] groupingsValues = AggregatedTags.GetGroupings(keyValue, groupingsDict);
 
                                 if (base64Artwork == null)
                                     base64Artwork = groupingsValues[artworkField];
@@ -2485,7 +3795,7 @@ namespace MusicBeePlugin
                                     base64Artwork = "";
                             }
 
-                            groupingsValues1 = AggregatedTags.GetGroupings(keyValue, groupingNames);
+                            groupingsValues1 = AggregatedTags.GetGroupings(keyValue, groupingsDict);
 
                             if (prevAlbumArtist1 != groupingsValues1[albumArtistField] || prevAlbum1 != groupingsValues1[albumField])
                             {
@@ -2508,9 +3818,9 @@ namespace MusicBeePlugin
                         albumTrackCounts.Add(trackCount);
 
 
-                        if (Plugin.SavedSettings.filterIndex == 1)
+                        if (SavedSettings.filterIndex == 1)
                             document = new HtmlDocumentByAlbum(stream, TagToolsPlugin, fileDirectoryPath, imagesDirectoryName);
-                        else if (Plugin.SavedSettings.filterIndex == 7)
+                        else if (SavedSettings.filterIndex == 7)
                             document = new HtmlDocumentCDBooklet(stream, TagToolsPlugin, fileDirectoryPath, imagesDirectoryName);
                         break;
                     case 2:
@@ -2540,7 +3850,7 @@ namespace MusicBeePlugin
             }
 
 
-            if (Plugin.SavedSettings.filterIndex != 7)
+            if (SavedSettings.filterIndex != 7)
             {
                 document.writeHeader();
             }
@@ -2572,22 +3882,29 @@ namespace MusicBeePlugin
                 gr_dest.DrawImage(pic, 0, 0, scaledPic.Width, scaledPic.Height);
                 gr_dest.Dispose();
 
-                ((HtmlDocumentCDBooklet)document).writeHeader(size, Plugin.GetBitmapAverageColor(scaledPic), scaledPic, 
+                ((HtmlDocumentCDBooklet)document).writeHeader(size, GetBitmapAverageColor(scaledPic), scaledPic,
                     albumArtistsAlbums, tags.Count);
 
                 scaledPic.Dispose();
             }
 
-            if (Plugin.SavedSettings.filterIndex != 5 && Plugin.SavedSettings.filterIndex != 7) //Lets write table headers
+
+            if (SavedSettings.filterIndex != 5 && SavedSettings.filterIndex != 7) //Lets write table headers
             {
-                for (int j = 0; j < groupingNames.Count; j++)
+                int k = -1;
+                foreach (var attribs in groupingsDict.Values)
                 {
-                    document.addCellToRow(groupingNames[j], groupingNames[j], j == albumArtistField, j == albumField);
+                    k++;
+                    document.addCellToRow(attribs.getColumnName(true, true, true), attribs.getColumnName(true, true, true), 
+                        j == albumArtistField, j == albumField);
                 }
 
-                for (int j = 0; j < functionNames.Count; j++)
+                k = -1;
+                foreach (var attribs in functionsDict.Values)
                 {
-                    document.addCellToRow(functionNames[j], functionNames[j], false, false);
+                    k++;
+                    document.addCellToRow(attribs.getColumnName(true, true, true), attribs.getColumnName(true, true, true), 
+                        false, false);
                 }
 
                 document.writeRow(0);
@@ -2619,23 +3936,28 @@ namespace MusicBeePlugin
             string prevAlbum = null;
             string prevAlbumArtist = null;
 
-            foreach (KeyValuePair<string, Plugin.ConvertStringsResult[]> keyValue in tags)
+            SortedDictionary<string, bool> allUrls = null;
+            if (SavedSettings.filterIndex == 5) //It's M3U playlist
+                allUrls = new SortedDictionary<string, bool>();
+
+
+            foreach (KeyValuePair<string, ConvertStringsResult[]> keyValue in tags)
             {
                 if (backgroundTaskIsCanceled)
                     return;
 
                 if (checkCondition(keyValue.Key, keyValue.Value))
                 {
-                    string[] groupingsValues = AggregatedTags.GetGroupings(keyValue, groupingNames);
+                    string[] groupingsValues = AggregatedTags.GetGroupings(keyValue, groupingsDict);
 
-                    if (Plugin.SavedSettings.filterIndex == 1)
+                    if (SavedSettings.filterIndex == 1)
                     {
                         if (prevAlbumArtist != groupingsValues[albumArtistField])
                         {
                             i++;
                             prevAlbumArtist = groupingsValues[albumArtistField];
                             prevAlbum = groupingsValues[albumField];
-                            document.beginAlbumArtist(groupingsValues[albumArtistField], groupingsValues.Length - 2 + functionNames.Count);
+                            document.beginAlbumArtist(groupingsValues[albumArtistField], groupingsValues.Length - 2 + functionsDict.Count);
                             document.beginAlbum(groupingsValues[albumField], artworks[groupingsValues[artworkField]], groupingsValues[artworkField], albumTrackCounts[i]);
                         }
                         else if (prevAlbum != groupingsValues[albumField])
@@ -2647,29 +3969,47 @@ namespace MusicBeePlugin
                     }
 
 
-                    if (Plugin.SavedSettings.filterIndex != 7) //It's not a CD booklet
+                    if (SavedSettings.filterIndex == 5) //It's M3U playlist
                     {
-                        for (int j = 0; j < groupingNames.Count; j++)
+                        SortedDictionary<string, bool> urls = keyValue.Value[keyValue.Value.Length - 1].items;
+
+                        foreach (var urlPair in urls)
                         {
-                            if (j == artworkField && (Plugin.SavedSettings.filterIndex == 1 || Plugin.SavedSettings.filterIndex == 2 || Plugin.SavedSettings.filterIndex == 3)) //Export images
+                            if (!allUrls.TryGetValue(urlPair.Key, out _))
+                                allUrls.Add(urlPair.Key, false);
+                        }
+                    }
+                    else if (SavedSettings.filterIndex != 7) //It's NOT a CD booklet
+                    {
+                        int l = -1;
+                        foreach (var attribs in groupingsDict.Values)
+                        {
+                            l++;
+
+                            if (j == artworkField && (SavedSettings.filterIndex == 1 || SavedSettings.filterIndex == 2 || SavedSettings.filterIndex == 3)) //Export images
                             {
                                 pic = artworks[groupingsValues[artworkField]];
 
                                 height = pic.Height;
 
-                                document.addCellToRow(pic, groupingNames[j], groupingsValues[j], pic.Width, pic.Height);
+                                document.addCellToRow(pic, attribs.getColumnName(true, true, true), groupingsValues[j], pic.Width, pic.Height);
                             }
-                            else if (j == artworkField && Plugin.SavedSettings.filterIndex != 1 && Plugin.SavedSettings.filterIndex != 2 && Plugin.SavedSettings.filterIndex != 3) //Export image hashes
-                                document.addCellToRow(groupingsValues[artworkField], groupingNames[j], j == albumArtistField, j == albumField);
+                            else if (j == artworkField && SavedSettings.filterIndex != 1 && SavedSettings.filterIndex != 2 && SavedSettings.filterIndex != 3) //Export image hashes
+                                document.addCellToRow(groupingsValues[artworkField], attribs.getColumnName(true, true, true), 
+                                    j == albumArtistField, j == albumField);
                             else //Its not the artwork column
-                                document.addCellToRow(groupingsValues[j], groupingNames[j], j == albumArtistField, j == albumField);
+                                document.addCellToRow(groupingsValues[j], attribs.getColumnName(true, true, true), 
+                                    j == albumArtistField, j == albumField);
                         }
 
-                        for (int j = 0; j < functionNames.Count; j++)
+                        l = -1;
+                        foreach (var attribs in functionsDict.Values)
                         {
-                            document.addCellToRow(AggregatedTags.GetField(keyValue.Key, keyValue.Value, groupingNames.Count + j, groupingNames, 
-                                operations[j], mulDivFactors[j], precisionDigits[j], appendTexts[j]), 
-                                functionNames[j], false, false);
+                            l++;
+
+                            document.addCellToRow(AggregatedTags.GetField(keyValue.Key, keyValue.Value, groupingsDict.Count + j, groupingsDict,
+                                operations[j], mulDivFactors[j], precisionDigits[j], appendTexts[j]),
+                                attribs.getColumnName(true, true, true), false, false);
                         }
                     }
                     else //It's a CD booklet
@@ -2696,12 +4036,22 @@ namespace MusicBeePlugin
                     }
 
 
-                    document.writeRow(height);
+                    if (SavedSettings.filterIndex != 5) //It's NOT M3U playlist
+                        document.writeRow(height);
+
                     height = 0;
                 }
             }
 
-            if (Plugin.SavedSettings.filterIndex != 7) //It's not a CD booklet
+            if (SavedSettings.filterIndex == 5) //It's M3U playlist
+            {
+                foreach (var url in allUrls.Keys)
+                {
+                    document.addCellToRow(url, UrlTagName, false, false);
+                    document.writeRow(0);
+                }
+            }
+            else if (SavedSettings.filterIndex != 7) //It's NOT a CD booklet
                 document.writeFooter();
             else
                 ((HtmlDocumentCDBooklet)document).writeFooter(albumArtistsAlbums);
@@ -2723,10 +4073,10 @@ namespace MusicBeePlugin
 
             return; //Code below may not work reliable
 
-            if (ProccessedReportDeletions.Contains(documentPathFileName))
+            if (ProcessedReportDeletions.Contains(documentPathFileName))
                 return;
 
-            ProccessedReportDeletions.Add(documentPathFileName);
+            ProcessedReportDeletions.Add(documentPathFileName);
 
             const int waitingTimeout = 5; //In milliseconds
 
@@ -2789,43 +4139,27 @@ namespace MusicBeePlugin
             string documentExtension = Regex.Replace(documentPathFileName, @"^.*(\..*)", "$1");
             if (retry || documentExtension != ".htm")
             {
-                ProccessedReportDeletions.Remove(documentPathFileName);
+                ProcessedReportDeletions.Remove(documentPathFileName);
                 return;
             }
 
             System.Threading.Thread.Sleep(10000);
 
-            ProccessedReportDeletions.Remove(documentPathFileName);
+            ProcessedReportDeletions.Remove(documentPathFileName);
             string imagesDirectoryPath = Regex.Replace(documentPathFileName, @"^(.*)\..*", "$1") + ".files";
             if (System.IO.Directory.Exists(imagesDirectoryPath))
                 System.IO.Directory.Delete(imagesDirectoryPath, true);
         }
 
-        private bool prepareBackgroundTask(bool checkForFunctions)
+        private bool checkPreview()
         {
             if (backgroundTaskIsWorking())
-                return true;
-
-            if (previewTable.Rows.Count == 0)
-            {
-                MessageBox.Show(this, Plugin.MsgPreviewIsNotGeneratedNothingToSave, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
-            }
 
-            if (checkForFunctions && sourceFieldComboBox.SelectedIndex == -1)
+            if (previewTable.RowCount == 0)
             {
-                MessageBox.Show(this, Plugin.MsgNoAggregateFunctionNothingToSave, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, MsgPreviewIsNotGeneratedNothingToSave, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
-            }
-
-            appliedPreset = (ReportPreset)presetsBox.SelectedItem;
-            prepareLocals();
-
-            if (checkForFunctions)
-            {
-                sourceTagList.Enabled = false;
-                buttonCheckAll.Enabled = false;
-                buttonUncheckAll.Enabled = false;
             }
 
             return true;
@@ -2833,34 +4167,74 @@ namespace MusicBeePlugin
 
         private void saveSettings()
         {
-            Plugin.SavedSettings.recalculateOnNumberOfTagsChanges = recalculateOnNumberOfTagsChangesCheckBox.Checked;
-            Plugin.SavedSettings.numberOfTagsToRecalculate = numberOfTagsToRecalculateNumericUpDown.Value;
-            Plugin.SavedSettings.autoAppliedReportPresetsCount = autoAppliedPresetCount;
+            SavedSettings.recalculateOnNumberOfTagsChanges = recalculateOnNumberOfTagsChangesCheckBox.Checked;
+            SavedSettings.numberOfTagsToRecalculate = numberOfTagsToRecalculateNumericUpDown.Value;
+            SavedSettings.autoAppliedReportPresetsCount = autoAppliedPresetCount;
 
-            Plugin.SavedSettings.reportsPresets = new ReportPreset[presetsBox.Items.Count];
-            presetsBox.Items.CopyTo(Plugin.SavedSettings.reportsPresets, 0);
+            SavedSettings.smartOperation = smartOperationCheckBox.Checked;
+
+            SavedSettings.reportsPresets = new ReportPreset[presetsBox.Items.Count];
+            presetsBox.Items.CopyTo(SavedSettings.reportsPresets, 0);
 
             InitReportPresetFunctionIds();
             RegisterLRPresetsHotkeys(TagToolsPlugin);
             setUnsavedChanges(false);
 
-            Plugin.SavedSettings.filterIndex = formatComboBox.SelectedIndex + 1;
-            Plugin.SavedSettings.openReportAfterExporting = openReportCheckBox.Checked;
+            SavedSettings.filterIndex = formatComboBox.SelectedIndex + 1;
+            SavedSettings.openReportAfterExporting = openReportCheckBox.Checked;
 
             TagToolsPlugin.SaveSettings();
         }
 
         public override void enableDisablePreviewOptionControls(bool enable)
         {
-            if (enable && previewIsGenerated)
-                return;
+            presetsBox.Enabled = enable && (newColumn == false);
+            buttonSave.Enabled = enable;
 
-            sourceTagList.Enabled = enable;
-            buttonCheckAll.Enabled = enable;
-            buttonUncheckAll.Enabled = enable;
-            totalsCheckBox.Enabled = enable;
+            buttonAddPreset.Enabled = enable;
 
-            functionComboBox.Enabled = enable;
+            if (selectedPreset == null)
+                enable = false;
+
+            buttonCopyPreset.Enabled = enable;
+            buttonDeletePreset.Enabled = enable && selectedPreset?.userPreset == true;
+
+            buttonApply.Enabled = enable;
+            buttonPreview.Enabled = selectedPreset != null;
+
+            smartOperationCheckBox.Enabled = enable && !previewIsGenerated;
+
+            buttonFilterResults.Enabled = enable && conditionCheckBox.Checked && previewIsGenerated;
+
+            useHotkeyForSelectedTracksCheckBox.Enabled = enable && assignHotkeyCheckBox.Checked && assignHotkeyCheckBox.Enabled;
+
+
+            tagsDataGridView.Enabled = enable && !previewIsGenerated && newColumn == false;
+            expressionsDataGridView.Enabled = enable && !previewIsGenerated && newColumn == false;
+
+            sourceTagList.Enabled = enable && !previewIsGenerated && newColumn == true;
+            buttonAddFunction.Enabled = enable && !previewIsGenerated && selectedPreset?.userPreset == true;
+            buttonUpdateFunction.Enabled = enable && !previewIsGenerated && newColumn != false;
+
+            parameter2ComboBox.Enabled = enable && !previewIsGenerated && newColumn == true;
+            parameter2Label.Enabled = enable && !previewIsGenerated && newColumn == true;
+            forTagLabel.Enabled = enable && !previewIsGenerated && newColumn == true;
+            functionComboBox.Enabled = enable && !previewIsGenerated && newColumn == true;
+            labelFunction.Enabled = enable && !previewIsGenerated && newColumn == true;
+
+            multipleItemsSplitterTrimCheckBox.Enabled = enable && !previewIsGenerated && expressionBackup != null && selectedPreset?.userPreset == true;
+            multipleItemsSplitterComboBox.Enabled = enable && !previewIsGenerated && expressionBackup != null && selectedPreset?.userPreset == true;
+            multipleItemsSplitterLabel.Enabled = enable && !previewIsGenerated && expressionBackup != null && selectedPreset?.userPreset == true;
+
+            expressionLabel.Enabled = enable && !previewIsGenerated && expressionBackup != null && selectedPreset?.userPreset == true;
+            expressionTextBox.Enabled = enable && !previewIsGenerated && expressionBackup != null && selectedPreset?.userPreset == true;
+            clearExpressionButton.Enabled = enable && !previewIsGenerated && expressionBackup != null && selectedPreset?.userPreset == true;
+
+            totalsCheckBox.Enabled = enable && !previewIsGenerated;
+
+            useAnotherPresetAsSourceCheckBox.Enabled = enable && !previewIsGenerated;
+            useAnotherPresetAsSourceComboBox.Enabled = enable && !previewIsGenerated;
+
             resizeArtworkCheckBox.Enabled = enable && previewIsGenerated;
             xArworkSizeUpDown.Enabled = enable && resizeArtworkCheckBox.Checked && previewIsGenerated;
             yArworkSizeUpDown.Enabled = enable && resizeArtworkCheckBox.Checked && previewIsGenerated;
@@ -2872,10 +4246,13 @@ namespace MusicBeePlugin
             formatComboBox.Enabled = enable && previewIsGenerated;
             openReportCheckBox.Enabled = enable && previewIsGenerated;
 
-            //buttonApply.Enabled = enable;
-
-            buttonSave.Enabled = enable;
-
+            operationComboBox.Enabled = enable && !previewIsGenerated;
+            mulDivFactorComboBox.Enabled = enable && !previewIsGenerated;
+            roundToLabel.Enabled = enable && !previewIsGenerated;
+            precisionDigitsComboBox.Enabled = enable && !previewIsGenerated;
+            digitsLabel.Enabled = enable && !previewIsGenerated;
+            appendLabel.Enabled = enable && !previewIsGenerated;
+            appendTextBox.Enabled = enable && !previewIsGenerated;
         }
 
         public override void enableQueryingButtons()
@@ -2902,7 +4279,7 @@ namespace MusicBeePlugin
             openReportCheckBox.Enabled = previewIsGenerated;
 
             buttonPreview.Enabled = true;
-            //buttonApply.Enabled = previewIsGenerated;
+            buttonApply.Enabled = true;
 
             buttonSave.Enabled = true;
         }
@@ -2920,7 +4297,7 @@ namespace MusicBeePlugin
             openReportCheckBox.Enabled = false;
 
             buttonPreview.Enabled = false;
-            //buttonApply.Enabled = false;
+            buttonApply.Enabled = false;
 
             buttonSave.Enabled = false;
         }
@@ -2932,15 +4309,15 @@ namespace MusicBeePlugin
 
         private void buttonAddPreset_Click(object sender, EventArgs e)
         {
-            presetsBox.Items.Insert(0, new ReportPreset(Plugin.ExportedTrackList));
+            presetsBox.Items.Insert(0, new ReportPreset(ExportedTrackList));
             presetsBox.SelectedIndex = 0;
-            
+
             if (presetsBoxLastSelectedIndex == 0)
             {
                 presetsBoxLastSelectedIndex = -1;
                 presetsBox_SelectedIndexChanged(null, null);
             }
-            
+
             setUnsavedChanges(true);
         }
 
@@ -2954,7 +4331,7 @@ namespace MusicBeePlugin
             }
 
             int currentIndex = presetsBox.SelectedIndex;
-            ReportPreset reportsPresetCopy = new ReportPreset((ReportPreset)presetsBox.SelectedItem, false);
+            ReportPreset reportsPresetCopy = new ReportPreset(selectedPreset, false);
             if (currentIndex < firstPredefinedPresetIndex)
                 presetsBox.Items.Insert(currentIndex + 1, reportsPresetCopy);
             else
@@ -2971,72 +4348,80 @@ namespace MusicBeePlugin
             setUnsavedChanges(true);
         }
 
-        private void UpdatePreset()
+        private void updatePreset()
         {
-            if (presetsBox.SelectedIndex >= 0)
+            if (selectedPreset != null)
             {
-                var preset = (ReportPreset)presetsBox.SelectedItem;
-
-                preset.guid = Guid.NewGuid();
+                selectedPreset.guid = Guid.NewGuid();
 
                 if (string.IsNullOrWhiteSpace(presetNameTextBox.Text))
-                    preset.name = null;
+                    selectedPreset.name = null;
                 else
-                    preset.name = presetNameTextBox.Text;
+                    selectedPreset.name = presetNameTextBox.Text;
 
-
-                if (assignHotkeyCheckBox.Checked && !preset.hotkeyAssigned)
+                if (assignHotkeyCheckBox.Checked && !selectedPreset.hotkeyAssigned)
                 {
-                    preset.hotkeySlot = FindFirstSlot(reportPresetHotkeyUsedSlots, false);
-                    reportPresetHotkeyUsedSlots[preset.hotkeySlot] = true;
+                    selectedPreset.hotkeySlot = FindFirstSlot(reportPresetHotkeyUsedSlots, false);
+                    reportPresetHotkeyUsedSlots[selectedPreset.hotkeySlot] = true;
                 }
-                else if (!assignHotkeyCheckBox.Checked && preset.hotkeyAssigned)
+                else if (!assignHotkeyCheckBox.Checked && selectedPreset.hotkeyAssigned)
                 {
-                    reportPresetHotkeyUsedSlots[preset.hotkeySlot] = false;
-                    preset.hotkeySlot = -1;
+                    reportPresetHotkeyUsedSlots[selectedPreset.hotkeySlot] = false;
+                    selectedPreset.hotkeySlot = -1;
+                }
+                
+                selectedPreset.hotkeyAssigned = assignHotkeyCheckBox.Checked;
+                selectedPreset.applyToSelectedTracks = useHotkeyForSelectedTracksCheckBox.Checked;
+
+
+                selectedPreset.functionIds = new string[savedFunctionIds.Count];
+                savedFunctionIds.CopyTo(selectedPreset.functionIds);
+
+                int columnCount;
+                (selectedPreset.groupings, columnCount) = groupingsDict.valuesToPresetArray(0);
+                (selectedPreset.functions, _) = functionsDict.valuesToPresetArray(columnCount);
+
+
+                selectedPreset.comparedField = comparedFieldList.Text;
+                selectedPreset.comparison = (Comparison)conditionList.SelectedIndex;
+                selectedPreset.conditionField = conditionFieldList.Text;
+                selectedPreset.conditionIsChecked = conditionCheckBox.Checked;
+                selectedPreset.totals = totalsCheckBox.Checked;
+
+                selectedPreset.useAnotherPresetAsSource = useAnotherPresetAsSourceCheckBox.Checked;
+                if (!selectedPreset.useAnotherPresetAsSource)
+                {
+                    lastSelectedRefCheckStatus = true;
+                    selectedPreset.anotherPresetAsSource = new ReportPresetReference();
+                }
+                else if (useAnotherPresetAsSourceComboBox.SelectedIndex != -1)
+                {
+                    lastSelectedRefCheckStatus = true;
+                    selectedPreset.anotherPresetAsSource = (ReportPresetReference)useAnotherPresetAsSourceComboBox.SelectedItem;
                 }
 
-                preset.hotkeyAssigned = assignHotkeyCheckBox.Checked;
-                preset.applyToSelectedTracks = useHotkeyForSelectedTracksCheckBox.Checked;
+                selectedPreset.autoApply = presetsBox.GetItemChecked(presetsBox.SelectedIndex);
+
+                selectedPreset.destinationTags = new string[savedDestinationTagsNames.Count];
+
+                savedDestinationTagsNames.CopyTo(selectedPreset.destinationTags, 0);
 
 
-                preset.groupingNames = new string[groupingNames.Count];
-                preset.functionNames = new string[functionNames.Count];
-                preset.functionIds = new string[savedFunctionIds.Count];
-                preset.functionTypes = new FunctionType[functionTypes.Count];
-                preset.parameterNames = new string[parameterNames.Count];
-                preset.parameter2Names = new string[parameter2Names.Count];
+                selectedPreset.operations = new int[sourceFieldComboBox.Items.Count];
+                selectedPreset.mulDivFactors = new string[sourceFieldComboBox.Items.Count];
+                selectedPreset.precisionDigits = new string[sourceFieldComboBox.Items.Count];
+                selectedPreset.appendTexts = new string[sourceFieldComboBox.Items.Count];
 
-                groupingNames.CopyTo(preset.groupingNames, 0);
-                functionNames.CopyTo(preset.functionNames, 0);
-                savedFunctionIds.CopyTo(preset.functionIds, 0);
-                functionTypes.CopyTo(preset.functionTypes, 0);
-                parameterNames.CopyTo(preset.parameterNames, 0);
-                parameter2Names.CopyTo(preset.parameter2Names, 0);
+                selectedPreset.operations = new int[operations.Count];
+                operations.CopyTo(selectedPreset.operations);
+                selectedPreset.mulDivFactors = new string[mulDivFactors.Count];
+                mulDivFactors.CopyTo(selectedPreset.mulDivFactors);
+                selectedPreset.precisionDigits = new string[precisionDigits.Count];
+                precisionDigits.CopyTo(selectedPreset.precisionDigits);
+                selectedPreset.appendTexts = new string[appendTexts.Count];
+                appendTexts.CopyTo(selectedPreset.appendTexts);
 
-                preset.comparedField = comparedFieldList.Text;
-                preset.conditionText = conditionList.Text;
-                preset.conditionField = conditionFieldList.Text;
-                preset.conditionIsChecked = conditionCheckBox.Checked;
-                preset.totals = totalsCheckBox.Checked;
-
-                preset.autoApply = presetsBox.GetItemChecked(presetsBox.SelectedIndex);
-
-                preset.destinationTags = new string[savedDestinationTagsNames.Count];
-
-                savedDestinationTagsNames.CopyTo(preset.destinationTags, 0);
-
-
-                preset.operations = new int[sourceFieldComboBox.Items.Count];
-                preset.mulDivFactors = new string[sourceFieldComboBox.Items.Count];
-                preset.precisionDigits = new string[sourceFieldComboBox.Items.Count];
-                preset.appendTexts = new string[sourceFieldComboBox.Items.Count];
-
-                operations.CopyTo(preset.operations, 0);
-                mulDivFactors.CopyTo(preset.mulDivFactors, 0);
-                precisionDigits.CopyTo(preset.precisionDigits, 0);
-                appendTexts.CopyTo(preset.appendTexts, 0);
-
+                selectedPreset.generateAutoname(groupingsDict, functionsDict);
 
                 presetsBox.Refresh();
             }
@@ -3044,7 +4429,7 @@ namespace MusicBeePlugin
 
         private void buttonDeletePreset_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show(this, Plugin.MsgDeletePresetConfirmation, "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+            DialogResult result = MessageBox.Show(this, MsgDeletePresetConfirmation, "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
 
             if (result == DialogResult.No)
                 return;
@@ -3060,9 +4445,9 @@ namespace MusicBeePlugin
 
                 ignoreCheckedPresetEvent = true;
 
-                if (((ReportPreset)presetsBox.SelectedItem).hotkeyAssigned)
+                if (selectedPreset.hotkeyAssigned)
                 {
-                    reportPresetHotkeyUsedSlots[((ReportPreset)presetsBox.SelectedItem).hotkeySlot] = false;
+                    reportPresetHotkeyUsedSlots[selectedPreset.hotkeySlot] = false;
                     reportPresetsWithHotkeysCount--;
                 }
 
@@ -3104,7 +4489,7 @@ namespace MusicBeePlugin
             {
                 if (idTextBox.Text != "")
                 {
-                    MessageBox.Show(this, Plugin.MsgFirstSelectWhichFieldYouWantToAssignFunctionIdTo, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show(this, MsgFirstSelectWhichFieldYouWantToAssignFunctionIdTo, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     idTextBox.Text = "";
                 }
 
@@ -3129,7 +4514,7 @@ namespace MusicBeePlugin
 
             if (allowedRemoved != "")
             {
-                MessageBox.Show(this, Plugin.MsgNotAllowedSymbols, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, MsgNotAllowedSymbols, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 savedFunctionIds[sourceFieldComboBox.SelectedIndex] = "";
                 idTextBox.Text = "";
             }
@@ -3139,9 +4524,9 @@ namespace MusicBeePlugin
                 {
                     foreach (var id in preset.functionIds)
                     {
-                        if (idTextBox.Text == id && preset != (ReportPreset)presetsBox.SelectedItem)
+                        if (idTextBox.Text == id && preset != selectedPreset)
                         {
-                            MessageBox.Show(this, Plugin.MsgPresetExists.Replace("%%ID%%", idTextBox.Text), "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            MessageBox.Show(this, MsgPresetExists.Replace("%%ID%%", idTextBox.Text), "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             savedFunctionIds[sourceFieldComboBox.SelectedIndex] = "";
                             idTextBox.Text = "";
                             return;
@@ -3155,7 +4540,7 @@ namespace MusicBeePlugin
 
                     if (idTextBox.Text == id && i != sourceFieldComboBox.SelectedIndex)
                     {
-                        MessageBox.Show(this, Plugin.MsgPresetExists.Replace("%%ID%%", idTextBox.Text), "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        MessageBox.Show(this, MsgPresetExists.Replace("%%ID%%", idTextBox.Text), "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         savedFunctionIds[sourceFieldComboBox.SelectedIndex] = "";
                         idTextBox.Text = "";
                         return;
@@ -3184,7 +4569,9 @@ namespace MusicBeePlugin
         private void buttonSave_Click(object sender, EventArgs e)
         {
             saveSettings();
-            Close();
+
+            if (Form.ModifierKeys != Keys.Control)
+                Close();
         }
 
         private void buttonPreview_Click(object sender, EventArgs e)
@@ -3194,7 +4581,7 @@ namespace MusicBeePlugin
 
         private void buttonApply_Click(object sender, EventArgs e)
         {
-            ApplyReportPreset((ReportPreset)presetsBox.SelectedItem);
+            ApplyReportPreset(selectedPreset, getReportPresetsArrayUI());
         }
 
         private void buttonClose_Click(object sender, EventArgs e)
@@ -3202,26 +4589,66 @@ namespace MusicBeePlugin
             Close();
         }
 
+        private void buttonFilterResultsChangeLabel()
+        {
+            if (resultsAreFiltered)
+            {
+                buttonFilterResults.Text = LrButtonFilterResultsShowAllText;
+                toolTip1.SetToolTip(buttonFilterResults, LrButtonFilterResultsShowAllToolTip);
+            }
+            else
+            {
+                buttonFilterResults.Text = ButtonFilterResultsText;
+                toolTip1.SetToolTip(buttonFilterResults, ButtonFilterResultsToolTip);
+            }
+        }
+
+        private void buttonFilterResults_Click(object sender, EventArgs e)
+        {
+            previewTable.Rows.Clear();
+
+            if (backgroundTaskIsWorking())
+                return;
+
+            if (previewTable.ColumnCount == 0)
+            {
+                //MessageBox.Show(this, tagToolsPlugin.msgNoTagsSelected);
+                return;
+            }
+
+            appliedPreset = selectedPreset;
+            prepareConditionRelatedLocals();
+
+            if (resultsAreFiltered)
+                applyPresetResults(null, true, false, null, -1, false);
+            else
+                applyPresetResults(null, true, false, null, -1, true);
+
+            resultsAreFiltered = !resultsAreFiltered;
+
+            buttonFilterResultsChangeLabel();
+        }
+
         private void LibraryReportsCommand_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (unsavedChanges)
             {
-                MessageBoxDefaultButton lastAnswer = Plugin.SavedSettings.lrUnsavedChangesLastAnswer;
-                DialogResult result = MessageBox.Show(this, Plugin.MsgLrDoYouWantToSaveChangesBeforeClosingTheWindow,
+                MessageBoxDefaultButton lastAnswer = SavedSettings.lrUnsavedChangesLastAnswer;
+                DialogResult result = MessageBox.Show(this, MsgLrDoYouWantToSaveChangesBeforeClosingTheWindow,
                     "", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, lastAnswer);
 
                 if (result == DialogResult.Yes)
                 {
-                    Plugin.SavedSettings.lrUnsavedChangesLastAnswer = MessageBoxDefaultButton.Button1;
+                    SavedSettings.lrUnsavedChangesLastAnswer = MessageBoxDefaultButton.Button1;
                     saveSettings();
                 }
                 else if (result == DialogResult.No)
                 {
-                    Plugin.SavedSettings.lrUnsavedChangesLastAnswer = MessageBoxDefaultButton.Button2;
+                    SavedSettings.lrUnsavedChangesLastAnswer = MessageBoxDefaultButton.Button2;
                 }
                 else if (result == DialogResult.Cancel)
                 {
-                    Plugin.SavedSettings.lrUnsavedChangesLastAnswer = MessageBoxDefaultButton.Button3;
+                    SavedSettings.lrUnsavedChangesLastAnswer = MessageBoxDefaultButton.Button3;
                     e.Cancel = true;
                     return;
                 }
@@ -3247,103 +4674,370 @@ namespace MusicBeePlugin
                 saveWindowLayout(0, 0, 0, splitContainer1.SplitterDistance);
         }
 
-        private void sourceTagList_ItemCheck(object sender, ItemCheckEventArgs e)
+        private void buttonHelp_Click(object sender, EventArgs e)
         {
-            if (completelyIgnoreItemCheckEvent)
-                return;
+            MessageBox.Show(this, HelpMsg, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
 
-
-            ignorePresetChangedEvent = true;
-
-            if (e.NewValue == CheckState.Checked)
+        private void setColumnChanged(bool? newColumnParam)
+        {
+            if (presetIsLoaded)
             {
-                if (!addColumn((string)sourceTagList.Items[e.Index], (string)parameter2ComboBox.SelectedItem, (FunctionType)functionComboBox.SelectedIndex))
+                return;
+            }
+            else if (newColumn != false && newColumnParam == null)
+            {
+                return;
+            }
+            else if (newColumn != false) // Discarding changes
+            {
+                expressionTextBox.Text = expressionBackup;
+                multipleItemsSplitterComboBox.Text = splitterBackup;
+                multipleItemsSplitterTrimCheckBox.Checked = trimValuesBackup;
+
+                setColumnSaved();
+
+                return;
+            }
+            else if (newColumnParam == null) // Updating expression
+            {
+                buttonUpdateFunction.Text = ButtonUpdateFunctionUpdateText;
+                toolTip1.SetToolTip(buttonUpdateFunction, ButtonUpdateFunctionUpdateToolTip);
+            }
+
+            buttonAddFunction.Text = ButtonAddFunctionDiscardText;
+            toolTip1.SetToolTip(buttonAddFunction, ButtonAddFunctionDiscardToolTip);
+
+            newColumn = newColumnParam;
+
+            buttonUpdateFunction.Image = Resources.warning_12b;
+
+            enableDisablePreviewOptionControls(true);
+        }
+
+        private void setColumnSaved()
+        {
+            buttonAddFunction.Text = ButtonAddFunctionCreateText;
+            toolTip1.SetToolTip(buttonAddFunction, ButtonAddFunctionCreateToolTip);
+
+            newColumn = false;
+
+            tagsDataGridView.Enabled = true;
+            expressionsDataGridView.Enabled = true;
+
+            buttonUpdateFunction.Text = ButtonUpdateFunctionSaveText;
+            toolTip1.SetToolTip(buttonUpdateFunction, ButtonUpdateFunctionSaveToolTip);
+            buttonUpdateFunction.Image = Resources.transparent_15;
+
+            expressionTextBox.Text = expressionBackup;
+            multipleItemsSplitterComboBox.Text = splitterBackup;
+            multipleItemsSplitterTrimCheckBox.Checked = trimValuesBackup;
+
+            enableDisablePreviewOptionControls(true);
+        }
+
+        private void buttonAddFunction_Click(object sender, EventArgs e)
+        {
+            setColumnChanged(true);
+        }
+
+        private void buttonUpdateFunction_Click(object sender, EventArgs e)
+        {
+            if (addColumn(sourceTagList.Text, parameter2ComboBox.Text, (FunctionType)functionComboBox.SelectedIndex,
+                multipleItemsSplitterComboBox.Text, multipleItemsSplitterTrimCheckBox.Checked, expressionTextBox.Text))
+            {
+                setColumnSaved();
+                setPresetChanged();
+            }
+        }
+
+        private void tagsDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 0 && e.RowIndex >= 0 && newColumn == false && selectedPreset?.userPreset == true)
+            {
+                var shortId = (string)tagsDataGridView.Rows[e.RowIndex].Cells[0].Tag;
+                var commonAttr = (ColumnAttributes)tagsDataGridView.Rows[e.RowIndex].Cells[1].Tag;
+
+                List<string> ids;
+                if (commonAttr.type == FunctionType.Grouping)
                 {
-                    e.NewValue = CheckState.Unchecked;
+                    ids = groupingsDict.getAllIdsByShortId(shortId);
+                    foreach (var id in ids)
+                    {
+                        var attribs = groupingsDict[id];
+                        removeColumn(attribs.parameterName, null, FunctionType.Grouping, attribs.splitter, attribs.trimValues, attribs.expression);
+                    }
                 }
+                else
+                {
+                    ids = functionsDict.getAllIdsByShortId(shortId);
+                    foreach (var id in ids)
+                    {
+                        var attribs = functionsDict[id];
+                        removeColumn(attribs.parameterName, attribs.parameter2Name, attribs.type, null, false, attribs.expression);
+                    }
+                }
+            }
+        }
+        private void tagsDataGridViewRowSelected(int rowIndex)
+        {
+            if (rowIndex >= 0) // Maybe new row is selected
+            {
+                tagsDataGridViewSelectedRow = rowIndex;
+
+                var shortId = (string)tagsDataGridView.Rows[rowIndex].Cells[0].Tag;
+
+                var commonAttr = (ColumnAttributes)tagsDataGridView.Rows[rowIndex].Cells[1].Tag;
+
+                splitterBackup = commonAttr.splitter;
+                trimValuesBackup = commonAttr.trimValues;
+
+                functionComboBox.SelectedIndex = (int)commonAttr.type;
+                sourceTagList.SelectedItem = commonAttr.parameterName;
+                parameter2ComboBox.SelectedItem = commonAttr.parameter2Name;
+                multipleItemsSplitterComboBox.Text = commonAttr.splitter;
+                multipleItemsSplitterTrimCheckBox.Checked = commonAttr.trimValues;
+
+
+                fillExpressionsDataGridView(shortId, false);
             }
             else
             {
-                removeColumn((string)sourceTagList.Items[e.Index], (string)parameter2ComboBox.SelectedItem, (FunctionType)functionComboBox.SelectedIndex);
+                expressionsDataGridView.Rows.Clear();
+            }
+
+            enableDisablePreviewOptionControls(true);
+        }
+
+        private void tagsDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex != 0 && e.RowIndex >= 0) // Maybe new row is selected
+                if (tagsDataGridViewSelectedRow != e.RowIndex)
+                    tagsDataGridViewRowSelected(e.RowIndex);
+        }
+
+        // If newExpression == true, then new row is added to expressionsDataGridView, select it, last row
+        // If newExpression == false, then new tag column is selected, select 1st row here
+        // If newExpression == null, then it's just existing expression replaced, reselect it
+        private void fillExpressionsDataGridView(string shortId, bool? newExpression)
+        {
+            int index = getSelectedRow(expressionsDataGridView);
+
+            if (expressionsDataGridView.RowCount > 0)
+                expressionsDataGridView.Rows.Clear();
+
+            if (tagsDataGridViewSelectedRow == -1)
+                return;
+
+            var exprs = shortIdsExprs[shortId];
+            foreach (var expr in exprs)
+            {
+                expressionsDataGridView.Rows.Add();
+                expressionsDataGridView.Rows[expressionsDataGridView.RowCount - 1].Cells[0].Value = "T";
+                expressionsDataGridView.Rows[expressionsDataGridView.RowCount - 1].Cells[1].Value = (expr == "" ? NoExpressionText : expr);
+                expressionsDataGridView.Rows[expressionsDataGridView.RowCount - 1].Cells[1].Tag = expr;
+
+                if (selectedPreset?.userPreset == true)
+                    expressionsDataGridView.Rows[expressionsDataGridView.RowCount - 1].Cells[0].ToolTipText = ExpressionsDataGridViewCheckBoxToolTip;
+            }
+
+            deselectAllRows(expressionsDataGridView);
+
+            if (newExpression == false)
+            {
+                selectRow(expressionsDataGridView, 0);
+                expressionBackup = (string)expressionsDataGridView.Rows[0].Cells[1].Tag;
+                expressionTextBox.Text = expressionBackup;
+            }
+            else if (newExpression == null)
+            {
+                selectRow(expressionsDataGridView, index);
+                expressionBackup = (string)expressionsDataGridView.Rows[index].Cells[1].Tag;
+                expressionTextBox.Text = expressionBackup;
+            }
+            else
+            {
+                int lastIndex = expressionsDataGridView.RowCount - 1;
+                selectRow(expressionsDataGridView, lastIndex);
+                expressionBackup = (string)expressionsDataGridView.Rows[lastIndex].Cells[1].Tag;
+                expressionTextBox.Text = expressionBackup;
+            }
+        }
+
+        private void expressionsDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 0 && e.RowIndex >= 0 && newColumn == false && selectedPreset?.userPreset == true)
+            {
+                var shortId = (string)tagsDataGridView.Rows[tagsDataGridViewSelectedRow].Cells[0].Tag;
+                var commonAttr = (ColumnAttributes)tagsDataGridView.Rows[tagsDataGridViewSelectedRow].Cells[1].Tag;
+
+                if (expressionsDataGridView.RowCount == 1)
+                {
+                    if (MessageBox.Show(this, DoYouWantToDeleteTheFieldMsg.Replace(@"\\", "\n\n")
+                        .Replace("%%FIELDNAME%%", commonAttr.getColumnName(false, false, false)),
+                        "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                        return;
+                }
+
+                string expression = (string)expressionsDataGridView.Rows[e.RowIndex].Cells[1].Tag;
+                removeColumn(commonAttr.parameterName, commonAttr.parameter2Name, commonAttr.type, commonAttr.splitter, commonAttr.trimValues, expression);
+            }
+        }
+
+        private void expressionsDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex != 0 && e.RowIndex >= 0) // Maybe new row is selected
+            {
+                expressionBackup = (string)expressionsDataGridView.Rows[e.RowIndex].Cells[1].Tag;
+                expressionTextBox.Text = expressionBackup;
+
+                enableDisablePreviewOptionControls(true);
+            }
+        }
+
+        private void sourceTagList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (sourceTagList.Text == ArtworkName || sourceTagList.Text == SequenceNumberName)
+            {
+                expressionBackup = null;
+            }
+            else if (expressionBackup == null)
+            {
+                if (expressionsDataGridView.SelectedRows.Count > 0)
+                {
+                    int index = expressionsDataGridView.SelectedRows[0].Index;
+                    expressionBackup = (string)expressionsDataGridView.Rows[index].Cells[1].Tag;
+                }
+            }
+
+            enableDisablePreviewOptionControls(true);
+        }
+
+        private void parameter2ComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Nothing is required for now
+        }
+
+        private void multipleItemsSplitterComboBox_TextUpdate(object sender, EventArgs e)
+        {
+            if (multipleItemsSplitterComboBox.Text == splitterBackup || newColumn == true)
+                return;
+
+            setColumnChanged(null);
+        }
+
+        private string multipleItemsSplitterComboBoxValueChanged()
+        {
+            if (multipleItemsSplitterComboBox.SelectedItem == null)
+                return null;
+
+
+            string text = multipleItemsSplitterComboBox.GetItemText(multipleItemsSplitterComboBox.SelectedItem);
+
+            if (multipleItemsSplitterComboBox.SelectedIndex == 0)
+            {
+                text = "";
+                multipleItemsSplitterTrimCheckBox.Checked = false;
+            }
+            else if (multipleItemsSplitterComboBox.SelectedIndex == 1)
+            {
+                text = "\\0";
+                multipleItemsSplitterTrimCheckBox.Checked = false;
+            }
+            else if (multipleItemsSplitterComboBox.SelectedIndex > 1)
+            {
+                int commentIndex = text.IndexOf(" (");
+                if (commentIndex > 0)
+                    text = text.Substring(1, commentIndex - 1);
+                else
+                    text = text.Substring(1);
+
+                multipleItemsSplitterTrimCheckBox.Checked = true;
             }
 
 
-            setPresetChanged();
-
-            ignorePresetChangedEvent = false;
+            return text;
         }
 
-        private void buttonUncheckAll_Click(object sender, EventArgs e)
+        private void multipleItemsSplitterComboBox_DropDownClosed(object sender, EventArgs e)
         {
-            resetLocalsAndUiControls();
+            string text = multipleItemsSplitterComboBoxValueChanged();
 
-            setPresetChanged();
+            if (text == null)
+                return;
+
+
+            // handing off the reset of the combobox selected value to a delegate method - using methodinvoker on the forms main thread is an efficient to do this
+            // see https://msdn.microsoft.com/en-us/library/system.windows.forms.methodinvoker(v=vs.110).aspx
+            BeginInvoke((MethodInvoker)delegate { multipleItemsSplitterComboBox.Text = text; });
+
+
+            if (text == splitterBackup || newColumn == true)
+                return;
+
+            setColumnChanged(null);
         }
 
-        private void buttonCheckAll_Click(object sender, EventArgs e)
+        private void multipleItemsSplitterComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            addAllTags();
+            // Nothing is required for now
+        }
 
-            setPresetChanged();
+        private void multipleItemsSplitterTrimCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (multipleItemsSplitterTrimCheckBox.Checked == trimValuesBackup || newColumn == true)
+                return;
+
+            setColumnChanged(null);
         }
 
         private void functionComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (completelyIgnoreFunctionChangedEvent)
+            if (presetIsLoaded)
                 return;
 
-            completelyIgnoreItemCheckEvent = true;
 
-
-            for (int i = 0; i < sourceTagList.Items.Count; i++)
+            if (functionComboBox.SelectedIndex >= functionComboBox.Items.Count - 2) // Average or Average Count
             {
-                sourceTagList.SetItemChecked(i, false);
-            }
+                multipleItemsSplitterLabel.Visible = false;
+                multipleItemsSplitterComboBox.Visible = false;
+                multipleItemsSplitterTrimCheckBox.Visible = false;
 
-
-            if (functionComboBox.SelectedIndex == 0) //Groupings
-            {
-                for (int i = 0; i < groupingNames.Count; i++)
-                {
-                    for (int j = 0; j < sourceTagList.Items.Count; j++)
-                    {
-                        if (groupingNames[i] == (string)sourceTagList.Items[j])
-                            sourceTagList.SetItemChecked(j, true);
-                    }
-                }
-            }
-            else //Functions
-            {
-                for (int j = 0; j < sourceTagList.Items.Count; j++)
-                {
-                    for (int i = 0; i < functionNames.Count; i++)
-                    {
-                        if (functionTypes[i] == FunctionType.Average || functionTypes[i] == FunctionType.AverageCount)
-                        {
-                            if (functionComboBox.SelectedIndex == (int)functionTypes[i] && parameterNames[i] == (string)sourceTagList.Items[j] && parameter2Names[i] == (string)parameter2ComboBox.SelectedItem)
-                                sourceTagList.SetItemChecked(j, true);
-                        }
-                        else
-                        {
-                            if (functionComboBox.SelectedIndex == (int)functionTypes[i] && parameterNames[i] == (string)sourceTagList.Items[j])
-                                sourceTagList.SetItemChecked(j, true);
-                        }
-                    }
-                }
-            }
-
-            if (functionComboBox.SelectedIndex >= functionComboBox.Items.Count - 2)
-            {
-                label6.Visible = true;
+                parameter2Label.Visible = true;
                 parameter2ComboBox.Visible = true;
             }
-            else
+            else if (functionComboBox.SelectedIndex == 0) // Grouping
             {
-                label6.Visible = false;
+                multipleItemsSplitterLabel.Visible = true;
+                multipleItemsSplitterComboBox.Visible = true;
+                multipleItemsSplitterTrimCheckBox.Visible = true;
+
+                parameter2Label.Visible = false;
                 parameter2ComboBox.Visible = false;
             }
+            else // Other functions
+            {
+                multipleItemsSplitterLabel.Visible = false;
+                multipleItemsSplitterComboBox.Visible = false;
+                multipleItemsSplitterTrimCheckBox.Visible = false;
 
-            completelyIgnoreItemCheckEvent = false;
+                parameter2Label.Visible = false;
+                parameter2ComboBox.Visible = false;
+            }
+        }
+
+        private void expressionTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+            if (expressionTextBox.Text == expressionBackup || newColumn == true)
+                return;
+
+            setColumnChanged(null);
+        }
+
+        private void clearExpressionButton_Click(object sender, EventArgs e)
+        {
+            expressionTextBox.Text = "";
         }
 
         private void presetsBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -3363,28 +5057,36 @@ namespace MusicBeePlugin
 
         private void presetsBoxSelectedIndexChanged(int index)
         {
+            sortedShortIds.Clear();
+            shortIdsExprs.Clear();
+
+            groupings.Clear();
+            groupingsDict.Clear();
+            functionsDict.Clear();
+
+            setColumnSaved();
+
+            functionComboBox.SelectedIndex = 0;
+            sourceTagList.SelectedIndex = 0;
+            multipleItemsSplitterComboBox.Text = "";
+            expressionTextBox.Text = "";
+
             if (index == -1)
             {
-                buttonApply.Enabled = false;
+                selectedPreset = null;
 
+                presetNameTextBox.Enabled = false;
 
-                conditionCheckBox.Enabled = false;
-                conditionFieldList.Enabled = false;
-                conditionList.Enabled = false;
-                comparedFieldList.Enabled = false;
-                buttonPreview.Enabled = false;
-                buttonCopyPreset.Enabled = false;
-                buttonDeletePreset.Enabled = false;
-                sourceFieldComboBox.Enabled = false;
-                destinationTagList.Enabled = false;
-                buttonCheckAll.Enabled = false;
-                buttonUncheckAll.Enabled = false;
-                functionComboBox.Enabled = false;
-                parameter2ComboBox.Enabled = false;
-                sourceTagList.Enabled = false;
-                previewTable.Enabled = false;
+                lastSelectedRefCheckStatus = true;
+                useAnotherPresetAsSourceCheckBox.Checked = false;
+                useAnotherPresetAsSourceComboBox.Items.Clear();
+                useAnotherPresetAsSourceCheckBox_CheckedChanged(null, null);
+
+                multipleItemsSplitterTrimCheckBox.Checked = false;
 
                 conditionCheckBox.Checked = false;
+                conditionCheckBox_CheckedChanged(null, null);
+
                 conditionFieldList.Text = "";
                 conditionList.Text = "";
                 comparedFieldList.Text = "";
@@ -3395,15 +5097,10 @@ namespace MusicBeePlugin
                 sourceTagList.Text = "";
 
                 idTextBox.Text = "";
-                idTextBox.Enabled = false;
 
-                presetNameTextBox.Enabled = false;
-
-                labelFunction.Enabled = false;
+                totalsCheckBox.Checked = false;
 
                 assignHotkeyCheckBox.Enabled = false;
-                useHotkeyForSelectedTracksCheckBox.Enabled = false;
-                totalsCheckBox.Enabled = false;
 
                 presetNameTextBox.Text = "";
                 assignHotkeyCheckBox.Checked = false;
@@ -3411,43 +5108,35 @@ namespace MusicBeePlugin
 
                 sourceFieldComboBox_SelectedIndexChanged(null, null);
 
+                tagsDataGridView.Rows.Clear();
+                tagsDataGridViewSelectedRow = -1;
+                expressionsDataGridView.Rows.Clear();
+
+                expressionBackup = null;
+                splitterBackup = null;
+                trimValuesBackup = false;
+
+                enableDisablePreviewOptionControls(true);
+
                 return;
             }
 
 
             resetLocalsAndUiControls();
 
-            ReportPreset preset = (ReportPreset)presetsBox.SelectedItem;
-
-            buttonApply.Enabled = true;
-
-            conditionCheckBox.Enabled = true;
-            buttonPreview.Enabled = true;
-            buttonCopyPreset.Enabled = true;
-            buttonDeletePreset.Enabled = preset.userPreset;
-            sourceFieldComboBox.Enabled = true;
-            destinationTagList.Enabled = true;
-            buttonCheckAll.Enabled = preset.userPreset;
-            buttonUncheckAll.Enabled = preset.userPreset;
-            functionComboBox.Enabled = preset.userPreset;
-            parameter2ComboBox.Enabled = true;
-            sourceTagList.Enabled = preset.userPreset;
-            previewTable.Enabled = true;
+            selectedPreset = (ReportPreset)presetsBox.SelectedItem;
 
             presetNameTextBox.Enabled = true;
-            presetNameTextBox.ReadOnly = !preset.userPreset;
+            presetNameTextBox.ReadOnly = !selectedPreset.userPreset;
 
-            labelFunction.Enabled = preset.userPreset;
 
-            assignHotkeyCheckBox.Checked = preset.hotkeyAssigned;
-            useHotkeyForSelectedTracksCheckBox.Checked = preset.applyToSelectedTracks;
-            useHotkeyForSelectedTracksCheckBox.Enabled = assignHotkeyCheckBox.Checked;
-            totalsCheckBox.Enabled = true;
-            totalsCheckBox.Checked = preset.totals;
+            assignHotkeyCheckBox.Checked = selectedPreset.hotkeyAssigned;
+            useHotkeyForSelectedTracksCheckBox.Checked = selectedPreset.applyToSelectedTracks;
+            totalsCheckBox.Checked = selectedPreset.totals;
 
-            if (reportPresetsWithHotkeysCount < Plugin.MaximumNumberOfLRHotkeys)
+            if (reportPresetsWithHotkeysCount < MaximumNumberOfLRHotkeys)
                 assignHotkeyCheckBox.Enabled = true;
-            else if (reportPresetsWithHotkeysCount == Plugin.MaximumNumberOfLRHotkeys && preset.hotkeyAssigned)
+            else if (reportPresetsWithHotkeysCount == MaximumNumberOfLRHotkeys && selectedPreset.hotkeyAssigned)
                 assignHotkeyCheckBox.Enabled = true;
             else
                 assignHotkeyCheckBox.Enabled = false;
@@ -3457,112 +5146,111 @@ namespace MusicBeePlugin
                 return;
 
 
-            presetNameTextBox.Text = preset.name ?? "";
+            presetNameTextBox.Text = selectedPreset.name ?? "";
 
-            completelyIgnoreFunctionChangedEvent = true;
+            FillListByTagNames(destinationTagList.Items);
 
-            Plugin.FillListByTagNames(destinationTagList.Items);
 
             //Groupings
-            functionComboBox.SelectedIndex = 0;
-            for (int i = 0; i < preset.groupingNames.Length; i++)
+            var tempDict = new ColumnAttributesDict();
+            int columnCount = prepareDict(tempDict, null, selectedPreset.groupings, 0);
+            foreach (var attribs in tempDict.Values)
             {
-                for (int j = 0; j < sourceTagList.Items.Count; j++)
-                {
-                    if (preset.groupingNames[i] == (string)sourceTagList.Items[j])
-                    {
-                        sourceTagList.SetItemChecked(j, true);
-                        break;
-                    }
-                }
+                addColumn(attribs.parameterName, null, FunctionType.Grouping,
+                    attribs.splitter, attribs.trimValues, attribs.expression);
             }
+
 
             //Functions
-            for (int i = 0; i < preset.functionNames.Length; i++)
+            tempDict.Clear();
+            prepareDict(tempDict, null, selectedPreset.functions, columnCount);
+            foreach (var attribs in tempDict.Values)
             {
-                completelyIgnoreItemCheckEvent = true; //Lets clear items list which were set in previous iteration
-                for (int j = 0; j < sourceTagList.Items.Count; j++)
-                {
-                    sourceTagList.SetItemChecked(j, false);
-                }
-                completelyIgnoreItemCheckEvent = false;
-
-
-                functionComboBox.SelectedIndex = (int)preset.functionTypes[i];
-                parameter2ComboBox.SelectedItem = preset.parameter2Names[i];
-
-
-                for (int j = 0; j < sourceTagList.Items.Count; j++)
-                {
-                    if (preset.parameterNames[i] == (string)sourceTagList.Items[j])
-                    {
-                        sourceTagList.SetItemChecked(j, true);
-                        break;
-                    }
-                }
+                addColumn(attribs.parameterName, attribs.parameter2Name, attribs.type,
+                    null, false, attribs.expression);
             }
 
 
+            functionComboBox.SelectedIndex = 0;
+            functionComboBox_SelectedIndexChanged(null, null);
+            sourceTagList.SelectedIndex = 0;
+            sourceTagList_SelectedIndexChanged(null, null);
+            parameter2ComboBox.SelectedIndex = 0;
+            parameter2ComboBox_SelectedIndexChanged(null, null);
+            multipleItemsSplitterTrimCheckBox.Checked = false;
+            multipleItemsSplitterTrimCheckBox_CheckedChanged(null, null);
+
             savedFunctionIds.Clear();
-            savedFunctionIds.AddRange(preset.functionIds);
+            savedFunctionIds.AddRange(selectedPreset.functionIds);
 
             savedDestinationTagsNames.Clear();
-            savedDestinationTagsNames.AddRange(preset.destinationTags);
+            savedDestinationTagsNames.AddRange(selectedPreset.destinationTags);
 
 
             if (parameter2ComboBox.SelectedIndex == -1)
-                parameter2ComboBox.SelectedItem = Plugin.MbApiInterface.Setting_GetFieldName((Plugin.MetaDataType)Plugin.FilePropertyType.Url);
+                parameter2ComboBox.SelectedItem = MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url);
 
 
 
             operations.Clear();
-            operations.AddRange(preset.operations);
+            operations.AddRange(selectedPreset.operations);
             mulDivFactors.Clear();
-            mulDivFactors.AddRange(preset.mulDivFactors);
+            mulDivFactors.AddRange(selectedPreset.mulDivFactors);
             precisionDigits.Clear();
-            precisionDigits.AddRange(preset.precisionDigits);
+            precisionDigits.AddRange(selectedPreset.precisionDigits);
             appendTexts.Clear();
-            appendTexts.AddRange(preset.appendTexts);
+            appendTexts.AddRange(selectedPreset.appendTexts);
 
 
-            totalsCheckBox.Checked = preset.totals;
-            conditionCheckBox.Checked = preset.conditionIsChecked;
-            conditionFieldList.Text = preset.conditionField;
+            useAnotherPresetAsSourceCheckBox.Checked = selectedPreset.useAnotherPresetAsSource;
+            findFilteringPresetsUI(useAnotherPresetAsSourceComboBox, presetsBox, selectedPreset, selectedPreset.anotherPresetAsSource);
+            useAnotherPresetAsSourceCheckBox_CheckedChanged(null, null);
 
-            conditionList.Text = preset.conditionText;
-            if (conditionList.SelectedIndex == -1)
-                conditionList.SelectedIndex = 0;
 
-            comparedFieldList.Text = preset.comparedField;
-
-            completelyIgnoreFunctionChangedEvent = false;
-
-            functionComboBox.SelectedIndex = 0;
+            totalsCheckBox.Checked = selectedPreset.totals;
+            conditionCheckBox.Checked = selectedPreset.conditionIsChecked;
+            conditionFieldList.Text = selectedPreset.conditionField;
+            conditionList.SelectedIndex = (int)selectedPreset.comparison;
+            comparedFieldList.Text = selectedPreset.comparedField;
 
             if (sourceFieldComboBox.Items.Count > 0)
             {
                 sourceFieldComboBox.SelectedIndex = 0;
-                destinationTagList.SelectedValue = preset.destinationTags[0];
+                destinationTagList.SelectedValue = selectedPreset.destinationTags[0];
                 idTextBox.Text = savedFunctionIds[0];
             }
             else
             {
-                idTextBox.Enabled = false;
+                sourceFieldComboBox_SelectedIndexChanged(null, null);
             }
 
-            sourceFieldComboBox_SelectedIndexChanged(null, null);
+
+            if (tagsDataGridView.RowCount > 0)
+            {
+                selectRow(tagsDataGridView, 0);
+            }
+            else
+            {
+                expressionBackup = "";
+                splitterBackup = "";
+                trimValuesBackup = false;
+            }
+
+
+            enableDisablePreviewOptionControls(true);
         }
 
         private void conditionCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             conditionFieldList.Enabled = conditionCheckBox.Checked;
-            conditionList.Enabled = conditionCheckBox.Checked;
-            comparedFieldList.Enabled = conditionCheckBox.Checked;
+            conditionList.Enabled = conditionCheckBox.Checked && conditionFieldList.SelectedIndex != -1;
+            comparedFieldList.Enabled = conditionCheckBox.Checked && conditionFieldList.SelectedIndex != -1;
+            buttonFilterResults.Enabled = conditionCheckBox.Checked && previewIsGenerated && conditionFieldList.SelectedIndex != -1;
 
             setPresetChanged();
         }
 
-        private void previewList_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        private void previewTable_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             //e.ThrowException = false;
         }
@@ -3598,7 +5286,7 @@ namespace MusicBeePlugin
                 ((ReportPreset)presetsBox.Items[e.Index]).autoApply = true;
                 autoAppliedPresetCount++;
 
-                if (!Plugin.SavedSettings.dontPlayTickedAutoApplyingAsrLrPresetSound && presetsBox.SelectedIndex != -1)
+                if (!SavedSettings.dontPlayTickedAutoApplyingAsrLrPresetSound && presetsBox.SelectedIndex != -1)
                     System.Media.SystemSounds.Exclamation.Play();
             }
             else
@@ -3611,14 +5299,14 @@ namespace MusicBeePlugin
 
             if (autoAppliedPresetCount == 0)
             {
-                autoApplyInfoLabel.Text = autoApplyText;
-                autoApplyInfoLabel.ForeColor = Plugin.UntickedColor;
+                autoApplyInfoLabel.Text = AutoApplyText;
+                autoApplyInfoLabel.ForeColor = UntickedColor;
             }
             else
             {
-                autoApplyInfoLabel.Text = autoApplyText 
-                    + nowTickedText.ToUpper().Replace("%%TICKEDPRESETS%%", autoAppliedPresetCount.ToString());
-                autoApplyInfoLabel.ForeColor = Plugin.TickedColor;
+                autoApplyInfoLabel.Text = AutoApplyText
+                    + NowTickedText.ToUpper().Replace("%%TICKEDPRESETS%%", autoAppliedPresetCount.ToString());
+                autoApplyInfoLabel.ForeColor = TickedColor;
             }
         }
 
@@ -3676,24 +5364,25 @@ namespace MusicBeePlugin
                 if (e.ColumnIndex == artworkField)
                     return;
 
-                Plugin.DataGridViewCellComparer comparator = new Plugin.DataGridViewCellComparer();
+                DataGridViewCellComparer comparator = new DataGridViewCellComparer
+                {
+                    comparedColumnIndex = e.ColumnIndex
+                };
 
-                comparator.comparedColumnIndex = e.ColumnIndex;
-
-                for (int i = 0; i < previewTable.Columns.Count; i++)
+                for (int i = 0; i < previewTable.ColumnCount; i++)
                     previewTable.Columns[i].HeaderCell.SortGlyphDirection = SortOrder.None;
 
                 previewTable.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = SortOrder.Ascending;
 
-                Plugin.SetStatusbarText(Plugin.LibraryReportsCommandSbText + " (" + Plugin.SbSorting + ")", false);
+                SetStatusbarText(LibraryReportsCommandSbText + " (" + SbSorting + ")", false);
                 previewTable.Sort(comparator);
-                Plugin.SetStatusbarText("", false);
+                SetStatusbarText("", false);
             }
         }
 
         private void resizeArtworkCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            Plugin.SavedSettings.resizeArtwork = resizeArtworkCheckBox.Checked;
+            SavedSettings.resizeArtwork = resizeArtworkCheckBox.Checked;
 
             xArworkSizeUpDown.Enabled = resizeArtworkCheckBox.Checked;
             yArworkSizeUpDown.Enabled = resizeArtworkCheckBox.Checked;
@@ -3701,12 +5390,12 @@ namespace MusicBeePlugin
 
         private void xArworkSizeUpDown_ValueChanged(object sender, EventArgs e)
         {
-            Plugin.SavedSettings.xArtworkSize = (ushort)xArworkSizeUpDown.Value;
+            SavedSettings.xArtworkSize = (ushort)xArworkSizeUpDown.Value;
         }
 
         private void yArworkSizeUpDown_ValueChanged(object sender, EventArgs e)
         {
-            Plugin.SavedSettings.yArtworkSize = (ushort)yArworkSizeUpDown.Value;
+            SavedSettings.yArtworkSize = (ushort)yArworkSizeUpDown.Value;
         }
 
         private void sourceFieldComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -3714,6 +5403,10 @@ namespace MusicBeePlugin
             if (sourceFieldComboBox.SelectedIndex == -1)
             {
                 sourceFieldComboBox.Enabled = false;
+                labelSaveField.Enabled = false;
+                labelSaveToTag.Enabled = false;
+                labelFunctionId.Enabled = false;
+
                 destinationTagList.Enabled = false;
                 idTextBox.Enabled = false;
                 clearIdButton.Enabled = false;
@@ -3735,12 +5428,15 @@ namespace MusicBeePlugin
                 digitsLabel.Enabled = false;
                 appendLabel.Enabled = false;
 
-
                 return;
             }
 
 
             sourceFieldComboBox.Enabled = true;
+            labelSaveField.Enabled = true;
+            labelSaveToTag.Enabled = true;
+            labelFunctionId.Enabled = true;
+
             destinationTagList.Enabled = true;
             idTextBox.Enabled = true;
             clearIdButton.Enabled = true;
@@ -3809,34 +5505,34 @@ namespace MusicBeePlugin
                 mulDivFactorComboBox.SelectedIndex = 0;
             }
             else switch (mulDivFactorComboBox.Text)
-            {
-                case "":
-                    mulDivFactorComboBox.SelectedIndex = 0;
-                    mulDivFactors[sourceFieldComboBox.SelectedIndex] = (string)mulDivFactorComboBox.Items[0];
+                {
+                    case "":
+                        mulDivFactorComboBox.SelectedIndex = 0;
+                        mulDivFactors[sourceFieldComboBox.SelectedIndex] = (string)mulDivFactorComboBox.Items[0];
 
-                    break;
-                case "1 (ignore)":
-                case "1 (игнорировать)":
-                case "1000 (K)":
-                case "1000000 (M)":
-                case "1024 (K)":
-                case "1048576 (M)":
-                    mulDivFactors[sourceFieldComboBox.SelectedIndex] = mulDivFactorComboBox.Text;
+                        break;
+                    case "1 (ignore)":
+                    case "1 (игнорировать)":
+                    case "1000 (K)":
+                    case "1000000 (M)":
+                    case "1024 (K)":
+                    case "1048576 (M)":
+                        mulDivFactors[sourceFieldComboBox.SelectedIndex] = mulDivFactorComboBox.Text;
 
-                    break;
-                default:
-                    string mulDivFactorText = TryParseUint(mulDivFactorComboBox.Text, 1);
-                    if (mulDivFactorComboBox.Text != mulDivFactorText)
-                    {
-                        mulDivFactorComboBox.Text = mulDivFactorText;
-                        mulDivFactorComboBox.SelectionStart = mulDivFactorText.Length;
-                        mulDivFactorComboBox.SelectionLength = 0;
-                    }
+                        break;
+                    default:
+                        string mulDivFactorText = TryParseUint(mulDivFactorComboBox.Text, 1);
+                        if (mulDivFactorComboBox.Text != mulDivFactorText)
+                        {
+                            mulDivFactorComboBox.Text = mulDivFactorText;
+                            mulDivFactorComboBox.SelectionStart = mulDivFactorText.Length;
+                            mulDivFactorComboBox.SelectionLength = 0;
+                        }
 
-                    mulDivFactors[sourceFieldComboBox.SelectedIndex] = mulDivFactorComboBox.Text;
+                        mulDivFactors[sourceFieldComboBox.SelectedIndex] = mulDivFactorComboBox.Text;
 
-                    break;
-            }
+                        break;
+                }
 
             if (!sourceFieldComboBoxIndexChanging)
                 setPresetChanged();
@@ -3849,30 +5545,30 @@ namespace MusicBeePlugin
                 precisionDigitsComboBox.SelectedIndex = 0;
             }
             else switch (precisionDigitsComboBox.Text)
-            {
-                case "":
-                    precisionDigitsComboBox.SelectedIndex = 0;
-                    precisionDigits[sourceFieldComboBox.SelectedIndex] = (string)precisionDigitsComboBox.Items[0];
+                {
+                    case "":
+                        precisionDigitsComboBox.SelectedIndex = 0;
+                        precisionDigits[sourceFieldComboBox.SelectedIndex] = (string)precisionDigitsComboBox.Items[0];
 
-                    break;
-                case "(don't round)":
-                case "(не округлять)":
-                    precisionDigits[sourceFieldComboBox.SelectedIndex] = (string)precisionDigitsComboBox.Items[0];
+                        break;
+                    case "(don't round)":
+                    case "(не округлять)":
+                        precisionDigits[sourceFieldComboBox.SelectedIndex] = (string)precisionDigitsComboBox.Items[0];
 
-                    break;
-                default:
-                    string precisionDigitsText = TryParseUint(precisionDigitsComboBox.Text, 0);
-                    if (precisionDigitsComboBox.Text != precisionDigitsText)
-                    {
-                        precisionDigitsComboBox.Text = precisionDigitsText;
-                        precisionDigitsComboBox.SelectionStart = precisionDigitsText.Length;
-                        precisionDigitsComboBox.SelectionLength = 0;
-                    }
+                        break;
+                    default:
+                        string precisionDigitsText = TryParseUint(precisionDigitsComboBox.Text, 0);
+                        if (precisionDigitsComboBox.Text != precisionDigitsText)
+                        {
+                            precisionDigitsComboBox.Text = precisionDigitsText;
+                            precisionDigitsComboBox.SelectionStart = precisionDigitsText.Length;
+                            precisionDigitsComboBox.SelectionLength = 0;
+                        }
 
-                    precisionDigits[sourceFieldComboBox.SelectedIndex] = precisionDigitsComboBox.Text;
+                        precisionDigits[sourceFieldComboBox.SelectedIndex] = precisionDigitsComboBox.Text;
 
-                    break;
-            }
+                        break;
+                }
 
             if (!sourceFieldComboBoxIndexChanging)
                 setPresetChanged();
@@ -3891,6 +5587,42 @@ namespace MusicBeePlugin
 
             if (!sourceFieldComboBoxIndexChanging)
                 setPresetChanged();
+        }
+
+        private void useAnotherPresetAsSourceComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            setPresetChanged();
+
+            if (presetIsLoaded)
+                return;
+
+            lastSelectedRefCheckStatus = true;
+            adjustPresetAsSourceUI(useAnotherPresetAsSourceComboBox, (ReportPresetReference)useAnotherPresetAsSourceComboBox.SelectedItem, lastSelectedRefCheckStatus);
+        }
+
+        private void useAnotherPresetAsSourceCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            setPresetChanged();
+            useAnotherPresetAsSourceComboBox.Enabled = useAnotherPresetAsSourceCheckBox.Checked;
+
+            if (presetIsLoaded)
+                return;
+
+            bool? selectedRefCheckStatus = lastSelectedRefCheckStatus;
+            if (selectedPreset.useAnotherPresetAsSource && selectedPreset.anotherPresetAsSource.permanentGuid == Guid.Empty)
+                selectedRefCheckStatus = null;
+
+            if (selectedPreset != null)
+                adjustPresetAsSourceUI(useAnotherPresetAsSourceComboBox, selectedPreset.anotherPresetAsSource, selectedRefCheckStatus);
+        }
+
+        private void previewTable_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                comparedFieldList.Text = previewTable.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                comparedFieldList_TextUpdate(null, null);
+            }
         }
     }
 
@@ -4056,7 +5788,7 @@ namespace MusicBeePlugin
 
         public override void addCellToRow(string cell, string cellName, bool dontOutput1, bool dontOutput2)
         {
-            if (cellName == Plugin.UrlTagName)
+            if (cellName == UrlTagName)
             {
                 base.addCellToRow(cell, cellName, dontOutput1, dontOutput2);
             }

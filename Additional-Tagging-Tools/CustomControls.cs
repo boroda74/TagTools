@@ -14,22 +14,22 @@ namespace MusicBeePlugin
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern int SendMessage(IntPtr hWnd, int msg, int wParam, [MarshalAs(UnmanagedType.LPWStr)] string lParam);
 
-        public static void SetTextBoxCue(TextBox textBox, string cue)
+        public static void SetCue(TextBox textBox, string cue)
         {
             SendMessage(textBox.Handle, EM_SETCUEBANNER, 0, cue);
         }
 
-        public static void ClearTextBoxCue(TextBox textBox)
+        public static void ClearCue(TextBox textBox)
         {
             SendMessage(textBox.Handle, EM_SETCUEBANNER, 0, string.Empty);
         }
 
-        public static void SetComboBoxCue(ComboBox comboBox, string cue)
+        public static void SetCue(ComboBox comboBox, string cue)
         {
             SendMessage(comboBox.Handle, CB_SETCUEBANNER, 0, cue);
         }
 
-        public static void ClearComboBoxCue(ComboBox comboBox)
+        public static void ClearCue(ComboBox comboBox)
         {
             SendMessage(comboBox.Handle, CB_SETCUEBANNER, 0, string.Empty);
         }
