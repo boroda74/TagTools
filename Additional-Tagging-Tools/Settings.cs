@@ -95,6 +95,8 @@ namespace MusicBeePlugin
 
             showBackupRestoreCheckBox.Checked = !SavedSettings.dontShowBackupRestore;
 
+            minimizePluginWindowsCheckBox.Checked = SavedSettings.minimizePluginWindows;
+
             useSkinColorsCheckBox.Checked = SavedSettings.useSkinColors;
             highlightChangedTagsCheckBox.Checked = !SavedSettings.dontHighlightChangedTags;
 
@@ -132,6 +134,8 @@ namespace MusicBeePlugin
             SavedSettings.dontShowShowHiddenWindows = !showShowHiddenWindowsCheckBox.Checked;
 
             SavedSettings.dontShowBackupRestore = !showBackupRestoreCheckBox.Checked;
+
+            SavedSettings.minimizePluginWindows = minimizePluginWindowsCheckBox.Checked;
 
             SavedSettings.useSkinColors = useSkinColorsCheckBox.Checked;
             SavedSettings.dontHighlightChangedTags = !highlightChangedTagsCheckBox.Checked;

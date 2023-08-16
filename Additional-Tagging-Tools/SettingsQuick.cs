@@ -80,6 +80,8 @@ namespace MusicBeePlugin
             selectedLineColors = true;
             reSkinLegend();
 
+            minimizePluginWindowsCheckBox.Checked = SavedSettings.minimizePluginWindows;
+
             useSkinColorsCheckBox.Checked = SavedSettings.useSkinColors;
             highlightChangedTagsCheckBox.Checked = !SavedSettings.dontHighlightChangedTags;
 
@@ -98,6 +100,8 @@ namespace MusicBeePlugin
         private void saveSettings()
         {
             bool previousUseSkinColors = SavedSettings.useSkinColors;
+
+            SavedSettings.minimizePluginWindows = minimizePluginWindowsCheckBox.Checked;
 
             SavedSettings.useSkinColors = useSkinColorsCheckBox.Checked;
             SavedSettings.dontHighlightChangedTags = !highlightChangedTagsCheckBox.Checked;

@@ -44,6 +44,7 @@
             this.showHiddenCommandWindowsRadioButton = new System.Windows.Forms.RadioButton();
             this.highlightChangedTagsCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.minimizePluginWindowsCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.preservedTagValuesLegendTextBox = new System.Windows.Forms.TextBox();
             this.preservedTagsLegendTextBox = new System.Windows.Forms.TextBox();
@@ -164,6 +165,7 @@
             // groupBox2
             // 
             resources.ApplyResources(this.groupBox2, "groupBox2");
+            this.groupBox2.Controls.Add(this.minimizePluginWindowsCheckBox);
             this.groupBox2.Controls.Add(this.groupBox6);
             this.groupBox2.Controls.Add(this.highlightChangedTagsCheckBox);
             this.groupBox2.Controls.Add(this.showHiddenCommandWindowsRadioButton);
@@ -172,6 +174,13 @@
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             this.toolTip1.SetToolTip(this.groupBox2, resources.GetString("groupBox2.ToolTip"));
+            // 
+            // minimizePluginWindowsCheckBox
+            // 
+            resources.ApplyResources(this.minimizePluginWindowsCheckBox, "minimizePluginWindowsCheckBox");
+            this.minimizePluginWindowsCheckBox.Name = "minimizePluginWindowsCheckBox";
+            this.toolTip1.SetToolTip(this.minimizePluginWindowsCheckBox, resources.GetString("minimizePluginWindowsCheckBox.ToolTip"));
+            this.minimizePluginWindowsCheckBox.UseVisualStyleBackColor = true;
             // 
             // groupBox6
             // 
@@ -306,5 +315,6 @@
         private System.Windows.Forms.TextBox changedLegendTextBox;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.CheckBox minimizePluginWindowsCheckBox;
     }
 }

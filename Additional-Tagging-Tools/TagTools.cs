@@ -299,6 +299,7 @@ namespace MusicBeePlugin
             public bool dontShowShowHiddenWindows;
             public bool dontShowBackupRestore;
 
+            public bool minimizePluginWindows;
             public bool useSkinColors;
             public bool dontHighlightChangedTags;
 

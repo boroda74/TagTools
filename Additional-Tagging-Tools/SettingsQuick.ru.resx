@@ -119,16 +119,16 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>694, 359</value>
+    <value>694, 377</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Отмена</value>
   </data>
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>613, 359</value>
+    <value>613, 377</value>
   </data>
   <data name="versionLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 364</value>
+    <value>10, 382</value>
   </data>
   <data name="versionLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 13</value>
@@ -137,7 +137,7 @@
     <value>Версия: </value>
   </data>
   <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 134</value>
+    <value>12, 152</value>
   </data>
   <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
     <value>755, 116</value>
@@ -170,7 +170,7 @@
     <value>Проиграть системный звук "Звездочка", когда фоновая задача завершается/остановлена</value>
   </data>
   <data name="saveLastSkippedButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>347, 359</value>
+    <value>347, 377</value>
   </data>
   <data name="saveLastSkippedButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>260, 23</value>
@@ -213,10 +213,16 @@
     <value>12, 29</value>
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>755, 99</value>
+    <value>755, 117</value>
   </data>
   <data name="groupBox2.Text" xml:space="preserve">
     <value>Оформление</value>
+  </data>
+  <data name="minimizePluginWindowsCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>352, 17</value>
+  </data>
+  <data name="minimizePluginWindowsCheckBox.Text" xml:space="preserve">
+    <value>Минимизировать окна плагина, вместо того чтобы скрывать их</value>
   </data>
   <data name="groupBox6.Location" type="System.Drawing.Point, System.Drawing">
     <value>540, 10</value>
@@ -249,7 +255,7 @@
     <value>Щелкните мышкой по любому полю, чтобы увидеть цвета выделенной строки:Щелкните мышкой по любому полю, чтобы увидеть цвета невыделенной строки</value>
   </data>
   <data name="groupBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 256</value>
+    <value>12, 274</value>
   </data>
   <data name="groupBox5.Size" type="System.Drawing.Size, System.Drawing">
     <value>755, 90</value>
@@ -282,7 +288,7 @@
     <value>*  Требуется заново открыть окна плагина, чтобы новые настройки вступили в силу</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>781, 391</value>
+    <value>781, 409</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Быстрые настройки</value>

@@ -610,7 +610,8 @@ namespace MusicBeePlugin
                 width = RestoreBounds.Width;
                 height = RestoreBounds.Height;
 
-                Hide();
+                if (!SavedSettings.minimizePluginWindows)
+                    Hide();
             }
             else
             {
