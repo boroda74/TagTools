@@ -3,9 +3,11 @@ LR expressions are mostly intended to be used for regexes, though they are not l
 If several virtual tags sourced from a single tag are split into multiple values (e.g., separated by ; ) for a given track, then *all combinations of these values* will be included in the LR report. Contrary to this, *different expressions of one split grouping tag* for a given track produce *a single combination for every split tag value*.
 
 Two virtual tags sourced from a single "Custom2" tag are split into multiple values:
+
 ![alt text][1]
 
 Two expressions of one split into multiple values grouping "Custom2" tag:
+
 ![alt text][2]
 
 You can refer to any tag in an LR expression using the MusicBee generic <Tag Name> construction, or refer to the current grouping/function tag (which can already be a split tag value if splitter is defined for this tag) as \@
