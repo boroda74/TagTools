@@ -1157,7 +1157,7 @@ namespace MusicBeePlugin
 
                             for (int j = 0; j < functionValues.Length; j++)
                             {
-                                aggregatedValues[j] = new ConvertStringsResult(1);
+                                aggregatedValues[j] = new ConvertStringsResult(-1);
 
                                 if (functionTypes[j] == FunctionType.Minimum)
                                 {
@@ -1198,10 +1198,13 @@ namespace MusicBeePlugin
                             {
                                 currentFunctionResult = ConvertStrings(currentFunctionValue);
 
-                                if (currentFunctionResult.type != 0)
-                                {
-                                    aggregatedValues[i].result1f += currentFunctionResult.result1f;
+                                if (string.IsNullOrWhiteSpace(currentFunctionValue))
+                                    currentFunctionResult.type = -1;
 
+                                aggregatedValues[i].result1f += currentFunctionResult.result1f;
+
+                                if (currentFunctionResult.type > 0)
+                                {
                                     if (aggregatedValues[i].result1fPrefix == null)
                                         aggregatedValues[i].result1fPrefix = currentFunctionResult.result1fPrefix;
                                     else if (aggregatedValues[i].result1fPrefix != currentFunctionResult.result1fPrefix)
@@ -1220,13 +1223,21 @@ namespace MusicBeePlugin
                                     aggregatedValues[i].type = currentFunctionResult.type;
                                 }
 
-                                resultTypes[i] = currentFunctionResult.type;
+                                if (currentFunctionResult.type > -1)
+                                {
+                                    resultTypes[i] = currentFunctionResult.type;
+                                    aggregatedValues[i].type = currentFunctionResult.type;
+                                }
                             }
                             else if (functionTypes[i] == FunctionType.Minimum)
                             {
                                 currentFunctionResult = ConvertStrings(currentFunctionValue);
 
-                                if (currentFunctionResult.type == 0)
+                                if (string.IsNullOrWhiteSpace(currentFunctionValue))
+                                {
+                                    currentFunctionResult.type = -1;
+                                }
+                                else if (currentFunctionResult.type == 0)
                                 {
                                     resultTypes[i] = 0;
                                 }
@@ -1243,11 +1254,11 @@ namespace MusicBeePlugin
                                     currentFunctionResult.type = resultTypes[i];
                                 }
 
-                                if (currentFunctionResult.type != 0)
-                                {
-                                    if (aggregatedValues[i].result1f > currentFunctionResult.result1f)
-                                        aggregatedValues[i].result1f = currentFunctionResult.result1f;
+                                if (aggregatedValues[i].result1f > currentFunctionResult.result1f)
+                                    aggregatedValues[i].result1f = currentFunctionResult.result1f;
 
+                                if (currentFunctionResult.type > 0)
+                                {
                                     if (aggregatedValues[i].result1fPrefix == null)
                                         aggregatedValues[i].result1fPrefix = currentFunctionResult.result1fPrefix;
                                     else if (aggregatedValues[i].result1fPrefix != currentFunctionResult.result1fPrefix)
@@ -1269,13 +1280,21 @@ namespace MusicBeePlugin
                                         aggregatedValues[i].result1s = currentFunctionResult.result1s;
                                 }
 
-                                aggregatedValues[i].type = currentFunctionResult.type;
+                                if (currentFunctionResult.type > -1)
+                                {
+                                    resultTypes[i] = currentFunctionResult.type;
+                                    aggregatedValues[i].type = currentFunctionResult.type;
+                                }
                             }
                             else if (functionTypes[i] == FunctionType.Maximum)
                             {
                                 currentFunctionResult = ConvertStrings(currentFunctionValue);
 
-                                if (currentFunctionResult.type == 0)
+                                if (string.IsNullOrWhiteSpace(currentFunctionValue))
+                                {
+                                    currentFunctionResult.type = -1;
+                                }
+                                else if (currentFunctionResult.type == 0)
                                 {
                                     resultTypes[i] = 0;
                                 }
@@ -1292,11 +1311,11 @@ namespace MusicBeePlugin
                                     currentFunctionResult.type = resultTypes[i];
                                 }
 
-                                if (currentFunctionResult.type != 0)
-                                {
-                                    if (aggregatedValues[i].result1f < currentFunctionResult.result1f)
-                                        aggregatedValues[i].result1f = currentFunctionResult.result1f;
+                                if (aggregatedValues[i].result1f < currentFunctionResult.result1f)
+                                    aggregatedValues[i].result1f = currentFunctionResult.result1f;
 
+                                if (currentFunctionResult.type > 0)
+                                {
                                     if (aggregatedValues[i].result1fPrefix == null)
                                         aggregatedValues[i].result1fPrefix = currentFunctionResult.result1fPrefix;
                                     else if (aggregatedValues[i].result1fPrefix != currentFunctionResult.result1fPrefix)
@@ -1318,19 +1337,27 @@ namespace MusicBeePlugin
                                         aggregatedValues[i].result1s = currentFunctionResult.result1s;
                                 }
 
-                                aggregatedValues[i].type = currentFunctionResult.type;
+                                if (currentFunctionResult.type > -1)
+                                {
+                                    resultTypes[i] = currentFunctionResult.type;
+                                    aggregatedValues[i].type = currentFunctionResult.type;
+                                }
                             }
                             else if (functionTypes[i] == FunctionType.Average)
                             {
                                 if (!aggregatedValues[i].items.TryGetValue(parameter2Values[i], out _))
                                     aggregatedValues[i].items.Add(parameter2Values[i], false);
 
-                                currentFunctionResult = ConvertStrings(functionValues[i]);
+                                currentFunctionResult = ConvertStrings(currentFunctionValue);
 
-                                if (currentFunctionResult.type != 0)
+
+                                if (string.IsNullOrWhiteSpace(currentFunctionValue))
+                                    currentFunctionResult.type = -1;
+
+                                aggregatedValues[i].result1f += currentFunctionResult.result1f;
+
+                                if (currentFunctionResult.type > 0)
                                 {
-                                    aggregatedValues[i].result1f += currentFunctionResult.result1f;
-
                                     if (aggregatedValues[i].result1fPrefix == null)
                                         aggregatedValues[i].result1fPrefix = currentFunctionResult.result1fPrefix;
                                     else if (aggregatedValues[i].result1fPrefix != currentFunctionResult.result1fPrefix)
@@ -1349,7 +1376,8 @@ namespace MusicBeePlugin
                                     aggregatedValues[i].type = currentFunctionResult.type;
                                 }
 
-                                resultTypes[i] = currentFunctionResult.type;
+                                if (currentFunctionResult.type > -1)
+                                    resultTypes[i] = currentFunctionResult.type;
                             }
                             else if (functionTypes[i] == FunctionType.AverageCount)
                             {
@@ -1539,9 +1567,9 @@ namespace MusicBeePlugin
                 for (int i = 0; i < rightAlignedColumns.Length; i++)
                 {
                     if (rightAlignedColumns[i])
-                        previewTable.Columns[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                        previewTable.Columns[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopRight;
                     else
-                        previewTable.Columns[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+                        previewTable.Columns[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopLeft;
                 }
             }
 
@@ -1593,6 +1621,8 @@ namespace MusicBeePlugin
                     previewTable.Columns[i].FillWeight = maxWidths[i] * 100;
             }
 
+            previewTable.AutoResizeColumns();
+            previewTable.AutoResizeRows();
 
             if (previewTable.RowCount > 0)
                 previewTable.CurrentCell = previewTable.Rows[0].Cells[0];
