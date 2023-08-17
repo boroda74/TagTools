@@ -11,4 +11,4 @@ Two expressions of one split into multiple values grouping "Custom2" tag:
 You can refer to any tag in an LR expression using the MusicBee generic <Tag Name> construction, or refer to the current grouping/function tag (which can already be a split tag value if splitter is defined for this tag) as \@
 
   [1]: https://i.imgur.com/M2TEiRP.png
-  [2]: https://i.imgur.com/QxKfyWx.png
+  [2]: https://i.imgur.com/rgWTVYY.png
