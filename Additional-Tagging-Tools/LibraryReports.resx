@@ -135,12 +135,12 @@
   <data name="smartOperationCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <metadata name="dirtyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="dirtyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>9, 9</value>
-  </metadata>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <data name="$this.Localizable" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
@@ -168,9 +168,9 @@
   <data name="buttonClose.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageBeforeText</value>
   </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>157, 9</value>
-  </metadata>
+  </data>
   <data name="buttonClose.ToolTip" xml:space="preserve">
     <value>There are unsaved changes</value>
   </data>
@@ -2473,8 +2473,11 @@ and before calculating aggregated functions</value>
   <data name="buttonHelp.ToolTip" xml:space="preserve">
     <value>Help on using virtual function expressions
 
-placeholder
-test string 2</value>
+LR expressions are mostly intended to be used for regexes, though they are not limited to them. Expressions can save you virtual tags if you need some expressions to be used in LR only, but the main purpose of LR expressions is to use them together with multiple item splitters for grouping tags.
+
+If several virtual tags sourced from a single tag are split into multiple values (e.g., separated by ; ) for a given track, then all combinations of these values will be included in the LR report. Contrary to this, different expressions of one split grouping tag for a given track produce a single combination for every split tag value.
+
+You can refer to any tag in an LR expression using the MusicBee generic &lt;Tag Name&gt; construction, or refer to the current grouping/function tag (which can already be a split tag value if splitter is defined for this tag) as \@</value>
   </data>
   <data name="&gt;&gt;buttonHelp.Name" xml:space="preserve">
     <value>buttonHelp</value>
@@ -2512,9 +2515,9 @@ test string 2</value>
   <data name="expressionsDataGridView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <metadata name="expressionsDataGridViewCheckedColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="expressionsDataGridViewCheckedColumn.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="expressionsDataGridViewCheckedColumn.HeaderText" xml:space="preserve">
     <value />
   </data>
@@ -2527,9 +2530,9 @@ test string 2</value>
   <data name="expressionsDataGridViewCheckedColumn.Width" type="System.Int32, mscorlib">
     <value>25</value>
   </data>
-  <metadata name="expressionsDataGridViewExpressionColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="expressionsDataGridViewExpressionColumn.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="expressionsDataGridViewExpressionColumn.HeaderText" xml:space="preserve">
     <value>Expression</value>
   </data>
@@ -2632,9 +2635,9 @@ and before calculating aggregated functions</value>
   <data name="tagsDataGridView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left</value>
   </data>
-  <metadata name="tagsDataGridViewCheckedColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="tagsDataGridViewCheckedColumn.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="tagsDataGridViewCheckedColumn.HeaderText" xml:space="preserve">
     <value />
   </data>
@@ -2647,9 +2650,9 @@ and before calculating aggregated functions</value>
   <data name="tagsDataGridViewCheckedColumn.Width" type="System.Int32, mscorlib">
     <value>25</value>
   </data>
-  <metadata name="tagsDataGridViewFunctionColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="tagsDataGridViewFunctionColumn.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="tagsDataGridViewFunctionColumn.HeaderText" xml:space="preserve">
     <value>Function</value>
   </data>
@@ -2662,18 +2665,18 @@ and before calculating aggregated functions</value>
   <data name="tagsDataGridViewFunctionColumn.Width" type="System.Int32, mscorlib">
     <value>80</value>
   </data>
-  <metadata name="tagsDataGridViewTagColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="tagsDataGridViewTagColumn.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="tagsDataGridViewTagColumn.HeaderText" xml:space="preserve">
     <value>Tag</value>
   </data>
   <data name="tagsDataGridViewTagColumn.MinimumWidth" type="System.Int32, mscorlib">
     <value>100</value>
   </data>
-  <metadata name="tagsDataGridViewInfoColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="tagsDataGridViewInfoColumn.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="tagsDataGridViewInfoColumn.HeaderText" xml:space="preserve">
     <value>Info</value>
   </data>

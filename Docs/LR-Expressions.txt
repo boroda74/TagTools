@@ -1,0 +1,17 @@
+LR expressions are mostly intended to be used for regexes, though they are not limited to them. Expressions can save you virtual tags if you need some expressions to be used in LR only, but the main purpose of LR expressions is to use them together with multiple item splitters for grouping tags.
+
+If several virtual tags sourced from a single tag are split into multiple values (e.g., separated by ; ) for a given track, then all combinations of these values will be included in the LR report. Contrary to this, different expressions of one split grouping tag for a given track produce a single combination for every split tag value.
+
+You can refer to any tag in an LR expression using the MusicBee generic <Tag Name> construction, or refer to the current grouping/function tag (which can already be a split tag value if splitter is defined for this tag) as \@
+
+
+
+
+
+
+
+Выражения ОБ в основном предназначены для использования с регулярными выражениями, хотя они этим не ограничиваются. Выражения могут сэкономить вам виртуальные теги, если вам нужно, чтобы некоторые выражения использовались только в ОБ, но основная цель выражений ОБ — использовать их вместе с разделителями элементов для тегов группировок.
+
+Если несколько виртуальных тегов, полученных из одного тега, разделены на несколько значений (например, разделенных ; ) для данного трека, то все комбинации этих значений будут включены в отчет ОБ. В отличие от этого, различные выражения одного разделенного тега для данной дорожки создают единую комбинацию для каждого разделенного значения тега.
+
+Вы можете ссылаться на любой тег в выражении ОБ, используя общую конструкцию MusicBee <Название тега>, или ссылаться на текущий тег группировки/функции (который уже может быть разделенным значением тега, если разделитель для этого тега задан) как \@

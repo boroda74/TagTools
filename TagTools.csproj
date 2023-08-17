@@ -244,6 +244,7 @@
     <None Include="Docs\ASR-AUTO-APPLYING-FILTERING.md" />
     <None Include="Docs\ASR-SPECIAL-FUNCTIONS.md" />
     <None Include="Docs\LR-AUTO-APPLYING-FILTERING.md" />
+    <None Include="Docs\LR-EXPRESSIONS.md" />
     <None Include="Docs\OnSelectedFilesChanged Event.md" />
     <None Include="Docs\VIRTUAL-TAG-FUNCTIONS.md" />
     <None Include="Properties\Settings.settings">
@@ -441,6 +442,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Docs\LR-Expressions.txt" />
     <Content Include="Docs\OnSelectedFilesChanged Event.txt" />
     <None Include="Properties\Resources\warning-12b.png" />
     <None Include="Properties\Resources\gear-15.png" />

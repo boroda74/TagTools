@@ -271,7 +271,7 @@ namespace MusicBeePlugin
             //Saving Help button tool tip
             string buttonHelpInitialToolTip = toolTip1.GetToolTip(buttonHelp);
             string buttonHelpToolTip = Regex.Replace(buttonHelpInitialToolTip, @"^(.*?)\r\n\r\n((.|\r|\n)*)", "$1");
-            HelpMsg = Regex.Replace(buttonHelpInitialToolTip, @"^(.*?)\r\n\r\n((.|\r|\n)*)", "$2");//***** Create HELP!!!!
+            HelpMsg = Regex.Replace(buttonHelpInitialToolTip, @"^(.*?)\r\n\r\n((.|\r|\n)*)", "$2");
             toolTip1.SetToolTip(buttonHelp, buttonHelpToolTip);
 
 

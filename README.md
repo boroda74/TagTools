@@ -67,6 +67,14 @@ Allows to export some library statistics for currently displayed tracks to exter
 
 Also, "Library Reports" allows to calculate one or more presets and save results to (custom) tags at startup/after a given number of tag changes/or manually. Useful for *autosaving* or manual saving such values as "Summary play counts of albums" or "Number of tracks for each artist", etc. to (custom) tags, i.e. it's some analog of virtual tags with the ability to operate not only on tags of current track, but on tags of all tracks.
 
+"Library Reports" supports multiple item splitters for grouping tags. For example, you can define splitter ; for "artist" or "'genre" tags to split multiple artists or genres. If several tags are split (i.e., several tags for one track may have several values) then *all possible combinations of split values for every tag* will be included in LR report.
+
+"Library Reports" supports virtual tag expressions (any expressions valid for virtual tags). 
+<br/>
+
+[Read more about "Library Reports" virtual tag expressions][6]
+<br/>
+
 "Library Reports" command adds new virtual tag function:
 
 <pre>$LR(&lt;URL&gt;,function_id)</pre>
@@ -351,3 +359,4 @@ Do all you want with plugin binary and source code at your own risk.
   [3]: https://github.com/boroda74/TagTools/blob/master/Docs/ASR-AUTO-APPLYING-FILTERING.md
   [4]: https://www.mediafire.com/file/h2t08o9562efboi/mb_TagTools_latest.zip/file
   [5]: https://i.imgur.com/C1gPwaK.png
+  [6]: https://github.com/boroda74/TagTools/blob/master/Docs/LR-EXPRESSIONS.md

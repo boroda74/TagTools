@@ -1,0 +1,5 @@
+LR expressions are mostly intended to be used for regexes, though they are not limited to them. Expressions can save you virtual tags if you need some expressions to be used in LR only, but the main purpose of LR expressions is to use them together with multiple item splitters for grouping tags.
+
+If several virtual tags sourced from a single tag are split into multiple values (e.g., separated by ; ) for a given track, then *all combinations of these values* will be included in the LR report. Contrary to this, *different expressions of one split grouping tag* for a given track produce *a single combination for every split tag value*.
+
+You can refer to any tag in an LR expression using the MusicBee generic <Tag Name> construction, or refer to the current grouping/function tag (which can already be a split tag value if splitter is defined for this tag) as \@
