@@ -13,7 +13,7 @@ using static MusicBeePlugin.Plugin;
 
 namespace MusicBeePlugin
 {
-    public partial class LibraryReportsCommand : PluginWindowTemplate
+    public partial class LibraryReportsCommand : PluginWindowTemplate, IDisposable
     {
         private delegate void AddRowsToTable(List<string[]> rows);
         private delegate void UpdateTable();
@@ -47,7 +47,7 @@ namespace MusicBeePlugin
         private const int MaxExprRepresentationLength = 40;
 
         private const int PreviewTableColumnMinimumWidth = 75;
-        private const int PreviewTableArtworkSize = 200;
+        private const int PreviewTableDefaultArtworkSize = 200;
 
         private static string AutoApplyText;
         private static string NowTickedText;
@@ -467,7 +467,7 @@ namespace MusicBeePlugin
             public string getUniqueId()
             {
                 return ((int)type).ToString("D2") + "\u0007" + ((int)GetTagId(parameterName)).ToString("D4")
-                    + "\u0007" + ((int)GetTagId(parameter2Name)).ToString("D4") + "\u0007" + expression ?? "";
+                    + "\u0007" + ((int)GetTagId(parameter2Name)).ToString("D4") + "\u0007" + (expression ?? "");
             }
 
             public override bool Equals(object obj)
@@ -1138,10 +1138,6 @@ namespace MusicBeePlugin
                         {
                             if (!aggregatedValues[0].items.TryGetValue(url, out _))
                                 aggregatedValues[0].items.Add(url, false);
-
-                            aggregatedValues[0].type = 1;
-
-                            resultTypes[0] = 1;
                         }
                     }
                 }
@@ -1398,10 +1394,6 @@ namespace MusicBeePlugin
 
                             if (!aggregatedValues[i].items.TryGetValue(url, out _))
                                 aggregatedValues[i].items.Add(url, false);
-
-                            aggregatedValues[i].type = 1;
-
-                            resultTypes[i] = 1;
                         }
                     }
                 }
@@ -1547,7 +1539,7 @@ namespace MusicBeePlugin
                 }
             }
 
-            for (int i = 0; i < resultTypes.Length - 1; i++) // Last result are invisible urls
+            for (int i = 0; i < resultTypes.Length; i++)
             {
                 if (resultTypes[i] > 0) // It's either number or date/time/duration. Let's right-align the column.
                     columnAlignments[j + 1 + i] = true;
@@ -1607,7 +1599,7 @@ namespace MusicBeePlugin
 
                         previewTable.Rows[previewTable.RowCount - 1].Cells[artworkField].ValueType = typeof(Bitmap);
                         previewTable.Rows[previewTable.RowCount - 1].Cells[artworkField].Value = pic;
-                        previewTable.Rows[previewTable.RowCount - 1].MinimumHeight = PreviewTableArtworkSize;
+                        previewTable.Rows[previewTable.RowCount - 1].MinimumHeight = PreviewTableDefaultArtworkSize;
                     }
                 }
             }
@@ -2147,7 +2139,7 @@ namespace MusicBeePlugin
                 queriedActualGroupingsTagIds[l] = 0;
 
 
-            resultTypes = new int[functionsDict.Count + 1]; // Last value are urls
+            resultTypes = new int[functionsDict.Count];
 
             for (int l = 0; l < resultTypes.Length; l++)
                 resultTypes[l] = -1;
@@ -3156,7 +3148,7 @@ namespace MusicBeePlugin
                 }
                 catch (System.Threading.ThreadAbortException)
                 {
-                    BackgroundTaskIsInProgress = false;
+                    // Let's just stop the thread...
                 }
             }
 
@@ -3178,7 +3170,7 @@ namespace MusicBeePlugin
                 }
                 catch (System.Threading.ThreadAbortException)
                 {
-                    BackgroundTaskIsInProgress = false;
+                    // Let's just stop the thread...
                 }
             }
 
@@ -3209,7 +3201,7 @@ namespace MusicBeePlugin
                 }
                 catch (System.Threading.ThreadAbortException)
                 {
-                    BackgroundTaskIsInProgress = false;
+                    // Let's just stop the thread...
                 }
             }
 
@@ -3552,7 +3544,7 @@ namespace MusicBeePlugin
                     HeaderText = fieldName,
                     AutoSizeMode = DataGridViewAutoSizeColumnMode.None,
                     Resizable = DataGridViewTriState.True,
-                    Width = PreviewTableArtworkSize,
+                    Width = PreviewTableDefaultArtworkSize,
                     SortMode = DataGridViewColumnSortMode.Programmatic,
                 };
                 imageColumn.HeaderCell.Tag = uniqueId;
@@ -4070,7 +4062,7 @@ namespace MusicBeePlugin
 
                         if (SavedSettings.filterIndex == 1)
                             document = new HtmlDocumentByAlbum(stream, TagToolsPlugin, fileDirectoryPath, imagesDirectoryName);
-                        else if (SavedSettings.filterIndex == 7)
+                        else //if (SavedSettings.filterIndex == 7)
                             document = new HtmlDocumentCDBooklet(stream, TagToolsPlugin, fileDirectoryPath, imagesDirectoryName);
                         break;
                     case 2:

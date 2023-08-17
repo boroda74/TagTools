@@ -251,6 +251,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="README.md" />
     <None Include="Sources\ASR-icons-mod.cdr" />
     <None Include="Sources\ASR-icons.cdr" />
     <None Include="Sources\separator.cpt" />
