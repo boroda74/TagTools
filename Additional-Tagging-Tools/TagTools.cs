@@ -3132,7 +3132,10 @@ namespace MusicBeePlugin
             LrButtonFilterResultsShowAllText = "Show All";
             LrButtonFilterResultsShowAllToolTip = "Show full preview";
 
-            LrCellToolTip = "Double-click to copy cell content to conditional export/saving compared field";
+            LrCellToolTip = "Ctrl-click to copy cell content to conditional export/saving compared field. \n" +
+                "Double-click row border to auto-size row. \n" +
+                "Shift-double-click row border to auto-size all rows. \n" +
+                "Alt-resize the row to change the height of all rows. ";
 
             SbBrokenPresetRetrievalChain = "Broken preset retrieval chain for LR preset: %%PRESETNAME%%! Check out the preset chain!";
 
@@ -4053,7 +4056,10 @@ namespace MusicBeePlugin
                 LrButtonFilterResultsShowAllText = "Показать все";
                 LrButtonFilterResultsShowAllToolTip = "Показать все результаты";
 
-                LrCellToolTip = "Двойной щелчок копирует содержимое ячейки в поле сравнения условного экспорта/записи";
+                LrCellToolTip = "Щелчок с нажатой клавишей Ctrl копирует содержимое ячейки в поле сравнения условного экспорта/записи. \n" +
+                    "Двойной щелчок по границе строки устанавливает авто-размер строки. \n" +
+                    "Двойной щелчок с нажатой клавишей Shift по границе строки устанавливает авто-размер всех строк. \n" +
+                    "Изменение размера строки с нажатой клавишей Alt изменит размер всех строк. ";
 
                 SbBrokenPresetRetrievalChain = "Нарушенная цепочка пресетов для получения списка треков для для пресета ОБ: %%PRESETNAME%%! Проверьте цепочку пресетов!";
 

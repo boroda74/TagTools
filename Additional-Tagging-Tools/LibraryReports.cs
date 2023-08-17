@@ -1549,8 +1549,13 @@ namespace MusicBeePlugin
             foreach (var row in rows)
             {
                 previewTable.Rows.Add(row);
-                previewTable.Rows[previewTable.RowCount - 1].Resizable = DataGridViewTriState.True;
-                
+
+                if (artworkField == -1)
+                    previewTable.Rows[previewTable.RowCount - 1].Resizable = DataGridViewTriState.True;
+                else
+                    previewTable.Rows[previewTable.RowCount - 1].Resizable = DataGridViewTriState.False;
+
+
                 for (int i = 0; i < previewTable.ColumnCount; i++)
                 {
                     if (i != artworkField)
@@ -1563,24 +1568,19 @@ namespace MusicBeePlugin
                         if (maxWidths[i] < row[i].Length)
                             maxWidths[i] = row[i].Length;
                     }
-                }
+                    else
+                    {
+                        //Lets replace string hashes in the Artwork column with images.
+                        string stringHash = row[artworkField];
+                        Bitmap pic;
 
-                if (artworkField != -1)
-                {
-                    //Lets replace string hashes in the Artwork column with images.
-                    string stringHash = row[artworkField];
-                    Bitmap pic;
+                        if (!artworks.TryGetValue(stringHash, out pic))
+                            pic = artworks[DefaultArtworkHash];
 
-                    if (!artworks.TryGetValue(stringHash, out pic))
-                        pic = artworks[DefaultArtworkHash];
-
-                    previewTable.Rows[previewTable.RowCount - 1].Cells[artworkField].ValueType = typeof(Bitmap);
-                    previewTable.Rows[previewTable.RowCount - 1].Cells[artworkField].Value = pic;
-                    previewTable.Rows[previewTable.RowCount - 1].MinimumHeight = PreviewTableArtworkSize;
-
-                    int width = Math.Max(pic.Height, pic.Width) / 10;
-                    if (maxWidths[artworkField] < width)
-                        maxWidths[artworkField] = width;
+                        previewTable.Rows[previewTable.RowCount - 1].Cells[artworkField].ValueType = typeof(Bitmap);
+                        previewTable.Rows[previewTable.RowCount - 1].Cells[artworkField].Value = pic;
+                        previewTable.Rows[previewTable.RowCount - 1].MinimumHeight = PreviewTableArtworkSize;
+                    }
                 }
             }
         }
@@ -5834,12 +5834,47 @@ namespace MusicBeePlugin
                 adjustPresetAsSourceUI(useAnotherPresetAsSourceComboBox, selectedPreset.anotherPresetAsSource, selectedRefCheckStatus);
         }
 
-        private void previewTable_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void previewTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
+            if (e.RowIndex >= 0 && Form.ModifierKeys == Keys.Control)
             {
                 comparedFieldList.Text = previewTable.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 comparedFieldList_TextUpdate(null, null);
+            }
+        }
+
+        private void previewTable_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex != artworkField && Form.ModifierKeys == Keys.Control)
+            {
+                conditionFieldList.SelectedIndex = e.ColumnIndex;
+                comparedFieldList.Text = previewTable.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                comparedFieldList_TextUpdate(null, null);
+            }
+        }
+
+        private void previewTable_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
+        {
+            if (e.Column.Index == artworkField)
+            {
+                for (int i = 0; i < previewTable.RowCount; i++)
+                    previewTable.Rows[i].MinimumHeight = e.Column.Width;
+
+                previewTable.AutoResizeRows();
+            }
+        }
+
+        private void previewTable_RowHeightChanged(object sender, DataGridViewRowEventArgs e)
+        {
+            if (artworkField == -1 && Form.ModifierKeys == Keys.Shift)
+            {
+                previewTable.AutoResizeRows();
+            }
+            else if (artworkField == -1 && Form.ModifierKeys == Keys.Alt)
+            {
+                for (int i = 0; i < previewTable.RowCount; i++)
+                    if (i != e.Row.Index && previewTable.Rows[i].Height < e.Row.Height)
+                        previewTable.Rows[i].Height = e.Row.Height;
             }
         }
     }
