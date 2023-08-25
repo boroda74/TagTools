@@ -38,7 +38,7 @@
     <DebugSymbols>false</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>D:\Архив\.Портативные программы\MusicBee\Plugins\</OutputPath>
+    <OutputPath>..\..\..\Архив\Плейеры\.MusicBee Portable\Plugins\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -48,7 +48,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>D:\Архив\.Портативные программы\MusicBee\Plugins\</OutputPath>
+    <OutputPath>..\..\..\Архив\Плейеры\.MusicBee Portable\Plugins\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -241,20 +241,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Additional-Tagging-Tools\app.config" />
-    <None Include="Docs\ASR-AUTO-APPLYING-FILTERING.md" />
-    <None Include="Docs\ASR-SPECIAL-FUNCTIONS.md" />
-    <None Include="Docs\LR-AUTO-APPLYING-FILTERING.md" />
-    <None Include="Docs\LR-EXPRESSIONS.md" />
-    <None Include="Docs\OnSelectedFilesChanged Event.md" />
-    <None Include="Docs\VIRTUAL-TAG-FUNCTIONS.md" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="README.md" />
-    <None Include="Sources\ASR-icons-mod.cdr" />
-    <None Include="Sources\ASR-icons.cdr" />
-    <None Include="Sources\separator.cpt" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Additional-Tagging-Tools\AdvancedSearchAndReplace.resx">
@@ -443,115 +433,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Docs\OnSelectedFilesChanged Event.txt" />
     <None Include="Properties\Resources\warning-12b.png" />
     <None Include="Properties\Resources\gear-15.png" />
     <None Include="Properties\Resources\gear-15-flat.png" />
     <None Include="Properties\Resources\clear-button-15-flat.png" />
-    <Content Include="Sources\Ready Icons 16x16px\auto-applied-presets.png" />
-    <Content Include="Sources\Ready Icons 16x16px\check-mark.png" />
-    <Content Include="Sources\Ready Icons 16x16px\clear-button-15.png" />
-    <Content Include="Sources\Ready Icons 16x16px\customized-presets.png" />
-    <Content Include="Sources\Ready Icons 16x16px\function-id-presets.png" />
-    <Content Include="Sources\Ready Icons 16x16px\hotkey-presets.png" />
-    <Content Include="Sources\Ready Icons 16x16px\MissingArtwork.png" />
-    <Content Include="Sources\Ready Icons 16x16px\playlist-presets.png" />
-    <Content Include="Sources\Ready Icons 16x16px\predefined-presets.png" />
-    <Content Include="Sources\Ready Icons 16x16px\search.png" />
-    <Content Include="Sources\Ready Icons 16x16px\set-button-15.png" />
-    <Content Include="Sources\Ready Icons 16x16px\transparent-24x24 !.png" />
-    <Content Include="Sources\Ready Icons 16x16px\uncheck-all-preset-filters.png" />
-    <Content Include="Sources\Ready Icons 16x16px\uncheck-mark.png" />
-    <Content Include="Sources\Ready Icons 16x16px\user-presets.png" />
-    <Content Include="Sources\Ready Icons 16x16px\warning-15-flat.png" />
-    <Content Include="Sources\Ready Icons 16x16px\warning-15.png" />
-    <Content Include="Sources\Ready Icons 16x16px\window.png" />
-    <Content Include="Sources\Ready Icons 24x24px\auto-applied-presets.png" />
-    <Content Include="Sources\Ready Icons 24x24px\check-mark.png" />
-    <Content Include="Sources\Ready Icons 24x24px\clear-button-15.png" />
-    <Content Include="Sources\Ready Icons 24x24px\customized-presets.png" />
-    <Content Include="Sources\Ready Icons 24x24px\function-id-presets.png" />
-    <Content Include="Sources\Ready Icons 24x24px\hotkey-presets.png" />
-    <Content Include="Sources\Ready Icons 24x24px\MissingArtwork.png" />
-    <Content Include="Sources\Ready Icons 24x24px\playlist-presets.png" />
-    <Content Include="Sources\Ready Icons 24x24px\predefined-presets.png" />
-    <Content Include="Sources\Ready Icons 24x24px\search.png" />
-    <Content Include="Sources\Ready Icons 24x24px\set-button-15.png" />
-    <Content Include="Sources\Ready Icons 24x24px\transparent-24x24 !.png" />
-    <Content Include="Sources\Ready Icons 24x24px\uncheck-all-preset-filters.png" />
-    <Content Include="Sources\Ready Icons 24x24px\uncheck-mark.png" />
-    <Content Include="Sources\Ready Icons 24x24px\user-presets.png" />
-    <Content Include="Sources\Ready Icons 24x24px\warning-15-flat.png" />
-    <Content Include="Sources\Ready Icons 24x24px\warning-15.png" />
-    <Content Include="Sources\Ready Icons 24x24px\window.png" />
-    <Content Include="Sources\Ready Icons 32x32px\auto-applied-presets.png" />
-    <Content Include="Sources\Ready Icons 32x32px\check-mark.png" />
-    <Content Include="Sources\Ready Icons 32x32px\clear-button-15.png" />
-    <Content Include="Sources\Ready Icons 32x32px\customized-presets.png" />
-    <Content Include="Sources\Ready Icons 32x32px\function-id-presets.png" />
-    <Content Include="Sources\Ready Icons 32x32px\hotkey-presets.png" />
-    <Content Include="Sources\Ready Icons 32x32px\MissingArtwork.png" />
-    <Content Include="Sources\Ready Icons 32x32px\playlist-presets.png" />
-    <Content Include="Sources\Ready Icons 32x32px\predefined-presets.png" />
-    <Content Include="Sources\Ready Icons 32x32px\search.png" />
-    <Content Include="Sources\Ready Icons 32x32px\set-button-15.png" />
-    <Content Include="Sources\Ready Icons 32x32px\transparent-32x32 !.png" />
-    <Content Include="Sources\Ready Icons 32x32px\uncheck-all-preset-filters.png" />
-    <Content Include="Sources\Ready Icons 32x32px\uncheck-mark.png" />
-    <Content Include="Sources\Ready Icons 32x32px\user-presets.png" />
-    <Content Include="Sources\Ready Icons 32x32px\warning-15-flat.png" />
-    <Content Include="Sources\Ready Icons 32x32px\warning-15.png" />
-    <Content Include="Sources\Ready Icons 32x32px\window.png" />
-    <Content Include="Sources\Ready Icons 40x40px !\auto-applied-presets.png" />
-    <Content Include="Sources\Ready Icons 40x40px !\check-mark.png" />
-    <Content Include="Sources\Ready Icons 40x40px !\clear-button-15.png" />
-    <Content Include="Sources\Ready Icons 40x40px !\customized-presets.png" />
-    <Content Include="Sources\Ready Icons 40x40px !\function-id-presets.png" />
-    <Content Include="Sources\Ready Icons 40x40px !\hotkey-presets.png" />
-    <Content Include="Sources\Ready Icons 40x40px !\MissingArtwork.png" />
-    <Content Include="Sources\Ready Icons 40x40px !\playlist-presets.png" />
-    <Content Include="Sources\Ready Icons 40x40px !\predefined-presets.png" />
-    <Content Include="Sources\Ready Icons 40x40px !\search.png" />
-    <Content Include="Sources\Ready Icons 40x40px !\separator.png" />
-    <Content Include="Sources\Ready Icons 40x40px !\set-button-15.png" />
-    <Content Include="Sources\Ready Icons 40x40px !\transparent-15.png" />
-    <Content Include="Sources\Ready Icons 40x40px !\uncheck-all-preset-filters.png" />
-    <Content Include="Sources\Ready Icons 40x40px !\uncheck-mark.png" />
-    <Content Include="Sources\Ready Icons 40x40px !\user-presets.png" />
-    <Content Include="Sources\Ready Icons 40x40px !\variants\customized-presets - middle !.png" />
-    <Content Include="Sources\Ready Icons 40x40px !\variants\customized-presets - up.png" />
-    <Content Include="Sources\Ready Icons 40x40px !\variants\customized-presets-down.png" />
-    <Content Include="Sources\Ready Icons 40x40px !\variants\predefined-presets - down-down.png" />
-    <Content Include="Sources\Ready Icons 40x40px !\variants\predefined-presets - down.png" />
-    <Content Include="Sources\Ready Icons 40x40px !\variants\predefined-presets - middle !.png" />
-    <Content Include="Sources\Ready Icons 40x40px !\variants\predefined-presets - up.png" />
-    <Content Include="Sources\Ready Icons 40x40px !\warning-15-flat.png" />
-    <Content Include="Sources\Ready Icons 40x40px !\warning-15.png" />
-    <Content Include="Sources\Ready Icons 40x40px !\window.png" />
-    <Content Include="Sources\Ready Icons 90x90px\auto-applied-presets.png" />
-    <Content Include="Sources\Ready Icons 90x90px\check-mark.png" />
-    <Content Include="Sources\Ready Icons 90x90px\clear-button-15.png" />
-    <Content Include="Sources\Ready Icons 90x90px\customized-presets.png" />
-    <Content Include="Sources\Ready Icons 90x90px\function-id-presets.png" />
-    <Content Include="Sources\Ready Icons 90x90px\hotkey-presets.png" />
-    <Content Include="Sources\Ready Icons 90x90px\MissingArtwork.png" />
-    <Content Include="Sources\Ready Icons 90x90px\playlist-presets.png" />
-    <Content Include="Sources\Ready Icons 90x90px\predefined-presets.png" />
-    <Content Include="Sources\Ready Icons 90x90px\search.png" />
-    <Content Include="Sources\Ready Icons 90x90px\set-button-15.png" />
-    <Content Include="Sources\Ready Icons 90x90px\transparent-15.png" />
-    <Content Include="Sources\Ready Icons 90x90px\uncheck-all-preset-filters.png" />
-    <Content Include="Sources\Ready Icons 90x90px\uncheck-mark.png" />
-    <Content Include="Sources\Ready Icons 90x90px\user-presets.png" />
-    <Content Include="Sources\Ready Icons 90x90px\warning-15-flat.png" />
-    <Content Include="Sources\Ready Icons 90x90px\warning-15.png" />
-    <Content Include="Sources\Ready Icons 90x90px\window.png" />
-    <Content Include="Sources\unsaved-changes-14.png" />
-    <Content Include="Sources\warning-12b.png" />
-    <Content Include="Sources\warning-15-flat.png" />
-    <Content Include="Sources\warning-15.png" />
-    <Content Include="Sources\warning-48.png" />
-    <Content Include="Sources\warning.ico" />
     <None Include="Properties\Resources\transparent-15.png" />
     <None Include="Properties\Resources\set-button-15.png" />
     <None Include="Properties\Resources\clear-button-15.png" />

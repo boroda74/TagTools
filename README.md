@@ -103,10 +103,10 @@ See two predefined presets "LIBRARY TOTALS" and "LIBRARY AVERAGES" of "Library R
 
 *LR virtual tag functions may be even more useful if they are used in grouping header in "Albums and Tracks" view.*
 
-Make sure that you haven't *accidentally* checked some "Library Reports" presets for auto-applying. You will see warning message at the top of "Library Reports" window if any presets are marked as auto-applied:
+Make sure that you haven't *accidentally* checked some "Library Reports" presets for auto-execution. You will see warning message at the top of "Library Reports" window if any presets are marked as auto-applied:
 <br/>
 
-[Auto-applied preset view example][2]
+[Auto-executed preset view example][2]
 <br/>
 
 **Auto Rate**
@@ -134,7 +134,7 @@ Command to re-encode all tags of selected tracks at ones. Cuesheets are supporte
 
 - "Advanced Search and Replace" works only with regular expressions.
 - "Advanced Search and Replace" has savable/customizable presets.
-- You can choose, which "Advanced Search and Replace" presets to automatically apply if any tag is changed and/or if new tracks are added to library/inbox.
+- You can choose, which "Advanced Search and Replace" presets to automatically execute if any tag is changed and/or if new tracks are added to library/inbox.
 - "Advanced Search and Replace" can search in one tag and make replacement in another tag.
 - Single "Advanced Search and Replace" preset can make up to 5 subsequent replacements.
 
@@ -153,16 +153,16 @@ To use this function go to main ASR window, select preset and define preset id (
 
 - All $ASR virtual tag functions are calculated, updated and displayed dynamically.
 
-Make sure that you haven't *accidentally* checked some "Advanced Search & Replace" presets for auto-applying. You will see warning message at the top of "Advanced Search & Replace" window if any presets are marked as auto-applied:
+Make sure that you haven't *accidentally* checked some "Advanced Search & Replace" presets for auto-execution. You will see warning message at the top of "Advanced Search & Replace" window if any presets are marked as auto-executed:
 <br/>
 
-[Auto-applied preset view example][3]
+[Auto-executed preset view example][3]
 <br/>
 
 **Multiple Search & Replace**
 <br/>
 
-Multi-step search and replace. You can make unlimited number of replacements in the same source tag and write result to a given destination tag. MSR presets can be saved as special ASR presets and can be ticked in ASR for auto-applying if any tags are changed or if new tracks are added to the library. 
+Multi-step search and replace. You can make unlimited number of replacements in the same source tag and write result to a given destination tag. MSR presets can be saved as special ASR presets and can be ticked in ASR for auto-execution if any tags are changed or if new tracks are added to the library. 
 <br/>
 
 **Calculate Average Album Ratings**
@@ -359,8 +359,8 @@ Do all you want with plugin binary and source code at your own risk.
 [PVS-Studio](https://pvs-studio.ru/ru/pvs-studio/?utm_source=website&utm_medium=github&utm_campaign=open_source) - static analyzer for C, C++, C#, and Java code.
 
   [1]: https://drive.google.com/drive/folders/0B-D1MoIY406HMzlJVWprYXF1Q0k?usp=sharing
-  [2]: https://github.com/boroda74/TagTools/blob/master/Docs/LR-AUTO-APPLYING-FILTERING.md
-  [3]: https://github.com/boroda74/TagTools/blob/master/Docs/ASR-AUTO-APPLYING-FILTERING.md
+  [2]: https://github.com/boroda74/TagTools/blob/master/Docs/LR-AUTO-EXECUTION-FILTERING.md
+  [3]: https://github.com/boroda74/TagTools/blob/master/Docs/ASR-AUTO-EXECUTION-FILTERING.md
   [4]: https://www.mediafire.com/file/h2t08o9562efboi/mb_TagTools_latest.zip/file
   [5]: https://i.imgur.com/C1gPwaK.png
   [6]: https://github.com/boroda74/TagTools/blob/master/Docs/LR-EXPRESSIONS.md
