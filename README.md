@@ -228,7 +228,7 @@ This plugin introduces several new virtual tag functions (they also can be used 
 
 *Note:*
 
-Use these functions like native MusicBee functions (i.e. without any initial setup required by $ALR() and $ASR() functions). 
+Use these functions like native MusicBee functions (i.e. without any initial setup required by $LR() and $ASR() functions). 
 Everywhere you can use either literals or MusicBee tags of appropriate types as function parameters, e.g. $NumberOfDays(&lt;Year&gt;,&lt;Original Year&gt;) or $SubDateTime(&lt;Date Added&gt;,01/01/2000). 
 
 <pre>
@@ -263,7 +263,7 @@ $TitleCase(string)
 $SentenceCase(string)
 
 $Sqrt(number): square root. May be useful for gathering some library 
-    statistics (in conjunction with ALR functions)
+    statistics (in conjunction with LR functions)
 
 $eq(number1,number2): compares 2 integer or fractional numbers, determines if 
     number1 is **eq**ual to number2, e.g. $eq(1.0,1) returns "T"
