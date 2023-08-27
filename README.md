@@ -1,4 +1,4 @@
-**ADDITIONAL TAGGING & REPORTING TOOLS PLUGIN**
+# ADDITIONAL TAGGING & REPORTING TOOLS PLUGIN
 <br/>
 
 *Note:*
@@ -103,7 +103,7 @@ See two predefined presets "LIBRARY TOTALS" and "LIBRARY AVERAGES" of "Library R
 
 *LR virtual tag functions may be even more useful if they are used in grouping header in "Albums and Tracks" view.*
 
-Make sure that you haven't *accidentally* checked some "Library Reports" presets for auto-execution. You will see warning message at the top of "Library Reports" window if any presets are marked as auto-applied:
+Make sure that you haven't *accidentally* checked some "Library Reports" presets for auto-execution. You will see warning message at the top of "Library Reports" window if any presets are marked as auto-executed:
 <br/>
 
 [Auto-executed preset view example][2]
