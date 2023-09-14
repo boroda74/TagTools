@@ -2074,11 +2074,11 @@ namespace MusicBeePlugin
             return result;
         }
 
-        public static void RefreshPanels(bool immediateRefresh = false, bool quickRefresh = false)
+        public static void RefreshPanels(bool immediateRefresh = false, bool quickRefresh = false, bool forceRefresh = false)
         {
             if (immediateRefresh)
             {
-                if (UiRefreshingIsNeeded)
+                if (UiRefreshingIsNeeded || forceRefresh)
                 {
                     UiRefreshingIsNeeded = false;
                     lock (LastUI_RefreshLocker)
@@ -5072,7 +5072,7 @@ namespace MusicBeePlugin
 
 
                     //Let's refresh UI
-                    RefreshPanels(true, true);
+                    RefreshPanels(true, true, true);
 
                     break;
                 case NotificationType.TrackChanged:
