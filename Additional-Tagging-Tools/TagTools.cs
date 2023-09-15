@@ -5594,6 +5594,20 @@ namespace MusicBeePlugin
             return ((char)charcode).ToString();
         }
 
+        public string CustomFunc_CharSequence(string code, string timesString)
+        {
+            ushort charcode = ushort.Parse(code, System.Globalization.NumberStyles.HexNumber);
+            string character = ((char)charcode).ToString();
+
+            string sequence = "";
+
+            int times = int.Parse(timesString);
+            for (int i = 0; i < times; i++)
+                sequence += character;
+
+            return sequence;
+        }
+
         public string CustomFunc_TagContainsAnyString(string url, string tagName, string text)
         {
             MetaDataType tagId = GetTagId(tagName);
