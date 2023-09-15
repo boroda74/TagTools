@@ -1224,7 +1224,22 @@ namespace MusicBeePlugin
             protected override string calculate(string currentFile, string parameter0, string parameter1 = null)
             {
                 ushort charcode = ushort.Parse(parameter0, System.Globalization.NumberStyles.HexNumber);
-                return ((char)charcode).ToString();
+                string character = ((char)charcode).ToString();
+
+                if (parameter1 == null)
+                {
+                    return character;
+                }
+                else
+                {
+                    string sequence = "";
+
+                    int times = int.Parse(parameter1);
+                    for (int i = 0; i < times; i++)
+                        sequence += character;
+                    
+                    return sequence;
+                }
             }
         }
 
