@@ -180,8 +180,8 @@ namespace MusicBeePlugin
             //    clipboardText = "\u0000";
 
 
-            System.Windows.Clipboard.SetText(clipboardText);
-            //NativeWindowsClipboard.SetText(clipboardText);//***
+            //System.Windows.Clipboard.SetText(clipboardText);//***
+            NativeWindowsClipboard.SetText(clipboardText);
 
             return true;
         }
