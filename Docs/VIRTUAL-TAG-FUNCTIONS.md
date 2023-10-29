@@ -74,6 +74,9 @@ $DateCreated(&lt;URL&gt;): returns creation date/time of music file (not last
 $Char(hexadecimal code): returns Unicode character with given hexadecimal 
     code, e.g. $Char(a7) returns "§" (U+00A7)
 
+$CharN(hexadecimal code,decimal number of times): returns Unicode character with given hexadecimal 
+    code repeated the given number of times, e.g. $CharN(a7,3) returns "§§§" (U+00A7 repeated 3 times)
+
 $TagContainsAnyString(&lt;URL&gt;,tag_name,string1|string2|etc.): returns "T" if tag 
     contains any of the strings separated by |, otherwise returns "F". 
     tag_name must be written without angle brackets, 
