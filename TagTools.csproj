@@ -64,7 +64,7 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
-    <OutputPath>D:\Архив\.Портативные программы\MusicBee\Plugins\</OutputPath>
+    <OutputPath>..\..\..\Архив\Плейеры\.MusicBee Portable\Plugins\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DebugType>full</DebugType>
@@ -74,7 +74,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <OutputPath>D:\Архив\.Портативные программы\MusicBee\Plugins\</OutputPath>
+    <OutputPath>..\..\..\Архив\Плейеры\.MusicBee Portable\Plugins\</OutputPath>
     <DefineConstants>CODE_ANALYSIS;TRACE</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Optimize>true</Optimize>
