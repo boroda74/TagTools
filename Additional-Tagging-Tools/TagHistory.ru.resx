@@ -61,7 +61,7 @@
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="T">
+    <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
@@ -133,7 +133,7 @@
   <data name="Library.HeaderText" xml:space="preserve">
     <value>Библиотека</value>
   </data>
-  <data name="dataGridViewCellStyle2.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="dataGridViewCellStyle4.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         Qk32AgAAAAAAADYAAAAoAAAADgAAABAAAAABABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEgoTGw8bGw8bGw8bGw8bGw8bGw8bG
@@ -216,12 +216,6 @@
   <data name="selectTagsButton.ToolTip" xml:space="preserve">
     <value>Выбрать отображаемые теги</value>
   </data>
-  <data name="rememberColumnasDefaulltWidthCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>445, 17</value>
-  </data>
-  <data name="rememberColumnasDefaulltWidthCheckBox.Text" xml:space="preserve">
-    <value>Установить измененную ширину колонки в качестве новой ширины по умолчанию</value>
-  </data>
   <data name="rememberColumnasDefaulltWidthCheckBox.ToolTip" xml:space="preserve">
     <value>Включите этот флажок и измените ширину любой колонки, чтобы установить эту новую ширину в качестве новой ширины по умолчанию</value>
   </data>
@@ -234,14 +228,20 @@
   <data name="undoButton.ToolTip" xml:space="preserve">
     <value>Восстановить колонку библиотеки</value>
   </data>
-  <data name="AutoSelectTagsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>231, 393</value>
-  </data>
   <data name="AutoSelectTagsCheckBox.ToolTip" xml:space="preserve">
     <value>Автоматически выбирать показываемые теги и скрывать архивы без отличий в тегах от текущих тегов</value>
   </data>
+  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>426, 13</value>
+  </data>
+  <data name="label5.Text" xml:space="preserve">
+    <value>Установить измененную ширину колонки в качестве новой ширины по умолчанию</value>
+  </data>
+  <data name="label5.ToolTip" xml:space="preserve">
+    <value>Включите этот флажок и измените ширину любой колонки, чтобы установить эту новую ширину в качестве новой ширины по умолчанию</value>
+  </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 13</value>
+    <value>87, 13</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
     <value>Теги для трека:</value>
@@ -253,7 +253,7 @@
     <value>905, 21</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1052, 420</value>
+    <value>1052, 421</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>1060, 450</value>

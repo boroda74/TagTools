@@ -39,6 +39,7 @@
             this.destinationTagList = new System.Windows.Forms.ComboBox();
             this.smartOperationCheckBox = new System.Windows.Forms.CheckBox();
             this.dirtyErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.label4 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).BeginInit();
             this.SuspendLayout();
@@ -133,12 +134,23 @@
             this.dirtyErrorProvider.ContainerControl = this;
             resources.ApplyResources(this.dirtyErrorProvider, "dirtyErrorProvider");
             // 
+            // label4
+            // 
+            resources.ApplyResources(this.label4, "label4");
+            this.dirtyErrorProvider.SetError(this.label4, resources.GetString("label4.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.label4, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("label4.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.label4, ((int)(resources.GetObject("label4.IconPadding"))));
+            this.label4.Name = "label4";
+            this.toolTip1.SetToolTip(this.label4, resources.GetString("label4.ToolTip"));
+            this.label4.Click += new System.EventHandler(this.label4_Click);
+            // 
             // SwapTagsCommand
             // 
             this.AcceptButton = this.buttonOK;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.smartOperationCheckBox);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
@@ -169,5 +181,6 @@
         private System.Windows.Forms.CheckBox smartOperationCheckBox;
         private System.Windows.Forms.ErrorProvider dirtyErrorProvider;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Label label4;
     }
 }

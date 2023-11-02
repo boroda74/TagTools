@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TagHistoryCommand));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.previewTable = new System.Windows.Forms.DataGridView();
@@ -54,6 +54,7 @@
             this.rememberColumnasDefaulltWidthCheckBox = new System.Windows.Forms.CheckBox();
             this.undoButton = new System.Windows.Forms.Button();
             this.AutoSelectTagsCheckBox = new System.Windows.Forms.CheckBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.trackListComboBox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).BeginInit();
@@ -86,14 +87,14 @@
             this.previewTable.BackgroundColor = System.Drawing.SystemColors.Window;
             this.previewTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.previewTable.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.previewTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.previewTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.previewTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Library,
             this.Column1,
@@ -125,11 +126,11 @@
             // 
             // ImageCellTemplate
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle2.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle2.NullValue")));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.ImageCellTemplate.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle4.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle4.NullValue")));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.ImageCellTemplate.DefaultCellStyle = dataGridViewCellStyle4;
             resources.ApplyResources(this.ImageCellTemplate, "ImageCellTemplate");
             this.ImageCellTemplate.Image = global::MusicBeePlugin.Properties.Resources.search;
             this.ImageCellTemplate.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
@@ -257,6 +258,13 @@
             this.AutoSelectTagsCheckBox.UseVisualStyleBackColor = true;
             this.AutoSelectTagsCheckBox.CheckedChanged += new System.EventHandler(this.AutoSelectTagsCheckBox_CheckedChanged);
             // 
+            // label5
+            // 
+            resources.ApplyResources(this.label5, "label5");
+            this.label5.Name = "label5";
+            this.toolTip1.SetToolTip(this.label5, resources.GetString("label5.ToolTip"));
+            this.label5.Click += new System.EventHandler(this.label5_Click);
+            // 
             // label4
             // 
             resources.ApplyResources(this.label4, "label4");
@@ -272,18 +280,19 @@
             this.toolTip1.SetToolTip(this.trackListComboBox, resources.GetString("trackListComboBox.ToolTip"));
             this.trackListComboBox.DropDownClosed += new System.EventHandler(this.trackListComboBox_DropDownClosed);
             // 
-            // TagHistoryPlugin
+            // TagHistoryCommand
             // 
             this.AcceptButton = this.buttonOK;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
+            this.Controls.Add(this.selectTagsButton);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.AutoSelectTagsCheckBox);
             this.Controls.Add(this.undoButton);
             this.Controls.Add(this.trackListComboBox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.rememberColumnasDefaulltWidthCheckBox);
-            this.Controls.Add(this.selectTagsButton);
             this.Controls.Add(this.restoreSelectedButton);
             this.Controls.Add(this.rereadButton);
             this.Controls.Add(this.label2);
@@ -295,7 +304,7 @@
             this.Controls.Add(this.previewTable);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
-            this.Name = "TagHistoryPlugin";
+            this.Name = "TagHistoryCommand";
             this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.Shown += new System.EventHandler(this.TagHistoryPlugin_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).EndInit();
@@ -330,5 +339,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewImageColumn ImageCellTemplate;
         private System.Windows.Forms.CheckBox AutoSelectTagsCheckBox;
+        private System.Windows.Forms.Label label5;
     }
 }

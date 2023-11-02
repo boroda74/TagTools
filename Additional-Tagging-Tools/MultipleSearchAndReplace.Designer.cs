@@ -496,7 +496,6 @@
             // autoApplyCheckBox
             // 
             resources.ApplyResources(this.autoApplyCheckBox, "autoApplyCheckBox");
-            this.autoApplyCheckBox.BackColor = System.Drawing.Color.Transparent;
             this.dirtyErrorProvider.SetError(this.autoApplyCheckBox, resources.GetString("autoApplyCheckBox.Error"));
             this.dirtyErrorProvider.SetIconAlignment(this.autoApplyCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("autoApplyCheckBox.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.autoApplyCheckBox, ((int)(resources.GetObject("autoApplyCheckBox.IconPadding"))));
@@ -507,7 +506,6 @@
             // autoApplyPictureBox
             // 
             resources.ApplyResources(this.autoApplyPictureBox, "autoApplyPictureBox");
-            this.autoApplyPictureBox.BackColor = System.Drawing.Color.Transparent;
             this.dirtyErrorProvider.SetError(this.autoApplyPictureBox, resources.GetString("autoApplyPictureBox.Error"));
             this.dirtyErrorProvider.SetIconAlignment(this.autoApplyPictureBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("autoApplyPictureBox.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.autoApplyPictureBox, ((int)(resources.GetObject("autoApplyPictureBox.IconPadding"))));

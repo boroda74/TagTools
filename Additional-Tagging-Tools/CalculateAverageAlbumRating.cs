@@ -273,5 +273,25 @@ namespace MusicBeePlugin
         {
             saveSettings();
         }
+
+        private void calculateAlbumRatingAtStartUpCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            calculateAlbumRatingAtStartUpCheckBox.Checked = !calculateAlbumRatingAtStartUpCheckBox.Checked;
+        }
+
+        private void considerUnratedCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            considerUnratedCheckBox.Checked = !considerUnratedCheckBox.Checked;
+        }
+
+        private void calculateAlbumRatingAtTagsChangedCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            calculateAlbumRatingAtTagsChangedCheckBox.Checked = !calculateAlbumRatingAtTagsChangedCheckBox.Checked;
+        }
+
+        private void notifyWhenCalculationCompletedCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            notifyWhenCalculationCompletedCheckBox.Checked = !notifyWhenCalculationCompletedCheckBox.Checked;
+        }
     }
 }

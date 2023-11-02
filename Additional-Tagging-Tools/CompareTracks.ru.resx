@@ -61,7 +61,7 @@
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="T">
+    <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
@@ -119,18 +119,18 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>854, 388</value>
+    <value>854, 394</value>
   </data>
   <data name="buttonOK.Text" xml:space="preserve">
     <value>Применить</value>
   </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>966, 388</value>
+    <value>966, 394</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Закрыть</value>
   </data>
-  <data name="dataGridViewCellStyle2.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="dataGridViewCellStyle6.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         Qk32AgAAAAAAADYAAAAoAAAADgAAABAAAAABABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEgoTGw8bGw8bGw8bGw8bGw8bGw8bG
@@ -148,10 +148,10 @@
 </value>
   </data>
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1064, 370</value>
+    <value>1064, 377</value>
   </data>
   <data name="selectTagsButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>28, 388</value>
+    <value>28, 394</value>
   </data>
   <data name="selectTagsButton.Text" xml:space="preserve">
     <value>Выбрать теги...</value>
@@ -160,25 +160,31 @@
     <value>Выбрать отображаемые теги</value>
   </data>
   <data name="rememberColumnasDefaulltWidthCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>140, 392</value>
-  </data>
-  <data name="rememberColumnasDefaulltWidthCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>445, 17</value>
-  </data>
-  <data name="rememberColumnasDefaulltWidthCheckBox.Text" xml:space="preserve">
-    <value>Установить измененную ширину колонки в качестве новой ширины по умолчанию</value>
+    <value>140, 398</value>
   </data>
   <data name="rememberColumnasDefaulltWidthCheckBox.ToolTip" xml:space="preserve">
     <value>Включите этот флажок и измените ширину любой колонки, чтобы установить эту новую ширину в качестве новой ширины по умолчанию</value>
   </data>
   <data name="AutoSelectTagsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 393</value>
+    <value>7, 399</value>
   </data>
   <data name="AutoSelectTagsCheckBox.ToolTip" xml:space="preserve">
     <value>Автоматически выбирать показываемые теги и скрывать треки без отличий</value>
   </data>
+  <data name="rememberColumnasDefaulltWidthCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>160, 400</value>
+  </data>
+  <data name="rememberColumnasDefaulltWidthCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>426, 13</value>
+  </data>
+  <data name="rememberColumnasDefaulltWidthCheckBoxLabel.Text" xml:space="preserve">
+    <value>Установить измененную ширину колонки в качестве новой ширины по умолчанию</value>
+  </data>
+  <data name="rememberColumnasDefaulltWidthCheckBoxLabel.ToolTip" xml:space="preserve">
+    <value>Включите этот флажок и измените ширину любой колонки, чтобы установить эту новую ширину в качестве новой ширины по умолчанию</value>
+  </data>
   <data name="buttonCopy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>597, 388</value>
+    <value>597, 394</value>
   </data>
   <data name="buttonCopy.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 23</value>
@@ -187,7 +193,7 @@
     <value>Копировать</value>
   </data>
   <data name="buttonPaste.Location" type="System.Drawing.Point, System.Drawing">
-    <value>679, 388</value>
+    <value>679, 394</value>
   </data>
   <data name="buttonPaste.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 23</value>
@@ -196,7 +202,7 @@
     <value>Вставить</value>
   </data>
   <data name="buttonClear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>761, 388</value>
+    <value>761, 394</value>
   </data>
   <data name="buttonClear.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 23</value>

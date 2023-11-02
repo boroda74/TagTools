@@ -61,7 +61,7 @@
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="T">
+    <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
@@ -154,12 +154,6 @@
   <data name="autobackupPrefixTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>161, 20</value>
   </data>
-  <data name="autobackupCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 17</value>
-  </data>
-  <data name="autobackupCheckBox.Text" xml:space="preserve">
-    <value>Автоархивация каждые:</value>
-  </data>
   <data name="autobackupCheckBox.ToolTip" xml:space="preserve">
     <value>Автоархивирование будет пропущено, если содержание текущей библиотеки и какие-либо теги 
 не изменилсь с момента последнего ручного или автоматического архивирования. </value>
@@ -176,23 +170,11 @@
   <data name="label3.Text" xml:space="preserve">
     <value>минут.</value>
   </data>
-  <data name="autodeleteOldCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>230, 17</value>
-  </data>
-  <data name="autodeleteOldCheckBox.Text" xml:space="preserve">
-    <value>Автоматически удалять архивы старше:</value>
-  </data>
   <data name="autodeleteOldCheckBox.ToolTip" xml:space="preserve">
     <value>Только автоматические архивы текущей библиотеки будут удаляться</value>
   </data>
   <data name="numberOfDaysNumericUpDown.Location" type="System.Drawing.Point, System.Drawing">
     <value>251, 63</value>
-  </data>
-  <data name="autodeleteManyCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>438, 17</value>
-  </data>
-  <data name="autodeleteManyCheckBox.Text" xml:space="preserve">
-    <value>Автоматически удалять старые архивы, если общее архивов число больше, чем:</value>
   </data>
   <data name="autodeleteManyCheckBox.ToolTip" xml:space="preserve">
     <value>Только автоматические архивы текущей библиотеки будут удаляться</value>
@@ -224,29 +206,66 @@
   <data name="buttonOK.Size" type="System.Drawing.Size, System.Drawing">
     <value>85, 23</value>
   </data>
-  <data name="backupArtworksCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>299, 17</value>
-  </data>
-  <data name="backupArtworksCheckBox.Text" xml:space="preserve">
-    <value>Архивировать обложки альбомов (не рекомендуется)</value>
-  </data>
   <data name="backupArtworksCheckBox.ToolTip" xml:space="preserve">
     <value>ВНИМАНИЕ! Эта опция затрагивает, как ручное, так и автоматическое архивирование.</value>
-  </data>
-  <data name="dontTryToGuessLibraryNameCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>277, 17</value>
-  </data>
-  <data name="dontTryToGuessLibraryNameCheckBox.Text" xml:space="preserve">
-    <value>Не пытаться предполагать название библиотеки</value>
   </data>
   <data name="dontTryToGuessLibraryNameCheckBox.ToolTip" xml:space="preserve">
     <value>ВНИМАНИЕ! Эта опция затрагивает, как ручное, так и автоматическое архивирование.
 Иногда предположение названия библиотеки работает неверно.</value>
   </data>
-  <data name="DontSkipAutobackupsIfPlayCountsChangedCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>548, 17</value>
+  <data name="autobackupCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>130, 13</value>
   </data>
-  <data name="DontSkipAutobackupsIfPlayCountsChangedCheckBox.Text" xml:space="preserve">
+  <data name="autobackupCheckBoxLabel.Text" xml:space="preserve">
+    <value>Автоархивация каждые:</value>
+  </data>
+  <data name="autobackupCheckBoxLabel.ToolTip" xml:space="preserve">
+    <value>Автоархивирование будет пропущено, если содержание текущей библиотеки и какие-либо теги 
+не изменилсь с момента последнего ручного или автоматического архивирования. 
+</value>
+  </data>
+  <data name="autodeleteOldCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>211, 13</value>
+  </data>
+  <data name="autodeleteOldCheckBoxLabel.Text" xml:space="preserve">
+    <value>Автоматически удалять архивы старше:</value>
+  </data>
+  <data name="autodeleteOldCheckBoxLabel.ToolTip" xml:space="preserve">
+    <value>Только автоматические архивы текущей библиотеки будут удаляться</value>
+  </data>
+  <data name="autodeleteManyCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>419, 13</value>
+  </data>
+  <data name="autodeleteManyCheckBoxLabel.Text" xml:space="preserve">
+    <value>Автоматически удалять старые архивы, если общее архивов число больше, чем:</value>
+  </data>
+  <data name="autodeleteManyCheckBoxLabel.ToolTip" xml:space="preserve">
+    <value>Только автоматические архивы текущей библиотеки будут удаляться</value>
+  </data>
+  <data name="dontTryToGuessLibraryNameCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>258, 13</value>
+  </data>
+  <data name="dontTryToGuessLibraryNameCheckBoxLabel.Text" xml:space="preserve">
+    <value>Не пытаться предполагать название библиотеки</value>
+  </data>
+  <data name="dontTryToGuessLibraryNameCheckBoxLabel.ToolTip" xml:space="preserve">
+    <value>ВНИМАНИЕ! Эта опция затрагивает, как ручное, так и автоматическое архивирование.
+Иногда предположение названия библиотеки работает неверно.
+</value>
+  </data>
+  <data name="backupArtworksCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>280, 13</value>
+  </data>
+  <data name="backupArtworksCheckBoxLabel.Text" xml:space="preserve">
+    <value>Архивировать обложки альбомов (не рекомендуется)</value>
+  </data>
+  <data name="backupArtworksCheckBoxLabel.ToolTip" xml:space="preserve">
+    <value>ВНИМАНИЕ! Эта опция затрагивает, как ручное, так и автоматическое архивирование.</value>
+  </data>
+  <data name="DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabelLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>529, 13</value>
+  </data>
+  <data name="DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabelLabel.Text" xml:space="preserve">
     <value>Не пропускать автоархивирование, даже если изменились только счетчики проигрываний/пропусков</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">

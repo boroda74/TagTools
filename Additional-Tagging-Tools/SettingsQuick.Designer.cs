@@ -34,6 +34,10 @@
             this.buttonOK = new System.Windows.Forms.Button();
             this.versionLabel = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
             this.playTickedAsrPresetSoundCheckBox = new System.Windows.Forms.CheckBox();
             this.playStoppedSoundCheckBox = new System.Windows.Forms.CheckBox();
             this.playStartedSoundCheckBox = new System.Windows.Forms.CheckBox();
@@ -44,12 +48,20 @@
             this.showHiddenCommandWindowsRadioButton = new System.Windows.Forms.RadioButton();
             this.highlightChangedTagsCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
             this.minimizePluginWindowsCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.preservedTagValuesLegendTextBox = new System.Windows.Forms.TextBox();
             this.preservedTagsLegendTextBox = new System.Windows.Forms.TextBox();
             this.changedLegendTextBox = new System.Windows.Forms.TextBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
             this.includePreservedTagValuesCheckBox = new System.Windows.Forms.CheckBox();
             this.includePreservedTagsCheckBox = new System.Windows.Forms.CheckBox();
             this.includeNotChangedTagsCheckBox = new System.Windows.Forms.CheckBox();
@@ -87,6 +99,10 @@
             // groupBox3
             // 
             resources.ApplyResources(this.groupBox3, "groupBox3");
+            this.groupBox3.Controls.Add(this.label26);
+            this.groupBox3.Controls.Add(this.label25);
+            this.groupBox3.Controls.Add(this.label24);
+            this.groupBox3.Controls.Add(this.label23);
             this.groupBox3.Controls.Add(this.playTickedAsrPresetSoundCheckBox);
             this.groupBox3.Controls.Add(this.playStoppedSoundCheckBox);
             this.groupBox3.Controls.Add(this.playStartedSoundCheckBox);
@@ -94,6 +110,34 @@
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
             this.toolTip1.SetToolTip(this.groupBox3, resources.GetString("groupBox3.ToolTip"));
+            // 
+            // label26
+            // 
+            resources.ApplyResources(this.label26, "label26");
+            this.label26.Name = "label26";
+            this.toolTip1.SetToolTip(this.label26, resources.GetString("label26.ToolTip"));
+            this.label26.Click += new System.EventHandler(this.label26_Click);
+            // 
+            // label25
+            // 
+            resources.ApplyResources(this.label25, "label25");
+            this.label25.Name = "label25";
+            this.toolTip1.SetToolTip(this.label25, resources.GetString("label25.ToolTip"));
+            this.label25.Click += new System.EventHandler(this.label25_Click);
+            // 
+            // label24
+            // 
+            resources.ApplyResources(this.label24, "label24");
+            this.label24.Name = "label24";
+            this.toolTip1.SetToolTip(this.label24, resources.GetString("label24.ToolTip"));
+            this.label24.Click += new System.EventHandler(this.label24_Click);
+            // 
+            // label23
+            // 
+            resources.ApplyResources(this.label23, "label23");
+            this.label23.Name = "label23";
+            this.toolTip1.SetToolTip(this.label23, resources.GetString("label23.ToolTip"));
+            this.label23.Click += new System.EventHandler(this.label23_Click);
             // 
             // playTickedAsrPresetSoundCheckBox
             // 
@@ -165,6 +209,11 @@
             // groupBox2
             // 
             resources.ApplyResources(this.groupBox2, "groupBox2");
+            this.groupBox2.Controls.Add(this.label22);
+            this.groupBox2.Controls.Add(this.label21);
+            this.groupBox2.Controls.Add(this.label20);
+            this.groupBox2.Controls.Add(this.label19);
+            this.groupBox2.Controls.Add(this.label18);
             this.groupBox2.Controls.Add(this.minimizePluginWindowsCheckBox);
             this.groupBox2.Controls.Add(this.groupBox6);
             this.groupBox2.Controls.Add(this.highlightChangedTagsCheckBox);
@@ -174,6 +223,42 @@
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             this.toolTip1.SetToolTip(this.groupBox2, resources.GetString("groupBox2.ToolTip"));
+            // 
+            // label22
+            // 
+            resources.ApplyResources(this.label22, "label22");
+            this.label22.Name = "label22";
+            this.toolTip1.SetToolTip(this.label22, resources.GetString("label22.ToolTip"));
+            this.label22.Click += new System.EventHandler(this.label22_Click);
+            // 
+            // label21
+            // 
+            resources.ApplyResources(this.label21, "label21");
+            this.label21.Name = "label21";
+            this.toolTip1.SetToolTip(this.label21, resources.GetString("label21.ToolTip"));
+            this.label21.Click += new System.EventHandler(this.label21_Click);
+            // 
+            // label20
+            // 
+            resources.ApplyResources(this.label20, "label20");
+            this.label20.Name = "label20";
+            this.toolTip1.SetToolTip(this.label20, resources.GetString("label20.ToolTip"));
+            this.label20.Click += new System.EventHandler(this.label20_Click);
+            // 
+            // label19
+            // 
+            resources.ApplyResources(this.label19, "label19");
+            this.label19.Name = "label19";
+            this.toolTip1.SetToolTip(this.label19, resources.GetString("label19.ToolTip"));
+            this.label19.Click += new System.EventHandler(this.label19_Click);
+            // 
+            // label18
+            // 
+            resources.ApplyResources(this.label18, "label18");
+            this.label18.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.label18.Name = "label18";
+            this.toolTip1.SetToolTip(this.label18, resources.GetString("label18.ToolTip"));
+            this.label18.Click += new System.EventHandler(this.label18_Click);
             // 
             // minimizePluginWindowsCheckBox
             // 
@@ -222,12 +307,36 @@
             // groupBox5
             // 
             resources.ApplyResources(this.groupBox5, "groupBox5");
+            this.groupBox5.Controls.Add(this.label29);
+            this.groupBox5.Controls.Add(this.label28);
+            this.groupBox5.Controls.Add(this.label27);
             this.groupBox5.Controls.Add(this.includePreservedTagValuesCheckBox);
             this.groupBox5.Controls.Add(this.includePreservedTagsCheckBox);
             this.groupBox5.Controls.Add(this.includeNotChangedTagsCheckBox);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.TabStop = false;
             this.toolTip1.SetToolTip(this.groupBox5, resources.GetString("groupBox5.ToolTip"));
+            // 
+            // label29
+            // 
+            resources.ApplyResources(this.label29, "label29");
+            this.label29.Name = "label29";
+            this.toolTip1.SetToolTip(this.label29, resources.GetString("label29.ToolTip"));
+            this.label29.Click += new System.EventHandler(this.label29_Click);
+            // 
+            // label28
+            // 
+            resources.ApplyResources(this.label28, "label28");
+            this.label28.Name = "label28";
+            this.toolTip1.SetToolTip(this.label28, resources.GetString("label28.ToolTip"));
+            this.label28.Click += new System.EventHandler(this.label28_Click);
+            // 
+            // label27
+            // 
+            resources.ApplyResources(this.label27, "label27");
+            this.label27.Name = "label27";
+            this.toolTip1.SetToolTip(this.label27, resources.GetString("label27.ToolTip"));
+            this.label27.Click += new System.EventHandler(this.label27_Click);
             // 
             // includePreservedTagValuesCheckBox
             // 
@@ -316,5 +425,17 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.CheckBox minimizePluginWindowsCheckBox;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label label27;
     }
 }

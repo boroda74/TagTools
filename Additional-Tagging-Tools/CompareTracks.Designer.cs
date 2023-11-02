@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CompareTracksCommand));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.previewTable = new System.Windows.Forms.DataGridView();
@@ -44,6 +44,7 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.rememberColumnasDefaulltWidthCheckBox = new System.Windows.Forms.CheckBox();
             this.AutoSelectTagsCheckBox = new System.Windows.Forms.CheckBox();
+            this.rememberColumnasDefaulltWidthCheckBoxLabel = new System.Windows.Forms.Label();
             this.buttonCopy = new System.Windows.Forms.Button();
             this.buttonPaste = new System.Windows.Forms.Button();
             this.buttonClear = new System.Windows.Forms.Button();
@@ -76,14 +77,14 @@
             this.previewTable.BackgroundColor = System.Drawing.SystemColors.Window;
             this.previewTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.previewTable.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.previewTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.previewTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.previewTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.ImageCellTemplate});
@@ -106,11 +107,11 @@
             // 
             // ImageCellTemplate
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle2.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle2.NullValue")));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.ImageCellTemplate.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle6.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle6.NullValue")));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.ImageCellTemplate.DefaultCellStyle = dataGridViewCellStyle6;
             resources.ApplyResources(this.ImageCellTemplate, "ImageCellTemplate");
             this.ImageCellTemplate.Image = global::MusicBeePlugin.Properties.Resources.search;
             this.ImageCellTemplate.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
@@ -150,6 +151,7 @@
             // 
             resources.ApplyResources(this.rememberColumnasDefaulltWidthCheckBox, "rememberColumnasDefaulltWidthCheckBox");
             this.rememberColumnasDefaulltWidthCheckBox.Name = "rememberColumnasDefaulltWidthCheckBox";
+            this.rememberColumnasDefaulltWidthCheckBox.Tag = "rememberColumnasDefaulltWidthCheckBoxLabel";
             this.toolTip1.SetToolTip(this.rememberColumnasDefaulltWidthCheckBox, resources.GetString("rememberColumnasDefaulltWidthCheckBox.ToolTip"));
             this.rememberColumnasDefaulltWidthCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -160,6 +162,13 @@
             this.toolTip1.SetToolTip(this.AutoSelectTagsCheckBox, resources.GetString("AutoSelectTagsCheckBox.ToolTip"));
             this.AutoSelectTagsCheckBox.UseVisualStyleBackColor = true;
             this.AutoSelectTagsCheckBox.CheckedChanged += new System.EventHandler(this.AutoSelectTagsCheckBox_CheckedChanged);
+            // 
+            // rememberColumnasDefaulltWidthCheckBoxLabel
+            // 
+            resources.ApplyResources(this.rememberColumnasDefaulltWidthCheckBoxLabel, "rememberColumnasDefaulltWidthCheckBoxLabel");
+            this.rememberColumnasDefaulltWidthCheckBoxLabel.Name = "rememberColumnasDefaulltWidthCheckBoxLabel";
+            this.toolTip1.SetToolTip(this.rememberColumnasDefaulltWidthCheckBoxLabel, resources.GetString("rememberColumnasDefaulltWidthCheckBoxLabel.ToolTip"));
+            this.rememberColumnasDefaulltWidthCheckBoxLabel.Click += new System.EventHandler(this.rememberColumnasDefaulltWidthCheckBoxLabel_Click);
             // 
             // buttonCopy
             // 
@@ -191,12 +200,13 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
+            this.Controls.Add(this.selectTagsButton);
+            this.Controls.Add(this.rememberColumnasDefaulltWidthCheckBoxLabel);
             this.Controls.Add(this.buttonClear);
             this.Controls.Add(this.buttonPaste);
             this.Controls.Add(this.buttonCopy);
             this.Controls.Add(this.AutoSelectTagsCheckBox);
             this.Controls.Add(this.rememberColumnasDefaulltWidthCheckBox);
-            this.Controls.Add(this.selectTagsButton);
             this.Controls.Add(this.previewTable);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
@@ -225,5 +235,6 @@
         private System.Windows.Forms.Button buttonCopy;
         private System.Windows.Forms.Button buttonPaste;
         private System.Windows.Forms.Button buttonClear;
+        private System.Windows.Forms.Label rememberColumnasDefaulltWidthCheckBoxLabel;
     }
 }

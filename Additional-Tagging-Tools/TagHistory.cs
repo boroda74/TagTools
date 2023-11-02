@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using static MusicBeePlugin.Plugin;
+using ExtensionMethods;
 
 namespace MusicBeePlugin
 {
@@ -657,7 +658,7 @@ namespace MusicBeePlugin
 
             if (AutoSelectTagsCheckBox.Checked)
             {
-                selectTagsButton.Enabled = false;
+                selectTagsButton.Enable(false);
 
                 int offset = 0;
                 displayedTags = new int[tagIds.Count - 1];
@@ -669,7 +670,7 @@ namespace MusicBeePlugin
             }
             else
             {
-                selectTagsButton.Enabled = true;
+                selectTagsButton.Enable(true);
 
                 displayedTags = SavedSettings.displayedTags;
             }
@@ -680,6 +681,11 @@ namespace MusicBeePlugin
 
 
             fillTable(searchFolderTextBox.Text, false, (int)numberOfBackupsNumericUpDown.Value, trackListComboBox.SelectedIndex, false);
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+            rememberColumnasDefaulltWidthCheckBox.Checked = !rememberColumnasDefaulltWidthCheckBox.Checked;
         }
     }
 }

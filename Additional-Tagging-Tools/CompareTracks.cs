@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using static MusicBeePlugin.Plugin;
+using ExtensionMethods;
 
 namespace MusicBeePlugin
 {
@@ -423,7 +424,7 @@ namespace MusicBeePlugin
 
             if (AutoSelectTagsCheckBox.Checked)
             {
-                selectTagsButton.Enabled = false;
+                selectTagsButton.Enable(false);
 
                 displayedTags = new int[tagIds.Count];
                 for (int i = 0; i < tagIds.Count; i++)
@@ -431,7 +432,7 @@ namespace MusicBeePlugin
             }
             else
             {
-                selectTagsButton.Enabled = true;
+                selectTagsButton.Enable(true);
 
                 displayedTags = SavedSettings.displayedTags;
             }
@@ -513,6 +514,11 @@ namespace MusicBeePlugin
                     }
                 }
             }
+        }
+
+        private void rememberColumnasDefaulltWidthCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            rememberColumnasDefaulltWidthCheckBox.Checked = !rememberColumnasDefaulltWidthCheckBox.Checked;
         }
     }
 }

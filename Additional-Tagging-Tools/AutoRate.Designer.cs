@@ -107,11 +107,27 @@ namespace MusicBeePlugin
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.labelTotalTracks = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.checkBox05Label = new System.Windows.Forms.Label();
+            this.checkBox1Label = new System.Windows.Forms.Label();
+            this.checkBox15Label = new System.Windows.Forms.Label();
+            this.checkBox2Label = new System.Windows.Forms.Label();
+            this.checkBox25Label = new System.Windows.Forms.Label();
+            this.checkBox3Label = new System.Windows.Forms.Label();
+            this.checkBox35Label = new System.Windows.Forms.Label();
+            this.checkBox4Label = new System.Windows.Forms.Label();
+            this.checkBox45Label = new System.Windows.Forms.Label();
+            this.checkBox5Label = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.sinceAddedCheckBox = new System.Windows.Forms.CheckBox();
+            this.sinceAddedCheckBoxLabel = new System.Windows.Forms.Label();
             this.notifyWhenAutoratingCompletedCheckBox = new System.Windows.Forms.CheckBox();
             this.playsPerDayTagList = new System.Windows.Forms.ComboBox();
             this.storePlaysPerDayCheckBox = new System.Windows.Forms.CheckBox();
+            this.storePlaysPerDayCheckBoxLabel = new System.Windows.Forms.Label();
+            this.autoRateAtStartUpCheckBoxLabel = new System.Windows.Forms.Label();
+            this.notifyWhenAutoratingCompletedCheckBoxLabel = new System.Windows.Forms.Label();
+            this.autoRateOnTrackPropertiesCheckBoxLabel = new System.Windows.Forms.Label();
+            this.holdsAtStartUpCheckBoxLabel = new System.Windows.Forms.Label();
             this.dirtyErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.baseRatingTrackBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.perCent5UpDown)).BeginInit();
@@ -163,6 +179,7 @@ namespace MusicBeePlugin
             this.autoRateAtStartUpCheckBox.Checked = true;
             this.autoRateAtStartUpCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.autoRateAtStartUpCheckBox.Name = "autoRateAtStartUpCheckBox";
+            this.autoRateAtStartUpCheckBox.Tag = "autoRateAtStartUpCheckBoxLabel";
             this.autoRateAtStartUpCheckBox.UseVisualStyleBackColor = true;
             this.autoRateAtStartUpCheckBox.CheckedChanged += new System.EventHandler(this.autoRateAtStartUp_CheckedChanged);
             // 
@@ -170,6 +187,7 @@ namespace MusicBeePlugin
             // 
             resources.ApplyResources(this.autoRateOnTrackPropertiesCheckBox, "autoRateOnTrackPropertiesCheckBox");
             this.autoRateOnTrackPropertiesCheckBox.Name = "autoRateOnTrackPropertiesCheckBox";
+            this.autoRateOnTrackPropertiesCheckBox.Tag = "autoRateOnTrackPropertiesCheckBoxLabel";
             this.autoRateOnTrackPropertiesCheckBox.UseVisualStyleBackColor = true;
             // 
             // baseRatingTrackBar
@@ -357,6 +375,7 @@ namespace MusicBeePlugin
             this.checkBox5.Checked = true;
             this.checkBox5.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox5.Name = "checkBox5";
+            this.checkBox5.Tag = "checkBox5Label";
             this.checkBox5.UseVisualStyleBackColor = true;
             this.checkBox5.CheckedChanged += new System.EventHandler(this.checkBoxFive_CheckedChanged);
             // 
@@ -366,6 +385,7 @@ namespace MusicBeePlugin
             this.checkBox45.Checked = true;
             this.checkBox45.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox45.Name = "checkBox45";
+            this.checkBox45.Tag = "checkBox45Label";
             this.checkBox45.UseVisualStyleBackColor = true;
             this.checkBox45.CheckedChanged += new System.EventHandler(this.checkBoxFourAndHalf_CheckedChanged);
             // 
@@ -375,6 +395,7 @@ namespace MusicBeePlugin
             this.checkBox4.Checked = true;
             this.checkBox4.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Tag = "checkBox4Label";
             this.checkBox4.UseVisualStyleBackColor = true;
             this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBoxFour_CheckedChanged);
             // 
@@ -384,6 +405,7 @@ namespace MusicBeePlugin
             this.checkBox35.Checked = true;
             this.checkBox35.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox35.Name = "checkBox35";
+            this.checkBox35.Tag = "checkBox35Label";
             this.checkBox35.UseVisualStyleBackColor = true;
             this.checkBox35.CheckedChanged += new System.EventHandler(this.checkBoxThreeAndHalf_CheckedChanged);
             // 
@@ -393,6 +415,7 @@ namespace MusicBeePlugin
             this.checkBox3.Checked = true;
             this.checkBox3.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Tag = "checkBox3Label";
             this.checkBox3.UseVisualStyleBackColor = true;
             this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBoxThree_CheckedChanged);
             // 
@@ -402,6 +425,7 @@ namespace MusicBeePlugin
             this.checkBox25.Checked = true;
             this.checkBox25.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox25.Name = "checkBox25";
+            this.checkBox25.Tag = "checkBox25Label";
             this.checkBox25.UseVisualStyleBackColor = true;
             this.checkBox25.CheckedChanged += new System.EventHandler(this.checkBoxTwoAndHalf_CheckedChanged);
             // 
@@ -411,6 +435,7 @@ namespace MusicBeePlugin
             this.checkBox2.Checked = true;
             this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Tag = "checkBox2Label";
             this.checkBox2.UseVisualStyleBackColor = true;
             this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBoxTwo_CheckedChanged);
             // 
@@ -420,6 +445,7 @@ namespace MusicBeePlugin
             this.checkBox15.Checked = true;
             this.checkBox15.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox15.Name = "checkBox15";
+            this.checkBox15.Tag = "checkBox15Label";
             this.checkBox15.UseVisualStyleBackColor = true;
             this.checkBox15.CheckedChanged += new System.EventHandler(this.checkBoxOneAndHalf_CheckedChanged);
             // 
@@ -429,6 +455,7 @@ namespace MusicBeePlugin
             this.checkBox1.Checked = true;
             this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Tag = "checkBox1Label";
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBoxOne_CheckedChanged);
             // 
@@ -438,6 +465,7 @@ namespace MusicBeePlugin
             this.checkBox05.Checked = true;
             this.checkBox05.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox05.Name = "checkBox05";
+            this.checkBox05.Tag = "checkBox05Label";
             this.checkBox05.UseVisualStyleBackColor = true;
             this.checkBox05.CheckedChanged += new System.EventHandler(this.checkBoxHalf_CheckedChanged);
             // 
@@ -578,6 +606,7 @@ namespace MusicBeePlugin
             // 
             resources.ApplyResources(this.calculateThresholdsAtStartUpCheckBox, "calculateThresholdsAtStartUpCheckBox");
             this.calculateThresholdsAtStartUpCheckBox.Name = "calculateThresholdsAtStartUpCheckBox";
+            this.calculateThresholdsAtStartUpCheckBox.Tag = "holdsAtStartUpCheckBoxLabel";
             this.calculateThresholdsAtStartUpCheckBox.UseVisualStyleBackColor = true;
             // 
             // groupBox1
@@ -616,6 +645,16 @@ namespace MusicBeePlugin
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.checkBox05Label);
+            this.groupBox2.Controls.Add(this.checkBox1Label);
+            this.groupBox2.Controls.Add(this.checkBox15Label);
+            this.groupBox2.Controls.Add(this.checkBox2Label);
+            this.groupBox2.Controls.Add(this.checkBox25Label);
+            this.groupBox2.Controls.Add(this.checkBox3Label);
+            this.groupBox2.Controls.Add(this.checkBox35Label);
+            this.groupBox2.Controls.Add(this.checkBox4Label);
+            this.groupBox2.Controls.Add(this.checkBox45Label);
+            this.groupBox2.Controls.Add(this.checkBox5Label);
             this.groupBox2.Controls.Add(this.checkBox05);
             this.groupBox2.Controls.Add(this.checkBox1);
             this.groupBox2.Controls.Add(this.checkBox15);
@@ -655,6 +694,66 @@ namespace MusicBeePlugin
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             // 
+            // checkBox05Label
+            // 
+            resources.ApplyResources(this.checkBox05Label, "checkBox05Label");
+            this.checkBox05Label.Name = "checkBox05Label";
+            this.checkBox05Label.Click += new System.EventHandler(this.checkBox05Label_Click);
+            // 
+            // checkBox1Label
+            // 
+            resources.ApplyResources(this.checkBox1Label, "checkBox1Label");
+            this.checkBox1Label.Name = "checkBox1Label";
+            this.checkBox1Label.Click += new System.EventHandler(this.checkBox1Label_Click);
+            // 
+            // checkBox15Label
+            // 
+            resources.ApplyResources(this.checkBox15Label, "checkBox15Label");
+            this.checkBox15Label.Name = "checkBox15Label";
+            this.checkBox15Label.Click += new System.EventHandler(this.checkBox15Label_Click);
+            // 
+            // checkBox2Label
+            // 
+            resources.ApplyResources(this.checkBox2Label, "checkBox2Label");
+            this.checkBox2Label.Name = "checkBox2Label";
+            this.checkBox2Label.Click += new System.EventHandler(this.checkBox2Label_Click);
+            // 
+            // checkBox25Label
+            // 
+            resources.ApplyResources(this.checkBox25Label, "checkBox25Label");
+            this.checkBox25Label.Name = "checkBox25Label";
+            this.checkBox25Label.Click += new System.EventHandler(this.checkBox25Label_Click);
+            // 
+            // checkBox3Label
+            // 
+            resources.ApplyResources(this.checkBox3Label, "checkBox3Label");
+            this.checkBox3Label.Name = "checkBox3Label";
+            this.checkBox3Label.Click += new System.EventHandler(this.checkBox3Label_Click);
+            // 
+            // checkBox35Label
+            // 
+            resources.ApplyResources(this.checkBox35Label, "checkBox35Label");
+            this.checkBox35Label.Name = "checkBox35Label";
+            this.checkBox35Label.Click += new System.EventHandler(this.checkBox35Label_Click);
+            // 
+            // checkBox4Label
+            // 
+            resources.ApplyResources(this.checkBox4Label, "checkBox4Label");
+            this.checkBox4Label.Name = "checkBox4Label";
+            this.checkBox4Label.Click += new System.EventHandler(this.checkBox4Label_Click);
+            // 
+            // checkBox45Label
+            // 
+            resources.ApplyResources(this.checkBox45Label, "checkBox45Label");
+            this.checkBox45Label.Name = "checkBox45Label";
+            this.checkBox45Label.Click += new System.EventHandler(this.checkBox45Label_Click);
+            // 
+            // checkBox5Label
+            // 
+            resources.ApplyResources(this.checkBox5Label, "checkBox5Label");
+            this.checkBox5Label.Name = "checkBox5Label";
+            this.checkBox5Label.Click += new System.EventHandler(this.checkBox5Label_Click);
+            // 
             // toolTip1
             // 
             this.toolTip1.AutoPopDelay = 20000;
@@ -665,13 +764,22 @@ namespace MusicBeePlugin
             // 
             resources.ApplyResources(this.sinceAddedCheckBox, "sinceAddedCheckBox");
             this.sinceAddedCheckBox.Name = "sinceAddedCheckBox";
+            this.sinceAddedCheckBox.Tag = "sinceAddedCheckBoxLabel";
             this.toolTip1.SetToolTip(this.sinceAddedCheckBox, resources.GetString("sinceAddedCheckBox.ToolTip"));
             this.sinceAddedCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // sinceAddedCheckBoxLabel
+            // 
+            resources.ApplyResources(this.sinceAddedCheckBoxLabel, "sinceAddedCheckBoxLabel");
+            this.sinceAddedCheckBoxLabel.Name = "sinceAddedCheckBoxLabel";
+            this.toolTip1.SetToolTip(this.sinceAddedCheckBoxLabel, resources.GetString("sinceAddedCheckBoxLabel.ToolTip"));
+            this.sinceAddedCheckBoxLabel.Click += new System.EventHandler(this.sinceAddedCheckBoxLabel_Click);
             // 
             // notifyWhenAutoratingCompletedCheckBox
             // 
             resources.ApplyResources(this.notifyWhenAutoratingCompletedCheckBox, "notifyWhenAutoratingCompletedCheckBox");
             this.notifyWhenAutoratingCompletedCheckBox.Name = "notifyWhenAutoratingCompletedCheckBox";
+            this.notifyWhenAutoratingCompletedCheckBox.Tag = "notifyWhenAutoratingCompletedCheckBoxLabel";
             this.notifyWhenAutoratingCompletedCheckBox.UseVisualStyleBackColor = true;
             // 
             // playsPerDayTagList
@@ -688,8 +796,39 @@ namespace MusicBeePlugin
             this.storePlaysPerDayCheckBox.Checked = true;
             this.storePlaysPerDayCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.storePlaysPerDayCheckBox.Name = "storePlaysPerDayCheckBox";
+            this.storePlaysPerDayCheckBox.Tag = "storePlaysPerDayCheckBoxLabel";
             this.storePlaysPerDayCheckBox.UseVisualStyleBackColor = true;
             this.storePlaysPerDayCheckBox.CheckedChanged += new System.EventHandler(this.storePlaysPerDay_CheckedChanged);
+            // 
+            // storePlaysPerDayCheckBoxLabel
+            // 
+            resources.ApplyResources(this.storePlaysPerDayCheckBoxLabel, "storePlaysPerDayCheckBoxLabel");
+            this.storePlaysPerDayCheckBoxLabel.Name = "storePlaysPerDayCheckBoxLabel";
+            this.storePlaysPerDayCheckBoxLabel.Click += new System.EventHandler(this.storePlaysPerDayCheckBoxLabel_Click);
+            // 
+            // autoRateAtStartUpCheckBoxLabel
+            // 
+            resources.ApplyResources(this.autoRateAtStartUpCheckBoxLabel, "autoRateAtStartUpCheckBoxLabel");
+            this.autoRateAtStartUpCheckBoxLabel.Name = "autoRateAtStartUpCheckBoxLabel";
+            this.autoRateAtStartUpCheckBoxLabel.Click += new System.EventHandler(this.autoRateAtStartUpCheckBoxLabel_Click);
+            // 
+            // notifyWhenAutoratingCompletedCheckBoxLabel
+            // 
+            resources.ApplyResources(this.notifyWhenAutoratingCompletedCheckBoxLabel, "notifyWhenAutoratingCompletedCheckBoxLabel");
+            this.notifyWhenAutoratingCompletedCheckBoxLabel.Name = "notifyWhenAutoratingCompletedCheckBoxLabel";
+            this.notifyWhenAutoratingCompletedCheckBoxLabel.Click += new System.EventHandler(this.notifyWhenAutoratingCompletedCheckBoxLabel_Click);
+            // 
+            // autoRateOnTrackPropertiesCheckBoxLabel
+            // 
+            resources.ApplyResources(this.autoRateOnTrackPropertiesCheckBoxLabel, "autoRateOnTrackPropertiesCheckBoxLabel");
+            this.autoRateOnTrackPropertiesCheckBoxLabel.Name = "autoRateOnTrackPropertiesCheckBoxLabel";
+            this.autoRateOnTrackPropertiesCheckBoxLabel.Click += new System.EventHandler(this.autoRateOnTrackPropertiesCheckBoxLabel_Click);
+            // 
+            // holdsAtStartUpCheckBoxLabel
+            // 
+            resources.ApplyResources(this.holdsAtStartUpCheckBoxLabel, "holdsAtStartUpCheckBoxLabel");
+            this.holdsAtStartUpCheckBoxLabel.Name = "holdsAtStartUpCheckBoxLabel";
+            this.holdsAtStartUpCheckBoxLabel.Click += new System.EventHandler(this.holdsAtStartUpCheckBoxLabel_Click);
             // 
             // dirtyErrorProvider
             // 
@@ -702,6 +841,12 @@ namespace MusicBeePlugin
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
+            this.Controls.Add(this.holdsAtStartUpCheckBoxLabel);
+            this.Controls.Add(this.sinceAddedCheckBoxLabel);
+            this.Controls.Add(this.autoRateOnTrackPropertiesCheckBoxLabel);
+            this.Controls.Add(this.notifyWhenAutoratingCompletedCheckBoxLabel);
+            this.Controls.Add(this.autoRateAtStartUpCheckBoxLabel);
+            this.Controls.Add(this.storePlaysPerDayCheckBoxLabel);
             this.Controls.Add(this.sinceAddedCheckBox);
             this.Controls.Add(this.storePlaysPerDayCheckBox);
             this.Controls.Add(this.playsPerDayTagList);
@@ -831,5 +976,21 @@ namespace MusicBeePlugin
         private System.Windows.Forms.CheckBox storePlaysPerDayCheckBox;
         private System.Windows.Forms.CheckBox sinceAddedCheckBox;
         private System.Windows.Forms.ErrorProvider dirtyErrorProvider;
+        private Label autoRateAtStartUpCheckBoxLabel;
+        private Label storePlaysPerDayCheckBoxLabel;
+        private Label notifyWhenAutoratingCompletedCheckBoxLabel;
+        private Label autoRateOnTrackPropertiesCheckBoxLabel;
+        private Label sinceAddedCheckBoxLabel;
+        private Label checkBox5Label;
+        private Label checkBox45Label;
+        private Label checkBox4Label;
+        private Label checkBox35Label;
+        private Label checkBox3Label;
+        private Label checkBox25Label;
+        private Label checkBox2Label;
+        private Label checkBox15Label;
+        private Label checkBox1Label;
+        private Label checkBox05Label;
+        private Label holdsAtStartUpCheckBoxLabel;
     }
 }

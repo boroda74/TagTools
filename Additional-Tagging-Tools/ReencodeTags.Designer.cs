@@ -48,6 +48,7 @@
             this.dirtyErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.previewSortTagsСheckBox = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.previewSortTagsСheckBoxLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).BeginInit();
             this.SuspendLayout();
@@ -202,6 +203,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.previewSortTagsСheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("previewSortTagsСheckBox.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.previewSortTagsСheckBox, ((int)(resources.GetObject("previewSortTagsСheckBox.IconPadding"))));
             this.previewSortTagsСheckBox.Name = "previewSortTagsСheckBox";
+            this.previewSortTagsСheckBox.Tag = "previewSortTagsСheckBoxLabel";
             this.previewSortTagsСheckBox.UseVisualStyleBackColor = true;
             // 
             // label1
@@ -212,12 +214,21 @@
             this.dirtyErrorProvider.SetIconPadding(this.label1, ((int)(resources.GetObject("label1.IconPadding"))));
             this.label1.Name = "label1";
             // 
+            // previewSortTagsСheckBoxLabel
+            // 
+            resources.ApplyResources(this.previewSortTagsСheckBoxLabel, "previewSortTagsСheckBoxLabel");
+            this.dirtyErrorProvider.SetError(this.previewSortTagsСheckBoxLabel, resources.GetString("previewSortTagsСheckBoxLabel.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.previewSortTagsСheckBoxLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("previewSortTagsСheckBoxLabel.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.previewSortTagsСheckBoxLabel, ((int)(resources.GetObject("previewSortTagsСheckBoxLabel.IconPadding"))));
+            this.previewSortTagsСheckBoxLabel.Name = "previewSortTagsСheckBoxLabel";
+            // 
             // ReencodeTagsCommand
             // 
             this.AcceptButton = this.buttonOK;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
+            this.Controls.Add(this.previewSortTagsСheckBoxLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.previewSortTagsСheckBox);
             this.Controls.Add(this.usedEncodingsList);
@@ -256,5 +267,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn NewTrack;
         private System.Windows.Forms.CheckBox previewSortTagsСheckBox;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label previewSortTagsСheckBoxLabel;
     }
 }

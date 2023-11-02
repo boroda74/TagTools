@@ -48,7 +48,14 @@
             this.backupArtworksCheckBox = new System.Windows.Forms.CheckBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.dontTryToGuessLibraryNameCheckBox = new System.Windows.Forms.CheckBox();
+            this.autobackupCheckBoxLabel = new System.Windows.Forms.Label();
+            this.autodeleteOldCheckBoxLabel = new System.Windows.Forms.Label();
+            this.autodeleteManyCheckBoxLabel = new System.Windows.Forms.Label();
+            this.DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel = new System.Windows.Forms.Label();
+            this.dontTryToGuessLibraryNameCheckBoxLabel = new System.Windows.Forms.Label();
+            this.backupArtworksCheckBoxLabel = new System.Windows.Forms.Label();
             this.DontSkipAutobackupsIfPlayCountsChangedCheckBox = new System.Windows.Forms.CheckBox();
+            this.DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabelLabel = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.autobackupNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfDaysNumericUpDown)).BeginInit();
@@ -91,6 +98,7 @@
             // 
             resources.ApplyResources(this.autobackupCheckBox, "autobackupCheckBox");
             this.autobackupCheckBox.Name = "autobackupCheckBox";
+            this.autobackupCheckBox.Tag = "autobackupCheckBoxLabel";
             this.toolTip1.SetToolTip(this.autobackupCheckBox, resources.GetString("autobackupCheckBox.ToolTip"));
             this.autobackupCheckBox.UseVisualStyleBackColor = true;
             this.autobackupCheckBox.CheckedChanged += new System.EventHandler(this.autobackupCheckBox_CheckedChanged);
@@ -114,6 +122,7 @@
             // 
             resources.ApplyResources(this.autodeleteOldCheckBox, "autodeleteOldCheckBox");
             this.autodeleteOldCheckBox.Name = "autodeleteOldCheckBox";
+            this.autodeleteOldCheckBox.Tag = "autodeleteOldCheckBoxLabel";
             this.toolTip1.SetToolTip(this.autodeleteOldCheckBox, resources.GetString("autodeleteOldCheckBox.ToolTip"));
             this.autodeleteOldCheckBox.UseVisualStyleBackColor = true;
             this.autodeleteOldCheckBox.CheckedChanged += new System.EventHandler(this.autodeleteOldCheckBox_CheckedChanged);
@@ -132,6 +141,7 @@
             // 
             resources.ApplyResources(this.autodeleteManyCheckBox, "autodeleteManyCheckBox");
             this.autodeleteManyCheckBox.Name = "autodeleteManyCheckBox";
+            this.autodeleteManyCheckBox.Tag = "autodeleteManyCheckBoxLabel";
             this.toolTip1.SetToolTip(this.autodeleteManyCheckBox, resources.GetString("autodeleteManyCheckBox.ToolTip"));
             this.autodeleteManyCheckBox.UseVisualStyleBackColor = true;
             this.autodeleteManyCheckBox.CheckedChanged += new System.EventHandler(this.autodeleteManyCheckBox_CheckedChanged);
@@ -170,6 +180,7 @@
             // 
             resources.ApplyResources(this.backupArtworksCheckBox, "backupArtworksCheckBox");
             this.backupArtworksCheckBox.Name = "backupArtworksCheckBox";
+            this.backupArtworksCheckBox.Tag = "backupArtworksCheckBoxLabel";
             this.toolTip1.SetToolTip(this.backupArtworksCheckBox, resources.GetString("backupArtworksCheckBox.ToolTip"));
             this.backupArtworksCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -183,15 +194,61 @@
             // 
             resources.ApplyResources(this.dontTryToGuessLibraryNameCheckBox, "dontTryToGuessLibraryNameCheckBox");
             this.dontTryToGuessLibraryNameCheckBox.Name = "dontTryToGuessLibraryNameCheckBox";
+            this.dontTryToGuessLibraryNameCheckBox.Tag = "dontTryToGuessLibraryNameCheckBoxLabel";
             this.toolTip1.SetToolTip(this.dontTryToGuessLibraryNameCheckBox, resources.GetString("dontTryToGuessLibraryNameCheckBox.ToolTip"));
             this.dontTryToGuessLibraryNameCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // autobackupCheckBoxLabel
+            // 
+            resources.ApplyResources(this.autobackupCheckBoxLabel, "autobackupCheckBoxLabel");
+            this.autobackupCheckBoxLabel.Name = "autobackupCheckBoxLabel";
+            this.toolTip1.SetToolTip(this.autobackupCheckBoxLabel, resources.GetString("autobackupCheckBoxLabel.ToolTip"));
+            this.autobackupCheckBoxLabel.Click += new System.EventHandler(this.autobackupCheckBoxLabel_Click);
+            // 
+            // autodeleteOldCheckBoxLabel
+            // 
+            resources.ApplyResources(this.autodeleteOldCheckBoxLabel, "autodeleteOldCheckBoxLabel");
+            this.autodeleteOldCheckBoxLabel.Name = "autodeleteOldCheckBoxLabel";
+            this.toolTip1.SetToolTip(this.autodeleteOldCheckBoxLabel, resources.GetString("autodeleteOldCheckBoxLabel.ToolTip"));
+            this.autodeleteOldCheckBoxLabel.Click += new System.EventHandler(this.autodeleteOldCheckBoxLabel_Click);
+            // 
+            // autodeleteManyCheckBoxLabel
+            // 
+            resources.ApplyResources(this.autodeleteManyCheckBoxLabel, "autodeleteManyCheckBoxLabel");
+            this.autodeleteManyCheckBoxLabel.Name = "autodeleteManyCheckBoxLabel";
+            this.toolTip1.SetToolTip(this.autodeleteManyCheckBoxLabel, resources.GetString("autodeleteManyCheckBoxLabel.ToolTip"));
+            this.autodeleteManyCheckBoxLabel.Click += new System.EventHandler(this.autodeleteManyCheckBoxLabel_Click);
+            // 
+            // DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel
+            // 
+            resources.ApplyResources(this.DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel, "DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel");
+            this.DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel.Name = "DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel";
+            this.DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel.Tag = "DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabelLabel";
+            this.toolTip1.SetToolTip(this.DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel, resources.GetString("DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel.ToolTip"));
+            // 
+            // dontTryToGuessLibraryNameCheckBoxLabel
+            // 
+            resources.ApplyResources(this.dontTryToGuessLibraryNameCheckBoxLabel, "dontTryToGuessLibraryNameCheckBoxLabel");
+            this.dontTryToGuessLibraryNameCheckBoxLabel.Name = "dontTryToGuessLibraryNameCheckBoxLabel";
+            this.toolTip1.SetToolTip(this.dontTryToGuessLibraryNameCheckBoxLabel, resources.GetString("dontTryToGuessLibraryNameCheckBoxLabel.ToolTip"));
+            // 
+            // backupArtworksCheckBoxLabel
+            // 
+            resources.ApplyResources(this.backupArtworksCheckBoxLabel, "backupArtworksCheckBoxLabel");
+            this.backupArtworksCheckBoxLabel.Name = "backupArtworksCheckBoxLabel";
+            this.toolTip1.SetToolTip(this.backupArtworksCheckBoxLabel, resources.GetString("backupArtworksCheckBoxLabel.ToolTip"));
             // 
             // DontSkipAutobackupsIfPlayCountsChangedCheckBox
             // 
             resources.ApplyResources(this.DontSkipAutobackupsIfPlayCountsChangedCheckBox, "DontSkipAutobackupsIfPlayCountsChangedCheckBox");
             this.DontSkipAutobackupsIfPlayCountsChangedCheckBox.Name = "DontSkipAutobackupsIfPlayCountsChangedCheckBox";
-            this.toolTip1.SetToolTip(this.DontSkipAutobackupsIfPlayCountsChangedCheckBox, resources.GetString("DontSkipAutobackupsIfPlayCountsChangedCheckBox.ToolTip"));
+            this.DontSkipAutobackupsIfPlayCountsChangedCheckBox.Tag = "DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel";
             this.DontSkipAutobackupsIfPlayCountsChangedCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabelLabel
+            // 
+            resources.ApplyResources(this.DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabelLabel, "DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabelLabel");
+            this.DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabelLabel.Name = "DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabelLabel";
             // 
             // groupBox1
             // 
@@ -205,6 +262,13 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonClose;
+            this.Controls.Add(this.backupArtworksCheckBoxLabel);
+            this.Controls.Add(this.dontTryToGuessLibraryNameCheckBoxLabel);
+            this.Controls.Add(this.DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabelLabel);
+            this.Controls.Add(this.autodeleteManyCheckBoxLabel);
+            this.Controls.Add(this.autodeleteOldCheckBoxLabel);
+            this.Controls.Add(this.autobackupCheckBoxLabel);
+            this.Controls.Add(this.DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel);
             this.Controls.Add(this.DontSkipAutobackupsIfPlayCountsChangedCheckBox);
             this.Controls.Add(this.dontTryToGuessLibraryNameCheckBox);
             this.Controls.Add(this.groupBox1);
@@ -257,5 +321,12 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox dontTryToGuessLibraryNameCheckBox;
         private System.Windows.Forms.CheckBox DontSkipAutobackupsIfPlayCountsChangedCheckBox;
+        private System.Windows.Forms.Label autobackupCheckBoxLabel;
+        private System.Windows.Forms.Label autodeleteOldCheckBoxLabel;
+        private System.Windows.Forms.Label autodeleteManyCheckBoxLabel;
+        private System.Windows.Forms.Label DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel;
+        private System.Windows.Forms.Label DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabelLabel;
+        private System.Windows.Forms.Label dontTryToGuessLibraryNameCheckBoxLabel;
+        private System.Windows.Forms.Label backupArtworksCheckBoxLabel;
     }
 }

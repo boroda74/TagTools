@@ -100,7 +100,9 @@
       <DependentUpon>AdvancedSearchAndReplace.cs</DependentUpon>
     </Compile>
     <Compile Include="Additional-Tagging-Tools\PasteTagsFromClipboard.cs" />
-    <Compile Include="Additional-Tagging-Tools\CustomControls.cs" />
+    <Compile Include="Additional-Tagging-Tools\CustomControls.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Additional-Tagging-Tools\ImagingAndColoring.cs" />
     <Compile Include="Additional-Tagging-Tools\ASRPresetEditor.cs">
       <SubType>Form</SubType>
@@ -433,6 +435,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\Resources\warning-wide-15.png" />
+    <None Include="Properties\Resources\Warning-45x15.png" />
     <None Include="Properties\Resources\warning-12b.png" />
     <None Include="Properties\Resources\gear-15.png" />
     <None Include="Properties\Resources\gear-15-flat.png" />

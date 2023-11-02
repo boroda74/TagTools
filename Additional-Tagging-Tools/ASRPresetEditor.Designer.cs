@@ -49,6 +49,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.appendCheckBox = new System.Windows.Forms.CheckBox();
+            this.condition1CheckBox = new System.Windows.Forms.CheckBox();
             this.customTextBox = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
@@ -61,6 +62,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.searchedTag2List = new System.Windows.Forms.ComboBox();
+            this.condition2CheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.label11 = new System.Windows.Forms.Label();
@@ -72,6 +74,7 @@
             this.replacedPattern3Box = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.searchedPattern3Box = new System.Windows.Forms.TextBox();
+            this.condition3CheckBox = new System.Windows.Forms.CheckBox();
             this.languages = new System.Windows.Forms.ComboBox();
             this.guidBox = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
@@ -94,6 +97,12 @@
             this.customText3Box = new System.Windows.Forms.TextBox();
             this.append4CheckBox = new System.Windows.Forms.CheckBox();
             this.append5CheckBox = new System.Windows.Forms.CheckBox();
+            this.condition4CheckBox = new System.Windows.Forms.CheckBox();
+            this.condition5CheckBox = new System.Windows.Forms.CheckBox();
+            this.customTextCheckBoxLabel = new System.Windows.Forms.Label();
+            this.customText3CheckBoxLabel = new System.Windows.Forms.Label();
+            this.customText2CheckBoxLabel = new System.Windows.Forms.Label();
+            this.customText4CheckBoxLabel = new System.Windows.Forms.Label();
             this.parameterTag3List = new System.Windows.Forms.ComboBox();
             this.label21 = new System.Windows.Forms.Label();
             this.parameterTag2List = new System.Windows.Forms.ComboBox();
@@ -136,6 +145,9 @@
             this.removePresetCheckBox = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.removePresetCheckBoxLable = new System.Windows.Forms.Label();
+            this.customizedByUserCheckBoxLabel = new System.Windows.Forms.Label();
+            this.userPresetCheckBoxLabel = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -191,7 +203,6 @@
             // label3
             // 
             resources.ApplyResources(this.label3, "label3");
-            this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Name = "label3";
             // 
             // searchedPatternBox
@@ -273,7 +284,6 @@
             // tableLayoutPanel3
             // 
             resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
-            this.tableLayoutPanel3.BackColor = System.Drawing.Color.Transparent;
             this.tableLayoutPanel3.Controls.Add(this.replacedTagList, 4, 1);
             this.tableLayoutPanel3.Controls.Add(this.appendCheckBox, 3, 1);
             this.tableLayoutPanel3.Controls.Add(this.label3, 0, 0);
@@ -283,6 +293,7 @@
             this.tableLayoutPanel3.Controls.Add(this.replacedPatternBox, 1, 1);
             this.tableLayoutPanel3.Controls.Add(this.searchedTagList, 4, 0);
             this.tableLayoutPanel3.Controls.Add(this.searchedPatternBox, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.condition1CheckBox, 3, 0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             // 
             // appendCheckBox
@@ -291,6 +302,14 @@
             this.appendCheckBox.Name = "appendCheckBox";
             this.toolTip1.SetToolTip(this.appendCheckBox, resources.GetString("appendCheckBox.ToolTip"));
             this.appendCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // condition1CheckBox
+            // 
+            resources.ApplyResources(this.condition1CheckBox, "condition1CheckBox");
+            this.condition1CheckBox.Name = "condition1CheckBox";
+            this.condition1CheckBox.ThreeState = true;
+            this.toolTip1.SetToolTip(this.condition1CheckBox, resources.GetString("condition1CheckBox.ToolTip"));
+            this.condition1CheckBox.UseVisualStyleBackColor = true;
             // 
             // customTextBox
             // 
@@ -308,7 +327,6 @@
             // tableLayoutPanel4
             // 
             resources.ApplyResources(this.tableLayoutPanel4, "tableLayoutPanel4");
-            this.tableLayoutPanel4.BackColor = System.Drawing.Color.Transparent;
             this.tableLayoutPanel4.Controls.Add(this.label7, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.replacedTag2List, 4, 1);
             this.tableLayoutPanel4.Controls.Add(this.append2CheckBox, 3, 1);
@@ -318,12 +336,12 @@
             this.tableLayoutPanel4.Controls.Add(this.label8, 0, 1);
             this.tableLayoutPanel4.Controls.Add(this.label9, 2, 0);
             this.tableLayoutPanel4.Controls.Add(this.searchedTag2List, 4, 0);
+            this.tableLayoutPanel4.Controls.Add(this.condition2CheckBox, 3, 0);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             // 
             // label7
             // 
             resources.ApplyResources(this.label7, "label7");
-            this.label7.BackColor = System.Drawing.Color.Transparent;
             this.label7.Name = "label7";
             // 
             // replacedTag2List
@@ -374,6 +392,14 @@
             this.searchedTag2List.FormattingEnabled = true;
             this.searchedTag2List.Name = "searchedTag2List";
             // 
+            // condition2CheckBox
+            // 
+            resources.ApplyResources(this.condition2CheckBox, "condition2CheckBox");
+            this.condition2CheckBox.Name = "condition2CheckBox";
+            this.condition2CheckBox.ThreeState = true;
+            this.toolTip1.SetToolTip(this.condition2CheckBox, resources.GetString("condition2CheckBox.ToolTip"));
+            this.condition2CheckBox.UseVisualStyleBackColor = true;
+            // 
             // groupBox3
             // 
             resources.ApplyResources(this.groupBox3, "groupBox3");
@@ -384,7 +410,6 @@
             // tableLayoutPanel5
             // 
             resources.ApplyResources(this.tableLayoutPanel5, "tableLayoutPanel5");
-            this.tableLayoutPanel5.BackColor = System.Drawing.Color.Transparent;
             this.tableLayoutPanel5.Controls.Add(this.label11, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.replacedTag3List, 4, 1);
             this.tableLayoutPanel5.Controls.Add(this.append3CheckBox, 3, 1);
@@ -394,6 +419,7 @@
             this.tableLayoutPanel5.Controls.Add(this.replacedPattern3Box, 1, 1);
             this.tableLayoutPanel5.Controls.Add(this.label13, 2, 0);
             this.tableLayoutPanel5.Controls.Add(this.searchedPattern3Box, 1, 0);
+            this.tableLayoutPanel5.Controls.Add(this.condition3CheckBox, 3, 0);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             // 
             // label11
@@ -449,6 +475,14 @@
             resources.ApplyResources(this.searchedPattern3Box, "searchedPattern3Box");
             this.searchedPattern3Box.Name = "searchedPattern3Box";
             // 
+            // condition3CheckBox
+            // 
+            resources.ApplyResources(this.condition3CheckBox, "condition3CheckBox");
+            this.condition3CheckBox.Name = "condition3CheckBox";
+            this.condition3CheckBox.ThreeState = true;
+            this.toolTip1.SetToolTip(this.condition3CheckBox, resources.GetString("condition3CheckBox.ToolTip"));
+            this.condition3CheckBox.UseVisualStyleBackColor = true;
+            // 
             // languages
             // 
             this.languages.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -483,6 +517,7 @@
             // 
             resources.ApplyResources(this.userPresetCheckBox, "userPresetCheckBox");
             this.userPresetCheckBox.Name = "userPresetCheckBox";
+            this.userPresetCheckBox.Tag = "userPresetCheckBoxLabel";
             this.userPresetCheckBox.UseVisualStyleBackColor = true;
             // 
             // parameterTagTypeList
@@ -543,6 +578,7 @@
             // 
             resources.ApplyResources(this.customTextCheckBox, "customTextCheckBox");
             this.customTextCheckBox.Name = "customTextCheckBox";
+            this.customTextCheckBox.Tag = "customTextCheckBoxLabel";
             this.toolTip1.SetToolTip(this.customTextCheckBox, resources.GetString("customTextCheckBox.ToolTip"));
             this.customTextCheckBox.UseVisualStyleBackColor = true;
             this.customTextCheckBox.CheckedChanged += new System.EventHandler(this.customTextChecked_CheckedChanged);
@@ -557,6 +593,7 @@
             // 
             resources.ApplyResources(this.customText2CheckBox, "customText2CheckBox");
             this.customText2CheckBox.Name = "customText2CheckBox";
+            this.customText2CheckBox.Tag = "customText2CheckBoxLabel";
             this.toolTip1.SetToolTip(this.customText2CheckBox, resources.GetString("customText2CheckBox.ToolTip"));
             this.customText2CheckBox.UseVisualStyleBackColor = true;
             this.customText2CheckBox.CheckedChanged += new System.EventHandler(this.customText2CheckBox_CheckedChanged);
@@ -571,6 +608,7 @@
             // 
             resources.ApplyResources(this.customText4CheckBox, "customText4CheckBox");
             this.customText4CheckBox.Name = "customText4CheckBox";
+            this.customText4CheckBox.Tag = "customText4CheckBoxLabel";
             this.toolTip1.SetToolTip(this.customText4CheckBox, resources.GetString("customText4CheckBox.ToolTip"));
             this.customText4CheckBox.UseVisualStyleBackColor = true;
             this.customText4CheckBox.CheckedChanged += new System.EventHandler(this.customText4CheckBox_CheckedChanged);
@@ -585,6 +623,7 @@
             // 
             resources.ApplyResources(this.customText3CheckBox, "customText3CheckBox");
             this.customText3CheckBox.Name = "customText3CheckBox";
+            this.customText3CheckBox.Tag = "customText3CheckBoxLabel";
             this.toolTip1.SetToolTip(this.customText3CheckBox, resources.GetString("customText3CheckBox.ToolTip"));
             this.customText3CheckBox.UseVisualStyleBackColor = true;
             this.customText3CheckBox.CheckedChanged += new System.EventHandler(this.customText3CheckBox_CheckedChanged);
@@ -608,6 +647,50 @@
             this.append5CheckBox.Name = "append5CheckBox";
             this.toolTip1.SetToolTip(this.append5CheckBox, resources.GetString("append5CheckBox.ToolTip"));
             this.append5CheckBox.UseVisualStyleBackColor = true;
+            // 
+            // condition4CheckBox
+            // 
+            resources.ApplyResources(this.condition4CheckBox, "condition4CheckBox");
+            this.condition4CheckBox.Name = "condition4CheckBox";
+            this.condition4CheckBox.ThreeState = true;
+            this.toolTip1.SetToolTip(this.condition4CheckBox, resources.GetString("condition4CheckBox.ToolTip"));
+            this.condition4CheckBox.UseVisualStyleBackColor = true;
+            // 
+            // condition5CheckBox
+            // 
+            resources.ApplyResources(this.condition5CheckBox, "condition5CheckBox");
+            this.condition5CheckBox.Name = "condition5CheckBox";
+            this.condition5CheckBox.ThreeState = true;
+            this.toolTip1.SetToolTip(this.condition5CheckBox, resources.GetString("condition5CheckBox.ToolTip"));
+            this.condition5CheckBox.UseVisualStyleBackColor = true;
+            // 
+            // customTextCheckBoxLabel
+            // 
+            resources.ApplyResources(this.customTextCheckBoxLabel, "customTextCheckBoxLabel");
+            this.customTextCheckBoxLabel.Name = "customTextCheckBoxLabel";
+            this.toolTip1.SetToolTip(this.customTextCheckBoxLabel, resources.GetString("customTextCheckBoxLabel.ToolTip"));
+            this.customTextCheckBoxLabel.Click += new System.EventHandler(this.customTextCheckBoxLabel_Click);
+            // 
+            // customText3CheckBoxLabel
+            // 
+            resources.ApplyResources(this.customText3CheckBoxLabel, "customText3CheckBoxLabel");
+            this.customText3CheckBoxLabel.Name = "customText3CheckBoxLabel";
+            this.toolTip1.SetToolTip(this.customText3CheckBoxLabel, resources.GetString("customText3CheckBoxLabel.ToolTip"));
+            this.customText3CheckBoxLabel.Click += new System.EventHandler(this.customText3CheckBoxLabel_Click);
+            // 
+            // customText2CheckBoxLabel
+            // 
+            resources.ApplyResources(this.customText2CheckBoxLabel, "customText2CheckBoxLabel");
+            this.customText2CheckBoxLabel.Name = "customText2CheckBoxLabel";
+            this.toolTip1.SetToolTip(this.customText2CheckBoxLabel, resources.GetString("customText2CheckBoxLabel.ToolTip"));
+            this.customText2CheckBoxLabel.Click += new System.EventHandler(this.customText2CheckBoxLabel_Click);
+            // 
+            // customText4CheckBoxLabel
+            // 
+            resources.ApplyResources(this.customText4CheckBoxLabel, "customText4CheckBoxLabel");
+            this.customText4CheckBoxLabel.Name = "customText4CheckBoxLabel";
+            this.toolTip1.SetToolTip(this.customText4CheckBoxLabel, resources.GetString("customText4CheckBoxLabel.ToolTip"));
+            this.customText4CheckBoxLabel.Click += new System.EventHandler(this.customText4CheckBoxLabel_Click);
             // 
             // parameterTag3List
             // 
@@ -751,7 +834,6 @@
             // tableLayoutPanel6
             // 
             resources.ApplyResources(this.tableLayoutPanel6, "tableLayoutPanel6");
-            this.tableLayoutPanel6.BackColor = System.Drawing.Color.Transparent;
             this.tableLayoutPanel6.Controls.Add(this.label29, 0, 0);
             this.tableLayoutPanel6.Controls.Add(this.replacedTag4List, 4, 1);
             this.tableLayoutPanel6.Controls.Add(this.append4CheckBox, 3, 1);
@@ -761,6 +843,7 @@
             this.tableLayoutPanel6.Controls.Add(this.replacedPattern4Box, 1, 1);
             this.tableLayoutPanel6.Controls.Add(this.label32, 2, 0);
             this.tableLayoutPanel6.Controls.Add(this.searchedPattern4Box, 1, 0);
+            this.tableLayoutPanel6.Controls.Add(this.condition4CheckBox, 3, 0);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             // 
             // label29
@@ -819,7 +902,6 @@
             // tableLayoutPanel7
             // 
             resources.ApplyResources(this.tableLayoutPanel7, "tableLayoutPanel7");
-            this.tableLayoutPanel7.BackColor = System.Drawing.Color.Transparent;
             this.tableLayoutPanel7.Controls.Add(this.label33, 0, 0);
             this.tableLayoutPanel7.Controls.Add(this.replacedTag5List, 4, 1);
             this.tableLayoutPanel7.Controls.Add(this.append5CheckBox, 3, 1);
@@ -829,6 +911,7 @@
             this.tableLayoutPanel7.Controls.Add(this.replacedPattern5Box, 1, 1);
             this.tableLayoutPanel7.Controls.Add(this.label36, 2, 0);
             this.tableLayoutPanel7.Controls.Add(this.searchedPattern5Box, 1, 0);
+            this.tableLayoutPanel7.Controls.Add(this.condition5CheckBox, 3, 0);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             // 
             // label33
@@ -881,12 +964,14 @@
             // 
             resources.ApplyResources(this.customizedByUserCheckBox, "customizedByUserCheckBox");
             this.customizedByUserCheckBox.Name = "customizedByUserCheckBox";
+            this.customizedByUserCheckBox.Tag = "customizedByUserCheckBoxLabel";
             this.customizedByUserCheckBox.UseVisualStyleBackColor = true;
             // 
             // removePresetCheckBox
             // 
             resources.ApplyResources(this.removePresetCheckBox, "removePresetCheckBox");
             this.removePresetCheckBox.Name = "removePresetCheckBox";
+            this.removePresetCheckBox.Tag = "removePresetCheckBox";
             this.removePresetCheckBox.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel1
@@ -921,15 +1006,34 @@
             // tableLayoutPanel2
             // 
             resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
+            this.tableLayoutPanel2.Controls.Add(this.customText4CheckBoxLabel, 4, 1);
+            this.tableLayoutPanel2.Controls.Add(this.customText2CheckBoxLabel, 4, 0);
             this.tableLayoutPanel2.Controls.Add(this.customTextCheckBox, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.customTextBox, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.customText2CheckBox, 2, 0);
-            this.tableLayoutPanel2.Controls.Add(this.customText2Box, 3, 0);
             this.tableLayoutPanel2.Controls.Add(this.customText3CheckBox, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.customText3Box, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.customText4Box, 3, 1);
-            this.tableLayoutPanel2.Controls.Add(this.customText4CheckBox, 2, 1);
+            this.tableLayoutPanel2.Controls.Add(this.customText2Box, 5, 0);
+            this.tableLayoutPanel2.Controls.Add(this.customText4Box, 5, 1);
+            this.tableLayoutPanel2.Controls.Add(this.customTextBox, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.customText3Box, 2, 1);
+            this.tableLayoutPanel2.Controls.Add(this.customTextCheckBoxLabel, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.customText3CheckBoxLabel, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.customText2CheckBox, 3, 0);
+            this.tableLayoutPanel2.Controls.Add(this.customText4CheckBox, 3, 1);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            // 
+            // removePresetCheckBoxLable
+            // 
+            resources.ApplyResources(this.removePresetCheckBoxLable, "removePresetCheckBoxLable");
+            this.removePresetCheckBoxLable.Name = "removePresetCheckBoxLable";
+            // 
+            // customizedByUserCheckBoxLabel
+            // 
+            resources.ApplyResources(this.customizedByUserCheckBoxLabel, "customizedByUserCheckBoxLabel");
+            this.customizedByUserCheckBoxLabel.Name = "customizedByUserCheckBoxLabel";
+            // 
+            // userPresetCheckBoxLabel
+            // 
+            resources.ApplyResources(this.userPresetCheckBoxLabel, "userPresetCheckBoxLabel");
+            this.userPresetCheckBoxLabel.Name = "userPresetCheckBoxLabel";
             // 
             // ASRPresetEditor
             // 
@@ -937,6 +1041,9 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
+            this.Controls.Add(this.userPresetCheckBoxLabel);
+            this.Controls.Add(this.customizedByUserCheckBoxLabel);
+            this.Controls.Add(this.removePresetCheckBoxLable);
             this.Controls.Add(this.nameBox);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
@@ -1094,5 +1201,17 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
+        private System.Windows.Forms.CheckBox condition1CheckBox;
+        private System.Windows.Forms.CheckBox condition2CheckBox;
+        private System.Windows.Forms.CheckBox condition3CheckBox;
+        private System.Windows.Forms.CheckBox condition4CheckBox;
+        private System.Windows.Forms.CheckBox condition5CheckBox;
+        private System.Windows.Forms.Label removePresetCheckBoxLable;
+        private System.Windows.Forms.Label customizedByUserCheckBoxLabel;
+        private System.Windows.Forms.Label userPresetCheckBoxLabel;
+        private System.Windows.Forms.Label customTextCheckBoxLabel;
+        private System.Windows.Forms.Label customText3CheckBoxLabel;
+        private System.Windows.Forms.Label customText2CheckBoxLabel;
+        private System.Windows.Forms.Label customText4CheckBoxLabel;
     }
 }

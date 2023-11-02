@@ -61,7 +61,7 @@
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="T">
+    <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
@@ -119,7 +119,7 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>892, 429</value>
+    <value>892, 431</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
@@ -140,6 +140,9 @@
   <data name="&gt;&gt;usedEncodingsList.Name" xml:space="preserve">
     <value>usedEncodingsList</value>
   </data>
+  <data name="&gt;&gt;buttonPreview.Name" xml:space="preserve">
+    <value>buttonPreview</value>
+  </data>
   <data name="&gt;&gt;previewSortTagsСheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -150,20 +153,17 @@
   <data name="label1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="dataGridViewTextBoxColumn3.HeaderText" xml:space="preserve">
-    <value>Original tag</value>
-  </data>
   <data name="&gt;&gt;dataGridViewTextBoxColumn3.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="dataGridViewTextBoxColumn1.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
+  <data name="previewSortTagsСheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>63</value>
   </data>
   <data name="buttonCancel.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;label4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="previewSortTagsСheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>27, 17</value>
   </data>
   <data name="initialEncodingsList.Size" type="System.Drawing.Size, System.Drawing">
     <value>179, 21</value>
@@ -177,8 +177,11 @@
   <data name="&gt;&gt;dataGridViewTextBoxColumn1.Name" xml:space="preserve">
     <value>dataGridViewTextBoxColumn1</value>
   </data>
-  <data name="previewSortTagsСheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>61</value>
+  <data name="&gt;&gt;buttonPreview.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="previewSortTagsСheckBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;dataGridViewTextBoxColumn1.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -190,18 +193,21 @@
     <value>TopLeft</value>
   </data>
   <data name="&gt;&gt;previewTable.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name="buttonPreview.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleLeft</value>
+  <data name="&gt;&gt;previewSortTagsСheckBoxLabel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn4.Width" type="System.Int32, mscorlib">
+    <value>153</value>
   </data>
   <data name="dataGridViewTextBoxColumn3.Width" type="System.Int32, mscorlib">
     <value>153</value>
   </data>
-  <data name="buttonCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="dataGridViewTextBoxColumn2.Width" type="System.Int32, mscorlib">
@@ -213,17 +219,20 @@
   <data name="&gt;&gt;previewSortTagsСheckBox.Name" xml:space="preserve">
     <value>previewSortTagsСheckBox</value>
   </data>
-  <data name="&gt;&gt;initialEncodingsList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="buttonPreview.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
-    <value>8</value>
+  <data name="&gt;&gt;previewSortTagsСheckBoxLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dirtyErrorProvider.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ErrorProvider, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;File.Name" xml:space="preserve">
     <value>File</value>
-  </data>
-  <data name="&gt;&gt;NewTrack.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;dataGridViewTextBoxColumn3.Name" xml:space="preserve">
     <value>dataGridViewTextBoxColumn3</value>
@@ -243,14 +252,14 @@
   <data name="&gt;&gt;previewTable.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
+  <data name="buttonOK.TabIndex" type="System.Int32, mscorlib">
+    <value>44</value>
+  </data>
   <data name="buttonOK.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
   </data>
   <data name="&gt;&gt;buttonOK.Parent" xml:space="preserve">
     <value>$this</value>
-  </data>
-  <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;usedEncodingsList.Parent" xml:space="preserve">
     <value>$this</value>
@@ -268,7 +277,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;previewSortTagsСheckBox.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="NewTrack.HeaderText" xml:space="preserve">
     <value>New track</value>
@@ -288,11 +297,11 @@
   <data name="dataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
     <value>Track</value>
   </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn4.Name" xml:space="preserve">
-    <value>dataGridViewTextBoxColumn4</value>
+  <data name="&gt;&gt;NewTrack.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>339, 13</value>
+  <data name="previewTable.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>51</value>
   </data>
   <data name="dataGridViewTextBoxColumn4.HeaderText" xml:space="preserve">
     <value>New tag</value>
@@ -318,6 +327,12 @@
   <data name="&gt;&gt;buttonOK.Name" xml:space="preserve">
     <value>buttonOK</value>
   </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>339, 13</value>
+  </data>
+  <data name="&gt;&gt;label4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="File.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
@@ -331,13 +346,130 @@
     <value>File</value>
   </data>
   <data name="&gt;&gt;buttonPreview.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="previewTable.RowHeadersWidth" type="System.Int32, mscorlib">
-    <value>51</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;label4.Parent" xml:space="preserve">
     <value>$this</value>
+  </data>
+  <data name="File.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="buttonCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="previewSortTagsСheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>427, 33</value>
+  </data>
+  <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>900, 460</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn2.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="initialEncodingsList.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="label2.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
+  </data>
+  <data name="&gt;&gt;previewSortTagsСheckBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="previewSortTagsСheckBoxLabel.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="buttonCancel.TabIndex" type="System.Int32, mscorlib">
+    <value>45</value>
+  </data>
+  <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
+    <value>728, 4</value>
+  </data>
+  <data name="&gt;&gt;dirtyErrorProvider.Name" xml:space="preserve">
+    <value>dirtyErrorProvider</value>
+  </data>
+  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+    <value>62</value>
+  </data>
+  <data name="buttonCancel.Text" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="&gt;&gt;previewSortTagsСheckBoxLabel.Name" xml:space="preserve">
+    <value>previewSortTagsСheckBoxLabel</value>
+  </data>
+  <data name="previewSortTagsСheckBoxLabel.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="previewTable.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="usedEncodingsList.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;previewTable.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;usedEncodingsList.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn4.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn4</value>
+  </data>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;Track.Name" xml:space="preserve">
+    <value>Track</value>
+  </data>
+  <data name="buttonPreview.Error" xml:space="preserve">
+    <value>Error!</value>
+  </data>
+  <data name="usedEncodingsList.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label2.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="dataGridViewTextBoxColumn1.Width" type="System.Int32, mscorlib">
+    <value>125</value>
+  </data>
+  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>289, 9</value>
+  </data>
+  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>132, 13</value>
+  </data>
+  <data name="buttonOK.Text" xml:space="preserve">
+    <value>Proceed</value>
+  </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 13</value>
+  </data>
+  <data name="initialEncodingsList.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="buttonCancel.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label4.TabIndex" type="System.Int32, mscorlib">
+    <value>59</value>
+  </data>
+  <data name="buttonPreview.TabIndex" type="System.Int32, mscorlib">
+    <value>55</value>
   </data>
   <data name="dirtyErrorProvider.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -936,119 +1068,11 @@
         AaxBwAOsQeAHrEHwD6xB//+sQQ==
 </value>
   </data>
-  <data name="File.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="previewSortTagsСheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>427, 33</value>
-  </data>
-  <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>900, 460</value>
-  </data>
-  <data name="buttonOK.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="dataGridViewTextBoxColumn2.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="label2.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>TopLeft</value>
-  </data>
-  <data name="&gt;&gt;previewSortTagsСheckBox.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="buttonCancel.TabIndex" type="System.Int32, mscorlib">
-    <value>45</value>
-  </data>
-  <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>728, 4</value>
-  </data>
-  <data name="&gt;&gt;dirtyErrorProvider.Name" xml:space="preserve">
-    <value>dirtyErrorProvider</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="buttonCancel.Text" xml:space="preserve">
-    <value>Close</value>
-  </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="previewTable.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="usedEncodingsList.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;previewTable.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Track.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;Track.Name" xml:space="preserve">
-    <value>Track</value>
-  </data>
-  <data name="buttonPreview.Error" xml:space="preserve">
-    <value>Error!</value>
-  </data>
-  <data name="usedEncodingsList.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;label4.Name" xml:space="preserve">
-    <value>label4</value>
-  </data>
-  <data name="label2.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="dataGridViewTextBoxColumn1.Width" type="System.Int32, mscorlib">
-    <value>125</value>
-  </data>
-  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>289, 9</value>
-  </data>
-  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>132, 13</value>
-  </data>
-  <data name="buttonOK.Text" xml:space="preserve">
-    <value>Proceed</value>
-  </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 13</value>
-  </data>
-  <data name="initialEncodingsList.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="buttonCancel.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="label4.TabIndex" type="System.Int32, mscorlib">
-    <value>59</value>
-  </data>
-  <data name="buttonPreview.TabIndex" type="System.Int32, mscorlib">
-    <value>55</value>
-  </data>
-  <data name="initialEncodingsList.Error" xml:space="preserve">
-    <value />
-  </data>
   <data name="&gt;&gt;NewTrack.Name" xml:space="preserve">
     <value>NewTrack</value>
+  </data>
+  <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
+    <value>9</value>
   </data>
   <data name="buttonOK.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1078,7 +1102,10 @@
     <value>Original track</value>
   </data>
   <data name="&gt;&gt;buttonOK.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn1.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
   <data name="buttonOK.Error" xml:space="preserve">
     <value />
@@ -1089,11 +1116,11 @@
   <data name="label2.Text" xml:space="preserve">
     <value>Original encoding:</value>
   </data>
-  <data name="dataGridViewTextBoxColumn4.Width" type="System.Int32, mscorlib">
-    <value>153</value>
+  <data name="previewSortTagsСheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="&gt;&gt;buttonPreview.Name" xml:space="preserve">
-    <value>buttonPreview</value>
+  <data name="previewSortTagsСheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>77, 13</value>
   </data>
   <data name="&gt;&gt;dataGridViewTextBoxColumn2.Name" xml:space="preserve">
     <value>dataGridViewTextBoxColumn2</value>
@@ -1104,14 +1131,17 @@
   <data name="previewSortTagsСheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="&gt;&gt;previewSortTagsСheckBoxLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="previewSortTagsСheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
     <value>877, 369</value>
   </data>
-  <data name="previewSortTagsСheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 17</value>
-  </data>
-  <data name="&gt;&gt;buttonCancel.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;initialEncodingsList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
     <value>Incorrectly used encoding:</value>
@@ -1135,13 +1165,13 @@
     <value>Preview</value>
   </data>
   <data name="previewSortTagsСheckBox.Text" xml:space="preserve">
-    <value>Show sort tags</value>
+    <value> </value>
   </data>
   <data name="buttonPreview.Location" type="System.Drawing.Point, System.Drawing">
     <value>647, 4</value>
   </data>
-  <data name="previewSortTagsСheckBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="&gt;&gt;Track.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="NewTrack.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1153,19 +1183,22 @@
     <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;initialEncodingsList.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;buttonCancel.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;dataGridViewTextBoxColumn4.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="previewSortTagsСheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>448, 34</value>
+  </data>
   <data name="label4.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
-  </data>
-  <data name="&gt;&gt;dirtyErrorProvider.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ErrorProvider, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="previewSortTagsСheckBox.Error" xml:space="preserve">
     <value />
@@ -1173,17 +1206,20 @@
   <data name="dataGridViewTextBoxColumn1.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="buttonOK.TabIndex" type="System.Int32, mscorlib">
-    <value>44</value>
+  <data name="buttonOK.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
   </data>
   <data name="&gt;&gt;dataGridViewTextBoxColumn2.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="previewSortTagsСheckBoxLabel.Text" xml:space="preserve">
+    <value>Show sort tags</value>
+  </data>
   <data name="initialEncodingsList.Location" type="System.Drawing.Point, System.Drawing">
     <value>102, 6</value>
   </data>
-  <data name="&gt;&gt;buttonPreview.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="previewSortTagsСheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>61</value>
   </data>
   <data name="label1.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1191,8 +1227,8 @@
   <data name="&gt;&gt;initialEncodingsList.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="label1.TabIndex" type="System.Int32, mscorlib">
-    <value>62</value>
+  <data name="dataGridViewTextBoxColumn3.HeaderText" xml:space="preserve">
+    <value>Original tag</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 9</value>
@@ -1206,8 +1242,8 @@
   <data name="previewTable.ColumnHeadersHeight" type="System.Int32, mscorlib">
     <value>29</value>
   </data>
-  <data name="&gt;&gt;usedEncodingsList.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;label4.Name" xml:space="preserve">
+    <value>label4</value>
   </data>
   <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>ru</value>

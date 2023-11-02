@@ -61,7 +61,7 @@
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="T">
+    <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
@@ -151,7 +151,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;buttonOK.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="buttonCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -181,7 +181,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="tableLayoutPanel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -211,7 +211,7 @@
     <value>sourceTagList</value>
   </data>
   <data name="&gt;&gt;sourceTagList.Type" xml:space="preserve">
-    <value>MusicBeePlugin.CustomListBox, mb_TagTools, Version=5.4.8373.19912, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckedListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;sourceTagList.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -241,7 +241,7 @@
     <value>checkedSourceTagList</value>
   </data>
   <data name="&gt;&gt;checkedSourceTagList.Type" xml:space="preserve">
-    <value>MusicBeePlugin.CustomListBox, mb_TagTools, Version=5.4.8373.19912, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckedListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;checkedSourceTagList.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -271,7 +271,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="sourceTagList" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="checkedSourceTagList" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50,Percent,50" /&gt;&lt;Rows Styles="Percent,50,Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
@@ -305,7 +305,7 @@ To rename tag set just type new name in this box. </value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;tagSetComboBox.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="checkUncheckAllCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -317,13 +317,13 @@ To rename tag set just type new name in this box. </value>
     <value>15, 437</value>
   </data>
   <data name="checkUncheckAllCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 17</value>
+    <value>27, 17</value>
   </data>
   <data name="checkUncheckAllCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
   <data name="checkUncheckAllCheckBox.Text" xml:space="preserve">
-    <value>Check all/uncheck all</value>
+    <value> </value>
   </data>
   <data name="&gt;&gt;checkUncheckAllCheckBox.Name" xml:space="preserve">
     <value>checkUncheckAllCheckBox</value>
@@ -335,7 +335,7 @@ To rename tag set just type new name in this box. </value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;checkUncheckAllCheckBox.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="label1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -365,6 +365,36 @@ To rename tag set just type new name in this box. </value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="checkUncheckAllCheckBoxLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="checkUncheckAllCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkUncheckAllCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>35, 438</value>
+  </data>
+  <data name="checkUncheckAllCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 13</value>
+  </data>
+  <data name="checkUncheckAllCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="checkUncheckAllCheckBoxLabel.Text" xml:space="preserve">
+    <value>Check all/uncheck all</value>
+  </data>
+  <data name="&gt;&gt;checkUncheckAllCheckBoxLabel.Name" xml:space="preserve">
+    <value>checkUncheckAllCheckBoxLabel</value>
+  </data>
+  <data name="&gt;&gt;checkUncheckAllCheckBoxLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkUncheckAllCheckBoxLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;checkUncheckAllCheckBoxLabel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

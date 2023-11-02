@@ -1,8 +1,13 @@
-﻿using System;
+﻿using ExtensionMethods;
+using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 using static MusicBeePlugin.Plugin;
+
+
 
 namespace MusicBeePlugin
 {
@@ -43,6 +48,15 @@ namespace MusicBeePlugin
         private int width;
         private int height;
 
+
+        protected bool ignoreLabelEnabledChanged = false;
+
+        protected static bool UseSkinColors = false;
+
+        //Skin button labels for rendering disabled buttons
+        protected Dictionary<Button, string> buttonLabels = new Dictionary<Button, string>();
+
+
         public bool backgroundTaskIsWorking()
         {
             lock (taskStarted)
@@ -67,27 +81,168 @@ namespace MusicBeePlugin
             TagToolsPlugin = tagToolsPluginParam;
         }
 
-        public static Control SkinControl(Control control)
+        public void SplitterPaint(object sender, PaintEventArgs e)
         {
-            if (!SavedSettings.useSkinColors)
+            SplitContainer s = sender as SplitContainer;
+            if (s != null)
+            {
+                int middle = s.SplitterDistance;
+                int left = s.Left;
+                int right = s.Right;
+
+                SplitterPen.DashPattern = SplitterPenDashPattern;
+
+                e.Graphics.DrawLine(SplitterPen, left, middle, right, middle);
+            }
+        }
+
+        private void TabControl_DrawItem(object sender, DrawItemEventArgs e)//********
+        {
+            TabPage page = ((TabControl)sender).TabPages[e.Index];
+            e.Graphics.FillRectangle(new SolidBrush(page.BackColor), e.Bounds);
+
+            Rectangle paddedBounds = e.Bounds;
+            int yOffset = (e.State == DrawItemState.Selected) ? -2 : 1;
+            paddedBounds.Offset(1, yOffset);
+            TextRenderer.DrawText(e.Graphics, page.Text, e.Font, paddedBounds, page.ForeColor);
+        }
+
+        public void Button_EnabledChanged(object sender, System.EventArgs e)
+        {
+            Button button = (Button)sender;
+
+            if (UseSkinColors)
+            {
+                if (button.Enabled)
+                {
+                    button.ForeColor = ButtonForeColorSkinned;
+                    button.BackColor = ButtonBackColorSkinned;
+                }
+                else
+                {
+                    button.ForeColor = ButtonDisabledForeColorSkinned;
+                    button.BackColor = ButtonDisabledBackColorSkinned;
+                }
+            }
+            else
+            {
+                if (button.Enabled)
+                {
+                    button.ForeColor = ButtonForeColor;
+                    button.BackColor = ButtonBackColor;
+                }
+                else
+                {
+                    button.ForeColor = ButtonDisabledForeColor;
+                    button.BackColor = ButtonDisabledBackColor;
+                }
+            }
+        }
+
+        public void Button_Paint(object sender, PaintEventArgs e)
+        {
+            Button button = (Button)sender;
+            string text = ((PluginWindowTemplate)button.FindForm()).buttonLabels[button];
+
+            // Set flags to center text on the button.
+            TextFormatFlags flags = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.WordBreak;   // center the text
+                                                                                                                                     // Render the text onto the button.
+            TextRenderer.DrawText(e.Graphics, text, button.Font, e.ClipRectangle, button.ForeColor, flags);
+        }
+
+        public void Button_TextChanged(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            string text = button.Text;
+
+            if (!string.IsNullOrEmpty(text))
+            {
+                Dictionary<Button, string> buttonLabels = ((PluginWindowTemplate)button.FindForm()).buttonLabels;
+                buttonLabels.Remove(button);
+                buttonLabels.Add(button, text);
+                button.Text = string.Empty;
+            }
+        }
+
+        public static Control SkinControl(PluginWindowTemplate form, Control control)
+        {
+            //if (control.GetType().IsSubclassOf(typeof(TabControl)) || control.GetType() == typeof(TabControl))
+            //{
+            //    TabControl tabControl = (TabControl)control;
+            //    tabControl.DrawItem += form.TabControl_DrawItem;
+
+            //    return tabControl;
+            //}
+
+            if (control.GetType().IsSubclassOf(typeof(SplitContainer)) || control.GetType() == typeof(SplitContainer))
+            {
+                SplitContainer container = (SplitContainer)control;
+                container.Paint += form.SplitterPaint;
+
+
+                if (UseSkinColors)
+                {
+                    container.Panel1.BackColor = BackFormColor;
+                    container.Panel1.ForeColor = AccentColor;
+
+                    container.Panel2.BackColor = BackFormColor;
+                    container.Panel2.ForeColor = AccentColor;
+                }
+                else
+                {
+                    container.Panel1.BackColor = SystemColors.Control;
+                    container.Panel1.ForeColor = SystemColors.ControlText;
+
+                    container.Panel2.BackColor = SystemColors.Control;
+                    container.Panel2.ForeColor = SystemColors.ControlText;
+                }
+
+                return container;
+            }
+
+            if (control.GetType().IsSubclassOf(typeof(Button)) || control.GetType() == typeof(Button))
+            {
+                Button button = (Button)control;
+
+                if (UseSkinColors)
+                {
+                    button.ForeColor = ButtonForeColorSkinned;
+                    button.BackColor = ButtonBackColorSkinned;
+                }
+                else
+                {
+                    button.ForeColor = ButtonForeColor;
+                    button.BackColor = ButtonBackColor;
+                }
+
+
+                form.buttonLabels.Add(button, button.Text);
+
+                button.FlatStyle = FlatStyle.Flat;
+                button.FlatAppearance.BorderSize = 1;
+                button.FlatAppearance.BorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentBorder));
+
+                button.EnabledChanged += form.Button_EnabledChanged;
+                button.Paint += form.Button_Paint;
+                button.TextChanged += form.Button_TextChanged;
+
+                button.Text = string.Empty;
+
+                return button;
+            }
+
+
+            //SplitContainer and (disabled) Button above must be skinned in any case (even if using system colors)
+            if (!UseSkinColors)
                 return control;
 
 
-            if (control.GetType() == typeof(Button))
+            if (control.GetType().IsSubclassOf(typeof(TextBox)) || control.GetType() == typeof(TextBox))
             {
                 control.BackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
                 control.ForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
 
-                ((Button)control).FlatStyle = FlatStyle.Flat;
-                ((Button)control).FlatAppearance.BorderSize = 1;
-                ((Button)control).FlatAppearance.BorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentBorder));
-            }
-            else if (control.GetType().IsSubclassOf(typeof(TextBox)) || control.GetType() == typeof(TextBox))
-            {
-                control.BackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
-                control.ForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
-
-                //((TextBox)control).BorderStyle = BorderStyle.FixedSingle;
+                ((TextBox)control).BorderStyle = BorderStyle.FixedSingle;
             }
             else if (control.GetType().IsSubclassOf(typeof(ComboBox)) || control.GetType() == typeof(ComboBox))
             {
@@ -100,6 +255,38 @@ namespace MusicBeePlugin
             {
                 control.BackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
                 control.ForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
+                
+                ((ListBox)control).BorderStyle = BorderStyle.Fixed3D;
+            }
+            else if (control.GetType().IsSubclassOf(typeof(Label)) || control.GetType() == typeof(Label))
+            {
+                control.BackColor = BackFormColor;
+
+                if (control.ForeColor == SystemColors.ControlText)
+                {
+                    control.ForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanelLabel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
+                }
+                else
+                {
+                    Color stdColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanelLabel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
+                    control.ForeColor = GetHighlightColor(control.ForeColor, stdColor, BackFormColor, 0.80f);
+                }
+
+                ((Label)control).FlatStyle = FlatStyle.System;
+            }
+            else if (control.GetType().IsSubclassOf(typeof(CheckBox)) || control.GetType() == typeof(CheckBox))
+            {
+                control.BackColor = BackFormColor;
+                control.ForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
+
+                ((CheckBox)control).FlatStyle = FlatStyle.System;
+            }
+            else if (control.GetType().IsSubclassOf(typeof(RadioButton)) || control.GetType() == typeof(RadioButton))
+            {
+                control.BackColor = BackFormColor;
+                control.ForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanelLabel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
+
+                ((RadioButton)control).FlatStyle = FlatStyle.System;
             }
             else if (control.GetType() == typeof(DataGridView))
             {
@@ -108,42 +295,37 @@ namespace MusicBeePlugin
 
                 ((DataGridView)control).BackgroundColor = control.BackColor;
                 ((DataGridView)control).DefaultCellStyle.BackColor = control.BackColor;
-                //((DataGridView)control).ColumnHeadersDefaultCellStyle.BackColor = control.BackColor;
             }
             else
             {
-                control.BackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
-                control.ForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
+                control.BackColor = BackFormColor;
+                control.ForeColor = AccentColor;
             }
 
             return control;
         }
 
-        public static Control SkinChildrenControls(Control parentControl)
+        public static Control SkinChildrenControls(PluginWindowTemplate form, Control parentControl)
         {
-            if (!SavedSettings.useSkinColors)
-                return parentControl;
-
-
             foreach (Control control in parentControl.Controls)
             {
 
-                SkinControl(control);
-                SkinChildrenControls(control);
+                SkinControl(form, control);
+                SkinChildrenControls(form, control);
             }
 
             return parentControl;
         }
 
-        public static Form SkinForm(Form form)
+        public static Form SkinForm(PluginWindowTemplate form)
         {
-            if (SavedSettings.useSkinColors)
+            if (UseSkinColors)
             {
-                form.BackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
-                form.ForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
-
-                SkinChildrenControls(form);
+                form.BackColor = BackFormColor;
+                form.ForeColor = AccentColor;
             }
+
+            SkinChildrenControls(form, form);
 
             return form;
         }
@@ -200,6 +382,7 @@ namespace MusicBeePlugin
 
             //return; //For debugging
 
+            UseSkinColors = SavedSettings.useSkinColors;
             SkinForm(this);
         }
 
@@ -464,20 +647,20 @@ namespace MusicBeePlugin
 
                     okButtonText = clickedButton.Text;
                     clickedButton.Text = CancelButtonName;
-                    clickedButton.Enabled = true;
+                    clickedButton.Enable(true);
 
                     closeButtonText = closeButton.Text;
                     closeButton.Text = HideButtonName;
-                    closeButton.Enabled = true;
+                    closeButton.Enable(true);
                 }
                 else //Querying operation
                 {
                     clickedForm.disableQueryingOrUpdatingButtons();
 
                     clickedButton.Text = StopButtonName;
-                    clickedButton.Enabled = true;
+                    clickedButton.Enable(true);
 
-                    closeButton.Enabled = false;
+                    closeButton.Enable(false);
                 }
 
                 enableDisablePreviewOptionControls(false);
@@ -516,7 +699,7 @@ namespace MusicBeePlugin
                         previewButton.Text = PreviewButtonName;
 
                     if (backgroundTaskIsScheduled)
-                        previewButton.Enabled = false;
+                        previewButton.Enable(false);
                     else
                         closeButton.Text = closeButtonText;
                 }
@@ -544,7 +727,7 @@ namespace MusicBeePlugin
                             clickedButton.Text = previewButtonText;
                         }
 
-                        closeButton.Enabled = true;
+                        closeButton.Enable(true);
                     }
                 }
 

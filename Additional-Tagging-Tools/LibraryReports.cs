@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using static MusicBeePlugin.Plugin;
+using ExtensionMethods;
 
 namespace MusicBeePlugin
 {
@@ -201,9 +202,10 @@ namespace MusicBeePlugin
 
 
             //Moving some controls to their proper places (they are moved initially for easy editing in Form Editor to not overlap other controls)
-            multipleItemsSplitterLabel.Location = new Point(multipleItemsSplitterLabel.Location.X, parameter2ComboBox.Location.Y);
-            multipleItemsSplitterComboBox.Location = new Point(multipleItemsSplitterComboBox.Location.X, parameter2ComboBox.Location.Y);
-            multipleItemsSplitterTrimCheckBox.Location = new Point(multipleItemsSplitterTrimCheckBox.Location.X, parameter2ComboBox.Location.Y);
+            //multipleItemsSplitterLabel.Location = new Point(multipleItemsSplitterLabel.Location.X, sourceTagList.Location.Y);
+            //multipleItemsSplitterComboBox.Location = new Point(multipleItemsSplitterComboBox.Location.X, forTagLabel.Location.Y);
+            //multipleItemsSplitterTrimCheckBox.Location = new Point(multipleItemsSplitterTrimCheckBox.Location.X, forTagLabel.Location.Y);
+            //multipleItemsSplitterTrimCheckBoxLabel.Location = new Point(multipleItemsSplitterTrimCheckBoxLabel.Location.X, forTagLabel.Location.Y);
 
 
             //Setting themed images
@@ -245,10 +247,13 @@ namespace MusicBeePlugin
 
 
             //Saving Create/Discard new field button labels & tool tip
-            string buttonAddFunctionText = buttonAddFunction.Text;
+            //string buttonAddFunctionText = buttonAddFunction.Text;
+            string buttonAddFunctionText = buttonLabels[buttonAddFunction];
             ButtonAddFunctionCreateText = Regex.Replace(buttonAddFunctionText, @"^(.*?)\:(.*)", "$1");
             ButtonAddFunctionDiscardText = Regex.Replace(buttonAddFunctionText, @"^(.*?)\:(.*)", "$2");
-            buttonAddFunction.Text = ButtonAddFunctionCreateText;
+            //buttonAddFunction.Text = ButtonAddFunctionCreateText;
+            buttonLabels.Replace(buttonAddFunction, ButtonAddFunctionCreateText);
+            buttonAddFunction.Refresh();
 
             string buttonAddFunctionToolTip = toolTip1.GetToolTip(buttonAddFunction);
             ButtonAddFunctionCreateToolTip = Regex.Replace(buttonAddFunctionToolTip, @"^(.*?)\:(.*)", "$1");
@@ -257,10 +262,13 @@ namespace MusicBeePlugin
 
 
             //Saving Save/Update field button labels & tool tip
-            string buttonUpdateFunctionText = buttonUpdateFunction.Text;
+            //string buttonUpdateFunctionText = buttonUpdateFunction.Text;
+            string buttonUpdateFunctionText = buttonLabels[buttonUpdateFunction];
             ButtonUpdateFunctionSaveText = Regex.Replace(buttonUpdateFunctionText, @"^(.*?)\:(.*)", "$1");
             ButtonUpdateFunctionUpdateText = Regex.Replace(buttonUpdateFunctionText, @"^(.*?)\:(.*)", "$2");
-            buttonUpdateFunction.Text = ButtonUpdateFunctionSaveText;
+            //buttonUpdateFunction.Text = ButtonUpdateFunctionSaveText;
+            buttonLabels.Replace(buttonUpdateFunction, ButtonUpdateFunctionSaveText);
+            buttonUpdateFunction.Refresh();
 
             string buttonUpdateFunctionToolTip = toolTip1.GetToolTip(buttonUpdateFunction);
             ButtonUpdateFunctionSaveToolTip = Regex.Replace(buttonUpdateFunctionToolTip, @"^(.*?)\:(.*)", "$1");
@@ -339,8 +347,8 @@ namespace MusicBeePlugin
             ignoreCheckedPresetEvent = true;
 
 
-            assignHotkeyCheckBoxText = assignHotkeyCheckBox.Text;
-            assignHotkeyCheckBox.Text = assignHotkeyCheckBoxText + (MaximumNumberOfLRHotkeys - reportPresetsWithHotkeysCount) + "/" + MaximumNumberOfLRHotkeys;
+            assignHotkeyCheckBoxText = assignHotkeyCheckBoxLabel.Text;
+            assignHotkeyCheckBoxLabel.Text = assignHotkeyCheckBoxText + (MaximumNumberOfLRHotkeys - reportPresetsWithHotkeysCount) + "/" + MaximumNumberOfLRHotkeys;
 
 
             FillListByTagNames(destinationTagList.Items);
@@ -1922,7 +1930,7 @@ namespace MusicBeePlugin
             if (selectedPreset == null)
                 return;
 
-            assignHotkeyCheckBox.Text = assignHotkeyCheckBoxText + (MaximumNumberOfLRHotkeys - reportPresetsWithHotkeysCount) + "/" + MaximumNumberOfLRHotkeys;
+            assignHotkeyCheckBoxLabel.Text = assignHotkeyCheckBoxText + (MaximumNumberOfLRHotkeys - reportPresetsWithHotkeysCount) + "/" + MaximumNumberOfLRHotkeys;
 
             updatePreset();
             setUnsavedChanges(true);
@@ -3533,7 +3541,7 @@ namespace MusicBeePlugin
 
             comparedFieldList.Items.Add(fullFieldName);
 
-            conditionCheckBox.Enabled = true;
+            conditionCheckBox.Enable(true);
             conditionCheckBox_CheckedChanged(null, null);
 
             if (fieldName == ArtworkName)
@@ -3783,7 +3791,7 @@ namespace MusicBeePlugin
 
             if (conditionFieldList.Items.Count == 0)
             {
-                conditionCheckBox.Enabled = false;
+                conditionCheckBox.Enable(false);
                 conditionCheckBox.Checked = false;
             }
 
@@ -4428,71 +4436,71 @@ namespace MusicBeePlugin
 
         public override void enableDisablePreviewOptionControls(bool enable)
         {
-            presetsBox.Enabled = enable && (newColumn == false);
-            buttonSave.Enabled = enable;
+            presetsBox.Enable(enable && (newColumn == false));
+            buttonSave.Enable(enable);
 
-            buttonAddPreset.Enabled = enable;
+            buttonAddPreset.Enable(enable);
 
             if (selectedPreset == null)
                 enable = false;
 
-            buttonCopyPreset.Enabled = enable;
-            buttonDeletePreset.Enabled = enable && selectedPreset?.userPreset == true;
+            buttonCopyPreset.Enable(enable);
+            buttonDeletePreset.Enable(enable && selectedPreset?.userPreset == true);
 
-            buttonApply.Enabled = enable;
-            buttonPreview.Enabled = selectedPreset != null;
+            buttonApply.Enable(enable);
+            buttonPreview.Enable(selectedPreset != null);
 
-            smartOperationCheckBox.Enabled = enable && !previewIsGenerated;
+            smartOperationCheckBox.Enable(enable && !previewIsGenerated);
 
-            buttonFilterResults.Enabled = enable && conditionCheckBox.Checked && previewIsGenerated;
+            buttonFilterResults.Enable(enable && conditionCheckBox.Checked && previewIsGenerated);
 
-            useHotkeyForSelectedTracksCheckBox.Enabled = enable && assignHotkeyCheckBox.Checked && assignHotkeyCheckBox.Enabled;
+            useHotkeyForSelectedTracksCheckBox.Enable(enable && assignHotkeyCheckBox.Checked && assignHotkeyCheckBox.Enabled);
 
 
-            tagsDataGridView.Enabled = enable && !previewIsGenerated && newColumn == false;
-            expressionsDataGridView.Enabled = enable && !previewIsGenerated && newColumn == false;
+            tagsDataGridView.Enable(enable && !previewIsGenerated && newColumn == false);
+            expressionsDataGridView.Enable(enable && !previewIsGenerated && newColumn == false);
 
-            sourceTagList.Enabled = enable && !previewIsGenerated && newColumn == true;
-            buttonAddFunction.Enabled = enable && !previewIsGenerated && selectedPreset?.userPreset == true;
-            buttonUpdateFunction.Enabled = enable && !previewIsGenerated && newColumn != false;
+            sourceTagList.Enable(enable && !previewIsGenerated && newColumn == true);
+            buttonAddFunction.Enable(enable && !previewIsGenerated && selectedPreset?.userPreset == true);
+            buttonUpdateFunction.Enable(enable && !previewIsGenerated && newColumn != false);
 
-            parameter2ComboBox.Enabled = enable && !previewIsGenerated && newColumn == true;
-            parameter2Label.Enabled = enable && !previewIsGenerated && newColumn == true;
-            forTagLabel.Enabled = enable && !previewIsGenerated && newColumn == true;
-            functionComboBox.Enabled = enable && !previewIsGenerated && newColumn == true;
-            labelFunction.Enabled = enable && !previewIsGenerated && newColumn == true;
+            parameter2ComboBox.Enable(enable && !previewIsGenerated && newColumn == true);
+            parameter2Label.Enable(enable && !previewIsGenerated && newColumn == true);
+            forTagLabel.Enable(enable && !previewIsGenerated && newColumn == true);
+            functionComboBox.Enable(enable && !previewIsGenerated && newColumn == true);
+            labelFunction.Enable(enable && !previewIsGenerated && newColumn == true);
 
-            multipleItemsSplitterTrimCheckBox.Enabled = enable && !previewIsGenerated && expressionBackup != null && selectedPreset?.userPreset == true;
-            multipleItemsSplitterComboBox.Enabled = enable && !previewIsGenerated && expressionBackup != null && selectedPreset?.userPreset == true;
-            multipleItemsSplitterLabel.Enabled = enable && !previewIsGenerated && expressionBackup != null && selectedPreset?.userPreset == true;
+            multipleItemsSplitterTrimCheckBox.Enable(enable && !previewIsGenerated && expressionBackup != null && selectedPreset?.userPreset == true);
+            multipleItemsSplitterComboBox.Enable(enable && !previewIsGenerated && expressionBackup != null && selectedPreset?.userPreset == true);
+            multipleItemsSplitterLabel.Enable(enable && !previewIsGenerated && expressionBackup != null && selectedPreset?.userPreset == true);
 
-            expressionLabel.Enabled = enable && !previewIsGenerated && expressionBackup != null && selectedPreset?.userPreset == true;
-            expressionTextBox.Enabled = enable && !previewIsGenerated && expressionBackup != null && selectedPreset?.userPreset == true;
-            clearExpressionButton.Enabled = enable && !previewIsGenerated && expressionBackup != null && selectedPreset?.userPreset == true;
+            expressionLabel.Enable(enable && !previewIsGenerated && expressionBackup != null && selectedPreset?.userPreset == true);
+            expressionTextBox.Enable(enable && !previewIsGenerated && expressionBackup != null && selectedPreset?.userPreset == true);
+            clearExpressionButton.Enable(enable && !previewIsGenerated && expressionBackup != null && selectedPreset?.userPreset == true);
 
-            totalsCheckBox.Enabled = enable && !previewIsGenerated;
+            totalsCheckBox.Enable(enable && !previewIsGenerated);
 
-            useAnotherPresetAsSourceCheckBox.Enabled = enable && !previewIsGenerated;
-            useAnotherPresetAsSourceComboBox.Enabled = enable && !previewIsGenerated;
+            useAnotherPresetAsSourceCheckBox.Enable(enable && !previewIsGenerated);
+            useAnotherPresetAsSourceComboBox.Enable(enable && !previewIsGenerated);
 
-            resizeArtworkCheckBox.Enabled = enable && !previewIsGenerated;
-            xArworkSizeUpDown.Enabled = enable && resizeArtworkCheckBox.Checked && !previewIsGenerated;
-            yArworkSizeUpDown.Enabled = enable && resizeArtworkCheckBox.Checked && !previewIsGenerated;
-            labelXxY.Enabled = enable && resizeArtworkCheckBox.Checked && !previewIsGenerated;
-            labelPx.Enabled = enable && resizeArtworkCheckBox.Checked && !previewIsGenerated;
+            resizeArtworkCheckBox.Enable(enable && !previewIsGenerated);
+            xArworkSizeUpDown.Enable(enable && resizeArtworkCheckBox.Checked && !previewIsGenerated);
+            yArworkSizeUpDown.Enable(enable && resizeArtworkCheckBox.Checked && !previewIsGenerated);
+            labelXxY.Enable(enable && resizeArtworkCheckBox.Checked && !previewIsGenerated);
+            labelPx.Enable(enable && resizeArtworkCheckBox.Checked && !previewIsGenerated);
 
-            buttonExport.Enabled = enable && previewIsGenerated;
-            labelFormat.Enabled = enable && previewIsGenerated;
-            formatComboBox.Enabled = enable && previewIsGenerated;
-            openReportCheckBox.Enabled = enable && previewIsGenerated;
+            buttonExport.Enable(enable && previewIsGenerated);
+            labelFormat.Enable(enable && previewIsGenerated);
+            formatComboBox.Enable(enable && previewIsGenerated);
+            openReportCheckBox.Enable(enable && previewIsGenerated);
 
-            operationComboBox.Enabled = enable && !previewIsGenerated;
-            mulDivFactorComboBox.Enabled = enable && !previewIsGenerated;
-            roundToLabel.Enabled = enable && !previewIsGenerated;
-            precisionDigitsComboBox.Enabled = enable && !previewIsGenerated;
-            digitsLabel.Enabled = enable && !previewIsGenerated;
-            appendLabel.Enabled = enable && !previewIsGenerated;
-            appendTextBox.Enabled = enable && !previewIsGenerated;
+            operationComboBox.Enable(enable && !previewIsGenerated);
+            mulDivFactorComboBox.Enable(enable && !previewIsGenerated);
+            roundToLabel.Enable(enable && !previewIsGenerated);
+            precisionDigitsComboBox.Enable(enable && !previewIsGenerated);
+            digitsLabel.Enable(enable && !previewIsGenerated);
+            appendLabel.Enable(enable && !previewIsGenerated);
+            appendTextBox.Enable(enable && !previewIsGenerated);
         }
 
         public override void enableQueryingButtons()
@@ -4508,43 +4516,49 @@ namespace MusicBeePlugin
 
         public override void enableQueryingOrUpdatingButtons()
         {
-            buttonExport.Enabled = previewIsGenerated;
-            labelFormat.Enabled = previewIsGenerated;
-            formatComboBox.Enabled = previewIsGenerated;
-            resizeArtworkCheckBox.Enabled = previewIsGenerated;
-            xArworkSizeUpDown.Enabled = previewIsGenerated;
-            yArworkSizeUpDown.Enabled = previewIsGenerated;
-            labelXxY.Enabled = previewIsGenerated;
-            labelPx.Enabled = previewIsGenerated;
-            openReportCheckBox.Enabled = previewIsGenerated;
+            buttonExport.Enable(previewIsGenerated);
+            labelFormat.Enable(previewIsGenerated);
+            formatComboBox.Enable(previewIsGenerated);
+            resizeArtworkCheckBox.Enable(previewIsGenerated);
+            xArworkSizeUpDown.Enable(previewIsGenerated);
+            yArworkSizeUpDown.Enable(previewIsGenerated);
+            labelXxY.Enable(previewIsGenerated);
+            labelPx.Enable(previewIsGenerated);
+            openReportCheckBox.Enable(previewIsGenerated);
 
-            buttonPreview.Enabled = true;
-            buttonApply.Enabled = true;
+            buttonPreview.Enable(true);
+            buttonApply.Enable(true);
 
-            buttonSave.Enabled = true;
+            buttonSave.Enable(true);
         }
 
         public override void disableQueryingOrUpdatingButtons()
         {
-            buttonExport.Enabled = false;
-            labelFormat.Enabled = false;
-            formatComboBox.Enabled = false;
-            resizeArtworkCheckBox.Enabled = false;
-            xArworkSizeUpDown.Enabled = false;
-            yArworkSizeUpDown.Enabled = false;
-            labelXxY.Enabled = false;
-            labelPx.Enabled = false;
-            openReportCheckBox.Enabled = false;
+            buttonExport.Enable(false);
+            labelFormat.Enable(false);
+            formatComboBox.Enable(false);
+            resizeArtworkCheckBox.Enable(false);
+            xArworkSizeUpDown.Enable(false);
+            yArworkSizeUpDown.Enable(false);
+            labelXxY.Enable(false);
+            labelPx.Enable(false);
+            openReportCheckBox.Enable(false);
 
-            buttonPreview.Enabled = false;
-            buttonApply.Enabled = false;
+            buttonPreview.Enable(false);
+            buttonApply.Enable(false);
 
-            buttonSave.Enabled = false;
+            buttonSave.Enable(false);
         }
 
         private void recalculateOnNumberOfTagsChangesCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            numberOfTagsToRecalculateNumericUpDown.Enabled = recalculateOnNumberOfTagsChangesCheckBox.Checked;
+            numberOfTagsToRecalculateNumericUpDown.Enable(recalculateOnNumberOfTagsChangesCheckBox.Checked);
+        }
+
+        private void recalculateOnNumberOfTagsChangesCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            recalculateOnNumberOfTagsChangesCheckBox.Checked = !recalculateOnNumberOfTagsChangesCheckBox.Checked;
+            recalculateOnNumberOfTagsChangesCheckBox_CheckedChanged(null, null);
         }
 
         private void buttonAddPreset_Click(object sender, EventArgs e)
@@ -4941,11 +4955,17 @@ namespace MusicBeePlugin
             }
             else if (newColumnParam == null) // Updating expression
             {
-                buttonUpdateFunction.Text = ButtonUpdateFunctionUpdateText;
+                //buttonUpdateFunction.Text = ButtonUpdateFunctionUpdateText;
+                buttonLabels.Replace(buttonUpdateFunction, ButtonUpdateFunctionUpdateText);
+                buttonUpdateFunction.Refresh();
+
                 toolTip1.SetToolTip(buttonUpdateFunction, ButtonUpdateFunctionUpdateToolTip);
             }
 
-            buttonAddFunction.Text = ButtonAddFunctionDiscardText;
+            //buttonAddFunction.Text = ButtonAddFunctionDiscardText;
+            buttonLabels.Replace(buttonAddFunction, ButtonAddFunctionDiscardText);
+            buttonAddFunction.Refresh();
+
             toolTip1.SetToolTip(buttonAddFunction, ButtonAddFunctionDiscardToolTip);
 
             newColumn = newColumnParam;
@@ -4962,10 +4982,13 @@ namespace MusicBeePlugin
 
             newColumn = false;
 
-            tagsDataGridView.Enabled = true;
-            expressionsDataGridView.Enabled = true;
+            tagsDataGridView.Enable(true);
+            expressionsDataGridView.Enable(true);
 
-            buttonUpdateFunction.Text = ButtonUpdateFunctionSaveText;
+            //buttonUpdateFunction.Text = ButtonUpdateFunctionSaveText;
+            buttonLabels.Replace(buttonUpdateFunction, ButtonUpdateFunctionSaveText);
+            buttonUpdateFunction.Refresh();
+
             toolTip1.SetToolTip(buttonUpdateFunction, ButtonUpdateFunctionSaveToolTip);
             buttonUpdateFunction.Image = Resources.transparent_15;
 
@@ -5231,6 +5254,15 @@ namespace MusicBeePlugin
             setColumnChanged(null);
         }
 
+        private void multipleItemsSplitterTrimCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            if (!multipleItemsSplitterTrimCheckBox.Enabled)
+                return;
+
+            multipleItemsSplitterTrimCheckBox.Checked = !multipleItemsSplitterTrimCheckBox.Checked;
+            multipleItemsSplitterTrimCheckBox_CheckedChanged(null, null);
+        }
+
         private void functionComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (presetIsLoaded)
@@ -5242,6 +5274,7 @@ namespace MusicBeePlugin
                 multipleItemsSplitterLabel.Visible = false;
                 multipleItemsSplitterComboBox.Visible = false;
                 multipleItemsSplitterTrimCheckBox.Visible = false;
+                multipleItemsSplitterTrimCheckBoxLabel.Visible = false;
 
                 parameter2Label.Visible = true;
                 parameter2ComboBox.Visible = true;
@@ -5251,6 +5284,7 @@ namespace MusicBeePlugin
                 multipleItemsSplitterLabel.Visible = true;
                 multipleItemsSplitterComboBox.Visible = true;
                 multipleItemsSplitterTrimCheckBox.Visible = true;
+                multipleItemsSplitterTrimCheckBoxLabel.Visible = true;
 
                 parameter2Label.Visible = false;
                 parameter2ComboBox.Visible = false;
@@ -5260,6 +5294,7 @@ namespace MusicBeePlugin
                 multipleItemsSplitterLabel.Visible = false;
                 multipleItemsSplitterComboBox.Visible = false;
                 multipleItemsSplitterTrimCheckBox.Visible = false;
+                multipleItemsSplitterTrimCheckBoxLabel.Visible = true;
 
                 parameter2Label.Visible = false;
                 parameter2ComboBox.Visible = false;
@@ -5315,7 +5350,7 @@ namespace MusicBeePlugin
             {
                 selectedPreset = null;
 
-                presetNameTextBox.Enabled = false;
+                presetNameTextBox.Enable(false);
 
                 lastSelectedRefCheckStatus = true;
                 useAnotherPresetAsSourceCheckBox.Checked = false;
@@ -5340,7 +5375,7 @@ namespace MusicBeePlugin
 
                 totalsCheckBox.Checked = false;
 
-                assignHotkeyCheckBox.Enabled = false;
+                assignHotkeyCheckBox.Enable(false);
 
                 presetNameTextBox.Text = "";
                 assignHotkeyCheckBox.Checked = false;
@@ -5366,7 +5401,7 @@ namespace MusicBeePlugin
 
             selectedPreset = (ReportPreset)presetsBox.SelectedItem;
 
-            presetNameTextBox.Enabled = true;
+            presetNameTextBox.Enable(true);
             presetNameTextBox.ReadOnly = !selectedPreset.userPreset;
 
 
@@ -5375,11 +5410,11 @@ namespace MusicBeePlugin
             totalsCheckBox.Checked = selectedPreset.totals;
 
             if (reportPresetsWithHotkeysCount < MaximumNumberOfLRHotkeys)
-                assignHotkeyCheckBox.Enabled = true;
+                assignHotkeyCheckBox.Enable(true);
             else if (reportPresetsWithHotkeysCount == MaximumNumberOfLRHotkeys && selectedPreset.hotkeyAssigned)
-                assignHotkeyCheckBox.Enabled = true;
+                assignHotkeyCheckBox.Enable(true);
             else
-                assignHotkeyCheckBox.Enabled = false;
+                assignHotkeyCheckBox.Enable(false);
 
 
             if (ignorePresetChangedEvent)
@@ -5482,12 +5517,21 @@ namespace MusicBeePlugin
 
         private void conditionCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            conditionFieldList.Enabled = conditionCheckBox.Checked;
-            conditionList.Enabled = conditionCheckBox.Checked && conditionFieldList.SelectedIndex != -1;
-            comparedFieldList.Enabled = conditionCheckBox.Checked && conditionFieldList.SelectedIndex != -1;
-            buttonFilterResults.Enabled = conditionCheckBox.Checked && previewIsGenerated && conditionFieldList.SelectedIndex != -1;
+            conditionFieldList.Enable(conditionCheckBox.Checked);
+            conditionList.Enable(conditionCheckBox.Checked && conditionFieldList.SelectedIndex != -1);
+            comparedFieldList.Enable(conditionCheckBox.Checked && conditionFieldList.SelectedIndex != -1);
+            buttonFilterResults.Enable(conditionCheckBox.Checked && previewIsGenerated && conditionFieldList.SelectedIndex != -1);
 
             setPresetChanged();
+        }
+
+        private void conditionCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            if (!conditionCheckBox.Enabled)
+                return;
+
+            conditionCheckBox.Checked = !conditionCheckBox.Checked;
+            conditionCheckBox_CheckedChanged(null, null);
         }
 
         private void previewTable_DataError(object sender, DataGridViewDataErrorEventArgs e)
@@ -5576,7 +5620,7 @@ namespace MusicBeePlugin
             if (presetsBox.SelectedIndex == -1)
                 return;
 
-            useHotkeyForSelectedTracksCheckBox.Enabled = assignHotkeyCheckBox.Checked;
+            useHotkeyForSelectedTracksCheckBox.Enable(assignHotkeyCheckBox.Checked);
 
             if (presetIsLoaded)
                 return;
@@ -5589,12 +5633,30 @@ namespace MusicBeePlugin
             setPresetChanged();
         }
 
+        private void assignHotkeyCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            if (!assignHotkeyCheckBox.Enabled)
+                return;
+
+            assignHotkeyCheckBox.Checked = !assignHotkeyCheckBox.Checked;
+            assignHotkeyCheckBox_CheckedChanged(null, null);
+        }
+
         private void useHotkeyForSelectedTracksCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (presetsBox.SelectedIndex == -1)
                 return;
 
             setPresetChanged();
+        }
+
+        private void useHotkeyForSelectedTracksCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            if (!useHotkeyForSelectedTracksCheckBox.Enabled)
+                return;
+
+            useHotkeyForSelectedTracksCheckBox.Checked = !useHotkeyForSelectedTracksCheckBox.Checked;
+            useHotkeyForSelectedTracksCheckBox_CheckedChanged(null, null);
         }
 
         private void previewTable_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -5624,8 +5686,17 @@ namespace MusicBeePlugin
         {
             SavedSettings.resizeArtwork = resizeArtworkCheckBox.Checked;
 
-            xArworkSizeUpDown.Enabled = resizeArtworkCheckBox.Checked;
-            yArworkSizeUpDown.Enabled = resizeArtworkCheckBox.Checked;
+            xArworkSizeUpDown.Enable(resizeArtworkCheckBox.Checked);
+            yArworkSizeUpDown.Enable(resizeArtworkCheckBox.Checked);
+        }
+
+        private void resizeArtworkCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            if (!resizeArtworkCheckBox.Enabled)
+                return;
+
+            resizeArtworkCheckBox.Checked = !resizeArtworkCheckBox.Checked;
+            resizeArtworkCheckBox_CheckedChanged(null, null);
         }
 
         private void xArworkSizeUpDown_ValueChanged(object sender, EventArgs e)
@@ -5642,14 +5713,14 @@ namespace MusicBeePlugin
         {
             if (sourceFieldComboBox.SelectedIndex == -1)
             {
-                sourceFieldComboBox.Enabled = false;
-                labelSaveField.Enabled = false;
-                labelSaveToTag.Enabled = false;
-                labelFunctionId.Enabled = false;
+                sourceFieldComboBox.Enable(false);
+                labelSaveField.Enable(false);
+                labelSaveToTag.Enable(false);
+                labelFunctionId.Enable(false);
 
-                destinationTagList.Enabled = false;
-                idTextBox.Enabled = false;
-                clearIdButton.Enabled = false;
+                destinationTagList.Enable(false);
+                idTextBox.Enable(false);
+                clearIdButton.Enable(false);
 
                 destinationTagList.SelectedIndex = -1;
                 idTextBox.Text = "";
@@ -5660,34 +5731,34 @@ namespace MusicBeePlugin
                 precisionDigitsComboBox.SelectedIndex = 0;
                 appendTextBox.Text = "";
 
-                operationComboBox.Enabled = false;
-                mulDivFactorComboBox.Enabled = false;
-                precisionDigitsComboBox.Enabled = false;
-                appendTextBox.Enabled = false;
-                roundToLabel.Enabled = false;
-                digitsLabel.Enabled = false;
-                appendLabel.Enabled = false;
+                operationComboBox.Enable(false);
+                mulDivFactorComboBox.Enable(false);
+                precisionDigitsComboBox.Enable(false);
+                appendTextBox.Enable(false);
+                roundToLabel.Enable(false);
+                digitsLabel.Enable(false);
+                appendLabel.Enable(false);
 
                 return;
             }
 
 
-            sourceFieldComboBox.Enabled = true;
-            labelSaveField.Enabled = true;
-            labelSaveToTag.Enabled = true;
-            labelFunctionId.Enabled = true;
+            sourceFieldComboBox.Enable(true);
+            labelSaveField.Enable(true);
+            labelSaveToTag.Enable(true);
+            labelFunctionId.Enable(true);
 
-            destinationTagList.Enabled = true;
-            idTextBox.Enabled = true;
-            clearIdButton.Enabled = true;
+            destinationTagList.Enable(true);
+            idTextBox.Enable(true);
+            clearIdButton.Enable(true);
 
-            operationComboBox.Enabled = true;
-            mulDivFactorComboBox.Enabled = true;
-            precisionDigitsComboBox.Enabled = true;
-            appendTextBox.Enabled = true;
-            roundToLabel.Enabled = true;
-            digitsLabel.Enabled = true;
-            appendLabel.Enabled = true;
+            operationComboBox.Enable(true);
+            mulDivFactorComboBox.Enable(true);
+            precisionDigitsComboBox.Enable(true);
+            appendTextBox.Enable(true);
+            roundToLabel.Enable(true);
+            digitsLabel.Enable(true);
+            appendLabel.Enable(true);
 
             sourceFieldComboBoxIndexChanging = true;
             destinationTagList.Text = savedDestinationTagsNames[sourceFieldComboBox.SelectedIndex];
@@ -5709,6 +5780,15 @@ namespace MusicBeePlugin
         private void totalsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             setPresetChanged();
+        }
+
+        private void totalsCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            if (!totalsCheckBox.Enabled)
+                return;
+
+            totalsCheckBox.Checked = !totalsCheckBox.Checked;
+            totalsCheckBox_CheckedChanged(null, null);
         }
 
         private void operationComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -5843,7 +5923,7 @@ namespace MusicBeePlugin
         private void useAnotherPresetAsSourceCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             setPresetChanged();
-            useAnotherPresetAsSourceComboBox.Enabled = useAnotherPresetAsSourceCheckBox.Checked;
+            useAnotherPresetAsSourceComboBox.Enable(useAnotherPresetAsSourceCheckBox.Checked);
 
             if (presetIsLoaded)
                 return;
@@ -5854,6 +5934,15 @@ namespace MusicBeePlugin
 
             if (selectedPreset != null)
                 adjustPresetAsSourceUI(useAnotherPresetAsSourceComboBox, selectedPreset.anotherPresetAsSource, selectedRefCheckStatus);
+        }
+
+        private void useAnotherPresetAsSourceCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            if (!useAnotherPresetAsSourceCheckBox.Enabled)
+                return;
+
+            useAnotherPresetAsSourceCheckBox.Checked = !useAnotherPresetAsSourceCheckBox.Checked;
+            useAnotherPresetAsSourceCheckBox_CheckedChanged(null, null);
         }
 
         private void previewTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -5898,6 +5987,20 @@ namespace MusicBeePlugin
                     if (i != e.Row.Index && previewTable.Rows[i].Height < e.Row.Height)
                         previewTable.Rows[i].Height = e.Row.Height;
             }
+        }
+
+        private void smartOperationCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            if (!smartOperationCheckBox.Enabled)
+                return;
+
+            smartOperationCheckBox.Checked = !smartOperationCheckBox.Checked;
+        }
+
+        private void buttonSettings_Click(object sender, EventArgs e)
+        {
+            PluginQuickSettings settings = new PluginQuickSettings(TagToolsPlugin);
+            PluginWindowTemplate.Display(settings, true);
         }
     }
 

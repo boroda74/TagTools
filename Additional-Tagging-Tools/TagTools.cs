@@ -1,17 +1,81 @@
-﻿using MusicBeePlugin.Properties;
+﻿using MusicBeePlugin;
+using MusicBeePlugin.Properties;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.IO;
-using System.Linq.Expressions;
-using System.Resources;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 using static MusicBeePlugin.AdvancedSearchAndReplaceCommand;
 using static MusicBeePlugin.LibraryReportsCommand;
+using ExtensionMethods;
+
+
+namespace ExtensionMethods
+{
+    public static class ReadonlyControls
+    {
+        public static void Replace<T1, T2>(this Dictionary<T1, T2> dictionary, T1 key, T2 value)
+        {
+            if (dictionary.TryGetValue(key, out _))
+                dictionary.Remove(key);
+
+            dictionary.Add(key, value);
+        }
+
+        public static void Enable(this Control control, bool state)
+        {
+            Color enabledColor;
+            Color disabledColor;
+
+            if (!Plugin.SavedSettings.useSkinColors)
+            {
+                enabledColor = SystemColors.ControlText;
+                disabledColor = SystemColors.GrayText;
+            }
+            else
+            {
+                enabledColor = Plugin.AccentColor;
+                disabledColor = Plugin.DimmedColor;
+            }
+
+
+            if (control.GetType() == typeof(Label))
+            {
+                if (state)
+                    control.ForeColor = enabledColor;
+                else
+                    control.ForeColor = disabledColor;
+
+                return;
+            }
+
+
+            if (control.GetType() != typeof(CheckBox) && control.GetType() != typeof(RadioButton))
+            {
+                control.Enabled = state;
+                return;
+            }
+
+
+            control.Enabled = state;
+            Label label = (Label)control.Parent.Controls[(string)control.Tag];
+
+
+
+            if (label != null)
+            {
+                if (state)
+                    label.ForeColor = enabledColor;
+                else
+                    label.ForeColor = disabledColor;
+            }
+        }
+    }
+}
+
 
 namespace MusicBeePlugin
 {
@@ -76,6 +140,42 @@ namespace MusicBeePlugin
         private static readonly PluginInfo About = new PluginInfo();
 
         public static string PluginVersion;
+
+
+
+        //Skinning
+        public static Color BackFormColor;
+
+        public static Color ButtonBackColor;
+        public static Color ButtonForeColor;
+
+        public static Color ButtonDisabledBackColor;
+        public static Color ButtonDisabledForeColor;
+
+
+        public static Color ButtonBackColorSkinned;
+        public static Color ButtonForeColorSkinned;
+
+        public static Color ButtonDisabledBackColorSkinned;
+        public static Color ButtonDisabledForeColorSkinned;
+
+
+        public static Color AccentColor;
+        public static Color AccentSelectedColor;
+        public static Color DimmedColor;
+        public static Color DeepDimmedColor;
+        public static Color VeryDeepDimmedColor;
+
+        public static Color  DimmedHighlight;
+
+        public static float AccentWeight;
+        public static float DimmedWeight;
+        public static float DeepDimmedWeight;
+        public static float VeryDeepDimmedWeight;
+
+        public static float[] SplitterPenDashPattern;
+        public static Pen SplitterPen;
+
 
         public const int MaximumNumberOfASRHotkeys = 20;
         public const int MaximumNumberOfLRHotkeys = 20;
@@ -275,6 +375,8 @@ namespace MusicBeePlugin
 
         #region Defaults for controls
         //Defaults for controls
+        public static DataGridViewCellStyle HeaderCellStyle = new DataGridViewHeaderCell().Style;
+
         public static DataGridViewCellStyle UnchangedCellStyle = new DataGridViewCellStyle();
         public static DataGridViewCellStyle ChangedCellStyle = new DataGridViewCellStyle();
         public static DataGridViewCellStyle DimmedCellStyle = new DataGridViewCellStyle();
@@ -326,6 +428,7 @@ namespace MusicBeePlugin
             public string reencodeTagSourceTagName;
 
             public bool onlyIfDestinationIsEmpty;
+            public bool onlyIfSourceNotEmpty;
             public bool smartOperation;
             public bool appendSource;
             public bool addSource;
@@ -834,7 +937,7 @@ namespace MusicBeePlugin
         {
             public int type; // 4 - date-time, 3 - timespan, 2 - double, 1 - items count, 0 - unknown/string, -1 - use other results to get type
 
-            public double result1f;//****
+            public double result1f;
             public string result1fPrefix;
             public string result1fSpace;
             public string result1fPostfix;
@@ -871,7 +974,7 @@ namespace MusicBeePlugin
                 items1 = new SortedDictionary<string, bool>();
             }
 
-            public int compare(ConvertStringsResult comparedResult) //-1: less than comparedResult, 0: equal to comparedResult, +1: greater than comparedResult //*****
+            public int compare(ConvertStringsResult comparedResult) //-1: less than comparedResult, 0: equal to comparedResult, +1: greater than comparedResult
             {
                 if (items1.Count != 0) //Its "average count" function, i.e. double
                 {
@@ -987,10 +1090,6 @@ namespace MusicBeePlugin
                     else
                         return result1fPrefix + result.ToString() + result1fSpace + appendedText + result1fPostfix;
                 }
-                //****else if (type == 2)
-                //{
-                //    return result1f.ToString();
-                //}
                 else if (type <= 0)
                 {
                     return result1s;
@@ -3318,7 +3417,7 @@ namespace MusicBeePlugin
                 "\n" +
                 "Shift-click checks/unchecks all rows containing the same tag\n" +
                 "\n" +
-                "Ctrl-click adds/removes the tag referred in the row to/from proceeded or preserved tags";//****!!!!!
+                "Ctrl-click adds/removes the tag referred in the row to/from proceeded or preserved tags";
             MsgAsrPresetsUsingAllTagsPseudoTagNameCannotBeAutoApplied = "Can't execute preset %%PRESETNAME%%! ASR presets using %%AllTagsPseudoTagName%% cannot " +
                 "be auto-executed, nor can be applied via hotkey!";
 
@@ -3521,11 +3620,36 @@ namespace MusicBeePlugin
                 SavedSettings.defaultTagHistoryNumberOfBackups = 10;
 
 
-            //COMMOM COLOR DEFINITIONS
-            UnchangedCellStyle.ForeColor = SystemColors.WindowText;
-            UnchangedCellStyle.BackColor = SystemColors.Window;
-            UnchangedCellStyle.SelectionForeColor = SystemColors.HighlightText;
-            UnchangedCellStyle.SelectionBackColor = SystemColors.Highlight;
+            //COMMOM COLOR DEFINITIONS//*****
+            if (SavedSettings.useSkinColors)
+            {
+                HeaderCellStyle.ForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinSubPanel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
+                HeaderCellStyle.BackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinSubPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
+                HeaderCellStyle.SelectionForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinSubPanel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
+                HeaderCellStyle.SelectionBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinSubPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
+
+                UnchangedCellStyle.ForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
+                UnchangedCellStyle.BackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
+                UnchangedCellStyle.SelectionForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateModified, ElementComponent.ComponentForeground));
+                UnchangedCellStyle.SelectionBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateModified, ElementComponent.ComponentBackground));
+
+                if (UnchangedCellStyle.SelectionForeColor == UnchangedCellStyle.ForeColor)
+                {
+                    UnchangedCellStyle.SelectionForeColor = SystemColors.HighlightText;
+                }
+
+                if (UnchangedCellStyle.SelectionBackColor == UnchangedCellStyle.BackColor)
+                {
+                    UnchangedCellStyle.SelectionBackColor = SystemColors.Highlight;
+                }
+            }
+            else
+            {
+                UnchangedCellStyle.ForeColor = SystemColors.WindowText;
+                UnchangedCellStyle.BackColor = SystemColors.Window;
+                UnchangedCellStyle.SelectionForeColor = SystemColors.HighlightText;
+                UnchangedCellStyle.SelectionBackColor = SystemColors.Highlight;
+            }
 
             Color ChangedForeColor = Color.FromKnownColor(KnownColor.Red);//****
             Color PreservedTagsForeColor = Color.FromKnownColor(KnownColor.Blue);
@@ -3536,7 +3660,7 @@ namespace MusicBeePlugin
             ChangedCellStyle.BackColor = UnchangedCellStyle.BackColor;
             ChangedCellStyle.SelectionBackColor = UnchangedCellStyle.SelectionBackColor;
 
-            float scale = 1.5f / 256f;//****
+            float scale = 1.5f;//****
 
             Color backColor = ChangedCellStyle.BackColor;
             float br = backColor.R;
@@ -3552,7 +3676,7 @@ namespace MusicBeePlugin
 
             float brt = (r + g + b) / 3f;
 
-            if (Math.Abs(brt - bbrt) < 256 / 3)
+            if (Math.Abs(brt - bbrt) < 256 / 3f)
             {
                 if (brt < 127)
                     r = r * (brt * scale);
@@ -3706,7 +3830,7 @@ namespace MusicBeePlugin
             PreservedTagCellStyle.BackColor = UnchangedCellStyle.BackColor;
             PreservedTagCellStyle.SelectionBackColor = UnchangedCellStyle.SelectionBackColor;
 
-            scale = 1.5f / 256f;//****
+            scale = 1.5f;//****
 
             backColor = UnchangedCellStyle.BackColor;
             br = backColor.R;
@@ -3722,7 +3846,7 @@ namespace MusicBeePlugin
 
             brt = (r + g + b) / 3f;
 
-            if (Math.Abs(brt - bbrt) < 256 / 3)
+            if (Math.Abs(brt - bbrt) < 256 / 3f)
             {
                 if (brt < 127)
                     r = r * (brt * scale);
@@ -3801,7 +3925,7 @@ namespace MusicBeePlugin
             PreservedTagValueCellStyle.BackColor = UnchangedCellStyle.BackColor;
             PreservedTagValueCellStyle.SelectionBackColor = UnchangedCellStyle.SelectionBackColor;
 
-            scale = 1.5f / 256f;//****
+            scale = 1.5f;//****
 
             backColor = UnchangedCellStyle.BackColor;
             br = backColor.R;
@@ -3817,7 +3941,7 @@ namespace MusicBeePlugin
 
             brt = (r + g + b) / 3f;
 
-            if (Math.Abs(brt - bbrt) < 256 / 3)
+            if (Math.Abs(brt - bbrt) < 256 / 3f)
             {
                 if (brt < 127)
                     r = r * (brt * scale);
@@ -4816,9 +4940,14 @@ namespace MusicBeePlugin
                 PeriodicAutobackupTimer = null;
             }
 
+
+            //Skinning
             EmptyButton?.Dispose();
             EmptyTextBox?.Dispose();
             EmptyForm?.Dispose();
+
+            SplitterPen.Dispose();
+
 
 
             lock (OpenedForms)
@@ -4900,16 +5029,69 @@ namespace MusicBeePlugin
                 return (ToolStripMenuItem)menuItem;
         }
 
-        public static void PrepareThemedBitmaps()
+        public static void PrepareThemedBitmapsAndColors()
         {
             //Skin controls
+            SplitterPenDashPattern = new float[] { 1f, 1f }; //Splitter is always drawn (even using system colors)
+            SplitterPen = new Pen(DimmedHighlight, 2);
+
+
+            Color backColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
+            AccentColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
+            AccentSelectedColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateModified, ElementComponent.ComponentForeground));
+
+
+            AccentWeight = 0.70f;
+            DimmedWeight = 0.45f;
+            DeepDimmedWeight = 0.137f;
+            VeryDeepDimmedWeight = 0.07f;//*****
+
+            DimmedColor = GetWeightedColor(AccentColor, backColor, DimmedWeight);
+            DeepDimmedColor = GetWeightedColor(AccentColor, backColor, DeepDimmedWeight);
+            VeryDeepDimmedColor = GetWeightedColor(AccentColor, backColor, VeryDeepDimmedWeight);
+
+            BackFormColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
+
+
+            //Skinning buttons (especially disabled buttons)
+            ButtonBackColorSkinned = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
+            ButtonForeColorSkinned = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
+
+            ButtonDisabledBackColorSkinned = ButtonBackColorSkinned;
+            //float avgBrightness = GetAverageBrightness(ButtonBackColorSkinned);
+            //if (avgBrightness > 0.5f)
+            //{
+            //    ButtonDisabledBackColorSkinned = GetWeightedColor(ButtonBackColorSkinned, Color.Black, 0.6f);
+            //}
+            //else
+            //{
+            //    ButtonDisabledBackColorSkinned = GetWeightedColor(ButtonBackColorSkinned, Color.White, 0.6f);
+            //}
+
+            ButtonDisabledForeColorSkinned = GetWeightedColor(ButtonForeColorSkinned, ButtonDisabledBackColorSkinned, 0.5f);
+
+
+            ButtonBackColor = SystemColors.Control;//******
+            ButtonForeColor = SystemColors.ControlText;
+
+            ButtonDisabledBackColor = ButtonBackColor;
+            //ButtonDisabledBackColor = SystemColors.ControlDark;
+            ButtonDisabledForeColor = SystemColors.GrayText;
+
+
+
             EmptyButton?.Dispose();
             EmptyTextBox?.Dispose();
             EmptyForm?.Dispose();
 
-            EmptyButton = (Button)PluginWindowTemplate.SkinControl(new Button());
-            EmptyTextBox = (TextBox)PluginWindowTemplate.SkinControl(new TextBox());
-            EmptyForm = PluginWindowTemplate.SkinForm(new Form());
+            var pluginWindowTemplate = new PluginWindowTemplate();
+            EmptyButton = (Button)PluginWindowTemplate.SkinControl(pluginWindowTemplate, new Button());
+            EmptyTextBox = (TextBox)PluginWindowTemplate.SkinControl(pluginWindowTemplate, new TextBox());
+            EmptyForm = PluginWindowTemplate.SkinForm(pluginWindowTemplate);
+
+
+            Color sampleColor = SystemColors.Highlight;
+            DimmedHighlight = GetHighlightColor(sampleColor, EmptyForm.ForeColor, EmptyForm.BackColor);
 
 
             //Setting default & making themed colors
@@ -4920,60 +5102,49 @@ namespace MusicBeePlugin
 
 
             //Making themed bitmaps
-            UncheckedState = GetSolidImageByBitmapMask(GetWeightedColor(EmptyForm.ForeColor, EmptyForm.BackColor), Resources.uncheck_mark);
-            CheckedState = GetSolidImageByBitmapMask(EmptyForm.ForeColor, Resources.check_mark);
+            CheckedState = GetSolidImageByBitmapMask(AccentColor, Resources.check_mark);
+            UncheckedState = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, BackFormColor, AccentWeight), Resources.uncheck_mark);
 
-            InterpolatedBox pictureBox = new InterpolatedBox
+
+            if (SavedSettings.useSkinColors)
             {
-                Interpolation = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic,
-                Image = Resources.clear_button_15
-            };
-
-            //ButtonSetImage = GetSolidImageByBitmapMask(EmptyButton.ForeColor, Resources.check_mark, 15, 15);
-
-            if (EmptyButton.FlatStyle == FlatStyle.Flat)
-            {
-                ButtonRemoveImage = Resources.clear_button_15_flat;
-                Warning = Resources.warning_15_Flat;
-                Gear = Resources.gear_15_Flat;
+                ButtonRemoveImage = GetSolidImageByBitmapMask(ButtonForeColorSkinned, Resources.uncheck_mark, 16, 16);
+                ButtonSetImage = GetSolidImageByBitmapMask(ButtonForeColorSkinned, Resources.check_mark, 16, 16);
+                Warning = Resources.warning_wide_15;
+                Gear = GetSolidImageByBitmapMask(ButtonForeColorSkinned, Resources.function_id_presets, 16, 16);
             }
             else
             {
-                ButtonRemoveImage = Resources.clear_button_15;
-                Warning = Resources.warning_15;
-                Gear = Resources.gear_15;
+                ButtonRemoveImage = GetSolidImageByBitmapMask(ButtonForeColor, Resources.uncheck_mark, 16, 16);
+                ButtonSetImage = GetSolidImageByBitmapMask(ButtonForeColor, Resources.check_mark, 16, 16);
+                Warning = Resources.warning_wide_15;
+                Gear = GetSolidImageByBitmapMask(ButtonForeColor, Resources.function_id_presets, 16, 16);
             }
 
 
-            //Color accentColor = SystemColors.Highlight;
-            Color accentColor = EmptyForm.ForeColor;
-            Color dimmedColor = EmptyForm.BackColor;
-            float accentWeight = 0.35f;
+            AutoAppliedPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.auto_applied_presets);
+            AutoAppliedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, BackFormColor, AccentWeight), Resources.auto_applied_presets);
 
+            PredefinedPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.predefined_presets);
+            PredefinedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, BackFormColor, AccentWeight), Resources.predefined_presets);
 
-            AutoAppliedPresetsAccent = GetSolidImageByBitmapMask(accentColor, Resources.auto_applied_presets);
-            AutoAppliedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(accentColor, dimmedColor, accentWeight), Resources.auto_applied_presets);
+            CustomizedPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.customized_presets);
+            CustomizedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, BackFormColor, AccentWeight), Resources.customized_presets);
 
-            PredefinedPresetsAccent = GetSolidImageByBitmapMask(accentColor, Resources.predefined_presets);
-            PredefinedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(accentColor, dimmedColor, accentWeight), Resources.predefined_presets);
+            UserPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.user_presets);
+            UserPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, BackFormColor, AccentWeight), Resources.user_presets);
 
-            CustomizedPresetsAccent = GetSolidImageByBitmapMask(accentColor, Resources.customized_presets);
-            CustomizedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(accentColor, dimmedColor, accentWeight), Resources.customized_presets);
+            PlaylistPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.playlist_presets);
+            PlaylistPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, BackFormColor, AccentWeight), Resources.playlist_presets);
 
-            UserPresetsAccent = GetSolidImageByBitmapMask(accentColor, Resources.user_presets);
-            UserPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(accentColor, dimmedColor, accentWeight), Resources.user_presets);
+            FunctionIdPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.function_id_presets);
+            FunctionIdPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, BackFormColor, AccentWeight), Resources.function_id_presets);
 
-            PlaylistPresetsAccent = GetSolidImageByBitmapMask(accentColor, Resources.playlist_presets);
-            PlaylistPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(accentColor, dimmedColor, accentWeight), Resources.playlist_presets);
+            HotkeyPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.hotkey_presets);
+            HotkeyPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, BackFormColor, AccentWeight), Resources.hotkey_presets);
 
-            FunctionIdPresetsAccent = GetSolidImageByBitmapMask(accentColor, Resources.function_id_presets);
-            FunctionIdPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(accentColor, dimmedColor, accentWeight), Resources.function_id_presets);
-
-            HotkeyPresetsAccent = GetSolidImageByBitmapMask(accentColor, Resources.hotkey_presets);
-            HotkeyPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(accentColor, dimmedColor, accentWeight), Resources.hotkey_presets);
-
-            UncheckAllFiltersAccent = GetSolidImageByBitmapMask(accentColor, Resources.uncheck_all_preset_filters);
-            UncheckAllFiltersDimmed = GetSolidImageByBitmapMask(GetWeightedColor(accentColor, dimmedColor, accentWeight), Resources.uncheck_all_preset_filters);
+            UncheckAllFiltersAccent = GetSolidImageByBitmapMask(AccentColor, Resources.uncheck_all_preset_filters);
+            UncheckAllFiltersDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, BackFormColor, AccentWeight), Resources.uncheck_all_preset_filters);
         }
 
         // receive event notifications from MusicBee
@@ -5063,7 +5234,7 @@ namespace MusicBeePlugin
 
 
                     //Let's prepare themed bitmaps for controls
-                    PrepareThemedBitmaps();
+                    PrepareThemedBitmapsAndColors();
 
 
                     //Execute library reports on startup
@@ -5437,6 +5608,13 @@ namespace MusicBeePlugin
             number = number.Replace('.', LocalizedDecimalPoint);
 
             return Math.Sqrt(float.Parse(number)).ToString();
+        }
+
+        public string CustomFunc_Lg(string number)
+        {
+            number = number.Replace('.', LocalizedDecimalPoint);
+
+            return Math.Log10(double.Parse(number)).ToString();
         }
 
         public string CustomFunc_eq(string number1, string number2)

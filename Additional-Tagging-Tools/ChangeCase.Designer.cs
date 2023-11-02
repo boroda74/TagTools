@@ -66,6 +66,17 @@
             this.buttonASRExceptedWords = new System.Windows.Forms.Button();
             this.buttonASRExceptWordsAfterSymbols = new System.Windows.Forms.Button();
             this.buttonASRWordSplitters = new System.Windows.Forms.Button();
+            this.sentenceCaseRadioButtonLabel = new System.Windows.Forms.Label();
+            this.lowerCaseRadioButtonLabel = new System.Windows.Forms.Label();
+            this.upperCaseRadioButtonLabel = new System.Windows.Forms.Label();
+            this.titleCaseRadioButtonLabel = new System.Windows.Forms.Label();
+            this.toggleCaseRadioButtonLabel = new System.Windows.Forms.Label();
+            this.exceptionWordsCheckBoxLabel = new System.Windows.Forms.Label();
+            this.onlyWordsCheckBoxLabel = new System.Windows.Forms.Label();
+            this.exceptionCharsCheckBoxLabel = new System.Windows.Forms.Label();
+            this.wordSplittersCheckBoxLabel = new System.Windows.Forms.Label();
+            this.alwaysCapitalize1stWordCheckBoxLabel = new System.Windows.Forms.Label();
+            this.alwaysCapitalizeLastWordCheckBoxLabel = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -143,6 +154,7 @@
             this.dirtyErrorProvider.SetIconPadding(this.sentenceCaseRadioButton, ((int)(resources.GetObject("sentenceCaseRadioButton.IconPadding"))));
             this.sentenceCaseRadioButton.Name = "sentenceCaseRadioButton";
             this.sentenceCaseRadioButton.TabStop = true;
+            this.sentenceCaseRadioButton.Tag = "sentenceCaseRadioButtonLabel";
             this.toolTip1.SetToolTip(this.sentenceCaseRadioButton, resources.GetString("sentenceCaseRadioButton.ToolTip"));
             this.sentenceCaseRadioButton.UseVisualStyleBackColor = true;
             this.sentenceCaseRadioButton.CheckedChanged += new System.EventHandler(this.casingRuleRadioButton_CheckedChanged);
@@ -154,6 +166,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.lowerCaseRadioButton, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("lowerCaseRadioButton.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.lowerCaseRadioButton, ((int)(resources.GetObject("lowerCaseRadioButton.IconPadding"))));
             this.lowerCaseRadioButton.Name = "lowerCaseRadioButton";
+            this.lowerCaseRadioButton.Tag = "lowerCaseRadioButtonLabel";
             this.toolTip1.SetToolTip(this.lowerCaseRadioButton, resources.GetString("lowerCaseRadioButton.ToolTip"));
             this.lowerCaseRadioButton.UseVisualStyleBackColor = true;
             this.lowerCaseRadioButton.CheckedChanged += new System.EventHandler(this.casingRuleRadioButton_CheckedChanged);
@@ -165,6 +178,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.upperCaseRadioButton, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("upperCaseRadioButton.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.upperCaseRadioButton, ((int)(resources.GetObject("upperCaseRadioButton.IconPadding"))));
             this.upperCaseRadioButton.Name = "upperCaseRadioButton";
+            this.upperCaseRadioButton.Tag = "upperCaseRadioButtonLabel";
             this.toolTip1.SetToolTip(this.upperCaseRadioButton, resources.GetString("upperCaseRadioButton.ToolTip"));
             this.upperCaseRadioButton.UseVisualStyleBackColor = true;
             this.upperCaseRadioButton.CheckedChanged += new System.EventHandler(this.casingRuleRadioButton_CheckedChanged);
@@ -176,6 +190,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.titleCaseRadioButton, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("titleCaseRadioButton.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.titleCaseRadioButton, ((int)(resources.GetObject("titleCaseRadioButton.IconPadding"))));
             this.titleCaseRadioButton.Name = "titleCaseRadioButton";
+            this.titleCaseRadioButton.Tag = "titleCaseRadioButtonLabel";
             this.toolTip1.SetToolTip(this.titleCaseRadioButton, resources.GetString("titleCaseRadioButton.ToolTip"));
             this.titleCaseRadioButton.UseVisualStyleBackColor = true;
             this.titleCaseRadioButton.CheckedChanged += new System.EventHandler(this.casingRuleRadioButton_CheckedChanged);
@@ -187,6 +202,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.toggleCaseRadioButton, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("toggleCaseRadioButton.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.toggleCaseRadioButton, ((int)(resources.GetObject("toggleCaseRadioButton.IconPadding"))));
             this.toggleCaseRadioButton.Name = "toggleCaseRadioButton";
+            this.toggleCaseRadioButton.Tag = "toggleCaseRadioButtonLabel";
             this.toolTip1.SetToolTip(this.toggleCaseRadioButton, resources.GetString("toggleCaseRadioButton.ToolTip"));
             this.toggleCaseRadioButton.UseVisualStyleBackColor = true;
             this.toggleCaseRadioButton.CheckedChanged += new System.EventHandler(this.casingRuleRadioButton_CheckedChanged);
@@ -309,6 +325,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.exceptionWordsCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("exceptionWordsCheckBox.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.exceptionWordsCheckBox, ((int)(resources.GetObject("exceptionWordsCheckBox.IconPadding"))));
             this.exceptionWordsCheckBox.Name = "exceptionWordsCheckBox";
+            this.exceptionWordsCheckBox.Tag = "exceptionWordsCheckBoxLabel";
             this.toolTip1.SetToolTip(this.exceptionWordsCheckBox, resources.GetString("exceptionWordsCheckBox.ToolTip"));
             this.exceptionWordsCheckBox.UseVisualStyleBackColor = true;
             this.exceptionWordsCheckBox.CheckedChanged += new System.EventHandler(this.exceptWordsCheckBox_CheckedChanged);
@@ -320,6 +337,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.exceptionCharsCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("exceptionCharsCheckBox.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.exceptionCharsCheckBox, ((int)(resources.GetObject("exceptionCharsCheckBox.IconPadding"))));
             this.exceptionCharsCheckBox.Name = "exceptionCharsCheckBox";
+            this.exceptionCharsCheckBox.Tag = "exceptionCharsCheckBoxLabel";
             this.toolTip1.SetToolTip(this.exceptionCharsCheckBox, resources.GetString("exceptionCharsCheckBox.ToolTip"));
             this.exceptionCharsCheckBox.UseVisualStyleBackColor = true;
             this.exceptionCharsCheckBox.CheckedChanged += new System.EventHandler(this.exceptCharsCheckBox_CheckedChanged);
@@ -331,6 +349,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.wordSplittersCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("wordSplittersCheckBox.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.wordSplittersCheckBox, ((int)(resources.GetObject("wordSplittersCheckBox.IconPadding"))));
             this.wordSplittersCheckBox.Name = "wordSplittersCheckBox";
+            this.wordSplittersCheckBox.Tag = "wordSplittersCheckBoxLabel";
             this.toolTip1.SetToolTip(this.wordSplittersCheckBox, resources.GetString("wordSplittersCheckBox.ToolTip"));
             this.wordSplittersCheckBox.UseVisualStyleBackColor = true;
             this.wordSplittersCheckBox.CheckedChanged += new System.EventHandler(this.wordSplittersCheckBox_CheckedChanged);
@@ -342,6 +361,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.onlyWordsCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("onlyWordsCheckBox.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.onlyWordsCheckBox, ((int)(resources.GetObject("onlyWordsCheckBox.IconPadding"))));
             this.onlyWordsCheckBox.Name = "onlyWordsCheckBox";
+            this.onlyWordsCheckBox.Tag = "onlyWordsCheckBoxLabel";
             this.toolTip1.SetToolTip(this.onlyWordsCheckBox, resources.GetString("onlyWordsCheckBox.ToolTip"));
             this.onlyWordsCheckBox.UseVisualStyleBackColor = true;
             this.onlyWordsCheckBox.CheckedChanged += new System.EventHandler(this.onlyWordsCheckBox_CheckedChanged);
@@ -384,6 +404,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.alwaysCapitalize1stWordCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("alwaysCapitalize1stWordCheckBox.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.alwaysCapitalize1stWordCheckBox, ((int)(resources.GetObject("alwaysCapitalize1stWordCheckBox.IconPadding"))));
             this.alwaysCapitalize1stWordCheckBox.Name = "alwaysCapitalize1stWordCheckBox";
+            this.alwaysCapitalize1stWordCheckBox.Tag = "alwaysCapitalize1stWordCheckBoxLabel";
             this.toolTip1.SetToolTip(this.alwaysCapitalize1stWordCheckBox, resources.GetString("alwaysCapitalize1stWordCheckBox.ToolTip"));
             this.alwaysCapitalize1stWordCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -394,6 +415,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.alwaysCapitalizeLastWordCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("alwaysCapitalizeLastWordCheckBox.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.alwaysCapitalizeLastWordCheckBox, ((int)(resources.GetObject("alwaysCapitalizeLastWordCheckBox.IconPadding"))));
             this.alwaysCapitalizeLastWordCheckBox.Name = "alwaysCapitalizeLastWordCheckBox";
+            this.alwaysCapitalizeLastWordCheckBox.Tag = "alwaysCapitalizeLastWordCheckBoxLabel";
             this.toolTip1.SetToolTip(this.alwaysCapitalizeLastWordCheckBox, resources.GetString("alwaysCapitalizeLastWordCheckBox.ToolTip"));
             this.alwaysCapitalizeLastWordCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -441,6 +463,117 @@
             this.toolTip1.SetToolTip(this.buttonASRWordSplitters, resources.GetString("buttonASRWordSplitters.ToolTip"));
             this.buttonASRWordSplitters.UseVisualStyleBackColor = true;
             this.buttonASRWordSplitters.Click += new System.EventHandler(this.buttonASRWordSplitters_Click);
+            // 
+            // sentenceCaseRadioButtonLabel
+            // 
+            resources.ApplyResources(this.sentenceCaseRadioButtonLabel, "sentenceCaseRadioButtonLabel");
+            this.dirtyErrorProvider.SetError(this.sentenceCaseRadioButtonLabel, resources.GetString("sentenceCaseRadioButtonLabel.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.sentenceCaseRadioButtonLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("sentenceCaseRadioButtonLabel.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.sentenceCaseRadioButtonLabel, ((int)(resources.GetObject("sentenceCaseRadioButtonLabel.IconPadding"))));
+            this.sentenceCaseRadioButtonLabel.Name = "sentenceCaseRadioButtonLabel";
+            this.toolTip1.SetToolTip(this.sentenceCaseRadioButtonLabel, resources.GetString("sentenceCaseRadioButtonLabel.ToolTip"));
+            this.sentenceCaseRadioButtonLabel.Click += new System.EventHandler(this.sentenceCaseRadioButtonLabel_Click);
+            // 
+            // lowerCaseRadioButtonLabel
+            // 
+            resources.ApplyResources(this.lowerCaseRadioButtonLabel, "lowerCaseRadioButtonLabel");
+            this.dirtyErrorProvider.SetError(this.lowerCaseRadioButtonLabel, resources.GetString("lowerCaseRadioButtonLabel.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.lowerCaseRadioButtonLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("lowerCaseRadioButtonLabel.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.lowerCaseRadioButtonLabel, ((int)(resources.GetObject("lowerCaseRadioButtonLabel.IconPadding"))));
+            this.lowerCaseRadioButtonLabel.Name = "lowerCaseRadioButtonLabel";
+            this.toolTip1.SetToolTip(this.lowerCaseRadioButtonLabel, resources.GetString("lowerCaseRadioButtonLabel.ToolTip"));
+            this.lowerCaseRadioButtonLabel.Click += new System.EventHandler(this.lowerCaseRadioButtonLabel_Click);
+            // 
+            // upperCaseRadioButtonLabel
+            // 
+            resources.ApplyResources(this.upperCaseRadioButtonLabel, "upperCaseRadioButtonLabel");
+            this.dirtyErrorProvider.SetError(this.upperCaseRadioButtonLabel, resources.GetString("upperCaseRadioButtonLabel.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.upperCaseRadioButtonLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("upperCaseRadioButtonLabel.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.upperCaseRadioButtonLabel, ((int)(resources.GetObject("upperCaseRadioButtonLabel.IconPadding"))));
+            this.upperCaseRadioButtonLabel.Name = "upperCaseRadioButtonLabel";
+            this.toolTip1.SetToolTip(this.upperCaseRadioButtonLabel, resources.GetString("upperCaseRadioButtonLabel.ToolTip"));
+            this.upperCaseRadioButtonLabel.Click += new System.EventHandler(this.upperCaseRadioButtonLabel_Click);
+            // 
+            // titleCaseRadioButtonLabel
+            // 
+            resources.ApplyResources(this.titleCaseRadioButtonLabel, "titleCaseRadioButtonLabel");
+            this.dirtyErrorProvider.SetError(this.titleCaseRadioButtonLabel, resources.GetString("titleCaseRadioButtonLabel.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.titleCaseRadioButtonLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("titleCaseRadioButtonLabel.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.titleCaseRadioButtonLabel, ((int)(resources.GetObject("titleCaseRadioButtonLabel.IconPadding"))));
+            this.titleCaseRadioButtonLabel.Name = "titleCaseRadioButtonLabel";
+            this.toolTip1.SetToolTip(this.titleCaseRadioButtonLabel, resources.GetString("titleCaseRadioButtonLabel.ToolTip"));
+            this.titleCaseRadioButtonLabel.Click += new System.EventHandler(this.titleCaseRadioButtonLabel_Click);
+            // 
+            // toggleCaseRadioButtonLabel
+            // 
+            resources.ApplyResources(this.toggleCaseRadioButtonLabel, "toggleCaseRadioButtonLabel");
+            this.dirtyErrorProvider.SetError(this.toggleCaseRadioButtonLabel, resources.GetString("toggleCaseRadioButtonLabel.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.toggleCaseRadioButtonLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("toggleCaseRadioButtonLabel.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.toggleCaseRadioButtonLabel, ((int)(resources.GetObject("toggleCaseRadioButtonLabel.IconPadding"))));
+            this.toggleCaseRadioButtonLabel.Name = "toggleCaseRadioButtonLabel";
+            this.toolTip1.SetToolTip(this.toggleCaseRadioButtonLabel, resources.GetString("toggleCaseRadioButtonLabel.ToolTip"));
+            this.toggleCaseRadioButtonLabel.Click += new System.EventHandler(this.toggleCaseRadioButtonLabel_Click);
+            // 
+            // exceptionWordsCheckBoxLabel
+            // 
+            resources.ApplyResources(this.exceptionWordsCheckBoxLabel, "exceptionWordsCheckBoxLabel");
+            this.dirtyErrorProvider.SetError(this.exceptionWordsCheckBoxLabel, resources.GetString("exceptionWordsCheckBoxLabel.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.exceptionWordsCheckBoxLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("exceptionWordsCheckBoxLabel.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.exceptionWordsCheckBoxLabel, ((int)(resources.GetObject("exceptionWordsCheckBoxLabel.IconPadding"))));
+            this.exceptionWordsCheckBoxLabel.Name = "exceptionWordsCheckBoxLabel";
+            this.toolTip1.SetToolTip(this.exceptionWordsCheckBoxLabel, resources.GetString("exceptionWordsCheckBoxLabel.ToolTip"));
+            this.exceptionWordsCheckBoxLabel.Click += new System.EventHandler(this.exceptionWordsCheckBoxLabel_Click);
+            // 
+            // onlyWordsCheckBoxLabel
+            // 
+            resources.ApplyResources(this.onlyWordsCheckBoxLabel, "onlyWordsCheckBoxLabel");
+            this.dirtyErrorProvider.SetError(this.onlyWordsCheckBoxLabel, resources.GetString("onlyWordsCheckBoxLabel.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.onlyWordsCheckBoxLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("onlyWordsCheckBoxLabel.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.onlyWordsCheckBoxLabel, ((int)(resources.GetObject("onlyWordsCheckBoxLabel.IconPadding"))));
+            this.onlyWordsCheckBoxLabel.Name = "onlyWordsCheckBoxLabel";
+            this.toolTip1.SetToolTip(this.onlyWordsCheckBoxLabel, resources.GetString("onlyWordsCheckBoxLabel.ToolTip"));
+            this.onlyWordsCheckBoxLabel.Click += new System.EventHandler(this.onlyWordsCheckBoxLabel_Click);
+            // 
+            // exceptionCharsCheckBoxLabel
+            // 
+            resources.ApplyResources(this.exceptionCharsCheckBoxLabel, "exceptionCharsCheckBoxLabel");
+            this.dirtyErrorProvider.SetError(this.exceptionCharsCheckBoxLabel, resources.GetString("exceptionCharsCheckBoxLabel.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.exceptionCharsCheckBoxLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("exceptionCharsCheckBoxLabel.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.exceptionCharsCheckBoxLabel, ((int)(resources.GetObject("exceptionCharsCheckBoxLabel.IconPadding"))));
+            this.exceptionCharsCheckBoxLabel.Name = "exceptionCharsCheckBoxLabel";
+            this.toolTip1.SetToolTip(this.exceptionCharsCheckBoxLabel, resources.GetString("exceptionCharsCheckBoxLabel.ToolTip"));
+            this.exceptionCharsCheckBoxLabel.Click += new System.EventHandler(this.exceptionCharsCheckBoxLabel_Click);
+            // 
+            // wordSplittersCheckBoxLabel
+            // 
+            resources.ApplyResources(this.wordSplittersCheckBoxLabel, "wordSplittersCheckBoxLabel");
+            this.dirtyErrorProvider.SetError(this.wordSplittersCheckBoxLabel, resources.GetString("wordSplittersCheckBoxLabel.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.wordSplittersCheckBoxLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("wordSplittersCheckBoxLabel.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.wordSplittersCheckBoxLabel, ((int)(resources.GetObject("wordSplittersCheckBoxLabel.IconPadding"))));
+            this.wordSplittersCheckBoxLabel.Name = "wordSplittersCheckBoxLabel";
+            this.toolTip1.SetToolTip(this.wordSplittersCheckBoxLabel, resources.GetString("wordSplittersCheckBoxLabel.ToolTip"));
+            this.wordSplittersCheckBoxLabel.Click += new System.EventHandler(this.wordSplittersCheckBoxLabel_Click);
+            // 
+            // alwaysCapitalize1stWordCheckBoxLabel
+            // 
+            resources.ApplyResources(this.alwaysCapitalize1stWordCheckBoxLabel, "alwaysCapitalize1stWordCheckBoxLabel");
+            this.dirtyErrorProvider.SetError(this.alwaysCapitalize1stWordCheckBoxLabel, resources.GetString("alwaysCapitalize1stWordCheckBoxLabel.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.alwaysCapitalize1stWordCheckBoxLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("alwaysCapitalize1stWordCheckBoxLabel.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.alwaysCapitalize1stWordCheckBoxLabel, ((int)(resources.GetObject("alwaysCapitalize1stWordCheckBoxLabel.IconPadding"))));
+            this.alwaysCapitalize1stWordCheckBoxLabel.Name = "alwaysCapitalize1stWordCheckBoxLabel";
+            this.alwaysCapitalize1stWordCheckBoxLabel.Tag = "";
+            this.toolTip1.SetToolTip(this.alwaysCapitalize1stWordCheckBoxLabel, resources.GetString("alwaysCapitalize1stWordCheckBoxLabel.ToolTip"));
+            this.alwaysCapitalize1stWordCheckBoxLabel.Click += new System.EventHandler(this.alwaysCapitalize1stWordCheckBoxLabel_Click);
+            // 
+            // alwaysCapitalizeLastWordCheckBoxLabel
+            // 
+            resources.ApplyResources(this.alwaysCapitalizeLastWordCheckBoxLabel, "alwaysCapitalizeLastWordCheckBoxLabel");
+            this.dirtyErrorProvider.SetError(this.alwaysCapitalizeLastWordCheckBoxLabel, resources.GetString("alwaysCapitalizeLastWordCheckBoxLabel.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.alwaysCapitalizeLastWordCheckBoxLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("alwaysCapitalizeLastWordCheckBoxLabel.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.alwaysCapitalizeLastWordCheckBoxLabel, ((int)(resources.GetObject("alwaysCapitalizeLastWordCheckBoxLabel.IconPadding"))));
+            this.alwaysCapitalizeLastWordCheckBoxLabel.Name = "alwaysCapitalizeLastWordCheckBoxLabel";
+            this.toolTip1.SetToolTip(this.alwaysCapitalizeLastWordCheckBoxLabel, resources.GetString("alwaysCapitalizeLastWordCheckBoxLabel.ToolTip"));
+            this.alwaysCapitalizeLastWordCheckBoxLabel.Click += new System.EventHandler(this.alwaysCapitalizeLastWordCheckBoxLabel_Click);
             // 
             // toolTip1
             // 
@@ -493,6 +626,17 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
+            this.Controls.Add(this.onlyWordsCheckBoxLabel);
+            this.Controls.Add(this.alwaysCapitalizeLastWordCheckBoxLabel);
+            this.Controls.Add(this.alwaysCapitalize1stWordCheckBoxLabel);
+            this.Controls.Add(this.wordSplittersCheckBoxLabel);
+            this.Controls.Add(this.exceptionCharsCheckBoxLabel);
+            this.Controls.Add(this.exceptionWordsCheckBoxLabel);
+            this.Controls.Add(this.toggleCaseRadioButtonLabel);
+            this.Controls.Add(this.titleCaseRadioButtonLabel);
+            this.Controls.Add(this.upperCaseRadioButtonLabel);
+            this.Controls.Add(this.lowerCaseRadioButtonLabel);
+            this.Controls.Add(this.sentenceCaseRadioButtonLabel);
             this.Controls.Add(this.buttonSettings);
             this.Controls.Add(this.buttonASRWordSplitters);
             this.Controls.Add(this.buttonASRExceptWordsAfterSymbols);
@@ -574,5 +718,16 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn NewTag;
         private System.Windows.Forms.DataGridViewTextBoxColumn NewTagT;
         private System.Windows.Forms.Button buttonSettings;
+        private System.Windows.Forms.Label upperCaseRadioButtonLabel;
+        private System.Windows.Forms.Label lowerCaseRadioButtonLabel;
+        private System.Windows.Forms.Label sentenceCaseRadioButtonLabel;
+        private System.Windows.Forms.Label toggleCaseRadioButtonLabel;
+        private System.Windows.Forms.Label titleCaseRadioButtonLabel;
+        private System.Windows.Forms.Label exceptionWordsCheckBoxLabel;
+        private System.Windows.Forms.Label onlyWordsCheckBoxLabel;
+        private System.Windows.Forms.Label exceptionCharsCheckBoxLabel;
+        private System.Windows.Forms.Label wordSplittersCheckBoxLabel;
+        private System.Windows.Forms.Label alwaysCapitalize1stWordCheckBoxLabel;
+        private System.Windows.Forms.Label alwaysCapitalizeLastWordCheckBoxLabel;
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 using static MusicBeePlugin.Plugin;
+using ExtensionMethods;
 
 namespace MusicBeePlugin
 {
@@ -382,8 +383,8 @@ namespace MusicBeePlugin
             if (enable && previewIsGenerated)
                 return;
 
-            initialEncodingsList.Enabled = enable;
-            usedEncodingsList.Enabled = enable;
+            initialEncodingsList.Enable(enable);
+            usedEncodingsList.Enable(enable);
         }
 
         public override void enableQueryingButtons()
@@ -399,14 +400,14 @@ namespace MusicBeePlugin
 
         public override void enableQueryingOrUpdatingButtons()
         {
-            buttonOK.Enabled = true;
-            buttonPreview.Enabled = true;
+            buttonOK.Enable(true);
+            buttonPreview.Enable(true);
         }
 
         public override void disableQueryingOrUpdatingButtons()
         {
-            buttonOK.Enabled = false;
-            buttonPreview.Enabled = false;
+            buttonOK.Enable(false);
+            buttonPreview.Enable(false);
         }
 
         private void previewTable_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)

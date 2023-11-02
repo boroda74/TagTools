@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>626, 4</value>
+    <value>729, 4</value>
   </data>
   <data name="buttonOK.Text" xml:space="preserve">
     <value>Применить</value>
@@ -132,16 +132,70 @@
     <value>MiddleRight</value>
   </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>709, 4</value>
+    <value>812, 4</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Закрыть</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>791, 406</value>
+    <value>892, 406</value>
+  </data>
+  <data name="addCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 109</value>
+  </data>
+  <data name="addCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>395, 13</value>
+  </data>
+  <data name="addCheckBoxLabel.Text" xml:space="preserve">
+    <value>Добавить тег источника в начало тега получателя, разделяя их символами:</value>
+  </data>
+  <data name="appendCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>27, 85</value>
+  </data>
+  <data name="appendCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>390, 13</value>
+  </data>
+  <data name="appendCheckBoxLabel.Text" xml:space="preserve">
+    <value>Добавить тег источника в конец тега получателя, разделяя их символами:</value>
+  </data>
+  <data name="onlyIfSourceNotEmptyCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>304, 59</value>
+  </data>
+  <data name="onlyIfSourceNotEmptyCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>210, 13</value>
+  </data>
+  <data name="onlyIfSourceNotEmptyCheckBoxLabel.Text" xml:space="preserve">
+    <value>или только если тег-источник не пустой</value>
+  </data>
+  <data name="onlyIfDestinationEmptyCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 59</value>
+  </data>
+  <data name="onlyIfDestinationEmptyCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>251, 13</value>
+  </data>
+  <data name="onlyIfDestinationEmptyCheckBoxLabel.Text" xml:space="preserve">
+    <value>Копировать, только если тег-получатель пустой</value>
+  </data>
+  <data name="smartOperationCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 34</value>
+  </data>
+  <data name="smartOperationCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>668, 13</value>
+  </data>
+  <data name="smartOperationCheckBoxLabel.Text" xml:space="preserve">
+    <value>Умное копирование (играет роль только при работе с тегами "Исполнитель"/"Композитор", содержащими несколько значений)</value>
+  </data>
+  <data name="smartOperationCheckBoxLabel.ToolTip" xml:space="preserve">
+    <value>Каждый байт исходного тега (включая служебные символы, обозначающие 
+роли исполнителей) будет сохранен, если эта опция отключена, однако 
+это может быть полезно только для копирования во временный тег
+</value>
+  </data>
+  <data name="onlyIfSourceNotEmptyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>287, 58</value>
   </data>
   <data name="buttonSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>506, 4</value>
+    <value>609, 4</value>
   </data>
   <data name="buttonSettings.ToolTip" xml:space="preserve">
     <value>Открыть быстрые настройки</value>
@@ -150,7 +204,7 @@
     <value>MiddleRight</value>
   </data>
   <data name="browseButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>709, 52</value>
+    <value>812, 54</value>
   </data>
   <data name="browseButton.Text" xml:space="preserve">
     <value>Открыть...</value>
@@ -159,34 +213,34 @@
     <value>MiddleRight</value>
   </data>
   <data name="addedTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>422, 100</value>
+    <value>424, 106</value>
   </data>
   <data name="addedTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>362, 21</value>
+    <value>463, 21</value>
   </data>
   <data name="appendedTextBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
   <data name="appendedTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>422, 77</value>
+    <value>424, 81</value>
   </data>
   <data name="appendedTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>362, 21</value>
+    <value>463, 21</value>
   </data>
   <data name="fileNameTextBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
   <data name="fileNameTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>422, 54</value>
+    <value>591, 56</value>
   </data>
   <data name="fileNameTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>281, 21</value>
+    <value>215, 21</value>
   </data>
   <data name="label3.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>349, 57</value>
+    <value>518, 59</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>67, 13</value>
@@ -197,29 +251,20 @@
   <data name="addCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="addCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>414, 17</value>
-  </data>
-  <data name="addCheckBox.Text" xml:space="preserve">
-    <value>Добавить тег источника в начало тега получателя, разделяя их символами:</value>
+  <data name="addCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 108</value>
   </data>
   <data name="onlyIfDestinationEmptyCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="onlyIfDestinationEmptyCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 17</value>
-  </data>
-  <data name="onlyIfDestinationEmptyCheckBox.Text" xml:space="preserve">
-    <value>Копировать, только если тег получатель пустой</value>
+  <data name="onlyIfDestinationEmptyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 58</value>
   </data>
   <data name="smartOperationCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="smartOperationCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>687, 17</value>
-  </data>
-  <data name="smartOperationCheckBox.Text" xml:space="preserve">
-    <value>Умное копирование (играет роль только при работе с тегами "Исполнитель"/"Композитор", содержащими несколько значений)</value>
+  <data name="smartOperationCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 33</value>
   </data>
   <data name="smartOperationCheckBox.ToolTip" xml:space="preserve">
     <value>Каждый байт исходного тега (включая служебные символы, обозначающие 
@@ -242,10 +287,10 @@
     <value>MiddleRight</value>
   </data>
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>777, 271</value>
+    <value>882, 271</value>
   </data>
   <data name="buttonPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>545, 4</value>
+    <value>648, 4</value>
   </data>
   <data name="buttonPreview.Text" xml:space="preserve">
     <value>Просмотр</value>
@@ -253,11 +298,8 @@
   <data name="appendCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="appendCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>409, 17</value>
-  </data>
-  <data name="appendCheckBox.Text" xml:space="preserve">
-    <value>Добавить тег источника в конец тега получателя, разделяя их символами:</value>
+  <data name="appendCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 84</value>
   </data>
   <data name="mainLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -281,7 +323,7 @@
     <value>MiddleRight</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>223, 9</value>
+    <value>227, 9</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 13</value>

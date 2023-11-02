@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 using static MusicBeePlugin.Plugin;
-
+using ExtensionMethods;
 
 namespace MusicBeePlugin
 {
@@ -21,6 +21,7 @@ namespace MusicBeePlugin
         private bool sourceTagIsClipboard;
         private bool sourceTagIsTextFile;
         private bool onlyIfDestinationEmpty;
+        private bool onlyIfSourceNotEmpty;
         private bool smartOperation;
         private bool appendSource;
         private bool addSource;
@@ -42,6 +43,8 @@ namespace MusicBeePlugin
         {
             base.initializeForm();
 
+            label3.Enable(false);
+
             buttonSettings.Image = Gear;
 
             FillListByTagNames(destinationTagList.Items);
@@ -50,6 +53,7 @@ namespace MusicBeePlugin
             sourceTagList.Text = SavedSettings.copySourceTagName;
 
             onlyIfDestinationEmptyCheckBox.Checked = SavedSettings.onlyIfDestinationIsEmpty;
+            onlyIfSourceNotEmptyCheckBox.Checked = SavedSettings.onlyIfSourceNotEmpty;
             smartOperationCheckBox.Checked = SavedSettings.smartOperation;
             appendCheckBox.Checked = SavedSettings.appendSource;
             addCheckBox.Checked = SavedSettings.addSource;
@@ -61,7 +65,7 @@ namespace MusicBeePlugin
             addedTextBox.Text = SavedSettings.addedText[0];
             addedTextBox.Items.AddRange(SavedSettings.addedText);
 
-            appendedTextBox.Enabled = appendCheckBox.Checked;
+            appendedTextBox.Enable(appendCheckBox.Checked);
 
             DatagridViewCheckBoxHeaderCell cbHeader = new DatagridViewCheckBoxHeaderCell();
             cbHeader.setState(true);
@@ -137,6 +141,7 @@ namespace MusicBeePlugin
             sourceTagIsTextFile = fileNameTextBox.Enabled;
             smartOperation = smartOperationCheckBox.Checked;
             onlyIfDestinationEmpty = onlyIfDestinationEmptyCheckBox.Checked;
+            onlyIfSourceNotEmpty = onlyIfSourceNotEmptyCheckBox.Checked;
             appendSource = appendCheckBox.Checked;
             addSource = addCheckBox.Checked;
             customText = fileNameTextBox.Text;
@@ -305,9 +310,13 @@ namespace MusicBeePlugin
                     continue;
                 else if (onlyIfDestinationEmpty && destinationTagValue != "" && stripNotChangedLines)
                     continue;
+                else if (onlyIfSourceNotEmpty && sourceTagValue == "" && stripNotChangedLines)
+                    continue;
                 else if (sourceTagValue == destinationTagValue)
                     isChecked = "F";
                 else if (onlyIfDestinationEmpty && destinationTagValue != "")
+                    isChecked = "F";
+                else if (onlyIfSourceNotEmpty && sourceTagValue == "")
                     isChecked = "F";
                 else
                     isChecked = "T";
@@ -396,6 +405,7 @@ namespace MusicBeePlugin
             SavedSettings.copySourceTagName = sourceTagList.Text;
             SavedSettings.copyDestinationTagName = destinationTagList.Text;
             SavedSettings.onlyIfDestinationIsEmpty = onlyIfDestinationEmptyCheckBox.Checked;
+            SavedSettings.onlyIfSourceNotEmpty = onlyIfSourceNotEmptyCheckBox.Checked;
             SavedSettings.smartOperation = smartOperationCheckBox.Checked;
             SavedSettings.appendSource = appendCheckBox.Checked;
             SavedSettings.addSource = addCheckBox.Checked;
@@ -437,25 +447,40 @@ namespace MusicBeePlugin
 
         private void appendCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            appendedTextBox.Enabled = appendCheckBox.Checked;
+            appendedTextBox.Enable(appendCheckBox.Checked);
 
             if (appendCheckBox.Checked)
                 addCheckBox.Checked = false;
         }
 
+        private void appendCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            appendCheckBox.Checked = !appendCheckBox.Checked;
+            appendCheckBox_CheckedChanged(null, null);
+        }
+
         private void addCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            addedTextBox.Enabled = addCheckBox.Checked;
+            addedTextBox.Enable(addCheckBox.Checked);
 
             if (addCheckBox.Checked)
                 appendCheckBox.Checked = false;
         }
 
+        private void addCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            addCheckBox.Checked = !addCheckBox.Checked;
+            addCheckBox_CheckedChanged(null, null);
+        }
+
         private void sourceTagList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            label3.Enabled = (sourceTagList.Text == TextFileTagName);
-            fileNameTextBox.Enabled = (sourceTagList.Text == TextFileTagName);
-            browseButton.Enabled = (sourceTagList.Text == TextFileTagName);
+            bool test = (sourceTagList.Text == TextFileTagName);
+            label3.Enable(test);
+            test = (sourceTagList.Text == TextFileTagName);
+            fileNameTextBox.Enable(test);
+            test = (sourceTagList.Text == TextFileTagName);
+            browseButton.Enable(test);
         }
 
         private void destinationTagList_SelectedIndexChanged(object sender, EventArgs e)
@@ -494,7 +519,7 @@ namespace MusicBeePlugin
 
         private void customTextBox_EnabledChanged(object sender, EventArgs e)
         {
-            label3.Enabled = fileNameTextBox.Enabled;
+            label3.Enable(fileNameTextBox.Enabled);
         }
 
         private void cbHeader_OnCheckBoxClicked(bool state)
@@ -553,17 +578,18 @@ namespace MusicBeePlugin
             if (enable && previewIsGenerated)
                 return;
 
-            sourceTagList.Enabled = enable;
-            destinationTagList.Enabled = enable;
-            label3.Enabled = enable && sourceTagList.Text == TextFileTagName;
-            fileNameTextBox.Enabled = enable && sourceTagList.Text == TextFileTagName;
-            browseButton.Enabled = enable && sourceTagList.Text == TextFileTagName;
-            smartOperationCheckBox.Enabled = enable;
-            onlyIfDestinationEmptyCheckBox.Enabled = enable;
-            addCheckBox.Enabled = enable;
-            addedTextBox.Enabled = enable && addCheckBox.Checked;
-            appendCheckBox.Enabled = enable;
-            appendedTextBox.Enabled = enable && appendCheckBox.Checked;
+            sourceTagList.Enable(enable);
+            destinationTagList.Enable(enable);
+            label3.Enable(enable && sourceTagList.Text == TextFileTagName);
+            fileNameTextBox.Enable(enable && sourceTagList.Text == TextFileTagName);
+            browseButton.Enable(enable && sourceTagList.Text == TextFileTagName);
+            smartOperationCheckBox.Enable(enable);
+            onlyIfDestinationEmptyCheckBox.Enable(enable);
+            onlyIfSourceNotEmptyCheckBox.Enable(enable);
+            addCheckBox.Enable(enable);
+            addedTextBox.Enable(enable && addCheckBox.Checked);
+            appendCheckBox.Enable(enable);
+            appendedTextBox.Enable(enable && appendCheckBox.Checked);
         }
 
         public override void enableQueryingButtons()
@@ -579,14 +605,14 @@ namespace MusicBeePlugin
 
         public override void enableQueryingOrUpdatingButtons()
         {
-            buttonOK.Enabled = true;
-            buttonPreview.Enabled = true;
+            buttonOK.Enable(true);
+            buttonPreview.Enable(true);
         }
 
         public override void disableQueryingOrUpdatingButtons()
         {
-            buttonOK.Enabled = false;
-            buttonPreview.Enabled = false;
+            buttonOK.Enable(false);
+            buttonPreview.Enable(false);
         }
 
         private void filenameTextBox_Leave(object sender, EventArgs e)
@@ -653,6 +679,35 @@ namespace MusicBeePlugin
         {
             PluginQuickSettings settings = new PluginQuickSettings(TagToolsPlugin);
             PluginWindowTemplate.Display(settings, true);
+        }
+
+        private void onlyIfDestinationEmptyCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (onlyIfDestinationEmptyCheckBox.Checked)
+                onlyIfSourceNotEmptyCheckBox.Checked = false;
+        }
+        private void onlyIfDestinationEmptyCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            onlyIfDestinationEmptyCheckBox.Checked = !onlyIfDestinationEmptyCheckBox.Checked;
+            onlyIfDestinationEmptyCheckBox_CheckedChanged(null, null);
+        }
+
+
+        private void onlyIfSourceNotEmptyCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (onlyIfSourceNotEmptyCheckBox.Checked)
+                onlyIfDestinationEmptyCheckBox.Checked = false;
+        }
+
+        private void onlyIfSourceNotEmptyCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            onlyIfSourceNotEmptyCheckBox.Checked = !onlyIfSourceNotEmptyCheckBox.Checked;
+        }
+
+        private void smartOperationCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            smartOperationCheckBox.Checked = !smartOperationCheckBox.Checked;
+            onlyIfSourceNotEmptyCheckBox_CheckedChanged(null, null);
         }
     }
 }

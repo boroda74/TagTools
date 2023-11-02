@@ -61,7 +61,7 @@
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="T">
+    <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
@@ -119,17 +119,80 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>981, 557</value>
+    <value>981, 562</value>
+  </data>
+  <data name="holdsAtStartUpCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>587, 34</value>
+  </data>
+  <data name="holdsAtStartUpCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>332, 13</value>
+  </data>
+  <data name="holdsAtStartUpCheckBoxLabel.Text" xml:space="preserve">
+    <value>Автоматически рассчитывать пороговые значения при запуске</value>
+  </data>
+  <data name="sinceAddedCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>33, 104</value>
+  </data>
+  <data name="sinceAddedCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>664, 13</value>
+  </data>
+  <data name="sinceAddedCheckBoxLabel.Text" xml:space="preserve">
+    <value>Рассчитывать "число воспроизведений в день во время существования в библиотеке" вместо "числа воспроизведений в день"</value>
+  </data>
+  <data name="sinceAddedCheckBoxLabel.ToolTip" xml:space="preserve">
+    <value>Обычно "Число воспроизведений в день" означает сколько раз в день в среднем композиция 
+проигрывалась с момента добавления в библиотеку до момента последнего воспроизведения. 
+Если вы воспроизводили композицию много раз в прошлом и с тех пор не слушали ее, то у 
+нее будет высокое значение "Числа воспроизведений в день". 
+
+Иногда лучше использовать эту опцию, чтобы трактовать "Число воспроизведений в день" как
+среднее чило вопроизведений в день с момента довления в библиотеку до текущего 
+момента (не важно, когда композиция была поледний раз проиграна). 
+
+Рекомендуется "автоматически устанавливать рейтинги при запуске", если вы хотите использовать 
+эту опцию потому, что "число воспроизведений в день во время существования в библиотеке" меняется 
+каждый день и установка авто-рейтингов должна происходить каждый день для каждой композиции. 
+</value>
+  </data>
+  <data name="autoRateOnTrackPropertiesCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>33, 81</value>
+  </data>
+  <data name="autoRateOnTrackPropertiesCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>389, 13</value>
+  </data>
+  <data name="autoRateOnTrackPropertiesCheckBoxLabel.Text" xml:space="preserve">
+    <value>Автоматически установить рейтинг при изменении проигрываемого трека</value>
+  </data>
+  <data name="notifyWhenAutoratingCompletedCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>321, 58</value>
+  </data>
+  <data name="notifyWhenAutoratingCompletedCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>147, 13</value>
+  </data>
+  <data name="notifyWhenAutoratingCompletedCheckBoxLabel.Text" xml:space="preserve">
+    <value>Оповестить по завершении</value>
+  </data>
+  <data name="autoRateAtStartUpCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>33, 58</value>
+  </data>
+  <data name="autoRateAtStartUpCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>259, 13</value>
+  </data>
+  <data name="autoRateAtStartUpCheckBoxLabel.Text" xml:space="preserve">
+    <value>Автоматически установить рейтинги при запуске</value>
+  </data>
+  <data name="storePlaysPerDayCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>249, 13</value>
+  </data>
+  <data name="storePlaysPerDayCheckBoxLabel.Text" xml:space="preserve">
+    <value>Сохранять число воспроизведений в день в тег</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="sinceAddedCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="sinceAddedCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>671, 17</value>
-  </data>
-  <data name="sinceAddedCheckBox.Text" xml:space="preserve">
-    <value>Рассчитывать "число воспроизведений в день во время существования в библиотеке" вместо "числа воспроизведений в день"</value>
+  <data name="sinceAddedCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 102</value>
   </data>
   <data name="sinceAddedCheckBox.ToolTip" xml:space="preserve">
     <value>Обычно "Число воспроизведений в день" означает сколько раз в день в среднем композиция 
@@ -148,12 +211,6 @@
   <data name="storePlaysPerDayCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="storePlaysPerDayCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>268, 17</value>
-  </data>
-  <data name="storePlaysPerDayCheckBox.Text" xml:space="preserve">
-    <value>Сохранять число воспроизведений в день в тег</value>
-  </data>
   <data name="playsPerDayTagList.Location" type="System.Drawing.Point, System.Drawing">
     <value>298, 32</value>
   </data>
@@ -164,73 +221,70 @@
     <value>NoControl</value>
   </data>
   <data name="notifyWhenAutoratingCompletedCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>298, 57</value>
+    <value>298, 56</value>
   </data>
-  <data name="notifyWhenAutoratingCompletedCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 17</value>
+  <data name="checkBox05Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 13</value>
   </data>
-  <data name="notifyWhenAutoratingCompletedCheckBox.Text" xml:space="preserve">
-    <value>Оповестить по завершении</value>
-  </data>
-  <data name="checkBox05.Size" type="System.Drawing.Size, System.Drawing">
-    <value>193, 17</value>
-  </data>
-  <data name="checkBox05.Text" xml:space="preserve">
+  <data name="checkBox05Label.Text" xml:space="preserve">
     <value>Установить 0,5 звездочки, если:</value>
   </data>
-  <data name="checkBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 17</value>
+  <data name="checkBox1Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>164, 13</value>
   </data>
-  <data name="checkBox1.Text" xml:space="preserve">
+  <data name="checkBox1Label.Text" xml:space="preserve">
     <value>Установить 1 звездочку, если:</value>
   </data>
-  <data name="checkBox15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>193, 17</value>
+  <data name="checkBox15Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 13</value>
   </data>
-  <data name="checkBox15.Text" xml:space="preserve">
+  <data name="checkBox15Label.Text" xml:space="preserve">
     <value>Установить 1,5 звездочки, если:</value>
   </data>
-  <data name="checkBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 17</value>
+  <data name="checkBox2Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>165, 13</value>
   </data>
-  <data name="checkBox2.Text" xml:space="preserve">
+  <data name="checkBox2Label.Text" xml:space="preserve">
     <value>Установить 2 звездочки, если:</value>
   </data>
-  <data name="checkBox25.Size" type="System.Drawing.Size, System.Drawing">
-    <value>193, 17</value>
+  <data name="checkBox25Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 13</value>
   </data>
-  <data name="checkBox25.Text" xml:space="preserve">
+  <data name="checkBox25Label.Text" xml:space="preserve">
     <value>Установить 2,5 звездочки, если:</value>
   </data>
-  <data name="checkBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 17</value>
+  <data name="checkBox3Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>165, 13</value>
   </data>
-  <data name="checkBox3.Text" xml:space="preserve">
+  <data name="checkBox3Label.Text" xml:space="preserve">
     <value>Установить 3 звездочки, если:</value>
   </data>
-  <data name="checkBox35.Size" type="System.Drawing.Size, System.Drawing">
-    <value>193, 17</value>
+  <data name="checkBox35Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 13</value>
   </data>
-  <data name="checkBox35.Text" xml:space="preserve">
+  <data name="checkBox35Label.Text" xml:space="preserve">
     <value>Установить 3,5 звездочки, если:</value>
   </data>
-  <data name="checkBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 17</value>
+  <data name="checkBox4Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>165, 13</value>
   </data>
-  <data name="checkBox4.Text" xml:space="preserve">
+  <data name="checkBox4Label.Text" xml:space="preserve">
     <value>Установить 4 звездочки, если:</value>
   </data>
-  <data name="checkBox45.Size" type="System.Drawing.Size, System.Drawing">
-    <value>193, 17</value>
+  <data name="checkBox45Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 13</value>
   </data>
-  <data name="checkBox45.Text" xml:space="preserve">
+  <data name="checkBox45Label.Text" xml:space="preserve">
     <value>Установить 4,5 звездочки, если:</value>
   </data>
-  <data name="checkBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 17</value>
+  <data name="checkBox5Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>165, 13</value>
   </data>
-  <data name="checkBox5.Text" xml:space="preserve">
+  <data name="checkBox5Label.Text" xml:space="preserve">
     <value>Установить 5 звездочек, если:</value>
+  </data>
+  <data name="checkBox5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>15, 14</value>
   </data>
   <data name="avgPlaysPerDayBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>213, 310</value>
@@ -445,12 +499,6 @@
   <data name="calculateThresholdsAtStartUpCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>566, 32</value>
   </data>
-  <data name="calculateThresholdsAtStartUpCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>351, 17</value>
-  </data>
-  <data name="calculateThresholdsAtStartUpCheckBox.Text" xml:space="preserve">
-    <value>Автоматически рассчитывать пороговые значения при запуске</value>
-  </data>
   <data name="label19.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 126</value>
   </data>
@@ -493,17 +541,11 @@
   <data name="baseRatingTrackBar.Location" type="System.Drawing.Point, System.Drawing">
     <value>401, 126</value>
   </data>
-  <data name="autoRateOnTrackPropertiesCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>429, 17</value>
+  <data name="autoRateOnTrackPropertiesCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 79</value>
   </data>
-  <data name="autoRateOnTrackPropertiesCheckBox.Text" xml:space="preserve">
-    <value>Автоматически установить рейтинг при изменении проигрываемого трека</value>
-  </data>
-  <data name="autoRateAtStartUpCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>278, 17</value>
-  </data>
-  <data name="autoRateAtStartUpCheckBox.Text" xml:space="preserve">
-    <value>Автоматически установить рейтинги при запуске</value>
+  <data name="autoRateAtStartUpCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 56</value>
   </data>
   <data name="autoRatingTagList.Location" type="System.Drawing.Point, System.Drawing">
     <value>298, 6</value>

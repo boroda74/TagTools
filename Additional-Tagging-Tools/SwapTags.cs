@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using static MusicBeePlugin.Plugin;
+using ExtensionMethods;
 
 namespace MusicBeePlugin
 {
@@ -122,12 +123,17 @@ namespace MusicBeePlugin
 
         public override void enableQueryingOrUpdatingButtons()
         {
-            buttonOK.Enabled = true;
+            buttonOK.Enable(true);
         }
 
         public override void disableQueryingOrUpdatingButtons()
         {
-            buttonOK.Enabled = false;
+            buttonOK.Enable(false);
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+            smartOperationCheckBox.Checked = !smartOperationCheckBox.Checked;
         }
     }
 }

@@ -61,7 +61,7 @@
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="T">
+    <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
@@ -117,352 +117,113 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="&gt;&gt;selectTagsButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="previewTable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 12</value>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>822, 421</value>
   </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;selectTagsButton.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="dataGridViewTextBoxColumn1.Width" type="System.Int32, mscorlib">
-    <value>383</value>
-  </data>
-  <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="buttonCopy.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="AutoSelectTagsCheckBox.ToolTip" xml:space="preserve">
-    <value>Automatically select displayed tags and don't show tracks without differences</value>
-  </data>
-  <data name="&gt;&gt;buttonClear.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="selectTagsButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>106, 23</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn3.Name" xml:space="preserve">
-    <value>dataGridViewTextBoxColumn3</value>
-  </data>
-  <data name="&gt;&gt;previewTable.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn2.Name" xml:space="preserve">
-    <value>dataGridViewTextBoxColumn2</value>
-  </data>
-  <data name="buttonPaste.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="ImageCellTemplate.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="ImageCellTemplate.Width" type="System.Int32, mscorlib">
-    <value>200</value>
-  </data>
-  <data name="buttonPaste.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 23</value>
-  </data>
-  <data name="buttonOK.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="buttonOK.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonCopy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>391, 389</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="AutoSelectTagsCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="buttonPaste.Text" xml:space="preserve">
-    <value>Paste</value>
-  </data>
-  <data name="dataGridViewTextBoxColumn2.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="buttonCopy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 23</value>
-  </data>
-  <data name="&gt;&gt;rememberColumnasDefaulltWidthCheckBox.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;buttonCopy.Name" xml:space="preserve">
-    <value>buttonCopy</value>
-  </data>
-  <data name="&gt;&gt;buttonOK.Name" xml:space="preserve">
-    <value>buttonOK</value>
-  </data>
-  <data name="buttonPaste.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
-  <data name="AutoSelectTagsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 394</value>
-  </data>
-  <data name="buttonPaste.TabIndex" type="System.Int32, mscorlib">
-    <value>30</value>
-  </data>
-  <data name="&gt;&gt;buttonOK.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>106, 23</value>
-  </data>
-  <data name="buttonOK.Text" xml:space="preserve">
-    <value>Proceed</value>
-  </data>
-  <data name="rememberColumnasDefaulltWidthCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;AutoSelectTagsCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="dataGridViewTextBoxColumn1.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="rememberColumnasDefaulltWidthCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 17</value>
-  </data>
-  <data name="&gt;&gt;Column1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="buttonCancel.Text" xml:space="preserve">
-    <value>Close</value>
-  </data>
-  <data name="rememberColumnasDefaulltWidthCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
-  </data>
-  <data name="&gt;&gt;rememberColumnasDefaulltWidthCheckBox.Name" xml:space="preserve">
-    <value>rememberColumnasDefaulltWidthCheckBox</value>
-  </data>
-  <data name="buttonClear.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
-  <data name="buttonPaste.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="&gt;&gt;buttonCopy.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>595, 389</value>
-  </data>
-  <data name="&gt;&gt;Column1.Name" xml:space="preserve">
-    <value>Column1</value>
-  </data>
-  <data name="&gt;&gt;buttonCancel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;buttonCopy.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="buttonCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="&gt;&gt;AutoSelectTagsCheckBox.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="Column1.Width" type="System.Int32, mscorlib">
-    <value>200</value>
-  </data>
-  <data name="selectTagsButton.Text" xml:space="preserve">
-    <value>Select tags...</value>
+  <data name="dataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
+    <value>Track</value>
   </data>
   <data name="&gt;&gt;buttonPaste.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="selectTagsButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="Column1.ToolTipText" xml:space="preserve">
+    <value>Some tooltip</value>
   </data>
-  <data name="&gt;&gt;buttonCopy.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;selectTagsButton.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
-  <data name="&gt;&gt;buttonClear.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;rememberColumnasDefaulltWidthCheckBoxLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;previewTable.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;dataGridViewTextBoxColumn3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonOK.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="dataGridViewTextBoxColumn1.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;selectTagsButton.Name" xml:space="preserve">
-    <value>selectTagsButton</value>
+  <data name="&gt;&gt;buttonClear.Name" xml:space="preserve">
+    <value>buttonClear</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Compare Tracks</value>
+  <data name="buttonCancel.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
   </data>
-  <data name="&gt;&gt;previewTable.Name" xml:space="preserve">
-    <value>previewTable</value>
+  <data name="ImageCellTemplate.Width" type="System.Int32, mscorlib">
+    <value>200</value>
   </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn1.Name" xml:space="preserve">
-    <value>dataGridViewTextBoxColumn1</value>
-  </data>
-  <data name="AutoSelectTagsCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;buttonOK.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="buttonOK.Size" type="System.Drawing.Size, System.Drawing">
-    <value>106, 23</value>
-  </data>
-  <data name="buttonClear.Text" xml:space="preserve">
-    <value>Clear</value>
-  </data>
-  <data name="rememberColumnasDefaulltWidthCheckBox.Text" xml:space="preserve">
-    <value>Set changed column width as new default</value>
-  </data>
-  <data name="rememberColumnasDefaulltWidthCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>140, 393</value>
-  </data>
-  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>830, 449</value>
-  </data>
-  <data name="&gt;&gt;rememberColumnasDefaulltWidthCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="selectTagsButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>28, 389</value>
-  </data>
-  <data name="Column1.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;buttonCancel.Name" xml:space="preserve">
-    <value>buttonCancel</value>
+  <data name="rememberColumnasDefaulltWidthCheckBoxLabel.ToolTip" xml:space="preserve">
+    <value>Tick this option and change the width of any column to set this width as new default</value>
   </data>
   <data name="dataGridViewTextBoxColumn2.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="Column1.ToolTipText" xml:space="preserve">
-    <value>Some tooltip</value>
-  </data>
-  <data name="buttonPaste.Location" type="System.Drawing.Point, System.Drawing">
-    <value>452, 389</value>
-  </data>
-  <data name="rememberColumnasDefaulltWidthCheckBox.ToolTip" xml:space="preserve">
-    <value>Tick this option and change the width of any column to set this width as new default</value>
-  </data>
-  <data name="dataGridViewCellStyle3.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        Qk32AgAAAAAAADYAAAAoAAAADgAAABAAAAABABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEgoTGw8bGw8bGw8bGw8bGw8bGw8bG
-        w8bGw8bGw8bGw8bGw8bGw8YAAAAAAISChP///////////////////////////////////////////8bD
-        xgAAAAAAhIKE////////////////////////////////////////////xsPGAAAAAACEgoT/////////
-        ///////////////////////////////////Gw8YAAAAAAISChP//////////////////////////////
-        /////////////8bDxgAAAAAAhIKE////////////AAD/AAD/////////AAD/AAD/////////xsPGAAAA
-        AACEgoT///////////////8AAP8AAP8AAP8AAP/////////////Gw8YAAAAAAISChP//////////////
-        /////wAA/wAA/////////////////8bDxgAAAAAAhIKE////////////////AAD/AAD/AAD/AAD/////
-        ////////xsPGAAAAAACEgoT///////////8AAP8AAP////////8AAP8AAP/////////Gw8YAAAAAAISC
-        hP///////////////////////////////////////////8bDxgAAAAAAhIKE////////////////////
-        ////////////////////////xsPGAAAAAACEgoT/////////////////////////////////////////
-        ///Gw8YAAAAAAISChP///////////////////////////////////////////8bDxgAAAAAAhIKEhIKE
-        hIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEAAA=
-</value>
-  </data>
-  <data name="previewTable.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="selectTagsButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
-  </data>
-  <data name="previewTable.ColumnHeadersHeight" type="System.Int32, mscorlib">
-    <value>29</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>822, 421</value>
-  </data>
-  <data name="&gt;&gt;buttonOK.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="buttonClear.TabIndex" type="System.Int32, mscorlib">
-    <value>31</value>
-  </data>
-  <data name="AutoSelectTagsCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>28</value>
-  </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="&gt;&gt;AutoSelectTagsCheckBox.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="dataGridViewTextBoxColumn3.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="AutoSelectTagsCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
-  </data>
-  <data name="buttonCopy.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="buttonOK.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
-  <data name="&gt;&gt;toolTip1.Name" xml:space="preserve">
-    <value>toolTip1</value>
+  <data name="buttonCopy.Location" type="System.Drawing.Point, System.Drawing">
+    <value>391, 393</value>
   </data>
-  <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>707, 389</value>
+  <data name="buttonOK.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;buttonClear.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;buttonPaste.Name" xml:space="preserve">
+    <value>buttonPaste</value>
   </data>
-  <data name="selectTagsButton.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn1.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn1</value>
   </data>
   <data name="&gt;&gt;dataGridViewTextBoxColumn1.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ImageCellTemplate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="buttonClear.Text" xml:space="preserve">
+    <value>Clear</value>
   </data>
-  <data name="selectTagsButton.ToolTip" xml:space="preserve">
-    <value>Select displayed tags</value>
+  <data name="rememberColumnasDefaulltWidthCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
   </data>
-  <data name="buttonClear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>513, 389</value>
+  <data name="&gt;&gt;rememberColumnasDefaulltWidthCheckBox.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="buttonClear.ToolTip" xml:space="preserve">
-    <value />
+  <data name="buttonPaste.TabIndex" type="System.Int32, mscorlib">
+    <value>30</value>
   </data>
-  <data name="buttonClear.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 23</value>
+  <data name="selectTagsButton.Text" xml:space="preserve">
+    <value>Select tags...</value>
   </data>
-  <data name="&gt;&gt;buttonCancel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="rememberColumnasDefaulltWidthCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>32</value>
   </data>
-  <data name="rememberColumnasDefaulltWidthCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
+  <data name="&gt;&gt;toolTip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="previewTable.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+  <data name="dataGridViewTextBoxColumn3.Width" type="System.Int32, mscorlib">
+    <value>192</value>
   </data>
-  <data name="buttonOK.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
-  <data name="buttonClear.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="buttonCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>806, 371</value>
+  <data name="dataGridViewTextBoxColumn2.Width" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="buttonClear.Location" type="System.Drawing.Point, System.Drawing">
+    <value>513, 393</value>
+  </data>
+  <data name="&gt;&gt;rememberColumnasDefaulltWidthCheckBoxLabel.Name" xml:space="preserve">
+    <value>rememberColumnasDefaulltWidthCheckBoxLabel</value>
+  </data>
+  <data name="buttonCopy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 23</value>
   </data>
   <data name="&gt;&gt;selectTagsButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="dataGridViewTextBoxColumn2.Width" type="System.Int32, mscorlib">
-    <value>8</value>
+  <data name="AutoSelectTagsCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="dataGridViewCellStyle2.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -481,94 +242,400 @@
         hIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEAAA=
 </value>
   </data>
-  <data name="&gt;&gt;buttonPaste.Name" xml:space="preserve">
-    <value>buttonPaste</value>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>CompareTracksCommand</value>
   </data>
-  <data name="&gt;&gt;buttonPaste.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;buttonClear.Name" xml:space="preserve">
-    <value>buttonClear</value>
-  </data>
-  <data name="buttonCopy.TabIndex" type="System.Int32, mscorlib">
-    <value>29</value>
-  </data>
-  <data name="ImageCellTemplate.HeaderText" xml:space="preserve">
-    <value>Image Cell Template</value>
-  </data>
-  <data name="&gt;&gt;toolTip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;rememberColumnasDefaulltWidthCheckBox.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <data name="&gt;&gt;previewTable.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="dataGridViewTextBoxColumn3.HeaderText" xml:space="preserve">
-    <value>Original tag</value>
+  <data name="buttonOK.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
   </data>
-  <data name="previewTable.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="dataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
-    <value>Track</value>
-  </data>
-  <data name="&gt;&gt;buttonPaste.Parent" xml:space="preserve">
+  <data name="&gt;&gt;buttonOK.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;rememberColumnasDefaulltWidthCheckBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;rememberColumnasDefaulltWidthCheckBoxLabel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;buttonCopy.Name" xml:space="preserve">
+    <value>buttonCopy</value>
+  </data>
+  <data name="rememberColumnasDefaulltWidthCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>140, 397</value>
+  </data>
+  <data name="selectTagsButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>28, 393</value>
+  </data>
+  <data name="rememberColumnasDefaulltWidthCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>160, 398</value>
+  </data>
+  <data name="&gt;&gt;rememberColumnasDefaulltWidthCheckBoxLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;buttonCancel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="rememberColumnasDefaulltWidthCheckBoxLabel.Text" xml:space="preserve">
+    <value>Set changed column width as new default</value>
+  </data>
+  <data name="&gt;&gt;buttonCopy.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="previewTable.RowHeadersWidth" type="System.Int32, mscorlib">
-    <value>150</value>
+  <data name="rememberColumnasDefaulltWidthCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>27, 17</value>
   </data>
-  <data name="dataGridViewTextBoxColumn3.Width" type="System.Int32, mscorlib">
-    <value>192</value>
-  </data>
-  <data name="Column1.HeaderText" xml:space="preserve">
-    <value>Some Track</value>
-  </data>
-  <data name="buttonCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
+  <data name="buttonCopy.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="dataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
     <value>OriginalTag</value>
   </data>
-  <data name="buttonCancel.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+  <data name="previewTable.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>150</value>
   </data>
-  <data name="AutoSelectTagsCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>15, 14</value>
+  <data name="dataGridViewCellStyle6.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        Qk32AgAAAAAAADYAAAAoAAAADgAAABAAAAABABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEgoTGw8bGw8bGw8bGw8bGw8bGw8bG
+        w8bGw8bGw8bGw8bGw8bGw8YAAAAAAISChP///////////////////////////////////////////8bD
+        xgAAAAAAhIKE////////////////////////////////////////////xsPGAAAAAACEgoT/////////
+        ///////////////////////////////////Gw8YAAAAAAISChP//////////////////////////////
+        /////////////8bDxgAAAAAAhIKE////////////AAD/AAD/////////AAD/AAD/////////xsPGAAAA
+        AACEgoT///////////////8AAP8AAP8AAP8AAP/////////////Gw8YAAAAAAISChP//////////////
+        /////wAA/wAA/////////////////8bDxgAAAAAAhIKE////////////////AAD/AAD/AAD/AAD/////
+        ////////xsPGAAAAAACEgoT///////////8AAP8AAP////////8AAP8AAP/////////Gw8YAAAAAAISC
+        hP///////////////////////////////////////////8bDxgAAAAAAhIKE////////////////////
+        ////////////////////////xsPGAAAAAACEgoT/////////////////////////////////////////
+        ///Gw8YAAAAAAISChP///////////////////////////////////////////8bDxgAAAAAAhIKEhIKE
+        hIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEAAA=
+</value>
   </data>
-  <data name="buttonCopy.Text" xml:space="preserve">
-    <value>Copy</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>CompareTracksCommand</value>
-  </data>
-  <data name="buttonOK.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;selectTagsButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;AutoSelectTagsCheckBox.Name" xml:space="preserve">
     <value>AutoSelectTagsCheckBox</value>
   </data>
-  <data name="&gt;&gt;ImageCellTemplate.Name" xml:space="preserve">
-    <value>ImageCellTemplate</value>
+  <data name="buttonCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="&gt;&gt;previewTable.Name" xml:space="preserve">
+    <value>previewTable</value>
+  </data>
+  <data name="AutoSelectTagsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 397</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn3.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>707, 393</value>
   </data>
   <data name="buttonCancel.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="$this.Language" type="System.Globalization.CultureInfo, mscorlib">
+  <data name="buttonPaste.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 23</value>
+  </data>
+  <data name="AutoSelectTagsCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>28</value>
+  </data>
+  <data name="&gt;&gt;buttonCancel.Name" xml:space="preserve">
+    <value>buttonCancel</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Compare Tracks</value>
+  </data>
+  <data name="&gt;&gt;buttonOK.Name" xml:space="preserve">
+    <value>buttonOK</value>
+  </data>
+  <data name="ImageCellTemplate.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;rememberColumnasDefaulltWidthCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="previewTable.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 12</value>
+  </data>
+  <data name="rememberColumnasDefaulltWidthCheckBox.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="previewTable.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="rememberColumnasDefaulltWidthCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="buttonCancel.Text" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="dataGridViewCellStyle4.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        Qk32AgAAAAAAADYAAAAoAAAADgAAABAAAAABABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEgoTGw8bGw8bGw8bGw8bGw8bGw8bG
+        w8bGw8bGw8bGw8bGw8bGw8YAAAAAAISChP///////////////////////////////////////////8bD
+        xgAAAAAAhIKE////////////////////////////////////////////xsPGAAAAAACEgoT/////////
+        ///////////////////////////////////Gw8YAAAAAAISChP//////////////////////////////
+        /////////////8bDxgAAAAAAhIKE////////////AAD/AAD/////////AAD/AAD/////////xsPGAAAA
+        AACEgoT///////////////8AAP8AAP8AAP8AAP/////////////Gw8YAAAAAAISChP//////////////
+        /////wAA/wAA/////////////////8bDxgAAAAAAhIKE////////////////AAD/AAD/AAD/AAD/////
+        ////////xsPGAAAAAACEgoT///////////8AAP8AAP////////8AAP8AAP/////////Gw8YAAAAAAISC
+        hP///////////////////////////////////////////8bDxgAAAAAAhIKE////////////////////
+        ////////////////////////xsPGAAAAAACEgoT/////////////////////////////////////////
+        ///Gw8YAAAAAAISChP///////////////////////////////////////////8bDxgAAAAAAhIKEhIKE
+        hIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEAAA=
+</value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>830, 449</value>
+  </data>
+  <data name="buttonCopy.TabIndex" type="System.Int32, mscorlib">
+    <value>29</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn2.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;buttonPaste.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="selectTagsButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 23</value>
+  </data>
+  <data name="buttonClear.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 23</value>
+  </data>
+  <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
+    <value>595, 393</value>
+  </data>
+  <data name="AutoSelectTagsCheckBox.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="buttonPaste.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn3.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn3</value>
+  </data>
+  <data name="&gt;&gt;previewTable.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;AutoSelectTagsCheckBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="rememberColumnasDefaulltWidthCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="Column1.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="Column1.HeaderText" xml:space="preserve">
+    <value>Some Track</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn1.Width" type="System.Int32, mscorlib">
+    <value>383</value>
+  </data>
+  <data name="&gt;&gt;buttonClear.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;AutoSelectTagsCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="buttonOK.Text" xml:space="preserve">
+    <value>Proceed</value>
+  </data>
+  <data name="rememberColumnasDefaulltWidthCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;rememberColumnasDefaulltWidthCheckBox.Name" xml:space="preserve">
+    <value>rememberColumnasDefaulltWidthCheckBox</value>
+  </data>
+  <data name="AutoSelectTagsCheckBox.ToolTip" xml:space="preserve">
+    <value>Automatically select displayed tags and don't show tracks without differences</value>
+  </data>
+  <data name="&gt;&gt;previewTable.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="AutoSelectTagsCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>27, 17</value>
+  </data>
+  <data name="rememberColumnasDefaulltWidthCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>205, 13</value>
+  </data>
+  <data name="buttonClear.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;buttonOK.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="selectTagsButton.ToolTip" xml:space="preserve">
+    <value>Select displayed tags</value>
+  </data>
+  <data name="&gt;&gt;buttonClear.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="rememberColumnasDefaulltWidthCheckBox.ToolTip" xml:space="preserve">
+    <value>Tick this option and change the width of any column to set this width as new default</value>
+  </data>
+  <data name="selectTagsButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="buttonClear.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="buttonCopy.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="buttonPaste.Text" xml:space="preserve">
+    <value>Paste</value>
+  </data>
+  <data name="&gt;&gt;ImageCellTemplate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dataGridViewCellStyle8.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        Qk32AgAAAAAAADYAAAAoAAAADgAAABAAAAABABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEgoTGw8bGw8bGw8bGw8bGw8bGw8bG
+        w8bGw8bGw8bGw8bGw8bGw8YAAAAAAISChP///////////////////////////////////////////8bD
+        xgAAAAAAhIKE////////////////////////////////////////////xsPGAAAAAACEgoT/////////
+        ///////////////////////////////////Gw8YAAAAAAISChP//////////////////////////////
+        /////////////8bDxgAAAAAAhIKE////////////AAD/AAD/////////AAD/AAD/////////xsPGAAAA
+        AACEgoT///////////////8AAP8AAP8AAP8AAP/////////////Gw8YAAAAAAISChP//////////////
+        /////wAA/wAA/////////////////8bDxgAAAAAAhIKE////////////////AAD/AAD/AAD/AAD/////
+        ////////xsPGAAAAAACEgoT///////////8AAP8AAP////////8AAP8AAP/////////Gw8YAAAAAAISC
+        hP///////////////////////////////////////////8bDxgAAAAAAhIKE////////////////////
+        ////////////////////////xsPGAAAAAACEgoT/////////////////////////////////////////
+        ///Gw8YAAAAAAISChP///////////////////////////////////////////8bDxgAAAAAAhIKEhIKE
+        hIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEAAA=
+</value>
+  </data>
+  <data name="previewTable.ColumnHeadersHeight" type="System.Int32, mscorlib">
+    <value>29</value>
+  </data>
+  <data name="&gt;&gt;selectTagsButton.Name" xml:space="preserve">
+    <value>selectTagsButton</value>
+  </data>
+  <data name="&gt;&gt;buttonCopy.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolTip1.Name" xml:space="preserve">
+    <value>toolTip1</value>
+  </data>
+  <data name="&gt;&gt;buttonCopy.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn2.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn2</value>
+  </data>
+  <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 23</value>
+  </data>
+  <data name="&gt;&gt;Column1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonClear.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
+    <value>806, 375</value>
+  </data>
+  <data name="selectTagsButton.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="&gt;&gt;buttonCancel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="buttonClear.TabIndex" type="System.Int32, mscorlib">
+    <value>31</value>
+  </data>
+  <data name="buttonPaste.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ImageCellTemplate.HeaderText" xml:space="preserve">
+    <value>Image Cell Template</value>
+  </data>
+  <data name="previewTable.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="AutoSelectTagsCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="buttonClear.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="previewTable.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;AutoSelectTagsCheckBox.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="Column1.Width" type="System.Int32, mscorlib">
+    <value>200</value>
+  </data>
+  <data name="AutoSelectTagsCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="buttonOK.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 23</value>
+  </data>
+  <data name="buttonCopy.Text" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonPaste.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Column1.Name" xml:space="preserve">
+    <value>Column1</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn3.HeaderText" xml:space="preserve">
+    <value>Original tag</value>
+  </data>
+  <data name="selectTagsButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="buttonOK.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;ImageCellTemplate.Name" xml:space="preserve">
+    <value>ImageCellTemplate</value>
+  </data>
+  <data name="buttonPaste.Location" type="System.Drawing.Point, System.Drawing">
+    <value>452, 393</value>
+  </data>
+  <data name="buttonPaste.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>ru</value>
-  </data>
-  <data name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing">
+  </metadata>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
-  </data>
-  <data name="$this.Localizable" type="System.Boolean, mscorlib">
+  </metadata>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
-  <data name="Column1.UserAddedColumn" type="System.Boolean, mscorlib">
+  </metadata>
+  <metadata name="Column1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
-  <data name="ImageCellTemplate.UserAddedColumn" type="System.Boolean, mscorlib">
+  </metadata>
+  <metadata name="ImageCellTemplate.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
+  </metadata>
 </root>

@@ -268,6 +268,16 @@ namespace MusicBeePlugin
             return Color.FromArgb(255 - sampleColor.R, 255 - sampleColor.G, 255 - sampleColor.B);
         }
 
+        public static float GetBrightnessDifference(Color sampleColor1, Color sampleColor2)
+        {
+            return (sampleColor1.R - sampleColor2.R + sampleColor1.G - sampleColor2.G + sampleColor1.B - sampleColor2.B) / 3.0f / 255f;
+        }
+
+        public static float GetAverageBrightness(Color sampleColor1)
+        {
+            return (sampleColor1.R + sampleColor1.G + sampleColor1.B) / 3.0f / 255f;
+        }
+
         public static Color GetBitmapAverageColor(Bitmap img)
         {
             int avgR = 0, avgG = 0, avgB = 0;

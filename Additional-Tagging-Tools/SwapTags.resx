@@ -134,22 +134,31 @@
   <data name="label1.Text" xml:space="preserve">
     <value>Swap tag</value>
   </data>
+  <data name="&gt;&gt;destinationTagList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="&gt;&gt;dirtyErrorProvider.Name" xml:space="preserve">
     <value>dirtyErrorProvider</value>
   </data>
-  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="buttonCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Smart swap (important only for working with multiple artists/composers per track)</value>
+  </data>
+  <data name="smartOperationCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="label2.Error" xml:space="preserve">
     <value />
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
   <data name="smartOperationCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
@@ -175,7 +184,7 @@
     <value>0</value>
   </data>
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>
@@ -184,7 +193,7 @@
     <value>0</value>
   </data>
   <data name="smartOperationCheckBox.Text" xml:space="preserve">
-    <value>Smart swap (important only for working with multiple artists/composers per track)</value>
+    <value> </value>
   </data>
   <data name="buttonCancel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -198,14 +207,14 @@
   <data name="buttonOK.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="sourceTagList.Error" xml:space="preserve">
-    <value />
+  <data name="label4.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
   </data>
   <data name="label3.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
   <data name="&gt;&gt;buttonOK.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -222,20 +231,29 @@
   <data name="label2.Text" xml:space="preserve">
     <value>and tag</value>
   </data>
+  <data name="buttonCancel.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>382, 13</value>
+  </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Close</value>
+  </data>
+  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>39, 41</value>
   </data>
   <data name="buttonOK.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="&gt;&gt;destinationTagList.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
     <value>304, 63</value>
   </data>
-  <data name="buttonCancel.Error" xml:space="preserve">
-    <value />
+  <data name="label4.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;buttonCancel.Parent" xml:space="preserve">
     <value>$this</value>
@@ -244,13 +262,16 @@
     <value>83, 13</value>
   </data>
   <data name="&gt;&gt;smartOperationCheckBox.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="label1.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;toolTip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="label4.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label4.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
   </data>
   <data name="&gt;&gt;sourceTagList.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -264,6 +285,9 @@
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
+  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Swap Tags</value>
   </data>
@@ -275,6 +299,9 @@
   </data>
   <data name="label3.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
+  </data>
+  <data name="&gt;&gt;label4.Name" xml:space="preserve">
+    <value>label4</value>
   </data>
   <data name="label1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -309,8 +336,8 @@
   <data name="&gt;&gt;label1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;sourceTagList.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>477, 91</value>
@@ -321,17 +348,22 @@
   <data name="&gt;&gt;buttonOK.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;sourceTagList.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="label4.ToolTip" xml:space="preserve">
+    <value>Every byte of the source tag (including the service characters that identify the roles of the artists) 
+will be preserved if this option is unchecked, however this may only be useful 
+for swapping it to a temporary tag</value>
+  </data>
+  <data name="&gt;&gt;buttonCancel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="destinationTagList.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 21</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -345,17 +377,20 @@
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
     <value>385, 63</value>
   </data>
-  <data name="smartOperationCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;label4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;destinationTagList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="smartOperationCheckBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="sourceTagList.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 21</value>
   </data>
-  <data name="&gt;&gt;buttonCancel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="sourceTagList.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="label4.Error" xml:space="preserve">
+    <value />
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>for selected files</value>
@@ -396,14 +431,23 @@
   <data name="&gt;&gt;toolTip1.Name" xml:space="preserve">
     <value>toolTip1</value>
   </data>
+  <data name="&gt;&gt;toolTip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="label2.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="smartOperationCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>401, 17</value>
+    <value>27, 17</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
     <value>377, 15</value>
+  </data>
+  <data name="buttonOK.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;smartOperationCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -414,8 +458,8 @@
   <data name="buttonCancel.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
-  <data name="smartOperationCheckBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>52, 13</value>
@@ -438,10 +482,13 @@ for swapping it to a temporary tag</value>
     <value>0</value>
   </data>
   <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="sourceTagList.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
+  </data>
+  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="buttonCancel.ToolTip" xml:space="preserve">
     <value />

@@ -61,7 +61,7 @@
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="T">
+    <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
@@ -117,349 +117,460 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="notifyWhenCalculationCompletedCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="notifyWhenCalculationCompletedCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="notifyWhenCalculationCompletedCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>375, 39</value>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>595, 176</value>
   </data>
-  <data name="notifyWhenCalculationCompletedCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>198, 17</value>
-  </data>
-  <data name="notifyWhenCalculationCompletedCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>151</value>
-  </data>
-  <data name="notifyWhenCalculationCompletedCheckBox.Text" xml:space="preserve">
-    <value>Notify when calculation is completed</value>
-  </data>
-  <data name="&gt;&gt;notifyWhenCalculationCompletedCheckBox.Name" xml:space="preserve">
-    <value>notifyWhenCalculationCompletedCheckBox</value>
-  </data>
-  <data name="&gt;&gt;notifyWhenCalculationCompletedCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;notifyWhenCalculationCompletedCheckBox.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;notifyWhenCalculationCompletedCheckBox.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="calculateAlbumRatingAtStartUpCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="calculateAlbumRatingAtStartUpCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="calculateAlbumRatingAtStartUpCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 39</value>
-  </data>
-  <data name="calculateAlbumRatingAtStartUpCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>325, 17</value>
-  </data>
-  <data name="calculateAlbumRatingAtStartUpCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>148</value>
-  </data>
-  <data name="calculateAlbumRatingAtStartUpCheckBox.Text" xml:space="preserve">
-    <value>Auto calculate average album ratings on startup for entire library</value>
-  </data>
-  <data name="&gt;&gt;calculateAlbumRatingAtStartUpCheckBox.Name" xml:space="preserve">
-    <value>calculateAlbumRatingAtStartUpCheckBox</value>
-  </data>
-  <data name="&gt;&gt;calculateAlbumRatingAtStartUpCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;calculateAlbumRatingAtStartUpCheckBox.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;calculateAlbumRatingAtStartUpCheckBox.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="button1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>213, 141</value>
-  </data>
-  <data name="button1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 23</value>
-  </data>
-  <data name="button1.TabIndex" type="System.Int32, mscorlib">
-    <value>146</value>
-  </data>
-  <data name="button1.Text" xml:space="preserve">
-    <value>Save settings</value>
-  </data>
-  <data name="&gt;&gt;button1.Name" xml:space="preserve">
-    <value>button1</value>
-  </data>
-  <data name="&gt;&gt;button1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;button1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;button1.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="buttonCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>450, 141</value>
-  </data>
-  <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 23</value>
-  </data>
-  <data name="buttonCancel.TabIndex" type="System.Int32, mscorlib">
-    <value>134</value>
-  </data>
-  <data name="buttonCancel.Text" xml:space="preserve">
-    <value>Close</value>
-  </data>
-  <data name="&gt;&gt;buttonCancel.Name" xml:space="preserve">
-    <value>buttonCancel</value>
-  </data>
-  <data name="&gt;&gt;buttonCancel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;buttonCancel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="buttonOK.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 141</value>
-  </data>
-  <data name="buttonOK.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 23</value>
-  </data>
-  <data name="buttonOK.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
-  </data>
-  <data name="buttonOK.Text" xml:space="preserve">
-    <value>Calculate average album rating now</value>
-  </data>
-  <data name="&gt;&gt;buttonOK.Name" xml:space="preserve">
-    <value>buttonOK</value>
-  </data>
-  <data name="&gt;&gt;buttonOK.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;buttonOK.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;buttonOK.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 9</value>
-  </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>252, 13</value>
-  </data>
-  <data name="label1.TabIndex" type="System.Int32, mscorlib">
-    <value>152</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>Calculate average album ratings for displayed tracks</value>
-  </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
-  </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="considerUnratedCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="considerUnratedCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 62</value>
-  </data>
-  <data name="considerUnratedCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 17</value>
-  </data>
-  <data name="considerUnratedCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>153</value>
-  </data>
-  <data name="considerUnratedCheckBox.Text" xml:space="preserve">
-    <value>Treat unrated tracks as zero-rated</value>
-  </data>
-  <data name="&gt;&gt;considerUnratedCheckBox.Name" xml:space="preserve">
-    <value>considerUnratedCheckBox</value>
-  </data>
-  <data name="&gt;&gt;considerUnratedCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;considerUnratedCheckBox.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;considerUnratedCheckBox.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="calculateAlbumRatingAtTagsChangedCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="calculateAlbumRatingAtTagsChangedCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 85</value>
-  </data>
-  <data name="calculateAlbumRatingAtTagsChangedCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>311, 17</value>
-  </data>
-  <data name="calculateAlbumRatingAtTagsChangedCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>154</value>
-  </data>
-  <data name="calculateAlbumRatingAtTagsChangedCheckBox.Text" xml:space="preserve">
-    <value>Auto calculate average album ratings on track rating change</value>
-  </data>
-  <data name="&gt;&gt;calculateAlbumRatingAtTagsChangedCheckBox.Name" xml:space="preserve">
-    <value>calculateAlbumRatingAtTagsChangedCheckBox</value>
-  </data>
-  <data name="&gt;&gt;calculateAlbumRatingAtTagsChangedCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;calculateAlbumRatingAtTagsChangedCheckBox.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;calculateAlbumRatingAtTagsChangedCheckBox.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 110</value>
-  </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>151, 13</value>
-  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>155</value>
   </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>Track ratings are stored in tag:</value>
-  </data>
-  <data name="&gt;&gt;label2.Name" xml:space="preserve">
-    <value>label2</value>
-  </data>
   <data name="&gt;&gt;label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="trackRatingTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>166, 107</value>
-  </data>
-  <data name="trackRatingTagList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 21</value>
-  </data>
-  <data name="trackRatingTagList.TabIndex" type="System.Int32, mscorlib">
-    <value>156</value>
-  </data>
-  <data name="&gt;&gt;trackRatingTagList.Name" xml:space="preserve">
-    <value>trackRatingTagList</value>
-  </data>
-  <data name="&gt;&gt;trackRatingTagList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;trackRatingTagList.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;trackRatingTagList.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="albumRatingTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>450, 107</value>
-  </data>
-  <data name="albumRatingTagList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 21</value>
-  </data>
-  <data name="albumRatingTagList.TabIndex" type="System.Int32, mscorlib">
-    <value>158</value>
-  </data>
-  <data name="&gt;&gt;albumRatingTagList.Name" xml:space="preserve">
-    <value>albumRatingTagList</value>
-  </data>
-  <data name="&gt;&gt;albumRatingTagList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;albumRatingTagList.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;albumRatingTagList.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="label3.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>293, 110</value>
-  </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 13</value>
-  </data>
-  <data name="label3.TabIndex" type="System.Int32, mscorlib">
-    <value>157</value>
-  </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value>Album ratings are stored in tag:</value>
-  </data>
-  <data name="&gt;&gt;label3.Name" xml:space="preserve">
-    <value>label3</value>
-  </data>
-  <data name="&gt;&gt;label3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label3.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;calculateAlbumRatingAtTagsChangedCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="&gt;&gt;trackRatingTagList.Name" xml:space="preserve">
+    <value>trackRatingTagList</value>
+  </data>
+  <data name="&gt;&gt;trackRatingTagList.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="buttonCancel.TabIndex" type="System.Int32, mscorlib">
+    <value>134</value>
+  </data>
+  <data name="&gt;&gt;albumRatingTagList.Name" xml:space="preserve">
+    <value>albumRatingTagList</value>
+  </data>
+  <data name="trackRatingTagList.TabIndex" type="System.Int32, mscorlib">
+    <value>156</value>
+  </data>
+  <data name="&gt;&gt;calculateAlbumRatingAtStartUpCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="calculateAlbumRatingAtTagsChangedCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>292, 13</value>
+  </data>
+  <data name="notifyWhenCalculationCompletedCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>27, 17</value>
+  </data>
+  <data name="albumRatingTagList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>450, 107</value>
+  </data>
+  <data name="calculateAlbumRatingAtStartUpCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>32, 41</value>
+  </data>
+  <data name="albumRatingTagList.TabIndex" type="System.Int32, mscorlib">
+    <value>158</value>
+  </data>
+  <data name="&gt;&gt;calculateAlbumRatingAtTagsChangedCheckBoxLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="considerUnratedCheckBox.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="calculateAlbumRatingAtStartUpCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>306, 13</value>
+  </data>
+  <data name="&gt;&gt;considerUnratedCheckBoxLabel.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;notifyWhenCalculationCompletedCheckBoxLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;considerUnratedCheckBoxLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="calculateAlbumRatingAtStartUpCheckBoxLabel.Text" xml:space="preserve">
+    <value>Auto calculate average album ratings on startup for entire library</value>
+  </data>
+  <data name="&gt;&gt;considerUnratedCheckBox.Name" xml:space="preserve">
+    <value>considerUnratedCheckBox</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="notifyWhenCalculationCompletedCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;notifyWhenCalculationCompletedCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="buttonCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="calculateAlbumRatingAtStartUpCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>595, 171</value>
+  <data name="&gt;&gt;notifyWhenCalculationCompletedCheckBoxLabel.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>601, 203</value>
+  <data name="considerUnratedCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>32, 64</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Calculate Average Album Ratings</value>
+  <data name="&gt;&gt;considerUnratedCheckBox.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;calculateAlbumRatingAtStartUpCheckBoxLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="calculateAlbumRatingAtStartUpCheckBox.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="calculateAlbumRatingAtStartUpCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="notifyWhenCalculationCompletedCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>395, 41</value>
+  </data>
+  <data name="calculateAlbumRatingAtTagsChangedCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>27, 17</value>
+  </data>
+  <data name="&gt;&gt;notifyWhenCalculationCompletedCheckBoxLabel.Name" xml:space="preserve">
+    <value>notifyWhenCalculationCompletedCheckBoxLabel</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Calculate average album ratings for displayed tracks</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>CalculateAverageAlbumRatingCommand</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=5.2.7338.31495, Culture=neutral, PublicKeyToken=null</value>
+  <data name="considerUnratedCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>167, 13</value>
   </data>
+  <data name="&gt;&gt;calculateAlbumRatingAtTagsChangedCheckBoxLabel.Name" xml:space="preserve">
+    <value>calculateAlbumRatingAtTagsChangedCheckBoxLabel</value>
+  </data>
+  <data name="buttonOK.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="considerUnratedCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;buttonOK.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;calculateAlbumRatingAtStartUpCheckBoxLabel.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;considerUnratedCheckBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;calculateAlbumRatingAtTagsChangedCheckBox.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;buttonCancel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="calculateAlbumRatingAtStartUpCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>27, 17</value>
+  </data>
+  <data name="notifyWhenCalculationCompletedCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>162</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>Album ratings are stored in tag:</value>
+  </data>
+  <data name="trackRatingTagList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>166, 107</value>
+  </data>
+  <data name="calculateAlbumRatingAtStartUpCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="button1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>195, 23</value>
+  </data>
+  <data name="&gt;&gt;albumRatingTagList.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 9</value>
+  </data>
+  <data name="notifyWhenCalculationCompletedCheckBox.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="&gt;&gt;trackRatingTagList.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;calculateAlbumRatingAtTagsChangedCheckBoxLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>252, 13</value>
+  </data>
+  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;label3.Name" xml:space="preserve">
+    <value>label3</value>
+  </data>
+  <data name="calculateAlbumRatingAtTagsChangedCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>32, 87</value>
+  </data>
+  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+    <value>label2</value>
+  </data>
+  <data name="calculateAlbumRatingAtTagsChangedCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>450, 141</value>
+  </data>
+  <data name="&gt;&gt;buttonOK.Name" xml:space="preserve">
+    <value>buttonOK</value>
+  </data>
+  <data name="notifyWhenCalculationCompletedCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>375, 39</value>
+  </data>
+  <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 23</value>
+  </data>
+  <data name="button1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label3.TabIndex" type="System.Int32, mscorlib">
+    <value>157</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Calculate Average Album Ratings</value>
+  </data>
+  <data name="&gt;&gt;calculateAlbumRatingAtStartUpCheckBoxLabel.Name" xml:space="preserve">
+    <value>calculateAlbumRatingAtStartUpCheckBoxLabel</value>
+  </data>
+  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;buttonOK.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="&gt;&gt;notifyWhenCalculationCompletedCheckBox.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>601, 203</value>
+  </data>
+  <data name="buttonOK.Size" type="System.Drawing.Size, System.Drawing">
+    <value>195, 23</value>
+  </data>
+  <data name="considerUnratedCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>153</value>
+  </data>
+  <data name="trackRatingTagList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 21</value>
+  </data>
+  <data name="label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="notifyWhenCalculationCompletedCheckBoxLabel.Text" xml:space="preserve">
+    <value>Notify when calculation is completed</value>
+  </data>
+  <data name="&gt;&gt;notifyWhenCalculationCompletedCheckBoxLabel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="label3.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 141</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="buttonCancel.Text" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="calculateAlbumRatingAtTagsChangedCheckBox.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="calculateAlbumRatingAtStartUpCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>159</value>
+  </data>
+  <data name="&gt;&gt;notifyWhenCalculationCompletedCheckBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="considerUnratedCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>160</value>
+  </data>
+  <data name="calculateAlbumRatingAtStartUpCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 39</value>
+  </data>
+  <data name="&gt;&gt;notifyWhenCalculationCompletedCheckBox.Name" xml:space="preserve">
+    <value>notifyWhenCalculationCompletedCheckBox</value>
+  </data>
+  <data name="calculateAlbumRatingAtTagsChangedCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>161</value>
+  </data>
+  <data name="&gt;&gt;calculateAlbumRatingAtStartUpCheckBoxLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;calculateAlbumRatingAtTagsChangedCheckBox.Name" xml:space="preserve">
+    <value>calculateAlbumRatingAtTagsChangedCheckBox</value>
+  </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>151, 13</value>
+  </data>
+  <data name="&gt;&gt;button1.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;buttonCancel.Name" xml:space="preserve">
+    <value>buttonCancel</value>
+  </data>
+  <data name="&gt;&gt;button1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="considerUnratedCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonOK.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;label3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;calculateAlbumRatingAtStartUpCheckBox.Name" xml:space="preserve">
+    <value>calculateAlbumRatingAtStartUpCheckBox</value>
+  </data>
+  <data name="&gt;&gt;albumRatingTagList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;calculateAlbumRatingAtStartUpCheckBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>293, 110</value>
+  </data>
+  <data name="buttonOK.Text" xml:space="preserve">
+    <value>Calculate average album rating now</value>
+  </data>
+  <data name="considerUnratedCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 62</value>
+  </data>
+  <data name="calculateAlbumRatingAtTagsChangedCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>154</value>
+  </data>
+  <data name="albumRatingTagList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 21</value>
+  </data>
+  <data name="&gt;&gt;calculateAlbumRatingAtTagsChangedCheckBoxLabel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;considerUnratedCheckBoxLabel.Name" xml:space="preserve">
+    <value>considerUnratedCheckBoxLabel</value>
+  </data>
+  <data name="calculateAlbumRatingAtTagsChangedCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="notifyWhenCalculationCompletedCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Track ratings are stored in tag:</value>
+  </data>
+  <data name="considerUnratedCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>27, 17</value>
+  </data>
+  <data name="&gt;&gt;button1.Name" xml:space="preserve">
+    <value>button1</value>
+  </data>
+  <data name="notifyWhenCalculationCompletedCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;buttonCancel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;calculateAlbumRatingAtTagsChangedCheckBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="notifyWhenCalculationCompletedCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>179, 13</value>
+  </data>
+  <data name="button1.Text" xml:space="preserve">
+    <value>Save settings</value>
+  </data>
+  <data name="&gt;&gt;considerUnratedCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 13</value>
+  </data>
+  <data name="buttonOK.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="calculateAlbumRatingAtStartUpCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>148</value>
+  </data>
+  <data name="button1.TabIndex" type="System.Int32, mscorlib">
+    <value>146</value>
+  </data>
+  <data name="notifyWhenCalculationCompletedCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>151</value>
+  </data>
+  <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>213, 141</value>
+  </data>
+  <data name="calculateAlbumRatingAtTagsChangedCheckBoxLabel.Text" xml:space="preserve">
+    <value>Auto calculate average album ratings on track rating change</value>
+  </data>
+  <data name="calculateAlbumRatingAtTagsChangedCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 85</value>
+  </data>
+  <data name="&gt;&gt;considerUnratedCheckBoxLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;albumRatingTagList.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;button1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+    <value>152</value>
+  </data>
+  <data name="&gt;&gt;trackRatingTagList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 110</value>
+  </data>
+  <data name="considerUnratedCheckBoxLabel.Text" xml:space="preserve">
+    <value>Treat unrated tracks as zero-rated</value>
+  </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="&gt;&gt;calculateAlbumRatingAtStartUpCheckBox.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>ru</value>
+  </metadata>
 </root>

@@ -37,7 +37,7 @@ namespace MusicBeePlugin
 
         protected new void initializeForm()
         {
-            //base.initializeForm();
+            base.initializeForm();
 
             MbForm = MbForm.IsDisposed ? (Form)FromHandle(MbApiInterface.MB_GetWindowHandle()) : MbForm;
             MbForm.AddOwnedForm(this);
@@ -385,6 +385,11 @@ namespace MusicBeePlugin
             //sourceTagList.Repaint();
         }
 
+        private void checkUncheckAllCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            checkUncheckAllCheckBox.Checked = !checkUncheckAllCheckBox.Checked;
+        }
+
         private void CopyTagsToClipboardCommand_FormClosed(object sender, FormClosedEventArgs e)
         {
             TagToolsPlugin.addCopyTagsToClipboardUsingMenuItems();
@@ -415,82 +420,6 @@ namespace MusicBeePlugin
         }
     }
 
-    unsafe public static class NativeWindowsClipboard//***
-    {
-        [DllImport("User32.dll", CharSet = CharSet.Unicode)]
-        private static extern int OpenClipboard(
-            IntPtr hWndNewOwner
-        );
-
-        [DllImport("User32.dll", CharSet = CharSet.Unicode)]
-        private static extern int CloseClipboard();
-
-        [DllImport("User32.dll", CharSet = CharSet.Unicode)]
-        private static extern int EmptyClipboard();
-
-        [DllImport("User32.dll", CharSet = CharSet.Unicode)]
-        private static extern IntPtr GetClipboardData(
-            uint uFormat
-        );
-
-        [DllImport("User32.dll", CharSet = CharSet.Unicode)]
-        private static extern IntPtr SetClipboardData(
-            uint uFormat,
-            IntPtr hMem
-        );
-
-        [DllImport("Kernel32.dll", CharSet = CharSet.Unicode)]
-        private static extern IntPtr GlobalLock(
-            IntPtr hMem
-        );
-
-        [DllImport("Kernel32.dll", CharSet = CharSet.Unicode)]
-        private static extern int GlobalUnlock(
-            IntPtr hMem
-        );
-
-        [DllImport("Kernel32.dll", CharSet = CharSet.Unicode)]
-        private static extern IntPtr GlobalAlloc(
-            uint uFlags,
-            ulong dwBytes
-        );
-
-        [DllImport("msvcrt", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
-        private static extern int wcscpy(char* str1, [MarshalAs(UnmanagedType.LPWStr)]StringBuilder str2);
-
-        private const uint CF_UNICODETEXT = 13;
-        private const uint GMEM_DDESHARE = 8192;
-
-        public static void SetText(string strText)
-        {
-            if (OpenClipboard(IntPtr.Zero) != 0)
-            {
-                IntPtr hgBuffer;
-                char* chBuffer;
-                EmptyClipboard();
-                hgBuffer = GlobalAlloc(GMEM_DDESHARE, 2 * Convert.ToUInt32(strText.Length + 1)); // 2 = sizeof(wchar_t) -- C++; sizeof(char) -- C#, UInt32 - for 32bit apps
-                chBuffer = (char*)GlobalLock(hgBuffer);
-                wcscpy(chBuffer, new StringBuilder(strText));
-                GlobalUnlock(hgBuffer);
-                SetClipboardData(CF_UNICODETEXT, hgBuffer);
-                CloseClipboard();
-            }
-        }
-
-        public static string GetText()
-        {
-            if (OpenClipboard(IntPtr.Zero) != 0)
-            {
-                IntPtr hData = GetClipboardData(CF_UNICODETEXT);
-                char* chBuffer = (char*)GlobalLock(hData);
-                string strResult = new string(chBuffer);
-                GlobalUnlock(hData);
-                CloseClipboard();
-                return strResult;
-            }
-            return "";
-        }
-    }
 
     public partial class Plugin
     {

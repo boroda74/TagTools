@@ -39,11 +39,9 @@
             this.checkUncheckAllCheckBox = new System.Windows.Forms.CheckBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label1 = new System.Windows.Forms.Label();
+            this.checkUncheckAllCheckBoxLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
-            //MusicBee
-            this.tagSetComboBox = (System.Windows.Forms.ComboBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.ComboBox);
-            //~MusicBee
             // 
             // buttonOK
             // 
@@ -98,6 +96,7 @@
             // 
             resources.ApplyResources(this.checkUncheckAllCheckBox, "checkUncheckAllCheckBox");
             this.checkUncheckAllCheckBox.Name = "checkUncheckAllCheckBox";
+            this.checkUncheckAllCheckBox.Tag = "checkUncheckAllCheckBoxLabel";
             this.checkUncheckAllCheckBox.UseVisualStyleBackColor = true;
             this.checkUncheckAllCheckBox.CheckedChanged += new System.EventHandler(this.checkUncheckAllCheckBox_CheckedChanged);
             // 
@@ -112,12 +111,19 @@
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
             // 
+            // checkUncheckAllCheckBoxLabel
+            // 
+            resources.ApplyResources(this.checkUncheckAllCheckBoxLabel, "checkUncheckAllCheckBoxLabel");
+            this.checkUncheckAllCheckBoxLabel.Name = "checkUncheckAllCheckBoxLabel";
+            this.checkUncheckAllCheckBoxLabel.Click += new System.EventHandler(this.checkUncheckAllCheckBoxLabel_Click);
+            // 
             // CopyTagsToClipboardCommand
             // 
             this.AcceptButton = this.buttonOK;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
+            this.Controls.Add(this.checkUncheckAllCheckBoxLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.checkUncheckAllCheckBox);
             this.Controls.Add(this.tagSetComboBox);
@@ -145,5 +151,6 @@
         private System.Windows.Forms.CheckBox checkUncheckAllCheckBox;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label checkUncheckAllCheckBoxLabel;
     }
 }

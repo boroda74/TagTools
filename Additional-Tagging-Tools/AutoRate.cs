@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using static MusicBeePlugin.Plugin;
+using ExtensionMethods;
 
 namespace MusicBeePlugin
 {
@@ -24,6 +25,7 @@ namespace MusicBeePlugin
             base.initializeForm();
 
             toolTip1.SetToolTip(this.autoRateAtStartUpCheckBox, MsgThresholdsDescription);
+            toolTip1.SetToolTip(this.autoRateAtStartUpCheckBoxLabel, MsgThresholdsDescription);
             toolTip1.SetToolTip(this.autoRateOnTrackPropertiesCheckBox, MsgThresholdsDescription);
             toolTip1.SetToolTip(this.threshold5Box, MsgThresholdsDescription);
             toolTip1.SetToolTip(this.threshold45Box, MsgThresholdsDescription);
@@ -38,6 +40,7 @@ namespace MusicBeePlugin
             toolTip1.SetToolTip(this.buttonOK, MsgThresholdsDescription);
 
             toolTip1.SetToolTip(this.calculateThresholdsAtStartUpCheckBox, MsgAutoCalculationOfThresholdsDescription);
+            toolTip1.SetToolTip(this.holdsAtStartUpCheckBoxLabel, MsgAutoCalculationOfThresholdsDescription);
             toolTip1.SetToolTip(this.perCent5UpDown, MsgAutoCalculationOfThresholdsDescription);
             toolTip1.SetToolTip(this.perCent45UpDown, MsgAutoCalculationOfThresholdsDescription);
             toolTip1.SetToolTip(this.perCent4UpDown, MsgAutoCalculationOfThresholdsDescription);
@@ -766,7 +769,7 @@ namespace MusicBeePlugin
 
         private void checkBoxN_CheckedChanged(TextBox threshold, CheckBox checkBox, NumericUpDown perCent)
         {
-            threshold.Enabled = checkBox.Checked;
+            threshold.Enable(checkBox.Checked);
             if (checkBox.Checked)
             {
                 if (perCent.Value == 0)
@@ -785,9 +788,21 @@ namespace MusicBeePlugin
             checkBoxN_CheckedChanged(threshold5Box, checkBox5, perCent5UpDown);
         }
 
+        private void checkBox5Label_Click(object sender, EventArgs e)
+        {
+            checkBox5.Checked = !checkBox5.Checked;
+            checkBoxFive_CheckedChanged(null, null);
+        }
+
         private void checkBoxFourAndHalf_CheckedChanged(object sender, EventArgs e)
         {
             checkBoxN_CheckedChanged(threshold45Box, checkBox45, perCent45UpDown);
+        }
+
+        private void checkBox45Label_Click(object sender, EventArgs e)
+        {
+            checkBox45.Checked = !checkBox45.Checked;
+            checkBoxFourAndHalf_CheckedChanged(null, null);
         }
 
         private void checkBoxFour_CheckedChanged(object sender, EventArgs e)
@@ -795,9 +810,21 @@ namespace MusicBeePlugin
             checkBoxN_CheckedChanged(threshold4Box, checkBox4, perCent4UpDown);
         }
 
+        private void checkBox4Label_Click(object sender, EventArgs e)
+        {
+            checkBox4.Checked = !checkBox4.Checked;
+            checkBoxFour_CheckedChanged(null, null);
+        }
+
         private void checkBoxThreeAndHalf_CheckedChanged(object sender, EventArgs e)
         {
             checkBoxN_CheckedChanged(threshold35Box, checkBox35, perCent35UpDown);
+        }
+
+        private void checkBox35Label_Click(object sender, EventArgs e)
+        {
+            checkBox35.Checked = !checkBox35.Checked;
+            checkBoxThreeAndHalf_CheckedChanged(null, null);
         }
 
         private void checkBoxThree_CheckedChanged(object sender, EventArgs e)
@@ -805,9 +832,21 @@ namespace MusicBeePlugin
             checkBoxN_CheckedChanged(threshold3Box, checkBox3, perCent3UpDown);
         }
 
+        private void checkBox3Label_Click(object sender, EventArgs e)
+        {
+            checkBox3.Checked = !checkBox3.Checked;
+            checkBoxThree_CheckedChanged(null, null);
+        }
+
         private void checkBoxTwoAndHalf_CheckedChanged(object sender, EventArgs e)
         {
             checkBoxN_CheckedChanged(threshold25Box, checkBox25, perCent25UpDown);
+        }
+
+        private void checkBox25Label_Click(object sender, EventArgs e)
+        {
+            checkBox25.Checked = !checkBox25.Checked;
+            checkBoxTwoAndHalf_CheckedChanged(null, null);
         }
 
         private void checkBoxTwo_CheckedChanged(object sender, EventArgs e)
@@ -815,9 +854,21 @@ namespace MusicBeePlugin
             checkBoxN_CheckedChanged(threshold2Box, checkBox2, perCent2UpDown);
         }
 
+        private void checkBox2Label_Click(object sender, EventArgs e)
+        {
+            checkBox2.Checked = !checkBox2.Checked;
+            checkBoxTwo_CheckedChanged(null, null);
+        }
+
         private void checkBoxOneAndHalf_CheckedChanged(object sender, EventArgs e)
         {
             checkBoxN_CheckedChanged(threshold15Box, checkBox15, perCent15UpDown);
+        }
+
+        private void checkBox15Label_Click(object sender, EventArgs e)
+        {
+            checkBox15.Checked = !checkBox15.Checked;
+            checkBoxOneAndHalf_CheckedChanged(null , null);
         }
 
         private void checkBoxOne_CheckedChanged(object sender, EventArgs e)
@@ -825,9 +876,21 @@ namespace MusicBeePlugin
             checkBoxN_CheckedChanged(threshold1Box, checkBox1, perCent1UpDown);
         }
 
+        private void checkBox1Label_Click(object sender, EventArgs e)
+        {
+            checkBox1.Checked = !checkBox1.Checked;
+            checkBoxOne_CheckedChanged(null, null);
+        }
+
         private void checkBoxHalf_CheckedChanged(object sender, EventArgs e)
         {
             checkBoxN_CheckedChanged(threshold05Box, checkBox05, perCent05UpDown);
+        }
+
+        private void checkBox05Label_Click(object sender, EventArgs e)
+        {
+            checkBox05.Checked = !checkBox05.Checked;
+            checkBoxHalf_CheckedChanged(null, null);
         }
 
         private void perCentN_ValueChanged(NumericUpDown perCent, CheckBox checkBox, Label perCentLabel, decimal actualPerCent)
@@ -948,12 +1011,24 @@ namespace MusicBeePlugin
 
         private void autoRateAtStartUp_CheckedChanged(object sender, EventArgs e)
         {
-            notifyWhenAutoratingCompletedCheckBox.Enabled = autoRateAtStartUpCheckBox.Checked;
+            notifyWhenAutoratingCompletedCheckBox.Enable(autoRateAtStartUpCheckBox.Checked);
+        }
+
+        private void autoRateAtStartUpCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            autoRateAtStartUpCheckBox.Checked = !autoRateAtStartUpCheckBox.Checked;
+            autoRateAtStartUp_CheckedChanged(null, null);
         }
 
         private void storePlaysPerDay_CheckedChanged(object sender, EventArgs e)
         {
-            playsPerDayTagList.Enabled = storePlaysPerDayCheckBox.Checked;
+            playsPerDayTagList.Enable(storePlaysPerDayCheckBox.Checked);
+        }
+
+        private void storePlaysPerDayCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            storePlaysPerDayCheckBox.Checked = !storePlaysPerDayCheckBox.Checked;
+            storePlaysPerDay_CheckedChanged(null, null);
         }
 
         public override void enableQueryingButtons()
@@ -969,14 +1044,37 @@ namespace MusicBeePlugin
 
         public override void enableQueryingOrUpdatingButtons()
         {
-            buttonOK.Enabled = true;
-            buttonCalculate.Enabled = true;
+            buttonOK.Enable(true);
+            buttonCalculate.Enable(true);
         }
 
         public override void disableQueryingOrUpdatingButtons()
         {
-            buttonOK.Enabled = false;
-            buttonCalculate.Enabled = false;
+            buttonOK.Enable(false);
+            buttonCalculate.Enable(false);
+        }
+
+        private void holdsAtStartUpCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            calculateThresholdsAtStartUpCheckBox.Checked = !calculateThresholdsAtStartUpCheckBox.Checked;
+        }
+
+        private void autoRateOnTrackPropertiesCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            autoRateOnTrackPropertiesCheckBox.Checked = !autoRateOnTrackPropertiesCheckBox.Checked;
+        }
+
+        private void sinceAddedCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            sinceAddedCheckBox.Checked = !sinceAddedCheckBox.Checked;
+        }
+
+        private void notifyWhenAutoratingCompletedCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            if (!notifyWhenAutoratingCompletedCheckBox.Enabled)
+                return;
+
+            notifyWhenAutoratingCompletedCheckBox.Checked = !notifyWhenAutoratingCompletedCheckBox.Checked;
         }
     }
 }

@@ -61,7 +61,7 @@
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="T">
+    <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
@@ -145,7 +145,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>26</value>
   </data>
   <data name="buttonOK.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -172,7 +172,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;buttonOK.ZOrder" xml:space="preserve">
-    <value>34</value>
+    <value>44</value>
   </data>
   <data name="label4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -199,10 +199,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>25</value>
   </data>
   <data name="autoRatingTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>213, 5</value>
+    <value>220, 5</value>
   </data>
   <data name="autoRatingTagList.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 21</value>
@@ -220,22 +220,22 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;autoRatingTagList.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>24</value>
   </data>
   <data name="autoRateAtStartUpCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="autoRateAtStartUpCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 57</value>
+    <value>12, 56</value>
   </data>
   <data name="autoRateAtStartUpCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 17</value>
+    <value>27, 17</value>
   </data>
   <data name="autoRateAtStartUpCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
   </data>
   <data name="autoRateAtStartUpCheckBox.Text" xml:space="preserve">
-    <value>Auto rate on startup</value>
+    <value> </value>
   </data>
   <data name="&gt;&gt;autoRateAtStartUpCheckBox.Name" xml:space="preserve">
     <value>autoRateAtStartUpCheckBox</value>
@@ -247,22 +247,22 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;autoRateAtStartUpCheckBox.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>23</value>
   </data>
   <data name="autoRateOnTrackPropertiesCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="autoRateOnTrackPropertiesCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 80</value>
+    <value>12, 79</value>
   </data>
   <data name="autoRateOnTrackPropertiesCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>247, 17</value>
+    <value>27, 17</value>
   </data>
   <data name="autoRateOnTrackPropertiesCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
   </data>
   <data name="autoRateOnTrackPropertiesCheckBox.Text" xml:space="preserve">
-    <value>Auto rate songs automatically if they are played</value>
+    <value> </value>
   </data>
   <data name="&gt;&gt;autoRateOnTrackPropertiesCheckBox.Name" xml:space="preserve">
     <value>autoRateOnTrackPropertiesCheckBox</value>
@@ -274,7 +274,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;autoRateOnTrackPropertiesCheckBox.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>22</value>
   </data>
   <data name="baseRatingTrackBar.Location" type="System.Drawing.Point, System.Drawing">
     <value>208, 130</value>
@@ -295,7 +295,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;baseRatingTrackBar.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>21</value>
   </data>
   <data name="label5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -322,7 +322,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>20</value>
   </data>
   <data name="label6.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -349,7 +349,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>19</value>
   </data>
   <data name="label7.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -376,7 +376,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>18</value>
   </data>
   <data name="label8.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -403,7 +403,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>17</value>
   </data>
   <data name="label9.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -430,7 +430,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label9.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>16</value>
   </data>
   <data name="label10.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -457,7 +457,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>15</value>
   </data>
   <data name="button1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -484,7 +484,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;button1.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>14</value>
   </data>
   <data name="threshold05Box.Location" type="System.Drawing.Point, System.Drawing">
     <value>157, 258</value>
@@ -505,7 +505,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;threshold05Box.ZOrder" xml:space="preserve">
-    <value>23</value>
+    <value>33</value>
   </data>
   <data name="threshold1Box.Location" type="System.Drawing.Point, System.Drawing">
     <value>157, 232</value>
@@ -526,7 +526,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;threshold1Box.ZOrder" xml:space="preserve">
-    <value>24</value>
+    <value>34</value>
   </data>
   <data name="threshold15Box.Location" type="System.Drawing.Point, System.Drawing">
     <value>157, 206</value>
@@ -547,7 +547,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;threshold15Box.ZOrder" xml:space="preserve">
-    <value>25</value>
+    <value>35</value>
   </data>
   <data name="threshold2Box.Location" type="System.Drawing.Point, System.Drawing">
     <value>157, 180</value>
@@ -568,7 +568,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;threshold2Box.ZOrder" xml:space="preserve">
-    <value>26</value>
+    <value>36</value>
   </data>
   <data name="threshold25Box.Location" type="System.Drawing.Point, System.Drawing">
     <value>157, 154</value>
@@ -589,7 +589,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;threshold25Box.ZOrder" xml:space="preserve">
-    <value>27</value>
+    <value>37</value>
   </data>
   <data name="threshold3Box.Location" type="System.Drawing.Point, System.Drawing">
     <value>157, 128</value>
@@ -610,7 +610,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;threshold3Box.ZOrder" xml:space="preserve">
-    <value>28</value>
+    <value>38</value>
   </data>
   <data name="threshold35Box.Location" type="System.Drawing.Point, System.Drawing">
     <value>157, 102</value>
@@ -631,7 +631,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;threshold35Box.ZOrder" xml:space="preserve">
-    <value>29</value>
+    <value>39</value>
   </data>
   <data name="threshold4Box.Location" type="System.Drawing.Point, System.Drawing">
     <value>157, 76</value>
@@ -652,7 +652,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;threshold4Box.ZOrder" xml:space="preserve">
-    <value>30</value>
+    <value>40</value>
   </data>
   <data name="threshold45Box.Location" type="System.Drawing.Point, System.Drawing">
     <value>157, 50</value>
@@ -673,7 +673,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;threshold45Box.ZOrder" xml:space="preserve">
-    <value>31</value>
+    <value>41</value>
   </data>
   <data name="threshold5Box.Location" type="System.Drawing.Point, System.Drawing">
     <value>157, 24</value>
@@ -694,7 +694,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;threshold5Box.ZOrder" xml:space="preserve">
-    <value>32</value>
+    <value>42</value>
   </data>
   <data name="LabelFive.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -724,7 +724,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;LabelFive.ZOrder" xml:space="preserve">
-    <value>33</value>
+    <value>43</value>
   </data>
   <data name="label19.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -751,7 +751,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label19.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>13</value>
   </data>
   <data name="label20.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -781,7 +781,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;label20.ZOrder" xml:space="preserve">
-    <value>22</value>
+    <value>32</value>
   </data>
   <data name="label21.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -811,7 +811,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;label21.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>31</value>
   </data>
   <data name="label22.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -841,7 +841,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;label22.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>30</value>
   </data>
   <data name="label23.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -871,7 +871,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;label23.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>29</value>
   </data>
   <data name="label24.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -901,7 +901,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;label24.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>28</value>
   </data>
   <data name="label25.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -931,7 +931,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;label25.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>27</value>
   </data>
   <data name="label26.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -961,7 +961,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;label26.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>26</value>
   </data>
   <data name="label27.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -991,7 +991,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;label27.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>25</value>
   </data>
   <data name="label28.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1021,7 +1021,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;label28.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>24</value>
   </data>
   <data name="label29.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1048,7 +1048,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;label29.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>23</value>
   </data>
   <data name="maxPlaysPerDayBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>157, 284</value>
@@ -1069,7 +1069,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;maxPlaysPerDayBox.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>22</value>
   </data>
   <data name="avgPlaysPerDayBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>157, 310</value>
@@ -1090,7 +1090,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;avgPlaysPerDayBox.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>20</value>
   </data>
   <data name="label30.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1120,7 +1120,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;label30.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>21</value>
   </data>
   <data name="checkBox5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1129,13 +1129,13 @@
     <value>8, 26</value>
   </data>
   <data name="checkBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 17</value>
+    <value>27, 17</value>
   </data>
   <data name="checkBox5.TabIndex" type="System.Int32, mscorlib">
     <value>93</value>
   </data>
   <data name="checkBox5.Text" xml:space="preserve">
-    <value>Set five stars if:</value>
+    <value> </value>
   </data>
   <data name="&gt;&gt;checkBox5.Name" xml:space="preserve">
     <value>checkBox5</value>
@@ -1147,7 +1147,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;checkBox5.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>19</value>
   </data>
   <data name="checkBox45.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1159,13 +1159,13 @@
     <value>8, 52</value>
   </data>
   <data name="checkBox45.Size" type="System.Drawing.Size, System.Drawing">
-    <value>131, 17</value>
+    <value>27, 17</value>
   </data>
   <data name="checkBox45.TabIndex" type="System.Int32, mscorlib">
     <value>94</value>
   </data>
   <data name="checkBox45.Text" xml:space="preserve">
-    <value>Set four-to-five stars if:</value>
+    <value> </value>
   </data>
   <data name="&gt;&gt;checkBox45.Name" xml:space="preserve">
     <value>checkBox45</value>
@@ -1177,7 +1177,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;checkBox45.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>18</value>
   </data>
   <data name="checkBox4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1189,13 +1189,13 @@
     <value>8, 78</value>
   </data>
   <data name="checkBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 17</value>
+    <value>27, 17</value>
   </data>
   <data name="checkBox4.TabIndex" type="System.Int32, mscorlib">
     <value>95</value>
   </data>
   <data name="checkBox4.Text" xml:space="preserve">
-    <value>Set four stars if:</value>
+    <value> </value>
   </data>
   <data name="&gt;&gt;checkBox4.Name" xml:space="preserve">
     <value>checkBox4</value>
@@ -1207,7 +1207,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;checkBox4.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>17</value>
   </data>
   <data name="checkBox35.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1219,13 +1219,13 @@
     <value>8, 104</value>
   </data>
   <data name="checkBox35.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 17</value>
+    <value>27, 17</value>
   </data>
   <data name="checkBox35.TabIndex" type="System.Int32, mscorlib">
     <value>96</value>
   </data>
   <data name="checkBox35.Text" xml:space="preserve">
-    <value>Set three-to-four stars if:</value>
+    <value> </value>
   </data>
   <data name="&gt;&gt;checkBox35.Name" xml:space="preserve">
     <value>checkBox35</value>
@@ -1237,7 +1237,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;checkBox35.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>16</value>
   </data>
   <data name="checkBox3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1249,13 +1249,13 @@
     <value>8, 130</value>
   </data>
   <data name="checkBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 17</value>
+    <value>27, 17</value>
   </data>
   <data name="checkBox3.TabIndex" type="System.Int32, mscorlib">
     <value>97</value>
   </data>
   <data name="checkBox3.Text" xml:space="preserve">
-    <value>Set three stars if:</value>
+    <value> </value>
   </data>
   <data name="&gt;&gt;checkBox3.Name" xml:space="preserve">
     <value>checkBox3</value>
@@ -1267,7 +1267,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;checkBox3.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>15</value>
   </data>
   <data name="checkBox25.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1279,13 +1279,13 @@
     <value>8, 156</value>
   </data>
   <data name="checkBox25.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 17</value>
+    <value>27, 17</value>
   </data>
   <data name="checkBox25.TabIndex" type="System.Int32, mscorlib">
     <value>98</value>
   </data>
   <data name="checkBox25.Text" xml:space="preserve">
-    <value>Set two-to-three stars if:</value>
+    <value> </value>
   </data>
   <data name="&gt;&gt;checkBox25.Name" xml:space="preserve">
     <value>checkBox25</value>
@@ -1297,7 +1297,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;checkBox25.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>14</value>
   </data>
   <data name="checkBox2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1309,13 +1309,13 @@
     <value>8, 182</value>
   </data>
   <data name="checkBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 17</value>
+    <value>27, 17</value>
   </data>
   <data name="checkBox2.TabIndex" type="System.Int32, mscorlib">
     <value>99</value>
   </data>
   <data name="checkBox2.Text" xml:space="preserve">
-    <value>Set two stars if:</value>
+    <value> </value>
   </data>
   <data name="&gt;&gt;checkBox2.Name" xml:space="preserve">
     <value>checkBox2</value>
@@ -1327,7 +1327,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;checkBox2.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>13</value>
   </data>
   <data name="checkBox15.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1339,13 +1339,13 @@
     <value>8, 208</value>
   </data>
   <data name="checkBox15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>131, 17</value>
+    <value>27, 17</value>
   </data>
   <data name="checkBox15.TabIndex" type="System.Int32, mscorlib">
     <value>100</value>
   </data>
   <data name="checkBox15.Text" xml:space="preserve">
-    <value>Set one-to-two stars if:</value>
+    <value> </value>
   </data>
   <data name="&gt;&gt;checkBox15.Name" xml:space="preserve">
     <value>checkBox15</value>
@@ -1357,7 +1357,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;checkBox15.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>12</value>
   </data>
   <data name="checkBox1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1369,13 +1369,13 @@
     <value>8, 234</value>
   </data>
   <data name="checkBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 17</value>
+    <value>27, 17</value>
   </data>
   <data name="checkBox1.TabIndex" type="System.Int32, mscorlib">
     <value>101</value>
   </data>
   <data name="checkBox1.Text" xml:space="preserve">
-    <value>Set one star if:</value>
+    <value> </value>
   </data>
   <data name="&gt;&gt;checkBox1.Name" xml:space="preserve">
     <value>checkBox1</value>
@@ -1387,7 +1387,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;checkBox1.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>11</value>
   </data>
   <data name="checkBox05.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1399,13 +1399,13 @@
     <value>8, 260</value>
   </data>
   <data name="checkBox05.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 17</value>
+    <value>27, 17</value>
   </data>
   <data name="checkBox05.TabIndex" type="System.Int32, mscorlib">
     <value>102</value>
   </data>
   <data name="checkBox05.Text" xml:space="preserve">
-    <value>Set half star if:</value>
+    <value> </value>
   </data>
   <data name="&gt;&gt;checkBox05.Name" xml:space="preserve">
     <value>checkBox05</value>
@@ -1417,7 +1417,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;checkBox05.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>10</value>
   </data>
   <data name="perCent5UpDown.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 24</value>
@@ -1929,6 +1929,9 @@
   <metadata name="dirtyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>114, 17</value>
   </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>ru</value>
+  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -1936,26 +1939,201 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>800, 557</value>
+    <value>800, 562</value>
   </data>
-  <data name="sinceAddedCheckBox.AutoSize" type="System.Boolean, mscorlib">
+  <data name="holdsAtStartUpCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="sinceAddedCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 103</value>
+  <data name="holdsAtStartUpCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>438, 35</value>
   </data>
-  <data name="sinceAddedCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>305, 17</value>
+  <data name="holdsAtStartUpCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>176, 13</value>
   </data>
-  <data name="sinceAddedCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>133</value>
+  <data name="holdsAtStartUpCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>139</value>
   </data>
-  <data name="sinceAddedCheckBox.Text" xml:space="preserve">
+  <data name="holdsAtStartUpCheckBoxLabel.Text" xml:space="preserve">
+    <value>Auto calculate thresholds on startup</value>
+  </data>
+  <data name="&gt;&gt;holdsAtStartUpCheckBoxLabel.Name" xml:space="preserve">
+    <value>holdsAtStartUpCheckBoxLabel</value>
+  </data>
+  <data name="&gt;&gt;holdsAtStartUpCheckBoxLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;holdsAtStartUpCheckBoxLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;holdsAtStartUpCheckBoxLabel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="sinceAddedCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="sinceAddedCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>33, 104</value>
+  </data>
+  <data name="sinceAddedCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>298, 13</value>
+  </data>
+  <data name="sinceAddedCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>138</value>
+  </data>
+  <data name="sinceAddedCheckBoxLabel.Text" xml:space="preserve">
     <value>Calculate "Plays per days in library" instead of "Plays per day"</value>
   </data>
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="sinceAddedCheckBoxLabel.ToolTip" xml:space="preserve">
+    <value>Usually "Plays per day" means the average number of times you played track since it was added to 
+the library and till the day it was last played. So if you played track frequently in past and didn't 
+play it for a long time then it will have high "Plays per day" value. 
+
+Sometimes it's better to use this option which will treat "Plays per day" as average number of times 
+track was played since it was added to the library till today (no matter when it was last played). 
+
+It's recommended to "Auto rate on startup" your tracks if you want to use this option because 
+"Plays per days in library" value depends on "today" date which is dynamic value and auto rating 
+should change every day for each track in this case. 
+</value>
+  </data>
+  <data name="&gt;&gt;sinceAddedCheckBoxLabel.Name" xml:space="preserve">
+    <value>sinceAddedCheckBoxLabel</value>
+  </data>
+  <data name="&gt;&gt;sinceAddedCheckBoxLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;sinceAddedCheckBoxLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;sinceAddedCheckBoxLabel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="autoRateOnTrackPropertiesCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="autoRateOnTrackPropertiesCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>33, 81</value>
+  </data>
+  <data name="autoRateOnTrackPropertiesCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>228, 13</value>
+  </data>
+  <data name="autoRateOnTrackPropertiesCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>137</value>
+  </data>
+  <data name="autoRateOnTrackPropertiesCheckBoxLabel.Text" xml:space="preserve">
+    <value>Auto rate songs automatically if they are played</value>
+  </data>
+  <data name="&gt;&gt;autoRateOnTrackPropertiesCheckBoxLabel.Name" xml:space="preserve">
+    <value>autoRateOnTrackPropertiesCheckBoxLabel</value>
+  </data>
+  <data name="&gt;&gt;autoRateOnTrackPropertiesCheckBoxLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;autoRateOnTrackPropertiesCheckBoxLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;autoRateOnTrackPropertiesCheckBoxLabel.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="notifyWhenAutoratingCompletedCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="notifyWhenAutoratingCompletedCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>243, 58</value>
+  </data>
+  <data name="notifyWhenAutoratingCompletedCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>178, 13</value>
+  </data>
+  <data name="notifyWhenAutoratingCompletedCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>136</value>
+  </data>
+  <data name="notifyWhenAutoratingCompletedCheckBoxLabel.Text" xml:space="preserve">
+    <value>Notify when auto rating is completed</value>
+  </data>
+  <data name="&gt;&gt;notifyWhenAutoratingCompletedCheckBoxLabel.Name" xml:space="preserve">
+    <value>notifyWhenAutoratingCompletedCheckBoxLabel</value>
+  </data>
+  <data name="&gt;&gt;notifyWhenAutoratingCompletedCheckBoxLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;notifyWhenAutoratingCompletedCheckBoxLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;notifyWhenAutoratingCompletedCheckBoxLabel.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="autoRateAtStartUpCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="autoRateAtStartUpCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>33, 58</value>
+  </data>
+  <data name="autoRateAtStartUpCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 13</value>
+  </data>
+  <data name="autoRateAtStartUpCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>135</value>
+  </data>
+  <data name="autoRateAtStartUpCheckBoxLabel.Text" xml:space="preserve">
+    <value>Auto rate on startup</value>
+  </data>
+  <data name="&gt;&gt;autoRateAtStartUpCheckBoxLabel.Name" xml:space="preserve">
+    <value>autoRateAtStartUpCheckBoxLabel</value>
+  </data>
+  <data name="&gt;&gt;autoRateAtStartUpCheckBoxLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;autoRateAtStartUpCheckBoxLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;autoRateAtStartUpCheckBoxLabel.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="storePlaysPerDayCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="storePlaysPerDayCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>33, 34</value>
+  </data>
+  <data name="storePlaysPerDayCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>176, 13</value>
+  </data>
+  <data name="storePlaysPerDayCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>134</value>
+  </data>
+  <data name="storePlaysPerDayCheckBoxLabel.Text" xml:space="preserve">
+    <value>Store number of plays per day in tag</value>
+  </data>
+  <data name="&gt;&gt;storePlaysPerDayCheckBoxLabel.Name" xml:space="preserve">
+    <value>storePlaysPerDayCheckBoxLabel</value>
+  </data>
+  <data name="&gt;&gt;storePlaysPerDayCheckBoxLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;storePlaysPerDayCheckBoxLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;storePlaysPerDayCheckBoxLabel.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="sinceAddedCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="sinceAddedCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 102</value>
+  </data>
+  <data name="sinceAddedCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>27, 17</value>
+  </data>
+  <data name="sinceAddedCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>133</value>
+  </data>
+  <data name="sinceAddedCheckBox.Text" xml:space="preserve">
+    <value> </value>
+  </data>
   <data name="sinceAddedCheckBox.ToolTip" xml:space="preserve">
     <value>Usually "Plays per day" means the average number of times you played track since it was added to 
 the library and till the day it was last played. So if you played track frequently in past and didn't 
@@ -1978,7 +2156,7 @@ should change every day for each track in this case. </value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;sinceAddedCheckBox.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>6</value>
   </data>
   <data name="storePlaysPerDayCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1987,13 +2165,13 @@ should change every day for each track in this case. </value>
     <value>12, 32</value>
   </data>
   <data name="storePlaysPerDayCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 17</value>
+    <value>27, 17</value>
   </data>
   <data name="storePlaysPerDayCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>132</value>
   </data>
   <data name="storePlaysPerDayCheckBox.Text" xml:space="preserve">
-    <value>Store number of plays per day in tag</value>
+    <value> </value>
   </data>
   <data name="&gt;&gt;storePlaysPerDayCheckBox.Name" xml:space="preserve">
     <value>storePlaysPerDayCheckBox</value>
@@ -2005,10 +2183,10 @@ should change every day for each track in this case. </value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;storePlaysPerDayCheckBox.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>7</value>
   </data>
   <data name="playsPerDayTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>213, 31</value>
+    <value>220, 31</value>
   </data>
   <data name="playsPerDayTagList.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 21</value>
@@ -2026,22 +2204,22 @@ should change every day for each track in this case. </value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;playsPerDayTagList.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>8</value>
   </data>
   <data name="notifyWhenAutoratingCompletedCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="notifyWhenAutoratingCompletedCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>213, 57</value>
+    <value>220, 56</value>
   </data>
   <data name="notifyWhenAutoratingCompletedCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>197, 17</value>
+    <value>27, 17</value>
   </data>
   <data name="notifyWhenAutoratingCompletedCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>129</value>
   </data>
   <data name="notifyWhenAutoratingCompletedCheckBox.Text" xml:space="preserve">
-    <value>Notify when auto rating is completed</value>
+    <value> </value>
   </data>
   <data name="&gt;&gt;notifyWhenAutoratingCompletedCheckBox.Name" xml:space="preserve">
     <value>notifyWhenAutoratingCompletedCheckBox</value>
@@ -2053,7 +2231,277 @@ should change every day for each track in this case. </value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;notifyWhenAutoratingCompletedCheckBox.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="checkBox05Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBox05Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>28, 262</value>
+  </data>
+  <data name="checkBox05Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>74, 13</value>
+  </data>
+  <data name="checkBox05Label.TabIndex" type="System.Int32, mscorlib">
+    <value>139</value>
+  </data>
+  <data name="checkBox05Label.Text" xml:space="preserve">
+    <value>Set half star if:</value>
+  </data>
+  <data name="&gt;&gt;checkBox05Label.Name" xml:space="preserve">
+    <value>checkBox05Label</value>
+  </data>
+  <data name="&gt;&gt;checkBox05Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBox05Label.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;checkBox05Label.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="checkBox1Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBox1Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>28, 236</value>
+  </data>
+  <data name="checkBox1Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 13</value>
+  </data>
+  <data name="checkBox1Label.TabIndex" type="System.Int32, mscorlib">
+    <value>139</value>
+  </data>
+  <data name="checkBox1Label.Text" xml:space="preserve">
+    <value>Set one star if:</value>
+  </data>
+  <data name="&gt;&gt;checkBox1Label.Name" xml:space="preserve">
+    <value>checkBox1Label</value>
+  </data>
+  <data name="&gt;&gt;checkBox1Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBox1Label.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;checkBox1Label.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="checkBox15Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBox15Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>28, 210</value>
+  </data>
+  <data name="checkBox15Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 13</value>
+  </data>
+  <data name="checkBox15Label.TabIndex" type="System.Int32, mscorlib">
+    <value>139</value>
+  </data>
+  <data name="checkBox15Label.Text" xml:space="preserve">
+    <value>Set one-to-two stars if:</value>
+  </data>
+  <data name="&gt;&gt;checkBox15Label.Name" xml:space="preserve">
+    <value>checkBox15Label</value>
+  </data>
+  <data name="&gt;&gt;checkBox15Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBox15Label.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;checkBox15Label.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="checkBox2Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBox2Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>28, 184</value>
+  </data>
+  <data name="checkBox2Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>79, 13</value>
+  </data>
+  <data name="checkBox2Label.TabIndex" type="System.Int32, mscorlib">
+    <value>139</value>
+  </data>
+  <data name="checkBox2Label.Text" xml:space="preserve">
+    <value>Set two stars if:</value>
+  </data>
+  <data name="&gt;&gt;checkBox2Label.Name" xml:space="preserve">
+    <value>checkBox2Label</value>
+  </data>
+  <data name="&gt;&gt;checkBox2Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBox2Label.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;checkBox2Label.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="checkBox25Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBox25Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>28, 158</value>
+  </data>
+  <data name="checkBox25Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>118, 13</value>
+  </data>
+  <data name="checkBox25Label.TabIndex" type="System.Int32, mscorlib">
+    <value>139</value>
+  </data>
+  <data name="checkBox25Label.Text" xml:space="preserve">
+    <value>Set two-to-three stars if:</value>
+  </data>
+  <data name="&gt;&gt;checkBox25Label.Name" xml:space="preserve">
+    <value>checkBox25Label</value>
+  </data>
+  <data name="&gt;&gt;checkBox25Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBox25Label.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;checkBox25Label.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="checkBox3Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBox3Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>28, 132</value>
+  </data>
+  <data name="checkBox3Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>86, 13</value>
+  </data>
+  <data name="checkBox3Label.TabIndex" type="System.Int32, mscorlib">
+    <value>139</value>
+  </data>
+  <data name="checkBox3Label.Text" xml:space="preserve">
+    <value>Set three stars if:</value>
+  </data>
+  <data name="&gt;&gt;checkBox3Label.Name" xml:space="preserve">
+    <value>checkBox3Label</value>
+  </data>
+  <data name="&gt;&gt;checkBox3Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBox3Label.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;checkBox3Label.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="checkBox35Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBox35Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>28, 106</value>
+  </data>
+  <data name="checkBox35Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>119, 13</value>
+  </data>
+  <data name="checkBox35Label.TabIndex" type="System.Int32, mscorlib">
+    <value>139</value>
+  </data>
+  <data name="checkBox35Label.Text" xml:space="preserve">
+    <value>Set three-to-four stars if:</value>
+  </data>
+  <data name="&gt;&gt;checkBox35Label.Name" xml:space="preserve">
+    <value>checkBox35Label</value>
+  </data>
+  <data name="&gt;&gt;checkBox35Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBox35Label.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;checkBox35Label.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="checkBox4Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBox4Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>28, 80</value>
+  </data>
+  <data name="checkBox4Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 13</value>
+  </data>
+  <data name="checkBox4Label.TabIndex" type="System.Int32, mscorlib">
+    <value>139</value>
+  </data>
+  <data name="checkBox4Label.Text" xml:space="preserve">
+    <value>Set four stars if:</value>
+  </data>
+  <data name="&gt;&gt;checkBox4Label.Name" xml:space="preserve">
+    <value>checkBox4Label</value>
+  </data>
+  <data name="&gt;&gt;checkBox4Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBox4Label.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;checkBox4Label.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="checkBox45Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBox45Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>28, 54</value>
+  </data>
+  <data name="checkBox45Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 13</value>
+  </data>
+  <data name="checkBox45Label.TabIndex" type="System.Int32, mscorlib">
+    <value>139</value>
+  </data>
+  <data name="checkBox45Label.Text" xml:space="preserve">
+    <value>Set four-to-five stars if:</value>
+  </data>
+  <data name="&gt;&gt;checkBox45Label.Name" xml:space="preserve">
+    <value>checkBox45Label</value>
+  </data>
+  <data name="&gt;&gt;checkBox45Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBox45Label.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;checkBox45Label.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="checkBox5Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBox5Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>28, 28</value>
+  </data>
+  <data name="checkBox5Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>79, 13</value>
+  </data>
+  <data name="checkBox5Label.TabIndex" type="System.Int32, mscorlib">
+    <value>139</value>
+  </data>
+  <data name="checkBox5Label.Text" xml:space="preserve">
+    <value>Set five stars if:</value>
+  </data>
+  <data name="&gt;&gt;checkBox5Label.Name" xml:space="preserve">
+    <value>checkBox5Label</value>
+  </data>
+  <data name="&gt;&gt;checkBox5Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBox5Label.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;checkBox5Label.ZOrder" xml:space="preserve">
+    <value>9</value>
   </data>
   <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 178</value>
@@ -2077,7 +2525,7 @@ should change every day for each track in this case. </value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>10</value>
   </data>
   <data name="labelTotalTracks.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2161,22 +2609,22 @@ should change every day for each track in this case. </value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>11</value>
   </data>
   <data name="calculateThresholdsAtStartUpCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="calculateThresholdsAtStartUpCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>417, 32</value>
+    <value>417, 33</value>
   </data>
   <data name="calculateThresholdsAtStartUpCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 17</value>
+    <value>27, 17</value>
   </data>
   <data name="calculateThresholdsAtStartUpCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>126</value>
   </data>
   <data name="calculateThresholdsAtStartUpCheckBox.Text" xml:space="preserve">
-    <value>Auto calculate thresholds on startup</value>
+    <value> </value>
   </data>
   <data name="&gt;&gt;calculateThresholdsAtStartUpCheckBox.Name" xml:space="preserve">
     <value>calculateThresholdsAtStartUpCheckBox</value>
@@ -2188,7 +2636,7 @@ should change every day for each track in this case. </value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;calculateThresholdsAtStartUpCheckBox.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>12</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>806, 589</value>
@@ -2212,7 +2660,7 @@ should change every day for each track in this case. </value>
     <value>AutoRateCommand</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=5.2.7338.31495, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="dirtyErrorProvider.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

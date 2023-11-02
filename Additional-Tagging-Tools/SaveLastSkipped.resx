@@ -61,7 +61,7 @@
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="T">
+    <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
@@ -118,36 +118,70 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="saveLastSkippedCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lastSkippedDateFormatTagList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>185, 39</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Date/time format:</value>
+  </data>
+  <data name="&gt;&gt;dirtyErrorProvider.Name" xml:space="preserve">
+    <value>dirtyErrorProvider</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="lastSkippedTagList.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="lastSkippedTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>185, 12</value>
+  <data name="buttonOK.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
   </data>
-  <data name="lastSkippedTagList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>228, 21</value>
+  <data name="buttonOK.Error" xml:space="preserve">
+    <value />
   </data>
-  <data name="lastSkippedTagList.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;lastSkippedTagList.Name" xml:space="preserve">
-    <value>lastSkippedTagList</value>
-  </data>
-  <data name="&gt;&gt;lastSkippedTagList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lastSkippedTagList.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;lastSkippedDateFormatTagList.Name" xml:space="preserve">
+    <value>lastSkippedDateFormatTagList</value>
   </data>
   <data name="&gt;&gt;lastSkippedTagList.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
-  <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>338, 66</value>
+  <data name="&gt;&gt;saveLastSkippedCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="buttonCancel.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="buttonCancel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;buttonOK.Name" xml:space="preserve">
+    <value>buttonOK</value>
+  </data>
+  <data name="saveLastSkippedCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 13</value>
+  </data>
+  <data name="buttonOK.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;saveLastSkippedCheckBox.Name" xml:space="preserve">
+    <value>saveLastSkippedCheckBox</value>
+  </data>
+  <data name="&gt;&gt;buttonOK.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
+  </data>
+  <data name="saveLastSkippedCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 14</value>
+  </data>
+  <data name="buttonOK.Text" xml:space="preserve">
+    <value>OK</value>
   </data>
   <data name="buttonCancel.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -155,101 +189,110 @@
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
-  <data name="&gt;&gt;buttonCancel.Name" xml:space="preserve">
-    <value>buttonCancel</value>
-  </data>
-  <data name="&gt;&gt;buttonCancel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;buttonCancel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;saveLastSkippedCheckBoxLabel.Parent" xml:space="preserve">
     <value>$this</value>
-  </data>
-  <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
-    <value>3</value>
   </data>
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
     <value>257, 66</value>
   </data>
-  <data name="buttonOK.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+  <data name="buttonCancel.Error" xml:space="preserve">
+    <value />
   </data>
-  <data name="buttonOK.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="buttonOK.Text" xml:space="preserve">
-    <value>OK</value>
-  </data>
-  <data name="&gt;&gt;buttonOK.Name" xml:space="preserve">
-    <value>buttonOK</value>
-  </data>
-  <data name="&gt;&gt;buttonOK.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;buttonOK.Parent" xml:space="preserve">
+  <data name="&gt;&gt;buttonCancel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;buttonOK.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="saveLastSkippedCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
   </data>
-  <data name="saveLastSkippedCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>338, 66</value>
   </data>
-  <data name="saveLastSkippedCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 14</value>
+  <data name="label1.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="saveLastSkippedCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>167, 17</value>
-  </data>
-  <data name="saveLastSkippedCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="saveLastSkippedCheckBox.Text" xml:space="preserve">
-    <value>Save last skipped date to tag:</value>
-  </data>
-  <data name="&gt;&gt;saveLastSkippedCheckBox.Name" xml:space="preserve">
-    <value>saveLastSkippedCheckBox</value>
-  </data>
-  <data name="&gt;&gt;saveLastSkippedCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="lastSkippedTagList.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;saveLastSkippedCheckBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;saveLastSkippedCheckBox.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="dirtyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing">
-    <value>17, 17</value>
-  </data>
-  <data name="$this.Localizable" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>425, 98</value>
-  </data>
-  <data name="lastSkippedDateFormatTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>185, 39</value>
-  </data>
-  <data name="lastSkippedDateFormatTagList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>228, 21</value>
-  </data>
   <data name="lastSkippedDateFormatTagList.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
   </data>
-  <data name="&gt;&gt;lastSkippedDateFormatTagList.Name" xml:space="preserve">
-    <value>lastSkippedDateFormatTagList</value>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 13</value>
   </data>
-  <data name="&gt;&gt;lastSkippedDateFormatTagList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Save Last Skipped Date</value>
+  </data>
+  <data name="saveLastSkippedCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;lastSkippedDateFormatTagList.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
+  <data name="&gt;&gt;buttonOK.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="buttonOK.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
   <data name="&gt;&gt;lastSkippedDateFormatTagList.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="label1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;dirtyErrorProvider.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ErrorProvider, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lastSkippedDateFormatTagList.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="lastSkippedDateFormatTagList.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
+  </data>
+  <data name="&gt;&gt;buttonCancel.Name" xml:space="preserve">
+    <value>buttonCancel</value>
+  </data>
+  <data name="lastSkippedTagList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>228, 21</value>
+  </data>
+  <data name="lastSkippedTagList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>185, 12</value>
+  </data>
+  <data name="saveLastSkippedCheckBoxLabel.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="saveLastSkippedCheckBoxLabel.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>425, 98</value>
+  </data>
+  <data name="&gt;&gt;buttonOK.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="saveLastSkippedCheckBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lastSkippedTagList.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="&gt;&gt;lastSkippedTagList.Name" xml:space="preserve">
+    <value>lastSkippedTagList</value>
+  </data>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -257,40 +300,91 @@
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>29, 42</value>
   </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 13</value>
+  <data name="saveLastSkippedCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>29, 15</value>
+  </data>
+  <data name="lastSkippedTagList.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;saveLastSkippedCheckBoxLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="label1.Error" xml:space="preserve">
+    <value />
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
   </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>Date/time format:</value>
+  <data name="lastSkippedDateFormatTagList.Error" xml:space="preserve">
+    <value />
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
+  <data name="&gt;&gt;buttonCancel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Save Last Skipped Date</value>
-  </data>
-  <data name="&gt;&gt;dirtyErrorProvider.Name" xml:space="preserve">
-    <value>dirtyErrorProvider</value>
-  </data>
-  <data name="&gt;&gt;dirtyErrorProvider.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ErrorProvider, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;saveLastSkippedCheckBoxLabel.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>SaveLastSkippedCommand</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;lastSkippedDateFormatTagList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="saveLastSkippedCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>27, 17</value>
+  </data>
+  <data name="saveLastSkippedCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="saveLastSkippedCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="buttonOK.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="saveLastSkippedCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="lastSkippedDateFormatTagList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>228, 21</value>
+  </data>
+  <data name="lastSkippedTagList.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="saveLastSkippedCheckBox.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="saveLastSkippedCheckBox.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;saveLastSkippedCheckBoxLabel.Name" xml:space="preserve">
+    <value>saveLastSkippedCheckBoxLabel</value>
+  </data>
+  <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="lastSkippedTagList.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;saveLastSkippedCheckBox.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;lastSkippedTagList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="saveLastSkippedCheckBoxLabel.Text" xml:space="preserve">
+    <value>Save last skipped date to tag:</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="dirtyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>ru</value>
+  </metadata>
 </root>

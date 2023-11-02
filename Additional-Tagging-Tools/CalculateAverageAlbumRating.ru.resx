@@ -61,7 +61,7 @@
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="T">
+    <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
@@ -112,26 +112,14 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="notifyWhenCalculationCompletedCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>515, 39</value>
-  </data>
-  <data name="notifyWhenCalculationCompletedCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 17</value>
-  </data>
-  <data name="notifyWhenCalculationCompletedCheckBox.Text" xml:space="preserve">
-    <value>Оповестить по завершении</value>
-  </data>
-  <data name="calculateAlbumRatingAtStartUpCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>478, 17</value>
-  </data>
-  <data name="calculateAlbumRatingAtStartUpCheckBox.Text" xml:space="preserve">
-    <value>Автоматически рассчитывать средний рейтинг альбомов при запуске для всех треков</value>
   </data>
   <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
     <value>286, 138</value>
@@ -158,32 +146,20 @@
     <value>Рассчитать средний рейтинг альбомов сейчас</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>353, 13</value>
+    <value>344, 13</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>Рассчитать средний рейтинг альбомов для отображаемых треков</value>
   </data>
-  <data name="considerUnratedCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>358, 17</value>
-  </data>
-  <data name="considerUnratedCheckBox.Text" xml:space="preserve">
-    <value>Считать треки без рейтинга треками с нулевым рейтингом</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="calculateAlbumRatingAtTagsChangedCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
-  </data>
-  <data name="calculateAlbumRatingAtTagsChangedCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>495, 17</value>
-  </data>
-  <data name="calculateAlbumRatingAtTagsChangedCheckBox.Text" xml:space="preserve">
-    <value>Автоматически рассчитывать средний рейтинг альбомов при изменении рейтинга трека</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 111</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 13</value>
+    <value>172, 13</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>Рейтинг треков хранится в теге:</value>
@@ -203,8 +179,35 @@
   <data name="label3.Text" xml:space="preserve">
     <value>Рейтинг альбомов хранится в теге:</value>
   </data>
+  <data name="calculateAlbumRatingAtStartUpCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>450, 13</value>
+  </data>
+  <data name="calculateAlbumRatingAtStartUpCheckBoxLabel.Text" xml:space="preserve">
+    <value>Автоматически рассчитывать средний рейтинг альбомов при запуске для всех треков</value>
+  </data>
+  <data name="considerUnratedCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>309, 13</value>
+  </data>
+  <data name="considerUnratedCheckBoxLabel.Text" xml:space="preserve">
+    <value>Считать треки без рейтинга треками с нулевым рейтингом</value>
+  </data>
+  <data name="calculateAlbumRatingAtTagsChangedCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>461, 13</value>
+  </data>
+  <data name="calculateAlbumRatingAtTagsChangedCheckBoxLabel.Text" xml:space="preserve">
+    <value>Автоматически рассчитывать средний рейтинг альбомов при изменении рейтинга трека</value>
+  </data>
+  <data name="notifyWhenCalculationCompletedCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>535, 41</value>
+  </data>
+  <data name="notifyWhenCalculationCompletedCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>147, 13</value>
+  </data>
+  <data name="notifyWhenCalculationCompletedCheckBoxLabel.Text" xml:space="preserve">
+    <value>Оповестить по завершении</value>
+  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>694, 171</value>
+    <value>694, 176</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Рассчитать средний рейтинг альбомов</value>

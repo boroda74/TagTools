@@ -133,9 +133,9 @@ namespace MusicBeePlugin.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap gear_15_Flat {
+        internal static System.Drawing.Bitmap gear_15_flat {
             get {
-                object obj = ResourceManager.GetObject("gear_15_Flat", resourceCulture);
+                object obj = ResourceManager.GetObject("gear_15_flat", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -263,9 +263,19 @@ namespace MusicBeePlugin.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap warning_15_Flat {
+        internal static System.Drawing.Bitmap warning_15_flat {
             get {
-                object obj = ResourceManager.GetObject("warning_15_Flat", resourceCulture);
+                object obj = ResourceManager.GetObject("warning_15_flat", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap warning_wide_15 {
+            get {
+                object obj = ResourceManager.GetObject("warning_wide_15", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

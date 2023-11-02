@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Windows.Forms;
 using static MusicBeePlugin.Plugin;
+using ExtensionMethods;
 
 namespace MusicBeePlugin
 {
@@ -59,7 +61,7 @@ namespace MusicBeePlugin
 
         private void saveLastSkippedCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            lastSkippedTagList.Enabled = saveLastSkippedCheckBox.Checked;
+            lastSkippedTagList.Enable(saveLastSkippedCheckBox.Checked);
         }
     }
 }

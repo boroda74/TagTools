@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using static MusicBeePlugin.Plugin;
+using ExtensionMethods;
 
 namespace MusicBeePlugin
 {
@@ -636,32 +637,56 @@ namespace MusicBeePlugin
 
         private void exceptWordsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            exceptionWordsBox.Enabled = exceptionWordsCheckBox.Checked || onlyWordsCheckBox.Checked;
-            removeExceptionButton.Enabled = exceptionWordsCheckBox.Checked || onlyWordsCheckBox.Checked;
+            exceptionWordsBox.Enable(exceptionWordsCheckBox.Checked || onlyWordsCheckBox.Checked);
+            removeExceptionButton.Enable(exceptionWordsCheckBox.Checked || onlyWordsCheckBox.Checked);
 
             if (exceptionWordsCheckBox.Checked)
                 onlyWordsCheckBox.Checked = false;
         }
 
+        private void exceptionWordsCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            exceptionWordsCheckBox.Checked = !exceptionWordsCheckBox.Checked;
+            exceptWordsCheckBox_CheckedChanged(null, null);
+        }
+
         private void onlyWordsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            exceptionWordsBox.Enabled = exceptionWordsCheckBox.Checked || onlyWordsCheckBox.Checked;
-            removeExceptionButton.Enabled = exceptionWordsCheckBox.Checked || onlyWordsCheckBox.Checked;
+            exceptionWordsBox.Enable(exceptionWordsCheckBox.Checked || onlyWordsCheckBox.Checked);
+            removeExceptionButton.Enable(exceptionWordsCheckBox.Checked || onlyWordsCheckBox.Checked);
 
             if (onlyWordsCheckBox.Checked)
                 exceptionWordsCheckBox.Checked = false;
         }
 
+        private void onlyWordsCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            onlyWordsCheckBox.Checked = !onlyWordsCheckBox.Checked;
+            onlyWordsCheckBox_CheckedChanged(null, null);
+        }
+
         private void exceptCharsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            exceptionCharsBox.Enabled = exceptionCharsCheckBox.Checked;
-            buttonASRExceptWordsAfterSymbols.Enabled = exceptionCharsCheckBox.Checked;
+            exceptionCharsBox.Enable(exceptionCharsCheckBox.Checked);
+            buttonASRExceptWordsAfterSymbols.Enable(exceptionCharsCheckBox.Checked);
+        }
+
+        private void exceptionCharsCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            exceptionCharsCheckBox.Checked = !exceptionCharsCheckBox.Checked;
+            exceptCharsCheckBox_CheckedChanged(null , null);
         }
 
         private void wordSplittersCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            wordSplittersBox.Enabled = wordSplittersCheckBox.Checked;
-            buttonASRWordSplitters.Enabled = wordSplittersCheckBox.Checked;
+            wordSplittersBox.Enable(wordSplittersCheckBox.Checked);
+            buttonASRWordSplitters.Enable(wordSplittersCheckBox.Checked);
+        }
+
+        private void wordSplittersCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            wordSplittersCheckBox.Checked = !wordSplittersCheckBox.Checked;
+            wordSplittersCheckBox_CheckedChanged(null, null);
         }
 
         private void cbHeader_OnCheckBoxClicked(bool state)
@@ -775,12 +800,12 @@ namespace MusicBeePlugin
 
         public override void enableDisablePreviewOptionControls(bool enable)
         {
-            buttonReapply.Enabled = enable && previewIsGenerated;
+            buttonReapply.Enable(enable && previewIsGenerated);
 
             if (enable && previewIsGenerated)
                 return;
 
-            sourceTagList.Enabled = enable;
+            sourceTagList.Enable(enable);
         }
 
         public override void enableQueryingButtons()
@@ -796,16 +821,16 @@ namespace MusicBeePlugin
 
         public override void enableQueryingOrUpdatingButtons()
         {
-            buttonOK.Enabled = true;
-            buttonPreview.Enabled = true;
-            buttonReapply.Enabled = true;
+            buttonOK.Enable(true);
+            buttonPreview.Enable(true);
+            buttonReapply.Enable(true);
         }
 
         public override void disableQueryingOrUpdatingButtons()
         {
-            buttonOK.Enabled = false;
-            buttonPreview.Enabled = false;
-            buttonReapply.Enabled = false;
+            buttonOK.Enable(false);
+            buttonPreview.Enable(false);
+            buttonReapply.Enable(false);
         }
 
         private void exceptionWordsBox_Leave(object sender, EventArgs e)
@@ -817,14 +842,44 @@ namespace MusicBeePlugin
         {
             if (titleCaseRadioButton.Checked || toggleCaseRadioButton.Checked)
             {
-                alwaysCapitalize1stWordCheckBox.Enabled = true;
-                alwaysCapitalizeLastWordCheckBox.Enabled = true;
+                alwaysCapitalize1stWordCheckBox.Enable(true);
+                alwaysCapitalizeLastWordCheckBox.Enable(true);
             }
             else
             {
-                alwaysCapitalize1stWordCheckBox.Enabled = false;
-                alwaysCapitalizeLastWordCheckBox.Enabled = false;
+                alwaysCapitalize1stWordCheckBox.Enable(false);
+                alwaysCapitalizeLastWordCheckBox.Enable(false);
             }
+        }
+
+        private void sentenceCaseRadioButtonLabel_Click(object sender, EventArgs e)
+        {
+            sentenceCaseRadioButton.Checked = true;
+            casingRuleRadioButton_CheckedChanged(null, null);
+        }
+
+        private void lowerCaseRadioButtonLabel_Click(object sender, EventArgs e)
+        {
+            lowerCaseRadioButton.Checked = true;
+            casingRuleRadioButton_CheckedChanged(null, null);
+        }
+
+        private void upperCaseRadioButtonLabel_Click(object sender, EventArgs e)
+        {
+            upperCaseRadioButton.Checked = true;
+            casingRuleRadioButton_CheckedChanged(null, null);
+        }
+
+        private void titleCaseRadioButtonLabel_Click(object sender, EventArgs e)
+        {
+            titleCaseRadioButton.Checked = true;
+            casingRuleRadioButton_CheckedChanged(null, null);
+        }
+
+        private void toggleCaseRadioButtonLabel_Click(object sender, EventArgs e)
+        {
+            toggleCaseRadioButton.Checked = true;
+            casingRuleRadioButton_CheckedChanged(null, null);
         }
 
         private void removeExceptionButton_Click(object sender, EventArgs e)
@@ -862,6 +917,16 @@ namespace MusicBeePlugin
         {
             PluginQuickSettings settings = new PluginQuickSettings(TagToolsPlugin);
             PluginWindowTemplate.Display(settings, true);
+        }
+
+        private void alwaysCapitalize1stWordCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            alwaysCapitalize1stWordCheckBox.Checked = !alwaysCapitalize1stWordCheckBox.Checked;
+        }
+
+        private void alwaysCapitalizeLastWordCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            alwaysCapitalizeLastWordCheckBox.Checked = !alwaysCapitalizeLastWordCheckBox.Checked;
         }
     }
 }

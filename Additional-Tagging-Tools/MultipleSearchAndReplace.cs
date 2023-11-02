@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using static MusicBeePlugin.AdvancedSearchAndReplaceCommand;
 using static MusicBeePlugin.Plugin;
+using ExtensionMethods;
 
 
 namespace MusicBeePlugin
@@ -545,23 +546,23 @@ namespace MusicBeePlugin
             bool intialEnabled = enable;
             enable = (enable && previewTable.Rows.Count == 0) || searchOnlyCheckBox.Checked;
 
-            searchOnlyCheckBox.Enabled = intialEnabled && !backgroundTaskIsWorking();
+            searchOnlyCheckBox.Enable(intialEnabled && !backgroundTaskIsWorking());
 
-            templateNameTextBox.Enabled = enable && !searchOnlyCheckBox.Checked;
+            templateNameTextBox.Enable(enable && !searchOnlyCheckBox.Checked);
             //ignoreTemplateNameTextBoxTextChanged = true;
             templateNameTextBox_TextChanged(null, null);
             //ignoreTemplateNameTextBoxTextChanged = false;
 
-            sourceTagList.Enabled = enable && !searchOnlyCheckBox.Checked;
-            destinationTagList.Enabled = enable && !autoDestinationTagCheckBox.Checked && !searchOnlyCheckBox.Checked;
-            label1.Enabled = enable && !searchOnlyCheckBox.Checked;
-            label2.Enabled = enable && !searchOnlyCheckBox.Checked;
-            label3.Enabled = enable && !searchOnlyCheckBox.Checked;
-            buttonSave.Enabled = enable && !searchOnlyCheckBox.Checked;
-            loadComboBox.Enabled = enable && !searchOnlyCheckBox.Checked;
-            buttonAdd.Enabled = enable;
-            templateTable.Enabled = enable;
-            autoDestinationTagCheckBox.Enabled = enable && !searchOnlyCheckBox.Checked;
+            sourceTagList.Enable(enable && !searchOnlyCheckBox.Checked);
+            destinationTagList.Enable(enable && !autoDestinationTagCheckBox.Checked && !searchOnlyCheckBox.Checked);
+            label1.Enable(enable && !searchOnlyCheckBox.Checked);
+            label2.Enable(enable && !searchOnlyCheckBox.Checked);
+            label3.Enable(enable && !searchOnlyCheckBox.Checked);
+            buttonSave.Enable(enable && !searchOnlyCheckBox.Checked);
+            loadComboBox.Enable(enable && !searchOnlyCheckBox.Checked);
+            buttonAdd.Enable(enable);
+            templateTable.Enable(enable);
+            autoDestinationTagCheckBox.Enable(enable && !searchOnlyCheckBox.Checked);
 
             dataGridViewTextBoxColumn16.Visible = !searchOnlyCheckBox.Checked;
             NewTag.Visible = !searchOnlyCheckBox.Checked;
@@ -578,20 +579,20 @@ namespace MusicBeePlugin
 
             if (templateTable.Rows.Count == 1)
             {
-                buttonUp.Enabled = false;
-                buttonDown.Enabled = false;
-                buttonDelete.Enabled = false;
+                buttonUp.Enable(false);
+                buttonDown.Enable(false);
+                buttonDelete.Enable(false);
             }
             else
             {
-                buttonUp.Enabled = enable && !searchOnlyCheckBox.Checked;
-                buttonDown.Enabled = enable && !searchOnlyCheckBox.Checked;
-                buttonDelete.Enabled = enable;
+                buttonUp.Enable(enable && !searchOnlyCheckBox.Checked);
+                buttonDown.Enable(enable && !searchOnlyCheckBox.Checked);
+                buttonDelete.Enable(enable);
             }
 
             if (searchOnlyCheckBox.Checked)
             {
-                buttonOK.Enabled = intialEnabled && (previewTable.Rows.Count > 0);
+                buttonOK.Enable(intialEnabled && (previewTable.Rows.Count > 0));
                 buttonOK.Text = SelectFoundButtonName;
                 if (!backgroundTaskIsWorking())
                 {
@@ -625,14 +626,14 @@ namespace MusicBeePlugin
 
         public override void enableQueryingOrUpdatingButtons()
         {
-            buttonOK.Enabled = true;
-            buttonPreview.Enabled = true;
+            buttonOK.Enable(true);
+            buttonPreview.Enable(true);
         }
 
         public override void disableQueryingOrUpdatingButtons()
         {
-            buttonOK.Enabled = false;
-            buttonPreview.Enabled = false;
+            buttonOK.Enable(false);
+            buttonPreview.Enable(false);
         }
 
         private void previewTableFormatRow(int rowIndex)
@@ -830,8 +831,8 @@ namespace MusicBeePlugin
                 loadComboBox.Items.Add(customMSR);
             }
             loadComboBox.SelectedItem = customMSR;
-            loadComboBox.Enabled = sourceTagList.Enabled;
-            buttonDeleteSaved.Enabled = true;
+            loadComboBox.Enable(sourceTagList.Enabled);
+            buttonDeleteSaved.Enable(true);
 
             TagToolsPlugin.SaveSettings();
         }
@@ -842,9 +843,9 @@ namespace MusicBeePlugin
             //    loadComboBox.SelectedIndex = 0;
 
             if (templateNameTextBox.Text == "")
-                buttonSave.Enabled = false;
+                buttonSave.Enable(false);
             else
-                buttonSave.Enabled = true;
+                buttonSave.Enable(true);
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
@@ -866,9 +867,9 @@ namespace MusicBeePlugin
 
             if (templateTable.Rows.Count > 1)
             {
-                buttonDelete.Enabled = true;
-                buttonUp.Enabled = !searchOnlyCheckBox.Checked;
-                buttonDown.Enabled = !searchOnlyCheckBox.Checked;
+                buttonDelete.Enable(true);
+                buttonUp.Enable(!searchOnlyCheckBox.Checked);
+                buttonDown.Enable(!searchOnlyCheckBox.Checked);
             }
         }
 
@@ -889,9 +890,9 @@ namespace MusicBeePlugin
 
                 if (templateTable.Rows.Count < 2)
                 {
-                    buttonUp.Enabled = false;
-                    buttonDown.Enabled = false;
-                    buttonDelete.Enabled = false;
+                    buttonUp.Enable(false);
+                    buttonDown.Enable(false);
+                    buttonDelete.Enable(false);
                 }
             }
         }
@@ -927,7 +928,7 @@ namespace MusicBeePlugin
                 customMSR = null;
                 templateNameTextBox.Text = CtlMSR;
                 templateNameTextBox.SelectionStart = CtlMSR.Length;
-                buttonDeleteSaved.Enabled = false;
+                buttonDeleteSaved.Enable(false);
                 autoApplyCheckBox.Checked = false;
                 return;
             }
@@ -936,7 +937,7 @@ namespace MusicBeePlugin
                 customMSR = (Preset)loadComboBox.SelectedItem;
             }
 
-            buttonDeleteSaved.Enabled = true;
+            buttonDeleteSaved.Enable(true);
 
             if (SavedSettings.autoAppliedAsrPresetGuids.Contains(customMSR.guid))
                 autoApplyCheckBox.Checked = true;
@@ -1000,7 +1001,7 @@ namespace MusicBeePlugin
         {
             if (autoDestinationTagCheckBox.Checked)
             {
-                destinationTagList.Enabled = false;
+                destinationTagList.Enable(false);
                 int destinationTagListSelectedIndex = destinationTagList.SelectedIndex;
                 destinationTagList.SelectedItem = sourceTagList.SelectedItem;
 
@@ -1011,7 +1012,7 @@ namespace MusicBeePlugin
             }
             else
             {
-                destinationTagList.Enabled = !searchOnlyCheckBox.Checked;
+                destinationTagList.Enable(!searchOnlyCheckBox.Checked);
             }
         }
 
@@ -1060,7 +1061,7 @@ namespace MusicBeePlugin
             loadComboBox.Items.Remove(customMSR);
 
             loadComboBox.SelectedIndex = 0;
-            buttonDeleteSaved.Enabled = false;
+            buttonDeleteSaved.Enable(false);
 
 
             TagToolsPlugin.SaveSettings();

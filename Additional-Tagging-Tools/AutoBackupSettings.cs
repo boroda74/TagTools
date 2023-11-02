@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using static MusicBeePlugin.Plugin;
-
+using ExtensionMethods;
 
 namespace MusicBeePlugin
 {
@@ -48,25 +48,43 @@ namespace MusicBeePlugin
         private void autobackupCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (autobackupCheckBox.Checked)
-                autobackupNumericUpDown.Enabled = true;
+                autobackupNumericUpDown.Enable(true);
             else
-                autobackupNumericUpDown.Enabled = false;
+                autobackupNumericUpDown.Enable(false);
+        }
+
+        private void autobackupCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            autobackupCheckBox.Checked = !autobackupCheckBox.Checked;
+            autobackupCheckBox_CheckedChanged(null, null);
         }
 
         private void autodeleteOldCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (autodeleteOldCheckBox.Checked)
-                numberOfDaysNumericUpDown.Enabled = true;
+                numberOfDaysNumericUpDown.Enable(true);
             else
-                numberOfDaysNumericUpDown.Enabled = false;
+                numberOfDaysNumericUpDown.Enable(false);
+        }
+
+        private void autodeleteOldCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            autodeleteOldCheckBox.Checked = !autodeleteOldCheckBox.Checked;
+            autodeleteOldCheckBox_CheckedChanged(null, null);
         }
 
         private void autodeleteManyCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (autodeleteManyCheckBox.Checked)
-                numberOfFilesNumericUpDown.Enabled = true;
+                numberOfFilesNumericUpDown.Enable(true);
             else
-                numberOfFilesNumericUpDown.Enabled = false;
+                numberOfFilesNumericUpDown.Enable(false);
+        }
+
+        private void autodeleteManyCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            autodeleteManyCheckBox.Checked = !autodeleteManyCheckBox.Checked;
+            autodeleteManyCheckBox_CheckedChanged(null, null);
         }
 
         private void browseButton_Click(object sender, EventArgs e)

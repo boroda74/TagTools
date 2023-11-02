@@ -147,7 +147,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>22</value>
+    <value>25</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="nameBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -172,7 +172,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;nameBox.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>3</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -199,7 +199,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>24</value>
   </data>
   <data name="descriptionBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -229,7 +229,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;descriptionBox.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>23</value>
   </data>
   <data name="label3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -478,7 +478,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonApply.Location" type="System.Drawing.Point, System.Drawing">
-    <value>676, 706</value>
+    <value>676, 700</value>
   </data>
   <data name="buttonApply.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 23</value>
@@ -499,7 +499,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;buttonApply.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>21</value>
   </data>
   <data name="buttonCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -508,7 +508,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>781, 706</value>
+    <value>781, 700</value>
   </data>
   <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 23</value>
@@ -529,13 +529,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>22</value>
   </data>
   <data name="ignoreCaseCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="ignoreCaseCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 710</value>
+    <value>11, 704</value>
   </data>
   <data name="ignoreCaseCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>102, 17</value>
@@ -556,7 +556,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ignoreCaseCheckBox.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>20</value>
   </data>
   <data name="linkLabel1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -583,7 +583,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;linkLabel1.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>19</value>
   </data>
   <data name="groupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -633,6 +633,43 @@
   <data name="&gt;&gt;appendCheckBox.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="condition1CheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="condition1CheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="condition1CheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>648, 6</value>
+  </data>
+  <data name="condition1CheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 6, 3, 0</value>
+  </data>
+  <data name="condition1CheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 17</value>
+  </data>
+  <data name="condition1CheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="condition1CheckBox.Text" xml:space="preserve">
+    <value>(-?)</value>
+  </data>
+  <data name="condition1CheckBox.ToolTip" xml:space="preserve">
+    <value>Replace only if the replacement value is not empty when unchecked
+Replace only if the destination tag is empty when checked</value>
+  </data>
+  <data name="&gt;&gt;condition1CheckBox.Name" xml:space="preserve">
+    <value>condition1CheckBox</value>
+  </data>
+  <data name="&gt;&gt;condition1CheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;condition1CheckBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;condition1CheckBox.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
   <data name="tableLayoutPanel3.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 14</value>
   </data>
@@ -661,10 +698,10 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel3.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="replacedTagList" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="appendCheckBox" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="label3" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label6" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label5" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="label4" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="replacedPatternBox" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="searchedTagList" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="searchedPatternBox" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,85,Percent,75,Absolute,50,Absolute,50,Percent,25" /&gt;&lt;Rows Styles="Percent,50,Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="replacedTagList" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="appendCheckBox" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="label3" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label6" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label5" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="label4" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="replacedPatternBox" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="searchedTagList" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="searchedPatternBox" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="condition1CheckBox" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,85,Percent,75,Absolute,50,Absolute,50,Percent,25" /&gt;&lt;Rows Styles="Percent,50,Percent,50,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 284</value>
+    <value>11, 278</value>
   </data>
   <data name="groupBox1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 0</value>
@@ -688,7 +725,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>18</value>
   </data>
   <data name="customTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -697,13 +734,13 @@
     <value>False</value>
   </data>
   <data name="customTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>115, 3</value>
+    <value>123, 6</value>
   </data>
   <data name="customTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 10</value>
+    <value>3, 6, 3, 10</value>
   </data>
   <data name="customTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>316, 20</value>
+    <value>308, 20</value>
   </data>
   <data name="customTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>29</value>
@@ -721,7 +758,7 @@
     <value>tableLayoutPanel2</value>
   </data>
   <data name="&gt;&gt;customTextBox.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>6</value>
   </data>
   <data name="groupBox2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1023,6 +1060,46 @@
   <data name="&gt;&gt;searchedTag2List.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
+  <data name="condition2CheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="condition2CheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="condition2CheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="condition2CheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>648, 6</value>
+  </data>
+  <data name="condition2CheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 6, 3, 0</value>
+  </data>
+  <data name="condition2CheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 17</value>
+  </data>
+  <data name="condition2CheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="condition2CheckBox.Text" xml:space="preserve">
+    <value>(-?)</value>
+  </data>
+  <data name="condition2CheckBox.ToolTip" xml:space="preserve">
+    <value>Replace only if the replacement value is not empty when unchecked
+Replace only if the destination tag is empty when checked</value>
+  </data>
+  <data name="&gt;&gt;condition2CheckBox.Name" xml:space="preserve">
+    <value>condition2CheckBox</value>
+  </data>
+  <data name="&gt;&gt;condition2CheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;condition2CheckBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanel4</value>
+  </data>
+  <data name="&gt;&gt;condition2CheckBox.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
   <data name="tableLayoutPanel4.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 14</value>
   </data>
@@ -1051,10 +1128,10 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel4.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label7" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="replacedTag2List" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="append2CheckBox" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="searchedPattern2Box" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="replacedPattern2Box" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label10" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="label8" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label9" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="searchedTag2List" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,85,Percent,75,Absolute,50,Absolute,50,Percent,25" /&gt;&lt;Rows Styles="Percent,50,Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label7" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="replacedTag2List" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="append2CheckBox" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="searchedPattern2Box" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="replacedPattern2Box" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label10" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="label8" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label9" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="searchedTag2List" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="condition2CheckBox" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,85,Percent,75,Absolute,50,Absolute,50,Percent,25" /&gt;&lt;Rows Styles="Percent,50,Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 368</value>
+    <value>11, 362</value>
   </data>
   <data name="groupBox2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 0</value>
@@ -1078,7 +1155,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>17</value>
   </data>
   <data name="groupBox3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1380,6 +1457,46 @@
   <data name="&gt;&gt;searchedPattern3Box.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
+  <data name="condition3CheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="condition3CheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="condition3CheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="condition3CheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>648, 6</value>
+  </data>
+  <data name="condition3CheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 6, 3, 0</value>
+  </data>
+  <data name="condition3CheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 17</value>
+  </data>
+  <data name="condition3CheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="condition3CheckBox.Text" xml:space="preserve">
+    <value>(-?)</value>
+  </data>
+  <data name="condition3CheckBox.ToolTip" xml:space="preserve">
+    <value>Replace only if the replacement value is not empty when unchecked
+Replace only if the destination tag is empty when checked</value>
+  </data>
+  <data name="&gt;&gt;condition3CheckBox.Name" xml:space="preserve">
+    <value>condition3CheckBox</value>
+  </data>
+  <data name="&gt;&gt;condition3CheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;condition3CheckBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanel5</value>
+  </data>
+  <data name="&gt;&gt;condition3CheckBox.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
   <data name="tableLayoutPanel5.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 14</value>
   </data>
@@ -1408,10 +1525,10 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel5.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label11" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="replacedTag3List" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="append3CheckBox" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="searchedTag3List" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="label12" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label14" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="replacedPattern3Box" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label13" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="searchedPattern3Box" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,85,Percent,75,Absolute,50,Absolute,50,Percent,25" /&gt;&lt;Rows Styles="Percent,50,Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label11" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="replacedTag3List" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="append3CheckBox" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="searchedTag3List" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="label12" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label14" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="replacedPattern3Box" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label13" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="searchedPattern3Box" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="condition3CheckBox" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,85,Percent,75,Absolute,50,Absolute,50,Percent,25" /&gt;&lt;Rows Styles="Percent,50,Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 452</value>
+    <value>11, 446</value>
   </data>
   <data name="groupBox3.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 0</value>
@@ -1435,7 +1552,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;groupBox3.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>16</value>
   </data>
   <data name="languages.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 70</value>
@@ -1456,10 +1573,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;languages.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>15</value>
   </data>
   <data name="guidBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>114, 111</value>
+    <value>114, 118</value>
   </data>
   <data name="guidBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>208, 20</value>
@@ -1477,13 +1594,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;guidBox.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>14</value>
   </data>
   <data name="label15.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="label15.Location" type="System.Drawing.Point, System.Drawing">
-    <value>38, 114</value>
+    <value>38, 121</value>
   </data>
   <data name="label15.Size" type="System.Drawing.Size, System.Drawing">
     <value>70, 13</value>
@@ -1504,7 +1621,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label15.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>13</value>
   </data>
   <data name="label16.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1513,7 +1630,7 @@
     <value>NoControl</value>
   </data>
   <data name="label16.Location" type="System.Drawing.Point, System.Drawing">
-    <value>433, 114</value>
+    <value>433, 121</value>
   </data>
   <data name="label16.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 13</value>
@@ -1534,10 +1651,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label16.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>11</value>
   </data>
   <data name="modifiedBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>489, 111</value>
+    <value>489, 118</value>
   </data>
   <data name="modifiedBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>208, 20</value>
@@ -1555,22 +1672,22 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;modifiedBox.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>12</value>
   </data>
   <data name="userPresetCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="userPresetCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>616, 94</value>
+    <value>616, 97</value>
   </data>
   <data name="userPresetCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 17</value>
+    <value>27, 17</value>
   </data>
   <data name="userPresetCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>50</value>
   </data>
   <data name="userPresetCheckBox.Text" xml:space="preserve">
-    <value>User preset</value>
+    <value> </value>
   </data>
   <data name="&gt;&gt;userPresetCheckBox.Name" xml:space="preserve">
     <value>userPresetCheckBox</value>
@@ -1582,7 +1699,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;userPresetCheckBox.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>10</value>
   </data>
   <data name="parameterTagTypeList.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1623,9 +1740,6 @@
   <data name="&gt;&gt;parameterTagTypeList.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="label17.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
   <data name="label17.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1644,13 +1758,13 @@
     <value>NoControl</value>
   </data>
   <data name="label17.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+    <value>0, 7</value>
   </data>
   <data name="label17.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 3, 3</value>
+    <value>0, 7, 3, 6</value>
   </data>
   <data name="label17.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 27</value>
+    <value>73, 13</value>
   </data>
   <data name="label17.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1673,9 +1787,6 @@
   <data name="&gt;&gt;label17.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="label18.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
   <data name="label18.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1694,13 +1805,13 @@
     <value>NoControl</value>
   </data>
   <data name="label18.Location" type="System.Drawing.Point, System.Drawing">
-    <value>434, 0</value>
+    <value>434, 7</value>
   </data>
   <data name="label18.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 3, 3</value>
+    <value>0, 7, 3, 6</value>
   </data>
   <data name="label18.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 27</value>
+    <value>73, 13</value>
   </data>
   <data name="label18.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -1762,9 +1873,6 @@
   <data name="&gt;&gt;parameterTag2TypeList.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="label19.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
   <data name="label19.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1783,13 +1891,13 @@
     <value>NoControl</value>
   </data>
   <data name="label19.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 30</value>
+    <value>0, 34</value>
   </data>
   <data name="label19.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 3, 3</value>
+    <value>0, 7, 3, 6</value>
   </data>
   <data name="label19.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 27</value>
+    <value>73, 13</value>
   </data>
   <data name="label19.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -1828,7 +1936,7 @@
     <value>writable (incl. &lt;All Tags&gt;)</value>
   </data>
   <data name="parameterTag3TypeList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>81, 33</value>
+    <value>81, 30</value>
   </data>
   <data name="parameterTag3TypeList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 10</value>
@@ -1852,25 +1960,25 @@
     <value>9</value>
   </data>
   <data name="customTextCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="customTextCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="customTextCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="customTextCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 5</value>
+    <value>3, 6</value>
   </data>
   <data name="customTextCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 5, 3, 3</value>
+    <value>3, 6, 3, 3</value>
   </data>
   <data name="customTextCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>106, 17</value>
+    <value>14, 20</value>
   </data>
   <data name="customTextCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
-  </data>
-  <data name="customTextCheckBox.Text" xml:space="preserve">
-    <value>&lt;Custom text 1&gt;:</value>
   </data>
   <data name="customTextCheckBox.ToolTip" xml:space="preserve">
     <value>"\@#" chars in searched and/or replaced patterns will be substituted with &lt;Custom text #&gt;</value>
@@ -1885,10 +1993,10 @@
     <value>tableLayoutPanel2</value>
   </data>
   <data name="&gt;&gt;customTextCheckBox.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="customText2CheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="customText2CheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1900,19 +2008,16 @@
     <value>NoControl</value>
   </data>
   <data name="customText2CheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>437, 5</value>
+    <value>437, 6</value>
   </data>
   <data name="customText2CheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 5, 3, 3</value>
+    <value>3, 6, 3, 3</value>
   </data>
   <data name="customText2CheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>106, 17</value>
+    <value>14, 20</value>
   </data>
   <data name="customText2CheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>30</value>
-  </data>
-  <data name="customText2CheckBox.Text" xml:space="preserve">
-    <value>&lt;Custom text 2&gt;:</value>
   </data>
   <data name="customText2CheckBox.ToolTip" xml:space="preserve">
     <value>"\@#" chars in searched and/or replaced patterns will be substituted with &lt;Custom text #&gt;</value>
@@ -1927,7 +2032,7 @@
     <value>tableLayoutPanel2</value>
   </data>
   <data name="&gt;&gt;customText2CheckBox.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>10</value>
   </data>
   <data name="customText2Box.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1936,13 +2041,13 @@
     <value>False</value>
   </data>
   <data name="customText2Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>549, 3</value>
+    <value>557, 6</value>
   </data>
   <data name="customText2Box.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 10</value>
+    <value>3, 6, 3, 10</value>
   </data>
   <data name="customText2Box.Size" type="System.Drawing.Size, System.Drawing">
-    <value>316, 20</value>
+    <value>308, 20</value>
   </data>
   <data name="customText2Box.TabIndex" type="System.Int32, mscorlib">
     <value>31</value>
@@ -1960,10 +2065,10 @@
     <value>tableLayoutPanel2</value>
   </data>
   <data name="&gt;&gt;customText2Box.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="customText4CheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="customText4CheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1978,16 +2083,13 @@
     <value>437, 35</value>
   </data>
   <data name="customText4CheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 5, 3, 3</value>
+    <value>3, 6, 3, 3</value>
   </data>
   <data name="customText4CheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>106, 17</value>
+    <value>14, 20</value>
   </data>
   <data name="customText4CheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>34</value>
-  </data>
-  <data name="customText4CheckBox.Text" xml:space="preserve">
-    <value>&lt;Custom text 4&gt;:</value>
   </data>
   <data name="customText4CheckBox.ToolTip" xml:space="preserve">
     <value>"\@#" chars in searched and/or replaced patterns will be substituted with &lt;Custom text #&gt;</value>
@@ -2002,7 +2104,7 @@
     <value>tableLayoutPanel2</value>
   </data>
   <data name="&gt;&gt;customText4CheckBox.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>11</value>
   </data>
   <data name="customText4Box.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -2011,13 +2113,13 @@
     <value>False</value>
   </data>
   <data name="customText4Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>549, 33</value>
+    <value>557, 35</value>
   </data>
   <data name="customText4Box.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 10</value>
+    <value>3, 6, 3, 10</value>
   </data>
   <data name="customText4Box.Size" type="System.Drawing.Size, System.Drawing">
-    <value>316, 20</value>
+    <value>308, 20</value>
   </data>
   <data name="customText4Box.TabIndex" type="System.Int32, mscorlib">
     <value>35</value>
@@ -2035,10 +2137,10 @@
     <value>tableLayoutPanel2</value>
   </data>
   <data name="&gt;&gt;customText4Box.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="customText3CheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="customText3CheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2053,16 +2155,13 @@
     <value>3, 35</value>
   </data>
   <data name="customText3CheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 5, 3, 3</value>
+    <value>3, 6, 3, 3</value>
   </data>
   <data name="customText3CheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>106, 17</value>
+    <value>14, 20</value>
   </data>
   <data name="customText3CheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
-  </data>
-  <data name="customText3CheckBox.Text" xml:space="preserve">
-    <value>&lt;Custom text 3&gt;:</value>
   </data>
   <data name="customText3CheckBox.ToolTip" xml:space="preserve">
     <value>"\@#" chars in searched and/or replaced patterns will be substituted with &lt;Custom text #&gt;</value>
@@ -2077,7 +2176,7 @@
     <value>tableLayoutPanel2</value>
   </data>
   <data name="&gt;&gt;customText3CheckBox.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="customText3Box.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -2086,13 +2185,13 @@
     <value>False</value>
   </data>
   <data name="customText3Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>115, 33</value>
+    <value>123, 35</value>
   </data>
   <data name="customText3Box.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 10</value>
+    <value>3, 6, 3, 10</value>
   </data>
   <data name="customText3Box.Size" type="System.Drawing.Size, System.Drawing">
-    <value>316, 20</value>
+    <value>308, 20</value>
   </data>
   <data name="customText3Box.TabIndex" type="System.Int32, mscorlib">
     <value>33</value>
@@ -2110,7 +2209,7 @@
     <value>tableLayoutPanel2</value>
   </data>
   <data name="&gt;&gt;customText3Box.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="append4CheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -2190,6 +2289,242 @@
   <data name="&gt;&gt;append5CheckBox.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="condition4CheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="condition4CheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="condition4CheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="condition4CheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>648, 6</value>
+  </data>
+  <data name="condition4CheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 6, 3, 0</value>
+  </data>
+  <data name="condition4CheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 17</value>
+  </data>
+  <data name="condition4CheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="condition4CheckBox.Text" xml:space="preserve">
+    <value>(-?)</value>
+  </data>
+  <data name="condition4CheckBox.ToolTip" xml:space="preserve">
+    <value>Replace only if the replacement value is not empty when unchecked
+Replace only if the destination tag is empty when checked</value>
+  </data>
+  <data name="&gt;&gt;condition4CheckBox.Name" xml:space="preserve">
+    <value>condition4CheckBox</value>
+  </data>
+  <data name="&gt;&gt;condition4CheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;condition4CheckBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanel6</value>
+  </data>
+  <data name="&gt;&gt;condition4CheckBox.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="condition5CheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="condition5CheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="condition5CheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="condition5CheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>648, 6</value>
+  </data>
+  <data name="condition5CheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 6, 3, 0</value>
+  </data>
+  <data name="condition5CheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 17</value>
+  </data>
+  <data name="condition5CheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="condition5CheckBox.Text" xml:space="preserve">
+    <value>(-?)</value>
+  </data>
+  <data name="condition5CheckBox.ToolTip" xml:space="preserve">
+    <value>Replace only if the replacement value is not empty when unchecked
+Replace only if the destination tag is empty when checked</value>
+  </data>
+  <data name="&gt;&gt;condition5CheckBox.Name" xml:space="preserve">
+    <value>condition5CheckBox</value>
+  </data>
+  <data name="&gt;&gt;condition5CheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;condition5CheckBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanel7</value>
+  </data>
+  <data name="&gt;&gt;condition5CheckBox.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="customTextCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="customTextCheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="customTextCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 9</value>
+  </data>
+  <data name="customTextCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 9, 3, 6</value>
+  </data>
+  <data name="customTextCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>86, 13</value>
+  </data>
+  <data name="customTextCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>58</value>
+  </data>
+  <data name="customTextCheckBoxLabel.Text" xml:space="preserve">
+    <value>&lt;Custom text 1&gt;:</value>
+  </data>
+  <data name="customTextCheckBoxLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="customTextCheckBoxLabel.ToolTip" xml:space="preserve">
+    <value>"\@#" chars in searched and/or replaced patterns will be substituted with &lt;Custom text #&gt;</value>
+  </data>
+  <data name="&gt;&gt;customTextCheckBoxLabel.Name" xml:space="preserve">
+    <value>customTextCheckBoxLabel</value>
+  </data>
+  <data name="&gt;&gt;customTextCheckBoxLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;customTextCheckBoxLabel.Parent" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;customTextCheckBoxLabel.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="customText3CheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="customText3CheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="customText3CheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 38</value>
+  </data>
+  <data name="customText3CheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 9, 3, 6</value>
+  </data>
+  <data name="customText3CheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>86, 13</value>
+  </data>
+  <data name="customText3CheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>58</value>
+  </data>
+  <data name="customText3CheckBoxLabel.Text" xml:space="preserve">
+    <value>&lt;Custom text 3&gt;:</value>
+  </data>
+  <data name="customText3CheckBoxLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="customText3CheckBoxLabel.ToolTip" xml:space="preserve">
+    <value>"\@#" chars in searched and/or replaced patterns will be substituted with &lt;Custom text #&gt;</value>
+  </data>
+  <data name="&gt;&gt;customText3CheckBoxLabel.Name" xml:space="preserve">
+    <value>customText3CheckBoxLabel</value>
+  </data>
+  <data name="&gt;&gt;customText3CheckBoxLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;customText3CheckBoxLabel.Parent" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;customText3CheckBoxLabel.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="customText2CheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="customText2CheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="customText2CheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>457, 9</value>
+  </data>
+  <data name="customText2CheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 9, 3, 6</value>
+  </data>
+  <data name="customText2CheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>86, 13</value>
+  </data>
+  <data name="customText2CheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>58</value>
+  </data>
+  <data name="customText2CheckBoxLabel.Text" xml:space="preserve">
+    <value>&lt;Custom text 2&gt;:</value>
+  </data>
+  <data name="customText2CheckBoxLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="customText2CheckBoxLabel.ToolTip" xml:space="preserve">
+    <value>"\@#" chars in searched and/or replaced patterns will be substituted with &lt;Custom text #&gt;</value>
+  </data>
+  <data name="&gt;&gt;customText2CheckBoxLabel.Name" xml:space="preserve">
+    <value>customText2CheckBoxLabel</value>
+  </data>
+  <data name="&gt;&gt;customText2CheckBoxLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;customText2CheckBoxLabel.Parent" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;customText2CheckBoxLabel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="customText4CheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="customText4CheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="customText4CheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>457, 38</value>
+  </data>
+  <data name="customText4CheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 9, 3, 6</value>
+  </data>
+  <data name="customText4CheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>86, 13</value>
+  </data>
+  <data name="customText4CheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>58</value>
+  </data>
+  <data name="customText4CheckBoxLabel.Text" xml:space="preserve">
+    <value>&lt;Custom text 4&gt;:</value>
+  </data>
+  <data name="customText4CheckBoxLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="customText4CheckBoxLabel.ToolTip" xml:space="preserve">
+    <value>"\@#" chars in searched and/or replaced patterns will be substituted with &lt;Custom text #&gt;</value>
+  </data>
+  <data name="&gt;&gt;customText4CheckBoxLabel.Name" xml:space="preserve">
+    <value>customText4CheckBoxLabel</value>
+  </data>
+  <data name="&gt;&gt;customText4CheckBoxLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;customText4CheckBoxLabel.Parent" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;customText4CheckBoxLabel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="parameterTag3List.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
@@ -2197,7 +2532,7 @@
     <value>False</value>
   </data>
   <data name="parameterTag3List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>288, 33</value>
+    <value>288, 30</value>
   </data>
   <data name="parameterTag3List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 10</value>
@@ -2221,7 +2556,7 @@
     <value>13</value>
   </data>
   <data name="label21.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+    <value>Top, Left, Right</value>
   </data>
   <data name="label21.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2230,13 +2565,13 @@
     <value>NoControl</value>
   </data>
   <data name="label21.Location" type="System.Drawing.Point, System.Drawing">
-    <value>202, 0</value>
+    <value>202, 7</value>
   </data>
   <data name="label21.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 0, 3, 3</value>
+    <value>6, 7, 3, 7</value>
   </data>
   <data name="label21.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 27</value>
+    <value>80, 13</value>
   </data>
   <data name="label21.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -2290,7 +2625,7 @@
     <value>7</value>
   </data>
   <data name="label22.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+    <value>Top, Left, Right</value>
   </data>
   <data name="label22.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2299,13 +2634,13 @@
     <value>NoControl</value>
   </data>
   <data name="label22.Location" type="System.Drawing.Point, System.Drawing">
-    <value>636, 0</value>
+    <value>636, 7</value>
   </data>
   <data name="label22.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 0, 3, 3</value>
+    <value>6, 7, 3, 7</value>
   </data>
   <data name="label22.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 27</value>
+    <value>80, 13</value>
   </data>
   <data name="label22.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -2359,7 +2694,7 @@
     <value>3</value>
   </data>
   <data name="label23.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+    <value>Top, Left, Right</value>
   </data>
   <data name="label23.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2368,13 +2703,13 @@
     <value>NoControl</value>
   </data>
   <data name="label23.Location" type="System.Drawing.Point, System.Drawing">
-    <value>202, 30</value>
+    <value>202, 34</value>
   </data>
   <data name="label23.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 0, 3, 3</value>
+    <value>6, 7, 3, 7</value>
   </data>
   <data name="label23.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 27</value>
+    <value>80, 13</value>
   </data>
   <data name="label23.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -2398,7 +2733,7 @@
     <value>10</value>
   </data>
   <data name="label20.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+    <value>Top, Left, Right</value>
   </data>
   <data name="label20.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2407,13 +2742,13 @@
     <value>NoControl</value>
   </data>
   <data name="label20.Location" type="System.Drawing.Point, System.Drawing">
-    <value>636, 60</value>
+    <value>636, 61</value>
   </data>
   <data name="label20.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 0, 3, 3</value>
+    <value>6, 7, 3, 7</value>
   </data>
   <data name="label20.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 27</value>
+    <value>80, 13</value>
   </data>
   <data name="label20.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
@@ -2443,7 +2778,7 @@
     <value>False</value>
   </data>
   <data name="parameterTag6List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>722, 63</value>
+    <value>722, 57</value>
   </data>
   <data name="parameterTag6List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 10</value>
@@ -2467,7 +2802,7 @@
     <value>11</value>
   </data>
   <data name="label24.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+    <value>Top, Left, Right</value>
   </data>
   <data name="label24.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2476,13 +2811,13 @@
     <value>NoControl</value>
   </data>
   <data name="label24.Location" type="System.Drawing.Point, System.Drawing">
-    <value>636, 30</value>
+    <value>636, 34</value>
   </data>
   <data name="label24.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 0, 3, 3</value>
+    <value>6, 7, 3, 7</value>
   </data>
   <data name="label24.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 27</value>
+    <value>80, 13</value>
   </data>
   <data name="label24.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -2512,7 +2847,7 @@
     <value>False</value>
   </data>
   <data name="parameterTag5List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>288, 63</value>
+    <value>288, 57</value>
   </data>
   <data name="parameterTag5List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 10</value>
@@ -2536,7 +2871,7 @@
     <value>17</value>
   </data>
   <data name="label25.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+    <value>Top, Left, Right</value>
   </data>
   <data name="label25.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2545,13 +2880,13 @@
     <value>NoControl</value>
   </data>
   <data name="label25.Location" type="System.Drawing.Point, System.Drawing">
-    <value>202, 60</value>
+    <value>202, 61</value>
   </data>
   <data name="label25.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 0, 3, 3</value>
+    <value>6, 7, 3, 7</value>
   </data>
   <data name="label25.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 27</value>
+    <value>80, 13</value>
   </data>
   <data name="label25.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -2581,7 +2916,7 @@
     <value>False</value>
   </data>
   <data name="parameterTag4List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>722, 33</value>
+    <value>722, 30</value>
   </data>
   <data name="parameterTag4List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 10</value>
@@ -2604,9 +2939,6 @@
   <data name="&gt;&gt;parameterTag4List.ZOrder" xml:space="preserve">
     <value>21</value>
   </data>
-  <data name="label26.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
   <data name="label26.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -2625,13 +2957,13 @@
     <value>NoControl</value>
   </data>
   <data name="label26.Location" type="System.Drawing.Point, System.Drawing">
-    <value>434, 60</value>
+    <value>434, 61</value>
   </data>
   <data name="label26.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 3, 3</value>
+    <value>0, 7, 3, 6</value>
   </data>
   <data name="label26.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 27</value>
+    <value>73, 13</value>
   </data>
   <data name="label26.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
@@ -2670,7 +3002,7 @@
     <value>writable (incl. &lt;All Tags&gt;)</value>
   </data>
   <data name="parameterTag6TypeList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>515, 63</value>
+    <value>515, 57</value>
   </data>
   <data name="parameterTag6TypeList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 10</value>
@@ -2693,9 +3025,6 @@
   <data name="&gt;&gt;parameterTag6TypeList.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
-  <data name="label27.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
   <data name="label27.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -2714,13 +3043,13 @@
     <value>NoControl</value>
   </data>
   <data name="label27.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 60</value>
+    <value>0, 61</value>
   </data>
   <data name="label27.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 3, 3</value>
+    <value>0, 7, 3, 6</value>
   </data>
   <data name="label27.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 27</value>
+    <value>73, 13</value>
   </data>
   <data name="label27.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -2759,7 +3088,7 @@
     <value>writable (incl. &lt;All Tags&gt;)</value>
   </data>
   <data name="parameterTag5TypeList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>81, 63</value>
+    <value>81, 57</value>
   </data>
   <data name="parameterTag5TypeList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 10</value>
@@ -2782,9 +3111,6 @@
   <data name="&gt;&gt;parameterTag5TypeList.ZOrder" xml:space="preserve">
     <value>23</value>
   </data>
-  <data name="label28.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
   <data name="label28.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -2803,13 +3129,13 @@
     <value>NoControl</value>
   </data>
   <data name="label28.Location" type="System.Drawing.Point, System.Drawing">
-    <value>434, 30</value>
+    <value>434, 34</value>
   </data>
   <data name="label28.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 3, 3</value>
+    <value>0, 7, 3, 6</value>
   </data>
   <data name="label28.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 27</value>
+    <value>73, 13</value>
   </data>
   <data name="label28.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -2848,7 +3174,7 @@
     <value>writable (incl. &lt;All Tags&gt;)</value>
   </data>
   <data name="parameterTag4TypeList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>515, 33</value>
+    <value>515, 30</value>
   </data>
   <data name="parameterTag4TypeList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 10</value>
@@ -3160,10 +3486,10 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel6.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label29" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="replacedTag4List" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="append4CheckBox" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="searchedTag4List" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="label30" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label31" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="replacedPattern4Box" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label32" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="searchedPattern4Box" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,85,Percent,75,Absolute,50,Absolute,50,Percent,25" /&gt;&lt;Rows Styles="Percent,50,Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label29" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="replacedTag4List" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="append4CheckBox" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="searchedTag4List" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="label30" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label31" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="replacedPattern4Box" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label32" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="searchedPattern4Box" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="condition4CheckBox" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,85,Percent,75,Absolute,50,Absolute,50,Percent,25" /&gt;&lt;Rows Styles="Percent,50,Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="groupBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 536</value>
+    <value>11, 530</value>
   </data>
   <data name="groupBox4.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 0</value>
@@ -3187,7 +3513,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;groupBox4.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>9</value>
   </data>
   <data name="groupBox5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -3475,10 +3801,10 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel7.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label33" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="replacedTag5List" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="append5CheckBox" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="searchedTag5List" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="label34" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label35" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="replacedPattern5Box" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label36" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="searchedPattern5Box" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,85,Percent,75,Absolute,50,Absolute,50,Percent,25" /&gt;&lt;Rows Styles="Percent,50,Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label33" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="replacedTag5List" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="append5CheckBox" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="searchedTag5List" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="label34" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label35" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="replacedPattern5Box" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label36" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="searchedPattern5Box" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="condition5CheckBox" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,85,Percent,75,Absolute,50,Absolute,50,Percent,25" /&gt;&lt;Rows Styles="Percent,50,Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="groupBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 620</value>
+    <value>11, 614</value>
   </data>
   <data name="groupBox5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 0</value>
@@ -3505,7 +3831,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;groupBox5.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>8</value>
   </data>
   <data name="customizedByUserCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3514,16 +3840,16 @@
     <value>NoControl</value>
   </data>
   <data name="customizedByUserCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>493, 94</value>
+    <value>493, 97</value>
   </data>
   <data name="customizedByUserCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 17</value>
+    <value>27, 17</value>
   </data>
   <data name="customizedByUserCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>51</value>
   </data>
   <data name="customizedByUserCheckBox.Text" xml:space="preserve">
-    <value>Customized by user</value>
+    <value> </value>
   </data>
   <data name="&gt;&gt;customizedByUserCheckBox.Name" xml:space="preserve">
     <value>customizedByUserCheckBox</value>
@@ -3535,22 +3861,22 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;customizedByUserCheckBox.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>7</value>
   </data>
   <data name="removePresetCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="removePresetCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>389, 94</value>
+    <value>389, 97</value>
   </data>
   <data name="removePresetCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 17</value>
+    <value>27, 17</value>
   </data>
   <data name="removePresetCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>52</value>
   </data>
   <data name="removePresetCheckBox.Text" xml:space="preserve">
-    <value>Remove preset</value>
+    <value> </value>
   </data>
   <data name="&gt;&gt;removePresetCheckBox.Name" xml:space="preserve">
     <value>removePresetCheckBox</value>
@@ -3562,7 +3888,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;removePresetCheckBox.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>6</value>
   </data>
   <data name="tableLayoutPanel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -3571,13 +3897,13 @@
     <value>8</value>
   </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 133</value>
+    <value>11, 140</value>
   </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>868, 90</value>
+    <value>868, 81</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>53</value>
@@ -3592,7 +3918,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>5</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label17" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="parameterTagTypeList" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label21" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="parameterTagList" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="label18" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="parameterTag2TypeList" Row="0" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="label22" Row="0" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="parameterTag2List" Row="0" RowSpan="1" Column="7" ColumnSpan="1" /&gt;&lt;Control Name="label19" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="parameterTag3TypeList" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label23" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="parameterTag6List" Row="2" RowSpan="1" Column="7" ColumnSpan="1" /&gt;&lt;Control Name="label20" Row="2" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="parameterTag3List" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="label28" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="parameterTag6TypeList" Row="2" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="label26" Row="2" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="parameterTag5List" Row="2" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="label24" Row="1" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="label25" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="parameterTag4TypeList" Row="1" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="parameterTag4List" Row="1" RowSpan="1" Column="7" ColumnSpan="1" /&gt;&lt;Control Name="label27" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="parameterTag5TypeList" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,78,Absolute,118,Absolute,89,Percent,50,Absolute,78,Absolute,118,Absolute,89,Percent,50" /&gt;&lt;Rows Styles="Percent,33,33333,Percent,33,33333,Percent,33,33333" /&gt;&lt;/TableLayoutSettings&gt;</value>
@@ -3601,19 +3927,19 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="tableLayoutPanel2.ColumnCount" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="tableLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 222</value>
+    <value>11, 219</value>
   </data>
   <data name="tableLayoutPanel2.RowCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>868, 60</value>
+    <value>868, 58</value>
   </data>
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
-    <value>54</value>
+    <value>56</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel2.Name" xml:space="preserve">
     <value>tableLayoutPanel2</value>
@@ -3625,10 +3951,97 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel2.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>4</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="customTextCheckBox" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="customTextBox" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="customText2CheckBox" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="customText2Box" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="customText3CheckBox" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="customText3Box" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="customText4Box" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="customText4CheckBox" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,112,Percent,50,Absolute,112,Percent,50" /&gt;&lt;Rows Styles="Percent,50,Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="customText4CheckBoxLabel" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="customText2CheckBoxLabel" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="customTextCheckBox" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="customText3CheckBox" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="customText2Box" Row="0" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="customText4Box" Row="1" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="customTextBox" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="customText3Box" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="customTextCheckBoxLabel" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="customText3CheckBoxLabel" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="customText2CheckBox" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="customText4CheckBox" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,20,Absolute,100,Percent,50,Absolute,20,Absolute,100,Percent,50" /&gt;&lt;Rows Styles="Percent,50,Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="removePresetCheckBoxLable.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="removePresetCheckBoxLable.Location" type="System.Drawing.Point, System.Drawing">
+    <value>408, 98</value>
+  </data>
+  <data name="removePresetCheckBoxLable.Size" type="System.Drawing.Size, System.Drawing">
+    <value>79, 13</value>
+  </data>
+  <data name="removePresetCheckBoxLable.TabIndex" type="System.Int32, mscorlib">
+    <value>55</value>
+  </data>
+  <data name="removePresetCheckBoxLable.Text" xml:space="preserve">
+    <value>Remove preset</value>
+  </data>
+  <data name="&gt;&gt;removePresetCheckBoxLable.Name" xml:space="preserve">
+    <value>removePresetCheckBoxLable</value>
+  </data>
+  <data name="&gt;&gt;removePresetCheckBoxLable.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;removePresetCheckBoxLable.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;removePresetCheckBoxLable.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="customizedByUserCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="customizedByUserCheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="customizedByUserCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>512, 98</value>
+  </data>
+  <data name="customizedByUserCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 13</value>
+  </data>
+  <data name="customizedByUserCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>56</value>
+  </data>
+  <data name="customizedByUserCheckBoxLabel.Text" xml:space="preserve">
+    <value>Customized by user</value>
+  </data>
+  <data name="&gt;&gt;customizedByUserCheckBoxLabel.Name" xml:space="preserve">
+    <value>customizedByUserCheckBoxLabel</value>
+  </data>
+  <data name="&gt;&gt;customizedByUserCheckBoxLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;customizedByUserCheckBoxLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;customizedByUserCheckBoxLabel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="userPresetCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="userPresetCheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="userPresetCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>635, 98</value>
+  </data>
+  <data name="userPresetCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 13</value>
+  </data>
+  <data name="userPresetCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>57</value>
+  </data>
+  <data name="userPresetCheckBoxLabel.Text" xml:space="preserve">
+    <value>User preset</value>
+  </data>
+  <data name="&gt;&gt;userPresetCheckBoxLabel.Name" xml:space="preserve">
+    <value>userPresetCheckBoxLabel</value>
+  </data>
+  <data name="&gt;&gt;userPresetCheckBoxLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;userPresetCheckBoxLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;userPresetCheckBoxLabel.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -3637,13 +4050,13 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>892, 736</value>
+    <value>892, 731</value>
   </data>
   <data name="$this.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>10000, 800</value>
+    <value>10000, 780</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>900, 763</value>
+    <value>900, 760</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Preset Editor</value>

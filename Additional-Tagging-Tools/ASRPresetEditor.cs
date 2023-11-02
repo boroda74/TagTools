@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using static MusicBeePlugin.AdvancedSearchAndReplaceCommand;
 using static MusicBeePlugin.Plugin;
+using ExtensionMethods;
 
 namespace MusicBeePlugin
 {
@@ -40,7 +41,7 @@ namespace MusicBeePlugin
             {
                 if (control.GetType() == typeof(Button))
                 {
-                    ((Button)control).Enabled = false;
+                    ((Button)control).Enable(false);
                 }
                 else if (control.GetType().IsSubclassOf(typeof(TextBox)) || control.GetType() == typeof(TextBox))
                 {
@@ -48,23 +49,44 @@ namespace MusicBeePlugin
                 }
                 else if (control.GetType().IsSubclassOf(typeof(ComboBox)) || control.GetType() == typeof(ComboBox))
                 {
-                    ((ComboBox)control).Enabled = false;
+                    ((ComboBox)control).Enable(false);
                 }
                 else if (control.GetType().IsSubclassOf(typeof(ListBox)) || control.GetType() == typeof(ListBox))
                 {
-                    ((ListBox)control).Enabled = false;
+                    ((ListBox)control).Enable(false);
                 }
                 else if (control.GetType() == typeof(GroupBox))
                 {
-                    //((GroupBox)control).Enabled = false;
+                    //((GroupBox)control).Enable(false);
                 }
                 else
                 {
-                    control.Enabled = false;
+                    control.Enable(false);
                 }
 
                 makeReadonly(control);
             }
+        }
+
+
+        private CheckState getThreeStateChecked(bool? state)
+        {
+            if (state == true)
+                return CheckState.Checked;
+            else if (state == false)
+                return CheckState.Unchecked;
+            else
+                return CheckState.Indeterminate;
+        }
+
+        private bool? getThreeStateBool(CheckState state)
+        {
+            if (state == CheckState.Checked)
+                return true;
+            else if (state == CheckState.Unchecked)
+                return false;
+            else
+                return null;
         }
 
         public bool editPreset(Preset presetParam, bool readOnly)
@@ -74,19 +96,19 @@ namespace MusicBeePlugin
             if (readOnly)
             {
                 makeReadonly(this);
-                buttonCancel.Enabled = true;
-                buttonApply.Enabled = true;
-                linkLabel1.Enabled = true;
+                buttonCancel.Enable(true);
+                buttonApply.Enable(true);
+                linkLabel1.Enable(true);
             }
 
             guidBox.Text = preset.guid.ToString();
             modifiedBox.Text = preset.modifiedUtc.ToLocalTime().ToString();
             userPresetCheckBox.Checked = preset.userPreset;
-            userPresetCheckBox.Enabled = DeveloperMode;
+            userPresetCheckBox.Enable(DeveloperMode);
             removePresetCheckBox.Checked = preset.removePreset;
             removePresetCheckBox.Visible = DeveloperMode;
             customizedByUserCheckBox.Checked = preset.customizedByUser;
-            customizedByUserCheckBox.Enabled = DeveloperMode;
+            customizedByUserCheckBox.Enable(DeveloperMode);
 
 
             currentLanguage = null;
@@ -185,22 +207,28 @@ namespace MusicBeePlugin
             append4CheckBox.Checked = preset.append4;
             append5CheckBox.Checked = preset.append5;
 
+            condition1CheckBox.CheckState = getThreeStateChecked(preset.limitation1);
+            condition2CheckBox.CheckState = getThreeStateChecked(preset.limitation2);
+            condition3CheckBox.CheckState = getThreeStateChecked(preset.limitation3);
+            condition4CheckBox.CheckState = getThreeStateChecked(preset.limitation4);
+            condition5CheckBox.CheckState = getThreeStateChecked(preset.limitation5);
+
             languages.Text = Language;
 
             if (readOnly)
             {
-                languages.Enabled = true;
-                parameterTagTypeList.Enabled = false;
-                parameterTag2TypeList.Enabled = false;
-                parameterTag3TypeList.Enabled = false;
-                parameterTag4TypeList.Enabled = false;
-                parameterTag5TypeList.Enabled = false;
-                parameterTag6TypeList.Enabled = false;
+                languages.Enable(true);
+                parameterTagTypeList.Enable(false);
+                parameterTag2TypeList.Enable(false);
+                parameterTag3TypeList.Enable(false);
+                parameterTag4TypeList.Enable(false);
+                parameterTag5TypeList.Enable(false);
+                parameterTag6TypeList.Enable(false);
 
-                customTextCheckBox.Enabled = false;
-                customText2CheckBox.Enabled = false;
-                customText3CheckBox.Enabled = false;
-                customText4CheckBox.Enabled = false;
+                customTextCheckBox.Enable(false);
+                customText2CheckBox.Enable(false);
+                customText3CheckBox.Enable(false);
+                customText4CheckBox.Enable(false);
 
                 customTextBox.ReadOnly = !customTextCheckBox.Checked;
                 customText2Box.ReadOnly = !customText2CheckBox.Checked;
@@ -281,6 +309,12 @@ namespace MusicBeePlugin
             preset.append4 = append4CheckBox.Checked;
             preset.append5 = append5CheckBox.Checked;
 
+            preset.limitation1 = getThreeStateBool(condition1CheckBox.CheckState);
+            preset.limitation2 = getThreeStateBool(condition2CheckBox.CheckState);
+            preset.limitation3 = getThreeStateBool(condition3CheckBox.CheckState);
+            preset.limitation4 = getThreeStateBool(condition4CheckBox.CheckState);
+            preset.limitation5 = getThreeStateBool(condition5CheckBox.CheckState);
+
             return true;
         }
 
@@ -339,7 +373,7 @@ namespace MusicBeePlugin
                 if (tagTypeList.Items.Count == 4)
                     tagTypeList.Items.RemoveAt(3);
 
-                tagTypeList.Enabled = false;
+                tagTypeList.Enable(false);
             }
             else
             {
@@ -357,7 +391,7 @@ namespace MusicBeePlugin
                         tagTypeList.Items.RemoveAt(3);
                 }
 
-                tagTypeList.Enabled = true;
+                tagTypeList.Enable(true);
             }
         }
 
@@ -481,46 +515,82 @@ namespace MusicBeePlugin
             parameterTagTypeChanged(parameterTag6TypeList, label26, parameterTag6List, label20);
         }
 
-        private void customTextChecked_CheckedChanged(object sender, EventArgs e)
+        private void customTextChecked_CheckedChanged(object sender, EventArgs e)//***---
         {
-            customTextBox.Enabled = customTextCheckBox.Checked;
+            customTextBox.Enable(customTextCheckBox.Checked);
             if (!customTextCheckBox.Checked)
             {
                 customTextBox.Text = "";
                 customText2CheckBox.Checked = false;
             }
-            customText2CheckBox.Enabled = customTextCheckBox.Checked;
+            customText2CheckBox.Enable(customTextCheckBox.Checked);
+        }
+
+        private void customTextCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            if (!customTextCheckBox.Enabled)
+                return;
+
+            customTextCheckBox.Checked = !customTextCheckBox.Checked;
+            customTextChecked_CheckedChanged(null, null);
         }
 
         private void customText2CheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            customText2Box.Enabled = customText2CheckBox.Checked;
+            customText2Box.Enable(customText2CheckBox.Checked);
             if (!customText2CheckBox.Checked)
             {
                 customText2Box.Text = "";
                 customText3CheckBox.Checked = false;
             }
-            customText3CheckBox.Enabled = customText2CheckBox.Checked;
+            customText3CheckBox.Enable(customText2CheckBox.Checked);
         }
 
+        private void customText2CheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            if (!customText2CheckBox.Enabled)
+                return;
+
+            customText2CheckBox.Checked = !customText2CheckBox.Checked;
+            customText2CheckBox_CheckedChanged(null, null);
+        }
+        
         private void customText3CheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            customText3Box.Enabled = customText3CheckBox.Checked;
+            customText3Box.Enable(customText3CheckBox.Checked);
             if (!customText3CheckBox.Checked)
             {
                 customText3Box.Text = "";
                 customText4CheckBox.Checked = false;
             }
-            customText4CheckBox.Enabled = customText3CheckBox.Checked;
+            customText4CheckBox.Enable(customText3CheckBox.Checked);
+        }
+
+        private void customText3CheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            if (!customText3CheckBox.Enabled)
+                return;
+
+            customText3CheckBox.Checked = !customText3CheckBox.Checked;
+            customText3CheckBox_CheckedChanged(null, null);
         }
 
         private void customText4CheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            customText4Box.Enabled = customText4CheckBox.Checked;
+            customText4Box.Enable(customText4CheckBox.Checked);
             if (!customText4CheckBox.Checked)
             {
                 customText4Box.Text = "";
             }
+        }
+
+        private void customText4CheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            if (!customText4CheckBox.Enabled) 
+                return;
+
+            customText4CheckBox.Checked = !customText4CheckBox.Checked;
+            customText4CheckBox_CheckedChanged(null, null);
         }
     }
 }
