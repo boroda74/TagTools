@@ -6,33 +6,6 @@ using System.Windows.Forms;
 
 namespace MusicBeePlugin
 {
-    public class ReadOnlyCheckBox : CheckBox//*****
-    {
-        [Category("Appearance")]
-        [Browsable(true), EditorBrowsable(EditorBrowsableState.Always)]
-        private bool readOnly = false;
-
-        public bool ReadOnly
-        {
-            get { return readOnly; }
-
-            set 
-            { 
-                readOnly = value;
-                
-                if (readOnly)
-                {
-
-                }
-            }
-        }
-
-        protected override void OnClick(EventArgs e)
-        {
-            if (!ReadOnly) base.OnClick(e);
-        }
-    }
-
     public static class CueProvider
     {
         private const int EM_SETCUEBANNER = 0x1501;

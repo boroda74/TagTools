@@ -9,7 +9,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using static MusicBeePlugin.Plugin;
-using ExtensionMethods;//****
+using ExtensionMethods;
 
 
 namespace MusicBeePlugin
@@ -216,7 +216,7 @@ namespace MusicBeePlugin
             previewTable.EnableHeadersVisualStyles = false;
 
             DatagridViewCheckBoxHeaderCell cbHeader = new DatagridViewCheckBoxHeaderCell();
-            cbHeader.Style = HeaderCellStyle;//*******
+            cbHeader.Style = HeaderCellStyle;
             cbHeader.setState(true);
             cbHeader.OnCheckBoxClicked += new CheckBoxClickedHandler(cbHeader_OnCheckBoxClicked);
 

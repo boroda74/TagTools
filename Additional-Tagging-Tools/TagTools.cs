@@ -4632,7 +4632,6 @@ namespace MusicBeePlugin
 
             if (SavedSettings.useSkinColors)
             {
-                //*****
                 Color backColorSkinned = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
                 AccentColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
                 //Color accentSelectedColorSkinned = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateModified, ElementComponent.ComponentForeground));
@@ -4740,7 +4739,7 @@ namespace MusicBeePlugin
 
 
 
-            //DATAGRIDVIEW COLOR DEFINITIONS//*****
+            //DATAGRIDVIEW COLOR DEFINITIONS
             if (SavedSettings.useSkinColors)
             {
                 HeaderCellStyle.ForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinSubPanel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
@@ -4771,7 +4770,7 @@ namespace MusicBeePlugin
                 UnchangedCellStyle.SelectionBackColor = SystemColors.Highlight;
             }
 
-            Color ChangedForeColor = Color.FromKnownColor(KnownColor.Red);//****
+            Color ChangedForeColor = Color.FromKnownColor(KnownColor.Red);
             Color PreservedTagsForeColor = Color.FromKnownColor(KnownColor.Blue);
             Color PreservedTagValuesForeColor = Color.FromKnownColor(KnownColor.Green);
 
@@ -4780,7 +4779,7 @@ namespace MusicBeePlugin
             ChangedCellStyle.BackColor = UnchangedCellStyle.BackColor;
             ChangedCellStyle.SelectionBackColor = UnchangedCellStyle.SelectionBackColor;
 
-            float scale = 1.5f;//****
+            float scale = 1.5f;//***
 
             Color backColor = ChangedCellStyle.BackColor;
             float br = backColor.R;
@@ -4875,7 +4874,7 @@ namespace MusicBeePlugin
             DimmedCellStyle.BackColor = UnchangedCellStyle.BackColor;
             DimmedCellStyle.SelectionBackColor = UnchangedCellStyle.SelectionBackColor;
 
-            scale = 0.2f; //Dimmed text brightness scale //****
+            scale = 0.2f; //Dimmed text brightness scale //***
 
             foreColor = UnchangedCellStyle.ForeColor;
             r = foreColor.R;
@@ -4950,7 +4949,7 @@ namespace MusicBeePlugin
             PreservedTagCellStyle.BackColor = UnchangedCellStyle.BackColor;
             PreservedTagCellStyle.SelectionBackColor = UnchangedCellStyle.SelectionBackColor;
 
-            scale = 1.5f;//****
+            scale = 1.5f;//***
 
             backColor = UnchangedCellStyle.BackColor;
             br = backColor.R;
@@ -4959,7 +4958,7 @@ namespace MusicBeePlugin
 
             bbrt = (br + bg + bb) / 3f;
 
-            foreColor = PreservedTagsForeColor;//*****
+            foreColor = PreservedTagsForeColor;
             r = foreColor.R;
             g = foreColor.G;
             b = foreColor.B;
@@ -5004,7 +5003,7 @@ namespace MusicBeePlugin
 
             bbrt = (br + bg + bb) / 3f;
 
-            foreColor = PreservedTagsForeColor;//*****
+            foreColor = PreservedTagsForeColor;
             r = foreColor.R;
             g = foreColor.G;
             b = foreColor.B;
@@ -5045,7 +5044,7 @@ namespace MusicBeePlugin
             PreservedTagValueCellStyle.BackColor = UnchangedCellStyle.BackColor;
             PreservedTagValueCellStyle.SelectionBackColor = UnchangedCellStyle.SelectionBackColor;
 
-            scale = 1.5f;//****
+            scale = 1.5f;//***
 
             backColor = UnchangedCellStyle.BackColor;
             br = backColor.R;
@@ -5054,7 +5053,7 @@ namespace MusicBeePlugin
 
             bbrt = (br + bg + bb) / 3f;
 
-            foreColor = PreservedTagValuesForeColor;//****
+            foreColor = PreservedTagValuesForeColor;
             r = foreColor.R;
             g = foreColor.G;
             b = foreColor.B;
@@ -5099,7 +5098,7 @@ namespace MusicBeePlugin
 
             bbrt = (br + bg + bb) / 3f;
 
-            foreColor = PreservedTagValuesForeColor;//*****
+            foreColor = PreservedTagValuesForeColor;
             r = foreColor.R;
             g = foreColor.G;
             b = foreColor.B;
