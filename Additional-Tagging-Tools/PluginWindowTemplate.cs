@@ -96,7 +96,7 @@ namespace MusicBeePlugin
             }
         }
 
-        private void TabControl_DrawItem(object sender, DrawItemEventArgs e)//********
+        private void TabControl_DrawItem(object sender, DrawItemEventArgs e)
         {
             TabPage page = ((TabControl)sender).TabPages[e.Index];
             e.Graphics.FillRectangle(new SolidBrush(page.BackColor), e.Bounds);
@@ -111,31 +111,15 @@ namespace MusicBeePlugin
         {
             Button button = (Button)sender;
 
-            if (UseSkinColors)
+            if (button.Enabled)
             {
-                if (button.Enabled)
-                {
-                    button.ForeColor = ButtonForeColorSkinned;
-                    button.BackColor = ButtonBackColorSkinned;
-                }
-                else
-                {
-                    button.ForeColor = ButtonDisabledForeColorSkinned;
-                    button.BackColor = ButtonDisabledBackColorSkinned;
-                }
+                button.ForeColor = ButtonForeColor;
+                button.BackColor = ButtonBackColor;
             }
             else
             {
-                if (button.Enabled)
-                {
-                    button.ForeColor = ButtonForeColor;
-                    button.BackColor = ButtonBackColor;
-                }
-                else
-                {
-                    button.ForeColor = ButtonDisabledForeColor;
-                    button.BackColor = ButtonDisabledBackColor;
-                }
+                button.ForeColor = ButtonDisabledForeColor;
+                button.BackColor = ButtonDisabledBackColor;
             }
         }
 
@@ -204,17 +188,8 @@ namespace MusicBeePlugin
             {
                 Button button = (Button)control;
 
-                if (UseSkinColors)
-                {
-                    button.ForeColor = ButtonForeColorSkinned;
-                    button.BackColor = ButtonBackColorSkinned;
-                }
-                else
-                {
-                    button.ForeColor = ButtonForeColor;
-                    button.BackColor = ButtonBackColor;
-                }
-
+                button.ForeColor = ButtonForeColor;
+                button.BackColor = ButtonBackColor;
 
                 form.buttonLabels.Add(button, button.Text);
 

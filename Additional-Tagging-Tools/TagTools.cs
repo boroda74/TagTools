@@ -153,13 +153,6 @@ namespace MusicBeePlugin
         public static Color ButtonDisabledForeColor;
 
 
-        public static Color ButtonBackColorSkinned;
-        public static Color ButtonForeColorSkinned;
-
-        public static Color ButtonDisabledBackColorSkinned;
-        public static Color ButtonDisabledForeColorSkinned;
-
-
         public static Color AccentColor;
         public static Color AccentSelectedColor;
         public static Color DimmedColor;
@@ -168,10 +161,6 @@ namespace MusicBeePlugin
 
         public static Color  DimmedHighlight;
 
-        public static float AccentWeight;
-        public static float DimmedWeight;
-        public static float DeepDimmedWeight;
-        public static float VeryDeepDimmedWeight;
 
         public static float[] SplitterPenDashPattern;
         public static Pen SplitterPen;
@@ -228,8 +217,6 @@ namespace MusicBeePlugin
         public static object AutobackupLocker = new object();
 
         public static Button EmptyButton;
-        public static TextBox EmptyTextBox;
-        public static Form EmptyForm;
 
         public static string[] ReadonlyTagsNames;
 
@@ -3619,405 +3606,6 @@ namespace MusicBeePlugin
             if (SavedSettings.defaultTagHistoryNumberOfBackups < 1)
                 SavedSettings.defaultTagHistoryNumberOfBackups = 10;
 
-
-            //COMMOM COLOR DEFINITIONS//*****
-            if (SavedSettings.useSkinColors)
-            {
-                HeaderCellStyle.ForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinSubPanel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
-                HeaderCellStyle.BackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinSubPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
-                HeaderCellStyle.SelectionForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinSubPanel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
-                HeaderCellStyle.SelectionBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinSubPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
-
-                UnchangedCellStyle.ForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
-                UnchangedCellStyle.BackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
-                UnchangedCellStyle.SelectionForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateModified, ElementComponent.ComponentForeground));
-                UnchangedCellStyle.SelectionBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateModified, ElementComponent.ComponentBackground));
-
-                if (UnchangedCellStyle.SelectionForeColor == UnchangedCellStyle.ForeColor)
-                {
-                    UnchangedCellStyle.SelectionForeColor = SystemColors.HighlightText;
-                }
-
-                if (UnchangedCellStyle.SelectionBackColor == UnchangedCellStyle.BackColor)
-                {
-                    UnchangedCellStyle.SelectionBackColor = SystemColors.Highlight;
-                }
-            }
-            else
-            {
-                UnchangedCellStyle.ForeColor = SystemColors.WindowText;
-                UnchangedCellStyle.BackColor = SystemColors.Window;
-                UnchangedCellStyle.SelectionForeColor = SystemColors.HighlightText;
-                UnchangedCellStyle.SelectionBackColor = SystemColors.Highlight;
-            }
-
-            Color ChangedForeColor = Color.FromKnownColor(KnownColor.Red);//****
-            Color PreservedTagsForeColor = Color.FromKnownColor(KnownColor.Blue);
-            Color PreservedTagValuesForeColor = Color.FromKnownColor(KnownColor.Green);
-
-
-            //CHANGED STYLE
-            ChangedCellStyle.BackColor = UnchangedCellStyle.BackColor;
-            ChangedCellStyle.SelectionBackColor = UnchangedCellStyle.SelectionBackColor;
-
-            float scale = 1.5f;//****
-
-            Color backColor = ChangedCellStyle.BackColor;
-            float br = backColor.R;
-            float bg = backColor.G;
-            float bb = backColor.B;
-
-            float bbrt = (br + bg + bb) / 3f;
-
-            Color foreColor = ChangedForeColor;
-            float r = foreColor.R;
-            float g = foreColor.G;
-            float b = foreColor.B;
-
-            float brt = (r + g + b) / 3f;
-
-            if (Math.Abs(brt - bbrt) < 256 / 3f)
-            {
-                if (brt < 127)
-                    r = r * (brt * scale);
-                else
-                    r = r / (brt * scale);
-
-                if (brt < 127)
-                    g = g * (brt * scale);
-                else
-                    g = g / (brt * scale);
-
-                if (brt < 127)
-                    b = b * (brt * scale);
-                else
-                    b = b / (brt * scale);
-
-                r = r > 255 ? 255 : r;
-                r = r < 0 ? 0 : r;
-
-                g = g > 255 ? 255 : g;
-                g = g < 0 ? 0 : g;
-
-                b = b > 255 ? 255 : b;
-                b = b < 0 ? 0 : b;
-            }
-
-            ChangedCellStyle.ForeColor = Color.FromArgb(255, (int)r, (int)g, (int)b);
-
-
-            //SELECTION CHANGED STYLE
-            backColor = ChangedCellStyle.SelectionBackColor;
-            br = backColor.R;
-            bg = backColor.G;
-            bb = backColor.B;
-
-            bbrt = (br + bg + bb) / 3f;
-
-            foreColor = ChangedForeColor;
-            r = foreColor.R;
-            g = foreColor.G;
-            b = foreColor.B;
-
-            brt = (r + g + b) / 3f;
-
-            if (Math.Abs(brt - bbrt) < 256 / 3f)
-            {
-                if (brt < 127)
-                    r = r * (brt * scale);
-                else
-                    r = r / (brt * scale);
-
-                if (brt < 127)
-                    g = g * (brt * scale);
-                else
-                    g = g / (brt * scale);
-
-                if (brt < 127)
-                    b = b * (brt * scale);
-                else
-                    b = b / (brt * scale);
-
-                r = r > 255 ? 255 : r;
-                r = r < 0 ? 0 : r;
-
-                g = g > 255 ? 255 : g;
-                g = g < 0 ? 0 : g;
-
-                b = b > 255 ? 255 : b;
-                b = b < 0 ? 0 : b;
-            }
-
-            ChangedCellStyle.SelectionForeColor = Color.FromArgb(255, (int)r, (int)g, (int)b);
-
-
-            //DIMMED STYLE
-            DimmedCellStyle.BackColor = UnchangedCellStyle.BackColor;
-            DimmedCellStyle.SelectionBackColor = UnchangedCellStyle.SelectionBackColor;
-
-            scale = 0.2f; //Dimmed text brightness scale //****
-
-            foreColor = UnchangedCellStyle.ForeColor;
-            r = foreColor.R;
-            g = foreColor.G;
-            b = foreColor.B;
-
-            brt = (r + g + b) / 3f;
-
-            if (brt < 127)
-            {
-                r = r / scale;
-                g = g / scale;
-                b = b / scale;
-
-            }
-            else
-            {
-                r = r * scale;
-                g = g * scale;
-                b = b * scale;
-
-            }
-
-            r = r > 255 ? 255 : r;
-            r = r < 0 ? 0 : r;
-
-            g = g > 255 ? 255 : g;
-            g = g < 0 ? 0 : g;
-
-            b = b > 255 ? 255 : b;
-            b = b < 0 ? 0 : b;
-
-            DimmedCellStyle.ForeColor = Color.FromArgb(255, (int)r, (int)g, (int)b);
-
-
-            //SELECTION DIMMED STYLE
-            foreColor = UnchangedCellStyle.SelectionForeColor;
-            r = foreColor.R;
-            g = foreColor.G;
-            b = foreColor.B;
-
-            brt = (r + g + b) / 3f;
-
-            if (brt < 127)
-            {
-                r = r / scale;
-                g = g / scale;
-                b = b / scale;
-
-            }
-            else
-            {
-                r = r * scale;
-                g = g * scale;
-                b = b * scale;
-
-            }
-
-            r = r > 255 ? 255 : r;
-            r = r < 0 ? 0 : r;
-
-            g = g > 255 ? 255 : g;
-            g = g < 0 ? 0 : g;
-
-            b = b > 255 ? 255 : b;
-            b = b < 0 ? 0 : b;
-
-            DimmedCellStyle.SelectionForeColor = Color.FromArgb(255, (int)r, (int)g, (int)b);
-
-
-            //PRESERVED TAG STYLE
-            PreservedTagCellStyle.BackColor = UnchangedCellStyle.BackColor;
-            PreservedTagCellStyle.SelectionBackColor = UnchangedCellStyle.SelectionBackColor;
-
-            scale = 1.5f;//****
-
-            backColor = UnchangedCellStyle.BackColor;
-            br = backColor.R;
-            bg = backColor.G;
-            bb = backColor.B;
-
-            bbrt = (br + bg + bb) / 3f;
-
-            foreColor = PreservedTagsForeColor;//*****
-            r = foreColor.R;
-            g = foreColor.G;
-            b = foreColor.B;
-
-            brt = (r + g + b) / 3f;
-
-            if (Math.Abs(brt - bbrt) < 256 / 3f)
-            {
-                if (brt < 127)
-                    r = r * (brt * scale);
-                else
-                    r = r / (brt * scale);
-
-                if (brt < 127)
-                    g = g * (brt * scale);
-                else
-                    g = g / (brt * scale);
-
-                if (brt < 127)
-                    b = b * (brt * scale);
-                else
-                    b = b / (brt * scale);
-
-                r = r > 255 ? 255 : r;
-                r = r < 0 ? 0 : r;
-
-                g = g > 255 ? 255 : g;
-                g = g < 0 ? 0 : g;
-
-                b = b > 255 ? 255 : b;
-                b = b < 0 ? 0 : b;
-            }
-
-            PreservedTagCellStyle.ForeColor = Color.FromArgb(255, (int)r, (int)g, (int)b);
-
-
-            //SELECTION PRESERVED TAG STYLE
-            backColor = UnchangedCellStyle.SelectionBackColor;
-            br = backColor.R;
-            bg = backColor.G;
-            bb = backColor.B;
-
-            bbrt = (br + bg + bb) / 3f;
-
-            foreColor = PreservedTagsForeColor;//*****
-            r = foreColor.R;
-            g = foreColor.G;
-            b = foreColor.B;
-
-            brt = (r + g + b) / 3f;
-
-            if (Math.Abs(brt - bbrt) < 256 / 3f)
-            {
-                if (brt < 127)
-                    r = r * (brt * scale);
-                else
-                    r = r / (brt * scale);
-
-                if (brt < 127)
-                    g = g * (brt * scale);
-                else
-                    g = g / (brt * scale);
-
-                if (brt < 127)
-                    b = b * (brt * scale);
-                else
-                    b = b / (brt * scale);
-
-                r = r > 255 ? 255 : r;
-                r = r < 0 ? 0 : r;
-
-                g = g > 255 ? 255 : g;
-                g = g < 0 ? 0 : g;
-
-                b = b > 255 ? 255 : b;
-                b = b < 0 ? 0 : b;
-            }
-
-            PreservedTagCellStyle.SelectionForeColor = Color.FromArgb(255, (int)r, (int)g, (int)b);
-
-
-            //PRESERVED TAG VALUE STYLE
-            PreservedTagValueCellStyle.BackColor = UnchangedCellStyle.BackColor;
-            PreservedTagValueCellStyle.SelectionBackColor = UnchangedCellStyle.SelectionBackColor;
-
-            scale = 1.5f;//****
-
-            backColor = UnchangedCellStyle.BackColor;
-            br = backColor.R;
-            bg = backColor.G;
-            bb = backColor.B;
-
-            bbrt = (br + bg + bb) / 3f;
-
-            foreColor = PreservedTagValuesForeColor;//****
-            r = foreColor.R;
-            g = foreColor.G;
-            b = foreColor.B;
-
-            brt = (r + g + b) / 3f;
-
-            if (Math.Abs(brt - bbrt) < 256 / 3f)
-            {
-                if (brt < 127)
-                    r = r * (brt * scale);
-                else
-                    r = r / (brt * scale);
-
-                if (brt < 127)
-                    g = g * (brt * scale);
-                else
-                    g = g / (brt * scale);
-
-                if (brt < 127)
-                    b = b * (brt * scale);
-                else
-                    b = b / (brt * scale);
-
-                r = r > 255 ? 255 : r;
-                r = r < 0 ? 0 : r;
-
-                g = g > 255 ? 255 : g;
-                g = g < 0 ? 0 : g;
-
-                b = b > 255 ? 255 : b;
-                b = b < 0 ? 0 : b;
-            }
-
-            PreservedTagValueCellStyle.ForeColor = Color.FromArgb(255, (int)r, (int)g, (int)b);
-
-
-            //SELECTION PRESERVED TAG STYLE
-            backColor = UnchangedCellStyle.SelectionBackColor;
-            br = backColor.R;
-            bg = backColor.G;
-            bb = backColor.B;
-
-            bbrt = (br + bg + bb) / 3f;
-
-            foreColor = PreservedTagValuesForeColor;//*****
-            r = foreColor.R;
-            g = foreColor.G;
-            b = foreColor.B;
-
-            brt = (r + g + b) / 3f;
-
-            if (Math.Abs(brt - bbrt) < 256 / 3f)
-            {
-                if (brt < 127)
-                    r = r * (brt * scale);
-                else
-                    r = r / (brt * scale);
-
-                if (brt < 127)
-                    g = g * (brt * scale);
-                else
-                    g = g / (brt * scale);
-
-                if (brt < 127)
-                    b = b * (brt * scale);
-                else
-                    b = b / (brt * scale);
-
-                r = r > 255 ? 255 : r;
-                r = r < 0 ? 0 : r;
-
-                g = g > 255 ? 255 : g;
-                g = g < 0 ? 0 : g;
-
-                b = b > 255 ? 255 : b;
-                b = b < 0 ? 0 : b;
-            }
-
-            PreservedTagValueCellStyle.SelectionForeColor = Color.FromArgb(255, (int)r, (int)g, (int)b);
-
-
-
-
             if (SavedSettings.defaultAsrPresetsExportFolder == null)
                 SavedSettings.defaultAsrPresetsExportFolder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             #endregion
@@ -4867,6 +4455,8 @@ namespace MusicBeePlugin
             #region Final initialization
             //Final initialization
             MbForm = (Form)Control.FromHandle(MbApiInterface.MB_GetWindowHandle());
+            EmptyButton = new Button();
+
             MusicName = MbApiInterface.MB_GetLocalisation("Main.tree.Music", "Music");
 
             TagToolsSubmenu = (ToolStripMenuItem)MbApiInterface.MB_AddMenuItem("mnuTools/[1]" + PluginMenuGroupName, null, null);
@@ -4942,10 +4532,6 @@ namespace MusicBeePlugin
 
 
             //Skinning
-            EmptyButton?.Dispose();
-            EmptyTextBox?.Dispose();
-            EmptyForm?.Dispose();
-
             SplitterPen.Dispose();
 
 
@@ -4961,6 +4547,8 @@ namespace MusicBeePlugin
             LibraryReportsCommandForAutoApplying?.Dispose();
             LibraryReportsCommandForHotkeys?.Dispose();
             LibraryReportsCommandForFunctionIds?.Dispose();
+
+            EmptyButton?.Dispose();
 
             if (!Uninstalled)
                 SaveSettings();
@@ -5031,87 +4619,91 @@ namespace MusicBeePlugin
 
         public static void PrepareThemedBitmapsAndColors()
         {
-            //Skin controls
+            //Splitter is invisible by default. Lets draw it.
             SplitterPenDashPattern = new float[] { 1f, 1f }; //Splitter is always drawn (even using system colors)
             SplitterPen = new Pen(DimmedHighlight, 2);
 
 
-            Color backColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
-            AccentColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
-            AccentSelectedColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateModified, ElementComponent.ComponentForeground));
+            //Skin controls
+            float accentWeight = 0.70f;
+            float dimmedWeight = 0.45f;
+            float deepDimmedWeight = 0.137f;
+            float veryDeepDimmedWeight = 0.07f;
 
+            if (SavedSettings.useSkinColors)
+            {
+                //*****
+                Color backColorSkinned = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
+                AccentColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
+                //Color accentSelectedColorSkinned = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateModified, ElementComponent.ComponentForeground));
 
-            AccentWeight = 0.70f;
-            DimmedWeight = 0.45f;
-            DeepDimmedWeight = 0.137f;
-            VeryDeepDimmedWeight = 0.07f;//*****
+                DimmedColor = GetWeightedColor(AccentColor, backColorSkinned, dimmedWeight);
+                DeepDimmedColor = GetWeightedColor(AccentColor, backColorSkinned, deepDimmedWeight);
+                VeryDeepDimmedColor = GetWeightedColor(AccentColor, backColorSkinned, veryDeepDimmedWeight);
 
-            DimmedColor = GetWeightedColor(AccentColor, backColor, DimmedWeight);
-            DeepDimmedColor = GetWeightedColor(AccentColor, backColor, DeepDimmedWeight);
-            VeryDeepDimmedColor = GetWeightedColor(AccentColor, backColor, VeryDeepDimmedWeight);
+                BackFormColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
 
-            BackFormColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
+                //Skinning buttons (especially disabled buttons)
+                ButtonBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
+                ButtonForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
 
+                ButtonDisabledBackColor = ButtonBackColor;
+                //float avgBrightness = GetAverageBrightness(ButtonBackColor);
+                //if (avgBrightness > 0.5f)
+                //{
+                //    ButtonDisabledBackColor = GetWeightedColor(ButtonBackColor, Color.Black, 0.6f);
+                //}
+                //else
+                //{
+                //    ButtonDisabledBackColor = GetWeightedColor(ButtonBackColor, Color.White, 0.6f);
+                //}
 
-            //Skinning buttons (especially disabled buttons)
-            ButtonBackColorSkinned = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
-            ButtonForeColorSkinned = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
+                ButtonDisabledForeColor = GetWeightedColor(ButtonForeColor, ButtonDisabledBackColor, 0.5f);
+            }
+            else
+            {
+                Color backColorNotSkinned = SystemColors.Control;
+                AccentColor = SystemColors.ControlText;
+                //Color AccentSelectedColorNotSkinned = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateModified, ElementComponent.ComponentForeground));
 
-            ButtonDisabledBackColorSkinned = ButtonBackColorSkinned;
-            //float avgBrightness = GetAverageBrightness(ButtonBackColorSkinned);
-            //if (avgBrightness > 0.5f)
-            //{
-            //    ButtonDisabledBackColorSkinned = GetWeightedColor(ButtonBackColorSkinned, Color.Black, 0.6f);
-            //}
-            //else
-            //{
-            //    ButtonDisabledBackColorSkinned = GetWeightedColor(ButtonBackColorSkinned, Color.White, 0.6f);
-            //}
+                DimmedColor = GetWeightedColor(AccentColor, backColorNotSkinned, dimmedWeight);
+                DeepDimmedColor = GetWeightedColor(AccentColor, backColorNotSkinned, deepDimmedWeight);
+                VeryDeepDimmedColor = GetWeightedColor(AccentColor, backColorNotSkinned, veryDeepDimmedWeight);
 
-            ButtonDisabledForeColorSkinned = GetWeightedColor(ButtonForeColorSkinned, ButtonDisabledBackColorSkinned, 0.5f);
+                BackFormColor = SystemColors.Control;
 
+                //Skinning buttons (especially disabled buttons)
+                ButtonBackColor = backColorNotSkinned;
+                ButtonForeColor = AccentColor;
 
-            ButtonBackColor = SystemColors.Control;//******
-            ButtonForeColor = SystemColors.ControlText;
-
-            ButtonDisabledBackColor = ButtonBackColor;
-            //ButtonDisabledBackColor = SystemColors.ControlDark;
-            ButtonDisabledForeColor = SystemColors.GrayText;
-
-
-
-            EmptyButton?.Dispose();
-            EmptyTextBox?.Dispose();
-            EmptyForm?.Dispose();
-
-            var pluginWindowTemplate = new PluginWindowTemplate();
-            EmptyButton = (Button)PluginWindowTemplate.SkinControl(pluginWindowTemplate, new Button());
-            EmptyTextBox = (TextBox)PluginWindowTemplate.SkinControl(pluginWindowTemplate, new TextBox());
-            EmptyForm = PluginWindowTemplate.SkinForm(pluginWindowTemplate);
+                ButtonDisabledBackColor = ButtonBackColor;
+                //ButtonDisabledBackColor = SystemColors.ControlDark;
+                ButtonDisabledForeColor = SystemColors.GrayText;
+            }
 
 
             Color sampleColor = SystemColors.Highlight;
-            DimmedHighlight = GetHighlightColor(sampleColor, EmptyForm.ForeColor, EmptyForm.BackColor);
+            DimmedHighlight = GetHighlightColor(sampleColor, AccentColor, BackFormColor);
 
 
             //Setting default & making themed colors
             HighlightColor = Color.Red;
-            UntickedColor = EmptyForm.ForeColor;
+            UntickedColor = AccentColor;
 
-            TickedColor = GetHighlightColor(HighlightColor, SystemColors.Highlight, EmptyForm.BackColor);
+            TickedColor = GetHighlightColor(HighlightColor, SystemColors.Highlight, BackFormColor);
 
 
             //Making themed bitmaps
             CheckedState = GetSolidImageByBitmapMask(AccentColor, Resources.check_mark);
-            UncheckedState = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, BackFormColor, AccentWeight), Resources.uncheck_mark);
+            UncheckedState = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, BackFormColor, accentWeight), Resources.uncheck_mark);
 
 
-            if (SavedSettings.useSkinColors)
+            if (SavedSettings.useSkinColors) //It's in case if skinned & not skinned buttons use different flat styles. At the moment it's not so.
             {
-                ButtonRemoveImage = GetSolidImageByBitmapMask(ButtonForeColorSkinned, Resources.uncheck_mark, 16, 16);
-                ButtonSetImage = GetSolidImageByBitmapMask(ButtonForeColorSkinned, Resources.check_mark, 16, 16);
+                ButtonRemoveImage = GetSolidImageByBitmapMask(ButtonForeColor, Resources.uncheck_mark, 16, 16);
+                ButtonSetImage = GetSolidImageByBitmapMask(ButtonForeColor, Resources.check_mark, 16, 16);
                 Warning = Resources.warning_wide_15;
-                Gear = GetSolidImageByBitmapMask(ButtonForeColorSkinned, Resources.function_id_presets, 16, 16);
+                Gear = GetSolidImageByBitmapMask(ButtonForeColor, Resources.function_id_presets, 16, 16);
             }
             else
             {
@@ -5123,28 +4715,425 @@ namespace MusicBeePlugin
 
 
             AutoAppliedPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.auto_applied_presets);
-            AutoAppliedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, BackFormColor, AccentWeight), Resources.auto_applied_presets);
+            AutoAppliedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, BackFormColor, accentWeight), Resources.auto_applied_presets);
 
             PredefinedPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.predefined_presets);
-            PredefinedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, BackFormColor, AccentWeight), Resources.predefined_presets);
+            PredefinedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, BackFormColor, accentWeight), Resources.predefined_presets);
 
             CustomizedPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.customized_presets);
-            CustomizedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, BackFormColor, AccentWeight), Resources.customized_presets);
+            CustomizedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, BackFormColor, accentWeight), Resources.customized_presets);
 
             UserPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.user_presets);
-            UserPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, BackFormColor, AccentWeight), Resources.user_presets);
+            UserPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, BackFormColor, accentWeight), Resources.user_presets);
 
             PlaylistPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.playlist_presets);
-            PlaylistPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, BackFormColor, AccentWeight), Resources.playlist_presets);
+            PlaylistPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, BackFormColor, accentWeight), Resources.playlist_presets);
 
             FunctionIdPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.function_id_presets);
-            FunctionIdPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, BackFormColor, AccentWeight), Resources.function_id_presets);
+            FunctionIdPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, BackFormColor, accentWeight), Resources.function_id_presets);
 
             HotkeyPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.hotkey_presets);
-            HotkeyPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, BackFormColor, AccentWeight), Resources.hotkey_presets);
+            HotkeyPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, BackFormColor, accentWeight), Resources.hotkey_presets);
 
             UncheckAllFiltersAccent = GetSolidImageByBitmapMask(AccentColor, Resources.uncheck_all_preset_filters);
-            UncheckAllFiltersDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, BackFormColor, AccentWeight), Resources.uncheck_all_preset_filters);
+            UncheckAllFiltersDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, BackFormColor, accentWeight), Resources.uncheck_all_preset_filters);
+
+
+
+            //DATAGRIDVIEW COLOR DEFINITIONS//*****
+            if (SavedSettings.useSkinColors)
+            {
+                HeaderCellStyle.ForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinSubPanel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
+                HeaderCellStyle.BackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinSubPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
+                HeaderCellStyle.SelectionForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinSubPanel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
+                HeaderCellStyle.SelectionBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinSubPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
+
+                UnchangedCellStyle.ForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
+                UnchangedCellStyle.BackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
+                UnchangedCellStyle.SelectionForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateModified, ElementComponent.ComponentForeground));
+                UnchangedCellStyle.SelectionBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateModified, ElementComponent.ComponentBackground));
+
+                if (UnchangedCellStyle.SelectionForeColor == UnchangedCellStyle.ForeColor)
+                {
+                    UnchangedCellStyle.SelectionForeColor = SystemColors.HighlightText;
+                }
+
+                if (UnchangedCellStyle.SelectionBackColor == UnchangedCellStyle.BackColor)
+                {
+                    UnchangedCellStyle.SelectionBackColor = SystemColors.Highlight;
+                }
+            }
+            else
+            {
+                UnchangedCellStyle.ForeColor = SystemColors.WindowText;
+                UnchangedCellStyle.BackColor = SystemColors.Window;
+                UnchangedCellStyle.SelectionForeColor = SystemColors.HighlightText;
+                UnchangedCellStyle.SelectionBackColor = SystemColors.Highlight;
+            }
+
+            Color ChangedForeColor = Color.FromKnownColor(KnownColor.Red);//****
+            Color PreservedTagsForeColor = Color.FromKnownColor(KnownColor.Blue);
+            Color PreservedTagValuesForeColor = Color.FromKnownColor(KnownColor.Green);
+
+
+            //CHANGED STYLE
+            ChangedCellStyle.BackColor = UnchangedCellStyle.BackColor;
+            ChangedCellStyle.SelectionBackColor = UnchangedCellStyle.SelectionBackColor;
+
+            float scale = 1.5f;//****
+
+            Color backColor = ChangedCellStyle.BackColor;
+            float br = backColor.R;
+            float bg = backColor.G;
+            float bb = backColor.B;
+
+            float bbrt = (br + bg + bb) / 3f;
+
+            Color foreColor = ChangedForeColor;
+            float r = foreColor.R;
+            float g = foreColor.G;
+            float b = foreColor.B;
+
+            float brt = (r + g + b) / 3f;
+
+            if (Math.Abs(brt - bbrt) < 256 / 3f)
+            {
+                if (brt < 127)
+                    r = r * (brt * scale);
+                else
+                    r = r / (brt * scale);
+
+                if (brt < 127)
+                    g = g * (brt * scale);
+                else
+                    g = g / (brt * scale);
+
+                if (brt < 127)
+                    b = b * (brt * scale);
+                else
+                    b = b / (brt * scale);
+
+                r = r > 255 ? 255 : r;
+                r = r < 0 ? 0 : r;
+
+                g = g > 255 ? 255 : g;
+                g = g < 0 ? 0 : g;
+
+                b = b > 255 ? 255 : b;
+                b = b < 0 ? 0 : b;
+            }
+
+            ChangedCellStyle.ForeColor = Color.FromArgb(255, (int)r, (int)g, (int)b);
+
+
+            //SELECTION CHANGED STYLE
+            backColor = ChangedCellStyle.SelectionBackColor;
+            br = backColor.R;
+            bg = backColor.G;
+            bb = backColor.B;
+
+            bbrt = (br + bg + bb) / 3f;
+
+            foreColor = ChangedForeColor;
+            r = foreColor.R;
+            g = foreColor.G;
+            b = foreColor.B;
+
+            brt = (r + g + b) / 3f;
+
+            if (Math.Abs(brt - bbrt) < 256 / 3f)
+            {
+                if (brt < 127)
+                    r = r * (brt * scale);
+                else
+                    r = r / (brt * scale);
+
+                if (brt < 127)
+                    g = g * (brt * scale);
+                else
+                    g = g / (brt * scale);
+
+                if (brt < 127)
+                    b = b * (brt * scale);
+                else
+                    b = b / (brt * scale);
+
+                r = r > 255 ? 255 : r;
+                r = r < 0 ? 0 : r;
+
+                g = g > 255 ? 255 : g;
+                g = g < 0 ? 0 : g;
+
+                b = b > 255 ? 255 : b;
+                b = b < 0 ? 0 : b;
+            }
+
+            ChangedCellStyle.SelectionForeColor = Color.FromArgb(255, (int)r, (int)g, (int)b);
+
+
+            //DIMMED STYLE
+            DimmedCellStyle.BackColor = UnchangedCellStyle.BackColor;
+            DimmedCellStyle.SelectionBackColor = UnchangedCellStyle.SelectionBackColor;
+
+            scale = 0.2f; //Dimmed text brightness scale //****
+
+            foreColor = UnchangedCellStyle.ForeColor;
+            r = foreColor.R;
+            g = foreColor.G;
+            b = foreColor.B;
+
+            brt = (r + g + b) / 3f;
+
+            if (brt < 127)
+            {
+                r = r / scale;
+                g = g / scale;
+                b = b / scale;
+
+            }
+            else
+            {
+                r = r * scale;
+                g = g * scale;
+                b = b * scale;
+
+            }
+
+            r = r > 255 ? 255 : r;
+            r = r < 0 ? 0 : r;
+
+            g = g > 255 ? 255 : g;
+            g = g < 0 ? 0 : g;
+
+            b = b > 255 ? 255 : b;
+            b = b < 0 ? 0 : b;
+
+            DimmedCellStyle.ForeColor = Color.FromArgb(255, (int)r, (int)g, (int)b);
+
+
+            //SELECTION DIMMED STYLE
+            foreColor = UnchangedCellStyle.SelectionForeColor;
+            r = foreColor.R;
+            g = foreColor.G;
+            b = foreColor.B;
+
+            brt = (r + g + b) / 3f;
+
+            if (brt < 127)
+            {
+                r = r / scale;
+                g = g / scale;
+                b = b / scale;
+
+            }
+            else
+            {
+                r = r * scale;
+                g = g * scale;
+                b = b * scale;
+
+            }
+
+            r = r > 255 ? 255 : r;
+            r = r < 0 ? 0 : r;
+
+            g = g > 255 ? 255 : g;
+            g = g < 0 ? 0 : g;
+
+            b = b > 255 ? 255 : b;
+            b = b < 0 ? 0 : b;
+
+            DimmedCellStyle.SelectionForeColor = Color.FromArgb(255, (int)r, (int)g, (int)b);
+
+
+            //PRESERVED TAG STYLE
+            PreservedTagCellStyle.BackColor = UnchangedCellStyle.BackColor;
+            PreservedTagCellStyle.SelectionBackColor = UnchangedCellStyle.SelectionBackColor;
+
+            scale = 1.5f;//****
+
+            backColor = UnchangedCellStyle.BackColor;
+            br = backColor.R;
+            bg = backColor.G;
+            bb = backColor.B;
+
+            bbrt = (br + bg + bb) / 3f;
+
+            foreColor = PreservedTagsForeColor;//*****
+            r = foreColor.R;
+            g = foreColor.G;
+            b = foreColor.B;
+
+            brt = (r + g + b) / 3f;
+
+            if (Math.Abs(brt - bbrt) < 256 / 3f)
+            {
+                if (brt < 127)
+                    r = r * (brt * scale);
+                else
+                    r = r / (brt * scale);
+
+                if (brt < 127)
+                    g = g * (brt * scale);
+                else
+                    g = g / (brt * scale);
+
+                if (brt < 127)
+                    b = b * (brt * scale);
+                else
+                    b = b / (brt * scale);
+
+                r = r > 255 ? 255 : r;
+                r = r < 0 ? 0 : r;
+
+                g = g > 255 ? 255 : g;
+                g = g < 0 ? 0 : g;
+
+                b = b > 255 ? 255 : b;
+                b = b < 0 ? 0 : b;
+            }
+
+            PreservedTagCellStyle.ForeColor = Color.FromArgb(255, (int)r, (int)g, (int)b);
+
+
+            //SELECTION PRESERVED TAG STYLE
+            backColor = UnchangedCellStyle.SelectionBackColor;
+            br = backColor.R;
+            bg = backColor.G;
+            bb = backColor.B;
+
+            bbrt = (br + bg + bb) / 3f;
+
+            foreColor = PreservedTagsForeColor;//*****
+            r = foreColor.R;
+            g = foreColor.G;
+            b = foreColor.B;
+
+            brt = (r + g + b) / 3f;
+
+            if (Math.Abs(brt - bbrt) < 256 / 3f)
+            {
+                if (brt < 127)
+                    r = r * (brt * scale);
+                else
+                    r = r / (brt * scale);
+
+                if (brt < 127)
+                    g = g * (brt * scale);
+                else
+                    g = g / (brt * scale);
+
+                if (brt < 127)
+                    b = b * (brt * scale);
+                else
+                    b = b / (brt * scale);
+
+                r = r > 255 ? 255 : r;
+                r = r < 0 ? 0 : r;
+
+                g = g > 255 ? 255 : g;
+                g = g < 0 ? 0 : g;
+
+                b = b > 255 ? 255 : b;
+                b = b < 0 ? 0 : b;
+            }
+
+            PreservedTagCellStyle.SelectionForeColor = Color.FromArgb(255, (int)r, (int)g, (int)b);
+
+
+            //PRESERVED TAG VALUE STYLE
+            PreservedTagValueCellStyle.BackColor = UnchangedCellStyle.BackColor;
+            PreservedTagValueCellStyle.SelectionBackColor = UnchangedCellStyle.SelectionBackColor;
+
+            scale = 1.5f;//****
+
+            backColor = UnchangedCellStyle.BackColor;
+            br = backColor.R;
+            bg = backColor.G;
+            bb = backColor.B;
+
+            bbrt = (br + bg + bb) / 3f;
+
+            foreColor = PreservedTagValuesForeColor;//****
+            r = foreColor.R;
+            g = foreColor.G;
+            b = foreColor.B;
+
+            brt = (r + g + b) / 3f;
+
+            if (Math.Abs(brt - bbrt) < 256 / 3f)
+            {
+                if (brt < 127)
+                    r = r * (brt * scale);
+                else
+                    r = r / (brt * scale);
+
+                if (brt < 127)
+                    g = g * (brt * scale);
+                else
+                    g = g / (brt * scale);
+
+                if (brt < 127)
+                    b = b * (brt * scale);
+                else
+                    b = b / (brt * scale);
+
+                r = r > 255 ? 255 : r;
+                r = r < 0 ? 0 : r;
+
+                g = g > 255 ? 255 : g;
+                g = g < 0 ? 0 : g;
+
+                b = b > 255 ? 255 : b;
+                b = b < 0 ? 0 : b;
+            }
+
+            PreservedTagValueCellStyle.ForeColor = Color.FromArgb(255, (int)r, (int)g, (int)b);
+
+
+            //SELECTION PRESERVED TAG STYLE
+            backColor = UnchangedCellStyle.SelectionBackColor;
+            br = backColor.R;
+            bg = backColor.G;
+            bb = backColor.B;
+
+            bbrt = (br + bg + bb) / 3f;
+
+            foreColor = PreservedTagValuesForeColor;//*****
+            r = foreColor.R;
+            g = foreColor.G;
+            b = foreColor.B;
+
+            brt = (r + g + b) / 3f;
+
+            if (Math.Abs(brt - bbrt) < 256 / 3f)
+            {
+                if (brt < 127)
+                    r = r * (brt * scale);
+                else
+                    r = r / (brt * scale);
+
+                if (brt < 127)
+                    g = g * (brt * scale);
+                else
+                    g = g / (brt * scale);
+
+                if (brt < 127)
+                    b = b * (brt * scale);
+                else
+                    b = b / (brt * scale);
+
+                r = r > 255 ? 255 : r;
+                r = r < 0 ? 0 : r;
+
+                g = g > 255 ? 255 : g;
+                g = g < 0 ? 0 : g;
+
+                b = b > 255 ? 255 : b;
+                b = b < 0 ? 0 : b;
+            }
+
+            PreservedTagValueCellStyle.SelectionForeColor = Color.FromArgb(255, (int)r, (int)g, (int)b);
         }
 
         // receive event notifications from MusicBee
@@ -5161,7 +5150,7 @@ namespace MusicBeePlugin
             switch (type)
             {
                 case NotificationType.PluginStartup:
-                    // perform startup initialisation
+                    // perform startup initialization
 
                     //ASR init
                     InitASR();

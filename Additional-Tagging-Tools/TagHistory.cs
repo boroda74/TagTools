@@ -74,7 +74,7 @@ namespace MusicBeePlugin
             Color sampleColor = SystemColors.HotTrack;
 
             //noBackupDataCellForeColor = sampleColor;
-            noBackupDataCellForeColor = GetWeightedColor(EmptyTextBox.ForeColor, sampleColor);//***
+            noBackupDataCellForeColor = GetWeightedColor(AccentColor, sampleColor);//***
 
 
 
