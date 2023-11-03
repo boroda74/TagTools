@@ -4626,7 +4626,7 @@ namespace MusicBeePlugin
 
             //Skin controls
             float accentWeight = 0.70f;
-            float dimmedWeight = 0.45f;
+            float dimmedWeight = 0.65f;
             float deepDimmedWeight = 0.137f;
             float veryDeepDimmedWeight = 0.07f;
 
@@ -4666,8 +4666,8 @@ namespace MusicBeePlugin
                 //Color AccentSelectedColorNotSkinned = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateModified, ElementComponent.ComponentForeground));
 
                 DimmedColor = GetWeightedColor(AccentColor, backColorNotSkinned, dimmedWeight);
-                DeepDimmedColor = GetWeightedColor(AccentColor, backColorNotSkinned, deepDimmedWeight);
-                VeryDeepDimmedColor = GetWeightedColor(AccentColor, backColorNotSkinned, veryDeepDimmedWeight);
+                DeepDimmedColor = GetWeightedColor(AccentColor, backColorNotSkinned, deepDimmedWeight);//*****
+                VeryDeepDimmedColor = GetWeightedColor(AccentColor, backColorNotSkinned, veryDeepDimmedWeight);//*****
 
                 BackFormColor = SystemColors.Control;
 
