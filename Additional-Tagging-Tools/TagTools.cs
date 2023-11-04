@@ -17,12 +17,42 @@ namespace ExtensionMethods
 {
     public static class ReadonlyControls
     {
-        public static void Replace<T1, T2>(this Dictionary<T1, T2> dictionary, T1 key, T2 value)
+        public static void AddReplace<T1, T2>(this Dictionary<T1, T2> dictionary, T1 key, T2 value)
         {
             if (dictionary.TryGetValue(key, out _))
                 dictionary.Remove(key);
 
             dictionary.Add(key, value);
+        }
+
+        public static void RemoveExisting<T1, T2>(this Dictionary<T1, T2> dictionary, T1 key)
+        {
+            if (dictionary.TryGetValue(key, out _))
+                dictionary.Remove(key);
+        }
+
+        public static bool Contains<T1, T2>(this Dictionary<T1, T2> dictionary, T1 key)
+        {
+            return dictionary.TryGetValue(key, out _);
+        }
+
+        public static void AddReplace<T1, T2>(this SortedDictionary<T1, T2> dictionary, T1 key, T2 value)
+        {
+            if (dictionary.TryGetValue(key, out _))
+                dictionary.Remove(key);
+
+            dictionary.Add(key, value);
+        }
+
+        public static void RemoveExisting<T1, T2>(this SortedDictionary<T1, T2> dictionary, T1 key)
+        {
+            if (dictionary.TryGetValue(key, out _))
+                dictionary.Remove(key);
+        }
+
+        public static bool Contains<T1, T2>(this SortedDictionary<T1, T2> dictionary, T1 key)
+        {
+            return dictionary.TryGetValue(key, out _);
         }
 
         public static void Enable(this Control control, bool state)
@@ -1522,7 +1552,7 @@ namespace MusicBeePlugin
 
             if (UpdatedTracksForBackupCount < MaxUpdatedTracksCount)
             {
-                if (!TracksNeedsToBeBackuped.TryGetValue(trackId, out _))
+                if (!TracksNeedsToBeBackuped.Contains(trackId))
                 {
                     TracksNeedsToBeBackuped.Add(trackId, true);
                     UpdatedTracksForBackupCount++;
@@ -4622,6 +4652,8 @@ namespace MusicBeePlugin
             //Splitter is invisible by default. Lets draw it.
             SplitterPenDashPattern = new float[] { 1f, 1f }; //Splitter is always drawn (even using system colors)
             SplitterPen = new Pen(DimmedHighlight, 2);
+            SplitterPen.DashPattern = SplitterPenDashPattern;
+
 
 
             //Skin controls

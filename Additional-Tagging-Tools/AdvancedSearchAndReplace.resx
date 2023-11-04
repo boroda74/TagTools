@@ -123,7 +123,10 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="splitContainer1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>2, 57</value>
+    <value>2, 78</value>
+  </data>
+  <data name="splitContainer1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="splitContainer1.Orientation" type="System.Windows.Forms.Orientation, System.Windows.Forms">
     <value>Horizontal</value>
@@ -139,10 +142,13 @@
     <value>NoControl</value>
   </data>
   <data name="applyToPlayingTrackCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>246, 150</value>
+    <value>302, 122</value>
+  </data>
+  <data name="applyToPlayingTrackCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="applyToPlayingTrackCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>124, 13</value>
+    <value>151, 17</value>
   </data>
   <data name="applyToPlayingTrackCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
     <value>171</value>
@@ -187,10 +193,10 @@
     <value>48</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+    <value>7, 17</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>766, 671</value>
+    <value>894, 747</value>
   </data>
   <data name="buttonSettings.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -202,10 +208,13 @@
     <value>NoControl</value>
   </data>
   <data name="buttonSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>402, 32</value>
+    <value>462, 45</value>
+  </data>
+  <data name="buttonSettings.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="buttonSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 23</value>
+    <value>25, 25</value>
   </data>
   <data name="buttonSettings.TabIndex" type="System.Int32, mscorlib">
     <value>169</value>
@@ -235,10 +244,13 @@
     <value>NoControl</value>
   </data>
   <data name="uncheckAllFiltersPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>581, 35</value>
+    <value>671, 49</value>
+  </data>
+  <data name="uncheckAllFiltersPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="uncheckAllFiltersPictureBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>16, 16</value>
+    <value>19, 21</value>
   </data>
   <data name="uncheckAllFiltersPictureBox.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>Zoom</value>
@@ -271,10 +283,13 @@
     <value>NoControl</value>
   </data>
   <data name="hotkeyPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>554, 35</value>
+    <value>639, 49</value>
+  </data>
+  <data name="hotkeyPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="hotkeyPictureBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>16, 16</value>
+    <value>19, 21</value>
   </data>
   <data name="hotkeyPictureBox.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>Zoom</value>
@@ -310,10 +325,13 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="functionIdPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>535, 35</value>
+    <value>617, 49</value>
+  </data>
+  <data name="functionIdPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="functionIdPictureBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>16, 16</value>
+    <value>19, 21</value>
   </data>
   <data name="functionIdPictureBox.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>Zoom</value>
@@ -349,10 +367,13 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="playlistPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>516, 35</value>
+    <value>595, 49</value>
+  </data>
+  <data name="playlistPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="playlistPictureBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>16, 16</value>
+    <value>19, 21</value>
   </data>
   <data name="playlistPictureBox.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>Zoom</value>
@@ -388,10 +409,13 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="userPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>497, 35</value>
+    <value>573, 49</value>
+  </data>
+  <data name="userPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="userPictureBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>16, 16</value>
+    <value>19, 21</value>
   </data>
   <data name="userPictureBox.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>Zoom</value>
@@ -427,10 +451,13 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="customizedPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>478, 35</value>
+    <value>551, 49</value>
+  </data>
+  <data name="customizedPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="customizedPictureBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>16, 16</value>
+    <value>19, 21</value>
   </data>
   <data name="customizedPictureBox.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>Zoom</value>
@@ -466,10 +493,13 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="predefinedPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>459, 35</value>
+    <value>529, 49</value>
+  </data>
+  <data name="predefinedPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="predefinedPictureBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>16, 16</value>
+    <value>19, 21</value>
   </data>
   <data name="predefinedPictureBox.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>Zoom</value>
@@ -505,10 +535,13 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="tickedOnlyPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>440, 35</value>
+    <value>506, 49</value>
+  </data>
+  <data name="tickedOnlyPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="tickedOnlyPictureBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>16, 16</value>
+    <value>19, 21</value>
   </data>
   <data name="tickedOnlyPictureBox.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>Zoom</value>
@@ -565,10 +598,13 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>Hotkey assigned</value>
   </data>
   <data name="filterComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>605, 33</value>
+    <value>699, 46</value>
+  </data>
+  <data name="filterComboBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="filterComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 21</value>
+    <value>184, 25</value>
   </data>
   <data name="filterComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -604,10 +640,13 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="clearSearchButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>373, 32</value>
+    <value>428, 45</value>
+  </data>
+  <data name="clearSearchButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="clearSearchButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 23</value>
+    <value>25, 25</value>
   </data>
   <data name="clearSearchButton.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -634,10 +673,13 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>TopLeft</value>
   </data>
   <data name="searchTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>35, 33</value>
+    <value>34, 46</value>
+  </data>
+  <data name="searchTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="searchTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>332, 20</value>
+    <value>387, 25</value>
   </data>
   <data name="searchTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -875,10 +917,13 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 33</value>
+    <value>4, 45</value>
+  </data>
+  <data name="pictureBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>21, 21</value>
+    <value>24, 24</value>
   </data>
   <data name="pictureBox1.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>StretchImage</value>
@@ -902,7 +947,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>Top, Left, Right</value>
   </data>
   <data name="autoApplyPresetslabel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+    <value>Segoe UI, 9.75pt, style=Bold</value>
   </data>
   <data name="autoApplyPresetslabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
@@ -911,10 +956,13 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="autoApplyPresetslabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 5</value>
+    <value>6, 7</value>
+  </data>
+  <data name="autoApplyPresetslabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="autoApplyPresetslabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>753, 30</value>
+    <value>878, 39</value>
   </data>
   <data name="autoApplyPresetslabel.TabIndex" type="System.Int32, mscorlib">
     <value>128</value>
@@ -935,8 +983,14 @@ Presets containing &lt;ALL TAGS&gt; pseudo-tag can't be auto-executed, nor can b
   <data name="&gt;&gt;autoApplyPresetslabel.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9.75pt</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>774, 600</value>
+    <value>902, 776</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Advanced Search &amp; Replace</value>
@@ -1677,10 +1731,13 @@ Presets containing &lt;ALL TAGS&gt; pseudo-tag can't be auto-executed, nor can b
     <value>NoControl</value>
   </data>
   <data name="applyToPlayingTrackCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>224, 149</value>
+    <value>276, 122</value>
+  </data>
+  <data name="applyToPlayingTrackCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="applyToPlayingTrackCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>27, 17</value>
+    <value>29, 21</value>
   </data>
   <data name="applyToPlayingTrackCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>156</value>
@@ -1713,10 +1770,13 @@ Presets containing &lt;ALL TAGS&gt; pseudo-tag can't be auto-executed, nor can b
     <value>NoControl</value>
   </data>
   <data name="favoriteCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>406, 150</value>
+    <value>495, 122</value>
+  </data>
+  <data name="favoriteCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="favoriteCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 13</value>
+    <value>123, 17</value>
   </data>
   <data name="favoriteCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
     <value>172</value>
@@ -1743,7 +1803,7 @@ Presets containing &lt;ALL TAGS&gt; pseudo-tag can't be auto-executed, nor can b
     <value>5</value>
   </data>
   <data name="buttonSelectPreservedTags.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+    <value>Top, Left, Right</value>
   </data>
   <data name="buttonSelectPreservedTags.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1755,13 +1815,13 @@ Presets containing &lt;ALL TAGS&gt; pseudo-tag can't be auto-executed, nor can b
     <value>NoControl</value>
   </data>
   <data name="buttonSelectPreservedTags.Location" type="System.Drawing.Point, System.Drawing">
-    <value>357, 2</value>
+    <value>414, 3</value>
   </data>
   <data name="buttonSelectPreservedTags.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 2, 0, 2</value>
+    <value>0, 3, 0, 3</value>
   </data>
   <data name="buttonSelectPreservedTags.Size" type="System.Drawing.Size, System.Drawing">
-    <value>20, 22</value>
+    <value>23, 27</value>
   </data>
   <data name="buttonSelectPreservedTags.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1794,16 +1854,16 @@ Presets containing &lt;ALL TAGS&gt; pseudo-tag can't be auto-executed, nor can b
     <value>NoControl</value>
   </data>
   <data name="labelPreserveTagValues.Location" type="System.Drawing.Point, System.Drawing">
-    <value>379, 7</value>
+    <value>439, 4</value>
   </data>
   <data name="labelPreserveTagValues.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 7, 0, 5</value>
+    <value>2, 4, 0, 4</value>
   </data>
   <data name="labelPreserveTagValues.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 3, 0, 0</value>
+    <value>0, 4, 0, 0</value>
   </data>
   <data name="labelPreserveTagValues.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 14</value>
+    <value>165, 21</value>
   </data>
   <data name="labelPreserveTagValues.TabIndex" type="System.Int32, mscorlib">
     <value>157</value>
@@ -1839,13 +1899,13 @@ Presets containing &lt;ALL TAGS&gt; pseudo-tag can't be auto-executed, nor can b
     <value>NoControl</value>
   </data>
   <data name="buttonProcessPreserveTags.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 2</value>
+    <value>0, 3</value>
   </data>
   <data name="buttonProcessPreserveTags.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 2, 0, 2</value>
+    <value>0, 3, 0, 3</value>
   </data>
   <data name="buttonProcessPreserveTags.Size" type="System.Drawing.Size, System.Drawing">
-    <value>118, 22</value>
+    <value>138, 28</value>
   </data>
   <data name="buttonProcessPreserveTags.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1877,10 +1937,13 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>TopLeft</value>
   </data>
   <data name="processPreserveTagsTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>121, 3</value>
+    <value>142, 4</value>
+  </data>
+  <data name="processPreserveTagsTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="processPreserveTagsTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>233, 20</value>
+    <value>268, 25</value>
   </data>
   <data name="processPreserveTagsTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>159</value>
@@ -1909,10 +1972,13 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>TopLeft</value>
   </data>
   <data name="preserveTagValuesTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>518, 3</value>
+    <value>608, 4</value>
+  </data>
+  <data name="preserveTagValuesTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="preserveTagValuesTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>234, 20</value>
+    <value>269, 25</value>
   </data>
   <data name="preserveTagValuesTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>158</value>
@@ -1933,13 +1999,16 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>4</value>
   </data>
   <data name="tableLayoutPanel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 278</value>
+    <value>4, 282</value>
+  </data>
+  <data name="tableLayoutPanel3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="tableLayoutPanel3.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>755, 26</value>
+    <value>881, 34</value>
   </data>
   <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
     <value>168</value>
@@ -1957,7 +2026,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>3</value>
   </data>
   <data name="tableLayoutPanel3.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="buttonSelectPreservedTags" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="labelPreserveTagValues" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="buttonProcessPreserveTags" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="processPreserveTagsTextBox" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="preserveTagValuesTextBox" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,50,00001,Absolute,20,AutoSize,0,Percent,50" /&gt;&lt;Rows Styles="Absolute,26" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="buttonSelectPreservedTags" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="labelPreserveTagValues" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="buttonProcessPreserveTags" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="processPreserveTagsTextBox" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="preserveTagValuesTextBox" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,50,00001,Absolute,23,AutoSize,0,Percent,50" /&gt;&lt;Rows Styles="Absolute,34" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="assignHotkeyCheckBoxLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -1969,10 +2038,13 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="assignHotkeyCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>27, 150</value>
+    <value>31, 122</value>
+  </data>
+  <data name="assignHotkeyCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="assignHotkeyCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 13</value>
+    <value>209, 17</value>
   </data>
   <data name="assignHotkeyCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
     <value>170</value>
@@ -2015,13 +2087,13 @@ You will need to reassign hotkey if the preset name is changed
     <value>NoControl</value>
   </data>
   <data name="customTextLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>2, 7</value>
+    <value>2, 9</value>
   </data>
   <data name="customTextLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 7, 0, 6</value>
+    <value>2, 9, 0, 8</value>
   </data>
   <data name="customTextLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 12</value>
+    <value>109, 16</value>
   </data>
   <data name="customTextLabel.TabIndex" type="System.Int32, mscorlib">
     <value>143</value>
@@ -2051,10 +2123,13 @@ You will need to reassign hotkey if the preset name is changed
     <value>TopLeft</value>
   </data>
   <data name="customTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>103, 3</value>
+    <value>121, 4</value>
+  </data>
+  <data name="customTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="customTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>271, 20</value>
+    <value>315, 25</value>
   </data>
   <data name="customTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>144</value>
@@ -2081,13 +2156,13 @@ You will need to reassign hotkey if the preset name is changed
     <value>NoControl</value>
   </data>
   <data name="customText2Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>379, 7</value>
+    <value>442, 9</value>
   </data>
   <data name="customText2Label.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 7, 0, 6</value>
+    <value>2, 9, 0, 8</value>
   </data>
   <data name="customText2Label.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 12</value>
+    <value>109, 16</value>
   </data>
   <data name="customText2Label.TabIndex" type="System.Int32, mscorlib">
     <value>147</value>
@@ -2117,10 +2192,13 @@ You will need to reassign hotkey if the preset name is changed
     <value>TopLeft</value>
   </data>
   <data name="customText2Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>480, 3</value>
+    <value>561, 4</value>
+  </data>
+  <data name="customText2Box.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="customText2Box.Size" type="System.Drawing.Size, System.Drawing">
-    <value>272, 20</value>
+    <value>316, 25</value>
   </data>
   <data name="customText2Box.TabIndex" type="System.Int32, mscorlib">
     <value>148</value>
@@ -2147,13 +2225,13 @@ You will need to reassign hotkey if the preset name is changed
     <value>NoControl</value>
   </data>
   <data name="customText3Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>2, 35</value>
+    <value>2, 42</value>
   </data>
   <data name="customText3Label.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 10, 0, 6</value>
+    <value>2, 9, 0, 8</value>
   </data>
   <data name="customText3Label.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 13</value>
+    <value>109, 16</value>
   </data>
   <data name="customText3Label.TabIndex" type="System.Int32, mscorlib">
     <value>145</value>
@@ -2183,13 +2261,13 @@ You will need to reassign hotkey if the preset name is changed
     <value>TopLeft</value>
   </data>
   <data name="customText3Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>103, 31</value>
+    <value>121, 37</value>
   </data>
   <data name="customText3Box.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 6, 3, 3</value>
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="customText3Box.Size" type="System.Drawing.Size, System.Drawing">
-    <value>271, 20</value>
+    <value>315, 25</value>
   </data>
   <data name="customText3Box.TabIndex" type="System.Int32, mscorlib">
     <value>146</value>
@@ -2216,13 +2294,13 @@ You will need to reassign hotkey if the preset name is changed
     <value>NoControl</value>
   </data>
   <data name="customText4Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>379, 35</value>
+    <value>442, 42</value>
   </data>
   <data name="customText4Label.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 10, 0, 6</value>
+    <value>2, 9, 0, 8</value>
   </data>
   <data name="customText4Label.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 13</value>
+    <value>109, 16</value>
   </data>
   <data name="customText4Label.TabIndex" type="System.Int32, mscorlib">
     <value>149</value>
@@ -2252,13 +2330,13 @@ You will need to reassign hotkey if the preset name is changed
     <value>TopLeft</value>
   </data>
   <data name="customText4Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>480, 31</value>
+    <value>561, 37</value>
   </data>
   <data name="customText4Box.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 6, 3, 3</value>
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="customText4Box.Size" type="System.Drawing.Size, System.Drawing">
-    <value>272, 20</value>
+    <value>316, 25</value>
   </data>
   <data name="customText4Box.TabIndex" type="System.Int32, mscorlib">
     <value>150</value>
@@ -2276,13 +2354,16 @@ You will need to reassign hotkey if the preset name is changed
     <value>7</value>
   </data>
   <data name="tableLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 222</value>
+    <value>4, 216</value>
+  </data>
+  <data name="tableLayoutPanel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="tableLayoutPanel2.RowCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>755, 58</value>
+    <value>881, 66</value>
   </data>
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>164</value>
@@ -2300,7 +2381,7 @@ You will need to reassign hotkey if the preset name is changed
     <value>5</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="customTextLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="customTextBox" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="customText2Label" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="customText2Box" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="customText3Label" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="customText3Box" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="customText4Label" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="customText4Box" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,100,Percent,50,Absolute,100,Percent,50" /&gt;&lt;Rows Styles="Absolute,25,Absolute,25,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="customTextLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="customTextBox" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="customText2Label" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="customText2Box" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="customText3Label" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="customText3Box" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="customText4Label" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="customText4Box" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,117,Percent,50,Absolute,117,Percent,50" /&gt;&lt;Rows Styles="Absolute,33,Absolute,33,Absolute,26" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="conditionCheckBoxLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -2312,10 +2393,13 @@ You will need to reassign hotkey if the preset name is changed
     <value>NoControl</value>
   </data>
   <data name="conditionCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>27, 127</value>
+    <value>31, 92</value>
+  </data>
+  <data name="conditionCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="conditionCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 13</value>
+    <value>331, 17</value>
   </data>
   <data name="conditionCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
     <value>169</value>
@@ -2348,10 +2432,13 @@ You will need to reassign hotkey if the preset name is changed
     <value>NoControl</value>
   </data>
   <data name="favoriteCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>388, 149</value>
+    <value>474, 122</value>
+  </data>
+  <data name="favoriteCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="favoriteCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>27, 17</value>
+    <value>29, 21</value>
   </data>
   <data name="favoriteCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>165</value>
@@ -2377,6 +2464,171 @@ You will need to reassign hotkey if the preset name is changed
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
+  <data name="parameterTag6List.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="parameterTag6List.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="parameterTag6List.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
+  </data>
+  <data name="parameterTag6List.Location" type="System.Drawing.Point, System.Drawing">
+    <value>678, 38</value>
+  </data>
+  <data name="parameterTag6List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="parameterTag6List.Size" type="System.Drawing.Size, System.Drawing">
+    <value>199, 25</value>
+  </data>
+  <data name="parameterTag6List.TabIndex" type="System.Int32, mscorlib">
+    <value>142</value>
+  </data>
+  <data name="&gt;&gt;parameterTag6List.Name" xml:space="preserve">
+    <value>parameterTag6List</value>
+  </data>
+  <data name="&gt;&gt;parameterTag6List.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;parameterTag6List.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;parameterTag6List.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="parameterTag5List.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="parameterTag5List.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="parameterTag5List.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
+  </data>
+  <data name="parameterTag5List.Location" type="System.Drawing.Point, System.Drawing">
+    <value>385, 38</value>
+  </data>
+  <data name="parameterTag5List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="parameterTag5List.Size" type="System.Drawing.Size, System.Drawing">
+    <value>197, 25</value>
+  </data>
+  <data name="parameterTag5List.TabIndex" type="System.Int32, mscorlib">
+    <value>140</value>
+  </data>
+  <data name="&gt;&gt;parameterTag5List.Name" xml:space="preserve">
+    <value>parameterTag5List</value>
+  </data>
+  <data name="&gt;&gt;parameterTag5List.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;parameterTag5List.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;parameterTag5List.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="parameterTag4List.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="parameterTag4List.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="parameterTag4List.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
+  </data>
+  <data name="parameterTag4List.Location" type="System.Drawing.Point, System.Drawing">
+    <value>92, 38</value>
+  </data>
+  <data name="parameterTag4List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="parameterTag4List.Size" type="System.Drawing.Size, System.Drawing">
+    <value>197, 25</value>
+  </data>
+  <data name="parameterTag4List.TabIndex" type="System.Int32, mscorlib">
+    <value>138</value>
+  </data>
+  <data name="&gt;&gt;parameterTag4List.Name" xml:space="preserve">
+    <value>parameterTag4List</value>
+  </data>
+  <data name="&gt;&gt;parameterTag4List.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;parameterTag4List.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;parameterTag4List.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="parameterTag3List.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="parameterTag3List.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="parameterTag3List.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
+  </data>
+  <data name="parameterTag3List.Location" type="System.Drawing.Point, System.Drawing">
+    <value>678, 4</value>
+  </data>
+  <data name="parameterTag3List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="parameterTag3List.Size" type="System.Drawing.Size, System.Drawing">
+    <value>199, 25</value>
+  </data>
+  <data name="parameterTag3List.TabIndex" type="System.Int32, mscorlib">
+    <value>136</value>
+  </data>
+  <data name="&gt;&gt;parameterTag3List.Name" xml:space="preserve">
+    <value>parameterTag3List</value>
+  </data>
+  <data name="&gt;&gt;parameterTag3List.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;parameterTag3List.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;parameterTag3List.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="parameterTag2List.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="parameterTag2List.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="parameterTag2List.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
+  </data>
+  <data name="parameterTag2List.Location" type="System.Drawing.Point, System.Drawing">
+    <value>385, 4</value>
+  </data>
+  <data name="parameterTag2List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="parameterTag2List.Size" type="System.Drawing.Size, System.Drawing">
+    <value>197, 25</value>
+  </data>
+  <data name="parameterTag2List.TabIndex" type="System.Int32, mscorlib">
+    <value>134</value>
+  </data>
+  <data name="&gt;&gt;parameterTag2List.Name" xml:space="preserve">
+    <value>parameterTag2List</value>
+  </data>
+  <data name="&gt;&gt;parameterTag2List.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;parameterTag2List.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;parameterTag2List.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
   <data name="parameterTagList.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
@@ -2387,10 +2639,13 @@ You will need to reassign hotkey if the preset name is changed
     <value>TopLeft</value>
   </data>
   <data name="parameterTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>78, 3</value>
+    <value>92, 4</value>
+  </data>
+  <data name="parameterTagList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="parameterTagList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 21</value>
+    <value>197, 25</value>
   </data>
   <data name="parameterTagList.TabIndex" type="System.Int32, mscorlib">
     <value>132</value>
@@ -2405,7 +2660,7 @@ You will need to reassign hotkey if the preset name is changed
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;parameterTagList.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>5</value>
   </data>
   <data name="labelTag.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2420,13 +2675,13 @@ You will need to reassign hotkey if the preset name is changed
     <value>NoControl</value>
   </data>
   <data name="labelTag.Location" type="System.Drawing.Point, System.Drawing">
-    <value>2, 7</value>
+    <value>2, 9</value>
   </data>
   <data name="labelTag.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 7, 0, 7</value>
+    <value>2, 9, 0, 9</value>
   </data>
   <data name="labelTag.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 12</value>
+    <value>77, 16</value>
   </data>
   <data name="labelTag.TabIndex" type="System.Int32, mscorlib">
     <value>131</value>
@@ -2450,7 +2705,7 @@ You will need to reassign hotkey if the preset name is changed
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;labelTag.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>6</value>
   </data>
   <data name="labelTag2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2465,13 +2720,13 @@ You will need to reassign hotkey if the preset name is changed
     <value>NoControl</value>
   </data>
   <data name="labelTag2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>253, 7</value>
+    <value>295, 9</value>
   </data>
   <data name="labelTag2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 7, 0, 7</value>
+    <value>2, 9, 0, 9</value>
   </data>
   <data name="labelTag2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 12</value>
+    <value>77, 16</value>
   </data>
   <data name="labelTag2.TabIndex" type="System.Int32, mscorlib">
     <value>133</value>
@@ -2489,37 +2744,7 @@ You will need to reassign hotkey if the preset name is changed
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;labelTag2.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="parameterTag2List.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="parameterTag2List.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="parameterTag2List.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>TopLeft</value>
-  </data>
-  <data name="parameterTag2List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>329, 3</value>
-  </data>
-  <data name="parameterTag2List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 21</value>
-  </data>
-  <data name="parameterTag2List.TabIndex" type="System.Int32, mscorlib">
-    <value>134</value>
-  </data>
-  <data name="&gt;&gt;parameterTag2List.Name" xml:space="preserve">
-    <value>parameterTag2List</value>
-  </data>
-  <data name="&gt;&gt;parameterTag2List.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;parameterTag2List.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;parameterTag2List.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>7</value>
   </data>
   <data name="labelTag3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2534,13 +2759,13 @@ You will need to reassign hotkey if the preset name is changed
     <value>NoControl</value>
   </data>
   <data name="labelTag3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>504, 7</value>
+    <value>588, 9</value>
   </data>
   <data name="labelTag3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 7, 0, 7</value>
+    <value>2, 9, 0, 9</value>
   </data>
   <data name="labelTag3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 12</value>
+    <value>77, 16</value>
   </data>
   <data name="labelTag3.TabIndex" type="System.Int32, mscorlib">
     <value>135</value>
@@ -2558,37 +2783,7 @@ You will need to reassign hotkey if the preset name is changed
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;labelTag3.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="parameterTag3List.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="parameterTag3List.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="parameterTag3List.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>TopLeft</value>
-  </data>
-  <data name="parameterTag3List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>580, 3</value>
-  </data>
-  <data name="parameterTag3List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 21</value>
-  </data>
-  <data name="parameterTag3List.TabIndex" type="System.Int32, mscorlib">
-    <value>136</value>
-  </data>
-  <data name="&gt;&gt;parameterTag3List.Name" xml:space="preserve">
-    <value>parameterTag3List</value>
-  </data>
-  <data name="&gt;&gt;parameterTag3List.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;parameterTag3List.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;parameterTag3List.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>8</value>
   </data>
   <data name="labelTag4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2603,13 +2798,13 @@ You will need to reassign hotkey if the preset name is changed
     <value>NoControl</value>
   </data>
   <data name="labelTag4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>2, 33</value>
+    <value>2, 43</value>
   </data>
   <data name="labelTag4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 7, 0, 7</value>
+    <value>2, 9, 0, 9</value>
   </data>
   <data name="labelTag4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 13</value>
+    <value>77, 16</value>
   </data>
   <data name="labelTag4.TabIndex" type="System.Int32, mscorlib">
     <value>137</value>
@@ -2627,37 +2822,7 @@ You will need to reassign hotkey if the preset name is changed
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;labelTag4.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="parameterTag4List.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="parameterTag4List.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="parameterTag4List.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>TopLeft</value>
-  </data>
-  <data name="parameterTag4List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>78, 29</value>
-  </data>
-  <data name="parameterTag4List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 21</value>
-  </data>
-  <data name="parameterTag4List.TabIndex" type="System.Int32, mscorlib">
-    <value>138</value>
-  </data>
-  <data name="&gt;&gt;parameterTag4List.Name" xml:space="preserve">
-    <value>parameterTag4List</value>
-  </data>
-  <data name="&gt;&gt;parameterTag4List.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;parameterTag4List.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;parameterTag4List.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="labelTag5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2672,13 +2837,13 @@ You will need to reassign hotkey if the preset name is changed
     <value>NoControl</value>
   </data>
   <data name="labelTag5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>253, 33</value>
+    <value>295, 43</value>
   </data>
   <data name="labelTag5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 7, 0, 7</value>
+    <value>2, 9, 0, 9</value>
   </data>
   <data name="labelTag5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 13</value>
+    <value>77, 16</value>
   </data>
   <data name="labelTag5.TabIndex" type="System.Int32, mscorlib">
     <value>139</value>
@@ -2696,37 +2861,7 @@ You will need to reassign hotkey if the preset name is changed
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;labelTag5.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="parameterTag5List.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="parameterTag5List.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="parameterTag5List.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>TopLeft</value>
-  </data>
-  <data name="parameterTag5List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>329, 29</value>
-  </data>
-  <data name="parameterTag5List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 21</value>
-  </data>
-  <data name="parameterTag5List.TabIndex" type="System.Int32, mscorlib">
-    <value>140</value>
-  </data>
-  <data name="&gt;&gt;parameterTag5List.Name" xml:space="preserve">
-    <value>parameterTag5List</value>
-  </data>
-  <data name="&gt;&gt;parameterTag5List.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;parameterTag5List.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;parameterTag5List.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="labelTag6.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2741,13 +2876,13 @@ You will need to reassign hotkey if the preset name is changed
     <value>NoControl</value>
   </data>
   <data name="labelTag6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>504, 33</value>
+    <value>588, 43</value>
   </data>
   <data name="labelTag6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 7, 0, 7</value>
+    <value>2, 9, 0, 9</value>
   </data>
   <data name="labelTag6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 13</value>
+    <value>77, 16</value>
   </data>
   <data name="labelTag6.TabIndex" type="System.Int32, mscorlib">
     <value>141</value>
@@ -2765,46 +2900,19 @@ You will need to reassign hotkey if the preset name is changed
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;labelTag6.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="parameterTag6List.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="parameterTag6List.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="parameterTag6List.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>TopLeft</value>
-  </data>
-  <data name="parameterTag6List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>580, 29</value>
-  </data>
-  <data name="parameterTag6List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 21</value>
-  </data>
-  <data name="parameterTag6List.TabIndex" type="System.Int32, mscorlib">
-    <value>142</value>
-  </data>
-  <data name="&gt;&gt;parameterTag6List.Name" xml:space="preserve">
-    <value>parameterTag6List</value>
-  </data>
-  <data name="&gt;&gt;parameterTag6List.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;parameterTag6List.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;parameterTag6List.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 170</value>
+    <value>4, 148</value>
+  </data>
+  <data name="tableLayoutPanel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>755, 54</value>
+    <value>881, 68</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>163</value>
@@ -2822,7 +2930,7 @@ You will need to reassign hotkey if the preset name is changed
     <value>8</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="parameterTagList" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelTag" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelTag2" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="parameterTag2List" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="labelTag3" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="parameterTag3List" Row="0" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="labelTag4" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="parameterTag4List" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelTag5" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="parameterTag5List" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="labelTag6" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="parameterTag6List" Row="1" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,75,Percent,33,33333,Absolute,75,Percent,33,33334,Absolute,75,Percent,33,33334" /&gt;&lt;Rows Styles="Absolute,26,Absolute,26,Absolute,20,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="parameterTag6List" Row="1" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="parameterTag5List" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="parameterTag4List" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="parameterTag3List" Row="0" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="parameterTag2List" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="parameterTagList" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelTag" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelTag2" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="labelTag3" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="labelTag4" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelTag5" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="labelTag6" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,88,Percent,33,33333,Absolute,88,Percent,33,33334,Absolute,88,Percent,33,33334" /&gt;&lt;Rows Styles="Absolute,34,Absolute,34,Absolute,26,Absolute,26" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="groupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left, Right</value>
@@ -2837,7 +2945,10 @@ You will need to reassign hotkey if the preset name is changed
     <value>TopLeft</value>
   </data>
   <data name="descriptionBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 16</value>
+    <value>5, 21</value>
+  </data>
+  <data name="descriptionBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="descriptionBox.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2846,7 +2957,7 @@ You will need to reassign hotkey if the preset name is changed
     <value>Vertical</value>
   </data>
   <data name="descriptionBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>747, 41</value>
+    <value>871, 52</value>
   </data>
   <data name="descriptionBox.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2867,10 +2978,16 @@ You will need to reassign hotkey if the preset name is changed
     <value>TopLeft</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 304</value>
+    <value>4, 316</value>
+  </data>
+  <data name="groupBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="groupBox1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>755, 63</value>
+    <value>881, 82</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>151</value>
@@ -2903,10 +3020,13 @@ You will need to reassign hotkey if the preset name is changed
     <value>NoControl</value>
   </data>
   <data name="conditionCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 126</value>
+    <value>6, 92</value>
+  </data>
+  <data name="conditionCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="conditionCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>27, 17</value>
+    <value>29, 21</value>
   </data>
   <data name="conditionCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>129</value>
@@ -2936,13 +3056,16 @@ You will need to reassign hotkey if the preset name is changed
     <value>False</value>
   </data>
   <data name="presetList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 5</value>
+    <value>6, 7</value>
+  </data>
+  <data name="presetList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="presetList.ScrollAlwaysVisible" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="presetList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>751, 114</value>
+    <value>876, 72</value>
   </data>
   <data name="presetList.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2972,10 +3095,13 @@ You will need to reassign hotkey if the preset name is changed
     <value>NoControl</value>
   </data>
   <data name="assignHotkeyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 149</value>
+    <value>6, 122</value>
+  </data>
+  <data name="assignHotkeyCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="assignHotkeyCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>27, 17</value>
+    <value>29, 21</value>
   </data>
   <data name="assignHotkeyCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>152</value>
@@ -3014,10 +3140,13 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>NoControl</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>459, 127</value>
+    <value>536, 92</value>
+  </data>
+  <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 13</value>
+    <value>177, 17</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>153</value>
@@ -3047,10 +3176,13 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>TopLeft</value>
   </data>
   <data name="playlistComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>300, 123</value>
+    <value>370, 87</value>
+  </data>
+  <data name="playlistComboBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="playlistComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 21</value>
+    <value>158, 25</value>
   </data>
   <data name="playlistComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>130</value>
@@ -3074,10 +3206,13 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>TopLeft</value>
   </data>
   <data name="idTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>610, 123</value>
+    <value>721, 87</value>
+  </data>
+  <data name="idTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="idTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 20</value>
+    <value>130, 25</value>
   </data>
   <data name="idTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>154</value>
@@ -3107,10 +3242,13 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>NoControl</value>
   </data>
   <data name="userPresetPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>681, 151</value>
+    <value>794, 123</value>
+  </data>
+  <data name="userPresetPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="userPresetPictureBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>13, 13</value>
+    <value>15, 17</value>
   </data>
   <data name="userPresetPictureBox.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>Zoom</value>
@@ -3143,10 +3281,13 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>NoControl</value>
   </data>
   <data name="clearIdButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>728, 122</value>
+    <value>857, 87</value>
+  </data>
+  <data name="clearIdButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="clearIdButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>22, 22</value>
+    <value>25, 25</value>
   </data>
   <data name="clearIdButton.TabIndex" type="System.Int32, mscorlib">
     <value>155</value>
@@ -3176,10 +3317,13 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>NoControl</value>
   </data>
   <data name="customizedPresetPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>546, 151</value>
+    <value>637, 123</value>
+  </data>
+  <data name="customizedPresetPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="customizedPresetPictureBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>13, 13</value>
+    <value>15, 17</value>
   </data>
   <data name="customizedPresetPictureBox.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>Zoom</value>
@@ -3212,10 +3356,13 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>NoControl</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>694, 150</value>
+    <value>810, 122</value>
+  </data>
+  <data name="label3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 13</value>
+    <value>76, 17</value>
   </data>
   <data name="label3.TabIndex" type="System.Int32, mscorlib">
     <value>159</value>
@@ -3251,10 +3398,13 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>NoControl</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>560, 150</value>
+    <value>653, 122</value>
+  </data>
+  <data name="label4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 13</value>
+    <value>123, 17</value>
   </data>
   <data name="label4.TabIndex" type="System.Int32, mscorlib">
     <value>160</value>
@@ -3578,13 +3728,16 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>TopLeft</value>
   </data>
   <data name="previewTable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 77</value>
+    <value>7, 100</value>
+  </data>
+  <data name="previewTable.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="previewTable.RowHeadersWidth" type="System.Int32, mscorlib">
     <value>51</value>
   </data>
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>749, 155</value>
+    <value>874, 149</value>
   </data>
   <data name="previewTable.TabIndex" type="System.Int32, mscorlib">
     <value>59</value>
@@ -3614,10 +3767,13 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>NoControl</value>
   </data>
   <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>54, -3</value>
+    <value>47, -4</value>
+  </data>
+  <data name="label7.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 13</value>
+    <value>160, 17</value>
   </data>
   <data name="label7.TabIndex" type="System.Int32, mscorlib">
     <value>57</value>
@@ -3647,10 +3803,13 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>NoControl</value>
   </data>
   <data name="buttonSaveClose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 14</value>
+    <value>8, 18</value>
+  </data>
+  <data name="buttonSaveClose.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="buttonSaveClose.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 23</value>
+    <value>114, 25</value>
   </data>
   <data name="buttonSaveClose.TabIndex" type="System.Int32, mscorlib">
     <value>54</value>
@@ -3682,10 +3841,13 @@ Ctrl-click to save preset definitions without closing this window</value>
     <value>NoControl</value>
   </data>
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>111, 43</value>
+    <value>130, 51</value>
+  </data>
+  <data name="buttonOK.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="buttonOK.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 23</value>
+    <value>114, 25</value>
   </data>
   <data name="buttonOK.TabIndex" type="System.Int32, mscorlib">
     <value>51</value>
@@ -3718,10 +3880,13 @@ Ctrl-click to save preset definitions without closing this window</value>
     <value>NoControl</value>
   </data>
   <data name="buttonPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 43</value>
+    <value>8, 51</value>
+  </data>
+  <data name="buttonPreview.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="buttonPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 23</value>
+    <value>114, 25</value>
   </data>
   <data name="buttonPreview.TabIndex" type="System.Int32, mscorlib">
     <value>50</value>
@@ -3760,10 +3925,13 @@ Ctrl-click to save preset definitions without closing this window</value>
     <value>NoControl</value>
   </data>
   <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>111, 14</value>
+    <value>130, 18</value>
+  </data>
+  <data name="buttonClose.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="buttonClose.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 23</value>
+    <value>114, 25</value>
   </data>
   <data name="buttonClose.TabIndex" type="System.Int32, mscorlib">
     <value>45</value>
@@ -3790,10 +3958,16 @@ Ctrl-click to save preset definitions without closing this window</value>
     <value>TopLeft</value>
   </data>
   <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>540, 0</value>
+    <value>630, 5</value>
+  </data>
+  <data name="groupBox3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="groupBox3.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 75</value>
+    <value>252, 86</value>
   </data>
   <data name="groupBox3.TabIndex" type="System.Int32, mscorlib">
     <value>58</value>
@@ -3817,10 +3991,13 @@ Ctrl-click to save preset definitions without closing this window</value>
     <value>NoControl</value>
   </data>
   <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>207, -3</value>
+    <value>241, -4</value>
+  </data>
+  <data name="label6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 13</value>
+    <value>133, 17</value>
   </data>
   <data name="label6.TabIndex" type="System.Int32, mscorlib">
     <value>56</value>
@@ -3843,6 +4020,42 @@ Ctrl-click to save preset definitions without closing this window</value>
   <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="buttonExportCustom.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
+  </data>
+  <data name="buttonExportCustom.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="buttonExportCustom.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 51</value>
+  </data>
+  <data name="buttonExportCustom.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="buttonExportCustom.Size" type="System.Drawing.Size, System.Drawing">
+    <value>114, 25</value>
+  </data>
+  <data name="buttonExportCustom.TabIndex" type="System.Int32, mscorlib">
+    <value>44</value>
+  </data>
+  <data name="buttonExportCustom.Text" xml:space="preserve">
+    <value>Export User...</value>
+  </data>
+  <data name="buttonExportCustom.ToolTip" xml:space="preserve">
+    <value>Export all user presets</value>
+  </data>
+  <data name="&gt;&gt;buttonExportCustom.Name" xml:space="preserve">
+    <value>buttonExportCustom</value>
+  </data>
+  <data name="&gt;&gt;buttonExportCustom.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonExportCustom.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;buttonExportCustom.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="buttonExport.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
   </data>
@@ -3850,10 +4063,13 @@ Ctrl-click to save preset definitions without closing this window</value>
     <value>NoControl</value>
   </data>
   <data name="buttonExport.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 14</value>
+    <value>8, 18</value>
+  </data>
+  <data name="buttonExport.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="buttonExport.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 23</value>
+    <value>114, 25</value>
   </data>
   <data name="buttonExport.TabIndex" type="System.Int32, mscorlib">
     <value>39</value>
@@ -3874,7 +4090,7 @@ Ctrl-click to save preset definitions without closing this window</value>
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;buttonExport.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="buttonDeleteAll.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
@@ -3883,10 +4099,13 @@ Ctrl-click to save preset definitions without closing this window</value>
     <value>NoControl</value>
   </data>
   <data name="buttonDeleteAll.Location" type="System.Drawing.Point, System.Drawing">
-    <value>423, 14</value>
+    <value>493, 18</value>
+  </data>
+  <data name="buttonDeleteAll.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="buttonDeleteAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 23</value>
+    <value>114, 25</value>
   </data>
   <data name="buttonDeleteAll.TabIndex" type="System.Int32, mscorlib">
     <value>42</value>
@@ -3907,7 +4126,7 @@ Ctrl-click to save preset definitions without closing this window</value>
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;buttonDeleteAll.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="buttonDelete.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
@@ -3916,10 +4135,13 @@ Ctrl-click to save preset definitions without closing this window</value>
     <value>NoControl</value>
   </data>
   <data name="buttonDelete.Location" type="System.Drawing.Point, System.Drawing">
-    <value>423, 43</value>
+    <value>493, 51</value>
+  </data>
+  <data name="buttonDelete.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="buttonDelete.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 23</value>
+    <value>114, 25</value>
   </data>
   <data name="buttonDelete.TabIndex" type="System.Int32, mscorlib">
     <value>49</value>
@@ -3940,7 +4162,7 @@ Ctrl-click to save preset definitions without closing this window</value>
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;buttonDelete.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="buttonEdit.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
@@ -3949,10 +4171,13 @@ Ctrl-click to save preset definitions without closing this window</value>
     <value>NoControl</value>
   </data>
   <data name="buttonEdit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>319, 43</value>
+    <value>372, 51</value>
+  </data>
+  <data name="buttonEdit.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="buttonEdit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 23</value>
+    <value>114, 25</value>
   </data>
   <data name="buttonEdit.TabIndex" type="System.Int32, mscorlib">
     <value>48</value>
@@ -3970,7 +4195,7 @@ Ctrl-click to save preset definitions without closing this window</value>
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;buttonEdit.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="buttonCreate.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
@@ -3979,10 +4204,13 @@ Ctrl-click to save preset definitions without closing this window</value>
     <value>NoControl</value>
   </data>
   <data name="buttonCreate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>111, 43</value>
+    <value>130, 51</value>
+  </data>
+  <data name="buttonCreate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="buttonCreate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 23</value>
+    <value>114, 25</value>
   </data>
   <data name="buttonCreate.TabIndex" type="System.Int32, mscorlib">
     <value>46</value>
@@ -4000,7 +4228,7 @@ Ctrl-click to save preset definitions without closing this window</value>
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;buttonCreate.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="buttonImport.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
@@ -4009,10 +4237,13 @@ Ctrl-click to save preset definitions without closing this window</value>
     <value>NoControl</value>
   </data>
   <data name="buttonImport.Location" type="System.Drawing.Point, System.Drawing">
-    <value>111, 14</value>
+    <value>130, 18</value>
+  </data>
+  <data name="buttonImport.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="buttonImport.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 23</value>
+    <value>114, 25</value>
   </data>
   <data name="buttonImport.TabIndex" type="System.Int32, mscorlib">
     <value>43</value>
@@ -4033,7 +4264,7 @@ Ctrl-click to save preset definitions without closing this window</value>
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;buttonImport.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="buttonImportNew.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
@@ -4042,10 +4273,13 @@ Ctrl-click to save preset definitions without closing this window</value>
     <value>NoControl</value>
   </data>
   <data name="buttonImportNew.Location" type="System.Drawing.Point, System.Drawing">
-    <value>215, 14</value>
+    <value>251, 18</value>
+  </data>
+  <data name="buttonImportNew.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="buttonImportNew.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 23</value>
+    <value>114, 25</value>
   </data>
   <data name="buttonImportNew.TabIndex" type="System.Int32, mscorlib">
     <value>40</value>
@@ -4067,7 +4301,7 @@ If you have deleted some predefined presets, then they won't be reinstalled</val
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;buttonImportNew.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="buttonImportAll.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
@@ -4076,10 +4310,13 @@ If you have deleted some predefined presets, then they won't be reinstalled</val
     <value>NoControl</value>
   </data>
   <data name="buttonImportAll.Location" type="System.Drawing.Point, System.Drawing">
-    <value>319, 14</value>
+    <value>372, 18</value>
+  </data>
+  <data name="buttonImportAll.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="buttonImportAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 23</value>
+    <value>114, 25</value>
   </data>
   <data name="buttonImportAll.TabIndex" type="System.Int32, mscorlib">
     <value>41</value>
@@ -4101,39 +4338,6 @@ If you have deleted some preinstalled presets, they will be reinstalled</value>
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;buttonImportAll.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="buttonExportCustom.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>TopLeft</value>
-  </data>
-  <data name="buttonExportCustom.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="buttonExportCustom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 43</value>
-  </data>
-  <data name="buttonExportCustom.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 23</value>
-  </data>
-  <data name="buttonExportCustom.TabIndex" type="System.Int32, mscorlib">
-    <value>44</value>
-  </data>
-  <data name="buttonExportCustom.Text" xml:space="preserve">
-    <value>Export User...</value>
-  </data>
-  <data name="buttonExportCustom.ToolTip" xml:space="preserve">
-    <value>Export all user presets</value>
-  </data>
-  <data name="&gt;&gt;buttonExportCustom.Name" xml:space="preserve">
-    <value>buttonExportCustom</value>
-  </data>
-  <data name="&gt;&gt;buttonExportCustom.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;buttonExportCustom.Parent" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="&gt;&gt;buttonExportCustom.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
   <data name="buttonCopy.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
@@ -4143,10 +4347,13 @@ If you have deleted some preinstalled presets, they will be reinstalled</value>
     <value>NoControl</value>
   </data>
   <data name="buttonCopy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>215, 43</value>
+    <value>251, 51</value>
+  </data>
+  <data name="buttonCopy.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="buttonCopy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 23</value>
+    <value>114, 25</value>
   </data>
   <data name="buttonCopy.TabIndex" type="System.Int32, mscorlib">
     <value>47</value>
@@ -4173,10 +4380,16 @@ If you have deleted some preinstalled presets, they will be reinstalled</value>
     <value>TopLeft</value>
   </data>
   <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 0</value>
+    <value>7, 5</value>
+  </data>
+  <data name="groupBox2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="groupBox2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>528, 75</value>
+    <value>616, 86</value>
   </data>
   <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>57</value>
@@ -4209,10 +4422,13 @@ If you have deleted some preinstalled presets, they will be reinstalled</value>
     <value>200</value>
   </data>
   <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>761, 612</value>
+    <value>888, 667</value>
   </data>
   <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
-    <value>371</value>
+    <value>403</value>
+  </data>
+  <data name="splitContainer1.SplitterWidth" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
   <data name="splitContainer1.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>

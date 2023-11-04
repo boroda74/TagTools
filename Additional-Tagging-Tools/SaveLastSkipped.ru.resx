@@ -128,12 +128,9 @@
   <data name="buttonOK.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="buttonOK.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>341, 66</value>
+    <value>397, 76</value>
   </data>
   <data name="buttonOK.Text" xml:space="preserve">
     <value>ОК</value>
@@ -147,17 +144,14 @@
   <data name="buttonCancel.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="buttonCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>422, 66</value>
+    <value>493, 76</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Отмена</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>511, 99</value>
+    <value>592, 109</value>
   </data>
   <data name="saveLastSkippedCheckBoxLabel.Error" xml:space="preserve">
     <value />
@@ -169,7 +163,7 @@
     <value>0</value>
   </data>
   <data name="saveLastSkippedCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>232, 13</value>
+    <value>272, 17</value>
   </data>
   <data name="saveLastSkippedCheckBoxLabel.Text" xml:space="preserve">
     <value>Сохранять дату последнего пропуска трека:</value>
@@ -184,7 +178,7 @@
     <value>0</value>
   </data>
   <data name="lastSkippedDateFormatTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>269, 39</value>
+    <value>316, 43</value>
   </data>
   <data name="label1.Error" xml:space="preserve">
     <value />
@@ -195,14 +189,8 @@
   <data name="label1.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>28, 42</value>
-  </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>129, 13</value>
+    <value>146, 17</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>Формат даты/времени:</value>
@@ -229,6 +217,6 @@
     <value>0</value>
   </data>
   <data name="lastSkippedTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>269, 12</value>
+    <value>316, 10</value>
   </data>
 </root>

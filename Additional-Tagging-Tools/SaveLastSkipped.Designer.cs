@@ -116,6 +116,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.saveLastSkippedCheckBoxLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("saveLastSkippedCheckBoxLabel.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.saveLastSkippedCheckBoxLabel, ((int)(resources.GetObject("saveLastSkippedCheckBoxLabel.IconPadding"))));
             this.saveLastSkippedCheckBoxLabel.Name = "saveLastSkippedCheckBoxLabel";
+            this.saveLastSkippedCheckBoxLabel.Click += new System.EventHandler(this.saveLastSkippedCheckBoxLabel_Click);
             // 
             // SaveLastSkippedCommand
             // 

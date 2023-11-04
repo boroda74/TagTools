@@ -119,53 +119,56 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="autobackupFolderTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>139, 12</value>
+    <value>163, 12</value>
   </data>
   <data name="autobackupFolderTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>587, 20</value>
+    <value>687, 25</value>
   </data>
   <data name="browseButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>732, 11</value>
+    <value>858, 11</value>
   </data>
   <data name="browseButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>85, 23</value>
+    <value>95, 25</value>
   </data>
   <data name="browseButton.Text" xml:space="preserve">
     <value>Просмотр...</value>
   </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 16</value>
+  </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 13</value>
+    <value>141, 17</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>Папка автоархивации:</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>321, 43</value>
+    <value>398, 55</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 13</value>
+    <value>384, 17</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>Префикс имен файлов для автоматически созданных архивов:</value>
   </data>
   <data name="autobackupPrefixTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>656, 39</value>
+    <value>792, 51</value>
   </data>
   <data name="autobackupPrefixTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>161, 20</value>
+    <value>161, 25</value>
   </data>
   <data name="autobackupCheckBox.ToolTip" xml:space="preserve">
     <value>Автоархивирование будет пропущено, если содержание текущей библиотеки и какие-либо теги 
 не изменилсь с момента последнего ручного или автоматического архивирования. </value>
   </data>
   <data name="autobackupNumericUpDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>170, 40</value>
+    <value>204, 52</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>263, 43</value>
+    <value>313, 55</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 13</value>
+    <value>45, 17</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>минут.</value>
@@ -174,37 +177,37 @@
     <value>Только автоматические архивы текущей библиотеки будут удаляться</value>
   </data>
   <data name="numberOfDaysNumericUpDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>251, 63</value>
+    <value>299, 81</value>
   </data>
   <data name="autodeleteManyCheckBox.ToolTip" xml:space="preserve">
     <value>Только автоматические архивы текущей библиотеки будут удаляться</value>
   </data>
   <data name="numberOfFilesNumericUpDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>459, 86</value>
+    <value>551, 111</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>344, 65</value>
+    <value>411, 83</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 13</value>
+    <value>39, 17</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
     <value>дней.</value>
   </data>
   <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>732, 160</value>
+    <value>858, 214</value>
   </data>
   <data name="buttonClose.Size" type="System.Drawing.Size, System.Drawing">
-    <value>85, 23</value>
+    <value>95, 25</value>
   </data>
   <data name="buttonClose.Text" xml:space="preserve">
     <value>Отмена</value>
   </data>
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>641, 160</value>
+    <value>755, 214</value>
   </data>
   <data name="buttonOK.Size" type="System.Drawing.Size, System.Drawing">
-    <value>85, 23</value>
+    <value>95, 25</value>
   </data>
   <data name="backupArtworksCheckBox.ToolTip" xml:space="preserve">
     <value>ВНИМАНИЕ! Эта опция затрагивает, как ручное, так и автоматическое архивирование.</value>
@@ -214,7 +217,7 @@
 Иногда предположение названия библиотеки работает неверно.</value>
   </data>
   <data name="autobackupCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 13</value>
+    <value>151, 17</value>
   </data>
   <data name="autobackupCheckBoxLabel.Text" xml:space="preserve">
     <value>Автоархивация каждые:</value>
@@ -225,7 +228,7 @@
 </value>
   </data>
   <data name="autodeleteOldCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>211, 13</value>
+    <value>246, 17</value>
   </data>
   <data name="autodeleteOldCheckBoxLabel.Text" xml:space="preserve">
     <value>Автоматически удалять архивы старше:</value>
@@ -234,7 +237,7 @@
     <value>Только автоматические архивы текущей библиотеки будут удаляться</value>
   </data>
   <data name="autodeleteManyCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>419, 13</value>
+    <value>498, 17</value>
   </data>
   <data name="autodeleteManyCheckBoxLabel.Text" xml:space="preserve">
     <value>Автоматически удалять старые архивы, если общее архивов число больше, чем:</value>
@@ -243,7 +246,7 @@
     <value>Только автоматические архивы текущей библиотеки будут удаляться</value>
   </data>
   <data name="dontTryToGuessLibraryNameCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>258, 13</value>
+    <value>300, 17</value>
   </data>
   <data name="dontTryToGuessLibraryNameCheckBoxLabel.Text" xml:space="preserve">
     <value>Не пытаться предполагать название библиотеки</value>
@@ -254,7 +257,7 @@
 </value>
   </data>
   <data name="backupArtworksCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>280, 13</value>
+    <value>335, 17</value>
   </data>
   <data name="backupArtworksCheckBoxLabel.Text" xml:space="preserve">
     <value>Архивировать обложки альбомов (не рекомендуется)</value>
@@ -263,16 +266,16 @@
     <value>ВНИМАНИЕ! Эта опция затрагивает, как ручное, так и автоматическое архивирование.</value>
   </data>
   <data name="DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabelLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>529, 13</value>
+    <value>621, 17</value>
   </data>
   <data name="DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabelLabel.Text" xml:space="preserve">
     <value>Не пропускать автоархивирование, даже если изменились только счетчики проигрываний/пропусков</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>802, 2</value>
+    <value>935, 2</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>829, 195</value>
+    <value>972, 249</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Настройки (авто)архивации</value>

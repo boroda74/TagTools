@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ExtensionMethods;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -272,11 +273,8 @@ namespace MusicBeePlugin
 
                         for (int m = 0; m < tagIds.Count; m++)
                         {
-                            string baseValue;
-                            baselineTags.TryGetValue((int)tagIds[m], out baseValue);
-
-                            string backupValue;
-                            track.Value.TryGetValue((int)tagIds[m], out backupValue);
+                            baselineTags.TryGetValue((int)tagIds[m], out string baseValue);
+                            track.Value.TryGetValue((int)tagIds[m], out string backupValue);
 
                             if (backupValue != baseValue)
                             {
@@ -421,14 +419,7 @@ namespace MusicBeePlugin
                             string incValue = incTags[incTagId];
 
                             if (incValue != null && incValue != "_x0000_")
-                            {
-                                string baseTag;
-
-                                if (tags.TryGetValue(incTagId, out baseTag)) //Track tag exists in baseline
-                                    tags.Remove(incTagId);
-
-                                tags.Add(incTagId, incValue);
-                            }
+                                tags.AddReplace(incTagId, incValue); //Track tag exists in baseline
                         }
                     }
                     else //Track doesn't exist in baseline
@@ -486,12 +477,10 @@ namespace MusicBeePlugin
 
         public string getValue(int trackId, int tagId)
         {
-            SerializableDictionary<int, string> tags;
-            if (!tracks.TryGetValue(trackId, out tags))
+            if (!tracks.TryGetValue(trackId, out SerializableDictionary<int, string> tags))
                 return null;
 
-            string value;
-            tags.TryGetValue(tagId, out value);
+            tags.TryGetValue(tagId, out string value);
 
             if (value != null)
                 return DecodeValue(value);
@@ -501,12 +490,10 @@ namespace MusicBeePlugin
 
         public string getIncValue(int trackId, int tagId, BackupType baseline)
         {
-            SerializableDictionary<int, string> tags;
-            if (!tracks.TryGetValue(trackId, out tags))
+            if (!tracks.TryGetValue(trackId, out SerializableDictionary<int, string> tags))
                 return baseline.getValue(trackId, tagId);
 
-            string value;
-            tags.TryGetValue(tagId, out value);
+            tags.TryGetValue(tagId, out string value);
 
             if (value != null)
                 return DecodeValue(value);
@@ -560,20 +547,13 @@ namespace MusicBeePlugin
         {
             valueParam = EncodeValue(valueParam);
 
-            SerializableDictionary<int, string> tags;
-            if (!tracks.TryGetValue(trackId, out tags))
+            if (!tracks.TryGetValue(trackId, out SerializableDictionary<int, string> tags))
             {
                 tags = new SerializableDictionary<int, string>();
                 tracks.Add(trackId, tags);
             }
 
-            string value;
-            if (tags.TryGetValue(tagId, out value))
-            {
-                tags.Remove(tagId);
-            }
-
-            tags.Add(tagId, valueParam);
+            tags.AddReplace(tagId, valueParam);
         }
     }
 
@@ -628,7 +608,7 @@ namespace MusicBeePlugin
                         trackId = int.Parse(Plugin.GetPersistentTrackId(currentFile));
 
 
-                        if (!Plugin.BackupIsAlwaysNeeded && !Plugin.TracksNeedsToBeBackuped.TryGetValue(trackId, out _))
+                        if (!Plugin.BackupIsAlwaysNeeded && !Plugin.TracksNeedsToBeBackuped.Contains(trackId))
                             continue;
 
 
@@ -641,14 +621,13 @@ namespace MusicBeePlugin
                                 backup.setValue(libraryTags[i], trackId, (int)tagIds[i]);
                         }
 
-                        SerializableDictionary<string, bool> trackBackups;
-                        if (!TryGetValue(libraryTrackId, out trackBackups))
+                        if (!TryGetValue(libraryTrackId, out SerializableDictionary<string, bool> trackBackups))
                         {
                             trackBackups = new SerializableDictionary<string, bool>();
                             Add(libraryTrackId, trackBackups);
                         }
 
-                        if (!trackBackups.TryGetValue(backup.guid, out _))
+                        if (!trackBackups.Contains(backup.guid))
                             trackBackups.Add(backup.guid, true);
                     }
 
@@ -789,8 +768,7 @@ namespace MusicBeePlugin
 
         public SerializableDictionary<string, bool> getBackupGuidsForTrack(string libraryName, int trackId)
         {
-            SerializableDictionary<string, bool> trackBackups;
-            if (!TryGetValue(Plugin.AddLibraryNameToTrackId(libraryName, trackId.ToString()), out trackBackups))
+            if (!TryGetValue(Plugin.AddLibraryNameToTrackId(libraryName, trackId.ToString()), out SerializableDictionary<string, bool> trackBackups))
                 trackBackups = new SerializableDictionary<string, bool>();
 
             return trackBackups;
@@ -800,7 +778,7 @@ namespace MusicBeePlugin
         {
             foreach (var trackBackups in Values)
             {
-                if (trackBackups.TryGetValue(backupCache.guid, out _))
+                if (trackBackups.Contains(backupCache.guid))
                     trackBackups.Remove(backupCache.guid);
             }
 

@@ -203,7 +203,7 @@ namespace MusicBeePlugin
             ignoreCheckedPresetEvent = false;
             autoAppliedPresetCount = 0;
             foreach (Preset tempPreset in presetsWorkingCopy.Values)
-                presetList.Items.Add(tempPreset, autoAppliedAsrPresetGuids.TryGetValue(tempPreset.guid, out _));
+                presetList.Items.Add(tempPreset, autoAppliedAsrPresetGuids.Contains(tempPreset.guid));
 
             showAutoapplyingWarningIfRequired();
             ignoreCheckedPresetEvent = true;
@@ -1580,8 +1580,7 @@ namespace MusicBeePlugin
                                     Presets.Remove(tempPreset.guid);
                                     if (SavedSettings.autoAppliedAsrPresetGuids.Contains(tempPreset.guid))
                                         AsrAutoAppliedPresets.Remove(existingPreset);
-                                    if (IdsAsrPresets.TryGetValue(tempPreset.id, out _))
-                                        IdsAsrPresets.Remove(tempPreset.id);
+                                    IdsAsrPresets.RemoveExisting(tempPreset.id);
                                 }
                             }
 
@@ -1914,10 +1913,7 @@ namespace MusicBeePlugin
 
         public static void SetTag(int tagId, string tagValue)
         {
-            if (SetTags.TryGetValue(tagId, out _))
-                SetTags.Remove(tagId);
-
-            SetTags.Add(tagId, tagValue);
+            SetTags.AddReplace(tagId, tagValue);
 
             LastSetTagValue = tagValue;
         }
@@ -2169,9 +2165,7 @@ namespace MusicBeePlugin
                         if (conditionSatisfied)
                         {
                             ReplaceTags(currentFile, tempPreset);
-
-                            if (!appliedPresets.TryGetValue(tempPreset.guid, out _))
-                                appliedPresets.Add(tempPreset.guid, false);
+                            appliedPresets.AddReplace(tempPreset.guid, false);
                         }
                     }
 
@@ -3006,7 +3000,7 @@ namespace MusicBeePlugin
             string[] presetNames = Directory.GetFiles(PresetsPath, "*");
             foreach (string presetName in presetNames)
             {
-                if (!savedPresetPaths.TryGetValue(presetName, out _))
+                if (!savedPresetPaths.Contains(presetName))
                     System.IO.File.Delete(presetName);
             }
 
@@ -3087,7 +3081,7 @@ namespace MusicBeePlugin
 
         private void deletePreset(Preset presetToRemove)
         {
-            if (autoAppliedAsrPresetGuids.TryGetValue(presetToRemove.guid, out _))
+            if (autoAppliedAsrPresetGuids.Contains(presetToRemove.guid))
             {
                 autoAppliedPresetCount--;
                 autoAppliedAsrPresetGuids.Remove(presetToRemove.guid);
@@ -3096,10 +3090,7 @@ namespace MusicBeePlugin
 
 
             idTextBox.Text = "";
-            if (asrIdsPresetGuids.TryGetValue(presetToRemove.id, out _))
-            {
-                asrIdsPresetGuids.Remove(presetToRemove.id);
-            }
+            asrIdsPresetGuids.RemoveExisting(presetToRemove.id);
 
 
             if (presetList.SelectedItem == presetToRemove)
@@ -3906,8 +3897,7 @@ namespace MusicBeePlugin
                 {
                     Preset newPreset = Preset.Load(filename, presetSerializer);
 
-                    if (!presetsWorkingCopy.TryGetValue(newPreset.guid, out Preset existingPreset))
-                        existingPreset = null;
+                    presetsWorkingCopy.TryGetValue(newPreset.guid, out Preset existingPreset);
 
                     if (existingPreset != null)
                     {
@@ -4047,7 +4037,7 @@ namespace MusicBeePlugin
             ignoreCheckedPresetEvent = false;
             autoAppliedPresetCount = 0;
             foreach (Preset tempPreset in presetsWorkingCopy.Values)
-                presetList.Items.Add(tempPreset, autoAppliedAsrPresetGuids.TryGetValue(tempPreset.guid, out _));
+                presetList.Items.Add(tempPreset, autoAppliedAsrPresetGuids.Contains(tempPreset.guid));
 
             presetList.SelectedIndex = -1;
             presetList_SelectedIndexChanged(null, null);
@@ -4055,7 +4045,7 @@ namespace MusicBeePlugin
             presetList.Sorted = true;
 
 
-            if (!presetsWorkingCopy.TryGetValue(selectedPresetGuid, out _))
+            if (!presetsWorkingCopy.Contains(selectedPresetGuid))
                 presetList.SelectedIndex = -1;
             else
                 presetList.SelectedItem = presetsWorkingCopy[selectedPresetGuid];
@@ -4108,8 +4098,7 @@ namespace MusicBeePlugin
 
                         if (newPreset.guid.ToString() != "ff8d53d9-526b-4b40-bbf0-848b6b892f70")
                         {
-                            if (!presetsWorkingCopy.TryGetValue(newPreset.guid, out Preset existingPreset))
-                                existingPreset = null;
+                            presetsWorkingCopy.TryGetValue(newPreset.guid, out Preset existingPreset);
 
                             if (existingPreset != null)
                             {
@@ -4329,7 +4318,7 @@ namespace MusicBeePlugin
             ignoreCheckedPresetEvent = false;
             autoAppliedPresetCount = 0;
             foreach (Preset tempPreset in presetsWorkingCopy.Values)
-                presetList.Items.Add(tempPreset, autoAppliedAsrPresetGuids.TryGetValue(tempPreset.guid, out _));
+                presetList.Items.Add(tempPreset, autoAppliedAsrPresetGuids.Contains(tempPreset.guid));
 
             refreshPresetList(selectedPresetGuid);
 
@@ -4526,7 +4515,7 @@ namespace MusicBeePlugin
                 assignHotkeyCheckBox.Enable(false);
                 buttonOK.Enable(previewIsGenerated);
 
-                if (autoAppliedAsrPresetGuids.TryGetValue(paramPreset.guid, out _))
+                if (autoAppliedAsrPresetGuids.Contains(paramPreset.guid))
                 {
                     int presetIndex = presetList.Items.IndexOf(paramPreset);
                     ignoreCheckedPresetEvent = false;
@@ -4560,7 +4549,7 @@ namespace MusicBeePlugin
 
             preset.parameterTagId = AsrGetTagId(parameterTagList.Text);
             allTagsReplaceIdsCount = preset.countAllTagsReplaceTagIds();
-            showAllTagsWarningIfRequired(preset, autoAppliedAsrPresetGuids.TryGetValue(preset.guid, out _));
+            showAllTagsWarningIfRequired(preset, autoAppliedAsrPresetGuids.Contains(preset.guid));
             nameColumns();
             preset.setCustomizationsFlag(this, backupedPreset);
         }
@@ -4572,7 +4561,7 @@ namespace MusicBeePlugin
 
             preset.parameterTag2Id = AsrGetTagId(parameterTag2List.Text);
             allTagsReplaceIdsCount = preset.countAllTagsReplaceTagIds();
-            showAllTagsWarningIfRequired(preset, autoAppliedAsrPresetGuids.TryGetValue(preset.guid, out _));
+            showAllTagsWarningIfRequired(preset, autoAppliedAsrPresetGuids.Contains(preset.guid));
             nameColumns();
             preset.setCustomizationsFlag(this, backupedPreset);
         }
@@ -4584,7 +4573,7 @@ namespace MusicBeePlugin
 
             preset.parameterTag3Id = AsrGetTagId(parameterTag3List.Text);
             allTagsReplaceIdsCount = preset.countAllTagsReplaceTagIds();
-            showAllTagsWarningIfRequired(preset, autoAppliedAsrPresetGuids.TryGetValue(preset.guid, out _));
+            showAllTagsWarningIfRequired(preset, autoAppliedAsrPresetGuids.Contains(preset.guid));
             nameColumns();
             preset.setCustomizationsFlag(this, backupedPreset);
         }
@@ -4596,7 +4585,7 @@ namespace MusicBeePlugin
 
             preset.parameterTag4Id = AsrGetTagId(parameterTag4List.Text);
             allTagsReplaceIdsCount = preset.countAllTagsReplaceTagIds();
-            showAllTagsWarningIfRequired(preset, autoAppliedAsrPresetGuids.TryGetValue(preset.guid, out _));
+            showAllTagsWarningIfRequired(preset, autoAppliedAsrPresetGuids.Contains(preset.guid));
             nameColumns();
             preset.setCustomizationsFlag(this, backupedPreset);
         }
@@ -4608,7 +4597,7 @@ namespace MusicBeePlugin
 
             preset.parameterTag5Id = AsrGetTagId(parameterTag5List.Text);
             allTagsReplaceIdsCount = preset.countAllTagsReplaceTagIds();
-            showAllTagsWarningIfRequired(preset, autoAppliedAsrPresetGuids.TryGetValue(preset.guid, out _));
+            showAllTagsWarningIfRequired(preset, autoAppliedAsrPresetGuids.Contains(preset.guid));
             nameColumns();
             preset.setCustomizationsFlag(this, backupedPreset);
         }
@@ -4620,7 +4609,7 @@ namespace MusicBeePlugin
 
             preset.parameterTag6Id = AsrGetTagId(parameterTag6List.Text);
             allTagsReplaceIdsCount = preset.countAllTagsReplaceTagIds();
-            showAllTagsWarningIfRequired(preset, autoAppliedAsrPresetGuids.TryGetValue(preset.guid, out _));
+            showAllTagsWarningIfRequired(preset, autoAppliedAsrPresetGuids.Contains(preset.guid));
             nameColumns();
             preset.setCustomizationsFlag(this, backupedPreset);
         }
@@ -5287,7 +5276,7 @@ namespace MusicBeePlugin
 
                 if (filteringCriteriaAreMeet)
                 {
-                    bool autoApply = autoAppliedAsrPresetGuids.TryGetValue(tempPreset.guid, out _);
+                    bool autoApply = autoAppliedAsrPresetGuids.Contains(tempPreset.guid);
                     if (!showTickedOnlyChecked || autoApply)
                     {
                         presetList.Items.Add(tempPreset, autoApply);
@@ -5434,7 +5423,7 @@ namespace MusicBeePlugin
             }
             else if (idTextBox.Text == "")
             {
-                if (asrIdsPresetGuids.TryGetValue(preset.id, out _))
+                if (asrIdsPresetGuids.Contains(preset.id))
                     asrIdsPresetGuids.Remove(preset.id);
 
                 preset.id = "";
@@ -5479,7 +5468,7 @@ namespace MusicBeePlugin
                 }
 
 
-                if (asrIdsPresetGuids.TryGetValue(preset.id, out _))
+                if (asrIdsPresetGuids.Contains(preset.id))
                     asrIdsPresetGuids.Remove(preset.id);
 
                 preset.id = idTextBox.Text;

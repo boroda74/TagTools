@@ -63,5 +63,10 @@ namespace MusicBeePlugin
         {
             lastSkippedTagList.Enable(saveLastSkippedCheckBox.Checked);
         }
+
+        private void saveLastSkippedCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            saveLastSkippedCheckBox.Checked = !saveLastSkippedCheckBox.Checked;
+        }
     }
 }

@@ -55,18 +55,18 @@ namespace MusicBeePlugin
             this.conditionCheckBoxLabel = new System.Windows.Forms.Label();
             this.favoriteCheckBox = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.parameterTag6List = new System.Windows.Forms.ComboBox();
+            this.parameterTag5List = new System.Windows.Forms.ComboBox();
+            this.parameterTag4List = new System.Windows.Forms.ComboBox();
+            this.parameterTag3List = new System.Windows.Forms.ComboBox();
+            this.parameterTag2List = new System.Windows.Forms.ComboBox();
             this.parameterTagList = new System.Windows.Forms.ComboBox();
             this.labelTag = new System.Windows.Forms.Label();
             this.labelTag2 = new System.Windows.Forms.Label();
-            this.parameterTag2List = new System.Windows.Forms.ComboBox();
             this.labelTag3 = new System.Windows.Forms.Label();
-            this.parameterTag3List = new System.Windows.Forms.ComboBox();
             this.labelTag4 = new System.Windows.Forms.Label();
-            this.parameterTag4List = new System.Windows.Forms.ComboBox();
             this.labelTag5 = new System.Windows.Forms.Label();
-            this.parameterTag5List = new System.Windows.Forms.ComboBox();
             this.labelTag6 = new System.Windows.Forms.Label();
-            this.parameterTag6List = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.descriptionBox = new System.Windows.Forms.TextBox();
             this.conditionCheckBox = new System.Windows.Forms.CheckBox();
@@ -108,6 +108,7 @@ namespace MusicBeePlugin
             this.buttonClose = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.buttonExportCustom = new System.Windows.Forms.Button();
             this.buttonExport = new System.Windows.Forms.Button();
             this.buttonDeleteAll = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
@@ -116,7 +117,6 @@ namespace MusicBeePlugin
             this.buttonImport = new System.Windows.Forms.Button();
             this.buttonImportNew = new System.Windows.Forms.Button();
             this.buttonImportAll = new System.Windows.Forms.Button();
-            this.buttonExportCustom = new System.Windows.Forms.Button();
             this.buttonCopy = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.filterComboBox = new System.Windows.Forms.ComboBox();
@@ -425,19 +425,69 @@ namespace MusicBeePlugin
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.parameterTag6List, 5, 1);
+            this.tableLayoutPanel1.Controls.Add(this.parameterTag5List, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.parameterTag4List, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.parameterTag3List, 5, 0);
+            this.tableLayoutPanel1.Controls.Add(this.parameterTag2List, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.parameterTagList, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.labelTag, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.labelTag2, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.parameterTag2List, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.labelTag3, 4, 0);
-            this.tableLayoutPanel1.Controls.Add(this.parameterTag3List, 5, 0);
             this.tableLayoutPanel1.Controls.Add(this.labelTag4, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.parameterTag4List, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.labelTag5, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.parameterTag5List, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.labelTag6, 4, 1);
-            this.tableLayoutPanel1.Controls.Add(this.parameterTag6List, 5, 1);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
+            // parameterTag6List
+            // 
+            resources.ApplyResources(this.parameterTag6List, "parameterTag6List");
+            this.parameterTag6List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.parameterTag6List.DropDownWidth = 250;
+            this.parameterTag6List.FormattingEnabled = true;
+            this.dirtyErrorProvider.SetIconAlignment(this.parameterTag6List, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("parameterTag6List.IconAlignment"))));
+            this.parameterTag6List.Name = "parameterTag6List";
+            this.parameterTag6List.SelectedIndexChanged += new System.EventHandler(this.parameterTag6_SelectedIndexChanged);
+            // 
+            // parameterTag5List
+            // 
+            resources.ApplyResources(this.parameterTag5List, "parameterTag5List");
+            this.parameterTag5List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.parameterTag5List.DropDownWidth = 250;
+            this.parameterTag5List.FormattingEnabled = true;
+            this.dirtyErrorProvider.SetIconAlignment(this.parameterTag5List, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("parameterTag5List.IconAlignment"))));
+            this.parameterTag5List.Name = "parameterTag5List";
+            this.parameterTag5List.SelectedIndexChanged += new System.EventHandler(this.parameterTag5_SelectedIndexChanged);
+            // 
+            // parameterTag4List
+            // 
+            resources.ApplyResources(this.parameterTag4List, "parameterTag4List");
+            this.parameterTag4List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.parameterTag4List.DropDownWidth = 250;
+            this.parameterTag4List.FormattingEnabled = true;
+            this.dirtyErrorProvider.SetIconAlignment(this.parameterTag4List, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("parameterTag4List.IconAlignment"))));
+            this.parameterTag4List.Name = "parameterTag4List";
+            this.parameterTag4List.SelectedIndexChanged += new System.EventHandler(this.parameterTag4_SelectedIndexChanged);
+            // 
+            // parameterTag3List
+            // 
+            resources.ApplyResources(this.parameterTag3List, "parameterTag3List");
+            this.parameterTag3List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.parameterTag3List.DropDownWidth = 250;
+            this.parameterTag3List.FormattingEnabled = true;
+            this.dirtyErrorProvider.SetIconAlignment(this.parameterTag3List, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("parameterTag3List.IconAlignment"))));
+            this.parameterTag3List.Name = "parameterTag3List";
+            this.parameterTag3List.SelectedIndexChanged += new System.EventHandler(this.parameterTag3_SelectedIndexChanged);
+            // 
+            // parameterTag2List
+            // 
+            resources.ApplyResources(this.parameterTag2List, "parameterTag2List");
+            this.parameterTag2List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.parameterTag2List.DropDownWidth = 250;
+            this.parameterTag2List.FormattingEnabled = true;
+            this.dirtyErrorProvider.SetIconAlignment(this.parameterTag2List, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("parameterTag2List.IconAlignment"))));
+            this.parameterTag2List.Name = "parameterTag2List";
+            this.parameterTag2List.SelectedIndexChanged += new System.EventHandler(this.parameterTag2_SelectedIndexChanged);
             // 
             // parameterTagList
             // 
@@ -466,16 +516,6 @@ namespace MusicBeePlugin
             this.labelTag2.Image = global::MusicBeePlugin.Properties.Resources.warning_12b;
             this.labelTag2.Name = "labelTag2";
             // 
-            // parameterTag2List
-            // 
-            resources.ApplyResources(this.parameterTag2List, "parameterTag2List");
-            this.parameterTag2List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.parameterTag2List.DropDownWidth = 250;
-            this.parameterTag2List.FormattingEnabled = true;
-            this.dirtyErrorProvider.SetIconAlignment(this.parameterTag2List, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("parameterTag2List.IconAlignment"))));
-            this.parameterTag2List.Name = "parameterTag2List";
-            this.parameterTag2List.SelectedIndexChanged += new System.EventHandler(this.parameterTag2_SelectedIndexChanged);
-            // 
             // labelTag3
             // 
             resources.ApplyResources(this.labelTag3, "labelTag3");
@@ -483,16 +523,6 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.labelTag3, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("labelTag3.IconAlignment"))));
             this.labelTag3.Image = global::MusicBeePlugin.Properties.Resources.warning_12b;
             this.labelTag3.Name = "labelTag3";
-            // 
-            // parameterTag3List
-            // 
-            resources.ApplyResources(this.parameterTag3List, "parameterTag3List");
-            this.parameterTag3List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.parameterTag3List.DropDownWidth = 250;
-            this.parameterTag3List.FormattingEnabled = true;
-            this.dirtyErrorProvider.SetIconAlignment(this.parameterTag3List, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("parameterTag3List.IconAlignment"))));
-            this.parameterTag3List.Name = "parameterTag3List";
-            this.parameterTag3List.SelectedIndexChanged += new System.EventHandler(this.parameterTag3_SelectedIndexChanged);
             // 
             // labelTag4
             // 
@@ -502,16 +532,6 @@ namespace MusicBeePlugin
             this.labelTag4.Image = global::MusicBeePlugin.Properties.Resources.warning_12b;
             this.labelTag4.Name = "labelTag4";
             // 
-            // parameterTag4List
-            // 
-            resources.ApplyResources(this.parameterTag4List, "parameterTag4List");
-            this.parameterTag4List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.parameterTag4List.DropDownWidth = 250;
-            this.parameterTag4List.FormattingEnabled = true;
-            this.dirtyErrorProvider.SetIconAlignment(this.parameterTag4List, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("parameterTag4List.IconAlignment"))));
-            this.parameterTag4List.Name = "parameterTag4List";
-            this.parameterTag4List.SelectedIndexChanged += new System.EventHandler(this.parameterTag4_SelectedIndexChanged);
-            // 
             // labelTag5
             // 
             resources.ApplyResources(this.labelTag5, "labelTag5");
@@ -520,16 +540,6 @@ namespace MusicBeePlugin
             this.labelTag5.Image = global::MusicBeePlugin.Properties.Resources.warning_12b;
             this.labelTag5.Name = "labelTag5";
             // 
-            // parameterTag5List
-            // 
-            resources.ApplyResources(this.parameterTag5List, "parameterTag5List");
-            this.parameterTag5List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.parameterTag5List.DropDownWidth = 250;
-            this.parameterTag5List.FormattingEnabled = true;
-            this.dirtyErrorProvider.SetIconAlignment(this.parameterTag5List, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("parameterTag5List.IconAlignment"))));
-            this.parameterTag5List.Name = "parameterTag5List";
-            this.parameterTag5List.SelectedIndexChanged += new System.EventHandler(this.parameterTag5_SelectedIndexChanged);
-            // 
             // labelTag6
             // 
             resources.ApplyResources(this.labelTag6, "labelTag6");
@@ -537,16 +547,6 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.labelTag6, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("labelTag6.IconAlignment"))));
             this.labelTag6.Image = global::MusicBeePlugin.Properties.Resources.warning_12b;
             this.labelTag6.Name = "labelTag6";
-            // 
-            // parameterTag6List
-            // 
-            resources.ApplyResources(this.parameterTag6List, "parameterTag6List");
-            this.parameterTag6List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.parameterTag6List.DropDownWidth = 250;
-            this.parameterTag6List.FormattingEnabled = true;
-            this.dirtyErrorProvider.SetIconAlignment(this.parameterTag6List, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("parameterTag6List.IconAlignment"))));
-            this.parameterTag6List.Name = "parameterTag6List";
-            this.parameterTag6List.SelectedIndexChanged += new System.EventHandler(this.parameterTag6_SelectedIndexChanged);
             // 
             // groupBox1
             // 
@@ -881,6 +881,7 @@ namespace MusicBeePlugin
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Controls.Add(this.buttonExportCustom);
             this.groupBox2.Controls.Add(this.buttonExport);
             this.groupBox2.Controls.Add(this.buttonDeleteAll);
             this.groupBox2.Controls.Add(this.buttonDelete);
@@ -889,7 +890,6 @@ namespace MusicBeePlugin
             this.groupBox2.Controls.Add(this.buttonImport);
             this.groupBox2.Controls.Add(this.buttonImportNew);
             this.groupBox2.Controls.Add(this.buttonImportAll);
-            this.groupBox2.Controls.Add(this.buttonExportCustom);
             this.groupBox2.Controls.Add(this.buttonCopy);
             this.dirtyErrorProvider.SetIconAlignment(this.groupBox2, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("groupBox2.IconAlignment"))));
             resources.ApplyResources(this.groupBox2, "groupBox2");
@@ -903,6 +903,17 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.label6, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("label6.IconAlignment"))));
             resources.ApplyResources(this.label6, "label6");
             this.label6.Name = "label6";
+            // 
+            // buttonExportCustom
+            // 
+            this.buttonExportCustom.BackColor = System.Drawing.SystemColors.Control;
+            this.buttonExportCustom.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.dirtyErrorProvider.SetIconAlignment(this.buttonExportCustom, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonExportCustom.IconAlignment"))));
+            resources.ApplyResources(this.buttonExportCustom, "buttonExportCustom");
+            this.buttonExportCustom.Name = "buttonExportCustom";
+            this.toolTip1.SetToolTip(this.buttonExportCustom, resources.GetString("buttonExportCustom.ToolTip"));
+            this.buttonExportCustom.UseVisualStyleBackColor = false;
+            this.buttonExportCustom.Click += new System.EventHandler(this.buttonExportUser_Click);
             // 
             // buttonExport
             // 
@@ -989,17 +1000,6 @@ namespace MusicBeePlugin
             this.toolTip1.SetToolTip(this.buttonImportAll, resources.GetString("buttonImportAll.ToolTip"));
             this.buttonImportAll.UseVisualStyleBackColor = false;
             this.buttonImportAll.Click += new System.EventHandler(this.buttonInstallAll_Click);
-            // 
-            // buttonExportCustom
-            // 
-            this.buttonExportCustom.BackColor = System.Drawing.SystemColors.Control;
-            this.buttonExportCustom.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.dirtyErrorProvider.SetIconAlignment(this.buttonExportCustom, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonExportCustom.IconAlignment"))));
-            resources.ApplyResources(this.buttonExportCustom, "buttonExportCustom");
-            this.buttonExportCustom.Name = "buttonExportCustom";
-            this.toolTip1.SetToolTip(this.buttonExportCustom, resources.GetString("buttonExportCustom.ToolTip"));
-            this.buttonExportCustom.UseVisualStyleBackColor = false;
-            this.buttonExportCustom.Click += new System.EventHandler(this.buttonExportUser_Click);
             // 
             // buttonCopy
             // 

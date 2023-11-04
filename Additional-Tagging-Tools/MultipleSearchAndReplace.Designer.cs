@@ -31,11 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MultipleSearchAndReplaceCommand));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.templateTable = new System.Windows.Forms.DataGridView();
             this.SearchTag = new System.Windows.Forms.DataGridViewComboBoxColumn();
@@ -81,13 +76,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.autoApplyPictureBox)).BeginInit();
             this.SuspendLayout();
-            //MusicBee
-            this.templateNameTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            //~MusicBee            
             // 
             // splitContainer1
             // 
             resources.ApplyResources(this.splitContainer1, "splitContainer1");
+            this.splitContainer1.BackColor = System.Drawing.SystemColors.GrayText;
             this.dirtyErrorProvider.SetError(this.splitContainer1, resources.GetString("splitContainer1.Error"));
             this.dirtyErrorProvider.SetIconAlignment(this.splitContainer1, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("splitContainer1.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.splitContainer1, ((int)(resources.GetObject("splitContainer1.IconPadding"))));
@@ -96,6 +89,7 @@
             // splitContainer1.Panel1
             // 
             resources.ApplyResources(this.splitContainer1.Panel1, "splitContainer1.Panel1");
+            this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.ControlDark;
             this.splitContainer1.Panel1.Controls.Add(this.templateTable);
             this.dirtyErrorProvider.SetError(this.splitContainer1.Panel1, resources.GetString("splitContainer1.Panel1.Error"));
             this.dirtyErrorProvider.SetIconAlignment(this.splitContainer1.Panel1, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("splitContainer1.Panel1.IconAlignment"))));
@@ -105,6 +99,7 @@
             // splitContainer1.Panel2
             // 
             resources.ApplyResources(this.splitContainer1.Panel2, "splitContainer1.Panel2");
+            this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.ControlDark;
             this.splitContainer1.Panel2.Controls.Add(this.previewTable);
             this.dirtyErrorProvider.SetError(this.splitContainer1.Panel2, resources.GetString("splitContainer1.Panel2.Error"));
             this.dirtyErrorProvider.SetIconAlignment(this.splitContainer1.Panel2, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("splitContainer1.Panel2.IconAlignment"))));
@@ -123,14 +118,6 @@
             this.templateTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.templateTable.BackgroundColor = System.Drawing.SystemColors.Window;
             this.templateTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.templateTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.templateTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.SearchTag,
             this.Column1,
@@ -138,27 +125,11 @@
             this.dataGridViewTextBoxColumn14,
             this.dataGridViewTextBoxColumn16,
             this.Column5});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.templateTable.DefaultCellStyle = dataGridViewCellStyle3;
             this.dirtyErrorProvider.SetError(this.templateTable, resources.GetString("templateTable.Error"));
             this.dirtyErrorProvider.SetIconAlignment(this.templateTable, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("templateTable.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.templateTable, ((int)(resources.GetObject("templateTable.IconPadding"))));
             this.templateTable.MultiSelect = false;
             this.templateTable.Name = "templateTable";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.templateTable.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.templateTable.RowHeadersVisible = false;
             this.templateTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.toolTip1.SetToolTip(this.templateTable, resources.GetString("templateTable.ToolTip"));
@@ -218,27 +189,11 @@
             this.previewTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.previewTable.BackgroundColor = System.Drawing.SystemColors.Window;
             this.previewTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.previewTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.previewTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column3,
             this.OriginalTag,
             this.NewTag,
             this.Column4});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.previewTable.DefaultCellStyle = dataGridViewCellStyle6;
             this.previewTable.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dirtyErrorProvider.SetError(this.previewTable, resources.GetString("previewTable.Error"));
             this.dirtyErrorProvider.SetIconAlignment(this.previewTable, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("previewTable.IconAlignment"))));
@@ -374,6 +329,7 @@
             this.dirtyErrorProvider.SetIconPadding(this.label2, ((int)(resources.GetObject("label2.IconPadding"))));
             this.label2.Name = "label2";
             this.toolTip1.SetToolTip(this.label2, resources.GetString("label2.ToolTip"));
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // destinationTagList
             // 
@@ -513,6 +469,7 @@
             this.autoApplyPictureBox.Name = "autoApplyPictureBox";
             this.autoApplyPictureBox.TabStop = false;
             this.toolTip1.SetToolTip(this.autoApplyPictureBox, resources.GetString("autoApplyPictureBox.ToolTip"));
+            this.autoApplyPictureBox.Click += new System.EventHandler(this.autoApplyPictureBox_Click);
             // 
             // toolTip1
             // 
@@ -526,28 +483,28 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
+            this.Controls.Add(this.buttonCancel);
+            this.Controls.Add(this.buttonOK);
+            this.Controls.Add(this.buttonPreview);
             this.Controls.Add(this.buttonSettings);
+            this.Controls.Add(this.destinationTagList);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.autoDestinationTagCheckBox);
+            this.Controls.Add(this.sourceTagList);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.autoApplyPictureBox);
             this.Controls.Add(this.autoApplyCheckBox);
             this.Controls.Add(this.buttonDeleteSaved);
             this.Controls.Add(this.searchOnlyCheckBox);
-            this.Controls.Add(this.autoDestinationTagCheckBox);
             this.Controls.Add(this.loadComboBox);
             this.Controls.Add(this.buttonDown);
             this.Controls.Add(this.buttonUp);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonAdd);
-            this.Controls.Add(this.destinationTagList);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.sourceTagList);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.templateNameTextBox);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.buttonPreview);
-            this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.buttonOK);
             this.HelpButton = true;
             this.Name = "MultipleSearchAndReplaceCommand";
             this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));

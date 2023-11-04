@@ -804,7 +804,7 @@ namespace MusicBeePlugin
 
             customMSR.savePreset(Path.Combine(PresetsPath, customMSR.getSafeFileName() + ASRPresetExtension));
 
-            if (Presets.TryGetValue(customMSR.guid, out _))
+            if (Presets.Contains(customMSR.guid))
                 Presets.Remove(customMSR.guid);
 
             Presets.Add(customMSR.guid, customMSR);
@@ -1016,6 +1016,12 @@ namespace MusicBeePlugin
             }
         }
 
+        private void label2_Click(object sender, EventArgs e)
+        {
+            autoDestinationTagCheckBox.Checked = !autoDestinationTagCheckBox.Checked;
+            autoDestinationTagCheckBox_CheckedChanged(null, null);
+        }
+
         private void sourceTagList_SelectedIndexChanged(object sender, EventArgs e)
         {
                 autoDestinationTagCheckBox_CheckedChanged(null, null);
@@ -1108,6 +1114,11 @@ namespace MusicBeePlugin
         {
             PluginQuickSettings settings = new PluginQuickSettings(TagToolsPlugin);
             PluginWindowTemplate.Display(settings, true);
+        }
+
+        private void autoApplyPictureBox_Click(object sender, EventArgs e)
+        {
+            autoApplyCheckBox.Checked = !autoApplyCheckBox.Checked;
         }
     }
 }

@@ -119,61 +119,73 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>694, 380</value>
+    <value>824, 402</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Отмена</value>
   </data>
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>613, 380</value>
+    <value>743, 402</value>
+  </data>
+  <data name="label6.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9.75pt, style=Bold</value>
+  </data>
+  <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 10</value>
+  </data>
+  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>765, 17</value>
+  </data>
+  <data name="label6.Text" xml:space="preserve">
+    <value>Настройки дополнительных инструментов (при изменении большинства настроек потребуется перезапуск MusicBee)</value>
   </data>
   <data name="versionLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 385</value>
+    <value>10, 407</value>
   </data>
   <data name="versionLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 13</value>
+    <value>57, 17</value>
   </data>
   <data name="versionLabel.Text" xml:space="preserve">
     <value>Версия: </value>
   </data>
+  <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 179</value>
+  </data>
+  <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>885, 116</value>
+  </data>
+  <data name="groupBox3.Text" xml:space="preserve">
+    <value>Звуки</value>
+  </data>
   <data name="label26.Size" type="System.Drawing.Size, System.Drawing">
-    <value>421, 13</value>
+    <value>488, 17</value>
   </data>
   <data name="label26.Text" xml:space="preserve">
     <value>Проиграть звук при отметке пресета ДПЗ/ОБ для автоматического применения</value>
   </data>
   <data name="label25.Size" type="System.Drawing.Size, System.Drawing">
-    <value>438, 13</value>
+    <value>509, 17</value>
   </data>
   <data name="label25.Text" xml:space="preserve">
     <value>Проиграть системный звук "Стоп", когда фоновая задача отменена пользователем</value>
   </data>
   <data name="label24.Size" type="System.Drawing.Size, System.Drawing">
-    <value>408, 13</value>
+    <value>471, 17</value>
   </data>
   <data name="label24.Text" xml:space="preserve">
     <value>Проиграть системный звук "Восклицание", когда фоновая задача начинается</value>
   </data>
   <data name="label23.Size" type="System.Drawing.Size, System.Drawing">
-    <value>474, 13</value>
+    <value>549, 17</value>
   </data>
   <data name="label23.Text" xml:space="preserve">
     <value>Проиграть системный звук "Звездочка", когда фоновая задача завершается/остановлена</value>
   </data>
-  <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 156</value>
-  </data>
-  <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>755, 116</value>
-  </data>
-  <data name="groupBox3.Text" xml:space="preserve">
-    <value>Звуки</value>
-  </data>
   <data name="saveLastSkippedButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>347, 380</value>
+    <value>407, 402</value>
   </data>
   <data name="saveLastSkippedButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>260, 23</value>
+    <value>330, 25</value>
   </data>
   <data name="saveLastSkippedButton.Text" xml:space="preserve">
     <value>Сохранять дату последнего пропуска трека...</value>
@@ -183,55 +195,73 @@
     <value>NoControl</value>
   </data>
   <data name="highlightChangedTagsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>267, 19</value>
+    <value>312, 19</value>
+  </data>
+  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 58</value>
+  </data>
+  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>885, 115</value>
+  </data>
+  <data name="groupBox2.Text" xml:space="preserve">
+    <value>Оформление</value>
   </data>
   <data name="label22.Size" type="System.Drawing.Size, System.Drawing">
-    <value>439, 13</value>
+    <value>516, 17</value>
   </data>
   <data name="label22.Text" xml:space="preserve">
     <value>Показывать скрытое окно плагина, когда его фоновая задача завершена/прервана</value>
   </data>
   <data name="label21.Size" type="System.Drawing.Size, System.Drawing">
-    <value>432, 13</value>
+    <value>508, 17</value>
   </data>
   <data name="label21.Text" xml:space="preserve">
     <value>Закрывать скрытое окно плагина, когда его фоновая задача завершена/прервана</value>
   </data>
   <data name="label20.Size" type="System.Drawing.Size, System.Drawing">
-    <value>333, 13</value>
+    <value>391, 17</value>
   </data>
   <data name="label20.Text" xml:space="preserve">
     <value>Минимизировать окна плагина, вместо того чтобы скрывать их</value>
   </data>
   <data name="label19.Location" type="System.Drawing.Point, System.Drawing">
-    <value>289, 20</value>
+    <value>334, 20</value>
   </data>
   <data name="label19.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 13</value>
+    <value>197, 17</value>
   </data>
   <data name="label19.Text" xml:space="preserve">
     <value>Подсвечивать измененные теги</value>
   </data>
   <data name="label18.Size" type="System.Drawing.Size, System.Drawing">
-    <value>199, 13</value>
+    <value>237, 17</value>
   </data>
   <data name="label18.Text" xml:space="preserve">
-    <value>Использовать цвета темы MusicBee *</value>
+    <value>Использовать цвета темы MusicBee **</value>
+  </data>
+  <data name="groupBox6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>608, 11</value>
+  </data>
+  <data name="groupBox6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>268, 95</value>
+  </data>
+  <data name="groupBox6.Text" xml:space="preserve">
+    <value>Цвета предварительного просмотра</value>
   </data>
   <data name="preservedTagValuesLegendTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 18</value>
+    <value>256, 18</value>
   </data>
   <data name="preservedTagValuesLegendTextBox.Text" xml:space="preserve">
     <value>Пропущенные значения тегов</value>
   </data>
   <data name="preservedTagsLegendTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 18</value>
+    <value>256, 18</value>
   </data>
   <data name="preservedTagsLegendTextBox.Text" xml:space="preserve">
     <value>Пропущенные теги</value>
   </data>
   <data name="changedLegendTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 18</value>
+    <value>256, 18</value>
   </data>
   <data name="changedLegendTextBox.Text" xml:space="preserve">
     <value>Измененные</value>
@@ -239,61 +269,43 @@
   <data name="changedLegendTextBox.ToolTip" xml:space="preserve">
     <value>Щелкните мышкой по любому полю, чтобы увидеть цвета выделенной строки:Щелкните мышкой по любому полю, чтобы увидеть цвета невыделенной строки</value>
   </data>
-  <data name="groupBox6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>540, 10</value>
+  <data name="groupBox5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 301</value>
   </data>
-  <data name="groupBox6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 82</value>
+  <data name="groupBox5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>885, 90</value>
   </data>
-  <data name="groupBox6.Text" xml:space="preserve">
-    <value>Цвета предварительного просмотра</value>
-  </data>
-  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 35</value>
-  </data>
-  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>755, 115</value>
-  </data>
-  <data name="groupBox2.Text" xml:space="preserve">
-    <value>Оформление</value>
+  <data name="groupBox5.Text" xml:space="preserve">
+    <value>Фильтрация результатов</value>
   </data>
   <data name="label29.Size" type="System.Drawing.Size, System.Drawing">
-    <value>707, 13</value>
+    <value>834, 17</value>
   </data>
   <data name="label29.Text" xml:space="preserve">
     <value>Включать в предварительный просмотр строки, содержащие только игнорированные значения тегов (Дополнительный поиск и замена)</value>
   </data>
   <data name="label28.Size" type="System.Drawing.Size, System.Drawing">
-    <value>651, 13</value>
+    <value>767, 17</value>
   </data>
   <data name="label28.Text" xml:space="preserve">
     <value>Включать в предварительный просмотр строки, содержащие только игнорированные теги (Дополнительный поиск и замена)</value>
   </data>
   <data name="label27.Size" type="System.Drawing.Size, System.Drawing">
-    <value>503, 13</value>
+    <value>590, 17</value>
   </data>
   <data name="label27.Text" xml:space="preserve">
     <value>Включать в предварительный просмотр строки, не содержащие измененные теги (все команды)</value>
   </data>
-  <data name="groupBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 278</value>
-  </data>
-  <data name="groupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>755, 90</value>
-  </data>
-  <data name="groupBox5.Text" xml:space="preserve">
-    <value>Фильтрация результатов</value>
-  </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>436, 13</value>
+    <value>517, 17</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
-    <value>*  Требуется заново открыть окна плагина, чтобы новые настройки вступили в силу</value>
+    <value>**  Требуется заново открыть окна плагина, чтобы новые настройки вступили в силу</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>781, 412</value>
+    <value>911, 434</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Быстрые настройки</value>
+    <value>Настройки</value>
   </data>
 </root>

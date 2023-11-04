@@ -34,6 +34,8 @@ namespace MusicBeePlugin
 
             FillListByTagNames(sourceTagList.Items, false, false, false, false);
             sourceTagList.Text = SavedSettings.reencodeTagSourceTagName;
+            if (sourceTagList.SelectedIndex == -1)
+                sourceTagList.SelectedIndex = 0;
 
             defaultEncoding = Encoding.Default;
             EncodingInfo[] encodings = Encoding.GetEncodings();

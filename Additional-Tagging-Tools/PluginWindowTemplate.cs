@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 using static MusicBeePlugin.Plugin;
@@ -89,8 +88,6 @@ namespace MusicBeePlugin
                 int middle = s.SplitterDistance;
                 int left = s.Left;
                 int right = s.Right;
-
-                SplitterPen.DashPattern = SplitterPenDashPattern;
 
                 e.Graphics.DrawLine(SplitterPen, left, middle, right, middle);
             }
@@ -248,6 +245,20 @@ namespace MusicBeePlugin
                 }
 
                 ((Label)control).FlatStyle = FlatStyle.System;
+            }
+            else if (control.GetType().IsSubclassOf(typeof(GroupBox)) || control.GetType() == typeof(GroupBox))
+            {
+                control.BackColor = BackFormColor;
+
+                if (control.ForeColor == SystemColors.ControlText)
+                {
+                    control.ForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanelLabel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
+                }
+                else
+                {
+                    Color stdColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanelLabel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
+                    control.ForeColor = GetHighlightColor(control.ForeColor, stdColor, BackFormColor, 0.80f);
+                }
             }
             else if (control.GetType().IsSubclassOf(typeof(CheckBox)) || control.GetType() == typeof(CheckBox))
             {
@@ -790,6 +801,9 @@ namespace MusicBeePlugin
                     width = Width;
                     height = Height;
                     windowState = WindowState;
+
+                    foreach (Button button in buttonLabels.Keys)
+                        button.Refresh();
                 }
             }
         }
@@ -952,7 +966,7 @@ namespace MusicBeePlugin
 
         private void PluginWindowTemplate_Load(object sender, EventArgs e)
         {
-            //return; //For debbuging
+            //return; //For debugging
 
             loadWindowSizesPositions();
         }

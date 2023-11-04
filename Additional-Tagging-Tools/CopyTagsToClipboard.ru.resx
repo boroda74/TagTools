@@ -119,7 +119,7 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>333, 433</value>
+    <value>397, 502</value>
   </data>
   <data name="buttonOK.Text" xml:space="preserve">
     <value>Копировать</value>
@@ -128,7 +128,7 @@
     <value />
   </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>414, 433</value>
+    <value>493, 502</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Закрыть</value>
@@ -136,37 +136,52 @@
   <data name="buttonCancel.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="sourceTagList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 218</value>
+  </data>
   <data name="sourceTagList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>471, 180</value>
+    <value>571, 206</value>
   </data>
   <data name="sourceTagList.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="checkedSourceTagList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>471, 180</value>
+    <value>571, 206</value>
   </data>
   <data name="checkedSourceTagList.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 44</value>
+  </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>477, 372</value>
+    <value>579, 428</value>
   </data>
   <data name="tableLayoutPanel1.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="tagSetComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 11</value>
+  </data>
   <data name="tagSetComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>474, 21</value>
+    <value>571, 25</value>
   </data>
   <data name="tagSetComboBox.ToolTip" xml:space="preserve">
     <value>Выбранные теги автоматически сохраняются в текущий набор тегов. 
 Чтобы переименовать текущий набор тегов, просто напишите новое 
 имя набора в этом поле. </value>
   </data>
+  <data name="checkUncheckAllCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 505</value>
+  </data>
   <data name="checkUncheckAllCheckBox.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 476</value>
+  </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>478, 13</value>
+    <value>576, 17</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>☆ - Обычный тег  ★ - Свой тег  ✪ - Только для чтения  ❏ - Свойство файла  ♺ - Виртуальный</value>
@@ -174,8 +189,11 @@
   <data name="label1.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="checkUncheckAllCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>33, 505</value>
+  </data>
   <data name="checkUncheckAllCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 13</value>
+    <value>164, 17</value>
   </data>
   <data name="checkUncheckAllCheckBoxLabel.Text" xml:space="preserve">
     <value>Выбрать все/снять выбор</value>
@@ -184,10 +202,10 @@
     <value />
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>500, 464</value>
+    <value>592, 536</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>508, 466</value>
+    <value>600, 565</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Копировать теги в буфер обмена</value>

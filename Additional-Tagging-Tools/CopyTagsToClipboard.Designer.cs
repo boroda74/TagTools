@@ -1,4 +1,6 @@
-﻿namespace MusicBeePlugin
+﻿using System.Windows.Forms;
+
+namespace MusicBeePlugin
 {
     partial class CopyTagsToClipboardCommand
     {
@@ -47,6 +49,7 @@
             // 
             resources.ApplyResources(this.buttonOK, "buttonOK");
             this.buttonOK.Name = "buttonOK";
+            this.toolTip1.SetToolTip(this.buttonOK, resources.GetString("buttonOK.ToolTip"));
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
@@ -55,6 +58,7 @@
             resources.ApplyResources(this.buttonCancel, "buttonCancel");
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Name = "buttonCancel";
+            this.toolTip1.SetToolTip(this.buttonCancel, resources.GetString("buttonCancel.ToolTip"));
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
@@ -64,6 +68,7 @@
             this.tableLayoutPanel1.Controls.Add(this.sourceTagList, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.checkedSourceTagList, 0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.toolTip1.SetToolTip(this.tableLayoutPanel1, resources.GetString("tableLayoutPanel1.ToolTip"));
             // 
             // sourceTagList
             // 
@@ -72,6 +77,7 @@
             this.sourceTagList.MultiColumn = true;
             this.sourceTagList.Name = "sourceTagList";
             this.sourceTagList.Sorted = true;
+            this.toolTip1.SetToolTip(this.sourceTagList, resources.GetString("sourceTagList.ToolTip"));
             this.sourceTagList.SelectedIndexChanged += new System.EventHandler(this.sourceTagList_SelectedIndexChanged);
             // 
             // checkedSourceTagList
@@ -81,6 +87,7 @@
             this.checkedSourceTagList.MultiColumn = true;
             this.checkedSourceTagList.Name = "checkedSourceTagList";
             this.checkedSourceTagList.Sorted = true;
+            this.toolTip1.SetToolTip(this.checkedSourceTagList, resources.GetString("checkedSourceTagList.ToolTip"));
             this.checkedSourceTagList.SelectedIndexChanged += new System.EventHandler(this.checkedSourceTagList_SelectedIndexChanged);
             // 
             // tagSetComboBox
@@ -97,6 +104,7 @@
             resources.ApplyResources(this.checkUncheckAllCheckBox, "checkUncheckAllCheckBox");
             this.checkUncheckAllCheckBox.Name = "checkUncheckAllCheckBox";
             this.checkUncheckAllCheckBox.Tag = "checkUncheckAllCheckBoxLabel";
+            this.toolTip1.SetToolTip(this.checkUncheckAllCheckBox, resources.GetString("checkUncheckAllCheckBox.ToolTip"));
             this.checkUncheckAllCheckBox.UseVisualStyleBackColor = true;
             this.checkUncheckAllCheckBox.CheckedChanged += new System.EventHandler(this.checkUncheckAllCheckBox_CheckedChanged);
             // 
@@ -110,11 +118,13 @@
             // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
+            this.toolTip1.SetToolTip(this.label1, resources.GetString("label1.ToolTip"));
             // 
             // checkUncheckAllCheckBoxLabel
             // 
             resources.ApplyResources(this.checkUncheckAllCheckBoxLabel, "checkUncheckAllCheckBoxLabel");
             this.checkUncheckAllCheckBoxLabel.Name = "checkUncheckAllCheckBoxLabel";
+            this.toolTip1.SetToolTip(this.checkUncheckAllCheckBoxLabel, resources.GetString("checkUncheckAllCheckBoxLabel.ToolTip"));
             this.checkUncheckAllCheckBoxLabel.Click += new System.EventHandler(this.checkUncheckAllCheckBoxLabel_Click);
             // 
             // CopyTagsToClipboardCommand
@@ -133,6 +143,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CopyTagsToClipboardCommand";
+            this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CopyTagsToClipboardCommand_FormClosed);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);

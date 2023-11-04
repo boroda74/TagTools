@@ -125,15 +125,20 @@
   <data name="searchOnlyCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 13</value>
+  <data name="autoApplyCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
   </data>
   <data name="&gt;&gt;dataGridViewTextBoxColumn16.Name" xml:space="preserve">
     <value>dataGridViewTextBoxColumn16</value>
   </data>
   <data name="searchOnlyCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="splitContainer1.Panel1.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="buttonAdd.Error" xml:space="preserve">
+    <value />
   </data>
   <data name="splitContainer1.Panel1.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -141,11 +146,14 @@
   <data name="buttonCancel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
   </data>
-  <data name="&gt;&gt;toolTip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;buttonSettings.Name" xml:space="preserve">
+    <value>buttonSettings</value>
   </data>
-  <data name="autoApplyPictureBox.ToolTip" xml:space="preserve">
-    <value>Save ASR preset as auto-executed</value>
+  <data name="&gt;&gt;buttonOK.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="buttonCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="buttonUp.ToolTip" xml:space="preserve">
     <value />
@@ -154,13 +162,14 @@
     <value>0</value>
   </data>
   <data name="&gt;&gt;buttonPreview.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;Column2.Name" xml:space="preserve">
     <value>Column2</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="templateNameTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>278, 34</value>
+    <value>324, 40</value>
   </data>
   <data name="buttonAdd.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -169,16 +178,19 @@
     <value />
   </data>
   <data name="autoDestinationTagCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>223, 9</value>
+    <value>258, 11</value>
   </data>
   <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>867, 358</value>
+    <value>1011, 479</value>
   </data>
   <data name="autoApplyPictureBox.Error" xml:space="preserve">
     <value />
   </data>
   <data name="splitContainer1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
+  </data>
+  <data name="splitContainer1.SplitterWidth" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
   <data name="sourceTagList.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -195,23 +207,29 @@
   <data name="searchOnlyCheckBox.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="buttonAdd.Error" xml:space="preserve">
-    <value />
+  <data name="buttonCancel.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="buttonCancel.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="buttonSettings.Error" xml:space="preserve">
-    <value />
+  <data name="previewTable.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="buttonDown.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>TopLeft</value>
+  <data name="&gt;&gt;previewTable.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;sourceTagList.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
   <data name="&gt;&gt;destinationTagList.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;autoDestinationTagCheckBox.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="&gt;&gt;templateNameTextBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9.75pt</value>
   </data>
   <data name="searchOnlyCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -222,12 +240,6 @@ later for auto-execution or assign hotkey to it</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
-  </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
-  </data>
-  <data name="&gt;&gt;autoApplyPictureBox.Name" xml:space="preserve">
-    <value>autoApplyPictureBox</value>
   </data>
   <data name="&gt;&gt;splitContainer1.Panel1.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -244,11 +256,14 @@ later for auto-execution or assign hotkey to it</value>
   <data name="Column1.Width" type="System.Int32, mscorlib">
     <value>30</value>
   </data>
-  <data name="buttonSave.Location" type="System.Drawing.Point, System.Drawing">
-    <value>547, 33</value>
+  <data name="&gt;&gt;previewTable.Name" xml:space="preserve">
+    <value>previewTable</value>
   </data>
-  <data name="&gt;&gt;Column5.Name" xml:space="preserve">
-    <value>Column5</value>
+  <data name="buttonSave.Location" type="System.Drawing.Point, System.Drawing">
+    <value>638, 40</value>
+  </data>
+  <data name="&gt;&gt;autoApplyPictureBox.Name" xml:space="preserve">
+    <value>autoApplyPictureBox</value>
   </data>
   <data name="buttonUp.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -260,19 +275,16 @@ later for auto-execution or assign hotkey to it</value>
     <value />
   </data>
   <data name="&gt;&gt;buttonOK.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;templateNameTextBox.ZOrder" xml:space="preserve">
-    <value>16</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn14.Name" xml:space="preserve">
-    <value>dataGridViewTextBoxColumn14</value>
+    <value>19</value>
   </data>
   <data name="sourceTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>58, 6</value>
+    <value>68, 8</value>
   </data>
-  <data name="&gt;&gt;previewTable.Parent" xml:space="preserve">
-    <value>splitContainer1.Panel2</value>
+  <data name="searchOnlyCheckBox.Text" xml:space="preserve">
+    <value>SEARCH ONLY</value>
   </data>
   <data name="&gt;&gt;buttonSave.Name" xml:space="preserve">
     <value>buttonSave</value>
@@ -281,10 +293,7 @@ later for auto-execution or assign hotkey to it</value>
     <value />
   </data>
   <data name="templateNameTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>218, 20</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>873, 423</value>
+    <value>254, 25</value>
   </data>
   <data name="buttonSave.Text" xml:space="preserve">
     <value>Save</value>
@@ -299,10 +308,7 @@ later for auto-execution or assign hotkey to it</value>
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="autoApplyPictureBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>16, 16</value>
-  </data>
-  <data name="autoApplyPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>524, 37</value>
+    <value>19, 21</value>
   </data>
   <data name="&gt;&gt;buttonDeleteSaved.Name" xml:space="preserve">
     <value>buttonDeleteSaved</value>
@@ -313,38 +319,44 @@ later for auto-execution or assign hotkey to it</value>
   <data name="buttonDelete.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;buttonCancel.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="label3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
-  <data name="buttonPreview.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+  <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 25</value>
   </data>
   <data name="&gt;&gt;dataGridViewTextBoxColumn14.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="loadComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>210, 21</value>
+    <value>244, 25</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Panel2.Name" xml:space="preserve">
+    <value>splitContainer1.Panel2</value>
   </data>
   <data name="dataGridViewTextBoxColumn14.HeaderText" xml:space="preserve">
     <value>Search for</value>
   </data>
   <data name="splitContainer1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>2, 60</value>
+    <value>2, 71</value>
   </data>
-  <data name="&gt;&gt;splitContainer1.Panel2.Parent" xml:space="preserve">
-    <value>splitContainer1</value>
+  <data name="sourceTagList.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="buttonDeleteSaved.Location" type="System.Drawing.Point, System.Drawing">
+    <value>985, 40</value>
+  </data>
+  <data name="buttonDown.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
   </data>
   <data name="previewTable.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
   </data>
-  <data name="&gt;&gt;buttonOK.Name" xml:space="preserve">
-    <value>buttonOK</value>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>1018, 553</value>
   </data>
   <data name="&gt;&gt;NewTag.Name" xml:space="preserve">
     <value>NewTag</value>
-  </data>
-  <data name="Column4.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="&gt;&gt;loadComboBox.Name" xml:space="preserve">
     <value>loadComboBox</value>
@@ -353,7 +365,7 @@ later for auto-execution or assign hotkey to it</value>
     <value />
   </data>
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>21</value>
   </data>
   <data name="&gt;&gt;Column4.Name" xml:space="preserve">
     <value>Column4</value>
@@ -365,19 +377,19 @@ later for auto-execution or assign hotkey to it</value>
     <value />
   </data>
   <data name="&gt;&gt;buttonDown.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>15</value>
   </data>
   <data name="Column1.MinimumWidth" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="templateTable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 2</value>
+  <data name="&gt;&gt;autoApplyPictureBox.ZOrder" xml:space="preserve">
+    <value>10</value>
   </data>
   <data name="SearchTag.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
   <data name="autoApplyCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>16, 24</value>
+    <value>19, 31</value>
   </data>
   <data name="&gt;&gt;splitContainer1.Panel1.Name" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
@@ -398,16 +410,10 @@ later for auto-execution or assign hotkey to it</value>
     <value>Aa</value>
   </data>
   <data name="buttonDeleteSaved.Size" type="System.Drawing.Size, System.Drawing">
-    <value>22, 22</value>
-  </data>
-  <data name="buttonCancel.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>25, 25</value>
   </data>
   <data name="templateNameTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
-  </data>
-  <data name="autoDestinationTagCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>32</value>
   </data>
   <data name="&gt;&gt;splitContainer1.Panel2.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -428,44 +434,56 @@ later for auto-execution or assign hotkey to it</value>
     <value>In SEARCH ONLY mode, you can enter multiple search 
 criteria, all of which must match the search results.</value>
   </data>
-  <data name="searchOnlyCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>TopLeft</value>
+  <data name="&gt;&gt;label3.Name" xml:space="preserve">
+    <value>label3</value>
   </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>From tag</value>
+  <data name="searchOnlyCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>110, 21</value>
   </data>
   <data name="&gt;&gt;destinationTagList.Name" xml:space="preserve">
     <value>destinationTagList</value>
   </data>
   <data name="buttonAdd.Location" type="System.Drawing.Point, System.Drawing">
-    <value>57, 33</value>
+    <value>66, 39</value>
   </data>
   <data name="&gt;&gt;autoApplyPictureBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;autoApplyPictureBox.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="templateTable.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 3</value>
+  </data>
+  <data name="searchOnlyCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 8</value>
+    <value>7, 11</value>
   </data>
-  <data name="buttonUp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 33</value>
+  <data name="buttonSave.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
   </data>
   <data name="&gt;&gt;autoApplyCheckBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
+  <data name="buttonOK.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="&gt;&gt;buttonDelete.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonOK.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="destinationTagList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="autoApplyPictureBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>611, 44</value>
   </data>
   <data name="templateTable.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="&gt;&gt;loadComboBox.Parent" xml:space="preserve">
     <value>$this</value>
+  </data>
+  <data name="autoApplyCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="&gt;&gt;sourceTagList.Parent" xml:space="preserve">
     <value>$this</value>
@@ -479,11 +497,17 @@ criteria, all of which must match the search results.</value>
   <data name="autoApplyCheckBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
+  <data name="splitContainer1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="&gt;&gt;splitContainer1.Panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="buttonOK.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
+  </data>
+  <data name="loadComboBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="splitContainer1.Panel1.ToolTip" xml:space="preserve">
     <value />
@@ -501,13 +525,13 @@ criteria, all of which must match the search results.</value>
     <value>autoDestinationTagCheckBox</value>
   </data>
   <data name="sourceTagList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 21</value>
+    <value>181, 25</value>
   </data>
   <data name="label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="&gt;&gt;autoApplyCheckBox.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>11</value>
   </data>
   <data name="label3.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -530,11 +554,11 @@ criteria, all of which must match the search results.</value>
   <data name="&gt;&gt;autoDestinationTagCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonSettings.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="buttonAdd.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="&gt;&gt;buttonSettings.Name" xml:space="preserve">
-    <value>buttonSettings</value>
+  <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="loadComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -542,11 +566,14 @@ criteria, all of which must match the search results.</value>
   <data name="&gt;&gt;destinationTagList.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="searchOnlyCheckBox.Text" xml:space="preserve">
-    <value>SEARCH ONLY</value>
+  <data name="autoDestinationTagCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="autoApplyPictureBox.ToolTip" xml:space="preserve">
+    <value>Save ASR preset as auto-executed</value>
   </data>
   <data name="&gt;&gt;buttonAdd.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>18</value>
   </data>
   <data name="&gt;&gt;sourceTagList.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -554,8 +581,8 @@ criteria, all of which must match the search results.</value>
   <data name="splitContainer1.Orientation" type="System.Windows.Forms.Orientation, System.Windows.Forms">
     <value>Horizontal</value>
   </data>
-  <data name="splitContainer1.ToolTip" xml:space="preserve">
-    <value />
+  <data name="autoApplyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>593, 40</value>
   </data>
   <data name="Column4.HeaderText" xml:space="preserve">
     <value>File</value>
@@ -569,6 +596,9 @@ criteria, all of which must match the search results.</value>
   <data name="buttonDeleteSaved.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
+  <data name="&gt;&gt;loadComboBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="dataGridViewTextBoxColumn16.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
@@ -579,16 +609,16 @@ criteria, all of which must match the search results.</value>
     <value>False</value>
   </data>
   <data name="destinationTagList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 21</value>
+    <value>181, 25</value>
   </data>
   <data name="autoApplyPictureBox.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>Zoom</value>
   </data>
-  <data name="buttonDelete.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="buttonSettings.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="buttonSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 23</value>
+    <value>25, 25</value>
   </data>
   <data name="&gt;&gt;autoApplyCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -599,11 +629,8 @@ criteria, all of which must match the search results.</value>
   <data name="label1.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="buttonDelete.Text" xml:space="preserve">
-    <value>Delete</value>
-  </data>
-  <data name="buttonDown.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="&gt;&gt;buttonOK.Name" xml:space="preserve">
+    <value>buttonOK</value>
   </data>
   <data name="autoDestinationTagCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1215,10 +1242,10 @@ criteria, all of which must match the search results.</value>
     <value />
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>242, 9</value>
+    <value>276, 11</value>
   </data>
   <data name="buttonSave.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>88, 25</value>
   </data>
   <data name="&gt;&gt;dirtyErrorProvider.Name" xml:space="preserve">
     <value>dirtyErrorProvider</value>
@@ -1226,77 +1253,86 @@ criteria, all of which must match the search results.</value>
   <data name="autoDestinationTagCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
   </data>
-  <data name="label3.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>TopLeft</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="buttonPreview.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;previewTable.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel2</value>
+  </data>
+  <data name="Column1.ToolTipText" xml:space="preserve">
+    <value>Use regular expressions</value>
   </data>
   <data name="&gt;&gt;searchOnlyCheckBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 13</value>
+    <value>61, 17</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 13</value>
+    <value>43, 17</value>
   </data>
-  <data name="&gt;&gt;buttonOK.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="buttonSettings.Error" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>0</value>
   </data>
   <data name="buttonAdd.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
   </data>
   <data name="destinationTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>278, 6</value>
+    <value>324, 8</value>
   </data>
   <data name="&gt;&gt;Column5.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="autoApplyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>508, 34</value>
+  <data name="buttonDeleteSaved.ToolTip" xml:space="preserve">
+    <value>Delete ASR preset</value>
   </data>
   <data name="splitContainer1.Panel2.Error" xml:space="preserve">
     <value />
   </data>
   <data name="buttonDelete.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>88, 25</value>
   </data>
   <data name="buttonPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>629, 3</value>
+    <value>734, 8</value>
   </data>
   <data name="autoApplyCheckBox.ToolTip" xml:space="preserve">
     <value>Save ASR preset as auto-executed</value>
   </data>
-  <data name="&gt;&gt;SearchTag.Name" xml:space="preserve">
-    <value>SearchTag</value>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 17</value>
   </data>
-  <data name="buttonOK.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="splitContainer1.TabIndex" type="System.Int32, mscorlib">
+    <value>119</value>
+  </data>
+  <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>923, 8</value>
   </data>
   <data name="label1.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>220, 37</value>
+    <value>257, 44</value>
+  </data>
+  <data name="templateNameTextBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="buttonDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>30, 33</value>
+    <value>35, 39</value>
   </data>
   <data name="destinationTagList.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="buttonDeleteSaved.Location" type="System.Drawing.Point, System.Drawing">
-    <value>844, 33</value>
+  <data name="buttonPreview.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
   </data>
   <data name="previewTable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 2</value>
+    <value>4, 3</value>
   </data>
   <data name="destinationTagList.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1326,7 +1362,7 @@ criteria, all of which must match the search results.</value>
     <value>NoControl</value>
   </data>
   <data name="buttonDelete.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 33</value>
+    <value>161, 39</value>
   </data>
   <data name="templateNameTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1334,8 +1370,8 @@ criteria, all of which must match the search results.</value>
   <data name="&gt;&gt;buttonUp.Name" xml:space="preserve">
     <value>buttonUp</value>
   </data>
-  <data name="NewTag.HeaderText" xml:space="preserve">
-    <value>New tag value</value>
+  <data name="&gt;&gt;SearchTag.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewComboBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="buttonDown.Text" xml:space="preserve">
     <value>⇓</value>
@@ -1349,11 +1385,20 @@ criteria, all of which must match the search results.</value>
   <data name="buttonSettings.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
+  <data name="label1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
+  </data>
   <data name="&gt;&gt;Column3.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;loadComboBox.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;OriginalTag.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Panel2.Parent" xml:space="preserve">
+    <value>splitContainer1</value>
   </data>
   <data name="splitContainer1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -1361,8 +1406,8 @@ criteria, all of which must match the search results.</value>
   <data name="&gt;&gt;splitContainer1.Panel1.Parent" xml:space="preserve">
     <value>splitContainer1</value>
   </data>
-  <data name="&gt;&gt;OriginalTag.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;buttonUp.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="label3.ToolTip" xml:space="preserve">
     <value>Preset name</value>
@@ -1374,7 +1419,10 @@ criteria, all of which must match the search results.</value>
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="autoDestinationTagCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="buttonUp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1383,7 +1431,10 @@ criteria, all of which must match the search results.</value>
     <value>Proceed</value>
   </data>
   <data name="&gt;&gt;destinationTagList.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>4</value>
+  </data>
+  <data name="label3.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="previewTable.RowHeadersWidth" type="System.Int32, mscorlib">
     <value>51</value>
@@ -1394,14 +1445,17 @@ criteria, all of which must match the search results.</value>
   <data name="buttonPreview.Error" xml:space="preserve">
     <value>Error!</value>
   </data>
+  <data name="&gt;&gt;Column5.Name" xml:space="preserve">
+    <value>Column5</value>
+  </data>
   <data name="autoApplyCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="templateTable.RowHeadersWidth" type="System.Int32, mscorlib">
     <value>51</value>
   </data>
-  <data name="templateNameTextBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="buttonUp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 39</value>
   </data>
   <data name="templateTable.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -1409,11 +1463,14 @@ criteria, all of which must match the search results.</value>
   <data name="templateTable.ColumnHeadersHeight" type="System.Int32, mscorlib">
     <value>29</value>
   </data>
-  <data name="buttonSave.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
+  <data name="&gt;&gt;toolTip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label1.Parent" xml:space="preserve">
     <value>$this</value>
+  </data>
+  <data name="label3.Error" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;label3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1439,8 +1496,14 @@ criteria, all of which must match the search results.</value>
   <data name="&gt;&gt;templateNameTextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label3.Name" xml:space="preserve">
-    <value>label3</value>
+  <data name="buttonSettings.Location" type="System.Drawing.Point, System.Drawing">
+    <value>688, 8</value>
+  </data>
+  <data name="buttonSave.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="buttonUp.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1460,29 +1523,29 @@ criteria, all of which must match the search results.</value>
   <data name="buttonSettings.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleLeft</value>
   </data>
+  <data name="buttonDown.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="sourceTagList.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
   </data>
-  <data name="&gt;&gt;buttonUp.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
   <data name="buttonAdd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>88, 25</value>
   </data>
   <data name="templateTable.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="searchOnlyCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>33</value>
+  <data name="buttonDelete.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="&gt;&gt;templateTable.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Column1.HeaderText" xml:space="preserve">
-    <value>(*)</value>
+  <data name="buttonDeleteSaved.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="searchOnlyCheckBox.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1493,32 +1556,50 @@ criteria, all of which must match the search results.</value>
   <data name="&gt;&gt;buttonAdd.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
+  <data name="buttonOK.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
   <data name="label3.Text" xml:space="preserve">
     <value>Preset:</value>
   </data>
   <data name="buttonAdd.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="label1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>TopLeft</value>
+  <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1004, 232</value>
+  </data>
+  <data name="autoApplyPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MultipleSearchAndReplaceCommand</value>
   </data>
+  <data name="sourceTagList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
   <data name="templateTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>861, 173</value>
+    <value>1004, 231</value>
+  </data>
+  <data name="&gt;&gt;buttonOK.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="buttonPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>88, 25</value>
+  </data>
+  <data name="Column4.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>8</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>to tag</value>
   </data>
+  <data name="buttonPreview.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="buttonUp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 23</value>
+    <value>25, 25</value>
   </data>
   <data name="loadComboBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1544,8 +1625,11 @@ criteria, all of which must match the search results.</value>
   <data name="autoApplyCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
+  <data name="searchOnlyCheckBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="searchOnlyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>439, 12</value>
+    <value>521, 12</value>
   </data>
   <data name="Column3.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1568,11 +1652,11 @@ criteria, all of which must match the search results.</value>
   <data name="buttonUp.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;loadComboBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="buttonDelete.Text" xml:space="preserve">
+    <value>Delete</value>
   </data>
   <data name="buttonDown.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 23</value>
+    <value>25, 25</value>
   </data>
   <data name="&gt;&gt;buttonDown.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1588,6 +1672,9 @@ criteria, all of which must match the search results.</value>
   </data>
   <data name="templateNameTextBox.Error" xml:space="preserve">
     <value />
+  </data>
+  <data name="&gt;&gt;SearchTag.Name" xml:space="preserve">
+    <value>SearchTag</value>
   </data>
   <data name="$this.ToolTip" xml:space="preserve">
     <value />
@@ -1622,23 +1709,17 @@ criteria, all of which must match the search results.</value>
   <data name="buttonSave.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
   </data>
-  <data name="sourceTagList.ToolTip" xml:space="preserve">
-    <value />
+  <data name="label1.Text" xml:space="preserve">
+    <value>From tag</value>
   </data>
   <data name="&gt;&gt;Column3.Name" xml:space="preserve">
     <value>Column3</value>
   </data>
-  <data name="buttonSave.Error" xml:space="preserve">
-    <value />
+  <data name="buttonSettings.TabIndex" type="System.Int32, mscorlib">
+    <value>120</value>
   </data>
-  <data name="splitContainer1.TabIndex" type="System.Int32, mscorlib">
-    <value>119</value>
-  </data>
-  <data name="searchOnlyCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 17</value>
-  </data>
-  <data name="splitContainer1.Panel1.Error" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;toolTip1.Name" xml:space="preserve">
+    <value>toolTip1</value>
   </data>
   <data name="templateNameTextBox.ToolTip" xml:space="preserve">
     <value>Preset name</value>
@@ -1646,14 +1727,14 @@ criteria, all of which must match the search results.</value>
   <data name="buttonDeleteSaved.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>881, 450</value>
-  </data>
   <data name="buttonSave.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Multiple Search &amp; Replace</value>
+  </data>
+  <data name="label2.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
   </data>
   <data name="&gt;&gt;Column4.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1661,11 +1742,11 @@ criteria, all of which must match the search results.</value>
   <data name="autoApplyPictureBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="autoDestinationTagCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;buttonDelete.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>17</value>
   </data>
   <data name="buttonOK.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
@@ -1682,29 +1763,29 @@ criteria, all of which must match the search results.</value>
   <data name="Column2.MinimumWidth" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="&gt;&gt;buttonSave.ZOrder" xml:space="preserve">
-    <value>17</value>
-  </data>
   <data name="buttonDelete.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
   </data>
-  <data name="&gt;&gt;splitContainer1.Panel2.Name" xml:space="preserve">
-    <value>splitContainer1.Panel2</value>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn14.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn14</value>
   </data>
-  <data name="label3.Error" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;buttonSave.ZOrder" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="NewTag.HeaderText" xml:space="preserve">
+    <value>New tag value</value>
   </data>
   <data name="&gt;&gt;label3.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>710, 3</value>
+    <value>828, 8</value>
   </data>
   <data name="&gt;&gt;buttonAdd.Name" xml:space="preserve">
     <value>buttonAdd</value>
   </data>
-  <data name="&gt;&gt;Column1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="templateNameTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="&gt;&gt;dirtyErrorProvider.Type" xml:space="preserve">
     <value>System.Windows.Forms.ErrorProvider, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1712,17 +1793,14 @@ criteria, all of which must match the search results.</value>
   <data name="label2.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;toolTip1.Name" xml:space="preserve">
-    <value>toolTip1</value>
-  </data>
   <data name="&gt;&gt;buttonDelete.Name" xml:space="preserve">
     <value>buttonDelete</value>
   </data>
   <data name="&gt;&gt;buttonDeleteSaved.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>12</value>
   </data>
-  <data name="&gt;&gt;previewTable.Name" xml:space="preserve">
-    <value>previewTable</value>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
   </data>
   <data name="&gt;&gt;label2.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1733,8 +1811,8 @@ criteria, all of which must match the search results.</value>
   <data name="Column5.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;previewTable.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Column4.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;splitContainer1.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1746,19 +1824,16 @@ criteria, all of which must match the search results.</value>
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>5</value>
   </data>
-  <data name="&gt;&gt;templateNameTextBox.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="label3.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
   </data>
   <data name="&gt;&gt;buttonUp.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>16</value>
   </data>
   <data name="splitContainer1.Panel2MinSize" type="System.Int32, mscorlib">
     <value>177</value>
-  </data>
-  <data name="buttonSettings.TabIndex" type="System.Int32, mscorlib">
-    <value>120</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Close</value>
@@ -1766,11 +1841,8 @@ criteria, all of which must match the search results.</value>
   <data name="&gt;&gt;splitContainer1.Name" xml:space="preserve">
     <value>splitContainer1</value>
   </data>
-  <data name="buttonDeleteSaved.ToolTip" xml:space="preserve">
-    <value>Delete ASR preset</value>
-  </data>
-  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="autoDestinationTagCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>32</value>
   </data>
   <data name="&gt;&gt;sourceTagList.Name" xml:space="preserve">
     <value>sourceTagList</value>
@@ -1782,16 +1854,19 @@ criteria, all of which must match the search results.</value>
     <value>label2</value>
   </data>
   <data name="autoDestinationTagCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>15, 14</value>
+    <value>29, 21</value>
   </data>
   <data name="loadComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>629, 34</value>
+    <value>734, 40</value>
+  </data>
+  <data name="buttonPreview.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+    <value>7, 17</value>
   </data>
-  <data name="buttonPreview.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="buttonCancel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="buttonDelete.ToolTip" xml:space="preserve">
     <value />
@@ -1799,17 +1874,17 @@ criteria, all of which must match the search results.</value>
   <data name="buttonAdd.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="label3.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="&gt;&gt;Column1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="buttonOK.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="Column1.HeaderText" xml:space="preserve">
+    <value>(*)</value>
   </data>
-  <data name="label2.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>1026, 580</value>
   </data>
   <data name="destinationTagList.ToolTip" xml:space="preserve">
     <value />
@@ -1823,23 +1898,20 @@ criteria, all of which must match the search results.</value>
   <data name="previewTable.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="searchOnlyCheckBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Column2.Width" type="System.Int32, mscorlib">
     <value>30</value>
   </data>
-  <data name="buttonCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="buttonSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>590, 3</value>
+  <data name="buttonDown.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="splitContainer1.Panel2.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="Column1.ToolTipText" xml:space="preserve">
-    <value>Use regular expressions</value>
+  <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="loadComboBox.ToolTip" xml:space="preserve">
     <value>Load ASR preset</value>
@@ -1859,20 +1931,23 @@ criteria, all of which must match the search results.</value>
   <data name="&gt;&gt;buttonDown.Name" xml:space="preserve">
     <value>buttonDown</value>
   </data>
-  <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+  <data name="&gt;&gt;buttonSettings.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="&gt;&gt;splitContainer1.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>9</value>
   </data>
   <data name="&gt;&gt;templateTable.Name" xml:space="preserve">
     <value>templateTable</value>
   </data>
-  <data name="autoApplyCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+  <data name="&gt;&gt;buttonCancel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="templateTable.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="&gt;&gt;searchOnlyCheckBox.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>13</value>
   </data>
   <data name="&gt;&gt;buttonSettings.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1887,10 +1962,10 @@ criteria, all of which must match the search results.</value>
     <value>NoControl</value>
   </data>
   <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
-    <value>177</value>
+    <value>236</value>
   </data>
-  <data name="&gt;&gt;SearchTag.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewComboBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;autoDestinationTagCheckBox.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <data name="buttonDelete.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
@@ -1898,8 +1973,8 @@ criteria, all of which must match the search results.</value>
   <data name="autoApplyPictureBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="&gt;&gt;sourceTagList.ZOrder" xml:space="preserve">
-    <value>14</value>
+  <data name="searchOnlyCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>33</value>
   </data>
   <data name="label2.ToolTip" xml:space="preserve">
     <value />
@@ -1907,20 +1982,23 @@ criteria, all of which must match the search results.</value>
   <data name="OriginalTag.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="Column4.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
+  <data name="autoDestinationTagCheckBox.Text" xml:space="preserve">
+    <value> </value>
   </data>
-  <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>791, 3</value>
+  <data name="buttonSave.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>861, 172</value>
+  <data name="buttonDelete.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="splitContainer1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
   <data name="buttonOK.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>88, 25</value>
   </data>
   <data name="sourceTagList.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
@@ -1939,6 +2017,9 @@ criteria, all of which must match the search results.</value>
   </metadata>
   <metadata name="dataGridViewTextBoxColumn16.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
+  </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>ru</value>
   </metadata>
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>165, 17</value>

@@ -288,7 +288,7 @@ namespace MusicBeePlugin
 
                     foreach (var tempBackupGuid in tempBackupGuids)
                     {
-                        if (!backupGuids.TryGetValue(tempBackupGuid.Key, out _))
+                        if (!backupGuids.Contains(tempBackupGuid.Key))
                             backupGuids.Add(tempBackupGuid.Key, false);
                     }
                 }
@@ -304,7 +304,7 @@ namespace MusicBeePlugin
                 {
                     backupCache = BackupCacheType.Load(GetBackupFilenameWithoutExtension(backupCacheFile));
 
-                    if (backupGuids.TryGetValue(backupCache.guid, out _))
+                    if (backupGuids.Contains(backupCache.guid))
                     {
                         int negativeDate = -((backupCache.creationDate.Year * 10000 + backupCache.creationDate.Month * 100 + backupCache.creationDate.Day) * 1000000 +
                             backupCache.creationDate.Hour * 10000 + backupCache.creationDate.Minute * 100 + backupCache.creationDate.Second);

@@ -592,5 +592,10 @@ namespace MusicBeePlugin
             customText4CheckBox.Checked = !customText4CheckBox.Checked;
             customText4CheckBox_CheckedChanged(null, null);
         }
+
+        private void ignoreCaseCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            ignoreCaseCheckBox.Checked = !ignoreCaseCheckBox.Checked;
+        }
     }
 }
