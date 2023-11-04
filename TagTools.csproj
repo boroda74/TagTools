@@ -133,12 +133,6 @@
     <Compile Include="Additional-Tagging-Tools\AutoBackupSettings.Designer.cs">
       <DependentUpon>AutoBackupSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="Additional-Tagging-Tools\ASRPresetConfirmation.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Additional-Tagging-Tools\ASRPresetConfirmation.Designer.cs">
-      <DependentUpon>ASRPresetConfirmation.cs</DependentUpon>
-    </Compile>
     <Compile Include="Additional-Tagging-Tools\MultipleSearchAndReplace.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -255,10 +249,6 @@
       <DependentUpon>AdvancedSearchAndReplace.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Additional-Tagging-Tools\ASRPresetConfirmation.ru.resx">
-      <DependentUpon>ASRPresetConfirmation.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Additional-Tagging-Tools\ASRPresetEditor.resx">
       <DependentUpon>ASRPresetEditor.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -295,10 +285,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Additional-Tagging-Tools\AutoBackupSettings.resx">
       <DependentUpon>AutoBackupSettings.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Additional-Tagging-Tools\ASRPresetConfirmation.resx">
-      <DependentUpon>ASRPresetConfirmation.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Additional-Tagging-Tools\LibraryReports.ru.resx">

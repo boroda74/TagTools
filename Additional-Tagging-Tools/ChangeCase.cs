@@ -393,7 +393,7 @@ namespace MusicBeePlugin
             if (exceptionWordsCheckBox.Enabled && exceptionWordsCheckBox.Checked)
                 exceptionWords = exceptionWordsBox.Text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-            if (exceptionWordsCheckBox.Enabled && onlyWordsCheckBox.Checked)
+            if (onlyWordsCheckBox.Enabled && onlyWordsCheckBox.Checked)
                 exceptionWords = exceptionWordsBox.Text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
             if (exceptionCharsCheckBox.Enabled && exceptionCharsCheckBox.Checked)

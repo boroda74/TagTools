@@ -4168,7 +4168,7 @@ namespace MusicBeePlugin
                                 }
                                 else if (newPreset.removePreset && newPreset.modifiedUtc > SavedSettings.lastAsrImportDateUtc)
                                 {
-                                    if (askToRemovePresets && newPreset.removePreset)
+                                    if (askToRemovePresets)
                                     {
                                         if (MessageBox.Show(this, MsgDoYouWantToResetYourCustomizedPredefinedPresets, "", MessageBoxButtons.YesNo, 
                                             MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.No)

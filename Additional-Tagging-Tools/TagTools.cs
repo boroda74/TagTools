@@ -1537,10 +1537,6 @@ namespace MusicBeePlugin
         public static void UpdateTrackForBackup(string trackUrl)
         {
             string id = GetPersistentTrackId(trackUrl);
-
-            if (id == null)
-                return;
-
             string nodeName = MbApiInterface.Library_GetFileTag(trackUrl, (MetaDataType)42);
 
             if (nodeName != MusicName)
@@ -1984,8 +1980,7 @@ namespace MusicBeePlugin
                         break;
 
                     case ArtistArtistsId:
-                        if (tags[i] == "")
-                            tags[i] = MbApiInterface.Library_GetFileTag(sourceFileUrl, MetaDataType.Artist);
+                        tags[i] = MbApiInterface.Library_GetFileTag(sourceFileUrl, MetaDataType.Artist);
                         break;
 
                     case ComposerComposersId:
@@ -2771,7 +2766,7 @@ namespace MusicBeePlugin
                 foreach (PluginWindowTemplate form in OpenedForms)
                 {
                     if (!form.Visible || form.WindowState == FormWindowState.Minimized)
-                        PluginWindowTemplate.Display(null);
+                        PluginWindowTemplate.Display(form);
                 }
             }
         }
@@ -4298,7 +4293,7 @@ namespace MusicBeePlugin
                     reportPreset.appendTexts = new string[reportPreset.functions.Length];
 
 
-                if (reportPreset.groupings.Length == 0 && reportPreset.functions.Length == 0)
+                if (reportPreset != null && reportPreset.groupings.Length == 0 && reportPreset.functions.Length == 0)
                 {
                     reportPreset.groupings = new PresetColumnAttributes[reportPreset.groupingNames.Length];
 

@@ -378,9 +378,10 @@ namespace MusicBeePlugin
             {
                 foreach (PluginWindowTemplate form in OpenedForms)
                 {
-                    if (newForm == null || form.GetType() == newForm.GetType())
+                    if (form.GetType() == newForm.GetType())
                     {
-                        newForm?.Dispose();
+                        if (form != newForm)
+                            newForm.Dispose();
 
                         if (form.Visible && form.WindowState != FormWindowState.Minimized)
                         {
@@ -394,47 +395,30 @@ namespace MusicBeePlugin
                             form.Height = form.height;
                             form.WindowState = form.windowState;
 
-                            if (newForm != null && modalForm)
-                            {
-                                form.modal = true;
-                                form.setInitialFormMaximizedBounds();
+                            if (form.modal)
                                 form.ShowDialog();
-                            }
-                            else if (newForm != null)
-                            {
-                                form.modal = false;
-                                form.setInitialFormMaximizedBounds();
+                            else
                                 form.Show();
-                            }
-                            else if (form.modal)
-                            {
-                                form.ShowDialog();
-                            }
-                            else //if (!form.modal)
-                            {
-                                form.Show();
-                            }
                         }
 
                         return;
                     }
                 }
 
-                OpenedForms.Add(newForm);
-            }
+                newForm.setInitialFormMaximizedBounds();
 
-            if (modalForm)
-            {
-                newForm.modal = true;
-                newForm.setInitialFormMaximizedBounds();
-                newForm.ShowDialog();
-                newForm.Dispose();
-            }
-            else
-            {
-                newForm.modal = false;
-                newForm.setInitialFormMaximizedBounds();
-                newForm.Show();
+                if (modalForm)
+                {
+                    newForm.modal = true;
+                    newForm.ShowDialog();
+                }
+                else if (newForm != null)
+                {
+                    newForm.modal = false;
+                    newForm.Show();
+                }
+
+                OpenedForms.Add(newForm);
             }
         }
 

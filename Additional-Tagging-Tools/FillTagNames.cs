@@ -662,7 +662,7 @@ namespace MusicBeePlugin
             catch (ArgumentException)
             {
                 wereErrors = true;
-                file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual26) + " / " + MetaDataType.Virtual26);
+                file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual25) + " / " + MetaDataType.Virtual25);
             }
             try
             {

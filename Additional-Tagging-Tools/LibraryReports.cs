@@ -567,7 +567,7 @@ namespace MusicBeePlugin
                     expression = expressions[exprIndex];
 
                 return ((int)type).ToString("D2") + "\u0007" + ((int)GetTagId(parameterName)).ToString("D4")
-                    + "\u0007" + ((int)GetTagId(parameter2Name)).ToString("D4") + "\u0007" + expression ?? "";
+                    + "\u0007" + ((int)GetTagId(parameter2Name)).ToString("D4") + "\u0007" + expression;
             }
 
             public override bool Equals(object obj)
@@ -3101,6 +3101,8 @@ namespace MusicBeePlugin
                                     operations[j], mulDivFactors[j], precisionDigits[j], appendTexts[j]);
                                 SetFileTag(queriedFiles[i], destinationTagIds[j], resultValue);
                             }
+
+                            j++;
                         }
 
                         CommitTagsToFile(queriedFiles[i], false, false);
@@ -5943,12 +5945,14 @@ namespace MusicBeePlugin
             if (presetIsLoaded)
                 return;
 
-            bool? selectedRefCheckStatus = lastSelectedRefCheckStatus;
-            if (selectedPreset.useAnotherPresetAsSource && selectedPreset.anotherPresetAsSource.permanentGuid == Guid.Empty)
-                selectedRefCheckStatus = null;
-
             if (selectedPreset != null)
+            {
+                bool? selectedRefCheckStatus = lastSelectedRefCheckStatus;
+                if (selectedPreset.useAnotherPresetAsSource && selectedPreset.anotherPresetAsSource.permanentGuid == Guid.Empty)
+                    selectedRefCheckStatus = null;
+
                 adjustPresetAsSourceUI(useAnotherPresetAsSourceComboBox, selectedPreset.anotherPresetAsSource, selectedRefCheckStatus);
+            }
         }
 
         private void useAnotherPresetAsSourceCheckBoxLabel_Click(object sender, EventArgs e)
