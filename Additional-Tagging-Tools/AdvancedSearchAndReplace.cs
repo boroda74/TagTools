@@ -3082,7 +3082,31 @@ namespace MusicBeePlugin
 
         private void buttonClose_Click(object sender, EventArgs e)
         {
-            Close();
+            if (unsavedChanges)
+            {
+                DialogResult result = DialogResult.No;
+                MessageBoxDefaultButton lastAnswer = SavedSettings.asrUnsavedChangesLastAnswer;
+                MessageBoxButtons confirmationButtons = MessageBoxButtons.YesNoCancel;
+
+                if (ForceCloseForms)
+                    confirmationButtons = MessageBoxButtons.YesNo;
+
+                result = MessageBox.Show(this, MsgAsrDoYouWantToSaveChangesBeforeClosingTheWindow,
+                    string.Empty, confirmationButtons, MessageBoxIcon.Warning, lastAnswer);
+
+
+                if (result == DialogResult.Yes)
+                {
+                    SavedSettings.asrUnsavedChangesLastAnswer = MessageBoxDefaultButton.Button1;
+                    saveSettings();
+                    Close();
+                }
+                else if (result == DialogResult.No)
+                {
+                    SavedSettings.asrUnsavedChangesLastAnswer = MessageBoxDefaultButton.Button2;
+                    Close();
+                }
+            }
         }
 
         private void deletePreset(Preset presetToRemove)
@@ -5699,35 +5723,7 @@ namespace MusicBeePlugin
 
         private void AdvancedSearchAndReplaceCommand_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (unsavedChanges)
-            {
-                DialogResult result = DialogResult.No;
-                MessageBoxDefaultButton lastAnswer = SavedSettings.asrUnsavedChangesLastAnswer;
-                MessageBoxButtons confirmationButtons = MessageBoxButtons.YesNoCancel;
-
-                if (ForceCloseForms)
-                    confirmationButtons = MessageBoxButtons.YesNo;
-
-                result = MessageBox.Show(this, MsgAsrDoYouWantToSaveChangesBeforeClosingTheWindow,
-                    string.Empty, confirmationButtons, MessageBoxIcon.Warning, lastAnswer);
-
-
-                if (result == DialogResult.Yes)
-                {
-                    SavedSettings.asrUnsavedChangesLastAnswer = MessageBoxDefaultButton.Button1;
-                    saveSettings();
-                }
-                else if (result == DialogResult.No)
-                {
-                    SavedSettings.asrUnsavedChangesLastAnswer = MessageBoxDefaultButton.Button2;
-                }
-                else if (result == DialogResult.Cancel)
-                {
-                    //SavedSettings.asrUnsavedChangesLastAnswer = MessageBoxDefaultButton.Button3;
-                    e.Cancel = true;
-                    return;
-                }
-            }
+            //Nothing at the moment...
         }
 
         private void AdvancedSearchAndReplaceCommand_Load(object sender, EventArgs e)

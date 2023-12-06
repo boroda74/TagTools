@@ -4817,7 +4817,28 @@ namespace MusicBeePlugin
 
         private void buttonClose_Click(object sender, EventArgs e)
         {
-            Close();
+            if (unsavedChanges)
+            {
+                DialogResult result = DialogResult.No;
+                MessageBoxDefaultButton lastAnswer = SavedSettings.asrUnsavedChangesLastAnswer;
+                MessageBoxButtons confirmationButtons = MessageBoxButtons.YesNoCancel;
+
+                result = MessageBox.Show(this, MsgAsrDoYouWantToSaveChangesBeforeClosingTheWindow,
+                    string.Empty, confirmationButtons, MessageBoxIcon.Warning, lastAnswer);
+
+
+                if (result == DialogResult.Yes)
+                {
+                    SavedSettings.lrUnsavedChangesLastAnswer = MessageBoxDefaultButton.Button1;
+                    saveSettings();
+                    Close();
+                }
+                else if (result == DialogResult.No)
+                {
+                    SavedSettings.lrUnsavedChangesLastAnswer = MessageBoxDefaultButton.Button2;
+                    Close();
+                }
+            }
         }
 
         private void buttonFilterResultsChangeLabel()
@@ -4862,35 +4883,7 @@ namespace MusicBeePlugin
 
         private void LibraryReportsCommand_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (unsavedChanges)
-            {
-                DialogResult result = DialogResult.No;
-                MessageBoxDefaultButton lastAnswer = SavedSettings.asrUnsavedChangesLastAnswer;
-                MessageBoxButtons confirmationButtons = MessageBoxButtons.YesNoCancel;
-
-                if (ForceCloseForms)
-                    confirmationButtons = MessageBoxButtons.YesNo;
-
-                result = MessageBox.Show(this, MsgAsrDoYouWantToSaveChangesBeforeClosingTheWindow,
-                    string.Empty, confirmationButtons, MessageBoxIcon.Warning, lastAnswer);
-
-
-                if (result == DialogResult.Yes)
-                {
-                    SavedSettings.lrUnsavedChangesLastAnswer = MessageBoxDefaultButton.Button1;
-                    saveSettings();
-                }
-                else if (result == DialogResult.No)
-                {
-                    SavedSettings.lrUnsavedChangesLastAnswer = MessageBoxDefaultButton.Button2;
-                }
-                else if (result == DialogResult.Cancel)
-                {
-                    //SavedSettings.lrUnsavedChangesLastAnswer = MessageBoxDefaultButton.Button3;
-                    e.Cancel = true;
-                    return;
-                }
-            }
+            //Nothing at the moment...
         }
 
         private void LibraryReportsCommand_Load(object sender, EventArgs e)
