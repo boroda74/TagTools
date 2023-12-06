@@ -18,21 +18,26 @@ namespace MusicBeePlugin
         public ASRPresetEditor(Plugin tagToolsPluginParam) : base(tagToolsPluginParam)
         {
             InitializeComponent();
-
             WritableAllTagsLocalizedItem = parameterTagTypeList.Items[3].ToString();
-
-            initializeForm();
         }
 
-        protected new void initializeForm()
+        protected override void initializeForm()
         {
             base.initializeForm();
 
             if (Language == "ru")
             {
-                tableLayoutPanel1.ColumnStyles[1].Width = 167;
-                tableLayoutPanel1.ColumnStyles[5].Width = 167;
+                tableLayoutPanel1.ColumnStyles[2].Width = (int)(180 * dpiScaleFactor);
+                tableLayoutPanel1.ColumnStyles[7].Width = (int)(180 * dpiScaleFactor);
             }
+            else
+            {
+                tableLayoutPanel1.ColumnStyles[2].Width = (int)(135 * dpiScaleFactor);
+                tableLayoutPanel1.ColumnStyles[7].Width = (int)(135 * dpiScaleFactor);
+            }
+
+
+            button_GotFocus(this.AcceptButton, null); //Let's mark active button
         }
 
         private void makeReadonly(Control parent)
@@ -97,7 +102,7 @@ namespace MusicBeePlugin
             {
                 makeReadonly(this);
                 buttonCancel.Enable(true);
-                buttonApply.Enable(true);
+                buttonOK.Enable(true);
                 linkLabel1.Enable(true);
             }
 
@@ -352,10 +357,10 @@ namespace MusicBeePlugin
             nameBox.Text = GetDictValue(preset.names, currentLanguage);
             descriptionBox.Text = GetDictValue(preset.descriptions, currentLanguage);
 
-            if (nameBox.Text == "")
+            if (nameBox.Text == string.Empty)
                 nameBox.Text = prevName;
 
-            if (descriptionBox.Text == "")
+            if (descriptionBox.Text == string.Empty)
                 descriptionBox.Text = prevDescription;
         }
 
@@ -452,7 +457,7 @@ namespace MusicBeePlugin
                 tagList.SelectedIndex = 0;
         }
 
-        private void parameterTagTypeChanged(ComboBox parameterTagTypeListParam, Label typeLabel, ComboBox parameterTagListParam, 
+        private void parameterTagTypeChanged(ComboBox parameterTagTypeListParam, PictureBox pictureBox, ComboBox parameterTagListParam, 
             Label label, ComboBox parameterTagTypeListParam2 = null)
         {
             string parameterTagName = parameterTagListParam.Text;
@@ -460,9 +465,9 @@ namespace MusicBeePlugin
             TagType tagType = (TagType)parameterTagTypeListParam.SelectedIndex;
 
             if (tagType == TagType.WritableAllowAllTags)
-                typeLabel.Image = Resources.warning_12b;
+                pictureBox.Image = ThemedBitmapAddRef(this, Warning);
             else
-                typeLabel.Image = Resources.transparent_15;
+                pictureBox.Image = Resources.transparent_15;
 
 
             FillParameterTagTypeList(tagType, parameterTagTypeListParam2);
@@ -487,32 +492,32 @@ namespace MusicBeePlugin
 
         private void parameterTagTypeList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            parameterTagTypeChanged(parameterTagTypeList, label17, parameterTagList, label21, parameterTag2TypeList);
+            parameterTagTypeChanged(parameterTagTypeList, pictureBox17, parameterTagList, label21, parameterTag2TypeList);
         }
 
         private void parameterTag2TypeList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            parameterTagTypeChanged(parameterTag2TypeList, label18, parameterTag2List, label22, parameterTag3TypeList);
+            parameterTagTypeChanged(parameterTag2TypeList, pictureBox18, parameterTag2List, label22, parameterTag3TypeList);
         }
 
         private void parameterTag3TypeList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            parameterTagTypeChanged(parameterTag3TypeList, label19, parameterTag3List, label23, parameterTag4TypeList);
+            parameterTagTypeChanged(parameterTag3TypeList, pictureBox19, parameterTag3List, label23, parameterTag4TypeList);
         }
 
         private void parameterTag4TypeList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            parameterTagTypeChanged(parameterTag4TypeList, label28, parameterTag4List, label24, parameterTag5TypeList);
+            parameterTagTypeChanged(parameterTag4TypeList, pictureBox28, parameterTag4List, label24, parameterTag5TypeList);
         }
 
         private void parameterTag5TypeList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            parameterTagTypeChanged(parameterTag5TypeList, label27, parameterTag5List, label25, parameterTag6TypeList);
+            parameterTagTypeChanged(parameterTag5TypeList, pictureBox27, parameterTag5List, label25, parameterTag6TypeList);
         }
 
         private void parameterTag6TypeList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            parameterTagTypeChanged(parameterTag6TypeList, label26, parameterTag6List, label20);
+            parameterTagTypeChanged(parameterTag6TypeList, pictureBox26, parameterTag6List, label20);
         }
 
         private void customTextChecked_CheckedChanged(object sender, EventArgs e)//***---
@@ -520,7 +525,7 @@ namespace MusicBeePlugin
             customTextBox.Enable(customTextCheckBox.Checked);
             if (!customTextCheckBox.Checked)
             {
-                customTextBox.Text = "";
+                customTextBox.Text = string.Empty;
                 customText2CheckBox.Checked = false;
             }
             customText2CheckBox.Enable(customTextCheckBox.Checked);
@@ -540,7 +545,7 @@ namespace MusicBeePlugin
             customText2Box.Enable(customText2CheckBox.Checked);
             if (!customText2CheckBox.Checked)
             {
-                customText2Box.Text = "";
+                customText2Box.Text = string.Empty;
                 customText3CheckBox.Checked = false;
             }
             customText3CheckBox.Enable(customText2CheckBox.Checked);
@@ -560,7 +565,7 @@ namespace MusicBeePlugin
             customText3Box.Enable(customText3CheckBox.Checked);
             if (!customText3CheckBox.Checked)
             {
-                customText3Box.Text = "";
+                customText3Box.Text = string.Empty;
                 customText4CheckBox.Checked = false;
             }
             customText4CheckBox.Enable(customText3CheckBox.Checked);
@@ -580,7 +585,7 @@ namespace MusicBeePlugin
             customText4Box.Enable(customText4CheckBox.Checked);
             if (!customText4CheckBox.Checked)
             {
-                customText4Box.Text = "";
+                customText4Box.Text = string.Empty;
             }
         }
 

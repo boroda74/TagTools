@@ -9,19 +9,6 @@ namespace MusicBeePlugin
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Освободить все используемые ресурсы.
-        /// </summary>
-        /// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
         #region Код, автоматически созданный конструктором форм Windows
 
         /// <summary>
@@ -45,7 +32,7 @@ namespace MusicBeePlugin
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonSave = new System.Windows.Forms.Button();
             this.threshold05Box = new System.Windows.Forms.TextBox();
             this.threshold1Box = new System.Windows.Forms.TextBox();
             this.threshold15Box = new System.Windows.Forms.TextBox();
@@ -117,6 +104,8 @@ namespace MusicBeePlugin
             this.checkBox4Label = new System.Windows.Forms.Label();
             this.checkBox45Label = new System.Windows.Forms.Label();
             this.checkBox5Label = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.sinceAddedCheckBox = new System.Windows.Forms.CheckBox();
             this.sinceAddedCheckBoxLabel = new System.Windows.Forms.Label();
@@ -153,8 +142,8 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.buttonCancel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonCancel.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.buttonCancel, ((int)(resources.GetObject("buttonCancel.IconPadding"))));
             this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Tag = "#AutoRateCommand@non-defaultable";
             this.toolTip1.SetToolTip(this.buttonCancel, resources.GetString("buttonCancel.ToolTip"));
-            this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // buttonOK
@@ -165,7 +154,6 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconPadding(this.buttonOK, ((int)(resources.GetObject("buttonOK.IconPadding"))));
             this.buttonOK.Name = "buttonOK";
             this.toolTip1.SetToolTip(this.buttonOK, resources.GetString("buttonOK.ToolTip"));
-            this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // label4
@@ -198,9 +186,8 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.autoRateAtStartUpCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("autoRateAtStartUpCheckBox.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.autoRateAtStartUpCheckBox, ((int)(resources.GetObject("autoRateAtStartUpCheckBox.IconPadding"))));
             this.autoRateAtStartUpCheckBox.Name = "autoRateAtStartUpCheckBox";
-            this.autoRateAtStartUpCheckBox.Tag = "autoRateAtStartUpCheckBoxLabel";
+            this.autoRateAtStartUpCheckBox.Tag = "#autoRateAtStartUpCheckBoxLabel";
             this.toolTip1.SetToolTip(this.autoRateAtStartUpCheckBox, resources.GetString("autoRateAtStartUpCheckBox.ToolTip"));
-            this.autoRateAtStartUpCheckBox.UseVisualStyleBackColor = true;
             this.autoRateAtStartUpCheckBox.CheckedChanged += new System.EventHandler(this.autoRateAtStartUp_CheckedChanged);
             // 
             // autoRateOnTrackPropertiesCheckBox
@@ -210,9 +197,8 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.autoRateOnTrackPropertiesCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("autoRateOnTrackPropertiesCheckBox.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.autoRateOnTrackPropertiesCheckBox, ((int)(resources.GetObject("autoRateOnTrackPropertiesCheckBox.IconPadding"))));
             this.autoRateOnTrackPropertiesCheckBox.Name = "autoRateOnTrackPropertiesCheckBox";
-            this.autoRateOnTrackPropertiesCheckBox.Tag = "autoRateOnTrackPropertiesCheckBoxLabel";
+            this.autoRateOnTrackPropertiesCheckBox.Tag = "#autoRateOnTrackPropertiesCheckBoxLabel";
             this.toolTip1.SetToolTip(this.autoRateOnTrackPropertiesCheckBox, resources.GetString("autoRateOnTrackPropertiesCheckBox.ToolTip"));
-            this.autoRateOnTrackPropertiesCheckBox.UseVisualStyleBackColor = true;
             // 
             // baseRatingTrackBar
             // 
@@ -277,16 +263,16 @@ namespace MusicBeePlugin
             this.label10.Name = "label10";
             this.toolTip1.SetToolTip(this.label10, resources.GetString("label10.ToolTip"));
             // 
-            // button1
+            // buttonSave
             // 
-            resources.ApplyResources(this.button1, "button1");
-            this.dirtyErrorProvider.SetError(this.button1, resources.GetString("button1.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.button1, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("button1.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.button1, ((int)(resources.GetObject("button1.IconPadding"))));
-            this.button1.Name = "button1";
-            this.toolTip1.SetToolTip(this.button1, resources.GetString("button1.ToolTip"));
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            resources.ApplyResources(this.buttonSave, "buttonSave");
+            this.dirtyErrorProvider.SetError(this.buttonSave, resources.GetString("buttonSave.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.buttonSave, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonSave.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.buttonSave, ((int)(resources.GetObject("buttonSave.IconPadding"))));
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Tag = "@non-defaultable";
+            this.toolTip1.SetToolTip(this.buttonSave, resources.GetString("buttonSave.ToolTip"));
+            this.buttonSave.Click += new System.EventHandler(this.button1_Click);
             // 
             // threshold05Box
             // 
@@ -295,6 +281,7 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.threshold05Box, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("threshold05Box.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.threshold05Box, ((int)(resources.GetObject("threshold05Box.IconPadding"))));
             this.threshold05Box.Name = "threshold05Box";
+            this.threshold05Box.Tag = "#label28";
             this.toolTip1.SetToolTip(this.threshold05Box, resources.GetString("threshold05Box.ToolTip"));
             this.threshold05Box.Leave += new System.EventHandler(this.threshold_TextChanged);
             // 
@@ -305,6 +292,7 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.threshold1Box, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("threshold1Box.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.threshold1Box, ((int)(resources.GetObject("threshold1Box.IconPadding"))));
             this.threshold1Box.Name = "threshold1Box";
+            this.threshold1Box.Tag = "#label27";
             this.toolTip1.SetToolTip(this.threshold1Box, resources.GetString("threshold1Box.ToolTip"));
             this.threshold1Box.Leave += new System.EventHandler(this.threshold_TextChanged);
             // 
@@ -315,6 +303,7 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.threshold15Box, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("threshold15Box.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.threshold15Box, ((int)(resources.GetObject("threshold15Box.IconPadding"))));
             this.threshold15Box.Name = "threshold15Box";
+            this.threshold15Box.Tag = "#label26";
             this.toolTip1.SetToolTip(this.threshold15Box, resources.GetString("threshold15Box.ToolTip"));
             this.threshold15Box.Leave += new System.EventHandler(this.threshold_TextChanged);
             // 
@@ -325,6 +314,7 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.threshold2Box, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("threshold2Box.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.threshold2Box, ((int)(resources.GetObject("threshold2Box.IconPadding"))));
             this.threshold2Box.Name = "threshold2Box";
+            this.threshold2Box.Tag = "#label25";
             this.toolTip1.SetToolTip(this.threshold2Box, resources.GetString("threshold2Box.ToolTip"));
             this.threshold2Box.Leave += new System.EventHandler(this.threshold_TextChanged);
             // 
@@ -335,6 +325,7 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.threshold25Box, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("threshold25Box.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.threshold25Box, ((int)(resources.GetObject("threshold25Box.IconPadding"))));
             this.threshold25Box.Name = "threshold25Box";
+            this.threshold25Box.Tag = "#label24";
             this.toolTip1.SetToolTip(this.threshold25Box, resources.GetString("threshold25Box.ToolTip"));
             this.threshold25Box.Leave += new System.EventHandler(this.threshold_TextChanged);
             // 
@@ -345,6 +336,7 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.threshold3Box, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("threshold3Box.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.threshold3Box, ((int)(resources.GetObject("threshold3Box.IconPadding"))));
             this.threshold3Box.Name = "threshold3Box";
+            this.threshold3Box.Tag = "#label23";
             this.toolTip1.SetToolTip(this.threshold3Box, resources.GetString("threshold3Box.ToolTip"));
             this.threshold3Box.Leave += new System.EventHandler(this.threshold_TextChanged);
             // 
@@ -355,6 +347,7 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.threshold35Box, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("threshold35Box.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.threshold35Box, ((int)(resources.GetObject("threshold35Box.IconPadding"))));
             this.threshold35Box.Name = "threshold35Box";
+            this.threshold35Box.Tag = "#label22";
             this.toolTip1.SetToolTip(this.threshold35Box, resources.GetString("threshold35Box.ToolTip"));
             this.threshold35Box.Leave += new System.EventHandler(this.threshold_TextChanged);
             // 
@@ -365,6 +358,7 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.threshold4Box, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("threshold4Box.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.threshold4Box, ((int)(resources.GetObject("threshold4Box.IconPadding"))));
             this.threshold4Box.Name = "threshold4Box";
+            this.threshold4Box.Tag = "#label21";
             this.toolTip1.SetToolTip(this.threshold4Box, resources.GetString("threshold4Box.ToolTip"));
             this.threshold4Box.Leave += new System.EventHandler(this.threshold_TextChanged);
             // 
@@ -375,6 +369,7 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.threshold45Box, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("threshold45Box.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.threshold45Box, ((int)(resources.GetObject("threshold45Box.IconPadding"))));
             this.threshold45Box.Name = "threshold45Box";
+            this.threshold45Box.Tag = "#label20";
             this.toolTip1.SetToolTip(this.threshold45Box, resources.GetString("threshold45Box.ToolTip"));
             this.threshold45Box.Leave += new System.EventHandler(this.threshold_TextChanged);
             // 
@@ -385,6 +380,7 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.threshold5Box, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("threshold5Box.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.threshold5Box, ((int)(resources.GetObject("threshold5Box.IconPadding"))));
             this.threshold5Box.Name = "threshold5Box";
+            this.threshold5Box.Tag = "#LabelFive";
             this.toolTip1.SetToolTip(this.threshold5Box, resources.GetString("threshold5Box.ToolTip"));
             this.threshold5Box.Leave += new System.EventHandler(this.threshold_TextChanged);
             // 
@@ -395,6 +391,7 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.LabelFive, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("LabelFive.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.LabelFive, ((int)(resources.GetObject("LabelFive.IconPadding"))));
             this.LabelFive.Name = "LabelFive";
+            this.LabelFive.Tag = "#groupBox2";
             this.toolTip1.SetToolTip(this.LabelFive, resources.GetString("LabelFive.ToolTip"));
             // 
             // label19
@@ -413,6 +410,7 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.label20, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("label20.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.label20, ((int)(resources.GetObject("label20.IconPadding"))));
             this.label20.Name = "label20";
+            this.label20.Tag = "#groupBox2";
             this.toolTip1.SetToolTip(this.label20, resources.GetString("label20.ToolTip"));
             // 
             // label21
@@ -422,6 +420,7 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.label21, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("label21.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.label21, ((int)(resources.GetObject("label21.IconPadding"))));
             this.label21.Name = "label21";
+            this.label21.Tag = "#groupBox2";
             this.toolTip1.SetToolTip(this.label21, resources.GetString("label21.ToolTip"));
             // 
             // label22
@@ -431,6 +430,7 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.label22, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("label22.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.label22, ((int)(resources.GetObject("label22.IconPadding"))));
             this.label22.Name = "label22";
+            this.label22.Tag = "#groupBox2";
             this.toolTip1.SetToolTip(this.label22, resources.GetString("label22.ToolTip"));
             // 
             // label23
@@ -440,6 +440,7 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.label23, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("label23.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.label23, ((int)(resources.GetObject("label23.IconPadding"))));
             this.label23.Name = "label23";
+            this.label23.Tag = "#groupBox2";
             this.toolTip1.SetToolTip(this.label23, resources.GetString("label23.ToolTip"));
             // 
             // label24
@@ -449,6 +450,7 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.label24, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("label24.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.label24, ((int)(resources.GetObject("label24.IconPadding"))));
             this.label24.Name = "label24";
+            this.label24.Tag = "#groupBox2";
             this.toolTip1.SetToolTip(this.label24, resources.GetString("label24.ToolTip"));
             // 
             // label25
@@ -458,6 +460,7 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.label25, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("label25.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.label25, ((int)(resources.GetObject("label25.IconPadding"))));
             this.label25.Name = "label25";
+            this.label25.Tag = "#groupBox2";
             this.toolTip1.SetToolTip(this.label25, resources.GetString("label25.ToolTip"));
             // 
             // label26
@@ -467,6 +470,7 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.label26, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("label26.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.label26, ((int)(resources.GetObject("label26.IconPadding"))));
             this.label26.Name = "label26";
+            this.label26.Tag = "#groupBox2";
             this.toolTip1.SetToolTip(this.label26, resources.GetString("label26.ToolTip"));
             // 
             // label27
@@ -476,6 +480,7 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.label27, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("label27.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.label27, ((int)(resources.GetObject("label27.IconPadding"))));
             this.label27.Name = "label27";
+            this.label27.Tag = "#groupBox2";
             this.toolTip1.SetToolTip(this.label27, resources.GetString("label27.ToolTip"));
             // 
             // label28
@@ -485,6 +490,7 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.label28, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("label28.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.label28, ((int)(resources.GetObject("label28.IconPadding"))));
             this.label28.Name = "label28";
+            this.label28.Tag = "#groupBox2";
             this.toolTip1.SetToolTip(this.label28, resources.GetString("label28.ToolTip"));
             // 
             // label29
@@ -504,6 +510,7 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconPadding(this.maxPlaysPerDayBox, ((int)(resources.GetObject("maxPlaysPerDayBox.IconPadding"))));
             this.maxPlaysPerDayBox.Name = "maxPlaysPerDayBox";
             this.maxPlaysPerDayBox.ReadOnly = true;
+            this.maxPlaysPerDayBox.Tag = "#label1";
             this.toolTip1.SetToolTip(this.maxPlaysPerDayBox, resources.GetString("maxPlaysPerDayBox.ToolTip"));
             // 
             // avgPlaysPerDayBox
@@ -514,6 +521,7 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconPadding(this.avgPlaysPerDayBox, ((int)(resources.GetObject("avgPlaysPerDayBox.IconPadding"))));
             this.avgPlaysPerDayBox.Name = "avgPlaysPerDayBox";
             this.avgPlaysPerDayBox.ReadOnly = true;
+            this.avgPlaysPerDayBox.Tag = "#label2";
             this.toolTip1.SetToolTip(this.avgPlaysPerDayBox, resources.GetString("avgPlaysPerDayBox.ToolTip"));
             // 
             // label30
@@ -534,9 +542,8 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.checkBox5, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("checkBox5.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.checkBox5, ((int)(resources.GetObject("checkBox5.IconPadding"))));
             this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Tag = "checkBox5Label";
+            this.checkBox5.Tag = "#checkBox5Label";
             this.toolTip1.SetToolTip(this.checkBox5, resources.GetString("checkBox5.ToolTip"));
-            this.checkBox5.UseVisualStyleBackColor = true;
             this.checkBox5.CheckedChanged += new System.EventHandler(this.checkBoxFive_CheckedChanged);
             // 
             // checkBox45
@@ -548,9 +555,8 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.checkBox45, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("checkBox45.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.checkBox45, ((int)(resources.GetObject("checkBox45.IconPadding"))));
             this.checkBox45.Name = "checkBox45";
-            this.checkBox45.Tag = "checkBox45Label";
+            this.checkBox45.Tag = "#checkBox45Label";
             this.toolTip1.SetToolTip(this.checkBox45, resources.GetString("checkBox45.ToolTip"));
-            this.checkBox45.UseVisualStyleBackColor = true;
             this.checkBox45.CheckedChanged += new System.EventHandler(this.checkBoxFourAndHalf_CheckedChanged);
             // 
             // checkBox4
@@ -562,9 +568,8 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.checkBox4, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("checkBox4.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.checkBox4, ((int)(resources.GetObject("checkBox4.IconPadding"))));
             this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Tag = "checkBox4Label";
+            this.checkBox4.Tag = "#checkBox4Label";
             this.toolTip1.SetToolTip(this.checkBox4, resources.GetString("checkBox4.ToolTip"));
-            this.checkBox4.UseVisualStyleBackColor = true;
             this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBoxFour_CheckedChanged);
             // 
             // checkBox35
@@ -576,9 +581,8 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.checkBox35, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("checkBox35.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.checkBox35, ((int)(resources.GetObject("checkBox35.IconPadding"))));
             this.checkBox35.Name = "checkBox35";
-            this.checkBox35.Tag = "checkBox35Label";
+            this.checkBox35.Tag = "#checkBox35Label";
             this.toolTip1.SetToolTip(this.checkBox35, resources.GetString("checkBox35.ToolTip"));
-            this.checkBox35.UseVisualStyleBackColor = true;
             this.checkBox35.CheckedChanged += new System.EventHandler(this.checkBoxThreeAndHalf_CheckedChanged);
             // 
             // checkBox3
@@ -590,9 +594,8 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.checkBox3, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("checkBox3.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.checkBox3, ((int)(resources.GetObject("checkBox3.IconPadding"))));
             this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Tag = "checkBox3Label";
+            this.checkBox3.Tag = "#checkBox3Label";
             this.toolTip1.SetToolTip(this.checkBox3, resources.GetString("checkBox3.ToolTip"));
-            this.checkBox3.UseVisualStyleBackColor = true;
             this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBoxThree_CheckedChanged);
             // 
             // checkBox25
@@ -604,9 +607,8 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.checkBox25, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("checkBox25.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.checkBox25, ((int)(resources.GetObject("checkBox25.IconPadding"))));
             this.checkBox25.Name = "checkBox25";
-            this.checkBox25.Tag = "checkBox25Label";
+            this.checkBox25.Tag = "#checkBox25Label";
             this.toolTip1.SetToolTip(this.checkBox25, resources.GetString("checkBox25.ToolTip"));
-            this.checkBox25.UseVisualStyleBackColor = true;
             this.checkBox25.CheckedChanged += new System.EventHandler(this.checkBoxTwoAndHalf_CheckedChanged);
             // 
             // checkBox2
@@ -618,9 +620,8 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.checkBox2, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("checkBox2.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.checkBox2, ((int)(resources.GetObject("checkBox2.IconPadding"))));
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Tag = "checkBox2Label";
+            this.checkBox2.Tag = "#checkBox2Label";
             this.toolTip1.SetToolTip(this.checkBox2, resources.GetString("checkBox2.ToolTip"));
-            this.checkBox2.UseVisualStyleBackColor = true;
             this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBoxTwo_CheckedChanged);
             // 
             // checkBox15
@@ -632,9 +633,8 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.checkBox15, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("checkBox15.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.checkBox15, ((int)(resources.GetObject("checkBox15.IconPadding"))));
             this.checkBox15.Name = "checkBox15";
-            this.checkBox15.Tag = "checkBox15Label";
+            this.checkBox15.Tag = "#checkBox15Label";
             this.toolTip1.SetToolTip(this.checkBox15, resources.GetString("checkBox15.ToolTip"));
-            this.checkBox15.UseVisualStyleBackColor = true;
             this.checkBox15.CheckedChanged += new System.EventHandler(this.checkBoxOneAndHalf_CheckedChanged);
             // 
             // checkBox1
@@ -646,9 +646,8 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.checkBox1, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("checkBox1.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.checkBox1, ((int)(resources.GetObject("checkBox1.IconPadding"))));
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Tag = "checkBox1Label";
+            this.checkBox1.Tag = "#checkBox1Label";
             this.toolTip1.SetToolTip(this.checkBox1, resources.GetString("checkBox1.ToolTip"));
-            this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBoxOne_CheckedChanged);
             // 
             // checkBox05
@@ -660,9 +659,8 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.checkBox05, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("checkBox05.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.checkBox05, ((int)(resources.GetObject("checkBox05.IconPadding"))));
             this.checkBox05.Name = "checkBox05";
-            this.checkBox05.Tag = "checkBox05Label";
+            this.checkBox05.Tag = "#checkBox05Label";
             this.toolTip1.SetToolTip(this.checkBox05, resources.GetString("checkBox05.ToolTip"));
-            this.checkBox05.UseVisualStyleBackColor = true;
             this.checkBox05.CheckedChanged += new System.EventHandler(this.checkBoxHalf_CheckedChanged);
             // 
             // perCent5UpDown
@@ -873,7 +871,6 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconPadding(this.buttonCalculate, ((int)(resources.GetObject("buttonCalculate.IconPadding"))));
             this.buttonCalculate.Name = "buttonCalculate";
             this.toolTip1.SetToolTip(this.buttonCalculate, resources.GetString("buttonCalculate.ToolTip"));
-            this.buttonCalculate.UseVisualStyleBackColor = true;
             this.buttonCalculate.Click += new System.EventHandler(this.buttonCalculate_Click);
             // 
             // labelSum
@@ -892,16 +889,15 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.calculateThresholdsAtStartUpCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("calculateThresholdsAtStartUpCheckBox.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.calculateThresholdsAtStartUpCheckBox, ((int)(resources.GetObject("calculateThresholdsAtStartUpCheckBox.IconPadding"))));
             this.calculateThresholdsAtStartUpCheckBox.Name = "calculateThresholdsAtStartUpCheckBox";
-            this.calculateThresholdsAtStartUpCheckBox.Tag = "holdsAtStartUpCheckBoxLabel";
+            this.calculateThresholdsAtStartUpCheckBox.Tag = "#holdsAtStartUpCheckBoxLabel";
             this.toolTip1.SetToolTip(this.calculateThresholdsAtStartUpCheckBox, resources.GetString("calculateThresholdsAtStartUpCheckBox.ToolTip"));
-            this.calculateThresholdsAtStartUpCheckBox.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
             resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.Controls.Add(this.buttonCalculate);
             this.groupBox1.Controls.Add(this.labelTotalTracks);
             this.groupBox1.Controls.Add(this.labelSum);
-            this.groupBox1.Controls.Add(this.buttonCalculate);
             this.groupBox1.Controls.Add(this.perCentLabel05);
             this.groupBox1.Controls.Add(this.perCent05UpDown);
             this.groupBox1.Controls.Add(this.perCentLabel1);
@@ -927,6 +923,7 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconPadding(this.groupBox1, ((int)(resources.GetObject("groupBox1.IconPadding"))));
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
+            this.groupBox1.Tag = "#AutoRateCommand";
             this.toolTip1.SetToolTip(this.groupBox1, resources.GetString("groupBox1.ToolTip"));
             // 
             // labelTotalTracks
@@ -941,56 +938,59 @@ namespace MusicBeePlugin
             // groupBox2
             // 
             resources.ApplyResources(this.groupBox2, "groupBox2");
-            this.groupBox2.Controls.Add(this.checkBox05Label);
-            this.groupBox2.Controls.Add(this.checkBox1Label);
-            this.groupBox2.Controls.Add(this.checkBox15Label);
-            this.groupBox2.Controls.Add(this.checkBox2Label);
-            this.groupBox2.Controls.Add(this.checkBox25Label);
-            this.groupBox2.Controls.Add(this.checkBox3Label);
-            this.groupBox2.Controls.Add(this.checkBox35Label);
-            this.groupBox2.Controls.Add(this.checkBox4Label);
-            this.groupBox2.Controls.Add(this.checkBox45Label);
-            this.groupBox2.Controls.Add(this.checkBox5Label);
-            this.groupBox2.Controls.Add(this.checkBox05);
-            this.groupBox2.Controls.Add(this.checkBox1);
-            this.groupBox2.Controls.Add(this.checkBox15);
-            this.groupBox2.Controls.Add(this.checkBox2);
-            this.groupBox2.Controls.Add(this.checkBox25);
-            this.groupBox2.Controls.Add(this.checkBox3);
-            this.groupBox2.Controls.Add(this.checkBox35);
-            this.groupBox2.Controls.Add(this.checkBox4);
-            this.groupBox2.Controls.Add(this.checkBox45);
-            this.groupBox2.Controls.Add(this.checkBox5);
+            this.groupBox2.Controls.Add(this.buttonOK);
             this.groupBox2.Controls.Add(this.avgPlaysPerDayBox);
             this.groupBox2.Controls.Add(this.label30);
             this.groupBox2.Controls.Add(this.maxPlaysPerDayBox);
             this.groupBox2.Controls.Add(this.label29);
             this.groupBox2.Controls.Add(this.label28);
-            this.groupBox2.Controls.Add(this.label27);
-            this.groupBox2.Controls.Add(this.label26);
-            this.groupBox2.Controls.Add(this.label25);
-            this.groupBox2.Controls.Add(this.label24);
-            this.groupBox2.Controls.Add(this.label23);
-            this.groupBox2.Controls.Add(this.label22);
-            this.groupBox2.Controls.Add(this.label21);
-            this.groupBox2.Controls.Add(this.label20);
             this.groupBox2.Controls.Add(this.threshold05Box);
+            this.groupBox2.Controls.Add(this.checkBox05Label);
+            this.groupBox2.Controls.Add(this.checkBox05);
+            this.groupBox2.Controls.Add(this.label27);
             this.groupBox2.Controls.Add(this.threshold1Box);
+            this.groupBox2.Controls.Add(this.checkBox1Label);
+            this.groupBox2.Controls.Add(this.checkBox1);
+            this.groupBox2.Controls.Add(this.label26);
             this.groupBox2.Controls.Add(this.threshold15Box);
+            this.groupBox2.Controls.Add(this.checkBox15Label);
+            this.groupBox2.Controls.Add(this.checkBox15);
+            this.groupBox2.Controls.Add(this.label25);
             this.groupBox2.Controls.Add(this.threshold2Box);
+            this.groupBox2.Controls.Add(this.checkBox2Label);
+            this.groupBox2.Controls.Add(this.checkBox2);
+            this.groupBox2.Controls.Add(this.label24);
             this.groupBox2.Controls.Add(this.threshold25Box);
+            this.groupBox2.Controls.Add(this.checkBox25Label);
+            this.groupBox2.Controls.Add(this.checkBox25);
+            this.groupBox2.Controls.Add(this.label23);
             this.groupBox2.Controls.Add(this.threshold3Box);
+            this.groupBox2.Controls.Add(this.checkBox3Label);
+            this.groupBox2.Controls.Add(this.checkBox3);
+            this.groupBox2.Controls.Add(this.label22);
             this.groupBox2.Controls.Add(this.threshold35Box);
+            this.groupBox2.Controls.Add(this.checkBox35Label);
+            this.groupBox2.Controls.Add(this.checkBox35);
+            this.groupBox2.Controls.Add(this.label21);
             this.groupBox2.Controls.Add(this.threshold4Box);
+            this.groupBox2.Controls.Add(this.checkBox4Label);
+            this.groupBox2.Controls.Add(this.checkBox4);
+            this.groupBox2.Controls.Add(this.label20);
             this.groupBox2.Controls.Add(this.threshold45Box);
-            this.groupBox2.Controls.Add(this.threshold5Box);
+            this.groupBox2.Controls.Add(this.checkBox45Label);
+            this.groupBox2.Controls.Add(this.checkBox45);
             this.groupBox2.Controls.Add(this.LabelFive);
-            this.groupBox2.Controls.Add(this.buttonOK);
+            this.groupBox2.Controls.Add(this.threshold5Box);
+            this.groupBox2.Controls.Add(this.checkBox5Label);
+            this.groupBox2.Controls.Add(this.checkBox5);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.label1);
             this.dirtyErrorProvider.SetError(this.groupBox2, resources.GetString("groupBox2.Error"));
             this.dirtyErrorProvider.SetIconAlignment(this.groupBox2, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("groupBox2.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.groupBox2, ((int)(resources.GetObject("groupBox2.IconPadding"))));
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
+            this.groupBox2.Tag = "#AutoRateCommand";
             this.toolTip1.SetToolTip(this.groupBox2, resources.GetString("groupBox2.ToolTip"));
             // 
             // checkBox05Label
@@ -1093,6 +1093,28 @@ namespace MusicBeePlugin
             this.toolTip1.SetToolTip(this.checkBox5Label, resources.GetString("checkBox5Label.ToolTip"));
             this.checkBox5Label.Click += new System.EventHandler(this.checkBox5Label_Click);
             // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.dirtyErrorProvider.SetError(this.label2, resources.GetString("label2.Error"));
+            this.label2.ForeColor = System.Drawing.SystemColors.Control;
+            this.dirtyErrorProvider.SetIconAlignment(this.label2, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("label2.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.label2, ((int)(resources.GetObject("label2.IconPadding"))));
+            this.label2.Name = "label2";
+            this.label2.Tag = "#groupBox2";
+            this.toolTip1.SetToolTip(this.label2, resources.GetString("label2.ToolTip"));
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.dirtyErrorProvider.SetError(this.label1, resources.GetString("label1.Error"));
+            this.label1.ForeColor = System.Drawing.SystemColors.Control;
+            this.dirtyErrorProvider.SetIconAlignment(this.label1, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("label1.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.label1, ((int)(resources.GetObject("label1.IconPadding"))));
+            this.label1.Name = "label1";
+            this.label1.Tag = "#groupBox2";
+            this.toolTip1.SetToolTip(this.label1, resources.GetString("label1.ToolTip"));
+            // 
             // toolTip1
             // 
             this.toolTip1.AutoPopDelay = 20000;
@@ -1106,9 +1128,8 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.sinceAddedCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("sinceAddedCheckBox.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.sinceAddedCheckBox, ((int)(resources.GetObject("sinceAddedCheckBox.IconPadding"))));
             this.sinceAddedCheckBox.Name = "sinceAddedCheckBox";
-            this.sinceAddedCheckBox.Tag = "sinceAddedCheckBoxLabel";
+            this.sinceAddedCheckBox.Tag = "#sinceAddedCheckBoxLabel";
             this.toolTip1.SetToolTip(this.sinceAddedCheckBox, resources.GetString("sinceAddedCheckBox.ToolTip"));
-            this.sinceAddedCheckBox.UseVisualStyleBackColor = true;
             // 
             // sinceAddedCheckBoxLabel
             // 
@@ -1127,9 +1148,8 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.notifyWhenAutoratingCompletedCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("notifyWhenAutoratingCompletedCheckBox.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.notifyWhenAutoratingCompletedCheckBox, ((int)(resources.GetObject("notifyWhenAutoratingCompletedCheckBox.IconPadding"))));
             this.notifyWhenAutoratingCompletedCheckBox.Name = "notifyWhenAutoratingCompletedCheckBox";
-            this.notifyWhenAutoratingCompletedCheckBox.Tag = "notifyWhenAutoratingCompletedCheckBoxLabel";
+            this.notifyWhenAutoratingCompletedCheckBox.Tag = "#notifyWhenAutoratingCompletedCheckBoxLabel";
             this.toolTip1.SetToolTip(this.notifyWhenAutoratingCompletedCheckBox, resources.GetString("notifyWhenAutoratingCompletedCheckBox.ToolTip"));
-            this.notifyWhenAutoratingCompletedCheckBox.UseVisualStyleBackColor = true;
             // 
             // playsPerDayTagList
             // 
@@ -1152,9 +1172,8 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.storePlaysPerDayCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("storePlaysPerDayCheckBox.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.storePlaysPerDayCheckBox, ((int)(resources.GetObject("storePlaysPerDayCheckBox.IconPadding"))));
             this.storePlaysPerDayCheckBox.Name = "storePlaysPerDayCheckBox";
-            this.storePlaysPerDayCheckBox.Tag = "storePlaysPerDayCheckBoxLabel";
+            this.storePlaysPerDayCheckBox.Tag = "#storePlaysPerDayCheckBoxLabel";
             this.toolTip1.SetToolTip(this.storePlaysPerDayCheckBox, resources.GetString("storePlaysPerDayCheckBox.ToolTip"));
-            this.storePlaysPerDayCheckBox.UseVisualStyleBackColor = true;
             this.storePlaysPerDayCheckBox.CheckedChanged += new System.EventHandler(this.storePlaysPerDay_CheckedChanged);
             // 
             // storePlaysPerDayCheckBoxLabel
@@ -1174,6 +1193,7 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.autoRateAtStartUpCheckBoxLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("autoRateAtStartUpCheckBoxLabel.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.autoRateAtStartUpCheckBoxLabel, ((int)(resources.GetObject("autoRateAtStartUpCheckBoxLabel.IconPadding"))));
             this.autoRateAtStartUpCheckBoxLabel.Name = "autoRateAtStartUpCheckBoxLabel";
+            this.autoRateAtStartUpCheckBoxLabel.Tag = "#notifyWhenAutoratingCompletedCheckBox";
             this.toolTip1.SetToolTip(this.autoRateAtStartUpCheckBoxLabel, resources.GetString("autoRateAtStartUpCheckBoxLabel.ToolTip"));
             this.autoRateAtStartUpCheckBoxLabel.Click += new System.EventHandler(this.autoRateAtStartUpCheckBoxLabel_Click);
             // 
@@ -1209,42 +1229,44 @@ namespace MusicBeePlugin
             // 
             // dirtyErrorProvider
             // 
-            this.dirtyErrorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.dirtyErrorProvider.BlinkRate = 1000;
+            this.dirtyErrorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.AlwaysBlink;
             this.dirtyErrorProvider.ContainerControl = this;
             resources.ApplyResources(this.dirtyErrorProvider, "dirtyErrorProvider");
             // 
             // AutoRateCommand
             // 
+            this.AcceptButton = this.buttonOK;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.Controls.Add(this.holdsAtStartUpCheckBoxLabel);
-            this.Controls.Add(this.sinceAddedCheckBoxLabel);
-            this.Controls.Add(this.autoRateOnTrackPropertiesCheckBoxLabel);
-            this.Controls.Add(this.notifyWhenAutoratingCompletedCheckBoxLabel);
-            this.Controls.Add(this.autoRateAtStartUpCheckBoxLabel);
-            this.Controls.Add(this.storePlaysPerDayCheckBoxLabel);
-            this.Controls.Add(this.sinceAddedCheckBox);
-            this.Controls.Add(this.storePlaysPerDayCheckBox);
-            this.Controls.Add(this.playsPerDayTagList);
-            this.Controls.Add(this.notifyWhenAutoratingCompletedCheckBox);
-            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.calculateThresholdsAtStartUpCheckBox);
-            this.Controls.Add(this.label19);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.baseRatingTrackBar);
+            this.Controls.Add(this.label19);
+            this.Controls.Add(this.sinceAddedCheckBoxLabel);
+            this.Controls.Add(this.sinceAddedCheckBox);
+            this.Controls.Add(this.autoRateOnTrackPropertiesCheckBoxLabel);
             this.Controls.Add(this.autoRateOnTrackPropertiesCheckBox);
+            this.Controls.Add(this.notifyWhenAutoratingCompletedCheckBoxLabel);
+            this.Controls.Add(this.notifyWhenAutoratingCompletedCheckBox);
+            this.Controls.Add(this.autoRateAtStartUpCheckBoxLabel);
             this.Controls.Add(this.autoRateAtStartUpCheckBox);
+            this.Controls.Add(this.holdsAtStartUpCheckBoxLabel);
+            this.Controls.Add(this.calculateThresholdsAtStartUpCheckBox);
+            this.Controls.Add(this.playsPerDayTagList);
+            this.Controls.Add(this.storePlaysPerDayCheckBoxLabel);
+            this.Controls.Add(this.storePlaysPerDayCheckBox);
+            this.Controls.Add(this.buttonCancel);
+            this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.autoRatingTagList);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.buttonCancel);
+            this.Controls.Add(this.baseRatingTrackBar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -1286,7 +1308,7 @@ namespace MusicBeePlugin
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.TextBox threshold05Box;
         private System.Windows.Forms.TextBox threshold1Box;
         private System.Windows.Forms.TextBox threshold15Box;
@@ -1370,5 +1392,7 @@ namespace MusicBeePlugin
         private Label checkBox1Label;
         private Label checkBox05Label;
         private Label holdsAtStartUpCheckBoxLabel;
+        private Label label2;
+        private Label label1;
     }
 }

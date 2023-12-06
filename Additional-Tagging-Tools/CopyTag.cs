@@ -36,16 +36,15 @@ namespace MusicBeePlugin
         public CopyTagCommand(Plugin tagToolsPluginParam) : base(tagToolsPluginParam)
         {
             InitializeComponent();
-            initializeForm();
         }
 
-        protected new void initializeForm()
+        protected override void initializeForm()
         {
             base.initializeForm();
 
             label3.Enable(false);
 
-            buttonSettings.Image = Gear;
+            buttonSettings.Image = ThemedBitmapAddRef(this, Gear);
 
             FillListByTagNames(destinationTagList.Items);
             destinationTagList.Text = SavedSettings.copyDestinationTagName;
@@ -77,7 +76,7 @@ namespace MusicBeePlugin
                 ThreeState = true,
                 FalseValue = "F",
                 TrueValue = "T",
-                IndeterminateValue = "",
+                IndeterminateValue = string.Empty,
                 Width = 25,
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.None
             };
@@ -93,14 +92,11 @@ namespace MusicBeePlugin
             addRowToTable = previewTable_AddRowToTable;
             processRowOfTable = previewTable_ProcessRowOfTable;
 
-            (int, int, int, int, int, int, int) value = loadWindowLayout();
 
-            if (value.Item1 != 0)
-            {
-                previewTable.Columns[1].Width = value.Item1;
-                previewTable.Columns[2].Width = value.Item2;
-                previewTable.Columns[3].Width = value.Item3;
-            }
+            enableDisablePreviewOptionControls(true, true);
+            enableQueryingOrUpdatingButtons();
+
+            button_GotFocus(this.AcceptButton, null); //Let's mark active button
         }
 
         private void previewTable_AddRowToTable(string[] row)
@@ -129,7 +125,7 @@ namespace MusicBeePlugin
 
             if (fileNameTextBox.Enabled && !System.IO.File.Exists(fileNameTextBox.Text))
             {
-                MessageBox.Show(this, MsgFileNotFound, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, MsgFileNotFound, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
 
@@ -187,8 +183,10 @@ namespace MusicBeePlugin
 
                 if (fileTags.Length != files.Length)
                 {
-                    MessageBox.Show(this, MsgNumberOfTagsInTextFile + fileTags.Length + MsgDoesntCorrespondToNumberOfSelectedTracks + files.Length + MsgMessageEnd, 
-                        "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show(this, MsgNumberOfTagsInTextFileDoesntCorrespondToNumberOfSelectedTracks
+                        .Replace("%%TEXT-TAG-FILES-COUNT%%", fileTags.Length.ToString())
+                        .Replace("%%SELECTED-FILES-COUNT%%", files.Length.ToString()), 
+                        string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return false;
                 }
             }
@@ -197,7 +195,7 @@ namespace MusicBeePlugin
                 if (!Clipboard.ContainsText())
                 {
                     MessageBox.Show(this, MsgClipboardDoesntContainText, 
-                        "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return false;
                 }
 
@@ -205,8 +203,10 @@ namespace MusicBeePlugin
 
                 if (fileTags.Length != files.Length)
                 {
-                    MessageBox.Show(this, MsgNumberOfTagsInClipboard + fileTags.Length + MsgDoesntCorrespondToNumberOfSelectedTracksC + files.Length + MsgMessageEndC, 
-                        "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show(this, MsgNumberOfTagsInClipboardDoesntCorrespondToNumberOfSelectedTracks
+                        .Replace("%%FILE-TAGS-LENGTH%%", fileTags.Length.ToString())
+                        .Replace("%%SELECTED-FILES-COUNT%%", files.Length.ToString()),
+                        string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return false;
                 }
             }
@@ -218,7 +218,7 @@ namespace MusicBeePlugin
 
             if (files.Length == 0)
             {
-                MessageBox.Show(this, MsgNoFilesSelected, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, MsgNoTracksSelected, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
             else
@@ -308,15 +308,15 @@ namespace MusicBeePlugin
 
                 if (sourceTagValue == destinationTagValue && stripNotChangedLines)
                     continue;
-                else if (onlyIfDestinationEmpty && destinationTagValue != "" && stripNotChangedLines)
+                else if (onlyIfDestinationEmpty && destinationTagValue != string.Empty && stripNotChangedLines)
                     continue;
-                else if (onlyIfSourceNotEmpty && sourceTagValue == "" && stripNotChangedLines)
+                else if (onlyIfSourceNotEmpty && sourceTagValue == string.Empty && stripNotChangedLines)
                     continue;
                 else if (sourceTagValue == destinationTagValue)
                     isChecked = "F";
-                else if (onlyIfDestinationEmpty && destinationTagValue != "")
+                else if (onlyIfDestinationEmpty && destinationTagValue != string.Empty)
                     isChecked = "F";
-                else if (onlyIfSourceNotEmpty && sourceTagValue == "")
+                else if (onlyIfSourceNotEmpty && sourceTagValue == string.Empty)
                     isChecked = "F";
                 else
                     isChecked = "T";
@@ -382,7 +382,7 @@ namespace MusicBeePlugin
                     newTag = tags[i][2];
 
 
-                    tags[i][0] = "";
+                    tags[i][0] = string.Empty;
 
                     Invoke(processRowOfTable, new object[] { i });
 
@@ -420,7 +420,7 @@ namespace MusicBeePlugin
         {
             if (sourceTagList.Text == destinationTagList.Text)
             {
-                MessageBox.Show(this, MsgSourceAndDestinationTagsAreTheSame, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, MsgSourceAndDestinationTagsAreTheSame, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
@@ -433,11 +433,12 @@ namespace MusicBeePlugin
         {
             if (sourceTagList.Text == destinationTagList.Text)
             {
-                MessageBox.Show(this, MsgSourceAndDestinationTagsAreTheSame, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, MsgSourceAndDestinationTagsAreTheSame, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
             clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewChanges, (Button)sender, buttonOK, buttonCancel);
+            enableQueryingOrUpdatingButtons();
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -573,7 +574,7 @@ namespace MusicBeePlugin
             }
         }
 
-        public override void enableDisablePreviewOptionControls(bool enable)
+        public override void enableDisablePreviewOptionControls(bool enable, bool dontChangeDisabled = false)
         {
             if (enable && previewIsGenerated)
                 return;
@@ -605,7 +606,7 @@ namespace MusicBeePlugin
 
         public override void enableQueryingOrUpdatingButtons()
         {
-            buttonOK.Enable(true);
+            buttonOK.Enable(previewIsGenerated || SavedSettings.allowCommandExecutionWithoutPreview);
             buttonPreview.Enable(true);
         }
 
@@ -678,7 +679,7 @@ namespace MusicBeePlugin
         private void buttonSettings_Click(object sender, EventArgs e)
         {
             PluginQuickSettings settings = new PluginQuickSettings(TagToolsPlugin);
-            PluginWindowTemplate.Display(settings, true);
+            Display(settings, true);
         }
 
         private void onlyIfDestinationEmptyCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -708,6 +709,29 @@ namespace MusicBeePlugin
         {
             smartOperationCheckBox.Checked = !smartOperationCheckBox.Checked;
             onlyIfSourceNotEmptyCheckBox_CheckedChanged(null, null);
+        }
+
+        private void CopyTagCommand_Load(object sender, EventArgs e)
+        {
+            (int, int, int, int, int, int, int) value = loadWindowLayout();
+
+            if (value.Item1 != 0)
+            {
+                previewTable.Columns[2].Width = (int)(value.Item1 * dpiScaleFactor);
+                previewTable.Columns[6].Width = (int)(value.Item2 * dpiScaleFactor);
+                previewTable.Columns[8].Width = (int)(value.Item3 * dpiScaleFactor);
+            }
+            else
+            {
+                previewTable.Columns[2].Width = (int)(previewTable.Columns[2].Width * dpiScaleFactor);
+                previewTable.Columns[6].Width = (int)(previewTable.Columns[6].Width * dpiScaleFactor);
+                previewTable.Columns[8].Width = (int)(previewTable.Columns[8].Width * dpiScaleFactor);
+            }
+        }
+
+        private void CopyTagCommand_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            saveWindowLayout(previewTable.Columns[2].Width, previewTable.Columns[6].Width, previewTable.Columns[8].Width);
         }
     }
 }

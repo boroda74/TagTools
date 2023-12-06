@@ -42,6 +42,7 @@ $SentenceCase(string)
 
 $Sqrt(number): square root. May be useful for gathering some library 
     statistics (in conjunction with LR functions)
+$Log(number): decimal logarithm (base 10). May be useful for volume (Replay Gain) analysis 
 
 $eq(number1,number2): compares 2 integer or fractional numbers, determines if 
     number1 is **eq**ual to number2, e.g. $eq(1.0,1) returns "T"

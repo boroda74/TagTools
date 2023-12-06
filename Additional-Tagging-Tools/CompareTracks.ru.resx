@@ -119,13 +119,13 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>997, 517</value>
+    <value>898, 3</value>
   </data>
   <data name="buttonOK.Text" xml:space="preserve">
     <value>Применить</value>
   </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1127, 517</value>
+    <value>1006, 3</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Закрыть</value>
@@ -148,10 +148,10 @@
 </value>
   </data>
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1242, 495</value>
+    <value>1098, 311</value>
   </data>
-  <data name="selectTagsButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>32, 517</value>
+  <data name="selectTagsButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 23</value>
   </data>
   <data name="selectTagsButton.Text" xml:space="preserve">
     <value>Выбрать теги...</value>
@@ -159,66 +159,53 @@
   <data name="selectTagsButton.ToolTip" xml:space="preserve">
     <value>Выбрать отображаемые теги</value>
   </data>
-  <data name="rememberColumnasDefaulltWidthCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>164, 520</value>
+  <data name="rememberColumnAsDefaultWidthCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>149, 7</value>
   </data>
-  <data name="rememberColumnasDefaulltWidthCheckBox.ToolTip" xml:space="preserve">
+  <data name="rememberColumnAsDefaultWidthCheckBox.ToolTip" xml:space="preserve">
     <value>Включите этот флажок и измените ширину любой колонки, чтобы установить эту новую ширину в качестве новой ширины по умолчанию</value>
-  </data>
-  <data name="AutoSelectTagsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 521</value>
   </data>
   <data name="AutoSelectTagsCheckBox.ToolTip" xml:space="preserve">
     <value>Автоматически выбирать показываемые теги и скрывать треки без отличий</value>
   </data>
-  <data name="rememberColumnasDefaulltWidthCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>186, 521</value>
+  <data name="rememberColumnAsDefaultWidthCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>176, 7</value>
   </data>
-  <data name="rememberColumnasDefaulltWidthCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>508, 17</value>
+  <data name="rememberColumnAsDefaultWidthCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>474, 15</value>
   </data>
-  <data name="rememberColumnasDefaulltWidthCheckBoxLabel.Text" xml:space="preserve">
+  <data name="rememberColumnAsDefaultWidthCheckBoxLabel.Text" xml:space="preserve">
     <value>Установить измененную ширину колонки в качестве новой ширины по умолчанию</value>
   </data>
-  <data name="rememberColumnasDefaulltWidthCheckBoxLabel.ToolTip" xml:space="preserve">
+  <data name="rememberColumnAsDefaultWidthCheckBoxLabel.ToolTip" xml:space="preserve">
     <value>Включите этот флажок и измените ширину любой колонки, чтобы установить эту новую ширину в качестве новой ширины по умолчанию</value>
   </data>
   <data name="buttonCopy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>696, 517</value>
+    <value>782, 3</value>
   </data>
-  <data name="buttonCopy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 25</value>
-  </data>
-  <data name="buttonCopy.Text" xml:space="preserve">
+  <data name="buttonCopy.ToolTip" xml:space="preserve">
     <value>Копировать</value>
   </data>
   <data name="buttonPaste.Location" type="System.Drawing.Point, System.Drawing">
-    <value>792, 517</value>
+    <value>816, 3</value>
   </data>
-  <data name="buttonPaste.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 25</value>
-  </data>
-  <data name="buttonPaste.Text" xml:space="preserve">
+  <data name="buttonPaste.ToolTip" xml:space="preserve">
     <value>Вставить</value>
   </data>
   <data name="buttonClear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>888, 517</value>
+    <value>850, 3</value>
   </data>
-  <data name="buttonClear.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 25</value>
-  </data>
-  <data name="buttonClear.Text" xml:space="preserve">
+  <data name="buttonClear.ToolTip" xml:space="preserve">
     <value>Очистить</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1260, 550</value>
+  <data name="toolsPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1114, 34</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>1114, 361</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>1268, 579</value>
+    <value>1130, 400</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Сравнение треков</value>

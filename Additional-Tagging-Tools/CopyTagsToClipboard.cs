@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Windows.Forms;
 using static MusicBeePlugin.Plugin;
 
@@ -18,7 +16,6 @@ namespace MusicBeePlugin
         public CopyTagsToClipboardCommand(Plugin tagToolsPluginParam) : base(tagToolsPluginParam)
         {
             InitializeComponent();
-            initializeForm();
         }
 
         public CopyTagsToClipboardCommand(Plugin tagToolsPluginParam, string formTitle, string copyButtonName) : base(tagToolsPluginParam)
@@ -35,7 +32,7 @@ namespace MusicBeePlugin
         }
 
 
-        protected new void initializeForm()
+        protected override void initializeForm()
         {
             base.initializeForm();
 
@@ -147,16 +144,16 @@ namespace MusicBeePlugin
 
             if (files.Length == 0)
             {
-                MessageBox.Show(MbForm, MsgNoFilesSelected, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(MbForm, MsgNoTracksSelected, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
 
             SavedSettings.lastTagSet = tagSet;
 
-            string clipboardText = "";
+            string clipboardText = string.Empty;
             foreach (string file in files)
             {
-                string tags = "";
+                string tags = string.Empty;
                 for (int i = 0; i < SavedSettings.copyTagsTagSets[tagSet].tagIds.Length; i++)
                 {
                     string tag = GetFileTag(file, (MetaDataType)SavedSettings.copyTagsTagSets[tagSet].tagIds[i]);
@@ -176,13 +173,12 @@ namespace MusicBeePlugin
 
             clipboardText = clipboardText.Remove(clipboardText.Length - 1);
 
-            //if (clipboardText == "")
+            //if (clipboardText == string.Empty)
             //    clipboardText = "\u0000";
 
 
-            System.Windows.Forms.Clipboard.Clear();
-            System.Windows.Forms.Clipboard.SetText(clipboardText);
-            //NativeWindowsClipboard.SetText(clipboardText);//***
+            Clipboard.Clear();
+            Clipboard.SetText(clipboardText);
 
             return true;
         }

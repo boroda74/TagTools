@@ -13,10 +13,9 @@ namespace MusicBeePlugin
         public AutoBackupSettings(Plugin tagToolsPluginParam) : base(tagToolsPluginParam)
         {
             InitializeComponent();
-            initializeForm();
         }
 
-        protected new void initializeForm()
+        protected override void initializeForm()
         {
             base.initializeForm();
 
@@ -39,10 +38,13 @@ namespace MusicBeePlugin
             if (SavedSettings.autodeleteKeepNumberOfFiles != 0)
                 autodeleteManyCheckBox.Checked = true;
 
-            DontSkipAutobackupsIfPlayCountsChangedCheckBox.Checked = SavedSettings.dontSkipAutobackupsIfOnlyPlayCountsChanged;
+            dontSkipAutobackupsIfPlayCountsChangedCheckBox.Checked = SavedSettings.dontSkipAutobackupsIfOnlyPlayCountsChanged;
 
             backupArtworksCheckBox.Checked = SavedSettings.backupArtworks;
             dontTryToGuessLibraryNameCheckBox.Checked = SavedSettings.dontTryToGuessLibraryName;
+
+
+            button_GotFocus(this.AcceptButton, null); //Let's mark active button
         }
 
         private void autobackupCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -103,7 +105,7 @@ namespace MusicBeePlugin
         {
             string driveLetter = MbApiInterface.Setting_GetPersistentStoragePath().Substring(0, 2);
 
-            SavedSettings.autobackupDirectory = autobackupFolderTextBox.Text.Replace(MbApiInterface.Setting_GetPersistentStoragePath(), "").Replace(driveLetter, "");
+            SavedSettings.autobackupDirectory = autobackupFolderTextBox.Text.Replace(MbApiInterface.Setting_GetPersistentStoragePath(), string.Empty).Replace(driveLetter, string.Empty);
             SavedSettings.autobackupPrefix = autobackupPrefixTextBox.Text;
 
             if (autobackupCheckBox.Checked)
@@ -121,7 +123,7 @@ namespace MusicBeePlugin
             else
                 SavedSettings.autodeleteKeepNumberOfFiles = 0;
 
-            SavedSettings.dontSkipAutobackupsIfOnlyPlayCountsChanged = DontSkipAutobackupsIfPlayCountsChangedCheckBox.Checked;
+            SavedSettings.dontSkipAutobackupsIfOnlyPlayCountsChanged = dontSkipAutobackupsIfPlayCountsChangedCheckBox.Checked;
 
 
             PeriodicAutobackupTimer?.Dispose();
@@ -153,7 +155,7 @@ namespace MusicBeePlugin
                     catch { };
                 }
 
-                MbApiInterface.MB_SetBackgroundTaskMessage("");
+                MbApiInterface.MB_SetBackgroundTaskMessage(string.Empty);
             }
 
             if (initialAutobackupInterval != SavedSettings.autobackupInterval && SavedSettings.autobackupInterval != 0)

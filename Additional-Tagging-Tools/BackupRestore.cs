@@ -193,7 +193,7 @@ namespace MusicBeePlugin
             {
                 file.Close();
 
-                MessageBox.Show(Plugin.MbForm, Plugin.MsgBackupIsCorrupted.Replace("%%FILENAME%%", fileName), "", 
+                MessageBox.Show(Plugin.MbForm, Plugin.MsgBackupIsCorrupted.Replace("%%FILENAME%%", fileName), string.Empty, 
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
                 return null;
@@ -318,7 +318,7 @@ namespace MusicBeePlugin
 
                     System.Threading.Thread.Sleep(2000);
 
-                    Plugin.MbApiInterface.MB_SetBackgroundTaskMessage("");
+                    Plugin.MbApiInterface.MB_SetBackgroundTaskMessage(string.Empty);
 
                     return;
                 }
@@ -364,7 +364,7 @@ namespace MusicBeePlugin
 
             System.Threading.Thread.Sleep(2000);
 
-            Plugin.MbApiInterface.MB_SetBackgroundTaskMessage("");
+            Plugin.MbApiInterface.MB_SetBackgroundTaskMessage(string.Empty);
         }
 
         public new static BackupType Load(string fileName, string backupFileExtension = ".xml")
@@ -375,7 +375,7 @@ namespace MusicBeePlugin
             if (backupFileExtension != ".bbl" && !System.IO.File.Exists(baselineFilename + ".bbl")) //Backup baseline file doesn't exist
             {
                 MessageBox.Show(Plugin.MbForm, Plugin.MsgBackupBaselineFileDoesntExist1 + baselineFilename + ".bbl" + Plugin.MsgBackupBaselineFileDoesntExist2, 
-                    "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return null;
             }
 
@@ -395,7 +395,7 @@ namespace MusicBeePlugin
                 file.Close();
 
                 MessageBox.Show(Plugin.MbForm, Plugin.MsgBackupIsCorrupted.Replace("%%FILENAME%%", fileName) + "\n\n" + ex.Message, 
-                    "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
                 return null;
             }
@@ -454,7 +454,7 @@ namespace MusicBeePlugin
                 file.Close();
 
                 MessageBox.Show(Plugin.MbForm, Plugin.MsgBackupIsCorrupted.Replace("%%FILENAME%%", fileName) + "\n\n" + ex.Message, 
-                    "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
                 return null;
             }
@@ -627,8 +627,7 @@ namespace MusicBeePlugin
                             Add(libraryTrackId, trackBackups);
                         }
 
-                        if (!trackBackups.Contains(backup.guid))
-                            trackBackups.Add(backup.guid, true);
+                        trackBackups.AddReplace(backup.guid, true);
                     }
 
 
@@ -655,7 +654,7 @@ namespace MusicBeePlugin
             if (!Plugin.SavedSettings.dontPlayCompletedSound)
                 System.Media.SystemSounds.Asterisk.Play();
 
-            Plugin.MbApiInterface.MB_SetBackgroundTaskMessage("");
+            Plugin.MbApiInterface.MB_SetBackgroundTaskMessage(string.Empty);
         }
 
         public static void LoadBackupAsync(object parameters)
@@ -699,10 +698,10 @@ namespace MusicBeePlugin
             if (backup.libraryName != Plugin.GetLibraryName())
             {
                 System.Media.SystemSounds.Hand.Play();
-                Plugin.MbApiInterface.MB_SetBackgroundTaskMessage("");
+                Plugin.MbApiInterface.MB_SetBackgroundTaskMessage(string.Empty);
 
                 MessageBox.Show(Plugin.MbForm, Plugin.MsgThisIsTheBackupOfDifferentLibrary, 
-                    "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
@@ -715,7 +714,7 @@ namespace MusicBeePlugin
 
                 if (files.Length == 0)
                 {
-                    MessageBox.Show(Plugin.MbForm, Plugin.MsgNoFilesSelected, "", 
+                    MessageBox.Show(Plugin.MbForm, Plugin.MsgNoTracksSelected, string.Empty, 
                         MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
@@ -762,7 +761,7 @@ namespace MusicBeePlugin
             if (!Plugin.SavedSettings.dontPlayCompletedSound)
                 System.Media.SystemSounds.Asterisk.Play();
 
-            Plugin.MbApiInterface.MB_SetBackgroundTaskMessage("");
+            Plugin.MbApiInterface.MB_SetBackgroundTaskMessage(string.Empty);
             Plugin.MbApiInterface.MB_RefreshPanels();
         }
 
@@ -777,10 +776,7 @@ namespace MusicBeePlugin
         public void deleteBackup(BackupCacheType backupCache)
         {
             foreach (var trackBackups in Values)
-            {
-                if (trackBackups.Contains(backupCache.guid))
-                    trackBackups.Remove(backupCache.guid);
-            }
+                trackBackups.RemoveExisting(backupCache.guid);
 
 
             bool wereSomeChanges = false;

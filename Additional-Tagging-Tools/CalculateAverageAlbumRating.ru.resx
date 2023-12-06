@@ -119,101 +119,91 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="notifyWhenCalculationCompletedCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>601, 51</value>
+    <value>541, 43</value>
   </data>
-  <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>333, 181</value>
+  <data name="buttonSave.Location" type="System.Drawing.Point, System.Drawing">
+    <value>258, 157</value>
   </data>
-  <data name="button1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>312, 25</value>
+  <data name="buttonSave.Size" type="System.Drawing.Size, System.Drawing">
+    <value>240, 23</value>
   </data>
-  <data name="button1.Text" xml:space="preserve">
+  <data name="buttonSave.Text" xml:space="preserve">
     <value>Сохранить настройки</value>
   </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>654, 181</value>
+    <value>700, 157</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Закрыть</value>
   </data>
-  <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 181</value>
-  </data>
   <data name="buttonOK.Size" type="System.Drawing.Size, System.Drawing">
-    <value>312, 25</value>
+    <value>240, 23</value>
   </data>
   <data name="buttonOK.Text" xml:space="preserve">
     <value>Рассчитать средний рейтинг альбомов сейчас</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>405, 17</value>
+    <value>376, 15</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>Рассчитать средний рейтинг альбомов для отображаемых треков</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="calculateAlbumRatingAtTagsChangedCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 146</value>
-  </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>197, 17</value>
+    <value>181, 15</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>Рейтинг треков хранится в теге:</value>
   </data>
   <data name="trackRatingTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>228, 141</value>
+    <value>197, 121</value>
+  </data>
+  <data name="trackRatingTagList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>190, 23</value>
   </data>
   <data name="albumRatingTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>654, 141</value>
+    <value>610, 121</value>
+  </data>
+  <data name="albumRatingTagList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>190, 23</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>428, 146</value>
+    <value>403, 124</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>217, 17</value>
+    <value>199, 15</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>Рейтинг альбомов хранится в теге:</value>
   </data>
   <data name="calculateAlbumRatingAtStartUpCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>525, 17</value>
+    <value>483, 15</value>
   </data>
   <data name="calculateAlbumRatingAtStartUpCheckBoxLabel.Text" xml:space="preserve">
     <value>Автоматически рассчитывать средний рейтинг альбомов при запуске для всех треков</value>
   </data>
   <data name="considerUnratedCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>359, 17</value>
+    <value>333, 15</value>
   </data>
   <data name="considerUnratedCheckBoxLabel.Text" xml:space="preserve">
     <value>Считать треки без рейтинга треками с нулевым рейтингом</value>
   </data>
   <data name="calculateAlbumRatingAtTagsChangedCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>538, 17</value>
+    <value>499, 15</value>
   </data>
   <data name="calculateAlbumRatingAtTagsChangedCheckBoxLabel.Text" xml:space="preserve">
     <value>Автоматически рассчитывать средний рейтинг альбомов при изменении рейтинга трека</value>
   </data>
   <data name="notifyWhenCalculationCompletedCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>624, 53</value>
+    <value>560, 43</value>
   </data>
   <data name="notifyWhenCalculationCompletedCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 17</value>
+    <value>159, 15</value>
   </data>
   <data name="notifyWhenCalculationCompletedCheckBoxLabel.Text" xml:space="preserve">
     <value>Оповестить по завершении</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>809, 218</value>
-  </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>700, 245</value>
+    <value>810, 191</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Рассчитать средний рейтинг альбомов</value>

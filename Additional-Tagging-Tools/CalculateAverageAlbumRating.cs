@@ -12,10 +12,9 @@ namespace MusicBeePlugin
         public CalculateAverageAlbumRatingCommand(Plugin tagToolsPluginParam) : base(tagToolsPluginParam)
         {
             InitializeComponent();
-            initializeForm();
         }
 
-        protected new void initializeForm()
+        protected override void initializeForm()
         {
             base.initializeForm();
 
@@ -29,6 +28,9 @@ namespace MusicBeePlugin
 
             FillListByTagNames(albumRatingTagList.Items);
             albumRatingTagList.Text = SavedSettings.albumRatingTagName;
+
+
+            button_GotFocus(this.AcceptButton, null); //Let's mark active button
         }
 
         public void calculateAlbumRating()
@@ -67,8 +69,8 @@ namespace MusicBeePlugin
             string currentAlbumArtsist;
             string currentAlbum;
 
-            string prevAlbumArtsist = "";
-            string prevAlbum = "";
+            string prevAlbumArtsist = string.Empty;
+            string prevAlbum = string.Empty;
             int prevRow = 0;
 
             double sumRating;
@@ -96,9 +98,9 @@ namespace MusicBeePlugin
 
                     for (int j = prevRow; j < i; j++)
                     {
-                        if ("" + tags[j][2] != "" || SavedSettings.considerUnrated)
+                        if (string.Empty + tags[j][2] != string.Empty || SavedSettings.considerUnrated)
                         {
-                            sumRating += ConvertStrings(tags[j][2]).result1f;
+                            sumRating += ConvertStrings(tags[j][2], ResultType.Double, DataType.Rating).resultD;
                             numberOfTracks++;
                         }
                     }
@@ -129,9 +131,9 @@ namespace MusicBeePlugin
 
             for (int j = prevRow; j < tags.Count; j++)
             {
-                if ("" + tags[j][2] != "" || SavedSettings.considerUnrated)
+                if (string.Empty + tags[j][2] != string.Empty || SavedSettings.considerUnrated)
                 {
-                    sumRating += ConvertStrings(tags[j][2]).result1f;
+                    sumRating += ConvertStrings(tags[j][2], ResultType.Double, DataType.Rating).resultD;
                     numberOfTracks++;
                 }
             }
@@ -156,7 +158,7 @@ namespace MusicBeePlugin
             SetResultingSbText();
 
             if (SavedSettings.notifyWhenCalculationCompleted) MessageBox.Show(this, MsgBackgroundTaskIsCompleted, 
-                "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public void calculateAlbumRatingForDisplayedTracks()
@@ -222,9 +224,9 @@ namespace MusicBeePlugin
 
             for (int j = 0; j < tags.Count; j++)
             {
-                if ("" + tags[j][2] != "" || SavedSettings.considerUnrated)
+                if (string.Empty + tags[j][2] != string.Empty || SavedSettings.considerUnrated)
                 {
-                    sumRating += ConvertStrings(tags[j][2]).result1f;
+                    sumRating += ConvertStrings(tags[j][2], ResultType.Double, DataType.Rating).resultD;
                     numberOfTracks++;
                 }
             }

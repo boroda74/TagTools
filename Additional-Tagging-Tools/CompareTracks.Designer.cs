@@ -7,19 +7,6 @@
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Освободить все используемые ресурсы.
-        /// </summary>
-        /// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
         #region Код, автоматически созданный конструктором форм Windows
 
         /// <summary>
@@ -31,6 +18,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CompareTracksCommand));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
@@ -42,21 +31,24 @@
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.selectTagsButton = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.rememberColumnasDefaulltWidthCheckBox = new System.Windows.Forms.CheckBox();
+            this.rememberColumnAsDefaultWidthCheckBox = new System.Windows.Forms.CheckBox();
             this.AutoSelectTagsCheckBox = new System.Windows.Forms.CheckBox();
-            this.rememberColumnasDefaulltWidthCheckBoxLabel = new System.Windows.Forms.Label();
+            this.rememberColumnAsDefaultWidthCheckBoxLabel = new System.Windows.Forms.Label();
             this.buttonCopy = new System.Windows.Forms.Button();
             this.buttonPaste = new System.Windows.Forms.Button();
             this.buttonClear = new System.Windows.Forms.Button();
+            this.toolsPanel = new System.Windows.Forms.Panel();
+            this.placeholderLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).BeginInit();
+            this.toolsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonOK
             // 
             resources.ApplyResources(this.buttonOK, "buttonOK");
             this.buttonOK.Name = "buttonOK";
+            this.buttonOK.Tag = "#buttonCancel";
             this.toolTip1.SetToolTip(this.buttonOK, resources.GetString("buttonOK.ToolTip"));
-            this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // buttonCancel
@@ -64,8 +56,8 @@
             resources.ApplyResources(this.buttonCancel, "buttonCancel");
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Tag = "#toolsPanel@non-defaultable";
             this.toolTip1.SetToolTip(this.buttonCancel, resources.GetString("buttonCancel.ToolTip"));
-            this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // previewTable
@@ -77,9 +69,9 @@
             this.previewTable.BackgroundColor = System.Drawing.SystemColors.Window;
             this.previewTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.previewTable.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F);
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -88,8 +80,24 @@
             this.previewTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.ImageCellTemplate});
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.previewTable.DefaultCellStyle = dataGridViewCellStyle3;
             this.previewTable.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
             this.previewTable.Name = "previewTable";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.previewTable.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.previewTable.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.previewTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.toolTip1.SetToolTip(this.previewTable, resources.GetString("previewTable.ToolTip"));
@@ -108,9 +116,7 @@
             // ImageCellTemplate
             // 
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             dataGridViewCellStyle2.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle2.NullValue")));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.ImageCellTemplate.DefaultCellStyle = dataGridViewCellStyle2;
             resources.ApplyResources(this.ImageCellTemplate, "ImageCellTemplate");
             this.ImageCellTemplate.Image = global::MusicBeePlugin.Properties.Resources.search;
@@ -137,8 +143,8 @@
             // 
             resources.ApplyResources(this.selectTagsButton, "selectTagsButton");
             this.selectTagsButton.Name = "selectTagsButton";
+            this.selectTagsButton.Tag = "@non-defaultable";
             this.toolTip1.SetToolTip(this.selectTagsButton, resources.GetString("selectTagsButton.ToolTip"));
-            this.selectTagsButton.UseVisualStyleBackColor = true;
             this.selectTagsButton.Click += new System.EventHandler(this.selectTagsButton_Click);
             // 
             // toolTip1
@@ -147,35 +153,33 @@
             this.toolTip1.InitialDelay = 500;
             this.toolTip1.ReshowDelay = 100;
             // 
-            // rememberColumnasDefaulltWidthCheckBox
+            // rememberColumnAsDefaultWidthCheckBox
             // 
-            resources.ApplyResources(this.rememberColumnasDefaulltWidthCheckBox, "rememberColumnasDefaulltWidthCheckBox");
-            this.rememberColumnasDefaulltWidthCheckBox.Name = "rememberColumnasDefaulltWidthCheckBox";
-            this.rememberColumnasDefaulltWidthCheckBox.Tag = "rememberColumnasDefaulltWidthCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.rememberColumnasDefaulltWidthCheckBox, resources.GetString("rememberColumnasDefaulltWidthCheckBox.ToolTip"));
-            this.rememberColumnasDefaulltWidthCheckBox.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.rememberColumnAsDefaultWidthCheckBox, "rememberColumnAsDefaultWidthCheckBox");
+            this.rememberColumnAsDefaultWidthCheckBox.Name = "rememberColumnAsDefaultWidthCheckBox";
+            this.rememberColumnAsDefaultWidthCheckBox.Tag = "#rememberColumnAsDefaultWidthCheckBoxLabel";
+            this.toolTip1.SetToolTip(this.rememberColumnAsDefaultWidthCheckBox, resources.GetString("rememberColumnAsDefaultWidthCheckBox.ToolTip"));
             // 
             // AutoSelectTagsCheckBox
             // 
             resources.ApplyResources(this.AutoSelectTagsCheckBox, "AutoSelectTagsCheckBox");
             this.AutoSelectTagsCheckBox.Name = "AutoSelectTagsCheckBox";
+            this.AutoSelectTagsCheckBox.Tag = "#placeholderLabel";
             this.toolTip1.SetToolTip(this.AutoSelectTagsCheckBox, resources.GetString("AutoSelectTagsCheckBox.ToolTip"));
-            this.AutoSelectTagsCheckBox.UseVisualStyleBackColor = true;
             this.AutoSelectTagsCheckBox.CheckedChanged += new System.EventHandler(this.AutoSelectTagsCheckBox_CheckedChanged);
             // 
-            // rememberColumnasDefaulltWidthCheckBoxLabel
+            // rememberColumnAsDefaultWidthCheckBoxLabel
             // 
-            resources.ApplyResources(this.rememberColumnasDefaulltWidthCheckBoxLabel, "rememberColumnasDefaulltWidthCheckBoxLabel");
-            this.rememberColumnasDefaulltWidthCheckBoxLabel.Name = "rememberColumnasDefaulltWidthCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.rememberColumnasDefaulltWidthCheckBoxLabel, resources.GetString("rememberColumnasDefaulltWidthCheckBoxLabel.ToolTip"));
-            this.rememberColumnasDefaulltWidthCheckBoxLabel.Click += new System.EventHandler(this.rememberColumnasDefaulltWidthCheckBoxLabel_Click);
+            resources.ApplyResources(this.rememberColumnAsDefaultWidthCheckBoxLabel, "rememberColumnAsDefaultWidthCheckBoxLabel");
+            this.rememberColumnAsDefaultWidthCheckBoxLabel.Name = "rememberColumnAsDefaultWidthCheckBoxLabel";
+            this.toolTip1.SetToolTip(this.rememberColumnAsDefaultWidthCheckBoxLabel, resources.GetString("rememberColumnAsDefaultWidthCheckBoxLabel.ToolTip"));
+            this.rememberColumnAsDefaultWidthCheckBoxLabel.Click += new System.EventHandler(this.rememberColumnasDefaulltWidthCheckBoxLabel_Click);
             // 
             // buttonCopy
             // 
             resources.ApplyResources(this.buttonCopy, "buttonCopy");
             this.buttonCopy.Name = "buttonCopy";
             this.toolTip1.SetToolTip(this.buttonCopy, resources.GetString("buttonCopy.ToolTip"));
-            this.buttonCopy.UseVisualStyleBackColor = true;
             this.buttonCopy.Click += new System.EventHandler(this.buttonCopy_Click);
             // 
             // buttonPaste
@@ -183,7 +187,6 @@
             resources.ApplyResources(this.buttonPaste, "buttonPaste");
             this.buttonPaste.Name = "buttonPaste";
             this.toolTip1.SetToolTip(this.buttonPaste, resources.GetString("buttonPaste.ToolTip"));
-            this.buttonPaste.UseVisualStyleBackColor = true;
             this.buttonPaste.Click += new System.EventHandler(this.buttonPaste_Click);
             // 
             // buttonClear
@@ -191,31 +194,46 @@
             resources.ApplyResources(this.buttonClear, "buttonClear");
             this.buttonClear.Name = "buttonClear";
             this.toolTip1.SetToolTip(this.buttonClear, resources.GetString("buttonClear.ToolTip"));
-            this.buttonClear.UseVisualStyleBackColor = true;
             this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
+            // 
+            // toolsPanel
+            // 
+            resources.ApplyResources(this.toolsPanel, "toolsPanel");
+            this.toolsPanel.Controls.Add(this.buttonCancel);
+            this.toolsPanel.Controls.Add(this.buttonOK);
+            this.toolsPanel.Controls.Add(this.buttonClear);
+            this.toolsPanel.Controls.Add(this.buttonPaste);
+            this.toolsPanel.Controls.Add(this.buttonCopy);
+            this.toolsPanel.Controls.Add(this.rememberColumnAsDefaultWidthCheckBoxLabel);
+            this.toolsPanel.Controls.Add(this.rememberColumnAsDefaultWidthCheckBox);
+            this.toolsPanel.Controls.Add(this.selectTagsButton);
+            this.toolsPanel.Controls.Add(this.placeholderLabel);
+            this.toolsPanel.Controls.Add(this.AutoSelectTagsCheckBox);
+            this.toolsPanel.Name = "toolsPanel";
+            this.toolTip1.SetToolTip(this.toolsPanel, resources.GetString("toolsPanel.ToolTip"));
+            // 
+            // placeholderLabel
+            // 
+            resources.ApplyResources(this.placeholderLabel, "placeholderLabel");
+            this.placeholderLabel.Name = "placeholderLabel";
+            this.placeholderLabel.Tag = " ";
+            this.toolTip1.SetToolTip(this.placeholderLabel, resources.GetString("placeholderLabel.ToolTip"));
             // 
             // CompareTracksCommand
             // 
             this.AcceptButton = this.buttonOK;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.buttonCancel;
-            this.Controls.Add(this.selectTagsButton);
-            this.Controls.Add(this.rememberColumnasDefaulltWidthCheckBoxLabel);
-            this.Controls.Add(this.buttonClear);
-            this.Controls.Add(this.buttonPaste);
-            this.Controls.Add(this.buttonCopy);
-            this.Controls.Add(this.AutoSelectTagsCheckBox);
-            this.Controls.Add(this.rememberColumnasDefaulltWidthCheckBox);
+            this.Controls.Add(this.toolsPanel);
             this.Controls.Add(this.previewTable);
-            this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.buttonOK);
             this.Name = "CompareTracksCommand";
+            this.Tag = "@fixed-min-width";
             this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.Shown += new System.EventHandler(this.TagHistoryPlugin_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).EndInit();
+            this.toolsPanel.ResumeLayout(false);
+            this.toolsPanel.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -228,13 +246,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.Button selectTagsButton;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.CheckBox rememberColumnasDefaulltWidthCheckBox;
+        private System.Windows.Forms.CheckBox rememberColumnAsDefaultWidthCheckBox;
         private System.Windows.Forms.CheckBox AutoSelectTagsCheckBox;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewImageColumn ImageCellTemplate;
         private System.Windows.Forms.Button buttonCopy;
         private System.Windows.Forms.Button buttonPaste;
         private System.Windows.Forms.Button buttonClear;
-        private System.Windows.Forms.Label rememberColumnasDefaulltWidthCheckBoxLabel;
+        private System.Windows.Forms.Label rememberColumnAsDefaultWidthCheckBoxLabel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewImageColumn ImageCellTemplate;
+        private System.Windows.Forms.Panel toolsPanel;
+        private System.Windows.Forms.Label placeholderLabel;
     }
 }

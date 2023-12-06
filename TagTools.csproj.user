@@ -22,14 +22,15 @@
     <StartProgram>D:\Архив\Плейеры\.MusicBee Portable\MusicBee.exe</StartProgram>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
-    <StartWorkingDirectory>D:\Архив\Плейеры\.MusicBee Portable\Plugins\</StartWorkingDirectory>
+    <StartWorkingDirectory>D:\Архив\Плейеры\.MusicBee\.MusicBee Portable Development\Plugins\</StartWorkingDirectory>
     <StartAction>Program</StartAction>
-    <StartProgram>D:\Архив\Плейеры\.MusicBee Portable\MusicBee.exe</StartProgram>
+    <StartProgram>D:\Архив\Плейеры\.MusicBee\.MusicBee Portable Development\MusicBee.exe</StartProgram>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <StartWorkingDirectory>D:\Архив\Плейеры\.MusicBee Portable\Plugins\</StartWorkingDirectory>
-    <EnableUnmanagedDebugging>true</EnableUnmanagedDebugging>
+    <StartWorkingDirectory>D:\Архив\Плейеры\.MusicBee\.MusicBee Portable Development\Plugins\</StartWorkingDirectory>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
     <StartAction>Program</StartAction>
-    <StartProgram>D:\Архив\Плейеры\.MusicBee Portable\MusicBee.exe</StartProgram>
+    <StartProgram>D:\Архив\Плейеры\.MusicBee\.MusicBee Portable Development\MusicBee.exe</StartProgram>
   </PropertyGroup>
 </Project>

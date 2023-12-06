@@ -14,10 +14,9 @@ namespace MusicBeePlugin
         public SwapTagsCommand(Plugin tagToolsPluginParam) : base(tagToolsPluginParam)
         {
             InitializeComponent();
-            initializeForm();
         }
 
-        protected new void initializeForm()
+        protected override void initializeForm()
         {
             base.initializeForm();
 
@@ -44,7 +43,7 @@ namespace MusicBeePlugin
 
             if (files.Length == 0)
             {
-                MessageBox.Show(this, MsgNoFilesSelected, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, MsgNoTracksSelected, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
             else
@@ -131,7 +130,7 @@ namespace MusicBeePlugin
             buttonOK.Enable(false);
         }
 
-        private void label4_Click(object sender, EventArgs e)
+        private void smartOperationCheckBoxLabel_Click(object sender, EventArgs e)
         {
             smartOperationCheckBox.Checked = !smartOperationCheckBox.Checked;
         }

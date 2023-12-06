@@ -86,15 +86,19 @@ namespace MusicBeePlugin
                 for (int i = 0; i + 2 < preparedMaskRGBData.Length; i += 4)
                 {
                     //convert to gray scale R:0.30 G=0.59 B 0.11
-                    greyLevel = (byte)(0.3 * preparedMaskRGBData[i + 2] + 0.59 * preparedMaskRGBData[i + 1] + 0.11 * preparedMaskRGBData[i]);
+                    float greyLevelF = 0.3f * preparedMaskRGBData[i + 2] + 0.59f * preparedMaskRGBData[i + 1] + 0.11f * preparedMaskRGBData[i];
 
                     if (opaque)
                     {
-                        greyLevel = ((int)greyLevel < 420/*OpacityThreshold*/) ? byte.MinValue : byte.MaxValue;
+                        greyLevel = (greyLevelF < 420/* MUST BE "/ some constant" - OpacityThreshold*/) ? byte.MinValue : byte.MaxValue;
                     }
                     if (invertedMask)
                     {
-                        greyLevel = (byte)(255 - (int)greyLevel);
+                        greyLevel = (byte)(255 - greyLevelF);
+                    }
+                    else
+                    {
+                        greyLevel = (byte)greyLevelF;
                     }
 
                     preparedMaskRGBData[i] = greyLevel;
@@ -104,7 +108,7 @@ namespace MusicBeePlugin
                 }
                 System.Runtime.InteropServices.Marshal.Copy(preparedMaskRGBData, 0, bmpData.Scan0, preparedMaskRGBData.Length);
                 preparedMask.UnlockBits(bmpData);
-                //this.spriteMask.Image = preparedMask;
+                //this.spriteMask.Image = ThemedBitmapAddRef(this, preparedMask);
                 // if the loaded image is available, we have everything to compute the masked image
                 if (_image != null)
                 {
@@ -232,7 +236,7 @@ namespace MusicBeePlugin
 
             float resultHue = (highlightHue * highlightWeight * highlightSat * highlightBr + sampleHue * (1 - highlightWeight) * sampleSat * sampleBr) 
                 / (highlightWeight * highlightSat * highlightBr + (1 - highlightWeight) * sampleSat * sampleBr);
-            float resultSat = highlightSat * 0.5f + sampleSat * 0.5f;
+            float resultSat = highlightSat * 0.3f + sampleSat * 0.7f;
             float resultBr = highlightBr * highlightWeight + sampleBr * (1 - highlightWeight);
 
             if (Math.Abs(resultBr - backBr) < 0.3)
@@ -346,6 +350,19 @@ namespace MusicBeePlugin
             scaledMaskedBitmap.Dispose();
 
             return alphaBlendedImage.AlphaBlendImages();
+        }
+
+        public static Bitmap ScaleBitmap(Bitmap bitmap, int newWidth, int newHeight)
+        {
+
+            Bitmap scaledBitmap = new Bitmap(newWidth, newHeight, bitmap.PixelFormat);
+            using (Graphics gfx = Graphics.FromImage(scaledBitmap))
+            {
+                gfx.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                gfx.DrawImage(bitmap, -1, -1, newWidth + 1, newHeight + 1);
+            }
+
+            return scaledBitmap;
         }
     }
 }

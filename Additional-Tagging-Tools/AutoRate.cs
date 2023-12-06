@@ -17,10 +17,9 @@ namespace MusicBeePlugin
         public AutoRateCommand(Plugin tagToolsPluginParam) : base(tagToolsPluginParam)
         {
             InitializeComponent();
-            initializeForm();
         }
 
-        protected new void initializeForm()
+        protected override void initializeForm()
         {
             base.initializeForm();
 
@@ -134,6 +133,9 @@ namespace MusicBeePlugin
             perCentN_ValueChanged(perCent15UpDown, checkBox15, perCentLabel15, SavedSettings.actualPerCent15);
             perCentN_ValueChanged(perCent1UpDown, checkBox1, perCentLabel1, SavedSettings.actualPerCent1);
             perCentN_ValueChanged(perCent05UpDown, checkBox05, perCentLabel05, SavedSettings.actualPerCent05);
+
+
+            button_GotFocus(this.AcceptButton, null); //Let's mark active button
         }
 
         private decimal sumOfPercentage()
@@ -351,7 +353,7 @@ namespace MusicBeePlugin
 
             if (files.Length == 0)
             {
-                MessageBox.Show(this, MsgNoFilesSelected, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, MsgNoTracksSelected, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
             else
@@ -391,7 +393,7 @@ namespace MusicBeePlugin
             if (derivedPlayed < 0)
                 derivedPlayed = 0;
 
-            try { daysSinceAdded = (DateTime.Parse("" + MbApiInterface.Library_GetFileProperty(currentFile, FilePropertyType.DateAdded)) - DateTime.Now).TotalDays; }
+            try { daysSinceAdded = (DateTime.Parse(string.Empty + MbApiInterface.Library_GetFileProperty(currentFile, FilePropertyType.DateAdded)) - DateTime.Now).TotalDays; }
             catch (FormatException) { daysSinceAdded = 0; }
 
             try
@@ -399,7 +401,7 @@ namespace MusicBeePlugin
                 if (SavedSettings.sinceAdded)
                     daysSinceLastPlayed = 0;
                 else
-                    daysSinceLastPlayed = (DateTime.Parse("" + MbApiInterface.Library_GetFileProperty(currentFile, FilePropertyType.LastPlayed)) - DateTime.Now).TotalDays;
+                    daysSinceLastPlayed = (DateTime.Parse(string.Empty + MbApiInterface.Library_GetFileProperty(currentFile, FilePropertyType.LastPlayed)) - DateTime.Now).TotalDays;
             }
             catch (FormatException) { daysSinceLastPlayed = 0; }
 
@@ -689,7 +691,7 @@ namespace MusicBeePlugin
         {
             if (sumOfPercentage() > 100)
             {
-                MessageBox.Show(this, MsgIncorrectSumOfWeights, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, MsgIncorrectSumOfWeights, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
 

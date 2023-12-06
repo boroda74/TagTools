@@ -9,19 +9,6 @@ namespace MusicBeePlugin
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Освободить все используемые ресурсы.
-        /// </summary>
-        /// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
         #region Код, автоматически созданный конструктором форм Windows
 
         /// <summary>
@@ -42,7 +29,9 @@ namespace MusicBeePlugin
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.checkUncheckAllCheckBoxLabel = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonOK
@@ -50,7 +39,6 @@ namespace MusicBeePlugin
             resources.ApplyResources(this.buttonOK, "buttonOK");
             this.buttonOK.Name = "buttonOK";
             this.toolTip1.SetToolTip(this.buttonOK, resources.GetString("buttonOK.ToolTip"));
-            this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // buttonCancel
@@ -59,7 +47,6 @@ namespace MusicBeePlugin
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Name = "buttonCancel";
             this.toolTip1.SetToolTip(this.buttonCancel, resources.GetString("buttonCancel.ToolTip"));
-            this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // tableLayoutPanel1
@@ -105,7 +92,6 @@ namespace MusicBeePlugin
             this.checkUncheckAllCheckBox.Name = "checkUncheckAllCheckBox";
             this.checkUncheckAllCheckBox.Tag = "checkUncheckAllCheckBoxLabel";
             this.toolTip1.SetToolTip(this.checkUncheckAllCheckBox, resources.GetString("checkUncheckAllCheckBox.ToolTip"));
-            this.checkUncheckAllCheckBox.UseVisualStyleBackColor = true;
             this.checkUncheckAllCheckBox.CheckedChanged += new System.EventHandler(this.checkUncheckAllCheckBox_CheckedChanged);
             // 
             // toolTip1
@@ -127,27 +113,36 @@ namespace MusicBeePlugin
             this.toolTip1.SetToolTip(this.checkUncheckAllCheckBoxLabel, resources.GetString("checkUncheckAllCheckBoxLabel.ToolTip"));
             this.checkUncheckAllCheckBoxLabel.Click += new System.EventHandler(this.checkUncheckAllCheckBoxLabel_Click);
             // 
+            // panel1
+            // 
+            resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.Controls.Add(this.buttonCancel);
+            this.panel1.Controls.Add(this.buttonOK);
+            this.panel1.Controls.Add(this.checkUncheckAllCheckBoxLabel);
+            this.panel1.Controls.Add(this.checkUncheckAllCheckBox);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Name = "panel1";
+            this.toolTip1.SetToolTip(this.panel1, resources.GetString("panel1.ToolTip"));
+            // 
             // CopyTagsToClipboardCommand
             // 
             this.AcceptButton = this.buttonOK;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.Controls.Add(this.checkUncheckAllCheckBoxLabel);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.checkUncheckAllCheckBox);
-            this.Controls.Add(this.tagSetComboBox);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.buttonOK);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.tagSetComboBox);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CopyTagsToClipboardCommand";
+            this.Tag = "";
             this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CopyTagsToClipboardCommand_FormClosed);
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -163,5 +158,6 @@ namespace MusicBeePlugin
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label checkUncheckAllCheckBoxLabel;
+        private Panel panel1;
     }
 }

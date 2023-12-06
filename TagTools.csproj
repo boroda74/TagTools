@@ -58,13 +58,13 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Additional-Tagging-Tools\Wrench.ico</ApplicationIcon>
+    <ApplicationIcon>wrench.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
-    <OutputPath>..\..\..\Архив\Плейеры\.MusicBee Portable\Plugins\</OutputPath>
+    <OutputPath>..\..\..\Архив\Плейеры\.MusicBee\.MusicBee Portable Development\Plugins\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DebugType>full</DebugType>
@@ -72,9 +72,11 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <OutputPath>..\..\..\Архив\Плейеры\.MusicBee Portable\Plugins\</OutputPath>
+    <OutputPath>..\..\..\Архив\Плейеры\.MusicBee\.MusicBee Portable Development\Plugins\</OutputPath>
     <DefineConstants>CODE_ANALYSIS;TRACE</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Optimize>true</Optimize>
@@ -83,6 +85,11 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
@@ -169,12 +176,6 @@
     <Compile Include="Additional-Tagging-Tools\TagHistory.Designer.cs">
       <DependentUpon>TagHistory.cs</DependentUpon>
     </Compile>
-    <Compile Include="Additional-Tagging-Tools\MultiplePastingQuestion.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Additional-Tagging-Tools\MultiplePastingQuestion.Designer.cs">
-      <DependentUpon>MultiplePastingQuestion.cs</DependentUpon>
-    </Compile>
     <Compile Include="Additional-Tagging-Tools\CopyTagsToClipboard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -235,6 +236,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Additional-Tagging-Tools\app.config" />
+    <None Include="app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -255,7 +257,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Additional-Tagging-Tools\ASRPresetEditor.ru.resx">
       <DependentUpon>ASRPresetEditor.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Additional-Tagging-Tools\AutoBackupSettings.ru.resx">
       <DependentUpon>AutoBackupSettings.cs</DependentUpon>
@@ -300,6 +301,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Additional-Tagging-Tools\ReencodeTag.resx">
       <DependentUpon>ReencodeTag.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Additional-Tagging-Tools\ReencodeTag.ru.resx">
       <DependentUpon>ReencodeTag.cs</DependentUpon>
@@ -336,16 +338,8 @@
       <DependentUpon>TagHistory.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Additional-Tagging-Tools\MultiplePastingQuestion.resx">
-      <DependentUpon>MultiplePastingQuestion.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Additional-Tagging-Tools\CopyTagsToClipboard.ru.resx">
       <DependentUpon>CopyTagsToClipboard.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Additional-Tagging-Tools\MultiplePastingQuestion.ru.resx">
-      <DependentUpon>MultiplePastingQuestion.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Additional-Tagging-Tools\CopyTagsToClipboard.resx">
       <DependentUpon>CopyTagsToClipboard.cs</DependentUpon>
@@ -419,17 +413,18 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\Resources\gear.png" />
+    <Content Include="wrench.ico" />
+    <None Include="Properties\Resources\warning-15.png" />
     <None Include="Properties\Resources\warning-wide-15.png" />
-    <None Include="Properties\Resources\Warning-45x15.png" />
-    <None Include="Properties\Resources\warning-12b.png" />
+    <None Include="Properties\Resources\window-23.png" />
+    <Content Include="Properties\Resources\window.png" />
+    <None Include="Properties\Resources\warning-wide.png" />
+    <None Include="Properties\Resources\warning.png" />
     <None Include="Properties\Resources\gear-15.png" />
-    <None Include="Properties\Resources\gear-15-flat.png" />
-    <None Include="Properties\Resources\clear-button-15-flat.png" />
     <None Include="Properties\Resources\transparent-15.png" />
     <None Include="Properties\Resources\set-button-15.png" />
     <None Include="Properties\Resources\clear-button-15.png" />
-    <None Include="Properties\Resources\warning-15-flat.png" />
-    <None Include="Properties\Resources\warning-15.png" />
     <None Include="Properties\Resources\uncheck-mark.png" />
     <None Include="Properties\Resources\uncheck-all-preset-filters.png" />
     <None Include="Properties\Resources\hotkey-presets.png" />
@@ -440,10 +435,8 @@
     <None Include="Properties\Resources\predefined-presets.png" />
     <None Include="Properties\Resources\auto-applied-presets.png" />
     <None Include="Properties\Resources\check-mark.png" />
-    <None Include="Properties\Resources\window.png" />
     <None Include="Properties\Resources\search.png" />
-    <None Include="Properties\Resources\MissingArtwork.png" />
-    <Content Include="Additional-Tagging-Tools\Wrench.ico" />
+    <None Include="Properties\Resources\missing-artwork.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

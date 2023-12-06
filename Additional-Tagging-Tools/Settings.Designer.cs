@@ -7,19 +7,6 @@
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Освободить все используемые ресурсы.
-        /// </summary>
-        /// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
         #region Код, автоматически созданный конструктором форм Windows
 
         /// <summary>
@@ -35,20 +22,20 @@
             this.label6 = new System.Windows.Forms.Label();
             this.versionLabel = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label26 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
+            this.playTickedAsrPresetSoundCheckBoxLabel = new System.Windows.Forms.Label();
             this.playTickedAsrPresetSoundCheckBox = new System.Windows.Forms.CheckBox();
+            this.playStoppedSoundCheckBoxLabel = new System.Windows.Forms.Label();
             this.playStoppedSoundCheckBox = new System.Windows.Forms.CheckBox();
+            this.playStartedSoundCheckBoxLabel = new System.Windows.Forms.Label();
             this.playStartedSoundCheckBox = new System.Windows.Forms.CheckBox();
+            this.playCompletedSoundCheckBoxLabel = new System.Windows.Forms.Label();
             this.playCompletedSoundCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.unitGBox = new System.Windows.Forms.TextBox();
-            this.unitMBox = new System.Windows.Forms.TextBox();
-            this.unitKBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.unitMBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.unitKBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.saveLastSkippedButton = new System.Windows.Forms.Button();
             this.useSkinColorsCheckBox = new System.Windows.Forms.CheckBox();
@@ -56,17 +43,17 @@
             this.showHiddenCommandWindowsRadioButton = new System.Windows.Forms.RadioButton();
             this.highlightChangedTagsCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.minimizePluginWindowsCheckBox = new System.Windows.Forms.CheckBox();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.preservedTagValuesLegendTextBox = new System.Windows.Forms.TextBox();
+            this.legendGroupBox = new System.Windows.Forms.GroupBox();
             this.preservedTagsLegendTextBox = new System.Windows.Forms.TextBox();
+            this.preservedTagValuesLegendTextBox = new System.Windows.Forms.TextBox();
             this.changedLegendTextBox = new System.Windows.Forms.TextBox();
-            this.showRencodeTagCheckBox = new System.Windows.Forms.CheckBox();
+            this.showHiddenCommandWindowsRadioButtonLabel = new System.Windows.Forms.Label();
+            this.closeHiddenCommandWindowsRadioButtonLabel = new System.Windows.Forms.Label();
+            this.minimizePluginWindowsCheckBoxLabel = new System.Windows.Forms.Label();
+            this.minimizePluginWindowsCheckBox = new System.Windows.Forms.CheckBox();
+            this.highlightChangedTagsCheckBoxLabel = new System.Windows.Forms.Label();
+            this.useSkinColorsCheckBoxLabel = new System.Windows.Forms.Label();
+            this.showReencodeTagCheckBox = new System.Windows.Forms.CheckBox();
             this.showChangeCaseCheckBox = new System.Windows.Forms.CheckBox();
             this.showLibraryReportsCheckBox = new System.Windows.Forms.CheckBox();
             this.showCopyTagCheckBox = new System.Windows.Forms.CheckBox();
@@ -79,24 +66,26 @@
             this.contextMenuCheckBox = new System.Windows.Forms.CheckBox();
             this.showCTCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.allowCommandExecutionWithoutPreviewCheckBoxLabel = new System.Windows.Forms.Label();
+            this.allowCommandExecutionWithoutPreviewCheckBox = new System.Windows.Forms.CheckBox();
+            this.contextMenuCheckBoxLabel = new System.Windows.Forms.Label();
+            this.showBackupRestoreCheckBoxLabel = new System.Windows.Forms.Label();
+            this.showShowHiddenWindowsCheckBoxLabel = new System.Windows.Forms.Label();
+            this.showCTCheckBoxLabel = new System.Windows.Forms.Label();
+            this.showCARCheckBoxLabel = new System.Windows.Forms.Label();
+            this.showASRCheckBoxLabel = new System.Windows.Forms.Label();
+            this.showAutorateCheckBoxLabel = new System.Windows.Forms.Label();
+            this.showLibraryReportsCheckBoxLabel = new System.Windows.Forms.Label();
+            this.showReencodeTagCheckBoxLabel = new System.Windows.Forms.Label();
+            this.showChangeCaseCheckBoxLabel = new System.Windows.Forms.Label();
+            this.showSwapTagsCheckBoxLabel = new System.Windows.Forms.Label();
             this.showCopyTagCheckBoxLabel = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.label29 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
-            this.label27 = new System.Windows.Forms.Label();
+            this.includePreservedTagValuesCheckBoxLabel = new System.Windows.Forms.Label();
             this.includePreservedTagValuesCheckBox = new System.Windows.Forms.CheckBox();
+            this.includePreservedTagsCheckBoxLabel = new System.Windows.Forms.Label();
             this.includePreservedTagsCheckBox = new System.Windows.Forms.CheckBox();
+            this.includeNotChangedTagsCheckBoxLabel = new System.Windows.Forms.Label();
             this.includeNotChangedTagsCheckBox = new System.Windows.Forms.CheckBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label1 = new System.Windows.Forms.Label();
@@ -104,29 +93,22 @@
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.groupBox6.SuspendLayout();
+            this.legendGroupBox.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.SuspendLayout();
-            //MusicBee
-            this.unitKBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.unitMBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.unitGBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            //~MusicBee
             // 
             // buttonCancel
             // 
             resources.ApplyResources(this.buttonCancel, "buttonCancel");
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // buttonOK
             // 
             resources.ApplyResources(this.buttonOK, "buttonOK");
             this.buttonOK.Name = "buttonOK";
-            this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // label6
@@ -142,73 +124,73 @@
             // groupBox3
             // 
             resources.ApplyResources(this.groupBox3, "groupBox3");
-            this.groupBox3.Controls.Add(this.label26);
-            this.groupBox3.Controls.Add(this.label25);
-            this.groupBox3.Controls.Add(this.label24);
-            this.groupBox3.Controls.Add(this.label23);
+            this.groupBox3.Controls.Add(this.playTickedAsrPresetSoundCheckBoxLabel);
             this.groupBox3.Controls.Add(this.playTickedAsrPresetSoundCheckBox);
+            this.groupBox3.Controls.Add(this.playStoppedSoundCheckBoxLabel);
             this.groupBox3.Controls.Add(this.playStoppedSoundCheckBox);
+            this.groupBox3.Controls.Add(this.playStartedSoundCheckBoxLabel);
             this.groupBox3.Controls.Add(this.playStartedSoundCheckBox);
+            this.groupBox3.Controls.Add(this.playCompletedSoundCheckBoxLabel);
             this.groupBox3.Controls.Add(this.playCompletedSoundCheckBox);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
             // 
-            // label26
+            // playTickedAsrPresetSoundCheckBoxLabel
             // 
-            resources.ApplyResources(this.label26, "label26");
-            this.label26.Name = "label26";
-            this.label26.Click += new System.EventHandler(this.label26_Click);
-            // 
-            // label25
-            // 
-            resources.ApplyResources(this.label25, "label25");
-            this.label25.Name = "label25";
-            this.label25.Click += new System.EventHandler(this.label25_Click);
-            // 
-            // label24
-            // 
-            resources.ApplyResources(this.label24, "label24");
-            this.label24.Name = "label24";
-            this.label24.Click += new System.EventHandler(this.label24_Click);
-            // 
-            // label23
-            // 
-            resources.ApplyResources(this.label23, "label23");
-            this.label23.Name = "label23";
-            this.label23.Click += new System.EventHandler(this.label23_Click);
+            resources.ApplyResources(this.playTickedAsrPresetSoundCheckBoxLabel, "playTickedAsrPresetSoundCheckBoxLabel");
+            this.playTickedAsrPresetSoundCheckBoxLabel.Name = "playTickedAsrPresetSoundCheckBoxLabel";
+            this.playTickedAsrPresetSoundCheckBoxLabel.Click += new System.EventHandler(this.playTickedAsrPresetSoundCheckBoxLabel_Click);
             // 
             // playTickedAsrPresetSoundCheckBox
             // 
             resources.ApplyResources(this.playTickedAsrPresetSoundCheckBox, "playTickedAsrPresetSoundCheckBox");
             this.playTickedAsrPresetSoundCheckBox.Name = "playTickedAsrPresetSoundCheckBox";
-            this.playTickedAsrPresetSoundCheckBox.UseVisualStyleBackColor = true;
+            this.playTickedAsrPresetSoundCheckBox.Tag = "#playTickedAsrPresetSoundCheckBoxLabel";
+            // 
+            // playStoppedSoundCheckBoxLabel
+            // 
+            resources.ApplyResources(this.playStoppedSoundCheckBoxLabel, "playStoppedSoundCheckBoxLabel");
+            this.playStoppedSoundCheckBoxLabel.Name = "playStoppedSoundCheckBoxLabel";
+            this.playStoppedSoundCheckBoxLabel.Click += new System.EventHandler(this.playStoppedSoundCheckBoxLabel_Click);
             // 
             // playStoppedSoundCheckBox
             // 
             resources.ApplyResources(this.playStoppedSoundCheckBox, "playStoppedSoundCheckBox");
             this.playStoppedSoundCheckBox.Name = "playStoppedSoundCheckBox";
-            this.playStoppedSoundCheckBox.UseVisualStyleBackColor = true;
+            this.playStoppedSoundCheckBox.Tag = "#playStoppedSoundCheckBoxLabel";
+            // 
+            // playStartedSoundCheckBoxLabel
+            // 
+            resources.ApplyResources(this.playStartedSoundCheckBoxLabel, "playStartedSoundCheckBoxLabel");
+            this.playStartedSoundCheckBoxLabel.Name = "playStartedSoundCheckBoxLabel";
+            this.playStartedSoundCheckBoxLabel.Click += new System.EventHandler(this.playStartedSoundCheckBoxLabel_Click);
             // 
             // playStartedSoundCheckBox
             // 
             resources.ApplyResources(this.playStartedSoundCheckBox, "playStartedSoundCheckBox");
             this.playStartedSoundCheckBox.Name = "playStartedSoundCheckBox";
-            this.playStartedSoundCheckBox.UseVisualStyleBackColor = true;
+            this.playStartedSoundCheckBox.Tag = "#playStartedSoundCheckBoxLabel";
+            // 
+            // playCompletedSoundCheckBoxLabel
+            // 
+            resources.ApplyResources(this.playCompletedSoundCheckBoxLabel, "playCompletedSoundCheckBoxLabel");
+            this.playCompletedSoundCheckBoxLabel.Name = "playCompletedSoundCheckBoxLabel";
+            this.playCompletedSoundCheckBoxLabel.Click += new System.EventHandler(this.playCompletedSoundCheckBoxLabel_Click);
             // 
             // playCompletedSoundCheckBox
             // 
             resources.ApplyResources(this.playCompletedSoundCheckBox, "playCompletedSoundCheckBox");
             this.playCompletedSoundCheckBox.Name = "playCompletedSoundCheckBox";
-            this.playCompletedSoundCheckBox.UseVisualStyleBackColor = true;
+            this.playCompletedSoundCheckBox.Tag = "#playCompletedSoundCheckBoxLabel";
             // 
             // groupBox4
             // 
             resources.ApplyResources(this.groupBox4, "groupBox4");
             this.groupBox4.Controls.Add(this.unitGBox);
-            this.groupBox4.Controls.Add(this.unitMBox);
-            this.groupBox4.Controls.Add(this.unitKBox);
             this.groupBox4.Controls.Add(this.label4);
+            this.groupBox4.Controls.Add(this.unitMBox);
             this.groupBox4.Controls.Add(this.label3);
+            this.groupBox4.Controls.Add(this.unitKBox);
             this.groupBox4.Controls.Add(this.label2);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.TabStop = false;
@@ -218,25 +200,25 @@
             resources.ApplyResources(this.unitGBox, "unitGBox");
             this.unitGBox.Name = "unitGBox";
             // 
-            // unitMBox
-            // 
-            resources.ApplyResources(this.unitMBox, "unitMBox");
-            this.unitMBox.Name = "unitMBox";
-            // 
-            // unitKBox
-            // 
-            resources.ApplyResources(this.unitKBox, "unitKBox");
-            this.unitKBox.Name = "unitKBox";
-            // 
             // label4
             // 
             resources.ApplyResources(this.label4, "label4");
             this.label4.Name = "label4";
             // 
+            // unitMBox
+            // 
+            resources.ApplyResources(this.unitMBox, "unitMBox");
+            this.unitMBox.Name = "unitMBox";
+            // 
             // label3
             // 
             resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
+            // 
+            // unitKBox
+            // 
+            resources.ApplyResources(this.unitKBox, "unitKBox");
+            this.unitKBox.Name = "unitKBox";
             // 
             // label2
             // 
@@ -247,7 +229,6 @@
             // 
             resources.ApplyResources(this.saveLastSkippedButton, "saveLastSkippedButton");
             this.saveLastSkippedButton.Name = "saveLastSkippedButton";
-            this.saveLastSkippedButton.UseVisualStyleBackColor = true;
             this.saveLastSkippedButton.Click += new System.EventHandler(this.saveLastSkippedButton_Click);
             // 
             // useSkinColorsCheckBox
@@ -255,98 +236,53 @@
             resources.ApplyResources(this.useSkinColorsCheckBox, "useSkinColorsCheckBox");
             this.useSkinColorsCheckBox.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.useSkinColorsCheckBox.Name = "useSkinColorsCheckBox";
-            this.useSkinColorsCheckBox.UseVisualStyleBackColor = true;
+            this.useSkinColorsCheckBox.Tag = "#useSkinColorsCheckBoxLabel";
             // 
             // closeHiddenCommandWindowsRadioButton
             // 
             resources.ApplyResources(this.closeHiddenCommandWindowsRadioButton, "closeHiddenCommandWindowsRadioButton");
             this.closeHiddenCommandWindowsRadioButton.Name = "closeHiddenCommandWindowsRadioButton";
             this.closeHiddenCommandWindowsRadioButton.TabStop = true;
-            this.closeHiddenCommandWindowsRadioButton.UseVisualStyleBackColor = true;
+            this.closeHiddenCommandWindowsRadioButton.Tag = "#closeHiddenCommandWindowsRadioButtonLabel";
             // 
             // showHiddenCommandWindowsRadioButton
             // 
             resources.ApplyResources(this.showHiddenCommandWindowsRadioButton, "showHiddenCommandWindowsRadioButton");
             this.showHiddenCommandWindowsRadioButton.Name = "showHiddenCommandWindowsRadioButton";
             this.showHiddenCommandWindowsRadioButton.TabStop = true;
-            this.showHiddenCommandWindowsRadioButton.UseVisualStyleBackColor = true;
+            this.showHiddenCommandWindowsRadioButton.Tag = "#showHiddenCommandWindowsRadioButtonLabel";
             // 
             // highlightChangedTagsCheckBox
             // 
             resources.ApplyResources(this.highlightChangedTagsCheckBox, "highlightChangedTagsCheckBox");
             this.highlightChangedTagsCheckBox.Name = "highlightChangedTagsCheckBox";
-            this.highlightChangedTagsCheckBox.UseVisualStyleBackColor = true;
+            this.highlightChangedTagsCheckBox.Tag = "#highlightChangedTagsCheckBoxLabel";
             // 
             // groupBox2
             // 
             resources.ApplyResources(this.groupBox2, "groupBox2");
-            this.groupBox2.Controls.Add(this.label22);
-            this.groupBox2.Controls.Add(this.label21);
-            this.groupBox2.Controls.Add(this.label20);
-            this.groupBox2.Controls.Add(this.label19);
-            this.groupBox2.Controls.Add(this.label18);
-            this.groupBox2.Controls.Add(this.minimizePluginWindowsCheckBox);
-            this.groupBox2.Controls.Add(this.groupBox6);
-            this.groupBox2.Controls.Add(this.highlightChangedTagsCheckBox);
+            this.groupBox2.Controls.Add(this.legendGroupBox);
+            this.groupBox2.Controls.Add(this.showHiddenCommandWindowsRadioButtonLabel);
             this.groupBox2.Controls.Add(this.showHiddenCommandWindowsRadioButton);
+            this.groupBox2.Controls.Add(this.closeHiddenCommandWindowsRadioButtonLabel);
             this.groupBox2.Controls.Add(this.closeHiddenCommandWindowsRadioButton);
+            this.groupBox2.Controls.Add(this.minimizePluginWindowsCheckBoxLabel);
+            this.groupBox2.Controls.Add(this.minimizePluginWindowsCheckBox);
+            this.groupBox2.Controls.Add(this.highlightChangedTagsCheckBoxLabel);
+            this.groupBox2.Controls.Add(this.highlightChangedTagsCheckBox);
+            this.groupBox2.Controls.Add(this.useSkinColorsCheckBoxLabel);
             this.groupBox2.Controls.Add(this.useSkinColorsCheckBox);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             // 
-            // label22
+            // legendGroupBox
             // 
-            resources.ApplyResources(this.label22, "label22");
-            this.label22.Name = "label22";
-            this.label22.Click += new System.EventHandler(this.label22_Click);
-            // 
-            // label21
-            // 
-            resources.ApplyResources(this.label21, "label21");
-            this.label21.Name = "label21";
-            this.label21.Click += new System.EventHandler(this.label21_Click);
-            // 
-            // label20
-            // 
-            resources.ApplyResources(this.label20, "label20");
-            this.label20.Name = "label20";
-            this.label20.Click += new System.EventHandler(this.label20_Click);
-            // 
-            // label19
-            // 
-            resources.ApplyResources(this.label19, "label19");
-            this.label19.Name = "label19";
-            this.label19.Click += new System.EventHandler(this.label19_Click);
-            // 
-            // label18
-            // 
-            resources.ApplyResources(this.label18, "label18");
-            this.label18.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label18.Name = "label18";
-            this.label18.Click += new System.EventHandler(this.label18_Click);
-            // 
-            // minimizePluginWindowsCheckBox
-            // 
-            resources.ApplyResources(this.minimizePluginWindowsCheckBox, "minimizePluginWindowsCheckBox");
-            this.minimizePluginWindowsCheckBox.Name = "minimizePluginWindowsCheckBox";
-            this.minimizePluginWindowsCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // groupBox6
-            // 
-            resources.ApplyResources(this.groupBox6, "groupBox6");
-            this.groupBox6.Controls.Add(this.preservedTagValuesLegendTextBox);
-            this.groupBox6.Controls.Add(this.preservedTagsLegendTextBox);
-            this.groupBox6.Controls.Add(this.changedLegendTextBox);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.TabStop = false;
-            // 
-            // preservedTagValuesLegendTextBox
-            // 
-            resources.ApplyResources(this.preservedTagValuesLegendTextBox, "preservedTagValuesLegendTextBox");
-            this.preservedTagValuesLegendTextBox.Cursor = System.Windows.Forms.Cursors.Default;
-            this.preservedTagValuesLegendTextBox.Name = "preservedTagValuesLegendTextBox";
-            this.preservedTagValuesLegendTextBox.ReadOnly = true;
-            this.preservedTagValuesLegendTextBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.preservedTagValuesLegendTextBox_MouseClick);
+            resources.ApplyResources(this.legendGroupBox, "legendGroupBox");
+            this.legendGroupBox.Controls.Add(this.preservedTagsLegendTextBox);
+            this.legendGroupBox.Controls.Add(this.preservedTagValuesLegendTextBox);
+            this.legendGroupBox.Controls.Add(this.changedLegendTextBox);
+            this.legendGroupBox.Name = "legendGroupBox";
+            this.legendGroupBox.TabStop = false;
             // 
             // preservedTagsLegendTextBox
             // 
@@ -355,6 +291,14 @@
             this.preservedTagsLegendTextBox.Name = "preservedTagsLegendTextBox";
             this.preservedTagsLegendTextBox.ReadOnly = true;
             this.preservedTagsLegendTextBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.preservedTagsLegendTextBox_MouseClick);
+            // 
+            // preservedTagValuesLegendTextBox
+            // 
+            resources.ApplyResources(this.preservedTagValuesLegendTextBox, "preservedTagValuesLegendTextBox");
+            this.preservedTagValuesLegendTextBox.Cursor = System.Windows.Forms.Cursors.Default;
+            this.preservedTagValuesLegendTextBox.Name = "preservedTagValuesLegendTextBox";
+            this.preservedTagValuesLegendTextBox.ReadOnly = true;
+            this.preservedTagValuesLegendTextBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.preservedTagValuesLegendTextBox_MouseClick);
             // 
             // changedLegendTextBox
             // 
@@ -365,198 +309,253 @@
             this.toolTip1.SetToolTip(this.changedLegendTextBox, resources.GetString("changedLegendTextBox.ToolTip"));
             this.changedLegendTextBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.changedLegendTextBox_MouseClick);
             // 
-            // showRencodeTagCheckBox
+            // showHiddenCommandWindowsRadioButtonLabel
             // 
-            resources.ApplyResources(this.showRencodeTagCheckBox, "showRencodeTagCheckBox");
-            this.showRencodeTagCheckBox.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.showRencodeTagCheckBox.Name = "showRencodeTagCheckBox";
-            this.showRencodeTagCheckBox.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.showHiddenCommandWindowsRadioButtonLabel, "showHiddenCommandWindowsRadioButtonLabel");
+            this.showHiddenCommandWindowsRadioButtonLabel.Name = "showHiddenCommandWindowsRadioButtonLabel";
+            this.showHiddenCommandWindowsRadioButtonLabel.Click += new System.EventHandler(this.showHiddenCommandWindowsRadioButtonLabel_Click);
+            // 
+            // closeHiddenCommandWindowsRadioButtonLabel
+            // 
+            resources.ApplyResources(this.closeHiddenCommandWindowsRadioButtonLabel, "closeHiddenCommandWindowsRadioButtonLabel");
+            this.closeHiddenCommandWindowsRadioButtonLabel.Name = "closeHiddenCommandWindowsRadioButtonLabel";
+            this.closeHiddenCommandWindowsRadioButtonLabel.Click += new System.EventHandler(this.closeHiddenCommandWindowsRadioButtonLabel_Click);
+            // 
+            // minimizePluginWindowsCheckBoxLabel
+            // 
+            resources.ApplyResources(this.minimizePluginWindowsCheckBoxLabel, "minimizePluginWindowsCheckBoxLabel");
+            this.minimizePluginWindowsCheckBoxLabel.Name = "minimizePluginWindowsCheckBoxLabel";
+            this.minimizePluginWindowsCheckBoxLabel.Click += new System.EventHandler(this.minimizePluginWindowsCheckBoxLabel_Click);
+            // 
+            // minimizePluginWindowsCheckBox
+            // 
+            resources.ApplyResources(this.minimizePluginWindowsCheckBox, "minimizePluginWindowsCheckBox");
+            this.minimizePluginWindowsCheckBox.Name = "minimizePluginWindowsCheckBox";
+            this.minimizePluginWindowsCheckBox.Tag = "#minimizePluginWindowsCheckBoxLabel";
+            // 
+            // highlightChangedTagsCheckBoxLabel
+            // 
+            resources.ApplyResources(this.highlightChangedTagsCheckBoxLabel, "highlightChangedTagsCheckBoxLabel");
+            this.highlightChangedTagsCheckBoxLabel.Name = "highlightChangedTagsCheckBoxLabel";
+            this.highlightChangedTagsCheckBoxLabel.Click += new System.EventHandler(this.highlightChangedTagsCheckBoxLabel_Click);
+            // 
+            // useSkinColorsCheckBoxLabel
+            // 
+            resources.ApplyResources(this.useSkinColorsCheckBoxLabel, "useSkinColorsCheckBoxLabel");
+            this.useSkinColorsCheckBoxLabel.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.useSkinColorsCheckBoxLabel.Name = "useSkinColorsCheckBoxLabel";
+            this.useSkinColorsCheckBoxLabel.Click += new System.EventHandler(this.useSkinColorsCheckBoxLabel_Click);
+            // 
+            // showReencodeTagCheckBox
+            // 
+            resources.ApplyResources(this.showReencodeTagCheckBox, "showReencodeTagCheckBox");
+            this.showReencodeTagCheckBox.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.showReencodeTagCheckBox.Name = "showReencodeTagCheckBox";
+            this.showReencodeTagCheckBox.Tag = "#showReencodeTagCheckBoxLabel";
             // 
             // showChangeCaseCheckBox
             // 
             resources.ApplyResources(this.showChangeCaseCheckBox, "showChangeCaseCheckBox");
             this.showChangeCaseCheckBox.ForeColor = System.Drawing.SystemColors.ControlText;
             this.showChangeCaseCheckBox.Name = "showChangeCaseCheckBox";
-            this.showChangeCaseCheckBox.UseVisualStyleBackColor = true;
+            this.showChangeCaseCheckBox.Tag = "#showChangeCaseCheckBoxLabel";
             // 
             // showLibraryReportsCheckBox
             // 
             resources.ApplyResources(this.showLibraryReportsCheckBox, "showLibraryReportsCheckBox");
             this.showLibraryReportsCheckBox.ForeColor = System.Drawing.SystemColors.ControlText;
             this.showLibraryReportsCheckBox.Name = "showLibraryReportsCheckBox";
-            this.showLibraryReportsCheckBox.UseVisualStyleBackColor = true;
+            this.showLibraryReportsCheckBox.Tag = "#showLibraryReportsCheckBoxLabel";
             // 
             // showCopyTagCheckBox
             // 
             resources.ApplyResources(this.showCopyTagCheckBox, "showCopyTagCheckBox");
             this.showCopyTagCheckBox.ForeColor = System.Drawing.SystemColors.ControlText;
             this.showCopyTagCheckBox.Name = "showCopyTagCheckBox";
-            this.showCopyTagCheckBox.Tag = "showCopyTagCheckBoxLabel";
-            this.showCopyTagCheckBox.UseVisualStyleBackColor = true;
+            this.showCopyTagCheckBox.Tag = "#showCopyTagCheckBoxLabel";
             // 
             // showAutorateCheckBox
             // 
             resources.ApplyResources(this.showAutorateCheckBox, "showAutorateCheckBox");
             this.showAutorateCheckBox.ForeColor = System.Drawing.SystemColors.ControlText;
             this.showAutorateCheckBox.Name = "showAutorateCheckBox";
-            this.showAutorateCheckBox.UseVisualStyleBackColor = true;
+            this.showAutorateCheckBox.Tag = "#showAutorateCheckBoxLabel";
             // 
             // showSwapTagsCheckBox
             // 
             resources.ApplyResources(this.showSwapTagsCheckBox, "showSwapTagsCheckBox");
             this.showSwapTagsCheckBox.ForeColor = System.Drawing.SystemColors.ControlText;
             this.showSwapTagsCheckBox.Name = "showSwapTagsCheckBox";
-            this.showSwapTagsCheckBox.UseVisualStyleBackColor = true;
+            this.showSwapTagsCheckBox.Tag = "#showSwapTagsCheckBoxLabel";
             // 
             // showASRCheckBox
             // 
             resources.ApplyResources(this.showASRCheckBox, "showASRCheckBox");
             this.showASRCheckBox.ForeColor = System.Drawing.SystemColors.ControlText;
             this.showASRCheckBox.Name = "showASRCheckBox";
-            this.showASRCheckBox.UseVisualStyleBackColor = true;
+            this.showASRCheckBox.Tag = "#showASRCheckBoxLabel";
             // 
             // showShowHiddenWindowsCheckBox
             // 
             resources.ApplyResources(this.showShowHiddenWindowsCheckBox, "showShowHiddenWindowsCheckBox");
             this.showShowHiddenWindowsCheckBox.ForeColor = System.Drawing.SystemColors.ControlText;
             this.showShowHiddenWindowsCheckBox.Name = "showShowHiddenWindowsCheckBox";
-            this.showShowHiddenWindowsCheckBox.UseVisualStyleBackColor = true;
+            this.showShowHiddenWindowsCheckBox.Tag = "#showShowHiddenWindowsCheckBoxLabel";
             // 
             // showCARCheckBox
             // 
             resources.ApplyResources(this.showCARCheckBox, "showCARCheckBox");
             this.showCARCheckBox.ForeColor = System.Drawing.SystemColors.ControlText;
             this.showCARCheckBox.Name = "showCARCheckBox";
-            this.showCARCheckBox.UseVisualStyleBackColor = true;
+            this.showCARCheckBox.Tag = "#showCARCheckBoxLabel";
             // 
             // showBackupRestoreCheckBox
             // 
             resources.ApplyResources(this.showBackupRestoreCheckBox, "showBackupRestoreCheckBox");
             this.showBackupRestoreCheckBox.ForeColor = System.Drawing.SystemColors.ControlText;
             this.showBackupRestoreCheckBox.Name = "showBackupRestoreCheckBox";
-            this.showBackupRestoreCheckBox.UseVisualStyleBackColor = true;
+            this.showBackupRestoreCheckBox.Tag = "#showBackupRestoreCheckBoxLabel";
             // 
             // contextMenuCheckBox
             // 
             resources.ApplyResources(this.contextMenuCheckBox, "contextMenuCheckBox");
             this.contextMenuCheckBox.ForeColor = System.Drawing.SystemColors.ControlText;
             this.contextMenuCheckBox.Name = "contextMenuCheckBox";
-            this.contextMenuCheckBox.UseVisualStyleBackColor = true;
+            this.contextMenuCheckBox.Tag = "#contextMenuCheckBoxLabel";
             // 
             // showCTCheckBox
             // 
             resources.ApplyResources(this.showCTCheckBox, "showCTCheckBox");
             this.showCTCheckBox.ForeColor = System.Drawing.SystemColors.ControlText;
             this.showCTCheckBox.Name = "showCTCheckBox";
-            this.showCTCheckBox.UseVisualStyleBackColor = true;
+            this.showCTCheckBox.Tag = "#showCTCheckBoxLabel";
             // 
             // groupBox1
             // 
             resources.ApplyResources(this.groupBox1, "groupBox1");
-            this.groupBox1.Controls.Add(this.label17);
-            this.groupBox1.Controls.Add(this.label16);
-            this.groupBox1.Controls.Add(this.label15);
-            this.groupBox1.Controls.Add(this.label14);
-            this.groupBox1.Controls.Add(this.label13);
-            this.groupBox1.Controls.Add(this.label12);
-            this.groupBox1.Controls.Add(this.label11);
-            this.groupBox1.Controls.Add(this.label10);
-            this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.showCopyTagCheckBoxLabel);
-            this.groupBox1.Controls.Add(this.showCTCheckBox);
+            this.groupBox1.Controls.Add(this.allowCommandExecutionWithoutPreviewCheckBoxLabel);
+            this.groupBox1.Controls.Add(this.allowCommandExecutionWithoutPreviewCheckBox);
+            this.groupBox1.Controls.Add(this.contextMenuCheckBoxLabel);
             this.groupBox1.Controls.Add(this.contextMenuCheckBox);
+            this.groupBox1.Controls.Add(this.showBackupRestoreCheckBoxLabel);
             this.groupBox1.Controls.Add(this.showBackupRestoreCheckBox);
-            this.groupBox1.Controls.Add(this.showCARCheckBox);
+            this.groupBox1.Controls.Add(this.showShowHiddenWindowsCheckBoxLabel);
             this.groupBox1.Controls.Add(this.showShowHiddenWindowsCheckBox);
+            this.groupBox1.Controls.Add(this.showCTCheckBoxLabel);
+            this.groupBox1.Controls.Add(this.showCTCheckBox);
+            this.groupBox1.Controls.Add(this.showCARCheckBoxLabel);
+            this.groupBox1.Controls.Add(this.showCARCheckBox);
+            this.groupBox1.Controls.Add(this.showASRCheckBoxLabel);
             this.groupBox1.Controls.Add(this.showASRCheckBox);
-            this.groupBox1.Controls.Add(this.showSwapTagsCheckBox);
+            this.groupBox1.Controls.Add(this.showAutorateCheckBoxLabel);
             this.groupBox1.Controls.Add(this.showAutorateCheckBox);
-            this.groupBox1.Controls.Add(this.showCopyTagCheckBox);
+            this.groupBox1.Controls.Add(this.showLibraryReportsCheckBoxLabel);
             this.groupBox1.Controls.Add(this.showLibraryReportsCheckBox);
+            this.groupBox1.Controls.Add(this.showReencodeTagCheckBoxLabel);
+            this.groupBox1.Controls.Add(this.showReencodeTagCheckBox);
+            this.groupBox1.Controls.Add(this.showChangeCaseCheckBoxLabel);
             this.groupBox1.Controls.Add(this.showChangeCaseCheckBox);
-            this.groupBox1.Controls.Add(this.showRencodeTagCheckBox);
+            this.groupBox1.Controls.Add(this.showSwapTagsCheckBoxLabel);
+            this.groupBox1.Controls.Add(this.showSwapTagsCheckBox);
+            this.groupBox1.Controls.Add(this.showCopyTagCheckBoxLabel);
+            this.groupBox1.Controls.Add(this.showCopyTagCheckBox);
             this.groupBox1.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
-            // label17
+            // allowCommandExecutionWithoutPreviewCheckBoxLabel
             // 
-            resources.ApplyResources(this.label17, "label17");
-            this.label17.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label17.Name = "label17";
-            this.label17.Click += new System.EventHandler(this.label17_Click);
+            resources.ApplyResources(this.allowCommandExecutionWithoutPreviewCheckBoxLabel, "allowCommandExecutionWithoutPreviewCheckBoxLabel");
+            this.allowCommandExecutionWithoutPreviewCheckBoxLabel.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.allowCommandExecutionWithoutPreviewCheckBoxLabel.Name = "allowCommandExecutionWithoutPreviewCheckBoxLabel";
+            this.allowCommandExecutionWithoutPreviewCheckBoxLabel.Tag = "";
+            this.allowCommandExecutionWithoutPreviewCheckBoxLabel.Click += new System.EventHandler(this.allowCommandExecutionWithoutPreviewCheckBoxLabel_Click);
             // 
-            // label16
+            // allowCommandExecutionWithoutPreviewCheckBox
             // 
-            resources.ApplyResources(this.label16, "label16");
-            this.label16.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label16.Name = "label16";
-            this.label16.Click += new System.EventHandler(this.label16_Click);
+            resources.ApplyResources(this.allowCommandExecutionWithoutPreviewCheckBox, "allowCommandExecutionWithoutPreviewCheckBox");
+            this.allowCommandExecutionWithoutPreviewCheckBox.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.allowCommandExecutionWithoutPreviewCheckBox.Name = "allowCommandExecutionWithoutPreviewCheckBox";
+            this.allowCommandExecutionWithoutPreviewCheckBox.Tag = "#allowCommandExecutionWithoutPreviewCheckBoxLabel";
             // 
-            // label15
+            // contextMenuCheckBoxLabel
             // 
-            resources.ApplyResources(this.label15, "label15");
-            this.label15.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label15.Name = "label15";
-            this.label15.Click += new System.EventHandler(this.label15_Click);
+            resources.ApplyResources(this.contextMenuCheckBoxLabel, "contextMenuCheckBoxLabel");
+            this.contextMenuCheckBoxLabel.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.contextMenuCheckBoxLabel.Name = "contextMenuCheckBoxLabel";
+            this.contextMenuCheckBoxLabel.Tag = "";
+            this.contextMenuCheckBoxLabel.Click += new System.EventHandler(this.contextMenuCheckBoxLabel_Click);
             // 
-            // label14
+            // showBackupRestoreCheckBoxLabel
             // 
-            resources.ApplyResources(this.label14, "label14");
-            this.label14.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label14.Name = "label14";
-            this.label14.Click += new System.EventHandler(this.label14_Click);
+            resources.ApplyResources(this.showBackupRestoreCheckBoxLabel, "showBackupRestoreCheckBoxLabel");
+            this.showBackupRestoreCheckBoxLabel.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.showBackupRestoreCheckBoxLabel.Name = "showBackupRestoreCheckBoxLabel";
+            this.showBackupRestoreCheckBoxLabel.Click += new System.EventHandler(this.showBackupRestoreCheckBoxLabel_Click);
             // 
-            // label13
+            // showShowHiddenWindowsCheckBoxLabel
             // 
-            resources.ApplyResources(this.label13, "label13");
-            this.label13.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label13.Name = "label13";
-            this.label13.Click += new System.EventHandler(this.label13_Click);
+            resources.ApplyResources(this.showShowHiddenWindowsCheckBoxLabel, "showShowHiddenWindowsCheckBoxLabel");
+            this.showShowHiddenWindowsCheckBoxLabel.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.showShowHiddenWindowsCheckBoxLabel.Name = "showShowHiddenWindowsCheckBoxLabel";
+            this.showShowHiddenWindowsCheckBoxLabel.Tag = "";
+            this.showShowHiddenWindowsCheckBoxLabel.Click += new System.EventHandler(this.showShowHiddenWindowsCheckBoxLabel_Click);
             // 
-            // label12
+            // showCTCheckBoxLabel
             // 
-            resources.ApplyResources(this.label12, "label12");
-            this.label12.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label12.Name = "label12";
-            this.label12.Click += new System.EventHandler(this.label12_Click);
+            resources.ApplyResources(this.showCTCheckBoxLabel, "showCTCheckBoxLabel");
+            this.showCTCheckBoxLabel.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.showCTCheckBoxLabel.Name = "showCTCheckBoxLabel";
+            this.showCTCheckBoxLabel.Click += new System.EventHandler(this.showCTCheckBoxLabel_Click);
             // 
-            // label11
+            // showCARCheckBoxLabel
             // 
-            resources.ApplyResources(this.label11, "label11");
-            this.label11.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label11.Name = "label11";
-            this.label11.Click += new System.EventHandler(this.label11_Click);
+            resources.ApplyResources(this.showCARCheckBoxLabel, "showCARCheckBoxLabel");
+            this.showCARCheckBoxLabel.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.showCARCheckBoxLabel.Name = "showCARCheckBoxLabel";
+            this.showCARCheckBoxLabel.Click += new System.EventHandler(this.showCARCheckBoxLabel_Click);
             // 
-            // label10
+            // showASRCheckBoxLabel
             // 
-            resources.ApplyResources(this.label10, "label10");
-            this.label10.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label10.Name = "label10";
-            this.label10.Click += new System.EventHandler(this.label10_Click);
+            resources.ApplyResources(this.showASRCheckBoxLabel, "showASRCheckBoxLabel");
+            this.showASRCheckBoxLabel.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.showASRCheckBoxLabel.Name = "showASRCheckBoxLabel";
+            this.showASRCheckBoxLabel.Click += new System.EventHandler(this.showASRCheckBoxLabel_Click);
             // 
-            // label9
+            // showAutorateCheckBoxLabel
             // 
-            resources.ApplyResources(this.label9, "label9");
-            this.label9.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label9.Name = "label9";
-            this.label9.Click += new System.EventHandler(this.label9_Click);
+            resources.ApplyResources(this.showAutorateCheckBoxLabel, "showAutorateCheckBoxLabel");
+            this.showAutorateCheckBoxLabel.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.showAutorateCheckBoxLabel.Name = "showAutorateCheckBoxLabel";
+            this.showAutorateCheckBoxLabel.Click += new System.EventHandler(this.showAutorateCheckBoxLabel_Click);
             // 
-            // label8
+            // showLibraryReportsCheckBoxLabel
             // 
-            resources.ApplyResources(this.label8, "label8");
-            this.label8.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label8.Name = "label8";
-            this.label8.Click += new System.EventHandler(this.label8_Click);
+            resources.ApplyResources(this.showLibraryReportsCheckBoxLabel, "showLibraryReportsCheckBoxLabel");
+            this.showLibraryReportsCheckBoxLabel.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.showLibraryReportsCheckBoxLabel.Name = "showLibraryReportsCheckBoxLabel";
+            this.showLibraryReportsCheckBoxLabel.Click += new System.EventHandler(this.showLibraryReportsCheckBoxLabel_Click);
             // 
-            // label7
+            // showReencodeTagCheckBoxLabel
             // 
-            resources.ApplyResources(this.label7, "label7");
-            this.label7.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label7.Name = "label7";
-            this.label7.Click += new System.EventHandler(this.label7_Click);
+            resources.ApplyResources(this.showReencodeTagCheckBoxLabel, "showReencodeTagCheckBoxLabel");
+            this.showReencodeTagCheckBoxLabel.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.showReencodeTagCheckBoxLabel.Name = "showReencodeTagCheckBoxLabel";
+            this.showReencodeTagCheckBoxLabel.Click += new System.EventHandler(this.showReencodeTagCheckBoxLabel_Click);
+            // 
+            // showChangeCaseCheckBoxLabel
+            // 
+            resources.ApplyResources(this.showChangeCaseCheckBoxLabel, "showChangeCaseCheckBoxLabel");
+            this.showChangeCaseCheckBoxLabel.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.showChangeCaseCheckBoxLabel.Name = "showChangeCaseCheckBoxLabel";
+            this.showChangeCaseCheckBoxLabel.Click += new System.EventHandler(this.showChangeCaseCheckBoxLabel_Click);
+            // 
+            // showSwapTagsCheckBoxLabel
+            // 
+            resources.ApplyResources(this.showSwapTagsCheckBoxLabel, "showSwapTagsCheckBoxLabel");
+            this.showSwapTagsCheckBoxLabel.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.showSwapTagsCheckBoxLabel.Name = "showSwapTagsCheckBoxLabel";
+            this.showSwapTagsCheckBoxLabel.Click += new System.EventHandler(this.showSwapTagsCheckBoxLabel_Click);
             // 
             // showCopyTagCheckBoxLabel
             // 
@@ -568,50 +567,50 @@
             // groupBox5
             // 
             resources.ApplyResources(this.groupBox5, "groupBox5");
-            this.groupBox5.Controls.Add(this.label29);
-            this.groupBox5.Controls.Add(this.label28);
-            this.groupBox5.Controls.Add(this.label27);
+            this.groupBox5.Controls.Add(this.includePreservedTagValuesCheckBoxLabel);
             this.groupBox5.Controls.Add(this.includePreservedTagValuesCheckBox);
+            this.groupBox5.Controls.Add(this.includePreservedTagsCheckBoxLabel);
             this.groupBox5.Controls.Add(this.includePreservedTagsCheckBox);
+            this.groupBox5.Controls.Add(this.includeNotChangedTagsCheckBoxLabel);
             this.groupBox5.Controls.Add(this.includeNotChangedTagsCheckBox);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.TabStop = false;
             // 
-            // label29
+            // includePreservedTagValuesCheckBoxLabel
             // 
-            resources.ApplyResources(this.label29, "label29");
-            this.label29.Name = "label29";
-            this.label29.Click += new System.EventHandler(this.label29_Click);
-            // 
-            // label28
-            // 
-            resources.ApplyResources(this.label28, "label28");
-            this.label28.Name = "label28";
-            this.label28.Click += new System.EventHandler(this.label28_Click);
-            // 
-            // label27
-            // 
-            resources.ApplyResources(this.label27, "label27");
-            this.label27.Name = "label27";
-            this.label27.Click += new System.EventHandler(this.label27_Click);
+            resources.ApplyResources(this.includePreservedTagValuesCheckBoxLabel, "includePreservedTagValuesCheckBoxLabel");
+            this.includePreservedTagValuesCheckBoxLabel.Name = "includePreservedTagValuesCheckBoxLabel";
+            this.includePreservedTagValuesCheckBoxLabel.Click += new System.EventHandler(this.includePreservedTagValuesCheckBoxLabel_Click);
             // 
             // includePreservedTagValuesCheckBox
             // 
             resources.ApplyResources(this.includePreservedTagValuesCheckBox, "includePreservedTagValuesCheckBox");
             this.includePreservedTagValuesCheckBox.Name = "includePreservedTagValuesCheckBox";
-            this.includePreservedTagValuesCheckBox.UseVisualStyleBackColor = true;
+            this.includePreservedTagValuesCheckBox.Tag = "#includePreservedTagValuesCheckBoxLabel";
+            // 
+            // includePreservedTagsCheckBoxLabel
+            // 
+            resources.ApplyResources(this.includePreservedTagsCheckBoxLabel, "includePreservedTagsCheckBoxLabel");
+            this.includePreservedTagsCheckBoxLabel.Name = "includePreservedTagsCheckBoxLabel";
+            this.includePreservedTagsCheckBoxLabel.Click += new System.EventHandler(this.includePreservedTagsCheckBoxLabel_Click);
             // 
             // includePreservedTagsCheckBox
             // 
             resources.ApplyResources(this.includePreservedTagsCheckBox, "includePreservedTagsCheckBox");
             this.includePreservedTagsCheckBox.Name = "includePreservedTagsCheckBox";
-            this.includePreservedTagsCheckBox.UseVisualStyleBackColor = true;
+            this.includePreservedTagsCheckBox.Tag = "#includePreservedTagsCheckBoxLabel";
+            // 
+            // includeNotChangedTagsCheckBoxLabel
+            // 
+            resources.ApplyResources(this.includeNotChangedTagsCheckBoxLabel, "includeNotChangedTagsCheckBoxLabel");
+            this.includeNotChangedTagsCheckBoxLabel.Name = "includeNotChangedTagsCheckBoxLabel";
+            this.includeNotChangedTagsCheckBoxLabel.Click += new System.EventHandler(this.includeNotChangedTagsCheckBoxLabel_Click);
             // 
             // includeNotChangedTagsCheckBox
             // 
             resources.ApplyResources(this.includeNotChangedTagsCheckBox, "includeNotChangedTagsCheckBox");
             this.includeNotChangedTagsCheckBox.Name = "includeNotChangedTagsCheckBox";
-            this.includeNotChangedTagsCheckBox.UseVisualStyleBackColor = true;
+            this.includeNotChangedTagsCheckBox.Tag = "#includeNotChangedTagsCheckBoxLabel";
             // 
             // label1
             // 
@@ -631,30 +630,31 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.groupBox5);
-            this.Controls.Add(this.saveLastSkippedButton);
-            this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.versionLabel);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.label6);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
+            this.Controls.Add(this.saveLastSkippedButton);
+            this.Controls.Add(this.versionLabel);
+            this.Controls.Add(this.groupBox4);
+            this.Controls.Add(this.groupBox5);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.label6);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "PluginSettings";
+            this.Tag = "@fixed-min-width";
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
+            this.legendGroupBox.ResumeLayout(false);
+            this.legendGroupBox.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox5.ResumeLayout(false);
@@ -688,7 +688,7 @@
         private System.Windows.Forms.RadioButton showHiddenCommandWindowsRadioButton;
         private System.Windows.Forms.CheckBox highlightChangedTagsCheckBox;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.CheckBox showRencodeTagCheckBox;
+        private System.Windows.Forms.CheckBox showReencodeTagCheckBox;
         private System.Windows.Forms.CheckBox showChangeCaseCheckBox;
         private System.Windows.Forms.CheckBox showLibraryReportsCheckBox;
         private System.Windows.Forms.CheckBox showCopyTagCheckBox;
@@ -705,7 +705,7 @@
         private System.Windows.Forms.CheckBox includeNotChangedTagsCheckBox;
         private System.Windows.Forms.CheckBox includePreservedTagsCheckBox;
         private System.Windows.Forms.CheckBox includePreservedTagValuesCheckBox;
-        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.GroupBox legendGroupBox;
         private System.Windows.Forms.TextBox preservedTagValuesLegendTextBox;
         private System.Windows.Forms.TextBox preservedTagsLegendTextBox;
         private System.Windows.Forms.TextBox changedLegendTextBox;
@@ -713,29 +713,31 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.CheckBox minimizePluginWindowsCheckBox;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label showSwapTagsCheckBoxLabel;
         private System.Windows.Forms.Label showCopyTagCheckBoxLabel;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.Label label28;
-        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label showLibraryReportsCheckBoxLabel;
+        private System.Windows.Forms.Label showReencodeTagCheckBoxLabel;
+        private System.Windows.Forms.Label showChangeCaseCheckBoxLabel;
+        private System.Windows.Forms.Label showCARCheckBoxLabel;
+        private System.Windows.Forms.Label showASRCheckBoxLabel;
+        private System.Windows.Forms.Label showAutorateCheckBoxLabel;
+        private System.Windows.Forms.Label contextMenuCheckBoxLabel;
+        private System.Windows.Forms.Label showBackupRestoreCheckBoxLabel;
+        private System.Windows.Forms.Label showShowHiddenWindowsCheckBoxLabel;
+        private System.Windows.Forms.Label showCTCheckBoxLabel;
+        private System.Windows.Forms.Label minimizePluginWindowsCheckBoxLabel;
+        private System.Windows.Forms.Label highlightChangedTagsCheckBoxLabel;
+        private System.Windows.Forms.Label useSkinColorsCheckBoxLabel;
+        private System.Windows.Forms.Label showHiddenCommandWindowsRadioButtonLabel;
+        private System.Windows.Forms.Label closeHiddenCommandWindowsRadioButtonLabel;
+        private System.Windows.Forms.Label playStartedSoundCheckBoxLabel;
+        private System.Windows.Forms.Label playCompletedSoundCheckBoxLabel;
+        private System.Windows.Forms.Label playTickedAsrPresetSoundCheckBoxLabel;
+        private System.Windows.Forms.Label playStoppedSoundCheckBoxLabel;
+        private System.Windows.Forms.Label includePreservedTagValuesCheckBoxLabel;
+        private System.Windows.Forms.Label includePreservedTagsCheckBoxLabel;
+        private System.Windows.Forms.Label includeNotChangedTagsCheckBoxLabel;
+        private System.Windows.Forms.Label allowCommandExecutionWithoutPreviewCheckBoxLabel;
+        private System.Windows.Forms.CheckBox allowCommandExecutionWithoutPreviewCheckBox;
     }
 }

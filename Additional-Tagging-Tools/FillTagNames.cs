@@ -1234,7 +1234,7 @@ namespace MusicBeePlugin
                 MessageBox.Show(MbForm, "Some tag names are duplicated. See \"" + 
                     System.IO.Path.Combine(MbApiInterface.Setting_GetPersistentStoragePath(), "TagTools.TagNamesErrorLog.txt")
                     + "\" file for details. Plugin is not properly initialized.", 
-                    "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             file1.Close();
@@ -1444,6 +1444,16 @@ namespace MusicBeePlugin
             }
             try
             {
+                file2.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Bitdepth) + " / " + FilePropertyType.Bitdepth);
+                PropNamesIds.Add(MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Bitdepth), FilePropertyType.Bitdepth);
+            }
+            catch (ArgumentException)
+            {
+                wereErrors = true;
+                file2.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Bitdepth) + " / " + FilePropertyType.Bitdepth);
+            }
+            try
+            {
                 file2.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.DateModified) + " / " + FilePropertyType.DateModified);
                 PropNamesIds.Add(MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.DateModified), FilePropertyType.DateModified);
             }
@@ -1498,7 +1508,7 @@ namespace MusicBeePlugin
                 MessageBox.Show(MbForm, "Some track property names are duplicated. See \"" + 
                     System.IO.Path.Combine(MbApiInterface.Setting_GetPersistentStoragePath(), "TagTools.PropNamesErrorLog.txt") 
                     + "\" file for details. Plugin is not properly initialized.", 
-                    "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             file2.Close();
@@ -1511,6 +1521,7 @@ namespace MusicBeePlugin
             PropIdsNames.Add(FilePropertyType.Channels, MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Channels));
             PropIdsNames.Add(FilePropertyType.SampleRate, MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.SampleRate));
             PropIdsNames.Add(FilePropertyType.Bitrate, MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Bitrate));
+            PropIdsNames.Add(FilePropertyType.Bitdepth, MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Bitdepth));
             PropIdsNames.Add(FilePropertyType.DateModified, MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.DateModified));
             TagIdsNames.Add((MetaDataType)(int)FilePropertyType.DateAdded, MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.DateAdded)); //"Date Added" is now writable
             PropIdsNames.Add(FilePropertyType.Duration, MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Duration));

@@ -7,19 +7,6 @@
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Освободить все используемые ресурсы.
-        /// </summary>
-        /// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
         #region Код, автоматически созданный конструктором форм Windows
 
         /// <summary>
@@ -31,7 +18,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CalculateAverageAlbumRatingCommand));
             this.notifyWhenCalculationCompletedCheckBox = new System.Windows.Forms.CheckBox();
             this.calculateAlbumRatingAtStartUpCheckBox = new System.Windows.Forms.CheckBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonSave = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -51,36 +38,33 @@
             // 
             resources.ApplyResources(this.notifyWhenCalculationCompletedCheckBox, "notifyWhenCalculationCompletedCheckBox");
             this.notifyWhenCalculationCompletedCheckBox.Name = "notifyWhenCalculationCompletedCheckBox";
-            this.notifyWhenCalculationCompletedCheckBox.Tag = "notifyWhenCalculationCompletedCheckBoxLabel";
-            this.notifyWhenCalculationCompletedCheckBox.UseVisualStyleBackColor = true;
+            this.notifyWhenCalculationCompletedCheckBox.Tag = "#notifyWhenCalculationCompletedCheckBoxLabel";
             // 
             // calculateAlbumRatingAtStartUpCheckBox
             // 
             resources.ApplyResources(this.calculateAlbumRatingAtStartUpCheckBox, "calculateAlbumRatingAtStartUpCheckBox");
             this.calculateAlbumRatingAtStartUpCheckBox.Name = "calculateAlbumRatingAtStartUpCheckBox";
-            this.calculateAlbumRatingAtStartUpCheckBox.Tag = "calculateAlbumRatingAtStartUpCheckBoxLabel";
-            this.calculateAlbumRatingAtStartUpCheckBox.UseVisualStyleBackColor = true;
+            this.calculateAlbumRatingAtStartUpCheckBox.Tag = "#calculateAlbumRatingAtStartUpCheckBoxLabel";
             // 
-            // button1
+            // buttonSave
             // 
-            resources.ApplyResources(this.button1, "button1");
-            this.button1.Name = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            resources.ApplyResources(this.buttonSave, "buttonSave");
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Tag = "@non-defaultable";
+            this.buttonSave.Click += new System.EventHandler(this.button1_Click);
             // 
             // buttonCancel
             // 
             resources.ApplyResources(this.buttonCancel, "buttonCancel");
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Tag = "#CalculateAverageAlbumRatingCommand@non-defaultable";
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // buttonOK
             // 
             resources.ApplyResources(this.buttonOK, "buttonOK");
             this.buttonOK.Name = "buttonOK";
-            this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // label1
@@ -92,20 +76,19 @@
             // 
             resources.ApplyResources(this.considerUnratedCheckBox, "considerUnratedCheckBox");
             this.considerUnratedCheckBox.Name = "considerUnratedCheckBox";
-            this.considerUnratedCheckBox.Tag = "considerUnratedCheckBoxLabel";
-            this.considerUnratedCheckBox.UseVisualStyleBackColor = true;
+            this.considerUnratedCheckBox.Tag = "#considerUnratedCheckBoxLabel";
             // 
             // calculateAlbumRatingAtTagsChangedCheckBox
             // 
             resources.ApplyResources(this.calculateAlbumRatingAtTagsChangedCheckBox, "calculateAlbumRatingAtTagsChangedCheckBox");
             this.calculateAlbumRatingAtTagsChangedCheckBox.Name = "calculateAlbumRatingAtTagsChangedCheckBox";
-            this.calculateAlbumRatingAtTagsChangedCheckBox.Tag = "calculateAlbumRatingAtTagsChangedCheckBoxLabel";
-            this.calculateAlbumRatingAtTagsChangedCheckBox.UseVisualStyleBackColor = true;
+            this.calculateAlbumRatingAtTagsChangedCheckBox.Tag = "#calculateAlbumRatingAtTagsChangedCheckBoxLabel";
             // 
             // label2
             // 
             resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
+            this.label2.Tag = "#trackRatingTagList";
             // 
             // trackRatingTagList
             // 
@@ -122,16 +105,19 @@
             this.albumRatingTagList.DropDownWidth = 250;
             this.albumRatingTagList.FormattingEnabled = true;
             this.albumRatingTagList.Name = "albumRatingTagList";
+            this.albumRatingTagList.Tag = "#CalculateAverageAlbumRatingCommand";
             // 
             // label3
             // 
             resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
+            this.label3.Tag = "#albumRatingTagList";
             // 
             // calculateAlbumRatingAtStartUpCheckBoxLabel
             // 
             resources.ApplyResources(this.calculateAlbumRatingAtStartUpCheckBoxLabel, "calculateAlbumRatingAtStartUpCheckBoxLabel");
             this.calculateAlbumRatingAtStartUpCheckBoxLabel.Name = "calculateAlbumRatingAtStartUpCheckBoxLabel";
+            this.calculateAlbumRatingAtStartUpCheckBoxLabel.Tag = "#notifyWhenCalculationCompletedCheckBox";
             this.calculateAlbumRatingAtStartUpCheckBoxLabel.Click += new System.EventHandler(this.calculateAlbumRatingAtStartUpCheckBoxLabel_Click);
             // 
             // considerUnratedCheckBoxLabel
@@ -154,28 +140,31 @@
             // 
             // CalculateAverageAlbumRatingCommand
             // 
+            this.AcceptButton = this.buttonOK;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.notifyWhenCalculationCompletedCheckBoxLabel);
-            this.Controls.Add(this.calculateAlbumRatingAtTagsChangedCheckBoxLabel);
-            this.Controls.Add(this.considerUnratedCheckBoxLabel);
-            this.Controls.Add(this.calculateAlbumRatingAtStartUpCheckBoxLabel);
+            this.CancelButton = this.buttonCancel;
+            this.Controls.Add(this.buttonCancel);
+            this.Controls.Add(this.buttonSave);
+            this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.albumRatingTagList);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.trackRatingTagList);
             this.Controls.Add(this.label2);
+            this.Controls.Add(this.calculateAlbumRatingAtTagsChangedCheckBoxLabel);
             this.Controls.Add(this.calculateAlbumRatingAtTagsChangedCheckBox);
+            this.Controls.Add(this.considerUnratedCheckBoxLabel);
             this.Controls.Add(this.considerUnratedCheckBox);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.notifyWhenCalculationCompletedCheckBoxLabel);
             this.Controls.Add(this.notifyWhenCalculationCompletedCheckBox);
+            this.Controls.Add(this.calculateAlbumRatingAtStartUpCheckBoxLabel);
             this.Controls.Add(this.calculateAlbumRatingAtStartUpCheckBox);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.buttonOK);
+            this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CalculateAverageAlbumRatingCommand";
+            this.Tag = "";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -185,7 +174,7 @@
 
         private System.Windows.Forms.CheckBox notifyWhenCalculationCompletedCheckBox;
         private System.Windows.Forms.CheckBox calculateAlbumRatingAtStartUpCheckBox;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.Label label1;

@@ -1,5 +1,4 @@
-﻿using MusicBeePlugin.Properties;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using static MusicBeePlugin.Plugin;
@@ -38,15 +37,14 @@ namespace MusicBeePlugin
         public ChangeCaseCommand(Plugin tagToolsPluginParam) : base(tagToolsPluginParam)
         {
             InitializeComponent();
-            initializeForm();
         }
 
-        protected new void initializeForm()
+        protected override void initializeForm()
         {
             base.initializeForm();
 
-            removeExceptionButton.Image = ButtonRemoveImage;
-            buttonSettings.Image = Gear;
+            removeExceptionButton.Image = ThemedBitmapAddRef(this, ButtonRemoveImage);
+            buttonSettings.Image = ThemedBitmapAddRef(this, Gear);
 
             FillListByTagNames(sourceTagList.Items);
             sourceTagList.Text = SavedSettings.changeCaseSourceTagName;
@@ -78,7 +76,7 @@ namespace MusicBeePlugin
                 ThreeState = true,
                 FalseValue = "F",
                 TrueValue = "T",
-                IndeterminateValue = "",
+                IndeterminateValue = string.Empty,
                 Width = 25,
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.None
             };
@@ -94,16 +92,11 @@ namespace MusicBeePlugin
             addRowToTable = previewTable_AddRowToTable;
             processRowOfTable = previewTable_ProcessRowOfTable;
 
-            (int, int, int, int, int, int, int) value = loadWindowLayout();
 
-            if (value.Item1 != 0)
-            {
-                previewTable.Columns[1].Width = value.Item1;
-                previewTable.Columns[2].Width = value.Item2;
-                previewTable.Columns[3].Width = value.Item3;
-            }
+            enableDisablePreviewOptionControls(true, true);
+            enableQueryingOrUpdatingButtons();
 
-            enableDisablePreviewOptionControls(true);
+            button_GotFocus(this.AcceptButton, null); //Let's mark active button
         }
 
         private void setChangeCaseOptionsRadioButtons(int pos)
@@ -151,7 +144,7 @@ namespace MusicBeePlugin
 
         public static string ChangeSubstringCase(string substring, ChangeCaseOptions changeCaseOption, bool isTheFirstWord)
         {
-            string newSubstring = "";
+            string newSubstring = string.Empty;
 
             switch (changeCaseOption)
             {
@@ -172,11 +165,11 @@ namespace MusicBeePlugin
                     {
                         if (isTheFirstChar)
                         {
-                            newSubstring = newSubstring + ("" + currentChar).ToUpper();
+                            newSubstring = newSubstring + (string.Empty + currentChar).ToUpper();
                             isTheFirstChar = false;
                         }
                         else
-                            newSubstring = newSubstring + ("" + currentChar).ToLower();
+                            newSubstring = newSubstring + (string.Empty + currentChar).ToLower();
                     }
                     break;
                 case ChangeCaseOptions.lowerCase:
@@ -188,13 +181,13 @@ namespace MusicBeePlugin
                 case ChangeCaseOptions.toggleCase:
                     foreach (char currentChar in substring)
                     {
-                        if (("" + currentChar).ToUpper() == ("" + currentChar)) //Char is uppercased
+                        if ((string.Empty + currentChar).ToUpper() == (string.Empty + currentChar)) //Char is uppercased
                         {
-                            newSubstring = newSubstring + ("" + currentChar).ToLower();
+                            newSubstring = newSubstring + (string.Empty + currentChar).ToLower();
                         }
                         else //Char is lowercased
                         {
-                            newSubstring = newSubstring + ("" + currentChar).ToUpper();
+                            newSubstring = newSubstring + (string.Empty + currentChar).ToUpper();
                         }
                     }
                     break;
@@ -205,7 +198,7 @@ namespace MusicBeePlugin
 
         public static bool CharIsCaseSensitive(char item)
         {
-            if (("" + item).ToLower() == ("" + item).ToUpper())
+            if ((string.Empty + item).ToLower() == (string.Empty + item).ToUpper())
                 return false;
             else
                 return true;
@@ -213,7 +206,7 @@ namespace MusicBeePlugin
 
         public static bool IsItemContainedInList(string item, string[] list)
         {
-            item = "" + item; //It converts null to string
+            item = string.Empty + item; //It converts null to string
 
             foreach (string currentItem in list)
                 if (item.ToLower() == currentItem.ToLower()) return true;
@@ -223,13 +216,13 @@ namespace MusicBeePlugin
 
         public static bool IsItemContainedInList(char item, string[] list)
         {
-            return IsItemContainedInList("" + item, list);
+            return IsItemContainedInList(string.Empty + item, list);
         }
 
         public static string ChangeWordsCase(string source, ChangeCaseOptions changeCaseOption, string[] exceptionWords = null, bool useWhiteList = false, string[] exceptionChars = null, string[] wordSplitters = null, bool alwaysCapitalize1stWord = false, bool alwaysCapitalizeLastWord = false)
         {
-            string newString = "";
-            string currentWord = "";
+            string newString = string.Empty;
+            string currentWord = string.Empty;
             char prevChar = '\0';
             bool wasCharException = false;
             bool isTheFirstWord = true;
@@ -237,19 +230,19 @@ namespace MusicBeePlugin
             if (exceptionWords == null)
             {
                 exceptionWords = new string[1];
-                exceptionWords[0] = "";
+                exceptionWords[0] = string.Empty;
             }
 
             if (exceptionChars == null)
             {
                 exceptionChars = new string[1];
-                exceptionChars[0] = "";
+                exceptionChars[0] = string.Empty;
             }
 
             if (wordSplitters == null)
             {
                 wordSplitters = new string[1];
-                wordSplitters[0] = "";
+                wordSplitters[0] = string.Empty;
             }
 
             foreach (char currentChar in source)
@@ -283,7 +276,7 @@ namespace MusicBeePlugin
                         }
 
 
-                        currentWord = ""; //Beginning of new word
+                        currentWord = string.Empty; //Beginning of new word
                         wasCharException = false;
                         isTheFirstWord = false;
                     }
@@ -294,14 +287,14 @@ namespace MusicBeePlugin
                 }
                 else //Not the end of word
                 {
-                    if (currentWord == "" && CharIsCaseSensitive(currentChar)) //Beginning of new word
+                    if (currentWord == string.Empty && CharIsCaseSensitive(currentChar)) //Beginning of new word
                     {
                         if (IsItemContainedInList(currentChar, exceptionChars)) //Ignore changing case later
                             wasCharException = true;
 
                         currentWord = currentWord + currentChar;
                     }
-                    else if (currentWord == "") //Several repeating symbols between words
+                    else if (currentWord == string.Empty) //Several repeating symbols between words
                     {
                         if (IsItemContainedInList(currentChar, exceptionChars)) //Ignore changing case later
                             wasCharException = true;
@@ -330,8 +323,8 @@ namespace MusicBeePlugin
 
         public static string ChangeSentenceCase(string source, string[] exceptionWords = null, bool useWhiteList = false, string[] exceptionChars = null, string[] wordSplitters = null)
         {
-            string newString = "";
-            string currentSentence = "";
+            string newString = string.Empty;
+            string currentSentence = string.Empty;
             char prevChar = '\0';
 
             foreach (char currentChar in source)
@@ -339,7 +332,7 @@ namespace MusicBeePlugin
                 if ((prevChar == '.' && currentChar == ' ') || currentChar == MultipleItemsSplitterId) //Beginning of new sentence
                 {
                     newString = newString + ChangeWordsCase(currentSentence, ChangeCaseOptions.sentenceCase, exceptionWords, useWhiteList, exceptionChars, wordSplitters);
-                    currentSentence = "" + currentChar;
+                    currentSentence = string.Empty + currentChar;
                 }
                 else //Not the beginning of new sentence
                 {
@@ -410,7 +403,7 @@ namespace MusicBeePlugin
 
             if (files.Length == 0)
             {
-                MessageBox.Show(this, MsgNoFilesSelected, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, MsgNoTracksSelected, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
             else
@@ -520,7 +513,7 @@ namespace MusicBeePlugin
 
             if (previewTable.Rows.Count == 0)
             {
-                MessageBox.Show(this, MsgPreviewIsNotGeneratedNothingToChange, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, MsgPreviewIsNotGeneratedNothingToChange, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
@@ -577,7 +570,7 @@ namespace MusicBeePlugin
                     currentFile = tags[i][1];
                     newTagValue = tags[i][2];
 
-                    tags[i][0] = "";
+                    tags[i][0] = string.Empty;
 
                     Invoke(processRowOfTable, new object[] { i });
 
@@ -622,6 +615,7 @@ namespace MusicBeePlugin
         private void buttonPreview_Click(object sender, EventArgs e)
         {
             clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewChanges, (Button)sender, buttonOK, buttonCancel);
+            enableQueryingOrUpdatingButtons();
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -798,10 +792,8 @@ namespace MusicBeePlugin
             }
         }
 
-        public override void enableDisablePreviewOptionControls(bool enable)
+        public override void enableDisablePreviewOptionControls(bool enable, bool dontChangeDisabled = false)
         {
-            buttonReapply.Enable(enable && previewIsGenerated);
-
             if (enable && previewIsGenerated)
                 return;
 
@@ -821,7 +813,7 @@ namespace MusicBeePlugin
 
         public override void enableQueryingOrUpdatingButtons()
         {
-            buttonOK.Enable(true);
+            buttonOK.Enable(previewIsGenerated || SavedSettings.allowCommandExecutionWithoutPreview);
             buttonPreview.Enable(true);
             buttonReapply.Enable(true);
         }
@@ -889,9 +881,9 @@ namespace MusicBeePlugin
                 if (exceptionWordsBox.Items[i].ToString() == exceptionWordsBox.Text)
                 {
                     exceptionWordsBox.Items.Remove(exceptionWordsBox.Text);
-                    exceptionWordsBox.Items.Add("");
+                    exceptionWordsBox.Items.Add(string.Empty);
 
-                    exceptionWordsBox.Text = "";
+                    exceptionWordsBox.Text = string.Empty;
 
                     break;
                 }
@@ -916,7 +908,7 @@ namespace MusicBeePlugin
         private void buttonSettings_Click(object sender, EventArgs e)
         {
             PluginQuickSettings settings = new PluginQuickSettings(TagToolsPlugin);
-            PluginWindowTemplate.Display(settings, true);
+            Display(settings, true);
         }
 
         private void alwaysCapitalize1stWordCheckBoxLabel_Click(object sender, EventArgs e)
@@ -927,6 +919,30 @@ namespace MusicBeePlugin
         private void alwaysCapitalizeLastWordCheckBoxLabel_Click(object sender, EventArgs e)
         {
             alwaysCapitalizeLastWordCheckBox.Checked = !alwaysCapitalizeLastWordCheckBox.Checked;
+        }
+
+        private void ChangeCaseCommand_Load(object sender, EventArgs e)
+        {
+            (int, int, int, int, int, int, int) value = loadWindowLayout();
+
+            if (value.Item1 != 0)
+            {
+                previewTable.Columns[2].Width = (int)(value.Item1 * dpiScaleFactor);
+                previewTable.Columns[4].Width = (int)(value.Item2 * dpiScaleFactor);
+                previewTable.Columns[6].Width = (int)(value.Item3 * dpiScaleFactor);
+            }
+            else
+            {
+                previewTable.Columns[2].Width = (int)(previewTable.Columns[2].Width * dpiScaleFactor);
+                previewTable.Columns[4].Width = (int)(previewTable.Columns[4].Width * dpiScaleFactor);
+                previewTable.Columns[6].Width = (int)(previewTable.Columns[6].Width * dpiScaleFactor);
+            }
+
+        }
+
+        private void ChangeCaseCommand_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            saveWindowLayout(previewTable.Columns[2].Width, previewTable.Columns[4].Width, previewTable.Columns[6].Width);
         }
     }
 }

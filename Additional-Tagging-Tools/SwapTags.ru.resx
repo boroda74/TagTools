@@ -117,177 +117,76 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="buttonOK.Error" xml:space="preserve">
-    <value />
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="buttonOK.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="buttonOK.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>596, 72</value>
+    <value>521, 66</value>
   </data>
   <data name="buttonOK.Text" xml:space="preserve">
     <value>Применить</value>
   </data>
-  <data name="buttonOK.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonCancel.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonCancel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="buttonCancel.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>692, 72</value>
+    <value>629, 66</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Закрыть</value>
   </data>
-  <data name="buttonCancel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>793, 108</value>
+    <value>735, 95</value>
   </data>
-  <data name="label4.Error" xml:space="preserve">
-    <value />
+  <data name="smartOperationCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>691, 15</value>
   </data>
-  <data name="label4.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="label4.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>746, 17</value>
-  </data>
-  <data name="label4.Text" xml:space="preserve">
+  <data name="smartOperationCheckBoxLabel.Text" xml:space="preserve">
     <value>Умный обмен (играет роль только при работе с тегами "Исполнитель"/"Композитор", содержащими несколько значений)</value>
   </data>
-  <data name="label4.ToolTip" xml:space="preserve">
+  <data name="smartOperationCheckBoxLabel.ToolTip" xml:space="preserve">
     <value>Каждый байт исходного тега (включая служебные символы, обозначающие роли исполнителей) 
 будет сохранен, если эта опция отключена, однако это может быть полезно только 
 при обмене значения тега с временным тегом
 </value>
-  </data>
-  <data name="smartOperationCheckBox.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="smartOperationCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="smartOperationCheckBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="smartOperationCheckBox.ToolTip" xml:space="preserve">
     <value>Каждый байт исходного тега (включая служебные символы, обозначающие роли исполнителей) 
 будет сохранен, если эта опция отключена, однако это может быть полезно только 
 при обмене значения тега с временным тегом</value>
   </data>
-  <data name="label3.Error" xml:space="preserve">
-    <value />
+  <data name="forTracksLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>563, 9</value>
   </data>
-  <data name="label3.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+  <data name="forTracksLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 15</value>
   </data>
-  <data name="label3.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>514, 14</value>
-  </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>135, 17</value>
-  </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value>у выбранных файлов</value>
-  </data>
-  <data name="label3.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="destinationTagList.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="destinationTagList.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="destinationTagList.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="forTracksLabel.Text" xml:space="preserve">
+    <value>у выбранных треков</value>
   </data>
   <data name="destinationTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>366, 10</value>
+    <value>385, 5</value>
   </data>
-  <data name="destinationTagList.ToolTip" xml:space="preserve">
-    <value />
+  <data name="destinationTagList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>170, 23</value>
   </data>
-  <data name="label2.Error" xml:space="preserve">
-    <value />
+  <data name="withTagLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>330, 9</value>
   </data>
-  <data name="label2.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+  <data name="withTagLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>33, 15</value>
   </data>
-  <data name="label2.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>308, 14</value>
-  </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 17</value>
-  </data>
-  <data name="label2.Text" xml:space="preserve">
+  <data name="withTagLabel.Text" xml:space="preserve">
     <value>и тег</value>
   </data>
-  <data name="label2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="sourceTagList.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="sourceTagList.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="sourceTagList.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="sourceTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>160, 10</value>
+    <value>151, 5</value>
   </data>
-  <data name="sourceTagList.ToolTip" xml:space="preserve">
-    <value />
+  <data name="sourceTagList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>170, 23</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Обмен двух тегов местами</value>
   </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
+  <data name="SwapTagLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>132, 15</value>
   </data>
-  <data name="label1.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="label1.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 17</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
+  <data name="SwapTagLabel.Text" xml:space="preserve">
     <value>Поменять местами тег</value>
-  </data>
-  <data name="label1.ToolTip" xml:space="preserve">
-    <value />
   </data>
 </root>

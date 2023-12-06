@@ -117,106 +117,47 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="buttonOK.Error" xml:space="preserve">
-    <value />
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="buttonOK.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="buttonOK.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>397, 76</value>
-  </data>
-  <data name="buttonOK.Text" xml:space="preserve">
-    <value>ОК</value>
-  </data>
-  <data name="buttonCancel.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonCancel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="buttonCancel.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="lastSkippedTagList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>355, 7</value>
   </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>493, 76</value>
+    <value>487, 71</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Отмена</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>592, 109</value>
+  <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
+    <value>391, 71</value>
   </data>
-  <data name="saveLastSkippedCheckBoxLabel.Error" xml:space="preserve">
-    <value />
+  <data name="buttonOK.Text" xml:space="preserve">
+    <value>ОК</value>
   </data>
-  <data name="saveLastSkippedCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+  <data name="dateTimeFormatLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>135, 15</value>
   </data>
-  <data name="saveLastSkippedCheckBoxLabel.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="dateTimeFormatLabel.Text" xml:space="preserve">
+    <value>Формат даты/времени:</value>
+  </data>
+  <data name="lastSkippedDateFormatTagList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>355, 39</value>
   </data>
   <data name="saveLastSkippedCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>272, 17</value>
+    <value>249, 15</value>
   </data>
   <data name="saveLastSkippedCheckBoxLabel.Text" xml:space="preserve">
     <value>Сохранять дату последнего пропуска трека:</value>
   </data>
-  <data name="lastSkippedDateFormatTagList.Error" xml:space="preserve">
-    <value />
+  <data name="placeholderCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 19</value>
   </data>
-  <data name="lastSkippedDateFormatTagList.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+  <data name="placeholderCheckBox.Text" xml:space="preserve">
+    <value> </value>
   </data>
-  <data name="lastSkippedDateFormatTagList.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="lastSkippedDateFormatTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>316, 43</value>
-  </data>
-  <data name="label1.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="label1.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 17</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>Формат даты/времени:</value>
-  </data>
-  <data name="saveLastSkippedCheckBox.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="saveLastSkippedCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="saveLastSkippedCheckBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>587, 103</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Сохранять дату последнего пропуска трека</value>
-  </data>
-  <data name="lastSkippedTagList.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lastSkippedTagList.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="lastSkippedTagList.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="lastSkippedTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>316, 10</value>
   </data>
 </root>

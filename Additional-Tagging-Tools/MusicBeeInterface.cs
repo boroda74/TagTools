@@ -408,6 +408,7 @@ namespace MusicBeePlugin
             Channels = 8,
             SampleRate = 9,
             Bitrate = 10,
+            Bitdepth = 183, //Added by me
             DateModified = 11,
             DateAdded = 12,
             LastPlayed = 13,
@@ -530,7 +531,7 @@ namespace MusicBeePlugin
             Virtual31 = 190,
             Virtual32 = 191,
 
-            Cuesheet = 18
+            Cuesheet = 18 //Added by me
         }
 
         public enum FileCodec

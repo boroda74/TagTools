@@ -36,7 +36,7 @@ namespace MusicBeePlugin
 
             if (selectedLineColors)
             {
-                toolTip1.SetToolTip(groupBox6, selectedChangedLegendText);
+                toolTip1.SetToolTip(legendGroupBox, selectedChangedLegendText);
 
                 toolTip1.SetToolTip(changedLegendTextBox, selectedChangedLegendText);
                 toolTip1.SetToolTip(preservedTagsLegendTextBox, selectedChangedLegendText);
@@ -44,7 +44,7 @@ namespace MusicBeePlugin
             }
             else
             {
-                toolTip1.SetToolTip(groupBox6, changedLegendText);
+                toolTip1.SetToolTip(legendGroupBox, changedLegendText);
 
                 toolTip1.SetToolTip(changedLegendTextBox, changedLegendText);
                 toolTip1.SetToolTip(preservedTagsLegendTextBox, changedLegendText);
@@ -65,10 +65,9 @@ namespace MusicBeePlugin
         public PluginSettings(Plugin TagToolsPluginParam) : base(TagToolsPluginParam)
         {
             InitializeComponent();
-            initializeForm();
         }
 
-        protected new void initializeForm()
+        protected override void initializeForm()
         {
             base.initializeForm();
 
@@ -80,12 +79,13 @@ namespace MusicBeePlugin
             selectedLineColors = true;
             reSkinLegend();
 
+            allowCommandExecutionWithoutPreviewCheckBox.Checked = SavedSettings.allowCommandExecutionWithoutPreview;
             contextMenuCheckBox.Checked = !SavedSettings.dontShowContextMenu;
 
             showCopyTagCheckBox.Checked = !SavedSettings.dontShowCopyTag;
             showSwapTagsCheckBox.Checked = !SavedSettings.dontShowSwapTags;
             showChangeCaseCheckBox.Checked = !SavedSettings.dontShowChangeCase;
-            showRencodeTagCheckBox.Checked = !SavedSettings.dontShowRencodeTag;
+            showReencodeTagCheckBox.Checked = !SavedSettings.dontShowReencodeTag;
             showLibraryReportsCheckBox.Checked = !SavedSettings.dontShowLibraryReports;
             showAutorateCheckBox.Checked = !SavedSettings.dontShowAutorate;
             showASRCheckBox.Checked = !SavedSettings.dontShowASR;
@@ -120,12 +120,13 @@ namespace MusicBeePlugin
         {
             bool previousUseSkinColors = SavedSettings.useSkinColors;
 
+            SavedSettings.allowCommandExecutionWithoutPreview = allowCommandExecutionWithoutPreviewCheckBox.Checked;
             SavedSettings.dontShowContextMenu = !contextMenuCheckBox.Checked;
 
             SavedSettings.dontShowCopyTag = !showCopyTagCheckBox.Checked;
             SavedSettings.dontShowSwapTags = !showSwapTagsCheckBox.Checked;
             SavedSettings.dontShowChangeCase = !showChangeCaseCheckBox.Checked;
-            SavedSettings.dontShowRencodeTag = !showRencodeTagCheckBox.Checked;
+            SavedSettings.dontShowReencodeTag = !showReencodeTagCheckBox.Checked;
             SavedSettings.dontShowLibraryReports = !showLibraryReportsCheckBox.Checked;
             SavedSettings.dontShowAutorate = !showAutorateCheckBox.Checked;
             SavedSettings.dontShowASR = !showASRCheckBox.Checked;
@@ -161,7 +162,13 @@ namespace MusicBeePlugin
             TagToolsPlugin.addPluginContextMenuItems();
 
             if (previousUseSkinColors != SavedSettings.useSkinColors)
+            {
+                //Let's dispose all unused themed bitmaps
+                FormsThemedBitmapsRelease(EmptyForm);
+
+                //Let's recreate themed bitmaps using new colors
                 PrepareThemedBitmapsAndColors();
+            }
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
@@ -201,119 +208,124 @@ namespace MusicBeePlugin
             showCopyTagCheckBox.Checked = !showCopyTagCheckBox.Checked;
         }
 
-        private void label7_Click(object sender, EventArgs e)
+        private void showSwapTagsCheckBoxLabel_Click(object sender, EventArgs e)
         {
             showSwapTagsCheckBox.Checked = !showSwapTagsCheckBox.Checked;
         }
 
-        private void label8_Click(object sender, EventArgs e)
+        private void showChangeCaseCheckBoxLabel_Click(object sender, EventArgs e)
         {
             showChangeCaseCheckBox.Checked = !showChangeCaseCheckBox.Checked;
         }
 
-        private void label9_Click(object sender, EventArgs e)
+        private void showReencodeTagCheckBoxLabel_Click(object sender, EventArgs e)
         {
-            showRencodeTagCheckBox.Checked = !showRencodeTagCheckBox.Checked;
+            showReencodeTagCheckBox.Checked = !showReencodeTagCheckBox.Checked;
         }
 
-        private void label10_Click(object sender, EventArgs e)
+        private void showLibraryReportsCheckBoxLabel_Click(object sender, EventArgs e)
         {
             showLibraryReportsCheckBox.Checked = !showLibraryReportsCheckBox.Checked;
         }
 
-        private void label11_Click(object sender, EventArgs e)
+        private void showAutorateCheckBoxLabel_Click(object sender, EventArgs e)
         {
             showAutorateCheckBox.Checked = !showAutorateCheckBox.Checked;
         }
 
-        private void label12_Click(object sender, EventArgs e)
+        private void showASRCheckBoxLabel_Click(object sender, EventArgs e)
         {
             showASRCheckBox.Checked = !showASRCheckBox.Checked;
         }
 
-        private void label13_Click(object sender, EventArgs e)
+        private void showCARCheckBoxLabel_Click(object sender, EventArgs e)
         {
             showCARCheckBox.Checked = !showCARCheckBox.Checked;
         }
 
-        private void label14_Click(object sender, EventArgs e)
+        private void showCTCheckBoxLabel_Click(object sender, EventArgs e)
         {
             showCTCheckBox.Checked = !showCTCheckBox.Checked;
         }
 
-        private void label15_Click(object sender, EventArgs e)
+        private void showShowHiddenWindowsCheckBoxLabel_Click(object sender, EventArgs e)
         {
             showShowHiddenWindowsCheckBox.Checked = !showShowHiddenWindowsCheckBox.Checked;
         }
 
-        private void label16_Click(object sender, EventArgs e)
+        private void showBackupRestoreCheckBoxLabel_Click(object sender, EventArgs e)
         {
             showBackupRestoreCheckBox.Checked = !showBackupRestoreCheckBox.Checked;
         }
 
-        private void label17_Click(object sender, EventArgs e)
+        private void contextMenuCheckBoxLabel_Click(object sender, EventArgs e)
         {
             contextMenuCheckBox.Checked = !contextMenuCheckBox.Checked;
         }
 
-        private void label18_Click(object sender, EventArgs e)
+        private void useSkinColorsCheckBoxLabel_Click(object sender, EventArgs e)
         {
             useSkinColorsCheckBox.Checked = !useSkinColorsCheckBox.Checked;
         }
 
-        private void label19_Click(object sender, EventArgs e)
+        private void highlightChangedTagsCheckBoxLabel_Click(object sender, EventArgs e)
         {
             highlightChangedTagsCheckBox.Checked = !highlightChangedTagsCheckBox.Checked;
         }
 
-        private void label20_Click(object sender, EventArgs e)
+        private void minimizePluginWindowsCheckBoxLabel_Click(object sender, EventArgs e)
         {
             minimizePluginWindowsCheckBox.Checked = !minimizePluginWindowsCheckBox.Checked;
         }
 
-        private void label21_Click(object sender, EventArgs e)
+        private void closeHiddenCommandWindowsRadioButtonLabel_Click(object sender, EventArgs e)
         {
             closeHiddenCommandWindowsRadioButton.Checked = true;
         }
 
-        private void label22_Click(object sender, EventArgs e)
+        private void showHiddenCommandWindowsRadioButtonLabel_Click(object sender, EventArgs e)
         {
             showHiddenCommandWindowsRadioButton.Checked = true;
         }
 
-        private void label23_Click(object sender, EventArgs e)
+        private void playCompletedSoundCheckBoxLabel_Click(object sender, EventArgs e)
         {
             playCompletedSoundCheckBox.Checked = !playCompletedSoundCheckBox.Checked;
         }
 
-        private void label24_Click(object sender, EventArgs e)
+        private void playStartedSoundCheckBoxLabel_Click(object sender, EventArgs e)
         {
             playStartedSoundCheckBox.Checked = !playStartedSoundCheckBox.Checked;
         }
 
-        private void label25_Click(object sender, EventArgs e)
+        private void playStoppedSoundCheckBoxLabel_Click(object sender, EventArgs e)
         {
             playStoppedSoundCheckBox.Checked = !playStoppedSoundCheckBox.Checked;
         }
 
-        private void label26_Click(object sender, EventArgs e)
+        private void playTickedAsrPresetSoundCheckBoxLabel_Click(object sender, EventArgs e)
         {
             playTickedAsrPresetSoundCheckBox.Checked = !playTickedAsrPresetSoundCheckBox.Checked;
         }
 
-        private void label27_Click(object sender, EventArgs e)
+        private void includeNotChangedTagsCheckBoxLabel_Click(object sender, EventArgs e)
         {
             includeNotChangedTagsCheckBox.Checked = !includeNotChangedTagsCheckBox.Checked;
         }
 
-        private void label28_Click(object sender, EventArgs e)
+        private void includePreservedTagsCheckBoxLabel_Click(object sender, EventArgs e)
         {
             includePreservedTagsCheckBox.Checked = !includePreservedTagsCheckBox.Checked;
         }
 
-        private void label29_Click(object sender, EventArgs e)
+        private void includePreservedTagValuesCheckBoxLabel_Click(object sender, EventArgs e)
         {
             includePreservedTagValuesCheckBox.Checked = !includePreservedTagValuesCheckBox.Checked;
+        }
+
+        private void allowCommandExecutionWithoutPreviewCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            allowCommandExecutionWithoutPreviewCheckBox.Checked = !allowCommandExecutionWithoutPreviewCheckBox.Checked;
         }
     }
 }

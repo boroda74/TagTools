@@ -39,12 +39,16 @@
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.KeyPreview = true;
             this.Name = "PluginWindowTemplate";
             this.ShowInTaskbar = false;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ToolsPluginTemplate_FormClosing);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PluginWindowTemplate_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.PluginWindowTemplate_FormClosed);
             this.Load += new System.EventHandler(this.PluginWindowTemplate_Load);
-            this.VisibleChanged += new System.EventHandler(this.ToolsPluginTemplate_VisibleChanged);
-            this.Resize += new System.EventHandler(this.ToolsPluginTemplate_Resize);
+            this.Shown += new System.EventHandler(this.PluginWindowTemplate_Shown);
+            this.VisibleChanged += new System.EventHandler(this.PluginWindowTemplate_VisibleChanged);
+            this.Move += new System.EventHandler(this.PluginWindowTemplate_Move);
+            this.Resize += new System.EventHandler(this.PluginWindowTemplate_Resize);
             this.ResumeLayout(false);
 
         }

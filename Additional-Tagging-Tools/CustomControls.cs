@@ -6,32 +6,36 @@ using System.Windows.Forms;
 
 namespace MusicBeePlugin
 {
-    public static class CueProvider
+    internal static class NativeMethods
     {
-        private const int EM_SETCUEBANNER = 0x1501;
-        private const int CB_SETCUEBANNER = 0x1703;
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        private static extern int SendMessage(IntPtr hWnd, int msg, int wParam, [MarshalAs(UnmanagedType.LPWStr)] string lParam);
-
-        public static void SetCue(TextBox textBox, string cue)
+        public static class CueProvider
         {
-            SendMessage(textBox.Handle, EM_SETCUEBANNER, 0, cue);
-        }
+            private const int EM_SETCUEBANNER = 0x1501;
+            private const int CB_SETCUEBANNER = 0x1703;
+            private static IntPtr Zero = IntPtr.Zero;
 
-        public static void ClearCue(TextBox textBox)
-        {
-            SendMessage(textBox.Handle, EM_SETCUEBANNER, 0, string.Empty);
-        }
+            [DllImport("user32.dll", CharSet = CharSet.Auto)]
+            private static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wParam, [MarshalAs(UnmanagedType.LPWStr)] string lParam);
 
-        public static void SetCue(ComboBox comboBox, string cue)
-        {
-            SendMessage(comboBox.Handle, CB_SETCUEBANNER, 0, cue);
-        }
+            public static void SetCue(TextBox textBox, string cue)
+            {
+                SendMessage(textBox.Handle, EM_SETCUEBANNER, Zero, cue);
+            }
 
-        public static void ClearCue(ComboBox comboBox)
-        {
-            SendMessage(comboBox.Handle, CB_SETCUEBANNER, 0, string.Empty);
+            public static void ClearCue(TextBox textBox)
+            {
+                SendMessage(textBox.Handle, EM_SETCUEBANNER, Zero, string.Empty);
+            }
+
+            public static void SetCue(ComboBox comboBox, string cue)
+            {
+                SendMessage(comboBox.Handle, CB_SETCUEBANNER, Zero, cue);
+            }
+
+            public static void ClearCue(ComboBox comboBox)
+            {
+                SendMessage(comboBox.Handle, CB_SETCUEBANNER, Zero, string.Empty);
+            }
         }
     }
 

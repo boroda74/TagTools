@@ -7,19 +7,6 @@
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Освободить все используемые ресурсы.
-        /// </summary>
-        /// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
         #region Код, автоматически созданный конструктором форм Windows
 
         /// <summary>
@@ -44,9 +31,9 @@
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label1 = new System.Windows.Forms.Label();
+            this.forLastLabel = new System.Windows.Forms.Label();
             this.numberOfBackupsNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.label2 = new System.Windows.Forms.Label();
+            this.backupsLabel = new System.Windows.Forms.Label();
             this.rereadButton = new System.Windows.Forms.Button();
             this.restoreSelectedButton = new System.Windows.Forms.Button();
             this.selectTagsButton = new System.Windows.Forms.Button();
@@ -54,18 +41,23 @@
             this.rememberColumnasDefaulltWidthCheckBox = new System.Windows.Forms.CheckBox();
             this.undoButton = new System.Windows.Forms.Button();
             this.AutoSelectTagsCheckBox = new System.Windows.Forms.CheckBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.rememberColumnasDefaulltWidthCheckBoxLabel = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.trackListComboBox = new System.Windows.Forms.ComboBox();
+            this.optionsPanel = new System.Windows.Forms.Panel();
+            this.placeholderLabel2 = new System.Windows.Forms.Label();
+            this.placeholderLabel1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfBackupsNumericUpDown)).BeginInit();
+            this.optionsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonOK
             // 
             resources.ApplyResources(this.buttonOK, "buttonOK");
             this.buttonOK.Name = "buttonOK";
-            this.buttonOK.UseVisualStyleBackColor = true;
+            this.buttonOK.Tag = "#buttonCancel";
+            this.toolTip1.SetToolTip(this.buttonOK, resources.GetString("buttonOK.ToolTip"));
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // buttonCancel
@@ -73,21 +65,22 @@
             resources.ApplyResources(this.buttonCancel, "buttonCancel");
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Tag = "#TagHistoryCommand@non-defaultable";
+            this.toolTip1.SetToolTip(this.buttonCancel, resources.GetString("buttonCancel.ToolTip"));
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // previewTable
             // 
+            resources.ApplyResources(this.previewTable, "previewTable");
             this.previewTable.AllowUserToAddRows = false;
             this.previewTable.AllowUserToDeleteRows = false;
-            resources.ApplyResources(this.previewTable, "previewTable");
             this.previewTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.previewTable.BackgroundColor = System.Drawing.SystemColors.Window;
             this.previewTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.previewTable.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F);
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -99,8 +92,11 @@
             this.ImageCellTemplate});
             this.previewTable.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
             this.previewTable.Name = "previewTable";
+            this.previewTable.RowHeadersVisible = false;
             this.previewTable.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.previewTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.previewTable.Tag = "";
+            this.toolTip1.SetToolTip(this.previewTable, resources.GetString("previewTable.ToolTip"));
             this.previewTable.RowHeadersWidthChanged += new System.EventHandler(this.previewTable_RowHeadersWidthChanged);
             this.previewTable.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.previewTable_ColumnHeaderMouseClick);
             this.previewTable.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.previewTable_ColumnWidthChanged);
@@ -138,6 +134,7 @@
             // 
             resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
+            this.toolTip1.SetToolTip(this.label3, resources.GetString("label3.ToolTip"));
             // 
             // searchFolderTextBox
             // 
@@ -147,13 +144,16 @@
             this.searchFolderTextBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.searchFolderTextBox.FormattingEnabled = true;
             this.searchFolderTextBox.Name = "searchFolderTextBox";
+            this.searchFolderTextBox.Tag = "#browseButton";
+            this.toolTip1.SetToolTip(this.searchFolderTextBox, resources.GetString("searchFolderTextBox.ToolTip"));
             this.searchFolderTextBox.Leave += new System.EventHandler(this.searchFolderTextBox_Leave);
             // 
             // browseButton
             // 
             resources.ApplyResources(this.browseButton, "browseButton");
             this.browseButton.Name = "browseButton";
-            this.browseButton.UseVisualStyleBackColor = true;
+            this.browseButton.Tag = "#forLastLabel@non-defaultable";
+            this.toolTip1.SetToolTip(this.browseButton, resources.GetString("browseButton.ToolTip"));
             this.browseButton.Click += new System.EventHandler(this.browseButton_Click);
             // 
             // dataGridViewTextBoxColumn1
@@ -171,10 +171,12 @@
             resources.ApplyResources(this.dataGridViewTextBoxColumn3, "dataGridViewTextBoxColumn3");
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             // 
-            // label1
+            // forLastLabel
             // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
+            resources.ApplyResources(this.forLastLabel, "forLastLabel");
+            this.forLastLabel.Name = "forLastLabel";
+            this.forLastLabel.Tag = "#numberOfBackupsNumericUpDown";
+            this.toolTip1.SetToolTip(this.forLastLabel, resources.GetString("forLastLabel.ToolTip"));
             // 
             // numberOfBackupsNumericUpDown
             // 
@@ -185,38 +187,43 @@
             0,
             0});
             this.numberOfBackupsNumericUpDown.Name = "numberOfBackupsNumericUpDown";
+            this.numberOfBackupsNumericUpDown.Tag = "#backupsLabel";
+            this.toolTip1.SetToolTip(this.numberOfBackupsNumericUpDown, resources.GetString("numberOfBackupsNumericUpDown.ToolTip"));
             this.numberOfBackupsNumericUpDown.Value = new decimal(new int[] {
             10,
             0,
             0,
             0});
             // 
-            // label2
+            // backupsLabel
             // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
+            resources.ApplyResources(this.backupsLabel, "backupsLabel");
+            this.backupsLabel.Name = "backupsLabel";
+            this.backupsLabel.Tag = "#rereadButton";
+            this.toolTip1.SetToolTip(this.backupsLabel, resources.GetString("backupsLabel.ToolTip"));
             // 
             // rereadButton
             // 
             resources.ApplyResources(this.rereadButton, "rereadButton");
             this.rereadButton.Name = "rereadButton";
-            this.rereadButton.UseVisualStyleBackColor = true;
+            this.rereadButton.Tag = "#optionsPanel";
+            this.toolTip1.SetToolTip(this.rereadButton, resources.GetString("rereadButton.ToolTip"));
             this.rereadButton.Click += new System.EventHandler(this.rereadButton_Click);
             // 
             // restoreSelectedButton
             // 
             resources.ApplyResources(this.restoreSelectedButton, "restoreSelectedButton");
             this.restoreSelectedButton.Name = "restoreSelectedButton";
+            this.restoreSelectedButton.Tag = "@non-defaultable";
             this.toolTip1.SetToolTip(this.restoreSelectedButton, resources.GetString("restoreSelectedButton.ToolTip"));
-            this.restoreSelectedButton.UseVisualStyleBackColor = true;
             this.restoreSelectedButton.Click += new System.EventHandler(this.restoreSelectedButton_Click);
             // 
             // selectTagsButton
             // 
             resources.ApplyResources(this.selectTagsButton, "selectTagsButton");
             this.selectTagsButton.Name = "selectTagsButton";
+            this.selectTagsButton.Tag = "@non-defaultable";
             this.toolTip1.SetToolTip(this.selectTagsButton, resources.GetString("selectTagsButton.ToolTip"));
-            this.selectTagsButton.UseVisualStyleBackColor = true;
             this.selectTagsButton.Click += new System.EventHandler(this.selectTagsButton_Click);
             // 
             // toolTip1
@@ -229,36 +236,36 @@
             // 
             resources.ApplyResources(this.rememberColumnasDefaulltWidthCheckBox, "rememberColumnasDefaulltWidthCheckBox");
             this.rememberColumnasDefaulltWidthCheckBox.Name = "rememberColumnasDefaulltWidthCheckBox";
+            this.rememberColumnasDefaulltWidthCheckBox.Tag = "#rememberColumnasDefaulltWidthCheckBoxLabel";
             this.toolTip1.SetToolTip(this.rememberColumnasDefaulltWidthCheckBox, resources.GetString("rememberColumnasDefaulltWidthCheckBox.ToolTip"));
-            this.rememberColumnasDefaulltWidthCheckBox.UseVisualStyleBackColor = true;
             // 
             // undoButton
             // 
             resources.ApplyResources(this.undoButton, "undoButton");
             this.undoButton.Name = "undoButton";
             this.toolTip1.SetToolTip(this.undoButton, resources.GetString("undoButton.ToolTip"));
-            this.undoButton.UseVisualStyleBackColor = true;
             this.undoButton.Click += new System.EventHandler(this.undoButton_Click);
             // 
             // AutoSelectTagsCheckBox
             // 
             resources.ApplyResources(this.AutoSelectTagsCheckBox, "AutoSelectTagsCheckBox");
             this.AutoSelectTagsCheckBox.Name = "AutoSelectTagsCheckBox";
+            this.AutoSelectTagsCheckBox.Tag = "#buttonCancel#rememberColumnasDefaulltWidthCheckBoxLabel#scaled-moved-x";
             this.toolTip1.SetToolTip(this.AutoSelectTagsCheckBox, resources.GetString("AutoSelectTagsCheckBox.ToolTip"));
-            this.AutoSelectTagsCheckBox.UseVisualStyleBackColor = true;
             this.AutoSelectTagsCheckBox.CheckedChanged += new System.EventHandler(this.AutoSelectTagsCheckBox_CheckedChanged);
             // 
-            // label5
+            // rememberColumnasDefaulltWidthCheckBoxLabel
             // 
-            resources.ApplyResources(this.label5, "label5");
-            this.label5.Name = "label5";
-            this.toolTip1.SetToolTip(this.label5, resources.GetString("label5.ToolTip"));
-            this.label5.Click += new System.EventHandler(this.label5_Click);
+            resources.ApplyResources(this.rememberColumnasDefaulltWidthCheckBoxLabel, "rememberColumnasDefaulltWidthCheckBoxLabel");
+            this.rememberColumnasDefaulltWidthCheckBoxLabel.Name = "rememberColumnasDefaulltWidthCheckBoxLabel";
+            this.toolTip1.SetToolTip(this.rememberColumnasDefaulltWidthCheckBoxLabel, resources.GetString("rememberColumnasDefaulltWidthCheckBoxLabel.ToolTip"));
+            this.rememberColumnasDefaulltWidthCheckBoxLabel.Click += new System.EventHandler(this.rememberColumnasDefaulltWidthCheckBoxLabel_Click);
             // 
             // label4
             // 
             resources.ApplyResources(this.label4, "label4");
             this.label4.Name = "label4";
+            this.toolTip1.SetToolTip(this.label4, resources.GetString("label4.ToolTip"));
             // 
             // trackListComboBox
             // 
@@ -266,7 +273,39 @@
             this.trackListComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.trackListComboBox.FormattingEnabled = true;
             this.trackListComboBox.Name = "trackListComboBox";
+            this.trackListComboBox.Tag = "#optionsPanel";
+            this.toolTip1.SetToolTip(this.trackListComboBox, resources.GetString("trackListComboBox.ToolTip"));
             this.trackListComboBox.DropDownClosed += new System.EventHandler(this.trackListComboBox_DropDownClosed);
+            // 
+            // optionsPanel
+            // 
+            resources.ApplyResources(this.optionsPanel, "optionsPanel");
+            this.optionsPanel.Controls.Add(this.rereadButton);
+            this.optionsPanel.Controls.Add(this.backupsLabel);
+            this.optionsPanel.Controls.Add(this.numberOfBackupsNumericUpDown);
+            this.optionsPanel.Controls.Add(this.browseButton);
+            this.optionsPanel.Controls.Add(this.forLastLabel);
+            this.optionsPanel.Controls.Add(this.searchFolderTextBox);
+            this.optionsPanel.Controls.Add(this.placeholderLabel2);
+            this.optionsPanel.Controls.Add(this.trackListComboBox);
+            this.optionsPanel.Controls.Add(this.placeholderLabel1);
+            this.optionsPanel.Name = "optionsPanel";
+            this.optionsPanel.Tag = "#TagHistoryCommand";
+            this.toolTip1.SetToolTip(this.optionsPanel, resources.GetString("optionsPanel.ToolTip"));
+            // 
+            // placeholderLabel2
+            // 
+            resources.ApplyResources(this.placeholderLabel2, "placeholderLabel2");
+            this.placeholderLabel2.Name = "placeholderLabel2";
+            this.placeholderLabel2.Tag = "#searchFolderTextBox";
+            this.toolTip1.SetToolTip(this.placeholderLabel2, resources.GetString("placeholderLabel2.ToolTip"));
+            // 
+            // placeholderLabel1
+            // 
+            resources.ApplyResources(this.placeholderLabel1, "placeholderLabel1");
+            this.placeholderLabel1.Name = "placeholderLabel1";
+            this.placeholderLabel1.Tag = "#trackListComboBox";
+            this.toolTip1.SetToolTip(this.placeholderLabel1, resources.GetString("placeholderLabel1.ToolTip"));
             // 
             // TagHistoryCommand
             // 
@@ -274,28 +313,25 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.Controls.Add(this.selectTagsButton);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.AutoSelectTagsCheckBox);
-            this.Controls.Add(this.undoButton);
-            this.Controls.Add(this.trackListComboBox);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.rememberColumnasDefaulltWidthCheckBox);
-            this.Controls.Add(this.restoreSelectedButton);
-            this.Controls.Add(this.rereadButton);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.numberOfBackupsNumericUpDown);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.browseButton);
-            this.Controls.Add(this.searchFolderTextBox);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.previewTable);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
+            this.Controls.Add(this.rememberColumnasDefaulltWidthCheckBoxLabel);
+            this.Controls.Add(this.rememberColumnasDefaulltWidthCheckBox);
+            this.Controls.Add(this.selectTagsButton);
+            this.Controls.Add(this.AutoSelectTagsCheckBox);
+            this.Controls.Add(this.undoButton);
+            this.Controls.Add(this.restoreSelectedButton);
+            this.Controls.Add(this.previewTable);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.optionsPanel);
             this.Name = "TagHistoryCommand";
+            this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.Shown += new System.EventHandler(this.TagHistoryPlugin_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfBackupsNumericUpDown)).EndInit();
+            this.optionsPanel.ResumeLayout(false);
+            this.optionsPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -311,9 +347,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox searchFolderTextBox;
         private System.Windows.Forms.Button browseButton;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label forLastLabel;
         private System.Windows.Forms.NumericUpDown numberOfBackupsNumericUpDown;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label backupsLabel;
         private System.Windows.Forms.Button rereadButton;
         private System.Windows.Forms.Button restoreSelectedButton;
         private System.Windows.Forms.Button selectTagsButton;
@@ -326,6 +362,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewImageColumn ImageCellTemplate;
         private System.Windows.Forms.CheckBox AutoSelectTagsCheckBox;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label rememberColumnasDefaulltWidthCheckBoxLabel;
+        private System.Windows.Forms.Panel optionsPanel;
+        private System.Windows.Forms.Label placeholderLabel1;
+        private System.Windows.Forms.Label placeholderLabel2;
     }
 }

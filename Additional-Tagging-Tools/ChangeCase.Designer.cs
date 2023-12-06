@@ -7,19 +7,6 @@
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Освободить все используемые ресурсы.
-        /// </summary>
-        /// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
         #region Код, автоматически созданный конструктором форм Windows
 
         /// <summary>
@@ -30,10 +17,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChangeCaseCommand));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
-            this.mainLabel = new System.Windows.Forms.Label();
+            this.forSelectedTracksLabel = new System.Windows.Forms.Label();
             this.sourceTagList = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.sentenceCaseRadioButton = new System.Windows.Forms.RadioButton();
@@ -77,41 +63,32 @@
             this.wordSplittersCheckBoxLabel = new System.Windows.Forms.Label();
             this.alwaysCapitalize1stWordCheckBoxLabel = new System.Windows.Forms.Label();
             this.alwaysCapitalizeLastWordCheckBoxLabel = new System.Windows.Forms.Label();
+            this.fieldsPanel = new System.Windows.Forms.Panel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).BeginInit();
+            this.fieldsPanel.SuspendLayout();
             this.SuspendLayout();
-            //MusicBee
-            this.exceptionWordsBox = (System.Windows.Forms.ComboBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.ComboBox);
-            this.exceptionCharsBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.wordSplittersBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            //~MusicBee
             // 
             // buttonCancel
             // 
             resources.ApplyResources(this.buttonCancel, "buttonCancel");
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Tag = "#fieldsPanel@non-defaultable";
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // buttonOK
             // 
             resources.ApplyResources(this.buttonOK, "buttonOK");
             this.buttonOK.Name = "buttonOK";
-            this.buttonOK.UseVisualStyleBackColor = true;
+            this.buttonOK.Tag = "#buttonCancel";
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
-            // mainLabel
+            // forSelectedTracksLabel
             // 
-            resources.ApplyResources(this.mainLabel, "mainLabel");
-            this.mainLabel.Name = "mainLabel";
+            resources.ApplyResources(this.forSelectedTracksLabel, "forSelectedTracksLabel");
+            this.forSelectedTracksLabel.Name = "forSelectedTracksLabel";
             // 
             // sourceTagList
             // 
@@ -120,62 +97,61 @@
             this.sourceTagList.FormattingEnabled = true;
             resources.ApplyResources(this.sourceTagList, "sourceTagList");
             this.sourceTagList.Name = "sourceTagList";
+            this.sourceTagList.Tag = "#forSelectedTracksLabel";
             // 
             // label1
             // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
+            this.label1.Tag = "#sourceTagList";
             // 
             // sentenceCaseRadioButton
             // 
             resources.ApplyResources(this.sentenceCaseRadioButton, "sentenceCaseRadioButton");
             this.sentenceCaseRadioButton.Name = "sentenceCaseRadioButton";
             this.sentenceCaseRadioButton.TabStop = true;
-            this.sentenceCaseRadioButton.Tag = "sentenceCaseRadioButtonLabel";
-            this.sentenceCaseRadioButton.UseVisualStyleBackColor = true;
+            this.sentenceCaseRadioButton.Tag = "#sentenceCaseRadioButtonLabel";
             this.sentenceCaseRadioButton.CheckedChanged += new System.EventHandler(this.casingRuleRadioButton_CheckedChanged);
             // 
             // lowerCaseRadioButton
             // 
             resources.ApplyResources(this.lowerCaseRadioButton, "lowerCaseRadioButton");
             this.lowerCaseRadioButton.Name = "lowerCaseRadioButton";
-            this.lowerCaseRadioButton.Tag = "lowerCaseRadioButtonLabel";
-            this.lowerCaseRadioButton.UseVisualStyleBackColor = true;
+            this.lowerCaseRadioButton.Tag = "#lowerCaseRadioButtonLabel";
             this.lowerCaseRadioButton.CheckedChanged += new System.EventHandler(this.casingRuleRadioButton_CheckedChanged);
             // 
             // upperCaseRadioButton
             // 
             resources.ApplyResources(this.upperCaseRadioButton, "upperCaseRadioButton");
             this.upperCaseRadioButton.Name = "upperCaseRadioButton";
-            this.upperCaseRadioButton.Tag = "upperCaseRadioButtonLabel";
-            this.upperCaseRadioButton.UseVisualStyleBackColor = true;
+            this.upperCaseRadioButton.Tag = "#upperCaseRadioButtonLabel";
             this.upperCaseRadioButton.CheckedChanged += new System.EventHandler(this.casingRuleRadioButton_CheckedChanged);
             // 
             // titleCaseRadioButton
             // 
             resources.ApplyResources(this.titleCaseRadioButton, "titleCaseRadioButton");
             this.titleCaseRadioButton.Name = "titleCaseRadioButton";
-            this.titleCaseRadioButton.Tag = "titleCaseRadioButtonLabel";
-            this.titleCaseRadioButton.UseVisualStyleBackColor = true;
+            this.titleCaseRadioButton.Tag = "#titleCaseRadioButtonLabel";
             this.titleCaseRadioButton.CheckedChanged += new System.EventHandler(this.casingRuleRadioButton_CheckedChanged);
             // 
             // toggleCaseRadioButton
             // 
             resources.ApplyResources(this.toggleCaseRadioButton, "toggleCaseRadioButton");
             this.toggleCaseRadioButton.Name = "toggleCaseRadioButton";
-            this.toggleCaseRadioButton.Tag = "toggleCaseRadioButtonLabel";
-            this.toggleCaseRadioButton.UseVisualStyleBackColor = true;
+            this.toggleCaseRadioButton.Tag = "#toggleCaseRadioButtonLabel";
             this.toggleCaseRadioButton.CheckedChanged += new System.EventHandler(this.casingRuleRadioButton_CheckedChanged);
             // 
             // exceptionCharsBox
             // 
             resources.ApplyResources(this.exceptionCharsBox, "exceptionCharsBox");
             this.exceptionCharsBox.Name = "exceptionCharsBox";
+            this.exceptionCharsBox.Tag = "#buttonASRExceptWordsAfterSymbols";
             // 
             // wordSplittersBox
             // 
             resources.ApplyResources(this.wordSplittersBox, "wordSplittersBox");
             this.wordSplittersBox.Name = "wordSplittersBox";
+            this.wordSplittersBox.Tag = "#buttonASRWordSplitters";
             // 
             // label6
             // 
@@ -188,7 +164,7 @@
             this.dirtyErrorProvider.SetError(this.buttonPreview, resources.GetString("buttonPreview.Error"));
             this.dirtyErrorProvider.SetIconAlignment(this.buttonPreview, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonPreview.IconAlignment"))));
             this.buttonPreview.Name = "buttonPreview";
-            this.buttonPreview.UseVisualStyleBackColor = true;
+            this.buttonPreview.Tag = "#buttonOK";
             this.buttonPreview.Click += new System.EventHandler(this.buttonPreview_Click);
             // 
             // previewTable
@@ -199,6 +175,7 @@
             this.previewTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.previewTable.BackgroundColor = System.Drawing.SystemColors.Window;
             this.previewTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.previewTable.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.previewTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.File,
             this.Track,
@@ -254,56 +231,52 @@
             resources.ApplyResources(this.buttonReapply, "buttonReapply");
             this.buttonReapply.Name = "buttonReapply";
             this.toolTip1.SetToolTip(this.buttonReapply, resources.GetString("buttonReapply.ToolTip"));
-            this.buttonReapply.UseVisualStyleBackColor = true;
             this.buttonReapply.Click += new System.EventHandler(this.buttonReapply_Click);
             // 
             // exceptionWordsCheckBox
             // 
             resources.ApplyResources(this.exceptionWordsCheckBox, "exceptionWordsCheckBox");
             this.exceptionWordsCheckBox.Name = "exceptionWordsCheckBox";
-            this.exceptionWordsCheckBox.Tag = "exceptionWordsCheckBoxLabel";
+            this.exceptionWordsCheckBox.Tag = "#exceptionWordsCheckBoxLabel";
             this.toolTip1.SetToolTip(this.exceptionWordsCheckBox, resources.GetString("exceptionWordsCheckBox.ToolTip"));
-            this.exceptionWordsCheckBox.UseVisualStyleBackColor = true;
             this.exceptionWordsCheckBox.CheckedChanged += new System.EventHandler(this.exceptWordsCheckBox_CheckedChanged);
             // 
             // exceptionCharsCheckBox
             // 
             resources.ApplyResources(this.exceptionCharsCheckBox, "exceptionCharsCheckBox");
             this.exceptionCharsCheckBox.Name = "exceptionCharsCheckBox";
-            this.exceptionCharsCheckBox.Tag = "exceptionCharsCheckBoxLabel";
-            this.exceptionCharsCheckBox.UseVisualStyleBackColor = true;
+            this.exceptionCharsCheckBox.Tag = "#exceptionCharsCheckBoxLabel";
             this.exceptionCharsCheckBox.CheckedChanged += new System.EventHandler(this.exceptCharsCheckBox_CheckedChanged);
             // 
             // wordSplittersCheckBox
             // 
             resources.ApplyResources(this.wordSplittersCheckBox, "wordSplittersCheckBox");
             this.wordSplittersCheckBox.Name = "wordSplittersCheckBox";
-            this.wordSplittersCheckBox.Tag = "wordSplittersCheckBoxLabel";
-            this.wordSplittersCheckBox.UseVisualStyleBackColor = true;
+            this.wordSplittersCheckBox.Tag = "#wordSplittersCheckBoxLabel";
             this.wordSplittersCheckBox.CheckedChanged += new System.EventHandler(this.wordSplittersCheckBox_CheckedChanged);
             // 
             // onlyWordsCheckBox
             // 
             resources.ApplyResources(this.onlyWordsCheckBox, "onlyWordsCheckBox");
             this.onlyWordsCheckBox.Name = "onlyWordsCheckBox";
-            this.onlyWordsCheckBox.Tag = "onlyWordsCheckBoxLabel";
-            this.onlyWordsCheckBox.UseVisualStyleBackColor = true;
+            this.onlyWordsCheckBox.Tag = "#onlyWordsCheckBoxLabel";
             this.onlyWordsCheckBox.CheckedChanged += new System.EventHandler(this.onlyWordsCheckBox_CheckedChanged);
             // 
             // dirtyErrorProvider
             // 
-            this.dirtyErrorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.dirtyErrorProvider.BlinkRate = 1000;
+            this.dirtyErrorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.AlwaysBlink;
             this.dirtyErrorProvider.ContainerControl = this;
             resources.ApplyResources(this.dirtyErrorProvider, "dirtyErrorProvider");
             // 
             // buttonSettings
             // 
-            resources.ApplyResources(this.buttonSettings, "buttonSettings");
             this.dirtyErrorProvider.SetIconAlignment(this.buttonSettings, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonSettings.IconAlignment"))));
             this.buttonSettings.Image = global::MusicBeePlugin.Properties.Resources.gear_15;
+            resources.ApplyResources(this.buttonSettings, "buttonSettings");
             this.buttonSettings.Name = "buttonSettings";
+            this.buttonSettings.Tag = "@non-defaultable";
             this.toolTip1.SetToolTip(this.buttonSettings, resources.GetString("buttonSettings.ToolTip"));
-            this.buttonSettings.UseVisualStyleBackColor = true;
             this.buttonSettings.Click += new System.EventHandler(this.buttonSettings_Click);
             // 
             // exceptionWordsBox
@@ -313,53 +286,52 @@
             this.exceptionWordsBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.exceptionWordsBox.FormattingEnabled = true;
             this.exceptionWordsBox.Name = "exceptionWordsBox";
+            this.exceptionWordsBox.Tag = "#removeExceptionButton";
             this.exceptionWordsBox.Leave += new System.EventHandler(this.exceptionWordsBox_Leave);
             // 
             // alwaysCapitalize1stWordCheckBox
             // 
             resources.ApplyResources(this.alwaysCapitalize1stWordCheckBox, "alwaysCapitalize1stWordCheckBox");
             this.alwaysCapitalize1stWordCheckBox.Name = "alwaysCapitalize1stWordCheckBox";
-            this.alwaysCapitalize1stWordCheckBox.Tag = "alwaysCapitalize1stWordCheckBoxLabel";
-            this.alwaysCapitalize1stWordCheckBox.UseVisualStyleBackColor = true;
+            this.alwaysCapitalize1stWordCheckBox.Tag = "#alwaysCapitalize1stWordCheckBoxLabel";
             // 
             // alwaysCapitalizeLastWordCheckBox
             // 
             resources.ApplyResources(this.alwaysCapitalizeLastWordCheckBox, "alwaysCapitalizeLastWordCheckBox");
             this.alwaysCapitalizeLastWordCheckBox.Name = "alwaysCapitalizeLastWordCheckBox";
-            this.alwaysCapitalizeLastWordCheckBox.Tag = "alwaysCapitalizeLastWordCheckBoxLabel";
-            this.alwaysCapitalizeLastWordCheckBox.UseVisualStyleBackColor = true;
+            this.alwaysCapitalizeLastWordCheckBox.Tag = "#alwaysCapitalizeLastWordCheckBoxLabel";
             // 
             // removeExceptionButton
             // 
             resources.ApplyResources(this.removeExceptionButton, "removeExceptionButton");
             this.removeExceptionButton.Image = global::MusicBeePlugin.Properties.Resources.clear_button_15;
             this.removeExceptionButton.Name = "removeExceptionButton";
+            this.removeExceptionButton.Tag = "#fieldsPanel@non-defaultable";
             this.toolTip1.SetToolTip(this.removeExceptionButton, resources.GetString("removeExceptionButton.ToolTip"));
-            this.removeExceptionButton.UseVisualStyleBackColor = true;
             this.removeExceptionButton.Click += new System.EventHandler(this.removeExceptionButton_Click);
             // 
             // buttonASRExceptedWords
             // 
             resources.ApplyResources(this.buttonASRExceptedWords, "buttonASRExceptedWords");
             this.buttonASRExceptedWords.Name = "buttonASRExceptedWords";
+            this.buttonASRExceptedWords.Tag = "@non-defaultable";
             this.toolTip1.SetToolTip(this.buttonASRExceptedWords, resources.GetString("buttonASRExceptedWords.ToolTip"));
-            this.buttonASRExceptedWords.UseVisualStyleBackColor = true;
             this.buttonASRExceptedWords.Click += new System.EventHandler(this.buttonASR_Click);
             // 
             // buttonASRExceptWordsAfterSymbols
             // 
             resources.ApplyResources(this.buttonASRExceptWordsAfterSymbols, "buttonASRExceptWordsAfterSymbols");
             this.buttonASRExceptWordsAfterSymbols.Name = "buttonASRExceptWordsAfterSymbols";
+            this.buttonASRExceptWordsAfterSymbols.Tag = "#fieldsPanel@non-defaultable";
             this.toolTip1.SetToolTip(this.buttonASRExceptWordsAfterSymbols, resources.GetString("buttonASRExceptWordsAfterSymbols.ToolTip"));
-            this.buttonASRExceptWordsAfterSymbols.UseVisualStyleBackColor = true;
             this.buttonASRExceptWordsAfterSymbols.Click += new System.EventHandler(this.buttonASRExceptWordsAfterSymbols_Click);
             // 
             // buttonASRWordSplitters
             // 
             resources.ApplyResources(this.buttonASRWordSplitters, "buttonASRWordSplitters");
             this.buttonASRWordSplitters.Name = "buttonASRWordSplitters";
+            this.buttonASRWordSplitters.Tag = "#fieldsPanel@non-defaultable";
             this.toolTip1.SetToolTip(this.buttonASRWordSplitters, resources.GetString("buttonASRWordSplitters.ToolTip"));
-            this.buttonASRWordSplitters.UseVisualStyleBackColor = true;
             this.buttonASRWordSplitters.Click += new System.EventHandler(this.buttonASRWordSplitters_Click);
             // 
             // sentenceCaseRadioButtonLabel
@@ -396,6 +368,7 @@
             // 
             resources.ApplyResources(this.exceptionWordsCheckBoxLabel, "exceptionWordsCheckBoxLabel");
             this.exceptionWordsCheckBoxLabel.Name = "exceptionWordsCheckBoxLabel";
+            this.exceptionWordsCheckBoxLabel.Tag = "#onlyWordsCheckBox";
             this.toolTip1.SetToolTip(this.exceptionWordsCheckBoxLabel, resources.GetString("exceptionWordsCheckBoxLabel.ToolTip"));
             this.exceptionWordsCheckBoxLabel.Click += new System.EventHandler(this.exceptionWordsCheckBoxLabel_Click);
             // 
@@ -421,7 +394,7 @@
             // 
             resources.ApplyResources(this.alwaysCapitalize1stWordCheckBoxLabel, "alwaysCapitalize1stWordCheckBoxLabel");
             this.alwaysCapitalize1stWordCheckBoxLabel.Name = "alwaysCapitalize1stWordCheckBoxLabel";
-            this.alwaysCapitalize1stWordCheckBoxLabel.Tag = "";
+            this.alwaysCapitalize1stWordCheckBoxLabel.Tag = "#alwaysCapitalizeLastWordCheckBox";
             this.alwaysCapitalize1stWordCheckBoxLabel.Click += new System.EventHandler(this.alwaysCapitalize1stWordCheckBoxLabel_Click);
             // 
             // alwaysCapitalizeLastWordCheckBoxLabel
@@ -430,100 +403,73 @@
             this.alwaysCapitalizeLastWordCheckBoxLabel.Name = "alwaysCapitalizeLastWordCheckBoxLabel";
             this.alwaysCapitalizeLastWordCheckBoxLabel.Click += new System.EventHandler(this.alwaysCapitalizeLastWordCheckBoxLabel_Click);
             // 
+            // fieldsPanel
+            // 
+            resources.ApplyResources(this.fieldsPanel, "fieldsPanel");
+            this.fieldsPanel.Controls.Add(this.buttonASRWordSplitters);
+            this.fieldsPanel.Controls.Add(this.wordSplittersBox);
+            this.fieldsPanel.Controls.Add(this.buttonASRExceptWordsAfterSymbols);
+            this.fieldsPanel.Controls.Add(this.exceptionCharsBox);
+            this.fieldsPanel.Controls.Add(this.removeExceptionButton);
+            this.fieldsPanel.Controls.Add(this.exceptionWordsBox);
+            this.fieldsPanel.Controls.Add(this.buttonCancel);
+            this.fieldsPanel.Controls.Add(this.buttonOK);
+            this.fieldsPanel.Controls.Add(this.buttonPreview);
+            this.fieldsPanel.Controls.Add(this.buttonSettings);
+            this.fieldsPanel.Controls.Add(this.buttonReapply);
+            this.fieldsPanel.Controls.Add(this.buttonASRExceptedWords);
+            this.fieldsPanel.Name = "fieldsPanel";
+            this.fieldsPanel.Tag = "#ChangeCaseCommand";
+            // 
             // toolTip1
             // 
             this.toolTip1.AutoPopDelay = 10000;
             this.toolTip1.InitialDelay = 1500;
             this.toolTip1.ReshowDelay = 100;
             // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.FillWeight = 1F;
-            resources.ApplyResources(this.dataGridViewTextBoxColumn1, "dataGridViewTextBoxColumn1");
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.FillWeight = 75F;
-            resources.ApplyResources(this.dataGridViewTextBoxColumn2, "dataGridViewTextBoxColumn2");
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.FillWeight = 1F;
-            resources.ApplyResources(this.dataGridViewTextBoxColumn3, "dataGridViewTextBoxColumn3");
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.FillWeight = 25F;
-            resources.ApplyResources(this.dataGridViewTextBoxColumn4, "dataGridViewTextBoxColumn4");
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.FillWeight = 1F;
-            resources.ApplyResources(this.dataGridViewTextBoxColumn5, "dataGridViewTextBoxColumn5");
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridViewTextBoxColumn6.FillWeight = 25F;
-            resources.ApplyResources(this.dataGridViewTextBoxColumn6, "dataGridViewTextBoxColumn6");
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            // 
             // ChangeCaseCommand
             // 
-            this.AcceptButton = this.buttonOK;
+            this.AcceptButton = this.buttonPreview;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.Controls.Add(this.onlyWordsCheckBoxLabel);
-            this.Controls.Add(this.alwaysCapitalizeLastWordCheckBoxLabel);
-            this.Controls.Add(this.alwaysCapitalize1stWordCheckBoxLabel);
-            this.Controls.Add(this.wordSplittersCheckBoxLabel);
-            this.Controls.Add(this.exceptionCharsCheckBoxLabel);
-            this.Controls.Add(this.exceptionWordsCheckBoxLabel);
-            this.Controls.Add(this.toggleCaseRadioButtonLabel);
-            this.Controls.Add(this.titleCaseRadioButtonLabel);
-            this.Controls.Add(this.upperCaseRadioButtonLabel);
-            this.Controls.Add(this.lowerCaseRadioButtonLabel);
-            this.Controls.Add(this.sentenceCaseRadioButtonLabel);
-            this.Controls.Add(this.buttonSettings);
-            this.Controls.Add(this.buttonASRWordSplitters);
-            this.Controls.Add(this.buttonASRExceptWordsAfterSymbols);
-            this.Controls.Add(this.buttonASRExceptedWords);
-            this.Controls.Add(this.removeExceptionButton);
-            this.Controls.Add(this.alwaysCapitalizeLastWordCheckBox);
-            this.Controls.Add(this.alwaysCapitalize1stWordCheckBox);
-            this.Controls.Add(this.exceptionWordsBox);
-            this.Controls.Add(this.onlyWordsCheckBox);
-            this.Controls.Add(this.wordSplittersCheckBox);
-            this.Controls.Add(this.exceptionCharsCheckBox);
-            this.Controls.Add(this.exceptionWordsCheckBox);
-            this.Controls.Add(this.buttonReapply);
             this.Controls.Add(this.previewTable);
-            this.Controls.Add(this.buttonPreview);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.wordSplittersBox);
-            this.Controls.Add(this.exceptionCharsBox);
+            this.Controls.Add(this.alwaysCapitalizeLastWordCheckBoxLabel);
+            this.Controls.Add(this.alwaysCapitalizeLastWordCheckBox);
+            this.Controls.Add(this.alwaysCapitalize1stWordCheckBoxLabel);
+            this.Controls.Add(this.alwaysCapitalize1stWordCheckBox);
+            this.Controls.Add(this.toggleCaseRadioButtonLabel);
             this.Controls.Add(this.toggleCaseRadioButton);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.titleCaseRadioButtonLabel);
             this.Controls.Add(this.titleCaseRadioButton);
+            this.Controls.Add(this.wordSplittersCheckBoxLabel);
+            this.Controls.Add(this.wordSplittersCheckBox);
+            this.Controls.Add(this.upperCaseRadioButtonLabel);
             this.Controls.Add(this.upperCaseRadioButton);
+            this.Controls.Add(this.exceptionCharsCheckBoxLabel);
+            this.Controls.Add(this.exceptionCharsCheckBox);
+            this.Controls.Add(this.lowerCaseRadioButtonLabel);
             this.Controls.Add(this.lowerCaseRadioButton);
+            this.Controls.Add(this.onlyWordsCheckBoxLabel);
+            this.Controls.Add(this.onlyWordsCheckBox);
+            this.Controls.Add(this.exceptionWordsCheckBoxLabel);
+            this.Controls.Add(this.exceptionWordsCheckBox);
+            this.Controls.Add(this.sentenceCaseRadioButtonLabel);
             this.Controls.Add(this.sentenceCaseRadioButton);
-            this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.buttonOK);
-            this.Controls.Add(this.mainLabel);
+            this.Controls.Add(this.forSelectedTracksLabel);
             this.Controls.Add(this.sourceTagList);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.fieldsPanel);
             this.Name = "ChangeCaseCommand";
+            this.Tag = "@small-min-width";
             this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ChangeCaseCommand_FormClosing);
+            this.Load += new System.EventHandler(this.ChangeCaseCommand_Load);
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).EndInit();
+            this.fieldsPanel.ResumeLayout(false);
+            this.fieldsPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -533,7 +479,7 @@
 
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonOK;
-        private System.Windows.Forms.Label mainLabel;
+        private System.Windows.Forms.Label forSelectedTracksLabel;
         private System.Windows.Forms.ComboBox sourceTagList;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RadioButton sentenceCaseRadioButton;
@@ -556,22 +502,10 @@
         private System.Windows.Forms.ComboBox exceptionWordsBox;
         private System.Windows.Forms.CheckBox alwaysCapitalizeLastWordCheckBox;
         private System.Windows.Forms.CheckBox alwaysCapitalize1stWordCheckBox;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.Button removeExceptionButton;
         private System.Windows.Forms.Button buttonASRExceptedWords;
         private System.Windows.Forms.Button buttonASRExceptWordsAfterSymbols;
         private System.Windows.Forms.Button buttonASRWordSplitters;
-        private System.Windows.Forms.DataGridViewTextBoxColumn File;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Track;
-        private System.Windows.Forms.DataGridViewTextBoxColumn OriginalTag;
-        private System.Windows.Forms.DataGridViewTextBoxColumn OriginalTagT;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NewTag;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NewTagT;
         private System.Windows.Forms.Button buttonSettings;
         private System.Windows.Forms.Label upperCaseRadioButtonLabel;
         private System.Windows.Forms.Label lowerCaseRadioButtonLabel;
@@ -584,5 +518,12 @@
         private System.Windows.Forms.Label wordSplittersCheckBoxLabel;
         private System.Windows.Forms.Label alwaysCapitalize1stWordCheckBoxLabel;
         private System.Windows.Forms.Label alwaysCapitalizeLastWordCheckBoxLabel;
+        private System.Windows.Forms.Panel fieldsPanel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn File;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Track;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OriginalTag;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OriginalTagT;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NewTag;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NewTagT;
     }
 }

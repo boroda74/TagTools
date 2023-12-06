@@ -39,17 +39,16 @@ namespace MusicBeePlugin
         public MultipleSearchAndReplaceCommand(Plugin tagToolsPluginParam) : base(tagToolsPluginParam)
         {
             InitializeComponent();
-            initializeForm();
         }
 
-        protected new void initializeForm()
+        protected override void initializeForm()
         {
             base.initializeForm();
 
             //Setting themed images
-            buttonDeleteSaved.Image = ButtonRemoveImage;
-            autoApplyPictureBox.Image = AutoAppliedPresetsAccent;
-            buttonSettings.Image = Gear;
+            buttonDeleteSaved.Image = ThemedBitmapAddRef(this, ButtonRemoveImage);
+            autoApplyPictureBox.Image = ThemedBitmapAddRef(this, AutoAppliedPresetsAccent);
+            buttonSettings.Image = ThemedBitmapAddRef(this, Gear);
 
 
             FillListByTagNames(destinationTagList.Items, false, false, false);
@@ -71,7 +70,7 @@ namespace MusicBeePlugin
                 ThreeState = true,
                 FalseValue = "F",
                 TrueValue = "T",
-                IndeterminateValue = "",
+                IndeterminateValue = string.Empty,
                 Width = 25,
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.None
             };
@@ -98,6 +97,12 @@ namespace MusicBeePlugin
 
             templateNameTextBox.Text = CtlMSR;
             templateNameTextBox.SelectionStart = CtlMSR.Length;
+
+
+            enableDisablePreviewOptionControls(true, true);
+            enableQueryingOrUpdatingButtons();
+
+            button_GotFocus(this.AcceptButton, null); //Let's mark active button
         }
 
         private void previewTable_AddRowToTable(string[] row)
@@ -140,9 +145,9 @@ namespace MusicBeePlugin
 
                 for (int i = 0; i < templateTable.Rows.Count; i++)
                 {
-                    sourceTagIds[i] = GetTagId("" + templateTable.Rows[i].Cells[0].Value);
-                    sourcePropIds[i] = GetPropId("" + templateTable.Rows[i].Cells[0].Value);
-                    sourceTagNames[i] = "" + templateTable.Rows[i].Cells[0].Value;
+                    sourceTagIds[i] = GetTagId(string.Empty + templateTable.Rows[i].Cells[0].Value);
+                    sourcePropIds[i] = GetPropId(string.Empty + templateTable.Rows[i].Cells[0].Value);
+                    sourceTagNames[i] = string.Empty + templateTable.Rows[i].Cells[0].Value;
                 }
             }
             else
@@ -170,12 +175,12 @@ namespace MusicBeePlugin
 
             if (files.Length == 0 && searchOnly)
             {
-                MessageBox.Show(this, MsgNoFilesDisplayed, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, MsgNoTracksDisplayed, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
             else if (files.Length == 0 && !searchOnly)
             {
-                MessageBox.Show(this, MsgNoFilesSelected, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, MsgNoTracksSelected, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
             else
@@ -184,11 +189,11 @@ namespace MusicBeePlugin
                 {
                     string[] template = new string[5];
 
-                    template[0] = "" + templateTable.Rows[i].Cells[0].Value;
-                    template[1] = "" + templateTable.Rows[i].Cells[1].Value;
-                    template[2] = "" + templateTable.Rows[i].Cells[2].Value;
-                    template[3] = "" + templateTable.Rows[i].Cells[3].Value;
-                    template[4] = "" + templateTable.Rows[i].Cells[4].Value;
+                    template[0] = string.Empty + templateTable.Rows[i].Cells[0].Value;
+                    template[1] = string.Empty + templateTable.Rows[i].Cells[1].Value;
+                    template[2] = string.Empty + templateTable.Rows[i].Cells[2].Value;
+                    template[3] = string.Empty + templateTable.Rows[i].Cells[3].Value;
+                    template[4] = string.Empty + templateTable.Rows[i].Cells[4].Value;
 
                     templates.Add(template);
                 }
@@ -277,21 +282,21 @@ namespace MusicBeePlugin
 
                             if (template1 == "T" && template2 == "T") //Regex/case sensitive
                             {
-                                newSourceTagValue = Replace(currentFile, sourceTagValue, template3, "", false, out _);
+                                newSourceTagValue = Replace(currentFile, sourceTagValue, template3, string.Empty, false, out _);
                             }
                             else if (template1 == "T" && template2 == "F") //Regex/case insensitive
                             {
-                                newSourceTagValue = Replace(currentFile, sourceTagValue, template3, "", true, out _);
+                                newSourceTagValue = Replace(currentFile, sourceTagValue, template3, string.Empty, true, out _);
                             }
                             else if (template1 == "F" && template2 == "T") //Case sensitive
                             {
                                 template3 = Regex.Escape(template3);
-                                newSourceTagValue = Replace(currentFile, sourceTagValue, template3, "", false, out _);
+                                newSourceTagValue = Replace(currentFile, sourceTagValue, template3, string.Empty, false, out _);
                             }
                             else //Case insensitive
                             {
                                 template3 = Regex.Escape(template3);
-                                newSourceTagValue = Replace(currentFile, sourceTagValue, template3, "", true, out _);
+                                newSourceTagValue = Replace(currentFile, sourceTagValue, template3, string.Empty, true, out _);
                             }
 
                             if (sourceTagValue == newSourceTagValue)
@@ -321,7 +326,7 @@ namespace MusicBeePlugin
                             row[0] = "T";
                             row[1] = track;
                             row[2] = sourceTagValue;
-                            row[3] = "";
+                            row[3] = string.Empty;
                             row[4] = currentFile;
 
                             Invoke(addRowToTable, new object[] { row });
@@ -331,8 +336,8 @@ namespace MusicBeePlugin
                         {
                             row[0] = "T";
                             row[1] = track;
-                            row[2] = "";
-                            row[3] = "";
+                            row[2] = string.Empty;
+                            row[3] = string.Empty;
                             row[4] = currentFile;
 
                             Invoke(addRowToTable, new object[] { row });
@@ -344,8 +349,8 @@ namespace MusicBeePlugin
                                     row[0] = null;
                                     row[1] = "            " + tagNames[j];
                                     row[2] = tagValues[j];
-                                    row[3] = "";
-                                    row[4] = "";
+                                    row[3] = string.Empty;
+                                    row[4] = string.Empty;
 
                                     Invoke(addRowToTable, new object[] { row });
                                     tags.Add(row);
@@ -455,7 +460,7 @@ namespace MusicBeePlugin
 
                     if (newTag != "SYNTAX ERROR!")
                     {
-                        tags[i][0] = "";
+                        tags[i][0] = string.Empty;
 
                         Invoke(processRowOfTable, new object[] { i });
 
@@ -503,6 +508,7 @@ namespace MusicBeePlugin
             else
             {
                 clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewChanges, (Button)sender, buttonOK, buttonCancel, 0);
+                enableQueryingOrUpdatingButtons();
             }
         }
 
@@ -541,12 +547,12 @@ namespace MusicBeePlugin
             }
         }
 
-        public override void enableDisablePreviewOptionControls(bool enable)
+        public override void enableDisablePreviewOptionControls(bool enable, bool dontChangeDisabled = false)
         {
-            bool intialEnabled = enable;
+            bool initiallyEnabled = enable;
             enable = (enable && previewTable.Rows.Count == 0) || searchOnlyCheckBox.Checked;
 
-            searchOnlyCheckBox.Enable(intialEnabled && !backgroundTaskIsWorking());
+            searchOnlyCheckBox.Enable(initiallyEnabled && !backgroundTaskIsWorking());
 
             templateNameTextBox.Enable(enable && !searchOnlyCheckBox.Checked);
             //ignoreTemplateNameTextBoxTextChanged = true;
@@ -555,16 +561,16 @@ namespace MusicBeePlugin
 
             sourceTagList.Enable(enable && !searchOnlyCheckBox.Checked);
             destinationTagList.Enable(enable && !autoDestinationTagCheckBox.Checked && !searchOnlyCheckBox.Checked);
-            label1.Enable(enable && !searchOnlyCheckBox.Checked);
-            label2.Enable(enable && !searchOnlyCheckBox.Checked);
-            label3.Enable(enable && !searchOnlyCheckBox.Checked);
+            fromTagLabel.Enable(enable && !searchOnlyCheckBox.Checked);
+            toTagLabel.Enable(enable && !searchOnlyCheckBox.Checked);
+            presetLabel.Enable(enable && !searchOnlyCheckBox.Checked);
             buttonSave.Enable(enable && !searchOnlyCheckBox.Checked);
             loadComboBox.Enable(enable && !searchOnlyCheckBox.Checked);
             buttonAdd.Enable(enable);
             templateTable.Enable(enable);
             autoDestinationTagCheckBox.Enable(enable && !searchOnlyCheckBox.Checked);
 
-            dataGridViewTextBoxColumn16.Visible = !searchOnlyCheckBox.Checked;
+            ReplaceWith.Visible = !searchOnlyCheckBox.Checked;
             NewTag.Visible = !searchOnlyCheckBox.Checked;
             if (searchOnlyCheckBox.Checked)
             {
@@ -592,14 +598,14 @@ namespace MusicBeePlugin
 
             if (searchOnlyCheckBox.Checked)
             {
-                buttonOK.Enable(intialEnabled && (previewTable.Rows.Count > 0));
+                buttonOK.Enable(initiallyEnabled && (previewTable.Rows.Count > 0));
                 buttonOK.Text = SelectFoundButtonName;
                 if (!backgroundTaskIsWorking())
                 {
                     buttonPreview.Text = FindButtonName;
                 }
             }
-            else if (intialEnabled)
+            else if (initiallyEnabled)
             {
                 buttonOK.Text = OKButtonName;
                 if (previewTable.Rows.Count == 0)
@@ -626,7 +632,7 @@ namespace MusicBeePlugin
 
         public override void enableQueryingOrUpdatingButtons()
         {
-            buttonOK.Enable(true);
+            buttonOK.Enable(previewIsGenerated || SavedSettings.allowCommandExecutionWithoutPreview);
             buttonPreview.Enable(true);
         }
 
@@ -700,13 +706,13 @@ namespace MusicBeePlugin
         {
             if (MSR == null)
             {
-                MessageBox.Show(this, MsgYouMustImportStandardAsrPresetsFirst, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, MsgYouMustImportStandardAsrPresetsFirst, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
             if (templateNameTextBox.Text == CtlMSR)
             {
-                MessageBox.Show(this, MsgGiveNameToAsrPreset, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, MsgGiveNameToAsrPreset, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
                 templateNameTextBox.Focus();
                 templateNameTextBox.SelectionStart = CtlMSR.Length;
@@ -759,10 +765,10 @@ namespace MusicBeePlugin
                     return;
             }
 
-            string query = "";
+            string query = string.Empty;
             for (int i = 0; i < templateTable.Rows.Count; i++)
             {
-                query += EncodeSearchReplaceTemplate("" + templateTable.Rows[i].Cells[3].Value, "" + templateTable.Rows[i].Cells[4].Value, (string)templateTable.Rows[i].Cells[1].Value == "T" ? true : false, (string)templateTable.Rows[i].Cells[2].Value == "T" ? true : false) + "|";
+                query += EncodeSearchReplaceTemplate(string.Empty + templateTable.Rows[i].Cells[3].Value, string.Empty + templateTable.Rows[i].Cells[4].Value, (string)templateTable.Rows[i].Cells[1].Value == "T" ? true : false, (string)templateTable.Rows[i].Cells[2].Value == "T" ? true : false) + "|";
             }
 
             query = query.Remove(query.Length - 1);
@@ -804,10 +810,7 @@ namespace MusicBeePlugin
 
             customMSR.savePreset(Path.Combine(PresetsPath, customMSR.getSafeFileName() + ASRPresetExtension));
 
-            if (Presets.Contains(customMSR.guid))
-                Presets.Remove(customMSR.guid);
-
-            Presets.Add(customMSR.guid, customMSR);
+            Presets.AddReplace(customMSR.guid, customMSR);
 
             if (autoApplyCheckBox.Checked && !SavedSettings.autoAppliedAsrPresetGuids.Contains(customMSR.guid))
             {
@@ -842,7 +845,7 @@ namespace MusicBeePlugin
             //if (!ignoreTemplateNameTextBoxTextChanged)
             //    loadComboBox.SelectedIndex = 0;
 
-            if (templateNameTextBox.Text == "")
+            if (templateNameTextBox.Text == string.Empty)
                 buttonSave.Enable(false);
             else
                 buttonSave.Enable(true);
@@ -1075,9 +1078,9 @@ namespace MusicBeePlugin
 
         private void MultipleSearchAndReplaceCommand_FormClosing(object sender, FormClosingEventArgs e)
         {
-            saveWindowLayout(previewTable.Columns[1].Width, previewTable.Columns[2].Width, previewTable.Columns[3].Width,
-                0, 
-                templateTable.Columns[0].Width, templateTable.Columns[3].Width, templateTable.Columns[4].Width);
+            saveWindowLayout(templateTable.Columns[0].Width, templateTable.Columns[3].Width, templateTable.Columns[4].Width, 
+                0,
+                previewTable.Columns[0].Width, previewTable.Columns[1].Width, previewTable.Columns[2].Width);
         }
 
         private void MultipleSearchAndReplaceCommand_Load(object sender, EventArgs e)
@@ -1086,20 +1089,32 @@ namespace MusicBeePlugin
 
             if (value.Item1 != 0)
             {
-                previewTable.Columns[1].Width = value.Item1;
-                previewTable.Columns[2].Width = value.Item2;
-                previewTable.Columns[3].Width = value.Item3;
+                templateTable.Columns[0].Width = (int)(value.Item1 * dpiScaleFactor);
+                templateTable.Columns[3].Width = (int)(value.Item2 * dpiScaleFactor);
+                templateTable.Columns[4].Width = (int)(value.Item3 * dpiScaleFactor);
 
-                templateTable.Columns[0].Width = value.Item5;
-                templateTable.Columns[3].Width = value.Item6;
-                templateTable.Columns[4].Width = value.Item7;
+                previewTable.Columns[0].Width = (int)(value.Item5 * dpiScaleFactor);
+                previewTable.Columns[1].Width = (int)(value.Item6 * dpiScaleFactor);
+                previewTable.Columns[2].Width = (int)(value.Item7 * dpiScaleFactor);
             }
+            else
+            {
+                templateTable.Columns[0].Width = (int)(templateTable.Columns[0].Width * dpiScaleFactor);
+                templateTable.Columns[3].Width = (int)(templateTable.Columns[3].Width * dpiScaleFactor);
+                templateTable.Columns[4].Width = (int)(templateTable.Columns[4].Width * dpiScaleFactor);
+
+                previewTable.Columns[0].Width = (int)(previewTable.Columns[0].Width * dpiScaleFactor);
+                previewTable.Columns[1].Width = (int)(previewTable.Columns[1].Width * dpiScaleFactor);
+                previewTable.Columns[2].Width = (int)(previewTable.Columns[2].Width * dpiScaleFactor);
+            }
+
+
+            ignoreSplitterMovedEvent = true;
 
             if (value.Item4 != 0)
-            {
-                ignoreSplitterMovedEvent = true;
-                splitContainer1.SplitterDistance = value.Item4;
-            }
+                splitContainer1.SplitterDistance = (int)(value.Item4 * dpiScaleFactor);
+            else
+                splitContainer1.SplitterDistance = (int)(splitContainer1.SplitterDistance * dpiScaleFactor);
 
             ignoreSplitterMovedEvent = false;
         }
@@ -1113,7 +1128,7 @@ namespace MusicBeePlugin
         private void buttonSettings_Click(object sender, EventArgs e)
         {
             PluginQuickSettings settings = new PluginQuickSettings(TagToolsPlugin);
-            PluginWindowTemplate.Display(settings, true);
+            Display(settings, true);
         }
 
         private void autoApplyPictureBox_Click(object sender, EventArgs e)

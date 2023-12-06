@@ -11,13 +11,32 @@ namespace MusicBeePlugin
         private string changedLegendText;
         private string selectedChangedLegendText;
 
+        protected void setCloseShowWindowsRadioButtons(int pos)
+        {
+            switch (pos)
+            {
+                case 1:
+                    closeHiddenCommandWindowsRadioButton.Checked = true;
+                    break;
+                default:
+                    showHiddenCommandWindowsRadioButton.Checked = true;
+                    break;
+            }
+        }
+
+        protected int getCloseShowWindowsRadioButtons()
+        {
+            if (closeHiddenCommandWindowsRadioButton.Checked) return 1;
+            else return 2;
+        }
+
         private void reSkinLegend()
         {
             selectedLineColors = !selectedLineColors;
 
             if (selectedLineColors)
             {
-                toolTip1.SetToolTip(groupBox6, selectedChangedLegendText);
+                toolTip1.SetToolTip(legendGroupBox, selectedChangedLegendText);
 
                 toolTip1.SetToolTip(changedLegendTextBox, selectedChangedLegendText);
                 toolTip1.SetToolTip(preservedTagsLegendTextBox, selectedChangedLegendText);
@@ -25,7 +44,7 @@ namespace MusicBeePlugin
             }
             else
             {
-                toolTip1.SetToolTip(groupBox6, changedLegendText);
+                toolTip1.SetToolTip(legendGroupBox, changedLegendText);
 
                 toolTip1.SetToolTip(changedLegendTextBox, changedLegendText);
                 toolTip1.SetToolTip(preservedTagsLegendTextBox, changedLegendText);
@@ -46,10 +65,9 @@ namespace MusicBeePlugin
         public PluginQuickSettings(Plugin TagToolsPluginParam) : base(TagToolsPluginParam)
         {
             InitializeComponent();
-            initializeForm();
         }
 
-        protected new void initializeForm()
+        protected override void initializeForm()
         {
             base.initializeForm();
 
@@ -61,6 +79,8 @@ namespace MusicBeePlugin
             selectedLineColors = true;
             reSkinLegend();
 
+            allowCommandExecutionWithoutPreviewCheckBox.Checked = SavedSettings.allowCommandExecutionWithoutPreview;
+
             minimizePluginWindowsCheckBox.Checked = SavedSettings.minimizePluginWindows;
 
             useSkinColorsCheckBox.Checked = SavedSettings.useSkinColors;
@@ -69,6 +89,8 @@ namespace MusicBeePlugin
             includeNotChangedTagsCheckBox.Checked = !SavedSettings.dontIncludeInPreviewLinesWithoutChangedTags;
             includePreservedTagsCheckBox.Checked = !SavedSettings.dontIncludeInPreviewLinesWithPreservedTagsAsr;
             includePreservedTagValuesCheckBox.Checked = !SavedSettings.dontIncludeInPreviewLinesWithPreservedTagValuesAsr;
+
+            setCloseShowWindowsRadioButtons(SavedSettings.closeShowHiddenWindows);
 
             playCompletedSoundCheckBox.Checked = !SavedSettings.dontPlayCompletedSound;
             playStartedSoundCheckBox.Checked = SavedSettings.playStartedSound;
@@ -80,6 +102,8 @@ namespace MusicBeePlugin
         {
             bool previousUseSkinColors = SavedSettings.useSkinColors;
 
+            SavedSettings.allowCommandExecutionWithoutPreview = allowCommandExecutionWithoutPreviewCheckBox.Checked;
+
             SavedSettings.minimizePluginWindows = minimizePluginWindowsCheckBox.Checked;
 
             SavedSettings.useSkinColors = useSkinColorsCheckBox.Checked;
@@ -88,6 +112,8 @@ namespace MusicBeePlugin
             SavedSettings.dontIncludeInPreviewLinesWithoutChangedTags = !includeNotChangedTagsCheckBox.Checked;
             SavedSettings.dontIncludeInPreviewLinesWithPreservedTagsAsr = !includePreservedTagsCheckBox.Checked;
             SavedSettings.dontIncludeInPreviewLinesWithPreservedTagValuesAsr = !includePreservedTagValuesCheckBox.Checked;
+
+            SavedSettings.closeShowHiddenWindows = getCloseShowWindowsRadioButtons();
 
             SavedSettings.dontPlayCompletedSound = !playCompletedSoundCheckBox.Checked;
             SavedSettings.playStartedSound = playStartedSoundCheckBox.Checked;
@@ -100,7 +126,13 @@ namespace MusicBeePlugin
             TagToolsPlugin.addPluginContextMenuItems();
 
             if (previousUseSkinColors != SavedSettings.useSkinColors)
+            {
+                //Let's dispose all unused themed bitmaps
+                FormsThemedBitmapsRelease(EmptyForm);
+
+                //Let's recreate themed bitmaps using new colors
                 PrepareThemedBitmapsAndColors();
+            }
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
@@ -135,64 +167,69 @@ namespace MusicBeePlugin
             reSkinLegend();
         }
 
-        private void label18_Click(object sender, EventArgs e)
+        private void useSkinColorsCheckBoxLabel_Click(object sender, EventArgs e)
         {
             useSkinColorsCheckBox.Checked = !useSkinColorsCheckBox.Checked;
         }
 
-        private void label19_Click(object sender, EventArgs e)
+        private void highlightChangedTagsCheckBoxLabel_Click(object sender, EventArgs e)
         {
             highlightChangedTagsCheckBox.Checked = !highlightChangedTagsCheckBox.Checked;
         }
 
-        private void label20_Click(object sender, EventArgs e)
+        private void minimizePluginWindowsCheckBoxLabel_Click(object sender, EventArgs e)
         {
             minimizePluginWindowsCheckBox.Checked = !minimizePluginWindowsCheckBox.Checked;
         }
 
-        private void label21_Click(object sender, EventArgs e)
+        private void closeHiddenCommandWindowsRadioButtonLabel_Click(object sender, EventArgs e)
         {
             closeHiddenCommandWindowsRadioButton.Checked = true;
         }
 
-        private void label22_Click(object sender, EventArgs e)
+        private void showHiddenCommandWindowsRadioButtonLabel_Click(object sender, EventArgs e)
         {
             showHiddenCommandWindowsRadioButton.Checked = true;
         }
 
-        private void label23_Click(object sender, EventArgs e)
+        private void playCompletedSoundCheckBoxLabel_Click(object sender, EventArgs e)
         {
             playCompletedSoundCheckBox.Checked = !playCompletedSoundCheckBox.Checked;
         }
 
-        private void label24_Click(object sender, EventArgs e)
+        private void playStartedSoundCheckBoxLabel_Click(object sender, EventArgs e)
         {
             playStartedSoundCheckBox.Checked = !playStartedSoundCheckBox.Checked;
         }
 
-        private void label25_Click(object sender, EventArgs e)
+        private void playStoppedSoundCheckBoxLabel_Click(object sender, EventArgs e)
         {
             playStoppedSoundCheckBox.Checked = !playStoppedSoundCheckBox.Checked;
         }
 
-        private void label26_Click(object sender, EventArgs e)
+        private void playTickedAsrPresetSoundCheckBoxLabel_Click(object sender, EventArgs e)
         {
             playTickedAsrPresetSoundCheckBox.Checked = !playTickedAsrPresetSoundCheckBox.Checked;
         }
 
-        private void label27_Click(object sender, EventArgs e)
+        private void includeNotChangedTagsCheckBoxLabel_Click(object sender, EventArgs e)
         {
             includeNotChangedTagsCheckBox.Checked = !includeNotChangedTagsCheckBox.Checked;
         }
 
-        private void label28_Click(object sender, EventArgs e)
+        private void includePreservedTagsCheckBoxLabel_Click(object sender, EventArgs e)
         {
             includePreservedTagsCheckBox.Checked = !includePreservedTagsCheckBox.Checked;
         }
 
-        private void label29_Click(object sender, EventArgs e)
+        private void includePreservedTagValuesCheckBoxLabel_Click(object sender, EventArgs e)
         {
             includePreservedTagValuesCheckBox.Checked = !includePreservedTagValuesCheckBox.Checked;
+        }
+
+        private void allowCommandExecutionWithoutPreviewCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            allowCommandExecutionWithoutPreviewCheckBox.Checked = !allowCommandExecutionWithoutPreviewCheckBox.Checked;
         }
     }
 }

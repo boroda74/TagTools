@@ -51,11 +51,9 @@ namespace MusicBeePlugin
 
             trackUrls = trackUrlsParam;
             trackIds = trackIdsParam;
-
-            initializeForm();
         }
 
-        protected new void initializeForm()
+        protected override void initializeForm()
         {
             base.initializeForm();
 
@@ -82,15 +80,15 @@ namespace MusicBeePlugin
             {
                 SavedSettings.lastSelectedFolders = new string[10];
                 SavedSettings.lastSelectedFolders[0] = GetAutobackupDirectory(SavedSettings.autobackupDirectory);
-                SavedSettings.lastSelectedFolders[1] = "";
-                SavedSettings.lastSelectedFolders[2] = "";
-                SavedSettings.lastSelectedFolders[3] = "";
-                SavedSettings.lastSelectedFolders[4] = "";
-                SavedSettings.lastSelectedFolders[5] = "";
-                SavedSettings.lastSelectedFolders[6] = "";
-                SavedSettings.lastSelectedFolders[7] = "";
-                SavedSettings.lastSelectedFolders[8] = "";
-                SavedSettings.lastSelectedFolders[9] = "";
+                SavedSettings.lastSelectedFolders[1] = string.Empty;
+                SavedSettings.lastSelectedFolders[2] = string.Empty;
+                SavedSettings.lastSelectedFolders[3] = string.Empty;
+                SavedSettings.lastSelectedFolders[4] = string.Empty;
+                SavedSettings.lastSelectedFolders[5] = string.Empty;
+                SavedSettings.lastSelectedFolders[6] = string.Empty;
+                SavedSettings.lastSelectedFolders[7] = string.Empty;
+                SavedSettings.lastSelectedFolders[8] = string.Empty;
+                SavedSettings.lastSelectedFolders[9] = string.Empty;
             }
 
             searchFolderTextBox.Items.AddRange(SavedSettings.lastSelectedFolders);
@@ -108,7 +106,7 @@ namespace MusicBeePlugin
             trackListComboBox.SelectedIndex = 0;
 
 
-            if (!SavedSettings.DontAutoSelectDisplayedTags || SavedSettings.displayedTags == null)
+            if (!SavedSettings.dontAutoSelectDisplayedTags || SavedSettings.displayedTags == null)
             {
                 int offset = 0;
                 displayedTags = new int[tagIds.Count - 1];
@@ -126,7 +124,7 @@ namespace MusicBeePlugin
             }
 
             ignoreAutoSelectTagsCheckBoxCheckedEvent = true;
-            AutoSelectTagsCheckBox.Checked = !SavedSettings.DontAutoSelectDisplayedTags;
+            AutoSelectTagsCheckBox.Checked = !SavedSettings.dontAutoSelectDisplayedTags;
             ignoreAutoSelectTagsCheckBoxCheckedEvent = false;
 
 
@@ -173,7 +171,7 @@ namespace MusicBeePlugin
 
                     base64Artwork = tagValue;
 
-                    if (tagValue == "")
+                    if (tagValue == string.Empty)
                         artwork = emptyArtwork;
                     else
                         artwork = (Bitmap)typeConverter.ConvertFrom(Convert.FromBase64String(tagValue));
@@ -249,7 +247,7 @@ namespace MusicBeePlugin
 
                                 if (tagValue != null)
                                 {
-                                    if (tagValue == "")
+                                    if (tagValue == string.Empty)
                                         artwork = emptyArtwork;
                                     else
                                         artwork = (Bitmap)typeConverter.ConvertFrom(Convert.FromBase64String(tagValue));
@@ -275,7 +273,7 @@ namespace MusicBeePlugin
             {
                 if (!System.IO.Directory.Exists(folder))
                 {
-                    MessageBox.Show(this, MsgFolderDoesntExists, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show(this, MsgFolderDoesntExists, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
 
@@ -287,10 +285,7 @@ namespace MusicBeePlugin
                     SortedDictionary<string, bool> tempBackupGuids = Plugin.BackupIndex.getBackupGuidsForTrack(libraryName, tempTrackId);
 
                     foreach (var tempBackupGuid in tempBackupGuids)
-                    {
-                        if (!backupGuids.Contains(tempBackupGuid.Key))
-                            backupGuids.Add(tempBackupGuid.Key, false);
-                    }
+                        backupGuids.AddReplace(tempBackupGuid.Key, false);
                 }
 
                 SortedDictionary<int, string> backupsWithNegativeDates = new SortedDictionary<int, string>();
@@ -371,7 +366,7 @@ namespace MusicBeePlugin
                 cachedBackupFilenames.Add(cache);
 
 
-            if (!SavedSettings.DontAutoSelectDisplayedTags)
+            if (!SavedSettings.dontAutoSelectDisplayedTags)
             {
                 List<int> reallyDisplayedTags2 = new List<int>();
 
@@ -399,7 +394,7 @@ namespace MusicBeePlugin
             }
 
 
-            if (!SavedSettings.DontAutoSelectDisplayedTags)
+            if (!SavedSettings.dontAutoSelectDisplayedTags)
             {
                 for (int i = cachedBackups.Count - 1; i >= 0; i--)
                 {
@@ -613,7 +608,7 @@ namespace MusicBeePlugin
                 {
                     Bitmap artwork;
 
-                    if (libraryTags[j] == "")
+                    if (libraryTags[j] == string.Empty)
                         artwork = emptyArtwork;
                     else
                         artwork = (Bitmap)typeConverter.ConvertFrom(Convert.FromBase64String(libraryTags[j]));
@@ -647,14 +642,14 @@ namespace MusicBeePlugin
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, ex.Message, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Close();
             }
         }
 
         private void AutoSelectTagsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            SavedSettings.DontAutoSelectDisplayedTags = !AutoSelectTagsCheckBox.Checked;
+            SavedSettings.dontAutoSelectDisplayedTags = !AutoSelectTagsCheckBox.Checked;
 
             if (AutoSelectTagsCheckBox.Checked)
             {
@@ -683,7 +678,7 @@ namespace MusicBeePlugin
             fillTable(searchFolderTextBox.Text, false, (int)numberOfBackupsNumericUpDown.Value, trackListComboBox.SelectedIndex, false);
         }
 
-        private void label5_Click(object sender, EventArgs e)
+        private void rememberColumnasDefaulltWidthCheckBoxLabel_Click(object sender, EventArgs e)
         {
             rememberColumnasDefaulltWidthCheckBox.Checked = !rememberColumnasDefaulltWidthCheckBox.Checked;
         }

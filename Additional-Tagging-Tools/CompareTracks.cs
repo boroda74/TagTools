@@ -39,13 +39,10 @@ namespace MusicBeePlugin
         public CompareTracksCommand(Plugin tagToolsPluginParam, string[] files) : base(tagToolsPluginParam)
         {
             InitializeComponent();
-
             trackUrls = files;
-
-            initializeForm();
         }
 
-        protected new void initializeForm()
+        protected override void initializeForm()
         {
             base.initializeForm();
 
@@ -63,7 +60,7 @@ namespace MusicBeePlugin
             noBackupDataCellForeColor = SystemColors.HotTrack;
 
 
-            if (!SavedSettings.DontAutoSelectDisplayedTags || SavedSettings.displayedTags == null)
+            if (!SavedSettings.dontAutoSelectDisplayedTags || SavedSettings.displayedTags == null)
             {
                 displayedTags = new int[tagIds.Count];
                 for (int i = 0; i < tagIds.Count; i++)
@@ -77,7 +74,7 @@ namespace MusicBeePlugin
             }
 
             ignoreAutoSelectTagsCheckBoxCheckedEvent = true;
-            AutoSelectTagsCheckBox.Checked = !SavedSettings.DontAutoSelectDisplayedTags;
+            AutoSelectTagsCheckBox.Checked = !SavedSettings.dontAutoSelectDisplayedTags;
             ignoreAutoSelectTagsCheckBoxCheckedEvent = false;
 
 
@@ -93,6 +90,9 @@ namespace MusicBeePlugin
 
             previewTable.RowHeadersWidth = rowHeadersWidth;
             previewTable.Columns[0].Width = defaultColumnWidth;
+
+
+            button_GotFocus(this.AcceptButton, null); //Let's mark active button
         }
 
         private void fillTagNamesInTable()
@@ -123,8 +123,8 @@ namespace MusicBeePlugin
                 if (reallyDisplayedTags.Count == 0)
                 {
                     DataGridViewColumn newColumn = (DataGridViewColumn)columnTemplate.Clone();
-                    newColumn.HeaderText = "";
-                    newColumn.ToolTipText = "";
+                    newColumn.HeaderText = string.Empty;
+                    newColumn.ToolTipText = string.Empty;
                     newColumn.Width = defaultColumnWidth;
 
                     previewTable.Columns.Insert(0, newColumn);
@@ -142,7 +142,7 @@ namespace MusicBeePlugin
                     else
                     {
                         previewTable.Rows[0].Cells[0].Value = new Bitmap(1, 1);
-                        previewTable.Rows[0].Cells[0].Tag = "";
+                        previewTable.Rows[0].Cells[0].Tag = string.Empty;
                     }
                 }
                 else
@@ -150,7 +150,7 @@ namespace MusicBeePlugin
                     for (int trackNo = 0; trackNo < cachedTracks.Count; trackNo++)
                     {
                         DataGridViewColumn newColumn = (DataGridViewColumn)columnTemplate.Clone();
-                        newColumn.HeaderText = "" + (trackNo + 1);
+                        newColumn.HeaderText = string.Empty + (trackNo + 1);
                         newColumn.ToolTipText = trackUrls[trackNo];
                         newColumn.Width = defaultColumnWidth;
 
@@ -187,7 +187,7 @@ namespace MusicBeePlugin
                             {
                                 Bitmap artwork;
 
-                                if (tagValue == "")
+                                if (tagValue == string.Empty)
                                     artwork = emptyArtwork;
                                 else
                                     artwork = (Bitmap)typeConverter.ConvertFrom(Convert.FromBase64String(tagValue));
@@ -232,7 +232,7 @@ namespace MusicBeePlugin
         {
             reallyDisplayedTags = new List<int>();
 
-            if (!SavedSettings.DontAutoSelectDisplayedTags)
+            if (!SavedSettings.dontAutoSelectDisplayedTags)
             {
                 List<int> reallyDisplayedTags2 = new List<int>();
 
@@ -266,7 +266,7 @@ namespace MusicBeePlugin
             }
 
 
-            if (!SavedSettings.DontAutoSelectDisplayedTags)
+            if (!SavedSettings.dontAutoSelectDisplayedTags)
             {
                 for (int i = cachedTracks.Count - 1; i >= 0; i--)
                 {
@@ -298,7 +298,7 @@ namespace MusicBeePlugin
             SavedSettings.displayedTags = displayedTags;
             SavedSettings.rowHeadersWidth = rowHeadersWidth;
             SavedSettings.defaultColumnWidth = defaultColumnWidth;
-            SavedSettings.DontAutoSelectDisplayedTags = !AutoSelectTagsCheckBox.Checked;
+            SavedSettings.dontAutoSelectDisplayedTags = !AutoSelectTagsCheckBox.Checked;
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
@@ -334,7 +334,7 @@ namespace MusicBeePlugin
 
         private void previewTable_RowHeadersWidthChanged(object sender, EventArgs e)
         {
-            if (rememberColumnasDefaulltWidthCheckBox.Checked)
+            if (rememberColumnAsDefaultWidthCheckBox.Checked)
             {
                 //rememberColumnasDefaulltWidthCheckBox.Checked = false;
 
@@ -344,7 +344,7 @@ namespace MusicBeePlugin
 
         private void previewTable_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
         {
-            if (rememberColumnasDefaulltWidthCheckBox.Checked)
+            if (rememberColumnAsDefaultWidthCheckBox.Checked)
             {
                 //rememberColumnasDefaulltWidthCheckBox.Checked = false;
 
@@ -420,7 +420,7 @@ namespace MusicBeePlugin
         {
             buffer.Clear();
 
-            SavedSettings.DontAutoSelectDisplayedTags = !AutoSelectTagsCheckBox.Checked;
+            SavedSettings.dontAutoSelectDisplayedTags = !AutoSelectTagsCheckBox.Checked;
 
             if (AutoSelectTagsCheckBox.Checked)
             {
@@ -504,7 +504,7 @@ namespace MusicBeePlugin
                         if (i == artworkRow)
                         {
                             previewTable.Rows[j].Cells[i].Value = emptyArtwork;
-                            previewTable.Rows[j].Cells[i].Tag = "";
+                            previewTable.Rows[j].Cells[i].Tag = string.Empty;
                             break;
                         }
                         else
@@ -518,7 +518,7 @@ namespace MusicBeePlugin
 
         private void rememberColumnasDefaulltWidthCheckBoxLabel_Click(object sender, EventArgs e)
         {
-            rememberColumnasDefaulltWidthCheckBox.Checked = !rememberColumnasDefaulltWidthCheckBox.Checked;
+            rememberColumnAsDefaultWidthCheckBox.Checked = !rememberColumnAsDefaultWidthCheckBox.Checked;
         }
     }
 }

@@ -7,19 +7,6 @@
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Освободить все используемые ресурсы.
-        /// </summary>
-        /// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
         #region Код, автоматически созданный конструктором форм Windows
 
         /// <summary>
@@ -59,7 +46,6 @@
             this.dirtyErrorProvider.SetError(this.buttonPreview, resources.GetString("buttonPreview.Error"));
             this.dirtyErrorProvider.SetIconAlignment(this.buttonPreview, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonPreview.IconAlignment"))));
             this.buttonPreview.Name = "buttonPreview";
-            this.buttonPreview.UseVisualStyleBackColor = true;
             this.buttonPreview.Click += new System.EventHandler(this.buttonPreview_Click);
             // 
             // buttonCancel
@@ -68,7 +54,6 @@
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.dirtyErrorProvider.SetIconAlignment(this.buttonCancel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonCancel.IconAlignment"))));
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // buttonOK
@@ -76,7 +61,6 @@
             resources.ApplyResources(this.buttonOK, "buttonOK");
             this.dirtyErrorProvider.SetIconAlignment(this.buttonOK, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonOK.IconAlignment"))));
             this.buttonOK.Name = "buttonOK";
-            this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // label2
@@ -177,7 +161,8 @@
             // 
             // dirtyErrorProvider
             // 
-            this.dirtyErrorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.dirtyErrorProvider.BlinkRate = 1000;
+            this.dirtyErrorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.AlwaysBlink;
             this.dirtyErrorProvider.ContainerControl = this;
             resources.ApplyResources(this.dirtyErrorProvider, "dirtyErrorProvider");
             // 
@@ -185,8 +170,7 @@
             // 
             resources.ApplyResources(this.previewSortTagsСheckBox, "previewSortTagsСheckBox");
             this.previewSortTagsСheckBox.Name = "previewSortTagsСheckBox";
-            this.previewSortTagsСheckBox.Tag = "previewSortTagsСheckBoxLabel";
-            this.previewSortTagsСheckBox.UseVisualStyleBackColor = true;
+            this.previewSortTagsСheckBox.Tag = "#previewSortTagsСheckBoxLabel";
             // 
             // label1
             // 
@@ -200,7 +184,7 @@
             // 
             // ReencodeTagsCommand
             // 
-            this.AcceptButton = this.buttonOK;
+            this.AcceptButton = this.buttonPreview;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
@@ -216,6 +200,8 @@
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
             this.Name = "ReencodeTagsCommand";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ReencodeTagsCommand_FormClosing);
+            this.Load += new System.EventHandler(this.ReencodeTagsCommand_Load);
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).EndInit();
             this.ResumeLayout(false);

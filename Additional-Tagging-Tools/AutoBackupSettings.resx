@@ -118,614 +118,593 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="autobackupFolderTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>141, 16</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="autobackupFolderTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="autobackupFolderTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>566, 25</value>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>723, 219</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="autobackupFolderTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;autobackupFolderTextBox.Name" xml:space="preserve">
-    <value>autobackupFolderTextBox</value>
-  </data>
-  <data name="&gt;&gt;autobackupFolderTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;autobackupFolderTextBox.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;autobackupFolderTextBox.ZOrder" xml:space="preserve">
-    <value>25</value>
-  </data>
-  <data name="browseButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>715, 15</value>
-  </data>
-  <data name="browseButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="browseButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 25</value>
-  </data>
-  <data name="browseButton.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="browseButton.Text" xml:space="preserve">
-    <value>Browse...</value>
-  </data>
-  <data name="&gt;&gt;browseButton.Name" xml:space="preserve">
-    <value>browseButton</value>
-  </data>
-  <data name="&gt;&gt;browseButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;browseButton.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;browseButton.ZOrder" xml:space="preserve">
-    <value>24</value>
-  </data>
-  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 19</value>
-  </data>
-  <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 17</value>
-  </data>
-  <data name="label1.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>Autobackup folder:</value>
-  </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
-  </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>23</value>
-  </data>
-  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>406, 57</value>
-  </data>
-  <data name="label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 17</value>
-  </data>
-  <data name="label2.TabIndex" type="System.Int32, mscorlib">
+  <data name="autobackupNumericUpDown.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>Prefix for autobackup filenames:</value>
+  <data name="dontTryToGuessLibraryNameCheckBox.Text" xml:space="preserve">
+    <value> </value>
   </data>
-  <data name="&gt;&gt;label2.Name" xml:space="preserve">
-    <value>label2</value>
-  </data>
-  <data name="&gt;&gt;label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>22</value>
-  </data>
-  <data name="autobackupPrefixTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>613, 53</value>
-  </data>
-  <data name="autobackupPrefixTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="groupBox1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
-  <data name="autobackupPrefixTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 25</value>
+  <data name="&gt;&gt;autobackupFolderLabel.ZOrder" xml:space="preserve">
+    <value>24</value>
   </data>
-  <data name="autobackupPrefixTextBox.TabIndex" type="System.Int32, mscorlib">
+  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="autobackupCheckBoxLabel.Text" xml:space="preserve">
+    <value>Autobackup every:</value>
+  </data>
+  <data name="&gt;&gt;autobackupPrefixTextBox.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;dontSkipAutobackupsIfPlayCountsChangedCheckBox.Name" xml:space="preserve">
+    <value>dontSkipAutobackupsIfPlayCountsChangedCheckBox</value>
+  </data>
+  <data name="autobackupFolderLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="autobackupPeriodLabel.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;autobackupPrefixTextBox.Name" xml:space="preserve">
-    <value>autobackupPrefixTextBox</value>
+  <data name="&gt;&gt;dontSkipAutobackupsIfPlayCountsChangedLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;autodeleteOldLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="autobackupPrefixLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="dontTryToGuessLibraryNameCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>210, 15</value>
+  </data>
+  <data name="autobackupPrefixLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="autobackupNumericUpDown.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="&gt;&gt;autodeleteManyCheckBox.Name" xml:space="preserve">
+    <value>autodeleteManyCheckBox</value>
   </data>
   <data name="&gt;&gt;autobackupPrefixTextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;autobackupPrefixTextBox.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="dontTryToGuessLibraryNameCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;autobackupPrefixTextBox.ZOrder" xml:space="preserve">
-    <value>21</value>
+  <data name="dontSkipAutobackupsIfPlayCountsChangedCheckBox.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <data name="autobackupCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="autobackupNumericUpDown.Location" type="System.Drawing.Point, System.Drawing">
+    <value>157, 40</value>
   </data>
-  <data name="autobackupCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 53</value>
+  <data name="&gt;&gt;autodeleteOldCheckBox.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="numberOfDaysNumericUpDown.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="autobackupCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
-  <data name="autobackupCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 21</value>
+  <data name="&gt;&gt;backupArtworksCheckBoxLabel.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="autobackupCheckBox.TabIndex" type="System.Int32, mscorlib">
+  <data name="backupArtworksCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="backupArtworksCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 189</value>
+  </data>
+  <data name="&gt;&gt;autobackupPrefixLabel.ZOrder" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;autodeleteOldCheckBoxLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="numberOfFilesNumericUpDown.Location" type="System.Drawing.Point, System.Drawing">
+    <value>453, 95</value>
+  </data>
+  <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
+    <value>613, 187</value>
+  </data>
+  <data name="numberOfFilesNumericUpDown.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="dontSkipAutobackupsIfPlayCountsChangedLabel.Text" xml:space="preserve">
+    <value>Don't skip autobackup, even if only play/skip counts are changed</value>
+  </data>
+  <data name="numberOfDaysNumericUpDown.Location" type="System.Drawing.Point, System.Drawing">
+    <value>283, 67</value>
+  </data>
+  <data name="&gt;&gt;autodeleteManyCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="autodeleteManyCheckBox.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="backupArtworksCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>38, 189</value>
+  </data>
+  <data name="dontSkipAutobackupsIfPlayCountsChangedCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 19</value>
+  </data>
+  <data name="&gt;&gt;dontTryToGuessLibraryNameCheckBox.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="autobackupCheckBox.Text" xml:space="preserve">
-    <value> </value>
+  <data name="autodeleteManyCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="browseButton.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;backupArtworksCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="autodeleteOldCheckBoxLabel.Text" xml:space="preserve">
+    <value>Automatically delete backups older than:</value>
+  </data>
+  <data name="autobackupFolderTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="&gt;&gt;autobackupPeriodLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="browseButton.Text" xml:space="preserve">
+    <value>Browse...</value>
+  </data>
+  <data name="autobackupFolderLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="autodeleteManyCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="&gt;&gt;autodeleteOldLabel.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="browseButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="autodeleteManyCheckBox.ToolTip" xml:space="preserve">
+    <value>Only autobackups of current library will be deleted</value>
+  </data>
+  <data name="dontSkipAutobackupsIfPlayCountsChangedCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="autodeleteOldCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="backupArtworksCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="autobackupCheckBox.ToolTip" xml:space="preserve">
     <value>Autobackups will be skipped if content of current library is not changed and no tags are changed
 after last manual or auto backup.</value>
   </data>
-  <data name="&gt;&gt;autobackupCheckBox.Name" xml:space="preserve">
-    <value>autobackupCheckBox</value>
+  <data name="autobackupCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
-  <data name="&gt;&gt;autobackupCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="autobackupPrefixTextBox.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="&gt;&gt;autobackupCheckBox.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;autobackupPrefixTextBox.Name" xml:space="preserve">
+    <value>autobackupPrefixTextBox</value>
   </data>
-  <data name="&gt;&gt;autobackupCheckBox.ZOrder" xml:space="preserve">
-    <value>20</value>
+  <data name="&gt;&gt;backupArtworksCheckBoxLabel.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
-  <data name="autobackupNumericUpDown.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="autobackupNumericUpDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>164, 53</value>
-  </data>
-  <data name="autobackupNumericUpDown.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="autobackupNumericUpDown.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 25</value>
-  </data>
-  <data name="autobackupNumericUpDown.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;autobackupNumericUpDown.Name" xml:space="preserve">
-    <value>autobackupNumericUpDown</value>
-  </data>
-  <data name="&gt;&gt;autobackupNumericUpDown.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;autobackupNumericUpDown.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;autobackupNumericUpDown.ZOrder" xml:space="preserve">
-    <value>19</value>
-  </data>
-  <data name="label3.AutoSize" type="System.Boolean, mscorlib">
+  <data name="autodeleteOldLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>279, 57</value>
-  </data>
-  <data name="label3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>38, 17</value>
-  </data>
-  <data name="label3.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value>mins.</value>
-  </data>
-  <data name="&gt;&gt;label3.Name" xml:space="preserve">
-    <value>label3</value>
-  </data>
-  <data name="&gt;&gt;label3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>18</value>
-  </data>
-  <data name="autodeleteOldCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="autodeleteOldCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 83</value>
-  </data>
-  <data name="autodeleteOldCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="autodeleteOldCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 21</value>
-  </data>
-  <data name="autodeleteOldCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="autodeleteOldCheckBox.Text" xml:space="preserve">
-    <value> </value>
-  </data>
-  <data name="autodeleteOldCheckBox.ToolTip" xml:space="preserve">
-    <value>Only autobackups of current library will be deleted</value>
-  </data>
-  <data name="&gt;&gt;autodeleteOldCheckBox.Name" xml:space="preserve">
-    <value>autodeleteOldCheckBox</value>
-  </data>
-  <data name="&gt;&gt;autodeleteOldCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;autodeleteOldCheckBox.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;autodeleteOldCheckBox.ZOrder" xml:space="preserve">
-    <value>17</value>
-  </data>
-  <data name="numberOfDaysNumericUpDown.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="numberOfDaysNumericUpDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>298, 83</value>
-  </data>
-  <data name="numberOfDaysNumericUpDown.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="numberOfDaysNumericUpDown.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 25</value>
-  </data>
-  <data name="numberOfDaysNumericUpDown.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;numberOfDaysNumericUpDown.Name" xml:space="preserve">
-    <value>numberOfDaysNumericUpDown</value>
-  </data>
-  <data name="&gt;&gt;numberOfDaysNumericUpDown.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;numberOfDaysNumericUpDown.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;numberOfDaysNumericUpDown.ZOrder" xml:space="preserve">
-    <value>16</value>
-  </data>
-  <data name="autodeleteManyCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="autodeleteManyCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="autodeleteManyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 113</value>
-  </data>
-  <data name="autodeleteManyCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="autodeleteManyCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 21</value>
-  </data>
-  <data name="autodeleteManyCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="autodeleteManyCheckBox.Text" xml:space="preserve">
-    <value> </value>
-  </data>
-  <data name="autodeleteManyCheckBox.ToolTip" xml:space="preserve">
-    <value>Only autobackups of current library will be deleted</value>
-  </data>
-  <data name="&gt;&gt;autodeleteManyCheckBox.Name" xml:space="preserve">
-    <value>autodeleteManyCheckBox</value>
-  </data>
-  <data name="&gt;&gt;autodeleteManyCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;autodeleteManyCheckBox.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;autodeleteManyCheckBox.ZOrder" xml:space="preserve">
-    <value>15</value>
-  </data>
-  <data name="numberOfFilesNumericUpDown.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="numberOfFilesNumericUpDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>487, 113</value>
-  </data>
-  <data name="numberOfFilesNumericUpDown.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="numberOfFilesNumericUpDown.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 25</value>
-  </data>
-  <data name="numberOfFilesNumericUpDown.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;numberOfFilesNumericUpDown.Name" xml:space="preserve">
-    <value>numberOfFilesNumericUpDown</value>
-  </data>
-  <data name="&gt;&gt;numberOfFilesNumericUpDown.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;numberOfFilesNumericUpDown.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;numberOfFilesNumericUpDown.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <data name="label4.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>406, 85</value>
-  </data>
-  <data name="label4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>38, 17</value>
-  </data>
-  <data name="label4.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="label4.Text" xml:space="preserve">
-    <value>days.</value>
-  </data>
-  <data name="&gt;&gt;label4.Name" xml:space="preserve">
-    <value>label4</value>
-  </data>
-  <data name="&gt;&gt;label4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>715, 211</value>
-  </data>
-  <data name="buttonClose.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="buttonClose.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 25</value>
-  </data>
-  <data name="buttonClose.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="buttonClose.Text" xml:space="preserve">
-    <value>Cancel</value>
-  </data>
-  <data name="&gt;&gt;buttonClose.Name" xml:space="preserve">
-    <value>buttonClose</value>
-  </data>
-  <data name="&gt;&gt;buttonClose.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;buttonClose.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;buttonClose.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="buttonOK.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>620, 211</value>
-  </data>
-  <data name="buttonOK.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="buttonOK.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 25</value>
-  </data>
-  <data name="buttonOK.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="buttonOK.Text" xml:space="preserve">
-    <value>OK</value>
-  </data>
-  <data name="&gt;&gt;buttonOK.Name" xml:space="preserve">
-    <value>buttonOK</value>
-  </data>
-  <data name="&gt;&gt;buttonOK.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;buttonOK.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;buttonOK.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="backupArtworksCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="backupArtworksCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="backupArtworksCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 214</value>
-  </data>
-  <data name="backupArtworksCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="backupArtworksCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 21</value>
-  </data>
-  <data name="backupArtworksCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="backupArtworksCheckBox.Text" xml:space="preserve">
-    <value> </value>
-  </data>
-  <data name="backupArtworksCheckBox.ToolTip" xml:space="preserve">
-    <value>WARNING! Both manual &amp; automatic backups depend on this option.</value>
-  </data>
-  <data name="&gt;&gt;backupArtworksCheckBox.Name" xml:space="preserve">
-    <value>backupArtworksCheckBox</value>
-  </data>
-  <data name="&gt;&gt;backupArtworksCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;backupArtworksCheckBox.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;backupArtworksCheckBox.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <data name="dontTryToGuessLibraryNameCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="dontTryToGuessLibraryNameCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="dontTryToGuessLibraryNameCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 183</value>
+    <value>11, 161</value>
   </data>
-  <data name="dontTryToGuessLibraryNameCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="dontTryToGuessLibraryNameCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="dontTryToGuessLibraryNameCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 21</value>
+  <data name="autodeleteOldLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>34, 15</value>
   </data>
-  <data name="dontTryToGuessLibraryNameCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
+  <data name="autobackupFolderTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
   </data>
-  <data name="dontTryToGuessLibraryNameCheckBox.Text" xml:space="preserve">
-    <value> </value>
+  <data name="backupArtworksCheckBoxLabel.Text" xml:space="preserve">
+    <value>Backup album artworks (not recommended)</value>
   </data>
-  <data name="dontTryToGuessLibraryNameCheckBox.ToolTip" xml:space="preserve">
-    <value>WARNING! Both manual &amp; automatic backups depend on this option.
-Sometimes guessing current library name may work incorrectly.</value>
-  </data>
-  <data name="&gt;&gt;dontTryToGuessLibraryNameCheckBox.Name" xml:space="preserve">
-    <value>dontTryToGuessLibraryNameCheckBox</value>
-  </data>
-  <data name="&gt;&gt;dontTryToGuessLibraryNameCheckBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;dontSkipAutobackupsIfPlayCountsChangedCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dontTryToGuessLibraryNameCheckBox.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;dontTryToGuessLibraryNameCheckBox.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="autobackupCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="autobackupCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>45, 55</value>
-  </data>
-  <data name="autobackupCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="autobackupCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 17</value>
-  </data>
-  <data name="autobackupCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
-  </data>
-  <data name="autobackupCheckBoxLabel.Text" xml:space="preserve">
-    <value>Autobackup every:</value>
-  </data>
-  <data name="autobackupCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value>Autobackups will be skipped if content of current library is not changed and no tags are changed
-after last manual or auto backup.
-</value>
-  </data>
-  <data name="&gt;&gt;autobackupCheckBoxLabel.Name" xml:space="preserve">
-    <value>autobackupCheckBoxLabel</value>
-  </data>
-  <data name="&gt;&gt;autobackupCheckBoxLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;autobackupCheckBoxLabel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;autobackupCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="autodeleteOldCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="autodeleteOldCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>45, 84</value>
-  </data>
-  <data name="autodeleteOldCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="autodeleteOldCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 17</value>
-  </data>
-  <data name="autodeleteOldCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
-  </data>
-  <data name="autodeleteOldCheckBoxLabel.Text" xml:space="preserve">
-    <value>Automatically delete backups older than:</value>
-  </data>
-  <data name="autodeleteOldCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value>Only autobackups of current library will be deleted</value>
-  </data>
-  <data name="&gt;&gt;autodeleteOldCheckBoxLabel.Name" xml:space="preserve">
-    <value>autodeleteOldCheckBoxLabel</value>
-  </data>
-  <data name="&gt;&gt;autodeleteOldCheckBoxLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;autodeleteOldCheckBoxLabel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;autodeleteOldCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="autodeleteManyCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="autodeleteManyCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>45, 114</value>
-  </data>
-  <data name="autodeleteManyCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="autodeleteManyCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>434, 17</value>
-  </data>
-  <data name="autodeleteManyCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
-  </data>
-  <data name="autodeleteManyCheckBoxLabel.Text" xml:space="preserve">
-    <value>Automatically delete old backups if the total number of backups exceeds:</value>
   </data>
   <data name="autodeleteManyCheckBoxLabel.ToolTip" xml:space="preserve">
     <value>Only autobackups of current library will be deleted</value>
   </data>
-  <data name="&gt;&gt;autodeleteManyCheckBoxLabel.Name" xml:space="preserve">
-    <value>autodeleteManyCheckBoxLabel</value>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>AutoBackupSettings</value>
+  </data>
+  <data name="&gt;&gt;autodeleteOldLabel.Name" xml:space="preserve">
+    <value>autodeleteOldLabel</value>
+  </data>
+  <data name="dontSkipAutobackupsIfPlayCountsChangedCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 122</value>
+  </data>
+  <data name="buttonClose.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="autodeleteManyCheckBoxLabel.Text" xml:space="preserve">
+    <value>Automatically delete old backups if the total number of backups exceeds:</value>
+  </data>
+  <data name="dontTryToGuessLibraryNameCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="autobackupPrefixTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="dontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel.ToolTip" xml:space="preserve">
+    <value>Only autobackups of current library will be deleted</value>
+  </data>
+  <data name="&gt;&gt;buttonOK.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;backupArtworksCheckBoxLabel.Name" xml:space="preserve">
+    <value>backupArtworksCheckBoxLabel</value>
+  </data>
+  <data name="autodeleteOldLabel.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="autobackupPeriodLabel.Text" xml:space="preserve">
+    <value>mins.</value>
+  </data>
+  <data name="&gt;&gt;backupArtworksCheckBox.Name" xml:space="preserve">
+    <value>backupArtworksCheckBox</value>
+  </data>
+  <data name="&gt;&gt;dontTryToGuessLibraryNameCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="backupArtworksCheckBox.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="autobackupCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 15</value>
+  </data>
+  <data name="autobackupCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="&gt;&gt;autobackupCheckBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;dontTryToGuessLibraryNameCheckBoxLabel.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;dontSkipAutobackupsIfPlayCountsChangedLabel.Name" xml:space="preserve">
+    <value>dontSkipAutobackupsIfPlayCountsChangedLabel</value>
+  </data>
+  <data name="&gt;&gt;dontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="autodeleteManyCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 19</value>
+  </data>
+  <data name="numberOfDaysNumericUpDown.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 23</value>
+  </data>
+  <data name="buttonClose.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 23</value>
+  </data>
+  <data name="numberOfDaysNumericUpDown.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="autodeleteOldLabel.Text" xml:space="preserve">
+    <value>days.</value>
+  </data>
+  <data name="autodeleteManyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 96</value>
+  </data>
+  <data name="autodeleteOldCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>223, 15</value>
+  </data>
+  <data name="&gt;&gt;autodeleteOldCheckBox.Name" xml:space="preserve">
+    <value>autodeleteOldCheckBox</value>
+  </data>
+  <data name="autodeleteManyCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="backupArtworksCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="&gt;&gt;buttonClose.Name" xml:space="preserve">
+    <value>buttonClose</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;backupArtworksCheckBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="buttonOK.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="&gt;&gt;autobackupNumericUpDown.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="autodeleteOldCheckBox.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="&gt;&gt;autobackupNumericUpDown.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dontSkipAutobackupsIfPlayCountsChangedLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="autodeleteOldCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 69</value>
+  </data>
+  <data name="&gt;&gt;autobackupFolderLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="buttonOK.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="autobackupPrefixTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="dontSkipAutobackupsIfPlayCountsChangedLabel.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="dontSkipAutobackupsIfPlayCountsChangedLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="backupArtworksCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;autodeleteManyCheckBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;buttonOK.Name" xml:space="preserve">
+    <value>buttonOK</value>
+  </data>
+  <data name="autodeleteOldCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;autobackupFolderTextBox.ZOrder" xml:space="preserve">
+    <value>23</value>
+  </data>
+  <data name="&gt;&gt;backupArtworksCheckBox.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="numberOfDaysNumericUpDown.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="backupArtworksCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;autodeleteManyCheckBoxLabel.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;autodeleteOldCheckBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="numberOfFilesNumericUpDown.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;dontSkipAutobackupsIfPlayCountsChangedLabel.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="autodeleteManyCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="dontTryToGuessLibraryNameCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="autobackupCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="autobackupPrefixLabel.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="autodeleteOldCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="buttonClose.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="autobackupFolderTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>448, 23</value>
+  </data>
+  <data name="backupArtworksCheckBox.ToolTip" xml:space="preserve">
+    <value>WARNING! Both manual &amp; automatic backups depend on this option.</value>
+  </data>
+  <data name="&gt;&gt;buttonClose.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="autodeleteManyCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>38, 96</value>
+  </data>
+  <data name="buttonOK.Text" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="autodeleteOldCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="autobackupPeriodLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>272, 43</value>
+  </data>
+  <data name="buttonClose.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="numberOfFilesNumericUpDown.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="&gt;&gt;autobackupCheckBox.Name" xml:space="preserve">
+    <value>autobackupCheckBox</value>
+  </data>
+  <data name="browseButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 23</value>
+  </data>
+  <data name="autobackupCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 42</value>
+  </data>
+  <data name="autobackupNumericUpDown.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="autobackupCheckBox.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>(Auto)backup Settings</value>
+  </data>
+  <data name="dontSkipAutobackupsIfPlayCountsChangedCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;numberOfFilesNumericUpDown.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;browseButton.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;numberOfDaysNumericUpDown.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel.Name" xml:space="preserve">
+    <value>dontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel</value>
+  </data>
+  <data name="&gt;&gt;autobackupFolderLabel.Name" xml:space="preserve">
+    <value>autobackupFolderLabel</value>
+  </data>
+  <data name="dontSkipAutobackupsIfPlayCountsChangedCheckBox.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="&gt;&gt;numberOfDaysNumericUpDown.Name" xml:space="preserve">
+    <value>numberOfDaysNumericUpDown</value>
+  </data>
+  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 150</value>
+  </data>
+  <data name="browseButton.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="buttonClose.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="autobackupPrefixLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>190, 15</value>
+  </data>
+  <data name="autobackupCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;autobackupNumericUpDown.Name" xml:space="preserve">
+    <value>autobackupNumericUpDown</value>
+  </data>
+  <data name="backupArtworksCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 15</value>
+  </data>
+  <data name="&gt;&gt;autobackupCheckBoxLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="browseButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="&gt;&gt;autobackupCheckBoxLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;autodeleteOldLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dontSkipAutobackupsIfPlayCountsChangedLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="&gt;&gt;autobackupCheckBox.ZOrder" xml:space="preserve">
+    <value>21</value>
+  </data>
+  <data name="&gt;&gt;autobackupCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="groupBox1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="groupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="buttonClose.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="&gt;&gt;autobackupFolderTextBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;dontSkipAutobackupsIfPlayCountsChangedCheckBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;autodeleteOldCheckBoxLabel.Name" xml:space="preserve">
+    <value>autodeleteOldCheckBoxLabel</value>
+  </data>
+  <data name="&gt;&gt;autobackupPrefixTextBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>702, 2</value>
+  </data>
+  <data name="&gt;&gt;numberOfDaysNumericUpDown.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;numberOfFilesNumericUpDown.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="autodeleteOldLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="&gt;&gt;autobackupPeriodLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="dontTryToGuessLibraryNameCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="autobackupPeriodLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="autodeleteManyCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>394, 15</value>
+  </data>
+  <data name="&gt;&gt;browseButton.Name" xml:space="preserve">
+    <value>browseButton</value>
+  </data>
+  <data name="&gt;&gt;autobackupFolderTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="autodeleteOldCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;buttonClose.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="autodeleteOldCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>38, 69</value>
+  </data>
+  <data name="dontSkipAutobackupsIfPlayCountsChangedLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>38, 122</value>
+  </data>
+  <data name="dontSkipAutobackupsIfPlayCountsChangedLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;autobackupNumericUpDown.ZOrder" xml:space="preserve">
+    <value>19</value>
+  </data>
+  <data name="dontSkipAutobackupsIfPlayCountsChangedCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="backupArtworksCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;autodeleteManyCheckBoxLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -733,225 +712,318 @@ after last manual or auto backup.
   <data name="&gt;&gt;autodeleteManyCheckBoxLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;autodeleteManyCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
   </data>
-  <data name="DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="autobackupPrefixLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>346, 43</value>
   </data>
-  <data name="DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>39, 143</value>
-  </data>
-  <data name="DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 17</value>
-  </data>
-  <data name="DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>25</value>
-  </data>
-  <data name="DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value>Only autobackups of current library will be deleted</value>
-  </data>
-  <data name="&gt;&gt;DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel.Name" xml:space="preserve">
-    <value>DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel</value>
-  </data>
-  <data name="&gt;&gt;DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;backupArtworksCheckBoxLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;autobackupPeriodLabel.Name" xml:space="preserve">
+    <value>autobackupPeriodLabel</value>
   </data>
-  <data name="&gt;&gt;DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="&gt;&gt;autodeleteManyCheckBox.ZOrder" xml:space="preserve">
+    <value>11</value>
   </data>
-  <data name="dontTryToGuessLibraryNameCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+  <data name="dontTryToGuessLibraryNameCheckBox.ToolTip" xml:space="preserve">
+    <value>WARNING! Both manual &amp; automatic backups depend on this option.
+Sometimes guessing current library name may work incorrectly.</value>
+  </data>
+  <data name="autodeleteOldCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 19</value>
+  </data>
+  <data name="&gt;&gt;toolTip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="autobackupPrefixLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="dontTryToGuessLibraryNameCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>45, 185</value>
+  <data name="&gt;&gt;buttonOK.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="dontTryToGuessLibraryNameCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+  <data name="dontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>32, 119</value>
   </data>
-  <data name="dontTryToGuessLibraryNameCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>234, 17</value>
+  <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
+    <value>505, 187</value>
+  </data>
+  <data name="autobackupPrefixTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="autobackupPeriodLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 15</value>
+  </data>
+  <data name="&gt;&gt;autobackupPeriodLabel.ZOrder" xml:space="preserve">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;numberOfFilesNumericUpDown.Name" xml:space="preserve">
+    <value>numberOfFilesNumericUpDown</value>
+  </data>
+  <data name="autodeleteManyCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;dontSkipAutobackupsIfPlayCountsChangedCheckBox.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;buttonOK.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="autodeleteOldCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;toolTip1.Name" xml:space="preserve">
+    <value>toolTip1</value>
+  </data>
+  <data name="autobackupPeriodLabel.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;dontTryToGuessLibraryNameCheckBoxLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="autobackupFolderLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 15</value>
+  </data>
+  <data name="autodeleteOldLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="dontTryToGuessLibraryNameCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 19</value>
+  </data>
+  <data name="buttonOK.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 23</value>
+  </data>
+  <data name="autobackupCheckBoxLabel.ToolTip" xml:space="preserve">
+    <value>Autobackups will be skipped if content of current library is not changed and no tags are changed
+after last manual or auto backup.
+</value>
+  </data>
+  <data name="&gt;&gt;dontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="numberOfFilesNumericUpDown.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 23</value>
+  </data>
+  <data name="autobackupFolderTextBox.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;browseButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="autobackupFolderLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 12</value>
+  </data>
+  <data name="dontSkipAutobackupsIfPlayCountsChangedCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="autobackupPrefixTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>544, 40</value>
   </data>
   <data name="dontTryToGuessLibraryNameCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>27</value>
+    <value>18</value>
   </data>
-  <data name="dontTryToGuessLibraryNameCheckBoxLabel.Text" xml:space="preserve">
-    <value>Don't try to guess current library name</value>
+  <data name="dontSkipAutobackupsIfPlayCountsChangedLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>351, 15</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>7, 15</value>
+  </data>
+  <data name="autobackupPeriodLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="autobackupFolderLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;autodeleteOldCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="autodeleteManyCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="&gt;&gt;autobackupPrefixLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="autobackupPrefixLabel.Text" xml:space="preserve">
+    <value>    Prefix for autobackup filenames:</value>
+  </data>
+  <data name="&gt;&gt;numberOfDaysNumericUpDown.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;autobackupFolderTextBox.Name" xml:space="preserve">
+    <value>autobackupFolderTextBox</value>
+  </data>
+  <data name="&gt;&gt;autobackupFolderLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="dontTryToGuessLibraryNameCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="autobackupPrefixLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="dontTryToGuessLibraryNameCheckBoxLabel.ToolTip" xml:space="preserve">
     <value>WARNING! Both manual &amp; automatic backups depend on this option.
 Sometimes guessing current library name may work incorrectly.
 </value>
   </data>
-  <data name="&gt;&gt;dontTryToGuessLibraryNameCheckBoxLabel.Name" xml:space="preserve">
-    <value>dontTryToGuessLibraryNameCheckBoxLabel</value>
-  </data>
-  <data name="&gt;&gt;dontTryToGuessLibraryNameCheckBoxLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dontTryToGuessLibraryNameCheckBoxLabel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;dontTryToGuessLibraryNameCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="backupArtworksCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="backupArtworksCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>45, 215</value>
-  </data>
-  <data name="backupArtworksCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="backupArtworksCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>263, 17</value>
-  </data>
-  <data name="backupArtworksCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>28</value>
-  </data>
-  <data name="backupArtworksCheckBoxLabel.Text" xml:space="preserve">
-    <value>Backup album artworks (not recommended)</value>
-  </data>
-  <data name="backupArtworksCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value>WARNING! Both manual &amp; automatic backups depend on this option.</value>
-  </data>
-  <data name="&gt;&gt;backupArtworksCheckBoxLabel.Name" xml:space="preserve">
-    <value>backupArtworksCheckBoxLabel</value>
-  </data>
-  <data name="&gt;&gt;backupArtworksCheckBoxLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;backupArtworksCheckBoxLabel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;backupArtworksCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="DontSkipAutobackupsIfPlayCountsChangedCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="DontSkipAutobackupsIfPlayCountsChangedCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="buttonOK.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="DontSkipAutobackupsIfPlayCountsChangedCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 142</value>
+  <data name="autobackupFolderLabel.Text" xml:space="preserve">
+    <value>Autobackup folder:</value>
   </data>
-  <data name="DontSkipAutobackupsIfPlayCountsChangedCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="autobackupFolderLabel.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="DontSkipAutobackupsIfPlayCountsChangedCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 21</value>
+  <data name="autobackupCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>38, 42</value>
   </data>
-  <data name="DontSkipAutobackupsIfPlayCountsChangedCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
-  </data>
-  <data name="DontSkipAutobackupsIfPlayCountsChangedCheckBox.Text" xml:space="preserve">
-    <value> </value>
-  </data>
-  <data name="&gt;&gt;DontSkipAutobackupsIfPlayCountsChangedCheckBox.Name" xml:space="preserve">
-    <value>DontSkipAutobackupsIfPlayCountsChangedCheckBox</value>
-  </data>
-  <data name="&gt;&gt;DontSkipAutobackupsIfPlayCountsChangedCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;DontSkipAutobackupsIfPlayCountsChangedCheckBox.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;DontSkipAutobackupsIfPlayCountsChangedCheckBox.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabelLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabelLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>45, 143</value>
-  </data>
-  <data name="DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabelLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabelLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>386, 17</value>
-  </data>
-  <data name="DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabelLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
-  </data>
-  <data name="DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabelLabel.Text" xml:space="preserve">
-    <value>Don't skip autobackup, even if only play/skip counts are changed</value>
-  </data>
-  <data name="&gt;&gt;DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabelLabel.Name" xml:space="preserve">
-    <value>DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabelLabel</value>
-  </data>
-  <data name="&gt;&gt;DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabelLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;autodeleteOldCheckBoxLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabelLabel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;DontSkipAutobackupsIfPlayCountsChangedCheckBoxLabelLabel.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 174</value>
-  </data>
-  <data name="groupBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="groupBox1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>785, 2</value>
-  </data>
-  <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>7, 17</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>816, 249</value>
-  </data>
-  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9.75pt</value>
-  </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>(Auto)backup Settings</value>
-  </data>
-  <data name="&gt;&gt;toolTip1.Name" xml:space="preserve">
-    <value>toolTip1</value>
-  </data>
-  <data name="&gt;&gt;toolTip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>AutoBackupSettings</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;autodeleteOldCheckBoxLabel.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="dontTryToGuessLibraryNameCheckBoxLabel.Text" xml:space="preserve">
+    <value>Don't try to guess current library name</value>
+  </data>
+  <data name="&gt;&gt;dontTryToGuessLibraryNameCheckBoxLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="dontTryToGuessLibraryNameCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>38, 161</value>
+  </data>
+  <data name="dontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="dontSkipAutobackupsIfPlayCountsChangedLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;autodeleteManyCheckBoxLabel.Name" xml:space="preserve">
+    <value>autodeleteManyCheckBoxLabel</value>
+  </data>
+  <data name="&gt;&gt;autobackupCheckBoxLabel.ZOrder" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="autobackupPrefixTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>169, 23</value>
+  </data>
+  <data name="autobackupCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="autodeleteOldCheckBox.ToolTip" xml:space="preserve">
+    <value>Only autobackups of current library will be deleted</value>
+  </data>
+  <data name="autodeleteOldLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>399, 69</value>
+  </data>
+  <data name="browseButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>613, 8</value>
+  </data>
+  <data name="numberOfFilesNumericUpDown.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="autobackupNumericUpDown.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 23</value>
+  </data>
+  <data name="backupArtworksCheckBoxLabel.ToolTip" xml:space="preserve">
+    <value>WARNING! Both manual &amp; automatic backups depend on this option.</value>
+  </data>
+  <data name="&gt;&gt;autobackupPrefixLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="autobackupFolderTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>157, 8</value>
+  </data>
+  <data name="autodeleteOldCheckBoxLabel.ToolTip" xml:space="preserve">
+    <value>Only autobackups of current library will be deleted</value>
+  </data>
+  <data name="numberOfDaysNumericUpDown.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="buttonOK.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="&gt;&gt;browseButton.ZOrder" xml:space="preserve">
+    <value>22</value>
+  </data>
+  <data name="backupArtworksCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="&gt;&gt;dontTryToGuessLibraryNameCheckBoxLabel.Name" xml:space="preserve">
+    <value>dontTryToGuessLibraryNameCheckBoxLabel</value>
+  </data>
+  <data name="autodeleteManyCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="backupArtworksCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 19</value>
+  </data>
+  <data name="dontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="&gt;&gt;numberOfFilesNumericUpDown.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;dontTryToGuessLibraryNameCheckBox.Name" xml:space="preserve">
+    <value>dontTryToGuessLibraryNameCheckBox</value>
+  </data>
+  <data name="autobackupFolderTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;buttonClose.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="groupBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="autobackupCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 19</value>
+  </data>
+  <data name="&gt;&gt;autobackupCheckBoxLabel.Name" xml:space="preserve">
+    <value>autobackupCheckBoxLabel</value>
+  </data>
+  <data name="dontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 15</value>
+  </data>
+  <data name="buttonOK.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="dontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;dontTryToGuessLibraryNameCheckBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="autobackupNumericUpDown.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;dontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel.ZOrder" xml:space="preserve">
+    <value>25</value>
+  </data>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;autobackupPrefixLabel.Name" xml:space="preserve">
+    <value>autobackupPrefixLabel</value>
+  </data>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>ru</value>
+  </metadata>
 </root>
