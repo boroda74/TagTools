@@ -81,8 +81,8 @@ namespace MusicBeePlugin
 
                 byte greyLevel;
                 bool opaque = false;
-                //int OpacityThreshold = this.trackBar1.Value;
-                bool invertedMask = true;//this.checkBoxInvertMask.Checked;
+                //int OpacityThreshold = trackBar1.Value;
+                bool invertedMask = true;//checkBoxInvertMask.Checked;
                 for (int i = 0; i + 2 < preparedMaskRGBData.Length; i += 4)
                 {
                     //convert to gray scale R:0.30 G=0.59 B 0.11
@@ -108,7 +108,7 @@ namespace MusicBeePlugin
                 }
                 System.Runtime.InteropServices.Marshal.Copy(preparedMaskRGBData, 0, bmpData.Scan0, preparedMaskRGBData.Length);
                 preparedMask.UnlockBits(bmpData);
-                //this.spriteMask.Image = ThemedBitmapAddRef(this, preparedMask);
+                //spriteMask.Image = ThemedBitmapAddRef(this, preparedMask);
                 // if the loaded image is available, we have everything to compute the masked image
                 if (_image != null)
                 {
@@ -274,12 +274,18 @@ namespace MusicBeePlugin
 
         public static float GetBrightnessDifference(Color sampleColor1, Color sampleColor2)
         {
-            return (sampleColor1.R - sampleColor2.R + sampleColor1.G - sampleColor2.G + sampleColor1.B - sampleColor2.B) / 3.0f / 255f;
+            return (sampleColor1.R - sampleColor2.R + sampleColor1.G - sampleColor2.G + sampleColor1.B - sampleColor2.B) / 3.0f / 256f;
         }
 
         public static float GetAverageBrightness(Color sampleColor1)
         {
-            return (sampleColor1.R + sampleColor1.G + sampleColor1.B) / 3.0f / 255f;
+            return (sampleColor1.R + sampleColor1.G + sampleColor1.B) / 3.0f / 256f;
+        }
+
+        public static Color InvertAverageBrightness(Color sampleColor1)
+        {
+            float invAvgBr = (1 - ((GetAverageBrightness(sampleColor1) - 0.5f) * 2)) / 2.02f;
+            return Color.FromArgb(sampleColor1.A, (int)(sampleColor1.R * invAvgBr), (int)(sampleColor1.G * invAvgBr),  (int)(sampleColor1.B * invAvgBr));
         }
 
         public static Color GetBitmapAverageColor(Bitmap img)

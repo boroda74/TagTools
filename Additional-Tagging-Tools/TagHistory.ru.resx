@@ -119,7 +119,7 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>934, 281</value>
+    <value>968, 5</value>
   </data>
   <data name="buttonOK.Size" type="System.Drawing.Size, System.Drawing">
     <value>140, 23</value>
@@ -127,11 +127,8 @@
   <data name="buttonOK.Text" xml:space="preserve">
     <value>Применить</value>
   </data>
-  <data name="buttonOK.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1081, 281</value>
+    <value>1116, 5</value>
   </data>
   <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>140, 23</value>
@@ -139,13 +136,10 @@
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Закрыть</value>
   </data>
-  <data name="buttonCancel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Library.HeaderText" xml:space="preserve">
     <value>Библиотека</value>
   </data>
-  <data name="dataGridViewCellStyle2.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="dataGridViewCellStyle4.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         Qk32AgAAAAAAADYAAAAoAAAADgAAABAAAAABABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEgoTGw8bGw8bGw8bGw8bGw8bGw8bG
@@ -163,10 +157,7 @@
 </value>
   </data>
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1213, 205</value>
-  </data>
-  <data name="previewTable.ToolTip" xml:space="preserve">
-    <value />
+    <value>1248, 218</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>136, 15</value>
@@ -174,26 +165,17 @@
   <data name="label3.Text" xml:space="preserve">
     <value>Искать архивы в папке:</value>
   </data>
-  <data name="label3.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="searchFolderTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>550, 23</value>
-  </data>
-  <data name="searchFolderTextBox.ToolTip" xml:space="preserve">
-    <value />
+    <value>573, 23</value>
   </data>
   <data name="browseButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>589, 35</value>
+    <value>612, 32</value>
   </data>
   <data name="browseButton.Text" xml:space="preserve">
     <value>Открыть...</value>
   </data>
-  <data name="browseButton.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="forLastLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>683, 39</value>
+    <value>709, 36</value>
   </data>
   <data name="forLastLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>101, 15</value>
@@ -201,17 +183,11 @@
   <data name="forLastLabel.Text" xml:space="preserve">
     <value>среди последних</value>
   </data>
-  <data name="forLastLabel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="numberOfBackupsNumericUpDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>796, 35</value>
-  </data>
-  <data name="numberOfBackupsNumericUpDown.ToolTip" xml:space="preserve">
-    <value />
+    <value>818, 32</value>
   </data>
   <data name="backupsLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>896, 39</value>
+    <value>918, 36</value>
   </data>
   <data name="backupsLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>52, 15</value>
@@ -219,11 +195,8 @@
   <data name="backupsLabel.Text" xml:space="preserve">
     <value>архивов</value>
   </data>
-  <data name="backupsLabel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="rereadButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>958, 35</value>
+    <value>978, 32</value>
   </data>
   <data name="rereadButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>140, 23</value>
@@ -231,8 +204,8 @@
   <data name="rereadButton.Text" xml:space="preserve">
     <value>Повторить поиск</value>
   </data>
-  <data name="rereadButton.ToolTip" xml:space="preserve">
-    <value />
+  <data name="restoreSelectedButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>140, 23</value>
   </data>
   <data name="restoreSelectedButton.Text" xml:space="preserve">
     <value>Восстановить</value>
@@ -240,14 +213,29 @@
   <data name="restoreSelectedButton.ToolTip" xml:space="preserve">
     <value>Скопировать выделенные ячейки архивов в колонку библиотеки</value>
   </data>
+  <data name="selectTagsButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>326, 5</value>
+  </data>
+  <data name="selectTagsButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>140, 23</value>
+  </data>
   <data name="selectTagsButton.Text" xml:space="preserve">
     <value>Выбрать теги...</value>
   </data>
   <data name="selectTagsButton.ToolTip" xml:space="preserve">
     <value>Выбрать отображаемые теги</value>
   </data>
-  <data name="rememberColumnasDefaulltWidthCheckBox.ToolTip" xml:space="preserve">
+  <data name="rememberColumnAsDefaultWidthCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>476, 8</value>
+  </data>
+  <data name="rememberColumnAsDefaultWidthCheckBox.ToolTip" xml:space="preserve">
     <value>Включите этот флажок и измените ширину любой колонки, чтобы установить эту новую ширину в качестве новой ширины по умолчанию</value>
+  </data>
+  <data name="undoButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>156, 5</value>
+  </data>
+  <data name="undoButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>140, 23</value>
   </data>
   <data name="undoButton.Text" xml:space="preserve">
     <value>Отменить все</value>
@@ -255,16 +243,22 @@
   <data name="undoButton.ToolTip" xml:space="preserve">
     <value>Восстановить колонку библиотеки</value>
   </data>
-  <data name="AutoSelectTagsCheckBox.ToolTip" xml:space="preserve">
+  <data name="autoSelectTagsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>303, 8</value>
+  </data>
+  <data name="autoSelectTagsCheckBox.ToolTip" xml:space="preserve">
     <value>Автоматически выбирать показываемые теги и скрывать архивы без отличий в тегах от текущих тегов</value>
   </data>
-  <data name="rememberColumnasDefaulltWidthCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>474, 15</value>
+  <data name="rememberColumnAsDefaultWidthCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>498, 9</value>
   </data>
-  <data name="rememberColumnasDefaulltWidthCheckBoxLabel.Text" xml:space="preserve">
-    <value>Установить измененную ширину колонки в качестве новой ширины по умолчанию</value>
+  <data name="rememberColumnAsDefaultWidthCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>413, 15</value>
   </data>
-  <data name="rememberColumnasDefaulltWidthCheckBoxLabel.ToolTip" xml:space="preserve">
+  <data name="rememberColumnAsDefaultWidthCheckBoxLabel.Text" xml:space="preserve">
+    <value>Устанавливать измененную ширину колонки как ширину по умолчанию</value>
+  </data>
+  <data name="rememberColumnAsDefaultWidthCheckBoxLabel.ToolTip" xml:space="preserve">
     <value>Включите этот флажок и измените ширину любой колонки, чтобы установить эту новую ширину в качестве новой ширины по умолчанию</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
@@ -273,40 +267,28 @@
   <data name="label4.Text" xml:space="preserve">
     <value>Теги для трека:</value>
   </data>
-  <data name="label4.ToolTip" xml:space="preserve">
-    <value />
+  <data name="trackListComboBox.Items" xml:space="preserve">
+    <value>(Выбранные треки)</value>
   </data>
   <data name="trackListComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1069, 23</value>
-  </data>
-  <data name="trackListComboBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="placeholderLabel2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="placeholderLabel1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="optionsPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>121, 0</value>
+    <value>1087, 23</value>
   </data>
   <data name="optionsPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1106, 65</value>
+    <value>1126, 60</value>
   </data>
-  <data name="optionsPanel.ToolTip" xml:space="preserve">
-    <value />
+  <data name="controlsPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1264, 33</value>
+  </data>
+  <data name="placeholderLabel3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>900, 9</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1229, 311</value>
+    <value>1264, 311</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>1245, 350</value>
+    <value>1280, 350</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>История тегов</value>
-  </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
   </data>
 </root>

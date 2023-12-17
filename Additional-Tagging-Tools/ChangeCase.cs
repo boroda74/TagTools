@@ -10,11 +10,11 @@ namespace MusicBeePlugin
     {
         public enum ChangeCaseOptions
         {
-            sentenceCase = -1,
-            lowerCase = 0,
-            upperCase = 1,
-            titleCase = 2,
-            toggleCase = 3,
+            SentenceCase = -1,
+            LowerCase = 0,
+            UpperCase = 1,
+            TitleCase = 2,
+            ToggleCase = 3,
         }
 
         private delegate void AddRowToTable(string[] row);
@@ -66,7 +66,14 @@ namespace MusicBeePlugin
             wordSplittersCheckBox_CheckedChanged(null, null);
             casingRuleRadioButton_CheckedChanged(null, null);
 
+
+            previewTable.EnableHeadersVisualStyles = !UseMusicBeeFontSkinColors;
+
+            previewTable.BackgroundColor = UnchangedCellStyle.BackColor;
+            previewTable.DefaultCellStyle = UnchangedCellStyle;
+
             DatagridViewCheckBoxHeaderCell cbHeader = new DatagridViewCheckBoxHeaderCell();
+            cbHeader.Style = HeaderCellStyle;
             cbHeader.setState(true);
             cbHeader.OnCheckBoxClicked += new CheckBoxClickedHandler(cbHeader_OnCheckBoxClicked);
 
@@ -83,6 +90,10 @@ namespace MusicBeePlugin
 
             previewTable.Columns.Insert(0, colCB);
 
+            previewTable.Columns[2].HeaderCell.Style = HeaderCellStyle;
+            previewTable.Columns[4].HeaderCell.Style = HeaderCellStyle;
+            previewTable.Columns[6].HeaderCell.Style = HeaderCellStyle;
+
             previewTable.Columns[2].HeaderCell.Style.WrapMode = DataGridViewTriState.True;
             previewTable.Columns[4].HeaderCell.Style.WrapMode = DataGridViewTriState.True;
             previewTable.Columns[6].HeaderCell.Style.WrapMode = DataGridViewTriState.True;
@@ -96,7 +107,7 @@ namespace MusicBeePlugin
             enableDisablePreviewOptionControls(true, true);
             enableQueryingOrUpdatingButtons();
 
-            button_GotFocus(this.AcceptButton, null); //Let's mark active button
+            button_GotFocus(AcceptButton, null); //Let's mark active button
         }
 
         private void setChangeCaseOptionsRadioButtons(int pos)
@@ -148,17 +159,17 @@ namespace MusicBeePlugin
 
             switch (changeCaseOption)
             {
-                case ChangeCaseOptions.sentenceCase:
+                case ChangeCaseOptions.SentenceCase:
                     if (isTheFirstWord)
                     {
-                        newSubstring = ChangeSubstringCase(substring, ChangeCaseOptions.titleCase, isTheFirstWord);
+                        newSubstring = ChangeSubstringCase(substring, ChangeCaseOptions.TitleCase, isTheFirstWord);
                     }
                     else
                     {
-                        newSubstring = ChangeSubstringCase(substring, ChangeCaseOptions.lowerCase, isTheFirstWord);
+                        newSubstring = ChangeSubstringCase(substring, ChangeCaseOptions.LowerCase, isTheFirstWord);
                     }
                     break;
-                case ChangeCaseOptions.titleCase:
+                case ChangeCaseOptions.TitleCase:
                     bool isTheFirstChar = true;
 
                     foreach (char currentChar in substring)
@@ -172,13 +183,13 @@ namespace MusicBeePlugin
                             newSubstring = newSubstring + (string.Empty + currentChar).ToLower();
                     }
                     break;
-                case ChangeCaseOptions.lowerCase:
+                case ChangeCaseOptions.LowerCase:
                     newSubstring = substring.ToLower();
                     break;
-                case ChangeCaseOptions.upperCase:
+                case ChangeCaseOptions.UpperCase:
                     newSubstring = substring.ToUpper();
                     break;
-                case ChangeCaseOptions.toggleCase:
+                case ChangeCaseOptions.ToggleCase:
                     foreach (char currentChar in substring)
                     {
                         if ((string.Empty + currentChar).ToUpper() == (string.Empty + currentChar)) //Char is uppercased
@@ -253,7 +264,7 @@ namespace MusicBeePlugin
                     {
                         if (alwaysCapitalize1stWord && isTheFirstWord) //Always Capitalize 1st word in tag if this option is checked
                         {
-                            newString = newString + ChangeSubstringCase(currentWord, ChangeCaseOptions.titleCase, true) + currentChar;
+                            newString = newString + ChangeSubstringCase(currentWord, ChangeCaseOptions.TitleCase, true) + currentChar;
                         }
                         else if (wasCharException || (IsItemContainedInList(currentWord, exceptionWords) && !useWhiteList) || (!IsItemContainedInList(currentWord, exceptionWords) && useWhiteList)) //Ignore changing case
                         {
@@ -312,7 +323,7 @@ namespace MusicBeePlugin
 
             //String is ended, so last currentWord IS a word
             if (alwaysCapitalizeLastWord) //Always Capitalize last word if this option is checked
-                newString = newString + ChangeSubstringCase(currentWord, ChangeCaseOptions.titleCase, true);
+                newString = newString + ChangeSubstringCase(currentWord, ChangeCaseOptions.TitleCase, true);
             else if (wasCharException || (IsItemContainedInList(currentWord, exceptionWords) && !useWhiteList) || (!IsItemContainedInList(currentWord, exceptionWords) && useWhiteList)) //Ignore changing case
                 newString = newString + currentWord;
             else //Change case
@@ -331,7 +342,7 @@ namespace MusicBeePlugin
             {
                 if ((prevChar == '.' && currentChar == ' ') || currentChar == MultipleItemsSplitterId) //Beginning of new sentence
                 {
-                    newString = newString + ChangeWordsCase(currentSentence, ChangeCaseOptions.sentenceCase, exceptionWords, useWhiteList, exceptionChars, wordSplitters);
+                    newString = newString + ChangeWordsCase(currentSentence, ChangeCaseOptions.SentenceCase, exceptionWords, useWhiteList, exceptionChars, wordSplitters);
                     currentSentence = string.Empty + currentChar;
                 }
                 else //Not the beginning of new sentence
@@ -343,7 +354,7 @@ namespace MusicBeePlugin
             }
 
             //String is ended, so last currentSentence IS a sentence
-            newString = newString + ChangeWordsCase(currentSentence, ChangeCaseOptions.sentenceCase, exceptionWords, useWhiteList, exceptionChars, wordSplitters);
+            newString = newString + ChangeWordsCase(currentSentence, ChangeCaseOptions.SentenceCase, exceptionWords, useWhiteList, exceptionChars, wordSplitters);
 
             return newString;
         }
@@ -355,13 +366,13 @@ namespace MusicBeePlugin
             else //Splitting to words
             {
                 if (changeCaseOptions == 2)
-                    return ChangeWordsCase(source, ChangeCaseOptions.lowerCase, exceptionWords, useWhiteList, exceptionChars, wordSplitters, alwaysCapitalize1stWord, alwaysCapitalizeLastWord);
+                    return ChangeWordsCase(source, ChangeCaseOptions.LowerCase, exceptionWords, useWhiteList, exceptionChars, wordSplitters, alwaysCapitalize1stWord, alwaysCapitalizeLastWord);
                 else if (changeCaseOptions == 3)
-                    return ChangeWordsCase(source, ChangeCaseOptions.upperCase, exceptionWords, useWhiteList, exceptionChars, wordSplitters, alwaysCapitalize1stWord, alwaysCapitalizeLastWord);
+                    return ChangeWordsCase(source, ChangeCaseOptions.UpperCase, exceptionWords, useWhiteList, exceptionChars, wordSplitters, alwaysCapitalize1stWord, alwaysCapitalizeLastWord);
                 else if (changeCaseOptions == 4)
-                    return ChangeWordsCase(source, ChangeCaseOptions.titleCase, exceptionWords, useWhiteList, exceptionChars, wordSplitters, alwaysCapitalize1stWord, alwaysCapitalizeLastWord);
+                    return ChangeWordsCase(source, ChangeCaseOptions.TitleCase, exceptionWords, useWhiteList, exceptionChars, wordSplitters, alwaysCapitalize1stWord, alwaysCapitalizeLastWord);
                 else //if (changeCaseOptions == 5)
-                    return ChangeWordsCase(source, ChangeCaseOptions.toggleCase, exceptionWords, useWhiteList, exceptionChars, wordSplitters, alwaysCapitalize1stWord, alwaysCapitalizeLastWord);
+                    return ChangeWordsCase(source, ChangeCaseOptions.ToggleCase, exceptionWords, useWhiteList, exceptionChars, wordSplitters, alwaysCapitalize1stWord, alwaysCapitalizeLastWord);
             }
         }
 
@@ -927,15 +938,15 @@ namespace MusicBeePlugin
 
             if (value.Item1 != 0)
             {
-                previewTable.Columns[2].Width = (int)(value.Item1 * dpiScaleFactor);
-                previewTable.Columns[4].Width = (int)(value.Item2 * dpiScaleFactor);
-                previewTable.Columns[6].Width = (int)(value.Item3 * dpiScaleFactor);
+                previewTable.Columns[2].Width = (int)(value.Item1 * hDpiFontScaling);
+                previewTable.Columns[4].Width = (int)(value.Item2 * hDpiFontScaling);
+                previewTable.Columns[6].Width = (int)(value.Item3 * hDpiFontScaling);
             }
             else
             {
-                previewTable.Columns[2].Width = (int)(previewTable.Columns[2].Width * dpiScaleFactor);
-                previewTable.Columns[4].Width = (int)(previewTable.Columns[4].Width * dpiScaleFactor);
-                previewTable.Columns[6].Width = (int)(previewTable.Columns[6].Width * dpiScaleFactor);
+                previewTable.Columns[2].Width = (int)(previewTable.Columns[2].Width * hDpiFontScaling);
+                previewTable.Columns[4].Width = (int)(previewTable.Columns[4].Width * hDpiFontScaling);
+                previewTable.Columns[6].Width = (int)(previewTable.Columns[6].Width * hDpiFontScaling);
             }
 
         }

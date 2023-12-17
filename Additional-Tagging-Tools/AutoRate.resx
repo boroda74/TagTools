@@ -139,13 +139,16 @@
     <value>13, 28</value>
   </data>
   <data name="perCent45UpDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 58</value>
+    <value>13, 55</value>
   </data>
   <data name="&gt;&gt;checkBox2.Parent" xml:space="preserve">
     <value>groupBox2</value>
   </data>
   <data name="threshold05Box.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
+  </data>
+  <data name="perCentLabel3.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
   </data>
   <data name="checkBox1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -157,7 +160,7 @@
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;checkBox35Label.ZOrder" xml:space="preserve">
-    <value>31</value>
+    <value>32</value>
   </data>
   <data name="autoRateAtStartUpCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -192,14 +195,14 @@
   <data name="checkBox2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>plays per day or more</value>
+  <data name="sinceAddedCheckBoxLabel.Error" xml:space="preserve">
+    <value />
   </data>
   <data name="perCent4UpDown.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-    <value>groupBox2</value>
+  <data name="labelTotalTracks.Text" xml:space="preserve">
+    <value>Number of ever played tracks in your library:  </value>
   </data>
   <data name="perCent25UpDown.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -207,17 +210,11 @@
   <data name="&gt;&gt;threshold25Box.Name" xml:space="preserve">
     <value>threshold25Box</value>
   </data>
-  <data name="checkBox15Label.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
   <data name="label8.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="&gt;&gt;sinceAddedCheckBox.Parent" xml:space="preserve">
     <value>$this</value>
-  </data>
-  <data name="label2.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="autoRateOnTrackPropertiesCheckBox.Text" xml:space="preserve">
     <value> </value>
@@ -247,13 +244,16 @@
     <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="perCent05UpDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 299</value>
+    <value>13, 271</value>
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
+  <data name="checkBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 19</value>
+  </data>
   <data name="threshold1Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>200, 268</value>
+    <value>200, 244</value>
   </data>
   <data name="label30.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -262,7 +262,7 @@
     <value>autoRateAtStartUpCheckBoxLabel</value>
   </data>
   <data name="&gt;&gt;label19.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>13, 15</value>
@@ -279,11 +279,8 @@
   <data name="perCentLabel1.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="checkBox5Label.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="&gt;&gt;perCent05UpDown.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="label26.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -316,10 +313,13 @@
     <value>MiddleRight</value>
   </data>
   <data name="sinceAddedCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>37, 126</value>
+    <value>34, 123</value>
   </data>
   <data name="checkBox45.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;label25.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="maxPlaysPerDayBox.ToolTip" xml:space="preserve">
     <value />
@@ -342,8 +342,8 @@
   <data name="threshold5Box.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="autoRateAtStartUpCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+  <data name="checkBox25Label.Text" xml:space="preserve">
+    <value>Set two-to-three stars if:</value>
   </data>
   <data name="label21.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -352,7 +352,7 @@
     <value>MiddleRight</value>
   </data>
   <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
-    <value>22</value>
+    <value>18</value>
   </data>
   <data name="&gt;&gt;perCent3UpDown.Parent" xml:space="preserve">
     <value>groupBox1</value>
@@ -367,7 +367,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="&gt;&gt;label30.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="autoRateOnTrackPropertiesCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -375,8 +375,8 @@
   <data name="perCentLabel25.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
   </data>
-  <data name="avgPlaysPerDayBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="holdsAtStartUpCheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="perCentLabel05.ToolTip" xml:space="preserve">
     <value />
@@ -384,11 +384,8 @@
   <data name="calculateThresholdsAtStartUpCheckBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="threshold25Box.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="perCentLabel05.Location" type="System.Drawing.Point, System.Drawing">
-    <value>94, 301</value>
+  <data name="sinceAddedCheckBoxLabel.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="label10.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
@@ -406,16 +403,13 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;perCent2UpDown.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;label2.Name" xml:space="preserve">
-    <value>label2</value>
+    <value>11</value>
   </data>
   <data name="perCentLabel3.Error" xml:space="preserve">
     <value />
   </data>
   <data name="&gt;&gt;perCent5UpDown.ZOrder" xml:space="preserve">
-    <value>22</value>
+    <value>23</value>
   </data>
   <data name="checkBox2Label.Size" type="System.Drawing.Size, System.Drawing">
     <value>86, 15</value>
@@ -424,7 +418,10 @@
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="checkBox15.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 242</value>
+    <value>10, 220</value>
+  </data>
+  <data name="groupBox2Label.Error" xml:space="preserve">
+    <value />
   </data>
   <data name="checkBox45Label.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -444,8 +441,8 @@
   <data name="&gt;&gt;checkBox45.Parent" xml:space="preserve">
     <value>groupBox2</value>
   </data>
-  <data name="maxPlaysPerDayBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="perCentLabel1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
   </data>
   <data name="&gt;&gt;checkBox3.Name" xml:space="preserve">
     <value>checkBox3</value>
@@ -454,16 +451,16 @@
     <value>checkBox05</value>
   </data>
   <data name="&gt;&gt;buttonCalculate.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;notifyWhenAutoratingCompletedCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="label28.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="labelTotalTracks.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 9pt, style=Bold</value>
   </data>
-  <data name="&gt;&gt;label25.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;threshold5Box.ZOrder" xml:space="preserve">
+    <value>43</value>
   </data>
   <data name="buttonOK.Error" xml:space="preserve">
     <value />
@@ -496,7 +493,7 @@
     <value>groupBox1</value>
   </data>
   <data name="checkBox25.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 182</value>
+    <value>10, 166</value>
   </data>
   <data name="perCent2UpDown.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -504,11 +501,8 @@
   <data name="threshold35Box.Size" type="System.Drawing.Size, System.Drawing">
     <value>141, 23</value>
   </data>
-  <data name="threshold2Box.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
   <data name="playsPerDayTagList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 23</value>
+    <value>170, 23</value>
   </data>
   <data name="&gt;&gt;holdsAtStartUpCheckBoxLabel.Parent" xml:space="preserve">
     <value>$this</value>
@@ -520,7 +514,7 @@
     <value />
   </data>
   <data name="threshold15Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>200, 238</value>
+    <value>200, 217</value>
   </data>
   <data name="groupBox1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -549,14 +543,20 @@
   <data name="&gt;&gt;label22.Name" xml:space="preserve">
     <value>label22</value>
   </data>
+  <data name="groupBox2Label.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="&gt;&gt;threshold05Box.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="checkBox3.Text" xml:space="preserve">
     <value> </value>
   </data>
   <data name="&gt;&gt;storePlaysPerDayCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>21</value>
+  </data>
+  <data name="&gt;&gt;checkBox05Label.Parent" xml:space="preserve">
+    <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;threshold4Box.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -564,8 +564,8 @@
   <data name="perCentLabel25.Text" xml:space="preserve">
     <value>% (~0 tracks)</value>
   </data>
-  <data name="labelTotalTracks.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt, style=Bold</value>
+  <data name="avgPlaysPerDayBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="label23.Text" xml:space="preserve">
     <value>plays per day or more</value>
@@ -591,8 +591,8 @@
   <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
     <value>groupBox1</value>
   </data>
-  <data name="checkBox25Label.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+  <data name="groupBox1Label.Text" xml:space="preserve">
+    <value> Set how much of your library should get which rating </value>
   </data>
   <data name="checkBox5.Error" xml:space="preserve">
     <value />
@@ -604,7 +604,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;holdsAtStartUpCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>23</value>
   </data>
   <data name="label30.ToolTip" xml:space="preserve">
     <value />
@@ -616,10 +616,10 @@
     <value>NoControl</value>
   </data>
   <data name="&gt;&gt;buttonSave.ZOrder" xml:space="preserve">
-    <value>23</value>
+    <value>19</value>
   </data>
-  <data name="threshold45Box.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="autoRateAtStartUpCheckBoxLabel.Text" xml:space="preserve">
+    <value>Auto rate on startup</value>
   </data>
   <data name="notifyWhenAutoratingCompletedCheckBoxLabel.Error" xml:space="preserve">
     <value />
@@ -627,14 +627,8 @@
   <data name="perCent1UpDown.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 23</value>
   </data>
-  <data name="checkBox1Label.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="&gt;&gt;label8.Parent" xml:space="preserve">
     <value>$this</value>
-  </data>
-  <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
   </data>
   <data name="perCentLabel3.Text" xml:space="preserve">
     <value>% (~0 tracks)</value>
@@ -649,10 +643,13 @@
     <value />
   </data>
   <data name="label24.Location" type="System.Drawing.Point, System.Drawing">
-    <value>349, 181</value>
+    <value>349, 166</value>
   </data>
   <data name="perCent4UpDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 89</value>
+    <value>13, 82</value>
+  </data>
+  <data name="&gt;&gt;groupBox2Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="storePlaysPerDayCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -699,11 +696,14 @@
   <data name="LabelFive.Text" xml:space="preserve">
     <value>plays per day or more</value>
   </data>
-  <data name="&gt;&gt;perCent35UpDown.ZOrder" xml:space="preserve">
-    <value>16</value>
+  <data name="groupBox1Label.Error" xml:space="preserve">
+    <value />
   </data>
-  <data name="checkBox25Label.Text" xml:space="preserve">
-    <value>Set two-to-three stars if:</value>
+  <data name="&gt;&gt;perCent35UpDown.ZOrder" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="threshold05Box.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="label30.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -714,17 +714,14 @@
   <data name="&gt;&gt;checkBox35Label.Name" xml:space="preserve">
     <value>checkBox35Label</value>
   </data>
-  <data name="buttonSave.Error" xml:space="preserve">
-    <value />
-  </data>
   <data name="&gt;&gt;label5.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="checkBox1.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="buttonCalculate.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Left</value>
+  <data name="perCent15UpDown.Error" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;perCentLabel5.Parent" xml:space="preserve">
     <value>groupBox1</value>
@@ -739,19 +736,19 @@
     <value>True</value>
   </data>
   <data name="&gt;&gt;label24.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>22</value>
   </data>
   <data name="&gt;&gt;sinceAddedCheckBox.Name" xml:space="preserve">
     <value>sinceAddedCheckBox</value>
   </data>
-  <data name="label26.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="&gt;&gt;LabelFive.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="checkBox3Label.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="perCent15UpDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 239</value>
+    <value>13, 217</value>
   </data>
   <data name="playsPerDayTagList.Error" xml:space="preserve">
     <value />
@@ -773,9 +770,6 @@
   </data>
   <data name="perCentLabel05.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="label1.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>13, 15</value>
@@ -817,7 +811,7 @@
     <value>13, 15</value>
   </data>
   <data name="perCent3UpDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 149</value>
+    <value>13, 136</value>
   </data>
   <data name="checkBox4Label.ToolTip" xml:space="preserve">
     <value />
@@ -856,7 +850,7 @@
     <value>label9</value>
   </data>
   <data name="&gt;&gt;threshold35Box.ZOrder" xml:space="preserve">
-    <value>30</value>
+    <value>31</value>
   </data>
   <data name="checkBox3.Error" xml:space="preserve">
     <value />
@@ -865,22 +859,22 @@
     <value>checkBox5Label</value>
   </data>
   <data name="holdsAtStartUpCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>3</value>
   </data>
   <data name="perCentLabel25.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
   </data>
   <data name="threshold05Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>200, 298</value>
+    <value>200, 271</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Auto Rate</value>
+    <value>Auto Rate Tracks</value>
   </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>13, 15</value>
   </data>
   <data name="&gt;&gt;threshold3Box.ZOrder" xml:space="preserve">
-    <value>26</value>
+    <value>27</value>
   </data>
   <data name="autoRateAtStartUpCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -901,7 +895,7 @@
     <value>0</value>
   </data>
   <data name="label27.Location" type="System.Drawing.Point, System.Drawing">
-    <value>349, 271</value>
+    <value>349, 247</value>
   </data>
   <data name="autoRateOnTrackPropertiesCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>258, 15</value>
@@ -924,8 +918,8 @@
   <data name="label30.TabIndex" type="System.Int32, mscorlib">
     <value>43</value>
   </data>
-  <data name="calculateThresholdsAtStartUpCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+  <data name="&gt;&gt;groupBox1Label.Name" xml:space="preserve">
+    <value>groupBox1Label</value>
   </data>
   <data name="label19.Size" type="System.Drawing.Size, System.Drawing">
     <value>213, 15</value>
@@ -933,11 +927,11 @@
   <data name="perCent3UpDown.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 23</value>
   </data>
-  <data name="autoRateOnTrackPropertiesCheckBoxLabel.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="&gt;&gt;perCentLabel2.ZOrder" xml:space="preserve">
+    <value>10</value>
   </data>
-  <data name="label23.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="threshold45Box.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="buttonCalculate.Size" type="System.Drawing.Size, System.Drawing">
     <value>290, 23</value>
@@ -946,19 +940,19 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="&gt;&gt;maxPlaysPerDayBox.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="label27.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
   </data>
   <data name="&gt;&gt;checkBox15Label.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>16</value>
   </data>
   <data name="baseRatingTrackBar.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="checkBox15Label.Size" type="System.Drawing.Size, System.Drawing">
-    <value>127, 15</value>
+  <data name="threshold5Box.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
   </data>
   <data name="perCentLabel35.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -970,7 +964,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>343, 186</value>
+    <value>340, 183</value>
   </data>
   <data name="perCentLabel3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -982,7 +976,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="groupBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>4, 4, 9, 4</value>
   </data>
   <data name="&gt;&gt;checkBox5.Name" xml:space="preserve">
     <value>checkBox5</value>
@@ -1002,20 +996,20 @@
   <data name="&gt;&gt;maxPlaysPerDayBox.Parent" xml:space="preserve">
     <value>groupBox2</value>
   </data>
+  <data name="perCent45UpDown.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="label7.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="perCent5UpDown.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 23</value>
   </data>
-  <data name="&gt;&gt;checkBox05Label.Parent" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="label8.IconPadding" type="System.Int32, mscorlib">
+  <data name="&gt;&gt;groupBox2Label.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="checkBox3.ToolTip" xml:space="preserve">
-    <value />
+  <data name="groupBox1Label.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="checkBox4Label.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -1030,10 +1024,10 @@
     <value>81, 15</value>
   </data>
   <data name="sinceAddedCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 126</value>
+    <value>9, 123</value>
   </data>
-  <data name="sinceAddedCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="perCent15UpDown.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;label28.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1045,10 +1039,10 @@
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="autoRateOnTrackPropertiesCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>9, 4, 4, 4</value>
   </data>
   <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>460, 186</value>
+    <value>457, 183</value>
   </data>
   <data name="&gt;&gt;label6.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1057,13 +1051,13 @@
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;autoRateAtStartUpCheckBox.ZOrder" xml:space="preserve">
-    <value>16</value>
-  </data>
-  <data name="&gt;&gt;label22.Parent" xml:space="preserve">
-    <value>groupBox2</value>
+    <value>17</value>
   </data>
   <data name="&gt;&gt;checkBox1Label.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="groupBox1Label.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="perCentLabel4.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1078,10 +1072,7 @@
     <value>label5</value>
   </data>
   <data name="checkBox1Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>32, 272</value>
-  </data>
-  <data name="threshold1Box.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>32, 247</value>
   </data>
   <data name="&gt;&gt;label29.Name" xml:space="preserve">
     <value>label29</value>
@@ -1101,16 +1092,13 @@
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>AutoRateCommand</value>
   </data>
-  <data name="threshold35Box.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
   <data name="perCent45UpDown.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="storePlaysPerDayCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="perCent35UpDown.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+  <data name="threshold1Box.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
   <data name="&gt;&gt;perCent2UpDown.Name" xml:space="preserve">
@@ -1118,6 +1106,9 @@
   </data>
   <data name="label8.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
+  </data>
+  <data name="&gt;&gt;checkBox5Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label6.Text" xml:space="preserve">
     <value>1</value>
@@ -1134,9 +1125,6 @@
   <data name="&gt;&gt;label10.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="notifyWhenAutoratingCompletedCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
   <data name="groupBox1.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -1149,11 +1137,11 @@
   <data name="&gt;&gt;buttonSave.Name" xml:space="preserve">
     <value>buttonSave</value>
   </data>
-  <data name="label2.TabIndex" type="System.Int32, mscorlib">
-    <value>45</value>
+  <data name="groupBox2.Error" xml:space="preserve">
+    <value />
   </data>
   <data name="autoRatingTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>313, 8</value>
+    <value>310, 8</value>
   </data>
   <data name="perCent1UpDown.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -1168,10 +1156,10 @@
     <value>40</value>
   </data>
   <data name="&gt;&gt;autoRateAtStartUpCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>16</value>
   </data>
-  <data name="label20.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="perCentLabel05.Location" type="System.Drawing.Point, System.Drawing">
+    <value>94, 274</value>
   </data>
   <data name="threshold4Box.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1200,6 +1188,9 @@
   <data name="buttonOK.TabIndex" type="System.Int32, mscorlib">
     <value>46</value>
   </data>
+  <data name="notifyWhenAutoratingCompletedCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
   <data name="threshold2Box.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
   </data>
@@ -1207,13 +1198,16 @@
     <value>True</value>
   </data>
   <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>301, 186</value>
+    <value>298, 183</value>
   </data>
   <data name="checkBox1Label.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="groupBox2Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>183, 15</value>
+  </data>
   <data name="&gt;&gt;label23.ZOrder" xml:space="preserve">
-    <value>25</value>
+    <value>26</value>
   </data>
   <data name="perCentLabel3.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -1222,13 +1216,13 @@
     <value>25</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>325, 423</value>
+    <value>395, 383</value>
   </data>
   <data name="label19.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+    <value>9, 0, 4, 0</value>
   </data>
-  <data name="label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="label27.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;notifyWhenAutoratingCompletedCheckBox.Name" xml:space="preserve">
     <value>notifyWhenAutoratingCompletedCheckBox</value>
@@ -1240,13 +1234,13 @@
     <value>4, 0, 4, 0</value>
   </data>
   <data name="checkBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 272</value>
+    <value>10, 247</value>
   </data>
   <data name="perCent25UpDown.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>421, 186</value>
+    <value>418, 183</value>
   </data>
   <data name="perCent45UpDown.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -1267,13 +1261,13 @@
     <value />
   </data>
   <data name="&gt;&gt;checkBox4Label.ZOrder" xml:space="preserve">
-    <value>35</value>
+    <value>36</value>
   </data>
-  <data name="LabelFive.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="&gt;&gt;label22.Parent" xml:space="preserve">
+    <value>groupBox2</value>
   </data>
-  <data name="label29.Error" xml:space="preserve">
-    <value />
+  <data name="checkBox25Label.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="&gt;&gt;sinceAddedCheckBoxLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1281,14 +1275,11 @@
   <data name="checkBox2.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
   </data>
-  <data name="buttonOK.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Left</value>
-  </data>
   <data name="&gt;&gt;perCentLabel1.Name" xml:space="preserve">
     <value>perCentLabel1</value>
   </data>
   <data name="&gt;&gt;perCentLabel5.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>22</value>
   </data>
   <data name="label26.Error" xml:space="preserve">
     <value />
@@ -1321,25 +1312,19 @@
     <value>MiddleRight</value>
   </data>
   <data name="label20.Location" type="System.Drawing.Point, System.Drawing">
-    <value>349, 61</value>
+    <value>349, 58</value>
   </data>
   <data name="checkBox5.Text" xml:space="preserve">
     <value> </value>
   </data>
-  <data name="groupBox2.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>46</value>
+  <data name="labelSum.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 301</value>
   </data>
   <data name="label19.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="&gt;&gt;threshold4Box.Name" xml:space="preserve">
     <value>threshold4Box</value>
-  </data>
-  <data name="perCent15UpDown.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
   </data>
   <data name="perCentLabel4.ToolTip" xml:space="preserve">
     <value />
@@ -1386,14 +1371,14 @@
   <data name="&gt;&gt;perCentLabel25.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>45</value>
+  <data name="groupBox2Label.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 9pt, style=Bold</value>
+  </data>
+  <data name="checkBox25Label.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="checkBox05Label.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
-  </data>
-  <data name="label27.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="&gt;&gt;perCent15UpDown.Parent" xml:space="preserve">
     <value>groupBox1</value>
@@ -1417,19 +1402,19 @@
     <value>True</value>
   </data>
   <data name="&gt;&gt;label26.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="&gt;&gt;autoRateOnTrackPropertiesCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;perCent4UpDown.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>19</value>
   </data>
   <data name="&gt;&gt;perCentLabel2.Parent" xml:space="preserve">
     <value>groupBox1</value>
   </data>
   <data name="autoRateAtStartUpCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>9, 4, 4, 4</value>
   </data>
   <data name="perCentLabel1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1437,14 +1422,17 @@
   <data name="checkBox35.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
-  <data name="&gt;&gt;threshold5Box.ZOrder" xml:space="preserve">
-    <value>42</value>
+  <data name="checkBox2Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="perCentLabel35.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="label22.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 15</value>
+  </data>
+  <data name="&gt;&gt;groupBox2Label.Parent" xml:space="preserve">
+    <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;threshold1Box.Name" xml:space="preserve">
     <value>threshold1Box</value>
@@ -1473,9 +1461,6 @@
   <data name="label10.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="calculateThresholdsAtStartUpCheckBox.Text" xml:space="preserve">
     <value> </value>
   </data>
@@ -1483,7 +1468,7 @@
     <value>calculateThresholdsAtStartUpCheckBox</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 11</value>
+    <value>9, 11</value>
   </data>
   <data name="perCentLabel4.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 15</value>
@@ -1504,9 +1489,6 @@
     <value>NoControl</value>
   </data>
   <data name="label9.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="perCent25UpDown.Error" xml:space="preserve">
     <value />
   </data>
   <data name="label4.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
@@ -1533,14 +1515,11 @@
   <data name="label26.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="perCent45UpDown.ToolTip" xml:space="preserve">
-    <value />
+  <data name="groupBox1Label.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
   </data>
   <data name="perCentLabel45.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 15</value>
-  </data>
-  <data name="&gt;&gt;sinceAddedCheckBoxLabel.Name" xml:space="preserve">
-    <value>sinceAddedCheckBoxLabel</value>
   </data>
   <data name="checkBox35.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1561,10 +1540,10 @@
     <value>True</value>
   </data>
   <data name="label4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+    <value>9, 0, 4, 0</value>
   </data>
   <data name="label23.Location" type="System.Drawing.Point, System.Drawing">
-    <value>349, 151</value>
+    <value>349, 139</value>
   </data>
   <data name="checkBox4Label.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1576,7 +1555,7 @@
     <value />
   </data>
   <data name="&gt;&gt;checkBox5.ZOrder" xml:space="preserve">
-    <value>44</value>
+    <value>45</value>
   </data>
   <data name="&gt;&gt;storePlaysPerDayCheckBoxLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1606,7 +1585,10 @@
     <value>perCentLabel5</value>
   </data>
   <data name="threshold4Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>200, 88</value>
+    <value>200, 82</value>
+  </data>
+  <data name="&gt;&gt;groupBox1Label.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="checkBox35Label.Size" type="System.Drawing.Size, System.Drawing">
     <value>136, 15</value>
@@ -1623,8 +1605,8 @@
   <data name="label20.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="label25.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="sinceAddedCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="label21.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -1636,19 +1618,16 @@
     <value>4, 0, 4, 0</value>
   </data>
   <data name="&gt;&gt;checkBox3Label.ZOrder" xml:space="preserve">
-    <value>27</value>
+    <value>28</value>
   </data>
   <data name="LabelFive.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="perCentLabel1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="label22.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="&gt;&gt;groupBox2Label.Name" xml:space="preserve">
+    <value>groupBox2Label</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>524, 210</value>
+    <value>529, 205</value>
   </data>
   <data name="label10.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1659,14 +1638,14 @@
   <data name="perCentLabel15.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;label4.Name" xml:space="preserve">
-    <value>label4</value>
+  <data name="buttonSave.Error" xml:space="preserve">
+    <value />
   </data>
   <data name="label30.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="autoRateOnTrackPropertiesCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 99</value>
+    <value>9, 96</value>
   </data>
   <data name="&gt;&gt;threshold45Box.Parent" xml:space="preserve">
     <value>groupBox2</value>
@@ -1692,8 +1671,11 @@
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>13, 15</value>
   </data>
-  <data name="notifyWhenAutoratingCompletedCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+  <data name="autoRateOnTrackPropertiesCheckBoxLabel.Text" xml:space="preserve">
+    <value>Auto rate songs automatically if they are played</value>
+  </data>
+  <data name="groupBox2Label.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
   </data>
   <data name="checkBox4Label.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1713,14 +1695,11 @@
   <data name="&gt;&gt;baseRatingTrackBar.Type" xml:space="preserve">
     <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="label1.Error" xml:space="preserve">
-    <value />
-  </data>
   <data name="perCentLabel2.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="labelTotalTracks.Size" type="System.Drawing.Size, System.Drawing">
-    <value>261, 15</value>
+    <value>247, 15</value>
   </data>
   <data name="perCent3UpDown.Error" xml:space="preserve">
     <value />
@@ -1738,10 +1717,10 @@
     <value>MiddleRight</value>
   </data>
   <data name="&gt;&gt;perCent1UpDown.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;buttonOK.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="perCent5UpDown.ToolTip" xml:space="preserve">
     <value />
@@ -1764,6 +1743,9 @@
   <data name="checkBox5Label.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
+  <data name="groupBox2Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 1</value>
+  </data>
   <data name="checkBox35.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1780,7 +1762,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;threshold25Box.ZOrder" xml:space="preserve">
-    <value>22</value>
+    <value>23</value>
   </data>
   <data name="holdsAtStartUpCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -1801,10 +1783,10 @@
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;avgPlaysPerDayBox.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="checkBox35Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>32, 122</value>
+    <value>32, 112</value>
   </data>
   <data name="LabelFive.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -1813,7 +1795,7 @@
     <value />
   </data>
   <data name="checkBox35.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 122</value>
+    <value>10, 112</value>
   </data>
   <data name="&gt;&gt;checkBox25.Name" xml:space="preserve">
     <value>checkBox25</value>
@@ -1822,10 +1804,10 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;sinceAddedCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="threshold45Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>200, 58</value>
+    <value>200, 55</value>
   </data>
   <data name="perCent4UpDown.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1834,7 +1816,7 @@
     <value>True</value>
   </data>
   <data name="&gt;&gt;checkBox2Label.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>20</value>
   </data>
   <data name="checkBox15Label.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -1851,8 +1833,8 @@
   <data name="checkBox35Label.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
-  <data name="&gt;&gt;perCentLabel1.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="notifyWhenAutoratingCompletedCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
   </data>
   <data name="baseRatingTrackBar.Size" type="System.Drawing.Size, System.Drawing">
     <value>230, 45</value>
@@ -1873,7 +1855,7 @@
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;LabelFive.ZOrder" xml:space="preserve">
-    <value>41</value>
+    <value>42</value>
   </data>
   <data name="&gt;&gt;perCentLabel3.Parent" xml:space="preserve">
     <value>groupBox1</value>
@@ -1894,7 +1876,7 @@
     <value>% (~0 tracks)</value>
   </data>
   <data name="&gt;&gt;checkBox1Label.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Close</value>
@@ -1912,25 +1894,25 @@
     <value>17</value>
   </data>
   <data name="&gt;&gt;label22.ZOrder" xml:space="preserve">
-    <value>29</value>
+    <value>30</value>
   </data>
   <data name="perCentLabel35.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="calculateThresholdsAtStartUpCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>484, 45</value>
+    <value>529, 42</value>
   </data>
   <data name="&gt;&gt;threshold15Box.Name" xml:space="preserve">
     <value>threshold15Box</value>
-  </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>plays per day or more</value>
   </data>
   <data name="checkBox2Label.Error" xml:space="preserve">
     <value />
   </data>
   <data name="maxPlaysPerDayBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
+  </data>
+  <data name="groupBox2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="buttonCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1942,7 +1924,7 @@
     <value>15</value>
   </data>
   <data name="checkBox3Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>32, 152</value>
+    <value>32, 139</value>
   </data>
   <data name="perCent45UpDown.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1975,16 +1957,13 @@
     <value>0</value>
   </data>
   <data name="&gt;&gt;label28.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="checkBox4.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>6</value>
   </data>
   <data name="label7.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
   </data>
   <data name="baseRatingTrackBar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>253, 152</value>
+    <value>250, 149</value>
   </data>
   <data name="&gt;&gt;buttonCancel.Name" xml:space="preserve">
     <value>buttonCancel</value>
@@ -1999,7 +1978,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;perCentLabel4.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>18</value>
   </data>
   <data name="labelTotalTracks.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -2038,7 +2017,7 @@
     <value>True</value>
   </data>
   <data name="&gt;&gt;baseRatingTrackBar.ZOrder" xml:space="preserve">
-    <value>26</value>
+    <value>8</value>
   </data>
   <data name="storePlaysPerDayCheckBox.ToolTip" xml:space="preserve">
     <value />
@@ -2047,7 +2026,7 @@
     <value>28, 19</value>
   </data>
   <data name="&gt;&gt;checkBox45Label.ZOrder" xml:space="preserve">
-    <value>39</value>
+    <value>40</value>
   </data>
   <data name="&gt;&gt;notifyWhenAutoratingCompletedCheckBoxLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2056,7 +2035,7 @@
     <value>NoControl</value>
   </data>
   <data name="label19.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 156</value>
+    <value>5, 153</value>
   </data>
   <data name="threshold15Box.ToolTip" xml:space="preserve">
     <value />
@@ -2113,13 +2092,13 @@
     <value />
   </data>
   <data name="&gt;&gt;label21.ZOrder" xml:space="preserve">
-    <value>33</value>
+    <value>34</value>
   </data>
   <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 23</value>
   </data>
   <data name="threshold25Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>200, 178</value>
+    <value>200, 163</value>
   </data>
   <data name="threshold25Box.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2143,7 +2122,7 @@
     <value>True</value>
   </data>
   <data name="perCentLabel35.Location" type="System.Drawing.Point, System.Drawing">
-    <value>94, 121</value>
+    <value>94, 112</value>
   </data>
   <data name="buttonSave.Text" xml:space="preserve">
     <value>Save settings</value>
@@ -2169,23 +2148,20 @@
   <data name="checkBox1.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
   </data>
-  <data name="groupBox2.Text" xml:space="preserve">
-    <value>Set the thresholds of auto rating</value>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>950, 634</value>
   </data>
   <data name="labelSum.Text" xml:space="preserve">
     <value>Sum: 100%</value>
   </data>
-  <data name="label4.Error" xml:space="preserve">
-    <value />
-  </data>
   <data name="perCentLabel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>94, 271</value>
+    <value>94, 247</value>
   </data>
   <data name="checkBox3Label.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
   </data>
   <data name="threshold2Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>200, 208</value>
+    <value>200, 190</value>
   </data>
   <data name="label19.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2245,16 +2221,13 @@
     <value>20</value>
   </data>
   <data name="label26.Location" type="System.Drawing.Point, System.Drawing">
-    <value>349, 241</value>
+    <value>349, 220</value>
   </data>
-  <data name="perCent15UpDown.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="sinceAddedCheckBoxLabel.Error" xml:space="preserve">
+  <data name="label23.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="threshold15Box.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="&gt;&gt;calculateThresholdsAtStartUpCheckBox.ZOrder" xml:space="preserve">
+    <value>24</value>
   </data>
   <data name="checkBox45.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2266,7 +2239,7 @@
     <value>10</value>
   </data>
   <data name="&gt;&gt;checkBox4.ZOrder" xml:space="preserve">
-    <value>36</value>
+    <value>37</value>
   </data>
   <data name="&gt;&gt;threshold25Box.Parent" xml:space="preserve">
     <value>groupBox2</value>
@@ -2283,8 +2256,8 @@
   <data name="checkBox1Label.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
   </data>
-  <data name="&gt;&gt;checkBox45Label.Name" xml:space="preserve">
-    <value>checkBox45Label</value>
+  <data name="labelSum.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 9pt, style=Bold</value>
   </data>
   <data name="checkBox35.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 19</value>
@@ -2301,11 +2274,14 @@
   <data name="label29.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
+  <data name="checkBox3Label.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="&gt;&gt;checkBox15.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>17</value>
   </data>
   <data name="&gt;&gt;notifyWhenAutoratingCompletedCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="&gt;&gt;storePlaysPerDayCheckBoxLabel.Parent" xml:space="preserve">
     <value>$this</value>
@@ -2913,7 +2889,10 @@
 </value>
   </data>
   <data name="checkBox4Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>32, 92</value>
+    <value>32, 85</value>
+  </data>
+  <data name="groupBox2Label.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
   </data>
   <data name="&gt;&gt;checkBox45Label.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2922,16 +2901,16 @@
     <value>4, 0, 4, 0</value>
   </data>
   <data name="label29.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 331</value>
+    <value>10, 301</value>
   </data>
   <data name="checkBox5.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
   <data name="&gt;&gt;perCentLabel05.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="perCent25UpDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 179</value>
+    <value>13, 163</value>
   </data>
   <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
     <value>4</value>
@@ -2963,9 +2942,6 @@
   <data name="threshold4Box.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="threshold5Box.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
   <data name="perCentLabel3.ToolTip" xml:space="preserve">
     <value />
   </data>
@@ -2985,7 +2961,7 @@
     <value>5</value>
   </data>
   <data name="perCentLabel25.Location" type="System.Drawing.Point, System.Drawing">
-    <value>94, 181</value>
+    <value>94, 166</value>
   </data>
   <data name="&gt;&gt;label20.Parent" xml:space="preserve">
     <value>groupBox2</value>
@@ -2994,7 +2970,7 @@
     <value>toolTip1</value>
   </data>
   <data name="perCentLabel4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>94, 92</value>
+    <value>94, 85</value>
   </data>
   <data name="avgPlaysPerDayBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -3002,8 +2978,8 @@
   <data name="label5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="label4.Error" xml:space="preserve">
+    <value />
   </data>
   <data name="perCentLabel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 15</value>
@@ -3020,8 +2996,8 @@
   <data name="label9.Text" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="checkBox3Label.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="groupBox1Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 1</value>
   </data>
   <data name="&gt;&gt;avgPlaysPerDayBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -3030,7 +3006,7 @@
     <value>buttonCalculate</value>
   </data>
   <data name="checkBox05.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 302</value>
+    <value>10, 274</value>
   </data>
   <data name="&gt;&gt;checkBox25Label.Parent" xml:space="preserve">
     <value>groupBox2</value>
@@ -3042,7 +3018,7 @@
     <value>$this</value>
   </data>
   <data name="perCent1UpDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 269</value>
+    <value>13, 244</value>
   </data>
   <data name="label28.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 15</value>
@@ -3072,13 +3048,13 @@
     <value>MiddleRight</value>
   </data>
   <data name="&gt;&gt;checkBox25.ZOrder" xml:space="preserve">
-    <value>24</value>
+    <value>25</value>
   </data>
   <data name="&gt;&gt;label25.Parent" xml:space="preserve">
     <value>groupBox2</value>
   </data>
   <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>261, 186</value>
+    <value>258, 183</value>
   </data>
   <data name="&gt;&gt;groupBox2.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -3090,7 +3066,7 @@
     <value>121, 15</value>
   </data>
   <data name="threshold3Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>200, 148</value>
+    <value>200, 136</value>
   </data>
   <data name="sinceAddedCheckBox.Error" xml:space="preserve">
     <value />
@@ -3105,7 +3081,7 @@
     <value>Set two stars if:</value>
   </data>
   <data name="perCentLabel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>94, 151</value>
+    <value>94, 139</value>
   </data>
   <data name="label24.Error" xml:space="preserve">
     <value />
@@ -3138,7 +3114,7 @@
     <value>$this</value>
   </data>
   <data name="perCentLabel15.Location" type="System.Drawing.Point, System.Drawing">
-    <value>94, 241</value>
+    <value>94, 220</value>
   </data>
   <data name="groupBox1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -3146,17 +3122,11 @@
   <data name="&gt;&gt;checkBox15.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="label1.TabIndex" type="System.Int32, mscorlib">
-    <value>42</value>
-  </data>
   <data name="perCent05UpDown.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
   </data>
   <data name="notifyWhenAutoratingCompletedCheckBoxLabel.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="label2.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
   </data>
   <data name="perCentLabel35.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3191,8 +3161,11 @@
   <data name="label4.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 210</value>
+  <data name="labelTotalTracks.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="groupBox1Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="perCent4UpDown.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3210,7 +3183,7 @@
     <value>88, 15</value>
   </data>
   <data name="&gt;&gt;threshold1Box.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="&gt;&gt;perCent4UpDown.Parent" xml:space="preserve">
     <value>groupBox1</value>
@@ -3219,13 +3192,13 @@
     <value />
   </data>
   <data name="storePlaysPerDayCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>9, 4, 4, 4</value>
   </data>
   <data name="&gt;&gt;threshold15Box.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="threshold05Box.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="&gt;&gt;label28.Name" xml:space="preserve">
+    <value>label28</value>
   </data>
   <data name="&gt;&gt;perCent35UpDown.Name" xml:space="preserve">
     <value>perCent35UpDown</value>
@@ -3251,6 +3224,9 @@
   <data name="label25.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
+  <data name="label22.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="perCentLabel1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -3258,13 +3234,13 @@
     <value />
   </data>
   <data name="&gt;&gt;checkBox35.ZOrder" xml:space="preserve">
-    <value>32</value>
+    <value>33</value>
   </data>
   <data name="&gt;&gt;label22.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="buttonCalculate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 391</value>
+    <value>10, 353</value>
   </data>
   <data name="&gt;&gt;buttonOK.Parent" xml:space="preserve">
     <value>groupBox2</value>
@@ -3308,14 +3284,11 @@
   <data name="label21.Text" xml:space="preserve">
     <value>plays per day or more</value>
   </data>
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>349, 331</value>
+  <data name="checkBox15Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>127, 15</value>
   </data>
-  <data name="autoRateOnTrackPropertiesCheckBoxLabel.Text" xml:space="preserve">
-    <value>Auto rate songs automatically if they are played</value>
-  </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;sinceAddedCheckBoxLabel.Name" xml:space="preserve">
+    <value>sinceAddedCheckBoxLabel</value>
   </data>
   <data name="&gt;&gt;baseRatingTrackBar.Parent" xml:space="preserve">
     <value>$this</value>
@@ -3324,13 +3297,13 @@
     <value>19</value>
   </data>
   <data name="checkBox45Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>32, 62</value>
+    <value>32, 58</value>
   </data>
   <data name="checkBox05.Error" xml:space="preserve">
     <value />
   </data>
   <data name="storePlaysPerDayCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 45</value>
+    <value>9, 42</value>
   </data>
   <data name="&gt;&gt;perCentLabel45.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -3341,29 +3314,23 @@
   <data name="&gt;&gt;playsPerDayTagList.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="checkBox1.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="autoRateOnTrackPropertiesCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
   <data name="&gt;&gt;threshold2Box.Parent" xml:space="preserve">
     <value>groupBox2</value>
   </data>
-  <data name="sinceAddedCheckBoxLabel.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="&gt;&gt;threshold1Box.Parent" xml:space="preserve">
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;checkBox3.ZOrder" xml:space="preserve">
-    <value>28</value>
+    <value>29</value>
   </data>
   <data name="&gt;&gt;checkBox3.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;threshold2Box.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>19</value>
   </data>
   <data name="labelSum.Error" xml:space="preserve">
     <value />
@@ -3371,11 +3338,14 @@
   <data name="perCentLabel25.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="&gt;&gt;groupBox1Label.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
   <data name="autoRateAtStartUpCheckBox.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="label27.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="perCent35UpDown.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
   </data>
   <data name="threshold3Box.Size" type="System.Drawing.Size, System.Drawing">
     <value>141, 23</value>
@@ -3393,10 +3363,10 @@
     <value>16</value>
   </data>
   <data name="&gt;&gt;perCent45UpDown.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>21</value>
   </data>
   <data name="sinceAddedCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>9, 4, 4, 4</value>
   </data>
   <data name="autoRatingTagList.Error" xml:space="preserve">
     <value />
@@ -3405,16 +3375,13 @@
     <value />
   </data>
   <data name="buttonSave.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="autoRateAtStartUpCheckBoxLabel.Text" xml:space="preserve">
-    <value>Auto rate on startup</value>
+    <value>7</value>
   </data>
   <data name="checkBox5Label.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="buttonCancel.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>8</value>
   </data>
   <data name="label20.Error" xml:space="preserve">
     <value />
@@ -3446,8 +3413,8 @@
   <data name="label20.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="threshold1Box.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="checkBox35.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="checkBox4.Error" xml:space="preserve">
     <value />
@@ -3462,13 +3429,10 @@
     <value>playsPerDayTagList</value>
   </data>
   <data name="&gt;&gt;checkBox25Label.ZOrder" xml:space="preserve">
-    <value>23</value>
+    <value>24</value>
   </data>
   <data name="checkBox4.Text" xml:space="preserve">
     <value> </value>
-  </data>
-  <data name="checkBox2Label.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
   </data>
   <data name="label10.Error" xml:space="preserve">
     <value />
@@ -3494,8 +3458,8 @@
   <data name="&gt;&gt;perCent45UpDown.Name" xml:space="preserve">
     <value>perCent45UpDown</value>
   </data>
-  <data name="holdsAtStartUpCheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="groupBox1Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>295, 15</value>
   </data>
   <data name="label29.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -3516,13 +3480,13 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="label22.Location" type="System.Drawing.Point, System.Drawing">
-    <value>349, 121</value>
+    <value>349, 112</value>
   </data>
   <data name="notifyWhenAutoratingCompletedCheckBox.Error" xml:space="preserve">
     <value />
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>500, 423</value>
+    <value>577, 383</value>
   </data>
   <data name="&gt;&gt;label9.Parent" xml:space="preserve">
     <value>$this</value>
@@ -3536,20 +3500,23 @@
   <data name="perCentLabel35.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="checkBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 212</value>
+  <data name="&gt;&gt;checkBox45Label.Name" xml:space="preserve">
+    <value>checkBox45Label</value>
   </data>
-  <data name="&gt;&gt;label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="checkBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 193</value>
+  </data>
+  <data name="checkBox2Label.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="holdsAtStartUpCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>509, 45</value>
+    <value>554, 42</value>
   </data>
   <data name="checkBox45Label.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="labelTotalTracks.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
+  <data name="perCent25UpDown.Error" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;autoRateOnTrackPropertiesCheckBoxLabel.Parent" xml:space="preserve">
     <value>$this</value>
@@ -3564,7 +3531,7 @@
     <value>% (~0 tracks)</value>
   </data>
   <data name="autoRateAtStartUpCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 71</value>
+    <value>9, 68</value>
   </data>
   <data name="perCentLabel45.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -3575,8 +3542,8 @@
   <data name="sinceAddedCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;perCentLabel2.ZOrder" xml:space="preserve">
-    <value>9</value>
+  <data name="checkBox25.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
   </data>
   <data name="checkBox25Label.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3594,7 +3561,7 @@
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="perCent2UpDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 209</value>
+    <value>13, 190</value>
   </data>
   <data name="sinceAddedCheckBoxLabel.ToolTip" xml:space="preserve">
     <value>Usually "Plays per day" means the average number of times you played track since it was added to 
@@ -3609,17 +3576,17 @@ It's recommended to "Auto rate on startup" your tracks if you want to use this o
 should change every day for each track in this case. 
 </value>
   </data>
-  <data name="buttonSave.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="autoRateAtStartUpCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 15, 0</value>
   </data>
   <data name="&gt;&gt;label8.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;perCentLabel3.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="threshold35Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>200, 118</value>
+    <value>200, 109</value>
   </data>
   <data name="label19.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -3628,9 +3595,6 @@ should change every day for each track in this case.
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="threshold35Box.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="threshold05Box.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="&gt;&gt;checkBox05Label.Type" xml:space="preserve">
@@ -3651,8 +3615,8 @@ should change every day for each track in this case.
   <data name="&gt;&gt;label24.Name" xml:space="preserve">
     <value>label24</value>
   </data>
-  <data name="maxPlaysPerDayBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+  <data name="buttonCalculate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="labelSum.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -3691,13 +3655,13 @@ should change every day for each track in this case.
     <value>0</value>
   </data>
   <data name="perCentLabel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>94, 211</value>
+    <value>94, 193</value>
   </data>
   <data name="calculateThresholdsAtStartUpCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="&gt;&gt;perCentLabel35.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>16</value>
   </data>
   <data name="perCentLabel15.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -3706,19 +3670,16 @@ should change every day for each track in this case.
     <value />
   </data>
   <data name="&gt;&gt;autoRatingTagList.ZOrder" xml:space="preserve">
-    <value>24</value>
+    <value>25</value>
   </data>
   <data name="notifyWhenAutoratingCompletedCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name="checkBox15Label.Text" xml:space="preserve">
-    <value>Set one-to-two stars if:</value>
-  </data>
   <data name="checkBox5Label.Size" type="System.Drawing.Size, System.Drawing">
     <value>85, 15</value>
   </data>
-  <data name="label22.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="groupBox2Label.Text" xml:space="preserve">
+    <value> Set the thresholds of auto rating </value>
   </data>
   <data name="&gt;&gt;label29.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -3727,7 +3688,7 @@ should change every day for each track in this case.
     <value>perCentLabel35</value>
   </data>
   <data name="storePlaysPerDayCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>36, 45</value>
+    <value>33, 42</value>
   </data>
   <data name="label10.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3747,6 +3708,12 @@ should change every day for each track in this case.
   <data name="playsPerDayTagList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
+  <data name="label7.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="groupBox2Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="&gt;&gt;perCent25UpDown.Name" xml:space="preserve">
     <value>perCent25UpDown</value>
   </data>
@@ -3759,8 +3726,8 @@ should change every day for each track in this case.
   <data name="label5.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="label1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="checkBox5Label.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="autoRateOnTrackPropertiesCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3771,23 +3738,17 @@ should change every day for each track in this case.
   <data name="threshold5Box.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
-  <data name="label1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="&gt;&gt;label23.Parent" xml:space="preserve">
     <value>groupBox2</value>
   </data>
-  <data name="threshold45Box.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="label29.Error" xml:space="preserve">
+    <value />
   </data>
   <data name="label26.Text" xml:space="preserve">
     <value>plays per day or more</value>
   </data>
   <data name="checkBox15Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>32, 242</value>
+    <value>32, 220</value>
   </data>
   <data name="&gt;&gt;label23.Name" xml:space="preserve">
     <value>label23</value>
@@ -3817,13 +3778,10 @@ should change every day for each track in this case.
     <value>MiddleRight</value>
   </data>
   <data name="labelSum.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 15</value>
+    <value>67, 15</value>
   </data>
   <data name="checkBox35Label.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
-  </data>
-  <data name="labelTotalTracks.Text" xml:space="preserve">
-    <value>Number of ever played tracks in your library:  </value>
   </data>
   <data name="checkBox45Label.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -3834,17 +3792,11 @@ should change every day for each track in this case.
   <data name="label21.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;label28.Name" xml:space="preserve">
-    <value>label28</value>
-  </data>
   <data name="&gt;&gt;perCent3UpDown.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="label29.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="threshold3Box.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
   </data>
   <data name="&gt;&gt;perCentLabel15.Name" xml:space="preserve">
     <value>perCentLabel15</value>
@@ -3861,17 +3813,14 @@ should change every day for each track in this case.
   <data name="&gt;&gt;perCent4UpDown.Name" xml:space="preserve">
     <value>perCent4UpDown</value>
   </data>
-  <data name="label1.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="labelTotalTracks.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 361</value>
+    <value>10, 328</value>
   </data>
   <data name="perCentLabel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
   </data>
   <data name="groupBox2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>9, 4, 4, 4</value>
   </data>
   <data name="label9.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3885,11 +3834,8 @@ should change every day for each track in this case.
   <data name="&gt;&gt;label9.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
-  </data>
   <data name="&gt;&gt;autoRateOnTrackPropertiesCheckBox.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="&gt;&gt;buttonCalculate.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -3919,7 +3865,7 @@ should change every day for each track in this case.
     <value>4, 4, 4, 4</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>862, 643</value>
+    <value>934, 595</value>
   </data>
   <data name="label28.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3927,14 +3873,14 @@ should change every day for each track in this case.
   <data name="perCent5UpDown.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 15</value>
+  <data name="groupBox1Label.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 9pt, style=Bold</value>
   </data>
   <data name="label30.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="buttonSave.Location" type="System.Drawing.Point, System.Drawing">
-    <value>484, 7</value>
+    <value>529, 8</value>
   </data>
   <data name="threshold45Box.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -3943,19 +3889,16 @@ should change every day for each track in this case.
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;perCentLabel15.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="label10.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="perCentLabel45.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="$this.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="groupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+    <value>Top, Left, Right</value>
   </data>
   <data name="label24.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -3984,20 +3927,17 @@ should change every day for each track in this case. </value>
   <data name="perCentLabel35.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="label2.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="groupBox2Label.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;calculateThresholdsAtStartUpCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="checkBox25Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>32, 182</value>
+    <value>32, 166</value>
   </data>
   <data name="&gt;&gt;checkBox45.ZOrder" xml:space="preserve">
-    <value>40</value>
+    <value>41</value>
   </data>
   <data name="label20.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -4005,8 +3945,8 @@ should change every day for each track in this case. </value>
   <data name="sinceAddedCheckBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;checkBox5Label.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="groupBox1Label.TabIndex" type="System.Int32, mscorlib">
+    <value>28</value>
   </data>
   <data name="perCent3UpDown.ToolTip" xml:space="preserve">
     <value />
@@ -4015,16 +3955,16 @@ should change every day for each track in this case. </value>
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;checkBox1.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="&gt;&gt;label20.ZOrder" xml:space="preserve">
-    <value>37</value>
+    <value>38</value>
   </data>
   <data name="&gt;&gt;perCentLabel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;checkBox5Label.ZOrder" xml:space="preserve">
-    <value>43</value>
+    <value>44</value>
   </data>
   <data name="perCentLabel3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -4045,7 +3985,7 @@ should change every day for each track in this case. </value>
     <value>0</value>
   </data>
   <data name="autoRatingTagList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 23</value>
+    <value>170, 23</value>
   </data>
   <data name="&gt;&gt;checkBox05Label.Name" xml:space="preserve">
     <value>checkBox05Label</value>
@@ -4075,7 +4015,7 @@ should change every day for each track in this case. </value>
     <value>plays per day or more</value>
   </data>
   <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>382, 186</value>
+    <value>379, 183</value>
   </data>
   <data name="checkBox2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -4093,7 +4033,7 @@ should change every day for each track in this case. </value>
     <value>0</value>
   </data>
   <data name="&gt;&gt;checkBox2.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>21</value>
   </data>
   <data name="holdsAtStartUpCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>198, 15</value>
@@ -4108,13 +4048,13 @@ should change every day for each track in this case. </value>
     <value />
   </data>
   <data name="label25.Location" type="System.Drawing.Point, System.Drawing">
-    <value>349, 211</value>
+    <value>349, 193</value>
   </data>
   <data name="notifyWhenAutoratingCompletedCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>204, 15</value>
   </data>
   <data name="autoRateAtStartUpCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>36, 71</value>
+    <value>33, 68</value>
   </data>
   <data name="checkBox4.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 19</value>
@@ -4124,9 +4064,6 @@ should change every day for each track in this case. </value>
   </data>
   <data name="checkBox35.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
-  </data>
-  <data name="groupBox1.Text" xml:space="preserve">
-    <value>Set how much of your library should get which rating</value>
   </data>
   <data name="checkBox15.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -4138,7 +4075,7 @@ should change every day for each track in this case. </value>
     <value />
   </data>
   <data name="checkBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 92</value>
+    <value>10, 85</value>
   </data>
   <data name="notifyWhenAutoratingCompletedCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -4155,14 +4092,11 @@ should change every day for each track in this case. </value>
   <data name="&gt;&gt;avgPlaysPerDayBox.Parent" xml:space="preserve">
     <value>groupBox2</value>
   </data>
-  <data name="label2.Error" xml:space="preserve">
-    <value />
+  <data name="autoRateOnTrackPropertiesCheckBoxLabel.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="autoRateOnTrackPropertiesCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
-  </data>
-  <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;label30.Parent" xml:space="preserve">
     <value>groupBox2</value>
@@ -4177,16 +4111,13 @@ should change every day for each track in this case. </value>
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;playsPerDayTagList.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>20</value>
   </data>
   <data name="label22.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="autoRateOnTrackPropertiesCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
-  </data>
-  <data name="avgPlaysPerDayBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
   </data>
   <data name="autoRateOnTrackPropertiesCheckBoxLabel.ToolTip" xml:space="preserve">
     <value />
@@ -4201,19 +4132,19 @@ should change every day for each track in this case. </value>
     <value />
   </data>
   <data name="&gt;&gt;label27.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="&gt;&gt;threshold5Box.Parent" xml:space="preserve">
     <value>groupBox2</value>
   </data>
-  <data name="buttonCalculate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="checkBox15Label.Text" xml:space="preserve">
+    <value>Set one-to-two stars if:</value>
   </data>
   <data name="perCent35UpDown.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
   <data name="maxPlaysPerDayBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>200, 328</value>
+    <value>200, 298</value>
   </data>
   <data name="avgPlaysPerDayBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -4222,7 +4153,7 @@ should change every day for each track in this case. </value>
     <value>holdsAtStartUpCheckBoxLabel</value>
   </data>
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 391</value>
+    <value>10, 353</value>
   </data>
   <data name="&gt;&gt;perCent45UpDown.Type" xml:space="preserve">
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -4234,7 +4165,7 @@ should change every day for each track in this case. </value>
     <value />
   </data>
   <data name="&gt;&gt;sinceAddedCheckBox.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="perCent1UpDown.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -4260,14 +4191,11 @@ should change every day for each track in this case. </value>
   <data name="perCent15UpDown.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="checkBox2Label.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
   <data name="&gt;&gt;threshold45Box.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="perCentLabel3.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+  <data name="&gt;&gt;perCentLabel1.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <data name="label9.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -4291,7 +4219,7 @@ should change every day for each track in this case. </value>
     <value>0</value>
   </data>
   <data name="notifyWhenAutoratingCompletedCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 71</value>
+    <value>204, 68</value>
   </data>
   <data name="label26.TabIndex" type="System.Int32, mscorlib">
     <value>31</value>
@@ -4317,14 +4245,14 @@ should change every day for each track in this case. </value>
   <data name="perCentLabel45.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="checkBox25.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+  <data name="checkBox4.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="checkBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 152</value>
+    <value>10, 139</value>
   </data>
   <data name="&gt;&gt;autoRateOnTrackPropertiesCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="perCentLabel05.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -4333,13 +4261,13 @@ should change every day for each track in this case. </value>
     <value>4, 4, 4, 4</value>
   </data>
   <data name="label28.Location" type="System.Drawing.Point, System.Drawing">
-    <value>349, 301</value>
+    <value>349, 274</value>
   </data>
   <data name="perCent5UpDown.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="checkBox05Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>32, 302</value>
+    <value>32, 274</value>
   </data>
   <data name="&gt;&gt;label25.Name" xml:space="preserve">
     <value>label25</value>
@@ -4359,14 +4287,11 @@ should change every day for each track in this case. </value>
   <data name="perCentLabel2.Text" xml:space="preserve">
     <value>% (~0 tracks)</value>
   </data>
-  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>350, 361</value>
-  </data>
   <data name="label7.Error" xml:space="preserve">
     <value />
   </data>
   <data name="&gt;&gt;checkBox05.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="LabelFive.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -4374,8 +4299,8 @@ should change every day for each track in this case. </value>
   <data name="holdsAtStartUpCheckBoxLabel.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="checkBox25Label.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 15</value>
+  <data name="buttonSave.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;label7.Name" xml:space="preserve">
     <value>label7</value>
@@ -4383,8 +4308,11 @@ should change every day for each track in this case. </value>
   <data name="label8.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
   </data>
+  <data name="label8.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="checkBox45.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 62</value>
+    <value>10, 58</value>
   </data>
   <data name="perCentLabel3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -4395,14 +4323,14 @@ should change every day for each track in this case. </value>
   <data name="label8.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="threshold5Box.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="checkBox3.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;label6.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;checkBox05Label.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="perCent15UpDown.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -4413,11 +4341,11 @@ should change every day for each track in this case. </value>
   <data name="label21.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="label24.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="checkBox25Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 15</value>
   </data>
   <data name="&gt;&gt;perCent25UpDown.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="perCentLabel45.Error" xml:space="preserve">
     <value />
@@ -4426,10 +4354,10 @@ should change every day for each track in this case. </value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;storePlaysPerDayCheckBox.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>22</value>
   </data>
   <data name="&gt;&gt;labelTotalTracks.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="perCentLabel25.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -4440,14 +4368,11 @@ should change every day for each track in this case. </value>
   <data name="&gt;&gt;label29.Parent" xml:space="preserve">
     <value>groupBox2</value>
   </data>
-  <data name="checkBox25Label.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="label7.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
   </data>
-  <data name="label7.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+  <data name="groupBox1Label.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="playsPerDayTagList.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -4483,7 +4408,7 @@ should change every day for each track in this case. </value>
     <value>threshold05Box</value>
   </data>
   <data name="&gt;&gt;labelSum.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;dirtyErrorProvider.Type" xml:space="preserve">
     <value>System.Windows.Forms.ErrorProvider, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -4493,12 +4418,6 @@ should change every day for each track in this case. </value>
   </data>
   <data name="label25.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
-  </data>
-  <data name="&gt;&gt;LabelFive.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="autoRateAtStartUpCheckBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="holdsAtStartUpCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -4513,7 +4432,7 @@ should change every day for each track in this case. </value>
     <value>NoControl</value>
   </data>
   <data name="&gt;&gt;perCentLabel25.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="maxPlaysPerDayBox.TabIndex" type="System.Int32, mscorlib">
     <value>41</value>
@@ -4527,9 +4446,6 @@ should change every day for each track in this case. </value>
   <data name="notifyWhenAutoratingCompletedCheckBoxLabel.Text" xml:space="preserve">
     <value>Notify when auto rating is completed</value>
   </data>
-  <data name="threshold4Box.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
   <data name="storePlaysPerDayCheckBoxLabel.ToolTip" xml:space="preserve">
     <value />
   </data>
@@ -4540,7 +4456,7 @@ should change every day for each track in this case. </value>
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;perCentLabel45.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>20</value>
   </data>
   <data name="playsPerDayTagList.ToolTip" xml:space="preserve">
     <value />
@@ -4561,25 +4477,22 @@ should change every day for each track in this case. </value>
     <value>4, 0, 4, 0</value>
   </data>
   <data name="perCent35UpDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 118</value>
+    <value>13, 109</value>
   </data>
   <data name="&gt;&gt;threshold15Box.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="label9.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="checkBox2Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>32, 212</value>
+    <value>32, 193</value>
   </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 15</value>
-  </data>
-  <data name="perCent15UpDown.Error" xml:space="preserve">
-    <value />
+  <data name="checkBox1.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="checkBox5Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>32, 32</value>
+    <value>32, 31</value>
   </data>
   <data name="label25.Text" xml:space="preserve">
     <value>plays per day or more</value>
@@ -4602,17 +4515,14 @@ should change every day for each track in this case. </value>
   <data name="perCent2UpDown.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="label21.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+  <data name="perCent15UpDown.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
   </data>
   <data name="&gt;&gt;threshold45Box.ZOrder" xml:space="preserve">
-    <value>38</value>
+    <value>39</value>
   </data>
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>25</value>
+    <value>26</value>
   </data>
   <data name="label30.Text" xml:space="preserve">
     <value>Average plays per day</value>
@@ -4630,10 +4540,10 @@ should change every day for each track in this case. </value>
     <value>4, 4, 4, 4</value>
   </data>
   <data name="avgPlaysPerDayBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>200, 358</value>
+    <value>200, 325</value>
   </data>
   <data name="&gt;&gt;notifyWhenAutoratingCompletedCheckBox.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="checkBox5Label.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -4665,6 +4575,9 @@ should change every day for each track in this case. </value>
   <data name="label5.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
+  <data name="calculateThresholdsAtStartUpCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
   <data name="perCent2UpDown.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
@@ -4675,13 +4588,13 @@ should change every day for each track in this case. </value>
     <value />
   </data>
   <data name="label30.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 361</value>
+    <value>10, 328</value>
   </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>749, 7</value>
+    <value>824, 8</value>
   </data>
   <data name="perCentLabel45.Location" type="System.Drawing.Point, System.Drawing">
-    <value>94, 61</value>
+    <value>94, 58</value>
   </data>
   <data name="checkBox3Label.Text" xml:space="preserve">
     <value>Set three stars if:</value>
@@ -4698,14 +4611,17 @@ should change every day for each track in this case. </value>
   <data name="label8.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
+  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 205</value>
+  </data>
   <data name="&gt;&gt;checkBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label29.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="notifyWhenAutoratingCompletedCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>213, 71</value>
+    <value>179, 68</value>
   </data>
   <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
@@ -4722,11 +4638,11 @@ should change every day for each track in this case. </value>
   <data name="&gt;&gt;checkBox3Label.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="labelSum.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 331</value>
+  <data name="autoRateAtStartUpCheckBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="checkBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 19</value>
+  <data name="perCentLabel05.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="&gt;&gt;storePlaysPerDayCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -4747,22 +4663,25 @@ should change every day for each track in this case. </value>
     <value />
   </data>
   <data name="&gt;&gt;perCent15UpDown.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;groupBox1Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="checkBox45.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="perCentLabel05.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+  <data name="checkBox15Label.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
   </data>
   <data name="&gt;&gt;threshold4Box.Parent" xml:space="preserve">
     <value>groupBox2</value>
   </data>
   <data name="buttonCancel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>4, 4, 9, 4</value>
   </data>
   <data name="label21.Location" type="System.Drawing.Point, System.Drawing">
-    <value>349, 91</value>
+    <value>349, 85</value>
   </data>
   <data name="checkBox35Label.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -4773,11 +4692,14 @@ should change every day for each track in this case. </value>
   <data name="autoRateAtStartUpCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
+  <data name="maxPlaysPerDayBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
   <data name="perCentLabel15.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;calculateThresholdsAtStartUpCheckBox.ZOrder" xml:space="preserve">
-    <value>18</value>
+  <data name="checkBox1Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="label23.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -4787,9 +4709,6 @@ should change every day for each track in this case. </value>
   </data>
   <data name="&gt;&gt;baseRatingTrackBar.Name" xml:space="preserve">
     <value>baseRatingTrackBar</value>
-  </data>
-  <data name="label23.Error" xml:space="preserve">
-    <value />
   </data>
   <data name="label27.TabIndex" type="System.Int32, mscorlib">
     <value>35</value>
@@ -4824,8 +4743,8 @@ should change every day for each track in this case. </value>
   <data name="&gt;&gt;notifyWhenAutoratingCompletedCheckBoxLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="checkBox35.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;label4.Name" xml:space="preserve">
+    <value>label4</value>
   </data>
   <data name="checkBox15.Error" xml:space="preserve">
     <value />
@@ -4834,10 +4753,10 @@ should change every day for each track in this case. </value>
     <value>0</value>
   </data>
   <data name="&gt;&gt;label25.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>18</value>
   </data>
   <data name="playsPerDayTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>313, 39</value>
+    <value>310, 36</value>
   </data>
   <data name="checkBox1Label.Text" xml:space="preserve">
     <value>Set one star if:</value>
@@ -4860,8 +4779,8 @@ should change every day for each track in this case. </value>
   <data name="perCentLabel25.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="labelSum.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt, style=Bold</value>
+  <data name="perCentLabel45.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="perCent35UpDown.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -4870,10 +4789,10 @@ should change every day for each track in this case. </value>
     <value>MiddleRight</value>
   </data>
   <data name="autoRateOnTrackPropertiesCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>36, 99</value>
+    <value>33, 96</value>
   </data>
   <data name="&gt;&gt;threshold4Box.ZOrder" xml:space="preserve">
-    <value>34</value>
+    <value>35</value>
   </data>
   <data name="autoRateOnTrackPropertiesCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -4885,7 +4804,7 @@ should change every day for each track in this case. </value>
     <value>MiddleRight</value>
   </data>
   <data name="checkBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 32</value>
+    <value>10, 31</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -4895,8 +4814,5 @@ should change every day for each track in this case. </value>
   </metadata>
   <metadata name="dirtyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>114, 17</value>
-  </metadata>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>ru</value>
   </metadata>
 </root>

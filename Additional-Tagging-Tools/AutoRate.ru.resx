@@ -136,7 +136,25 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1114, 643</value>
+    <value>1244, 595</value>
+  </data>
+  <data name="groupBox1Label.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="groupBox1Label.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="groupBox1Label.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="groupBox1Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>429, 15</value>
+  </data>
+  <data name="groupBox1Label.Text" xml:space="preserve">
+    <value> Укажите какой процент библиотеки должен иметь определенный рейтинг </value>
+  </data>
+  <data name="groupBox1Label.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="buttonCalculate.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -160,7 +178,7 @@
     <value>0</value>
   </data>
   <data name="labelTotalTracks.Size" type="System.Drawing.Size, System.Drawing">
-    <value>200, 15</value>
+    <value>190, 15</value>
   </data>
   <data name="labelTotalTracks.Text" xml:space="preserve">
     <value>Ever played tracks in your library: 0</value>
@@ -430,15 +448,30 @@
     <value>0</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>632, 210</value>
+    <value>676, 205</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>469, 423</value>
-  </data>
-  <data name="groupBox1.Text" xml:space="preserve">
-    <value>Укажите какой процент библиотеки должен иметь определенный рейтинг</value>
+    <value>559, 383</value>
   </data>
   <data name="groupBox1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="groupBox2Label.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="groupBox2Label.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="groupBox2Label.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="groupBox2Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>276, 15</value>
+  </data>
+  <data name="groupBox2Label.Text" xml:space="preserve">
+    <value> Пороговые значения для установки рейтингов </value>
+  </data>
+  <data name="groupBox2Label.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="avgPlaysPerDayBox.Error" xml:space="preserve">
@@ -451,7 +484,7 @@
     <value>0</value>
   </data>
   <data name="avgPlaysPerDayBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>220, 358</value>
+    <value>249, 325</value>
   </data>
   <data name="avgPlaysPerDayBox.ToolTip" xml:space="preserve">
     <value />
@@ -484,7 +517,7 @@
     <value>0</value>
   </data>
   <data name="maxPlaysPerDayBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>220, 328</value>
+    <value>249, 298</value>
   </data>
   <data name="maxPlaysPerDayBox.ToolTip" xml:space="preserve">
     <value />
@@ -517,7 +550,7 @@
     <value>0</value>
   </data>
   <data name="label28.Location" type="System.Drawing.Point, System.Drawing">
-    <value>371, 301</value>
+    <value>398, 274</value>
   </data>
   <data name="label28.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 15</value>
@@ -538,7 +571,7 @@
     <value>0</value>
   </data>
   <data name="threshold05Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>220, 298</value>
+    <value>249, 271</value>
   </data>
   <data name="threshold05Box.ToolTip" xml:space="preserve">
     <value />
@@ -583,7 +616,7 @@
     <value>0</value>
   </data>
   <data name="label27.Location" type="System.Drawing.Point, System.Drawing">
-    <value>371, 271</value>
+    <value>398, 247</value>
   </data>
   <data name="label27.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 15</value>
@@ -604,7 +637,7 @@
     <value>0</value>
   </data>
   <data name="threshold1Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>220, 268</value>
+    <value>249, 244</value>
   </data>
   <data name="threshold1Box.ToolTip" xml:space="preserve">
     <value />
@@ -649,7 +682,7 @@
     <value>0</value>
   </data>
   <data name="label26.Location" type="System.Drawing.Point, System.Drawing">
-    <value>371, 241</value>
+    <value>398, 220</value>
   </data>
   <data name="label26.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 15</value>
@@ -670,7 +703,7 @@
     <value>0</value>
   </data>
   <data name="threshold15Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>220, 238</value>
+    <value>249, 217</value>
   </data>
   <data name="threshold15Box.ToolTip" xml:space="preserve">
     <value />
@@ -715,7 +748,7 @@
     <value>0</value>
   </data>
   <data name="label25.Location" type="System.Drawing.Point, System.Drawing">
-    <value>371, 211</value>
+    <value>398, 193</value>
   </data>
   <data name="label25.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 15</value>
@@ -736,7 +769,7 @@
     <value>0</value>
   </data>
   <data name="threshold2Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>220, 208</value>
+    <value>249, 190</value>
   </data>
   <data name="threshold2Box.ToolTip" xml:space="preserve">
     <value />
@@ -781,7 +814,7 @@
     <value>0</value>
   </data>
   <data name="label24.Location" type="System.Drawing.Point, System.Drawing">
-    <value>371, 181</value>
+    <value>398, 166</value>
   </data>
   <data name="label24.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 15</value>
@@ -802,7 +835,7 @@
     <value>0</value>
   </data>
   <data name="threshold25Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>220, 178</value>
+    <value>249, 163</value>
   </data>
   <data name="threshold25Box.ToolTip" xml:space="preserve">
     <value />
@@ -847,7 +880,7 @@
     <value>0</value>
   </data>
   <data name="label23.Location" type="System.Drawing.Point, System.Drawing">
-    <value>371, 151</value>
+    <value>398, 139</value>
   </data>
   <data name="label23.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 15</value>
@@ -868,7 +901,7 @@
     <value>0</value>
   </data>
   <data name="threshold3Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>220, 148</value>
+    <value>249, 136</value>
   </data>
   <data name="threshold3Box.ToolTip" xml:space="preserve">
     <value />
@@ -913,7 +946,7 @@
     <value>0</value>
   </data>
   <data name="label22.Location" type="System.Drawing.Point, System.Drawing">
-    <value>371, 121</value>
+    <value>398, 112</value>
   </data>
   <data name="label22.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 15</value>
@@ -934,7 +967,7 @@
     <value>0</value>
   </data>
   <data name="threshold35Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>220, 118</value>
+    <value>249, 109</value>
   </data>
   <data name="threshold35Box.ToolTip" xml:space="preserve">
     <value />
@@ -979,7 +1012,7 @@
     <value>0</value>
   </data>
   <data name="label21.Location" type="System.Drawing.Point, System.Drawing">
-    <value>371, 91</value>
+    <value>398, 85</value>
   </data>
   <data name="label21.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 15</value>
@@ -1000,7 +1033,7 @@
     <value>0</value>
   </data>
   <data name="threshold4Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>220, 88</value>
+    <value>249, 82</value>
   </data>
   <data name="threshold4Box.ToolTip" xml:space="preserve">
     <value />
@@ -1045,7 +1078,7 @@
     <value>0</value>
   </data>
   <data name="label20.Location" type="System.Drawing.Point, System.Drawing">
-    <value>371, 61</value>
+    <value>398, 58</value>
   </data>
   <data name="label20.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 15</value>
@@ -1066,7 +1099,7 @@
     <value>0</value>
   </data>
   <data name="threshold45Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>220, 58</value>
+    <value>249, 55</value>
   </data>
   <data name="threshold45Box.ToolTip" xml:space="preserve">
     <value />
@@ -1111,7 +1144,7 @@
     <value>0</value>
   </data>
   <data name="LabelFive.Location" type="System.Drawing.Point, System.Drawing">
-    <value>371, 31</value>
+    <value>398, 31</value>
   </data>
   <data name="LabelFive.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 15</value>
@@ -1132,7 +1165,7 @@
     <value>0</value>
   </data>
   <data name="threshold5Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>220, 28</value>
+    <value>249, 28</value>
   </data>
   <data name="threshold5Box.ToolTip" xml:space="preserve">
     <value />
@@ -1167,48 +1200,6 @@
   <data name="checkBox5.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="label2.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label2.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="label2.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>371, 361</value>
-  </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 15</value>
-  </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>или больше воспроизведений в день</value>
-  </data>
-  <data name="label2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label1.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="label1.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>371, 331</value>
-  </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 15</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>или больше воспроизведений в день</value>
-  </data>
-  <data name="label1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="groupBox2.Error" xml:space="preserve">
     <value />
   </data>
@@ -1219,10 +1210,7 @@
     <value>0</value>
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>610, 423</value>
-  </data>
-  <data name="groupBox2.Text" xml:space="preserve">
-    <value>Пороговые значения для установки рейтингов</value>
+    <value>1034, 383</value>
   </data>
   <data name="groupBox2.ToolTip" xml:space="preserve">
     <value />
@@ -1237,7 +1225,7 @@
     <value>0</value>
   </data>
   <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>650, 186</value>
+    <value>673, 183</value>
   </data>
   <data name="label10.ToolTip" xml:space="preserve">
     <value />
@@ -1252,7 +1240,7 @@
     <value>0</value>
   </data>
   <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>611, 186</value>
+    <value>634, 183</value>
   </data>
   <data name="label9.ToolTip" xml:space="preserve">
     <value />
@@ -1267,7 +1255,7 @@
     <value>0</value>
   </data>
   <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>572, 186</value>
+    <value>595, 183</value>
   </data>
   <data name="label8.ToolTip" xml:space="preserve">
     <value />
@@ -1282,7 +1270,7 @@
     <value>0</value>
   </data>
   <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>533, 186</value>
+    <value>556, 183</value>
   </data>
   <data name="label7.ToolTip" xml:space="preserve">
     <value />
@@ -1297,7 +1285,7 @@
     <value>0</value>
   </data>
   <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>491, 186</value>
+    <value>514, 183</value>
   </data>
   <data name="label6.ToolTip" xml:space="preserve">
     <value />
@@ -1312,9 +1300,24 @@
     <value>0</value>
   </data>
   <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>451, 186</value>
+    <value>474, 183</value>
   </data>
   <data name="label5.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="baseRatingTrackBar.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="baseRatingTrackBar.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="baseRatingTrackBar.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="baseRatingTrackBar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>466, 149</value>
+  </data>
+  <data name="baseRatingTrackBar.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="label19.Error" xml:space="preserve">
@@ -1325,9 +1328,6 @@
   </data>
   <data name="label19.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
-  </data>
-  <data name="label19.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 156</value>
   </data>
   <data name="label19.Size" type="System.Drawing.Size, System.Drawing">
     <value>417, 15</value>
@@ -1431,7 +1431,7 @@
     <value>0</value>
   </data>
   <data name="notifyWhenAutoratingCompletedCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>378, 71</value>
+    <value>356, 68</value>
   </data>
   <data name="notifyWhenAutoratingCompletedCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>159, 15</value>
@@ -1452,7 +1452,7 @@
     <value>0</value>
   </data>
   <data name="notifyWhenAutoratingCompletedCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>350, 71</value>
+    <value>331, 68</value>
   </data>
   <data name="notifyWhenAutoratingCompletedCheckBox.ToolTip" xml:space="preserve">
     <value />
@@ -1487,40 +1487,19 @@
   <data name="autoRateAtStartUpCheckBox.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="holdsAtStartUpCheckBoxLabel.Error" xml:space="preserve">
+  <data name="buttonSave.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="holdsAtStartUpCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+  <data name="buttonSave.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="holdsAtStartUpCheckBoxLabel.IconPadding" type="System.Int32, mscorlib">
+  <data name="buttonSave.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="holdsAtStartUpCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>663, 45</value>
+  <data name="buttonSave.Text" xml:space="preserve">
+    <value>Сохранить настройки</value>
   </data>
-  <data name="holdsAtStartUpCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>358, 15</value>
-  </data>
-  <data name="holdsAtStartUpCheckBoxLabel.Text" xml:space="preserve">
-    <value>Автоматически рассчитывать пороговые значения при запуске</value>
-  </data>
-  <data name="holdsAtStartUpCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="calculateThresholdsAtStartUpCheckBox.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="calculateThresholdsAtStartUpCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="calculateThresholdsAtStartUpCheckBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="calculateThresholdsAtStartUpCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>638, 45</value>
-  </data>
-  <data name="calculateThresholdsAtStartUpCheckBox.ToolTip" xml:space="preserve">
+  <data name="buttonSave.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="playsPerDayTagList.Error" xml:space="preserve">
@@ -1531,12 +1510,6 @@
   </data>
   <data name="playsPerDayTagList.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
-  </data>
-  <data name="playsPerDayTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>442, 39</value>
-  </data>
-  <data name="playsPerDayTagList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 23</value>
   </data>
   <data name="playsPerDayTagList.ToolTip" xml:space="preserve">
     <value />
@@ -1571,22 +1544,34 @@
   <data name="storePlaysPerDayCheckBox.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="buttonSave.Error" xml:space="preserve">
+  <data name="holdsAtStartUpCheckBoxLabel.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="buttonSave.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+  <data name="holdsAtStartUpCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="buttonSave.IconPadding" type="System.Int32, mscorlib">
+  <data name="holdsAtStartUpCheckBoxLabel.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="buttonSave.Location" type="System.Drawing.Point, System.Drawing">
-    <value>638, 7</value>
+  <data name="holdsAtStartUpCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>358, 15</value>
   </data>
-  <data name="buttonSave.Text" xml:space="preserve">
-    <value>Сохранить настройки</value>
+  <data name="holdsAtStartUpCheckBoxLabel.Text" xml:space="preserve">
+    <value>Автоматически рассчитывать пороговые значения при запуске</value>
   </data>
-  <data name="buttonSave.ToolTip" xml:space="preserve">
+  <data name="holdsAtStartUpCheckBoxLabel.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="calculateThresholdsAtStartUpCheckBox.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="calculateThresholdsAtStartUpCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="calculateThresholdsAtStartUpCheckBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="calculateThresholdsAtStartUpCheckBox.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="autoRatingTagList.Error" xml:space="preserve">
@@ -1597,12 +1582,6 @@
   </data>
   <data name="autoRatingTagList.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
-  </data>
-  <data name="autoRatingTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>442, 8</value>
-  </data>
-  <data name="autoRatingTagList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 23</value>
   </data>
   <data name="autoRatingTagList.ToolTip" xml:space="preserve">
     <value />
@@ -1616,9 +1595,6 @@
   <data name="label4.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 11</value>
-  </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>143, 15</value>
   </data>
@@ -1628,20 +1604,8 @@
   <data name="label4.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="baseRatingTrackBar.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="baseRatingTrackBar.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="baseRatingTrackBar.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="baseRatingTrackBar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>443, 150</value>
-  </data>
-  <data name="baseRatingTrackBar.ToolTip" xml:space="preserve">
-    <value />
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>1260, 634</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Автоматически установить рейтинги</value>
@@ -2261,7 +2225,7 @@
     <value>0</value>
   </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1001, 7</value>
+    <value>1409, 8</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Закрыть</value>

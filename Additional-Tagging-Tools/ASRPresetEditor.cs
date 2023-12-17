@@ -25,19 +25,26 @@ namespace MusicBeePlugin
         {
             base.initializeForm();
 
+            if (UseMusicBeeFontSkinColors)
+            {
+                linkLabel1.DisabledLinkColor = DimmedAccentColor;
+                linkLabel1.LinkColor = TickedColor;
+                linkLabel1.ActiveLinkColor = DimmedHighlight;
+            }
+
             if (Language == "ru")
             {
-                tableLayoutPanel1.ColumnStyles[2].Width = (int)(180 * dpiScaleFactor);
-                tableLayoutPanel1.ColumnStyles[7].Width = (int)(180 * dpiScaleFactor);
+                tableLayoutPanel1.ColumnStyles[2].Width = (int)(180 * hDpiFontScaling);
+                tableLayoutPanel1.ColumnStyles[7].Width = (int)(180 * hDpiFontScaling);
             }
             else
             {
-                tableLayoutPanel1.ColumnStyles[2].Width = (int)(135 * dpiScaleFactor);
-                tableLayoutPanel1.ColumnStyles[7].Width = (int)(135 * dpiScaleFactor);
+                tableLayoutPanel1.ColumnStyles[2].Width = (int)(135 * hDpiFontScaling);
+                tableLayoutPanel1.ColumnStyles[7].Width = (int)(135 * hDpiFontScaling);
             }
 
 
-            button_GotFocus(this.AcceptButton, null); //Let's mark active button
+            button_GotFocus(AcceptButton, null); //Let's mark active button
         }
 
         private void makeReadonly(Control parent)
@@ -400,7 +407,7 @@ namespace MusicBeePlugin
             }
         }
 
-        private void FillTagCombobox(ComboBox tagList, bool isSearchTag) // isSearchTag: 0 - replaced tag, 1 - searched tag//*****
+        private void FillTagCombobox(ComboBox tagList, bool isSearchTag)
         {
             int searchFlag = isSearchTag ? 1 : 0;
             string tagName = tagList.Text;

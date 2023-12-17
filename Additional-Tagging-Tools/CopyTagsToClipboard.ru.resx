@@ -119,34 +119,28 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>295, 35</value>
-  </data>
-  <data name="buttonOK.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 23</value>
+    <value>355, 32</value>
   </data>
   <data name="buttonOK.Text" xml:space="preserve">
     <value>Копировать</value>
   </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>418, 35</value>
-  </data>
-  <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 23</value>
+    <value>463, 32</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Закрыть</value>
   </data>
+  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>557, 413</value>
+  </data>
   <data name="sourceTagList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>527, 200</value>
+    <value>557, 204</value>
   </data>
   <data name="checkedSourceTagList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>527, 201</value>
-  </data>
-  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>527, 406</value>
+    <value>557, 204</value>
   </data>
   <data name="tagSetComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>527, 23</value>
+    <value>557, 23</value>
   </data>
   <data name="tagSetComboBox.ToolTip" xml:space="preserve">
     <value>Выбранные теги автоматически сохраняются в текущий набор тегов. 
@@ -154,7 +148,7 @@
 имя набора в этом поле. </value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>525, 15</value>
+    <value>528, 15</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>☆ - Обычный тег  ★ - Свой тег  ✪ - Только для чтения  ❏ - Свойство файла  ♺ - Виртуальный</value>
@@ -165,14 +159,14 @@
   <data name="checkUncheckAllCheckBoxLabel.Text" xml:space="preserve">
     <value>Выбрать все/снять выбор</value>
   </data>
-  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>539, 66</value>
+  <data name="controlsPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>569, 62</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>539, 511</value>
+    <value>569, 511</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>555, 550</value>
+    <value>585, 550</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Копировать теги в буфер обмена</value>

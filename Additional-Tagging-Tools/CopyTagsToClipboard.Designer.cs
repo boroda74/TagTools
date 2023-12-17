@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿
+using System.Windows.Forms;
 
 namespace MusicBeePlugin
 {
@@ -22,23 +23,23 @@ namespace MusicBeePlugin
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.sourceTagList = new MusicBeePlugin.CustomListBox();
-            this.checkedSourceTagList = new MusicBeePlugin.CustomListBox();
+            this.sourceTagList = new System.Windows.Forms.CheckedListBox();
+            this.checkedSourceTagList = new System.Windows.Forms.CheckedListBox();
             this.tagSetComboBox = new System.Windows.Forms.ComboBox();
             this.checkUncheckAllCheckBox = new System.Windows.Forms.CheckBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.checkUncheckAllCheckBoxLabel = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.controlsPanel = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.controlsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonOK
             // 
             resources.ApplyResources(this.buttonOK, "buttonOK");
             this.buttonOK.Name = "buttonOK";
-            this.toolTip1.SetToolTip(this.buttonOK, resources.GetString("buttonOK.ToolTip"));
+            this.buttonOK.Tag = "#buttonCancel";
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // buttonCancel
@@ -46,7 +47,7 @@ namespace MusicBeePlugin
             resources.ApplyResources(this.buttonCancel, "buttonCancel");
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Name = "buttonCancel";
-            this.toolTip1.SetToolTip(this.buttonCancel, resources.GetString("buttonCancel.ToolTip"));
+            this.buttonCancel.Tag = "#controlsPanel";
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // tableLayoutPanel1
@@ -55,7 +56,6 @@ namespace MusicBeePlugin
             this.tableLayoutPanel1.Controls.Add(this.sourceTagList, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.checkedSourceTagList, 0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.toolTip1.SetToolTip(this.tableLayoutPanel1, resources.GetString("tableLayoutPanel1.ToolTip"));
             // 
             // sourceTagList
             // 
@@ -64,7 +64,6 @@ namespace MusicBeePlugin
             this.sourceTagList.MultiColumn = true;
             this.sourceTagList.Name = "sourceTagList";
             this.sourceTagList.Sorted = true;
-            this.toolTip1.SetToolTip(this.sourceTagList, resources.GetString("sourceTagList.ToolTip"));
             this.sourceTagList.SelectedIndexChanged += new System.EventHandler(this.sourceTagList_SelectedIndexChanged);
             // 
             // checkedSourceTagList
@@ -74,7 +73,6 @@ namespace MusicBeePlugin
             this.checkedSourceTagList.MultiColumn = true;
             this.checkedSourceTagList.Name = "checkedSourceTagList";
             this.checkedSourceTagList.Sorted = true;
-            this.toolTip1.SetToolTip(this.checkedSourceTagList, resources.GetString("checkedSourceTagList.ToolTip"));
             this.checkedSourceTagList.SelectedIndexChanged += new System.EventHandler(this.checkedSourceTagList_SelectedIndexChanged);
             // 
             // tagSetComboBox
@@ -91,7 +89,6 @@ namespace MusicBeePlugin
             resources.ApplyResources(this.checkUncheckAllCheckBox, "checkUncheckAllCheckBox");
             this.checkUncheckAllCheckBox.Name = "checkUncheckAllCheckBox";
             this.checkUncheckAllCheckBox.Tag = "checkUncheckAllCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.checkUncheckAllCheckBox, resources.GetString("checkUncheckAllCheckBox.ToolTip"));
             this.checkUncheckAllCheckBox.CheckedChanged += new System.EventHandler(this.checkUncheckAllCheckBox_CheckedChanged);
             // 
             // toolTip1
@@ -104,25 +101,23 @@ namespace MusicBeePlugin
             // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            this.toolTip1.SetToolTip(this.label1, resources.GetString("label1.ToolTip"));
+            this.label1.Tag = "@pinned-to-parent";
             // 
             // checkUncheckAllCheckBoxLabel
             // 
             resources.ApplyResources(this.checkUncheckAllCheckBoxLabel, "checkUncheckAllCheckBoxLabel");
             this.checkUncheckAllCheckBoxLabel.Name = "checkUncheckAllCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.checkUncheckAllCheckBoxLabel, resources.GetString("checkUncheckAllCheckBoxLabel.ToolTip"));
             this.checkUncheckAllCheckBoxLabel.Click += new System.EventHandler(this.checkUncheckAllCheckBoxLabel_Click);
             // 
-            // panel1
+            // controlsPanel
             // 
-            resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.Controls.Add(this.buttonCancel);
-            this.panel1.Controls.Add(this.buttonOK);
-            this.panel1.Controls.Add(this.checkUncheckAllCheckBoxLabel);
-            this.panel1.Controls.Add(this.checkUncheckAllCheckBox);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Name = "panel1";
-            this.toolTip1.SetToolTip(this.panel1, resources.GetString("panel1.ToolTip"));
+            resources.ApplyResources(this.controlsPanel, "controlsPanel");
+            this.controlsPanel.Controls.Add(this.buttonCancel);
+            this.controlsPanel.Controls.Add(this.buttonOK);
+            this.controlsPanel.Controls.Add(this.checkUncheckAllCheckBoxLabel);
+            this.controlsPanel.Controls.Add(this.checkUncheckAllCheckBox);
+            this.controlsPanel.Controls.Add(this.label1);
+            this.controlsPanel.Name = "controlsPanel";
             // 
             // CopyTagsToClipboardCommand
             // 
@@ -131,17 +126,16 @@ namespace MusicBeePlugin
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.tagSetComboBox);
+            this.Controls.Add(this.controlsPanel);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CopyTagsToClipboardCommand";
             this.Tag = "";
-            this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CopyTagsToClipboardCommand_FormClosed);
             this.tableLayoutPanel1.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.controlsPanel.ResumeLayout(false);
+            this.controlsPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -151,13 +145,13 @@ namespace MusicBeePlugin
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private MusicBeePlugin.CustomListBox sourceTagList;
-        private MusicBeePlugin.CustomListBox checkedSourceTagList;
+        private System.Windows.Forms.CheckedListBox sourceTagList;
+        private System.Windows.Forms.CheckedListBox checkedSourceTagList;
         private System.Windows.Forms.ComboBox tagSetComboBox;
         private System.Windows.Forms.CheckBox checkUncheckAllCheckBox;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label checkUncheckAllCheckBoxLabel;
-        private Panel panel1;
+        private Panel controlsPanel;
     }
 }

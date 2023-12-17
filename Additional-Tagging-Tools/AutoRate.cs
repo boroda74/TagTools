@@ -23,34 +23,34 @@ namespace MusicBeePlugin
         {
             base.initializeForm();
 
-            toolTip1.SetToolTip(this.autoRateAtStartUpCheckBox, MsgThresholdsDescription);
-            toolTip1.SetToolTip(this.autoRateAtStartUpCheckBoxLabel, MsgThresholdsDescription);
-            toolTip1.SetToolTip(this.autoRateOnTrackPropertiesCheckBox, MsgThresholdsDescription);
-            toolTip1.SetToolTip(this.threshold5Box, MsgThresholdsDescription);
-            toolTip1.SetToolTip(this.threshold45Box, MsgThresholdsDescription);
-            toolTip1.SetToolTip(this.threshold4Box, MsgThresholdsDescription);
-            toolTip1.SetToolTip(this.threshold35Box, MsgThresholdsDescription);
-            toolTip1.SetToolTip(this.threshold3Box, MsgThresholdsDescription);
-            toolTip1.SetToolTip(this.threshold25Box, MsgThresholdsDescription);
-            toolTip1.SetToolTip(this.threshold2Box, MsgThresholdsDescription);
-            toolTip1.SetToolTip(this.threshold15Box, MsgThresholdsDescription);
-            toolTip1.SetToolTip(this.threshold1Box, MsgThresholdsDescription);
-            toolTip1.SetToolTip(this.threshold05Box, MsgThresholdsDescription);
-            toolTip1.SetToolTip(this.buttonOK, MsgThresholdsDescription);
+            toolTip1.SetToolTip(autoRateAtStartUpCheckBox, MsgThresholdsDescription);
+            toolTip1.SetToolTip(autoRateAtStartUpCheckBoxLabel, MsgThresholdsDescription);
+            toolTip1.SetToolTip(autoRateOnTrackPropertiesCheckBox, MsgThresholdsDescription);
+            toolTip1.SetToolTip(threshold5Box, MsgThresholdsDescription);
+            toolTip1.SetToolTip(threshold45Box, MsgThresholdsDescription);
+            toolTip1.SetToolTip(threshold4Box, MsgThresholdsDescription);
+            toolTip1.SetToolTip(threshold35Box, MsgThresholdsDescription);
+            toolTip1.SetToolTip(threshold3Box, MsgThresholdsDescription);
+            toolTip1.SetToolTip(threshold25Box, MsgThresholdsDescription);
+            toolTip1.SetToolTip(threshold2Box, MsgThresholdsDescription);
+            toolTip1.SetToolTip(threshold15Box, MsgThresholdsDescription);
+            toolTip1.SetToolTip(threshold1Box, MsgThresholdsDescription);
+            toolTip1.SetToolTip(threshold05Box, MsgThresholdsDescription);
+            toolTip1.SetToolTip(buttonOK, MsgThresholdsDescription);
 
-            toolTip1.SetToolTip(this.calculateThresholdsAtStartUpCheckBox, MsgAutoCalculationOfThresholdsDescription);
-            toolTip1.SetToolTip(this.holdsAtStartUpCheckBoxLabel, MsgAutoCalculationOfThresholdsDescription);
-            toolTip1.SetToolTip(this.perCent5UpDown, MsgAutoCalculationOfThresholdsDescription);
-            toolTip1.SetToolTip(this.perCent45UpDown, MsgAutoCalculationOfThresholdsDescription);
-            toolTip1.SetToolTip(this.perCent4UpDown, MsgAutoCalculationOfThresholdsDescription);
-            toolTip1.SetToolTip(this.perCent35UpDown, MsgAutoCalculationOfThresholdsDescription);
-            toolTip1.SetToolTip(this.perCent3UpDown, MsgAutoCalculationOfThresholdsDescription);
-            toolTip1.SetToolTip(this.perCent25UpDown, MsgAutoCalculationOfThresholdsDescription);
-            toolTip1.SetToolTip(this.perCent2UpDown, MsgAutoCalculationOfThresholdsDescription);
-            toolTip1.SetToolTip(this.perCent15UpDown, MsgAutoCalculationOfThresholdsDescription);
-            toolTip1.SetToolTip(this.perCent1UpDown, MsgAutoCalculationOfThresholdsDescription);
-            toolTip1.SetToolTip(this.perCent05UpDown, MsgAutoCalculationOfThresholdsDescription);
-            toolTip1.SetToolTip(this.buttonCalculate, MsgAutoCalculationOfThresholdsDescription);
+            toolTip1.SetToolTip(calculateThresholdsAtStartUpCheckBox, MsgAutoCalculationOfThresholdsDescription);
+            toolTip1.SetToolTip(holdsAtStartUpCheckBoxLabel, MsgAutoCalculationOfThresholdsDescription);
+            toolTip1.SetToolTip(perCent5UpDown, MsgAutoCalculationOfThresholdsDescription);
+            toolTip1.SetToolTip(perCent45UpDown, MsgAutoCalculationOfThresholdsDescription);
+            toolTip1.SetToolTip(perCent4UpDown, MsgAutoCalculationOfThresholdsDescription);
+            toolTip1.SetToolTip(perCent35UpDown, MsgAutoCalculationOfThresholdsDescription);
+            toolTip1.SetToolTip(perCent3UpDown, MsgAutoCalculationOfThresholdsDescription);
+            toolTip1.SetToolTip(perCent25UpDown, MsgAutoCalculationOfThresholdsDescription);
+            toolTip1.SetToolTip(perCent2UpDown, MsgAutoCalculationOfThresholdsDescription);
+            toolTip1.SetToolTip(perCent15UpDown, MsgAutoCalculationOfThresholdsDescription);
+            toolTip1.SetToolTip(perCent1UpDown, MsgAutoCalculationOfThresholdsDescription);
+            toolTip1.SetToolTip(perCent05UpDown, MsgAutoCalculationOfThresholdsDescription);
+            toolTip1.SetToolTip(buttonCalculate, MsgAutoCalculationOfThresholdsDescription);
 
 
             autoRatingTagList.Items.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Rating));
@@ -135,7 +135,7 @@ namespace MusicBeePlugin
             perCentN_ValueChanged(perCent05UpDown, checkBox05, perCentLabel05, SavedSettings.actualPerCent05);
 
 
-            button_GotFocus(this.AcceptButton, null); //Let's mark active button
+            button_GotFocus(AcceptButton, null); //Let's mark active button
         }
 
         private decimal sumOfPercentage()
@@ -1031,6 +1031,15 @@ namespace MusicBeePlugin
         {
             storePlaysPerDayCheckBox.Checked = !storePlaysPerDayCheckBox.Checked;
             storePlaysPerDay_CheckedChanged(null, null);
+        }
+
+        public override void enableDisablePreviewOptionControls(bool enable, bool dontChangeDisabled = false)
+        {
+            foreach (var control in allControls)
+            {
+                if (control != buttonOK && control != buttonCancel)
+                    control.Enable(enable);
+            }
         }
 
         public override void enableQueryingButtons()

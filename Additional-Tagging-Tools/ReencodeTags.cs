@@ -39,19 +39,26 @@ namespace MusicBeePlugin
 
             for (int i = 1; i < encodings.Length; i++)
             {
-                initialEncodingsList.Items.Add(encodings[i].Name);
-                usedEncodingsList.Items.Add(encodings[i].Name);
+                initialEncodingList.Items.Add(encodings[i].Name);
+                usedEncodingList.Items.Add(encodings[i].Name);
             }
 
-            initialEncodingsList.Text = SavedSettings.initialEncodingName;
+            initialEncodingList.Text = SavedSettings.initialEncodingName;
             //usedEncodingsList.Text = SavedSettings.usedEncodingName;
 
-            if (initialEncodingsList.Text == string.Empty)
-                initialEncodingsList.Text = defaultEncoding.WebName;
-            if (usedEncodingsList.Text == string.Empty)
-                usedEncodingsList.Text = defaultEncoding.WebName;
+            if (initialEncodingList.Text == string.Empty)
+                initialEncodingList.Text = defaultEncoding.WebName;
+            if (usedEncodingList.Text == string.Empty)
+                usedEncodingList.Text = defaultEncoding.WebName;
+
+
+            previewTable.EnableHeadersVisualStyles = !UseMusicBeeFontSkinColors;
+
+            previewTable.BackgroundColor = UnchangedCellStyle.BackColor;
+            previewTable.DefaultCellStyle = UnchangedCellStyle;
 
             DatagridViewCheckBoxHeaderCell cbHeader = new DatagridViewCheckBoxHeaderCell();
+            cbHeader.Style = HeaderCellStyle;
             cbHeader.setState(true);
             cbHeader.OnCheckBoxClicked += new CheckBoxClickedHandler(cbHeader_OnCheckBoxClicked);
 
@@ -69,6 +76,9 @@ namespace MusicBeePlugin
 
             previewTable.Columns.Insert(0, colCB);
 
+            previewTable.Columns[2].HeaderCell.Style = HeaderCellStyle;
+            previewTable.Columns[3].HeaderCell.Style = HeaderCellStyle;
+
             previewTable.Columns[2].HeaderCell.Style.WrapMode = DataGridViewTriState.True;
             previewTable.Columns[3].HeaderCell.Style.WrapMode = DataGridViewTriState.True;
 
@@ -81,7 +91,7 @@ namespace MusicBeePlugin
             enableDisablePreviewOptionControls(true, true);
             enableQueryingOrUpdatingButtons();
 
-            button_GotFocus(this.AcceptButton, null); //Let's mark active button
+            button_GotFocus(AcceptButton, null); //Let's mark active button
         }
 
         private void previewTable_AddRowToTable(string[] row)
@@ -118,8 +128,8 @@ namespace MusicBeePlugin
             if (backgroundTaskIsWorking())
                 return true;
 
-            originalEncoding = Encoding.GetEncoding(initialEncodingsList.Text);
-            usedEncoding = Encoding.GetEncoding(usedEncodingsList.Text);
+            originalEncoding = Encoding.GetEncoding(initialEncodingList.Text);
+            usedEncoding = Encoding.GetEncoding(usedEncodingList.Text);
 
             previewSortTags = previewSortTagsСheckBox.Checked;
 
@@ -304,7 +314,7 @@ namespace MusicBeePlugin
         {
             saveWindowLayout(previewTable.Columns[1].Width, previewTable.Columns[2].Width, previewTable.Columns[3].Width);
 
-            SavedSettings.initialEncodingName = initialEncodingsList.Text;
+            SavedSettings.initialEncodingName = initialEncodingList.Text;
             //SavedSettings.usedEncodingName = usedEncodingsList.Text;
 
             TagToolsPlugin.SaveSettings();
@@ -380,8 +390,8 @@ namespace MusicBeePlugin
             if (enable && previewIsGenerated)
                 return;
 
-            initialEncodingsList.Enable(enable);
-            usedEncodingsList.Enable(enable);
+            initialEncodingList.Enable(enable);
+            usedEncodingList.Enable(enable);
         }
 
         public override void enableQueryingButtons()
@@ -425,13 +435,13 @@ namespace MusicBeePlugin
 
             if (value.Item1 != 0)
             {
-                previewTable.Columns[1].Width = (int)(value.Item1 * dpiScaleFactor);
-                previewTable.Columns[2].Width = (int)(value.Item2 * dpiScaleFactor);
+                previewTable.Columns[1].Width = (int)(value.Item1 * hDpiFontScaling);
+                previewTable.Columns[2].Width = (int)(value.Item2 * hDpiFontScaling);
             }
             else
             {
-                previewTable.Columns[1].Width = (int)(previewTable.Columns[1].Width * dpiScaleFactor);
-                previewTable.Columns[2].Width = (int)(previewTable.Columns[2].Width * dpiScaleFactor);
+                previewTable.Columns[1].Width = (int)(previewTable.Columns[1].Width * hDpiFontScaling);
+                previewTable.Columns[2].Width = (int)(previewTable.Columns[2].Width * hDpiFontScaling);
             }
         }
 

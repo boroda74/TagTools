@@ -21,13 +21,13 @@
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.initialEncodingsList = new System.Windows.Forms.ComboBox();
+            this.initialEncodingList = new System.Windows.Forms.ComboBox();
             this.previewTable = new System.Windows.Forms.DataGridView();
             this.File = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Track = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NewTrack = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.usedEncodingsList = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.usedEncodingList = new System.Windows.Forms.ComboBox();
+            this.usedEncodingLabel = new System.Windows.Forms.Label();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -36,8 +36,10 @@
             this.previewSortTagsСheckBox = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.previewSortTagsСheckBoxLabel = new System.Windows.Forms.Label();
+            this.controlsPanel = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).BeginInit();
+            this.controlsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonPreview
@@ -46,6 +48,7 @@
             this.dirtyErrorProvider.SetError(this.buttonPreview, resources.GetString("buttonPreview.Error"));
             this.dirtyErrorProvider.SetIconAlignment(this.buttonPreview, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonPreview.IconAlignment"))));
             this.buttonPreview.Name = "buttonPreview";
+            this.buttonPreview.Tag = "#buttonOK";
             this.buttonPreview.Click += new System.EventHandler(this.buttonPreview_Click);
             // 
             // buttonCancel
@@ -54,6 +57,7 @@
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.dirtyErrorProvider.SetIconAlignment(this.buttonCancel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonCancel.IconAlignment"))));
             this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Tag = "#controlsPanel@pinned-to-parent@non-defaultable";
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // buttonOK
@@ -61,6 +65,7 @@
             resources.ApplyResources(this.buttonOK, "buttonOK");
             this.dirtyErrorProvider.SetIconAlignment(this.buttonOK, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonOK.IconAlignment"))));
             this.buttonOK.Name = "buttonOK";
+            this.buttonOK.Tag = "#buttonCancel";
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // label2
@@ -68,15 +73,17 @@
             resources.ApplyResources(this.label2, "label2");
             this.dirtyErrorProvider.SetIconAlignment(this.label2, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("label2.IconAlignment"))));
             this.label2.Name = "label2";
+            this.label2.Tag = "#initialEncodingList@pinned-to-parent";
             // 
-            // initialEncodingsList
+            // initialEncodingList
             // 
-            this.initialEncodingsList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.initialEncodingsList.DropDownWidth = 250;
-            this.initialEncodingsList.FormattingEnabled = true;
-            this.dirtyErrorProvider.SetIconAlignment(this.initialEncodingsList, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("initialEncodingsList.IconAlignment"))));
-            resources.ApplyResources(this.initialEncodingsList, "initialEncodingsList");
-            this.initialEncodingsList.Name = "initialEncodingsList";
+            this.initialEncodingList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.initialEncodingList.DropDownWidth = 250;
+            this.initialEncodingList.FormattingEnabled = true;
+            this.dirtyErrorProvider.SetIconAlignment(this.initialEncodingList, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("initialEncodingList.IconAlignment"))));
+            resources.ApplyResources(this.initialEncodingList, "initialEncodingList");
+            this.initialEncodingList.Name = "initialEncodingList";
+            this.initialEncodingList.Tag = "#usedEncodingLabel";
             // 
             // previewTable
             // 
@@ -119,20 +126,21 @@
             resources.ApplyResources(this.NewTrack, "NewTrack");
             this.NewTrack.Name = "NewTrack";
             // 
-            // usedEncodingsList
+            // usedEncodingList
             // 
-            this.usedEncodingsList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.usedEncodingsList.DropDownWidth = 250;
-            this.usedEncodingsList.FormattingEnabled = true;
-            this.dirtyErrorProvider.SetIconAlignment(this.usedEncodingsList, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("usedEncodingsList.IconAlignment"))));
-            resources.ApplyResources(this.usedEncodingsList, "usedEncodingsList");
-            this.usedEncodingsList.Name = "usedEncodingsList";
+            this.usedEncodingList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.usedEncodingList.DropDownWidth = 250;
+            this.usedEncodingList.FormattingEnabled = true;
+            this.dirtyErrorProvider.SetIconAlignment(this.usedEncodingList, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("usedEncodingList.IconAlignment"))));
+            resources.ApplyResources(this.usedEncodingList, "usedEncodingList");
+            this.usedEncodingList.Name = "usedEncodingList";
             // 
-            // label4
+            // usedEncodingLabel
             // 
-            resources.ApplyResources(this.label4, "label4");
-            this.dirtyErrorProvider.SetIconAlignment(this.label4, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("label4.IconAlignment"))));
-            this.label4.Name = "label4";
+            resources.ApplyResources(this.usedEncodingLabel, "usedEncodingLabel");
+            this.dirtyErrorProvider.SetIconAlignment(this.usedEncodingLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("usedEncodingLabel.IconAlignment"))));
+            this.usedEncodingLabel.Name = "usedEncodingLabel";
+            this.usedEncodingLabel.Tag = "#usedEncodingList";
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -176,11 +184,27 @@
             // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
+            this.label1.Tag = "@pinned-to-parent";
             // 
             // previewSortTagsСheckBoxLabel
             // 
             resources.ApplyResources(this.previewSortTagsСheckBoxLabel, "previewSortTagsСheckBoxLabel");
             this.previewSortTagsСheckBoxLabel.Name = "previewSortTagsСheckBoxLabel";
+            // 
+            // controlsPanel
+            // 
+            resources.ApplyResources(this.controlsPanel, "controlsPanel");
+            this.controlsPanel.Controls.Add(this.previewSortTagsСheckBoxLabel);
+            this.controlsPanel.Controls.Add(this.previewSortTagsСheckBox);
+            this.controlsPanel.Controls.Add(this.label1);
+            this.controlsPanel.Controls.Add(this.buttonCancel);
+            this.controlsPanel.Controls.Add(this.buttonOK);
+            this.controlsPanel.Controls.Add(this.buttonPreview);
+            this.controlsPanel.Controls.Add(this.usedEncodingList);
+            this.controlsPanel.Controls.Add(this.usedEncodingLabel);
+            this.controlsPanel.Controls.Add(this.initialEncodingList);
+            this.controlsPanel.Controls.Add(this.label2);
+            this.controlsPanel.Name = "controlsPanel";
             // 
             // ReencodeTagsCommand
             // 
@@ -188,24 +212,16 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.Controls.Add(this.previewSortTagsСheckBoxLabel);
-            this.Controls.Add(this.previewSortTagsСheckBox);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.usedEncodingsList);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.initialEncodingsList);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.buttonPreview);
             this.Controls.Add(this.previewTable);
-            this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.buttonOK);
+            this.Controls.Add(this.controlsPanel);
             this.Name = "ReencodeTagsCommand";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ReencodeTagsCommand_FormClosing);
             this.Load += new System.EventHandler(this.ReencodeTagsCommand_Load);
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).EndInit();
+            this.controlsPanel.ResumeLayout(false);
+            this.controlsPanel.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -215,10 +231,10 @@
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox initialEncodingsList;
+        private System.Windows.Forms.ComboBox initialEncodingList;
         private System.Windows.Forms.DataGridView previewTable;
-        private System.Windows.Forms.ComboBox usedEncodingsList;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox usedEncodingList;
+        private System.Windows.Forms.Label usedEncodingLabel;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
@@ -230,5 +246,6 @@
         private System.Windows.Forms.CheckBox previewSortTagsСheckBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label previewSortTagsСheckBoxLabel;
+        private System.Windows.Forms.Panel controlsPanel;
     }
 }

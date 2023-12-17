@@ -75,7 +75,7 @@
             resources.ApplyResources(this.buttonCancel, "buttonCancel");
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Tag = "#fieldsPanel@non-defaultable";
+            this.buttonCancel.Tag = "#fieldsPanel@pinned-to-parent@non-defaultable";
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // buttonOK
@@ -145,13 +145,13 @@
             // 
             resources.ApplyResources(this.exceptionCharsBox, "exceptionCharsBox");
             this.exceptionCharsBox.Name = "exceptionCharsBox";
-            this.exceptionCharsBox.Tag = "#buttonASRExceptWordsAfterSymbols";
+            this.exceptionCharsBox.Tag = "#buttonASRExceptWordsAfterSymbols@pinned-to-parent";
             // 
             // wordSplittersBox
             // 
             resources.ApplyResources(this.wordSplittersBox, "wordSplittersBox");
             this.wordSplittersBox.Name = "wordSplittersBox";
-            this.wordSplittersBox.Tag = "#buttonASRWordSplitters";
+            this.wordSplittersBox.Tag = "#buttonASRWordSplitters@pinned-to-parent";
             // 
             // label6
             // 
@@ -183,7 +183,6 @@
             this.OriginalTagT,
             this.NewTag,
             this.NewTagT});
-            this.previewTable.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.previewTable.MultiSelect = false;
             this.previewTable.Name = "previewTable";
             this.previewTable.RowHeadersVisible = false;
@@ -201,24 +200,28 @@
             this.Track.FillWeight = 75F;
             resources.ApplyResources(this.Track, "Track");
             this.Track.Name = "Track";
+            this.Track.ReadOnly = true;
             // 
             // OriginalTag
             // 
             this.OriginalTag.FillWeight = 1F;
             resources.ApplyResources(this.OriginalTag, "OriginalTag");
             this.OriginalTag.Name = "OriginalTag";
+            this.OriginalTag.ReadOnly = true;
             // 
             // OriginalTagT
             // 
             this.OriginalTagT.FillWeight = 25F;
             resources.ApplyResources(this.OriginalTagT, "OriginalTagT");
             this.OriginalTagT.Name = "OriginalTagT";
+            this.OriginalTagT.ReadOnly = true;
             // 
             // NewTag
             // 
             this.NewTag.FillWeight = 1F;
             resources.ApplyResources(this.NewTag, "NewTag");
             this.NewTag.Name = "NewTag";
+            this.NewTag.ReadOnly = true;
             // 
             // NewTagT
             // 
@@ -230,6 +233,7 @@
             // 
             resources.ApplyResources(this.buttonReapply, "buttonReapply");
             this.buttonReapply.Name = "buttonReapply";
+            this.buttonReapply.Tag = "#buttonSettings@pinned-to-parent";
             this.toolTip1.SetToolTip(this.buttonReapply, resources.GetString("buttonReapply.ToolTip"));
             this.buttonReapply.Click += new System.EventHandler(this.buttonReapply_Click);
             // 
@@ -275,7 +279,7 @@
             this.buttonSettings.Image = global::MusicBeePlugin.Properties.Resources.gear_15;
             resources.ApplyResources(this.buttonSettings, "buttonSettings");
             this.buttonSettings.Name = "buttonSettings";
-            this.buttonSettings.Tag = "@non-defaultable";
+            this.buttonSettings.Tag = "@non-defaultable@square-control";
             this.toolTip1.SetToolTip(this.buttonSettings, resources.GetString("buttonSettings.ToolTip"));
             this.buttonSettings.Click += new System.EventHandler(this.buttonSettings_Click);
             // 
@@ -286,7 +290,7 @@
             this.exceptionWordsBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.exceptionWordsBox.FormattingEnabled = true;
             this.exceptionWordsBox.Name = "exceptionWordsBox";
-            this.exceptionWordsBox.Tag = "#removeExceptionButton";
+            this.exceptionWordsBox.Tag = "#removeExceptionButton@pinned-to-parent";
             this.exceptionWordsBox.Leave += new System.EventHandler(this.exceptionWordsBox_Leave);
             // 
             // alwaysCapitalize1stWordCheckBox
@@ -306,7 +310,7 @@
             resources.ApplyResources(this.removeExceptionButton, "removeExceptionButton");
             this.removeExceptionButton.Image = global::MusicBeePlugin.Properties.Resources.clear_button_15;
             this.removeExceptionButton.Name = "removeExceptionButton";
-            this.removeExceptionButton.Tag = "#fieldsPanel@non-defaultable";
+            this.removeExceptionButton.Tag = "#fieldsPanel@pinned-to-parent@non-defaultable";
             this.toolTip1.SetToolTip(this.removeExceptionButton, resources.GetString("removeExceptionButton.ToolTip"));
             this.removeExceptionButton.Click += new System.EventHandler(this.removeExceptionButton_Click);
             // 
@@ -314,7 +318,7 @@
             // 
             resources.ApplyResources(this.buttonASRExceptedWords, "buttonASRExceptedWords");
             this.buttonASRExceptedWords.Name = "buttonASRExceptedWords";
-            this.buttonASRExceptedWords.Tag = "@non-defaultable";
+            this.buttonASRExceptedWords.Tag = "#fieldsPanel@pinned-to-parent@non-defaultable";
             this.toolTip1.SetToolTip(this.buttonASRExceptedWords, resources.GetString("buttonASRExceptedWords.ToolTip"));
             this.buttonASRExceptedWords.Click += new System.EventHandler(this.buttonASR_Click);
             // 
@@ -322,7 +326,7 @@
             // 
             resources.ApplyResources(this.buttonASRExceptWordsAfterSymbols, "buttonASRExceptWordsAfterSymbols");
             this.buttonASRExceptWordsAfterSymbols.Name = "buttonASRExceptWordsAfterSymbols";
-            this.buttonASRExceptWordsAfterSymbols.Tag = "#fieldsPanel@non-defaultable";
+            this.buttonASRExceptWordsAfterSymbols.Tag = "#fieldsPanel@pinned-to-parentl@non-defaultable";
             this.toolTip1.SetToolTip(this.buttonASRExceptWordsAfterSymbols, resources.GetString("buttonASRExceptWordsAfterSymbols.ToolTip"));
             this.buttonASRExceptWordsAfterSymbols.Click += new System.EventHandler(this.buttonASRExceptWordsAfterSymbols_Click);
             // 
@@ -330,7 +334,7 @@
             // 
             resources.ApplyResources(this.buttonASRWordSplitters, "buttonASRWordSplitters");
             this.buttonASRWordSplitters.Name = "buttonASRWordSplitters";
-            this.buttonASRWordSplitters.Tag = "#fieldsPanel@non-defaultable";
+            this.buttonASRWordSplitters.Tag = "#fieldsPanel@pinned-to-parent@non-defaultable";
             this.toolTip1.SetToolTip(this.buttonASRWordSplitters, resources.GetString("buttonASRWordSplitters.ToolTip"));
             this.buttonASRWordSplitters.Click += new System.EventHandler(this.buttonASRWordSplitters_Click);
             // 
@@ -376,6 +380,7 @@
             // 
             resources.ApplyResources(this.onlyWordsCheckBoxLabel, "onlyWordsCheckBoxLabel");
             this.onlyWordsCheckBoxLabel.Name = "onlyWordsCheckBoxLabel";
+            this.onlyWordsCheckBoxLabel.Tag = "";
             this.onlyWordsCheckBoxLabel.Click += new System.EventHandler(this.onlyWordsCheckBoxLabel_Click);
             // 
             // exceptionCharsCheckBoxLabel
@@ -388,6 +393,7 @@
             // 
             resources.ApplyResources(this.wordSplittersCheckBoxLabel, "wordSplittersCheckBoxLabel");
             this.wordSplittersCheckBoxLabel.Name = "wordSplittersCheckBoxLabel";
+            this.wordSplittersCheckBoxLabel.Tag = "#fieldsPanel";
             this.wordSplittersCheckBoxLabel.Click += new System.EventHandler(this.wordSplittersCheckBoxLabel_Click);
             // 
             // alwaysCapitalize1stWordCheckBoxLabel
@@ -413,13 +419,13 @@
             this.fieldsPanel.Controls.Add(this.removeExceptionButton);
             this.fieldsPanel.Controls.Add(this.exceptionWordsBox);
             this.fieldsPanel.Controls.Add(this.buttonCancel);
+            this.fieldsPanel.Controls.Add(this.buttonASRExceptedWords);
             this.fieldsPanel.Controls.Add(this.buttonOK);
             this.fieldsPanel.Controls.Add(this.buttonPreview);
             this.fieldsPanel.Controls.Add(this.buttonSettings);
             this.fieldsPanel.Controls.Add(this.buttonReapply);
-            this.fieldsPanel.Controls.Add(this.buttonASRExceptedWords);
             this.fieldsPanel.Name = "fieldsPanel";
-            this.fieldsPanel.Tag = "#ChangeCaseCommand";
+            this.fieldsPanel.Tag = "#ChangeCaseCommand@pinned-to-parent";
             // 
             // toolTip1
             // 
@@ -462,7 +468,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.fieldsPanel);
             this.Name = "ChangeCaseCommand";
-            this.Tag = "@small-min-width";
+            this.Tag = "";
             this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ChangeCaseCommand_FormClosing);
             this.Load += new System.EventHandler(this.ChangeCaseCommand_Load);

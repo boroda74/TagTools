@@ -34,40 +34,43 @@
             this.ignoreCaseCheckBox = new System.Windows.Forms.CheckBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox1Label = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.appendCheckBox = new System.Windows.Forms.CheckBox();
-            this.condition1CheckBox = new System.Windows.Forms.CheckBox();
-            this.label37 = new System.Windows.Forms.Label();
             this.label38 = new System.Windows.Forms.Label();
+            this.appendCheckBox = new System.Windows.Forms.CheckBox();
+            this.label37 = new System.Windows.Forms.Label();
+            this.condition1CheckBox = new System.Windows.Forms.CheckBox();
             this.customTextBox = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox2Label = new System.Windows.Forms.Label();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.label7 = new System.Windows.Forms.Label();
             this.replacedTag2List = new System.Windows.Forms.ComboBox();
+            this.label40 = new System.Windows.Forms.Label();
             this.append2CheckBox = new System.Windows.Forms.CheckBox();
-            this.searchedPattern2Box = new System.Windows.Forms.TextBox();
-            this.replacedPattern2Box = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.replacedPattern2Box = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.searchedTag2List = new System.Windows.Forms.ComboBox();
-            this.condition2CheckBox = new System.Windows.Forms.CheckBox();
             this.label39 = new System.Windows.Forms.Label();
-            this.label40 = new System.Windows.Forms.Label();
+            this.condition2CheckBox = new System.Windows.Forms.CheckBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.searchedPattern2Box = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.groupBox3Label = new System.Windows.Forms.Label();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.label11 = new System.Windows.Forms.Label();
             this.replacedTag3List = new System.Windows.Forms.ComboBox();
+            this.label42 = new System.Windows.Forms.Label();
             this.append3CheckBox = new System.Windows.Forms.CheckBox();
-            this.searchedTag3List = new System.Windows.Forms.ComboBox();
-            this.label12 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.replacedPattern3Box = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.searchedTag3List = new System.Windows.Forms.ComboBox();
+            this.label41 = new System.Windows.Forms.Label();
+            this.condition3CheckBox = new System.Windows.Forms.CheckBox();
             this.label13 = new System.Windows.Forms.Label();
             this.searchedPattern3Box = new System.Windows.Forms.TextBox();
-            this.condition3CheckBox = new System.Windows.Forms.CheckBox();
-            this.label41 = new System.Windows.Forms.Label();
-            this.label42 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.languages = new System.Windows.Forms.ComboBox();
             this.guidBox = new System.Windows.Forms.TextBox();
             this.guidLabel = new System.Windows.Forms.Label();
@@ -113,40 +116,42 @@
             this.parameterTag5TypeList = new System.Windows.Forms.ComboBox();
             this.parameterTag4TypeList = new System.Windows.Forms.ComboBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.groupBox4Label = new System.Windows.Forms.Label();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.label29 = new System.Windows.Forms.Label();
             this.replacedTag4List = new System.Windows.Forms.ComboBox();
-            this.searchedTag4List = new System.Windows.Forms.ComboBox();
-            this.label30 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
             this.replacedPattern4Box = new System.Windows.Forms.TextBox();
+            this.label30 = new System.Windows.Forms.Label();
+            this.searchedTag4List = new System.Windows.Forms.ComboBox();
             this.label32 = new System.Windows.Forms.Label();
             this.searchedPattern4Box = new System.Windows.Forms.TextBox();
+            this.label29 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
-            this.label33 = new System.Windows.Forms.Label();
             this.replacedTag5List = new System.Windows.Forms.ComboBox();
-            this.searchedTag5List = new System.Windows.Forms.ComboBox();
-            this.label34 = new System.Windows.Forms.Label();
             this.label35 = new System.Windows.Forms.Label();
             this.replacedPattern5Box = new System.Windows.Forms.TextBox();
+            this.label34 = new System.Windows.Forms.Label();
+            this.searchedTag5List = new System.Windows.Forms.ComboBox();
             this.label36 = new System.Windows.Forms.Label();
             this.searchedPattern5Box = new System.Windows.Forms.TextBox();
+            this.label33 = new System.Windows.Forms.Label();
             this.customizedByUserCheckBox = new System.Windows.Forms.CheckBox();
             this.removePresetCheckBox = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.pictureBox26 = new System.Windows.Forms.PictureBox();
-            this.pictureBox27 = new System.Windows.Forms.PictureBox();
-            this.pictureBox28 = new System.Windows.Forms.PictureBox();
-            this.pictureBox19 = new System.Windows.Forms.PictureBox();
-            this.pictureBox18 = new System.Windows.Forms.PictureBox();
-            this.pictureBox17 = new System.Windows.Forms.PictureBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
+            this.pictureBox26 = new System.Windows.Forms.PictureBox();
             this.label27 = new System.Windows.Forms.Label();
+            this.pictureBox27 = new System.Windows.Forms.PictureBox();
+            this.label28 = new System.Windows.Forms.Label();
+            this.pictureBox28 = new System.Windows.Forms.PictureBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.pictureBox19 = new System.Windows.Forms.PictureBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.pictureBox18 = new System.Windows.Forms.PictureBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.pictureBox17 = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.removePresetCheckBoxLabel = new System.Windows.Forms.Label();
             this.customizedByUserCheckBoxLabel = new System.Windows.Forms.Label();
@@ -260,7 +265,10 @@
             // 
             // linkLabel1
             // 
+            this.linkLabel1.ActiveLinkColor = System.Drawing.SystemColors.MenuHighlight;
             resources.ApplyResources(this.linkLabel1, "linkLabel1");
+            this.linkLabel1.DisabledLinkColor = System.Drawing.SystemColors.GrayText;
+            this.linkLabel1.LinkColor = System.Drawing.SystemColors.HotTrack;
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.TabStop = true;
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
@@ -268,26 +276,38 @@
             // groupBox1
             // 
             resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.Controls.Add(this.groupBox1Label);
             this.groupBox1.Controls.Add(this.tableLayoutPanel3);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
+            // 
+            // groupBox1Label
+            // 
+            resources.ApplyResources(this.groupBox1Label, "groupBox1Label");
+            this.groupBox1Label.Name = "groupBox1Label";
             // 
             // tableLayoutPanel3
             // 
             resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
             this.tableLayoutPanel3.Controls.Add(this.replacedTagList, 5, 1);
-            this.tableLayoutPanel3.Controls.Add(this.appendCheckBox, 3, 1);
-            this.tableLayoutPanel3.Controls.Add(this.label3, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.label6, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.label5, 2, 1);
-            this.tableLayoutPanel3.Controls.Add(this.label4, 2, 0);
-            this.tableLayoutPanel3.Controls.Add(this.replacedPatternBox, 1, 1);
-            this.tableLayoutPanel3.Controls.Add(this.searchedTagList, 5, 0);
-            this.tableLayoutPanel3.Controls.Add(this.searchedPatternBox, 1, 0);
-            this.tableLayoutPanel3.Controls.Add(this.condition1CheckBox, 3, 0);
-            this.tableLayoutPanel3.Controls.Add(this.label37, 4, 0);
             this.tableLayoutPanel3.Controls.Add(this.label38, 4, 1);
+            this.tableLayoutPanel3.Controls.Add(this.appendCheckBox, 3, 1);
+            this.tableLayoutPanel3.Controls.Add(this.label5, 2, 1);
+            this.tableLayoutPanel3.Controls.Add(this.replacedPatternBox, 1, 1);
+            this.tableLayoutPanel3.Controls.Add(this.label6, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.searchedTagList, 5, 0);
+            this.tableLayoutPanel3.Controls.Add(this.label37, 4, 0);
+            this.tableLayoutPanel3.Controls.Add(this.condition1CheckBox, 3, 0);
+            this.tableLayoutPanel3.Controls.Add(this.label4, 2, 0);
+            this.tableLayoutPanel3.Controls.Add(this.searchedPatternBox, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.label3, 0, 0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            // 
+            // label38
+            // 
+            resources.ApplyResources(this.label38, "label38");
+            this.label38.Name = "label38";
+            this.toolTip1.SetToolTip(this.label38, resources.GetString("label38.ToolTip"));
             // 
             // appendCheckBox
             // 
@@ -295,24 +315,18 @@
             this.appendCheckBox.Name = "appendCheckBox";
             this.toolTip1.SetToolTip(this.appendCheckBox, resources.GetString("appendCheckBox.ToolTip"));
             // 
-            // condition1CheckBox
-            // 
-            resources.ApplyResources(this.condition1CheckBox, "condition1CheckBox");
-            this.condition1CheckBox.Name = "condition1CheckBox";
-            this.condition1CheckBox.ThreeState = true;
-            this.toolTip1.SetToolTip(this.condition1CheckBox, resources.GetString("condition1CheckBox.ToolTip"));
-            // 
             // label37
             // 
             resources.ApplyResources(this.label37, "label37");
             this.label37.Name = "label37";
             this.toolTip1.SetToolTip(this.label37, resources.GetString("label37.ToolTip"));
             // 
-            // label38
+            // condition1CheckBox
             // 
-            resources.ApplyResources(this.label38, "label38");
-            this.label38.Name = "label38";
-            this.toolTip1.SetToolTip(this.label38, resources.GetString("label38.ToolTip"));
+            resources.ApplyResources(this.condition1CheckBox, "condition1CheckBox");
+            this.condition1CheckBox.Name = "condition1CheckBox";
+            this.condition1CheckBox.ThreeState = true;
+            this.toolTip1.SetToolTip(this.condition1CheckBox, resources.GetString("condition1CheckBox.ToolTip"));
             // 
             // customTextBox
             // 
@@ -323,31 +337,32 @@
             // groupBox2
             // 
             resources.ApplyResources(this.groupBox2, "groupBox2");
+            this.groupBox2.Controls.Add(this.groupBox2Label);
             this.groupBox2.Controls.Add(this.tableLayoutPanel4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             // 
+            // groupBox2Label
+            // 
+            resources.ApplyResources(this.groupBox2Label, "groupBox2Label");
+            this.groupBox2Label.Name = "groupBox2Label";
+            // 
             // tableLayoutPanel4
             // 
             resources.ApplyResources(this.tableLayoutPanel4, "tableLayoutPanel4");
-            this.tableLayoutPanel4.Controls.Add(this.label7, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.replacedTag2List, 5, 1);
+            this.tableLayoutPanel4.Controls.Add(this.label40, 4, 1);
             this.tableLayoutPanel4.Controls.Add(this.append2CheckBox, 3, 1);
-            this.tableLayoutPanel4.Controls.Add(this.searchedPattern2Box, 1, 0);
-            this.tableLayoutPanel4.Controls.Add(this.replacedPattern2Box, 1, 1);
             this.tableLayoutPanel4.Controls.Add(this.label10, 2, 1);
+            this.tableLayoutPanel4.Controls.Add(this.replacedPattern2Box, 1, 1);
             this.tableLayoutPanel4.Controls.Add(this.label8, 0, 1);
             this.tableLayoutPanel4.Controls.Add(this.searchedTag2List, 5, 0);
-            this.tableLayoutPanel4.Controls.Add(this.condition2CheckBox, 3, 0);
             this.tableLayoutPanel4.Controls.Add(this.label39, 4, 0);
-            this.tableLayoutPanel4.Controls.Add(this.label40, 4, 1);
+            this.tableLayoutPanel4.Controls.Add(this.condition2CheckBox, 3, 0);
             this.tableLayoutPanel4.Controls.Add(this.label9, 2, 0);
+            this.tableLayoutPanel4.Controls.Add(this.searchedPattern2Box, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.label7, 0, 0);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            // 
-            // label7
-            // 
-            resources.ApplyResources(this.label7, "label7");
-            this.label7.Name = "label7";
             // 
             // replacedTag2List
             // 
@@ -357,26 +372,27 @@
             this.replacedTag2List.FormattingEnabled = true;
             this.replacedTag2List.Name = "replacedTag2List";
             // 
+            // label40
+            // 
+            resources.ApplyResources(this.label40, "label40");
+            this.label40.Name = "label40";
+            this.toolTip1.SetToolTip(this.label40, resources.GetString("label40.ToolTip"));
+            // 
             // append2CheckBox
             // 
             resources.ApplyResources(this.append2CheckBox, "append2CheckBox");
             this.append2CheckBox.Name = "append2CheckBox";
             this.toolTip1.SetToolTip(this.append2CheckBox, resources.GetString("append2CheckBox.ToolTip"));
             // 
-            // searchedPattern2Box
+            // label10
             // 
-            resources.ApplyResources(this.searchedPattern2Box, "searchedPattern2Box");
-            this.searchedPattern2Box.Name = "searchedPattern2Box";
+            resources.ApplyResources(this.label10, "label10");
+            this.label10.Name = "label10";
             // 
             // replacedPattern2Box
             // 
             resources.ApplyResources(this.replacedPattern2Box, "replacedPattern2Box");
             this.replacedPattern2Box.Name = "replacedPattern2Box";
-            // 
-            // label10
-            // 
-            resources.ApplyResources(this.label10, "label10");
-            this.label10.Name = "label10";
             // 
             // label8
             // 
@@ -391,6 +407,12 @@
             this.searchedTag2List.FormattingEnabled = true;
             this.searchedTag2List.Name = "searchedTag2List";
             // 
+            // label39
+            // 
+            resources.ApplyResources(this.label39, "label39");
+            this.label39.Name = "label39";
+            this.toolTip1.SetToolTip(this.label39, resources.GetString("label39.ToolTip"));
+            // 
             // condition2CheckBox
             // 
             resources.ApplyResources(this.condition2CheckBox, "condition2CheckBox");
@@ -398,51 +420,50 @@
             this.condition2CheckBox.ThreeState = true;
             this.toolTip1.SetToolTip(this.condition2CheckBox, resources.GetString("condition2CheckBox.ToolTip"));
             // 
-            // label39
-            // 
-            resources.ApplyResources(this.label39, "label39");
-            this.label39.Name = "label39";
-            this.toolTip1.SetToolTip(this.label39, resources.GetString("label39.ToolTip"));
-            // 
-            // label40
-            // 
-            resources.ApplyResources(this.label40, "label40");
-            this.label40.Name = "label40";
-            this.toolTip1.SetToolTip(this.label40, resources.GetString("label40.ToolTip"));
-            // 
             // label9
             // 
             resources.ApplyResources(this.label9, "label9");
             this.label9.Name = "label9";
             // 
+            // searchedPattern2Box
+            // 
+            resources.ApplyResources(this.searchedPattern2Box, "searchedPattern2Box");
+            this.searchedPattern2Box.Name = "searchedPattern2Box";
+            // 
+            // label7
+            // 
+            resources.ApplyResources(this.label7, "label7");
+            this.label7.Name = "label7";
+            // 
             // groupBox3
             // 
             resources.ApplyResources(this.groupBox3, "groupBox3");
+            this.groupBox3.Controls.Add(this.groupBox3Label);
             this.groupBox3.Controls.Add(this.tableLayoutPanel5);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
             // 
+            // groupBox3Label
+            // 
+            resources.ApplyResources(this.groupBox3Label, "groupBox3Label");
+            this.groupBox3Label.Name = "groupBox3Label";
+            // 
             // tableLayoutPanel5
             // 
             resources.ApplyResources(this.tableLayoutPanel5, "tableLayoutPanel5");
-            this.tableLayoutPanel5.Controls.Add(this.label11, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.replacedTag3List, 5, 1);
+            this.tableLayoutPanel5.Controls.Add(this.label42, 4, 1);
             this.tableLayoutPanel5.Controls.Add(this.append3CheckBox, 3, 1);
-            this.tableLayoutPanel5.Controls.Add(this.searchedTag3List, 5, 0);
-            this.tableLayoutPanel5.Controls.Add(this.label12, 0, 1);
             this.tableLayoutPanel5.Controls.Add(this.label14, 2, 1);
             this.tableLayoutPanel5.Controls.Add(this.replacedPattern3Box, 1, 1);
+            this.tableLayoutPanel5.Controls.Add(this.label12, 0, 1);
+            this.tableLayoutPanel5.Controls.Add(this.searchedTag3List, 5, 0);
+            this.tableLayoutPanel5.Controls.Add(this.label41, 4, 0);
+            this.tableLayoutPanel5.Controls.Add(this.condition3CheckBox, 3, 0);
             this.tableLayoutPanel5.Controls.Add(this.label13, 2, 0);
             this.tableLayoutPanel5.Controls.Add(this.searchedPattern3Box, 1, 0);
-            this.tableLayoutPanel5.Controls.Add(this.condition3CheckBox, 3, 0);
-            this.tableLayoutPanel5.Controls.Add(this.label41, 4, 0);
-            this.tableLayoutPanel5.Controls.Add(this.label42, 4, 1);
+            this.tableLayoutPanel5.Controls.Add(this.label11, 0, 0);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
-            // 
-            // label11
-            // 
-            resources.ApplyResources(this.label11, "label11");
-            this.label11.Name = "label11";
             // 
             // replacedTag3List
             // 
@@ -452,24 +473,17 @@
             this.replacedTag3List.FormattingEnabled = true;
             this.replacedTag3List.Name = "replacedTag3List";
             // 
+            // label42
+            // 
+            resources.ApplyResources(this.label42, "label42");
+            this.label42.Name = "label42";
+            this.toolTip1.SetToolTip(this.label42, resources.GetString("label42.ToolTip"));
+            // 
             // append3CheckBox
             // 
             resources.ApplyResources(this.append3CheckBox, "append3CheckBox");
             this.append3CheckBox.Name = "append3CheckBox";
             this.toolTip1.SetToolTip(this.append3CheckBox, resources.GetString("append3CheckBox.ToolTip"));
-            // 
-            // searchedTag3List
-            // 
-            resources.ApplyResources(this.searchedTag3List, "searchedTag3List");
-            this.searchedTag3List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.searchedTag3List.DropDownWidth = 250;
-            this.searchedTag3List.FormattingEnabled = true;
-            this.searchedTag3List.Name = "searchedTag3List";
-            // 
-            // label12
-            // 
-            resources.ApplyResources(this.label12, "label12");
-            this.label12.Name = "label12";
             // 
             // label14
             // 
@@ -481,6 +495,32 @@
             resources.ApplyResources(this.replacedPattern3Box, "replacedPattern3Box");
             this.replacedPattern3Box.Name = "replacedPattern3Box";
             // 
+            // label12
+            // 
+            resources.ApplyResources(this.label12, "label12");
+            this.label12.Name = "label12";
+            // 
+            // searchedTag3List
+            // 
+            resources.ApplyResources(this.searchedTag3List, "searchedTag3List");
+            this.searchedTag3List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.searchedTag3List.DropDownWidth = 250;
+            this.searchedTag3List.FormattingEnabled = true;
+            this.searchedTag3List.Name = "searchedTag3List";
+            // 
+            // label41
+            // 
+            resources.ApplyResources(this.label41, "label41");
+            this.label41.Name = "label41";
+            this.toolTip1.SetToolTip(this.label41, resources.GetString("label41.ToolTip"));
+            // 
+            // condition3CheckBox
+            // 
+            resources.ApplyResources(this.condition3CheckBox, "condition3CheckBox");
+            this.condition3CheckBox.Name = "condition3CheckBox";
+            this.condition3CheckBox.ThreeState = true;
+            this.toolTip1.SetToolTip(this.condition3CheckBox, resources.GetString("condition3CheckBox.ToolTip"));
+            // 
             // label13
             // 
             resources.ApplyResources(this.label13, "label13");
@@ -491,24 +531,10 @@
             resources.ApplyResources(this.searchedPattern3Box, "searchedPattern3Box");
             this.searchedPattern3Box.Name = "searchedPattern3Box";
             // 
-            // condition3CheckBox
+            // label11
             // 
-            resources.ApplyResources(this.condition3CheckBox, "condition3CheckBox");
-            this.condition3CheckBox.Name = "condition3CheckBox";
-            this.condition3CheckBox.ThreeState = true;
-            this.toolTip1.SetToolTip(this.condition3CheckBox, resources.GetString("condition3CheckBox.ToolTip"));
-            // 
-            // label41
-            // 
-            resources.ApplyResources(this.label41, "label41");
-            this.label41.Name = "label41";
-            this.toolTip1.SetToolTip(this.label41, resources.GetString("label41.ToolTip"));
-            // 
-            // label42
-            // 
-            resources.ApplyResources(this.label42, "label42");
-            this.label42.Name = "label42";
-            this.toolTip1.SetToolTip(this.label42, resources.GetString("label42.ToolTip"));
+            resources.ApplyResources(this.label11, "label11");
+            this.label11.Name = "label11";
             // 
             // languages
             // 
@@ -523,7 +549,7 @@
             resources.ApplyResources(this.guidBox, "guidBox");
             this.guidBox.Name = "guidBox";
             this.guidBox.ReadOnly = true;
-            this.guidBox.Tag = "#modifiedLabel#scaled-moved-x";
+            this.guidBox.Tag = "#modifiedLabel";
             // 
             // guidLabel
             // 
@@ -842,31 +868,32 @@
             // groupBox4
             // 
             resources.ApplyResources(this.groupBox4, "groupBox4");
+            this.groupBox4.Controls.Add(this.groupBox4Label);
             this.groupBox4.Controls.Add(this.tableLayoutPanel6);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.TabStop = false;
             // 
+            // groupBox4Label
+            // 
+            resources.ApplyResources(this.groupBox4Label, "groupBox4Label");
+            this.groupBox4Label.Name = "groupBox4Label";
+            // 
             // tableLayoutPanel6
             // 
             resources.ApplyResources(this.tableLayoutPanel6, "tableLayoutPanel6");
-            this.tableLayoutPanel6.Controls.Add(this.label29, 0, 0);
             this.tableLayoutPanel6.Controls.Add(this.replacedTag4List, 5, 1);
+            this.tableLayoutPanel6.Controls.Add(this.label44, 4, 1);
             this.tableLayoutPanel6.Controls.Add(this.append4CheckBox, 3, 1);
-            this.tableLayoutPanel6.Controls.Add(this.searchedTag4List, 5, 0);
-            this.tableLayoutPanel6.Controls.Add(this.label30, 0, 1);
             this.tableLayoutPanel6.Controls.Add(this.label31, 2, 1);
             this.tableLayoutPanel6.Controls.Add(this.replacedPattern4Box, 1, 1);
+            this.tableLayoutPanel6.Controls.Add(this.label30, 0, 1);
+            this.tableLayoutPanel6.Controls.Add(this.searchedTag4List, 5, 0);
+            this.tableLayoutPanel6.Controls.Add(this.label43, 4, 0);
+            this.tableLayoutPanel6.Controls.Add(this.condition4CheckBox, 3, 0);
             this.tableLayoutPanel6.Controls.Add(this.label32, 2, 0);
             this.tableLayoutPanel6.Controls.Add(this.searchedPattern4Box, 1, 0);
-            this.tableLayoutPanel6.Controls.Add(this.condition4CheckBox, 3, 0);
-            this.tableLayoutPanel6.Controls.Add(this.label43, 4, 0);
-            this.tableLayoutPanel6.Controls.Add(this.label44, 4, 1);
+            this.tableLayoutPanel6.Controls.Add(this.label29, 0, 0);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
-            // 
-            // label29
-            // 
-            resources.ApplyResources(this.label29, "label29");
-            this.label29.Name = "label29";
             // 
             // replacedTag4List
             // 
@@ -875,19 +902,6 @@
             this.replacedTag4List.DropDownWidth = 250;
             this.replacedTag4List.FormattingEnabled = true;
             this.replacedTag4List.Name = "replacedTag4List";
-            // 
-            // searchedTag4List
-            // 
-            resources.ApplyResources(this.searchedTag4List, "searchedTag4List");
-            this.searchedTag4List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.searchedTag4List.DropDownWidth = 250;
-            this.searchedTag4List.FormattingEnabled = true;
-            this.searchedTag4List.Name = "searchedTag4List";
-            // 
-            // label30
-            // 
-            resources.ApplyResources(this.label30, "label30");
-            this.label30.Name = "label30";
             // 
             // label31
             // 
@@ -899,6 +913,19 @@
             resources.ApplyResources(this.replacedPattern4Box, "replacedPattern4Box");
             this.replacedPattern4Box.Name = "replacedPattern4Box";
             // 
+            // label30
+            // 
+            resources.ApplyResources(this.label30, "label30");
+            this.label30.Name = "label30";
+            // 
+            // searchedTag4List
+            // 
+            resources.ApplyResources(this.searchedTag4List, "searchedTag4List");
+            this.searchedTag4List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.searchedTag4List.DropDownWidth = 250;
+            this.searchedTag4List.FormattingEnabled = true;
+            this.searchedTag4List.Name = "searchedTag4List";
+            // 
             // label32
             // 
             resources.ApplyResources(this.label32, "label32");
@@ -909,34 +936,40 @@
             resources.ApplyResources(this.searchedPattern4Box, "searchedPattern4Box");
             this.searchedPattern4Box.Name = "searchedPattern4Box";
             // 
+            // label29
+            // 
+            resources.ApplyResources(this.label29, "label29");
+            this.label29.Name = "label29";
+            // 
             // groupBox5
             // 
             resources.ApplyResources(this.groupBox5, "groupBox5");
+            this.groupBox5.Controls.Add(this.label15);
             this.groupBox5.Controls.Add(this.tableLayoutPanel7);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.TabStop = false;
             // 
+            // label15
+            // 
+            resources.ApplyResources(this.label15, "label15");
+            this.label15.Name = "label15";
+            // 
             // tableLayoutPanel7
             // 
             resources.ApplyResources(this.tableLayoutPanel7, "tableLayoutPanel7");
-            this.tableLayoutPanel7.Controls.Add(this.label33, 0, 0);
             this.tableLayoutPanel7.Controls.Add(this.replacedTag5List, 5, 1);
+            this.tableLayoutPanel7.Controls.Add(this.label46, 4, 1);
             this.tableLayoutPanel7.Controls.Add(this.append5CheckBox, 3, 1);
-            this.tableLayoutPanel7.Controls.Add(this.searchedTag5List, 5, 0);
-            this.tableLayoutPanel7.Controls.Add(this.label34, 0, 1);
             this.tableLayoutPanel7.Controls.Add(this.label35, 2, 1);
             this.tableLayoutPanel7.Controls.Add(this.replacedPattern5Box, 1, 1);
+            this.tableLayoutPanel7.Controls.Add(this.label34, 0, 1);
+            this.tableLayoutPanel7.Controls.Add(this.searchedTag5List, 5, 0);
+            this.tableLayoutPanel7.Controls.Add(this.label45, 4, 0);
+            this.tableLayoutPanel7.Controls.Add(this.condition5CheckBox, 3, 0);
             this.tableLayoutPanel7.Controls.Add(this.label36, 2, 0);
             this.tableLayoutPanel7.Controls.Add(this.searchedPattern5Box, 1, 0);
-            this.tableLayoutPanel7.Controls.Add(this.condition5CheckBox, 3, 0);
-            this.tableLayoutPanel7.Controls.Add(this.label45, 4, 0);
-            this.tableLayoutPanel7.Controls.Add(this.label46, 4, 1);
+            this.tableLayoutPanel7.Controls.Add(this.label33, 0, 0);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
-            // 
-            // label33
-            // 
-            resources.ApplyResources(this.label33, "label33");
-            this.label33.Name = "label33";
             // 
             // replacedTag5List
             // 
@@ -945,19 +978,6 @@
             this.replacedTag5List.DropDownWidth = 250;
             this.replacedTag5List.FormattingEnabled = true;
             this.replacedTag5List.Name = "replacedTag5List";
-            // 
-            // searchedTag5List
-            // 
-            resources.ApplyResources(this.searchedTag5List, "searchedTag5List");
-            this.searchedTag5List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.searchedTag5List.DropDownWidth = 250;
-            this.searchedTag5List.FormattingEnabled = true;
-            this.searchedTag5List.Name = "searchedTag5List";
-            // 
-            // label34
-            // 
-            resources.ApplyResources(this.label34, "label34");
-            this.label34.Name = "label34";
             // 
             // label35
             // 
@@ -969,6 +989,19 @@
             resources.ApplyResources(this.replacedPattern5Box, "replacedPattern5Box");
             this.replacedPattern5Box.Name = "replacedPattern5Box";
             // 
+            // label34
+            // 
+            resources.ApplyResources(this.label34, "label34");
+            this.label34.Name = "label34";
+            // 
+            // searchedTag5List
+            // 
+            resources.ApplyResources(this.searchedTag5List, "searchedTag5List");
+            this.searchedTag5List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.searchedTag5List.DropDownWidth = 250;
+            this.searchedTag5List.FormattingEnabled = true;
+            this.searchedTag5List.Name = "searchedTag5List";
+            // 
             // label36
             // 
             resources.ApplyResources(this.label36, "label36");
@@ -978,6 +1011,11 @@
             // 
             resources.ApplyResources(this.searchedPattern5Box, "searchedPattern5Box");
             this.searchedPattern5Box.Name = "searchedPattern5Box";
+            // 
+            // label33
+            // 
+            resources.ApplyResources(this.label33, "label33");
+            this.label33.Name = "label33";
             // 
             // customizedByUserCheckBox
             // 
@@ -994,37 +1032,42 @@
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.pictureBox26, 5, 2);
-            this.tableLayoutPanel1.Controls.Add(this.pictureBox27, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.pictureBox28, 5, 1);
-            this.tableLayoutPanel1.Controls.Add(this.pictureBox19, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.pictureBox18, 5, 0);
-            this.tableLayoutPanel1.Controls.Add(this.pictureBox17, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label17, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.parameterTagTypeList, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label21, 3, 0);
-            this.tableLayoutPanel1.Controls.Add(this.parameterTagList, 4, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label18, 6, 0);
-            this.tableLayoutPanel1.Controls.Add(this.parameterTag2TypeList, 7, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label22, 8, 0);
-            this.tableLayoutPanel1.Controls.Add(this.parameterTag2List, 9, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label19, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.parameterTag3TypeList, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label23, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.parameterTag6List, 9, 2);
             this.tableLayoutPanel1.Controls.Add(this.label20, 8, 2);
-            this.tableLayoutPanel1.Controls.Add(this.parameterTag3List, 4, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label28, 6, 1);
             this.tableLayoutPanel1.Controls.Add(this.parameterTag6TypeList, 7, 2);
             this.tableLayoutPanel1.Controls.Add(this.label26, 6, 2);
+            this.tableLayoutPanel1.Controls.Add(this.pictureBox26, 5, 2);
             this.tableLayoutPanel1.Controls.Add(this.parameterTag5List, 4, 2);
-            this.tableLayoutPanel1.Controls.Add(this.label24, 8, 1);
             this.tableLayoutPanel1.Controls.Add(this.label25, 3, 2);
-            this.tableLayoutPanel1.Controls.Add(this.parameterTag4TypeList, 7, 1);
-            this.tableLayoutPanel1.Controls.Add(this.parameterTag4List, 9, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label27, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.parameterTag5TypeList, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.label27, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.pictureBox27, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.parameterTag4List, 9, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label24, 8, 1);
+            this.tableLayoutPanel1.Controls.Add(this.parameterTag4TypeList, 7, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label28, 6, 1);
+            this.tableLayoutPanel1.Controls.Add(this.pictureBox28, 5, 1);
+            this.tableLayoutPanel1.Controls.Add(this.parameterTag3List, 4, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label23, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.parameterTag3TypeList, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label19, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.pictureBox19, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.parameterTag2List, 9, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label22, 8, 0);
+            this.tableLayoutPanel1.Controls.Add(this.parameterTag2TypeList, 7, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label18, 6, 0);
+            this.tableLayoutPanel1.Controls.Add(this.pictureBox18, 5, 0);
+            this.tableLayoutPanel1.Controls.Add(this.parameterTagList, 4, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label21, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.parameterTagTypeList, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label17, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.pictureBox17, 0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
+            // label26
+            // 
+            resources.ApplyResources(this.label26, "label26");
+            this.label26.Name = "label26";
             // 
             // pictureBox26
             // 
@@ -1032,11 +1075,21 @@
             this.pictureBox26.Name = "pictureBox26";
             this.pictureBox26.TabStop = false;
             // 
+            // label27
+            // 
+            resources.ApplyResources(this.label27, "label27");
+            this.label27.Name = "label27";
+            // 
             // pictureBox27
             // 
             resources.ApplyResources(this.pictureBox27, "pictureBox27");
             this.pictureBox27.Name = "pictureBox27";
             this.pictureBox27.TabStop = false;
+            // 
+            // label28
+            // 
+            resources.ApplyResources(this.label28, "label28");
+            this.label28.Name = "label28";
             // 
             // pictureBox28
             // 
@@ -1044,11 +1097,21 @@
             this.pictureBox28.Name = "pictureBox28";
             this.pictureBox28.TabStop = false;
             // 
+            // label19
+            // 
+            resources.ApplyResources(this.label19, "label19");
+            this.label19.Name = "label19";
+            // 
             // pictureBox19
             // 
             resources.ApplyResources(this.pictureBox19, "pictureBox19");
             this.pictureBox19.Name = "pictureBox19";
             this.pictureBox19.TabStop = false;
+            // 
+            // label18
+            // 
+            resources.ApplyResources(this.label18, "label18");
+            this.label18.Name = "label18";
             // 
             // pictureBox18
             // 
@@ -1056,57 +1119,32 @@
             this.pictureBox18.Name = "pictureBox18";
             this.pictureBox18.TabStop = false;
             // 
+            // label17
+            // 
+            resources.ApplyResources(this.label17, "label17");
+            this.label17.Name = "label17";
+            // 
             // pictureBox17
             // 
             resources.ApplyResources(this.pictureBox17, "pictureBox17");
             this.pictureBox17.Name = "pictureBox17";
             this.pictureBox17.TabStop = false;
             // 
-            // label17
-            // 
-            resources.ApplyResources(this.label17, "label17");
-            this.label17.Name = "label17";
-            // 
-            // label18
-            // 
-            resources.ApplyResources(this.label18, "label18");
-            this.label18.Name = "label18";
-            // 
-            // label19
-            // 
-            resources.ApplyResources(this.label19, "label19");
-            this.label19.Name = "label19";
-            // 
-            // label28
-            // 
-            resources.ApplyResources(this.label28, "label28");
-            this.label28.Name = "label28";
-            // 
-            // label26
-            // 
-            resources.ApplyResources(this.label26, "label26");
-            this.label26.Name = "label26";
-            // 
-            // label27
-            // 
-            resources.ApplyResources(this.label27, "label27");
-            this.label27.Name = "label27";
-            // 
             // tableLayoutPanel2
             // 
             resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
+            this.tableLayoutPanel2.Controls.Add(this.customText4Box, 5, 1);
             this.tableLayoutPanel2.Controls.Add(this.customText4CheckBoxLabel, 4, 1);
-            this.tableLayoutPanel2.Controls.Add(this.customText2CheckBoxLabel, 4, 0);
-            this.tableLayoutPanel2.Controls.Add(this.customTextCheckBox, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.customText4CheckBox, 3, 1);
+            this.tableLayoutPanel2.Controls.Add(this.customText3Box, 2, 1);
+            this.tableLayoutPanel2.Controls.Add(this.customText3CheckBoxLabel, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.customText3CheckBox, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.customText2Box, 5, 0);
-            this.tableLayoutPanel2.Controls.Add(this.customText4Box, 5, 1);
-            this.tableLayoutPanel2.Controls.Add(this.customTextBox, 2, 0);
-            this.tableLayoutPanel2.Controls.Add(this.customText3Box, 2, 1);
-            this.tableLayoutPanel2.Controls.Add(this.customTextCheckBoxLabel, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.customText3CheckBoxLabel, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.customText2CheckBoxLabel, 4, 0);
             this.tableLayoutPanel2.Controls.Add(this.customText2CheckBox, 3, 0);
-            this.tableLayoutPanel2.Controls.Add(this.customText4CheckBox, 3, 1);
+            this.tableLayoutPanel2.Controls.Add(this.customTextBox, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.customTextCheckBoxLabel, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.customTextCheckBox, 0, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             // 
             // removePresetCheckBoxLabel
@@ -1125,7 +1163,7 @@
             // 
             resources.ApplyResources(this.userPresetCheckBoxLabel, "userPresetCheckBoxLabel");
             this.userPresetCheckBoxLabel.Name = "userPresetCheckBoxLabel";
-            this.userPresetCheckBoxLabel.Tag = "";
+            this.userPresetCheckBoxLabel.Tag = "#ASRPresetEditor@pinned-to-parent";
             // 
             // ignoreCaseCheckBoxLabel
             // 
@@ -1139,48 +1177,53 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.Controls.Add(this.ignoreCaseCheckBoxLabel);
-            this.Controls.Add(this.userPresetCheckBoxLabel);
-            this.Controls.Add(this.customizedByUserCheckBoxLabel);
-            this.Controls.Add(this.removePresetCheckBoxLabel);
-            this.Controls.Add(this.nameBox);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.removePresetCheckBox);
-            this.Controls.Add(this.customizedByUserCheckBox);
-            this.Controls.Add(this.groupBox5);
-            this.Controls.Add(this.groupBox4);
+            this.Controls.Add(this.userPresetCheckBoxLabel);
             this.Controls.Add(this.userPresetCheckBox);
-            this.Controls.Add(this.modifiedLabel);
+            this.Controls.Add(this.customizedByUserCheckBoxLabel);
+            this.Controls.Add(this.customizedByUserCheckBox);
+            this.Controls.Add(this.removePresetCheckBoxLabel);
+            this.Controls.Add(this.removePresetCheckBox);
             this.Controls.Add(this.modifiedBox);
-            this.Controls.Add(this.guidLabel);
+            this.Controls.Add(this.modifiedLabel);
             this.Controls.Add(this.guidBox);
-            this.Controls.Add(this.languages);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.guidLabel);
             this.Controls.Add(this.linkLabel1);
-            this.Controls.Add(this.ignoreCaseCheckBox);
-            this.Controls.Add(this.buttonOK);
-            this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.descriptionBox);
+            this.Controls.Add(this.nameBox);
+            this.Controls.Add(this.languages);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.MinimizeBox = false;
+            this.Controls.Add(this.buttonCancel);
+            this.Controls.Add(this.buttonOK);
+            this.Controls.Add(this.ignoreCaseCheckBoxLabel);
+            this.Controls.Add(this.ignoreCaseCheckBox);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox4);
+            this.Controls.Add(this.groupBox5);
             this.Name = "ASRPresetEditor";
+            this.Tag = "@min-max-height-same";
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.tableLayoutPanel6.ResumeLayout(false);
             this.tableLayoutPanel6.PerformLayout();
             this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.tableLayoutPanel7.ResumeLayout(false);
             this.tableLayoutPanel7.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -1335,5 +1378,10 @@
         private System.Windows.Forms.PictureBox pictureBox19;
         private System.Windows.Forms.PictureBox pictureBox18;
         private System.Windows.Forms.PictureBox pictureBox17;
+        private System.Windows.Forms.Label groupBox1Label;
+        private System.Windows.Forms.Label groupBox2Label;
+        private System.Windows.Forms.Label groupBox3Label;
+        private System.Windows.Forms.Label groupBox4Label;
+        private System.Windows.Forms.Label label15;
     }
 }

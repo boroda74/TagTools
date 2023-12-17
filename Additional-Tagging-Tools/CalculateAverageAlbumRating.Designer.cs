@@ -15,6 +15,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CalculateAverageAlbumRatingCommand));
             this.notifyWhenCalculationCompletedCheckBox = new System.Windows.Forms.CheckBox();
             this.calculateAlbumRatingAtStartUpCheckBox = new System.Windows.Forms.CheckBox();
@@ -32,6 +33,8 @@
             this.considerUnratedCheckBoxLabel = new System.Windows.Forms.Label();
             this.calculateAlbumRatingAtTagsChangedCheckBoxLabel = new System.Windows.Forms.Label();
             this.notifyWhenCalculationCompletedCheckBoxLabel = new System.Windows.Forms.Label();
+            this.dirtyErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // notifyWhenCalculationCompletedCheckBox
@@ -63,6 +66,7 @@
             // 
             // buttonOK
             // 
+            this.dirtyErrorProvider.SetError(this.buttonOK, resources.GetString("buttonOK.Error"));
             resources.ApplyResources(this.buttonOK, "buttonOK");
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
@@ -92,10 +96,10 @@
             // 
             // trackRatingTagList
             // 
-            resources.ApplyResources(this.trackRatingTagList, "trackRatingTagList");
             this.trackRatingTagList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.trackRatingTagList.DropDownWidth = 250;
             this.trackRatingTagList.FormattingEnabled = true;
+            resources.ApplyResources(this.trackRatingTagList, "trackRatingTagList");
             this.trackRatingTagList.Name = "trackRatingTagList";
             // 
             // albumRatingTagList
@@ -138,6 +142,13 @@
             this.notifyWhenCalculationCompletedCheckBoxLabel.Name = "notifyWhenCalculationCompletedCheckBoxLabel";
             this.notifyWhenCalculationCompletedCheckBoxLabel.Click += new System.EventHandler(this.notifyWhenCalculationCompletedCheckBoxLabel_Click);
             // 
+            // dirtyErrorProvider
+            // 
+            this.dirtyErrorProvider.BlinkRate = 1000;
+            this.dirtyErrorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.AlwaysBlink;
+            this.dirtyErrorProvider.ContainerControl = this;
+            resources.ApplyResources(this.dirtyErrorProvider, "dirtyErrorProvider");
+            // 
             // CalculateAverageAlbumRatingCommand
             // 
             this.AcceptButton = this.buttonOK;
@@ -160,11 +171,10 @@
             this.Controls.Add(this.calculateAlbumRatingAtStartUpCheckBoxLabel);
             this.Controls.Add(this.calculateAlbumRatingAtStartUpCheckBox);
             this.Controls.Add(this.label1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "CalculateAverageAlbumRatingCommand";
-            this.Tag = "";
+            this.Tag = "@min-max-width-same@min-max-height-same";
+            ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -188,5 +198,6 @@
         private System.Windows.Forms.Label considerUnratedCheckBoxLabel;
         private System.Windows.Forms.Label calculateAlbumRatingAtTagsChangedCheckBoxLabel;
         private System.Windows.Forms.Label notifyWhenCalculationCompletedCheckBoxLabel;
+        private System.Windows.Forms.ErrorProvider dirtyErrorProvider;
     }
 }

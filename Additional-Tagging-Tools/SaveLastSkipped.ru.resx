@@ -119,19 +119,22 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lastSkippedTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>355, 7</value>
+    <value>307, 5</value>
   </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>487, 71</value>
+    <value>439, 59</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Отмена</value>
   </data>
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>391, 71</value>
+    <value>343, 59</value>
   </data>
   <data name="buttonOK.Text" xml:space="preserve">
     <value>ОК</value>
+  </data>
+  <data name="saveLastSkippedCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 4</value>
   </data>
   <data name="dateTimeFormatLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>135, 15</value>
@@ -140,7 +143,10 @@
     <value>Формат даты/времени:</value>
   </data>
   <data name="lastSkippedDateFormatTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>355, 39</value>
+    <value>307, 32</value>
+  </data>
+  <data name="saveLastSkippedCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>28, 6</value>
   </data>
   <data name="saveLastSkippedCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>249, 15</value>
@@ -148,14 +154,11 @@
   <data name="saveLastSkippedCheckBoxLabel.Text" xml:space="preserve">
     <value>Сохранять дату последнего пропуска трека:</value>
   </data>
-  <data name="placeholderCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 19</value>
-  </data>
-  <data name="placeholderCheckBox.Text" xml:space="preserve">
-    <value> </value>
-  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>587, 103</value>
+    <value>539, 86</value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>555, 125</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Сохранять дату последнего пропуска трека</value>

@@ -51,6 +51,9 @@ namespace MusicBeePlugin
             tagSetComboBox.Items.Add(SavedSettings.copyTagsTagSets[9].setName);
 
             tagSetComboBox_DropDownClosed(null, null);
+
+
+            button_GotFocus(AcceptButton, null); //Let's mark active button
         }
 
         public static string[] SelectTags(Plugin tagToolsPluginParam, string formTitle, string copyButtonName, string[] preselectedTags, bool addArtworkAlso)

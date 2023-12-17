@@ -8,11 +8,10 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
+using System.Linq;
 using static MusicBeePlugin.AdvancedSearchAndReplaceCommand;
 using static MusicBeePlugin.LibraryReportsCommand;
 using ExtensionMethods;
-using static MusicBeePlugin.Plugin;
-using System.CodeDom;
 
 
 namespace ExtensionMethods
@@ -87,13 +86,13 @@ namespace ExtensionMethods
     }
 
     public static class ReadonlyControls
-    { 
+    {
         public static void Enable(this Control control, bool state)
         {
             Color enabledColor;
             Color disabledColor;
 
-            if (!Plugin.SavedSettings.useSkinColors)
+            if (!Plugin.SavedSettings.useMusicBeeFontSkinColors)
             {
                 enabledColor = SystemColors.ControlText;
                 disabledColor = SystemColors.GrayText;
@@ -101,7 +100,7 @@ namespace ExtensionMethods
             else
             {
                 enabledColor = Plugin.AccentColor;
-                disabledColor = Plugin.DimmedColor;
+                disabledColor = Plugin.DimmedAccentColor;
             }
 
 
@@ -124,21 +123,19 @@ namespace ExtensionMethods
 
 
             control.Enabled = state;
-            Label label = (Label)control.Parent.Controls[(string)control.Tag];
 
-
-
-            if (label != null)
+            //control2 must be Label
+            (control.FindForm() as PluginWindowTemplate).controlsReferences.TryGetValue(control, out var control2);
+            if (control2 != null)
             {
                 if (state)
-                    label.ForeColor = enabledColor;
+                    control2.ForeColor = enabledColor;
                 else
-                    label.ForeColor = disabledColor;
+                    control2.ForeColor = disabledColor;
             }
         }
     }
 }
-
 
 namespace MusicBeePlugin
 {
@@ -215,15 +212,16 @@ namespace MusicBeePlugin
 
         public static string PluginVersion;
 
-
+        public static ToolStripMenuItem OpenedFormsSubmenu;
 
         //Skinning
-        public static bool ForceCloseForms = false;//******
+        public static bool PluginClosing = false;//***
 
-        public static Color ControlHighlightColor;
-        public static Color ContrastColor;
+        public static Color ControlHighlightBackColor;
+        public static Color ControlHighlightForeColor;
 
         public static Color FormBackColor;
+        public static Color FormForeColor;
 
         public static Color ButtonFocusedBorderColor;
         public static Color ButtonBorderColor;
@@ -234,10 +232,16 @@ namespace MusicBeePlugin
         public static Color ButtonDisabledBackColor;
         public static Color ButtonDisabledForeColor;
 
+        public static Color InputPanelForeColor;
+        public static Color InputPanelBackColor;
+
+        public static Color InputControlForeColor;
+        public static Color InputControlBackColor;
+
         public static Color AccentColor;
         public static Color AccentSelectedColor;
-        public static Color DimmedColor;
-        public static Color DeepDimmedColor;
+        public static Color DimmedAccentColor;
+        public static Color DeepDimmedAccentColor;
 
         public static Color DimmedHighlight;
 
@@ -509,8 +513,14 @@ namespace MusicBeePlugin
         #endregion
 
         #region Settings
+        //Cached settings until MusicBee restart
+        public static bool DontShowShowHiddenWindows;
+
         public class SavedSettingsType
         {
+            public bool allowAsrLrPresetAutoexecution;
+            public bool allowCommandExecutionWithoutPreview;
+
             public bool dontShowContextMenu;
 
             public bool dontShowCopyTag;
@@ -525,10 +535,8 @@ namespace MusicBeePlugin
             public bool dontShowShowHiddenWindows;
             public bool dontShowBackupRestore;
 
-            public bool allowCommandExecutionWithoutPreview;
-
             public bool minimizePluginWindows;
-            public bool useSkinColors;
+            public bool useMusicBeeFontSkinColors;
             public bool dontHighlightChangedTags;
 
             public bool dontIncludeInPreviewLinesWithoutChangedTags;
@@ -689,8 +697,7 @@ namespace MusicBeePlugin
             public bool dontShowPredefinedPresetsCantBeChangedMessage;
             public string defaultAsrPresetsExportFolder;
 
-            public MessageBoxDefaultButton asrUnsavedChangesLastAnswer = MessageBoxDefaultButton.Button3;
-            public MessageBoxDefaultButton lrUnsavedChangesLastAnswer = MessageBoxDefaultButton.Button3;
+            public MessageBoxDefaultButton unsavedChangesConfirmationLastAnswer = MessageBoxDefaultButton.Button1;
 
             public int lastSkippedTagId;
             public int lastSkippedDateFormat;
@@ -713,6 +720,7 @@ namespace MusicBeePlugin
         private static string PluginDescription;
         private static string PluginVersionString;
 
+        private static string OpenWindowsMenuSectionName;
         private static string TagToolsMenuSectionName;
         private static string BackupRestoreMenuSectionName;
 
@@ -748,7 +756,7 @@ namespace MusicBeePlugin
         private static string PasteTagsFromClipboardCommandDescription;
         private static string CopyTagsToClipboardUsingMenuDescription;
         private static string MsrCommandDescription;
-        private static string ShowHiddenCommandDescription;
+        public static string ShowHiddenCommandDescription;
 
         public static string BackupTagsCommandName;
         public static string RestoreTagsCommandName;
@@ -951,8 +959,7 @@ namespace MusicBeePlugin
         public static string MsgSelectTrack;
         public static string MsgSelectAtLeast2Tracks;
         public static string MsgCreateBaselineWarning;
-        public static string MsgBackupBaselineFileDoesntExist1;
-        public static string MsgBackupBaselineFileDoesntExist2;
+        public static string MsgBackupBaselineFileDoesntExist;
         public static string MsgThisIsTheBackupOfDifferentLibrary;
         public static string MsgGiveNameToAsrPreset;
         public static string MsgAreYouSureYouWantToSaveAsrPreset;
@@ -1057,7 +1064,8 @@ namespace MusicBeePlugin
 
         public enum ResultType
         {
-            UseOtherResults = -1,
+            UseOtherResults = -2,
+            AutoDouble = -1,
             UnknownOrString = 0,
             ItemCount = 1,
             Double = 2,
@@ -1349,13 +1357,13 @@ namespace MusicBeePlugin
 
             result.resultS = arg;
 
-            if (arg == null)
+            if (arg == string.Empty)
             {
                 result.resultD = 0;
-                result.resultS = "NO DATA!";
+                result.resultS = string.Empty;
 
-                result.dataType = DataType.String;
-                result.resultType = ResultType.ParsingError;
+                result.dataType = dataType;
+                result.resultType = ResultType.UseOtherResults; //Use other results to get type
 
                 return result;
             }
@@ -1484,6 +1492,9 @@ namespace MusicBeePlugin
             {
                 if (!double.TryParse(arg, out result.resultD) && !replacements)
                     return ConvertStrings(arg, ResultType.Double, DataType.Number, true);
+                else if (!replacements) //Let's try to parse as number if there were no replacements
+                    return ConvertStrings(arg, ResultType.Double, DataType.Number, true);
+
 
                 return result;
             }
@@ -1520,7 +1531,15 @@ namespace MusicBeePlugin
                 }
                 else if (DateTime.TryParse(arg, out DateTime datetime))
                 {
-                    result.resultD = datetime.ToBinary();
+                    if (datetime.Year < 1900)
+                    {
+                        result.resultD = TimeSpan.Parse(arg).TotalSeconds;
+                        result.resultType = ResultType.Timespan;
+                    }
+                    else
+                    {
+                        result.resultD = datetime.ToBinary();
+                    }
                 }
                 else
                 {
@@ -1535,42 +1554,63 @@ namespace MusicBeePlugin
                 if (dataType != DataType.String)
                     throw new Exception("Unsupported data type: " + dataType + "!");
 
-                try //Let's try to parse as duration
+                try //Let's try to parse as short duration (without date)
                 {
-                    string[] ts1 = arg.Split(':');
-                    TimeSpan time;
+                    if (arg.Contains(":") && !arg.Contains("/") && !arg.Contains("-") && !arg.Contains("."))
+                    {
+                        string[] ts1 = arg.Split(':');
+                        TimeSpan time;
 
-                    time = TimeSpan.FromSeconds(Convert.ToInt32(ts1[ts1.Length - 1]));
-                    time += TimeSpan.FromMinutes(Convert.ToInt32(ts1[ts1.Length - 2]));
-                    if (ts1.Length > 2)
-                        time += TimeSpan.FromHours(Convert.ToInt32(ts1[ts1.Length - 3]));
+                        time = TimeSpan.FromSeconds(Convert.ToInt32(ts1[ts1.Length - 1]));
+                        time += TimeSpan.FromMinutes(Convert.ToInt32(ts1[ts1.Length - 2]));
+                        if (ts1.Length > 2)
+                            time += TimeSpan.FromHours(Convert.ToInt32(ts1[ts1.Length - 3]));
 
-                    result.resultD = time.TotalSeconds;
-                    result.resultType = ResultType.Timespan;
+                        result.resultD = time.TotalSeconds;
+                        result.resultType = ResultType.Timespan;
 
-                    return result;
+                        return result;
+                    }
+                    else
+                    {
+                        throw new Exception(); //Go to parsing as date/time
+                    }
                 }
                 catch
                 {
                     try //Let's try to parse as date/time
                     {
-                        result.resultD = DateTime.Parse(arg).ToBinary();
+                        var datetime = DateTime.Parse(arg);
+                        if (datetime.Year < 1900)
+                            throw new Exception(); //Let's try to parse as timespan again (as full timespan format including date)
+
+                        result.resultD = datetime.ToBinary();
                         result.resultType = ResultType.Datetime;
 
                         return result;
                     }
                     catch
                     {
-                        if (!replacements) //Let's try to parse as number if there were no replacements
+                        try //Let's try to parse as timespan again (as full timespan format including date)
                         {
-                            return ConvertStrings(arg, ResultType.Double, DataType.String, true);
-                        }
-                        else
-                        {
-                            result.resultD = 0;
-                            result.resultType = ResultType.UnknownOrString;
+                            result.resultD = TimeSpan.Parse(arg).TotalSeconds;
+                            result.resultType = ResultType.Timespan;
 
                             return result;
+                        }
+                        catch
+                        {
+                            if (!replacements) //Let's try to parse as number if there were no replacements
+                            {
+                                return ConvertStrings(arg, ResultType.AutoDouble, DataType.String, true);
+                            }
+                            else
+                            {
+                                result.resultD = 0;
+                                result.resultType = ResultType.UnknownOrString;
+
+                                return result;
+                            }
                         }
                     }
                 }
@@ -2840,6 +2880,12 @@ namespace MusicBeePlugin
         #endregion
 
         #region Menu handlers
+        public void openWindowActivationEventHandler(object sender, EventArgs e)
+        {
+            var tagToolsForm = ((sender as ToolStripMenuItem).Tag as PluginWindowTemplate);
+            PluginWindowTemplate.Display(tagToolsForm);
+        }
+
         public void copyTagEventHandler(object sender, EventArgs e)
         {
             CopyTagCommand tagToolsForm = new CopyTagCommand(this);
@@ -3217,6 +3263,7 @@ namespace MusicBeePlugin
             PluginDescription = "Adds some tagging & reporting tools to MusicBee";
             PluginVersionString = "Version: ";
 
+            OpenWindowsMenuSectionName = "OPEN WINDOWS";
             TagToolsMenuSectionName = "TAGGING && REPORTING";
             BackupRestoreMenuSectionName = "BACKUP && RESTORE";
 
@@ -3233,7 +3280,7 @@ namespace MusicBeePlugin
             CopyTagsToClipboardCommandName = "Copy Tags to Clipboard...";
             PasteTagsFromClipboardCommandName = "Paste Tags from Clipboard";
             MsrCommandName = "Multiple Search && Replace...";
-            ShowHiddenCommandName = "Show hidden plugin windows";
+            ShowHiddenCommandName = "Show hidden/restore minimized plugin windows";
 
             TagToolsHotkeyDescription = "Tagging Tools: ";
             CopyTagCommandDescription = TagToolsHotkeyDescription + "Copy Tag";
@@ -3329,10 +3376,10 @@ namespace MusicBeePlugin
 
 
             //Let's determine casing rules for genre category as an example
-            ChangeCaseCommand.ChangeCaseOptions changeCaseMode = ChangeCaseCommand.ChangeCaseOptions.sentenceCase;
+            ChangeCaseCommand.ChangeCaseOptions changeCaseMode = ChangeCaseCommand.ChangeCaseOptions.SentenceCase;
             string[] genreCategory = MbApiInterface.Setting_GetFieldName(MetaDataType.GenreCategory).Split(' ');
             if (char.ToUpper(genreCategory[genreCategory.Length - 1][0]) == genreCategory[genreCategory.Length - 1][0])
-                changeCaseMode = ChangeCaseCommand.ChangeCaseOptions.titleCase;
+                changeCaseMode = ChangeCaseCommand.ChangeCaseOptions.TitleCase;
 
             ArtistArtistsName = MbApiInterface.Setting_GetFieldName(MetaDataType.Artist);
             ComposerComposersName = MbApiInterface.Setting_GetFieldName(MetaDataType.Composer);
@@ -3552,8 +3599,7 @@ namespace MusicBeePlugin
             MsgSelectOneTrackOnly = "Select one track only!";
             MsgSelectTrack = "Select a track!";
             MsgSelectAtLeast2Tracks = "Select at least 2 tracks to compare!";
-            MsgBackupBaselineFileDoesntExist1 = "Backup baseline file\"'";
-            MsgBackupBaselineFileDoesntExist2 = "\" doesn't exist!";
+            MsgBackupBaselineFileDoesntExist = "Backup baseline file\"%%FILENAME%%\" doesn't exist!";
             MsgThisIsTheBackupOfDifferentLibrary = "This is the backup of different library!";
             MsgCreateBaselineWarning = "When you create the first backup of given library, a backup baseline is created. " +
                 "All further backups are incremental relative to baseline. " +
@@ -3672,6 +3718,7 @@ namespace MusicBeePlugin
             file.Close();
             #endregion
 
+            DontShowShowHiddenWindows = SavedSettings.dontShowShowHiddenWindows;
 
             #region Resetting invalid/absent settings
             if (SavedSettings == null)
@@ -3812,6 +3859,7 @@ namespace MusicBeePlugin
                 PluginDescription = "Плагин добавляет дополнительные инструменты для работы с тегами";
                 PluginVersionString = "Версия: ";
 
+                OpenWindowsMenuSectionName = "ОТКРЫТЫЕ ОКНА";
                 TagToolsMenuSectionName = "ДОПОЛНИТЕЛЬНЫЕ ИНСТРУМЕНТЫ";
                 BackupRestoreMenuSectionName = "АРХИВАЦИЯ И ВОССТАНОВЛЕНИЕ";
 
@@ -3828,7 +3876,7 @@ namespace MusicBeePlugin
                 CopyTagsToClipboardCommandName = "Копировать теги в буфер обмена...";
                 PasteTagsFromClipboardCommandName = "Вставить теги из буфера обмена";
                 MsrCommandName = "Множественный поиск и замена...";
-                ShowHiddenCommandName = "Показать скрытые окна плагина";
+                ShowHiddenCommandName = "Показать скрытые/восстановить свернутые окна плагина";
 
                 TagToolsHotkeyDescription = "Дополнительные инструменты: ";
                 CopyTagCommandDescription = TagToolsHotkeyDescription + "Копировать тег";
@@ -4107,8 +4155,7 @@ namespace MusicBeePlugin
                 MsgSelectOneTrackOnly = "Выберите только один трек!";
                 MsgSelectTrack = "Выберите трек!";
                 MsgSelectAtLeast2Tracks = "Выберите по меньшей мере 2 трека для сравнения!";
-                MsgBackupBaselineFileDoesntExist1 = "Файл первоначального опорного архива '";
-                MsgBackupBaselineFileDoesntExist2 = "' не существует!";
+                MsgBackupBaselineFileDoesntExist = "Файл первоначального опорного архива \"%%FILENAME%%\" не существует!";
                 MsgThisIsTheBackupOfDifferentLibrary = "Это архив другой библиотеки!";
                 MsgCreateBaselineWarning = "Когда создается первый архив любой библиотеки, сначала создается полный опорный архив. " +
                     "Все последующие архивы являются разницей с опорным архивом. " +
@@ -4718,22 +4765,22 @@ namespace MusicBeePlugin
             }
 
 
-            ForceCloseForms = true;
-            for (int i = OpenedForms.Count - 1; i >= 0; i--)
-                OpenedForms[i].Close();
+
+            lock (OpenedForms)
+            {
+                PluginClosing = true;
+
+                for (int i = OpenedForms.Count - 1; i >= 0; i--)
+                {
+                    OpenedForms[i].backgroundTaskIsCanceled = true;
+                    OpenedForms[i].Close();
+                }
+            }
 
 
             //Let's dispose all unused bitmaps
             FormsThemedBitmapsRelease(EmptyForm);
 
-
-            lock (OpenedForms)
-            {
-                foreach (PluginWindowTemplate form in OpenedForms)
-                {
-                    form.backgroundTaskIsCanceled = true;
-                }
-            }
 
             LibraryReportsCommandForAutoApplying?.Dispose();
             LibraryReportsCommandForHotkeys?.Dispose();
@@ -4795,13 +4842,14 @@ namespace MusicBeePlugin
             Uninstalled = true;
         }
 
-        public static ToolStripMenuItem AddMenuItem(ToolStripMenuItem menuItemGroup, string itemName, string hotkeyDescription, EventHandler handler, bool enabled = true)
+        public static ToolStripMenuItem AddMenuItem(ToolStripMenuItem menuItemGroup, string itemName, string hotkeyDescription, EventHandler handler, bool enabled = true, Form form = null)
         {
             if (hotkeyDescription != null)
                 MbApiInterface.MB_RegisterCommand(hotkeyDescription, handler);
 
             ToolStripItem menuItem = menuItemGroup.DropDown.Items.Add(itemName, null, handler);
             menuItem.Enabled = enabled;
+            menuItem.Tag = form;
 
             if (itemName == "-")
                 return null;
@@ -4839,31 +4887,31 @@ namespace MusicBeePlugin
         //    );
         //}
 
-        public static void PrepareThemedBitmapsAndColors()
+        public void prepareThemedBitmapsAndColors()
         {
             //Skin controls
-            float accentWeight = 0.70f;
-            float dimmedWeight = 0.65f;
-            float deepDimmedWeight = 0.3f;
+            const float AccentBackWeight = 0.70f;
+            const float LightDimmedWeight = 0.90f;
+            const float DimmedWeight = 0.65f;
+            const float DeepDimmedWeight = 0.3f;
 
-            if (SavedSettings.useSkinColors)
+            if (SavedSettings.useMusicBeeFontSkinColors)
             {
-                Color backColorSkinned = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
+                InputPanelForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
+                InputPanelBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
+
+                InputControlForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
+                InputControlBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
+
                 AccentColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
 
-                DimmedColor = GetWeightedColor(AccentColor, backColorSkinned, dimmedWeight);
-                DeepDimmedColor = GetWeightedColor(AccentColor, backColorSkinned, deepDimmedWeight);
+                DimmedAccentColor = GetWeightedColor(AccentColor, InputPanelBackColor, DimmedWeight);
+                DeepDimmedAccentColor = GetWeightedColor(AccentColor, InputPanelBackColor, DeepDimmedWeight);
 
                 FormBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
-
-                //Skinning buttons (especially disabled buttons)
-                ButtonFocusedBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentBorder));
-                ButtonBorderColor = ButtonFocusedBorderColor;
-
-                ButtonBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
-                ButtonForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
-
-                ButtonDisabledBackColor = ButtonBackColor;
+                FormForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
+                //FormBackColor = MbForm.BackColor;
+                //FormForeColor = MbForm.ForeColor;
 
                 //***
                 //float avgForeBrightness = GetAverageBrightness(ButtonBackColor);
@@ -4877,20 +4925,61 @@ namespace MusicBeePlugin
                 //}
                 //***
 
-                ButtonDisabledForeColor = GetWeightedColor(ButtonForeColor, ButtonDisabledBackColor, 0.5f);
 
+                //Below: (SkinElement)2 - highlight enum code //*******
+                int controlHighlightBackCode = MbApiInterface.Setting_GetSkinElementColour((SkinElement)2, ElementState.ElementStateDefault, ElementComponent.ComponentBackground);
+                Color controlHighlightBackColor;
 
-                //Below: 2 - highlight enum code //*******
-                int controlHighlightCode = MbApiInterface.Setting_GetSkinElementColour((SkinElement)2, ElementState.ElementStateDefault, ElementComponent.ComponentBackground);
-
-                if (controlHighlightCode == 0) //Unsupported by older API
-                    ControlHighlightColor = ButtonDisabledForeColor;
-                else if (controlHighlightCode == -1) //Windows color scheme
-                    ControlHighlightColor = ButtonDisabledForeColor;
+                if (controlHighlightBackCode == 0) //Unsupported by older API
+                    controlHighlightBackColor = GetWeightedColor(AccentColor, Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinTrackAndArtistPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBackground)), LightDimmedWeight);
+                else if (controlHighlightBackCode == -1) //Windows color scheme
+                    controlHighlightBackColor = SystemColors.Control;
                 else
-                    ControlHighlightColor = Color.FromArgb(controlHighlightCode);
+                    controlHighlightBackColor = Color.FromArgb(controlHighlightBackCode);
 
-                ContrastColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentBackground)); ;
+                Color buttonBackLightDimmedAccentColor = GetWeightedColor(AccentColor, controlHighlightBackColor, LightDimmedWeight);
+                Color buttonBackDimmedAccentColor = GetWeightedColor(AccentColor, controlHighlightBackColor, DimmedWeight);
+                Color buttonBackDeepDimmedAccentColor = GetWeightedColor(AccentColor, controlHighlightBackColor, DeepDimmedWeight);
+
+                //Skinning buttons (especially disabled buttons)
+                ButtonBackColor = controlHighlightBackColor;
+                ButtonDisabledBackColor = ButtonBackColor;
+                ControlHighlightBackColor = controlHighlightBackColor; //*** buttonBackDeepDimmedAccentColor;
+
+
+                ControlHighlightForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
+
+                int controlHighlightForeCode = MbApiInterface.Setting_GetSkinElementColour((SkinElement)2, ElementState.ElementStateDefault, ElementComponent.ComponentForeground);
+                Color controlHighlightForeColor;
+
+                if (controlHighlightForeCode == 0) //Unsupported by older API
+                    controlHighlightForeColor = AccentColor;
+                else if (controlHighlightForeCode == -1) //Windows color scheme
+                    controlHighlightForeColor = SystemColors.ControlText;
+                else
+                    controlHighlightForeColor = Color.FromArgb(controlHighlightForeCode);
+
+                Color buttonLightForeDimmedColor = GetWeightedColor(controlHighlightForeColor, ButtonBackColor, LightDimmedWeight);
+                Color buttonForeDimmedColor = GetWeightedColor(controlHighlightForeColor, ButtonBackColor, DimmedWeight);
+                Color buttonForeDeepDimmedColor = GetWeightedColor(controlHighlightForeColor, ButtonBackColor, DeepDimmedWeight);
+
+                ButtonForeColor = controlHighlightForeColor;
+                ButtonDisabledForeColor = GetWeightedColor(ButtonForeColor, ButtonDisabledBackColor, 0.3f);
+                ControlHighlightForeColor = buttonLightForeDimmedColor;
+
+                float avgForeBrightness = GetAverageBrightness(ControlHighlightForeColor);
+                float avgBackBrightness = GetAverageBrightness(ControlHighlightBackColor);
+                if (Math.Abs(avgForeBrightness - avgBackBrightness) < 0.35f)
+                {
+                    if (avgForeBrightness < 0.5f)
+                        ControlHighlightForeColor = GetWeightedColor(ControlHighlightForeColor, Color.Black, 0.4f);
+                    else
+                        ControlHighlightForeColor = GetWeightedColor(ControlHighlightForeColor, Color.White, 0.4f);
+                }
+
+
+                ButtonBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentBorder));
+                ButtonFocusedBorderColor = GetWeightedColor(ButtonBorderColor, ButtonForeColor);
             }
             else
             {
@@ -4899,10 +4988,11 @@ namespace MusicBeePlugin
                 Color backColorNotSkinned = SystemColors.Control;
                 AccentColor = SystemColors.ControlText;
 
-                DimmedColor = GetWeightedColor(AccentColor, backColorNotSkinned, dimmedWeight); //This is not used at the moment
-                DeepDimmedColor = GetWeightedColor(AccentColor, backColorNotSkinned, deepDimmedWeight); //This is not used at the moment
+                DimmedAccentColor = GetWeightedColor(AccentColor, backColorNotSkinned, DimmedWeight); //This is not used at the moment
+                DeepDimmedAccentColor = GetWeightedColor(AccentColor, backColorNotSkinned, DeepDimmedWeight); //This is not used at the moment
 
-                FormBackColor = SystemColors.Control; //This is not used at the moment
+                FormBackColor = SystemColors.Control;
+                FormForeColor = SystemColors.ControlText; //This is not used at the moment
 
                 //Skinning buttons (especially disabled buttons)
                 //ButtonFocusedBorderColor = windowsAccentColor;
@@ -4916,8 +5006,8 @@ namespace MusicBeePlugin
                 ButtonDisabledForeColor = SystemColors.GrayText; //This is not used at the moment
 
 
-                ControlHighlightColor = SystemColors.ButtonFace; //This is not used at the moment
-                ContrastColor = SystemColors.ControlText; //This is not used at the moment
+                ControlHighlightBackColor = SystemColors.ButtonFace; //This is not used at the moment
+                ControlHighlightForeColor = SystemColors.ControlText; //This is not used at the moment
             }
 
 
@@ -4929,140 +5019,152 @@ namespace MusicBeePlugin
             HighlightColor = Color.Red;
             UntickedColor = AccentColor;
 
-            TickedColor = GetHighlightColor(HighlightColor, SystemColors.Highlight, FormBackColor, 0.5f);
+            TickedColor = GetHighlightColor(HighlightColor, sampleColor, FormBackColor, 0.5f);
 
 
             //Making themed bitmaps
-            CheckedState = GetSolidImageByBitmapMask(AccentColor, Resources.check_mark);
-            ThemedBitmapAddRef(EmptyForm, CheckedState);
-            UncheckedState = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, accentWeight), Resources.uncheck_mark);
-            ThemedBitmapAddRef(EmptyForm, UncheckedState);
+            float dpiScaling = 1;
+            float hDpiFontScaling = 1;
+            float vDpiFontScaling = 1;
+
+            var scalingSampleForm = new PluginWindowTemplate(this);
+            MbForm.AddOwnedForm(scalingSampleForm);
+            scalingSampleForm.dontShowForm = true;
+            scalingSampleForm.Show();
+            dpiScaling = scalingSampleForm.dpiScaling;
+            hDpiFontScaling = scalingSampleForm.hDpiFontScaling;
+            vDpiFontScaling = scalingSampleForm.vDpiFontScaling;
+            MbForm.RemoveOwnedForm(scalingSampleForm);
+            scalingSampleForm.Dispose();
 
 
             //Splitter is invisible by default. Lets draw it.
             SplitterColor = GetWeightedColor(SystemColors.Desktop, AccentColor, 0.8f);//***
 
-            float dpiScaleFactor = 1;
-            int dpi = MbForm.DeviceDpi;
 
-            if (dpi != 96)
-                dpiScaleFactor = dpi / 96f;
-
-            if (SavedSettings.useSkinColors) //It's in case if skinned & not skinned buttons use different flat styles. At the moment it's not so.
+            if (SavedSettings.useMusicBeeFontSkinColors) //It's in case if skinned & not skinned buttons use different flat styles. At the moment it's not so.
             {
-                int size = (int)Math.Round(14.6f * dpiScaleFactor);
-                int wideHeight = (int)(15f * dpiScaleFactor);
-                int wideWidth = (int)(30f * dpiScaleFactor);
-                int smallSize = (int)(15f * dpiScaleFactor);
+                int size = (int)Math.Round(17f * vDpiFontScaling);
+                int wideHeight = (int)(15f * vDpiFontScaling);
+                int wideWidth = (int)(30f * vDpiFontScaling);
+                int smallSize = (int)(15f * vDpiFontScaling);
 
-                ButtonRemoveImage = GetSolidImageByBitmapMask(AccentColor, Resources.uncheck_mark, size, size);
+                ButtonRemoveImage = GetSolidImageByBitmapMask(ButtonForeColor, Resources.uncheck_mark, size, size);
                 ThemedBitmapAddRef(EmptyForm, ButtonRemoveImage);
-                ButtonSetImage = GetSolidImageByBitmapMask(AccentColor, Resources.check_mark, size, size);
+                ButtonSetImage = GetSolidImageByBitmapMask(ButtonForeColor, Resources.check_mark, size, size);
                 ThemedBitmapAddRef(EmptyForm, ButtonSetImage);
                 WarningWide = ScaleBitmap(Resources.warning_wide, wideWidth, wideHeight);
                 ThemedBitmapAddRef(EmptyForm, WarningWide);
                 Warning = ScaleBitmap(Resources.warning, smallSize, smallSize);
                 ThemedBitmapAddRef(EmptyForm, Warning);
-                Gear = GetSolidImageByBitmapMask(AccentColor, Resources.gear, size, size);
+                Gear = GetSolidImageByBitmapMask(ButtonForeColor, Resources.gear, size, size);
                 ThemedBitmapAddRef(EmptyForm, Gear);
             }
             else
             {
-                int size = (int)Math.Round(19f * dpiScaleFactor);
-                int wideHeight = (int)(15f * dpiScaleFactor);
-                int wideWidth = (int)(30f * dpiScaleFactor);
-                int smallSize = (int)(15f * dpiScaleFactor);
+                int size = (int)Math.Round(18f * vDpiFontScaling);
+                int wideHeight = (int)(15f * vDpiFontScaling);
+                int wideWidth = (int)(30f * vDpiFontScaling);
+                int smallSize = (int)(15f * vDpiFontScaling);
 
-                ButtonRemoveImage = GetSolidImageByBitmapMask(AccentColor, Resources.uncheck_mark, size, size);
+                ButtonRemoveImage = GetSolidImageByBitmapMask(ButtonForeColor, Resources.uncheck_mark, size, size);
                 ThemedBitmapAddRef(EmptyForm, ButtonRemoveImage);
-                ButtonSetImage = GetSolidImageByBitmapMask(AccentColor, Resources.check_mark, size, size);
+                ButtonSetImage = GetSolidImageByBitmapMask(ButtonForeColor, Resources.check_mark, size, size);
                 ThemedBitmapAddRef(EmptyForm, ButtonSetImage);
                 WarningWide = ScaleBitmap(Resources.warning_wide, wideWidth, wideHeight);
                 ThemedBitmapAddRef(EmptyForm, WarningWide);
                 Warning = ScaleBitmap(Resources.warning, smallSize, smallSize);
                 ThemedBitmapAddRef(EmptyForm, Warning);
-                Gear = GetSolidImageByBitmapMask(AccentColor, Resources.gear, size, size);
+                Gear = GetSolidImageByBitmapMask(ButtonForeColor, Resources.gear, size, size);
                 ThemedBitmapAddRef(EmptyForm, Gear);
             }
 
 
-            int pictogramSize = (int)(23f * dpiScaleFactor);
+            //ASR
+            int markSize = (int)(15f * vDpiFontScaling);
 
-            Window = ScaleBitmap(Resources.window, pictogramSize, pictogramSize);
-            ThemedBitmapAddRef(EmptyForm, Window);
+            CheckedState = GetSolidImageByBitmapMask(AccentColor, Resources.check_mark, markSize, markSize);
+            ThemedBitmapAddRef(EmptyForm, CheckedState);
+            UncheckedState = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, AccentBackWeight), Resources.uncheck_mark, markSize, markSize);
+            ThemedBitmapAddRef(EmptyForm, UncheckedState);
+ 
 
-
-            int pictureSize = (int)(20f * dpiScaleFactor);
+            int pictureSize = (int)(19f * vDpiFontScaling);
 
             Search = GetSolidImageByBitmapMask(AccentColor, Resources.search, pictureSize, pictureSize);
             ThemedBitmapAddRef(EmptyForm, Search);
 
 
-
             AutoAppliedPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.auto_applied_presets, pictureSize, pictureSize);
             ThemedBitmapAddRef(EmptyForm, AutoAppliedPresetsAccent);
-            AutoAppliedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, deepDimmedWeight), Resources.auto_applied_presets, pictureSize, pictureSize);
+            AutoAppliedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), Resources.auto_applied_presets, pictureSize, pictureSize);
             ThemedBitmapAddRef(EmptyForm, AutoAppliedPresetsDimmed);
 
             PredefinedPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.predefined_presets, pictureSize, pictureSize);
             ThemedBitmapAddRef(EmptyForm, PredefinedPresetsAccent);
-            PredefinedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, deepDimmedWeight), Resources.predefined_presets, pictureSize, pictureSize);
+            PredefinedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), Resources.predefined_presets, pictureSize, pictureSize);
             ThemedBitmapAddRef(EmptyForm, PredefinedPresetsDimmed);
 
             CustomizedPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.customized_presets, pictureSize, pictureSize);
             ThemedBitmapAddRef(EmptyForm, CustomizedPresetsAccent);
-            CustomizedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, deepDimmedWeight), Resources.customized_presets, pictureSize, pictureSize);
+            CustomizedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), Resources.customized_presets, pictureSize, pictureSize);
             ThemedBitmapAddRef(EmptyForm, CustomizedPresetsDimmed);
 
             UserPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.user_presets, pictureSize, pictureSize);
             ThemedBitmapAddRef(EmptyForm, UserPresetsAccent);
-            UserPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, deepDimmedWeight), Resources.user_presets, pictureSize, pictureSize);
+            UserPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), Resources.user_presets, pictureSize, pictureSize);
             ThemedBitmapAddRef(EmptyForm, UserPresetsDimmed);
 
             PlaylistPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.playlist_presets, pictureSize, pictureSize);
             ThemedBitmapAddRef(EmptyForm, PlaylistPresetsAccent);
-            PlaylistPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, deepDimmedWeight), Resources.playlist_presets, pictureSize, pictureSize);
+            PlaylistPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), Resources.playlist_presets, pictureSize, pictureSize);
             ThemedBitmapAddRef(EmptyForm, PlaylistPresetsDimmed);
 
             FunctionIdPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.function_id_presets, pictureSize, pictureSize);
             ThemedBitmapAddRef(EmptyForm, FunctionIdPresetsAccent);
-            FunctionIdPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, deepDimmedWeight), Resources.function_id_presets, pictureSize, pictureSize);
+            FunctionIdPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), Resources.function_id_presets, pictureSize, pictureSize);
             ThemedBitmapAddRef(EmptyForm, FunctionIdPresetsDimmed);
 
             HotkeyPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.hotkey_presets, pictureSize, pictureSize);
             ThemedBitmapAddRef(EmptyForm, HotkeyPresetsAccent);
-            HotkeyPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, deepDimmedWeight), Resources.hotkey_presets, pictureSize, pictureSize);
+            HotkeyPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), Resources.hotkey_presets, pictureSize, pictureSize);
             ThemedBitmapAddRef(EmptyForm, HotkeyPresetsDimmed);
 
             UncheckAllFiltersAccent = GetSolidImageByBitmapMask(AccentColor, Resources.uncheck_all_preset_filters, pictureSize, pictureSize);
             ThemedBitmapAddRef(EmptyForm, UncheckAllFiltersAccent);
-            UncheckAllFiltersDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, deepDimmedWeight), Resources.uncheck_all_preset_filters, pictureSize, pictureSize);
+            UncheckAllFiltersDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), Resources.uncheck_all_preset_filters, pictureSize, pictureSize);
             ThemedBitmapAddRef(EmptyForm, UncheckAllFiltersDimmed);
+
+
+            //LR
+            int pictogramSize = (int)(23f * vDpiFontScaling);
+
+            Window = ScaleBitmap(Resources.window, pictogramSize, pictogramSize);
+            ThemedBitmapAddRef(EmptyForm, Window);
 
 
 
             //DATAGRIDVIEW COLOR DEFINITIONS
-            if (SavedSettings.useSkinColors)
+            if (SavedSettings.useMusicBeeFontSkinColors)
             {
-                HeaderCellStyle.ForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinSubPanel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
-                HeaderCellStyle.BackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinSubPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
-                HeaderCellStyle.SelectionForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinSubPanel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
-                HeaderCellStyle.SelectionBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinSubPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
+                HeaderCellStyle.ForeColor = ButtonForeColor;
+                HeaderCellStyle.BackColor = DeepDimmedAccentColor;
+                HeaderCellStyle.SelectionForeColor = ButtonForeColor;
+                HeaderCellStyle.SelectionBackColor = DimmedAccentColor;
 
-                UnchangedCellStyle.ForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
-                UnchangedCellStyle.BackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
-                UnchangedCellStyle.SelectionForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateModified, ElementComponent.ComponentForeground));
-                UnchangedCellStyle.SelectionBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateModified, ElementComponent.ComponentBackground));
+                UnchangedCellStyle.ForeColor = InputControlForeColor;
+                UnchangedCellStyle.BackColor = InputControlBackColor;
+                UnchangedCellStyle.SelectionForeColor = ButtonForeColor;
+                UnchangedCellStyle.SelectionBackColor = ButtonBackColor;
 
-                if (UnchangedCellStyle.SelectionForeColor == UnchangedCellStyle.ForeColor)
-                {
-                    UnchangedCellStyle.SelectionForeColor = SystemColors.HighlightText;
-                }
+                if (GetBrightnessDifference(UnchangedCellStyle.SelectionBackColor, UnchangedCellStyle.BackColor) < 0.25f)
+                    UnchangedCellStyle.SelectionBackColor = DeepDimmedAccentColor;
 
-                if (UnchangedCellStyle.SelectionBackColor == UnchangedCellStyle.BackColor)
-                {
-                    UnchangedCellStyle.SelectionBackColor = SystemColors.Highlight;
-                }
+                if (GetBrightnessDifference(HeaderCellStyle.ForeColor, HeaderCellStyle.BackColor) < 0.3f)
+                    HeaderCellStyle.ForeColor = InvertAverageBrightness(HeaderCellStyle.ForeColor);
+
+                if (GetBrightnessDifference(HeaderCellStyle.SelectionForeColor, HeaderCellStyle.SelectionBackColor) < 0.3f)
+                    HeaderCellStyle.SelectionForeColor = InvertAverageBrightness(HeaderCellStyle.SelectionForeColor);
             }
             else
             {
@@ -5526,7 +5628,7 @@ namespace MusicBeePlugin
 
 
                     //Let's prepare themed bitmaps for controls
-                    PrepareThemedBitmapsAndColors();
+                    prepareThemedBitmapsAndColors();
 
 
                     //Execute library reports on startup
@@ -5696,7 +5798,9 @@ namespace MusicBeePlugin
         {
             TagToolsSubmenu.DropDown.Items.Clear();
 
-            if (!SavedSettings.dontShowBackupRestore) AddMenuItem(TagToolsSubmenu, TagToolsMenuSectionName, null, null, false);
+            OpenedFormsSubmenu = AddMenuItem(TagToolsSubmenu, OpenWindowsMenuSectionName, null, null);
+            AddMenuItem(TagToolsSubmenu, "-", null, null);
+            AddMenuItem(TagToolsSubmenu, TagToolsMenuSectionName, null, null, false);
 
             if (!SavedSettings.dontShowCopyTag) AddMenuItem(TagToolsSubmenu, CopyTagCommandName, CopyTagCommandDescription, copyTagEventHandler);
             if (!SavedSettings.dontShowSwapTags) AddMenuItem(TagToolsSubmenu, SwapTagsCommandName, SwapTagsCommandDescription, swapTagsEventHandler);
@@ -5753,12 +5857,6 @@ namespace MusicBeePlugin
                 AddMenuItem(TagToolsSubmenu, AutoBackupSettingsCommandName, AutoBackupSettingsCommandDescription, autoBackupSettingsEventHandler);
             }
 
-            if (!SavedSettings.dontShowShowHiddenWindows)
-            {
-                AddMenuItem(TagToolsSubmenu, "-", null, null);
-                AddMenuItem(TagToolsSubmenu, ShowHiddenCommandName, ShowHiddenCommandDescription, showHiddenEventHandler);
-            }
-
             AddMenuItem(TagToolsSubmenu, "-", null, null);
             AddMenuItem(TagToolsSubmenu, PluginVersion, null, null, false);
         }
@@ -5799,10 +5897,10 @@ namespace MusicBeePlugin
                 AddMenuItem(TagToolsContextSubmenu, TagHistoryCommandName, null, tagHistoryEventHandler);
             }
 
+
             if (!SavedSettings.dontShowShowHiddenWindows)
             {
-                AddMenuItem(TagToolsContextSubmenu, "-", null, null);
-                AddMenuItem(TagToolsContextSubmenu, ShowHiddenCommandName, null, showHiddenEventHandler);
+                MbApiInterface.MB_RegisterCommand(ShowHiddenCommandName, showHiddenEventHandler);
             }
         }
 
@@ -6024,9 +6122,9 @@ namespace MusicBeePlugin
         {
             string[] exceptionWords = SavedSettings.exceptionWordsASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-            input = ChangeCaseCommand.ChangeWordsCase(input, ChangeCaseCommand.ChangeCaseOptions.lowerCase, null, false,
+            input = ChangeCaseCommand.ChangeWordsCase(input, ChangeCaseCommand.ChangeCaseOptions.LowerCase, null, false,
                 null, SavedSettings.wordSplittersASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries));
-            string result = ChangeCaseCommand.ChangeWordsCase(input, ChangeCaseCommand.ChangeCaseOptions.titleCase, exceptionWords, false,
+            string result = ChangeCaseCommand.ChangeWordsCase(input, ChangeCaseCommand.ChangeCaseOptions.TitleCase, exceptionWords, false,
                 SavedSettings.exceptionCharsASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries), SavedSettings.wordSplittersASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries), true, true);
 
             return result;
@@ -6036,9 +6134,9 @@ namespace MusicBeePlugin
         {
             string[] exceptionWords = SavedSettings.exceptionWordsASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-            input = ChangeCaseCommand.ChangeWordsCase(input, ChangeCaseCommand.ChangeCaseOptions.lowerCase, null, false,
+            input = ChangeCaseCommand.ChangeWordsCase(input, ChangeCaseCommand.ChangeCaseOptions.LowerCase, null, false,
                 null, SavedSettings.wordSplittersASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries));
-            string result = ChangeCaseCommand.ChangeWordsCase(input, ChangeCaseCommand.ChangeCaseOptions.sentenceCase, exceptionWords, false,
+            string result = ChangeCaseCommand.ChangeWordsCase(input, ChangeCaseCommand.ChangeCaseOptions.SentenceCase, exceptionWords, false,
                 SavedSettings.exceptionCharsASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries), SavedSettings.wordSplittersASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries), true, false);
 
             return result;

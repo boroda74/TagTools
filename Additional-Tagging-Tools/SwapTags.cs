@@ -27,6 +27,10 @@ namespace MusicBeePlugin
             destinationTagList.Text = SavedSettings.swapTagsDestinationTagName;
 
             smartOperationCheckBox.Checked = SavedSettings.smartOperation;
+
+            enableQueryingOrUpdatingButtons();
+
+            button_GotFocus(AcceptButton, null); //Let's mark active button
         }
 
         private bool prepareBackgroundTask()
@@ -118,6 +122,11 @@ namespace MusicBeePlugin
         {
             dirtyErrorProvider.SetError(buttonOK, " ");
             dirtyErrorProvider.SetError(buttonOK, string.Empty);
+        }
+
+        public override void disableQueryingButtons()
+        {
+            dirtyErrorProvider.SetError(buttonOK, getBackgroundTasksWarning());
         }
 
         public override void enableQueryingOrUpdatingButtons()

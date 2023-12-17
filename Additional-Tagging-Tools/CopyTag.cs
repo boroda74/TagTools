@@ -42,7 +42,7 @@ namespace MusicBeePlugin
         {
             base.initializeForm();
 
-            label3.Enable(false);
+            fileNameLabel.Enable(false);
 
             buttonSettings.Image = ThemedBitmapAddRef(this, Gear);
 
@@ -66,7 +66,14 @@ namespace MusicBeePlugin
 
             appendedTextBox.Enable(appendCheckBox.Checked);
 
+
+            previewTable.EnableHeadersVisualStyles = !UseMusicBeeFontSkinColors;
+
+            previewTable.BackgroundColor = UnchangedCellStyle.BackColor;
+            previewTable.DefaultCellStyle = UnchangedCellStyle;
+
             DatagridViewCheckBoxHeaderCell cbHeader = new DatagridViewCheckBoxHeaderCell();
+            cbHeader.Style = HeaderCellStyle;
             cbHeader.setState(true);
             cbHeader.OnCheckBoxClicked += new CheckBoxClickedHandler(cbHeader_OnCheckBoxClicked);
 
@@ -83,6 +90,10 @@ namespace MusicBeePlugin
 
             previewTable.Columns.Insert(0, colCB);
 
+            previewTable.Columns[2].HeaderCell.Style = HeaderCellStyle;
+            previewTable.Columns[6].HeaderCell.Style = HeaderCellStyle;
+            previewTable.Columns[8].HeaderCell.Style = HeaderCellStyle;
+
             previewTable.Columns[2].HeaderCell.Style.WrapMode = DataGridViewTriState.True;
             previewTable.Columns[6].HeaderCell.Style.WrapMode = DataGridViewTriState.True;
             previewTable.Columns[8].HeaderCell.Style.WrapMode = DataGridViewTriState.True;
@@ -96,7 +107,8 @@ namespace MusicBeePlugin
             enableDisablePreviewOptionControls(true, true);
             enableQueryingOrUpdatingButtons();
 
-            button_GotFocus(this.AcceptButton, null); //Let's mark active button
+
+            button_GotFocus(AcceptButton, null); //Let's mark active button
         }
 
         private void previewTable_AddRowToTable(string[] row)
@@ -477,7 +489,7 @@ namespace MusicBeePlugin
         private void sourceTagList_SelectedIndexChanged(object sender, EventArgs e)
         {
             bool test = (sourceTagList.Text == TextFileTagName);
-            label3.Enable(test);
+            fileNameLabel.Enable(test);
             test = (sourceTagList.Text == TextFileTagName);
             fileNameTextBox.Enable(test);
             test = (sourceTagList.Text == TextFileTagName);
@@ -520,7 +532,7 @@ namespace MusicBeePlugin
 
         private void customTextBox_EnabledChanged(object sender, EventArgs e)
         {
-            label3.Enable(fileNameTextBox.Enabled);
+            fileNameLabel.Enable(fileNameTextBox.Enabled);
         }
 
         private void cbHeader_OnCheckBoxClicked(bool state)
@@ -581,7 +593,7 @@ namespace MusicBeePlugin
 
             sourceTagList.Enable(enable);
             destinationTagList.Enable(enable);
-            label3.Enable(enable && sourceTagList.Text == TextFileTagName);
+            fileNameLabel.Enable(enable && sourceTagList.Text == TextFileTagName);
             fileNameTextBox.Enable(enable && sourceTagList.Text == TextFileTagName);
             browseButton.Enable(enable && sourceTagList.Text == TextFileTagName);
             smartOperationCheckBox.Enable(enable);
@@ -717,15 +729,15 @@ namespace MusicBeePlugin
 
             if (value.Item1 != 0)
             {
-                previewTable.Columns[2].Width = (int)(value.Item1 * dpiScaleFactor);
-                previewTable.Columns[6].Width = (int)(value.Item2 * dpiScaleFactor);
-                previewTable.Columns[8].Width = (int)(value.Item3 * dpiScaleFactor);
+                previewTable.Columns[2].Width = (int)(value.Item1 * hDpiFontScaling);
+                previewTable.Columns[6].Width = (int)(value.Item2 * hDpiFontScaling);
+                previewTable.Columns[8].Width = (int)(value.Item3 * hDpiFontScaling);
             }
             else
             {
-                previewTable.Columns[2].Width = (int)(previewTable.Columns[2].Width * dpiScaleFactor);
-                previewTable.Columns[6].Width = (int)(previewTable.Columns[6].Width * dpiScaleFactor);
-                previewTable.Columns[8].Width = (int)(previewTable.Columns[8].Width * dpiScaleFactor);
+                previewTable.Columns[2].Width = (int)(previewTable.Columns[2].Width * hDpiFontScaling);
+                previewTable.Columns[6].Width = (int)(previewTable.Columns[6].Width * hDpiFontScaling);
+                previewTable.Columns[8].Width = (int)(previewTable.Columns[8].Width * hDpiFontScaling);
             }
         }
 

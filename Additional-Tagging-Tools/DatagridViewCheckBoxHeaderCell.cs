@@ -75,7 +75,7 @@ namespace MusicBeePlugin
             if (OnCheckBoxClicked != null)
             {
                 OnCheckBoxClicked(_checked);
-                this.DataGridView.InvalidateCell(this);
+                DataGridView.InvalidateCell(this);
             }
         }
 
@@ -85,7 +85,7 @@ namespace MusicBeePlugin
             if (OnCheckBoxClicked != null)
             {
                 OnCheckBoxClicked(_checked);
-                this.DataGridView.InvalidateCell(this);
+                DataGridView.InvalidateCell(this);
             }
         }
 

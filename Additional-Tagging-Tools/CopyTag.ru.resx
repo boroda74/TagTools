@@ -117,68 +117,37 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>312, 4</value>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="buttonPreview.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="buttonOK.Text" xml:space="preserve">
-    <value>Применить</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="buttonPreview.Location" type="System.Drawing.Point, System.Drawing">
+    <value>278, 5</value>
+  </data>
+  <data name="buttonPreview.Text" xml:space="preserve">
+    <value>Просмотр</value>
+  </data>
+  <data name="buttonPreview.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="buttonCancel.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="buttonCancel.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>418, 4</value>
+    <value>493, 5</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Закрыть</value>
   </data>
+  <data name="buttonCancel.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>984, 361</value>
-  </data>
-  <data name="onlyIfSourceNotEmptyCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>343, 69</value>
-  </data>
-  <data name="onlyIfSourceNotEmptyCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>231, 15</value>
-  </data>
-  <data name="onlyIfSourceNotEmptyCheckBoxLabel.Text" xml:space="preserve">
-    <value>или только если тег-источник не пустой</value>
-  </data>
-  <data name="addCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>424, 15</value>
-  </data>
-  <data name="addCheckBoxLabel.Text" xml:space="preserve">
-    <value>Добавить тег источника в начало тега получателя, разделяя их символами:</value>
-  </data>
-  <data name="appendCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>417, 15</value>
-  </data>
-  <data name="appendCheckBoxLabel.Text" xml:space="preserve">
-    <value>Добавить тег источника в конец тега получателя, разделяя их символами:</value>
-  </data>
-  <data name="onlyIfDestinationEmptyCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>274, 15</value>
-  </data>
-  <data name="onlyIfDestinationEmptyCheckBoxLabel.Text" xml:space="preserve">
-    <value>Копировать, только если тег-получатель пустой</value>
-  </data>
-  <data name="smartOperationCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>725, 15</value>
-  </data>
-  <data name="smartOperationCheckBoxLabel.Text" xml:space="preserve">
-    <value>Умное копирование (играет роль только при работе с тегами "Исполнитель"/"Композитор", содержащими несколько значений)</value>
-  </data>
-  <data name="smartOperationCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value>Каждый байт исходного тега (включая служебные символы, обозначающие 
-роли исполнителей) будет сохранен, если эта опция отключена, однако 
-это может быть полезно только для копирования во временный тег
-</value>
-  </data>
-  <data name="onlyIfSourceNotEmptyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>316, 69</value>
-  </data>
-  <data name="smartOperationCheckBox.ToolTip" xml:space="preserve">
-    <value>Каждый байт исходного тега (включая служебные символы, обозначающие 
-роли исполнителей) будет сохранен, если эта опция отключена, однако 
-это может быть полезно только для копирования во временный тег</value>
+    <value>1059, 361</value>
   </data>
   <data name="Track.HeaderText" xml:space="preserve">
     <value>Трек</value>
@@ -192,11 +161,173 @@
   <data name="NewTagT.HeaderText" xml:space="preserve">
     <value>Новое значение</value>
   </data>
+  <data name="previewTable.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="previewTable.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>971, 198</value>
+    <value>1046, 214</value>
+  </data>
+  <data name="previewTable.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="addCheckBoxLabel.Error" xml:space="preserve">
+    <value />
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="addCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="addCheckBoxLabel.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="addCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>424, 15</value>
+  </data>
+  <data name="addCheckBoxLabel.Text" xml:space="preserve">
+    <value>Добавить тег источника в начало тега получателя, разделяя их символами:</value>
+  </data>
+  <data name="addCheckBoxLabel.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="addCheckBox.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="addCheckBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="addCheckBox.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="appendCheckBoxLabel.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="appendCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="appendCheckBoxLabel.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="appendCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>417, 15</value>
+  </data>
+  <data name="appendCheckBoxLabel.Text" xml:space="preserve">
+    <value>Добавить тег источника в конец тега получателя, разделяя их символами:</value>
+  </data>
+  <data name="appendCheckBoxLabel.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="appendCheckBox.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="appendCheckBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="appendCheckBox.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="onlyIfSourceNotEmptyCheckBoxLabel.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="onlyIfSourceNotEmptyCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="onlyIfSourceNotEmptyCheckBoxLabel.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="onlyIfSourceNotEmptyCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>343, 63</value>
+  </data>
+  <data name="onlyIfSourceNotEmptyCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>231, 15</value>
+  </data>
+  <data name="onlyIfSourceNotEmptyCheckBoxLabel.Text" xml:space="preserve">
+    <value>или только если тег-источник не пустой</value>
+  </data>
+  <data name="onlyIfSourceNotEmptyCheckBoxLabel.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="onlyIfSourceNotEmptyCheckBox.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="onlyIfSourceNotEmptyCheckBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="onlyIfSourceNotEmptyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>321, 63</value>
+  </data>
+  <data name="onlyIfSourceNotEmptyCheckBox.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="onlyIfDestinationEmptyCheckBoxLabel.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="onlyIfDestinationEmptyCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="onlyIfDestinationEmptyCheckBoxLabel.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="onlyIfDestinationEmptyCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>274, 15</value>
+  </data>
+  <data name="onlyIfDestinationEmptyCheckBoxLabel.Text" xml:space="preserve">
+    <value>Копировать, только если тег-получатель пустой</value>
+  </data>
+  <data name="onlyIfDestinationEmptyCheckBoxLabel.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="onlyIfDestinationEmptyCheckBox.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="onlyIfDestinationEmptyCheckBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="onlyIfDestinationEmptyCheckBox.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="smartOperationCheckBoxLabel.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="smartOperationCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="smartOperationCheckBoxLabel.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="smartOperationCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>725, 15</value>
+  </data>
+  <data name="smartOperationCheckBoxLabel.Text" xml:space="preserve">
+    <value>Умное копирование (играет роль только при работе с тегами "Исполнитель"/"Композитор", содержащими несколько значений)</value>
+  </data>
+  <data name="smartOperationCheckBoxLabel.ToolTip" xml:space="preserve">
+    <value>Каждый байт исходного тега (включая служебные символы, обозначающие 
+роли исполнителей) будет сохранен, если эта опция отключена, однако 
+это может быть полезно только для копирования во временный тег
+</value>
+  </data>
+  <data name="smartOperationCheckBox.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="smartOperationCheckBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="smartOperationCheckBox.ToolTip" xml:space="preserve">
+    <value>Каждый байт исходного тега (включая служебные символы, обозначающие 
+роли исполнителей) будет сохранен, если эта опция отключена, однако 
+это может быть полезно только для копирования во временный тег</value>
+  </data>
+  <data name="forSelectedTracksLabel.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="forSelectedTracksLabel.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="forSelectedTracksLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>486, 10</value>
+    <value>513, 9</value>
   </data>
   <data name="forSelectedTracksLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 15</value>
@@ -204,14 +335,32 @@
   <data name="forSelectedTracksLabel.Text" xml:space="preserve">
     <value>у выбранных треков</value>
   </data>
+  <data name="forSelectedTracksLabel.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="destinationTagList.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="destinationTagList.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="destinationTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>317, 5</value>
+    <value>329, 5</value>
   </data>
   <data name="destinationTagList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 23</value>
+    <value>170, 23</value>
+  </data>
+  <data name="destinationTagList.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="forTagLabel.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="forTagLabel.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="forTagLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>278, 10</value>
+    <value>281, 9</value>
   </data>
   <data name="forTagLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 15</value>
@@ -219,62 +368,149 @@
   <data name="forTagLabel.Text" xml:space="preserve">
     <value>в тег</value>
   </data>
+  <data name="forTagLabel.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="sourceTagList.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="sourceTagList.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="sourceTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>107, 5</value>
+    <value>101, 5</value>
   </data>
   <data name="sourceTagList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 23</value>
+    <value>170, 23</value>
+  </data>
+  <data name="sourceTagList.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="addedTextBox.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="addedTextBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="addedTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>518, 23</value>
+    <value>593, 23</value>
+  </data>
+  <data name="addedTextBox.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="appendedTextBox.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="appendedTextBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="appendedTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>518, 23</value>
+    <value>593, 23</value>
+  </data>
+  <data name="appendedTextBox.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="browseButton.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="browseButton.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="browseButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>418, 64</value>
+    <value>493, 59</value>
   </data>
   <data name="browseButton.Text" xml:space="preserve">
     <value>Открыть...</value>
   </data>
+  <data name="browseButton.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="fileNameTextBox.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="fileNameTextBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="fileNameTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>219, 64</value>
+    <value>213, 59</value>
   </data>
   <data name="fileNameTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>193, 23</value>
+    <value>277, 23</value>
   </data>
-  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>139, 69</value>
+  <data name="fileNameTextBox.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="fileNameLabel.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="fileNameLabel.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="fileNameLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>133, 63</value>
+  </data>
+  <data name="fileNameLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 15</value>
   </data>
-  <data name="label3.Text" xml:space="preserve">
+  <data name="fileNameLabel.Text" xml:space="preserve">
     <value>Имя файла:</value>
   </data>
-  <data name="buttonPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>205, 4</value>
+  <data name="fileNameLabel.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="buttonPreview.Text" xml:space="preserve">
-    <value>Просмотр</value>
+  <data name="buttonOK.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="buttonOK.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
+    <value>385, 5</value>
+  </data>
+  <data name="buttonOK.Text" xml:space="preserve">
+    <value>Применить</value>
+  </data>
+  <data name="buttonOK.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="buttonSettings.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="buttonSettings.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="buttonSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>161, 4</value>
+    <value>234, 5</value>
   </data>
   <data name="buttonSettings.ToolTip" xml:space="preserve">
     <value>Открыть быстрые настройки</value>
+  </data>
+  <data name="fieldsPanel.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="fieldsPanel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="fieldsPanel.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="fieldsPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>459, 0</value>
   </data>
   <data name="fieldsPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>523, 154</value>
+    <value>598, 140</value>
+  </data>
+  <data name="fieldsPanel.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>1000, 400</value>
+    <value>1075, 400</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Копирование тега</value>
+  </data>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="dirtyErrorProvider.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -878,10 +1114,19 @@
         ngDxxx4A8MYeAPBMPgD4AD4A/AB+AP8B/gD///4A///+AP///gA=
 </value>
   </data>
+  <data name="copyTagLabel.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="copyTagLabel.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="copyTagLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>91, 15</value>
   </data>
   <data name="copyTagLabel.Text" xml:space="preserve">
     <value>Копировать тег</value>
+  </data>
+  <data name="copyTagLabel.ToolTip" xml:space="preserve">
+    <value />
   </data>
 </root>

@@ -8,7 +8,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using static MusicBeePlugin.Plugin;
-using static MusicBeePlugin.NativeMethods;
 using ExtensionMethods;
 
 
@@ -16,6 +15,8 @@ namespace MusicBeePlugin
 {
     public partial class AdvancedSearchAndReplaceCommand : PluginWindowTemplate
     {
+        protected bool forceCloseForms = true;
+
         private static string CustomText1;
 
 
@@ -80,6 +81,8 @@ namespace MusicBeePlugin
         private static string AllTagsPresetsCantBeAutoAppliedText;
         private static string AllTagsTagIsSelectedToolTip;
 
+        private static string AutoApplyDisabledText;
+
         private static string CellTooTip;
 
         private System.Threading.Timer allTagsWarningTimer = null;
@@ -102,6 +105,7 @@ namespace MusicBeePlugin
 
         private bool unsavedChanges = false;
         private string buttonCloseToolTip;
+        private int presetListLastSelectedIndex = -2;
 
         public AdvancedSearchAndReplaceCommand(Plugin tagToolsPluginParam) : base(tagToolsPluginParam)
         {
@@ -121,10 +125,9 @@ namespace MusicBeePlugin
             //var addedHeight = (int)Math.Round(4d * dpiScaleFactor); // Some appropriate value, greater than the field's default of 2
             //heightField.SetValue(presetList, addedHeight); // Where "presetList" is your CheckedListBox
 
-            tableLayoutPanel3ColWidth0 = tableLayoutPanel3.ColumnStyles[0].Width * dpiScaleFactor;
+            tableLayoutPanel3ColWidth0 = tableLayoutPanel3.ColumnStyles[0].Width * hDpiFontScaling;
             tableLayoutPanel3ColWidth1 = tableLayoutPanel3.ColumnStyles[1].Width;
-            tableLayoutPanel3ColWidth2 = tableLayoutPanel3.ColumnStyles[2].Width * dpiScaleFactor;
-
+            tableLayoutPanel3ColWidth2 = tableLayoutPanel3.ColumnStyles[2].Width * hDpiFontScaling;
 
 
             //Setting themed images
@@ -186,34 +189,19 @@ namespace MusicBeePlugin
             EditApplyText = Regex.Replace(entireText, @"^(.*?)~.*", "$1");
             AutoApplyText = Regex.Replace(entireText, @"^.*?~(.*?)~.*", "$1");
             ClickHereText = Regex.Replace(entireText, @"^.*?~.*?~(.*?)~.*", "$1");
-            NowTickedText = Regex.Replace(entireText, @"^.*?~.*?~.*?~(.*)~.*", "$1");
-            AllTagsPresetsCantBeAutoAppliedText = Regex.Replace(entireText, @"^.*?~.*?~.*?~.*?~(.*)", "$1");
+            NowTickedText = Regex.Replace(entireText, @"^.*?~.*?~.*?~(.*?)~.*", "$1");
+            AllTagsPresetsCantBeAutoAppliedText = Regex.Replace(entireText, @"^.*?~.*?~.*?~.*?~(.*?)~.*", "$1");
+            AutoApplyDisabledText = Regex.Replace(entireText, @"^.*?~.*?~.*?~.*?~.*?~(.*)", "$1");
 
-            processPresetChanges = false;
-
-            presetList.Items.Clear();
-            presetList.Sorted = false;
-            ignoreCheckedPresetEvent = false;
-            autoAppliedPresetCount = 0;
-            foreach (Preset tempPreset in presetsWorkingCopy.Values)
-                presetList.Items.Add(tempPreset, autoAppliedAsrPresetGuids.Contains(tempPreset.guid));
-
-
-            assignHotkeyCheckBox.Enable(false);
-            assignHotkeyCheckBox.Checked = false;
-
-
-            CueProvider.SetCue(filterComboBox, CtlMixedFilters);
-
-            showAutoApplyingWarningIfRequired();
-            ignoreCheckedPresetEvent = true;
-            presetList.Sorted = true;
 
             asrPresetsWithHotkeysCount = ASRPresetsWithHotkeysCount;
             assignHotkeyCheckBoxText = Regex.Replace(assignHotkeyCheckBoxLabel.Text, "^(.*:\\s).*", "$1");
             assignHotkeyCheckBoxLabel.Text = assignHotkeyCheckBoxText + (MaximumNumberOfASRHotkeys - asrPresetsWithHotkeysCount) + "/" + MaximumNumberOfASRHotkeys;
 
-            previewTable.EnableHeadersVisualStyles = false;
+            previewTable.EnableHeadersVisualStyles = !UseMusicBeeFontSkinColors;
+
+            previewTable.BackgroundColor = UnchangedCellStyle.BackColor;
+            previewTable.DefaultCellStyle = UnchangedCellStyle;
 
             DatagridViewCheckBoxHeaderCell cbHeader = new DatagridViewCheckBoxHeaderCell();
             cbHeader.Style = HeaderCellStyle;
@@ -256,8 +244,10 @@ namespace MusicBeePlugin
             previewTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 
 
-            float tagNameFontSize = previewTable.DefaultCellStyle.Font.Size * 0.8f; //Maybe it's worth to adjust fine size !!!
-            Font tagNameFont = new Font(this.Font.FontFamily, tagNameFontSize, FontStyle.Bold);//---
+            Font tagNameFont;
+            //float tagNameFontSize = previewTable.DefaultCellStyle.Font.Size * 0.8f; //Maybe it's worth to adjust fine size !!!
+            //tagNameFont = new Font(Font.FontFamily, tagNameFontSize, FontStyle.Bold);//---
+            tagNameFont = Font;
 
             previewTable.Columns[4].HeaderCell.Style.Font = tagNameFont;
             previewTable.Columns[7].HeaderCell.Style.Font = tagNameFont;
@@ -295,34 +285,13 @@ namespace MusicBeePlugin
 
             previewTable.Columns[19].HeaderCell.Style.WrapMode = DataGridViewTriState.False;
             previewTable.Columns[19].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            previewTable.Columns[19].Width = (int)(25 * dpiScaleFactor);
-            previewTable.Columns[19].MinimumWidth = (int)(25 * dpiScaleFactor);
+            previewTable.Columns[19].Width = (int)(25 * hDpiFontScaling);
+            previewTable.Columns[19].MinimumWidth = (int)(25 * hDpiFontScaling);
 
             TagNameText = previewTable.Columns[4].HeaderText;
             OrigValueText = previewTable.Columns[5].HeaderText;
             NewValueText = previewTable.Columns[6].HeaderText;
 
-            MbApiInterface.Playlist_QueryPlaylists();
-            string playlist = MbApiInterface.Playlist_QueryGetNextPlaylist();
-
-            while (playlist != null)
-            {
-                //if (mbApiInterface.Playlist_GetType(playlist) == Plugin.PlaylistFormat.Auto)
-                {
-                    Playlist newPlaylist = new Playlist(playlist);
-                    playlistComboBox.Items.Add(newPlaylist);
-                }
-
-                playlist = MbApiInterface.Playlist_QueryGetNextPlaylist();
-            }
-
-            if (playlistComboBox.Items.Count > 0)
-                playlistComboBox.SelectedIndex = 0;
-
-
-            presetList_SelectedIndexChanged(null, null);
-
-            processPresetChanges = true;
 
             buttonClose.Image = Resources.transparent_15;
             buttonCloseToolTip = toolTip1.GetToolTip(buttonClose);
@@ -346,7 +315,54 @@ namespace MusicBeePlugin
             IgnoreFilterComboBoxSelectedIndexChanged = false;
 
 
-            button_GotFocus(this.AcceptButton, null); //Let's mark active button
+            processPresetChanges = false;
+
+            presetList.Sorted = false;
+            ignoreCheckedPresetEvent = false;
+
+            autoAppliedPresetCount = 0;
+            foreach (Preset tempPreset in presetsWorkingCopy.Values)
+                presetList.Items.Add(tempPreset, autoAppliedAsrPresetGuids.Contains(tempPreset.guid));
+
+            presetList.Sorted = true;
+
+
+            assignHotkeyCheckBox.Enable(false);
+            assignHotkeyCheckBox.Checked = false;
+
+
+            MbApiInterface.Playlist_QueryPlaylists();
+            string playlist = MbApiInterface.Playlist_QueryGetNextPlaylist();
+
+            while (playlist != null)
+            {
+                //if (mbApiInterface.Playlist_GetType(playlist) == Plugin.PlaylistFormat.Auto)
+                {
+                    Playlist newPlaylist = new Playlist(playlist);
+                    playlistComboBox.Items.Add(newPlaylist);
+                }
+
+                playlist = MbApiInterface.Playlist_QueryGetNextPlaylist();
+            }
+
+            if (playlistComboBox.Items.Count > 0)
+                playlistComboBox.SelectedIndex = 0;
+
+
+            SetComboBoxCue(filterComboBox, CtlMixedFilters);
+
+            
+            presetList.SelectedIndex = -1;
+            presetList_SelectedIndexChanged(null, null);
+
+
+            showAutoApplyingWarningIfRequired();
+
+            ignoreCheckedPresetEvent = true;
+            processPresetChanges = true;
+
+
+            button_GotFocus(AcceptButton, null); //Let's mark active button
         }
 
         public enum TagType
@@ -1146,9 +1162,9 @@ namespace MusicBeePlugin
 
                 exceptionWords = parameter1.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-                parameter0 = ChangeCaseCommand.ChangeWordsCase(parameter0, ChangeCaseCommand.ChangeCaseOptions.lowerCase, null, false,
+                parameter0 = ChangeCaseCommand.ChangeWordsCase(parameter0, ChangeCaseCommand.ChangeCaseOptions.LowerCase, null, false,
                     null, SavedSettings.wordSplittersASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries));
-                string result = ChangeCaseCommand.ChangeWordsCase(parameter0, ChangeCaseCommand.ChangeCaseOptions.titleCase, exceptionWords, false,
+                string result = ChangeCaseCommand.ChangeWordsCase(parameter0, ChangeCaseCommand.ChangeCaseOptions.TitleCase, exceptionWords, false,
                     SavedSettings.exceptionCharsASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries), SavedSettings.wordSplittersASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries), true, true);
 
                 return result;
@@ -1171,7 +1187,7 @@ namespace MusicBeePlugin
 
                 exceptionWords = parameter1.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-                string result = ChangeCaseCommand.ChangeWordsCase(parameter0, ChangeCaseCommand.ChangeCaseOptions.lowerCase, exceptionWords, false,
+                string result = ChangeCaseCommand.ChangeWordsCase(parameter0, ChangeCaseCommand.ChangeCaseOptions.LowerCase, exceptionWords, false,
                     SavedSettings.exceptionCharsASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries), SavedSettings.wordSplittersASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries));
 
                 return result;
@@ -1194,7 +1210,7 @@ namespace MusicBeePlugin
 
                 exceptionWords = parameter1.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-                string result = ChangeCaseCommand.ChangeWordsCase(parameter0, ChangeCaseCommand.ChangeCaseOptions.upperCase, exceptionWords, false,
+                string result = ChangeCaseCommand.ChangeWordsCase(parameter0, ChangeCaseCommand.ChangeCaseOptions.UpperCase, exceptionWords, false,
                     SavedSettings.exceptionCharsASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries), SavedSettings.wordSplittersASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries));
 
                 return result;
@@ -1217,9 +1233,9 @@ namespace MusicBeePlugin
 
                 exceptionWords = parameter1.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-                parameter0 = ChangeCaseCommand.ChangeWordsCase(parameter0, ChangeCaseCommand.ChangeCaseOptions.lowerCase, null, false,
+                parameter0 = ChangeCaseCommand.ChangeWordsCase(parameter0, ChangeCaseCommand.ChangeCaseOptions.LowerCase, null, false,
                     null, SavedSettings.wordSplittersASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries));
-                string result = ChangeCaseCommand.ChangeWordsCase(parameter0, ChangeCaseCommand.ChangeCaseOptions.sentenceCase, exceptionWords, false,
+                string result = ChangeCaseCommand.ChangeWordsCase(parameter0, ChangeCaseCommand.ChangeCaseOptions.SentenceCase, exceptionWords, false,
                     SavedSettings.exceptionCharsASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries), SavedSettings.wordSplittersASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries), true, false);
 
                 return result;
@@ -2129,6 +2145,12 @@ namespace MusicBeePlugin
 
         public static void AsrAutoApplyPresets(object currentFileObj, object tagToolsPluginObj)
         {
+            if (!SavedSettings.allowAsrLrPresetAutoexecution)
+                return;
+            else if (AsrAutoAppliedPresets.Count == 0)
+                return;
+
+
             string currentFile = (string)currentFileObj;
             Plugin tagToolsPluginParam = (Plugin)tagToolsPluginObj;
 
@@ -2136,50 +2158,47 @@ namespace MusicBeePlugin
 
             lock (AsrAutoAppliedPresets)
             {
-                if (AsrAutoAppliedPresets.Count > 0)
+                foreach (Preset tempPreset in AsrAutoAppliedPresets)
                 {
-                    foreach (Preset tempPreset in AsrAutoAppliedPresets)
+
+                    if (tempPreset.allTagsReplaceIdsCount > 0)
+                        SetStatusbarText(MsgAsrPresetsUsingAllTagsPseudoTagNameCannotBeAutoApplied
+                            .Replace("%%PRESETNAME%%!", tempPreset.getName()).Replace("%%AllTagsPseudoTagName%%", AllTagsPseudoTagName), true);
+
+                    bool conditionSatisfied = true;
+
+                    if (tempPreset.condition)
                     {
+                        conditionSatisfied = false;
 
-                        if (tempPreset.allTagsReplaceIdsCount > 0)
-                            SetStatusbarText(MsgAsrPresetsUsingAllTagsPseudoTagNameCannotBeAutoApplied
-                                .Replace("%%PRESETNAME%%!", tempPreset.getName()).Replace("%%AllTagsPseudoTagName%%", AllTagsPseudoTagName), true);
+                        MbApiInterface.Playlist_QueryPlaylists();
+                        string playlist = MbApiInterface.Playlist_QueryGetNextPlaylist();
 
-                        bool conditionSatisfied = true;
-
-                        if (tempPreset.condition)
+                        while (playlist != null)
                         {
-                            conditionSatisfied = false;
-
-                            MbApiInterface.Playlist_QueryPlaylists();
-                            string playlist = MbApiInterface.Playlist_QueryGetNextPlaylist();
-
-                            while (playlist != null)
+                            if (playlist == tempPreset.playlist)
                             {
-                                if (playlist == tempPreset.playlist)
-                                {
-                                    conditionSatisfied = MbApiInterface.Playlist_IsInList(playlist, currentFile);
-                                    break;
-                                }
-
-                                playlist = MbApiInterface.Playlist_QueryGetNextPlaylist();
+                                conditionSatisfied = MbApiInterface.Playlist_IsInList(playlist, currentFile);
+                                break;
                             }
-                        }
 
-                        if (conditionSatisfied)
-                        {
-                            ReplaceTags(currentFile, tempPreset);
-                            appliedPresets.AddReplace(tempPreset.guid, false);
+                            playlist = MbApiInterface.Playlist_QueryGetNextPlaylist();
                         }
                     }
 
-                    if (appliedPresets.Count > 1)
-                        SetStatusbarText(SbAsrPresetsAreApplied.Replace("%%PRESETCOUNT%%", appliedPresets.Count.ToString()), true);
-                    else if (appliedPresets.Count == 1)
-                        SetStatusbarText(SbAsrPresetIsApplied.Replace("%%PRESETNAME%%", Presets[appliedPresets.ElementAt(0).Key].getName()), true);
-
-                    RefreshPanels(true);
+                    if (conditionSatisfied)
+                    {
+                        ReplaceTags(currentFile, tempPreset);
+                        appliedPresets.AddReplace(tempPreset.guid, false);
+                    }
                 }
+
+                if (appliedPresets.Count > 1)
+                    SetStatusbarText(SbAsrPresetsAreApplied.Replace("%%PRESETCOUNT%%", appliedPresets.Count.ToString()), true);
+                else if (appliedPresets.Count == 1)
+                    SetStatusbarText(SbAsrPresetIsApplied.Replace("%%PRESETNAME%%", Presets[appliedPresets.ElementAt(0).Key].getName()), true);
+
+                RefreshPanels(true);
             }
         }
 
@@ -2847,7 +2866,6 @@ namespace MusicBeePlugin
             }
 
 
-            Invoke(new Action(() => { enableDisablePreviewOptionControls(true); }));//---
             RefreshPanels(true);
             SetResultingSbText();
         }
@@ -2956,6 +2974,7 @@ namespace MusicBeePlugin
 
                     presetList.Items.Add(tempPreset);
 
+                    presetListLastSelectedIndex = -1;
                     refreshPresetList(tempPreset.guid);
                 }
                 else
@@ -3078,35 +3097,15 @@ namespace MusicBeePlugin
         private void buttonSave_Click(object sender, EventArgs e)
         {
             saveSettings();
+
+            if (ModifierKeys != Keys.Control)
+                Close();
         }
 
         private void buttonClose_Click(object sender, EventArgs e)
         {
-            if (unsavedChanges)
-            {
-                DialogResult result = DialogResult.No;
-                MessageBoxDefaultButton lastAnswer = SavedSettings.asrUnsavedChangesLastAnswer;
-                MessageBoxButtons confirmationButtons = MessageBoxButtons.YesNoCancel;
-
-                if (ForceCloseForms)
-                    confirmationButtons = MessageBoxButtons.YesNo;
-
-                result = MessageBox.Show(this, MsgAsrDoYouWantToSaveChangesBeforeClosingTheWindow,
-                    string.Empty, confirmationButtons, MessageBoxIcon.Warning, lastAnswer);
-
-
-                if (result == DialogResult.Yes)
-                {
-                    SavedSettings.asrUnsavedChangesLastAnswer = MessageBoxDefaultButton.Button1;
-                    saveSettings();
-                    Close();
-                }
-                else if (result == DialogResult.No)
-                {
-                    SavedSettings.asrUnsavedChangesLastAnswer = MessageBoxDefaultButton.Button2;
-                    Close();
-                }
-            }
+            forceCloseForms = false;
+            Close();
         }
 
         private void deletePreset(Preset presetToRemove)
@@ -3597,15 +3596,23 @@ namespace MusicBeePlugin
 
         private void presetList_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (presetListLastSelectedIndex == presetList.SelectedIndex)
+                return;
+
             if (previewIsGenerated)
                 clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewChanges, buttonPreview, buttonOK, buttonClose);
 
             processPresetChanges = false;
+            presetListSelectedIndexChanged(presetList.SelectedIndex);
+            presetListLastSelectedIndex = presetList.SelectedIndex;
+            processPresetChanges = true;
+        }
 
+        private void presetListSelectedIndexChanged(int index)
+        { 
             saveColumnWidths(preset);
 
-
-            if (presetList.SelectedIndex == -1)
+            if (index == -1)
             {
                 preset = null;
                 backedUpPreset = null;
@@ -3745,8 +3752,6 @@ namespace MusicBeePlugin
 
             //Lets deal with preview table
             nameColumns();
-
-            processPresetChanges = true;
         }
 
         private void exportPreset(Preset preset, string presetPathName)
@@ -4011,7 +4016,7 @@ namespace MusicBeePlugin
 
             if (!presetsWorkingCopy.Contains(selectedPresetGuid))
                 presetList.SelectedIndex = -1;
-            else
+            else if ((presetList.SelectedItem as Preset).guid != selectedPresetGuid)
                 presetList.SelectedItem = presetsWorkingCopy[selectedPresetGuid];
 
         }
@@ -5368,7 +5373,15 @@ namespace MusicBeePlugin
 
         private void showAutoApplyingWarningIfRequired()
         {
-            if (autoAppliedPresetCount == 0)
+            if (!SavedSettings.allowAsrLrPresetAutoexecution)
+            {
+                autoApplyPresetsLabel.Text = EditApplyText + AutoApplyDisabledText;
+
+                toolTip1.SetToolTip(autoApplyPresetsLabel, EditApplyText + "\n" + AutoApplyDisabledText);
+
+                autoApplyPresetsLabel.ForeColor = TickedColor;
+            }
+            else if (autoAppliedPresetCount == 0)
             {
                 autoApplyPresetsLabel.Text = EditApplyText + AutoApplyText;
 
@@ -5723,7 +5736,40 @@ namespace MusicBeePlugin
 
         private void AdvancedSearchAndReplaceCommand_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //Nothing at the moment...
+            if (PluginClosing)
+            {
+                return;
+            }
+            else if (unsavedChanges)
+            {
+                DialogResult result = DialogResult.No;
+                MessageBoxDefaultButton lastAnswer = SavedSettings.unsavedChangesConfirmationLastAnswer;
+                MessageBoxButtons confirmationButtons = MessageBoxButtons.YesNo;
+
+                if (!forceCloseForms)
+                    confirmationButtons = MessageBoxButtons.YesNoCancel;
+
+                forceCloseForms = true;
+
+                result = MessageBox.Show(this, MsgAsrDoYouWantToSaveChangesBeforeClosingTheWindow,
+                    string.Empty, confirmationButtons, MessageBoxIcon.Warning, lastAnswer);
+
+
+                if (result == DialogResult.Yes)
+                {
+                    SavedSettings.unsavedChangesConfirmationLastAnswer = MessageBoxDefaultButton.Button1;
+                    saveSettings();
+                }
+                else if (result == DialogResult.No)
+                {
+                    SavedSettings.unsavedChangesConfirmationLastAnswer = MessageBoxDefaultButton.Button2;
+                }
+                else //if (result == DialogResult.Cancel)
+                {
+                    //SavedSettings.asrUnsavedChangesLastAnswer = MessageBoxDefaultButton.Button3;
+                    e.Cancel = true;
+                }
+            }
         }
 
         private void AdvancedSearchAndReplaceCommand_Load(object sender, EventArgs e)
@@ -5732,10 +5778,22 @@ namespace MusicBeePlugin
 
             ignoreSplitterMovedEvent = true;
 
-            if (value.Item4 != 0)
-                splitContainer1.SplitterDistance = (int)(value.Item4 * dpiScaleFactor);
-            else
-                splitContainer1.SplitterDistance = (int)(splitContainer1.SplitterDistance * dpiScaleFactor);
+            //Let's scale split containers manually (auto-scaling is improper)
+            foreach (var scsa in splitContainersScalingAttributes)
+            {
+                var sc = scsa.splitContainer;
+                sc.Panel1MinSize = (int)(scsa.panel1MinSize * vDpiFontScaling);
+                sc.Panel2MinSize = (int)(scsa.panel2MinSize * vDpiFontScaling);
+
+                if (value.Item4 != 0)
+                {
+                    sc.SplitterDistance = (int)(value.Item4 * vDpiFontScaling);
+                }
+                else
+                {
+                    sc.SplitterDistance = (int)(scsa.splitterDistance * vDpiFontScaling);
+                }
+            }
 
             ignoreSplitterMovedEvent = false;
         }

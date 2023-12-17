@@ -4,38 +4,35 @@ using System.Drawing.Drawing2D;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace MusicBeePlugin
+namespace ExtensionMethods
 {
     internal static class NativeMethods
     {
-        public static class CueProvider
+        private const int EM_SETCUEBANNER = 0x1501;
+        private const int CB_SETCUEBANNER = 0x1703;
+        private static IntPtr Zero = IntPtr.Zero;
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        private static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wParam, [MarshalAs(UnmanagedType.LPWStr)] string lParam);
+
+        public static void SetCue(this TextBox textBox, string cue)
         {
-            private const int EM_SETCUEBANNER = 0x1501;
-            private const int CB_SETCUEBANNER = 0x1703;
-            private static IntPtr Zero = IntPtr.Zero;
+            SendMessage(textBox.Handle, EM_SETCUEBANNER, Zero, cue);
+        }
 
-            [DllImport("user32.dll", CharSet = CharSet.Auto)]
-            private static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wParam, [MarshalAs(UnmanagedType.LPWStr)] string lParam);
+        public static void ClearCue(this TextBox textBox)
+        {
+            SendMessage(textBox.Handle, EM_SETCUEBANNER, Zero, string.Empty);
+        }
 
-            public static void SetCue(TextBox textBox, string cue)
-            {
-                SendMessage(textBox.Handle, EM_SETCUEBANNER, Zero, cue);
-            }
+        public static void SetCue(this ComboBox comboBox, string cue)
+        {
+            SendMessage(comboBox.Handle, CB_SETCUEBANNER, Zero, cue);
+        }
 
-            public static void ClearCue(TextBox textBox)
-            {
-                SendMessage(textBox.Handle, EM_SETCUEBANNER, Zero, string.Empty);
-            }
-
-            public static void SetCue(ComboBox comboBox, string cue)
-            {
-                SendMessage(comboBox.Handle, CB_SETCUEBANNER, Zero, cue);
-            }
-
-            public static void ClearCue(ComboBox comboBox)
-            {
-                SendMessage(comboBox.Handle, CB_SETCUEBANNER, Zero, string.Empty);
-            }
+        public static void ClearCue(this ComboBox comboBox)
+        {
+            SendMessage(comboBox.Handle, CB_SETCUEBANNER, Zero, string.Empty);
         }
     }
 

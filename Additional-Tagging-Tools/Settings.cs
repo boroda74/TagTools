@@ -79,7 +79,9 @@ namespace MusicBeePlugin
             selectedLineColors = true;
             reSkinLegend();
 
+            allowAsrLrPresetAutoexecutionCheckBox.Checked = SavedSettings.allowAsrLrPresetAutoexecution;
             allowCommandExecutionWithoutPreviewCheckBox.Checked = SavedSettings.allowCommandExecutionWithoutPreview;
+
             contextMenuCheckBox.Checked = !SavedSettings.dontShowContextMenu;
 
             showCopyTagCheckBox.Checked = !SavedSettings.dontShowCopyTag;
@@ -97,7 +99,7 @@ namespace MusicBeePlugin
 
             minimizePluginWindowsCheckBox.Checked = SavedSettings.minimizePluginWindows;
 
-            useSkinColorsCheckBox.Checked = SavedSettings.useSkinColors;
+            useMusicBeeFontSkinColorsCheckBox.Checked = SavedSettings.useMusicBeeFontSkinColors;
             highlightChangedTagsCheckBox.Checked = !SavedSettings.dontHighlightChangedTags;
 
             includeNotChangedTagsCheckBox.Checked = !SavedSettings.dontIncludeInPreviewLinesWithoutChangedTags;
@@ -118,9 +120,11 @@ namespace MusicBeePlugin
 
         private void saveSettings()
         {
-            bool previousUseSkinColors = SavedSettings.useSkinColors;
+            bool previousUseSkinColors = SavedSettings.useMusicBeeFontSkinColors;
 
+            SavedSettings.allowAsrLrPresetAutoexecution = allowAsrLrPresetAutoexecutionCheckBox.Checked;
             SavedSettings.allowCommandExecutionWithoutPreview = allowCommandExecutionWithoutPreviewCheckBox.Checked;
+            
             SavedSettings.dontShowContextMenu = !contextMenuCheckBox.Checked;
 
             SavedSettings.dontShowCopyTag = !showCopyTagCheckBox.Checked;
@@ -138,7 +142,7 @@ namespace MusicBeePlugin
 
             SavedSettings.minimizePluginWindows = minimizePluginWindowsCheckBox.Checked;
 
-            SavedSettings.useSkinColors = useSkinColorsCheckBox.Checked;
+            SavedSettings.useMusicBeeFontSkinColors = useMusicBeeFontSkinColorsCheckBox.Checked;
             SavedSettings.dontHighlightChangedTags = !highlightChangedTagsCheckBox.Checked;
 
             SavedSettings.dontIncludeInPreviewLinesWithoutChangedTags = !includeNotChangedTagsCheckBox.Checked;
@@ -161,13 +165,13 @@ namespace MusicBeePlugin
             TagToolsPlugin.addPluginMenuItems();
             TagToolsPlugin.addPluginContextMenuItems();
 
-            if (previousUseSkinColors != SavedSettings.useSkinColors)
+            if (previousUseSkinColors != SavedSettings.useMusicBeeFontSkinColors)
             {
                 //Let's dispose all unused themed bitmaps
                 FormsThemedBitmapsRelease(EmptyForm);
 
                 //Let's recreate themed bitmaps using new colors
-                PrepareThemedBitmapsAndColors();
+                TagToolsPlugin.prepareThemedBitmapsAndColors();
             }
         }
 
@@ -263,9 +267,9 @@ namespace MusicBeePlugin
             contextMenuCheckBox.Checked = !contextMenuCheckBox.Checked;
         }
 
-        private void useSkinColorsCheckBoxLabel_Click(object sender, EventArgs e)
+        private void useMusicBeeFontSkinColorsCheckBoxLabel_Click(object sender, EventArgs e)
         {
-            useSkinColorsCheckBox.Checked = !useSkinColorsCheckBox.Checked;
+            useMusicBeeFontSkinColorsCheckBox.Checked = !useMusicBeeFontSkinColorsCheckBox.Checked;
         }
 
         private void highlightChangedTagsCheckBoxLabel_Click(object sender, EventArgs e)
@@ -326,6 +330,11 @@ namespace MusicBeePlugin
         private void allowCommandExecutionWithoutPreviewCheckBoxLabel_Click(object sender, EventArgs e)
         {
             allowCommandExecutionWithoutPreviewCheckBox.Checked = !allowCommandExecutionWithoutPreviewCheckBox.Checked;
+        }
+
+        private void allowAsrLrPresetAutoexecutionCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            allowAsrLrPresetAutoexecutionCheckBox.Checked = !allowAsrLrPresetAutoexecutionCheckBox.Checked;
         }
     }
 }

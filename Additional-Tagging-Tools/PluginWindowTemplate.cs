@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
+using System.Resources;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
@@ -21,22 +23,54 @@ namespace MusicBeePlugin
         private int height;
         private int width;
 
+        public bool dontShowForm = false;
+        protected bool hidden = false;//******
         protected bool initialized = false;
 
-        //ALL controls of the form
+        //SKIN COLORING/CUSTOM FORM'S FONT/DPI SCALING
+        public float dpiScaling = 1;
+
+        public float hDpiFormScaling = 1;
+        public float vDpiFormScaling = 1;
+
+        public float hDpiFontScaling = 1;
+        public float vDpiFontScaling = 1;
+
+
+        //ALL controls of the form and their references (if any)
         protected List<Control> allControls = new List<Control> ();
-        protected List<Button> nonDefaultableButtons = new List<Button> ();
+        internal Dictionary<Control, Control> controlsReferences = new Dictionary<Control, Control>();
+        protected Dictionary<Control, Control> controlsReferenced = new Dictionary<Control, Control>();
+
+        protected struct SplitContainerScalingAttributes
+        {
+            public SplitContainer splitContainer;
+            public int panel1MinSize;
+            public int panel2MinSize;
+            public int splitterDistance;
+        }
+
+        protected List<SplitContainerScalingAttributes> splitContainersScalingAttributes = new List<SplitContainerScalingAttributes>();
+
+        protected List<Button> nonDefaultableButtons = new List<Button>();
+        protected bool artificiallyFocusedAcceptButton = false;
+
+        protected List<Control> pinnedToParentControls = new List<Control>();
+        protected List<Control> leftRightAnchoredControls = new List<Control>();
 
         protected bool ignoreSizePositionChanges = true;
 
-        protected static bool UseSkinColors = false;
+        protected static bool UseMusicBeeFontSkinColors = false;
 
-        //Skin button labels for rendering disabled buttons
+        //Skin button labels for rendering disabled buttons & combo boxes
         protected Dictionary<Button, string> buttonLabels = new Dictionary<Button, string>();
+        protected Dictionary<Control, string> controlCueBanners = new Dictionary<Control, string>();
+        protected List<ComboBox> dropDownStyleComboBox = new List<ComboBox>();
 
-        protected float dpiScaleFactor = 1;
+        protected Control lastSelectedControl;
 
 
+        //BACKGROUND TASKS PROCESSING
         private delegate void StopButtonClicked(PluginWindowTemplate clickedForm, PrepareOperation prepareOperation);
         private delegate void TaskStarted();
         public delegate bool PrepareOperation();
@@ -66,6 +100,18 @@ namespace MusicBeePlugin
 
         protected bool ignoreLabelEnabledChanged = false;
 
+        public PluginWindowTemplate()
+        {
+            //Some operations won't create visual forms of commands. Only they use this constructor. Let's skip component initialization in this case.
+        }
+
+        public PluginWindowTemplate(Plugin tagToolsPluginParam)
+        {
+            InitializeComponent();
+
+            TagToolsPlugin = tagToolsPluginParam;
+        }
+
         public bool backgroundTaskIsWorking()
         {
             lock (taskStarted)
@@ -77,15 +123,86 @@ namespace MusicBeePlugin
             return false;
         }
 
-        public PluginWindowTemplate()
+        public void SetComboBoxCue(ComboBox comboBox, string cue)
         {
+            controlCueBanners.AddReplace(comboBox, cue);
+            comboBox.SetCue(cue);
         }
 
-        public PluginWindowTemplate(Plugin tagToolsPluginParam)
+        public void ClearComboBoxCue(ComboBox comboBox)
         {
-            InitializeComponent();
+            controlCueBanners.RemoveExisting(comboBox);
+            comboBox.ClearCue();
+        }
 
-            TagToolsPlugin = tagToolsPluginParam;
+        public void comboBox_EnabledChanged(object sender, System.EventArgs e)
+        {
+            ComboBox comboBox = sender as ComboBox;
+
+            if (dropDownStyleComboBox.Contains(comboBox))
+            {
+                if (comboBox.Enabled)
+                    comboBox.DropDownStyle = ComboBoxStyle.DropDown;
+                else
+                    comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            }
+        }
+
+        private void comboBox_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            ComboBox comboBox = sender as ComboBox;
+
+            int index = e.Index;
+
+            Color foreColor;
+            Color backColor;
+
+            if (comboBox.Enabled && comboBox.Focused && (index == -1 || (e.State & DrawItemState.Selected) != 0))
+            {
+                foreColor = SystemColors.HighlightText;
+                backColor = SystemColors.Highlight;
+            }
+            //Disabled
+            else if (e.State == (DrawItemState.Disabled | DrawItemState.NoAccelerator
+                | DrawItemState.NoFocusRect | DrawItemState.ComboBoxEdit))
+            {
+                foreColor = DimmedAccentColor;
+                backColor = FormBackColor;
+            }
+            else //if (comboBox.Enabled)
+            {
+                foreColor = ForeColor;
+                backColor = BackColor;
+            }
+
+            string text = string.Empty;
+            if (index == -1)
+            {
+                if (!controlCueBanners.TryGetValue(comboBox, out text))
+                    text = comboBox.Text;
+            }
+            else
+            {
+                text = comboBox.Items[index].ToString();
+            }
+
+            //Draw the background of the item.
+            e.DrawBackground();
+
+            e.Graphics.FillRectangle(new SolidBrush(backColor), e.Bounds);
+
+            TextRenderer.DrawText(
+                dc: e.Graphics,
+                text: text,
+                font: comboBox.Font,
+                bounds: e.Bounds,
+                foreColor: foreColor,
+                backColor: backColor,
+                flags: TextFormatFlags.Top | TextFormatFlags.Left);
+
+
+            //Draw the focus rectangle if the mouse hovers over an item.
+            e.DrawFocusRectangle();
         }
 
         private void tabControl_DrawItem(object sender, DrawItemEventArgs e)
@@ -103,49 +220,37 @@ namespace MusicBeePlugin
         {
             Button button = (Button)sender;
 
-            if (button.Enabled && button == this.AcceptButton)
+            if (button.Enabled && button == AcceptButton)
                 button_GotFocus(sender, e);
             else if (button.Focused)
                 button_GotFocus(sender, e);
-            else if (UseSkinColors)
+            else if (UseMusicBeeFontSkinColors)
                 button_LostFocus(sender, e);
         }
 
-        public void button_GotFocus(object sender, System.EventArgs e)
+        protected void setButtonColors(Button button)
         {
-            Button button = (Button)sender;
-
-            Color borderColor = ButtonFocusedBorderColor;
-            Color foreColor = ContrastColor;
-            Color backColor = ControlHighlightColor;
-
-            if (this.AcceptButton != button)
+            if (UseMusicBeeFontSkinColors)
             {
-                if (!nonDefaultableButtons.Contains(button))
-                {
-                    if (UseSkinColors)
-                        ((Button)this.AcceptButton).FlatAppearance.BorderColor = ButtonBorderColor;
+                Button acceptButton = (Button)AcceptButton;
 
-                    this.AcceptButton = button;//-----
+                if (button.Enabled && button == acceptButton)
+                {
+                    button.FlatAppearance.BorderColor = ButtonFocusedBorderColor;
+                    button.ForeColor = ControlHighlightForeColor;
+                    button.BackColor = ControlHighlightBackColor;
                 }
-                else if (this.AcceptButton != null)
+                //else if (button.Enabled && button.Focused) //***
+                //{
+                //    button.FlatAppearance.BorderColor = ButtonFocusedBorderColor;
+                //    button.ForeColor = ButtonForeColor;
+                //    button.BackColor = ButtonBackColor;
+                //}
+                else if (button.Enabled)
                 {
-                    ((Button)this.AcceptButton).Focus();
-
-                    borderColor = ButtonBorderColor;
-                    foreColor = ButtonForeColor;
-                    backColor = ButtonBackColor;
-                }
-            }
-
-
-            if (UseSkinColors)
-            {
-                if (button.Enabled)
-                {
-                    button.FlatAppearance.BorderColor = borderColor;
-                    button.ForeColor = foreColor;
-                    button.BackColor = backColor;
+                    button.FlatAppearance.BorderColor = ButtonBorderColor;
+                    button.ForeColor = ButtonForeColor;
+                    button.BackColor = ButtonBackColor;
                 }
                 else
                 {
@@ -156,22 +261,56 @@ namespace MusicBeePlugin
             }
         }
 
+        public void button_GotFocus(object sender, System.EventArgs e)
+        {
+            Button button = sender as Button;
+            Button acceptButton = (Button)AcceptButton;
+
+            if (button == lastSelectedControl)
+            {
+                //Nothing...
+            }
+            else if (artificiallyFocusedAcceptButton && acceptButton == button)
+            {
+                artificiallyFocusedAcceptButton = false;
+
+                //EITHER:
+                //lastSelectedControl = button;
+
+                //OR:
+                button_LostFocus(button, null);
+                lastSelectedControl.Select();
+            }
+            else if (acceptButton != button) //Not accept button clicked
+            {
+                if (!nonDefaultableButtons.Contains(button)) //It's defaultable button
+                {
+                    lastSelectedControl = button;
+                    AcceptButton = button;
+                    button_LostFocus(acceptButton, null);
+                }
+                else if (acceptButton != null && acceptButton.Enabled && !artificiallyFocusedAcceptButton) //It's non-defaultable button & accept button enabled
+                {
+                    artificiallyFocusedAcceptButton = true;
+                    acceptButton.Focus();
+                }
+                else //It's non-defaultable button & accept button disabled, let's activate last active control
+                {
+                    lastSelectedControl?.Select();
+                }
+            }
+            else //Accept button clicked
+            {
+                lastSelectedControl = button;
+            }
+
+
+            setButtonColors(button);
+        }
+
         public void button_LostFocus(object sender, System.EventArgs e)
         {
-            Button button = (Button)sender;
-
-            if (button.Enabled)
-            {
-                button.FlatAppearance.BorderColor = ButtonBorderColor;
-                button.ForeColor = ButtonForeColor;
-                button.BackColor = ButtonBackColor;
-            }
-            else
-            {
-                button.FlatAppearance.BorderColor = ButtonBorderColor;
-                button.ForeColor = ButtonDisabledForeColor;
-                button.BackColor = ButtonDisabledBackColor;
-            }
+            setButtonColors(sender as Button);
         }
 
         public void button_Paint(object sender, PaintEventArgs e)
@@ -184,7 +323,7 @@ namespace MusicBeePlugin
             TextFormatFlags flags = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.WordBreak;   // center the text
             
             // Render the text onto the button.
-            TextRenderer.DrawText(e.Graphics, text, Font, e.ClipRectangle, button.ForeColor, flags);
+            TextRenderer.DrawText(e.Graphics, text, button.Font, e.ClipRectangle, button.ForeColor, flags);
         }
 
         public void button_TextChanged(object sender, EventArgs e)
@@ -196,68 +335,81 @@ namespace MusicBeePlugin
             {
                 buttonLabels.AddReplace(button, text);
 
-                if (UseSkinColors)
+                if (UseMusicBeeFontSkinColors)
                     button.Text = string.Empty;
 
                 button.Refresh();
             }
         }
 
-        public static int GetPictureBoxY(Control control, Control control2)
+        public void control_Enter(object sender, System.EventArgs e)
         {
-            float control2MiddleY = control2.Location.Y + control2.Height / 2f;
-            return (int)(control2MiddleY - control.Height / 2f);
+            var control = sender as Control;
+            if (!(control is Button) && !control.GetType().IsSubclassOf(typeof(Button)) && control.Controls.Count == 0)
+                lastSelectedControl = control;
         }
 
-        public int getGenericLeftRightAnchoredControlWidth(Control control)
+        //int - parent level if control2 is ancestor, otherwise 0
+        public static (Control, int, bool, bool, bool, string[]) GetReferredControlControlLevelMarksRemarks(Control control)
         {
-            return (int)(GetControlSize(control).Width * 1.0f / (4f * dpiScaleFactor - 3f)); //*****
+            (_, _, bool scaledMovedL, bool scaledMovedR, bool scaledMovedY, string[] remarks) = GetControlTagReferredNameMarksRemarks(control);
+            (Control control2, int level) = GetReferredControl(control);
+
+            return (control2, level, scaledMovedL, scaledMovedR, scaledMovedY, remarks);
         }
 
-        public static void SetControlTagReferredNameMarksAndCustomRemark(Control control, string tagValue, bool scaledMovedX = false, bool scaledMovedY = false, 
-            string control2Name = null, string remark = null)//---
-        {
-            (_, string oldControl2Name, bool scaledMovedOldX, bool scaledMovedOldY, string oldRemark) = GetControlTagReferredNameMarksAndCustomRemark(control);
 
-            scaledMovedX |= scaledMovedOldX;
+        public static void SetControlTagReferredNameMarksRemarks(Control control, string tagValue,
+            bool scaledMovedL = false, bool scaledMovedR = false, bool scaledMovedY = false,
+            string control2Name = null, params string[] remarks)
+        {
+            (_, string oldControl2Name, bool scaledMovedOldL, bool scaledMovedOldR, bool scaledMovedOldY, string[] oldRemarks) = GetControlTagReferredNameMarksRemarks(control);
+
+            scaledMovedL |= scaledMovedOldL;
+            scaledMovedR |= scaledMovedOldR;
             scaledMovedY |= scaledMovedOldY;
 
-
+            
             if (control2Name == null)
                 control2Name = oldControl2Name;
 
-            if (remark == null)
-                remark = oldRemark;
+            if (remarks.Length == 0)
+                remarks = oldRemarks;
 
             control.Tag = tagValue ?? string.Empty;
 
             if (!string.IsNullOrEmpty(control2Name))
                 control.Tag += "#" + control2Name;
 
-            if (scaledMovedX)
-                control.Tag += "#scaled-moved-x";
+            if (scaledMovedL)
+                control.Tag += "#scaled-moved-left";
+
+            if (scaledMovedR)
+                control.Tag += "#scaled-moved-right";
 
             if (scaledMovedY)
                 control.Tag += "#scaled-moved-y";
 
-            if (!string.IsNullOrEmpty(remark))
-                control.Tag += "@" + remark;
+            if (remarks.Length != 0)
+                control.Tag += remarks.Aggregate(string.Empty, (arg1, arg2) => arg1 + "@" + arg2);
         }
 
-        //Returns initial tag value, referred control name, moved-scaled marks and custom remark
-        public static (string, string, bool, bool, string) GetControlTagReferredNameMarksAndCustomRemark(Control control)//---
+        //Returns initial tag value, referred control name, moved-scaled marks and array of custom remarks
+        public static (string, string, bool, bool, bool, string[]) GetControlTagReferredNameMarksRemarks(Control control)
         {
             if (control.Tag == null || !(control.Tag is string))
-                return (string.Empty, string.Empty, false, false, string.Empty);
+                return (string.Empty, string.Empty, false, false, false, new string[0]);
 
             string controlTag = control.Tag as string;
-            bool scaledMovedX = controlTag.Contains("#scaled-moved-x");
+            bool scaledMovedL = controlTag.Contains("#scaled-moved-left");
+            bool scaledMovedR = controlTag.Contains("#scaled-moved-right");
             bool scaledMovedY = controlTag.Contains("#scaled-moved-y");
-            controlTag = controlTag.Replace("#scaled-moved-x", string.Empty);
+            controlTag = controlTag.Replace("#scaled-moved-left", string.Empty);
+            controlTag = controlTag.Replace("#scaled-moved-right", string.Empty);
             controlTag = controlTag.Replace("#scaled-moved-y", string.Empty);
 
             string tagValue = controlTag;
-            string remark = string.Empty;
+            string remarks = string.Empty;
             string control2Name = controlTag;
 
             //Optional tag value by itself
@@ -270,26 +422,28 @@ namespace MusicBeePlugin
             //Optional custom remark
             if (control2Name.Contains("@"))
             {
-                remark = Regex.Replace(control2Name, "^(.*?)@(.*)", "$2");
-                control2Name = control2Name.Replace("@" + remark, string.Empty);
+                remarks = Regex.Replace(control2Name, "^(.*?)@(.*)", "$2");
+                control2Name = control2Name.Replace("@" + remarks, string.Empty);
             }
 
             if (tagValue.Contains("@"))
             {
-                remark = Regex.Replace(tagValue, "^(.*?)@(.*)", "$2");
-                tagValue = tagValue.Replace("@" + remark, string.Empty);
+                remarks = Regex.Replace(tagValue, "^(.*?)@(.*)", "$2");
+                tagValue = tagValue.Replace("@" + remarks, string.Empty);
             }
 
-            return (tagValue, control2Name, scaledMovedX, scaledMovedY, remark);
+            if (remarks == string.Empty)
+                return (tagValue, control2Name, scaledMovedL, scaledMovedR, scaledMovedY, new string[0]);
+            else
+                return (tagValue, control2Name, scaledMovedL, scaledMovedR, scaledMovedY, remarks.Split('@'));
         }
 
         public static (Control, int) GetReferredControl(Control control) //int - parent level if control2 is ancestor, otherwise 0
         {
-            (_, string control2Name, _, _, _) = GetControlTagReferredNameMarksAndCustomRemark(control);
-            
+            (_, string control2Name, _, _, _, _) = GetControlTagReferredNameMarksRemarks(control);
+
             if (string.IsNullOrEmpty(control2Name))
                 return (null, 0);
-
 
             int level = 0;
             Control control2 = control.Parent.Controls[control2Name];
@@ -312,581 +466,445 @@ namespace MusicBeePlugin
             return (control2, level);
         }
 
-        public static Control GetReferringControl(Control control)
-        {
-            Control referringControl = null;
-            foreach (Control refControl in control.Parent.Controls)
-            {
-                (Control control2, _) = GetReferredControl(refControl);
-
-                if (control2 == control && referringControl == null)
-                    referringControl = refControl;
-                else if (control2 == control)
-                    throw new Exception("More than one referring control for control: " + control.Name + "!");
-
-            }
-
-            return referringControl;
-        }
-
-        //int - parent level if control2 is ancestor, otherwise 0 //---
-        public static (Control, int, bool, bool) GetReferredControlAndControlLevelAndMarks(Control control)
-        {
-            (_, _, bool scaledMovedX, bool scaledMovedY, _) = GetControlTagReferredNameMarksAndCustomRemark(control);
-            (Control control2, int level) = GetReferredControl(control);
-
-            return (control2, level, scaledMovedX, scaledMovedY);
-        }
-
-        public Size GetControlSize(Control control)
+        public static Size GetControlSize(Control control)
         {
             if (control.GetType().IsSubclassOf(typeof(Form)) || control.GetType() == typeof(Form))
                 return ((Form)control).ClientSize;
-            else //if (control.GetType().IsSubclassOf(typeof(Button)) || control.GetType() == typeof(Button))//******
+            else
                 return control.Size;
-            //else
-            //    return new Size(control.Size.Width - (int)((control.Margin.Left + control.Margin.Right) * dpiScaleFactor), control.Size.Height);
         }
 
-        public int getRightAnchoredControlX(Control control, int controlNewWidth, Control control2, int level, float offset)
+        public static int GetControlLevel(Control control, Control control2)
         {
-            if (level == 0)
-                return (int)(control2.Location.X - controlNewWidth - offset * dpiScaleFactor);
+            if (control == null)
+                return 0;
+
+
+            string control2Name = control2.Name;
+
+            int level = 0;
+
+            Control foundParent = null;
+            Control parent = control.Parent;
+            while (foundParent == null && parent != null)
+            {
+                level++;
+
+                if (parent.Name == control2Name)
+                    foundParent = parent;
+                else
+                    parent = parent.Parent;
+            }
+
+            if (foundParent == null)
+                level = 0;
+
+            return level;
+        }
+
+        public static (int, int, int, int) GetControl2LeftRightMarginsOrParent0WidthPaddings(Control control, Control control2, bool pinnedToParent = false) //Returns: Left, Right or 0 & parent Width, margins or parent padding
+        {
+            if (control2 == null && pinnedToParent)
+                return (0, GetControlSize(control.Parent).Width, control.Parent.Padding.Left, control.Parent.Padding.Right);
+            
+
+            int level = GetControlLevel(control, control2);
+
+            if (level > 0)
+                return (GetControlSize(control2).Width, GetControlSize(control2).Width, control2.Padding.Right, control2.Padding.Left);
+            else //if (level == 0)
+                return (control2.Location.X, control2.Location.X + control2.Width, control2.Margin.Left, control2.Margin.Right);
+        }
+
+        public int getRightAnchoredControlX(Control control, int controlNewWidth, Control control2, bool pinnedToParent, int level, float offset = 0)
+        {
+            if (pinnedToParent)
+            {
+                return GetControlSize(control.Parent).Width - controlNewWidth - (control.Margin.Right + control.Parent.Padding.Right);
+            }
+            else if (level == 0)
+            {
+                if (offset == 0)
+                    return control2.Location.X - controlNewWidth - (control.Margin.Right + control2.Margin.Left);
+                else
+                    return (int)Math.Round(control2.Location.X - controlNewWidth - offset * hDpiFontScaling);
+            }
             else
-                return (int)(GetControlSize(control2).Width - controlNewWidth - offset * dpiScaleFactor);
+            {
+                return GetControlSize(control2).Width - controlNewWidth - (control.Margin.Right + control2.Padding.Right);
+            }
         }
 
-        public int getRightAnchoredControlWidth(Control control, Control control2, int level, float offset)
+        public static float GetYCenteredToY2(float controlHeight, float refControlY, Control control2)
         {
-            if (level == 0)
-                return (int)(control2.Location.X - control.Location.X - offset * dpiScaleFactor);
+            float control2MiddleY = refControlY + control2.Height / 2f;
+            return control2MiddleY - controlHeight / 2f;
+        }
+
+        public int getButtonY(Control control, AnchorStyles style)
+        {
+            float controlNewY = control.Location.Y - (control.Height - control.Height / vDpiFontScaling) / 4;//***
+            return (int)Math.Round(controlNewY);
+        }
+
+        public int getLabelY(Control control)
+        {
+            float controlNewY = control.Location.Y - (control.Height - control.Height / vDpiFontScaling) / 2;//***
+            return (int)Math.Round(controlNewY);
+        }
+
+        public int getPictureBoxY(Control control, float scale)
+        {
+            float controlNewY = control.Location.Y - (control.Height - control.Height / scale) / 2;
+            return (int)Math.Round(controlNewY);
+        }
+
+        public int getPictureBoxY(float controlHeight, Control control2)
+        {
+            float heightDifference = controlHeight - control2.Height;
+            float controlNewY = GetYCenteredToY2(controlHeight, control2.Location.Y, control2);
+
+            controlNewY -= heightDifference / 4 * vDpiFontScaling; //***
+            controlNewY += controlHeight * 0.12f;
+            return (int)Math.Round(controlNewY);
+        }
+
+        public int getCheckBoxesRadioButtonsY(Control control, Control control2)
+        {
+            if (control.Height == control2.Height)
+            {
+                return control.Location.Y;
+            }
             else
-                return (int)(GetControlSize(control2).Width - control.Location.X - offset * dpiScaleFactor);
+            {
+                float heightDifference = control.Height - control2.Height;
+                float controlNewY = GetYCenteredToY2(control.Height, control2.Location.Y, control2);
+
+                controlNewY -= heightDifference / 4 * vDpiFontScaling; //***
+                controlNewY += control.Height * 0.12f;
+                return (int)Math.Round(controlNewY);
+            }
         }
 
-        public void preMoveScaleControl(Control control)
+        //Let's correct flaws of AUTO-scaling
+        public virtual void preMoveScaleControl(Control control)
         {
-            if (control.GetType().IsSubclassOf(typeof(Form)) || control.GetType() == typeof(Form))
+            //if (control.GetType().IsSubclassOf(typeof(Form)) || control.GetType() == typeof(Form))
                 return;
 
-            (_, string control2Name, _, _, string remark) = GetControlTagReferredNameMarksAndCustomRemark(control);
-            if (remark == "non-defaultable")
-                nonDefaultableButtons.Add((Button)control);
+            string stringTag = control.Tag as string;
 
-
-            if (
-                //control.GetType().IsSubclassOf(typeof(GroupBox)) || control.GetType() == typeof(GroupBox) ||
-                //control.GetType().IsSubclassOf(typeof(Label)) || control.GetType() == typeof(Label) ||
-                control.GetType().IsSubclassOf(typeof(Button)) || control.GetType() == typeof(Button) ||
-                control.GetType().IsSubclassOf(typeof(PictureBox)) || control.GetType() == typeof(PictureBox)
-            )
+            if (control.GetType().IsSubclassOf(typeof(Button)) || control.GetType() == typeof(Button))
             {
-                Control referringControl = GetReferringControl(control);
-
-                bool setMarks = false;
-                if (control2Name == string.Empty && referringControl == null)
-                    setMarks = true;
-
-
-                //Control:  NOT Button, or NOT top, left & right anchored Button/no referred control. It's NOT a button in table layout panel.
-                if (!(control.GetType().IsSubclassOf(typeof(Button)) || control.GetType() == typeof(Button)) || 
-                    ((control.Anchor & AnchorStyles.Top) == 0 || (control.Anchor & AnchorStyles.Left) == 0 || (control.Anchor & AnchorStyles.Right) == 0))
+                control.Location = new Point(control.Location.X, getButtonY(control, control.Anchor));
+            }
+            else if (control.GetType().IsSubclassOf(typeof(PictureBox)) || control.GetType() == typeof(PictureBox))
+            {
+                if (stringTag?.Contains("@small-picture") == true)
                 {
-                    int controlNewWidth = (int)(control.Width * dpiScaleFactor);
-                    Control parentControl = control.Parent;
+                    control.Width = (int)Math.Round(control.Width * hDpiFontScaling);
+                    control.Height = (int)Math.Round(control.Height * hDpiFontScaling);
 
-                    //SQUARE (NOT BUTTON)
-                    if (control.Width == control.Height)
-                    {
-                        control.Width = controlNewWidth;
-                        control.Height = controlNewWidth;
-                    }
-                    else if (parentControl.GetType().IsSubclassOf(typeof(GroupBox)) || parentControl.GetType() == typeof(GroupBox) 
-                            && (control.GetType().IsSubclassOf(typeof(Button)) || control.GetType() == typeof(Button) ||
-                                control.GetType().IsSubclassOf(typeof(Label)) || control.GetType() == typeof(Label))
-                    )
-                    {
-                        //Setting X position. Width is set below.
-                        if ((control.Anchor & AnchorStyles.Left) != 0 && (control.Anchor & AnchorStyles.Right) == 0) //Left anchor
-                        {
-                            control.Location = new Point((int)(control.Location.X * dpiScaleFactor), control.Location.Y);
-                        }
-                        else if ((control.Anchor & AnchorStyles.Left) == 0 && (control.Anchor & AnchorStyles.Right) != 0) //Right anchor
-                        {
-                            float rightNewOffset = (parentControl.Width - control.Location.X - control.Width) * dpiScaleFactor;
-                            float controlNewX = parentControl.Width - controlNewWidth - rightNewOffset;
-
-                            control.Location = new Point((int)controlNewX, control.Location.Y);
-                        }
-                        else //Let's ignore left & right anchored controls for now
-                        {
-                            //...
-                        }
-
-                        control.Width = controlNewWidth;
-
-                        if (setMarks)
-                            SetControlTagReferredNameMarksAndCustomRemark(control, null, true, false);
-                    }
+                    control.Location = new Point(control.Location.X, getPictureBoxY(control, hDpiFontScaling));
                 }
-
-
-                //Lets' set Button's vertical size/position for generic button
-                if (control.GetType().IsSubclassOf(typeof(Button)) || control.GetType() == typeof(Button))
+                else
                 {
-                    //Control (Button) NOT top, left & right anchor/no referred control. It's NOT a button in table layout panel.
-                    //if ((control.Anchor & AnchorStyles.Top) == 0 || (control.Anchor & AnchorStyles.Left) == 0 || (control.Anchor & AnchorStyles.Right) == 0)
-                    {
-                        //NOT SQUARE (square button is a special case)
-                        if (control.Width != control.Height)
-                        {
-                            int controlNewHeight = (int)(control.Height * dpiScaleFactor);
+                    control.Width = (int)Math.Round(control.Width * vDpiFontScaling);
+                    control.Height = (int)Math.Round(control.Height * vDpiFontScaling);
 
-                            //Top anchor
-                            if ((control.Anchor & AnchorStyles.Top) != 0 && (control.Anchor & AnchorStyles.Bottom) == 0)
-                            {
-                                control.Height = controlNewHeight;
-                            }
-                            //Bottom anchor
-                            else if ((control.Anchor & AnchorStyles.Top) == 0 && (control.Anchor & AnchorStyles.Bottom) != 0)
-                            {
-                                int controlNewY = control.Location.Y + control.Height - controlNewHeight;
-
-                                control.Location = new Point(control.Location.X, controlNewY);
-                                control.Height = controlNewHeight;
-                            }
-                            //Top & bottom anchor/no vertical anchor
-                            else
-                            {
-                                float controlMiddleY = (control.Location.Y + control.Height / 2f);
-                                int controlNewY = (int)(controlMiddleY - controlNewHeight / 2f);
-
-                                control.Location = new Point(control.Location.X, controlNewY);
-                                control.Height = controlNewHeight;
-                            }
-
-
-                            if (setMarks)
-                                SetControlTagReferredNameMarksAndCustomRemark(control, null, false, true);
-                        }
-                    }
+                    control.Location = new Point(control.Location.X, getPictureBoxY(control, vDpiFontScaling));
                 }
             }
+            else if (control.GetType().IsSubclassOf(typeof(Label)) || control.GetType() == typeof(Label))
+            {
+                control.Location = new Point(control.Location.X, getLabelY(control));
+            }
+
+
+            //Control that was initially square (before AUTO-scaling) 
+            if (stringTag?.Contains("@square-control") == true)
+                control.Width = control.Height;
         }
 
-        public int getAdjustedControlHeight(int controlHeight)
-        {
-            return (int)Math.Round(controlHeight * ((dpiScaleFactor - 1) * 0.34f + 1)); //*****
-        }
-
-        public void postMoveScaleControl(Control control, bool forceMoveScale = false)
-        {
-            if (control.GetType().IsSubclassOf(typeof(Form)) || control.GetType() == typeof(Form))
-                return;
-
-            int controlNewWidth = (int)(control.Width * dpiScaleFactor);
-            int controlNewHeight = getAdjustedControlHeight(control.Height);
-
-
-            (_, string control2Name, bool scaledMovedX, bool scaledMovedY, _) = GetControlTagReferredNameMarksAndCustomRemark(control);
-
-            if (!forceMoveScale && (scaledMovedX || scaledMovedY))
-                return;
-            else if (string.IsNullOrEmpty(control2Name))
-                return;
-
-            Control parentControl = control.Parent;
-
-            if (!(
-                control.GetType().IsSubclassOf(typeof(ComboBox)) || control.GetType() == typeof(ComboBox) ||
-                control.GetType().IsSubclassOf(typeof(TextBox)) || control.GetType() == typeof(TextBox) ||
-                control.GetType().IsSubclassOf(typeof(Button)) || control.GetType() == typeof(Button)
-            ))
-            {
-                return;
-            }
-
-            if (control.GetType().IsSubclassOf(typeof(TextBox)) || control.GetType() == typeof(TextBox))
-            {
-                if (((TextBox)control).Multiline)
-                    return;
-            }
-
-            if (!control.GetType().IsSubclassOf(typeof(Button)) && control.GetType() != typeof(Button))
-            {
-                if ((control.Anchor & AnchorStyles.Left) != 0 && (control.Anchor & AnchorStyles.Right) != 0) //Not a Button, control left & right anchor/no referred control
-                {
-                    controlNewWidth = getGenericLeftRightAnchoredControlWidth(control);
-                    controlNewHeight = control.Height;
-                }
-            }
-            //Control (Button) NOT top, left & right anchor/no referred control. It's NOT a button in table layout panel. Let's reset Button's width & height.
-            else if ((control.Anchor & AnchorStyles.Top) == 0 || (control.Anchor & AnchorStyles.Left) == 0 || (control.Anchor & AnchorStyles.Right) == 0)
-            {
-                //SQUARE
-                if (control.Width == control.Height)
-                    controlNewWidth = control.Width;
-
-                controlNewHeight = control.Height;
-            }
-
-
-            //Setting X positions. Width is set below.
-            if ((control.Anchor & AnchorStyles.Left) != 0 && (control.Anchor & AnchorStyles.Right) == 0 && controlNewWidth != control.Width) //Left anchor, width changed
-            {
-                control.Location = new Point((int)(control.Location.X * dpiScaleFactor), control.Location.Y);
-            }
-            else if ((control.Anchor & AnchorStyles.Left) == 0 && (control.Anchor & AnchorStyles.Right) != 0 && controlNewWidth != control.Width) //Right anchor, width changed
-            {
-                int rightNewOffset = (int)((GetControlSize(parentControl).Width - (control.Location.X + control.Width)) * dpiScaleFactor);
-                int controlNewX = GetControlSize(parentControl).Width - controlNewWidth - rightNewOffset;
-
-                control.Location = new Point(controlNewX, control.Location.Y);
-            }
-
-
-            //Setting Y positions. Height is set below.
-            //Nothing at the moment...
-
-            //Setting width & height.
-            control.Width = controlNewWidth;
-            control.Height = controlNewHeight;
-        }
-
-        public void moveScaleReferringDependentControls(Control control)
+        public void moveScaleControlDependentReferringControls(Control control)
         {
             if (control.GetType().IsSubclassOf(typeof(Form)) || control.GetType() == typeof(Form))
                 return;
 
 
-            bool scaledMovedXRef = false;
-            bool scaledMovedYRef = false;
-            Control referringControl = GetReferringControl(control);
-            if (referringControl != null)
-                (_, _, scaledMovedXRef, scaledMovedYRef, _) = GetControlTagReferredNameMarksAndCustomRemark(referringControl);
+            const float smallControlOffsetX = 0.1f;
+            const float checkBoxRadioButtonOffsetCompensationX = 12f;
 
-            (Control control2, int level, bool scaledMovedX, bool scaledMovedY) = GetReferredControlAndControlLevelAndMarks(control);
 
-            if (scaledMovedX && scaledMovedY)
+            controlsReferenced.TryGetValue(control, out Control referringControl);
+
+            (Control control2, int level, bool scaledMovedL, bool scaledMovedR, bool scaledMovedY, string[] remarks) = GetReferredControlControlLevelMarksRemarks(control);
+            bool pinnedToParent = remarks.Contains("pinned-to-parent");
+
+            //control is left & right anchored. Let's move/scale it at the end (in another function).
+            if ((control.Anchor & AnchorStyles.Left) != 0 && (control.Anchor & AnchorStyles.Right) != 0)
+            {
+                if (!leftRightAnchoredControls.Contains(control))
+                    leftRightAnchoredControls.Add(control);
+
                 return;
+            }
 
 
-
-            //control left anchor
+            //control is left anchored
             if (referringControl != null && (control.Anchor & AnchorStyles.Left) != 0 && (control.Anchor & AnchorStyles.Right) == 0)
-                moveScaleReferringDependentControls(referringControl);
-            //Manually horizontally aligned CheckBox
-            else if (referringControl != null && scaledMovedXRef && !scaledMovedYRef && (referringControl.GetType().IsSubclassOf(typeof(CheckBox)) || referringControl.GetType() == typeof(CheckBox)))
-                moveScaleReferringDependentControls(referringControl);
-            //Manually horizontally aligned RadioButton
-            else if (referringControl != null && scaledMovedXRef && !scaledMovedYRef && (referringControl.GetType().IsSubclassOf(typeof(RadioButton)) || referringControl.GetType() == typeof(RadioButton)))
-                moveScaleReferringDependentControls(referringControl);
+                moveScaleControlDependentReferringControls(referringControl);
+            //referringControl is left anchored, control must be left & right anchored (left anchored only is considered above) 
+            else if (referringControl != null && (referringControl.Anchor & AnchorStyles.Left) != 0 && (referringControl.Anchor & AnchorStyles.Right) != 0)
+                moveScaleControlDependentReferringControls(referringControl);
 
 
-            if (control2 == null)
+            //Special case. Will move/scale it to parent. Let's proceed further...
+            if (pinnedToParent)
+                ;
+            //No control2 and control is NOT left & right anchored (see above)
+            else if (control2 == null)
+                return;
+            //control2 is right anchored and control is NOT left & right anchored (see earlier)
+            else if ((control2.Anchor & AnchorStyles.Left) == 0 && (control2.Anchor & AnchorStyles.Right) != 0)
+                moveScaleControlDependentReferringControls(control2);
+
+
+
+            if (scaledMovedL && scaledMovedR && scaledMovedY)
                 return;
 
 
-            (_, _, bool scaledMovedX2, bool scaledMovedY2, _) = GetControlTagReferredNameMarksAndCustomRemark(control2);
-            (Control control3, int level2) = GetReferredControl(control2);
+            bool scaledMovedL2 = true;
+            bool scaledMovedR2 = true;
+            bool scaledMovedY2 = true;
+
+            if (control2 != null)
+                (_, _, scaledMovedL2, scaledMovedR2, scaledMovedY2, _) = GetControlTagReferredNameMarksRemarks(control2);
 
 
-            //Manually horizontally aligned CheckBox. Let's proceed further...
-            if (scaledMovedX && !scaledMovedY && (control.GetType().IsSubclassOf(typeof(CheckBox)) || control.GetType() == typeof(CheckBox)))
-                ;
-            //Manually horizontally aligned RadioButton. Let's proceed further...
-            else if (scaledMovedX && !scaledMovedY && (control.GetType().IsSubclassOf(typeof(RadioButton)) || control.GetType() == typeof(RadioButton)))
-                ;
-            //control2 right anchor and control is NOT manually horizontally aligned CheckBox or RadioButton
-            else if ((control2.Anchor & AnchorStyles.Left) == 0 && (control2.Anchor & AnchorStyles.Right) != 0)
-                moveScaleReferringDependentControls(control2);
-
-
-            const float genericOffsetX = 10;//******
-            const float edgeOffsetX = 6f;
-            const float buttonOffsetX = 8f;
-            const float smallControlOffsetX = 8f;
-            const float smallControlOffsetY = 0.8f;//*****
-
-
-            if ((control.Anchor & AnchorStyles.Left) != 0 && (control.Anchor & AnchorStyles.Right) == 0) //control left anchor
+            //control left anchored
+            if ((control.Anchor & AnchorStyles.Left) != 0 && (control.Anchor & AnchorStyles.Right) == 0)
             {
-                if (control.GetType().IsSubclassOf(typeof(GroupBox)) || control.GetType() == typeof(GroupBox))
+                if (pinnedToParent || level > 0)
                 {
-                    if (!scaledMovedX)
+                    if (!scaledMovedL)
                     {
-                        float controlNewWidth = control.Width * dpiScaleFactor;
+                        var parent = control2;
+                        if (parent == null)
+                            parent = control.Parent;
 
-                        control.Width = (int)controlNewWidth;
-                        scaledMovedX = true;
+                        control.Location = new Point(parent.Padding.Left + control.Margin.Left, control.Location.Y);
+                        scaledMovedL = true;
                     }
                 }
-                else if (level > 0)
-                {
-                    if (!scaledMovedX)
-                    {
-                        control.Location = new Point((int)(edgeOffsetX * dpiScaleFactor), control.Location.Y);
-                        scaledMovedX = true;
-                    }
-                }
-                else if (control.GetType().IsSubclassOf(typeof(CheckBox)) || control.GetType() == typeof(CheckBox) || 
-                    control.GetType().IsSubclassOf(typeof(RadioButton)) || control.GetType() == typeof(RadioButton)
+                else if (control.GetType().IsSubclassOf(typeof(CheckBox)) || control.GetType() == typeof(CheckBox) ||
+                            control.GetType().IsSubclassOf(typeof(RadioButton)) || control.GetType() == typeof(RadioButton)
                 )
                 {
-                    if (!scaledMovedY && (control2.GetType().IsSubclassOf(typeof(Label)) || control2.GetType() == typeof(Label)))
+                    if (!scaledMovedY)
                     {
-                        control.Location = new Point(control.Location.X, (int)(control2.Location.Y - smallControlOffsetY * dpiScaleFactor));
+                        if (control2.GetType().IsSubclassOf(typeof(Label)) || control2.GetType() == typeof(Label))
+                        {
+                            control.Location = new Point(control.Location.X, getCheckBoxesRadioButtonsY(control, control2));
+                        }
+                        else
+                        {
+                            control.Location = new Point(control.Location.X, (int)Math.Round(GetYCenteredToY2(control.Height, control2.Location.Y, control2)));
+                        }
+
                         scaledMovedY = true;
                     }
 
-                    if (!scaledMovedX2)
+                    if (!scaledMovedL2)
                     {
-                        control2.Location = new Point((int)(control.Location.X + control.Width - smallControlOffsetX * dpiScaleFactor), control2.Location.Y);
-                        scaledMovedX2 = true;
+                        control2.Location = new Point((int)Math.Round(control.Location.X + control.Width - checkBoxRadioButtonOffsetCompensationX * hDpiFontScaling), control2.Location.Y);
+                        scaledMovedL2 = true;
                     }
                 }
                 else if (control.GetType().IsSubclassOf(typeof(PictureBox)) || control.GetType() == typeof(PictureBox))
                 {
-                    int controlNewY = GetPictureBoxY(control, control2);
-
-                    if (!scaledMovedY)
-                    {
-                        control.Location = new Point(control.Location.X, controlNewY);
-                        scaledMovedY = true;
-                    }
-
-                    if (!scaledMovedX2)
-                    {
-                        control2.Location = new Point((int)(control.Location.X + control.Width + smallControlOffsetX * dpiScaleFactor), control2.Location.Y);//*****
-                        scaledMovedX2 = true;
-                    }
-                }
-                else if ((control2.Anchor & AnchorStyles.Left) != 0 && (control2.Anchor & AnchorStyles.Right) == 0) //control2 left anchor
-                {
-                    float offset = genericOffsetX;
-                    if (control2.GetType().IsSubclassOf(typeof(Button)) || control2.GetType() == typeof(Button))
-                    {
-                        if (control2.Width == control2.Height)
-                            offset = buttonOffsetX;
-                    }
-
-
-                    if (!scaledMovedX2)
-                    {
-                        control2.Location = new Point((int)(control.Location.X + control.Width + offset * dpiScaleFactor), control2.Location.Y);
-                        scaledMovedX2 = true;
-                    }
-                }
-                //control2 must NOT have right anchor. See below.
-                else if ((control2.Anchor & AnchorStyles.Left) == 0 && (control2.Anchor & AnchorStyles.Right) != 0)
-                {
-                    throw new Exception("Invalid control2 anchoring! Expected anchor is not right.");
-                }
-                else //control2 left & right or no anchors
-                {
-                    if (!scaledMovedX2)
-                    {
-                        if (control3 == null) //Let's center relative parent
-                        {
-                            control2.Location = new Point((int)(control.Location.X + control.Width + genericOffsetX * dpiScaleFactor), control2.Location.Y);
-                            control2.Width = getGenericLeftRightAnchoredControlWidth(control2);
-                        }
-                        else
-                        {
-                            control2.Location = new Point((int)(control.Location.X + control.Width + genericOffsetX * dpiScaleFactor), control2.Location.Y);
-                            control2.Width = getRightAnchoredControlWidth(control2, control3, level2, genericOffsetX);
-                        }
-
-                        scaledMovedX2 = true;
-                    }
-                }
-            }
-            else if ((control.Anchor & AnchorStyles.Left) == 0 && (control.Anchor & AnchorStyles.Right) != 0) //control right anchor
-            {
-                if (control.GetType().IsSubclassOf(typeof(GroupBox)) || control.GetType() == typeof(GroupBox))
-                {
-                    if (!scaledMovedX)
-                    {
-                        float controlNewWidth = control.Width * dpiScaleFactor;
-                        int rightOffset = GetControlSize(control2).Width - (control.Location.X + control.Width);
-                        float controlNewX = GetControlSize(control2).Width - rightOffset - controlNewWidth;
-
-                        control.Location = new Point((int)controlNewX, control.Location.Y);
-                        control.Width = (int)controlNewWidth;
-                        scaledMovedX = true;
-                    }
-                }
-                else if (level > 0)
-                {
-                    if (!scaledMovedX)
-                    {
-                        control.Location = new Point(getRightAnchoredControlX(control, control.Width, control2, level, edgeOffsetX), control.Location.Y);
-                        scaledMovedX = true;
-                    }
-                }
-                else if (control.GetType().IsSubclassOf(typeof(CheckBox)) || control.GetType() == typeof(CheckBox) || 
-                    control.GetType().IsSubclassOf(typeof(RadioButton)) || control.GetType() == typeof(RadioButton)
-                )
-                {
-                    if (scaledMovedX && !scaledMovedY)
+                    if (!scaledMovedY2)
                     {
                         if (control2.GetType().IsSubclassOf(typeof(Label)) || control2.GetType() == typeof(Label))
                         {
-                            control.Location = new Point(control.Location.X, (int)(control2.Location.Y - smallControlOffsetY * dpiScaleFactor));
-                            scaledMovedY = true;
-                        }
-
-                        if (!scaledMovedX2)
-                        {
-                            control2.Location = new Point((int)(control.Location.X + control.Width - smallControlOffsetX * dpiScaleFactor), control2.Location.Y);
-                            scaledMovedX2 = true;
-                        }
-                    }
-                    else
-                    {
-                        if (!scaledMovedX && !scaledMovedY)
-                        {
-                            if (!scaledMovedY && (control2.GetType().IsSubclassOf(typeof(Label)) || control2.GetType() == typeof(Label)))
-                            {
-                                control.Location = new Point(getRightAnchoredControlX(control, control.Width, control2, level, -smallControlOffsetX), (int)(control2.Location.Y - smallControlOffsetY * dpiScaleFactor));
-                                scaledMovedY = true;
-                            }
-                            else
-                            {
-                                control.Location = new Point(getRightAnchoredControlX(control, control.Width, control2, level, -smallControlOffsetX), control.Location.Y);
-                            }
-
-                            scaledMovedX = true;
-                        }
-                    }
-                }
-                else if (control.GetType().IsSubclassOf(typeof(PictureBox)) || control.GetType() == typeof(PictureBox)) //control (PictureBox) must have right anchor
-                {
-                    int controlNewY = GetPictureBoxY(control, control2);
-
-                    if (!scaledMovedX && !scaledMovedY)
-                    {
-                        control.Location = new Point(getRightAnchoredControlX(control, control.Width, control2, level, smallControlOffsetX), controlNewY);
-                        scaledMovedX = true;
-                        scaledMovedY = true;
-                    }
-                }
-                else if ((control2.Anchor & AnchorStyles.Left) == 0 && (control2.Anchor & AnchorStyles.Right) != 0) //control2 right anchor
-                {
-                    float offset = genericOffsetX;
-                    if (!control.GetType().IsSubclassOf(typeof(Button)) && control.GetType() != typeof(Button))
-                    {
-                        if (control2.GetType().IsSubclassOf(typeof(Button)) || control2.GetType() == typeof(Button))
-                            offset = buttonOffsetX;
-                    }
-
-
-                    if (control3 != null && level2 > 0)
-                    {
-                        if (!scaledMovedX2)
-                        {
-                            if (level2 == 0)
-                                control2.Location = new Point(getRightAnchoredControlX(control2, control2.Width, control3, level2, genericOffsetX), control2.Location.Y);
-                            else
-                                control2.Location = new Point(getRightAnchoredControlX(control2, control2.Width, control3, level2, edgeOffsetX), control2.Location.Y);
-
-                            scaledMovedX2 = true;
-                        }
-                    }
-
-                    if (!scaledMovedX)
-                    {
-                        control.Location = new Point(getRightAnchoredControlX(control, control.Width, control2, level, offset), control.Location.Y);
-                        scaledMovedX = true;
-                    }
-                }
-                //control2 must NOT have left anchor. See below.
-                else if ((control2.Anchor & AnchorStyles.Left) != 0 && (control2.Anchor & AnchorStyles.Right) == 0)
-                {
-                    throw new Exception("Invalid control2 anchoring! Expected anchor is not left.");
-                }
-                else //control2 left & right or no anchors
-                {
-                    if (!scaledMovedX2)
-                    {
-                        if (control3 == null) //Let's center relative parent
-                        {
-                            int control2NewWidth = getGenericLeftRightAnchoredControlWidth(control2);
-
-                            control2.Location = new Point((int)(control.Location.X + control.Width + genericOffsetX * dpiScaleFactor), control2.Location.Y);
-                            control2.Width = control2NewWidth;
+                            control2.Location = new Point((int)Math.Round(control.Location.X + control.Width + smallControlOffsetX * hDpiFontScaling), control2.Location.Y);
                         }
                         else
                         {
-                            int control2NewWidth = getRightAnchoredControlX(control2, control2.Width, control3, level2, edgeOffsetX) - control2.Location.X;
-
-                            control2.Location = new Point((int)(control.Location.X + control.Width + genericOffsetX * dpiScaleFactor), control2.Location.Y);
-                            control2.Width = control2NewWidth;//*****
+                            control2.Location = new Point(control.Location.X + control.Width + control.Margin.Right + control2.Margin.Left, control2.Location.Y);
                         }
 
-                        scaledMovedX2 = true;
+                        scaledMovedL2 = true;
+                    }
+
+                    if (!scaledMovedY)
+                    {
+                        control.Location = new Point(control.Location.X, getPictureBoxY(control.Height, control2));
+                        scaledMovedY = true;
                     }
                 }
+                //control2 left anchored
+                else if ((control2.Anchor & AnchorStyles.Left) != 0 && (control2.Anchor & AnchorStyles.Right) == 0)
+                {
+                    if (!scaledMovedL2)
+                    {
+                        control2.Location = new Point(control.Location.X + control.Width + control2.Margin.Left + control.Margin.Right, control2.Location.Y);
+                        scaledMovedL2 = true;
+                    }
+                }
+                //control2 must NOT be right anchored. See below.
+                else if ((control2.Anchor & AnchorStyles.Left) == 0 && (control2.Anchor & AnchorStyles.Right) != 0)
+                {
+                    throw new Exception("Invalid control2 anchoring for control: " + control.Name + "! Expected anchor is not right.");
+                }
+                //control2 must NOT be not anchored
+                else if ((control2.Anchor & AnchorStyles.Left) == 0 && (control2.Anchor & AnchorStyles.Right) == 0)
+                {
+                    throw new Exception("Invalid control2 anchoring for control: " + control.Name + "! Expected anchor is not none.");
+                }
             }
-            else if ((control.Anchor & AnchorStyles.Left) != 0 && (control.Anchor & AnchorStyles.Right) != 0)  //control left & right anchor
+            //control right anchored
+            else if ((control.Anchor & AnchorStyles.Left) == 0 && (control.Anchor & AnchorStyles.Right) != 0)
             {
-                if (control.GetType().IsSubclassOf(typeof(Panel)) || control.GetType() == typeof(Panel))
+                if (pinnedToParent || level > 0)
                 {
-                    if (!scaledMovedX)
+                    if (!scaledMovedL)
                     {
-                        float controlNewX = control.Location.X * dpiScaleFactor;
-                        float controlNewWidth = GetControlSize(control2).Width - controlNewX;
+                        var parent = control2;
+                        if (parent == null)
+                            parent = control.Parent;
 
-                        control.Location = new Point((int)controlNewX, control.Location.Y);
-                        control.Width = (int)controlNewWidth;
-                        scaledMovedX = true;
+                        int controlNewX = GetControlSize(parent).Width - control.Width - (parent.Padding.Right + control.Margin.Right);
+
+                        control.Location = new Point(controlNewX, control.Location.Y);
+                        scaledMovedL = true;
                     }
                 }
-                else if (level > 0)
+                else if (control.GetType().IsSubclassOf(typeof(CheckBox)) || control.GetType() == typeof(CheckBox) ||
+                    control.GetType().IsSubclassOf(typeof(RadioButton)) || control.GetType() == typeof(RadioButton)
+                )
                 {
-                    if (!scaledMovedX)
+                    if (!scaledMovedL && !scaledMovedY)
                     {
-                        float controlMiddleX = control.Location.X + control.Width / 2f;
-                        float controlNewWidth = control.Width * dpiScaleFactor;
-                        float controlNewX = controlMiddleX - controlNewWidth / 2f;
+                        if (!scaledMovedY && (control2.GetType().IsSubclassOf(typeof(Label)) || control2.GetType() == typeof(Label)))
+                        {
+                            control.Location = new Point(getRightAnchoredControlX(control, control.Width, control2, pinnedToParent, level, -checkBoxRadioButtonOffsetCompensationX * hDpiFontScaling), getCheckBoxesRadioButtonsY(control, control2));
+                        }
+                        else
+                        {
+                            control.Location = new Point(getRightAnchoredControlX(control, control.Width, control2, pinnedToParent, level), (int)Math.Round(GetYCenteredToY2(control.Height, control2.Location.Y, control2)));
+                        }
 
-                        control.Location = new Point((int)controlNewX, control.Location.Y);
-                        control.Width = (int)controlNewWidth;
-                        scaledMovedX = true;
+                        scaledMovedL = true;
+                        scaledMovedY = true;
                     }
                 }
-                //control2 must have right anchor. See below.
-                else if ((control2.Anchor & AnchorStyles.Left) != 0 || (control2.Anchor & AnchorStyles.Right) == 0)
+                else if (control.GetType().IsSubclassOf(typeof(PictureBox)) || control.GetType() == typeof(PictureBox))
                 {
-                    throw new Exception("Invalid control2 anchoring! Expected anchor is right.");
+                    if (!scaledMovedL)
+                    {
+                        if (control2.GetType().IsSubclassOf(typeof(Label)) || control2.GetType() == typeof(Label))
+                        {
+                            control.Location = new Point(getRightAnchoredControlX(control, control.Width, control2, pinnedToParent, level, smallControlOffsetX), control.Location.Y);
+                        }
+                        else
+                        {
+                            control.Location = new Point(getRightAnchoredControlX(control, control.Width, control2, pinnedToParent, level, control.Margin.Right + control2.Margin.Left), control.Location.Y);
+                        }
+
+                        scaledMovedL = true;
+                    }
+
+                    if (!scaledMovedY)
+                    {
+                        control.Location = new Point(control.Location.X, getPictureBoxY(control.Height, control2));
+                        scaledMovedY = true;
+                    }
                 }
-                else //control2 right anchor
+                //control2 right anchored
+                else if (((control2.Anchor & AnchorStyles.Left) == 0 && (control2.Anchor & AnchorStyles.Right) != 0) || level > 0)
                 {
-                    float offset = genericOffsetX;
-                    if (control2.GetType().IsSubclassOf(typeof(Button)) || control2.GetType() == typeof(Button))
+                    if (!scaledMovedL)
                     {
-                        if (control2.Width == control2.Height)
-                            offset = buttonOffsetX;
+                        control.Location = new Point(getRightAnchoredControlX(control, control.Width, control2, pinnedToParent, level), control.Location.Y);
+                        scaledMovedL = true;
                     }
-
-
-                    if (!scaledMovedX2)
-                    {
-                        moveScaleReferringDependentControls(control2);
-                    }
-
-                    control.Width = (int)(control2.Location.X - control.Location.X - offset * dpiScaleFactor);
-                    scaledMovedX = true; 
+                }
+                //control2 must NOT be left anchored. See below.
+                else if ((control2.Anchor & AnchorStyles.Left) != 0 && (control2.Anchor & AnchorStyles.Right) == 0)
+                {
+                    throw new Exception("Invalid control2 anchoring for control: " + control.Name + "! Expected anchor is not left.");
+                }
+                //control2 must NOT be not anchored
+                else if ((control2.Anchor & AnchorStyles.Left) == 0 && (control2.Anchor & AnchorStyles.Right) == 0)
+                {
+                    throw new Exception("Invalid control2 anchoring for control: " + control.Name + "! Expected anchor is not none.");
                 }
             }
 
 
-            SetControlTagReferredNameMarksAndCustomRemark(control, null, true, true);
-            SetControlTagReferredNameMarksAndCustomRemark(control2, null, scaledMovedX2, scaledMovedY2);//******
+            SetControlTagReferredNameMarksRemarks(control, null, scaledMovedL, scaledMovedR, scaledMovedY);
 
-            if (scaledMovedX2 || scaledMovedY2)//***** see above
-                moveScaleReferringDependentControls(control2);
+            if (control2 != null)
+                SetControlTagReferredNameMarksRemarks(control2, null, scaledMovedL2, scaledMovedR2, scaledMovedY2);
         }
+
+        public void scaleMoveLeftRightAnchoredControls()
+        {
+            foreach (var control in leftRightAnchoredControls)
+            {
+                controlsReferenced.TryGetValue(control, out var controlReferencing);
+                controlsReferences.TryGetValue(control, out var controlReference);
+
+                (_, _, _, _, _, string[] remarks) = GetControlTagReferredNameMarksRemarks(control);
+                bool pinnedToParent = remarks.Contains("pinned-to-parent");
+                int controlReferencingLevel = GetControlLevel(controlReferencing, control); 
+
+                int controlRNew;
+
+                if (controlReferencing != null && controlReferencingLevel == 0 && controlReference != null)
+                {
+                    (int controlReferencingLeft, int controlReferencingRight, int controlReferencingMarginLeft, int controlReferencingMarginRight) = GetControl2LeftRightMarginsOrParent0WidthPaddings(control, controlReferencing, pinnedToParent);
+                    (int controlReferenceLeft, int controlReferenceRight, int controlReferenceMarginLeft, int controlReferenceMarginRight) = GetControl2LeftRightMarginsOrParent0WidthPaddings(control, controlReference, pinnedToParent);
+
+                    controlRNew = controlReferenceLeft - (controlReferenceMarginLeft + control.Margin.Right);
+                    control.Location = new Point(controlReferencingRight + (controlReferencingMarginRight + control.Margin.Left), control.Location.Y);
+                    control.Width = controlRNew - control.Location.X;
+                
+                }
+                else if (controlReferencing != null && controlReferencingLevel == 0 && controlReference == null)
+                {
+                    (int controlReferencingLeft, int controlReferencingRight, int controlReferencingMarginLeft, int controlReferencingMarginRight) = GetControl2LeftRightMarginsOrParent0WidthPaddings(control, controlReferencing, pinnedToParent);
+
+                    controlRNew = control.Location.X + control.Width;
+                    control.Location = new Point(controlReferencingLeft + (controlReferencingMarginRight + control.Margin.Left), control.Location.Y);
+                    control.Width = controlRNew - control.Location.X;
+                }
+                else if ((controlReferencing == null || controlReferencingLevel > 0) && controlReference != null)
+                {
+                    (int controlReferenceLeft, int controlReferenceRight, int controlReferenceMarginLeft, int controlReferenceMarginRight) = GetControl2LeftRightMarginsOrParent0WidthPaddings(control, controlReference, pinnedToParent);
+
+                    if (pinnedToParent && GetControlLevel(control, controlReference) > 0) //Pinned to controlReference (i.e. controlReference is a parent)
+                    {
+                        (int controlReferencingLeft, int controlReferencingRight, int controlReferencingMarginLeft, int controlReferencingMarginRight) = GetControl2LeftRightMarginsOrParent0WidthPaddings(control, control.Parent, true);
+
+                        control.Location = new Point(controlReferencingMarginRight + control.Margin.Left, control.Location.Y);
+                        controlRNew = controlReferenceRight - (controlReferenceMarginRight + control.Margin.Right);
+                    }
+                    else
+                    {
+                        controlRNew = controlReferenceLeft - (controlReferenceMarginLeft + control.Margin.Right);
+                    }
+
+                    control.Width = controlRNew - control.Location.X;
+                }
+                else //if (controlReferencing == null && controlReference == null)
+                {
+                    //Nothing to do. Lets keep auto-scaled scaling/position... 
+                }
+            }
+       }
 
         public void skinControl(Control control)
         {
@@ -922,9 +940,10 @@ namespace MusicBeePlugin
 
                 button.TextChanged += button_TextChanged;
                 button.GotFocus += button_GotFocus;
+                button.LostFocus += button_LostFocus;
 
 
-                if (!UseSkinColors)
+                if (!UseMusicBeeFontSkinColors)
                 {
                     button.FlatStyle = FlatStyle.Standard;
                 }
@@ -939,38 +958,56 @@ namespace MusicBeePlugin
 
                     button.EnabledChanged += button_EnabledChanged;
                     button.Paint += button_Paint;
-                    button.LostFocus += button_LostFocus;
 
                     button.Text = string.Empty;
                 }
 
                 return;
             }
+            else
+            {
+                control.Enter += control_Enter;
+            }
 
 
             //SplitContainer and (disabled) Button above must be skinned in any case (even if using system colors)
-            if (!UseSkinColors)
+            if (!UseMusicBeeFontSkinColors)
                 return;
 
 
             if (control.GetType().IsSubclassOf(typeof(TextBox)) || control.GetType() == typeof(TextBox))
             {
-                control.BackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
-                control.ForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
+                control.BackColor = InputControlBackColor;
+                control.ForeColor = InputControlForeColor;
 
                 ((TextBox)control).BorderStyle = BorderStyle.FixedSingle;
             }
             else if (control.GetType().IsSubclassOf(typeof(ComboBox)) || control.GetType() == typeof(ComboBox))
             {
-                control.BackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
-                control.ForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
+                ComboBox comboBox = control as ComboBox;
 
-                ((ComboBox)control).FlatStyle = FlatStyle.Flat;
+                control.BackColor = InputControlBackColor;
+                control.ForeColor = InputControlForeColor;
+
+                comboBox.FlatStyle = FlatStyle.Flat;
+
+                if (comboBox.DropDownStyle == ComboBoxStyle.DropDownList) //For rendering high contrast cue banners.
+                {
+                    comboBox.DrawItem += comboBox_DrawItem;
+                    comboBox.DrawMode = DrawMode.OwnerDrawFixed;
+                }
+                else //DropDown look ugly if disabled. Let's handle 
+                {
+                    dropDownStyleComboBox.Add(comboBox);
+
+                    comboBox.EnabledChanged += comboBox_EnabledChanged;
+                    comboBox_EnabledChanged(comboBox, null);
+                }
             }
             else if (control.GetType().IsSubclassOf(typeof(ListBox)) || control.GetType() == typeof(ListBox))
             {
-                control.BackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
-                control.ForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
+                control.BackColor = InputControlBackColor;
+                control.ForeColor = InputControlForeColor;
                 
                 ((ListBox)control).BorderStyle = BorderStyle.Fixed3D;
             }
@@ -1007,24 +1044,26 @@ namespace MusicBeePlugin
             else if (control.GetType().IsSubclassOf(typeof(CheckBox)) || control.GetType() == typeof(CheckBox))
             {
                 control.BackColor = FormBackColor;
-                control.ForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
+                control.ForeColor = FormForeColor;
 
                 ((CheckBox)control).FlatStyle = FlatStyle.System;
             }
             else if (control.GetType().IsSubclassOf(typeof(RadioButton)) || control.GetType() == typeof(RadioButton))
             {
                 control.BackColor = FormBackColor;
-                control.ForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanelLabel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
+                control.ForeColor = FormForeColor;
 
                 ((RadioButton)control).FlatStyle = FlatStyle.System;
             }
             else if (control.GetType() == typeof(DataGridView))
             {
-                control.BackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
-                control.ForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
+                control.BackColor = HeaderCellStyle.BackColor;
+                control.ForeColor = HeaderCellStyle.ForeColor;
 
-                ((DataGridView)control).BackgroundColor = control.BackColor;
-                ((DataGridView)control).DefaultCellStyle.BackColor = control.BackColor;
+                ((DataGridView)control).BorderStyle = BorderStyle.FixedSingle;
+                ((DataGridView)control).ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+                ((DataGridView)control).BackgroundColor = UnchangedCellStyle.BackColor;
+                ((DataGridView)control).DefaultCellStyle = UnchangedCellStyle;
             }
             else
             {
@@ -1033,6 +1072,28 @@ namespace MusicBeePlugin
             }
 
             return;
+        }
+
+        public void fillControlsReferencesRemarks()
+        {
+            for (int i = allControls.Count - 1; i >= 0; i--)
+            {
+                var control = allControls[i];
+                
+                (Control control2, int level, _, _, _, string[] remarks) = GetReferredControlControlLevelMarksRemarks(control);
+
+                if (control2 != null)
+                {
+                    controlsReferences.AddReplace(control, control2);
+                    controlsReferenced.AddReplace(control2, control);
+                }
+
+                if (remarks.Contains("pinned-to-parent") && !pinnedToParentControls.Contains(control))
+                    pinnedToParentControls.Add(control);
+
+                if (remarks.Contains("non-defaultable") && !nonDefaultableButtons.Contains(control))
+                    nonDefaultableButtons.Add((Button)control);
+            }
         }
 
         public void addAllChildrenControls(Control parentControl)
@@ -1046,65 +1107,386 @@ namespace MusicBeePlugin
 
         public void skinMoveScaleAllControls()
         {
-            if (UseSkinColors)
+            if (UseMusicBeeFontSkinColors)
             {
                 BackColor = FormBackColor;
-                ForeColor = AccentColor;
+                ForeColor = FormForeColor;
             }
 
-            addAllChildrenControls(this);
+            fillControlsReferencesRemarks();
 
-            for (int i = allControls.Count - 1; i >=0; i--)
+
+            for (int i = allControls.Count - 1; i >= 0; i--)
                 skinControl(allControls[i]);
+
 
             for (int i = allControls.Count - 1; i >= 0; i--)
                 preMoveScaleControl(allControls[i]);
 
             for (int i = allControls.Count - 1; i >= 0; i--)
-                moveScaleReferringDependentControls(allControls[i]);
+                moveScaleControlDependentReferringControls(allControls[i]);
 
-            for (int i = allControls.Count - 1; i >= 0; i--)
-                postMoveScaleControl(allControls[i]);
+            scaleMoveLeftRightAnchoredControls();
         }
 
-        protected void setInitialFormMaximumMinimumSize()
+        protected void setInitialFormMaximumMinimumSize(Size initialMinimumSize, Size initialMaximumSize, bool sameMinMaxWidth, bool sameMinMaxHeight)
         {
-            int minimumWidth;
+            if (modal)
+                MinimizeBox = false;
 
-            if (Tag as string == "@fixed-min-width")
-                minimumWidth = MinimumSize.Width;
-            else if (Tag as string == "@small-min-width")
-                minimumWidth = (int)(MinimumSize.Width * ((dpiScaleFactor - 1) * 0.5f + 1));
+
+            hDpiFormScaling = (float)MinimumSize.Width / initialMinimumSize.Width;
+            vDpiFormScaling = (float)MinimumSize.Height / initialMinimumSize.Height;
+
+            if (fixedSize)
+            {
+                Width = (int)Math.Round(Width * hDpiFormScaling);
+            }
             else
-                minimumWidth = (int)(MinimumSize.Width * dpiScaleFactor);
-
-
-            if (!modal && !fixedSize)
             {
-                MinimumSize = new Size(minimumWidth, (int)(MinimumSize.Height * dpiScaleFactor));
-                MaximumSize = new Size((int)(MaximumSize.Width * dpiScaleFactor), (int)(MaximumSize.Height * dpiScaleFactor));
-            }
-            else if (!fixedSize)
-            {
-                int minimumHeight = (int)(MinimumSize.Height * ((dpiScaleFactor - 1) * 0.059f + 1));
+                int maxWidth = 0;
+                if (sameMinMaxWidth)
+                    maxWidth = MinimumSize.Width;
+                else if (initialMaximumSize.Width != 0)
+                    maxWidth = (int)Math.Round(initialMaximumSize.Width * hDpiFormScaling);
 
-                MinimumSize = new Size(minimumWidth, minimumHeight);
-                MaximumSize = new Size((int)(MaximumSize.Width * dpiScaleFactor), (int)(MaximumSize.Height * dpiScaleFactor));
+                int maxHeight = 0;
+                if (sameMinMaxHeight)
+                    maxHeight = MinimumSize.Height;
+                else if (initialMaximumSize.Height != 0)
+                    maxHeight = (int)Math.Round(initialMaximumSize.Height * vDpiFormScaling);
+
+                MaximumSize = new Size(maxWidth, maxHeight);
             }
+        }
+
+        public enum FontEquality
+        {
+            DifferentFontUnits = -1,
+
+            DifferentStylesSizes = 0,
+
+            EqualSizes = 1,
+
+            SymbolStyles = 2,
+            EqualStyles = 4,
+
+            EqualSizesStyles = EqualSizes | EqualStyles,
+
+            DifferentNames = 8,
+            PartiallyEqualNames = 16,
+            EqualNames = 32,
+
+            Equal = EqualSizesStyles | EqualNames,
+        }
+
+        public static FontEquality CompareFonts(Font font1, Font font2)
+        {
+            FontEquality fontNameEquality;
+
+            string lcFontName = font1.Name.ToLower();
+            bool isSymbolFont = lcFontName.Contains("icons") || lcFontName.Contains("mdl2") || lcFontName.Contains("symbol");
+
+            lcFontName = font2.Name.ToLower();
+            isSymbolFont |= lcFontName.Contains("icons") || lcFontName.Contains("mdl2") || lcFontName.Contains("symbol");
+
+            if (font1.Name == font2.Name)
+                fontNameEquality = FontEquality.EqualNames;
+            else if ((font1.Name.StartsWith(font2.Name) || font2.Name.StartsWith(font1.Name)) && !isSymbolFont)
+                fontNameEquality = FontEquality.PartiallyEqualNames;
+            else
+                fontNameEquality = FontEquality.DifferentNames;
+
+
+            if (font1.Unit != font2.Unit)
+            {
+                return FontEquality.DifferentFontUnits;
+            }
+            else if (isSymbolFont && font1.Size == font2.Size)
+            {
+                return FontEquality.EqualSizes | FontEquality.SymbolStyles | fontNameEquality;
+            }
+            else if (isSymbolFont)
+            {
+                return FontEquality.SymbolStyles | fontNameEquality;
+            }
+            else if (font1.Style == font2.Style && font1.Size == font2.Size && font1.GdiVerticalFont == font2.GdiVerticalFont)
+            {
+                return FontEquality.EqualSizesStyles | fontNameEquality;
+            }
+            else if (font1.Size == font2.Size && font1.GdiVerticalFont == font2.GdiVerticalFont)
+            {
+                return FontEquality.EqualSizes | fontNameEquality;
+            }
+            else
+            {
+                return FontEquality.DifferentStylesSizes | fontNameEquality;
+            }
+        }
+
+        protected void scaleForm()
+        {
+            List<Control> ownFontControls = new List<Control>();
+
+            for (int i = 0; i <  allControls.Count; i++) //Required for correct DPI scaling
+            {
+                var control = allControls[i];
+
+                var fontEquality = CompareFonts(control.Font, Font);
+                bool sameFonts = (fontEquality == FontEquality.Equal);
+
+                if (!sameFonts)
+                    ownFontControls.Add(control);
+
+                if (control.GetType().IsSubclassOf(typeof(ContainerControl)))
+                    (control as ContainerControl).AutoScaleMode = AutoScaleMode.Inherit;
+
+                if (control is SplitContainer) //Let's remember initial properties to scale them manually later
+                {
+                    SplitContainer sc = control as SplitContainer;
+                    SplitContainerScalingAttributes scsa = default;
+                    scsa.splitContainer = sc;
+                    scsa.panel2MinSize = sc.Panel1MinSize;
+                    scsa.panel2MinSize = sc.Panel2MinSize;
+                    scsa.splitterDistance = sc.SplitterDistance;
+
+                    splitContainersScalingAttributes.Add(scsa);
+                }
+            }
+
+
+            bool sameMinMaxWidth = false;
+            bool sameMinMaxHeight = false;
+
+            if ((Tag as string)?.Contains("@min-max-width-same") == true)
+                sameMinMaxWidth = true;
+
+            if ((Tag as string)?.Contains("@min-max-height-same") == true)
+                sameMinMaxHeight = true;
+
+            var resources = new ResourceManager(GetType());
+
+            object resource = resources.GetObject("$this.MaximumSize");
+            Size initialMaximumSize = resource == null ? new Size(0, 0) : (Size)resource;
+            resource = resources.GetObject("$this.MinimumSize");
+            Size initialMinimumSize = resource == null ? new Size(0, 0) : (Size)resource;
+            resource = resources.GetObject("$this.ClientSize");
+            Size initialClientSize = resource == null ? new Size(0, 0) : (Size)resource;
+            resource = resources.GetObject("$this.Font");
+            Font initialFormFont = resource == null ? Font : (Font)resource;
+
+
+            MaximumSize = new Size(0, 0); //Let's temporary remove max. size restrictions
+
+
+            Font mbFont;
+            if (UseMusicBeeFontSkinColors)
+                mbFont = MbApiInterface.Setting_GetDefaultFont();
+            else
+                mbFont = Font;
+
+            FontEquality mbThisFormFontEquality = CompareFonts(mbFont, initialFormFont);
+
+
+            for (int i = allControls.Count - 1; i >= 0; i--) //Required for correct DPI scaling
+                allControls[i].SuspendLayout();
+
+            SuspendLayout();
+
+
+            if (mbThisFormFontEquality == FontEquality.DifferentFontUnits)
+            {
+                MessageBox.Show(MbForm, "Unsupported MusicBee font type!\n" + //*******
+                    "Either choose different font in MusicBee preferences or disable using skin colors in plugin settings.",
+                    string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                //Won't change form's font, but let's rescale in case of DPI change...
+            }
+            else if (mbThisFormFontEquality == FontEquality.Equal)
+            {
+                //Won't change form's font, but let's rescale in case of DPI change...
+            }
+            else
+            {
+                bool formFontEqualNamesStyles;
+
+                if ((mbThisFormFontEquality & FontEquality.EqualNames & FontEquality.EqualStyles) != 0) //Let's change font sizes only, they can't be the same (see above)
+                {
+                    formFontEqualNamesStyles = true;
+                    Font = new Font(Font.Name, mbFont.Size, Font.Style);
+                }
+                else
+                {
+                    formFontEqualNamesStyles = false;
+                    Font = new Font(mbFont.Name, mbFont.Size, mbFont.Style | Font.Style);
+                }
+
+
+                foreach (var control in allControls)
+                {
+                    if (ownFontControls.Contains(control))
+                    {
+                        var controlFormFontEquality = CompareFonts(control.Font, initialFormFont);
+
+                        if (formFontEqualNamesStyles)
+                            control.Font = new Font(control.Font.Name, mbFont.Size * control.Font.Size / initialFormFont.Size, control.Font.Style);
+                        else if ((controlFormFontEquality & FontEquality.EqualNames) != 0 || (controlFormFontEquality & FontEquality.PartiallyEqualNames) != 0)
+                            control.Font = new Font(mbFont.Name, mbFont.Size * control.Font.Size / initialFormFont.Size, mbFont.Style | control.Font.Style);
+                        else if ((controlFormFontEquality & FontEquality.SymbolStyles) == 0)
+                            control.Font = new Font(control.Font.Name, mbFont.Size * control.Font.Size / initialFormFont.Size, mbFont.Style | control.Font.Style);
+                        else
+                            control.Font = new Font(control.Font.Name, mbFont.Size * control.Font.Size / initialFormFont.Size, control.Font.Style);
+                    }
+                    else if (control.Text == " ") //It's zero width space
+                    {
+                        control.Font = new Font(initialFormFont.Name, control.Font.Size, FontStyle.Regular);
+                    }
+                }
+            }
+
+
+            for (int i = 0; i < allControls.Count; i++) //Required for correct DPI scaling
+            {
+                allControls[i].ResumeLayout(false);
+                allControls[i].PerformLayout();
+            }
+
+
+            ResumeLayout(false);
+            PerformLayout();
+
+
+            MinimumSize = Size;
+
+            hDpiFontScaling = (float)ClientSize.Width / initialClientSize.Width;//***** hDpiFontScaling VS vDpiFontScaling !!!
+            vDpiFontScaling = (float)ClientSize.Height / initialClientSize.Height;
+
+
+            //Split containers must be scaled manually in the child form's "OnLoad" handler using "splitContainersScalingAttributes" (auto-scaling is improper)
+
+            setInitialFormMaximumMinimumSize(initialMinimumSize, initialMaximumSize, sameMinMaxWidth, sameMinMaxHeight);
         }
 
         protected void setFormMaximizedBounds()
         {
             if (modal && MaximumSize.Height != 0 && !fixedSize)
             {
-                int maximizedHeight = Height;
+                int maximizedHeight = MaximumSize.Height;
 
                 if (maximizedHeight > Screen.FromControl(this).WorkingArea.Height)
                     maximizedHeight = Screen.FromControl(this).WorkingArea.Height;
 
-                MaximizedBounds = new Rectangle((int)(Screen.FromControl(this).WorkingArea.Left), 0, 
-                    (int)(Screen.FromControl(this).WorkingArea.Width), maximizedHeight);
+                MaximizedBounds = new Rectangle(Screen.FromControl(this).WorkingArea.Left, 0, //****** scaling needed?
+                    Screen.FromControl(this).WorkingArea.Width, maximizedHeight);
             }
+        }
+
+        protected void primaryInitialization()
+        {
+            if (!dontShowForm) //If forceHidden, then form is created to get DPI/font scaling only, won't show it, form will be disposed soon.
+            {
+                if (initialized)
+                {
+                    tryShowForm();
+                    return;
+                }
+
+
+                //Common initialization
+                if (MbForm.IsDisposed)
+                    MbForm = (Form)FromHandle(MbApiInterface.MB_GetWindowHandle());
+
+                MbForm.AddOwnedForm(this);
+
+                clickedButton = EmptyButton;
+
+                lock (OpenedForms)
+                {
+                    if (NumberOfNativeMbBackgroundTasks > 0)
+                        disableQueryingButtons();
+                    else
+                        enableQueryingButtons();
+                }
+
+                stopButtonClicked = stopButtonClickedMethod;
+                taskStarted = taskStartedMethod;
+
+                TagToolsPlugin.fillTagNames();
+            }
+
+            //DPI/font scaling & loading plugin windows sizes/positions
+            fixedSize = (FormBorderStyle == FormBorderStyle.FixedDialog) || (FormBorderStyle == FormBorderStyle.FixedSingle) ? true : false;
+
+            if (DeviceDpi != 96)
+                dpiScaling = DeviceDpi / 96f;
+
+            UseMusicBeeFontSkinColors = SavedSettings.useMusicBeeFontSkinColors;
+            addAllChildrenControls(this);
+
+
+            ignoreSizePositionChanges = true;
+
+            scaleForm(); //DPI/font scaling
+
+            if (dontShowForm) //Form is created to get DPI/font scaling only, won't show it, form will be disposed soon.
+                return;
+
+
+            loadWindowSizesPositions();
+
+            if (width != 0 && height != 0)
+            {
+                width = (int)(width * hDpiFormScaling);
+
+                if (!fixedSize)
+                    height = (int)(height * vDpiFormScaling);
+
+                Width = width;
+                Height = height;
+                WindowState = windowState;
+            }
+            else if (!modal && !fixedSize)
+            {
+                width = (int)(Width * hDpiFormScaling);
+                height = (int)(Height * vDpiFormScaling);
+
+                Width = width;
+                Height = height;
+                WindowState = FormWindowState.Normal;
+            }
+            else if (!fixedSize) //Modal
+            {
+                Width = MinimumSize.Width;
+                Height = MinimumSize.Height;
+                WindowState = FormWindowState.Normal;
+
+                width = Width;
+                height = Height;
+
+            }
+            else //Fixed size
+            {
+                Width = (int)(Width * hDpiFormScaling);
+                Height = Height;
+                WindowState = FormWindowState.Normal;
+
+                width = Width;
+                height = Height;
+            }
+
+            Top = (int)(top * hDpiFormScaling);
+            Left = (int)(left * hDpiFormScaling);
+
+            setFormMaximizedBounds();
+
+            skinMoveScaleAllControls();//***
+
+
+            ignoreSizePositionChanges = false;
+            initialized = true;
+
+
+            tryShowForm();
         }
 
         public static void Display(PluginWindowTemplate newForm, bool modalForm = false)
@@ -1140,8 +1522,18 @@ namespace MusicBeePlugin
                     }
                 }
 
-                
+
                 OpenedForms.Add(newForm);
+
+
+                if (!DontShowShowHiddenWindows && OpenedFormsSubmenu.DropDownItems.Count == 0)
+                {
+                    AddMenuItem(OpenedFormsSubmenu, ShowHiddenCommandName, null, TagToolsPlugin.showHiddenEventHandler);
+                    AddMenuItem(OpenedFormsSubmenu, "-", null, null);
+                }
+
+
+                AddMenuItem(OpenedFormsSubmenu, newForm.Text, null, TagToolsPlugin.openWindowActivationEventHandler, true, newForm);
 
                 if (modalForm)
                     newForm.ShowDialog();
@@ -1153,121 +1545,6 @@ namespace MusicBeePlugin
         protected virtual void initializeForm()
         {
             //Implemented in derived classes... 
-        }
-
-        protected void primaryInitialization()
-        {
-            if (initialized)
-            {
-                tryShowForm();
-                return;
-            }
-
-
-            fixedSize = (FormBorderStyle == FormBorderStyle.FixedDialog) || (FormBorderStyle == FormBorderStyle.FixedSingle) ? true : false;
-
-            if (DeviceDpi != 96)
-                dpiScaleFactor = DeviceDpi / 96f;
-
-            UseSkinColors = SavedSettings.useSkinColors;
-
-            ignoreSizePositionChanges = true;
-
-
-            if (MbForm.IsDisposed)
-                MbForm = (Form)FromHandle(MbApiInterface.MB_GetWindowHandle());
-
-            MbForm.AddOwnedForm(this);
-
-            clickedButton = EmptyButton;
-
-            lock (OpenedForms)
-            {
-                if (NumberOfNativeMbBackgroundTasks > 0)
-                    disableQueryingButtons();
-                else
-                    enableQueryingButtons();
-            }
-
-            stopButtonClicked = stopButtonClickedMethod;
-            taskStarted = taskStartedMethod;
-
-            TagToolsPlugin.fillTagNames();
-
-
-            loadWindowSizesPositions();
-
-            if (width != 0 && height != 0)
-            {
-                width = (int)(width * dpiScaleFactor);
-
-                if (!modal && !fixedSize)
-                    height = (int)(height * dpiScaleFactor);
-
-                setInitialFormMaximumMinimumSize();
-
-                Width = width;
-                Height = height;
-                WindowState = windowState;
-            }
-            else if (!modal && !fixedSize)
-            {
-                width = (int)(Width * dpiScaleFactor);
-                height = (int)(Height * dpiScaleFactor);
-
-                setInitialFormMaximumMinimumSize();
-
-                if (Tag as string == "@fixed-min-width")
-                    width = MinimumSize.Width;
-
-                Width = width;
-                Height = height;
-                WindowState = FormWindowState.Normal;
-            }
-            else if (!fixedSize) //Modal
-            {
-                setInitialFormMaximumMinimumSize();
-
-                if (Tag as string == "@fixed-min-width")
-                    Width = MinimumSize.Width;
-
-                Height = MinimumSize.Height;
-                WindowState = FormWindowState.Normal;
-
-                width = Width;
-                height = Height;
-
-            }
-            else //Fixed size
-            {
-                if (Tag as string != "@fixed-min-width")
-                    Width = (int)(Width * dpiScaleFactor);
-
-                Height = Height;
-                WindowState = FormWindowState.Normal;
-
-                width = Width;
-                height = Height;
-            }
-
-            setFormMaximizedBounds();
-
-
-            left = (int)(left * dpiScaleFactor);
-            top = (int)(top * dpiScaleFactor);
-
-
-            Left = left;
-            Top = top;
-
-            skinMoveScaleAllControls();
-
-
-            ignoreSizePositionChanges = false;
-            initialized = true;
-
-
-            tryShowForm();
         }
 
         protected void tryShowForm()
@@ -1366,7 +1643,9 @@ namespace MusicBeePlugin
 
         private void PluginWindowTemplate_Shown(object sender, EventArgs e)
         {
-            //Nothing at the moment...
+            for (int i = allControls.Count - 1; i >= 0; i--)
+                if (allControls[i].Focused)
+                    lastSelectedControl = allControls[i];
         }
 
         private void PluginWindowTemplate_FormClosing(object sender, FormClosingEventArgs e)
@@ -1386,6 +1665,27 @@ namespace MusicBeePlugin
         {
             lock (OpenedForms)
             {
+                foreach (var item in OpenedFormsSubmenu.DropDownItems)
+                {
+                    var menuItem = item as ToolStripMenuItem;
+                    if (menuItem != null)
+                    {
+                        var form = menuItem.Tag as PluginWindowTemplate;
+                        if (form == this)
+                        {
+                            OpenedFormsSubmenu.DropDownItems.Remove(menuItem);
+                            break;
+                        }
+                    }
+                }
+
+                if (!DontShowShowHiddenWindows && OpenedFormsSubmenu.DropDownItems.Count == 2)
+                {
+                    OpenedFormsSubmenu.DropDownItems.RemoveAt(1);
+                    OpenedFormsSubmenu.DropDownItems.RemoveAt(0);
+                }
+
+
                 OpenedForms.Remove(this);
                 FormsThemedBitmapsRelease(this);
             }
@@ -1482,13 +1782,13 @@ namespace MusicBeePlugin
             }
 
 
-            int width2 = (int)(width / dpiScaleFactor);
+            int width2 = (int)(width / hDpiFormScaling);
             int height2;
 
             if (fixedSize)
                 currentWindowSettings.h = height2 = 0;
             else if (!modal)
-                height2 = (int)(height / dpiScaleFactor);
+                height2 = (int)(height / vDpiFormScaling);
             else
                 height2 = height;
 
@@ -1511,13 +1811,13 @@ namespace MusicBeePlugin
             }
 
 
-            int left2 = (int)(left / dpiScaleFactor);
+            int left2 = (int)(left / hDpiFormScaling);
             if (Math.Abs(left2 - currentWindowSettings.x) <= 1) // 1px
             {
                 left2 = currentWindowSettings.x;
             }
 
-            int top2 = (int)(top / dpiScaleFactor);
+            int top2 = (int)(top / vDpiFormScaling);
             if (Math.Abs(top2 - currentWindowSettings.y) <= 1) // 1px
             {
                 top2 = currentWindowSettings.y;
@@ -1544,21 +1844,21 @@ namespace MusicBeePlugin
 
             if (column1Width != 0)
             {
-                int column1Width2 = (int)(column1Width / dpiScaleFactor);
+                int column1Width2 = (int)(column1Width / hDpiFontScaling);
                 if (100f * Math.Abs(column1Width2 - currentWindowSettings.column1Width) / column1Width2 < 0.5f)
                     column1Width2 = currentWindowSettings.column1Width;
 
                 currentWindowSettings.column1Width = column1Width2;
 
 
-                int column2Width2 = (int)(column2Width / dpiScaleFactor);
+                int column2Width2 = (int)(column2Width / hDpiFontScaling);
                 if (100f * Math.Abs(column2Width2 - currentWindowSettings.column1Width) / column2Width2 < 0.5f)
                     column2Width2 = currentWindowSettings.column2Width;
 
                 currentWindowSettings.column2Width = column2Width2;
 
 
-                int column3Width2 = (int)(column3Width / dpiScaleFactor);
+                int column3Width2 = (int)(column3Width / hDpiFontScaling);
                 if (100f * Math.Abs(column3Width2 - currentWindowSettings.column3Width) / column3Width2 < 0.5f)
                     column3Width2 = currentWindowSettings.column3Width;
 
@@ -1567,21 +1867,21 @@ namespace MusicBeePlugin
 
             if (table2column1Width != 0)
             {
-                int table2column1Width2 = (int)(table2column1Width / dpiScaleFactor);
+                int table2column1Width2 = (int)(table2column1Width / hDpiFontScaling);
                 if (100f * Math.Abs(table2column1Width2 - currentWindowSettings.table2column1Width) / table2column1Width2 < 0.5f)
                     table2column1Width2 = currentWindowSettings.table2column1Width;
 
                 currentWindowSettings.table2column1Width = table2column1Width2;
 
 
-                int table2column2Width2 = (int)(table2column2Width / dpiScaleFactor);
+                int table2column2Width2 = (int)(table2column2Width / hDpiFontScaling);
                 if (100f * Math.Abs(table2column2Width2 - currentWindowSettings.table2column1Width) / table2column2Width2 < 0.5f)
                     table2column2Width2 = currentWindowSettings.table2column2Width;
 
                 currentWindowSettings.table2column2Width = table2column2Width2;
 
 
-                int table2column3Width2 = (int)(table2column3Width / dpiScaleFactor);
+                int table2column3Width2 = (int)(table2column3Width / hDpiFontScaling);
                 if (100f * Math.Abs(table2column3Width2 - currentWindowSettings.table2column3Width) / table2column3Width2 < 0.5f)
                     table2column3Width2 = currentWindowSettings.table2column3Width;
 
@@ -1590,7 +1890,7 @@ namespace MusicBeePlugin
 
             if (splitterDistance != 0)
             {
-                int splitterDistance2 = (int)(splitterDistance / dpiScaleFactor);
+                int splitterDistance2 = (int)(splitterDistance / vDpiFontScaling);
                 if (100f * Math.Abs(splitterDistance2 - currentWindowSettings.splitterDistance) / splitterDistance2 < 0.5f)
                     splitterDistance2 = currentWindowSettings.splitterDistance;
 
@@ -1736,9 +2036,9 @@ namespace MusicBeePlugin
                     tempThread.Start();
                 }
 
-                previewButtonText = buttonLabels[previewButtonParam];
-                okButtonText = buttonLabels[okButtonParam];
-                closeButtonText = buttonLabels[closeButtonParam];
+                buttonLabels.TryGetValue(previewButtonParam, out previewButtonText);
+                buttonLabels.TryGetValue(okButtonParam, out okButtonText);
+                buttonLabels.TryGetValue(closeButtonParam, out closeButtonText);
 
                 queryingOrUpdatingButtonClick(this);
             }

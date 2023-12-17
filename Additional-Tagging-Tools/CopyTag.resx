@@ -142,7 +142,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>115, 4</value>
+    <value>189, 5</value>
   </data>
   <data name="buttonPreview.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -151,7 +151,7 @@
     <value>100, 23</value>
   </data>
   <data name="buttonPreview.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>1</value>
   </data>
   <data name="buttonPreview.Text" xml:space="preserve">
     <value>Preview</value>
@@ -181,7 +181,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>330, 4</value>
+    <value>404, 5</value>
   </data>
   <data name="buttonCancel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -190,7 +190,7 @@
     <value>100, 23</value>
   </data>
   <data name="buttonCancel.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+    <value>3</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Close</value>
@@ -208,315 +208,7 @@
     <value>5</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>894, 361</value>
-  </data>
-  <data name="onlyIfSourceNotEmptyCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="onlyIfSourceNotEmptyCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>269, 69</value>
-  </data>
-  <data name="onlyIfSourceNotEmptyCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="onlyIfSourceNotEmptyCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 15</value>
-  </data>
-  <data name="onlyIfSourceNotEmptyCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>125</value>
-  </data>
-  <data name="onlyIfSourceNotEmptyCheckBoxLabel.Text" xml:space="preserve">
-    <value>or only if source tag is not empty</value>
-  </data>
-  <data name="&gt;&gt;onlyIfSourceNotEmptyCheckBoxLabel.Name" xml:space="preserve">
-    <value>onlyIfSourceNotEmptyCheckBoxLabel</value>
-  </data>
-  <data name="&gt;&gt;onlyIfSourceNotEmptyCheckBoxLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;onlyIfSourceNotEmptyCheckBoxLabel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;onlyIfSourceNotEmptyCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="addCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="addCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>28, 129</value>
-  </data>
-  <data name="addCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="addCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>398, 15</value>
-  </data>
-  <data name="addCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>127</value>
-  </data>
-  <data name="addCheckBoxLabel.Text" xml:space="preserve">
-    <value>Add source tag to the beginning of destination tag placing between them:</value>
-  </data>
-  <data name="&gt;&gt;addCheckBoxLabel.Name" xml:space="preserve">
-    <value>addCheckBoxLabel</value>
-  </data>
-  <data name="&gt;&gt;addCheckBoxLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;addCheckBoxLabel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;addCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="appendCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="appendCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>28, 99</value>
-  </data>
-  <data name="appendCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="appendCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>384, 15</value>
-  </data>
-  <data name="appendCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>126</value>
-  </data>
-  <data name="appendCheckBoxLabel.Text" xml:space="preserve">
-    <value>Append source tag to the end of destination tag placing between them:</value>
-  </data>
-  <data name="&gt;&gt;appendCheckBoxLabel.Name" xml:space="preserve">
-    <value>appendCheckBoxLabel</value>
-  </data>
-  <data name="&gt;&gt;appendCheckBoxLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;appendCheckBoxLabel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;appendCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="onlyIfDestinationEmptyCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="onlyIfDestinationEmptyCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>28, 69</value>
-  </data>
-  <data name="onlyIfDestinationEmptyCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="onlyIfDestinationEmptyCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>201, 15</value>
-  </data>
-  <data name="onlyIfDestinationEmptyCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>124</value>
-  </data>
-  <data name="onlyIfDestinationEmptyCheckBoxLabel.Text" xml:space="preserve">
-    <value>Copy only if destination tag is empty</value>
-  </data>
-  <data name="&gt;&gt;onlyIfDestinationEmptyCheckBoxLabel.Name" xml:space="preserve">
-    <value>onlyIfDestinationEmptyCheckBoxLabel</value>
-  </data>
-  <data name="&gt;&gt;onlyIfDestinationEmptyCheckBoxLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;onlyIfDestinationEmptyCheckBoxLabel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;onlyIfDestinationEmptyCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="smartOperationCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="smartOperationCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>28, 39</value>
-  </data>
-  <data name="smartOperationCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="smartOperationCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>440, 15</value>
-  </data>
-  <data name="smartOperationCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>123</value>
-  </data>
-  <data name="smartOperationCheckBoxLabel.Text" xml:space="preserve">
-    <value>Smart copy (important only for working with multiple artists/composers per track)</value>
-  </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>140, 17</value>
-  </metadata>
-  <data name="smartOperationCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value>Every byte of the source tag (including the service characters that identify the roles of the artists) 
-will be preserved if this option is unchecked, however this may only be useful 
-for copying it to a temporary tag
-</value>
-  </data>
-  <data name="&gt;&gt;smartOperationCheckBoxLabel.Name" xml:space="preserve">
-    <value>smartOperationCheckBoxLabel</value>
-  </data>
-  <data name="&gt;&gt;smartOperationCheckBoxLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;smartOperationCheckBoxLabel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;smartOperationCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="onlyIfSourceNotEmptyCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="onlyIfSourceNotEmptyCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>TopLeft</value>
-  </data>
-  <data name="onlyIfSourceNotEmptyCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="onlyIfSourceNotEmptyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>242, 69</value>
-  </data>
-  <data name="onlyIfSourceNotEmptyCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="onlyIfSourceNotEmptyCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 19</value>
-  </data>
-  <data name="onlyIfSourceNotEmptyCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>122</value>
-  </data>
-  <data name="onlyIfSourceNotEmptyCheckBox.Text" xml:space="preserve">
-    <value> </value>
-  </data>
-  <data name="&gt;&gt;onlyIfSourceNotEmptyCheckBox.Name" xml:space="preserve">
-    <value>onlyIfSourceNotEmptyCheckBox</value>
-  </data>
-  <data name="&gt;&gt;onlyIfSourceNotEmptyCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;onlyIfSourceNotEmptyCheckBox.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;onlyIfSourceNotEmptyCheckBox.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="addCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="addCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>TopLeft</value>
-  </data>
-  <data name="addCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="addCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 129</value>
-  </data>
-  <data name="addCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="addCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 19</value>
-  </data>
-  <data name="addCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="addCheckBox.Text" xml:space="preserve">
-    <value> </value>
-  </data>
-  <data name="&gt;&gt;addCheckBox.Name" xml:space="preserve">
-    <value>addCheckBox</value>
-  </data>
-  <data name="&gt;&gt;addCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;addCheckBox.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;addCheckBox.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="onlyIfDestinationEmptyCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="onlyIfDestinationEmptyCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>TopLeft</value>
-  </data>
-  <data name="onlyIfDestinationEmptyCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="onlyIfDestinationEmptyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 69</value>
-  </data>
-  <data name="onlyIfDestinationEmptyCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="onlyIfDestinationEmptyCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 19</value>
-  </data>
-  <data name="onlyIfDestinationEmptyCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="onlyIfDestinationEmptyCheckBox.Text" xml:space="preserve">
-    <value> </value>
-  </data>
-  <data name="&gt;&gt;onlyIfDestinationEmptyCheckBox.Name" xml:space="preserve">
-    <value>onlyIfDestinationEmptyCheckBox</value>
-  </data>
-  <data name="&gt;&gt;onlyIfDestinationEmptyCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;onlyIfDestinationEmptyCheckBox.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;onlyIfDestinationEmptyCheckBox.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="smartOperationCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="smartOperationCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>TopLeft</value>
-  </data>
-  <data name="smartOperationCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="smartOperationCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 39</value>
-  </data>
-  <data name="smartOperationCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="smartOperationCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 19</value>
-  </data>
-  <data name="smartOperationCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="smartOperationCheckBox.Text" xml:space="preserve">
-    <value> </value>
-  </data>
-  <data name="smartOperationCheckBox.ToolTip" xml:space="preserve">
-    <value>Every byte of the source tag (including the service characters that identify the roles of the artists) 
-will be preserved if this option is unchecked, however this may only be useful 
-for copying it to a temporary tag</value>
-  </data>
-  <data name="&gt;&gt;smartOperationCheckBox.Name" xml:space="preserve">
-    <value>smartOperationCheckBox</value>
-  </data>
-  <data name="&gt;&gt;smartOperationCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;smartOperationCheckBox.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;smartOperationCheckBox.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>944, 361</value>
   </data>
   <data name="previewTable.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -615,7 +307,7 @@ for copying it to a temporary tag</value>
     <value>TopLeft</value>
   </data>
   <data name="previewTable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 157</value>
+    <value>6, 141</value>
   </data>
   <data name="previewTable.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -624,7 +316,7 @@ for copying it to a temporary tag</value>
     <value>51</value>
   </data>
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>881, 198</value>
+    <value>931, 214</value>
   </data>
   <data name="previewTable.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -639,7 +331,103 @@ for copying it to a temporary tag</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;previewTable.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>0</value>
+  </data>
+  <data name="addCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="addCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>28, 117</value>
+  </data>
+  <data name="addCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="addCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>398, 15</value>
+  </data>
+  <data name="addCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="addCheckBoxLabel.Text" xml:space="preserve">
+    <value>Add source tag to the beginning of destination tag placing between them:</value>
+  </data>
+  <data name="&gt;&gt;addCheckBoxLabel.Name" xml:space="preserve">
+    <value>addCheckBoxLabel</value>
+  </data>
+  <data name="&gt;&gt;addCheckBoxLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;addCheckBoxLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;addCheckBoxLabel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="addCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="addCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
+  </data>
+  <data name="addCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="addCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 117</value>
+  </data>
+  <data name="addCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="addCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 19</value>
+  </data>
+  <data name="addCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="addCheckBox.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="&gt;&gt;addCheckBox.Name" xml:space="preserve">
+    <value>addCheckBox</value>
+  </data>
+  <data name="&gt;&gt;addCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;addCheckBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;addCheckBox.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="appendCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="appendCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>28, 90</value>
+  </data>
+  <data name="appendCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="appendCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>384, 15</value>
+  </data>
+  <data name="appendCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="appendCheckBoxLabel.Text" xml:space="preserve">
+    <value>Append source tag to the end of destination tag placing between them:</value>
+  </data>
+  <data name="&gt;&gt;appendCheckBoxLabel.Name" xml:space="preserve">
+    <value>appendCheckBoxLabel</value>
+  </data>
+  <data name="&gt;&gt;appendCheckBoxLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;appendCheckBoxLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;appendCheckBoxLabel.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="appendCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -651,7 +439,7 @@ for copying it to a temporary tag</value>
     <value>NoControl</value>
   </data>
   <data name="appendCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 99</value>
+    <value>6, 90</value>
   </data>
   <data name="appendCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -660,7 +448,7 @@ for copying it to a temporary tag</value>
     <value>28, 19</value>
   </data>
   <data name="appendCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>11</value>
   </data>
   <data name="appendCheckBox.Text" xml:space="preserve">
     <value> </value>
@@ -675,6 +463,218 @@ for copying it to a temporary tag</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;appendCheckBox.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="onlyIfSourceNotEmptyCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="onlyIfSourceNotEmptyCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>269, 63</value>
+  </data>
+  <data name="onlyIfSourceNotEmptyCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="onlyIfSourceNotEmptyCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>181, 15</value>
+  </data>
+  <data name="onlyIfSourceNotEmptyCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="onlyIfSourceNotEmptyCheckBoxLabel.Text" xml:space="preserve">
+    <value>or only if source tag is not empty</value>
+  </data>
+  <data name="&gt;&gt;onlyIfSourceNotEmptyCheckBoxLabel.Name" xml:space="preserve">
+    <value>onlyIfSourceNotEmptyCheckBoxLabel</value>
+  </data>
+  <data name="&gt;&gt;onlyIfSourceNotEmptyCheckBoxLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;onlyIfSourceNotEmptyCheckBoxLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;onlyIfSourceNotEmptyCheckBoxLabel.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="onlyIfSourceNotEmptyCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="onlyIfSourceNotEmptyCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
+  </data>
+  <data name="onlyIfSourceNotEmptyCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="onlyIfSourceNotEmptyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>242, 63</value>
+  </data>
+  <data name="onlyIfSourceNotEmptyCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="onlyIfSourceNotEmptyCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 19</value>
+  </data>
+  <data name="onlyIfSourceNotEmptyCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="onlyIfSourceNotEmptyCheckBox.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="&gt;&gt;onlyIfSourceNotEmptyCheckBox.Name" xml:space="preserve">
+    <value>onlyIfSourceNotEmptyCheckBox</value>
+  </data>
+  <data name="&gt;&gt;onlyIfSourceNotEmptyCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;onlyIfSourceNotEmptyCheckBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;onlyIfSourceNotEmptyCheckBox.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="onlyIfDestinationEmptyCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="onlyIfDestinationEmptyCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>28, 63</value>
+  </data>
+  <data name="onlyIfDestinationEmptyCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="onlyIfDestinationEmptyCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>201, 15</value>
+  </data>
+  <data name="onlyIfDestinationEmptyCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="onlyIfDestinationEmptyCheckBoxLabel.Text" xml:space="preserve">
+    <value>Copy only if destination tag is empty</value>
+  </data>
+  <data name="&gt;&gt;onlyIfDestinationEmptyCheckBoxLabel.Name" xml:space="preserve">
+    <value>onlyIfDestinationEmptyCheckBoxLabel</value>
+  </data>
+  <data name="&gt;&gt;onlyIfDestinationEmptyCheckBoxLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;onlyIfDestinationEmptyCheckBoxLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;onlyIfDestinationEmptyCheckBoxLabel.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="onlyIfDestinationEmptyCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="onlyIfDestinationEmptyCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
+  </data>
+  <data name="onlyIfDestinationEmptyCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="onlyIfDestinationEmptyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 63</value>
+  </data>
+  <data name="onlyIfDestinationEmptyCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="onlyIfDestinationEmptyCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 19</value>
+  </data>
+  <data name="onlyIfDestinationEmptyCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="onlyIfDestinationEmptyCheckBox.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="&gt;&gt;onlyIfDestinationEmptyCheckBox.Name" xml:space="preserve">
+    <value>onlyIfDestinationEmptyCheckBox</value>
+  </data>
+  <data name="&gt;&gt;onlyIfDestinationEmptyCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;onlyIfDestinationEmptyCheckBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;onlyIfDestinationEmptyCheckBox.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="smartOperationCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="smartOperationCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>28, 36</value>
+  </data>
+  <data name="smartOperationCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="smartOperationCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>440, 15</value>
+  </data>
+  <data name="smartOperationCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="smartOperationCheckBoxLabel.Text" xml:space="preserve">
+    <value>Smart copy (important only for working with multiple artists/composers per track)</value>
+  </data>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>140, 17</value>
+  </metadata>
+  <data name="smartOperationCheckBoxLabel.ToolTip" xml:space="preserve">
+    <value>Every byte of the source tag (including the service characters that identify the roles of the artists) 
+will be preserved if this option is unchecked, however this may only be useful 
+for copying it to a temporary tag
+</value>
+  </data>
+  <data name="&gt;&gt;smartOperationCheckBoxLabel.Name" xml:space="preserve">
+    <value>smartOperationCheckBoxLabel</value>
+  </data>
+  <data name="&gt;&gt;smartOperationCheckBoxLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;smartOperationCheckBoxLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;smartOperationCheckBoxLabel.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="smartOperationCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="smartOperationCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
+  </data>
+  <data name="smartOperationCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="smartOperationCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 36</value>
+  </data>
+  <data name="smartOperationCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="smartOperationCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 19</value>
+  </data>
+  <data name="smartOperationCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="smartOperationCheckBox.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="smartOperationCheckBox.ToolTip" xml:space="preserve">
+    <value>Every byte of the source tag (including the service characters that identify the roles of the artists) 
+will be preserved if this option is unchecked, however this may only be useful 
+for copying it to a temporary tag</value>
+  </data>
+  <data name="&gt;&gt;smartOperationCheckBox.Name" xml:space="preserve">
+    <value>smartOperationCheckBox</value>
+  </data>
+  <data name="&gt;&gt;smartOperationCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;smartOperationCheckBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;smartOperationCheckBox.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
   <data name="forSelectedTracksLabel.AutoSize" type="System.Boolean, mscorlib">
@@ -816,16 +816,16 @@ for copying it to a temporary tag</value>
     <value>TopLeft</value>
   </data>
   <data name="addedTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 124</value>
+    <value>0, 113</value>
   </data>
   <data name="addedTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="addedTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>430, 23</value>
+    <value>504, 23</value>
   </data>
   <data name="addedTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>8</value>
   </data>
   <data name="&gt;&gt;addedTextBox.Name" xml:space="preserve">
     <value>addedTextBox</value>
@@ -849,16 +849,16 @@ for copying it to a temporary tag</value>
     <value>TopLeft</value>
   </data>
   <data name="appendedTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 94</value>
+    <value>0, 86</value>
   </data>
   <data name="appendedTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="appendedTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>430, 23</value>
+    <value>504, 23</value>
   </data>
   <data name="appendedTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;appendedTextBox.Name" xml:space="preserve">
     <value>appendedTextBox</value>
@@ -882,7 +882,7 @@ for copying it to a temporary tag</value>
     <value>NoControl</value>
   </data>
   <data name="browseButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>330, 64</value>
+    <value>404, 59</value>
   </data>
   <data name="browseButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -891,7 +891,7 @@ for copying it to a temporary tag</value>
     <value>100, 23</value>
   </data>
   <data name="browseButton.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
+    <value>6</value>
   </data>
   <data name="browseButton.Text" xml:space="preserve">
     <value>Browse...</value>
@@ -918,16 +918,16 @@ for copying it to a temporary tag</value>
     <value>TopLeft</value>
   </data>
   <data name="fileNameTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>60, 64</value>
+    <value>135, 59</value>
   </data>
   <data name="fileNameTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="fileNameTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 23</value>
+    <value>266, 23</value>
   </data>
   <data name="fileNameTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;fileNameTextBox.Name" xml:space="preserve">
     <value>fileNameTextBox</value>
@@ -941,40 +941,40 @@ for copying it to a temporary tag</value>
   <data name="&gt;&gt;fileNameTextBox.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="label3.AutoSize" type="System.Boolean, mscorlib">
+  <data name="fileNameLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="label3.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+  <data name="fileNameLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
   </data>
-  <data name="label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="fileNameLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>2, 69</value>
+  <data name="fileNameLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>69, 63</value>
   </data>
-  <data name="label3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="fileNameLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
   </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="fileNameLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 15</value>
   </data>
-  <data name="label3.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+  <data name="fileNameLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
   </data>
-  <data name="label3.Text" xml:space="preserve">
+  <data name="fileNameLabel.Text" xml:space="preserve">
     <value>Filename:</value>
   </data>
-  <data name="&gt;&gt;label3.Name" xml:space="preserve">
-    <value>label3</value>
+  <data name="&gt;&gt;fileNameLabel.Name" xml:space="preserve">
+    <value>fileNameLabel</value>
   </data>
-  <data name="&gt;&gt;label3.Type" xml:space="preserve">
+  <data name="&gt;&gt;fileNameLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
+  <data name="&gt;&gt;fileNameLabel.Parent" xml:space="preserve">
     <value>fieldsPanel</value>
   </data>
-  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;fileNameLabel.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="buttonOK.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -987,7 +987,7 @@ for copying it to a temporary tag</value>
     <value>NoControl</value>
   </data>
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>222, 4</value>
+    <value>296, 5</value>
   </data>
   <data name="buttonOK.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -996,7 +996,7 @@ for copying it to a temporary tag</value>
     <value>100, 23</value>
   </data>
   <data name="buttonOK.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>2</value>
   </data>
   <data name="buttonOK.Text" xml:space="preserve">
     <value>Proceed</value>
@@ -1023,16 +1023,16 @@ for copying it to a temporary tag</value>
     <value>NoControl</value>
   </data>
   <data name="buttonSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>71, 4</value>
+    <value>145, 5</value>
   </data>
   <data name="buttonSettings.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="buttonSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>22, 22</value>
+    <value>23, 23</value>
   </data>
   <data name="buttonSettings.TabIndex" type="System.Int32, mscorlib">
-    <value>121</value>
+    <value>0</value>
   </data>
   <data name="buttonSettings.ToolTip" xml:space="preserve">
     <value>Open quick settings</value>
@@ -1050,13 +1050,13 @@ for copying it to a temporary tag</value>
     <value>8</value>
   </data>
   <data name="fieldsPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>457, 0</value>
+    <value>433, 0</value>
   </data>
   <data name="fieldsPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>435, 154</value>
+    <value>509, 140</value>
   </data>
   <data name="fieldsPanel.TabIndex" type="System.Int32, mscorlib">
-    <value>128</value>
+    <value>15</value>
   </data>
   <data name="&gt;&gt;fieldsPanel.Name" xml:space="preserve">
     <value>fieldsPanel</value>
@@ -1077,7 +1077,7 @@ for copying it to a temporary tag</value>
     <value>4, 4, 4, 4</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>910, 400</value>
+    <value>960, 400</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Copy Tag</value>

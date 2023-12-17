@@ -374,11 +374,19 @@ namespace MusicBeePlugin
 
             if (backupFileExtension != ".bbl" && !System.IO.File.Exists(baselineFilename + ".bbl")) //Backup baseline file doesn't exist
             {
-                MessageBox.Show(Plugin.MbForm, Plugin.MsgBackupBaselineFileDoesntExist1 + baselineFilename + ".bbl" + Plugin.MsgBackupBaselineFileDoesntExist2, 
+                MessageBox.Show(Plugin.MbForm, Plugin.MsgBackupBaselineFileDoesntExist.Replace("%%FILENAME%%", baselineFilename + ".bbl"), 
                     string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return null;
             }
 
+
+            //if (!System.IO.File.Exists(fileName + backupFileExtension)) //***
+            //{
+            //    MessageBox.Show(Plugin.MbForm, Plugin.MsgBackupFileDoesntExist.Replace("%%FILENAME%%", fileName),
+            //        string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+            //    return null;
+            //}
 
             System.IO.FileStream stream = System.IO.File.Open(fileName + backupFileExtension, System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.None);
             System.IO.StreamReader file = new System.IO.StreamReader(stream, Encoding.UTF8);

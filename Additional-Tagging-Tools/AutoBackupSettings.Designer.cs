@@ -61,7 +61,7 @@
             // 
             resources.ApplyResources(this.browseButton, "browseButton");
             this.browseButton.Name = "browseButton";
-            this.browseButton.Tag = "#AutoBackupSettings";
+            this.browseButton.Tag = "#AutoBackupSettings@non-defaultable";
             this.toolTip1.SetToolTip(this.browseButton, resources.GetString("browseButton.ToolTip"));
             this.browseButton.Click += new System.EventHandler(this.browseButton_Click);
             // 
@@ -291,10 +291,9 @@
             this.Controls.Add(this.autobackupFolderTextBox);
             this.Controls.Add(this.autobackupFolderLabel);
             this.Controls.Add(this.dontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "AutoBackupSettings";
+            this.Tag = "@min-max-height-same";
             this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             ((System.ComponentModel.ISupportInitialize)(this.autobackupNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfDaysNumericUpDown)).EndInit();

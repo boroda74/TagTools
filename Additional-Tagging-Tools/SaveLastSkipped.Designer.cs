@@ -28,16 +28,16 @@
             // 
             // lastSkippedTagList
             // 
+            resources.ApplyResources(this.lastSkippedTagList, "lastSkippedTagList");
             this.lastSkippedTagList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.lastSkippedTagList.DropDownWidth = 250;
-            resources.ApplyResources(this.lastSkippedTagList, "lastSkippedTagList");
             this.lastSkippedTagList.FormattingEnabled = true;
             this.lastSkippedTagList.Name = "lastSkippedTagList";
             // 
             // buttonCancel
             // 
-            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.buttonCancel, "buttonCancel");
+            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Tag = "@non-defaultable";
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
@@ -62,10 +62,10 @@
             // 
             // lastSkippedDateFormatTagList
             // 
+            resources.ApplyResources(this.lastSkippedDateFormatTagList, "lastSkippedDateFormatTagList");
             this.lastSkippedDateFormatTagList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.lastSkippedDateFormatTagList.DropDownWidth = 250;
             this.lastSkippedDateFormatTagList.FormattingEnabled = true;
-            resources.ApplyResources(this.lastSkippedDateFormatTagList, "lastSkippedDateFormatTagList");
             this.lastSkippedDateFormatTagList.Name = "lastSkippedDateFormatTagList";
             // 
             // saveLastSkippedCheckBoxLabel
@@ -94,10 +94,9 @@
             this.Controls.Add(this.lastSkippedTagList);
             this.Controls.Add(this.saveLastSkippedCheckBoxLabel);
             this.Controls.Add(this.saveLastSkippedCheckBox);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "SaveLastSkippedCommand";
-            this.Tag = "@fixed-min-width";
+            this.Tag = "@min-max-width-same@min-max-height-same";
             this.ResumeLayout(false);
             this.PerformLayout();
 

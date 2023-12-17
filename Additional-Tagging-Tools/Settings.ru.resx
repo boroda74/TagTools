@@ -119,13 +119,13 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>972, 790</value>
+    <value>882, 6</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Отмена</value>
   </data>
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>866, 790</value>
+    <value>776, 6</value>
   </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>666, 15</value>
@@ -135,6 +135,15 @@
   </data>
   <data name="versionLabel.Text" xml:space="preserve">
     <value>Версия: </value>
+  </data>
+  <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>970, 112</value>
+  </data>
+  <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 15</value>
+  </data>
+  <data name="label9.Text" xml:space="preserve">
+    <value> Звуки </value>
   </data>
   <data name="playTickedAsrPresetSoundCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>449, 15</value>
@@ -160,14 +169,14 @@
   <data name="playCompletedSoundCheckBoxLabel.Text" xml:space="preserve">
     <value>Проиграть системный звук "Звездочка", когда фоновая задача завершается/остановлена</value>
   </data>
-  <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1060, 112</value>
+  <data name="groupBox4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>970, 110</value>
   </data>
-  <data name="groupBox3.Text" xml:space="preserve">
-    <value>Звуки</value>
+  <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>640, 15</value>
   </data>
-  <data name="unitGBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>469, 77</value>
+  <data name="label11.Text" xml:space="preserve">
+    <value> Команда "Отчеты по библиотеке" (не нужно для русской и английской локализации Windows, регистр не важен) </value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>339, 15</value>
@@ -175,17 +184,11 @@
   <data name="label4.Text" xml:space="preserve">
     <value>Единица измерения миллиардов (например, "Г" для "Гига"):</value>
   </data>
-  <data name="unitMBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>469, 49</value>
-  </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>343, 15</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>Единица измерения миллионов (например, "М" для "Мега"):</value>
-  </data>
-  <data name="unitKBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>469, 22</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>308, 15</value>
@@ -193,14 +196,11 @@
   <data name="label2.Text" xml:space="preserve">
     <value>Единица измерения тысяч (например, "К" для "Кило"):</value>
   </data>
-  <data name="groupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1060, 110</value>
-  </data>
-  <data name="groupBox4.Text" xml:space="preserve">
-    <value>Команда "Отчеты по библиотеке" (не нужно для русской и английской локализации Windows, регистр не важен)</value>
+  <data name="unitsPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>372, 0</value>
   </data>
   <data name="saveLastSkippedButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>525, 790</value>
+    <value>435, 6</value>
   </data>
   <data name="saveLastSkippedButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>335, 23</value>
@@ -209,37 +209,49 @@
     <value>Сохранять дату последнего пропуска трека...</value>
   </data>
   <data name="highlightChangedTagsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>459, 21</value>
+    <value>429, 21</value>
+  </data>
+  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>970, 112</value>
+  </data>
+  <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 15</value>
+  </data>
+  <data name="label8.Text" xml:space="preserve">
+    <value> Оформление </value>
+  </data>
+  <data name="legendGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>680, 10</value>
+  </data>
+  <data name="legendGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>280, 93</value>
+  </data>
+  <data name="legendLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>217, 15</value>
+  </data>
+  <data name="legendLabel.Text" xml:space="preserve">
+    <value> Цвета предварительного просмотра </value>
   </data>
   <data name="preservedTagsLegendTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>250, 19</value>
+    <value>262, 19</value>
   </data>
   <data name="preservedTagsLegendTextBox.Text" xml:space="preserve">
     <value>Пропущенные теги</value>
   </data>
   <data name="preservedTagValuesLegendTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>250, 19</value>
+    <value>262, 19</value>
   </data>
   <data name="preservedTagValuesLegendTextBox.Text" xml:space="preserve">
     <value>Пропущенные значения тегов</value>
   </data>
   <data name="changedLegendTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>250, 19</value>
+    <value>262, 19</value>
   </data>
   <data name="changedLegendTextBox.Text" xml:space="preserve">
     <value>Измененные</value>
   </data>
   <data name="changedLegendTextBox.ToolTip" xml:space="preserve">
     <value>Щелкните мышкой по любому полю, чтобы увидеть цвета выделенной строки:Щелкните мышкой по любому полю, чтобы увидеть цвета невыделенной строки</value>
-  </data>
-  <data name="legendGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>782, 10</value>
-  </data>
-  <data name="legendGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>268, 93</value>
-  </data>
-  <data name="legendGroupBox.Text" xml:space="preserve">
-    <value>Цвета предварительного просмотра</value>
   </data>
   <data name="showHiddenCommandWindowsRadioButtonLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>466, 15</value>
@@ -260,7 +272,7 @@
     <value>Минимизировать окна плагина, вместо того чтобы скрывать их</value>
   </data>
   <data name="highlightChangedTagsCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>480, 21</value>
+    <value>450, 21</value>
   </data>
   <data name="highlightChangedTagsCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>182, 15</value>
@@ -268,41 +280,50 @@
   <data name="highlightChangedTagsCheckBoxLabel.Text" xml:space="preserve">
     <value>Подсвечивать измененные теги</value>
   </data>
-  <data name="useSkinColorsCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 15</value>
+  <data name="useMusicBeeFontSkinColorsCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>268, 15</value>
   </data>
-  <data name="useSkinColorsCheckBoxLabel.Text" xml:space="preserve">
-    <value>Использовать цвета темы MusicBee **</value>
-  </data>
-  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1060, 112</value>
-  </data>
-  <data name="groupBox2.Text" xml:space="preserve">
-    <value>Оформление</value>
+  <data name="useMusicBeeFontSkinColorsCheckBoxLabel.Text" xml:space="preserve">
+    <value>Использовать шрифт MusicBee и цвета темы **</value>
   </data>
   <data name="contextMenuCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>459, 21</value>
+    <value>429, 63</value>
   </data>
-  <data name="allowCommandExecutionWithoutPreviewCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>480, 42</value>
-  </data>
-  <data name="allowCommandExecutionWithoutPreviewCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>437, 15</value>
-  </data>
-  <data name="allowCommandExecutionWithoutPreviewCheckBoxLabel.Text" xml:space="preserve">
-    <value>Разрешить выполнение команд без предварительного просмотра изменений</value>
-  </data>
-  <data name="allowCommandExecutionWithoutPreviewCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>459, 42</value>
+  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>970, 258</value>
   </data>
   <data name="contextMenuCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>480, 21</value>
+    <value>450, 63</value>
   </data>
   <data name="contextMenuCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>243, 15</value>
   </data>
   <data name="contextMenuCheckBoxLabel.Text" xml:space="preserve">
     <value>Показывать команды в контекстном меню</value>
+  </data>
+  <data name="allowCommandExecutionWithoutPreviewCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>450, 42</value>
+  </data>
+  <data name="allowCommandExecutionWithoutPreviewCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>445, 15</value>
+  </data>
+  <data name="allowCommandExecutionWithoutPreviewCheckBoxLabel.Text" xml:space="preserve">
+    <value>Разрешить выполнение команд без предварительного просмотра изменений *</value>
+  </data>
+  <data name="allowCommandExecutionWithoutPreviewCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>429, 42</value>
+  </data>
+  <data name="allowAsrLrPresetAutoexecutionCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>450, 21</value>
+  </data>
+  <data name="allowAsrLrPresetAutoexecutionCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>340, 15</value>
+  </data>
+  <data name="allowAsrLrPresetAutoexecutionCheckBoxLabel.Text" xml:space="preserve">
+    <value>Разрешить автоматическое применение пресетов ДПЗ/ОБ *</value>
+  </data>
+  <data name="allowAsrLrPresetAutoexecutionCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>429, 21</value>
   </data>
   <data name="showBackupRestoreCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>334, 15</value>
@@ -311,10 +332,10 @@
     <value>Показывать в меню команды архивации и воостановления</value>
   </data>
   <data name="showShowHiddenWindowsCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>357, 15</value>
+    <value>497, 15</value>
   </data>
   <data name="showShowHiddenWindowsCheckBoxLabel.Text" xml:space="preserve">
-    <value>Показывать в меню команду "Показать скрытые окна плагина"</value>
+    <value>Показывать в меню команду "Показать скрытые/восстановить свернутые окна плагина"</value>
   </data>
   <data name="showCTCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>265, 15</value>
@@ -371,11 +392,20 @@
   <data name="showCopyTagCheckBoxLabel.Text" xml:space="preserve">
     <value>Показывать в меню команду "Копировать тег"</value>
   </data>
-  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1060, 258</value>
+  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>128, 15</value>
   </data>
-  <data name="groupBox1.Text" xml:space="preserve">
-    <value>Выберите команды *</value>
+  <data name="label7.Text" xml:space="preserve">
+    <value> Выберите команды * </value>
+  </data>
+  <data name="groupBox5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>970, 90</value>
+  </data>
+  <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>149, 15</value>
+  </data>
+  <data name="label10.Text" xml:space="preserve">
+    <value> Фильтрация результатов </value>
   </data>
   <data name="includePreservedTagValuesCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>769, 15</value>
@@ -395,12 +425,6 @@
   <data name="includeNotChangedTagsCheckBoxLabel.Text" xml:space="preserve">
     <value>Включать в предварительный просмотр строки, не содержащие измененные теги (все команды)</value>
   </data>
-  <data name="groupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1060, 90</value>
-  </data>
-  <data name="groupBox5.Text" xml:space="preserve">
-    <value>Фильтрация результатов</value>
-  </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>424, 15</value>
   </data>
@@ -413,8 +437,14 @@
   <data name="label5.Text" xml:space="preserve">
     <value>**  Требуется заново открыть окна плагина, чтобы новые настройки вступили в силу</value>
   </data>
+  <data name="buttonsPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>994, 35</value>
+  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1084, 823</value>
+    <value>994, 813</value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>1010, 852</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Настройки</value>

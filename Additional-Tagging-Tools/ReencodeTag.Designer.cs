@@ -33,8 +33,10 @@
             this.usedEncodingsList = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.dirtyErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.controlsPanel = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).BeginInit();
+            this.controlsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonPreview
@@ -43,6 +45,7 @@
             this.dirtyErrorProvider.SetError(this.buttonPreview, resources.GetString("buttonPreview.Error"));
             this.dirtyErrorProvider.SetIconAlignment(this.buttonPreview, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonPreview.IconAlignment"))));
             this.buttonPreview.Name = "buttonPreview";
+            this.buttonPreview.Tag = "#buttonOK";
             this.buttonPreview.Click += new System.EventHandler(this.buttonPreview_Click);
             // 
             // buttonCancel
@@ -50,12 +53,14 @@
             resources.ApplyResources(this.buttonCancel, "buttonCancel");
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Tag = "#controlsPanel@pinned-to-parent";
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // buttonOK
             // 
             resources.ApplyResources(this.buttonOK, "buttonOK");
             this.buttonOK.Name = "buttonOK";
+            this.buttonOK.Tag = "#buttonCancel";
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // label3
@@ -75,11 +80,13 @@
             // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
+            this.label1.Tag = "";
             // 
             // label2
             // 
             resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
+            this.label2.Tag = "";
             // 
             // initialEncodingsList
             // 
@@ -145,6 +152,7 @@
             // 
             resources.ApplyResources(this.label4, "label4");
             this.label4.Name = "label4";
+            this.label4.Tag = "#usedEncodingsList";
             // 
             // dirtyErrorProvider
             // 
@@ -153,30 +161,37 @@
             this.dirtyErrorProvider.ContainerControl = this;
             resources.ApplyResources(this.dirtyErrorProvider, "dirtyErrorProvider");
             // 
+            // controlsPanel
+            // 
+            resources.ApplyResources(this.controlsPanel, "controlsPanel");
+            this.controlsPanel.Controls.Add(this.usedEncodingsList);
+            this.controlsPanel.Controls.Add(this.label4);
+            this.controlsPanel.Controls.Add(this.initialEncodingsList);
+            this.controlsPanel.Controls.Add(this.label2);
+            this.controlsPanel.Controls.Add(this.buttonCancel);
+            this.controlsPanel.Controls.Add(this.buttonOK);
+            this.controlsPanel.Controls.Add(this.buttonPreview);
+            this.controlsPanel.Controls.Add(this.label3);
+            this.controlsPanel.Controls.Add(this.sourceTagList);
+            this.controlsPanel.Controls.Add(this.label1);
+            this.controlsPanel.Name = "controlsPanel";
+            // 
             // ReencodeTagPlugin
             // 
             this.AcceptButton = this.buttonPreview;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.Controls.Add(this.usedEncodingsList);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.initialEncodingsList);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.buttonPreview);
             this.Controls.Add(this.previewTable);
-            this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.buttonOK);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.sourceTagList);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.controlsPanel);
             this.Name = "ReencodeTagPlugin";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ReencodeTagPlugin_FormClosing);
             this.Load += new System.EventHandler(this.ReencodeTagPlugin_Load);
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).EndInit();
+            this.controlsPanel.ResumeLayout(false);
+            this.controlsPanel.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -198,5 +213,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Track;
         private System.Windows.Forms.DataGridViewTextBoxColumn OriginalTag;
         private System.Windows.Forms.DataGridViewTextBoxColumn NewTag;
+        private System.Windows.Forms.Panel controlsPanel;
     }
 }

@@ -119,16 +119,28 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1021, 5</value>
+    <value>1043, 5</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Закрыть</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1129, 311</value>
+    <value>1154, 311</value>
+  </data>
+  <data name="Track.HeaderText" xml:space="preserve">
+    <value>Изначальный трек</value>
+  </data>
+  <data name="NewTrack.HeaderText" xml:space="preserve">
+    <value>Новый трек</value>
+  </data>
+  <data name="previewTable.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 59</value>
+  </data>
+  <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1138, 245</value>
   </data>
   <data name="previewSortTagsСheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>668, 39</value>
+    <value>709, 35</value>
   </data>
   <data name="previewSortTagsСheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>166, 15</value>
@@ -137,7 +149,7 @@
     <value>Показывать теги сортировки</value>
   </data>
   <data name="previewSortTagsСheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>648, 38</value>
+    <value>689, 35</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>492, 15</value>
@@ -145,26 +157,26 @@
   <data name="label1.Text" xml:space="preserve">
     <value>Можно дважды щелкнуть по любой ячейке, чтобы увидеть все теги в отдельном окне</value>
   </data>
-  <data name="usedEncodingsList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>647, 5</value>
+  <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
+    <value>935, 5</value>
   </data>
-  <data name="usedEncodingsList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 23</value>
+  <data name="buttonOK.Text" xml:space="preserve">
+    <value>Применить</value>
   </data>
-  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>342, 9</value>
+  <data name="usedEncodingList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>569, 5</value>
   </data>
-  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="usedEncodingLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>337, 9</value>
+  </data>
+  <data name="usedEncodingLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>226, 15</value>
   </data>
-  <data name="label4.Text" xml:space="preserve">
+  <data name="usedEncodingLabel.Text" xml:space="preserve">
     <value>Ошибочно использованная кодировка:</value>
   </data>
-  <data name="initialEncodingsList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>202, 5</value>
-  </data>
-  <data name="initialEncodingsList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 23</value>
+  <data name="initialEncodingList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>155, 5</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>143, 15</value>
@@ -172,23 +184,11 @@
   <data name="label2.Text" xml:space="preserve">
     <value>Изначальная кодировка:</value>
   </data>
-  <data name="Track.HeaderText" xml:space="preserve">
-    <value>Изначальный трек</value>
-  </data>
-  <data name="NewTrack.HeaderText" xml:space="preserve">
-    <value>Новый трек</value>
-  </data>
-  <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1113, 240</value>
-  </data>
-  <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>913, 5</value>
-  </data>
-  <data name="buttonOK.Text" xml:space="preserve">
-    <value>Применить</value>
+  <data name="controlsPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1153, 57</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>1145, 350</value>
+    <value>1135, 350</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Изменить кодировку тегов</value>
@@ -796,7 +796,7 @@
 </value>
   </data>
   <data name="buttonPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>805, 5</value>
+    <value>827, 5</value>
   </data>
   <data name="buttonPreview.Text" xml:space="preserve">
     <value>Просмотр</value>

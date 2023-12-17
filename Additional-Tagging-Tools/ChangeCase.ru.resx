@@ -119,13 +119,13 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>217, 5</value>
+    <value>248, 5</value>
   </data>
   <data name="buttonPreview.Text" xml:space="preserve">
     <value>Просмотр</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1044, 361</value>
+    <value>1121, 361</value>
   </data>
   <data name="Track.HeaderText" xml:space="preserve">
     <value>Трек</value>
@@ -143,10 +143,10 @@
     <value>Новое значение</value>
   </data>
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1032, 171</value>
+    <value>1109, 186</value>
   </data>
   <data name="alwaysCapitalizeLastWordCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>559, 158</value>
+    <value>630, 144</value>
   </data>
   <data name="alwaysCapitalizeLastWordCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>300, 15</value>
@@ -155,10 +155,10 @@
     <value>Всегда Начинать С Прописных последнее слово тега</value>
   </data>
   <data name="alwaysCapitalizeLastWordCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>536, 158</value>
+    <value>602, 144</value>
   </data>
   <data name="alwaysCapitalize1stWordCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>225, 158</value>
+    <value>269, 144</value>
   </data>
   <data name="alwaysCapitalize1stWordCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>281, 15</value>
@@ -167,16 +167,10 @@
     <value>Всегда Начинать С Прописных первое слово тега</value>
   </data>
   <data name="alwaysCapitalize1stWordCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 158</value>
-  </data>
-  <data name="toggleCaseRadioButtonLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 15</value>
-  </data>
-  <data name="toggleCaseRadioButtonLabel.Text" xml:space="preserve">
-    <value>иЗМЕНИТЬ рЕГИСТР</value>
+    <value>241, 144</value>
   </data>
   <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>200, 128</value>
+    <value>237, 117</value>
   </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>338, 15</value>
@@ -184,14 +178,12 @@
   <data name="label6.Text" xml:space="preserve">
     <value>В полях символы и слова должны разделяться пробелами</value>
   </data>
-  <data name="titleCaseRadioButtonLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>139, 15</value>
-  </data>
-  <data name="titleCaseRadioButtonLabel.Text" xml:space="preserve">
-    <value>Начинать С Прописных</value>
-  </data>
   <data name="wordSplittersCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>225, 98</value>
+    <value>269, 90</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="wordSplittersCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 8, 0</value>
   </data>
   <data name="wordSplittersCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>277, 15</value>
@@ -200,7 +192,7 @@
     <value>Символы, которые считать разделителями слов:</value>
   </data>
   <data name="wordSplittersCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 98</value>
+    <value>241, 90</value>
   </data>
   <data name="upperCaseRadioButtonLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 15</value>
@@ -209,7 +201,7 @@
     <value>ВСЕ ПРОПИСНЫЕ</value>
   </data>
   <data name="exceptionCharsCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>225, 68</value>
+    <value>269, 63</value>
   </data>
   <data name="exceptionCharsCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>169, 15</value>
@@ -218,7 +210,7 @@
     <value>Кроме слов после символов:</value>
   </data>
   <data name="exceptionCharsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 68</value>
+    <value>241, 63</value>
   </data>
   <data name="lowerCaseRadioButtonLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>82, 15</value>
@@ -227,7 +219,7 @@
     <value>все строчные</value>
   </data>
   <data name="onlyWordsCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>339, 38</value>
+    <value>406, 36</value>
   </data>
   <data name="onlyWordsCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>122, 15</value>
@@ -236,10 +228,10 @@
     <value>или только в словах:</value>
   </data>
   <data name="onlyWordsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>317, 38</value>
+    <value>378, 36</value>
   </data>
   <data name="exceptionWordsCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>225, 38</value>
+    <value>269, 36</value>
   </data>
   <data name="exceptionWordsCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 15</value>
@@ -251,7 +243,7 @@
     <value>Эта опция запретит любые изменения указанных слов. Например, UB40 останется UB40 независимо от остальных настроек команды.</value>
   </data>
   <data name="exceptionWordsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 38</value>
+    <value>241, 36</value>
   </data>
   <data name="exceptionWordsCheckBox.ToolTip" xml:space="preserve">
     <value>Эта опция запретит любые изменения указанных слов. Например, UB40 останется UB40 независимо от остальных настроек команды.</value>
@@ -263,7 +255,7 @@
     <value>Как в предложениях.</value>
   </data>
   <data name="forSelectedTracksLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>349, 8</value>
+    <value>356, 9</value>
   </data>
   <data name="forSelectedTracksLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 15</value>
@@ -272,7 +264,7 @@
     <value>у выбранных треков</value>
   </data>
   <data name="sourceTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>151, 3</value>
+    <value>150, 5</value>
   </data>
   <data name="sourceTagList.Size" type="System.Drawing.Size, System.Drawing">
     <value>190, 23</value>
@@ -283,8 +275,20 @@
   <data name="label1.Text" xml:space="preserve">
     <value>Изменить регистр тега</value>
   </data>
+  <data name="toggleCaseRadioButtonLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 15</value>
+  </data>
+  <data name="toggleCaseRadioButtonLabel.Text" xml:space="preserve">
+    <value>иЗМЕНИТЬ рЕГИСТР</value>
+  </data>
+  <data name="titleCaseRadioButtonLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 15</value>
+  </data>
+  <data name="titleCaseRadioButtonLabel.Text" xml:space="preserve">
+    <value>Начинать С Прописных</value>
+  </data>
   <data name="buttonASRWordSplitters.Location" type="System.Drawing.Point, System.Drawing">
-    <value>433, 95</value>
+    <value>464, 86</value>
   </data>
   <data name="buttonASRWordSplitters.Text" xml:space="preserve">
     <value>ДПЗ</value>
@@ -294,14 +298,11 @@
 для Дополнительного поиска и замены
 </value>
   </data>
-  <data name="wordSplittersBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 95</value>
-  </data>
   <data name="wordSplittersBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>425, 23</value>
+    <value>452, 23</value>
   </data>
   <data name="buttonASRExceptWordsAfterSymbols.Location" type="System.Drawing.Point, System.Drawing">
-    <value>433, 65</value>
+    <value>464, 59</value>
   </data>
   <data name="buttonASRExceptWordsAfterSymbols.Text" xml:space="preserve">
     <value>ДПЗ</value>
@@ -310,48 +311,20 @@
     <value>Установить список символов как значение по умолчанию 
 для Дополнительного поиска и замены</value>
   </data>
-  <data name="exceptionCharsBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 65</value>
-  </data>
   <data name="exceptionCharsBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>425, 23</value>
+    <value>452, 23</value>
   </data>
   <data name="removeExceptionButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>433, 35</value>
+    <value>464, 32</value>
   </data>
   <data name="removeExceptionButton.ToolTip" xml:space="preserve">
     <value>Удалить введенный список исключений из истории (если есть точное совпадение)</value>
   </data>
-  <data name="exceptionWordsBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 35</value>
-  </data>
   <data name="exceptionWordsBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>425, 23</value>
-  </data>
-  <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>325, 5</value>
-  </data>
-  <data name="buttonOK.Text" xml:space="preserve">
-    <value>Применить</value>
-  </data>
-  <data name="buttonSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>171, 5</value>
-  </data>
-  <data name="buttonSettings.ToolTip" xml:space="preserve">
-    <value>Открыть быстрые настройки</value>
-  </data>
-  <data name="buttonReapply.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 5</value>
-  </data>
-  <data name="buttonReapply.Text" xml:space="preserve">
-    <value>Изменить новый тег</value>
-  </data>
-  <data name="buttonReapply.ToolTip" xml:space="preserve">
-    <value>Эта команда применит правила изменения регистра (в том числе исключения) 
-к уже сгенерированному, но еще не записанному новому значению тега</value>
+    <value>452, 23</value>
   </data>
   <data name="buttonASRExceptedWords.Location" type="System.Drawing.Point, System.Drawing">
-    <value>399, 14</value>
+    <value>431, 14</value>
   </data>
   <data name="buttonASRExceptedWords.Text" xml:space="preserve">
     <value>ДПЗ</value>
@@ -360,14 +333,33 @@
     <value>Установить список исключенных слов как значение по умолчанию 
 для Дополнительного поиска и замены</value>
   </data>
+  <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
+    <value>356, 5</value>
+  </data>
+  <data name="buttonOK.Text" xml:space="preserve">
+    <value>Применить</value>
+  </data>
+  <data name="buttonSettings.Location" type="System.Drawing.Point, System.Drawing">
+    <value>177, 5</value>
+  </data>
+  <data name="buttonSettings.ToolTip" xml:space="preserve">
+    <value>Открыть быстрые настройки</value>
+  </data>
+  <data name="buttonReapply.Text" xml:space="preserve">
+    <value>Изменить новый тег</value>
+  </data>
+  <data name="buttonReapply.ToolTip" xml:space="preserve">
+    <value>Эта команда применит правила изменения регистра (в том числе исключения) 
+к уже сгенерированному, но еще не записанному новому значению тега</value>
+  </data>
   <data name="fieldsPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>506, 0</value>
+    <value>550, 0</value>
   </data>
   <data name="fieldsPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>538, 125</value>
+    <value>570, 114</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>1060, 400</value>
+    <value>1137, 400</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Изменение регистра</value>
@@ -978,7 +970,7 @@
 </value>
   </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>433, 5</value>
+    <value>464, 5</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Закрыть</value>

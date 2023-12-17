@@ -54,6 +54,16 @@ namespace MusicBeePlugin
                 tagIds.Add(GetTagId(tagNames[i]));
 
 
+            previewTable.EnableHeadersVisualStyles = !UseMusicBeeFontSkinColors;
+
+            previewTable.BackgroundColor = UnchangedCellStyle.BackColor;
+            previewTable.DefaultCellStyle = UnchangedCellStyle;
+            previewTable.RowHeadersDefaultCellStyle = HeaderCellStyle;
+            previewTable.DefaultCellStyle = UnchangedCellStyle;
+
+            previewTable.Columns[0].HeaderCell.Style = HeaderCellStyle;
+            previewTable.Columns[1].HeaderCell.Style = HeaderCellStyle;
+
             columnTemplate = (DataGridViewColumn)previewTable.Columns[0].Clone();
             artworkCellTemplate = previewTable.Columns[1].CellTemplate;
 
@@ -74,7 +84,7 @@ namespace MusicBeePlugin
             }
 
             ignoreAutoSelectTagsCheckBoxCheckedEvent = true;
-            AutoSelectTagsCheckBox.Checked = !SavedSettings.dontAutoSelectDisplayedTags;
+            autoSelectTagsCheckBox.Checked = !SavedSettings.dontAutoSelectDisplayedTags;
             ignoreAutoSelectTagsCheckBoxCheckedEvent = false;
 
 
@@ -92,7 +102,7 @@ namespace MusicBeePlugin
             previewTable.Columns[0].Width = defaultColumnWidth;
 
 
-            button_GotFocus(this.AcceptButton, null); //Let's mark active button
+            button_GotFocus(AcceptButton, null); //Let's mark active button
         }
 
         private void fillTagNamesInTable()
@@ -298,7 +308,7 @@ namespace MusicBeePlugin
             SavedSettings.displayedTags = displayedTags;
             SavedSettings.rowHeadersWidth = rowHeadersWidth;
             SavedSettings.defaultColumnWidth = defaultColumnWidth;
-            SavedSettings.dontAutoSelectDisplayedTags = !AutoSelectTagsCheckBox.Checked;
+            SavedSettings.dontAutoSelectDisplayedTags = !autoSelectTagsCheckBox.Checked;
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
@@ -336,7 +346,7 @@ namespace MusicBeePlugin
         {
             if (rememberColumnAsDefaultWidthCheckBox.Checked)
             {
-                //rememberColumnasDefaulltWidthCheckBox.Checked = false;
+                //rememberColumnAsDefaultWidthCheckBox.Checked = false;
 
                 rowHeadersWidth = previewTable.RowHeadersWidth;
             }
@@ -346,7 +356,7 @@ namespace MusicBeePlugin
         {
             if (rememberColumnAsDefaultWidthCheckBox.Checked)
             {
-                //rememberColumnasDefaulltWidthCheckBox.Checked = false;
+                //rememberColumnAsDefaultWidthCheckBox.Checked = false;
 
                 for (int i = 0; i < previewTable.ColumnCount; i++)
                 {
@@ -416,13 +426,13 @@ namespace MusicBeePlugin
             fillTable(false);
         }
 
-        private void AutoSelectTagsCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void autoSelectTagsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             buffer.Clear();
 
-            SavedSettings.dontAutoSelectDisplayedTags = !AutoSelectTagsCheckBox.Checked;
+            SavedSettings.dontAutoSelectDisplayedTags = !autoSelectTagsCheckBox.Checked;
 
-            if (AutoSelectTagsCheckBox.Checked)
+            if (autoSelectTagsCheckBox.Checked)
             {
                 selectTagsButton.Enable(false);
 
@@ -516,9 +526,14 @@ namespace MusicBeePlugin
             }
         }
 
-        private void rememberColumnasDefaulltWidthCheckBoxLabel_Click(object sender, EventArgs e)
+        private void rememberColumnAsDefaultWidthCheckBoxLabel_Click(object sender, EventArgs e)
         {
             rememberColumnAsDefaultWidthCheckBox.Checked = !rememberColumnAsDefaultWidthCheckBox.Checked;
+        }
+
+        private void CompareTracksCommand_Load(object sender, EventArgs e)
+        {
+            placeholderLabel.Visible = false;
         }
     }
 }

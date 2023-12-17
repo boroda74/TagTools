@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ExtensionMethods;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using static MusicBeePlugin.Plugin;
@@ -30,7 +31,7 @@ namespace MusicBeePlugin
             albumRatingTagList.Text = SavedSettings.albumRatingTagName;
 
 
-            button_GotFocus(this.AcceptButton, null); //Let's mark active button
+            button_GotFocus(AcceptButton, null); //Let's mark active button
         }
 
         public void calculateAlbumRating()
@@ -245,6 +246,36 @@ namespace MusicBeePlugin
             }
 
             RefreshPanels(true);
+        }
+
+        public override void enableDisablePreviewOptionControls(bool enable, bool dontChangeDisabled = false)
+        {
+            foreach (var control in allControls)
+            {
+                if (control != buttonOK && control != buttonCancel)
+                    control.Enable(enable);
+            }
+        }
+
+        public override void enableQueryingButtons()
+        {
+            dirtyErrorProvider.SetError(buttonOK, " ");
+            dirtyErrorProvider.SetError(buttonOK, string.Empty);
+        }
+
+        public override void disableQueryingButtons()
+        {
+            dirtyErrorProvider.SetError(buttonOK, getBackgroundTasksWarning());
+        }
+
+        public override void enableQueryingOrUpdatingButtons()
+        {
+            buttonOK.Enable(true);
+        }
+
+        public override void disableQueryingOrUpdatingButtons()
+        {
+            buttonOK.Enable(false);
         }
 
         private void saveSettings()

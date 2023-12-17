@@ -138,17 +138,17 @@
     <value>NoControl</value>
   </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>796, 5</value>
+    <value>726, 5</value>
   </data>
   <data name="buttonCancel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>4, 4, 8, 4</value>
   </data>
   <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 23</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="buttonCancel.TabIndex" type="System.Int32, mscorlib">
-    <value>45</value>
+    <value>5</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Close</value>
@@ -160,127 +160,13 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonCancel.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>controlsPanel</value>
   </data>
   <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>4</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>904, 311</value>
-  </data>
-  <data name="usedEncodingsList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>549, 36</value>
-  </data>
-  <data name="usedEncodingsList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="usedEncodingsList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 23</value>
-  </data>
-  <data name="usedEncodingsList.TabIndex" type="System.Int32, mscorlib">
-    <value>60</value>
-  </data>
-  <data name="&gt;&gt;usedEncodingsList.Name" xml:space="preserve">
-    <value>usedEncodingsList</value>
-  </data>
-  <data name="&gt;&gt;usedEncodingsList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;usedEncodingsList.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;usedEncodingsList.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="label4.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>364, 40</value>
-  </data>
-  <data name="label4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 15</value>
-  </data>
-  <data name="label4.TabIndex" type="System.Int32, mscorlib">
-    <value>59</value>
-  </data>
-  <data name="label4.Text" xml:space="preserve">
-    <value>Incorrectly used encoding:</value>
-  </data>
-  <data name="&gt;&gt;label4.Name" xml:space="preserve">
-    <value>label4</value>
-  </data>
-  <data name="&gt;&gt;label4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="initialEncodingsList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>146, 36</value>
-  </data>
-  <data name="initialEncodingsList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="initialEncodingsList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 23</value>
-  </data>
-  <data name="initialEncodingsList.TabIndex" type="System.Int32, mscorlib">
-    <value>58</value>
-  </data>
-  <data name="&gt;&gt;initialEncodingsList.Name" xml:space="preserve">
-    <value>initialEncodingsList</value>
-  </data>
-  <data name="&gt;&gt;initialEncodingsList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;initialEncodingsList.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;initialEncodingsList.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 40</value>
-  </data>
-  <data name="label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 15</value>
-  </data>
-  <data name="label2.TabIndex" type="System.Int32, mscorlib">
-    <value>57</value>
-  </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>Original encoding:</value>
-  </data>
-  <data name="&gt;&gt;label2.Name" xml:space="preserve">
-    <value>label2</value>
-  </data>
-  <data name="&gt;&gt;label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>834, 311</value>
   </data>
   <data name="previewTable.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -328,7 +214,7 @@
     <value>25</value>
   </data>
   <data name="previewTable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 68</value>
+    <value>8, 60</value>
   </data>
   <data name="previewTable.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -337,10 +223,10 @@
     <value>51</value>
   </data>
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>888, 236</value>
+    <value>818, 244</value>
   </data>
   <data name="previewTable.TabIndex" type="System.Int32, mscorlib">
-    <value>56</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;previewTable.Name" xml:space="preserve">
     <value>previewTable</value>
@@ -352,7 +238,124 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;previewTable.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>0</value>
+  </data>
+  <data name="controlsPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="usedEncodingsList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>519, 32</value>
+  </data>
+  <data name="usedEncodingsList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="usedEncodingsList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>208, 23</value>
+  </data>
+  <data name="usedEncodingsList.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;usedEncodingsList.Name" xml:space="preserve">
+    <value>usedEncodingsList</value>
+  </data>
+  <data name="&gt;&gt;usedEncodingsList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;usedEncodingsList.Parent" xml:space="preserve">
+    <value>controlsPanel</value>
+  </data>
+  <data name="&gt;&gt;usedEncodingsList.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="label4.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>364, 36</value>
+  </data>
+  <data name="label4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>147, 15</value>
+  </data>
+  <data name="label4.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Incorrectly used encoding:</value>
+  </data>
+  <data name="&gt;&gt;label4.Name" xml:space="preserve">
+    <value>label4</value>
+  </data>
+  <data name="&gt;&gt;label4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
+    <value>controlsPanel</value>
+  </data>
+  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="initialEncodingsList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>146, 32</value>
+  </data>
+  <data name="initialEncodingsList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="initialEncodingsList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>208, 23</value>
+  </data>
+  <data name="initialEncodingsList.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;initialEncodingsList.Name" xml:space="preserve">
+    <value>initialEncodingsList</value>
+  </data>
+  <data name="&gt;&gt;initialEncodingsList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;initialEncodingsList.Parent" xml:space="preserve">
+    <value>controlsPanel</value>
+  </data>
+  <data name="&gt;&gt;initialEncodingsList.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 36</value>
+  </data>
+  <data name="label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 0, 4, 0</value>
+  </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 15</value>
+  </data>
+  <data name="label2.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Original encoding:</value>
+  </data>
+  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+    <value>label2</value>
+  </data>
+  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+    <value>controlsPanel</value>
+  </data>
+  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="buttonOK.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -361,7 +364,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>688, 5</value>
+    <value>618, 5</value>
   </data>
   <data name="buttonOK.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -370,7 +373,7 @@
     <value>100, 23</value>
   </data>
   <data name="buttonOK.TabIndex" type="System.Int32, mscorlib">
-    <value>44</value>
+    <value>4</value>
   </data>
   <data name="buttonOK.Text" xml:space="preserve">
     <value>Proceed</value>
@@ -382,10 +385,10 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonOK.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>controlsPanel</value>
   </data>
   <data name="&gt;&gt;buttonOK.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>5</value>
   </data>
   <data name="label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -403,7 +406,7 @@
     <value>102, 15</value>
   </data>
   <data name="label3.TabIndex" type="System.Int32, mscorlib">
-    <value>43</value>
+    <value>2</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>for selected tracks</value>
@@ -415,10 +418,10 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label3.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>controlsPanel</value>
   </data>
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="sourceTagList.Location" type="System.Drawing.Point, System.Drawing">
     <value>146, 5</value>
@@ -430,7 +433,7 @@
     <value>208, 23</value>
   </data>
   <data name="sourceTagList.TabIndex" type="System.Int32, mscorlib">
-    <value>42</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;sourceTagList.Name" xml:space="preserve">
     <value>sourceTagList</value>
@@ -439,10 +442,10 @@
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;sourceTagList.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>controlsPanel</value>
   </data>
   <data name="&gt;&gt;sourceTagList.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -454,13 +457,13 @@
     <value>5, 9</value>
   </data>
   <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+    <value>5, 0, 4, 0</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>79, 15</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
-    <value>41</value>
+    <value>0</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>Reencode tag</value>
@@ -472,10 +475,31 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>controlsPanel</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
+  </data>
+  <data name="controlsPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="controlsPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>834, 60</value>
+  </data>
+  <data name="controlsPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;controlsPanel.Name" xml:space="preserve">
+    <value>controlsPanel</value>
+  </data>
+  <data name="&gt;&gt;controlsPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;controlsPanel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;controlsPanel.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -484,7 +508,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>920, 350</value>
+    <value>850, 350</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Reencode Tag</value>
@@ -1137,7 +1161,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>580, 5</value>
+    <value>510, 5</value>
   </data>
   <data name="buttonPreview.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1146,7 +1170,7 @@
     <value>100, 23</value>
   </data>
   <data name="buttonPreview.TabIndex" type="System.Int32, mscorlib">
-    <value>55</value>
+    <value>3</value>
   </data>
   <data name="buttonPreview.Text" xml:space="preserve">
     <value>Preview</value>
@@ -1158,9 +1182,9 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonPreview.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>controlsPanel</value>
   </data>
   <data name="&gt;&gt;buttonPreview.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
 </root>

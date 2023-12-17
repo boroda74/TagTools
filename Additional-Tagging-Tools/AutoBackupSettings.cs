@@ -44,7 +44,7 @@ namespace MusicBeePlugin
             dontTryToGuessLibraryNameCheckBox.Checked = SavedSettings.dontTryToGuessLibraryName;
 
 
-            button_GotFocus(this.AcceptButton, null); //Let's mark active button
+            button_GotFocus(AcceptButton, null); //Let's mark active button
         }
 
         private void autobackupCheckBox_CheckedChanged(object sender, EventArgs e)

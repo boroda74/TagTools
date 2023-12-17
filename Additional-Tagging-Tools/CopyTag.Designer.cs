@@ -39,7 +39,7 @@
             this.dirtyErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.onlyIfDestinationEmptyCheckBox = new System.Windows.Forms.CheckBox();
             this.addCheckBox = new System.Windows.Forms.CheckBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.fileNameLabel = new System.Windows.Forms.Label();
             this.fileNameTextBox = new System.Windows.Forms.ComboBox();
             this.appendedTextBox = new System.Windows.Forms.ComboBox();
             this.addedTextBox = new System.Windows.Forms.ComboBox();
@@ -114,7 +114,7 @@
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.dirtyErrorProvider.SetIconAlignment(this.buttonCancel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonCancel.IconAlignment"))));
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Tag = "@non-defaultable";
+            this.buttonCancel.Tag = "#fieldsPanel@pinned-to-parent@non-defaultable";
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // appendCheckBox
@@ -235,12 +235,12 @@
             this.addCheckBox.Tag = "#addCheckBoxLabel";
             this.addCheckBox.CheckedChanged += new System.EventHandler(this.addCheckBox_CheckedChanged);
             // 
-            // label3
+            // fileNameLabel
             // 
-            resources.ApplyResources(this.label3, "label3");
-            this.dirtyErrorProvider.SetIconAlignment(this.label3, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("label3.IconAlignment"))));
-            this.label3.Name = "label3";
-            this.label3.Tag = "#fileNameTextBox";
+            resources.ApplyResources(this.fileNameLabel, "fileNameLabel");
+            this.dirtyErrorProvider.SetIconAlignment(this.fileNameLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("fileNameLabel.IconAlignment"))));
+            this.fileNameLabel.Name = "fileNameLabel";
+            this.fileNameLabel.Tag = "#fileNameTextBox";
             // 
             // fileNameTextBox
             // 
@@ -261,7 +261,7 @@
             this.appendedTextBox.FormattingEnabled = true;
             this.dirtyErrorProvider.SetIconAlignment(this.appendedTextBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("appendedTextBox.IconAlignment"))));
             this.appendedTextBox.Name = "appendedTextBox";
-            this.appendedTextBox.Tag = "";
+            this.appendedTextBox.Tag = "#fieldsPanel@pinned-to-parent";
             this.appendedTextBox.Leave += new System.EventHandler(this.appendedTextBox_Leave);
             // 
             // addedTextBox
@@ -272,7 +272,7 @@
             this.addedTextBox.FormattingEnabled = true;
             this.dirtyErrorProvider.SetIconAlignment(this.addedTextBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("addedTextBox.IconAlignment"))));
             this.addedTextBox.Name = "addedTextBox";
-            this.addedTextBox.Tag = "";
+            this.addedTextBox.Tag = "#fieldsPanel@pinned-to-parent";
             this.addedTextBox.Leave += new System.EventHandler(this.addedTextBox_Leave);
             // 
             // browseButton
@@ -281,7 +281,7 @@
             this.browseButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.dirtyErrorProvider.SetIconAlignment(this.browseButton, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("browseButton.IconAlignment"))));
             this.browseButton.Name = "browseButton";
-            this.browseButton.Tag = "@non-defaultable";
+            this.browseButton.Tag = "#fieldsPanel@pinned-to-parent@non-defaultable";
             this.browseButton.Click += new System.EventHandler(this.browseButton_Click);
             // 
             // buttonSettings
@@ -290,7 +290,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.buttonSettings, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonSettings.IconAlignment"))));
             this.buttonSettings.Image = global::MusicBeePlugin.Properties.Resources.gear_15;
             this.buttonSettings.Name = "buttonSettings";
-            this.buttonSettings.Tag = "@non-defaultable";
+            this.buttonSettings.Tag = "@non-defaultable@square-control";
             this.toolTip1.SetToolTip(this.buttonSettings, resources.GetString("buttonSettings.ToolTip"));
             this.buttonSettings.Click += new System.EventHandler(this.buttonSettings_Click);
             // 
@@ -320,6 +320,7 @@
             // 
             resources.ApplyResources(this.onlyIfSourceNotEmptyCheckBoxLabel, "onlyIfSourceNotEmptyCheckBoxLabel");
             this.onlyIfSourceNotEmptyCheckBoxLabel.Name = "onlyIfSourceNotEmptyCheckBoxLabel";
+            this.onlyIfSourceNotEmptyCheckBoxLabel.Tag = "";
             this.onlyIfSourceNotEmptyCheckBoxLabel.Click += new System.EventHandler(this.onlyIfSourceNotEmptyCheckBoxLabel_Click);
             // 
             // appendCheckBoxLabel
@@ -332,7 +333,7 @@
             // 
             resources.ApplyResources(this.addCheckBoxLabel, "addCheckBoxLabel");
             this.addCheckBoxLabel.Name = "addCheckBoxLabel";
-            this.addCheckBoxLabel.Tag = "";
+            this.addCheckBoxLabel.Tag = "#fieldsPanel";
             this.addCheckBoxLabel.Click += new System.EventHandler(this.addCheckBoxLabel_Click);
             // 
             // fieldsPanel
@@ -342,13 +343,13 @@
             this.fieldsPanel.Controls.Add(this.appendedTextBox);
             this.fieldsPanel.Controls.Add(this.browseButton);
             this.fieldsPanel.Controls.Add(this.fileNameTextBox);
-            this.fieldsPanel.Controls.Add(this.label3);
+            this.fieldsPanel.Controls.Add(this.fileNameLabel);
             this.fieldsPanel.Controls.Add(this.buttonCancel);
             this.fieldsPanel.Controls.Add(this.buttonOK);
             this.fieldsPanel.Controls.Add(this.buttonPreview);
             this.fieldsPanel.Controls.Add(this.buttonSettings);
             this.fieldsPanel.Name = "fieldsPanel";
-            this.fieldsPanel.Tag = "#CopyTagCommand";
+            this.fieldsPanel.Tag = "#CopyTagCommand@pinned-to-parent";
             // 
             // CopyTagCommand
             // 
@@ -356,17 +357,17 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.Controls.Add(this.onlyIfSourceNotEmptyCheckBoxLabel);
-            this.Controls.Add(this.addCheckBoxLabel);
-            this.Controls.Add(this.appendCheckBoxLabel);
-            this.Controls.Add(this.onlyIfDestinationEmptyCheckBoxLabel);
-            this.Controls.Add(this.smartOperationCheckBoxLabel);
-            this.Controls.Add(this.onlyIfSourceNotEmptyCheckBox);
-            this.Controls.Add(this.addCheckBox);
-            this.Controls.Add(this.onlyIfDestinationEmptyCheckBox);
-            this.Controls.Add(this.smartOperationCheckBox);
             this.Controls.Add(this.previewTable);
+            this.Controls.Add(this.addCheckBoxLabel);
+            this.Controls.Add(this.addCheckBox);
+            this.Controls.Add(this.appendCheckBoxLabel);
             this.Controls.Add(this.appendCheckBox);
+            this.Controls.Add(this.onlyIfSourceNotEmptyCheckBoxLabel);
+            this.Controls.Add(this.onlyIfSourceNotEmptyCheckBox);
+            this.Controls.Add(this.onlyIfDestinationEmptyCheckBoxLabel);
+            this.Controls.Add(this.onlyIfDestinationEmptyCheckBox);
+            this.Controls.Add(this.smartOperationCheckBoxLabel);
+            this.Controls.Add(this.smartOperationCheckBox);
             this.Controls.Add(this.forSelectedTracksLabel);
             this.Controls.Add(this.destinationTagList);
             this.Controls.Add(this.forTagLabel);
@@ -374,7 +375,7 @@
             this.Controls.Add(this.copyTagLabel);
             this.Controls.Add(this.fieldsPanel);
             this.Name = "CopyTagCommand";
-            this.Tag = "@small-min-width";
+            this.Tag = "";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CopyTagCommand_FormClosing);
             this.Load += new System.EventHandler(this.CopyTagCommand_Load);
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).EndInit();
@@ -402,7 +403,7 @@
         private System.Windows.Forms.ErrorProvider dirtyErrorProvider;
         private System.Windows.Forms.CheckBox onlyIfDestinationEmptyCheckBox;
         private System.Windows.Forms.CheckBox addCheckBox;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label fileNameLabel;
         private System.Windows.Forms.ComboBox addedTextBox;
         private System.Windows.Forms.ComboBox appendedTextBox;
         private System.Windows.Forms.ComboBox fileNameTextBox;

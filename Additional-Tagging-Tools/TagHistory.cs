@@ -20,7 +20,6 @@ namespace MusicBeePlugin
 
         private Bitmap emptyArtwork = new Bitmap(1, 1);
         private int artworkRow;
-        private string base64Artwork;
         private TypeConverter typeConverter = TypeDescriptor.GetConverter(typeof(Bitmap));
 
         private DataGridViewColumn columnTemplate;
@@ -33,7 +32,9 @@ namespace MusicBeePlugin
 
         private string lastSelectedFolder;
 
-        private string[] libraryTags;
+        private string[,] libraryTags;
+        private string[,] currentTags;
+        private List<string[,]> backupTags;
 
         private List<BackupType> originalCachedBackups;
         private List<string> originalCachedBackupFilenames;
@@ -64,6 +65,15 @@ namespace MusicBeePlugin
             for (int i = 0; i < tagNames.Count; i++)
                 tagIds.Add(GetTagId(tagNames[i]));
 
+
+            previewTable.EnableHeadersVisualStyles = !UseMusicBeeFontSkinColors;
+
+            previewTable.BackgroundColor = UnchangedCellStyle.BackColor;
+            previewTable.DefaultCellStyle = UnchangedCellStyle;
+
+            previewTable.Columns[0].HeaderCell.Style = HeaderCellStyle;
+            previewTable.Columns[1].HeaderCell.Style = HeaderCellStyle;
+            previewTable.Columns[2].HeaderCell.Style = HeaderCellStyle;
 
             columnTemplate = (DataGridViewColumn)previewTable.Columns[1].Clone();
             artworkCellTemplate = previewTable.Columns[2].CellTemplate;
@@ -124,7 +134,7 @@ namespace MusicBeePlugin
             }
 
             ignoreAutoSelectTagsCheckBoxCheckedEvent = true;
-            AutoSelectTagsCheckBox.Checked = !SavedSettings.dontAutoSelectDisplayedTags;
+            autoSelectTagsCheckBox.Checked = !SavedSettings.dontAutoSelectDisplayedTags;
             ignoreAutoSelectTagsCheckBoxCheckedEvent = false;
 
 
@@ -140,39 +150,71 @@ namespace MusicBeePlugin
 
             previewTable.RowHeadersWidth = rowHeadersWidth;
             previewTable.Columns[0].Width = defaultColumnWidth;
+
+
+            button_GotFocus(AcceptButton, null); //Let's mark active button
         }
 
         private void fillTagNamesInTable(int trackIndex)
         {
-            libraryTags = new string[displayedTags.Length];
+            libraryTags = new string[trackListComboBox.Items.Count, reallyDisplayedTags.Count];
+            currentTags = new string[trackListComboBox.Items.Count, reallyDisplayedTags.Count];
+            backupTags = new List<string[,]>();
 
             previewTable.RowCount = 1;
             if (reallyDisplayedTags.Count > 1)
                 previewTable.RowCount = reallyDisplayedTags.Count;
 
             artworkRow = -1;
-            base64Artwork = null;
 
             for (int j = 0; j < reallyDisplayedTags.Count; j++)
             {
                 previewTable.Rows[j].HeaderCell.Value = GetTagName((MetaDataType)reallyDisplayedTags[j]);
 
-                string tagValue = GetFileTag(trackUrls[trackIndex], (MetaDataType)reallyDisplayedTags[j]);
-
-                libraryTags[j] = tagValue;
-
-
                 if ((MetaDataType)reallyDisplayedTags[j] == MetaDataType.Artwork)
                 {
                     artworkRow = j;
 
+                    previewTable.Rows[j].Cells[0] = (DataGridViewCell)artworkCellTemplate.Clone();
+                    previewTable.Rows[j].Cells[0].ReadOnly = true;
+                }
+            }
 
+            if (trackIndex > 0)
+            {
+                fillTagNamesInTableInternal(trackIndex);
+            }
+            else
+            {
+                for (int i = 1; i < trackListComboBox.Items.Count; i++)
+                    fillTagNamesInTableInternal(i);
+            }
+        }
+
+        private void fillTagNamesInTableInternal(int trackIndex)
+        {
+            for (int j = 0; j < reallyDisplayedTags.Count; j++)
+            {
+                string tagValue = GetFileTag(trackUrls[trackIndex - 1], (MetaDataType)reallyDisplayedTags[j]);
+
+                if (libraryTags[0, j] == null)
+                    libraryTags[0, j] = tagValue;
+                else if (libraryTags[0, j] != tagValue)
+                    libraryTags[0, j] = "(Mixed values)";//******
+
+                libraryTags[trackIndex, j] = tagValue;
+
+                currentTags[0, j] = libraryTags[0, j];
+                currentTags[trackIndex, j] = tagValue;
+
+                if (artworkRow == j)
+                {
                     Bitmap artwork;
 
-                    base64Artwork = tagValue;
-
-                    if (tagValue == string.Empty)
+                    if (libraryTags[0, j] == string.Empty)
                         artwork = emptyArtwork;
+                    if (libraryTags[0, j] == "(Mixed values)")//******
+                        artwork = MissingArtwork; //*****
                     else
                         artwork = (Bitmap)typeConverter.ConvertFrom(Convert.FromBase64String(tagValue));
 
@@ -183,7 +225,7 @@ namespace MusicBeePlugin
                 }
                 else
                 {
-                    previewTable.Rows[j].Cells[0].Value = tagValue;
+                    previewTable.Rows[j].Cells[0].Value = libraryTags[0, j];
                 }
             }
         }
@@ -213,144 +255,187 @@ namespace MusicBeePlugin
                 }
                 else
                 {
-                    for (int backupCount = 0; backupCount < cachedBackups.Count; backupCount++)
+                    for (int backupIndex = 0; backupIndex < cachedBackups.Count; backupIndex++)
                     {
-                        BackupType backup = cachedBackups[backupCount];
-
-                        DataGridViewColumn newColumn = (DataGridViewColumn)columnTemplate.Clone();
-                        newColumn.HeaderText = GetBackupDateTime(backup);
-                        newColumn.ToolTipText = cachedBackupFilenames[backupCount];
-                        newColumn.Width = defaultColumnWidth;
-
-                        previewTable.Columns.Add(newColumn);
-
-
-                        for (int j = 0; j < reallyDisplayedTags.Count; j++)
+                        if (trackIndex > 0)
                         {
-                            string tagValue = backup.getIncValue(trackIds[trackIndex], reallyDisplayedTags[j], baseline);
+                            fillTableInternalReuseCache(backupIndex, trackIndex);
+                            fillTableInternalReuseCacheFinal(backupIndex);
+                        }
+                        else
+                        {
+                            for (int i = 1; i < trackListComboBox.Items.Count; i++)
+                                fillTableInternalReuseCache(backupIndex, i);
 
-                            if (j != artworkRow)
-                            {
-                                if (tagValue != null)
-                                    previewTable.Rows[j].Cells[backupCount + 1].Value = tagValue;
-                                else
-                                    previewTable.Rows[j].Cells[backupCount + 1].Value = CtlNoBackupData;
-
-                                if (tagValue == null)
-                                    previewTable.Rows[j].Cells[backupCount + 1].Style.ForeColor = noBackupDataCellForeColor;
-                                else if (tagValue != (string)previewTable.Rows[j].Cells[0].Value)
-                                    previewTable.Rows[j].Cells[backupCount + 1].Style.ForeColor = noBackupDataCellForeColor;
-                            }
-                            else
-                            {
-                                Bitmap artwork;
-
-                                if (tagValue != null)
-                                {
-                                    if (tagValue == string.Empty)
-                                        artwork = emptyArtwork;
-                                    else
-                                        artwork = (Bitmap)typeConverter.ConvertFrom(Convert.FromBase64String(tagValue));
-                                }
-                                else
-                                {
-                                    artwork = MissingArtwork;
-                                }
-
-
-                                previewTable.Rows[j].Cells[backupCount + 1] = (DataGridViewCell)artworkCellTemplate.Clone();
-                                previewTable.Rows[j].Cells[backupCount + 1].Value = artwork;
-                                previewTable.Rows[j].Cells[backupCount + 1].ReadOnly = true;
-
-                                //if (tagValue == TagToolsPlugin.ctlNoBackupData)
-                                //    previewTable.Rows[j].Cells[i + 2].Style.BackColor = noBackupDataCellForeColor;
-                            }
+                            fillTableInternalReuseCacheFinal(backupIndex);
                         }
                     }
                 }
             }
             else
             {
-                if (!System.IO.Directory.Exists(folder))
-                {
-                    MessageBox.Show(this, MsgFolderDoesntExists, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    return;
-                }
-
-
-                SortedDictionary<string, bool> backupGuids = new SortedDictionary<string, bool>();
-
-                foreach (var tempTrackId in trackIds)
-                {
-                    SortedDictionary<string, bool> tempBackupGuids = Plugin.BackupIndex.getBackupGuidsForTrack(libraryName, tempTrackId);
-
-                    foreach (var tempBackupGuid in tempBackupGuids)
-                        backupGuids.AddReplace(tempBackupGuid.Key, false);
-                }
-
-                SortedDictionary<int, string> backupsWithNegativeDates = new SortedDictionary<int, string>();
-
-
-                string[] backupCacheFiles = System.IO.Directory.GetFiles(folder, "*.mbc", includeSubfolders ? System.IO.SearchOption.AllDirectories : System.IO.SearchOption.TopDirectoryOnly);
-
-                BackupCacheType backupCache = new BackupCacheType();
-
-                foreach (string backupCacheFile in backupCacheFiles)
-                {
-                    backupCache = BackupCacheType.Load(GetBackupFilenameWithoutExtension(backupCacheFile));
-
-                    if (backupGuids.Contains(backupCache.guid))
-                    {
-                        int negativeDate = -((backupCache.creationDate.Year * 10000 + backupCache.creationDate.Month * 100 + backupCache.creationDate.Day) * 1000000 +
-                            backupCache.creationDate.Hour * 10000 + backupCache.creationDate.Minute * 100 + backupCache.creationDate.Second);
-
-                        backupsWithNegativeDates.Add(negativeDate, GetBackupFilenameWithoutExtension(backupCacheFile));
-                    }
-                }
-
-
-                baseline = BackupType.Load(GetBackupBaselineFilename(), ".bbl");
-
-                BackupType backup;
-
-                int totalBackupCount = maxBackupCount < backupsWithNegativeDates.Count ? maxBackupCount : backupsWithNegativeDates.Count;
-
-                cachedBackups = new List<BackupType>();
-                cachedBackupFilenames = new List<string>();
-
-                int backupCount = 0;
-                foreach (var backupWithNegativeDate in backupsWithNegativeDates)
-                {
-                    string backupFile = backupWithNegativeDate.Value;
-                    backup = BackupType.LoadIncrementalBackupOnly(backupFile);
-                    cachedBackups.Add(backup);
-
-                    cachedBackupFilenames.Add(backupFile);
-
-                    backupCount++;
-
-                    if (backupCount >= maxBackupCount)
-                        break;
-                }
-
-
-                originalCachedBackups = new List<BackupType>();
-                foreach (var cache in cachedBackups)
-                    originalCachedBackups.Add(cache);
-
-                originalCachedBackupFilenames = new List<string>();
-                foreach (var cache in cachedBackupFilenames)
-                    originalCachedBackupFilenames.Add(cache);
-
-
-                getReallyDisplayedTags(trackIndex);
-
-
-                fillTable(folder, includeSubfolders, maxBackupCount, trackIndex, true);
-
-                if (!SavedSettings.dontPlayCompletedSound)
-                    System.Media.SystemSounds.Asterisk.Play();
+                fillTableFillCache(folder, includeSubfolders, maxBackupCount, trackIndex);
             }
+        }
+
+        private void fillTableInternalReuseCacheFinal(int backupIndex)
+        {
+            var currentBackupTags = backupTags[backupIndex];
+
+            for (int j = 0; j < reallyDisplayedTags.Count; j++)
+            {
+                if (j != artworkRow)
+                {
+                    if (currentBackupTags[0, j] != null)
+                        previewTable.Rows[j].Cells[backupIndex + 1].Value = currentBackupTags[0, j];
+                    else
+                        previewTable.Rows[j].Cells[backupIndex + 1].Value = CtlNoBackupData;
+
+                    if (currentBackupTags[0, j] == null)
+                        previewTable.Rows[j].Cells[backupIndex + 1].Style.ForeColor = noBackupDataCellForeColor;
+                    else if (currentBackupTags[0, j] != (string)previewTable.Rows[j].Cells[0].Value)
+                        previewTable.Rows[j].Cells[backupIndex + 1].Style.ForeColor = noBackupDataCellForeColor;
+                }
+                else
+                {
+                    Bitmap artwork;
+
+                    if (currentBackupTags[0, j] != null)
+                    {
+                        if (currentBackupTags[0, j] == string.Empty)
+                            artwork = emptyArtwork;
+                        else if (currentBackupTags[0, j] == "(Mixed values)") //******
+                            artwork = MissingArtwork; //******
+                        else
+                            artwork = (Bitmap)typeConverter.ConvertFrom(Convert.FromBase64String(currentBackupTags[0, j]));
+                    }
+                    else
+                    {
+                        artwork = MissingArtwork;
+                    }
+
+                    previewTable.Rows[j].Cells[backupIndex + 1] = (DataGridViewCell)artworkCellTemplate.Clone();
+                    previewTable.Rows[j].Cells[backupIndex + 1].Value = artwork;
+                    previewTable.Rows[j].Cells[backupIndex + 1].ReadOnly = true;
+
+                    //if (tagValue == TagToolsPlugin.ctlNoBackupData)
+                    //    previewTable.Rows[j].Cells[i + 2].Style.BackColor = noBackupDataCellForeColor;
+                }
+            }
+        }
+
+        private void fillTableInternalReuseCache(int backupIndex, int trackIndex)
+        {
+            BackupType backup = cachedBackups[backupIndex];
+
+            DataGridViewColumn newColumn = (DataGridViewColumn)columnTemplate.Clone();
+            newColumn.HeaderText = GetBackupDateTime(backup);
+            newColumn.ToolTipText = cachedBackupFilenames[backupIndex];
+            newColumn.Width = defaultColumnWidth;
+
+            previewTable.Columns.Add(newColumn);
+
+            string[,] currentBackupTags;
+            if (backupIndex < backupTags.Count)
+                currentBackupTags = backupTags[backupIndex];
+            else
+                currentBackupTags = new string[trackListComboBox.Items.Count, reallyDisplayedTags.Count];
+
+            for (int j = 0; j < reallyDisplayedTags.Count; j++)
+            {
+                string tagValue = backup.getIncValue(trackIds[trackIndex - 1], reallyDisplayedTags[j], baseline);
+
+                if (currentBackupTags[0, j] == null)
+                    currentBackupTags[0, j] = tagValue;
+                else if (currentBackupTags[0, j] != tagValue)
+                    currentBackupTags[0, j] = "(Mixed values)";//******
+
+                currentBackupTags[trackIndex, j] = tagValue;
+            }
+
+            if (backupIndex >= backupTags.Count)
+                backupTags.Add(currentBackupTags);
+        }
+
+        private void fillTableFillCache(string folder, bool includeSubfolders, int maxBackupCount, int trackIndex)
+        {
+            if (!System.IO.Directory.Exists(folder))
+            {
+                MessageBox.Show(this, MsgFolderDoesntExists, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+
+            SortedDictionary<string, bool> backupGuids = new SortedDictionary<string, bool>();
+
+            foreach (var tempTrackId in trackIds)
+            {
+                SortedDictionary<string, bool> tempBackupGuids = Plugin.BackupIndex.getBackupGuidsForTrack(libraryName, tempTrackId);
+
+                foreach (var tempBackupGuid in tempBackupGuids)
+                    backupGuids.AddReplace(tempBackupGuid.Key, false);
+            }
+
+            SortedDictionary<int, string> backupsWithNegativeDates = new SortedDictionary<int, string>();
+
+
+            string[] backupCacheFiles = System.IO.Directory.GetFiles(folder, "*.mbc", includeSubfolders ? System.IO.SearchOption.AllDirectories : System.IO.SearchOption.TopDirectoryOnly);
+
+            BackupCacheType backupCache = new BackupCacheType();
+
+            foreach (string backupCacheFile in backupCacheFiles)
+            {
+                backupCache = BackupCacheType.Load(GetBackupFilenameWithoutExtension(backupCacheFile));
+
+                if (backupGuids.Contains(backupCache.guid))
+                {
+                    int negativeDate = -((backupCache.creationDate.Year * 10000 + backupCache.creationDate.Month * 100 + backupCache.creationDate.Day) * 1000000 +
+                        backupCache.creationDate.Hour * 10000 + backupCache.creationDate.Minute * 100 + backupCache.creationDate.Second);
+
+                    backupsWithNegativeDates.Add(negativeDate, GetBackupFilenameWithoutExtension(backupCacheFile));
+                }
+            }
+
+
+            baseline = BackupType.Load(GetBackupBaselineFilename(), ".bbl");
+
+            BackupType backup;
+
+            int totalBackupCount = maxBackupCount < backupsWithNegativeDates.Count ? maxBackupCount : backupsWithNegativeDates.Count;
+
+            cachedBackups = new List<BackupType>();
+            cachedBackupFilenames = new List<string>();
+
+            int backupIndex = 0;
+            foreach (var backupWithNegativeDate in backupsWithNegativeDates)
+            {
+                string backupFile = backupWithNegativeDate.Value;
+                backup = BackupType.LoadIncrementalBackupOnly(backupFile);
+                cachedBackups.Add(backup);
+
+                cachedBackupFilenames.Add(backupFile);
+
+                backupIndex++;
+
+                if (backupIndex >= maxBackupCount)
+                    break;
+            }
+
+
+            originalCachedBackups = new List<BackupType>();
+            foreach (var cache in cachedBackups)
+                originalCachedBackups.Add(cache);
+
+            originalCachedBackupFilenames = new List<string>();
+            foreach (var cache in cachedBackupFilenames)
+                originalCachedBackupFilenames.Add(cache);
+
+
+            getReallyDisplayedTags(trackIndex);
+            fillTable(folder, includeSubfolders, maxBackupCount, trackIndex, true);
+
+            if (!SavedSettings.dontPlayCompletedSound)
+                System.Media.SystemSounds.Asterisk.Play();
         }
 
         private void getReallyDisplayedTags(int trackIndex)
@@ -365,7 +450,28 @@ namespace MusicBeePlugin
             foreach (var cache in originalCachedBackupFilenames)
                 cachedBackupFilenames.Add(cache);
 
+            bool[] backupHaveDifferences = null;
 
+            if (trackIndex > 0)
+            {
+                getReallyDisplayedTagsInternal(trackIndex, ref backupHaveDifferences);
+                prepareCleanupCachedBackupsInternal(trackIndex, backupHaveDifferences);
+                cleanupCachedBackupsInternal(backupHaveDifferences);
+            }
+            else
+            {
+                for (int i = 1; i < trackListComboBox.Items.Count; i++)
+                {
+                    getReallyDisplayedTagsInternal(i, ref backupHaveDifferences);
+                    prepareCleanupCachedBackupsInternal(i, backupHaveDifferences);
+                }
+
+                cleanupCachedBackupsInternal(backupHaveDifferences);
+            }
+        }
+
+        private void getReallyDisplayedTagsInternal(int trackIndex, ref bool[] backupHaveDifferences)
+        {
             if (!SavedSettings.dontAutoSelectDisplayedTags)
             {
                 List<int> reallyDisplayedTags2 = new List<int>();
@@ -375,7 +481,7 @@ namespace MusicBeePlugin
                 {
                     for (int i = cachedBackups.Count - 1; i >= 0; i--)
                     {
-                        if (GetFileTag(trackUrls[trackIndex], (MetaDataType)displayedTags[j]) != cachedBackups[i].getIncValue(trackIds[trackIndex], displayedTags[j], baseline))
+                        if (GetFileTag(trackUrls[trackIndex - 1], (MetaDataType)displayedTags[j]) != cachedBackups[i].getIncValue(trackIds[trackIndex - 1], displayedTags[j], baseline))
                         {
                             if (!reallyDisplayedTags2.Contains(displayedTags[j]))
                                 reallyDisplayedTags2.Add(displayedTags[j]);
@@ -385,33 +491,51 @@ namespace MusicBeePlugin
 
 
                 for (int j = reallyDisplayedTags2.Count - 1; j >= 0; j--)
-                    reallyDisplayedTags.Add(reallyDisplayedTags2[j]);
+                {
+                    if (!reallyDisplayedTags.Contains(reallyDisplayedTags2[j]))
+                        reallyDisplayedTags.Add(reallyDisplayedTags2[j]);
+                }
             }
             else
             {
                 for (int j = 0; j < displayedTags.Length; j++)
-                    reallyDisplayedTags.Add(displayedTags[j]);
+                {
+                    if (!reallyDisplayedTags.Contains(displayedTags[j]))
+                        reallyDisplayedTags.Add(displayedTags[j]);
+                }
             }
 
+            backupHaveDifferences = new bool[cachedBackups.Count];
+            for (int k = 0; k < cachedBackups.Count; k++)
+                backupHaveDifferences[k] = false;
+        }
 
+        private void prepareCleanupCachedBackupsInternal(int trackIndex, bool[] backupHaveDifferences)
+        {
             if (!SavedSettings.dontAutoSelectDisplayedTags)
             {
                 for (int i = cachedBackups.Count - 1; i >= 0; i--)
                 {
-                    bool backupHaveDifferences = false;
                     for (int j = displayedTags.Length - 1; j >= 0; j--)
                     {
-                        if (GetFileTag(trackUrls[trackIndex], (MetaDataType)displayedTags[j]) != cachedBackups[i].getIncValue(trackIds[trackIndex], displayedTags[j], baseline))
+                        if (GetFileTag(trackUrls[trackIndex - 1], (MetaDataType)displayedTags[j]) != cachedBackups[i].getIncValue(trackIds[trackIndex - 1], displayedTags[j], baseline))
                         {
-                            backupHaveDifferences = true;
+                            backupHaveDifferences[i] = true;
                             break;
                         }
                     }
+                }
+            }
+        }
 
-                    if (!backupHaveDifferences)
-                    {
+        private void cleanupCachedBackupsInternal(bool[] backupHaveDifferences)
+        {
+            if (!SavedSettings.dontAutoSelectDisplayedTags)
+            {
+                for (int i = cachedBackups.Count - 1; i >= 0; i--)
+                {
+                    if (!backupHaveDifferences[i])
                         cachedBackups.RemoveAt(i);
-                    }
                 }
             }
         }
@@ -422,24 +546,33 @@ namespace MusicBeePlugin
             SavedSettings.displayedTags = displayedTags;
             SavedSettings.rowHeadersWidth = rowHeadersWidth;
             SavedSettings.defaultColumnWidth = defaultColumnWidth;
-            //SavedSettings.DontAutoSelectDisplayedTags = !AutoSelectTagsCheckBox.Checked;
+            //SavedSettings.DontAutoSelectDisplayedTags = !autoSelectTagsCheckBox.Checked;
 
             searchFolderTextBox.Items.CopyTo(SavedSettings.lastSelectedFolders, 0);
 
             TagToolsPlugin.SaveSettings();
         }
 
-        private void buttonOK_Click(object sender, EventArgs e)
+        private void saveTags(int trackIndex)
         {
             for (int j = 0; j < reallyDisplayedTags.Count; j++)
+                SetFileTag(trackUrls[trackIndex - 1], (MetaDataType)reallyDisplayedTags[j], currentTags[trackIndex, j]);
+
+            CommitTagsToFile(trackUrls[trackIndex - 1]);
+        }
+
+        private void buttonOK_Click(object sender, EventArgs e)
+        {
+            if (trackListComboBox.SelectedIndex > 0)
             {
-                if (j == artworkRow)
-                    SetFileTag(trackUrls[trackListComboBox.SelectedIndex], (MetaDataType)reallyDisplayedTags[j], base64Artwork);
-                else
-                    SetFileTag(trackUrls[trackListComboBox.SelectedIndex], (MetaDataType)reallyDisplayedTags[j], (string)previewTable.Rows[j].Cells[0].Value);
+                saveTags(trackListComboBox.SelectedIndex);
+            }
+            else
+            {
+                for (int i = 1; i < trackListComboBox.Items.Count; i++)
+                    saveTags(i);
             }
 
-            CommitTagsToFile(trackUrls[trackListComboBox.SelectedIndex]);
             MbApiInterface.MB_RefreshPanels();
         }
 
@@ -470,7 +603,7 @@ namespace MusicBeePlugin
             fillTable(searchFolderTextBox.Text, false, (int)numberOfBackupsNumericUpDown.Value, trackListComboBox.SelectedIndex, false);
         }
 
-        private void restoreSelectedButton_Click(object sender, EventArgs e)
+        private void restoreSelected(int trackIndex)
         {
             for (int j = 0; j < previewTable.RowCount; j++)
             {
@@ -478,10 +611,46 @@ namespace MusicBeePlugin
                 {
                     if (j == artworkRow)
                     {
-                        if (previewTable.Rows[j].Cells[i].Selected && cachedBackups[i - 1].getIncValue(trackIds[trackListComboBox.SelectedIndex], reallyDisplayedTags[j], baseline) != null)
+                        if (previewTable.Rows[j].Cells[i].Selected && cachedBackups[i - 1].getIncValue(trackIds[trackIndex - 1], reallyDisplayedTags[j], baseline) != null)
+                        {
+                            currentTags[trackIndex, j] = backupTags[i - 1][trackIndex, j];
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        if (previewTable.Rows[j].Cells[i].Selected && (string)previewTable.Rows[j].Cells[i].Value != CtlNoBackupData)
+                        {
+                            currentTags[trackIndex, j] = backupTags[i - 1][trackIndex, j];
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void restoreSelectedButton_Click(object sender, EventArgs e)
+        {
+            if (trackListComboBox.SelectedIndex > 0)
+            {
+                restoreSelected(trackListComboBox.SelectedIndex);
+            }
+            else
+            {
+                for (int i = 1; i < trackListComboBox.Items.Count; i++)
+                    restoreSelected(i);
+            }
+
+
+            for (int j = 0; j < previewTable.RowCount; j++)
+            {
+                for (int i = 1; i < previewTable.ColumnCount; i++)
+                {
+                    if (j == artworkRow)
+                    {
+                        if (previewTable.Rows[j].Cells[i].Selected && previewTable.Rows[j].Cells[i].Value != emptyArtwork)
                         {
                             previewTable.Rows[j].Cells[0].Value = previewTable.Rows[j].Cells[i].Value;
-                            base64Artwork = cachedBackups[i - 1].getIncValue(trackIds[trackListComboBox.SelectedIndex], reallyDisplayedTags[j], baseline);
                             break;
                         }
                     }
@@ -505,9 +674,9 @@ namespace MusicBeePlugin
 
         private void previewTable_RowHeadersWidthChanged(object sender, EventArgs e)
         {
-            if (rememberColumnasDefaulltWidthCheckBox.Checked)
+            if (rememberColumnAsDefaultWidthCheckBox.Checked)
             {
-                //rememberColumnasDefaulltWidthCheckBox.Checked = false;
+                //rememberColumnAsDefaultWidthCheckBox.Checked = false;
 
                 rowHeadersWidth = previewTable.RowHeadersWidth;
             }
@@ -515,9 +684,9 @@ namespace MusicBeePlugin
 
         private void previewTable_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
         {
-            if (rememberColumnasDefaulltWidthCheckBox.Checked)
+            if (rememberColumnAsDefaultWidthCheckBox.Checked)
             {
-                //rememberColumnasDefaulltWidthCheckBox.Checked = false;
+                //rememberColumnAsDefaultWidthCheckBox.Checked = false;
 
                 for (int i = 0; i < previewTable.ColumnCount; i++)
                 {
@@ -594,33 +763,29 @@ namespace MusicBeePlugin
         {
             for (int j = 0; j < reallyDisplayedTags.Count; j++)
             {
-                int libIndex = 0;
-                foreach (var tagId in displayedTags)
-                {
-                    if (tagId == reallyDisplayedTags[j])
-                        libIndex = j;
-                }
+                for (int i = 0; i < currentTags.GetLength(0); i++)
+                    currentTags[i, j] = libraryTags[i, j];
 
-                previewTable.Rows[j].Cells[0].Value = libraryTags[j];
+                previewTable.Rows[j].Cells[0].Value = libraryTags[0, j];
 
 
-                if ((MetaDataType)displayedTags[j] == MetaDataType.Artwork)
+                if ((MetaDataType)reallyDisplayedTags[j] == MetaDataType.Artwork)
                 {
                     Bitmap artwork;
 
-                    if (libraryTags[j] == string.Empty)
+                    if (libraryTags[0, j] == string.Empty)
                         artwork = emptyArtwork;
+                    else if (libraryTags[0, j] == "(Mixed values)") //******
+                        artwork = MissingArtwork; //******
                     else
-                        artwork = (Bitmap)typeConverter.ConvertFrom(Convert.FromBase64String(libraryTags[j]));
+                        artwork = (Bitmap)typeConverter.ConvertFrom(Convert.FromBase64String(libraryTags[0, j]));
 
-
-                    base64Artwork = libraryTags[j];
 
                     previewTable.Rows[j].Cells[0].Value = artwork;
                 }
                 else
                 {
-                    previewTable.Rows[j].Cells[0].Value = libraryTags[j];
+                    previewTable.Rows[j].Cells[0].Value = libraryTags[0, j];
                 }
 
             }
@@ -634,24 +799,21 @@ namespace MusicBeePlugin
 
         private void TagHistoryPlugin_Shown(object sender, EventArgs e)
         {
-            try
-            {
-                previewTable.ColumnCount = 1;
-                Refresh();
-                fillTable(searchFolderTextBox.Text, false, (int)numberOfBackupsNumericUpDown.Value, 0, false);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(this, ex.Message, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Close();
-            }
+            previewTable.ColumnCount = 1;
+            Refresh();
+            fillTable(searchFolderTextBox.Text, false, (int)numberOfBackupsNumericUpDown.Value, 0, false);
         }
 
-        private void AutoSelectTagsCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void TagHistoryCommand_Load(object sender, EventArgs e)
         {
-            SavedSettings.dontAutoSelectDisplayedTags = !AutoSelectTagsCheckBox.Checked;
+            placeholderLabel3.Visible = false;
+        }
 
-            if (AutoSelectTagsCheckBox.Checked)
+        private void autoSelectTagsCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            SavedSettings.dontAutoSelectDisplayedTags = !autoSelectTagsCheckBox.Checked;
+
+            if (autoSelectTagsCheckBox.Checked)
             {
                 selectTagsButton.Enable(false);
 
@@ -678,9 +840,9 @@ namespace MusicBeePlugin
             fillTable(searchFolderTextBox.Text, false, (int)numberOfBackupsNumericUpDown.Value, trackListComboBox.SelectedIndex, false);
         }
 
-        private void rememberColumnasDefaulltWidthCheckBoxLabel_Click(object sender, EventArgs e)
+        private void rememberColumnAsDefaultWidthCheckBoxLabel_Click(object sender, EventArgs e)
         {
-            rememberColumnasDefaulltWidthCheckBox.Checked = !rememberColumnasDefaulltWidthCheckBox.Checked;
+            rememberColumnAsDefaultWidthCheckBox.Checked = !rememberColumnAsDefaultWidthCheckBox.Checked;
         }
     }
 }

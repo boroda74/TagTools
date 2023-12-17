@@ -32,7 +32,7 @@
             this.selectTagsButton = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.rememberColumnAsDefaultWidthCheckBox = new System.Windows.Forms.CheckBox();
-            this.AutoSelectTagsCheckBox = new System.Windows.Forms.CheckBox();
+            this.autoSelectTagsCheckBox = new System.Windows.Forms.CheckBox();
             this.rememberColumnAsDefaultWidthCheckBoxLabel = new System.Windows.Forms.Label();
             this.buttonCopy = new System.Windows.Forms.Button();
             this.buttonPaste = new System.Windows.Forms.Button();
@@ -48,7 +48,6 @@
             resources.ApplyResources(this.buttonOK, "buttonOK");
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Tag = "#buttonCancel";
-            this.toolTip1.SetToolTip(this.buttonOK, resources.GetString("buttonOK.ToolTip"));
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // buttonCancel
@@ -56,15 +55,14 @@
             resources.ApplyResources(this.buttonCancel, "buttonCancel");
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Tag = "#toolsPanel@non-defaultable";
-            this.toolTip1.SetToolTip(this.buttonCancel, resources.GetString("buttonCancel.ToolTip"));
+            this.buttonCancel.Tag = "#toolsPanel@non-defaultable@pinned-to-parent";
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // previewTable
             // 
-            resources.ApplyResources(this.previewTable, "previewTable");
             this.previewTable.AllowUserToAddRows = false;
             this.previewTable.AllowUserToDeleteRows = false;
+            resources.ApplyResources(this.previewTable, "previewTable");
             this.previewTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.previewTable.BackgroundColor = System.Drawing.SystemColors.Window;
             this.previewTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -98,9 +96,9 @@
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.previewTable.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.previewTable.RowHeadersVisible = false;
             this.previewTable.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.previewTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.toolTip1.SetToolTip(this.previewTable, resources.GetString("previewTable.ToolTip"));
             this.previewTable.RowHeadersWidthChanged += new System.EventHandler(this.previewTable_RowHeadersWidthChanged);
             this.previewTable.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.previewTable_ColumnHeaderMouseClick);
             this.previewTable.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.previewTable_ColumnWidthChanged);
@@ -143,7 +141,7 @@
             // 
             resources.ApplyResources(this.selectTagsButton, "selectTagsButton");
             this.selectTagsButton.Name = "selectTagsButton";
-            this.selectTagsButton.Tag = "@non-defaultable";
+            this.selectTagsButton.Tag = "#rememberColumnAsDefaultWidthCheckBox@non-defaultable";
             this.toolTip1.SetToolTip(this.selectTagsButton, resources.GetString("selectTagsButton.ToolTip"));
             this.selectTagsButton.Click += new System.EventHandler(this.selectTagsButton_Click);
             // 
@@ -160,25 +158,26 @@
             this.rememberColumnAsDefaultWidthCheckBox.Tag = "#rememberColumnAsDefaultWidthCheckBoxLabel";
             this.toolTip1.SetToolTip(this.rememberColumnAsDefaultWidthCheckBox, resources.GetString("rememberColumnAsDefaultWidthCheckBox.ToolTip"));
             // 
-            // AutoSelectTagsCheckBox
+            // autoSelectTagsCheckBox
             // 
-            resources.ApplyResources(this.AutoSelectTagsCheckBox, "AutoSelectTagsCheckBox");
-            this.AutoSelectTagsCheckBox.Name = "AutoSelectTagsCheckBox";
-            this.AutoSelectTagsCheckBox.Tag = "#placeholderLabel";
-            this.toolTip1.SetToolTip(this.AutoSelectTagsCheckBox, resources.GetString("AutoSelectTagsCheckBox.ToolTip"));
-            this.AutoSelectTagsCheckBox.CheckedChanged += new System.EventHandler(this.AutoSelectTagsCheckBox_CheckedChanged);
+            resources.ApplyResources(this.autoSelectTagsCheckBox, "autoSelectTagsCheckBox");
+            this.autoSelectTagsCheckBox.Name = "autoSelectTagsCheckBox";
+            this.autoSelectTagsCheckBox.Tag = "#placeholderLabel";
+            this.toolTip1.SetToolTip(this.autoSelectTagsCheckBox, resources.GetString("autoSelectTagsCheckBox.ToolTip"));
+            this.autoSelectTagsCheckBox.CheckedChanged += new System.EventHandler(this.autoSelectTagsCheckBox_CheckedChanged);
             // 
             // rememberColumnAsDefaultWidthCheckBoxLabel
             // 
             resources.ApplyResources(this.rememberColumnAsDefaultWidthCheckBoxLabel, "rememberColumnAsDefaultWidthCheckBoxLabel");
             this.rememberColumnAsDefaultWidthCheckBoxLabel.Name = "rememberColumnAsDefaultWidthCheckBoxLabel";
             this.toolTip1.SetToolTip(this.rememberColumnAsDefaultWidthCheckBoxLabel, resources.GetString("rememberColumnAsDefaultWidthCheckBoxLabel.ToolTip"));
-            this.rememberColumnAsDefaultWidthCheckBoxLabel.Click += new System.EventHandler(this.rememberColumnasDefaulltWidthCheckBoxLabel_Click);
+            this.rememberColumnAsDefaultWidthCheckBoxLabel.Click += new System.EventHandler(this.rememberColumnAsDefaultWidthCheckBoxLabel_Click);
             // 
             // buttonCopy
             // 
             resources.ApplyResources(this.buttonCopy, "buttonCopy");
             this.buttonCopy.Name = "buttonCopy";
+            this.buttonCopy.Tag = "@square-control";
             this.toolTip1.SetToolTip(this.buttonCopy, resources.GetString("buttonCopy.ToolTip"));
             this.buttonCopy.Click += new System.EventHandler(this.buttonCopy_Click);
             // 
@@ -186,6 +185,7 @@
             // 
             resources.ApplyResources(this.buttonPaste, "buttonPaste");
             this.buttonPaste.Name = "buttonPaste";
+            this.buttonPaste.Tag = "@square-control";
             this.toolTip1.SetToolTip(this.buttonPaste, resources.GetString("buttonPaste.ToolTip"));
             this.buttonPaste.Click += new System.EventHandler(this.buttonPaste_Click);
             // 
@@ -193,6 +193,7 @@
             // 
             resources.ApplyResources(this.buttonClear, "buttonClear");
             this.buttonClear.Name = "buttonClear";
+            this.buttonClear.Tag = "@square-control";
             this.toolTip1.SetToolTip(this.buttonClear, resources.GetString("buttonClear.ToolTip"));
             this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
             // 
@@ -207,17 +208,14 @@
             this.toolsPanel.Controls.Add(this.rememberColumnAsDefaultWidthCheckBoxLabel);
             this.toolsPanel.Controls.Add(this.rememberColumnAsDefaultWidthCheckBox);
             this.toolsPanel.Controls.Add(this.selectTagsButton);
+            this.toolsPanel.Controls.Add(this.autoSelectTagsCheckBox);
             this.toolsPanel.Controls.Add(this.placeholderLabel);
-            this.toolsPanel.Controls.Add(this.AutoSelectTagsCheckBox);
             this.toolsPanel.Name = "toolsPanel";
-            this.toolTip1.SetToolTip(this.toolsPanel, resources.GetString("toolsPanel.ToolTip"));
             // 
             // placeholderLabel
             // 
             resources.ApplyResources(this.placeholderLabel, "placeholderLabel");
             this.placeholderLabel.Name = "placeholderLabel";
-            this.placeholderLabel.Tag = " ";
-            this.toolTip1.SetToolTip(this.placeholderLabel, resources.GetString("placeholderLabel.ToolTip"));
             // 
             // CompareTracksCommand
             // 
@@ -227,8 +225,8 @@
             this.Controls.Add(this.toolsPanel);
             this.Controls.Add(this.previewTable);
             this.Name = "CompareTracksCommand";
-            this.Tag = "@fixed-min-width";
-            this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
+            this.Tag = "";
+            this.Load += new System.EventHandler(this.CompareTracksCommand_Load);
             this.Shown += new System.EventHandler(this.TagHistoryPlugin_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).EndInit();
             this.toolsPanel.ResumeLayout(false);
@@ -247,7 +245,7 @@
         private System.Windows.Forms.Button selectTagsButton;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.CheckBox rememberColumnAsDefaultWidthCheckBox;
-        private System.Windows.Forms.CheckBox AutoSelectTagsCheckBox;
+        private System.Windows.Forms.CheckBox autoSelectTagsCheckBox;
         private System.Windows.Forms.Button buttonCopy;
         private System.Windows.Forms.Button buttonPaste;
         private System.Windows.Forms.Button buttonClear;

@@ -45,6 +45,7 @@ namespace MusicBeePlugin
         {
             base.initializeForm();
 
+
             //Setting themed images
             buttonDeleteSaved.Image = ThemedBitmapAddRef(this, ButtonRemoveImage);
             autoApplyPictureBox.Image = ThemedBitmapAddRef(this, AutoAppliedPresetsAccent);
@@ -60,7 +61,26 @@ namespace MusicBeePlugin
             FillListByTagNames(((DataGridViewComboBoxColumn)templateTable.Columns[0]).Items, true, false, false);
 
 
+            templateTable.EnableHeadersVisualStyles = !UseMusicBeeFontSkinColors;
+
+            templateTable.BackgroundColor = UnchangedCellStyle.BackColor;
+            templateTable.DefaultCellStyle = UnchangedCellStyle;
+
+            templateTable.Columns[1].HeaderCell.Style = HeaderCellStyle;
+            templateTable.Columns[2].HeaderCell.Style = HeaderCellStyle;
+            templateTable.Columns[3].HeaderCell.Style = HeaderCellStyle;
+            templateTable.Columns[4].HeaderCell.Style = HeaderCellStyle;
+
+            templateTable.Columns[1].Width = (int)Math.Round(templateTable.Columns[1].Width * hDpiFontScaling);
+            templateTable.Columns[2].Width = (int)Math.Round(templateTable.Columns[1].Width * hDpiFontScaling);
+
+            previewTable.EnableHeadersVisualStyles = !UseMusicBeeFontSkinColors;
+
+            previewTable.BackgroundColor = UnchangedCellStyle.BackColor;
+            previewTable.DefaultCellStyle = UnchangedCellStyle;
+
             DatagridViewCheckBoxHeaderCell cbHeader = new DatagridViewCheckBoxHeaderCell();
+            cbHeader.Style = HeaderCellStyle;
             cbHeader.setState(true);
             cbHeader.OnCheckBoxClicked += new CheckBoxClickedHandler(cbHeader_OnCheckBoxClicked);
 
@@ -77,8 +97,13 @@ namespace MusicBeePlugin
 
             previewTable.Columns.Insert(0, colCB);
 
+            previewTable.Columns[1].HeaderCell.Style = HeaderCellStyle;
+            previewTable.Columns[2].HeaderCell.Style = HeaderCellStyle;
+            previewTable.Columns[3].HeaderCell.Style = HeaderCellStyle;
+
             addRowToTable = previewTable_AddRowToTable;
             processRowOfTable = previewTable_ProcessRowOfTable;
+
 
             customMSR = null;
 
@@ -102,7 +127,15 @@ namespace MusicBeePlugin
             enableDisablePreviewOptionControls(true, true);
             enableQueryingOrUpdatingButtons();
 
-            button_GotFocus(this.AcceptButton, null); //Let's mark active button
+            button_GotFocus(AcceptButton, null); //Let's mark active button
+        }
+
+        public override void preMoveScaleControl(Control control)
+        {
+            if (control.Name == "loadComboBox")
+                loadComboBox.Width = loadComboBox.Width - (int)Math.Round(7 * loadComboBox.Margin.Left - 7 * loadComboBox.Margin.Left / hDpiFontScaling);
+
+            base.preMoveScaleControl(control);
         }
 
         private void previewTable_AddRowToTable(string[] row)
@@ -1089,34 +1122,49 @@ namespace MusicBeePlugin
 
             if (value.Item1 != 0)
             {
-                templateTable.Columns[0].Width = (int)(value.Item1 * dpiScaleFactor);
-                templateTable.Columns[3].Width = (int)(value.Item2 * dpiScaleFactor);
-                templateTable.Columns[4].Width = (int)(value.Item3 * dpiScaleFactor);
+                templateTable.Columns[0].Width = (int)(value.Item1 * hDpiFontScaling);
+                templateTable.Columns[3].Width = (int)(value.Item2 * hDpiFontScaling);
+                templateTable.Columns[4].Width = (int)(value.Item3 * hDpiFontScaling);
 
-                previewTable.Columns[0].Width = (int)(value.Item5 * dpiScaleFactor);
-                previewTable.Columns[1].Width = (int)(value.Item6 * dpiScaleFactor);
-                previewTable.Columns[2].Width = (int)(value.Item7 * dpiScaleFactor);
+                previewTable.Columns[0].Width = (int)(value.Item5 * hDpiFontScaling);
+                previewTable.Columns[1].Width = (int)(value.Item6 * hDpiFontScaling);
+                previewTable.Columns[2].Width = (int)(value.Item7 * hDpiFontScaling);
             }
             else
             {
-                templateTable.Columns[0].Width = (int)(templateTable.Columns[0].Width * dpiScaleFactor);
-                templateTable.Columns[3].Width = (int)(templateTable.Columns[3].Width * dpiScaleFactor);
-                templateTable.Columns[4].Width = (int)(templateTable.Columns[4].Width * dpiScaleFactor);
+                templateTable.Columns[0].Width = (int)(templateTable.Columns[0].Width * hDpiFontScaling);
+                templateTable.Columns[3].Width = (int)(templateTable.Columns[3].Width * hDpiFontScaling);
+                templateTable.Columns[4].Width = (int)(templateTable.Columns[4].Width * hDpiFontScaling);
 
-                previewTable.Columns[0].Width = (int)(previewTable.Columns[0].Width * dpiScaleFactor);
-                previewTable.Columns[1].Width = (int)(previewTable.Columns[1].Width * dpiScaleFactor);
-                previewTable.Columns[2].Width = (int)(previewTable.Columns[2].Width * dpiScaleFactor);
+                previewTable.Columns[0].Width = (int)(previewTable.Columns[0].Width * hDpiFontScaling);
+                previewTable.Columns[1].Width = (int)(previewTable.Columns[1].Width * hDpiFontScaling);
+                previewTable.Columns[2].Width = (int)(previewTable.Columns[2].Width * hDpiFontScaling);
             }
 
 
             ignoreSplitterMovedEvent = true;
 
-            if (value.Item4 != 0)
-                splitContainer1.SplitterDistance = (int)(value.Item4 * dpiScaleFactor);
-            else
-                splitContainer1.SplitterDistance = (int)(splitContainer1.SplitterDistance * dpiScaleFactor);
+            //Let's scale split containers manually (auto-scaling is improper)
+            foreach (var scsa in splitContainersScalingAttributes)
+            {
+                var sc = scsa.splitContainer;
+                sc.Panel1MinSize = (int)(scsa.panel1MinSize * vDpiFontScaling);
+                sc.Panel2MinSize = (int)(scsa.panel2MinSize * vDpiFontScaling);
+
+                if (value.Item4 != 0)
+                {
+                    sc.SplitterDistance = (int)(value.Item4 * vDpiFontScaling);
+                }
+                else
+                {
+                    sc.SplitterDistance = (int)(scsa.splitterDistance * vDpiFontScaling);
+                }
+            }
 
             ignoreSplitterMovedEvent = false;
+
+
+            placeholderLabel1.Visible = false;
         }
 
         private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
