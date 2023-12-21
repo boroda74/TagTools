@@ -58,7 +58,7 @@ namespace MusicBeePlugin
             FillListByTagNames(sourceTagList.Items, true, false, false);
             sourceTagList.Text = SavedSettings.copySourceTagName;
 
-            FillListByTagNames(((DataGridViewComboBoxColumn)templateTable.Columns[0]).Items, true, false, false);
+            FillListByTagNames((templateTable.Columns[0] as DataGridViewComboBoxColumn).Items, true, false, false);
 
 
             templateTable.EnableHeadersVisualStyles = !UseMusicBeeFontSkinColors;
@@ -1122,23 +1122,23 @@ namespace MusicBeePlugin
 
             if (value.Item1 != 0)
             {
-                templateTable.Columns[0].Width = (int)(value.Item1 * hDpiFontScaling);
-                templateTable.Columns[3].Width = (int)(value.Item2 * hDpiFontScaling);
-                templateTable.Columns[4].Width = (int)(value.Item3 * hDpiFontScaling);
+                templateTable.Columns[0].Width = (int)Math.Round(value.Item1 * hDpiFontScaling);
+                templateTable.Columns[3].Width = (int)Math.Round(value.Item2 * hDpiFontScaling);
+                templateTable.Columns[4].Width = (int)Math.Round(value.Item3 * hDpiFontScaling);
 
-                previewTable.Columns[0].Width = (int)(value.Item5 * hDpiFontScaling);
-                previewTable.Columns[1].Width = (int)(value.Item6 * hDpiFontScaling);
-                previewTable.Columns[2].Width = (int)(value.Item7 * hDpiFontScaling);
+                previewTable.Columns[0].Width = (int)Math.Round(value.Item5 * hDpiFontScaling);
+                previewTable.Columns[1].Width = (int)Math.Round(value.Item6 * hDpiFontScaling);
+                previewTable.Columns[2].Width = (int)Math.Round(value.Item7 * hDpiFontScaling);
             }
             else
             {
-                templateTable.Columns[0].Width = (int)(templateTable.Columns[0].Width * hDpiFontScaling);
-                templateTable.Columns[3].Width = (int)(templateTable.Columns[3].Width * hDpiFontScaling);
-                templateTable.Columns[4].Width = (int)(templateTable.Columns[4].Width * hDpiFontScaling);
+                templateTable.Columns[0].Width = (int)Math.Round(templateTable.Columns[0].Width * hDpiFontScaling);
+                templateTable.Columns[3].Width = (int)Math.Round(templateTable.Columns[3].Width * hDpiFontScaling);
+                templateTable.Columns[4].Width = (int)Math.Round(templateTable.Columns[4].Width * hDpiFontScaling);
 
-                previewTable.Columns[0].Width = (int)(previewTable.Columns[0].Width * hDpiFontScaling);
-                previewTable.Columns[1].Width = (int)(previewTable.Columns[1].Width * hDpiFontScaling);
-                previewTable.Columns[2].Width = (int)(previewTable.Columns[2].Width * hDpiFontScaling);
+                previewTable.Columns[0].Width = (int)Math.Round(previewTable.Columns[0].Width * hDpiFontScaling);
+                previewTable.Columns[1].Width = (int)Math.Round(previewTable.Columns[1].Width * hDpiFontScaling);
+                previewTable.Columns[2].Width = (int)Math.Round(previewTable.Columns[2].Width * hDpiFontScaling);
             }
 
 
@@ -1148,16 +1148,16 @@ namespace MusicBeePlugin
             foreach (var scsa in splitContainersScalingAttributes)
             {
                 var sc = scsa.splitContainer;
-                sc.Panel1MinSize = (int)(scsa.panel1MinSize * vDpiFontScaling);
-                sc.Panel2MinSize = (int)(scsa.panel2MinSize * vDpiFontScaling);
+                sc.Panel1MinSize = (int)Math.Round(scsa.panel1MinSize * vDpiFontScaling);
+                sc.Panel2MinSize = (int)Math.Round(scsa.panel2MinSize * vDpiFontScaling);
 
                 if (value.Item4 != 0)
                 {
-                    sc.SplitterDistance = (int)(value.Item4 * vDpiFontScaling);
+                    sc.SplitterDistance = (int)Math.Round(value.Item4 * vDpiFontScaling);
                 }
                 else
                 {
-                    sc.SplitterDistance = (int)(scsa.splitterDistance * vDpiFontScaling);
+                    sc.SplitterDistance = (int)Math.Round(scsa.splitterDistance * vDpiFontScaling);
                 }
             }
 

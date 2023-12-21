@@ -1729,13 +1729,13 @@
     <value>320, 21</value>
   </data>
   <data name="allowAsrLrPresetAutoexecutionCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>211, 15</value>
+    <value>203, 15</value>
   </data>
   <data name="allowAsrLrPresetAutoexecutionCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="allowAsrLrPresetAutoexecutionCheckBoxLabel.Text" xml:space="preserve">
-    <value>Allow ASR/LR presets auto-execution *</value>
+    <value>Allow ASR/LR presets auto-execution</value>
   </data>
   <data name="&gt;&gt;allowAsrLrPresetAutoexecutionCheckBoxLabel.Name" xml:space="preserve">
     <value>allowAsrLrPresetAutoexecutionCheckBoxLabel</value>

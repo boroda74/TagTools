@@ -55,14 +55,12 @@
             this.autobackupFolderTextBox.Name = "autobackupFolderTextBox";
             this.autobackupFolderTextBox.ReadOnly = true;
             this.autobackupFolderTextBox.Tag = "#browseButton";
-            this.toolTip1.SetToolTip(this.autobackupFolderTextBox, resources.GetString("autobackupFolderTextBox.ToolTip"));
             // 
             // browseButton
             // 
             resources.ApplyResources(this.browseButton, "browseButton");
             this.browseButton.Name = "browseButton";
             this.browseButton.Tag = "#AutoBackupSettings@non-defaultable";
-            this.toolTip1.SetToolTip(this.browseButton, resources.GetString("browseButton.ToolTip"));
             this.browseButton.Click += new System.EventHandler(this.browseButton_Click);
             // 
             // autobackupFolderLabel
@@ -70,21 +68,18 @@
             resources.ApplyResources(this.autobackupFolderLabel, "autobackupFolderLabel");
             this.autobackupFolderLabel.Name = "autobackupFolderLabel";
             this.autobackupFolderLabel.Tag = "";
-            this.toolTip1.SetToolTip(this.autobackupFolderLabel, resources.GetString("autobackupFolderLabel.ToolTip"));
             // 
             // autobackupPrefixLabel
             // 
             resources.ApplyResources(this.autobackupPrefixLabel, "autobackupPrefixLabel");
             this.autobackupPrefixLabel.Name = "autobackupPrefixLabel";
             this.autobackupPrefixLabel.Tag = "#autobackupPrefixTextBox";
-            this.toolTip1.SetToolTip(this.autobackupPrefixLabel, resources.GetString("autobackupPrefixLabel.ToolTip"));
             // 
             // autobackupPrefixTextBox
             // 
             resources.ApplyResources(this.autobackupPrefixTextBox, "autobackupPrefixTextBox");
             this.autobackupPrefixTextBox.Name = "autobackupPrefixTextBox";
             this.autobackupPrefixTextBox.Tag = "#AutoBackupSettings";
-            this.toolTip1.SetToolTip(this.autobackupPrefixTextBox, resources.GetString("autobackupPrefixTextBox.ToolTip"));
             // 
             // autobackupCheckBox
             // 
@@ -104,14 +99,12 @@
             0});
             this.autobackupNumericUpDown.Name = "autobackupNumericUpDown";
             this.autobackupNumericUpDown.Tag = "#autobackupPeriodLabel";
-            this.toolTip1.SetToolTip(this.autobackupNumericUpDown, resources.GetString("autobackupNumericUpDown.ToolTip"));
             // 
             // autobackupPeriodLabel
             // 
             resources.ApplyResources(this.autobackupPeriodLabel, "autobackupPeriodLabel");
             this.autobackupPeriodLabel.Name = "autobackupPeriodLabel";
             this.autobackupPeriodLabel.Tag = "";
-            this.toolTip1.SetToolTip(this.autobackupPeriodLabel, resources.GetString("autobackupPeriodLabel.ToolTip"));
             // 
             // autodeleteOldCheckBox
             // 
@@ -131,7 +124,6 @@
             0});
             this.numberOfDaysNumericUpDown.Name = "numberOfDaysNumericUpDown";
             this.numberOfDaysNumericUpDown.Tag = "#autodeleteOldLabel";
-            this.toolTip1.SetToolTip(this.numberOfDaysNumericUpDown, resources.GetString("numberOfDaysNumericUpDown.ToolTip"));
             // 
             // autodeleteManyCheckBox
             // 
@@ -150,13 +142,11 @@
             0,
             0});
             this.numberOfFilesNumericUpDown.Name = "numberOfFilesNumericUpDown";
-            this.toolTip1.SetToolTip(this.numberOfFilesNumericUpDown, resources.GetString("numberOfFilesNumericUpDown.ToolTip"));
             // 
             // autodeleteOldLabel
             // 
             resources.ApplyResources(this.autodeleteOldLabel, "autodeleteOldLabel");
             this.autodeleteOldLabel.Name = "autodeleteOldLabel";
-            this.toolTip1.SetToolTip(this.autodeleteOldLabel, resources.GetString("autodeleteOldLabel.ToolTip"));
             // 
             // buttonClose
             // 
@@ -164,7 +154,6 @@
             this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Tag = "#AutoBackupSettings@non-defaultable";
-            this.toolTip1.SetToolTip(this.buttonClose, resources.GetString("buttonClose.ToolTip"));
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
             // buttonOK
@@ -172,7 +161,6 @@
             resources.ApplyResources(this.buttonOK, "buttonOK");
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Tag = "#buttonClose";
-            this.toolTip1.SetToolTip(this.buttonOK, resources.GetString("buttonOK.ToolTip"));
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // backupArtworksCheckBox
@@ -231,33 +219,33 @@
             resources.ApplyResources(this.dontTryToGuessLibraryNameCheckBoxLabel, "dontTryToGuessLibraryNameCheckBoxLabel");
             this.dontTryToGuessLibraryNameCheckBoxLabel.Name = "dontTryToGuessLibraryNameCheckBoxLabel";
             this.toolTip1.SetToolTip(this.dontTryToGuessLibraryNameCheckBoxLabel, resources.GetString("dontTryToGuessLibraryNameCheckBoxLabel.ToolTip"));
+            this.dontTryToGuessLibraryNameCheckBoxLabel.Click += new System.EventHandler(this.dontTryToGuessLibraryNameCheckBoxLabel_Click);
             // 
             // backupArtworksCheckBoxLabel
             // 
             resources.ApplyResources(this.backupArtworksCheckBoxLabel, "backupArtworksCheckBoxLabel");
             this.backupArtworksCheckBoxLabel.Name = "backupArtworksCheckBoxLabel";
             this.toolTip1.SetToolTip(this.backupArtworksCheckBoxLabel, resources.GetString("backupArtworksCheckBoxLabel.ToolTip"));
+            this.backupArtworksCheckBoxLabel.Click += new System.EventHandler(this.backupArtworksCheckBoxLabel_Click);
             // 
             // dontSkipAutobackupsIfPlayCountsChangedCheckBox
             // 
             resources.ApplyResources(this.dontSkipAutobackupsIfPlayCountsChangedCheckBox, "dontSkipAutobackupsIfPlayCountsChangedCheckBox");
             this.dontSkipAutobackupsIfPlayCountsChangedCheckBox.Name = "dontSkipAutobackupsIfPlayCountsChangedCheckBox";
             this.dontSkipAutobackupsIfPlayCountsChangedCheckBox.Tag = "#dontSkipAutobackupsIfPlayCountsChangedLabel";
-            this.toolTip1.SetToolTip(this.dontSkipAutobackupsIfPlayCountsChangedCheckBox, resources.GetString("dontSkipAutobackupsIfPlayCountsChangedCheckBox.ToolTip"));
             // 
             // dontSkipAutobackupsIfPlayCountsChangedLabel
             // 
             resources.ApplyResources(this.dontSkipAutobackupsIfPlayCountsChangedLabel, "dontSkipAutobackupsIfPlayCountsChangedLabel");
             this.dontSkipAutobackupsIfPlayCountsChangedLabel.Name = "dontSkipAutobackupsIfPlayCountsChangedLabel";
             this.dontSkipAutobackupsIfPlayCountsChangedLabel.Tag = "";
-            this.toolTip1.SetToolTip(this.dontSkipAutobackupsIfPlayCountsChangedLabel, resources.GetString("dontSkipAutobackupsIfPlayCountsChangedLabel.ToolTip"));
+            this.dontSkipAutobackupsIfPlayCountsChangedLabel.Click += new System.EventHandler(this.dontSkipAutobackupsIfPlayCountsChangedLabel_Click);
             // 
             // groupBox1
             // 
             resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
-            this.toolTip1.SetToolTip(this.groupBox1, resources.GetString("groupBox1.ToolTip"));
             // 
             // AutoBackupSettings
             // 
@@ -294,7 +282,6 @@
             this.MaximizeBox = false;
             this.Name = "AutoBackupSettings";
             this.Tag = "@min-max-height-same";
-            this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             ((System.ComponentModel.ISupportInitialize)(this.autobackupNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfDaysNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfFilesNumericUpDown)).EndInit();

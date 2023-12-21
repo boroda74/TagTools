@@ -169,6 +169,12 @@
   <data name="alwaysCapitalize1stWordCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>241, 144</value>
   </data>
+  <data name="toggleCaseRadioButtonLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 15</value>
+  </data>
+  <data name="toggleCaseRadioButtonLabel.Text" xml:space="preserve">
+    <value>иЗМЕНИТЬ рЕГИСТР</value>
+  </data>
   <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
     <value>237, 117</value>
   </data>
@@ -177,6 +183,12 @@
   </data>
   <data name="label6.Text" xml:space="preserve">
     <value>В полях символы и слова должны разделяться пробелами</value>
+  </data>
+  <data name="titleCaseRadioButtonLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 15</value>
+  </data>
+  <data name="titleCaseRadioButtonLabel.Text" xml:space="preserve">
+    <value>Начинать С Прописных</value>
   </data>
   <data name="wordSplittersCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>269, 90</value>
@@ -274,18 +286,6 @@
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>Изменить регистр тега</value>
-  </data>
-  <data name="toggleCaseRadioButtonLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 15</value>
-  </data>
-  <data name="toggleCaseRadioButtonLabel.Text" xml:space="preserve">
-    <value>иЗМЕНИТЬ рЕГИСТР</value>
-  </data>
-  <data name="titleCaseRadioButtonLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>139, 15</value>
-  </data>
-  <data name="titleCaseRadioButtonLabel.Text" xml:space="preserve">
-    <value>Начинать С Прописных</value>
   </data>
   <data name="buttonASRWordSplitters.Location" type="System.Drawing.Point, System.Drawing">
     <value>464, 86</value>

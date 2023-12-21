@@ -33,6 +33,7 @@
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dirtyErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.buttonSettings = new System.Windows.Forms.Button();
             this.previewSortTagsСheckBox = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.previewSortTagsСheckBoxLabel = new System.Windows.Forms.Label();
@@ -174,6 +175,15 @@
             this.dirtyErrorProvider.ContainerControl = this;
             resources.ApplyResources(this.dirtyErrorProvider, "dirtyErrorProvider");
             // 
+            // buttonSettings
+            // 
+            resources.ApplyResources(this.buttonSettings, "buttonSettings");
+            this.dirtyErrorProvider.SetIconAlignment(this.buttonSettings, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonSettings.IconAlignment"))));
+            this.buttonSettings.Image = global::MusicBeePlugin.Properties.Resources.gear_15;
+            this.buttonSettings.Name = "buttonSettings";
+            this.buttonSettings.Tag = "@non-defaultable@square-control";
+            this.buttonSettings.Click += new System.EventHandler(this.buttonSettings_Click);
+            // 
             // previewSortTagsСheckBox
             // 
             resources.ApplyResources(this.previewSortTagsСheckBox, "previewSortTagsСheckBox");
@@ -194,6 +204,7 @@
             // controlsPanel
             // 
             resources.ApplyResources(this.controlsPanel, "controlsPanel");
+            this.controlsPanel.Controls.Add(this.buttonSettings);
             this.controlsPanel.Controls.Add(this.previewSortTagsСheckBoxLabel);
             this.controlsPanel.Controls.Add(this.previewSortTagsСheckBox);
             this.controlsPanel.Controls.Add(this.label1);
@@ -247,5 +258,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label previewSortTagsСheckBoxLabel;
         private System.Windows.Forms.Panel controlsPanel;
+        private System.Windows.Forms.Button buttonSettings;
     }
 }

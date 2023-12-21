@@ -254,9 +254,9 @@ namespace MusicBeePlugin
 
         public static Color GetWeightedColor(Color sampleColor1, Color sampleColor2, float sampleColor1Weight = 0.5f)//***
         {
-            int resultR = (int)(sampleColor1.R * sampleColor1Weight + sampleColor2.R * (1 - sampleColor1Weight));
-            int resultG = (int)(sampleColor1.G * sampleColor1Weight + sampleColor2.G * (1 - sampleColor1Weight));
-            int resultB = (int)(sampleColor1.B * sampleColor1Weight + sampleColor2.B * (1 - sampleColor1Weight));
+            int resultR = (int)Math.Round(sampleColor1.R * sampleColor1Weight + sampleColor2.R * (1 - sampleColor1Weight));
+            int resultG = (int)Math.Round(sampleColor1.G * sampleColor1Weight + sampleColor2.G * (1 - sampleColor1Weight));
+            int resultB = (int)Math.Round(sampleColor1.B * sampleColor1Weight + sampleColor2.B * (1 - sampleColor1Weight));
 
             resultR = resultR > 255 ? 255 : resultR;
             resultG = resultG > 255 ? 255 : resultG;
@@ -285,7 +285,7 @@ namespace MusicBeePlugin
         public static Color InvertAverageBrightness(Color sampleColor1)
         {
             float invAvgBr = (1 - ((GetAverageBrightness(sampleColor1) - 0.5f) * 2)) / 2.02f;
-            return Color.FromArgb(sampleColor1.A, (int)(sampleColor1.R * invAvgBr), (int)(sampleColor1.G * invAvgBr),  (int)(sampleColor1.B * invAvgBr));
+            return Color.FromArgb(sampleColor1.A, (int)Math.Round(sampleColor1.R * invAvgBr), (int)Math.Round(sampleColor1.G * invAvgBr),  (int)Math.Round(sampleColor1.B * invAvgBr));
         }
 
         public static Color GetBitmapAverageColor(Bitmap img)

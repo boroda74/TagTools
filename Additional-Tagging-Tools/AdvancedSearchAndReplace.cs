@@ -15,6 +15,7 @@ namespace MusicBeePlugin
 {
     public partial class AdvancedSearchAndReplaceCommand : PluginWindowTemplate
     {
+        protected const int FormShowDelay = 2250; //milliseconds
         protected bool forceCloseForms = true;
 
         private static string CustomText1;
@@ -285,8 +286,8 @@ namespace MusicBeePlugin
 
             previewTable.Columns[19].HeaderCell.Style.WrapMode = DataGridViewTriState.False;
             previewTable.Columns[19].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            previewTable.Columns[19].Width = (int)(25 * hDpiFontScaling);
-            previewTable.Columns[19].MinimumWidth = (int)(25 * hDpiFontScaling);
+            previewTable.Columns[19].Width = (int)Math.Round(25 * hDpiFontScaling);
+            previewTable.Columns[19].MinimumWidth = (int)Math.Round(25 * hDpiFontScaling);
 
             TagNameText = previewTable.Columns[4].HeaderText;
             OrigValueText = previewTable.Columns[5].HeaderText;
@@ -2151,8 +2152,8 @@ namespace MusicBeePlugin
                 return;
 
 
-            string currentFile = (string)currentFileObj;
-            Plugin tagToolsPluginParam = (Plugin)tagToolsPluginObj;
+            string currentFile = currentFileObj as string;
+            Plugin tagToolsPluginParam = tagToolsPluginObj as Plugin;
 
             SortedDictionary<Guid, bool> appliedPresets = new SortedDictionary<Guid, bool>();
 
@@ -2329,7 +2330,7 @@ namespace MusicBeePlugin
         {
             tags.Clear();
             previewTable.Rows.Clear();
-            ((DatagridViewCheckBoxHeaderCell)previewTable.Columns[0].HeaderCell).setState(true);
+            (previewTable.Columns[0].HeaderCell as DatagridViewCheckBoxHeaderCell).setState(true);
 
             if (backgroundTaskIsWorking())
                 return true;
@@ -3156,7 +3157,7 @@ namespace MusicBeePlugin
             if (result == DialogResult.No)
                 return;
 
-            deletePreset((Preset)presetList.SelectedItem);
+            deletePreset(presetList.SelectedItem as Preset);
             showAutoApplyingWarningIfRequired();
         }
 
@@ -3644,12 +3645,12 @@ namespace MusicBeePlugin
                 applyToPlayingTrackCheckBox.Checked = false;
                 favoriteCheckBox.Checked = false;
 
-                enableDisablePreviewOptionControls(false);
+                enableDisablePreviewOptionControls(true, true);
                 disableQueryingOrUpdatingButtons();
             }
             else
             {
-                presetsWorkingCopy.TryGetValue(((Preset)presetList.SelectedItem).guid, out preset);
+                presetsWorkingCopy.TryGetValue((presetList.SelectedItem as Preset).guid, out preset);
                 backedUpPreset = new Preset(preset);
 
                 if (!preset.userPreset && !DeveloperMode)
@@ -3845,7 +3846,7 @@ namespace MusicBeePlugin
 
             Guid selectedPresetGuid = Guid.Empty;
             if (presetList.SelectedItem != null)
-                selectedPresetGuid = ((Preset)presetList.SelectedItem).guid;
+                selectedPresetGuid = (presetList.SelectedItem as Preset).guid;
 
 
             bool askToImportExistingAsCopy = true;
@@ -4036,7 +4037,7 @@ namespace MusicBeePlugin
 
             Guid selectedPresetGuid = Guid.Empty;
             if (presetList.SelectedItem != null)
-                selectedPresetGuid = ((Preset)presetList.SelectedItem).guid;
+                selectedPresetGuid = (presetList.SelectedItem as Preset).guid;
 
 
             if (MessageBox.Show(this, MsgInstallingConfirmation, string.Empty, 
@@ -4760,7 +4761,7 @@ namespace MusicBeePlugin
                 return;
 
             if (playlistComboBox.SelectedIndex >= 0)
-                preset.playlist = ((Playlist)(playlistComboBox.SelectedItem)).playlist;
+                preset.playlist = (playlistComboBox.SelectedItem as Playlist).playlist;
             else
                 preset.playlist = string.Empty;
 
@@ -4771,7 +4772,7 @@ namespace MusicBeePlugin
         {
             foreach (DataGridViewRow row in previewTable.Rows)
             {
-                if ((string)row.Cells[0].Value == null)
+                if (row.Cells[0].Value == null)
                     continue;
 
                 if (state)
@@ -5169,6 +5170,13 @@ namespace MusicBeePlugin
             if (enable && previewIsGenerated)
                 return;
 
+            buttonCreate.Enable(enable);
+            buttonImportNew.Enable(enable);
+            buttonImportAll.Enable(enable);
+            buttonImport.Enable(enable);
+            buttonExportCustom.Enable(enable);
+
+
             if (preset == null)
                 enable = false;
 
@@ -5209,12 +5217,7 @@ namespace MusicBeePlugin
             buttonProcessPreserveTags.Enable(false);
 
             buttonExport.Enable(enable && (editButtonEnabled || preset.getCustomizationsFlag()));
-            buttonImportNew.Enable(enable);
-            buttonImportAll.Enable(enable);
-            buttonImport.Enable(enable);
-            buttonExportCustom.Enable(enable);
 
-            buttonCreate.Enable(enable);
             buttonCopy.Enable(enable);
             buttonEdit.Enable(enable && editButtonEnabled);
             buttonDelete.Enable(enable);
@@ -5373,32 +5376,45 @@ namespace MusicBeePlugin
 
         private void showAutoApplyingWarningIfRequired()
         {
-            if (!SavedSettings.allowAsrLrPresetAutoexecution)
+            if (autoAppliedPresetCount == 0)
             {
-                autoApplyPresetsLabel.Text = EditApplyText + AutoApplyDisabledText;
+                if (SavedSettings.allowAsrLrPresetAutoexecution)
+                {
+                    autoApplyPresetsLabel.Text = EditApplyText + AutoApplyText;
 
-                toolTip1.SetToolTip(autoApplyPresetsLabel, EditApplyText + "\n" + AutoApplyDisabledText);
+                    toolTip1.SetToolTip(autoApplyPresetsLabel, EditApplyText + "\n" + AutoApplyText);
 
-                autoApplyPresetsLabel.ForeColor = TickedColor;
-            }
-            else if (autoAppliedPresetCount == 0)
-            {
-                autoApplyPresetsLabel.Text = EditApplyText + AutoApplyText;
+                    autoApplyPresetsLabel.ForeColor = UntickedColor;
+                }
+                else
+                {
+                    autoApplyPresetsLabel.Text = EditApplyText + AutoApplyDisabledText.ToUpper();
 
-                toolTip1.SetToolTip(autoApplyPresetsLabel, EditApplyText + "\n" + AutoApplyText + "\n\n"
-                    + NowTickedText.ToUpper().Replace("%%TICKEDPRESETS%%", autoAppliedPresetCount.ToString()));
+                    toolTip1.SetToolTip(autoApplyPresetsLabel, EditApplyText + "\n" + AutoApplyDisabledText.ToUpper());
 
-                autoApplyPresetsLabel.ForeColor = UntickedColor;
+                    autoApplyPresetsLabel.ForeColor = TickedColor;
+                }
                 //tickedOnlyChecked = false;
                 //tickedOnlyCheckBox.Enable(false);
             }
             else
             {
-                autoApplyPresetsLabel.Text = EditApplyText + AutoApplyText + "\n"
+                if (SavedSettings.allowAsrLrPresetAutoexecution)
+                {
+                    autoApplyPresetsLabel.Text = EditApplyText + AutoApplyText + "\n"
                     + NowTickedText.ToUpper().Replace("%%TICKEDPRESETS%%", autoAppliedPresetCount.ToString());
 
-                toolTip1.SetToolTip(autoApplyPresetsLabel, EditApplyText + "\n" + AutoApplyText + "\n\n"
-                    + ClickHereText.ToUpper() + "\n" + NowTickedText.ToUpper().Replace("%%TICKEDPRESETS%%", autoAppliedPresetCount.ToString()));
+                    toolTip1.SetToolTip(autoApplyPresetsLabel, EditApplyText + "\n" + AutoApplyText + "\n\n"
+                        + ClickHereText.ToUpper() + "\n" + NowTickedText.ToUpper().Replace("%%TICKEDPRESETS%%", autoAppliedPresetCount.ToString()));
+                }
+                else
+                {
+                    autoApplyPresetsLabel.Text = EditApplyText + AutoApplyDisabledText.ToUpper() + "\n"
+                    + NowTickedText.ToUpper().Replace("%%TICKEDPRESETS%%", autoAppliedPresetCount.ToString());
+
+                    toolTip1.SetToolTip(autoApplyPresetsLabel, EditApplyText + "\n" + AutoApplyDisabledText.ToUpper() + "\n\n"
+                        + ClickHereText.ToUpper() + "\n" + NowTickedText.ToUpper().Replace("%%TICKEDPRESETS%%", autoAppliedPresetCount.ToString()));
+                }
 
                 autoApplyPresetsLabel.ForeColor = TickedColor;
                 //tickedOnlyCheckBox.Enable(true);
@@ -5621,6 +5637,7 @@ namespace MusicBeePlugin
         {
             PluginQuickSettings settings = new PluginQuickSettings(TagToolsPlugin);
             Display(settings, true);
+            showAutoApplyingWarningIfRequired();
         }
 
         private void setCheckedPicturesStates()
@@ -5782,16 +5799,16 @@ namespace MusicBeePlugin
             foreach (var scsa in splitContainersScalingAttributes)
             {
                 var sc = scsa.splitContainer;
-                sc.Panel1MinSize = (int)(scsa.panel1MinSize * vDpiFontScaling);
-                sc.Panel2MinSize = (int)(scsa.panel2MinSize * vDpiFontScaling);
+                sc.Panel1MinSize = (int)Math.Round(scsa.panel1MinSize * vDpiFontScaling);
+                sc.Panel2MinSize = (int)Math.Round(scsa.panel2MinSize * vDpiFontScaling);
 
                 if (value.Item4 != 0)
                 {
-                    sc.SplitterDistance = (int)(value.Item4 * vDpiFontScaling);
+                    sc.SplitterDistance = (int)Math.Round(value.Item4 * vDpiFontScaling);
                 }
                 else
                 {
-                    sc.SplitterDistance = (int)(scsa.splitterDistance * vDpiFontScaling);
+                    sc.SplitterDistance = (int)Math.Round(scsa.splitterDistance * vDpiFontScaling);
                 }
             }
 

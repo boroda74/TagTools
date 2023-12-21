@@ -535,7 +535,7 @@
             // allowAsrLrPresetAutoexecutionCheckBoxLabel
             // 
             resources.ApplyResources(this.allowAsrLrPresetAutoexecutionCheckBoxLabel, "allowAsrLrPresetAutoexecutionCheckBoxLabel");
-            this.allowAsrLrPresetAutoexecutionCheckBoxLabel.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.allowAsrLrPresetAutoexecutionCheckBoxLabel.ForeColor = System.Drawing.SystemColors.ControlText;
             this.allowAsrLrPresetAutoexecutionCheckBoxLabel.Name = "allowAsrLrPresetAutoexecutionCheckBoxLabel";
             this.allowAsrLrPresetAutoexecutionCheckBoxLabel.Tag = "";
             this.allowAsrLrPresetAutoexecutionCheckBoxLabel.Click += new System.EventHandler(this.allowAsrLrPresetAutoexecutionCheckBoxLabel_Click);
@@ -543,7 +543,7 @@
             // allowAsrLrPresetAutoexecutionCheckBox
             // 
             resources.ApplyResources(this.allowAsrLrPresetAutoexecutionCheckBox, "allowAsrLrPresetAutoexecutionCheckBox");
-            this.allowAsrLrPresetAutoexecutionCheckBox.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.allowAsrLrPresetAutoexecutionCheckBox.ForeColor = System.Drawing.SystemColors.Control;
             this.allowAsrLrPresetAutoexecutionCheckBox.Name = "allowAsrLrPresetAutoexecutionCheckBox";
             this.allowAsrLrPresetAutoexecutionCheckBox.Tag = "#allowAsrLrPresetAutoexecutionCheckBoxLabel";
             // 

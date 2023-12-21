@@ -130,7 +130,7 @@ namespace MusicBeePlugin
             tags.Clear();
             previewTable.Rows.Clear();
             previewIsGenerated = false;
-            ((DatagridViewCheckBoxHeaderCell)previewTable.Columns[0].HeaderCell).setState(true);
+            (previewTable.Columns[0].HeaderCell as DatagridViewCheckBoxHeaderCell).setState(true);
 
             if (backgroundTaskIsWorking())
                 return true;
@@ -539,7 +539,7 @@ namespace MusicBeePlugin
         {
             foreach (DataGridViewRow row in previewTable.Rows)
             {
-                if ((string)row.Cells[0].Value == null)
+                if (row.Cells[0].Value == null)
                     continue;
 
                 if (state)
@@ -729,15 +729,15 @@ namespace MusicBeePlugin
 
             if (value.Item1 != 0)
             {
-                previewTable.Columns[2].Width = (int)(value.Item1 * hDpiFontScaling);
-                previewTable.Columns[6].Width = (int)(value.Item2 * hDpiFontScaling);
-                previewTable.Columns[8].Width = (int)(value.Item3 * hDpiFontScaling);
+                previewTable.Columns[2].Width = (int)Math.Round(value.Item1 * hDpiFontScaling);
+                previewTable.Columns[6].Width = (int)Math.Round(value.Item2 * hDpiFontScaling);
+                previewTable.Columns[8].Width = (int)Math.Round(value.Item3 * hDpiFontScaling);
             }
             else
             {
-                previewTable.Columns[2].Width = (int)(previewTable.Columns[2].Width * hDpiFontScaling);
-                previewTable.Columns[6].Width = (int)(previewTable.Columns[6].Width * hDpiFontScaling);
-                previewTable.Columns[8].Width = (int)(previewTable.Columns[8].Width * hDpiFontScaling);
+                previewTable.Columns[2].Width = (int)Math.Round(previewTable.Columns[2].Width * hDpiFontScaling);
+                previewTable.Columns[6].Width = (int)Math.Round(previewTable.Columns[6].Width * hDpiFontScaling);
+                previewTable.Columns[8].Width = (int)Math.Round(previewTable.Columns[8].Width * hDpiFontScaling);
             }
         }
 

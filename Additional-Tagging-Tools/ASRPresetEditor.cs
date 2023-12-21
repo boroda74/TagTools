@@ -34,13 +34,13 @@ namespace MusicBeePlugin
 
             if (Language == "ru")
             {
-                tableLayoutPanel1.ColumnStyles[2].Width = (int)(180 * hDpiFontScaling);
-                tableLayoutPanel1.ColumnStyles[7].Width = (int)(180 * hDpiFontScaling);
+                tableLayoutPanel1.ColumnStyles[2].Width = (int)Math.Round(180 * hDpiFontScaling);
+                tableLayoutPanel1.ColumnStyles[7].Width = (int)Math.Round(180 * hDpiFontScaling);
             }
             else
             {
-                tableLayoutPanel1.ColumnStyles[2].Width = (int)(135 * hDpiFontScaling);
-                tableLayoutPanel1.ColumnStyles[7].Width = (int)(135 * hDpiFontScaling);
+                tableLayoutPanel1.ColumnStyles[2].Width = (int)Math.Round(135 * hDpiFontScaling);
+                tableLayoutPanel1.ColumnStyles[7].Width = (int)Math.Round(135 * hDpiFontScaling);
             }
 
 
@@ -51,25 +51,25 @@ namespace MusicBeePlugin
         {
             foreach (Control control in parent.Controls)
             {
-                if (control.GetType() == typeof(Button))
+                if (control is Button)
                 {
-                    ((Button)control).Enable(false);
+                    (control as Button).Enable(false);
                 }
-                else if (control.GetType().IsSubclassOf(typeof(TextBox)) || control.GetType() == typeof(TextBox))
+                else if (control.GetType().IsSubclassOf(typeof(TextBox)) || control is TextBox)
                 {
-                    ((TextBox)control).ReadOnly = true;
+                    (control as TextBox).ReadOnly = true;
                 }
-                else if (control.GetType().IsSubclassOf(typeof(ComboBox)) || control.GetType() == typeof(ComboBox))
+                else if (control.GetType().IsSubclassOf(typeof(ComboBox)) || control is ComboBox)
                 {
-                    ((ComboBox)control).Enable(false);
+                    (control as ComboBox).Enable(false);
                 }
-                else if (control.GetType().IsSubclassOf(typeof(ListBox)) || control.GetType() == typeof(ListBox))
+                else if (control.GetType().IsSubclassOf(typeof(ListBox)) || control is ListBox)
                 {
-                    ((ListBox)control).Enable(false);
+                    (control as ListBox).Enable(false);
                 }
-                else if (control.GetType() == typeof(GroupBox))
+                else if (control is GroupBox)
                 {
-                    //((GroupBox)control).Enable(false);
+                    //(control as GroupBox).Enable(false);
                 }
                 else
                 {

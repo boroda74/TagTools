@@ -13,7 +13,7 @@ namespace MusicBeePlugin
             ReadonlyTagsNames[0] = GenreCategoryName;
             ReadonlyTagsNames[1] = SynchronisedLyricsName;
             ReadonlyTagsNames[2] = UnsynchronisedLyricsName;
-            ReadonlyTagsNames[3] = DisplayedAlbumArtsistName;
+            ReadonlyTagsNames[3] = DisplayedAlbumArtistName;
             ReadonlyTagsNames[4] = MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual1);
             ReadonlyTagsNames[5] = MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual2);
             ReadonlyTagsNames[6] = MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual3);
@@ -105,13 +105,13 @@ namespace MusicBeePlugin
             }
             try
             {
-                file1.WriteLine("Adding " + DisplayedAlbumArtsistName + " / " + MetaDataType.AlbumArtist);
-                TagNamesIds.Add(DisplayedAlbumArtsistName, MetaDataType.AlbumArtist);
+                file1.WriteLine("Adding " + DisplayedAlbumArtistName + " / " + MetaDataType.AlbumArtist);
+                TagNamesIds.Add(DisplayedAlbumArtistName, MetaDataType.AlbumArtist);
             }
             catch (ArgumentException)
             {
                 wereErrors = true;
-                file1.WriteLine("Cant add " + DisplayedAlbumArtsistName + " / " + MetaDataType.AlbumArtist);
+                file1.WriteLine("Cant add " + DisplayedAlbumArtistName + " / " + MetaDataType.AlbumArtist);
             }
             try
             {
@@ -1242,7 +1242,7 @@ namespace MusicBeePlugin
 
             TagIdsNames.Add(MetaDataType.TrackTitle, MbApiInterface.Setting_GetFieldName(MetaDataType.TrackTitle));
             TagIdsNames.Add(MetaDataType.Album, AlbumTagName);
-            TagIdsNames.Add(MetaDataType.AlbumArtist, DisplayedAlbumArtsistName);
+            TagIdsNames.Add(MetaDataType.AlbumArtist, DisplayedAlbumArtistName);
             TagIdsNames.Add(MetaDataType.AlbumArtistRaw, MbApiInterface.Setting_GetFieldName(MetaDataType.AlbumArtist));
             TagIdsNames.Add(DisplayedArtistId, DisplayedArtistName);
             TagIdsNames.Add(ArtistArtistsId, ArtistArtistsName);

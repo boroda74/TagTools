@@ -320,7 +320,7 @@
     <value>340, 15</value>
   </data>
   <data name="allowAsrLrPresetAutoexecutionCheckBoxLabel.Text" xml:space="preserve">
-    <value>Разрешить автоматическое применение пресетов ДПЗ/ОБ *</value>
+    <value>Разрешить автоматическое применение пресетов ДПЗ/ОБ</value>
   </data>
   <data name="allowAsrLrPresetAutoexecutionCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>429, 21</value>

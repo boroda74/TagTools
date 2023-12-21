@@ -153,6 +153,26 @@ namespace MusicBeePlugin.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap multiple_artworks {
+            get {
+                object obj = ResourceManager.GetObject("multiple_artworks", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap multiple_artworks_accent {
+            get {
+                object obj = ResourceManager.GetObject("multiple_artworks_accent", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap playlist_presets {
             get {
                 object obj = ResourceManager.GetObject("playlist_presets", resourceCulture);

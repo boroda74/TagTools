@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Drawing.Drawing2D;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ExtensionMethods
 {
@@ -22,17 +23,26 @@ namespace ExtensionMethods
 
         public static void ClearCue(this TextBox textBox)
         {
-            SendMessage(textBox.Handle, EM_SETCUEBANNER, Zero, string.Empty);
+            SetCue(textBox, string.Empty);
         }
 
         public static void SetCue(this ComboBox comboBox, string cue)
         {
+            cue = cue.TrimStart(' ');
+
+            // handing off the reset of the combobox selected value to a delegate method - using methodinvoker on the forms main thread is an efficient to do this
+            // see https://msdn.microsoft.com/en-us/library/system.windows.forms.methodinvoker(v=vs.110).aspx
+            if (!comboBox.Items.Contains(cue))//******
+                comboBox.FindForm().BeginInvoke((MethodInvoker)delegate { comboBox.Text = cue; });
+            else
+                comboBox.Text = cue;
+
             SendMessage(comboBox.Handle, CB_SETCUEBANNER, Zero, cue);
         }
 
         public static void ClearCue(this ComboBox comboBox)
         {
-            SendMessage(comboBox.Handle, CB_SETCUEBANNER, Zero, string.Empty);
+            SetCue(comboBox, string.Empty);
         }
     }
 

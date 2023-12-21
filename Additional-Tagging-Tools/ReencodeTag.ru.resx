@@ -130,13 +130,13 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>812, 5</value>
+    <value>852, 5</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Закрыть</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>919, 311</value>
+    <value>959, 311</value>
   </data>
   <data name="Track.HeaderText" xml:space="preserve">
     <value>Трек</value>
@@ -157,7 +157,16 @@
     <value>0</value>
   </data>
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>903, 244</value>
+    <value>943, 244</value>
+  </data>
+  <data name="buttonSettings.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="buttonSettings.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="buttonSettings.Location" type="System.Drawing.Point, System.Drawing">
+    <value>591, 5</value>
   </data>
   <data name="usedEncodingsList.Error" xml:space="preserve">
     <value />
@@ -226,7 +235,7 @@
     <value>0</value>
   </data>
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>704, 5</value>
+    <value>744, 5</value>
   </data>
   <data name="buttonOK.Text" xml:space="preserve">
     <value>Применить</value>
@@ -286,10 +295,10 @@
     <value>0</value>
   </data>
   <data name="controlsPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>921, 61</value>
+    <value>961, 61</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>935, 350</value>
+    <value>975, 350</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Изменить кодировку тега</value>
@@ -900,7 +909,7 @@
     <value>0</value>
   </data>
   <data name="buttonPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>596, 5</value>
+    <value>636, 5</value>
   </data>
   <data name="buttonPreview.Text" xml:space="preserve">
     <value>Просмотр</value>

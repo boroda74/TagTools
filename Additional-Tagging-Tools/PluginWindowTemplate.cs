@@ -10,22 +10,22 @@ using System.Windows.Forms;
 using static MusicBeePlugin.Plugin;
 
 
-
 namespace MusicBeePlugin
 {
     public partial class PluginWindowTemplate : Form
     {
-        private bool modal;
-        private bool fixedSize = false;
-        private FormWindowState windowState;
-        private int left;
-        private int top;
-        private int height;
-        private int width;
+        protected bool modal;
+        protected bool fixedSize = false;
+        protected FormWindowState windowState;
+        protected int left;
+        protected int top;
+        protected int height;
+        protected int width;
+
+        protected const int FormShowDelay = 750; //milliseconds
+        private System.Threading.Timer delayedShowFormTimer = null;
 
         public bool dontShowForm = false;
-        protected bool hidden = false;//******
-        protected bool initialized = false;
 
         //SKIN COLORING/CUSTOM FORM'S FONT/DPI SCALING
         public float dpiScaling = 1;
@@ -142,9 +142,16 @@ namespace MusicBeePlugin
             if (dropDownStyleComboBox.Contains(comboBox))
             {
                 if (comboBox.Enabled)
+                {
                     comboBox.DropDownStyle = ComboBoxStyle.DropDown;
+
+                    if (comboBox.Text == string.Empty && controlCueBanners.Contains(comboBox))
+                        comboBox.Text = controlCueBanners[comboBox];
+                }
                 else
+                {
                     comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+                }
             }
         }
 
@@ -159,7 +166,7 @@ namespace MusicBeePlugin
 
             if (comboBox.Enabled && comboBox.Focused && (index == -1 || (e.State & DrawItemState.Selected) != 0))
             {
-                foreColor = SystemColors.HighlightText;
+                foreColor = SystemColors.HighlightText;//*****
                 backColor = SystemColors.Highlight;
             }
             //Disabled
@@ -167,12 +174,12 @@ namespace MusicBeePlugin
                 | DrawItemState.NoFocusRect | DrawItemState.ComboBoxEdit))
             {
                 foreColor = DimmedAccentColor;
-                backColor = FormBackColor;
+                backColor = comboBox.BackColor;
             }
             else //if (comboBox.Enabled)
             {
-                foreColor = ForeColor;
-                backColor = BackColor;
+                foreColor = comboBox.ForeColor;
+                backColor = comboBox.BackColor;
             }
 
             string text = string.Empty;
@@ -207,7 +214,7 @@ namespace MusicBeePlugin
 
         private void tabControl_DrawItem(object sender, DrawItemEventArgs e)
         {
-            TabPage page = ((TabControl)sender).TabPages[e.Index];
+            TabPage page = (sender as TabControl).TabPages[e.Index];
             Rectangle paddedBounds = e.Bounds;
             int yOffset = (e.State == DrawItemState.Selected) ? -2 : 1;
             paddedBounds.Offset(1, yOffset);
@@ -218,7 +225,7 @@ namespace MusicBeePlugin
 
         public void button_EnabledChanged(object sender, System.EventArgs e)
         {
-            Button button = (Button)sender;
+            Button button = sender as Button;
 
             if (button.Enabled && button == AcceptButton)
                 button_GotFocus(sender, e);
@@ -232,7 +239,7 @@ namespace MusicBeePlugin
         {
             if (UseMusicBeeFontSkinColors)
             {
-                Button acceptButton = (Button)AcceptButton;
+                Button acceptButton = AcceptButton as Button;
 
                 if (button.Enabled && button == acceptButton)
                 {
@@ -240,7 +247,7 @@ namespace MusicBeePlugin
                     button.ForeColor = ControlHighlightForeColor;
                     button.BackColor = ControlHighlightBackColor;
                 }
-                //else if (button.Enabled && button.Focused) //***
+                //else if (button.Enabled && button.Focused) //****
                 //{
                 //    button.FlatAppearance.BorderColor = ButtonFocusedBorderColor;
                 //    button.ForeColor = ButtonForeColor;
@@ -264,7 +271,7 @@ namespace MusicBeePlugin
         public void button_GotFocus(object sender, System.EventArgs e)
         {
             Button button = sender as Button;
-            Button acceptButton = (Button)AcceptButton;
+            Button acceptButton = AcceptButton as Button;
 
             if (button == lastSelectedControl)
             {
@@ -274,7 +281,7 @@ namespace MusicBeePlugin
             {
                 artificiallyFocusedAcceptButton = false;
 
-                //EITHER:
+                //EITHER: //*******
                 //lastSelectedControl = button;
 
                 //OR:
@@ -315,7 +322,7 @@ namespace MusicBeePlugin
 
         public void button_Paint(object sender, PaintEventArgs e)
         {
-            Button button = (Button)sender;
+            Button button = sender as Button;
 
             string text = buttonLabels[button];
 
@@ -328,7 +335,7 @@ namespace MusicBeePlugin
 
         public void button_TextChanged(object sender, EventArgs e)
         {
-            Button button = (Button)sender;
+            Button button = sender as Button;
             string text = button.Text;
 
             if (!string.IsNullOrEmpty(text))
@@ -336,9 +343,10 @@ namespace MusicBeePlugin
                 buttonLabels.AddReplace(button, text);
 
                 if (UseMusicBeeFontSkinColors)
+                {
                     button.Text = string.Empty;
-
-                button.Refresh();
+                    button.Refresh();
+                }
             }
         }
 
@@ -468,8 +476,8 @@ namespace MusicBeePlugin
 
         public static Size GetControlSize(Control control)
         {
-            if (control.GetType().IsSubclassOf(typeof(Form)) || control.GetType() == typeof(Form))
-                return ((Form)control).ClientSize;
+            if (control.GetType().IsSubclassOf(typeof(Form)) || control is Form)
+                return (control as Form).ClientSize;
             else
                 return control.Size;
         }
@@ -513,7 +521,7 @@ namespace MusicBeePlugin
             if (level > 0)
                 return (GetControlSize(control2).Width, GetControlSize(control2).Width, control2.Padding.Right, control2.Padding.Left);
             else //if (level == 0)
-                return (control2.Location.X, control2.Location.X + control2.Width, control2.Margin.Left, control2.Margin.Right);
+                return (control2.Left, control2.Left + control2.Width, control2.Margin.Left, control2.Margin.Right);
         }
 
         public int getRightAnchoredControlX(Control control, int controlNewWidth, Control control2, bool pinnedToParent, int level, float offset = 0)
@@ -525,9 +533,9 @@ namespace MusicBeePlugin
             else if (level == 0)
             {
                 if (offset == 0)
-                    return control2.Location.X - controlNewWidth - (control.Margin.Right + control2.Margin.Left);
+                    return control2.Left - controlNewWidth - (control.Margin.Right + control2.Margin.Left);
                 else
-                    return (int)Math.Round(control2.Location.X - controlNewWidth - offset * hDpiFontScaling);
+                    return (int)Math.Round(control2.Left - controlNewWidth - offset * hDpiFontScaling);
             }
             else
             {
@@ -543,26 +551,26 @@ namespace MusicBeePlugin
 
         public int getButtonY(Control control, AnchorStyles style)
         {
-            float controlNewY = control.Location.Y - (control.Height - control.Height / vDpiFontScaling) / 4;//***
+            float controlNewY = control.Top - (control.Height - control.Height / vDpiFontScaling) / 4;//****
             return (int)Math.Round(controlNewY);
         }
 
         public int getLabelY(Control control)
         {
-            float controlNewY = control.Location.Y - (control.Height - control.Height / vDpiFontScaling) / 2;//***
+            float controlNewY = control.Top - (control.Height - control.Height / vDpiFontScaling) / 2;
             return (int)Math.Round(controlNewY);
         }
 
         public int getPictureBoxY(Control control, float scale)
         {
-            float controlNewY = control.Location.Y - (control.Height - control.Height / scale) / 2;
+            float controlNewY = control.Top - (control.Height - control.Height / scale) / 2;
             return (int)Math.Round(controlNewY);
         }
 
         public int getPictureBoxY(float controlHeight, Control control2)
         {
             float heightDifference = controlHeight - control2.Height;
-            float controlNewY = GetYCenteredToY2(controlHeight, control2.Location.Y, control2);
+            float controlNewY = GetYCenteredToY2(controlHeight, control2.Top, control2);
 
             controlNewY -= heightDifference / 4 * vDpiFontScaling; //***
             controlNewY += controlHeight * 0.12f;
@@ -573,12 +581,12 @@ namespace MusicBeePlugin
         {
             if (control.Height == control2.Height)
             {
-                return control.Location.Y;
+                return control.Top;
             }
             else
             {
                 float heightDifference = control.Height - control2.Height;
-                float controlNewY = GetYCenteredToY2(control.Height, control2.Location.Y, control2);
+                float controlNewY = GetYCenteredToY2(control.Height, control2.Top, control2);
 
                 controlNewY -= heightDifference / 4 * vDpiFontScaling; //***
                 controlNewY += control.Height * 0.12f;
@@ -589,35 +597,35 @@ namespace MusicBeePlugin
         //Let's correct flaws of AUTO-scaling
         public virtual void preMoveScaleControl(Control control)
         {
-            //if (control.GetType().IsSubclassOf(typeof(Form)) || control.GetType() == typeof(Form))
+            if (control.GetType().IsSubclassOf(typeof(Form)) || control is Form)
                 return;
 
             string stringTag = control.Tag as string;
 
-            if (control.GetType().IsSubclassOf(typeof(Button)) || control.GetType() == typeof(Button))
+            if (control.GetType().IsSubclassOf(typeof(Button)) || control is Button)
             {
-                control.Location = new Point(control.Location.X, getButtonY(control, control.Anchor));
+                control.Top = getButtonY(control, control.Anchor);
             }
-            else if (control.GetType().IsSubclassOf(typeof(PictureBox)) || control.GetType() == typeof(PictureBox))
+            else if (control.GetType().IsSubclassOf(typeof(PictureBox)) || control is PictureBox)
             {
                 if (stringTag?.Contains("@small-picture") == true)
                 {
                     control.Width = (int)Math.Round(control.Width * hDpiFontScaling);
                     control.Height = (int)Math.Round(control.Height * hDpiFontScaling);
 
-                    control.Location = new Point(control.Location.X, getPictureBoxY(control, hDpiFontScaling));
+                    control.Top = getPictureBoxY(control, hDpiFontScaling);
                 }
                 else
                 {
                     control.Width = (int)Math.Round(control.Width * vDpiFontScaling);
                     control.Height = (int)Math.Round(control.Height * vDpiFontScaling);
 
-                    control.Location = new Point(control.Location.X, getPictureBoxY(control, vDpiFontScaling));
+                    control.Top = getPictureBoxY(control, vDpiFontScaling);
                 }
             }
-            else if (control.GetType().IsSubclassOf(typeof(Label)) || control.GetType() == typeof(Label))
+            else if (control.GetType().IsSubclassOf(typeof(Label)) || control is Label)
             {
-                control.Location = new Point(control.Location.X, getLabelY(control));
+                control.Top = getLabelY(control);
             }
 
 
@@ -628,7 +636,7 @@ namespace MusicBeePlugin
 
         public void moveScaleControlDependentReferringControls(Control control)
         {
-            if (control.GetType().IsSubclassOf(typeof(Form)) || control.GetType() == typeof(Form))
+            if (control.GetType().IsSubclassOf(typeof(Form)) || control is Form)
                 return;
 
 
@@ -694,23 +702,23 @@ namespace MusicBeePlugin
                         if (parent == null)
                             parent = control.Parent;
 
-                        control.Location = new Point(parent.Padding.Left + control.Margin.Left, control.Location.Y);
+                        control.Left = parent.Padding.Left + control.Margin.Left;
                         scaledMovedL = true;
                     }
                 }
-                else if (control.GetType().IsSubclassOf(typeof(CheckBox)) || control.GetType() == typeof(CheckBox) ||
-                            control.GetType().IsSubclassOf(typeof(RadioButton)) || control.GetType() == typeof(RadioButton)
+                else if (control.GetType().IsSubclassOf(typeof(CheckBox)) || control is CheckBox ||
+                            control.GetType().IsSubclassOf(typeof(RadioButton)) || control is RadioButton
                 )
                 {
                     if (!scaledMovedY)
                     {
-                        if (control2.GetType().IsSubclassOf(typeof(Label)) || control2.GetType() == typeof(Label))
+                        if (control2.GetType().IsSubclassOf(typeof(Label)) || control2 is Label)
                         {
-                            control.Location = new Point(control.Location.X, getCheckBoxesRadioButtonsY(control, control2));
+                            control.Top = getCheckBoxesRadioButtonsY(control, control2);
                         }
                         else
                         {
-                            control.Location = new Point(control.Location.X, (int)Math.Round(GetYCenteredToY2(control.Height, control2.Location.Y, control2)));
+                            control.Top = (int)Math.Round(GetYCenteredToY2(control.Height, control2.Top, control2));
                         }
 
                         scaledMovedY = true;
@@ -718,30 +726,30 @@ namespace MusicBeePlugin
 
                     if (!scaledMovedL2)
                     {
-                        control2.Location = new Point((int)Math.Round(control.Location.X + control.Width - checkBoxRadioButtonOffsetCompensationX * hDpiFontScaling), control2.Location.Y);
+                        control2.Left = (int)Math.Round(control.Left + control.Width - checkBoxRadioButtonOffsetCompensationX * hDpiFontScaling);
                         scaledMovedL2 = true;
                     }
                 }
-                else if (control.GetType().IsSubclassOf(typeof(PictureBox)) || control.GetType() == typeof(PictureBox))
+                else if (control.GetType().IsSubclassOf(typeof(PictureBox)) || control is PictureBox)
                 {
                     if (!scaledMovedY2)
                     {
-                        if (control2.GetType().IsSubclassOf(typeof(Label)) || control2.GetType() == typeof(Label))
+                        if (control2.GetType().IsSubclassOf(typeof(Label)) || control2 is Label)
                         {
-                            control2.Location = new Point((int)Math.Round(control.Location.X + control.Width + smallControlOffsetX * hDpiFontScaling), control2.Location.Y);
+                            control2.Left = (int)Math.Round(control.Left + control.Width + smallControlOffsetX * hDpiFontScaling);
+
+                            if (!scaledMovedY)
+                            {
+                                control.Top = getPictureBoxY(control.Height, control2);
+                                scaledMovedY = true;
+                            }
                         }
                         else
                         {
-                            control2.Location = new Point(control.Location.X + control.Width + control.Margin.Right + control2.Margin.Left, control2.Location.Y);
+                            control2.Left = control.Left + control.Width + control.Margin.Right + control2.Margin.Left;
                         }
 
                         scaledMovedL2 = true;
-                    }
-
-                    if (!scaledMovedY)
-                    {
-                        control.Location = new Point(control.Location.X, getPictureBoxY(control.Height, control2));
-                        scaledMovedY = true;
                     }
                 }
                 //control2 left anchored
@@ -749,7 +757,7 @@ namespace MusicBeePlugin
                 {
                     if (!scaledMovedL2)
                     {
-                        control2.Location = new Point(control.Location.X + control.Width + control2.Margin.Left + control.Margin.Right, control2.Location.Y);
+                        control2.Left = control.Left + control.Width + control2.Margin.Left + control.Margin.Right;
                         scaledMovedL2 = true;
                     }
                 }
@@ -775,51 +783,51 @@ namespace MusicBeePlugin
                         if (parent == null)
                             parent = control.Parent;
 
-                        int controlNewX = GetControlSize(parent).Width - control.Width - (parent.Padding.Right + control.Margin.Right);
-
-                        control.Location = new Point(controlNewX, control.Location.Y);
+                        control.Left = GetControlSize(parent).Width - control.Width - (parent.Padding.Right + control.Margin.Right);
                         scaledMovedL = true;
                     }
                 }
-                else if (control.GetType().IsSubclassOf(typeof(CheckBox)) || control.GetType() == typeof(CheckBox) ||
-                    control.GetType().IsSubclassOf(typeof(RadioButton)) || control.GetType() == typeof(RadioButton)
+                else if (control.GetType().IsSubclassOf(typeof(CheckBox)) || control is CheckBox ||
+                    control.GetType().IsSubclassOf(typeof(RadioButton)) || control is RadioButton
                 )
                 {
                     if (!scaledMovedL && !scaledMovedY)
                     {
-                        if (!scaledMovedY && (control2.GetType().IsSubclassOf(typeof(Label)) || control2.GetType() == typeof(Label)))
+                        if (!scaledMovedY && (control2.GetType().IsSubclassOf(typeof(Label)) || control2 is Label))
                         {
-                            control.Location = new Point(getRightAnchoredControlX(control, control.Width, control2, pinnedToParent, level, -checkBoxRadioButtonOffsetCompensationX * hDpiFontScaling), getCheckBoxesRadioButtonsY(control, control2));
+                            control.Left = getRightAnchoredControlX(control, control.Width, control2, pinnedToParent, level, -checkBoxRadioButtonOffsetCompensationX * hDpiFontScaling);
+                            control.Top = getCheckBoxesRadioButtonsY(control, control2);
                         }
                         else
                         {
-                            control.Location = new Point(getRightAnchoredControlX(control, control.Width, control2, pinnedToParent, level), (int)Math.Round(GetYCenteredToY2(control.Height, control2.Location.Y, control2)));
+                            control.Left = getRightAnchoredControlX(control, control.Width, control2, pinnedToParent, level);
+                            control.Top = (int)Math.Round(GetYCenteredToY2(control.Height, control2.Top, control2));
                         }
 
                         scaledMovedL = true;
                         scaledMovedY = true;
                     }
                 }
-                else if (control.GetType().IsSubclassOf(typeof(PictureBox)) || control.GetType() == typeof(PictureBox))
+                else if (control.GetType().IsSubclassOf(typeof(PictureBox)) || control is PictureBox)
                 {
                     if (!scaledMovedL)
                     {
-                        if (control2.GetType().IsSubclassOf(typeof(Label)) || control2.GetType() == typeof(Label))
+                        if (control2.GetType().IsSubclassOf(typeof(Label)) || control2 is Label)
                         {
-                            control.Location = new Point(getRightAnchoredControlX(control, control.Width, control2, pinnedToParent, level, smallControlOffsetX), control.Location.Y);
+                            control.Left = getRightAnchoredControlX(control, control.Width, control2, pinnedToParent, level, smallControlOffsetX);
+
+                            if (!scaledMovedY)
+                            {
+                                control.Top = getPictureBoxY(control.Height, control2);
+                                scaledMovedY = true;
+                            }
                         }
                         else
                         {
-                            control.Location = new Point(getRightAnchoredControlX(control, control.Width, control2, pinnedToParent, level, control.Margin.Right + control2.Margin.Left), control.Location.Y);
+                            control.Left = getRightAnchoredControlX(control, control.Width, control2, pinnedToParent, level, control.Margin.Right + control2.Margin.Left);
                         }
 
                         scaledMovedL = true;
-                    }
-
-                    if (!scaledMovedY)
-                    {
-                        control.Location = new Point(control.Location.X, getPictureBoxY(control.Height, control2));
-                        scaledMovedY = true;
                     }
                 }
                 //control2 right anchored
@@ -827,7 +835,7 @@ namespace MusicBeePlugin
                 {
                     if (!scaledMovedL)
                     {
-                        control.Location = new Point(getRightAnchoredControlX(control, control.Width, control2, pinnedToParent, level), control.Location.Y);
+                        control.Left = getRightAnchoredControlX(control, control.Width, control2, pinnedToParent, level);
                         scaledMovedL = true;
                     }
                 }
@@ -869,17 +877,17 @@ namespace MusicBeePlugin
                     (int controlReferenceLeft, int controlReferenceRight, int controlReferenceMarginLeft, int controlReferenceMarginRight) = GetControl2LeftRightMarginsOrParent0WidthPaddings(control, controlReference, pinnedToParent);
 
                     controlRNew = controlReferenceLeft - (controlReferenceMarginLeft + control.Margin.Right);
-                    control.Location = new Point(controlReferencingRight + (controlReferencingMarginRight + control.Margin.Left), control.Location.Y);
-                    control.Width = controlRNew - control.Location.X;
+                    control.Left = controlReferencingRight + (controlReferencingMarginRight + control.Margin.Left);
+                    control.Width = controlRNew - control.Left;
                 
                 }
                 else if (controlReferencing != null && controlReferencingLevel == 0 && controlReference == null)
                 {
                     (int controlReferencingLeft, int controlReferencingRight, int controlReferencingMarginLeft, int controlReferencingMarginRight) = GetControl2LeftRightMarginsOrParent0WidthPaddings(control, controlReferencing, pinnedToParent);
 
-                    controlRNew = control.Location.X + control.Width;
-                    control.Location = new Point(controlReferencingLeft + (controlReferencingMarginRight + control.Margin.Left), control.Location.Y);
-                    control.Width = controlRNew - control.Location.X;
+                    controlRNew = control.Left + control.Width;
+                    control.Left = controlReferencingLeft + (controlReferencingMarginRight + control.Margin.Left);
+                    control.Width = controlRNew - control.Left;
                 }
                 else if ((controlReferencing == null || controlReferencingLevel > 0) && controlReference != null)
                 {
@@ -889,7 +897,7 @@ namespace MusicBeePlugin
                     {
                         (int controlReferencingLeft, int controlReferencingRight, int controlReferencingMarginLeft, int controlReferencingMarginRight) = GetControl2LeftRightMarginsOrParent0WidthPaddings(control, control.Parent, true);
 
-                        control.Location = new Point(controlReferencingMarginRight + control.Margin.Left, control.Location.Y);
+                        control.Left = controlReferencingMarginRight + control.Margin.Left;
                         controlRNew = controlReferenceRight - (controlReferenceMarginRight + control.Margin.Right);
                     }
                     else
@@ -897,7 +905,7 @@ namespace MusicBeePlugin
                         controlRNew = controlReferenceLeft - (controlReferenceMarginLeft + control.Margin.Right);
                     }
 
-                    control.Width = controlRNew - control.Location.X;
+                    control.Width = controlRNew - control.Left;
                 }
                 else //if (controlReferencing == null && controlReference == null)
                 {
@@ -908,15 +916,15 @@ namespace MusicBeePlugin
 
         public void skinControl(Control control)
         {
-            //if (control.GetType().IsSubclassOf(typeof(TabControl)) || control.GetType() == typeof(TabControl))
+            //if (control.GetType().IsSubclassOf(typeof(TabControl)) || control is TabControl)
             //{
-            //    TabControl tabControl = (TabControl)control;
+            //    TabControl tabControl = control as TabControl;
             //    tabControl.DrawItem += form.TabControl_DrawItem;
             //
             //    return;
             //}
 
-            if (control.GetType().IsSubclassOf(typeof(SplitContainer)) || control.GetType() == typeof(SplitContainer))
+            if (control.GetType().IsSubclassOf(typeof(SplitContainer)) || control is SplitContainer)
             {
                 SplitContainer splitContainer = (SplitContainer) control;
 
@@ -931,9 +939,9 @@ namespace MusicBeePlugin
                 return;
             }
 
-            if (control.GetType().IsSubclassOf(typeof(Button)) || control.GetType() == typeof(Button))
+            if (control.GetType().IsSubclassOf(typeof(Button)) || control is Button)
             {
-                Button button = (Button)control;
+                Button button = control as Button;
 
                 buttonLabels.AddReplace(button, button.Text);
 
@@ -946,6 +954,7 @@ namespace MusicBeePlugin
                 if (!UseMusicBeeFontSkinColors)
                 {
                     button.FlatStyle = FlatStyle.Standard;
+                    buttonLabels.AddReplace(button, button.Text);
                 }
                 else
                 {
@@ -975,14 +984,14 @@ namespace MusicBeePlugin
                 return;
 
 
-            if (control.GetType().IsSubclassOf(typeof(TextBox)) || control.GetType() == typeof(TextBox))
+            if (control.GetType().IsSubclassOf(typeof(TextBox)) || control is TextBox)
             {
                 control.BackColor = InputControlBackColor;
                 control.ForeColor = InputControlForeColor;
 
-                ((TextBox)control).BorderStyle = BorderStyle.FixedSingle;
+                (control as TextBox).BorderStyle = BorderStyle.FixedSingle;
             }
-            else if (control.GetType().IsSubclassOf(typeof(ComboBox)) || control.GetType() == typeof(ComboBox))
+            else if (control.GetType().IsSubclassOf(typeof(ComboBox)) || control is ComboBox)
             {
                 ComboBox comboBox = control as ComboBox;
 
@@ -991,12 +1000,11 @@ namespace MusicBeePlugin
 
                 comboBox.FlatStyle = FlatStyle.Flat;
 
-                if (comboBox.DropDownStyle == ComboBoxStyle.DropDownList) //For rendering high contrast cue banners.
-                {
-                    comboBox.DrawItem += comboBox_DrawItem;
-                    comboBox.DrawMode = DrawMode.OwnerDrawFixed;
-                }
-                else //DropDown look ugly if disabled. Let's handle 
+                //For rendering high contrast cue banners. Works with DropDownLists only.
+                comboBox.DrawItem += comboBox_DrawItem;
+                comboBox.DrawMode = DrawMode.OwnerDrawFixed;
+
+                if (comboBox.DropDownStyle == ComboBoxStyle.DropDown) //DropDown looks ugly if disabled. Let's handle 
                 {
                     dropDownStyleComboBox.Add(comboBox);
 
@@ -1004,14 +1012,14 @@ namespace MusicBeePlugin
                     comboBox_EnabledChanged(comboBox, null);
                 }
             }
-            else if (control.GetType().IsSubclassOf(typeof(ListBox)) || control.GetType() == typeof(ListBox))
+            else if (control.GetType().IsSubclassOf(typeof(ListBox)) || control is ListBox)
             {
                 control.BackColor = InputControlBackColor;
                 control.ForeColor = InputControlForeColor;
                 
-                ((ListBox)control).BorderStyle = BorderStyle.Fixed3D;
+                (control as ListBox).BorderStyle = BorderStyle.Fixed3D;
             }
-            else if (control.GetType().IsSubclassOf(typeof(Label)) || control.GetType() == typeof(Label))
+            else if (control.GetType().IsSubclassOf(typeof(Label)) || control is Label)
             {
                 control.BackColor = FormBackColor;
 
@@ -1025,7 +1033,7 @@ namespace MusicBeePlugin
                     control.ForeColor = GetHighlightColor(control.ForeColor, stdColor, FormBackColor, 0.80f);
                 }
             }
-            else if (control.GetType().IsSubclassOf(typeof(GroupBox)) || control.GetType() == typeof(GroupBox))
+            else if (control.GetType().IsSubclassOf(typeof(GroupBox)) || control is GroupBox)
             {
                 control.BackColor = FormBackColor;
 
@@ -1039,31 +1047,31 @@ namespace MusicBeePlugin
                     control.ForeColor = GetHighlightColor(control.ForeColor, stdColor, FormBackColor, 0.80f);
                 }
 
-                ((GroupBox)control).FlatStyle = FlatStyle.System;
+                (control as GroupBox).FlatStyle = FlatStyle.System;
             }
-            else if (control.GetType().IsSubclassOf(typeof(CheckBox)) || control.GetType() == typeof(CheckBox))
+            else if (control.GetType().IsSubclassOf(typeof(CheckBox)) || control is CheckBox)
             {
                 control.BackColor = FormBackColor;
                 control.ForeColor = FormForeColor;
 
-                ((CheckBox)control).FlatStyle = FlatStyle.System;
+                (control as CheckBox).FlatStyle = FlatStyle.System;
             }
-            else if (control.GetType().IsSubclassOf(typeof(RadioButton)) || control.GetType() == typeof(RadioButton))
+            else if (control.GetType().IsSubclassOf(typeof(RadioButton)) || control is RadioButton)
             {
                 control.BackColor = FormBackColor;
                 control.ForeColor = FormForeColor;
 
-                ((RadioButton)control).FlatStyle = FlatStyle.System;
+                (control as RadioButton).FlatStyle = FlatStyle.System;
             }
-            else if (control.GetType() == typeof(DataGridView))
+            else if (control is DataGridView)
             {
                 control.BackColor = HeaderCellStyle.BackColor;
                 control.ForeColor = HeaderCellStyle.ForeColor;
 
-                ((DataGridView)control).BorderStyle = BorderStyle.FixedSingle;
-                ((DataGridView)control).ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-                ((DataGridView)control).BackgroundColor = UnchangedCellStyle.BackColor;
-                ((DataGridView)control).DefaultCellStyle = UnchangedCellStyle;
+                (control as DataGridView).BorderStyle = BorderStyle.FixedSingle;
+                (control as DataGridView).ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+                (control as DataGridView).BackgroundColor = UnchangedCellStyle.BackColor;
+                (control as DataGridView).DefaultCellStyle = UnchangedCellStyle;
             }
             else
             {
@@ -1092,7 +1100,7 @@ namespace MusicBeePlugin
                     pinnedToParentControls.Add(control);
 
                 if (remarks.Contains("non-defaultable") && !nonDefaultableButtons.Contains(control))
-                    nonDefaultableButtons.Add((Button)control);
+                    nonDefaultableButtons.Add(control as Button);
             }
         }
 
@@ -1246,7 +1254,7 @@ namespace MusicBeePlugin
                     SplitContainer sc = control as SplitContainer;
                     SplitContainerScalingAttributes scsa = default;
                     scsa.splitContainer = sc;
-                    scsa.panel2MinSize = sc.Panel1MinSize;
+                    scsa.panel1MinSize = sc.Panel1MinSize;
                     scsa.panel2MinSize = sc.Panel2MinSize;
                     scsa.splitterDistance = sc.SplitterDistance;
 
@@ -1273,7 +1281,7 @@ namespace MusicBeePlugin
             resource = resources.GetObject("$this.ClientSize");
             Size initialClientSize = resource == null ? new Size(0, 0) : (Size)resource;
             resource = resources.GetObject("$this.Font");
-            Font initialFormFont = resource == null ? Font : (Font)resource;
+            Font initialFormFont = resource == null ? Font : resource as Font;
 
 
             MaximumSize = new Size(0, 0); //Let's temporary remove max. size restrictions
@@ -1296,7 +1304,7 @@ namespace MusicBeePlugin
 
             if (mbThisFormFontEquality == FontEquality.DifferentFontUnits)
             {
-                MessageBox.Show(MbForm, "Unsupported MusicBee font type!\n" + //*******
+                MessageBox.Show(MbForm, "Unsupported MusicBee font type!\n" + 
                     "Either choose different font in MusicBee preferences or disable using skin colors in plugin settings.",
                     string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
@@ -1358,7 +1366,7 @@ namespace MusicBeePlugin
 
             MinimumSize = Size;
 
-            hDpiFontScaling = (float)ClientSize.Width / initialClientSize.Width;//***** hDpiFontScaling VS vDpiFontScaling !!!
+            hDpiFontScaling = (float)ClientSize.Width / initialClientSize.Width;
             vDpiFontScaling = (float)ClientSize.Height / initialClientSize.Height;
 
 
@@ -1376,27 +1384,20 @@ namespace MusicBeePlugin
                 if (maximizedHeight > Screen.FromControl(this).WorkingArea.Height)
                     maximizedHeight = Screen.FromControl(this).WorkingArea.Height;
 
-                MaximizedBounds = new Rectangle(Screen.FromControl(this).WorkingArea.Left, 0, //****** scaling needed?
+                MaximizedBounds = new Rectangle(Screen.FromControl(this).WorkingArea.Left, 0, 
                     Screen.FromControl(this).WorkingArea.Width, maximizedHeight);
             }
         }
 
-        protected void primaryInitialization()
+        protected void initAndShow()
         {
-            if (!dontShowForm) //If forceHidden, then form is created to get DPI/font scaling only, won't show it, form will be disposed soon.
+            if (!dontShowForm) //If dontShowForm, then form is created to get DPI/font scaling only, won't show it, form will be disposed soon.
             {
-                if (initialized)
-                {
-                    tryShowForm();
-                    return;
-                }
-
-
                 //Common initialization
                 if (MbForm.IsDisposed)
                     MbForm = (Form)FromHandle(MbApiInterface.MB_GetWindowHandle());
 
-                MbForm.AddOwnedForm(this);
+                //MbForm.AddOwnedForm(this);//******
 
                 clickedButton = EmptyButton;
 
@@ -1434,59 +1435,113 @@ namespace MusicBeePlugin
 
             loadWindowSizesPositions();
 
-            if (width != 0 && height != 0)
+            if (width != 0 && height != 0 && !fixedSize)
             {
-                width = (int)(width * hDpiFormScaling);
+                width = (int)Math.Round(width * hDpiFormScaling);
 
                 if (!fixedSize)
-                    height = (int)(height * vDpiFormScaling);
+                    height = (int)Math.Round(height * vDpiFormScaling);
+
+
+                if (MinimumSize.Width != 0 && width < MinimumSize.Width)
+                    width = MinimumSize.Width;
+
+                if (MaximumSize.Width != 0 && width > MaximumSize.Width)
+                    width = MaximumSize.Width;
+
+
+                if (MinimumSize.Height != 0 && height < MinimumSize.Height)
+                    height = MinimumSize.Height;
+
+                if (MaximumSize.Height != 0 && height > MaximumSize.Height)
+                    height = MaximumSize.Height;
+
 
                 Width = width;
                 Height = height;
                 WindowState = windowState;
             }
-            else if (!modal && !fixedSize)
+            else if (fixedSize) //Fixed size
             {
-                width = (int)(Width * hDpiFormScaling);
-                height = (int)(Height * vDpiFormScaling);
-
-                Width = width;
-                Height = height;
-                WindowState = FormWindowState.Normal;
-            }
-            else if (!fixedSize) //Modal
-            {
-                Width = MinimumSize.Width;
-                Height = MinimumSize.Height;
-                WindowState = FormWindowState.Normal;
-
-                width = Width;
-                height = Height;
-
-            }
-            else //Fixed size
-            {
-                Width = (int)(Width * hDpiFormScaling);
-                Height = Height;
+                Width = (int)Math.Round(Width * hDpiFormScaling);
                 WindowState = FormWindowState.Normal;
 
                 width = Width;
                 height = Height;
             }
+            else //No saved state, not fixed size
+            {
+                WindowState = FormWindowState.Normal;
 
-            Top = (int)(top * hDpiFormScaling);
-            Left = (int)(left * hDpiFormScaling);
+                width = Width;
+                height = Height;
+
+                left = Left;
+                top = Top;
+            }
+
+            if (left != 0 || top != 0) //Saved position
+            {
+                left = (int)Math.Round(left * hDpiFormScaling);
+                top = (int)Math.Round(top * vDpiFormScaling);
+            }
+            else
+            {
+                left = Left;
+                top = Top;
+            }
+
 
             setFormMaximizedBounds();
-
-            skinMoveScaleAllControls();//***
-
-
-            ignoreSizePositionChanges = false;
-            initialized = true;
+            skinMoveScaleAllControls();
 
 
-            tryShowForm();
+            if (FormShowDelay == 0)
+            {
+                SetBounds(left, top, width, height);
+                ignoreSizePositionChanges = false;
+                showFormInternal();
+            }
+            else
+            {
+                SetBounds(-20 - Width, -20 - Height, Width, Height);
+                delayedShowFormTimer = new System.Threading.Timer(showFormDelayedInternal, null, FormShowDelay, Timeout.Infinite);
+                showFormInternal();
+            }
+        }
+
+        protected void showFormDelayedInternal(object state)
+        {
+            delayedShowFormTimer.Dispose();
+            delayedShowFormTimer = null;
+
+            Invoke(new Action(() => {
+                if (!IsDisposed)
+                {
+                    SetBounds(left, top, width, height);
+                    ignoreSizePositionChanges = false;
+                }
+            }));
+        }
+
+        protected void showFormInternal()
+        {
+            if (modal)
+                base.ShowDialog(MbForm);
+            else
+                base.Show(MbForm);
+        }
+
+        public new void Show()
+        {
+            modal = false;
+            initAndShow();
+        }
+
+        public new void ShowDialog()
+        {
+            modal = true;
+            initAndShow();
         }
 
         public static void Display(PluginWindowTemplate newForm, bool modalForm = false)
@@ -1547,26 +1602,6 @@ namespace MusicBeePlugin
             //Implemented in derived classes... 
         }
 
-        protected void tryShowForm()
-        {
-            if (modal)
-                base.ShowDialog();
-            else
-                base.Show();
-        }
-
-        public new void Show()
-        {
-            modal = false;
-            primaryInitialization();
-        }
-
-        public new void ShowDialog()
-        {
-            modal = true;
-            primaryInitialization();
-        }
-
         private void PluginWindowTemplate_Move(object sender, EventArgs e)
         {
             if (ignoreSizePositionChanges)
@@ -1607,7 +1642,7 @@ namespace MusicBeePlugin
                 }
                 else
                 {
-                    setFormMaximizedBounds();
+                    //setFormMaximizedBounds(); //******
 
                     left = Left;
                     top = Top;
@@ -1644,8 +1679,13 @@ namespace MusicBeePlugin
         private void PluginWindowTemplate_Shown(object sender, EventArgs e)
         {
             for (int i = allControls.Count - 1; i >= 0; i--)
-                if (allControls[i].Focused)
+            {
+                if (allControls[i].Focused && allControls[i].Controls.Count == 0)
+                {
                     lastSelectedControl = allControls[i];
+                    break;
+                }
+            }
         }
 
         private void PluginWindowTemplate_FormClosing(object sender, FormClosingEventArgs e)
@@ -1782,15 +1822,8 @@ namespace MusicBeePlugin
             }
 
 
-            int width2 = (int)(width / hDpiFormScaling);
-            int height2;
-
-            if (fixedSize)
-                currentWindowSettings.h = height2 = 0;
-            else if (!modal)
-                height2 = (int)(height / vDpiFormScaling);
-            else
-                height2 = height;
+            int width2 = (int)Math.Round(width / hDpiFormScaling);
+            int height2 = (int)Math.Round(height / vDpiFormScaling);
 
             if (width2 == 0)
             {
@@ -1811,13 +1844,13 @@ namespace MusicBeePlugin
             }
 
 
-            int left2 = (int)(left / hDpiFormScaling);
+            int left2 = (int)Math.Round(left / hDpiFormScaling);
             if (Math.Abs(left2 - currentWindowSettings.x) <= 1) // 1px
             {
                 left2 = currentWindowSettings.x;
             }
 
-            int top2 = (int)(top / vDpiFormScaling);
+            int top2 = (int)Math.Round(top / vDpiFormScaling);
             if (Math.Abs(top2 - currentWindowSettings.y) <= 1) // 1px
             {
                 top2 = currentWindowSettings.y;
@@ -1844,21 +1877,21 @@ namespace MusicBeePlugin
 
             if (column1Width != 0)
             {
-                int column1Width2 = (int)(column1Width / hDpiFontScaling);
+                int column1Width2 = (int)Math.Round(column1Width / hDpiFontScaling);
                 if (100f * Math.Abs(column1Width2 - currentWindowSettings.column1Width) / column1Width2 < 0.5f)
                     column1Width2 = currentWindowSettings.column1Width;
 
                 currentWindowSettings.column1Width = column1Width2;
 
 
-                int column2Width2 = (int)(column2Width / hDpiFontScaling);
+                int column2Width2 = (int)Math.Round(column2Width / hDpiFontScaling);
                 if (100f * Math.Abs(column2Width2 - currentWindowSettings.column1Width) / column2Width2 < 0.5f)
                     column2Width2 = currentWindowSettings.column2Width;
 
                 currentWindowSettings.column2Width = column2Width2;
 
 
-                int column3Width2 = (int)(column3Width / hDpiFontScaling);
+                int column3Width2 = (int)Math.Round(column3Width / hDpiFontScaling);
                 if (100f * Math.Abs(column3Width2 - currentWindowSettings.column3Width) / column3Width2 < 0.5f)
                     column3Width2 = currentWindowSettings.column3Width;
 
@@ -1867,21 +1900,21 @@ namespace MusicBeePlugin
 
             if (table2column1Width != 0)
             {
-                int table2column1Width2 = (int)(table2column1Width / hDpiFontScaling);
+                int table2column1Width2 = (int)Math.Round(table2column1Width / hDpiFontScaling);
                 if (100f * Math.Abs(table2column1Width2 - currentWindowSettings.table2column1Width) / table2column1Width2 < 0.5f)
                     table2column1Width2 = currentWindowSettings.table2column1Width;
 
                 currentWindowSettings.table2column1Width = table2column1Width2;
 
 
-                int table2column2Width2 = (int)(table2column2Width / hDpiFontScaling);
+                int table2column2Width2 = (int)Math.Round(table2column2Width / hDpiFontScaling);
                 if (100f * Math.Abs(table2column2Width2 - currentWindowSettings.table2column1Width) / table2column2Width2 < 0.5f)
                     table2column2Width2 = currentWindowSettings.table2column2Width;
 
                 currentWindowSettings.table2column2Width = table2column2Width2;
 
 
-                int table2column3Width2 = (int)(table2column3Width / hDpiFontScaling);
+                int table2column3Width2 = (int)Math.Round(table2column3Width / hDpiFontScaling);
                 if (100f * Math.Abs(table2column3Width2 - currentWindowSettings.table2column3Width) / table2column3Width2 < 0.5f)
                     table2column3Width2 = currentWindowSettings.table2column3Width;
 
@@ -1890,7 +1923,7 @@ namespace MusicBeePlugin
 
             if (splitterDistance != 0)
             {
-                int splitterDistance2 = (int)(splitterDistance / vDpiFontScaling);
+                int splitterDistance2 = (int)Math.Round(splitterDistance / vDpiFontScaling);
                 if (100f * Math.Abs(splitterDistance2 - currentWindowSettings.splitterDistance) / splitterDistance2 < 0.5f)
                     splitterDistance2 = currentWindowSettings.splitterDistance;
 

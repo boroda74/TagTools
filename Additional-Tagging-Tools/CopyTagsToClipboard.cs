@@ -108,7 +108,7 @@ namespace MusicBeePlugin
             {
                 for (int j = 0; j < sourceTagList.Items.Count; j++)
                 {
-                    if (((string)sourceTagList.Items[j]).Substring(2) == selectedTags[i])
+                    if ((sourceTagList.Items[j] as string).Substring(2) == selectedTags[i])
                     {
                         sourceTagList.SetItemChecked(j, true);
                         break;
@@ -194,11 +194,11 @@ namespace MusicBeePlugin
 
             for (int i = 0; i < checkedSourceTagList.Items.Count; i++)
             {
-                int id = (int)GetTagId((string)checkedSourceTagList.Items[i]);
+                int id = (int)GetTagId(checkedSourceTagList.Items[i] as string);
 
                 checkedIds.Add(id);
 
-                if (((string)checkedSourceTagList.Items[i]).Substring(2) == DisplayedArtistName) //Displayed artist should be copied to clipboard the first or second
+                if ((checkedSourceTagList.Items[i] as string).Substring(2) == DisplayedArtistName) //Displayed artist should be copied to clipboard the first or second
                 {
                     if (displayedArtistOffset == 0)
                         displayedComposerOffset = 1;
@@ -206,7 +206,7 @@ namespace MusicBeePlugin
                     checkedIds[checkedIds.Count - 1] = checkedIds[displayedArtistOffset];
                     checkedIds[displayedArtistOffset] = id;
                 }
-                else if (((string)checkedSourceTagList.Items[i]).Substring(2) == DisplayedComposerName) //Displayed composer should be copied to clipboard the first or second
+                else if ((checkedSourceTagList.Items[i] as string).Substring(2) == DisplayedComposerName) //Displayed composer should be copied to clipboard the first or second
                 {
                     if (displayedComposerOffset == 0)
                         displayedArtistOffset = 1;

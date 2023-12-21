@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MusicBeePlugin</RootNamespace>
     <AssemblyName>mb_TagTools</AssemblyName>
-    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -414,6 +414,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\Resources\gear.png" />
+    <None Include="Properties\Resources\multiple-artworks.png" />
+    <None Include="Properties\Resources\multiple-artworks-accent.png" />
     <Content Include="wrench.ico" />
     <None Include="Properties\Resources\warning-15.png" />
     <None Include="Properties\Resources\warning-wide-15.png" />

@@ -104,7 +104,7 @@ namespace ExtensionMethods
             }
 
 
-            if (control.GetType() == typeof(Label))
+            if (control is Label)
             {
                 if (state)
                     control.ForeColor = enabledColor;
@@ -115,23 +115,13 @@ namespace ExtensionMethods
             }
 
 
-            if (control.GetType() != typeof(CheckBox) && control.GetType() != typeof(RadioButton))
-            {
-                control.Enabled = state;
-                return;
-            }
-
-
             control.Enabled = state;
 
-            //control2 must be Label
-            (control.FindForm() as PluginWindowTemplate).controlsReferences.TryGetValue(control, out var control2);
-            if (control2 != null)
+            if (control is CheckBox || control is RadioButton)
             {
-                if (state)
-                    control2.ForeColor = enabledColor;
-                else
-                    control2.ForeColor = disabledColor;
+                (control.FindForm() as PluginWindowTemplate).controlsReferences.TryGetValue(control, out var control2);
+                if (control2 != null && control2 is Label)
+                    control2.Enable(state);
             }
         }
     }
@@ -367,8 +357,8 @@ namespace MusicBeePlugin
         public static bool DisablePlaySoundOnce = false;
 
         public static bool BackupIsAlwaysNeeded = true;
-        public static SortedDictionary<int, bool> TracksNeedsToBeBackuped = new SortedDictionary<int, bool>();
-        public static SortedDictionary<int, bool> TempTracksNeedsToBeBackuped = new SortedDictionary<int, bool>();
+        public static SortedDictionary<int, bool> TracksNeedsToBeBackedUp = new SortedDictionary<int, bool>();
+        public static SortedDictionary<int, bool> TempTracksNeedsToBeBackedUp = new SortedDictionary<int, bool>();
         public static int UpdatedTracksForBackupCount = 0;
         public const int MaxUpdatedTracksCount = 5000;
         public static string MusicName;
@@ -482,7 +472,7 @@ namespace MusicBeePlugin
         public static string ArtistArtistsName;
         public static string DisplayedComposerName;
         public static string ComposerComposersName;
-        public static string DisplayedAlbumArtsistName;
+        public static string DisplayedAlbumArtistName;
         public static string ArtworkName;
         public static string LyricsName;
         public static string LyricsNamePostfix;
@@ -1001,6 +991,10 @@ namespace MusicBeePlugin
         public static string CtlSelectThisFolder;
         public static string CtlNoBackupData;
         public static string CtlNoDifferences;
+        public static string CtlMixedValues;
+        public static string CtlMixedValuesSameAsInLibrary;
+        public static string CtlMixedValuesDifferentFromLibrary;
+
         public static string MsgNotAllowedSymbols;
         public static string MsgPresetExists;
 
@@ -1066,18 +1060,22 @@ namespace MusicBeePlugin
         {
             UseOtherResults = -2,
             AutoDouble = -1,
-            UnknownOrString = 0,
-            ItemCount = 1,
-            Double = 2,
-            Datetime = 3,
-            Timespan = 4,
-            Year = 5,
+            Double = 1,
+            Year = 2,
+            DateTime = 3,
+            TimeSpan = 4,
+
+            ItemCount = 50,
+            UnknownOrString = 51,
 
             ParsingError = 100
         }
 
         public struct ConvertStringsResult
         {
+            public static readonly DateTime ReferenceDt = new DateTime(0001, 1, 1);
+            public static readonly TimeSpan ReferenceTsOffset = new TimeSpan(0001, 0, 0);
+
             public DataType dataType;
             public ResultType resultType;
 
@@ -1088,6 +1086,7 @@ namespace MusicBeePlugin
 
             public string resultS;
 
+            public SortedDictionary<string, bool> urls;
             public SortedDictionary<string, bool> items;
             public SortedDictionary<string, bool> items1;
 
@@ -1103,6 +1102,7 @@ namespace MusicBeePlugin
 
                 resultS = string.Empty;
 
+                urls = new SortedDictionary<string, bool>();
                 items = new SortedDictionary<string, bool>();
                 items1 = new SortedDictionary<string, bool>();
             }
@@ -1114,8 +1114,8 @@ namespace MusicBeePlugin
                     double value = (double)items1.Count / items.Count;
                     
                     double comparedValue;
-                    if (comparedResult.items == null)
-                        comparedValue = comparedResult.resultD;
+                    if (comparedResult.items.Count == 0 && comparedResult.items1.Count == 0)
+                        comparedValue = 0;
                     else
                         comparedValue = (double)comparedResult.items1.Count / comparedResult.items.Count;
 
@@ -1126,7 +1126,7 @@ namespace MusicBeePlugin
                     else //if (value > comparedValue)
                         return +1;
                 }
-                else if (resultType <= 0) //0 - unknown/string, -1 - use other results to get type
+                else if (resultType == ResultType.UnknownOrString || resultType == ResultType.UseOtherResults) //**** use other results to get type????
                 {
                     string value = resultS;
                     string comparedValue = comparedResult.resultS;
@@ -1136,12 +1136,7 @@ namespace MusicBeePlugin
                 else if (resultType == ResultType.ItemCount) //Items count
                 {
                     double value = items.Count;
-
-                    double comparedValue;
-                    if (comparedResult.items == null)
-                        comparedValue = comparedResult.resultD;
-                    else
-                        comparedValue = comparedResult.items.Count;
+                    double comparedValue = comparedResult.items.Count;
 
                     if (value == comparedValue)
                         return 0;
@@ -1150,14 +1145,14 @@ namespace MusicBeePlugin
                     else //if (value > comparedValue)
                         return +1;
                 }
-                else if ((int)resultType >= 2) //2: double, 3: timespan (milliseconds), 4: date-time (milliseconds from DateTime.MinValue)
+                else if (resultType >= ResultType.AutoDouble && resultType < ResultType.UnknownOrString) //(Auto)double, year or date-time (milliseconds from 1900-01-01), timespan (milliseconds)
                 {
                     double value = resultD;
-                    if (items.Count != 0) //Its "average" function
+                    if (items != null && items.Count != 0) //Its "average" function
                         value /= items.Count;
 
                     double comparedValue = comparedResult.resultD;
-                    if (comparedResult.items != null && comparedResult.items.Count != 0) //Its "average" function
+                    if (items != null && items.Count != 0) //Its "average" function
                         comparedValue /= comparedResult.items.Count;
 
                     if (value == comparedValue)
@@ -1168,7 +1163,8 @@ namespace MusicBeePlugin
                         return +1;
                 }
 
-                return -100; //This must never happen
+
+                throw new Exception("Unsupported result type: " + resultType + "!"); //This must never happen
             }
 
             public double getResult() //Returns double for any numeric (number/duration/date-time) result or NegativeInfinity for any not numeric one
@@ -1177,49 +1173,49 @@ namespace MusicBeePlugin
                 {
                     return (double)items1.Count / items.Count;
                 }
-                else if (resultType <= 0) //0 - unknown/string, -1 - use other results to get type
-                {
-                    if (items.Count == 0)
-                        return double.NegativeInfinity;
-                    else //Its "average" function
-                        return resultD / items.Count;
-                }
+                //else if (resultType >= ResultType.UnknownOrString || resultType == ResultType.UseOtherResults) //**** must never happen
+                //{
+                //    if (items.Count == 0)
+                //        return double.NegativeInfinity;
+                //    else //Its "average" function
+                //        return resultD / items.Count;
+                //}
                 else if (resultType == ResultType.ItemCount) //Items count
                 {
                     return items.Count;
                 }
-                else if (resultType == ResultType.Double) //Double
+                else if (resultType == ResultType.Double || resultType == ResultType.AutoDouble) //Double
                 {
                     if (items.Count == 0)
                         return resultD;
                     else //Its "average" function
                         return resultD / items.Count;
                 }
-                else if (resultType == ResultType.Timespan) //Timespan
+                else if (resultType == ResultType.TimeSpan) //Timespan
                 {
                     if (items.Count == 0)
                         return resultD;
                     else //Its "average" function
                         return resultD / items.Count;
                 }
-                else if (resultType == ResultType.Datetime) //Date/time
+                else if (resultType == ResultType.DateTime) //Datetime
                 {
                     if (items.Count == 0)
                         return resultD;
                     else //Its "average" function
                         return resultD / items.Count;
                 }
-                else if (resultType == ResultType.Year) //Date/time (year only)
+                else if (resultType == ResultType.Year) //Datetime (year only)
                 {
                     if (items.Count == 0)
                         return resultD;
                     else //Its "average" function
                         return resultD / items.Count;
                 }
-                else if (resultType == ResultType.ParsingError) //Parsing error
-                {
-                    return double.NegativeInfinity;
-                }
+                //else if (resultType == ResultType.ParsingError) //Parsing error //**** must never happen
+                //{
+                //    return double.NegativeInfinity;
+                //}
                 else
                 {
                     throw new Exception("Not implemented result type: " + resultType + "!");
@@ -1228,63 +1224,53 @@ namespace MusicBeePlugin
 
             public string getFormattedResult(int operation, string mulDivFactorRepr, string precisionDigitsRepr, string appendedText)
             {
-                double result = getResult();
-
-                if (resultType <= 0)
+                if (resultType == ResultType.UnknownOrString || resultType == ResultType.UseOtherResults) //**** Use other results???
                 {
                     return resultS;
                 }
+                else if (resultType == ResultType.ParsingError)
+                {
+                    return "#PARSING ERROR!";
+                }
+
+
+                double result = getResult();
+
+                if (result == double.NegativeInfinity)
+                {
+                    resultType = ResultType.ParsingError;
+
+                    return "#INVALID VALUE!";
+                }
+                else if (resultType == ResultType.ItemCount || resultType == ResultType.Double || resultType == ResultType.AutoDouble) //Item count or double. It's numeric result. Let's format it.
+                {
+                    int mulDivFactor = GetMulDivFactor(mulDivFactorRepr);
+                    if (mulDivFactor != 1 && operation == 0)
+                        result /= mulDivFactor;
+                    else if (mulDivFactor != 1 && operation == 1)
+                        result *= mulDivFactor;
+
+                    int precisionDigits = GetPrecisionDigits(precisionDigitsRepr);
+                    if (precisionDigits >= 0)
+                        return resultDPrefix + Math.Round((decimal)result, precisionDigits).ToString("F" + precisionDigits) + resultDSpace + appendedText + resultDPostfix;
+                    else
+                        return resultDPrefix + result.ToString() + resultDSpace + appendedText + resultDPostfix;
+                }
+                else if (resultType == ResultType.TimeSpan)
+                {
+                    return TimeSpan.FromMilliseconds(result).ToString("g");//***
+                }
+                else if (resultType == ResultType.DateTime)
+                {
+                    return (ReferenceDt + ReferenceTsOffset + TimeSpan.FromMilliseconds(result)).ToString("g");
+                }
+                else if (resultType == ResultType.Year)
+                {
+                    return (ReferenceDt + ReferenceTsOffset + TimeSpan.FromMilliseconds(result)).Year.ToString("D4");
+                }
                 else
                 {
-                    if (resultType == ResultType.ParsingError)
-                    {
-                        return "#PARSING ERROR!";
-                    }
-                    else if (result == double.NegativeInfinity)
-                    {
-                        resultType = ResultType.ParsingError;
-
-                        return "#INVALID VALUE!";
-                    }
-                    else if (resultType == ResultType.ItemCount || resultType == ResultType.Double) //Item count or double. It's numeric result. Let's format it.
-                    {
-                        int mulDivFactor = GetMulDivFactor(mulDivFactorRepr);
-                        if (mulDivFactor != 1 && operation == 0)
-                            result /= mulDivFactor;
-                        else if (mulDivFactor != 1 && operation == 1)
-                            result *= mulDivFactor;
-
-                        int precisionDigits = GetPrecisionDigits(precisionDigitsRepr);
-                        if (precisionDigits >= 0)
-                            return resultDPrefix + Math.Round((decimal)result, precisionDigits).ToString("F" + precisionDigits) + resultDSpace + appendedText + resultDPostfix;
-                        else
-                            return resultDPrefix + result.ToString() + resultDSpace + appendedText + resultDPostfix;
-                    }
-                    else if (resultType == ResultType.Timespan)
-                    {
-                        if (items.Count == 0)
-                            return TimeSpan.FromSeconds(resultD).ToString("g");//***
-                        else //Its "average" function
-                            return TimeSpan.FromSeconds(resultD / items.Count).ToString("g");
-                    }
-                    else if (resultType == ResultType.Datetime)
-                    {
-                        if (items.Count == 0)
-                            return DateTime.FromBinary((long)resultD).ToString("g");
-                        else //Its "average" function
-                            return DateTime.FromBinary((long)(resultD / items.Count)).ToString("g");
-                    }
-                    else if (resultType == ResultType.Year)
-                    {
-                        if (items.Count == 0)
-                            return DateTime.FromBinary((long)resultD).Year.ToString("D4");
-                        else //Its "average" function
-                            return DateTime.FromBinary((long)(resultD / items.Count)).Year.ToString("D4");
-                    }
-                    else
-                    {
-                        throw new Exception("Not implemented result type: " + resultType + "!");
-                    }
+                    throw new Exception("Not implemented result type: " + resultType + "!");
                 }
             }
         }
@@ -1463,7 +1449,11 @@ namespace MusicBeePlugin
                     result.resultDSpace = numberspace;
                     result.resultDPostfix = numberpostfix;
                     result.dataType = dataType;
-                    result.resultType = ResultType.Double;
+
+                    if (dataType == DataType.Number)
+                        result.resultType = ResultType.Double;
+                    else
+                        result.resultType = ResultType.AutoDouble;
                 }
                 else if (dataType != DataType.Number) //Auto-type
                 {
@@ -1495,7 +1485,6 @@ namespace MusicBeePlugin
                 else if (!replacements) //Let's try to parse as number if there were no replacements
                     return ConvertStrings(arg, ResultType.Double, DataType.Number, true);
 
-
                 return result;
             }
             else if (dataType == DataType.Rating)
@@ -1512,33 +1501,26 @@ namespace MusicBeePlugin
             {
                 if (arg.Length < 5 && !arg.Contains(":") && !arg.Contains("/") && !arg.Contains("-") && !arg.Contains("."))
                 {
-                    if (arg == string.Empty)
-                    {
-                        result.resultD = new DateTime(1, 1, 1).ToBinary();
-                    }
-                    else
-                    {
-                        result.resultD = new DateTime(int.Parse(arg), 1, 1).ToBinary();
-                    }
-
+                    result.resultD = (new DateTime(int.Parse(arg), 1, 1) - ConvertStringsResult.ReferenceDt - ConvertStringsResult.ReferenceTsOffset).TotalMilliseconds;
                     result.resultType = ResultType.Year;
 
                     return result;
                 }
                 else if (arg.Contains(":") && !arg.Contains("/") && !arg.Contains("-") && !arg.Contains("."))
                 {
-                    return ConvertStrings(arg, ResultType.Timespan, DataType.String);
+                    return ConvertStrings(arg, ResultType.TimeSpan, DataType.String);
                 }
                 else if (DateTime.TryParse(arg, out DateTime datetime))
                 {
                     if (datetime.Year < 1900)
                     {
-                        result.resultD = TimeSpan.Parse(arg).TotalSeconds;
-                        result.resultType = ResultType.Timespan;
+                        result.resultD = TimeSpan.Parse(arg).TotalMilliseconds;
+                        result.resultType = ResultType.TimeSpan;
                     }
                     else
                     {
-                        result.resultD = datetime.ToBinary();
+                        result.resultD = (datetime - ConvertStringsResult.ReferenceDt - ConvertStringsResult.ReferenceTsOffset).TotalMilliseconds;
+                        result.resultType = ResultType.DateTime;
                     }
                 }
                 else
@@ -1566,8 +1548,8 @@ namespace MusicBeePlugin
                         if (ts1.Length > 2)
                             time += TimeSpan.FromHours(Convert.ToInt32(ts1[ts1.Length - 3]));
 
-                        result.resultD = time.TotalSeconds;
-                        result.resultType = ResultType.Timespan;
+                        result.resultD = time.TotalMilliseconds;
+                        result.resultType = ResultType.TimeSpan;
 
                         return result;
                     }
@@ -1584,8 +1566,8 @@ namespace MusicBeePlugin
                         if (datetime.Year < 1900)
                             throw new Exception(); //Let's try to parse as timespan again (as full timespan format including date)
 
-                        result.resultD = datetime.ToBinary();
-                        result.resultType = ResultType.Datetime;
+                        result.resultD = (datetime - ConvertStringsResult.ReferenceDt - ConvertStringsResult.ReferenceTsOffset).TotalMilliseconds;
+                        result.resultType = ResultType.DateTime;
 
                         return result;
                     }
@@ -1594,7 +1576,7 @@ namespace MusicBeePlugin
                         try //Let's try to parse as timespan again (as full timespan format including date)
                         {
                             result.resultD = TimeSpan.Parse(arg).TotalSeconds;
-                            result.resultType = ResultType.Timespan;
+                            result.resultType = ResultType.TimeSpan;
 
                             return result;
                         }
@@ -1620,21 +1602,32 @@ namespace MusicBeePlugin
         //Returns: +1 - string1 > string2, 0 - string1 = string2, -1 - string1 < string2
         public static int CompareStrings(string string1, string string2, ResultType type = ResultType.UseOtherResults, DataType datatype = DataType.String)
         {
-            ConvertStringsResult result1 = ConvertStrings(string1, type, datatype);
-            ConvertStringsResult result2 = ConvertStrings(string2, type, datatype);
+            ConvertStringsResult result1 = default;
+            ConvertStringsResult result2 = default;
 
-            //Types: 100 - parsing error, 4 - date - time, 3 - timespan, 2 - double, 1 - items count, 0 - unknown / string, -1 - use other results to get type
-            switch (result1.resultType)
+            if (type < ResultType.UnknownOrString)
+            {
+                result1 = ConvertStrings(string1, type, datatype);
+                result2 = ConvertStrings(string2, type, datatype);
+
+                if (result1.resultType > result2.resultType)
+                    type = result1.resultType;
+                else
+                    type = result2.resultType;
+            }
+
+            switch (type)
             {
                 case ResultType.ItemCount:
 
-                    if (result1.resultD > result2.resultD)
+                    if (result1.items.Count > result2.items.Count)
                         return 1;
-                    else if (result1.resultD < result2.resultD)
+                    else if (result1.items.Count < result2.items.Count)
                         return -1;
                     else
                         return 0;
 
+                case ResultType.AutoDouble:
                 case ResultType.Double:
 
                     if (result1.resultD > result2.resultD)
@@ -1644,7 +1637,7 @@ namespace MusicBeePlugin
                     else
                         return 0;
 
-                case ResultType.Timespan:
+                case ResultType.TimeSpan:
 
                     if (result1.resultD > result2.resultD)
                         return 1;
@@ -1653,7 +1646,7 @@ namespace MusicBeePlugin
                     else
                         return 0;
 
-                case ResultType.Datetime:
+                case ResultType.DateTime:
 
                     if (result1.resultD > result2.resultD)
                         return 1;
@@ -1674,13 +1667,17 @@ namespace MusicBeePlugin
 
         public class DataGridViewCellComparer : System.Collections.IComparer
         {
+            public ResultType[] resultTypes = null;
             public int comparedColumnIndex = -1;
 
             public int Compare(object x, object y)
             {
+                if (resultTypes == null)
+                    throw new Exception("Undefined table sorting type!");
+
                 if (comparedColumnIndex != -1)
                 {
-                    int comparison = CompareStrings((string)(((DataGridViewRow)x).Cells[comparedColumnIndex].Value), (string)(((DataGridViewRow)y).Cells[comparedColumnIndex].Value));
+                    int comparison = CompareStrings((x as DataGridViewRow).Cells[comparedColumnIndex].Value as string, (y as DataGridViewRow).Cells[comparedColumnIndex].Value as string);
                     if (comparison > 0)
                         return 1;
                     else if (comparison < 0)
@@ -1708,7 +1705,7 @@ namespace MusicBeePlugin
 
                     for (int i = 0; i < tagCounterIndex; i++)
                     {
-                        comparation = CompareStrings(x[i], y[i]);
+                        comparation = CompareStrings(x[i], y[i], ResultType.Double, DataType.Number);
 
                         if (comparation > 0)
                             return 1;
@@ -1739,15 +1736,15 @@ namespace MusicBeePlugin
 
             if (UpdatedTracksForBackupCount < MaxUpdatedTracksCount)
             {
-                if (!TracksNeedsToBeBackuped.Contains(trackId))
+                if (!TracksNeedsToBeBackedUp.Contains(trackId))
                 {
-                    TracksNeedsToBeBackuped.Add(trackId, true);
+                    TracksNeedsToBeBackedUp.Add(trackId, true);
                     UpdatedTracksForBackupCount++;
                 }
             }
             else
             {
-                TracksNeedsToBeBackuped.Clear();
+                TracksNeedsToBeBackedUp.Clear();
                 UpdatedTracksForBackupCount = 0;
                 BackupIsAlwaysNeeded = true;
             }
@@ -1957,7 +1954,7 @@ namespace MusicBeePlugin
 
         //    for (int i = 0; i < listBox.Items.Count; i++)
         //    {
-        //        if (((ReportPreset)listBox.Items[i]).guid == preset.guid)
+        //        if ((listBox.Items[i] as ReportPreset).guid == preset.guid)
         //        {
         //            listBox.Items.RemoveAt(i);
         //            itemIsFound = true;
@@ -2306,7 +2303,7 @@ namespace MusicBeePlugin
                     if (!string.IsNullOrWhiteSpace(value))
                     {
                         System.ComponentModel.TypeConverter tc = System.ComponentModel.TypeDescriptor.GetConverter(typeof(Bitmap));
-                        Bitmap bitmapImage = (Bitmap)tc.ConvertFrom(Convert.FromBase64String(value));
+                        Bitmap bitmapImage = (tc.ConvertFrom(Convert.FromBase64String(value)) as Bitmap);
 
                         MemoryStream tempJpeg = new MemoryStream();
                         bitmapImage.Save(tempJpeg, System.Drawing.Imaging.ImageFormat.Png);
@@ -3369,7 +3366,7 @@ namespace MusicBeePlugin
 
             LibraryTotalsPresetName = "Library totals";
             LibraryAveragesPresetName = "Library averages";
-            CDBookletPresetName = "CD Booklet";
+            CDBookletPresetName = "CD Booklet(s)";
             AlbumsAndTracksPresetName = "Albums & Tracks";
 
             EmptyPresetName = "<Empty preset>";
@@ -3396,7 +3393,7 @@ namespace MusicBeePlugin
             
             string localizedDisplayedAlbumArtist = MbApiInterface.MB_GetLocalisation("aSplit.msg.diar", "display {0}:");
             localizedDisplayedAlbumArtist = Regex.Replace(localizedDisplayedAlbumArtist, @"^(.*?)\s?\{0\}\:?\s?(.*)", " ($1$2)");
-            DisplayedAlbumArtsistName = MbApiInterface.Setting_GetFieldName(MetaDataType.AlbumArtist) + localizedDisplayedAlbumArtist;
+            DisplayedAlbumArtistName = MbApiInterface.Setting_GetFieldName(MetaDataType.AlbumArtist) + localizedDisplayedAlbumArtist;
 
 
             ArtworkName = MbApiInterface.Setting_GetFieldName(MetaDataType.Artwork);
@@ -3414,7 +3411,7 @@ namespace MusicBeePlugin
 
             //Supported exported file formats
             ExportedFormats = "HTML Document (grouped by albums)|*.htm|HTML Document|*.htm|Simple HTML table|*.htm|Tab delimited text|*.txt|M3U Playlist|*.m3u|CSV file|*.csv|HTML Document (CD Booklet)|*.htm";
-            ExportedTrackList = "Exported Track List";
+            ExportedTrackList = "LR Track List";
 
 
             //Displayed text
@@ -3561,9 +3558,9 @@ namespace MusicBeePlugin
                 " doesn't correspond to the number of tags in last used tag set (%%LAST-USED-TAG-SET-TAGS-COUNT%%)!";
 
 
-            MsgFirstThreeGroupingFieldsInPreviewTableShouldBe = "First three grouping fields in preview table should be \"" + DisplayedAlbumArtsistName + "\", \"" + AlbumTagName + "\" and \"" + ArtworkName + "\" to export to HTML Document (grouped by album)";
+            MsgFirstThreeGroupingFieldsInPreviewTableShouldBe = "First three grouping fields in preview table should be \"" + DisplayedAlbumArtistName + "\", \"" + AlbumTagName + "\" and \"" + ArtworkName + "\" to export to HTML Document (grouped by album)";
             MsgFirstSixGroupingFieldsInPreviewTableShouldBe = "First six grouping fields in preview table should be '" + SequenceNumberName 
-                + "\", \"" + DisplayedAlbumArtsistName + "\", \"" + AlbumTagName + "\", \"" + ArtworkName + "\", \"" 
+                + "\", \"" + DisplayedAlbumArtistName + "\", \"" + AlbumTagName + "\", \"" + ArtworkName + "\", \"" 
                 + MbApiInterface.Setting_GetFieldName(MetaDataType.TrackTitle) + "\" and \"" 
                 + MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Duration) 
                 + "' to export to HTML Document (CD Booklet)";
@@ -3599,7 +3596,7 @@ namespace MusicBeePlugin
             MsgSelectOneTrackOnly = "Select one track only!";
             MsgSelectTrack = "Select a track!";
             MsgSelectAtLeast2Tracks = "Select at least 2 tracks to compare!";
-            MsgBackupBaselineFileDoesntExist = "Backup baseline file\"%%FILENAME%%\" doesn't exist!";
+            MsgBackupBaselineFileDoesntExist = "Backup baseline file\"%%FILENAME%%\" doesn't exist! Backup tags manually first!";
             MsgThisIsTheBackupOfDifferentLibrary = "This is the backup of different library!";
             MsgCreateBaselineWarning = "When you create the first backup of given library, a backup baseline is created. " +
                 "All further backups are incremental relative to baseline. " +
@@ -3656,6 +3653,9 @@ namespace MusicBeePlugin
             CtlSelectThisFolder = "[SELECT THIS FOLDER]";
             CtlNoBackupData = "<No backup data>";
             CtlNoDifferences = "<No differences>";
+            CtlMixedValues = "(Mixed values)";
+            CtlMixedValuesSameAsInLibrary = "Same as in library";
+            CtlMixedValuesDifferentFromLibrary = "Different from library";
 
             MsgNotAllowedSymbols = "Only ASCII letters, numbers and symbols - : _ . are allowed!";
             MsgPresetExists = "Preset with ID %%ID%% already exists!";
@@ -3975,7 +3975,7 @@ namespace MusicBeePlugin
 
                 //Supported exported file formats
                 ExportedFormats = "Документ HTML (по альбомам)|*.htm|Документ HTML|*.htm|Простая таблица HTML|*.htm|Текст, разделенный табуляциями|*.txt|Плейлист M3U|*.m3u|Файл CSV|*.csv|Документ HTML (буклет компакт-диска)|*.htm";
-                ExportedTrackList = "Список экcпортированных треков";
+                ExportedTrackList = "Список треков ОБ";
 
                 //Displayed text
                 //ListItemConditionIs = "равен";
@@ -4115,10 +4115,10 @@ namespace MusicBeePlugin
                     " не соответствует количеству тегов последнего использованного набора тегов (%%LAST-USED-TAG-SET-TAGS-COUNT%%)!";
 
 
-                MsgFirstThreeGroupingFieldsInPreviewTableShouldBe = "Первые три поля группировок в таблице должны быть \"" + DisplayedAlbumArtsistName + "\", '" 
+                MsgFirstThreeGroupingFieldsInPreviewTableShouldBe = "Первые три поля группировок в таблице должны быть \"" + DisplayedAlbumArtistName + "\", '" 
                     + AlbumTagName + "\" и \"" + ArtworkName + "\" для того, чтобы экспортировать теги в формат \"Документ HTML (по альбомам)'";
                 MsgFirstSixGroupingFieldsInPreviewTableShouldBe = "Первые шесть полей группировок в таблице должны быть \"" + SequenceNumberName
-                    + "\", \"" + DisplayedAlbumArtsistName + "\", \"" + AlbumTagName + "\", \"" + ArtworkName + "\", \""
+                    + "\", \"" + DisplayedAlbumArtistName + "\", \"" + AlbumTagName + "\", \"" + ArtworkName + "\", \""
                     + MbApiInterface.Setting_GetFieldName(MetaDataType.TrackTitle) + "\" and \""
                     + MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Duration)
                     + "\" для того, чтобы экспортировать теги в формат \"Документ HTML (буклет компакт-диска)\"";
@@ -4155,7 +4155,7 @@ namespace MusicBeePlugin
                 MsgSelectOneTrackOnly = "Выберите только один трек!";
                 MsgSelectTrack = "Выберите трек!";
                 MsgSelectAtLeast2Tracks = "Выберите по меньшей мере 2 трека для сравнения!";
-                MsgBackupBaselineFileDoesntExist = "Файл первоначального опорного архива \"%%FILENAME%%\" не существует!";
+                MsgBackupBaselineFileDoesntExist = "Файл первоначального опорного архива \"%%FILENAME%%\" не существует! Сначала создайте архив тегов вручную!";
                 MsgThisIsTheBackupOfDifferentLibrary = "Это архив другой библиотеки!";
                 MsgCreateBaselineWarning = "Когда создается первый архив любой библиотеки, сначала создается полный опорный архив. " +
                     "Все последующие архивы являются разницей с опорным архивом. " +
@@ -4213,6 +4213,9 @@ namespace MusicBeePlugin
                 CtlSelectThisFolder = "[ВЫБРАТЬ ЭТУ ПАПКУ]";
                 CtlNoBackupData = "<Нет архивных данных>";
                 CtlNoDifferences = "<Нет отличий>";
+                CtlMixedValues = "(Разные значения)";
+                CtlMixedValuesSameAsInLibrary = "Совпадает с библиотекой";
+                CtlMixedValuesDifferentFromLibrary = "Отличается от библиотеки";
 
                 MsgNotAllowedSymbols = "Разрешены только буквы ASCII, числа и символы - : _ .!";
                 MsgPresetExists = "Пресет с ID-ом %%ID%% уже существует!";
@@ -4280,14 +4283,14 @@ namespace MusicBeePlugin
 
             //Library Totals
             tempGroupings[0] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Genre), null, null, false);
-            tempGroupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { string.Empty }, DisplayedAlbumArtsistName, null, null, false);
+            tempGroupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { string.Empty }, DisplayedAlbumArtistName, null, null, false);
             tempGroupings[2] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Album), null, null, false);
 
             for (int f = 0; f < tempGroupings.Length; f++)
                 tempGroupings[f].columnIndices = new int[] { f };
 
 
-            tempFunctions[0] = new PresetColumnAttributes(LrFunctionType.Count, new string[] { string.Empty }, DisplayedAlbumArtsistName, null, null, false);
+            tempFunctions[0] = new PresetColumnAttributes(LrFunctionType.Count, new string[] { string.Empty }, DisplayedAlbumArtistName, null, null, false);
             tempFunctions[1] = new PresetColumnAttributes(LrFunctionType.Count, new string[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Genre), null, null, false);
             tempFunctions[2] = new PresetColumnAttributes(LrFunctionType.Count, new string[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Year), null, null, false);
             tempFunctions[3] = new PresetColumnAttributes(LrFunctionType.Count, new string[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Album), null, null, false);
@@ -4337,7 +4340,7 @@ namespace MusicBeePlugin
             tempFunctions = new PresetColumnAttributes[10];
 
             tempGroupings[0] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Genre), null, null, false);
-            tempGroupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { string.Empty }, DisplayedAlbumArtsistName, null, null, false);
+            tempGroupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { string.Empty }, DisplayedAlbumArtistName, null, null, false);
             tempGroupings[2] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Album), null, null, false);
 
             for (int f = 0; f < tempGroupings.Length; f++)
@@ -4405,7 +4408,7 @@ namespace MusicBeePlugin
             tempFunctions = new PresetColumnAttributes[0];
 
             tempGroupings[0] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { null }, SequenceNumberName, null, null, false);
-            tempGroupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { string.Empty }, DisplayedAlbumArtsistName, null, null, false);
+            tempGroupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { string.Empty }, DisplayedAlbumArtistName, null, null, false);
             tempGroupings[2] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Album), null, null, false);
             tempGroupings[3] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { null }, MbApiInterface.Setting_GetFieldName(MetaDataType.Artwork), null, null, false);
             tempGroupings[4] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.TrackTitle), null, null, false);
@@ -4446,7 +4449,7 @@ namespace MusicBeePlugin
             tempGroupings = new PresetColumnAttributes[5];
             tempFunctions = new PresetColumnAttributes[0];
 
-            tempGroupings[0] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { string.Empty }, DisplayedAlbumArtsistName, null, null, false);
+            tempGroupings[0] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { string.Empty }, DisplayedAlbumArtistName, null, null, false);
             tempGroupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Album), null, null, false);
             tempGroupings[2] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { null }, MbApiInterface.Setting_GetFieldName(MetaDataType.Artwork), null, null, false);
             tempGroupings[3] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.TrackNo), null, null, false);
@@ -4913,6 +4916,32 @@ namespace MusicBeePlugin
                 //FormBackColor = MbForm.BackColor;
                 //FormForeColor = MbForm.ForeColor;
 
+
+                //SKINNING BUTTONS (ESPECIALLY DISABLED BUTTONS)
+                //Below: (SkinElement)2 - highlight enum code //****
+
+                //Back colors
+                int buttonBackCode = MbApiInterface.Setting_GetSkinElementColour((SkinElement)2, ElementState.ElementStateDefault, ElementComponent.ComponentBackground);
+                Color buttonBackColor;
+
+                //const float buttonBackgroundWeight = LightDimmedWeight;
+                const float buttonBackgroundWeight = 1;
+                if (buttonBackCode == 0) //Unsupported by older API
+                    buttonBackColor = GetWeightedColor(Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinTrackAndArtistPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBackground)), AccentColor, buttonBackgroundWeight);
+                else if (buttonBackCode == -1) //Windows color scheme
+                    buttonBackColor = SystemColors.Control;
+                else
+                    buttonBackColor = Color.FromArgb(buttonBackCode);
+
+                Color buttonBackLightDimmedAccentColor = GetWeightedColor(buttonBackColor, AccentColor, LightDimmedWeight);
+                Color buttonBackDimmedAccentColor = GetWeightedColor(buttonBackColor, AccentColor, DimmedWeight);
+                Color buttonBackDeepDimmedAccentColor = GetWeightedColor(buttonBackColor, AccentColor, DeepDimmedWeight);
+
+
+                ButtonBackColor = buttonBackColor;
+                ButtonDisabledBackColor = ButtonBackColor;
+                ControlHighlightBackColor = buttonBackLightDimmedAccentColor;
+
                 //***
                 //float avgForeBrightness = GetAverageBrightness(ButtonBackColor);
                 //float avgBackBrightness = GetAverageBrightness(ButtonBackColor);
@@ -4926,46 +4955,24 @@ namespace MusicBeePlugin
                 //***
 
 
-                //Below: (SkinElement)2 - highlight enum code //*******
-                int controlHighlightBackCode = MbApiInterface.Setting_GetSkinElementColour((SkinElement)2, ElementState.ElementStateDefault, ElementComponent.ComponentBackground);
-                Color controlHighlightBackColor;
+                //Fore colors
+                int buttonForeCode = MbApiInterface.Setting_GetSkinElementColour((SkinElement)2, ElementState.ElementStateDefault, ElementComponent.ComponentForeground);
+                Color buttonForeColor;
 
-                if (controlHighlightBackCode == 0) //Unsupported by older API
-                    controlHighlightBackColor = GetWeightedColor(AccentColor, Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinTrackAndArtistPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBackground)), LightDimmedWeight);
-                else if (controlHighlightBackCode == -1) //Windows color scheme
-                    controlHighlightBackColor = SystemColors.Control;
+                if (buttonForeCode == 0) //Unsupported by older API
+                    buttonForeColor = AccentColor;
+                else if (buttonForeCode == -1) //Windows color scheme
+                    buttonForeColor = SystemColors.ControlText;
                 else
-                    controlHighlightBackColor = Color.FromArgb(controlHighlightBackCode);
+                    buttonForeColor = Color.FromArgb(buttonForeCode);
 
-                Color buttonBackLightDimmedAccentColor = GetWeightedColor(AccentColor, controlHighlightBackColor, LightDimmedWeight);
-                Color buttonBackDimmedAccentColor = GetWeightedColor(AccentColor, controlHighlightBackColor, DimmedWeight);
-                Color buttonBackDeepDimmedAccentColor = GetWeightedColor(AccentColor, controlHighlightBackColor, DeepDimmedWeight);
+                Color buttonLightForeDimmedColor = GetWeightedColor(buttonForeColor, ButtonBackColor, LightDimmedWeight);
+                Color buttonForeDimmedColor = GetWeightedColor(buttonForeColor, ButtonBackColor, DimmedWeight);
+                Color buttonForeDeepDimmedColor = GetWeightedColor(buttonForeColor, ButtonBackColor, DeepDimmedWeight);
 
-                //Skinning buttons (especially disabled buttons)
-                ButtonBackColor = controlHighlightBackColor;
-                ButtonDisabledBackColor = ButtonBackColor;
-                ControlHighlightBackColor = controlHighlightBackColor; //*** buttonBackDeepDimmedAccentColor;
-
-
-                ControlHighlightForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
-
-                int controlHighlightForeCode = MbApiInterface.Setting_GetSkinElementColour((SkinElement)2, ElementState.ElementStateDefault, ElementComponent.ComponentForeground);
-                Color controlHighlightForeColor;
-
-                if (controlHighlightForeCode == 0) //Unsupported by older API
-                    controlHighlightForeColor = AccentColor;
-                else if (controlHighlightForeCode == -1) //Windows color scheme
-                    controlHighlightForeColor = SystemColors.ControlText;
-                else
-                    controlHighlightForeColor = Color.FromArgb(controlHighlightForeCode);
-
-                Color buttonLightForeDimmedColor = GetWeightedColor(controlHighlightForeColor, ButtonBackColor, LightDimmedWeight);
-                Color buttonForeDimmedColor = GetWeightedColor(controlHighlightForeColor, ButtonBackColor, DimmedWeight);
-                Color buttonForeDeepDimmedColor = GetWeightedColor(controlHighlightForeColor, ButtonBackColor, DeepDimmedWeight);
-
-                ButtonForeColor = controlHighlightForeColor;
-                ButtonDisabledForeColor = GetWeightedColor(ButtonForeColor, ButtonDisabledBackColor, 0.3f);
-                ControlHighlightForeColor = buttonLightForeDimmedColor;
+                ButtonForeColor = buttonForeColor;
+                ButtonDisabledForeColor = GetWeightedColor(ButtonForeColor, ButtonDisabledBackColor, 0.5f);
+                ControlHighlightForeColor = buttonForeColor;
 
                 float avgForeBrightness = GetAverageBrightness(ControlHighlightForeColor);
                 float avgBackBrightness = GetAverageBrightness(ControlHighlightBackColor);
@@ -4978,7 +4985,7 @@ namespace MusicBeePlugin
                 }
 
 
-                ButtonBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentBorder));
+                ButtonBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBorder));
                 ButtonFocusedBorderColor = GetWeightedColor(ButtonBorderColor, ButtonForeColor);
             }
             else
@@ -5045,9 +5052,9 @@ namespace MusicBeePlugin
             if (SavedSettings.useMusicBeeFontSkinColors) //It's in case if skinned & not skinned buttons use different flat styles. At the moment it's not so.
             {
                 int size = (int)Math.Round(17f * vDpiFontScaling);
-                int wideHeight = (int)(15f * vDpiFontScaling);
-                int wideWidth = (int)(30f * vDpiFontScaling);
-                int smallSize = (int)(15f * vDpiFontScaling);
+                int wideHeight = (int)Math.Round(15f * vDpiFontScaling);
+                int wideWidth = (int)Math.Round(30f * vDpiFontScaling);
+                int smallSize = (int)Math.Round(15f * vDpiFontScaling);
 
                 ButtonRemoveImage = GetSolidImageByBitmapMask(ButtonForeColor, Resources.uncheck_mark, size, size);
                 ThemedBitmapAddRef(EmptyForm, ButtonRemoveImage);
@@ -5063,9 +5070,9 @@ namespace MusicBeePlugin
             else
             {
                 int size = (int)Math.Round(18f * vDpiFontScaling);
-                int wideHeight = (int)(15f * vDpiFontScaling);
-                int wideWidth = (int)(30f * vDpiFontScaling);
-                int smallSize = (int)(15f * vDpiFontScaling);
+                int wideHeight = (int)Math.Round(15f * vDpiFontScaling);
+                int wideWidth = (int)Math.Round(30f * vDpiFontScaling);
+                int smallSize = (int)Math.Round(15f * vDpiFontScaling);
 
                 ButtonRemoveImage = GetSolidImageByBitmapMask(ButtonForeColor, Resources.uncheck_mark, size, size);
                 ThemedBitmapAddRef(EmptyForm, ButtonRemoveImage);
@@ -5081,7 +5088,7 @@ namespace MusicBeePlugin
 
 
             //ASR
-            int markSize = (int)(15f * vDpiFontScaling);
+            int markSize = (int)Math.Round(15f * vDpiFontScaling);
 
             CheckedState = GetSolidImageByBitmapMask(AccentColor, Resources.check_mark, markSize, markSize);
             ThemedBitmapAddRef(EmptyForm, CheckedState);
@@ -5089,7 +5096,7 @@ namespace MusicBeePlugin
             ThemedBitmapAddRef(EmptyForm, UncheckedState);
  
 
-            int pictureSize = (int)(19f * vDpiFontScaling);
+            int pictureSize = (int)Math.Round(19f * vDpiFontScaling);
 
             Search = GetSolidImageByBitmapMask(AccentColor, Resources.search, pictureSize, pictureSize);
             ThemedBitmapAddRef(EmptyForm, Search);
@@ -5137,7 +5144,7 @@ namespace MusicBeePlugin
 
 
             //LR
-            int pictogramSize = (int)(23f * vDpiFontScaling);
+            int pictogramSize = (int)Math.Round(23f * vDpiFontScaling);
 
             Window = ScaleBitmap(Resources.window, pictogramSize, pictogramSize);
             ThemedBitmapAddRef(EmptyForm, Window);
@@ -5228,7 +5235,7 @@ namespace MusicBeePlugin
                 b = b < 0 ? 0 : b;
             }
 
-            ChangedCellStyle.ForeColor = Color.FromArgb(255, (int)r, (int)g, (int)b);
+            ChangedCellStyle.ForeColor = Color.FromArgb(255, (int)Math.Round(r), (int)Math.Round(g), (int)Math.Round(b));
 
 
             //SELECTION CHANGED STYLE
@@ -5273,7 +5280,7 @@ namespace MusicBeePlugin
                 b = b < 0 ? 0 : b;
             }
 
-            ChangedCellStyle.SelectionForeColor = Color.FromArgb(255, (int)r, (int)g, (int)b);
+            ChangedCellStyle.SelectionForeColor = Color.FromArgb(255, (int)Math.Round(r), (int)Math.Round(g), (int)Math.Round(b));
 
 
             //DIMMED STYLE
@@ -5313,7 +5320,7 @@ namespace MusicBeePlugin
             b = b > 255 ? 255 : b;
             b = b < 0 ? 0 : b;
 
-            DimmedCellStyle.ForeColor = Color.FromArgb(255, (int)r, (int)g, (int)b);
+            DimmedCellStyle.ForeColor = Color.FromArgb(255, (int)Math.Round(r), (int)Math.Round(g), (int)Math.Round(b));
 
 
             //SELECTION DIMMED STYLE
@@ -5348,7 +5355,7 @@ namespace MusicBeePlugin
             b = b > 255 ? 255 : b;
             b = b < 0 ? 0 : b;
 
-            DimmedCellStyle.SelectionForeColor = Color.FromArgb(255, (int)r, (int)g, (int)b);
+            DimmedCellStyle.SelectionForeColor = Color.FromArgb(255, (int)Math.Round(r), (int)Math.Round(g), (int)Math.Round(b));
 
 
             //PRESERVED TAG STYLE
@@ -5398,7 +5405,7 @@ namespace MusicBeePlugin
                 b = b < 0 ? 0 : b;
             }
 
-            PreservedTagCellStyle.ForeColor = Color.FromArgb(255, (int)r, (int)g, (int)b);
+            PreservedTagCellStyle.ForeColor = Color.FromArgb(255, (int)Math.Round(r), (int)Math.Round(g), (int)Math.Round(b));
 
 
             //SELECTION PRESERVED TAG STYLE
@@ -5443,7 +5450,7 @@ namespace MusicBeePlugin
                 b = b < 0 ? 0 : b;
             }
 
-            PreservedTagCellStyle.SelectionForeColor = Color.FromArgb(255, (int)r, (int)g, (int)b);
+            PreservedTagCellStyle.SelectionForeColor = Color.FromArgb(255, (int)Math.Round(r), (int)Math.Round(g), (int)Math.Round(b));
 
 
             //PRESERVED TAG VALUE STYLE
@@ -5493,7 +5500,7 @@ namespace MusicBeePlugin
                 b = b < 0 ? 0 : b;
             }
 
-            PreservedTagValueCellStyle.ForeColor = Color.FromArgb(255, (int)r, (int)g, (int)b);
+            PreservedTagValueCellStyle.ForeColor = Color.FromArgb(255, (int)Math.Round(r), (int)Math.Round(g), (int)Math.Round(b));
 
 
             //SELECTION PRESERVED TAG STYLE
@@ -5538,7 +5545,7 @@ namespace MusicBeePlugin
                 b = b < 0 ? 0 : b;
             }
 
-            PreservedTagValueCellStyle.SelectionForeColor = Color.FromArgb(255, (int)r, (int)g, (int)b);
+            PreservedTagValueCellStyle.SelectionForeColor = Color.FromArgb(255, (int)Math.Round(r), (int)Math.Round(g), (int)Math.Round(b));
         }
 
         // receive event notifications from MusicBee

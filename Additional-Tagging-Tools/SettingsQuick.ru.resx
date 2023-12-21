@@ -119,13 +119,13 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>792, 425</value>
+    <value>882, 425</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Отмена</value>
   </data>
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>686, 425</value>
+    <value>776, 425</value>
   </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>666, 15</value>
@@ -137,7 +137,7 @@
     <value>Версия: </value>
   </data>
   <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>880, 112</value>
+    <value>970, 112</value>
   </data>
   <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>45, 15</value>
@@ -170,7 +170,7 @@
     <value>Проиграть системный звук "Звездочка", когда фоновая задача завершается/остановлена</value>
   </data>
   <data name="saveLastSkippedButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>345, 425</value>
+    <value>435, 425</value>
   </data>
   <data name="saveLastSkippedButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>335, 23</value>
@@ -182,7 +182,7 @@
     <value>331, 21</value>
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>880, 112</value>
+    <value>970, 112</value>
   </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 15</value>
@@ -191,7 +191,7 @@
     <value> Оформление </value>
   </data>
   <data name="legendGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>590, 10</value>
+    <value>680, 10</value>
   </data>
   <data name="legendGroupBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>280, 93</value>
@@ -263,7 +263,7 @@
     <value>Разрешить выполнение команд без предварительного просмотра изменений *</value>
   </data>
   <data name="groupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>880, 90</value>
+    <value>970, 90</value>
   </data>
   <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
     <value>149, 15</value>
@@ -296,16 +296,20 @@
     <value>*  Требуется заново открыть окна плагина, чтобы новые настройки вступили в силу</value>
   </data>
   <data name="allowAsrLrPresetAutoexecutionCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>340, 15</value>
+    <value>332, 15</value>
   </data>
   <data name="allowAsrLrPresetAutoexecutionCheckBoxLabel.Text" xml:space="preserve">
-    <value>Разрешить автоматическое применение пресетов ДПЗ/ОБ *</value>
+    <value>Разрешить автоматическое применение пресетов ДПЗ/ОБ</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>904, 455</value>
+    <value>994, 455</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>920, 494</value>
+    <value>1010, 494</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Настройки</value>

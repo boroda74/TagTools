@@ -133,6 +133,9 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>869, 174</value>
   </data>
+  <data name="buttonSettings.Location" type="System.Drawing.Point, System.Drawing">
+    <value>715, 145</value>
+  </data>
   <data name="buttonSave.Location" type="System.Drawing.Point, System.Drawing">
     <value>357, 145</value>
   </data>

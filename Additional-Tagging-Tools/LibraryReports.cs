@@ -16,7 +16,10 @@ namespace MusicBeePlugin
 {
     public partial class LibraryReportsCommand : PluginWindowTemplate
     {
+        protected const int FormShowDelay = 2500; //milliseconds
         protected bool forceCloseForms = true;
+
+        private static string DontUseSplitter;
 
         private delegate void AddRowsToTable(List<string[]> rows);
         private delegate void UpdateTable();
@@ -118,7 +121,8 @@ namespace MusicBeePlugin
         private SortedDictionary<string, bool>[] cachedQueriedActualGroupingValues = null;
         private SortedDictionary<string, List<string>> queriedFilesActualComposedGroupingValues = new SortedDictionary<string, List<string>>(); //<url, list of composed groupings>
 
-        private bool[] rightAlignedColumns; // Cache for preview table/exported report 
+        private bool[] columnsRightAlignment; // Cache for preview table/exported report 
+        private ResultType[] columnTypes; // Cache for preview table/exported report 
 
         private AggregatedTags tags = new AggregatedTags();
         private AggregatedTags fileTags = new AggregatedTags();
@@ -196,6 +200,9 @@ namespace MusicBeePlugin
             previewTable.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
 
 
+            if (DontUseSplitter == null)
+                DontUseSplitter = (multipleItemsSplitterComboBox.Items[0] as string).TrimStart(' ');
+
             //Setting themed images
             openReportCheckBoxPicture.Image = ThemedBitmapAddRef(this, Window);
 
@@ -224,7 +231,7 @@ namespace MusicBeePlugin
             }
             else
             {
-                autoApplyPresetsLabel.Text = AutoApplyText + "\n" + AutoApplyDisabledText;
+                autoApplyPresetsLabel.Text = AutoApplyText + "\n" + AutoApplyDisabledText.ToUpper();
                 autoApplyPresetsLabel.ForeColor = TickedColor;
             }
 
@@ -325,7 +332,6 @@ namespace MusicBeePlugin
 
 
             presetNameTextBox.SetCue(CtlAutoLrPresetName);
-            multipleItemsSplitterComboBox.SetCue((string)multipleItemsSplitterComboBox.Items[0]);
 
             NoExpressionText = expressionTextBox.Text;
             expressionTextBox.SetCue(NoExpressionText);
@@ -385,7 +391,7 @@ namespace MusicBeePlugin
             if (Language == "ru")
                 tagsDataGridView.Columns[1].Width = 130;
 
-            tagsDataGridView.Columns[1].Width = (int)(tagsDataGridView.Columns[1].Width * hDpiFontScaling);
+            tagsDataGridView.Columns[1].Width = (int)Math.Round(tagsDataGridView.Columns[1].Width * hDpiFontScaling);
 
             presetList.SelectedIndex = -1;
             presetList_SelectedIndexChanged(null, null);
@@ -413,7 +419,7 @@ namespace MusicBeePlugin
             public LrFunctionType functionType;
             public string parameterName;
             public DataType dataType = DataType.String;
-            public ResultType resultType = 0;
+            public ResultType resultType = ResultType.UseOtherResults;
             public string parameter2Name = null;
             public string splitter = null;
             public bool trimValues = false;
@@ -1014,6 +1020,14 @@ namespace MusicBeePlugin
             columnIndicesRef[index].Add(columnIndex);
         }
 
+        public void SetMultipleItemsSplitterComboBoxCue(ComboBox comboBox, string cue)
+        {
+            if (string.IsNullOrEmpty(cue))
+                SetComboBoxCue(multipleItemsSplitterComboBox, DontUseSplitter);
+            else
+                SetComboBoxCue(multipleItemsSplitterComboBox, cue);
+        }
+
         // Helper for Iterate()
         private static void MoveDependent(IEnumerator<string>[] enumerators, int[] dependentGroupingColumns, string[] lastValues, int currentLoopIndex, bool reset)
         {
@@ -1114,45 +1128,45 @@ namespace MusicBeePlugin
             public static List<string> GetComposedGroupingValues(List<string>[] groupingValuesLists, int[] dependentGroupingColumns, bool totals)
             {
                 var composedGroupings = new List<string>();
-                var groupingValues = new string[groupingValuesLists.Length];
 
                 if (groupingValuesLists.Length == 0)
                 {
                     composedGroupings.Add(string.Empty);
+                    return composedGroupings;
                 }
-                else
+
+                var groupingValues = new string[groupingValuesLists.Length];
+
+                string[] lastValues = new string[groupingValuesLists.Length]; // This array will store all grouping values of last iteration
+                int minimalLoopIndex = groupingValuesLists.Length - 2;
+                int currentLoopIndex = groupingValuesLists.Length - 1;
+
+                // Neither of the lists in groupingValuesLists array can be empty, so let's get 1st value of every list
+                var enumerators = new IEnumerator<string>[groupingValuesLists.Length];
+                for (int i = 0; i < groupingValuesLists.Length; i++)
                 {
-                    string[] lastValues = new string[groupingValuesLists.Length]; // This array will store all grouping values of last iteration
-                    int minimalLoopIndex = groupingValuesLists.Length - 2;
-                    int currentLoopIndex = groupingValuesLists.Length - 1;
+                    (enumerators[i] = groupingValuesLists[i].GetEnumerator()).MoveNext();
+                    lastValues[i] = enumerators[i].Current;
+                }
 
-                    // Neither of the lists in groupingValuesLists array can be empty, so let's get 1st value of every list
-                    var enumerators = new IEnumerator<string>[groupingValuesLists.Length];
-                    for (int i = 0; i < groupingValuesLists.Length; i++)
+                do
+                {
+                    for (int i = 0; i < enumerators.Length; i++)
+                        groupingValues[i] = lastValues[i];
+
+                    composedGroupings.Add(string.Join(MultipleItemsSplitterId.ToString(), groupingValues));
+
+
+                    if (totals)
                     {
-                        (enumerators[i] = groupingValuesLists[i].GetEnumerator()).MoveNext();
-                        lastValues[i] = enumerators[i].Current;
-                    }
-
-                    do
-                    {
-                        for (int i = 0; i < enumerators.Length; i++)
-                            groupingValues[i] = lastValues[i];
-
-                        composedGroupings.Add(string.Join(MultipleItemsSplitterId.ToString(), groupingValues));
-
-
-                        if (totals)
+                        for (int j = groupingValues.Length - 1; j >= 0; j--)
                         {
-                            for (int j = groupingValues.Length - 1; j >= 0; j--)
-                            {
-                                groupingValues[j] = TotalsString;
-                                composedGroupings.Add(string.Join(MultipleItemsSplitterId.ToString(), groupingValues));
-                            }
+                            groupingValues[j] = TotalsString;
+                            composedGroupings.Add(string.Join(MultipleItemsSplitterId.ToString(), groupingValues));
                         }
                     }
-                    while (Iterate(enumerators, dependentGroupingColumns, lastValues, ref minimalLoopIndex, ref currentLoopIndex));
                 }
+                while (Iterate(enumerators, dependentGroupingColumns, lastValues, ref minimalLoopIndex, ref currentLoopIndex));
 
                 return composedGroupings;
             }
@@ -1169,13 +1183,13 @@ namespace MusicBeePlugin
                         if (!TryGetValue(composedGroupings, out aggregatedValues))
                         {
                             aggregatedValues = new ConvertStringsResult[1];
-                            aggregatedValues[0] = new ConvertStringsResult(ResultType.ItemCount, DataType.String); //This are URLs (SortedDictionary<url, false>)
+                            aggregatedValues[0] = new ConvertStringsResult(ResultType.UseOtherResults, DataType.String); //This are URLs (SortedDictionary<url, false>)
 
                             Add(composedGroupings, aggregatedValues);
                         }
 
                         if (url != null) // Let's deal with URLs (SortedDictionary<url, false>)
-                            aggregatedValues[0].items.AddReplace(url, false);
+                            aggregatedValues[0].urls.AddReplace(url, false);
                     }
                 }
                 else
@@ -1186,15 +1200,21 @@ namespace MusicBeePlugin
 
                         if (!TryGetValue(composedGroupings, out aggregatedValues))
                         {
-                            aggregatedValues = new ConvertStringsResult[functionValues.Length + 1];
+                            aggregatedValues = new ConvertStringsResult[functionValues.Length];
 
                             int j = -1;
                             foreach (var function in functions.Values)
                             {
                                 j++;
+
                                 aggregatedValues[j] = new ConvertStringsResult(function.resultType, function.dataType);
 
-                                if (function.functionType == LrFunctionType.Minimum)
+                                if (function.functionType == LrFunctionType.Count)
+                                {
+                                    function.resultType = ResultType.ItemCount;
+                                    function.dataType = DataType.String;
+                                }
+                                else if (function.functionType == LrFunctionType.Minimum)
                                 {
                                     aggregatedValues[j].resultD = double.MaxValue;
                                     aggregatedValues[j].resultS = "口";
@@ -1205,8 +1225,6 @@ namespace MusicBeePlugin
                                     aggregatedValues[j].resultS = string.Empty;
                                 }
                             }
-
-                            aggregatedValues[functionValues.Length] = new ConvertStringsResult(ResultType.ItemCount, DataType.String); //This are URLs (SortedDictionary<url, false>)
 
                             Add(composedGroupings, aggregatedValues);
                         }
@@ -1228,17 +1246,67 @@ namespace MusicBeePlugin
                                 function.resultType = ResultType.ItemCount;
                                 function.dataType = DataType.String;
                             }
+                            else if (function.functionType == LrFunctionType.AverageCount)
+                            {
+                                aggregatedValues[i].items1.AddReplace(currentFunctionValue, false);
+                                aggregatedValues[i].items.AddReplace(parameter2Values[i], false);
+
+                                function.resultType = ResultType.UnknownOrString;
+                                function.dataType = DataType.String;
+                            }
+                            else if (function.functionType == LrFunctionType.Average)
+                            {
+                                aggregatedValues[i].items.AddReplace(parameter2Values[i], false);
+                                currentFunctionResult = ConvertStrings(currentFunctionValue, function.resultType, function.dataType);
+
+                                if (currentFunctionResult.resultType < function.resultType)
+                                    currentFunctionResult.resultType = function.resultType;
+
+                                if (currentFunctionResult.resultType < ResultType.UnknownOrString)
+                                {
+                                    aggregatedValues[i].resultD += currentFunctionResult.resultD;
+
+                                    if (aggregatedValues[i].resultDPrefix == null)
+                                        aggregatedValues[i].resultDPrefix = currentFunctionResult.resultDPrefix;
+                                    else if (aggregatedValues[i].resultDPrefix != currentFunctionResult.resultDPrefix)
+                                        aggregatedValues[i].resultDPrefix = string.Empty;
+
+                                    if (aggregatedValues[i].resultDSpace == null)
+                                        aggregatedValues[i].resultDSpace = currentFunctionResult.resultDSpace;
+                                    else if (aggregatedValues[i].resultDSpace != currentFunctionResult.resultDSpace)
+                                        aggregatedValues[i].resultDSpace = string.Empty;
+
+                                    if (aggregatedValues[i].resultDPostfix == null)
+                                        aggregatedValues[i].resultDPostfix = currentFunctionResult.resultDPostfix;
+                                    else if (aggregatedValues[i].resultDPostfix != currentFunctionResult.resultDPostfix)
+                                        aggregatedValues[i].resultDPostfix = string.Empty;
+
+                                    aggregatedValues[i].resultType = currentFunctionResult.resultType;
+                                }
+                                else
+                                {
+                                    aggregatedValues[i].resultD = currentFunctionResult.resultD;
+                                    aggregatedValues[i].resultS = currentFunctionResult.resultS;
+                                }
+
+
+                                if (currentFunctionResult.resultType > function.resultType)
+                                {
+                                    function.resultType = currentFunctionResult.resultType;
+                                    aggregatedValues[i].resultType = currentFunctionResult.resultType;
+                                }
+                            }
                             else if (function.functionType == LrFunctionType.Sum)
                             {
                                 currentFunctionResult = ConvertStrings(currentFunctionValue, function.resultType, function.dataType);
 
-                                if (string.IsNullOrWhiteSpace(currentFunctionValue))
-                                    currentFunctionResult.resultType = ResultType.UseOtherResults;
+                                if (currentFunctionResult.resultType < function.resultType)
+                                    currentFunctionResult.resultType = function.resultType;
 
-                                aggregatedValues[i].resultD += currentFunctionResult.resultD;
-
-                                if (currentFunctionResult.resultType > 0)
+                                if (currentFunctionResult.resultType < ResultType.UnknownOrString)
                                 {
+                                    aggregatedValues[i].resultD += currentFunctionResult.resultD;
+
                                     if (aggregatedValues[i].resultDPrefix == null)
                                         aggregatedValues[i].resultDPrefix = currentFunctionResult.resultDPrefix;
                                     else if (aggregatedValues[i].resultDPrefix != currentFunctionResult.resultDPrefix)
@@ -1254,6 +1322,12 @@ namespace MusicBeePlugin
                                     else if (aggregatedValues[i].resultDPostfix != currentFunctionResult.resultDPostfix)
                                         aggregatedValues[i].resultDPostfix = string.Empty;
                                 }
+                                else
+                                {
+                                    aggregatedValues[i].resultD = currentFunctionResult.resultD;
+                                    aggregatedValues[i].resultS = currentFunctionResult.resultS;
+                                }
+
 
                                 if (currentFunctionResult.resultType > function.resultType)
                                 {
@@ -1265,23 +1339,18 @@ namespace MusicBeePlugin
                             {
                                 currentFunctionResult = ConvertStrings(currentFunctionValue, function.resultType, function.dataType);
 
-                                if (string.IsNullOrWhiteSpace(currentFunctionValue))
-                                {
-                                    currentFunctionResult.resultType = ResultType.UseOtherResults;
-                                }
-                                else if (currentFunctionResult.resultType == ResultType.UnknownOrString)
-                                {
-                                    function.resultType = ResultType.UnknownOrString;
-                                }
-                                else if (currentFunctionResult.resultType < function.resultType)
-                                {
+                                if (currentFunctionResult.resultType < function.resultType)
                                     currentFunctionResult.resultType = function.resultType;
-                                }
+
 
                                 if (aggregatedValues[i].resultD > currentFunctionResult.resultD)
                                     aggregatedValues[i].resultD = currentFunctionResult.resultD;
 
-                                if (currentFunctionResult.resultType > 0)
+                                if (CompareStrings(aggregatedValues[i].resultS, currentFunctionResult.resultS, ResultType.UnknownOrString, DataType.String) == 1)
+                                    aggregatedValues[i].resultS = currentFunctionResult.resultS;
+
+
+                                if (currentFunctionResult.resultType == ResultType.Double || currentFunctionResult.resultType == ResultType.AutoDouble)
                                 {
                                     if (aggregatedValues[i].resultDPrefix == null)
                                         aggregatedValues[i].resultDPrefix = currentFunctionResult.resultDPrefix;
@@ -1298,11 +1367,7 @@ namespace MusicBeePlugin
                                     else if (aggregatedValues[i].resultDPostfix != currentFunctionResult.resultDPostfix)
                                         aggregatedValues[i].resultDPostfix = string.Empty;
                                 }
-                                else
-                                {
-                                    if (CompareStrings(aggregatedValues[i].resultS, currentFunctionResult.resultS) == 1)
-                                        aggregatedValues[i].resultS = currentFunctionResult.resultS;
-                                }
+
 
                                 if (currentFunctionResult.resultType > function.resultType)
                                 {
@@ -1314,23 +1379,18 @@ namespace MusicBeePlugin
                             {
                                 currentFunctionResult = ConvertStrings(currentFunctionValue, function.resultType, function.dataType);
 
-                                if (string.IsNullOrWhiteSpace(currentFunctionValue))
-                                {
-                                    currentFunctionResult.resultType = ResultType.UseOtherResults;
-                                }
-                                else if (currentFunctionResult.resultType == ResultType.UnknownOrString)
-                                {
-                                    function.resultType = ResultType.UnknownOrString;
-                                }
-                                else if (currentFunctionResult.resultType < function.resultType)
-                                {
+                                if (currentFunctionResult.resultType < function.resultType)
                                     currentFunctionResult.resultType = function.resultType;
-                                }
+
 
                                 if (aggregatedValues[i].resultD < currentFunctionResult.resultD)
                                     aggregatedValues[i].resultD = currentFunctionResult.resultD;
 
-                                if (currentFunctionResult.resultType > 0)
+                                if (CompareStrings(aggregatedValues[i].resultS, currentFunctionResult.resultS, ResultType.UnknownOrString, DataType.String) == -1)
+                                    aggregatedValues[i].resultS = currentFunctionResult.resultS;
+
+
+                                if (currentFunctionResult.resultType == ResultType.Double || currentFunctionResult.resultType == ResultType.AutoDouble)
                                 {
                                     if (aggregatedValues[i].resultDPrefix == null)
                                         aggregatedValues[i].resultDPrefix = currentFunctionResult.resultDPrefix;
@@ -1347,11 +1407,7 @@ namespace MusicBeePlugin
                                     else if (aggregatedValues[i].resultDPostfix != currentFunctionResult.resultDPostfix)
                                         aggregatedValues[i].resultDPostfix = string.Empty;
                                 }
-                                else
-                                {
-                                    if (CompareStrings(aggregatedValues[i].resultS, currentFunctionResult.resultS) == -1)
-                                        aggregatedValues[i].resultS = currentFunctionResult.resultS;
-                                }
+
 
                                 if (currentFunctionResult.resultType > function.resultType)
                                 {
@@ -1359,56 +1415,11 @@ namespace MusicBeePlugin
                                     aggregatedValues[i].resultType = currentFunctionResult.resultType;
                                 }
                             }
-                            else if (function.functionType == LrFunctionType.Average)
-                            {
-                                aggregatedValues[i].items.AddReplace(parameter2Values[i], false);
-                                currentFunctionResult = ConvertStrings(currentFunctionValue, function.resultType, function.dataType);
 
 
-                                if (string.IsNullOrWhiteSpace(currentFunctionValue))
-                                    currentFunctionResult.resultType = ResultType.UseOtherResults;
-
-                                aggregatedValues[i].resultD += currentFunctionResult.resultD;
-
-                                if (currentFunctionResult.resultType > 0)
-                                {
-                                    if (aggregatedValues[i].resultDPrefix == null)
-                                        aggregatedValues[i].resultDPrefix = currentFunctionResult.resultDPrefix;
-                                    else if (aggregatedValues[i].resultDPrefix != currentFunctionResult.resultDPrefix)
-                                        aggregatedValues[i].resultDPrefix = string.Empty;
-
-                                    if (aggregatedValues[i].resultDSpace == null)
-                                        aggregatedValues[i].resultDSpace = currentFunctionResult.resultDSpace;
-                                    else if (aggregatedValues[i].resultDSpace != currentFunctionResult.resultDSpace)
-                                        aggregatedValues[i].resultDSpace = string.Empty;
-
-                                    if (aggregatedValues[i].resultDPostfix == null)
-                                        aggregatedValues[i].resultDPostfix = currentFunctionResult.resultDPostfix;
-                                    else if (aggregatedValues[i].resultDPostfix != currentFunctionResult.resultDPostfix)
-                                        aggregatedValues[i].resultDPostfix = string.Empty;
-
-                                    aggregatedValues[i].resultType = currentFunctionResult.resultType;
-                                }
-
-                                if (currentFunctionResult.resultType > function.resultType)
-                                {
-                                    function.resultType = currentFunctionResult.resultType;
-                                    aggregatedValues[i].resultType = currentFunctionResult.resultType;
-                                }
-                            }
-                            else if (function.functionType == LrFunctionType.AverageCount)
-                            {
-                                aggregatedValues[i].items.AddReplace(parameter2Values[i], false);
-                                aggregatedValues[i].items1.AddReplace(currentFunctionValue, false);
-
-                                aggregatedValues[i].resultType = ResultType.ItemCount;
-                                function.resultType = ResultType.ItemCount;
-                            }
+                            if (url != null) // Let's deal with URLs (SortedDictionary<url, false>)
+                                aggregatedValues[i].urls.AddReplace(url, false);
                         }
-
-
-                        if (url != null) // Let's deal with URLs (SortedDictionary<url, false>)
-                            aggregatedValues[i].items.AddReplace(url, false);
                     }
                 }
             }
@@ -1505,7 +1516,7 @@ namespace MusicBeePlugin
                     int exprRepresentationTailStart = expression.Length - exprRepresentationMiddle;
 
                     columnName += " : " + expression.Substring(0, exprRepresentationMiddle) + "…"
-                        + expression.Substring(exprRepresentationTailStart);                        ;
+                        + expression.Substring(exprRepresentationTailStart);
                 }
                 else
                 {
@@ -1524,51 +1535,72 @@ namespace MusicBeePlugin
         }
 
 
-        private bool[] getRightAlignedColumns()
+        private (ResultType[], bool[]) getColumnTypesRightAlignment()
         {
-            bool[] columnAlignments = new bool[groupingsDict.Count + functionsDict.Count];
+            bool[] columnRightAlignments = new bool[groupingsDict.Count + functionsDict.Count];
+            ResultType[] resultTypes = new ResultType[groupingsDict.Count + functionsDict.Count];
 
-            int j = -1;
+            int j = 0;
             foreach (var attribs in groupingsDict.Values)
             {
-                j++;
-
-                if (attribs.parameterName == SequenceNumberName || attribs.parameterName == DateCreatedTagName) // It's a number. Let's right-align the column.
+                if (attribs.parameterName == SequenceNumberName) // It's a number. Let's right-align the column.
                 {
-                    columnAlignments[j] = true;
+                    columnRightAlignments[j] = true;
+                    resultTypes[j] = ResultType.Double;
+                }
+                else if (attribs.parameterName == DateCreatedTagName) // It's a number. Let's right-align the column.
+                {
+                    columnRightAlignments[j] = true;
+                    resultTypes[j] = ResultType.DateTime;
                 }
                 else
                 {
                     DataType columnType = MbApiInterface.Setting_GetDataType(GetTagId(attribs.parameterName));
-                    if (columnType == DataType.Number || columnType == DataType.DateTime) // Let's right-align the column.
-                        columnAlignments[j] = true;
-                    else // It's either string or rating, or internal plugin pseudo-tag like "Filename". Let's left-align the column.
-                        columnAlignments[j] = false;
+                    if (columnType == DataType.Number || columnType == DataType.Rating) // Let's right-align the column.
+                    {
+                        columnRightAlignments[j] = true;
+                        resultTypes[j] = ResultType.Double;
+                    }
+                    else if (columnType == DataType.DateTime) // Let's right-align the column.
+                    {
+                        columnRightAlignments[j] = true;
+                        resultTypes[j] = ResultType.DateTime;
+                    }
+                    else // It's either string, or internal plugin pseudo-tag like "Filename". Let's left-align the column.
+                    {
+                        columnRightAlignments[j] = false;
+                        resultTypes[j] = ResultType.UnknownOrString;
+                    }
                 }
+
+                j++;
             }
 
-            int i = -1;
+            int i = 0;
             foreach (var function in functionsDict.Values)
             {
-                i++;
-                if ((function.resultType > 0 || function.resultType == ResultType.AutoDouble) && function.resultType != ResultType.ParsingError) // It's either number or date/time/duration. Let's right-align the column.
-                    columnAlignments[j + 1 + i] = true;
+                if (function.resultType >= ResultType.AutoDouble && function.resultType <= ResultType.ItemCount) // It's either number or date/time/duration. Let's right-align the column.
+                    columnRightAlignments[j + i] = true;
                 else
-                    columnAlignments[j + 1 + i] = false;
+                    columnRightAlignments[j + i] = false;
+
+                resultTypes[j] = function.resultType;
+
+                i++;
             }
 
-            return columnAlignments;
+            return (resultTypes, columnRightAlignments);
         }
 
         private void previewTable_AddRowsToTable(List<string[]> rows)
         {
             if (previewTable.RowCount == 0) // There are no rows in preview table yet, so let's adjust column text alignment according to data type
             {
-                rightAlignedColumns = getRightAlignedColumns();
+                (columnTypes, columnsRightAlignment) = getColumnTypesRightAlignment();
 
-                for (int i = 0; i < rightAlignedColumns.Length; i++)
+                for (int i = 0; i < columnsRightAlignment.Length; i++)
                 {
-                    if (rightAlignedColumns[i])
+                    if (columnsRightAlignment[i])
                         previewTable.Columns[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopRight;
                     else
                         previewTable.Columns[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopLeft;
@@ -1636,7 +1668,7 @@ namespace MusicBeePlugin
             {
                 toolTip1.SetToolTip(useAnotherPresetAsSourceCheckBox, UseAnotherPresetAsSourceToolTip);
                 useAnotherPresetAsSourceCheckBox.Image = Resources.transparent_15;
-                foundPresetRefs.SetCue(string.Empty);
+                SetComboBoxCue(foundPresetRefs, string.Empty);
 
                 foundPresetRefs.SelectedItem = selectedPresetRef;
             }
@@ -1644,7 +1676,7 @@ namespace MusicBeePlugin
             {
                 toolTip1.SetToolTip(useAnotherPresetAsSourceCheckBox, UseAnotherPresetAsSourceToolTip + "\n\n" + UseAnotherPresetAsSourceIsSenselessToolTip.ToUpper());
                 useAnotherPresetAsSourceCheckBox.Image = ThemedBitmapAddRef(this, WarningWide);
-                foundPresetRefs.SetCue(selectedPresetRef.name);
+                SetComboBoxCue(foundPresetRefs, selectedPresetRef.name);
 
                 foundPresetRefs.SelectedIndex = -1;
             }
@@ -1652,7 +1684,7 @@ namespace MusicBeePlugin
             {
                 toolTip1.SetToolTip(useAnotherPresetAsSourceCheckBox, UseAnotherPresetAsSourceToolTip + "\n\n" + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper());
                 useAnotherPresetAsSourceCheckBox.Image = ThemedBitmapAddRef(this, WarningWide);
-                foundPresetRefs.SetCue(selectedPresetRef.name);
+                SetComboBoxCue(foundPresetRefs, selectedPresetRef.name);
 
                 foundPresetRefs.SelectedIndex = -1;
             }
@@ -1706,7 +1738,7 @@ namespace MusicBeePlugin
 
             foreach (var item in presetList.Items)
             {
-                ReportPreset preset = (ReportPreset)item;
+                ReportPreset preset = item as ReportPreset;//********
 
                 if (preset != currentPreset)
                 {
@@ -1978,7 +2010,7 @@ namespace MusicBeePlugin
 
                     try
                     {
-                        Bitmap bm_dest = new Bitmap((int)(pic.Width * SF), (int)(pic.Height * SF), System.Drawing.Imaging.PixelFormat.Format32bppRgb);
+                        Bitmap bm_dest = new Bitmap((int)Math.Round(pic.Width * SF), (int)Math.Round(pic.Height * SF), System.Drawing.Imaging.PixelFormat.Format32bppRgb);
                         Graphics gr_dest = Graphics.FromImage(bm_dest);
                         gr_dest.DrawImage(pic, 0, 0, bm_dest.Width, bm_dest.Height);
                         pic.Dispose();
@@ -2162,7 +2194,7 @@ namespace MusicBeePlugin
                 }
                 else if (dataType == DataType.DateTime)
                 {
-                    function.resultType = ResultType.Datetime;
+                    function.resultType = ResultType.Year;
                     function.dataType = dataType;
                 }
                 else
@@ -2811,11 +2843,11 @@ namespace MusicBeePlugin
                         return string.Empty;
                     }
 
-                    filesCount += keyValue.Value[keyValue.Value.Length - 1].items.Count;
+                    filesCount += keyValue.Value[0].urls.Count;
 
                     string composedGroupingValues = keyValue.Key;
-                    string[] groupingsRow = AggregatedTags.GetGroupings(keyValue, groupingsDict); 
-                    string[] row = new string[groupingsRow.Length + keyValue.Value.Length - 1]; // Let's exclude last .Value[], it's urls
+                    string[] groupingsRow = AggregatedTags.GetGroupings(keyValue, groupingsDict);
+                    string[] row = new string[groupingsRow.Length + keyValue.Value.Length];
 
                     ConvertStringsResult[] functionValues = tags[composedGroupingValues];
 
@@ -3485,6 +3517,9 @@ namespace MusicBeePlugin
         {
             DataGridViewColumn column;
 
+            if (splitter == DontUseSplitter)
+                splitter = "";
+
             if (fieldName == ArtworkName || fieldName == SequenceNumberName)
             {
                 if (type != LrFunctionType.Grouping)
@@ -3614,11 +3649,11 @@ namespace MusicBeePlugin
 
                 destinationTagList.SelectedItem = NullTagName;
                 savedFunctionIds.Add(string.Empty);
-                savedDestinationTagsNames.Add((string)destinationTagList.SelectedItem);
+                savedDestinationTagsNames.Add(destinationTagList.SelectedItem as string);
 
                 operations.Add(0);
-                mulDivFactors.Add((string)mulDivFactorComboBox.Items[0]);
-                precisionDigits.Add((string)precisionDigitsComboBox.Items[0]);
+                mulDivFactors.Add(mulDivFactorComboBox.Items[0] as string);
+                precisionDigits.Add(precisionDigitsComboBox.Items[0] as string);
                 appendTexts.Add(string.Empty);
 
                 sourceFieldComboBox.Items.Add(fullFieldName);
@@ -3940,7 +3975,7 @@ namespace MusicBeePlugin
             {
                 j++;
 
-                if (attribs.getColumnName(false, false, false) == DisplayedAlbumArtsistName)
+                if (attribs.getColumnName(false, false, false) == DisplayedAlbumArtistName)
                     albumArtistField = j;
                 else if (attribs.getColumnName(false, false, false) == MbApiInterface.Setting_GetFieldName(MetaDataType.Album))
                     albumField = j;
@@ -4168,12 +4203,12 @@ namespace MusicBeePlugin
                     SF = xSF;
 
 
-                scaledPic = new Bitmap((int)(pic.Width * SF), (int)(pic.Height * SF), System.Drawing.Imaging.PixelFormat.Format32bppRgb);
+                scaledPic = new Bitmap((int)Math.Round(pic.Width * SF), (int)Math.Round(pic.Height * SF), System.Drawing.Imaging.PixelFormat.Format32bppRgb);
                 Graphics gr_dest = Graphics.FromImage(scaledPic);
                 gr_dest.DrawImage(pic, 0, 0, scaledPic.Width, scaledPic.Height);
                 gr_dest.Dispose();
 
-                ((HtmlDocumentCDBooklet)document).writeHeader(CdBookletArtworkSize, GetBitmapAverageColor(scaledPic), scaledPic,
+                (document as HtmlDocumentCDBooklet).writeHeader(CdBookletArtworkSize, GetBitmapAverageColor(scaledPic), scaledPic,
                     albumArtistsAlbums, tags.Count);
 
                 scaledPic.Dispose();
@@ -4260,7 +4295,7 @@ namespace MusicBeePlugin
 
                     if (selectedPreset.fileFormatIndex == LrReportFormat.M3u) //It's M3U playlist
                     {
-                        SortedDictionary<string, bool> urls = keyValue.Value[keyValue.Value.Length - 1].items;
+                        SortedDictionary<string, bool> urls = keyValue.Value[0].urls;
 
                         foreach (var urlPair in urls)
                             allUrls.AddReplace(urlPair.Key, false);
@@ -4285,10 +4320,10 @@ namespace MusicBeePlugin
                             else if (l == artworkField && selectedPreset.fileFormatIndex != LrReportFormat.HtmlDocumentByAlbums 
                                 && selectedPreset.fileFormatIndex != LrReportFormat.HtmlDocument 
                                 && selectedPreset.fileFormatIndex != LrReportFormat.HtmlTable) //Export image hashes
-                                document.addCellToRow(groupingsValues[artworkField], attribs.getColumnName(true, true, true), rightAlignedColumns[l], 
+                                document.addCellToRow(groupingsValues[artworkField], attribs.getColumnName(true, true, true), columnsRightAlignment[l], 
                                     l == albumArtistField, l == albumField);
                             else //Its not the artwork column
-                                document.addCellToRow(groupingsValues[l], attribs.getColumnName(true, true, true), rightAlignedColumns[l], 
+                                document.addCellToRow(groupingsValues[l], attribs.getColumnName(true, true, true), columnsRightAlignment[l], 
                                     l == albumArtistField, l == albumField);
                         }
 
@@ -4299,7 +4334,7 @@ namespace MusicBeePlugin
 
                             document.addCellToRow(AggregatedTags.GetField(keyValue.Key, keyValue.Value, groupingsDict.Count + l, groupingsDict,
                                 operations[l], mulDivFactors[l], precisionDigits[l], appendTexts[l]),
-                                attribs.getColumnName(true, true, true), rightAlignedColumns[groupingsDict.Count + l], false, false);
+                                attribs.getColumnName(true, true, true), columnsRightAlignment[groupingsDict.Count + l], false, false);
                         }
                     }
                     else //It's a CD booklet
@@ -4308,18 +4343,18 @@ namespace MusicBeePlugin
                         {
                             if (!multipleAlbums) //1 album
                             {
-                                ((HtmlDocumentCDBooklet)document).addTrack(int.Parse(groupingsValues[seqNumField]),
+                                (document as HtmlDocumentCDBooklet).addTrack(int.Parse(groupingsValues[seqNumField]),
                                     null, null, groupingsValues[titleField], groupingsValues[durationField]);
                             }
                             else //Several albums
                             {
-                                ((HtmlDocumentCDBooklet)document).addTrack(int.Parse(groupingsValues[seqNumField]),
+                                (document as HtmlDocumentCDBooklet).addTrack(int.Parse(groupingsValues[seqNumField]),
                                     null, groupingsValues[albumField], groupingsValues[titleField], groupingsValues[durationField]);
                             }
                         }
                         else //Several album artists
                         {
-                            ((HtmlDocumentCDBooklet)document).addTrack(int.Parse(groupingsValues[seqNumField]),
+                            (document as HtmlDocumentCDBooklet).addTrack(int.Parse(groupingsValues[seqNumField]),
                                 groupingsValues[albumArtistField], groupingsValues[albumField], groupingsValues[titleField],
                                 groupingsValues[durationField]);
                         }
@@ -4344,7 +4379,7 @@ namespace MusicBeePlugin
             else if (selectedPreset.fileFormatIndex != LrReportFormat.HtmlDocumentCdBooklet) //It's NOT a CD booklet
                 document.writeFooter();
             else
-                ((HtmlDocumentCDBooklet)document).writeFooter(albumArtistsAlbums);
+                (document as HtmlDocumentCDBooklet).writeFooter(albumArtistsAlbums);
 
             document.close();
 
@@ -4357,7 +4392,7 @@ namespace MusicBeePlugin
 
         public static void OpenReport(object document)
         {
-            string documentPathFileName = (string)document;
+            string documentPathFileName = document as string;
 
             System.Diagnostics.Process.Start(documentPathFileName);
 
@@ -4611,7 +4646,7 @@ namespace MusicBeePlugin
             int firstPredefinedPresetIndex;
             for (firstPredefinedPresetIndex = 0; firstPredefinedPresetIndex < presetList.Items.Count; firstPredefinedPresetIndex++)
             {
-                if (!((ReportPreset)presetList.Items[firstPredefinedPresetIndex]).userPreset)
+                if (!(presetList.Items[firstPredefinedPresetIndex] as ReportPreset).userPreset)
                     break;
             }
 
@@ -4965,16 +5000,16 @@ namespace MusicBeePlugin
             foreach (var scsa in splitContainersScalingAttributes)
             {
                 var sc = scsa.splitContainer;
-                sc.Panel1MinSize = (int)(scsa.panel1MinSize * vDpiFontScaling);
-                sc.Panel2MinSize = (int)(scsa.panel2MinSize * vDpiFontScaling);
+                sc.Panel1MinSize = (int)Math.Round(scsa.panel1MinSize * vDpiFontScaling);
+                sc.Panel2MinSize = (int)Math.Round(scsa.panel2MinSize * vDpiFontScaling);
 
                 if (value.Item4 != 0)
                 {
-                    sc.SplitterDistance = (int)(value.Item4 * vDpiFontScaling);
+                    sc.SplitterDistance = (int)Math.Round(value.Item4 * vDpiFontScaling);
                 }
                 else
                 {
-                    sc.SplitterDistance = (int)(scsa.splitterDistance * vDpiFontScaling);
+                    sc.SplitterDistance = (int)Math.Round(scsa.splitterDistance * vDpiFontScaling);
                 }
             }
 
@@ -5005,7 +5040,7 @@ namespace MusicBeePlugin
             else if (newColumn != false) // Discarding changes
             {
                 expressionTextBox.Text = expressionBackup;
-                multipleItemsSplitterComboBox.Text = splitterBackup;
+                SetMultipleItemsSplitterComboBoxCue(multipleItemsSplitterComboBox, splitterBackup);
                 multipleItemsSplitterTrimCheckBox.Checked = trimValuesBackup;
 
                 setColumnSaved();
@@ -5047,7 +5082,7 @@ namespace MusicBeePlugin
             buttonUpdateFunction.Image = Resources.transparent_15;
 
             expressionTextBox.Text = expressionBackup;
-            multipleItemsSplitterComboBox.Text = splitterBackup;
+            SetMultipleItemsSplitterComboBoxCue(multipleItemsSplitterComboBox, splitterBackup);
             multipleItemsSplitterTrimCheckBox.Checked = trimValuesBackup;
 
             enableDisablePreviewOptionControls(true);
@@ -5112,7 +5147,7 @@ namespace MusicBeePlugin
                 functionComboBox.SelectedIndex = (int)commonAttr.functionType;
                 sourceTagList.SelectedItem = commonAttr.parameterName;
                 parameter2ComboBox.SelectedItem = commonAttr.parameter2Name;
-                multipleItemsSplitterComboBox.Text = commonAttr.splitter;
+                SetMultipleItemsSplitterComboBoxCue(multipleItemsSplitterComboBox, commonAttr.splitter);
                 multipleItemsSplitterTrimCheckBox.Checked = commonAttr.trimValues;
 
 
@@ -5251,25 +5286,19 @@ namespace MusicBeePlugin
 
             string text = multipleItemsSplitterComboBox.GetItemText(multipleItemsSplitterComboBox.SelectedItem);
 
-            if (multipleItemsSplitterComboBox.SelectedIndex == 0)
-            {
-                text = string.Empty;
-                multipleItemsSplitterTrimCheckBox.Checked = false;
-            }
-            else if (multipleItemsSplitterComboBox.SelectedIndex == 1)
+            if (multipleItemsSplitterComboBox.SelectedIndex == 1)
             {
                 text = "\\0";
                 multipleItemsSplitterTrimCheckBox.Checked = false;
             }
-            else if (multipleItemsSplitterComboBox.SelectedIndex > 1)
+            else
             {
-                int commentIndex = text.IndexOf(" (");
-                if (commentIndex > 0)
-                    text = text.Substring(1, commentIndex - 1);
-                else
-                    text = text.Substring(1);
+                text = text.TrimStart(' ');
 
-                multipleItemsSplitterTrimCheckBox.Checked = true;
+                if (multipleItemsSplitterComboBox.SelectedIndex == 0)
+                    multipleItemsSplitterTrimCheckBox.Checked = false;
+                else
+                    multipleItemsSplitterTrimCheckBox.Checked = true;
             }
 
 
@@ -5284,10 +5313,7 @@ namespace MusicBeePlugin
                 return;
 
 
-            // handing off the reset of the combobox selected value to a delegate method - using methodinvoker on the forms main thread is an efficient to do this
-            // see https://msdn.microsoft.com/en-us/library/system.windows.forms.methodinvoker(v=vs.110).aspx
-            BeginInvoke((MethodInvoker)delegate { multipleItemsSplitterComboBox.Text = text; });
-
+            SetMultipleItemsSplitterComboBoxCue(multipleItemsSplitterComboBox, text);
 
             if (text == splitterBackup || newColumn == true)
                 return;
@@ -5396,11 +5422,12 @@ namespace MusicBeePlugin
 
             functionComboBox.SelectedIndex = 0;
             sourceTagList.SelectedIndex = 0;
-            multipleItemsSplitterComboBox.Text = string.Empty;
             expressionTextBox.Text = string.Empty;
 
             if (index == -1)
             {
+                SetComboBoxCue(multipleItemsSplitterComboBox, DontUseSplitter);
+
                 selectedPreset = null;
 
                 formatComboBox.SelectedIndex = 1;
@@ -5456,7 +5483,6 @@ namespace MusicBeePlugin
             resetLocalsAndUiControls();
 
             selectedPreset = (ReportPreset)presetList.SelectedItem;
-
 
             if (selectedPreset.fileFormatIndex == 0)
                 formatComboBox.SelectedIndex = 1;
@@ -5616,49 +5642,67 @@ namespace MusicBeePlugin
 
         private void presetList_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-            if (ignoreCheckedPresetEvent)
+            if (e != null)
             {
+                if (ignoreCheckedPresetEvent)
+                {
+                    if (e.NewValue == CheckState.Checked)
+                        e.NewValue = CheckState.Unchecked;
+                    else if (e.NewValue == CheckState.Unchecked)
+                        e.NewValue = CheckState.Checked;
+
+                    return;
+                }
+
+                if (presetList.SelectedIndex != -1)
+                    setUnsavedChanges(true);
+
                 if (e.NewValue == CheckState.Checked)
-                    e.NewValue = CheckState.Unchecked;
-                else if (e.NewValue == CheckState.Unchecked)
-                    e.NewValue = CheckState.Checked;
+                {
+                    (presetList.Items[e.Index] as ReportPreset).autoApply = true;
+                    autoAppliedPresetCount++;
 
-                return;
-            }
-
-            if (presetList.SelectedIndex != -1)
-                setUnsavedChanges(true);
-
-            if (e.NewValue == CheckState.Checked)
-            {
-                ((ReportPreset)presetList.Items[e.Index]).autoApply = true;
-                autoAppliedPresetCount++;
-
-                if (!SavedSettings.dontPlayTickedAutoApplyingAsrLrPresetSound && presetList.SelectedIndex != -1)
-                    System.Media.SystemSounds.Exclamation.Play();
-            }
-            else
-            {
-                ((ReportPreset)presetList.Items[e.Index]).autoApply = false;
-                autoAppliedPresetCount--;
+                    if (!SavedSettings.dontPlayTickedAutoApplyingAsrLrPresetSound && presetList.SelectedIndex != -1)
+                        System.Media.SystemSounds.Exclamation.Play();
+                }
+                else
+                {
+                    (presetList.Items[e.Index] as ReportPreset).autoApply = false;
+                    autoAppliedPresetCount--;
+                }
             }
 
 
-            if (!SavedSettings.allowAsrLrPresetAutoexecution)
+            if (autoAppliedPresetCount == 0)
             {
-                autoApplyPresetsLabel.Text = AutoApplyText + "\n" 
-                    + AutoApplyDisabledText;
-                autoApplyPresetsLabel.ForeColor = TickedColor;
-            }
-            else if (autoAppliedPresetCount == 0)
-            {
-                autoApplyPresetsLabel.Text = AutoApplyText;
-                autoApplyPresetsLabel.ForeColor = UntickedColor;
+                if (SavedSettings.allowAsrLrPresetAutoexecution)
+                {
+                    autoApplyPresetsLabel.Text = AutoApplyText;
+
+                    autoApplyPresetsLabel.ForeColor = UntickedColor;
+                }
+                else
+                {
+                    autoApplyPresetsLabel.Text = AutoApplyText + "\n"
+                        + AutoApplyDisabledText.ToUpper();
+
+                    autoApplyPresetsLabel.ForeColor = TickedColor;
+                }
             }
             else
             {
-                autoApplyPresetsLabel.Text = AutoApplyText + "\n"
+                if (SavedSettings.allowAsrLrPresetAutoexecution)
+                {
+                    autoApplyPresetsLabel.Text = AutoApplyText + "\n"
                     + NowTickedText.ToUpper().Replace("%%TICKEDPRESETS%%", autoAppliedPresetCount.ToString());
+                }
+                else
+                {
+                    autoApplyPresetsLabel.Text = AutoApplyText + "\n"
+                    + AutoApplyDisabledText.ToUpper() + "\n"
+                    + NowTickedText.ToUpper().Replace("%%TICKEDPRESETS%%", autoAppliedPresetCount.ToString());
+                }
+
                 autoApplyPresetsLabel.ForeColor = TickedColor;
             }
         }
@@ -5737,6 +5781,7 @@ namespace MusicBeePlugin
 
                 DataGridViewCellComparer comparator = new DataGridViewCellComparer
                 {
+                    resultTypes = columnTypes,
                     comparedColumnIndex = e.ColumnIndex
                 };
 
@@ -6072,6 +6117,7 @@ namespace MusicBeePlugin
         {
             PluginQuickSettings settings = new PluginQuickSettings(TagToolsPlugin);
             Display(settings, true);
+            presetList_ItemCheck(null, null); //Let's refresh auto-apply warning
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)

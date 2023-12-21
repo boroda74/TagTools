@@ -413,15 +413,14 @@
             // allowAsrLrPresetAutoexecutionCheckBoxLabel
             // 
             resources.ApplyResources(this.allowAsrLrPresetAutoexecutionCheckBoxLabel, "allowAsrLrPresetAutoexecutionCheckBoxLabel");
-            this.allowAsrLrPresetAutoexecutionCheckBoxLabel.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.allowAsrLrPresetAutoexecutionCheckBoxLabel.Name = "allowAsrLrPresetAutoexecutionCheckBoxLabel";
             this.allowAsrLrPresetAutoexecutionCheckBoxLabel.Tag = "";
             this.toolTip1.SetToolTip(this.allowAsrLrPresetAutoexecutionCheckBoxLabel, resources.GetString("allowAsrLrPresetAutoexecutionCheckBoxLabel.ToolTip"));
+            this.allowAsrLrPresetAutoexecutionCheckBoxLabel.Click += new System.EventHandler(this.allowAsrLrPresetAutoexecutionCheckBoxLabel_Click);
             // 
             // allowAsrLrPresetAutoexecutionCheckBox
             // 
             resources.ApplyResources(this.allowAsrLrPresetAutoexecutionCheckBox, "allowAsrLrPresetAutoexecutionCheckBox");
-            this.allowAsrLrPresetAutoexecutionCheckBox.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.allowAsrLrPresetAutoexecutionCheckBox.Name = "allowAsrLrPresetAutoexecutionCheckBox";
             this.allowAsrLrPresetAutoexecutionCheckBox.Tag = "#allowAsrLrPresetAutoexecutionCheckBoxLabel";
             this.toolTip1.SetToolTip(this.allowAsrLrPresetAutoexecutionCheckBox, resources.GetString("allowAsrLrPresetAutoexecutionCheckBox.ToolTip"));

@@ -109,6 +109,7 @@ namespace MusicBeePlugin
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.sinceAddedCheckBox = new System.Windows.Forms.CheckBox();
             this.sinceAddedCheckBoxLabel = new System.Windows.Forms.Label();
+            this.buttonSettings = new System.Windows.Forms.Button();
             this.notifyWhenAutoratingCompletedCheckBox = new System.Windows.Forms.CheckBox();
             this.playsPerDayTagList = new System.Windows.Forms.ComboBox();
             this.storePlaysPerDayCheckBox = new System.Windows.Forms.CheckBox();
@@ -1183,6 +1184,18 @@ namespace MusicBeePlugin
             this.toolTip1.SetToolTip(this.sinceAddedCheckBoxLabel, resources.GetString("sinceAddedCheckBoxLabel.ToolTip"));
             this.sinceAddedCheckBoxLabel.Click += new System.EventHandler(this.sinceAddedCheckBoxLabel_Click);
             // 
+            // buttonSettings
+            // 
+            resources.ApplyResources(this.buttonSettings, "buttonSettings");
+            this.dirtyErrorProvider.SetError(this.buttonSettings, resources.GetString("buttonSettings.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.buttonSettings, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonSettings.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.buttonSettings, ((int)(resources.GetObject("buttonSettings.IconPadding"))));
+            this.buttonSettings.Image = global::MusicBeePlugin.Properties.Resources.gear_15;
+            this.buttonSettings.Name = "buttonSettings";
+            this.buttonSettings.Tag = "@non-defaultable@square-control";
+            this.toolTip1.SetToolTip(this.buttonSettings, resources.GetString("buttonSettings.ToolTip"));
+            this.buttonSettings.Click += new System.EventHandler(this.buttonSettings_Click);
+            // 
             // notifyWhenAutoratingCompletedCheckBox
             // 
             resources.ApplyResources(this.notifyWhenAutoratingCompletedCheckBox, "notifyWhenAutoratingCompletedCheckBox");
@@ -1287,6 +1300,7 @@ namespace MusicBeePlugin
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
+            this.Controls.Add(this.buttonSettings);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.label10);
@@ -1440,5 +1454,6 @@ namespace MusicBeePlugin
         private Label holdsAtStartUpCheckBoxLabel;
         private Label groupBox1Label;
         private Label groupBox2Label;
+        private Button buttonSettings;
     }
 }

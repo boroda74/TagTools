@@ -89,6 +89,21 @@ namespace MusicBeePlugin
             autodeleteManyCheckBox_CheckedChanged(null, null);
         }
 
+        private void dontSkipAutobackupsIfPlayCountsChangedLabel_Click(object sender, EventArgs e)
+        {
+            dontSkipAutobackupsIfPlayCountsChangedCheckBox.Checked = !dontSkipAutobackupsIfPlayCountsChangedCheckBox.Checked;
+        }
+
+        private void dontTryToGuessLibraryNameCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            dontTryToGuessLibraryNameCheckBox.Checked = !dontTryToGuessLibraryNameCheckBox.Checked;
+        }
+
+        private void backupArtworksCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            backupArtworksCheckBox.Checked = !backupArtworksCheckBox.Checked;
+        }
+
         private void browseButton_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog dialog = new FolderBrowserDialog

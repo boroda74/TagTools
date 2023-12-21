@@ -34,6 +34,8 @@ namespace MusicBeePlugin
         {
             base.initializeForm();
 
+            buttonSettings.Image = ThemedBitmapAddRef(this, Gear);
+
             defaultEncoding = Encoding.Default;
             EncodingInfo[] encodings = Encoding.GetEncodings();
 
@@ -123,7 +125,7 @@ namespace MusicBeePlugin
             newTracks.Clear();
             previewTable.Rows.Clear();
             previewIsGenerated = false;
-            ((DatagridViewCheckBoxHeaderCell)previewTable.Columns[0].HeaderCell).setState(true);
+            (previewTable.Columns[0].HeaderCell as DatagridViewCheckBoxHeaderCell).setState(true);
 
             if (backgroundTaskIsWorking())
                 return true;
@@ -342,7 +344,7 @@ namespace MusicBeePlugin
         {
             foreach (DataGridViewRow row in previewTable.Rows)
             {
-                if ((string)row.Cells[0].Value == null)
+                if (row.Cells[0].Value == null)
                     continue;
 
                 if (state)
@@ -435,19 +437,25 @@ namespace MusicBeePlugin
 
             if (value.Item1 != 0)
             {
-                previewTable.Columns[1].Width = (int)(value.Item1 * hDpiFontScaling);
-                previewTable.Columns[2].Width = (int)(value.Item2 * hDpiFontScaling);
+                previewTable.Columns[1].Width = (int)Math.Round(value.Item1 * hDpiFontScaling);
+                previewTable.Columns[2].Width = (int)Math.Round(value.Item2 * hDpiFontScaling);
             }
             else
             {
-                previewTable.Columns[1].Width = (int)(previewTable.Columns[1].Width * hDpiFontScaling);
-                previewTable.Columns[2].Width = (int)(previewTable.Columns[2].Width * hDpiFontScaling);
+                previewTable.Columns[1].Width = (int)Math.Round(previewTable.Columns[1].Width * hDpiFontScaling);
+                previewTable.Columns[2].Width = (int)Math.Round(previewTable.Columns[2].Width * hDpiFontScaling);
             }
         }
 
         private void ReencodeTagsCommand_FormClosing(object sender, FormClosingEventArgs e)
         {
             saveWindowLayout(previewTable.Columns[1].Width, previewTable.Columns[2].Width);
+        }
+
+        private void buttonSettings_Click(object sender, EventArgs e)
+        {
+            PluginQuickSettings settings = new PluginQuickSettings(TagToolsPlugin);
+            Display(settings, true);
         }
     }
 }

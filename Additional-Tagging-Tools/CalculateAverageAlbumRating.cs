@@ -19,6 +19,8 @@ namespace MusicBeePlugin
         {
             base.initializeForm();
 
+            buttonSettings.Image = ThemedBitmapAddRef(this, Gear);
+
             calculateAlbumRatingAtStartUpCheckBox.Checked = SavedSettings.calculateAlbumRatingAtStartUp;
             calculateAlbumRatingAtTagsChangedCheckBox.Checked = SavedSettings.calculateAlbumRatingAtTagsChanged;
             notifyWhenCalculationCompletedCheckBox.Checked = SavedSettings.notifyWhenCalculationCompleted;
@@ -325,6 +327,12 @@ namespace MusicBeePlugin
         private void notifyWhenCalculationCompletedCheckBoxLabel_Click(object sender, EventArgs e)
         {
             notifyWhenCalculationCompletedCheckBox.Checked = !notifyWhenCalculationCompletedCheckBox.Checked;
+        }
+
+        private void buttonSettings_Click(object sender, EventArgs e)
+        {
+            PluginQuickSettings settings = new PluginQuickSettings(TagToolsPlugin);
+            Display(settings, true);
         }
     }
 }

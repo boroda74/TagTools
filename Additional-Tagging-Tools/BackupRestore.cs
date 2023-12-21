@@ -28,7 +28,7 @@ namespace MusicBeePlugin
             }
 
             if (string.IsNullOrWhiteSpace(libraryName))
-                libraryName = "";
+                libraryName = string.Empty;
             else
                 libraryName += " - ";
 
@@ -236,6 +236,8 @@ namespace MusicBeePlugin
             if (System.IO.File.Exists(baselineFilename + ".bbl")) //Backup baseline file exists
             {
                 baseline = Load(baselineFilename, ".bbl");
+                if (baseline == null)
+                    return;
 
 
                 List<string> tagNames = new List<string>();
@@ -304,7 +306,7 @@ namespace MusicBeePlugin
                     if (trackNeedsToBeBackuped)
                     {
                         incrementalBackup.tracks.Add(trackId, tagsForIncrementalBackup);
-                        Plugin.TempTracksNeedsToBeBackuped.Add(trackId, true);
+                        Plugin.TempTracksNeedsToBeBackedUp.Add(trackId, true);
                     }
                 }
 
@@ -327,7 +329,7 @@ namespace MusicBeePlugin
             {
                 baseline = this;
 
-                Plugin.TempTracksNeedsToBeBackuped.Clear();
+                Plugin.TempTracksNeedsToBeBackedUp.Clear();
                 Plugin.UpdatedTracksForBackupCount = 0;
                 Plugin.BackupIsAlwaysNeeded = true;
             }
@@ -372,7 +374,7 @@ namespace MusicBeePlugin
             BackupType baseline;
             string baselineFilename = Plugin.GetBackupBaselineFilename();
 
-            if (backupFileExtension != ".bbl" && !System.IO.File.Exists(baselineFilename + ".bbl")) //Backup baseline file doesn't exist
+            if (!System.IO.File.Exists(baselineFilename + ".bbl")) //Backup baseline file doesn't exist
             {
                 MessageBox.Show(Plugin.MbForm, Plugin.MsgBackupBaselineFileDoesntExist.Replace("%%FILENAME%%", baselineFilename + ".bbl"), 
                     string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -414,6 +416,9 @@ namespace MusicBeePlugin
             if (backupFileExtension != ".bbl") //We are loading incremental backup
             {
                 baseline = Load(baselineFilename, ".bbl");
+                if (baseline == null)
+                    return null;
+
 
                 foreach (var incTrack in incrementalBackup.tracks)
                 {
@@ -580,7 +585,7 @@ namespace MusicBeePlugin
         {
             System.Threading.Thread.CurrentThread.Priority = System.Threading.ThreadPriority.Lowest;
 
-            Plugin.TempTracksNeedsToBeBackuped.Clear();
+            Plugin.TempTracksNeedsToBeBackedUp.Clear();
 
             string[] files = null;
             if (Plugin.MbApiInterface.Library_QueryFilesEx("domain=Library", out files))
@@ -616,7 +621,7 @@ namespace MusicBeePlugin
                         trackId = int.Parse(Plugin.GetPersistentTrackId(currentFile));
 
 
-                        if (!Plugin.BackupIsAlwaysNeeded && !Plugin.TracksNeedsToBeBackuped.Contains(trackId))
+                        if (!Plugin.BackupIsAlwaysNeeded && !Plugin.TracksNeedsToBeBackedUp.Contains(trackId))
                             continue;
 
 
@@ -654,8 +659,8 @@ namespace MusicBeePlugin
             }
 
 
-            Plugin.TracksNeedsToBeBackuped = Plugin.TempTracksNeedsToBeBackuped;
-            Plugin.TempTracksNeedsToBeBackuped = new SortedDictionary<int, bool>();
+            Plugin.TracksNeedsToBeBackedUp = Plugin.TempTracksNeedsToBeBackedUp;
+            Plugin.TempTracksNeedsToBeBackedUp = new SortedDictionary<int, bool>();
             Plugin.UpdatedTracksForBackupCount = 0;
             Plugin.BackupIsAlwaysNeeded = false;
 
@@ -702,6 +707,8 @@ namespace MusicBeePlugin
 
 
             BackupType backup = BackupType.Load(backupName);
+            if (backup == null)
+                return;
 
             if (backup.libraryName != Plugin.GetLibraryName())
             {

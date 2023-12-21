@@ -9,6 +9,8 @@ namespace MusicBeePlugin
 {
     public partial class AutoRateCommand : PluginWindowTemplate
     {
+        protected const int FormShowDelay = 2750; //milliseconds
+
         private string[] files = new string[0];
 
         private static int NumberOfFiles;
@@ -22,6 +24,8 @@ namespace MusicBeePlugin
         protected override void initializeForm()
         {
             base.initializeForm();
+
+            buttonSettings.Image = ThemedBitmapAddRef(this, Gear);
 
             toolTip1.SetToolTip(autoRateAtStartUpCheckBox, MsgThresholdsDescription);
             toolTip1.SetToolTip(autoRateAtStartUpCheckBoxLabel, MsgThresholdsDescription);
@@ -338,7 +342,7 @@ namespace MusicBeePlugin
 
             SetResultingSbText();
 
-            if (SavedSettings.notifyWhenAutoratingCompleted) MessageBox.Show(this, MsgBackgroundTaskIsCompleted, "", 
+            if (SavedSettings.notifyWhenAutoratingCompleted) MessageBox.Show(this, MsgBackgroundTaskIsCompleted, string.Empty, 
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -1008,7 +1012,7 @@ namespace MusicBeePlugin
 
         private void threshold_TextChanged(object sender, EventArgs e)
         {
-            ((TextBox)sender).Text = ConvertDoubleToString(RoundPlaysPerDay(((TextBox)sender).Text));
+            (sender as TextBox).Text = ConvertDoubleToString(RoundPlaysPerDay((sender as TextBox).Text));
         }
 
         private void autoRateAtStartUp_CheckedChanged(object sender, EventArgs e)
@@ -1086,6 +1090,12 @@ namespace MusicBeePlugin
                 return;
 
             notifyWhenAutoratingCompletedCheckBox.Checked = !notifyWhenAutoratingCompletedCheckBox.Checked;
+        }
+
+        private void buttonSettings_Click(object sender, EventArgs e)
+        {
+            PluginQuickSettings settings = new PluginQuickSettings(TagToolsPlugin);
+            Display(settings, true);
         }
     }
 }
