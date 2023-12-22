@@ -306,12 +306,15 @@ namespace MusicBeePlugin
                     }
                     else
                     {
-                        string composedTagValue = string.Empty;
+                        //string composedTagValue = string.Empty; //******
+                        tagHashes[i, j] = 0;
 
                         foreach (var tagValue in tagValues[i, j].Keys)
-                            composedTagValue += tagValue;
+                            tagHashes[i, j] += tagValue.GetHashCode();
+                        //composedTagValue += tagValue;
 
-                        tagHashes[i, j] = composedTagValue.GetHashCode();
+                        //tagHashes[i, j] = composedTagValue.GetHashCode();
+                        tagHashes[i, j] = tagHashes[i, j].GetHashCode();
                     }
                 }
             }

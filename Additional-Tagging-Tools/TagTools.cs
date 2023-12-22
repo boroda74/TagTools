@@ -207,11 +207,13 @@ namespace MusicBeePlugin
         //Skinning
         public static bool PluginClosing = false;//***
 
-        public static Color ControlHighlightBackColor;
-        public static Color ControlHighlightForeColor;
+        public static Color MusicBeeBackColor;
 
         public static Color FormBackColor;
         public static Color FormForeColor;
+
+        public static Color ControlHighlightBackColor;
+        public static Color ControlHighlightForeColor;
 
         public static Color ButtonFocusedBorderColor;
         public static Color ButtonBorderColor;
@@ -4900,6 +4902,8 @@ namespace MusicBeePlugin
 
             if (SavedSettings.useMusicBeeFontSkinColors)
             {
+                MusicBeeBackColor = MbForm.BackColor;
+
                 InputPanelForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
                 InputPanelBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
 
@@ -4927,7 +4931,8 @@ namespace MusicBeePlugin
                 //const float buttonBackgroundWeight = LightDimmedWeight;
                 const float buttonBackgroundWeight = 1;
                 if (buttonBackCode == 0) //Unsupported by older API
-                    buttonBackColor = GetWeightedColor(Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinTrackAndArtistPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBackground)), AccentColor, buttonBackgroundWeight);
+                    //buttonBackColor = GetWeightedColor(Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinTrackAndArtistPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBackground)), AccentColor, buttonBackgroundWeight);
+                    buttonBackColor = GetWeightedColor(MusicBeeBackColor, AccentColor, buttonBackgroundWeight);
                 else if (buttonBackCode == -1) //Windows color scheme
                     buttonBackColor = SystemColors.Control;
                 else
