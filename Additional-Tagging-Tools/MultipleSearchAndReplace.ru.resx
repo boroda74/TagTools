@@ -199,6 +199,10 @@
   <data name="autoDestinationTagCheckBox.ToolTip" xml:space="preserve">
     <value>Устанавливать тег назначения такой же, как тег источника</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="fromTagLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 16, 0</value>
+  </data>
   <data name="fromTagLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 15</value>
   </data>
@@ -812,6 +816,21 @@
   </data>
   <data name="SearchTag.HeaderText" xml:space="preserve">
     <value>Искать в теге</value>
+  </data>
+  <data name="RegEx.ToolTipText" xml:space="preserve">
+    <value>Использовать регулярные выражения</value>
+  </data>
+  <data name="CaseSensitive.ToolTipText" xml:space="preserve">
+    <value>Регистрочувствительный поиск</value>
+  </data>
+  <data name="SearchFor.HeaderText" xml:space="preserve">
+    <value>Найти</value>
+  </data>
+  <data name="ReplaceWith.HeaderText" xml:space="preserve">
+    <value>Заменить на</value>
+  </data>
+  <data name="Track.HeaderText" xml:space="preserve">
+    <value>Трек</value>
   </data>
   <data name="OriginalTag.HeaderText" xml:space="preserve">
     <value>Исходное значение</value>

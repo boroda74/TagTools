@@ -115,23 +115,27 @@
             resources.ApplyResources(this.buttonCancel, "buttonCancel");
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Tag = "@pinned-to-parent-x@pinned-to-parent-y@non-defaultable";
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // buttonOK
             // 
             resources.ApplyResources(this.buttonOK, "buttonOK");
             this.buttonOK.Name = "buttonOK";
+            this.buttonOK.Tag = "#buttonCancel@pinned-to-parent-y";
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // label6
             // 
             resources.ApplyResources(this.label6, "label6");
             this.label6.Name = "label6";
+            this.label6.Tag = "@pinned-to-parent-x";
             // 
             // versionLabel
             // 
             resources.ApplyResources(this.versionLabel, "versionLabel");
             this.versionLabel.Name = "versionLabel";
+            this.versionLabel.Tag = "@pinned-to-parent-x@pinned-to-parent-y";
             // 
             // groupBox3
             // 
@@ -147,6 +151,7 @@
             this.groupBox3.Controls.Add(this.playCompletedSoundCheckBox);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
+            this.groupBox3.Tag = "#PluginSettings@pinned-to-parent-x";
             // 
             // label9
             // 
@@ -211,6 +216,7 @@
             this.groupBox4.Controls.Add(this.unitsPanel);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.TabStop = false;
+            this.groupBox4.Tag = "#PluginSettings@pinned-to-parent-x";
             // 
             // label11
             // 
@@ -260,6 +266,7 @@
             // 
             resources.ApplyResources(this.saveLastSkippedButton, "saveLastSkippedButton");
             this.saveLastSkippedButton.Name = "saveLastSkippedButton";
+            this.saveLastSkippedButton.Tag = "#buttonOK@pinned-to-parent-y";
             this.saveLastSkippedButton.Click += new System.EventHandler(this.saveLastSkippedButton_Click);
             // 
             // useMusicBeeFontSkinColorsCheckBox
@@ -306,6 +313,7 @@
             this.groupBox2.Controls.Add(this.useMusicBeeFontSkinColorsCheckBox);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
+            this.groupBox2.Tag = "#PluginSettings@pinned-to-parent-x";
             // 
             // label8
             // 
@@ -321,6 +329,7 @@
             this.legendGroupBox.Controls.Add(this.changedLegendTextBox);
             this.legendGroupBox.Name = "legendGroupBox";
             this.legendGroupBox.TabStop = false;
+            this.legendGroupBox.Tag = "#groupBox2";
             // 
             // legendLabel
             // 
@@ -508,6 +517,7 @@
             this.groupBox1.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
+            this.groupBox1.Tag = "#PluginSettings@pinned-to-parent-x";
             // 
             // contextMenuCheckBoxLabel
             // 
@@ -520,7 +530,7 @@
             // allowCommandExecutionWithoutPreviewCheckBoxLabel
             // 
             resources.ApplyResources(this.allowCommandExecutionWithoutPreviewCheckBoxLabel, "allowCommandExecutionWithoutPreviewCheckBoxLabel");
-            this.allowCommandExecutionWithoutPreviewCheckBoxLabel.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.allowCommandExecutionWithoutPreviewCheckBoxLabel.ForeColor = System.Drawing.SystemColors.ControlText;
             this.allowCommandExecutionWithoutPreviewCheckBoxLabel.Name = "allowCommandExecutionWithoutPreviewCheckBoxLabel";
             this.allowCommandExecutionWithoutPreviewCheckBoxLabel.Tag = "";
             this.allowCommandExecutionWithoutPreviewCheckBoxLabel.Click += new System.EventHandler(this.allowCommandExecutionWithoutPreviewCheckBoxLabel_Click);
@@ -528,7 +538,7 @@
             // allowCommandExecutionWithoutPreviewCheckBox
             // 
             resources.ApplyResources(this.allowCommandExecutionWithoutPreviewCheckBox, "allowCommandExecutionWithoutPreviewCheckBox");
-            this.allowCommandExecutionWithoutPreviewCheckBox.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.allowCommandExecutionWithoutPreviewCheckBox.ForeColor = System.Drawing.SystemColors.ControlText;
             this.allowCommandExecutionWithoutPreviewCheckBox.Name = "allowCommandExecutionWithoutPreviewCheckBox";
             this.allowCommandExecutionWithoutPreviewCheckBox.Tag = "#allowCommandExecutionWithoutPreviewCheckBoxLabel";
             // 
@@ -543,7 +553,7 @@
             // allowAsrLrPresetAutoexecutionCheckBox
             // 
             resources.ApplyResources(this.allowAsrLrPresetAutoexecutionCheckBox, "allowAsrLrPresetAutoexecutionCheckBox");
-            this.allowAsrLrPresetAutoexecutionCheckBox.ForeColor = System.Drawing.SystemColors.Control;
+            this.allowAsrLrPresetAutoexecutionCheckBox.ForeColor = System.Drawing.SystemColors.ControlText;
             this.allowAsrLrPresetAutoexecutionCheckBox.Name = "allowAsrLrPresetAutoexecutionCheckBox";
             this.allowAsrLrPresetAutoexecutionCheckBox.Tag = "#allowAsrLrPresetAutoexecutionCheckBoxLabel";
             // 
@@ -642,6 +652,7 @@
             this.groupBox5.Controls.Add(this.includeNotChangedTagsCheckBox);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.TabStop = false;
+            this.groupBox5.Tag = "#PluginSettings@pinned-to-parent-x";
             // 
             // label10
             // 
@@ -689,12 +700,14 @@
             resources.ApplyResources(this.label1, "label1");
             this.label1.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.label1.Name = "label1";
+            this.label1.Tag = "@pinned-to-parent-x";
             // 
             // label5
             // 
             resources.ApplyResources(this.label5, "label5");
             this.label5.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.label5.Name = "label5";
+            this.label5.Tag = "@pinned-to-parent-x";
             // 
             // buttonsPanel
             // 
@@ -704,6 +717,7 @@
             this.buttonsPanel.Controls.Add(this.saveLastSkippedButton);
             this.buttonsPanel.Controls.Add(this.versionLabel);
             this.buttonsPanel.Name = "buttonsPanel";
+            this.buttonsPanel.Tag = "#PluginSettings&PluginSettings@pinned-to-parent-x";
             // 
             // PluginSettings
             // 

@@ -250,7 +250,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonPreview.Parent" xml:space="preserve">
-    <value>panel1</value>
+    <value>controlsPanel</value>
   </data>
   <data name="&gt;&gt;buttonPreview.ZOrder" xml:space="preserve">
     <value>13</value>
@@ -289,7 +289,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonCancel.Parent" xml:space="preserve">
-    <value>panel1</value>
+    <value>controlsPanel</value>
   </data>
   <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
     <value>11</value>
@@ -297,7 +297,7 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>934, 461</value>
   </data>
-  <data name="panel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="controlsPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
   <data name="buttonDeleteSaved.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -313,7 +313,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonDeleteSaved.Location" type="System.Drawing.Point, System.Drawing">
-    <value>904, 32</value>
+    <value>905, 32</value>
   </data>
   <data name="buttonDeleteSaved.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 6, 4</value>
@@ -337,7 +337,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonDeleteSaved.Parent" xml:space="preserve">
-    <value>panel1</value>
+    <value>controlsPanel</value>
   </data>
   <data name="&gt;&gt;buttonDeleteSaved.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -352,7 +352,7 @@
     <value>TopLeft</value>
   </data>
   <data name="loadComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>720, 32</value>
+    <value>721, 32</value>
   </data>
   <data name="loadComboBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 4, 4, 4</value>
@@ -373,7 +373,7 @@
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;loadComboBox.Parent" xml:space="preserve">
-    <value>panel1</value>
+    <value>controlsPanel</value>
   </data>
   <data name="&gt;&gt;loadComboBox.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -416,7 +416,7 @@ later for auto-execution or assign hotkey to it</value>
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonSave.Parent" xml:space="preserve">
-    <value>panel1</value>
+    <value>controlsPanel</value>
   </data>
   <data name="&gt;&gt;buttonSave.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -428,7 +428,7 @@ later for auto-execution or assign hotkey to it</value>
     <value>NoControl</value>
   </data>
   <data name="autoApplyPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>585, 34</value>
+    <value>582, 34</value>
   </data>
   <data name="autoApplyPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 0, 4</value>
@@ -452,7 +452,7 @@ later for auto-execution or assign hotkey to it</value>
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;autoApplyPictureBox.Parent" xml:space="preserve">
-    <value>panel1</value>
+    <value>controlsPanel</value>
   </data>
   <data name="&gt;&gt;autoApplyPictureBox.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -467,7 +467,7 @@ later for auto-execution or assign hotkey to it</value>
     <value>NoControl</value>
   </data>
   <data name="autoApplyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>535, 36</value>
+    <value>532, 36</value>
   </data>
   <data name="autoApplyCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 4, 4, 4</value>
@@ -491,7 +491,7 @@ later for auto-execution or assign hotkey to it</value>
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;autoApplyCheckBox.Parent" xml:space="preserve">
-    <value>panel1</value>
+    <value>controlsPanel</value>
   </data>
   <data name="&gt;&gt;autoApplyCheckBox.ZOrder" xml:space="preserve">
     <value>4</value>
@@ -509,7 +509,7 @@ later for auto-execution or assign hotkey to it</value>
     <value>4, 4, 4, 4</value>
   </data>
   <data name="templateNameTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>201, 23</value>
+    <value>198, 23</value>
   </data>
   <data name="templateNameTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -524,7 +524,7 @@ later for auto-execution or assign hotkey to it</value>
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;templateNameTextBox.Parent" xml:space="preserve">
-    <value>panel1</value>
+    <value>controlsPanel</value>
   </data>
   <data name="&gt;&gt;templateNameTextBox.ZOrder" xml:space="preserve">
     <value>5</value>
@@ -563,7 +563,7 @@ later for auto-execution or assign hotkey to it</value>
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;presetLabel.Parent" xml:space="preserve">
-    <value>panel1</value>
+    <value>controlsPanel</value>
   </data>
   <data name="&gt;&gt;presetLabel.ZOrder" xml:space="preserve">
     <value>6</value>
@@ -599,7 +599,7 @@ later for auto-execution or assign hotkey to it</value>
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonDelete.Parent" xml:space="preserve">
-    <value>panel1</value>
+    <value>controlsPanel</value>
   </data>
   <data name="&gt;&gt;buttonDelete.ZOrder" xml:space="preserve">
     <value>7</value>
@@ -632,7 +632,7 @@ later for auto-execution or assign hotkey to it</value>
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonAdd.Parent" xml:space="preserve">
-    <value>panel1</value>
+    <value>controlsPanel</value>
   </data>
   <data name="&gt;&gt;buttonAdd.ZOrder" xml:space="preserve">
     <value>8</value>
@@ -671,7 +671,7 @@ later for auto-execution or assign hotkey to it</value>
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonDown.Parent" xml:space="preserve">
-    <value>panel1</value>
+    <value>controlsPanel</value>
   </data>
   <data name="&gt;&gt;buttonDown.ZOrder" xml:space="preserve">
     <value>9</value>
@@ -710,7 +710,7 @@ later for auto-execution or assign hotkey to it</value>
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonUp.Parent" xml:space="preserve">
-    <value>panel1</value>
+    <value>controlsPanel</value>
   </data>
   <data name="&gt;&gt;buttonUp.ZOrder" xml:space="preserve">
     <value>10</value>
@@ -746,7 +746,7 @@ later for auto-execution or assign hotkey to it</value>
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonOK.Parent" xml:space="preserve">
-    <value>panel1</value>
+    <value>controlsPanel</value>
   </data>
   <data name="&gt;&gt;buttonOK.ZOrder" xml:space="preserve">
     <value>12</value>
@@ -761,10 +761,10 @@ later for auto-execution or assign hotkey to it</value>
     <value>NoControl</value>
   </data>
   <data name="buttonSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>563, 5</value>
+    <value>565, 5</value>
   </data>
   <data name="buttonSettings.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>4, 4, 20, 4</value>
   </data>
   <data name="buttonSettings.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 23</value>
@@ -782,7 +782,7 @@ later for auto-execution or assign hotkey to it</value>
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonSettings.Parent" xml:space="preserve">
-    <value>panel1</value>
+    <value>controlsPanel</value>
   </data>
   <data name="&gt;&gt;buttonSettings.ZOrder" xml:space="preserve">
     <value>14</value>
@@ -800,7 +800,7 @@ later for auto-execution or assign hotkey to it</value>
     <value>NoControl</value>
   </data>
   <data name="searchOnlyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>444, 22</value>
+    <value>441, 22</value>
   </data>
   <data name="searchOnlyCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -828,7 +828,7 @@ criteria, all of which must match the search results.</value>
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;searchOnlyCheckBox.Parent" xml:space="preserve">
-    <value>panel1</value>
+    <value>controlsPanel</value>
   </data>
   <data name="&gt;&gt;searchOnlyCheckBox.ZOrder" xml:space="preserve">
     <value>15</value>
@@ -855,7 +855,7 @@ criteria, all of which must match the search results.</value>
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;destinationTagList.Parent" xml:space="preserve">
-    <value>panel1</value>
+    <value>controlsPanel</value>
   </data>
   <data name="&gt;&gt;destinationTagList.ZOrder" xml:space="preserve">
     <value>16</value>
@@ -891,7 +891,7 @@ criteria, all of which must match the search results.</value>
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toTagLabel.Parent" xml:space="preserve">
-    <value>panel1</value>
+    <value>controlsPanel</value>
   </data>
   <data name="&gt;&gt;toTagLabel.ZOrder" xml:space="preserve">
     <value>17</value>
@@ -930,7 +930,7 @@ criteria, all of which must match the search results.</value>
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;autoDestinationTagCheckBox.Parent" xml:space="preserve">
-    <value>panel1</value>
+    <value>controlsPanel</value>
   </data>
   <data name="&gt;&gt;autoDestinationTagCheckBox.ZOrder" xml:space="preserve">
     <value>18</value>
@@ -957,7 +957,7 @@ criteria, all of which must match the search results.</value>
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;sourceTagList.Parent" xml:space="preserve">
-    <value>panel1</value>
+    <value>controlsPanel</value>
   </data>
   <data name="&gt;&gt;sourceTagList.ZOrder" xml:space="preserve">
     <value>19</value>
@@ -972,10 +972,10 @@ criteria, all of which must match the search results.</value>
     <value>NoControl</value>
   </data>
   <data name="fromTagLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 9</value>
+    <value>4, 9</value>
   </data>
   <data name="fromTagLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 0, 8, 0</value>
+    <value>4, 0, 7, 0</value>
   </data>
   <data name="fromTagLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 15</value>
@@ -993,7 +993,7 @@ criteria, all of which must match the search results.</value>
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;fromTagLabel.Parent" xml:space="preserve">
-    <value>panel1</value>
+    <value>controlsPanel</value>
   </data>
   <data name="&gt;&gt;fromTagLabel.ZOrder" xml:space="preserve">
     <value>20</value>
@@ -1008,7 +1008,7 @@ criteria, all of which must match the search results.</value>
     <value>NoControl</value>
   </data>
   <data name="placeholderLabel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>570, 36</value>
+    <value>567, 36</value>
   </data>
   <data name="placeholderLabel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 15</value>
@@ -1026,30 +1026,33 @@ criteria, all of which must match the search results.</value>
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;placeholderLabel1.Parent" xml:space="preserve">
-    <value>panel1</value>
+    <value>controlsPanel</value>
   </data>
   <data name="&gt;&gt;placeholderLabel1.ZOrder" xml:space="preserve">
     <value>21</value>
   </data>
-  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="controlsPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>937, 60</value>
+  <data name="controlsPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
   </data>
-  <data name="panel1.TabIndex" type="System.Int32, mscorlib">
+  <data name="controlsPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>934, 60</value>
+  </data>
+  <data name="controlsPanel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
-    <value>panel1</value>
+  <data name="&gt;&gt;controlsPanel.Name" xml:space="preserve">
+    <value>controlsPanel</value>
   </data>
-  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;controlsPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;controlsPanel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;controlsPanel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
@@ -1751,7 +1754,7 @@ criteria, all of which must match the search results.</value>
     <value>0, 0</value>
   </data>
   <data name="templateTable.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>0, 4, 0, 4</value>
   </data>
   <data name="templateTable.RowHeadersWidth" type="System.Int32, mscorlib">
     <value>51</value>
@@ -1841,7 +1844,7 @@ criteria, all of which must match the search results.</value>
     <value>0, 0</value>
   </data>
   <data name="previewTable.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>0, 4, 0, 0</value>
   </data>
   <data name="previewTable.RowHeadersWidth" type="System.Int32, mscorlib">
     <value>51</value>

@@ -1,15 +1,15 @@
-﻿using MusicBeePlugin.Properties;
+﻿using ExtensionMethods;
+using MusicBeePlugin.Properties;
 using System;
 using System.Diagnostics;
 using System.Windows.Forms;
 using static MusicBeePlugin.AdvancedSearchAndReplaceCommand;
 using static MusicBeePlugin.Plugin;
-using ExtensionMethods;
 
 namespace MusicBeePlugin
 {
     public partial class ASRPresetEditor : PluginWindowTemplate
-    { 
+    {
         private Preset preset;
         private bool settingsSaved = false;
         private string currentLanguage;
@@ -464,7 +464,7 @@ namespace MusicBeePlugin
                 tagList.SelectedIndex = 0;
         }
 
-        private void parameterTagTypeChanged(ComboBox parameterTagTypeListParam, PictureBox pictureBox, ComboBox parameterTagListParam, 
+        private void parameterTagTypeChanged(ComboBox parameterTagTypeListParam, PictureBox pictureBox, ComboBox parameterTagListParam,
             Label label, ComboBox parameterTagTypeListParam2 = null)
         {
             string parameterTagName = parameterTagListParam.Text;
@@ -566,7 +566,7 @@ namespace MusicBeePlugin
             customText2CheckBox.Checked = !customText2CheckBox.Checked;
             customText2CheckBox_CheckedChanged(null, null);
         }
-        
+
         private void customText3CheckBox_CheckedChanged(object sender, EventArgs e)
         {
             customText3Box.Enable(customText3CheckBox.Checked);
@@ -598,7 +598,7 @@ namespace MusicBeePlugin
 
         private void customText4CheckBoxLabel_Click(object sender, EventArgs e)
         {
-            if (!customText4CheckBox.Enabled) 
+            if (!customText4CheckBox.Enabled)
                 return;
 
             customText4CheckBox.Checked = !customText4CheckBox.Checked;

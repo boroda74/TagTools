@@ -1,8 +1,8 @@
-﻿using System;
+﻿using ExtensionMethods;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using static MusicBeePlugin.Plugin;
-using ExtensionMethods;
 
 namespace MusicBeePlugin
 {
@@ -679,7 +679,7 @@ namespace MusicBeePlugin
         private void exceptionCharsCheckBoxLabel_Click(object sender, EventArgs e)
         {
             exceptionCharsCheckBox.Checked = !exceptionCharsCheckBox.Checked;
-            exceptCharsCheckBox_CheckedChanged(null , null);
+            exceptCharsCheckBox_CheckedChanged(null, null);
         }
 
         private void wordSplittersCheckBox_CheckedChanged(object sender, EventArgs e)

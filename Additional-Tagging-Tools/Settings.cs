@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 using static MusicBeePlugin.Plugin;
 
 namespace MusicBeePlugin
@@ -124,7 +124,7 @@ namespace MusicBeePlugin
 
             SavedSettings.allowAsrLrPresetAutoexecution = allowAsrLrPresetAutoexecutionCheckBox.Checked;
             SavedSettings.allowCommandExecutionWithoutPreview = allowCommandExecutionWithoutPreviewCheckBox.Checked;
-            
+
             SavedSettings.dontShowContextMenu = !contextMenuCheckBox.Checked;
 
             SavedSettings.dontShowCopyTag = !showCopyTagCheckBox.Checked;

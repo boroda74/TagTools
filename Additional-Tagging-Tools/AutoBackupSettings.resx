@@ -184,7 +184,7 @@
     <value>8, 12</value>
   </data>
   <data name="autobackupFolderLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+    <value>8, 0, 4, 0</value>
   </data>
   <data name="autobackupFolderLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 15</value>
@@ -274,7 +274,7 @@
     <value>11, 39</value>
   </data>
   <data name="autobackupCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>8, 4, 4, 4</value>
   </data>
   <data name="autobackupCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 19</value>
@@ -365,7 +365,7 @@ after last manual or auto backup.</value>
     <value>11, 67</value>
   </data>
   <data name="autodeleteOldCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>8, 4, 4, 4</value>
   </data>
   <data name="autodeleteOldCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 19</value>
@@ -428,7 +428,7 @@ after last manual or auto backup.</value>
     <value>11, 95</value>
   </data>
   <data name="autodeleteManyCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>8, 4, 4, 4</value>
   </data>
   <data name="autodeleteManyCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 19</value>
@@ -512,13 +512,13 @@ after last manual or auto backup.</value>
     <value>12</value>
   </data>
   <data name="buttonClose.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+    <value>Bottom, Right</value>
   </data>
   <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
     <value>615, 181</value>
   </data>
   <data name="buttonClose.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 8, 4</value>
+    <value>4, 4, 8, 8</value>
   </data>
   <data name="buttonClose.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 23</value>
@@ -542,7 +542,7 @@ after last manual or auto backup.</value>
     <value>0</value>
   </data>
   <data name="buttonOK.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+    <value>Bottom, Right</value>
   </data>
   <data name="buttonOK.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -551,7 +551,7 @@ after last manual or auto backup.</value>
     <value>507, 181</value>
   </data>
   <data name="buttonOK.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>4, 4, 4, 8</value>
   </data>
   <data name="buttonOK.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 23</value>
@@ -584,7 +584,7 @@ after last manual or auto backup.</value>
     <value>11, 185</value>
   </data>
   <data name="backupArtworksCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>8, 4, 4, 4</value>
   </data>
   <data name="backupArtworksCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 19</value>
@@ -623,7 +623,7 @@ after last manual or auto backup.</value>
     <value>11, 157</value>
   </data>
   <data name="dontTryToGuessLibraryNameCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>8, 4, 4, 4</value>
   </data>
   <data name="dontTryToGuessLibraryNameCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 19</value>
@@ -859,7 +859,7 @@ Sometimes guessing current library name may work incorrectly.
     <value>11, 123</value>
   </data>
   <data name="dontSkipAutobackupsIfPlayCountsChangedCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>8, 4, 4, 4</value>
   </data>
   <data name="dontSkipAutobackupsIfPlayCountsChangedCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 19</value>
@@ -922,7 +922,7 @@ Sometimes guessing current library name may work incorrectly.
     <value>11, 148</value>
   </data>
   <data name="groupBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>8, 4, 8, 4</value>
   </data>
   <data name="groupBox1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>

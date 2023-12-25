@@ -133,7 +133,7 @@
     <value>9, 9</value>
   </data>
   <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+    <value>9, 0, 4, 0</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 15</value>
@@ -163,10 +163,10 @@
     <value>98, 6</value>
   </data>
   <data name="nameBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>4, 4, 9, 4</value>
   </data>
   <data name="nameBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>896, 23</value>
+    <value>893, 23</value>
   </data>
   <data name="nameBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -193,7 +193,7 @@
     <value>9, 35</value>
   </data>
   <data name="label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+    <value>9, 0, 4, 0</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>70, 15</value>
@@ -226,7 +226,7 @@
     <value>98, 35</value>
   </data>
   <data name="descriptionBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>4, 4, 9, 4</value>
   </data>
   <data name="descriptionBox.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -235,7 +235,7 @@
     <value>Vertical</value>
   </data>
   <data name="descriptionBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>896, 67</value>
+    <value>893, 67</value>
   </data>
   <data name="descriptionBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -268,7 +268,7 @@
     <value>3, 1, 3, 1</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 25</value>
+    <value>74, 26</value>
   </data>
   <data name="label3.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -301,7 +301,7 @@
     <value>3, 1, 3, 1</value>
   </data>
   <data name="searchedPatternBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>590, 23</value>
+    <value>585, 23</value>
   </data>
   <data name="searchedPatternBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -328,13 +328,13 @@
     <value>NoControl</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>679, 1</value>
+    <value>674, 1</value>
   </data>
   <data name="label4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 25</value>
+    <value>37, 26</value>
   </data>
   <data name="label4.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -361,13 +361,13 @@
     <value>Left, Right</value>
   </data>
   <data name="searchedTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>780, 3</value>
+    <value>775, 2</value>
   </data>
   <data name="searchedTagList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 1, 5, 1</value>
+    <value>3, 1, 0, 1</value>
   </data>
   <data name="searchedTagList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 23</value>
+    <value>195, 23</value>
   </data>
   <data name="searchedTagList.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -388,13 +388,13 @@
     <value>Left, Right</value>
   </data>
   <data name="replacedTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>780, 30</value>
+    <value>775, 30</value>
   </data>
   <data name="replacedTagList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 1, 5, 1</value>
+    <value>3, 1, 0, 1</value>
   </data>
   <data name="replacedTagList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 23</value>
+    <value>195, 23</value>
   </data>
   <data name="replacedTagList.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -421,13 +421,13 @@
     <value>NoControl</value>
   </data>
   <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>679, 28</value>
+    <value>674, 29</value>
   </data>
   <data name="label5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 25</value>
+    <value>37, 26</value>
   </data>
   <data name="label5.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -454,13 +454,13 @@
     <value>Left, Right</value>
   </data>
   <data name="replacedPatternBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>83, 29</value>
+    <value>83, 30</value>
   </data>
   <data name="replacedPatternBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
   </data>
   <data name="replacedPatternBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>590, 23</value>
+    <value>585, 23</value>
   </data>
   <data name="replacedPatternBox.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -487,13 +487,13 @@
     <value>NoControl</value>
   </data>
   <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 28</value>
+    <value>3, 29</value>
   </data>
   <data name="label6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
   </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 25</value>
+    <value>74, 26</value>
   </data>
   <data name="label6.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -517,13 +517,16 @@
     <value>5</value>
   </data>
   <data name="buttonOK.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+    <value>Bottom, Right</value>
   </data>
   <data name="buttonOK.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>788, 683</value>
+    <value>777, 690</value>
+  </data>
+  <data name="buttonOK.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 8</value>
   </data>
   <data name="buttonOK.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 23</value>
@@ -547,13 +550,16 @@
     <value>19</value>
   </data>
   <data name="buttonCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+    <value>Bottom, Right</value>
   </data>
   <data name="buttonCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>894, 683</value>
+    <value>891, 690</value>
+  </data>
+  <data name="buttonCancel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 9, 8</value>
   </data>
   <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 23</value>
@@ -576,6 +582,9 @@
   <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
     <value>18</value>
   </data>
+  <data name="ignoreCaseCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
   <data name="ignoreCaseCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -583,7 +592,10 @@
     <value>NoControl</value>
   </data>
   <data name="ignoreCaseCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 687</value>
+    <value>9, 694</value>
+  </data>
+  <data name="ignoreCaseCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 4, 4, 4</value>
   </data>
   <data name="ignoreCaseCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 19</value>
@@ -649,7 +661,7 @@
     <value>Segoe UI Semibold, 9pt, style=Bold</value>
   </data>
   <data name="groupBox1Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 1</value>
+    <value>16, -1</value>
   </data>
   <data name="groupBox1Label.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 15</value>
@@ -672,9 +684,6 @@
   <data name="&gt;&gt;groupBox1Label.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="tableLayoutPanel3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
   <data name="tableLayoutPanel3.ColumnCount" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
@@ -685,13 +694,13 @@
     <value>True</value>
   </data>
   <data name="label38.Location" type="System.Drawing.Point, System.Drawing">
-    <value>749, 28</value>
+    <value>744, 29</value>
   </data>
   <data name="label38.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
   </data>
   <data name="label38.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 25</value>
+    <value>25, 26</value>
   </data>
   <data name="label38.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -733,7 +742,7 @@
     <value>NoControl</value>
   </data>
   <data name="appendCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>716, 28</value>
+    <value>711, 29</value>
   </data>
   <data name="appendCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 1, 2, 1</value>
@@ -742,7 +751,7 @@
     <value>0, 3, 0, 0</value>
   </data>
   <data name="appendCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 25</value>
+    <value>28, 26</value>
   </data>
   <data name="appendCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -772,13 +781,13 @@
     <value>True</value>
   </data>
   <data name="label37.Location" type="System.Drawing.Point, System.Drawing">
-    <value>749, 1</value>
+    <value>744, 1</value>
   </data>
   <data name="label37.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
   </data>
   <data name="label37.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 25</value>
+    <value>25, 26</value>
   </data>
   <data name="label37.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -818,7 +827,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>NoControl</value>
   </data>
   <data name="condition1CheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>716, 1</value>
+    <value>711, 1</value>
   </data>
   <data name="condition1CheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 1, 2, 1</value>
@@ -827,7 +836,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>0, 3, 0, 0</value>
   </data>
   <data name="condition1CheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 25</value>
+    <value>28, 26</value>
   </data>
   <data name="condition1CheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -851,17 +860,20 @@ Replace only if the destination tag is empty when checked</value>
   <data name="&gt;&gt;condition1CheckBox.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
+  <data name="tableLayoutPanel3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <data name="tableLayoutPanel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 16</value>
+    <value>8, 16</value>
   </data>
   <data name="tableLayoutPanel3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>0, 0, 0, 0</value>
   </data>
   <data name="tableLayoutPanel3.RowCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>976, 54</value>
+    <value>970, 56</value>
   </data>
   <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -882,16 +894,16 @@ Replace only if the destination tag is empty when checked</value>
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="replacedTagList" Row="1" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="label38" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="appendCheckBox" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="label5" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="replacedPatternBox" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label6" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="searchedTagList" Row="0" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="label37" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="condition1CheckBox" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="label4" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="searchedPatternBox" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label3" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,75,AutoSize,0,AutoSize,0,AutoSize,0,Percent,25" /&gt;&lt;Rows Styles="Percent,50,Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 288</value>
+    <value>5, 292</value>
   </data>
   <data name="groupBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>5, 4, 9, 4</value>
   </data>
   <data name="groupBox1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>8, 0, 8, 8</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>985, 78</value>
+    <value>986, 80</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -918,7 +930,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>133, 2</value>
   </data>
   <data name="customTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 1, 3, 1</value>
+    <value>3, 1, 0, 1</value>
   </data>
   <data name="customTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>358, 23</value>
@@ -954,7 +966,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>NoControl</value>
   </data>
   <data name="groupBox2Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 1</value>
+    <value>16, -1</value>
   </data>
   <data name="groupBox2Label.Size" type="System.Drawing.Size, System.Drawing">
     <value>108, 15</value>
@@ -977,9 +989,6 @@ Replace only if the destination tag is empty when checked</value>
   <data name="&gt;&gt;groupBox2Label.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="tableLayoutPanel4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
   <data name="tableLayoutPanel4.ColumnCount" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
@@ -987,13 +996,13 @@ Replace only if the destination tag is empty when checked</value>
     <value>Left, Right</value>
   </data>
   <data name="replacedTag2List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>780, 30</value>
+    <value>772, 30</value>
   </data>
   <data name="replacedTag2List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 1, 5, 1</value>
+    <value>3, 1, 0, 1</value>
   </data>
   <data name="replacedTag2List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 23</value>
+    <value>194, 23</value>
   </data>
   <data name="replacedTag2List.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -1017,13 +1026,13 @@ Replace only if the destination tag is empty when checked</value>
     <value>True</value>
   </data>
   <data name="label40.Location" type="System.Drawing.Point, System.Drawing">
-    <value>749, 28</value>
+    <value>741, 29</value>
   </data>
   <data name="label40.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
   </data>
   <data name="label40.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 25</value>
+    <value>25, 26</value>
   </data>
   <data name="label40.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -1062,7 +1071,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>NoControl</value>
   </data>
   <data name="append2CheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>716, 28</value>
+    <value>708, 29</value>
   </data>
   <data name="append2CheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 1, 2, 1</value>
@@ -1071,7 +1080,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>0, 3, 0, 0</value>
   </data>
   <data name="append2CheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 25</value>
+    <value>28, 26</value>
   </data>
   <data name="append2CheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -1104,13 +1113,13 @@ Replace only if the destination tag is empty when checked</value>
     <value>NoControl</value>
   </data>
   <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>679, 28</value>
+    <value>671, 29</value>
   </data>
   <data name="label10.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
   </data>
   <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 25</value>
+    <value>37, 26</value>
   </data>
   <data name="label10.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -1137,13 +1146,13 @@ Replace only if the destination tag is empty when checked</value>
     <value>Left, Right</value>
   </data>
   <data name="replacedPattern2Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>83, 29</value>
+    <value>83, 30</value>
   </data>
   <data name="replacedPattern2Box.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
   </data>
   <data name="replacedPattern2Box.Size" type="System.Drawing.Size, System.Drawing">
-    <value>590, 23</value>
+    <value>582, 23</value>
   </data>
   <data name="replacedPattern2Box.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -1170,13 +1179,13 @@ Replace only if the destination tag is empty when checked</value>
     <value>NoControl</value>
   </data>
   <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 28</value>
+    <value>3, 29</value>
   </data>
   <data name="label8.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
   </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 25</value>
+    <value>74, 26</value>
   </data>
   <data name="label8.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1203,13 +1212,13 @@ Replace only if the destination tag is empty when checked</value>
     <value>Left, Right</value>
   </data>
   <data name="searchedTag2List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>780, 3</value>
+    <value>772, 2</value>
   </data>
   <data name="searchedTag2List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 1, 5, 1</value>
+    <value>3, 1, 0, 1</value>
   </data>
   <data name="searchedTag2List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 23</value>
+    <value>194, 23</value>
   </data>
   <data name="searchedTag2List.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1233,13 +1242,13 @@ Replace only if the destination tag is empty when checked</value>
     <value>True</value>
   </data>
   <data name="label39.Location" type="System.Drawing.Point, System.Drawing">
-    <value>749, 1</value>
+    <value>741, 1</value>
   </data>
   <data name="label39.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
   </data>
   <data name="label39.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 25</value>
+    <value>25, 26</value>
   </data>
   <data name="label39.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1279,7 +1288,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>NoControl</value>
   </data>
   <data name="condition2CheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>716, 1</value>
+    <value>708, 1</value>
   </data>
   <data name="condition2CheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 1, 2, 1</value>
@@ -1288,7 +1297,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>0, 3, 0, 0</value>
   </data>
   <data name="condition2CheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 25</value>
+    <value>28, 26</value>
   </data>
   <data name="condition2CheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1322,13 +1331,13 @@ Replace only if the destination tag is empty when checked</value>
     <value>NoControl</value>
   </data>
   <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>679, 1</value>
+    <value>671, 1</value>
   </data>
   <data name="label9.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
   </data>
   <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 25</value>
+    <value>37, 26</value>
   </data>
   <data name="label9.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1361,7 +1370,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>3, 1, 3, 1</value>
   </data>
   <data name="searchedPattern2Box.Size" type="System.Drawing.Size, System.Drawing">
-    <value>590, 23</value>
+    <value>582, 23</value>
   </data>
   <data name="searchedPattern2Box.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1394,7 +1403,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>3, 1, 3, 1</value>
   </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 25</value>
+    <value>74, 26</value>
   </data>
   <data name="label7.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1417,17 +1426,20 @@ Replace only if the destination tag is empty when checked</value>
   <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
+  <data name="tableLayoutPanel4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <data name="tableLayoutPanel4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 16</value>
+    <value>8, 16</value>
   </data>
   <data name="tableLayoutPanel4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>0, 0, 0, 0</value>
   </data>
   <data name="tableLayoutPanel4.RowCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="tableLayoutPanel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>976, 54</value>
+    <value>966, 56</value>
   </data>
   <data name="tableLayoutPanel4.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1448,16 +1460,16 @@ Replace only if the destination tag is empty when checked</value>
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="replacedTag2List" Row="1" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="label40" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="append2CheckBox" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="label10" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="replacedPattern2Box" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label8" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="searchedTag2List" Row="0" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="label39" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="condition2CheckBox" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="label9" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="searchedPattern2Box" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label7" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,75,AutoSize,0,AutoSize,0,AutoSize,0,Percent,25" /&gt;&lt;Rows Styles="Percent,50,Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 366</value>
+    <value>9, 370</value>
   </data>
   <data name="groupBox2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>5, 4, 9, 4</value>
   </data>
   <data name="groupBox2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>8, 0, 8, 8</value>
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>985, 78</value>
+    <value>982, 80</value>
   </data>
   <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -1487,7 +1499,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>NoControl</value>
   </data>
   <data name="groupBox3Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 1</value>
+    <value>16, -1</value>
   </data>
   <data name="groupBox3Label.Size" type="System.Drawing.Size, System.Drawing">
     <value>108, 15</value>
@@ -1510,9 +1522,6 @@ Replace only if the destination tag is empty when checked</value>
   <data name="&gt;&gt;groupBox3Label.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="tableLayoutPanel5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
   <data name="tableLayoutPanel5.ColumnCount" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
@@ -1520,13 +1529,13 @@ Replace only if the destination tag is empty when checked</value>
     <value>Left, Right</value>
   </data>
   <data name="replacedTag3List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>777, 30</value>
+    <value>772, 30</value>
   </data>
   <data name="replacedTag3List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 1, 5, 1</value>
+    <value>3, 1, 0, 1</value>
   </data>
   <data name="replacedTag3List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 23</value>
+    <value>194, 23</value>
   </data>
   <data name="replacedTag3List.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -1550,13 +1559,13 @@ Replace only if the destination tag is empty when checked</value>
     <value>True</value>
   </data>
   <data name="label42.Location" type="System.Drawing.Point, System.Drawing">
-    <value>746, 28</value>
+    <value>741, 29</value>
   </data>
   <data name="label42.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
   </data>
   <data name="label42.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 25</value>
+    <value>25, 26</value>
   </data>
   <data name="label42.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -1595,7 +1604,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>NoControl</value>
   </data>
   <data name="append3CheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>713, 28</value>
+    <value>708, 29</value>
   </data>
   <data name="append3CheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 1, 2, 1</value>
@@ -1604,7 +1613,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>0, 3, 0, 0</value>
   </data>
   <data name="append3CheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 25</value>
+    <value>28, 26</value>
   </data>
   <data name="append3CheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -1637,13 +1646,13 @@ Replace only if the destination tag is empty when checked</value>
     <value>NoControl</value>
   </data>
   <data name="label14.Location" type="System.Drawing.Point, System.Drawing">
-    <value>676, 28</value>
+    <value>671, 29</value>
   </data>
   <data name="label14.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
   </data>
   <data name="label14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 25</value>
+    <value>37, 26</value>
   </data>
   <data name="label14.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -1670,13 +1679,13 @@ Replace only if the destination tag is empty when checked</value>
     <value>Left, Right</value>
   </data>
   <data name="replacedPattern3Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>83, 29</value>
+    <value>83, 30</value>
   </data>
   <data name="replacedPattern3Box.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
   </data>
   <data name="replacedPattern3Box.Size" type="System.Drawing.Size, System.Drawing">
-    <value>587, 23</value>
+    <value>582, 23</value>
   </data>
   <data name="replacedPattern3Box.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -1703,13 +1712,13 @@ Replace only if the destination tag is empty when checked</value>
     <value>NoControl</value>
   </data>
   <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 28</value>
+    <value>3, 29</value>
   </data>
   <data name="label12.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
   </data>
   <data name="label12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 25</value>
+    <value>74, 26</value>
   </data>
   <data name="label12.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1736,13 +1745,13 @@ Replace only if the destination tag is empty when checked</value>
     <value>Left, Right</value>
   </data>
   <data name="searchedTag3List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>777, 3</value>
+    <value>772, 2</value>
   </data>
   <data name="searchedTag3List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 1, 5, 1</value>
+    <value>3, 1, 0, 1</value>
   </data>
   <data name="searchedTag3List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 23</value>
+    <value>194, 23</value>
   </data>
   <data name="searchedTag3List.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1766,13 +1775,13 @@ Replace only if the destination tag is empty when checked</value>
     <value>True</value>
   </data>
   <data name="label41.Location" type="System.Drawing.Point, System.Drawing">
-    <value>746, 1</value>
+    <value>741, 1</value>
   </data>
   <data name="label41.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
   </data>
   <data name="label41.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 25</value>
+    <value>25, 26</value>
   </data>
   <data name="label41.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1812,7 +1821,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>NoControl</value>
   </data>
   <data name="condition3CheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>713, 1</value>
+    <value>708, 1</value>
   </data>
   <data name="condition3CheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 1, 2, 1</value>
@@ -1821,7 +1830,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>0, 3, 0, 0</value>
   </data>
   <data name="condition3CheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 25</value>
+    <value>28, 26</value>
   </data>
   <data name="condition3CheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1855,13 +1864,13 @@ Replace only if the destination tag is empty when checked</value>
     <value>NoControl</value>
   </data>
   <data name="label13.Location" type="System.Drawing.Point, System.Drawing">
-    <value>676, 1</value>
+    <value>671, 1</value>
   </data>
   <data name="label13.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
   </data>
   <data name="label13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 25</value>
+    <value>37, 26</value>
   </data>
   <data name="label13.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1894,7 +1903,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>3, 1, 3, 1</value>
   </data>
   <data name="searchedPattern3Box.Size" type="System.Drawing.Size, System.Drawing">
-    <value>587, 23</value>
+    <value>582, 23</value>
   </data>
   <data name="searchedPattern3Box.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1927,7 +1936,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>3, 1, 3, 1</value>
   </data>
   <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 25</value>
+    <value>74, 26</value>
   </data>
   <data name="label11.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1950,17 +1959,20 @@ Replace only if the destination tag is empty when checked</value>
   <data name="&gt;&gt;label11.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
+  <data name="tableLayoutPanel5.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <data name="tableLayoutPanel5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 16</value>
+    <value>8, 16</value>
   </data>
   <data name="tableLayoutPanel5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>0, 0, 0, 0</value>
   </data>
   <data name="tableLayoutPanel5.RowCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="tableLayoutPanel5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>972, 54</value>
+    <value>966, 56</value>
   </data>
   <data name="tableLayoutPanel5.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1981,16 +1993,16 @@ Replace only if the destination tag is empty when checked</value>
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="replacedTag3List" Row="1" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="label42" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="append3CheckBox" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="label14" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="replacedPattern3Box" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label12" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="searchedTag3List" Row="0" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="label41" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="condition3CheckBox" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="label13" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="searchedPattern3Box" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label11" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,75,AutoSize,0,AutoSize,0,AutoSize,0,Percent,25" /&gt;&lt;Rows Styles="Percent,50,Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 444</value>
+    <value>9, 448</value>
   </data>
   <data name="groupBox3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>5, 4, 9, 4</value>
   </data>
   <data name="groupBox3.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>8, 0, 8, 8</value>
   </data>
   <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>985, 78</value>
+    <value>982, 80</value>
   </data>
   <data name="groupBox3.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -2011,7 +2023,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>9, 79</value>
   </data>
   <data name="languages.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>9, 4, 4, 4</value>
   </data>
   <data name="languages.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -2065,7 +2077,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>9, 131</value>
   </data>
   <data name="guidLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+    <value>9, 0, 4, 0</value>
   </data>
   <data name="guidLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 15</value>
@@ -2155,7 +2167,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>NoControl</value>
   </data>
   <data name="userPresetCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>904, 131</value>
+    <value>896, 131</value>
   </data>
   <data name="userPresetCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>7, 4, 4, 4</value>
@@ -2197,7 +2209,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>writable +&lt;all tags&gt;</value>
   </data>
   <data name="parameterTagTypeList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>89, 3</value>
+    <value>89, 2</value>
   </data>
   <data name="parameterTagTypeList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -2236,7 +2248,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>writable (incl. &lt;All Tags&gt;)</value>
   </data>
   <data name="parameterTag2TypeList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>583, 3</value>
+    <value>580, 2</value>
   </data>
   <data name="parameterTag2TypeList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -2275,7 +2287,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>writable (incl. &lt;All Tags&gt;)</value>
   </data>
   <data name="parameterTag3TypeList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>89, 30</value>
+    <value>89, 29</value>
   </data>
   <data name="parameterTag3TypeList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -2353,7 +2365,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>NoControl</value>
   </data>
   <data name="customText2CheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>498, 0</value>
+    <value>495, 0</value>
   </data>
   <data name="customText2CheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 0, 0</value>
@@ -2392,10 +2404,10 @@ Replace only if the destination tag is empty when checked</value>
     <value>False</value>
   </data>
   <data name="customText2Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>627, 2</value>
+    <value>624, 2</value>
   </data>
   <data name="customText2Box.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 1, 3, 1</value>
+    <value>3, 1, 0, 1</value>
   </data>
   <data name="customText2Box.Size" type="System.Drawing.Size, System.Drawing">
     <value>358, 23</value>
@@ -2431,7 +2443,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>NoControl</value>
   </data>
   <data name="customText4CheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>498, 27</value>
+    <value>495, 27</value>
   </data>
   <data name="customText4CheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 0, 0</value>
@@ -2470,10 +2482,10 @@ Replace only if the destination tag is empty when checked</value>
     <value>False</value>
   </data>
   <data name="customText4Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>627, 29</value>
+    <value>624, 29</value>
   </data>
   <data name="customText4Box.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 1, 3, 1</value>
+    <value>3, 1, 0, 1</value>
   </data>
   <data name="customText4Box.Size" type="System.Drawing.Size, System.Drawing">
     <value>358, 23</value>
@@ -2551,7 +2563,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>133, 29</value>
   </data>
   <data name="customText3Box.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 1, 3, 1</value>
+    <value>3, 1, 0, 1</value>
   </data>
   <data name="customText3Box.Size" type="System.Drawing.Size, System.Drawing">
     <value>358, 23</value>
@@ -2587,7 +2599,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>NoControl</value>
   </data>
   <data name="append4CheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>716, 28</value>
+    <value>708, 29</value>
   </data>
   <data name="append4CheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 1, 2, 1</value>
@@ -2596,7 +2608,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>0, 3, 0, 0</value>
   </data>
   <data name="append4CheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 25</value>
+    <value>28, 26</value>
   </data>
   <data name="append4CheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -2632,7 +2644,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>NoControl</value>
   </data>
   <data name="append5CheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>716, 28</value>
+    <value>708, 29</value>
   </data>
   <data name="append5CheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 1, 2, 1</value>
@@ -2641,7 +2653,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>0, 3, 0, 0</value>
   </data>
   <data name="append5CheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 25</value>
+    <value>28, 26</value>
   </data>
   <data name="append5CheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -2677,7 +2689,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>NoControl</value>
   </data>
   <data name="condition4CheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>716, 1</value>
+    <value>708, 1</value>
   </data>
   <data name="condition4CheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 1, 2, 1</value>
@@ -2686,7 +2698,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>0, 3, 0, 0</value>
   </data>
   <data name="condition4CheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 25</value>
+    <value>28, 26</value>
   </data>
   <data name="condition4CheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -2723,7 +2735,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>NoControl</value>
   </data>
   <data name="condition5CheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>716, 1</value>
+    <value>708, 1</value>
   </data>
   <data name="condition5CheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 1, 2, 1</value>
@@ -2732,7 +2744,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>0, 3, 0, 0</value>
   </data>
   <data name="condition5CheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 25</value>
+    <value>28, 26</value>
   </data>
   <data name="condition5CheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -2850,7 +2862,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>NoControl</value>
   </data>
   <data name="customText2CheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>524, 1</value>
+    <value>521, 1</value>
   </data>
   <data name="customText2CheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -2892,7 +2904,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>NoControl</value>
   </data>
   <data name="customText4CheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>524, 28</value>
+    <value>521, 28</value>
   </data>
   <data name="customText4CheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -2931,13 +2943,13 @@ Replace only if the destination tag is empty when checked</value>
     <value>True</value>
   </data>
   <data name="label43.Location" type="System.Drawing.Point, System.Drawing">
-    <value>749, 1</value>
+    <value>741, 1</value>
   </data>
   <data name="label43.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
   </data>
   <data name="label43.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 25</value>
+    <value>25, 26</value>
   </data>
   <data name="label43.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -2971,13 +2983,13 @@ Replace only if the destination tag is empty when checked</value>
     <value>True</value>
   </data>
   <data name="label44.Location" type="System.Drawing.Point, System.Drawing">
-    <value>749, 28</value>
+    <value>741, 29</value>
   </data>
   <data name="label44.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
   </data>
   <data name="label44.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 25</value>
+    <value>25, 26</value>
   </data>
   <data name="label44.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -3010,13 +3022,13 @@ Replace only if the destination tag is empty when checked</value>
     <value>True</value>
   </data>
   <data name="label45.Location" type="System.Drawing.Point, System.Drawing">
-    <value>749, 1</value>
+    <value>741, 1</value>
   </data>
   <data name="label45.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
   </data>
   <data name="label45.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 25</value>
+    <value>25, 26</value>
   </data>
   <data name="label45.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -3051,13 +3063,13 @@ Replace only if the destination tag is empty when checked
     <value>True</value>
   </data>
   <data name="label46.Location" type="System.Drawing.Point, System.Drawing">
-    <value>749, 28</value>
+    <value>741, 29</value>
   </data>
   <data name="label46.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
   </data>
   <data name="label46.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 25</value>
+    <value>25, 26</value>
   </data>
   <data name="label46.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -3090,10 +3102,10 @@ Replace only if the destination tag is empty when checked
     <value>False</value>
   </data>
   <data name="parameterTag3List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>351, 30</value>
+    <value>351, 29</value>
   </data>
   <data name="parameterTag3List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 1, 3, 1</value>
+    <value>3, 1, 0, 1</value>
   </data>
   <data name="parameterTag3List.Size" type="System.Drawing.Size, System.Drawing">
     <value>140, 23</value>
@@ -3159,10 +3171,10 @@ Replace only if the destination tag is empty when checked
     <value>False</value>
   </data>
   <data name="parameterTag2List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>845, 3</value>
+    <value>842, 2</value>
   </data>
   <data name="parameterTag2List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 1, 3, 1</value>
+    <value>3, 1, 0, 1</value>
   </data>
   <data name="parameterTag2List.Size" type="System.Drawing.Size, System.Drawing">
     <value>140, 23</value>
@@ -3192,7 +3204,7 @@ Replace only if the destination tag is empty when checked
     <value>NoControl</value>
   </data>
   <data name="label22.Location" type="System.Drawing.Point, System.Drawing">
-    <value>753, 1</value>
+    <value>750, 1</value>
   </data>
   <data name="label22.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -3228,10 +3240,10 @@ Replace only if the destination tag is empty when checked
     <value>False</value>
   </data>
   <data name="parameterTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>351, 3</value>
+    <value>351, 2</value>
   </data>
   <data name="parameterTagList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 1, 3, 1</value>
+    <value>3, 1, 0, 1</value>
   </data>
   <data name="parameterTagList.Size" type="System.Drawing.Size, System.Drawing">
     <value>140, 23</value>
@@ -3300,7 +3312,7 @@ Replace only if the destination tag is empty when checked
     <value>NoControl</value>
   </data>
   <data name="label20.Location" type="System.Drawing.Point, System.Drawing">
-    <value>753, 55</value>
+    <value>750, 55</value>
   </data>
   <data name="label20.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -3336,10 +3348,10 @@ Replace only if the destination tag is empty when checked
     <value>False</value>
   </data>
   <data name="parameterTag6List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>845, 57</value>
+    <value>842, 56</value>
   </data>
   <data name="parameterTag6List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 1, 3, 1</value>
+    <value>3, 1, 0, 1</value>
   </data>
   <data name="parameterTag6List.Size" type="System.Drawing.Size, System.Drawing">
     <value>140, 23</value>
@@ -3369,7 +3381,7 @@ Replace only if the destination tag is empty when checked
     <value>NoControl</value>
   </data>
   <data name="label24.Location" type="System.Drawing.Point, System.Drawing">
-    <value>753, 28</value>
+    <value>750, 28</value>
   </data>
   <data name="label24.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -3405,10 +3417,10 @@ Replace only if the destination tag is empty when checked
     <value>False</value>
   </data>
   <data name="parameterTag5List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>351, 57</value>
+    <value>351, 56</value>
   </data>
   <data name="parameterTag5List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 1, 3, 1</value>
+    <value>3, 1, 0, 1</value>
   </data>
   <data name="parameterTag5List.Size" type="System.Drawing.Size, System.Drawing">
     <value>140, 23</value>
@@ -3474,10 +3486,10 @@ Replace only if the destination tag is empty when checked
     <value>False</value>
   </data>
   <data name="parameterTag4List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>845, 30</value>
+    <value>842, 29</value>
   </data>
   <data name="parameterTag4List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 1, 3, 1</value>
+    <value>3, 1, 0, 1</value>
   </data>
   <data name="parameterTag4List.Size" type="System.Drawing.Size, System.Drawing">
     <value>140, 23</value>
@@ -3513,7 +3525,7 @@ Replace only if the destination tag is empty when checked
     <value>writable (incl. &lt;All Tags&gt;)</value>
   </data>
   <data name="parameterTag6TypeList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>583, 57</value>
+    <value>580, 56</value>
   </data>
   <data name="parameterTag6TypeList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -3552,7 +3564,7 @@ Replace only if the destination tag is empty when checked
     <value>writable (incl. &lt;All Tags&gt;)</value>
   </data>
   <data name="parameterTag5TypeList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>89, 57</value>
+    <value>89, 56</value>
   </data>
   <data name="parameterTag5TypeList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -3591,7 +3603,7 @@ Replace only if the destination tag is empty when checked
     <value>writable (incl. &lt;All Tags&gt;)</value>
   </data>
   <data name="parameterTag4TypeList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>583, 30</value>
+    <value>580, 29</value>
   </data>
   <data name="parameterTag4TypeList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -3627,7 +3639,7 @@ Replace only if the destination tag is empty when checked
     <value>NoControl</value>
   </data>
   <data name="groupBox4Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 1</value>
+    <value>16, -1</value>
   </data>
   <data name="groupBox4Label.Size" type="System.Drawing.Size, System.Drawing">
     <value>108, 15</value>
@@ -3650,9 +3662,6 @@ Replace only if the destination tag is empty when checked
   <data name="&gt;&gt;groupBox4Label.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="tableLayoutPanel6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
   <data name="tableLayoutPanel6.ColumnCount" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
@@ -3660,13 +3669,13 @@ Replace only if the destination tag is empty when checked
     <value>Left, Right</value>
   </data>
   <data name="replacedTag4List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>780, 30</value>
+    <value>772, 30</value>
   </data>
   <data name="replacedTag4List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 1, 5, 1</value>
+    <value>3, 1, 0, 1</value>
   </data>
   <data name="replacedTag4List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 23</value>
+    <value>194, 23</value>
   </data>
   <data name="replacedTag4List.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -3693,13 +3702,13 @@ Replace only if the destination tag is empty when checked
     <value>NoControl</value>
   </data>
   <data name="label31.Location" type="System.Drawing.Point, System.Drawing">
-    <value>679, 28</value>
+    <value>671, 29</value>
   </data>
   <data name="label31.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
   </data>
   <data name="label31.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 25</value>
+    <value>37, 26</value>
   </data>
   <data name="label31.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -3726,13 +3735,13 @@ Replace only if the destination tag is empty when checked
     <value>Left, Right</value>
   </data>
   <data name="replacedPattern4Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>83, 29</value>
+    <value>83, 30</value>
   </data>
   <data name="replacedPattern4Box.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
   </data>
   <data name="replacedPattern4Box.Size" type="System.Drawing.Size, System.Drawing">
-    <value>590, 23</value>
+    <value>582, 23</value>
   </data>
   <data name="replacedPattern4Box.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -3759,13 +3768,13 @@ Replace only if the destination tag is empty when checked
     <value>NoControl</value>
   </data>
   <data name="label30.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 28</value>
+    <value>3, 29</value>
   </data>
   <data name="label30.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
   </data>
   <data name="label30.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 25</value>
+    <value>74, 26</value>
   </data>
   <data name="label30.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -3792,13 +3801,13 @@ Replace only if the destination tag is empty when checked
     <value>Left, Right</value>
   </data>
   <data name="searchedTag4List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>780, 3</value>
+    <value>772, 2</value>
   </data>
   <data name="searchedTag4List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 1, 5, 1</value>
+    <value>3, 1, 0, 1</value>
   </data>
   <data name="searchedTag4List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 23</value>
+    <value>194, 23</value>
   </data>
   <data name="searchedTag4List.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -3825,13 +3834,13 @@ Replace only if the destination tag is empty when checked
     <value>NoControl</value>
   </data>
   <data name="label32.Location" type="System.Drawing.Point, System.Drawing">
-    <value>679, 1</value>
+    <value>671, 1</value>
   </data>
   <data name="label32.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
   </data>
   <data name="label32.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 25</value>
+    <value>37, 26</value>
   </data>
   <data name="label32.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -3864,7 +3873,7 @@ Replace only if the destination tag is empty when checked
     <value>3, 1, 3, 1</value>
   </data>
   <data name="searchedPattern4Box.Size" type="System.Drawing.Size, System.Drawing">
-    <value>590, 23</value>
+    <value>582, 23</value>
   </data>
   <data name="searchedPattern4Box.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -3897,7 +3906,7 @@ Replace only if the destination tag is empty when checked
     <value>3, 1, 3, 1</value>
   </data>
   <data name="label29.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 25</value>
+    <value>74, 26</value>
   </data>
   <data name="label29.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3920,17 +3929,20 @@ Replace only if the destination tag is empty when checked
   <data name="&gt;&gt;label29.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
+  <data name="tableLayoutPanel6.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <data name="tableLayoutPanel6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 16</value>
+    <value>8, 16</value>
   </data>
   <data name="tableLayoutPanel6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>0, 0, 0, 0</value>
   </data>
   <data name="tableLayoutPanel6.RowCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="tableLayoutPanel6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>976, 54</value>
+    <value>966, 56</value>
   </data>
   <data name="tableLayoutPanel6.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3951,16 +3963,16 @@ Replace only if the destination tag is empty when checked
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="replacedTag4List" Row="1" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="label44" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="append4CheckBox" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="label31" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="replacedPattern4Box" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label30" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="searchedTag4List" Row="0" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="label43" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="condition4CheckBox" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="label32" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="searchedPattern4Box" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label29" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,75,AutoSize,0,AutoSize,0,AutoSize,0,Percent,25" /&gt;&lt;Rows Styles="Percent,50,Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="groupBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 522</value>
+    <value>9, 526</value>
   </data>
   <data name="groupBox4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>5, 4, 9, 4</value>
   </data>
   <data name="groupBox4.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>8, 0, 8, 8</value>
   </data>
   <data name="groupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>985, 78</value>
+    <value>982, 80</value>
   </data>
   <data name="groupBox4.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -3990,7 +4002,7 @@ Replace only if the destination tag is empty when checked
     <value>NoControl</value>
   </data>
   <data name="label15.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 1</value>
+    <value>16, -1</value>
   </data>
   <data name="label15.Size" type="System.Drawing.Size, System.Drawing">
     <value>108, 15</value>
@@ -4013,9 +4025,6 @@ Replace only if the destination tag is empty when checked
   <data name="&gt;&gt;label15.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="tableLayoutPanel7.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
   <data name="tableLayoutPanel7.ColumnCount" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
@@ -4023,13 +4032,13 @@ Replace only if the destination tag is empty when checked
     <value>Left, Right</value>
   </data>
   <data name="replacedTag5List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>780, 30</value>
+    <value>772, 30</value>
   </data>
   <data name="replacedTag5List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 1, 5, 1</value>
+    <value>3, 1, 0, 1</value>
   </data>
   <data name="replacedTag5List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 23</value>
+    <value>194, 23</value>
   </data>
   <data name="replacedTag5List.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -4056,13 +4065,13 @@ Replace only if the destination tag is empty when checked
     <value>NoControl</value>
   </data>
   <data name="label35.Location" type="System.Drawing.Point, System.Drawing">
-    <value>679, 28</value>
+    <value>671, 29</value>
   </data>
   <data name="label35.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
   </data>
   <data name="label35.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 25</value>
+    <value>37, 26</value>
   </data>
   <data name="label35.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -4089,13 +4098,13 @@ Replace only if the destination tag is empty when checked
     <value>Left, Right</value>
   </data>
   <data name="replacedPattern5Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>83, 29</value>
+    <value>83, 30</value>
   </data>
   <data name="replacedPattern5Box.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
   </data>
   <data name="replacedPattern5Box.Size" type="System.Drawing.Size, System.Drawing">
-    <value>590, 23</value>
+    <value>582, 23</value>
   </data>
   <data name="replacedPattern5Box.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -4122,13 +4131,13 @@ Replace only if the destination tag is empty when checked
     <value>NoControl</value>
   </data>
   <data name="label34.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 28</value>
+    <value>3, 29</value>
   </data>
   <data name="label34.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
   </data>
   <data name="label34.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 25</value>
+    <value>74, 26</value>
   </data>
   <data name="label34.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -4155,13 +4164,13 @@ Replace only if the destination tag is empty when checked
     <value>Left, Right</value>
   </data>
   <data name="searchedTag5List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>780, 3</value>
+    <value>772, 2</value>
   </data>
   <data name="searchedTag5List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 1, 5, 1</value>
+    <value>3, 1, 0, 1</value>
   </data>
   <data name="searchedTag5List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 23</value>
+    <value>194, 23</value>
   </data>
   <data name="searchedTag5List.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -4188,13 +4197,13 @@ Replace only if the destination tag is empty when checked
     <value>NoControl</value>
   </data>
   <data name="label36.Location" type="System.Drawing.Point, System.Drawing">
-    <value>679, 1</value>
+    <value>671, 1</value>
   </data>
   <data name="label36.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
   </data>
   <data name="label36.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 25</value>
+    <value>37, 26</value>
   </data>
   <data name="label36.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -4227,7 +4236,7 @@ Replace only if the destination tag is empty when checked
     <value>3, 1, 3, 1</value>
   </data>
   <data name="searchedPattern5Box.Size" type="System.Drawing.Size, System.Drawing">
-    <value>590, 23</value>
+    <value>582, 23</value>
   </data>
   <data name="searchedPattern5Box.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -4260,7 +4269,7 @@ Replace only if the destination tag is empty when checked
     <value>3, 1, 3, 1</value>
   </data>
   <data name="label33.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 25</value>
+    <value>74, 26</value>
   </data>
   <data name="label33.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -4283,17 +4292,20 @@ Replace only if the destination tag is empty when checked
   <data name="&gt;&gt;label33.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
+  <data name="tableLayoutPanel7.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <data name="tableLayoutPanel7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 16</value>
+    <value>8, 16</value>
   </data>
   <data name="tableLayoutPanel7.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>0, 0, 0, 0</value>
   </data>
   <data name="tableLayoutPanel7.RowCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="tableLayoutPanel7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>976, 54</value>
+    <value>966, 56</value>
   </data>
   <data name="tableLayoutPanel7.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -4314,16 +4326,16 @@ Replace only if the destination tag is empty when checked
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="replacedTag5List" Row="1" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="label46" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="append5CheckBox" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="label35" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="replacedPattern5Box" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label34" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="searchedTag5List" Row="0" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="label45" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="condition5CheckBox" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="label36" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="searchedPattern5Box" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label33" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,75,AutoSize,0,AutoSize,0,AutoSize,0,Percent,25" /&gt;&lt;Rows Styles="Percent,50,Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="groupBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 600</value>
+    <value>9, 604</value>
   </data>
   <data name="groupBox5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 0</value>
+    <value>5, 4, 9, 4</value>
   </data>
   <data name="groupBox5.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>8, 0, 8, 8</value>
   </data>
   <data name="groupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>985, 78</value>
+    <value>982, 80</value>
   </data>
   <data name="groupBox5.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -4350,7 +4362,7 @@ Replace only if the destination tag is empty when checked
     <value>NoControl</value>
   </data>
   <data name="customizedByUserCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>758, 131</value>
+    <value>750, 131</value>
   </data>
   <data name="customizedByUserCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>7, 4, 4, 4</value>
@@ -4386,7 +4398,7 @@ Replace only if the destination tag is empty when checked
     <value>NoControl</value>
   </data>
   <data name="removePresetCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>636, 131</value>
+    <value>628, 131</value>
   </data>
   <data name="removePresetCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -4428,7 +4440,7 @@ Replace only if the destination tag is empty when checked
     <value>NoControl</value>
   </data>
   <data name="label26.Location" type="System.Drawing.Point, System.Drawing">
-    <value>516, 55</value>
+    <value>513, 55</value>
   </data>
   <data name="label26.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -4473,7 +4485,7 @@ Replace only if the destination tag is empty when checked
     <value>NoControl</value>
   </data>
   <data name="pictureBox26.Location" type="System.Drawing.Point, System.Drawing">
-    <value>498, 60</value>
+    <value>495, 60</value>
   </data>
   <data name="pictureBox26.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 0, 0</value>
@@ -4590,7 +4602,7 @@ Replace only if the destination tag is empty when checked
     <value>NoControl</value>
   </data>
   <data name="label28.Location" type="System.Drawing.Point, System.Drawing">
-    <value>516, 28</value>
+    <value>513, 28</value>
   </data>
   <data name="label28.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -4635,7 +4647,7 @@ Replace only if the destination tag is empty when checked
     <value>NoControl</value>
   </data>
   <data name="pictureBox28.Location" type="System.Drawing.Point, System.Drawing">
-    <value>498, 33</value>
+    <value>495, 33</value>
   </data>
   <data name="pictureBox28.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 0, 0</value>
@@ -4752,7 +4764,7 @@ Replace only if the destination tag is empty when checked
     <value>NoControl</value>
   </data>
   <data name="label18.Location" type="System.Drawing.Point, System.Drawing">
-    <value>516, 1</value>
+    <value>513, 1</value>
   </data>
   <data name="label18.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -4797,7 +4809,7 @@ Replace only if the destination tag is empty when checked
     <value>NoControl</value>
   </data>
   <data name="pictureBox18.Location" type="System.Drawing.Point, System.Drawing">
-    <value>498, 6</value>
+    <value>495, 6</value>
   </data>
   <data name="pictureBox18.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 0, 0</value>
@@ -4904,11 +4916,14 @@ Replace only if the destination tag is empty when checked
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 152</value>
   </data>
+  <data name="tableLayoutPanel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 3, 9, 3</value>
+  </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>988, 81</value>
+    <value>982, 81</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -4935,16 +4950,16 @@ Replace only if the destination tag is empty when checked
     <value>6</value>
   </data>
   <data name="tableLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 233</value>
+    <value>9, 235</value>
   </data>
   <data name="tableLayoutPanel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>9, 3, 9, 3</value>
   </data>
   <data name="tableLayoutPanel2.RowCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>988, 54</value>
+    <value>982, 54</value>
   </data>
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -4974,7 +4989,7 @@ Replace only if the destination tag is empty when checked
     <value>NoControl</value>
   </data>
   <data name="removePresetCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>661, 131</value>
+    <value>653, 131</value>
   </data>
   <data name="removePresetCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -5010,7 +5025,7 @@ Replace only if the destination tag is empty when checked
     <value>NoControl</value>
   </data>
   <data name="customizedByUserCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>780, 131</value>
+    <value>772, 131</value>
   </data>
   <data name="customizedByUserCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -5046,10 +5061,10 @@ Replace only if the destination tag is empty when checked
     <value>NoControl</value>
   </data>
   <data name="userPresetCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>926, 131</value>
+    <value>918, 131</value>
   </data>
   <data name="userPresetCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 7, 0</value>
+    <value>4, 0, 9, 0</value>
   </data>
   <data name="userPresetCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>65, 15</value>
@@ -5072,11 +5087,17 @@ Replace only if the destination tag is empty when checked
   <data name="&gt;&gt;userPresetCheckBoxLabel.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="ignoreCaseCheckBoxLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
   <data name="ignoreCaseCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="ignoreCaseCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>31, 687</value>
+    <value>31, 694</value>
+  </data>
+  <data name="ignoreCaseCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 10</value>
   </data>
   <data name="ignoreCaseCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 15</value>
@@ -5106,7 +5127,7 @@ Replace only if the destination tag is empty when checked
     <value>7, 15</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1004, 711</value>
+    <value>1004, 719</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -5118,7 +5139,7 @@ Replace only if the destination tag is empty when checked
     <value>11000, 1500</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>1020, 750</value>
+    <value>1020, 758</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Preset Editor</value>

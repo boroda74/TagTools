@@ -49,7 +49,7 @@ namespace MusicBeePlugin
             {
                 MessageBox.Show(MbForm, MsgNumberOfTagsInClipboardDoesntCorrespondToNumberOfSelectedTracks
                         .Replace("%%FILE-TAGS-LENGTH%%", fileTags.Length.ToString())
-                        .Replace("%%SELECTED-FILES-COUNT%%", files.Length.ToString()), 
+                        .Replace("%%SELECTED-FILES-COUNT%%", files.Length.ToString()),
                     string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
@@ -64,7 +64,7 @@ namespace MusicBeePlugin
                 {
                     MessageBox.Show(MbForm, MsgNumberOfTagsInClipboardDoesntCorrespondToNumberOfCopiedTags
                         .Replace("%%CLIPBOARD-TAGS-COUNT%%", tags.Length.ToString())
-                        .Replace("%%LAST-USED-TAG-SET-TAGS-COUNT%%", SavedSettings.copyTagsTagSets[SavedSettings.lastTagSet].tagIds.Length.ToString()), 
+                        .Replace("%%LAST-USED-TAG-SET-TAGS-COUNT%%", SavedSettings.copyTagsTagSets[SavedSettings.lastTagSet].tagIds.Length.ToString()),
                         string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return false;
                 }

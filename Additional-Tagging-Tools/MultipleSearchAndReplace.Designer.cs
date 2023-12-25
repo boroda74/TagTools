@@ -52,7 +52,7 @@
             this.buttonDeleteSaved = new System.Windows.Forms.Button();
             this.autoApplyCheckBox = new System.Windows.Forms.CheckBox();
             this.autoApplyPictureBox = new System.Windows.Forms.PictureBox();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.controlsPanel = new System.Windows.Forms.Panel();
             this.placeholderLabel1 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -63,7 +63,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.autoApplyPictureBox)).BeginInit();
-            this.panel1.SuspendLayout();
+            this.controlsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -81,7 +81,8 @@
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.ControlDark;
             this.splitContainer1.Panel2.Controls.Add(this.previewTable);
-            this.splitContainer1.Tag = "#MultipleSearchAndReplaceCommand@pinned-to-parent";
+            this.splitContainer1.Tag = "#MultipleSearchAndReplaceCommand&MultipleSearchAndReplaceCommand@pinned-to-parent" +
+    "-x";
             this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
             // 
             // templateTable
@@ -217,7 +218,7 @@
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.dirtyErrorProvider.SetIconAlignment(this.buttonCancel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonCancel.IconAlignment"))));
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Tag = "#MultipleSearchAndReplaceCommand@non-defaultable";
+            this.buttonCancel.Tag = "#controlsPanel@non-defaultable";
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // buttonPreview
@@ -261,7 +262,7 @@
             resources.ApplyResources(this.fromTagLabel, "fromTagLabel");
             this.dirtyErrorProvider.SetIconAlignment(this.fromTagLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("fromTagLabel.IconAlignment"))));
             this.fromTagLabel.Name = "fromTagLabel";
-            this.fromTagLabel.Tag = "#sourceTagList@pinned-to-parent";
+            this.fromTagLabel.Tag = "#sourceTagList@pinned-to-parent-x";
             // 
             // sourceTagList
             // 
@@ -312,7 +313,7 @@
             resources.ApplyResources(this.buttonUp, "buttonUp");
             this.dirtyErrorProvider.SetIconAlignment(this.buttonUp, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonUp.IconAlignment"))));
             this.buttonUp.Name = "buttonUp";
-            this.buttonUp.Tag = "#buttonDown@non-defaultable@square-control";
+            this.buttonUp.Tag = "#buttonDown@non-defaultable@square-control@pinned-to-parent-x";
             this.buttonUp.Click += new System.EventHandler(this.buttonUp_Click);
             // 
             // buttonDown
@@ -360,7 +361,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.buttonSettings, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonSettings.IconAlignment"))));
             this.buttonSettings.Image = global::MusicBeePlugin.Properties.Resources.gear_15;
             this.buttonSettings.Name = "buttonSettings";
-            this.buttonSettings.Tag = "@square-control";
+            this.buttonSettings.Tag = "#buttonPreview@square-control";
             this.toolTip1.SetToolTip(this.buttonSettings, resources.GetString("buttonSettings.ToolTip"));
             this.buttonSettings.Click += new System.EventHandler(this.buttonSettings_Click);
             // 
@@ -371,7 +372,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.buttonDeleteSaved, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonDeleteSaved.IconAlignment"))));
             this.buttonDeleteSaved.Image = global::MusicBeePlugin.Properties.Resources.clear_button_15;
             this.buttonDeleteSaved.Name = "buttonDeleteSaved";
-            this.buttonDeleteSaved.Tag = "#MultipleSearchAndReplaceCommand@non-defaultable@square-control";
+            this.buttonDeleteSaved.Tag = "#controlsPanel@non-defaultable@square-control";
             this.toolTip1.SetToolTip(this.buttonDeleteSaved, resources.GetString("buttonDeleteSaved.ToolTip"));
             this.buttonDeleteSaved.Click += new System.EventHandler(this.buttonDeleteSaved_Click);
             // 
@@ -388,36 +389,37 @@
             this.autoApplyPictureBox.Image = global::MusicBeePlugin.Properties.Resources.auto_applied_presets;
             this.autoApplyPictureBox.Name = "autoApplyPictureBox";
             this.autoApplyPictureBox.TabStop = false;
-            this.autoApplyPictureBox.Tag = "#buttonSave#scaled-moved-y@square-control";
+            this.autoApplyPictureBox.Tag = "#buttonSave#scaled-moved-top@square-control";
             this.toolTip1.SetToolTip(this.autoApplyPictureBox, resources.GetString("autoApplyPictureBox.ToolTip"));
             this.autoApplyPictureBox.Click += new System.EventHandler(this.autoApplyPictureBox_Click);
             // 
-            // panel1
+            // controlsPanel
             // 
-            resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.Controls.Add(this.buttonDeleteSaved);
-            this.panel1.Controls.Add(this.loadComboBox);
-            this.panel1.Controls.Add(this.buttonSave);
-            this.panel1.Controls.Add(this.autoApplyPictureBox);
-            this.panel1.Controls.Add(this.autoApplyCheckBox);
-            this.panel1.Controls.Add(this.templateNameTextBox);
-            this.panel1.Controls.Add(this.presetLabel);
-            this.panel1.Controls.Add(this.buttonDelete);
-            this.panel1.Controls.Add(this.buttonAdd);
-            this.panel1.Controls.Add(this.buttonDown);
-            this.panel1.Controls.Add(this.buttonUp);
-            this.panel1.Controls.Add(this.buttonCancel);
-            this.panel1.Controls.Add(this.buttonOK);
-            this.panel1.Controls.Add(this.buttonPreview);
-            this.panel1.Controls.Add(this.buttonSettings);
-            this.panel1.Controls.Add(this.searchOnlyCheckBox);
-            this.panel1.Controls.Add(this.destinationTagList);
-            this.panel1.Controls.Add(this.toTagLabel);
-            this.panel1.Controls.Add(this.autoDestinationTagCheckBox);
-            this.panel1.Controls.Add(this.sourceTagList);
-            this.panel1.Controls.Add(this.fromTagLabel);
-            this.panel1.Controls.Add(this.placeholderLabel1);
-            this.panel1.Name = "panel1";
+            resources.ApplyResources(this.controlsPanel, "controlsPanel");
+            this.controlsPanel.Controls.Add(this.buttonDeleteSaved);
+            this.controlsPanel.Controls.Add(this.loadComboBox);
+            this.controlsPanel.Controls.Add(this.buttonSave);
+            this.controlsPanel.Controls.Add(this.autoApplyPictureBox);
+            this.controlsPanel.Controls.Add(this.autoApplyCheckBox);
+            this.controlsPanel.Controls.Add(this.templateNameTextBox);
+            this.controlsPanel.Controls.Add(this.presetLabel);
+            this.controlsPanel.Controls.Add(this.buttonDelete);
+            this.controlsPanel.Controls.Add(this.buttonAdd);
+            this.controlsPanel.Controls.Add(this.buttonDown);
+            this.controlsPanel.Controls.Add(this.buttonUp);
+            this.controlsPanel.Controls.Add(this.buttonCancel);
+            this.controlsPanel.Controls.Add(this.buttonOK);
+            this.controlsPanel.Controls.Add(this.buttonPreview);
+            this.controlsPanel.Controls.Add(this.buttonSettings);
+            this.controlsPanel.Controls.Add(this.searchOnlyCheckBox);
+            this.controlsPanel.Controls.Add(this.destinationTagList);
+            this.controlsPanel.Controls.Add(this.toTagLabel);
+            this.controlsPanel.Controls.Add(this.autoDestinationTagCheckBox);
+            this.controlsPanel.Controls.Add(this.sourceTagList);
+            this.controlsPanel.Controls.Add(this.fromTagLabel);
+            this.controlsPanel.Controls.Add(this.placeholderLabel1);
+            this.controlsPanel.Name = "controlsPanel";
+            this.controlsPanel.Tag = "#MultipleSearchAndReplaceCommand&splitContainer1@pinned-to-parent-x";
             // 
             // placeholderLabel1
             // 
@@ -438,7 +440,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
             this.Controls.Add(this.splitContainer1);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.controlsPanel);
             this.HelpButton = true;
             this.Name = "MultipleSearchAndReplaceCommand";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MultipleSearchAndReplaceCommand_FormClosing);
@@ -451,8 +453,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.autoApplyPictureBox)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.controlsPanel.ResumeLayout(false);
+            this.controlsPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -484,6 +486,8 @@
         private System.Windows.Forms.Label presetLabel;
         private System.Windows.Forms.Button buttonPreview;
         private System.Windows.Forms.Button buttonSettings;
+        private System.Windows.Forms.Panel controlsPanel;
+        private System.Windows.Forms.Label placeholderLabel1;
         private System.Windows.Forms.DataGridViewComboBoxColumn SearchTag;
         private System.Windows.Forms.DataGridViewCheckBoxColumn RegEx;
         private System.Windows.Forms.DataGridViewCheckBoxColumn CaseSensitive;
@@ -494,7 +498,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn OriginalTag;
         private System.Windows.Forms.DataGridViewTextBoxColumn NewTag;
         private System.Windows.Forms.DataGridViewTextBoxColumn FileColumn;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label placeholderLabel1;
     }
 }

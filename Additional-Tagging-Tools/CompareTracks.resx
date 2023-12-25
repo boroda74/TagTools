@@ -126,10 +126,10 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>548, 4</value>
+    <value>551, 7</value>
   </data>
   <data name="buttonOK.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>4, 4, 4, 7</value>
   </data>
   <data name="buttonOK.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 23</value>
@@ -160,10 +160,10 @@
     <value>NoControl</value>
   </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>656, 4</value>
+    <value>659, 7</value>
   </data>
   <data name="buttonCancel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 8, 4</value>
+    <value>4, 4, 5, 7</value>
   </data>
   <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 23</value>
@@ -237,16 +237,16 @@
     <value>200</value>
   </data>
   <data name="previewTable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 8</value>
+    <value>5, 5</value>
   </data>
   <data name="previewTable.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>5, 5, 5, 37</value>
   </data>
   <data name="previewTable.RowHeadersWidth" type="System.Int32, mscorlib">
     <value>150</value>
   </data>
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>748, 318</value>
+    <value>754, 319</value>
   </data>
   <data name="previewTable.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -261,7 +261,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;previewTable.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="dataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
     <value>Track</value>
@@ -297,10 +297,10 @@
     <value>NoControl</value>
   </data>
   <data name="selectTagsButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>28, 4</value>
+    <value>28, 7</value>
   </data>
   <data name="selectTagsButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>4, 4, 4, 7</value>
   </data>
   <data name="selectTagsButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 23</value>
@@ -336,7 +336,7 @@
     <value>NoControl</value>
   </data>
   <data name="rememberColumnAsDefaultWidthCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>136, 7</value>
+    <value>136, 10</value>
   </data>
   <data name="rememberColumnAsDefaultWidthCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -372,10 +372,10 @@
     <value>NoControl</value>
   </data>
   <data name="autoSelectTagsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 7</value>
+    <value>6, 10</value>
   </data>
   <data name="autoSelectTagsCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>6, 4, 4, 4</value>
   </data>
   <data name="autoSelectTagsCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 19</value>
@@ -405,7 +405,7 @@
     <value>True</value>
   </data>
   <data name="rememberColumnAsDefaultWidthCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>163, 7</value>
+    <value>163, 10</value>
   </data>
   <data name="rememberColumnAsDefaultWidthCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -444,10 +444,10 @@
     <value>NoControl</value>
   </data>
   <data name="buttonCopy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>432, 4</value>
+    <value>432, 7</value>
   </data>
   <data name="buttonCopy.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>4, 4, 4, 7</value>
   </data>
   <data name="buttonCopy.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 23</value>
@@ -483,10 +483,10 @@
     <value>NoControl</value>
   </data>
   <data name="buttonPaste.Location" type="System.Drawing.Point, System.Drawing">
-    <value>466, 4</value>
+    <value>466, 7</value>
   </data>
   <data name="buttonPaste.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>4, 4, 4, 7</value>
   </data>
   <data name="buttonPaste.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 23</value>
@@ -522,10 +522,10 @@
     <value>NoControl</value>
   </data>
   <data name="buttonClear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>499, 4</value>
+    <value>499, 7</value>
   </data>
   <data name="buttonClear.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>4, 4, 4, 7</value>
   </data>
   <data name="buttonClear.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 23</value>
@@ -558,7 +558,7 @@
     <value>True</value>
   </data>
   <data name="placeholderLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>380, 7</value>
+    <value>380, 10</value>
   </data>
   <data name="placeholderLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 15</value>
@@ -582,10 +582,13 @@
     <value>9</value>
   </data>
   <data name="toolsPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 329</value>
+    <value>0, 324</value>
+  </data>
+  <data name="toolsPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
   </data>
   <data name="toolsPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>764, 32</value>
+    <value>764, 37</value>
   </data>
   <data name="toolsPanel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -600,7 +603,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;toolsPanel.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

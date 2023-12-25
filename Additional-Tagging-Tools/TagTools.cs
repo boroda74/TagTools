@@ -1,17 +1,17 @@
-﻿using MusicBeePlugin;
+﻿using ExtensionMethods;
+using MusicBeePlugin;
 using MusicBeePlugin.Properties;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
-using System.Linq;
 using static MusicBeePlugin.AdvancedSearchAndReplaceCommand;
 using static MusicBeePlugin.LibraryReportsCommand;
-using ExtensionMethods;
 
 
 namespace ExtensionMethods
@@ -119,7 +119,7 @@ namespace ExtensionMethods
 
             if (control is CheckBox || control is RadioButton)
             {
-                (control.FindForm() as PluginWindowTemplate).controlsReferences.TryGetValue(control, out var control2);
+                (control.FindForm() as PluginWindowTemplate).controlsReferencesX.TryGetValue(control, out var control2);
                 if (control2 != null && control2 is Label)
                     control2.Enable(state);
             }
@@ -253,7 +253,7 @@ namespace MusicBeePlugin
         private static Dictionary<Form, List<Bitmap>> FormsThemedBitmaps = new Dictionary<Form, List<Bitmap>>();
         private static Dictionary<Bitmap, int> ThemedBitmapCounts = new Dictionary<Bitmap, int>();
 
-        public static Bitmap ThemedBitmapAddRef(Form form,Bitmap bitmap)
+        public static Bitmap ThemedBitmapAddRef(Form form, Bitmap bitmap)
         {
             if (FormsThemedBitmaps.TryGetValue(form, out var bitmapList))
             {
@@ -381,7 +381,7 @@ namespace MusicBeePlugin
 
         private static System.Threading.Timer PeriodicUI_RefreshTimer = null;
         private static System.Threading.Timer DelayedStatusbarTextClearingTimer = null;
-        private static TimerCallback DelayedStatusbarTextClearingDelegate; 
+        private static TimerCallback DelayedStatusbarTextClearingDelegate;
         private static bool UiRefreshingIsNeeded = false;
         private static TimeSpan RefreshUI_Delay = new TimeSpan(0, 0, 5);
         public static DateTime LastUI_Refresh = DateTime.MinValue;
@@ -464,7 +464,7 @@ namespace MusicBeePlugin
 
         public const MetaDataType NullTagId = (MetaDataType)(-20);
         public const MetaDataType DateCreatedTagId = (MetaDataType)(-21);
-        
+
         public const MetaDataType ClipboardTagId = (MetaDataType)(-150);
         public const MetaDataType FolderTagId = (MetaDataType)(-151);
         public const MetaDataType FileNameTagId = (MetaDataType)(-152);
@@ -846,7 +846,7 @@ namespace MusicBeePlugin
         public static string OriginalTagHeaderText;
 
         public static string TableCellError;
-        
+
         public static string DefaultASRPresetName;
 
 
@@ -903,10 +903,12 @@ namespace MusicBeePlugin
         public static string MsgDoYouWantToImportExistingPresetsAsCopies;
 
         public static string MsgPresetsWereImported;
+        public static string MsgMsrPresetWasImported;
         public static string MsgPresetsWereImportedAsCopies;
         public static string MsgPresetsFailedToImport;
 
         public static string MsgPresetsWereInstalled;
+        public static string MsgMsrPresetWasInstalled;
         public static string MsgPresetsCustomizedWereReinstalled;
         public static string MsgPresetsWereReinstalled;
         public static string MsgPresetsWereUpdated;
@@ -921,7 +923,6 @@ namespace MusicBeePlugin
 
         public static string MsgNoPresetsDeleted;
         public static string MsgPresetsWereDeleted;
-        public static string MsgFailedToDelete;
 
 
         public static string MsgNumberOfTagsInTextFileDoesntCorrespondToNumberOfSelectedTracks;
@@ -1114,7 +1115,7 @@ namespace MusicBeePlugin
                 if (items1.Count != 0) //Its "average count" function, i.e. double
                 {
                     double value = (double)items1.Count / items.Count;
-                    
+
                     double comparedValue;
                     if (comparedResult.items.Count == 0 && comparedResult.items1.Count == 0)
                         comparedValue = 0;
@@ -1464,7 +1465,7 @@ namespace MusicBeePlugin
                     result.resultDSpace = string.Empty;
                     result.resultDPostfix = string.Empty;
                     result.dataType = dataType;
-                    result.resultType = ResultType.UseOtherResults;
+                    result.resultType = ResultType.UnknownOrString;
                 }
                 else //Error parsing number type
                 {
@@ -1482,9 +1483,9 @@ namespace MusicBeePlugin
 
             if (dataType == DataType.Number)
             {
-                if (!double.TryParse(arg, out result.resultD) && !replacements)
+                if (!double.TryParse(arg, out result.resultD))
                     return ConvertStrings(arg, ResultType.Double, DataType.Number, true);
-                else if (!replacements) //Let's try to parse as number if there were no replacements
+                else //Let's try to parse as number if there were no replacements
                     return ConvertStrings(arg, ResultType.Double, DataType.Number, true);
 
                 return result;
@@ -1584,17 +1585,8 @@ namespace MusicBeePlugin
                         }
                         catch
                         {
-                            if (!replacements) //Let's try to parse as number if there were no replacements
-                            {
-                                return ConvertStrings(arg, ResultType.AutoDouble, DataType.String, true);
-                            }
-                            else
-                            {
-                                result.resultD = 0;
-                                result.resultType = ResultType.UnknownOrString;
-
-                                return result;
-                            }
+                            //Let's try to parse as number if there were no replacements
+                            return ConvertStrings(arg, ResultType.AutoDouble, DataType.String, true);
                         }
                     }
                 }
@@ -2557,7 +2549,7 @@ namespace MusicBeePlugin
             }
         }
 
-        public static void FillListByTagNames(System.Collections.IList list, bool addReadOnlyTagsAlso = false, bool addArtworkAlso = false, 
+        public static void FillListByTagNames(System.Collections.IList list, bool addReadOnlyTagsAlso = false, bool addArtworkAlso = false,
             bool addNullAlso = true, bool addTagMarkers = false, bool addAllTagsPseudoTagAlso = false)
         {
             foreach (string tagName in TagNamesIds.Keys)
@@ -2634,7 +2626,7 @@ namespace MusicBeePlugin
                                 marker = "☆";
                             break;
                     }
-                    
+
                     marker += " ";
                 }
 
@@ -2654,7 +2646,7 @@ namespace MusicBeePlugin
                         list.Add(marker + tagName);
                 }
                 else if (addReadOnlyTagsAlso || !ChangeCaseCommand.IsItemContainedInList(tagName, ReadonlyTagsNames))
-                { 
+                {
                     list.Add(marker + tagName);
                 }
             }
@@ -2832,6 +2824,8 @@ namespace MusicBeePlugin
                 string backupFilenameWithoutExtension = GetBackupFilenameWithoutExtension(files[i]);
 
                 backupCache = BackupCacheType.Load(backupFilenameWithoutExtension);
+                if (backupCache == null)
+                    return;
 
                 if (backupCache.isAutocreated && backupCache.libraryName == currentLibraryName)
                 {
@@ -2905,7 +2899,7 @@ namespace MusicBeePlugin
 
         public void reencodeTagEventHandler(object sender, EventArgs e)
         {
-            ReencodeTagPlugin tagToolsForm = new ReencodeTagPlugin(this);
+            ReencodeTagCommand tagToolsForm = new ReencodeTagCommand(this);
             PluginWindowTemplate.Display(tagToolsForm);
         }
 
@@ -3136,9 +3130,9 @@ namespace MusicBeePlugin
                 {
                     string backupFilenameWithoutExtension = GetBackupFilenameWithoutExtension(files[i]);
 
-                    backupCache = BackupCacheType.Load(backupFilenameWithoutExtension);
+                    backupCache = BackupCacheType.Load(backupFilenameWithoutExtension, ".xml", true);
 
-                    if (backupCache.libraryName == currentLibraryName)
+                    if (backupCache == null || backupCache.libraryName == currentLibraryName)
                     {
                         BackupIndex.deleteBackup(backupCache);
 
@@ -3183,7 +3177,8 @@ namespace MusicBeePlugin
             {
                 backupCache = BackupCacheType.Load(GetBackupFilenameWithoutExtension(filename));
 
-                BackupIndex.deleteBackup(backupCache);
+                if (backupCache != null)
+                    BackupIndex.deleteBackup(backupCache);
 
                 File.Delete(filename);
                 File.Delete(GetBackupFilenameWithoutExtension(filename) + ".mbc");
@@ -3384,15 +3379,15 @@ namespace MusicBeePlugin
             ComposerComposersName = MbApiInterface.Setting_GetFieldName(MetaDataType.Composer);
 
             DisplayedArtistName = MbApiInterface.MB_GetLocalisation("aSplit.msg.diar", "display {0}:").Replace("{0}", ArtistArtistsName);
-            DisplayedArtistName = ChangeCaseCommand.ChangeWordsCase(DisplayedArtistName, changeCaseMode, 
+            DisplayedArtistName = ChangeCaseCommand.ChangeWordsCase(DisplayedArtistName, changeCaseMode,
                 null, false, null, null);
             DisplayedArtistName = DisplayedArtistName.Remove(DisplayedArtistName.Length - 1);
 
             DisplayedComposerName = MbApiInterface.MB_GetLocalisation("aSplit.msg.diar", "display {0}:").Replace("{0}", ComposerComposersName);
-            DisplayedComposerName = ChangeCaseCommand.ChangeWordsCase(DisplayedComposerName, changeCaseMode, 
+            DisplayedComposerName = ChangeCaseCommand.ChangeWordsCase(DisplayedComposerName, changeCaseMode,
                 null, false, null, null);
             DisplayedComposerName = DisplayedComposerName.Remove(DisplayedComposerName.Length - 1);
-            
+
             string localizedDisplayedAlbumArtist = MbApiInterface.MB_GetLocalisation("aSplit.msg.diar", "display {0}:");
             localizedDisplayedAlbumArtist = Regex.Replace(localizedDisplayedAlbumArtist, @"^(.*?)\s?\{0\}\:?\s?(.*)", " ($1$2)");
             DisplayedAlbumArtistName = MbApiInterface.Setting_GetFieldName(MetaDataType.AlbumArtist) + localizedDisplayedAlbumArtist;
@@ -3460,7 +3455,7 @@ namespace MusicBeePlugin
             SelectFoundButtonName = "Select found";
             OriginalTagHeaderTextTagValue = "Tag value";
             OriginalTagHeaderText = "Original tag";
-            
+
             TableCellError = "#Error!";
 
             DefaultASRPresetName = "Preset #";
@@ -3523,29 +3518,30 @@ namespace MusicBeePlugin
                 + "Do you want to delete these presets?";
 
             MsgPresetsWereImported = " preset{;s;s} {was;were;were} imported.\n";
+            MsgMsrPresetWasImported = " service hidden preset was imported.\n";
             MsgPresetsWereImportedAsCopies = " preset{;s;s} {was;were;were} imported as new preset{;s;s}.\n";
-            MsgPresetsFailedToImport = " preset{;s;s} failed to import due to file\n" + AddLeadingSpaces(0, 4, 0)  + 
+            MsgPresetsFailedToImport = " preset{;s;s} failed to import due to file\n" + AddLeadingSpaces(0, 4, 0) +
                 " read error{;s;s} or wrong format.";
 
             MsgPresetsWereInstalled = " preset{;s;s} {was;were;were} installed.\n";
-            MsgPresetsCustomizedWereReinstalled = " preset{;s;s} customized by you {was;were;were} reinstalled,\n" + AddLeadingSpaces(0, 4, 0)  
+            MsgMsrPresetWasInstalled = " service hidden preset was installed.\n";
+            MsgPresetsCustomizedWereReinstalled = " preset{;s;s} customized by you {was;were;were} reinstalled,\n" + AddLeadingSpaces(0, 4, 0)
                 + " but {its;their;their} customizations were preserved.\n";
             MsgPresetsWereReinstalled = " preset{;s;s} {was;were;were} reinstalled.\n";
             MsgPresetsWereUpdated = " presets {was;were;were} updated.\n";
-            MsgPresetsCustomizedWereUpdated = " preset{;s;s} customized by you {was;were;were} updated,\n" + AddLeadingSpaces(0, 4, 0) 
+            MsgPresetsCustomizedWereUpdated = " preset{;s;s} customized by you {was;were;were} updated,\n" + AddLeadingSpaces(0, 4, 0)
                 + " but {its;their;their} customizations were preserved.\n";
             MsgPresetsWereNotChanged = " preset{;s;s} {was;were;were} not changed since\n" + AddLeadingSpaces(0, 4, 0)
                 + " last update, and skipped.\n\n";
             MsgPresetsRemoved = " predefined preset{;s;s} {was;were;were} deleted.\n";
-            MsgPresetsFailedToUpdate = " preset{;s;s} failed to install due to file\n" + AddLeadingSpaces(0, 4, 0) 
+            MsgPresetsFailedToUpdate = " preset{;s;s} failed to install due to file\n" + AddLeadingSpaces(0, 4, 0)
                 + " read error{;s;s} or wrong format.";
-            
+
             MsgPresetsNotFound = "No presets for installing found in expected directory!";
 
             MsgDeletingConfirmation = "Do you want to delete all predefined presets?";
             MsgNoPresetsDeleted = "No presets were deleted. ";
             MsgPresetsWereDeleted = " preset{;s;s} {was;were;were} deleted.";
-            MsgFailedToDelete = " preset{;s;s} failed to delete.";
 
 
             MsgNumberOfTagsInTextFileDoesntCorrespondToNumberOfSelectedTracks = "Number of tags in text file (%%TEXT-TAG-FILES-COUNT%%)" +
@@ -3553,18 +3549,18 @@ namespace MusicBeePlugin
 
             MsgClipboardDoesntContainText = "Clipboard doesn't contain text!";
 
-            MsgNumberOfTagsInClipboardDoesntCorrespondToNumberOfSelectedTracks = "The number of tags in clipboard (%%FILE-TAGS-LENGTH%%)" + 
+            MsgNumberOfTagsInClipboardDoesntCorrespondToNumberOfSelectedTracks = "The number of tags in clipboard (%%FILE-TAGS-LENGTH%%)" +
                 " doesn't correspond to the number of selected tracks (%%SELECTED-FILES-COUNT%%)!";
             MsgDoYouWantToPasteTagsAnyway = " Do you want to paste tags anyway?";
-            MsgNumberOfTagsInClipboardDoesntCorrespondToNumberOfCopiedTags = "The number of tags in clipboard (%%CLIPBOARD-TAGS-COUNT%%)" + 
+            MsgNumberOfTagsInClipboardDoesntCorrespondToNumberOfCopiedTags = "The number of tags in clipboard (%%CLIPBOARD-TAGS-COUNT%%)" +
                 " doesn't correspond to the number of tags in last used tag set (%%LAST-USED-TAG-SET-TAGS-COUNT%%)!";
 
 
             MsgFirstThreeGroupingFieldsInPreviewTableShouldBe = "First three grouping fields in preview table should be \"" + DisplayedAlbumArtistName + "\", \"" + AlbumTagName + "\" and \"" + ArtworkName + "\" to export to HTML Document (grouped by album)";
-            MsgFirstSixGroupingFieldsInPreviewTableShouldBe = "First six grouping fields in preview table should be '" + SequenceNumberName 
-                + "\", \"" + DisplayedAlbumArtistName + "\", \"" + AlbumTagName + "\", \"" + ArtworkName + "\", \"" 
-                + MbApiInterface.Setting_GetFieldName(MetaDataType.TrackTitle) + "\" and \"" 
-                + MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Duration) 
+            MsgFirstSixGroupingFieldsInPreviewTableShouldBe = "First six grouping fields in preview table should be '" + SequenceNumberName
+                + "\", \"" + DisplayedAlbumArtistName + "\", \"" + AlbumTagName + "\", \"" + ArtworkName + "\", \""
+                + MbApiInterface.Setting_GetFieldName(MetaDataType.TrackTitle) + "\" and \""
+                + MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Duration)
                 + "' to export to HTML Document (CD Booklet)";
 
             MsgYouMustImportStandardAsrPresetsFirst = "You must import standard ASR presets first!";
@@ -3720,11 +3716,11 @@ namespace MusicBeePlugin
             file.Close();
             #endregion
 
-            DontShowShowHiddenWindows = SavedSettings.dontShowShowHiddenWindows;
-
             #region Resetting invalid/absent settings
             if (SavedSettings == null)
                 SavedSettings = new SavedSettingsType();
+
+            DontShowShowHiddenWindows = SavedSettings.dontShowShowHiddenWindows;
 
             if (SavedSettings.windowsSettings == null)
                 SavedSettings.windowsSettings = new List<WindowSettingsType>();
@@ -4080,21 +4076,23 @@ namespace MusicBeePlugin
 
 
                 MsgPresetsWereImported = " пресет{;а;ов} был{;и;и} импортирован{;ы;ы}.\n";
+                MsgMsrPresetWasImported = " служебный скрытый пресет был импортирован.\n";
                 MsgPresetsWereImportedAsCopies = " пресет{;а;ов} был{;и;и} импортирован{;ы;ы} как новы{й;ые;ые} пресет{;ы;ы}.\n";
-                MsgPresetsFailedToImport = " пресет{;а;ов} не удалось импортировать из-за ошиб{ки;ок;ок}\n" + AddLeadingSpaces(0, 4, 0) 
+                MsgPresetsFailedToImport = " пресет{;а;ов} не удалось импортировать из-за ошиб{ки;ок;ок}\n" + AddLeadingSpaces(0, 4, 0)
                     + " чтения файл{а;ов;ов} или {его;их;их} неверного формата.";
 
                 MsgPresetsWereInstalled = " пресет{;а;ов} был{;и;и} установлен{;ы;ы}.\n\n";
-                MsgPresetsCustomizedWereReinstalled = " пресет{;а;ов}, настроенн{ый;ых;ых} вами, был{;и;и}\n" + AddLeadingSpaces(0, 4, 0) 
+                MsgMsrPresetWasInstalled = " служебный скрытый пресет был установлен.\n";
+                MsgPresetsCustomizedWereReinstalled = " пресет{;а;ов}, настроенн{ый;ых;ых} вами, был{;и;и}\n" + AddLeadingSpaces(0, 4, 0)
                     + " переустановлен{;ы;ы}, но {его;их;их} настройки были сохранены.\n\n";
                 MsgPresetsWereReinstalled = " пресет{;а;ов} был{;и;и} переустановлен{;ы;ы}.\n\n";
                 MsgPresetsWereUpdated = " пресет{;а;ов} был{;и;и} обновлен{;ы;ы}.\n\n";
-                MsgPresetsCustomizedWereUpdated = " пресет{;а;ов}, настроенн{ый;ых;ых} вами, был{;и;и} обновлен{;ы;ы},\n" + AddLeadingSpaces(0, 4, 0) 
+                MsgPresetsCustomizedWereUpdated = " пресет{;а;ов}, настроенн{ый;ых;ых} вами, был{;и;и} обновлен{;ы;ы},\n" + AddLeadingSpaces(0, 4, 0)
                     + " но {его;их;их} настройки были сохранены.\n\n";
-                MsgPresetsWereNotChanged = " пресет{;а;ов} не изменил{ся;ись;ись} с последнего \n" + AddLeadingSpaces(0, 4, 0) 
+                MsgPresetsWereNotChanged = " пресет{;а;ов} не изменил{ся;ись;ись} с последнего \n" + AddLeadingSpaces(0, 4, 0)
                     + " обновления и был{;и;и} пропущен{;ы;ы}.\n\n";
                 MsgPresetsRemoved = " пресет{;а;ов} был{;и;и} удален{;ы;ы}.\n\n";
-                MsgPresetsFailedToUpdate = " пресет{;а;ов} не удалось обновить из-за ошиб{ки;ок;ок}\n" + AddLeadingSpaces(0, 4, 0) 
+                MsgPresetsFailedToUpdate = " пресет{;а;ов} не удалось обновить из-за ошиб{ки;ок;ок}\n" + AddLeadingSpaces(0, 4, 0)
                     + " чтения файл{а;ов;ов} или {его;их;их} неверного формата.";
 
                 MsgPresetsNotFound = "Не найдены пресеты для установки в ожидаемом каталоге!";
@@ -4102,7 +4100,6 @@ namespace MusicBeePlugin
                 MsgDeletingConfirmation = "Удалить все стандартные пресеты?";
                 MsgNoPresetsDeleted = "Пресеты не были удалены.";
                 MsgPresetsWereDeleted = " пресет{;а;ов} был{;и;и} удален{;ы;ы}.";
-                MsgFailedToDelete = " пресет{;а;ов} не удалось удалить.";
 
 
                 MsgNumberOfTagsInTextFileDoesntCorrespondToNumberOfSelectedTracks = "Количество тегов в текстовом файле (%%TEXT-TAG-FILES-COUNT%%)" +
@@ -4117,7 +4114,7 @@ namespace MusicBeePlugin
                     " не соответствует количеству тегов последнего использованного набора тегов (%%LAST-USED-TAG-SET-TAGS-COUNT%%)!";
 
 
-                MsgFirstThreeGroupingFieldsInPreviewTableShouldBe = "Первые три поля группировок в таблице должны быть \"" + DisplayedAlbumArtistName + "\", '" 
+                MsgFirstThreeGroupingFieldsInPreviewTableShouldBe = "Первые три поля группировок в таблице должны быть \"" + DisplayedAlbumArtistName + "\", '"
                     + AlbumTagName + "\" и \"" + ArtworkName + "\" для того, чтобы экспортировать теги в формат \"Документ HTML (по альбомам)'";
                 MsgFirstSixGroupingFieldsInPreviewTableShouldBe = "Первые шесть полей группировок в таблице должны быть \"" + SequenceNumberName
                     + "\", \"" + DisplayedAlbumArtistName + "\", \"" + AlbumTagName + "\", \"" + ArtworkName + "\", \""
@@ -4331,7 +4328,7 @@ namespace MusicBeePlugin
 
             tempLibraryReportsPreset.sourceTags = new string[tempFunctions.Length];
             for (int i = 0; i < tempFunctions.Length; i++)
-                tempLibraryReportsPreset.sourceTags[i] = GetColumnName(tempFunctions[i].parameterName, tempFunctions[i].parameter2Name, 
+                tempLibraryReportsPreset.sourceTags[i] = GetColumnName(tempFunctions[i].parameterName, tempFunctions[i].parameter2Name,
                     tempFunctions[i].functionType, null, false, null, false, false, true);
 
             reportsPresets[presetCounter++] = tempLibraryReportsPreset;
@@ -4349,7 +4346,7 @@ namespace MusicBeePlugin
                 tempGroupings[f].columnIndices = new int[] { f };
 
 
-            tempFunctions[0] = new PresetColumnAttributes(LrFunctionType.AverageCount, new string[] { string.Empty }, 
+            tempFunctions[0] = new PresetColumnAttributes(LrFunctionType.AverageCount, new string[] { string.Empty },
                 MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url), MbApiInterface.Setting_GetFieldName(MetaDataType.Artist), null, false);
             tempFunctions[1] = new PresetColumnAttributes(LrFunctionType.AverageCount, new string[] { string.Empty },
                 MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url), MbApiInterface.Setting_GetFieldName(MetaDataType.Album), null, false);
@@ -4692,7 +4689,7 @@ namespace MusicBeePlugin
             #region Final initialization
             //Final initialization
             MbForm = (Form)Control.FromHandle(MbApiInterface.MB_GetWindowHandle());
-            
+
             EmptyButton = new Button();
             EmptyForm = new Form(); //For themed bitmaps disposing control
 
@@ -4922,7 +4919,7 @@ namespace MusicBeePlugin
 
 
                 //SKINNING BUTTONS (ESPECIALLY DISABLED BUTTONS)
-                //Below: (SkinElement)2 - highlight enum code //****
+                //Below: (SkinElement)2 - BUTTON??? enum code //****
 
                 //Back colors
                 int buttonBackCode = MbApiInterface.Setting_GetSkinElementColour((SkinElement)2, ElementState.ElementStateDefault, ElementComponent.ComponentBackground);
@@ -5035,18 +5032,12 @@ namespace MusicBeePlugin
 
 
             //Making themed bitmaps
-            float dpiScaling = 1;
-            float hDpiFontScaling = 1;
-            float vDpiFontScaling = 1;
-
             var scalingSampleForm = new PluginWindowTemplate(this);
-            MbForm.AddOwnedForm(scalingSampleForm);
             scalingSampleForm.dontShowForm = true;
             scalingSampleForm.Show();
-            dpiScaling = scalingSampleForm.dpiScaling;
-            hDpiFontScaling = scalingSampleForm.hDpiFontScaling;
-            vDpiFontScaling = scalingSampleForm.vDpiFontScaling;
-            MbForm.RemoveOwnedForm(scalingSampleForm);
+            float dpiScaling = scalingSampleForm.dpiScaling;
+            float hDpiFontScaling = scalingSampleForm.hDpiFontScaling;
+            float vDpiFontScaling = scalingSampleForm.vDpiFontScaling;
             scalingSampleForm.Dispose();
 
 
@@ -5099,7 +5090,7 @@ namespace MusicBeePlugin
             ThemedBitmapAddRef(EmptyForm, CheckedState);
             UncheckedState = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, AccentBackWeight), Resources.uncheck_mark, markSize, markSize);
             ThemedBitmapAddRef(EmptyForm, UncheckedState);
- 
+
 
             int pictureSize = (int)Math.Round(19f * vDpiFontScaling);
 
@@ -5155,6 +5146,7 @@ namespace MusicBeePlugin
             ThemedBitmapAddRef(EmptyForm, Window);
 
 
+            HeaderCellStyle.Alignment = DataGridViewContentAlignment.TopLeft;//******
 
             //DATAGRIDVIEW COLOR DEFINITIONS
             if (SavedSettings.useMusicBeeFontSkinColors)
@@ -5858,6 +5850,8 @@ namespace MusicBeePlugin
             {
                 AddMenuItem(TagToolsSubmenu, "-", null, null);
                 AddMenuItem(TagToolsSubmenu, BackupRestoreMenuSectionName, null, null, false);
+                AddMenuItem(TagToolsSubmenu, TagHistoryCommandName, TagHistoryCommandDescription, tagHistoryEventHandler);
+                AddMenuItem(TagToolsSubmenu, "-", null, null);
                 AddMenuItem(TagToolsSubmenu, BackupTagsCommandName, BackupTagsCommandDescription, backupTagsEventHandler);
                 AddMenuItem(TagToolsSubmenu, RestoreTagsCommandName, RestoreTagsCommandDescription, restoreTagsEventHandler);
                 AddMenuItem(TagToolsSubmenu, RestoreTagsForEntireLibraryCommandName, RestoreTagsForEntireLibraryCommandDescription, restoreTagsForEntireLibraryEventHandler);
@@ -5904,8 +5898,6 @@ namespace MusicBeePlugin
             {
                 AddMenuItem(TagToolsContextSubmenu, "-", null, null);
                 AddMenuItem(TagToolsContextSubmenu, BackupRestoreMenuSectionName, null, null, false);
-
-                MbApiInterface.MB_RegisterCommand(TagHistoryCommandDescription, tagHistoryEventHandler);
                 AddMenuItem(TagToolsContextSubmenu, TagHistoryCommandName, null, tagHistoryEventHandler);
             }
 
@@ -5972,7 +5964,7 @@ namespace MusicBeePlugin
             return RandomGenerator.Next(int.Parse(max_number) + 1).ToString("D" + Math.Ceiling((decimal)(Math.Log10(float.Parse(max_number) + 1))));
         }
 
-         public string CustomFunc_Round(string number, string number_of_digits)
+        public string CustomFunc_Round(string number, string number_of_digits)
         {
             number = number.Replace('.', LocalizedDecimalPoint);
             number_of_digits = number_of_digits.Replace('.', LocalizedDecimalPoint);

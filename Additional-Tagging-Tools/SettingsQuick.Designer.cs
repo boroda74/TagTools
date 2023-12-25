@@ -74,27 +74,27 @@
             resources.ApplyResources(this.buttonCancel, "buttonCancel");
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Name = "buttonCancel";
-            this.toolTip1.SetToolTip(this.buttonCancel, resources.GetString("buttonCancel.ToolTip"));
+            this.buttonCancel.Tag = "#PluginQuickSettings&PluginQuickSettings@non-defaultable";
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // buttonOK
             // 
             resources.ApplyResources(this.buttonOK, "buttonOK");
             this.buttonOK.Name = "buttonOK";
-            this.toolTip1.SetToolTip(this.buttonOK, resources.GetString("buttonOK.ToolTip"));
+            this.buttonOK.Tag = "#buttonCancel&PluginQuickSettings";
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // label6
             // 
             resources.ApplyResources(this.label6, "label6");
             this.label6.Name = "label6";
-            this.toolTip1.SetToolTip(this.label6, resources.GetString("label6.ToolTip"));
+            this.label6.Tag = "@pinned-to-parent-x";
             // 
             // versionLabel
             // 
             resources.ApplyResources(this.versionLabel, "versionLabel");
             this.versionLabel.Name = "versionLabel";
-            this.toolTip1.SetToolTip(this.versionLabel, resources.GetString("versionLabel.ToolTip"));
+            this.versionLabel.Tag = "@pinned-to-parent-x@pinned-to-parent-y";
             // 
             // groupBox3
             // 
@@ -110,19 +110,17 @@
             this.groupBox3.Controls.Add(this.playCompletedSoundCheckBox);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
-            this.toolTip1.SetToolTip(this.groupBox3, resources.GetString("groupBox3.ToolTip"));
+            this.groupBox3.Tag = "#PluginQuickSettings@pinned-to-parent-x";
             // 
             // label9
             // 
             resources.ApplyResources(this.label9, "label9");
             this.label9.Name = "label9";
-            this.toolTip1.SetToolTip(this.label9, resources.GetString("label9.ToolTip"));
             // 
             // playTickedAsrPresetSoundCheckBoxLabel
             // 
             resources.ApplyResources(this.playTickedAsrPresetSoundCheckBoxLabel, "playTickedAsrPresetSoundCheckBoxLabel");
             this.playTickedAsrPresetSoundCheckBoxLabel.Name = "playTickedAsrPresetSoundCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.playTickedAsrPresetSoundCheckBoxLabel, resources.GetString("playTickedAsrPresetSoundCheckBoxLabel.ToolTip"));
             this.playTickedAsrPresetSoundCheckBoxLabel.Click += new System.EventHandler(this.playTickedAsrPresetSoundCheckBoxLabel_Click);
             // 
             // playTickedAsrPresetSoundCheckBox
@@ -130,13 +128,11 @@
             resources.ApplyResources(this.playTickedAsrPresetSoundCheckBox, "playTickedAsrPresetSoundCheckBox");
             this.playTickedAsrPresetSoundCheckBox.Name = "playTickedAsrPresetSoundCheckBox";
             this.playTickedAsrPresetSoundCheckBox.Tag = "#playTickedAsrPresetSoundCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.playTickedAsrPresetSoundCheckBox, resources.GetString("playTickedAsrPresetSoundCheckBox.ToolTip"));
             // 
             // playStoppedSoundCheckBoxLabel
             // 
             resources.ApplyResources(this.playStoppedSoundCheckBoxLabel, "playStoppedSoundCheckBoxLabel");
             this.playStoppedSoundCheckBoxLabel.Name = "playStoppedSoundCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.playStoppedSoundCheckBoxLabel, resources.GetString("playStoppedSoundCheckBoxLabel.ToolTip"));
             this.playStoppedSoundCheckBoxLabel.Click += new System.EventHandler(this.playStoppedSoundCheckBoxLabel_Click);
             // 
             // playStoppedSoundCheckBox
@@ -144,13 +140,11 @@
             resources.ApplyResources(this.playStoppedSoundCheckBox, "playStoppedSoundCheckBox");
             this.playStoppedSoundCheckBox.Name = "playStoppedSoundCheckBox";
             this.playStoppedSoundCheckBox.Tag = "#playStoppedSoundCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.playStoppedSoundCheckBox, resources.GetString("playStoppedSoundCheckBox.ToolTip"));
             // 
             // playStartedSoundCheckBoxLabel
             // 
             resources.ApplyResources(this.playStartedSoundCheckBoxLabel, "playStartedSoundCheckBoxLabel");
             this.playStartedSoundCheckBoxLabel.Name = "playStartedSoundCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.playStartedSoundCheckBoxLabel, resources.GetString("playStartedSoundCheckBoxLabel.ToolTip"));
             this.playStartedSoundCheckBoxLabel.Click += new System.EventHandler(this.playStartedSoundCheckBoxLabel_Click);
             // 
             // playStartedSoundCheckBox
@@ -158,13 +152,11 @@
             resources.ApplyResources(this.playStartedSoundCheckBox, "playStartedSoundCheckBox");
             this.playStartedSoundCheckBox.Name = "playStartedSoundCheckBox";
             this.playStartedSoundCheckBox.Tag = "#playStartedSoundCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.playStartedSoundCheckBox, resources.GetString("playStartedSoundCheckBox.ToolTip"));
             // 
             // playCompletedSoundCheckBoxLabel
             // 
             resources.ApplyResources(this.playCompletedSoundCheckBoxLabel, "playCompletedSoundCheckBoxLabel");
             this.playCompletedSoundCheckBoxLabel.Name = "playCompletedSoundCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.playCompletedSoundCheckBoxLabel, resources.GetString("playCompletedSoundCheckBoxLabel.ToolTip"));
             this.playCompletedSoundCheckBoxLabel.Click += new System.EventHandler(this.playCompletedSoundCheckBoxLabel_Click);
             // 
             // playCompletedSoundCheckBox
@@ -172,13 +164,12 @@
             resources.ApplyResources(this.playCompletedSoundCheckBox, "playCompletedSoundCheckBox");
             this.playCompletedSoundCheckBox.Name = "playCompletedSoundCheckBox";
             this.playCompletedSoundCheckBox.Tag = "#playCompletedSoundCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.playCompletedSoundCheckBox, resources.GetString("playCompletedSoundCheckBox.ToolTip"));
             // 
             // saveLastSkippedButton
             // 
             resources.ApplyResources(this.saveLastSkippedButton, "saveLastSkippedButton");
             this.saveLastSkippedButton.Name = "saveLastSkippedButton";
-            this.toolTip1.SetToolTip(this.saveLastSkippedButton, resources.GetString("saveLastSkippedButton.ToolTip"));
+            this.saveLastSkippedButton.Tag = "#buttonOK&PluginQuickSettings";
             this.saveLastSkippedButton.Click += new System.EventHandler(this.saveLastSkippedButton_Click);
             // 
             // useMusicBeeFontSkinColorsCheckBox
@@ -187,7 +178,6 @@
             this.useMusicBeeFontSkinColorsCheckBox.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.useMusicBeeFontSkinColorsCheckBox.Name = "useMusicBeeFontSkinColorsCheckBox";
             this.useMusicBeeFontSkinColorsCheckBox.Tag = "#useMusicBeeFontSkinColorsCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.useMusicBeeFontSkinColorsCheckBox, resources.GetString("useMusicBeeFontSkinColorsCheckBox.ToolTip"));
             // 
             // closeHiddenCommandWindowsRadioButton
             // 
@@ -195,7 +185,6 @@
             this.closeHiddenCommandWindowsRadioButton.Name = "closeHiddenCommandWindowsRadioButton";
             this.closeHiddenCommandWindowsRadioButton.TabStop = true;
             this.closeHiddenCommandWindowsRadioButton.Tag = "#closeHiddenCommandWindowsRadioButtonLabel";
-            this.toolTip1.SetToolTip(this.closeHiddenCommandWindowsRadioButton, resources.GetString("closeHiddenCommandWindowsRadioButton.ToolTip"));
             // 
             // showHiddenCommandWindowsRadioButton
             // 
@@ -203,14 +192,12 @@
             this.showHiddenCommandWindowsRadioButton.Name = "showHiddenCommandWindowsRadioButton";
             this.showHiddenCommandWindowsRadioButton.TabStop = true;
             this.showHiddenCommandWindowsRadioButton.Tag = "#showHiddenCommandWindowsRadioButtonLabel";
-            this.toolTip1.SetToolTip(this.showHiddenCommandWindowsRadioButton, resources.GetString("showHiddenCommandWindowsRadioButton.ToolTip"));
             // 
             // highlightChangedTagsCheckBox
             // 
             resources.ApplyResources(this.highlightChangedTagsCheckBox, "highlightChangedTagsCheckBox");
             this.highlightChangedTagsCheckBox.Name = "highlightChangedTagsCheckBox";
             this.highlightChangedTagsCheckBox.Tag = "#highlightChangedTagsCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.highlightChangedTagsCheckBox, resources.GetString("highlightChangedTagsCheckBox.ToolTip"));
             // 
             // groupBox2
             // 
@@ -229,13 +216,12 @@
             this.groupBox2.Controls.Add(this.useMusicBeeFontSkinColorsCheckBox);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
-            this.toolTip1.SetToolTip(this.groupBox2, resources.GetString("groupBox2.ToolTip"));
+            this.groupBox2.Tag = "#PluginQuickSettings@pinned-to-parent-x";
             // 
             // label8
             // 
             resources.ApplyResources(this.label8, "label8");
             this.label8.Name = "label8";
-            this.toolTip1.SetToolTip(this.label8, resources.GetString("label8.ToolTip"));
             // 
             // legendGroupBox
             // 
@@ -246,13 +232,12 @@
             this.legendGroupBox.Controls.Add(this.changedLegendTextBox);
             this.legendGroupBox.Name = "legendGroupBox";
             this.legendGroupBox.TabStop = false;
-            this.toolTip1.SetToolTip(this.legendGroupBox, resources.GetString("legendGroupBox.ToolTip"));
+            this.legendGroupBox.Tag = "#groupBox2";
             // 
             // legendLabel
             // 
             resources.ApplyResources(this.legendLabel, "legendLabel");
             this.legendLabel.Name = "legendLabel";
-            this.toolTip1.SetToolTip(this.legendLabel, resources.GetString("legendLabel.ToolTip"));
             // 
             // preservedTagValuesLegendTextBox
             // 
@@ -260,7 +245,6 @@
             this.preservedTagValuesLegendTextBox.Cursor = System.Windows.Forms.Cursors.Default;
             this.preservedTagValuesLegendTextBox.Name = "preservedTagValuesLegendTextBox";
             this.preservedTagValuesLegendTextBox.ReadOnly = true;
-            this.toolTip1.SetToolTip(this.preservedTagValuesLegendTextBox, resources.GetString("preservedTagValuesLegendTextBox.ToolTip"));
             this.preservedTagValuesLegendTextBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.preservedTagValuesLegendTextBox_MouseClick);
             // 
             // preservedTagsLegendTextBox
@@ -269,7 +253,6 @@
             this.preservedTagsLegendTextBox.Cursor = System.Windows.Forms.Cursors.Default;
             this.preservedTagsLegendTextBox.Name = "preservedTagsLegendTextBox";
             this.preservedTagsLegendTextBox.ReadOnly = true;
-            this.toolTip1.SetToolTip(this.preservedTagsLegendTextBox, resources.GetString("preservedTagsLegendTextBox.ToolTip"));
             this.preservedTagsLegendTextBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.preservedTagsLegendTextBox_MouseClick);
             // 
             // changedLegendTextBox
@@ -285,28 +268,24 @@
             // 
             resources.ApplyResources(this.highlightChangedTagsCheckBoxLabel, "highlightChangedTagsCheckBoxLabel");
             this.highlightChangedTagsCheckBoxLabel.Name = "highlightChangedTagsCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.highlightChangedTagsCheckBoxLabel, resources.GetString("highlightChangedTagsCheckBoxLabel.ToolTip"));
             this.highlightChangedTagsCheckBoxLabel.Click += new System.EventHandler(this.highlightChangedTagsCheckBoxLabel_Click);
             // 
             // showHiddenCommandWindowsRadioButtonLabel
             // 
             resources.ApplyResources(this.showHiddenCommandWindowsRadioButtonLabel, "showHiddenCommandWindowsRadioButtonLabel");
             this.showHiddenCommandWindowsRadioButtonLabel.Name = "showHiddenCommandWindowsRadioButtonLabel";
-            this.toolTip1.SetToolTip(this.showHiddenCommandWindowsRadioButtonLabel, resources.GetString("showHiddenCommandWindowsRadioButtonLabel.ToolTip"));
             this.showHiddenCommandWindowsRadioButtonLabel.Click += new System.EventHandler(this.showHiddenCommandWindowsRadioButtonLabel_Click);
             // 
             // closeHiddenCommandWindowsRadioButtonLabel
             // 
             resources.ApplyResources(this.closeHiddenCommandWindowsRadioButtonLabel, "closeHiddenCommandWindowsRadioButtonLabel");
             this.closeHiddenCommandWindowsRadioButtonLabel.Name = "closeHiddenCommandWindowsRadioButtonLabel";
-            this.toolTip1.SetToolTip(this.closeHiddenCommandWindowsRadioButtonLabel, resources.GetString("closeHiddenCommandWindowsRadioButtonLabel.ToolTip"));
             this.closeHiddenCommandWindowsRadioButtonLabel.Click += new System.EventHandler(this.closeHiddenCommandWindowsRadioButtonLabel_Click);
             // 
             // minimizePluginWindowsCheckBoxLabel
             // 
             resources.ApplyResources(this.minimizePluginWindowsCheckBoxLabel, "minimizePluginWindowsCheckBoxLabel");
             this.minimizePluginWindowsCheckBoxLabel.Name = "minimizePluginWindowsCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.minimizePluginWindowsCheckBoxLabel, resources.GetString("minimizePluginWindowsCheckBoxLabel.ToolTip"));
             this.minimizePluginWindowsCheckBoxLabel.Click += new System.EventHandler(this.minimizePluginWindowsCheckBoxLabel_Click);
             // 
             // minimizePluginWindowsCheckBox
@@ -314,14 +293,12 @@
             resources.ApplyResources(this.minimizePluginWindowsCheckBox, "minimizePluginWindowsCheckBox");
             this.minimizePluginWindowsCheckBox.Name = "minimizePluginWindowsCheckBox";
             this.minimizePluginWindowsCheckBox.Tag = "#minimizePluginWindowsCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.minimizePluginWindowsCheckBox, resources.GetString("minimizePluginWindowsCheckBox.ToolTip"));
             // 
             // useMusicBeeFontSkinColorsCheckBoxLabel
             // 
             resources.ApplyResources(this.useMusicBeeFontSkinColorsCheckBoxLabel, "useMusicBeeFontSkinColorsCheckBoxLabel");
             this.useMusicBeeFontSkinColorsCheckBoxLabel.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.useMusicBeeFontSkinColorsCheckBoxLabel.Name = "useMusicBeeFontSkinColorsCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.useMusicBeeFontSkinColorsCheckBoxLabel, resources.GetString("useMusicBeeFontSkinColorsCheckBoxLabel.ToolTip"));
             this.useMusicBeeFontSkinColorsCheckBoxLabel.Click += new System.EventHandler(this.useMusicBeeFontSkinColorsCheckBoxLabel_Click);
             // 
             // allowCommandExecutionWithoutPreviewCheckBoxLabel
@@ -330,7 +307,6 @@
             this.allowCommandExecutionWithoutPreviewCheckBoxLabel.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.allowCommandExecutionWithoutPreviewCheckBoxLabel.Name = "allowCommandExecutionWithoutPreviewCheckBoxLabel";
             this.allowCommandExecutionWithoutPreviewCheckBoxLabel.Tag = "";
-            this.toolTip1.SetToolTip(this.allowCommandExecutionWithoutPreviewCheckBoxLabel, resources.GetString("allowCommandExecutionWithoutPreviewCheckBoxLabel.ToolTip"));
             this.allowCommandExecutionWithoutPreviewCheckBoxLabel.Click += new System.EventHandler(this.allowCommandExecutionWithoutPreviewCheckBoxLabel_Click);
             // 
             // allowCommandExecutionWithoutPreviewCheckBox
@@ -338,8 +314,7 @@
             resources.ApplyResources(this.allowCommandExecutionWithoutPreviewCheckBox, "allowCommandExecutionWithoutPreviewCheckBox");
             this.allowCommandExecutionWithoutPreviewCheckBox.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.allowCommandExecutionWithoutPreviewCheckBox.Name = "allowCommandExecutionWithoutPreviewCheckBox";
-            this.allowCommandExecutionWithoutPreviewCheckBox.Tag = "#allowCommandExecutionWithoutPreviewCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.allowCommandExecutionWithoutPreviewCheckBox, resources.GetString("allowCommandExecutionWithoutPreviewCheckBox.ToolTip"));
+            this.allowCommandExecutionWithoutPreviewCheckBox.Tag = "#allowCommandExecutionWithoutPreviewCheckBoxLabel@pinned-to-parent-x";
             // 
             // groupBox5
             // 
@@ -353,19 +328,17 @@
             this.groupBox5.Controls.Add(this.includeNotChangedTagsCheckBox);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.TabStop = false;
-            this.toolTip1.SetToolTip(this.groupBox5, resources.GetString("groupBox5.ToolTip"));
+            this.groupBox5.Tag = "#PluginQuickSettings@pinned-to-parent-x";
             // 
             // label10
             // 
             resources.ApplyResources(this.label10, "label10");
             this.label10.Name = "label10";
-            this.toolTip1.SetToolTip(this.label10, resources.GetString("label10.ToolTip"));
             // 
             // includePreservedTagValuesCheckBoxLabel
             // 
             resources.ApplyResources(this.includePreservedTagValuesCheckBoxLabel, "includePreservedTagValuesCheckBoxLabel");
             this.includePreservedTagValuesCheckBoxLabel.Name = "includePreservedTagValuesCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.includePreservedTagValuesCheckBoxLabel, resources.GetString("includePreservedTagValuesCheckBoxLabel.ToolTip"));
             this.includePreservedTagValuesCheckBoxLabel.Click += new System.EventHandler(this.includePreservedTagValuesCheckBoxLabel_Click);
             // 
             // includePreservedTagValuesCheckBox
@@ -373,13 +346,11 @@
             resources.ApplyResources(this.includePreservedTagValuesCheckBox, "includePreservedTagValuesCheckBox");
             this.includePreservedTagValuesCheckBox.Name = "includePreservedTagValuesCheckBox";
             this.includePreservedTagValuesCheckBox.Tag = "#includePreservedTagValuesCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.includePreservedTagValuesCheckBox, resources.GetString("includePreservedTagValuesCheckBox.ToolTip"));
             // 
             // includePreservedTagsCheckBoxLabel
             // 
             resources.ApplyResources(this.includePreservedTagsCheckBoxLabel, "includePreservedTagsCheckBoxLabel");
             this.includePreservedTagsCheckBoxLabel.Name = "includePreservedTagsCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.includePreservedTagsCheckBoxLabel, resources.GetString("includePreservedTagsCheckBoxLabel.ToolTip"));
             this.includePreservedTagsCheckBoxLabel.Click += new System.EventHandler(this.includePreservedTagsCheckBoxLabel_Click);
             // 
             // includePreservedTagsCheckBox
@@ -387,13 +358,11 @@
             resources.ApplyResources(this.includePreservedTagsCheckBox, "includePreservedTagsCheckBox");
             this.includePreservedTagsCheckBox.Name = "includePreservedTagsCheckBox";
             this.includePreservedTagsCheckBox.Tag = "#includePreservedTagsCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.includePreservedTagsCheckBox, resources.GetString("includePreservedTagsCheckBox.ToolTip"));
             // 
             // includeNotChangedTagsCheckBoxLabel
             // 
             resources.ApplyResources(this.includeNotChangedTagsCheckBoxLabel, "includeNotChangedTagsCheckBoxLabel");
             this.includeNotChangedTagsCheckBoxLabel.Name = "includeNotChangedTagsCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.includeNotChangedTagsCheckBoxLabel, resources.GetString("includeNotChangedTagsCheckBoxLabel.ToolTip"));
             this.includeNotChangedTagsCheckBoxLabel.Click += new System.EventHandler(this.includeNotChangedTagsCheckBoxLabel_Click);
             // 
             // includeNotChangedTagsCheckBox
@@ -401,29 +370,26 @@
             resources.ApplyResources(this.includeNotChangedTagsCheckBox, "includeNotChangedTagsCheckBox");
             this.includeNotChangedTagsCheckBox.Name = "includeNotChangedTagsCheckBox";
             this.includeNotChangedTagsCheckBox.Tag = "#includeNotChangedTagsCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.includeNotChangedTagsCheckBox, resources.GetString("includeNotChangedTagsCheckBox.ToolTip"));
             // 
             // label5
             // 
             resources.ApplyResources(this.label5, "label5");
             this.label5.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.label5.Name = "label5";
-            this.toolTip1.SetToolTip(this.label5, resources.GetString("label5.ToolTip"));
+            this.label5.Tag = "@pinned-to-parent-x";
             // 
             // allowAsrLrPresetAutoexecutionCheckBoxLabel
             // 
             resources.ApplyResources(this.allowAsrLrPresetAutoexecutionCheckBoxLabel, "allowAsrLrPresetAutoexecutionCheckBoxLabel");
             this.allowAsrLrPresetAutoexecutionCheckBoxLabel.Name = "allowAsrLrPresetAutoexecutionCheckBoxLabel";
             this.allowAsrLrPresetAutoexecutionCheckBoxLabel.Tag = "";
-            this.toolTip1.SetToolTip(this.allowAsrLrPresetAutoexecutionCheckBoxLabel, resources.GetString("allowAsrLrPresetAutoexecutionCheckBoxLabel.ToolTip"));
             this.allowAsrLrPresetAutoexecutionCheckBoxLabel.Click += new System.EventHandler(this.allowAsrLrPresetAutoexecutionCheckBoxLabel_Click);
             // 
             // allowAsrLrPresetAutoexecutionCheckBox
             // 
             resources.ApplyResources(this.allowAsrLrPresetAutoexecutionCheckBox, "allowAsrLrPresetAutoexecutionCheckBox");
             this.allowAsrLrPresetAutoexecutionCheckBox.Name = "allowAsrLrPresetAutoexecutionCheckBox";
-            this.allowAsrLrPresetAutoexecutionCheckBox.Tag = "#allowAsrLrPresetAutoexecutionCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.allowAsrLrPresetAutoexecutionCheckBox, resources.GetString("allowAsrLrPresetAutoexecutionCheckBox.ToolTip"));
+            this.allowAsrLrPresetAutoexecutionCheckBox.Tag = "#allowAsrLrPresetAutoexecutionCheckBoxLabel@pinned-to-parent-x";
             // 
             // PluginQuickSettings
             // 
@@ -447,7 +413,6 @@
             this.MaximizeBox = false;
             this.Name = "PluginQuickSettings";
             this.Tag = "@min-max-width-same@min-max-height-same";
-            this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);

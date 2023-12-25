@@ -181,21 +181,25 @@
             // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
+            this.label1.Tag = "@pinned-to-parent-x";
             // 
             // nameBox
             // 
             resources.ApplyResources(this.nameBox, "nameBox");
             this.nameBox.Name = "nameBox";
+            this.nameBox.Tag = "#ASRPresetEditor";
             // 
             // label2
             // 
             resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
+            this.label2.Tag = "@pinned-to-parent-x";
             // 
             // descriptionBox
             // 
             resources.ApplyResources(this.descriptionBox, "descriptionBox");
             this.descriptionBox.Name = "descriptionBox";
+            this.descriptionBox.Tag = "#ASRPresetEditor";
             // 
             // label3
             // 
@@ -247,6 +251,7 @@
             // 
             resources.ApplyResources(this.buttonOK, "buttonOK");
             this.buttonOK.Name = "buttonOK";
+            this.buttonOK.Tag = "#buttonCancel@pinned-to-parent-y";
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // buttonCancel
@@ -254,14 +259,14 @@
             resources.ApplyResources(this.buttonCancel, "buttonCancel");
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Tag = "@non-defaultable";
+            this.buttonCancel.Tag = "#ASRPresetEditor@non-defaultable@pinned-to-parent-y";
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // ignoreCaseCheckBox
             // 
             resources.ApplyResources(this.ignoreCaseCheckBox, "ignoreCaseCheckBox");
             this.ignoreCaseCheckBox.Name = "ignoreCaseCheckBox";
-            this.ignoreCaseCheckBox.Tag = "#ignoreCaseCheckBoxLabel";
+            this.ignoreCaseCheckBox.Tag = "#ignoreCaseCheckBoxLabel@pinned-to-parent-x";
             // 
             // linkLabel1
             // 
@@ -280,6 +285,7 @@
             this.groupBox1.Controls.Add(this.tableLayoutPanel3);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
+            this.groupBox1.Tag = "#ASRPresetEditor@pinned-to-parent-x";
             // 
             // groupBox1Label
             // 
@@ -341,6 +347,7 @@
             this.groupBox2.Controls.Add(this.tableLayoutPanel4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
+            this.groupBox2.Tag = "#ASRPresetEditor@pinned-to-parent-x";
             // 
             // groupBox2Label
             // 
@@ -442,6 +449,7 @@
             this.groupBox3.Controls.Add(this.tableLayoutPanel5);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
+            this.groupBox3.Tag = "#ASRPresetEditor@pinned-to-parent-x";
             // 
             // groupBox3Label
             // 
@@ -542,6 +550,7 @@
             this.languages.FormattingEnabled = true;
             resources.ApplyResources(this.languages, "languages");
             this.languages.Name = "languages";
+            this.languages.Tag = "@pinned-to-parent-x";
             this.languages.SelectedIndexChanged += new System.EventHandler(this.languages_SelectedIndexChanged);
             // 
             // guidBox
@@ -555,7 +564,7 @@
             // 
             resources.ApplyResources(this.guidLabel, "guidLabel");
             this.guidLabel.Name = "guidLabel";
-            this.guidLabel.Tag = "";
+            this.guidLabel.Tag = "@pinned-to-parent-x";
             // 
             // modifiedLabel
             // 
@@ -872,6 +881,7 @@
             this.groupBox4.Controls.Add(this.tableLayoutPanel6);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.TabStop = false;
+            this.groupBox4.Tag = "#ASRPresetEditor@pinned-to-parent-x";
             // 
             // groupBox4Label
             // 
@@ -948,6 +958,7 @@
             this.groupBox5.Controls.Add(this.tableLayoutPanel7);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.TabStop = false;
+            this.groupBox5.Tag = "#ASRPresetEditor@pinned-to-parent-x";
             // 
             // label15
             // 
@@ -1063,6 +1074,7 @@
             this.tableLayoutPanel1.Controls.Add(this.label17, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.pictureBox17, 0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.Tag = "#ASRPresetEditor@pinned-to-parent-x";
             // 
             // label26
             // 
@@ -1146,6 +1158,7 @@
             this.tableLayoutPanel2.Controls.Add(this.customTextCheckBoxLabel, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.customTextCheckBox, 0, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.Tag = "#ASRPresetEditor@pinned-to-parent-x";
             // 
             // removePresetCheckBoxLabel
             // 
@@ -1163,12 +1176,13 @@
             // 
             resources.ApplyResources(this.userPresetCheckBoxLabel, "userPresetCheckBoxLabel");
             this.userPresetCheckBoxLabel.Name = "userPresetCheckBoxLabel";
-            this.userPresetCheckBoxLabel.Tag = "#ASRPresetEditor@pinned-to-parent";
+            this.userPresetCheckBoxLabel.Tag = "#ASRPresetEditor@pinned-to-parent-x";
             // 
             // ignoreCaseCheckBoxLabel
             // 
             resources.ApplyResources(this.ignoreCaseCheckBoxLabel, "ignoreCaseCheckBoxLabel");
             this.ignoreCaseCheckBoxLabel.Name = "ignoreCaseCheckBoxLabel";
+            this.ignoreCaseCheckBoxLabel.Tag = "#&ASRPresetEditor";
             this.ignoreCaseCheckBoxLabel.Click += new System.EventHandler(this.ignoreCaseCheckBoxLabel_Click);
             // 
             // ASRPresetEditor

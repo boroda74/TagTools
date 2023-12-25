@@ -22,9 +22,6 @@ namespace MusicBeePlugin
         protected int height;
         protected int width;
 
-        protected const int FormShowDelay = 750; //milliseconds
-        private System.Threading.Timer delayedShowFormTimer = null;
-
         public bool dontShowForm = false;
 
         //SKIN COLORING/CUSTOM FORM'S FONT/DPI SCALING
@@ -38,9 +35,22 @@ namespace MusicBeePlugin
 
 
         //ALL controls of the form and their references (if any)
-        protected List<Control> allControls = new List<Control> ();
-        internal Dictionary<Control, Control> controlsReferences = new Dictionary<Control, Control>();
-        protected Dictionary<Control, Control> controlsReferenced = new Dictionary<Control, Control>();
+        protected List<Control> allControls = new List<Control>();
+
+        internal Dictionary<Control, Control> controlsReferencesX = new Dictionary<Control, Control>();
+        protected Dictionary<Control, Control> controlsReferencedX = new Dictionary<Control, Control>();
+
+        internal Dictionary<Control, Control> controlsReferencesY = new Dictionary<Control, Control>();
+        protected Dictionary<Control, Control> controlsReferencedY = new Dictionary<Control, Control>();
+
+        protected List<Button> nonDefaultableButtons = new List<Button>();
+        protected bool artificiallyFocusedAcceptButton = false;
+
+        protected List<Control> pinnedToParentControlsX = new List<Control>();
+        protected List<Control> leftRightAnchoredControls = new List<Control>();
+
+        protected List<Control> pinnedToParentControlsY = new List<Control>();
+        protected List<Control> topBottomAnchoredControls = new List<Control>();
 
         protected struct SplitContainerScalingAttributes
         {
@@ -51,12 +61,6 @@ namespace MusicBeePlugin
         }
 
         protected List<SplitContainerScalingAttributes> splitContainersScalingAttributes = new List<SplitContainerScalingAttributes>();
-
-        protected List<Button> nonDefaultableButtons = new List<Button>();
-        protected bool artificiallyFocusedAcceptButton = false;
-
-        protected List<Control> pinnedToParentControls = new List<Control>();
-        protected List<Control> leftRightAnchoredControls = new List<Control>();
 
         protected bool ignoreSizePositionChanges = true;
 
@@ -280,11 +284,6 @@ namespace MusicBeePlugin
             else if (artificiallyFocusedAcceptButton && acceptButton == button)
             {
                 artificiallyFocusedAcceptButton = false;
-
-                //EITHER: //*******
-                //lastSelectedControl = button;
-
-                //OR:
                 button_LostFocus(button, null);
                 lastSelectedControl.Select();
             }
@@ -328,7 +327,7 @@ namespace MusicBeePlugin
 
             // Set flags to center text on the button.
             TextFormatFlags flags = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.WordBreak;   // center the text
-            
+
             // Render the text onto the button.
             TextRenderer.DrawText(e.Graphics, text, button.Font, e.ClipRectangle, button.ForeColor, flags);
         }
@@ -357,37 +356,44 @@ namespace MusicBeePlugin
                 lastSelectedControl = control;
         }
 
-        //int - parent level if control2 is ancestor, otherwise 0
-        public static (Control, int, bool, bool, bool, string[]) GetReferredControlControlLevelMarksRemarks(Control control)
+        //int - parent levelX if control2X is ancestor, otherwise 0
+        public static (Control, int, Control, int, bool, bool, bool, bool, string[]) GetReferredControlControlLevelMarksRemarks(Control control)
         {
-            (_, _, bool scaledMovedL, bool scaledMovedR, bool scaledMovedY, string[] remarks) = GetControlTagReferredNameMarksRemarks(control);
-            (Control control2, int level) = GetReferredControl(control);
+            (_, _, _, bool scaledMovedL, bool scaledMovedR, bool scaledMovedT, bool scaledMovedB, string[] remarks) = GetControlTagReferredNamesMarksRemarks(control);
+            (Control control2X, int levelX, Control control2Y, int levelY) = GetReferredControls(control);
 
-            return (control2, level, scaledMovedL, scaledMovedR, scaledMovedY, remarks);
+            return (control2X, levelX, control2Y, levelY, scaledMovedL, scaledMovedR, scaledMovedT, scaledMovedB, remarks);
         }
 
 
         public static void SetControlTagReferredNameMarksRemarks(Control control, string tagValue,
-            bool scaledMovedL = false, bool scaledMovedR = false, bool scaledMovedY = false,
-            string control2Name = null, params string[] remarks)
+            bool scaledMovedL = false, bool scaledMovedR = false, bool scaledMovedT = false, bool scaledMovedB = false,
+            string control2NameX = null, string control2NameY = null, params string[] remarks)
         {
-            (_, string oldControl2Name, bool scaledMovedOldL, bool scaledMovedOldR, bool scaledMovedOldY, string[] oldRemarks) = GetControlTagReferredNameMarksRemarks(control);
+            (_, string oldControl2NameX, string oldControl2NameY, bool scaledMovedOldL, bool scaledMovedOldR, bool scaledMovedOldT, bool scaledMovedOldB, string[] oldRemarks) = GetControlTagReferredNamesMarksRemarks(control);
 
             scaledMovedL |= scaledMovedOldL;
             scaledMovedR |= scaledMovedOldR;
-            scaledMovedY |= scaledMovedOldY;
+            scaledMovedT |= scaledMovedOldT;
+            scaledMovedB |= scaledMovedOldB;
 
-            
-            if (control2Name == null)
-                control2Name = oldControl2Name;
+
+            if (control2NameX == null)
+                control2NameX = oldControl2NameX;
+
+            if (control2NameY == null)
+                control2NameY = oldControl2NameY;
 
             if (remarks.Length == 0)
                 remarks = oldRemarks;
 
             control.Tag = tagValue ?? string.Empty;
 
-            if (!string.IsNullOrEmpty(control2Name))
-                control.Tag += "#" + control2Name;
+            if (!string.IsNullOrEmpty(control2NameX))
+                control.Tag += "#" + control2NameX;
+
+            if (!string.IsNullOrEmpty(control2NameY))
+                control.Tag += "&" + control2NameY;
 
             if (scaledMovedL)
                 control.Tag += "#scaled-moved-left";
@@ -395,43 +401,56 @@ namespace MusicBeePlugin
             if (scaledMovedR)
                 control.Tag += "#scaled-moved-right";
 
-            if (scaledMovedY)
-                control.Tag += "#scaled-moved-y";
+            if (scaledMovedT)
+                control.Tag += "#scaled-moved-top";
+
+            if (scaledMovedB)
+                control.Tag += "#scaled-moved-bottom";
 
             if (remarks.Length != 0)
                 control.Tag += remarks.Aggregate(string.Empty, (arg1, arg2) => arg1 + "@" + arg2);
         }
 
-        //Returns initial tag value, referred control name, moved-scaled marks and array of custom remarks
-        public static (string, string, bool, bool, bool, string[]) GetControlTagReferredNameMarksRemarks(Control control)
+        //Returns initial tag value, referred X control name, referred Y control name, moved-scaled marks and array of custom remarks
+        public static (string, string, string, bool, bool, bool, bool, string[]) GetControlTagReferredNamesMarksRemarks(Control control)
         {
             if (control.Tag == null || !(control.Tag is string))
-                return (string.Empty, string.Empty, false, false, false, new string[0]);
+                return (string.Empty, string.Empty, string.Empty, false, false, false, false, new string[0]);
 
             string controlTag = control.Tag as string;
             bool scaledMovedL = controlTag.Contains("#scaled-moved-left");
             bool scaledMovedR = controlTag.Contains("#scaled-moved-right");
-            bool scaledMovedY = controlTag.Contains("#scaled-moved-y");
+            bool scaledMovedT = controlTag.Contains("#scaled-moved-top");
+            bool scaledMovedB = controlTag.Contains("#scaled-moved-bottom");
             controlTag = controlTag.Replace("#scaled-moved-left", string.Empty);
             controlTag = controlTag.Replace("#scaled-moved-right", string.Empty);
-            controlTag = controlTag.Replace("#scaled-moved-y", string.Empty);
+            controlTag = controlTag.Replace("#scaled-moved-top", string.Empty);
+            controlTag = controlTag.Replace("#scaled-moved-bottom", string.Empty);
 
             string tagValue = controlTag;
             string remarks = string.Empty;
-            string control2Name = controlTag;
+            string control2NameX = controlTag;
+            string control2NameY = string.Empty;
 
             //Optional tag value by itself
             if (controlTag.Contains("#"))
             {
-                control2Name = Regex.Replace(controlTag, "^(.*?)#(.*)", "$2");
-                tagValue = controlTag.Replace("#" + control2Name, string.Empty);
+                control2NameX = Regex.Replace(controlTag, "^(.*?)#(.*)", "$2");
+                tagValue = controlTag.Replace("#" + control2NameX, string.Empty);
             }
 
             //Optional custom remark
-            if (control2Name.Contains("@"))
+            if (control2NameX.Contains("@"))
             {
-                remarks = Regex.Replace(control2Name, "^(.*?)@(.*)", "$2");
-                control2Name = control2Name.Replace("@" + remarks, string.Empty);
+                remarks = Regex.Replace(control2NameX, "^(.*?)@(.*)", "$2");
+                control2NameX = control2NameX.Replace("@" + remarks, string.Empty);
+            }
+
+            //control2NameY reference
+            if (control2NameX.Contains("&"))
+            {
+                control2NameY = Regex.Replace(control2NameX, "^(.*?)&(.*)", "$2");
+                control2NameX = control2NameX.Replace("&" + control2NameY, string.Empty);
             }
 
             if (tagValue.Contains("@"))
@@ -441,37 +460,45 @@ namespace MusicBeePlugin
             }
 
             if (remarks == string.Empty)
-                return (tagValue, control2Name, scaledMovedL, scaledMovedR, scaledMovedY, new string[0]);
+                return (tagValue, control2NameX, control2NameY, scaledMovedL, scaledMovedR, scaledMovedT, scaledMovedB, new string[0]);
             else
-                return (tagValue, control2Name, scaledMovedL, scaledMovedR, scaledMovedY, remarks.Split('@'));
+                return (tagValue, control2NameX, control2NameY, scaledMovedL, scaledMovedR, scaledMovedT, scaledMovedB, remarks.Split('@'));
         }
 
-        public static (Control, int) GetReferredControl(Control control) //int - parent level if control2 is ancestor, otherwise 0
+        public static (Control, int) GetReferredControlByName(Control control, string control2Name) //int - parent levelX if control2X is ancestor, otherwise 0
         {
-            (_, string control2Name, _, _, _, _) = GetControlTagReferredNameMarksRemarks(control);
-
             if (string.IsNullOrEmpty(control2Name))
                 return (null, 0);
 
-            int level = 0;
-            Control control2 = control.Parent.Controls[control2Name];
+            int levelX = 0;
+            Control control2X = control.Parent.Controls[control2Name];
 
             Control parent = control.Parent;
-            while (control2 == null && parent != null)
+            while (control2X == null && parent != null)
             {
-                level++;
+                levelX++;
 
                 if (parent.Name == control2Name)
-                    control2 = parent;
+                    control2X = parent;
                 else
                     parent = parent.Parent;
             }
 
-            if (control2 == null)
-                level = 0;
+            if (control2X == null)
+                levelX = 0;
 
 
-            return (control2, level);
+            return (control2X, levelX);
+        }
+
+        public static (Control, int, Control, int) GetReferredControls(Control control) //int - parent levelX if control2X is ancestor, otherwise 0
+        {
+            (_, string control2NameX, string control2NameY, _, _, _, _, _) = GetControlTagReferredNamesMarksRemarks(control);
+
+            (Control control2X, int levelX) = GetReferredControlByName(control, control2NameX);
+            (Control control2Y, int levelY) = GetReferredControlByName(control, control2NameY);
+
+            return (control2X, levelX, control2Y, levelY);
         }
 
         public static Size GetControlSize(Control control)
@@ -510,48 +537,81 @@ namespace MusicBeePlugin
             return level;
         }
 
-        public static (int, int, int, int) GetControl2LeftRightMarginsOrParent0WidthPaddings(Control control, Control control2, bool pinnedToParent = false) //Returns: Left, Right or 0 & parent Width, margins or parent padding
+        public static (int, int, int, int) GetControl2LeftRightMarginsOrParent0WidthPaddings(Control control, Control control2X, bool pinnedToParentX = false) //Returns: Left, Right or 0 & parent Width, margins or parent padding
         {
-            if (control2 == null && pinnedToParent)
+            if (control2X == null && pinnedToParentX)
                 return (0, GetControlSize(control.Parent).Width, control.Parent.Padding.Left, control.Parent.Padding.Right);
-            
 
-            int level = GetControlLevel(control, control2);
 
-            if (level > 0)
-                return (GetControlSize(control2).Width, GetControlSize(control2).Width, control2.Padding.Right, control2.Padding.Left);
-            else //if (level == 0)
-                return (control2.Left, control2.Left + control2.Width, control2.Margin.Left, control2.Margin.Right);
+            int levelX = GetControlLevel(control, control2X);
+
+            if (levelX > 0)
+                return (GetControlSize(control2X).Width, GetControlSize(control2X).Width, control2X.Padding.Right, control2X.Padding.Left);
+            else //if (levelX == 0)
+                return (control2X.Left, control2X.Left + control2X.Width, control2X.Margin.Left, control2X.Margin.Right);
         }
 
-        public int getRightAnchoredControlX(Control control, int controlNewWidth, Control control2, bool pinnedToParent, int level, float offset = 0)
+        public static (int, int, int, int) GetControl2TopBottomMarginsOrParent0HeightPaddings(Control control, Control control2Y, bool pinnedToParentY = false) //Returns: Top, Bottom or 0 & parent Height, margins or parent padding
         {
-            if (pinnedToParent)
+            if (control2Y == null && pinnedToParentY)
+                return (0, GetControlSize(control.Parent).Height, control.Parent.Padding.Top, control.Parent.Padding.Bottom);
+
+
+            int levelY = GetControlLevel(control, control2Y);
+
+            if (levelY > 0)
+                return (GetControlSize(control2Y).Height, GetControlSize(control2Y).Height, control2Y.Padding.Bottom, control2Y.Padding.Top);
+            else //if (levelY == 0)
+                return (control2Y.Top, control2Y.Top + control2Y.Height, control2Y.Margin.Top, control2Y.Margin.Bottom);
+        }
+
+        public int getRightAnchoredControlX(Control control, int controlNewWidth, Control control2X, bool pinnedToParentX, int levelX, float offset = 0)
+        {
+            if (pinnedToParentX)
             {
                 return GetControlSize(control.Parent).Width - controlNewWidth - (control.Margin.Right + control.Parent.Padding.Right);
             }
-            else if (level == 0)
+            else if (levelX == 0)
             {
                 if (offset == 0)
-                    return control2.Left - controlNewWidth - (control.Margin.Right + control2.Margin.Left);
+                    return control2X.Left - controlNewWidth - (control.Margin.Right + control2X.Margin.Left);
                 else
-                    return (int)Math.Round(control2.Left - controlNewWidth - offset * hDpiFontScaling);
+                    return (int)Math.Round(control2X.Left - controlNewWidth - offset * hDpiFontScaling);
             }
             else
             {
-                return GetControlSize(control2).Width - controlNewWidth - (control.Margin.Right + control2.Padding.Right);
+                return GetControlSize(control2X).Width - controlNewWidth - (control.Margin.Right + control2X.Padding.Right);
             }
         }
 
-        public static float GetYCenteredToY2(float controlHeight, float refControlY, Control control2)
+        public int getBottomAnchoredControlY(Control control, int controlNewHeight, Control control2Y, bool pinnedToParentY, int levelY, float offset = 0)
         {
-            float control2MiddleY = refControlY + control2.Height / 2f;
+            if (pinnedToParentY)
+            {
+                return GetControlSize(control.Parent).Height - controlNewHeight - (control.Margin.Bottom + control.Parent.Padding.Bottom);
+            }
+            else if (levelY == 0)
+            {
+                if (offset == 0)
+                    return control2Y.Top - controlNewHeight - (control.Margin.Bottom + control2Y.Margin.Top);
+                else
+                    return (int)Math.Round(control2Y.Top - controlNewHeight - offset * vDpiFontScaling);
+            }
+            else
+            {
+                return GetControlSize(control2Y).Height - controlNewHeight - (control.Margin.Bottom + control2Y.Padding.Bottom);
+            }
+        }
+
+        public static float GetYCenteredToY2(float controlHeight, float refControlY, Control control2X)
+        {
+            float control2MiddleY = refControlY + control2X.Height / 2f;
             return control2MiddleY - controlHeight / 2f;
         }
 
         public int getButtonY(Control control, AnchorStyles style)
         {
-            float controlNewY = control.Top - (control.Height - control.Height / vDpiFontScaling) / 4;//****
+            float controlNewY = control.Top - (control.Height - control.Height / vDpiFontScaling) / 4;//***
             return (int)Math.Round(controlNewY);
         }
 
@@ -567,29 +627,29 @@ namespace MusicBeePlugin
             return (int)Math.Round(controlNewY);
         }
 
-        public int getPictureBoxY(float controlHeight, Control control2)
+        public int getPictureBoxY(float controlHeight, Control control2X)
         {
-            float heightDifference = controlHeight - control2.Height;
-            float controlNewY = GetYCenteredToY2(controlHeight, control2.Top, control2);
+            float heightDifference = controlHeight - control2X.Height;
+            float controlNewY = GetYCenteredToY2(controlHeight, control2X.Top, control2X);
 
-            controlNewY -= heightDifference / 4 * vDpiFontScaling; //***
-            controlNewY += controlHeight * 0.12f;
+            controlNewY -= heightDifference / 6 / vDpiFontScaling; //*****
+            controlNewY += controlHeight * 0.07f;
             return (int)Math.Round(controlNewY);
         }
 
-        public int getCheckBoxesRadioButtonsY(Control control, Control control2)
+        public int getCheckBoxesRadioButtonsY(Control control, Control control2X)
         {
-            if (control.Height == control2.Height)
+            if (control.Height == control2X.Height)
             {
                 return control.Top;
             }
             else
             {
-                float heightDifference = control.Height - control2.Height;
-                float controlNewY = GetYCenteredToY2(control.Height, control2.Top, control2);
+                float heightDifference = control.Height - control2X.Height;
+                float controlNewY = GetYCenteredToY2(control.Height, control2X.Top, control2X);
 
-                controlNewY -= heightDifference / 4 * vDpiFontScaling; //***
-                controlNewY += control.Height * 0.12f;
+                controlNewY -= heightDifference / 6 / vDpiFontScaling; //******
+                controlNewY += control.Height * 0.07f;
                 return (int)Math.Round(controlNewY);
             }
         }
@@ -634,7 +694,7 @@ namespace MusicBeePlugin
                 control.Width = control.Height;
         }
 
-        public void moveScaleControlDependentReferringControls(Control control)
+        public void moveScaleControlDependentReferringControlsX(Control control)
         {
             if (control.GetType().IsSubclassOf(typeof(Form)) || control is Form)
                 return;
@@ -644,10 +704,10 @@ namespace MusicBeePlugin
             const float checkBoxRadioButtonOffsetCompensationX = 12f;
 
 
-            controlsReferenced.TryGetValue(control, out Control referringControl);
+            controlsReferencedX.TryGetValue(control, out Control referringControlX);
 
-            (Control control2, int level, bool scaledMovedL, bool scaledMovedR, bool scaledMovedY, string[] remarks) = GetReferredControlControlLevelMarksRemarks(control);
-            bool pinnedToParent = remarks.Contains("pinned-to-parent");
+            (Control control2X, int levelX, _, _, bool scaledMovedL, bool scaledMovedR, bool scaledMovedT, bool scaledMovedB, string[] remarks) = GetReferredControlControlLevelMarksRemarks(control);
+            bool pinnedToParentX = remarks.Contains("pinned-to-parent-x");
 
             //control is left & right anchored. Let's move/scale it at the end (in another function).
             if ((control.Anchor & AnchorStyles.Left) != 0 && (control.Anchor & AnchorStyles.Right) != 0)
@@ -660,127 +720,134 @@ namespace MusicBeePlugin
 
 
             //control is left anchored
-            if (referringControl != null && (control.Anchor & AnchorStyles.Left) != 0 && (control.Anchor & AnchorStyles.Right) == 0)
-                moveScaleControlDependentReferringControls(referringControl);
+            if (referringControlX != null && (control.Anchor & AnchorStyles.Left) != 0 && (control.Anchor & AnchorStyles.Right) == 0)
+                moveScaleControlDependentReferringControlsX(referringControlX);
             //referringControl is left anchored, control must be left & right anchored (left anchored only is considered above) 
-            else if (referringControl != null && (referringControl.Anchor & AnchorStyles.Left) != 0 && (referringControl.Anchor & AnchorStyles.Right) != 0)
-                moveScaleControlDependentReferringControls(referringControl);
+            else if (referringControlX != null && (referringControlX.Anchor & AnchorStyles.Left) != 0 && (referringControlX.Anchor & AnchorStyles.Right) != 0)
+                moveScaleControlDependentReferringControlsX(referringControlX);
 
 
             //Special case. Will move/scale it to parent. Let's proceed further...
-            if (pinnedToParent)
+            if (pinnedToParentX)
                 ;
-            //No control2 and control is NOT left & right anchored (see above)
-            else if (control2 == null)
+            //No control2X and control is NOT left & right anchored (see above)
+            else if (control2X == null)
                 return;
-            //control2 is right anchored and control is NOT left & right anchored (see earlier)
-            else if ((control2.Anchor & AnchorStyles.Left) == 0 && (control2.Anchor & AnchorStyles.Right) != 0)
-                moveScaleControlDependentReferringControls(control2);
+            //control2X is right anchored and control is NOT left & right anchored (see earlier)
+            else if ((control2X.Anchor & AnchorStyles.Left) == 0 && (control2X.Anchor & AnchorStyles.Right) != 0)
+                moveScaleControlDependentReferringControlsX(control2X);
 
 
 
-            if (scaledMovedL && scaledMovedR && scaledMovedY)
+            if (scaledMovedL && scaledMovedR && scaledMovedT)
                 return;
 
 
             bool scaledMovedL2 = true;
             bool scaledMovedR2 = true;
-            bool scaledMovedY2 = true;
 
-            if (control2 != null)
-                (_, _, scaledMovedL2, scaledMovedR2, scaledMovedY2, _) = GetControlTagReferredNameMarksRemarks(control2);
+            if (control2X != null)
+                (_, _, _, scaledMovedL2, scaledMovedR2, _, _, _) = GetControlTagReferredNamesMarksRemarks(control2X);
+
+
+            //VERTICAL MOVEMENT OF HORIZONTALLY LINKED CONTROLS
+            if (control.GetType().IsSubclassOf(typeof(CheckBox)) || control is CheckBox ||
+                        control.GetType().IsSubclassOf(typeof(RadioButton)) || control is RadioButton
+            )
+            {
+                if (!scaledMovedT)
+                {
+                    if (control2X.GetType().IsSubclassOf(typeof(Label)) || control2X is Label)
+                        control.Top = getCheckBoxesRadioButtonsY(control, control2X);
+                    else
+                        control.Top = (int)Math.Round(GetYCenteredToY2(control.Height, control2X.Top, control2X));
+
+                    scaledMovedT = true;
+                }
+            }
+            else if (control.GetType().IsSubclassOf(typeof(PictureBox)) || control is PictureBox)
+            {
+                if (control2X.GetType().IsSubclassOf(typeof(Label)) || control2X is Label)
+                {
+                    if (!scaledMovedT)
+                    {
+                        control.Top = getPictureBoxY(control.Height, control2X);
+                        scaledMovedT = true;
+                    }
+                }
+            }
 
 
             //control left anchored
             if ((control.Anchor & AnchorStyles.Left) != 0 && (control.Anchor & AnchorStyles.Right) == 0)
             {
-                if (pinnedToParent || level > 0)
+                if (pinnedToParentX || levelX > 0)
                 {
                     if (!scaledMovedL)
                     {
-                        var parent = control2;
-                        if (parent == null)
+                        var parent = control2X;
+                        if (parent == null || pinnedToParentX)
                             parent = control.Parent;
 
                         control.Left = parent.Padding.Left + control.Margin.Left;
                         scaledMovedL = true;
                     }
                 }
-                else if (control.GetType().IsSubclassOf(typeof(CheckBox)) || control is CheckBox ||
-                            control.GetType().IsSubclassOf(typeof(RadioButton)) || control is RadioButton
-                )
-                {
-                    if (!scaledMovedY)
-                    {
-                        if (control2.GetType().IsSubclassOf(typeof(Label)) || control2 is Label)
-                        {
-                            control.Top = getCheckBoxesRadioButtonsY(control, control2);
-                        }
-                        else
-                        {
-                            control.Top = (int)Math.Round(GetYCenteredToY2(control.Height, control2.Top, control2));
-                        }
 
-                        scaledMovedY = true;
-                    }
-
-                    if (!scaledMovedL2)
-                    {
-                        control2.Left = (int)Math.Round(control.Left + control.Width - checkBoxRadioButtonOffsetCompensationX * hDpiFontScaling);
-                        scaledMovedL2 = true;
-                    }
-                }
-                else if (control.GetType().IsSubclassOf(typeof(PictureBox)) || control is PictureBox)
+                if (control2X != null)
                 {
-                    if (!scaledMovedY2)
+                    if (control.GetType().IsSubclassOf(typeof(CheckBox)) || control is CheckBox ||
+                                control.GetType().IsSubclassOf(typeof(RadioButton)) || control is RadioButton
+                    )
                     {
-                        if (control2.GetType().IsSubclassOf(typeof(Label)) || control2 is Label)
+                        if (!scaledMovedL2)
                         {
-                            control2.Left = (int)Math.Round(control.Left + control.Width + smallControlOffsetX * hDpiFontScaling);
-
-                            if (!scaledMovedY)
-                            {
-                                control.Top = getPictureBoxY(control.Height, control2);
-                                scaledMovedY = true;
-                            }
+                            control2X.Left = (int)Math.Round(control.Left + control.Width - checkBoxRadioButtonOffsetCompensationX * hDpiFontScaling);
+                            scaledMovedL2 = true;
                         }
-                        else
-                        {
-                            control2.Left = control.Left + control.Width + control.Margin.Right + control2.Margin.Left;
-                        }
-
-                        scaledMovedL2 = true;
                     }
-                }
-                //control2 left anchored
-                else if ((control2.Anchor & AnchorStyles.Left) != 0 && (control2.Anchor & AnchorStyles.Right) == 0)
-                {
-                    if (!scaledMovedL2)
+                    else if (control.GetType().IsSubclassOf(typeof(PictureBox)) || control is PictureBox)
                     {
-                        control2.Left = control.Left + control.Width + control2.Margin.Left + control.Margin.Right;
-                        scaledMovedL2 = true;
+                        if (!scaledMovedL2)
+                        {
+                            if (control2X.GetType().IsSubclassOf(typeof(Label)) || control2X is Label)
+                                control2X.Left = (int)Math.Round(control.Left + control.Width + smallControlOffsetX * hDpiFontScaling);
+                            else
+                                control2X.Left = control.Left + control.Width + control.Margin.Right + control2X.Margin.Left;
+
+                            scaledMovedL2 = true;
+                        }
                     }
-                }
-                //control2 must NOT be right anchored. See below.
-                else if ((control2.Anchor & AnchorStyles.Left) == 0 && (control2.Anchor & AnchorStyles.Right) != 0)
-                {
-                    throw new Exception("Invalid control2 anchoring for control: " + control.Name + "! Expected anchor is not right.");
-                }
-                //control2 must NOT be not anchored
-                else if ((control2.Anchor & AnchorStyles.Left) == 0 && (control2.Anchor & AnchorStyles.Right) == 0)
-                {
-                    throw new Exception("Invalid control2 anchoring for control: " + control.Name + "! Expected anchor is not none.");
+                    //control2X left anchored
+                    else if ((control2X.Anchor & AnchorStyles.Left) != 0 && (control2X.Anchor & AnchorStyles.Right) == 0)
+                    {
+                        if (!scaledMovedL2)
+                        {
+                            control2X.Left = control.Left + control.Width + control2X.Margin.Left + control.Margin.Right;
+                            scaledMovedL2 = true;
+                        }
+                    }
+                    //control2X must NOT be right anchored. See below.
+                    else if ((control2X.Anchor & AnchorStyles.Left) == 0 && (control2X.Anchor & AnchorStyles.Right) != 0)
+                    {
+                        throw new Exception("Invalid control2X anchoring for control: " + control.Name + "! Expected anchor is not right.");
+                    }
+                    //control2X must NOT be not anchored
+                    else if ((control2X.Anchor & AnchorStyles.Left) == 0 && (control2X.Anchor & AnchorStyles.Right) == 0)
+                    {
+                        throw new Exception("Invalid control2X anchoring for control: " + control.Name + "! Expected anchor is not none.");
+                    }
                 }
             }
             //control right anchored
             else if ((control.Anchor & AnchorStyles.Left) == 0 && (control.Anchor & AnchorStyles.Right) != 0)
             {
-                if (pinnedToParent || level > 0)
+                if (pinnedToParentX || levelX > 0)
                 {
                     if (!scaledMovedL)
                     {
-                        var parent = control2;
-                        if (parent == null)
+                        var parent = control2X;
+                        if (parent == null || pinnedToParentX)
                             parent = control.Parent;
 
                         control.Left = GetControlSize(parent).Width - control.Width - (parent.Padding.Right + control.Margin.Right);
@@ -791,99 +858,216 @@ namespace MusicBeePlugin
                     control.GetType().IsSubclassOf(typeof(RadioButton)) || control is RadioButton
                 )
                 {
-                    if (!scaledMovedL && !scaledMovedY)
+                    if (!scaledMovedL)
                     {
-                        if (!scaledMovedY && (control2.GetType().IsSubclassOf(typeof(Label)) || control2 is Label))
-                        {
-                            control.Left = getRightAnchoredControlX(control, control.Width, control2, pinnedToParent, level, -checkBoxRadioButtonOffsetCompensationX * hDpiFontScaling);
-                            control.Top = getCheckBoxesRadioButtonsY(control, control2);
-                        }
+                        if (control2X.GetType().IsSubclassOf(typeof(Label)) || control2X is Label)
+                            control.Left = getRightAnchoredControlX(control, control.Width, control2X, pinnedToParentX, levelX, -checkBoxRadioButtonOffsetCompensationX * hDpiFontScaling);
                         else
-                        {
-                            control.Left = getRightAnchoredControlX(control, control.Width, control2, pinnedToParent, level);
-                            control.Top = (int)Math.Round(GetYCenteredToY2(control.Height, control2.Top, control2));
-                        }
+                            control.Left = getRightAnchoredControlX(control, control.Width, control2X, pinnedToParentX, levelX);
 
                         scaledMovedL = true;
-                        scaledMovedY = true;
                     }
                 }
                 else if (control.GetType().IsSubclassOf(typeof(PictureBox)) || control is PictureBox)
                 {
                     if (!scaledMovedL)
                     {
-                        if (control2.GetType().IsSubclassOf(typeof(Label)) || control2 is Label)
-                        {
-                            control.Left = getRightAnchoredControlX(control, control.Width, control2, pinnedToParent, level, smallControlOffsetX);
-
-                            if (!scaledMovedY)
-                            {
-                                control.Top = getPictureBoxY(control.Height, control2);
-                                scaledMovedY = true;
-                            }
-                        }
+                        if (control2X.GetType().IsSubclassOf(typeof(Label)) || control2X is Label)
+                            control.Left = getRightAnchoredControlX(control, control.Width, control2X, pinnedToParentX, levelX, smallControlOffsetX);
                         else
-                        {
-                            control.Left = getRightAnchoredControlX(control, control.Width, control2, pinnedToParent, level, control.Margin.Right + control2.Margin.Left);
-                        }
+                            control.Left = getRightAnchoredControlX(control, control.Width, control2X, pinnedToParentX, levelX, control.Margin.Right + control2X.Margin.Left);
 
                         scaledMovedL = true;
                     }
                 }
-                //control2 right anchored
-                else if (((control2.Anchor & AnchorStyles.Left) == 0 && (control2.Anchor & AnchorStyles.Right) != 0) || level > 0)
+                //control2X right anchored
+                else if ((control2X.Anchor & AnchorStyles.Left) == 0 && (control2X.Anchor & AnchorStyles.Right) != 0)
                 {
                     if (!scaledMovedL)
                     {
-                        control.Left = getRightAnchoredControlX(control, control.Width, control2, pinnedToParent, level);
+                        control.Left = getRightAnchoredControlX(control, control.Width, control2X, pinnedToParentX, levelX);
                         scaledMovedL = true;
                     }
                 }
-                //control2 must NOT be left anchored. See below.
-                else if ((control2.Anchor & AnchorStyles.Left) != 0 && (control2.Anchor & AnchorStyles.Right) == 0)
+                //control2X must NOT be left anchored. See below.
+                else if ((control2X.Anchor & AnchorStyles.Left) != 0 && (control2X.Anchor & AnchorStyles.Right) == 0)
                 {
-                    throw new Exception("Invalid control2 anchoring for control: " + control.Name + "! Expected anchor is not left.");
+                    throw new Exception("Invalid control2X anchoring for control: " + control.Name + "! Expected anchor is not left.");
                 }
-                //control2 must NOT be not anchored
-                else if ((control2.Anchor & AnchorStyles.Left) == 0 && (control2.Anchor & AnchorStyles.Right) == 0)
+                //control2X must NOT be not anchored
+                else if ((control2X.Anchor & AnchorStyles.Left) == 0 && (control2X.Anchor & AnchorStyles.Right) == 0)
                 {
-                    throw new Exception("Invalid control2 anchoring for control: " + control.Name + "! Expected anchor is not none.");
+                    throw new Exception("Invalid control2X anchoring for control: " + control.Name + "! Expected anchor is not none.");
                 }
             }
 
 
-            SetControlTagReferredNameMarksRemarks(control, null, scaledMovedL, scaledMovedR, scaledMovedY);
+            SetControlTagReferredNameMarksRemarks(control, null, scaledMovedL, scaledMovedR, scaledMovedT);
 
-            if (control2 != null)
-                SetControlTagReferredNameMarksRemarks(control2, null, scaledMovedL2, scaledMovedR2, scaledMovedY2);
+            if (control2X != null)
+                SetControlTagReferredNameMarksRemarks(control2X, null, scaledMovedL2, scaledMovedR2);
+        }
+
+        public void moveScaleControlDependentReferringControlsY(Control control)
+        {
+            if (control.GetType().IsSubclassOf(typeof(Form)) || control is Form)
+                return;
+
+
+            controlsReferencedY.TryGetValue(control, out Control referringControlY);
+
+            (_, _, Control control2Y, int levelY, _, _, bool scaledMovedT, bool scaledMovedB, string[] remarks) = GetReferredControlControlLevelMarksRemarks(control);
+            bool pinnedToParentY = remarks.Contains("pinned-to-parent-y");
+
+            //control is top & bottom anchored. Let's move/scale it at the end (in another function).
+            if ((control.Anchor & AnchorStyles.Top) != 0 && (control.Anchor & AnchorStyles.Bottom) != 0)
+            {
+                if (!topBottomAnchoredControls.Contains(control))
+                    topBottomAnchoredControls.Add(control);
+
+                return;
+            }
+
+
+            //control is top anchored
+            if (referringControlY != null && (control.Anchor & AnchorStyles.Top) != 0 && (control.Anchor & AnchorStyles.Bottom) == 0)
+                moveScaleControlDependentReferringControlsY(referringControlY);
+            //referringControl is top anchored, control must be top & bottom anchored (top anchored only is considered above) 
+            else if (referringControlY != null && (referringControlY.Anchor & AnchorStyles.Top) != 0 && (referringControlY.Anchor & AnchorStyles.Bottom) != 0)
+                moveScaleControlDependentReferringControlsY(referringControlY);
+
+
+            //Special case. Will move/scale it to parent. Let's proceed further...
+            if (pinnedToParentY)
+                ;
+            //No control2Y and control is NOT top & bottom anchored (see above)
+            else if (control2Y == null)
+                return;
+            //control2Y is bottom anchored and control is NOT top & bottom anchored (see earlier)
+            else if ((control2Y.Anchor & AnchorStyles.Top) == 0 && (control2Y.Anchor & AnchorStyles.Bottom) != 0)
+                moveScaleControlDependentReferringControlsY(control2Y);
+
+
+
+            if (scaledMovedT && scaledMovedB)
+                return;
+
+
+            bool scaledMovedT2 = true;
+            bool scaledMovedB2 = true;
+
+            if (control2Y != null)
+                (_, _, _, _, _, scaledMovedT2, scaledMovedB2, _) = GetControlTagReferredNamesMarksRemarks(control2Y);
+
+
+            //control top anchored
+            if ((control.Anchor & AnchorStyles.Top) != 0 && (control.Anchor & AnchorStyles.Bottom) == 0)
+            {
+                if (pinnedToParentY || levelY > 0)
+                {
+                    if (!scaledMovedT)
+                    {
+                        var parent = control2Y;
+                        if (parent == null)
+                            parent = control.Parent;
+
+                        control.Top = parent.Padding.Top + control.Margin.Top;
+                        scaledMovedT = true;
+                    }
+                }
+
+                if (control2Y != null)
+                {
+                    //control2Y top anchored
+                    if ((control2Y.Anchor & AnchorStyles.Top) != 0 && (control2Y.Anchor & AnchorStyles.Bottom) == 0)
+                    {
+                        if (!scaledMovedT2)
+                        {
+                            control2Y.Top = control.Top + control.Height + control2Y.Margin.Top + control.Margin.Bottom;
+                            scaledMovedT2 = true;
+                        }
+                    }
+                    //control2Y must NOT be bottom anchored. See below.
+                    else if ((control2Y.Anchor & AnchorStyles.Top) == 0 && (control2Y.Anchor & AnchorStyles.Bottom) != 0)
+                    {
+                        throw new Exception("Invalid control2Y anchoring for control: " + control.Name + "! Expected anchor is not bottom.");
+                    }
+                    //control2Y must NOT be not anchored
+                    else if ((control2Y.Anchor & AnchorStyles.Top) == 0 && (control2Y.Anchor & AnchorStyles.Bottom) == 0)
+                    {
+                        throw new Exception("Invalid control2Y anchoring for control: " + control.Name + "! Expected anchor is not none.");
+                    }
+                }
+            }
+            //control bottom anchored
+            else if ((control.Anchor & AnchorStyles.Top) == 0 && (control.Anchor & AnchorStyles.Bottom) != 0)
+            {
+                if (pinnedToParentY || levelY > 0)
+                {
+                    if (!scaledMovedT)
+                    {
+                        var parent = control2Y;
+                        if (parent == null)
+                            parent = control.Parent;
+
+                        control.Top = GetControlSize(parent).Height - control.Height - (parent.Padding.Bottom + control.Margin.Bottom);
+                        scaledMovedT = true;
+                    }
+                }
+                //control2Y bottom anchored
+                else if ((control2Y.Anchor & AnchorStyles.Top) == 0 && (control2Y.Anchor & AnchorStyles.Bottom) != 0)
+                {
+                    if (!scaledMovedT)
+                    {
+                        control.Top = getBottomAnchoredControlY(control, control.Height, control2Y, pinnedToParentY, levelY);
+                        scaledMovedT = true;
+                    }
+                }
+                //control2Y must NOT be top anchored. See below.
+                else if ((control2Y.Anchor & AnchorStyles.Top) != 0 && (control2Y.Anchor & AnchorStyles.Bottom) == 0)
+                {
+                    throw new Exception("Invalid control2Y anchoring for control: " + control.Name + "! Expected anchor is not top.");
+                }
+                //control2Y must NOT be not anchored
+                else if ((control2Y.Anchor & AnchorStyles.Top) == 0 && (control2Y.Anchor & AnchorStyles.Bottom) == 0)
+                {
+                    throw new Exception("Invalid control2Y anchoring for control: " + control.Name + "! Expected anchor is not none.");
+                }
+            }
+
+
+            SetControlTagReferredNameMarksRemarks(control, null, false, false, scaledMovedT, scaledMovedB);
+
+            if (control2Y != null)
+                SetControlTagReferredNameMarksRemarks(control2Y, null, false, false, scaledMovedT2, scaledMovedB2);
         }
 
         public void scaleMoveLeftRightAnchoredControls()
         {
             foreach (var control in leftRightAnchoredControls)
             {
-                controlsReferenced.TryGetValue(control, out var controlReferencing);
-                controlsReferences.TryGetValue(control, out var controlReference);
+                controlsReferencedX.TryGetValue(control, out var controlReferencing);
+                controlsReferencesX.TryGetValue(control, out var controlReference);
 
-                (_, _, _, _, _, string[] remarks) = GetControlTagReferredNameMarksRemarks(control);
-                bool pinnedToParent = remarks.Contains("pinned-to-parent");
-                int controlReferencingLevel = GetControlLevel(controlReferencing, control); 
+                (_, _, _, _, _, _, _, string[] remarks) = GetControlTagReferredNamesMarksRemarks(control);
+                bool pinnedToParentX = remarks.Contains("pinned-to-parent-x");
+                int controlReferencingLevel = GetControlLevel(controlReferencing, control);
 
                 int controlRNew;
 
                 if (controlReferencing != null && controlReferencingLevel == 0 && controlReference != null)
                 {
-                    (int controlReferencingLeft, int controlReferencingRight, int controlReferencingMarginLeft, int controlReferencingMarginRight) = GetControl2LeftRightMarginsOrParent0WidthPaddings(control, controlReferencing, pinnedToParent);
-                    (int controlReferenceLeft, int controlReferenceRight, int controlReferenceMarginLeft, int controlReferenceMarginRight) = GetControl2LeftRightMarginsOrParent0WidthPaddings(control, controlReference, pinnedToParent);
+                    (int controlReferencingLeft, int controlReferencingRight, int controlReferencingMarginLeft, int controlReferencingMarginRight) = GetControl2LeftRightMarginsOrParent0WidthPaddings(control, controlReferencing, pinnedToParentX);
+                    (int controlReferenceLeft, int controlReferenceRight, int controlReferenceMarginLeft, int controlReferenceMarginRight) = GetControl2LeftRightMarginsOrParent0WidthPaddings(control, controlReference, pinnedToParentX);
 
                     controlRNew = controlReferenceLeft - (controlReferenceMarginLeft + control.Margin.Right);
                     control.Left = controlReferencingRight + (controlReferencingMarginRight + control.Margin.Left);
                     control.Width = controlRNew - control.Left;
-                
+
                 }
                 else if (controlReferencing != null && controlReferencingLevel == 0 && controlReference == null)
                 {
-                    (int controlReferencingLeft, int controlReferencingRight, int controlReferencingMarginLeft, int controlReferencingMarginRight) = GetControl2LeftRightMarginsOrParent0WidthPaddings(control, controlReferencing, pinnedToParent);
+                    (int controlReferencingLeft, int controlReferencingRight, int controlReferencingMarginLeft, int controlReferencingMarginRight) = GetControl2LeftRightMarginsOrParent0WidthPaddings(control, controlReferencing, pinnedToParentX);
 
                     controlRNew = control.Left + control.Width;
                     control.Left = controlReferencingLeft + (controlReferencingMarginRight + control.Margin.Left);
@@ -891,13 +1075,13 @@ namespace MusicBeePlugin
                 }
                 else if ((controlReferencing == null || controlReferencingLevel > 0) && controlReference != null)
                 {
-                    (int controlReferenceLeft, int controlReferenceRight, int controlReferenceMarginLeft, int controlReferenceMarginRight) = GetControl2LeftRightMarginsOrParent0WidthPaddings(control, controlReference, pinnedToParent);
+                    (int controlReferenceLeft, int controlReferenceRight, int controlReferenceMarginLeft, int controlReferenceMarginRight) = GetControl2LeftRightMarginsOrParent0WidthPaddings(control, controlReference, pinnedToParentX);
 
-                    if (pinnedToParent && GetControlLevel(control, controlReference) > 0) //Pinned to controlReference (i.e. controlReference is a parent)
+                    if (pinnedToParentX && GetControlLevel(control, controlReference) > 0) //Pinned to controlReference (i.e. controlReference is a parent)
                     {
-                        (int controlReferencingLeft, int controlReferencingRight, int controlReferencingMarginLeft, int controlReferencingMarginRight) = GetControl2LeftRightMarginsOrParent0WidthPaddings(control, control.Parent, true);
+                        //(int controlReferencingLeft, int controlReferencingRight, int controlReferencingMarginLeft, int controlReferencingMarginRight) = GetControl2LeftRightMarginsOrParent0WidthPaddings(control, control.Parent, true);
 
-                        control.Left = controlReferencingMarginRight + control.Margin.Left;
+                        control.Left = controlReferenceMarginRight + control.Margin.Left;
                         controlRNew = controlReferenceRight - (controlReferenceMarginRight + control.Margin.Right);
                     }
                     else
@@ -912,7 +1096,63 @@ namespace MusicBeePlugin
                     //Nothing to do. Lets keep auto-scaled scaling/position... 
                 }
             }
-       }
+        }
+
+        public void scaleMoveTopBottomAnchoredControls()
+        {
+            foreach (var control in topBottomAnchoredControls)
+            {
+                controlsReferencedY.TryGetValue(control, out var controlReferencing);
+                controlsReferencesY.TryGetValue(control, out var controlReference);
+
+                (_, _, _, _, _, _, _, string[] remarks) = GetControlTagReferredNamesMarksRemarks(control);
+                bool pinnedToParentY = remarks.Contains("pinned-to-parent-y");
+                int controlReferencingLevel = GetControlLevel(controlReferencing, control);
+
+                int controlRNew;
+
+                if (controlReferencing != null && controlReferencingLevel == 0 && controlReference != null)
+                {
+                    (int controlReferencingTop, int controlReferencingBottom, int controlReferencingMarginTop, int controlReferencingMarginBottom) = GetControl2TopBottomMarginsOrParent0HeightPaddings(control, controlReferencing, pinnedToParentY);
+                    (int controlReferenceTop, int controlReferenceBottom, int controlReferenceMarginTop, int controlReferenceMarginBottom) = GetControl2TopBottomMarginsOrParent0HeightPaddings(control, controlReference, pinnedToParentY);
+
+                    controlRNew = controlReferenceTop - (controlReferenceMarginTop + control.Margin.Bottom);
+                    control.Top = controlReferencingBottom + (controlReferencingMarginBottom + control.Margin.Top);
+                    control.Height = controlRNew - control.Top;
+
+                }
+                else if (controlReferencing != null && controlReferencingLevel == 0 && controlReference == null)
+                {
+                    (int controlReferencingTop, int controlReferencingBottom, int controlReferencingMarginTop, int controlReferencingMarginBottom) = GetControl2TopBottomMarginsOrParent0HeightPaddings(control, controlReferencing, pinnedToParentY);
+
+                    controlRNew = control.Top + control.Height;
+                    control.Top = controlReferencingTop + (controlReferencingMarginBottom + control.Margin.Top);
+                    control.Height = controlRNew - control.Top;
+                }
+                else if ((controlReferencing == null || controlReferencingLevel > 0) && controlReference != null)
+                {
+                    (int controlReferenceTop, int controlReferenceBottom, int controlReferenceMarginTop, int controlReferenceMarginBottom) = GetControl2TopBottomMarginsOrParent0HeightPaddings(control, controlReference, pinnedToParentY);
+
+                    if (pinnedToParentY && GetControlLevel(control, controlReference) > 0) //Pinned to controlReference (i.e. controlReference is a parent)
+                    {
+                        //(int controlReferencingTop, int controlReferencingBottom, int controlReferencingMarginTop, int controlReferencingMarginBottom) = GetControl2TopBottomMarginsOrParent0HeightPaddings(control, control.Parent, true);
+
+                        control.Top = controlReferenceMarginBottom + control.Margin.Top;
+                        controlRNew = controlReferenceBottom - (controlReferenceMarginBottom + control.Margin.Bottom);
+                    }
+                    else
+                    {
+                        controlRNew = controlReferenceTop - (controlReferenceMarginTop + control.Margin.Bottom);
+                    }
+
+                    control.Height = controlRNew - control.Top;
+                }
+                else //if (controlReferencing == null && controlReference == null)
+                {
+                    //Nothing to do. Lets keep auto-scaled scaling/position... 
+                }
+            }
+        }
 
         public void skinControl(Control control)
         {
@@ -926,7 +1166,7 @@ namespace MusicBeePlugin
 
             if (control.GetType().IsSubclassOf(typeof(SplitContainer)) || control is SplitContainer)
             {
-                SplitContainer splitContainer = (SplitContainer) control;
+                SplitContainer splitContainer = (SplitContainer)control;
 
                 splitContainer.Panel1.BackColor = FormBackColor;
                 splitContainer.Panel1.ForeColor = AccentColor;
@@ -1016,7 +1256,7 @@ namespace MusicBeePlugin
             {
                 control.BackColor = InputControlBackColor;
                 control.ForeColor = InputControlForeColor;
-                
+
                 (control as ListBox).BorderStyle = BorderStyle.Fixed3D;
             }
             else if (control.GetType().IsSubclassOf(typeof(Label)) || control is Label)
@@ -1047,7 +1287,7 @@ namespace MusicBeePlugin
                     control.ForeColor = GetHighlightColor(control.ForeColor, stdColor, FormBackColor, 0.80f);
                 }
 
-                (control as GroupBox).FlatStyle = FlatStyle.System;
+                (control as GroupBox).FlatStyle = FlatStyle.Standard;
             }
             else if (control.GetType().IsSubclassOf(typeof(CheckBox)) || control is CheckBox)
             {
@@ -1087,17 +1327,28 @@ namespace MusicBeePlugin
             for (int i = allControls.Count - 1; i >= 0; i--)
             {
                 var control = allControls[i];
-                
-                (Control control2, int level, _, _, _, string[] remarks) = GetReferredControlControlLevelMarksRemarks(control);
 
-                if (control2 != null)
+                (Control control2X, int levelX, Control control2Y, int levelY, _, _, _, _, string[] remarks) = GetReferredControlControlLevelMarksRemarks(control);
+
+                if (control2X != null)
                 {
-                    controlsReferences.AddReplace(control, control2);
-                    controlsReferenced.AddReplace(control2, control);
+                    controlsReferencesX.AddReplace(control, control2X);
+                    controlsReferencedX.AddReplace(control2X, control);
                 }
 
-                if (remarks.Contains("pinned-to-parent") && !pinnedToParentControls.Contains(control))
-                    pinnedToParentControls.Add(control);
+                if (remarks.Contains("pinned-to-parent-x") && !pinnedToParentControlsX.Contains(control))
+                    pinnedToParentControlsX.Add(control);
+
+
+                if (control2Y != null)
+                {
+                    controlsReferencesY.AddReplace(control, control2Y);
+                    controlsReferencedY.AddReplace(control2Y, control);
+                }
+
+                if (remarks.Contains("pinned-to-parent-y") && !pinnedToParentControlsY.Contains(control))
+                    pinnedToParentControlsY.Add(control);
+
 
                 if (remarks.Contains("non-defaultable") && !nonDefaultableButtons.Contains(control))
                     nonDefaultableButtons.Add(control as Button);
@@ -1132,9 +1383,13 @@ namespace MusicBeePlugin
                 preMoveScaleControl(allControls[i]);
 
             for (int i = allControls.Count - 1; i >= 0; i--)
-                moveScaleControlDependentReferringControls(allControls[i]);
+                moveScaleControlDependentReferringControlsY(allControls[i]);
+
+            for (int i = allControls.Count - 1; i >= 0; i--)
+                moveScaleControlDependentReferringControlsX(allControls[i]);
 
             scaleMoveLeftRightAnchoredControls();
+            scaleMoveTopBottomAnchoredControls();
         }
 
         protected void setInitialFormMaximumMinimumSize(Size initialMinimumSize, Size initialMaximumSize, bool sameMinMaxWidth, bool sameMinMaxHeight)
@@ -1236,7 +1491,7 @@ namespace MusicBeePlugin
         {
             List<Control> ownFontControls = new List<Control>();
 
-            for (int i = 0; i <  allControls.Count; i++) //Required for correct DPI scaling
+            for (int i = 0; i < allControls.Count; i++) //Required for correct DPI scaling
             {
                 var control = allControls[i];
 
@@ -1304,7 +1559,7 @@ namespace MusicBeePlugin
 
             if (mbThisFormFontEquality == FontEquality.DifferentFontUnits)
             {
-                MessageBox.Show(MbForm, "Unsupported MusicBee font type!\n" + 
+                MessageBox.Show(MbForm, "Unsupported MusicBee font type!\n" +
                     "Either choose different font in MusicBee preferences or disable using skin colors in plugin settings.",
                     string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
@@ -1384,7 +1639,7 @@ namespace MusicBeePlugin
                 if (maximizedHeight > Screen.FromControl(this).WorkingArea.Height)
                     maximizedHeight = Screen.FromControl(this).WorkingArea.Height;
 
-                MaximizedBounds = new Rectangle(Screen.FromControl(this).WorkingArea.Left, 0, 
+                MaximizedBounds = new Rectangle(Screen.FromControl(this).WorkingArea.Left, 0,
                     Screen.FromControl(this).WorkingArea.Width, maximizedHeight);
             }
         }
@@ -1396,8 +1651,6 @@ namespace MusicBeePlugin
                 //Common initialization
                 if (MbForm.IsDisposed)
                     MbForm = (Form)FromHandle(MbApiInterface.MB_GetWindowHandle());
-
-                //MbForm.AddOwnedForm(this);//******
 
                 clickedButton = EmptyButton;
 
@@ -1438,9 +1691,7 @@ namespace MusicBeePlugin
             if (width != 0 && height != 0 && !fixedSize)
             {
                 width = (int)Math.Round(width * hDpiFormScaling);
-
-                if (!fixedSize)
-                    height = (int)Math.Round(height * vDpiFormScaling);
+                height = (int)Math.Round(height * vDpiFormScaling);
 
 
                 if (MinimumSize.Width != 0 && width < MinimumSize.Width)
@@ -1496,32 +1747,8 @@ namespace MusicBeePlugin
             skinMoveScaleAllControls();
 
 
-            if (FormShowDelay == 0)
-            {
-                SetBounds(left, top, width, height);
-                ignoreSizePositionChanges = false;
-                showFormInternal();
-            }
-            else
-            {
-                SetBounds(-20 - Width, -20 - Height, Width, Height);
-                delayedShowFormTimer = new System.Threading.Timer(showFormDelayedInternal, null, FormShowDelay, Timeout.Infinite);
-                showFormInternal();
-            }
-        }
-
-        protected void showFormDelayedInternal(object state)
-        {
-            delayedShowFormTimer.Dispose();
-            delayedShowFormTimer = null;
-
-            Invoke(new Action(() => {
-                if (!IsDisposed)
-                {
-                    SetBounds(left, top, width, height);
-                    ignoreSizePositionChanges = false;
-                }
-            }));
+            SetBounds(-20 - Width, -20 - Height, Width, Height);
+            showFormInternal();
         }
 
         protected void showFormInternal()
@@ -1602,6 +1829,29 @@ namespace MusicBeePlugin
             //Implemented in derived classes... 
         }
 
+        private void PluginWindowTemplate_Load(object sender, EventArgs e)
+        {
+            initializeForm();
+        }
+
+        private void PluginWindowTemplate_Shown(object sender, EventArgs e)
+        {
+            for (int i = allControls.Count - 1; i >= 0; i--)
+            {
+                if (allControls[i].Focused && allControls[i].Controls.Count == 0)
+                {
+                    lastSelectedControl = allControls[i];
+                    break;
+                }
+            }
+
+            Application.DoEvents();
+
+            Activate();
+            SetBounds(left, top, width, height);
+            ignoreSizePositionChanges = false;
+        }
+
         private void PluginWindowTemplate_Move(object sender, EventArgs e)
         {
             if (ignoreSizePositionChanges)
@@ -1668,23 +1918,6 @@ namespace MusicBeePlugin
                 Height = height;
 
                 //windowWidth = 0;
-            }
-        }
-
-        private void PluginWindowTemplate_Load(object sender, EventArgs e)
-        {
-            initializeForm();
-        }
-
-        private void PluginWindowTemplate_Shown(object sender, EventArgs e)
-        {
-            for (int i = allControls.Count - 1; i >= 0; i--)
-            {
-                if (allControls[i].Focused && allControls[i].Controls.Count == 0)
-                {
-                    lastSelectedControl = allControls[i];
-                    break;
-                }
             }
         }
 
@@ -1812,7 +2045,7 @@ namespace MusicBeePlugin
             var currentWindowSettings = findCreateSavedWindowSettings(true);
 
 
-            if(WindowState == FormWindowState.Normal)
+            if (WindowState == FormWindowState.Normal)
             {
                 width = Width;
                 height = Height;
@@ -2233,7 +2466,7 @@ namespace MusicBeePlugin
         }
 
         // clearPreview = 0: //--- ??? //****** What is this?
-        protected void clickOnPreviewButton(DataGridView previewTable, PrepareOperation prepareOperation, ThreadStart operation, 
+        protected void clickOnPreviewButton(DataGridView previewTable, PrepareOperation prepareOperation, ThreadStart operation,
             Button clickedButtonParam, Button okButtonParam, Button closeButtonParam, int clearPreview = 0)
         {
             if ((previewTable.Rows.Count == 0 || backgroundTaskIsWorking() || clearPreview == 2) && clearPreview != 1)

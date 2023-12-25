@@ -160,7 +160,7 @@ namespace MusicBeePlugin
 
             SetResultingSbText();
 
-            if (SavedSettings.notifyWhenCalculationCompleted) MessageBox.Show(this, MsgBackgroundTaskIsCompleted, 
+            if (SavedSettings.notifyWhenCalculationCompleted) MessageBox.Show(this, MsgBackgroundTaskIsCompleted,
                 string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 

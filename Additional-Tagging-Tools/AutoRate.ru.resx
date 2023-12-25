@@ -353,7 +353,7 @@
     <value>Установить 5 звездочек, если:</value>
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1034, 383</value>
+    <value>659, 383</value>
   </data>
   <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
     <value>673, 183</value>
@@ -441,8 +441,14 @@
   <data name="autoRateAtStartUpCheckBoxLabel.Text" xml:space="preserve">
     <value>Автоматически установить рейтинги при запуске</value>
   </data>
+  <data name="buttonSave.Location" type="System.Drawing.Point, System.Drawing">
+    <value>659, 8</value>
+  </data>
   <data name="buttonSave.Text" xml:space="preserve">
     <value>Сохранить настройки</value>
+  </data>
+  <data name="playsPerDayTagList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>311, 36</value>
   </data>
   <data name="storePlaysPerDayCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>270, 15</value>
@@ -450,11 +456,20 @@
   <data name="storePlaysPerDayCheckBoxLabel.Text" xml:space="preserve">
     <value>Сохранять число воспроизведений в день в тег:</value>
   </data>
+  <data name="holdsAtStartUpCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>684, 42</value>
+  </data>
   <data name="holdsAtStartUpCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>358, 15</value>
   </data>
   <data name="holdsAtStartUpCheckBoxLabel.Text" xml:space="preserve">
     <value>Автоматически рассчитывать пороговые значения при запуске</value>
+  </data>
+  <data name="calculateThresholdsAtStartUpCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>659, 42</value>
+  </data>
+  <data name="autoRatingTagList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>160, 8</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>143, 15</value>

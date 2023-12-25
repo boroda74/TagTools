@@ -1,16 +1,14 @@
-﻿using System;
+﻿using ExtensionMethods;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using static MusicBeePlugin.Plugin;
-using ExtensionMethods;
 
 namespace MusicBeePlugin
 {
     public partial class AutoRateCommand : PluginWindowTemplate
     {
-        protected const int FormShowDelay = 2750; //milliseconds
-
         private string[] files = new string[0];
 
         private static int NumberOfFiles;
@@ -342,7 +340,7 @@ namespace MusicBeePlugin
 
             SetResultingSbText();
 
-            if (SavedSettings.notifyWhenAutoratingCompleted) MessageBox.Show(this, MsgBackgroundTaskIsCompleted, string.Empty, 
+            if (SavedSettings.notifyWhenAutoratingCompleted) MessageBox.Show(this, MsgBackgroundTaskIsCompleted, string.Empty,
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -874,7 +872,7 @@ namespace MusicBeePlugin
         private void checkBox15Label_Click(object sender, EventArgs e)
         {
             checkBox15.Checked = !checkBox15.Checked;
-            checkBoxOneAndHalf_CheckedChanged(null , null);
+            checkBoxOneAndHalf_CheckedChanged(null, null);
         }
 
         private void checkBoxOne_CheckedChanged(object sender, EventArgs e)

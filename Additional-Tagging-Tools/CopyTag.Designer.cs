@@ -114,7 +114,7 @@
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.dirtyErrorProvider.SetIconAlignment(this.buttonCancel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonCancel.IconAlignment"))));
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Tag = "#fieldsPanel@pinned-to-parent@non-defaultable";
+            this.buttonCancel.Tag = "#fieldsPanel@non-defaultable";
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // appendCheckBox
@@ -157,6 +157,7 @@
             this.previewTable.Name = "previewTable";
             this.previewTable.RowHeadersVisible = false;
             this.previewTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.previewTable.Tag = "#CopyTagCommand&CopyTagCommand@pinned-to-parent-x";
             this.previewTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.previewTable_CellContentClick);
             // 
             // File
@@ -261,7 +262,7 @@
             this.appendedTextBox.FormattingEnabled = true;
             this.dirtyErrorProvider.SetIconAlignment(this.appendedTextBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("appendedTextBox.IconAlignment"))));
             this.appendedTextBox.Name = "appendedTextBox";
-            this.appendedTextBox.Tag = "#fieldsPanel@pinned-to-parent";
+            this.appendedTextBox.Tag = "#fieldsPanel";
             this.appendedTextBox.Leave += new System.EventHandler(this.appendedTextBox_Leave);
             // 
             // addedTextBox
@@ -272,7 +273,7 @@
             this.addedTextBox.FormattingEnabled = true;
             this.dirtyErrorProvider.SetIconAlignment(this.addedTextBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("addedTextBox.IconAlignment"))));
             this.addedTextBox.Name = "addedTextBox";
-            this.addedTextBox.Tag = "#fieldsPanel@pinned-to-parent";
+            this.addedTextBox.Tag = "#fieldsPanel";
             this.addedTextBox.Leave += new System.EventHandler(this.addedTextBox_Leave);
             // 
             // browseButton
@@ -281,7 +282,7 @@
             this.browseButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.dirtyErrorProvider.SetIconAlignment(this.browseButton, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("browseButton.IconAlignment"))));
             this.browseButton.Name = "browseButton";
-            this.browseButton.Tag = "#fieldsPanel@pinned-to-parent@non-defaultable";
+            this.browseButton.Tag = "#fieldsPanel@non-defaultable";
             this.browseButton.Click += new System.EventHandler(this.browseButton_Click);
             // 
             // buttonSettings
@@ -349,7 +350,7 @@
             this.fieldsPanel.Controls.Add(this.buttonPreview);
             this.fieldsPanel.Controls.Add(this.buttonSettings);
             this.fieldsPanel.Name = "fieldsPanel";
-            this.fieldsPanel.Tag = "#CopyTagCommand@pinned-to-parent";
+            this.fieldsPanel.Tag = "#CopyTagCommand&previewTable@pinned-to-parent-x";
             // 
             // CopyTagCommand
             // 

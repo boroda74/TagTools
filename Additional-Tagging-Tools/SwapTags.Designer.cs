@@ -35,7 +35,7 @@
             // 
             resources.ApplyResources(this.SwapTagLabel, "SwapTagLabel");
             this.SwapTagLabel.Name = "SwapTagLabel";
-            this.SwapTagLabel.Tag = "#sourceTagList";
+            this.SwapTagLabel.Tag = "#sourceTagList@pinned-to-parent-x";
             // 
             // sourceTagList
             // 
@@ -57,6 +57,7 @@
             resources.ApplyResources(this.buttonCancel, "buttonCancel");
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Tag = "#SwapTagsCommand&SwapTagsCommand@non-defaultable";
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // forTracksLabel
@@ -70,6 +71,7 @@
             this.dirtyErrorProvider.SetError(this.buttonOK, resources.GetString("buttonOK.Error"));
             this.dirtyErrorProvider.SetIconAlignment(this.buttonOK, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonOK.IconAlignment"))));
             this.buttonOK.Name = "buttonOK";
+            this.buttonOK.Tag = "#buttonCancel&SwapTagsCommand";
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // destinationTagList

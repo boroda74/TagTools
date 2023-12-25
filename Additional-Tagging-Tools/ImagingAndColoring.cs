@@ -234,7 +234,7 @@ namespace MusicBeePlugin
 
             float backBr = backColor.GetBrightness();
 
-            float resultHue = (highlightHue * highlightWeight * highlightSat * highlightBr + sampleHue * (1 - highlightWeight) * sampleSat * sampleBr) 
+            float resultHue = (highlightHue * highlightWeight * highlightSat * highlightBr + sampleHue * (1 - highlightWeight) * sampleSat * sampleBr)
                 / (highlightWeight * highlightSat * highlightBr + (1 - highlightWeight) * sampleSat * sampleBr);
             float resultSat = highlightSat * 0.3f + sampleSat * 0.7f;
             float resultBr = highlightBr * highlightWeight + sampleBr * (1 - highlightWeight);
@@ -285,7 +285,7 @@ namespace MusicBeePlugin
         public static Color InvertAverageBrightness(Color sampleColor1)
         {
             float invAvgBr = (1 - ((GetAverageBrightness(sampleColor1) - 0.5f) * 2)) / 2.02f;
-            return Color.FromArgb(sampleColor1.A, (int)Math.Round(sampleColor1.R * invAvgBr), (int)Math.Round(sampleColor1.G * invAvgBr),  (int)Math.Round(sampleColor1.B * invAvgBr));
+            return Color.FromArgb(sampleColor1.A, (int)Math.Round(sampleColor1.R * invAvgBr), (int)Math.Round(sampleColor1.G * invAvgBr), (int)Math.Round(sampleColor1.B * invAvgBr));
         }
 
         public static Color GetBitmapAverageColor(Bitmap img)

@@ -117,17 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="buttonCancel.Error" xml:space="preserve">
-    <value />
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="buttonCancel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="buttonCancel.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
     <value>852, 5</value>
@@ -147,77 +136,26 @@
   <data name="NewTag.HeaderText" xml:space="preserve">
     <value>Новое значение</value>
   </data>
-  <data name="previewTable.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="previewTable.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="previewTable.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>943, 244</value>
-  </data>
-  <data name="buttonSettings.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonSettings.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>949, 247</value>
   </data>
   <data name="buttonSettings.Location" type="System.Drawing.Point, System.Drawing">
     <value>591, 5</value>
   </data>
-  <data name="usedEncodingsList.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="usedEncodingsList.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="usedEncodingsList.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="usedEncodingsList.Location" type="System.Drawing.Point, System.Drawing">
     <value>669, 32</value>
   </data>
-  <data name="label4.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label4.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="label4.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="incorrectlyUsedEncodingLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>433, 36</value>
   </data>
-  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="incorrectlyUsedEncodingLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>226, 15</value>
   </data>
-  <data name="label4.Text" xml:space="preserve">
+  <data name="incorrectlyUsedEncodingLabel.Text" xml:space="preserve">
     <value>Ошибочно использованная кодировка:</value>
-  </data>
-  <data name="initialEncodingsList.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="initialEncodingsList.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="initialEncodingsList.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="initialEncodingsList.Location" type="System.Drawing.Point, System.Drawing">
     <value>215, 32</value>
-  </data>
-  <data name="label2.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label2.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="label2.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>143, 15</value>
@@ -225,74 +163,29 @@
   <data name="label2.Text" xml:space="preserve">
     <value>Изначальная кодировка:</value>
   </data>
-  <data name="buttonOK.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonOK.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="buttonOK.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
     <value>744, 5</value>
   </data>
   <data name="buttonOK.Text" xml:space="preserve">
     <value>Применить</value>
   </data>
-  <data name="label3.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label3.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="label3.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="forSelectedTracksLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>433, 9</value>
   </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="forSelectedTracksLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 15</value>
   </data>
-  <data name="label3.Text" xml:space="preserve">
+  <data name="forSelectedTracksLabel.Text" xml:space="preserve">
     <value>у выбранных треков</value>
-  </data>
-  <data name="sourceTagList.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="sourceTagList.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="sourceTagList.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="sourceTagList.Location" type="System.Drawing.Point, System.Drawing">
     <value>215, 5</value>
-  </data>
-  <data name="label1.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="label1.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>147, 15</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>Изменить кодировку тега</value>
-  </data>
-  <data name="controlsPanel.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="controlsPanel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="controlsPanel.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="controlsPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>961, 61</value>
@@ -904,9 +797,6 @@
         AAAAAAAA///+AP///gD///4A///+AP4A/gD8AH4A+Dg+APD8HgDx/h4A8f8eAOPBngDjwZ4A48GeAOPH
         ngDxxx4A8MYeAPBMPgD4AD4A/AB+AP8B/gD///4A///+AP///gA=
 </value>
-  </data>
-  <data name="buttonPreview.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="buttonPreview.Location" type="System.Drawing.Point, System.Drawing">
     <value>636, 5</value>

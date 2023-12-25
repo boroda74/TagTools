@@ -124,20 +124,35 @@
   <data name="buttonOK.Text" xml:space="preserve">
     <value>Копировать</value>
   </data>
+  <data name="buttonOK.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
     <value>463, 32</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Закрыть</value>
   </data>
-  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>557, 413</value>
+  <data name="buttonCancel.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="sourceTagList.Size" type="System.Drawing.Size, System.Drawing">
     <value>557, 204</value>
   </data>
+  <data name="sourceTagList.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="checkedSourceTagList.Size" type="System.Drawing.Size, System.Drawing">
     <value>557, 204</value>
+  </data>
+  <data name="checkedSourceTagList.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>557, 413</value>
+  </data>
+  <data name="tableLayoutPanel1.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="tagSetComboBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>557, 23</value>
@@ -147,11 +162,17 @@
 Чтобы переименовать текущий набор тегов, просто напишите новое 
 имя набора в этом поле. </value>
   </data>
+  <data name="checkUncheckAllCheckBox.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>528, 15</value>
+    <value>525, 15</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>☆ - Обычный тег  ★ - Свой тег  ✪ - Только для чтения  ❏ - Свойство файла  ♺ - Виртуальный</value>
+  </data>
+  <data name="label1.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="checkUncheckAllCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>149, 15</value>
@@ -159,8 +180,14 @@
   <data name="checkUncheckAllCheckBoxLabel.Text" xml:space="preserve">
     <value>Выбрать все/снять выбор</value>
   </data>
+  <data name="checkUncheckAllCheckBoxLabel.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="controlsPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>569, 62</value>
+  </data>
+  <data name="controlsPanel.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>569, 511</value>
@@ -170,5 +197,8 @@
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Копировать теги в буфер обмена</value>
+  </data>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value />
   </data>
 </root>

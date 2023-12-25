@@ -121,29 +121,6 @@
   <data name="splitContainer1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="splitContainer1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 79</value>
-  </data>
-  <data name="splitContainer1.Orientation" type="System.Windows.Forms.Orientation, System.Windows.Forms">
-    <value>Horizontal</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="tableLayoutPanel4.ColumnCount" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="panel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="groupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="descriptionBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="descriptionBox.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
   <metadata name="dirtyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>137, 9</value>
   </metadata>
@@ -159,9 +136,13 @@
   <data name="buttonPreview.Error" xml:space="preserve">
     <value>Error!</value>
   </data>
+  <data name="buttonPreview.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
+  </data>
   <data name="buttonPreview.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonPreview.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 43</value>
   </data>
@@ -171,6 +152,7 @@
   <data name="buttonPreview.Size" type="System.Drawing.Size, System.Drawing">
     <value>126, 23</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="buttonPreview.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
@@ -240,7 +222,46 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>987, 661</value>
   </data>
-  <data name="panel3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="autoApplyPresetsLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="autoApplyPresetsLabel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 9pt, style=Bold</value>
+  </data>
+  <data name="autoApplyPresetsLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
+  </data>
+  <data name="autoApplyPresetsLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="autoApplyPresetsLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 4</value>
+  </data>
+  <data name="autoApplyPresetsLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>12, 4, 12, 0</value>
+  </data>
+  <data name="autoApplyPresetsLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>962, 45</value>
+  </data>
+  <data name="autoApplyPresetsLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="autoApplyPresetsLabel.Text" xml:space="preserve">
+    <value>Select preset below to edit it or execute it for selected tracks. ~Tick presets to automatically execute them if track tags are edited/updated or new tracks are added to library. ~Click here to see ticked presets only. ~Presets ticked for auto-execution: %%TICKEDPRESETS%%~Presets containing &lt;ALL TAGS&gt; pseudo-tag can't be auto-executed, nor can be assigned hotkey to~Auto-execution of presets is disabled in plugin settings. </value>
+  </data>
+  <data name="&gt;&gt;autoApplyPresetsLabel.Name" xml:space="preserve">
+    <value>autoApplyPresetsLabel</value>
+  </data>
+  <data name="&gt;&gt;autoApplyPresetsLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;autoApplyPresetsLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;autoApplyPresetsLabel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="filtersPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
   <data name="filterComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -274,13 +295,13 @@
     <value>Hotkey assigned</value>
   </data>
   <data name="filterComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>794, 4</value>
+    <value>783, 4</value>
   </data>
   <data name="filterComboBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 3, 4, 3</value>
+    <value>4, 3, 7, 3</value>
   </data>
   <data name="filterComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 23</value>
+    <value>186, 23</value>
   </data>
   <data name="filterComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -298,7 +319,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;filterComboBox.Parent" xml:space="preserve">
-    <value>panel3</value>
+    <value>filtersPanel</value>
   </data>
   <data name="&gt;&gt;filterComboBox.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -333,7 +354,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="uncheckAllFiltersPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>750, 6</value>
+    <value>739, 6</value>
   </data>
   <data name="uncheckAllFiltersPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -357,7 +378,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;uncheckAllFiltersPictureBox.Parent" xml:space="preserve">
-    <value>panel3</value>
+    <value>filtersPanel</value>
   </data>
   <data name="&gt;&gt;uncheckAllFiltersPictureBox.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -394,7 +415,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="hotkeyPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>708, 6</value>
+    <value>697, 6</value>
   </data>
   <data name="hotkeyPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -421,7 +442,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;hotkeyPictureBox.Parent" xml:space="preserve">
-    <value>panel3</value>
+    <value>filtersPanel</value>
   </data>
   <data name="&gt;&gt;hotkeyPictureBox.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -468,7 +489,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="functionIdPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>678, 6</value>
+    <value>667, 6</value>
   </data>
   <data name="functionIdPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -495,7 +516,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;functionIdPictureBox.Parent" xml:space="preserve">
-    <value>panel3</value>
+    <value>filtersPanel</value>
   </data>
   <data name="&gt;&gt;functionIdPictureBox.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -533,7 +554,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="playlistPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>648, 6</value>
+    <value>637, 6</value>
   </data>
   <data name="playlistPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -560,7 +581,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;playlistPictureBox.Parent" xml:space="preserve">
-    <value>panel3</value>
+    <value>filtersPanel</value>
   </data>
   <data name="&gt;&gt;playlistPictureBox.ZOrder" xml:space="preserve">
     <value>4</value>
@@ -599,7 +620,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="userPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>618, 6</value>
+    <value>607, 6</value>
   </data>
   <data name="userPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -626,7 +647,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;userPictureBox.Parent" xml:space="preserve">
-    <value>panel3</value>
+    <value>filtersPanel</value>
   </data>
   <data name="&gt;&gt;userPictureBox.ZOrder" xml:space="preserve">
     <value>5</value>
@@ -666,7 +687,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="customizedPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>588, 6</value>
+    <value>577, 6</value>
   </data>
   <data name="customizedPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -693,7 +714,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;customizedPictureBox.Parent" xml:space="preserve">
-    <value>panel3</value>
+    <value>filtersPanel</value>
   </data>
   <data name="&gt;&gt;customizedPictureBox.ZOrder" xml:space="preserve">
     <value>6</value>
@@ -727,7 +748,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="predefinedPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>558, 6</value>
+    <value>547, 6</value>
   </data>
   <data name="predefinedPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -754,7 +775,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;predefinedPictureBox.Parent" xml:space="preserve">
-    <value>panel3</value>
+    <value>filtersPanel</value>
   </data>
   <data name="&gt;&gt;predefinedPictureBox.ZOrder" xml:space="preserve">
     <value>7</value>
@@ -798,7 +819,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="tickedOnlyPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>528, 6</value>
+    <value>517, 6</value>
   </data>
   <data name="tickedOnlyPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -825,7 +846,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tickedOnlyPictureBox.Parent" xml:space="preserve">
-    <value>panel3</value>
+    <value>filtersPanel</value>
   </data>
   <data name="&gt;&gt;tickedOnlyPictureBox.ZOrder" xml:space="preserve">
     <value>8</value>
@@ -840,7 +861,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="buttonSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>484, 4</value>
+    <value>473, 4</value>
   </data>
   <data name="buttonSettings.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -861,7 +882,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonSettings.Parent" xml:space="preserve">
-    <value>panel3</value>
+    <value>filtersPanel</value>
   </data>
   <data name="&gt;&gt;buttonSettings.ZOrder" xml:space="preserve">
     <value>9</value>
@@ -869,11 +890,14 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
   <data name="clearSearchButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
+  <data name="clearSearchButton.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
+  </data>
   <data name="clearSearchButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="clearSearchButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>441, 4</value>
+    <value>430, 4</value>
   </data>
   <data name="clearSearchButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 3, 4, 3</value>
@@ -894,7 +918,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;clearSearchButton.Parent" xml:space="preserve">
-    <value>panel3</value>
+    <value>filtersPanel</value>
   </data>
   <data name="&gt;&gt;clearSearchButton.ZOrder" xml:space="preserve">
     <value>10</value>
@@ -912,7 +936,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>4, 3, 4, 3</value>
   </data>
   <data name="searchTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>399, 23</value>
+    <value>388, 23</value>
   </data>
   <data name="searchTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -927,7 +951,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;searchTextBox.Parent" xml:space="preserve">
-    <value>panel3</value>
+    <value>filtersPanel</value>
   </data>
   <data name="&gt;&gt;searchTextBox.ZOrder" xml:space="preserve">
     <value>11</value>
@@ -939,10 +963,10 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="searchPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 6</value>
+    <value>7, 6</value>
   </data>
   <data name="searchPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
+    <value>7, 0, 0, 0</value>
   </data>
   <data name="searchPictureBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>19, 19</value>
@@ -960,69 +984,36 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;searchPictureBox.Parent" xml:space="preserve">
-    <value>panel3</value>
+    <value>filtersPanel</value>
   </data>
   <data name="&gt;&gt;searchPictureBox.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
-  <data name="panel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 48</value>
-  </data>
-  <data name="panel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>987, 32</value>
-  </data>
-  <data name="panel3.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;panel3.Name" xml:space="preserve">
-    <value>panel3</value>
-  </data>
-  <data name="&gt;&gt;panel3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panel3.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;panel3.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="autoApplyPresetsLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="autoApplyPresetsLabel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI Semibold, 9pt, style=Bold</value>
-  </data>
-  <data name="autoApplyPresetsLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+  <data name="filtersPanel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
   </data>
-  <data name="autoApplyPresetsLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="filtersPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 51</value>
   </data>
-  <data name="autoApplyPresetsLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 4</value>
+  <data name="filtersPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 0, 5, 0</value>
   </data>
-  <data name="autoApplyPresetsLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+  <data name="filtersPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>976, 32</value>
   </data>
-  <data name="autoApplyPresetsLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>961, 45</value>
+  <data name="filtersPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
-  <data name="autoApplyPresetsLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="&gt;&gt;filtersPanel.Name" xml:space="preserve">
+    <value>filtersPanel</value>
   </data>
-  <data name="autoApplyPresetsLabel.Text" xml:space="preserve">
-    <value>Select preset below to edit it or execute it for selected tracks. ~Tick presets to automatically execute them if track tags are edited/updated or new tracks are added to library. ~Click here to see ticked presets only. ~Presets ticked for auto-execution: %%TICKEDPRESETS%%~Presets containing &lt;ALL TAGS&gt; pseudo-tag can't be auto-executed, nor can be assigned hotkey to~Auto-execution of presets is disabled in plugin settings. </value>
+  <data name="&gt;&gt;filtersPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;autoApplyPresetsLabel.Name" xml:space="preserve">
-    <value>autoApplyPresetsLabel</value>
-  </data>
-  <data name="&gt;&gt;autoApplyPresetsLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;autoApplyPresetsLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;filtersPanel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;autoApplyPresetsLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;filtersPanel.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
@@ -1771,98 +1762,23 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
         ngDxxx4A8MYeAPBMPgD4AD4A/AB+AP8B/gD///4A///+AP///gA=
 </value>
   </data>
-  <data name="descriptionBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+  <data name="splitContainer1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
   </data>
-  <data name="descriptionBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 17</value>
+  <data name="splitContainer1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 82</value>
   </data>
-  <data name="descriptionBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 3, 4, 3</value>
+  <data name="splitContainer1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 0, 5, 5</value>
   </data>
-  <data name="descriptionBox.Multiline" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="splitContainer1.Orientation" type="System.Windows.Forms.Orientation, System.Windows.Forms">
+    <value>Horizontal</value>
   </data>
-  <data name="descriptionBox.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
-    <value>Vertical</value>
-  </data>
-  <data name="descriptionBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>950, 58</value>
-  </data>
-  <data name="descriptionBox.TabIndex" type="System.Int32, mscorlib">
+  <data name="tableLayoutPanel4.ColumnCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;descriptionBox.Name" xml:space="preserve">
-    <value>descriptionBox</value>
-  </data>
-  <data name="&gt;&gt;descriptionBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;descriptionBox.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;descriptionBox.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="groupBox1Label.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="groupBox1Label.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI Semibold, 9pt, style=Bold</value>
-  </data>
-  <data name="groupBox1Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, -1</value>
-  </data>
-  <data name="groupBox1Label.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 15</value>
-  </data>
-  <data name="groupBox1Label.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="groupBox1Label.Text" xml:space="preserve">
-    <value>  Preset description  </value>
-  </data>
-  <data name="&gt;&gt;groupBox1Label.Name" xml:space="preserve">
-    <value>groupBox1Label</value>
-  </data>
-  <data name="&gt;&gt;groupBox1Label.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox1Label.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;groupBox1Label.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="groupBox1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>TopLeft</value>
-  </data>
-  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 189</value>
-  </data>
-  <data name="groupBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 3, 4, 3</value>
-  </data>
-  <data name="groupBox1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 3, 4, 3</value>
-  </data>
-  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>962, 81</value>
-  </data>
-  <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="panel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="tableLayoutPanel3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1957,6 +1873,9 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
   <data name="buttonSelectPreservedTags.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
+  <data name="buttonSelectPreservedTags.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
+  </data>
   <data name="buttonSelectPreservedTags.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -2031,6 +1950,9 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
   <data name="buttonProcessPreserveTags.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
+  <data name="buttonProcessPreserveTags.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
+  </data>
   <data name="buttonProcessPreserveTags.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -2066,8 +1988,11 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
   <data name="&gt;&gt;buttonProcessPreserveTags.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="tableLayoutPanel3.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
+  </data>
   <data name="tableLayoutPanel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 161</value>
+    <value>3, 163</value>
   </data>
   <data name="tableLayoutPanel3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 1</value>
@@ -2091,7 +2016,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel3.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="tableLayoutPanel3.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="preserveTagValuesTextBox" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="labelPreserveTagValues" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="buttonSelectPreservedTags" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="processPreserveTagsTextBox" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="buttonProcessPreserveTags" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,150,Percent,50,AutoSize,0,AutoSize,0,Percent,50" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
@@ -2140,6 +2065,9 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
   </data>
   <data name="customText4Label.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="customText4Label.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
   </data>
   <data name="customText4Label.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2213,6 +2141,9 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
   <data name="customText3Label.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="customText3Label.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
+  </data>
   <data name="customText3Label.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -2284,6 +2215,9 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
   </data>
   <data name="customText2Label.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="customText2Label.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
   </data>
   <data name="customText2Label.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2357,6 +2291,9 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
   <data name="customTextLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="customTextLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
+  </data>
   <data name="customTextLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -2390,8 +2327,11 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
   <data name="&gt;&gt;customTextLabel.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="tableLayoutPanel2.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
+  </data>
   <data name="tableLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 107</value>
+    <value>3, 109</value>
   </data>
   <data name="tableLayoutPanel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -2415,7 +2355,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel2.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="customText4Box" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="customText4Label" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="customText3Box" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="customText3Label" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="customText2Box" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="customText2Label" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="customTextBox" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="customTextLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,50,AutoSize,0,Percent,50" /&gt;&lt;Rows Styles="Percent,50,Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
@@ -2436,7 +2376,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>TopLeft</value>
   </data>
   <data name="parameterTag6List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>722, 30</value>
+    <value>722, 29</value>
   </data>
   <data name="parameterTag6List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 6, 1</value>
@@ -2504,6 +2444,9 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
   <data name="pictureTag6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Left</value>
   </data>
+  <data name="pictureTag6.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
+  </data>
   <data name="pictureTag6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -2544,7 +2487,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>TopLeft</value>
   </data>
   <data name="parameterTag5List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>398, 30</value>
+    <value>398, 29</value>
   </data>
   <data name="parameterTag5List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 6, 1</value>
@@ -2612,6 +2555,9 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
   <data name="pictureTag5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Left</value>
   </data>
+  <data name="pictureTag5.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
+  </data>
   <data name="pictureTag5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -2652,7 +2598,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>TopLeft</value>
   </data>
   <data name="parameterTag4List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>74, 30</value>
+    <value>74, 29</value>
   </data>
   <data name="parameterTag4List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 6, 1</value>
@@ -2720,6 +2666,9 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
   <data name="pictureTag4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Left</value>
   </data>
+  <data name="pictureTag4.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
+  </data>
   <data name="pictureTag4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -2760,7 +2709,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>TopLeft</value>
   </data>
   <data name="parameterTag3List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>722, 3</value>
+    <value>722, 2</value>
   </data>
   <data name="parameterTag3List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 6, 1</value>
@@ -2828,6 +2777,9 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
   <data name="pictureTag3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Left</value>
   </data>
+  <data name="pictureTag3.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
+  </data>
   <data name="pictureTag3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -2868,7 +2820,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>TopLeft</value>
   </data>
   <data name="parameterTag2List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>398, 3</value>
+    <value>398, 2</value>
   </data>
   <data name="parameterTag2List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 6, 1</value>
@@ -2936,6 +2888,9 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
   <data name="pictureTag2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Left</value>
   </data>
+  <data name="pictureTag2.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
+  </data>
   <data name="pictureTag2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -2976,7 +2931,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>TopLeft</value>
   </data>
   <data name="parameterTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>74, 3</value>
+    <value>74, 2</value>
   </data>
   <data name="parameterTagList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 6, 1</value>
@@ -3047,6 +3002,9 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
   <data name="pictureTag.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Left</value>
   </data>
+  <data name="pictureTag.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
+  </data>
   <data name="pictureTag.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -3077,6 +3035,9 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
   <data name="&gt;&gt;pictureTag.ZOrder" xml:space="preserve">
     <value>17</value>
   </data>
+  <data name="tableLayoutPanel1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
+  </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 53</value>
   </data>
@@ -3102,7 +3063,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="parameterTag6List" Row="1" RowSpan="1" Column="8" ColumnSpan="1" /&gt;&lt;Control Name="labelTag6" Row="1" RowSpan="1" Column="7" ColumnSpan="1" /&gt;&lt;Control Name="pictureTag6" Row="1" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="parameterTag5List" Row="1" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="labelTag5" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="pictureTag5" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="parameterTag4List" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="labelTag4" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="pictureTag4" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="parameterTag3List" Row="0" RowSpan="1" Column="8" ColumnSpan="1" /&gt;&lt;Control Name="labelTag3" Row="0" RowSpan="1" Column="7" ColumnSpan="1" /&gt;&lt;Control Name="pictureTag3" Row="0" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="parameterTag2List" Row="0" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="labelTag2" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="pictureTag2" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="parameterTagList" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="labelTag" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="pictureTag" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,Percent,33,33334,AutoSize,0,AutoSize,0,Percent,33,33334,AutoSize,0,AutoSize,0,Percent,33,33332" /&gt;&lt;Rows Styles="Percent,50,Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
@@ -3144,7 +3105,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;userPresetLabel.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="userPresetPictureBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -3180,7 +3141,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;userPresetPictureBox.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="customizedPresetLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -3219,7 +3180,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;customizedPresetLabel.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="customizedPresetPictureBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -3255,10 +3216,13 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;customizedPresetPictureBox.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="favoriteCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="favoriteCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
   </data>
   <data name="favoriteCheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -3288,7 +3252,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;favoriteCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="favoriteCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3324,10 +3288,13 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;favoriteCheckBox.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="applyToPlayingTrackCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="applyToPlayingTrackCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
   </data>
   <data name="applyToPlayingTrackCheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -3360,7 +3327,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;applyToPlayingTrackCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="applyToPlayingTrackCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3402,10 +3369,13 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;applyToPlayingTrackCheckBox.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>10</value>
   </data>
   <data name="assignHotkeyCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="assignHotkeyCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
   </data>
   <data name="assignHotkeyCheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -3442,7 +3412,7 @@ You will need to reassign hotkey if the preset name is changed
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;assignHotkeyCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>11</value>
   </data>
   <data name="assignHotkeyCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3484,7 +3454,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;assignHotkeyCheckBox.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>12</value>
   </data>
   <data name="clearIdButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -3520,7 +3490,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;clearIdButton.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>13</value>
   </data>
   <data name="idTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -3553,7 +3523,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;idTextBox.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>14</value>
   </data>
   <data name="idLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -3592,7 +3562,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;idLabel.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>15</value>
   </data>
   <data name="playlistComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -3625,10 +3595,13 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;playlistComboBox.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>16</value>
   </data>
   <data name="conditionCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="conditionCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
   </data>
   <data name="conditionCheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -3658,7 +3631,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;conditionCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>17</value>
   </data>
   <data name="conditionCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3694,7 +3667,115 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;conditionCheckBox.ZOrder" xml:space="preserve">
+    <value>18</value>
+  </data>
+  <data name="groupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="descriptionBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="descriptionBox.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="descriptionBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
+  </data>
+  <data name="descriptionBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 16</value>
+  </data>
+  <data name="descriptionBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="descriptionBox.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="descriptionBox.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
+    <value>Vertical</value>
+  </data>
+  <data name="descriptionBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>950, 57</value>
+  </data>
+  <data name="descriptionBox.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;descriptionBox.Name" xml:space="preserve">
+    <value>descriptionBox</value>
+  </data>
+  <data name="&gt;&gt;descriptionBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;descriptionBox.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;descriptionBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="groupBox1Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="groupBox1Label.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 9pt, style=Bold</value>
+  </data>
+  <data name="groupBox1Label.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
+  </data>
+  <data name="groupBox1Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, -1</value>
+  </data>
+  <data name="groupBox1Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 15</value>
+  </data>
+  <data name="groupBox1Label.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="groupBox1Label.Text" xml:space="preserve">
+    <value>  Preset description  </value>
+  </data>
+  <data name="&gt;&gt;groupBox1Label.Name" xml:space="preserve">
+    <value>groupBox1Label</value>
+  </data>
+  <data name="&gt;&gt;groupBox1Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox1Label.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;groupBox1Label.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="groupBox1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
+  </data>
+  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 191</value>
+  </data>
+  <data name="groupBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 3, 4, 3</value>
+  </data>
+  <data name="groupBox1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 0, 6, 6</value>
+  </data>
+  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>962, 79</value>
+  </data>
+  <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
     <value>19</value>
+  </data>
+  <data name="panel1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
   </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 108</value>
@@ -3722,6 +3803,9 @@ You will need to reassign hotkey if the preset name is changed</value>
   </data>
   <data name="presetList.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="presetList.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
   </data>
   <data name="presetList.IntegralHeight" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -3756,6 +3840,9 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="tableLayoutPanel4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
+  <data name="tableLayoutPanel4.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
+  </data>
   <data name="tableLayoutPanel4.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -3782,6 +3869,9 @@ You will need to reassign hotkey if the preset name is changed</value>
   </data>
   <data name="tableLayoutPanel4.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="panel1" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="presetList" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Percent,100,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="splitContainer1.Panel1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
   </data>
   <data name="&gt;&gt;splitContainer1.Panel1.Name" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
@@ -4093,7 +4183,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>51</value>
   </data>
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>962, 101</value>
+    <value>962, 98</value>
   </data>
   <data name="previewTable.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -4702,11 +4792,14 @@ If you have deleted some predefined presets, then they won't be reinstalled</val
   <data name="panel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
+  <data name="panel2.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
+  </data>
   <data name="panel2.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>976, 190</value>
+    <value>976, 187</value>
   </data>
   <data name="panel2.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -4722,6 +4815,9 @@ If you have deleted some predefined presets, then they won't be reinstalled</val
   </data>
   <data name="&gt;&gt;panel2.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="splitContainer1.Panel2.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
   </data>
   <data name="&gt;&gt;splitContainer1.Panel2.Name" xml:space="preserve">
     <value>splitContainer1.Panel2</value>
@@ -4739,7 +4835,7 @@ If you have deleted some predefined presets, then they won't be reinstalled</val
     <value>170</value>
   </data>
   <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>976, 578</value>
+    <value>976, 575</value>
   </data>
   <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
     <value>385</value>

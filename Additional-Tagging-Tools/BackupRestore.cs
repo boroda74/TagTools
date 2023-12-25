@@ -177,7 +177,7 @@ namespace MusicBeePlugin
             file.Close();
         }
 
-        public static BackupCacheType Load(string fileName, string backupFileExtension = ".xml")
+        public static BackupCacheType Load(string fileName, string backupFileExtension = ".xml", bool ignoreExceptions = false)
         {
             System.IO.FileStream stream = System.IO.File.Open(fileName + ".mbc", System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.None);
             System.IO.StreamReader file = new System.IO.StreamReader(stream, Encoding.UTF8);
@@ -193,8 +193,9 @@ namespace MusicBeePlugin
             {
                 file.Close();
 
-                MessageBox.Show(Plugin.MbForm, Plugin.MsgBackupIsCorrupted.Replace("%%FILENAME%%", fileName), string.Empty, 
-                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                if (!ignoreExceptions)
+                    MessageBox.Show(Plugin.MbForm, Plugin.MsgBackupIsCorrupted.Replace("%%FILENAME%%", fileName), string.Empty,
+                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
                 return null;
             }
@@ -376,7 +377,7 @@ namespace MusicBeePlugin
 
             if (!System.IO.File.Exists(baselineFilename + ".bbl")) //Backup baseline file doesn't exist
             {
-                MessageBox.Show(Plugin.MbForm, Plugin.MsgBackupBaselineFileDoesntExist.Replace("%%FILENAME%%", baselineFilename + ".bbl"), 
+                MessageBox.Show(Plugin.MbForm, Plugin.MsgBackupBaselineFileDoesntExist.Replace("%%FILENAME%%", baselineFilename + ".bbl"),
                     string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return null;
             }
@@ -404,7 +405,7 @@ namespace MusicBeePlugin
             {
                 file.Close();
 
-                MessageBox.Show(Plugin.MbForm, Plugin.MsgBackupIsCorrupted.Replace("%%FILENAME%%", fileName) + "\n\n" + ex.Message, 
+                MessageBox.Show(Plugin.MbForm, Plugin.MsgBackupIsCorrupted.Replace("%%FILENAME%%", fileName) + "\n\n" + ex.Message,
                     string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
                 return null;
@@ -466,7 +467,7 @@ namespace MusicBeePlugin
             {
                 file.Close();
 
-                MessageBox.Show(Plugin.MbForm, Plugin.MsgBackupIsCorrupted.Replace("%%FILENAME%%", fileName) + "\n\n" + ex.Message, 
+                MessageBox.Show(Plugin.MbForm, Plugin.MsgBackupIsCorrupted.Replace("%%FILENAME%%", fileName) + "\n\n" + ex.Message,
                     string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
                 return null;
@@ -715,7 +716,7 @@ namespace MusicBeePlugin
                 System.Media.SystemSounds.Hand.Play();
                 Plugin.MbApiInterface.MB_SetBackgroundTaskMessage(string.Empty);
 
-                MessageBox.Show(Plugin.MbForm, Plugin.MsgThisIsTheBackupOfDifferentLibrary, 
+                MessageBox.Show(Plugin.MbForm, Plugin.MsgThisIsTheBackupOfDifferentLibrary,
                     string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
@@ -729,7 +730,7 @@ namespace MusicBeePlugin
 
                 if (files.Length == 0)
                 {
-                    MessageBox.Show(Plugin.MbForm, Plugin.MsgNoTracksSelected, string.Empty, 
+                    MessageBox.Show(Plugin.MbForm, Plugin.MsgNoTracksSelected, string.Empty,
                         MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }

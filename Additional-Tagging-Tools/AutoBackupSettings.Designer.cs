@@ -153,14 +153,14 @@
             resources.ApplyResources(this.buttonClose, "buttonClose");
             this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Tag = "#AutoBackupSettings@non-defaultable";
+            this.buttonClose.Tag = "#AutoBackupSettings@non-defaultable@pinned-to-parent-y";
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
             // buttonOK
             // 
             resources.ApplyResources(this.buttonOK, "buttonOK");
             this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Tag = "#buttonClose";
+            this.buttonOK.Tag = "#buttonClose@pinned-to-parent-y";
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // backupArtworksCheckBox

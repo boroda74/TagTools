@@ -55,7 +55,7 @@
             resources.ApplyResources(this.buttonCancel, "buttonCancel");
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Tag = "#toolsPanel@non-defaultable@pinned-to-parent";
+            this.buttonCancel.Tag = "#toolsPanel@non-defaultable@pinned-to-parent-x";
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // previewTable
@@ -99,6 +99,7 @@
             this.previewTable.RowHeadersVisible = false;
             this.previewTable.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.previewTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.previewTable.Tag = "#CompareTracksCommand&CompareTracksCommand@pinned-to-parent-x@pinned-to-parent-y";
             this.previewTable.RowHeadersWidthChanged += new System.EventHandler(this.previewTable_RowHeadersWidthChanged);
             this.previewTable.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.previewTable_ColumnHeaderMouseClick);
             this.previewTable.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.previewTable_ColumnWidthChanged);
@@ -162,7 +163,7 @@
             // 
             resources.ApplyResources(this.autoSelectTagsCheckBox, "autoSelectTagsCheckBox");
             this.autoSelectTagsCheckBox.Name = "autoSelectTagsCheckBox";
-            this.autoSelectTagsCheckBox.Tag = "#placeholderLabel";
+            this.autoSelectTagsCheckBox.Tag = "#placeholderLabel@pinned-to-parent-x";
             this.toolTip1.SetToolTip(this.autoSelectTagsCheckBox, resources.GetString("autoSelectTagsCheckBox.ToolTip"));
             this.autoSelectTagsCheckBox.CheckedChanged += new System.EventHandler(this.autoSelectTagsCheckBox_CheckedChanged);
             // 
@@ -211,6 +212,7 @@
             this.toolsPanel.Controls.Add(this.autoSelectTagsCheckBox);
             this.toolsPanel.Controls.Add(this.placeholderLabel);
             this.toolsPanel.Name = "toolsPanel";
+            this.toolsPanel.Tag = "#CompareTracksCommand&CompareTracksCommand@pinned-to-parent-x@pinned-to-parent-y";
             // 
             // placeholderLabel
             // 
@@ -222,8 +224,8 @@
             this.AcceptButton = this.buttonOK;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.toolsPanel);
             this.Controls.Add(this.previewTable);
+            this.Controls.Add(this.toolsPanel);
             this.Name = "CompareTracksCommand";
             this.Tag = "";
             this.Load += new System.EventHandler(this.CompareTracksCommand_Load);

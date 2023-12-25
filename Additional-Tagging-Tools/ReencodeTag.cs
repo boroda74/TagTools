@@ -1,13 +1,13 @@
-﻿using System;
+﻿using ExtensionMethods;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 using static MusicBeePlugin.Plugin;
-using ExtensionMethods;
 
 namespace MusicBeePlugin
 {
-    public partial class ReencodeTagPlugin : PluginWindowTemplate
+    public partial class ReencodeTagCommand : PluginWindowTemplate
     {
         private delegate void AddRowToTable(string[] row);
         private delegate void ProcessRowOfTable(int row);
@@ -22,7 +22,7 @@ namespace MusicBeePlugin
         private Encoding originalEncoding;
         private Encoding usedEncoding;
 
-        public ReencodeTagPlugin(Plugin tagToolsPluginParam) : base(tagToolsPluginParam)
+        public ReencodeTagCommand(Plugin tagToolsPluginParam) : base(tagToolsPluginParam)
         {
             InitializeComponent();
         }

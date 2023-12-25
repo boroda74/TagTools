@@ -1,7 +1,7 @@
-﻿using System;
+﻿using ExtensionMethods;
+using System;
 using System.Windows.Forms;
 using static MusicBeePlugin.Plugin;
-using ExtensionMethods;
 
 namespace MusicBeePlugin
 {
@@ -103,7 +103,7 @@ namespace MusicBeePlugin
             if (sourceTagList.Text == destinationTagList.Text)
                 if (!smartOperationCheckBox.Checked || !(GetTagId(sourceTagList.Text) == ArtistArtistsId || GetTagId(sourceTagList.Text) == ComposerComposersId))
                 {
-                    MessageBox.Show(this, MsgSwapTagsSourceAndDestinationTagsAreTheSame, 
+                    MessageBox.Show(this, MsgSwapTagsSourceAndDestinationTagsAreTheSame,
                         null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }

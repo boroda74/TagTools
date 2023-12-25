@@ -78,7 +78,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.buttonCancel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonCancel.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.buttonCancel, ((int)(resources.GetObject("buttonCancel.IconPadding"))));
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Tag = "#fieldsPanel@pinned-to-parent@non-defaultable";
+            this.buttonCancel.Tag = "#fieldsPanel@pinned-to-parent-x@non-defaultable";
             this.toolTip1.SetToolTip(this.buttonCancel, resources.GetString("buttonCancel.ToolTip"));
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
@@ -122,7 +122,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.label1, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("label1.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.label1, ((int)(resources.GetObject("label1.IconPadding"))));
             this.label1.Name = "label1";
-            this.label1.Tag = "#sourceTagList";
+            this.label1.Tag = "#sourceTagList@pinned-to-parent-x";
             this.toolTip1.SetToolTip(this.label1, resources.GetString("label1.ToolTip"));
             // 
             // sentenceCaseRadioButton
@@ -133,7 +133,7 @@
             this.dirtyErrorProvider.SetIconPadding(this.sentenceCaseRadioButton, ((int)(resources.GetObject("sentenceCaseRadioButton.IconPadding"))));
             this.sentenceCaseRadioButton.Name = "sentenceCaseRadioButton";
             this.sentenceCaseRadioButton.TabStop = true;
-            this.sentenceCaseRadioButton.Tag = "#sentenceCaseRadioButtonLabel";
+            this.sentenceCaseRadioButton.Tag = "#sentenceCaseRadioButtonLabel@pinned-to-parent-x";
             this.toolTip1.SetToolTip(this.sentenceCaseRadioButton, resources.GetString("sentenceCaseRadioButton.ToolTip"));
             this.sentenceCaseRadioButton.CheckedChanged += new System.EventHandler(this.casingRuleRadioButton_CheckedChanged);
             // 
@@ -144,7 +144,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.lowerCaseRadioButton, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("lowerCaseRadioButton.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.lowerCaseRadioButton, ((int)(resources.GetObject("lowerCaseRadioButton.IconPadding"))));
             this.lowerCaseRadioButton.Name = "lowerCaseRadioButton";
-            this.lowerCaseRadioButton.Tag = "#lowerCaseRadioButtonLabel";
+            this.lowerCaseRadioButton.Tag = "#lowerCaseRadioButtonLabel@pinned-to-parent-x";
             this.toolTip1.SetToolTip(this.lowerCaseRadioButton, resources.GetString("lowerCaseRadioButton.ToolTip"));
             this.lowerCaseRadioButton.CheckedChanged += new System.EventHandler(this.casingRuleRadioButton_CheckedChanged);
             // 
@@ -155,7 +155,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.upperCaseRadioButton, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("upperCaseRadioButton.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.upperCaseRadioButton, ((int)(resources.GetObject("upperCaseRadioButton.IconPadding"))));
             this.upperCaseRadioButton.Name = "upperCaseRadioButton";
-            this.upperCaseRadioButton.Tag = "#upperCaseRadioButtonLabel";
+            this.upperCaseRadioButton.Tag = "#upperCaseRadioButtonLabel@pinned-to-parent-x";
             this.toolTip1.SetToolTip(this.upperCaseRadioButton, resources.GetString("upperCaseRadioButton.ToolTip"));
             this.upperCaseRadioButton.CheckedChanged += new System.EventHandler(this.casingRuleRadioButton_CheckedChanged);
             // 
@@ -166,7 +166,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.titleCaseRadioButton, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("titleCaseRadioButton.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.titleCaseRadioButton, ((int)(resources.GetObject("titleCaseRadioButton.IconPadding"))));
             this.titleCaseRadioButton.Name = "titleCaseRadioButton";
-            this.titleCaseRadioButton.Tag = "#titleCaseRadioButtonLabel";
+            this.titleCaseRadioButton.Tag = "#titleCaseRadioButtonLabel@pinned-to-parent-x";
             this.toolTip1.SetToolTip(this.titleCaseRadioButton, resources.GetString("titleCaseRadioButton.ToolTip"));
             this.titleCaseRadioButton.CheckedChanged += new System.EventHandler(this.casingRuleRadioButton_CheckedChanged);
             // 
@@ -177,7 +177,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.toggleCaseRadioButton, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("toggleCaseRadioButton.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.toggleCaseRadioButton, ((int)(resources.GetObject("toggleCaseRadioButton.IconPadding"))));
             this.toggleCaseRadioButton.Name = "toggleCaseRadioButton";
-            this.toggleCaseRadioButton.Tag = "#toggleCaseRadioButtonLabel";
+            this.toggleCaseRadioButton.Tag = "#toggleCaseRadioButtonLabel@pinned-to-parent-x";
             this.toolTip1.SetToolTip(this.toggleCaseRadioButton, resources.GetString("toggleCaseRadioButton.ToolTip"));
             this.toggleCaseRadioButton.CheckedChanged += new System.EventHandler(this.casingRuleRadioButton_CheckedChanged);
             // 
@@ -188,7 +188,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.exceptionCharsBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("exceptionCharsBox.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.exceptionCharsBox, ((int)(resources.GetObject("exceptionCharsBox.IconPadding"))));
             this.exceptionCharsBox.Name = "exceptionCharsBox";
-            this.exceptionCharsBox.Tag = "#buttonASRExceptWordsAfterSymbols@pinned-to-parent";
+            this.exceptionCharsBox.Tag = "#buttonASRExceptWordsAfterSymbols@pinned-to-parent-x";
             this.toolTip1.SetToolTip(this.exceptionCharsBox, resources.GetString("exceptionCharsBox.ToolTip"));
             // 
             // wordSplittersBox
@@ -198,7 +198,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.wordSplittersBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("wordSplittersBox.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.wordSplittersBox, ((int)(resources.GetObject("wordSplittersBox.IconPadding"))));
             this.wordSplittersBox.Name = "wordSplittersBox";
-            this.wordSplittersBox.Tag = "#buttonASRWordSplitters@pinned-to-parent";
+            this.wordSplittersBox.Tag = "#buttonASRWordSplitters@pinned-to-parent-x";
             this.toolTip1.SetToolTip(this.wordSplittersBox, resources.GetString("wordSplittersBox.ToolTip"));
             // 
             // label6
@@ -244,6 +244,7 @@
             this.previewTable.Name = "previewTable";
             this.previewTable.RowHeadersVisible = false;
             this.previewTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.previewTable.Tag = "#ChangeCaseCommand&ChangeCaseCommand@pinned-to-parent-x";
             this.toolTip1.SetToolTip(this.previewTable, resources.GetString("previewTable.ToolTip"));
             this.previewTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.previewTable_CellContentClick);
             // 
@@ -294,7 +295,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.buttonReapply, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonReapply.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.buttonReapply, ((int)(resources.GetObject("buttonReapply.IconPadding"))));
             this.buttonReapply.Name = "buttonReapply";
-            this.buttonReapply.Tag = "#buttonSettings@pinned-to-parent";
+            this.buttonReapply.Tag = "#buttonSettings@pinned-to-parent-x";
             this.toolTip1.SetToolTip(this.buttonReapply, resources.GetString("buttonReapply.ToolTip"));
             this.buttonReapply.Click += new System.EventHandler(this.buttonReapply_Click);
             // 
@@ -371,7 +372,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.exceptionWordsBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("exceptionWordsBox.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.exceptionWordsBox, ((int)(resources.GetObject("exceptionWordsBox.IconPadding"))));
             this.exceptionWordsBox.Name = "exceptionWordsBox";
-            this.exceptionWordsBox.Tag = "#removeExceptionButton@pinned-to-parent";
+            this.exceptionWordsBox.Tag = "#removeExceptionButton@pinned-to-parent-x";
             this.toolTip1.SetToolTip(this.exceptionWordsBox, resources.GetString("exceptionWordsBox.ToolTip"));
             this.exceptionWordsBox.Leave += new System.EventHandler(this.exceptionWordsBox_Leave);
             // 
@@ -403,7 +404,7 @@
             this.dirtyErrorProvider.SetIconPadding(this.removeExceptionButton, ((int)(resources.GetObject("removeExceptionButton.IconPadding"))));
             this.removeExceptionButton.Image = global::MusicBeePlugin.Properties.Resources.clear_button_15;
             this.removeExceptionButton.Name = "removeExceptionButton";
-            this.removeExceptionButton.Tag = "#fieldsPanel@pinned-to-parent@non-defaultable";
+            this.removeExceptionButton.Tag = "#fieldsPanel@pinned-to-parent-x@non-defaultable";
             this.toolTip1.SetToolTip(this.removeExceptionButton, resources.GetString("removeExceptionButton.ToolTip"));
             this.removeExceptionButton.Click += new System.EventHandler(this.removeExceptionButton_Click);
             // 
@@ -414,7 +415,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.buttonASRExceptedWords, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonASRExceptedWords.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.buttonASRExceptedWords, ((int)(resources.GetObject("buttonASRExceptedWords.IconPadding"))));
             this.buttonASRExceptedWords.Name = "buttonASRExceptedWords";
-            this.buttonASRExceptedWords.Tag = "#fieldsPanel@pinned-to-parent@non-defaultable";
+            this.buttonASRExceptedWords.Tag = "#fieldsPanel@pinned-to-parent-x@non-defaultable";
             this.toolTip1.SetToolTip(this.buttonASRExceptedWords, resources.GetString("buttonASRExceptedWords.ToolTip"));
             this.buttonASRExceptedWords.Click += new System.EventHandler(this.buttonASR_Click);
             // 
@@ -436,7 +437,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.buttonASRWordSplitters, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonASRWordSplitters.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.buttonASRWordSplitters, ((int)(resources.GetObject("buttonASRWordSplitters.IconPadding"))));
             this.buttonASRWordSplitters.Name = "buttonASRWordSplitters";
-            this.buttonASRWordSplitters.Tag = "#fieldsPanel@pinned-to-parent@non-defaultable";
+            this.buttonASRWordSplitters.Tag = "#fieldsPanel@pinned-to-parent-x@non-defaultable";
             this.toolTip1.SetToolTip(this.buttonASRWordSplitters, resources.GetString("buttonASRWordSplitters.ToolTip"));
             this.buttonASRWordSplitters.Click += new System.EventHandler(this.buttonASRWordSplitters_Click);
             // 
@@ -487,6 +488,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.toggleCaseRadioButtonLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("toggleCaseRadioButtonLabel.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.toggleCaseRadioButtonLabel, ((int)(resources.GetObject("toggleCaseRadioButtonLabel.IconPadding"))));
             this.toggleCaseRadioButtonLabel.Name = "toggleCaseRadioButtonLabel";
+            this.toggleCaseRadioButtonLabel.Tag = "#&previewTable";
             this.toolTip1.SetToolTip(this.toggleCaseRadioButtonLabel, resources.GetString("toggleCaseRadioButtonLabel.ToolTip"));
             this.toggleCaseRadioButtonLabel.Click += new System.EventHandler(this.toggleCaseRadioButtonLabel_Click);
             // 
@@ -573,7 +575,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.fieldsPanel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("fieldsPanel.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.fieldsPanel, ((int)(resources.GetObject("fieldsPanel.IconPadding"))));
             this.fieldsPanel.Name = "fieldsPanel";
-            this.fieldsPanel.Tag = "#ChangeCaseCommand@pinned-to-parent";
+            this.fieldsPanel.Tag = "#ChangeCaseCommand@pinned-to-parent-x";
             this.toolTip1.SetToolTip(this.fieldsPanel, resources.GetString("fieldsPanel.ToolTip"));
             // 
             // toolTip1

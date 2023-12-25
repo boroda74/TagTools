@@ -1,11 +1,11 @@
-﻿using System;
+﻿using ExtensionMethods;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using static MusicBeePlugin.AdvancedSearchAndReplaceCommand;
 using static MusicBeePlugin.Plugin;
-using ExtensionMethods;
 
 
 namespace MusicBeePlugin
@@ -1060,7 +1060,7 @@ namespace MusicBeePlugin
 
         private void sourceTagList_SelectedIndexChanged(object sender, EventArgs e)
         {
-                autoDestinationTagCheckBox_CheckedChanged(null, null);
+            autoDestinationTagCheckBox_CheckedChanged(null, null);
         }
 
         private void SearchOnlyCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -1111,7 +1111,7 @@ namespace MusicBeePlugin
 
         private void MultipleSearchAndReplaceCommand_FormClosing(object sender, FormClosingEventArgs e)
         {
-            saveWindowLayout(templateTable.Columns[0].Width, templateTable.Columns[3].Width, templateTable.Columns[4].Width, 
+            saveWindowLayout(templateTable.Columns[0].Width, templateTable.Columns[3].Width, templateTable.Columns[4].Width,
                 0,
                 previewTable.Columns[0].Width, previewTable.Columns[1].Width, previewTable.Columns[2].Width);
         }

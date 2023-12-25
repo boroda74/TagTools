@@ -142,7 +142,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>189, 5</value>
+    <value>197, 5</value>
   </data>
   <data name="buttonPreview.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -181,10 +181,10 @@
     <value>NoControl</value>
   </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>404, 5</value>
+    <value>412, 5</value>
   </data>
   <data name="buttonCancel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>4, 4, 6, 4</value>
   </data>
   <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 23</value>
@@ -208,7 +208,7 @@
     <value>5</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>944, 361</value>
+    <value>952, 368</value>
   </data>
   <data name="previewTable.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -310,13 +310,13 @@
     <value>6, 141</value>
   </data>
   <data name="previewTable.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>6, 0, 6, 6</value>
   </data>
   <data name="previewTable.RowHeadersWidth" type="System.Int32, mscorlib">
     <value>51</value>
   </data>
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>931, 214</value>
+    <value>939, 221</value>
   </data>
   <data name="previewTable.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -373,10 +373,10 @@
     <value>NoControl</value>
   </data>
   <data name="addCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 117</value>
+    <value>7, 117</value>
   </data>
   <data name="addCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>7, 4, 4, 4</value>
   </data>
   <data name="addCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 19</value>
@@ -439,10 +439,10 @@
     <value>NoControl</value>
   </data>
   <data name="appendCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 90</value>
+    <value>7, 90</value>
   </data>
   <data name="appendCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>7, 4, 4, 4</value>
   </data>
   <data name="appendCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 19</value>
@@ -571,10 +571,10 @@
     <value>NoControl</value>
   </data>
   <data name="onlyIfDestinationEmptyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 63</value>
+    <value>7, 63</value>
   </data>
   <data name="onlyIfDestinationEmptyCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>7, 4, 4, 4</value>
   </data>
   <data name="onlyIfDestinationEmptyCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 19</value>
@@ -646,10 +646,10 @@ for copying it to a temporary tag
     <value>NoControl</value>
   </data>
   <data name="smartOperationCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 36</value>
+    <value>7, 36</value>
   </data>
   <data name="smartOperationCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>7, 4, 4, 4</value>
   </data>
   <data name="smartOperationCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 19</value>
@@ -819,10 +819,10 @@ for copying it to a temporary tag</value>
     <value>0, 113</value>
   </data>
   <data name="addedTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>4, 4, 6, 4</value>
   </data>
   <data name="addedTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>504, 23</value>
+    <value>512, 23</value>
   </data>
   <data name="addedTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -852,10 +852,10 @@ for copying it to a temporary tag</value>
     <value>0, 86</value>
   </data>
   <data name="appendedTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>4, 4, 6, 4</value>
   </data>
   <data name="appendedTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>504, 23</value>
+    <value>512, 23</value>
   </data>
   <data name="appendedTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -882,10 +882,10 @@ for copying it to a temporary tag</value>
     <value>NoControl</value>
   </data>
   <data name="browseButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>404, 59</value>
+    <value>412, 59</value>
   </data>
   <data name="browseButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>4, 4, 6, 4</value>
   </data>
   <data name="browseButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 23</value>
@@ -924,7 +924,7 @@ for copying it to a temporary tag</value>
     <value>4, 4, 4, 4</value>
   </data>
   <data name="fileNameTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 23</value>
+    <value>274, 23</value>
   </data>
   <data name="fileNameTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -987,7 +987,7 @@ for copying it to a temporary tag</value>
     <value>NoControl</value>
   </data>
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>296, 5</value>
+    <value>304, 5</value>
   </data>
   <data name="buttonOK.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1023,7 +1023,7 @@ for copying it to a temporary tag</value>
     <value>NoControl</value>
   </data>
   <data name="buttonSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>145, 5</value>
+    <value>153, 5</value>
   </data>
   <data name="buttonSettings.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1052,8 +1052,11 @@ for copying it to a temporary tag</value>
   <data name="fieldsPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>433, 0</value>
   </data>
+  <data name="fieldsPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 0, 0, 0</value>
+  </data>
   <data name="fieldsPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>509, 140</value>
+    <value>517, 140</value>
   </data>
   <data name="fieldsPanel.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -1757,7 +1760,7 @@ for copying it to a temporary tag</value>
     <value>NoControl</value>
   </data>
   <data name="copyTagLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 9</value>
+    <value>4, 9</value>
   </data>
   <data name="copyTagLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>

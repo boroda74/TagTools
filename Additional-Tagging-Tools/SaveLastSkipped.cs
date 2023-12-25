@@ -1,7 +1,7 @@
-﻿using System;
+﻿using ExtensionMethods;
+using System;
 using System.Windows.Forms;
 using static MusicBeePlugin.Plugin;
-using ExtensionMethods;
 
 namespace MusicBeePlugin
 {
@@ -66,6 +66,11 @@ namespace MusicBeePlugin
         private void saveLastSkippedCheckBoxLabel_Click(object sender, EventArgs e)
         {
             saveLastSkippedCheckBox.Checked = !saveLastSkippedCheckBox.Checked;
+        }
+
+        private void SaveLastSkippedCommand_Load(object sender, EventArgs e)
+        {
+            placeholderCheckBox.Visible = false;
         }
     }
 }

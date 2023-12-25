@@ -1,9 +1,9 @@
-﻿using System;
+﻿using ExtensionMethods;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 using static MusicBeePlugin.Plugin;
-using ExtensionMethods;
 
 namespace MusicBeePlugin
 {
@@ -197,7 +197,7 @@ namespace MusicBeePlugin
                 {
                     MessageBox.Show(this, MsgNumberOfTagsInTextFileDoesntCorrespondToNumberOfSelectedTracks
                         .Replace("%%TEXT-TAG-FILES-COUNT%%", fileTags.Length.ToString())
-                        .Replace("%%SELECTED-FILES-COUNT%%", files.Length.ToString()), 
+                        .Replace("%%SELECTED-FILES-COUNT%%", files.Length.ToString()),
                         string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return false;
                 }
@@ -206,7 +206,7 @@ namespace MusicBeePlugin
             {
                 if (!Clipboard.ContainsText())
                 {
-                    MessageBox.Show(this, MsgClipboardDoesntContainText, 
+                    MessageBox.Show(this, MsgClipboardDoesntContainText,
                         string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return false;
                 }
@@ -356,7 +356,7 @@ namespace MusicBeePlugin
                     row[7] = row[3];
                     row[8] = row[4];
                 }
-                else if (isChecked == "F")
+                else //if (isChecked == "F")
                 {
                     row[7] = row[5];
                     row[8] = row[6];

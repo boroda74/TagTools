@@ -337,7 +337,7 @@ namespace MusicBeePlugin
                 int matchingLength = 0;
                 for (int i = 1; i <= prefix.Length && i <= tagSetComboBox.Text.Length; i++)
                 {
-                    if (prefix.Substring(0,i) == tagSetComboBox.Text.Substring(0, i))
+                    if (prefix.Substring(0, i) == tagSetComboBox.Text.Substring(0, i))
                         matchingLength = i;
                     else
                         break;
@@ -415,7 +415,7 @@ namespace MusicBeePlugin
         {
             ProcessPaintMessages = true;
 
-            Invalidate();
+            Refresh();
         }
     }
 

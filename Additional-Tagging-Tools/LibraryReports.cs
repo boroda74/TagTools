@@ -1,4 +1,5 @@
-﻿using MusicBeePlugin.Properties;
+﻿using ExtensionMethods;
+using MusicBeePlugin.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,15 +9,13 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using static MusicBeePlugin.Plugin;
 using static ExtensionMethods.NativeMethods;
-using ExtensionMethods;
+using static MusicBeePlugin.Plugin;
 
 namespace MusicBeePlugin
 {
     public partial class LibraryReportsCommand : PluginWindowTemplate
     {
-        protected const int FormShowDelay = 2500; //milliseconds
         protected bool forceCloseForms = true;
 
         private static string DontUseSplitter;
@@ -532,7 +531,7 @@ namespace MusicBeePlugin
 
             public string getColumnName(bool trimName, bool includeSplitterTrimInfo, bool includeExpression)
             {
-                return GetColumnName(parameterName, parameter2Name, functionType, splitter, trimValues, expression, trimName, 
+                return GetColumnName(parameterName, parameter2Name, functionType, splitter, trimValues, expression, trimName,
                     includeSplitterTrimInfo, includeExpression);
             }
 
@@ -636,7 +635,7 @@ namespace MusicBeePlugin
                 {
                     if (string.IsNullOrWhiteSpace(expressions[i]))
                     {
-                        tagExprValues.Add(new ColumnIndexTagValue { index = columnIndices[i], value = tagValue }) ;
+                        tagExprValues.Add(new ColumnIndexTagValue { index = columnIndices[i], value = tagValue });
                     }
                     else
                     {
@@ -698,7 +697,7 @@ namespace MusicBeePlugin
 
                 var shortIdsRef = new List<string>();
                 var columnIndicesRef = new List<List<int>>();
-                var expressionsRef = new List<List<string>>();  
+                var expressionsRef = new List<List<string>>();
 
                 int i = startingColumnIndex - 1;
                 foreach (var attribs in Values)
@@ -997,8 +996,8 @@ namespace MusicBeePlugin
             }
         }
 
-        public static void LoadPresetColumnAttributes(List<PresetColumnAttributes> presetAttribsListRef, List<string> shortIdsRef, List<List<int>> columnIndicesRef,  
-            List<List<string>> expressionsRef, ColumnAttributes attribs, int columnIndex) 
+        public static void LoadPresetColumnAttributes(List<PresetColumnAttributes> presetAttribsListRef, List<string> shortIdsRef, List<List<int>> columnIndicesRef,
+            List<List<string>> expressionsRef, ColumnAttributes attribs, int columnIndex)
         {
             PresetColumnAttributes presetAttribs;
 
@@ -1070,7 +1069,7 @@ namespace MusicBeePlugin
             {
                 return false;
             }
-            else 
+            else
             {
                 int oldCurrentLoopIndex = currentLoopIndex;
 
@@ -1171,7 +1170,7 @@ namespace MusicBeePlugin
                 return composedGroupings;
             }
 
-            public void add(string url, List<string> composedGroupingsList, ColumnAttributesDict functions, 
+            public void add(string url, List<string> composedGroupingsList, ColumnAttributesDict functions,
                 string[] functionValues, string[] parameter2Values)
             {
                 if (functionValues == null || functionValues.Length == 0)
@@ -1242,7 +1241,7 @@ namespace MusicBeePlugin
                             {
                                 aggregatedValues[i].items.AddReplace(currentFunctionValue, false);
                                 aggregatedValues[i].resultType = ResultType.ItemCount;
-                                
+
                                 function.resultType = ResultType.ItemCount;
                                 function.dataType = DataType.String;
                             }
@@ -1738,7 +1737,7 @@ namespace MusicBeePlugin
 
             foreach (var item in presetList.Items)
             {
-                ReportPreset preset = item as ReportPreset;//********
+                ReportPreset preset = item as ReportPreset;
 
                 if (preset != currentPreset)
                 {
@@ -1786,7 +1785,7 @@ namespace MusicBeePlugin
             tagsDataGridView.Rows.Clear();
             tagsDataGridViewSelectedRow = -1;
             expressionsDataGridView.Rows.Clear();
-            
+
             expressionBackup = string.Empty;
             splitterBackup = string.Empty;
             trimValuesBackup = false;
@@ -1818,7 +1817,7 @@ namespace MusicBeePlugin
         }
 
         // Returns column count
-        private static int prepareDict(ColumnAttributesDict dictRef, SortedDictionary<string, PresetColumnAttributes> presetDictRef, 
+        private static int prepareDict(ColumnAttributesDict dictRef, SortedDictionary<string, PresetColumnAttributes> presetDictRef,
             PresetColumnAttributes[] attribsSet, int startingColumnIndex)
         {
             int columnIndex = startingColumnIndex;
@@ -1831,7 +1830,7 @@ namespace MusicBeePlugin
                     presetDictRef.Add(attribsSet[i].getShortId(), attribsSet[i]);
 
 
-            repeat_again:
+                repeat_again:
             if (columnIndex <= maxColumnIndex)
             {
                 for (int i = 0; i < attribsSet.Length; i++)
@@ -1840,8 +1839,8 @@ namespace MusicBeePlugin
                     {
                         if (columnIndex == attribsSet[i].columnIndices[j])
                         {
-                            dictRef.Add(attribsSet[i].getUniqueId(j), 
-                                new ColumnAttributes(attribsSet[i].functionType, attribsSet[i].expressions[j], attribsSet[i].parameterName, 
+                            dictRef.Add(attribsSet[i].getUniqueId(j),
+                                new ColumnAttributes(attribsSet[i].functionType, attribsSet[i].expressions[j], attribsSet[i].parameterName,
                                 attribsSet[i].parameter2Name, attribsSet[i].splitter, attribsSet[i].trimValues));
 
                             columnIndex++;
@@ -2294,7 +2293,7 @@ namespace MusicBeePlugin
 
                 if (queryOnlyGroupings)
                     tags.Clear();
- 
+
                 for (int n = 0; n < queriedFiles.Length; n++)
                 {
                     List<string>[] currentFileGroupingValues = null; // array (size of grouping count) of list of split values
@@ -2549,7 +2548,7 @@ namespace MusicBeePlugin
             for (int f = 0; f < groupingValuesList.Length; f++)
                 groupingValuesList[f] = new List<string>();
 
-            List<LrFunctionType> functionTypes =  new List<LrFunctionType>();
+            List<LrFunctionType> functionTypes = new List<LrFunctionType>();
             string[] functionValues = new string[functionsDict.Count];
             string[] parameter2Values = new string[functionsDict.Count];
 
@@ -2631,7 +2630,7 @@ namespace MusicBeePlugin
 
                     var columnIndicesTags = attribs.getSplitValues(currentFile, tagValue);
                     foreach (var columnIndexTag in columnIndicesTags)
-                        groupingValuesList[columnIndexTag.index].Add(columnIndexTag.value); 
+                        groupingValuesList[columnIndexTag.index].Add(columnIndexTag.value);
                 }
 
                 if (skipFile)
@@ -2915,9 +2914,9 @@ namespace MusicBeePlugin
             return "...";
         }
 
-        private void applyOnlyGroupingsPresetResults(string[] queriedFiles, bool interactive, int sequenceNumberGrouping, bool? filterResults) 
-            // filterResults: true - filter queriedFiles list by condition, false - undo filtering of queriedFiles,
-            // null - skip filtering, proceed as usual, true & !interactive - update lastFiles by filtered file list
+        private void applyOnlyGroupingsPresetResults(string[] queriedFiles, bool interactive, int sequenceNumberGrouping, bool? filterResults)
+        // filterResults: true - filter queriedFiles list by condition, false - undo filtering of queriedFiles,
+        // null - skip filtering, proceed as usual, true & !interactive - update lastFiles by filtered file list
         {
             if (queriedFiles == null)
                 queriedFiles = lastFiles;
@@ -3571,7 +3570,7 @@ namespace MusicBeePlugin
                     throw new Exception("This field already exists in preset!");
                 else
                 {
-                    if (MessageBox.Show(this, DoYouWantToReplaceTheFieldMsg.Replace(@"\\", "\n\n").Replace("%%FIELDNAME%%", simpleColumnName), 
+                    if (MessageBox.Show(this, DoYouWantToReplaceTheFieldMsg.Replace(@"\\", "\n\n").Replace("%%FIELDNAME%%", simpleColumnName),
                     string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                         return false;
                     else // Confirmed replacement
@@ -4076,12 +4075,12 @@ namespace MusicBeePlugin
 
                     System.IO.Directory.CreateDirectory(fileDirectoryPath + imagesDirectoryName);
                 }
-                else if (selectedPreset.fileFormatIndex == LrReportFormat.HtmlDocument || selectedPreset.fileFormatIndex == LrReportFormat.HtmlTable)
+                else if (selectedPreset.fileFormatIndex == LrReportFormat.HtmlTable)
                 {
                     if (System.IO.Directory.Exists(fileDirectoryPath + imagesDirectoryName))
                         System.IO.Directory.Delete(fileDirectoryPath + imagesDirectoryName, true);
 
-                    if (selectedPreset.fileFormatIndex == LrReportFormat.HtmlDocument || artworkField != -1)
+                    if (artworkField != -1)
                         System.IO.Directory.CreateDirectory(fileDirectoryPath + imagesDirectoryName);
                 }
 
@@ -4132,7 +4131,7 @@ namespace MusicBeePlugin
                                 }
 
                                 prevAlbum1 = groupingsValues1[albumField];
-                                
+
                                 currentAlbumArtistAlbums.Add(prevAlbum1);
                                 albumTrackCounts.Add(trackCount);
                                 trackCount = 0;
@@ -4221,7 +4220,7 @@ namespace MusicBeePlugin
                 foreach (var attribs in groupingsDict.Values)
                 {
                     k++;
-                    document.addCellToRow(attribs.getColumnName(true, true, true), attribs.getColumnName(true, true, true), false, 
+                    document.addCellToRow(attribs.getColumnName(true, true, true), attribs.getColumnName(true, true, true), false,
                         k == albumArtistField, k == albumField);
                 }
 
@@ -4307,8 +4306,8 @@ namespace MusicBeePlugin
                         {
                             l++;
 
-                            if (l == artworkField && (selectedPreset.fileFormatIndex == LrReportFormat.HtmlDocumentByAlbums 
-                                || selectedPreset.fileFormatIndex == LrReportFormat.HtmlDocument 
+                            if (l == artworkField && (selectedPreset.fileFormatIndex == LrReportFormat.HtmlDocumentByAlbums
+                                || selectedPreset.fileFormatIndex == LrReportFormat.HtmlDocument
                                 || selectedPreset.fileFormatIndex == LrReportFormat.HtmlTable)) //Export images
                             {
                                 pic = artworks[groupingsValues[artworkField]];
@@ -4317,13 +4316,13 @@ namespace MusicBeePlugin
 
                                 document.addCellToRow(pic, attribs.getColumnName(true, true, true), groupingsValues[l], pic.Width, pic.Height);
                             }
-                            else if (l == artworkField && selectedPreset.fileFormatIndex != LrReportFormat.HtmlDocumentByAlbums 
-                                && selectedPreset.fileFormatIndex != LrReportFormat.HtmlDocument 
+                            else if (l == artworkField && selectedPreset.fileFormatIndex != LrReportFormat.HtmlDocumentByAlbums
+                                && selectedPreset.fileFormatIndex != LrReportFormat.HtmlDocument
                                 && selectedPreset.fileFormatIndex != LrReportFormat.HtmlTable) //Export image hashes
-                                document.addCellToRow(groupingsValues[artworkField], attribs.getColumnName(true, true, true), columnsRightAlignment[l], 
+                                document.addCellToRow(groupingsValues[artworkField], attribs.getColumnName(true, true, true), columnsRightAlignment[l],
                                     l == albumArtistField, l == albumField);
                             else //Its not the artwork column
-                                document.addCellToRow(groupingsValues[l], attribs.getColumnName(true, true, true), columnsRightAlignment[l], 
+                                document.addCellToRow(groupingsValues[l], attribs.getColumnName(true, true, true), columnsRightAlignment[l],
                                     l == albumArtistField, l == albumField);
                         }
 
@@ -4691,7 +4690,7 @@ namespace MusicBeePlugin
                     reportPresetHotkeyUsedSlots[selectedPreset.hotkeySlot] = false;
                     selectedPreset.hotkeySlot = -1;
                 }
-                
+
                 selectedPreset.hotkeyAssigned = assignHotkeyCheckBox.Checked;
                 selectedPreset.applyToSelectedTracks = useHotkeyForSelectedTracksCheckBox.Checked;
 
@@ -4960,7 +4959,6 @@ namespace MusicBeePlugin
             }
             else if (unsavedChanges)
             {
-                DialogResult result = DialogResult.No;
                 MessageBoxDefaultButton lastAnswer = SavedSettings.unsavedChangesConfirmationLastAnswer;
                 MessageBoxButtons confirmationButtons = MessageBoxButtons.YesNo;
 
@@ -4969,7 +4967,7 @@ namespace MusicBeePlugin
 
                 forceCloseForms = true;
 
-                result = MessageBox.Show(this, MsgAsrDoYouWantToSaveChangesBeforeClosingTheWindow,
+                DialogResult result = MessageBox.Show(this, MsgAsrDoYouWantToSaveChangesBeforeClosingTheWindow,
                     string.Empty, confirmationButtons, MessageBoxIcon.Warning, lastAnswer);
 
 
@@ -6582,17 +6580,17 @@ namespace MusicBeePlugin
 
         protected override void getHeader()
         {
-            text = "<html>\r\n<head>\r\n" 
-                + "\t<link rel=Stylesheet href='" + imagesDirectoryName + "/stylesheet.css'>" 
-                + "\r\n</head>\r\n" 
-                + "<body>\r\n<table><tr>\r\n" 
-                + "<td class=xl0 width=" + backgroundSize + " height=" + backgroundSize + ">" 
+            text = "<html>\r\n<head>\r\n"
+                + "\t<link rel=Stylesheet href='" + imagesDirectoryName + "/stylesheet.css'>"
+                + "\r\n</head>\r\n"
+                + "<body>\r\n<table><tr>\r\n"
+                + "<td class=xl0 width=" + backgroundSize + " height=" + backgroundSize + ">"
                 + "\r\n<table>\r\n";
         }
 
         protected void getFooter(SortedDictionary<string, List<string>> albumArtistsAlbums)
         {
-            text = "</table>\r\n</td>\r\n<td width=" + backgroundSize + " height=" + backgroundSize 
+            text = "</table>\r\n</td>\r\n<td width=" + backgroundSize + " height=" + backgroundSize
                 + " background='" + imagesDirectoryName + "/bg1.jpg' style='background-repeat:no-repeat;background-position:center center;'><table>\r\n";
 
             foreach (KeyValuePair<string, List<string>> albumArtist in albumArtistsAlbums)

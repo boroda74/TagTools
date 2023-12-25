@@ -125,19 +125,19 @@
     <value>Рассчитать средний рейтинг альбомов сейчас</value>
   </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>759, 145</value>
+    <value>759, 147</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Закрыть</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>869, 174</value>
+    <value>869, 177</value>
   </data>
   <data name="buttonSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>715, 145</value>
+    <value>715, 147</value>
   </data>
   <data name="buttonSave.Location" type="System.Drawing.Point, System.Drawing">
-    <value>357, 145</value>
+    <value>357, 147</value>
   </data>
   <data name="buttonSave.Size" type="System.Drawing.Size, System.Drawing">
     <value>325, 23</value>
@@ -213,7 +213,7 @@
     <value>Рассчитать средний рейтинг альбомов для отображаемых треков</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>885, 213</value>
+    <value>885, 216</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Рассчитать средний рейтинг альбомов</value>

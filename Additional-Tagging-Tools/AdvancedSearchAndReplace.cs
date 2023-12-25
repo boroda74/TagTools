@@ -1,4 +1,5 @@
-﻿using MusicBeePlugin.Properties;
+﻿using ExtensionMethods;
+using MusicBeePlugin.Properties;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -8,14 +9,13 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using static MusicBeePlugin.Plugin;
-using ExtensionMethods;
 
 
 namespace MusicBeePlugin
 {
     public partial class AdvancedSearchAndReplaceCommand : PluginWindowTemplate
+
     {
-        protected const int FormShowDelay = 2250; //milliseconds
         protected bool forceCloseForms = true;
 
         private static string CustomText1;
@@ -133,7 +133,7 @@ namespace MusicBeePlugin
 
             //Setting themed images
             searchPictureBox.Image = ThemedBitmapAddRef(this, Search);
-            
+
             clearIdButton.Image = ThemedBitmapAddRef(this, ButtonRemoveImage);
             clearSearchButton.Image = ThemedBitmapAddRef(this, ButtonRemoveImage);
 
@@ -352,7 +352,7 @@ namespace MusicBeePlugin
 
             SetComboBoxCue(filterComboBox, CtlMixedFilters);
 
-            
+
             presetList.SelectedIndex = -1;
             presetList_SelectedIndexChanged(null, null);
 
@@ -368,7 +368,7 @@ namespace MusicBeePlugin
 
         public enum TagType
         {
-            Undefined = -1,
+            Undefined = -1, //***** delete later!!!!
             NotUsed = 0,
             Readonly = 1,
             Writable = 2,
@@ -425,7 +425,7 @@ namespace MusicBeePlugin
             public int parameterTag5Type;
             public int parameterTag6Type;
 
-            public TagType parameterTagTypeNew = TagType.Undefined;
+            public TagType parameterTagTypeNew = TagType.Undefined; //****** rename to parameterTagType later !!!!
             public TagType parameterTag2TypeNew = TagType.Undefined;
             public TagType parameterTag3TypeNew = TagType.Undefined;
             public TagType parameterTag4TypeNew = TagType.Undefined;
@@ -702,7 +702,7 @@ namespace MusicBeePlugin
 
                 file.Close();
 
-                if (savedPreset.parameterTagTypeNew == TagType.Undefined)
+                if (savedPreset.parameterTagTypeNew == TagType.Undefined) //****** delete later!!!!
                     savedPreset.parameterTagTypeNew = GetTagTypeByPresetParameterTagType(savedPreset.parameterTagType);
                 if (savedPreset.parameterTag2TypeNew == TagType.Undefined)
                     savedPreset.parameterTag2TypeNew = GetTagTypeByPresetParameterTagType(savedPreset.parameterTag2Type);
@@ -1273,7 +1273,7 @@ namespace MusicBeePlugin
         }
 
         private class Char1 : Function
-        { 
+        {
             public Char1()
             {
                 functionName = "char";
@@ -1295,7 +1295,7 @@ namespace MusicBeePlugin
                     int times = int.Parse(parameter1);
                     for (int i = 0; i < times; i++)
                         sequence += character;
-                    
+
                     return sequence;
                 }
             }
@@ -1587,7 +1587,7 @@ namespace MusicBeePlugin
                 for (int i = presetNames.Length - 1; i >= 0; i--)
                 {
                     string presetName = presetNames[i];
-                        
+
                     try
                     {
                         Preset tempPreset = Preset.Load(presetName, presetSerializer);
@@ -1939,10 +1939,10 @@ namespace MusicBeePlugin
             LastSetTagValue = tagValue;
         }
 
-        public static void SetReplacedTag(string currentFile, AdvancedSearchAndReplaceCommand asrCommand, 
-            int searchedTagId, int replacedTagId, string searchedPattern, string replacedPattern, 
-            string preserveValues, string preserveTags, string processTags, bool ignoreCase, bool append, bool? limitation, 
-            out string searchedTagValue, out string replacedTagValue, out string originalReplacedTagValue, 
+        public static void SetReplacedTag(string currentFile, AdvancedSearchAndReplaceCommand asrCommand,
+            int searchedTagId, int replacedTagId, string searchedPattern, string replacedPattern,
+            string preserveValues, string preserveTags, string processTags, bool ignoreCase, bool append, bool? limitation,
+            out string searchedTagValue, out string replacedTagValue, out string originalReplacedTagValue,
             out bool replacedTagValuePreserved, out bool replacedTagPreserved)
         {
             if (searchedPattern == string.Empty)
@@ -2038,10 +2038,10 @@ namespace MusicBeePlugin
             presetParam.replacedTagId = presetParam.substituteTagId(presetParam.replacedTagId);
 
             SetReplacedTag(currentFile, asrCommand, presetParam.searchedTagId, presetParam.replacedTagId,
-                presetParam.replaceVariable(presetParam.searchedPattern, true), presetParam.replaceVariable(presetParam.replacedPattern, false), 
-                presetParam.preserveValues, preserveTags, processTags, 
-                presetParam.ignoreCase, presetParam.append, presetParam.limitation1, 
-                out searchedAndReplacedTags.searchedTagValue, out searchedAndReplacedTags.replacedTagValue, out searchedAndReplacedTags.originalReplacedTagValue, 
+                presetParam.replaceVariable(presetParam.searchedPattern, true), presetParam.replaceVariable(presetParam.replacedPattern, false),
+                presetParam.preserveValues, preserveTags, processTags,
+                presetParam.ignoreCase, presetParam.append, presetParam.limitation1,
+                out searchedAndReplacedTags.searchedTagValue, out searchedAndReplacedTags.replacedTagValue, out searchedAndReplacedTags.originalReplacedTagValue,
                 out searchedAndReplacedTags.replacedTagValuePreserved, out searchedAndReplacedTags.replacedTagPreserved);
 
 
@@ -2062,7 +2062,7 @@ namespace MusicBeePlugin
             SetReplacedTag(currentFile, asrCommand, presetParam.searchedTag3Id, presetParam.replacedTag3Id,
                 presetParam.replaceVariable(presetParam.searchedPattern3, true), presetParam.replaceVariable(presetParam.replacedPattern3, false),
                 presetParam.preserveValues, preserveTags, processTags,
-                presetParam.ignoreCase, presetParam.append3, presetParam.limitation3, 
+                presetParam.ignoreCase, presetParam.append3, presetParam.limitation3,
                 out searchedAndReplacedTags.searchedTag3Value, out searchedAndReplacedTags.replacedTag3Value, out searchedAndReplacedTags.originalReplacedTag3Value,
                 out searchedAndReplacedTags.replacedTag3ValuePreserved, out searchedAndReplacedTags.replacedTag3Preserved);
 
@@ -2073,7 +2073,7 @@ namespace MusicBeePlugin
             SetReplacedTag(currentFile, asrCommand, presetParam.searchedTag4Id, presetParam.replacedTag4Id,
                 presetParam.replaceVariable(presetParam.searchedPattern4, true), presetParam.replaceVariable(presetParam.replacedPattern4, false),
                 presetParam.preserveValues, preserveTags, processTags,
-                presetParam.ignoreCase, presetParam.append4, presetParam.limitation4, 
+                presetParam.ignoreCase, presetParam.append4, presetParam.limitation4,
                 out searchedAndReplacedTags.searchedTag4Value, out searchedAndReplacedTags.replacedTag4Value, out searchedAndReplacedTags.originalReplacedTag4Value,
                 out searchedAndReplacedTags.replacedTag4ValuePreserved, out searchedAndReplacedTags.replacedTag4Preserved);
 
@@ -2084,8 +2084,8 @@ namespace MusicBeePlugin
             SetReplacedTag(currentFile, asrCommand, presetParam.searchedTag5Id, presetParam.replacedTag5Id,
                 presetParam.replaceVariable(presetParam.searchedPattern5, true), presetParam.replaceVariable(presetParam.replacedPattern5, false),
                 presetParam.preserveValues, preserveTags, processTags,
-                presetParam.ignoreCase, presetParam.append5, presetParam.limitation5, 
-                out searchedAndReplacedTags.searchedTag5Value, out searchedAndReplacedTags.replacedTag5Value, out searchedAndReplacedTags.originalReplacedTag5Value, 
+                presetParam.ignoreCase, presetParam.append5, presetParam.limitation5,
+                out searchedAndReplacedTags.searchedTag5Value, out searchedAndReplacedTags.replacedTag5Value, out searchedAndReplacedTags.originalReplacedTag5Value,
                 out searchedAndReplacedTags.replacedTag5ValuePreserved, out searchedAndReplacedTags.replacedTag5Preserved);
 
 
@@ -2103,27 +2103,27 @@ namespace MusicBeePlugin
 
             if (presetParam.searchedPattern != string.Empty)
             {
-                SetFileTag(currentFile, (MetaDataType)presetParam.substituteTagId(presetParam.replacedTagId), 
+                SetFileTag(currentFile, (MetaDataType)presetParam.substituteTagId(presetParam.replacedTagId),
                     searchedAndReplacedTags.replacedTagValue, true, asrCommand);
 
                 if (presetParam.searchedPattern2 != string.Empty)
                 {
-                    SetFileTag(currentFile, (MetaDataType)presetParam.substituteTagId(presetParam.replacedTag2Id), 
+                    SetFileTag(currentFile, (MetaDataType)presetParam.substituteTagId(presetParam.replacedTag2Id),
                         searchedAndReplacedTags.replacedTag2Value, true, asrCommand);
 
                     if (presetParam.searchedPattern3 != string.Empty)
                     {
-                        SetFileTag(currentFile, (MetaDataType)presetParam.substituteTagId(presetParam.replacedTag3Id), 
+                        SetFileTag(currentFile, (MetaDataType)presetParam.substituteTagId(presetParam.replacedTag3Id),
                             searchedAndReplacedTags.replacedTag3Value, true, asrCommand);
 
                         if (presetParam.searchedPattern4 != string.Empty)
                         {
-                            SetFileTag(currentFile, (MetaDataType)presetParam.substituteTagId(presetParam.replacedTag4Id), 
+                            SetFileTag(currentFile, (MetaDataType)presetParam.substituteTagId(presetParam.replacedTag4Id),
                                 searchedAndReplacedTags.replacedTag4Value, true, asrCommand);
 
                             if (presetParam.searchedPattern5 != string.Empty)
                             {
-                                SetFileTag(currentFile, (MetaDataType)presetParam.substituteTagId(presetParam.replacedTag5Id), 
+                                SetFileTag(currentFile, (MetaDataType)presetParam.substituteTagId(presetParam.replacedTag5Id),
                                     searchedAndReplacedTags.replacedTag5Value, true, asrCommand);
                             }
                         }
@@ -2370,7 +2370,7 @@ namespace MusicBeePlugin
                 {
                     MessageBox.Show(this, MsgNumberOfTagsInClipboardDoesntCorrespondToNumberOfSelectedTracks
                         .Replace("%%FILE-TAGS-LENGTH%%", fileTags.Length.ToString())
-                        .Replace("%%SELECTED-FILES-COUNT%%", files.Length.ToString()), 
+                        .Replace("%%SELECTED-FILES-COUNT%%", files.Length.ToString()),
                         string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return false;
                 }
@@ -2598,7 +2598,7 @@ namespace MusicBeePlugin
             return result;
         }
 
-        private static ChangesDetectionResult Min(ChangesDetectionResult result1, ChangesDetectionResult result2, 
+        private static ChangesDetectionResult Min(ChangesDetectionResult result1, ChangesDetectionResult result2,
             ChangesDetectionResult result3, ChangesDetectionResult result4, ChangesDetectionResult result5)
         {
             int res = 100;
@@ -2626,9 +2626,9 @@ namespace MusicBeePlugin
             return (ChangesDetectionResult)res;
         }
 
-        private static (bool, ChangesDetectionResult, ChangesDetectionResult, ChangesDetectionResult, ChangesDetectionResult, ChangesDetectionResult, ChangesDetectionResult) 
+        private static (bool, ChangesDetectionResult, ChangesDetectionResult, ChangesDetectionResult, ChangesDetectionResult, ChangesDetectionResult, ChangesDetectionResult)
             DetectTagsChanges(Preset processingPreset, SearchedAndReplacedTagsStruct searchedAndReplacedTags)
-            // 1st result: false - skip, true - proceed
+        // 1st result: false - skip, true - proceed
         {
             ChangesDetectionResult result1 = ChangesDetectionResult.NoExclusionsDetected;
             ChangesDetectionResult result2 = ChangesDetectionResult.NoExclusionsDetected;
@@ -2727,9 +2727,9 @@ namespace MusicBeePlugin
 
                         var searchedAndReplacedTags = GetReplacedTags(currentFile, ref processingPresetCopy, this, false);
 
-                        (bool proceed, ChangesDetectionResult minResult, ChangesDetectionResult changeType1, ChangesDetectionResult changeType2, 
-                            ChangesDetectionResult changeType3, ChangesDetectionResult changeType4, ChangesDetectionResult changeType5) 
-                            
+                        (bool proceed, ChangesDetectionResult minResult, ChangesDetectionResult changeType1, ChangesDetectionResult changeType2,
+                            ChangesDetectionResult changeType3, ChangesDetectionResult changeType4, ChangesDetectionResult changeType5)
+
                             = DetectTagsChanges(processingPresetCopy, searchedAndReplacedTags);
 
                         if (proceed)
@@ -3610,7 +3610,7 @@ namespace MusicBeePlugin
         }
 
         private void presetListSelectedIndexChanged(int index)
-        { 
+        {
             saveColumnWidths(preset);
 
             if (index == -1)
@@ -3650,7 +3650,7 @@ namespace MusicBeePlugin
             }
             else
             {
-                presetsWorkingCopy.TryGetValue((presetList.SelectedItem as Preset).guid, out preset);
+                presetsWorkingCopy.TryGetValue((presetList.Items[index] as Preset).guid, out preset);
                 backedUpPreset = new Preset(preset);
 
                 if (!preset.userPreset && !DeveloperMode)
@@ -3852,6 +3852,7 @@ namespace MusicBeePlugin
             bool askToImportExistingAsCopy = true;
             bool importExistingAsCopy = false;
 
+            bool isMsrImported = false;
             int numberOfImportedPresets = 0;
             int numberOfImportedAsCopyPresets = 0;
             int numberOfErrors = 0;
@@ -3866,46 +3867,54 @@ namespace MusicBeePlugin
 
                     presetsWorkingCopy.TryGetValue(newPreset.guid, out Preset existingPreset);
 
-                    if (existingPreset != null)
+                    if (newPreset.guid.ToString() != "ff8d53d9-526b-4b40-bbf0-848b6b892f70")
                     {
-                        if (askToImportExistingAsCopy)
+                        if (existingPreset != null)
                         {
-                            DialogResult result = MessageBox.Show(this, MsgDoYouWantToImportExistingPresetsAsCopies, 
-                                null, MessageBoxButtons.YesNo,
-                                MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+                            if (askToImportExistingAsCopy)
+                            {
+                                DialogResult result = MessageBox.Show(this, MsgDoYouWantToImportExistingPresetsAsCopies,
+                                    null, MessageBoxButtons.YesNo,
+                                    MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
 
-                            askToImportExistingAsCopy = false;
-                            if (result == DialogResult.Yes)
-                            {
-                                importExistingAsCopy = true;
+                                askToImportExistingAsCopy = false;
+                                if (result == DialogResult.Yes)
+                                {
+                                    importExistingAsCopy = true;
+                                }
+                                else //if (result == DialogResult.No)
+                                {
+                                    importExistingAsCopy = false;
+                                }
                             }
-                            else //if (result == DialogResult.No)
+
+
+                            if (importExistingAsCopy)
                             {
-                                importExistingAsCopy = false;
+                                Preset newPresetCopy = new Preset(newPreset, true, false, null, "*");
+
+                                presetsWorkingCopy.Add(newPresetCopy.guid, newPresetCopy);
+                                numberOfImportedAsCopyPresets++;
+                            }
+                            else
+                            {
+                                newPreset.copyExtendedCustomizationsFrom(existingPreset);
+
+                                presetsWorkingCopy.Remove(newPreset.guid);
+                                presetsWorkingCopy.Add(newPreset.guid, newPreset);
+                                numberOfImportedPresets++;
                             }
                         }
-
-
-                        if (importExistingAsCopy)
+                        else //if (existingPreset == null)
                         {
-                            Preset newPresetCopy = new Preset(newPreset, true, false,  null, "*");
-
-                            presetsWorkingCopy.Add(newPresetCopy.guid, newPresetCopy);
-                            numberOfImportedAsCopyPresets++;
-                        }
-                        else
-                        {
-                            newPreset.copyExtendedCustomizationsFrom(existingPreset);
-
-                            presetsWorkingCopy.Remove(newPreset.guid);
                             presetsWorkingCopy.Add(newPreset.guid, newPreset);
                             numberOfImportedPresets++;
                         }
                     }
-                    else //if (existingPreset == null)
+                    else
                     {
-                        presetsWorkingCopy.Add(newPreset.guid, newPreset);
-                        numberOfImportedPresets++;
+                        MSR = newPreset;
+                        isMsrImported = true;
                     }
                 }
                 catch
@@ -3917,8 +3926,10 @@ namespace MusicBeePlugin
             refreshPresetList(selectedPresetGuid);
 
             string message = string.Empty;
+            if (isMsrImported)
+                message += AddLeadingSpaces(1, 4) + MsgMsrPresetWasImported;
             //if (numberOfImportedPresets > 0)
-                message += AddLeadingSpaces(numberOfImportedPresets, 4) + GetPluralForm(MsgPresetsWereImported, numberOfImportedPresets);
+            message += AddLeadingSpaces(numberOfImportedPresets, 4) + GetPluralForm(MsgPresetsWereImported, numberOfImportedPresets);
             if (numberOfImportedAsCopyPresets > 0)
                 message += AddLeadingSpaces(numberOfImportedAsCopyPresets, 4) + GetPluralForm(MsgPresetsWereImportedAsCopies, numberOfImportedAsCopyPresets);
             if (numberOfErrors > 0)
@@ -3989,7 +4000,7 @@ namespace MusicBeePlugin
             if (!processPresetChanges)
                 return;
 
-            unsavedChanges = true; 
+            unsavedChanges = true;
             buttonClose.Image = ThemedBitmapAddRef(this, WarningWide);
             toolTip1.SetToolTip(buttonClose, buttonCloseToolTip);
         }
@@ -4017,7 +4028,7 @@ namespace MusicBeePlugin
 
             if (!presetsWorkingCopy.Contains(selectedPresetGuid))
                 presetList.SelectedIndex = -1;
-            else if ((presetList.SelectedItem as Preset).guid != selectedPresetGuid)
+            else if ((presetList.SelectedItem as Preset)?.guid != selectedPresetGuid)
                 presetList.SelectedItem = presetsWorkingCopy[selectedPresetGuid];
 
         }
@@ -4025,6 +4036,8 @@ namespace MusicBeePlugin
         public void install(bool installAll)
         {
             string[] newPresetNames;
+
+            bool isMsrInstalled = false;
             int numberOfInstalledPresets = 0;
             int numberOfReinstalledPresets = 0;
             int numberOfUpdatedPresets = 0;
@@ -4040,8 +4053,8 @@ namespace MusicBeePlugin
                 selectedPresetGuid = (presetList.SelectedItem as Preset).guid;
 
 
-            if (MessageBox.Show(this, MsgInstallingConfirmation, string.Empty, 
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) 
+            if (MessageBox.Show(this, MsgInstallingConfirmation, string.Empty,
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
                 == DialogResult.No)
                 return;
 
@@ -4061,7 +4074,7 @@ namespace MusicBeePlugin
                 for (int i = newPresetNames.Length - 1; i >= 0; i--)
                 {
                     string newPresetName = newPresetNames[i];
-                    
+
                     try
                     {
                         Preset newPreset = Preset.Load(newPresetName, presetSerializer);
@@ -4080,7 +4093,7 @@ namespace MusicBeePlugin
                                 {
                                     if (askToResetCustomizedByUser && anyCustomization)
                                     {
-                                        if (MessageBox.Show(this, MsgDoYouWantToResetYourCustomizedPredefinedPresets, string.Empty, MessageBoxButtons.YesNo, 
+                                        if (MessageBox.Show(this, MsgDoYouWantToResetYourCustomizedPredefinedPresets, string.Empty, MessageBoxButtons.YesNo,
                                             MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.No)
                                         {
                                             askToResetCustomizedByUser = false;
@@ -4094,15 +4107,15 @@ namespace MusicBeePlugin
 
                                     if (askToRemovePresets && newPreset.removePreset)
                                     {
-                                        if (MessageBox.Show(this, MsgDoYouWantToRemovePredefinedPresets, string.Empty, MessageBoxButtons.YesNo, 
+                                        if (MessageBox.Show(this, MsgDoYouWantToRemovePredefinedPresets, string.Empty, MessageBoxButtons.YesNo,
                                             MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.No)
                                         {
-                                            askToResetCustomizedByUser = false;
+                                            askToRemovePresets = false;
                                             removePresets = false;
                                         }
                                         else
                                         {
-                                            askToResetCustomizedByUser = false;
+                                            askToRemovePresets = false;
                                         }
                                     }
 
@@ -4140,15 +4153,15 @@ namespace MusicBeePlugin
                                 {
                                     if (askToRemovePresets)
                                     {
-                                        if (MessageBox.Show(this, MsgDoYouWantToResetYourCustomizedPredefinedPresets, string.Empty, MessageBoxButtons.YesNo, 
+                                        if (MessageBox.Show(this, MsgDoYouWantToResetYourCustomizedPredefinedPresets, string.Empty, MessageBoxButtons.YesNo,
                                             MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.No)
                                         {
-                                            askToResetCustomizedByUser = false;
+                                            askToRemovePresets = false;
                                             removePresets = false;
                                         }
                                         else
                                         {
-                                            askToResetCustomizedByUser = false;
+                                            askToRemovePresets = false;
                                         }
                                     }
 
@@ -4198,6 +4211,7 @@ namespace MusicBeePlugin
                         else
                         {
                             MSR = newPreset;
+                            isMsrInstalled = true;
                         }
                     }
                     catch
@@ -4215,6 +4229,8 @@ namespace MusicBeePlugin
 
 
             string message = string.Empty;
+            if (isMsrInstalled)
+                message += AddLeadingSpaces(1, 4) + MsgMsrPresetWasInstalled;
             if (numberOfInstalledPresets > 0)
                 message += AddLeadingSpaces(numberOfInstalledPresets, 4) + GetPluralForm(MsgPresetsWereInstalled, numberOfInstalledPresets);
             if (numberOfReinstalledCustomizedPresets > 0)
@@ -4250,9 +4266,8 @@ namespace MusicBeePlugin
         public void deleteAll()
         {
             int numberOfDeletedPresets = 0;
-            int numberOfErrors = 0;
 
-            DialogResult result = MessageBox.Show(this, MsgDeletingConfirmation, string.Empty, MessageBoxButtons.YesNo, 
+            DialogResult result = MessageBox.Show(this, MsgDeletingConfirmation, string.Empty, MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
 
             if (result == DialogResult.No)
@@ -4300,14 +4315,10 @@ namespace MusicBeePlugin
 
             string message = string.Empty;
 
-            if (numberOfDeletedPresets == 0 && numberOfErrors == 0)
+            if (numberOfDeletedPresets == 0)
                 message = MsgNoPresetsDeleted;
             else
                 message += numberOfDeletedPresets + GetPluralForm(MsgPresetsWereDeleted, numberOfDeletedPresets);
-
-            if (numberOfErrors > 0)
-                message += "\n" + numberOfErrors + GetPluralForm(MsgFailedToDelete, numberOfErrors);
-
 
             MessageBox.Show(this, message, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
@@ -4739,9 +4750,6 @@ namespace MusicBeePlugin
 
             playlistComboBox.Enable(conditionCheckBox.Checked);
 
-            if (!processPresetChanges)
-                return;
-
             preset.condition = playlistComboBox.Enabled;
             preset.setCustomizationsFlag(this, backedUpPreset);
         }
@@ -4971,7 +4979,7 @@ namespace MusicBeePlugin
             for (int columnIndex = 1; columnIndex < previewTable.ColumnCount; columnIndex++)
             {
                 if (columnIndex == 6 && previewTable.Columns[columnIndex].Visible)
-                { 
+                {
                     var cell = previewTable.Rows[rowIndex].Cells[6];
                     ChangesDetectionResult changeType = (ChangesDetectionResult)cell.Tag;
 
@@ -4983,7 +4991,7 @@ namespace MusicBeePlugin
                         cell.Style = UnchangedCellStyle;
                     else if (changeType == ChangesDetectionResult.NoExclusionsDetected)
                         cell.Style = ChangedCellStyle;
-                } 
+                }
                 else if (columnIndex == 9 && previewTable.Columns[columnIndex].Visible)
                 {
                     var cell = previewTable.Rows[rowIndex].Cells[9];
@@ -5448,7 +5456,7 @@ namespace MusicBeePlugin
                 if (presetList.SelectedIndex != -1)
                 {
                     autoAppliedAsrPresetGuids.Add(checkedChangedPreset.guid, false);
-                    
+
                     if (!SavedSettings.dontPlayTickedAutoApplyingAsrLrPresetSound)
                         System.Media.SystemSounds.Exclamation.Play();
                 }
@@ -5612,7 +5620,7 @@ namespace MusicBeePlugin
             }
             else
             {
-                if (!SavedSettings.dontShowPredefinedPresetsCantBeChangedMessage && 
+                if (!SavedSettings.dontShowPredefinedPresetsCantBeChangedMessage &&
                     MessageBox.Show(this, MsgPredefinedPresetsCantBeChanged,
                     string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
                 {
@@ -5759,7 +5767,6 @@ namespace MusicBeePlugin
             }
             else if (unsavedChanges)
             {
-                DialogResult result = DialogResult.No;
                 MessageBoxDefaultButton lastAnswer = SavedSettings.unsavedChangesConfirmationLastAnswer;
                 MessageBoxButtons confirmationButtons = MessageBoxButtons.YesNo;
 
@@ -5768,7 +5775,7 @@ namespace MusicBeePlugin
 
                 forceCloseForms = true;
 
-                result = MessageBox.Show(this, MsgAsrDoYouWantToSaveChangesBeforeClosingTheWindow,
+                DialogResult result = MessageBox.Show(this, MsgAsrDoYouWantToSaveChangesBeforeClosingTheWindow,
                     string.Empty, confirmationButtons, MessageBoxIcon.Warning, lastAnswer);
 
 

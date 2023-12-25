@@ -58,6 +58,7 @@
             resources.ApplyResources(this.buttonOK, "buttonOK");
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Tag = "#buttonCancel";
+            this.toolTip1.SetToolTip(this.buttonOK, resources.GetString("buttonOK.ToolTip"));
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // buttonCancel
@@ -66,13 +67,14 @@
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Tag = "#controlsPanel@non-defaultable";
+            this.toolTip1.SetToolTip(this.buttonCancel, resources.GetString("buttonCancel.ToolTip"));
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // previewTable
             // 
+            resources.ApplyResources(this.previewTable, "previewTable");
             this.previewTable.AllowUserToAddRows = false;
             this.previewTable.AllowUserToDeleteRows = false;
-            resources.ApplyResources(this.previewTable, "previewTable");
             this.previewTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.previewTable.BackgroundColor = System.Drawing.SystemColors.Window;
             this.previewTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -93,7 +95,8 @@
             this.previewTable.Name = "previewTable";
             this.previewTable.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.previewTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.previewTable.Tag = "";
+            this.previewTable.Tag = "#TagHistoryCommand&controlsPanel";
+            this.toolTip1.SetToolTip(this.previewTable, resources.GetString("previewTable.ToolTip"));
             this.previewTable.RowHeadersWidthChanged += new System.EventHandler(this.previewTable_RowHeadersWidthChanged);
             this.previewTable.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.previewTable_CellEndEdit);
             this.previewTable.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.previewTable_CellFormatting);
@@ -133,7 +136,8 @@
             // 
             resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
-            this.label3.Tag = "#optionsPanel";
+            this.label3.Tag = "#optionsPanel@pinned-to-parent-x";
+            this.toolTip1.SetToolTip(this.label3, resources.GetString("label3.ToolTip"));
             // 
             // searchFolderTextBox
             // 
@@ -144,6 +148,7 @@
             this.searchFolderTextBox.FormattingEnabled = true;
             this.searchFolderTextBox.Name = "searchFolderTextBox";
             this.searchFolderTextBox.Tag = "#browseButton";
+            this.toolTip1.SetToolTip(this.searchFolderTextBox, resources.GetString("searchFolderTextBox.ToolTip"));
             this.searchFolderTextBox.Leave += new System.EventHandler(this.searchFolderTextBox_Leave);
             // 
             // browseButton
@@ -151,6 +156,7 @@
             resources.ApplyResources(this.browseButton, "browseButton");
             this.browseButton.Name = "browseButton";
             this.browseButton.Tag = "#forLastLabel@non-defaultable";
+            this.toolTip1.SetToolTip(this.browseButton, resources.GetString("browseButton.ToolTip"));
             this.browseButton.Click += new System.EventHandler(this.browseButton_Click);
             // 
             // dataGridViewTextBoxColumn1
@@ -173,6 +179,7 @@
             resources.ApplyResources(this.forLastLabel, "forLastLabel");
             this.forLastLabel.Name = "forLastLabel";
             this.forLastLabel.Tag = "#numberOfBackupsNumericUpDown";
+            this.toolTip1.SetToolTip(this.forLastLabel, resources.GetString("forLastLabel.ToolTip"));
             // 
             // numberOfBackupsNumericUpDown
             // 
@@ -184,6 +191,7 @@
             0});
             this.numberOfBackupsNumericUpDown.Name = "numberOfBackupsNumericUpDown";
             this.numberOfBackupsNumericUpDown.Tag = "#backupsLabel";
+            this.toolTip1.SetToolTip(this.numberOfBackupsNumericUpDown, resources.GetString("numberOfBackupsNumericUpDown.ToolTip"));
             this.numberOfBackupsNumericUpDown.Value = new decimal(new int[] {
             10,
             0,
@@ -195,19 +203,21 @@
             resources.ApplyResources(this.backupsLabel, "backupsLabel");
             this.backupsLabel.Name = "backupsLabel";
             this.backupsLabel.Tag = "#rereadButton";
+            this.toolTip1.SetToolTip(this.backupsLabel, resources.GetString("backupsLabel.ToolTip"));
             // 
             // rereadButton
             // 
             resources.ApplyResources(this.rereadButton, "rereadButton");
             this.rereadButton.Name = "rereadButton";
             this.rereadButton.Tag = "#optionsPanel@non-defaultable";
+            this.toolTip1.SetToolTip(this.rereadButton, resources.GetString("rereadButton.ToolTip"));
             this.rereadButton.Click += new System.EventHandler(this.rereadButton_Click);
             // 
             // restoreSelectedButton
             // 
             resources.ApplyResources(this.restoreSelectedButton, "restoreSelectedButton");
             this.restoreSelectedButton.Name = "restoreSelectedButton";
-            this.restoreSelectedButton.Tag = "";
+            this.restoreSelectedButton.Tag = "#undoButton";
             this.toolTip1.SetToolTip(this.restoreSelectedButton, resources.GetString("restoreSelectedButton.ToolTip"));
             this.restoreSelectedButton.Click += new System.EventHandler(this.restoreSelectedButton_Click);
             // 
@@ -258,6 +268,8 @@
             // 
             resources.ApplyResources(this.label4, "label4");
             this.label4.Name = "label4";
+            this.label4.Tag = "@pinned-to-parent-x";
+            this.toolTip1.SetToolTip(this.label4, resources.GetString("label4.ToolTip"));
             // 
             // trackListComboBox
             // 
@@ -268,6 +280,7 @@
             resources.GetString("trackListComboBox.Items")});
             this.trackListComboBox.Name = "trackListComboBox";
             this.trackListComboBox.Tag = "#optionsPanel";
+            this.toolTip1.SetToolTip(this.trackListComboBox, resources.GetString("trackListComboBox.ToolTip"));
             this.trackListComboBox.DropDownClosed += new System.EventHandler(this.trackListComboBox_DropDownClosed);
             // 
             // optionsPanel
@@ -281,7 +294,8 @@
             this.optionsPanel.Controls.Add(this.searchFolderTextBox);
             this.optionsPanel.Controls.Add(this.trackListComboBox);
             this.optionsPanel.Name = "optionsPanel";
-            this.optionsPanel.Tag = "#TagHistoryCommand";
+            this.optionsPanel.Tag = "#TagHistoryCommand&previewTable";
+            this.toolTip1.SetToolTip(this.optionsPanel, resources.GetString("optionsPanel.ToolTip"));
             // 
             // controlsPanel
             // 
@@ -296,12 +310,15 @@
             this.controlsPanel.Controls.Add(this.restoreSelectedButton);
             this.controlsPanel.Controls.Add(this.placeholderLabel3);
             this.controlsPanel.Name = "controlsPanel";
+            this.controlsPanel.Tag = "#TagHistoryCommand&TagHistoryCommand";
+            this.toolTip1.SetToolTip(this.controlsPanel, resources.GetString("controlsPanel.ToolTip"));
             // 
             // placeholderLabel3
             // 
             resources.ApplyResources(this.placeholderLabel3, "placeholderLabel3");
             this.placeholderLabel3.Name = "placeholderLabel3";
             this.placeholderLabel3.Tag = "";
+            this.toolTip1.SetToolTip(this.placeholderLabel3, resources.GetString("placeholderLabel3.ToolTip"));
             // 
             // TagHistoryCommand
             // 
@@ -315,6 +332,7 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.optionsPanel);
             this.Name = "TagHistoryCommand";
+            this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.Load += new System.EventHandler(this.TagHistoryCommand_Load);
             this.Shown += new System.EventHandler(this.TagHistoryPlugin_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).EndInit();
