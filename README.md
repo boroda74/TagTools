@@ -215,7 +215,6 @@ These commands allow to (auto)backup tags of all tracks in your library and rest
 
 *Notes:*
 
-- "Tag History" is available in track context menu only.
 - The plugin backs up tags using tack unique IDs, which are stored in MusicBee library (database) only. So, it's some kind of "Time machine" only. THE PLUGIN WON'T BE ABLE TO RESTORE TAGS IF YOU HAVE CREATED A NEW MUSICBEE LIBRARY FROM SCRATCH, E.G. ON A NEW PC (EVEN IF YOU HAVE ADDED THE SAME TRACKS TO THE NEW LIBRARY)!
 
 ----
