@@ -1997,7 +1997,7 @@ namespace MusicBeePlugin
             }
             replacedTagPreserved = false;
 
-            if (!string.IsNullOrWhiteSpace(preserveValues) && (";" + preserveValues + ";").Contains(";" + originalReplacedTagValue + ";"))
+            if (!string.IsNullOrWhiteSpace(preserveValues) && (";;" + preserveValues + ";;").Contains(";;" + originalReplacedTagValue + ";;"))
             {
                 replacedTagValuePreserved = true;
                 replacedTagValue = originalReplacedTagValue;
@@ -4718,7 +4718,7 @@ namespace MusicBeePlugin
         private void buttonSelectPreservedTags_Click(object sender, EventArgs e)
         {
             string[] selectedTags = processPreserveTagsTextBox.Text.Split(new string[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
-            selectedTags = CopyTagsToClipboardCommand.SelectTags(TagToolsPlugin, SelectTagsWindowTitle, SelectButtonName, selectedTags, false);
+            selectedTags = CopyTagsToClipboardCommand.SelectTags(TagToolsPlugin, SelectTagsWindowTitle, SelectButtonName, selectedTags, false, false);
 
             string preserveTags = string.Empty;
             if (selectedTags.Length > 0)

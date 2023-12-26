@@ -338,7 +338,7 @@ namespace MusicBeePlugin
         private void selectTagsButton_Click(object sender, EventArgs e)
         {
             buffer.Clear();
-            displayedTags = CopyTagsToClipboardCommand.SelectTags(TagToolsPlugin, SelectDisplayedTagsWindowTitle, SelectButtonName, displayedTags, true);
+            displayedTags = CopyTagsToClipboardCommand.SelectTags(TagToolsPlugin, SelectDisplayedTagsWindowTitle, SelectButtonName, displayedTags, true, true);
             fillTable(false);
         }
 

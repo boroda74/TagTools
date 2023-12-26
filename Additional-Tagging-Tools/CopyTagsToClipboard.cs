@@ -26,9 +26,6 @@ namespace MusicBeePlugin
             Text = formTitle;
             buttonOK.Text = copyButtonName;
             returnSelectedTags = true;
-
-            MbForm = MbForm.IsDisposed ? (Form)FromHandle(MbApiInterface.MB_GetWindowHandle()) : MbForm;
-            MbForm.AddOwnedForm(this);
         }
 
 
@@ -36,38 +33,38 @@ namespace MusicBeePlugin
         {
             base.initializeForm();
 
-            MbForm = MbForm.IsDisposed ? (Form)FromHandle(MbApiInterface.MB_GetWindowHandle()) : MbForm;
-            MbForm.AddOwnedForm(this);
+            if (!returnSelectedTags)
+            {
+                tagSetComboBox.Items.Add(SavedSettings.copyTagsTagSets[0].setName);
+                tagSetComboBox.Items.Add(SavedSettings.copyTagsTagSets[1].setName);
+                tagSetComboBox.Items.Add(SavedSettings.copyTagsTagSets[2].setName);
+                tagSetComboBox.Items.Add(SavedSettings.copyTagsTagSets[3].setName);
+                tagSetComboBox.Items.Add(SavedSettings.copyTagsTagSets[4].setName);
+                tagSetComboBox.Items.Add(SavedSettings.copyTagsTagSets[5].setName);
+                tagSetComboBox.Items.Add(SavedSettings.copyTagsTagSets[6].setName);
+                tagSetComboBox.Items.Add(SavedSettings.copyTagsTagSets[7].setName);
+                tagSetComboBox.Items.Add(SavedSettings.copyTagsTagSets[8].setName);
+                tagSetComboBox.Items.Add(SavedSettings.copyTagsTagSets[9].setName);
 
-            tagSetComboBox.Items.Add(SavedSettings.copyTagsTagSets[0].setName);
-            tagSetComboBox.Items.Add(SavedSettings.copyTagsTagSets[1].setName);
-            tagSetComboBox.Items.Add(SavedSettings.copyTagsTagSets[2].setName);
-            tagSetComboBox.Items.Add(SavedSettings.copyTagsTagSets[3].setName);
-            tagSetComboBox.Items.Add(SavedSettings.copyTagsTagSets[4].setName);
-            tagSetComboBox.Items.Add(SavedSettings.copyTagsTagSets[5].setName);
-            tagSetComboBox.Items.Add(SavedSettings.copyTagsTagSets[6].setName);
-            tagSetComboBox.Items.Add(SavedSettings.copyTagsTagSets[7].setName);
-            tagSetComboBox.Items.Add(SavedSettings.copyTagsTagSets[8].setName);
-            tagSetComboBox.Items.Add(SavedSettings.copyTagsTagSets[9].setName);
-
-            tagSetComboBox_DropDownClosed(null, null);
+                tagSetComboBox_DropDownClosed(null, null);
+            }
 
 
             button_GotFocus(AcceptButton, null); //Let's mark active button
         }
 
-        public static string[] SelectTags(Plugin tagToolsPluginParam, string formTitle, string copyButtonName, string[] preselectedTags, bool addArtworkAlso)
+        public static string[] SelectTags(Plugin tagToolsPluginParam, string formTitle, string copyButtonName, string[] preselectedTags, bool addArtworkAlso, bool addDateCreatedAlso)
         {
             CopyTagsToClipboardCommand form = new CopyTagsToClipboardCommand(tagToolsPluginParam, formTitle, copyButtonName);
 
             form.selectedTags = (string[])preselectedTags.Clone();
-            form.fillTags(false, addArtworkAlso);
+            form.fillTags(false, addArtworkAlso, addDateCreatedAlso);
             Display(form, true);
 
             return form.selectedTags;
         }
 
-        public static int[] SelectTags(Plugin tagToolsPluginParam, string formTitle, string copyButtonName, int[] preselectedTags, bool addArtworkAlso)
+        public static int[] SelectTags(Plugin tagToolsPluginParam, string formTitle, string copyButtonName, int[] preselectedTags, bool addArtworkAlso, bool addDateCreatedAlso)
         {
             CopyTagsToClipboardCommand form = new CopyTagsToClipboardCommand(tagToolsPluginParam, formTitle, copyButtonName);
 
@@ -75,7 +72,7 @@ namespace MusicBeePlugin
             for (int i = 0; i < preselectedTags.Length; i++)
                 form.selectedTags[i] = GetTagName((MetaDataType)preselectedTags[i]);
 
-            form.fillTags(false, addArtworkAlso);
+            form.fillTags(false, addArtworkAlso, addDateCreatedAlso);
             Display(form, true);
 
             int[] selectedTagIds = new int[form.selectedTags.Length];
@@ -93,12 +90,12 @@ namespace MusicBeePlugin
                 selectedTags[i] = checkedSourceTagList.Items[i].ToString().Substring(2);
         }
 
-        private void fillTags(bool addReadonlyTagsAlso, bool addArtworkAlso)
+        private void fillTags(bool addReadonlyTagsAlso, bool addArtworkAlso, bool addDateCreatedAlso)
         {
             checkedSourceTagList.Items.Clear();
             sourceTagList.Items.Clear();
 
-            FillListByTagNames(sourceTagList.Items, addReadonlyTagsAlso, addArtworkAlso, false, true);
+            FillListByTagNames(sourceTagList.Items, addReadonlyTagsAlso, addArtworkAlso, false, true, false, addDateCreatedAlso);
 
             if (addReadonlyTagsAlso)
                 FillListByPropNames(sourceTagList.Items, true);
@@ -134,7 +131,7 @@ namespace MusicBeePlugin
                 selectedTags[i] = tagName;
             }
 
-            fillTags(true, true);
+            fillTags(true, true, true);
         }
 
         public static bool CopyTagsToClipboard(int tagSet)
@@ -293,10 +290,6 @@ namespace MusicBeePlugin
 
         private void tagSetComboBox_DropDownClosed(object sender, EventArgs e)
         {
-            if (tagSetComboBox.SelectedIndex == SavedSettings.lastInteractiveTagSet)
-                return;
-
-
             if (tagSetComboBox.SelectedIndex == -1)
             {
                 tagSetComboBox.SelectedIndex = SavedSettings.lastInteractiveTagSet;

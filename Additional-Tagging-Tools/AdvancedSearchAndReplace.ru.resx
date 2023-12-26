@@ -1108,7 +1108,7 @@
     <value>399, 23</value>
   </data>
   <data name="preserveTagValuesTextBox.ToolTip" xml:space="preserve">
-    <value>Указанные значения тегов никогда не будут изменяться. Разделяйте значения тегов ; </value>
+    <value>Указанные значения тегов никогда не будут изменяться, независимо от того в каких тегах они встречаются. Разделяйте значения тегов ;;</value>
   </data>
   <data name="labelPreserveTagValues.Location" type="System.Drawing.Point, System.Drawing">
     <value>588, 3</value>
@@ -1120,7 +1120,7 @@
     <value>Не изменять значения тегов:</value>
   </data>
   <data name="labelPreserveTagValues.ToolTip" xml:space="preserve">
-    <value>Никогда не изменять эти значения тегов (разделенные ;), независимо от того, в каких тегах они встречаютя</value>
+    <value>Никогда не изменять эти значения тегов (разделенные ;;), независимо от того, в каких тегах они встречаютя</value>
   </data>
   <data name="buttonSelectPreservedTags.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>

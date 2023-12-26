@@ -1,6 +1,7 @@
 ﻿using ExtensionMethods;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -370,7 +371,7 @@ namespace MusicBeePlugin
             Plugin.MbApiInterface.MB_SetBackgroundTaskMessage(string.Empty);
         }
 
-        public new static BackupType Load(string fileName, string backupFileExtension = ".xml")
+        public static BackupType Load(string fileName, string backupFileExtension = ".xml")
         {
             BackupType baseline;
             string baselineFilename = Plugin.GetBackupBaselineFilename();
@@ -631,7 +632,11 @@ namespace MusicBeePlugin
 
                         for (int i = 0; i < tagIds.Count; i++)
                         {
-                            if (Plugin.SavedSettings.backupArtworks || tagIds[i] != Plugin.MetaDataType.Artwork)
+                            if (tagIds[i] == Plugin.DateCreatedTagId)
+                                ;//Let's skip this tag...
+                            else if (tagIds[i] == Plugin.MetaDataType.Artwork && !Plugin.SavedSettings.backupArtworks)
+                                ;//Let's skip this tag...
+                            else
                                 backup.setValue(libraryTags[i], trackId, (int)tagIds[i]);
                         }
 

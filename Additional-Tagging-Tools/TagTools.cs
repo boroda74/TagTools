@@ -1485,8 +1485,6 @@ namespace MusicBeePlugin
             {
                 if (!double.TryParse(arg, out result.resultD))
                     return ConvertStrings(arg, ResultType.Double, DataType.Number, true);
-                else //Let's try to parse as number if there were no replacements
-                    return ConvertStrings(arg, ResultType.Double, DataType.Number, true);
 
                 return result;
             }
@@ -2550,7 +2548,7 @@ namespace MusicBeePlugin
         }
 
         public static void FillListByTagNames(System.Collections.IList list, bool addReadOnlyTagsAlso = false, bool addArtworkAlso = false,
-            bool addNullAlso = true, bool addTagMarkers = false, bool addAllTagsPseudoTagAlso = false)
+            bool addNullAlso = true, bool addTagMarkers = false, bool addAllTagsPseudoTagAlso = false, bool addDateCreatedAlso = true)
         {
             foreach (string tagName in TagNamesIds.Keys)
             {
@@ -2633,6 +2631,11 @@ namespace MusicBeePlugin
                 if (tagName == ArtworkName)
                 {
                     if (addArtworkAlso)
+                        list.Add(marker + tagName);
+                }
+                else if (tagName == DateCreatedTagName)
+                {
+                    if (addDateCreatedAlso)
                         list.Add(marker + tagName);
                 }
                 else if (tagName == AllTagsPseudoTagName)
@@ -4583,7 +4586,7 @@ namespace MusicBeePlugin
             if (SavedSettings.copyTagsTagSets == null)
             {
                 List<string> tagNameList = new List<string>();
-                FillListByTagNames(tagNameList, false, true, false);
+                FillListByTagNames(tagNameList, false, false, false, false, false, false);
                 //FillListWithProps(tagNameList);
 
                 if (tagNameList.Contains("Sort Artist"))

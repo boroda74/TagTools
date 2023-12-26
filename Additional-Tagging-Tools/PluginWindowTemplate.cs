@@ -1649,9 +1649,6 @@ namespace MusicBeePlugin
             if (!dontShowForm) //If dontShowForm, then form is created to get DPI/font scaling only, won't show it, form will be disposed soon.
             {
                 //Common initialization
-                if (MbForm.IsDisposed)
-                    MbForm = (Form)FromHandle(MbApiInterface.MB_GetWindowHandle());
-
                 clickedButton = EmptyButton;
 
                 lock (OpenedForms)
@@ -1753,6 +1750,9 @@ namespace MusicBeePlugin
 
         protected void showFormInternal()
         {
+            if (MbForm.IsDisposed)
+                MbForm = (Form)FromHandle(MbApiInterface.MB_GetWindowHandle());
+
             if (modal)
                 base.ShowDialog(MbForm);
             else

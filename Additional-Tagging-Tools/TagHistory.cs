@@ -70,7 +70,7 @@ namespace MusicBeePlugin
             base.initializeForm();
 
             tagNames = new List<string>();
-            FillListByTagNames(tagNames, false, true, false);
+            FillListByTagNames(tagNames, false, true, false, false, false, false);
 
             tagIds = new List<MetaDataType>();
             for (int i = 0; i < tagNames.Count; i++)
@@ -581,6 +581,10 @@ namespace MusicBeePlugin
 
                 for (int j = displayedTags.Length - 1; j >= 0; j--)
                 {
+                    if ((MetaDataType)displayedTags[j] == DateCreatedTagId)
+                        continue;
+
+
                     for (int i = cachedBackups.Count - 1; i >= 0; i--)
                     {
                         if (GetFileTag(trackUrls[trackIndex - 1], (MetaDataType)displayedTags[j]) != cachedBackups[i].getIncValue(trackIds[trackIndex - 1], displayedTags[j], baseline))
@@ -801,7 +805,7 @@ namespace MusicBeePlugin
 
         private void selectTagsButton_Click(object sender, EventArgs e)
         {
-            displayedTags = CopyTagsToClipboardCommand.SelectTags(TagToolsPlugin, SelectDisplayedTagsWindowTitle, SelectButtonName, displayedTags, true);
+            displayedTags = CopyTagsToClipboardCommand.SelectTags(TagToolsPlugin, SelectDisplayedTagsWindowTitle, SelectButtonName, displayedTags, SavedSettings.backupArtworks, false);
             fillTable(searchFolderTextBox.Text, false, (int)numberOfBackupsNumericUpDown.Value, trackListComboBox.SelectedIndex, false, false);
         }
 

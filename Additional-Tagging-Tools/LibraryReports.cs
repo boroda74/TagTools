@@ -4395,7 +4395,7 @@ namespace MusicBeePlugin
 
             System.Diagnostics.Process.Start(documentPathFileName);
 
-            return; //Code below may not work reliable
+            return; //Code below does not work reliably
 
             if (ProcessedReportDeletions.Contains(documentPathFileName))
                 return;
