@@ -1671,7 +1671,7 @@ namespace MusicBeePlugin
             if (DeviceDpi != 96)
                 dpiScaling = DeviceDpi / 96f;
 
-            UseMusicBeeFontSkinColors = SavedSettings.useMusicBeeFontSkinColors;
+            UseMusicBeeFontSkinColors = !SavedSettings.dontUseMusicBeeFontSkinColors;
             addAllChildrenControls(this);
 
 

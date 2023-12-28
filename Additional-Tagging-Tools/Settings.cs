@@ -99,7 +99,7 @@ namespace MusicBeePlugin
 
             minimizePluginWindowsCheckBox.Checked = SavedSettings.minimizePluginWindows;
 
-            useMusicBeeFontSkinColorsCheckBox.Checked = SavedSettings.useMusicBeeFontSkinColors;
+            useMusicBeeFontSkinColorsCheckBox.Checked = !SavedSettings.dontUseMusicBeeFontSkinColors;
             highlightChangedTagsCheckBox.Checked = !SavedSettings.dontHighlightChangedTags;
 
             includeNotChangedTagsCheckBox.Checked = !SavedSettings.dontIncludeInPreviewLinesWithoutChangedTags;
@@ -120,7 +120,7 @@ namespace MusicBeePlugin
 
         private void saveSettings()
         {
-            bool previousUseSkinColors = SavedSettings.useMusicBeeFontSkinColors;
+            bool previousDontUseSkinColors = SavedSettings.dontUseMusicBeeFontSkinColors;
 
             SavedSettings.allowAsrLrPresetAutoexecution = allowAsrLrPresetAutoexecutionCheckBox.Checked;
             SavedSettings.allowCommandExecutionWithoutPreview = allowCommandExecutionWithoutPreviewCheckBox.Checked;
@@ -142,7 +142,7 @@ namespace MusicBeePlugin
 
             SavedSettings.minimizePluginWindows = minimizePluginWindowsCheckBox.Checked;
 
-            SavedSettings.useMusicBeeFontSkinColors = useMusicBeeFontSkinColorsCheckBox.Checked;
+            SavedSettings.dontUseMusicBeeFontSkinColors = !useMusicBeeFontSkinColorsCheckBox.Checked;
             SavedSettings.dontHighlightChangedTags = !highlightChangedTagsCheckBox.Checked;
 
             SavedSettings.dontIncludeInPreviewLinesWithoutChangedTags = !includeNotChangedTagsCheckBox.Checked;
@@ -165,7 +165,7 @@ namespace MusicBeePlugin
             TagToolsPlugin.addPluginMenuItems();
             TagToolsPlugin.addPluginContextMenuItems();
 
-            if (previousUseSkinColors != SavedSettings.useMusicBeeFontSkinColors)
+            if (previousDontUseSkinColors != SavedSettings.dontUseMusicBeeFontSkinColors)
             {
                 //Let's dispose all unused themed bitmaps
                 FormsThemedBitmapsRelease(EmptyForm);
