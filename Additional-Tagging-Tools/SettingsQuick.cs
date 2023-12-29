@@ -84,7 +84,8 @@ namespace MusicBeePlugin
 
             minimizePluginWindowsCheckBox.Checked = SavedSettings.minimizePluginWindows;
 
-            useMusicBeeFontSkinColorsCheckBox.Checked = !SavedSettings.dontUseMusicBeeFontSkinColors;
+            useSkinColorsCheckBox.Checked = !SavedSettings.dontUseSkinColors;
+            useMusicBeeFontCheckBox.Checked = SavedSettings.useMusicBeeFont;
             highlightChangedTagsCheckBox.Checked = !SavedSettings.dontHighlightChangedTags;
 
             includeNotChangedTagsCheckBox.Checked = !SavedSettings.dontIncludeInPreviewLinesWithoutChangedTags;
@@ -101,14 +102,16 @@ namespace MusicBeePlugin
 
         private void saveSettings()
         {
-            bool previousDontUseSkinColors = SavedSettings.dontUseMusicBeeFontSkinColors;
+            bool previousDontUseSkinColors = SavedSettings.dontUseSkinColors;
+            bool previousUseMusicBeeFont = SavedSettings.useMusicBeeFont;
 
             SavedSettings.allowAsrLrPresetAutoexecution = allowAsrLrPresetAutoexecutionCheckBox.Checked;
             SavedSettings.allowCommandExecutionWithoutPreview = allowCommandExecutionWithoutPreviewCheckBox.Checked;
 
             SavedSettings.minimizePluginWindows = minimizePluginWindowsCheckBox.Checked;
 
-            SavedSettings.dontUseMusicBeeFontSkinColors = !useMusicBeeFontSkinColorsCheckBox.Checked;
+            SavedSettings.dontUseSkinColors = !useSkinColorsCheckBox.Checked;
+            SavedSettings.useMusicBeeFont = useMusicBeeFontCheckBox.Checked;
             SavedSettings.dontHighlightChangedTags = !highlightChangedTagsCheckBox.Checked;
 
             SavedSettings.dontIncludeInPreviewLinesWithoutChangedTags = !includeNotChangedTagsCheckBox.Checked;
@@ -127,7 +130,7 @@ namespace MusicBeePlugin
             TagToolsPlugin.addPluginMenuItems();
             TagToolsPlugin.addPluginContextMenuItems();
 
-            if (previousDontUseSkinColors != SavedSettings.dontUseMusicBeeFontSkinColors)
+            if (previousDontUseSkinColors != SavedSettings.dontUseSkinColors || previousUseMusicBeeFont != SavedSettings.useMusicBeeFont)
             {
                 //Let's dispose all unused themed bitmaps
                 FormsThemedBitmapsRelease(EmptyForm);
@@ -171,7 +174,7 @@ namespace MusicBeePlugin
 
         private void useMusicBeeFontSkinColorsCheckBoxLabel_Click(object sender, EventArgs e)
         {
-            useMusicBeeFontSkinColorsCheckBox.Checked = !useMusicBeeFontSkinColorsCheckBox.Checked;
+            useSkinColorsCheckBox.Checked = !useSkinColorsCheckBox.Checked;
         }
 
         private void highlightChangedTagsCheckBoxLabel_Click(object sender, EventArgs e)

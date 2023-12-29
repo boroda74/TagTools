@@ -64,7 +64,8 @@ namespace MusicBeePlugin
 
         protected bool ignoreSizePositionChanges = true;
 
-        protected static bool UseMusicBeeFontSkinColors = false;
+        protected static bool UseSkinColors = false;
+        protected static bool UseMusicBeeFont = false;
 
         //Skin button labels for rendering disabled buttons & combo boxes
         protected Dictionary<Button, string> buttonLabels = new Dictionary<Button, string>();
@@ -235,13 +236,13 @@ namespace MusicBeePlugin
                 button_GotFocus(sender, e);
             else if (button.Focused)
                 button_GotFocus(sender, e);
-            else if (UseMusicBeeFontSkinColors)
+            else if (UseSkinColors)
                 button_LostFocus(sender, e);
         }
 
         protected void setButtonColors(Button button)
         {
-            if (UseMusicBeeFontSkinColors)
+            if (UseSkinColors)
             {
                 Button acceptButton = AcceptButton as Button;
 
@@ -285,7 +286,7 @@ namespace MusicBeePlugin
             {
                 artificiallyFocusedAcceptButton = false;
                 button_LostFocus(button, null);
-                lastSelectedControl.Select();
+                lastSelectedControl?.Select();
             }
             else if (acceptButton != button) //Not accept button clicked
             {
@@ -341,7 +342,7 @@ namespace MusicBeePlugin
             {
                 buttonLabels.AddReplace(button, text);
 
-                if (UseMusicBeeFontSkinColors)
+                if (UseSkinColors)
                 {
                     button.Text = string.Empty;
                     button.Refresh();
@@ -1191,7 +1192,7 @@ namespace MusicBeePlugin
                 button.LostFocus += button_LostFocus;
 
 
-                if (!UseMusicBeeFontSkinColors)
+                if (!UseSkinColors)
                 {
                     button.FlatStyle = FlatStyle.Standard;
                     buttonLabels.AddReplace(button, button.Text);
@@ -1220,7 +1221,7 @@ namespace MusicBeePlugin
 
 
             //SplitContainer and (disabled) Button above must be skinned in any case (even if using system colors)
-            if (!UseMusicBeeFontSkinColors)
+            if (!UseSkinColors)
                 return;
 
 
@@ -1308,6 +1309,7 @@ namespace MusicBeePlugin
                 control.BackColor = HeaderCellStyle.BackColor;
                 control.ForeColor = HeaderCellStyle.ForeColor;
 
+                (control as DataGridView).EnableHeadersVisualStyles = false;
                 (control as DataGridView).BorderStyle = BorderStyle.FixedSingle;
                 (control as DataGridView).ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
                 (control as DataGridView).BackgroundColor = UnchangedCellStyle.BackColor;
@@ -1366,7 +1368,7 @@ namespace MusicBeePlugin
 
         public void skinMoveScaleAllControls()
         {
-            if (UseMusicBeeFontSkinColors)
+            if (UseSkinColors)
             {
                 BackColor = FormBackColor;
                 ForeColor = FormForeColor;
@@ -1542,82 +1544,83 @@ namespace MusicBeePlugin
             MaximumSize = new Size(0, 0); //Let's temporary remove max. size restrictions
 
 
-            Font mbFont;
-            if (UseMusicBeeFontSkinColors)
+            FontEquality mbThisFormFontInitialEquality = CompareFonts(Font, initialFormFont);
+
+            if (UseMusicBeeFont || mbThisFormFontInitialEquality != FontEquality.Equal)
+            {
+
+                Font mbFont;
                 mbFont = MbApiInterface.Setting_GetDefaultFont();
-            else
-                mbFont = Font;
-
-            FontEquality mbThisFormFontEquality = CompareFonts(mbFont, initialFormFont);
+                FontEquality mbThisFormFontEquality = CompareFonts(mbFont, initialFormFont);
 
 
-            for (int i = allControls.Count - 1; i >= 0; i--) //Required for correct DPI scaling
-                allControls[i].SuspendLayout();
+                for (int i = allControls.Count - 1; i >= 0; i--) //Required for correct DPI scaling
+                    allControls[i].SuspendLayout();
 
-            SuspendLayout();
+                SuspendLayout();
 
 
-            if (mbThisFormFontEquality == FontEquality.DifferentFontUnits)
-            {
-                MessageBox.Show(MbForm, "Unsupported MusicBee font type!\n" +
-                    "Either choose different font in MusicBee preferences or disable using skin colors in plugin settings.",
-                    string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                //Won't change form's font, but let's rescale in case of DPI change...
-            }
-            else if (mbThisFormFontEquality == FontEquality.Equal)
-            {
-                //Won't change form's font, but let's rescale in case of DPI change...
-            }
-            else
-            {
-                bool formFontEqualNamesStyles;
-
-                if ((mbThisFormFontEquality & FontEquality.EqualNames & FontEquality.EqualStyles) != 0) //Let's change font sizes only, they can't be the same (see above)
+                if (mbThisFormFontEquality == FontEquality.DifferentFontUnits)
                 {
-                    formFontEqualNamesStyles = true;
-                    Font = new Font(Font.Name, mbFont.Size, Font.Style);
+                    MessageBox.Show(MbForm, "Unsupported MusicBee font type!\n" +
+                        "Either choose different font in MusicBee preferences or disable using skin colors in plugin settings.",
+                        string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    //Won't change form's font, but let's rescale in case of DPI change...
+                }
+                else if (mbThisFormFontEquality == FontEquality.Equal)
+                {
+                    //Won't change form's font, but let's rescale in case of DPI change...
                 }
                 else
                 {
-                    formFontEqualNamesStyles = false;
-                    Font = new Font(mbFont.Name, mbFont.Size, mbFont.Style | Font.Style);
+                    bool formFontEqualNamesStyles;
+
+                    if ((mbThisFormFontEquality & FontEquality.EqualNames & FontEquality.EqualStyles) != 0) //Let's change font sizes only, they can't be the same (see above)
+                    {
+                        formFontEqualNamesStyles = true;
+                        Font = new Font(Font.Name, mbFont.Size, Font.Style);
+                    }
+                    else
+                    {
+                        formFontEqualNamesStyles = false;
+                        Font = new Font(mbFont.Name, mbFont.Size, mbFont.Style | Font.Style);
+                    }
+
+
+                    foreach (var control in allControls)
+                    {
+                        if (ownFontControls.Contains(control))
+                        {
+                            var controlFormFontEquality = CompareFonts(control.Font, initialFormFont);
+
+                            if (formFontEqualNamesStyles)
+                                control.Font = new Font(control.Font.Name, mbFont.Size * control.Font.Size / initialFormFont.Size, control.Font.Style);
+                            else if ((controlFormFontEquality & FontEquality.EqualNames) != 0 || (controlFormFontEquality & FontEquality.PartiallyEqualNames) != 0)
+                                control.Font = new Font(mbFont.Name, mbFont.Size * control.Font.Size / initialFormFont.Size, mbFont.Style | control.Font.Style);
+                            else if ((controlFormFontEquality & FontEquality.SymbolStyles) == 0)
+                                control.Font = new Font(control.Font.Name, mbFont.Size * control.Font.Size / initialFormFont.Size, mbFont.Style | control.Font.Style);
+                            else
+                                control.Font = new Font(control.Font.Name, mbFont.Size * control.Font.Size / initialFormFont.Size, control.Font.Style);
+                        }
+                        else if (control.Text == " ") //It's zero width space
+                        {
+                            control.Font = new Font(initialFormFont.Name, control.Font.Size, FontStyle.Regular);
+                        }
+                    }
                 }
 
 
-                foreach (var control in allControls)
+                for (int i = 0; i < allControls.Count; i++) //Required for correct DPI scaling
                 {
-                    if (ownFontControls.Contains(control))
-                    {
-                        var controlFormFontEquality = CompareFonts(control.Font, initialFormFont);
-
-                        if (formFontEqualNamesStyles)
-                            control.Font = new Font(control.Font.Name, mbFont.Size * control.Font.Size / initialFormFont.Size, control.Font.Style);
-                        else if ((controlFormFontEquality & FontEquality.EqualNames) != 0 || (controlFormFontEquality & FontEquality.PartiallyEqualNames) != 0)
-                            control.Font = new Font(mbFont.Name, mbFont.Size * control.Font.Size / initialFormFont.Size, mbFont.Style | control.Font.Style);
-                        else if ((controlFormFontEquality & FontEquality.SymbolStyles) == 0)
-                            control.Font = new Font(control.Font.Name, mbFont.Size * control.Font.Size / initialFormFont.Size, mbFont.Style | control.Font.Style);
-                        else
-                            control.Font = new Font(control.Font.Name, mbFont.Size * control.Font.Size / initialFormFont.Size, control.Font.Style);
-                    }
-                    else if (control.Text == " ") //It's zero width space
-                    {
-                        control.Font = new Font(initialFormFont.Name, control.Font.Size, FontStyle.Regular);
-                    }
+                    allControls[i].ResumeLayout(false);
+                    allControls[i].PerformLayout();
                 }
+
+
+                ResumeLayout(false);
+                PerformLayout();
             }
-
-
-            for (int i = 0; i < allControls.Count; i++) //Required for correct DPI scaling
-            {
-                allControls[i].ResumeLayout(false);
-                allControls[i].PerformLayout();
-            }
-
-
-            ResumeLayout(false);
-            PerformLayout();
-
 
             MinimumSize = Size;
 
@@ -1671,7 +1674,9 @@ namespace MusicBeePlugin
             if (DeviceDpi != 96)
                 dpiScaling = DeviceDpi / 96f;
 
-            UseMusicBeeFontSkinColors = !SavedSettings.dontUseMusicBeeFontSkinColors;
+            UseSkinColors = !SavedSettings.dontUseSkinColors;
+            UseMusicBeeFont = SavedSettings.useMusicBeeFont;
+
             addAllChildrenControls(this);
 
 

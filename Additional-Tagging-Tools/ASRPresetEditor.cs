@@ -25,7 +25,7 @@ namespace MusicBeePlugin
         {
             base.initializeForm();
 
-            if (UseMusicBeeFontSkinColors)
+            if (UseSkinColors)
             {
                 linkLabel1.DisabledLinkColor = DimmedAccentColor;
                 linkLabel1.LinkColor = TickedColor;

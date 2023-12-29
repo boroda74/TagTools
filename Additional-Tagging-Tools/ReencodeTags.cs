@@ -54,11 +54,6 @@ namespace MusicBeePlugin
                 usedEncodingList.Text = defaultEncoding.WebName;
 
 
-            previewTable.EnableHeadersVisualStyles = !UseMusicBeeFontSkinColors;
-
-            previewTable.BackgroundColor = UnchangedCellStyle.BackColor;
-            previewTable.DefaultCellStyle = UnchangedCellStyle;
-
             DatagridViewCheckBoxHeaderCell cbHeader = new DatagridViewCheckBoxHeaderCell();
             cbHeader.Style = HeaderCellStyle;
             cbHeader.setState(true);

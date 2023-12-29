@@ -77,11 +77,6 @@ namespace MusicBeePlugin
                 tagIds.Add(GetTagId(tagNames[i]));
 
 
-            previewTable.EnableHeadersVisualStyles = !UseMusicBeeFontSkinColors;
-
-            previewTable.BackgroundColor = UnchangedCellStyle.BackColor;
-            previewTable.DefaultCellStyle = UnchangedCellStyle;
-
             previewTable.Columns[0].HeaderCell.Style = HeaderCellStyle;
             previewTable.Columns[1].HeaderCell.Style = HeaderCellStyle;
             previewTable.Columns[2].HeaderCell.Style = HeaderCellStyle;

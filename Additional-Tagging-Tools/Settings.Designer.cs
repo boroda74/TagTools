@@ -22,7 +22,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.versionLabel = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label9 = new System.Windows.Forms.Label();
             this.playTickedAsrPresetSoundCheckBoxLabel = new System.Windows.Forms.Label();
             this.playTickedAsrPresetSoundCheckBox = new System.Windows.Forms.CheckBox();
             this.playStoppedSoundCheckBoxLabel = new System.Windows.Forms.Label();
@@ -31,33 +30,36 @@
             this.playStartedSoundCheckBox = new System.Windows.Forms.CheckBox();
             this.playCompletedSoundCheckBoxLabel = new System.Windows.Forms.Label();
             this.playCompletedSoundCheckBox = new System.Windows.Forms.CheckBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label11 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.unitsPanel = new System.Windows.Forms.Panel();
             this.unitGBox = new System.Windows.Forms.TextBox();
             this.unitMBox = new System.Windows.Forms.TextBox();
             this.unitKBox = new System.Windows.Forms.TextBox();
             this.saveLastSkippedButton = new System.Windows.Forms.Button();
-            this.useMusicBeeFontSkinColorsCheckBox = new System.Windows.Forms.CheckBox();
+            this.useSkinColorsCheckBox = new System.Windows.Forms.CheckBox();
             this.closeHiddenCommandWindowsRadioButton = new System.Windows.Forms.RadioButton();
             this.showHiddenCommandWindowsRadioButton = new System.Windows.Forms.RadioButton();
             this.highlightChangedTagsCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label8 = new System.Windows.Forms.Label();
             this.legendGroupBox = new System.Windows.Forms.GroupBox();
-            this.legendLabel = new System.Windows.Forms.Label();
-            this.preservedTagsLegendTextBox = new System.Windows.Forms.TextBox();
             this.preservedTagValuesLegendTextBox = new System.Windows.Forms.TextBox();
+            this.preservedTagsLegendTextBox = new System.Windows.Forms.TextBox();
             this.changedLegendTextBox = new System.Windows.Forms.TextBox();
+            this.legendLabel = new System.Windows.Forms.Label();
+            this.highlightChangedTagsCheckBoxLabel = new System.Windows.Forms.Label();
             this.showHiddenCommandWindowsRadioButtonLabel = new System.Windows.Forms.Label();
             this.closeHiddenCommandWindowsRadioButtonLabel = new System.Windows.Forms.Label();
             this.minimizePluginWindowsCheckBoxLabel = new System.Windows.Forms.Label();
             this.minimizePluginWindowsCheckBox = new System.Windows.Forms.CheckBox();
-            this.highlightChangedTagsCheckBoxLabel = new System.Windows.Forms.Label();
-            this.useMusicBeeFontSkinColorsCheckBoxLabel = new System.Windows.Forms.Label();
+            this.useMusicBeeFontCheckBoxLabel = new System.Windows.Forms.Label();
+            this.useMusicBeeFontCheckBox = new System.Windows.Forms.CheckBox();
+            this.useSkinColorsCheckBoxLabel = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.showReencodeTagCheckBox = new System.Windows.Forms.CheckBox();
             this.showChangeCaseCheckBox = new System.Windows.Forms.CheckBox();
             this.showLibraryReportsCheckBox = new System.Windows.Forms.CheckBox();
@@ -89,17 +91,20 @@
             this.showCopyTagCheckBoxLabel = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.includePreservedTagValuesCheckBoxLabel = new System.Windows.Forms.Label();
             this.includePreservedTagValuesCheckBox = new System.Windows.Forms.CheckBox();
             this.includePreservedTagsCheckBoxLabel = new System.Windows.Forms.Label();
             this.includePreservedTagsCheckBox = new System.Windows.Forms.CheckBox();
             this.includeNotChangedTagsCheckBoxLabel = new System.Windows.Forms.Label();
             this.includeNotChangedTagsCheckBox = new System.Windows.Forms.CheckBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.buttonsPanel = new System.Windows.Forms.Panel();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.unitsPanel.SuspendLayout();
@@ -108,6 +113,9 @@
             this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.buttonsPanel.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonCancel
@@ -140,7 +148,6 @@
             // groupBox3
             // 
             resources.ApplyResources(this.groupBox3, "groupBox3");
-            this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Controls.Add(this.playTickedAsrPresetSoundCheckBoxLabel);
             this.groupBox3.Controls.Add(this.playTickedAsrPresetSoundCheckBox);
             this.groupBox3.Controls.Add(this.playStoppedSoundCheckBoxLabel);
@@ -149,14 +156,10 @@
             this.groupBox3.Controls.Add(this.playStartedSoundCheckBox);
             this.groupBox3.Controls.Add(this.playCompletedSoundCheckBoxLabel);
             this.groupBox3.Controls.Add(this.playCompletedSoundCheckBox);
+            this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
-            this.groupBox3.Tag = "#PluginSettings@pinned-to-parent-x";
-            // 
-            // label9
-            // 
-            resources.ApplyResources(this.label9, "label9");
-            this.label9.Name = "label9";
+            this.groupBox3.Tag = "#tabPage1@pinned-to-parent-x";
             // 
             // playTickedAsrPresetSoundCheckBoxLabel
             // 
@@ -206,22 +209,22 @@
             this.playCompletedSoundCheckBox.Name = "playCompletedSoundCheckBox";
             this.playCompletedSoundCheckBox.Tag = "#playCompletedSoundCheckBoxLabel";
             // 
+            // label9
+            // 
+            resources.ApplyResources(this.label9, "label9");
+            this.label9.Name = "label9";
+            // 
             // groupBox4
             // 
             resources.ApplyResources(this.groupBox4, "groupBox4");
-            this.groupBox4.Controls.Add(this.label11);
             this.groupBox4.Controls.Add(this.label4);
             this.groupBox4.Controls.Add(this.label3);
             this.groupBox4.Controls.Add(this.label2);
+            this.groupBox4.Controls.Add(this.label11);
             this.groupBox4.Controls.Add(this.unitsPanel);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.TabStop = false;
-            this.groupBox4.Tag = "#PluginSettings@pinned-to-parent-x";
-            // 
-            // label11
-            // 
-            resources.ApplyResources(this.label11, "label11");
-            this.label11.Name = "label11";
+            this.groupBox4.Tag = "#tabPage2@pinned-to-parent-x";
             // 
             // label4
             // 
@@ -238,6 +241,11 @@
             // 
             resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
+            // 
+            // label11
+            // 
+            resources.ApplyResources(this.label11, "label11");
+            this.label11.Name = "label11";
             // 
             // unitsPanel
             // 
@@ -269,12 +277,12 @@
             this.saveLastSkippedButton.Tag = "#buttonOK@pinned-to-parent-y";
             this.saveLastSkippedButton.Click += new System.EventHandler(this.saveLastSkippedButton_Click);
             // 
-            // useMusicBeeFontSkinColorsCheckBox
+            // useSkinColorsCheckBox
             // 
-            resources.ApplyResources(this.useMusicBeeFontSkinColorsCheckBox, "useMusicBeeFontSkinColorsCheckBox");
-            this.useMusicBeeFontSkinColorsCheckBox.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.useMusicBeeFontSkinColorsCheckBox.Name = "useMusicBeeFontSkinColorsCheckBox";
-            this.useMusicBeeFontSkinColorsCheckBox.Tag = "#useMusicBeeFontSkinColorsCheckBoxLabel";
+            resources.ApplyResources(this.useSkinColorsCheckBox, "useSkinColorsCheckBox");
+            this.useSkinColorsCheckBox.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.useSkinColorsCheckBox.Name = "useSkinColorsCheckBox";
+            this.useSkinColorsCheckBox.Tag = "#useSkinColorsCheckBoxLabel";
             // 
             // closeHiddenCommandWindowsRadioButton
             // 
@@ -299,50 +307,34 @@
             // groupBox2
             // 
             resources.ApplyResources(this.groupBox2, "groupBox2");
-            this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.legendGroupBox);
+            this.groupBox2.Controls.Add(this.highlightChangedTagsCheckBoxLabel);
+            this.groupBox2.Controls.Add(this.highlightChangedTagsCheckBox);
             this.groupBox2.Controls.Add(this.showHiddenCommandWindowsRadioButtonLabel);
             this.groupBox2.Controls.Add(this.showHiddenCommandWindowsRadioButton);
             this.groupBox2.Controls.Add(this.closeHiddenCommandWindowsRadioButtonLabel);
             this.groupBox2.Controls.Add(this.closeHiddenCommandWindowsRadioButton);
             this.groupBox2.Controls.Add(this.minimizePluginWindowsCheckBoxLabel);
             this.groupBox2.Controls.Add(this.minimizePluginWindowsCheckBox);
-            this.groupBox2.Controls.Add(this.highlightChangedTagsCheckBoxLabel);
-            this.groupBox2.Controls.Add(this.highlightChangedTagsCheckBox);
-            this.groupBox2.Controls.Add(this.useMusicBeeFontSkinColorsCheckBoxLabel);
-            this.groupBox2.Controls.Add(this.useMusicBeeFontSkinColorsCheckBox);
+            this.groupBox2.Controls.Add(this.useMusicBeeFontCheckBoxLabel);
+            this.groupBox2.Controls.Add(this.useMusicBeeFontCheckBox);
+            this.groupBox2.Controls.Add(this.useSkinColorsCheckBoxLabel);
+            this.groupBox2.Controls.Add(this.useSkinColorsCheckBox);
+            this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
-            this.groupBox2.Tag = "#PluginSettings@pinned-to-parent-x";
-            // 
-            // label8
-            // 
-            resources.ApplyResources(this.label8, "label8");
-            this.label8.Name = "label8";
+            this.groupBox2.Tag = "#tabPage1@pinned-to-parent-x";
             // 
             // legendGroupBox
             // 
             resources.ApplyResources(this.legendGroupBox, "legendGroupBox");
-            this.legendGroupBox.Controls.Add(this.legendLabel);
-            this.legendGroupBox.Controls.Add(this.preservedTagsLegendTextBox);
             this.legendGroupBox.Controls.Add(this.preservedTagValuesLegendTextBox);
+            this.legendGroupBox.Controls.Add(this.preservedTagsLegendTextBox);
             this.legendGroupBox.Controls.Add(this.changedLegendTextBox);
+            this.legendGroupBox.Controls.Add(this.legendLabel);
             this.legendGroupBox.Name = "legendGroupBox";
             this.legendGroupBox.TabStop = false;
             this.legendGroupBox.Tag = "#groupBox2";
-            // 
-            // legendLabel
-            // 
-            resources.ApplyResources(this.legendLabel, "legendLabel");
-            this.legendLabel.Name = "legendLabel";
-            // 
-            // preservedTagsLegendTextBox
-            // 
-            resources.ApplyResources(this.preservedTagsLegendTextBox, "preservedTagsLegendTextBox");
-            this.preservedTagsLegendTextBox.Cursor = System.Windows.Forms.Cursors.Default;
-            this.preservedTagsLegendTextBox.Name = "preservedTagsLegendTextBox";
-            this.preservedTagsLegendTextBox.ReadOnly = true;
-            this.preservedTagsLegendTextBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.preservedTagsLegendTextBox_MouseClick);
             // 
             // preservedTagValuesLegendTextBox
             // 
@@ -352,6 +344,14 @@
             this.preservedTagValuesLegendTextBox.ReadOnly = true;
             this.preservedTagValuesLegendTextBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.preservedTagValuesLegendTextBox_MouseClick);
             // 
+            // preservedTagsLegendTextBox
+            // 
+            resources.ApplyResources(this.preservedTagsLegendTextBox, "preservedTagsLegendTextBox");
+            this.preservedTagsLegendTextBox.Cursor = System.Windows.Forms.Cursors.Default;
+            this.preservedTagsLegendTextBox.Name = "preservedTagsLegendTextBox";
+            this.preservedTagsLegendTextBox.ReadOnly = true;
+            this.preservedTagsLegendTextBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.preservedTagsLegendTextBox_MouseClick);
+            // 
             // changedLegendTextBox
             // 
             resources.ApplyResources(this.changedLegendTextBox, "changedLegendTextBox");
@@ -360,6 +360,17 @@
             this.changedLegendTextBox.ReadOnly = true;
             this.toolTip1.SetToolTip(this.changedLegendTextBox, resources.GetString("changedLegendTextBox.ToolTip"));
             this.changedLegendTextBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.changedLegendTextBox_MouseClick);
+            // 
+            // legendLabel
+            // 
+            resources.ApplyResources(this.legendLabel, "legendLabel");
+            this.legendLabel.Name = "legendLabel";
+            // 
+            // highlightChangedTagsCheckBoxLabel
+            // 
+            resources.ApplyResources(this.highlightChangedTagsCheckBoxLabel, "highlightChangedTagsCheckBoxLabel");
+            this.highlightChangedTagsCheckBoxLabel.Name = "highlightChangedTagsCheckBoxLabel";
+            this.highlightChangedTagsCheckBoxLabel.Click += new System.EventHandler(this.highlightChangedTagsCheckBoxLabel_Click);
             // 
             // showHiddenCommandWindowsRadioButtonLabel
             // 
@@ -385,18 +396,30 @@
             this.minimizePluginWindowsCheckBox.Name = "minimizePluginWindowsCheckBox";
             this.minimizePluginWindowsCheckBox.Tag = "#minimizePluginWindowsCheckBoxLabel";
             // 
-            // highlightChangedTagsCheckBoxLabel
+            // useMusicBeeFontCheckBoxLabel
             // 
-            resources.ApplyResources(this.highlightChangedTagsCheckBoxLabel, "highlightChangedTagsCheckBoxLabel");
-            this.highlightChangedTagsCheckBoxLabel.Name = "highlightChangedTagsCheckBoxLabel";
-            this.highlightChangedTagsCheckBoxLabel.Click += new System.EventHandler(this.highlightChangedTagsCheckBoxLabel_Click);
+            resources.ApplyResources(this.useMusicBeeFontCheckBoxLabel, "useMusicBeeFontCheckBoxLabel");
+            this.useMusicBeeFontCheckBoxLabel.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.useMusicBeeFontCheckBoxLabel.Name = "useMusicBeeFontCheckBoxLabel";
             // 
-            // useMusicBeeFontSkinColorsCheckBoxLabel
+            // useMusicBeeFontCheckBox
             // 
-            resources.ApplyResources(this.useMusicBeeFontSkinColorsCheckBoxLabel, "useMusicBeeFontSkinColorsCheckBoxLabel");
-            this.useMusicBeeFontSkinColorsCheckBoxLabel.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.useMusicBeeFontSkinColorsCheckBoxLabel.Name = "useMusicBeeFontSkinColorsCheckBoxLabel";
-            this.useMusicBeeFontSkinColorsCheckBoxLabel.Click += new System.EventHandler(this.useMusicBeeFontSkinColorsCheckBoxLabel_Click);
+            resources.ApplyResources(this.useMusicBeeFontCheckBox, "useMusicBeeFontCheckBox");
+            this.useMusicBeeFontCheckBox.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.useMusicBeeFontCheckBox.Name = "useMusicBeeFontCheckBox";
+            this.useMusicBeeFontCheckBox.Tag = "#useMusicBeeFontCheckBoxLabel";
+            // 
+            // useSkinColorsCheckBoxLabel
+            // 
+            resources.ApplyResources(this.useSkinColorsCheckBoxLabel, "useSkinColorsCheckBoxLabel");
+            this.useSkinColorsCheckBoxLabel.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.useSkinColorsCheckBoxLabel.Name = "useSkinColorsCheckBoxLabel";
+            this.useSkinColorsCheckBoxLabel.Click += new System.EventHandler(this.useMusicBeeFontSkinColorsCheckBoxLabel_Click);
+            // 
+            // label8
+            // 
+            resources.ApplyResources(this.label8, "label8");
+            this.label8.Name = "label8";
             // 
             // showReencodeTagCheckBox
             // 
@@ -517,7 +540,7 @@
             this.groupBox1.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
-            this.groupBox1.Tag = "#PluginSettings@pinned-to-parent-x";
+            this.groupBox1.Tag = "#tabPage1@pinned-to-parent-x";
             // 
             // contextMenuCheckBoxLabel
             // 
@@ -643,21 +666,16 @@
             // groupBox5
             // 
             resources.ApplyResources(this.groupBox5, "groupBox5");
-            this.groupBox5.Controls.Add(this.label10);
             this.groupBox5.Controls.Add(this.includePreservedTagValuesCheckBoxLabel);
             this.groupBox5.Controls.Add(this.includePreservedTagValuesCheckBox);
             this.groupBox5.Controls.Add(this.includePreservedTagsCheckBoxLabel);
             this.groupBox5.Controls.Add(this.includePreservedTagsCheckBox);
             this.groupBox5.Controls.Add(this.includeNotChangedTagsCheckBoxLabel);
             this.groupBox5.Controls.Add(this.includeNotChangedTagsCheckBox);
+            this.groupBox5.Controls.Add(this.label10);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.TabStop = false;
-            this.groupBox5.Tag = "#PluginSettings@pinned-to-parent-x";
-            // 
-            // label10
-            // 
-            resources.ApplyResources(this.label10, "label10");
-            this.label10.Name = "label10";
+            this.groupBox5.Tag = "#tabPage2@pinned-to-parent-x";
             // 
             // includePreservedTagValuesCheckBoxLabel
             // 
@@ -695,6 +713,11 @@
             this.includeNotChangedTagsCheckBox.Name = "includeNotChangedTagsCheckBox";
             this.includeNotChangedTagsCheckBox.Tag = "#includeNotChangedTagsCheckBoxLabel";
             // 
+            // label10
+            // 
+            resources.ApplyResources(this.label10, "label10");
+            this.label10.Name = "label10";
+            // 
             // label1
             // 
             resources.ApplyResources(this.label1, "label1");
@@ -719,17 +742,37 @@
             this.buttonsPanel.Name = "buttonsPanel";
             this.buttonsPanel.Tag = "#PluginSettings&PluginSettings@pinned-to-parent-x";
             // 
+            // tabControl1
+            // 
+            resources.ApplyResources(this.tabControl1, "tabControl1");
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Tag = "#PluginSettings@pinned-to-parent-x";
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.groupBox3);
+            this.tabPage1.Controls.Add(this.groupBox2);
+            this.tabPage1.Controls.Add(this.groupBox1);
+            resources.ApplyResources(this.tabPage1, "tabPage1");
+            this.tabPage1.Name = "tabPage1";
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.groupBox4);
+            this.tabPage2.Controls.Add(this.groupBox5);
+            resources.ApplyResources(this.tabPage2, "tabPage2");
+            this.tabPage2.Name = "tabPage2";
+            // 
             // PluginSettings
             // 
             this.AcceptButton = this.buttonOK;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.groupBox5);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label6);
@@ -753,6 +796,9 @@
             this.groupBox5.PerformLayout();
             this.buttonsPanel.ResumeLayout(false);
             this.buttonsPanel.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -777,7 +823,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button saveLastSkippedButton;
         private System.Windows.Forms.CheckBox playTickedAsrPresetSoundCheckBox;
-        private System.Windows.Forms.CheckBox useMusicBeeFontSkinColorsCheckBox;
+        private System.Windows.Forms.CheckBox useSkinColorsCheckBox;
         private System.Windows.Forms.RadioButton closeHiddenCommandWindowsRadioButton;
         private System.Windows.Forms.RadioButton showHiddenCommandWindowsRadioButton;
         private System.Windows.Forms.CheckBox highlightChangedTagsCheckBox;
@@ -821,7 +867,7 @@
         private System.Windows.Forms.Label showCTCheckBoxLabel;
         private System.Windows.Forms.Label minimizePluginWindowsCheckBoxLabel;
         private System.Windows.Forms.Label highlightChangedTagsCheckBoxLabel;
-        private System.Windows.Forms.Label useMusicBeeFontSkinColorsCheckBoxLabel;
+        private System.Windows.Forms.Label useSkinColorsCheckBoxLabel;
         private System.Windows.Forms.Label showHiddenCommandWindowsRadioButtonLabel;
         private System.Windows.Forms.Label closeHiddenCommandWindowsRadioButtonLabel;
         private System.Windows.Forms.Label playStartedSoundCheckBoxLabel;
@@ -843,5 +889,10 @@
         private System.Windows.Forms.CheckBox allowAsrLrPresetAutoexecutionCheckBox;
         private System.Windows.Forms.Panel buttonsPanel;
         private System.Windows.Forms.Panel unitsPanel;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Label useMusicBeeFontCheckBoxLabel;
+        private System.Windows.Forms.CheckBox useMusicBeeFontCheckBox;
     }
 }

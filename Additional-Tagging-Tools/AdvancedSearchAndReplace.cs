@@ -199,11 +199,6 @@ namespace MusicBeePlugin
             assignHotkeyCheckBoxText = Regex.Replace(assignHotkeyCheckBoxLabel.Text, "^(.*:\\s).*", "$1");
             assignHotkeyCheckBoxLabel.Text = assignHotkeyCheckBoxText + (MaximumNumberOfASRHotkeys - asrPresetsWithHotkeysCount) + "/" + MaximumNumberOfASRHotkeys;
 
-            previewTable.EnableHeadersVisualStyles = !UseMusicBeeFontSkinColors;
-
-            previewTable.BackgroundColor = UnchangedCellStyle.BackColor;
-            previewTable.DefaultCellStyle = UnchangedCellStyle;
-
             DatagridViewCheckBoxHeaderCell cbHeader = new DatagridViewCheckBoxHeaderCell();
             cbHeader.Style = HeaderCellStyle;
             cbHeader.setState(true);

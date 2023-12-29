@@ -61,11 +61,6 @@ namespace MusicBeePlugin
             FillListByTagNames((templateTable.Columns[0] as DataGridViewComboBoxColumn).Items, true, false, false);
 
 
-            templateTable.EnableHeadersVisualStyles = !UseMusicBeeFontSkinColors;
-
-            templateTable.BackgroundColor = UnchangedCellStyle.BackColor;
-            templateTable.DefaultCellStyle = UnchangedCellStyle;
-
             templateTable.Columns[1].HeaderCell.Style = HeaderCellStyle;
             templateTable.Columns[2].HeaderCell.Style = HeaderCellStyle;
             templateTable.Columns[3].HeaderCell.Style = HeaderCellStyle;
@@ -73,11 +68,6 @@ namespace MusicBeePlugin
 
             templateTable.Columns[1].Width = (int)Math.Round(templateTable.Columns[1].Width * hDpiFontScaling);
             templateTable.Columns[2].Width = (int)Math.Round(templateTable.Columns[1].Width * hDpiFontScaling);
-
-            previewTable.EnableHeadersVisualStyles = !UseMusicBeeFontSkinColors;
-
-            previewTable.BackgroundColor = UnchangedCellStyle.BackColor;
-            previewTable.DefaultCellStyle = UnchangedCellStyle;
 
             DatagridViewCheckBoxHeaderCell cbHeader = new DatagridViewCheckBoxHeaderCell();
             cbHeader.Style = HeaderCellStyle;

@@ -92,7 +92,7 @@ namespace ExtensionMethods
             Color enabledColor;
             Color disabledColor;
 
-            if (Plugin.SavedSettings.dontUseMusicBeeFontSkinColors)
+            if (Plugin.SavedSettings.dontUseSkinColors)
             {
                 enabledColor = SystemColors.ControlText;
                 disabledColor = SystemColors.GrayText;
@@ -528,7 +528,8 @@ namespace MusicBeePlugin
             public bool dontShowBackupRestore;
 
             public bool minimizePluginWindows;
-            public bool dontUseMusicBeeFontSkinColors;
+            public bool dontUseSkinColors;
+            public bool useMusicBeeFont;
             public bool dontHighlightChangedTags;
 
             public bool dontIncludeInPreviewLinesWithoutChangedTags;
@@ -4900,7 +4901,7 @@ namespace MusicBeePlugin
             const float DimmedWeight = 0.65f;
             const float DeepDimmedWeight = 0.3f;
 
-            if (!SavedSettings.dontUseMusicBeeFontSkinColors)
+            if (!SavedSettings.dontUseSkinColors)
             {
                 MusicBeeBackColor = MbForm.BackColor;
 
@@ -5048,7 +5049,7 @@ namespace MusicBeePlugin
             SplitterColor = GetWeightedColor(SystemColors.Desktop, AccentColor, 0.8f);//***
 
 
-            if (!SavedSettings.dontUseMusicBeeFontSkinColors) //It's in case if skinned & not skinned buttons use different flat styles. At the moment it's not so.
+            if (SavedSettings.useMusicBeeFont) //It's in case if skinned & not skinned buttons use different flat styles. At the moment it's not so.
             {
                 int size = (int)Math.Round(17f * vDpiFontScaling);
                 int wideHeight = (int)Math.Round(15f * vDpiFontScaling);
@@ -5149,10 +5150,10 @@ namespace MusicBeePlugin
             ThemedBitmapAddRef(EmptyForm, Window);
 
 
-            HeaderCellStyle.Alignment = DataGridViewContentAlignment.TopLeft;//******
+            HeaderCellStyle.Alignment = DataGridViewContentAlignment.TopLeft;
 
             //DATAGRIDVIEW COLOR DEFINITIONS
-            if (!SavedSettings.dontUseMusicBeeFontSkinColors)
+            if (!SavedSettings.dontUseSkinColors)
             {
                 HeaderCellStyle.ForeColor = ButtonForeColor;
                 HeaderCellStyle.BackColor = DeepDimmedAccentColor;

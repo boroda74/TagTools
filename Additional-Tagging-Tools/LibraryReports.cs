@@ -366,22 +366,11 @@ namespace MusicBeePlugin
             TotalsFont = new Font(Font.FontFamily, tagNameFontSize, FontStyle.Bold);
 
 
-            previewTable.EnableHeadersVisualStyles = !UseMusicBeeFontSkinColors;
-            tagsDataGridView.EnableHeadersVisualStyles = !UseMusicBeeFontSkinColors;
-            expressionsDataGridView.EnableHeadersVisualStyles = !UseMusicBeeFontSkinColors;
-
-            previewTable.BackgroundColor = UnchangedCellStyle.BackColor;
-            previewTable.DefaultCellStyle = UnchangedCellStyle;
-
-            tagsDataGridView.BackgroundColor = UnchangedCellStyle.BackColor;
-            tagsDataGridView.DefaultCellStyle = UnchangedCellStyle;
             tagsDataGridView.Columns[0].HeaderCell.Style = HeaderCellStyle;
             tagsDataGridView.Columns[1].HeaderCell.Style = HeaderCellStyle;
             tagsDataGridView.Columns[2].HeaderCell.Style = HeaderCellStyle;
             tagsDataGridView.Columns[3].HeaderCell.Style = HeaderCellStyle;
 
-            expressionsDataGridView.BackgroundColor = UnchangedCellStyle.BackColor;
-            expressionsDataGridView.DefaultCellStyle = UnchangedCellStyle;
             expressionsDataGridView.Columns[0].HeaderCell.Style = HeaderCellStyle;
             expressionsDataGridView.Columns[1].HeaderCell.Style = HeaderCellStyle;
 

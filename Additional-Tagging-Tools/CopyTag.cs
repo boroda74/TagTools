@@ -67,11 +67,6 @@ namespace MusicBeePlugin
             appendedTextBox.Enable(appendCheckBox.Checked);
 
 
-            previewTable.EnableHeadersVisualStyles = !UseMusicBeeFontSkinColors;
-
-            previewTable.BackgroundColor = UnchangedCellStyle.BackColor;
-            previewTable.DefaultCellStyle = UnchangedCellStyle;
-
             DatagridViewCheckBoxHeaderCell cbHeader = new DatagridViewCheckBoxHeaderCell();
             cbHeader.Style = HeaderCellStyle;
             cbHeader.setState(true);
