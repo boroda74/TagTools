@@ -270,9 +270,14 @@ namespace MusicBeePlugin
             contextMenuCheckBox.Checked = !contextMenuCheckBox.Checked;
         }
 
-        private void useMusicBeeFontSkinColorsCheckBoxLabel_Click(object sender, EventArgs e)
+        private void useSkinColorsCheckBoxLabel_Click(object sender, EventArgs e)
         {
             useSkinColorsCheckBox.Checked = !useSkinColorsCheckBox.Checked;
+        }
+
+        private void useMusicBeeFontCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            useMusicBeeFontCheckBox.Checked = !useMusicBeeFontCheckBox.Checked;
         }
 
         private void highlightChangedTagsCheckBoxLabel_Click(object sender, EventArgs e)

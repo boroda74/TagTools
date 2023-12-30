@@ -126,10 +126,10 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>654, 6</value>
+    <value>656, 6</value>
   </data>
   <data name="buttonCancel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 12, 7</value>
+    <value>4, 4, 7, 7</value>
   </data>
   <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 23</value>
@@ -160,7 +160,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>546, 6</value>
+    <value>548, 6</value>
   </data>
   <data name="buttonOK.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 7</value>
@@ -199,7 +199,7 @@
     <value>7, 7</value>
   </data>
   <data name="label6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>9, 9, 3, 0</value>
+    <value>7, 7, 3, 0</value>
   </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>188, 15</value>
@@ -232,10 +232,10 @@
     <value>Segoe UI Semibold, 9pt, style=Bold</value>
   </data>
   <data name="versionLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 9</value>
+    <value>7, 9</value>
   </data>
   <data name="versionLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>12, 0, 3, 11</value>
+    <value>7, 0, 3, 11</value>
   </data>
   <data name="versionLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>52, 15</value>
@@ -520,13 +520,13 @@
     <value>8</value>
   </data>
   <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 418</value>
+    <value>7, 418</value>
   </data>
   <data name="groupBox3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>12, 3, 12, 3</value>
+    <value>7, 3, 7, 3</value>
   </data>
   <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>714, 112</value>
+    <value>724, 112</value>
   </data>
   <data name="groupBox3.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -754,13 +754,13 @@
     <value>4</value>
   </data>
   <data name="groupBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 102</value>
+    <value>7, 102</value>
   </data>
   <data name="groupBox4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>12, 3, 12, 3</value>
+    <value>7, 3, 7, 3</value>
   </data>
   <data name="groupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>714, 110</value>
+    <value>724, 110</value>
   </data>
   <data name="groupBox4.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -781,7 +781,7 @@
     <value>Bottom, Right</value>
   </data>
   <data name="saveLastSkippedButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>338, 6</value>
+    <value>340, 6</value>
   </data>
   <data name="saveLastSkippedButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 7</value>
@@ -904,7 +904,7 @@
     <value>True</value>
   </data>
   <data name="highlightChangedTagsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>519, 21</value>
+    <value>529, 21</value>
   </data>
   <data name="highlightChangedTagsCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 19</value>
@@ -1063,7 +1063,7 @@
     <value>3</value>
   </data>
   <data name="legendGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>519, 38</value>
+    <value>529, 38</value>
   </data>
   <data name="legendGroupBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 10, 3</value>
@@ -1093,7 +1093,7 @@
     <value>True</value>
   </data>
   <data name="highlightChangedTagsCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>538, 21</value>
+    <value>548, 21</value>
   </data>
   <data name="highlightChangedTagsCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>131, 15</value>
@@ -1342,13 +1342,13 @@
     <value>13</value>
   </data>
   <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 270</value>
+    <value>7, 270</value>
   </data>
   <data name="groupBox2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>12, 3, 12, 3</value>
+    <value>7, 3, 7, 3</value>
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>714, 142</value>
+    <value>724, 142</value>
   </data>
   <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2230,13 +2230,13 @@
     <value>28</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 6</value>
+    <value>7, 6</value>
   </data>
   <data name="groupBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>12, 6, 12, 3</value>
+    <value>7, 6, 7, 3</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>714, 258</value>
+    <value>724, 258</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2266,13 +2266,13 @@
     <value>27, 63</value>
   </data>
   <data name="includePreservedTagValuesCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>482, 15</value>
+    <value>485, 15</value>
   </data>
   <data name="includePreservedTagValuesCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
   <data name="includePreservedTagValuesCheckBoxLabel.Text" xml:space="preserve">
-    <value>Incude in preview lines containing preserved tag values only (Advanced Search &amp;&amp; Replace)</value>
+    <value>Include in preview lines containing preserved tag values only (Advanced Search &amp;&amp; Replace)</value>
   </data>
   <data name="&gt;&gt;includePreservedTagValuesCheckBoxLabel.Name" xml:space="preserve">
     <value>includePreservedTagValuesCheckBoxLabel</value>
@@ -2323,13 +2323,13 @@
     <value>27, 42</value>
   </data>
   <data name="includePreservedTagsCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>451, 15</value>
+    <value>454, 15</value>
   </data>
   <data name="includePreservedTagsCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
   <data name="includePreservedTagsCheckBoxLabel.Text" xml:space="preserve">
-    <value>Incude in preview lines containing preserved tags only (Advanced Search &amp;&amp; Replace)</value>
+    <value>Include in preview lines containing preserved tags only (Advanced Search &amp;&amp; Replace)</value>
   </data>
   <data name="&gt;&gt;includePreservedTagsCheckBoxLabel.Name" xml:space="preserve">
     <value>includePreservedTagsCheckBoxLabel</value>
@@ -2380,13 +2380,13 @@
     <value>27, 21</value>
   </data>
   <data name="includeNotChangedTagsCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>370, 15</value>
+    <value>373, 15</value>
   </data>
   <data name="includeNotChangedTagsCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="includeNotChangedTagsCheckBoxLabel.Text" xml:space="preserve">
-    <value>Incude in preview lines not containing changed tags (All commands)</value>
+    <value>Include in preview lines not containing changed tags (All commands)</value>
   </data>
   <data name="&gt;&gt;includeNotChangedTagsCheckBoxLabel.Name" xml:space="preserve">
     <value>includeNotChangedTagsCheckBoxLabel</value>
@@ -2461,13 +2461,13 @@
     <value>6</value>
   </data>
   <data name="groupBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 6</value>
+    <value>7, 6</value>
   </data>
   <data name="groupBox5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>12, 6, 12, 3</value>
+    <value>7, 6, 7, 3</value>
   </data>
   <data name="groupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>714, 90</value>
+    <value>724, 90</value>
   </data>
   <data name="groupBox5.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -2494,7 +2494,7 @@
     <value>7, 24</value>
   </data>
   <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>9, 0, 3, 0</value>
+    <value>7, 0, 3, 0</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>369, 15</value>
@@ -2527,7 +2527,7 @@
     <value>7, 41</value>
   </data>
   <data name="label5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>9, 0, 3, 0</value>
+    <value>7, 0, 3, 0</value>
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>425, 15</value>
@@ -2554,13 +2554,13 @@
     <value>Bottom, Left, Right</value>
   </data>
   <data name="buttonsPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 628</value>
+    <value>0, 630</value>
   </data>
   <data name="buttonsPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="buttonsPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>759, 35</value>
+    <value>761, 35</value>
   </data>
   <data name="buttonsPanel.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -2635,10 +2635,10 @@
     <value>1</value>
   </data>
   <data name="tabControl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 58</value>
+    <value>7, 59</value>
   </data>
   <data name="tabControl1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>9, 3, 9, 3</value>
+    <value>7, 3, 7, 3</value>
   </data>
   <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
     <value>747, 569</value>

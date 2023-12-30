@@ -401,6 +401,7 @@
             resources.ApplyResources(this.useMusicBeeFontCheckBoxLabel, "useMusicBeeFontCheckBoxLabel");
             this.useMusicBeeFontCheckBoxLabel.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.useMusicBeeFontCheckBoxLabel.Name = "useMusicBeeFontCheckBoxLabel";
+            this.useMusicBeeFontCheckBoxLabel.Click += new System.EventHandler(this.useMusicBeeFontCheckBoxLabel_Click);
             // 
             // useMusicBeeFontCheckBox
             // 
@@ -414,7 +415,7 @@
             resources.ApplyResources(this.useSkinColorsCheckBoxLabel, "useSkinColorsCheckBoxLabel");
             this.useSkinColorsCheckBoxLabel.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.useSkinColorsCheckBoxLabel.Name = "useSkinColorsCheckBoxLabel";
-            this.useSkinColorsCheckBoxLabel.Click += new System.EventHandler(this.useMusicBeeFontSkinColorsCheckBoxLabel_Click);
+            this.useSkinColorsCheckBoxLabel.Click += new System.EventHandler(this.useSkinColorsCheckBoxLabel_Click);
             // 
             // label8
             // 
@@ -553,7 +554,7 @@
             // allowCommandExecutionWithoutPreviewCheckBoxLabel
             // 
             resources.ApplyResources(this.allowCommandExecutionWithoutPreviewCheckBoxLabel, "allowCommandExecutionWithoutPreviewCheckBoxLabel");
-            this.allowCommandExecutionWithoutPreviewCheckBoxLabel.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.allowCommandExecutionWithoutPreviewCheckBoxLabel.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.allowCommandExecutionWithoutPreviewCheckBoxLabel.Name = "allowCommandExecutionWithoutPreviewCheckBoxLabel";
             this.allowCommandExecutionWithoutPreviewCheckBoxLabel.Tag = "";
             this.allowCommandExecutionWithoutPreviewCheckBoxLabel.Click += new System.EventHandler(this.allowCommandExecutionWithoutPreviewCheckBoxLabel_Click);

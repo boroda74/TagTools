@@ -5049,7 +5049,7 @@ namespace MusicBeePlugin
             SplitterColor = GetWeightedColor(SystemColors.Desktop, AccentColor, 0.8f);//***
 
 
-            if (SavedSettings.useMusicBeeFont) //It's in case if skinned & not skinned buttons use different flat styles. At the moment it's not so.
+            if (!SavedSettings.dontUseSkinColors) //It's in case if skinned & not skinned buttons use different flat styles. At the moment it's not so.
             {
                 int size = (int)Math.Round(17f * vDpiFontScaling);
                 int wideHeight = (int)Math.Round(15f * vDpiFontScaling);
@@ -5069,7 +5069,7 @@ namespace MusicBeePlugin
             }
             else
             {
-                int size = (int)Math.Round(18f * vDpiFontScaling);
+                int size = (int)Math.Round(19f * vDpiFontScaling);
                 int wideHeight = (int)Math.Round(15f * vDpiFontScaling);
                 int wideWidth = (int)Math.Round(30f * vDpiFontScaling);
                 int smallSize = (int)Math.Round(15f * vDpiFontScaling);
