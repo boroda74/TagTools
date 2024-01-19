@@ -3,7 +3,7 @@
 
 *Note:*
 
-If you are familiar with plugin quick update process, you can always download *latest plugin version [here][4]* (NOTE: this latest version can require the latest version of MusicBee which sometimes may be available as a beta). Copy the file "mb_TagTools.dll" from the archive "mb_TagTools_latest.zip" to MusicBee  "Plugins" folder, and overwrite the existing file.
+If you are familiar with plugin quick update process, you can always download *latest plugin version [here][4]*. Copy the file "mb_TagTools.dll" from the archive "mb_TagTools_latest.zip" to MusicBee  "Plugins" folder, and overwrite the existing file.
 <br/>
 
 *Note:*
@@ -361,8 +361,8 @@ Do all you want with plugin binary and source code at your own risk.
 [PVS-Studio](https://pvs-studio.ru/ru/pvs-studio/?utm_source=website&utm_medium=github&utm_campaign=open_source) - static analyzer for C, C++, C#, and Java code.
 
   [1]: https://drive.google.com/drive/folders/0B-D1MoIY406HMzlJVWprYXF1Q0k?usp=sharing
-  [2]: https://sourceforge.net/p/tag-tools/code/ci/master/tree/Docs/LR-AUTO-EXECUTION-FILTERING.md
-  [3]: https://sourceforge.net/p/tag-tools/code/ci/master/tree/Docs/ASR-AUTO-EXECUTION-FILTERING.md
+  [2]: https://github.com/boroda74/TagTools/blob/master/Docs/LR-AUTO-EXECUTION-FILTERING.md
+  [3]: https://github.com/boroda74/TagTools/blob/master/Docs/ASR-AUTO-EXECUTION-FILTERING.md
   [4]: https://www.mediafire.com/file/h2t08o9562efboi/mb_TagTools_latest.zip/file
   [5]: https://i.imgur.com/C1gPwaK.png
-  [6]: https://sourceforge.net/p/tag-tools/code/ci/master/tree/Docs/LR-EXPRESSIONS.md
+  [6]: https://github.com/boroda74/TagTools/blob/master/Docs/LR-EXPRESSIONS.md
