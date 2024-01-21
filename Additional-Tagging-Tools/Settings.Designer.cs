@@ -117,6 +117,13 @@
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.SuspendLayout();
+
+            //MusicBee
+            this.unitKBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
+            this.unitMBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
+            this.unitGBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
+            //~MusicBee
+
             // 
             // buttonCancel
             // 

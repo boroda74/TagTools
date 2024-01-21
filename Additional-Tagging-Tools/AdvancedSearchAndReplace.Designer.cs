@@ -1,4 +1,5 @@
-﻿using System.Drawing.Drawing2D;
+﻿using ExtensionMethods;
+using System.Drawing.Drawing2D;
 
 namespace MusicBeePlugin
 {
@@ -166,6 +167,52 @@ namespace MusicBeePlugin
             this.filtersPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).BeginInit();
             this.SuspendLayout();
+
+            //MusicBee
+            this.searchTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
+            this.customTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
+            this.customText2Box = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
+            this.customText3Box = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
+            this.customText4Box = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
+            this.idTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
+            this.preserveTagValuesTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
+
+
+            InterpolationMode defaultInterpolationMode = InterpolationMode.HighQualityBicubic;
+
+
+            this.customizedPresetPictureBox = new InterpolatedBox();
+            ((InterpolatedBox)customizedPresetPictureBox).Interpolation = defaultInterpolationMode;
+
+            this.userPresetPictureBox = new InterpolatedBox();
+            ((InterpolatedBox)userPresetPictureBox).Interpolation = defaultInterpolationMode;
+
+
+            this.tickedOnlyPictureBox = new InterpolatedBox();
+            ((InterpolatedBox)tickedOnlyPictureBox).Interpolation = defaultInterpolationMode;
+
+            this.predefinedPictureBox = new InterpolatedBox();
+            ((InterpolatedBox)predefinedPictureBox).Interpolation = defaultInterpolationMode;
+
+            this.customizedPictureBox = new InterpolatedBox();
+            ((InterpolatedBox)customizedPictureBox).Interpolation = defaultInterpolationMode;
+
+            this.userPictureBox = new InterpolatedBox();
+            ((InterpolatedBox)userPictureBox).Interpolation = defaultInterpolationMode;
+
+            this.playlistPictureBox = new InterpolatedBox();
+            ((InterpolatedBox)playlistPictureBox).Interpolation = defaultInterpolationMode;
+
+            this.functionIdPictureBox = new InterpolatedBox();
+            ((InterpolatedBox)functionIdPictureBox).Interpolation = defaultInterpolationMode;
+
+            this.hotkeyPictureBox = new InterpolatedBox();
+            ((InterpolatedBox)hotkeyPictureBox).Interpolation = defaultInterpolationMode;
+
+            this.uncheckAllFiltersPictureBox = new InterpolatedBox();
+            ((InterpolatedBox)uncheckAllFiltersPictureBox).Interpolation = defaultInterpolationMode;
+            //~MusicBee
+
             // 
             // splitContainer1
             // 

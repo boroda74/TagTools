@@ -34,6 +34,11 @@ namespace MusicBeePlugin
             this.tableLayoutPanel1.SuspendLayout();
             this.controlsPanel.SuspendLayout();
             this.SuspendLayout();
+
+            //MusicBee
+            this.tagSetComboBox = (System.Windows.Forms.ComboBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.ComboBox);
+            //~MusicBee
+
             // 
             // buttonOK
             // 

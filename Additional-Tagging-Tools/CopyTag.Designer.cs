@@ -57,6 +57,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).BeginInit();
             this.fieldsPanel.SuspendLayout();
             this.SuspendLayout();
+
+            //MusicBee
+            this.fileNameTextBox = (System.Windows.Forms.ComboBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.ComboBox);
+            this.appendedTextBox = (System.Windows.Forms.ComboBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.ComboBox);
+            this.addedTextBox = (System.Windows.Forms.ComboBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.ComboBox);
+            //~MusicBee
+
             // 
             // copyTagLabel
             // 

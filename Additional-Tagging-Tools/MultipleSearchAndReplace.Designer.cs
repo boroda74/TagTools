@@ -65,6 +65,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.autoApplyPictureBox)).BeginInit();
             this.controlsPanel.SuspendLayout();
             this.SuspendLayout();
+
+            //MusicBee
+            this.templateNameTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
+            //~MusicBee            
+
             // 
             // splitContainer1
             // 

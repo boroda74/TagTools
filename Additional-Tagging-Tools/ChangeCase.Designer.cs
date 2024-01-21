@@ -69,6 +69,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).BeginInit();
             this.fieldsPanel.SuspendLayout();
             this.SuspendLayout();
+
+            //MusicBee
+            this.exceptionWordsBox = (System.Windows.Forms.ComboBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.ComboBox);
+            this.exceptionCharsBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
+            this.wordSplittersBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
+            //~MusicBee
+
             // 
             // buttonCancel
             // 
