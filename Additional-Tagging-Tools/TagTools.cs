@@ -469,6 +469,7 @@ namespace MusicBeePlugin
         public const MetaDataType FolderTagId = (MetaDataType)(-151);
         public const MetaDataType FileNameTagId = (MetaDataType)(-152);
         public const MetaDataType FilePathTagId = (MetaDataType)(-153);
+        public const MetaDataType FilePathWoExtTagId = (MetaDataType)(-154);
 
         public static string DisplayedArtistName;
         public static string ArtistArtistsName;
@@ -487,6 +488,7 @@ namespace MusicBeePlugin
         public static string FolderTagName;
         public static string FileNameTagName;
         public static string FilePathTagName;
+        public static string FilePathWoExtTagName;
         public static string AlbumUniqueIdName;
 
         public static string GenericTagSetName;
@@ -929,11 +931,14 @@ namespace MusicBeePlugin
         public static string MsgNumberOfTagsInTextFileDoesntCorrespondToNumberOfSelectedTracks;
 
         public static string MsgClipboardDoesntContainText;
+        public static string MsgClipboardDoesntContainTags;
+        public static string MsgUnknownTagNameInClipboard;
 
         public static string MsgNumberOfTagsInClipboardDoesntCorrespondToNumberOfSelectedTracks;
         public static string MsgDoYouWantToPasteTagsAnyway;
-        public static string MsgNumberOfTagsInClipboardDoesntCorrespondToNumberOfCopiedTags;
-
+        public static string MsgWrongNumberOfCopiedTags;
+        public static string MsgMatchTracksByPathQuestion;
+        public static string MsgTracksSelectedMatchedNotMatched;
 
         public static string MsgFirstThreeGroupingFieldsInPreviewTableShouldBe;
         public static string MsgFirstSixGroupingFieldsInPreviewTableShouldBe;
@@ -2068,6 +2073,10 @@ namespace MusicBeePlugin
                     tag = Regex.Replace(sourceFileUrl, @"^(.*)\\(.*)", "$1");
                     break;
 
+                case FilePathWoExtTagId:
+                    tag = Regex.Replace(sourceFileUrl, @"^(.*)\.(.*)", "$1");
+                    break;
+
                 default:
                     tag = MbApiInterface.Library_GetFileTag(sourceFileUrl, tagId);
                     break;
@@ -2138,6 +2147,10 @@ namespace MusicBeePlugin
                     case FilePathTagId:
                         tagIds2[i] = 0;
                         break;
+
+                    case FilePathWoExtTagId:
+                        tagIds2[i] = 0;
+                        break;
                 }
             }
 
@@ -2196,6 +2209,10 @@ namespace MusicBeePlugin
 
                     case FilePathTagId:
                         tags[i] = Regex.Replace(sourceFileUrl, @"^(.*)\\(.*)", "$1");
+                        break;
+
+                    case FilePathWoExtTagId:
+                        tags[i] = Regex.Replace(sourceFileUrl, @"^(.*)\.(.*)", "$1");
                         break;
                 }
 
@@ -2479,7 +2496,7 @@ namespace MusicBeePlugin
             if (tagName == null)
                 tagName = string.Empty;
 
-            if (tagName.Length > 1 && (tagName[0] == '★' || tagName[0] == '☆' || tagName[0] == '♺' || tagName[0] == '❏'))
+            if (tagName.Length > 1 && (tagName[0] == '★' || tagName[0] == '☆' || tagName[0] == '✪' || tagName[0] == '♺' || tagName[0] == '❏'))
                 tagName = tagName.Substring(2);
 
             if (tagName == DateCreatedTagName)
@@ -2493,6 +2510,9 @@ namespace MusicBeePlugin
 
             if (tagName == FilePathTagName)
                 return FilePathTagId;
+
+            if (tagName == FilePathWoExtTagName)
+                return FilePathWoExtTagId;
 
             if (TagNamesIds.TryGetValue(tagName, out MetaDataType tagId))
             {
@@ -2522,8 +2542,14 @@ namespace MusicBeePlugin
             if (tagId == FileNameTagId)
                 return FileNameTagName;
 
+            if (tagId == FileNameTagId)
+                return FilePathWoExtTagName;
+
             if (tagId == FilePathTagId)
                 return FilePathTagName;
+
+            if (tagId == FilePathWoExtTagId)
+                return FilePathWoExtTagName;
 
             if (tagId == AllTagsPseudoTagId)
             {
@@ -3360,6 +3386,7 @@ namespace MusicBeePlugin
             FolderTagName = "<Folder>";
             FileNameTagName = "<Filename>";
             FilePathTagName = "<File Path>";
+            FilePathWoExtTagName = "<Full Path w/o Ext.>";
             AlbumUniqueIdName = "<Album Unique Id>";
 
             ParameterTagName = "Tag";
@@ -3553,12 +3580,21 @@ namespace MusicBeePlugin
 
             MsgClipboardDoesntContainText = "Clipboard doesn't contain text!";
 
-            MsgNumberOfTagsInClipboardDoesntCorrespondToNumberOfSelectedTracks = "The number of tags in clipboard (%%FILE-TAGS-LENGTH%%)" +
+            MsgClipboardDoesntContainTags = "Clipboard doesn't contain tags!";
+
+            MsgUnknownTagNameInClipboard = "Unknown tag name in clipboard: %%TAG-NAME%%!";
+
+            MsgNumberOfTagsInClipboardDoesntCorrespondToNumberOfSelectedTracks = "The number of tags of tracks in clipboard (%%FILE-TAGS-LENGTH%%)" +
                 " doesn't correspond to the number of selected tracks (%%SELECTED-FILES-COUNT%%)!";
             MsgDoYouWantToPasteTagsAnyway = " Do you want to paste tags anyway?";
-            MsgNumberOfTagsInClipboardDoesntCorrespondToNumberOfCopiedTags = "The number of tags in clipboard (%%CLIPBOARD-TAGS-COUNT%%)" +
-                " doesn't correspond to the number of tags in last used tag set (%%LAST-USED-TAG-SET-TAGS-COUNT%%)!";
-
+            MsgWrongNumberOfCopiedTags = "Wrong number of copied tags in clipboard (%%CLIPBOARD-TAGS-COUNT%%)" +
+                " at line %%CLIPBOARD-LINE%% of clipboard text!";
+            MsgMatchTracksByPathQuestion = "Clipboard contains %%MATCH-TAG-NAME%% pseudo-tag. Do you want to match tracks" +
+                " for pasted tags according to this tag (otherwise tracks for pasted tags will be selected according to their displayed order)?";
+            MsgTracksSelectedMatchedNotMatched = "Selected tracks: %%SELECTED-TRACKS%%\n" +
+                "Tags of tracks in clipboard: %%CLIPBOARD-TRACKS%%\n" +
+                "Matched tracks: %%MATCHED-TRACKS%%\n" +
+                "Not matched tracks: %%NOT-MATCHED-TRACKS%%";
 
             MsgFirstThreeGroupingFieldsInPreviewTableShouldBe = "First three grouping fields in preview table should be \"" + DisplayedAlbumArtistName + "\", \"" + AlbumTagName + "\" and \"" + ArtworkName + "\" to export to HTML Document (grouped by album)";
             MsgFirstSixGroupingFieldsInPreviewTableShouldBe = "First six grouping fields in preview table should be '" + SequenceNumberName
@@ -3955,6 +3991,7 @@ namespace MusicBeePlugin
                 FolderTagName = "<Папка>";
                 FileNameTagName = "<Имя файла>";
                 FilePathTagName = "<Путь к файлу>";
+                FilePathWoExtTagName = "<Полный путь без расш.>";
                 AlbumUniqueIdName = "<Уникальный Id альбома>";
 
                 ParameterTagName = "Тег";
@@ -4111,11 +4148,21 @@ namespace MusicBeePlugin
 
                 MsgClipboardDoesntContainText = "Буфер обмена не содержит текст!";
 
-                MsgNumberOfTagsInClipboardDoesntCorrespondToNumberOfSelectedTracks = "Количество тегов в буфере обмена (%%FILE-TAGS-LENGTH%%)" +
+                MsgClipboardDoesntContainTags = "Буфер обмена не содержит теги!";
+
+                MsgUnknownTagNameInClipboard = "Неизвестное имя тега в буфере обмена: %%TAG-NAME%%!";
+
+                MsgNumberOfTagsInClipboardDoesntCorrespondToNumberOfSelectedTracks = "Количество тегов треков в буфере обмена (%%FILE-TAGS-LENGTH%%)" +
                     " не соответствует количеству выбранных треков (%%SELECTED-FILES-COUNT%%)!";
                 MsgDoYouWantToPasteTagsAnyway = " Вставить теги все равно?";
-                MsgNumberOfTagsInClipboardDoesntCorrespondToNumberOfCopiedTags = "Количество тегов в буфере обмена (%%CLIPBOARD-TAGS-COUNT%%)" +
-                    " не соответствует количеству тегов последнего использованного набора тегов (%%LAST-USED-TAG-SET-TAGS-COUNT%%)!";
+                MsgWrongNumberOfCopiedTags = "Неверное количество скопированных в буфер обмена тегов (%%CLIPBOARD-TAGS-COUNT%%)" +
+                    " в строке %%CLIPBOARD-LINE%% текста буфера обмена!";
+                MsgMatchTracksByPathQuestion = "Буфер обмена содержит псевдо-тег %%MATCH-TAG-NAME%%. Вставлять теги в соответствии с этим тегом" +
+                    " (в противном случае треки для тегов будут выбираться по их порядку отображения)?";
+                MsgTracksSelectedMatchedNotMatched = "Выбрано треков: %%SELECTED-TRACKS%%\n" +
+                    "Тегов треков в буфере обмена: %%CLIPBOARD-TRACKS%%\n" +
+                    "Найдено подходящих треков: %%MATCHED-TRACKS%%\n" +
+                    "Не найдено подходящих треков: %%NOT-MATCHED-TRACKS%%";
 
 
                 MsgFirstThreeGroupingFieldsInPreviewTableShouldBe = "Первые три поля группировок в таблице должны быть \"" + DisplayedAlbumArtistName + "\", '"
@@ -4863,11 +4910,14 @@ namespace MusicBeePlugin
                 return (ToolStripMenuItem)menuItem;
         }
 
-        //internal static class NativeMethods
-        //{
-        //    [DllImport("dwmapi.dll", EntryPoint = "#127")]
-        //    internal static extern void DwmGetColorizationParameters(ref DWMCOLORIZATIONPARAMS args);
-        //}
+        internal static class NativeMethods
+        {
+            [System.Runtime.InteropServices.DllImport("user32.dll")]
+            internal static extern IntPtr CloseClipboard();
+            
+            //[System.Runtime.InteropServices.DllImport("dwmapi.dll", EntryPoint = "#127")]
+            //internal static extern void DwmGetColorizationParameters(ref DWMCOLORIZATIONPARAMS args);
+        }
 
         //public struct DWMCOLORIZATIONPARAMS
         //{

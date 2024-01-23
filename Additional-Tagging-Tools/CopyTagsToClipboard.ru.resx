@@ -119,60 +119,42 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>355, 32</value>
+    <value>430, 32</value>
   </data>
   <data name="buttonOK.Text" xml:space="preserve">
     <value>Копировать</value>
   </data>
-  <data name="buttonOK.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>463, 32</value>
+    <value>538, 32</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Закрыть</value>
   </data>
-  <data name="buttonCancel.ToolTip" xml:space="preserve">
-    <value />
+  <data name="sourceTagList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 209</value>
   </data>
   <data name="sourceTagList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>557, 204</value>
-  </data>
-  <data name="sourceTagList.ToolTip" xml:space="preserve">
-    <value />
+    <value>632, 204</value>
   </data>
   <data name="checkedSourceTagList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>557, 204</value>
-  </data>
-  <data name="checkedSourceTagList.ToolTip" xml:space="preserve">
-    <value />
+    <value>632, 204</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>557, 413</value>
-  </data>
-  <data name="tableLayoutPanel1.ToolTip" xml:space="preserve">
-    <value />
+    <value>632, 413</value>
   </data>
   <data name="tagSetComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>557, 23</value>
+    <value>632, 23</value>
   </data>
   <data name="tagSetComboBox.ToolTip" xml:space="preserve">
     <value>Выбранные теги автоматически сохраняются в текущий набор тегов. 
 Чтобы переименовать текущий набор тегов, просто напишите новое 
 имя набора в этом поле. </value>
   </data>
-  <data name="checkUncheckAllCheckBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>525, 15</value>
+    <value>589, 15</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>☆ - Обычный тег  ★ - Свой тег  ✪ - Только для чтения  ❏ - Свойство файла  ♺ - Виртуальный</value>
-  </data>
-  <data name="label1.ToolTip" xml:space="preserve">
-    <value />
+    <value>☆ - Обычный тег  ★ - Свой тег  ✪ - Только для чтения/псевдо-тег  ❏ - Свойство файла  ♺ - Виртуальный</value>
   </data>
   <data name="checkUncheckAllCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>149, 15</value>
@@ -180,25 +162,22 @@
   <data name="checkUncheckAllCheckBoxLabel.Text" xml:space="preserve">
     <value>Выбрать все/снять выбор</value>
   </data>
-  <data name="checkUncheckAllCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="controlsPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>569, 62</value>
+    <value>644, 62</value>
   </data>
-  <data name="controlsPanel.ToolTip" xml:space="preserve">
-    <value />
+  <data name="infoLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>632, 63</value>
+  </data>
+  <data name="infoLabel.Text" xml:space="preserve">
+    <value>Вы можете скопировать теги из нескольких выбранных треков и вставить скопированные теги в выбранные треки. По умолчанию плагин выбирает треки для вставленных тегов в отображаемом порядке, но вы также можете использовать псевдотеги URL или &lt;Полный путь без расш.&gt; для нахождения треков для вставленных тегов (среди выбранных треков).</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>569, 511</value>
+    <value>646, 513</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>585, 550</value>
+    <value>660, 550</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Копировать теги в буфер обмена</value>
-  </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
   </data>
 </root>

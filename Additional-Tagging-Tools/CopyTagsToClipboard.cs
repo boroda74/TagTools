@@ -151,14 +151,31 @@ namespace MusicBeePlugin
             SavedSettings.lastTagSet = tagSet;
 
             string clipboardText = string.Empty;
+
+
+            //Let's copy tag names as the 1st row
+            string tagNames = string.Empty;
+            for (int i = 0; i < SavedSettings.copyTagsTagSets[tagSet].tagIds.Length; i++)
+            {
+                string tag = GetTagName((MetaDataType)SavedSettings.copyTagsTagSets[tagSet].tagIds[i]);
+                tag += '\t';
+
+                tagNames += tag;
+            }
+
+            tagNames = tagNames.Remove(tagNames.Length - 1);
+
+            clipboardText += tagNames + '\n';
+
+
             foreach (string file in files)
             {
                 string tags = string.Empty;
                 for (int i = 0; i < SavedSettings.copyTagsTagSets[tagSet].tagIds.Length; i++)
                 {
                     string tag = GetFileTag(file, (MetaDataType)SavedSettings.copyTagsTagSets[tagSet].tagIds[i]);
-                    tag = tag.Replace("\u0000", "\u0006").Replace("\u000D", "\u0007").Replace("\u000A", "\u0008");
-                    tag += "\t";
+                    tag = tag.Replace('\u0000', '\u0006').Replace('\u000D', '\u0007').Replace('\u000A', '\u0008');
+                    tag += '\t';
 
                     if (tag.Length > 4000000)
                         tag = "\t";
@@ -168,7 +185,7 @@ namespace MusicBeePlugin
 
                 tags = tags.Remove(tags.Length - 1);
 
-                clipboardText += tags + "\n";
+                clipboardText += tags + '\n';
             }
 
             clipboardText = clipboardText.Remove(clipboardText.Length - 1);
@@ -177,6 +194,7 @@ namespace MusicBeePlugin
             //    clipboardText = "\u0000";
 
 
+            NativeMethods.CloseClipboard();
             Clipboard.Clear();
             Clipboard.SetText(clipboardText);
 

@@ -31,6 +31,7 @@ namespace MusicBeePlugin
             this.label1 = new System.Windows.Forms.Label();
             this.checkUncheckAllCheckBoxLabel = new System.Windows.Forms.Label();
             this.controlsPanel = new System.Windows.Forms.Panel();
+            this.infoLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.controlsPanel.SuspendLayout();
             this.SuspendLayout();
@@ -130,15 +131,23 @@ namespace MusicBeePlugin
             this.controlsPanel.Tag = "#CopyTagsToClipboardCommand&CopyTagsToClipboardCommand@pinned-to-parent-x@pinned-" +
     "to-parent-y";
             // 
+            // infoLabel
+            // 
+            resources.ApplyResources(this.infoLabel, "infoLabel");
+            this.infoLabel.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.infoLabel.Name = "infoLabel";
+            this.infoLabel.Tag = "#CopyTagsToClipboardCommand&tagSetComboBox@pinned-to-parent-x@pinned-to-parent-y";
+            // 
             // CopyTagsToClipboardCommand
             // 
             this.AcceptButton = this.buttonOK;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
+            this.Controls.Add(this.controlsPanel);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.tagSetComboBox);
-            this.Controls.Add(this.controlsPanel);
+            this.Controls.Add(this.infoLabel);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CopyTagsToClipboardCommand";
@@ -164,5 +173,6 @@ namespace MusicBeePlugin
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label checkUncheckAllCheckBoxLabel;
         private Panel controlsPanel;
+        private Label infoLabel;
     }
 }

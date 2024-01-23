@@ -30,11 +30,63 @@ namespace MusicBeePlugin
 
             string[] fileTags = System.Windows.Clipboard.GetText().Split(new char[] { '\n' }, StringSplitOptions.None);
 
+            if (fileTags.Length < 2) //1st row must be tag names, 2nd row and further are tag values
+            {
+                MessageBox.Show(MbForm, MsgClipboardDoesntContainTags, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+
+
+            string allTagNames = fileTags[0].Trim('\r');
+            string[] tagNames = allTagNames.Split(new char[] { '\t' }, StringSplitOptions.None);
+            int[] tagIds = new int[tagNames.Length];
+            for (int k = 0; k < tagNames.Length; k++)
+            {
+                string tagName = tagNames[k];
+
+                tagIds[k] = (int)GetTagId(tagName);
+
+                if (tagIds[k] == 0)
+                {
+                    MessageBox.Show(MbForm, MsgUnknownTagNameInClipboard.Replace("%%TAG-NAME%%", tagName), string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return false;
+                }
+            }
+
+
+            int matchTagIndex = -1;
+            string matchTagName = null;
+            for (int k = 0; k < tagIds.Length; k++)
+            {
+                if (tagIds[k] == (int)FilePropertyType.Url)
+                {
+                    matchTagIndex = k;
+                    matchTagName = GetTagName((MetaDataType)FilePropertyType.Url);
+                    break;
+                }
+                else if (tagIds[k] == (int)FilePathWoExtTagId)
+                {
+                    matchTagIndex = k;
+                    matchTagName = FilePathWoExtTagName;
+                }
+            }
+
+
+            if (matchTagIndex > -1)
+            {
+                DialogResult result = MessageBox.Show(MbForm, MsgMatchTracksByPathQuestion.Replace("%%MATCH-TAG-NAME%%", matchTagName),
+                    string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+
+                if (result == DialogResult.No)
+                    matchTagIndex = -1;
+            }
+
+
             bool multiplePasting = false;
-            if (fileTags.Length == 1 && files.Length > 1)
+            if ((fileTags.Length == 2 && files.Length > 1) || (fileTags.Length - 1 != files.Length && matchTagIndex > -1))
             {
                 DialogResult result = MessageBox.Show(MbForm, MsgNumberOfTagsInClipboardDoesntCorrespondToNumberOfSelectedTracks
-                        .Replace("%%FILE-TAGS-LENGTH%%", fileTags.Length.ToString())
+                        .Replace("%%FILE-TAGS-LENGTH%%", (fileTags.Length - 1).ToString())
                         .Replace("%%SELECTED-FILES-COUNT%%", files.Length.ToString()) +
                         MsgDoYouWantToPasteTagsAnyway,
                     string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
@@ -43,44 +95,95 @@ namespace MusicBeePlugin
                     multiplePasting = true;
                 else
                     return false;
-
             }
-            else if (fileTags.Length != files.Length)
+            else if (fileTags.Length - 1 != files.Length)
             {
                 MessageBox.Show(MbForm, MsgNumberOfTagsInClipboardDoesntCorrespondToNumberOfSelectedTracks
-                        .Replace("%%FILE-TAGS-LENGTH%%", fileTags.Length.ToString())
+                        .Replace("%%FILE-TAGS-LENGTH%%", (fileTags.Length - 1).ToString())
                         .Replace("%%SELECTED-FILES-COUNT%%", files.Length.ToString()),
                     string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
 
 
+            int matchedTracks = 0;
+            int notMatchedTracks = 0;
             for (int i = 0; i < files.Length; i++)
             {
                 string file = files[i];
-                string[] tags = fileTags[multiplePasting ? 0 : i].Split(new char[] { '\t' }, StringSplitOptions.None);
 
-                if (tags.Length != SavedSettings.copyTagsTagSets[SavedSettings.lastTagSet].tagIds.Length)
+                bool trackMatched = false;
+                string[] tags = null;
+                if (matchTagIndex == -1)
                 {
-                    MessageBox.Show(MbForm, MsgNumberOfTagsInClipboardDoesntCorrespondToNumberOfCopiedTags
-                        .Replace("%%CLIPBOARD-TAGS-COUNT%%", tags.Length.ToString())
-                        .Replace("%%LAST-USED-TAG-SET-TAGS-COUNT%%", SavedSettings.copyTagsTagSets[SavedSettings.lastTagSet].tagIds.Length.ToString()),
-                        string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    return false;
+                    tags = fileTags[multiplePasting ? 1 : i + 1].Split(new char[] { '\t' }, StringSplitOptions.None);
+
+                    if (tagIds.Length != tags.Length)
+                    {
+                        MessageBox.Show(MbForm, MsgWrongNumberOfCopiedTags
+                            .Replace("%%CLIPBOARD-TAGS-COUNT%%", tags.Length.ToString())
+                            .Replace("%%CLIPBOARD-LINE%%", (multiplePasting ? 1 : i + 1).ToString()),
+                            string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return false;
+                    }
+                }
+                else
+                {
+                    string fileMatchTag = GetFileTag(file, (MetaDataType)tagIds[matchTagIndex]);
+
+                    for (int l = 1; l < fileTags.Length; l++)
+                    {
+                        tags = fileTags[l].Split(new char[] { '\t' }, StringSplitOptions.None);
+
+                        if (tagIds.Length != tags.Length)
+                        {
+                            MessageBox.Show(MbForm, MsgWrongNumberOfCopiedTags
+                                .Replace("%%CLIPBOARD-TAGS-COUNT%%", tags.Length.ToString())
+                                .Replace("%%CLIPBOARD-LINE%%", l.ToString()), 
+                                string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            return false;
+                        }
+
+                        string matchTag = tags[matchTagIndex];
+
+                        if (matchTag == fileMatchTag)
+                        {
+                            trackMatched = true;
+                            break;
+                        }
+                    }
                 }
 
-                for (int j = 0; j < SavedSettings.copyTagsTagSets[SavedSettings.lastTagSet].tagIds.Length; j++)
-                {
-                    if (tags[j].Length > 0 && tags[j][tags[j].Length - 1] == '\r')
-                        tags[j] = tags[j].Remove(tags[j].Length - 1);
 
-                    string tag = tags[j].Replace("\u0006", "\u0000").Replace("\u0007", "\u000D").Replace("\u0008", "\u000A");
-                    SetFileTag(file, (MetaDataType)SavedSettings.copyTagsTagSets[SavedSettings.lastTagSet].tagIds[j], tag);
+                if (matchTagIndex > -1 && !trackMatched) //Track not matched by path among selected tracks
+                {
+                    notMatchedTracks++;
+                    continue;
                 }
+
+                matchedTracks++;
+
+                for (int j = 0; j < tagIds.Length; j++)
+                {
+                    tags[j] = tags[j].Trim('\r');
+                    string tag = tags[j].Replace('\u0006', '\u0000').Replace('\u0007', '\u000D').Replace('\u0008', '\u000A');
+                    SetFileTag(file, (MetaDataType)tagIds[j], tag);
+                }
+
                 CommitTagsToFile(file);
             }
 
             MbApiInterface.MB_RefreshPanels();
+
+            if (matchTagIndex > -1 && (matchedTracks != files.Length || matchedTracks != fileTags.Length - 1))
+            {
+                MessageBox.Show(MbForm, MsgTracksSelectedMatchedNotMatched
+                    .Replace("%%SELECTED-TRACKS%%", files.Length.ToString())
+                    .Replace("%%CLIPBOARD-TRACKS%%", (fileTags.Length - 1).ToString())
+                    .Replace("%%MATCHED-TRACKS%%", matchedTracks.ToString())
+                    .Replace("%%NOT-MATCHED-TRACKS%%", notMatchedTracks.ToString()),
+                    string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
 
             return true;
         }

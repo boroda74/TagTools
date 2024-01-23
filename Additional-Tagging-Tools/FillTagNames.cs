@@ -8,7 +8,7 @@ namespace MusicBeePlugin
     {
         public void fillTagNames()
         {
-            ReadonlyTagsNames = new string[47];
+            ReadonlyTagsNames = new string[48];
 
             ReadonlyTagsNames[0] = GenreCategoryName;
             ReadonlyTagsNames[1] = SynchronisedLyricsName;
@@ -61,7 +61,8 @@ namespace MusicBeePlugin
             ReadonlyTagsNames[43] = FolderTagName;
             ReadonlyTagsNames[44] = FileNameTagName;
             ReadonlyTagsNames[45] = FilePathTagName;
-            ReadonlyTagsNames[46] = AlbumUniqueIdName;
+            ReadonlyTagsNames[46] = FilePathWoExtTagName;
+            ReadonlyTagsNames[47] = AlbumUniqueIdName;
 
 
             //Tags
@@ -1210,6 +1211,16 @@ namespace MusicBeePlugin
             }
             try
             {
+                file1.WriteLine("Adding " + FilePathWoExtTagName + " / " + FilePathWoExtTagId);
+                TagNamesIds.Add(FilePathWoExtTagName, FilePathWoExtTagId);
+            }
+            catch (ArgumentException)
+            {
+                wereErrors = true;
+                file1.WriteLine("Cant add " + FilePathWoExtTagName + " / " + FilePathWoExtTagId);
+            }
+            try
+            {
                 file1.WriteLine("Adding " + AlbumUniqueIdName + " / " + MetaDataType.AlbumUniqueId);
                 TagNamesIds.Add(AlbumUniqueIdName, MetaDataType.AlbumUniqueId);
             }
@@ -1361,6 +1372,7 @@ namespace MusicBeePlugin
             TagIdsNames.Add(FolderTagId, FolderTagName);
             TagIdsNames.Add(FileNameTagId, FileNameTagName);
             TagIdsNames.Add(FilePathTagId, FilePathTagName);
+            TagIdsNames.Add(FilePathWoExtTagId, FilePathWoExtTagName);
             TagIdsNames.Add(MetaDataType.AlbumUniqueId, AlbumUniqueIdName);
             TagIdsNames.Add(DateCreatedTagId, DateCreatedTagName);
 
