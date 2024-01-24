@@ -201,9 +201,9 @@ namespace MusicBeePlugin
                     string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             }
 
-            if (matchTagIndex > -1 && !autoPaste && continuePasteResult == DialogResult.Yes)
+            if (!autoPaste && matchTagIndex > -1 && continuePasteResult == DialogResult.Yes)
                 return PasteTagsFromClipboard(tagToolsPluginParam, files, fileTags);
-            else if (matchTagIndex > -1 && !autoPaste)
+            else if (!autoPaste && matchTagIndex > -1)
                 return false;
             
 

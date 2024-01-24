@@ -1396,8 +1396,8 @@ namespace MusicBeePlugin
 
         protected void setInitialFormMaximumMinimumSize(Size initialMinimumSize, Size initialMaximumSize, bool sameMinMaxWidth, bool sameMinMaxHeight)
         {
-            if (modal)
-                MinimizeBox = false;
+            if (sameMinMaxWidth && sameMinMaxHeight)
+                fixedSize = true;
 
 
             hDpiFormScaling = (float)MinimumSize.Width / initialMinimumSize.Width;
@@ -1423,6 +1423,13 @@ namespace MusicBeePlugin
 
                 MaximumSize = new Size(maxWidth, maxHeight);
             }
+
+
+            if (modal)
+                MinimizeBox = false;
+
+            if (fixedSize)
+                FormBorderStyle = FormBorderStyle.FixedDialog;
         }
 
         public enum FontEquality
@@ -1669,8 +1676,6 @@ namespace MusicBeePlugin
             }
 
             //DPI/font scaling & loading plugin windows sizes/positions
-            fixedSize = (FormBorderStyle == FormBorderStyle.FixedDialog) || (FormBorderStyle == FormBorderStyle.FixedSingle) ? true : false;
-
             if (DeviceDpi != 96)
                 dpiScaling = DeviceDpi / 96f;
 
