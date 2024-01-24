@@ -191,7 +191,7 @@ namespace MusicBeePlugin
                 MbApiInterface.MB_RefreshPanels();
 
             DialogResult continuePasteResult = DialogResult.Yes;
-            if (!autoPaste && matchTagIndex > -1 && (matchedTracks != files.Length || matchedTracks != fileTags.Length - 1))
+            if (!autoPaste && matchTagIndex > -1)
             {
                 continuePasteResult = MessageBox.Show(MbForm, MsgTracksSelectedMatchedNotMatched
                     .Replace("%%SELECTED-TRACKS%%", files.Length.ToString())
