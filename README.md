@@ -1,6 +1,9 @@
 # ADDITIONAL TAGGING & REPORTING TOOLS PLUGIN
 <br/>
 
+Plugin requires MusicBee version **3.5** or higher.
+<br/>
+
 *Note:*
 
 If you are familiar with plugin quick update process, you can always download *latest plugin version [here][4]*. Copy the file "mb_TagTools.dll" from the archive "mb_TagTools_latest.zip" to MusicBee  "Plugins" folder, and overwrite the existing file.

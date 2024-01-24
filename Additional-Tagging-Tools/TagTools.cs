@@ -3594,7 +3594,8 @@ namespace MusicBeePlugin
             MsgTracksSelectedMatchedNotMatched = "Selected tracks: %%SELECTED-TRACKS%%\n" +
                 "Tags of tracks in clipboard: %%CLIPBOARD-TRACKS%%\n" +
                 "Matched tracks: %%MATCHED-TRACKS%%\n" +
-                "Not matched tracks: %%NOT-MATCHED-TRACKS%%";
+                "Not matched tracks: %%NOT-MATCHED-TRACKS%%\n\n" + 
+                "Paste tags?";
 
             MsgFirstThreeGroupingFieldsInPreviewTableShouldBe = "First three grouping fields in preview table should be \"" + DisplayedAlbumArtistName + "\", \"" + AlbumTagName + "\" and \"" + ArtworkName + "\" to export to HTML Document (grouped by album)";
             MsgFirstSixGroupingFieldsInPreviewTableShouldBe = "First six grouping fields in preview table should be '" + SequenceNumberName
@@ -4162,7 +4163,8 @@ namespace MusicBeePlugin
                 MsgTracksSelectedMatchedNotMatched = "Выбрано треков: %%SELECTED-TRACKS%%\n" +
                     "Тегов треков в буфере обмена: %%CLIPBOARD-TRACKS%%\n" +
                     "Найдено подходящих треков: %%MATCHED-TRACKS%%\n" +
-                    "Не найдено подходящих треков: %%NOT-MATCHED-TRACKS%%";
+                    "Не найдено подходящих треков: %%NOT-MATCHED-TRACKS%%\n\n" + 
+                    "Вставить теги?";
 
 
                 MsgFirstThreeGroupingFieldsInPreviewTableShouldBe = "Первые три поля группировок в таблице должны быть \"" + DisplayedAlbumArtistName + "\", '"

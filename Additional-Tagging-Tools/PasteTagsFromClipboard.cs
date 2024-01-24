@@ -6,13 +6,20 @@ namespace MusicBeePlugin
 {
     public partial class Plugin
     {
-        public static bool PasteTagsFromClipboard(Plugin tagToolsPluginParam)
+        //If files is NOT null then paste tags matching by paths automatically (and fileTags must be NOT null also)
+        public static bool PasteTagsFromClipboard(Plugin tagToolsPluginParam, string[] files = null, string[] fileTags = null)
         {
-            List<string> destinationTagNames = new List<string>();
-            string[] files = null;
+            bool autoPaste = false;
+            if (files != null)
+                autoPaste = true;
 
-            if (!MbApiInterface.Library_QueryFilesEx("domain=SelectedFiles", out files))
-                files = new string[0];
+            List<string> destinationTagNames = new List<string>();
+
+            if (!autoPaste)
+            {
+                if (!MbApiInterface.Library_QueryFilesEx("domain=SelectedFiles", out files))
+                    files = new string[0];
+            }
 
 
             if (files.Length == 0)
@@ -28,7 +35,8 @@ namespace MusicBeePlugin
                 return false;
             }
 
-            string[] fileTags = System.Windows.Clipboard.GetText().Split(new char[] { '\n' }, StringSplitOptions.None);
+            if (!autoPaste)
+                fileTags = System.Windows.Clipboard.GetText().Split(new char[] { '\n' }, StringSplitOptions.None);
 
             if (fileTags.Length < 2) //1st row must be tag names, 2nd row and further are tag values
             {
@@ -72,37 +80,40 @@ namespace MusicBeePlugin
             }
 
 
-            if (matchTagIndex > -1)
+            if (matchTagIndex > -1 && !autoPaste)
             {
-                DialogResult result = MessageBox.Show(MbForm, MsgMatchTracksByPathQuestion.Replace("%%MATCH-TAG-NAME%%", matchTagName),
+                DialogResult matchTracksResult = MessageBox.Show(MbForm, MsgMatchTracksByPathQuestion.Replace("%%MATCH-TAG-NAME%%", matchTagName),
                     string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
 
-                if (result == DialogResult.No)
+                if (matchTracksResult == DialogResult.No)
                     matchTagIndex = -1;
             }
 
 
             bool multiplePasting = false;
-            if ((fileTags.Length == 2 && files.Length > 1) || (fileTags.Length - 1 != files.Length && matchTagIndex > -1))
+            if (!autoPaste)
             {
-                DialogResult result = MessageBox.Show(MbForm, MsgNumberOfTagsInClipboardDoesntCorrespondToNumberOfSelectedTracks
-                        .Replace("%%FILE-TAGS-LENGTH%%", (fileTags.Length - 1).ToString())
-                        .Replace("%%SELECTED-FILES-COUNT%%", files.Length.ToString()) +
-                        MsgDoYouWantToPasteTagsAnyway,
-                    string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+                if ((fileTags.Length == 2 && files.Length > 1) || (fileTags.Length - 1 != files.Length && matchTagIndex > -1))
+                {
+                    DialogResult pasteAnywayResult = MessageBox.Show(MbForm, MsgNumberOfTagsInClipboardDoesntCorrespondToNumberOfSelectedTracks
+                            .Replace("%%FILE-TAGS-LENGTH%%", (fileTags.Length - 1).ToString())
+                            .Replace("%%SELECTED-FILES-COUNT%%", files.Length.ToString()) +
+                            MsgDoYouWantToPasteTagsAnyway,
+                        string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
 
-                if (result == DialogResult.Yes)
-                    multiplePasting = true;
-                else
+                    if (pasteAnywayResult == DialogResult.Yes)
+                        multiplePasting = true;
+                    else
+                        return false;
+                }
+                else if (fileTags.Length - 1 != files.Length)
+                {
+                    MessageBox.Show(MbForm, MsgNumberOfTagsInClipboardDoesntCorrespondToNumberOfSelectedTracks
+                            .Replace("%%FILE-TAGS-LENGTH%%", (fileTags.Length - 1).ToString())
+                            .Replace("%%SELECTED-FILES-COUNT%%", files.Length.ToString()),
+                        string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return false;
-            }
-            else if (fileTags.Length - 1 != files.Length)
-            {
-                MessageBox.Show(MbForm, MsgNumberOfTagsInClipboardDoesntCorrespondToNumberOfSelectedTracks
-                        .Replace("%%FILE-TAGS-LENGTH%%", (fileTags.Length - 1).ToString())
-                        .Replace("%%SELECTED-FILES-COUNT%%", files.Length.ToString()),
-                    string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return false;
+                }
             }
 
 
@@ -163,27 +174,38 @@ namespace MusicBeePlugin
 
                 matchedTracks++;
 
-                for (int j = 0; j < tagIds.Length; j++)
+                if (matchTagIndex == -1 || autoPaste)
                 {
-                    tags[j] = tags[j].Trim('\r');
-                    string tag = tags[j].Replace('\u0006', '\u0000').Replace('\u0007', '\u000D').Replace('\u0008', '\u000A');
-                    SetFileTag(file, (MetaDataType)tagIds[j], tag);
-                }
+                    for (int j = 0; j < tagIds.Length; j++)
+                    {
+                        tags[j] = tags[j].Trim('\r');
+                        string tag = tags[j].Replace('\u0006', '\u0000').Replace('\u0007', '\u000D').Replace('\u0008', '\u000A');
+                        SetFileTag(file, (MetaDataType)tagIds[j], tag);
+                    }
 
-                CommitTagsToFile(file);
+                    CommitTagsToFile(file);
+                }
             }
 
-            MbApiInterface.MB_RefreshPanels();
+            if (matchTagIndex == -1 || autoPaste)
+                MbApiInterface.MB_RefreshPanels();
 
-            if (matchTagIndex > -1 && (matchedTracks != files.Length || matchedTracks != fileTags.Length - 1))
+            DialogResult continuePasteResult = DialogResult.Yes;
+            if (!autoPaste && matchTagIndex > -1 && (matchedTracks != files.Length || matchedTracks != fileTags.Length - 1))
             {
-                MessageBox.Show(MbForm, MsgTracksSelectedMatchedNotMatched
+                continuePasteResult = MessageBox.Show(MbForm, MsgTracksSelectedMatchedNotMatched
                     .Replace("%%SELECTED-TRACKS%%", files.Length.ToString())
                     .Replace("%%CLIPBOARD-TRACKS%%", (fileTags.Length - 1).ToString())
                     .Replace("%%MATCHED-TRACKS%%", matchedTracks.ToString())
                     .Replace("%%NOT-MATCHED-TRACKS%%", notMatchedTracks.ToString()),
-                    string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             }
+
+            if (matchTagIndex > -1 && !autoPaste && continuePasteResult == DialogResult.Yes)
+                return PasteTagsFromClipboard(tagToolsPluginParam, files, fileTags);
+            else if (matchTagIndex > -1 && !autoPaste)
+                return false;
+            
 
             return true;
         }
