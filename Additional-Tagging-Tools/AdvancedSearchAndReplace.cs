@@ -5178,6 +5178,7 @@ namespace MusicBeePlugin
             buttonImportAll.Enable(enable);
             buttonImport.Enable(enable);
             buttonExportCustom.Enable(enable);
+            buttonDeleteAll.Enable(enable);
 
 
             if (preset == null)
@@ -5224,7 +5225,6 @@ namespace MusicBeePlugin
             buttonCopy.Enable(enable);
             buttonEdit.Enable(enable && editButtonEnabled);
             buttonDelete.Enable(enable);
-            buttonDeleteAll.Enable(enable);
         }
 
         public override void enableQueryingButtons()
