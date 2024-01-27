@@ -1403,11 +1403,7 @@ namespace MusicBeePlugin
             hDpiFormScaling = (float)MinimumSize.Width / initialMinimumSize.Width;
             vDpiFormScaling = (float)MinimumSize.Height / initialMinimumSize.Height;
 
-            if (fixedSize)
-            {
-                Width = (int)Math.Round(Width * hDpiFormScaling);
-            }
-            else
+            if (!fixedSize)
             {
                 int maxWidth = 0;
                 if (sameMinMaxWidth)
@@ -1429,7 +1425,10 @@ namespace MusicBeePlugin
                 MinimizeBox = false;
 
             if (fixedSize)
+            {
+                MaximizeBox = false;
                 FormBorderStyle = FormBorderStyle.FixedDialog;
+            }
         }
 
         public enum FontEquality
@@ -1792,22 +1791,19 @@ namespace MusicBeePlugin
                         if (form != newForm)
                             newForm.Dispose();
 
-                        if (form.Visible && form.WindowState != FormWindowState.Minimized)
+                        if (form.Visible && form.WindowState != FormWindowState.Minimized) //Restored or maximized window
                         {
                             form.Activate();
                         }
-                        else
+                        else //Hidden or minimized window
                         {
                             form.Left = form.left;
                             form.Top = form.top;
                             form.Width = form.width;
                             form.Height = form.height;
                             form.WindowState = form.windowState;
-
-                            if (form.modal)
-                                form.ShowDialog();
-                            else
-                                form.Show();
+                            form.Visible = true;
+                            form.Activate();
                         }
 
                         return;
@@ -1867,8 +1863,11 @@ namespace MusicBeePlugin
             if (ignoreSizePositionChanges)
                 return;
 
-            left = Left;
-            top = Top;
+            if (Left + Width >= 0 && Top + Height >= 0)
+            {
+                left = Left;
+                top = Top;
+            }
 
             Refresh();
         }
@@ -1904,10 +1903,13 @@ namespace MusicBeePlugin
                 {
                     //setFormMaximizedBounds(); //******
 
-                    left = Left;
-                    top = Top;
-                    width = Width;
-                    height = Height;
+                    if (Left + Width >= 0 && Top + Height >= 0)
+                    {
+                        left = Left;
+                        top = Top;
+                        width = Width;
+                        height = Height;
+                    }
                 }
 
                 Refresh();
@@ -2005,7 +2007,10 @@ namespace MusicBeePlugin
         {
             var windowSettings = findCreateSavedWindowSettings(false);
 
-            if (windowSettings != null)
+            if (windowSettings != null 
+                && windowSettings.x + windowSettings.w >= 0 
+                && windowSettings.y + windowSettings.h >= 0
+            )
             {
                 left = windowSettings.x;
                 top = windowSettings.y;
@@ -2052,66 +2057,69 @@ namespace MusicBeePlugin
 
         protected void saveWindowSizesPositions()
         {
-            var currentWindowSettings = findCreateSavedWindowSettings(true);
-
-
-            if (WindowState == FormWindowState.Normal)
+            if (Left + Width >= 0 && Top + Height >= 0)
             {
-                width = Width;
-                height = Height;
-                left = Left;
-                top = Top;
-                windowState = FormWindowState.Normal;
+                var currentWindowSettings = findCreateSavedWindowSettings(true);
+
+
+                if (WindowState == FormWindowState.Normal)
+                {
+                    width = Width;
+                    height = Height;
+                    left = Left;
+                    top = Top;
+                    windowState = FormWindowState.Normal;
+                }
+
+
+                int width2 = (int)Math.Round(width / hDpiFormScaling);
+                int height2 = (int)Math.Round(height / vDpiFormScaling);
+
+                if (width2 == 0)
+                {
+                    width2 = currentWindowSettings.w;
+                }
+                else if (100d * Math.Abs(width2 - currentWindowSettings.w) / width2 < 0.5d) // 0.5%
+                {
+                    width2 = currentWindowSettings.w;
+                }
+
+                if (height2 == 0)
+                {
+                    height2 = currentWindowSettings.h;
+                }
+                else if (100d * Math.Abs(height2 - currentWindowSettings.h) / height2 < 0.5d) // 0.5%
+                {
+                    height2 = currentWindowSettings.h;
+                }
+
+
+                int left2 = (int)Math.Round(left / hDpiFormScaling);
+                if (Math.Abs(left2 - currentWindowSettings.x) <= 1) // 1px
+                {
+                    left2 = currentWindowSettings.x;
+                }
+
+                int top2 = (int)Math.Round(top / vDpiFormScaling);
+                if (Math.Abs(top2 - currentWindowSettings.y) <= 1) // 1px
+                {
+                    top2 = currentWindowSettings.y;
+                }
+
+
+
+                currentWindowSettings.x = left2;
+                currentWindowSettings.y = top2;
+                currentWindowSettings.w = width2;
+                currentWindowSettings.h = height2;
+
+                if (!Visible || WindowState == FormWindowState.Minimized)
+                    currentWindowSettings.max = (windowState == FormWindowState.Maximized ? true : false);
+                else if (windowState == FormWindowState.Maximized)
+                    currentWindowSettings.max = true;
+                else
+                    currentWindowSettings.max = false;
             }
-
-
-            int width2 = (int)Math.Round(width / hDpiFormScaling);
-            int height2 = (int)Math.Round(height / vDpiFormScaling);
-
-            if (width2 == 0)
-            {
-                width2 = currentWindowSettings.w;
-            }
-            else if (100d * Math.Abs(width2 - currentWindowSettings.w) / width2 < 0.5d) // 0.5%
-            {
-                width2 = currentWindowSettings.w;
-            }
-
-            if (height2 == 0)
-            {
-                height2 = currentWindowSettings.h;
-            }
-            else if (100d * Math.Abs(height2 - currentWindowSettings.h) / height2 < 0.5d) // 0.5%
-            {
-                height2 = currentWindowSettings.h;
-            }
-
-
-            int left2 = (int)Math.Round(left / hDpiFormScaling);
-            if (Math.Abs(left2 - currentWindowSettings.x) <= 1) // 1px
-            {
-                left2 = currentWindowSettings.x;
-            }
-
-            int top2 = (int)Math.Round(top / vDpiFormScaling);
-            if (Math.Abs(top2 - currentWindowSettings.y) <= 1) // 1px
-            {
-                top2 = currentWindowSettings.y;
-            }
-
-
-
-            currentWindowSettings.x = left2;
-            currentWindowSettings.y = top2;
-            currentWindowSettings.w = width2;
-            currentWindowSettings.h = height2;
-
-            if (!Visible || WindowState == FormWindowState.Minimized)
-                currentWindowSettings.max = (windowState == FormWindowState.Maximized ? true : false);
-            else if (windowState == FormWindowState.Maximized)
-                currentWindowSettings.max = true;
-            else
-                currentWindowSettings.max = false;
         }
 
         protected void saveWindowLayout(int column1Width = 0, int column2Width = 0, int column3Width = 0, int splitterDistance = 0, int table2column1Width = 0, int table2column2Width = 0, int table2column3Width = 0)

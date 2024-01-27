@@ -941,7 +941,6 @@ namespace MusicBeePlugin
             this.Controls.Add(this.calculateThresholdsAtStartUpCheckBox);
             this.Controls.Add(this.autoRatingTagList);
             this.Controls.Add(this.label4);
-            this.MaximizeBox = false;
             this.Name = "AutoRateCommand";
             this.Tag = "@min-max-width-same@min-max-height-same";
             ((System.ComponentModel.ISupportInitialize)(this.baseRatingTrackBar)).EndInit();

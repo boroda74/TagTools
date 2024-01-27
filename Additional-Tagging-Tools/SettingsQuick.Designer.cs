@@ -437,7 +437,6 @@
             this.Controls.Add(this.allowCommandExecutionWithoutPreviewCheckBox);
             this.Controls.Add(this.allowAsrLrPresetAutoexecutionCheckBoxLabel);
             this.Controls.Add(this.allowAsrLrPresetAutoexecutionCheckBox);
-            this.MaximizeBox = false;
             this.Name = "PluginQuickSettings";
             this.Tag = "@min-max-width-same@min-max-height-same";
             this.groupBox3.ResumeLayout(false);

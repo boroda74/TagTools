@@ -264,9 +264,6 @@
   <data name="&gt;&gt;autobackupPrefixTextBox.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <data name="autobackupCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -285,6 +282,9 @@
   <data name="autobackupCheckBox.Text" xml:space="preserve">
     <value> </value>
   </data>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <data name="autobackupCheckBox.ToolTip" xml:space="preserve">
     <value>Autobackups will be skipped if content of current library is not changed and no tags are changed
 after last manual or auto backup.</value>
@@ -610,9 +610,6 @@ after last manual or auto backup.</value>
   <data name="&gt;&gt;backupArtworksCheckBox.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <data name="dontTryToGuessLibraryNameCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -952,7 +949,7 @@ Sometimes guessing current library name may work incorrectly.
     <value>7, 15</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>724, 212</value>
+    <value>726, 214</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>

@@ -785,7 +785,6 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.buttonsPanel);
-            this.MaximizeBox = false;
             this.Name = "PluginSettings";
             this.Tag = "@min-max-width-same@min-max-height-same";
             this.groupBox3.ResumeLayout(false);

@@ -97,7 +97,6 @@
             this.Controls.Add(this.lastSkippedTagList);
             this.Controls.Add(this.saveLastSkippedCheckBoxLabel);
             this.Controls.Add(this.saveLastSkippedCheckBox);
-            this.MaximizeBox = false;
             this.Name = "SaveLastSkippedCommand";
             this.Tag = "@min-max-width-same@min-max-height-same";
             this.Load += new System.EventHandler(this.SaveLastSkippedCommand_Load);

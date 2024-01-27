@@ -285,7 +285,6 @@
             this.Controls.Add(this.autobackupFolderTextBox);
             this.Controls.Add(this.autobackupFolderLabel);
             this.Controls.Add(this.dontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel);
-            this.MaximizeBox = false;
             this.Name = "AutoBackupSettings";
             this.Tag = "@min-max-height-same";
             ((System.ComponentModel.ISupportInitialize)(this.autobackupNumericUpDown)).EndInit();

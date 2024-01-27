@@ -185,7 +185,6 @@
             this.Controls.Add(this.calculateAlbumRatingAtStartUpCheckBoxLabel);
             this.Controls.Add(this.calculateAlbumRatingAtStartUpCheckBox);
             this.Controls.Add(this.label1);
-            this.MaximizeBox = false;
             this.Name = "CalculateAverageAlbumRatingCommand";
             this.Tag = "@min-max-width-same@min-max-height-same";
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).EndInit();
