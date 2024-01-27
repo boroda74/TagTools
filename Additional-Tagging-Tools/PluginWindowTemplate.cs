@@ -1694,7 +1694,7 @@ namespace MusicBeePlugin
 
             loadWindowSizesPositions();
 
-            if (width != 0 && height != 0 && !fixedSize)
+            if (width != 0 && height != 0 && !fixedSize) //There is a saved state, not fixed size
             {
                 width = (int)Math.Round(width * hDpiFormScaling);
                 height = (int)Math.Round(height * vDpiFormScaling);
