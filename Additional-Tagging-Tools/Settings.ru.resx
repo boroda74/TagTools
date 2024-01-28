@@ -119,13 +119,13 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>891, 6</value>
+    <value>889, 6</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Отмена</value>
   </data>
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>783, 6</value>
+    <value>781, 6</value>
   </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>666, 15</value>
@@ -140,7 +140,7 @@
     <value>Версия: </value>
   </data>
   <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>949, 112</value>
+    <value>947, 112</value>
   </data>
   <data name="playTickedAsrPresetSoundCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>449, 15</value>
@@ -203,7 +203,7 @@
     <value>436, 0</value>
   </data>
   <data name="saveLastSkippedButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>485, 6</value>
+    <value>483, 6</value>
   </data>
   <data name="saveLastSkippedButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>290, 23</value>
@@ -212,13 +212,13 @@
     <value>Сохранять дату последнего пропуска трека...</value>
   </data>
   <data name="highlightChangedTagsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>360, 21</value>
+    <value>640, 21</value>
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>949, 142</value>
+    <value>947, 142</value>
   </data>
   <data name="legendGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>642, 21</value>
+    <value>640, 39</value>
   </data>
   <data name="legendGroupBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>297, 93</value>
@@ -251,7 +251,7 @@
     <value> Цвета предварительного просмотра </value>
   </data>
   <data name="highlightChangedTagsCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>381, 21</value>
+    <value>661, 21</value>
   </data>
   <data name="highlightChangedTagsCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>182, 15</value>
@@ -277,6 +277,27 @@
   <data name="minimizePluginWindowsCheckBoxLabel.Text" xml:space="preserve">
     <value>Минимизировать окна плагина, вместо того чтобы скрывать их</value>
   </data>
+  <data name="customFontButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>610, 39</value>
+  </data>
+  <data name="customFontTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>428, 39</value>
+  </data>
+  <data name="customFontTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>176, 23</value>
+  </data>
+  <data name="useCustomFontCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>254, 42</value>
+  </data>
+  <data name="useCustomFontCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>168, 15</value>
+  </data>
+  <data name="useCustomFontCheckBoxLabel.Text" xml:space="preserve">
+    <value>Использовать свой шрифт **</value>
+  </data>
+  <data name="useCustomFontCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>233, 42</value>
+  </data>
   <data name="useMusicBeeFontCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>193, 15</value>
   </data>
@@ -299,7 +320,13 @@
     <value>410, 63</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>949, 258</value>
+    <value>947, 258</value>
+  </data>
+  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>128, 15</value>
+  </data>
+  <data name="label7.Text" xml:space="preserve">
+    <value> Выберите команды * </value>
   </data>
   <data name="contextMenuCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>431, 63</value>
@@ -401,12 +428,6 @@
   <data name="showCopyTagCheckBoxLabel.Text" xml:space="preserve">
     <value>Показывать в меню команду "Копировать тег"</value>
   </data>
-  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 15</value>
-  </data>
-  <data name="label7.Text" xml:space="preserve">
-    <value> Выберите команды * </value>
-  </data>
   <data name="groupBox5.Size" type="System.Drawing.Size, System.Drawing">
     <value>878, 90</value>
   </data>
@@ -446,26 +467,29 @@
   <data name="label5.Text" xml:space="preserve">
     <value>**  Требуется заново открыть окна плагина, чтобы новые настройки вступили в силу</value>
   </data>
+  <data name="buttonsPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 626</value>
+  </data>
   <data name="buttonsPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>996, 35</value>
+    <value>994, 35</value>
   </data>
   <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>982, 570</value>
+    <value>980, 570</value>
   </data>
   <data name="tabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>974, 542</value>
+    <value>972, 542</value>
   </data>
   <data name="tabPage1.Text" xml:space="preserve">
     <value>Поведение</value>
   </data>
   <data name="tabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>974, 542</value>
+    <value>972, 542</value>
   </data>
   <data name="tabPage2.Text" xml:space="preserve">
     <value>Обработка</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>996, 665</value>
+    <value>994, 663</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>1010, 702</value>

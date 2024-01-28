@@ -7,6 +7,15 @@
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
+        /// <summary>
+        /// Освободить все используемые ресурсы.
+        /// </summary>
+        /// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
+        protected override void Dispose(bool disposing)
+        {
+            customFont.Dispose();//*******
+        }
+
         #region Код, автоматически созданный конструктором форм Windows
 
         /// <summary>
@@ -56,6 +65,10 @@
             this.closeHiddenCommandWindowsRadioButtonLabel = new System.Windows.Forms.Label();
             this.minimizePluginWindowsCheckBoxLabel = new System.Windows.Forms.Label();
             this.minimizePluginWindowsCheckBox = new System.Windows.Forms.CheckBox();
+            this.customFontButton = new System.Windows.Forms.Button();
+            this.customFontTextBox = new System.Windows.Forms.TextBox();
+            this.useCustomFontCheckBoxLabel = new System.Windows.Forms.Label();
+            this.useCustomFontCheckBox = new System.Windows.Forms.CheckBox();
             this.useMusicBeeFontCheckBoxLabel = new System.Windows.Forms.Label();
             this.useMusicBeeFontCheckBox = new System.Windows.Forms.CheckBox();
             this.useSkinColorsCheckBoxLabel = new System.Windows.Forms.Label();
@@ -73,6 +86,7 @@
             this.contextMenuCheckBox = new System.Windows.Forms.CheckBox();
             this.showCTCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.contextMenuCheckBoxLabel = new System.Windows.Forms.Label();
             this.allowCommandExecutionWithoutPreviewCheckBoxLabel = new System.Windows.Forms.Label();
             this.allowCommandExecutionWithoutPreviewCheckBox = new System.Windows.Forms.CheckBox();
@@ -89,7 +103,6 @@
             this.showChangeCaseCheckBoxLabel = new System.Windows.Forms.Label();
             this.showSwapTagsCheckBoxLabel = new System.Windows.Forms.Label();
             this.showCopyTagCheckBoxLabel = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.includePreservedTagValuesCheckBoxLabel = new System.Windows.Forms.Label();
             this.includePreservedTagValuesCheckBox = new System.Windows.Forms.CheckBox();
@@ -323,6 +336,10 @@
             this.groupBox2.Controls.Add(this.closeHiddenCommandWindowsRadioButton);
             this.groupBox2.Controls.Add(this.minimizePluginWindowsCheckBoxLabel);
             this.groupBox2.Controls.Add(this.minimizePluginWindowsCheckBox);
+            this.groupBox2.Controls.Add(this.customFontButton);
+            this.groupBox2.Controls.Add(this.customFontTextBox);
+            this.groupBox2.Controls.Add(this.useCustomFontCheckBoxLabel);
+            this.groupBox2.Controls.Add(this.useCustomFontCheckBox);
             this.groupBox2.Controls.Add(this.useMusicBeeFontCheckBoxLabel);
             this.groupBox2.Controls.Add(this.useMusicBeeFontCheckBox);
             this.groupBox2.Controls.Add(this.useSkinColorsCheckBoxLabel);
@@ -403,11 +420,43 @@
             this.minimizePluginWindowsCheckBox.Name = "minimizePluginWindowsCheckBox";
             this.minimizePluginWindowsCheckBox.Tag = "#minimizePluginWindowsCheckBoxLabel";
             // 
+            // customFontButton
+            // 
+            resources.ApplyResources(this.customFontButton, "customFontButton");
+            this.customFontButton.Name = "customFontButton";
+            this.customFontButton.Tag = "#legendGroupBox@non-defaultable";
+            this.customFontButton.UseVisualStyleBackColor = true;
+            this.customFontButton.Click += new System.EventHandler(this.customFontButton_Click);
+            // 
+            // customFontTextBox
+            // 
+            resources.ApplyResources(this.customFontTextBox, "customFontTextBox");
+            this.customFontTextBox.Name = "customFontTextBox";
+            this.customFontTextBox.ReadOnly = true;
+            this.customFontTextBox.Tag = "#customFontButton";
+            // 
+            // useCustomFontCheckBoxLabel
+            // 
+            resources.ApplyResources(this.useCustomFontCheckBoxLabel, "useCustomFontCheckBoxLabel");
+            this.useCustomFontCheckBoxLabel.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.useCustomFontCheckBoxLabel.Name = "useCustomFontCheckBoxLabel";
+            this.useCustomFontCheckBoxLabel.Tag = "#customFontTextBox";
+            this.useCustomFontCheckBoxLabel.Click += new System.EventHandler(this.useCustomFontCheckBoxLabel_Click);
+            // 
+            // useCustomFontCheckBox
+            // 
+            resources.ApplyResources(this.useCustomFontCheckBox, "useCustomFontCheckBox");
+            this.useCustomFontCheckBox.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.useCustomFontCheckBox.Name = "useCustomFontCheckBox";
+            this.useCustomFontCheckBox.Tag = "#useCustomFontCheckBoxLabel";
+            this.useCustomFontCheckBox.CheckedChanged += new System.EventHandler(this.useCustomFontCheckBox_CheckedChanged);
+            // 
             // useMusicBeeFontCheckBoxLabel
             // 
             resources.ApplyResources(this.useMusicBeeFontCheckBoxLabel, "useMusicBeeFontCheckBoxLabel");
             this.useMusicBeeFontCheckBoxLabel.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.useMusicBeeFontCheckBoxLabel.Name = "useMusicBeeFontCheckBoxLabel";
+            this.useMusicBeeFontCheckBoxLabel.Tag = "#useCustomFontCheckBox";
             this.useMusicBeeFontCheckBoxLabel.Click += new System.EventHandler(this.useMusicBeeFontCheckBoxLabel_Click);
             // 
             // useMusicBeeFontCheckBox
@@ -416,6 +465,7 @@
             this.useMusicBeeFontCheckBox.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.useMusicBeeFontCheckBox.Name = "useMusicBeeFontCheckBox";
             this.useMusicBeeFontCheckBox.Tag = "#useMusicBeeFontCheckBoxLabel";
+            this.useMusicBeeFontCheckBox.CheckedChanged += new System.EventHandler(this.useMusicBeeFontCheckBox_CheckedChanged);
             // 
             // useSkinColorsCheckBoxLabel
             // 
@@ -516,6 +566,7 @@
             // groupBox1
             // 
             resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.contextMenuCheckBoxLabel);
             this.groupBox1.Controls.Add(this.contextMenuCheckBox);
             this.groupBox1.Controls.Add(this.allowCommandExecutionWithoutPreviewCheckBoxLabel);
@@ -544,11 +595,15 @@
             this.groupBox1.Controls.Add(this.showSwapTagsCheckBox);
             this.groupBox1.Controls.Add(this.showCopyTagCheckBoxLabel);
             this.groupBox1.Controls.Add(this.showCopyTagCheckBox);
-            this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             this.groupBox1.Tag = "#tabPage1@pinned-to-parent-x";
+            // 
+            // label7
+            // 
+            resources.ApplyResources(this.label7, "label7");
+            this.label7.Name = "label7";
             // 
             // contextMenuCheckBoxLabel
             // 
@@ -666,11 +721,6 @@
             this.showCopyTagCheckBoxLabel.Name = "showCopyTagCheckBoxLabel";
             this.showCopyTagCheckBoxLabel.Click += new System.EventHandler(this.showCopyTagCheckBoxLabel_Click);
             // 
-            // label7
-            // 
-            resources.ApplyResources(this.label7, "label7");
-            this.label7.Name = "label7";
-            // 
             // groupBox5
             // 
             resources.ApplyResources(this.groupBox5, "groupBox5");
@@ -780,11 +830,11 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
+            this.Controls.Add(this.buttonsPanel);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.buttonsPanel);
             this.Name = "PluginSettings";
             this.Tag = "@min-max-width-same@min-max-height-same";
             this.groupBox3.ResumeLayout(false);
@@ -901,5 +951,9 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Label useMusicBeeFontCheckBoxLabel;
         private System.Windows.Forms.CheckBox useMusicBeeFontCheckBox;
+        private System.Windows.Forms.TextBox customFontTextBox;
+        private System.Windows.Forms.Label useCustomFontCheckBoxLabel;
+        private System.Windows.Forms.CheckBox useCustomFontCheckBox;
+        private System.Windows.Forms.Button customFontButton;
     }
 }

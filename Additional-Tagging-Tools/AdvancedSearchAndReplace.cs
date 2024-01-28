@@ -2943,6 +2943,7 @@ namespace MusicBeePlugin
 
         private void editPreset(Preset tempPreset, bool itsNewPreset, bool readOnly)
         {
+            string backedUpPresetName = tempPreset.getName();
             bool presetChanged;
             using (ASRPresetEditor tagToolsForm = new ASRPresetEditor(TagToolsPlugin))
             {
@@ -2973,7 +2974,7 @@ namespace MusicBeePlugin
                     presetListLastSelectedIndex = -1;
                     refreshPresetList(tempPreset.guid);
                 }
-                else
+                else if (tempPreset.getName() != backedUpPresetName)
                 {
                     refreshPresetList(tempPreset.guid);
                 }

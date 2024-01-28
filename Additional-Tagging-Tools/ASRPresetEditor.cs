@@ -609,5 +609,20 @@ namespace MusicBeePlugin
         {
             ignoreCaseCheckBox.Checked = !ignoreCaseCheckBox.Checked;
         }
+
+        private void removePresetCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            removePresetCheckBox.Checked = !removePresetCheckBox.Checked;
+        }
+
+        private void customizedByUserCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            customizedByUserCheckBox.Checked = !customizedByUserCheckBox.Checked;
+        }
+
+        private void userPresetCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            userPresetCheckBox.Checked = !userPresetCheckBox.Checked;
+        }
     }
 }

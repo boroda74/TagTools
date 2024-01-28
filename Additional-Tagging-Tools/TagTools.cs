@@ -530,8 +530,16 @@ namespace MusicBeePlugin
             public bool dontShowBackupRestore;
 
             public bool minimizePluginWindows;
+
             public bool dontUseSkinColors;
+            
             public bool useMusicBeeFont;
+
+            public bool useCustomFont;
+            public string pluginFontFamilyName;
+            public float pluginFontSize;
+            public System.Drawing.FontStyle pluginFontStyle;
+
             public bool dontHighlightChangedTags;
 
             public bool dontIncludeInPreviewLinesWithoutChangedTags;

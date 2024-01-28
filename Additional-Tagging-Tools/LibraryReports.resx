@@ -1966,7 +1966,7 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>22</value>
   </data>
   <data name="openReportCheckBoxPicture.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+    <value>Right</value>
   </data>
   <data name="openReportCheckBoxPicture.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>

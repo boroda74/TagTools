@@ -474,7 +474,7 @@
             resources.ApplyResources(this.openReportCheckBoxLabel, "openReportCheckBoxLabel");
             this.dirtyErrorProvider.SetIconAlignment(this.openReportCheckBoxLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("openReportCheckBoxLabel.IconAlignment"))));
             this.openReportCheckBoxLabel.Name = "openReportCheckBoxLabel";
-            this.openReportCheckBoxLabel.Tag = "";
+            this.openReportCheckBoxLabel.Tag = "&openReportCheckBoxPicture";
             this.toolTip1.SetToolTip(this.openReportCheckBoxLabel, resources.GetString("openReportCheckBoxLabel.ToolTip"));
             this.openReportCheckBoxLabel.Click += new System.EventHandler(this.openReportCheckBoxLabel_Click);
             // 
@@ -483,7 +483,7 @@
             resources.ApplyResources(this.openReportCheckBox, "openReportCheckBox");
             this.dirtyErrorProvider.SetIconAlignment(this.openReportCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("openReportCheckBox.IconAlignment"))));
             this.openReportCheckBox.Name = "openReportCheckBox";
-            this.openReportCheckBox.Tag = "#openReportCheckBoxLabel";
+            this.openReportCheckBox.Tag = "#openReportCheckBoxLabel|openReportCheckBoxPicture";
             this.toolTip1.SetToolTip(this.openReportCheckBox, resources.GetString("openReportCheckBox.ToolTip"));
             // 
             // yArtworkSizeUpDown

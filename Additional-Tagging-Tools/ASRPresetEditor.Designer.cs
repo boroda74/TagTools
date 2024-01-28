@@ -1185,18 +1185,21 @@
             resources.ApplyResources(this.removePresetCheckBoxLabel, "removePresetCheckBoxLabel");
             this.removePresetCheckBoxLabel.Name = "removePresetCheckBoxLabel";
             this.removePresetCheckBoxLabel.Tag = "#customizedByUserCheckBox";
+            this.removePresetCheckBoxLabel.Click += new System.EventHandler(this.removePresetCheckBoxLabel_Click);
             // 
             // customizedByUserCheckBoxLabel
             // 
             resources.ApplyResources(this.customizedByUserCheckBoxLabel, "customizedByUserCheckBoxLabel");
             this.customizedByUserCheckBoxLabel.Name = "customizedByUserCheckBoxLabel";
             this.customizedByUserCheckBoxLabel.Tag = "#userPresetCheckBox";
+            this.customizedByUserCheckBoxLabel.Click += new System.EventHandler(this.customizedByUserCheckBoxLabel_Click);
             // 
             // userPresetCheckBoxLabel
             // 
             resources.ApplyResources(this.userPresetCheckBoxLabel, "userPresetCheckBoxLabel");
             this.userPresetCheckBoxLabel.Name = "userPresetCheckBoxLabel";
             this.userPresetCheckBoxLabel.Tag = "#ASRPresetEditor@pinned-to-parent-x";
+            this.userPresetCheckBoxLabel.Click += new System.EventHandler(this.userPresetCheckBoxLabel_Click);
             // 
             // ignoreCaseCheckBoxLabel
             // 

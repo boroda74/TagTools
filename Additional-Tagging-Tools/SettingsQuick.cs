@@ -10,6 +10,7 @@ namespace MusicBeePlugin
         private bool selectedLineColors;
         private string changedLegendText;
         private string selectedChangedLegendText;
+        private System.Drawing.Font customFont;
 
         protected void setCloseShowWindowsRadioButtons(int pos)
         {
@@ -86,6 +87,28 @@ namespace MusicBeePlugin
 
             useSkinColorsCheckBox.Checked = !SavedSettings.dontUseSkinColors;
             useMusicBeeFontCheckBox.Checked = SavedSettings.useMusicBeeFont;
+
+
+            useCustomFontCheckBox.Checked = SavedSettings.useCustomFont;
+
+            if (SavedSettings.pluginFontFamilyName == null)
+            {
+                customFont = MbApiInterface.Setting_GetDefaultFont();
+            }
+            else
+            {
+                customFont = new System.Drawing.Font(
+                    SavedSettings.pluginFontFamilyName,
+                    SavedSettings.pluginFontSize,
+                    SavedSettings.pluginFontStyle
+                    );
+            }
+
+            customFontTextBox.Text = customFont.Name + " " + customFont.Style + " " + customFont.Size + " pt";
+            customFontTextBox.Text = customFontTextBox.Text.Replace(", ", " ").Replace("bold Bold", "bold");
+            customFontButton.Enabled = useCustomFontCheckBox.Checked;
+
+
             highlightChangedTagsCheckBox.Checked = !SavedSettings.dontHighlightChangedTags;
 
             includeNotChangedTagsCheckBox.Checked = !SavedSettings.dontIncludeInPreviewLinesWithoutChangedTags;
@@ -112,6 +135,12 @@ namespace MusicBeePlugin
 
             SavedSettings.dontUseSkinColors = !useSkinColorsCheckBox.Checked;
             SavedSettings.useMusicBeeFont = useMusicBeeFontCheckBox.Checked;
+
+            SavedSettings.useCustomFont = useCustomFontCheckBox.Checked;
+            SavedSettings.pluginFontFamilyName = customFont.FontFamily.Name;
+            SavedSettings.pluginFontSize = customFont.Size;
+            SavedSettings.pluginFontStyle = customFont.Style;
+
             SavedSettings.dontHighlightChangedTags = !highlightChangedTagsCheckBox.Checked;
 
             SavedSettings.dontIncludeInPreviewLinesWithoutChangedTags = !includeNotChangedTagsCheckBox.Checked;
@@ -177,9 +206,49 @@ namespace MusicBeePlugin
             useSkinColorsCheckBox.Checked = !useSkinColorsCheckBox.Checked;
         }
 
+        private void useMusicBeeFontCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (useMusicBeeFontCheckBox.Checked && useCustomFontCheckBox.Checked)
+                useCustomFontCheckBox.Checked = false;
+        }
+
         private void useMusicBeeFontCheckBoxLabel_Click(object sender, EventArgs e)
         {
             useMusicBeeFontCheckBox.Checked = !useMusicBeeFontCheckBox.Checked;
+            useMusicBeeFontCheckBox_CheckedChanged(null, null);
+        }
+
+        private void useCustomFontCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            customFontButton.Enabled = useCustomFontCheckBox.Checked;
+
+            if (useMusicBeeFontCheckBox.Checked && useCustomFontCheckBox.Checked)
+                useMusicBeeFontCheckBox.Checked = false;
+        }
+
+        private void useCustomFontCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            useCustomFontCheckBox.Checked = !useCustomFontCheckBox.Checked;
+            useCustomFontCheckBox_CheckedChanged(null, null);
+        }
+
+        private void customFontButton_Click(object sender, EventArgs e)
+        {
+            FontDialog customFontDialog = new FontDialog();
+            customFontDialog.Font = customFont;
+            customFontDialog.ShowApply = false;
+            customFontDialog.FontMustExist = true;
+            customFontDialog.ShowColor = false;
+            customFontDialog.ShowEffects = false;
+            var result = customFontDialog.ShowDialog(this);
+
+            if (result == DialogResult.OK)
+            {
+                customFont.Dispose();
+                customFont = customFontDialog.Font;
+                customFontTextBox.Text = customFont.Name + " " + customFont.Style + " " + customFont.Size + " pt";
+                customFontTextBox.Text = customFontTextBox.Text.Replace(", ", " ").Replace("bold Bold", "bold");
+            }
         }
 
         private void highlightChangedTagsCheckBoxLabel_Click(object sender, EventArgs e)

@@ -119,7 +119,7 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>779, 461</value>
+    <value>877, 460</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Отмена</value>
@@ -128,7 +128,7 @@
     <value />
   </data>
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>671, 461</value>
+    <value>769, 460</value>
   </data>
   <data name="buttonOK.ToolTip" xml:space="preserve">
     <value />
@@ -197,13 +197,13 @@
     <value />
   </data>
   <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>872, 112</value>
+    <value>970, 112</value>
   </data>
   <data name="groupBox3.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="saveLastSkippedButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>373, 461</value>
+    <value>471, 460</value>
   </data>
   <data name="saveLastSkippedButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>290, 23</value>
@@ -229,16 +229,49 @@
   <data name="highlightChangedTagsCheckBox.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="highlightChangedTagsCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>311, 21</value>
+  <data name="preservedTagValuesLegendTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>238, 19</value>
   </data>
-  <data name="highlightChangedTagsCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 15</value>
+  <data name="preservedTagValuesLegendTextBox.Text" xml:space="preserve">
+    <value>Пропущенные значения тегов</value>
   </data>
-  <data name="highlightChangedTagsCheckBoxLabel.Text" xml:space="preserve">
-    <value>Подсвечивать измененные теги</value>
+  <data name="preservedTagValuesLegendTextBox.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="highlightChangedTagsCheckBoxLabel.ToolTip" xml:space="preserve">
+  <data name="preservedTagsLegendTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>238, 19</value>
+  </data>
+  <data name="preservedTagsLegendTextBox.Text" xml:space="preserve">
+    <value>Пропущенные теги</value>
+  </data>
+  <data name="preservedTagsLegendTextBox.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="changedLegendTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>238, 19</value>
+  </data>
+  <data name="changedLegendTextBox.Text" xml:space="preserve">
+    <value>Измененные</value>
+  </data>
+  <data name="changedLegendTextBox.ToolTip" xml:space="preserve">
+    <value>Щелкните мышкой по любому полю, чтобы увидеть цвета выделенной строки:Щелкните мышкой по любому полю, чтобы увидеть цвета невыделенной строки</value>
+  </data>
+  <data name="legendLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>214, 15</value>
+  </data>
+  <data name="legendLabel.Text" xml:space="preserve">
+    <value> Цвета предварительного просмотра </value>
+  </data>
+  <data name="legendLabel.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="legendGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>705, 21</value>
+  </data>
+  <data name="legendGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>256, 93</value>
+  </data>
+  <data name="legendGroupBox.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="showHiddenCommandWindowsRadioButtonLabel.Size" type="System.Drawing.Size, System.Drawing">
@@ -271,6 +304,36 @@
   <data name="minimizePluginWindowsCheckBox.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="customFontButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>675, 39</value>
+  </data>
+  <data name="customFontButton.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="customFontTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>429, 39</value>
+  </data>
+  <data name="customFontTextBox.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="useCustomFontCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>255, 42</value>
+  </data>
+  <data name="useCustomFontCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>168, 15</value>
+  </data>
+  <data name="useCustomFontCheckBoxLabel.Text" xml:space="preserve">
+    <value>Использовать свой шрифт **</value>
+  </data>
+  <data name="useCustomFontCheckBoxLabel.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="useCustomFontCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>233, 42</value>
+  </data>
+  <data name="useCustomFontCheckBox.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="useMusicBeeFontCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>193, 15</value>
   </data>
@@ -281,6 +344,18 @@
     <value />
   </data>
   <data name="useMusicBeeFontCheckBox.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="highlightChangedTagsCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>311, 21</value>
+  </data>
+  <data name="highlightChangedTagsCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>182, 15</value>
+  </data>
+  <data name="highlightChangedTagsCheckBoxLabel.Text" xml:space="preserve">
+    <value>Подсвечивать измененные теги</value>
+  </data>
+  <data name="highlightChangedTagsCheckBoxLabel.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="useSkinColorsCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
@@ -301,53 +376,8 @@
   <data name="label8.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="preservedTagValuesLegendTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>264, 19</value>
-  </data>
-  <data name="preservedTagValuesLegendTextBox.Text" xml:space="preserve">
-    <value>Пропущенные значения тегов</value>
-  </data>
-  <data name="preservedTagValuesLegendTextBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="preservedTagsLegendTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>264, 19</value>
-  </data>
-  <data name="preservedTagsLegendTextBox.Text" xml:space="preserve">
-    <value>Пропущенные теги</value>
-  </data>
-  <data name="preservedTagsLegendTextBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="changedLegendTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>264, 19</value>
-  </data>
-  <data name="changedLegendTextBox.Text" xml:space="preserve">
-    <value>Измененные</value>
-  </data>
-  <data name="changedLegendTextBox.ToolTip" xml:space="preserve">
-    <value>Щелкните мышкой по любому полю, чтобы увидеть цвета выделенной строки:Щелкните мышкой по любому полю, чтобы увидеть цвета невыделенной строки</value>
-  </data>
-  <data name="legendLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>214, 15</value>
-  </data>
-  <data name="legendLabel.Text" xml:space="preserve">
-    <value> Цвета предварительного просмотра </value>
-  </data>
-  <data name="legendLabel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="legendGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>581, 21</value>
-  </data>
-  <data name="legendGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>282, 93</value>
-  </data>
-  <data name="legendGroupBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>872, 129</value>
+    <value>970, 129</value>
   </data>
   <data name="groupBox2.ToolTip" xml:space="preserve">
     <value />
@@ -410,7 +440,7 @@
     <value />
   </data>
   <data name="groupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>872, 90</value>
+    <value>970, 90</value>
   </data>
   <data name="groupBox5.ToolTip" xml:space="preserve">
     <value />
@@ -455,10 +485,10 @@
     <value />
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>886, 493</value>
+    <value>984, 491</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>900, 530</value>
+    <value>1000, 530</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Настройки</value>
