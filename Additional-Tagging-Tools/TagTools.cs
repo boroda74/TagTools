@@ -5942,11 +5942,11 @@ namespace MusicBeePlugin
             if (!SavedSettings.dontShowBackupRestore) AddMenuItem(TagToolsContextSubmenu, TagToolsMenuSectionName, null, null, false);
 
             if (!SavedSettings.dontShowCopyTag) AddMenuItem(TagToolsContextSubmenu, CopyTagCommandName, null, copyTagEventHandler);
-            if (!SavedSettings.dontShowSwapTags) AddMenuItem(TagToolsContextSubmenu, SwapTagsCommandName, null, swapTagsEventHandler);
+            //if (!SavedSettings.dontShowSwapTags) AddMenuItem(TagToolsContextSubmenu, SwapTagsCommandName, null, swapTagsEventHandler);
             if (!SavedSettings.dontShowChangeCase) AddMenuItem(TagToolsContextSubmenu, ChangeCaseCommandName, null, changeCaseEventHandler);
             if (!SavedSettings.dontShowASR)
             {
-                AddMenuItem(TagToolsContextSubmenu, AsrCommandName, null, asrEventHandler);
+                //AddMenuItem(TagToolsContextSubmenu, AsrCommandName, null, asrEventHandler);
                 if (ASRPresetsWithHotkeysCount > 0)
                     ASRPresetsContextMenuItem = AddMenuItem(TagToolsContextSubmenu, AsrCommandName.Replace("...", string.Empty), null, null);
                 AddMenuItem(TagToolsContextSubmenu, MsrCommandName, null, multipleSearchReplaceEventHandler);
