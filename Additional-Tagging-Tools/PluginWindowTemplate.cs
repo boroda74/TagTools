@@ -665,7 +665,13 @@ namespace MusicBeePlugin
 
         public int getButtonY(Control control, AnchorStyles style)
         {
-            float controlNewY = control.Top - (control.Height - control.Height / vDpiFontScaling) / 4;//***
+            float controlNewY;
+
+            if ((control.Anchor & AnchorStyles.Top) == 0 && (control.Anchor & AnchorStyles.Bottom) == 0) //Not vertically anchored
+                controlNewY = control.Top;
+            else
+                controlNewY = control.Top - (control.Height - control.Height / vDpiFontScaling) / 4f;//***
+
             return (int)Math.Round(controlNewY);
         }
 
@@ -1745,7 +1751,8 @@ namespace MusicBeePlugin
 
 
                 initialFormFont.Dispose();
-                workingFont.Dispose();
+                if (!UseMusicBeeFont)
+                    workingFont.Dispose();
             }
 
             MinimumSize = Size;

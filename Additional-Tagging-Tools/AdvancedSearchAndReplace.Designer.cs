@@ -967,8 +967,8 @@ namespace MusicBeePlugin
             // 
             // buttonDelete
             // 
-            this.dirtyErrorProvider.SetIconAlignment(this.buttonDelete, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonDelete.IconAlignment"))));
             resources.ApplyResources(this.buttonDelete, "buttonDelete");
+            this.dirtyErrorProvider.SetIconAlignment(this.buttonDelete, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonDelete.IconAlignment"))));
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Tag = "";
             this.toolTip1.SetToolTip(this.buttonDelete, resources.GetString("buttonDelete.ToolTip"));
@@ -976,16 +976,16 @@ namespace MusicBeePlugin
             // 
             // buttonEdit
             // 
-            this.dirtyErrorProvider.SetIconAlignment(this.buttonEdit, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonEdit.IconAlignment"))));
             resources.ApplyResources(this.buttonEdit, "buttonEdit");
+            this.dirtyErrorProvider.SetIconAlignment(this.buttonEdit, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonEdit.IconAlignment"))));
             this.buttonEdit.Name = "buttonEdit";
             this.buttonEdit.Tag = "";
             this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
             // 
             // buttonCopy
             // 
-            this.dirtyErrorProvider.SetIconAlignment(this.buttonCopy, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonCopy.IconAlignment"))));
             resources.ApplyResources(this.buttonCopy, "buttonCopy");
+            this.dirtyErrorProvider.SetIconAlignment(this.buttonCopy, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonCopy.IconAlignment"))));
             this.buttonCopy.Name = "buttonCopy";
             this.buttonCopy.Tag = "";
             this.toolTip1.SetToolTip(this.buttonCopy, resources.GetString("buttonCopy.ToolTip"));
@@ -993,16 +993,16 @@ namespace MusicBeePlugin
             // 
             // buttonCreate
             // 
-            this.dirtyErrorProvider.SetIconAlignment(this.buttonCreate, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonCreate.IconAlignment"))));
             resources.ApplyResources(this.buttonCreate, "buttonCreate");
+            this.dirtyErrorProvider.SetIconAlignment(this.buttonCreate, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonCreate.IconAlignment"))));
             this.buttonCreate.Name = "buttonCreate";
             this.buttonCreate.Tag = "";
             this.buttonCreate.Click += new System.EventHandler(this.buttonCreate_Click);
             // 
             // buttonExportCustom
             // 
-            this.dirtyErrorProvider.SetIconAlignment(this.buttonExportCustom, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonExportCustom.IconAlignment"))));
             resources.ApplyResources(this.buttonExportCustom, "buttonExportCustom");
+            this.dirtyErrorProvider.SetIconAlignment(this.buttonExportCustom, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonExportCustom.IconAlignment"))));
             this.buttonExportCustom.Name = "buttonExportCustom";
             this.buttonExportCustom.Tag = "";
             this.toolTip1.SetToolTip(this.buttonExportCustom, resources.GetString("buttonExportCustom.ToolTip"));
@@ -1010,8 +1010,8 @@ namespace MusicBeePlugin
             // 
             // buttonDeleteAll
             // 
-            this.dirtyErrorProvider.SetIconAlignment(this.buttonDeleteAll, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonDeleteAll.IconAlignment"))));
             resources.ApplyResources(this.buttonDeleteAll, "buttonDeleteAll");
+            this.dirtyErrorProvider.SetIconAlignment(this.buttonDeleteAll, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonDeleteAll.IconAlignment"))));
             this.buttonDeleteAll.Name = "buttonDeleteAll";
             this.buttonDeleteAll.Tag = "";
             this.toolTip1.SetToolTip(this.buttonDeleteAll, resources.GetString("buttonDeleteAll.ToolTip"));
@@ -1019,8 +1019,8 @@ namespace MusicBeePlugin
             // 
             // buttonImportAll
             // 
-            this.dirtyErrorProvider.SetIconAlignment(this.buttonImportAll, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonImportAll.IconAlignment"))));
             resources.ApplyResources(this.buttonImportAll, "buttonImportAll");
+            this.dirtyErrorProvider.SetIconAlignment(this.buttonImportAll, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonImportAll.IconAlignment"))));
             this.buttonImportAll.Name = "buttonImportAll";
             this.buttonImportAll.Tag = "";
             this.toolTip1.SetToolTip(this.buttonImportAll, resources.GetString("buttonImportAll.ToolTip"));
@@ -1028,8 +1028,8 @@ namespace MusicBeePlugin
             // 
             // buttonImportNew
             // 
-            this.dirtyErrorProvider.SetIconAlignment(this.buttonImportNew, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonImportNew.IconAlignment"))));
             resources.ApplyResources(this.buttonImportNew, "buttonImportNew");
+            this.dirtyErrorProvider.SetIconAlignment(this.buttonImportNew, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonImportNew.IconAlignment"))));
             this.buttonImportNew.Name = "buttonImportNew";
             this.buttonImportNew.Tag = "";
             this.toolTip1.SetToolTip(this.buttonImportNew, resources.GetString("buttonImportNew.ToolTip"));
@@ -1037,8 +1037,8 @@ namespace MusicBeePlugin
             // 
             // buttonImport
             // 
-            this.dirtyErrorProvider.SetIconAlignment(this.buttonImport, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonImport.IconAlignment"))));
             resources.ApplyResources(this.buttonImport, "buttonImport");
+            this.dirtyErrorProvider.SetIconAlignment(this.buttonImport, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonImport.IconAlignment"))));
             this.buttonImport.Name = "buttonImport";
             this.buttonImport.Tag = "";
             this.toolTip1.SetToolTip(this.buttonImport, resources.GetString("buttonImport.ToolTip"));
@@ -1046,8 +1046,8 @@ namespace MusicBeePlugin
             // 
             // buttonExport
             // 
-            this.dirtyErrorProvider.SetIconAlignment(this.buttonExport, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonExport.IconAlignment"))));
             resources.ApplyResources(this.buttonExport, "buttonExport");
+            this.dirtyErrorProvider.SetIconAlignment(this.buttonExport, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonExport.IconAlignment"))));
             this.buttonExport.Name = "buttonExport";
             this.buttonExport.Tag = "";
             this.toolTip1.SetToolTip(this.buttonExport, resources.GetString("buttonExport.ToolTip"));

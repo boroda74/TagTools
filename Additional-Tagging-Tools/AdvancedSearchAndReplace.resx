@@ -131,7 +131,7 @@
     <value>48</value>
   </metadata>
   <data name="buttonPreview.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+    <value>Right</value>
   </data>
   <data name="buttonPreview.Error" xml:space="preserve">
     <value>Error!</value>
@@ -175,7 +175,7 @@
     <value>7, 15</value>
   </data>
   <data name="buttonClose.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+    <value>Right</value>
   </data>
   <data name="buttonClose.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
@@ -4201,7 +4201,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>Top, Right</value>
   </data>
   <data name="buttonOK.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+    <value>Right</value>
   </data>
   <data name="buttonOK.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
@@ -4240,7 +4240,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>0</value>
   </data>
   <data name="buttonSaveClose.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+    <value>Right</value>
   </data>
   <data name="buttonSaveClose.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
@@ -4355,6 +4355,9 @@ Ctrl-click to save preset definitions without closing this window</value>
   <data name="&gt;&gt;settingsProcessingGroupBox.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="buttonDelete.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
   <data name="buttonDelete.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
   </data>
@@ -4391,6 +4394,9 @@ Ctrl-click to save preset definitions without closing this window</value>
   <data name="&gt;&gt;buttonDelete.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="buttonEdit.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
   <data name="buttonEdit.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
   </data>
@@ -4423,6 +4429,9 @@ Ctrl-click to save preset definitions without closing this window</value>
   </data>
   <data name="&gt;&gt;buttonEdit.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="buttonCopy.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
   </data>
   <data name="buttonCopy.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
@@ -4460,6 +4469,9 @@ Ctrl-click to save preset definitions without closing this window</value>
   <data name="&gt;&gt;buttonCopy.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="buttonCreate.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
   <data name="buttonCreate.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
   </data>
@@ -4492,6 +4504,9 @@ Ctrl-click to save preset definitions without closing this window</value>
   </data>
   <data name="&gt;&gt;buttonCreate.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="buttonExportCustom.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
   </data>
   <data name="buttonExportCustom.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
@@ -4529,6 +4544,9 @@ Ctrl-click to save preset definitions without closing this window</value>
   <data name="&gt;&gt;buttonExportCustom.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="buttonDeleteAll.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
   <data name="buttonDeleteAll.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
   </data>
@@ -4564,6 +4582,9 @@ Ctrl-click to save preset definitions without closing this window</value>
   </data>
   <data name="&gt;&gt;buttonDeleteAll.ZOrder" xml:space="preserve">
     <value>5</value>
+  </data>
+  <data name="buttonImportAll.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
   </data>
   <data name="buttonImportAll.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
@@ -4602,6 +4623,9 @@ If you have deleted some preinstalled presets, they will be reinstalled</value>
   <data name="&gt;&gt;buttonImportAll.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="buttonImportNew.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
   <data name="buttonImportNew.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
   </data>
@@ -4639,6 +4663,9 @@ If you have deleted some predefined presets, then they won't be reinstalled</val
   <data name="&gt;&gt;buttonImportNew.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="buttonImport.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
   <data name="buttonImport.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
   </data>
@@ -4674,6 +4701,9 @@ If you have deleted some predefined presets, then they won't be reinstalled</val
   </data>
   <data name="&gt;&gt;buttonImport.ZOrder" xml:space="preserve">
     <value>8</value>
+  </data>
+  <data name="buttonExport.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
   </data>
   <data name="buttonExport.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
