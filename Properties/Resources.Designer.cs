@@ -22,7 +22,7 @@ namespace MusicBeePlugin.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -103,6 +103,16 @@ namespace MusicBeePlugin.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap down_arrow_combobox_b {
+            get {
+                object obj = ResourceManager.GetObject("down_arrow_combobox_b", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap function_id_presets {
             get {
                 object obj = ResourceManager.GetObject("function_id_presets", resourceCulture);
@@ -136,6 +146,16 @@ namespace MusicBeePlugin.Properties {
         internal static System.Drawing.Bitmap hotkey_presets {
             get {
                 object obj = ResourceManager.GetObject("hotkey_presets", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap left_arrow_b {
+            get {
+                object obj = ResourceManager.GetObject("left_arrow_b", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -213,6 +233,26 @@ namespace MusicBeePlugin.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap thumb_middle_horizontal_c {
+            get {
+                object obj = ResourceManager.GetObject("thumb_middle_horizontal_c", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap thumb_middle_vertical_c {
+            get {
+                object obj = ResourceManager.GetObject("thumb_middle_vertical_c", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap transparent_15 {
             get {
                 object obj = ResourceManager.GetObject("transparent_15", resourceCulture);
@@ -236,6 +276,16 @@ namespace MusicBeePlugin.Properties {
         internal static System.Drawing.Bitmap uncheck_mark {
             get {
                 object obj = ResourceManager.GetObject("uncheck_mark", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap up_arrow_b {
+            get {
+                object obj = ResourceManager.GetObject("up_arrow_b", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

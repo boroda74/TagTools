@@ -1,0 +1,500 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>889, 6</value>
+  </data>
+  <data name="buttonCancel.Text" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
+    <value>781, 6</value>
+  </data>
+  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>666, 15</value>
+  </data>
+  <data name="label6.Text" xml:space="preserve">
+    <value>Настройки дополнительных инструментов (при изменении большинства настроек потребуется перезапуск MusicBee)</value>
+  </data>
+  <data name="versionLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 10</value>
+  </data>
+  <data name="versionLabel.Text" xml:space="preserve">
+    <value>Версия: </value>
+  </data>
+  <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>947, 112</value>
+  </data>
+  <data name="playTickedAsrPresetSoundCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>449, 15</value>
+  </data>
+  <data name="playTickedAsrPresetSoundCheckBoxLabel.Text" xml:space="preserve">
+    <value>Проиграть звук при отметке пресета ДПЗ/ОБ для автоматического применения</value>
+  </data>
+  <data name="playStoppedSoundCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>466, 15</value>
+  </data>
+  <data name="playStoppedSoundCheckBoxLabel.Text" xml:space="preserve">
+    <value>Проиграть системный звук "Стоп", когда фоновая задача отменена пользователем</value>
+  </data>
+  <data name="playStartedSoundCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>435, 15</value>
+  </data>
+  <data name="playStartedSoundCheckBoxLabel.Text" xml:space="preserve">
+    <value>Проиграть системный звук "Восклицание", когда фоновая задача начинается</value>
+  </data>
+  <data name="playCompletedSoundCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>500, 15</value>
+  </data>
+  <data name="playCompletedSoundCheckBoxLabel.Text" xml:space="preserve">
+    <value>Проиграть системный звук "Звездочка", когда фоновая задача завершается/остановлена</value>
+  </data>
+  <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 15</value>
+  </data>
+  <data name="label9.Text" xml:space="preserve">
+    <value> Звуки </value>
+  </data>
+  <data name="groupBox4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>878, 110</value>
+  </data>
+  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>339, 15</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Единица измерения миллиардов (например, "Г" для "Гига"):</value>
+  </data>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>343, 15</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>Единица измерения миллионов (например, "М" для "Мега"):</value>
+  </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>308, 15</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Единица измерения тысяч (например, "К" для "Кило"):</value>
+  </data>
+  <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>640, 15</value>
+  </data>
+  <data name="label11.Text" xml:space="preserve">
+    <value> Команда "Отчеты по библиотеке" (не нужно для русской и английской локализации Windows, регистр не важен) </value>
+  </data>
+  <data name="unitsPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>436, 0</value>
+  </data>
+  <data name="saveLastSkippedButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>483, 6</value>
+  </data>
+  <data name="saveLastSkippedButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>290, 23</value>
+  </data>
+  <data name="saveLastSkippedButton.Text" xml:space="preserve">
+    <value>Сохранять дату последнего пропуска трека...</value>
+  </data>
+  <data name="highlightChangedTagsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>640, 21</value>
+  </data>
+  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>947, 142</value>
+  </data>
+  <data name="legendGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>640, 39</value>
+  </data>
+  <data name="legendGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>297, 93</value>
+  </data>
+  <data name="preservedTagValuesLegendTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>279, 19</value>
+  </data>
+  <data name="preservedTagValuesLegendTextBox.Text" xml:space="preserve">
+    <value>Пропущенные значения тегов</value>
+  </data>
+  <data name="preservedTagsLegendTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>279, 19</value>
+  </data>
+  <data name="preservedTagsLegendTextBox.Text" xml:space="preserve">
+    <value>Пропущенные теги</value>
+  </data>
+  <data name="changedLegendTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>279, 19</value>
+  </data>
+  <data name="changedLegendTextBox.Text" xml:space="preserve">
+    <value>Измененные</value>
+  </data>
+  <data name="changedLegendTextBox.ToolTip" xml:space="preserve">
+    <value>Щелкните мышкой по любому полю, чтобы увидеть цвета выделенной строки:Щелкните мышкой по любому полю, чтобы увидеть цвета невыделенной строки</value>
+  </data>
+  <data name="legendLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>217, 15</value>
+  </data>
+  <data name="legendLabel.Text" xml:space="preserve">
+    <value> Цвета предварительного просмотра </value>
+  </data>
+  <data name="highlightChangedTagsCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>661, 21</value>
+  </data>
+  <data name="highlightChangedTagsCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>182, 15</value>
+  </data>
+  <data name="highlightChangedTagsCheckBoxLabel.Text" xml:space="preserve">
+    <value>Подсвечивать измененные теги</value>
+  </data>
+  <data name="showHiddenCommandWindowsRadioButtonLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>466, 15</value>
+  </data>
+  <data name="showHiddenCommandWindowsRadioButtonLabel.Text" xml:space="preserve">
+    <value>Показывать скрытое окно плагина, когда его фоновая задача завершена/прервана</value>
+  </data>
+  <data name="closeHiddenCommandWindowsRadioButtonLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>459, 15</value>
+  </data>
+  <data name="closeHiddenCommandWindowsRadioButtonLabel.Text" xml:space="preserve">
+    <value>Закрывать скрытое окно плагина, когда его фоновая задача завершена/прервана</value>
+  </data>
+  <data name="minimizePluginWindowsCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>361, 15</value>
+  </data>
+  <data name="minimizePluginWindowsCheckBoxLabel.Text" xml:space="preserve">
+    <value>Минимизировать окна плагина, вместо того чтобы скрывать их</value>
+  </data>
+  <data name="customFontButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>610, 39</value>
+  </data>
+  <data name="customFontTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>428, 39</value>
+  </data>
+  <data name="customFontTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>176, 23</value>
+  </data>
+  <data name="useCustomFontCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>254, 42</value>
+  </data>
+  <data name="useCustomFontCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>168, 15</value>
+  </data>
+  <data name="useCustomFontCheckBoxLabel.Text" xml:space="preserve">
+    <value>Использовать свой шрифт **</value>
+  </data>
+  <data name="useCustomFontCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>233, 42</value>
+  </data>
+  <data name="useMusicBeeFontCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 15</value>
+  </data>
+  <data name="useMusicBeeFontCheckBoxLabel.Text" xml:space="preserve">
+    <value>Использовать шрифт MusicBee **</value>
+  </data>
+  <data name="useSkinColorsCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>162, 15</value>
+  </data>
+  <data name="useSkinColorsCheckBoxLabel.Text" xml:space="preserve">
+    <value>Использовать цвета темы **</value>
+  </data>
+  <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 15</value>
+  </data>
+  <data name="label8.Text" xml:space="preserve">
+    <value> Оформление </value>
+  </data>
+  <data name="contextMenuCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>410, 63</value>
+  </data>
+  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>947, 258</value>
+  </data>
+  <data name="contextMenuCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>431, 63</value>
+  </data>
+  <data name="contextMenuCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>243, 15</value>
+  </data>
+  <data name="contextMenuCheckBoxLabel.Text" xml:space="preserve">
+    <value>Показывать команды в контекстном меню</value>
+  </data>
+  <data name="allowCommandExecutionWithoutPreviewCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>431, 42</value>
+  </data>
+  <data name="allowCommandExecutionWithoutPreviewCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>445, 15</value>
+  </data>
+  <data name="allowCommandExecutionWithoutPreviewCheckBoxLabel.Text" xml:space="preserve">
+    <value>Разрешить выполнение команд без предварительного просмотра изменений *</value>
+  </data>
+  <data name="allowCommandExecutionWithoutPreviewCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>410, 42</value>
+  </data>
+  <data name="allowAsrLrPresetAutoexecutionCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>431, 21</value>
+  </data>
+  <data name="allowAsrLrPresetAutoexecutionCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>332, 15</value>
+  </data>
+  <data name="allowAsrLrPresetAutoexecutionCheckBoxLabel.Text" xml:space="preserve">
+    <value>Разрешить автоматическое применение пресетов ДПЗ/ОБ</value>
+  </data>
+  <data name="allowAsrLrPresetAutoexecutionCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>410, 21</value>
+  </data>
+  <data name="showShowHiddenWindowsCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>481, 15</value>
+  </data>
+  <data name="showShowHiddenWindowsCheckBoxLabel.Text" xml:space="preserve">
+    <value>Показывать в меню пункт "Показать скрытые/восстановить свернутые окна плагина"</value>
+  </data>
+  <data name="showBackupRestoreCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>279, 15</value>
+  </data>
+  <data name="showBackupRestoreCheckBoxLabel.Text" xml:space="preserve">
+    <value>Включить команды архивации и восстановления</value>
+  </data>
+  <data name="showCTCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>211, 15</value>
+  </data>
+  <data name="showCTCheckBoxLabel.Text" xml:space="preserve">
+    <value>Включить команду "Сравнить треки"</value>
+  </data>
+  <data name="showCARCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>340, 15</value>
+  </data>
+  <data name="showCARCheckBoxLabel.Text" xml:space="preserve">
+    <value>Включить команду "Рассчитать средний рейтинг альбомов"</value>
+  </data>
+  <data name="showASRCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>514, 15</value>
+  </data>
+  <data name="showASRCheckBoxLabel.Text" xml:space="preserve">
+    <value>Включить команды "Дополнительные поиск и замена" / "Множественный поиск и замена"</value>
+  </data>
+  <data name="showAutorateCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>328, 15</value>
+  </data>
+  <data name="showAutorateCheckBoxLabel.Text" xml:space="preserve">
+    <value>Включить команду "Автоматически установить рейтинги"</value>
+  </data>
+  <data name="showLibraryReportsCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>251, 15</value>
+  </data>
+  <data name="showLibraryReportsCheckBoxLabel.Text" xml:space="preserve">
+    <value>Включить команду "Отчеты по библиотеке"
+</value>
+  </data>
+  <data name="showReencodeTagCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>265, 15</value>
+  </data>
+  <data name="showReencodeTagCheckBoxLabel.Text" xml:space="preserve">
+    <value>Включить команду "Изменить кодировку тега"</value>
+  </data>
+  <data name="showChangeCaseCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>250, 15</value>
+  </data>
+  <data name="showChangeCaseCheckBoxLabel.Text" xml:space="preserve">
+    <value>Включить команду "Изменить регистр тега"</value>
+  </data>
+  <data name="showSwapTagsCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>277, 15</value>
+  </data>
+  <data name="showSwapTagsCheckBoxLabel.Text" xml:space="preserve">
+    <value>Включить команду "Поменять местами два тега"</value>
+  </data>
+  <data name="showCopyTagCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 15</value>
+  </data>
+  <data name="showCopyTagCheckBoxLabel.Text" xml:space="preserve">
+    <value>Включить команду "Копировать тег"</value>
+  </data>
+  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>128, 15</value>
+  </data>
+  <data name="label7.Text" xml:space="preserve">
+    <value> Выберите команды * </value>
+  </data>
+  <data name="groupBox5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>878, 90</value>
+  </data>
+  <data name="includePreservedTagValuesCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>769, 15</value>
+  </data>
+  <data name="includePreservedTagValuesCheckBoxLabel.Text" xml:space="preserve">
+    <value>Включать в предварительный просмотр строки, содержащие только игнорированные значения тегов (Дополнительный поиск и замена)</value>
+  </data>
+  <data name="includePreservedTagsCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>709, 15</value>
+  </data>
+  <data name="includePreservedTagsCheckBoxLabel.Text" xml:space="preserve">
+    <value>Включать в предварительный просмотр строки, содержащие только игнорированные теги (Дополнительный поиск и замена)</value>
+  </data>
+  <data name="includeNotChangedTagsCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>544, 15</value>
+  </data>
+  <data name="includeNotChangedTagsCheckBoxLabel.Text" xml:space="preserve">
+    <value>Включать в предварительный просмотр строки, не содержащие измененные теги (все команды)</value>
+  </data>
+  <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>149, 15</value>
+  </data>
+  <data name="label10.Text" xml:space="preserve">
+    <value> Фильтрация результатов </value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>424, 15</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>*  Требуется перезапуск MusicBee, чтобы новые настройки вступили в силу</value>
+  </data>
+  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>476, 15</value>
+  </data>
+  <data name="label5.Text" xml:space="preserve">
+    <value>**  Требуется заново открыть окна плагина, чтобы новые настройки вступили в силу</value>
+  </data>
+  <data name="buttonsPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 626</value>
+  </data>
+  <data name="buttonsPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>994, 35</value>
+  </data>
+  <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>980, 570</value>
+  </data>
+  <data name="tabPage1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>972, 542</value>
+  </data>
+  <data name="tabPage1.Text" xml:space="preserve">
+    <value>Поведение</value>
+  </data>
+  <data name="tabPage2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>972, 542</value>
+  </data>
+  <data name="tabPage2.Text" xml:space="preserve">
+    <value>Обработка</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>994, 663</value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>1010, 702</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+</root>

@@ -193,4 +193,19 @@
   <data name="multiple_artworks_accent" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\multiple-artworks-accent.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="left_arrow_b" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\left-arrow-b.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="thumb_middle_horizontal_c" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\thumb-middle-horizontal-c.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="thumb_middle_vertical_c" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\thumb-middle-vertical-c.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="up_arrow_b" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\up-arrow-b.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="down_arrow_combobox_b" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\down-arrow-combobox-b.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

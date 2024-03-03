@@ -1,0 +1,471 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F5D46BA1-6F21-40EF-9695-46105CCACD08}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MusicBeePlugin</RootNamespace>
+    <AssemblyName>mb_TagTools</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\Архив\Плейеры\.MusicBee Portable\Plugins\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\Архив\Плейеры\.MusicBee Portable\Plugins\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>wrench.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <OutputPath>D:\Архив\Плейеры\.MusicBee\.MusicBee Portable Development\Plugins\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>D:\Архив\Плейеры\.MusicBee\.MusicBee Portable Development\Plugins\</OutputPath>
+    <DefineConstants>CODE_ANALYSIS;TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <PlatformTarget>x86</PlatformTarget>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Plugin\AdvancedSearchAndReplace.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Plugin\AdvancedSearchAndReplace.Designer.cs">
+      <DependentUpon>AdvancedSearchAndReplace.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\EventHandlersToolkit.cs" />
+    <Compile Include="Helpers\ExtensionMethods.cs" />
+    <Compile Include="Helpers\NativeMethods.cs" />
+    <Compile Include="Helpers\PluginSampleWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Helpers\PluginSampleWindow.Designer.cs">
+      <DependentUpon>PluginSampleWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Plugin\PasteTagsFromClipboard.cs" />
+    <Compile Include="Helpers\CustomControls.cs" />
+    <Compile Include="Helpers\ImagingAndColoring.cs" />
+    <Compile Include="Plugin\ASRPresetEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Plugin\ASRPresetEditor.Designer.cs">
+      <DependentUpon>ASRPresetEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Plugin\AutoRate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Plugin\AutoRate.Designer.cs">
+      <DependentUpon>AutoRate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Plugin\BackupRestore.cs" />
+    <Compile Include="Plugin\CalculateAverageAlbumRating.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Plugin\CalculateAverageAlbumRating.Designer.cs">
+      <DependentUpon>CalculateAverageAlbumRating.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Plugin\ChangeCase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Plugin\ChangeCase.Designer.cs">
+      <DependentUpon>ChangeCase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Plugin\AutoBackupSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Plugin\AutoBackupSettings.Designer.cs">
+      <DependentUpon>AutoBackupSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Plugin\MultipleSearchAndReplace.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Plugin\MultipleSearchAndReplace.Designer.cs">
+      <DependentUpon>MultipleSearchAndReplace.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Plugin\ReencodeTag.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Plugin\ReencodeTag.designer.cs">
+      <DependentUpon>ReencodeTag.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Plugin\CompareTracks.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Plugin\CompareTracks.Designer.cs">
+      <DependentUpon>CompareTracks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Plugin\SaveLastSkippedDate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Plugin\SaveLastSkippedDate.Designer.cs">
+      <DependentUpon>SaveLastSkippedDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Plugin\PluginSettingsQuick.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Plugin\PluginSettingsQuick.Designer.cs">
+      <DependentUpon>PluginSettingsQuick.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Plugin\TagHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Plugin\TagHistory.Designer.cs">
+      <DependentUpon>TagHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Plugin\CopyTagsToClipboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Plugin\CopyTagsToClipboard.Designer.cs">
+      <DependentUpon>CopyTagsToClipboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Plugin\CopyTag.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Plugin\CopyTag.Designer.cs">
+      <DependentUpon>CopyTag.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\DataGridViewCheckBoxHeaderCell.cs" />
+    <Compile Include="Helpers\FillTagNames.cs" />
+    <Compile Include="Plugin\LibraryReports.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Plugin\LibraryReports.Designer.cs">
+      <DependentUpon>LibraryReports.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\MusicBeeInterface.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Plugin\ReencodeTags.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Plugin\ReencodeTags.Designer.cs">
+      <DependentUpon>ReencodeTags.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Plugin\PluginSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Plugin\PluginSettings.Designer.cs">
+      <DependentUpon>PluginSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Plugin\SwapTags.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Plugin\SwapTags.Designer.cs">
+      <DependentUpon>SwapTags.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Plugin\Main-Module.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Helpers\PluginWindowTemplate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Helpers\PluginWindowTemplate.Designer.cs">
+      <DependentUpon>PluginWindowTemplate.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Plugin\app.config" />
+    <None Include="app.manifest" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Plugin\AdvancedSearchAndReplace.resx">
+      <DependentUpon>AdvancedSearchAndReplace.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plugin\AdvancedSearchAndReplace.ru.resx">
+      <DependentUpon>AdvancedSearchAndReplace.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plugin\ASRPresetEditor.resx">
+      <DependentUpon>ASRPresetEditor.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plugin\ASRPresetEditor.ru.resx">
+      <DependentUpon>ASRPresetEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plugin\AutoBackupSettings.ru.resx">
+      <DependentUpon>AutoBackupSettings.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plugin\AutoRate.resx">
+      <DependentUpon>AutoRate.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plugin\AutoRate.ru.resx">
+      <DependentUpon>AutoRate.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plugin\CalculateAverageAlbumRating.resx">
+      <DependentUpon>CalculateAverageAlbumRating.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plugin\CalculateAverageAlbumRating.ru.resx">
+      <DependentUpon>CalculateAverageAlbumRating.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plugin\ChangeCase.resx">
+      <DependentUpon>ChangeCase.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plugin\ChangeCase.ru.resx">
+      <DependentUpon>ChangeCase.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plugin\AutoBackupSettings.resx">
+      <DependentUpon>AutoBackupSettings.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Helpers\PluginSampleWindow.resx">
+      <DependentUpon>PluginSampleWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plugin\LibraryReports.ru.resx">
+      <DependentUpon>LibraryReports.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plugin\MultipleSearchAndReplace.resx">
+      <DependentUpon>MultipleSearchAndReplace.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plugin\MultipleSearchAndReplace.ru.resx">
+      <DependentUpon>MultipleSearchAndReplace.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plugin\ReencodeTag.resx">
+      <DependentUpon>ReencodeTag.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plugin\ReencodeTag.ru.resx">
+      <DependentUpon>ReencodeTag.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plugin\CompareTracks.resx">
+      <DependentUpon>CompareTracks.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plugin\CompareTracks.ru.resx">
+      <DependentUpon>CompareTracks.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plugin\SaveLastSkippedDate.resx">
+      <DependentUpon>SaveLastSkippedDate.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plugin\SaveLastSkippedDate.ru.resx">
+      <DependentUpon>SaveLastSkippedDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plugin\PluginSettingsQuick.resx">
+      <DependentUpon>PluginSettingsQuick.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plugin\PluginSettingsQuick.ru.resx">
+      <DependentUpon>PluginSettingsQuick.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plugin\TagHistory.resx">
+      <DependentUpon>TagHistory.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plugin\TagHistory.ru.resx">
+      <DependentUpon>TagHistory.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plugin\CopyTagsToClipboard.ru.resx">
+      <DependentUpon>CopyTagsToClipboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plugin\CopyTagsToClipboard.resx">
+      <DependentUpon>CopyTagsToClipboard.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plugin\CopyTag.resx">
+      <DependentUpon>CopyTag.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plugin\CopyTag.ru.resx">
+      <DependentUpon>CopyTag.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plugin\LibraryReports.resx">
+      <DependentUpon>LibraryReports.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plugin\ReencodeTags.resx">
+      <DependentUpon>ReencodeTags.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plugin\ReencodeTags.ru.resx">
+      <DependentUpon>ReencodeTags.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plugin\PluginSettings.resx">
+      <DependentUpon>PluginSettings.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plugin\PluginSettings.ru.resx">
+      <DependentUpon>PluginSettings.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plugin\SwapTags.resx">
+      <DependentUpon>SwapTags.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plugin\SwapTags.ru.resx">
+      <DependentUpon>SwapTags.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Helpers\PluginWindowTemplate.resx">
+      <DependentUpon>PluginWindowTemplate.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 и x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>Клиентский профиль .NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Установщик Windows 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Resources\gear.png" />
+    <None Include="Properties\Resources\multiple-artworks.png" />
+    <None Include="Properties\Resources\multiple-artworks-accent.png" />
+    <None Include="Properties\Resources\up-arrow-b.png" />
+    <None Include="Properties\Resources\left-arrow-b.png" />
+    <None Include="Properties\Resources\thumb-middle-horizontal-c.png" />
+    <None Include="Properties\Resources\thumb-middle-vertical-c.png" />
+    <None Include="Properties\Resources\down-arrow-combobox-b.png" />
+    <Content Include="wrench.ico" />
+    <None Include="Properties\Resources\warning-15.png" />
+    <None Include="Properties\Resources\warning-wide-15.png" />
+    <None Include="Properties\Resources\window-23.png" />
+    <Content Include="Properties\Resources\window.png" />
+    <None Include="Properties\Resources\warning-wide.png" />
+    <None Include="Properties\Resources\warning.png" />
+    <None Include="Properties\Resources\gear-15.png" />
+    <None Include="Properties\Resources\transparent-15.png" />
+    <None Include="Properties\Resources\set-button-15.png" />
+    <None Include="Properties\Resources\clear-button-15.png" />
+    <None Include="Properties\Resources\uncheck-mark.png" />
+    <None Include="Properties\Resources\uncheck-all-preset-filters.png" />
+    <None Include="Properties\Resources\hotkey-presets.png" />
+    <None Include="Properties\Resources\function-id-presets.png" />
+    <None Include="Properties\Resources\playlist-presets.png" />
+    <None Include="Properties\Resources\user-presets.png" />
+    <None Include="Properties\Resources\customized-presets.png" />
+    <None Include="Properties\Resources\predefined-presets.png" />
+    <None Include="Properties\Resources\auto-applied-presets.png" />
+    <None Include="Properties\Resources\check-mark.png" />
+    <None Include="Properties\Resources\search.png" />
+    <None Include="Properties\Resources\missing-artwork.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
