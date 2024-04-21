@@ -75,7 +75,8 @@ namespace MusicBeePlugin
         TabSeparatedText = 4,
         M3u = 5,
         Csv = 6,
-        HtmlDocumentCdBooklet = 7
+        HtmlDocumentCdBooklet = 7,
+        HtmlDocumentAlbumGrid = 8
     }
     #endregion
 
@@ -227,7 +228,7 @@ namespace MusicBeePlugin
 
 
         internal const float ScrollBarWidth = 10.6f;//Not yet DPI scaled
-        internal static int SbBorderWidth = 1; // _scaledPx;
+        internal static int SbBorderWidth = 1; // scaledPx;
 
 
         internal static Bitmap DownArrowComboBoxImage;
@@ -290,7 +291,7 @@ namespace MusicBeePlugin
 
         internal const int MaximumNumberOfASRHotkeys = 20;
         internal const int MaximumNumberOfLRHotkeys = 20;
-        internal const int PredefinedReportPresetCount = 4;
+        internal const int PredefinedReportPresetCount = 5;
 
         internal static readonly char LocalizedDecimalPoint = (0.5).ToString()[1];
         internal static Bitmap MissingArtwork;
@@ -369,12 +370,12 @@ namespace MusicBeePlugin
         internal static SortedDictionary<string, Preset> IdsAsrPresets = new SortedDictionary<string, Preset>();
         internal static Preset MSR;
 
-        internal static LibraryReports LibraryReportsCommandForAutoApplying = new LibraryReports();
+        internal static LibraryReports LibraryReportsForAutoApplying = null;
 
-        internal static LibraryReports LibraryReportsCommandForHotkeys = new LibraryReports();
+        internal static LibraryReports LibraryReportsForHotkeys = null;
         internal static ReportPreset[] ReportPresetsWithHotkeys = new ReportPreset[MaximumNumberOfLRHotkeys];
         internal static int LRPresetsWithHotkeysCount = 0;
-        internal static LibraryReports LibraryReportsCommandForFunctionIds = new LibraryReports();
+        internal static LibraryReports LibraryReportsForFunctionIds = null;
         internal static SortedDictionary<string, ReportPreset> IdsReportPresets = new SortedDictionary<string, ReportPreset>();
         internal static bool ReportPresetIdsAreInitialized = false;
 
@@ -489,7 +490,7 @@ namespace MusicBeePlugin
             public bool minimizePluginWindows;
 
             public bool dontUseSkinColors;
-            
+
             public bool useMusicBeeFont;
 
             public bool useCustomFont;
@@ -577,9 +578,6 @@ namespace MusicBeePlugin
             public string trackRatingTagName;
             public string albumRatingTagName;
 
-            public bool resizeArtwork;
-            public ushort xArtworkSize;
-            public ushort yArtworkSize;
             public bool openReportAfterExporting;
 
             public bool checkBox5;
@@ -686,36 +684,36 @@ namespace MusicBeePlugin
         private static string TagToolsMenuSectionName;
         private static string BackupRestoreMenuSectionName;
 
-        internal static string CopyTagCommandName;
-        internal static string SwapTagsCommandName;
-        internal static string ChangeCaseCommandName;
-        internal static string ReencodeTagCommandName;
-        internal static string ReencodeTagsCommandName;
-        internal static string LibraryReportsCommandName;
-        internal static string AutoRateCommandName;
+        internal static string CopyTagName;
+        internal static string SwapTagsName;
+        internal static string ChangeCaseName;
+        internal static string ReencodeTagName;
+        internal static string ReencodeTagsName;
+        internal static string LibraryReportsName;
+        internal static string AutoRateName;
         internal static string AsrCommandName;
         internal static string CarCommandName;
         internal static string CtCommandName;
-        internal static string CopyTagsToClipboardCommandName;
-        internal static string PasteTagsFromClipboardCommandName;
+        internal static string CopyTagsToClipboardName;
+        internal static string PasteTagsFromClipboardName;
         internal static string MsrCommandName;
         internal static string ShowHiddenCommandName;
 
         private static string TagToolsHotkeyDescription;
-        private static string CopyTagCommandDescription;
-        private static string SwapTagsCommandDescription;
-        private static string ChangeCaseCommandDescription;
-        private static string ReencodeTagCommandDescription;
-        private static string ReencodeTagsCommandDescription;
-        private static string LibraryReportsCommandDescription;
-        private static string AutoRateCommandDescription;
+        private static string CopyTagDescription;
+        private static string SwapTagsDescription;
+        private static string ChangeCaseDescription;
+        private static string ReencodeTagDescription;
+        private static string ReencodeTagsDescription;
+        private static string LibraryReportsDescription;
+        private static string AutoRateDescription;
         private static string AsrCommandDescription;
         internal static string AsrHotkeyDescription;
         internal static string ReportPresetHotkeyDescription;
         private static string CarCommandDescription;
         private static string CtCommandDescription;
-        private static string CopyTagsToClipboardCommandDescription;
-        private static string PasteTagsFromClipboardCommandDescription;
+        private static string CopyTagsToClipboardDescription;
+        private static string PasteTagsFromClipboardDescription;
         private static string CopyTagsToClipboardUsingMenuDescription;
         private static string MsrCommandDescription;
         internal static string ShowHiddenCommandDescription;
@@ -727,9 +725,9 @@ namespace MusicBeePlugin
         internal static string MoveBackupsCommandName;
         internal static string CreateNewBaselineCommandName;
         internal static string DeleteBackupsCommandName;
-        internal static string AutoBackupSettingsCommandName;
+        internal static string AutoBackupSettingsName;
 
-        internal static string TagHistoryCommandName;
+        internal static string TagHistoryName;
 
         private static string BackupTagsCommandDescription;
         private static string RestoreTagsCommandDescription;
@@ -738,18 +736,18 @@ namespace MusicBeePlugin
         private static string MoveBackupsCommandDescription;
         private static string CreateNewBaselineCommandDescription;
         private static string DeleteBackupsCommandDescription;
-        private static string AutoBackupSettingsCommandDescription;
+        private static string AutoBackupSettingsDescription;
 
-        private static string TagHistoryCommandDescription;
+        private static string TagHistoryDescription;
 
-        internal static string CopyTagCommandSbText;
-        internal static string SwapTagsCommandSbText;
-        internal static string ChangeCaseCommandSbText;
-        internal static string ReencodeTagCommandSbText;
-        internal static string LibraryReportsCommandSbText;
+        internal static string CopyTagSbText;
+        internal static string SwapTagsSbText;
+        internal static string ChangeCaseSbText;
+        internal static string ReencodeTagSbText;
+        internal static string LibraryReportsSbText;
         internal static string LibraryReportsGeneratingPreviewCommandSbText;
         internal static string ApplyingLibraryReportSbText;
-        internal static string AutoRateCommandSbText;
+        internal static string AutoRateSbText;
         internal static string AsrCommandSbText;
         internal static string CarCommandSbText;
         internal static string MsrCommandSbText;
@@ -779,6 +777,7 @@ namespace MusicBeePlugin
         internal static string LibraryAveragesPresetName;
         internal static string CDBookletPresetName;
         internal static string AlbumsAndTracksPresetName;
+        internal static string AlbumGridPresetName;
 
         internal static string EmptyPresetName;
 
@@ -911,6 +910,8 @@ namespace MusicBeePlugin
 
         internal static string MsgFirstThreeGroupingFieldsInPreviewTableShouldBe;
         internal static string MsgFirstSixGroupingFieldsInPreviewTableShouldBe;
+        internal static string MsgFirstTwoGroupingFieldsInPreviewTableShouldBe;
+        internal static string MsgResizingArtworksRequired;
 
         internal static string MsgYouMustImportStandardAsrPresetsFirst;
 
@@ -3307,36 +3308,36 @@ namespace MusicBeePlugin
             TagToolsMenuSectionName = "TAGGING && REPORTING";
             BackupRestoreMenuSectionName = "BACKUP && RESTORE";
 
-            CopyTagCommandName = "Copy Tag...";
-            SwapTagsCommandName = "Swap Tags...";
-            ChangeCaseCommandName = "Change Case...";
-            ReencodeTagCommandName = "Reencode Tag...";
-            ReencodeTagsCommandName = "Reencode Tags...";
-            LibraryReportsCommandName = "Library Reports...";
-            AutoRateCommandName = "Auto Rate Tracks...";
+            CopyTagName = "Copy Tag...";
+            SwapTagsName = "Swap Tags...";
+            ChangeCaseName = "Change Case...";
+            ReencodeTagName = "Reencode Tag...";
+            ReencodeTagsName = "Reencode Tags...";
+            LibraryReportsName = "Library Reports...";
+            AutoRateName = "Auto Rate Tracks...";
             AsrCommandName = "Advanced Search && Replace...";
             CarCommandName = "Calculate Average Album Rating...";
             CtCommandName = "Compare Tracks...";
-            CopyTagsToClipboardCommandName = "Copy Tags to Clipboard...";
-            PasteTagsFromClipboardCommandName = "Paste Tags from Clipboard";
+            CopyTagsToClipboardName = "Copy Tags to Clipboard...";
+            PasteTagsFromClipboardName = "Paste Tags from Clipboard";
             MsrCommandName = "Multiple Search && Replace...";
             ShowHiddenCommandName = "Show hidden/restore minimized plugin windows";
 
             TagToolsHotkeyDescription = "Tagging Tools: ";
-            CopyTagCommandDescription = TagToolsHotkeyDescription + "Copy Tag";
-            SwapTagsCommandDescription = TagToolsHotkeyDescription + "Swap Tags";
-            ChangeCaseCommandDescription = TagToolsHotkeyDescription + "Change Case";
-            ReencodeTagCommandDescription = TagToolsHotkeyDescription + "Reencode Tag";
-            ReencodeTagsCommandDescription = TagToolsHotkeyDescription + "Reencode Tags";
-            LibraryReportsCommandDescription = TagToolsHotkeyDescription + "Library Reports";
+            CopyTagDescription = TagToolsHotkeyDescription + "Copy Tag";
+            SwapTagsDescription = TagToolsHotkeyDescription + "Swap Tags";
+            ChangeCaseDescription = TagToolsHotkeyDescription + "Change Case";
+            ReencodeTagDescription = TagToolsHotkeyDescription + "Reencode Tag";
+            ReencodeTagsDescription = TagToolsHotkeyDescription + "Reencode Tags";
+            LibraryReportsDescription = TagToolsHotkeyDescription + "Library Reports";
             ReportPresetHotkeyDescription = TagToolsHotkeyDescription;
-            AutoRateCommandDescription = TagToolsHotkeyDescription + "Auto Rate Tracks";
+            AutoRateDescription = TagToolsHotkeyDescription + "Auto Rate Tracks";
             AsrCommandDescription = TagToolsHotkeyDescription + "Advanced Search & Replace";
             AsrHotkeyDescription = TagToolsHotkeyDescription;
             CarCommandDescription = TagToolsHotkeyDescription + "Calculate Average Album Rating";
             CtCommandDescription = TagToolsHotkeyDescription + "Compare Tracks";
-            CopyTagsToClipboardCommandDescription = TagToolsHotkeyDescription + "Copy Tags to Clipboard";
-            PasteTagsFromClipboardCommandDescription = TagToolsHotkeyDescription + "Paste Tags from Clipboard";
+            CopyTagsToClipboardDescription = TagToolsHotkeyDescription + "Copy Tags to Clipboard";
+            PasteTagsFromClipboardDescription = TagToolsHotkeyDescription + "Paste Tags from Clipboard";
             CopyTagsToClipboardUsingMenuDescription = "Copy Tags to Clipboard Using Tag Set";
             MsrCommandDescription = TagToolsHotkeyDescription + "Multiple Search & Replace";
             ShowHiddenCommandDescription = TagToolsHotkeyDescription + "Show Hidden MusicBeePlugin Windows";
@@ -3348,9 +3349,9 @@ namespace MusicBeePlugin
             MoveBackupsCommandName = "Move Backup(s)...";
             CreateNewBaselineCommandName = "Create New Baseline of Current Library...";
             DeleteBackupsCommandName = "Delete Backup(s)...";
-            AutoBackupSettingsCommandName = "(Auto)backup Settings...";
+            AutoBackupSettingsName = "(Auto)backup Settings...";
 
-            TagHistoryCommandName = "Tag History....";
+            TagHistoryName = "Tag History....";
 
             BackupTagsCommandDescription = TagToolsHotkeyDescription + "Backup Tags for All Tracks";
             RestoreTagsCommandDescription = TagToolsHotkeyDescription + "Restore Tags for Selected Tracks";
@@ -3359,18 +3360,18 @@ namespace MusicBeePlugin
             MoveBackupsCommandDescription = TagToolsHotkeyDescription + "Move Backup(s)";
             CreateNewBaselineCommandDescription = TagToolsHotkeyDescription + "Create New Baseline of Current Library";
             DeleteBackupsCommandDescription = TagToolsHotkeyDescription + "Delete Backup(s)";
-            AutoBackupSettingsCommandDescription = TagToolsHotkeyDescription + "(Auto)backup Settings";
+            AutoBackupSettingsDescription = TagToolsHotkeyDescription + "(Auto)backup Settings";
 
-            TagHistoryCommandDescription = TagToolsHotkeyDescription + "Tag History";
+            TagHistoryDescription = TagToolsHotkeyDescription + "Tag History";
 
-            CopyTagCommandSbText = "Copying tag";
-            SwapTagsCommandSbText = "Swapping tags";
-            ChangeCaseCommandSbText = "Changing case";
-            ReencodeTagCommandSbText = "Reencoding tags";
-            LibraryReportsCommandSbText = "Generating report";
+            CopyTagSbText = "Copying tag";
+            SwapTagsSbText = "Swapping tags";
+            ChangeCaseSbText = "Changing case";
+            ReencodeTagSbText = "Reencoding tags";
+            LibraryReportsSbText = "Generating report";
             LibraryReportsGeneratingPreviewCommandSbText = "Generating preview";
             ApplyingLibraryReportSbText = "Applying LR preset";
-            AutoRateCommandSbText = "Auto rating tracks";
+            AutoRateSbText = "Auto rating tracks";
             AsrCommandSbText = "Advanced searching and replacing";
             CarCommandSbText = "Calculating average album rating";
             MsrCommandSbText = "Multiple searching and replacing";
@@ -3412,6 +3413,7 @@ namespace MusicBeePlugin
             LibraryAveragesPresetName = "Library averages";
             CDBookletPresetName = "CD Booklet(s)";
             AlbumsAndTracksPresetName = "Albums & Tracks";
+            AlbumGridPresetName = "Album Grid (album list)";
 
             EmptyPresetName = "<Empty preset>";
 
@@ -3454,7 +3456,8 @@ namespace MusicBeePlugin
             GenericTagSetName = "Tag set";
 
             //Supported exported file formats
-            ExportedFormats = "HTML Document (grouped by albums)|*.htm|HTML Document|*.htm|Simple HTML table|*.htm|Tab delimited text|*.txt|M3U Playlist|*.m3u|CSV file|*.csv|HTML Document (CD Booklet)|*.htm";
+            ExportedFormats = "HTML Document (grouped by albums)|*.htm|HTML Document|*.htm|Simple HTML table|*.htm|Tab delimited text|*.txt|M3U Playlist|*.m3u|" +
+                "CSV file|*.csv|HTML Document (CD Booklet)|*.htm|HTML Document (Album Grid)|*.htm";
             ExportedTrackList = "LR Track List";
 
 
@@ -3621,15 +3624,19 @@ namespace MusicBeePlugin
             MsgTracksSelectedMatchedNotMatched = "Selected tracks: %%SELECTED-TRACKS%%\n" +
                 "Tags of tracks in clipboard: %%CLIPBOARD-TRACKS%%\n" +
                 "Matched tracks: %%MATCHED-TRACKS%%\n" +
-                "Not matched tracks: %%NOT-MATCHED-TRACKS%%\n\n" + 
+                "Not matched tracks: %%NOT-MATCHED-TRACKS%%\n\n" +
                 "Paste tags?";
 
-            MsgFirstThreeGroupingFieldsInPreviewTableShouldBe = "First three grouping fields in preview table should be \"" + DisplayedAlbumArtistName + "\", \"" + AlbumTagName + "\" and \"" + ArtworkName + "\" to export to HTML Document (grouped by album)";
+            MsgFirstThreeGroupingFieldsInPreviewTableShouldBe = "First three grouping fields in preview table should be \"" + DisplayedAlbumArtistName + "\", \"" + AlbumTagName + "\" and \"" + ArtworkName + "\" to export" +
+                " to \"HTML Document (grouped by album)\"!";
             MsgFirstSixGroupingFieldsInPreviewTableShouldBe = "First six grouping fields in preview table should be '" + SequenceNumberName
                 + "\", \"" + DisplayedAlbumArtistName + "\", \"" + AlbumTagName + "\", \"" + ArtworkName + "\", \""
                 + MbApiInterface.Setting_GetFieldName(MetaDataType.TrackTitle) + "\" and \""
                 + MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Duration)
-                + "' to export to HTML Document (CD Booklet)";
+                + "' to export to \"HTML Document (CD Booklet)\"!";
+            MsgFirstTwoGroupingFieldsInPreviewTableShouldBe = "First two grouping fields in preview table should be \"" + AlbumTagName + "\" and \"" + ArtworkName + "\" to export " +
+                "to \"HTML Document (Album List)\"!";
+            MsgResizingArtworksRequired = "Artwork resizing (more than 60px) must be turned on to use this export format!";
 
             MsgYouMustImportStandardAsrPresetsFirst = "You must import standard ASR presets first!";
 
@@ -3931,36 +3938,36 @@ namespace MusicBeePlugin
                 TagToolsMenuSectionName = "ДОПОЛНИТЕЛЬНЫЕ ИНСТРУМЕНТЫ";
                 BackupRestoreMenuSectionName = "АРХИВАЦИЯ И ВОССТАНОВЛЕНИЕ";
 
-                CopyTagCommandName = "Копировать тег...";
-                SwapTagsCommandName = "Поменять местами два тега...";
-                ChangeCaseCommandName = "Изменить регистр тега...";
-                ReencodeTagCommandName = "Изменить кодировку тега...";
-                ReencodeTagsCommandName = "Изменить кодировку тегов...";
-                LibraryReportsCommandName = "Отчеты по библиотеке...";
-                AutoRateCommandName = "Автоматически установить рейтинги...";
+                CopyTagName = "Копировать тег...";
+                SwapTagsName = "Поменять местами два тега...";
+                ChangeCaseName = "Изменить регистр тега...";
+                ReencodeTagName = "Изменить кодировку тега...";
+                ReencodeTagsName = "Изменить кодировку тегов...";
+                LibraryReportsName = "Отчеты по библиотеке...";
+                AutoRateName = "Автоматически установить рейтинги...";
                 AsrCommandName = "Дополнительный поиск и замена...";
                 CarCommandName = "Рассчитать средний рейтинг альбомов...";
                 CtCommandName = "Сравнить треки...";
-                CopyTagsToClipboardCommandName = "Копировать теги в буфер обмена...";
-                PasteTagsFromClipboardCommandName = "Вставить теги из буфера обмена";
+                CopyTagsToClipboardName = "Копировать теги в буфер обмена...";
+                PasteTagsFromClipboardName = "Вставить теги из буфера обмена";
                 MsrCommandName = "Множественный поиск и замена...";
                 ShowHiddenCommandName = "Показать скрытые/восстановить свернутые окна плагина";
 
                 TagToolsHotkeyDescription = "Дополнительные инструменты: ";
-                CopyTagCommandDescription = TagToolsHotkeyDescription + "Копировать тег";
-                SwapTagsCommandDescription = TagToolsHotkeyDescription + "Поменять местами два тега";
-                ChangeCaseCommandDescription = TagToolsHotkeyDescription + "Изменить регистр тега";
-                ReencodeTagCommandDescription = TagToolsHotkeyDescription + "Изменить кодировку тега";
-                ReencodeTagsCommandDescription = TagToolsHotkeyDescription + "Изменить кодировку тегов";
-                LibraryReportsCommandDescription = TagToolsHotkeyDescription + "Отчеты по библиотеке";
+                CopyTagDescription = TagToolsHotkeyDescription + "Копировать тег";
+                SwapTagsDescription = TagToolsHotkeyDescription + "Поменять местами два тега";
+                ChangeCaseDescription = TagToolsHotkeyDescription + "Изменить регистр тега";
+                ReencodeTagDescription = TagToolsHotkeyDescription + "Изменить кодировку тега";
+                ReencodeTagsDescription = TagToolsHotkeyDescription + "Изменить кодировку тегов";
+                LibraryReportsDescription = TagToolsHotkeyDescription + "Отчеты по библиотеке";
                 ReportPresetHotkeyDescription = TagToolsHotkeyDescription;
-                AutoRateCommandDescription = TagToolsHotkeyDescription + "Автоматически установить рейтинги";
+                AutoRateDescription = TagToolsHotkeyDescription + "Автоматически установить рейтинги";
                 AsrCommandDescription = TagToolsHotkeyDescription + "Дополнительный поиск и замена";
                 AsrHotkeyDescription = TagToolsHotkeyDescription;
                 CarCommandDescription = TagToolsHotkeyDescription + "Рассчитать средний рейтинг альбомов";
                 CtCommandDescription = TagToolsHotkeyDescription + "Сравнить треки";
-                CopyTagsToClipboardCommandDescription = TagToolsHotkeyDescription + "Копировать теги в буфер обмена";
-                PasteTagsFromClipboardCommandDescription = TagToolsHotkeyDescription + "Вставить теги из буфера обмена";
+                CopyTagsToClipboardDescription = TagToolsHotkeyDescription + "Копировать теги в буфер обмена";
+                PasteTagsFromClipboardDescription = TagToolsHotkeyDescription + "Вставить теги из буфера обмена";
                 CopyTagsToClipboardUsingMenuDescription = "Копировать теги в буфер обмена, используя набор";
                 MsrCommandDescription = TagToolsHotkeyDescription + "Множественный поиск и замена";
                 ShowHiddenCommandDescription = TagToolsHotkeyDescription + "Показать скрытые окна плагина";
@@ -3972,9 +3979,9 @@ namespace MusicBeePlugin
                 MoveBackupsCommandName = "Переместить архив(ы)...";
                 CreateNewBaselineCommandName = "Создать новый опорный архив текущей библиотеки...";
                 DeleteBackupsCommandName = "Удалить архив(ы)...";
-                AutoBackupSettingsCommandName = "Настройки (авто)архивации...";
+                AutoBackupSettingsName = "Настройки (авто)архивации...";
 
-                TagHistoryCommandName = "История тегов...";
+                TagHistoryName = "История тегов...";
 
                 BackupTagsCommandDescription = TagToolsHotkeyDescription + "Архивировать теги для всех треков";
                 RestoreTagsCommandDescription = TagToolsHotkeyDescription + "Восстановить теги для выбранных треков";
@@ -3983,18 +3990,18 @@ namespace MusicBeePlugin
                 MoveBackupsCommandDescription = TagToolsHotkeyDescription + "Переместить архив(ы)";
                 CreateNewBaselineCommandDescription = TagToolsHotkeyDescription + "Создать новый опорный архив текущей библиотеки";
                 DeleteBackupsCommandDescription = TagToolsHotkeyDescription + "Удалить архив(ы)";
-                AutoBackupSettingsCommandDescription = TagToolsHotkeyDescription + "Настройки (авто)архивации";
+                AutoBackupSettingsDescription = TagToolsHotkeyDescription + "Настройки (авто)архивации";
 
-                TagHistoryCommandDescription = TagToolsHotkeyDescription + "История тегов";
+                TagHistoryDescription = TagToolsHotkeyDescription + "История тегов";
 
-                CopyTagCommandSbText = "Копирование тегов";
-                SwapTagsCommandSbText = "Обмен тегов местами";
-                ChangeCaseCommandSbText = "Изменение регистра тега";
-                ReencodeTagCommandSbText = "Изменение кодировки тегов";
-                LibraryReportsCommandSbText = "Формирование отчета";
+                CopyTagSbText = "Копирование тегов";
+                SwapTagsSbText = "Обмен тегов местами";
+                ChangeCaseSbText = "Изменение регистра тега";
+                ReencodeTagSbText = "Изменение кодировки тегов";
+                LibraryReportsSbText = "Формирование отчета";
                 LibraryReportsGeneratingPreviewCommandSbText = "Формирование предварительного просмотра";
                 ApplyingLibraryReportSbText = "Применение пресета ОБ";
-                AutoRateCommandSbText = "Автоматическая установка рейтингов";
+                AutoRateSbText = "Автоматическая установка рейтингов";
                 AsrCommandSbText = "Дополнительный поиск и замена";
                 CarCommandSbText = "Расчет среднего рейтинга альбомов";
                 MsrCommandSbText = "Множественный поиск и замена";
@@ -4031,6 +4038,7 @@ namespace MusicBeePlugin
                 LibraryAveragesPresetName = "В среднем по библиотеке";
                 CDBookletPresetName = "Буклет компакт-диска";
                 AlbumsAndTracksPresetName = "Альбомы и треки";
+                AlbumGridPresetName = "Сетка альбомов (список альбомов)";
 
                 EmptyPresetName = "<Пустой пресет>";
 
@@ -4043,7 +4051,8 @@ namespace MusicBeePlugin
 
 
                 //Supported exported file formats
-                ExportedFormats = "Документ HTML (по альбомам)|*.htm|Документ HTML|*.htm|Простая таблица HTML|*.htm|Текст, разделенный табуляциями|*.txt|Плейлист M3U|*.m3u|Файл CSV|*.csv|Документ HTML (буклет компакт-диска)|*.htm";
+                ExportedFormats = "Документ HTML (по альбомам)|*.htm|Документ HTML|*.htm|Простая таблица HTML|*.htm|Текст, разделенный табуляциями|*.txt|Плейлист M3U|*.m3u|" +
+                    "Файл CSV|*.csv|Документ HTML (буклет компакт-диска)|*.htm|Документ HTML (сетка альбомов)|*.htm";
                 ExportedTrackList = "Список треков ОБ";
 
                 //Displayed text
@@ -4201,17 +4210,20 @@ namespace MusicBeePlugin
                 MsgTracksSelectedMatchedNotMatched = "Выбрано треков: %%SELECTED-TRACKS%%\n" +
                     "Тегов треков в буфере обмена: %%CLIPBOARD-TRACKS%%\n" +
                     "Найдено подходящих треков: %%MATCHED-TRACKS%%\n" +
-                    "Не найдено подходящих треков: %%NOT-MATCHED-TRACKS%%\n\n" + 
+                    "Не найдено подходящих треков: %%NOT-MATCHED-TRACKS%%\n\n" +
                     "Вставить теги?";
 
 
                 MsgFirstThreeGroupingFieldsInPreviewTableShouldBe = "Первые три поля группировок в таблице должны быть \"" + DisplayedAlbumArtistName + "\", '"
-                    + AlbumTagName + "\" и \"" + ArtworkName + "\" для того, чтобы экспортировать теги в формат \"Документ HTML (по альбомам)'";
+                    + AlbumTagName + "\" и \"" + ArtworkName + "\" для того, чтобы экспортировать теги в формат \"Документ HTML (по альбомам)\"!";
                 MsgFirstSixGroupingFieldsInPreviewTableShouldBe = "Первые шесть полей группировок в таблице должны быть \"" + SequenceNumberName
                     + "\", \"" + DisplayedAlbumArtistName + "\", \"" + AlbumTagName + "\", \"" + ArtworkName + "\", \""
                     + MbApiInterface.Setting_GetFieldName(MetaDataType.TrackTitle) + "\" and \""
                     + MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Duration)
-                    + "\" для того, чтобы экспортировать теги в формат \"Документ HTML (буклет компакт-диска)\"";
+                    + "\" для того, чтобы экспортировать теги в формат \"Документ HTML (буклет компакт-диска)\"!";
+                MsgFirstTwoGroupingFieldsInPreviewTableShouldBe = "Первые два поля группировок в таблице должны быть \"" + AlbumTagName + "\" и \"" + ArtworkName 
+                    + "\" для того, чтобы экспортировать теги в формат \"Документ HTML (список альбомов)\"!";
+                MsgResizingArtworksRequired = "Требуется включить изменение размеров обложек (не меньше 60 пикс.) для использования этого формата экспорта!";
 
                 MsgYouMustImportStandardAsrPresetsFirst = "Сначала надо импортировать стандартные пресеты дополнительного поиска и замены!";
 
@@ -4577,6 +4589,47 @@ namespace MusicBeePlugin
             reportsPresets[presetCounter++] = tempLibraryReportsPreset;
 
 
+            //Album Grid
+            tempGroupings = new PresetColumnAttributes[2];
+            tempFunctions = new PresetColumnAttributes[0];
+
+            tempGroupings[0] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Album), null, null, false);
+            tempGroupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { null }, MbApiInterface.Setting_GetFieldName(MetaDataType.Artwork), null, null, false);
+
+            for (int f = 0; f < tempGroupings.Length; f++)
+                tempGroupings[f].columnIndices = new int[] { f };
+
+
+            tempFunctionIds = new string[tempFunctions.Length];
+
+            tempDestinationTags = new string[tempFunctions.Length];
+            for (int i = 0; i < tempDestinationTags.Length; i++)
+                tempDestinationTags[i] = NullTagName;
+
+            tempLibraryReportsPreset = new ReportPreset
+            {
+                groupings = tempGroupings,
+                functions = tempFunctions,
+                totals = false,
+                name = AlbumGridPresetName.ToUpper(),
+                userPreset = false,
+
+                sourceTags = new string[0],
+                destinationTags = tempDestinationTags,
+                functionIds = tempFunctionIds,
+                conditionField = tempGroupings[0].parameterName,
+                comparison = Comparison.IsGreaterOrEqual,
+
+                resizeArtwork = true,
+                newArtworkSize = 60,
+
+                exportedTrackListName = ExportedTrackList,
+                fileFormatIndex = LrReportFormat.HtmlDocumentAlbumGrid
+            };
+
+            reportsPresets[presetCounter++] = tempLibraryReportsPreset;
+
+
             foreach (var reportPreset in reportsPresets) //******* remove later !!!
             {
                 if (reportPreset != null && reportPreset.exportedTrackListName == null)
@@ -4853,9 +4906,9 @@ namespace MusicBeePlugin
             FormThemedBitmapsRelease(EmptyForm);
 
 
-            LibraryReportsCommandForAutoApplying?.Dispose();
-            LibraryReportsCommandForHotkeys?.Dispose();
-            LibraryReportsCommandForFunctionIds?.Dispose();
+            LibraryReportsForAutoApplying?.Dispose();
+            LibraryReportsForHotkeys?.Dispose();
+            LibraryReportsForFunctionIds?.Dispose();
 
             EmptyButton?.Dispose();
             EmptyForm?.Dispose();
@@ -4933,71 +4986,27 @@ namespace MusicBeePlugin
                     InitLR();
                     InitASR();
 
+                    //(Auto)backup init
+                    InitBackupRestore();
+
+
+                    MissingArtwork = Resources.missing_artwork;
+                    DefaultArtwork = MissingArtwork;
+
+                    //Let's prepare themed bitmaps for controls
+                    prepareThemedBitmapsAndColors();
 
                     //Let's create plugin main and context menu items
                     MbForm.Invoke((MethodInvoker)delegate { addPluginContextMenuItems(); addPluginMenuItems(); });
 
 
+                    //Let's refresh MusicBee UI every 5 sec if there are any tags changed by plugin since last refresh
+                    DelayedStatusbarTextClearingDelegate = DelayedStatusbarTextClearing;
                     PeriodicUI_RefreshTimer = new System.Threading.Timer(regularUI_Refresh, null, RefreshUI_Delay, RefreshUI_Delay);
 
-                    DelayedStatusbarTextClearingDelegate = DelayedStatusbarTextClearing;
-
-                    //(Auto)backup init
-                    if (!SavedSettings.dontShowBackupRestore)
-                    {
-                        if (File.Exists(GetAutobackupDirectory(SavedSettings.autobackupDirectory) + @"\" + BackupIndexFileName))
-                        {
-                            FileStream stream = File.Open(GetAutobackupDirectory(SavedSettings.autobackupDirectory) + @"\" + BackupIndexFileName, FileMode.Open, FileAccess.Read, FileShare.None);
-                            StreamReader file = new StreamReader(stream, Encoding.UTF8);
-
-                            System.Xml.Serialization.XmlSerializer backupSerializer = new System.Xml.Serialization.XmlSerializer(typeof(BackupIndex));
-
-                            try
-                            {
-                                BackupIndex = (BackupIndex)backupSerializer.Deserialize(file);
-                            }
-                            catch
-                            {
-                                MessageBox.Show(MbForm, MsgMasterBackupIndexIsCorrupted, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                                BackupIndex = new BackupIndex();
-                            }
-
-                            file.Close();
-                        }
-                        else
-                        {
-                            BackupIndex = new BackupIndex();
-                        }
-
-                        if (!SavedSettings.dontShowBackupRestore && SavedSettings.autobackupInterval != 0)
-                        {
-                            PeriodicAutobackupTimer = new System.Threading.Timer(regularAutobackup, null, new TimeSpan(0, 0, (int)SavedSettings.autobackupInterval * 60), new TimeSpan(0, 0, (int)SavedSettings.autobackupInterval * 60));
-                        }
-                    }
 
                     //Auto rate at startup
-                    if (SavedSettings.calculateThresholdsAtStartUp || SavedSettings.autoRateAtStartUp)
-                    {
-                        using (AutoRate tagToolsForm = new AutoRate(this))
-                        {
-                            tagToolsForm.switchOperation(tagToolsForm.onStartup, EmptyButton, EmptyButton, EmptyButton, EmptyButton, true, null);
-                        }
-                    }
-                    if (SavedSettings.calculateAlbumRatingAtStartUp)
-                    {
-                        using (CalculateAverageAlbumRating tagToolsForm = new CalculateAverageAlbumRating(this))
-                        {
-                            tagToolsForm.calculateAlbumRatingForAllTracks();
-                        }
-                    }
-
-                    MissingArtwork = Resources.missing_artwork;
-                    DefaultArtwork = MissingArtwork;
-
-
-                    //Let's prepare themed bitmaps for controls
-                    prepareThemedBitmapsAndColors();
-
+                    AutoRate.AutoRateOnStartup(this);
 
                     //Execute library reports on startup
                     AutoApplyReportPresets();
@@ -5988,24 +5997,24 @@ namespace MusicBeePlugin
             AddMenuItem(TagToolsSubmenu, "-", null, null);
             AddMenuItem(TagToolsSubmenu, TagToolsMenuSectionName, null, null, false);
 
-            if (!SavedSettings.dontShowCopyTag) AddMenuItem(TagToolsSubmenu, CopyTagCommandName, CopyTagCommandDescription, copyTagEventHandler);
-            if (!SavedSettings.dontShowSwapTags) AddMenuItem(TagToolsSubmenu, SwapTagsCommandName, SwapTagsCommandDescription, swapTagsEventHandler);
-            if (!SavedSettings.dontShowChangeCase) AddMenuItem(TagToolsSubmenu, ChangeCaseCommandName, ChangeCaseCommandDescription, changeCaseEventHandler);
+            if (!SavedSettings.dontShowCopyTag) AddMenuItem(TagToolsSubmenu, CopyTagName, CopyTagDescription, copyTagEventHandler);
+            if (!SavedSettings.dontShowSwapTags) AddMenuItem(TagToolsSubmenu, SwapTagsName, SwapTagsDescription, swapTagsEventHandler);
+            if (!SavedSettings.dontShowChangeCase) AddMenuItem(TagToolsSubmenu, ChangeCaseName, ChangeCaseDescription, changeCaseEventHandler);
             if (!SavedSettings.dontShowReencodeTag)
             {
-                AddMenuItem(TagToolsSubmenu, ReencodeTagCommandName, ReencodeTagCommandDescription, reencodeTagEventHandler);
-                AddMenuItem(TagToolsSubmenu, ReencodeTagsCommandName, ReencodeTagsCommandDescription, reencodeTagsEventHandler);
+                AddMenuItem(TagToolsSubmenu, ReencodeTagName, ReencodeTagDescription, reencodeTagEventHandler);
+                AddMenuItem(TagToolsSubmenu, ReencodeTagsName, ReencodeTagsDescription, reencodeTagsEventHandler);
             }
             if (!SavedSettings.dontShowLibraryReports)
             {
-                AddMenuItem(TagToolsSubmenu, LibraryReportsCommandName, LibraryReportsCommandDescription, libraryReportsEventHandler);
+                AddMenuItem(TagToolsSubmenu, LibraryReportsName, LibraryReportsDescription, libraryReportsEventHandler);
                 if (LRPresetsWithHotkeysCount > 0)
                 {
-                    LibraryReportsPresetsMenuItem = AddMenuItem(TagToolsSubmenu, LibraryReportsCommandName.Replace("...", string.Empty), null, null);
+                    LibraryReportsPresetsMenuItem = AddMenuItem(TagToolsSubmenu, LibraryReportsName.Replace("...", string.Empty), null, null);
                     RegisterLRPresetsHotkeysAndMenuItems(this);
                 }
             }
-            if (!SavedSettings.dontShowAutorate) AddMenuItem(TagToolsSubmenu, AutoRateCommandName, AutoRateCommandDescription, autoRateEventHandler);
+            if (!SavedSettings.dontShowAutorate) AddMenuItem(TagToolsSubmenu, AutoRateName, AutoRateDescription, autoRateEventHandler);
             if (!SavedSettings.dontShowASR)
             {
                 AddMenuItem(TagToolsSubmenu, AsrCommandName, AsrCommandDescription, asrEventHandler);
@@ -6021,7 +6030,7 @@ namespace MusicBeePlugin
 
 
             AddMenuItem(TagToolsSubmenu, "-", null, null);
-            AddMenuItem(TagToolsSubmenu, CopyTagsToClipboardCommandName, CopyTagsToClipboardCommandDescription, copyTagsToClipboardEventHandler);
+            AddMenuItem(TagToolsSubmenu, CopyTagsToClipboardName, CopyTagsToClipboardDescription, copyTagsToClipboardEventHandler);
             CopyTagsToClipboardUsingMenuItem = AddMenuItem(TagToolsSubmenu, CopyTagsToClipboardUsingMenuDescription, null, null);
             addCopyTagsToClipboardUsingMenuItems();
 
@@ -6036,14 +6045,14 @@ namespace MusicBeePlugin
             MbApiInterface.MB_RegisterCommand(TagToolsHotkeyDescription + CopyTagsToClipboardUsingMenuDescription + " [09]", copyTagsUsingTagSet9EventHandler);
             MbApiInterface.MB_RegisterCommand(TagToolsHotkeyDescription + CopyTagsToClipboardUsingMenuDescription + " [10]", copyTagsUsingTagSet10EventHandler);
 
-            AddMenuItem(TagToolsSubmenu, PasteTagsFromClipboardCommandName, PasteTagsFromClipboardCommandDescription, pasteTagsFromClipboardEventHandler);
+            AddMenuItem(TagToolsSubmenu, PasteTagsFromClipboardName, PasteTagsFromClipboardDescription, pasteTagsFromClipboardEventHandler);
 
 
             if (!SavedSettings.dontShowBackupRestore)
             {
                 AddMenuItem(TagToolsSubmenu, "-", null, null);
                 AddMenuItem(TagToolsSubmenu, BackupRestoreMenuSectionName, null, null, false);
-                AddMenuItem(TagToolsSubmenu, TagHistoryCommandName, TagHistoryCommandDescription, tagHistoryEventHandler);
+                AddMenuItem(TagToolsSubmenu, TagHistoryName, TagHistoryDescription, tagHistoryEventHandler);
                 AddMenuItem(TagToolsSubmenu, "-", null, null);
                 AddMenuItem(TagToolsSubmenu, BackupTagsCommandName, BackupTagsCommandDescription, backupTagsEventHandler);
                 AddMenuItem(TagToolsSubmenu, RestoreTagsCommandName, RestoreTagsCommandDescription, restoreTagsEventHandler);
@@ -6053,7 +6062,7 @@ namespace MusicBeePlugin
                 AddMenuItem(TagToolsSubmenu, CreateNewBaselineCommandName, CreateNewBaselineCommandDescription, createNewBaselineEventHandler);
                 AddMenuItem(TagToolsSubmenu, DeleteBackupsCommandName, DeleteBackupsCommandDescription, deleteBackupsEventHandler);
                 AddMenuItem(TagToolsSubmenu, "-", null, null);
-                AddMenuItem(TagToolsSubmenu, AutoBackupSettingsCommandName, AutoBackupSettingsCommandDescription, autoBackupSettingsEventHandler);
+                AddMenuItem(TagToolsSubmenu, AutoBackupSettingsName, AutoBackupSettingsDescription, autoBackupSettingsEventHandler);
             }
 
             AddMenuItem(TagToolsSubmenu, "-", null, null);
@@ -6071,14 +6080,14 @@ namespace MusicBeePlugin
 
             if (!SavedSettings.dontShowBackupRestore) AddMenuItem(TagToolsContextSubmenu, TagToolsMenuSectionName, null, null, false);
 
-            if (!SavedSettings.dontShowCopyTag) AddMenuItem(TagToolsContextSubmenu, CopyTagCommandName, null, copyTagEventHandler);
-            if (!SavedSettings.dontShowSwapTags) AddMenuItem(TagToolsContextSubmenu, SwapTagsCommandName, null, swapTagsEventHandler);
-            if (!SavedSettings.dontShowChangeCase) AddMenuItem(TagToolsContextSubmenu, ChangeCaseCommandName, null, changeCaseEventHandler);
+            if (!SavedSettings.dontShowCopyTag) AddMenuItem(TagToolsContextSubmenu, CopyTagName, null, copyTagEventHandler);
+            if (!SavedSettings.dontShowSwapTags) AddMenuItem(TagToolsContextSubmenu, SwapTagsName, null, swapTagsEventHandler);
+            if (!SavedSettings.dontShowChangeCase) AddMenuItem(TagToolsContextSubmenu, ChangeCaseName, null, changeCaseEventHandler);
             if (!SavedSettings.dontShowLibraryReports)
             {
-                AddMenuItem(TagToolsSubmenu, LibraryReportsCommandName, LibraryReportsCommandDescription, libraryReportsEventHandler);
+                AddMenuItem(TagToolsSubmenu, LibraryReportsName, LibraryReportsDescription, libraryReportsEventHandler);
                 if (LRPresetsWithHotkeysCount > 0)
-                    LRPresetsContextMenuItem = AddMenuItem(TagToolsContextSubmenu, LibraryReportsCommandName.Replace("...", string.Empty), null, null);
+                    LRPresetsContextMenuItem = AddMenuItem(TagToolsContextSubmenu, LibraryReportsName.Replace("...", string.Empty), null, null);
             }
             if (!SavedSettings.dontShowASR)
             {
@@ -6089,16 +6098,16 @@ namespace MusicBeePlugin
             }
             if (!SavedSettings.dontShowCT) AddMenuItem(TagToolsContextSubmenu, CtCommandName, null, compareTracksEventHandler);
             AddMenuItem(TagToolsContextSubmenu, "-", null, null);
-            AddMenuItem(TagToolsContextSubmenu, CopyTagsToClipboardCommandName, null, copyTagsToClipboardEventHandler);
+            AddMenuItem(TagToolsContextSubmenu, CopyTagsToClipboardName, null, copyTagsToClipboardEventHandler);
             CopyTagsToClipboardUsingContextMenuItem = AddMenuItem(TagToolsContextSubmenu, CopyTagsToClipboardUsingMenuDescription, null, null);
             addCopyTagsToClipboardUsingContextMenuItems();
-            AddMenuItem(TagToolsContextSubmenu, PasteTagsFromClipboardCommandName, null, pasteTagsFromClipboardEventHandler);
+            AddMenuItem(TagToolsContextSubmenu, PasteTagsFromClipboardName, null, pasteTagsFromClipboardEventHandler);
 
             if (!SavedSettings.dontShowBackupRestore)
             {
                 AddMenuItem(TagToolsContextSubmenu, "-", null, null);
                 AddMenuItem(TagToolsContextSubmenu, BackupRestoreMenuSectionName, null, null, false);
-                AddMenuItem(TagToolsContextSubmenu, TagHistoryCommandName, null, tagHistoryEventHandler);
+                AddMenuItem(TagToolsContextSubmenu, TagHistoryName, null, tagHistoryEventHandler);
             }
 
 
@@ -6147,6 +6156,9 @@ namespace MusicBeePlugin
         #region Plugin's additional virtual tag functions
         public string CustomFunc_ASR(string url, string presetId)
         {
+            if (SavedSettings.dontShowASR)
+                return "ASR is disabled!";
+
             if (presetId == string.Empty)
                 return string.Empty;
 
@@ -6155,6 +6167,9 @@ namespace MusicBeePlugin
 
         public string CustomFunc_LR(string url, string functionId)
         {
+            if (SavedSettings.dontShowLibraryReports)
+                return "LR is disabled!";
+
             if (functionId == string.Empty)
                 return string.Empty;
 
@@ -6324,25 +6339,45 @@ namespace MusicBeePlugin
             return DateTime.Now.ToString();
         }
 
+
         public string CustomFunc_TitleCase(string input)
         {
-            string[] exceptionWords = SavedSettings.exceptionWordsASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            string[] wordSplittersASR = SavedSettings.wordSplittersASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            string[] exceptionCharsASR = SavedSettings.exceptionCharsASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-
-            input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.LowerCase, null, false,
-                null, wordSplittersASR);
-            string result = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.TitleCase, exceptionWords, false,
-                exceptionCharsASR, wordSplittersASR, true, true);
-
-            return result;
+            return CustomFunc_TitleCase(input, null, null, null);
         }
 
+        //If parameter# is empty, then use ASR defaults; if it's a whitespace, then don't use it
         public string CustomFunc_TitleCase(string input, string exceptionWordsString)
         {
-            string[] exceptionWords = exceptionWordsString.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            string[] wordSplittersASR = SavedSettings.wordSplittersASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            string[] exceptionCharsASR = SavedSettings.exceptionCharsASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            return CustomFunc_TitleCase(input, exceptionWordsString, null, null);
+        }
+
+        //If parameter# is empty, then use ASR defaults; if it's a whitespace, then don't use it
+        public string CustomFunc_TitleCase(string input, string exceptionWordsString, string wordSplittersASRString)
+        {
+            return CustomFunc_TitleCase(input, exceptionWordsString, wordSplittersASRString, null);
+        }
+
+        //If parameter# is empty, then use ASR defaults; if it's a whitespace, then don't use it
+        public string CustomFunc_TitleCase(string input, string exceptionWordsString, string wordSplittersASRString, string exceptionCharsASRString)//********
+        {
+            string[] exceptionWords = null;
+            string[] wordSplittersASR = null;
+            string[] exceptionCharsASR = null;
+
+            if (string.IsNullOrEmpty(exceptionWordsString))
+                exceptionWords = SavedSettings.exceptionWordsASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            else if (!string.IsNullOrWhiteSpace(exceptionWordsString))
+                exceptionWords = exceptionWordsString.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+            if (string.IsNullOrEmpty(wordSplittersASRString))
+                wordSplittersASR = SavedSettings.exceptionWordsASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            else if (!string.IsNullOrWhiteSpace(wordSplittersASRString))
+                wordSplittersASR = wordSplittersASRString.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+            if (string.IsNullOrEmpty(exceptionCharsASRString))
+                exceptionWords = SavedSettings.exceptionWordsASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            else if (!string.IsNullOrWhiteSpace(exceptionCharsASRString))
+                exceptionWords = exceptionCharsASRString.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
             input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.LowerCase, null, false,
                 null, wordSplittersASR);
@@ -6351,26 +6386,40 @@ namespace MusicBeePlugin
 
             return result;
         }
+
 
         public string CustomFunc_SentenceCase(string input)
         {
-            string[] exceptionWords = SavedSettings.exceptionWordsASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            string[] wordSplittersASR = SavedSettings.wordSplittersASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            string[] exceptionCharsASR = SavedSettings.exceptionCharsASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-
-            input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.LowerCase, null, false,
-                null, wordSplittersASR);
-            string result = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.SentenceCase, exceptionWords, false,
-                exceptionCharsASR, wordSplittersASR, true, true);
-
-            return result;
+            return CustomFunc_SentenceCase(input, null, null, null);
         }
 
+        //If parameter# is empty, then use ASR defaults; if it's a whitespace, then don't use it
         public string CustomFunc_SentenceCase(string input, string exceptionWordsString)
         {
-            string[] exceptionWords = exceptionWordsString.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            string[] wordSplittersASR = SavedSettings.wordSplittersASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            string[] exceptionCharsASR = SavedSettings.exceptionCharsASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            return CustomFunc_SentenceCase(input, exceptionWordsString, null, null);
+        }
+
+        //If parameter# is empty, then use ASR defaults; if it's a whitespace, then don't use it
+        private string CustomFunc_SentenceCase(string input, string exceptionWordsString, string wordSplittersASRString, string exceptionCharsASRString)//********
+        {
+            string[] exceptionWords = null;
+            string[] wordSplittersASR = null;
+            string[] exceptionCharsASR = null;
+
+            if (string.IsNullOrEmpty(exceptionWordsString))
+                exceptionWords = SavedSettings.exceptionWordsASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            else if (!string.IsNullOrWhiteSpace(exceptionWordsString))
+                exceptionWords = exceptionWordsString.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+            if (string.IsNullOrEmpty(wordSplittersASRString))
+                wordSplittersASR = SavedSettings.exceptionWordsASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            else if (!string.IsNullOrWhiteSpace(wordSplittersASRString))
+                wordSplittersASR = wordSplittersASRString.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+            if (string.IsNullOrEmpty(exceptionCharsASRString))
+                exceptionWords = SavedSettings.exceptionWordsASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            else if (!string.IsNullOrWhiteSpace(exceptionCharsASRString))
+                exceptionWords = exceptionCharsASRString.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
             input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.LowerCase, null, false,
                 null, wordSplittersASR);
@@ -6379,6 +6428,7 @@ namespace MusicBeePlugin
 
             return result;
         }
+
 
         public string CustomFunc_Name(string parameter)
         {

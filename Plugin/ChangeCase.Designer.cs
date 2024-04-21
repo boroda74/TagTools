@@ -264,7 +264,7 @@
             this.previewTable.Name = "previewTable";
             this.previewTable.RowHeadersVisible = false;
             this.previewTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.previewTable.Tag = "#ChangeCaseCommand&ChangeCaseCommand@pinned-to-parent-x";
+            this.previewTable.Tag = "#ChangeCase&ChangeCase@pinned-to-parent-x";
             this.toolTip1.SetToolTip(this.previewTable, resources.GetString("previewTable.ToolTip"));
             this.previewTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.previewTable_CellContentClick);
             // 
@@ -595,7 +595,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.fieldsPanel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("fieldsPanel.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.fieldsPanel, ((int)(resources.GetObject("fieldsPanel.IconPadding"))));
             this.fieldsPanel.Name = "fieldsPanel";
-            this.fieldsPanel.Tag = "#ChangeCaseCommand@pinned-to-parent-x";
+            this.fieldsPanel.Tag = "#ChangeCase@pinned-to-parent-x";
             this.toolTip1.SetToolTip(this.fieldsPanel, resources.GetString("fieldsPanel.ToolTip"));
             // 
             // toolTip1
@@ -604,7 +604,7 @@
             this.toolTip1.InitialDelay = 1500;
             this.toolTip1.ReshowDelay = 100;
             // 
-            // ChangeCaseCommand
+            // ChangeCase
             // 
             this.AcceptButton = this.buttonPreview;
             resources.ApplyResources(this, "$this");
@@ -638,11 +638,11 @@
             this.Controls.Add(this.sourceTagList);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.fieldsPanel);
-            this.Name = "ChangeCaseCommand";
+            this.Name = "ChangeCase";
             this.Tag = "";
             this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ChangeCaseCommand_FormClosing);
-            this.Load += new System.EventHandler(this.ChangeCaseCommand_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ChangeCase_FormClosing);
+            this.Load += new System.EventHandler(this.ChangeCase_Load);
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).EndInit();
             this.fieldsPanel.ResumeLayout(false);

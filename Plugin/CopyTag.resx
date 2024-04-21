@@ -940,7 +940,7 @@ for copying it to a temporary tag
     <value>browseButton</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>CopyTagCommand</value>
+    <value>CopyTag</value>
   </data>
   <data name="&gt;&gt;SupposedDestinationTagT.Name" xml:space="preserve">
     <value>SupposedDestinationTagT</value>

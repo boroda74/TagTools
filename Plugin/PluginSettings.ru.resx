@@ -131,7 +131,7 @@
     <value>666, 15</value>
   </data>
   <data name="label6.Text" xml:space="preserve">
-    <value>Настройки дополнительных инструментов (при изменении большинства настроек потребуется перезапуск MusicBee)</value>
+    <value>Настройки дополнительных инструментов (при изменении некоторых настроек потребуется перезапуск MusicBee)</value>
   </data>
   <data name="versionLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 10</value>
@@ -423,10 +423,10 @@
     <value>Включить команду "Копировать тег"</value>
   </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 15</value>
+    <value>117, 15</value>
   </data>
   <data name="label7.Text" xml:space="preserve">
-    <value> Выберите команды * </value>
+    <value> Выберите команды</value>
   </data>
   <data name="groupBox5.Size" type="System.Drawing.Size, System.Drawing">
     <value>878, 90</value>
@@ -468,16 +468,16 @@
     <value>**  Требуется заново открыть окна плагина, чтобы новые настройки вступили в силу</value>
   </data>
   <data name="buttonsPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 626</value>
+    <value>0, 624</value>
   </data>
   <data name="buttonsPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>994, 35</value>
   </data>
   <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>980, 570</value>
+    <value>980, 565</value>
   </data>
   <data name="tabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>972, 542</value>
+    <value>972, 537</value>
   </data>
   <data name="tabPage1.Text" xml:space="preserve">
     <value>Поведение</value>
@@ -489,10 +489,10 @@
     <value>Обработка</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>994, 663</value>
+    <value>994, 661</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>1010, 702</value>
+    <value>1010, 700</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Настройки</value>

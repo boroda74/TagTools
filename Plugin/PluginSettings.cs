@@ -1,7 +1,7 @@
-﻿using System;
+﻿using ExtensionMethods;
+using System;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using ExtensionMethods;
 using static MusicBeePlugin.Plugin;
 
 namespace MusicBeePlugin
@@ -214,6 +214,7 @@ namespace MusicBeePlugin
 
             AdvancedSearchAndReplace.InitASR();
             LibraryReports.InitLR();
+            TagToolsPlugin.InitBackupRestore();
 
             TagToolsPlugin.addPluginContextMenuItems();
             TagToolsPlugin.addPluginMenuItems();

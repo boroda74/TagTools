@@ -501,7 +501,7 @@ namespace MusicBeePlugin
 
                 currentFile = files[fileCounter];
 
-                SetStatusbarTextForFileOperations(ChangeCaseCommandSbText, true, fileCounter, files.Length, currentFile);
+                SetStatusbarTextForFileOperations(ChangeCaseSbText, true, fileCounter, files.Length, currentFile);
 
                 sourceTagValue = GetFileTag(currentFile, sourceTagId);
                 sourceTagTValue = GetTagRepresentation(sourceTagValue);
@@ -614,7 +614,7 @@ namespace MusicBeePlugin
 
                     Invoke(processRowOfTable, new object[] { i });
 
-                    SetStatusbarTextForFileOperations(ChangeCaseCommandSbText, false, i, tags.Count, currentFile);
+                    SetStatusbarTextForFileOperations(ChangeCaseSbText, false, i, tags.Count, currentFile);
 
                     SetFileTag(currentFile, sourceTagId, newTagValue);
                     CommitTagsToFile(currentFile);
@@ -994,7 +994,7 @@ namespace MusicBeePlugin
             alwaysCapitalizeLastWordCheckBox.Checked = !alwaysCapitalizeLastWordCheckBox.Checked;
         }
 
-        private void ChangeCaseCommand_Load(object sender, EventArgs e)
+        private void ChangeCase_Load(object sender, EventArgs e)
         {
             (int, int, int, int, int, int, int) value = loadWindowLayout();
 
@@ -1013,7 +1013,7 @@ namespace MusicBeePlugin
 
         }
 
-        private void ChangeCaseCommand_FormClosing(object sender, FormClosingEventArgs e)
+        private void ChangeCase_FormClosing(object sender, FormClosingEventArgs e)
         {
             saveWindowLayout(previewTable.Columns[2].Width, previewTable.Columns[4].Width, previewTable.Columns[6].Width);
         }

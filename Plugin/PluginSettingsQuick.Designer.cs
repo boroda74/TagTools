@@ -521,6 +521,7 @@
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Tag = "@pinned-to-parent-x@pinned-to-parent-y@non-defaultable";
+            this.toolTip1.SetToolTip(this.buttonCancel, resources.GetString("buttonCancel.ToolTip"));
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // buttonOK
@@ -529,6 +530,7 @@
             this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Tag = "#buttonCancel@pinned-to-parent-y";
+            this.toolTip1.SetToolTip(this.buttonOK, resources.GetString("buttonOK.ToolTip"));
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // saveLastSkippedButton

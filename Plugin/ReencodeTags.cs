@@ -212,7 +212,7 @@ namespace MusicBeePlugin
 
                 currentFile = files[fileCounter];
 
-                SetStatusbarTextForFileOperations(ReencodeTagCommandSbText, true, fileCounter, files.Length, currentFile);
+                SetStatusbarTextForFileOperations(ReencodeTagSbText, true, fileCounter, files.Length, currentFile);
 
                 string[] currentTags = new string[numberOfWritableTags + 2];
                 currentTags[0] = "T";
@@ -296,7 +296,7 @@ namespace MusicBeePlugin
 
                     Invoke(processRowOfTable, new object[] { i });
 
-                    SetStatusbarTextForFileOperations(ReencodeTagCommandSbText, false, i, newTracks.Count, currentFile);
+                    SetStatusbarTextForFileOperations(ReencodeTagSbText, false, i, newTracks.Count, currentFile);
 
                     string cuesheet = GetFileTag(currentFile, MetaDataType.Cuesheet);
                     if (cuesheet == string.Empty)
@@ -455,7 +455,7 @@ namespace MusicBeePlugin
             }
         }
 
-        private void ReencodeTagsCommand_Load(object sender, EventArgs e)
+        private void ReencodeTags_Load(object sender, EventArgs e)
         {
             (int, int, int, int, int, int, int) value = loadWindowLayout();
 
@@ -471,7 +471,7 @@ namespace MusicBeePlugin
             }
         }
 
-        private void ReencodeTagsCommand_FormClosing(object sender, FormClosingEventArgs e)
+        private void ReencodeTags_FormClosing(object sender, FormClosingEventArgs e)
         {
             saveWindowLayout(previewTable.Columns[1].Width, previewTable.Columns[2].Width);
         }

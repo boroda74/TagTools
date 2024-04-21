@@ -52,7 +52,7 @@ namespace MusicBeePlugin
         private string cue = string.Empty;
 
         public ComboBox comboBox = null;
-        
+
         private TextBox textBox = null;
         private Button button = null;
         private CustomListBox listBox = null;
@@ -413,11 +413,11 @@ namespace MusicBeePlugin
 
         public IList Items
         {
-            get 
+            get
             {
                 if (comboBox == null)
                     return (IList)listBox.Items;
-                else 
+                else
                     return (IList)comboBox.Items;
             }
         }
@@ -487,65 +487,73 @@ namespace MusicBeePlugin
             }
         }
 
+        public void SetText(string value)
+        {
+            int index = IndexOfText(value);
+
+            if (comboBox == null)
+            {
+                if (index == -1 && string.IsNullOrEmpty(value) && textBox.ReadOnly)
+                {
+                    textBox.ForeColor = Plugin.InputControlForeColor;
+                    textBox.Text = cue;
+                }
+                else if (index == -1 && string.IsNullOrEmpty(value) && !textBox.ReadOnly)
+                {
+                    textBox.ForeColor = Plugin.InputControlDimmedForeColor;
+                    textBox.Text = cue;
+                }
+                else
+                {
+                    textBox.ForeColor = Plugin.InputControlForeColor;
+                    textBox.Text = value;
+
+                    SelectedIndex = index;
+                }
+
+                EventHandlersToolkit.FireEvent(this, "TextChanged", null);
+            }
+            else// if (comboBox != null)
+            {
+                if (index == -1 && DropDownStyle == ComboBoxStyle.DropDown)
+                    comboBox.Text = value;
+                else
+                    SelectedIndex = index;
+
+                EventHandlersToolkit.FireEvent(this, "TextChanged", null);
+            }
+        }
+
         public override string Text
         {
-            get 
+            get
             {
                 if (comboBox == null)
                     return textBox.Text;
                 else
                     return comboBox.Text;
-            }  
-            
-            set 
+            }
+
+            set
             {
-                int index = IndexOfText(value);
-
                 if (comboBox == null && textBox.Text != value)
-                {
-                    if (index == -1 && string.IsNullOrEmpty(value) && textBox.ReadOnly)
-                    {
-                        textBox.ForeColor = Plugin.InputControlForeColor;
-                        textBox.Text = cue;
-                    }
-                    else if (index == -1 && string.IsNullOrEmpty(value) && !textBox.ReadOnly)
-                    {
-                        textBox.ForeColor = Plugin.InputControlDimmedForeColor;
-                        textBox.Text = cue;
-                    }
-                    else
-                    {
-                        textBox.ForeColor = Plugin.InputControlForeColor;
-                        textBox.Text = value;
-                    }
-
-                    SelectedIndex = index;
-
-                    EventHandlersToolkit.FireEvent(this, "TextChanged", null);
-                }
+                    SetText(value);
                 else if (comboBox != null && comboBox.Text != value)
-                {
-                    if (index == -1 && DropDownStyle == ComboBoxStyle.DropDown)
-                        comboBox.Text = value;
-
-                    SelectedIndex = index;
-
-                    EventHandlersToolkit.FireEvent(this, "TextChanged", null);
-                }
+                    SetText(value);
             }
         }
 
-        public int  SelectedIndex
-        { 
-            get 
+        public int SelectedIndex
+        {
+            get
             {
                 if (comboBox == null)
                     return listBox.SelectedIndex;
                 else
                     return comboBox.SelectedIndex;
             }
-            
-            set 
+
+            set
             {
                 if (comboBox == null && lastSelectedIndex != value)
                 {
@@ -574,8 +582,8 @@ namespace MusicBeePlugin
         }
 
         public object SelectedItem
-        { 
-            get 
+        {
+            get
             {
                 if (comboBox == null)
                     return listBox.SelectedItem;
@@ -583,7 +591,7 @@ namespace MusicBeePlugin
                     return comboBox.SelectedItem;
             }
 
-            set 
+            set
             {
                 if (comboBox == null && listBox.SelectedItem != value)
                 {
@@ -611,7 +619,7 @@ namespace MusicBeePlugin
 
         public bool ReadOnly
         {
-            get 
+            get
             {
                 if (comboBox == null)
                     return textBox.ReadOnly;
@@ -619,7 +627,7 @@ namespace MusicBeePlugin
                     return comboBox.DropDownStyle == ComboBoxStyle.DropDownList;
             }
 
-            set 
+            set
             {
                 if (comboBox == null)
                     textBox.ReadOnly = value;
@@ -675,7 +683,7 @@ namespace MusicBeePlugin
 
         public ComboBoxStyle DropDownStyle
         {
-            get 
+            get
             {
                 if (comboBox == null)
                     return textBox.ReadOnly ? ComboBoxStyle.DropDownList : ComboBoxStyle.DropDown;
@@ -705,6 +713,7 @@ namespace MusicBeePlugin
             EventHandlersToolkit.CopyEventHandlers(comboBox, destControl, "SelectedItemChanged", false);
             EventHandlersToolkit.CopyEventHandlers(comboBox, destControl, "VisibleChanged", false);
             EventHandlersToolkit.CopyEventHandlers(comboBox, destControl, "EnabledChanged", false);
+            EventHandlersToolkit.CopyEventHandlers(comboBox, destControl, "DropDownClosed", false);
         }
 
         private void customComboBox_SizeChanged(object sender, EventArgs e)
@@ -797,13 +806,16 @@ namespace MusicBeePlugin
             }
         }
 
-        public void SetCue(string cue)
+        public void SetCue(string cue, bool forceCue)
         {
+            if (forceCue)
+                SelectedIndex = -1;
+
             if (comboBox == null)
             {
                 this.cue = cue;
                 if (listBox.SelectedIndex == -1)
-                    textBox.Text = string.Empty;
+                    this.SetText(string.Empty);
             }
             else
             {
@@ -949,7 +961,7 @@ namespace MusicBeePlugin
             }
         }
 
-        public bool ShowScrollbars
+        private bool ShowScrollbars //********* doesn't work
         {
             get { return showScroll; }
 
@@ -1021,8 +1033,10 @@ namespace MusicBeePlugin
 
         public event EventHandler ItemsChanged;
 
-        public CustomCheckedListBox()
+        public CustomCheckedListBox(bool showScroll)
         {
+            this.showScroll = showScroll;
+
             InitializeComponent();
 
             //SetStyle(ControlStyles.ResizeRedraw, true);//******
@@ -1046,7 +1060,7 @@ namespace MusicBeePlugin
         }
 
 
-        public bool ShowScrollbars
+        private bool ShowScrollbars //********* doesn't work
         {
             get { return showScroll; }
 
@@ -1205,12 +1219,12 @@ namespace MusicBeePlugin
                 scrollBarThumbAndSpansBackBrush?.Dispose();
                 scrollBarThumbAndSpansBorderBrush?.Dispose();
             }
-        
+
             base.Dispose(disposing);
         }
 
         //refScrollBar must be null if scrolledControl is not a parent of custom scroll bar & scroll bar must be placed on the right to scrolledControl
-        public CustomVScrollBar(Form ownerForm, Control scrolledControl, 
+        public CustomVScrollBar(Form ownerForm, Control scrolledControl,
             GetScrollBarMetricsDelegate getScrollBarMetrics, int borderWidth, Control refScrollBar = null)
         {
             InitializeComponent();
@@ -1378,7 +1392,7 @@ namespace MusicBeePlugin
             set
             {
                 largeChange = value;
-                
+
                 //figure out thumb top
                 SetThumbTopFromValueAndLargeChange();
 
@@ -1615,11 +1629,11 @@ namespace MusicBeePlugin
             }
         }
 
-        private void OnPaint1(PaintEventArgs e, Image upArrowImage, Image downArrowImage, 
+        private void OnPaint1(PaintEventArgs e, Image upArrowImage, Image downArrowImage,
             Image thumbTopImage, Image thumbMiddleImage, Image thumbBottomImage, bool stretchThumbImage)
         {
             if (stretchThumbImage && thumbMiddleImage == null)
-                throw new Exception("Impossible to stretch thumb. Middle thumb image is null."); 
+                throw new Exception("Impossible to stretch thumb. Middle thumb image is null.");
 
 
             e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
@@ -1671,15 +1685,15 @@ namespace MusicBeePlugin
 
             //draw top image background
             if (scrollBarThumbAndSpansBackBrush != null)
-                e.Graphics.FillRectangle(scrollBarThumbAndSpansBackBrush, new Rectangle(sbBorderWidth + offsetX, 
+                e.Graphics.FillRectangle(scrollBarThumbAndSpansBackBrush, new Rectangle(sbBorderWidth + offsetX,
                     sbBorderWidth,
-                    initialWidth - 2 * sbBorderWidth, upArrowImage.Height 
+                    initialWidth - 2 * sbBorderWidth, upArrowImage.Height
                     + upImageAdditionalTopHeight + upImageAdditionalBottomHeight));
 
             //draw top image
             //+1 scaled px nTop offset due to scroll bar top border
             //-2 scaled px of width for scroll bar left/right borders
-            e.Graphics.DrawImage(upArrowImage, new Rectangle(new Point(sbBorderWidth + offsetX, 
+            e.Graphics.DrawImage(upArrowImage, new Rectangle(new Point(sbBorderWidth + offsetX,
                 sbBorderWidth + upImageAdditionalTopHeight),
                 new Size(upArrowImage.Width, upArrowImage.Height)));
 
@@ -1695,7 +1709,7 @@ namespace MusicBeePlugin
 
             //draw spans & thumb background, thumb image(s) will be drawn over it later
             if (scrollBarThumbAndSpansBackBrush != null)
-                e.Graphics.FillRectangle(scrollBarThumbAndSpansBackBrush, new Rectangle(scaledPx + sbBorderWidth + offsetX, 
+                e.Graphics.FillRectangle(scrollBarThumbAndSpansBackBrush, new Rectangle(scaledPx + sbBorderWidth + offsetX,
                     nTop + sbBorderWidth,
                     initialWidth - 2 * sbBorderWidth - scaledPx, nThumbHeight - sbBorderWidth));
 
@@ -1735,16 +1749,16 @@ namespace MusicBeePlugin
 
             //draw bottom image background
             if (scrollBarThumbAndSpansBackBrush != null)
-                e.Graphics.FillRectangle(scrollBarThumbAndSpansBackBrush, new Rectangle(sbBorderWidth + offsetX, 
+                e.Graphics.FillRectangle(scrollBarThumbAndSpansBackBrush, new Rectangle(sbBorderWidth + offsetX,
                     Height - downArrowImage.Height
                     - upImageAdditionalTopHeight - upImageAdditionalBottomHeight - sbBorderWidth,
-                    initialWidth - 2 * sbBorderWidth, downArrowImage.Height 
+                    initialWidth - 2 * sbBorderWidth, downArrowImage.Height
                     + upImageAdditionalTopHeight + upImageAdditionalBottomHeight));
 
             //draw bottom image
             //-1 scaled px vertical offset due to scroll bar bottom border
             //-2 scaled px of width for scroll bar left/right borders
-            e.Graphics.DrawImage(downArrowImage, new Rectangle(new Point(sbBorderWidth + offsetX, 
+            e.Graphics.DrawImage(downArrowImage, new Rectangle(new Point(sbBorderWidth + offsetX,
                 Height - downArrowImage.Height
                 - upImageAdditionalTopHeight - sbBorderWidth),
                 new Size(downArrowImage.Width, downArrowImage.Height)));
@@ -1799,18 +1813,18 @@ namespace MusicBeePlugin
             (int nRealRange, int nPixelRange, int nTrackHeight, int nThumbHeight, float fThumbHeight) = GetMetrics();
 
             int nTop = thumbTop;
-            nTop += upArrowImage.Height + upImageAdditionalTopHeight + upImageAdditionalBottomHeight 
+            nTop += upArrowImage.Height + upImageAdditionalTopHeight + upImageAdditionalBottomHeight
                 + sbBorderWidth; //+1 scaled px to top shift below due to top border
 
 
-            Rectangle thumbRect = new Rectangle(new Point(sbBorderWidth + offsetX, nTop), 
+            Rectangle thumbRect = new Rectangle(new Point(sbBorderWidth + offsetX, nTop),
                 new Size(initialWidth - 2 * sbBorderWidth, nThumbHeight));
-            Rectangle uparrowRect = new Rectangle(new Point(sbBorderWidth + offsetX, sbBorderWidth), 
-                new Size(initialWidth - 2 * sbBorderWidth, (upArrowImage.Height 
+            Rectangle uparrowRect = new Rectangle(new Point(sbBorderWidth + offsetX, sbBorderWidth),
+                new Size(initialWidth - 2 * sbBorderWidth, (upArrowImage.Height
                 + upImageAdditionalTopHeight + upImageAdditionalBottomHeight)));
-            Rectangle downarrowRect = new Rectangle(new Point(sbBorderWidth + offsetX, upArrowImage.Height 
-                + upImageAdditionalTopHeight + upImageAdditionalBottomHeight + sbBorderWidth + nTrackHeight), 
-                new Size(initialWidth - 2 * sbBorderWidth, upArrowImage.Height 
+            Rectangle downarrowRect = new Rectangle(new Point(sbBorderWidth + offsetX, upArrowImage.Height
+                + upImageAdditionalTopHeight + upImageAdditionalBottomHeight + sbBorderWidth + nTrackHeight),
+                new Size(initialWidth - 2 * sbBorderWidth, upArrowImage.Height
                 + upImageAdditionalTopHeight + upImageAdditionalBottomHeight));
 
             if (thumbRect.Contains(ptPoint))
@@ -1865,12 +1879,12 @@ namespace MusicBeePlugin
             }
             else if (thumbRect.Top > ptPoint.Y && thumbRect.Left < ptPoint.X && thumbRect.Left + thumbRect.Width > ptPoint.X)
             {
-                float fScrollDistance = Height - 2 * (upArrowImage.Height 
+                float fScrollDistance = Height - 2 * (upArrowImage.Height
                     + upImageAdditionalTopHeight + upImageAdditionalBottomHeight + sbBorderWidth);
 
                 float fScrollPerc = 0.0f;
                 if (fScrollDistance != 0)
-                    fScrollPerc = ((float)ptPoint.Y - (upArrowImage.Height 
+                    fScrollPerc = ((float)ptPoint.Y - (upArrowImage.Height
                         + upImageAdditionalTopHeight + upImageAdditionalBottomHeight + sbBorderWidth)) / fScrollDistance;
 
                 if (fScrollPerc < 0)
@@ -1888,12 +1902,12 @@ namespace MusicBeePlugin
             }
             else if (thumbRect.Top + thumbRect.Height < ptPoint.Y && thumbRect.Left < ptPoint.X && thumbRect.Left + thumbRect.Width > ptPoint.X)
             {
-                float fScrollDistance = Height - 2 * (upArrowImage.Height 
+                float fScrollDistance = Height - 2 * (upArrowImage.Height
                     + upImageAdditionalTopHeight + upImageAdditionalBottomHeight + sbBorderWidth);
 
                 float fScrollPerc = 0.0f;
                 if (fScrollDistance != 0)
-                    fScrollPerc = 1f - ((float)Height - 2 * (upArrowImage.Height 
+                    fScrollPerc = 1f - ((float)Height - 2 * (upArrowImage.Height
                         + upImageAdditionalTopHeight + upImageAdditionalBottomHeight + sbBorderWidth) - ptPoint.Y) / fScrollDistance;
 
                 if (fScrollPerc > 1)
@@ -1927,7 +1941,7 @@ namespace MusicBeePlugin
             {
                 if (nPixelRange > 0)
                 {
-                    int nNewThumbTop = y - (upArrowImage.Height 
+                    int nNewThumbTop = y - (upArrowImage.Height
                         + upImageAdditionalTopHeight + upImageAdditionalBottomHeight + sbBorderWidth + nSpot);
 
                     if (nNewThumbTop < 0)
@@ -1935,7 +1949,7 @@ namespace MusicBeePlugin
                     else if (nNewThumbTop > nPixelRange)
                         thumbTop = nPixelRange;
                     else
-                        thumbTop = y - (upArrowImage.Height 
+                        thumbTop = y - (upArrowImage.Height
                             + upImageAdditionalTopHeight + upImageAdditionalBottomHeight + sbBorderWidth + nSpot);
 
                     //figure out value
@@ -2061,7 +2075,7 @@ namespace MusicBeePlugin
         }
 
         //refScrollBar must be null if scrolledControl is not a parent of custom scroll bar & scroll bar must be placed below scrolledControl
-        public CustomHScrollBar(Form ownerForm, Control scrolledControl, 
+        public CustomHScrollBar(Form ownerForm, Control scrolledControl,
             GetScrollBarMetricsDelegate getScrollBarMetrics, Control refScrollBar = null)
         {
             InitializeComponent();
@@ -2122,7 +2136,7 @@ namespace MusicBeePlugin
                 Margin = new Padding(0, 0, 0, 0);
 
                 ScrolledControl.Controls.Add(this);
-                
+
                 offsetY = Height - initialHeight;
 
                 refScrollBar.Visible = false;
@@ -2224,7 +2238,7 @@ namespace MusicBeePlugin
             set
             {
                 largeChange = value;
- 
+
                 //figure out thumb left
                 SetThumbLeftFromValueAndLargeChange();
 
@@ -2513,7 +2527,7 @@ namespace MusicBeePlugin
             //+1 scaled px to left shift below due to scroll bar left border,
             //-2 scaled px of size for scroll bar left/right & top/bottom borders
             if (narrowScrollBarBackBrush != null && Height != initialHeight)
-                e.Graphics.FillRectangle(narrowScrollBarBackBrush, new Rectangle(sbBorderWidth, sbBorderWidth + offsetY, 
+                e.Graphics.FillRectangle(narrowScrollBarBackBrush, new Rectangle(sbBorderWidth, sbBorderWidth + offsetY,
                     Width - 2 * sbBorderWidth, initialHeight - 2 * sbBorderWidth));
 
 
@@ -2656,7 +2670,7 @@ namespace MusicBeePlugin
                 new Size(leftArrowImage.Width + leftImageAdditionalLeftWidth + leftImageAdditionalRightWidth,
                 initialHeight - 2 * sbBorderWidth));
             Rectangle rightarrowRect = new Rectangle(new Point(leftArrowImage.Width
-                + leftImageAdditionalLeftWidth + leftImageAdditionalRightWidth + sbBorderWidth + nTrackWidth, 
+                + leftImageAdditionalLeftWidth + leftImageAdditionalRightWidth + sbBorderWidth + nTrackWidth,
                 sbBorderWidth + offsetY),
                 new Size(leftArrowImage.Width + leftImageAdditionalLeftWidth + leftImageAdditionalRightWidth,
                 initialHeight - 2 * sbBorderWidth));

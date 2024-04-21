@@ -231,7 +231,7 @@ namespace MusicBeePlugin
 
                 currentFile = files[fileCounter];
 
-                SetStatusbarTextForFileOperations(ReencodeTagCommandSbText, true, fileCounter, files.Length, currentFile);
+                SetStatusbarTextForFileOperations(ReencodeTagSbText, true, fileCounter, files.Length, currentFile);
 
                 sourceTagValue = GetFileTag(currentFile, sourceTagId);
                 newTagValue = reencode(sourceTagValue);
@@ -297,7 +297,7 @@ namespace MusicBeePlugin
 
                     Invoke(processRowOfTable, new object[] { i });
 
-                    SetStatusbarTextForFileOperations(ReencodeTagCommandSbText, false, i, tags.Count, currentFile);
+                    SetStatusbarTextForFileOperations(ReencodeTagSbText, false, i, tags.Count, currentFile);
 
                     SetFileTag(currentFile, sourceTagId, newTag);
                     CommitTagsToFile(currentFile);

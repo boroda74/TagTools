@@ -1,8 +1,8 @@
-﻿using System;
+﻿using ExtensionMethods;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using ExtensionMethods;
 using static MusicBeePlugin.Plugin;
 
 namespace MusicBeePlugin
@@ -402,7 +402,7 @@ namespace MusicBeePlugin
             checkUncheckAllCheckBox.Checked = !checkUncheckAllCheckBox.Checked;
         }
 
-        private void CopyTagsToClipboardCommand_FormClosed(object sender, FormClosedEventArgs e)
+        private void CopyTagsToClipboard_FormClosed(object sender, FormClosedEventArgs e)
         {
             TagToolsPlugin.addCopyTagsToClipboardUsingMenuItems();
             TagToolsPlugin.addCopyTagsToClipboardUsingContextMenuItems();

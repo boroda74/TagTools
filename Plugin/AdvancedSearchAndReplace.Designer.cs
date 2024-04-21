@@ -192,7 +192,7 @@ namespace MusicBeePlugin
             this.SuspendLayout();
 
             //MusicBee
-            this.presetList = new CustomCheckedListBox();
+            this.presetList = new CustomCheckedListBox(Plugin.SavedSettings.dontUseSkinColors);
             this.searchTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
             this.customTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
             this.customText2Box = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
@@ -258,7 +258,7 @@ namespace MusicBeePlugin
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.ControlDark;
             this.splitContainer1.Panel2.Controls.Add(this.panel2);
             this.dirtyErrorProvider.SetIconAlignment(this.splitContainer1.Panel2, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("splitContainer1.Panel2.IconAlignment"))));
-            this.splitContainer1.Tag = "#AdvancedSearchAndReplaceCommand&AdvancedSearchAndReplaceCommand";
+            this.splitContainer1.Tag = "#AdvancedSearchAndReplace&AdvancedSearchAndReplace";
             this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
             // 
             // tableLayoutPanel4
@@ -1240,7 +1240,7 @@ namespace MusicBeePlugin
             this.autoApplyPresetsLabel.AutoEllipsis = true;
             this.dirtyErrorProvider.SetIconAlignment(this.autoApplyPresetsLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("autoApplyPresetsLabel.IconAlignment"))));
             this.autoApplyPresetsLabel.Name = "autoApplyPresetsLabel";
-            this.autoApplyPresetsLabel.Tag = "#AdvancedSearchAndReplaceCommand&filtersPanel";
+            this.autoApplyPresetsLabel.Tag = "#AdvancedSearchAndReplace&filtersPanel";
             this.autoApplyPresetsLabel.Click += new System.EventHandler(this.label5_Click);
             // 
             // searchPictureBox
@@ -1270,7 +1270,7 @@ namespace MusicBeePlugin
             this.filtersPanel.Controls.Add(this.searchPictureBox);
             this.dirtyErrorProvider.SetIconAlignment(this.filtersPanel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("filtersPanel.IconAlignment"))));
             this.filtersPanel.Name = "filtersPanel";
-            this.filtersPanel.Tag = "#AdvancedSearchAndReplaceCommand&splitContainer1";
+            this.filtersPanel.Tag = "#AdvancedSearchAndReplace&splitContainer1";
             // 
             // dirtyErrorProvider
             // 
@@ -1279,7 +1279,7 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.ContainerControl = this;
             resources.ApplyResources(this.dirtyErrorProvider, "dirtyErrorProvider");
             // 
-            // AdvancedSearchAndReplaceCommand
+            // AdvancedSearchAndReplace
             // 
             this.AcceptButton = this.buttonPreview;
             resources.ApplyResources(this, "$this");
@@ -1288,9 +1288,9 @@ namespace MusicBeePlugin
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.autoApplyPresetsLabel);
             this.Controls.Add(this.filtersPanel);
-            this.Name = "AdvancedSearchAndReplaceCommand";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AdvancedSearchAndReplaceCommand_FormClosing);
-            this.Load += new System.EventHandler(this.AdvancedSearchAndReplaceCommand_Load);
+            this.Name = "AdvancedSearchAndReplace";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AdvancedSearchAndReplace_FormClosing);
+            this.Load += new System.EventHandler(this.AdvancedSearchAndReplace_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();

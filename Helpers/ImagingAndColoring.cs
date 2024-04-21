@@ -2,7 +2,6 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-using System.Windows.Forms;
 
 
 namespace MusicBeePlugin
@@ -436,7 +435,7 @@ namespace MusicBeePlugin
             return alphaBlendedImage.AlphaBlendImages();
         }
 
-        internal static Bitmap GetSolidImageByBitmapMask(Color foreColor, Bitmap maskBitmap, int newWidth, int newHeight, 
+        internal static Bitmap GetSolidImageByBitmapMask(Color foreColor, Bitmap maskBitmap, int newWidth, int newHeight,
             bool invertedMask = true, InterpolationMode interpolationMode = InterpolationMode.HighQualityBicubic)
         {
             Bitmap scaledForeColorFilledBitmap = FillBitmapByColor(foreColor, PixelFormat.Format32bppArgb, newWidth, newHeight);
@@ -449,8 +448,8 @@ namespace MusicBeePlugin
             return alphaBlendedImage.AlphaBlendImages();
         }
 
-        internal static Bitmap GetSolidImageByBitmapMask(Color foreColor, Color backColor, Bitmap maskBitmap, 
-            int newWidth, int newHeight, bool invertedMask = true, 
+        internal static Bitmap GetSolidImageByBitmapMask(Color foreColor, Color backColor, Bitmap maskBitmap,
+            int newWidth, int newHeight, bool invertedMask = true,
             InterpolationMode interpolationMode = InterpolationMode.HighQualityBicubic)
         {
             Bitmap scaledForeColorFilledBitmap = FillBitmapByColor(foreColor, PixelFormat.Format32bppArgb, newWidth, newHeight);
@@ -465,9 +464,9 @@ namespace MusicBeePlugin
 
         internal static Bitmap ApplyMaskToImage(Bitmap image, Bitmap maskBitmap, int newWidth, int newHeight, bool invertedMask)
         {
-            Bitmap scaledImage = ScaleBitmap(image, PixelFormat.Format32bppArgb, InterpolationMode.HighQualityBicubic, 
+            Bitmap scaledImage = ScaleBitmap(image, PixelFormat.Format32bppArgb, InterpolationMode.HighQualityBicubic,
                 newWidth, newHeight);
-            Bitmap scaledMaskBitmap = ScaleBitmap(maskBitmap, PixelFormat.Format32bppArgb, InterpolationMode.HighQualityBicubic, 
+            Bitmap scaledMaskBitmap = ScaleBitmap(maskBitmap, PixelFormat.Format32bppArgb, InterpolationMode.HighQualityBicubic,
                 newWidth, newHeight);
             AlphaBlendedImage alphaBlendedImage = new AlphaBlendedImage(scaledImage, scaledMaskBitmap, invertedMask);
 
@@ -514,7 +513,7 @@ namespace MusicBeePlugin
                 //now rotate the image
                 gfx.RotateTransform(rotationAngle);
                 gfx.TranslateTransform(-(float)rotatedBitmap.Width / 2, -(float)rotatedBitmap.Height / 2);
-                
+
                 //now draw our new image onto the graphics object
                 gfx.DrawImage(bitmap, new Point(0, 0));
             }

@@ -1079,7 +1079,7 @@ namespace MusicBeePlugin
             fillTable(searchFolderTextBoxCustom.Text, false, (int)numberOfBackupsNumericUpDown.Value, 0, false, false);
         }
 
-        private void TagHistoryCommand_Load(object sender, EventArgs e)
+        private void TagHistory_Load(object sender, EventArgs e)
         {
             placeholderLabel3.Visible = false;
         }

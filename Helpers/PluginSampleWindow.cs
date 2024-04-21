@@ -1,6 +1,4 @@
-﻿using System.Windows.Forms;
-
-namespace MusicBeePlugin
+﻿namespace MusicBeePlugin
 {
     public partial class PluginSampleWindow : PluginWindowTemplate
     {

@@ -885,7 +885,7 @@
     <value>8</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>ReencodeTagsCommand</value>
+    <value>ReencodeTags</value>
   </data>
   <data name="label2.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>

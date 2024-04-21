@@ -8,7 +8,6 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 using static MusicBeePlugin.Plugin;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace MusicBeePlugin
 {
@@ -150,10 +149,10 @@ namespace MusicBeePlugin
             return false;
         }
 
-        internal void SetComboBoxCue(CustomComboBox comboBox, string cue)
+        internal void SetComboBoxCue(CustomComboBox comboBox, string cue, bool forceCue = false)
         {
             controlCueBanners.AddReplace(comboBox, cue);
-            comboBox.SetCue(cue);
+            comboBox.SetCue(cue, forceCue);
         }
 
         internal void SetComboBoxCue(ComboBox comboBox, string cue)
@@ -408,7 +407,7 @@ namespace MusicBeePlugin
             bool scaledMovedL = false, bool scaledMovedR = false, bool scaledMovedT = false, bool scaledMovedB = false,
             string[] control2NamesX = null, string[] control2NamesY = null, params string[] remarks)
         {
-            (_, string[] oldControl2NamesXArray, string[] oldControl2NamesYArray, bool scaledMovedOldL, bool scaledMovedOldR, bool scaledMovedOldT, bool scaledMovedOldB, string[] oldRemarks) = 
+            (_, string[] oldControl2NamesXArray, string[] oldControl2NamesYArray, bool scaledMovedOldL, bool scaledMovedOldR, bool scaledMovedOldT, bool scaledMovedOldB, string[] oldRemarks) =
                 GetControlTagReferredNamesMarksRemarks(control);
 
             List<string> oldControl2NamesX = oldControl2NamesXArray.ToList();
@@ -566,7 +565,7 @@ namespace MusicBeePlugin
         //Returns X referred controls array, int - array of scrolledControl levelX if control2X is ancestor, otherwise 0, then the same for Y
         internal static (Control[], int[], Control[], int[]) GetReferredControls(Control control)
         {
-            (_, string[] control2NamesX, string[] control2NamesY, _, _, _, _, _) = 
+            (_, string[] control2NamesX, string[] control2NamesY, _, _, _, _, _) =
                 GetControlTagReferredNamesMarksRemarks(control);
 
             Control[] controls2X = new Control[control2NamesX.Length];
@@ -1363,7 +1362,7 @@ namespace MusicBeePlugin
 
                 if (dataGridView.RowCount > 0)
                 {
-                    int lastTopDisplayedRow = dataGridView.RowCount - dataGridView.DisplayedRowCount(false);
+                    int lastTopDisplayedRow = dataGridView.RowCount - dataGridView.DisplayedRowCount(true);
                     if (lastTopDisplayedRow < 0)
                         lastTopDisplayedRow = 0;
 
@@ -1388,8 +1387,8 @@ namespace MusicBeePlugin
                         dataGridView.HorizontalScrollingOffset = 0;
                     else if (dataGridView.HorizontalScrollingOffset + delta > dataGridView.RowHeadersWidth +
                         dataGridView.Columns.GetColumnsWidth(DataGridViewElementStates.Visible) - 1)
-                            dataGridView.HorizontalScrollingOffset = dataGridView.RowHeadersWidth +
-                            dataGridView.Columns.GetColumnsWidth(DataGridViewElementStates.Visible) - 1;
+                        dataGridView.HorizontalScrollingOffset = dataGridView.RowHeadersWidth +
+                        dataGridView.Columns.GetColumnsWidth(DataGridViewElementStates.Visible) - 1;
                     else
                         dataGridView.HorizontalScrollingOffset += delta;
                 }
@@ -1834,7 +1833,7 @@ namespace MusicBeePlugin
 
             (int totalLines, int visibleLines) = GetTextBoxMetrics(textBox);
 
-            if (refScrollBar is CustomVScrollBar && totalLines  > 0)
+            if (refScrollBar is CustomVScrollBar && totalLines > 0)
                 return (0, totalLines, visibleLines);
             else if (refScrollBar is CustomVScrollBar)
                 return (0, 1, 1);
@@ -2390,7 +2389,7 @@ namespace MusicBeePlugin
 
                     listBox.SelectedIndexChanged += listBox_SelectedIndexChanged;
                     listBox.MouseWheel += listBox_MouseWheel;
-                        
+
                     if (listBox is CustomListBox || listBox is CustomCheckedListBox)
                         listBox.SizeChanged += customScrollBarCustomListBox_SizeChanged;
                     else
@@ -3215,8 +3214,8 @@ namespace MusicBeePlugin
         {
             var windowSettings = findCreateSavedWindowSettings(false);
 
-            if (windowSettings != null 
-                && windowSettings.x + windowSettings.w >= 0 
+            if (windowSettings != null
+                && windowSettings.x + windowSettings.w >= 0
                 && windowSettings.y + windowSettings.h >= 0
             )
             {

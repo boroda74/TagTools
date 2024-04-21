@@ -131,7 +131,7 @@
             this.previewTable.Name = "previewTable";
             this.previewTable.RowHeadersVisible = false;
             this.previewTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.previewTable.Tag = "#ReencodeTagCommand&ReencodeTagCommand@pinned-to-parent-x";
+            this.previewTable.Tag = "#ReencodeTag&ReencodeTag@pinned-to-parent-x";
             this.previewTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.previewTable_CellContentClick);
             // 
             // File
@@ -203,9 +203,9 @@
             this.controlsPanel.Controls.Add(this.sourceTagList);
             this.controlsPanel.Controls.Add(this.label1);
             this.controlsPanel.Name = "controlsPanel";
-            this.controlsPanel.Tag = "#ReencodeTagCommand&previewTable@pinned-to-parent-x";
+            this.controlsPanel.Tag = "#ReencodeTag&previewTable@pinned-to-parent-x";
             // 
-            // ReencodeTagCommand
+            // ReencodeTag
             // 
             this.AcceptButton = this.buttonPreview;
             resources.ApplyResources(this, "$this");
@@ -213,7 +213,7 @@
             this.CancelButton = this.buttonCancel;
             this.Controls.Add(this.previewTable);
             this.Controls.Add(this.controlsPanel);
-            this.Name = "ReencodeTagCommand";
+            this.Name = "ReencodeTag";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ReencodeTagPlugin_FormClosing);
             this.Load += new System.EventHandler(this.ReencodeTagPlugin_Load);
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).EndInit();

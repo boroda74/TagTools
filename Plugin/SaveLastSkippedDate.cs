@@ -1,6 +1,5 @@
 ﻿using ExtensionMethods;
 using System;
-using System.Windows.Forms;
 using static MusicBeePlugin.Plugin;
 
 namespace MusicBeePlugin
@@ -76,7 +75,7 @@ namespace MusicBeePlugin
             saveLastSkippedCheckBox.Checked = !saveLastSkippedCheckBox.Checked;
         }
 
-        private void SaveLastSkippedCommand_Load(object sender, EventArgs e)
+        private void SaveLastSkippedDate_Load(object sender, EventArgs e)
         {
             placeholderCheckBox.Visible = false;
         }

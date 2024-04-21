@@ -530,7 +530,7 @@ namespace MusicBeePlugin
             rememberColumnAsDefaultWidthCheckBox.Checked = !rememberColumnAsDefaultWidthCheckBox.Checked;
         }
 
-        private void CompareTracksCommand_Load(object sender, EventArgs e)
+        private void CompareTracks_Load(object sender, EventArgs e)
         {
             placeholderLabel.Visible = false;
         }

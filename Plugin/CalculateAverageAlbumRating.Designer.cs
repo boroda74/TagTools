@@ -68,7 +68,7 @@
             // 
             resources.ApplyResources(this.buttonSave, "buttonSave");
             this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Tag = "#&CalculateAverageAlbumRatingCommand@non-defaultable";
+            this.buttonSave.Tag = "#&CalculateAverageAlbumRating@non-defaultable";
             this.buttonSave.Click += new System.EventHandler(this.button1_Click);
             // 
             // buttonCancel
@@ -76,7 +76,7 @@
             resources.ApplyResources(this.buttonCancel, "buttonCancel");
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Tag = "#CalculateAverageAlbumRatingCommand&CalculateAverageAlbumRatingCommand@non-defaul" +
+            this.buttonCancel.Tag = "#CalculateAverageAlbumRating&CalculateAverageAlbumRating@non-defaul" +
     "table";
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
@@ -85,7 +85,7 @@
             resources.ApplyResources(this.buttonOK, "buttonOK");
             this.dirtyErrorProvider.SetError(this.buttonOK, resources.GetString("buttonOK.Error"));
             this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Tag = "#buttonSave&CalculateAverageAlbumRatingCommand@pinned-to-parent-x";
+            this.buttonOK.Tag = "#buttonSave&CalculateAverageAlbumRating@pinned-to-parent-x";
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // label1
@@ -127,7 +127,7 @@
             this.albumRatingTagList.DropDownWidth = 250;
             this.albumRatingTagList.FormattingEnabled = true;
             this.albumRatingTagList.Name = "albumRatingTagList";
-            this.albumRatingTagList.Tag = "#CalculateAverageAlbumRatingCommand";
+            this.albumRatingTagList.Tag = "#CalculateAverageAlbumRating";
             // 
             // label3
             // 
@@ -173,10 +173,10 @@
             this.dirtyErrorProvider.SetIconAlignment(this.buttonSettings, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonSettings.IconAlignment"))));
             this.buttonSettings.Image = global::MusicBeePlugin.Properties.Resources.gear_15;
             this.buttonSettings.Name = "buttonSettings";
-            this.buttonSettings.Tag = "#buttonCancel&CalculateAverageAlbumRatingCommand@non-defaultable@square-control";
+            this.buttonSettings.Tag = "#buttonCancel&CalculateAverageAlbumRating@non-defaultable@square-control";
             this.buttonSettings.Click += new System.EventHandler(this.buttonSettings_Click);
             // 
-            // CalculateAverageAlbumRatingCommand
+            // CalculateAverageAlbumRating
             // 
             this.AcceptButton = this.buttonOK;
             resources.ApplyResources(this, "$this");
@@ -199,7 +199,7 @@
             this.Controls.Add(this.calculateAlbumRatingAtStartUpCheckBoxLabel);
             this.Controls.Add(this.calculateAlbumRatingAtStartUpCheckBox);
             this.Controls.Add(this.label1);
-            this.Name = "CalculateAverageAlbumRatingCommand";
+            this.Name = "CalculateAverageAlbumRating";
             this.Tag = "@min-max-width-same@min-max-height-same";
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).EndInit();
             this.ResumeLayout(false);

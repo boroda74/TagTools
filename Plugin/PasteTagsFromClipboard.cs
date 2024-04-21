@@ -150,7 +150,7 @@ namespace MusicBeePlugin
                         {
                             MessageBox.Show(MbForm, MsgWrongNumberOfCopiedTags
                                 .Replace("%%CLIPBOARD-TAGS-COUNT%%", tags.Length.ToString())
-                                .Replace("%%CLIPBOARD-LINE%%", l.ToString()), 
+                                .Replace("%%CLIPBOARD-LINE%%", l.ToString()),
                                 string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             return false;
                         }
@@ -205,7 +205,7 @@ namespace MusicBeePlugin
                 return PasteTagsFromClipboard(tagToolsPluginParam, files, fileTags);
             else if (!autoPaste && matchTagIndex > -1)
                 return false;
-            
+
 
             return true;
         }

@@ -81,7 +81,7 @@ namespace MusicBeePlugin
             this.tableLayoutPanel1.Controls.Add(this.uncheckedSourceTagLabel, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.checkedSourceTagLabel, 0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.Tag = "#CopyTagsToClipboardCommand&controlsPanel";
+            this.tableLayoutPanel1.Tag = "#CopyTagsToClipboard&controlsPanel";
             // 
             // sourceTagList
             // 
@@ -114,7 +114,7 @@ namespace MusicBeePlugin
             resources.ApplyResources(this.tagSetComboBox, "tagSetComboBox");
             this.tagSetComboBox.FormattingEnabled = true;
             this.tagSetComboBox.Name = "tagSetComboBox";
-            this.tagSetComboBox.Tag = "#CopyTagsToClipboardCommand&tableLayoutPanel1";
+            this.tagSetComboBox.Tag = "#CopyTagsToClipboard&tableLayoutPanel1";
             this.toolTip1.SetToolTip(this.tagSetComboBox, resources.GetString("tagSetComboBox.ToolTip"));
             this.tagSetComboBox.DropDownClosed += new System.EventHandler(this.tagSetComboBox_DropDownClosed);
             this.tagSetComboBox.TextChanged += new System.EventHandler(this.tagSetComboBox_TextChanged);
@@ -154,16 +154,16 @@ namespace MusicBeePlugin
             this.controlsPanel.Controls.Add(this.checkUncheckAllCheckBox);
             this.controlsPanel.Controls.Add(this.label1);
             this.controlsPanel.Name = "controlsPanel";
-            this.controlsPanel.Tag = "#&CopyTagsToClipboardCommand";
+            this.controlsPanel.Tag = "#&CopyTagsToClipboard";
             // 
             // infoLabel
             // 
             resources.ApplyResources(this.infoLabel, "infoLabel");
             this.infoLabel.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.infoLabel.Name = "infoLabel";
-            this.infoLabel.Tag = "#CopyTagsToClipboardCommand&tagSetComboBox@pinned-to-parent-y";
+            this.infoLabel.Tag = "#CopyTagsToClipboard&tagSetComboBox@pinned-to-parent-y";
             // 
-            // CopyTagsToClipboardCommand
+            // CopyTagsToClipboard
             // 
             this.AcceptButton = this.buttonOK;
             resources.ApplyResources(this, "$this");
@@ -175,9 +175,9 @@ namespace MusicBeePlugin
             this.Controls.Add(this.tagSetComboBox);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "CopyTagsToClipboardCommand";
+            this.Name = "CopyTagsToClipboard";
             this.Tag = "";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CopyTagsToClipboardCommand_FormClosed);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CopyTagsToClipboard_FormClosed);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.controlsPanel.ResumeLayout(false);

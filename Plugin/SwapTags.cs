@@ -78,7 +78,7 @@ namespace MusicBeePlugin
 
                 currentFile = files[fileCounter];
 
-                SetStatusbarTextForFileOperations(SwapTagsCommandSbText, false, fileCounter, files.Length, currentFile);
+                SetStatusbarTextForFileOperations(SwapTagsSbText, false, fileCounter, files.Length, currentFile);
 
                 sourceTagValue = GetFileTag(currentFile, sourceTagId);
                 destinationTagValue = GetFileTag(currentFile, destinationTagId);

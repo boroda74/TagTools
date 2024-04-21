@@ -129,7 +129,7 @@
             this.previewTable.Name = "previewTable";
             this.previewTable.RowHeadersVisible = false;
             this.previewTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.previewTable.Tag = "#ReencodeTagsCommand&ReencodeTagsCommand@pinned-to-parent-x";
+            this.previewTable.Tag = "#ReencodeTags&ReencodeTags@pinned-to-parent-x";
             this.previewTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.previewTable_CellContentClick);
             this.previewTable.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.previewTable_CellContentDoubleClick);
             // 
@@ -260,9 +260,9 @@
             this.dirtyErrorProvider.SetIconAlignment(this.controlsPanel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("controlsPanel.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.controlsPanel, ((int)(resources.GetObject("controlsPanel.IconPadding"))));
             this.controlsPanel.Name = "controlsPanel";
-            this.controlsPanel.Tag = "#ReencodeTagsCommand&previewTable@pinned-to-parent-x";
+            this.controlsPanel.Tag = "#ReencodeTags&previewTable@pinned-to-parent-x";
             // 
-            // ReencodeTagsCommand
+            // ReencodeTags
             // 
             this.AcceptButton = this.buttonPreview;
             resources.ApplyResources(this, "$this");
@@ -270,9 +270,9 @@
             this.CancelButton = this.buttonCancel;
             this.Controls.Add(this.previewTable);
             this.Controls.Add(this.controlsPanel);
-            this.Name = "ReencodeTagsCommand";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ReencodeTagsCommand_FormClosing);
-            this.Load += new System.EventHandler(this.ReencodeTagsCommand_Load);
+            this.Name = "ReencodeTags";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ReencodeTags_FormClosing);
+            this.Load += new System.EventHandler(this.ReencodeTags_Load);
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).EndInit();
             this.controlsPanel.ResumeLayout(false);

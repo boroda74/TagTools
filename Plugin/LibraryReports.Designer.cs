@@ -66,10 +66,8 @@
             this.openReportCheckBoxPicture = new System.Windows.Forms.PictureBox();
             this.openReportCheckBoxLabel = new System.Windows.Forms.Label();
             this.openReportCheckBox = new System.Windows.Forms.CheckBox();
-            this.yArtworkSizeUpDown = new System.Windows.Forms.NumericUpDown();
-            this.xArtworkSizeUpDown = new System.Windows.Forms.NumericUpDown();
-            this.labelPx = new System.Windows.Forms.Label();
-            this.labelXxY = new System.Windows.Forms.Label();
+            this.newArtworkSizeUpDown = new System.Windows.Forms.NumericUpDown();
+            this.labelRemark = new System.Windows.Forms.Label();
             this.resizeArtworkCheckBoxLabel = new System.Windows.Forms.Label();
             this.resizeArtworkCheckBox = new System.Windows.Forms.CheckBox();
             this.totalsCheckBoxLabel = new System.Windows.Forms.Label();
@@ -139,8 +137,7 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.openReportCheckBoxPicture)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.yArtworkSizeUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.xArtworkSizeUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.newArtworkSizeUpDown)).BeginInit();
             this.listBoxTableLayoutPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             this.presetTabControl.SuspendLayout();
@@ -156,7 +153,7 @@
             this.SuspendLayout();
 
             //MusicBee
-            this.presetList = new CustomCheckedListBox();
+            this.presetList = new CustomCheckedListBox(Plugin.SavedSettings.dontUseSkinColors);
             this.presetNameTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
             this.appendTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
             this.idTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
@@ -192,7 +189,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.splitContainer1.Panel2, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("splitContainer1.Panel2.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.splitContainer1.Panel2, ((int)(resources.GetObject("splitContainer1.Panel2.IconPadding"))));
             this.toolTip1.SetToolTip(this.splitContainer1.Panel2, resources.GetString("splitContainer1.Panel2.ToolTip"));
-            this.splitContainer1.Tag = "#LibraryReportsCommand&LibraryReportsCommand@pinned-to-parent-x";
+            this.splitContainer1.Tag = "#LibraryReports&LibraryReports@pinned-to-parent-x";
             this.toolTip1.SetToolTip(this.splitContainer1, resources.GetString("splitContainer1.ToolTip"));
             this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
             // 
@@ -236,10 +233,8 @@
             this.panel1.Controls.Add(this.openReportCheckBoxPicture);
             this.panel1.Controls.Add(this.openReportCheckBoxLabel);
             this.panel1.Controls.Add(this.openReportCheckBox);
-            this.panel1.Controls.Add(this.yArtworkSizeUpDown);
-            this.panel1.Controls.Add(this.xArtworkSizeUpDown);
-            this.panel1.Controls.Add(this.labelPx);
-            this.panel1.Controls.Add(this.labelXxY);
+            this.panel1.Controls.Add(this.newArtworkSizeUpDown);
+            this.panel1.Controls.Add(this.labelRemark);
             this.panel1.Controls.Add(this.resizeArtworkCheckBoxLabel);
             this.panel1.Controls.Add(this.resizeArtworkCheckBox);
             this.panel1.Controls.Add(this.totalsCheckBoxLabel);
@@ -583,76 +578,41 @@
             this.openReportCheckBox.Tag = "#openReportCheckBoxLabel|openReportCheckBoxPicture";
             this.toolTip1.SetToolTip(this.openReportCheckBox, resources.GetString("openReportCheckBox.ToolTip"));
             // 
-            // yArtworkSizeUpDown
+            // newArtworkSizeUpDown
             // 
-            resources.ApplyResources(this.yArtworkSizeUpDown, "yArtworkSizeUpDown");
-            this.dirtyErrorProvider.SetError(this.yArtworkSizeUpDown, resources.GetString("yArtworkSizeUpDown.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.yArtworkSizeUpDown, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("yArtworkSizeUpDown.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.yArtworkSizeUpDown, ((int)(resources.GetObject("yArtworkSizeUpDown.IconPadding"))));
-            this.yArtworkSizeUpDown.Maximum = new decimal(new int[] {
+            resources.ApplyResources(this.newArtworkSizeUpDown, "newArtworkSizeUpDown");
+            this.dirtyErrorProvider.SetError(this.newArtworkSizeUpDown, resources.GetString("newArtworkSizeUpDown.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.newArtworkSizeUpDown, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("newArtworkSizeUpDown.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.newArtworkSizeUpDown, ((int)(resources.GetObject("newArtworkSizeUpDown.IconPadding"))));
+            this.newArtworkSizeUpDown.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
-            this.yArtworkSizeUpDown.Minimum = new decimal(new int[] {
+            this.newArtworkSizeUpDown.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.yArtworkSizeUpDown.Name = "yArtworkSizeUpDown";
-            this.yArtworkSizeUpDown.Tag = "#labelPx";
-            this.toolTip1.SetToolTip(this.yArtworkSizeUpDown, resources.GetString("yArtworkSizeUpDown.ToolTip"));
-            this.yArtworkSizeUpDown.Value = new decimal(new int[] {
+            this.newArtworkSizeUpDown.Name = "newArtworkSizeUpDown";
+            this.newArtworkSizeUpDown.Tag = "#labelRemark";
+            this.toolTip1.SetToolTip(this.newArtworkSizeUpDown, resources.GetString("newArtworkSizeUpDown.ToolTip"));
+            this.newArtworkSizeUpDown.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.yArtworkSizeUpDown.ValueChanged += new System.EventHandler(this.yArtworkSizeUpDown_ValueChanged);
+            this.newArtworkSizeUpDown.ValueChanged += new System.EventHandler(this.newArtworkSizeUpDown_ValueChanged);
             // 
-            // xArtworkSizeUpDown
+            // labelRemark
             // 
-            resources.ApplyResources(this.xArtworkSizeUpDown, "xArtworkSizeUpDown");
-            this.dirtyErrorProvider.SetError(this.xArtworkSizeUpDown, resources.GetString("xArtworkSizeUpDown.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.xArtworkSizeUpDown, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("xArtworkSizeUpDown.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.xArtworkSizeUpDown, ((int)(resources.GetObject("xArtworkSizeUpDown.IconPadding"))));
-            this.xArtworkSizeUpDown.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.xArtworkSizeUpDown.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.xArtworkSizeUpDown.Name = "xArtworkSizeUpDown";
-            this.xArtworkSizeUpDown.Tag = "#labelXxY";
-            this.toolTip1.SetToolTip(this.xArtworkSizeUpDown, resources.GetString("xArtworkSizeUpDown.ToolTip"));
-            this.xArtworkSizeUpDown.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.xArtworkSizeUpDown.ValueChanged += new System.EventHandler(this.xArtworkSizeUpDown_ValueChanged);
-            // 
-            // labelPx
-            // 
-            resources.ApplyResources(this.labelPx, "labelPx");
-            this.dirtyErrorProvider.SetError(this.labelPx, resources.GetString("labelPx.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.labelPx, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("labelPx.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.labelPx, ((int)(resources.GetObject("labelPx.IconPadding"))));
-            this.labelPx.Name = "labelPx";
-            this.toolTip1.SetToolTip(this.labelPx, resources.GetString("labelPx.ToolTip"));
-            // 
-            // labelXxY
-            // 
-            resources.ApplyResources(this.labelXxY, "labelXxY");
-            this.dirtyErrorProvider.SetError(this.labelXxY, resources.GetString("labelXxY.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.labelXxY, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("labelXxY.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.labelXxY, ((int)(resources.GetObject("labelXxY.IconPadding"))));
-            this.labelXxY.Name = "labelXxY";
-            this.labelXxY.Tag = "#yArtworkSizeUpDown";
-            this.toolTip1.SetToolTip(this.labelXxY, resources.GetString("labelXxY.ToolTip"));
+            resources.ApplyResources(this.labelRemark, "labelRemark");
+            this.dirtyErrorProvider.SetError(this.labelRemark, resources.GetString("labelRemark.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.labelRemark, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("labelRemark.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.labelRemark, ((int)(resources.GetObject("labelRemark.IconPadding"))));
+            this.labelRemark.Name = "labelRemark";
+            this.labelRemark.Tag = "";
+            this.toolTip1.SetToolTip(this.labelRemark, resources.GetString("labelRemark.ToolTip"));
             // 
             // resizeArtworkCheckBoxLabel
             // 
@@ -661,7 +621,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.resizeArtworkCheckBoxLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("resizeArtworkCheckBoxLabel.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.resizeArtworkCheckBoxLabel, ((int)(resources.GetObject("resizeArtworkCheckBoxLabel.IconPadding"))));
             this.resizeArtworkCheckBoxLabel.Name = "resizeArtworkCheckBoxLabel";
-            this.resizeArtworkCheckBoxLabel.Tag = "#xArtworkSizeUpDown";
+            this.resizeArtworkCheckBoxLabel.Tag = "#newArtworkSizeUpDown";
             this.toolTip1.SetToolTip(this.resizeArtworkCheckBoxLabel, resources.GetString("resizeArtworkCheckBoxLabel.ToolTip"));
             this.resizeArtworkCheckBoxLabel.Click += new System.EventHandler(this.resizeArtworkCheckBoxLabel_Click);
             // 
@@ -1174,7 +1134,6 @@
             this.toolTip1.SetToolTip(this.multipleItemsSplitterComboBox, resources.GetString("multipleItemsSplitterComboBox.ToolTip"));
             this.multipleItemsSplitterComboBox.SelectedIndexChanged += new System.EventHandler(this.multipleItemsSplitterComboBox_SelectedIndexChanged);
             this.multipleItemsSplitterComboBox.TextUpdate += new System.EventHandler(this.multipleItemsSplitterComboBox_TextUpdate);
-            this.multipleItemsSplitterComboBox.DropDownClosed += new System.EventHandler(this.multipleItemsSplitterComboBox_DropDownClosed);
             // 
             // multipleItemsSplitterLabel
             // 
@@ -1324,7 +1283,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.autoApplyPresetsLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("autoApplyPresetsLabel.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.autoApplyPresetsLabel, ((int)(resources.GetObject("autoApplyPresetsLabel.IconPadding"))));
             this.autoApplyPresetsLabel.Name = "autoApplyPresetsLabel";
-            this.autoApplyPresetsLabel.Tag = "#LibraryReportsCommand&autoApplyPanel@pinned-to-parent-x";
+            this.autoApplyPresetsLabel.Tag = "#LibraryReports&autoApplyPanel@pinned-to-parent-x";
             this.toolTip1.SetToolTip(this.autoApplyPresetsLabel, resources.GetString("autoApplyPresetsLabel.ToolTip"));
             // 
             // dirtyErrorProvider
@@ -1407,10 +1366,10 @@
             this.dirtyErrorProvider.SetIconAlignment(this.autoApplyPanel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("autoApplyPanel.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.autoApplyPanel, ((int)(resources.GetObject("autoApplyPanel.IconPadding"))));
             this.autoApplyPanel.Name = "autoApplyPanel";
-            this.autoApplyPanel.Tag = "#LibraryReportsCommand&splitContainer1@pinned-to-parent-x";
+            this.autoApplyPanel.Tag = "#LibraryReports&splitContainer1@pinned-to-parent-x";
             this.toolTip1.SetToolTip(this.autoApplyPanel, resources.GetString("autoApplyPanel.ToolTip"));
             // 
-            // LibraryReportsCommand
+            // LibraryReports
             // 
             this.AcceptButton = this.buttonPreview;
             resources.ApplyResources(this, "$this");
@@ -1419,10 +1378,10 @@
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.autoApplyPresetsLabel);
             this.Controls.Add(this.autoApplyPanel);
-            this.Name = "LibraryReportsCommand";
+            this.Name = "LibraryReports";
             this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LibraryReportsCommand_FormClosing);
-            this.Load += new System.EventHandler(this.LibraryReportsCommand_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LibraryReports_FormClosing);
+            this.Load += new System.EventHandler(this.LibraryReports_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -1431,8 +1390,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.openReportCheckBoxPicture)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.yArtworkSizeUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.xArtworkSizeUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.newArtworkSizeUpDown)).EndInit();
             this.listBoxTableLayoutPanel.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.presetTabControl.ResumeLayout(false);
@@ -1468,10 +1426,8 @@
         private System.Windows.Forms.ComboBox functionComboBox;
         private System.Windows.Forms.Label labelFunction;
         private System.Windows.Forms.ComboBox parameter2ComboBox;
-        private System.Windows.Forms.Label labelPx;
-        private System.Windows.Forms.NumericUpDown yArtworkSizeUpDown;
-        private System.Windows.Forms.Label labelXxY;
-        private System.Windows.Forms.NumericUpDown xArtworkSizeUpDown;
+        private System.Windows.Forms.Label labelRemark;
+        private System.Windows.Forms.NumericUpDown newArtworkSizeUpDown;
         private System.Windows.Forms.CheckBox resizeArtworkCheckBox;
         private System.Windows.Forms.CheckBox openReportCheckBox;
         private System.Windows.Forms.ToolTip toolTip1;

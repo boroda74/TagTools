@@ -2452,7 +2452,7 @@ already generated, but not yet saved "New tag"</value>
     <value>Set excepted words a default for Advanced search &amp; replace presets</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>ChangeCaseCommand</value>
+    <value>ChangeCase</value>
   </data>
   <data name="exceptionWordsCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>

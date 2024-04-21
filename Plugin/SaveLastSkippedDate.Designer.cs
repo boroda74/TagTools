@@ -47,21 +47,21 @@
             this.lastSkippedTagList.DropDownWidth = 250;
             this.lastSkippedTagList.FormattingEnabled = true;
             this.lastSkippedTagList.Name = "lastSkippedTagList";
-            this.lastSkippedTagList.Tag = "#SaveLastSkippedCommand";
+            this.lastSkippedTagList.Tag = "#SaveLastSkippedDate";
             // 
             // buttonCancel
             // 
             resources.ApplyResources(this.buttonCancel, "buttonCancel");
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Tag = "#SaveLastSkippedCommand&SaveLastSkippedCommand@non-defaultable";
+            this.buttonCancel.Tag = "#SaveLastSkippedDate&SaveLastSkippedDate@non-defaultable";
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // buttonOK
             // 
             resources.ApplyResources(this.buttonOK, "buttonOK");
             this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Tag = "#buttonCancel&SaveLastSkippedCommand";
+            this.buttonOK.Tag = "#buttonCancel&SaveLastSkippedDate";
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // saveLastSkippedCheckBox
@@ -83,7 +83,7 @@
             this.lastSkippedDateFormatTagList.DropDownWidth = 250;
             this.lastSkippedDateFormatTagList.FormattingEnabled = true;
             this.lastSkippedDateFormatTagList.Name = "lastSkippedDateFormatTagList";
-            this.lastSkippedDateFormatTagList.Tag = "#SaveLastSkippedCommand";
+            this.lastSkippedDateFormatTagList.Tag = "#SaveLastSkippedDate";
             // 
             // saveLastSkippedCheckBoxLabel
             // 
@@ -97,7 +97,7 @@
             this.placeholderCheckBox.Name = "placeholderCheckBox";
             this.placeholderCheckBox.Tag = "#dateTimeFormatLabel";
             // 
-            // SaveLastSkippedCommand
+            // SaveLastSkippedDate
             // 
             this.AcceptButton = this.buttonOK;
             resources.ApplyResources(this, "$this");
@@ -111,9 +111,9 @@
             this.Controls.Add(this.lastSkippedTagList);
             this.Controls.Add(this.saveLastSkippedCheckBoxLabel);
             this.Controls.Add(this.saveLastSkippedCheckBox);
-            this.Name = "SaveLastSkippedCommand";
+            this.Name = "SaveLastSkippedDate";
             this.Tag = "@min-max-width-same@min-max-height-same";
-            this.Load += new System.EventHandler(this.SaveLastSkippedCommand_Load);
+            this.Load += new System.EventHandler(this.SaveLastSkippedDate_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -1583,7 +1584,18 @@ namespace MusicBeePlugin
         internal static void InitASR()
         {
             if (SavedSettings.dontShowASR)
+            {
+                lock (AsrAutoAppliedPresets)
+                {
+                    AsrAutoAppliedPresets.Clear();
+                    IdsAsrPresets.Clear();
+                    ASRPresetsWithHotkeysCount = 0;
+                    for (int i = 0; i < AsrPresetsWithHotkeys.Length; i++)
+                        AsrPresetsWithHotkeys[i] = null;
+                }
+
                 return;
+            }
 
             lock (AsrAutoAppliedPresets)
             {
@@ -5819,7 +5831,7 @@ namespace MusicBeePlugin
 
         }
 
-        private void AdvancedSearchAndReplaceCommand_FormClosing(object sender, FormClosingEventArgs e)
+        private void AdvancedSearchAndReplace_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (PluginClosing)
             {
@@ -5856,7 +5868,7 @@ namespace MusicBeePlugin
             }
         }
 
-        private void AdvancedSearchAndReplaceCommand_Load(object sender, EventArgs e)
+        private void AdvancedSearchAndReplace_Load(object sender, EventArgs e)
         {
             (int, int, int, int, int, int, int) value = loadWindowLayout();
 

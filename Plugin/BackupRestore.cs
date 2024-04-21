@@ -1,7 +1,7 @@
 ﻿using ExtensionMethods;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
+using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -11,6 +11,43 @@ namespace MusicBeePlugin
 {
     public partial class Plugin
     {
+        internal void InitBackupRestore()
+        {
+            PeriodicAutobackupTimer?.Dispose();
+            PeriodicAutobackupTimer = null;
+
+            //(Auto)backup init
+            if (!SavedSettings.dontShowBackupRestore)
+            {
+                if (File.Exists(GetAutobackupDirectory(SavedSettings.autobackupDirectory) + @"\" + BackupIndexFileName))
+                {
+                    FileStream stream = File.Open(GetAutobackupDirectory(SavedSettings.autobackupDirectory) + @"\" + BackupIndexFileName, FileMode.Open, FileAccess.Read, FileShare.None);
+                    StreamReader file = new StreamReader(stream, Encoding.UTF8);
+
+                    System.Xml.Serialization.XmlSerializer backupSerializer = new System.Xml.Serialization.XmlSerializer(typeof(BackupIndex));
+
+                    try
+                    {
+                        BackupIndex = (BackupIndex)backupSerializer.Deserialize(file);
+                    }
+                    catch
+                    {
+                        MessageBox.Show(MbForm, MsgMasterBackupIndexIsCorrupted, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        BackupIndex = new BackupIndex();
+                    }
+
+                    file.Close();
+                }
+                else
+                {
+                    BackupIndex = new BackupIndex();
+                }
+            }
+
+            if (!SavedSettings.dontShowBackupRestore && SavedSettings.autobackupInterval != 0)
+                PeriodicAutobackupTimer = new System.Threading.Timer(regularAutobackup, null, new TimeSpan(0, 0, (int)SavedSettings.autobackupInterval * 60), new TimeSpan(0, 0, (int)SavedSettings.autobackupInterval * 60));
+        }
+
         internal static string GetLibraryName()
         {
             string libraryName = null;

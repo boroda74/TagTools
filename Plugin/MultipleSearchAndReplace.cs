@@ -1133,14 +1133,14 @@ namespace MusicBeePlugin
             TagToolsPlugin.SaveSettings();
         }
 
-        private void MultipleSearchAndReplaceCommand_FormClosing(object sender, FormClosingEventArgs e)
+        private void MultipleSearchAndReplace_FormClosing(object sender, FormClosingEventArgs e)
         {
             saveWindowLayout(templateTable.Columns[0].Width, templateTable.Columns[3].Width, templateTable.Columns[4].Width,
                 0,
                 previewTable.Columns[1].Width, previewTable.Columns[2].Width, previewTable.Columns[3].Width);
         }
 
-        private void MultipleSearchAndReplaceCommand_Load(object sender, EventArgs e)
+        private void MultipleSearchAndReplace_Load(object sender, EventArgs e)
         {
             (int, int, int, int, int, int, int) value = loadWindowLayout();
 

@@ -38,7 +38,7 @@
     <DebugSymbols>false</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\Архив\Плейеры\.MusicBee Portable\Plugins\</OutputPath>
+    <OutputPath>..\..\..\Архив\Плейеры\.MusicBee\.MusicBee Portable Development\Plugins\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -48,7 +48,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\..\Архив\Плейеры\.MusicBee Portable\Plugins\</OutputPath>
+    <OutputPath>..\..\..\Архив\Плейеры\.MusicBee\.MusicBee Portable Development\Plugins\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>

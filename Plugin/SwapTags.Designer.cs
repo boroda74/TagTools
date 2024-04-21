@@ -71,7 +71,7 @@
             resources.ApplyResources(this.buttonCancel, "buttonCancel");
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Tag = "#SwapTagsCommand&SwapTagsCommand@non-defaultable";
+            this.buttonCancel.Tag = "#SwapTags&SwapTags@non-defaultable";
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // forTracksLabel
@@ -85,7 +85,7 @@
             this.dirtyErrorProvider.SetError(this.buttonOK, resources.GetString("buttonOK.Error"));
             this.dirtyErrorProvider.SetIconAlignment(this.buttonOK, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonOK.IconAlignment"))));
             this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Tag = "#buttonCancel&SwapTagsCommand";
+            this.buttonOK.Tag = "#buttonCancel&SwapTags";
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // destinationTagList
@@ -118,7 +118,7 @@
             this.toolTip1.SetToolTip(this.smartOperationCheckBoxLabel, resources.GetString("smartOperationCheckBoxLabel.ToolTip"));
             this.smartOperationCheckBoxLabel.Click += new System.EventHandler(this.smartOperationCheckBoxLabel_Click);
             // 
-            // SwapTagsCommand
+            // SwapTags
             // 
             this.AcceptButton = this.buttonOK;
             resources.ApplyResources(this, "$this");
@@ -133,7 +133,7 @@
             this.Controls.Add(this.withTagLabel);
             this.Controls.Add(this.sourceTagList);
             this.Controls.Add(this.SwapTagLabel);
-            this.Name = "SwapTagsCommand";
+            this.Name = "SwapTags";
             this.Tag = "@min-max-width-same@min-max-height-same";
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).EndInit();
             this.ResumeLayout(false);

@@ -113,7 +113,7 @@
             this.previewTable.RowHeadersVisible = false;
             this.previewTable.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.previewTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.previewTable.Tag = "#CompareTracksCommand&CompareTracksCommand@pinned-to-parent-x@pinned-to-parent-y";
+            this.previewTable.Tag = "#CompareTracks&CompareTracks@pinned-to-parent-x@pinned-to-parent-y";
             this.previewTable.RowHeadersWidthChanged += new System.EventHandler(this.previewTable_RowHeadersWidthChanged);
             this.previewTable.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.previewTable_ColumnHeaderMouseClick);
             this.previewTable.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.previewTable_ColumnWidthChanged);
@@ -226,23 +226,23 @@
             this.toolsPanel.Controls.Add(this.autoSelectTagsCheckBox);
             this.toolsPanel.Controls.Add(this.placeholderLabel);
             this.toolsPanel.Name = "toolsPanel";
-            this.toolsPanel.Tag = "#CompareTracksCommand&CompareTracksCommand@pinned-to-parent-x@pinned-to-parent-y";
+            this.toolsPanel.Tag = "#CompareTracks&CompareTracks@pinned-to-parent-x@pinned-to-parent-y";
             // 
             // placeholderLabel
             // 
             resources.ApplyResources(this.placeholderLabel, "placeholderLabel");
             this.placeholderLabel.Name = "placeholderLabel";
             // 
-            // CompareTracksCommand
+            // CompareTracks
             // 
             this.AcceptButton = this.buttonOK;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.previewTable);
             this.Controls.Add(this.toolsPanel);
-            this.Name = "CompareTracksCommand";
+            this.Name = "CompareTracks";
             this.Tag = "";
-            this.Load += new System.EventHandler(this.CompareTracksCommand_Load);
+            this.Load += new System.EventHandler(this.CompareTracks_Load);
             this.Shown += new System.EventHandler(this.CompareTracks_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).EndInit();
             this.toolsPanel.ResumeLayout(false);

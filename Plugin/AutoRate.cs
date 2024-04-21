@@ -23,6 +23,25 @@ namespace MusicBeePlugin
             InitializeComponent();
         }
 
+        internal static void AutoRateOnStartup(Plugin tagToolsPlugin)
+        {
+            if (SavedSettings.calculateThresholdsAtStartUp || SavedSettings.autoRateAtStartUp)
+            {
+                using (AutoRate tagToolsForm = new AutoRate(tagToolsPlugin))
+                {
+                    tagToolsForm.switchOperation(tagToolsForm.onStartup, EmptyButton, EmptyButton, EmptyButton, EmptyButton, true, null);
+                }
+            }
+
+            if (SavedSettings.calculateAlbumRatingAtStartUp)
+            {
+                using (CalculateAverageAlbumRating tagToolsForm = new CalculateAverageAlbumRating(tagToolsPlugin))
+                {
+                    tagToolsForm.calculateAlbumRatingForAllTracks();
+                }
+            }
+        }
+
         protected override void initializeForm()
         {
             base.initializeForm();
@@ -339,7 +358,7 @@ namespace MusicBeePlugin
 
                 currentFile = files[fileCounter];
 
-                SetStatusbarTextForFileOperations(AutoRateCommandSbText, false, fileCounter, files.Length, currentFile);
+                SetStatusbarTextForFileOperations(AutoRateSbText, false, fileCounter, files.Length, currentFile);
 
                 AutoRateLive(TagToolsPlugin, currentFile);
             }
@@ -383,7 +402,7 @@ namespace MusicBeePlugin
 
                 currentFile = files[fileCounter];
 
-                SetStatusbarTextForFileOperations(AutoRateCommandSbText, false, fileCounter, files.Length, currentFile);
+                SetStatusbarTextForFileOperations(AutoRateSbText, false, fileCounter, files.Length, currentFile);
 
                 AutoRateLive(TagToolsPlugin, currentFile);
             }

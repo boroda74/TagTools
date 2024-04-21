@@ -100,7 +100,7 @@
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.ControlDark;
             this.splitContainer1.Panel2.Controls.Add(this.previewTable);
-            this.splitContainer1.Tag = "#MultipleSearchAndReplaceCommand&MultipleSearchAndReplaceCommand@pinned-to-parent" +
+            this.splitContainer1.Tag = "#MultipleSearchAndReplace&MultipleSearchAndReplace@pinned-to-parent" +
     "-x";
             this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
             // 
@@ -438,7 +438,7 @@
             this.controlsPanel.Controls.Add(this.fromTagLabel);
             this.controlsPanel.Controls.Add(this.placeholderLabel1);
             this.controlsPanel.Name = "controlsPanel";
-            this.controlsPanel.Tag = "#MultipleSearchAndReplaceCommand&splitContainer1@pinned-to-parent-x";
+            this.controlsPanel.Tag = "#MultipleSearchAndReplace&splitContainer1@pinned-to-parent-x";
             // 
             // placeholderLabel1
             // 
@@ -452,7 +452,7 @@
             this.toolTip1.InitialDelay = 900;
             this.toolTip1.ReshowDelay = 1000;
             // 
-            // MultipleSearchAndReplaceCommand
+            // MultipleSearchAndReplace
             // 
             this.AcceptButton = this.buttonPreview;
             resources.ApplyResources(this, "$this");
@@ -461,9 +461,9 @@
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.controlsPanel);
             this.HelpButton = true;
-            this.Name = "MultipleSearchAndReplaceCommand";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MultipleSearchAndReplaceCommand_FormClosing);
-            this.Load += new System.EventHandler(this.MultipleSearchAndReplaceCommand_Load);
+            this.Name = "MultipleSearchAndReplace";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MultipleSearchAndReplace_FormClosing);
+            this.Load += new System.EventHandler(this.MultipleSearchAndReplace_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();

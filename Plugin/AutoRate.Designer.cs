@@ -170,7 +170,7 @@ namespace MusicBeePlugin
             resources.ApplyResources(this.buttonCancel, "buttonCancel");
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Tag = "#AutoRateCommand@non-defaultable";
+            this.buttonCancel.Tag = "#AutoRate@non-defaultable";
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // buttonOK
@@ -699,7 +699,7 @@ namespace MusicBeePlugin
             this.groupBox1.Controls.Add(this.perCent5UpDown);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
-            this.groupBox1.Tag = "#AutoRateCommand";
+            this.groupBox1.Tag = "#AutoRate";
             // 
             // groupBox1Label
             // 
@@ -937,7 +937,7 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.ContainerControl = this;
             resources.ApplyResources(this.dirtyErrorProvider, "dirtyErrorProvider");
             // 
-            // AutoRateCommand
+            // AutoRate
             // 
             this.AcceptButton = this.buttonOK;
             resources.ApplyResources(this, "$this");
@@ -971,7 +971,7 @@ namespace MusicBeePlugin
             this.Controls.Add(this.calculateThresholdsAtStartUpCheckBox);
             this.Controls.Add(this.autoRatingTagList);
             this.Controls.Add(this.label4);
-            this.Name = "AutoRateCommand";
+            this.Name = "AutoRate";
             this.Tag = "@min-max-width-same@min-max-height-same";
             ((System.ComponentModel.ISupportInitialize)(this.baseRatingTrackBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.perCent5UpDown)).EndInit();

@@ -173,13 +173,11 @@ namespace MusicBeePlugin
                 MbApiInterface.MB_SetBackgroundTaskMessage(string.Empty);
             }
 
-            if (initialAutoBackupInterval != SavedSettings.autobackupInterval && SavedSettings.autobackupInterval != 0)
-            {
-                PeriodicAutobackupTimer = new System.Threading.Timer(TagToolsPlugin.regularAutobackup, null, new TimeSpan(0, 0, (int)SavedSettings.autobackupInterval * 60), new TimeSpan(0, 0, (int)SavedSettings.autobackupInterval * 60));
-            }
-
             SavedSettings.backupArtworks = backupArtworksCheckBox.Checked;
             SavedSettings.dontTryToGuessLibraryName = dontTryToGuessLibraryNameCheckBox.Checked;
+
+            if (initialAutoBackupInterval != SavedSettings.autobackupInterval)
+                TagToolsPlugin.InitBackupRestore();
 
 
             Close();

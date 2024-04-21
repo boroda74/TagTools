@@ -199,7 +199,7 @@
             this.previewTable.Name = "previewTable";
             this.previewTable.RowHeadersVisible = false;
             this.previewTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.previewTable.Tag = "#CopyTagCommand&CopyTagCommand@pinned-to-parent-x";
+            this.previewTable.Tag = "#CopyTag&CopyTag@pinned-to-parent-x";
             this.toolTip1.SetToolTip(this.previewTable, resources.GetString("previewTable.ToolTip"));
             this.previewTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.previewTable_CellContentClick);
             // 
@@ -443,10 +443,10 @@
             this.dirtyErrorProvider.SetIconAlignment(this.fieldsPanel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("fieldsPanel.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.fieldsPanel, ((int)(resources.GetObject("fieldsPanel.IconPadding"))));
             this.fieldsPanel.Name = "fieldsPanel";
-            this.fieldsPanel.Tag = "#CopyTagCommand&previewTable@pinned-to-parent-x";
+            this.fieldsPanel.Tag = "#CopyTag&previewTable@pinned-to-parent-x";
             this.toolTip1.SetToolTip(this.fieldsPanel, resources.GetString("fieldsPanel.ToolTip"));
             // 
-            // CopyTagCommand
+            // CopyTag
             // 
             this.AcceptButton = this.buttonPreview;
             resources.ApplyResources(this, "$this");
@@ -469,11 +469,11 @@
             this.Controls.Add(this.sourceTagList);
             this.Controls.Add(this.copyTagLabel);
             this.Controls.Add(this.fieldsPanel);
-            this.Name = "CopyTagCommand";
+            this.Name = "CopyTag";
             this.Tag = "";
             this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CopyTagCommand_FormClosing);
-            this.Load += new System.EventHandler(this.CopyTagCommand_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CopyTag_FormClosing);
+            this.Load += new System.EventHandler(this.CopyTag_Load);
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).EndInit();
             this.fieldsPanel.ResumeLayout(false);

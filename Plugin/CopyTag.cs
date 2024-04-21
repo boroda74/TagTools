@@ -324,7 +324,7 @@ namespace MusicBeePlugin
 
                 currentFile = files[fileCounter];
 
-                SetStatusbarTextForFileOperations(CopyTagCommandSbText, true, fileCounter, files.Length, currentFile);
+                SetStatusbarTextForFileOperations(CopyTagSbText, true, fileCounter, files.Length, currentFile);
 
                 if (sourceTagIsTextFile || sourceTagIsClipboard)
                 {
@@ -431,7 +431,7 @@ namespace MusicBeePlugin
 
                     Invoke(processRowOfTable, new object[] { i });
 
-                    SetStatusbarTextForFileOperations(CopyTagCommandSbText, false, i, tags.Count, currentFile);
+                    SetStatusbarTextForFileOperations(CopyTagSbText, false, i, tags.Count, currentFile);
 
                     SetFileTag(currentFile, destinationTagId, newTag);
                     CommitTagsToFile(currentFile);
@@ -771,7 +771,7 @@ namespace MusicBeePlugin
             onlyIfSourceNotEmptyCheckBox_CheckedChanged(null, null);
         }
 
-        private void CopyTagCommand_Load(object sender, EventArgs e)
+        private void CopyTag_Load(object sender, EventArgs e)
         {
             (int, int, int, int, int, int, int) value = loadWindowLayout();
 
@@ -789,7 +789,7 @@ namespace MusicBeePlugin
             }
         }
 
-        private void CopyTagCommand_FormClosing(object sender, FormClosingEventArgs e)
+        private void CopyTag_FormClosing(object sender, FormClosingEventArgs e)
         {
             saveWindowLayout(previewTable.Columns[2].Width, previewTable.Columns[6].Width, previewTable.Columns[8].Width);
         }
