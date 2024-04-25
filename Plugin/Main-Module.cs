@@ -910,7 +910,7 @@ namespace MusicBeePlugin
 
         internal static string MsgFirstThreeGroupingFieldsInPreviewTableShouldBe;
         internal static string MsgFirstSixGroupingFieldsInPreviewTableShouldBe;
-        internal static string MsgFirstTwoGroupingFieldsInPreviewTableShouldBe;
+        internal static string MsgFirstThreeGroupingFieldsInPreviewTableShouldBe2;
         internal static string MsgResizingArtworksRequired;
 
         internal static string MsgYouMustImportStandardAsrPresetsFirst;
@@ -3634,7 +3634,7 @@ namespace MusicBeePlugin
                 + MbApiInterface.Setting_GetFieldName(MetaDataType.TrackTitle) + "\" and \""
                 + MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Duration)
                 + "' to export to \"HTML Document (CD Booklet)\"!";
-            MsgFirstTwoGroupingFieldsInPreviewTableShouldBe = "First two grouping fields in preview table should be \"" + AlbumTagName + "\" and \"" + ArtworkName + "\" to export " +
+            MsgFirstThreeGroupingFieldsInPreviewTableShouldBe2 = "First three grouping fields in preview table should be \"" + AlbumTagName + "\", \"" + DisplayedAlbumArtistName + "\" and \"" + ArtworkName + "\" to export " +
                 "to \"HTML Document (Album List)\"!";
             MsgResizingArtworksRequired = "Artwork resizing (more than 60px) must be turned on to use this export format!";
 
@@ -4221,7 +4221,7 @@ namespace MusicBeePlugin
                     + MbApiInterface.Setting_GetFieldName(MetaDataType.TrackTitle) + "\" and \""
                     + MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Duration)
                     + "\" для того, чтобы экспортировать теги в формат \"Документ HTML (буклет компакт-диска)\"!";
-                MsgFirstTwoGroupingFieldsInPreviewTableShouldBe = "Первые два поля группировок в таблице должны быть \"" + AlbumTagName + "\" и \"" + ArtworkName 
+                MsgFirstThreeGroupingFieldsInPreviewTableShouldBe2 = "Первые три поля группировок в таблице должны быть \"" + AlbumTagName + "\", \"" + DisplayedAlbumArtistName + "\" и \"" + ArtworkName 
                     + "\" для того, чтобы экспортировать теги в формат \"Документ HTML (список альбомов)\"!";
                 MsgResizingArtworksRequired = "Требуется включить изменение размеров обложек (не меньше 60 пикс.) для использования этого формата экспорта!";
 
@@ -4590,11 +4590,12 @@ namespace MusicBeePlugin
 
 
             //Album Grid
-            tempGroupings = new PresetColumnAttributes[2];
+            tempGroupings = new PresetColumnAttributes[3];
             tempFunctions = new PresetColumnAttributes[0];
 
             tempGroupings[0] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Album), null, null, false);
-            tempGroupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { null }, MbApiInterface.Setting_GetFieldName(MetaDataType.Artwork), null, null, false);
+            tempGroupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { string.Empty }, DisplayedAlbumArtistName, null, null, false);
+            tempGroupings[2] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { null }, MbApiInterface.Setting_GetFieldName(MetaDataType.Artwork), null, null, false);
 
             for (int f = 0; f < tempGroupings.Length; f++)
                 tempGroupings[f].columnIndices = new int[] { f };
@@ -6342,45 +6343,37 @@ namespace MusicBeePlugin
 
         public string CustomFunc_TitleCase(string input)
         {
-            return CustomFunc_TitleCase(input, null, null, null);
+            return CustomFunc_TitleCase4(input, null, null, null);
         }
 
-        //If parameter# is empty, then use ASR defaults; if it's a whitespace, then don't use it
-        public string CustomFunc_TitleCase(string input, string exceptionWordsString)
+        public string CustomFunc_TitleCase2(string input, string exceptionWordsString)
         {
-            return CustomFunc_TitleCase(input, exceptionWordsString, null, null);
+            return CustomFunc_TitleCase4(input, exceptionWordsString, null, null);
         }
 
-        //If parameter# is empty, then use ASR defaults; if it's a whitespace, then don't use it
-        public string CustomFunc_TitleCase(string input, string exceptionWordsString, string wordSplittersASRString)
+        public string CustomFunc_TitleCase3(string input, string exceptionWordsString, string wordSplittersString)
         {
-            return CustomFunc_TitleCase(input, exceptionWordsString, wordSplittersASRString, null);
+            return CustomFunc_TitleCase4(input, exceptionWordsString, wordSplittersString, null);
         }
 
-        //If parameter# is empty, then use ASR defaults; if it's a whitespace, then don't use it
-        public string CustomFunc_TitleCase(string input, string exceptionWordsString, string wordSplittersASRString, string exceptionCharsASRString)//********
+        public string CustomFunc_TitleCase4(string input, string exceptionWordsString, string wordSplittersString, string exceptionCharsString) //***
         {
             string[] exceptionWords = null;
             string[] wordSplittersASR = null;
             string[] exceptionCharsASR = null;
 
-            if (string.IsNullOrEmpty(exceptionWordsString))
-                exceptionWords = SavedSettings.exceptionWordsASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            else if (!string.IsNullOrWhiteSpace(exceptionWordsString))
+            if (!string.IsNullOrWhiteSpace(exceptionWordsString)) //***
                 exceptionWords = exceptionWordsString.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-            if (string.IsNullOrEmpty(wordSplittersASRString))
-                wordSplittersASR = SavedSettings.exceptionWordsASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            else if (!string.IsNullOrWhiteSpace(wordSplittersASRString))
-                wordSplittersASR = wordSplittersASRString.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            if (!string.IsNullOrWhiteSpace(wordSplittersString)) //***
+                wordSplittersASR = wordSplittersString.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-            if (string.IsNullOrEmpty(exceptionCharsASRString))
-                exceptionWords = SavedSettings.exceptionWordsASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            else if (!string.IsNullOrWhiteSpace(exceptionCharsASRString))
-                exceptionWords = exceptionCharsASRString.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            if (!string.IsNullOrWhiteSpace(exceptionCharsString)) //***
+                exceptionCharsASR = exceptionCharsString.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
             input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.LowerCase, null, false,
                 null, wordSplittersASR);
+
             string result = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.TitleCase, exceptionWords, false,
                 exceptionCharsASR, wordSplittersASR, true, true);
 
@@ -6390,41 +6383,8 @@ namespace MusicBeePlugin
 
         public string CustomFunc_SentenceCase(string input)
         {
-            return CustomFunc_SentenceCase(input, null, null, null);
-        }
-
-        //If parameter# is empty, then use ASR defaults; if it's a whitespace, then don't use it
-        public string CustomFunc_SentenceCase(string input, string exceptionWordsString)
-        {
-            return CustomFunc_SentenceCase(input, exceptionWordsString, null, null);
-        }
-
-        //If parameter# is empty, then use ASR defaults; if it's a whitespace, then don't use it
-        private string CustomFunc_SentenceCase(string input, string exceptionWordsString, string wordSplittersASRString, string exceptionCharsASRString)//********
-        {
-            string[] exceptionWords = null;
-            string[] wordSplittersASR = null;
-            string[] exceptionCharsASR = null;
-
-            if (string.IsNullOrEmpty(exceptionWordsString))
-                exceptionWords = SavedSettings.exceptionWordsASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            else if (!string.IsNullOrWhiteSpace(exceptionWordsString))
-                exceptionWords = exceptionWordsString.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-
-            if (string.IsNullOrEmpty(wordSplittersASRString))
-                wordSplittersASR = SavedSettings.exceptionWordsASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            else if (!string.IsNullOrWhiteSpace(wordSplittersASRString))
-                wordSplittersASR = wordSplittersASRString.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-
-            if (string.IsNullOrEmpty(exceptionCharsASRString))
-                exceptionWords = SavedSettings.exceptionWordsASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            else if (!string.IsNullOrWhiteSpace(exceptionCharsASRString))
-                exceptionWords = exceptionCharsASRString.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-
-            input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.LowerCase, null, false,
-                null, wordSplittersASR);
-            string result = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.SentenceCase, exceptionWords, false,
-                exceptionCharsASR, wordSplittersASR, true, true);
+            input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.LowerCase, null, false, null, null);
+            string result = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.SentenceCase, null, false, null, null, true, false);
 
             return result;
         }

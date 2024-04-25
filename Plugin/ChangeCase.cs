@@ -286,22 +286,11 @@ namespace MusicBeePlugin
                         }
                         else if (wasCharException || (IsItemContainedInList(currentWord, exceptionWords) && !useWhiteList) || (!IsItemContainedInList(currentWord, exceptionWords) && useWhiteList)) //Ignore changing case
                         {
-                            if (currentWord.Length == 1 && IsItemContainedInList(currentChar, wordSplitters))
-                                currentWord = currentWord.ToUpper();
-
                             newString = newString + currentWord + currentChar;
                         }
                         else //Change case
                         {
-                            if (currentWord.Length == 1 && IsItemContainedInList(currentChar, wordSplitters))
-                            {
-                                currentWord = currentWord.ToUpper();
-                                newString = newString + currentWord + currentChar;
-                            }
-                            else
-                            {
-                                newString = newString + ChangeSubstringCase(currentWord, changeCaseOption, isTheFirstWord) + currentChar;
-                            }
+                            newString = newString + ChangeSubstringCase(currentWord, changeCaseOption, isTheFirstWord) + currentChar;
                         }
 
 

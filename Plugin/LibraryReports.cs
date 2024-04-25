@@ -2809,7 +2809,7 @@ namespace MusicBeePlugin
                         ; // Nothing...
                     else // Let's cache results for function ids
                     {
-                        fileComposedGroupingValues.Add(currentFile, composedGroupingValues);
+                        fileComposedGroupingValues.AddReplace(currentFile, composedGroupingValues);
                         fileTags.add(currentFile, new List<string> { composedGroupingValues }, functionsDict, functionValues, parameter2Values);
                     }
                 }
@@ -4159,9 +4159,9 @@ namespace MusicBeePlugin
                 return;
             }
             else if (selectedPreset.fileFormatIndex == LrReportFormat.HtmlDocumentAlbumGrid && (albumField != 0
-            || artworkField != 1))
+            || albumArtistField != 1 || artworkField != 2))
             {
-                MessageBox.Show(this, MsgFirstTwoGroupingFieldsInPreviewTableShouldBe,
+                MessageBox.Show(this, MsgFirstThreeGroupingFieldsInPreviewTableShouldBe2,
                     string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
@@ -4353,12 +4353,15 @@ namespace MusicBeePlugin
             const int artworkGridHtmlWidth = 740;
             const int artworkGridBordersWidth = 30;
             int artworkGridMaxImageSize = (int)newArtworkSizeUpDown.Value;
-            int artworkGridRowImageCount = artworkGridHtmlWidth / artworkGridMaxImageSize;
+            int artworkGridRowImageCount = (int)((float)artworkGridHtmlWidth / (artworkGridMaxImageSize + artworkGridBordersWidth));
 
             if (selectedPreset.fileFormatIndex == LrReportFormat.HtmlDocumentAlbumGrid) //It's special case because every entry in tags dictionary is a separate album
             {
-                int fontSize = (int)(artworkGridMaxImageSize / 15f); //Font size units are pixels
-                int labelHeight = (int)(fontSize * 2.6f);
+                int fontSize = 12; //Font size units are pixels
+                int labelHeight = (int)(fontSize * 2.6f * 125 / artworkGridMaxImageSize);
+
+                if (labelHeight < (int)(fontSize * 1.3f))
+                    labelHeight = (int)(fontSize * 1.3f);
 
                 const string color = "#000000";//***
 
@@ -4497,7 +4500,7 @@ namespace MusicBeePlugin
                         pic = artworks[groupingsValues[artworkField]];
                         string albumLabel = groupingsValues[0];
 
-                        for (int l = 2; l < groupingsValues.Length; l++) //groupingsValues: 1st value MUST BE album name, 2nd value MUST BE artwork
+                        for (int l = 3; l < groupingsValues.Length; l++) //groupingsValues: 1st value MUST BE album name, 2nd value MUST BE artwork
                             albumLabel += "/" + groupingsValues[l];
 
                         (document as HtmlDocumentAlbumGrid).addCellToRow(pic, albumLabel, groupingsValues[artworkField]);
@@ -5688,8 +5691,8 @@ namespace MusicBeePlugin
             groupingsDict.Clear();
             functionsDict.Clear();
 
-            functionComboBoxCustom.SelectedIndex = 0;
-            sourceTagListCustom.SelectedIndex = 0;
+            functionComboBoxCustom.SelectedIndex = -1;
+            sourceTagListCustom.SelectedIndex = -1;
             expressionTextBox.Text = string.Empty;
 
             if (index == -1)

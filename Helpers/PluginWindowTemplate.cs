@@ -776,7 +776,18 @@ namespace MusicBeePlugin
 
             //Control that was initially square (before AUTO-scaling)
             if (stringTag?.Contains("@square-control") == true)
+            {
+                if ((control.Anchor & AnchorStyles.Right) != 0)
+                {
+                    if (control.Width > control.Height)
+                        control.Left -= control.Width - control.Height;
+                    else
+                        control.Left += control.Width - control.Height;
+                }
+
+
                 control.Width = control.Height;
+            }
         }
 
         internal void moveScaleControlDependentReferringControlsX(Control control, int control2XIndex = -1)

@@ -138,6 +138,7 @@ namespace MusicBeePlugin
             listBox.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom;
             listBox.Margin = new Padding(0, 0, 0, 0);
 
+            listBox.SelectedIndex = -1;
 
             tableLayoutPanel.Controls.Add(listBox, 0, 0);
 
