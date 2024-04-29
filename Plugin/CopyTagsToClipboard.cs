@@ -218,7 +218,7 @@ namespace MusicBeePlugin
             clipboardText = clipboardText.Remove(clipboardText.Length - 1);
 
             //if (clipboardText == string.Empty)
-            //    clipboardText = "\u0000";
+            //   clipboardText = "\u0000";
 
 
             NativeMethods.CloseClipboard();

@@ -20,7 +20,7 @@ namespace MusicBeePlugin
                     return (T)child;
             }
 
-            // Not found.
+            //Not found.
             return null;
         }
 
@@ -149,7 +149,7 @@ namespace MusicBeePlugin
 
         public CustomComboBox(PluginWindowTemplate ownerForm, ComboBox comboBoxRef, bool skinned)
         {
-            //SetStyle(ControlStyles.ResizeRedraw, true);//******
+            //SetStyle(ControlStyles.ResizeRedraw, true);
             //SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             //SetStyle(ControlStyles.DoubleBuffer, true);
 
@@ -514,7 +514,7 @@ namespace MusicBeePlugin
 
                 EventHandlersToolkit.FireEvent(this, "TextChanged", null);
             }
-            else// if (comboBox != null)
+            else//if (comboBox != null)
             {
                 if (index == -1 && DropDownStyle == ComboBoxStyle.DropDown)
                     comboBox.Text = value;
@@ -741,7 +741,7 @@ namespace MusicBeePlugin
             if (lastItemCount != listBox.Items.Count)
             {
                 lastItemCount = listBox.Items.Count;
-                SelectedIndex = listBox.SelectedIndex;//******
+                //SelectedIndex = listBox.SelectedIndex;
             }
 
             int dropDownWidth = this.Width;
@@ -788,20 +788,20 @@ namespace MusicBeePlugin
 
                 Point textBoxScreenLocation = textBox.PointToScreen(textBox.Location);
 
-                // try to position _dropDown below textbox
+                //try to position _dropDown below textbox
                 Point pt = textBoxScreenLocation;
                 pt.Offset(0, textBox.Height);
 
-                // determine if it will fit on the screen below the textbox
+                //determine if it will fit on the screen below the textbox
                 Size dropdownSize = dropDown.GetPreferredSize(Size.Empty);
                 Rectangle dropdownBounds = new Rectangle(pt, dropdownSize);
 
                 if (dropdownBounds.Bottom <= Screen.GetWorkingArea(dropdownBounds).Bottom)
-                {   // show below
+                {   //show below
                     dropDown.Show(pt, ToolStripDropDownDirection.BelowRight);
                 }
                 else
-                {   // show above
+                {   //show above
                     dropDown.Show(textBoxScreenLocation, ToolStripDropDownDirection.AboveRight);
                 }
             }
@@ -879,11 +879,11 @@ namespace MusicBeePlugin
 
             InitializeComponent();
 
-            //SetStyle(ControlStyles.ResizeRedraw, true);//******
+            //SetStyle(ControlStyles.ResizeRedraw, true);
             //SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             //SetStyle(ControlStyles.DoubleBuffer, true);
 
-            // TODO: Add any initialization after the InitForm call
+            //TODO: Add any initialization after the InitForm call
         }
 
         public CustomListBox(int customScrollBarInitialWidth, int scaledPx) : this(false)
@@ -902,7 +902,6 @@ namespace MusicBeePlugin
                 {
                     if ((Parent as TableLayoutPanel).ColumnStyles[1].Width != vScrollBar.Width)
                     {
-                        //(Parent as TableLayoutPanel).ColumnStyles[0].Width -= vScrollBar.Width;//*******
                         (Parent as TableLayoutPanel).ColumnStyles[1].Width = vScrollBar.Width;
                         if (Height != MaximumSize.Height)
                         {
@@ -916,10 +915,7 @@ namespace MusicBeePlugin
                 else
                 {
                     if ((Parent as TableLayoutPanel).ColumnStyles[1].Width != 0)
-                    {
-                        //(Parent as TableLayoutPanel).ColumnStyles[0].Width += vScrollBar.Width;//*****
                         (Parent as TableLayoutPanel).ColumnStyles[1].Width = 0;
-                    }
 
                     if (Height != itemsHeight)
                         Height = itemsHeight;
@@ -942,10 +938,6 @@ namespace MusicBeePlugin
 
                 if (Width != MinimumSize.Width)
                     Width = MinimumSize.Width;
-
-
-                //Invalidate();
-                //Parent.Invalidate();//*******
             }
         }
 
@@ -962,20 +954,20 @@ namespace MusicBeePlugin
             }
         }
 
-        private bool ShowScrollbars //********* doesn't work
-        {
-            get { return showScroll; }
+        //public bool ShowScrollbars //Doesn't work
+        //{
+        //    get { return showScroll; }
 
-            set
-            {
-                if (showScroll != value)
-                {
-                    showScroll = value;
-                    if (IsHandleCreated)
-                        RecreateHandle();
-                }
-            }
-        }
+        //    set
+        //    {
+        //        if (showScroll != value)
+        //        {
+        //            showScroll = value;
+        //            if (IsHandleCreated)
+        //                RecreateHandle();
+        //        }
+        //    }
+        //}
 
         public void SuspendPainting()
         {
@@ -1040,11 +1032,11 @@ namespace MusicBeePlugin
 
             InitializeComponent();
 
-            //SetStyle(ControlStyles.ResizeRedraw, true);//******
+            //SetStyle(ControlStyles.ResizeRedraw, true);
             //SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             //SetStyle(ControlStyles.DoubleBuffer, true);
 
-            // TODO: Add any initialization after the InitForm call
+            //TODO: Add any initialization after the InitForm call
         }
 
         protected override CreateParams CreateParams
@@ -1060,21 +1052,20 @@ namespace MusicBeePlugin
             }
         }
 
+        //public bool ShowScrollbars //Doesn't work
+        //{
+        //    get { return showScroll; }
 
-        private bool ShowScrollbars //********* doesn't work
-        {
-            get { return showScroll; }
-
-            set
-            {
-                if (showScroll != value)
-                {
-                    showScroll = value;
-                    if (IsHandleCreated)
-                        RecreateHandle();
-                }
-            }
-        }
+        //    set
+        //    {
+        //        if (showScroll != value)
+        //        {
+        //            showScroll = value;
+        //            if (IsHandleCreated)
+        //                RecreateHandle();
+        //        }
+        //    }
+        //}
 
         public void SuspendPainting()
         {
@@ -1797,9 +1788,9 @@ namespace MusicBeePlugin
         private void InitializeComponent()
         {
             SuspendLayout();
-            // 
-            // CustomScrollBar
-            // 
+            //
+            //CustomScrollBar
+            //
             Name = "CustomScrollBar";
             MouseDown += new MouseEventHandler(CustomScrollBar_MouseDown);
             MouseMove += new MouseEventHandler(CustomScrollBar_MouseMove);
@@ -2644,9 +2635,9 @@ namespace MusicBeePlugin
         private void InitializeComponent()
         {
             SuspendLayout();
-            // 
-            // CustomScrollBar
-            // 
+            //
+            //CustomScrollBar
+            //
             Name = "CustomScrollBar";
             MouseDown += new MouseEventHandler(CustomScrollBar_MouseDown);
             MouseMove += new MouseEventHandler(CustomScrollBar_MouseMove);
@@ -2838,26 +2829,26 @@ public class InterpolatedBox : PictureBox
         set
         {
             if (value == InterpolationMode.Invalid)
-                throw new ArgumentException("\"Invalid\" is not a valid value."); // (Duh!)
+                throw new ArgumentException("\"Invalid\" is not a valid value."); //(Duh!)
 
             interpolation = value;
-            Invalidate(); // Image should be redrawn when a different interpolation is selected
+            Invalidate(); //Image should be redrawn when a different interpolation is selected
         }
     }
     #endregion
 
     protected override void OnPaint(PaintEventArgs pe)
     {
-        // Before the PictureBox renders the image, we modify the
-        // graphics object to change the interpolation.
+        //Before the PictureBox renders the image, we modify the
+        //graphics object to change the interpolation.
 
-        // Set the selected interpolation.
+        //Set the selected interpolation.
         pe.Graphics.InterpolationMode = interpolation;
-        // Certain interpolation modes (such as nearest neighbor) need
-        // to be offset by half a pixel to render correctly.
+        //Certain interpolation modes (such as nearest neighbor) need
+        //to be offset by half a pixel to render correctly.
         pe.Graphics.PixelOffsetMode = PixelOffsetMode.Half;
 
-        // Allow the PictureBox to draw.
+        //Allow the PictureBox to draw.
         base.OnPaint(pe);
     }
 }

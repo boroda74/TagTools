@@ -133,7 +133,7 @@
     <value>55, 15</value>
   </data>
   <data name="SwapTagLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>1</value>
   </data>
   <data name="SwapTagLabel.Text" xml:space="preserve">
     <value>Swap tag</value>
@@ -160,7 +160,7 @@
     <value>140, 23</value>
   </data>
   <data name="sourceTagList.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;sourceTagList.Name" xml:space="preserve">
     <value>sourceTagList</value>
@@ -187,7 +187,7 @@
     <value>47, 15</value>
   </data>
   <data name="withTagLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>3</value>
   </data>
   <data name="withTagLabel.Text" xml:space="preserve">
     <value>and tag</value>
@@ -217,7 +217,7 @@
     <value>100, 23</value>
   </data>
   <data name="buttonCancel.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>8</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Close</value>
@@ -250,7 +250,7 @@
     <value>102, 15</value>
   </data>
   <data name="forTracksLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>5</value>
   </data>
   <data name="forTracksLabel.Text" xml:space="preserve">
     <value>for selected tracks</value>
@@ -295,7 +295,7 @@
     <value>441, 15</value>
   </data>
   <data name="smartOperationCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+    <value>7</value>
   </data>
   <data name="smartOperationCheckBoxLabel.Text" xml:space="preserve">
     <value>Smart swap (important only for working with multiple artists/composers per track)</value>
@@ -333,7 +333,7 @@ for swapping it to a temporary tag</value>
     <value>28, 19</value>
   </data>
   <data name="smartOperationCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+    <value>6</value>
   </data>
   <data name="smartOperationCheckBox.Text" xml:space="preserve">
     <value> </value>
@@ -365,7 +365,7 @@ for swapping it to a temporary tag</value>
     <value>140, 23</value>
   </data>
   <data name="destinationTagList.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;destinationTagList.Name" xml:space="preserve">
     <value>destinationTagList</value>
@@ -407,7 +407,7 @@ for swapping it to a temporary tag</value>
     <value>SwapTags</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=8.1.8884.1469, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="dirtyErrorProvider.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1027,7 +1027,7 @@ for swapping it to a temporary tag</value>
     <value>100, 23</value>
   </data>
   <data name="buttonOK.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>0</value>
   </data>
   <data name="buttonOK.Text" xml:space="preserve">
     <value>Proceed</value>

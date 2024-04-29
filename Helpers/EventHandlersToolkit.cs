@@ -14,7 +14,7 @@ namespace MusicBeePlugin
             var srcEventKey = GetControlEventKey(src, eventName);
             var srcHandlers = srcEventList[srcEventKey];
 
-            // Copy the srcHandlers
+            //Copy the srcHandlers
             var destEventList = GetControlEventHandlerList(dest);
             var destEventKey = GetControlEventKey(dest, eventName);
 
@@ -31,8 +31,8 @@ namespace MusicBeePlugin
 
             if (eventKeyField == null)
             {
-                // Not all events in the WinForms controls use this pattern.
-                // Other methods can be used to search for the event srcHandlers if required.
+                //Not all events in the WinForms controls use this pattern.
+                //Other methods can be used to search for the event srcHandlers if required.
                 return null;
             }
 
@@ -44,7 +44,7 @@ namespace MusicBeePlugin
             FieldInfo eventKeyField = GetStaticNonPublicFieldInfo(type, "Event" + eventName);
 
             if (eventKeyField == null && eventName.EndsWith("Changed"))
-                eventKeyField = GetStaticNonPublicFieldInfo(type, "Event" + eventName.Remove(eventName.Length - 7)); // remove "Changed"
+                eventKeyField = GetStaticNonPublicFieldInfo(type, "Event" + eventName.Remove(eventName.Length - 7)); //remove "Changed"
 
             if (eventKeyField == null)
                 eventKeyField = GetStaticNonPublicFieldInfo(type, "EVENT_" + eventName.ToUpper());
@@ -52,7 +52,7 @@ namespace MusicBeePlugin
             return eventKeyField;
         }
 
-        // Also searches up the inheritance hierarchy
+        //Also searches up the inheritance hierarchy
         private static FieldInfo GetStaticNonPublicFieldInfo(Type type, string name)
         {
             FieldInfo fi;

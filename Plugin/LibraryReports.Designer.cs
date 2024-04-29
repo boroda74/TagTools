@@ -2,15 +2,15 @@
 {
     partial class LibraryReports
     {
-        /// <summary>
-        /// Требуется переменная конструктора.
-        /// </summary>
+        ///<summary>
+        ///Требуется переменная конструктора.
+        ///</summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Освободить все используемые ресурсы.
-        /// </summary>
-        /// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
+        ///<summary>
+        ///Освободить все используемые ресурсы.
+        ///</summary>
+        ///<param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -28,10 +28,10 @@
 
         #region Код, автоматически созданный конструктором форм Windows
 
-        /// <summary>
-        /// Обязательный метод для поддержки конструктора - не изменяйте
-        /// содержимое данного метода при помощи редактора кода.
-        /// </summary>
+        ///<summary>
+        ///Обязательный метод для поддержки конструктора - не изменяйте
+        ///содержимое данного метода при помощи редактора кода.
+        ///</summary>
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
@@ -160,37 +160,37 @@
             this.expressionTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
             //~MusicBee
 
-            // 
-            // splitContainer1
-            // 
+            //
+            //splitContainer1
+            //
             resources.ApplyResources(this.splitContainer1, "splitContainer1");
             this.splitContainer1.BackColor = System.Drawing.SystemColors.GrayText;
             this.dirtyErrorProvider.SetIconAlignment(this.splitContainer1, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("splitContainer1.IconAlignment"))));
             this.splitContainer1.Name = "splitContainer1";
-            // 
-            // splitContainer1.Panel1
-            // 
+            //
+            //splitContainer1.Panel1
+            //
             this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.ControlDark;
             this.splitContainer1.Panel1.Controls.Add(this.tableLayoutPanel1);
             this.dirtyErrorProvider.SetIconAlignment(this.splitContainer1.Panel1, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("splitContainer1.Panel1.IconAlignment"))));
-            // 
-            // splitContainer1.Panel2
-            // 
+            //
+            //splitContainer1.Panel2
+            //
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.ControlDark;
             this.splitContainer1.Panel2.Controls.Add(this.panel2);
             this.dirtyErrorProvider.SetIconAlignment(this.splitContainer1.Panel2, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("splitContainer1.Panel2.IconAlignment"))));
             this.splitContainer1.Tag = "#LibraryReports&LibraryReports@pinned-to-parent-x";
             this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
-            // 
-            // tableLayoutPanel1
-            // 
+            //
+            //tableLayoutPanel1
+            //
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.listBoxTableLayoutPanel, 0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            // 
-            // panel1
-            // 
+            //
+            //panel1
+            //
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Controls.Add(this.smartOperationCheckBoxLabel);
             this.panel1.Controls.Add(this.smartOperationCheckBox);
@@ -244,49 +244,49 @@
             this.panel1.Controls.Add(this.presetNameTextBox);
             this.dirtyErrorProvider.SetIconAlignment(this.panel1, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("panel1.IconAlignment"))));
             this.panel1.Name = "panel1";
-            // 
-            // smartOperationCheckBoxLabel
-            // 
+            //
+            //smartOperationCheckBoxLabel
+            //
             resources.ApplyResources(this.smartOperationCheckBoxLabel, "smartOperationCheckBoxLabel");
             this.dirtyErrorProvider.SetIconAlignment(this.smartOperationCheckBoxLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("smartOperationCheckBoxLabel.IconAlignment"))));
             this.smartOperationCheckBoxLabel.Name = "smartOperationCheckBoxLabel";
             this.smartOperationCheckBoxLabel.Tag = "@pinned-to-parent-x";
             this.toolTip1.SetToolTip(this.smartOperationCheckBoxLabel, resources.GetString("smartOperationCheckBoxLabel.ToolTip"));
             this.smartOperationCheckBoxLabel.Click += new System.EventHandler(this.smartOperationCheckBoxLabel_Click);
-            // 
-            // smartOperationCheckBox
-            // 
+            //
+            //smartOperationCheckBox
+            //
             resources.ApplyResources(this.smartOperationCheckBox, "smartOperationCheckBox");
             this.dirtyErrorProvider.SetIconAlignment(this.smartOperationCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("smartOperationCheckBox.IconAlignment"))));
             this.smartOperationCheckBox.Name = "smartOperationCheckBox";
             this.smartOperationCheckBox.Tag = "#smartOperationCheckBoxLabel";
             this.toolTip1.SetToolTip(this.smartOperationCheckBox, resources.GetString("smartOperationCheckBox.ToolTip"));
-            // 
-            // appendTextBox
-            // 
+            //
+            //appendTextBox
+            //
             resources.ApplyResources(this.appendTextBox, "appendTextBox");
             this.dirtyErrorProvider.SetIconAlignment(this.appendTextBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("appendTextBox.IconAlignment"))));
             this.appendTextBox.Name = "appendTextBox";
             this.appendTextBox.Tag = "#smartOperationCheckBox";
             this.appendTextBox.TextChanged += new System.EventHandler(this.appendTextBox_TextChanged);
-            // 
-            // appendLabel
-            // 
+            //
+            //appendLabel
+            //
             resources.ApplyResources(this.appendLabel, "appendLabel");
             this.dirtyErrorProvider.SetIconAlignment(this.appendLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("appendLabel.IconAlignment"))));
             this.appendLabel.Name = "appendLabel";
             this.appendLabel.Tag = "#appendTextBox";
             this.toolTip1.SetToolTip(this.appendLabel, resources.GetString("appendLabel.ToolTip"));
-            // 
-            // digitsLabel
-            // 
+            //
+            //digitsLabel
+            //
             resources.ApplyResources(this.digitsLabel, "digitsLabel");
             this.dirtyErrorProvider.SetIconAlignment(this.digitsLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("digitsLabel.IconAlignment"))));
             this.digitsLabel.Name = "digitsLabel";
             this.digitsLabel.Tag = "#appendLabel";
-            // 
-            // precisionDigitsComboBox
-            // 
+            //
+            //precisionDigitsComboBox
+            //
             this.precisionDigitsComboBox.FormattingEnabled = true;
             this.dirtyErrorProvider.SetIconAlignment(this.precisionDigitsComboBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("precisionDigitsComboBox.IconAlignment"))));
             this.precisionDigitsComboBox.Items.AddRange(new object[] {
@@ -300,16 +300,16 @@
             this.precisionDigitsComboBox.Name = "precisionDigitsComboBox";
             this.precisionDigitsComboBox.Tag = "#digitsLabel";
             this.precisionDigitsComboBox.TextChanged += new System.EventHandler(this.precisionDigitsComboBox_TextChanged);
-            // 
-            // roundToLabel
-            // 
+            //
+            //roundToLabel
+            //
             resources.ApplyResources(this.roundToLabel, "roundToLabel");
             this.dirtyErrorProvider.SetIconAlignment(this.roundToLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("roundToLabel.IconAlignment"))));
             this.roundToLabel.Name = "roundToLabel";
             this.roundToLabel.Tag = "#precisionDigitsComboBox";
-            // 
-            // mulDivFactorComboBox
-            // 
+            //
+            //mulDivFactorComboBox
+            //
             this.mulDivFactorComboBox.FormattingEnabled = true;
             this.dirtyErrorProvider.SetIconAlignment(this.mulDivFactorComboBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("mulDivFactorComboBox.IconAlignment"))));
             this.mulDivFactorComboBox.Items.AddRange(new object[] {
@@ -324,9 +324,9 @@
             this.mulDivFactorComboBox.Name = "mulDivFactorComboBox";
             this.mulDivFactorComboBox.Tag = "#roundToLabel";
             this.mulDivFactorComboBox.TextChanged += new System.EventHandler(this.mulDivFactorComboBox_TextChanged);
-            // 
-            // operationComboBox
-            // 
+            //
+            //operationComboBox
+            //
             this.operationComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.operationComboBox.FormattingEnabled = true;
             this.dirtyErrorProvider.SetIconAlignment(this.operationComboBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("operationComboBox.IconAlignment"))));
@@ -337,9 +337,9 @@
             this.operationComboBox.Name = "operationComboBox";
             this.operationComboBox.Tag = "#mulDivFactorComboBox@pinned-to-parent-x";
             this.operationComboBox.SelectedIndexChanged += new System.EventHandler(this.operationComboBox_SelectedIndexChanged);
-            // 
-            // clearIdButton
-            // 
+            //
+            //clearIdButton
+            //
             resources.ApplyResources(this.clearIdButton, "clearIdButton");
             this.dirtyErrorProvider.SetIconAlignment(this.clearIdButton, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("clearIdButton.IconAlignment"))));
             this.clearIdButton.Image = global::MusicBeePlugin.Properties.Resources.clear_button_15;
@@ -347,25 +347,25 @@
             this.clearIdButton.Tag = "@pinned-to-parent-x@non-defaultable@square-control";
             this.toolTip1.SetToolTip(this.clearIdButton, resources.GetString("clearIdButton.ToolTip"));
             this.clearIdButton.Click += new System.EventHandler(this.clearIdButton_Click);
-            // 
-            // idTextBox
-            // 
+            //
+            //idTextBox
+            //
             resources.ApplyResources(this.idTextBox, "idTextBox");
             this.dirtyErrorProvider.SetIconAlignment(this.idTextBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("idTextBox.IconAlignment"))));
             this.idTextBox.Name = "idTextBox";
             this.idTextBox.Tag = "#clearIdButton";
             this.toolTip1.SetToolTip(this.idTextBox, resources.GetString("idTextBox.ToolTip"));
             this.idTextBox.Leave += new System.EventHandler(this.idTextBox_Leave);
-            // 
-            // labelFunctionId
-            // 
+            //
+            //labelFunctionId
+            //
             resources.ApplyResources(this.labelFunctionId, "labelFunctionId");
             this.dirtyErrorProvider.SetIconAlignment(this.labelFunctionId, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("labelFunctionId.IconAlignment"))));
             this.labelFunctionId.Name = "labelFunctionId";
             this.labelFunctionId.Tag = "#idTextBox";
-            // 
-            // destinationTagList
-            // 
+            //
+            //destinationTagList
+            //
             this.destinationTagList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.destinationTagList.DropDownWidth = 250;
             this.destinationTagList.FormattingEnabled = true;
@@ -373,16 +373,16 @@
             resources.ApplyResources(this.destinationTagList, "destinationTagList");
             this.destinationTagList.Name = "destinationTagList";
             this.destinationTagList.SelectedIndexChanged += new System.EventHandler(this.destinationTagList_SelectedIndexChanged);
-            // 
-            // labelSaveToTag
-            // 
+            //
+            //labelSaveToTag
+            //
             resources.ApplyResources(this.labelSaveToTag, "labelSaveToTag");
             this.dirtyErrorProvider.SetIconAlignment(this.labelSaveToTag, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("labelSaveToTag.IconAlignment"))));
             this.labelSaveToTag.Name = "labelSaveToTag";
             this.labelSaveToTag.Tag = "#destinationTagList";
-            // 
-            // sourceFieldComboBox
-            // 
+            //
+            //sourceFieldComboBox
+            //
             this.sourceFieldComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.sourceFieldComboBox.DropDownWidth = 600;
             this.sourceFieldComboBox.FormattingEnabled = true;
@@ -391,25 +391,25 @@
             this.sourceFieldComboBox.Name = "sourceFieldComboBox";
             this.sourceFieldComboBox.Tag = "#labelSaveToTag";
             this.sourceFieldComboBox.SelectedIndexChanged += new System.EventHandler(this.sourceFieldComboBox_SelectedIndexChanged);
-            // 
-            // labelSaveField
-            // 
+            //
+            //labelSaveField
+            //
             resources.ApplyResources(this.labelSaveField, "labelSaveField");
             this.dirtyErrorProvider.SetIconAlignment(this.labelSaveField, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("labelSaveField.IconAlignment"))));
             this.labelSaveField.Name = "labelSaveField";
             this.labelSaveField.Tag = "#sourceFieldComboBox";
-            // 
-            // buttonFilterResults
-            // 
+            //
+            //buttonFilterResults
+            //
             resources.ApplyResources(this.buttonFilterResults, "buttonFilterResults");
             this.dirtyErrorProvider.SetIconAlignment(this.buttonFilterResults, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonFilterResults.IconAlignment"))));
             this.buttonFilterResults.Name = "buttonFilterResults";
             this.buttonFilterResults.Tag = "@pinned-to-parent-x@non-defaultable";
             this.toolTip1.SetToolTip(this.buttonFilterResults, resources.GetString("buttonFilterResults.ToolTip"));
             this.buttonFilterResults.Click += new System.EventHandler(this.buttonFilterResults_Click);
-            // 
-            // comparedFieldList
-            // 
+            //
+            //comparedFieldList
+            //
             resources.ApplyResources(this.comparedFieldList, "comparedFieldList");
             this.comparedFieldList.DropDownWidth = 600;
             this.comparedFieldList.FormattingEnabled = true;
@@ -417,9 +417,9 @@
             this.comparedFieldList.Name = "comparedFieldList";
             this.comparedFieldList.Tag = "#buttonFilterResults";
             this.comparedFieldList.TextUpdate += new System.EventHandler(this.comparedFieldList_TextUpdate);
-            // 
-            // conditionList
-            // 
+            //
+            //conditionList
+            //
             this.conditionList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.conditionList.FormattingEnabled = true;
             this.dirtyErrorProvider.SetIconAlignment(this.conditionList, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("conditionList.IconAlignment"))));
@@ -427,9 +427,9 @@
             this.conditionList.Name = "conditionList";
             this.conditionList.Tag = "#comparedFieldList";
             this.conditionList.SelectedIndexChanged += new System.EventHandler(this.conditionList_SelectedIndexChanged);
-            // 
-            // conditionFieldList
-            // 
+            //
+            //conditionFieldList
+            //
             this.conditionFieldList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.conditionFieldList.DropDownWidth = 600;
             this.conditionFieldList.FormattingEnabled = true;
@@ -438,33 +438,33 @@
             this.conditionFieldList.Name = "conditionFieldList";
             this.conditionFieldList.Tag = "#conditionList";
             this.conditionFieldList.SelectedIndexChanged += new System.EventHandler(this.conditionFieldList_SelectedIndexChanged);
-            // 
-            // conditionCheckBoxLabel
-            // 
+            //
+            //conditionCheckBoxLabel
+            //
             resources.ApplyResources(this.conditionCheckBoxLabel, "conditionCheckBoxLabel");
             this.dirtyErrorProvider.SetIconAlignment(this.conditionCheckBoxLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("conditionCheckBoxLabel.IconAlignment"))));
             this.conditionCheckBoxLabel.Name = "conditionCheckBoxLabel";
             this.conditionCheckBoxLabel.Tag = "#conditionFieldList";
             this.conditionCheckBoxLabel.Click += new System.EventHandler(this.conditionCheckBoxLabel_Click);
-            // 
-            // conditionCheckBox
-            // 
+            //
+            //conditionCheckBox
+            //
             resources.ApplyResources(this.conditionCheckBox, "conditionCheckBox");
             this.dirtyErrorProvider.SetIconAlignment(this.conditionCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("conditionCheckBox.IconAlignment"))));
             this.conditionCheckBox.Name = "conditionCheckBox";
             this.conditionCheckBox.Tag = "#conditionCheckBoxLabel";
             this.conditionCheckBox.CheckedChanged += new System.EventHandler(this.conditionCheckBox_CheckedChanged);
-            // 
-            // buttonExport
-            // 
+            //
+            //buttonExport
+            //
             resources.ApplyResources(this.buttonExport, "buttonExport");
             this.dirtyErrorProvider.SetIconAlignment(this.buttonExport, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonExport.IconAlignment"))));
             this.buttonExport.Name = "buttonExport";
             this.buttonExport.Tag = "@pinned-to-parent-x@non-defaultable";
             this.buttonExport.Click += new System.EventHandler(this.buttonExport_Click);
-            // 
-            // openReportCheckBoxPicture
-            // 
+            //
+            //openReportCheckBoxPicture
+            //
             resources.ApplyResources(this.openReportCheckBoxPicture, "openReportCheckBoxPicture");
             this.dirtyErrorProvider.SetIconAlignment(this.openReportCheckBoxPicture, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("openReportCheckBoxPicture.IconAlignment"))));
             this.openReportCheckBoxPicture.Image = global::MusicBeePlugin.Properties.Resources.window_23;
@@ -473,26 +473,26 @@
             this.openReportCheckBoxPicture.Tag = "@square-control@small-picture";
             this.toolTip1.SetToolTip(this.openReportCheckBoxPicture, resources.GetString("openReportCheckBoxPicture.ToolTip"));
             this.openReportCheckBoxPicture.Click += new System.EventHandler(this.pictureBox1_Click);
-            // 
-            // openReportCheckBoxLabel
-            // 
+            //
+            //openReportCheckBoxLabel
+            //
             resources.ApplyResources(this.openReportCheckBoxLabel, "openReportCheckBoxLabel");
             this.dirtyErrorProvider.SetIconAlignment(this.openReportCheckBoxLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("openReportCheckBoxLabel.IconAlignment"))));
             this.openReportCheckBoxLabel.Name = "openReportCheckBoxLabel";
             this.openReportCheckBoxLabel.Tag = "&openReportCheckBoxPicture";
             this.toolTip1.SetToolTip(this.openReportCheckBoxLabel, resources.GetString("openReportCheckBoxLabel.ToolTip"));
             this.openReportCheckBoxLabel.Click += new System.EventHandler(this.openReportCheckBoxLabel_Click);
-            // 
-            // openReportCheckBox
-            // 
+            //
+            //openReportCheckBox
+            //
             resources.ApplyResources(this.openReportCheckBox, "openReportCheckBox");
             this.dirtyErrorProvider.SetIconAlignment(this.openReportCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("openReportCheckBox.IconAlignment"))));
             this.openReportCheckBox.Name = "openReportCheckBox";
             this.openReportCheckBox.Tag = "#openReportCheckBoxLabel|openReportCheckBoxPicture";
             this.toolTip1.SetToolTip(this.openReportCheckBox, resources.GetString("openReportCheckBox.ToolTip"));
-            // 
-            // newArtworkSizeUpDown
-            // 
+            //
+            //newArtworkSizeUpDown
+            //
             this.dirtyErrorProvider.SetIconAlignment(this.newArtworkSizeUpDown, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("newArtworkSizeUpDown.IconAlignment"))));
             resources.ApplyResources(this.newArtworkSizeUpDown, "newArtworkSizeUpDown");
             this.newArtworkSizeUpDown.Maximum = new decimal(new int[] {
@@ -513,48 +513,48 @@
             0,
             0});
             this.newArtworkSizeUpDown.ValueChanged += new System.EventHandler(this.newArtworkSizeUpDown_ValueChanged);
-            // 
-            // labelRemark
-            // 
+            //
+            //labelRemark
+            //
             resources.ApplyResources(this.labelRemark, "labelRemark");
             this.dirtyErrorProvider.SetIconAlignment(this.labelRemark, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("labelRemark.IconAlignment"))));
             this.labelRemark.Name = "labelRemark";
             this.labelRemark.Tag = "";
-            // 
-            // resizeArtworkCheckBoxLabel
-            // 
+            //
+            //resizeArtworkCheckBoxLabel
+            //
             resources.ApplyResources(this.resizeArtworkCheckBoxLabel, "resizeArtworkCheckBoxLabel");
             this.dirtyErrorProvider.SetIconAlignment(this.resizeArtworkCheckBoxLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("resizeArtworkCheckBoxLabel.IconAlignment"))));
             this.resizeArtworkCheckBoxLabel.Name = "resizeArtworkCheckBoxLabel";
             this.resizeArtworkCheckBoxLabel.Tag = "#newArtworkSizeUpDown";
             this.resizeArtworkCheckBoxLabel.Click += new System.EventHandler(this.resizeArtworkCheckBoxLabel_Click);
-            // 
-            // resizeArtworkCheckBox
-            // 
+            //
+            //resizeArtworkCheckBox
+            //
             resources.ApplyResources(this.resizeArtworkCheckBox, "resizeArtworkCheckBox");
             this.dirtyErrorProvider.SetIconAlignment(this.resizeArtworkCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("resizeArtworkCheckBox.IconAlignment"))));
             this.resizeArtworkCheckBox.Name = "resizeArtworkCheckBox";
             this.resizeArtworkCheckBox.Tag = "#resizeArtworkCheckBoxLabel";
             this.resizeArtworkCheckBox.CheckedChanged += new System.EventHandler(this.resizeArtworkCheckBox_CheckedChanged);
-            // 
-            // totalsCheckBoxLabel
-            // 
+            //
+            //totalsCheckBoxLabel
+            //
             resources.ApplyResources(this.totalsCheckBoxLabel, "totalsCheckBoxLabel");
             this.dirtyErrorProvider.SetIconAlignment(this.totalsCheckBoxLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("totalsCheckBoxLabel.IconAlignment"))));
             this.totalsCheckBoxLabel.Name = "totalsCheckBoxLabel";
             this.totalsCheckBoxLabel.Tag = "#resizeArtworkCheckBox";
             this.totalsCheckBoxLabel.Click += new System.EventHandler(this.totalsCheckBoxLabel_Click);
-            // 
-            // totalsCheckBox
-            // 
+            //
+            //totalsCheckBox
+            //
             resources.ApplyResources(this.totalsCheckBox, "totalsCheckBox");
             this.dirtyErrorProvider.SetIconAlignment(this.totalsCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("totalsCheckBox.IconAlignment"))));
             this.totalsCheckBox.Name = "totalsCheckBox";
             this.totalsCheckBox.Tag = "#totalsCheckBoxLabel";
             this.totalsCheckBox.CheckedChanged += new System.EventHandler(this.totalsCheckBox_CheckedChanged);
-            // 
-            // formatComboBox
-            // 
+            //
+            //formatComboBox
+            //
             resources.ApplyResources(this.formatComboBox, "formatComboBox");
             this.formatComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.formatComboBox.FormattingEnabled = true;
@@ -563,16 +563,16 @@
             this.formatComboBox.Tag = "#splitContainer1";
             this.toolTip1.SetToolTip(this.formatComboBox, resources.GetString("formatComboBox.ToolTip"));
             this.formatComboBox.SelectedIndexChanged += new System.EventHandler(this.formatComboBox_SelectedIndexChanged);
-            // 
-            // labelFormat
-            // 
+            //
+            //labelFormat
+            //
             resources.ApplyResources(this.labelFormat, "labelFormat");
             this.dirtyErrorProvider.SetIconAlignment(this.labelFormat, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("labelFormat.IconAlignment"))));
             this.labelFormat.Name = "labelFormat";
             this.labelFormat.Tag = "#formatComboBox";
-            // 
-            // useAnotherPresetAsSourceComboBox
-            // 
+            //
+            //useAnotherPresetAsSourceComboBox
+            //
             resources.ApplyResources(this.useAnotherPresetAsSourceComboBox, "useAnotherPresetAsSourceComboBox");
             this.useAnotherPresetAsSourceComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.useAnotherPresetAsSourceComboBox.DropDownWidth = 600;
@@ -582,27 +582,27 @@
             this.useAnotherPresetAsSourceComboBox.Tag = "#labelFormat";
             this.toolTip1.SetToolTip(this.useAnotherPresetAsSourceComboBox, resources.GetString("useAnotherPresetAsSourceComboBox.ToolTip"));
             this.useAnotherPresetAsSourceComboBox.SelectedIndexChanged += new System.EventHandler(this.useAnotherPresetAsSourceComboBox_SelectedIndexChanged);
-            // 
-            // useAnotherPresetAsSourceCheckBoxLabel
-            // 
+            //
+            //useAnotherPresetAsSourceCheckBoxLabel
+            //
             resources.ApplyResources(this.useAnotherPresetAsSourceCheckBoxLabel, "useAnotherPresetAsSourceCheckBoxLabel");
             this.dirtyErrorProvider.SetIconAlignment(this.useAnotherPresetAsSourceCheckBoxLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("useAnotherPresetAsSourceCheckBoxLabel.IconAlignment"))));
             this.useAnotherPresetAsSourceCheckBoxLabel.Name = "useAnotherPresetAsSourceCheckBoxLabel";
             this.useAnotherPresetAsSourceCheckBoxLabel.Tag = "#useAnotherPresetAsSourceComboBox";
             this.toolTip1.SetToolTip(this.useAnotherPresetAsSourceCheckBoxLabel, resources.GetString("useAnotherPresetAsSourceCheckBoxLabel.ToolTip"));
             this.useAnotherPresetAsSourceCheckBoxLabel.Click += new System.EventHandler(this.useAnotherPresetAsSourceCheckBoxLabel_Click);
-            // 
-            // useAnotherPresetAsSourceCheckBox
-            // 
+            //
+            //useAnotherPresetAsSourceCheckBox
+            //
             resources.ApplyResources(this.useAnotherPresetAsSourceCheckBox, "useAnotherPresetAsSourceCheckBox");
             this.dirtyErrorProvider.SetIconAlignment(this.useAnotherPresetAsSourceCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("useAnotherPresetAsSourceCheckBox.IconAlignment"))));
             this.useAnotherPresetAsSourceCheckBox.Name = "useAnotherPresetAsSourceCheckBox";
             this.useAnotherPresetAsSourceCheckBox.Tag = "#useAnotherPresetAsSourceCheckBoxLabel";
             this.toolTip1.SetToolTip(this.useAnotherPresetAsSourceCheckBox, resources.GetString("useAnotherPresetAsSourceCheckBox.ToolTip"));
             this.useAnotherPresetAsSourceCheckBox.CheckedChanged += new System.EventHandler(this.useAnotherPresetAsSourceCheckBox_CheckedChanged);
-            // 
-            // buttonClose
-            // 
+            //
+            //buttonClose
+            //
             resources.ApplyResources(this.buttonClose, "buttonClose");
             this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.dirtyErrorProvider.SetIconAlignment(this.buttonClose, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonClose.IconAlignment"))));
@@ -611,9 +611,9 @@
             this.buttonClose.Tag = "@pinned-to-parent-x@non-defaultable";
             this.toolTip1.SetToolTip(this.buttonClose, resources.GetString("buttonClose.ToolTip"));
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
-            // 
-            // buttonSaveClose
-            // 
+            //
+            //buttonSaveClose
+            //
             resources.ApplyResources(this.buttonSaveClose, "buttonSaveClose");
             this.buttonSaveClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.dirtyErrorProvider.SetIconAlignment(this.buttonSaveClose, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonSaveClose.IconAlignment"))));
@@ -621,18 +621,18 @@
             this.buttonSaveClose.Tag = "#buttonClose";
             this.toolTip1.SetToolTip(this.buttonSaveClose, resources.GetString("buttonSaveClose.ToolTip"));
             this.buttonSaveClose.Click += new System.EventHandler(this.buttonSave_Click);
-            // 
-            // buttonOK
-            // 
+            //
+            //buttonOK
+            //
             resources.ApplyResources(this.buttonOK, "buttonOK");
             this.dirtyErrorProvider.SetIconAlignment(this.buttonOK, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonOK.IconAlignment"))));
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Tag = "#buttonSaveClose";
             this.toolTip1.SetToolTip(this.buttonOK, resources.GetString("buttonOK.ToolTip"));
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
-            // 
-            // buttonPreview
-            // 
+            //
+            //buttonPreview
+            //
             resources.ApplyResources(this.buttonPreview, "buttonPreview");
             this.dirtyErrorProvider.SetError(this.buttonPreview, resources.GetString("buttonPreview.Error"));
             this.dirtyErrorProvider.SetIconAlignment(this.buttonPreview, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonPreview.IconAlignment"))));
@@ -640,9 +640,9 @@
             this.buttonPreview.Tag = "#buttonOK";
             this.toolTip1.SetToolTip(this.buttonPreview, resources.GetString("buttonPreview.ToolTip"));
             this.buttonPreview.Click += new System.EventHandler(this.buttonPreview_Click);
-            // 
-            // buttonSettings
-            // 
+            //
+            //buttonSettings
+            //
             resources.ApplyResources(this.buttonSettings, "buttonSettings");
             this.dirtyErrorProvider.SetIconAlignment(this.buttonSettings, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonSettings.IconAlignment"))));
             this.buttonSettings.Image = global::MusicBeePlugin.Properties.Resources.gear_15;
@@ -650,82 +650,82 @@
             this.buttonSettings.Tag = "@non-defaultable@square-control";
             this.toolTip1.SetToolTip(this.buttonSettings, resources.GetString("buttonSettings.ToolTip"));
             this.buttonSettings.Click += new System.EventHandler(this.buttonSettings_Click);
-            // 
-            // buttonDeletePreset
-            // 
+            //
+            //buttonDeletePreset
+            //
             this.dirtyErrorProvider.SetIconAlignment(this.buttonDeletePreset, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonDeletePreset.IconAlignment"))));
             resources.ApplyResources(this.buttonDeletePreset, "buttonDeletePreset");
             this.buttonDeletePreset.Name = "buttonDeletePreset";
             this.buttonDeletePreset.Click += new System.EventHandler(this.buttonDeletePreset_Click);
-            // 
-            // buttonCopyPreset
-            // 
+            //
+            //buttonCopyPreset
+            //
             this.dirtyErrorProvider.SetIconAlignment(this.buttonCopyPreset, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonCopyPreset.IconAlignment"))));
             resources.ApplyResources(this.buttonCopyPreset, "buttonCopyPreset");
             this.buttonCopyPreset.Name = "buttonCopyPreset";
             this.buttonCopyPreset.Tag = "#buttonDeletePreset";
             this.buttonCopyPreset.Click += new System.EventHandler(this.buttonCopyPreset_Click);
-            // 
-            // buttonAddPreset
-            // 
+            //
+            //buttonAddPreset
+            //
             this.dirtyErrorProvider.SetIconAlignment(this.buttonAddPreset, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonAddPreset.IconAlignment"))));
             resources.ApplyResources(this.buttonAddPreset, "buttonAddPreset");
             this.buttonAddPreset.Name = "buttonAddPreset";
             this.buttonAddPreset.Tag = "#buttonCopyPreset@pinned-to-parent-x@non-defaultable";
             this.buttonAddPreset.Click += new System.EventHandler(this.buttonAddPreset_Click);
-            // 
-            // useHotkeyForSelectedTracksCheckBoxLabel
-            // 
+            //
+            //useHotkeyForSelectedTracksCheckBoxLabel
+            //
             resources.ApplyResources(this.useHotkeyForSelectedTracksCheckBoxLabel, "useHotkeyForSelectedTracksCheckBoxLabel");
             this.dirtyErrorProvider.SetIconAlignment(this.useHotkeyForSelectedTracksCheckBoxLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("useHotkeyForSelectedTracksCheckBoxLabel.IconAlignment"))));
             this.useHotkeyForSelectedTracksCheckBoxLabel.Name = "useHotkeyForSelectedTracksCheckBoxLabel";
             this.useHotkeyForSelectedTracksCheckBoxLabel.Tag = "#splitContainer1";
             this.toolTip1.SetToolTip(this.useHotkeyForSelectedTracksCheckBoxLabel, resources.GetString("useHotkeyForSelectedTracksCheckBoxLabel.ToolTip"));
             this.useHotkeyForSelectedTracksCheckBoxLabel.Click += new System.EventHandler(this.useHotkeyForSelectedTracksCheckBoxLabel_Click);
-            // 
-            // useHotkeyForSelectedTracksCheckBox
-            // 
+            //
+            //useHotkeyForSelectedTracksCheckBox
+            //
             resources.ApplyResources(this.useHotkeyForSelectedTracksCheckBox, "useHotkeyForSelectedTracksCheckBox");
             this.dirtyErrorProvider.SetIconAlignment(this.useHotkeyForSelectedTracksCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("useHotkeyForSelectedTracksCheckBox.IconAlignment"))));
             this.useHotkeyForSelectedTracksCheckBox.Name = "useHotkeyForSelectedTracksCheckBox";
             this.useHotkeyForSelectedTracksCheckBox.Tag = "#useHotkeyForSelectedTracksCheckBoxLabel";
             this.toolTip1.SetToolTip(this.useHotkeyForSelectedTracksCheckBox, resources.GetString("useHotkeyForSelectedTracksCheckBox.ToolTip"));
             this.useHotkeyForSelectedTracksCheckBox.CheckedChanged += new System.EventHandler(this.useHotkeyForSelectedTracksCheckBox_CheckedChanged);
-            // 
-            // assignHotkeyCheckBoxLabel
-            // 
+            //
+            //assignHotkeyCheckBoxLabel
+            //
             resources.ApplyResources(this.assignHotkeyCheckBoxLabel, "assignHotkeyCheckBoxLabel");
             this.dirtyErrorProvider.SetIconAlignment(this.assignHotkeyCheckBoxLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("assignHotkeyCheckBoxLabel.IconAlignment"))));
             this.assignHotkeyCheckBoxLabel.Name = "assignHotkeyCheckBoxLabel";
             this.assignHotkeyCheckBoxLabel.Tag = "#useHotkeyForSelectedTracksCheckBox";
             this.toolTip1.SetToolTip(this.assignHotkeyCheckBoxLabel, resources.GetString("assignHotkeyCheckBoxLabel.ToolTip"));
             this.assignHotkeyCheckBoxLabel.Click += new System.EventHandler(this.assignHotkeyCheckBoxLabel_Click);
-            // 
-            // assignHotkeyCheckBox
-            // 
+            //
+            //assignHotkeyCheckBox
+            //
             resources.ApplyResources(this.assignHotkeyCheckBox, "assignHotkeyCheckBox");
             this.dirtyErrorProvider.SetIconAlignment(this.assignHotkeyCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("assignHotkeyCheckBox.IconAlignment"))));
             this.assignHotkeyCheckBox.Name = "assignHotkeyCheckBox";
             this.assignHotkeyCheckBox.Tag = "#assignHotkeyCheckBoxLabel";
             this.toolTip1.SetToolTip(this.assignHotkeyCheckBox, resources.GetString("assignHotkeyCheckBox.ToolTip"));
             this.assignHotkeyCheckBox.CheckedChanged += new System.EventHandler(this.assignHotkeyCheckBox_CheckedChanged);
-            // 
-            // presetNameTextBox
-            // 
+            //
+            //presetNameTextBox
+            //
             this.dirtyErrorProvider.SetIconAlignment(this.presetNameTextBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("presetNameTextBox.IconAlignment"))));
             resources.ApplyResources(this.presetNameTextBox, "presetNameTextBox");
             this.presetNameTextBox.Name = "presetNameTextBox";
             this.toolTip1.SetToolTip(this.presetNameTextBox, resources.GetString("presetNameTextBox.ToolTip"));
             this.presetNameTextBox.Leave += new System.EventHandler(this.presetNameTextBox_Leave);
-            // 
-            // listBoxTableLayoutPanel
-            // 
+            //
+            //listBoxTableLayoutPanel
+            //
             resources.ApplyResources(this.listBoxTableLayoutPanel, "listBoxTableLayoutPanel");
             this.listBoxTableLayoutPanel.Controls.Add(this.presetList, 0, 0);
             this.listBoxTableLayoutPanel.Name = "listBoxTableLayoutPanel";
-            // 
-            // presetList
-            // 
+            //
+            //presetList
+            //
             resources.ApplyResources(this.presetList, "presetList");
             this.presetList.FormattingEnabled = true;
             this.dirtyErrorProvider.SetIconAlignment(this.presetList, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("presetList.IconAlignment"))));
@@ -734,31 +734,31 @@
             this.presetList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.presetList_ItemCheck);
             this.presetList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.presetList_MouseClick);
             this.presetList.SelectedIndexChanged += new System.EventHandler(this.presetList_SelectedIndexChanged);
-            // 
-            // panel2
-            // 
+            //
+            //panel2
+            //
             this.panel2.Controls.Add(this.presetTabControl);
             resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Name = "panel2";
-            // 
-            // presetTabControl
-            // 
+            //
+            //presetTabControl
+            //
             resources.ApplyResources(this.presetTabControl, "presetTabControl");
             this.presetTabControl.Controls.Add(this.tabPage1);
             this.presetTabControl.Controls.Add(this.tabPage2);
             this.dirtyErrorProvider.SetIconAlignment(this.presetTabControl, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("presetTabControl.IconAlignment"))));
             this.presetTabControl.Name = "presetTabControl";
             this.presetTabControl.SelectedIndex = 0;
-            // 
-            // tabPage1
-            // 
+            //
+            //tabPage1
+            //
             this.tabPage1.Controls.Add(this.previewTable);
             this.dirtyErrorProvider.SetIconAlignment(this.tabPage1, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("tabPage1.IconAlignment"))));
             resources.ApplyResources(this.tabPage1, "tabPage1");
             this.tabPage1.Name = "tabPage1";
-            // 
-            // previewTable
-            // 
+            //
+            //previewTable
+            //
             this.previewTable.AllowUserToAddRows = false;
             this.previewTable.AllowUserToDeleteRows = false;
             resources.ApplyResources(this.previewTable, "previewTable");
@@ -785,9 +785,9 @@
             this.previewTable.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.previewTable_ColumnWidthChanged);
             this.previewTable.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.previewTable_DataError);
             this.previewTable.RowHeightChanged += new System.Windows.Forms.DataGridViewRowEventHandler(this.previewTable_RowHeightChanged);
-            // 
-            // tabPage2
-            // 
+            //
+            //tabPage2
+            //
             this.tabPage2.Controls.Add(this.multipleItemsSplitterTrimCheckBoxLabel);
             this.tabPage2.Controls.Add(this.multipleItemsSplitterTrimCheckBox);
             this.tabPage2.Controls.Add(this.expressionsDataGridView);
@@ -806,17 +806,17 @@
             this.dirtyErrorProvider.SetIconAlignment(this.tabPage2, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("tabPage2.IconAlignment"))));
             resources.ApplyResources(this.tabPage2, "tabPage2");
             this.tabPage2.Name = "tabPage2";
-            // 
-            // multipleItemsSplitterTrimCheckBoxLabel
-            // 
+            //
+            //multipleItemsSplitterTrimCheckBoxLabel
+            //
             resources.ApplyResources(this.multipleItemsSplitterTrimCheckBoxLabel, "multipleItemsSplitterTrimCheckBoxLabel");
             this.dirtyErrorProvider.SetIconAlignment(this.multipleItemsSplitterTrimCheckBoxLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("multipleItemsSplitterTrimCheckBoxLabel.IconAlignment"))));
             this.multipleItemsSplitterTrimCheckBoxLabel.Name = "multipleItemsSplitterTrimCheckBoxLabel";
             this.toolTip1.SetToolTip(this.multipleItemsSplitterTrimCheckBoxLabel, resources.GetString("multipleItemsSplitterTrimCheckBoxLabel.ToolTip"));
             this.multipleItemsSplitterTrimCheckBoxLabel.Click += new System.EventHandler(this.multipleItemsSplitterTrimCheckBoxLabel_Click);
-            // 
-            // multipleItemsSplitterTrimCheckBox
-            // 
+            //
+            //multipleItemsSplitterTrimCheckBox
+            //
             resources.ApplyResources(this.multipleItemsSplitterTrimCheckBox, "multipleItemsSplitterTrimCheckBox");
             this.dirtyErrorProvider.SetIconAlignment(this.multipleItemsSplitterTrimCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("multipleItemsSplitterTrimCheckBox.IconAlignment"))));
             this.multipleItemsSplitterTrimCheckBox.Name = "multipleItemsSplitterTrimCheckBox";
@@ -824,9 +824,9 @@
             this.toolTip1.SetToolTip(this.multipleItemsSplitterTrimCheckBox, resources.GetString("multipleItemsSplitterTrimCheckBox.ToolTip"));
             this.multipleItemsSplitterTrimCheckBox.UseVisualStyleBackColor = false;
             this.multipleItemsSplitterTrimCheckBox.CheckedChanged += new System.EventHandler(this.multipleItemsSplitterTrimCheckBox_CheckedChanged);
-            // 
-            // expressionsDataGridView
-            // 
+            //
+            //expressionsDataGridView
+            //
             this.expressionsDataGridView.AllowUserToAddRows = false;
             resources.ApplyResources(this.expressionsDataGridView, "expressionsDataGridView");
             this.expressionsDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -844,9 +844,9 @@
             this.expressionsDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.expressionsDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.expressionsDataGridView_CellClick);
             this.expressionsDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.expressionsDataGridView_CellContentClick);
-            // 
-            // expressionsDataGridViewCheckedColumn
-            // 
+            //
+            //expressionsDataGridViewCheckedColumn
+            //
             this.expressionsDataGridViewCheckedColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.expressionsDataGridViewCheckedColumn.FalseValue = "F";
             resources.ApplyResources(this.expressionsDataGridViewCheckedColumn, "expressionsDataGridViewCheckedColumn");
@@ -854,15 +854,15 @@
             this.expressionsDataGridViewCheckedColumn.Name = "expressionsDataGridViewCheckedColumn";
             this.expressionsDataGridViewCheckedColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.expressionsDataGridViewCheckedColumn.TrueValue = "T";
-            // 
-            // expressionsDataGridViewExpressionColumn
-            // 
+            //
+            //expressionsDataGridViewExpressionColumn
+            //
             this.expressionsDataGridViewExpressionColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             resources.ApplyResources(this.expressionsDataGridViewExpressionColumn, "expressionsDataGridViewExpressionColumn");
             this.expressionsDataGridViewExpressionColumn.Name = "expressionsDataGridViewExpressionColumn";
-            // 
-            // tagsDataGridView
-            // 
+            //
+            //tagsDataGridView
+            //
             this.tagsDataGridView.AllowUserToAddRows = false;
             this.tagsDataGridView.AllowUserToDeleteRows = false;
             resources.ApplyResources(this.tagsDataGridView, "tagsDataGridView");
@@ -883,9 +883,9 @@
             this.tagsDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.tagsDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tagsDataGridView_CellClick);
             this.tagsDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tagsDataGridView_CellContentClick);
-            // 
-            // tagsDataGridViewCheckedColumn
-            // 
+            //
+            //tagsDataGridViewCheckedColumn
+            //
             this.tagsDataGridViewCheckedColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.tagsDataGridViewCheckedColumn.FalseValue = "F";
             resources.ApplyResources(this.tagsDataGridViewCheckedColumn, "tagsDataGridViewCheckedColumn");
@@ -893,51 +893,51 @@
             this.tagsDataGridViewCheckedColumn.Name = "tagsDataGridViewCheckedColumn";
             this.tagsDataGridViewCheckedColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.tagsDataGridViewCheckedColumn.TrueValue = "T";
-            // 
-            // tagsDataGridViewFunctionColumn
-            // 
+            //
+            //tagsDataGridViewFunctionColumn
+            //
             this.tagsDataGridViewFunctionColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.tagsDataGridViewFunctionColumn.FillWeight = 50F;
             resources.ApplyResources(this.tagsDataGridViewFunctionColumn, "tagsDataGridViewFunctionColumn");
             this.tagsDataGridViewFunctionColumn.Name = "tagsDataGridViewFunctionColumn";
             this.tagsDataGridViewFunctionColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.tagsDataGridViewFunctionColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // tagsDataGridViewTagColumn
-            // 
+            //
+            //tagsDataGridViewTagColumn
+            //
             this.tagsDataGridViewTagColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.tagsDataGridViewTagColumn.FillWeight = 150F;
             resources.ApplyResources(this.tagsDataGridViewTagColumn, "tagsDataGridViewTagColumn");
             this.tagsDataGridViewTagColumn.Name = "tagsDataGridViewTagColumn";
             this.tagsDataGridViewTagColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // tagsDataGridViewInfoColumn
-            // 
+            //
+            //tagsDataGridViewInfoColumn
+            //
             this.tagsDataGridViewInfoColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.tagsDataGridViewInfoColumn.FillWeight = 70F;
             resources.ApplyResources(this.tagsDataGridViewInfoColumn, "tagsDataGridViewInfoColumn");
             this.tagsDataGridViewInfoColumn.Name = "tagsDataGridViewInfoColumn";
             this.tagsDataGridViewInfoColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // expressionTextBox
-            // 
+            //
+            //expressionTextBox
+            //
             resources.ApplyResources(this.expressionTextBox, "expressionTextBox");
             this.dirtyErrorProvider.SetIconAlignment(this.expressionTextBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("expressionTextBox.IconAlignment"))));
             this.expressionTextBox.Name = "expressionTextBox";
             this.expressionTextBox.Tag = "#buttonsPanel";
             this.toolTip1.SetToolTip(this.expressionTextBox, resources.GetString("expressionTextBox.ToolTip"));
             this.expressionTextBox.TextChanged += new System.EventHandler(this.expressionTextBox_TextChanged);
-            // 
-            // expressionLabel
-            // 
+            //
+            //expressionLabel
+            //
             resources.ApplyResources(this.expressionLabel, "expressionLabel");
             this.dirtyErrorProvider.SetIconAlignment(this.expressionLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("expressionLabel.IconAlignment"))));
             this.expressionLabel.Name = "expressionLabel";
             this.expressionLabel.Tag = "#expressionTextBox";
             this.toolTip1.SetToolTip(this.expressionLabel, resources.GetString("expressionLabel.ToolTip"));
-            // 
-            // multipleItemsSplitterComboBox
-            // 
+            //
+            //multipleItemsSplitterComboBox
+            //
             this.multipleItemsSplitterComboBox.DropDownWidth = 390;
             this.dirtyErrorProvider.SetIconAlignment(this.multipleItemsSplitterComboBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("multipleItemsSplitterComboBox.IconAlignment"))));
             this.multipleItemsSplitterComboBox.Items.AddRange(new object[] {
@@ -951,17 +951,17 @@
             this.toolTip1.SetToolTip(this.multipleItemsSplitterComboBox, resources.GetString("multipleItemsSplitterComboBox.ToolTip"));
             this.multipleItemsSplitterComboBox.SelectedIndexChanged += new System.EventHandler(this.multipleItemsSplitterComboBox_SelectedIndexChanged);
             this.multipleItemsSplitterComboBox.TextUpdate += new System.EventHandler(this.multipleItemsSplitterComboBox_TextUpdate);
-            // 
-            // multipleItemsSplitterLabel
-            // 
+            //
+            //multipleItemsSplitterLabel
+            //
             resources.ApplyResources(this.multipleItemsSplitterLabel, "multipleItemsSplitterLabel");
             this.dirtyErrorProvider.SetIconAlignment(this.multipleItemsSplitterLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("multipleItemsSplitterLabel.IconAlignment"))));
             this.multipleItemsSplitterLabel.Name = "multipleItemsSplitterLabel";
             this.multipleItemsSplitterLabel.Tag = "#multipleItemsSplitterComboBox";
             this.toolTip1.SetToolTip(this.multipleItemsSplitterLabel, resources.GetString("multipleItemsSplitterLabel.ToolTip"));
-            // 
-            // parameter2ComboBox
-            // 
+            //
+            //parameter2ComboBox
+            //
             this.parameter2ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.parameter2ComboBox.DropDownWidth = 250;
             this.parameter2ComboBox.FormattingEnabled = true;
@@ -969,16 +969,16 @@
             resources.ApplyResources(this.parameter2ComboBox, "parameter2ComboBox");
             this.parameter2ComboBox.Name = "parameter2ComboBox";
             this.parameter2ComboBox.SelectedIndexChanged += new System.EventHandler(this.parameter2ComboBox_SelectedIndexChanged);
-            // 
-            // parameter2Label
-            // 
+            //
+            //parameter2Label
+            //
             resources.ApplyResources(this.parameter2Label, "parameter2Label");
             this.dirtyErrorProvider.SetIconAlignment(this.parameter2Label, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("parameter2Label.IconAlignment"))));
             this.parameter2Label.Name = "parameter2Label";
             this.parameter2Label.Tag = "#parameter2ComboBox";
-            // 
-            // sourceTagList
-            // 
+            //
+            //sourceTagList
+            //
             this.sourceTagList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.sourceTagList.DropDownWidth = 250;
             this.sourceTagList.FormattingEnabled = true;
@@ -987,16 +987,16 @@
             this.sourceTagList.Name = "sourceTagList";
             this.sourceTagList.Tag = "#parameter2Label";
             this.sourceTagList.SelectedIndexChanged += new System.EventHandler(this.sourceTagList_SelectedIndexChanged);
-            // 
-            // forTagLabel
-            // 
+            //
+            //forTagLabel
+            //
             resources.ApplyResources(this.forTagLabel, "forTagLabel");
             this.dirtyErrorProvider.SetIconAlignment(this.forTagLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("forTagLabel.IconAlignment"))));
             this.forTagLabel.Name = "forTagLabel";
             this.forTagLabel.Tag = "#sourceTagList";
-            // 
-            // functionComboBox
-            // 
+            //
+            //functionComboBox
+            //
             this.functionComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.functionComboBox.DropDownWidth = 110;
             this.dirtyErrorProvider.SetIconAlignment(this.functionComboBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("functionComboBox.IconAlignment"))));
@@ -1004,16 +1004,16 @@
             this.functionComboBox.Name = "functionComboBox";
             this.functionComboBox.Tag = "#forTagLabel";
             this.functionComboBox.SelectedIndexChanged += new System.EventHandler(this.functionComboBox_SelectedIndexChanged);
-            // 
-            // labelFunction
-            // 
+            //
+            //labelFunction
+            //
             resources.ApplyResources(this.labelFunction, "labelFunction");
             this.dirtyErrorProvider.SetIconAlignment(this.labelFunction, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("labelFunction.IconAlignment"))));
             this.labelFunction.Name = "labelFunction";
             this.labelFunction.Tag = "#functionComboBox";
-            // 
-            // buttonsPanel
-            // 
+            //
+            //buttonsPanel
+            //
             resources.ApplyResources(this.buttonsPanel, "buttonsPanel");
             this.buttonsPanel.Controls.Add(this.buttonUpdateFunction);
             this.buttonsPanel.Controls.Add(this.buttonAddFunction);
@@ -1021,9 +1021,9 @@
             this.buttonsPanel.Controls.Add(this.buttonClearExpression);
             this.buttonsPanel.Name = "buttonsPanel";
             this.buttonsPanel.Tag = "#tabPage2";
-            // 
-            // buttonUpdateFunction
-            // 
+            //
+            //buttonUpdateFunction
+            //
             resources.ApplyResources(this.buttonUpdateFunction, "buttonUpdateFunction");
             this.dirtyErrorProvider.SetIconAlignment(this.buttonUpdateFunction, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonUpdateFunction.IconAlignment"))));
             this.buttonUpdateFunction.Image = global::MusicBeePlugin.Properties.Resources.warning_wide_15;
@@ -1031,27 +1031,27 @@
             this.buttonUpdateFunction.Tag = "#buttonsPanel@non-defaultable";
             this.toolTip1.SetToolTip(this.buttonUpdateFunction, resources.GetString("buttonUpdateFunction.ToolTip"));
             this.buttonUpdateFunction.Click += new System.EventHandler(this.buttonUpdateFunction_Click);
-            // 
-            // buttonAddFunction
-            // 
+            //
+            //buttonAddFunction
+            //
             resources.ApplyResources(this.buttonAddFunction, "buttonAddFunction");
             this.dirtyErrorProvider.SetIconAlignment(this.buttonAddFunction, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonAddFunction.IconAlignment"))));
             this.buttonAddFunction.Name = "buttonAddFunction";
             this.buttonAddFunction.Tag = "#buttonUpdateFunction@non-defaultable";
             this.toolTip1.SetToolTip(this.buttonAddFunction, resources.GetString("buttonAddFunction.ToolTip"));
             this.buttonAddFunction.Click += new System.EventHandler(this.buttonAddFunction_Click);
-            // 
-            // buttonHelp
-            // 
+            //
+            //buttonHelp
+            //
             this.dirtyErrorProvider.SetIconAlignment(this.buttonHelp, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonHelp.IconAlignment"))));
             resources.ApplyResources(this.buttonHelp, "buttonHelp");
             this.buttonHelp.Name = "buttonHelp";
             this.buttonHelp.Tag = "@non-defaultable";
             this.toolTip1.SetToolTip(this.buttonHelp, resources.GetString("buttonHelp.ToolTip"));
             this.buttonHelp.Click += new System.EventHandler(this.buttonHelp_Click);
-            // 
-            // buttonClearExpression
-            // 
+            //
+            //buttonClearExpression
+            //
             this.dirtyErrorProvider.SetIconAlignment(this.buttonClearExpression, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonClearExpression.IconAlignment"))));
             this.buttonClearExpression.Image = global::MusicBeePlugin.Properties.Resources.clear_button_15;
             resources.ApplyResources(this.buttonClearExpression, "buttonClearExpression");
@@ -1059,30 +1059,30 @@
             this.buttonClearExpression.Tag = "@pinned-to-parent-x@non-defaultable@square-control";
             this.toolTip1.SetToolTip(this.buttonClearExpression, resources.GetString("buttonClearExpression.ToolTip"));
             this.buttonClearExpression.Click += new System.EventHandler(this.buttonClearExpression_Click);
-            // 
-            // autoApplyPresetsLabel
-            // 
+            //
+            //autoApplyPresetsLabel
+            //
             resources.ApplyResources(this.autoApplyPresetsLabel, "autoApplyPresetsLabel");
             this.autoApplyPresetsLabel.AutoEllipsis = true;
             this.dirtyErrorProvider.SetIconAlignment(this.autoApplyPresetsLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("autoApplyPresetsLabel.IconAlignment"))));
             this.autoApplyPresetsLabel.Name = "autoApplyPresetsLabel";
             this.autoApplyPresetsLabel.Tag = "#LibraryReports&autoApplyPanel@pinned-to-parent-x";
-            // 
-            // dirtyErrorProvider
-            // 
+            //
+            //dirtyErrorProvider
+            //
             this.dirtyErrorProvider.BlinkRate = 1000;
             this.dirtyErrorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.AlwaysBlink;
             this.dirtyErrorProvider.ContainerControl = this;
             resources.ApplyResources(this.dirtyErrorProvider, "dirtyErrorProvider");
-            // 
-            // tagChangesLabel
-            // 
+            //
+            //tagChangesLabel
+            //
             resources.ApplyResources(this.tagChangesLabel, "tagChangesLabel");
             this.dirtyErrorProvider.SetIconAlignment(this.tagChangesLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("tagChangesLabel.IconAlignment"))));
             this.tagChangesLabel.Name = "tagChangesLabel";
-            // 
-            // numberOfTagsToRecalculateNumericUpDown
-            // 
+            //
+            //numberOfTagsToRecalculateNumericUpDown
+            //
             this.dirtyErrorProvider.SetIconAlignment(this.numberOfTagsToRecalculateNumericUpDown, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("numberOfTagsToRecalculateNumericUpDown.IconAlignment"))));
             this.numberOfTagsToRecalculateNumericUpDown.Increment = new decimal(new int[] {
             10,
@@ -1108,25 +1108,25 @@
             0,
             0});
             this.numberOfTagsToRecalculateNumericUpDown.ValueChanged += new System.EventHandler(this.numberOfTagsToRecalculateNumericUpDown_ValueChanged);
-            // 
-            // recalculateOnNumberOfTagsChangesCheckBox
-            // 
+            //
+            //recalculateOnNumberOfTagsChangesCheckBox
+            //
             resources.ApplyResources(this.recalculateOnNumberOfTagsChangesCheckBox, "recalculateOnNumberOfTagsChangesCheckBox");
             this.dirtyErrorProvider.SetIconAlignment(this.recalculateOnNumberOfTagsChangesCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("recalculateOnNumberOfTagsChangesCheckBox.IconAlignment"))));
             this.recalculateOnNumberOfTagsChangesCheckBox.Name = "recalculateOnNumberOfTagsChangesCheckBox";
             this.recalculateOnNumberOfTagsChangesCheckBox.Tag = "#recalculateOnNumberOfTagsChangesCheckBoxLabel@pinned-to-parent-x";
             this.recalculateOnNumberOfTagsChangesCheckBox.CheckedChanged += new System.EventHandler(this.recalculateOnNumberOfTagsChangesCheckBox_CheckedChanged);
-            // 
-            // recalculateOnNumberOfTagsChangesCheckBoxLabel
-            // 
+            //
+            //recalculateOnNumberOfTagsChangesCheckBoxLabel
+            //
             resources.ApplyResources(this.recalculateOnNumberOfTagsChangesCheckBoxLabel, "recalculateOnNumberOfTagsChangesCheckBoxLabel");
             this.dirtyErrorProvider.SetIconAlignment(this.recalculateOnNumberOfTagsChangesCheckBoxLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("recalculateOnNumberOfTagsChangesCheckBoxLabel.IconAlignment"))));
             this.recalculateOnNumberOfTagsChangesCheckBoxLabel.Name = "recalculateOnNumberOfTagsChangesCheckBoxLabel";
             this.recalculateOnNumberOfTagsChangesCheckBoxLabel.Tag = "#numberOfTagsToRecalculateNumericUpDown";
             this.recalculateOnNumberOfTagsChangesCheckBoxLabel.Click += new System.EventHandler(this.recalculateOnNumberOfTagsChangesCheckBoxLabel_Click);
-            // 
-            // autoApplyPanel
-            // 
+            //
+            //autoApplyPanel
+            //
             this.autoApplyPanel.Controls.Add(this.tagChangesLabel);
             this.autoApplyPanel.Controls.Add(this.numberOfTagsToRecalculateNumericUpDown);
             this.autoApplyPanel.Controls.Add(this.recalculateOnNumberOfTagsChangesCheckBoxLabel);
@@ -1134,9 +1134,9 @@
             resources.ApplyResources(this.autoApplyPanel, "autoApplyPanel");
             this.autoApplyPanel.Name = "autoApplyPanel";
             this.autoApplyPanel.Tag = "#LibraryReports&splitContainer1@pinned-to-parent-x";
-            // 
-            // LibraryReports
-            // 
+            //
+            //LibraryReports
+            //
             this.AcceptButton = this.buttonPreview;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

@@ -2,15 +2,15 @@
 {
     partial class MultipleSearchAndReplace
     {
-        /// <summary>
-        /// Требуется переменная конструктора.
-        /// </summary>
+        ///<summary>
+        ///Требуется переменная конструктора.
+        ///</summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Освободить все используемые ресурсы.
-        /// </summary>
-        /// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
+        ///<summary>
+        ///Освободить все используемые ресурсы.
+        ///</summary>
+        ///<param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -23,10 +23,10 @@
 
         #region Код, автоматически созданный конструктором форм Windows
 
-        /// <summary>
-        /// Обязательный метод для поддержки конструктора - не изменяйте
-        /// содержимое данного метода при помощи редактора кода.
-        /// </summary>
+        ///<summary>
+        ///Обязательный метод для поддержки конструктора - не изменяйте
+        ///содержимое данного метода при помощи редактора кода.
+        ///</summary>
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
@@ -100,8 +100,7 @@
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.ControlDark;
             this.splitContainer1.Panel2.Controls.Add(this.previewTable);
-            this.splitContainer1.Tag = "#MultipleSearchAndReplace&MultipleSearchAndReplace@pinned-to-parent" +
-    "-x";
+            this.splitContainer1.Tag = "#MultipleSearchAndReplace&MultipleSearchAndReplace@pinned-to-parent-x";
             this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
             // 
             // templateTable
@@ -321,8 +320,8 @@
             // 
             // buttonDelete
             // 
-            resources.ApplyResources(this.buttonDelete, "buttonDelete");
             this.dirtyErrorProvider.SetIconAlignment(this.buttonDelete, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonDelete.IconAlignment"))));
+            resources.ApplyResources(this.buttonDelete, "buttonDelete");
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Tag = "#presetLabel@non-defaultable";
             this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);

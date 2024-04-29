@@ -238,7 +238,7 @@
     <value>100, 23</value>
   </data>
   <data name="buttonPreview.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>0</value>
   </data>
   <data name="buttonPreview.Text" xml:space="preserve">
     <value>Preview</value>
@@ -303,9 +303,6 @@
   <data name="buttonDeleteSaved.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="buttonDeleteSaved.IsEnabled()" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="buttonDeleteSaved.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
   </data>
@@ -322,7 +319,7 @@
     <value>23, 23</value>
   </data>
   <data name="buttonDeleteSaved.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
+    <value>19</value>
   </data>
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>165, 17</value>
@@ -361,7 +358,7 @@
     <value>176, 23</value>
   </data>
   <data name="loadComboBox.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
+    <value>18</value>
   </data>
   <data name="loadComboBox.ToolTip" xml:space="preserve">
     <value>Load ASR preset</value>
@@ -381,9 +378,6 @@
   <data name="buttonSave.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="buttonSave.IsEnabled()" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="buttonSave.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
   </data>
@@ -400,7 +394,7 @@
     <value>100, 23</value>
   </data>
   <data name="buttonSave.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
+    <value>17</value>
   </data>
   <data name="buttonSave.Text" xml:space="preserve">
     <value>Save</value>
@@ -476,7 +470,7 @@ later for auto-execution or assign hotkey to it</value>
     <value>28, 19</value>
   </data>
   <data name="autoApplyCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+    <value>15</value>
   </data>
   <data name="autoApplyCheckBox.Text" xml:space="preserve">
     <value> </value>
@@ -512,7 +506,7 @@ later for auto-execution or assign hotkey to it</value>
     <value>198, 23</value>
   </data>
   <data name="templateNameTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+    <value>13</value>
   </data>
   <data name="templateNameTextBox.ToolTip" xml:space="preserve">
     <value>Preset name</value>
@@ -548,7 +542,7 @@ later for auto-execution or assign hotkey to it</value>
     <value>42, 15</value>
   </data>
   <data name="presetLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>12</value>
   </data>
   <data name="presetLabel.Text" xml:space="preserve">
     <value>Preset:</value>
@@ -568,9 +562,6 @@ later for auto-execution or assign hotkey to it</value>
   <data name="&gt;&gt;presetLabel.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="buttonDelete.IsEnabled()" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="buttonDelete.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
   </data>
@@ -587,7 +578,7 @@ later for auto-execution or assign hotkey to it</value>
     <value>88, 23</value>
   </data>
   <data name="buttonDelete.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>11</value>
   </data>
   <data name="buttonDelete.Text" xml:space="preserve">
     <value>Delete</value>
@@ -620,7 +611,7 @@ later for auto-execution or assign hotkey to it</value>
     <value>88, 23</value>
   </data>
   <data name="buttonAdd.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>10</value>
   </data>
   <data name="buttonAdd.Text" xml:space="preserve">
     <value>Add</value>
@@ -636,9 +627,6 @@ later for auto-execution or assign hotkey to it</value>
   </data>
   <data name="&gt;&gt;buttonAdd.ZOrder" xml:space="preserve">
     <value>8</value>
-  </data>
-  <data name="buttonDown.IsEnabled()" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="buttonDown.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe Fluent Icons, 8.25pt, style=Bold</value>
@@ -659,7 +647,7 @@ later for auto-execution or assign hotkey to it</value>
     <value>23, 23</value>
   </data>
   <data name="buttonDown.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>9</value>
   </data>
   <data name="buttonDown.Text" xml:space="preserve">
     <value></value>
@@ -675,9 +663,6 @@ later for auto-execution or assign hotkey to it</value>
   </data>
   <data name="&gt;&gt;buttonDown.ZOrder" xml:space="preserve">
     <value>9</value>
-  </data>
-  <data name="buttonUp.IsEnabled()" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="buttonUp.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe Fluent Icons, 8.25pt, style=Bold</value>
@@ -698,7 +683,7 @@ later for auto-execution or assign hotkey to it</value>
     <value>23, 23</value>
   </data>
   <data name="buttonUp.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>8</value>
   </data>
   <data name="buttonUp.Text" xml:space="preserve">
     <value></value>
@@ -734,7 +719,7 @@ later for auto-execution or assign hotkey to it</value>
     <value>100, 23</value>
   </data>
   <data name="buttonOK.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>1</value>
   </data>
   <data name="buttonOK.Text" xml:space="preserve">
     <value>Proceed</value>
@@ -770,7 +755,7 @@ later for auto-execution or assign hotkey to it</value>
     <value>23, 23</value>
   </data>
   <data name="buttonSettings.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="buttonSettings.ToolTip" xml:space="preserve">
     <value>Open quick settings</value>
@@ -809,7 +794,7 @@ later for auto-execution or assign hotkey to it</value>
     <value>103, 19</value>
   </data>
   <data name="searchOnlyCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>14</value>
   </data>
   <data name="searchOnlyCheckBox.Text" xml:space="preserve">
     <value>SEARCH ONLY</value>
@@ -846,7 +831,7 @@ criteria, all of which must match the search results.</value>
     <value>184, 23</value>
   </data>
   <data name="destinationTagList.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;destinationTagList.Name" xml:space="preserve">
     <value>destinationTagList</value>
@@ -879,7 +864,7 @@ criteria, all of which must match the search results.</value>
     <value>38, 15</value>
   </data>
   <data name="toTagLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="toTagLabel.Text" xml:space="preserve">
     <value>to tag</value>
@@ -915,7 +900,7 @@ criteria, all of which must match the search results.</value>
     <value>28, 19</value>
   </data>
   <data name="autoDestinationTagCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="autoDestinationTagCheckBox.Text" xml:space="preserve">
     <value> </value>
@@ -948,7 +933,7 @@ criteria, all of which must match the search results.</value>
     <value>184, 23</value>
   </data>
   <data name="sourceTagList.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;sourceTagList.Name" xml:space="preserve">
     <value>sourceTagList</value>
@@ -981,7 +966,7 @@ criteria, all of which must match the search results.</value>
     <value>55, 15</value>
   </data>
   <data name="fromTagLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="fromTagLabel.Text" xml:space="preserve">
     <value>From tag</value>
@@ -1014,7 +999,7 @@ criteria, all of which must match the search results.</value>
     <value>35, 15</value>
   </data>
   <data name="placeholderLabel1.TabIndex" type="System.Int32, mscorlib">
-    <value>119</value>
+    <value>16</value>
   </data>
   <data name="placeholderLabel1.Text" xml:space="preserve">
     <value>pppp</value>

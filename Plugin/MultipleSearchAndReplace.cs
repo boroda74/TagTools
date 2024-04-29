@@ -900,7 +900,7 @@ namespace MusicBeePlugin
         private void templateNameTextBox_TextChanged(object sender, EventArgs e)
         {
             //if (!ignoreTemplateNameTextBoxTextChanged)
-            //    loadComboBoxCustom.SelectedIndex = 0;
+            //   loadComboBoxCustom.SelectedIndex = 0;
 
             if (templateNameTextBox.Text == string.Empty)
                 buttonSave.Enable(false);

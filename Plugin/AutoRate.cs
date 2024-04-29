@@ -516,9 +516,7 @@ namespace MusicBeePlugin
                     NumberOfFiles++;
 
                     int statistics;
-                    playsPerDayStatistics.TryGetValue(-playsPerDay, out statistics);
-
-                    if (statistics != 0)
+                    if (playsPerDayStatistics.TryGetValue(-playsPerDay, out statistics))
                         playsPerDayStatistics.Remove(-playsPerDay);
 
                     playsPerDayStatistics.Add(-playsPerDay, ++statistics);

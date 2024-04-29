@@ -32,7 +32,7 @@ namespace MusicBeePlugin
         private CustomComboBox filterComboBoxCustom;
 
 
-        private const int tableColumnCount = 20; // IT'S COLUMN COUNT OF "previewTable" !!!
+        private const int tableColumnCount = 20; //IT'S COLUMN COUNT OF "previewTable" !!!
 
         private static bool IgnoreFilterComboBoxSelectedIndexChanged = false;
 
@@ -71,7 +71,7 @@ namespace MusicBeePlugin
         private Preset backedUpPreset = null;
         private bool processTagsMode = true;
 
-        private SortedDictionary<string, Preset> presetProcessingCopies; // <Guid as string, Preset>: To deal with <All Tags> pseudo tag some presets will be duplicated
+        private SortedDictionary<string, Preset> presetProcessingCopies; //<Guid as string, Preset>: To deal with <All Tags> pseudo tag some presets will be duplicated
         private int allTagsReplaceIdsCount = 0;
         private bool[] allTagsPresetParameterTagMask;
 
@@ -162,12 +162,12 @@ namespace MusicBeePlugin
 
             //Setting control not standard properties
             //var heightField = presetList.GetType().GetField(
-            //    "scaledListItemBordersHeight",
-            //    BindingFlags.NonPublic | BindingFlags.Instance
+            //   "scaledListItemBordersHeight",
+            //   BindingFlags.NonPublic | BindingFlags.Instance
             //);
 
-            //var addedHeight = (int)Math.Round(4d * dpiScaleFactor); // Some appropriate value, greater than the field's default of 2
-            //heightField.SetValue(presetList, addedHeight); // Where "presetList" is your CheckedListBox
+            //var addedHeight = (int)Math.Round(4d * dpiScaleFactor); //Some appropriate value, greater than the field's default of 2
+            //heightField.SetValue(presetList, addedHeight); //Where "presetList" is your CheckedListBox
 
             tableLayoutPanel3ColWidth0 = tableLayoutPanel3.ColumnStyles[0].Width * hDpiFontScaling;
             tableLayoutPanel3ColWidth1 = tableLayoutPanel3.ColumnStyles[1].Width;
@@ -871,7 +871,7 @@ namespace MusicBeePlugin
                 return pathName;
             }
 
-            public string replaceVariable(string pattern, bool isSearchPattern) // isSearchPattern: true - search (i.e. must be escaped), false - replace
+            public string replaceVariable(string pattern, bool isSearchPattern) //isSearchPattern: true - search (i.e. must be escaped), false - replace
             {
                 CustomText1 = customText;
 
@@ -907,7 +907,7 @@ namespace MusicBeePlugin
                     return false;
             }
 
-            public (int, bool[]) getAllTagsReplaceTagIds() // Returns (<All Tags> replace parameter Id count, <All Tags> parameter Id mask)
+            public (int, bool[]) getAllTagsReplaceTagIds() //Returns (<All Tags> replace parameter Id count, <All Tags> parameter Id mask)
             {
                 bool[] allTagsParameterTagMask = new bool[5];
                 allTagsParameterTagMask[0] = false;
@@ -935,7 +935,7 @@ namespace MusicBeePlugin
                 return (countAllTagsReplaceTagIds(), allTagsParameterTagMask);
             }
 
-            public int countAllTagsReplaceTagIds() // Counts <All Tags> replace parameter Ids
+            public int countAllTagsReplaceTagIds() //Counts <All Tags> replace parameter Ids
             {
                 allTagsReplaceIdsCount = 0;
 
@@ -1108,7 +1108,7 @@ namespace MusicBeePlugin
 
                 double soundCheck1000d = 1000 * Math.Pow(10.0, (-0.1 * replayGain));
                 //if (soundCheck1000d > 65534)
-                //    soundCheck1000d = 65534;
+                //   soundCheck1000d = 65534;
                 uint soundCheck1000;
 
                 try
@@ -1123,16 +1123,16 @@ namespace MusicBeePlugin
 
                 //double soundCheck2500d = 2500 * Math.Pow(10.0, (-0.1 * replayGain));
                 //if (soundCheck2500d > 65534)
-                //    soundCheck2500d = 65534;
+                //   soundCheck2500d = 65534;
                 //uint soundCheck2500;
 
                 //try
                 //{
-                //    soundCheck2500 = Convert.ToUInt32(soundCheck2500d);
+                //   soundCheck2500 = Convert.ToUInt32(soundCheck2500d);
                 //}
                 //catch
                 //{
-                //    soundCheck2500 = 0;
+                //   soundCheck2500 = 0;
                 //}
 
 
@@ -2689,7 +2689,7 @@ namespace MusicBeePlugin
 
         private static (bool, ChangesDetectionResult, ChangesDetectionResult, ChangesDetectionResult, ChangesDetectionResult, ChangesDetectionResult, ChangesDetectionResult)
             DetectTagsChanges(Preset processingPreset, SearchedAndReplacedTagsStruct searchedAndReplacedTags)
-        // 1st result: false - skip, true - proceed
+        //1st result: false - skip, true - proceed
         {
             ChangesDetectionResult result1 = ChangesDetectionResult.NoExclusionsDetected;
             ChangesDetectionResult result2 = ChangesDetectionResult.NoExclusionsDetected;
@@ -3042,7 +3042,7 @@ namespace MusicBeePlugin
                     presetListLastSelectedIndex = -1;
                     refreshPresetList(tempPreset.guid);
                 }
-                else// if (tempPreset.getName() != backedUpPresetName || descriptionBox.Text != GetDictValue(tempPreset.descriptions, Language))
+                else//if (tempPreset.getName() != backedUpPresetName || descriptionBox.Text != GetDictValue(tempPreset.descriptions, Language))
                 {
                     refreshPresetList(tempPreset.guid);
                 }
@@ -4014,56 +4014,6 @@ namespace MusicBeePlugin
             MessageBox.Show(this, message, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        internal static string GetPluralForm(string sentence, int number)
-        {
-            int form;
-            int remainder = number % 10;
-
-            if (number == 0) //Here may be special form like "No files" instead of "0 files"
-                form = 5;
-            else if (number >= 5 && number <= 20)
-                form = 5;
-            else if (remainder == 0)
-                form = 5;
-            else if (remainder == 1)
-                form = 1;
-            else if (remainder >= 2 && remainder <= 4)
-                form = 2;
-            else
-                form = 5;
-
-            switch (form)
-            {
-                case 1:
-                    sentence = Regex.Replace(sentence, @"\{(.*?);(.*?);(.*?)\}", "$1");
-                    break;
-                case 2:
-                    sentence = Regex.Replace(sentence, @"\{(.*?);(.*?);(.*?)\}", "$2");
-                    break;
-                case 5:
-                    sentence = Regex.Replace(sentence, @"\{(.*?);(.*?);(.*?)\}", "$3");
-                    break;
-            }
-
-            return sentence;
-        }
-
-        internal static string AddLeadingSpaces(int number, int spacesCount, int zerosCount = 1)
-        {
-            string leadingZerosNumber = number.ToString("D" + spacesCount);
-            string leadingSpaces = string.Empty;
-            int maxZerosIndex;
-            for (maxZerosIndex = 0; maxZerosIndex < spacesCount - zerosCount; maxZerosIndex++)
-            {
-                if (leadingZerosNumber[maxZerosIndex] == '0')
-                    leadingSpaces += '\u2007';
-                else
-                    break;
-            }
-
-            return leadingSpaces + leadingZerosNumber.Substring(maxZerosIndex);
-        }
-
         internal void setPresetsChanged()
         {
             if (!processPresetChanges)
@@ -4952,13 +4902,13 @@ namespace MusicBeePlugin
                     return;
 
 
-                if (!sameTags) // Toggle checked state of single row
+                if (!sameTags) //Toggle checked state of single row
                 {
                     toggleRow(check, e.RowIndex);
 
                     previewTableFormatRow(e.RowIndex);
                 }
-                else // Toggle checked state of all rows for the same tag(s) - 1 row can refer to up to 5 tags
+                else //Toggle checked state of all rows for the same tag(s) - 1 row can refer to up to 5 tags
                 {
                     string[] invokedTags = new string[5];
 

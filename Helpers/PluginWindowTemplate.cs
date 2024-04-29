@@ -281,10 +281,10 @@ namespace MusicBeePlugin
                 }
                 //else if (button.IsEnabled() && button.Focused) //****
                 //{
-                //    button.FlatAppearance.BorderColor = ButtonFocusedBorderColor;
+                //   button.FlatAppearance.BorderColor = ButtonFocusedBorderColor;
                 //
-                //    button.ForeColor = _buttonForeColor;
-                //    button.BackColor = _buttonBackColor;
+                //   button.ForeColor = _buttonForeColor;
+                //   button.BackColor = _buttonBackColor;
                 //}
                 //Generic button
                 else if (button.IsEnabled() && button.FlatAppearance.BorderColor == buttonBorderColor)
@@ -361,10 +361,10 @@ namespace MusicBeePlugin
 
             string text = buttonLabels[button];
 
-            // Set flags to center text on the button.
-            TextFormatFlags flags = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.WordBreak;   // center the text
+            //Set flags to center text on the button.
+            TextFormatFlags flags = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.WordBreak;   //center the text
 
-            // Render the text onto the button.
+            //Render the text onto the button.
             TextRenderer.DrawText(e.Graphics, text, button.Font, e.ClipRectangle, button.ForeColor, flags);
         }
 
@@ -2130,10 +2130,10 @@ namespace MusicBeePlugin
         {
             //if (control.GetType().IsSubclassOf(typeof(TabControl)) || control is TabControl)
             //{
-            //    TabControl tabControl = control as TabControl;
-            //    tabControl.DrawItem += form.TabControl_DrawItem;
+            //   TabControl tabControl = control as TabControl;
+            //   tabControl.DrawItem += form.TabControl_DrawItem;
             //
-            //    return;
+            //   return;
             //}
 
             if (control is SplitContainer || control.GetType().IsSubclassOf(typeof(SplitContainer)))
@@ -3062,10 +3062,10 @@ namespace MusicBeePlugin
                 return;
 
             //if (this == EmptyForm) //******
-            //    return;
+            //   return;
 
             //if (this.GetType() == typeof(PluginSampleWindow))
-            //    return;
+            //   return;
 
             if (this.GetType() == typeof(PluginSettings))
                 return;
@@ -3297,7 +3297,7 @@ namespace MusicBeePlugin
                 {
                     width2 = currentWindowSettings.w;
                 }
-                else if (100d * Math.Abs(width2 - currentWindowSettings.w) / width2 < 0.5d) // 0.5%
+                else if (100d * Math.Abs(width2 - currentWindowSettings.w) / width2 < 0.5d) //0.5%
                 {
                     width2 = currentWindowSettings.w;
                 }
@@ -3306,20 +3306,20 @@ namespace MusicBeePlugin
                 {
                     height2 = currentWindowSettings.h;
                 }
-                else if (100d * Math.Abs(height2 - currentWindowSettings.h) / height2 < 0.5d) // 0.5%
+                else if (100d * Math.Abs(height2 - currentWindowSettings.h) / height2 < 0.5d) //0.5%
                 {
                     height2 = currentWindowSettings.h;
                 }
 
 
                 int left2 = (int)Math.Round(left / hDpiFormScaling);
-                if (Math.Abs(left2 - currentWindowSettings.x) <= 1) // 1px
+                if (Math.Abs(left2 - currentWindowSettings.x) <= 1) //1px
                 {
                     left2 = currentWindowSettings.x;
                 }
 
                 int top2 = (int)Math.Round(top / vDpiFormScaling);
-                if (Math.Abs(top2 - currentWindowSettings.y) <= 1) // 1px
+                if (Math.Abs(top2 - currentWindowSettings.y) <= 1) //1px
                 {
                     top2 = currentWindowSettings.y;
                 }
@@ -3701,7 +3701,7 @@ namespace MusicBeePlugin
             }
         }
 
-        // clearPreview = 0: //--- ??? //****** What is this?
+        //clearPreview = 0: //--- ??? //****** What is this?
         protected void clickOnPreviewButton(DataGridView previewTable, PrepareOperation prepareOperation, ThreadStart operation,
             Button clickedButtonParam, Button okButtonParam, Button closeButtonParam, int clearPreview = 0)
         {

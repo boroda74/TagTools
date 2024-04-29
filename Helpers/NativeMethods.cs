@@ -47,37 +47,37 @@ internal static class NativeMethods
 
     //public struct ScrollInfoStruct
     //{
-    //    internal int cbSize;
-    //    internal int fMask;
-    //    internal int nMin;
-    //    internal int nMax;
-    //    internal int nPage;
-    //    internal int nPos;
-    //    internal int nTrackPos;
+    //   internal int cbSize;
+    //   internal int fMask;
+    //   internal int nMin;
+    //   internal int nMax;
+    //   internal int nPage;
+    //   internal int nPos;
+    //   internal int nTrackPos;
     //}
 
     //public struct DWMCOLORIZATIONPARAMS
     //{
-    //    internal uint ColorizationColor,
-    //        ColorizationAfterglow,
-    //        ColorizationColorBalance,
-    //        ColorizationAfterglowBalance,
-    //        ColorizationBlurBalance,
-    //        ColorizationGlassReflectionIntensity,
-    //        ColorizationOpaqueBlend;
+    //   internal uint ColorizationColor,
+    //       ColorizationAfterglow,
+    //       ColorizationColorBalance,
+    //       ColorizationAfterglowBalance,
+    //       ColorizationBlurBalance,
+    //       ColorizationGlassReflectionIntensity,
+    //       ColorizationOpaqueBlend;
     //}
 
     //internal static Color GetWindowColorizationColor(bool opaque)
     //{
-    //    DWMCOLORIZATIONPARAMS args = default;
-    //    NativeMethods.DwmGetColorizationParameters(ref args);
+    //   DWMCOLORIZATIONPARAMS args = default;
+    //   NativeMethods.DwmGetColorizationParameters(ref args);
 
-    //    return Color.FromArgb(
-    //        (byte)(opaque ? 255 : args.ColorizationColor >> 24),
-    //        (byte)(args.ColorizationColor >> 16),
-    //        (byte)(args.ColorizationColor >> 8),
-    //        (byte)args.ColorizationColor
-    //    );
+    //   return Color.FromArgb(
+    //       (byte)(opaque ? 255 : args.ColorizationColor >> 24),
+    //       (byte)(args.ColorizationColor >> 16),
+    //       (byte)(args.ColorizationColor >> 8),
+    //       (byte)args.ColorizationColor
+    //   );
     //}
 
     [DllImport("user32.dll")]
@@ -142,8 +142,8 @@ internal static class NativeMethods
     {
         cue = cue.TrimStart(' ');
 
-        // handing off the reset of the combobox selected value to a delegate method - using methodinvoker on the forms main thread is an efficient to do this
-        // see https://msdn.microsoft.com/en-us/library/system.windows.forms.methodinvoker(v=vs.110).aspx
+        //handing off the reset of the combobox selected value to a delegate method - using methodinvoker on the forms main thread is an efficient to do this
+        //see https://msdn.microsoft.com/en-us/library/system.windows.forms.methodinvoker(v=vs.110).aspx
         if (!comboBox.Items.Contains(cue))
             comboBox.FindForm().BeginInvoke((MethodInvoker)delegate { comboBox.Text = cue; });
         else

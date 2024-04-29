@@ -2,15 +2,15 @@
 {
     partial class TagHistory
     {
-        /// <summary>
-        /// Требуется переменная конструктора.
-        /// </summary>
+        ///<summary>
+        ///Требуется переменная конструктора.
+        ///</summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Освободить все используемые ресурсы.
-        /// </summary>
-        /// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
+        ///<summary>
+        ///Освободить все используемые ресурсы.
+        ///</summary>
+        ///<param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -23,16 +23,16 @@
 
         #region Код, автоматически созданный конструктором форм Windows
 
-        /// <summary>
-        /// Обязательный метод для поддержки конструктора - не изменяйте
-        /// содержимое данного метода при помощи редактора кода.
-        /// </summary>
+        ///<summary>
+        ///Обязательный метод для поддержки конструктора - не изменяйте
+        ///содержимое данного метода при помощи редактора кода.
+        ///</summary>
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TagHistory));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.previewTable = new System.Windows.Forms.DataGridView();
@@ -72,7 +72,6 @@
             resources.ApplyResources(this.buttonOK, "buttonOK");
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Tag = "#buttonCancel";
-            this.toolTip1.SetToolTip(this.buttonOK, resources.GetString("buttonOK.ToolTip"));
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // buttonCancel
@@ -81,26 +80,25 @@
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Tag = "#controlsPanel@non-defaultable";
-            this.toolTip1.SetToolTip(this.buttonCancel, resources.GetString("buttonCancel.ToolTip"));
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // previewTable
             // 
-            resources.ApplyResources(this.previewTable, "previewTable");
             this.previewTable.AllowUserToAddRows = false;
             this.previewTable.AllowUserToDeleteRows = false;
+            resources.ApplyResources(this.previewTable, "previewTable");
             this.previewTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.previewTable.BackgroundColor = System.Drawing.SystemColors.Window;
             this.previewTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.previewTable.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.previewTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.previewTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.previewTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Library,
             this.Column1,
@@ -110,7 +108,6 @@
             this.previewTable.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.previewTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.previewTable.Tag = "#TagHistory&controlsPanel";
-            this.toolTip1.SetToolTip(this.previewTable, resources.GetString("previewTable.ToolTip"));
             this.previewTable.RowHeadersWidthChanged += new System.EventHandler(this.previewTable_RowHeadersWidthChanged);
             this.previewTable.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.previewTable_CellEndEdit);
             this.previewTable.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.previewTable_CellFormatting);
@@ -135,11 +132,11 @@
             // 
             // ImageCellTemplate
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle2.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle2.NullValue")));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.ImageCellTemplate.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle4.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle4.NullValue")));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.ImageCellTemplate.DefaultCellStyle = dataGridViewCellStyle4;
             resources.ApplyResources(this.ImageCellTemplate, "ImageCellTemplate");
             this.ImageCellTemplate.Image = global::MusicBeePlugin.Properties.Resources.search;
             this.ImageCellTemplate.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
@@ -151,7 +148,6 @@
             resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
             this.label3.Tag = "#optionsPanel@pinned-to-parent-x";
-            this.toolTip1.SetToolTip(this.label3, resources.GetString("label3.ToolTip"));
             // 
             // searchFolderTextBox
             // 
@@ -162,7 +158,6 @@
             this.searchFolderTextBox.FormattingEnabled = true;
             this.searchFolderTextBox.Name = "searchFolderTextBox";
             this.searchFolderTextBox.Tag = "#browseButton";
-            this.toolTip1.SetToolTip(this.searchFolderTextBox, resources.GetString("searchFolderTextBox.ToolTip"));
             this.searchFolderTextBox.Leave += new System.EventHandler(this.searchFolderTextBox_Leave);
             // 
             // browseButton
@@ -170,7 +165,6 @@
             resources.ApplyResources(this.browseButton, "browseButton");
             this.browseButton.Name = "browseButton";
             this.browseButton.Tag = "#forLastLabel@non-defaultable";
-            this.toolTip1.SetToolTip(this.browseButton, resources.GetString("browseButton.ToolTip"));
             this.browseButton.Click += new System.EventHandler(this.browseButton_Click);
             // 
             // dataGridViewTextBoxColumn1
@@ -193,7 +187,6 @@
             resources.ApplyResources(this.forLastLabel, "forLastLabel");
             this.forLastLabel.Name = "forLastLabel";
             this.forLastLabel.Tag = "#numberOfBackupsNumericUpDown";
-            this.toolTip1.SetToolTip(this.forLastLabel, resources.GetString("forLastLabel.ToolTip"));
             // 
             // numberOfBackupsNumericUpDown
             // 
@@ -205,7 +198,6 @@
             0});
             this.numberOfBackupsNumericUpDown.Name = "numberOfBackupsNumericUpDown";
             this.numberOfBackupsNumericUpDown.Tag = "#backupsLabel";
-            this.toolTip1.SetToolTip(this.numberOfBackupsNumericUpDown, resources.GetString("numberOfBackupsNumericUpDown.ToolTip"));
             this.numberOfBackupsNumericUpDown.Value = new decimal(new int[] {
             10,
             0,
@@ -217,14 +209,12 @@
             resources.ApplyResources(this.backupsLabel, "backupsLabel");
             this.backupsLabel.Name = "backupsLabel";
             this.backupsLabel.Tag = "#rereadButton";
-            this.toolTip1.SetToolTip(this.backupsLabel, resources.GetString("backupsLabel.ToolTip"));
             // 
             // rereadButton
             // 
             resources.ApplyResources(this.rereadButton, "rereadButton");
             this.rereadButton.Name = "rereadButton";
             this.rereadButton.Tag = "#optionsPanel@non-defaultable";
-            this.toolTip1.SetToolTip(this.rereadButton, resources.GetString("rereadButton.ToolTip"));
             this.rereadButton.Click += new System.EventHandler(this.rereadButton_Click);
             // 
             // restoreSelectedButton
@@ -283,7 +273,6 @@
             resources.ApplyResources(this.label4, "label4");
             this.label4.Name = "label4";
             this.label4.Tag = "@pinned-to-parent-x";
-            this.toolTip1.SetToolTip(this.label4, resources.GetString("label4.ToolTip"));
             // 
             // trackListComboBox
             // 
@@ -294,7 +283,6 @@
             resources.GetString("trackListComboBox.Items")});
             this.trackListComboBox.Name = "trackListComboBox";
             this.trackListComboBox.Tag = "#optionsPanel";
-            this.toolTip1.SetToolTip(this.trackListComboBox, resources.GetString("trackListComboBox.ToolTip"));
             this.trackListComboBox.DropDownClosed += new System.EventHandler(this.trackListComboBox_DropDownClosed);
             // 
             // optionsPanel
@@ -309,7 +297,6 @@
             this.optionsPanel.Controls.Add(this.trackListComboBox);
             this.optionsPanel.Name = "optionsPanel";
             this.optionsPanel.Tag = "#TagHistory&previewTable";
-            this.toolTip1.SetToolTip(this.optionsPanel, resources.GetString("optionsPanel.ToolTip"));
             // 
             // controlsPanel
             // 
@@ -325,14 +312,12 @@
             this.controlsPanel.Controls.Add(this.placeholderLabel3);
             this.controlsPanel.Name = "controlsPanel";
             this.controlsPanel.Tag = "#TagHistory&TagHistory";
-            this.toolTip1.SetToolTip(this.controlsPanel, resources.GetString("controlsPanel.ToolTip"));
             // 
             // placeholderLabel3
             // 
             resources.ApplyResources(this.placeholderLabel3, "placeholderLabel3");
             this.placeholderLabel3.Name = "placeholderLabel3";
             this.placeholderLabel3.Tag = "";
-            this.toolTip1.SetToolTip(this.placeholderLabel3, resources.GetString("placeholderLabel3.ToolTip"));
             // 
             // TagHistory
             // 
@@ -346,7 +331,6 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.optionsPanel);
             this.Name = "TagHistory";
-            this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.Load += new System.EventHandler(this.TagHistory_Load);
             this.Shown += new System.EventHandler(this.TagHistoryPlugin_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).EndInit();

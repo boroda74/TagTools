@@ -120,7 +120,7 @@ namespace MusicBeePlugin
         internal static string GetBackupDateTime(BackupType backup)
         {
             DateTime backupDate = backup.creationDate.ToLocalTime();
-            return backupDate.Year.ToString("D4") + "-" + backupDate.Month.ToString("D2") + "-" + backupDate.Day.ToString("D2") + " " + backupDate.Hour.ToString("D2") + ":" + backupDate.Minute.ToString("D2"); // + "." + backupDate.Second.ToString("D2");
+            return backupDate.Year.ToString("D4") + "-" + backupDate.Month.ToString("D2") + "-" + backupDate.Day.ToString("D2") + " " + backupDate.Hour.ToString("D2") + ":" + backupDate.Minute.ToString("D2"); //+ "." + backupDate.Second.ToString("D2");
         }
 
         internal static string GetBackupFilenameWithoutExtension(string fullFilename)
@@ -423,10 +423,10 @@ namespace MusicBeePlugin
 
             //if (!System.IO.File.Exists(fileName + backupFileExtension)) //***
             //{
-            //    MessageBox.Show(MusicBeePlugin.MbForm, MusicBeePlugin.MsgBackupFileDoesntExist.Replace("%%FILENAME%%", fileName),
-            //        string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            //   MessageBox.Show(MusicBeePlugin.MbForm, MusicBeePlugin.MsgBackupFileDoesntExist.Replace("%%FILENAME%%", fileName),
+            //       string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
-            //    return null;
+            //   return null;
             //}
 
             System.IO.FileStream stream = System.IO.File.Open(fileName + backupFileExtension, System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.None);

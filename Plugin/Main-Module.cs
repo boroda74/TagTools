@@ -228,7 +228,7 @@ namespace MusicBeePlugin
 
 
         internal const float ScrollBarWidth = 10.6f;//Not yet DPI scaled
-        internal static int SbBorderWidth = 1; // scaledPx;
+        internal static int SbBorderWidth = 1; //scaledPx;
 
 
         internal static Bitmap DownArrowComboBoxImage;
@@ -325,8 +325,10 @@ namespace MusicBeePlugin
         private delegate void AutoApplyDelegate(object currentFileObj, object tagToolsPluginObj);
         private readonly AutoApplyDelegate autoApplyDelegate = AsrAutoApplyPresets;
 
-        private static readonly List<string> FilesUpdatedByPlugin = new List<string>();
+        private static readonly List<string> FilesUpdatedByAsr = new List<string>();
         private static readonly List<string> ChangedFiles = new List<string>();
+
+        private static readonly List<string> FilesUpdatedByLr = new List<string>();
 
         private static System.Threading.Timer PeriodicUI_RefreshTimer = null;
         private static System.Threading.Timer DelayedStatusbarTextClearingTimer = null;
@@ -895,6 +897,8 @@ namespace MusicBeePlugin
         internal static string MsgNoPresetsDeleted;
         internal static string MsgPresetsWereDeleted;
 
+        internal static string MsgLrCachedPresetsChanged;
+
 
         internal static string MsgNumberOfTagsInTextFileDoesntCorrespondToNumberOfSelectedTracks;
 
@@ -990,6 +994,56 @@ namespace MusicBeePlugin
 
 
         #region Common methods/functions
+        internal static string GetPluralForm(string sentence, int number)
+        {
+            int form;
+            int remainder = number % 10;
+
+            if (number == 0) //Here may be special form like "No files" instead of "0 files"
+                form = 5;
+            else if (number >= 5 && number <= 20)
+                form = 5;
+            else if (remainder == 0)
+                form = 5;
+            else if (remainder == 1)
+                form = 1;
+            else if (remainder >= 2 && remainder <= 4)
+                form = 2;
+            else
+                form = 5;
+
+            switch (form)
+            {
+                case 1:
+                    sentence = Regex.Replace(sentence, @"\{(.*?);(.*?);(.*?)\}", "$1");
+                    break;
+                case 2:
+                    sentence = Regex.Replace(sentence, @"\{(.*?);(.*?);(.*?)\}", "$2");
+                    break;
+                case 5:
+                    sentence = Regex.Replace(sentence, @"\{(.*?);(.*?);(.*?)\}", "$3");
+                    break;
+            }
+
+            return sentence;
+        }
+
+        internal static string AddLeadingSpaces(int number, int spacesCount, int zerosCount = 1)
+        {
+            string leadingZerosNumber = number.ToString("D" + spacesCount);
+            string leadingSpaces = string.Empty;
+            int maxZerosIndex;
+            for (maxZerosIndex = 0; maxZerosIndex < spacesCount - zerosCount; maxZerosIndex++)
+            {
+                if (leadingZerosNumber[maxZerosIndex] == '0')
+                    leadingSpaces += '\u2007';
+                else
+                    break;
+            }
+
+            return leadingSpaces + leadingZerosNumber.Substring(maxZerosIndex);
+        }
+
         public struct SwappedTags
         {
             internal string newDestinationTagValue;
@@ -1154,10 +1208,10 @@ namespace MusicBeePlugin
                 }
                 //else if (resultType >= ResultType.UnknownOrString || resultType == ResultType.UseOtherResults) //**** must never happen
                 //{
-                //    if (items.Count == 0)
-                //        return double.NegativeInfinity;
-                //    else //Its "average" function
-                //        return resultD / items.Count;
+                //   if (items.Count == 0)
+                //       return double.NegativeInfinity;
+                //   else //Its "average" function
+                //       return resultD / items.Count;
                 //}
                 else if (resultType == ResultType.ItemCount) //Items count
                 {
@@ -1193,7 +1247,7 @@ namespace MusicBeePlugin
                 }
                 //else if (resultType == ResultType.ParsingError) //Parsing error //**** must never happen
                 //{
-                //    return double.NegativeInfinity;
+                //   return double.NegativeInfinity;
                 //}
                 else
                 {
@@ -1297,7 +1351,7 @@ namespace MusicBeePlugin
 
             string prefix = Regex.Replace(input, @"^(\D*?)(\d+)(\.|\,)?(\d*?)(\s*)(\D*)$", "$1", RegexOptions.IgnoreCase);
 
-            if (!string.IsNullOrWhiteSpace(prefix)) // Probably prefixed string must not br treated as number at all //***
+            if (!string.IsNullOrWhiteSpace(prefix)) //Probably prefixed string must not br treated as number at all //***
                 return (double.NegativeInfinity, null, null, null);
             if (prefix == input)
                 prefix = string.Empty;
@@ -1935,23 +1989,23 @@ namespace MusicBeePlugin
 
         //internal static void SetIReportPreset1stInListBoxByGuid(ListBox listBox, ReportPreset preset)
         //{
-        //    bool itemIsFound = false;
+        //   bool itemIsFound = false;
 
-        //    for (int i = 0; i < listBox.Items.Count; i++)
-        //    {
-        //        if ((listBox.Items[i] as ReportPreset).guid == preset.guid)
-        //        {
-        //            listBox.Items.RemoveAt(i);
-        //            itemIsFound = true;
-        //            break;
-        //        }
-        //    }
+        //   for (int i = 0; i < listBox.Items.Count; i++)
+        //   {
+        //       if ((listBox.Items[i] as ReportPreset).guid == preset.guid)
+        //       {
+        //           listBox.Items.RemoveAt(i);
+        //           itemIsFound = true;
+        //           break;
+        //       }
+        //   }
 
-        //    if (!itemIsFound)
-        //        listBox.Items.RemoveAt(listBox.Items.Count - 1);
+        //   if (!itemIsFound)
+        //       listBox.Items.RemoveAt(listBox.Items.Count - 1);
 
-        //    listBox.Items.Insert(NumberOfPredefinedPresets, preset);
-        //    listBox.SelectedItem = preset;
+        //   listBox.Items.Insert(NumberOfPredefinedPresets, preset);
+        //   listBox.SelectedItem = preset;
         //}
 
         internal static string GetFileTag(string sourceFileUrl, MetaDataType tagId, bool normalizeTrackRatingTo0_100Range = false)
@@ -2334,7 +2388,8 @@ namespace MusicBeePlugin
             }
         }
 
-        internal static bool CommitTagsToFile(string sourceFileUrl, bool ignoreTagsChanged = false, bool updateOnlyChangedTags = false)
+        internal static bool CommitTagsToFile(string sourceFileUrl, bool ignoreFutureTagsChangedEventByAsr = false, bool updateOnlyChangedTags = false, 
+            bool ignoreFutureTagsChangedEventByLr = false)
         {
             bool result = false;
 
@@ -2350,11 +2405,19 @@ namespace MusicBeePlugin
                     return true;
             }
 
-            if (ignoreTagsChanged)
+            if (ignoreFutureTagsChangedEventByAsr)
             {
-                lock (FilesUpdatedByPlugin)
+                lock (FilesUpdatedByAsr)
                 {
-                    FilesUpdatedByPlugin.Add(sourceFileUrl);
+                    FilesUpdatedByAsr.Add(sourceFileUrl);
+                }
+            }
+
+            if (ignoreFutureTagsChangedEventByLr)
+            {
+                lock (FilesUpdatedByLr)
+                {
+                    FilesUpdatedByLr.Add(sourceFileUrl);
                 }
             }
 
@@ -2764,9 +2827,9 @@ namespace MusicBeePlugin
                     sbText = LastCommandSbText + ": " + "100% (" + LastFileCounter + " " + SbItemNames + ") " + SbUpdated;
 
                 //if (lastPreview)
-                //    sbText = LastCommandSbText + ": 100% " + sbRead;
+                //   sbText = LastCommandSbText + ": 100% " + sbRead;
                 //else
-                //    sbText = LastCommandSbText + ": 100% " + sbUpdated;
+                //   sbText = LastCommandSbText + ": 100% " + sbUpdated;
 
                 SetStatusbarText(sbText, autoClear);
             }
@@ -3240,8 +3303,8 @@ namespace MusicBeePlugin
             {
                 //if (files.Length > 1)
                 //{
-                //    MessageBox.Show(MusicBeePlugin.MbForm, msgSelectOneTrackOnly);
-                //    return;
+                //   MessageBox.Show(MusicBeePlugin.MbForm, msgSelectOneTrackOnly);
+                //   return;
                 //}
 
                 if (files.Length == 0)
@@ -3604,6 +3667,11 @@ namespace MusicBeePlugin
             MsgNoPresetsDeleted = "No presets were deleted. ";
             MsgPresetsWereDeleted = " preset{;s;s} {was;were;were} deleted.";
 
+            MsgLrCachedPresetsChanged = "You have created or changed %%CHANGED-PRESET-COUNT%% preset{;s;s}, which use{s;;} LR functions " +
+                "with assigned IDs AND saved to tags. These functions will use the tags as the cache. If you change some tags or add new tracks " +
+                "to the library, this cache will dynamically update. But it’s REQUIED to fill this cache initially for existing tracks/current tags. " +
+                "You can’t proceed with saving LR presets without executing all concerned presets. Do you want to execute them automatically now? ." +
+                "This may take a while.";
 
             MsgNumberOfTagsInTextFileDoesntCorrespondToNumberOfSelectedTracks = "Number of tags in text file (%%TEXT-TAG-FILES-COUNT%%)" +
                 " doesn't correspond to number of selected tracks (%%SELECTED-FILES-COUNT%%)!";
@@ -4190,6 +4258,12 @@ namespace MusicBeePlugin
                 MsgNoPresetsDeleted = "Пресеты не были удалены.";
                 MsgPresetsWereDeleted = " пресет{;а;ов} был{;и;и} удален{;ы;ы}.";
 
+                MsgLrCachedPresetsChanged = "Вы создали или изменили %%CHANGED-PRESET-COUNT%% пресет{;а;ов}, которы{й;е;е} использу{е;ю;ю}т функции ОБ " +
+                    "с назначенными идентификаторами И с сохранением результатов в теги. Эти функции будут использовать теги в качестве кеша. Если вы измените " +
+                    "какие-то теги или добавите в библиотеку новые треки, этот кеш будет динамически обновляться. Но НЕОБХОДИМО изначально заполнить " +
+                    "этот кеш для существующих треков/текущих тегов. Вы не можете продолжить сохранение пресетов ОБ, не применив все соответствующие " +
+                    "пресеты. Вы хотите применить их сейчас автоматически? Это может занять некоторое время.";
+
 
                 MsgNumberOfTagsInTextFileDoesntCorrespondToNumberOfSelectedTracks = "Количество тегов в текстовом файле (%%TEXT-TAG-FILES-COUNT%%)" +
                     " не соответствует количеству выбранных треков (%%SELECTED-FILES-COUNT%%)!";
@@ -4358,7 +4432,7 @@ namespace MusicBeePlugin
             if (SavedSettings.reportsPresets == null)
                 SavedSettings.reportsPresets = new ReportPreset[0];
 
-            // Let's remove all predefined presets and recreate them from scratch
+            //Let's remove all predefined presets and recreate them from scratch
             int existingPredefinedCount = 0;
             for (int i = 0; i < SavedSettings.reportsPresets.Length; i++)
             {
@@ -4826,15 +4900,15 @@ namespace MusicBeePlugin
             About.Name = PluginName;
             About.Description = PluginDescription;
             About.Author = "boroda";
-            About.TargetApplication = string.Empty;   // current only applies to artwork, lyrics or instant messenger name that appears in the provider drop down selector or target Instant Messenger
+            About.TargetApplication = string.Empty;   //current only applies to artwork, lyrics or instant messenger name that appears in the provider drop down selector or target Instant Messenger
             About.Type = PluginType.General;
             About.VersionMajor = (short)System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Major;
             About.VersionMinor = (short)System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Minor;
-            About.Revision = (short)System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Build; // Autogenerated, number of days since 2000-01-01 at build time
+            About.Revision = (short)System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Build; //Autogenerated, number of days since 2000-01-01 at build time
             About.MinInterfaceVersion = 39;
             About.MinApiRevision = 51;
             About.ReceiveNotifications = (ReceiveNotificationFlags.PlayerEvents | ReceiveNotificationFlags.TagEvents);
-            About.ConfigurationPanelHeight = 0;   // height in pixels that musicbee should reserve in a panel for config settings. When set, a handle to an empty panel will be passed to the Configure function
+            About.ConfigurationPanelHeight = 0;   //height in pixels that musicbee should reserve in a panel for config settings. When set, a handle to an empty panel will be passed to the Configure function
 
             int pluginBuildTime = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Revision;
 
@@ -4848,11 +4922,11 @@ namespace MusicBeePlugin
         #region Other plugin interface methods
         public bool Configure(IntPtr panelHandle)
         {
-            // save any persistent settings in a sub-folder of this path
+            //save any persistent settings in a sub-folder of this path
             //string dataPath = mbApiInterface.Setting_GetPersistentStoragePath();
-            // panelHandle will only be set if you set about.ConfigurationPanelHeight to a non-zero value
-            // keep in mind the panel width is scaled according to the font the user has selected
-            // if about.ConfigurationPanelHeight is set to 0, you can display your own popup window
+            //panelHandle will only be set if you set about.ConfigurationPanelHeight to a non-zero value
+            //keep in mind the panel width is scaled according to the font the user has selected
+            //if about.ConfigurationPanelHeight is set to 0, you can display your own popup window
 
             PluginSettings tagToolsForm = new PluginSettings(this);
             PluginWindowTemplate.Display(tagToolsForm, true);
@@ -4862,8 +4936,8 @@ namespace MusicBeePlugin
             return true;
         }
 
-        // called by MusicBee when the user clicks Apply or Save in the MusicBee Preferences screen.
-        // its up to you to figure out whether anything has changed and needs updating
+        //called by MusicBee when the user clicks Apply or Save in the MusicBee Preferences screen.
+        //its up to you to figure out whether anything has changed and needs updating
         public void SaveSettings()
         {
             Encoding unicode = Encoding.UTF8;
@@ -4877,7 +4951,7 @@ namespace MusicBeePlugin
             file.Close();
         }
 
-        // MusicBee is closing the plugin (plugin is being disabled by user or MusicBee is shutting down)
+        //MusicBee is closing the plugin (plugin is being disabled by user or MusicBee is shutting down)
         public void Close(PluginCloseReason reason)
         {
             PeriodicUI_RefreshTimer?.Dispose();
@@ -4918,7 +4992,7 @@ namespace MusicBeePlugin
                 SaveSettings();
         }
 
-        // uninstall this plugin - clean up any persisted files
+        //uninstall this plugin - clean up any persisted files
         public void Uninstall()
         {
             //Lets delete backups
@@ -4952,7 +5026,7 @@ namespace MusicBeePlugin
 
 
             //Lets try to delete predefined presets files (this can't be done by plugin if it's
-            // installed to "C:\Program Files (x86)\MusicBee\Plugins" folder)
+            //installed to "C:\Program Files (x86)\MusicBee\Plugins" folder)
             string presetsPath = Path.Combine(PluginsPath, AsrPresetsDirectory);
 
             try
@@ -4967,8 +5041,41 @@ namespace MusicBeePlugin
             Uninstalled = true;
         }
 
-        // receive event notifications from MusicBee
-        // you need to set about.ReceiveNotificationFlags = PlayerEvents to receive all notifications, and not just the startup event
+        private void autoApplyAsrUpdateLrCache(string sourceFileUrl)
+        {
+            if (!SavedSettings.dontShowASR || !SavedSettings.dontShowLibraryReports)
+            {
+                bool autoApplyAsr = false;
+
+                lock (FilesUpdatedByAsr)
+                {
+                    if (FilesUpdatedByAsr.Contains(sourceFileUrl))
+                        FilesUpdatedByAsr.Remove(sourceFileUrl);
+                    else
+                        autoApplyAsr = true;
+                }
+
+                if (autoApplyAsr && !SavedSettings.dontShowASR)
+                    AsrAutoApplyPresets(sourceFileUrl, this);
+
+                
+                bool autoApplyLr = false;
+
+                lock (FilesUpdatedByLr)
+                {
+                    if (FilesUpdatedByLr.Contains(sourceFileUrl))
+                        FilesUpdatedByLr.Remove(sourceFileUrl);
+                    else
+                        autoApplyLr = true;
+                }
+
+                if (autoApplyLr && !SavedSettings.dontShowLibraryReports)
+                    LibraryReportsForFunctionIds.updateFunctionCache(sourceFileUrl);
+            }
+        }
+
+        //receive event notifications from MusicBee
+        //you need to set about.ReceiveNotificationFlags = PlayerEvents to receive all notifications, and not just the startup event
         public void ReceiveNotification(string sourceFileUrl, NotificationType type)
         {
             if (!PrioritySet)
@@ -4977,11 +5084,11 @@ namespace MusicBeePlugin
                 Thread.CurrentThread.Priority = ThreadPriority.Lowest;
             }
 
-            // perform some action depending on the notification type
+            //perform some action depending on the notification type
             switch (type)
             {
                 case NotificationType.PluginStartup:
-                    // perform startup initialization
+                    //perform startup initialization
 
                     //LR & ASR init
                     InitLR();
@@ -5044,80 +5151,31 @@ namespace MusicBeePlugin
                         }
                     }
 
-                    if (!SavedSettings.dontShowASR)
-                    {
-                        bool autoApply = false;
-
-                        lock (FilesUpdatedByPlugin)
-                        {
-                            if (FilesUpdatedByPlugin.Contains(sourceFileUrl))
-                                FilesUpdatedByPlugin.Remove(sourceFileUrl);
-                            else
-                                autoApply = true;
-                        }
-
-                        if (autoApply)
-                            AsrAutoApplyPresets(sourceFileUrl, this);
-                    }
+                    autoApplyAsrUpdateLrCache(sourceFileUrl);
 
                     if (SavedSettings.autoRateOnTrackProperties)
-                    {
                         AutoRate.AutoRateLive(this, sourceFileUrl);
-                    }
 
                     NumberOfTagChanges++;
 
 
                     if (!SavedSettings.dontShowBackupRestore && SavedSettings.dontSkipAutobackupsIfOnlyPlayCountsChanged)
-                    {
                         UpdateTrackForBackup(sourceFileUrl);
-                    }
 
                     break;
                 case NotificationType.TagsChanged:
-                case NotificationType.FileAddedToInbox:
+                //case NotificationType.FileAddedToInbox:
                 case NotificationType.FileAddedToLibrary:
-                    if (!SavedSettings.dontShowASR)
-                    {
-                        bool autoApply = false;
+                    autoApplyAsrUpdateLrCache(sourceFileUrl);
 
-                        lock (FilesUpdatedByPlugin)
-                        {
-                            if (FilesUpdatedByPlugin.Contains(sourceFileUrl))
-                                FilesUpdatedByPlugin.Remove(sourceFileUrl);
-                            else
-                                autoApply = true;
-                        }
-
-                        if (autoApply)
-                            AsrAutoApplyPresets(sourceFileUrl, this);
-                    }
-
-                    NumberOfTagChanges++;
-
+                    NumberOfTagChanges++;//****************
 
                     if (!SavedSettings.dontShowBackupRestore)
-                    {
                         UpdateTrackForBackup(sourceFileUrl);
-                    }
 
                     break;
                 case NotificationType.RatingChanged:
-                    if (!SavedSettings.dontShowASR)
-                    {
-                        bool autoApply = false;
-
-                        lock (FilesUpdatedByPlugin)
-                        {
-                            if (FilesUpdatedByPlugin.Contains(sourceFileUrl))
-                                FilesUpdatedByPlugin.Remove(sourceFileUrl);
-                            else
-                                autoApply = true;
-                        }
-
-                        if (autoApply)
-                            AsrAutoApplyPresets(sourceFileUrl, this);
-                    }
+                    autoApplyAsrUpdateLrCache(sourceFileUrl);
 
                     if (!SavedSettings.dontShowCAR)
                     {
@@ -5129,35 +5187,17 @@ namespace MusicBeePlugin
 
 
                     if (!SavedSettings.dontShowBackupRestore)
-                    {
                         UpdateTrackForBackup(sourceFileUrl);
-                    }
 
                     break;
                 case NotificationType.ReplayGainChanged:
-                    if (!SavedSettings.dontShowASR)
-                    {
-                        bool autoApply = false;
-
-                        lock (FilesUpdatedByPlugin)
-                        {
-                            if (FilesUpdatedByPlugin.Contains(sourceFileUrl))
-                                FilesUpdatedByPlugin.Remove(sourceFileUrl);
-                            else
-                                autoApply = true;
-                        }
-
-                        if (autoApply)
-                            AsrAutoApplyPresets(sourceFileUrl, this);
-                    }
+                    autoApplyAsrUpdateLrCache(sourceFileUrl);
 
                     NumberOfTagChanges++;
 
 
                     if (!SavedSettings.dontShowBackupRestore)
-                    {
                         UpdateTrackForBackup(sourceFileUrl);
-                    }
 
                     break;
             }
@@ -5238,10 +5278,10 @@ namespace MusicBeePlugin
                 //float avgBackBrightness = GetAverageBrightness(_buttonBackColor);
                 //if (Math.Abs(avgForeBrightness - avgBackBrightness) < 0.5f)
                 //{
-                //    if (avgBackBrightness < 0.5f)
-                //        _buttonDisabledBackColor = GetWeightedColor(_buttonBackColor, Color.Black, 0.6f);
-                //    else
-                //        _buttonDisabledBackColor = GetWeightedColor(_buttonBackColor, Color.White, 0.6f);
+                //   if (avgBackBrightness < 0.5f)
+                //       _buttonDisabledBackColor = GetWeightedColor(_buttonBackColor, Color.Black, 0.6f);
+                //   else
+                //       _buttonDisabledBackColor = GetWeightedColor(_buttonBackColor, Color.White, 0.6f);
                 //}
                 //***
 
@@ -5396,11 +5436,11 @@ namespace MusicBeePlugin
 
                 //OR:
                 //ThumbTopImage = GetSolidImageByBitmapMask(_scrollBarThumbAndSpansForeColor, Resources.thumb_top_b,
-                //    scrollBarImagesWidth, (int)Math.Round(_dpiScaling * scrollBarImagesWidth * Resources.thumb_top_b.Height / Resources.thumb_top_b.Width));
+                //   scrollBarImagesWidth, (int)Math.Round(_dpiScaling * scrollBarImagesWidth * Resources.thumb_top_b.Height / Resources.thumb_top_b.Width));
                 //ThemedBitmapAddRef(EmptyForm, ThumbTopImage);
 
                 //ThumbMiddleImage = GetSolidImageByBitmapMask(_scrollBarThumbAndSpansForeColor, Resources.thumb_middle_b,
-                //    scrollBarImagesWidth, (int)Math.Round(_dpiScaling * scrollBarImagesWidth * Resources.thumb_middle_b.Height / Resources.thumb_middle_b.Width));
+                //   scrollBarImagesWidth, (int)Math.Round(_dpiScaling * scrollBarImagesWidth * Resources.thumb_middle_b.Height / Resources.thumb_middle_b.Width));
                 //ThemedBitmapAddRef(EmptyForm, ThumbMiddleImage);
 
                 //ThumbBottomImage = MirrorBitmap(ThumbTopImage, true);
@@ -5424,11 +5464,11 @@ namespace MusicBeePlugin
 
                 //OR:
                 //ThumbLeftImage = GetSolidImageByBitmapMask(_scrollBarThumbAndSpansForeColor, Resources.thumb_left_b,
-                //    scrollBarImagesWidth, (int)Math.Round(_dpiScaling * scrollBarImagesWidth * Resources.thumb_left_b.Height / Resources.thumb_left_b.Width));
+                //   scrollBarImagesWidth, (int)Math.Round(_dpiScaling * scrollBarImagesWidth * Resources.thumb_left_b.Height / Resources.thumb_left_b.Width));
                 //ThemedBitmapAddRef(EmptyForm, ThumbLeftImage);
 
                 //ThumbMiddleImage = GetSolidImageByBitmapMask(_scrollBarThumbAndSpansForeColor, Resources.thumb_middle_b,
-                //    scrollBarImagesWidth, (int)Math.Round(_dpiScaling * scrollBarImagesWidth * Resources.thumb_middle_b.Height / Resources.thumb_middle_b.Width));
+                //   scrollBarImagesWidth, (int)Math.Round(_dpiScaling * scrollBarImagesWidth * Resources.thumb_middle_b.Height / Resources.thumb_middle_b.Width));
                 //ThemedBitmapAddRef(EmptyForm, ThumbMiddleImage);
 
                 //ThumbRightImage = MirrorBitmap(ThumbLeftImage, true);

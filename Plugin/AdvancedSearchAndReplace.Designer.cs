@@ -5,15 +5,15 @@ namespace MusicBeePlugin
 {
     partial class AdvancedSearchAndReplace
     {
-        /// <summary>
-        /// Требуется переменная конструктора.
-        /// </summary>
+        ///<summary>
+        ///Требуется переменная конструктора.
+        ///</summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Освободить все используемые ресурсы.
-        /// </summary>
-        /// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
+        ///<summary>
+        ///Освободить все используемые ресурсы.
+        ///</summary>
+        ///<param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -31,10 +31,10 @@ namespace MusicBeePlugin
 
         #region Код, автоматически созданный конструктором форм Windows
 
-        /// <summary>
-        /// Обязательный метод для поддержки конструктора - не изменяйте
-        /// содержимое данного метода при помощи редактора кода.
-        /// </summary>
+        ///<summary>
+        ///Обязательный метод для поддержки конструктора - не изменяйте
+        ///содержимое данного метода при помощи редактора кода.
+        ///</summary>
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
@@ -239,38 +239,38 @@ namespace MusicBeePlugin
             ((InterpolatedBox)uncheckAllFiltersPictureBox).Interpolation = defaultInterpolationMode;
             //~MusicBee
 
-            // 
-            // splitContainer1
-            // 
+            //
+            //splitContainer1
+            //
             resources.ApplyResources(this.splitContainer1, "splitContainer1");
             this.splitContainer1.BackColor = System.Drawing.SystemColors.GrayText;
             this.dirtyErrorProvider.SetIconAlignment(this.splitContainer1, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("splitContainer1.IconAlignment"))));
             this.splitContainer1.Name = "splitContainer1";
-            // 
-            // splitContainer1.Panel1
-            // 
+            //
+            //splitContainer1.Panel1
+            //
             this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.ControlDark;
             this.splitContainer1.Panel1.Controls.Add(this.tableLayoutPanel4);
             this.dirtyErrorProvider.SetIconAlignment(this.splitContainer1.Panel1, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("splitContainer1.Panel1.IconAlignment"))));
-            // 
-            // splitContainer1.Panel2
-            // 
+            //
+            //splitContainer1.Panel2
+            //
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.ControlDark;
             this.splitContainer1.Panel2.Controls.Add(this.panel2);
             this.dirtyErrorProvider.SetIconAlignment(this.splitContainer1.Panel2, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("splitContainer1.Panel2.IconAlignment"))));
             this.splitContainer1.Tag = "#AdvancedSearchAndReplace&AdvancedSearchAndReplace";
             this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
-            // 
-            // tableLayoutPanel4
-            // 
+            //
+            //tableLayoutPanel4
+            //
             resources.ApplyResources(this.tableLayoutPanel4, "tableLayoutPanel4");
             this.tableLayoutPanel4.Controls.Add(this.panel1, 0, 1);
             this.tableLayoutPanel4.Controls.Add(this.listBoxTableLayoutPanel, 0, 0);
             this.dirtyErrorProvider.SetIconAlignment(this.tableLayoutPanel4, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("tableLayoutPanel4.IconAlignment"))));
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            // 
-            // panel1
-            // 
+            //
+            //panel1
+            //
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Controls.Add(this.tableLayoutPanel3);
             this.panel1.Controls.Add(this.tableLayoutPanel2);
@@ -295,9 +295,9 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.panel1, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("panel1.IconAlignment"))));
             this.panel1.Name = "panel1";
             this.panel1.Tag = "";
-            // 
-            // tableLayoutPanel3
-            // 
+            //
+            //tableLayoutPanel3
+            //
             resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
             this.tableLayoutPanel3.Controls.Add(this.preserveTagValuesTextBox, 4, 0);
             this.tableLayoutPanel3.Controls.Add(this.labelPreserveTagValues, 3, 0);
@@ -306,50 +306,50 @@ namespace MusicBeePlugin
             this.tableLayoutPanel3.Controls.Add(this.buttonProcessPreserveTags, 0, 0);
             this.dirtyErrorProvider.SetIconAlignment(this.tableLayoutPanel3, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("tableLayoutPanel3.IconAlignment"))));
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            // 
-            // preserveTagValuesTextBox
-            // 
+            //
+            //preserveTagValuesTextBox
+            //
             resources.ApplyResources(this.preserveTagValuesTextBox, "preserveTagValuesTextBox");
             this.dirtyErrorProvider.SetIconAlignment(this.preserveTagValuesTextBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("preserveTagValuesTextBox.IconAlignment"))));
             this.preserveTagValuesTextBox.Name = "preserveTagValuesTextBox";
             this.toolTip1.SetToolTip(this.preserveTagValuesTextBox, resources.GetString("preserveTagValuesTextBox.ToolTip"));
             this.preserveTagValuesTextBox.TextChanged += new System.EventHandler(this.preserveTagValuesTextBox_TextChanged);
-            // 
-            // labelPreserveTagValues
-            // 
+            //
+            //labelPreserveTagValues
+            //
             resources.ApplyResources(this.labelPreserveTagValues, "labelPreserveTagValues");
             this.dirtyErrorProvider.SetIconAlignment(this.labelPreserveTagValues, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("labelPreserveTagValues.IconAlignment"))));
             this.labelPreserveTagValues.Name = "labelPreserveTagValues";
             this.toolTip1.SetToolTip(this.labelPreserveTagValues, resources.GetString("labelPreserveTagValues.ToolTip"));
-            // 
-            // buttonSelectPreservedTags
-            // 
+            //
+            //buttonSelectPreservedTags
+            //
             resources.ApplyResources(this.buttonSelectPreservedTags, "buttonSelectPreservedTags");
             this.dirtyErrorProvider.SetIconAlignment(this.buttonSelectPreservedTags, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonSelectPreservedTags.IconAlignment"))));
             this.buttonSelectPreservedTags.Name = "buttonSelectPreservedTags";
             this.buttonSelectPreservedTags.Tag = "@non-defaultable";
             this.toolTip1.SetToolTip(this.buttonSelectPreservedTags, resources.GetString("buttonSelectPreservedTags.ToolTip"));
             this.buttonSelectPreservedTags.Click += new System.EventHandler(this.buttonSelectPreservedTags_Click);
-            // 
-            // processPreserveTagsTextBox
-            // 
+            //
+            //processPreserveTagsTextBox
+            //
             resources.ApplyResources(this.processPreserveTagsTextBox, "processPreserveTagsTextBox");
             this.dirtyErrorProvider.SetIconAlignment(this.processPreserveTagsTextBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("processPreserveTagsTextBox.IconAlignment"))));
             this.processPreserveTagsTextBox.Name = "processPreserveTagsTextBox";
             this.toolTip1.SetToolTip(this.processPreserveTagsTextBox, resources.GetString("processPreserveTagsTextBox.ToolTip"));
             this.processPreserveTagsTextBox.TextChanged += new System.EventHandler(this.processPreserveTagsTextBox_TextChanged);
-            // 
-            // buttonProcessPreserveTags
-            // 
+            //
+            //buttonProcessPreserveTags
+            //
             resources.ApplyResources(this.buttonProcessPreserveTags, "buttonProcessPreserveTags");
             this.dirtyErrorProvider.SetIconAlignment(this.buttonProcessPreserveTags, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonProcessPreserveTags.IconAlignment"))));
             this.buttonProcessPreserveTags.Name = "buttonProcessPreserveTags";
             this.buttonProcessPreserveTags.Tag = "@non-defaultable";
             this.toolTip1.SetToolTip(this.buttonProcessPreserveTags, resources.GetString("buttonProcessPreserveTags.ToolTip"));
             this.buttonProcessPreserveTags.Click += new System.EventHandler(this.buttonProcessPreserveTags_Click);
-            // 
-            // tableLayoutPanel2
-            // 
+            //
+            //tableLayoutPanel2
+            //
             resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
             this.tableLayoutPanel2.Controls.Add(this.customText4Box, 3, 1);
             this.tableLayoutPanel2.Controls.Add(this.customText4Label, 2, 1);
@@ -361,61 +361,61 @@ namespace MusicBeePlugin
             this.tableLayoutPanel2.Controls.Add(this.customTextLabel, 0, 0);
             this.dirtyErrorProvider.SetIconAlignment(this.tableLayoutPanel2, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("tableLayoutPanel2.IconAlignment"))));
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            // 
-            // customText4Box
-            // 
+            //
+            //customText4Box
+            //
             resources.ApplyResources(this.customText4Box, "customText4Box");
             this.dirtyErrorProvider.SetIconAlignment(this.customText4Box, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("customText4Box.IconAlignment"))));
             this.customText4Box.Name = "customText4Box";
             this.customText4Box.TextChanged += new System.EventHandler(this.customText4Box_TextChanged);
-            // 
-            // customText4Label
-            // 
+            //
+            //customText4Label
+            //
             resources.ApplyResources(this.customText4Label, "customText4Label");
             this.dirtyErrorProvider.SetIconAlignment(this.customText4Label, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("customText4Label.IconAlignment"))));
             this.customText4Label.Name = "customText4Label";
-            // 
-            // customText3Box
-            // 
+            //
+            //customText3Box
+            //
             resources.ApplyResources(this.customText3Box, "customText3Box");
             this.dirtyErrorProvider.SetIconAlignment(this.customText3Box, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("customText3Box.IconAlignment"))));
             this.customText3Box.Name = "customText3Box";
             this.customText3Box.TextChanged += new System.EventHandler(this.customText3Box_TextChanged);
-            // 
-            // customText3Label
-            // 
+            //
+            //customText3Label
+            //
             resources.ApplyResources(this.customText3Label, "customText3Label");
             this.dirtyErrorProvider.SetIconAlignment(this.customText3Label, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("customText3Label.IconAlignment"))));
             this.customText3Label.Name = "customText3Label";
-            // 
-            // customText2Box
-            // 
+            //
+            //customText2Box
+            //
             resources.ApplyResources(this.customText2Box, "customText2Box");
             this.dirtyErrorProvider.SetIconAlignment(this.customText2Box, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("customText2Box.IconAlignment"))));
             this.customText2Box.Name = "customText2Box";
             this.customText2Box.TextChanged += new System.EventHandler(this.customText2Box_TextChanged);
-            // 
-            // customText2Label
-            // 
+            //
+            //customText2Label
+            //
             resources.ApplyResources(this.customText2Label, "customText2Label");
             this.dirtyErrorProvider.SetIconAlignment(this.customText2Label, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("customText2Label.IconAlignment"))));
             this.customText2Label.Name = "customText2Label";
-            // 
-            // customTextBox
-            // 
+            //
+            //customTextBox
+            //
             resources.ApplyResources(this.customTextBox, "customTextBox");
             this.dirtyErrorProvider.SetIconAlignment(this.customTextBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("customTextBox.IconAlignment"))));
             this.customTextBox.Name = "customTextBox";
             this.customTextBox.TextChanged += new System.EventHandler(this.customTextBox_TextChanged);
-            // 
-            // customTextLabel
-            // 
+            //
+            //customTextLabel
+            //
             resources.ApplyResources(this.customTextLabel, "customTextLabel");
             this.dirtyErrorProvider.SetIconAlignment(this.customTextLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("customTextLabel.IconAlignment"))));
             this.customTextLabel.Name = "customTextLabel";
-            // 
-            // tableLayoutPanel1
-            // 
+            //
+            //tableLayoutPanel1
+            //
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
             this.tableLayoutPanel1.Controls.Add(this.parameterTag6List, 8, 1);
             this.tableLayoutPanel1.Controls.Add(this.labelTag6, 7, 1);
@@ -437,9 +437,9 @@ namespace MusicBeePlugin
             this.tableLayoutPanel1.Controls.Add(this.pictureTag, 0, 0);
             this.dirtyErrorProvider.SetIconAlignment(this.tableLayoutPanel1, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("tableLayoutPanel1.IconAlignment"))));
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            // 
-            // parameterTag6List
-            // 
+            //
+            //parameterTag6List
+            //
             resources.ApplyResources(this.parameterTag6List, "parameterTag6List");
             this.parameterTag6List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.parameterTag6List.DropDownWidth = 250;
@@ -447,23 +447,23 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.parameterTag6List, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("parameterTag6List.IconAlignment"))));
             this.parameterTag6List.Name = "parameterTag6List";
             this.parameterTag6List.SelectedIndexChanged += new System.EventHandler(this.parameterTag6_SelectedIndexChanged);
-            // 
-            // labelTag6
-            // 
+            //
+            //labelTag6
+            //
             resources.ApplyResources(this.labelTag6, "labelTag6");
             this.dirtyErrorProvider.SetIconAlignment(this.labelTag6, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("labelTag6.IconAlignment"))));
             this.labelTag6.Name = "labelTag6";
-            // 
-            // pictureTag6
-            // 
+            //
+            //pictureTag6
+            //
             resources.ApplyResources(this.pictureTag6, "pictureTag6");
             this.dirtyErrorProvider.SetIconAlignment(this.pictureTag6, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("pictureTag6.IconAlignment"))));
             this.pictureTag6.Image = global::MusicBeePlugin.Properties.Resources.warning_15;
             this.pictureTag6.Name = "pictureTag6";
             this.pictureTag6.TabStop = false;
-            // 
-            // parameterTag5List
-            // 
+            //
+            //parameterTag5List
+            //
             resources.ApplyResources(this.parameterTag5List, "parameterTag5List");
             this.parameterTag5List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.parameterTag5List.DropDownWidth = 250;
@@ -471,23 +471,23 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.parameterTag5List, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("parameterTag5List.IconAlignment"))));
             this.parameterTag5List.Name = "parameterTag5List";
             this.parameterTag5List.SelectedIndexChanged += new System.EventHandler(this.parameterTag5_SelectedIndexChanged);
-            // 
-            // labelTag5
-            // 
+            //
+            //labelTag5
+            //
             resources.ApplyResources(this.labelTag5, "labelTag5");
             this.dirtyErrorProvider.SetIconAlignment(this.labelTag5, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("labelTag5.IconAlignment"))));
             this.labelTag5.Name = "labelTag5";
-            // 
-            // pictureTag5
-            // 
+            //
+            //pictureTag5
+            //
             resources.ApplyResources(this.pictureTag5, "pictureTag5");
             this.dirtyErrorProvider.SetIconAlignment(this.pictureTag5, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("pictureTag5.IconAlignment"))));
             this.pictureTag5.Image = global::MusicBeePlugin.Properties.Resources.warning_15;
             this.pictureTag5.Name = "pictureTag5";
             this.pictureTag5.TabStop = false;
-            // 
-            // parameterTag4List
-            // 
+            //
+            //parameterTag4List
+            //
             resources.ApplyResources(this.parameterTag4List, "parameterTag4List");
             this.parameterTag4List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.parameterTag4List.DropDownWidth = 250;
@@ -495,23 +495,23 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.parameterTag4List, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("parameterTag4List.IconAlignment"))));
             this.parameterTag4List.Name = "parameterTag4List";
             this.parameterTag4List.SelectedIndexChanged += new System.EventHandler(this.parameterTag4_SelectedIndexChanged);
-            // 
-            // labelTag4
-            // 
+            //
+            //labelTag4
+            //
             resources.ApplyResources(this.labelTag4, "labelTag4");
             this.dirtyErrorProvider.SetIconAlignment(this.labelTag4, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("labelTag4.IconAlignment"))));
             this.labelTag4.Name = "labelTag4";
-            // 
-            // pictureTag4
-            // 
+            //
+            //pictureTag4
+            //
             resources.ApplyResources(this.pictureTag4, "pictureTag4");
             this.dirtyErrorProvider.SetIconAlignment(this.pictureTag4, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("pictureTag4.IconAlignment"))));
             this.pictureTag4.Image = global::MusicBeePlugin.Properties.Resources.warning_15;
             this.pictureTag4.Name = "pictureTag4";
             this.pictureTag4.TabStop = false;
-            // 
-            // parameterTag3List
-            // 
+            //
+            //parameterTag3List
+            //
             resources.ApplyResources(this.parameterTag3List, "parameterTag3List");
             this.parameterTag3List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.parameterTag3List.DropDownWidth = 250;
@@ -519,23 +519,23 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.parameterTag3List, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("parameterTag3List.IconAlignment"))));
             this.parameterTag3List.Name = "parameterTag3List";
             this.parameterTag3List.SelectedIndexChanged += new System.EventHandler(this.parameterTag3_SelectedIndexChanged);
-            // 
-            // labelTag3
-            // 
+            //
+            //labelTag3
+            //
             resources.ApplyResources(this.labelTag3, "labelTag3");
             this.dirtyErrorProvider.SetIconAlignment(this.labelTag3, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("labelTag3.IconAlignment"))));
             this.labelTag3.Name = "labelTag3";
-            // 
-            // pictureTag3
-            // 
+            //
+            //pictureTag3
+            //
             resources.ApplyResources(this.pictureTag3, "pictureTag3");
             this.dirtyErrorProvider.SetIconAlignment(this.pictureTag3, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("pictureTag3.IconAlignment"))));
             this.pictureTag3.Image = global::MusicBeePlugin.Properties.Resources.warning_15;
             this.pictureTag3.Name = "pictureTag3";
             this.pictureTag3.TabStop = false;
-            // 
-            // parameterTag2List
-            // 
+            //
+            //parameterTag2List
+            //
             resources.ApplyResources(this.parameterTag2List, "parameterTag2List");
             this.parameterTag2List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.parameterTag2List.DropDownWidth = 250;
@@ -543,23 +543,23 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.parameterTag2List, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("parameterTag2List.IconAlignment"))));
             this.parameterTag2List.Name = "parameterTag2List";
             this.parameterTag2List.SelectedIndexChanged += new System.EventHandler(this.parameterTag2_SelectedIndexChanged);
-            // 
-            // labelTag2
-            // 
+            //
+            //labelTag2
+            //
             resources.ApplyResources(this.labelTag2, "labelTag2");
             this.dirtyErrorProvider.SetIconAlignment(this.labelTag2, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("labelTag2.IconAlignment"))));
             this.labelTag2.Name = "labelTag2";
-            // 
-            // pictureTag2
-            // 
+            //
+            //pictureTag2
+            //
             resources.ApplyResources(this.pictureTag2, "pictureTag2");
             this.dirtyErrorProvider.SetIconAlignment(this.pictureTag2, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("pictureTag2.IconAlignment"))));
             this.pictureTag2.Image = global::MusicBeePlugin.Properties.Resources.warning_15;
             this.pictureTag2.Name = "pictureTag2";
             this.pictureTag2.TabStop = false;
-            // 
-            // parameterTagList
-            // 
+            //
+            //parameterTagList
+            //
             resources.ApplyResources(this.parameterTagList, "parameterTagList");
             this.parameterTagList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.parameterTagList.DropDownWidth = 250;
@@ -567,108 +567,108 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.parameterTagList, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("parameterTagList.IconAlignment"))));
             this.parameterTagList.Name = "parameterTagList";
             this.parameterTagList.SelectedIndexChanged += new System.EventHandler(this.parameterTag_SelectedIndexChanged);
-            // 
-            // labelTag
-            // 
+            //
+            //labelTag
+            //
             resources.ApplyResources(this.labelTag, "labelTag");
             this.dirtyErrorProvider.SetIconAlignment(this.labelTag, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("labelTag.IconAlignment"))));
             this.labelTag.Name = "labelTag";
             this.toolTip1.SetToolTip(this.labelTag, resources.GetString("labelTag.ToolTip"));
-            // 
-            // pictureTag
-            // 
+            //
+            //pictureTag
+            //
             resources.ApplyResources(this.pictureTag, "pictureTag");
             this.dirtyErrorProvider.SetIconAlignment(this.pictureTag, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("pictureTag.IconAlignment"))));
             this.pictureTag.Image = global::MusicBeePlugin.Properties.Resources.warning_15;
             this.pictureTag.Name = "pictureTag";
             this.pictureTag.TabStop = false;
-            // 
-            // userPresetLabel
-            // 
+            //
+            //userPresetLabel
+            //
             resources.ApplyResources(this.userPresetLabel, "userPresetLabel");
             this.dirtyErrorProvider.SetIconAlignment(this.userPresetLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("userPresetLabel.IconAlignment"))));
             this.userPresetLabel.Name = "userPresetLabel";
             this.userPresetLabel.Tag = "#splitContainer1@pinned-to-parent-x";
-            // 
-            // userPresetPictureBox
-            // 
+            //
+            //userPresetPictureBox
+            //
             resources.ApplyResources(this.userPresetPictureBox, "userPresetPictureBox");
             this.dirtyErrorProvider.SetIconAlignment(this.userPresetPictureBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("userPresetPictureBox.IconAlignment"))));
             this.userPresetPictureBox.Image = global::MusicBeePlugin.Properties.Resources.clear_button_15;
             this.userPresetPictureBox.Name = "userPresetPictureBox";
             this.userPresetPictureBox.TabStop = false;
             this.userPresetPictureBox.Tag = "#userPresetLabel@square-control@small-picture";
-            // 
-            // customizedPresetLabel
-            // 
+            //
+            //customizedPresetLabel
+            //
             resources.ApplyResources(this.customizedPresetLabel, "customizedPresetLabel");
             this.dirtyErrorProvider.SetIconAlignment(this.customizedPresetLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("customizedPresetLabel.IconAlignment"))));
             this.customizedPresetLabel.Name = "customizedPresetLabel";
             this.customizedPresetLabel.Tag = "#userPresetPictureBox";
-            // 
-            // customizedPresetPictureBox
-            // 
+            //
+            //customizedPresetPictureBox
+            //
             resources.ApplyResources(this.customizedPresetPictureBox, "customizedPresetPictureBox");
             this.dirtyErrorProvider.SetIconAlignment(this.customizedPresetPictureBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("customizedPresetPictureBox.IconAlignment"))));
             this.customizedPresetPictureBox.Image = global::MusicBeePlugin.Properties.Resources.clear_button_15;
             this.customizedPresetPictureBox.Name = "customizedPresetPictureBox";
             this.customizedPresetPictureBox.TabStop = false;
             this.customizedPresetPictureBox.Tag = "#customizedPresetLabel@square-control@small-picture";
-            // 
-            // favoriteCheckBoxLabel
-            // 
+            //
+            //favoriteCheckBoxLabel
+            //
             resources.ApplyResources(this.favoriteCheckBoxLabel, "favoriteCheckBoxLabel");
             this.dirtyErrorProvider.SetIconAlignment(this.favoriteCheckBoxLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("favoriteCheckBoxLabel.IconAlignment"))));
             this.favoriteCheckBoxLabel.Name = "favoriteCheckBoxLabel";
             this.favoriteCheckBoxLabel.Tag = "";
             this.favoriteCheckBoxLabel.Click += new System.EventHandler(this.favoriteCheckBoxLabel_Click);
-            // 
-            // favoriteCheckBox
-            // 
+            //
+            //favoriteCheckBox
+            //
             resources.ApplyResources(this.favoriteCheckBox, "favoriteCheckBox");
             this.dirtyErrorProvider.SetIconAlignment(this.favoriteCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("favoriteCheckBox.IconAlignment"))));
             this.favoriteCheckBox.Name = "favoriteCheckBox";
             this.favoriteCheckBox.Tag = "#favoriteCheckBoxLabel";
             this.favoriteCheckBox.CheckedChanged += new System.EventHandler(this.favoriteCheckBox_CheckedChanged);
-            // 
-            // applyToPlayingTrackCheckBoxLabel
-            // 
+            //
+            //applyToPlayingTrackCheckBoxLabel
+            //
             resources.ApplyResources(this.applyToPlayingTrackCheckBoxLabel, "applyToPlayingTrackCheckBoxLabel");
             this.dirtyErrorProvider.SetIconAlignment(this.applyToPlayingTrackCheckBoxLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("applyToPlayingTrackCheckBoxLabel.IconAlignment"))));
             this.applyToPlayingTrackCheckBoxLabel.Name = "applyToPlayingTrackCheckBoxLabel";
             this.applyToPlayingTrackCheckBoxLabel.Tag = "#favoriteCheckBox";
             this.toolTip1.SetToolTip(this.applyToPlayingTrackCheckBoxLabel, resources.GetString("applyToPlayingTrackCheckBoxLabel.ToolTip"));
             this.applyToPlayingTrackCheckBoxLabel.Click += new System.EventHandler(this.applyToPlayingTrackCheckBoxLabel_Click);
-            // 
-            // applyToPlayingTrackCheckBox
-            // 
+            //
+            //applyToPlayingTrackCheckBox
+            //
             resources.ApplyResources(this.applyToPlayingTrackCheckBox, "applyToPlayingTrackCheckBox");
             this.dirtyErrorProvider.SetIconAlignment(this.applyToPlayingTrackCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("applyToPlayingTrackCheckBox.IconAlignment"))));
             this.applyToPlayingTrackCheckBox.Name = "applyToPlayingTrackCheckBox";
             this.applyToPlayingTrackCheckBox.Tag = "#applyToPlayingTrackCheckBoxLabel";
             this.toolTip1.SetToolTip(this.applyToPlayingTrackCheckBox, resources.GetString("applyToPlayingTrackCheckBox.ToolTip"));
             this.applyToPlayingTrackCheckBox.CheckedChanged += new System.EventHandler(this.applyToPlayingTrackCheckBox_CheckedChanged);
-            // 
-            // assignHotkeyCheckBoxLabel
-            // 
+            //
+            //assignHotkeyCheckBoxLabel
+            //
             resources.ApplyResources(this.assignHotkeyCheckBoxLabel, "assignHotkeyCheckBoxLabel");
             this.dirtyErrorProvider.SetIconAlignment(this.assignHotkeyCheckBoxLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("assignHotkeyCheckBoxLabel.IconAlignment"))));
             this.assignHotkeyCheckBoxLabel.Name = "assignHotkeyCheckBoxLabel";
             this.assignHotkeyCheckBoxLabel.Tag = "#applyToPlayingTrackCheckBox";
             this.toolTip1.SetToolTip(this.assignHotkeyCheckBoxLabel, resources.GetString("assignHotkeyCheckBoxLabel.ToolTip"));
             this.assignHotkeyCheckBoxLabel.Click += new System.EventHandler(this.assignHotkeyCheckBoxLabel_Click);
-            // 
-            // assignHotkeyCheckBox
-            // 
+            //
+            //assignHotkeyCheckBox
+            //
             resources.ApplyResources(this.assignHotkeyCheckBox, "assignHotkeyCheckBox");
             this.dirtyErrorProvider.SetIconAlignment(this.assignHotkeyCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("assignHotkeyCheckBox.IconAlignment"))));
             this.assignHotkeyCheckBox.Name = "assignHotkeyCheckBox";
             this.assignHotkeyCheckBox.Tag = "#assignHotkeyCheckBoxLabel";
             this.toolTip1.SetToolTip(this.assignHotkeyCheckBox, resources.GetString("assignHotkeyCheckBox.ToolTip"));
             this.assignHotkeyCheckBox.CheckedChanged += new System.EventHandler(this.assignHotkeyCheckBox_CheckedChanged);
-            // 
-            // clearIdButton
-            // 
+            //
+            //clearIdButton
+            //
             resources.ApplyResources(this.clearIdButton, "clearIdButton");
             this.dirtyErrorProvider.SetIconAlignment(this.clearIdButton, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("clearIdButton.IconAlignment"))));
             this.clearIdButton.Image = global::MusicBeePlugin.Properties.Resources.clear_button_15;
@@ -676,25 +676,25 @@ namespace MusicBeePlugin
             this.clearIdButton.Tag = "@pinned-to-parent-x@non-defaultable@square-control";
             this.toolTip1.SetToolTip(this.clearIdButton, resources.GetString("clearIdButton.ToolTip"));
             this.clearIdButton.Click += new System.EventHandler(this.clearIdButton_Click);
-            // 
-            // idTextBox
-            // 
+            //
+            //idTextBox
+            //
             resources.ApplyResources(this.idTextBox, "idTextBox");
             this.dirtyErrorProvider.SetIconAlignment(this.idTextBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("idTextBox.IconAlignment"))));
             this.idTextBox.Name = "idTextBox";
             this.idTextBox.Tag = "#clearIdButton";
             this.toolTip1.SetToolTip(this.idTextBox, resources.GetString("idTextBox.ToolTip"));
             this.idTextBox.Leave += new System.EventHandler(this.idTextBox_Leave);
-            // 
-            // idLabel
-            // 
+            //
+            //idLabel
+            //
             resources.ApplyResources(this.idLabel, "idLabel");
             this.dirtyErrorProvider.SetIconAlignment(this.idLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("idLabel.IconAlignment"))));
             this.idLabel.Name = "idLabel";
             this.idLabel.Tag = "#idTextBox";
-            // 
-            // playlistComboBox
-            // 
+            //
+            //playlistComboBox
+            //
             resources.ApplyResources(this.playlistComboBox, "playlistComboBox");
             this.playlistComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.playlistComboBox.DropDownWidth = 250;
@@ -703,60 +703,60 @@ namespace MusicBeePlugin
             this.playlistComboBox.Name = "playlistComboBox";
             this.playlistComboBox.Tag = "#idLabel";
             this.playlistComboBox.SelectedIndexChanged += new System.EventHandler(this.playlistComboBox_SelectedIndexChanged);
-            // 
-            // conditionCheckBoxLabel
-            // 
+            //
+            //conditionCheckBoxLabel
+            //
             resources.ApplyResources(this.conditionCheckBoxLabel, "conditionCheckBoxLabel");
             this.dirtyErrorProvider.SetIconAlignment(this.conditionCheckBoxLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("conditionCheckBoxLabel.IconAlignment"))));
             this.conditionCheckBoxLabel.Name = "conditionCheckBoxLabel";
             this.conditionCheckBoxLabel.Tag = "#playlistComboBox";
             this.conditionCheckBoxLabel.Click += new System.EventHandler(this.conditionCheckBoxLabel_Click);
-            // 
-            // conditionCheckBox
-            // 
+            //
+            //conditionCheckBox
+            //
             resources.ApplyResources(this.conditionCheckBox, "conditionCheckBox");
             this.dirtyErrorProvider.SetIconAlignment(this.conditionCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("conditionCheckBox.IconAlignment"))));
             this.conditionCheckBox.Name = "conditionCheckBox";
             this.conditionCheckBox.Tag = "#conditionCheckBoxLabel";
             this.conditionCheckBox.CheckedChanged += new System.EventHandler(this.conditionCheckBox_CheckedChanged);
-            // 
-            // descriptionGroupBox
-            // 
+            //
+            //descriptionGroupBox
+            //
             resources.ApplyResources(this.descriptionGroupBox, "descriptionGroupBox");
             this.descriptionGroupBox.Controls.Add(this.textBoxTableLayoutPanel);
             this.descriptionGroupBox.Controls.Add(this.descriptionGroupBoxLabel);
             this.dirtyErrorProvider.SetIconAlignment(this.descriptionGroupBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("descriptionGroupBox.IconAlignment"))));
             this.descriptionGroupBox.Name = "descriptionGroupBox";
             this.descriptionGroupBox.TabStop = false;
-            // 
-            // textBoxTableLayoutPanel
-            // 
+            //
+            //textBoxTableLayoutPanel
+            //
             resources.ApplyResources(this.textBoxTableLayoutPanel, "textBoxTableLayoutPanel");
             this.textBoxTableLayoutPanel.Controls.Add(this.descriptionBox, 0, 0);
             this.textBoxTableLayoutPanel.Name = "textBoxTableLayoutPanel";
             this.textBoxTableLayoutPanel.Tag = "";
-            // 
-            // descriptionBox
-            // 
+            //
+            //descriptionBox
+            //
             resources.ApplyResources(this.descriptionBox, "descriptionBox");
             this.dirtyErrorProvider.SetIconAlignment(this.descriptionBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("descriptionBox.IconAlignment"))));
             this.descriptionBox.Name = "descriptionBox";
             this.descriptionBox.ReadOnly = true;
-            // 
-            // descriptionGroupBoxLabel
-            // 
+            //
+            //descriptionGroupBoxLabel
+            //
             resources.ApplyResources(this.descriptionGroupBoxLabel, "descriptionGroupBoxLabel");
             this.dirtyErrorProvider.SetIconAlignment(this.descriptionGroupBoxLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("descriptionGroupBoxLabel.IconAlignment"))));
             this.descriptionGroupBoxLabel.Name = "descriptionGroupBoxLabel";
-            // 
-            // listBoxTableLayoutPanel
-            // 
+            //
+            //listBoxTableLayoutPanel
+            //
             resources.ApplyResources(this.listBoxTableLayoutPanel, "listBoxTableLayoutPanel");
             this.listBoxTableLayoutPanel.Controls.Add(this.presetList, 0, 0);
             this.listBoxTableLayoutPanel.Name = "listBoxTableLayoutPanel";
-            // 
-            // presetList
-            // 
+            //
+            //presetList
+            //
             resources.ApplyResources(this.presetList, "presetList");
             this.dirtyErrorProvider.SetIconAlignment(this.presetList, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("presetList.IconAlignment"))));
             this.presetList.Name = "presetList";
@@ -764,9 +764,9 @@ namespace MusicBeePlugin
             this.presetList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.presetList_MouseClick);
             this.presetList.SelectedIndexChanged += new System.EventHandler(this.presetList_SelectedIndexChanged);
             this.presetList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.presetList_MouseDoubleClick);
-            // 
-            // panel2
-            // 
+            //
+            //panel2
+            //
             this.panel2.Controls.Add(this.previewTable);
             this.panel2.Controls.Add(this.settingsProcessingGroupBox);
             this.panel2.Controls.Add(this.presetManagementGroupBox);
@@ -774,9 +774,9 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.panel2, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("panel2.IconAlignment"))));
             this.panel2.Name = "panel2";
             this.panel2.Tag = "";
-            // 
-            // previewTable
-            // 
+            //
+            //previewTable
+            //
             this.previewTable.AllowUserToAddRows = false;
             this.previewTable.AllowUserToDeleteRows = false;
             resources.ApplyResources(this.previewTable, "previewTable");
@@ -810,123 +810,123 @@ namespace MusicBeePlugin
             this.previewTable.RowHeadersVisible = false;
             this.previewTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.previewTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.previewTable_CellContentClick);
-            // 
-            // PresetGuid
-            // 
+            //
+            //PresetGuid
+            //
             resources.ApplyResources(this.PresetGuid, "PresetGuid");
             this.PresetGuid.Name = "PresetGuid";
-            // 
-            // File
-            // 
+            //
+            //File
+            //
             this.File.FillWeight = 7.191176F;
             resources.ApplyResources(this.File, "File");
             this.File.Name = "File";
-            // 
-            // Track
-            // 
+            //
+            //Track
+            //
             this.Track.FillWeight = 168.2848F;
             resources.ApplyResources(this.Track, "Track");
             this.Track.Name = "Track";
-            // 
-            // TagName1
-            // 
+            //
+            //TagName1
+            //
             this.TagName1.FillWeight = 24.52376F;
             resources.ApplyResources(this.TagName1, "TagName1");
             this.TagName1.Name = "TagName1";
-            // 
-            // OriginalTag1
-            // 
+            //
+            //OriginalTag1
+            //
             this.OriginalTag1.FillWeight = 24.52376F;
             resources.ApplyResources(this.OriginalTag1, "OriginalTag1");
             this.OriginalTag1.Name = "OriginalTag1";
-            // 
-            // NewTag1
-            // 
+            //
+            //NewTag1
+            //
             this.NewTag1.FillWeight = 24.52376F;
             resources.ApplyResources(this.NewTag1, "NewTag1");
             this.NewTag1.Name = "NewTag1";
-            // 
-            // TagName2
-            // 
+            //
+            //TagName2
+            //
             this.TagName2.FillWeight = 24.52376F;
             resources.ApplyResources(this.TagName2, "TagName2");
             this.TagName2.Name = "TagName2";
-            // 
-            // OriginalTag2
-            // 
+            //
+            //OriginalTag2
+            //
             this.OriginalTag2.FillWeight = 24.52376F;
             resources.ApplyResources(this.OriginalTag2, "OriginalTag2");
             this.OriginalTag2.Name = "OriginalTag2";
-            // 
-            // NewTag2
-            // 
+            //
+            //NewTag2
+            //
             this.NewTag2.FillWeight = 24.52376F;
             resources.ApplyResources(this.NewTag2, "NewTag2");
             this.NewTag2.Name = "NewTag2";
-            // 
-            // TagName3
-            // 
+            //
+            //TagName3
+            //
             this.TagName3.FillWeight = 24.52376F;
             resources.ApplyResources(this.TagName3, "TagName3");
             this.TagName3.Name = "TagName3";
-            // 
-            // OriginalTag3
-            // 
+            //
+            //OriginalTag3
+            //
             this.OriginalTag3.FillWeight = 24.52376F;
             resources.ApplyResources(this.OriginalTag3, "OriginalTag3");
             this.OriginalTag3.Name = "OriginalTag3";
-            // 
-            // NewTag3
-            // 
+            //
+            //NewTag3
+            //
             this.NewTag3.FillWeight = 24.52376F;
             resources.ApplyResources(this.NewTag3, "NewTag3");
             this.NewTag3.Name = "NewTag3";
-            // 
-            // TagName4
-            // 
+            //
+            //TagName4
+            //
             this.TagName4.FillWeight = 24.52376F;
             resources.ApplyResources(this.TagName4, "TagName4");
             this.TagName4.Name = "TagName4";
-            // 
-            // OriginalTag4
-            // 
+            //
+            //OriginalTag4
+            //
             this.OriginalTag4.FillWeight = 24.52376F;
             resources.ApplyResources(this.OriginalTag4, "OriginalTag4");
             this.OriginalTag4.Name = "OriginalTag4";
-            // 
-            // NewTag4
-            // 
+            //
+            //NewTag4
+            //
             this.NewTag4.FillWeight = 24.52376F;
             resources.ApplyResources(this.NewTag4, "NewTag4");
             this.NewTag4.Name = "NewTag4";
-            // 
-            // TagName5
-            // 
+            //
+            //TagName5
+            //
             this.TagName5.FillWeight = 24.52376F;
             resources.ApplyResources(this.TagName5, "TagName5");
             this.TagName5.Name = "TagName5";
-            // 
-            // OriginalTag5
-            // 
+            //
+            //OriginalTag5
+            //
             this.OriginalTag5.FillWeight = 24.52376F;
             resources.ApplyResources(this.OriginalTag5, "OriginalTag5");
             this.OriginalTag5.Name = "OriginalTag5";
-            // 
-            // NewTag5
-            // 
+            //
+            //NewTag5
+            //
             this.NewTag5.FillWeight = 24.52376F;
             resources.ApplyResources(this.NewTag5, "NewTag5");
             this.NewTag5.Name = "NewTag5";
-            // 
-            // OddEven
-            // 
+            //
+            //OddEven
+            //
             this.OddEven.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.OddEven.FillWeight = 5.286435F;
             resources.ApplyResources(this.OddEven, "OddEven");
             this.OddEven.Name = "OddEven";
-            // 
-            // settingsProcessingGroupBox
-            // 
+            //
+            //settingsProcessingGroupBox
+            //
             resources.ApplyResources(this.settingsProcessingGroupBox, "settingsProcessingGroupBox");
             this.settingsProcessingGroupBox.Controls.Add(this.buttonOK);
             this.settingsProcessingGroupBox.Controls.Add(this.buttonPreview);
@@ -937,27 +937,27 @@ namespace MusicBeePlugin
             this.settingsProcessingGroupBox.Name = "settingsProcessingGroupBox";
             this.settingsProcessingGroupBox.TabStop = false;
             this.settingsProcessingGroupBox.Tag = "";
-            // 
-            // buttonOK
-            // 
+            //
+            //buttonOK
+            //
             resources.ApplyResources(this.buttonOK, "buttonOK");
             this.dirtyErrorProvider.SetIconAlignment(this.buttonOK, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonOK.IconAlignment"))));
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Tag = "";
             this.toolTip1.SetToolTip(this.buttonOK, resources.GetString("buttonOK.ToolTip"));
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
-            // 
-            // buttonPreview
-            // 
+            //
+            //buttonPreview
+            //
             resources.ApplyResources(this.buttonPreview, "buttonPreview");
             this.dirtyErrorProvider.SetError(this.buttonPreview, resources.GetString("buttonPreview.Error"));
             this.dirtyErrorProvider.SetIconAlignment(this.buttonPreview, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonPreview.IconAlignment"))));
             this.buttonPreview.Name = "buttonPreview";
             this.buttonPreview.Tag = "";
             this.buttonPreview.Click += new System.EventHandler(this.buttonPreview_Click);
-            // 
-            // buttonClose
-            // 
+            //
+            //buttonClose
+            //
             resources.ApplyResources(this.buttonClose, "buttonClose");
             this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.dirtyErrorProvider.SetIconAlignment(this.buttonClose, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonClose.IconAlignment"))));
@@ -966,9 +966,9 @@ namespace MusicBeePlugin
             this.buttonClose.Tag = "@non-defaultable";
             this.toolTip1.SetToolTip(this.buttonClose, resources.GetString("buttonClose.ToolTip"));
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
-            // 
-            // buttonSaveClose
-            // 
+            //
+            //buttonSaveClose
+            //
             resources.ApplyResources(this.buttonSaveClose, "buttonSaveClose");
             this.buttonSaveClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.dirtyErrorProvider.SetIconAlignment(this.buttonSaveClose, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonSaveClose.IconAlignment"))));
@@ -976,16 +976,16 @@ namespace MusicBeePlugin
             this.buttonSaveClose.Tag = "";
             this.toolTip1.SetToolTip(this.buttonSaveClose, resources.GetString("buttonSaveClose.ToolTip"));
             this.buttonSaveClose.Click += new System.EventHandler(this.buttonSaveClose_Click);
-            // 
-            // settingsProcessingLabel
-            // 
+            //
+            //settingsProcessingLabel
+            //
             resources.ApplyResources(this.settingsProcessingLabel, "settingsProcessingLabel");
             this.dirtyErrorProvider.SetIconAlignment(this.settingsProcessingLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("settingsProcessingLabel.IconAlignment"))));
             this.settingsProcessingLabel.Name = "settingsProcessingLabel";
             this.settingsProcessingLabel.Tag = "";
-            // 
-            // presetManagementGroupBox
-            // 
+            //
+            //presetManagementGroupBox
+            //
             this.presetManagementGroupBox.Controls.Add(this.buttonDelete);
             this.presetManagementGroupBox.Controls.Add(this.buttonEdit);
             this.presetManagementGroupBox.Controls.Add(this.buttonCopy);
@@ -1002,110 +1002,110 @@ namespace MusicBeePlugin
             this.presetManagementGroupBox.Name = "presetManagementGroupBox";
             this.presetManagementGroupBox.TabStop = false;
             this.presetManagementGroupBox.Tag = "";
-            // 
-            // buttonDelete
-            // 
+            //
+            //buttonDelete
+            //
             resources.ApplyResources(this.buttonDelete, "buttonDelete");
             this.dirtyErrorProvider.SetIconAlignment(this.buttonDelete, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonDelete.IconAlignment"))));
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Tag = "";
             this.toolTip1.SetToolTip(this.buttonDelete, resources.GetString("buttonDelete.ToolTip"));
             this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
-            // 
-            // buttonEdit
-            // 
+            //
+            //buttonEdit
+            //
             resources.ApplyResources(this.buttonEdit, "buttonEdit");
             this.dirtyErrorProvider.SetIconAlignment(this.buttonEdit, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonEdit.IconAlignment"))));
             this.buttonEdit.Name = "buttonEdit";
             this.buttonEdit.Tag = "";
             this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
-            // 
-            // buttonCopy
-            // 
+            //
+            //buttonCopy
+            //
             resources.ApplyResources(this.buttonCopy, "buttonCopy");
             this.dirtyErrorProvider.SetIconAlignment(this.buttonCopy, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonCopy.IconAlignment"))));
             this.buttonCopy.Name = "buttonCopy";
             this.buttonCopy.Tag = "";
             this.toolTip1.SetToolTip(this.buttonCopy, resources.GetString("buttonCopy.ToolTip"));
             this.buttonCopy.Click += new System.EventHandler(this.buttonCopy_Click);
-            // 
-            // buttonCreate
-            // 
+            //
+            //buttonCreate
+            //
             resources.ApplyResources(this.buttonCreate, "buttonCreate");
             this.dirtyErrorProvider.SetIconAlignment(this.buttonCreate, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonCreate.IconAlignment"))));
             this.buttonCreate.Name = "buttonCreate";
             this.buttonCreate.Tag = "";
             this.buttonCreate.Click += new System.EventHandler(this.buttonCreate_Click);
-            // 
-            // buttonExportCustom
-            // 
+            //
+            //buttonExportCustom
+            //
             resources.ApplyResources(this.buttonExportCustom, "buttonExportCustom");
             this.dirtyErrorProvider.SetIconAlignment(this.buttonExportCustom, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonExportCustom.IconAlignment"))));
             this.buttonExportCustom.Name = "buttonExportCustom";
             this.buttonExportCustom.Tag = "";
             this.toolTip1.SetToolTip(this.buttonExportCustom, resources.GetString("buttonExportCustom.ToolTip"));
             this.buttonExportCustom.Click += new System.EventHandler(this.buttonExportUser_Click);
-            // 
-            // buttonDeleteAll
-            // 
+            //
+            //buttonDeleteAll
+            //
             resources.ApplyResources(this.buttonDeleteAll, "buttonDeleteAll");
             this.dirtyErrorProvider.SetIconAlignment(this.buttonDeleteAll, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonDeleteAll.IconAlignment"))));
             this.buttonDeleteAll.Name = "buttonDeleteAll";
             this.buttonDeleteAll.Tag = "";
             this.toolTip1.SetToolTip(this.buttonDeleteAll, resources.GetString("buttonDeleteAll.ToolTip"));
             this.buttonDeleteAll.Click += new System.EventHandler(this.buttonDeleteAll_Click);
-            // 
-            // buttonImportAll
-            // 
+            //
+            //buttonImportAll
+            //
             resources.ApplyResources(this.buttonImportAll, "buttonImportAll");
             this.dirtyErrorProvider.SetIconAlignment(this.buttonImportAll, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonImportAll.IconAlignment"))));
             this.buttonImportAll.Name = "buttonImportAll";
             this.buttonImportAll.Tag = "";
             this.toolTip1.SetToolTip(this.buttonImportAll, resources.GetString("buttonImportAll.ToolTip"));
             this.buttonImportAll.Click += new System.EventHandler(this.buttonInstallAll_Click);
-            // 
-            // buttonImportNew
-            // 
+            //
+            //buttonImportNew
+            //
             resources.ApplyResources(this.buttonImportNew, "buttonImportNew");
             this.dirtyErrorProvider.SetIconAlignment(this.buttonImportNew, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonImportNew.IconAlignment"))));
             this.buttonImportNew.Name = "buttonImportNew";
             this.buttonImportNew.Tag = "";
             this.toolTip1.SetToolTip(this.buttonImportNew, resources.GetString("buttonImportNew.ToolTip"));
             this.buttonImportNew.Click += new System.EventHandler(this.buttonInstallNew_Click);
-            // 
-            // buttonImport
-            // 
+            //
+            //buttonImport
+            //
             resources.ApplyResources(this.buttonImport, "buttonImport");
             this.dirtyErrorProvider.SetIconAlignment(this.buttonImport, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonImport.IconAlignment"))));
             this.buttonImport.Name = "buttonImport";
             this.buttonImport.Tag = "";
             this.toolTip1.SetToolTip(this.buttonImport, resources.GetString("buttonImport.ToolTip"));
             this.buttonImport.Click += new System.EventHandler(this.buttonImport_Click);
-            // 
-            // buttonExport
-            // 
+            //
+            //buttonExport
+            //
             resources.ApplyResources(this.buttonExport, "buttonExport");
             this.dirtyErrorProvider.SetIconAlignment(this.buttonExport, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonExport.IconAlignment"))));
             this.buttonExport.Name = "buttonExport";
             this.buttonExport.Tag = "";
             this.toolTip1.SetToolTip(this.buttonExport, resources.GetString("buttonExport.ToolTip"));
             this.buttonExport.Click += new System.EventHandler(this.buttonExport_Click);
-            // 
-            // presetManagementLabel
-            // 
+            //
+            //presetManagementLabel
+            //
             resources.ApplyResources(this.presetManagementLabel, "presetManagementLabel");
             this.dirtyErrorProvider.SetIconAlignment(this.presetManagementLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("presetManagementLabel.IconAlignment"))));
             this.presetManagementLabel.Name = "presetManagementLabel";
             this.presetManagementLabel.Tag = "";
-            // 
-            // toolTip1
-            // 
+            //
+            //toolTip1
+            //
             this.toolTip1.AutoPopDelay = 10000;
             this.toolTip1.InitialDelay = 900;
             this.toolTip1.ReshowDelay = 1000;
-            // 
-            // filterComboBox
-            // 
+            //
+            //filterComboBox
+            //
             resources.ApplyResources(this.filterComboBox, "filterComboBox");
             this.filterComboBox.CausesValidation = false;
             this.filterComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -1124,18 +1124,18 @@ namespace MusicBeePlugin
             this.filterComboBox.Tag = "#filtersPanel";
             this.toolTip1.SetToolTip(this.filterComboBox, resources.GetString("filterComboBox.ToolTip"));
             this.filterComboBox.SelectedIndexChanged += new System.EventHandler(this.filterComboBox_SelectedIndexChanged);
-            // 
-            // searchTextBox
-            // 
+            //
+            //searchTextBox
+            //
             resources.ApplyResources(this.searchTextBox, "searchTextBox");
             this.dirtyErrorProvider.SetIconAlignment(this.searchTextBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("searchTextBox.IconAlignment"))));
             this.searchTextBox.Name = "searchTextBox";
             this.searchTextBox.Tag = "#clearSearchButton";
             this.toolTip1.SetToolTip(this.searchTextBox, resources.GetString("searchTextBox.ToolTip"));
             this.searchTextBox.TextChanged += new System.EventHandler(this.searchTextBox_TextChanged);
-            // 
-            // buttonSettings
-            // 
+            //
+            //buttonSettings
+            //
             resources.ApplyResources(this.buttonSettings, "buttonSettings");
             this.dirtyErrorProvider.SetIconAlignment(this.buttonSettings, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonSettings.IconAlignment"))));
             this.buttonSettings.Image = global::MusicBeePlugin.Properties.Resources.gear_15;
@@ -1143,9 +1143,9 @@ namespace MusicBeePlugin
             this.buttonSettings.Tag = "@non-defaultable@square-control";
             this.toolTip1.SetToolTip(this.buttonSettings, resources.GetString("buttonSettings.ToolTip"));
             this.buttonSettings.Click += new System.EventHandler(this.buttonSettings_Click);
-            // 
-            // uncheckAllFiltersPictureBox
-            // 
+            //
+            //uncheckAllFiltersPictureBox
+            //
             resources.ApplyResources(this.uncheckAllFiltersPictureBox, "uncheckAllFiltersPictureBox");
             this.dirtyErrorProvider.SetIconAlignment(this.uncheckAllFiltersPictureBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("uncheckAllFiltersPictureBox.IconAlignment"))));
             this.uncheckAllFiltersPictureBox.Name = "uncheckAllFiltersPictureBox";
@@ -1153,9 +1153,9 @@ namespace MusicBeePlugin
             this.uncheckAllFiltersPictureBox.Tag = "@square-control";
             this.toolTip1.SetToolTip(this.uncheckAllFiltersPictureBox, resources.GetString("uncheckAllFiltersPictureBox.ToolTip"));
             this.uncheckAllFiltersPictureBox.Click += new System.EventHandler(this.uncheckAllFiltersPictureBox_Click);
-            // 
-            // hotkeyPictureBox
-            // 
+            //
+            //hotkeyPictureBox
+            //
             resources.ApplyResources(this.hotkeyPictureBox, "hotkeyPictureBox");
             this.dirtyErrorProvider.SetIconAlignment(this.hotkeyPictureBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("hotkeyPictureBox.IconAlignment"))));
             this.hotkeyPictureBox.Name = "hotkeyPictureBox";
@@ -1163,9 +1163,9 @@ namespace MusicBeePlugin
             this.hotkeyPictureBox.Tag = "@square-control";
             this.toolTip1.SetToolTip(this.hotkeyPictureBox, resources.GetString("hotkeyPictureBox.ToolTip"));
             this.hotkeyPictureBox.Click += new System.EventHandler(this.hotkeyPictureBox_Click);
-            // 
-            // functionIdPictureBox
-            // 
+            //
+            //functionIdPictureBox
+            //
             resources.ApplyResources(this.functionIdPictureBox, "functionIdPictureBox");
             this.dirtyErrorProvider.SetIconAlignment(this.functionIdPictureBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("functionIdPictureBox.IconAlignment"))));
             this.functionIdPictureBox.Name = "functionIdPictureBox";
@@ -1173,9 +1173,9 @@ namespace MusicBeePlugin
             this.functionIdPictureBox.Tag = "@square-control";
             this.toolTip1.SetToolTip(this.functionIdPictureBox, resources.GetString("functionIdPictureBox.ToolTip"));
             this.functionIdPictureBox.Click += new System.EventHandler(this.functionIdPictureBox_Click);
-            // 
-            // playlistPictureBox
-            // 
+            //
+            //playlistPictureBox
+            //
             resources.ApplyResources(this.playlistPictureBox, "playlistPictureBox");
             this.dirtyErrorProvider.SetIconAlignment(this.playlistPictureBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("playlistPictureBox.IconAlignment"))));
             this.playlistPictureBox.Name = "playlistPictureBox";
@@ -1183,9 +1183,9 @@ namespace MusicBeePlugin
             this.playlistPictureBox.Tag = "@square-control";
             this.toolTip1.SetToolTip(this.playlistPictureBox, resources.GetString("playlistPictureBox.ToolTip"));
             this.playlistPictureBox.Click += new System.EventHandler(this.playlistPictureBox_Click);
-            // 
-            // userPictureBox
-            // 
+            //
+            //userPictureBox
+            //
             resources.ApplyResources(this.userPictureBox, "userPictureBox");
             this.dirtyErrorProvider.SetIconAlignment(this.userPictureBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("userPictureBox.IconAlignment"))));
             this.userPictureBox.Name = "userPictureBox";
@@ -1193,9 +1193,9 @@ namespace MusicBeePlugin
             this.userPictureBox.Tag = "@square-control";
             this.toolTip1.SetToolTip(this.userPictureBox, resources.GetString("userPictureBox.ToolTip"));
             this.userPictureBox.Click += new System.EventHandler(this.userPictureBox_Click);
-            // 
-            // customizedPictureBox
-            // 
+            //
+            //customizedPictureBox
+            //
             resources.ApplyResources(this.customizedPictureBox, "customizedPictureBox");
             this.dirtyErrorProvider.SetIconAlignment(this.customizedPictureBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("customizedPictureBox.IconAlignment"))));
             this.customizedPictureBox.Name = "customizedPictureBox";
@@ -1203,9 +1203,9 @@ namespace MusicBeePlugin
             this.customizedPictureBox.Tag = "@square-control";
             this.toolTip1.SetToolTip(this.customizedPictureBox, resources.GetString("customizedPictureBox.ToolTip"));
             this.customizedPictureBox.Click += new System.EventHandler(this.customizedPictureBox_Click);
-            // 
-            // predefinedPictureBox
-            // 
+            //
+            //predefinedPictureBox
+            //
             resources.ApplyResources(this.predefinedPictureBox, "predefinedPictureBox");
             this.dirtyErrorProvider.SetIconAlignment(this.predefinedPictureBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("predefinedPictureBox.IconAlignment"))));
             this.predefinedPictureBox.Name = "predefinedPictureBox";
@@ -1213,9 +1213,9 @@ namespace MusicBeePlugin
             this.predefinedPictureBox.Tag = "@square-control";
             this.toolTip1.SetToolTip(this.predefinedPictureBox, resources.GetString("predefinedPictureBox.ToolTip"));
             this.predefinedPictureBox.Click += new System.EventHandler(this.predefinedPictureBox_Click);
-            // 
-            // tickedOnlyPictureBox
-            // 
+            //
+            //tickedOnlyPictureBox
+            //
             resources.ApplyResources(this.tickedOnlyPictureBox, "tickedOnlyPictureBox");
             this.dirtyErrorProvider.SetIconAlignment(this.tickedOnlyPictureBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("tickedOnlyPictureBox.IconAlignment"))));
             this.tickedOnlyPictureBox.Name = "tickedOnlyPictureBox";
@@ -1223,9 +1223,9 @@ namespace MusicBeePlugin
             this.tickedOnlyPictureBox.Tag = "@square-control";
             this.toolTip1.SetToolTip(this.tickedOnlyPictureBox, resources.GetString("tickedOnlyPictureBox.ToolTip"));
             this.tickedOnlyPictureBox.Click += new System.EventHandler(this.tickedOnlyPictureBox_Click);
-            // 
-            // clearSearchButton
-            // 
+            //
+            //clearSearchButton
+            //
             resources.ApplyResources(this.clearSearchButton, "clearSearchButton");
             this.dirtyErrorProvider.SetIconAlignment(this.clearSearchButton, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("clearSearchButton.IconAlignment"))));
             this.clearSearchButton.Image = global::MusicBeePlugin.Properties.Resources.clear_button_15;
@@ -1233,27 +1233,27 @@ namespace MusicBeePlugin
             this.clearSearchButton.Tag = "@non-defaultable@square-control";
             this.toolTip1.SetToolTip(this.clearSearchButton, resources.GetString("clearSearchButton.ToolTip"));
             this.clearSearchButton.Click += new System.EventHandler(this.clearSearchButton_Click);
-            // 
-            // autoApplyPresetsLabel
-            // 
+            //
+            //autoApplyPresetsLabel
+            //
             resources.ApplyResources(this.autoApplyPresetsLabel, "autoApplyPresetsLabel");
             this.autoApplyPresetsLabel.AutoEllipsis = true;
             this.dirtyErrorProvider.SetIconAlignment(this.autoApplyPresetsLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("autoApplyPresetsLabel.IconAlignment"))));
             this.autoApplyPresetsLabel.Name = "autoApplyPresetsLabel";
             this.autoApplyPresetsLabel.Tag = "#AdvancedSearchAndReplace&filtersPanel";
             this.autoApplyPresetsLabel.Click += new System.EventHandler(this.label5_Click);
-            // 
-            // searchPictureBox
-            // 
+            //
+            //searchPictureBox
+            //
             this.dirtyErrorProvider.SetIconAlignment(this.searchPictureBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("searchPictureBox.IconAlignment"))));
             this.searchPictureBox.Image = global::MusicBeePlugin.Properties.Resources.search;
             resources.ApplyResources(this.searchPictureBox, "searchPictureBox");
             this.searchPictureBox.Name = "searchPictureBox";
             this.searchPictureBox.TabStop = false;
             this.searchPictureBox.Tag = "#searchTextBox@square-control";
-            // 
-            // filtersPanel
-            // 
+            //
+            //filtersPanel
+            //
             resources.ApplyResources(this.filtersPanel, "filtersPanel");
             this.filtersPanel.Controls.Add(this.filterComboBox);
             this.filtersPanel.Controls.Add(this.uncheckAllFiltersPictureBox);
@@ -1271,16 +1271,16 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.filtersPanel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("filtersPanel.IconAlignment"))));
             this.filtersPanel.Name = "filtersPanel";
             this.filtersPanel.Tag = "#AdvancedSearchAndReplace&splitContainer1";
-            // 
-            // dirtyErrorProvider
-            // 
+            //
+            //dirtyErrorProvider
+            //
             this.dirtyErrorProvider.BlinkRate = 1000;
             this.dirtyErrorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.AlwaysBlink;
             this.dirtyErrorProvider.ContainerControl = this;
             resources.ApplyResources(this.dirtyErrorProvider, "dirtyErrorProvider");
-            // 
-            // AdvancedSearchAndReplace
-            // 
+            //
+            //AdvancedSearchAndReplace
+            //
             this.AcceptButton = this.buttonPreview;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

@@ -179,13 +179,10 @@ namespace MusicBeePlugin
             {
                 case ChangeCaseOptions.SentenceCase:
                     if (isTheFirstWord)
-                    {
                         newSubstring = ChangeSubstringCase(substring, ChangeCaseOptions.TitleCase, isTheFirstWord);
-                    }
                     else
-                    {
                         newSubstring = ChangeSubstringCase(substring, ChangeCaseOptions.LowerCase, isTheFirstWord);
-                    }
+
                     break;
                 case ChangeCaseOptions.TitleCase:
                     bool isTheFirstChar = true;
@@ -211,13 +208,9 @@ namespace MusicBeePlugin
                     foreach (char currentChar in substring)
                     {
                         if ((string.Empty + currentChar).ToUpper() == (string.Empty + currentChar)) //Char is uppercased
-                        {
                             newSubstring = newSubstring + (string.Empty + currentChar).ToLower();
-                        }
                         else //Char is lowercased
-                        {
                             newSubstring = newSubstring + (string.Empty + currentChar).ToUpper();
-                        }
                     }
                     break;
             }
@@ -225,7 +218,7 @@ namespace MusicBeePlugin
             return newSubstring;
         }
 
-        internal static bool CharIsCaseSensitive(char item)
+        internal static bool IsCharCaseSensitive(char item)
         {
             if ((string.Empty + item).ToLower() == (string.Empty + item).ToUpper())
                 return false;
@@ -257,22 +250,13 @@ namespace MusicBeePlugin
             bool isTheFirstWord = true;
 
             if (exceptionWords == null)
-            {
-                exceptionWords = new string[1];
-                exceptionWords[0] = string.Empty;
-            }
+                exceptionWords = new string[0];
 
             if (exceptionChars == null)
-            {
-                exceptionChars = new string[1];
-                exceptionChars[0] = string.Empty;
-            }
+                exceptionChars = new string[0];
 
             if (wordSplitters == null)
-            {
-                wordSplitters = new string[1];
-                wordSplitters[0] = string.Empty;
-            }
+                wordSplitters = new string[0];
 
             foreach (char currentChar in source)
             {
@@ -305,7 +289,7 @@ namespace MusicBeePlugin
                 }
                 else //Not the end of word
                 {
-                    if (currentWord == string.Empty && CharIsCaseSensitive(currentChar)) //Beginning of new word
+                    if (currentWord == string.Empty && IsCharCaseSensitive(currentChar)) //Beginning of new word
                     {
                         if (IsItemContainedInList(currentChar, exceptionChars)) //Ignore changing case later
                             wasCharException = true;
@@ -329,7 +313,7 @@ namespace MusicBeePlugin
             }
 
             //String is ended, so last currentWord IS a word
-            if (alwaysCapitalizeLastWord) //Always Capitalize last word if this option is checked
+            if (alwaysCapitalizeLastWord && !wasCharException) //Always Capitalize last word if this option is checked, but there was no character exception
                 newString = newString + ChangeSubstringCase(currentWord, ChangeCaseOptions.TitleCase, true);
             else if (wasCharException || (IsItemContainedInList(currentWord, exceptionWords) && !useWhiteList) || (!IsItemContainedInList(currentWord, exceptionWords) && useWhiteList)) //Ignore changing case
                 newString = newString + currentWord;
@@ -369,7 +353,9 @@ namespace MusicBeePlugin
         private string changeCase(string source, int changeCaseOptions, string[] exceptionWords = null, bool useWhiteList = false, string[] exceptionChars = null, string[] wordSplitters = null, bool alwaysCapitalize1stWord = false, bool alwaysCapitalizeLastWord = false)
         {
             if (changeCaseOptions == 1) //Splitting to sentences
+            {
                 return ChangeSentenceCase(source, exceptionWords, useWhiteList, exceptionChars, wordSplitters);
+            }
             else //Splitting to words
             {
                 if (changeCaseOptions == 2)

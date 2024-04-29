@@ -922,7 +922,7 @@ namespace MusicBeePlugin
                 if (allTagsAreEqual == true)
                     artwork = MultipleArtworksAccent;
                 //else if (allTagsAreEqual == null) //This never must happen //******
-                //    artwork = emptyArtwork;
+                //   artwork = emptyArtwork;
                 else //if (allTagsAreEqual == false)
                     artwork = MultipleArtworks;
 
@@ -935,7 +935,7 @@ namespace MusicBeePlugin
                     else //if (allTagsAreEqual == false)
                         previewTable.Rows[rowIndex].Cells[columnIndex].ToolTipText = CtlMixedValues.Trim('(', ')') + "\n" + CtlMixedValuesDifferentFromLibrary;
                     //else //This never must happen //******
-                    //    previewTable.Rows[rowIndex].Cells[columnIndex].ToolTipText = null;
+                    //   previewTable.Rows[rowIndex].Cells[columnIndex].ToolTipText = null;
                 }
             }
             else if (previewTable.Rows[rowIndex].Cells[columnIndex].ToolTipText != null) //Not mixed artworks

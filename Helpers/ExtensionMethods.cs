@@ -74,6 +74,28 @@ namespace ExtensionMethods
         {
             return dictionary.TryGetValue(key, out _);
         }
+
+        public static bool AddNotExisting<T>(this List<T> list, T value)//***************
+        {
+            if (!list.Contains(value))
+            {
+                list.Add(value);
+                return true;
+            }
+
+            return false;
+        }
+
+        public static bool RemoveExisting<T>(this List<T> list, T value)
+        {
+            if (!list.Contains(value))
+            {
+                list.Remove(value);
+                return true;
+            }
+
+            return false;
+        }
     }
 
     public static class DataGridViewExtensions

@@ -489,27 +489,27 @@ namespace MusicBeePlugin
             tagList.ItemsClear();
 
 
-            // Let's add <Tag #> if either filled tag list is for search or <Tag #> is writable
+            //Let's add <Tag #> if either filled tag list is for search or <Tag #> is writable
             if (parameterTagTypeListCustom.SelectedIndex >= (int)TagType.Writable - searchFlag)
                 tagList.Items.Add("<" + ParameterTagName + " 1>");
 
-            // Let's add <Tag #> if either filled tag list is for search or <Tag #> is writable
+            //Let's add <Tag #> if either filled tag list is for search or <Tag #> is writable
             if (parameterTag2TypeListCustom.SelectedIndex >= (int)TagType.Writable - searchFlag)
                 tagList.Items.Add("<" + ParameterTagName + " 2>");
 
-            // Let's add <Tag #> if either filled tag list is for search or <Tag #> is writable
+            //Let's add <Tag #> if either filled tag list is for search or <Tag #> is writable
             if (parameterTag3TypeListCustom.SelectedIndex >= (int)TagType.Writable - searchFlag)
                 tagList.Items.Add("<" + ParameterTagName + " 3>");
 
-            // Let's add <Tag #> if either filled tag list is for search or <Tag #> is writable
+            //Let's add <Tag #> if either filled tag list is for search or <Tag #> is writable
             if (parameterTag4TypeListCustom.SelectedIndex >= (int)TagType.Writable - searchFlag)
                 tagList.Items.Add("<" + ParameterTagName + " 4>");
 
-            // Let's add <Tag #> if either filled tag list is for search or <Tag #> is writable
+            //Let's add <Tag #> if either filled tag list is for search or <Tag #> is writable
             if (parameterTag5TypeListCustom.SelectedIndex >= (int)TagType.Writable - searchFlag)
                 tagList.Items.Add("<" + ParameterTagName + " 5>");
 
-            // Let's add <Tag #> if either filled tag list is for search or <Tag #> is writable
+            //Let's add <Tag #> if either filled tag list is for search or <Tag #> is writable
             if (parameterTag6TypeListCustom.SelectedIndex >= (int)TagType.Writable - searchFlag)
                 tagList.Items.Add("<" + ParameterTagName + " 6>");
 
@@ -519,12 +519,12 @@ namespace MusicBeePlugin
             tagList.Items.Add("<" + TempTagName + " 3>");
             tagList.Items.Add("<" + TempTagName + " 4>");
 
-            if (isSearchTag) // It's read-only operation
+            if (isSearchTag) //It's read-only operation
             {
-                FillListByTagNames(tagList.Items, true); // true: add read-only tags too
+                FillListByTagNames(tagList.Items, true); //true: add read-only tags too
                 FillListByPropNames(tagList.Items);
             }
-            else  // It's writable operation
+            else  //It's writable operation
             {
                 FillListByTagNames(tagList.Items);
             }

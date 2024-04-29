@@ -2,15 +2,15 @@
 {
     partial class CompareTracks
     {
-        /// <summary>
-        /// Требуется переменная конструктора.
-        /// </summary>
+        ///<summary>
+        ///Требуется переменная конструктора.
+        ///</summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Освободить все используемые ресурсы.
-        /// </summary>
-        /// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
+        ///<summary>
+        ///Освободить все используемые ресурсы.
+        ///</summary>
+        ///<param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -23,10 +23,10 @@
 
         #region Код, автоматически созданный конструктором форм Windows
 
-        /// <summary>
-        /// Обязательный метод для поддержки конструктора - не изменяйте
-        /// содержимое данного метода при помощи редактора кода.
-        /// </summary>
+        ///<summary>
+        ///Обязательный метод для поддержки конструктора - не изменяйте
+        ///содержимое данного метода при помощи редактора кода.
+        ///</summary>
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
@@ -56,24 +56,24 @@
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).BeginInit();
             this.toolsPanel.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // buttonOK
-            // 
+            //
+            //buttonOK
+            //
             resources.ApplyResources(this.buttonOK, "buttonOK");
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Tag = "#buttonCancel";
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
-            // 
-            // buttonCancel
-            // 
+            //
+            //buttonCancel
+            //
             resources.ApplyResources(this.buttonCancel, "buttonCancel");
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Tag = "#toolsPanel@non-defaultable@pinned-to-parent-x";
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
-            // 
-            // previewTable
-            // 
+            //
+            //previewTable
+            //
             this.previewTable.AllowUserToAddRows = false;
             this.previewTable.AllowUserToDeleteRows = false;
             resources.ApplyResources(this.previewTable, "previewTable");
@@ -119,15 +119,15 @@
             this.previewTable.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.previewTable_ColumnWidthChanged);
             this.previewTable.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.previewTable_DataError);
             this.previewTable.SelectionChanged += new System.EventHandler(this.previewTable_SelectionChanged);
-            // 
-            // Column1
-            // 
+            //
+            //Column1
+            //
             resources.ApplyResources(this.Column1, "Column1");
             this.Column1.Name = "Column1";
             this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // ImageCellTemplate
-            // 
+            //
+            //ImageCellTemplate
+            //
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle2.NullValue")));
             this.ImageCellTemplate.DefaultCellStyle = dataGridViewCellStyle2;
@@ -136,84 +136,84 @@
             this.ImageCellTemplate.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
             this.ImageCellTemplate.Name = "ImageCellTemplate";
             this.ImageCellTemplate.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
+            //
+            //dataGridViewTextBoxColumn1
+            //
             resources.ApplyResources(this.dataGridViewTextBoxColumn1, "dataGridViewTextBoxColumn1");
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
+            //
+            //dataGridViewTextBoxColumn2
+            //
             resources.ApplyResources(this.dataGridViewTextBoxColumn2, "dataGridViewTextBoxColumn2");
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
+            //
+            //dataGridViewTextBoxColumn3
+            //
             resources.ApplyResources(this.dataGridViewTextBoxColumn3, "dataGridViewTextBoxColumn3");
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            // 
-            // selectTagsButton
-            // 
+            //
+            //selectTagsButton
+            //
             resources.ApplyResources(this.selectTagsButton, "selectTagsButton");
             this.selectTagsButton.Name = "selectTagsButton";
             this.selectTagsButton.Tag = "#rememberColumnAsDefaultWidthCheckBox@non-defaultable";
             this.toolTip1.SetToolTip(this.selectTagsButton, resources.GetString("selectTagsButton.ToolTip"));
             this.selectTagsButton.Click += new System.EventHandler(this.selectTagsButton_Click);
-            // 
-            // toolTip1
-            // 
+            //
+            //toolTip1
+            //
             this.toolTip1.AutoPopDelay = 10000;
             this.toolTip1.InitialDelay = 500;
             this.toolTip1.ReshowDelay = 100;
-            // 
-            // rememberColumnAsDefaultWidthCheckBox
-            // 
+            //
+            //rememberColumnAsDefaultWidthCheckBox
+            //
             resources.ApplyResources(this.rememberColumnAsDefaultWidthCheckBox, "rememberColumnAsDefaultWidthCheckBox");
             this.rememberColumnAsDefaultWidthCheckBox.Name = "rememberColumnAsDefaultWidthCheckBox";
             this.rememberColumnAsDefaultWidthCheckBox.Tag = "#rememberColumnAsDefaultWidthCheckBoxLabel";
             this.toolTip1.SetToolTip(this.rememberColumnAsDefaultWidthCheckBox, resources.GetString("rememberColumnAsDefaultWidthCheckBox.ToolTip"));
-            // 
-            // autoSelectTagsCheckBox
-            // 
+            //
+            //autoSelectTagsCheckBox
+            //
             resources.ApplyResources(this.autoSelectTagsCheckBox, "autoSelectTagsCheckBox");
             this.autoSelectTagsCheckBox.Name = "autoSelectTagsCheckBox";
             this.autoSelectTagsCheckBox.Tag = "#placeholderLabel@pinned-to-parent-x";
             this.toolTip1.SetToolTip(this.autoSelectTagsCheckBox, resources.GetString("autoSelectTagsCheckBox.ToolTip"));
             this.autoSelectTagsCheckBox.CheckedChanged += new System.EventHandler(this.autoSelectTagsCheckBox_CheckedChanged);
-            // 
-            // rememberColumnAsDefaultWidthCheckBoxLabel
-            // 
+            //
+            //rememberColumnAsDefaultWidthCheckBoxLabel
+            //
             resources.ApplyResources(this.rememberColumnAsDefaultWidthCheckBoxLabel, "rememberColumnAsDefaultWidthCheckBoxLabel");
             this.rememberColumnAsDefaultWidthCheckBoxLabel.Name = "rememberColumnAsDefaultWidthCheckBoxLabel";
             this.toolTip1.SetToolTip(this.rememberColumnAsDefaultWidthCheckBoxLabel, resources.GetString("rememberColumnAsDefaultWidthCheckBoxLabel.ToolTip"));
             this.rememberColumnAsDefaultWidthCheckBoxLabel.Click += new System.EventHandler(this.rememberColumnAsDefaultWidthCheckBoxLabel_Click);
-            // 
-            // buttonCopy
-            // 
+            //
+            //buttonCopy
+            //
             resources.ApplyResources(this.buttonCopy, "buttonCopy");
             this.buttonCopy.Name = "buttonCopy";
             this.buttonCopy.Tag = "@square-control";
             this.toolTip1.SetToolTip(this.buttonCopy, resources.GetString("buttonCopy.ToolTip"));
             this.buttonCopy.Click += new System.EventHandler(this.buttonCopy_Click);
-            // 
-            // buttonPaste
-            // 
+            //
+            //buttonPaste
+            //
             resources.ApplyResources(this.buttonPaste, "buttonPaste");
             this.buttonPaste.Name = "buttonPaste";
             this.buttonPaste.Tag = "@square-control";
             this.toolTip1.SetToolTip(this.buttonPaste, resources.GetString("buttonPaste.ToolTip"));
             this.buttonPaste.Click += new System.EventHandler(this.buttonPaste_Click);
-            // 
-            // buttonClear
-            // 
+            //
+            //buttonClear
+            //
             resources.ApplyResources(this.buttonClear, "buttonClear");
             this.buttonClear.Name = "buttonClear";
             this.buttonClear.Tag = "@square-control";
             this.toolTip1.SetToolTip(this.buttonClear, resources.GetString("buttonClear.ToolTip"));
             this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
-            // 
-            // toolsPanel
-            // 
+            //
+            //toolsPanel
+            //
             resources.ApplyResources(this.toolsPanel, "toolsPanel");
             this.toolsPanel.Controls.Add(this.buttonCancel);
             this.toolsPanel.Controls.Add(this.buttonOK);
@@ -227,14 +227,14 @@
             this.toolsPanel.Controls.Add(this.placeholderLabel);
             this.toolsPanel.Name = "toolsPanel";
             this.toolsPanel.Tag = "#CompareTracks&CompareTracks@pinned-to-parent-x@pinned-to-parent-y";
-            // 
-            // placeholderLabel
-            // 
+            //
+            //placeholderLabel
+            //
             resources.ApplyResources(this.placeholderLabel, "placeholderLabel");
             this.placeholderLabel.Name = "placeholderLabel";
-            // 
-            // CompareTracks
-            // 
+            //
+            //CompareTracks
+            //
             this.AcceptButton = this.buttonOK;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

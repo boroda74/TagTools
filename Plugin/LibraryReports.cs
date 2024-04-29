@@ -8,6 +8,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Windows.Forms;
 using static MusicBeePlugin.Plugin;
 
@@ -52,10 +53,11 @@ namespace MusicBeePlugin
             cachedQueriedActualGroupingValues = null;
             queriedFilesActualComposedGroupingValues.Clear();
             tags.Clear();
-            fileComposedGroupingValues.Clear();
-            fileTags.Clear();
+            filesComposedGroupingValues.Clear();
+            filesTags.Clear();
             clearArtworks();
         }
+
 
         private static List<string> ProcessedReportDeletions = new List<string>();
 
@@ -65,7 +67,7 @@ namespace MusicBeePlugin
         internal SortedDictionary<string, Bitmap> artworks = new SortedDictionary<string, Bitmap>();
         private Bitmap artwork; //For CD booklet export
 
-        private Font totalsFont; // Preview table font for "Totals" cells
+        private Font totalsFont; //Preview table font for "Totals" cells
         private int[] maxWidths = null;
 
         private const int MaxColumnRepresentationLength = 80; //***
@@ -139,12 +141,12 @@ namespace MusicBeePlugin
         private SortedDictionary<string, bool>[] cachedQueriedActualGroupingValues = null;
         private SortedDictionary<string, List<string>> queriedFilesActualComposedGroupingValues = new SortedDictionary<string, List<string>>(); //<url, list of composed groupings>
 
-        private bool[] columnsRightAlignment; // Cache for preview table/exported report 
-        private ResultType[] columnTypes; // Cache for preview table/exported report 
+        private bool[] columnsRightAlignment; //Cache for preview table/exported report 
+        private ResultType[] columnTypes; //Cache for preview table/exported report 
 
         private AggregatedTags tags = new AggregatedTags();
-        private SortedDictionary<string, string> fileComposedGroupingValues = new SortedDictionary<string, string>();
-        private AggregatedTags fileTags = new AggregatedTags();
+        private SortedDictionary<string, string> filesComposedGroupingValues = new SortedDictionary<string, string>();
+        private AggregatedTags filesTags = new AggregatedTags();
 
         private string[] lastFiles = null;
 
@@ -168,12 +170,12 @@ namespace MusicBeePlugin
         private bool? newColumn = false;
         private int tagsDataGridViewSelectedRow = -1;
 
-        private SortedDictionary<string, PresetColumnAttributes> groupings = new SortedDictionary<string, PresetColumnAttributes>(); // Short ids, attributes (various expressions)
+        private SortedDictionary<string, PresetColumnAttributes> groupings = new SortedDictionary<string, PresetColumnAttributes>(); //Short ids, attributes (various expressions)
 
 
         //Working locals & UI preset caching
-        private List<string> sortedShortIds = new List<string>(); // Short Ids
-        private Dictionary<string, List<string>> shortIdsExprs = new Dictionary<string, List<string>>(); // Short ids, expressions
+        private List<string> sortedShortIds = new List<string>(); //Short ids
+        private Dictionary<string, List<string>> shortIdsExprs = new Dictionary<string, List<string>>(); //Short ids, expressions
 
         private ColumnAttributesDict groupingsDict = new ColumnAttributesDict();
         private ColumnAttributesDict functionsDict = new ColumnAttributesDict();
@@ -231,12 +233,12 @@ namespace MusicBeePlugin
 
             //Setting control not standard properties
             //var heightField = presetList.GetType().GetField(
-            //    "scaledListItemBordersHeight",
-            //    BindingFlags.NonPublic | BindingFlags.Instance
+            //   "scaledListItemBordersHeight",
+            //   BindingFlags.NonPublic | BindingFlags.Instance
             //);
 
-            //var addedHeight = 4; // Some appropriate value, greater than the field's default of 2
-            //heightField.SetValue(presetList, addedHeight); // Where "presetList" is your CheckedListBox
+            //var addedHeight = 4; //Some appropriate value, greater than the field's default of 2
+            //heightField.SetValue(presetList, addedHeight); //Where "presetList" is your CheckedListBox
 
             previewTable.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
 
@@ -328,7 +330,7 @@ namespace MusicBeePlugin
             toolTip1.SetToolTip(buttonHelp, buttonHelpToolTip);
 
 
-            // Saving field & expression tables tooltips for check boxes
+            //Saving field & expression tables tooltips for check boxes
             TagsDataGridViewCheckBoxToolTip = tagsDataGridView.Columns[0].HeaderCell.ToolTipText;
             tagsDataGridView.Columns[0].HeaderCell.ToolTipText = null;
 
@@ -336,12 +338,12 @@ namespace MusicBeePlugin
             expressionsDataGridView.Columns[0].HeaderCell.ToolTipText = null;
 
 
-            // Saving text for message box shown on last expression removing
+            //Saving text for message box shown on last expression removing
             DoYouWantToDeleteTheFieldMsg = expressionsDataGridView.Columns[1].HeaderCell.ToolTipText;
             expressionsDataGridView.Columns[1].HeaderCell.ToolTipText = null;
 
 
-            // Saving text for message box shown on field replacing
+            //Saving text for message box shown on field replacing
             DoYouWantToReplaceTheFieldMsg = tagsDataGridView.Columns[1].HeaderCell.ToolTipText;
             tagsDataGridView.Columns[1].HeaderCell.ToolTipText = null;
 
@@ -593,7 +595,7 @@ namespace MusicBeePlugin
         public class PresetColumnAttributes : ColumnAttributesBase
         {
             public string[] expressions = new string[] { string.Empty };
-            public int[] columnIndices = new int[0]; // per expression for current grouping/function
+            public int[] columnIndices = new int[0]; //per expression for current grouping/function
 
             public PresetColumnAttributes() : base()
             {
@@ -610,7 +612,7 @@ namespace MusicBeePlugin
 
             public PresetColumnAttributes(ColumnAttributesBase sourceAttribs) : base(sourceAttribs)
             {
-                // Nothing to do...
+                //Nothing to do...
             }
 
             public PresetColumnAttributes(PresetColumnAttributes sourceAttribs) : base(sourceAttribs)
@@ -662,7 +664,7 @@ namespace MusicBeePlugin
                 return true;
             }
 
-            // returns {columnIndex, resulting tag value}, accepts int[] columnIndices: per expression for current grouping/function
+            //returns {columnIndex, resulting tag value}, accepts int[] columnIndices: per expression for current grouping/function
             public List<ColumnIndexTagValue> evaluateExpressions(string url, string tagValue)
             {
                 tagValue = tagValue.Replace('\"', '\u0007');
@@ -687,7 +689,7 @@ namespace MusicBeePlugin
                 return tagExprValues;
             }
 
-            // <columnIndex, resulting tag value>, int[] columnIndices: per expression for current grouping/function
+            //<columnIndex, resulting tag value>, int[] columnIndices: per expression for current grouping/function
             public List<ColumnIndexTagValue> getSplitValues(string url, string tagValue)
             {
                 var results = new List<ColumnIndexTagValue>();
@@ -713,7 +715,7 @@ namespace MusicBeePlugin
             }
         }
 
-        public class ColumnAttributesDict : Dictionary<string, ColumnAttributes> // Column unique ID (string), Column settings
+        public class ColumnAttributesDict : Dictionary<string, ColumnAttributes> //Column unique ID (string), Column settings
         {
             public ColumnAttributesDict() : base()
             {
@@ -726,7 +728,7 @@ namespace MusicBeePlugin
                     Add(attribs.getUniqueId(), attribs);
             }
 
-            // Returns PresetColumnAttributes[], column count
+            //Returns PresetColumnAttributes[], column count
             public (PresetColumnAttributes[], int) valuesToPresetArray(int startingColumnIndex)
             {
                 var presetAttribListRef = new List<PresetColumnAttributes>();
@@ -762,6 +764,8 @@ namespace MusicBeePlugin
                 {
                     if (key == searchedKey)
                         return i;
+
+                    i++;
                 }
 
                 return -1;
@@ -819,8 +823,8 @@ namespace MusicBeePlugin
 
             //public ReportPresetReference()
             //{
-            //    name = null;
-            //    permanentGuid = Guid.NewGuid();
+            //   name = null;
+            //   permanentGuid = Guid.NewGuid();
             //}
 
             public ReportPresetReference(ReportPreset referencePreset)
@@ -870,8 +874,8 @@ namespace MusicBeePlugin
             private bool columnsChecked = false;
 
             public bool userPreset = true;
-            public Guid guid = Guid.NewGuid(); // guid is reset on every preset update in UI
-            public Guid permanentGuid = Guid.NewGuid(); // permanentGuid is reset on preset copying in UI
+            public Guid guid = Guid.NewGuid(); //guid is reset on every preset update in UI
+            public Guid permanentGuid = Guid.NewGuid(); //permanentGuid is reset on preset copying in UI
 
             public bool hotkeyAssigned = false;
             public bool applyToSelectedTracks = true;
@@ -1072,12 +1076,12 @@ namespace MusicBeePlugin
             columnIndicesRef[index].Add(columnIndex);
         }
 
-        // Helper for Iterate()
+        //Helper for Iterate()
         private static void MoveDependent(IEnumerator<string>[] enumerators, int[] dependentGroupingColumns, string[] lastValues, int currentLoopIndex, bool reset)
         {
             for (int j = dependentGroupingColumns.Length - 1; j >= 0; j--)
             {
-                if (currentLoopIndex != j && dependentGroupingColumns[currentLoopIndex] == dependentGroupingColumns[j]) // Let's move all dependent groupings
+                if (currentLoopIndex != j && dependentGroupingColumns[currentLoopIndex] == dependentGroupingColumns[j]) //Let's move all dependent groupings
                 {
                     if (reset)
                         enumerators[j].Reset();
@@ -1088,14 +1092,14 @@ namespace MusicBeePlugin
             }
         }
 
-        // Let's iterate through all possible split grouping values (but not repeating the same groupings for different expressions)
+        //Let's iterate through all possible split grouping values (but not repeating the same groupings for different expressions)
         //
-        // Accepts IEnumerator<split grouping values>[grouping column count],
+        //Accepts IEnumerator<split grouping values>[grouping column count],
         //
-        // int[grouping column count] dependentGroupingColumns: indices of groupings
-        //     in global dictionary "groupings" (which doesn't include expressions)
+        //int[grouping column count] dependentGroupingColumns: indices of groupings
+        //    in global dictionary "groupings" (which doesn't include expressions)
         //
-        // Returns false when iteration completed, and string[grouping column count] lastValues on every iteration
+        //Returns false when iteration completed, and string[grouping column count] lastValues on every iteration
         private static bool Iterate(IEnumerator<string>[] enumerators, int[] dependentGroupingColumns, string[] lastValues, ref int minimalLoopIndex, ref int currentLoopIndex)
         {
             bool movedThis = enumerators[currentLoopIndex].MoveNext();
@@ -1162,13 +1166,13 @@ namespace MusicBeePlugin
             }
         }
 
-        // SortedDictionary<composed groupings OR OTHER UNIQUE ID, function results>
+        //SortedDictionary<composed groupings OR OTHER UNIQUE ID, function results>
         public class AggregatedTags : SortedDictionary<string, ConvertStringsResult[]>
         {
-            // Accepts List<split grouping values>[grouping column count],
-            //     returns List<string -> composed groupings> for every split grouping
-            // int[grouping column count] dependentGroupingColumns: indices of groupings
-            //     in global dictionary "groupings" (which doesn't include expressions)
+            //Accepts List<split grouping values>[grouping column count],
+            //    returns List<string -> composed groupings> for every split grouping
+            //int[grouping column count] dependentGroupingColumns: indices of groupings
+            //    in global dictionary "groupings" (which doesn't include expressions)
             internal static List<string> GetComposedGroupingValues(List<string>[] groupingValuesLists, int[] dependentGroupingColumns, bool totals)
             {
                 var composedGroupings = new List<string>();
@@ -1181,11 +1185,11 @@ namespace MusicBeePlugin
 
                 var groupingValues = new string[groupingValuesLists.Length];
 
-                string[] lastValues = new string[groupingValuesLists.Length]; // This array will store all grouping values of last iteration
+                string[] lastValues = new string[groupingValuesLists.Length]; //This array will store all grouping values of last iteration
                 int minimalLoopIndex = groupingValuesLists.Length - 2;
                 int currentLoopIndex = groupingValuesLists.Length - 1;
 
-                // Neither of the lists in groupingValuesLists array can be empty, so let's get 1st value of every list
+                //Neither of the lists in groupingValuesLists array can be empty, so let's get 1st value of every list
                 var enumerators = new IEnumerator<string>[groupingValuesLists.Length];
                 for (int i = 0; i < groupingValuesLists.Length; i++)
                 {
@@ -1232,7 +1236,7 @@ namespace MusicBeePlugin
                             Add(composedGroupings, aggregatedValues);
                         }
 
-                        if (url != null) // Let's deal with URLs (SortedDictionary<url, false>)
+                        if (url != null) //Let's deal with URLs (SortedDictionary<url, false>)
                             aggregatedValues[0].urls.AddReplace(url, false);
                     }
                 }
@@ -1461,7 +1465,7 @@ namespace MusicBeePlugin
                             }
 
 
-                            if (url != null) // Let's deal with URLs (SortedDictionary<url, false>)
+                            if (url != null) //Let's deal with URLs (SortedDictionary<url, false>)
                                 aggregatedValues[i].urls.AddReplace(url, false);
                         }
                     }
@@ -1587,12 +1591,12 @@ namespace MusicBeePlugin
             int j = 0;
             foreach (var attribs in groupingsDict.Values)
             {
-                if (attribs.parameterName == SequenceNumberName) // It's a number. Let's right-align the column.
+                if (attribs.parameterName == SequenceNumberName) //It's a number. Let's right-align the column.
                 {
                     columnRightAlignments[j] = true;
                     resultTypes[j] = ResultType.Double;
                 }
-                else if (attribs.parameterName == DateCreatedTagName) // It's a number. Let's right-align the column.
+                else if (attribs.parameterName == DateCreatedTagName) //It's a number. Let's right-align the column.
                 {
                     columnRightAlignments[j] = true;
                     resultTypes[j] = ResultType.DateTime;
@@ -1600,17 +1604,17 @@ namespace MusicBeePlugin
                 else
                 {
                     DataType columnType = MbApiInterface.Setting_GetDataType(GetTagId(attribs.parameterName));
-                    if (columnType == DataType.Number || columnType == DataType.Rating) // Let's right-align the column.
+                    if (columnType == DataType.Number || columnType == DataType.Rating) //Let's right-align the column.
                     {
                         columnRightAlignments[j] = true;
                         resultTypes[j] = ResultType.Double;
                     }
-                    else if (columnType == DataType.DateTime) // Let's right-align the column.
+                    else if (columnType == DataType.DateTime) //Let's right-align the column.
                     {
                         columnRightAlignments[j] = true;
                         resultTypes[j] = ResultType.DateTime;
                     }
-                    else // It's either string, or internal plugin pseudo-tag like "Filename". Let's left-align the column.
+                    else //It's either string, or internal plugin pseudo-tag like "Filename". Let's left-align the column.
                     {
                         columnRightAlignments[j] = false;
                         resultTypes[j] = ResultType.UnknownOrString;
@@ -1623,7 +1627,7 @@ namespace MusicBeePlugin
             int i = 0;
             foreach (var function in functionsDict.Values)
             {
-                if (function.resultType >= ResultType.AutoDouble && function.resultType <= ResultType.ItemCount) // It's either number or date/time/duration. Let's right-align the column.
+                if (function.resultType >= ResultType.AutoDouble && function.resultType <= ResultType.ItemCount) //It's either number or date/time/duration. Let's right-align the column.
                     columnRightAlignments[j + i] = true;
                 else
                     columnRightAlignments[j + i] = false;
@@ -1638,7 +1642,7 @@ namespace MusicBeePlugin
 
         private void previewTable_AddRowsToTable(List<string[]> rows)
         {
-            if (previewTable.RowCount == 0) // There are no rows in preview table yet, so let's adjust column text alignment according to data type
+            if (previewTable.RowCount == 0) //There are no rows in preview table yet, so let's adjust column text alignment according to data type
             {
                 (columnTypes, columnsRightAlignment) = getColumnTypesRightAlignment();
 
@@ -1750,7 +1754,7 @@ namespace MusicBeePlugin
 
         private bool? checkPresetReference(ReportPreset[] presetList, SortedDictionary<Guid, bool> referredPresetGuids,
             bool useAnotherPresetAsSource, ReportPresetReference presetReference)
-        // Returns: true - reference chain is good, null - reference chain is senseless (there is !conditionIsChecked), false - reference chain is bad (looped references)
+        //Returns: true - reference chain is good, null - reference chain is senseless (there is !conditionIsChecked), false - reference chain is bad (looped references)
         {
             if (!useAnotherPresetAsSource)
                 return true;
@@ -1875,7 +1879,7 @@ namespace MusicBeePlugin
             clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewTrackList, buttonPreview, buttonOK, buttonClose);
         }
 
-        // Returns column count
+        //Returns column count
         private static int prepareDict(ColumnAttributesDict dictRef, SortedDictionary<string, PresetColumnAttributes> presetDictRef,
             PresetColumnAttributes[] attribsSet, int startingColumnIndex)
         {
@@ -2141,11 +2145,50 @@ namespace MusicBeePlugin
             return sequenceNumber;
         }
 
+        private string getTagValue(string file, MetaDataType tagId, FilePropertyType propId, bool rawValues)
+        {
+            string tagValue;
+
+            if (tagId == (MetaDataType)(-99)) //Sequence number
+            {
+                tagValue = "xXxXxXxXx"; //Let's reserve space for future numbers
+            }
+            else if (tagId == 0 && propId == 0)
+            {
+                tagValue = string.Empty; //Will ignore this grouping...
+            }
+            else if (tagId == ArtistArtistsId || tagId == ComposerComposersId) //Lets make smart conversion of list of artists/composers
+            {
+                tagValue = GetFileTag(file, tagId);
+                if (smartOperation && !rawValues)
+                    tagValue = GetTagRepresentation(tagValue);
+                else if (!rawValues)
+                    tagValue = RemoveRoleIds(tagValue);
+            }
+            else if (tagId == MetaDataType.Artwork) //It's artwork image. Lets fill cell with hash codes. 
+            {
+                tagValue = ResizedArtworkProvider.GetBase64ArtworkBase64Hash(
+                    GetFileTag(file, MetaDataType.Artwork), artworks, out Bitmap pic);
+
+                artwork = pic; //For CD booklet export
+            }
+            else if (tagId == 0)
+            {
+                tagValue = MbApiInterface.Library_GetFileProperty(file, propId);
+            }
+            else
+            { 
+                tagValue = GetFileTag(file, tagId, true);
+            }
+
+            return tagValue;
+        }
+
         private string executePreset(string[] queriedFiles, bool interactive, bool saveResultsToTags, string functionId,
-            bool? filterResults) // filterResults: null - proceed as usual (filter results on tag saving only, any "interactive" is allowed),
-                                 // true & "!interactive" - update lastFiles by filtered file list
-                                 // ALL OTHER COMBINATIONS OF filterResults AND interactive ARE PROHIBITED!
-                                 // NOT NULL filterResults MUST BE USED ONLY FOR FILTERING PRESET CHAIN INVOKED INSIDE THIS FUNCTION
+            bool? filterResults, bool forceFunctionCacheUpdate = false) //filterResults: null - proceed as usual (filter results on tag saving only, any "interactive" is allowed),
+                                 //true & "!interactive" - update lastFiles by filtered file list
+                                 //ALL OTHER COMBINATIONS OF filterResults AND interactive ARE PROHIBITED!
+                                 //NOT NULL filterResults MUST BE USED ONLY FOR FILTERING PRESET CHAIN INVOKED INSIDE THIS FUNCTION
 
         {
             string parameterCombinationErrorMessage = "Prohibited parameter combination: interactive = " + interactive + ", filterResults = " + filterResults;
@@ -2165,6 +2208,12 @@ namespace MusicBeePlugin
             {
                 cachedAppliedPresetGuid = Guid.NewGuid();
                 return SbIncorrectLrFunctionId;
+            }
+            else if (functionId != null && !forceFunctionCacheUpdate)
+            {
+                string cachedValue = getCachedValue(queriedFiles[0], functionId);
+                if (cachedValue != null)
+                    return cachedValue;
             }
 
 
@@ -2203,17 +2252,15 @@ namespace MusicBeePlugin
                 return "???";
             }
 
-
-
             string query;
             string tagValue;
 
 
-            // int[] dependentGroupingColumns will be used several time below, let's cache it
-            // 
-            // int[grouping column count] dependentGroupingColumns: indices of groupings
-            //     in global dictionary "groupings" (which doesn't include expressions),
-            //     but -1 for groupings having only one column 
+            //int[] dependentGroupingColumns will be used several time below, let's cache it
+            //
+            //int[grouping column count] dependentGroupingColumns: indices of groupings
+            //    in global dictionary "groupings" (which doesn't include expressions),
+            //    but -1 for groupings having only one column 
             int[] dependentGroupingColumns = new int[groupingsDict.Count];
             int p = -1;
             foreach (var grouping in groupings.Values)
@@ -2327,8 +2374,43 @@ namespace MusicBeePlugin
 
 
             //Let's add default artwork
-            clearArtworks();
-            ResizedArtworkProvider.Init(artworkField, artworks, appliedPreset.resizeArtwork ? appliedPreset.newArtworkSize : -1);
+            if (functionId != null)
+            {
+                clearArtworks();
+                ResizedArtworkProvider.Init(artworkField, artworks, appliedPreset.resizeArtwork ? appliedPreset.newArtworkSize : -1);
+            }
+            
+            if (forceFunctionCacheUpdate) //LR function tag cache auto-update
+            {
+                query = @"<SmartPlaylist><Source Type=""1""><Conditions CombineMethod=""All"">";
+
+                i = -1;
+                foreach (var attribs in groupings.Values)
+                {
+                    i++;
+
+                    //Let's remember actual grouping values for future reuse
+                    MetaDataType tagId = queriedActualGroupingsTagIds[i];
+                    FilePropertyType propId = 0;
+                    if (tagId == 0)
+                        propId = queriedActualGroupingsPropIds[i];
+
+                    tagValue = getTagValue(queriedFiles[0], tagId, propId, true);
+
+                    string nativeTagName = MbApiInterface.Setting_GetFieldName(tagId);
+
+                    if (!string.IsNullOrEmpty(nativeTagName))
+                    {
+                        query += @"<Condition Field=""" + nativeTagName + @""" Comparison=""Is""";
+                        query += @" Value=""" + tagValue.Replace("\"", "&quot;") + @"""";
+                        query += @" />";
+                    }
+                }
+
+                query += "</Conditions></Source></SmartPlaylist>";
+
+                MbApiInterface.Library_QueryFilesEx(query, out queriedFiles);
+            }
 
 
             queriedFilesActualComposedGroupingValues.Clear(); //<url, composed groupings>
@@ -2363,7 +2445,7 @@ namespace MusicBeePlugin
 
                 for (int n = 0; n < queriedFiles.Length; n++)
                 {
-                    List<string>[] currentFileGroupingValues = null; // array (size of grouping count) of list of split values
+                    List<string>[] currentFileGroupingValues = null; //array (size of grouping count) of list of split values
 
                     if (queryOnlyGroupings)
                     {
@@ -2377,50 +2459,16 @@ namespace MusicBeePlugin
                     {
                         i++;
 
-                        {
-                            //Let's remember actual grouping values for future reuse
-                            MetaDataType tagId = queriedActualGroupingsTagIds[i];
-                            FilePropertyType propId = 0;
-                            if (tagId == 0)
-                                propId = queriedActualGroupingsPropIds[i];
+                        //Let's remember actual grouping values for future reuse
+                        MetaDataType tagId = queriedActualGroupingsTagIds[i];
+                        FilePropertyType propId = 0;
+                        if (tagId == 0)
+                            propId = queriedActualGroupingsPropIds[i];
 
-                            if (tagId == (MetaDataType)(-99))
-                            {
-                                tagValue = "xXxXxXxXx"; //Let's reserve space for future numbers
-                            }
-                            else if (tagId == 0 && propId == 0)
-                            {
-                                tagValue = string.Empty; //Will ignore this grouping...
-                            }
-                            else if (tagId == ArtistArtistsId || tagId == ComposerComposersId) //Lets make smart conversion of list of artists/composers
-                            {
-                                tagValue = GetFileTag(queriedFiles[n], tagId);
-                                if (smartOperation)
-                                    tagValue = GetTagRepresentation(tagValue);
-                                else
-                                    tagValue = RemoveRoleIds(tagValue);
-                            }
-                            else if (attribs.parameterName == ArtworkName) //It's artwork image. Lets fill cell with hash codes. 
-                            {
-                                tagValue = ResizedArtworkProvider.GetBase64ArtworkBase64Hash(
-                                    GetFileTag(queriedFiles[n], MetaDataType.Artwork), artworks, out Bitmap pic);
-                                artwork = pic; //For CD booklet export
-                            }
-                            else
-                            {
-                                if (tagId == 0)
-                                {
-                                    tagValue = MbApiInterface.Library_GetFileProperty(queriedFiles[n], propId);
-                                }
-                                else
-                                {
-                                    tagValue = GetFileTag(queriedFiles[n], tagId, true);
-                                }
-                            }
+                        tagValue = getTagValue(queriedFiles[n], tagId, propId, true);
 
-                            if (!queryOnlyGroupings)
-                                queriedActualGroupingValues[i].AddReplace(tagValue, false);
-                        }
+                        if (!queryOnlyGroupings)
+                            queriedActualGroupingValues[i].AddReplace(tagValue, false);
 
                         if (queryOnlyGroupings)
                         {
@@ -2431,8 +2479,8 @@ namespace MusicBeePlugin
                         else
                         {
                             //Let's remember only grouping values, which can be used in query in Library_QueryFilesEx function
-                            MetaDataType tagId = queriedGroupingsTagIds[i];
-                            FilePropertyType propId = 0;
+                            tagId = queriedGroupingsTagIds[i];
+                            propId = 0;
                             if (tagId == 0)
                                 propId = queriedGroupingsPropIds[i];
 
@@ -2443,13 +2491,9 @@ namespace MusicBeePlugin
                             else
                             {
                                 if (tagId == 0)
-                                {
                                     tagValue = MbApiInterface.Library_GetFileProperty(queriedFiles[n], propId);
-                                }
                                 else
-                                {
                                     tagValue = GetFileTag(queriedFiles[n], tagId, true);
-                                }
 
                                 queriedGroupingValues[i].AddReplace(tagValue, false);
                             }
@@ -2532,9 +2576,7 @@ namespace MusicBeePlugin
 
                         int n = 1;
                         foreach (var queriedValues in queriedGroupingValues[i])
-                        {
                             query += @" Value" + (n++) + @"=""" + queriedValues.Key.Replace("\"", "&quot;") + @"""";
-                        }
 
                         query += @" />";
                     }
@@ -2615,23 +2657,22 @@ namespace MusicBeePlugin
             for (int f = 0; f < groupingValuesList.Length; f++)
                 groupingValuesList[f] = new List<string>();
 
-            List<LrFunctionType> functionTypes = new List<LrFunctionType>();
             string[] functionValues = new string[functionsDict.Count];
             string[] parameter2Values = new string[functionsDict.Count];
 
 
-            if (!interactive && filterResults == true) // Only for filtering by another preset
-                ; // Nothing...
-            else // Let's later cache results for function ids
+            if (!interactive && filterResults == true) //Only for filtering by another preset
+                ; //Nothing...
+            else //Let's later cache results for function ids
             {
-                fileComposedGroupingValues.Clear();
-                fileTags.Clear();
+                filesComposedGroupingValues.Clear();
+                filesTags.Clear();
             }
 
             for (int fileCounter = 0; fileCounter < files.Length; fileCounter++)
             {
                 bool skipFile = false; //If current file grouping tags are not contained in
-                                       // queriedActualGroupingValues, i.e. queried file selection is excessive due to unsupported (and skipped in query) tags
+                                       //queriedActualGroupingValues, i.e. queried file selection is excessive due to unsupported (and skipped in query) tags
 
                 if (backgroundTaskIsCanceled)
                 {
@@ -2654,7 +2695,7 @@ namespace MusicBeePlugin
                 for (int f = 0; f < groupingValuesList.Length; f++)
                     groupingValuesList[f].Clear();
 
-                string composedGroupingValues = string.Empty;
+                string composedGroupingValues = null;
 
                 i = -1;
                 foreach (var attribs in groupings.Values)
@@ -2664,33 +2705,7 @@ namespace MusicBeePlugin
                     MetaDataType tagId = queriedActualGroupingsTagIds[i];
                     FilePropertyType propId = queriedActualGroupingsPropIds[i];
 
-                    if (tagId == (MetaDataType)(-99))
-                    {
-                        tagValue = "xXxXxXxXx"; //Let's reserve space for future numbers
-                    }
-                    else if (tagId == 0 && propId == 0)
-                    {
-                        tagValue = string.Empty; //Will ignore this grouping...
-                    }
-                    else if (tagId == ArtistArtistsId || tagId == ComposerComposersId) //Let's make smart conversion of list of artists/composers
-                    {
-                        tagValue = GetFileTag(currentFile, tagId);
-                        if (smartOperation)
-                            tagValue = GetTagRepresentation(tagValue);
-                        else
-                            tagValue = RemoveRoleIds(tagValue);
-                    }
-                    else
-                    {
-                        if (tagId == 0)
-                        {
-                            tagValue = MbApiInterface.Library_GetFileProperty(currentFile, propId);
-                        }
-                        else
-                        {
-                            tagValue = GetFileTag(currentFile, tagId, true);
-                        }
-                    }
+                    tagValue = getTagValue(currentFile, tagId, propId, false);
 
 
                     if (queriedFiles != null && !queriedActualGroupingValues[i].Contains(tagValue))
@@ -2699,7 +2714,10 @@ namespace MusicBeePlugin
                         break; //Break grouping loop
                     }
 
-                    composedGroupingValues = string.Join(MultipleItemsSplitterId.ToString(), composedGroupingValues, tagValue);
+                    if (composedGroupingValues == null)
+                        composedGroupingValues = tagValue;
+                    else
+                        composedGroupingValues = composedGroupingValues + MultipleItemsSplitterId.ToString() + tagValue;
 
                     var columnIndicesTags = attribs.getSplitValues(currentFile, tagValue);
                     foreach (var columnIndexTag in columnIndicesTags)
@@ -2709,6 +2727,8 @@ namespace MusicBeePlugin
                 if (skipFile)
                     continue; //Continue file loop
 
+
+                filesComposedGroupingValues.AddReplace(currentFile, composedGroupingValues);
                 List<string> composedGroupingValuesList = AggregatedTags.GetComposedGroupingValues(groupingValuesList, dependentGroupingColumns, appliedPreset.totals);
 
                 if (!queriedFilesActualComposedGroupingValues.TryGetValue(currentFile, out List<string> existingComposedGroupingValuesList))
@@ -2729,7 +2749,6 @@ namespace MusicBeePlugin
                     }
                 }
 
-                functionTypes.Clear();
 
                 int j = -1;
                 foreach (var attribs in functionsDict.Values)
@@ -2737,61 +2756,21 @@ namespace MusicBeePlugin
                     j++;
 
                     MetaDataType tagId = GetTagId(attribs.parameterName);
+                    FilePropertyType propId = GetPropId(attribs.parameterName);
 
                     if (attribs.parameterName == SequenceNumberName)
-                    {
                         tagValue = ConvertSequenceNumberToString(fileCounter);
-                    }
-                    else if (tagId == ArtistArtistsId || tagId == ComposerComposersId) //Lets make smart conversion of list of artists/composers
-                    {
-
-                        tagValue = GetFileTag(currentFile, tagId);
-                        if (smartOperation)
-                            tagValue = GetTagRepresentation(tagValue);
-                        else
-                            tagValue = RemoveRoleIds(tagValue);
-                    }
                     else
-                    {
-                        if (tagId == 0)
-                        {
-                            FilePropertyType propId = GetPropId(attribs.parameterName);
-                            tagValue = MbApiInterface.Library_GetFileProperty(currentFile, propId);
-                        }
-                        else
-                        {
-                            tagValue = GetFileTag(currentFile, tagId, true);
-                        }
-                    }
+                        tagValue = getTagValue(currentFile, tagId, propId, false);
 
-                    functionTypes.Add(attribs.functionType);
                     functionValues[j] = tagValue;
 
                     if (attribs.functionType == LrFunctionType.Average || attribs.functionType == LrFunctionType.AverageCount)
                     {
                         tagId = GetTagId(attribs.parameter2Name);
+                        propId = GetPropId(attribs.parameter2Name);
 
-                        if (tagId == ArtistArtistsId || tagId == ComposerComposersId) //Lets make smart conversion of list of artists/composers
-                        {
-
-                            tagValue = GetFileTag(currentFile, tagId);
-                            if (smartOperation)
-                                tagValue = GetTagRepresentation(tagValue);
-                            else
-                                tagValue = RemoveRoleIds(tagValue);
-                        }
-                        else
-                        {
-                            if (tagId == 0)
-                            {
-                                FilePropertyType propId = GetPropId(attribs.parameter2Name);
-                                tagValue = MbApiInterface.Library_GetFileProperty(currentFile, propId);
-                            }
-                            else
-                            {
-                                tagValue = GetFileTag(currentFile, tagId, true);
-                            }
-                        }
+                        tagValue = getTagValue(currentFile, tagId, propId, false);
 
                         parameter2Values[j] = tagValue;
                     }
@@ -2805,13 +2784,10 @@ namespace MusicBeePlugin
                 {
                     tags.add(currentFile, composedGroupingValuesList, functionsDict, functionValues, parameter2Values);
 
-                    if (!interactive && filterResults == true) // Only for filtering by another preset
-                        ; // Nothing...
-                    else // Let's cache results for function ids
-                    {
-                        fileComposedGroupingValues.AddReplace(currentFile, composedGroupingValues);
-                        fileTags.add(currentFile, new List<string> { composedGroupingValues }, functionsDict, functionValues, parameter2Values);
-                    }
+                    if (!interactive && filterResults == true) //Only for filtering by another preset
+                        ; //Nothing...
+                    else //Let's cache results for function ids
+                        filesTags.add(currentFile, new List<string> { composedGroupingValues }, functionsDict, functionValues, parameter2Values);
                 }
                 else
                 {
@@ -2838,20 +2814,22 @@ namespace MusicBeePlugin
             cachedAppliedPresetGuid = appliedPreset.guid;
             if (queriedFiles == null)
                 return applyPresetResults(files, interactive, saveResultsToTags, functionId, sequenceNumberField, filterResults);
+            else if (forceFunctionCacheUpdate)
+                return applyPresetResults(queriedFiles, interactive, true, string.Empty, sequenceNumberField, filterResults);
             else
                 return applyPresetResults(queriedFiles, interactive, saveResultsToTags, functionId, sequenceNumberField, filterResults);
         }
 
         private string applyPresetResults(string[] queriedFiles, bool interactive, bool saveResultsToTags, string functionId, int sequenceNumberGrouping,
-            bool? filterResults) // filterResults: true - filter queriedFiles list by condition, false - undo filtering of queriedFiles,
-                                 // null - skip filtering, proceed as usual, true & !interactive - update lastFiles by filtered file list
+            bool? filterResults) //filterResults: true - filter queriedFiles list by condition, false - undo filtering of queriedFiles,
+                                 //null - skip filtering, proceed as usual, true & !interactive - update lastFiles by filtered file list
         {
             if (queriedFiles == null)
                 queriedFiles = lastFiles;
             else
                 lastFiles = queriedFiles.Clone() as string[];
 
-            if (functionId != null)
+            if (!string.IsNullOrEmpty(functionId))
                 return getFunctionResult(queriedFiles[0], queriedFilesActualComposedGroupingValues, functionId);
 
 
@@ -2873,7 +2851,7 @@ namespace MusicBeePlugin
 
             List<string[]> rows = new List<string[]>();
 
-            if (!interactive && filterResults == true) // Only for filtering by another preset
+            if (!interactive && filterResults == true) //Only for filtering by another preset
             {
                 var filteredFiles = new List<string>();
 
@@ -2893,7 +2871,7 @@ namespace MusicBeePlugin
                         if (checkCondition(composedGroupingValues, functionValues))
                         {
                             filteredFiles.Add(queriedFiles[i]);
-                            break; // Let's continue with the next file
+                            break; //Let's continue with the next file
                         }
                     }
                 }
@@ -2971,9 +2949,13 @@ namespace MusicBeePlugin
             }
 
 
-            if (saveResultsToTags)
+            if (saveResultsToTags && functionId == null)
             {
                 SetResultingSbText(appliedPreset.getName(), false, true);
+                saveFields(interactive, queriedFiles, queriedFilesActualComposedGroupingValues);
+            }
+            else if (saveResultsToTags)
+            {
                 saveFields(interactive, queriedFiles, queriedFilesActualComposedGroupingValues);
             }
             else
@@ -2991,8 +2973,8 @@ namespace MusicBeePlugin
         }
 
         private void applyOnlyGroupingsPresetResults(string[] queriedFiles, bool interactive, int sequenceNumberGrouping, bool? filterResults)
-        // filterResults: true - filter queriedFiles list by condition, false - undo filtering of queriedFiles,
-        // null - skip filtering, proceed as usual, true & !interactive - update lastFiles by filtered file list
+        //filterResults: true - filter queriedFiles list by condition, false - undo filtering of queriedFiles,
+        //null - skip filtering, proceed as usual, true & !interactive - update lastFiles by filtered file list
         {
             if (queriedFiles == null)
                 queriedFiles = lastFiles;
@@ -3016,7 +2998,7 @@ namespace MusicBeePlugin
             }
 
 
-            if (!interactive && filterResults == true) // Only for filtering by another preset
+            if (!interactive && filterResults == true) //Only for filtering by another preset
             {
                 var filteredFiles = new List<string>();
 
@@ -3034,7 +3016,7 @@ namespace MusicBeePlugin
                         if (checkCondition(composedGroupingValues, null))
                         {
                             filteredFiles.Add(queriedFiles[i]);
-                            break; // Let's continue with the next file
+                            break; //Let's continue with the next file
                         }
                     }
                 }
@@ -3173,17 +3155,61 @@ namespace MusicBeePlugin
             return checkCondition(AggregatedTags.CompareField(composedGroupings, convertResults, conditionField, groupingsDict, comparedValue));
         }
 
+        private string getCachedValue(string queriedFile, string functionId)
+        {
+            MetaDataType tagId = 0;
+            for (int i = 0; i < appliedPreset.functionIds.Length; i++)
+            {
+                if (appliedPreset.functionIds[i] == functionId)
+                {
+                    if (!string.IsNullOrEmpty(appliedPreset.destinationTags[i]))
+                    {
+                        tagId = GetTagId(appliedPreset.destinationTags[i]);
+                        break;
+                    }
+                }
+            }
+
+            if (tagId == 0)
+                return null;
+
+            return GetFileTag(queriedFile, tagId);
+        }
+
         private string getFunctionResult(string queriedFile, SortedDictionary<string, List<string>> queriedFilesActualComposedGroupingValues, string functionId)
         {
-            ConvertStringsResult[] functionValues = fileTags[fileComposedGroupingValues[queriedFile]];
+            ConvertStringsResult[] functionValues = null;
+
+            if (filesComposedGroupingValues.TryGetValue(queriedFile, out string queriedFileComposedGroupingValues))
+            {
+                if (!filesTags.TryGetValue(queriedFileComposedGroupingValues, out functionValues))
+                {
+                    periodicCacheClearing(null);
+                    return "ERROR!";
+                }
+            }
+            else
+            {
+                periodicCacheClearing(null);
+                return "ERROR!";
+            }
+
 
             int i = 0;
             foreach (var attribs in functionsDict.Values)
             {
                 if (savedFunctionIds[i] == functionId)
                 {
-                    return AggregatedTags.GetField(null, functionValues, groupingsDict.Count + i, groupingsDict,
+                    string resultValue = AggregatedTags.GetField(null, functionValues, groupingsDict.Count + i, groupingsDict,
                         operations[i], mulDivFactors[i], precisionDigits[i], appendTexts[i]);
+
+                    if (destinationTagIds[i] > 0) //Let's use custom tag as cache
+                    {
+                        SetFileTag(queriedFile, destinationTagIds[i], resultValue);
+                        CommitTagsToFile(queriedFile, false, false, true);
+                    }
+
+                    return resultValue;
                 }
 
                 i++;
@@ -3209,7 +3235,7 @@ namespace MusicBeePlugin
 
 
                 List<string> composedGroupingValuesList = queriedFilesActualComposedGroupingValues[queriedFiles[i]];
-                ConvertStringsResult[] fileFunctionValues = fileTags[fileComposedGroupingValues[queriedFiles[i]]]; // Let's write aggregated values for entire file
+                ConvertStringsResult[] fileFunctionValues = filesTags[filesComposedGroupingValues[queriedFiles[i]]]; //Let's write aggregated values for entire file
 
                 foreach (string composedGroupingValues in composedGroupingValuesList)
                 {
@@ -3222,14 +3248,34 @@ namespace MusicBeePlugin
                             {
                                 string resultValue = AggregatedTags.GetField(composedGroupingValues, fileFunctionValues, groupingsDict.Count + j, groupingsDict,
                                     operations[j], mulDivFactors[j], precisionDigits[j], appendTexts[j]);
+
                                 SetFileTag(queriedFiles[i], destinationTagIds[j], resultValue);
+                                CommitTagsToFile(queriedFiles[i], false, false, true);
                             }
 
                             j++;
                         }
 
-                        CommitTagsToFile(queriedFiles[i], false, false);
-                        break; // Continue with the next file
+                        break; //Continue with the next file, because only one of composed grouping values can be saved to the same file anyway
+                    }
+                    else //Condition doesn't matter if custom tags are used as a cache
+                    {
+                        int j = 0;
+                        foreach (var attribs in functionsDict.Values)
+                        {
+                            if (destinationTagIds[j] > 0 && !string.IsNullOrWhiteSpace(savedFunctionIds[j]))
+                            {
+                                string resultValue = AggregatedTags.GetField(composedGroupingValues, fileFunctionValues, groupingsDict.Count + j, groupingsDict,
+                                    operations[j], mulDivFactors[j], precisionDigits[j], appendTexts[j]);
+
+                                SetFileTag(queriedFiles[i], destinationTagIds[j], resultValue);
+                                CommitTagsToFile(queriedFiles[i], false, false, true);
+                            }
+
+                            j++;
+                        }
+
+                        break; //Continue with the next file, because only one of composed grouping values can be saved to the same file anyway
                     }
                 }
             }
@@ -3283,7 +3329,7 @@ namespace MusicBeePlugin
                 }
                 catch (System.Threading.ThreadAbortException)
                 {
-                    // Let's just stop the thread...
+                    //Let's just stop the thread...
                 }
             }
 
@@ -3305,7 +3351,7 @@ namespace MusicBeePlugin
                 }
                 catch (System.Threading.ThreadAbortException)
                 {
-                    // Let's just stop the thread...
+                    //Let's just stop the thread...
                 }
             }
 
@@ -3337,12 +3383,42 @@ namespace MusicBeePlugin
                 }
                 catch (System.Threading.ThreadAbortException)
                 {
-                    // Let's just stop the thread...
+                    //Let's just stop the thread...
                 }
             }
 
             BackgroundTaskIsInProgress = false;
             RefreshPanels(true);
+        }
+
+        internal void updateFunctionCache(string changedFile)
+        {
+            if (!ReportPresetIdsAreInitialized)
+                return;
+            else if (IdsReportPresets.Count == 0)
+                return;
+
+            while (BackgroundTaskIsInProgress)
+                Thread.Sleep(500);
+
+            BackgroundTaskIsInProgress = true;
+
+            lock (SavedSettings.reportsPresets)
+            {
+                string[] changedFiles = new string[] { changedFile };
+
+                foreach (var idPreset in IdsReportPresets)
+                {
+                    LibraryReportsForFunctionIds.reportPresets = SavedSettings.reportsPresets;
+                    LibraryReportsForFunctionIds.appliedPreset = idPreset.Value;
+
+                    LibraryReportsForFunctionIds.executePreset(changedFiles, false, false, idPreset.Key, null, true);
+                }
+            }
+
+            BackgroundTaskIsInProgress = false;
+
+            RefreshPanels();
         }
 
         internal static void AutoApplyReportPresets()
@@ -3412,9 +3488,7 @@ namespace MusicBeePlugin
         internal static string AutoCalculateReportPresetFunction(string calculatedFile, string functionId)
         {
             if (!ReportPresetIdsAreInitialized)
-            {
                 return MsgRefreshUi;
-            }
 
             if (!IdsReportPresets.TryGetValue(functionId, out ReportPreset preset))
                 return MsgIncorrectReportPresetId;
@@ -3624,9 +3698,7 @@ namespace MusicBeePlugin
         internal static void RegisterLRPresetsHotkeysAndMenuItems(Plugin tagToolsPlugin)
         {
             for (int i = 0; i < ReportPresetsWithHotkeys.Length; i++)
-            {
-                RegisterPresetHotkey(tagToolsPlugin, ReportPresetsWithHotkeys[i], i);//******* WAS i += 2 !!!
-            }
+                RegisterPresetHotkey(tagToolsPlugin, ReportPresetsWithHotkeys[i], i);
         }
 
         private int getSelectedRow(DataGridView table)
@@ -3690,7 +3762,7 @@ namespace MusicBeePlugin
             string columnName = GetColumnName(fieldName, parameter2Name, type, splitter, trimValues, expression, true, true, true);
             string fullFieldName = GetColumnName(fieldName, parameter2Name, type, splitter, trimValues, expression, false, false, true);
 
-            // Some column attributes are not unique, they can be replaced, and must not be included in column name
+            //Some column attributes are not unique, they can be replaced, and must not be included in column name
             string simpleColumnName = GetColumnName(fieldName, parameter2Name, type, null, false, expression, true, false, true);
 
             int oldSortedShortIdsIndex = sortedShortIds.IndexOf(shortId);
@@ -3698,10 +3770,10 @@ namespace MusicBeePlugin
             if (shortIdsExprs.TryGetValue(shortId, out var exprs1))
                 oldExpressionIndex = exprs1.IndexOf(expressionBackup);
 
-            // Let's check if the column exists already
+            //Let's check if the column exists already
             int replacedColumnIndex = -1;
 
-            if (newColumn == null) // Updating splitter, trim or expression. Let's silently replace old column 
+            if (newColumn == null) //Updating splitter, trim or expression. Let's silently replace old column 
             {
                 updateColumns(shortId, fieldName, parameter2Name, type, splitter, trimValues, expression);
                 expressionBackup = expression;
@@ -3719,7 +3791,7 @@ namespace MusicBeePlugin
                     if (MessageBox.Show(this, DoYouWantToReplaceTheFieldMsg.Replace(@"\\", "\n\n").Replace("%%FIELDNAME%%", simpleColumnName),
                     string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                         return false;
-                    else // Confirmed replacement
+                    else //Confirmed replacement
                         replacedColumnIndex = removeColumn(fieldName, parameter2Name, type, splitter, trimValues, expression);
                 }
             }
@@ -3815,7 +3887,7 @@ namespace MusicBeePlugin
             splitterBackup = splitter;
             trimValuesBackup = trimValues;
 
-            if (oldSortedShortIdsIndex == -1 || !shortIdsExprs.Contains(shortId)) // New column, even not considering expressions, OR replaced (and removed above) LAST expression
+            if (oldSortedShortIdsIndex == -1 || !shortIdsExprs.Contains(shortId)) //New column, even not considering expressions, OR replaced (and removed above) LAST expression
             {
                 shortIdsExprs.Add(shortId, new List<string> { expression });
 
@@ -3835,10 +3907,10 @@ namespace MusicBeePlugin
                 else if (columnAttributes.parameter2Name != null)
                     tagsDataGridView.Rows[newSortedShortIdsIndex].Cells[3].Value = columnAttributes.parameter2Name;
 
-                if (!presetIsLoading) // Interactive
+                if (!presetIsLoading) //Interactive
                 {
                     selectRow(tagsDataGridView, newSortedShortIdsIndex);
-                    fillExpressionsDataGridView(shortId, true); // New expression will be added from shortIdsExprs
+                    fillExpressionsDataGridView(shortId, true); //New expression will be added from shortIdsExprs
                 }
                 else
                 {
@@ -3847,25 +3919,25 @@ namespace MusicBeePlugin
                         expressionsDataGridView.RowCount = 0;
                 }
             }
-            else // Updating existing column (which may not be selected/current)
+            else //Updating existing column (which may not be selected/current)
             {
                 tagsDataGridView.Rows[oldSortedShortIdsIndex].Cells[1].Tag = columnAttributes;
                 tagsDataGridView.Rows[oldSortedShortIdsIndex].Cells[2].Value = columnAttributes.parameterName;
                 if (columnAttributes.functionType == LrFunctionType.Grouping)
                     tagsDataGridView.Rows[newSortedShortIdsIndex].Cells[3].Value = GetSplitterRepresentation(columnAttributes.splitter, columnAttributes.trimValues, false);
 
-                if (oldSortedShortIdsIndex != tagsDataGridViewSelectedRow) // Updating tag column which is not current
+                if (oldSortedShortIdsIndex != tagsDataGridViewSelectedRow) //Updating tag column which is not current
                     selectRow(tagsDataGridView, oldSortedShortIdsIndex);
 
                 var exprs = shortIdsExprs[shortId];
 
-                if (oldExpressionIndex == -1) // It's new expression, let's add it to the end of list
+                if (oldExpressionIndex == -1) //It's new expression, let's add it to the end of list
                     exprs.Add(expression);
-                else // It's replaced expression (already removed above, but it wasn't last one) 
+                else //It's replaced expression (already removed above, but it wasn't last one) 
                     exprs.Insert(oldExpressionIndex, expression);
 
-                if (!presetIsLoading) // Interactive
-                    fillExpressionsDataGridView(shortId, null); // New expression will be added from shortIdsExprs
+                if (!presetIsLoading) //Interactive
+                    fillExpressionsDataGridView(shortId, null); //New expression will be added from shortIdsExprs
             }
 
 
@@ -3891,7 +3963,7 @@ namespace MusicBeePlugin
                 else
                     currentDict = functionsDict;
 
-                // If the current column doesn't correspond to the type of currentDict, let's skip it
+                //If the current column doesn't correspond to the type of currentDict, let's skip it
                 if (!currentDict.TryGetValue(colUniqueId, out var currentAttributes))
                     continue;
 
@@ -3899,7 +3971,7 @@ namespace MusicBeePlugin
                 if (shortId == currentAttributes.getShortId())
                 {
                     string newBackup;
-                    if (currentAttributes.expression == expressionBackup) // Let's replace it
+                    if (currentAttributes.expression == expressionBackup) //Let's replace it
                     {
                         newBackup = expression;
 
@@ -3909,7 +3981,7 @@ namespace MusicBeePlugin
                     }
                     else
                     {
-                        newBackup = currentAttributes.expression; // Let's keep it as is
+                        newBackup = currentAttributes.expression; //Let's keep it as is
                     }
 
                     var newAttributes = new ColumnAttributes(type, newBackup, fieldName, parameter2Name, splitter, trimValues);
@@ -4009,7 +4081,7 @@ namespace MusicBeePlugin
             previewTable.Columns.RemoveAt(columnIndex);
 
 
-            // Now let's deal with field & expression tables
+            //Now let's deal with field & expression tables
             int sortedShortIdsIndex = sortedShortIds.IndexOf(shortId);
 
             var exprs = shortIdsExprs[shortId];
@@ -4705,8 +4777,61 @@ namespace MusicBeePlugin
             return true;
         }
 
-        private void saveSettings()
+        private bool saveSettings()
         {
+            List<ReportPreset> newOrChangedCachedPresets = new List<ReportPreset>();
+            foreach (ReportPreset changedPreset in presetList.Items)
+            {
+                bool isItNewPreset = true;
+
+                foreach (ReportPreset savedPreset in SavedSettings.reportsPresets)
+                {
+                    if (changedPreset.permanentGuid == savedPreset.permanentGuid)
+                    {
+                        isItNewPreset = false;
+
+                        if (changedPreset.guid != savedPreset.guid)
+                        {
+                            for (int i = 0; i < changedPreset.functions.Length; i++)
+                            {
+                                if (!string.IsNullOrWhiteSpace(changedPreset.functionIds[i]) && !string.IsNullOrWhiteSpace(changedPreset.destinationTags[i]))
+                                    newOrChangedCachedPresets.Add(changedPreset);
+                            }
+                        }
+
+                        break;
+                    }
+                }
+
+                if (isItNewPreset)
+                    newOrChangedCachedPresets.Add(changedPreset);
+            }
+
+            if (newOrChangedCachedPresets.Count > 0)
+            {
+                DialogResult result = MessageBox.Show(this, GetPluralForm(MsgLrCachedPresetsChanged, newOrChangedCachedPresets.Count)
+                    .Replace("%%CHANGED-PRESET-COUNT%%", newOrChangedCachedPresets.Count.ToString()), 
+                    string.Empty, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
+
+                if (result == DialogResult.Cancel)
+                    return false;
+
+                foreach (var changedPreset in newOrChangedCachedPresets)
+                {
+                    try
+                    {
+                        appliedPreset = changedPreset;
+                        executePreset(null, false, true, null, null);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(this, ex.Message, null, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
+                }
+            }
+
+
             SavedSettings.recalculateOnNumberOfTagsChanges = recalculateOnNumberOfTagsChangesCheckBox.Checked;
             SavedSettings.numberOfTagsToRecalculate = numberOfTagsToRecalculateNumericUpDown.Value;
             SavedSettings.autoAppliedReportPresetsCount = autoAppliedPresetCount;
@@ -4726,6 +4851,8 @@ namespace MusicBeePlugin
             SavedSettings.openReportAfterExporting = openReportCheckBox.Checked;
 
             TagToolsPlugin.SaveSettings();
+
+            return true;
         }
 
         internal override void enableDisablePreviewOptionControls(bool enable, bool dontChangeDisabled = false)
@@ -5114,7 +5241,8 @@ namespace MusicBeePlugin
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            saveSettings();
+            if (!saveSettings())
+                return;
 
             if (ModifierKeys != Keys.Control)
                 Close();
@@ -5207,7 +5335,8 @@ namespace MusicBeePlugin
                 if (result == DialogResult.Yes)
                 {
                     SavedSettings.unsavedChangesConfirmationLastAnswer = MessageBoxDefaultButton.Button1;
-                    saveSettings();
+                    if (!saveSettings())
+                        e.Cancel = true;
                 }
                 else if (result == DialogResult.No)
                 {
@@ -5268,7 +5397,7 @@ namespace MusicBeePlugin
             {
                 return;
             }
-            else if (newColumn != false) // Discarding changes
+            else if (newColumn != false) //Discarding changes
             {
                 expressionTextBox.Text = expressionBackup;
                 SetMultipleItemsSplitterComboBoxCue(splitterBackup);
@@ -5278,7 +5407,7 @@ namespace MusicBeePlugin
 
                 return;
             }
-            else if (newColumnParam == null) // Updating expression
+            else if (newColumnParam == null) //Updating expression
             {
                 //buttonUpdateFunction.Text = ButtonUpdateFunctionUpdateText;
                 buttonUpdateFunction.Text = ButtonUpdateFunctionUpdateText;
@@ -5376,7 +5505,7 @@ namespace MusicBeePlugin
         }
         private void tagsDataGridViewRowSelected(int rowIndex)
         {
-            if (rowIndex >= 0) // Maybe new row is selected
+            if (rowIndex >= 0) //Maybe new row is selected
             {
                 tagsDataGridViewSelectedRow = rowIndex;
 
@@ -5408,14 +5537,14 @@ namespace MusicBeePlugin
 
         private void tagsDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex != 0 && e.RowIndex >= 0) // Maybe new row is selected
+            if (e.ColumnIndex != 0 && e.RowIndex >= 0) //Maybe new row is selected
                 if (tagsDataGridViewSelectedRow != e.RowIndex)
                     tagsDataGridViewRowSelected(e.RowIndex);
         }
 
-        // If newExpression == true, then new row is added to expressionsDataGridView, select it, last row
-        // If newExpression == false, then new tag column is selected, select 1st row here
-        // If newExpression == null, then it's just existing expression replaced, reselect it
+        //If newExpression == true, then new row is added to expressionsDataGridView, select it, last row
+        //If newExpression == false, then new tag column is selected, select 1st row here
+        //If newExpression == null, then it's just existing expression replaced, reselect it
         private void fillExpressionsDataGridView(string shortId, bool? newExpression)
         {
             int index = getSelectedRow(expressionsDataGridView);
@@ -5487,7 +5616,7 @@ namespace MusicBeePlugin
 
         private void expressionsDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex != 0 && e.RowIndex >= 0) // Maybe new row is selected
+            if (e.ColumnIndex != 0 && e.RowIndex >= 0) //Maybe new row is selected
             {
                 expressionBackup = (string)expressionsDataGridView.Rows[e.RowIndex].Cells[1].Tag;
                 expressionTextBox.Text = expressionBackup;
@@ -5516,7 +5645,7 @@ namespace MusicBeePlugin
 
         private void parameter2ComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Nothing is required for now
+            //Nothing is required for now
         }
 
         private void multipleItemsSplitterComboBox_TextUpdate(object sender, EventArgs e)
@@ -5597,7 +5726,7 @@ namespace MusicBeePlugin
 
         private void multipleItemsSplitterComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Nothing is required for now
+            //Nothing is required for now
         }
 
         private void multipleItemsSplitterTrimCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -5619,7 +5748,7 @@ namespace MusicBeePlugin
 
         private void functionComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (functionComboBoxCustom.SelectedIndex >= functionComboBoxCustom.Items.Count - 2) // Average or Average Count
+            if (functionComboBoxCustom.SelectedIndex >= functionComboBoxCustom.Items.Count - 2) //Average or Average Count
             {
                 multipleItemsSplitterLabel.Visible = false;
                 multipleItemsSplitterComboBoxCustom.Visible = false;
@@ -5630,7 +5759,7 @@ namespace MusicBeePlugin
                 parameter2Label.Visible = true;
                 parameter2ComboBoxCustom.Visible = true;
             }
-            else if (functionComboBoxCustom.SelectedIndex == 0) // Grouping
+            else if (functionComboBoxCustom.SelectedIndex == 0) //Grouping
             {
                 multipleItemsSplitterLabel.Visible = true;
                 multipleItemsSplitterComboBoxCustom.Visible = true;
@@ -5641,7 +5770,7 @@ namespace MusicBeePlugin
                 parameter2Label.Visible = false;
                 parameter2ComboBoxCustom.Visible = false;
             }
-            else // Other functions
+            else //Other functions
             {
                 multipleItemsSplitterLabel.Visible = false;
                 multipleItemsSplitterComboBoxCustom.Visible = false;
@@ -5742,7 +5871,7 @@ namespace MusicBeePlugin
 
                 sourceFieldComboBox_SelectedIndexChanged(null, null);
 
-                previewTable.ColumnCount = 0;//*******
+                previewTable.ColumnCount = 0;
                 tagsDataGridView.RowCount = 0;
                 tagsDataGridViewSelectedRow = -1;
                 expressionsDataGridView.RowCount = 0;

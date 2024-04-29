@@ -148,7 +148,7 @@
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="buttonCancel.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>10</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Close</value>
@@ -262,7 +262,7 @@
     <value>23, 23</value>
   </data>
   <data name="buttonSettings.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="&gt;&gt;buttonSettings.Name" xml:space="preserve">
     <value>buttonSettings</value>
@@ -286,7 +286,7 @@
     <value>208, 23</value>
   </data>
   <data name="usedEncodingList.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="&gt;&gt;usedEncodingList.Name" xml:space="preserve">
     <value>usedEncodingList</value>
@@ -316,7 +316,7 @@
     <value>147, 15</value>
   </data>
   <data name="incorrectlyUsedEncodingLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="incorrectlyUsedEncodingLabel.Text" xml:space="preserve">
     <value>Incorrectly used encoding:</value>
@@ -343,7 +343,7 @@
     <value>208, 23</value>
   </data>
   <data name="initialEncodingList.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;initialEncodingList.Name" xml:space="preserve">
     <value>initialEncodingList</value>
@@ -373,7 +373,7 @@
     <value>105, 15</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>Original encoding:</value>
@@ -406,7 +406,7 @@
     <value>100, 23</value>
   </data>
   <data name="buttonOK.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>1</value>
   </data>
   <data name="buttonOK.Text" xml:space="preserve">
     <value>Proceed</value>
@@ -439,7 +439,7 @@
     <value>102, 15</value>
   </data>
   <data name="forSelectedTracksLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="forSelectedTracksLabel.Text" xml:space="preserve">
     <value>for selected tracks</value>
@@ -466,7 +466,7 @@
     <value>208, 23</value>
   </data>
   <data name="sourceTagList.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;sourceTagList.Name" xml:space="preserve">
     <value>sourceTagList</value>
@@ -496,7 +496,7 @@
     <value>79, 15</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>Reencode tag</value>
@@ -583,7 +583,7 @@
     <value>ReencodeTag</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=8.1.8884.1469, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="dirtyErrorProvider.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1206,7 +1206,7 @@
     <value>100, 23</value>
   </data>
   <data name="buttonPreview.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>0</value>
   </data>
   <data name="buttonPreview.Text" xml:space="preserve">
     <value>Preview</value>

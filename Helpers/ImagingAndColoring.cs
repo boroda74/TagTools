@@ -219,14 +219,14 @@ namespace MusicBeePlugin
 
         private Bitmap Create32bppImageAndClearAlpha(Bitmap tmpImage)
         {
-            // declare the new image that will be returned by the function
+            //declare the new image that will be returned by the function
             Bitmap returnedImage = new Bitmap(tmpImage.Width, tmpImage.Height, PixelFormat.Format32bppArgb);
 
-            // create a graphics instance to draw the original image in the new one
+            //create a graphics instance to draw the original image in the new one
             Rectangle rect = new Rectangle(0, 0, tmpImage.Width, tmpImage.Height);
             Graphics g = Graphics.FromImage(returnedImage);
 
-            // create an image attribe to force a clearing of the alpha layer
+            //create an image attribe to force a clearing of the alpha layer
             ImageAttributes imageAttributes = new ImageAttributes();
             float[][] colorMatrixElements = {
                         new float[] {1,0,0,0,0},
@@ -238,7 +238,7 @@ namespace MusicBeePlugin
             ColorMatrix colorMatrix = new ColorMatrix(colorMatrixElements);
             imageAttributes.SetColorMatrix(colorMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
 
-            // draw the original image 
+            //draw the original image 
             g.DrawImage(tmpImage, rect, 0, 0, tmpImage.Width, tmpImage.Height, GraphicsUnit.Pixel, imageAttributes);
             g.Dispose();
             return returnedImage;
@@ -266,20 +266,20 @@ namespace MusicBeePlugin
                 r = g = bl = b;
             else
             {
-                // the argb wheel consists of 6 sectors. Figure out which sector
-                // you're in.
+                //the argb wheel consists of 6 sectors. Figure out which sector
+                //you're in.
                 double sectorPos = h / 60D;
                 int sectorNumber = (int)Math.Floor(sectorPos);
-                // get the fractional part of the sector
+                //get the fractional part of the sector
                 double fractionalSector = sectorPos - sectorNumber;
 
-                // calculate values for the three axes of the argb.
+                //calculate values for the three axes of the argb.
                 double p = b * (1D - s);
                 double q = b * (1D - (s * fractionalSector));
                 double t = b * (1D - (s * (1D - fractionalSector)));
 
-                // assign the fractional colors to r, g, and b based on the sector
-                // the angle is in.
+                //assign the fractional colors to r, g, and b based on the sector
+                //the angle is in.
                 switch (sectorNumber)
                 {
                     case 0:
@@ -565,7 +565,7 @@ namespace MusicBeePlugin
                 gfx.DrawImage(image, new Rectangle(x, y, destWidth, height),
                     new Rectangle(0, 0, srcImageWidth, height), GraphicsUnit.Pixel);
             }
-            else // scaleY == true
+            else //scaleY == true
             {
                 gfx.DrawImage(image, new Rectangle(x, y, destWidth, height),
                     new Rectangle(0, 0, srcImageWidth, image.Height), GraphicsUnit.Pixel);
@@ -586,7 +586,7 @@ namespace MusicBeePlugin
             {
                 DrawYRepeatedImageInternal(gfx, image, x, y, width, width, height, scaleY);
             }
-            else // scaleX == true
+            else //scaleX == true
             {
                 DrawYRepeatedImageInternal(gfx, image, x, y, image.Width, width, height, scaleY);
             }
