@@ -48,7 +48,7 @@ namespace MusicBeePlugin
             usedEncodingListCustom = namesComboBoxes["usedEncodingList"];
 
 
-            buttonSettings.Image = ThemedBitmapAddRef(this, buttonSettings.Image, Gear);
+            buttonSettings.Image = ReplaceBitmap(buttonSettings.Image, Gear);
 
             FillListByTagNames(sourceTagListCustom.Items, false, false, false, false);
             sourceTagListCustom.Text = SavedSettings.reencodeTagSourceTagName;

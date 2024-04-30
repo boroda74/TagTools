@@ -18,11 +18,6 @@
                 components.Dispose();
             }
 
-            if (disposing)
-            {
-                Plugin.FormThemedBitmapsRelease(this);
-            }
-
             base.Dispose(disposing);
         }
 

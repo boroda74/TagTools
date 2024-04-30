@@ -228,8 +228,8 @@ namespace MusicBeePlugin
             if (useSkinColors)
                 multipleItemsSplitterComboBox.SelectedIndexChanged += multipleItemsSplitterComboBox_DropDownClosed;
 
-            warning = ThemedBitmapAddRef(this, null, Warning);
-            warningWide = ThemedBitmapAddRef(this, null, WarningWide);
+            warning = ReplaceBitmap(null, Warning);
+            warningWide = ReplaceBitmap(null, WarningWide);
 
             //Setting control not standard properties
             //var heightField = presetList.GetType().GetField(
@@ -247,12 +247,12 @@ namespace MusicBeePlugin
                 DontUseSplitter = (multipleItemsSplitterComboBoxCustom.Items[0] as string).TrimStart(' ');
 
             //Setting themed images
-            openReportCheckBoxPicture.Image = ThemedBitmapAddRef(this, openReportCheckBoxPicture.Image, Window);
+            openReportCheckBoxPicture.Image = ReplaceBitmap(openReportCheckBoxPicture.Image, Window);
 
-            clearIdButton.Image = ThemedBitmapAddRef(this, clearIdButton.Image, ButtonRemoveImage);
-            buttonSettings.Image = ThemedBitmapAddRef(this, buttonSettings.Image, Gear);
+            clearIdButton.Image = ReplaceBitmap(clearIdButton.Image, ButtonRemoveImage);
+            buttonSettings.Image = ReplaceBitmap(buttonSettings.Image, Gear);
 
-            buttonClearExpression.Image = ThemedBitmapAddRef(this, buttonClearExpression.Image, ButtonRemoveImage);
+            buttonClearExpression.Image = ReplaceBitmap(buttonClearExpression.Image, ButtonRemoveImage);
 
 
             //Clearing "unsaved changes" button image
@@ -3206,7 +3206,7 @@ namespace MusicBeePlugin
                     if (destinationTagIds[i] > 0) //Let's use custom tag as cache
                     {
                         SetFileTag(queriedFile, destinationTagIds[i], resultValue);
-                        CommitTagsToFile(queriedFile, false, false, true);
+                        CommitTagsToFile(queriedFile, true, false);
                     }
 
                     return resultValue;
@@ -3250,7 +3250,7 @@ namespace MusicBeePlugin
                                     operations[j], mulDivFactors[j], precisionDigits[j], appendTexts[j]);
 
                                 SetFileTag(queriedFiles[i], destinationTagIds[j], resultValue);
-                                CommitTagsToFile(queriedFiles[i], false, false, true);
+                                CommitTagsToFile(queriedFiles[i], true, false);
                             }
 
                             j++;
@@ -3269,7 +3269,7 @@ namespace MusicBeePlugin
                                     operations[j], mulDivFactors[j], precisionDigits[j], appendTexts[j]);
 
                                 SetFileTag(queriedFiles[i], destinationTagIds[j], resultValue);
-                                CommitTagsToFile(queriedFiles[i], false, false, true);
+                                CommitTagsToFile(queriedFiles[i], true, false);
                             }
 
                             j++;

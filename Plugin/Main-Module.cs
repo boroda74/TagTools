@@ -155,75 +155,75 @@ namespace MusicBeePlugin
 
 
         //Themed bitmaps
-
-        //Dictionary below is intended for disposing unused ones 
-        private static Dictionary<Form, List<Bitmap>> FormsThemedBitmaps = new Dictionary<Form, List<Bitmap>>();
-        private static Dictionary<Bitmap, int> ThemedBitmapCounts = new Dictionary<Bitmap, int>();
-
-        internal static Bitmap ThemedBitmapAddRef(Form form, Image oldImage, Bitmap newBitmap)
+        internal static Bitmap ReplaceBitmap(Image oldImage, Bitmap newBitmap)
         {
             if (newBitmap == null)
                 return (Bitmap)oldImage;
 
+            oldImage?.Dispose();
 
-            List<Bitmap> bitmapList = null;
-            if (newBitmap != Resources.transparent_15)
-            {
-                if (FormsThemedBitmaps.TryGetValue(form, out bitmapList))
-                {
-                    bitmapList.Add(newBitmap);
-                    FormsThemedBitmaps.AddReplace(form, bitmapList);
-                }
-                else
-                {
-                    bitmapList = new List<Bitmap>();
-                    bitmapList.Add(newBitmap);
-
-                    FormsThemedBitmaps.Add(form, bitmapList);
-                }
-
-
-                ThemedBitmapCounts.TryGetValue(newBitmap, out var count);
-                ThemedBitmapCounts.AddReplace(newBitmap, ++count);
-            }
-
-            if (oldImage != null && oldImage != Resources.transparent_15)
-            {
-                if (bitmapList != null || FormsThemedBitmaps.TryGetValue(form, out bitmapList))
-                    FormThemedBitmapRelease(bitmapList, (Bitmap)oldImage);
-            }
-
-            return newBitmap;
+            return new Bitmap(newBitmap);
         }
 
-        internal static void FormThemedBitmapRelease(List<Bitmap> bitmapList, Bitmap bitmap)
+        internal static void DisposePluginBitmaps()
         {
-            if (bitmapList.Contains(bitmap))
-            {
-                ThemedBitmapCounts.TryGetValue(bitmap, out var count);
-                if (--count == 0)
-                {
-                    ThemedBitmapCounts.Remove(bitmap);
-                    bitmap.Dispose();
-                }
-                else
-                {
-                    ThemedBitmapCounts.AddReplace(bitmap, count);
-                }
-            }
-        }
+            DownArrowComboBoxImage?.Dispose();
 
-        internal static void FormThemedBitmapsRelease(Form form)
-        {
-            if (!FormsThemedBitmaps.TryGetValue(form, out var bitmapList))
-                //"form" is one of setting windows. This function is called artificially on saving settings, not from PluginWindowTemplate_FormClosed() handler.
-                return;
+            UpArrowImage?.Dispose();
+            DownArrowImage?.Dispose();
+
+            ThumbTopImage?.Dispose();
+            ThumbMiddleVerticalImage?.Dispose();
+            ThumbBottomImage?.Dispose();
 
 
-            foreach (var bitmap in bitmapList)
-                FormThemedBitmapRelease(bitmapList, bitmap);
+            LeftArrowImage?.Dispose();
+            RightArrowImage?.Dispose();
 
-            FormsThemedBitmaps.Remove(form);
+            ThumbLeftImage?.Dispose();
+            ThumbMiddleHorizontalImage?.Dispose();
+            ThumbRightImage?.Dispose();
+
+
+            ButtonRemoveImage?.Dispose();
+            ButtonSetImage?.Dispose();
+
+            CheckedState?.Dispose();
+            UncheckedState?.Dispose();
+
+            WarningWide?.Dispose();
+            Warning?.Dispose();
+
+            Search?.Dispose();
+            Window?.Dispose();
+
+            Gear?.Dispose();
+
+            AutoAppliedPresetsAccent?.Dispose();
+            AutoAppliedPresetsDimmed?.Dispose();
+
+            PredefinedPresetsAccent?.Dispose();
+            PredefinedPresetsDimmed?.Dispose();
+
+            CustomizedPresetsAccent?.Dispose();
+            CustomizedPresetsDimmed?.Dispose();
+
+            UserPresetsAccent?.Dispose();
+            UserPresetsDimmed?.Dispose();
+
+            PlaylistPresetsAccent?.Dispose();
+            PlaylistPresetsDimmed?.Dispose();
+
+            FunctionIdPresetsAccent?.Dispose();
+            FunctionIdPresetsDimmed?.Dispose();
+
+            HotkeyPresetsAccent?.Dispose();
+            HotkeyPresetsDimmed?.Dispose();
+
+            UncheckAllFiltersAccent?.Dispose();
+            UncheckAllFiltersDimmed?.Dispose();
+
+            MissingArtwork?.Dispose();
         }
 
 
@@ -325,10 +325,8 @@ namespace MusicBeePlugin
         private delegate void AutoApplyDelegate(object currentFileObj, object tagToolsPluginObj);
         private readonly AutoApplyDelegate autoApplyDelegate = AsrAutoApplyPresets;
 
-        private static readonly List<string> FilesUpdatedByAsr = new List<string>();
+        private static readonly List<string> FilesUpdatedByPlugin = new List<string>();
         private static readonly List<string> ChangedFiles = new List<string>();
-
-        private static readonly List<string> FilesUpdatedByLr = new List<string>();
 
         private static System.Threading.Timer PeriodicUI_RefreshTimer = null;
         private static System.Threading.Timer DelayedStatusbarTextClearingTimer = null;
@@ -2357,10 +2355,11 @@ namespace MusicBeePlugin
                         Bitmap bitmapImage = (tc.ConvertFrom(Convert.FromBase64String(value)) as Bitmap);
 
                         MemoryStream tempJpeg = new MemoryStream();
-                        bitmapImage.Save(tempJpeg, System.Drawing.Imaging.ImageFormat.Png);
+                        bitmapImage.Save(tempJpeg, ImageFormat.Png);
 
                         imageData = tempJpeg.ToArray();
                         tempJpeg.Close();
+                        bitmapImage.Dispose();
                     }
 
                     return MbApiInterface.Library_SetArtworkEx(sourceFileUrl, 0, imageData);
@@ -2388,8 +2387,7 @@ namespace MusicBeePlugin
             }
         }
 
-        internal static bool CommitTagsToFile(string sourceFileUrl, bool ignoreFutureTagsChangedEventByAsr = false, bool updateOnlyChangedTags = false, 
-            bool ignoreFutureTagsChangedEventByLr = false)
+        internal static bool CommitTagsToFile(string sourceFileUrl, bool ignoreFutureTagsChangedEvent = false, bool updateOnlyChangedTags = false)
         {
             bool result = false;
 
@@ -2405,19 +2403,11 @@ namespace MusicBeePlugin
                     return true;
             }
 
-            if (ignoreFutureTagsChangedEventByAsr)
+            if (ignoreFutureTagsChangedEvent)
             {
-                lock (FilesUpdatedByAsr)
+                lock (FilesUpdatedByPlugin)
                 {
-                    FilesUpdatedByAsr.Add(sourceFileUrl);
-                }
-            }
-
-            if (ignoreFutureTagsChangedEventByLr)
-            {
-                lock (FilesUpdatedByLr)
-                {
-                    FilesUpdatedByLr.Add(sourceFileUrl);
+                    FilesUpdatedByPlugin.Add(sourceFileUrl);
                 }
             }
 
@@ -4977,8 +4967,8 @@ namespace MusicBeePlugin
             }
 
 
-            //Let's dispose all unused bitmaps
-            FormThemedBitmapsRelease(EmptyForm);
+            //Let's dispose all global bitmaps
+            DisposePluginBitmaps();
 
 
             LibraryReportsForAutoApplying?.Dispose();
@@ -5045,31 +5035,20 @@ namespace MusicBeePlugin
         {
             if (!SavedSettings.dontShowASR || !SavedSettings.dontShowLibraryReports)
             {
-                bool autoApplyAsr = false;
+                bool autoApplyAsrUpdateLrCache = false;
 
-                lock (FilesUpdatedByAsr)
+                lock (FilesUpdatedByPlugin)
                 {
-                    if (FilesUpdatedByAsr.Contains(sourceFileUrl))
-                        FilesUpdatedByAsr.Remove(sourceFileUrl);
+                    if (FilesUpdatedByPlugin.Contains(sourceFileUrl))
+                        FilesUpdatedByPlugin.Remove(sourceFileUrl);
                     else
-                        autoApplyAsr = true;
+                        autoApplyAsrUpdateLrCache = true;
                 }
 
-                if (autoApplyAsr && !SavedSettings.dontShowASR)
+                if (autoApplyAsrUpdateLrCache && !SavedSettings.dontShowASR)
                     AsrAutoApplyPresets(sourceFileUrl, this);
 
-                
-                bool autoApplyLr = false;
-
-                lock (FilesUpdatedByLr)
-                {
-                    if (FilesUpdatedByLr.Contains(sourceFileUrl))
-                        FilesUpdatedByLr.Remove(sourceFileUrl);
-                    else
-                        autoApplyLr = true;
-                }
-
-                if (autoApplyLr && !SavedSettings.dontShowLibraryReports)
+                if (autoApplyAsrUpdateLrCache && !SavedSettings.dontShowLibraryReports)
                     LibraryReportsForFunctionIds.updateFunctionCache(sourceFileUrl);
             }
         }
@@ -5416,22 +5395,23 @@ namespace MusicBeePlugin
                 oldBitmap = DownArrowComboBoxImage;
                 DownArrowComboBoxImage = GetSolidImageByBitmapMask(ScrollBarThumbAndSpansForeColor, Resources.down_arrow_combobox_b,
                     comboBoxDownArrowSize, comboBoxDownArrowSize);
-                ThemedBitmapAddRef(EmptyForm, oldBitmap, DownArrowComboBoxImage);
+                oldBitmap?.Dispose();
 
                 oldBitmap = UpArrowImage;
                 UpArrowImage = GetSolidImageByBitmapMask(ScrollBarThumbAndSpansForeColor, Resources.up_arrow_b,
                     scrollBarImagesWidth, scrollBarImagesWidth);
-                ThemedBitmapAddRef(EmptyForm, oldBitmap, UpArrowImage);
+                oldBitmap?.Dispose();
+
                 oldBitmap = DownArrowImage;
                 DownArrowImage = MirrorBitmap(UpArrowImage, true);
-                ThemedBitmapAddRef(EmptyForm, oldBitmap, DownArrowImage);
+                oldBitmap?.Dispose();
 
                 //EITHER:
                 oldBitmap = ThumbMiddleVerticalImage;
                 ThumbMiddleVerticalImage = GetSolidImageByBitmapMask(ScrollBarThumbAndSpansForeColor, Resources.thumb_middle_vertical_c,
                     scrollBarImagesWidth - 3 * scaledPx, Resources.thumb_middle_vertical_c.Height, //Here middle thumb image is without right transparent part
                     true, InterpolationMode.NearestNeighbor);
-                ThemedBitmapAddRef(EmptyForm, oldBitmap, ThumbMiddleVerticalImage);
+                oldBitmap?.Dispose();
 
 
                 //OR:
@@ -5449,17 +5429,18 @@ namespace MusicBeePlugin
 
                 oldBitmap = LeftArrowImage;
                 LeftArrowImage = GetSolidImageByBitmapMask(ScrollBarThumbAndSpansForeColor, Resources.left_arrow_b, scrollBarImagesWidth, scrollBarImagesWidth);
-                ThemedBitmapAddRef(EmptyForm, oldBitmap, LeftArrowImage);
+                oldBitmap?.Dispose();
+
                 oldBitmap = RightArrowImage;
                 RightArrowImage = MirrorBitmap(LeftArrowImage, false);
-                ThemedBitmapAddRef(EmptyForm, oldBitmap, RightArrowImage);
+                oldBitmap?.Dispose();
 
                 //EITHER:
                 oldBitmap = ThumbMiddleHorizontalImage;
                 ThumbMiddleHorizontalImage = GetSolidImageByBitmapMask(ScrollBarThumbAndSpansForeColor, Resources.thumb_middle_horizontal_c,
                     Resources.thumb_middle_horizontal_c.Width, scrollBarImagesWidth - 3 * scaledPx, //Here middle thumb image is without bottom transparent part
                     true, InterpolationMode.NearestNeighbor);
-                ThemedBitmapAddRef(EmptyForm, oldBitmap, ThumbMiddleHorizontalImage);
+                oldBitmap?.Dispose();
 
 
                 //OR:
@@ -5478,22 +5459,26 @@ namespace MusicBeePlugin
                 oldBitmap = ButtonRemoveImage;
                 ButtonRemoveImage = GetSolidImageByBitmapMask(ButtonForeColor, Resources.uncheck_mark,
                     size, size);
-                ThemedBitmapAddRef(EmptyForm, oldBitmap, ButtonRemoveImage);
+                oldBitmap?.Dispose();
+
                 oldBitmap = ButtonSetImage;
                 ButtonSetImage = GetSolidImageByBitmapMask(ButtonForeColor, Resources.check_mark,
                     size, size);
-                ThemedBitmapAddRef(EmptyForm, oldBitmap, ButtonSetImage);
+                oldBitmap?.Dispose();
+
                 oldBitmap = WarningWide;
                 WarningWide = ScaleBitmap(Resources.warning_wide, PixelFormat.Format32bppArgb, InterpolationMode.HighQualityBicubic,
                     wideWidth, wideHeight);
-                ThemedBitmapAddRef(EmptyForm, oldBitmap, WarningWide);
+                oldBitmap?.Dispose();
+
                 oldBitmap = Warning;
                 Warning = ScaleBitmap(Resources.warning, PixelFormat.Format32bppArgb, InterpolationMode.HighQualityBicubic,
                     smallSize, smallSize);
-                ThemedBitmapAddRef(EmptyForm, oldBitmap, Warning);
+                oldBitmap?.Dispose();
+
                 oldBitmap = Gear;
                 Gear = GetSolidImageByBitmapMask(ButtonForeColor, Resources.gear, size, size);
-                ThemedBitmapAddRef(EmptyForm, oldBitmap, Gear);
+                oldBitmap?.Dispose();
             }
             else
             {
@@ -5514,23 +5499,27 @@ namespace MusicBeePlugin
                 oldBitmap = ButtonRemoveImage;
                 ButtonRemoveImage = GetSolidImageByBitmapMask(ButtonForeColor, Resources.uncheck_mark,
                     size, size);
-                ThemedBitmapAddRef(EmptyForm, oldBitmap, ButtonRemoveImage);
+                oldBitmap?.Dispose();
+
                 oldBitmap = ButtonSetImage;
                 ButtonSetImage = GetSolidImageByBitmapMask(ButtonForeColor, Resources.check_mark,
                     size, size);
-                ThemedBitmapAddRef(EmptyForm, oldBitmap, ButtonSetImage);
+                oldBitmap?.Dispose();
+
                 oldBitmap = WarningWide;
                 WarningWide = ScaleBitmap(Resources.warning_wide, PixelFormat.Format32bppArgb, InterpolationMode.HighQualityBicubic,
                     wideWidth, wideHeight);
-                ThemedBitmapAddRef(EmptyForm, oldBitmap, WarningWide);
+                oldBitmap?.Dispose();
+
                 oldBitmap = Warning;
                 Warning = ScaleBitmap(Resources.warning, PixelFormat.Format32bppArgb, InterpolationMode.HighQualityBicubic,
                     smallSize, smallSize);
-                ThemedBitmapAddRef(EmptyForm, oldBitmap, Warning);
+                oldBitmap?.Dispose();
+
                 oldBitmap = Gear;
                 Gear = GetSolidImageByBitmapMask(ButtonForeColor, Resources.gear,
                     size, size);
-                ThemedBitmapAddRef(EmptyForm, oldBitmap, Gear);
+                oldBitmap?.Dispose();
             }
 
 
@@ -5539,73 +5528,82 @@ namespace MusicBeePlugin
 
             oldBitmap = CheckedState;
             CheckedState = GetSolidImageByBitmapMask(AccentColor, Resources.check_mark, markSize, markSize);
-            ThemedBitmapAddRef(EmptyForm, oldBitmap, CheckedState);
+            oldBitmap?.Dispose();
+
             oldBitmap = UncheckedState;
             UncheckedState = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, AccentBackWeight), Resources.uncheck_mark, markSize, markSize);
-            ThemedBitmapAddRef(EmptyForm, oldBitmap, UncheckedState);
+            oldBitmap?.Dispose();
 
             int pictureSize = (int)Math.Round(19f * buttonHeightDpiFontScaling);
 
             oldBitmap = Search;
             Search = GetSolidImageByBitmapMask(AccentColor, Resources.search, pictureSize, pictureSize);
-            ThemedBitmapAddRef(EmptyForm, oldBitmap, Search);
+            oldBitmap?.Dispose();
 
 
             oldBitmap = AutoAppliedPresetsAccent;
             AutoAppliedPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.auto_applied_presets, pictureSize, pictureSize);
-            ThemedBitmapAddRef(EmptyForm, oldBitmap, AutoAppliedPresetsAccent);
+            oldBitmap?.Dispose();
+
             oldBitmap = AutoAppliedPresetsDimmed;
             AutoAppliedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), Resources.auto_applied_presets, pictureSize, pictureSize);
-            ThemedBitmapAddRef(EmptyForm, oldBitmap, AutoAppliedPresetsDimmed);
+            oldBitmap?.Dispose();
 
             oldBitmap = PredefinedPresetsAccent;
             PredefinedPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.predefined_presets, pictureSize, pictureSize);
-            ThemedBitmapAddRef(EmptyForm, oldBitmap, PredefinedPresetsAccent);
+            oldBitmap?.Dispose();
+
             oldBitmap = PredefinedPresetsDimmed;
             PredefinedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), Resources.predefined_presets, pictureSize, pictureSize);
-            ThemedBitmapAddRef(EmptyForm, oldBitmap, PredefinedPresetsDimmed);
+            oldBitmap?.Dispose();
 
             oldBitmap = CustomizedPresetsAccent;
             CustomizedPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.customized_presets, pictureSize, pictureSize);
-            ThemedBitmapAddRef(EmptyForm, oldBitmap, CustomizedPresetsAccent);
+            oldBitmap?.Dispose();
+
             oldBitmap = CustomizedPresetsDimmed;
             CustomizedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), Resources.customized_presets, pictureSize, pictureSize);
-            ThemedBitmapAddRef(EmptyForm, oldBitmap, CustomizedPresetsDimmed);
+            oldBitmap?.Dispose();
 
             oldBitmap = UserPresetsAccent;
             UserPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.user_presets, pictureSize, pictureSize);
-            ThemedBitmapAddRef(EmptyForm, oldBitmap, UserPresetsAccent);
+            oldBitmap?.Dispose();
+
             oldBitmap = UserPresetsDimmed;
             UserPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), Resources.user_presets, pictureSize, pictureSize);
-            ThemedBitmapAddRef(EmptyForm, oldBitmap, UserPresetsDimmed);
+            oldBitmap?.Dispose();
 
             oldBitmap = PlaylistPresetsAccent;
             PlaylistPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.playlist_presets, pictureSize, pictureSize);
-            ThemedBitmapAddRef(EmptyForm, oldBitmap, PlaylistPresetsAccent);
+            oldBitmap?.Dispose();
+
             oldBitmap = PlaylistPresetsDimmed;
             PlaylistPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), Resources.playlist_presets, pictureSize, pictureSize);
-            ThemedBitmapAddRef(EmptyForm, oldBitmap, PlaylistPresetsDimmed);
+            oldBitmap?.Dispose();
 
             oldBitmap = FunctionIdPresetsAccent;
             FunctionIdPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.function_id_presets, pictureSize, pictureSize);
-            ThemedBitmapAddRef(EmptyForm, oldBitmap, FunctionIdPresetsAccent);
+            oldBitmap?.Dispose();
+
             oldBitmap = FunctionIdPresetsDimmed;
             FunctionIdPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), Resources.function_id_presets, pictureSize, pictureSize);
-            ThemedBitmapAddRef(EmptyForm, oldBitmap, FunctionIdPresetsDimmed);
+            oldBitmap?.Dispose();
 
             oldBitmap = HotkeyPresetsAccent;
             HotkeyPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.hotkey_presets, pictureSize, pictureSize);
-            ThemedBitmapAddRef(EmptyForm, oldBitmap, HotkeyPresetsAccent);
+            oldBitmap?.Dispose();
+
             oldBitmap = HotkeyPresetsDimmed;
             HotkeyPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), Resources.hotkey_presets, pictureSize, pictureSize);
-            ThemedBitmapAddRef(EmptyForm, oldBitmap, HotkeyPresetsDimmed);
+            oldBitmap?.Dispose();
 
             oldBitmap = UncheckAllFiltersAccent;
             UncheckAllFiltersAccent = GetSolidImageByBitmapMask(AccentColor, Resources.uncheck_all_preset_filters, pictureSize, pictureSize);
-            ThemedBitmapAddRef(EmptyForm, oldBitmap, UncheckAllFiltersAccent);
+            oldBitmap?.Dispose();
+
             oldBitmap = UncheckAllFiltersDimmed;
             UncheckAllFiltersDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), Resources.uncheck_all_preset_filters, pictureSize, pictureSize);
-            ThemedBitmapAddRef(EmptyForm, oldBitmap, UncheckAllFiltersDimmed);
+            oldBitmap?.Dispose();
 
 
             //LR
@@ -5613,7 +5611,7 @@ namespace MusicBeePlugin
 
             oldBitmap = Window;
             Window = ScaleBitmap(Resources.window, pictogramSize, pictogramSize);
-            ThemedBitmapAddRef(EmptyForm, oldBitmap, Window);
+            oldBitmap?.Dispose();
 
 
             HeaderCellStyle.Alignment = DataGridViewContentAlignment.TopLeft;

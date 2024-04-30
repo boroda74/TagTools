@@ -86,7 +86,7 @@ namespace MusicBeePlugin
 
             WritableAllTagsLocalizedItem = parameterTagTypeListCustom.Items[3].ToString();
 
-            warning = ThemedBitmapAddRef(this, null, Warning);
+            warning = ReplaceBitmap(null, Warning);
 
             if (readOnly)
             {

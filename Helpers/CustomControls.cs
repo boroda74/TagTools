@@ -1235,12 +1235,12 @@ namespace MusicBeePlugin
             scrollBarThumbAndSpansBorderColor = Plugin.ScrollBarThumbAndSpansBorderColor;
 
 
-            upArrowImage = Plugin.ThemedBitmapAddRef(ownerForm, upArrowImage, Plugin.UpArrowImage);
-            downArrowImage = Plugin.ThemedBitmapAddRef(ownerForm, downArrowImage, Plugin.DownArrowImage);
+            upArrowImage = Plugin.ReplaceBitmap(upArrowImage, Plugin.UpArrowImage);
+            downArrowImage = Plugin.ReplaceBitmap(downArrowImage, Plugin.DownArrowImage);
 
-            thumbTopImage = Plugin.ThemedBitmapAddRef(ownerForm, thumbTopImage, Plugin.ThumbTopImage);
-            thumbMiddleImage = Plugin.ThemedBitmapAddRef(ownerForm, thumbMiddleImage, Plugin.ThumbMiddleVerticalImage);
-            thumbBottomImage = Plugin.ThemedBitmapAddRef(ownerForm, thumbBottomImage, Plugin.ThumbBottomImage);
+            thumbTopImage = Plugin.ReplaceBitmap(thumbTopImage, Plugin.ThumbTopImage);
+            thumbMiddleImage = Plugin.ReplaceBitmap(thumbMiddleImage, Plugin.ThumbMiddleVerticalImage);
+            thumbBottomImage = Plugin.ReplaceBitmap(thumbBottomImage, Plugin.ThumbBottomImage);
 
             GetExternalMetrics = getScrollBarMetrics;
             ScrolledControl = scrolledControl;
@@ -2086,12 +2086,12 @@ namespace MusicBeePlugin
             scrollBarThumbAndSpansBorderColor = Plugin.ScrollBarThumbAndSpansBorderColor;
 
 
-            leftArrowImage = Plugin.ThemedBitmapAddRef(ownerForm, leftArrowImage, Plugin.LeftArrowImage);
-            rightArrowImage = Plugin.ThemedBitmapAddRef(ownerForm, rightArrowImage, Plugin.RightArrowImage);
+            leftArrowImage = Plugin.ReplaceBitmap(leftArrowImage, Plugin.LeftArrowImage);
+            rightArrowImage = Plugin.ReplaceBitmap(rightArrowImage, Plugin.RightArrowImage);
 
-            thumbLeftImage = Plugin.ThemedBitmapAddRef(ownerForm, thumbLeftImage, Plugin.ThumbLeftImage);
-            thumbMiddleImage = Plugin.ThemedBitmapAddRef(ownerForm, thumbMiddleImage, Plugin.ThumbMiddleHorizontalImage);
-            thumbRightImage = Plugin.ThemedBitmapAddRef(ownerForm, thumbRightImage, Plugin.ThumbRightImage);
+            thumbLeftImage = Plugin.ReplaceBitmap(thumbLeftImage, Plugin.ThumbLeftImage);
+            thumbMiddleImage = Plugin.ReplaceBitmap(thumbMiddleImage, Plugin.ThumbMiddleHorizontalImage);
+            thumbRightImage = Plugin.ReplaceBitmap(thumbRightImage, Plugin.ThumbRightImage);
 
             GetExternalMetrics = getScrollBarMetrics;
             ScrolledControl = scrolledControl;

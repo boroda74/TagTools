@@ -2990,7 +2990,7 @@ namespace MusicBeePlugin
                     if (form.GetType() == newForm.GetType())
                     {
                         if (form != newForm)
-                            newForm.Dispose();
+                            newForm.Close(); //*********
 
                         if (form.Visible && form.WindowState != FormWindowState.Minimized) //Restored or maximized window
                         {

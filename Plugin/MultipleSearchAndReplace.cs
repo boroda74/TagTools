@@ -63,9 +63,9 @@ namespace MusicBeePlugin
 
 
             //Setting themed images
-            buttonDeleteSaved.Image = ThemedBitmapAddRef(this, buttonDeleteSaved.Image, ButtonRemoveImage);
-            autoApplyPictureBox.Image = ThemedBitmapAddRef(this, autoApplyPictureBox.Image, AutoAppliedPresetsAccent);
-            buttonSettings.Image = ThemedBitmapAddRef(this, buttonSettings.Image, Gear);
+            buttonDeleteSaved.Image = ReplaceBitmap(buttonDeleteSaved.Image, ButtonRemoveImage);
+            autoApplyPictureBox.Image = ReplaceBitmap(autoApplyPictureBox.Image, AutoAppliedPresetsAccent);
+            buttonSettings.Image = ReplaceBitmap(buttonSettings.Image, Gear);
 
 
             FillListByTagNames(destinationTagListCustom.Items, false, false, false);

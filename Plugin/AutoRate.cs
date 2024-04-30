@@ -50,7 +50,7 @@ namespace MusicBeePlugin
             playsPerDayTagListCustom = namesComboBoxes["playsPerDayTagList"];
 
 
-            buttonSettings.Image = ThemedBitmapAddRef(this, buttonSettings.Image, Gear);
+            buttonSettings.Image = ReplaceBitmap(buttonSettings.Image, Gear);
 
             toolTip1.SetToolTip(autoRateAtStartUpCheckBox, MsgThresholdsDescription);
             toolTip1.SetToolTip(autoRateAtStartUpCheckBoxLabel, MsgThresholdsDescription);

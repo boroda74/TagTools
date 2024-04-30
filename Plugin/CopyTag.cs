@@ -65,7 +65,7 @@ namespace MusicBeePlugin
 
             fileNameLabel.Enable(false);
 
-            buttonSettings.Image = ThemedBitmapAddRef(this, buttonSettings.Image, Gear);
+            buttonSettings.Image = ReplaceBitmap(buttonSettings.Image, Gear);
 
             FillListByTagNames(destinationTagListCustom.Items);
             destinationTagListCustom.Text = SavedSettings.copyDestinationTagName;

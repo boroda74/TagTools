@@ -45,7 +45,7 @@ namespace MusicBeePlugin
             usedEncodingListCustom = namesComboBoxes["usedEncodingList"];
 
 
-            buttonSettings.Image = ThemedBitmapAddRef(this, buttonSettings.Image, Gear);
+            buttonSettings.Image = ReplaceBitmap(buttonSettings.Image, Gear);
 
             defaultEncoding = Encoding.Default;
             EncodingInfo[] encodings = Encoding.GetEncodings();

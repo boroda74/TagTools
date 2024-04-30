@@ -59,8 +59,8 @@ namespace MusicBeePlugin
             exceptionWordsBoxCustom = namesComboBoxes["exceptionWordsBox"];
 
 
-            removeExceptionButton.Image = ThemedBitmapAddRef(this, removeExceptionButton.Image, ButtonRemoveImage);
-            buttonSettings.Image = ThemedBitmapAddRef(this, buttonSettings.Image, Gear);
+            removeExceptionButton.Image = ReplaceBitmap(removeExceptionButton.Image, ButtonRemoveImage);
+            buttonSettings.Image = ReplaceBitmap(buttonSettings.Image, Gear);
 
             FillListByTagNames(sourceTagListCustom.Items);
             sourceTagListCustom.Text = SavedSettings.changeCaseSourceTagName;

@@ -155,10 +155,10 @@ namespace MusicBeePlugin
             filterComboBoxCustom = namesComboBoxes["filterComboBox"];
 
 
-            warning = ThemedBitmapAddRef(this, null, Warning);
-            warningWide = ThemedBitmapAddRef(this, null, WarningWide);
-            checkedState = ThemedBitmapAddRef(this, null, CheckedState);
-            uncheckedState = ThemedBitmapAddRef(this, null, UncheckedState);
+            warning = ReplaceBitmap(null, Warning);
+            warningWide = ReplaceBitmap(null, WarningWide);
+            checkedState = ReplaceBitmap(null, CheckedState);
+            uncheckedState = ReplaceBitmap(null, UncheckedState);
 
             //Setting control not standard properties
             //var heightField = presetList.GetType().GetField(
@@ -175,21 +175,21 @@ namespace MusicBeePlugin
 
 
             //Setting themed images
-            searchPictureBox.Image = ThemedBitmapAddRef(this, searchPictureBox.Image, Search);
+            searchPictureBox.Image = ReplaceBitmap(searchPictureBox.Image, Search);
 
-            clearIdButton.Image = ThemedBitmapAddRef(this, clearIdButton.Image, ButtonRemoveImage);
-            clearSearchButton.Image = ThemedBitmapAddRef(this, clearSearchButton.Image, ButtonRemoveImage);
+            clearIdButton.Image = ReplaceBitmap(clearIdButton.Image, ButtonRemoveImage);
+            clearSearchButton.Image = ReplaceBitmap(clearSearchButton.Image, ButtonRemoveImage);
 
-            tickedOnlyPictureBox.Image = ThemedBitmapAddRef(this, tickedOnlyPictureBox.Image, AutoAppliedPresetsDimmed);
-            predefinedPictureBox.Image = ThemedBitmapAddRef(this, predefinedPictureBox.Image, PredefinedPresetsDimmed);
-            customizedPictureBox.Image = ThemedBitmapAddRef(this, customizedPictureBox.Image, CustomizedPresetsDimmed);
-            userPictureBox.Image = ThemedBitmapAddRef(this, userPictureBox.Image, UserPresetsDimmed);
-            playlistPictureBox.Image = ThemedBitmapAddRef(this, playlistPictureBox.Image, PlaylistPresetsDimmed);
-            functionIdPictureBox.Image = ThemedBitmapAddRef(this, functionIdPictureBox.Image, FunctionIdPresetsDimmed);
-            hotkeyPictureBox.Image = ThemedBitmapAddRef(this, hotkeyPictureBox.Image, HotkeyPresetsDimmed);
-            uncheckAllFiltersPictureBox.Image = ThemedBitmapAddRef(this, uncheckAllFiltersPictureBox.Image, UncheckAllFiltersDimmed);
+            tickedOnlyPictureBox.Image = ReplaceBitmap(tickedOnlyPictureBox.Image, AutoAppliedPresetsDimmed);
+            predefinedPictureBox.Image = ReplaceBitmap(predefinedPictureBox.Image, PredefinedPresetsDimmed);
+            customizedPictureBox.Image = ReplaceBitmap(customizedPictureBox.Image, CustomizedPresetsDimmed);
+            userPictureBox.Image = ReplaceBitmap(userPictureBox.Image, UserPresetsDimmed);
+            playlistPictureBox.Image = ReplaceBitmap(playlistPictureBox.Image, PlaylistPresetsDimmed);
+            functionIdPictureBox.Image = ReplaceBitmap(functionIdPictureBox.Image, FunctionIdPresetsDimmed);
+            hotkeyPictureBox.Image = ReplaceBitmap(hotkeyPictureBox.Image, HotkeyPresetsDimmed);
+            uncheckAllFiltersPictureBox.Image = ReplaceBitmap(uncheckAllFiltersPictureBox.Image, UncheckAllFiltersDimmed);
 
-            buttonSettings.Image = ThemedBitmapAddRef(this, buttonSettings.Image, Gear);
+            buttonSettings.Image = ReplaceBitmap(buttonSettings.Image, Gear);
 
             //Setting themed colors
             descriptionBox.ForeColor = DimmedHighlight;
@@ -5677,79 +5677,79 @@ namespace MusicBeePlugin
 
             if (showHotkeyAssignedChecked)
             {
-                hotkeyPictureBox.Image = ThemedBitmapAddRef(this, hotkeyPictureBox.Image, HotkeyPresetsAccent);
+                hotkeyPictureBox.Image = ReplaceBitmap(hotkeyPictureBox.Image, HotkeyPresetsAccent);
                 checkedCount++;
                 checkedFilter = 7;
             }
             else
             {
-                hotkeyPictureBox.Image = ThemedBitmapAddRef(this, hotkeyPictureBox.Image, HotkeyPresetsDimmed);
+                hotkeyPictureBox.Image = ReplaceBitmap(hotkeyPictureBox.Image, HotkeyPresetsDimmed);
             }
 
             if (showFunctionIdAssignedChecked)
             {
-                functionIdPictureBox.Image = ThemedBitmapAddRef(this, functionIdPictureBox.Image, FunctionIdPresetsAccent);
+                functionIdPictureBox.Image = ReplaceBitmap(functionIdPictureBox.Image, FunctionIdPresetsAccent);
                 checkedCount++;
                 checkedFilter = 6;
             }
             else
             {
-                functionIdPictureBox.Image = ThemedBitmapAddRef(this, functionIdPictureBox.Image, FunctionIdPresetsDimmed);
+                functionIdPictureBox.Image = ReplaceBitmap(functionIdPictureBox.Image, FunctionIdPresetsDimmed);
             }
 
             if (showPlaylistLimitedChecked)
             {
-                playlistPictureBox.Image = ThemedBitmapAddRef(this, playlistPictureBox.Image, PlaylistPresetsAccent);
+                playlistPictureBox.Image = ReplaceBitmap(playlistPictureBox.Image, PlaylistPresetsAccent);
                 checkedCount++;
                 checkedFilter = 5;
             }
             else
             {
-                playlistPictureBox.Image = ThemedBitmapAddRef(this, playlistPictureBox.Image, PlaylistPresetsDimmed);
+                playlistPictureBox.Image = ReplaceBitmap(playlistPictureBox.Image, PlaylistPresetsDimmed);
             }
 
             if (showUserChecked)
             {
-                userPictureBox.Image = ThemedBitmapAddRef(this, userPictureBox.Image, UserPresetsAccent);
+                userPictureBox.Image = ReplaceBitmap(userPictureBox.Image, UserPresetsAccent);
                 checkedCount++;
                 checkedFilter = 4;
             }
             else
             {
-                userPictureBox.Image = ThemedBitmapAddRef(this, userPictureBox.Image, UserPresetsDimmed);
+                userPictureBox.Image = ReplaceBitmap(userPictureBox.Image, UserPresetsDimmed);
             }
 
             if (showCustomizedChecked)
             {
-                customizedPictureBox.Image = ThemedBitmapAddRef(this, customizedPictureBox.Image, CustomizedPresetsAccent);
+                customizedPictureBox.Image = ReplaceBitmap(customizedPictureBox.Image, CustomizedPresetsAccent);
                 checkedCount++;
                 checkedFilter = 3;
             }
             else
             {
-                customizedPictureBox.Image = ThemedBitmapAddRef(this, customizedPictureBox.Image, CustomizedPresetsDimmed);
+                customizedPictureBox.Image = ReplaceBitmap(customizedPictureBox.Image, CustomizedPresetsDimmed);
             }
 
             if (showPredefinedChecked)
             {
-                predefinedPictureBox.Image = ThemedBitmapAddRef(this, predefinedPictureBox.Image, PredefinedPresetsAccent);
+                predefinedPictureBox.Image = ReplaceBitmap(predefinedPictureBox.Image, PredefinedPresetsAccent);
                 checkedCount++;
                 checkedFilter = 2;
             }
             else
             {
-                predefinedPictureBox.Image = ThemedBitmapAddRef(this, predefinedPictureBox.Image, PredefinedPresetsDimmed);
+                predefinedPictureBox.Image = ReplaceBitmap(predefinedPictureBox.Image, PredefinedPresetsDimmed);
             }
 
             if (showTickedOnlyChecked)
             {
-                tickedOnlyPictureBox.Image = ThemedBitmapAddRef(this, tickedOnlyPictureBox.Image, AutoAppliedPresetsAccent);
+                tickedOnlyPictureBox.Image = ReplaceBitmap(tickedOnlyPictureBox.Image, AutoAppliedPresetsAccent);
                 checkedCount++;
                 checkedFilter = 1;
             }
             else
             {
-                tickedOnlyPictureBox.Image = ThemedBitmapAddRef(this, tickedOnlyPictureBox.Image, AutoAppliedPresetsDimmed);
+                tickedOnlyPictureBox.Image = ReplaceBitmap(tickedOnlyPictureBox.Image, AutoAppliedPresetsDimmed);
             }
 
 
@@ -5775,9 +5775,9 @@ namespace MusicBeePlugin
 
 
             if (untickAllChecked)
-                uncheckAllFiltersPictureBox.Image = ThemedBitmapAddRef(this, uncheckAllFiltersPictureBox.Image, UncheckAllFiltersAccent);
+                uncheckAllFiltersPictureBox.Image = ReplaceBitmap(uncheckAllFiltersPictureBox.Image, UncheckAllFiltersAccent);
             else
-                uncheckAllFiltersPictureBox.Image = ThemedBitmapAddRef(this, uncheckAllFiltersPictureBox.Image, UncheckAllFiltersDimmed);
+                uncheckAllFiltersPictureBox.Image = ReplaceBitmap(uncheckAllFiltersPictureBox.Image, UncheckAllFiltersDimmed);
 
         }
 
