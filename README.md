@@ -1,15 +1,39 @@
-# Additional-Tagging-Tools.EN
+# ADDITIONAL TAGGING & REPORTING TOOLS PLUGIN
 
-## Table of contents
+# Additional Tagging \& Reporting Tools plugin
 
-- [ADDITIONAL TAGGING & REPORTING TOOLS PLUGIN](Docs/ADDITIONALTAGGINGREPORTINGTOOLSP.md)
-  - [ADDITIONAL TAGGING & REPORTING](Docs/ADDITIONALTAGGINGREPORTING.md)
-    - [LR EXAMPLES](Docs/LREXAMPLES.md)
-    - [LR EXPRESSIONS](Docs/LREXPRESSIONS.md)
-    - [LR AUTO-EXECUTION FILTERING](Docs/LRAUTO-EXECUTIONFILTERING.md)
-    - [ASR AUTO-EXECUTION FILTERING](Docs/ASRAUTO-EXECUTIONFILTERING.md)
-    - [LAST SKIPPED DATE/TIME](Docs/LASTSKIPPEDDATETIME.md)
-  - [BACKUP & RESTORE](Docs/BACKUPRESTORE.md)
-  - [VIRTUAL TAG FUNCTIONS](Docs/VIRTUALTAGFUNCTIONS.md)
-  - [ASR & MSR SPECIAL FUNCTIONS](Docs/ASRMSRSPECIALFUNCTIONS.md)
-  - [APPENDIX](Docs/APPENDIX.md)
+Plugin requires MusicBee version **3.5** or higher, and can use additional features of MusicBee 3.6, which is available as beta version only at the time writing of this help file.\
+&nbsp;
+
+*Note:*
+
+If you are familiar with the plugin quick update process, you can always [download latest plugin version here](https://www.mediafire.com/file/h2t08o9562efboi/mb\_TagTools\_latest.zip/file "target=\"\_blank\""). Copy the file "mb\_TagTools.dll" from the archive "mb\_TagTools\_latest.zip" to MusicBee "Plugins" folder, and overwrite the existing file.\
+&nbsp;
+
+*Note:*
+
+Pay attention to tool tips over buttons/fields in plugin windows.
+
+&nbsp;
+
+#### Plugin adding/updating/removing
+
+Extract content of the downloaded archive to a temporary folder of your choice. See the "README FIRST\!" file inside this folder for instructions on adding/updating/removing the plugin.
+
+#### This help file has been last updated on:
+
+**&#50;024-04-30**
+
+&nbsp;
+
+# Content
+
+[Additional Tagging \& Reporting](docs/ADDITIONALTAGGINGREPORTING.md)
+
+[Backup \& Restore](docs/BACKUPRESTORE.md)
+
+[Virtual tag functions](docs/VIRTUALTAGFUNCTIONS.md)
+
+[ASR \& MSR special functions](docs/ASRMSRSPECIALFUNCTIONS.md)
+
+[Appendix](docs/APPENDIX.md)

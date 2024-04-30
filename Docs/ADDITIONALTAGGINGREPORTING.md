@@ -48,18 +48,16 @@ Even ID3V2 tags are usually stored not using UTF encoding (which is independent 
 
 Allows to export some library statistics for currently displayed tracks to external file: HTML document (as a table), M3U playlist (it’s only possible to export file paths to playlists, but considering filtering capability of command this option may be useful), CSV file, HTML document as CD booklet, etc. You can re-import LR report file into a spreadsheet editor (including HTML table - it is the easiest way to import the tags to Microsoft Excel) for printing statistics or the content of your library, filtered library content, or your playlist(s).
 
-&nbsp;
-
 *Notes:*
 
 * Command supports two types of exported fields: grouping tags and aggregated functions. Plugin calculates every aggregated function for every unique combination of grouping tags. "Count" function counts the number of *different* values of a given tag. Other functions are obvious, and you can apply them only to numeric or duration tags (e.g. "Time", "File size", etc.).
-* Any aggregated function can be saved to physically stored (e.g., custom) tag (of course this tag won’t be updated automatically), so that MusicBee could use this aggregated function for sorting/filtering.
+* Any aggregated function can be saved to physically stored (e.g., custom) tag, so that MusicBee could use this aggregated function for sorting/filtering or in auto-playlist rules.
 * For all aggregated functions except for "Count" function please make sure that all tag values used by function have the same measurement units (KB, MB, etc.) or adjust units in plugin settings (go to MusicBee menu\> Edit\> Preferences\> Plugins\> Additional Tagging Tools\> Configure (not required if both MusicBee and Windows localizations are English or Russian).
 * If you want only to export some tags, then define only grouping fields in preview table (don't use aggregated functions and uncheck "Calculate sub-grouping totals" checkbox, which is senseless in this case).
 
 &nbsp;
 
-Also, "Library Reports" allows to calculate aggregated functions of one or more presets and to save results to (custom) tags at startup, after a given number of tag changes or manually. This may be useful for *auto-saving* or manual saving such values as "Summary play counts of albums" or "Number of tracks for each artist", etc. to (custom) tags, i.e. it's some analog of virtual tags with the ability to operate not only on tags of current track, but on tags of all tracks.
+Also, "Library Reports" allows to calculate aggregated functions of one or more presets and to save results to (custom) tags at startup or manually. This may be useful for *auto-saving* or manual saving such values as "Summary play counts of albums" or "Number of tracks for each artist", etc. to (custom) tags, i.e. it's some analog of virtual tags with the ability to operate not only on tags of the current track, but on tags of all tracks.
 
 [View some LR report examples](LREXAMPLES.md)
 
@@ -79,17 +77,9 @@ Also, see two predefined presets "LIBRARY TOTALS" and "LIBRARY AVERAGES" of "Lib
 
 $LR(\<URL\>,function\_id)
 
-To use this function open library reports window, create one or several presets, each with one or more aggregated functions and assign a function id (any string containing a-z chars, numbers and symbols . : - \_ ) to functions. Probably you will want to write all aggregate function results to \<Null\> tag in this case (i.e. do not write them to any tags at all if you use these functions only for virtual tags).
+To use this function open library reports window, create one or more presets, each with one or more aggregated functions and assign a function id (any string containing a-z chars, numbers and symbols . : - \_ ) to the functions. $LR functions are calculated dynamically. You can write all aggregate function results to \<Null\> pseudo-tag in this case (i.e. do not write them to any tags at all if you use these functions only for virtual tags). All $LR virtual tag functions are calculated, updated and displayed dynamically. Also, you can assign a LR function at the same time a ***function\_id*** and chose to *store function results in (custom) tag*. In this case, LR will use a stored tag as a persistent function result cache. If you change some tags or add new tracks to the library, this cache will *dynamically update*. But it’s **required** to fill this cache *initially* for all tracks existing in the library/current tags. You can’t proceed with saving LR presets without executing all concerned presets.&nbsp;
 
 "Library Reports" virtual tag functions allow to gather and display in the main panel some library statistics for currently displayed tracks.
-
-&nbsp;
-
-*Note:*
-
-* All $LR virtual tag functions are calculated, updated and displayed dynamically.
-
-&nbsp;
 
 *LR virtual tag functions may be even more useful if they are used in the grouping header of "Albums and Tracks" view.*
 
