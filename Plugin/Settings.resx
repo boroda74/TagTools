@@ -189,7 +189,7 @@
   <data name="groupBox4.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="&gt;&gt;allowAsrLrPresetAutoexecutionCheckBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;allowAsrLrPresetAutoExecutionCheckBox.Parent" xml:space="preserve">
     <value>groupBox1</value>
   </data>
   <data name="unitMBox.Location" type="System.Drawing.Point, System.Drawing">
@@ -273,10 +273,10 @@
   <data name="showAutorateCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="allowAsrLrPresetAutoexecutionCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="allowAsrLrPresetAutoExecutionCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>328, 21</value>
   </data>
-  <data name="&gt;&gt;showASRCheckBoxLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;showAsrCheckBoxLabel.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
   <data name="highlightChangedTagsCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -339,7 +339,7 @@
   <data name="&gt;&gt;includePreservedTagValuesCheckBox.Name" xml:space="preserve">
     <value>includePreservedTagValuesCheckBox</value>
   </data>
-  <data name="showASRCheckBox.TabIndex" type="System.Int32, mscorlib">
+  <data name="showAsrCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
   </data>
   <data name="&gt;&gt;showCTCheckBox.Type" xml:space="preserve">
@@ -381,7 +381,7 @@
   <data name="unitKBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>57, 23</value>
   </data>
-  <data name="allowAsrLrPresetAutoexecutionCheckBox.AutoSize" type="System.Boolean, mscorlib">
+  <data name="allowAsrLrPresetAutoExecutionCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
@@ -657,7 +657,7 @@
   <data name="showShowHiddenWindowsCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
   </data>
-  <data name="showASRCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="showAsrCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>27, 147</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
@@ -807,7 +807,7 @@
   <data name="showBackupRestoreCheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="showASRCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="showAsrCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="label6.Text" xml:space="preserve">
@@ -921,7 +921,7 @@
   <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 0</value>
   </data>
-  <data name="allowAsrLrPresetAutoexecutionCheckBox.TabIndex" type="System.Int32, mscorlib">
+  <data name="allowAsrLrPresetAutoExecutionCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="&gt;&gt;includeNotChangedTagsCheckBox.Parent" xml:space="preserve">
@@ -945,7 +945,7 @@
   <data name="showSwapTagsCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 19</value>
   </data>
-  <data name="&gt;&gt;allowAsrLrPresetAutoexecutionCheckBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;allowAsrLrPresetAutoExecutionCheckBox.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="label9.ToolTip" xml:space="preserve">
@@ -966,7 +966,7 @@
   <data name="versionLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;allowAsrLrPresetAutoexecutionCheckBoxLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;allowAsrLrPresetAutoExecutionCheckBoxLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="showCARCheckBox.AutoSize" type="System.Boolean, mscorlib">
@@ -1134,7 +1134,7 @@
   <data name="&gt;&gt;versionLabel.Name" xml:space="preserve">
     <value>versionLabel</value>
   </data>
-  <data name="showASRCheckBox.ToolTip" xml:space="preserve">
+  <data name="showAsrCheckBox.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="showCARCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
@@ -1194,7 +1194,7 @@
   <data name="minimizePluginWindowsCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="allowAsrLrPresetAutoexecutionCheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="allowAsrLrPresetAutoExecutionCheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="showLibraryReportsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
@@ -1248,13 +1248,13 @@
   <data name="&gt;&gt;changedLegendTextBox.Parent" xml:space="preserve">
     <value>legendGroupBox</value>
   </data>
-  <data name="&gt;&gt;showASRCheckBoxLabel.Name" xml:space="preserve">
-    <value>showASRCheckBoxLabel</value>
+  <data name="&gt;&gt;showAsrCheckBoxLabel.Name" xml:space="preserve">
+    <value>showAsrCheckBoxLabel</value>
   </data>
   <data name="changedLegendTextBox.ToolTip" xml:space="preserve">
     <value>Click on any example field to see the colors of selected line:Click on any example field to see the colors of not selected line</value>
   </data>
-  <data name="showASRCheckBoxLabel.ToolTip" xml:space="preserve">
+  <data name="showAsrCheckBoxLabel.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="showAutorateCheckBox.Size" type="System.Drawing.Size, System.Drawing">
@@ -1275,7 +1275,7 @@
   <data name="showBackupRestoreCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
   </data>
-  <data name="&gt;&gt;showASRCheckBoxLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;showAsrCheckBoxLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="buttonOK.Size" type="System.Drawing.Size, System.Drawing">
@@ -1365,8 +1365,8 @@
   <data name="&gt;&gt;groupBox3.Name" xml:space="preserve">
     <value>groupBox3</value>
   </data>
-  <data name="&gt;&gt;showASRCheckBox.Name" xml:space="preserve">
-    <value>showASRCheckBox</value>
+  <data name="&gt;&gt;showAsrCheckBox.Name" xml:space="preserve">
+    <value>showAsrCheckBox</value>
   </data>
   <data name="useMusicBeeFontCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 19</value>
@@ -1383,7 +1383,7 @@
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
-  <data name="allowAsrLrPresetAutoexecutionCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="allowAsrLrPresetAutoExecutionCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>203, 15</value>
   </data>
   <data name="includePreservedTagValuesCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
@@ -1569,7 +1569,7 @@
   <data name="showCARCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="showASRCheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="showAsrCheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
@@ -1629,7 +1629,7 @@
   <data name="useCustomFontCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="showASRCheckBox.Text" xml:space="preserve">
+  <data name="showAsrCheckBox.Text" xml:space="preserve">
     <value> </value>
   </data>
   <data name="&gt;&gt;playStartedSoundCheckBoxLabel.ZOrder" xml:space="preserve">
@@ -1665,7 +1665,7 @@
   <data name="&gt;&gt;label6.Name" xml:space="preserve">
     <value>label6</value>
   </data>
-  <data name="allowAsrLrPresetAutoexecutionCheckBoxLabel.Text" xml:space="preserve">
+  <data name="allowAsrLrPresetAutoExecutionCheckBoxLabel.Text" xml:space="preserve">
     <value>Allow ASR/LR presets auto-execution</value>
   </data>
   <data name="showCARCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
@@ -1677,7 +1677,7 @@
   <data name="changedLegendTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;allowAsrLrPresetAutoexecutionCheckBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;allowAsrLrPresetAutoExecutionCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="showChangeCaseCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
@@ -1710,7 +1710,7 @@
   <data name="contextMenuCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>328, 63</value>
   </data>
-  <data name="&gt;&gt;allowAsrLrPresetAutoexecutionCheckBoxLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;allowAsrLrPresetAutoExecutionCheckBoxLabel.Parent" xml:space="preserve">
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;allowCommandExecutionWithoutPreviewCheckBox.ZOrder" xml:space="preserve">
@@ -1782,7 +1782,7 @@
   <data name="useCustomFontCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>185, 42</value>
   </data>
-  <data name="showASRCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+  <data name="showAsrCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="showBackupRestoreCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
@@ -1869,8 +1869,8 @@
   <data name="&gt;&gt;useSkinColorsCheckBoxLabel.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
-  <data name="&gt;&gt;allowAsrLrPresetAutoexecutionCheckBoxLabel.Name" xml:space="preserve">
-    <value>allowAsrLrPresetAutoexecutionCheckBoxLabel</value>
+  <data name="&gt;&gt;allowAsrLrPresetAutoExecutionCheckBoxLabel.Name" xml:space="preserve">
+    <value>allowAsrLrPresetAutoExecutionCheckBoxLabel</value>
   </data>
   <data name="showChangeCaseCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1893,7 +1893,7 @@
   <data name="label11.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;showASRCheckBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;showAsrCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="includePreservedTagsCheckBox.TabIndex" type="System.Int32, mscorlib">
@@ -1905,7 +1905,7 @@
   <data name="legendGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
   </data>
-  <data name="&gt;&gt;showASRCheckBoxLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;showAsrCheckBoxLabel.Parent" xml:space="preserve">
     <value>groupBox1</value>
   </data>
   <data name="highlightChangedTagsCheckBoxLabel.Text" xml:space="preserve">
@@ -1953,7 +1953,7 @@
   <data name="includePreservedTagsCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;showASRCheckBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;showAsrCheckBox.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
   <data name="label6.Font" type="System.Drawing.Font, System.Drawing">
@@ -2061,7 +2061,7 @@
   <data name="&gt;&gt;buttonsPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="allowAsrLrPresetAutoexecutionCheckBoxLabel.ToolTip" xml:space="preserve">
+  <data name="allowAsrLrPresetAutoExecutionCheckBoxLabel.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="playCompletedSoundCheckBox.ToolTip" xml:space="preserve">
@@ -2079,7 +2079,7 @@
   <data name="&gt;&gt;label9.Parent" xml:space="preserve">
     <value>groupBox3</value>
   </data>
-  <data name="showASRCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="showAsrCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 19</value>
   </data>
   <data name="playStartedSoundCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
@@ -2205,7 +2205,7 @@
   <data name="useMusicBeeFontCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="allowAsrLrPresetAutoexecutionCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="allowAsrLrPresetAutoExecutionCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 19</value>
   </data>
   <data name="label10.AutoSize" type="System.Boolean, mscorlib">
@@ -2214,7 +2214,7 @@
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;allowAsrLrPresetAutoexecutionCheckBoxLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;allowAsrLrPresetAutoExecutionCheckBoxLabel.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="&gt;&gt;showReencodeTagCheckBoxLabel.Parent" xml:space="preserve">
@@ -2403,7 +2403,7 @@
   <data name="includeNotChangedTagsCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>27, 21</value>
   </data>
-  <data name="showASRCheckBox.AutoSize" type="System.Boolean, mscorlib">
+  <data name="showAsrCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="&gt;&gt;minimizePluginWindowsCheckBox.Parent" xml:space="preserve">
@@ -2427,7 +2427,7 @@
   <data name="&gt;&gt;playStoppedSoundCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="allowAsrLrPresetAutoexecutionCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="allowAsrLrPresetAutoExecutionCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="showBackupRestoreCheckBoxLabel.Text" xml:space="preserve">
@@ -2460,7 +2460,7 @@
   <data name="label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="allowAsrLrPresetAutoexecutionCheckBox.Text" xml:space="preserve">
+  <data name="allowAsrLrPresetAutoExecutionCheckBox.Text" xml:space="preserve">
     <value> </value>
   </data>
   <data name="&gt;&gt;tabControl1.ZOrder" xml:space="preserve">
@@ -2640,7 +2640,7 @@
   <data name="tabPage1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="showASRCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="showAsrCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 147</value>
   </data>
   <data name="&gt;&gt;playStoppedSoundCheckBoxLabel.ZOrder" xml:space="preserve">
@@ -2664,7 +2664,7 @@
   <data name="showSwapTagsCheckBoxLabel.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;showASRCheckBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;showAsrCheckBox.Parent" xml:space="preserve">
     <value>groupBox1</value>
   </data>
   <data name="minimizePluginWindowsCheckBox.Size" type="System.Drawing.Size, System.Drawing">
@@ -2706,10 +2706,10 @@
   <data name="buttonOK.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
-  <data name="allowAsrLrPresetAutoexecutionCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="allowAsrLrPresetAutoExecutionCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>307, 21</value>
   </data>
-  <data name="showASRCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+  <data name="showAsrCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
   </data>
   <data name="&gt;&gt;showBackupRestoreCheckBoxLabel.Parent" xml:space="preserve">
@@ -2718,7 +2718,7 @@
   <data name="&gt;&gt;label6.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="showASRCheckBoxLabel.Text" xml:space="preserve">
+  <data name="showAsrCheckBoxLabel.Text" xml:space="preserve">
     <value>Enable "Advanced Search &amp;&amp; Replace" / "Multiple Search &amp;&amp; Replace" commands</value>
   </data>
   <data name="&gt;&gt;label11.ZOrder" xml:space="preserve">
@@ -2736,16 +2736,16 @@
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 25</value>
   </data>
-  <data name="allowAsrLrPresetAutoexecutionCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+  <data name="allowAsrLrPresetAutoExecutionCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="allowAsrLrPresetAutoexecutionCheckBox.ToolTip" xml:space="preserve">
+  <data name="allowAsrLrPresetAutoExecutionCheckBox.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="&gt;&gt;unitGBox.Parent" xml:space="preserve">
     <value>unitsPanel</value>
   </data>
-  <data name="showASRCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="showAsrCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>426, 15</value>
   </data>
   <data name="&gt;&gt;showSwapTagsCheckBox.Type" xml:space="preserve">
@@ -2940,8 +2940,8 @@
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>193, 15</value>
   </data>
-  <data name="&gt;&gt;allowAsrLrPresetAutoexecutionCheckBox.Name" xml:space="preserve">
-    <value>allowAsrLrPresetAutoexecutionCheckBox</value>
+  <data name="&gt;&gt;allowAsrLrPresetAutoExecutionCheckBox.Name" xml:space="preserve">
+    <value>allowAsrLrPresetAutoExecutionCheckBox</value>
   </data>
   <data name="minimizePluginWindowsCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3000,7 +3000,7 @@
   <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="allowAsrLrPresetAutoexecutionCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+  <data name="allowAsrLrPresetAutoExecutionCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="label7.Text" xml:space="preserve">

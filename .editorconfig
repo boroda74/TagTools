@@ -1,0 +1,7 @@
+﻿[*.cs]
+
+# IDE1006: Стили именования
+dotnet_diagnostic.IDE1006.severity = none
+
+# IDE1005: Вызов делегата можно упростить.
+dotnet_diagnostic.IDE1005.severity = none

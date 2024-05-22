@@ -119,25 +119,25 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>428, 32</value>
+    <value>440, 32</value>
   </data>
   <data name="buttonOK.Text" xml:space="preserve">
     <value>Копировать</value>
   </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>536, 32</value>
+    <value>548, 32</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Закрыть</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>630, 343</value>
+    <value>642, 343</value>
   </data>
   <data name="sourceTagList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>610, 131</value>
+    <value>622, 131</value>
   </data>
   <data name="checkedSourceTagList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>610, 131</value>
+    <value>622, 131</value>
   </data>
   <data name="uncheckedSourceTagLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>97, 15</value>
@@ -152,7 +152,7 @@
     <value>Выбранные теги:</value>
   </data>
   <data name="tagSetComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>630, 23</value>
+    <value>642, 23</value>
   </data>
   <data name="tagSetComboBox.ToolTip" xml:space="preserve">
     <value>Выбранные теги автоматически сохраняются в текущий набор тегов. 
@@ -175,19 +175,19 @@
     <value>0, 445</value>
   </data>
   <data name="controlsPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>642, 62</value>
+    <value>654, 62</value>
   </data>
   <data name="infoLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>630, 63</value>
+    <value>642, 63</value>
   </data>
   <data name="infoLabel.Text" xml:space="preserve">
     <value>Вы можете скопировать теги из нескольких выбранных треков и вставить скопированные теги в выбранные треки. По умолчанию плагин выбирает треки для вставленных тегов в отображаемом порядке, но вы также можете использовать псевдотеги URL или &lt;Полный путь без расш.&gt; для нахождения треков для вставленных тегов (среди выбранных треков).</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>644, 511</value>
+    <value>656, 513</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>660, 550</value>
+    <value>670, 550</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Копировать теги в буфер обмена</value>

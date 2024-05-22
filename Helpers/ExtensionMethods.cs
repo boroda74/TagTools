@@ -1,17 +1,19 @@
 ﻿using MusicBeePlugin;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using static MusicBeePlugin.LibraryReports;
 using static NativeMethods;
 
 
 namespace ExtensionMethods
 {
-    public static class DictionariesExtensions
+    internal static class DictionariesExtensions
     {
-        public static bool AddReplace<T1, T2>(this Dictionary<T1, T2> dictionary, T1 key, T2 value)
+        internal static bool AddReplace<T1, T2>(this Dictionary<T1, T2> dictionary, T1 key, T2 value)
         {
-            if (dictionary.TryGetValue(key, out _))
+            if (dictionary.ContainsKey(key))
             {
                 dictionary.Remove(key);
                 dictionary.Add(key, value);
@@ -24,9 +26,40 @@ namespace ExtensionMethods
             }
         }
 
-        public static bool RemoveExisting<T1, T2>(this Dictionary<T1, T2> dictionary, T1 key)
+        internal static bool AddSkip<T1, T2>(this Dictionary<T1, T2> dictionary, T1 key, T2 value)
         {
-            if (dictionary.TryGetValue(key, out _))
+            if (dictionary.ContainsKey(key))
+            {
+                return true;
+            }
+            else
+            {
+                dictionary.Add(key, value);
+                return false;
+            }
+        }
+
+        internal static bool AddSkip<T>(this Dictionary<T, bool> dictionary, T key)
+        {
+            if (dictionary.ContainsKey(key))
+            {
+                return true;
+            }
+            else
+            {
+                dictionary.Add(key, false);
+                return false;
+            }
+        }
+
+        internal static void Add<T>(this Dictionary<T, bool> dictionary, T key)
+        {
+            dictionary.Add(key, false);
+        }
+
+        internal static bool RemoveExisting<T1, T2>(this Dictionary<T1, T2> dictionary, T1 key)
+        {
+            if (dictionary.ContainsKey(key))
             {
                 dictionary.Remove(key);
                 return true;
@@ -37,14 +70,10 @@ namespace ExtensionMethods
             }
         }
 
-        public static bool Contains<T1, T2>(this Dictionary<T1, T2> dictionary, T1 key)
-        {
-            return dictionary.TryGetValue(key, out _);
-        }
 
-        public static bool AddReplace<T1, T2>(this SortedDictionary<T1, T2> dictionary, T1 key, T2 value)
+        internal static bool AddReplace<T1, T2>(this SortedDictionary<T1, T2> dictionary, T1 key, T2 value)
         {
-            if (dictionary.TryGetValue(key, out _))
+            if (dictionary.ContainsKey(key))
             {
                 dictionary.Remove(key);
                 dictionary.Add(key, value);
@@ -57,9 +86,40 @@ namespace ExtensionMethods
             }
         }
 
-        public static bool RemoveExisting<T1, T2>(this SortedDictionary<T1, T2> dictionary, T1 key)
+        internal static bool AddSkip<T1, T2>(this SortedDictionary<T1, T2> dictionary, T1 key, T2 value)
         {
-            if (dictionary.TryGetValue(key, out _))
+            if (dictionary.ContainsKey(key))
+            {
+                return true;
+            }
+            else
+            {
+                dictionary.Add(key, value);
+                return false;
+            }
+        }
+
+        internal static bool AddSkip<T>(this SortedDictionary<T, bool> dictionary, T key)
+        {
+            if (dictionary.ContainsKey(key))
+            {
+                return true;
+            }
+            else
+            {
+                dictionary.Add(key, false);
+                return false;
+            }
+        }
+
+        internal static void Add<T>(this SortedDictionary<T, bool> dictionary, T key)
+        {
+            dictionary.Add(key, false);
+        }
+
+        internal static bool RemoveExisting<T1, T2>(this SortedDictionary<T1, T2> dictionary, T1 key)
+        {
+            if (dictionary.ContainsKey(key))
             {
                 dictionary.Remove(key);
                 return true;
@@ -70,12 +130,82 @@ namespace ExtensionMethods
             }
         }
 
-        public static bool Contains<T1, T2>(this SortedDictionary<T1, T2> dictionary, T1 key)
+
+        internal static bool AddReplaceUi(this ColumnAttributesDict dictionary, string key, ColumnAttributes value, Button button, CheckBox checkBox)
         {
-            return dictionary.TryGetValue(key, out _);
+            button.Enable(true);
+            checkBox.Enable(true);
+
+            if (dictionary.ContainsKey(key))
+            {
+                dictionary.Remove(key);
+                dictionary.Add(key, value);
+                return true;
+            }
+            else
+            {
+                dictionary.Add(key, value);
+                return false;
+            }
         }
 
-        public static bool AddNotExisting<T>(this List<T> list, T value)//***************
+        internal static bool AddSkipUi(this ColumnAttributesDict dictionary, string key, ColumnAttributes value, Button button, CheckBox checkBox)
+        {
+            button.Enable(true);
+            checkBox.Enable(true);
+
+            if (dictionary.ContainsKey(key))
+            {
+                return true;
+            }
+            else
+            {
+                dictionary.Add(key, value);
+                return false;
+            }
+        }
+
+        internal static bool RemoveExistingUi(this ColumnAttributesDict dictionary, string key, Button button, CheckBox checkBox)
+        {
+            if (dictionary.ContainsKey(key))
+            {
+                dictionary.Remove(key);
+
+                if (dictionary.Count == 0)
+                {
+                    button.Enable(false);
+                    checkBox.Enable(false);
+                    checkBox.Checked = false;
+                }
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        internal static void RemoveUi(this ColumnAttributesDict dictionary, string key, Button button, CheckBox checkBox)
+        {
+            dictionary.Remove(key);
+
+            if (dictionary.Count == 0)
+            {
+                button.Enable(false);
+                checkBox.Enable(false);
+                checkBox.Checked = false;
+            }
+        }
+
+        internal static void ClearUi(this ColumnAttributesDict dictionary, Button button)
+        {
+            dictionary.Clear();
+            button.Enable(false);
+        }
+
+
+        internal static bool AddUnique<T>(this List<T> list, T value)
         {
             if (!list.Contains(value))
             {
@@ -86,9 +216,9 @@ namespace ExtensionMethods
             return false;
         }
 
-        public static bool RemoveExisting<T>(this List<T> list, T value)
+        internal static bool RemoveExisting<T>(this List<T> list, T value)
         {
-            if (!list.Contains(value))
+            if (list.Contains(value))
             {
                 list.Remove(value);
                 return true;
@@ -96,11 +226,57 @@ namespace ExtensionMethods
 
             return false;
         }
+
+        internal static int IndexOfFirst<T>(this T[] array, T value)
+        {
+            if (value == null) //-V3111
+            {
+                for (int i = 0; i < array.Length; i++)
+                {
+                    if (array[i] == null) //-V3111
+                        return i;
+                }
+
+                return -1;
+            }
+
+            EqualityComparer<T> @default = EqualityComparer<T>.Default;
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (@default.Equals(array[i], value))
+                    return i;
+            }
+
+            return -1;
+        }
+
+        internal static int IndexOfLast<T>(this T[] array, T value)
+        {
+            if (value == null) //-V3111
+            {
+                for (int i = array.Length - 1; i >= 0; i--)
+                {
+                    if (array[i] == null) //-V3111
+                        return i;
+                }
+
+                return -1;
+            }
+
+            EqualityComparer<T> @default = EqualityComparer<T>.Default;
+            for (int i = array.Length - 1; i >= 0; i--)
+            {
+                if (@default.Equals(array[i], value))
+                    return i;
+            }
+
+            return -1;
+        }
     }
 
-    public static class DataGridViewExtensions
+    internal static class DataGridViewExtensions
     {
-        public static void DisableColumnsAutoSize(this DataGridView dataGridView, bool? keepColumnWidths)
+        internal static void DisableColumnsAutoSize(this DataGridView dataGridView, bool? keepColumnWidths)
         {
             if (keepColumnWidths == null)
                 dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -114,19 +290,19 @@ namespace ExtensionMethods
             }
         }
 
-        public static void SetColumnsAutoSizeFill(this DataGridView dataGridView)
+        internal static void SetColumnsAutoSizeFill(this DataGridView dataGridView)
         {
             for (int i = 0; i < dataGridView.ColumnCount; i++)
                 dataGridView.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
-        public static void SetColumnsAutoSizeAllCells(this DataGridView dataGridView)
+        internal static void SetColumnsAutoSizeAllCells(this DataGridView dataGridView)
         {
             for (int i = 0; i < dataGridView.ColumnCount; i++)
                 dataGridView.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
         }
 
-        public static void SetColumnsAutoSizeAllCellsLastFill(this DataGridView dataGridView)
+        internal static void SetColumnsAutoSizeAllCellsLastFill(this DataGridView dataGridView)
         {
             for (int i = 0; i < dataGridView.ColumnCount - 1; i++)
                 dataGridView.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
@@ -135,63 +311,98 @@ namespace ExtensionMethods
         }
     }
 
-    public static class TextBoxExtensions
+    internal static class TextBoxExtensions
     {
-        public static int GetCaretPosition(this TextBox textBox)
+        internal static int GetCaretPosition(this TextBox textBox)
         {
-            Point caret;
-            GetCaretPos(out caret);
+            GetCaretPos(out Point caret);
             return textBox.GetCharIndexFromPosition(caret);
         }
 
-        public static int GetScrollPosition(this TextBox textbox)
+        internal static int GetScrollPosition(this TextBox textBox)
         {
             Point lowPoint = new Point(5, 5);
-            int charOnFirstVisibleLine = textbox.GetCharIndexFromPosition(lowPoint);
-            int firstVisibleLine = textbox.GetLineFromCharIndex(charOnFirstVisibleLine);
+            int charOnFirstVisibleLine = textBox.GetCharIndexFromPosition(lowPoint);
+            int firstVisibleLine = textBox.GetLineFromCharIndex(charOnFirstVisibleLine);
             return firstVisibleLine;
         }
 
-        public static void Scroll(this TextBox textbox, int delta)
+        internal static void Scroll(this TextBox textBox, int delta)
         {
-            SendMessage(textbox.Handle, EM_LINESCROLL, 0, delta);
+            SendMessage(textBox.Handle, EM_LINESCROLL, Zero, (IntPtr)delta);
         }
 
-        public static void ScrollToTop(this TextBox textbox)
+        internal static void ScrollToTop(this TextBox textBox)
         {
-            var customVScrollBar = ControlsTools.FindControlChild<CustomVScrollBar>(textbox.Parent);
+            var customVScrollBar = ControlsTools.FindControlChild<CustomVScrollBar>(textBox.Parent);
 
-            SendMessage(textbox.Handle, EM_LINESCROLL, 0, -100000);
+            SendMessage(textBox.Handle, EM_LINESCROLL, Zero, (IntPtr)(- 100000));
             customVScrollBar?.SetValue(0);
             customVScrollBar?.Invalidate();
-            textbox.Invalidate();
+            textBox.Invalidate();
         }
     }
 
-    public static class ListBoxExtensions
+    internal static class ListBoxExtensions
     {
-        public static void Scroll(this ListBox listBox, int delta)
+        internal static void Scroll(this ListBox listBox, int delta)
         {
-            SendMessage(listBox.Handle, EM_LINESCROLL, 0, delta);
+            SendMessage(listBox.Handle, EM_LINESCROLL, Zero, (IntPtr)delta);
         }
 
-        public static void ScrollToTop(this ListBox listBox)
+        internal static void ScrollToTop(this ListBox listBox)
         {
             var customVScrollBar = ControlsTools.FindControlChild<CustomVScrollBar>(listBox.Parent);
 
-            SendMessage(listBox.Handle, EM_LINESCROLL, 0, -100000);
+            SendMessage(listBox.Handle, EM_LINESCROLL, Zero, (IntPtr)(- 100000));
             customVScrollBar?.SetValue(0);
             customVScrollBar?.Invalidate();
             listBox.Invalidate();
         }
     }
 
-    public static class ReadonlyControls
+    internal static class ReadonlyControls
     {
-        public static void Enable(this Control control, bool state)
+        internal static void MakeReadonly(this Control parent, bool state)
+        {
+            foreach (Control control in parent.Controls)
+            {
+                if (control is Button)
+                    (control as Button).Enable(!state);
+                else if (control.GetType().IsSubclassOf(typeof(TextBox)) || control is TextBox)
+                    (control as TextBox).ReadOnly = state;
+                else if (control.GetType().IsSubclassOf(typeof(CustomComboBox)) || control is CustomComboBox)
+                    (control as CustomComboBox).ForceReadonly(state);
+                else if (control.GetType().IsSubclassOf(typeof(ListBox)) || control is ListBox)
+                    (control as ListBox).Enable(!state);
+                else if (control is GroupBox)
+                    ; //Nothing...
+                else if (control is TableLayoutPanel)
+                    ; //Nothing...
+                else if (control is Panel)
+                    ; //Nothing...
+                else
+                    control.Enable(false);
+
+                control.MakeReadonly(state);
+            }
+        }
+
+        internal static void Enable(this Control control, bool state)
+        {
+            if (string.IsNullOrEmpty(control.AccessibleDescription))
+                control.EnableInternal(state);
+            else if (state && control.AccessibleDescription == Plugin.DisabledState)
+                control.AccessibleDescription = Plugin.EnabledState;
+            else if (!state && control.AccessibleDescription == Plugin.EnabledState)
+                control.AccessibleDescription = Plugin.DisabledState;
+        }
+
+        internal static void EnableInternal(this Control control, bool state)
         {
             Color enabledColor;
             Color disabledColor;
+
 
             if (Plugin.SavedSettings.dontUseSkinColors)
             {
@@ -226,7 +437,7 @@ namespace ExtensionMethods
             }
         }
 
-        public static bool IsEnabled(this Control control)
+        internal static bool IsEnabled(this Control control)
         {
             Color disabledColor;
 

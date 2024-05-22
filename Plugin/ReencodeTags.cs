@@ -32,7 +32,7 @@ namespace MusicBeePlugin
 
         private bool previewSortTags;
 
-        internal ReencodeTags(Plugin tagToolsPluginParam) : base(tagToolsPluginParam)
+        internal ReencodeTags(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
         }
@@ -478,7 +478,7 @@ namespace MusicBeePlugin
 
         private void buttonSettings_Click(object sender, EventArgs e)
         {
-            PluginQuickSettings settings = new PluginQuickSettings(TagToolsPlugin);
+            QuickSettings settings = new QuickSettings(TagToolsPlugin);
             Display(settings, true);
         }
     }

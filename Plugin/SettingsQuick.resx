@@ -177,7 +177,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="allowAsrLrPresetAutoexecutionCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="allowAsrLrPresetAutoExecutionCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>8, 3, 3, 3</value>
   </data>
   <data name="allowCommandExecutionWithoutPreviewCheckBoxLabel.ToolTip" xml:space="preserve">
@@ -216,7 +216,7 @@
   <data name="&gt;&gt;useSkinColorsCheckBox.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
-  <data name="allowAsrLrPresetAutoexecutionCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="allowAsrLrPresetAutoExecutionCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>26, 63</value>
   </data>
   <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
@@ -354,7 +354,7 @@
   <data name="closeHiddenCommandWindowsRadioButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 82</value>
   </data>
-  <data name="allowAsrLrPresetAutoexecutionCheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="allowAsrLrPresetAutoExecutionCheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="customFontTextBox.Location" type="System.Drawing.Point, System.Drawing">
@@ -390,7 +390,7 @@
   <data name="minimizePluginWindowsCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="allowAsrLrPresetAutoexecutionCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="allowAsrLrPresetAutoExecutionCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="useCustomFontCheckBoxLabel.ToolTip" xml:space="preserve">
@@ -405,7 +405,7 @@
   <data name="&gt;&gt;highlightChangedTagsCheckBoxLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;allowAsrLrPresetAutoexecutionCheckBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;allowAsrLrPresetAutoExecutionCheckBox.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="&gt;&gt;buttonCancel.Parent" xml:space="preserve">
@@ -414,7 +414,7 @@
   <data name="&gt;&gt;playCompletedSoundCheckBoxLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;allowAsrLrPresetAutoexecutionCheckBoxLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;allowAsrLrPresetAutoExecutionCheckBoxLabel.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="useSkinColorsCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
@@ -438,10 +438,10 @@
   <data name="&gt;&gt;playStartedSoundCheckBoxLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="allowAsrLrPresetAutoexecutionCheckBoxLabel.ToolTip" xml:space="preserve">
+  <data name="allowAsrLrPresetAutoExecutionCheckBoxLabel.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="allowAsrLrPresetAutoexecutionCheckBox.Text" xml:space="preserve">
+  <data name="allowAsrLrPresetAutoExecutionCheckBox.Text" xml:space="preserve">
     <value> </value>
   </data>
   <data name="customFontButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -624,8 +624,8 @@
   <data name="includePreservedTagsCheckBoxLabel.Text" xml:space="preserve">
     <value>Include in preview lines containing preserved tags only (Advanced Search &amp;&amp; Replace)</value>
   </data>
-  <data name="&gt;&gt;allowAsrLrPresetAutoexecutionCheckBox.Name" xml:space="preserve">
-    <value>allowAsrLrPresetAutoexecutionCheckBox</value>
+  <data name="&gt;&gt;allowAsrLrPresetAutoExecutionCheckBox.Name" xml:space="preserve">
+    <value>allowAsrLrPresetAutoExecutionCheckBox</value>
   </data>
   <data name="preservedTagValuesLegendTextBox.Text" xml:space="preserve">
     <value>Preserved tag values</value>
@@ -789,7 +789,7 @@
   <data name="&gt;&gt;label9.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;allowAsrLrPresetAutoexecutionCheckBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;allowAsrLrPresetAutoExecutionCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;closeHiddenCommandWindowsRadioButton.ZOrder" xml:space="preserve">
@@ -867,7 +867,7 @@
   <data name="&gt;&gt;saveLastSkippedButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;allowAsrLrPresetAutoexecutionCheckBoxLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;allowAsrLrPresetAutoExecutionCheckBoxLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="playCompletedSoundCheckBox.Location" type="System.Drawing.Point, System.Drawing">
@@ -969,7 +969,7 @@
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>366, 15</value>
   </data>
-  <data name="allowAsrLrPresetAutoexecutionCheckBoxLabel.Text" xml:space="preserve">
+  <data name="allowAsrLrPresetAutoExecutionCheckBoxLabel.Text" xml:space="preserve">
     <value>Allow ASR/LR presets auto-execution</value>
   </data>
   <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
@@ -1251,7 +1251,7 @@
   <data name="changedLegendTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;allowAsrLrPresetAutoexecutionCheckBoxLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;allowAsrLrPresetAutoExecutionCheckBoxLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;customFontButton.Type" xml:space="preserve">
@@ -1284,7 +1284,7 @@
   <data name="&gt;&gt;useMusicBeeFontCheckBoxLabel.Name" xml:space="preserve">
     <value>useMusicBeeFontCheckBoxLabel</value>
   </data>
-  <data name="allowAsrLrPresetAutoexecutionCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+  <data name="allowAsrLrPresetAutoExecutionCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
   <data name="&gt;&gt;includeNotChangedTagsCheckBox.Parent" xml:space="preserve">
@@ -1335,7 +1335,7 @@
   <data name="useCustomFontCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="allowAsrLrPresetAutoexecutionCheckBox.AutoSize" type="System.Boolean, mscorlib">
+  <data name="allowAsrLrPresetAutoExecutionCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="&gt;&gt;legendLabel.ZOrder" xml:space="preserve">
@@ -1422,7 +1422,7 @@
   <data name="label1.Text" xml:space="preserve">
     <value>*  MusicBee restart is required for the changed settings to take effect</value>
   </data>
-  <data name="allowAsrLrPresetAutoexecutionCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="allowAsrLrPresetAutoExecutionCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 19</value>
   </data>
   <data name="allowCommandExecutionWithoutPreviewCheckBox.Size" type="System.Drawing.Size, System.Drawing">
@@ -1458,7 +1458,7 @@
   <data name="&gt;&gt;useSkinColorsCheckBoxLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="allowAsrLrPresetAutoexecutionCheckBox.TabIndex" type="System.Int32, mscorlib">
+  <data name="allowAsrLrPresetAutoExecutionCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
   <data name="legendGroupBox.TabIndex" type="System.Int32, mscorlib">
@@ -1494,7 +1494,7 @@
   <data name="includePreservedTagsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 42</value>
   </data>
-  <data name="allowAsrLrPresetAutoexecutionCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="allowAsrLrPresetAutoExecutionCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>203, 15</value>
   </data>
   <data name="saveLastSkippedButton.Text" xml:space="preserve">
@@ -1587,7 +1587,7 @@
   <data name="playStartedSoundCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>27, 42</value>
   </data>
-  <data name="&gt;&gt;allowAsrLrPresetAutoexecutionCheckBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;allowAsrLrPresetAutoExecutionCheckBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="customFontButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -1626,7 +1626,7 @@
   <data name="playCompletedSoundCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="allowAsrLrPresetAutoexecutionCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="allowAsrLrPresetAutoExecutionCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 63</value>
   </data>
   <data name="&gt;&gt;label1.Type" xml:space="preserve">
@@ -1716,7 +1716,7 @@
   <data name="label6.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="allowAsrLrPresetAutoexecutionCheckBox.ToolTip" xml:space="preserve">
+  <data name="allowAsrLrPresetAutoExecutionCheckBox.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="label9.TabIndex" type="System.Int32, mscorlib">
@@ -1827,8 +1827,8 @@
   <data name="versionLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;allowAsrLrPresetAutoexecutionCheckBoxLabel.Name" xml:space="preserve">
-    <value>allowAsrLrPresetAutoexecutionCheckBoxLabel</value>
+  <data name="&gt;&gt;allowAsrLrPresetAutoExecutionCheckBoxLabel.Name" xml:space="preserve">
+    <value>allowAsrLrPresetAutoExecutionCheckBoxLabel</value>
   </data>
   <data name="useCustomFontCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1878,10 +1878,10 @@
   <data name="&gt;&gt;buttonOK.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="allowAsrLrPresetAutoexecutionCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="allowAsrLrPresetAutoExecutionCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 0, 15, 0</value>
   </data>
-  <data name="allowAsrLrPresetAutoexecutionCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+  <data name="allowAsrLrPresetAutoExecutionCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="groupBox2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">

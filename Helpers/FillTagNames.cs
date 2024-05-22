@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace MusicBeePlugin
 {
-    public partial class Plugin
+    partial class Plugin
     {
         internal void fillTagNames()
         {

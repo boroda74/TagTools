@@ -18,6 +18,14 @@
                 components.Dispose();
             }
 
+            if (disposing)
+            {
+                emptyArtwork.Dispose();
+
+                columnTemplate.Dispose();
+                artworkCellTemplate.Dispose();
+            }
+
             base.Dispose(disposing);
         }
 

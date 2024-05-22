@@ -304,7 +304,7 @@ namespace MusicBeePlugin
         [StructLayout(LayoutKind.Sequential)]
         public class PluginInfo
         {
-            public short PluginInfoVersion;
+            public short PluginInfoVersion; //-V3085
             public PluginType Type;
             public string Name;
             public string Description;
@@ -313,8 +313,8 @@ namespace MusicBeePlugin
             public short VersionMajor;
             public short VersionMinor;
             public short Revision;
-            public short MinInterfaceVersion;
-            public short MinApiRevision;
+            public short MinInterfaceVersion; //-V3085
+            public short MinApiRevision; //-V3085
             public ReceiveNotificationFlags ReceiveNotifications;
             public int ConfigurationPanelHeight;
         }

@@ -19,16 +19,16 @@ namespace MusicBeePlugin
         private string[] prefixedUnselectedTags = null;
         private string[] prefixedSelectedTags = null;
         private string[] selectedTags = null;
-        private bool returnSelectedTags = false;
+        private readonly bool returnSelectedTags = false;
 
-        internal CopyTagsToClipboard(Plugin tagToolsPluginParam) : base(tagToolsPluginParam)
+        internal CopyTagsToClipboard(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
         }
 
-        internal CopyTagsToClipboard(Plugin tagToolsPluginParam, string formTitle, string copyButtonName) : this(tagToolsPluginParam)
+        internal CopyTagsToClipboard(Plugin plugin, string formTitle, string copyButtonName) : this(plugin)
         {
-            tagSetComboBoxCustom.Visible = false;
+            tagSetComboBox.Visible = false;
             Text = formTitle;
             buttonOK.Text = copyButtonName;
             returnSelectedTags = true;
@@ -40,7 +40,7 @@ namespace MusicBeePlugin
             base.initializeForm();
 
             tagSetComboBoxCustom = namesComboBoxes["tagSetComboBox"];
-
+            tagSetComboBoxCustom.Visible = tagSetComboBox.Visible;
 
             if (!returnSelectedTags)
             {
@@ -63,9 +63,9 @@ namespace MusicBeePlugin
             button_GotFocus(AcceptButton, null); //Let's mark active button
         }
 
-        internal static string[] SelectTags(Plugin tagToolsPluginParam, string formTitle, string copyButtonName, string[] preselectedTags, bool addArtworkAlso, bool addDateCreatedAlso)
+        internal static string[] SelectTags(Plugin plugin, string formTitle, string copyButtonName, string[] preselectedTags, bool addArtworkAlso, bool addDateCreatedAlso)
         {
-            CopyTagsToClipboard form = new CopyTagsToClipboard(tagToolsPluginParam, formTitle, copyButtonName);
+            CopyTagsToClipboard form = new CopyTagsToClipboard(plugin, formTitle, copyButtonName);
 
             form.selectedTags = preselectedTags.Clone() as string[];
             form.fillTags(false, addArtworkAlso, addDateCreatedAlso);
@@ -74,9 +74,9 @@ namespace MusicBeePlugin
             return form.selectedTags;
         }
 
-        internal static int[] SelectTags(Plugin tagToolsPluginParam, string formTitle, string copyButtonName, int[] preselectedTags, bool addArtworkAlso, bool addDateCreatedAlso)
+        internal static int[] SelectTags(Plugin plugin, string formTitle, string copyButtonName, int[] preselectedTags, bool addArtworkAlso, bool addDateCreatedAlso)
         {
-            CopyTagsToClipboard form = new CopyTagsToClipboard(tagToolsPluginParam, formTitle, copyButtonName);
+            CopyTagsToClipboard form = new CopyTagsToClipboard(plugin, formTitle, copyButtonName);
 
             form.selectedTags = new string[preselectedTags.Length];
             for (int i = 0; i < preselectedTags.Length; i++)
@@ -100,7 +100,7 @@ namespace MusicBeePlugin
                 selectedTags[i] = checkedSourceTagList.Items[i].ToString().Substring(2);
         }
 
-        private void prepareAvailableTags(bool addReadonlyTagsAlso, bool addArtworkAlso, bool addDateCreatedAlso)//********
+        private void prepareAvailableTags(bool addReadonlyTagsAlso, bool addArtworkAlso, bool addDateCreatedAlso)
         {
             List<string> availableTagList = new List<string>();
             FillListByTagNames(availableTagList, addReadonlyTagsAlso, addArtworkAlso, false, false, false, addDateCreatedAlso);
@@ -163,9 +163,7 @@ namespace MusicBeePlugin
 
         internal static bool CopyTagsToClipboardUsingTagSet(int tagSet)
         {
-            string[] files = null;
-
-            if (!MbApiInterface.Library_QueryFilesEx("domain=SelectedFiles", out files))
+            if (!MbApiInterface.Library_QueryFilesEx("domain=SelectedFiles", out string[] files))
                 files = new string[0];
 
 
@@ -410,7 +408,7 @@ namespace MusicBeePlugin
     }
 
 
-    public partial class Plugin
+    partial class Plugin
     {
         internal void copyTagsUsingTagSet1EventHandler(object sender, EventArgs e)
         {

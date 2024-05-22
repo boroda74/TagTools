@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Xml.Serialization;
 using System.Windows.Forms;
 using static MusicBeePlugin.Plugin;
 
@@ -49,11 +49,11 @@ namespace MusicBeePlugin
         private Bitmap checkedState = null;
         private Bitmap uncheckedState = null;
 
-        private DataGridViewCellStyle unchangedCellStyle = new DataGridViewCellStyle(UnchangedCellStyle);
-        private DataGridViewCellStyle changedCellStyle = new DataGridViewCellStyle(ChangedCellStyle);
-        private DataGridViewCellStyle dimmedCellStyle = new DataGridViewCellStyle(DimmedCellStyle);
-        private DataGridViewCellStyle preservedTagCellStyle = new DataGridViewCellStyle(PreservedTagCellStyle);
-        private DataGridViewCellStyle preservedTagValueCellStyle = new DataGridViewCellStyle(PreservedTagValueCellStyle);
+        private readonly DataGridViewCellStyle unchangedCellStyle = new DataGridViewCellStyle(UnchangedCellStyle);
+        private readonly DataGridViewCellStyle changedCellStyle = new DataGridViewCellStyle(ChangedCellStyle);
+        private readonly DataGridViewCellStyle dimmedCellStyle = new DataGridViewCellStyle(DimmedCellStyle);
+        private readonly DataGridViewCellStyle preservedTagCellStyle = new DataGridViewCellStyle(PreservedTagCellStyle);
+        private readonly DataGridViewCellStyle preservedTagValueCellStyle = new DataGridViewCellStyle(PreservedTagValueCellStyle);
 
         private delegate void AddRowToTable(string[] row, object changeTypes);
         private delegate void ProcessRowOfTable(int row);
@@ -135,7 +135,7 @@ namespace MusicBeePlugin
         private string buttonCloseToolTip;
         private int presetListLastSelectedIndex = -2;
 
-        internal AdvancedSearchAndReplace(Plugin tagToolsPluginParam) : base(tagToolsPluginParam)
+        internal AdvancedSearchAndReplace(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
         }
@@ -143,6 +143,8 @@ namespace MusicBeePlugin
         protected override void initializeForm()
         {
             base.initializeForm();
+            this.Enabled = false;
+
 
             parameterTag6ListCustom = namesComboBoxes["parameterTag6List"];
             parameterTag5ListCustom = namesComboBoxes["parameterTag5List"];
@@ -198,9 +200,9 @@ namespace MusicBeePlugin
 
             //Initialization
             presetsWorkingCopy = new SortedDictionary<Guid, Preset>();
-            foreach (var tempPreset in Presets.Values)
+            foreach (var preset in Presets.Values)
             {
-                Preset presetCopy = new Preset(tempPreset);
+                Preset presetCopy = new Preset(preset);
                 presetsWorkingCopy.Add(presetCopy.guid, presetCopy);
             }
 
@@ -208,8 +210,8 @@ namespace MusicBeePlugin
             foreach (Guid guid in SavedSettings.autoAppliedAsrPresetGuids)
                 autoAppliedAsrPresetGuids.Add(guid, false);
 
-            asrPresetsWithHotkeysGuids = new Guid[MaximumNumberOfASRHotkeys];
-            for (int j = 0; j < MaximumNumberOfASRHotkeys; j++)
+            asrPresetsWithHotkeysGuids = new Guid[MaximumNumberOfAsrHotkeys];
+            for (int j = 0; j < MaximumNumberOfAsrHotkeys; j++)
             {
                 if (SavedSettings.asrPresetsWithHotkeysGuids[j] != Guid.Empty)
                 {
@@ -238,9 +240,9 @@ namespace MusicBeePlugin
             AutoApplyDisabledText = Regex.Replace(entireText, @"^.*?~.*?~.*?~.*?~.*?~(.*)", "$1");
 
 
-            asrPresetsWithHotkeysCount = ASRPresetsWithHotkeysCount;
+            asrPresetsWithHotkeysCount = AsrPresetsWithHotkeysCount;
             assignHotkeyCheckBoxText = Regex.Replace(assignHotkeyCheckBoxLabel.Text, "^(.*:\\s).*", "$1");
-            assignHotkeyCheckBoxLabel.Text = assignHotkeyCheckBoxText + (MaximumNumberOfASRHotkeys - asrPresetsWithHotkeysCount) + "/" + MaximumNumberOfASRHotkeys;
+            assignHotkeyCheckBoxLabel.Text = assignHotkeyCheckBoxText + (MaximumNumberOfAsrHotkeys - asrPresetsWithHotkeysCount) + "/" + MaximumNumberOfAsrHotkeys;
 
 
             var headerCellStyle = new DataGridViewCellStyle(HeaderCellStyle);
@@ -363,8 +365,8 @@ namespace MusicBeePlugin
             ignoreCheckedPresetEvent = false;
 
             autoAppliedPresetCount = 0;
-            foreach (Preset tempPreset in presetsWorkingCopy.Values)
-                presetList.Items.Add(tempPreset, autoAppliedAsrPresetGuids.Contains(tempPreset.guid));
+            foreach (Preset preset in presetsWorkingCopy.Values)
+                presetList.Items.Add(preset, autoAppliedAsrPresetGuids.ContainsKey(preset.guid));
 
             presetList.Sorted = true;
 
@@ -406,6 +408,9 @@ namespace MusicBeePlugin
             UpdateCustomScrollBars(presetList);
 
 
+            this.Enabled = true;
+
+
             button_GotFocus(AcceptButton, null); //Let's mark active button
         }
 
@@ -445,6 +450,7 @@ namespace MusicBeePlugin
             public bool customizedByUser;
             public bool removePreset;
             public Guid guid;
+            public bool changed = false; //"changed" is set to "false" initially and on saving preset, and is set to "true" on any preset modification
             public string id;
             public bool hotkeyAssigned;
             public bool applyToPlayingTrack;
@@ -697,13 +703,15 @@ namespace MusicBeePlugin
 
             public string getHotkeyDescription()
             {
-                return AsrHotkeyDescription + "⌕: " + getName() + getHotkeyPostfix();
+                return AsrPresetHotkeyDescription + "⌕: " + getName() + getHotkeyPostfix();
             }
 
             public override string ToString()
             {
+                string changedPostfix = changed ? " ⚠" : string.Empty;
+
                 return (favorite ? "♥ " : string.Empty) + GetDictValue(names, Language) + (getCustomizationsFlag() ? " " : string.Empty) + (userPreset ? " " : string.Empty)
-                    + (condition ? " " : string.Empty) + (id != string.Empty ? " " : string.Empty) + getHotkeyPostfix();
+                    + (condition ? " " : string.Empty) + (id != string.Empty ? " " : string.Empty) + getHotkeyPostfix() + changedPostfix;
             }
 
             public string getName(bool getEnglishName = false)
@@ -721,13 +729,13 @@ namespace MusicBeePlugin
                     .Replace("\"", "\'\'")
                     .Replace('*', '#').Replace('?', '#').Replace('|', '#');
 
-                if (presetSafeFileName.Length > 251 - ASRPresetExtension.Length)
-                    presetSafeFileName = presetSafeFileName.Substring(0, 250 - ASRPresetExtension.Length) + "…";
+                if (presetSafeFileName.Length > 251 - AsrPresetExtension.Length)
+                    presetSafeFileName = presetSafeFileName.Substring(0, 250 - AsrPresetExtension.Length) + "…";
 
                 return presetSafeFileName;
             }
 
-            public static Preset Load(string filename, System.Xml.Serialization.XmlSerializer presetSerializer)
+            public static Preset Load(string filename, XmlSerializer presetSerializer)
             {
                 FileStream stream = System.IO.File.Open(filename, FileMode.Open, FileAccess.Read, FileShare.None);
                 StreamReader file = new StreamReader(stream, Unicode);
@@ -805,6 +813,7 @@ namespace MusicBeePlugin
                 {
                     if (form.unsavedChanges || customized || areFineCustomizationsMade(referencePreset))
                     {
+                        changed = true;
                         form.setCheckedState(form.customizedPresetPictureBox, customized);
                         form.setPresetsChanged();
                     }
@@ -857,9 +866,9 @@ namespace MusicBeePlugin
             public string savePreset(string pathName = null)
             {
                 if (pathName == null)
-                    pathName = Path.Combine(@"\\?\" + PresetsPath, guid.ToString() + ASRPresetExtension);
+                    pathName = Path.Combine(@"\\?\" + PresetsPath, guid.ToString() + AsrPresetExtension);
 
-                System.Xml.Serialization.XmlSerializer presetSerializer = new System.Xml.Serialization.XmlSerializer(typeof(Preset));
+                XmlSerializer presetSerializer = new XmlSerializer(typeof(Preset));
 
                 FileStream stream = System.IO.File.Open(pathName, FileMode.Create, FileAccess.Write, FileShare.None);
                 StreamWriter file = new StreamWriter(stream, Unicode);
@@ -959,7 +968,7 @@ namespace MusicBeePlugin
 
             public int substituteTagId(int tagId)
             {
-                switch ((ServiceMetaData)tagId)
+                switch ((ServiceMetaData)tagId) //-V3002
                 {
                     case ServiceMetaData.ParameterTagId1:
                         tagId = parameterTagId;
@@ -1022,9 +1031,9 @@ namespace MusicBeePlugin
         {
             public string playlist;
 
-            public Playlist(string playlistParam)
+            public Playlist(string playlist)
             {
-                playlist = playlistParam;
+                this.playlist = playlist;
             }
 
             public override string ToString()
@@ -1089,7 +1098,7 @@ namespace MusicBeePlugin
                 functionName = "rg2sc";
             }
 
-            protected override string calculate(string currentFile, string parameter0, string parameter1 = null)
+            protected override string calculate(string currentFile, string parameter0, string parameter1 = null) //-V3065
             {
                 parameter0 = Regex.Replace(parameter0, @"(.*)\s.*", "$1");
 
@@ -1180,14 +1189,17 @@ namespace MusicBeePlugin
                 string[] exceptionWords;
 
                 if (parameter1 == null)
-                    parameter1 = SavedSettings.exceptionWordsASR;
+                    parameter1 = SavedSettings.exceptionWordsAsr;
 
                 exceptionWords = parameter1.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-                parameter0 = ChangeCase.ChangeWordsCase(parameter0, ChangeCase.ChangeCaseOptions.LowerCase, null, false,
-                    null, SavedSettings.wordSplittersASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries));
+                parameter0 = ChangeCase.ChangeWordsCase(parameter0, ChangeCase.ChangeCaseOptions.LowerCase);
+
                 string result = ChangeCase.ChangeWordsCase(parameter0, ChangeCase.ChangeCaseOptions.TitleCase, exceptionWords, false,
-                    SavedSettings.exceptionCharsASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries), SavedSettings.wordSplittersASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries), true, true);
+                    SavedSettings.exceptionCharsAsr.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
+                    SavedSettings.leftExceptionCharsAsr.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
+                    SavedSettings.rightExceptionCharsAsr.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
+                    SavedSettings.wordSeparatorsAsr.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries), true, true);
 
                 return result;
             }
@@ -1205,12 +1217,15 @@ namespace MusicBeePlugin
                 string[] exceptionWords;
 
                 if (parameter1 == null)
-                    parameter1 = SavedSettings.exceptionWordsASR;
+                    parameter1 = SavedSettings.exceptionWordsAsr;
 
                 exceptionWords = parameter1.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
                 string result = ChangeCase.ChangeWordsCase(parameter0, ChangeCase.ChangeCaseOptions.LowerCase, exceptionWords, false,
-                    SavedSettings.exceptionCharsASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries), SavedSettings.wordSplittersASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries));
+                    SavedSettings.exceptionCharsAsr.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
+                    SavedSettings.leftExceptionCharsAsr.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
+                    SavedSettings.rightExceptionCharsAsr.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
+                    SavedSettings.wordSeparatorsAsr.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries), true, false);
 
                 return result;
             }
@@ -1228,12 +1243,15 @@ namespace MusicBeePlugin
                 string[] exceptionWords;
 
                 if (parameter1 == null)
-                    parameter1 = SavedSettings.exceptionWordsASR;
+                    parameter1 = SavedSettings.exceptionWordsAsr;
 
                 exceptionWords = parameter1.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
                 string result = ChangeCase.ChangeWordsCase(parameter0, ChangeCase.ChangeCaseOptions.UpperCase, exceptionWords, false,
-                    SavedSettings.exceptionCharsASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries), SavedSettings.wordSplittersASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries));
+                    SavedSettings.exceptionCharsAsr.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
+                    SavedSettings.leftExceptionCharsAsr.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
+                    SavedSettings.rightExceptionCharsAsr.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
+                    SavedSettings.wordSeparatorsAsr.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries), true, false);
 
                 return result;
             }
@@ -1251,14 +1269,17 @@ namespace MusicBeePlugin
                 string[] exceptionWords;
 
                 if (parameter1 == null)
-                    parameter1 = SavedSettings.exceptionWordsASR;
+                    parameter1 = SavedSettings.exceptionWordsAsr;
 
                 exceptionWords = parameter1.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
                 parameter0 = ChangeCase.ChangeWordsCase(parameter0, ChangeCase.ChangeCaseOptions.LowerCase, null, false,
-                    null, SavedSettings.wordSplittersASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries));
+                    null, SavedSettings.wordSeparatorsAsr.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries));
                 string result = ChangeCase.ChangeWordsCase(parameter0, ChangeCase.ChangeCaseOptions.SentenceCase, exceptionWords, false,
-                    SavedSettings.exceptionCharsASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries), SavedSettings.wordSplittersASR.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries), true, false);
+                    SavedSettings.exceptionCharsAsr.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
+                    SavedSettings.leftExceptionCharsAsr.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
+                    SavedSettings.rightExceptionCharsAsr.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
+                    SavedSettings.wordSeparatorsAsr.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries), true, false);
 
                 return result;
             }
@@ -1271,7 +1292,7 @@ namespace MusicBeePlugin
                 functionName = "eval";
             }
 
-            protected override string calculate(string currentFile, string parameter0, string parameter1 = null)
+            protected override string calculate(string currentFile, string parameter0, string parameter1 = null) //-V3065
             {
                 parameter0 = parameter0.Replace("\"\"", "^^");
                 parameter0 = parameter0.Replace("\"", "&&&");
@@ -1329,7 +1350,7 @@ namespace MusicBeePlugin
                 functionName = "repunct";
             }
 
-            protected override string calculate(string currentFile, string parameter0, string parameter1 = null)
+            protected override string calculate(string currentFile, string parameter0, string parameter1 = null) //-V3065
             {
                 parameter0 = Regex.Replace(parameter0, "\u013F", "L");
                 parameter0 = Regex.Replace(parameter0, "\u0140", "l");
@@ -1425,7 +1446,7 @@ namespace MusicBeePlugin
                 }
             }
 
-            protected override string calculate(string currentFile, string parameter0, string parameter1 = null)
+            protected override string calculate(string currentFile, string parameter0, string parameter1 = null) //-V3065
             {
                 CustomText1 = Regex.Replace(CustomText1, "; ", ";");
                 string[] artists = parameter0.Replace("\u000E", "[").Replace("\u000F", "]").Split(new string[] { "\u0000" }, StringSplitOptions.RemoveEmptyEntries);
@@ -1434,7 +1455,7 @@ namespace MusicBeePlugin
 
                 for (int i = 0; i < artists.Length; i++)
                 {
-                    if (artists[i][0] == '\x02')
+                    if (artists[i][0] == '\u0002')
                     {
                         performersList.Add(artists[i]);
                         artists[i] = null;
@@ -1472,11 +1493,11 @@ namespace MusicBeePlugin
                 {
                     if (artists[i] == null)
                     {
-                        newArtists += performersList[performerNo++].Remove(0, 3) + "\x00";
+                        newArtists += performersList[performerNo++].Remove(0, 3) + "\u0000";
                     }
                     else
                     {
-                        newArtists += artists[i] + "\x00";
+                        newArtists += artists[i] + "\u0000";
                     }
                 }
 
@@ -1495,6 +1516,9 @@ namespace MusicBeePlugin
 
             protected override string calculate(string currentFile, string parameter0, string parameter1 = null)
             {
+                if (parameter1 == null)
+                    return CtlAsrSyntaxError;
+
                 string[] secondParameter = parameter1.Split('|');
 
                 for (int i = 0; i < secondParameter.Length; i++)
@@ -1503,7 +1527,7 @@ namespace MusicBeePlugin
 
                     if (pair.Length != 2)
                     {
-                        return "SYNTAX ERROR!";
+                        return CtlAsrSyntaxError;
                     }
 
                     if (pair[0].Length > 0 && pair[0][0] == '#')
@@ -1581,15 +1605,15 @@ namespace MusicBeePlugin
                 dict.Add("en", newValue);
         }
 
-        internal static void InitASR()
+        internal static void InitAsr()
         {
-            if (SavedSettings.dontShowASR)
+            if (SavedSettings.dontShowAsr)
             {
                 lock (AsrAutoAppliedPresets)
                 {
                     AsrAutoAppliedPresets.Clear();
                     IdsAsrPresets.Clear();
-                    ASRPresetsWithHotkeysCount = 0;
+                    AsrPresetsWithHotkeysCount = 0;
                     for (int i = 0; i < AsrPresetsWithHotkeys.Length; i++)
                         AsrPresetsWithHotkeys[i] = null;
                 }
@@ -1608,13 +1632,13 @@ namespace MusicBeePlugin
                 string[] presetNames;
 
                 AsrAutoAppliedPresets.Clear();
-                ASRPresetsWithHotkeysCount = 0;
+                AsrPresetsWithHotkeysCount = 0;
 
                 if (!Directory.Exists(PresetsPath))
                     Directory.CreateDirectory(PresetsPath);
 
-                presetNames = Directory.GetFiles(PresetsPath, "*" + ASRPresetExtension);
-                System.Xml.Serialization.XmlSerializer presetSerializer = new System.Xml.Serialization.XmlSerializer(typeof(Preset));
+                presetNames = Directory.GetFiles(PresetsPath, "*" + AsrPresetExtension);
+                XmlSerializer presetSerializer = new XmlSerializer(typeof(Preset));
 
                 for (int i = presetNames.Length - 1; i >= 0; i--)
                 {
@@ -1622,51 +1646,50 @@ namespace MusicBeePlugin
 
                     try
                     {
-                        Preset tempPreset = Preset.Load(presetName, presetSerializer);
+                        Preset preset = Preset.Load(presetName, presetSerializer);
 
-                        if (tempPreset.guid.ToString() != "ff8d53d9-526b-4b40-bbf0-848b6b892f70")
+                        if (preset.guid.ToString() != "ff8d53d9-526b-4b40-bbf0-848b6b892f70")
                         {
-                            if (Presets.TryGetValue(tempPreset.guid, out Preset existingPreset))
+                            if (Presets.TryGetValue(preset.guid, out Preset existingPreset))
                             {
-                                if (tempPreset.modifiedUtc >= existingPreset.modifiedUtc)
+                                if (preset.modifiedUtc >= existingPreset.modifiedUtc)
                                 {
-                                    Presets.Remove(tempPreset.guid);
-                                    if (SavedSettings.autoAppliedAsrPresetGuids.Contains(tempPreset.guid))
-                                        AsrAutoAppliedPresets.Remove(existingPreset);
-                                    IdsAsrPresets.RemoveExisting(tempPreset.id);
+                                    Presets.Remove(preset.guid);
+                                    AsrAutoAppliedPresets.RemoveExisting(existingPreset);
+                                    IdsAsrPresets.RemoveExisting(preset.id);
                                 }
                             }
 
-                            Presets.Add(tempPreset.guid, tempPreset);
+                            Presets.Add(preset.guid, preset);
 
-                            if (SavedSettings.autoAppliedAsrPresetGuids.Contains(tempPreset.guid))
-                                AsrAutoAppliedPresets.Add(tempPreset);
+                            if (SavedSettings.autoAppliedAsrPresetGuids.Contains(preset.guid))
+                                AsrAutoAppliedPresets.Add(preset);
 
-                            if (SavedSettings.asrPresetsWithHotkeysGuids.Contains(tempPreset.guid))
+                            if (SavedSettings.asrPresetsWithHotkeysGuids.Contains(preset.guid))
                             {
                                 int index;
-                                ASRPresetsWithHotkeysCount++;
+                                AsrPresetsWithHotkeysCount++;
                                 for (index = 0; index < SavedSettings.asrPresetsWithHotkeysGuids.Length; index++)
                                 {
-                                    if (SavedSettings.asrPresetsWithHotkeysGuids[index] == tempPreset.guid)
+                                    if (SavedSettings.asrPresetsWithHotkeysGuids[index] == preset.guid)
                                         break;
                                 }
-                                AsrPresetsWithHotkeys[index] = tempPreset;
-                                tempPreset.hotkeyAssigned = true;
+                                AsrPresetsWithHotkeys[index] = preset;
+                                preset.hotkeyAssigned = true;
                             }
                             else
                             {
-                                tempPreset.hotkeyAssigned = false;
+                                preset.hotkeyAssigned = false;
                             }
 
-                            if (!string.IsNullOrEmpty(tempPreset.id))
+                            if (!string.IsNullOrEmpty(preset.id))
                             {
-                                IdsAsrPresets.Add(tempPreset.id, tempPreset);
+                                IdsAsrPresets.Add(preset.id, preset);
                             }
                         }
                         else
                         {
-                            MSR = tempPreset;
+                            MSR = preset;
                         }
                     }
                     catch { };
@@ -1674,122 +1697,122 @@ namespace MusicBeePlugin
             }
         }
 
-        internal static void RegisterASRPresetsHotkeysAndMenuItems(Plugin tagToolsPlugin)
+        internal static void RegisterAsrPresetsHotkeysAndMenuItems(Plugin plugin)
         {
-            ASRPresetsMenuItem?.DropDown.Items.Clear();
+            AsrPresetsMenuItem?.DropDown.Items.Clear();
 
-            ASRPresetsContextMenuItem?.DropDown.Items.Clear();
+            AsrPresetsContextMenuItem?.DropDown.Items.Clear();
 
-            if (SavedSettings.dontShowASR)
+            if (SavedSettings.dontShowAsr)
                 return;
 
             for (int i = 0; i < AsrPresetsWithHotkeys.Length; i++)
             {
-                Preset tempPreset = AsrPresetsWithHotkeys[i];
+                Preset preset = AsrPresetsWithHotkeys[i];
 
-                if (tempPreset != null)
+                if (preset != null)
                 {
                     switch (i)
                     {
                         case 0:
-                            MbApiInterface.MB_RegisterCommand(tempPreset.getHotkeyDescription(), tagToolsPlugin.ASRPreset1EventHandler);
-                            ASRPresetsMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset1EventHandler);
-                            ASRPresetsContextMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset1EventHandler);
+                            MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset1EventHandler);
+                            AsrPresetsMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset1EventHandler);
+                            AsrPresetsContextMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset1EventHandler);
                             break;
                         case 1:
-                            MbApiInterface.MB_RegisterCommand(tempPreset.getHotkeyDescription(), tagToolsPlugin.ASRPreset2EventHandler);
-                            ASRPresetsMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset2EventHandler);
-                            ASRPresetsContextMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset2EventHandler);
+                            MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset2EventHandler);
+                            AsrPresetsMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset2EventHandler);
+                            AsrPresetsContextMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset2EventHandler);
                             break;
                         case 2:
-                            MbApiInterface.MB_RegisterCommand(tempPreset.getHotkeyDescription(), tagToolsPlugin.ASRPreset3EventHandler);
-                            ASRPresetsMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset3EventHandler);
-                            ASRPresetsContextMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset3EventHandler);
+                            MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset3EventHandler);
+                            AsrPresetsMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset3EventHandler);
+                            AsrPresetsContextMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset3EventHandler);
                             break;
                         case 3:
-                            MbApiInterface.MB_RegisterCommand(tempPreset.getHotkeyDescription(), tagToolsPlugin.ASRPreset4EventHandler);
-                            ASRPresetsMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset4EventHandler);
-                            ASRPresetsContextMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset4EventHandler);
+                            MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset4EventHandler);
+                            AsrPresetsMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset4EventHandler);
+                            AsrPresetsContextMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset4EventHandler);
                             break;
                         case 4:
-                            MbApiInterface.MB_RegisterCommand(tempPreset.getHotkeyDescription(), tagToolsPlugin.ASRPreset5EventHandler);
-                            ASRPresetsMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset5EventHandler);
-                            ASRPresetsContextMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset5EventHandler);
+                            MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset5EventHandler);
+                            AsrPresetsMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset5EventHandler);
+                            AsrPresetsContextMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset5EventHandler);
                             break;
                         case 5:
-                            MbApiInterface.MB_RegisterCommand(tempPreset.getHotkeyDescription(), tagToolsPlugin.ASRPreset6EventHandler);
-                            ASRPresetsMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset6EventHandler);
-                            ASRPresetsContextMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset6EventHandler);
+                            MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset6EventHandler);
+                            AsrPresetsMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset6EventHandler);
+                            AsrPresetsContextMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset6EventHandler);
                             break;
                         case 6:
-                            MbApiInterface.MB_RegisterCommand(tempPreset.getHotkeyDescription(), tagToolsPlugin.ASRPreset7EventHandler);
-                            ASRPresetsMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset7EventHandler);
-                            ASRPresetsContextMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset7EventHandler);
+                            MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset7EventHandler);
+                            AsrPresetsMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset7EventHandler);
+                            AsrPresetsContextMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset7EventHandler);
                             break;
                         case 7:
-                            MbApiInterface.MB_RegisterCommand(tempPreset.getHotkeyDescription(), tagToolsPlugin.ASRPreset8EventHandler);
-                            ASRPresetsMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset8EventHandler);
-                            ASRPresetsContextMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset8EventHandler);
+                            MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset8EventHandler);
+                            AsrPresetsMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset8EventHandler);
+                            AsrPresetsContextMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset8EventHandler);
                             break;
                         case 8:
-                            MbApiInterface.MB_RegisterCommand(tempPreset.getHotkeyDescription(), tagToolsPlugin.ASRPreset9EventHandler);
-                            ASRPresetsMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset9EventHandler);
-                            ASRPresetsContextMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset9EventHandler);
+                            MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset9EventHandler);
+                            AsrPresetsMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset9EventHandler);
+                            AsrPresetsContextMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset9EventHandler);
                             break;
                         case 9:
-                            MbApiInterface.MB_RegisterCommand(tempPreset.getHotkeyDescription(), tagToolsPlugin.ASRPreset10EventHandler);
-                            ASRPresetsMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset10EventHandler);
-                            ASRPresetsContextMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset10EventHandler);
+                            MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset10EventHandler);
+                            AsrPresetsMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset10EventHandler);
+                            AsrPresetsContextMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset10EventHandler);
                             break;
                         case 10:
-                            MbApiInterface.MB_RegisterCommand(tempPreset.getHotkeyDescription(), tagToolsPlugin.ASRPreset11EventHandler);
-                            ASRPresetsMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset11EventHandler);
-                            ASRPresetsContextMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset11EventHandler);
+                            MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset11EventHandler);
+                            AsrPresetsMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset11EventHandler);
+                            AsrPresetsContextMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset11EventHandler);
                             break;
                         case 11:
-                            MbApiInterface.MB_RegisterCommand(tempPreset.getHotkeyDescription(), tagToolsPlugin.ASRPreset12EventHandler);
-                            ASRPresetsMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset12EventHandler);
-                            ASRPresetsContextMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset12EventHandler);
+                            MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset12EventHandler);
+                            AsrPresetsMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset12EventHandler);
+                            AsrPresetsContextMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset12EventHandler);
                             break;
                         case 12:
-                            MbApiInterface.MB_RegisterCommand(tempPreset.getHotkeyDescription(), tagToolsPlugin.ASRPreset13EventHandler);
-                            ASRPresetsMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset13EventHandler);
-                            ASRPresetsContextMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset13EventHandler);
+                            MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset13EventHandler);
+                            AsrPresetsMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset13EventHandler);
+                            AsrPresetsContextMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset13EventHandler);
                             break;
                         case 13:
-                            MbApiInterface.MB_RegisterCommand(tempPreset.getHotkeyDescription(), tagToolsPlugin.ASRPreset14EventHandler);
-                            ASRPresetsMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset14EventHandler);
-                            ASRPresetsContextMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset14EventHandler);
+                            MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset14EventHandler);
+                            AsrPresetsMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset14EventHandler);
+                            AsrPresetsContextMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset14EventHandler);
                             break;
                         case 14:
-                            MbApiInterface.MB_RegisterCommand(tempPreset.getHotkeyDescription(), tagToolsPlugin.ASRPreset15EventHandler);
-                            ASRPresetsMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset15EventHandler);
-                            ASRPresetsContextMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset15EventHandler);
+                            MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset15EventHandler);
+                            AsrPresetsMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset15EventHandler);
+                            AsrPresetsContextMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset15EventHandler);
                             break;
                         case 15:
-                            MbApiInterface.MB_RegisterCommand(tempPreset.getHotkeyDescription(), tagToolsPlugin.ASRPreset16EventHandler);
-                            ASRPresetsMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset16EventHandler);
-                            ASRPresetsContextMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset16EventHandler);
+                            MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset16EventHandler);
+                            AsrPresetsMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset16EventHandler);
+                            AsrPresetsContextMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset16EventHandler);
                             break;
                         case 16:
-                            MbApiInterface.MB_RegisterCommand(tempPreset.getHotkeyDescription(), tagToolsPlugin.ASRPreset17EventHandler);
-                            ASRPresetsMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset17EventHandler);
-                            ASRPresetsContextMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset17EventHandler);
+                            MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset17EventHandler);
+                            AsrPresetsMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset17EventHandler);
+                            AsrPresetsContextMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset17EventHandler);
                             break;
                         case 17:
-                            MbApiInterface.MB_RegisterCommand(tempPreset.getHotkeyDescription(), tagToolsPlugin.ASRPreset18EventHandler);
-                            ASRPresetsMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset18EventHandler);
-                            ASRPresetsContextMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset18EventHandler);
+                            MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset18EventHandler);
+                            AsrPresetsMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset18EventHandler);
+                            AsrPresetsContextMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset18EventHandler);
                             break;
                         case 18:
-                            MbApiInterface.MB_RegisterCommand(tempPreset.getHotkeyDescription(), tagToolsPlugin.ASRPreset19EventHandler);
-                            ASRPresetsMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset19EventHandler);
-                            ASRPresetsContextMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset19EventHandler);
+                            MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset19EventHandler);
+                            AsrPresetsMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset19EventHandler);
+                            AsrPresetsContextMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset19EventHandler);
                             break;
                         case 19:
-                            MbApiInterface.MB_RegisterCommand(tempPreset.getHotkeyDescription(), tagToolsPlugin.ASRPreset20EventHandler);
-                            ASRPresetsMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset20EventHandler);
-                            ASRPresetsContextMenuItem?.DropDown.Items.Add(tempPreset.getName(), null, tagToolsPlugin.ASRPreset20EventHandler);
+                            MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset20EventHandler);
+                            AsrPresetsMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset20EventHandler);
+                            AsrPresetsContextMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset20EventHandler);
                             break;
                         default:
                             throw new Exception("Incorrect ASR hotkey slot: " + i + "!");
@@ -1831,10 +1854,10 @@ namespace MusicBeePlugin
             string sourceTagValue = GetTag(sourceFileUrl, plugin, (int)tagId);
             SetTag((int)tagId, value);
 
-            if (!updateOnlyChangedTags || sourceTagValue != value)
-                return Plugin.SetFileTag(sourceFileUrl, tagId, value, false);
-            else
+            if (updateOnlyChangedTags && sourceTagValue == value)
                 return true;
+            else
+                return Plugin.SetFileTag(sourceFileUrl, tagId, value, false);
         }
 
         private void previewTable_AddRowToTable(string[] row, object changeTypes)
@@ -1936,7 +1959,7 @@ namespace MusicBeePlugin
             {
                 //MessageBox.Show(MusicBeePlugin.MbForm, ex.Message);
 
-                return "SYNTAX ERROR!";
+                return CtlAsrSyntaxError;
             }
 
             return value;
@@ -1962,13 +1985,16 @@ namespace MusicBeePlugin
                     }
                 }
 
+                if (position == -1)
+                    return string.Empty;
+
                 return asrCommand.fileTags[position];
             }
 
 
-            SetTags.TryGetValue(tagId, out string tempTag);
+            SetTags.TryGetValue(tagId, out string cachedTagValue);
 
-            if (tempTag == null)
+            if (cachedTagValue == null)
             {
                 if (tagId < PropMetaDataThreshold)
                     return GetFileTag(currentFile, (MetaDataType)tagId);
@@ -1977,7 +2003,7 @@ namespace MusicBeePlugin
             }
             else
             {
-                return tempTag;
+                return cachedTagValue;
             }
         }
 
@@ -2064,76 +2090,76 @@ namespace MusicBeePlugin
             SetTag(replacedTagId, replacedTagValue);
         }
 
-        internal static SearchedAndReplacedTagsStruct GetReplacedTags(string currentFile, ref Preset presetParam, AdvancedSearchAndReplace asrCommand = null, bool copyPresetParam = true)
+        internal static SearchedAndReplacedTagsStruct GetReplacedTags(string currentFile, ref Preset preset, AdvancedSearchAndReplace asrCommand = null, bool copyPreset = true)
         {
-            if (copyPresetParam)
-                presetParam = new Preset(presetParam);
+            if (copyPreset)
+                preset = new Preset(preset);
 
             var searchedAndReplacedTags = new SearchedAndReplacedTagsStruct();
             SetTags.Clear();
 
-            (int count, bool[] mask) = presetParam.getAllTagsReplaceTagIds();
+            (int count, _) = preset.getAllTagsReplaceTagIds();
             string processTags = null;
             string preserveTags = null;
             if (count > 0)
             {
-                if (presetParam.processTagsMode)
-                    processTags = presetParam.processTags;
+                if (preset.processTagsMode)
+                    processTags = preset.processTags;
                 else
-                    preserveTags = presetParam.preserveTags;
+                    preserveTags = preset.preserveTags;
             }
 
-            presetParam.searchedTagId = presetParam.substituteTagId(presetParam.searchedTagId);
-            presetParam.replacedTagId = presetParam.substituteTagId(presetParam.replacedTagId);
+            preset.searchedTagId = preset.substituteTagId(preset.searchedTagId);
+            preset.replacedTagId = preset.substituteTagId(preset.replacedTagId);
 
-            SetReplacedTag(currentFile, asrCommand, presetParam.searchedTagId, presetParam.replacedTagId,
-                presetParam.replaceVariable(presetParam.searchedPattern, true), presetParam.replaceVariable(presetParam.replacedPattern, false),
-                presetParam.preserveValues, preserveTags, processTags,
-                presetParam.ignoreCase, presetParam.append, presetParam.limitation1,
+            SetReplacedTag(currentFile, asrCommand, preset.searchedTagId, preset.replacedTagId,
+                preset.replaceVariable(preset.searchedPattern, true), preset.replaceVariable(preset.replacedPattern, false),
+                preset.preserveValues, preserveTags, processTags,
+                preset.ignoreCase, preset.append, preset.limitation1,
                 out searchedAndReplacedTags.searchedTagValue, out searchedAndReplacedTags.replacedTagValue, out searchedAndReplacedTags.originalReplacedTagValue,
                 out searchedAndReplacedTags.replacedTagValuePreserved, out searchedAndReplacedTags.replacedTagPreserved);
 
 
-            presetParam.searchedTag2Id = presetParam.substituteTagId(presetParam.searchedTag2Id);
-            presetParam.replacedTag2Id = presetParam.substituteTagId(presetParam.replacedTag2Id);
+            preset.searchedTag2Id = preset.substituteTagId(preset.searchedTag2Id);
+            preset.replacedTag2Id = preset.substituteTagId(preset.replacedTag2Id);
 
-            SetReplacedTag(currentFile, asrCommand, presetParam.searchedTag2Id, presetParam.replacedTag2Id,
-                presetParam.replaceVariable(presetParam.searchedPattern2, true), presetParam.replaceVariable(presetParam.replacedPattern2, false),
-                presetParam.preserveValues, preserveTags, processTags,
-                presetParam.ignoreCase, presetParam.append2, presetParam.limitation2,
+            SetReplacedTag(currentFile, asrCommand, preset.searchedTag2Id, preset.replacedTag2Id,
+                preset.replaceVariable(preset.searchedPattern2, true), preset.replaceVariable(preset.replacedPattern2, false),
+                preset.preserveValues, preserveTags, processTags,
+                preset.ignoreCase, preset.append2, preset.limitation2,
                 out searchedAndReplacedTags.searchedTag2Value, out searchedAndReplacedTags.replacedTag2Value, out searchedAndReplacedTags.originalReplacedTag2Value,
                 out searchedAndReplacedTags.replacedTag2ValuePreserved, out searchedAndReplacedTags.replacedTag2Preserved);
 
 
-            presetParam.searchedTag3Id = presetParam.substituteTagId(presetParam.searchedTag3Id);
-            presetParam.replacedTag3Id = presetParam.substituteTagId(presetParam.replacedTag3Id);
+            preset.searchedTag3Id = preset.substituteTagId(preset.searchedTag3Id);
+            preset.replacedTag3Id = preset.substituteTagId(preset.replacedTag3Id);
 
-            SetReplacedTag(currentFile, asrCommand, presetParam.searchedTag3Id, presetParam.replacedTag3Id,
-                presetParam.replaceVariable(presetParam.searchedPattern3, true), presetParam.replaceVariable(presetParam.replacedPattern3, false),
-                presetParam.preserveValues, preserveTags, processTags,
-                presetParam.ignoreCase, presetParam.append3, presetParam.limitation3,
+            SetReplacedTag(currentFile, asrCommand, preset.searchedTag3Id, preset.replacedTag3Id,
+                preset.replaceVariable(preset.searchedPattern3, true), preset.replaceVariable(preset.replacedPattern3, false),
+                preset.preserveValues, preserveTags, processTags,
+                preset.ignoreCase, preset.append3, preset.limitation3,
                 out searchedAndReplacedTags.searchedTag3Value, out searchedAndReplacedTags.replacedTag3Value, out searchedAndReplacedTags.originalReplacedTag3Value,
                 out searchedAndReplacedTags.replacedTag3ValuePreserved, out searchedAndReplacedTags.replacedTag3Preserved);
 
 
-            presetParam.searchedTag4Id = presetParam.substituteTagId(presetParam.searchedTag4Id);
-            presetParam.replacedTag4Id = presetParam.substituteTagId(presetParam.replacedTag4Id);
+            preset.searchedTag4Id = preset.substituteTagId(preset.searchedTag4Id);
+            preset.replacedTag4Id = preset.substituteTagId(preset.replacedTag4Id);
 
-            SetReplacedTag(currentFile, asrCommand, presetParam.searchedTag4Id, presetParam.replacedTag4Id,
-                presetParam.replaceVariable(presetParam.searchedPattern4, true), presetParam.replaceVariable(presetParam.replacedPattern4, false),
-                presetParam.preserveValues, preserveTags, processTags,
-                presetParam.ignoreCase, presetParam.append4, presetParam.limitation4,
+            SetReplacedTag(currentFile, asrCommand, preset.searchedTag4Id, preset.replacedTag4Id,
+                preset.replaceVariable(preset.searchedPattern4, true), preset.replaceVariable(preset.replacedPattern4, false),
+                preset.preserveValues, preserveTags, processTags,
+                preset.ignoreCase, preset.append4, preset.limitation4,
                 out searchedAndReplacedTags.searchedTag4Value, out searchedAndReplacedTags.replacedTag4Value, out searchedAndReplacedTags.originalReplacedTag4Value,
                 out searchedAndReplacedTags.replacedTag4ValuePreserved, out searchedAndReplacedTags.replacedTag4Preserved);
 
 
-            presetParam.searchedTag5Id = presetParam.substituteTagId(presetParam.searchedTag5Id);
-            presetParam.replacedTag5Id = presetParam.substituteTagId(presetParam.replacedTag5Id);
+            preset.searchedTag5Id = preset.substituteTagId(preset.searchedTag5Id);
+            preset.replacedTag5Id = preset.substituteTagId(preset.replacedTag5Id);
 
-            SetReplacedTag(currentFile, asrCommand, presetParam.searchedTag5Id, presetParam.replacedTag5Id,
-                presetParam.replaceVariable(presetParam.searchedPattern5, true), presetParam.replaceVariable(presetParam.replacedPattern5, false),
-                presetParam.preserveValues, preserveTags, processTags,
-                presetParam.ignoreCase, presetParam.append5, presetParam.limitation5,
+            SetReplacedTag(currentFile, asrCommand, preset.searchedTag5Id, preset.replacedTag5Id,
+                preset.replaceVariable(preset.searchedPattern5, true), preset.replaceVariable(preset.replacedPattern5, false),
+                preset.preserveValues, preserveTags, processTags,
+                preset.ignoreCase, preset.append5, preset.limitation5,
                 out searchedAndReplacedTags.searchedTag5Value, out searchedAndReplacedTags.replacedTag5Value, out searchedAndReplacedTags.originalReplacedTag5Value,
                 out searchedAndReplacedTags.replacedTag5ValuePreserved, out searchedAndReplacedTags.replacedTag5Preserved);
 
@@ -2141,38 +2167,38 @@ namespace MusicBeePlugin
             return searchedAndReplacedTags;
         }
 
-        internal static void SaveReplacedTags(string currentFile, Preset presetParam, SearchedAndReplacedTagsStruct searchedAndReplacedTags, AdvancedSearchAndReplace asrCommand = null)
+        internal static void SaveReplacedTags(string currentFile, Preset preset, SearchedAndReplacedTagsStruct searchedAndReplacedTags, AdvancedSearchAndReplace asrCommand = null)
         {
-            if (searchedAndReplacedTags.replacedTagValue == "SYNTAX ERROR!" || searchedAndReplacedTags.replacedTag2Value == "SYNTAX ERROR!" ||
-                searchedAndReplacedTags.replacedTag3Value == "SYNTAX ERROR!" || searchedAndReplacedTags.replacedTag4Value == "SYNTAX ERROR!" ||
-                searchedAndReplacedTags.replacedTag5Value == "SYNTAX ERROR!")
+            if (searchedAndReplacedTags.replacedTagValue == CtlAsrSyntaxError || searchedAndReplacedTags.replacedTag2Value == CtlAsrSyntaxError ||
+                searchedAndReplacedTags.replacedTag3Value == CtlAsrSyntaxError || searchedAndReplacedTags.replacedTag4Value == CtlAsrSyntaxError ||
+                searchedAndReplacedTags.replacedTag5Value == CtlAsrSyntaxError)
                 return;
 
             SetTags.Clear();
 
-            if (presetParam.searchedPattern != string.Empty)
+            if (preset.searchedPattern != string.Empty)
             {
-                SetFileTag(currentFile, (MetaDataType)presetParam.substituteTagId(presetParam.replacedTagId),
+                SetFileTag(currentFile, (MetaDataType)preset.substituteTagId(preset.replacedTagId),
                     searchedAndReplacedTags.replacedTagValue, true, asrCommand);
 
-                if (presetParam.searchedPattern2 != string.Empty)
+                if (preset.searchedPattern2 != string.Empty)
                 {
-                    SetFileTag(currentFile, (MetaDataType)presetParam.substituteTagId(presetParam.replacedTag2Id),
+                    SetFileTag(currentFile, (MetaDataType)preset.substituteTagId(preset.replacedTag2Id),
                         searchedAndReplacedTags.replacedTag2Value, true, asrCommand);
 
-                    if (presetParam.searchedPattern3 != string.Empty)
+                    if (preset.searchedPattern3 != string.Empty)
                     {
-                        SetFileTag(currentFile, (MetaDataType)presetParam.substituteTagId(presetParam.replacedTag3Id),
+                        SetFileTag(currentFile, (MetaDataType)preset.substituteTagId(preset.replacedTag3Id),
                             searchedAndReplacedTags.replacedTag3Value, true, asrCommand);
 
-                        if (presetParam.searchedPattern4 != string.Empty)
+                        if (preset.searchedPattern4 != string.Empty)
                         {
-                            SetFileTag(currentFile, (MetaDataType)presetParam.substituteTagId(presetParam.replacedTag4Id),
+                            SetFileTag(currentFile, (MetaDataType)preset.substituteTagId(preset.replacedTag4Id),
                                 searchedAndReplacedTags.replacedTag4Value, true, asrCommand);
 
-                            if (presetParam.searchedPattern5 != string.Empty)
+                            if (preset.searchedPattern5 != string.Empty)
                             {
-                                SetFileTag(currentFile, (MetaDataType)presetParam.substituteTagId(presetParam.replacedTag5Id),
+                                SetFileTag(currentFile, (MetaDataType)preset.substituteTagId(preset.replacedTag5Id),
                                     searchedAndReplacedTags.replacedTag5Value, true, asrCommand);
                             }
                         }
@@ -2184,40 +2210,40 @@ namespace MusicBeePlugin
             CommitTagsToFile(currentFile, true, true);
         }
 
-        internal static void ReplaceTags(string currentFile, Preset presetParam)
+        internal static void ReplaceTags(string currentFile, Preset preset)
         {
             lock (Presets)
             {
-                var searchedAndReplacedTags = GetReplacedTags(currentFile, ref presetParam);
-                SaveReplacedTags(currentFile, presetParam, searchedAndReplacedTags);
+                var searchedAndReplacedTags = GetReplacedTags(currentFile, ref preset);
+                SaveReplacedTags(currentFile, preset, searchedAndReplacedTags);
             }
         }
 
         internal static void AsrAutoApplyPresets(object currentFileObj, object tagToolsPluginObj)
         {
-            if (!SavedSettings.allowAsrLrPresetAutoexecution)
+            if (!SavedSettings.allowAsrLrPresetAutoExecution)
                 return;
             else if (AsrAutoAppliedPresets.Count == 0)
                 return;
 
 
             string currentFile = currentFileObj as string;
-            Plugin tagToolsPluginParam = tagToolsPluginObj as Plugin;
+            Plugin plugin = tagToolsPluginObj as Plugin;
 
             SortedDictionary<Guid, bool> appliedPresets = new SortedDictionary<Guid, bool>();
 
             lock (AsrAutoAppliedPresets)
             {
-                foreach (Preset tempPreset in AsrAutoAppliedPresets)
+                foreach (Preset preset in AsrAutoAppliedPresets)
                 {
 
-                    if (tempPreset.allTagsReplaceIdsCount > 0)
+                    if (preset.allTagsReplaceIdsCount > 0)
                         SetStatusbarText(MsgAsrPresetsUsingAllTagsPseudoTagNameCannotBeAutoApplied
-                            .Replace("%%PRESETNAME%%!", tempPreset.getName()).Replace("%%AllTagsPseudoTagName%%", AllTagsPseudoTagName), true);
+                            .Replace("%%PRESETNAME%%!", preset.getName()).Replace("%%AllTagsPseudoTagName%%", AllTagsPseudoTagName), true);
 
                     bool conditionSatisfied = true;
 
-                    if (tempPreset.condition)
+                    if (preset.condition)
                     {
                         conditionSatisfied = false;
 
@@ -2226,7 +2252,7 @@ namespace MusicBeePlugin
 
                         while (playlist != null)
                         {
-                            if (playlist == tempPreset.playlist)
+                            if (playlist == preset.playlist)
                             {
                                 conditionSatisfied = MbApiInterface.Playlist_IsInList(playlist, currentFile);
                                 break;
@@ -2238,8 +2264,8 @@ namespace MusicBeePlugin
 
                     if (conditionSatisfied)
                     {
-                        ReplaceTags(currentFile, tempPreset);
-                        appliedPresets.AddReplace(tempPreset.guid, false);
+                        ReplaceTags(currentFile, preset); //-V3156
+                        appliedPresets.AddSkip(preset.guid);
                     }
                 }
 
@@ -2252,11 +2278,11 @@ namespace MusicBeePlugin
             }
         }
 
-        internal static string GetLastReplacedTag(string currentFile, Preset presetParam)
+        internal static string GetLastReplacedTag(string currentFile, Preset preset)
         {
             bool conditionSatisfied = true;
 
-            if (presetParam.condition)
+            if (preset.condition)
             {
                 conditionSatisfied = false;
 
@@ -2265,7 +2291,7 @@ namespace MusicBeePlugin
 
                 while (playlist != null)
                 {
-                    if (playlist == presetParam.playlist)
+                    if (playlist == preset.playlist)
                     {
                         conditionSatisfied = MbApiInterface.Playlist_IsInList(playlist, currentFile);
                         break;
@@ -2277,7 +2303,7 @@ namespace MusicBeePlugin
 
             if (conditionSatisfied)
             {
-                GetReplacedTags(currentFile, ref presetParam);
+                GetReplacedTags(currentFile, ref preset);
                 return LastSetTagValue;
             }
 
@@ -2286,19 +2312,19 @@ namespace MusicBeePlugin
 
         internal static void ApplyPreset(int presetIndex)
         {
-            Preset tempPreset = AsrPresetsWithHotkeys[presetIndex - 1];
+            Preset preset = AsrPresetsWithHotkeys[presetIndex - 1];
 
-            if (tempPreset == null)
+            if (preset == null)
                 return;
 
-            if (tempPreset.allTagsReplaceIdsCount > 0)
+            if (preset.allTagsReplaceIdsCount > 0)
                 SetStatusbarText(MsgAsrPresetsUsingAllTagsPseudoTagNameCannotBeAutoApplied
-                    .Replace("%%PRESETNAME%%!", tempPreset.getName()).Replace("%%AllTagsPseudoTagName%%", AllTagsPseudoTagName), true);
+                    .Replace("%%PRESETNAME%%!", preset.getName()).Replace("%%AllTagsPseudoTagName%%", AllTagsPseudoTagName), true);
 
 
             bool conditionSatisfied = true;
 
-            if (!tempPreset.applyToPlayingTrack)
+            if (!preset.applyToPlayingTrack)
             {
                 if (MbApiInterface.Library_QueryFilesEx("domain=SelectedFiles", out string[] files))
                 {
@@ -2312,7 +2338,7 @@ namespace MusicBeePlugin
                     {
                         string currentFile = files[i];
 
-                        if (tempPreset.condition)
+                        if (preset.condition)
                         {
                             conditionSatisfied = false;
 
@@ -2321,7 +2347,7 @@ namespace MusicBeePlugin
 
                             while (playlist != null)
                             {
-                                if (playlist == tempPreset.playlist)
+                                if (playlist == preset.playlist)
                                 {
                                     conditionSatisfied = MbApiInterface.Playlist_IsInList(playlist, currentFile);
                                     break;
@@ -2333,8 +2359,8 @@ namespace MusicBeePlugin
 
                         if (conditionSatisfied)
                         {
-                            ReplaceTags(currentFile, tempPreset);
-                            SetStatusbarText(SbAsrPresetIsApplied.Replace("%%PRESETNAME%%", tempPreset.getName()), true);
+                            ReplaceTags(currentFile, preset);
+                            SetStatusbarText(SbAsrPresetIsApplied.Replace("%%PRESETNAME%%", preset.getName()), true);
                         }
                     }
                 }
@@ -2345,7 +2371,7 @@ namespace MusicBeePlugin
 
                 if (!string.IsNullOrEmpty(currentFile))
                 {
-                    if (tempPreset.condition)
+                    if (preset.condition)
                     {
                         conditionSatisfied = false;
 
@@ -2354,7 +2380,7 @@ namespace MusicBeePlugin
 
                         while (playlist != null)
                         {
-                            if (playlist == tempPreset.playlist)
+                            if (playlist == preset.playlist)
                             {
                                 conditionSatisfied = MbApiInterface.Playlist_IsInList(playlist, currentFile);
                                 break;
@@ -2366,8 +2392,8 @@ namespace MusicBeePlugin
 
                     if (conditionSatisfied)
                     {
-                        ReplaceTags(currentFile, tempPreset);
-                        SetStatusbarText(SbAsrPresetIsApplied.Replace("%%PRESETNAME%%", tempPreset.getName()), true);
+                        ReplaceTags(currentFile, preset);
+                        SetStatusbarText(SbAsrPresetIsApplied.Replace("%%PRESETNAME%%", preset.getName()), true);
                     }
                 }
             }
@@ -2477,31 +2503,31 @@ namespace MusicBeePlugin
             internal int parameterTag6Id;
         }
 
-        private Dictionary<TagIdCombination, bool> generateParameterTagIdCombinationsForAllTagsPseudoTags(List<int> allWritableTagIds, Preset presetParam)
+        private Dictionary<TagIdCombination, bool> generateParameterTagIdCombinationsForAllTagsPseudoTags(List<int> allWritableTagIds, Preset preset)
         {
             var tagIdCombinations = new Dictionary<TagIdCombination, bool>();
 
-            if (presetParam.parameterTagId == (int)AllTagsPseudoTagId)
+            if (preset.parameterTagId == (int)AllTagsPseudoTagId)
             {
                 foreach (int tagId1 in allWritableTagIds)
                 {
-                    if (presetParam.parameterTag2Id == (int)AllTagsPseudoTagId)
+                    if (preset.parameterTag2Id == (int)AllTagsPseudoTagId)
                     {
                         foreach (int tagId2 in allWritableTagIds)
                         {
-                            if (presetParam.parameterTag3Id == (int)AllTagsPseudoTagId)
+                            if (preset.parameterTag3Id == (int)AllTagsPseudoTagId)
                             {
                                 foreach (int tagId3 in allWritableTagIds)
                                 {
-                                    if (presetParam.parameterTag4Id == (int)AllTagsPseudoTagId)
+                                    if (preset.parameterTag4Id == (int)AllTagsPseudoTagId)
                                     {
                                         foreach (int tagId4 in allWritableTagIds)
                                         {
-                                            if (presetParam.parameterTag5Id == (int)AllTagsPseudoTagId)
+                                            if (preset.parameterTag5Id == (int)AllTagsPseudoTagId)
                                             {
                                                 foreach (int tagId5 in allWritableTagIds)
                                                 {
-                                                    if (presetParam.parameterTag6Id == (int)AllTagsPseudoTagId)
+                                                    if (preset.parameterTag6Id == (int)AllTagsPseudoTagId)
                                                     {
                                                         foreach (int tagId6 in allWritableTagIds)
                                                         {
@@ -2524,7 +2550,7 @@ namespace MusicBeePlugin
                                                         tagCombination.parameterTag3Id = tagId3;
                                                         tagCombination.parameterTag4Id = tagId4;
                                                         tagCombination.parameterTag5Id = tagId5;
-                                                        tagCombination.parameterTag6Id = presetParam.parameterTag6Id;
+                                                        tagCombination.parameterTag6Id = preset.parameterTag6Id;
 
                                                         tagIdCombinations.Add(tagCombination, false);
                                                     }
@@ -2537,8 +2563,8 @@ namespace MusicBeePlugin
                                                 tagCombination.parameterTag2Id = tagId2;
                                                 tagCombination.parameterTag3Id = tagId3;
                                                 tagCombination.parameterTag4Id = tagId4;
-                                                tagCombination.parameterTag5Id = presetParam.parameterTag5Id;
-                                                tagCombination.parameterTag6Id = presetParam.parameterTag6Id;
+                                                tagCombination.parameterTag5Id = preset.parameterTag5Id;
+                                                tagCombination.parameterTag6Id = preset.parameterTag6Id;
 
                                                 tagIdCombinations.Add(tagCombination, false);
                                             }
@@ -2550,9 +2576,9 @@ namespace MusicBeePlugin
                                         tagCombination.parameterTagId = tagId1;
                                         tagCombination.parameterTag2Id = tagId2;
                                         tagCombination.parameterTag3Id = tagId3;
-                                        tagCombination.parameterTag4Id = presetParam.parameterTag4Id;
-                                        tagCombination.parameterTag5Id = presetParam.parameterTag5Id;
-                                        tagCombination.parameterTag6Id = presetParam.parameterTag6Id;
+                                        tagCombination.parameterTag4Id = preset.parameterTag4Id;
+                                        tagCombination.parameterTag5Id = preset.parameterTag5Id;
+                                        tagCombination.parameterTag6Id = preset.parameterTag6Id;
 
                                         tagIdCombinations.Add(tagCombination, false);
                                     }
@@ -2563,10 +2589,10 @@ namespace MusicBeePlugin
                                 TagIdCombination tagCombination;
                                 tagCombination.parameterTagId = tagId1;
                                 tagCombination.parameterTag2Id = tagId2;
-                                tagCombination.parameterTag3Id = presetParam.parameterTag3Id;
-                                tagCombination.parameterTag4Id = presetParam.parameterTag4Id;
-                                tagCombination.parameterTag5Id = presetParam.parameterTag5Id;
-                                tagCombination.parameterTag6Id = presetParam.parameterTag6Id;
+                                tagCombination.parameterTag3Id = preset.parameterTag3Id;
+                                tagCombination.parameterTag4Id = preset.parameterTag4Id;
+                                tagCombination.parameterTag5Id = preset.parameterTag5Id;
+                                tagCombination.parameterTag6Id = preset.parameterTag6Id;
 
                                 tagIdCombinations.Add(tagCombination, false);
                             }
@@ -2576,11 +2602,11 @@ namespace MusicBeePlugin
                     {
                         TagIdCombination tagCombination;
                         tagCombination.parameterTagId = tagId1;
-                        tagCombination.parameterTag2Id = presetParam.parameterTag2Id;
-                        tagCombination.parameterTag3Id = presetParam.parameterTag3Id;
-                        tagCombination.parameterTag4Id = presetParam.parameterTag4Id;
-                        tagCombination.parameterTag5Id = presetParam.parameterTag5Id;
-                        tagCombination.parameterTag6Id = presetParam.parameterTag6Id;
+                        tagCombination.parameterTag2Id = preset.parameterTag2Id;
+                        tagCombination.parameterTag3Id = preset.parameterTag3Id;
+                        tagCombination.parameterTag4Id = preset.parameterTag4Id;
+                        tagCombination.parameterTag5Id = preset.parameterTag5Id;
+                        tagCombination.parameterTag6Id = preset.parameterTag6Id;
 
                         tagIdCombinations.Add(tagCombination, false);
                     }
@@ -2589,12 +2615,12 @@ namespace MusicBeePlugin
             else
             {
                 TagIdCombination tagCombination;
-                tagCombination.parameterTagId = presetParam.parameterTagId;
-                tagCombination.parameterTag2Id = presetParam.parameterTag2Id;
-                tagCombination.parameterTag3Id = presetParam.parameterTag3Id;
-                tagCombination.parameterTag4Id = presetParam.parameterTag4Id;
-                tagCombination.parameterTag5Id = presetParam.parameterTag5Id;
-                tagCombination.parameterTag6Id = presetParam.parameterTag6Id;
+                tagCombination.parameterTagId = preset.parameterTagId;
+                tagCombination.parameterTag2Id = preset.parameterTag2Id;
+                tagCombination.parameterTag3Id = preset.parameterTag3Id;
+                tagCombination.parameterTag4Id = preset.parameterTag4Id;
+                tagCombination.parameterTag5Id = preset.parameterTag5Id;
+                tagCombination.parameterTag6Id = preset.parameterTag6Id;
 
                 tagIdCombinations.Add(tagCombination, false);
             }
@@ -2602,14 +2628,14 @@ namespace MusicBeePlugin
             return tagIdCombinations;
         }
 
-        private SortedDictionary<string, Preset> generatePresetsForAllTagsPseudoTags(Preset presetParam)
+        private SortedDictionary<string, Preset> generatePresetsForAllTagsPseudoTags(Preset preset)
         {
             var allTagsPseudoTagPresets = new SortedDictionary<string, Preset>();
 
 
             foreach (var tagsCombination in tagIdCombinations.Keys)
             {
-                var combinationPreset = new Preset(presetParam, true, false)
+                var combinationPreset = new Preset(preset, true, false)
                 {
                     parameterTagId = tagsCombination.parameterTagId,
                     parameterTag2Id = tagsCombination.parameterTag2Id,
@@ -2782,7 +2808,7 @@ namespace MusicBeePlugin
                             even = !even;
                         }
 
-                        SetStatusbarTextForFileOperations(AsrCommandSbText, true, fileCounter, files.Length, currentFile);
+                        SetStatusbarTextForFileOperations(AsrSbText, true, fileCounter, files.Length, currentFile);
 
                         string track = GetTrackRepresentation(currentFile);
 
@@ -2916,7 +2942,7 @@ namespace MusicBeePlugin
                     Invoke(processRowOfTable, new object[] { i });
                 }
 
-                SetStatusbarTextForFileOperations(AsrCommandSbText, false, i, tags.Count, currentFile);
+                SetStatusbarTextForFileOperations(AsrSbText, false, i, tags.Count, currentFile);
             }
 
 
@@ -3009,42 +3035,42 @@ namespace MusicBeePlugin
             return tagId;
         }
 
-        private void editPreset(Preset tempPreset, bool itsNewPreset, bool readOnly)
+        private void editPreset(Preset preset, bool itsNewPreset, bool readOnly)
         {
-            string backedUpPresetName = tempPreset.getName();
+            string backedUpPresetName = preset.getName();
             bool presetChanged;
-            using (ASRPresetEditor tagToolsForm = new ASRPresetEditor(TagToolsPlugin))
-            {
-                presetChanged = tagToolsForm.editPreset(tempPreset, readOnly);
-            }
+            using (AsrPresetEditor tagToolsForm = new AsrPresetEditor(TagToolsPlugin))
+                presetChanged = tagToolsForm.editPreset(preset, readOnly);
 
             if (presetChanged)
             {
                 if (!readOnly)
                 {
-                    tempPreset.modifiedUtc = DateTime.UtcNow;
+                    preset.modifiedUtc = DateTime.UtcNow;
                     unsavedChanges = true;
+                    preset.changed = true;
 
                     buttonClose.Image = warningWide;
                     toolTip1.SetToolTip(buttonClose, buttonCloseToolTip);
                 }
                 else
                 {
-                    tempPreset.setCustomizationsFlag(this, backedUpPreset);
+                    preset.setCustomizationsFlag(this, backedUpPreset);
                 }
 
                 if (itsNewPreset)
                 {
-                    presetsWorkingCopy.Add(tempPreset.guid, tempPreset);
+                    presetsWorkingCopy.Add(preset.guid, preset);
 
-                    presetList.Items.Add(tempPreset);
+                    presetList.Items.Add(preset);
 
                     presetListLastSelectedIndex = -1;
-                    refreshPresetList(tempPreset.guid);
+                    refreshPresetList(preset.guid);
                 }
-                else//if (tempPreset.getName() != backedUpPresetName || descriptionBox.Text != GetDictValue(tempPreset.descriptions, Language))
+                else if (preset.getName() != backedUpPresetName || descriptionBox.Text != GetDictValue(preset.descriptions, Language)
+                    || preset.userPreset != backedUpPreset.userPreset || preset.customizedByUser != backedUpPreset.customizedByUser)
                 {
-                    refreshPresetList(tempPreset.guid);
+                    refreshPresetList(preset.guid);
                 }
             }
         }
@@ -3073,39 +3099,40 @@ namespace MusicBeePlugin
 
             SortedDictionary<string, bool> savedPresetPaths = new SortedDictionary<string, bool>();
             SortedDictionary<string, int> countedPresetFilenames = new SortedDictionary<string, int>();
-            foreach (Preset tempPreset in presetsWorkingCopy.Values)
+            foreach (Preset preset in presetsWorkingCopy.Values)
             {
-                string presetFilename = getCountedPresetFilename(countedPresetFilenames, tempPreset.getSafeFileName());
-                savedPresetPaths.Add(tempPreset.savePreset(Path.Combine(PresetsPath, presetFilename + ASRPresetExtension)), false);
+                string presetFilename = getCountedPresetFilename(countedPresetFilenames, preset.getSafeFileName());
+                savedPresetPaths.Add(preset.savePreset(Path.Combine(PresetsPath, presetFilename + AsrPresetExtension)), false);
             }
 
             if (MSR != null)
             {
                 string presetFilename = getCountedPresetFilename(countedPresetFilenames, MSR.getSafeFileName());
-                savedPresetPaths.Add(MSR.savePreset(Path.Combine(PresetsPath, presetFilename + ASRPresetExtension)), false);
+                savedPresetPaths.Add(MSR.savePreset(Path.Combine(PresetsPath, presetFilename + AsrPresetExtension)), false);
             }
 
 
             string[] presetNames = Directory.GetFiles(PresetsPath, "*");
             foreach (string presetName in presetNames)
             {
-                if (!savedPresetPaths.Contains(presetName))
+                if (!savedPresetPaths.ContainsKey(presetName))
                     System.IO.File.Delete(presetName);
             }
 
 
             Presets = new SortedDictionary<Guid, Preset>();
-            foreach (var tempPreset in presetsWorkingCopy.Values)
+            foreach (var preset in presetsWorkingCopy.Values)
             {
-                Preset presetCopy = new Preset(tempPreset);
+                preset.changed = false;
+                Preset presetCopy = new Preset(preset);
                 Presets.Add(presetCopy.guid, presetCopy);
             }
 
-            ASRPresetsWithHotkeysCount = asrPresetsWithHotkeysCount;
+            AsrPresetsWithHotkeysCount = asrPresetsWithHotkeysCount;
 
-            SavedSettings.asrPresetsWithHotkeysGuids = new Guid[MaximumNumberOfASRHotkeys];
-            AsrPresetsWithHotkeys = new Preset[MaximumNumberOfASRHotkeys];
-            for (int j = 0; j < MaximumNumberOfASRHotkeys; j++)
+            SavedSettings.asrPresetsWithHotkeysGuids = new Guid[MaximumNumberOfAsrHotkeys];
+            AsrPresetsWithHotkeys = new Preset[MaximumNumberOfAsrHotkeys];
+            for (int j = 0; j < MaximumNumberOfAsrHotkeys; j++)
             {
                 SavedSettings.asrPresetsWithHotkeysGuids[j] = asrPresetsWithHotkeysGuids[j];
 
@@ -3132,7 +3159,7 @@ namespace MusicBeePlugin
 
             TagToolsPlugin.SaveSettings();
 
-            InitASR();
+            InitAsr();
 
             TagToolsPlugin.addPluginContextMenuItems();
             TagToolsPlugin.addPluginMenuItems();
@@ -3161,14 +3188,8 @@ namespace MusicBeePlugin
 
             if (ModifierKeys != Keys.Control)
                 Close();
-        }
-
-        private void buttonSave_Click(object sender, EventArgs e)
-        {
-            saveSettings();
-
-            if (ModifierKeys != Keys.Control)
-                Close();
+            else
+                presetList.Refresh();
         }
 
         private void buttonClose_Click(object sender, EventArgs e)
@@ -3179,11 +3200,8 @@ namespace MusicBeePlugin
 
         private void deletePreset(Preset presetToRemove)
         {
-            if (autoAppliedAsrPresetGuids.Contains(presetToRemove.guid))
-            {
+            if (autoAppliedAsrPresetGuids.RemoveExisting(presetToRemove.guid))
                 autoAppliedPresetCount--;
-                autoAppliedAsrPresetGuids.Remove(presetToRemove.guid);
-            }
 
 
 
@@ -3248,7 +3266,7 @@ namespace MusicBeePlugin
                 userPreset = true
             };
 
-            newPreset.names.Add(Language, DefaultASRPresetName + (presetList.Items.Count + 1));
+            newPreset.names.Add(Language, DefaultAsrPresetName + (presetList.Items.Count + 1));
             newPreset.ignoreCase = true;
 
             editPreset(newPreset, true, false);
@@ -3280,43 +3298,43 @@ namespace MusicBeePlugin
             return tagType;
         }
 
-        internal static void FillParameterTagList(TagType parameterTagType, string selectedTagName, CustomComboBox parameterTagListParam, Label parameterTagLabelParam)
+        internal static void FillParameterTagList(TagType parameterTagType, string selectedTagName, CustomComboBox parameterTagList, Label parameterTagLabel)
         {
-            parameterTagListParam.ItemsClear();
+            parameterTagList.ItemsClear();
 
             if (parameterTagType == TagType.NotUsed) //Not used
             {
                 selectedTagName = string.Empty;
-                parameterTagListParam.Enable(false);
-                parameterTagLabelParam.Enable(false);
+                parameterTagList.Enable(false);
+                parameterTagLabel.Enable(false);
             }
             else if (parameterTagType == TagType.Readonly) //Read only
             {
-                FillListByTagNames(parameterTagListParam.Items, true);
-                FillListByPropNames(parameterTagListParam.Items);
-                parameterTagListParam.Enable(true);
-                parameterTagLabelParam.Enable(true);
+                FillListByTagNames(parameterTagList.Items, true);
+                FillListByPropNames(parameterTagList.Items);
+                parameterTagList.Enable(true);
+                parameterTagLabel.Enable(true);
             }
             else if (parameterTagType == TagType.Writable) //Writable
             {
-                FillListByTagNames(parameterTagListParam.Items);
-                parameterTagListParam.Enable(true);
-                parameterTagLabelParam.Enable(true);
+                FillListByTagNames(parameterTagList.Items);
+                parameterTagList.Enable(true);
+                parameterTagLabel.Enable(true);
             }
             else //Writable (incl. <All Tags>)
             {
-                FillListByTagNames(parameterTagListParam.Items, false, false, true, false, true);
-                parameterTagListParam.Enable(true);
-                parameterTagLabelParam.Enable(true);
+                FillListByTagNames(parameterTagList.Items, false, false, true, false, true);
+                parameterTagList.Enable(true);
+                parameterTagLabel.Enable(true);
             }
 
 
-            if (parameterTagListParam.Items.Contains(selectedTagName))
-                parameterTagListParam.SelectedItem = selectedTagName;
-            else if (parameterTagListParam.Items.Count > 0)
-                parameterTagListParam.SelectedIndex = 0;
+            if (parameterTagList.Items.Contains(selectedTagName))
+                parameterTagList.SelectedItem = selectedTagName;
+            else if (parameterTagList.Items.Count > 0)
+                parameterTagList.SelectedIndex = 0;
             else
-                parameterTagListParam.SelectedIndex = -1;
+                parameterTagList.SelectedIndex = -1;
         }
 
         private static bool DetectTempTag(int tagId)
@@ -3665,7 +3683,8 @@ namespace MusicBeePlugin
             if (presetListLastSelectedIndex == presetList.SelectedIndex)
                 return;
 
-            previewIsGenerated = false;//*******
+            if (previewIsGenerated)
+                clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewChanges, buttonPreview, buttonOK, buttonClose);
 
             processPresetChanges = false;
             presetListSelectedIndexChanged(presetList.SelectedIndex);
@@ -3758,7 +3777,7 @@ namespace MusicBeePlugin
                 customText4Box.Text = preset.customText4Checked ? preset.customText4 : string.Empty;
 
                 bool hotkeyAssigned = preset.hotkeyAssigned;
-                if (asrPresetsWithHotkeysCount >= MaximumNumberOfASRHotkeys && !hotkeyAssigned)
+                if (asrPresetsWithHotkeysCount >= MaximumNumberOfAsrHotkeys && !hotkeyAssigned)
                 {
                     assignHotkeyCheckBox.Enable(false);
                     assignHotkeyCheckBox.Checked = false;
@@ -3787,11 +3806,11 @@ namespace MusicBeePlugin
                     if (preset.condition)
                     {
                         bool playlistFound = false;
-                        foreach (Playlist tempPreset in playlistComboBoxCustom.Items)
+                        foreach (Playlist playlist in playlistComboBoxCustom.Items)
                         {
-                            if (tempPreset.playlist == preset.playlist)
+                            if (playlist.playlist == preset.playlist)
                             {
-                                playlistComboBoxCustom.SelectedItem = tempPreset;
+                                playlistComboBoxCustom.SelectedItem = playlist;
                                 conditionCheckBox.Checked = true;
                                 playlistFound = true;
                                 break;
@@ -3819,9 +3838,9 @@ namespace MusicBeePlugin
             nameColumns();
 
 
-            UpdateCustomScrollBars(previewTable);//*****
-            UpdateCustomScrollBars(descriptionBox);//*****
-            descriptionBox.ScrollToTop();//*****
+            UpdateCustomScrollBars(previewTable);
+            UpdateCustomScrollBars(descriptionBox);
+            descriptionBox.ScrollToTop();
         }
 
         private void exportPreset(Preset preset, string presetPathName)
@@ -3845,7 +3864,7 @@ namespace MusicBeePlugin
             SaveFileDialog dialog = new SaveFileDialog
             {
                 //Title = "Save ASR preset",
-                Filter = ASRPresetNaming + "|*" + ASRPresetExtension,
+                Filter = AsrPresetNaming + "|*" + AsrPresetExtension,
                 InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
                 FileName = presetSafeFileName
             };
@@ -3888,14 +3907,14 @@ namespace MusicBeePlugin
                         presetFilename = getCountedPresetFilename(countedPresetFileNames, currentPresetKVPair.Value.getSafeFileName());
                     }
 
-                    string presetFilePath = @"\\?\" + Path.Combine(dialog.SelectedPath, presetFilename + ASRPresetExtension);
+                    string presetFilePath = @"\\?\" + Path.Combine(dialog.SelectedPath, presetFilename + AsrPresetExtension);
                     exportPreset(currentPresetKVPair.Value, presetFilePath);
                 }
             }
 
             if (developerExport && MSR != null)
             {
-                string presetFilePath = @"\\?\" + Path.Combine(dialog.SelectedPath, "!" + MSR.guid.ToString("B") + ASRPresetExtension);
+                string presetFilePath = @"\\?\" + Path.Combine(dialog.SelectedPath, "!" + MSR.guid.ToString("B") + AsrPresetExtension);
                 exportPreset(MSR, presetFilePath);
             }
         }
@@ -3905,7 +3924,7 @@ namespace MusicBeePlugin
             OpenFileDialog dialog = new OpenFileDialog
             {
                 //Title = "Load ASR preset",
-                Filter = ASRPresetNaming + "|*" + ASRPresetExtension,
+                Filter = AsrPresetNaming + "|*" + AsrPresetExtension,
                 InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
                 Multiselect = true
             };
@@ -3926,7 +3945,7 @@ namespace MusicBeePlugin
             int numberOfImportedAsCopyPresets = 0;
             int numberOfErrors = 0;
 
-            System.Xml.Serialization.XmlSerializer presetSerializer = new System.Xml.Serialization.XmlSerializer(typeof(Preset));
+            XmlSerializer presetSerializer = new XmlSerializer(typeof(Preset));
 
             foreach (string filename in dialog.FileNames)
             {
@@ -4036,8 +4055,8 @@ namespace MusicBeePlugin
             presetList.Sorted = false;
             ignoreCheckedPresetEvent = false;
             autoAppliedPresetCount = 0;
-            foreach (Preset tempPreset in presetsWorkingCopy.Values)
-                presetList.Items.Add(tempPreset, autoAppliedAsrPresetGuids.Contains(tempPreset.guid));
+            foreach (Preset preset in presetsWorkingCopy.Values)
+                presetList.Items.Add(preset, autoAppliedAsrPresetGuids.ContainsKey(preset.guid));
 
             presetList.SelectedIndex = -1;
             presetList_SelectedIndexChanged(null, null);
@@ -4045,13 +4064,13 @@ namespace MusicBeePlugin
             presetList.Sorted = true;
 
 
-            if (!presetsWorkingCopy.Contains(selectedPresetGuid))
+            if (!presetsWorkingCopy.ContainsKey(selectedPresetGuid))
                 presetList.SelectedIndex = -1;
             else if ((presetList.SelectedItem as Preset)?.guid != selectedPresetGuid)
                 presetList.SelectedItem = presetsWorkingCopy[selectedPresetGuid];
 
 
-            UpdateCustomScrollBars(presetList);//*****
+            UpdateCustomScrollBars(presetList);
         }
 
         internal void install(bool installAll)
@@ -4085,8 +4104,8 @@ namespace MusicBeePlugin
 
             if (Directory.Exists(PluginsPath))
             {
-                newPresetNames = Directory.GetFiles(Path.Combine(PluginsPath, AsrPresetsDirectory), "*" + ASRPresetExtension);
-                System.Xml.Serialization.XmlSerializer presetSerializer = new System.Xml.Serialization.XmlSerializer(typeof(Preset));
+                newPresetNames = Directory.GetFiles(Path.Combine(PluginsPath, AsrPresetsDirectory), "*" + AsrPresetExtension);
+                XmlSerializer presetSerializer = new XmlSerializer(typeof(Preset));
 
                 bool askToResetCustomizedByUser = true;
                 bool resetCustomizedByUser = true;
@@ -4307,9 +4326,9 @@ namespace MusicBeePlugin
                 }
             }
 
-            foreach (var tempPreset in predefinedPresets)
+            foreach (var preset in predefinedPresets)
             {
-                deletePreset(tempPreset);
+                deletePreset(preset);
                 numberOfDeletedPresets++;
             }
 
@@ -4323,8 +4342,8 @@ namespace MusicBeePlugin
             presetList.Sorted = false;
             ignoreCheckedPresetEvent = false;
             autoAppliedPresetCount = 0;
-            foreach (Preset tempPreset in presetsWorkingCopy.Values)
-                presetList.Items.Add(tempPreset, autoAppliedAsrPresetGuids.Contains(tempPreset.guid));
+            foreach (Preset preset in presetsWorkingCopy.Values)
+                presetList.Items.Add(preset, autoAppliedAsrPresetGuids.ContainsKey(preset.guid));
 
             refreshPresetList(selectedPresetGuid);
 
@@ -4556,7 +4575,7 @@ namespace MusicBeePlugin
                 assignHotkeyCheckBox.Checked = false;
                 assignHotkeyCheckBox.Enable(false);
 
-                if (autoAppliedAsrPresetGuids.Contains(paramPreset.guid))
+                if (autoAppliedAsrPresetGuids.ContainsKey(paramPreset.guid))
                 {
                     int presetIndex = presetList.Items.IndexOf(paramPreset);
                     ignoreCheckedPresetEvent = false;
@@ -4594,7 +4613,7 @@ namespace MusicBeePlugin
 
             preset.parameterTagId = AsrGetTagId(parameterTagListCustom.Text);
             allTagsReplaceIdsCount = preset.countAllTagsReplaceTagIds();
-            showAllTagsWarningIfRequired(preset, autoAppliedAsrPresetGuids.Contains(preset.guid));
+            showAllTagsWarningIfRequired(preset, autoAppliedAsrPresetGuids.ContainsKey(preset.guid));
             nameColumns();
             preset.setCustomizationsFlag(this, backedUpPreset);
         }
@@ -4606,7 +4625,7 @@ namespace MusicBeePlugin
 
             preset.parameterTag2Id = AsrGetTagId(parameterTag2ListCustom.Text);
             allTagsReplaceIdsCount = preset.countAllTagsReplaceTagIds();
-            showAllTagsWarningIfRequired(preset, autoAppliedAsrPresetGuids.Contains(preset.guid));
+            showAllTagsWarningIfRequired(preset, autoAppliedAsrPresetGuids.ContainsKey(preset.guid));
             nameColumns();
             preset.setCustomizationsFlag(this, backedUpPreset);
         }
@@ -4618,7 +4637,7 @@ namespace MusicBeePlugin
 
             preset.parameterTag3Id = AsrGetTagId(parameterTag3ListCustom.Text);
             allTagsReplaceIdsCount = preset.countAllTagsReplaceTagIds();
-            showAllTagsWarningIfRequired(preset, autoAppliedAsrPresetGuids.Contains(preset.guid));
+            showAllTagsWarningIfRequired(preset, autoAppliedAsrPresetGuids.ContainsKey(preset.guid));
             nameColumns();
             preset.setCustomizationsFlag(this, backedUpPreset);
         }
@@ -4630,7 +4649,7 @@ namespace MusicBeePlugin
 
             preset.parameterTag4Id = AsrGetTagId(parameterTag4ListCustom.Text);
             allTagsReplaceIdsCount = preset.countAllTagsReplaceTagIds();
-            showAllTagsWarningIfRequired(preset, autoAppliedAsrPresetGuids.Contains(preset.guid));
+            showAllTagsWarningIfRequired(preset, autoAppliedAsrPresetGuids.ContainsKey(preset.guid));
             nameColumns();
             preset.setCustomizationsFlag(this, backedUpPreset);
         }
@@ -4642,7 +4661,7 @@ namespace MusicBeePlugin
 
             preset.parameterTag5Id = AsrGetTagId(parameterTag5ListCustom.Text);
             allTagsReplaceIdsCount = preset.countAllTagsReplaceTagIds();
-            showAllTagsWarningIfRequired(preset, autoAppliedAsrPresetGuids.Contains(preset.guid));
+            showAllTagsWarningIfRequired(preset, autoAppliedAsrPresetGuids.ContainsKey(preset.guid));
             nameColumns();
             preset.setCustomizationsFlag(this, backedUpPreset);
         }
@@ -4654,7 +4673,7 @@ namespace MusicBeePlugin
 
             preset.parameterTag6Id = AsrGetTagId(parameterTag6ListCustom.Text);
             allTagsReplaceIdsCount = preset.countAllTagsReplaceTagIds();
-            showAllTagsWarningIfRequired(preset, autoAppliedAsrPresetGuids.Contains(preset.guid));
+            showAllTagsWarningIfRequired(preset, autoAppliedAsrPresetGuids.ContainsKey(preset.guid));
             nameColumns();
             preset.setCustomizationsFlag(this, backedUpPreset);
         }
@@ -4781,7 +4800,6 @@ namespace MusicBeePlugin
                 return;
 
             conditionCheckBox.Checked = !conditionCheckBox.Checked;
-            conditionCheckBox_CheckedChanged(null, null);
         }
 
         private void playlistComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -5039,21 +5057,14 @@ namespace MusicBeePlugin
                         return;
                     }
 
-                    int i = 5;
-                    do
-                    {
-                        if (previewTable.Columns[i].Visible)
-                            break;
+                    if (previewTable.Columns[5].Visible)
+                        break;
 
-                        i -= 3;
-                    }
-                    while (i >= 5);
-
-                    if ((ChangesDetectionResult)previewTable.Rows[rowIndex].Cells[i + 1].Tag == ChangesDetectionResult.PreservedTagsDetected)
+                    if ((ChangesDetectionResult)previewTable.Rows[rowIndex].Cells[3].Tag == ChangesDetectionResult.PreservedTagsDetected)
                         cell.Style = preservedTagCellStyle;
-                    else if ((ChangesDetectionResult)previewTable.Rows[rowIndex].Cells[i + 1].Tag == ChangesDetectionResult.PreservedTagValuesDetected)
+                    else if ((ChangesDetectionResult)previewTable.Rows[rowIndex].Cells[3].Tag == ChangesDetectionResult.PreservedTagValuesDetected)
                         cell.Style = preservedTagValueCellStyle;
-                    else if ((string)cell.Value == (string)previewTable.Rows[rowIndex].Cells[i].Value)
+                    else if ((string)cell.Value == (string)previewTable.Rows[rowIndex].Cells[2].Value)
                         cell.Style = unchangedCellStyle;
                     else
                         cell.Style = changedCellStyle;
@@ -5105,7 +5116,6 @@ namespace MusicBeePlugin
                 else if (columnIndex == 15 && previewTable.Columns[columnIndex].Visible)
                 {
                     var cell = previewTable.Rows[rowIndex].Cells[15];
-                    ChangesDetectionResult changeType = (ChangesDetectionResult)cell.Tag;
 
                     if ((ChangesDetectionResult)cell.Tag == ChangesDetectionResult.PreservedTagsDetected)
                     {
@@ -5230,7 +5240,7 @@ namespace MusicBeePlugin
             labelTag6.Enable(enable && (labelTag6.IsEnabled() || !dontChangeDisabled));
             parameterTag6ListCustom.Enable(enable && (parameterTag6ListCustom.IsEnabled() || !dontChangeDisabled));
 
-            customTextLabel.Enable(enable && preset.customTextChecked);
+            customTextLabel.Enable(enable && preset.customTextChecked); //-V3125
             customTextBox.Enable(enable && preset.customTextChecked);
             customText2Label.Enable(enable && preset.customText2Checked);
             customText2Box.Enable(enable && preset.customText2Checked);
@@ -5290,32 +5300,32 @@ namespace MusicBeePlugin
 
             setCheckedPicturesStates();
 
-            foreach (Preset tempPreset in presetsWorkingCopy.Values)
+            foreach (Preset preset in presetsWorkingCopy.Values)
             {
                 bool filteringCriteriaAreMeet = true;
 
 
-                if (showHotkeyAssignedChecked && !tempPreset.hotkeyAssigned)
+                if (showHotkeyAssignedChecked && !preset.hotkeyAssigned)
                 {
                     filteringCriteriaAreMeet = false;
                 }
-                else if (showFunctionIdAssignedChecked && string.IsNullOrEmpty(tempPreset.id))
+                else if (showFunctionIdAssignedChecked && string.IsNullOrEmpty(preset.id))
                 {
                     filteringCriteriaAreMeet = false;
                 }
-                else if (showPlaylistLimitedChecked && !tempPreset.condition)
+                else if (showPlaylistLimitedChecked && !preset.condition)
                 {
                     filteringCriteriaAreMeet = false;
                 }
-                else if (showUserChecked && !tempPreset.userPreset)
+                else if (showUserChecked && !preset.userPreset)
                 {
                     filteringCriteriaAreMeet = false;
                 }
-                else if (showCustomizedChecked && !tempPreset.getCustomizationsFlag())
+                else if (showCustomizedChecked && !preset.getCustomizationsFlag())
                 {
                     filteringCriteriaAreMeet = false;
                 }
-                else if (showPredefinedChecked && tempPreset.userPreset)
+                else if (showPredefinedChecked && preset.userPreset)
                 {
                     filteringCriteriaAreMeet = false;
                 }
@@ -5323,7 +5333,7 @@ namespace MusicBeePlugin
 
                 if (filteringCriteriaAreMeet)
                 {
-                    string presetName = tempPreset.ToString();
+                    string presetName = preset.ToString();
 
                     foreach (string searchString in searchStrings)
                     {
@@ -5338,10 +5348,10 @@ namespace MusicBeePlugin
 
                 if (filteringCriteriaAreMeet)
                 {
-                    bool autoApply = autoAppliedAsrPresetGuids.Contains(tempPreset.guid);
+                    bool autoApply = autoAppliedAsrPresetGuids.ContainsKey(preset.guid);
                     if (!showTickedOnlyChecked || autoApply)
                     {
-                        presetList.Items.Add(tempPreset, autoApply);
+                        presetList.Items.Add(preset, autoApply);
                         if (autoApply)
                             autoAppliedPresetCount--;
                     }
@@ -5372,7 +5382,7 @@ namespace MusicBeePlugin
             if (assignHotkeyCheckBox.Checked)
             {
                 int slot = FindFirstSlot(asrPresetsWithHotkeysGuids, Guid.Empty);
-                asrPresetsWithHotkeysGuids[slot] = preset.guid;
+                asrPresetsWithHotkeysGuids[slot] = preset.guid; //-V3106
                 preset.hotkeyAssigned = true;
 
                 asrPresetsWithHotkeysCount++;
@@ -5382,7 +5392,7 @@ namespace MusicBeePlugin
             else
             {
                 int slot = FindFirstSlot(asrPresetsWithHotkeysGuids, preset.guid);
-                asrPresetsWithHotkeysGuids[slot] = Guid.Empty;
+                asrPresetsWithHotkeysGuids[slot] = Guid.Empty; //-V3106
                 preset.hotkeyAssigned = false;
 
                 asrPresetsWithHotkeysCount--;
@@ -5393,7 +5403,7 @@ namespace MusicBeePlugin
 
             preset.setCustomizationsFlag(this, backedUpPreset);
 
-            assignHotkeyCheckBoxLabel.Text = assignHotkeyCheckBoxText + (MaximumNumberOfASRHotkeys - asrPresetsWithHotkeysCount) + "/" + MaximumNumberOfASRHotkeys;
+            assignHotkeyCheckBoxLabel.Text = assignHotkeyCheckBoxText + (MaximumNumberOfAsrHotkeys - asrPresetsWithHotkeysCount) + "/" + MaximumNumberOfAsrHotkeys;
         }
 
         private void assignHotkeyCheckBoxLabel_Click(object sender, EventArgs e)
@@ -5408,7 +5418,7 @@ namespace MusicBeePlugin
         {
             if (autoAppliedPresetCount == 0)
             {
-                if (SavedSettings.allowAsrLrPresetAutoexecution)
+                if (SavedSettings.allowAsrLrPresetAutoExecution)
                 {
                     autoApplyPresetsLabel.Text = EditApplyText + AutoApplyText;
 
@@ -5429,7 +5439,7 @@ namespace MusicBeePlugin
             }
             else
             {
-                if (SavedSettings.allowAsrLrPresetAutoexecution)
+                if (SavedSettings.allowAsrLrPresetAutoExecution)
                 {
                     autoApplyPresetsLabel.Text = EditApplyText + AutoApplyText + "\n"
                     + NowTickedText.ToUpper().Replace("%%TICKEDPRESETS%%", autoAppliedPresetCount.ToString());
@@ -5584,7 +5594,6 @@ namespace MusicBeePlugin
                 return;
 
             applyToPlayingTrackCheckBox.Checked = !applyToPlayingTrackCheckBox.Checked;
-            applyToPlayingTrackCheckBox_CheckedChanged(null, null);
         }
 
         private void favoriteCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -5603,7 +5612,6 @@ namespace MusicBeePlugin
                 return;
 
             favoriteCheckBox.Checked = !favoriteCheckBox.Checked;
-            favoriteCheckBox_CheckedChanged(null, null);
         }
 
         private void saveColumnWidths(Preset savedPreset)
@@ -5665,7 +5673,7 @@ namespace MusicBeePlugin
 
         private void buttonSettings_Click(object sender, EventArgs e)
         {
-            PluginQuickSettings settings = new PluginQuickSettings(TagToolsPlugin);
+            QuickSettings settings = new QuickSettings(TagToolsPlugin);
             Display(settings, true);
             showAutoApplyingWarningIfRequired();
         }
@@ -5841,7 +5849,7 @@ namespace MusicBeePlugin
                 }
             }
 
-            ignoreSplitterMovedEvent = false;
+            ignoreSplitterMovedEvent = false; //-V3008
         }
 
         private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
@@ -6089,104 +6097,104 @@ namespace MusicBeePlugin
         }
     }
 
-    public partial class Plugin
+    partial class Plugin
     {
-        internal void ASRPreset1EventHandler(object sender, EventArgs e)
+        internal void AsrPreset1EventHandler(object sender, EventArgs e)
         {
             AdvancedSearchAndReplace.ApplyPreset(1);
         }
 
-        internal void ASRPreset2EventHandler(object sender, EventArgs e)
+        internal void AsrPreset2EventHandler(object sender, EventArgs e)
         {
             AdvancedSearchAndReplace.ApplyPreset(2);
         }
 
-        internal void ASRPreset3EventHandler(object sender, EventArgs e)
+        internal void AsrPreset3EventHandler(object sender, EventArgs e)
         {
             AdvancedSearchAndReplace.ApplyPreset(3);
         }
 
-        internal void ASRPreset4EventHandler(object sender, EventArgs e)
+        internal void AsrPreset4EventHandler(object sender, EventArgs e)
         {
             AdvancedSearchAndReplace.ApplyPreset(4);
         }
 
-        internal void ASRPreset5EventHandler(object sender, EventArgs e)
+        internal void AsrPreset5EventHandler(object sender, EventArgs e)
         {
             AdvancedSearchAndReplace.ApplyPreset(5);
         }
 
-        internal void ASRPreset6EventHandler(object sender, EventArgs e)
+        internal void AsrPreset6EventHandler(object sender, EventArgs e)
         {
             AdvancedSearchAndReplace.ApplyPreset(6);
         }
 
-        internal void ASRPreset7EventHandler(object sender, EventArgs e)
+        internal void AsrPreset7EventHandler(object sender, EventArgs e)
         {
             AdvancedSearchAndReplace.ApplyPreset(7);
         }
 
-        internal void ASRPreset8EventHandler(object sender, EventArgs e)
+        internal void AsrPreset8EventHandler(object sender, EventArgs e)
         {
             AdvancedSearchAndReplace.ApplyPreset(8);
         }
 
-        internal void ASRPreset9EventHandler(object sender, EventArgs e)
+        internal void AsrPreset9EventHandler(object sender, EventArgs e)
         {
             AdvancedSearchAndReplace.ApplyPreset(9);
         }
 
-        internal void ASRPreset10EventHandler(object sender, EventArgs e)
+        internal void AsrPreset10EventHandler(object sender, EventArgs e)
         {
             AdvancedSearchAndReplace.ApplyPreset(10);
         }
 
-        internal void ASRPreset11EventHandler(object sender, EventArgs e)
+        internal void AsrPreset11EventHandler(object sender, EventArgs e)
         {
             AdvancedSearchAndReplace.ApplyPreset(11);
         }
 
-        internal void ASRPreset12EventHandler(object sender, EventArgs e)
+        internal void AsrPreset12EventHandler(object sender, EventArgs e)
         {
             AdvancedSearchAndReplace.ApplyPreset(12);
         }
 
-        internal void ASRPreset13EventHandler(object sender, EventArgs e)
+        internal void AsrPreset13EventHandler(object sender, EventArgs e)
         {
             AdvancedSearchAndReplace.ApplyPreset(13);
         }
 
-        internal void ASRPreset14EventHandler(object sender, EventArgs e)
+        internal void AsrPreset14EventHandler(object sender, EventArgs e)
         {
             AdvancedSearchAndReplace.ApplyPreset(14);
         }
 
-        internal void ASRPreset15EventHandler(object sender, EventArgs e)
+        internal void AsrPreset15EventHandler(object sender, EventArgs e)
         {
             AdvancedSearchAndReplace.ApplyPreset(15);
         }
 
-        internal void ASRPreset16EventHandler(object sender, EventArgs e)
+        internal void AsrPreset16EventHandler(object sender, EventArgs e)
         {
             AdvancedSearchAndReplace.ApplyPreset(16);
         }
 
-        internal void ASRPreset17EventHandler(object sender, EventArgs e)
+        internal void AsrPreset17EventHandler(object sender, EventArgs e)
         {
             AdvancedSearchAndReplace.ApplyPreset(17);
         }
 
-        internal void ASRPreset18EventHandler(object sender, EventArgs e)
+        internal void AsrPreset18EventHandler(object sender, EventArgs e)
         {
             AdvancedSearchAndReplace.ApplyPreset(18);
         }
 
-        internal void ASRPreset19EventHandler(object sender, EventArgs e)
+        internal void AsrPreset19EventHandler(object sender, EventArgs e)
         {
             AdvancedSearchAndReplace.ApplyPreset(19);
         }
 
-        internal void ASRPreset20EventHandler(object sender, EventArgs e)
+        internal void AsrPreset20EventHandler(object sender, EventArgs e)
         {
             AdvancedSearchAndReplace.ApplyPreset(20);
         }

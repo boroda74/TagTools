@@ -63,6 +63,7 @@ namespace MusicBeePlugin
             resources.ApplyResources(this.buttonOK, "buttonOK");
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Tag = "#buttonCancel&controlsPanel";
+            this.toolTip1.SetToolTip(this.buttonOK, resources.GetString("buttonOK.ToolTip"));
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // buttonCancel
@@ -71,6 +72,7 @@ namespace MusicBeePlugin
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Tag = "#controlsPanel&controlsPanel";
+            this.toolTip1.SetToolTip(this.buttonCancel, resources.GetString("buttonCancel.ToolTip"));
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // tableLayoutPanel1
@@ -82,6 +84,7 @@ namespace MusicBeePlugin
             this.tableLayoutPanel1.Controls.Add(this.checkedSourceTagLabel, 0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.Tag = "#CopyTagsToClipboard&controlsPanel";
+            this.toolTip1.SetToolTip(this.tableLayoutPanel1, resources.GetString("tableLayoutPanel1.ToolTip"));
             // 
             // sourceTagList
             // 
@@ -89,6 +92,7 @@ namespace MusicBeePlugin
             this.sourceTagList.MultiColumn = true;
             this.sourceTagList.Name = "sourceTagList";
             this.sourceTagList.Sorted = true;
+            this.toolTip1.SetToolTip(this.sourceTagList, resources.GetString("sourceTagList.ToolTip"));
             this.sourceTagList.SelectedIndexChanged += new System.EventHandler(this.sourceTagList_SelectedIndexChanged);
             // 
             // checkedSourceTagList
@@ -97,17 +101,20 @@ namespace MusicBeePlugin
             this.checkedSourceTagList.MultiColumn = true;
             this.checkedSourceTagList.Name = "checkedSourceTagList";
             this.checkedSourceTagList.Sorted = true;
+            this.toolTip1.SetToolTip(this.checkedSourceTagList, resources.GetString("checkedSourceTagList.ToolTip"));
             this.checkedSourceTagList.SelectedIndexChanged += new System.EventHandler(this.checkedSourceTagList_SelectedIndexChanged);
             // 
             // uncheckedSourceTagLabel
             // 
             resources.ApplyResources(this.uncheckedSourceTagLabel, "uncheckedSourceTagLabel");
             this.uncheckedSourceTagLabel.Name = "uncheckedSourceTagLabel";
+            this.toolTip1.SetToolTip(this.uncheckedSourceTagLabel, resources.GetString("uncheckedSourceTagLabel.ToolTip"));
             // 
             // checkedSourceTagLabel
             // 
             resources.ApplyResources(this.checkedSourceTagLabel, "checkedSourceTagLabel");
             this.checkedSourceTagLabel.Name = "checkedSourceTagLabel";
+            this.toolTip1.SetToolTip(this.checkedSourceTagLabel, resources.GetString("checkedSourceTagLabel.ToolTip"));
             // 
             // tagSetComboBox
             // 
@@ -124,6 +131,7 @@ namespace MusicBeePlugin
             resources.ApplyResources(this.checkUncheckAllCheckBox, "checkUncheckAllCheckBox");
             this.checkUncheckAllCheckBox.Name = "checkUncheckAllCheckBox";
             this.checkUncheckAllCheckBox.Tag = "#checkUncheckAllCheckBoxLabel@pinned-to-parent-x";
+            this.toolTip1.SetToolTip(this.checkUncheckAllCheckBox, resources.GetString("checkUncheckAllCheckBox.ToolTip"));
             this.checkUncheckAllCheckBox.CheckedChanged += new System.EventHandler(this.checkUncheckAllCheckBox_CheckedChanged);
             // 
             // toolTip1
@@ -137,12 +145,14 @@ namespace MusicBeePlugin
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
             this.label1.Tag = "@pinned-to-parent-x";
+            this.toolTip1.SetToolTip(this.label1, resources.GetString("label1.ToolTip"));
             // 
             // checkUncheckAllCheckBoxLabel
             // 
             resources.ApplyResources(this.checkUncheckAllCheckBoxLabel, "checkUncheckAllCheckBoxLabel");
             this.checkUncheckAllCheckBoxLabel.Name = "checkUncheckAllCheckBoxLabel";
             this.checkUncheckAllCheckBoxLabel.Tag = "#&controlsPanel";
+            this.toolTip1.SetToolTip(this.checkUncheckAllCheckBoxLabel, resources.GetString("checkUncheckAllCheckBoxLabel.ToolTip"));
             this.checkUncheckAllCheckBoxLabel.Click += new System.EventHandler(this.checkUncheckAllCheckBoxLabel_Click);
             // 
             // controlsPanel
@@ -154,7 +164,8 @@ namespace MusicBeePlugin
             this.controlsPanel.Controls.Add(this.checkUncheckAllCheckBox);
             this.controlsPanel.Controls.Add(this.label1);
             this.controlsPanel.Name = "controlsPanel";
-            this.controlsPanel.Tag = "#&CopyTagsToClipboard";
+            this.controlsPanel.Tag = "#CopyTagsToClipboard&CopyTagsToClipboard";
+            this.toolTip1.SetToolTip(this.controlsPanel, resources.GetString("controlsPanel.ToolTip"));
             // 
             // infoLabel
             // 
@@ -162,6 +173,7 @@ namespace MusicBeePlugin
             this.infoLabel.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.infoLabel.Name = "infoLabel";
             this.infoLabel.Tag = "#CopyTagsToClipboard&tagSetComboBox@pinned-to-parent-y";
+            this.toolTip1.SetToolTip(this.infoLabel, resources.GetString("infoLabel.ToolTip"));
             // 
             // CopyTagsToClipboard
             // 
@@ -177,6 +189,7 @@ namespace MusicBeePlugin
             this.MinimizeBox = false;
             this.Name = "CopyTagsToClipboard";
             this.Tag = "";
+            this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CopyTagsToClipboard_FormClosed);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();

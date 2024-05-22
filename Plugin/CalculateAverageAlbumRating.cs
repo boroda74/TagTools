@@ -14,7 +14,7 @@ namespace MusicBeePlugin
 
         private string[] files = new string[0];
 
-        internal CalculateAverageAlbumRating(Plugin tagToolsPluginParam) : base(tagToolsPluginParam)
+        internal CalculateAverageAlbumRating(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
         }
@@ -57,7 +57,7 @@ namespace MusicBeePlugin
 
                 currentFile = files[fileCounter];
 
-                SetStatusbarTextForFileOperations(CarCommandSbText, true, fileCounter, files.Length, currentFile);
+                SetStatusbarTextForFileOperations(CarSbText, true, fileCounter, files.Length, currentFile);
 
                 row = new string[4];
 
@@ -69,12 +69,13 @@ namespace MusicBeePlugin
                 tags.Add(row);
             }
 
-            SetStatusbarText(CarCommandSbText + " (" + SbSorting + ")", false);
+            SetStatusbarText(CarSbText + " (" + SbSorting + ")", false);
 
             TextTableComparer textTableComparator = new TextTableComparer
             {
                 tagCounterIndex = 2
             };
+
             tags.Sort(textTableComparator);
 
             string currentAlbumArtsist;
@@ -109,7 +110,7 @@ namespace MusicBeePlugin
 
                     for (int j = prevRow; j < i; j++)
                     {
-                        if (string.Empty + tags[j][2] != string.Empty || SavedSettings.considerUnrated)
+                        if (!string.IsNullOrEmpty(tags[j][2]) || SavedSettings.considerUnrated)
                         {
                             sumRating += ConvertStrings(tags[j][2], ResultType.Double, DataType.Rating).resultD;
                             numberOfTracks++;
@@ -128,7 +129,7 @@ namespace MusicBeePlugin
                         SetFileTag(currentFile, GetTagId(SavedSettings.albumRatingTagName), avgRating.ToString(), true);
                         CommitTagsToFile(currentFile, false, true);
 
-                        SetStatusbarTextForFileOperations(CarCommandSbText, false, j, tags.Count, currentFile);
+                        SetStatusbarTextForFileOperations(CarSbText, false, j, tags.Count, currentFile);
                     }
 
                     prevAlbumArtsist = currentAlbumArtsist;
@@ -142,7 +143,7 @@ namespace MusicBeePlugin
 
             for (int j = prevRow; j < tags.Count; j++)
             {
-                if (string.Empty + tags[j][2] != string.Empty || SavedSettings.considerUnrated)
+                if (!string.IsNullOrEmpty(tags[j][2]) || SavedSettings.considerUnrated)
                 {
                     sumRating += ConvertStrings(tags[j][2], ResultType.Double, DataType.Rating).resultD;
                     numberOfTracks++;
@@ -161,7 +162,7 @@ namespace MusicBeePlugin
                 SetFileTag(currentFile, GetTagId(SavedSettings.albumRatingTagName), avgRating.ToString(), true);
                 CommitTagsToFile(currentFile, false, true);
 
-                SetStatusbarTextForFileOperations(CarCommandSbText, false, j, tags.Count, currentFile);
+                SetStatusbarTextForFileOperations(CarSbText, false, j, tags.Count, currentFile);
             }
 
             RefreshPanels(true);
@@ -190,7 +191,7 @@ namespace MusicBeePlugin
             switchOperation(calculateAlbumRating, buttonOK, EmptyButton, EmptyButton, EmptyButton, true, null);
         }
 
-        internal static void CalculateAlbumRatingForAlbum(Plugin tagToolsPluginParam, string currentFile)
+        internal static void CalculateAlbumRatingForAlbum(string currentFile)
         {
             string[] localFiles = null;
 
@@ -235,7 +236,7 @@ namespace MusicBeePlugin
 
             for (int j = 0; j < tags.Count; j++)
             {
-                if (string.Empty + tags[j][2] != string.Empty || SavedSettings.considerUnrated)
+                if (!string.IsNullOrEmpty(tags[j][2]) || SavedSettings.considerUnrated)
                 {
                     sumRating += ConvertStrings(tags[j][2], ResultType.Double, DataType.Rating).resultD;
                     numberOfTracks++;
@@ -339,7 +340,7 @@ namespace MusicBeePlugin
 
         private void buttonSettings_Click(object sender, EventArgs e)
         {
-            PluginQuickSettings settings = new PluginQuickSettings(TagToolsPlugin);
+            QuickSettings settings = new QuickSettings(TagToolsPlugin);
             Display(settings, true);
         }
     }

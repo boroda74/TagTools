@@ -18,27 +18,23 @@ namespace MusicBeePlugin
         private static int NumberOfFiles;
         private decimal actSumOfPercentage;
 
-        internal AutoRate(Plugin tagToolsPluginParam) : base(tagToolsPluginParam)
+        internal AutoRate(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
         }
 
-        internal static void AutoRateOnStartup(Plugin tagToolsPlugin)
+        internal static void AutoRateOnStartup(Plugin plugin)
         {
             if (SavedSettings.calculateThresholdsAtStartUp || SavedSettings.autoRateAtStartUp)
             {
-                using (AutoRate tagToolsForm = new AutoRate(tagToolsPlugin))
-                {
+                using (AutoRate tagToolsForm = new AutoRate(plugin))
                     tagToolsForm.switchOperation(tagToolsForm.onStartup, EmptyButton, EmptyButton, EmptyButton, EmptyButton, true, null);
-                }
             }
 
             if (SavedSettings.calculateAlbumRatingAtStartUp)
             {
-                using (CalculateAverageAlbumRating tagToolsForm = new CalculateAverageAlbumRating(tagToolsPlugin))
-                {
+                using (CalculateAverageAlbumRating tagToolsForm = new CalculateAverageAlbumRating(plugin))
                     tagToolsForm.calculateAlbumRatingForAllTracks();
-                }
             }
         }
 
@@ -278,18 +274,18 @@ namespace MusicBeePlugin
 
         private static double RoundPlaysPerDay(string value)
         {
-            double temp;
+            double number;
 
             try
             {
-                temp = Convert.ToDouble(value);
+                number = Convert.ToDouble(value);
             }
             catch (FormatException)
             {
-                temp = 0;
+                number = 0;
             }
 
-            return RoundPlaysPerDay(temp);
+            return RoundPlaysPerDay(number);
         }
 
         private static string ConvertDoubleToString(double value)
@@ -297,13 +293,13 @@ namespace MusicBeePlugin
             return RoundPlaysPerDay(value).ToString();
         }
 
-        internal static void AutoRateLive(Plugin tagToolsPluginParam, string currentFile)
+        internal static void AutoRateLive(string currentFile)
         {
             MetaDataType autoRateTagId = SavedSettings.autoRateTagId;
             MetaDataType playsPerDayTagId = SavedSettings.playsPerDayTagId;
 
             int autoRating;
-            double playsPerDay = GetPlaysPerDay(tagToolsPluginParam, currentFile);
+            double playsPerDay = GetPlaysPerDay(currentFile);
 
             if (playsPerDay == -1)
                 autoRating = SavedSettings.defaultRating;
@@ -360,7 +356,7 @@ namespace MusicBeePlugin
 
                 SetStatusbarTextForFileOperations(AutoRateSbText, false, fileCounter, files.Length, currentFile);
 
-                AutoRateLive(TagToolsPlugin, currentFile);
+                AutoRateLive(currentFile);
             }
 
             RefreshPanels(true);
@@ -404,13 +400,13 @@ namespace MusicBeePlugin
 
                 SetStatusbarTextForFileOperations(AutoRateSbText, false, fileCounter, files.Length, currentFile);
 
-                AutoRateLive(TagToolsPlugin, currentFile);
+                AutoRateLive(currentFile);
             }
 
             SetResultingSbText();
         }
 
-        private static double GetPlaysPerDay(Plugin tagToolsPlugin, string currentFile)
+        private static double GetPlaysPerDay(string currentFile)
         {
             double daysSinceAdded = 0;
             double daysSinceLastPlayed = 0;
@@ -463,7 +459,7 @@ namespace MusicBeePlugin
             {
                 currentFile = files[fileCounter];
 
-                double playsPerDay = GetPlaysPerDay(TagToolsPlugin, currentFile);
+                double playsPerDay = GetPlaysPerDay(currentFile);
 
                 if (playsPerDay != -1)
                 {
@@ -509,14 +505,13 @@ namespace MusicBeePlugin
 
                 currentFile = files[fileCounter];
 
-                double playsPerDay = GetPlaysPerDay(TagToolsPlugin, currentFile);
+                double playsPerDay = GetPlaysPerDay(currentFile);
 
                 if (playsPerDay != -1)
                 {
                     NumberOfFiles++;
 
-                    int statistics;
-                    if (playsPerDayStatistics.TryGetValue(-playsPerDay, out statistics))
+                    if (playsPerDayStatistics.TryGetValue(-playsPerDay, out int statistics))
                         playsPerDayStatistics.Remove(-playsPerDay);
 
                     playsPerDayStatistics.Add(-playsPerDay, ++statistics);
@@ -553,8 +548,7 @@ namespace MusicBeePlugin
                 if (backgroundTaskIsCanceled)
                     return;
 
-                int statistics;
-                playsPerDayStatistics.TryGetValue(playsPerDay, out statistics);
+                playsPerDayStatistics.TryGetValue(playsPerDay, out int statistics);
                 statisticsSum += statistics;
 
                 if (SavedSettings.perCent5 != 0 && SavedSettings.threshold5 == 0)
@@ -820,7 +814,6 @@ namespace MusicBeePlugin
         private void checkBox5Label_Click(object sender, EventArgs e)
         {
             checkBox5.Checked = !checkBox5.Checked;
-            checkBoxFive_CheckedChanged(null, null);
         }
 
         private void checkBoxFourAndHalf_CheckedChanged(object sender, EventArgs e)
@@ -831,7 +824,6 @@ namespace MusicBeePlugin
         private void checkBox45Label_Click(object sender, EventArgs e)
         {
             checkBox45.Checked = !checkBox45.Checked;
-            checkBoxFourAndHalf_CheckedChanged(null, null);
         }
 
         private void checkBoxFour_CheckedChanged(object sender, EventArgs e)
@@ -842,7 +834,6 @@ namespace MusicBeePlugin
         private void checkBox4Label_Click(object sender, EventArgs e)
         {
             checkBox4.Checked = !checkBox4.Checked;
-            checkBoxFour_CheckedChanged(null, null);
         }
 
         private void checkBoxThreeAndHalf_CheckedChanged(object sender, EventArgs e)
@@ -853,7 +844,6 @@ namespace MusicBeePlugin
         private void checkBox35Label_Click(object sender, EventArgs e)
         {
             checkBox35.Checked = !checkBox35.Checked;
-            checkBoxThreeAndHalf_CheckedChanged(null, null);
         }
 
         private void checkBoxThree_CheckedChanged(object sender, EventArgs e)
@@ -864,7 +854,6 @@ namespace MusicBeePlugin
         private void checkBox3Label_Click(object sender, EventArgs e)
         {
             checkBox3.Checked = !checkBox3.Checked;
-            checkBoxThree_CheckedChanged(null, null);
         }
 
         private void checkBoxTwoAndHalf_CheckedChanged(object sender, EventArgs e)
@@ -875,7 +864,6 @@ namespace MusicBeePlugin
         private void checkBox25Label_Click(object sender, EventArgs e)
         {
             checkBox25.Checked = !checkBox25.Checked;
-            checkBoxTwoAndHalf_CheckedChanged(null, null);
         }
 
         private void checkBoxTwo_CheckedChanged(object sender, EventArgs e)
@@ -886,7 +874,6 @@ namespace MusicBeePlugin
         private void checkBox2Label_Click(object sender, EventArgs e)
         {
             checkBox2.Checked = !checkBox2.Checked;
-            checkBoxTwo_CheckedChanged(null, null);
         }
 
         private void checkBoxOneAndHalf_CheckedChanged(object sender, EventArgs e)
@@ -897,7 +884,6 @@ namespace MusicBeePlugin
         private void checkBox15Label_Click(object sender, EventArgs e)
         {
             checkBox15.Checked = !checkBox15.Checked;
-            checkBoxOneAndHalf_CheckedChanged(null, null);
         }
 
         private void checkBoxOne_CheckedChanged(object sender, EventArgs e)
@@ -908,7 +894,6 @@ namespace MusicBeePlugin
         private void checkBox1Label_Click(object sender, EventArgs e)
         {
             checkBox1.Checked = !checkBox1.Checked;
-            checkBoxOne_CheckedChanged(null, null);
         }
 
         private void checkBoxHalf_CheckedChanged(object sender, EventArgs e)
@@ -919,7 +904,6 @@ namespace MusicBeePlugin
         private void checkBox05Label_Click(object sender, EventArgs e)
         {
             checkBox05.Checked = !checkBox05.Checked;
-            checkBoxHalf_CheckedChanged(null, null);
         }
 
         private void perCentN_ValueChanged(NumericUpDown perCent, CheckBox checkBox, Label perCentLabel, decimal actualPerCent)
@@ -1046,7 +1030,6 @@ namespace MusicBeePlugin
         private void autoRateAtStartUpCheckBoxLabel_Click(object sender, EventArgs e)
         {
             autoRateAtStartUpCheckBox.Checked = !autoRateAtStartUpCheckBox.Checked;
-            autoRateAtStartUp_CheckedChanged(null, null);
         }
 
         private void storePlaysPerDay_CheckedChanged(object sender, EventArgs e)
@@ -1057,7 +1040,6 @@ namespace MusicBeePlugin
         private void storePlaysPerDayCheckBoxLabel_Click(object sender, EventArgs e)
         {
             storePlaysPerDayCheckBox.Checked = !storePlaysPerDayCheckBox.Checked;
-            storePlaysPerDay_CheckedChanged(null, null);
         }
 
         internal override void enableDisablePreviewOptionControls(bool enable, bool dontChangeDisabled = false)
@@ -1117,7 +1099,7 @@ namespace MusicBeePlugin
 
         private void buttonSettings_Click(object sender, EventArgs e)
         {
-            PluginQuickSettings settings = new PluginQuickSettings(TagToolsPlugin);
+            QuickSettings settings = new QuickSettings(TagToolsPlugin);
             Display(settings, true);
         }
     }

@@ -15,7 +15,7 @@ namespace MusicBeePlugin
         private MetaDataType destinationTagId;
         private string[] files = new string[0];
 
-        internal SwapTags(Plugin tagToolsPluginParam) : base(tagToolsPluginParam)
+        internal SwapTags(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
         }

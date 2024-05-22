@@ -10,7 +10,7 @@ namespace MusicBeePlugin
         private CustomComboBox lastSkippedDateFormatTagListCustom;
 
 
-        internal SaveLastSkippedDate(Plugin tagToolsPluginParam) : base(tagToolsPluginParam)
+        internal SaveLastSkippedDate(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
         }

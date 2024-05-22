@@ -1,6 +1,6 @@
 ﻿namespace MusicBeePlugin
 {
-    partial class PluginSettings
+    partial class QuickSettings
     {
         ///<summary>
         ///Требуется переменная конструктора.
@@ -33,11 +33,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PluginSettings));
-            this.buttonCancel = new System.Windows.Forms.Button();
-            this.buttonOK = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.versionLabel = new System.Windows.Forms.Label();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QuickSettings));
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.playTickedAsrPresetSoundCheckBoxLabel = new System.Windows.Forms.Label();
             this.playTickedAsrPresetSoundCheckBox = new System.Windows.Forms.CheckBox();
@@ -48,16 +44,6 @@
             this.playCompletedSoundCheckBoxLabel = new System.Windows.Forms.Label();
             this.playCompletedSoundCheckBox = new System.Windows.Forms.CheckBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.unitsPanel = new System.Windows.Forms.Panel();
-            this.unitGBox = new System.Windows.Forms.TextBox();
-            this.unitMBox = new System.Windows.Forms.TextBox();
-            this.unitKBox = new System.Windows.Forms.TextBox();
-            this.saveLastSkippedButton = new System.Windows.Forms.Button();
             this.useSkinColorsCheckBox = new System.Windows.Forms.CheckBox();
             this.closeHiddenCommandWindowsRadioButton = new System.Windows.Forms.RadioButton();
             this.showHiddenCommandWindowsRadioButton = new System.Windows.Forms.RadioButton();
@@ -68,7 +54,6 @@
             this.preservedTagsLegendTextBox = new System.Windows.Forms.TextBox();
             this.changedLegendTextBox = new System.Windows.Forms.TextBox();
             this.legendLabel = new System.Windows.Forms.Label();
-            this.highlightChangedTagsCheckBoxLabel = new System.Windows.Forms.Label();
             this.showHiddenCommandWindowsRadioButtonLabel = new System.Windows.Forms.Label();
             this.closeHiddenCommandWindowsRadioButtonLabel = new System.Windows.Forms.Label();
             this.minimizePluginWindowsCheckBoxLabel = new System.Windows.Forms.Label();
@@ -79,38 +64,11 @@
             this.useCustomFontCheckBox = new System.Windows.Forms.CheckBox();
             this.useMusicBeeFontCheckBoxLabel = new System.Windows.Forms.Label();
             this.useMusicBeeFontCheckBox = new System.Windows.Forms.CheckBox();
+            this.highlightChangedTagsCheckBoxLabel = new System.Windows.Forms.Label();
             this.useSkinColorsCheckBoxLabel = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.showReencodeTagCheckBox = new System.Windows.Forms.CheckBox();
-            this.showChangeCaseCheckBox = new System.Windows.Forms.CheckBox();
-            this.showLibraryReportsCheckBox = new System.Windows.Forms.CheckBox();
-            this.showCopyTagCheckBox = new System.Windows.Forms.CheckBox();
-            this.showAutorateCheckBox = new System.Windows.Forms.CheckBox();
-            this.showSwapTagsCheckBox = new System.Windows.Forms.CheckBox();
-            this.showASRCheckBox = new System.Windows.Forms.CheckBox();
-            this.showShowHiddenWindowsCheckBox = new System.Windows.Forms.CheckBox();
-            this.showCARCheckBox = new System.Windows.Forms.CheckBox();
-            this.showBackupRestoreCheckBox = new System.Windows.Forms.CheckBox();
-            this.contextMenuCheckBox = new System.Windows.Forms.CheckBox();
-            this.showCTCheckBox = new System.Windows.Forms.CheckBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.contextMenuCheckBoxLabel = new System.Windows.Forms.Label();
             this.allowCommandExecutionWithoutPreviewCheckBoxLabel = new System.Windows.Forms.Label();
             this.allowCommandExecutionWithoutPreviewCheckBox = new System.Windows.Forms.CheckBox();
-            this.allowAsrLrPresetAutoexecutionCheckBoxLabel = new System.Windows.Forms.Label();
-            this.allowAsrLrPresetAutoexecutionCheckBox = new System.Windows.Forms.CheckBox();
-            this.showShowHiddenWindowsCheckBoxLabel = new System.Windows.Forms.Label();
-            this.showBackupRestoreCheckBoxLabel = new System.Windows.Forms.Label();
-            this.showCTCheckBoxLabel = new System.Windows.Forms.Label();
-            this.showCARCheckBoxLabel = new System.Windows.Forms.Label();
-            this.showASRCheckBoxLabel = new System.Windows.Forms.Label();
-            this.showAutorateCheckBoxLabel = new System.Windows.Forms.Label();
-            this.showLibraryReportsCheckBoxLabel = new System.Windows.Forms.Label();
-            this.showReencodeTagCheckBoxLabel = new System.Windows.Forms.Label();
-            this.showChangeCaseCheckBoxLabel = new System.Windows.Forms.Label();
-            this.showSwapTagsCheckBoxLabel = new System.Windows.Forms.Label();
-            this.showCopyTagCheckBoxLabel = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.includePreservedTagValuesCheckBoxLabel = new System.Windows.Forms.Label();
             this.includePreservedTagValuesCheckBox = new System.Windows.Forms.CheckBox();
@@ -120,67 +78,30 @@
             this.includeNotChangedTagsCheckBox = new System.Windows.Forms.CheckBox();
             this.label10 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.label1 = new System.Windows.Forms.Label();
+            this.allowAsrLrPresetAutoExecutionCheckBoxLabel = new System.Windows.Forms.Label();
+            this.allowAsrLrPresetAutoExecutionCheckBox = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.buttonsPanel = new System.Windows.Forms.Panel();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.buttonCancel = new System.Windows.Forms.Button();
+            this.buttonOK = new System.Windows.Forms.Button();
+            this.saveLastSkippedButton = new System.Windows.Forms.Button();
+            this.versionLabel = new System.Windows.Forms.Label();
             this.groupBox3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.unitsPanel.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.legendGroupBox.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.buttonsPanel.SuspendLayout();
-            this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
 
             //MusicBee
-            this.unitKBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.unitMBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.unitGBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
             this.customFontTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
             this.preservedTagValuesLegendTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
             this.preservedTagsLegendTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
             this.changedLegendTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
             //~MusicBee
 
-            //
-            //buttonCancel
-            //
-            resources.ApplyResources(this.buttonCancel, "buttonCancel");
-            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Tag = "@pinned-to-parent-x@pinned-to-parent-y@non-defaultable";
-            this.toolTip1.SetToolTip(this.buttonCancel, resources.GetString("buttonCancel.ToolTip"));
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
-            //
-            //buttonOK
-            //
-            resources.ApplyResources(this.buttonOK, "buttonOK");
-            this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Tag = "#buttonCancel@pinned-to-parent-y";
-            this.toolTip1.SetToolTip(this.buttonOK, resources.GetString("buttonOK.ToolTip"));
-            this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
-            //
-            //label6
-            //
-            resources.ApplyResources(this.label6, "label6");
-            this.label6.Name = "label6";
-            this.label6.Tag = "@pinned-to-parent-x";
-            this.toolTip1.SetToolTip(this.label6, resources.GetString("label6.ToolTip"));
-            //
-            //versionLabel
-            //
-            resources.ApplyResources(this.versionLabel, "versionLabel");
-            this.versionLabel.Name = "versionLabel";
-            this.versionLabel.Tag = "@pinned-to-parent-x@pinned-to-parent-y";
-            this.toolTip1.SetToolTip(this.versionLabel, resources.GetString("versionLabel.ToolTip"));
             //
             //groupBox3
             //
@@ -196,7 +117,7 @@
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
-            this.groupBox3.Tag = "#tabPage1@pinned-to-parent-x";
+            this.groupBox3.Tag = "#PluginQuickSettings@pinned-to-parent-x";
             this.toolTip1.SetToolTip(this.groupBox3, resources.GetString("groupBox3.ToolTip"));
             //
             //playTickedAsrPresetSoundCheckBoxLabel
@@ -261,79 +182,6 @@
             this.label9.Name = "label9";
             this.toolTip1.SetToolTip(this.label9, resources.GetString("label9.ToolTip"));
             //
-            //groupBox4
-            //
-            resources.ApplyResources(this.groupBox4, "groupBox4");
-            this.groupBox4.Controls.Add(this.label4);
-            this.groupBox4.Controls.Add(this.label3);
-            this.groupBox4.Controls.Add(this.label2);
-            this.groupBox4.Controls.Add(this.label11);
-            this.groupBox4.Controls.Add(this.unitsPanel);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Tag = "#tabPage2@pinned-to-parent-x";
-            this.toolTip1.SetToolTip(this.groupBox4, resources.GetString("groupBox4.ToolTip"));
-            //
-            //label4
-            //
-            resources.ApplyResources(this.label4, "label4");
-            this.label4.Name = "label4";
-            this.toolTip1.SetToolTip(this.label4, resources.GetString("label4.ToolTip"));
-            //
-            //label3
-            //
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.Name = "label3";
-            this.label3.Tag = "#unitsPanel";
-            this.toolTip1.SetToolTip(this.label3, resources.GetString("label3.ToolTip"));
-            //
-            //label2
-            //
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
-            this.toolTip1.SetToolTip(this.label2, resources.GetString("label2.ToolTip"));
-            //
-            //label11
-            //
-            resources.ApplyResources(this.label11, "label11");
-            this.label11.Name = "label11";
-            this.toolTip1.SetToolTip(this.label11, resources.GetString("label11.ToolTip"));
-            //
-            //unitsPanel
-            //
-            resources.ApplyResources(this.unitsPanel, "unitsPanel");
-            this.unitsPanel.Controls.Add(this.unitGBox);
-            this.unitsPanel.Controls.Add(this.unitMBox);
-            this.unitsPanel.Controls.Add(this.unitKBox);
-            this.unitsPanel.Name = "unitsPanel";
-            this.toolTip1.SetToolTip(this.unitsPanel, resources.GetString("unitsPanel.ToolTip"));
-            //
-            //unitGBox
-            //
-            resources.ApplyResources(this.unitGBox, "unitGBox");
-            this.unitGBox.Name = "unitGBox";
-            this.toolTip1.SetToolTip(this.unitGBox, resources.GetString("unitGBox.ToolTip"));
-            //
-            //unitMBox
-            //
-            resources.ApplyResources(this.unitMBox, "unitMBox");
-            this.unitMBox.Name = "unitMBox";
-            this.toolTip1.SetToolTip(this.unitMBox, resources.GetString("unitMBox.ToolTip"));
-            //
-            //unitKBox
-            //
-            resources.ApplyResources(this.unitKBox, "unitKBox");
-            this.unitKBox.Name = "unitKBox";
-            this.toolTip1.SetToolTip(this.unitKBox, resources.GetString("unitKBox.ToolTip"));
-            //
-            //saveLastSkippedButton
-            //
-            resources.ApplyResources(this.saveLastSkippedButton, "saveLastSkippedButton");
-            this.saveLastSkippedButton.Name = "saveLastSkippedButton";
-            this.saveLastSkippedButton.Tag = "#buttonOK@pinned-to-parent-y";
-            this.toolTip1.SetToolTip(this.saveLastSkippedButton, resources.GetString("saveLastSkippedButton.ToolTip"));
-            this.saveLastSkippedButton.Click += new System.EventHandler(this.saveLastSkippedButton_Click);
-            //
             //useSkinColorsCheckBox
             //
             resources.ApplyResources(this.useSkinColorsCheckBox, "useSkinColorsCheckBox");
@@ -369,8 +217,6 @@
             //
             resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Controls.Add(this.legendGroupBox);
-            this.groupBox2.Controls.Add(this.highlightChangedTagsCheckBoxLabel);
-            this.groupBox2.Controls.Add(this.highlightChangedTagsCheckBox);
             this.groupBox2.Controls.Add(this.showHiddenCommandWindowsRadioButtonLabel);
             this.groupBox2.Controls.Add(this.showHiddenCommandWindowsRadioButton);
             this.groupBox2.Controls.Add(this.closeHiddenCommandWindowsRadioButtonLabel);
@@ -383,12 +229,14 @@
             this.groupBox2.Controls.Add(this.useCustomFontCheckBox);
             this.groupBox2.Controls.Add(this.useMusicBeeFontCheckBoxLabel);
             this.groupBox2.Controls.Add(this.useMusicBeeFontCheckBox);
+            this.groupBox2.Controls.Add(this.highlightChangedTagsCheckBoxLabel);
+            this.groupBox2.Controls.Add(this.highlightChangedTagsCheckBox);
             this.groupBox2.Controls.Add(this.useSkinColorsCheckBoxLabel);
             this.groupBox2.Controls.Add(this.useSkinColorsCheckBox);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
-            this.groupBox2.Tag = "#tabPage1@pinned-to-parent-x";
+            this.groupBox2.Tag = "#PluginQuickSettings@pinned-to-parent-x";
             this.toolTip1.SetToolTip(this.groupBox2, resources.GetString("groupBox2.ToolTip"));
             //
             //legendGroupBox
@@ -435,13 +283,6 @@
             resources.ApplyResources(this.legendLabel, "legendLabel");
             this.legendLabel.Name = "legendLabel";
             this.toolTip1.SetToolTip(this.legendLabel, resources.GetString("legendLabel.ToolTip"));
-            //
-            //highlightChangedTagsCheckBoxLabel
-            //
-            resources.ApplyResources(this.highlightChangedTagsCheckBoxLabel, "highlightChangedTagsCheckBoxLabel");
-            this.highlightChangedTagsCheckBoxLabel.Name = "highlightChangedTagsCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.highlightChangedTagsCheckBoxLabel, resources.GetString("highlightChangedTagsCheckBoxLabel.ToolTip"));
-            this.highlightChangedTagsCheckBoxLabel.Click += new System.EventHandler(this.highlightChangedTagsCheckBoxLabel_Click);
             //
             //showHiddenCommandWindowsRadioButtonLabel
             //
@@ -524,6 +365,13 @@
             this.toolTip1.SetToolTip(this.useMusicBeeFontCheckBox, resources.GetString("useMusicBeeFontCheckBox.ToolTip"));
             this.useMusicBeeFontCheckBox.CheckedChanged += new System.EventHandler(this.useMusicBeeFontCheckBox_CheckedChanged);
             //
+            //highlightChangedTagsCheckBoxLabel
+            //
+            resources.ApplyResources(this.highlightChangedTagsCheckBoxLabel, "highlightChangedTagsCheckBoxLabel");
+            this.highlightChangedTagsCheckBoxLabel.Name = "highlightChangedTagsCheckBoxLabel";
+            this.toolTip1.SetToolTip(this.highlightChangedTagsCheckBoxLabel, resources.GetString("highlightChangedTagsCheckBoxLabel.ToolTip"));
+            this.highlightChangedTagsCheckBoxLabel.Click += new System.EventHandler(this.highlightChangedTagsCheckBoxLabel_Click);
+            //
             //useSkinColorsCheckBoxLabel
             //
             resources.ApplyResources(this.useSkinColorsCheckBoxLabel, "useSkinColorsCheckBoxLabel");
@@ -538,147 +386,6 @@
             this.label8.Name = "label8";
             this.toolTip1.SetToolTip(this.label8, resources.GetString("label8.ToolTip"));
             //
-            //showReencodeTagCheckBox
-            //
-            resources.ApplyResources(this.showReencodeTagCheckBox, "showReencodeTagCheckBox");
-            this.showReencodeTagCheckBox.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.showReencodeTagCheckBox.Name = "showReencodeTagCheckBox";
-            this.showReencodeTagCheckBox.Tag = "#showReencodeTagCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.showReencodeTagCheckBox, resources.GetString("showReencodeTagCheckBox.ToolTip"));
-            //
-            //showChangeCaseCheckBox
-            //
-            resources.ApplyResources(this.showChangeCaseCheckBox, "showChangeCaseCheckBox");
-            this.showChangeCaseCheckBox.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.showChangeCaseCheckBox.Name = "showChangeCaseCheckBox";
-            this.showChangeCaseCheckBox.Tag = "#showChangeCaseCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.showChangeCaseCheckBox, resources.GetString("showChangeCaseCheckBox.ToolTip"));
-            //
-            //showLibraryReportsCheckBox
-            //
-            resources.ApplyResources(this.showLibraryReportsCheckBox, "showLibraryReportsCheckBox");
-            this.showLibraryReportsCheckBox.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.showLibraryReportsCheckBox.Name = "showLibraryReportsCheckBox";
-            this.showLibraryReportsCheckBox.Tag = "#showLibraryReportsCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.showLibraryReportsCheckBox, resources.GetString("showLibraryReportsCheckBox.ToolTip"));
-            //
-            //showCopyTagCheckBox
-            //
-            resources.ApplyResources(this.showCopyTagCheckBox, "showCopyTagCheckBox");
-            this.showCopyTagCheckBox.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.showCopyTagCheckBox.Name = "showCopyTagCheckBox";
-            this.showCopyTagCheckBox.Tag = "#showCopyTagCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.showCopyTagCheckBox, resources.GetString("showCopyTagCheckBox.ToolTip"));
-            //
-            //showAutorateCheckBox
-            //
-            resources.ApplyResources(this.showAutorateCheckBox, "showAutorateCheckBox");
-            this.showAutorateCheckBox.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.showAutorateCheckBox.Name = "showAutorateCheckBox";
-            this.showAutorateCheckBox.Tag = "#showAutorateCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.showAutorateCheckBox, resources.GetString("showAutorateCheckBox.ToolTip"));
-            //
-            //showSwapTagsCheckBox
-            //
-            resources.ApplyResources(this.showSwapTagsCheckBox, "showSwapTagsCheckBox");
-            this.showSwapTagsCheckBox.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.showSwapTagsCheckBox.Name = "showSwapTagsCheckBox";
-            this.showSwapTagsCheckBox.Tag = "#showSwapTagsCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.showSwapTagsCheckBox, resources.GetString("showSwapTagsCheckBox.ToolTip"));
-            //
-            //showASRCheckBox
-            //
-            resources.ApplyResources(this.showASRCheckBox, "showASRCheckBox");
-            this.showASRCheckBox.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.showASRCheckBox.Name = "showASRCheckBox";
-            this.showASRCheckBox.Tag = "#showASRCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.showASRCheckBox, resources.GetString("showASRCheckBox.ToolTip"));
-            //
-            //showShowHiddenWindowsCheckBox
-            //
-            resources.ApplyResources(this.showShowHiddenWindowsCheckBox, "showShowHiddenWindowsCheckBox");
-            this.showShowHiddenWindowsCheckBox.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.showShowHiddenWindowsCheckBox.Name = "showShowHiddenWindowsCheckBox";
-            this.showShowHiddenWindowsCheckBox.Tag = "#showShowHiddenWindowsCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.showShowHiddenWindowsCheckBox, resources.GetString("showShowHiddenWindowsCheckBox.ToolTip"));
-            //
-            //showCARCheckBox
-            //
-            resources.ApplyResources(this.showCARCheckBox, "showCARCheckBox");
-            this.showCARCheckBox.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.showCARCheckBox.Name = "showCARCheckBox";
-            this.showCARCheckBox.Tag = "#showCARCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.showCARCheckBox, resources.GetString("showCARCheckBox.ToolTip"));
-            //
-            //showBackupRestoreCheckBox
-            //
-            resources.ApplyResources(this.showBackupRestoreCheckBox, "showBackupRestoreCheckBox");
-            this.showBackupRestoreCheckBox.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.showBackupRestoreCheckBox.Name = "showBackupRestoreCheckBox";
-            this.showBackupRestoreCheckBox.Tag = "#showBackupRestoreCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.showBackupRestoreCheckBox, resources.GetString("showBackupRestoreCheckBox.ToolTip"));
-            //
-            //contextMenuCheckBox
-            //
-            resources.ApplyResources(this.contextMenuCheckBox, "contextMenuCheckBox");
-            this.contextMenuCheckBox.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.contextMenuCheckBox.Name = "contextMenuCheckBox";
-            this.contextMenuCheckBox.Tag = "#contextMenuCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.contextMenuCheckBox, resources.GetString("contextMenuCheckBox.ToolTip"));
-            //
-            //showCTCheckBox
-            //
-            resources.ApplyResources(this.showCTCheckBox, "showCTCheckBox");
-            this.showCTCheckBox.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.showCTCheckBox.Name = "showCTCheckBox";
-            this.showCTCheckBox.Tag = "#showCTCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.showCTCheckBox, resources.GetString("showCTCheckBox.ToolTip"));
-            //
-            //groupBox1
-            //
-            resources.ApplyResources(this.groupBox1, "groupBox1");
-            this.groupBox1.Controls.Add(this.contextMenuCheckBoxLabel);
-            this.groupBox1.Controls.Add(this.contextMenuCheckBox);
-            this.groupBox1.Controls.Add(this.allowCommandExecutionWithoutPreviewCheckBoxLabel);
-            this.groupBox1.Controls.Add(this.allowCommandExecutionWithoutPreviewCheckBox);
-            this.groupBox1.Controls.Add(this.allowAsrLrPresetAutoexecutionCheckBoxLabel);
-            this.groupBox1.Controls.Add(this.allowAsrLrPresetAutoexecutionCheckBox);
-            this.groupBox1.Controls.Add(this.showShowHiddenWindowsCheckBoxLabel);
-            this.groupBox1.Controls.Add(this.showShowHiddenWindowsCheckBox);
-            this.groupBox1.Controls.Add(this.showBackupRestoreCheckBoxLabel);
-            this.groupBox1.Controls.Add(this.showBackupRestoreCheckBox);
-            this.groupBox1.Controls.Add(this.showCTCheckBoxLabel);
-            this.groupBox1.Controls.Add(this.showCTCheckBox);
-            this.groupBox1.Controls.Add(this.showCARCheckBoxLabel);
-            this.groupBox1.Controls.Add(this.showCARCheckBox);
-            this.groupBox1.Controls.Add(this.showASRCheckBoxLabel);
-            this.groupBox1.Controls.Add(this.showASRCheckBox);
-            this.groupBox1.Controls.Add(this.showAutorateCheckBoxLabel);
-            this.groupBox1.Controls.Add(this.showAutorateCheckBox);
-            this.groupBox1.Controls.Add(this.showLibraryReportsCheckBoxLabel);
-            this.groupBox1.Controls.Add(this.showLibraryReportsCheckBox);
-            this.groupBox1.Controls.Add(this.showReencodeTagCheckBoxLabel);
-            this.groupBox1.Controls.Add(this.showReencodeTagCheckBox);
-            this.groupBox1.Controls.Add(this.showChangeCaseCheckBoxLabel);
-            this.groupBox1.Controls.Add(this.showChangeCaseCheckBox);
-            this.groupBox1.Controls.Add(this.showSwapTagsCheckBoxLabel);
-            this.groupBox1.Controls.Add(this.showSwapTagsCheckBox);
-            this.groupBox1.Controls.Add(this.showCopyTagCheckBoxLabel);
-            this.groupBox1.Controls.Add(this.showCopyTagCheckBox);
-            this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Tag = "#tabPage1@pinned-to-parent-x";
-            this.toolTip1.SetToolTip(this.groupBox1, resources.GetString("groupBox1.ToolTip"));
-            //
-            //contextMenuCheckBoxLabel
-            //
-            resources.ApplyResources(this.contextMenuCheckBoxLabel, "contextMenuCheckBoxLabel");
-            this.contextMenuCheckBoxLabel.Name = "contextMenuCheckBoxLabel";
-            this.contextMenuCheckBoxLabel.Tag = "";
-            this.toolTip1.SetToolTip(this.contextMenuCheckBoxLabel, resources.GetString("contextMenuCheckBoxLabel.ToolTip"));
-            this.contextMenuCheckBoxLabel.Click += new System.EventHandler(this.contextMenuCheckBoxLabel_Click);
-            //
             //allowCommandExecutionWithoutPreviewCheckBoxLabel
             //
             resources.ApplyResources(this.allowCommandExecutionWithoutPreviewCheckBoxLabel, "allowCommandExecutionWithoutPreviewCheckBoxLabel");
@@ -691,110 +398,10 @@
             //allowCommandExecutionWithoutPreviewCheckBox
             //
             resources.ApplyResources(this.allowCommandExecutionWithoutPreviewCheckBox, "allowCommandExecutionWithoutPreviewCheckBox");
-            this.allowCommandExecutionWithoutPreviewCheckBox.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.allowCommandExecutionWithoutPreviewCheckBox.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.allowCommandExecutionWithoutPreviewCheckBox.Name = "allowCommandExecutionWithoutPreviewCheckBox";
-            this.allowCommandExecutionWithoutPreviewCheckBox.Tag = "#allowCommandExecutionWithoutPreviewCheckBoxLabel";
+            this.allowCommandExecutionWithoutPreviewCheckBox.Tag = "#allowCommandExecutionWithoutPreviewCheckBoxLabel@pinned-to-parent-x";
             this.toolTip1.SetToolTip(this.allowCommandExecutionWithoutPreviewCheckBox, resources.GetString("allowCommandExecutionWithoutPreviewCheckBox.ToolTip"));
-            //
-            //allowAsrLrPresetAutoexecutionCheckBoxLabel
-            //
-            resources.ApplyResources(this.allowAsrLrPresetAutoexecutionCheckBoxLabel, "allowAsrLrPresetAutoexecutionCheckBoxLabel");
-            this.allowAsrLrPresetAutoexecutionCheckBoxLabel.Name = "allowAsrLrPresetAutoexecutionCheckBoxLabel";
-            this.allowAsrLrPresetAutoexecutionCheckBoxLabel.Tag = "";
-            this.toolTip1.SetToolTip(this.allowAsrLrPresetAutoexecutionCheckBoxLabel, resources.GetString("allowAsrLrPresetAutoexecutionCheckBoxLabel.ToolTip"));
-            this.allowAsrLrPresetAutoexecutionCheckBoxLabel.Click += new System.EventHandler(this.allowAsrLrPresetAutoexecutionCheckBoxLabel_Click);
-            //
-            //allowAsrLrPresetAutoexecutionCheckBox
-            //
-            resources.ApplyResources(this.allowAsrLrPresetAutoexecutionCheckBox, "allowAsrLrPresetAutoexecutionCheckBox");
-            this.allowAsrLrPresetAutoexecutionCheckBox.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.allowAsrLrPresetAutoexecutionCheckBox.Name = "allowAsrLrPresetAutoexecutionCheckBox";
-            this.allowAsrLrPresetAutoexecutionCheckBox.Tag = "#allowAsrLrPresetAutoexecutionCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.allowAsrLrPresetAutoexecutionCheckBox, resources.GetString("allowAsrLrPresetAutoexecutionCheckBox.ToolTip"));
-            //
-            //showShowHiddenWindowsCheckBoxLabel
-            //
-            resources.ApplyResources(this.showShowHiddenWindowsCheckBoxLabel, "showShowHiddenWindowsCheckBoxLabel");
-            this.showShowHiddenWindowsCheckBoxLabel.Name = "showShowHiddenWindowsCheckBoxLabel";
-            this.showShowHiddenWindowsCheckBoxLabel.Tag = "";
-            this.toolTip1.SetToolTip(this.showShowHiddenWindowsCheckBoxLabel, resources.GetString("showShowHiddenWindowsCheckBoxLabel.ToolTip"));
-            this.showShowHiddenWindowsCheckBoxLabel.Click += new System.EventHandler(this.showShowHiddenWindowsCheckBoxLabel_Click);
-            //
-            //showBackupRestoreCheckBoxLabel
-            //
-            resources.ApplyResources(this.showBackupRestoreCheckBoxLabel, "showBackupRestoreCheckBoxLabel");
-            this.showBackupRestoreCheckBoxLabel.Name = "showBackupRestoreCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.showBackupRestoreCheckBoxLabel, resources.GetString("showBackupRestoreCheckBoxLabel.ToolTip"));
-            this.showBackupRestoreCheckBoxLabel.Click += new System.EventHandler(this.showBackupRestoreCheckBoxLabel_Click);
-            //
-            //showCTCheckBoxLabel
-            //
-            resources.ApplyResources(this.showCTCheckBoxLabel, "showCTCheckBoxLabel");
-            this.showCTCheckBoxLabel.Name = "showCTCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.showCTCheckBoxLabel, resources.GetString("showCTCheckBoxLabel.ToolTip"));
-            this.showCTCheckBoxLabel.Click += new System.EventHandler(this.showCTCheckBoxLabel_Click);
-            //
-            //showCARCheckBoxLabel
-            //
-            resources.ApplyResources(this.showCARCheckBoxLabel, "showCARCheckBoxLabel");
-            this.showCARCheckBoxLabel.Name = "showCARCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.showCARCheckBoxLabel, resources.GetString("showCARCheckBoxLabel.ToolTip"));
-            this.showCARCheckBoxLabel.Click += new System.EventHandler(this.showCARCheckBoxLabel_Click);
-            //
-            //showASRCheckBoxLabel
-            //
-            resources.ApplyResources(this.showASRCheckBoxLabel, "showASRCheckBoxLabel");
-            this.showASRCheckBoxLabel.Name = "showASRCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.showASRCheckBoxLabel, resources.GetString("showASRCheckBoxLabel.ToolTip"));
-            this.showASRCheckBoxLabel.Click += new System.EventHandler(this.showASRCheckBoxLabel_Click);
-            //
-            //showAutorateCheckBoxLabel
-            //
-            resources.ApplyResources(this.showAutorateCheckBoxLabel, "showAutorateCheckBoxLabel");
-            this.showAutorateCheckBoxLabel.Name = "showAutorateCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.showAutorateCheckBoxLabel, resources.GetString("showAutorateCheckBoxLabel.ToolTip"));
-            this.showAutorateCheckBoxLabel.Click += new System.EventHandler(this.showAutorateCheckBoxLabel_Click);
-            //
-            //showLibraryReportsCheckBoxLabel
-            //
-            resources.ApplyResources(this.showLibraryReportsCheckBoxLabel, "showLibraryReportsCheckBoxLabel");
-            this.showLibraryReportsCheckBoxLabel.Name = "showLibraryReportsCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.showLibraryReportsCheckBoxLabel, resources.GetString("showLibraryReportsCheckBoxLabel.ToolTip"));
-            this.showLibraryReportsCheckBoxLabel.Click += new System.EventHandler(this.showLibraryReportsCheckBoxLabel_Click);
-            //
-            //showReencodeTagCheckBoxLabel
-            //
-            resources.ApplyResources(this.showReencodeTagCheckBoxLabel, "showReencodeTagCheckBoxLabel");
-            this.showReencodeTagCheckBoxLabel.Name = "showReencodeTagCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.showReencodeTagCheckBoxLabel, resources.GetString("showReencodeTagCheckBoxLabel.ToolTip"));
-            this.showReencodeTagCheckBoxLabel.Click += new System.EventHandler(this.showReencodeTagCheckBoxLabel_Click);
-            //
-            //showChangeCaseCheckBoxLabel
-            //
-            resources.ApplyResources(this.showChangeCaseCheckBoxLabel, "showChangeCaseCheckBoxLabel");
-            this.showChangeCaseCheckBoxLabel.Name = "showChangeCaseCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.showChangeCaseCheckBoxLabel, resources.GetString("showChangeCaseCheckBoxLabel.ToolTip"));
-            this.showChangeCaseCheckBoxLabel.Click += new System.EventHandler(this.showChangeCaseCheckBoxLabel_Click);
-            //
-            //showSwapTagsCheckBoxLabel
-            //
-            resources.ApplyResources(this.showSwapTagsCheckBoxLabel, "showSwapTagsCheckBoxLabel");
-            this.showSwapTagsCheckBoxLabel.Name = "showSwapTagsCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.showSwapTagsCheckBoxLabel, resources.GetString("showSwapTagsCheckBoxLabel.ToolTip"));
-            this.showSwapTagsCheckBoxLabel.Click += new System.EventHandler(this.showSwapTagsCheckBoxLabel_Click);
-            //
-            //showCopyTagCheckBoxLabel
-            //
-            resources.ApplyResources(this.showCopyTagCheckBoxLabel, "showCopyTagCheckBoxLabel");
-            this.showCopyTagCheckBoxLabel.Name = "showCopyTagCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.showCopyTagCheckBoxLabel, resources.GetString("showCopyTagCheckBoxLabel.ToolTip"));
-            this.showCopyTagCheckBoxLabel.Click += new System.EventHandler(this.showCopyTagCheckBoxLabel_Click);
-            //
-            //label7
-            //
-            resources.ApplyResources(this.label7, "label7");
-            this.label7.Name = "label7";
-            this.toolTip1.SetToolTip(this.label7, resources.GetString("label7.ToolTip"));
             //
             //groupBox5
             //
@@ -808,7 +415,7 @@
             this.groupBox5.Controls.Add(this.label10);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.TabStop = false;
-            this.groupBox5.Tag = "#tabPage2@pinned-to-parent-x";
+            this.groupBox5.Tag = "#PluginQuickSettings@pinned-to-parent-x";
             this.toolTip1.SetToolTip(this.groupBox5, resources.GetString("groupBox5.ToolTip"));
             //
             //includePreservedTagValuesCheckBoxLabel
@@ -859,13 +466,20 @@
             this.label10.Name = "label10";
             this.toolTip1.SetToolTip(this.label10, resources.GetString("label10.ToolTip"));
             //
-            //label1
+            //allowAsrLrPresetAutoExecutionCheckBoxLabel
             //
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label1.Name = "label1";
-            this.label1.Tag = "@pinned-to-parent-x";
-            this.toolTip1.SetToolTip(this.label1, resources.GetString("label1.ToolTip"));
+            resources.ApplyResources(this.allowAsrLrPresetAutoExecutionCheckBoxLabel, "allowAsrLrPresetAutoExecutionCheckBoxLabel");
+            this.allowAsrLrPresetAutoExecutionCheckBoxLabel.Name = "allowAsrLrPresetAutoExecutionCheckBoxLabel";
+            this.allowAsrLrPresetAutoExecutionCheckBoxLabel.Tag = "";
+            this.toolTip1.SetToolTip(this.allowAsrLrPresetAutoExecutionCheckBoxLabel, resources.GetString("allowAsrLrPresetAutoExecutionCheckBoxLabel.ToolTip"));
+            this.allowAsrLrPresetAutoExecutionCheckBoxLabel.Click += new System.EventHandler(this.allowAsrLrPresetAutoExecutionCheckBoxLabel_Click);
+            //
+            //allowAsrLrPresetAutoExecutionCheckBox
+            //
+            resources.ApplyResources(this.allowAsrLrPresetAutoExecutionCheckBox, "allowAsrLrPresetAutoExecutionCheckBox");
+            this.allowAsrLrPresetAutoExecutionCheckBox.Name = "allowAsrLrPresetAutoExecutionCheckBox";
+            this.allowAsrLrPresetAutoExecutionCheckBox.Tag = "#allowAsrLrPresetAutoExecutionCheckBoxLabel@pinned-to-parent-x";
+            this.toolTip1.SetToolTip(this.allowAsrLrPresetAutoExecutionCheckBox, resources.GetString("allowAsrLrPresetAutoExecutionCheckBox.ToolTip"));
             //
             //label5
             //
@@ -875,6 +489,21 @@
             this.label5.Tag = "@pinned-to-parent-x";
             this.toolTip1.SetToolTip(this.label5, resources.GetString("label5.ToolTip"));
             //
+            //label1
+            //
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.label1.Name = "label1";
+            this.label1.Tag = "@pinned-to-parent-x";
+            this.toolTip1.SetToolTip(this.label1, resources.GetString("label1.ToolTip"));
+            //
+            //label6
+            //
+            resources.ApplyResources(this.label6, "label6");
+            this.label6.Name = "label6";
+            this.label6.Tag = "@pinned-to-parent-x";
+            this.toolTip1.SetToolTip(this.label6, resources.GetString("label6.ToolTip"));
+            //
             //buttonsPanel
             //
             resources.ApplyResources(this.buttonsPanel, "buttonsPanel");
@@ -883,111 +512,85 @@
             this.buttonsPanel.Controls.Add(this.saveLastSkippedButton);
             this.buttonsPanel.Controls.Add(this.versionLabel);
             this.buttonsPanel.Name = "buttonsPanel";
-            this.buttonsPanel.Tag = "#PluginSettings&PluginSettings@pinned-to-parent-x";
+            this.buttonsPanel.Tag = "#PluginQuickSettings&PluginQuickSettings@pinned-to-parent-x";
             this.toolTip1.SetToolTip(this.buttonsPanel, resources.GetString("buttonsPanel.ToolTip"));
             //
-            //tabControl1
+            //buttonCancel
             //
-            resources.ApplyResources(this.tabControl1, "tabControl1");
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Tag = "#PluginSettings@pinned-to-parent-x";
-            this.toolTip1.SetToolTip(this.tabControl1, resources.GetString("tabControl1.ToolTip"));
+            resources.ApplyResources(this.buttonCancel, "buttonCancel");
+            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Tag = "@pinned-to-parent-x@pinned-to-parent-y@non-defaultable";
+            this.toolTip1.SetToolTip(this.buttonCancel, resources.GetString("buttonCancel.ToolTip"));
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             //
-            //tabPage1
+            //buttonOK
             //
-            resources.ApplyResources(this.tabPage1, "tabPage1");
-            this.tabPage1.Controls.Add(this.groupBox3);
-            this.tabPage1.Controls.Add(this.groupBox2);
-            this.tabPage1.Controls.Add(this.groupBox1);
-            this.tabPage1.Name = "tabPage1";
-            this.toolTip1.SetToolTip(this.tabPage1, resources.GetString("tabPage1.ToolTip"));
+            resources.ApplyResources(this.buttonOK, "buttonOK");
+            this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.buttonOK.Name = "buttonOK";
+            this.buttonOK.Tag = "#buttonCancel@pinned-to-parent-y";
+            this.toolTip1.SetToolTip(this.buttonOK, resources.GetString("buttonOK.ToolTip"));
+            this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             //
-            //tabPage2
+            //saveLastSkippedButton
             //
-            resources.ApplyResources(this.tabPage2, "tabPage2");
-            this.tabPage2.Controls.Add(this.groupBox4);
-            this.tabPage2.Controls.Add(this.groupBox5);
-            this.tabPage2.Name = "tabPage2";
-            this.toolTip1.SetToolTip(this.tabPage2, resources.GetString("tabPage2.ToolTip"));
+            resources.ApplyResources(this.saveLastSkippedButton, "saveLastSkippedButton");
+            this.saveLastSkippedButton.Name = "saveLastSkippedButton";
+            this.saveLastSkippedButton.Tag = "#buttonOK@pinned-to-parent-y";
+            this.toolTip1.SetToolTip(this.saveLastSkippedButton, resources.GetString("saveLastSkippedButton.ToolTip"));
             //
-            //PluginSettings
+            //versionLabel
             //
-            this.AcceptButton = this.buttonOK;
+            resources.ApplyResources(this.versionLabel, "versionLabel");
+            this.versionLabel.Name = "versionLabel";
+            this.versionLabel.Tag = "@pinned-to-parent-x@pinned-to-parent-y";
+            this.toolTip1.SetToolTip(this.versionLabel, resources.GetString("versionLabel.ToolTip"));
+            //
+            //PluginQuickSettings
+            //
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.buttonCancel;
             this.Controls.Add(this.buttonsPanel);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.groupBox5);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.allowCommandExecutionWithoutPreviewCheckBoxLabel);
+            this.Controls.Add(this.allowCommandExecutionWithoutPreviewCheckBox);
+            this.Controls.Add(this.allowAsrLrPresetAutoExecutionCheckBoxLabel);
+            this.Controls.Add(this.allowAsrLrPresetAutoExecutionCheckBox);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label6);
-            this.Name = "PluginSettings";
+            this.Name = "PluginQuickSettings";
             this.Tag = "@min-max-width-same@min-max-height-same";
             this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            this.unitsPanel.ResumeLayout(false);
-            this.unitsPanel.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.legendGroupBox.ResumeLayout(false);
             this.legendGroupBox.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.buttonsPanel.ResumeLayout(false);
             this.buttonsPanel.PerformLayout();
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button buttonCancel;
-        private System.Windows.Forms.Button buttonOK;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label versionLabel;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.CheckBox playStoppedSoundCheckBox;
         private System.Windows.Forms.CheckBox playStartedSoundCheckBox;
         private System.Windows.Forms.CheckBox playCompletedSoundCheckBox;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.TextBox unitGBox;
-        private System.Windows.Forms.TextBox unitMBox;
-        private System.Windows.Forms.TextBox unitKBox;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button saveLastSkippedButton;
         private System.Windows.Forms.CheckBox playTickedAsrPresetSoundCheckBox;
         private System.Windows.Forms.CheckBox useSkinColorsCheckBox;
         private System.Windows.Forms.RadioButton closeHiddenCommandWindowsRadioButton;
         private System.Windows.Forms.RadioButton showHiddenCommandWindowsRadioButton;
         private System.Windows.Forms.CheckBox highlightChangedTagsCheckBox;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.CheckBox showReencodeTagCheckBox;
-        private System.Windows.Forms.CheckBox showChangeCaseCheckBox;
-        private System.Windows.Forms.CheckBox showLibraryReportsCheckBox;
-        private System.Windows.Forms.CheckBox showCopyTagCheckBox;
-        private System.Windows.Forms.CheckBox showAutorateCheckBox;
-        private System.Windows.Forms.CheckBox showSwapTagsCheckBox;
-        private System.Windows.Forms.CheckBox showASRCheckBox;
-        private System.Windows.Forms.CheckBox showShowHiddenWindowsCheckBox;
-        private System.Windows.Forms.CheckBox showCARCheckBox;
-        private System.Windows.Forms.CheckBox showBackupRestoreCheckBox;
-        private System.Windows.Forms.CheckBox contextMenuCheckBox;
-        private System.Windows.Forms.CheckBox showCTCheckBox;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.CheckBox includeNotChangedTagsCheckBox;
         private System.Windows.Forms.CheckBox includePreservedTagsCheckBox;
@@ -997,21 +600,7 @@
         private System.Windows.Forms.TextBox preservedTagsLegendTextBox;
         private System.Windows.Forms.TextBox changedLegendTextBox;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.CheckBox minimizePluginWindowsCheckBox;
-        private System.Windows.Forms.Label showSwapTagsCheckBoxLabel;
-        private System.Windows.Forms.Label showCopyTagCheckBoxLabel;
-        private System.Windows.Forms.Label showLibraryReportsCheckBoxLabel;
-        private System.Windows.Forms.Label showReencodeTagCheckBoxLabel;
-        private System.Windows.Forms.Label showChangeCaseCheckBoxLabel;
-        private System.Windows.Forms.Label showCARCheckBoxLabel;
-        private System.Windows.Forms.Label showASRCheckBoxLabel;
-        private System.Windows.Forms.Label showAutorateCheckBoxLabel;
-        private System.Windows.Forms.Label contextMenuCheckBoxLabel;
-        private System.Windows.Forms.Label showBackupRestoreCheckBoxLabel;
-        private System.Windows.Forms.Label showShowHiddenWindowsCheckBoxLabel;
-        private System.Windows.Forms.Label showCTCheckBoxLabel;
         private System.Windows.Forms.Label minimizePluginWindowsCheckBoxLabel;
         private System.Windows.Forms.Label highlightChangedTagsCheckBoxLabel;
         private System.Windows.Forms.Label useSkinColorsCheckBoxLabel;
@@ -1027,23 +616,24 @@
         private System.Windows.Forms.Label allowCommandExecutionWithoutPreviewCheckBoxLabel;
         private System.Windows.Forms.CheckBox allowCommandExecutionWithoutPreviewCheckBox;
         private System.Windows.Forms.Label legendLabel;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label allowAsrLrPresetAutoexecutionCheckBoxLabel;
-        private System.Windows.Forms.CheckBox allowAsrLrPresetAutoexecutionCheckBox;
-        private System.Windows.Forms.Panel buttonsPanel;
-        private System.Windows.Forms.Panel unitsPanel;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Label allowAsrLrPresetAutoExecutionCheckBoxLabel;
+        private System.Windows.Forms.CheckBox allowAsrLrPresetAutoExecutionCheckBox;
         private System.Windows.Forms.Label useMusicBeeFontCheckBoxLabel;
         private System.Windows.Forms.CheckBox useMusicBeeFontCheckBox;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button customFontButton;
         private System.Windows.Forms.TextBox customFontTextBox;
         private System.Windows.Forms.Label useCustomFontCheckBoxLabel;
         private System.Windows.Forms.CheckBox useCustomFontCheckBox;
-        private System.Windows.Forms.Button customFontButton;
+        private System.Windows.Forms.Panel buttonsPanel;
+        private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.Button buttonOK;
+        private System.Windows.Forms.Button saveLastSkippedButton;
+        private System.Windows.Forms.Label versionLabel;
     }
 }

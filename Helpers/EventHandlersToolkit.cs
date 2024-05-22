@@ -71,7 +71,7 @@ namespace MusicBeePlugin
             PropertyInfo pi = type.GetProperty("Events",
                BindingFlags.NonPublic | BindingFlags.Instance);
 
-            return (EventHandlerList)pi.GetValue(c, null);
+            return pi.GetValue(c, null) as EventHandlerList;
         }
 
         internal static void FireEvent(object targetObject, string eventName, EventArgs e)
@@ -96,8 +96,7 @@ namespace MusicBeePlugin
                   methodName,
                   BindingFlags.Instance | BindingFlags.NonPublic);
 
-            if (mi == null)
-                throw new ArgumentException("Cannot find event thrower named " + methodName);
+            _ = mi ?? throw new ArgumentException("Cannot find event thrower named " + methodName);
 
             mi.Invoke(targetObject, new object[] { e });
         }

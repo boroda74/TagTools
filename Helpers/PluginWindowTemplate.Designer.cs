@@ -18,6 +18,12 @@
                 components.Dispose();
             }
 
+            if (disposing)
+            {
+                foreach (var customCombox in namesComboBoxes.Values)
+                    customCombox.Dispose();
+            }
+
             base.Dispose(disposing);
         }
 

@@ -16,9 +16,9 @@ namespace MusicBeePlugin
         private CustomComboBox addedTextBoxCustom;
 
 
-        private DataGridViewCellStyle unchangedCellStyle = new DataGridViewCellStyle(UnchangedCellStyle);
-        private DataGridViewCellStyle changedCellStyle = new DataGridViewCellStyle(ChangedCellStyle);
-        private DataGridViewCellStyle dimmedCellStyle = new DataGridViewCellStyle(DimmedCellStyle);
+        private readonly DataGridViewCellStyle unchangedCellStyle = new DataGridViewCellStyle(UnchangedCellStyle);
+        private readonly DataGridViewCellStyle changedCellStyle = new DataGridViewCellStyle(ChangedCellStyle);
+        private readonly DataGridViewCellStyle dimmedCellStyle = new DataGridViewCellStyle(DimmedCellStyle);
 
         private delegate void AddRowToTable(string[] row);
         private delegate void ProcessRowOfTable(int row);
@@ -39,15 +39,14 @@ namespace MusicBeePlugin
         private bool smartOperation;
         private bool appendSource;
         private bool addSource;
-        private string customText;
         private string appendedText;
         private string addedText;
 
         private string[] files = new string[0];
-        private List<string[]> tags = new List<string[]>();
+        private readonly List<string[]> tags = new List<string[]>();
         private string[] fileTags;
 
-        internal CopyTag(Plugin tagToolsPluginParam) : base(tagToolsPluginParam)
+        internal CopyTag(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
         }
@@ -184,7 +183,6 @@ namespace MusicBeePlugin
             onlyIfSourceNotEmpty = onlyIfSourceNotEmptyCheckBox.Checked;
             appendSource = appendCheckBox.Checked;
             addSource = addCheckBox.Checked;
-            customText = fileNameTextBoxCustom.Text;
             appendedText = appendedTextBoxCustom.Text;
             addedText = addedTextBoxCustom.Text;
 
@@ -505,7 +503,6 @@ namespace MusicBeePlugin
                 return;
 
             appendCheckBox.Checked = !appendCheckBox.Checked;
-            appendCheckBox_CheckedChanged(null, null);
         }
 
         private void addCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -522,7 +519,6 @@ namespace MusicBeePlugin
                 return;
 
             addCheckBox.Checked = !addCheckBox.Checked;
-            addCheckBox_CheckedChanged(null, null);
         }
 
         private void sourceTagList_SelectedIndexChanged(object sender, EventArgs e)
@@ -719,7 +715,7 @@ namespace MusicBeePlugin
         {
             OpenFileDialog dialog = new OpenFileDialog
             {
-                Filter = "Text files|*.txt",
+                Filter = CtlCopyTagFilter,
                 FilterIndex = 0
             };
             if (dialog.ShowDialog(this) == DialogResult.Cancel) return;
@@ -729,7 +725,7 @@ namespace MusicBeePlugin
 
         private void buttonSettings_Click(object sender, EventArgs e)
         {
-            PluginQuickSettings settings = new PluginQuickSettings(TagToolsPlugin);
+            QuickSettings settings = new QuickSettings(TagToolsPlugin);
             Display(settings, true);
         }
 
@@ -744,7 +740,6 @@ namespace MusicBeePlugin
                 return;
 
             onlyIfDestinationEmptyCheckBox.Checked = !onlyIfDestinationEmptyCheckBox.Checked;
-            onlyIfDestinationEmptyCheckBox_CheckedChanged(null, null);
         }
 
 
@@ -768,7 +763,6 @@ namespace MusicBeePlugin
                 return;
 
             smartOperationCheckBox.Checked = !smartOperationCheckBox.Checked;
-            onlyIfSourceNotEmptyCheckBox_CheckedChanged(null, null);
         }
 
         private void CopyTag_Load(object sender, EventArgs e)

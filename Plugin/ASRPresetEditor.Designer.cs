@@ -1,6 +1,6 @@
 ﻿namespace MusicBeePlugin
 {
-    partial class ASRPresetEditor
+    partial class AsrPresetEditor
     {
         ///<summary>
         ///Требуется переменная конструктора.
@@ -18,6 +18,11 @@
                 components.Dispose();
             }
 
+            if (disposing)
+            {
+                warning?.Dispose();
+            }
+
             base.Dispose(disposing);
         }
 
@@ -30,7 +35,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ASRPresetEditor));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AsrPresetEditor));
             this.label1 = new System.Windows.Forms.Label();
             this.nameBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -223,7 +228,7 @@
             //
             resources.ApplyResources(this.nameBox, "nameBox");
             this.nameBox.Name = "nameBox";
-            this.nameBox.Tag = "#ASRPresetEditor";
+            this.nameBox.Tag = "#AsrPresetEditor";
             //
             //label2
             //
@@ -295,7 +300,7 @@
             resources.ApplyResources(this.buttonCancel, "buttonCancel");
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Tag = "#ASRPresetEditor@non-defaultable@pinned-to-parent-y";
+            this.buttonCancel.Tag = "#AsrPresetEditor@non-defaultable@pinned-to-parent-y";
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             //
             //ignoreCaseCheckBox
@@ -321,7 +326,7 @@
             this.groupBox1.Controls.Add(this.tableLayoutPanel3);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
-            this.groupBox1.Tag = "#ASRPresetEditor@pinned-to-parent-x";
+            this.groupBox1.Tag = "#AsrPresetEditor@pinned-to-parent-x";
             //
             //groupBox1Label
             //
@@ -383,7 +388,7 @@
             this.groupBox2.Controls.Add(this.tableLayoutPanel4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
-            this.groupBox2.Tag = "#ASRPresetEditor@pinned-to-parent-x";
+            this.groupBox2.Tag = "#AsrPresetEditor@pinned-to-parent-x";
             //
             //groupBox2Label
             //
@@ -485,7 +490,7 @@
             this.groupBox3.Controls.Add(this.tableLayoutPanel5);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
-            this.groupBox3.Tag = "#ASRPresetEditor@pinned-to-parent-x";
+            this.groupBox3.Tag = "#AsrPresetEditor@pinned-to-parent-x";
             //
             //groupBox3Label
             //
@@ -917,7 +922,7 @@
             this.groupBox4.Controls.Add(this.tableLayoutPanel6);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.TabStop = false;
-            this.groupBox4.Tag = "#ASRPresetEditor@pinned-to-parent-x";
+            this.groupBox4.Tag = "#AsrPresetEditor@pinned-to-parent-x";
             //
             //groupBox4Label
             //
@@ -994,7 +999,7 @@
             this.groupBox5.Controls.Add(this.tableLayoutPanel7);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.TabStop = false;
-            this.groupBox5.Tag = "#ASRPresetEditor@pinned-to-parent-x";
+            this.groupBox5.Tag = "#AsrPresetEditor@pinned-to-parent-x";
             //
             //label15
             //
@@ -1110,7 +1115,7 @@
             this.tableLayoutPanel1.Controls.Add(this.label17, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.pictureBox17, 0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.Tag = "#ASRPresetEditor@pinned-to-parent-x";
+            this.tableLayoutPanel1.Tag = "#AsrPresetEditor@pinned-to-parent-x";
             //
             //label26
             //
@@ -1194,7 +1199,7 @@
             this.tableLayoutPanel2.Controls.Add(this.customTextCheckBoxLabel, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.customTextCheckBox, 0, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.Tag = "#ASRPresetEditor@pinned-to-parent-x";
+            this.tableLayoutPanel2.Tag = "#AsrPresetEditor@pinned-to-parent-x";
             //
             //removePresetCheckBoxLabel
             //
@@ -1214,7 +1219,7 @@
             //
             resources.ApplyResources(this.userPresetCheckBoxLabel, "userPresetCheckBoxLabel");
             this.userPresetCheckBoxLabel.Name = "userPresetCheckBoxLabel";
-            this.userPresetCheckBoxLabel.Tag = "#ASRPresetEditor@pinned-to-parent-x";
+            this.userPresetCheckBoxLabel.Tag = "#AsrPresetEditor@pinned-to-parent-x";
             this.userPresetCheckBoxLabel.Click += new System.EventHandler(this.userPresetCheckBoxLabel_Click);
             //
             //ignoreCaseCheckBoxLabel
@@ -1229,9 +1234,9 @@
             resources.ApplyResources(this.textBoxTableLayoutPanel, "textBoxTableLayoutPanel");
             this.textBoxTableLayoutPanel.Controls.Add(this.descriptionBox, 0, 0);
             this.textBoxTableLayoutPanel.Name = "textBoxTableLayoutPanel";
-            this.textBoxTableLayoutPanel.Tag = "#ASRPresetEditor";
+            this.textBoxTableLayoutPanel.Tag = "#AsrPresetEditor";
             //
-            //ASRPresetEditor
+            //AsrPresetEditor
             //
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -1263,9 +1268,9 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox5);
-            this.Name = "ASRPresetEditor";
+            this.Name = "AsrPresetEditor";
             this.Tag = "@min-max-height-same";
-            this.Load += new System.EventHandler(this.ASRPresetEditor_Load);
+            this.Load += new System.EventHandler(this.AsrPresetEditor_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);

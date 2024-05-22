@@ -31,14 +31,14 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AutoBackupSettings));
-            this.autobackupFolderTextBox = new System.Windows.Forms.TextBox();
+            this.autoBackupFolderTextBox = new System.Windows.Forms.TextBox();
             this.browseButton = new System.Windows.Forms.Button();
-            this.autobackupFolderLabel = new System.Windows.Forms.Label();
-            this.autobackupPrefixLabel = new System.Windows.Forms.Label();
-            this.autobackupPrefixTextBox = new System.Windows.Forms.TextBox();
-            this.autobackupCheckBox = new System.Windows.Forms.CheckBox();
-            this.autobackupNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.autobackupPeriodLabel = new System.Windows.Forms.Label();
+            this.autoBackupFolderLabel = new System.Windows.Forms.Label();
+            this.autoBackupPrefixLabel = new System.Windows.Forms.Label();
+            this.autoBackupPrefixTextBox = new System.Windows.Forms.TextBox();
+            this.autoBackupCheckBox = new System.Windows.Forms.CheckBox();
+            this.autoBackupNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.autoBackupPeriodLabel = new System.Windows.Forms.Label();
             this.autodeleteOldCheckBox = new System.Windows.Forms.CheckBox();
             this.numberOfDaysNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.autodeleteManyCheckBox = new System.Windows.Forms.CheckBox();
@@ -49,32 +49,32 @@
             this.backupArtworksCheckBox = new System.Windows.Forms.CheckBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.dontTryToGuessLibraryNameCheckBox = new System.Windows.Forms.CheckBox();
-            this.autobackupCheckBoxLabel = new System.Windows.Forms.Label();
+            this.autoBackupCheckBoxLabel = new System.Windows.Forms.Label();
             this.autodeleteOldCheckBoxLabel = new System.Windows.Forms.Label();
             this.autodeleteManyCheckBoxLabel = new System.Windows.Forms.Label();
-            this.dontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel = new System.Windows.Forms.Label();
+            this.dontSkipAutoBackupsIfPlayCountsChangedCheckBoxLabel = new System.Windows.Forms.Label();
             this.dontTryToGuessLibraryNameCheckBoxLabel = new System.Windows.Forms.Label();
             this.backupArtworksCheckBoxLabel = new System.Windows.Forms.Label();
-            this.dontSkipAutobackupsIfPlayCountsChangedCheckBox = new System.Windows.Forms.CheckBox();
-            this.dontSkipAutobackupsIfPlayCountsChangedLabel = new System.Windows.Forms.Label();
+            this.dontSkipAutoBackupsIfPlayCountsChangedCheckBox = new System.Windows.Forms.CheckBox();
+            this.dontSkipAutoBackupsIfPlayCountsChangedLabel = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            ((System.ComponentModel.ISupportInitialize)(this.autobackupNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.autoBackupNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfDaysNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfFilesNumericUpDown)).BeginInit();
             this.SuspendLayout();
 
             //MusicBee
-            this.autobackupFolderTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.autobackupPrefixTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
+            this.autoBackupFolderTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
+            this.autoBackupPrefixTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
             //~MusicBee
 
             //
-            //autobackupFolderTextBox
+            //autoBackupFolderTextBox
             //
-            resources.ApplyResources(this.autobackupFolderTextBox, "autobackupFolderTextBox");
-            this.autobackupFolderTextBox.Name = "autobackupFolderTextBox";
-            this.autobackupFolderTextBox.ReadOnly = true;
-            this.autobackupFolderTextBox.Tag = "#browseButton";
+            resources.ApplyResources(this.autoBackupFolderTextBox, "autoBackupFolderTextBox");
+            this.autoBackupFolderTextBox.Name = "autoBackupFolderTextBox";
+            this.autoBackupFolderTextBox.ReadOnly = true;
+            this.autoBackupFolderTextBox.Tag = "#browseButton";
             //
             //browseButton
             //
@@ -83,48 +83,48 @@
             this.browseButton.Tag = "#AutoBackupSettings@non-defaultable";
             this.browseButton.Click += new System.EventHandler(this.browseButton_Click);
             //
-            //autobackupFolderLabel
+            //autoBackupFolderLabel
             //
-            resources.ApplyResources(this.autobackupFolderLabel, "autobackupFolderLabel");
-            this.autobackupFolderLabel.Name = "autobackupFolderLabel";
-            this.autobackupFolderLabel.Tag = "";
+            resources.ApplyResources(this.autoBackupFolderLabel, "autoBackupFolderLabel");
+            this.autoBackupFolderLabel.Name = "autoBackupFolderLabel";
+            this.autoBackupFolderLabel.Tag = "";
             //
-            //autobackupPrefixLabel
+            //autoBackupPrefixLabel
             //
-            resources.ApplyResources(this.autobackupPrefixLabel, "autobackupPrefixLabel");
-            this.autobackupPrefixLabel.Name = "autobackupPrefixLabel";
-            this.autobackupPrefixLabel.Tag = "#autobackupPrefixTextBox";
+            resources.ApplyResources(this.autoBackupPrefixLabel, "autoBackupPrefixLabel");
+            this.autoBackupPrefixLabel.Name = "autoBackupPrefixLabel";
+            this.autoBackupPrefixLabel.Tag = "#autoBackupPrefixTextBox";
             //
-            //autobackupPrefixTextBox
+            //autoBackupPrefixTextBox
             //
-            resources.ApplyResources(this.autobackupPrefixTextBox, "autobackupPrefixTextBox");
-            this.autobackupPrefixTextBox.Name = "autobackupPrefixTextBox";
-            this.autobackupPrefixTextBox.Tag = "#AutoBackupSettings";
+            resources.ApplyResources(this.autoBackupPrefixTextBox, "autoBackupPrefixTextBox");
+            this.autoBackupPrefixTextBox.Name = "autoBackupPrefixTextBox";
+            this.autoBackupPrefixTextBox.Tag = "#AutoBackupSettings";
             //
-            //autobackupCheckBox
+            //autoBackupCheckBox
             //
-            resources.ApplyResources(this.autobackupCheckBox, "autobackupCheckBox");
-            this.autobackupCheckBox.Name = "autobackupCheckBox";
-            this.autobackupCheckBox.Tag = "#autobackupCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.autobackupCheckBox, resources.GetString("autobackupCheckBox.ToolTip"));
-            this.autobackupCheckBox.CheckedChanged += new System.EventHandler(this.autobackupCheckBox_CheckedChanged);
+            resources.ApplyResources(this.autoBackupCheckBox, "autoBackupCheckBox");
+            this.autoBackupCheckBox.Name = "autoBackupCheckBox";
+            this.autoBackupCheckBox.Tag = "#autoBackupCheckBoxLabel";
+            this.toolTip1.SetToolTip(this.autoBackupCheckBox, resources.GetString("autoBackupCheckBox.ToolTip"));
+            this.autoBackupCheckBox.CheckedChanged += new System.EventHandler(this.autoBackupCheckBox_CheckedChanged);
             //
-            //autobackupNumericUpDown
+            //autoBackupNumericUpDown
             //
-            resources.ApplyResources(this.autobackupNumericUpDown, "autobackupNumericUpDown");
-            this.autobackupNumericUpDown.Maximum = new decimal(new int[] {
+            resources.ApplyResources(this.autoBackupNumericUpDown, "autoBackupNumericUpDown");
+            this.autoBackupNumericUpDown.Maximum = new decimal(new int[] {
             1000000,
             0,
             0,
             0});
-            this.autobackupNumericUpDown.Name = "autobackupNumericUpDown";
-            this.autobackupNumericUpDown.Tag = "#autobackupPeriodLabel";
+            this.autoBackupNumericUpDown.Name = "autoBackupNumericUpDown";
+            this.autoBackupNumericUpDown.Tag = "#autoBackupPeriodLabel";
             //
-            //autobackupPeriodLabel
+            //autoBackupPeriodLabel
             //
-            resources.ApplyResources(this.autobackupPeriodLabel, "autobackupPeriodLabel");
-            this.autobackupPeriodLabel.Name = "autobackupPeriodLabel";
-            this.autobackupPeriodLabel.Tag = "";
+            resources.ApplyResources(this.autoBackupPeriodLabel, "autoBackupPeriodLabel");
+            this.autoBackupPeriodLabel.Name = "autoBackupPeriodLabel";
+            this.autoBackupPeriodLabel.Tag = "";
             //
             //autodeleteOldCheckBox
             //
@@ -203,13 +203,13 @@
             this.dontTryToGuessLibraryNameCheckBox.Tag = "#dontTryToGuessLibraryNameCheckBoxLabel";
             this.toolTip1.SetToolTip(this.dontTryToGuessLibraryNameCheckBox, resources.GetString("dontTryToGuessLibraryNameCheckBox.ToolTip"));
             //
-            //autobackupCheckBoxLabel
+            //autoBackupCheckBoxLabel
             //
-            resources.ApplyResources(this.autobackupCheckBoxLabel, "autobackupCheckBoxLabel");
-            this.autobackupCheckBoxLabel.Name = "autobackupCheckBoxLabel";
-            this.autobackupCheckBoxLabel.Tag = "#autobackupNumericUpDown";
-            this.toolTip1.SetToolTip(this.autobackupCheckBoxLabel, resources.GetString("autobackupCheckBoxLabel.ToolTip"));
-            this.autobackupCheckBoxLabel.Click += new System.EventHandler(this.autobackupCheckBoxLabel_Click);
+            resources.ApplyResources(this.autoBackupCheckBoxLabel, "autoBackupCheckBoxLabel");
+            this.autoBackupCheckBoxLabel.Name = "autoBackupCheckBoxLabel";
+            this.autoBackupCheckBoxLabel.Tag = "#autoBackupNumericUpDown";
+            this.toolTip1.SetToolTip(this.autoBackupCheckBoxLabel, resources.GetString("autoBackupCheckBoxLabel.ToolTip"));
+            this.autoBackupCheckBoxLabel.Click += new System.EventHandler(this.autoBackupCheckBoxLabel_Click);
             //
             //autodeleteOldCheckBoxLabel
             //
@@ -227,11 +227,11 @@
             this.toolTip1.SetToolTip(this.autodeleteManyCheckBoxLabel, resources.GetString("autodeleteManyCheckBoxLabel.ToolTip"));
             this.autodeleteManyCheckBoxLabel.Click += new System.EventHandler(this.autodeleteManyCheckBoxLabel_Click);
             //
-            //dontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel
+            //dontSkipAutoBackupsIfPlayCountsChangedCheckBoxLabel
             //
-            resources.ApplyResources(this.dontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel, "dontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel");
-            this.dontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel.Name = "dontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.dontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel, resources.GetString("dontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel.ToolTip"));
+            resources.ApplyResources(this.dontSkipAutoBackupsIfPlayCountsChangedCheckBoxLabel, "dontSkipAutoBackupsIfPlayCountsChangedCheckBoxLabel");
+            this.dontSkipAutoBackupsIfPlayCountsChangedCheckBoxLabel.Name = "dontSkipAutoBackupsIfPlayCountsChangedCheckBoxLabel";
+            this.toolTip1.SetToolTip(this.dontSkipAutoBackupsIfPlayCountsChangedCheckBoxLabel, resources.GetString("dontSkipAutoBackupsIfPlayCountsChangedCheckBoxLabel.ToolTip"));
             //
             //dontTryToGuessLibraryNameCheckBoxLabel
             //
@@ -247,18 +247,18 @@
             this.toolTip1.SetToolTip(this.backupArtworksCheckBoxLabel, resources.GetString("backupArtworksCheckBoxLabel.ToolTip"));
             this.backupArtworksCheckBoxLabel.Click += new System.EventHandler(this.backupArtworksCheckBoxLabel_Click);
             //
-            //dontSkipAutobackupsIfPlayCountsChangedCheckBox
+            //dontSkipAutoBackupsIfPlayCountsChangedCheckBox
             //
-            resources.ApplyResources(this.dontSkipAutobackupsIfPlayCountsChangedCheckBox, "dontSkipAutobackupsIfPlayCountsChangedCheckBox");
-            this.dontSkipAutobackupsIfPlayCountsChangedCheckBox.Name = "dontSkipAutobackupsIfPlayCountsChangedCheckBox";
-            this.dontSkipAutobackupsIfPlayCountsChangedCheckBox.Tag = "#dontSkipAutobackupsIfPlayCountsChangedLabel";
+            resources.ApplyResources(this.dontSkipAutoBackupsIfPlayCountsChangedCheckBox, "dontSkipAutoBackupsIfPlayCountsChangedCheckBox");
+            this.dontSkipAutoBackupsIfPlayCountsChangedCheckBox.Name = "dontSkipAutoBackupsIfPlayCountsChangedCheckBox";
+            this.dontSkipAutoBackupsIfPlayCountsChangedCheckBox.Tag = "#dontSkipAutoBackupsIfPlayCountsChangedLabel";
             //
-            //dontSkipAutobackupsIfPlayCountsChangedLabel
+            //dontSkipAutoBackupsIfPlayCountsChangedLabel
             //
-            resources.ApplyResources(this.dontSkipAutobackupsIfPlayCountsChangedLabel, "dontSkipAutobackupsIfPlayCountsChangedLabel");
-            this.dontSkipAutobackupsIfPlayCountsChangedLabel.Name = "dontSkipAutobackupsIfPlayCountsChangedLabel";
-            this.dontSkipAutobackupsIfPlayCountsChangedLabel.Tag = "";
-            this.dontSkipAutobackupsIfPlayCountsChangedLabel.Click += new System.EventHandler(this.dontSkipAutobackupsIfPlayCountsChangedLabel_Click);
+            resources.ApplyResources(this.dontSkipAutoBackupsIfPlayCountsChangedLabel, "dontSkipAutoBackupsIfPlayCountsChangedLabel");
+            this.dontSkipAutoBackupsIfPlayCountsChangedLabel.Name = "dontSkipAutoBackupsIfPlayCountsChangedLabel";
+            this.dontSkipAutoBackupsIfPlayCountsChangedLabel.Tag = "";
+            this.dontSkipAutoBackupsIfPlayCountsChangedLabel.Click += new System.EventHandler(this.dontSkipAutoBackupsIfPlayCountsChangedLabel_Click);
             //
             //groupBox1
             //
@@ -279,8 +279,8 @@
             this.Controls.Add(this.dontTryToGuessLibraryNameCheckBoxLabel);
             this.Controls.Add(this.dontTryToGuessLibraryNameCheckBox);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.dontSkipAutobackupsIfPlayCountsChangedLabel);
-            this.Controls.Add(this.dontSkipAutobackupsIfPlayCountsChangedCheckBox);
+            this.Controls.Add(this.dontSkipAutoBackupsIfPlayCountsChangedLabel);
+            this.Controls.Add(this.dontSkipAutoBackupsIfPlayCountsChangedCheckBox);
             this.Controls.Add(this.numberOfFilesNumericUpDown);
             this.Controls.Add(this.autodeleteManyCheckBoxLabel);
             this.Controls.Add(this.autodeleteManyCheckBox);
@@ -288,19 +288,19 @@
             this.Controls.Add(this.numberOfDaysNumericUpDown);
             this.Controls.Add(this.autodeleteOldCheckBoxLabel);
             this.Controls.Add(this.autodeleteOldCheckBox);
-            this.Controls.Add(this.autobackupPrefixTextBox);
-            this.Controls.Add(this.autobackupPrefixLabel);
-            this.Controls.Add(this.autobackupPeriodLabel);
-            this.Controls.Add(this.autobackupNumericUpDown);
-            this.Controls.Add(this.autobackupCheckBoxLabel);
-            this.Controls.Add(this.autobackupCheckBox);
+            this.Controls.Add(this.autoBackupPrefixTextBox);
+            this.Controls.Add(this.autoBackupPrefixLabel);
+            this.Controls.Add(this.autoBackupPeriodLabel);
+            this.Controls.Add(this.autoBackupNumericUpDown);
+            this.Controls.Add(this.autoBackupCheckBoxLabel);
+            this.Controls.Add(this.autoBackupCheckBox);
             this.Controls.Add(this.browseButton);
-            this.Controls.Add(this.autobackupFolderTextBox);
-            this.Controls.Add(this.autobackupFolderLabel);
-            this.Controls.Add(this.dontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel);
+            this.Controls.Add(this.autoBackupFolderTextBox);
+            this.Controls.Add(this.autoBackupFolderLabel);
+            this.Controls.Add(this.dontSkipAutoBackupsIfPlayCountsChangedCheckBoxLabel);
             this.Name = "AutoBackupSettings";
             this.Tag = "@min-max-height-same";
-            ((System.ComponentModel.ISupportInitialize)(this.autobackupNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.autoBackupNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfDaysNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfFilesNumericUpDown)).EndInit();
             this.ResumeLayout(false);
@@ -309,14 +309,14 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label autobackupFolderLabel;
+        private System.Windows.Forms.Label autoBackupFolderLabel;
         private System.Windows.Forms.Button browseButton;
-        private System.Windows.Forms.TextBox autobackupFolderTextBox;
-        private System.Windows.Forms.Label autobackupPrefixLabel;
-        private System.Windows.Forms.TextBox autobackupPrefixTextBox;
-        private System.Windows.Forms.CheckBox autobackupCheckBox;
-        private System.Windows.Forms.NumericUpDown autobackupNumericUpDown;
-        private System.Windows.Forms.Label autobackupPeriodLabel;
+        private System.Windows.Forms.TextBox autoBackupFolderTextBox;
+        private System.Windows.Forms.Label autoBackupPrefixLabel;
+        private System.Windows.Forms.TextBox autoBackupPrefixTextBox;
+        private System.Windows.Forms.CheckBox autoBackupCheckBox;
+        private System.Windows.Forms.NumericUpDown autoBackupNumericUpDown;
+        private System.Windows.Forms.Label autoBackupPeriodLabel;
         private System.Windows.Forms.CheckBox autodeleteOldCheckBox;
         private System.Windows.Forms.NumericUpDown numberOfDaysNumericUpDown;
         private System.Windows.Forms.CheckBox autodeleteManyCheckBox;
@@ -328,12 +328,12 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox dontTryToGuessLibraryNameCheckBox;
-        private System.Windows.Forms.CheckBox dontSkipAutobackupsIfPlayCountsChangedCheckBox;
-        private System.Windows.Forms.Label autobackupCheckBoxLabel;
+        private System.Windows.Forms.CheckBox dontSkipAutoBackupsIfPlayCountsChangedCheckBox;
+        private System.Windows.Forms.Label autoBackupCheckBoxLabel;
         private System.Windows.Forms.Label autodeleteOldCheckBoxLabel;
         private System.Windows.Forms.Label autodeleteManyCheckBoxLabel;
-        private System.Windows.Forms.Label dontSkipAutobackupsIfPlayCountsChangedCheckBoxLabel;
-        private System.Windows.Forms.Label dontSkipAutobackupsIfPlayCountsChangedLabel;
+        private System.Windows.Forms.Label dontSkipAutoBackupsIfPlayCountsChangedCheckBoxLabel;
+        private System.Windows.Forms.Label dontSkipAutoBackupsIfPlayCountsChangedLabel;
         private System.Windows.Forms.Label dontTryToGuessLibraryNameCheckBoxLabel;
         private System.Windows.Forms.Label backupArtworksCheckBoxLabel;
     }

@@ -141,7 +141,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>511, 32</value>
+    <value>512, 32</value>
   </data>
   <data name="buttonPreview.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -172,7 +172,7 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;buttonPreview.ZOrder" xml:space="preserve">
-    <value>40</value>
+    <value>41</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>7, 15</value>
@@ -190,10 +190,10 @@
     <value>NoControl</value>
   </data>
   <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>925, 32</value>
+    <value>924, 32</value>
   </data>
   <data name="buttonClose.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 8, 4</value>
+    <value>4, 4, 7, 4</value>
   </data>
   <data name="buttonClose.Size" type="System.Drawing.Size, System.Drawing">
     <value>130, 23</value>
@@ -217,10 +217,10 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;buttonClose.ZOrder" xml:space="preserve">
-    <value>37</value>
+    <value>38</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1076, 613</value>
+    <value>1074, 611</value>
   </data>
   <data name="autoApplyPresetsLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -241,7 +241,7 @@
     <value>13, 4, 13, 0</value>
   </data>
   <data name="autoApplyPresetsLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1047, 45</value>
+    <value>1046, 45</value>
   </data>
   <data name="autoApplyPresetsLabel.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -260,162 +260,6 @@
   </data>
   <data name="&gt;&gt;autoApplyPresetsLabel.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="tagChangesLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="tagChangesLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>TopLeft</value>
-  </data>
-  <data name="tagChangesLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="tagChangesLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>457, 8</value>
-  </data>
-  <data name="tagChangesLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="tagChangesLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 15</value>
-  </data>
-  <data name="tagChangesLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>58</value>
-  </data>
-  <data name="tagChangesLabel.Text" xml:space="preserve">
-    <value>tag changes</value>
-  </data>
-  <data name="&gt;&gt;tagChangesLabel.Name" xml:space="preserve">
-    <value>tagChangesLabel</value>
-  </data>
-  <data name="&gt;&gt;tagChangesLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tagChangesLabel.Parent" xml:space="preserve">
-    <value>autoApplyPanel</value>
-  </data>
-  <data name="&gt;&gt;tagChangesLabel.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="numberOfTagsToRecalculateNumericUpDown.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>TopLeft</value>
-  </data>
-  <data name="numberOfTagsToRecalculateNumericUpDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>308, 5</value>
-  </data>
-  <data name="numberOfTagsToRecalculateNumericUpDown.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="numberOfTagsToRecalculateNumericUpDown.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 23</value>
-  </data>
-  <data name="numberOfTagsToRecalculateNumericUpDown.TabIndex" type="System.Int32, mscorlib">
-    <value>57</value>
-  </data>
-  <data name="&gt;&gt;numberOfTagsToRecalculateNumericUpDown.Name" xml:space="preserve">
-    <value>numberOfTagsToRecalculateNumericUpDown</value>
-  </data>
-  <data name="&gt;&gt;numberOfTagsToRecalculateNumericUpDown.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;numberOfTagsToRecalculateNumericUpDown.Parent" xml:space="preserve">
-    <value>autoApplyPanel</value>
-  </data>
-  <data name="&gt;&gt;numberOfTagsToRecalculateNumericUpDown.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="recalculateOnNumberOfTagsChangesCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="recalculateOnNumberOfTagsChangesCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>TopLeft</value>
-  </data>
-  <data name="recalculateOnNumberOfTagsChangesCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>35, 8</value>
-  </data>
-  <data name="recalculateOnNumberOfTagsChangesCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="recalculateOnNumberOfTagsChangesCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 15</value>
-  </data>
-  <data name="recalculateOnNumberOfTagsChangesCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>121</value>
-  </data>
-  <data name="recalculateOnNumberOfTagsChangesCheckBoxLabel.Text" xml:space="preserve">
-    <value>Execute ticked presets for chosen tags on every</value>
-  </data>
-  <data name="&gt;&gt;recalculateOnNumberOfTagsChangesCheckBoxLabel.Name" xml:space="preserve">
-    <value>recalculateOnNumberOfTagsChangesCheckBoxLabel</value>
-  </data>
-  <data name="&gt;&gt;recalculateOnNumberOfTagsChangesCheckBoxLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;recalculateOnNumberOfTagsChangesCheckBoxLabel.Parent" xml:space="preserve">
-    <value>autoApplyPanel</value>
-  </data>
-  <data name="&gt;&gt;recalculateOnNumberOfTagsChangesCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="recalculateOnNumberOfTagsChangesCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="recalculateOnNumberOfTagsChangesCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>TopLeft</value>
-  </data>
-  <data name="recalculateOnNumberOfTagsChangesCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="recalculateOnNumberOfTagsChangesCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 8</value>
-  </data>
-  <data name="recalculateOnNumberOfTagsChangesCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>14, 4, 4, 4</value>
-  </data>
-  <data name="recalculateOnNumberOfTagsChangesCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 19</value>
-  </data>
-  <data name="recalculateOnNumberOfTagsChangesCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>56</value>
-  </data>
-  <data name="recalculateOnNumberOfTagsChangesCheckBox.Text" xml:space="preserve">
-    <value> </value>
-  </data>
-  <data name="&gt;&gt;recalculateOnNumberOfTagsChangesCheckBox.Name" xml:space="preserve">
-    <value>recalculateOnNumberOfTagsChangesCheckBox</value>
-  </data>
-  <data name="&gt;&gt;recalculateOnNumberOfTagsChangesCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;recalculateOnNumberOfTagsChangesCheckBox.Parent" xml:space="preserve">
-    <value>autoApplyPanel</value>
-  </data>
-  <data name="&gt;&gt;recalculateOnNumberOfTagsChangesCheckBox.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="autoApplyPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 51</value>
-  </data>
-  <data name="autoApplyPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="autoApplyPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1074, 33</value>
-  </data>
-  <data name="autoApplyPanel.TabIndex" type="System.Int32, mscorlib">
-    <value>122</value>
-  </data>
-  <data name="&gt;&gt;autoApplyPanel.Name" xml:space="preserve">
-    <value>autoApplyPanel</value>
-  </data>
-  <data name="&gt;&gt;autoApplyPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;autoApplyPanel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;autoApplyPanel.ZOrder" xml:space="preserve">
-    <value>2</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -477,11 +321,47 @@
   <data name="&gt;&gt;toolTip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;dataGridViewCheckBoxColumn1.Name" xml:space="preserve">
+    <value>dataGridViewCheckBoxColumn1</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewCheckBoxColumn1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn1.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn1</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewCheckBoxColumn2.Name" xml:space="preserve">
+    <value>dataGridViewCheckBoxColumn2</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewCheckBoxColumn2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn2.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn2</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn3.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn3</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn4.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn4</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>LibraryReports</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=8.1.8900.32518, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="dirtyErrorProvider.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1089,7 +969,7 @@
     <value>TopLeft</value>
   </data>
   <data name="splitContainer1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 84</value>
+    <value>5, 51</value>
   </data>
   <data name="splitContainer1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 0, 5, 5</value>
@@ -1103,6 +983,39 @@
   <data name="panel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
+  <data name="presetChainIsWrongPictureBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="presetChainIsWrongPictureBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="presetChainIsWrongPictureBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>517, 62</value>
+  </data>
+  <data name="presetChainIsWrongPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="presetChainIsWrongPictureBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>34, 17</value>
+  </data>
+  <data name="presetChainIsWrongPictureBox.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>CenterImage</value>
+  </data>
+  <data name="presetChainIsWrongPictureBox.TabIndex" type="System.Int32, mscorlib">
+    <value>172</value>
+  </data>
+  <data name="&gt;&gt;presetChainIsWrongPictureBox.Name" xml:space="preserve">
+    <value>presetChainIsWrongPictureBox</value>
+  </data>
+  <data name="&gt;&gt;presetChainIsWrongPictureBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;presetChainIsWrongPictureBox.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;presetChainIsWrongPictureBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="smartOperationCheckBoxLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
@@ -1112,8 +1025,11 @@
   <data name="smartOperationCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
   </data>
+  <data name="smartOperationCheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="smartOperationCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>860, 171</value>
+    <value>866, 171</value>
   </data>
   <data name="smartOperationCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 8, 0</value>
@@ -1142,7 +1058,7 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;smartOperationCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="smartOperationCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1153,8 +1069,11 @@ Unchecking this may only be relevant in the case of using multiple item splitter
   <data name="smartOperationCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
   </data>
+  <data name="smartOperationCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="smartOperationCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>840, 171</value>
+    <value>846, 171</value>
   </data>
   <data name="smartOperationCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1183,7 +1102,7 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;smartOperationCheckBox.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="appendTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1198,7 +1117,7 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>4, 4, 15, 4</value>
   </data>
   <data name="appendTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 23</value>
+    <value>123, 23</value>
   </data>
   <data name="appendTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>49</value>
@@ -1213,7 +1132,7 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;appendTextBox.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="appendLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1255,7 +1174,7 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;appendLabel.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="digitsLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1291,7 +1210,7 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;digitsLabel.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="precisionDigitsComboBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
@@ -1339,13 +1258,16 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;precisionDigitsComboBox.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="roundToLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="roundToLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
+  </data>
+  <data name="roundToLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="roundToLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>258, 171</value>
@@ -1372,7 +1294,7 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;roundToLabel.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="mulDivFactorComboBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
@@ -1423,7 +1345,7 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;mulDivFactorComboBox.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="operationComboBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
@@ -1456,7 +1378,7 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;operationComboBox.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="clearIdButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1468,10 +1390,10 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>NoControl</value>
   </data>
   <data name="clearIdButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1033, 140</value>
+    <value>1031, 140</value>
   </data>
   <data name="clearIdButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 4, 8, 4</value>
+    <value>0, 4, 7, 4</value>
   </data>
   <data name="clearIdButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 23</value>
@@ -1492,7 +1414,7 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;clearIdButton.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="idTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1501,13 +1423,13 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>TopLeft</value>
   </data>
   <data name="idTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>885, 140</value>
+    <value>891, 140</value>
   </data>
   <data name="idTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="idTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 23</value>
+    <value>138, 23</value>
   </data>
   <data name="idTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>41</value>
@@ -1525,7 +1447,7 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;idTextBox.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="labelFunctionId.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1540,7 +1462,7 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>NoControl</value>
   </data>
   <data name="labelFunctionId.Location" type="System.Drawing.Point, System.Drawing">
-    <value>712, 143</value>
+    <value>718, 143</value>
   </data>
   <data name="labelFunctionId.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -1564,7 +1486,7 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;labelFunctionId.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="destinationTagList.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
@@ -1591,7 +1513,7 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;destinationTagList.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="labelSaveToTag.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1627,7 +1549,7 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;labelSaveToTag.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="sourceFieldComboBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
@@ -1654,7 +1576,7 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;sourceFieldComboBox.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="labelSaveField.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1690,7 +1612,7 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;labelSaveField.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>16</value>
   </data>
   <data name="buttonFilterResults.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1702,10 +1624,10 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>NoControl</value>
   </data>
   <data name="buttonFilterResults.Location" type="System.Drawing.Point, System.Drawing">
-    <value>925, 113</value>
+    <value>924, 113</value>
   </data>
   <data name="buttonFilterResults.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 8, 4</value>
+    <value>4, 4, 7, 4</value>
   </data>
   <data name="buttonFilterResults.Size" type="System.Drawing.Size, System.Drawing">
     <value>130, 23</value>
@@ -1729,7 +1651,7 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;buttonFilterResults.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>17</value>
   </data>
   <data name="comparedFieldList.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1744,7 +1666,7 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>4, 4, 4, 4</value>
   </data>
   <data name="comparedFieldList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>367, 23</value>
+    <value>368, 23</value>
   </data>
   <data name="comparedFieldList.TabIndex" type="System.Int32, mscorlib">
     <value>34</value>
@@ -1759,7 +1681,7 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;comparedFieldList.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>18</value>
   </data>
   <data name="conditionList.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
@@ -1786,7 +1708,7 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;conditionList.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>19</value>
   </data>
   <data name="conditionFieldList.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
@@ -1813,13 +1735,16 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;conditionFieldList.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>20</value>
   </data>
   <data name="conditionCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="conditionCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
+  </data>
+  <data name="conditionCheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="conditionCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>30, 116</value>
@@ -1846,7 +1771,7 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;conditionCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>21</value>
   </data>
   <data name="conditionCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1882,7 +1807,7 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;conditionCheckBox.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>22</value>
   </data>
   <data name="buttonExport.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1894,10 +1819,10 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>NoControl</value>
   </data>
   <data name="buttonExport.Location" type="System.Drawing.Point, System.Drawing">
-    <value>925, 86</value>
+    <value>924, 86</value>
   </data>
   <data name="buttonExport.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 8, 4</value>
+    <value>4, 4, 7, 4</value>
   </data>
   <data name="buttonExport.Size" type="System.Drawing.Size, System.Drawing">
     <value>130, 23</value>
@@ -1918,7 +1843,7 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;buttonExport.ZOrder" xml:space="preserve">
-    <value>22</value>
+    <value>23</value>
   </data>
   <data name="openReportCheckBoxPicture.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Right</value>
@@ -1930,7 +1855,7 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>NoControl</value>
   </data>
   <data name="openReportCheckBoxPicture.Location" type="System.Drawing.Point, System.Drawing">
-    <value>689, 86</value>
+    <value>695, 86</value>
   </data>
   <data name="openReportCheckBoxPicture.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 23</value>
@@ -1954,7 +1879,7 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;openReportCheckBoxPicture.ZOrder" xml:space="preserve">
-    <value>23</value>
+    <value>24</value>
   </data>
   <data name="openReportCheckBoxLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1965,8 +1890,11 @@ Unchecking this may only be relevant in the case of using multiple item splitter
   <data name="openReportCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
   </data>
+  <data name="openReportCheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="openReportCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>691, 90</value>
+    <value>697, 90</value>
   </data>
   <data name="openReportCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -1993,7 +1921,7 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;openReportCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>24</value>
+    <value>25</value>
   </data>
   <data name="openReportCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -2008,7 +1936,7 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>NoControl</value>
   </data>
   <data name="openReportCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>670, 90</value>
+    <value>676, 90</value>
   </data>
   <data name="openReportCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -2035,7 +1963,7 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;openReportCheckBox.ZOrder" xml:space="preserve">
-    <value>25</value>
+    <value>26</value>
   </data>
   <data name="newArtworkSizeUpDown.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
@@ -2062,7 +1990,7 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;newArtworkSizeUpDown.ZOrder" xml:space="preserve">
-    <value>26</value>
+    <value>27</value>
   </data>
   <data name="labelRemark.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2098,13 +2026,16 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;labelRemark.ZOrder" xml:space="preserve">
-    <value>27</value>
+    <value>28</value>
   </data>
   <data name="resizeArtworkCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="resizeArtworkCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
+  </data>
+  <data name="resizeArtworkCheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="resizeArtworkCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>229, 90</value>
@@ -2131,7 +2062,7 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;resizeArtworkCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>28</value>
+    <value>29</value>
   </data>
   <data name="resizeArtworkCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2167,13 +2098,16 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;resizeArtworkCheckBox.ZOrder" xml:space="preserve">
-    <value>29</value>
+    <value>30</value>
   </data>
   <data name="totalsCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="totalsCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
+  </data>
+  <data name="totalsCheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="totalsCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>30, 90</value>
@@ -2200,13 +2134,16 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;totalsCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>30</value>
+    <value>31</value>
   </data>
   <data name="totalsCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="totalsCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
+  </data>
+  <data name="totalsCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="totalsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 90</value>
@@ -2233,7 +2170,7 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;totalsCheckBox.ZOrder" xml:space="preserve">
-    <value>31</value>
+    <value>32</value>
   </data>
   <data name="formatComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -2242,13 +2179,13 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>TopLeft</value>
   </data>
   <data name="formatComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>632, 59</value>
+    <value>638, 59</value>
   </data>
   <data name="formatComboBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 8, 4</value>
   </data>
   <data name="formatComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>423, 23</value>
+    <value>416, 23</value>
   </data>
   <data name="formatComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -2266,7 +2203,7 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;formatComboBox.ZOrder" xml:space="preserve">
-    <value>32</value>
+    <value>33</value>
   </data>
   <data name="labelFormat.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -2281,7 +2218,7 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>NoControl</value>
   </data>
   <data name="labelFormat.Location" type="System.Drawing.Point, System.Drawing">
-    <value>575, 63</value>
+    <value>581, 63</value>
   </data>
   <data name="labelFormat.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>30, 0, 4, 0</value>
@@ -2305,7 +2242,7 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;labelFormat.ZOrder" xml:space="preserve">
-    <value>33</value>
+    <value>34</value>
   </data>
   <data name="useAnotherPresetAsSourceComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -2320,7 +2257,7 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>4, 4, 4, 4</value>
   </data>
   <data name="useAnotherPresetAsSourceComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>316, 23</value>
+    <value>279, 23</value>
   </data>
   <data name="useAnotherPresetAsSourceComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -2339,7 +2276,7 @@ Retrieved presets can be chained</value>
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;useAnotherPresetAsSourceComboBox.ZOrder" xml:space="preserve">
-    <value>34</value>
+    <value>35</value>
   </data>
   <data name="useAnotherPresetAsSourceCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2347,8 +2284,8 @@ Retrieved presets can be chained</value>
   <data name="useAnotherPresetAsSourceCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
   </data>
-  <data name="useAnotherPresetAsSourceCheckBoxLabel.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
+  <data name="useAnotherPresetAsSourceCheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="useAnotherPresetAsSourceCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>30, 63</value>
@@ -2365,22 +2302,6 @@ Retrieved presets can be chained</value>
   <data name="useAnotherPresetAsSourceCheckBoxLabel.Text" xml:space="preserve">
     <value>Retrieve tracks from another preset</value>
   </data>
-  <data name="useAnotherPresetAsSourceCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value>Retrieving tracks from another preset makes sense only if this preset is using conditional filtering
-Retrieved presets can be chained:
-The retrieved preset or other retrieved presets in the chain are not selected 
-or no longer use conditional filtering, which means the retrieval ​chain is useless! 
-
-This preset can't be used! 
-
-Check out the preset chain!:
-The selected preset or other presets in the chain either have been deleted 
-or are now included in the looped preset chain! 
-
-This preset can't be used! 
-
-Check out the preset chain!</value>
-  </data>
   <data name="&gt;&gt;useAnotherPresetAsSourceCheckBoxLabel.Name" xml:space="preserve">
     <value>useAnotherPresetAsSourceCheckBoxLabel</value>
   </data>
@@ -2391,7 +2312,7 @@ Check out the preset chain!</value>
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;useAnotherPresetAsSourceCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>35</value>
+    <value>36</value>
   </data>
   <data name="useAnotherPresetAsSourceCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2421,16 +2342,10 @@ Check out the preset chain!</value>
     <value>Retrieving tracks from another preset makes sense only if this preset is using conditional filtering
 Retrieved presets can be chained:
 The retrieved preset or other retrieved presets in the chain are not selected 
-or no longer use conditional filtering, which means the retrieval ​chain is useless! 
-
-This preset can't be used! 
-
-Check out the preset chain!:
+or no longer use conditional filtering, which means the retrieval ​chain is useless!:
 The selected preset or other presets in the chain either have been deleted 
-or are now included in the looped preset chain! 
-
-This preset can't be used! 
-
+or are now included in the looped preset chain!:
+This preset can't be used!
 Check out the preset chain!</value>
   </data>
   <data name="&gt;&gt;useAnotherPresetAsSourceCheckBox.Name" xml:space="preserve">
@@ -2443,7 +2358,7 @@ Check out the preset chain!</value>
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;useAnotherPresetAsSourceCheckBox.ZOrder" xml:space="preserve">
-    <value>36</value>
+    <value>37</value>
   </data>
   <data name="buttonSaveClose.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -2458,7 +2373,7 @@ Check out the preset chain!</value>
     <value>NoControl</value>
   </data>
   <data name="buttonSaveClose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>787, 32</value>
+    <value>788, 32</value>
   </data>
   <data name="buttonSaveClose.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -2487,7 +2402,7 @@ Ctrl-click to save preset definitions without closing this window</value>
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;buttonSaveClose.ZOrder" xml:space="preserve">
-    <value>38</value>
+    <value>39</value>
   </data>
   <data name="buttonOK.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -2499,7 +2414,7 @@ Ctrl-click to save preset definitions without closing this window</value>
     <value>NoControl</value>
   </data>
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>649, 32</value>
+    <value>650, 32</value>
   </data>
   <data name="buttonOK.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -2526,7 +2441,7 @@ Ctrl-click to save preset definitions without closing this window</value>
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;buttonOK.ZOrder" xml:space="preserve">
-    <value>39</value>
+    <value>40</value>
   </data>
   <data name="buttonSettings.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -2538,7 +2453,7 @@ Ctrl-click to save preset definitions without closing this window</value>
     <value>NoControl</value>
   </data>
   <data name="buttonSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>461, 32</value>
+    <value>462, 32</value>
   </data>
   <data name="buttonSettings.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -2562,7 +2477,7 @@ Ctrl-click to save preset definitions without closing this window</value>
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;buttonSettings.ZOrder" xml:space="preserve">
-    <value>41</value>
+    <value>42</value>
   </data>
   <data name="buttonDeletePreset.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
@@ -2595,7 +2510,7 @@ Ctrl-click to save preset definitions without closing this window</value>
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;buttonDeletePreset.ZOrder" xml:space="preserve">
-    <value>42</value>
+    <value>43</value>
   </data>
   <data name="buttonCopyPreset.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
@@ -2628,7 +2543,7 @@ Ctrl-click to save preset definitions without closing this window</value>
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;buttonCopyPreset.ZOrder" xml:space="preserve">
-    <value>43</value>
+    <value>44</value>
   </data>
   <data name="buttonAddPreset.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
@@ -2661,7 +2576,7 @@ Ctrl-click to save preset definitions without closing this window</value>
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;buttonAddPreset.ZOrder" xml:space="preserve">
-    <value>44</value>
+    <value>45</value>
   </data>
   <data name="useHotkeyForSelectedTracksCheckBoxLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -2676,7 +2591,7 @@ Ctrl-click to save preset definitions without closing this window</value>
     <value>NoControl</value>
   </data>
   <data name="useHotkeyForSelectedTracksCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>905, 9</value>
+    <value>911, 9</value>
   </data>
   <data name="useHotkeyForSelectedTracksCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 8, 0</value>
@@ -2703,7 +2618,7 @@ Ctrl-click to save preset definitions without closing this window</value>
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;useHotkeyForSelectedTracksCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>45</value>
+    <value>46</value>
   </data>
   <data name="useHotkeyForSelectedTracksCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -2718,7 +2633,7 @@ Ctrl-click to save preset definitions without closing this window</value>
     <value>NoControl</value>
   </data>
   <data name="useHotkeyForSelectedTracksCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>884, 9</value>
+    <value>890, 9</value>
   </data>
   <data name="useHotkeyForSelectedTracksCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -2745,7 +2660,7 @@ Ctrl-click to save preset definitions without closing this window</value>
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;useHotkeyForSelectedTracksCheckBox.ZOrder" xml:space="preserve">
-    <value>46</value>
+    <value>47</value>
   </data>
   <data name="assignHotkeyCheckBoxLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -2756,8 +2671,11 @@ Ctrl-click to save preset definitions without closing this window</value>
   <data name="assignHotkeyCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
   </data>
+  <data name="assignHotkeyCheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="assignHotkeyCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>621, 9</value>
+    <value>627, 9</value>
   </data>
   <data name="assignHotkeyCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -2788,7 +2706,7 @@ You will need to reassign hotkey if the preset name is changed
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;assignHotkeyCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>47</value>
+    <value>48</value>
   </data>
   <data name="assignHotkeyCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -2803,7 +2721,7 @@ You will need to reassign hotkey if the preset name is changed
     <value>NoControl</value>
   </data>
   <data name="assignHotkeyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>601, 9</value>
+    <value>607, 9</value>
   </data>
   <data name="assignHotkeyCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -2833,7 +2751,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;assignHotkeyCheckBox.ZOrder" xml:space="preserve">
-    <value>48</value>
+    <value>49</value>
   </data>
   <data name="presetNameTextBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
@@ -2863,19 +2781,19 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;presetNameTextBox.ZOrder" xml:space="preserve">
-    <value>49</value>
+    <value>50</value>
   </data>
   <data name="panel1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
   </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 112</value>
+    <value>0, 129</value>
   </data>
   <data name="panel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1064, 195</value>
+    <value>1070, 195</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>172</value>
@@ -2892,11 +2810,8 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="listBoxTableLayoutPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
   <data name="listBoxTableLayoutPanel.ColumnCount" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="presetList.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -2914,7 +2829,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>0, 0, 0, 0</value>
   </data>
   <data name="presetList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1028, 93</value>
+    <value>1034, 109</value>
   </data>
   <data name="presetList.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2931,17 +2846,20 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="&gt;&gt;presetList.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="listBoxTableLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <data name="listBoxTableLayoutPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 0</value>
   </data>
   <data name="listBoxTableLayoutPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>8, 0, 8, 0</value>
+    <value>8, 0, 0, 0</value>
   </data>
   <data name="listBoxTableLayoutPanel.RowCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="listBoxTableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1048, 112</value>
+    <value>1062, 129</value>
   </data>
   <data name="listBoxTableLayoutPanel.TabIndex" type="System.Int32, mscorlib">
     <value>123</value>
@@ -2959,7 +2877,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>1</value>
   </data>
   <data name="listBoxTableLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="presetList" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,Absolute,20" /&gt;&lt;Rows Styles="Percent,83,33334,Percent,16,66667" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="presetList" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,Absolute,20,Absolute,8" /&gt;&lt;Rows Styles="Percent,100,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -2971,7 +2889,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>2</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1064, 307</value>
+    <value>1062, 324</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -3031,7 +2949,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>51</value>
   </data>
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1031, 163</value>
+    <value>1029, 174</value>
   </data>
   <data name="previewTable.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3061,7 +2979,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>4, 4, 4, 4</value>
   </data>
   <data name="tabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1040, 172</value>
+    <value>1038, 185</value>
   </data>
   <data name="tabPage1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3199,7 +3117,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>4, 4, 4, 4</value>
   </data>
   <data name="expressionsDataGridView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>447, 106</value>
+    <value>447, 119</value>
   </data>
   <data name="expressionsDataGridView.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -3280,7 +3198,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>4, 4, 4, 4</value>
   </data>
   <data name="tagsDataGridView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>580, 106</value>
+    <value>580, 119</value>
   </data>
   <data name="tagsDataGridView.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -3850,7 +3768,7 @@ You can refer to any tag in an LR expression using the MusicBee generic &lt;Tag 
     <value>4, 4, 4, 4</value>
   </data>
   <data name="tabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1040, 172</value>
+    <value>1038, 185</value>
   </data>
   <data name="tabPage2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -3877,10 +3795,10 @@ You can refer to any tag in an LR expression using the MusicBee generic &lt;Tag 
     <value>8, 5</value>
   </data>
   <data name="presetTabControl.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>8, 4, 8, 8</value>
   </data>
   <data name="presetTabControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1048, 200</value>
+    <value>1046, 213</value>
   </data>
   <data name="presetTabControl.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3903,8 +3821,11 @@ You can refer to any tag in an LR expression using the MusicBee generic &lt;Tag 
   <data name="panel2.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
+  <data name="panel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1064, 212</value>
+    <value>1062, 226</value>
   </data>
   <data name="panel2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -3940,10 +3861,10 @@ You can refer to any tag in an LR expression using the MusicBee generic &lt;Tag 
     <value>200</value>
   </data>
   <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1064, 522</value>
+    <value>1062, 553</value>
   </data>
   <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
-    <value>307</value>
+    <value>324</value>
   </data>
   <data name="splitContainer1.SplitterWidth" type="System.Int32, mscorlib">
     <value>3</value>
@@ -3962,5 +3883,65 @@ You can refer to any tag in an LR expression using the MusicBee generic &lt;Tag 
   </data>
   <data name="&gt;&gt;splitContainer1.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="dataGridViewCheckBoxColumn1.HeaderText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="dataGridViewCheckBoxColumn1.MinimumWidth" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="dataGridViewCheckBoxColumn1.ToolTipText" xml:space="preserve">
+    <value>Uncheck to remove expression column from the preset</value>
+  </data>
+  <data name="dataGridViewCheckBoxColumn1.Width" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
+    <value>Expression</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn1.MinimumWidth" type="System.Int32, mscorlib">
+    <value>100</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn1.ToolTipText" xml:space="preserve">
+    <value>You have unchecked the last expression for the field:\\%%FIELDNAME%%\\Do you want to delete the field?</value>
+  </data>
+  <data name="dataGridViewCheckBoxColumn2.HeaderText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="dataGridViewCheckBoxColumn2.MinimumWidth" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="dataGridViewCheckBoxColumn2.ToolTipText" xml:space="preserve">
+    <value>Uncheck to remove grouping/function from the preset</value>
+  </data>
+  <data name="dataGridViewCheckBoxColumn2.Width" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
+    <value>Function</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn2.MinimumWidth" type="System.Int32, mscorlib">
+    <value>80</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn2.ToolTipText" xml:space="preserve">
+    <value>The field:\\%%FIELDNAME%%\\already exists. Do you want to replace the field?</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn2.Width" type="System.Int32, mscorlib">
+    <value>80</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn3.HeaderText" xml:space="preserve">
+    <value>Tag</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn3.MinimumWidth" type="System.Int32, mscorlib">
+    <value>100</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn4.HeaderText" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn4.MinimumWidth" type="System.Int32, mscorlib">
+    <value>50</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn4.ToolTipText" xml:space="preserve">
+    <value>Multiple item splitter for groupings, or "per tag" tag for functions</value>
   </data>
 </root>

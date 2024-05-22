@@ -6,7 +6,7 @@ using static MusicBeePlugin.Plugin;
 
 namespace MusicBeePlugin
 {
-    public partial class PluginSettings : PluginWindowTemplate
+    public partial class Settings : PluginWindowTemplate
     {
         private bool selectedLineColors;
         private string changedLegendText;
@@ -64,7 +64,7 @@ namespace MusicBeePlugin
             preservedTagValuesLegendTextBox.BackColor = selectedLineColors ? PreservedTagValueCellStyle.SelectionBackColor : PreservedTagValueCellStyle.BackColor;
         }
 
-        internal PluginSettings(Plugin TagToolsPluginParam) : base(TagToolsPluginParam)
+        internal Settings(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
         }
@@ -81,7 +81,7 @@ namespace MusicBeePlugin
             selectedLineColors = true;
             reSkinLegend();
 
-            allowAsrLrPresetAutoexecutionCheckBox.Checked = SavedSettings.allowAsrLrPresetAutoexecution;
+            allowAsrLrPresetAutoExecutionCheckBox.Checked = SavedSettings.allowAsrLrPresetAutoExecution;
             allowCommandExecutionWithoutPreviewCheckBox.Checked = SavedSettings.allowCommandExecutionWithoutPreview;
 
             contextMenuCheckBox.Checked = !SavedSettings.dontShowContextMenu;
@@ -92,7 +92,7 @@ namespace MusicBeePlugin
             showReencodeTagCheckBox.Checked = !SavedSettings.dontShowReencodeTag;
             showLibraryReportsCheckBox.Checked = !SavedSettings.dontShowLibraryReports;
             showAutorateCheckBox.Checked = !SavedSettings.dontShowAutorate;
-            showASRCheckBox.Checked = !SavedSettings.dontShowASR;
+            showAsrCheckBox.Checked = !SavedSettings.dontShowAsr;
             showCARCheckBox.Checked = !SavedSettings.dontShowCAR;
             showCTCheckBox.Checked = !SavedSettings.dontShowCT;
             showShowHiddenWindowsCheckBox.Checked = !SavedSettings.dontShowShowHiddenWindows;
@@ -159,12 +159,8 @@ namespace MusicBeePlugin
                 sizesColorsChanged = true;
             else if (SavedSettings.useCustomFont && SavedSettings.pluginFontStyle != customFont.Style)
                 sizesColorsChanged = true;
-            else if (SavedSettings.useCustomFont && SavedSettings.pluginFontFamilyName != customFont.FontFamily.Name)
-                sizesColorsChanged = true;
-            else if (SavedSettings.useCustomFont && SavedSettings.pluginFontFamilyName != customFont.FontFamily.Name)
-                sizesColorsChanged = true;
 
-            SavedSettings.allowAsrLrPresetAutoexecution = allowAsrLrPresetAutoexecutionCheckBox.Checked;
+            SavedSettings.allowAsrLrPresetAutoExecution = allowAsrLrPresetAutoExecutionCheckBox.Checked;
             SavedSettings.allowCommandExecutionWithoutPreview = allowCommandExecutionWithoutPreviewCheckBox.Checked;
 
             SavedSettings.dontShowContextMenu = !contextMenuCheckBox.Checked;
@@ -175,7 +171,7 @@ namespace MusicBeePlugin
             SavedSettings.dontShowReencodeTag = !showReencodeTagCheckBox.Checked;
             SavedSettings.dontShowLibraryReports = !showLibraryReportsCheckBox.Checked;
             SavedSettings.dontShowAutorate = !showAutorateCheckBox.Checked;
-            SavedSettings.dontShowASR = !showASRCheckBox.Checked;
+            SavedSettings.dontShowAsr = !showAsrCheckBox.Checked;
             SavedSettings.dontShowCAR = !showCARCheckBox.Checked;
             SavedSettings.dontShowCT = !showCTCheckBox.Checked;
             SavedSettings.dontShowShowHiddenWindows = !showShowHiddenWindowsCheckBox.Checked;
@@ -212,8 +208,8 @@ namespace MusicBeePlugin
 
             TagToolsPlugin.SaveSettings();
 
-            AdvancedSearchAndReplace.InitASR();
-            LibraryReports.InitLR();
+            AdvancedSearchAndReplace.InitAsr();
+            LibraryReports.InitLr();
             TagToolsPlugin.InitBackupRestore();
 
             TagToolsPlugin.addPluginContextMenuItems();
@@ -286,9 +282,9 @@ namespace MusicBeePlugin
             showAutorateCheckBox.Checked = !showAutorateCheckBox.Checked;
         }
 
-        private void showASRCheckBoxLabel_Click(object sender, EventArgs e)
+        private void showAsrCheckBoxLabel_Click(object sender, EventArgs e)
         {
-            showASRCheckBox.Checked = !showASRCheckBox.Checked;
+            showAsrCheckBox.Checked = !showAsrCheckBox.Checked;
         }
 
         private void showCARCheckBoxLabel_Click(object sender, EventArgs e)
@@ -429,9 +425,9 @@ namespace MusicBeePlugin
             allowCommandExecutionWithoutPreviewCheckBox.Checked = !allowCommandExecutionWithoutPreviewCheckBox.Checked;
         }
 
-        private void allowAsrLrPresetAutoexecutionCheckBoxLabel_Click(object sender, EventArgs e)
+        private void allowAsrLrPresetAutoExecutionCheckBoxLabel_Click(object sender, EventArgs e)
         {
-            allowAsrLrPresetAutoexecutionCheckBox.Checked = !allowAsrLrPresetAutoexecutionCheckBox.Checked;
+            allowAsrLrPresetAutoExecutionCheckBox.Checked = !allowAsrLrPresetAutoExecutionCheckBox.Checked;
         }
     }
 }

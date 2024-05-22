@@ -23,7 +23,16 @@ namespace MusicBeePlugin
 
             if (disposing)
             {
-                tagNameFont?.Dispose();
+                if (allTagsWarningTimer != null)
+                    allTagsWarningTimer.Dispose();
+
+                warning.Dispose();
+                warningWide.Dispose();
+                checkedState.Dispose();
+                uncheckedState.Dispose();
+
+
+                tagNameFont.Dispose();
             }
 
             base.Dispose(disposing);

@@ -9,7 +9,7 @@ using static MusicBeePlugin.Plugin;
 
 namespace MusicBeePlugin
 {
-    public partial class ASRPresetEditor : PluginWindowTemplate
+    public partial class AsrPresetEditor : PluginWindowTemplate
     {
         private CustomComboBox replacedTag5ListCustom;
         private CustomComboBox searchedTag5ListCustom;
@@ -48,7 +48,7 @@ namespace MusicBeePlugin
         private static string WritableAllTagsLocalizedItem;
         private Bitmap warning = null;
 
-        internal ASRPresetEditor(Plugin tagToolsPluginParam) : base(tagToolsPluginParam)
+        internal AsrPresetEditor(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
         }
@@ -90,10 +90,13 @@ namespace MusicBeePlugin
 
             if (readOnly)
             {
-                makeReadonly(this);
+                this.MakeReadonly(true);
+
                 buttonCancel.Enable(true);
                 buttonOK.Enable(true);
                 linkLabel1.Enable(true);
+                tableLayoutPanel1.MakeReadonly(false);
+                tableLayoutPanel2.MakeReadonly(false);
             }
 
             guidBox.Text = preset.guid.ToString();
@@ -261,40 +264,6 @@ namespace MusicBeePlugin
             button_GotFocus(AcceptButton, null); //Let's mark active button
         }
 
-        private void makeReadonly(Control parent)
-        {
-            foreach (Control control in parent.Controls)
-            {
-                if (control is Button)
-                {
-                    (control as Button).Enable(false);
-                }
-                else if (control.GetType().IsSubclassOf(typeof(TextBox)) || control is TextBox)
-                {
-                    (control as TextBox).ReadOnly = true;
-                }
-                else if (control.GetType().IsSubclassOf(typeof(CustomComboBox)) || control is CustomComboBox)
-                {
-                    (control as CustomComboBox).Enable(false);
-                }
-                else if (control.GetType().IsSubclassOf(typeof(ListBox)) || control is ListBox)
-                {
-                    (control as ListBox).Enable(false);
-                }
-                else if (control is GroupBox)
-                {
-                    //(control as GroupBox).Enable(false);
-                }
-                else
-                {
-                    control.Enable(false);
-                }
-
-                makeReadonly(control);
-            }
-        }
-
-
         private CheckState getThreeStateChecked(bool? state)
         {
             if (state == true)
@@ -315,9 +284,9 @@ namespace MusicBeePlugin
                 return null;
         }
 
-        internal bool editPreset(Preset presetParam, bool openAsReadOnly)
+        internal bool editPreset(Preset preset, bool openAsReadOnly)
         {
-            preset = presetParam;
+            this.preset = preset;
             readOnly = openAsReadOnly;
 
             Display(this, true);
@@ -445,7 +414,7 @@ namespace MusicBeePlugin
 
         private static void FillParameterTagTypeList(TagType prevTagType, CustomComboBox tagTypeList, Label tagTypeLabel)
         {
-            if (tagTypeList == null)
+            if (tagTypeList == null || tagTypeLabel == null)
                 return;
 
 
@@ -538,12 +507,12 @@ namespace MusicBeePlugin
                 tagList.SelectedIndex = 0;
         }
 
-        private void parameterTagTypeChanged(CustomComboBox parameterTagTypeListParam, PictureBox pictureBox, CustomComboBox parameterTagListParam,
-            Label tagLabel, CustomComboBox parameterTagTypeListParam2 = null, Label tagTypeLabel2 = null)
+        private void parameterTagTypeChanged(CustomComboBox parameterTagTypeList, PictureBox pictureBox, CustomComboBox parameterTagList,
+            Label tagLabel, CustomComboBox parameterTagTypeList2 = null, Label tagTypeLabel2 = null)
         {
-            string parameterTagName = parameterTagListParam.Text;
+            string parameterTagName = parameterTagList.Text;
 
-            TagType tagType = (TagType)parameterTagTypeListParam.SelectedIndex;
+            TagType tagType = (TagType)parameterTagTypeList.SelectedIndex;
 
             if (tagType == TagType.WritableAllowAllTags)
                 pictureBox.Image = warning;
@@ -551,11 +520,12 @@ namespace MusicBeePlugin
                 pictureBox.Image = Resources.transparent_15;
 
 
-            FillParameterTagTypeList(tagType, parameterTagTypeListParam2, tagTypeLabel2);
+            FillParameterTagTypeList(tagType, parameterTagTypeList2, tagTypeLabel2); //-V3080
 
             if (tagType == TagType.WritableAllowAllTags) //Let's disable entering <ALL TAGS> pseudo-tag directly in preset editor for safety reasons !!!
                 tagType = TagType.Writable;
-            FillParameterTagList(tagType, parameterTagName, parameterTagListParam, tagLabel);
+
+            FillParameterTagList(tagType, parameterTagName, parameterTagList, tagLabel);
 
 
             if (fillTagComboBoxes)
@@ -621,7 +591,6 @@ namespace MusicBeePlugin
                 return;
 
             customTextCheckBox.Checked = !customTextCheckBox.Checked;
-            customTextChecked_CheckedChanged(null, null);
         }
 
         private void customText2CheckBox_CheckedChanged(object sender, EventArgs e)
@@ -641,7 +610,6 @@ namespace MusicBeePlugin
                 return;
 
             customText2CheckBox.Checked = !customText2CheckBox.Checked;
-            customText2CheckBox_CheckedChanged(null, null);
         }
 
         private void customText3CheckBox_CheckedChanged(object sender, EventArgs e)
@@ -661,7 +629,6 @@ namespace MusicBeePlugin
                 return;
 
             customText3CheckBox.Checked = !customText3CheckBox.Checked;
-            customText3CheckBox_CheckedChanged(null, null);
         }
 
         private void customText4CheckBox_CheckedChanged(object sender, EventArgs e)
@@ -679,7 +646,6 @@ namespace MusicBeePlugin
                 return;
 
             customText4CheckBox.Checked = !customText4CheckBox.Checked;
-            customText4CheckBox_CheckedChanged(null, null);
         }
 
         private void ignoreCaseCheckBoxLabel_Click(object sender, EventArgs e)
@@ -714,7 +680,7 @@ namespace MusicBeePlugin
             descriptionBox.ScrollToCaret();
         }
 
-        private void ASRPresetEditor_Load(object sender, EventArgs e)
+        private void AsrPresetEditor_Load(object sender, EventArgs e)
         {
             UpdateCustomScrollBars(descriptionBox);
         }

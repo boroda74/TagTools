@@ -6,16 +6,16 @@ using System.Drawing.Imaging;
 
 namespace MusicBeePlugin
 {
-    public class AlphaBlendedImage
+    internal class AlphaBlendedImage
     {
         Bitmap _image = null;
         Bitmap _mask = null;
         Bitmap _preparedMask = null;
         Bitmap _finalMaskedImage = null;
 
-        Color _maskColor = Color.FromArgb(-1);
+        Color _maskColor = Plugin.NoColor;
         bool _invertedMask = true;
-        Color _backColor = Color.FromArgb(-1);
+        Color _backColor = Plugin.NoColor;
 
         ~AlphaBlendedImage()
         {
@@ -34,9 +34,9 @@ namespace MusicBeePlugin
         {
             _image = Create32bppImageAndClearAlpha(image);
             _mask = Create32bppImageAndClearAlpha(mask);
-            _maskColor = Color.FromArgb(-1);
+            _maskColor = Plugin.NoColor;
             _invertedMask = invertedMask;
-            _backColor = Color.FromArgb(-1);
+            _backColor = Plugin.NoColor;
         }
 
         internal AlphaBlendedImage(Bitmap image, Bitmap mask, bool invertedMask, Color maskColor)
@@ -45,7 +45,7 @@ namespace MusicBeePlugin
             _mask = Create32bppImageAndClearAlpha(mask);
             _maskColor = maskColor;
             _invertedMask = invertedMask;
-            _backColor = Color.FromArgb(-1);
+            _backColor = Plugin.NoColor;
         }
 
         internal AlphaBlendedImage(Bitmap image, Bitmap mask, Color maskColor, bool invertedMask, Color backColor)
@@ -70,7 +70,7 @@ namespace MusicBeePlugin
             {
                 if (_image.Width != _preparedMask.Width || _image.Height != _preparedMask.Height)
                 {
-                    throw new BadImageFormatException("Mask and image must be the same size");
+                    throw new BadImageFormatException(Plugin.ExMaskAndImageMustBeTheSameSize);
                 }
                 else
                 {
@@ -94,16 +94,12 @@ namespace MusicBeePlugin
                         }
                         else if (_backColor.ToArgb() == -1)
                         {
-                            double rgbDataR = 0;
-                            double rgbDataG = 0;
-                            double rgbDataB = 0;
-
-                            rgbDataR = Math.Round((double)_maskColor.R * preparedMaskRGBAData[i] / 255
-                                + finalMaskedImageRGBAData[i] * (255 - preparedMaskRGBAData[i]) / 255);
-                            rgbDataG = Math.Round((double)_maskColor.G * preparedMaskRGBAData[i] / 255
-                                + finalMaskedImageRGBAData[i + 1] * (255 - preparedMaskRGBAData[i]) / 255);
-                            rgbDataB = Math.Round((double)_maskColor.B * preparedMaskRGBAData[i] / 255
-                                + finalMaskedImageRGBAData[i + 2] * (255 - preparedMaskRGBAData[i]) / 255);
+                            double rgbDataR = Math.Round((double)_maskColor.R * preparedMaskRGBAData[i] / 255
+                                + (double)finalMaskedImageRGBAData[i] * (255 - preparedMaskRGBAData[i]) / 255);
+                            double rgbDataG = Math.Round((double)_maskColor.G * preparedMaskRGBAData[i] / 255
+                                + (double)finalMaskedImageRGBAData[i + 1] * (255 - preparedMaskRGBAData[i]) / 255);
+                            double rgbDataB = Math.Round((double)_maskColor.B * preparedMaskRGBAData[i] / 255
+                                + (double)finalMaskedImageRGBAData[i + 2] * (255 - preparedMaskRGBAData[i]) / 255);
 
 
                             if (rgbDataR < 0)
@@ -128,16 +124,12 @@ namespace MusicBeePlugin
                         }
                         else
                         {
-                            double rgbDataR = 0;
-                            double rgbDataG = 0;
-                            double rgbDataB = 0;
-
-                            rgbDataR = Math.Round((double)_maskColor.R * preparedMaskRGBAData[i] / 255
-                                + _backColor.R * (255 - preparedMaskRGBAData[i]) / 255);
-                            rgbDataG = Math.Round((double)_maskColor.G * preparedMaskRGBAData[i] / 255
-                                + _backColor.G * (255 - preparedMaskRGBAData[i]) / 255);
-                            rgbDataB = Math.Round((double)_maskColor.B * preparedMaskRGBAData[i] / 255
-                                + _backColor.B * (255 - preparedMaskRGBAData[i]) / 255);
+                            double rgbDataR = Math.Round((double)_maskColor.R * preparedMaskRGBAData[i] / 255
+                                + (double)_backColor.R * (255 - preparedMaskRGBAData[i]) / 255);
+                            double rgbDataG = Math.Round((double)_maskColor.G * preparedMaskRGBAData[i] / 255
+                                + (double)_backColor.G * (255 - preparedMaskRGBAData[i]) / 255);
+                            double rgbDataB = Math.Round((double)_maskColor.B * preparedMaskRGBAData[i] / 255
+                                + (double)_backColor.B * (255 - preparedMaskRGBAData[i]) / 255);
 
 
                             if (rgbDataR < 0)
@@ -200,7 +192,7 @@ namespace MusicBeePlugin
 
                     byte brightness = (byte)Math.Round(brightnessF);
 
-                    if (opaque)
+                    if (opaque) //-V3022
                         brightness = (brightnessF < 420/* MUST BE "some constant" - OpacityThreshold*/) ? byte.MinValue : byte.MaxValue; //**** greyLevelF LESS THAN 420 ???
 
                     preparedMaskRGBData[i] = brightness;
@@ -342,9 +334,9 @@ namespace MusicBeePlugin
             if (Math.Abs(resultBr - backBr) < 0.3)
             {
                 if (backBr > 0.5)
-                    resultBr = resultBr - Math.Abs(resultBr - backBr);
+                    resultBr -= Math.Abs(resultBr - backBr);
                 else
-                    resultBr = resultBr + Math.Abs(resultBr - backBr);
+                    resultBr += Math.Abs(resultBr - backBr);
             }
 
             Color resultColor = HsbToRgb(resultHue, resultSat, resultBr);
@@ -406,13 +398,13 @@ namespace MusicBeePlugin
                 }
             }
 
-            avgR = avgR * 3 / 2 / blurPixelCount;
+            avgR = avgR * 3 / 2 / blurPixelCount; //-V3064
             avgR = avgR > 255 ? 255 : avgR;
 
-            avgG = avgG * 3 / 2 / blurPixelCount;
+            avgG = avgG * 3 / 2 / blurPixelCount; //-V3064
             avgG = avgG > 255 ? 255 : avgG;
 
-            avgB = avgB * 3 / 2 / blurPixelCount;
+            avgB = avgB * 3 / 2 / blurPixelCount; //-V3064
             avgB = avgB > 255 ? 255 : avgB;
 
 
@@ -424,9 +416,7 @@ namespace MusicBeePlugin
             Bitmap templateBitmap = new Bitmap(maskBitmap.Width, maskBitmap.Height, PixelFormat.Format32bppArgb);
 
             using (Graphics gfx = Graphics.FromImage(templateBitmap))
-            {
                 gfx.Clear(foreColor);
-            }
 
             AlphaBlendedImage alphaBlendedImage = new AlphaBlendedImage(templateBitmap, maskBitmap);
 
@@ -550,7 +540,7 @@ namespace MusicBeePlugin
         {
             if (height > image.Height && !scaleY)
             {
-                int yOffset = 0;
+                int yOffset;
                 for (yOffset = 0; yOffset < height - image.Height; yOffset += image.Height)
                 {
                     gfx.DrawImage(image, new Rectangle(x, y + yOffset, destWidth, image.Height),
@@ -576,7 +566,7 @@ namespace MusicBeePlugin
         {
             if (width > image.Width && !scaleX)
             {
-                int xOffset = 0;
+                int xOffset;
                 for (xOffset = 0; xOffset < width - image.Width; xOffset += image.Width)
                     DrawYRepeatedImageInternal(gfx, image, x + xOffset, y, image.Width, image.Width, height, scaleY);
 

@@ -10,7 +10,7 @@ namespace MusicBeePlugin
         private decimal initialAutoBackupInterval;
         private string initialAutoBackupDirectory;
 
-        internal AutoBackupSettings(Plugin tagToolsPluginParam) : base(tagToolsPluginParam)
+        internal AutoBackupSettings(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
         }
@@ -19,18 +19,18 @@ namespace MusicBeePlugin
         {
             base.initializeForm();
 
-            initialAutoBackupInterval = SavedSettings.autobackupInterval;
-            initialAutoBackupDirectory = SavedSettings.autobackupDirectory;
+            initialAutoBackupInterval = SavedSettings.autoBackupInterval;
+            initialAutoBackupDirectory = SavedSettings.autoBackupDirectory;
 
-            autobackupFolderTextBox.Text = GetAutobackupDirectory(SavedSettings.autobackupDirectory);
-            autobackupPrefixTextBox.Text = SavedSettings.autobackupPrefix;
+            autoBackupFolderTextBox.Text = BrGetAutoBackupDirectory(SavedSettings.autoBackupDirectory);
+            autoBackupPrefixTextBox.Text = SavedSettings.autoBackupPrefix;
 
-            autobackupNumericUpDown.Value = SavedSettings.autobackupInterval;
+            autoBackupNumericUpDown.Value = SavedSettings.autoBackupInterval;
             numberOfDaysNumericUpDown.Value = SavedSettings.autodeleteKeepNumberOfDays;
             numberOfFilesNumericUpDown.Value = SavedSettings.autodeleteKeepNumberOfFiles;
 
-            if (SavedSettings.autobackupInterval != 0)
-                autobackupCheckBox.Checked = true;
+            if (SavedSettings.autoBackupInterval != 0)
+                autoBackupCheckBox.Checked = true;
 
             if (SavedSettings.autodeleteKeepNumberOfDays != 0)
                 autodeleteOldCheckBox.Checked = true;
@@ -38,7 +38,7 @@ namespace MusicBeePlugin
             if (SavedSettings.autodeleteKeepNumberOfFiles != 0)
                 autodeleteManyCheckBox.Checked = true;
 
-            dontSkipAutobackupsIfPlayCountsChangedCheckBox.Checked = SavedSettings.dontSkipAutobackupsIfOnlyPlayCountsChanged;
+            dontSkipAutoBackupsIfPlayCountsChangedCheckBox.Checked = SavedSettings.dontSkipAutoBackupsIfOnlyPlayCountsChanged;
 
             backupArtworksCheckBox.Checked = SavedSettings.backupArtworks;
             dontTryToGuessLibraryNameCheckBox.Checked = SavedSettings.dontTryToGuessLibraryName;
@@ -47,18 +47,17 @@ namespace MusicBeePlugin
             button_GotFocus(AcceptButton, null); //Let's mark active button
         }
 
-        private void autobackupCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void autoBackupCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (autobackupCheckBox.Checked)
-                autobackupNumericUpDown.Enable(true);
+            if (autoBackupCheckBox.Checked)
+                autoBackupNumericUpDown.Enable(true);
             else
-                autobackupNumericUpDown.Enable(false);
+                autoBackupNumericUpDown.Enable(false);
         }
 
-        private void autobackupCheckBoxLabel_Click(object sender, EventArgs e)
+        private void autoBackupCheckBoxLabel_Click(object sender, EventArgs e)
         {
-            autobackupCheckBox.Checked = !autobackupCheckBox.Checked;
-            autobackupCheckBox_CheckedChanged(null, null);
+            autoBackupCheckBox.Checked = !autoBackupCheckBox.Checked;
         }
 
         private void autodeleteOldCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -72,7 +71,6 @@ namespace MusicBeePlugin
         private void autodeleteOldCheckBoxLabel_Click(object sender, EventArgs e)
         {
             autodeleteOldCheckBox.Checked = !autodeleteOldCheckBox.Checked;
-            autodeleteOldCheckBox_CheckedChanged(null, null);
         }
 
         private void autodeleteManyCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -86,12 +84,11 @@ namespace MusicBeePlugin
         private void autodeleteManyCheckBoxLabel_Click(object sender, EventArgs e)
         {
             autodeleteManyCheckBox.Checked = !autodeleteManyCheckBox.Checked;
-            autodeleteManyCheckBox_CheckedChanged(null, null);
         }
 
-        private void dontSkipAutobackupsIfPlayCountsChangedLabel_Click(object sender, EventArgs e)
+        private void dontSkipAutoBackupsIfPlayCountsChangedLabel_Click(object sender, EventArgs e)
         {
-            dontSkipAutobackupsIfPlayCountsChangedCheckBox.Checked = !dontSkipAutobackupsIfPlayCountsChangedCheckBox.Checked;
+            dontSkipAutoBackupsIfPlayCountsChangedCheckBox.Checked = !dontSkipAutoBackupsIfPlayCountsChangedCheckBox.Checked;
         }
 
         private void dontTryToGuessLibraryNameCheckBoxLabel_Click(object sender, EventArgs e)
@@ -108,25 +105,25 @@ namespace MusicBeePlugin
         {
             FolderBrowserDialog dialog = new FolderBrowserDialog
             {
-                SelectedPath = autobackupFolderTextBox.Text
+                SelectedPath = autoBackupFolderTextBox.Text
             };
 
             if (dialog.ShowDialog(this) == DialogResult.Cancel) return;
 
-            autobackupFolderTextBox.Text = dialog.SelectedPath;
+            autoBackupFolderTextBox.Text = dialog.SelectedPath;
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
             string driveLetter = MbApiInterface.Setting_GetPersistentStoragePath().Substring(0, 2);
 
-            SavedSettings.autobackupDirectory = autobackupFolderTextBox.Text.Replace(MbApiInterface.Setting_GetPersistentStoragePath(), string.Empty).Replace(driveLetter, string.Empty);
-            SavedSettings.autobackupPrefix = autobackupPrefixTextBox.Text;
+            SavedSettings.autoBackupDirectory = autoBackupFolderTextBox.Text.Replace(MbApiInterface.Setting_GetPersistentStoragePath(), string.Empty).Replace(driveLetter, string.Empty);
+            SavedSettings.autoBackupPrefix = autoBackupPrefixTextBox.Text;
 
-            if (autobackupCheckBox.Checked)
-                SavedSettings.autobackupInterval = autobackupNumericUpDown.Value;
+            if (autoBackupCheckBox.Checked)
+                SavedSettings.autoBackupInterval = autoBackupNumericUpDown.Value;
             else
-                SavedSettings.autobackupInterval = 0;
+                SavedSettings.autoBackupInterval = 0;
 
             if (autodeleteOldCheckBox.Checked)
                 SavedSettings.autodeleteKeepNumberOfDays = numberOfDaysNumericUpDown.Value;
@@ -138,34 +135,34 @@ namespace MusicBeePlugin
             else
                 SavedSettings.autodeleteKeepNumberOfFiles = 0;
 
-            SavedSettings.dontSkipAutobackupsIfOnlyPlayCountsChanged = dontSkipAutobackupsIfPlayCountsChangedCheckBox.Checked;
+            SavedSettings.dontSkipAutoBackupsIfOnlyPlayCountsChanged = dontSkipAutoBackupsIfPlayCountsChangedCheckBox.Checked;
 
 
-            PeriodicAutobackupTimer?.Dispose();
+            PeriodicAutoBackupTimer?.Dispose();
 
-            PeriodicAutobackupTimer = null;
+            PeriodicAutoBackupTimer = null;
 
-            if (initialAutoBackupDirectory != SavedSettings.autobackupDirectory)
+            if (initialAutoBackupDirectory != SavedSettings.autoBackupDirectory)
             {
                 MbApiInterface.MB_SetBackgroundTaskMessage(SbMovingBackupsToNewFolder);
 
-                lock (AutobackupLocker)
+                lock (TracksNeededToBeBackedUp)
                 {
-                    if (!System.IO.Directory.Exists(GetAutobackupDirectory(SavedSettings.autobackupDirectory)))
-                        System.IO.Directory.CreateDirectory(GetAutobackupDirectory(SavedSettings.autobackupDirectory));
+                    if (!System.IO.Directory.Exists(BrGetAutoBackupDirectory(SavedSettings.autoBackupDirectory)))
+                        System.IO.Directory.CreateDirectory(BrGetAutoBackupDirectory(SavedSettings.autoBackupDirectory));
 
-                    string[] files = System.IO.Directory.GetFileSystemEntries(GetAutobackupDirectory(initialAutoBackupDirectory));
+                    string[] files = System.IO.Directory.GetFileSystemEntries(BrGetAutoBackupDirectory(initialAutoBackupDirectory));
                     for (int i = 0; i < files.Length; i++)
                         try
                         {
-                            System.IO.Directory.Move(files[i], GetAutobackupDirectory(SavedSettings.autobackupDirectory) + @"\" + GetBackupSafeFilename(files[i]));
+                            System.IO.Directory.Move(files[i], BrGetAutoBackupDirectory(SavedSettings.autoBackupDirectory) + @"\" + BrGetBackupSafeFilename(files[i]));
                         }
                         catch { };
 
 
                     try
                     {
-                        System.IO.Directory.Delete(GetAutobackupDirectory(initialAutoBackupDirectory));
+                        System.IO.Directory.Delete(BrGetAutoBackupDirectory(initialAutoBackupDirectory));
                     }
                     catch { };
                 }
@@ -176,7 +173,7 @@ namespace MusicBeePlugin
             SavedSettings.backupArtworks = backupArtworksCheckBox.Checked;
             SavedSettings.dontTryToGuessLibraryName = dontTryToGuessLibraryNameCheckBox.Checked;
 
-            if (initialAutoBackupInterval != SavedSettings.autobackupInterval)
+            if (initialAutoBackupInterval != SavedSettings.autoBackupInterval)
                 TagToolsPlugin.InitBackupRestore();
 
 

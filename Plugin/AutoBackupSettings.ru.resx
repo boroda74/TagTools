@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="autobackupFolderTextBox.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="autoBackupFolderTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>624, 23</value>
   </data>
-  <data name="autobackupFolderTextBox.ToolTip" xml:space="preserve">
+  <data name="autoBackupFolderTextBox.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="browseButton.Location" type="System.Drawing.Point, System.Drawing">
@@ -133,50 +133,50 @@
   <data name="browseButton.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="autobackupFolderLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="autoBackupFolderLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>130, 15</value>
   </data>
-  <data name="autobackupFolderLabel.Text" xml:space="preserve">
+  <data name="autoBackupFolderLabel.Text" xml:space="preserve">
     <value>Папка авторезервирования:</value>
   </data>
-  <data name="autobackupFolderLabel.ToolTip" xml:space="preserve">
+  <data name="autoBackupFolderLabel.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="autobackupPrefixLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="autoBackupPrefixLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>344, 40</value>
   </data>
-  <data name="autobackupPrefixLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="autoBackupPrefixLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>367, 15</value>
   </data>
-  <data name="autobackupPrefixLabel.Text" xml:space="preserve">
+  <data name="autoBackupPrefixLabel.Text" xml:space="preserve">
     <value>    Префикс имен файлов для автоматически созданных архивов:</value>
   </data>
-  <data name="autobackupPrefixLabel.ToolTip" xml:space="preserve">
+  <data name="autoBackupPrefixLabel.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="autobackupPrefixTextBox.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="autoBackupPrefixTextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>720, 37</value>
   </data>
-  <data name="autobackupPrefixTextBox.ToolTip" xml:space="preserve">
+  <data name="autoBackupPrefixTextBox.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="autobackupCheckBox.ToolTip" xml:space="preserve">
+  <data name="autoBackupCheckBox.ToolTip" xml:space="preserve">
     <value>Автоархивирование будет пропущено, если содержание текущей библиотеки и какие-либо теги 
 не изменилсь с момента последнего ручного или автоматического архивирования. </value>
   </data>
-  <data name="autobackupNumericUpDown.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="autoBackupNumericUpDown.Location" type="System.Drawing.Point, System.Drawing">
     <value>184, 37</value>
   </data>
-  <data name="autobackupNumericUpDown.ToolTip" xml:space="preserve">
+  <data name="autoBackupNumericUpDown.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="autobackupPeriodLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="autoBackupPeriodLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>298, 40</value>
   </data>
-  <data name="autobackupPeriodLabel.Text" xml:space="preserve">
+  <data name="autoBackupPeriodLabel.Text" xml:space="preserve">
     <value>дней.</value>
   </data>
-  <data name="autobackupPeriodLabel.ToolTip" xml:space="preserve">
+  <data name="autoBackupPeriodLabel.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="autodeleteOldCheckBox.ToolTip" xml:space="preserve">
@@ -223,15 +223,15 @@
   </data>
   <data name="dontTryToGuessLibraryNameCheckBox.ToolTip" xml:space="preserve">
     <value>ВНИМАНИЕ! Эта опция затрагивает, как ручное, так и автоматическое архивирование.
-Иногда предположение названия библиотеки работает неверно.</value>
+Иногда предположение названия библиотеки работает некорректно.</value>
   </data>
-  <data name="autobackupCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="autoBackupCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>139, 15</value>
   </data>
-  <data name="autobackupCheckBoxLabel.Text" xml:space="preserve">
+  <data name="autoBackupCheckBoxLabel.Text" xml:space="preserve">
     <value>Автоархивация каждые:</value>
   </data>
-  <data name="autobackupCheckBoxLabel.ToolTip" xml:space="preserve">
+  <data name="autoBackupCheckBoxLabel.ToolTip" xml:space="preserve">
     <value>Автоархивирование будет пропущено, если содержание текущей библиотеки и какие-либо теги 
 не изменилсь с момента последнего ручного или автоматического архивирования. 
 </value>
@@ -262,7 +262,7 @@
   </data>
   <data name="dontTryToGuessLibraryNameCheckBoxLabel.ToolTip" xml:space="preserve">
     <value>ВНИМАНИЕ! Эта опция затрагивает, как ручное, так и автоматическое архивирование.
-Иногда предположение названия библиотеки работает неверно.
+Иногда предположение названия библиотеки работает некорректно.
 </value>
   </data>
   <data name="backupArtworksCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
@@ -274,16 +274,16 @@
   <data name="backupArtworksCheckBoxLabel.ToolTip" xml:space="preserve">
     <value>ВНИМАНИЕ! Эта опция затрагивает, как ручное, так и автоматическое архивирование.</value>
   </data>
-  <data name="dontSkipAutobackupsIfPlayCountsChangedCheckBox.ToolTip" xml:space="preserve">
+  <data name="dontSkipAutoBackupsIfPlayCountsChangedCheckBox.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="dontSkipAutobackupsIfPlayCountsChangedLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="dontSkipAutoBackupsIfPlayCountsChangedLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>576, 15</value>
   </data>
-  <data name="dontSkipAutobackupsIfPlayCountsChangedLabel.Text" xml:space="preserve">
+  <data name="dontSkipAutoBackupsIfPlayCountsChangedLabel.Text" xml:space="preserve">
     <value>Не пропускать автоархивирование, даже если изменились только счетчики проигрываний/пропусков</value>
   </data>
-  <data name="dontSkipAutobackupsIfPlayCountsChangedLabel.ToolTip" xml:space="preserve">
+  <data name="dontSkipAutoBackupsIfPlayCountsChangedLabel.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">

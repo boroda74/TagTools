@@ -1,25 +1,9 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 namespace MusicBeePlugin
 {
     public delegate void CheckBoxClickedHandler(bool state);
-
-    public class DataGridViewCheckBoxHeaderCellEventArgs : EventArgs
-    {
-        private bool bChecked;
-
-        public DataGridViewCheckBoxHeaderCellEventArgs(bool bChecked)
-        {
-            this.bChecked = bChecked;
-        }
-
-        public bool Checked
-        {
-            get { return bChecked; }
-        }
-    }
 
     public class DataGridViewCheckBoxHeaderCell : DataGridViewColumnHeaderCell
     {
@@ -77,7 +61,7 @@ namespace MusicBeePlugin
             checkedState = !checkedState;
             if (OnCheckBoxClicked != null)
             {
-                OnCheckBoxClicked(checkedState);
+                OnCheckBoxClicked(checkedState); //-V3083
                 DataGridView.InvalidateCell(this);
             }
         }

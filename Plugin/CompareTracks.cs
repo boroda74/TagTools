@@ -10,33 +10,31 @@ namespace MusicBeePlugin
 {
     public partial class CompareTracks : PluginWindowTemplate
     {
-        private string[] trackUrls;
+        private readonly string[] trackUrls;
 
         private List<string> tagNames;
         private List<MetaDataType> tagIds;
         private int[] displayedTags;
         private List<int> reallyDisplayedTags;
 
-        private Bitmap emptyArtwork = new Bitmap(1, 1);
+        private readonly Bitmap emptyArtwork = new Bitmap(1, 1);
         private int artworkRow;
-        private TypeConverter typeConverter = TypeDescriptor.GetConverter(typeof(Bitmap));
+        private readonly TypeConverter typeConverter = TypeDescriptor.GetConverter(typeof(Bitmap));
 
         private List<List<string>> cachedTracks;
 
         private DataGridViewColumn columnTemplate;
         private DataGridViewCell artworkCellTemplate;
 
-        private Color noBackupDataCellForeColor;
-
         private int rowHeadersWidth;
         private int defaultColumnWidth;
 
         private bool ignoreAutoSelectTagsCheckBoxCheckedEvent = false;
 
-        private Dictionary<int, object> buffer = new Dictionary<int, object>();
+        private readonly Dictionary<int, object> buffer = new Dictionary<int, object>();
         private Bitmap bufferArtwork;
 
-        internal CompareTracks(Plugin tagToolsPluginParam, string[] files) : base(tagToolsPluginParam)
+        internal CompareTracks(Plugin plugin, string[] files) : base(plugin)
         {
             InitializeComponent();
             trackUrls = files;
@@ -63,8 +61,6 @@ namespace MusicBeePlugin
 
             columnTemplate = previewTable.Columns[0].Clone() as DataGridViewColumn;
             artworkCellTemplate = previewTable.Columns[1].CellTemplate;
-
-            noBackupDataCellForeColor = SystemColors.HotTrack;
 
 
             if (!SavedSettings.dontAutoSelectDisplayedTags || SavedSettings.displayedTags == null)
@@ -197,7 +193,7 @@ namespace MusicBeePlugin
                                 if (tagValue == string.Empty)
                                     artwork = emptyArtwork;
                                 else
-                                    artwork = (Bitmap)typeConverter.ConvertFrom(Convert.FromBase64String(tagValue));
+                                    artwork = typeConverter.ConvertFrom(Convert.FromBase64String(tagValue)) as Bitmap;
 
 
                                 previewTable.Rows[j].Cells[trackNo] = artworkCellTemplate.Clone() as DataGridViewCell;

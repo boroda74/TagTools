@@ -2,7 +2,7 @@
 {
     public partial class PluginSampleWindow : PluginWindowTemplate
     {
-        internal PluginSampleWindow(Plugin tagToolsPluginParam) : base(tagToolsPluginParam)
+        internal PluginSampleWindow(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
         }

@@ -6,7 +6,7 @@ using static MusicBeePlugin.Plugin;
 
 namespace MusicBeePlugin
 {
-    public partial class PluginQuickSettings : PluginWindowTemplate
+    public partial class QuickSettings : PluginWindowTemplate
     {
         private bool selectedLineColors;
         private string changedLegendText;
@@ -64,7 +64,7 @@ namespace MusicBeePlugin
             preservedTagValuesLegendTextBox.BackColor = selectedLineColors ? PreservedTagValueCellStyle.SelectionBackColor : PreservedTagValueCellStyle.BackColor;
         }
 
-        internal PluginQuickSettings(Plugin TagToolsPluginParam) : base(TagToolsPluginParam)
+        internal QuickSettings(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
         }
@@ -81,7 +81,7 @@ namespace MusicBeePlugin
             selectedLineColors = true;
             reSkinLegend();
 
-            allowAsrLrPresetAutoexecutionCheckBox.Checked = SavedSettings.allowAsrLrPresetAutoexecution;
+            allowAsrLrPresetAutoExecutionCheckBox.Checked = SavedSettings.allowAsrLrPresetAutoExecution;
             allowCommandExecutionWithoutPreviewCheckBox.Checked = SavedSettings.allowCommandExecutionWithoutPreview;
 
             minimizePluginWindowsCheckBox.Checked = SavedSettings.minimizePluginWindows;
@@ -140,12 +140,8 @@ namespace MusicBeePlugin
                 sizesColorsChanged = true;
             else if (SavedSettings.useCustomFont && SavedSettings.pluginFontStyle != customFont.Style)
                 sizesColorsChanged = true;
-            else if (SavedSettings.useCustomFont && SavedSettings.pluginFontFamilyName != customFont.FontFamily.Name)
-                sizesColorsChanged = true;
-            else if (SavedSettings.useCustomFont && SavedSettings.pluginFontFamilyName != customFont.FontFamily.Name)
-                sizesColorsChanged = true;
 
-            SavedSettings.allowAsrLrPresetAutoexecution = allowAsrLrPresetAutoexecutionCheckBox.Checked;
+            SavedSettings.allowAsrLrPresetAutoExecution = allowAsrLrPresetAutoExecutionCheckBox.Checked;
             SavedSettings.allowCommandExecutionWithoutPreview = allowCommandExecutionWithoutPreviewCheckBox.Checked;
 
             SavedSettings.minimizePluginWindows = minimizePluginWindowsCheckBox.Checked;
@@ -173,8 +169,8 @@ namespace MusicBeePlugin
 
             TagToolsPlugin.SaveSettings();
 
-            AdvancedSearchAndReplace.InitASR();
-            LibraryReports.InitLR();
+            AdvancedSearchAndReplace.InitAsr();
+            LibraryReports.InitLr();
             TagToolsPlugin.InitBackupRestore();
 
             TagToolsPlugin.addPluginContextMenuItems();
@@ -231,7 +227,6 @@ namespace MusicBeePlugin
         private void useMusicBeeFontCheckBoxLabel_Click(object sender, EventArgs e)
         {
             useMusicBeeFontCheckBox.Checked = !useMusicBeeFontCheckBox.Checked;
-            useMusicBeeFontCheckBox_CheckedChanged(null, null);
         }
 
         private void useCustomFontCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -245,7 +240,6 @@ namespace MusicBeePlugin
         private void useCustomFontCheckBoxLabel_Click(object sender, EventArgs e)
         {
             useCustomFontCheckBox.Checked = !useCustomFontCheckBox.Checked;
-            useCustomFontCheckBox_CheckedChanged(null, null);
         }
 
         private void customFontButton_Click(object sender, EventArgs e)
@@ -330,9 +324,9 @@ namespace MusicBeePlugin
             allowCommandExecutionWithoutPreviewCheckBox.Checked = !allowCommandExecutionWithoutPreviewCheckBox.Checked;
         }
 
-        private void allowAsrLrPresetAutoexecutionCheckBoxLabel_Click(object sender, EventArgs e)
+        private void allowAsrLrPresetAutoExecutionCheckBoxLabel_Click(object sender, EventArgs e)
         {
-            allowAsrLrPresetAutoexecutionCheckBox.Checked = !allowAsrLrPresetAutoexecutionCheckBox.Checked;
+            allowAsrLrPresetAutoExecutionCheckBox.Checked = !allowAsrLrPresetAutoExecutionCheckBox.Checked;
         }
     }
 }

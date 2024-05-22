@@ -9,19 +9,19 @@ using System.Xml.Serialization;
 
 namespace MusicBeePlugin
 {
-    public partial class Plugin
+    partial class Plugin
     {
         internal void InitBackupRestore()
         {
-            PeriodicAutobackupTimer?.Dispose();
-            PeriodicAutobackupTimer = null;
+            PeriodicAutoBackupTimer?.Dispose();
+            PeriodicAutoBackupTimer = null;
 
             //(Auto)backup init
             if (!SavedSettings.dontShowBackupRestore)
             {
-                if (File.Exists(GetAutobackupDirectory(SavedSettings.autobackupDirectory) + @"\" + BackupIndexFileName))
+                if (File.Exists(BrGetAutoBackupDirectory(SavedSettings.autoBackupDirectory) + @"\" + BackupIndexFileName))
                 {
-                    FileStream stream = File.Open(GetAutobackupDirectory(SavedSettings.autobackupDirectory) + @"\" + BackupIndexFileName, FileMode.Open, FileAccess.Read, FileShare.None);
+                    FileStream stream = File.Open(BrGetAutoBackupDirectory(SavedSettings.autoBackupDirectory) + @"\" + BackupIndexFileName, FileMode.Open, FileAccess.Read, FileShare.None);
                     StreamReader file = new StreamReader(stream, Encoding.UTF8);
 
                     System.Xml.Serialization.XmlSerializer backupSerializer = new System.Xml.Serialization.XmlSerializer(typeof(BackupIndex));
@@ -44,11 +44,11 @@ namespace MusicBeePlugin
                 }
             }
 
-            if (!SavedSettings.dontShowBackupRestore && SavedSettings.autobackupInterval != 0)
-                PeriodicAutobackupTimer = new System.Threading.Timer(regularAutobackup, null, new TimeSpan(0, 0, (int)SavedSettings.autobackupInterval * 60), new TimeSpan(0, 0, (int)SavedSettings.autobackupInterval * 60));
+            if (!SavedSettings.dontShowBackupRestore && SavedSettings.autoBackupInterval != 0)
+                PeriodicAutoBackupTimer = new System.Threading.Timer(RegularAutoBackup, null, new TimeSpan(0, 0, (int)SavedSettings.autoBackupInterval * 60), new TimeSpan(0, 0, (int)SavedSettings.autoBackupInterval * 60));
         }
 
-        internal static string GetLibraryName()
+        internal static string BrGetCurrentLibraryName()
         {
             string libraryName = null;
 
@@ -59,81 +59,62 @@ namespace MusicBeePlugin
                     string playlist = MbApiInterface.Playlist_QueryGetNextPlaylist();
 
                     if (!string.IsNullOrEmpty(playlist))
-                    {
-                        libraryName = Regex.Replace(playlist, @".*\\([^\\]*)\\Playlists\\.*", "$1");
-                    }
+                        libraryName = Regex.Replace(playlist, @"^.*\\([^\\]*)\\Playlists\\.*", "$1");
                 }
             }
 
             if (string.IsNullOrWhiteSpace(libraryName))
-                libraryName = string.Empty;
+                libraryName = "";
             else
                 libraryName += " - ";
 
             return libraryName;
         }
 
-        internal static string GetAutobackupDirectory(string autobackupDirectory)
+        internal static string BrGetAutoBackupDirectory(string autoBackupDirectory)
         {
-            if (autobackupDirectory.Length > 0 && autobackupDirectory[0] == '\\')
-            {
-                autobackupDirectory = MbApiInterface.Setting_GetPersistentStoragePath().Substring(0, 2) + autobackupDirectory;
-            }
-            else if (autobackupDirectory.Length > 1 && autobackupDirectory[1] != ':')
-            {
-                autobackupDirectory = MbApiInterface.Setting_GetPersistentStoragePath() + autobackupDirectory;
-            }
+            if (autoBackupDirectory.Length > 0 && autoBackupDirectory[0] == '\\')
+                autoBackupDirectory = MbApiInterface.Setting_GetPersistentStoragePath().Substring(0, 2) + autoBackupDirectory;
+            else if (autoBackupDirectory.Length > 1 && autoBackupDirectory[1] != ':')
+                autoBackupDirectory = MbApiInterface.Setting_GetPersistentStoragePath() + autoBackupDirectory;
 
-            return autobackupDirectory;
+            return autoBackupDirectory;
         }
 
-        internal static string GetPersistentTrackId(string currentFile)
-        {
-            string id = MbApiInterface.Library_GetDevicePersistentId(currentFile, DeviceIdType.MusicBeeNativeId);
-
-            if (id == null)
-                id = "-1";
-
-            return id;
-        }
-
-        internal static string AddLibraryNameToTrackId(string libraryName, string trackId)
-        {
-            return libraryName + "%%%%" + trackId;
-        }
-
-        internal static string GetDefaultBackupFilename(string prefix)
+        internal static string BrGetDefaultBackupFilename(string prefix)
         {
             DateTime now = DateTime.Now;
 
-            return GetLibraryName() + prefix + now.Year.ToString("D4") + "-" + now.Month.ToString("D2") + "-" + now.Day.ToString("D2") + " " + now.Hour.ToString("D2") + "." + now.Minute.ToString("D2") + "." + now.Second.ToString("D2");
+            return BrGetCurrentLibraryName() + prefix + now.Year.ToString("D4") + "-" + now.Month.ToString("D2") + "-" + now.Day.ToString("D2") + " "
+                + now.Hour.ToString("D2") + "." + now.Minute.ToString("D2") + "." + now.Second.ToString("D2");
         }
 
-        internal static string GetBackupBaselineFilename(string libraryName = null)
+        internal static string BrGetBackupBaselineFilename(string libraryName = null)
         {
             if (libraryName == null)
-                return GetAutobackupDirectory(SavedSettings.autobackupDirectory) + @"\" + GetLibraryName() + "Baseline";
+                return BrGetAutoBackupDirectory(SavedSettings.autoBackupDirectory) + @"\" + BrGetCurrentLibraryName() + "Baseline";
             else
-                return GetAutobackupDirectory(SavedSettings.autobackupDirectory) + @"\" + libraryName + "Baseline";
+                return BrGetAutoBackupDirectory(SavedSettings.autoBackupDirectory) + @"\" + libraryName + "Baseline";
         }
 
-        internal static string GetBackupDateTime(BackupType backup)
+        internal static string BrGetBackupDateTime(Backup backup)
         {
             DateTime backupDate = backup.creationDate.ToLocalTime();
-            return backupDate.Year.ToString("D4") + "-" + backupDate.Month.ToString("D2") + "-" + backupDate.Day.ToString("D2") + " " + backupDate.Hour.ToString("D2") + ":" + backupDate.Minute.ToString("D2"); //+ "." + backupDate.Second.ToString("D2");
+            return backupDate.Year.ToString("D4") + "-" + backupDate.Month.ToString("D2") + "-" + backupDate.Day.ToString("D2") + " "
+                + backupDate.Hour.ToString("D2") + ":" + backupDate.Minute.ToString("D2"); // + "." + backupDate.Second.ToString("D2");
         }
 
-        internal static string GetBackupFilenameWithoutExtension(string fullFilename)
+        internal static string BrGetBackupFilenameWithoutExtension(string fullFilename)
         {
             return Regex.Replace(fullFilename, @"(.*)\..*", "$1");
         }
 
-        internal static string GetBackupSafeFilenameWithoutExtension(string fullFilename)
+        internal static string BrGetBackupSafeFilenameWithoutExtension(string fullFilename)
         {
             return Regex.Replace(fullFilename, @".*\\(.*)\..*", "$1");
         }
 
-        internal static string GetBackupSafeFilename(string fullFilename)
+        internal static string BrGetBackupSafeFilename(string fullFilename)
         {
             return Regex.Replace(fullFilename, @".*\\(.*)", "$1");
         }
@@ -181,23 +162,23 @@ namespace MusicBeePlugin
         }
     }
 
-    public class BackupCacheType
+    public class BackupCache
     {
-        internal bool isAutocreated;
-        internal DateTime creationDate;
-        internal string guid;
-        internal string libraryName;
+        public bool isAutoCreated;
+        public DateTime creationDate;
+        public string guid;
+        public string libraryName;
 
-        internal BackupCacheType() : base()
+        public BackupCache() : base()
         {
             creationDate = DateTime.UtcNow;
             guid = Guid.NewGuid().ToString();
-            libraryName = Plugin.GetLibraryName();
+            libraryName = Plugin.BrGetCurrentLibraryName();
         }
 
-        internal BackupCacheType(BackupCacheType source, bool isAutocreatedParam) : base()
+        public BackupCache(BackupCache source, bool isAutoCreated) : base()
         {
-            isAutocreated = isAutocreatedParam;
+            this.isAutoCreated = isAutoCreated;
             creationDate = source.creationDate;
             guid = source.guid;
             libraryName = source.libraryName;
@@ -205,35 +186,31 @@ namespace MusicBeePlugin
 
         internal virtual void save(string fileName)
         {
-            System.IO.Stream stream = System.IO.File.Open(fileName + ".mbc", System.IO.FileMode.Create, System.IO.FileAccess.Write, System.IO.FileShare.None);
-            System.IO.StreamWriter file = new System.IO.StreamWriter(stream, Encoding.UTF8);
-
-            XmlSerializer serializer = new XmlSerializer(typeof(BackupCacheType));
+            Stream stream = File.Open(fileName + ".mbc", FileMode.Create, FileAccess.Write, FileShare.None);
+            StreamWriter file = new StreamWriter(stream, Encoding.UTF8);
+            XmlSerializer serializer = new XmlSerializer(typeof(BackupCache));
 
             serializer.Serialize(file, this);
 
             file.Close();
         }
 
-        internal static BackupCacheType Load(string fileName, string backupFileExtension = ".xml", bool ignoreExceptions = false)
+        internal static BackupCache Load(string fileName)
         {
-            System.IO.FileStream stream = System.IO.File.Open(fileName + ".mbc", System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.None);
-            System.IO.StreamReader file = new System.IO.StreamReader(stream, Encoding.UTF8);
+            FileStream stream = File.Open(fileName + ".mbc", FileMode.Open, FileAccess.Read, FileShare.None);
+            StreamReader file = new StreamReader(stream, Encoding.UTF8);
+            XmlSerializer serializer = new XmlSerializer(typeof(BackupCache));
+            BackupCache backupCache;
 
-            XmlSerializer serializer = new XmlSerializer(typeof(BackupCacheType));
-
-            BackupCacheType backupCache;
             try
             {
-                backupCache = (BackupCacheType)serializer.Deserialize(file);
+                backupCache = (BackupCache)serializer.Deserialize(file);
             }
             catch
             {
                 file.Close();
 
-                if (!ignoreExceptions)
-                    MessageBox.Show(Plugin.MbForm, Plugin.MsgBackupIsCorrupted.Replace("%%FILENAME%%", fileName), string.Empty,
-                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(Plugin.MbForm, Plugin.MsgBackupIsCorrupted.Replace("%%FILENAME%%", fileName));
 
                 return null;
             }
@@ -244,35 +221,35 @@ namespace MusicBeePlugin
         }
     }
 
-    public class BackupType : BackupCacheType
+    public class Backup : BackupCache
     {
-        internal List<string> incrementalBackups = new List<string>(); //This field in used by baseline files only
-        internal SerializableDictionary<int, SerializableDictionary<int, string>> tracks = new SerializableDictionary<int, SerializableDictionary<int, string>>();
+        public List<string> incrementalBackups = new List<string>(); //This field in used by baseline files only
+        public SerializableDictionary<int, SerializableDictionary<int, string>> tracks = new SerializableDictionary<int, SerializableDictionary<int, string>>();
 
-        internal BackupType() : base()
+        public Backup() : base()
         {
             return;
         }
 
-        internal BackupType(BackupType backup, bool isAutocreatedParam) : base(backup, isAutocreatedParam)
+        public Backup(Backup backup, bool isAutoCreated) : base(backup, isAutoCreated)
         {
             return;
         }
 
-        internal BackupType(bool isAutocreatedParam) : base()
+        public Backup(bool isAutoCreated) : base()
         {
-            isAutocreated = isAutocreatedParam;
+            base.isAutoCreated = isAutoCreated;
             guid = Guid.NewGuid().ToString();
-            libraryName = Plugin.GetLibraryName();
+            libraryName = Plugin.BrGetCurrentLibraryName();
         }
 
         internal override void save(string fileName)
         {
-            BackupType baseline;
-            BackupType incrementalBackup = new BackupType(this, isAutocreated);
-            string baselineFilename = Plugin.GetBackupBaselineFilename();
+            Backup baseline;
+            Backup incrementalBackup = new Backup(this, isAutoCreated);
+            string baselineFilename = Plugin.BrGetBackupBaselineFilename();
 
-            if (System.IO.File.Exists(baselineFilename + ".bbl")) //Backup baseline file exists
+            if (File.Exists(baselineFilename + ".bbl")) //Backup baseline file exists
             {
                 baseline = Load(baselineFilename, ".bbl");
                 if (baseline == null)
@@ -295,9 +272,7 @@ namespace MusicBeePlugin
                 foreach (var track in tracks)
                 {
                     int trackId = track.Key;
-
                     bool trackNeedsToBeBackuped = true;
-                    SerializableDictionary<int, string> baselineTags;
 
                     int lastShownCount = 0;
                     int percentage = 100 * fileCounter / totalFiles;
@@ -307,7 +282,7 @@ namespace MusicBeePlugin
                         Plugin.MbApiInterface.MB_SetBackgroundTaskMessage(Plugin.SbCompairingTags + percentage + "%");
                     }
 
-                    if (baseline.tracks.TryGetValue(trackId, out baselineTags)) //Found current track in baseline
+                    if (baseline.tracks.TryGetValue(trackId, out SerializableDictionary<int, string> baselineTags)) //Found current track in baseline
                     {
                         trackNeedsToBeBackuped = false;
                         tagsForIncrementalBackup = new SerializableDictionary<int, string>();
@@ -330,8 +305,7 @@ namespace MusicBeePlugin
 
                         for (int m = 0; m < tagIds.Count; m++)
                         {
-                            string backupValue;
-                            track.Value.TryGetValue((int)tagIds[m], out backupValue);
+                            track.Value.TryGetValue((int)tagIds[m], out string backupValue);
 
                             if (backupValue != null)
                             {
@@ -345,21 +319,18 @@ namespace MusicBeePlugin
                     if (trackNeedsToBeBackuped)
                     {
                         incrementalBackup.tracks.Add(trackId, tagsForIncrementalBackup);
-                        Plugin.TempTracksNeedsToBeBackedUp.Add(trackId, true);
+                        Plugin.TempTracksNeededToBeBackedUp.Add(trackId, false);
                     }
                 }
 
 
-                if (isAutocreated && incrementalBackup.tracks.Count == 0)
+                if (isAutoCreated && incrementalBackup.tracks.Count == 0)
                 {
-                    Plugin.MbApiInterface.MB_SetBackgroundTaskMessage(Plugin.SbTagAutobackupSkipped);
-
-                    if (Plugin.SavedSettings.playCanceledSound)
-                        System.Media.SystemSounds.Hand.Play();
+                    Plugin.MbApiInterface.MB_SetBackgroundTaskMessage(Plugin.SbTagAutoBackupSkipped);
 
                     System.Threading.Thread.Sleep(2000);
 
-                    Plugin.MbApiInterface.MB_SetBackgroundTaskMessage(string.Empty);
+                    Plugin.MbApiInterface.MB_SetBackgroundTaskMessage("");
 
                     return;
                 }
@@ -368,7 +339,7 @@ namespace MusicBeePlugin
             {
                 baseline = this;
 
-                Plugin.TempTracksNeedsToBeBackedUp.Clear();
+                Plugin.TempTracksNeededToBeBackedUp.Clear();
                 Plugin.UpdatedTracksForBackupCount = 0;
                 Plugin.BackupIsAlwaysNeeded = true;
             }
@@ -378,10 +349,9 @@ namespace MusicBeePlugin
 
 
             //Lets save baseline first
-            System.IO.Stream streamBbl = System.IO.File.Open(baselineFilename + ".bbl", System.IO.FileMode.Create, System.IO.FileAccess.Write, System.IO.FileShare.None);
-            System.IO.StreamWriter fileBbl = new System.IO.StreamWriter(streamBbl, Encoding.UTF8);
-
-            XmlSerializer serializerBbl = new XmlSerializer(typeof(BackupType));
+            Stream streamBbl = File.Open(baselineFilename + ".bbl", FileMode.Create, FileAccess.Write, FileShare.None);
+            StreamWriter fileBbl = new StreamWriter(streamBbl, Encoding.UTF8);
+            XmlSerializer serializerBbl = new XmlSerializer(typeof(Backup));
 
             serializerBbl.Serialize(fileBbl, baseline);
 
@@ -390,61 +360,48 @@ namespace MusicBeePlugin
 
 
             //Lets save incremental backup
-            System.IO.Stream stream = System.IO.File.Open(fileName + ".xml", System.IO.FileMode.Create, System.IO.FileAccess.Write, System.IO.FileShare.None);
-            System.IO.StreamWriter file = new System.IO.StreamWriter(stream, Encoding.UTF8);
-
-            XmlSerializer serializer = new XmlSerializer(typeof(BackupType));
+            Stream stream = File.Open(fileName + ".xml", FileMode.Create, FileAccess.Write, FileShare.None);
+            StreamWriter file = new StreamWriter(stream, Encoding.UTF8);
+            XmlSerializer serializer = new XmlSerializer(typeof(Backup));
 
             serializer.Serialize(file, incrementalBackup);
 
             file.Close();
 
 
-            BackupCacheType backupCache = new BackupCacheType(incrementalBackup, isAutocreated);
+            BackupCache backupCache = new BackupCache(incrementalBackup, isAutoCreated);
             backupCache.save(fileName);
 
             System.Threading.Thread.Sleep(2000);
 
-            Plugin.MbApiInterface.MB_SetBackgroundTaskMessage(string.Empty);
+            Plugin.MbApiInterface.MB_SetBackgroundTaskMessage("");
         }
 
-        internal static BackupType Load(string fileName, string backupFileExtension = ".xml")
+        internal static Backup Load(string fileName, string backupFileExtension = ".xml")
         {
-            BackupType baseline;
-            string baselineFilename = Plugin.GetBackupBaselineFilename();
+            string baselineFilename = Plugin.BrGetBackupBaselineFilename();
 
-            if (!System.IO.File.Exists(baselineFilename + ".bbl")) //Backup baseline file doesn't exist
+            if (!File.Exists(baselineFilename + ".bbl")) //Backup baseline file doesn't exist
             {
-                MessageBox.Show(Plugin.MbForm, Plugin.MsgBackupBaselineFileDoesntExist.Replace("%%FILENAME%%", baselineFilename + ".bbl"),
-                    string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(Plugin.MbForm, Plugin.MsgBackupBaselineFileDoesntExist.Replace("%%FILENAME%%", baselineFilename + ".bbl"));
                 return null;
             }
 
 
-            //if (!System.IO.File.Exists(fileName + backupFileExtension)) //***
-            //{
-            //   MessageBox.Show(MusicBeePlugin.MbForm, MusicBeePlugin.MsgBackupFileDoesntExist.Replace("%%FILENAME%%", fileName),
-            //       string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            FileStream stream = File.Open(fileName + backupFileExtension, FileMode.Open, FileAccess.Read, FileShare.None);
+            StreamReader file = new StreamReader(stream, Encoding.UTF8);
+            XmlSerializer backupSerializer = new XmlSerializer(typeof(Backup));
+            Backup incrementalBackup;
 
-            //   return null;
-            //}
-
-            System.IO.FileStream stream = System.IO.File.Open(fileName + backupFileExtension, System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.None);
-            System.IO.StreamReader file = new System.IO.StreamReader(stream, Encoding.UTF8);
-
-            XmlSerializer backupSerializer = new XmlSerializer(typeof(BackupType));
-
-            BackupType incrementalBackup;
             try
             {
-                incrementalBackup = (BackupType)backupSerializer.Deserialize(file);
+                incrementalBackup = (Backup)backupSerializer.Deserialize(file);
             }
             catch (Exception ex)
             {
                 file.Close();
 
-                MessageBox.Show(Plugin.MbForm, Plugin.MsgBackupIsCorrupted.Replace("%%FILENAME%%", fileName) + "\n\n" + ex.Message,
-                    string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(Plugin.MbForm, Plugin.MsgBackupIsCorrupted.Replace("%%FILENAME%%", fileName) + "\n\n" + ex.Message);
 
                 return null;
             }
@@ -454,15 +411,13 @@ namespace MusicBeePlugin
 
             if (backupFileExtension != ".bbl") //We are loading incremental backup
             {
-                baseline = Load(baselineFilename, ".bbl");
+                Backup baseline = Load(baselineFilename, ".bbl");
                 if (baseline == null)
                     return null;
 
-
                 foreach (var incTrack in incrementalBackup.tracks)
                 {
-                    SerializableDictionary<int, string> tags;
-                    if (baseline.tracks.TryGetValue(incTrack.Key, out tags)) //Track exists in baseline
+                    if (baseline.tracks.TryGetValue(incTrack.Key, out SerializableDictionary<int, string> tags)) //Track exists in baseline
                     {
                         var incTags = incTrack.Value;
 
@@ -471,7 +426,7 @@ namespace MusicBeePlugin
                             string incValue = incTags[incTagId];
 
                             if (incValue != null && incValue != "_x0000_")
-                                tags.AddReplace(incTagId, incValue); //Track tag exists in baseline
+                                tags.AddReplace(incTagId, incValue);
                         }
                     }
                     else //Track doesn't exist in baseline
@@ -488,25 +443,22 @@ namespace MusicBeePlugin
             }
         }
 
-        internal static BackupType LoadIncrementalBackupOnly(string fileName)
+        internal static Backup LoadIncrementalBackupOnly(string fileName)
         {
-            System.IO.FileStream stream = System.IO.File.Open(fileName + ".xml", System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.None);
-            System.IO.StreamReader file = new System.IO.StreamReader(stream, Encoding.UTF8);
-
-            XmlSerializer backupSerializer = new XmlSerializer(typeof(BackupType));
-
-            BackupType incrementalBackup;
+            FileStream stream = File.Open(fileName + ".xml", FileMode.Open, FileAccess.Read, FileShare.None);
+            StreamReader file = new StreamReader(stream, Encoding.UTF8);
+            XmlSerializer backupSerializer = new XmlSerializer(typeof(Backup));
+            Backup incrementalBackup;
 
             try
             {
-                incrementalBackup = (BackupType)backupSerializer.Deserialize(file);
+                incrementalBackup = (Backup)backupSerializer.Deserialize(file);
             }
             catch (Exception ex)
             {
                 file.Close();
 
-                MessageBox.Show(Plugin.MbForm, Plugin.MsgBackupIsCorrupted.Replace("%%FILENAME%%", fileName) + "\n\n" + ex.Message,
-                    string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(Plugin.MbForm, Plugin.MsgBackupIsCorrupted.Replace("%%FILENAME%%", fileName) + "\n\n" + ex.Message);
 
                 return null;
             }
@@ -540,7 +492,7 @@ namespace MusicBeePlugin
                 return null;
         }
 
-        internal string getIncValue(int trackId, int tagId, BackupType baseline)
+        internal string getIncValue(int trackId, int tagId, Backup baseline)
         {
             if (!tracks.TryGetValue(trackId, out SerializableDictionary<int, string> tags))
                 return baseline.getValue(trackId, tagId);
@@ -595,9 +547,9 @@ namespace MusicBeePlugin
             return value;
         }
 
-        internal void setValue(string valueParam, int trackId, int tagId)
+        internal void setValue(string value, int trackId, int tagId)
         {
-            valueParam = EncodeValue(valueParam);
+            value = EncodeValue(value);
 
             if (!tracks.TryGetValue(trackId, out SerializableDictionary<int, string> tags))
             {
@@ -605,7 +557,7 @@ namespace MusicBeePlugin
                 tracks.Add(trackId, tags);
             }
 
-            tags.AddReplace(tagId, valueParam);
+            tags.AddReplace(tagId, value);
         }
     }
 
@@ -613,29 +565,27 @@ namespace MusicBeePlugin
     {
         internal void saveBackupAsync(object parameters)
         {
-            string backupName = (string)(((object[])parameters)[0]);
-            string statusbarText = (string)(((object[])parameters)[1]);
-            bool isAutocreatedParam = (bool)(((object[])parameters)[2]);
+            string backupName = (parameters as object[])[0] as string;
+            string statusBarText = (parameters as object[])[1] as string;
+            bool isAutoCreated = (bool)(parameters as object[])[2];
 
-            saveBackup(backupName, statusbarText, isAutocreatedParam);
+            saveBackup(backupName, statusBarText, isAutoCreated);
         }
 
-        internal void saveBackup(string backupName, string statusbarText, bool isAutocreatedParam)
+        internal void saveBackup(string backupName, string statusBarText, bool isAutoCreated)
         {
             System.Threading.Thread.CurrentThread.Priority = System.Threading.ThreadPriority.Lowest;
 
-            Plugin.TempTracksNeedsToBeBackedUp.Clear();
+            Plugin.TempTracksNeededToBeBackedUp.Clear();
 
-            string[] files = null;
-            if (Plugin.MbApiInterface.Library_QueryFilesEx("domain=Library", out files))
+            if (Plugin.MbApiInterface.Library_QueryFilesEx("domain=Library", out string[] files))
             {
                 string currentFile;
-                int trackId;
-                string libraryName = Plugin.GetLibraryName();
+                string libraryName = Plugin.BrGetCurrentLibraryName();
                 string libraryTrackId;
                 string[] libraryTags;
 
-                lock (Plugin.AutobackupLocker)
+                lock (Plugin.TracksNeededToBeBackedUp)
                 {
                     List<string> tagNames = new List<string>();
                     Plugin.FillListByTagNames(tagNames, false, true, false);
@@ -644,7 +594,7 @@ namespace MusicBeePlugin
                     for (int i = 0; i < tagNames.Count; i++)
                         tagIds.Add(Plugin.GetTagId(tagNames[i]));
 
-                    BackupType backup = new BackupType(isAutocreatedParam);
+                    Backup backup = new Backup(isAutoCreated);
 
                     int lastShownCount = 0;
                     for (int fileCounter = 0; fileCounter < files.Length; fileCounter++)
@@ -653,27 +603,24 @@ namespace MusicBeePlugin
                         if (lastShownCount < percentage)
                         {
                             lastShownCount = percentage;
-                            Plugin.MbApiInterface.MB_SetBackgroundTaskMessage(statusbarText + " " + percentage + "% (" + backupName + ")");
+                            Plugin.MbApiInterface.MB_SetBackgroundTaskMessage(statusBarText + " " + percentage + "% (" + backupName + ")");
                         }
 
                         currentFile = files[fileCounter];
-                        trackId = int.Parse(Plugin.GetPersistentTrackId(currentFile));
+                        string trackIdString = Plugin.GetPersistentTrackId(currentFile);
+                        int trackId = int.Parse(trackIdString);
 
 
-                        if (!Plugin.BackupIsAlwaysNeeded && !Plugin.TracksNeedsToBeBackedUp.Contains(trackId))
+                        if (!Plugin.BackupIsAlwaysNeeded && !Plugin.TracksNeededToBeBackedUp.ContainsKey(trackId))
                             continue;
 
 
-                        libraryTrackId = Plugin.AddLibraryNameToTrackId(libraryName, trackId.ToString());
+                        libraryTrackId = Plugin.AddLibraryNameToTrackId(libraryName, trackIdString);
                         libraryTags = Plugin.GetFileTags(currentFile, tagIds);
 
                         for (int i = 0; i < tagIds.Count; i++)
                         {
-                            if (tagIds[i] == Plugin.DateCreatedTagId)
-                                ;//Let's skip this tag...
-                            else if (tagIds[i] == Plugin.MetaDataType.Artwork && !Plugin.SavedSettings.backupArtworks)
-                                ;//Let's skip this tag...
-                            else
+                            if (Plugin.SavedSettings.backupArtworks || tagIds[i] != Plugin.MetaDataType.Artwork)
                                 backup.setValue(libraryTags[i], trackId, (int)tagIds[i]);
                         }
 
@@ -683,16 +630,15 @@ namespace MusicBeePlugin
                             Add(libraryTrackId, trackBackups);
                         }
 
-                        trackBackups.AddReplace(backup.guid, true);
+                        trackBackups.AddSkip(backup.guid);
                     }
 
 
                     backup.save(backupName);
 
 
-                    System.IO.FileStream stream = System.IO.File.Open(Plugin.GetAutobackupDirectory(Plugin.SavedSettings.autobackupDirectory) + @"\" + Plugin.BackupIndexFileName, System.IO.FileMode.Create, System.IO.FileAccess.Write, System.IO.FileShare.None);
-                    System.IO.StreamWriter file = new System.IO.StreamWriter(stream, Encoding.UTF8);
-
+                    FileStream stream = File.Open(Plugin.BrGetAutoBackupDirectory(Plugin.SavedSettings.autoBackupDirectory) + @"\" + Plugin.BackupIndexFileName, FileMode.Create, FileAccess.Write, FileShare.None);
+                    StreamWriter file = new StreamWriter(stream, Encoding.UTF8);
                     XmlSerializer backupIndexSerializer = new XmlSerializer(typeof(BackupIndex));
 
                     backupIndexSerializer.Serialize(file, this);
@@ -702,23 +648,22 @@ namespace MusicBeePlugin
             }
 
 
-            Plugin.TracksNeedsToBeBackedUp = Plugin.TempTracksNeedsToBeBackedUp;
-            Plugin.TempTracksNeedsToBeBackedUp = new SortedDictionary<int, bool>();
+            Plugin.TracksNeededToBeBackedUp = Plugin.TempTracksNeededToBeBackedUp;
+            Plugin.TempTracksNeededToBeBackedUp = new SortedDictionary<int, bool>();
             Plugin.UpdatedTracksForBackupCount = 0;
             Plugin.BackupIsAlwaysNeeded = false;
 
-            if (!Plugin.SavedSettings.dontPlayCompletedSound)
+            if (!Plugin.SavedSettings.dontPlayCompletedSound && !isAutoCreated)
                 System.Media.SystemSounds.Asterisk.Play();
 
-            Plugin.MbApiInterface.MB_SetBackgroundTaskMessage(string.Empty);
+            Plugin.MbApiInterface.MB_SetBackgroundTaskMessage("");
         }
 
         internal static void LoadBackupAsync(object parameters)
         {
-            string backupName = (string)(((object[])parameters)[0]);
-            string statusbarText = (string)(((object[])parameters)[1]);
-            bool restoreForEntireLibrary = (bool)(((object[])parameters)[2]);
-            Plugin tagToolsPlugin = (Plugin)(((object[])parameters)[3]);
+            string backupName = (parameters as object[])[0] as string;
+            string statusBarText = (parameters as object[])[1] as string;
+            bool restoreForEntireLibrary = (bool)(parameters as object[])[0];
 
             lock (Plugin.OpenedForms)
             {
@@ -727,7 +672,7 @@ namespace MusicBeePlugin
 
             try
             {
-                LoadBackup(backupName, statusbarText, restoreForEntireLibrary);
+                LoadBackup(backupName, statusBarText, restoreForEntireLibrary);
             }
             catch (System.Threading.ThreadAbortException) { }
 
@@ -737,7 +682,7 @@ namespace MusicBeePlugin
             }
         }
 
-        internal static void LoadBackup(string backupName, string statusbarText, bool restoreForEntireLibrary)
+        internal static void LoadBackup(string backupName, string statusBarText, bool restoreForEntireLibrary)
         {
             System.Threading.Thread.CurrentThread.Priority = System.Threading.ThreadPriority.Lowest;
 
@@ -749,31 +694,25 @@ namespace MusicBeePlugin
                 query = "domain=SelectedFiles";
 
 
-            BackupType backup = BackupType.Load(backupName);
+            Backup backup = Backup.Load(backupName);
             if (backup == null)
                 return;
 
-            if (backup.libraryName != Plugin.GetLibraryName())
+            if (backup.libraryName != Plugin.BrGetCurrentLibraryName())
             {
                 System.Media.SystemSounds.Hand.Play();
-                Plugin.MbApiInterface.MB_SetBackgroundTaskMessage(string.Empty);
+                Plugin.MbApiInterface.MB_SetBackgroundTaskMessage("");
 
-                MessageBox.Show(Plugin.MbForm, Plugin.MsgThisIsTheBackupOfDifferentLibrary,
-                    string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(Plugin.MbForm, Plugin.MsgThisIsTheBackupOfDifferentLibrary);
                 return;
             }
 
 
-            string[] files = null;
-            if (Plugin.MbApiInterface.Library_QueryFilesEx(query, out files))
+            if (Plugin.MbApiInterface.Library_QueryFilesEx(query, out string[] files))
             {
-                string currentFile;
-                int trackId;
-
                 if (files.Length == 0)
                 {
-                    MessageBox.Show(Plugin.MbForm, Plugin.MsgNoTracksSelected, string.Empty,
-                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show(Plugin.MbForm, Plugin.MsgNoTracksSelected);
                     return;
                 }
 
@@ -792,11 +731,11 @@ namespace MusicBeePlugin
                     if (lastShownCount < percentage)
                     {
                         lastShownCount = percentage;
-                        Plugin.MbApiInterface.MB_SetBackgroundTaskMessage(statusbarText + " " + percentage + "% (" + backupName + ")");
+                        Plugin.MbApiInterface.MB_SetBackgroundTaskMessage(statusBarText + " " + percentage + "% (" + backupName + ")");
                     }
 
-                    currentFile = files[fileCounter];
-                    trackId = int.Parse(Plugin.GetPersistentTrackId(currentFile));
+                    string currentFile = files[fileCounter];
+                    int trackId = int.Parse(Plugin.GetPersistentTrackId(currentFile));
 
                     bool tagsWereSet = false;
                     for (int i = 0; i < tagIds.Count; i++)
@@ -819,7 +758,7 @@ namespace MusicBeePlugin
             if (!Plugin.SavedSettings.dontPlayCompletedSound)
                 System.Media.SystemSounds.Asterisk.Play();
 
-            Plugin.MbApiInterface.MB_SetBackgroundTaskMessage(string.Empty);
+            Plugin.MbApiInterface.MB_SetBackgroundTaskMessage("");
             Plugin.MbApiInterface.MB_RefreshPanels();
         }
 
@@ -831,13 +770,12 @@ namespace MusicBeePlugin
             return trackBackups;
         }
 
-        internal void deleteBackup(BackupCacheType backupCache)
+        internal void deleteBackup(BackupCache backupCache)
         {
             foreach (var trackBackups in Values)
                 trackBackups.RemoveExisting(backupCache.guid);
 
-
-            bool wereSomeChanges = false;
+            bool wereSomeChanges;
 
             do
             {
@@ -857,23 +795,26 @@ namespace MusicBeePlugin
 
 
 
-            string baselineFilename = Plugin.GetBackupBaselineFilename(backupCache.libraryName);
+            string baselineFilename = Plugin.BrGetBackupBaselineFilename(backupCache.libraryName);
 
-            if (System.IO.File.Exists(baselineFilename + ".bbl")) //Backup baseline file exists
+            if (File.Exists(baselineFilename + ".bbl")) //Backup baseline file exists
             {
-                BackupType baseline = BackupType.Load(baselineFilename, ".bbl");
+                Backup baseline = Backup.Load(baselineFilename, ".bbl");
+                if (baseline == null)
+                    return;
+
                 baseline.incrementalBackups.Remove(backupCache.guid);
 
                 if (baseline.incrementalBackups.Count == 0) //Lets delete baseline file
                 {
-                    System.IO.File.Delete(baselineFilename + ".bbl");
+                    File.Delete(baselineFilename + ".bbl");
                 }
                 else //Lets save baseline first
                 {
-                    System.IO.Stream streamBbl = System.IO.File.Open(baselineFilename + ".bbl", System.IO.FileMode.Create, System.IO.FileAccess.Write, System.IO.FileShare.None);
-                    System.IO.StreamWriter fileBbl = new System.IO.StreamWriter(streamBbl, Encoding.UTF8);
+                    Stream streamBbl = File.Open(baselineFilename + ".bbl", FileMode.Create, FileAccess.Write, FileShare.None);
+                    StreamWriter fileBbl = new StreamWriter(streamBbl, Encoding.UTF8);
 
-                    XmlSerializer serializerBbl = new XmlSerializer(typeof(BackupType));
+                    System.Xml.Serialization.XmlSerializer serializerBbl = new System.Xml.Serialization.XmlSerializer(typeof(Backup));
 
                     serializerBbl.Serialize(fileBbl, baseline);
 
@@ -883,8 +824,8 @@ namespace MusicBeePlugin
 
 
 
-            System.IO.FileStream stream = System.IO.File.Open(Plugin.GetAutobackupDirectory(Plugin.SavedSettings.autobackupDirectory) + @"\" + Plugin.BackupIndexFileName, System.IO.FileMode.Create, System.IO.FileAccess.Write, System.IO.FileShare.None);
-            System.IO.StreamWriter file = new System.IO.StreamWriter(stream, Encoding.UTF8);
+            FileStream stream = File.Open(Plugin.BrGetAutoBackupDirectory(Plugin.SavedSettings.autoBackupDirectory) + @"\" + Plugin.BackupIndexFileName, FileMode.Create, FileAccess.Write, FileShare.None);
+            StreamWriter file = new StreamWriter(stream, Encoding.UTF8);
 
             XmlSerializer backupIndexSerializer = new XmlSerializer(typeof(BackupIndex));
 

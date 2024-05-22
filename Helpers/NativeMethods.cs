@@ -14,8 +14,8 @@ internal static class NativeMethods
 
     internal const int EM_LINESCROLL = 0x00B6;
 
-    internal const int EM_SETCUEBANNER = 0x1501;
-    internal const int CB_SETCUEBANNER = 0x1703;
+    internal static int EM_SETCUEBANNER = 0x1501;
+    internal static int CB_SETCUEBANNER = 0x1703;
 
     internal const int LB_ADDSTRING = 0x180;
     internal const int LB_INSERTSTRING = 0x181;
@@ -45,7 +45,7 @@ internal static class NativeMethods
     internal const int SIF_PAGE = 0x2;
     internal const int SIF_ALL = SIF_RANGE | SIF_PAGE | SIF_POS | SIF_TRACKPOS;
 
-    //public struct ScrollInfoStruct
+    //internal struct ScrollInfoStruct
     //{
     //   internal int cbSize;
     //   internal int fMask;
@@ -56,7 +56,7 @@ internal static class NativeMethods
     //   internal int nTrackPos;
     //}
 
-    //public struct DWMCOLORIZATIONPARAMS
+    //internal struct DWMCOLORIZATIONPARAMS
     //{
     //   internal uint ColorizationColor,
     //       ColorizationAfterglow,
@@ -80,14 +80,29 @@ internal static class NativeMethods
     //   );
     //}
 
-    [DllImport("user32.dll")]
-    internal extern static int SetWindowLong(IntPtr hwnd, int nIndex, int newLong);
 
     [DllImport("user32.dll")]
-    internal extern static int GetWindowLong(IntPtr hwnd, int nIndex);
+    internal extern static int SetWindowLong(IntPtr hwnd, int nIndex, uint newLong);
+
+    [DllImport("user32.dll", EntryPoint = "GetWindowLong")]
+    private static extern IntPtr GetWindowLongPtr32(IntPtr hWnd, int nIndex);
+
+    [DllImport("user32.dll", EntryPoint = "GetWindowLongPtr")]
+    private static extern IntPtr GetWindowLongPtr64(IntPtr hWnd, int nIndex);
+
+    public static IntPtr GetWindowLong(IntPtr hWnd, int nIndex)
+    {
+        if (IntPtr.Size == 8)
+            return GetWindowLongPtr64(hWnd, nIndex);
+        else
+            return GetWindowLongPtr32(hWnd, nIndex);
+    }
 
     [DllImport("user32.dll")]
-    internal static extern int SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
+    internal static extern IntPtr SendMessage(IntPtr hWnd, uint wMsg, IntPtr wParam, IntPtr lParam);
+
+    [DllImport("user32.dll", CharSet = CharSet.Auto)]
+    internal static extern IntPtr SendMessage(IntPtr hWnd, uint msg, IntPtr wParam, [MarshalAs(UnmanagedType.LPWStr)] string lParam);
 
     //[DllImport("user32.dll")]
     //internal static extern int SetScrollPos(IntPtr hWnd, int nBar, int nPos, bool bRedraw);
@@ -97,7 +112,7 @@ internal static class NativeMethods
 
     internal static void HideScrollBar(IntPtr handle, int wBar)
     {
-        int style = GetWindowLong(handle, GWL_STYLE);
+        int style = (int)GetWindowLong(handle, GWL_STYLE);
 
         if (wBar == SB_HORZ)
             style = style & (~WS_HSCROLL);
@@ -106,18 +121,20 @@ internal static class NativeMethods
         else if (wBar == SB_BOTH)
             style = style & (~WS_HSCROLL) & (~WS_VSCROLL);
 
-        SetWindowLong(handle, GWL_STYLE, style);
+        SetWindowLong(handle, GWL_STYLE, (uint)style);
     }
 
     [DllImport("user32")]
-    internal extern static int GetCaretPos(out Point p);
+    [return: MarshalAs(UnmanagedType.Bool)]
+    internal extern static bool GetCaretPos(out Point p);
 
     [DllImport("user32", CallingConvention = CallingConvention.Winapi)]
     [return: MarshalAs(UnmanagedType.Bool)]
     internal static extern bool ShowScrollBar(IntPtr hwnd, int wBar, [MarshalAs(UnmanagedType.Bool)] bool bShow);
 
     [DllImport("user32.dll")]
-    internal static extern IntPtr CloseClipboard();
+    [return: MarshalAs(UnmanagedType.Bool)]
+    internal static extern bool CloseClipboard();
 
     //[DllImport("user32.dll", SetLastError = true)]
     //internal static extern int GetScrollInfo(IntPtr hWnd, int n, ref ScrollInfoStruct lpScrollInfo);
@@ -125,12 +142,9 @@ internal static class NativeMethods
     //[DllImport("dwmapi.dll", EntryPoint = "#127")]
     //internal static extern void DwmGetColorizationParameters(ref DWMCOLORIZATIONPARAMS args);
 
-    [DllImport("user32.dll", CharSet = CharSet.Auto)]
-    private static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wParam, [MarshalAs(UnmanagedType.LPWStr)] string lParam);
-
     internal static void SetCue(this TextBox textBox, string cue)
     {
-        SendMessage(textBox.Handle, EM_SETCUEBANNER, Zero, cue);
+        SendMessage(textBox.Handle, (uint)EM_SETCUEBANNER, Zero, cue);
     }
 
     internal static void ClearCue(this TextBox textBox)
@@ -149,7 +163,7 @@ internal static class NativeMethods
         else
             comboBox.Text = cue;
 
-        SendMessage(comboBox.Handle, CB_SETCUEBANNER, Zero, cue);
+        SendMessage(comboBox.Handle, (uint)CB_SETCUEBANNER, Zero, cue);
     }
 
     internal static void ClearCue(this ComboBox comboBox)

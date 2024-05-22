@@ -4,10 +4,10 @@ using System.Windows.Forms;
 
 namespace MusicBeePlugin
 {
-    public partial class Plugin
+    partial class Plugin
     {
         //If files is NOT null then paste tags matching by paths automatically (and fileTags must be NOT null also)
-        internal static bool PasteTagsFromClipboard(Plugin tagToolsPluginParam, string[] files = null, string[] fileTags = null)
+        internal static bool PasteTagsFromClipboard(string[] files = null, string[] fileTags = null)
         {
             bool autoPaste = false;
             if (files != null)
@@ -202,7 +202,7 @@ namespace MusicBeePlugin
             }
 
             if (!autoPaste && matchTagIndex > -1 && continuePasteResult == DialogResult.Yes)
-                return PasteTagsFromClipboard(tagToolsPluginParam, files, fileTags);
+                return PasteTagsFromClipboard(files, fileTags);
             else if (!autoPaste && matchTagIndex > -1)
                 return false;
 
