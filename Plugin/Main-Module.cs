@@ -13,7 +13,6 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 using System.Xml.Serialization;
-using Utils;
 using static MusicBeePlugin.AdvancedSearchAndReplace;
 using static MusicBeePlugin.LibraryReports;
 
@@ -851,7 +850,6 @@ namespace MusicBeePlugin
         internal static string MsgTracks;
         internal static string MsgActualPercent;
 
-        internal static string MsgExceptionCharactersMustBeSingleCharacters; //*****
         internal static string MsgTheNumberOfOpeningExceptionCharactersMustBe;
 
         internal static string MsgLrDoYouWantToSaveChangesBeforeClosingTheWindow;
@@ -3607,7 +3605,6 @@ namespace MusicBeePlugin
             MsgActualPercent = "% / Act.: ";
             MsgIncorrectPresetName = "Incorrect preset name or duplicated preset names.";
 
-            MsgExceptionCharactersMustBeSingleCharacters = "Exception characters must be single characters!";
             MsgTheNumberOfOpeningExceptionCharactersMustBe = "The number of opening exception characters must be the same as the number of closing exception characters!";
 
             MsgLrDoYouWantToSaveChangesBeforeClosingTheWindow = "There are unsaved changes. Do you want to save changes before closing the window?";
@@ -3654,7 +3651,7 @@ namespace MusicBeePlugin
             MsgPresetsWereDeleted = " preset{;s;s} {was;were;were} deleted.";
 
 
-            string msgLrCachedPresetsInitialFilling = "These functions will use these tags as the cache. If you change some tags or add new tracks " + 
+            string msgLrCachedPresetsInitialFilling = "These functions will use these tags as the cache. If you change some tags or add new tracks " +
                 "to the library, this cache will dynamically update. However, it’s HIGHLY RECOMMENDED first to fill this cache for all existing " +
                 "tracks/current tags in the current library to avoid UI slowdowns and freezes when using MusicBee regularly. \n\n" +
                 "Do you want to execute all affected presets automatically now? " +
@@ -4309,7 +4306,6 @@ namespace MusicBeePlugin
                 MsgActualPercent = "% / Действ.: ";
                 MsgIncorrectPresetName = "Некорректное название пресета или пресет с таким названием уже существует.";
 
-                MsgExceptionCharactersMustBeSingleCharacters = "Символы исключения должны быть одиночными символами!";
                 MsgTheNumberOfOpeningExceptionCharactersMustBe = "Число открывающих символов исключения должно быть таким же как и число закрывающих символов!";
 
                 MsgLrDoYouWantToSaveChangesBeforeClosingTheWindow = "Есть несохраненные изменения. Сохранить изменения, прежде чем закрыть окно?";
@@ -6639,7 +6635,7 @@ namespace MusicBeePlugin
             return CustomFunc_TitleCase5(input, exceptionWordsString, wordSeparatorsString, null, null, null);
         }
 
-        public string CustomFunc_TitleCase4(string input, string exceptionWordsString, string wordSeparatorsString, 
+        public string CustomFunc_TitleCase4(string input, string exceptionWordsString, string wordSeparatorsString,
             string leftExceptionCharsString, string rightExceptionCharsString)
         {
             return CustomFunc_TitleCase5(input, exceptionWordsString, wordSeparatorsString, leftExceptionCharsString, rightExceptionCharsString, null);

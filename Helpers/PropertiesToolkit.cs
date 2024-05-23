@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Utils
+namespace ExtensionMethods
 {
-    public static class Objects
+    public static class PropertiesToolkit
     {
         /// <summary>
         /// Copies all the matching properties and fields from 'source' to 'destination'
@@ -14,7 +14,7 @@ namespace Utils
         {
             var sourceMembers = GetMembers(source.GetType());
             var destinationMembers = GetMembers(destination.GetType());
-
+            
             // Copy data from source to destination
             foreach (var sourceMember in sourceMembers)
             {

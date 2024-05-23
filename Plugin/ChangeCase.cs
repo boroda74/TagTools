@@ -828,9 +828,21 @@ namespace MusicBeePlugin
 
         private void exceptionCharPairsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            leftExceptionCharsBoxCustom.Enable(exceptionCharPairsCheckBox.Checked);
-            rightExceptionCharsBoxCustom.Enable(exceptionCharPairsCheckBox.Checked);
-            buttonAsrExceptWordsBetweenSymbols.Enable(exceptionCharPairsCheckBox.Checked);
+            if (!exceptionCharPairsCheckBox.Checked && !CheckIfTheSameNumberOfCharsInStrings(leftExceptionCharsBoxCustom.Text, rightExceptionCharsBoxCustom.Text))
+            {
+                leftExceptionCharsBoxCustom.Enable(true);
+                rightExceptionCharsBoxCustom.Enable(true);
+                exceptionCharPairsCheckBox.Checked = true;
+
+                this.ActiveControl = rightExceptionCharsBoxCustom;
+                rightExceptionCharsBox_Leave(null, null);
+            }
+            else
+            {
+                leftExceptionCharsBoxCustom.Enable(exceptionCharPairsCheckBox.Checked);
+                rightExceptionCharsBoxCustom.Enable(exceptionCharPairsCheckBox.Checked);
+                buttonAsrExceptWordsBetweenSymbols.Enable(exceptionCharPairsCheckBox.Checked);
+            }
         }
 
         private void exceptionCharPairsCheckBoxLabel_Click(object sender, EventArgs e)
@@ -1064,7 +1076,13 @@ namespace MusicBeePlugin
         {
             leftExceptionCharsBoxCustom.Text = Regex.Replace(leftExceptionCharsBoxCustom.Text.Trim(' '), @"\s{2,}", " ");
 
-            rightExceptionCharsBoxCustom.Focus();
+            if (this.ActiveControl != rightExceptionCharsBoxCustom && !CheckIfTheSameNumberOfCharsInStrings(leftExceptionCharsBoxCustom.Text, rightExceptionCharsBoxCustom.Text))
+            {
+                rightExceptionCharsBoxCustom.Focus();
+                rightExceptionCharsBoxCustom.SelectionStart = rightExceptionCharsBoxCustom.Text.Length + 1;
+                rightExceptionCharsBoxCustom.SelectionLength = 0;
+            }
+
             CustomComboBoxLeave(leftExceptionCharsBoxCustom);
         }
 
@@ -1072,12 +1090,14 @@ namespace MusicBeePlugin
         {
             rightExceptionCharsBoxCustom.Text = Regex.Replace(rightExceptionCharsBoxCustom.Text.Trim(' '), @"\s{2,}", " ");
 
-            if (!CheckIfTheSameNumberOfCharsInStrings(leftExceptionCharsBoxCustom.Text, rightExceptionCharsBoxCustom.Text))
+            if (this.ActiveControl != leftExceptionCharsBoxCustom && !CheckIfTheSameNumberOfCharsInStrings(leftExceptionCharsBoxCustom.Text, rightExceptionCharsBoxCustom.Text))
             {
                 MessageBox.Show(MbForm, MsgTheNumberOfOpeningExceptionCharactersMustBe,
                     string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 rightExceptionCharsBoxCustom.Focus();
+                rightExceptionCharsBoxCustom.SelectionStart = rightExceptionCharsBoxCustom.Text.Length + 1;
+                rightExceptionCharsBoxCustom.SelectionLength = 0;
             }
 
             CustomComboBoxLeave(rightExceptionCharsBoxCustom);

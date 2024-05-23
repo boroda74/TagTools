@@ -336,7 +336,7 @@ namespace ExtensionMethods
         {
             var customVScrollBar = ControlsTools.FindControlChild<CustomVScrollBar>(textBox.Parent);
 
-            SendMessage(textBox.Handle, EM_LINESCROLL, Zero, (IntPtr)(- 100000));
+            SendMessage(textBox.Handle, EM_LINESCROLL, Zero, (IntPtr)(-100000));
             customVScrollBar?.SetValue(0);
             customVScrollBar?.Invalidate();
             textBox.Invalidate();
@@ -354,7 +354,7 @@ namespace ExtensionMethods
         {
             var customVScrollBar = ControlsTools.FindControlChild<CustomVScrollBar>(listBox.Parent);
 
-            SendMessage(listBox.Handle, EM_LINESCROLL, Zero, (IntPtr)(- 100000));
+            SendMessage(listBox.Handle, EM_LINESCROLL, Zero, (IntPtr)(-100000));
             customVScrollBar?.SetValue(0);
             customVScrollBar?.Invalidate();
             listBox.Invalidate();

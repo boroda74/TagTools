@@ -1,5 +1,5 @@
 ﻿
-namespace MusicBeePlugin
+namespace ExtensionMethods
 {
     using System;
     using System.ComponentModel;
@@ -8,7 +8,7 @@ namespace MusicBeePlugin
 
     internal static class EventHandlersToolkit
     {
-        internal static void CopyEventHandlers(Control src, Control dest, string eventName, bool deleteSrcHandlers)
+        internal static void CopyEventHandlersTo(this Control src, Control dest, string eventName, bool deleteSrcHandlers)
         {
             var srcEventList = GetControlEventHandlerList(src);
             var srcEventKey = GetControlEventKey(src, eventName);
@@ -24,7 +24,7 @@ namespace MusicBeePlugin
                 srcEventList.RemoveHandler(srcEventKey, srcEventList[srcEventKey]);
         }
 
-        private static object GetControlEventKey(Control c, string eventName)
+        private static object GetControlEventKey(this Control c, string eventName)
         {
             Type type = c.GetType();
             FieldInfo eventKeyField = TryGetStaticNonPublicFieldInfo(type, eventName);
@@ -39,7 +39,7 @@ namespace MusicBeePlugin
             return eventKeyField.GetValue(c);
         }
 
-        private static FieldInfo TryGetStaticNonPublicFieldInfo(Type type, string eventName)
+        private static FieldInfo TryGetStaticNonPublicFieldInfo(this Type type, string eventName)
         {
             FieldInfo eventKeyField = GetStaticNonPublicFieldInfo(type, "Event" + eventName);
 
@@ -53,7 +53,7 @@ namespace MusicBeePlugin
         }
 
         //Also searches up the inheritance hierarchy
-        private static FieldInfo GetStaticNonPublicFieldInfo(Type type, string name)
+        private static FieldInfo GetStaticNonPublicFieldInfo(this Type type, string name)
         {
             FieldInfo fi;
             do
@@ -65,7 +65,7 @@ namespace MusicBeePlugin
             return fi;
         }
 
-        private static EventHandlerList GetControlEventHandlerList(Control c)
+        private static EventHandlerList GetControlEventHandlerList(this Control c)
         {
             Type type = c.GetType();
             PropertyInfo pi = type.GetProperty("Events",
@@ -74,7 +74,7 @@ namespace MusicBeePlugin
             return pi.GetValue(c, null) as EventHandlerList;
         }
 
-        internal static void FireEvent(object targetObject, string eventName, EventArgs e)
+        internal static void FireEvent(this object targetObject, string eventName, EventArgs e)
         {
             /*
              * By convention event handlers are internally called by a protected

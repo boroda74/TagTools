@@ -3352,7 +3352,7 @@ namespace MusicBeePlugin
             string presetResultPostfix = LrCachedFunctionResultPresetSeparator + appliedPresetGuid + LrCachedFunctionResultLibraryPathHashSeparator;
             string resultPostfix = LrCachedFunctionResultPresetSeparator + LrCurrentLibraryPathHash + presetResultPostfix;
 
-            if (!cachedResult.Contains(LrCachedFunctionResultLibraryPathHashSeparator) 
+            if (!cachedResult.Contains(LrCachedFunctionResultLibraryPathHashSeparator)
                 || !cachedResult.Contains(LrCachedFunctionResultPresetSeparator)) //Function result hasn't been cached
 
                 return newResult + resultPostfix;
@@ -3424,15 +3424,15 @@ namespace MusicBeePlugin
 
             if (LrCurrentLibraryPathHash == null) //Path hash is not yet generated since MB startup
                 LrCurrentLibraryPathHash = GetStringHash(GetCurrentLibraryPath());
-            else if (!cachedResult.Contains(LrCachedFunctionResultPresetSeparator + LrCurrentLibraryPathHash 
+            else if (!cachedResult.Contains(LrCachedFunctionResultPresetSeparator + LrCurrentLibraryPathHash
                 + LrCachedFunctionResultPresetSeparator)) //Maybe library has been switched since MB startup
-                
+
                 LrCurrentLibraryPathHash = GetStringHash(GetCurrentLibraryPath());
 
 
             int trackId = GetPersistentTrackIdInt(queriedFile);
 
-            if (!queriedFile.EndsWith(".asx") && !cachedResult.Contains(LrCachedFunctionResultPresetSeparator + LrCurrentLibraryPathHash 
+            if (!queriedFile.EndsWith(".asx") && !cachedResult.Contains(LrCachedFunctionResultPresetSeparator + LrCurrentLibraryPathHash
                 + LrCachedFunctionResultPresetSeparator)) //Function results cache hasn't been filled for the current library 
             {
                 bool notYetCachedTrack = false;
@@ -3452,7 +3452,7 @@ namespace MusicBeePlugin
                 {
                     LrLastAskedCacheFillLibraryPathHash = libraryPathGetHashCode;
 
-                    DialogResult result = MessageBox.Show(this, MsgLrCachedPresetsNotApplied, 
+                    DialogResult result = MessageBox.Show(this, MsgLrCachedPresetsNotApplied,
                         string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
 
                     if (result == DialogResult.No)
@@ -3476,7 +3476,7 @@ namespace MusicBeePlugin
                                 string checkedCachedResult = GetFileTag(queriedFile, destinationTagId);
 
                                 //functionIds[i] results cache hasn't been filled for the current library
-                                if (!checkedCachedResult.Contains(LrCachedFunctionResultPresetSeparator + LrCurrentLibraryPathHash 
+                                if (!checkedCachedResult.Contains(LrCachedFunctionResultPresetSeparator + LrCurrentLibraryPathHash
                                     + LrCachedFunctionResultPresetSeparator))
                                 {
                                     notCachedPresets.Add(preset);
@@ -3502,7 +3502,7 @@ namespace MusicBeePlugin
             return getCachedFunctionResultInternal(cachedResult);
         }
 
-        private string getFunctionResult(string queriedFile, string functionId, AggregatedTags tags, 
+        private string getFunctionResult(string queriedFile, string functionId, AggregatedTags tags,
             SortedDictionary<int, List<string>> filesActualComposedSplitGroupingTagsLists)
         {
             ConvertStringsResult[] functionResults = null;
@@ -3559,7 +3559,7 @@ namespace MusicBeePlugin
 
             for (int i = 0; i < queriedFiles.Length; i++)
             {
-                
+
                 int trackId = GetPersistentTrackIdInt(queriedFiles[i]);
                 bool tagsSet = false;
 
@@ -3807,7 +3807,7 @@ namespace MusicBeePlugin
                 foreach (var idPreset in IdsReportPresets)
                 {
                     lock (LrPresetExecutionLocker)
-                    { 
+                    {
                         if (PresetsProcessedByFunctionCacheUpdate.AddUnique(idPreset.Value.guid))
                         {
                             LibraryReportsCommandForFunctionIds.appliedPreset = idPreset.Value;

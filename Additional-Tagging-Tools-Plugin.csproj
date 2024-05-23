@@ -130,7 +130,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers\.UTILS.cs" />
+    <Compile Include="Helpers\PropertiesToolkit.cs" />
     <Compile Include="Helpers\LibraryReports Preset Filtering.cs">
       <SubType>Form</SubType>
     </Compile>

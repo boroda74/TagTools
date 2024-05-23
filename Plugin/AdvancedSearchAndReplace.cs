@@ -7,8 +7,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Xml.Serialization;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 using static MusicBeePlugin.Plugin;
 
 

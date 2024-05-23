@@ -205,7 +205,7 @@ namespace MusicBeePlugin
 
             this.Controls.Add(this.comboBox);
 
-            DropDownStyle = comboBox.DropDownStyle;
+            this.DropDownStyle = comboBox.DropDownStyle;
 
 
             CopyComboBoxEventHandlers(comboBox, this.comboBox);
@@ -352,7 +352,7 @@ namespace MusicBeePlugin
             this.SizeChanged += customComboBox_SizeChanged;
             customComboBox_SizeChanged(this, null);
 
-            DropDownStyle = comboBox.DropDownStyle;
+            this.DropDownStyle = comboBox.DropDownStyle;
 
             int allControlsIndex = ownerForm.allControls.IndexOf(comboBox);
             ownerForm.allControls.RemoveAt(allControlsIndex);
@@ -550,7 +550,7 @@ namespace MusicBeePlugin
                     SelectedIndex = index;
                 }
 
-                EventHandlersToolkit.FireEvent(this, "TextChanged", null);
+                this.FireEvent("TextChanged", null);
             }
             else//if (comboBox != null)
             {
@@ -559,7 +559,7 @@ namespace MusicBeePlugin
                 else
                     SelectedIndex = index;
 
-                EventHandlersToolkit.FireEvent(this, "TextChanged", null);
+                this.FireEvent("TextChanged", null);
             }
         }
 
@@ -727,13 +727,13 @@ namespace MusicBeePlugin
                     textBox.Visible = value;
                     button.Visible = value;
 
-                    EventHandlersToolkit.FireEvent(this, "VisibleChanged", null);
+                    this.FireEvent("VisibleChanged", null);
                 }
                 else if (comboBox != null && base.Visible != value)
                 {
                     comboBox.Visible = value;
 
-                    EventHandlersToolkit.FireEvent(this, "VisibleChanged", null);
+                    this.FireEvent("VisibleChanged", null);
                 }
 
                 base.Visible = value;
@@ -754,7 +754,7 @@ namespace MusicBeePlugin
 
                     base.Enabled = value;
 
-                    EventHandlersToolkit.FireEvent(this, "EnabledChanged", null);
+                    this.FireEvent("EnabledChanged", null);
                 }
             }
         }
@@ -788,21 +788,21 @@ namespace MusicBeePlugin
         {
             if (destControl is CustomComboBox customComboBox)
             {
-                EventHandlersToolkit.CopyEventHandlers(comboBox, customComboBox.textBox, "TextChanged", false);
-                EventHandlersToolkit.CopyEventHandlers(comboBox, customComboBox.listBox, "SelectedIndexChanged", false);
-                EventHandlersToolkit.CopyEventHandlers(comboBox, customComboBox.listBox, "SelectedItemChanged", false);
-                EventHandlersToolkit.CopyEventHandlers(comboBox, destControl, "VisibleChanged", false);
-                EventHandlersToolkit.CopyEventHandlers(comboBox, destControl, "EnabledChanged", false);
-                EventHandlersToolkit.CopyEventHandlers(comboBox, destControl, "DropDownClosed", false);
+                comboBox.CopyEventHandlersTo(customComboBox.textBox, "TextChanged", false);
+                comboBox.CopyEventHandlersTo(customComboBox.listBox, "SelectedIndexChanged", false);
+                comboBox.CopyEventHandlersTo(customComboBox.listBox, "SelectedItemChanged", false);
+                comboBox.CopyEventHandlersTo(destControl, "VisibleChanged", false);
+                comboBox.CopyEventHandlersTo(destControl, "EnabledChanged", false);
+                comboBox.CopyEventHandlersTo(destControl, "DropDownClosed", false);
             }
             else
             {
-                EventHandlersToolkit.CopyEventHandlers(comboBox, destControl, "TextChanged", false);
-                EventHandlersToolkit.CopyEventHandlers(comboBox, destControl, "SelectedIndexChanged", false);
-                EventHandlersToolkit.CopyEventHandlers(comboBox, destControl, "SelectedItemChanged", false);
-                EventHandlersToolkit.CopyEventHandlers(comboBox, destControl, "VisibleChanged", false);
-                EventHandlersToolkit.CopyEventHandlers(comboBox, destControl, "EnabledChanged", false);
-                EventHandlersToolkit.CopyEventHandlers(comboBox, destControl, "DropDownClosed", false);
+                comboBox.CopyEventHandlersTo(destControl, "TextChanged", false);
+                comboBox.CopyEventHandlersTo(destControl, "SelectedIndexChanged", false);
+                comboBox.CopyEventHandlersTo(destControl, "SelectedItemChanged", false);
+                comboBox.CopyEventHandlersTo(destControl, "VisibleChanged", false);
+                comboBox.CopyEventHandlersTo(destControl, "EnabledChanged", false);
+                comboBox.CopyEventHandlersTo(destControl, "DropDownClosed", false);
             }
         }
 
@@ -947,7 +947,7 @@ namespace MusicBeePlugin
         }
         public void ScrollToTop()
         {
-            NativeMethods.SendMessage(this.Handle, NativeMethods.EM_LINESCROLL, Zero, (IntPtr) (- 100000));
+            NativeMethods.SendMessage(this.Handle, NativeMethods.EM_LINESCROLL, Zero, (IntPtr)(-100000));
             vScrollBar.SetValue(0);
             vScrollBar.Invalidate();
             Invalidate();
