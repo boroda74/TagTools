@@ -14,7 +14,7 @@ namespace ExtensionMethods
         {
             var sourceMembers = GetMembers(source.GetType());
             var destinationMembers = GetMembers(destination.GetType());
-            
+
             // Copy data from source to destination
             foreach (var sourceMember in sourceMembers)
             {

@@ -6619,30 +6619,8 @@ namespace MusicBeePlugin
             return DateTime.Now.ToString();
         }
 
-
-        public string CustomFunc_TitleCase(string input)
-        {
-            return CustomFunc_TitleCase5(input, null, null, null, null, null);
-        }
-
-        public string CustomFunc_TitleCase2(string input, string exceptionWordsString)
-        {
-            return CustomFunc_TitleCase5(input, exceptionWordsString, null, null, null, null);
-        }
-
-        public string CustomFunc_TitleCase3(string input, string exceptionWordsString, string wordSeparatorsString)
-        {
-            return CustomFunc_TitleCase5(input, exceptionWordsString, wordSeparatorsString, null, null, null);
-        }
-
-        public string CustomFunc_TitleCase4(string input, string exceptionWordsString, string wordSeparatorsString,
-            string leftExceptionCharsString, string rightExceptionCharsString)
-        {
-            return CustomFunc_TitleCase5(input, exceptionWordsString, wordSeparatorsString, leftExceptionCharsString, rightExceptionCharsString, null);
-        }
-
-        public string CustomFunc_TitleCase5(string input, string exceptionWordsString, string wordSeparatorsString,
-            string leftExceptionCharsString, string rightExceptionCharsString, string exceptionCharsString) //**********
+        public string CustomFunc_TitleCase(string input, string exceptionWordsString, string wordSeparatorsString,
+            string leftExceptionCharsString, string rightExceptionCharsString, string exceptionCharsString)
         {
             string[] exceptionWords = null;
             string[] wordSeparators = null;
@@ -6714,16 +6692,7 @@ namespace MusicBeePlugin
             return result;
         }
 
-
-        public string CustomFunc_SentenceCase(string input)
-        {
-            input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.LowerCase);
-            string result = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.SentenceCase, null, false, null, null, null, null, true, false);
-
-            return result;
-        }
-
-        public string CustomFunc_SentenceCase2(string input, string sentenceSeparatorsString)//********
+        public string CustomFunc_SentenceCase(string input, string sentenceSeparatorsString)
         {
             string[] sentenceSeparators = null;
 
@@ -6735,7 +6704,6 @@ namespace MusicBeePlugin
 
             return result;
         }
-
 
         public string CustomFunc_Name(string parameter)
         {
