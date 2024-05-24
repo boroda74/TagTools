@@ -4,4 +4,4 @@ These commands allow to (auto)backup tags of all tracks in your library and rest
 
 *Note:*
 
-* The plugin backs up tags using tack unique IDs, which are stored in the MusicBee library (database) only. So, it's some kind of "Time machine" only. THE PLUGIN WON'T BE ABLE TO RESTORE TAGS IF YOU HAVE CREATED A NEW MUSICBEE LIBRARY FROM SCRATCH, E.G. ON A NEW PC (EVEN IF YOU HAVE ADDED THE SAME TRACKS TO THE NEW LIBRARY)\!
+* "Backup \& Restore" relies on MusicBee internal track IDs specific to the library. Because of this, you can't restore tags to a library other than the library from which the tags have been backed up. But you have an option for the plugin to save a copy of the track IDs to a custom tag of your choice, and to restore backed-up tags using this custom tag to identify tracks instead of actual track IDs. This will let you restore the tags to the new library containing the same tracks if you have recreated the library from scratch, e.g., on another computer. Make sure that this custom tag is stored in the file tag, not in the MusicBee database.
