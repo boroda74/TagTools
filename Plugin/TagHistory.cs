@@ -462,7 +462,7 @@ namespace MusicBeePlugin
         {
             if (!System.IO.Directory.Exists(folder))
             {
-                MessageBox.Show(this, MsgFolderDoesntExists, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, MsgBrFolderDoesntExists, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 

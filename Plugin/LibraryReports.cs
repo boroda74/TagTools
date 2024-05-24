@@ -3751,9 +3751,7 @@ namespace MusicBeePlugin
             //if (nodeName != MusicName)
             //    return;
 
-            string id = GetPersistentTrackId(changedFile);
-            int trackId = int.Parse(id);
-
+            int trackId = GetPersistentTrackIdInt(changedFile);
 
             lock (LrTrackCacheNeededToBeUpdated)
                 LrTrackCacheNeededToBeUpdated.AddSkip(trackId, changedFile);

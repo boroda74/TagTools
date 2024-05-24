@@ -290,6 +290,7 @@ namespace MusicBeePlugin
         internal static Form EmptyForm;
 
         internal static string[] ReadonlyTagsNames;
+        internal static string[] CustomTagNames;
 
         internal static string Language;
         internal static string PluginsPath;
@@ -344,8 +345,8 @@ namespace MusicBeePlugin
         internal const char MultipleItemsSplitterId = '\u0000';
         internal const char GuestId = '\u0001';
         internal const char PerformerId = '\u0002';
-        internal const char RemixerId = '\x04';
-        internal const char EndOfStringId = '\x08';
+        internal const char RemixerId = '\u0004';
+        internal const char EndOfStringId = '\u0008';
 
         internal const string TotalsString = "\u0001";
 
@@ -368,7 +369,7 @@ namespace MusicBeePlugin
         private int InitialSkipCount;
         #endregion
 
-        #region Localized strings
+        #region Service tags and their localized names
         //Some workarounds
         internal const MetaDataType DisplayedArtistId = (MetaDataType)(-1);
         internal const MetaDataType ArtistArtistsId = (MetaDataType)(-2);
@@ -427,6 +428,10 @@ namespace MusicBeePlugin
         #region Settings
         //Cached settings until MusicBee restart
         internal static bool DontShowShowHiddenWindows;
+
+        internal static bool UseCustomTrackIdTag;
+        internal static int CustomTrackIdTag;
+
 
         [Serializable]
         public class PluginSettings : SavedSettingsType //******* remove SavedSettingsType later!!!!!!
@@ -615,6 +620,8 @@ namespace MusicBeePlugin
             public decimal autoBackupInterval;
             public decimal autodeleteKeepNumberOfDays;
             public decimal autodeleteKeepNumberOfFiles;
+            public bool useCustomTrackIdTag;
+            public int customTrackIdTag;
 
             public int rowHeadersWidth;
             public int defaultColumnWidth;
@@ -644,7 +651,7 @@ namespace MusicBeePlugin
         #endregion
 
 
-        #region Other localized strings
+        #region Localized strings
         //Localizable strings
 
         //Supported exported file formats
@@ -850,7 +857,7 @@ namespace MusicBeePlugin
         internal static string MsgTracks;
         internal static string MsgActualPercent;
 
-        internal static string MsgTheNumberOfOpeningExceptionCharactersMustBe;
+        internal static string MsgCsTheNumberOfOpeningExceptionCharactersMustBe;
 
         internal static string MsgLrDoYouWantToSaveChangesBeforeClosingTheWindow;
         internal static string MsgLrDoYouWantToCloseTheWindowWithoutSavingChanges;
@@ -913,24 +920,27 @@ namespace MusicBeePlugin
         internal static string CtlDirtyError2sf;
         internal static string CtlDirtyError2mf;
 
+        internal static string MsgSelectTracks;
 
-        internal static string MsgMasterBackupIndexIsCorrupted;
-        internal static string MsgBackupIsCorrupted;
-        internal static string MsgFolderDoesntExists;
-        internal static string MsgSelectOneTrackOnly;
-        internal static string MsgSelectTrack;
-        internal static string MsgSelectAtLeast2Tracks;
-        internal static string MsgCreateBaselineWarning;
-        internal static string MsgBackupBaselineFileDoesntExist;
-        internal static string MsgThisIsTheBackupOfDifferentLibrary;
-        internal static string MsgGiveNameToAsrPreset;
-        internal static string MsgAreYouSureYouWantToSaveAsrPreset;
-        internal static string MsgAreYouSureYouWantToOverwriteAsrPreset;
-        internal static string MsgAreYouSureYouWantToOverwriteRenameAsrPreset;
-        internal static string MsgAreYouSureYouWantToDeleteAsrPreset;
-        internal static string MsgPredefinedPresetsCantBeChanged;
-        internal static string MsgSavePreset;
-        internal static string MsgDeletePreset;
+        internal static string MsgCtSelectAtLeast2Tracks;
+
+        internal static string MsgAsrPredefinedPresetsCantBeChanged;
+
+        internal static string MsgMsrGiveNameToAsrPreset;
+        internal static string MsgMsrAreYouSureYouWantToSaveAsrPreset;
+        internal static string MsgMsrAreYouSureYouWantToOverwriteAsrPreset;
+        internal static string MsgMsrAreYouSureYouWantToOverwriteRenameAsrPreset;
+        internal static string MsgMsrAreYouSureYouWantToDeleteAsrPreset;
+        internal static string MsgMsrSavePreset;
+        internal static string MsgMsrDeletePreset;
+
+        internal static string MsgBrMasterBackupIndexIsCorrupted;
+        internal static string MsgBrBackupIsCorrupted;
+        internal static string MsgBrFolderDoesntExists;
+        internal static string MsgBrCreateBaselineWarning;
+        internal static string MsgBrBackupBaselineFileDoesntExist;
+        internal static string MsgBrThisIsTheBackupOfDifferentLibrary;
+        internal static string MsgBrCreateNewBaselineBackupBeforeMusicBeeRestart;
 
         internal static string MsgUnsupportedMusicBeeFontType;
 
@@ -1003,14 +1013,17 @@ namespace MusicBeePlugin
 
 
         #region Common methods/functions
-        internal static string GetPersistentTrackId(string currentFile)
+        internal static string GetPersistentTrackId(string currentFile, bool useCustomTrackIdTag = false)
         {
-            return MbApiInterface.Library_GetDevicePersistentId(currentFile, (DeviceIdType)0) ?? "-1";
+            if (useCustomTrackIdTag && SavedSettings.useCustomTrackIdTag && SavedSettings.customTrackIdTag > 0)
+                return GetFileTag(currentFile, (MetaDataType)SavedSettings.customTrackIdTag);
+            else
+                return MbApiInterface.Library_GetDevicePersistentId(currentFile, (DeviceIdType)0) ?? "-1";
         }
 
-        internal static int GetPersistentTrackIdInt(string currentFile)
+        internal static int GetPersistentTrackIdInt(string currentFile, bool useCustomTrackIdTag = false)
         {
-            return int.Parse(MbApiInterface.Library_GetDevicePersistentId(currentFile, (DeviceIdType)0) ?? "-1");
+            return int.Parse(GetPersistentTrackId(currentFile, useCustomTrackIdTag));
         }
 
         internal static string AddLibraryNameToTrackId(string libraryName, string trackId)
@@ -1766,9 +1779,7 @@ namespace MusicBeePlugin
                 return;
 
 
-            string id = GetPersistentTrackId(trackUrl);
-            int trackId = int.Parse(id);
-
+            int trackId = GetPersistentTrackIdInt(trackUrl, false);
 
             if (UpdatedTracksForBackupCount < MaxUpdatedTracksCount)
             {
@@ -2704,10 +2715,14 @@ namespace MusicBeePlugin
         }
 
         internal static void FillListByTagNames(System.Collections.IList list, bool addReadOnlyTagsAlso = false, bool addArtworkAlso = false,
-            bool addNullAlso = true, bool addTagPrefixes = false, bool addAllTagsPseudoTagAlso = false, bool addDateCreatedAlso = true)
+            bool addNullAlso = true, bool addTagPrefixes = false, bool addAllTagsPseudoTagAlso = false, bool addDateCreatedAlso = true, bool addCustomTagsOnly = false)
         {
             foreach (string tagName in TagNamesIds.Keys)
             {
+                if (addCustomTagsOnly && !CustomTagNames.Contains(tagName))
+                    continue;
+
+
                 string prefix = string.Empty;
 
                 if (addTagPrefixes)
@@ -3062,7 +3077,7 @@ namespace MusicBeePlugin
             if (File.Exists(BrGetBackupFilenameWithoutExtension(dialog.FileName) + ".mbc"))
                 File.Delete(BrGetBackupFilenameWithoutExtension(dialog.FileName) + ".mbc");
 
-            MbApiInterface.MB_CreateParameterisedBackgroundTask(BackupIndex.saveBackupAsync, new object[] { BrGetBackupFilenameWithoutExtension(dialog.FileName), SbMakingTagBackup, false, false }, MbForm);
+            MbApiInterface.MB_CreateParameterisedBackgroundTask(BackupIndex.saveBackupAsync, new object[] { BrGetBackupFilenameWithoutExtension(dialog.FileName), SbMakingTagBackup, false }, MbForm);
             dialog.Dispose();
         }
 
@@ -3185,7 +3200,7 @@ namespace MusicBeePlugin
 
         internal void createNewBaselineEventHandler(object sender, EventArgs e)
         {
-            MessageBox.Show(MbForm, MsgCreateBaselineWarning, CtlWarning, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show(MbForm, MsgBrCreateBaselineWarning, CtlWarning, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
 
             SaveFileDialog dialog = new SaveFileDialog
@@ -3237,7 +3252,20 @@ namespace MusicBeePlugin
             if (File.Exists(BrGetBackupFilenameWithoutExtension(dialog.FileName) + ".mbc"))
                 File.Delete(BrGetBackupFilenameWithoutExtension(dialog.FileName) + ".mbc");
 
-            MbApiInterface.MB_CreateParameterisedBackgroundTask(BackupIndex.saveBackupAsync, new object[] { BrGetBackupFilenameWithoutExtension(dialog.FileName), SbMakingTagBackup, false, true }, MbForm);
+            if (UseCustomTrackIdTag)
+            {
+                bool useCustomTrackIdTag = UseCustomTrackIdTag;
+                int customTrackIdTag = CustomTrackIdTag;
+
+                //Let's cache previous value in case of baseline backup creation failure
+                UseCustomTrackIdTag = SavedSettings.useCustomTrackIdTag;
+                CustomTrackIdTag = SavedSettings.customTrackIdTag;
+
+                SavedSettings.useCustomTrackIdTag = useCustomTrackIdTag;
+                SavedSettings.customTrackIdTag = customTrackIdTag;
+            }
+
+            MbApiInterface.MB_CreateParameterisedBackgroundTask(BackupIndex.saveBackupAsync, new object[] { BrGetBackupFilenameWithoutExtension(dialog.FileName), SbMakingTagBackup, false }, MbForm);
             dialog.Dispose();
         }
 
@@ -3289,13 +3317,13 @@ namespace MusicBeePlugin
 
                 if (files.Length == 0)
                 {
-                    MessageBox.Show(MbForm, MsgSelectTrack, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show(MbForm, MsgSelectTracks, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
 
                 int[] trackIds = new int[files.Length];
                 for (int i = 0; i < files.Length; i++)
-                    trackIds[i] = int.Parse(GetPersistentTrackId(files[i]));
+                    trackIds[i] = GetPersistentTrackIdInt(files[i], true);
 
 
                 TagHistory tagToolsForm = new TagHistory(this, files, trackIds);
@@ -3310,7 +3338,7 @@ namespace MusicBeePlugin
             {
                 if (files.Length < 2)
                 {
-                    MessageBox.Show(MbForm, MsgSelectAtLeast2Tracks, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show(MbForm, MsgCtSelectAtLeast2Tracks, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
 
@@ -3605,7 +3633,7 @@ namespace MusicBeePlugin
             MsgActualPercent = "% / Act.: ";
             MsgIncorrectPresetName = "Incorrect preset name or duplicated preset names.";
 
-            MsgTheNumberOfOpeningExceptionCharactersMustBe = "The number of opening exception characters must be the same as the number of closing exception characters!";
+            MsgCsTheNumberOfOpeningExceptionCharactersMustBe = "The number of opening exception characters must be the same as the number of closing exception characters!";
 
             MsgLrDoYouWantToSaveChangesBeforeClosingTheWindow = "There are unsaved changes. Do you want to save changes before closing the window?";
             MsgLrDoYouWantToCloseTheWindowWithoutSavingChanges = "You can’t save presets now. Would you like to discard any changes when closing the LR window?";
@@ -3726,29 +3754,29 @@ namespace MusicBeePlugin
             CtlDirtyError2mf = " background file updating operations is running/scheduled. \n" +
                 "Preview results may be not accurate. ";
 
+            MsgSelectTracks = "Select a tracks!";
 
-            MsgMasterBackupIndexIsCorrupted = "Master tag backup index is corrupted! All existing at the moment backups are not available any more in \"Tag history\" command.";
-            MsgBackupIsCorrupted = "Backup \"%%FILENAME%%\" is corrupted or is not valid MusicBee backup!";
-            MsgFolderDoesntExists = "Folder doesn't exist!";
-            MsgSelectOneTrackOnly = "Select one track only!";
-            MsgSelectTrack = "Select a track!";
-            MsgSelectAtLeast2Tracks = "Select at least 2 tracks to compare!";
-            MsgBackupBaselineFileDoesntExist = "Backup baseline file\"%%FILENAME%%\" doesn't exist! Backup tags manually first!";
-            MsgThisIsTheBackupOfDifferentLibrary = "This is the backup of different library!";
-            MsgCreateBaselineWarning = "When you create the first backup of given library, a backup baseline is created. " +
+            MsgBrMasterBackupIndexIsCorrupted = "Master tag backup index is corrupted! All existing at the moment backups are not available any more in \"Tag history\" command.";
+            MsgBrBackupIsCorrupted = "Backup \"%%FILENAME%%\" is corrupted or is not valid MusicBee backup!";
+            MsgBrFolderDoesntExists = "Folder doesn't exist!";
+            MsgCtSelectAtLeast2Tracks = "Select at least 2 tracks to compare!";
+            MsgBrBackupBaselineFileDoesntExist = "Backup baseline file\"%%FILENAME%%\" doesn't exist! Backup tags manually first!";
+            MsgBrThisIsTheBackupOfDifferentLibrary = "This is the backup of different library! Do you still want to try to restore the tags from this backup?";
+            MsgBrCreateBaselineWarning = "When you create the first backup of given library, a backup baseline is created. " +
                 "All further backups are incremental relative to baseline. " +
                 "If you have changed very much tags incremental backups may become too large. This command will delete ALL incremental backups " +
                 "of CURRENT library and will create new backup baseline if you continue. ";
+            MsgBrCreateNewBaselineBackupBeforeMusicBeeRestart = "You must create new baseline backup before MusicBee restart for the change of this option to take effect!";
 
-            MsgGiveNameToAsrPreset = "Give a name to preset!";
-            MsgAreYouSureYouWantToSaveAsrPreset = "Do you want to save ASR preset named \"%%PRESETNAME%%\"?";
-            MsgAreYouSureYouWantToOverwriteAsrPreset = "Do you want to overwrite ASR preset \"%%PRESETNAME%%\"?";
-            MsgAreYouSureYouWantToOverwriteRenameAsrPreset = "Do you want to overwrite ASR preset \"%%PRESETNAME%%\", and rename it to \"%%NEWPRESETNAME%%\"?";
-            MsgAreYouSureYouWantToDeleteAsrPreset = "Do you want to delete ASR preset \"%%PRESETNAME%%\"?";
-            MsgPredefinedPresetsCantBeChanged = "Predefined presets can't be changed. Preset editor will open in read-only mode.\n\n"
+            MsgMsrGiveNameToAsrPreset = "Give a name to preset!";
+            MsgMsrAreYouSureYouWantToSaveAsrPreset = "Do you want to save ASR preset named \"%%PRESETNAME%%\"?";
+            MsgMsrAreYouSureYouWantToOverwriteAsrPreset = "Do you want to overwrite ASR preset \"%%PRESETNAME%%\"?";
+            MsgMsrAreYouSureYouWantToOverwriteRenameAsrPreset = "Do you want to overwrite ASR preset \"%%PRESETNAME%%\", and rename it to \"%%NEWPRESETNAME%%\"?";
+            MsgMsrAreYouSureYouWantToDeleteAsrPreset = "Do you want to delete ASR preset \"%%PRESETNAME%%\"?";
+            MsgAsrPredefinedPresetsCantBeChanged = "Predefined presets can't be changed. Preset editor will open in read-only mode.\n\n"
                 + "Do you want to disable this warning?";
-            MsgSavePreset = "Save Preset";
-            MsgDeletePreset = "Delete Preset";
+            MsgMsrSavePreset = "Save Preset";
+            MsgMsrDeletePreset = "Delete Preset";
 
             MsgUnsupportedMusicBeeFontType = "Unsupported MusicBee font type!\n" +
                 "Either choose different font in MusicBee preferences or disable using MusicBee font in plugin settings.";
@@ -4306,7 +4334,7 @@ namespace MusicBeePlugin
                 MsgActualPercent = "% / Действ.: ";
                 MsgIncorrectPresetName = "Некорректное название пресета или пресет с таким названием уже существует.";
 
-                MsgTheNumberOfOpeningExceptionCharactersMustBe = "Число открывающих символов исключения должно быть таким же как и число закрывающих символов!";
+                MsgCsTheNumberOfOpeningExceptionCharactersMustBe = "Число открывающих символов исключения должно быть таким же как и число закрывающих символов!";
 
                 MsgLrDoYouWantToSaveChangesBeforeClosingTheWindow = "Есть несохраненные изменения. Сохранить изменения, прежде чем закрыть окно?";
                 MsgLrDoYouWantToCloseTheWindowWithoutSavingChanges = "Сейчас вы не можете сохранить пресеты. Отменить все изменения при закрытии окна \"Отчетов по библиотеке\"?";
@@ -4428,30 +4456,30 @@ namespace MusicBeePlugin
                 CtlDirtyError2mf = " фоновых операций обновления файлов. \n" +
                     "Результаты предварительного просмотра могут быть не точны. ";
 
+                MsgSelectTracks = "Выберите треки!";
 
-                MsgMasterBackupIndexIsCorrupted = "Основной индекс архива тегов поврежден! Все существующие на данный момент архивы " +
+                MsgBrMasterBackupIndexIsCorrupted = "Основной индекс архива тегов поврежден! Все существующие на данный момент архивы " +
                     "будут не доступны в команде \"История тегов\".";
-                MsgBackupIsCorrupted = "Архив \"%%FILENAME%%\" или поврежден, или не является архивом MusicBee!";
-                MsgFolderDoesntExists = "Папка не существует!";
-                MsgSelectOneTrackOnly = "Выберите только один трек!";
-                MsgSelectTrack = "Выберите трек!";
-                MsgSelectAtLeast2Tracks = "Выберите по меньшей мере 2 трека для сравнения!";
-                MsgBackupBaselineFileDoesntExist = "Файл первоначального опорного архива \"%%FILENAME%%\" не существует! Сначала создайте архив тегов вручную!";
-                MsgThisIsTheBackupOfDifferentLibrary = "Это архив другой библиотеки!";
-                MsgCreateBaselineWarning = "Когда создается первый архив любой библиотеки, сначала создается полный опорный архив. " +
+                MsgBrBackupIsCorrupted = "Архив \"%%FILENAME%%\" или поврежден, или не является архивом MusicBee!";
+                MsgBrFolderDoesntExists = "Папка не существует!";
+                MsgCtSelectAtLeast2Tracks = "Выберите по меньшей мере 2 трека для сравнения!";
+                MsgBrBackupBaselineFileDoesntExist = "Файл первоначального опорного архива \"%%FILENAME%%\" не существует! Сначала создайте архив тегов вручную!";
+                MsgBrThisIsTheBackupOfDifferentLibrary = "Это архив другой библиотеки! Все равно попытаться восстановить теги из этой резервной копии?";
+                MsgBrCreateBaselineWarning = "Когда создается первый архив любой библиотеки, сначала создается полный опорный архив. " +
                     "Все последующие архивы являются разницей с опорным архивом. " +
                     "Если было изменено очень много тегов, то разностные архивы могут стать очень большими. Эта команда удалит " +
                     "ВСЕ разностные архивы ТЕКУЩЕЙ библиотеки и создаст новый опорный архив. ";
+                MsgBrCreateNewBaselineBackupBeforeMusicBeeRestart = "Требуется создать новый опорный архив до перезапуска MusicBee, что изменение этой настройки вступило в силу!";
 
-                MsgGiveNameToAsrPreset = "Задайте название пресета!";
-                MsgAreYouSureYouWantToSaveAsrPreset = "Сохранить пресет дополнительного поиска и замены под названием \"%%PRESETNAME%%\"?";
-                MsgAreYouSureYouWantToOverwriteAsrPreset = "Перезаписать пресет дополнительного поиска и замены \"%%PRESETNAME%%\"?";
-                MsgAreYouSureYouWantToOverwriteRenameAsrPreset = "Перезаписать пресет дополнительного поиска и замены \"%%PRESETNAME%%\", переименовав его в \"%%NEWPRESETNAME%%\"?";
-                MsgAreYouSureYouWantToDeleteAsrPreset = "Удалить пресет дополнительного поиска и замены \"%%PRESETNAME%%\"?";
-                MsgPredefinedPresetsCantBeChanged = "Стандартные пресеты нельзя изменять. Редактор пресетов будет открыт в режиме просмотра.\n\n"
+                MsgMsrGiveNameToAsrPreset = "Задайте название пресета!";
+                MsgMsrAreYouSureYouWantToSaveAsrPreset = "Сохранить пресет дополнительного поиска и замены под названием \"%%PRESETNAME%%\"?";
+                MsgMsrAreYouSureYouWantToOverwriteAsrPreset = "Перезаписать пресет дополнительного поиска и замены \"%%PRESETNAME%%\"?";
+                MsgMsrAreYouSureYouWantToOverwriteRenameAsrPreset = "Перезаписать пресет дополнительного поиска и замены \"%%PRESETNAME%%\", переименовав его в \"%%NEWPRESETNAME%%\"?";
+                MsgMsrAreYouSureYouWantToDeleteAsrPreset = "Удалить пресет дополнительного поиска и замены \"%%PRESETNAME%%\"?";
+                MsgAsrPredefinedPresetsCantBeChanged = "Стандартные пресеты нельзя изменять. Редактор пресетов будет открыт в режиме просмотра.\n\n"
                     + "Отключить показ этого предупреждения?";
-                MsgSavePreset = "Сохранить пресет";
-                MsgDeletePreset = "Удалить пресет";
+                MsgMsrSavePreset = "Сохранить пресет";
+                MsgMsrDeletePreset = "Удалить пресет";
 
                 MsgUnsupportedMusicBeeFontType = "Тип шрифта MusicBee не поддерживается плагином!\n" +
                     "Или выберите другой шрифт в настройках MusicBee, или отключите использование шрифта MusicBee в настройках плагина.";

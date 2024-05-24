@@ -299,8 +299,10 @@ namespace MusicBeePlugin
             button.ImageAlign = ContentAlignment.MiddleCenter;
             button.TextImageRelation = TextImageRelation.Overlay;
             button.Image = Plugin.DownArrowComboBoxImage;
+            button.TabStop = false;
 
-            button.Click += button_Click;
+            //button.Click += button_Click;//******
+            button.GotFocus += Button_GotFocus;
 
             ownerForm.skinControl(button);
             button.FlatAppearance.BorderColor = ownerForm.narrowScrollBarBackColor;
@@ -462,7 +464,7 @@ namespace MusicBeePlugin
         {
             get
             {
-                if (comboBox == null && button.IsEnabled())
+                if (comboBox == null && ReadOnly && button.IsEnabled())
                     return true;
                 else
                     return false;
@@ -789,8 +791,8 @@ namespace MusicBeePlugin
             if (destControl is CustomComboBox customComboBox)
             {
                 comboBox.CopyEventHandlersTo(customComboBox.textBox, "TextChanged", false);
-                comboBox.CopyEventHandlersTo(customComboBox.listBox, "SelectedIndexChanged", false);
-                comboBox.CopyEventHandlersTo(customComboBox.listBox, "SelectedItemChanged", false);
+                comboBox.CopyEventHandlersTo(destControl, "SelectedIndexChanged", false);
+                comboBox.CopyEventHandlersTo(destControl, "SelectedItemChanged", false);
                 comboBox.CopyEventHandlersTo(destControl, "VisibleChanged", false);
                 comboBox.CopyEventHandlersTo(destControl, "EnabledChanged", false);
                 comboBox.CopyEventHandlersTo(destControl, "DropDownClosed", false);
@@ -868,6 +870,12 @@ namespace MusicBeePlugin
             dropDownClosedTime = DateTime.UtcNow;
 
             base.Events[EVENT_DROPDOWNCLOSED]?.DynamicInvoke(this, null);
+        }
+
+        private void Button_GotFocus(object sender, EventArgs e)
+        {
+
+            button_Click(null, null);
         }
 
         private void button_Click(object sender, EventArgs e)

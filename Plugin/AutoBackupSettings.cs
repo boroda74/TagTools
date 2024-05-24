@@ -7,8 +7,12 @@ namespace MusicBeePlugin
 {
     public partial class AutoBackupSettings : PluginWindowTemplate
     {
+        private CustomComboBox trackIdTagListCustom;
+
         private decimal initialAutoBackupInterval;
         private string initialAutoBackupDirectory;
+
+        private bool customTrackIdTagWarningShown = false;
 
         internal AutoBackupSettings(Plugin plugin) : base(plugin)
         {
@@ -18,6 +22,28 @@ namespace MusicBeePlugin
         protected override void initializeForm()
         {
             base.initializeForm();
+
+            trackIdTagListCustom = namesComboBoxes["trackIdTagList"];
+
+
+            customTrackIdTagWarningShown = true;
+
+
+            if (CustomTrackIdTag == 0)
+            {
+                UseCustomTrackIdTag = SavedSettings.useCustomTrackIdTag;
+                CustomTrackIdTag = SavedSettings.customTrackIdTag;
+            }
+
+            storeTrackIdsInCustomTagCheckBox.Checked = UseCustomTrackIdTag;
+
+            FillListByTagNames(trackIdTagListCustom.Items, false, false, false, false, false, false, true);
+            trackIdTagListCustom.Text = GetTagName((MetaDataType)CustomTrackIdTag);
+            if (trackIdTagListCustom.SelectedIndex == -1)
+                trackIdTagListCustom.SelectedIndex = 0;
+
+            customTrackIdTagWarningShown = false;
+
 
             initialAutoBackupInterval = SavedSettings.autoBackupInterval;
             initialAutoBackupDirectory = SavedSettings.autoBackupDirectory;
@@ -94,6 +120,37 @@ namespace MusicBeePlugin
         private void dontTryToGuessLibraryNameCheckBoxLabel_Click(object sender, EventArgs e)
         {
             dontTryToGuessLibraryNameCheckBox.Checked = !dontTryToGuessLibraryNameCheckBox.Checked;
+        }
+
+
+        private void storeTrackIdsInCustomTagCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            trackIdTagListCustom.Enable(storeTrackIdsInCustomTagCheckBox.Checked);
+            UseCustomTrackIdTag = storeTrackIdsInCustomTagCheckBox.Checked;
+
+            if (!customTrackIdTagWarningShown && UseCustomTrackIdTag != SavedSettings.useCustomTrackIdTag)
+            {
+                customTrackIdTagWarningShown = true;
+                MessageBox.Show(this, MsgBrCreateNewBaselineBackupBeforeMusicBeeRestart, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+        }
+
+        private void storeTrackIdsInCustomTagCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            if (storeTrackIdsInCustomTagCheckBox.IsEnabled())
+                storeTrackIdsInCustomTagCheckBox.Checked = !storeTrackIdsInCustomTagCheckBox.Checked;
+        }
+
+        private void trackIdTagList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CustomTrackIdTag = (int)GetTagId(trackIdTagListCustom.Text);
+
+
+            if (!customTrackIdTagWarningShown && UseCustomTrackIdTag && CustomTrackIdTag != SavedSettings.customTrackIdTag)
+            {
+                customTrackIdTagWarningShown = true;
+                MessageBox.Show(this, MsgBrCreateNewBaselineBackupBeforeMusicBeeRestart, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
         private void backupArtworksCheckBoxLabel_Click(object sender, EventArgs e)

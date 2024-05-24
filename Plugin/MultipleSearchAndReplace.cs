@@ -769,7 +769,7 @@ namespace MusicBeePlugin
 
             if (string.IsNullOrEmpty(templateNameTextBox.Text) || templateNameTextBox.Text == CtlMSR)
             {
-                MessageBox.Show(this, MsgGiveNameToAsrPreset, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, MsgMsrGiveNameToAsrPreset, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
                 templateNameTextBox.Focus();
                 templateNameTextBox.SelectionStart = CtlMSR.Length;
@@ -801,24 +801,24 @@ namespace MusicBeePlugin
 
             if (!presetExists)
             {
-                if (MessageBox.Show(this, MsgAreYouSureYouWantToSaveAsrPreset
+                if (MessageBox.Show(this, MsgMsrAreYouSureYouWantToSaveAsrPreset
                     .Replace("%%PRESETNAME%%", templateNameTextBox.Text),
-                        MsgSavePreset, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                        MsgMsrSavePreset, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                     return;
             }
             else if (templateNameTextBox.Text == customMSR.getName())
             {
-                if (MessageBox.Show(this, MsgAreYouSureYouWantToOverwriteAsrPreset
+                if (MessageBox.Show(this, MsgMsrAreYouSureYouWantToOverwriteAsrPreset
                     .Replace("%%PRESETNAME%%", templateNameTextBox.Text),
-                        MsgSavePreset, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                        MsgMsrSavePreset, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                     return;
             }
             else
             {
-                if (MessageBox.Show(this, MsgAreYouSureYouWantToOverwriteRenameAsrPreset
+                if (MessageBox.Show(this, MsgMsrAreYouSureYouWantToOverwriteRenameAsrPreset
                     .Replace("%%PRESETNAME%%", customMSR.getName())
                     .Replace("%%NEWPRESETNAME%%", templateNameTextBox.Text),
-                        MsgSavePreset, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                        MsgMsrSavePreset, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                     return;
             }
 
@@ -1091,8 +1091,8 @@ namespace MusicBeePlugin
 
         private void buttonDeleteSaved_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show(this, MsgAreYouSureYouWantToDeleteAsrPreset.Replace("%%PRESETNAME%%", templateNameTextBox.Text),
-                    MsgDeletePreset, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            if (MessageBox.Show(this, MsgMsrAreYouSureYouWantToDeleteAsrPreset.Replace("%%PRESETNAME%%", templateNameTextBox.Text),
+                    MsgMsrDeletePreset, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                 return;
 
 

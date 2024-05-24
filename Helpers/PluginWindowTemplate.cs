@@ -2182,14 +2182,14 @@ namespace MusicBeePlugin
 
             foreach (string tagName in customComboBox.Items)
             {
-                if (tagName[0].ToString().ToLower() == firstLetter)
+                if (tagName.Length > 0 && tagName[0].ToString().ToLower() == firstLetter)
                 {
                     customComboBox.SelectedItem = tagName;
                     return;
                 }
                 else if (searchedCharIsLetter && !ChangeCase.IsCharCaseSensitive(tagName[0]))
                 {
-                    if (tagName[1].ToString().ToLower() == firstLetter)
+                    if (tagName.Length > 1 && tagName[1].ToString().ToLower() == firstLetter)
                     {
                         customComboBox.SelectedItem = tagName;
                         return;

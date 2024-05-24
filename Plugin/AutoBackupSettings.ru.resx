@@ -118,11 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="autoBackupFolderTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>624, 23</value>
+  <data name="autoBackupFolderTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>177, 8</value>
   </data>
-  <data name="autoBackupFolderTextBox.ToolTip" xml:space="preserve">
-    <value />
+  <data name="autoBackupFolderTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>604, 23</value>
   </data>
   <data name="browseButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>791, 8</value>
@@ -130,17 +130,11 @@
   <data name="browseButton.Text" xml:space="preserve">
     <value>Просмотр...</value>
   </data>
-  <data name="browseButton.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="autoBackupFolderLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 15</value>
+    <value>161, 15</value>
   </data>
   <data name="autoBackupFolderLabel.Text" xml:space="preserve">
     <value>Папка авторезервирования:</value>
-  </data>
-  <data name="autoBackupFolderLabel.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="autoBackupPrefixLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>344, 40</value>
@@ -151,14 +145,8 @@
   <data name="autoBackupPrefixLabel.Text" xml:space="preserve">
     <value>    Префикс имен файлов для автоматически созданных архивов:</value>
   </data>
-  <data name="autoBackupPrefixLabel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="autoBackupPrefixTextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>720, 37</value>
-  </data>
-  <data name="autoBackupPrefixTextBox.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="autoBackupCheckBox.ToolTip" xml:space="preserve">
     <value>Автоархивирование будет пропущено, если содержание текущей библиотеки и какие-либо теги 
@@ -167,23 +155,14 @@
   <data name="autoBackupNumericUpDown.Location" type="System.Drawing.Point, System.Drawing">
     <value>184, 37</value>
   </data>
-  <data name="autoBackupNumericUpDown.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="autoBackupPeriodLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>298, 40</value>
   </data>
   <data name="autoBackupPeriodLabel.Text" xml:space="preserve">
     <value>дней.</value>
   </data>
-  <data name="autoBackupPeriodLabel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="autodeleteOldCheckBox.ToolTip" xml:space="preserve">
     <value>Только автоматические архивы текущей библиотеки будут удаляться</value>
-  </data>
-  <data name="numberOfDaysNumericUpDown.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="autodeleteManyCheckBox.ToolTip" xml:space="preserve">
     <value>Только автоматические архивы текущей библиотеки будут удаляться</value>
@@ -191,17 +170,11 @@
   <data name="numberOfFilesNumericUpDown.Location" type="System.Drawing.Point, System.Drawing">
     <value>503, 93</value>
   </data>
-  <data name="numberOfFilesNumericUpDown.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="autodeleteOldLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 15</value>
   </data>
   <data name="autodeleteOldLabel.Text" xml:space="preserve">
     <value>минут.</value>
-  </data>
-  <data name="autodeleteOldLabel.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
     <value>791, 181</value>
@@ -209,14 +182,8 @@
   <data name="buttonClose.Text" xml:space="preserve">
     <value>Отмена</value>
   </data>
-  <data name="buttonClose.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
     <value>683, 181</value>
-  </data>
-  <data name="buttonOK.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="backupArtworksCheckBox.ToolTip" xml:space="preserve">
     <value>ВНИМАНИЕ! Эта опция затрагивает, как ручное, так и автоматическое архивирование.</value>
@@ -274,8 +241,62 @@
   <data name="backupArtworksCheckBoxLabel.ToolTip" xml:space="preserve">
     <value>ВНИМАНИЕ! Эта опция затрагивает, как ручное, так и автоматическое архивирование.</value>
   </data>
-  <data name="dontSkipAutoBackupsIfPlayCountsChangedCheckBox.ToolTip" xml:space="preserve">
-    <value />
+  <data name="storeTrackIdsInCustomTagCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>368, 157</value>
+  </data>
+  <data name="storeTrackIdsInCustomTagCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>350, 15</value>
+  </data>
+  <data name="storeTrackIdsInCustomTagCheckBoxLabel.Text" xml:space="preserve">
+    <value>Использовать свой тег для хранения идентификаторов треков</value>
+  </data>
+  <data name="storeTrackIdsInCustomTagCheckBoxLabel.ToolTip" xml:space="preserve">
+    <value>Архивация/восстановление тегов основано на внутренних идентификаторах треков 
+MusicBee, зависящих от библиотеки. По этой причине вы не можете восстановить теги 
+в библиотеку, отличную от той, из которой были созданы резервные копии тегов. Если 
+вы отметите эту опцию, плагин сохранит копию идентификаторов треков в выбранном вами 
+своем теге и будет восстановливать резервные копии тегов, используя этот тег для идентификации 
+треков вместо фактических идентификаторов треков.
+
+Это позволит вам восстановить теги в новую библиотеку, содержащую те же треки, если вы воссоздавали 
+библиотеку заново, например, на другом компьютере.
+
+Убедитесь, что этот свой тег хранится в теге файла, а не в базе данных MusicBee.</value>
+  </data>
+  <data name="storeTrackIdsInCustomTagCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>341, 157</value>
+  </data>
+  <data name="storeTrackIdsInCustomTagCheckBox.ToolTip" xml:space="preserve">
+    <value>Архивация/восстановление тегов основано на внутренних идентификаторах треков 
+MusicBee, зависящих от библиотеки. По этой причине вы не можете восстановить теги 
+в библиотеку, отличную от той, из которой были созданы резервные копии тегов. Если 
+вы отметите эту опцию, плагин сохранит копию идентификаторов треков в выбранном вами 
+своем теге и будет восстановливать резервные копии тегов, используя этот тег для идентификации 
+треков вместо фактических идентификаторов треков.
+
+Это позволит вам восстановить теги в новую библиотеку, содержащую те же треки, если вы воссоздавали 
+библиотеку заново, например, на другом компьютере.
+
+Убедитесь, что этот свой тег хранится в теге файла, а не в базе данных MusicBee.</value>
+  </data>
+  <data name="trackIdTagList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>726, 154</value>
+  </data>
+  <data name="trackIdTagList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>165, 23</value>
+  </data>
+  <data name="trackIdTagList.ToolTip" xml:space="preserve">
+    <value>Архивация/восстановление тегов основано на внутренних идентификаторах треков 
+MusicBee, зависящих от библиотеки. По этой причине вы не можете восстановить теги 
+в библиотеку, отличную от той, из которой были созданы резервные копии тегов. Если 
+вы отметите эту опцию, плагин сохранит копию идентификаторов треков в выбранном вами 
+своем теге и будет восстановливать резервные копии тегов, используя этот тег для идентификации 
+треков вместо фактических идентификаторов треков.
+
+Это позволит вам восстановить теги в новую библиотеку, содержащую те же треки, если вы воссоздавали 
+библиотеку заново, например, на другом компьютере.
+
+Убедитесь, что этот свой тег хранится в теге файла, а не в базе данных MusicBee.</value>
   </data>
   <data name="dontSkipAutoBackupsIfPlayCountsChangedLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>576, 15</value>
@@ -283,14 +304,8 @@
   <data name="dontSkipAutoBackupsIfPlayCountsChangedLabel.Text" xml:space="preserve">
     <value>Не пропускать автоархивирование, даже если изменились только счетчики проигрываний/пропусков</value>
   </data>
-  <data name="dontSkipAutoBackupsIfPlayCountsChangedLabel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>880, 4</value>
-  </data>
-  <data name="groupBox1.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>899, 212</value>
@@ -300,8 +315,5 @@
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Настройки (авто)архивации</value>
-  </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
   </data>
 </root>

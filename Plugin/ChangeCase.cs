@@ -1092,7 +1092,7 @@ namespace MusicBeePlugin
 
             if (this.ActiveControl != leftExceptionCharsBoxCustom && !CheckIfTheSameNumberOfCharsInStrings(leftExceptionCharsBoxCustom.Text, rightExceptionCharsBoxCustom.Text))
             {
-                MessageBox.Show(MbForm, MsgTheNumberOfOpeningExceptionCharactersMustBe,
+                MessageBox.Show(MbForm, MsgCsTheNumberOfOpeningExceptionCharactersMustBe,
                     string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 rightExceptionCharsBoxCustom.Focus();

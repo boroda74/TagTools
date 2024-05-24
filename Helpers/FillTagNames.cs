@@ -8,6 +8,28 @@ namespace MusicBeePlugin
     {
         internal void fillTagNames()
         {
+            //Custom tags
+            CustomTagNames = new string[16]; //***** Add new custom tags later!!!!
+
+            CustomTagNames[0] = MbApiInterface.Setting_GetFieldName(MetaDataType.Custom1);
+            CustomTagNames[1] = MbApiInterface.Setting_GetFieldName(MetaDataType.Custom2);
+            CustomTagNames[2] = MbApiInterface.Setting_GetFieldName(MetaDataType.Custom3);
+            CustomTagNames[3] = MbApiInterface.Setting_GetFieldName(MetaDataType.Custom4);
+            CustomTagNames[4] = MbApiInterface.Setting_GetFieldName(MetaDataType.Custom5);
+            CustomTagNames[5] = MbApiInterface.Setting_GetFieldName(MetaDataType.Custom6);
+            CustomTagNames[6] = MbApiInterface.Setting_GetFieldName(MetaDataType.Custom7);
+            CustomTagNames[7] = MbApiInterface.Setting_GetFieldName(MetaDataType.Custom8);
+            CustomTagNames[8] = MbApiInterface.Setting_GetFieldName(MetaDataType.Custom9);
+            CustomTagNames[9] = MbApiInterface.Setting_GetFieldName(MetaDataType.Custom10);
+            CustomTagNames[10] = MbApiInterface.Setting_GetFieldName(MetaDataType.Custom11);
+            CustomTagNames[11] = MbApiInterface.Setting_GetFieldName(MetaDataType.Custom12);
+            CustomTagNames[12] = MbApiInterface.Setting_GetFieldName(MetaDataType.Custom13);
+            CustomTagNames[13] = MbApiInterface.Setting_GetFieldName(MetaDataType.Custom14);
+            CustomTagNames[14] = MbApiInterface.Setting_GetFieldName(MetaDataType.Custom15);
+            CustomTagNames[15] = MbApiInterface.Setting_GetFieldName(MetaDataType.Custom16);
+
+
+            //Read only tags
             ReadonlyTagsNames = new string[48];
 
             ReadonlyTagsNames[0] = GenreCategoryName;

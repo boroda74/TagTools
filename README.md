@@ -8,7 +8,7 @@ Plugin requires MusicBee version **3.5** or higher, and can use additional featu
 
 *Note:*
 
-If you are familiar with the plugin quick update process, you can always [download latest plugin version here](https://www.mediafire.com/file/h2t08o9562efboi/mb\_TagTools\_latest.zip/file "target=\"\_blank\""). Copy the file "mb\_TagTools.dll" from the archive "mb\_TagTools\_latest.zip" to MusicBee "Plugins" folder, and overwrite the existing file.
+If you are familiar with the plugin quick update process, you can always [download latest plugin version here](https://www.mediafire.com/file/h2t08o9562efboi/mb\_TagTools\_latest.zip/file "target=\"\_blank\""). (NOTE: this latest version always requires the latest version of MusicBee which sometimes may be available as a beta). Copy the file "mb\_TagTools.dll" from the archive "mb\_TagTools\_latest.zip" to MusicBee "Plugins" folder, and overwrite the existing file.
 
 &nbsp;
 

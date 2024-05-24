@@ -2330,7 +2330,7 @@ namespace MusicBeePlugin
                 {
                     if (files.Length == 0)
                     {
-                        MessageBox.Show(MbForm, MsgSelectTrack, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        MessageBox.Show(MbForm, MsgSelectTracks, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return;
                     }
 
@@ -5651,7 +5651,7 @@ namespace MusicBeePlugin
             else
             {
                 if (!SavedSettings.dontShowPredefinedPresetsCantBeChangedMessage &&
-                    MessageBox.Show(this, MsgPredefinedPresetsCantBeChanged,
+                    MessageBox.Show(this, MsgAsrPredefinedPresetsCantBeChanged,
                     string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
                 {
                     SavedSettings.dontShowPredefinedPresetsCantBeChangedMessage = true;
