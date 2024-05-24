@@ -16,4 +16,4 @@ You can use special functions in substitution fields of "Advanced Search \& Repl
 
 **\\@eval\[\[virtual\_tag\_expression\]\]** : returns result of calculation of ***virtual\_tag\_expression***, e.g. ***\\@eval\[\[$Sub(\<Play Count\>,\<Skip Count\>)\]\]***
 
-**\\@repunct\[\[string\]\]** : changes Unicode punctuation marks to ASCII analogs, e.g. « to \<\< 
+**\\@repunct\[\[string\]\]** : changes Unicode punctuation marks to ASCII analogs, e.g. « to \<\<

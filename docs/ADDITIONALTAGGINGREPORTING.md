@@ -57,7 +57,7 @@ Allows to export some library statistics for currently displayed tracks to exter
 
 &nbsp;
 
-Also, "Library Reports" allows to calculate aggregated functions of one or more presets and to save results to (custom) tags at startup or manually. This may be useful for *auto-saving* or manual saving such values as "Summary play counts of albums" or "Number of tracks for each artist", etc. to (custom) tags, i.e. it's some analog of virtual tags with the ability to operate not only on tags of the current track, but on tags of all tracks.
+Also, "Library Reports" allows to calculate aggregated functions of one or more presets and to save results to (custom or generic) tags at startup or manually. This may be useful for *auto-saving* or manual saving such values as "Summary play counts of albums" or "Number of tracks for each artist", etc. to (custom) tags, i.e. it's some analog of virtual tags with the ability to operate not only on tags of the current track, but on tags of all tracks.
 
 [View some LR report examples](LREXAMPLES.md)
 
@@ -77,9 +77,9 @@ Also, see two predefined presets "LIBRARY TOTALS" and "LIBRARY AVERAGES" of "Lib
 
 $LR(\<URL\>,function\_id)
 
-To use this function open library reports window, create one or more presets, each with one or more aggregated functions and assign a function id (any string containing a-z chars, numbers and symbols . : - \_ ) to the functions. $LR functions are calculated dynamically. You can write all aggregate function results to \<Null\> pseudo-tag in this case (i.e. do not write them to any tags at all if you use these functions only for virtual tags). All $LR virtual tag functions are calculated, updated and displayed dynamically. Also, you can assign a LR function at the same time a ***function\_id*** and chose to *store function results in (custom) tag*. In this case, LR will use a stored tag as a persistent function result cache. If you change some tags or add new tracks to the library, this cache will *dynamically update*. But it’s **required** to fill this cache *initially* for all tracks existing in the library/current tags. You can’t proceed with saving LR presets without executing all concerned presets.&nbsp;
+To use this function open library reports window, create one or more presets, each with one or more aggregated functions and assign a function id (any string containing **a-z** chars, **numbers** and symbols **. : - \_** ) to the functions. You can write all aggregate function results to \<Null\> pseudo-tag in this case (i.e. do not write them to any tags at all if you use these functions only for virtual tags). All $LR virtual tag functions are calculated, updated and displayed *dynamically*. Also, you can at the same time *assign an id* to the function **and** choose *to store function results in (custom) tag*. In this case, LR will use a stored tag as a persistent function result cache. If you change some tags or add new tracks to the library, this cache will *dynamically update*. However, **it’s highly recommended** first to fill this cache for all existing tracks/current tags in the current library to avoid UI slowdowns and freezes when using MusicBee regularly. You will be automatically prompted to execute all affected presets and fill the cache for the current library if you define such LR presets.&nbsp;
 
-"Library Reports" virtual tag functions allow to gather and display in the main panel some library statistics for currently displayed tracks.
+"Library Reports" virtual tag functions allow you to collect and display some library statistics for currently displayed tracks in the main window. Either you can use virtual tags that use $LR functions in auto-playlist filter criteria. However, in this case it's **strongly recommended** to cache the results of the LR functions in tags.
 
 *LR virtual tag functions may be even more useful if they are used in the grouping header of "Albums and Tracks" view.*
 
@@ -163,6 +163,8 @@ Command provides an easy way to compare tags of 2 (or more) tracks.
 
 Copies specified tags from selected files to clipboard.
 
+&nbsp;
+
 ### Paste Tags from Clipboard
 
 Pastes tags to selected files from clipboard.
@@ -173,6 +175,7 @@ Pastes tags to selected files from clipboard.
 * It's impossible to copy tags from several tracks and paste them to another number of tracks.
 * It's possible to copy tags in MusicBee and paste them to another application like Microsoft Excel or Notepad++.
 * Usually tags are pasted to tracks in the track display order, but you can also copy \<Full path w/o ext.\> (full track path including filename **without** extension) or URL (full track path including filename **and** extension) pseudo-tags along with other tags to clipboard. Here, the plugin will prompt you to match tracks according to these tags or use the track displayed order as usual. It's not recommended to copy both these pseudo-tags to clipboard to avoid confusion, but just in case the URL pseudo-tag takes precedence. If you choose to match tracks by path, the number of tracks from which the tags have been copied may not be equal to the number of tracks to which the tags are pasted.
+* If you paste tags from external application (e.g. from Microsoft Excel or Notepad++) make sure that *the first copied row* contains *tag names* (exactly as *the tags are named in MusicBee*).
 
 &nbsp;
 
