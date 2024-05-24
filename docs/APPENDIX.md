@@ -6,7 +6,7 @@ Do all you want with plugin binary and source code at your own risk.
 
 ### Source code
 
-MS VS 2022 project, C#. Most people don't need this.&nbsp;
+MS VS 2022 project, C#. Most people don't need this.
 
 ### Backup download
 
@@ -20,4 +20,4 @@ MS VS 2022 project, C#. Most people don't need this.&nbsp;
 
 This project has been checked by PVS-Studio.
 
-**[PVS-Studio](https://pvs-studio.ru/ru/pvs-studio/?utm\_source=website\&utm\_medium=github\&utm\_campaign=open\_source "target=\"\_blank\"") - static analyzer for C, C++, C#, and Java code.
+**[PVS-Studio](https://pvs-studio.ru/ru/pvs-studio/?utm\_source=website\&utm\_medium=github\&utm\_campaign=open\_source "target=\"\_blank\"") - static analyzer for C, C++, C#, and Java code.**

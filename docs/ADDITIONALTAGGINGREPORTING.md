@@ -67,7 +67,7 @@ Also, see two predefined presets "LIBRARY TOTALS" and "LIBRARY AVERAGES" of "Lib
 
 "Library Reports" command supports multiple item splitters for grouping tags. For example, you can define splitter ";" for "Artist" or "Genre" tags to split multiple artists or genres. If several tags are split (i.e., several tags for one track may have several values) then *all combinations of split values for every tag* will be included in the LR report.
 
-"Library Reports" supports virtual tag expressions (any expressions valid for virtual tags).&nbsp;
+"Library Reports" supports virtual tag expressions (any expressions valid for virtual tags).
 
 [Read more about "Library Reports" virtual tag expressions](LREXPRESSIONS.md)
 
@@ -77,7 +77,7 @@ Also, see two predefined presets "LIBRARY TOTALS" and "LIBRARY AVERAGES" of "Lib
 
 $LR(\<URL\>,function\_id)
 
-To use this function open library reports window, create one or more presets, each with one or more aggregated functions and assign a function id (any string containing **a-z** chars, **numbers** and symbols **. : - \_** ) to the functions. You can write all aggregate function results to \<Null\> pseudo-tag in this case (i.e. do not write them to any tags at all if you use these functions only for virtual tags). All $LR virtual tag functions are calculated, updated and displayed *dynamically*. Also, you can at the same time *assign an id* to the function **and** choose *to store function results in (custom) tag*. In this case, LR will use a stored tag as a persistent function result cache. If you change some tags or add new tracks to the library, this cache will *dynamically update*. However, **it’s highly recommended** first to fill this cache for all existing tracks/current tags in the current library to avoid UI slowdowns and freezes when using MusicBee regularly. You will be automatically prompted to execute all affected presets and fill the cache for the current library if you define such LR presets.&nbsp;
+To use this function open library reports window, create one or more presets, each with one or more aggregated functions and assign a function id (any string containing **a-z** chars, **numbers** and symbols **. : - \_** ) to the functions. You can write all aggregate function results to \<Null\> pseudo-tag in this case (i.e. do not write them to any tags at all if you use these functions only for virtual tags). All $LR virtual tag functions are calculated, updated and displayed *dynamically*. Also, you can at the same time *assign an id* to the function **and** choose *to store function results in (custom) tag*. In this case, LR will use a stored tag as a persistent function result cache. If you change some tags or add new tracks to the library, this cache will *dynamically update*. However, **it’s highly recommended** first to fill this cache for all existing tracks/current tags in the current library to avoid UI slowdowns and freezes when using MusicBee regularly. You will be automatically prompted to execute all affected presets and fill the cache for the current library if you define such LR presets.
 
 "Library Reports" virtual tag functions allow you to collect and display some library statistics for currently displayed tracks in the main window. Either you can use virtual tags that use $LR functions in auto-playlist filter criteria. However, in this case it's **strongly recommended** to cache the results of the LR functions in tags.
 

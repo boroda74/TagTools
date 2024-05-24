@@ -2,15 +2,13 @@
 
 Plugin introduces several new virtual tag functions (they also can be used in various filename templates, e.g. in the file organizer).
 
-**&nbsp;
+&nbsp;
 
 *Note:*
 
+Use these functions like native MusicBee functions (i.e. without any initial setup required by $LR() and $ASR() functions).
 
-
-**Use these functions like native MusicBee functions (i.e. without any initial setup required by $LR() and $ASR() functions).
-
-**Everywhere you can use either literals or MusicBee tags of appropriate types as function parameters, e.g. $NumberOfDays(\<Year\>,\<Original Year\>) or $SubDateTime(\<Date Added\>,01/01/2000).
+Everywhere you can use either literals or MusicBee tags of appropriate types as function parameters, e.g. $NumberOfDays(\<Year\>,\<Original Year\>) or $SubDateTime(\<Date Added\>,01/01/2000).
 
 **$Random(max\_number)** : random integer number between 0 and *max\_number* (including them)
 
