@@ -12,80 +12,84 @@ Everywhere you can use either literals or MusicBee tags of appropriate types as 
     e.g. $NumberOfDays(\<Year\>,\<Original Year\>) or $SubDateTime(\<Date Added\>,01/01/2000).
 
 <pre>
-**$Random(max\_number)** : random integer number between 0 and *max\_number* (including them)
+<b>$Random(max\_number)</b> : random integer number between 0 and <i>max\_number</i> (including them)
 
-**$Now()** : returns current date/time. Date/time format depends on your Windows regional settings, 
-    something like **11/01/2022 02:30:00 pm** (for US regional settings) 
-    or **01.11.2022 14:30:00** (for European regional settings)
+<b>$Now()</b> : returns current date/time. Date/time format depends on your Windows regional settings, 
+    something like <b>11/01/2022 02:30:00 pm</b> (for US regional settings) 
+    or <b>01.11.2022 14:30:00</b> (for European regional settings)
 
-**$AddDuration(duration1,duration2)** : adds *duration2* to *duration1*. Duration format is similar to date/time format 
-    without "**am/pm**" suffix, but allowed values are different, e.g. **00/01/0000 00:00:00** is valid duration, but is not 
+<b>$AddDuration(duration1,duration2)</b> : adds <i>duration2</i> to <i>duration1</i>. Duration format is similar to date/time format 
+    without "<b>am/pm</b>" suffix, but allowed values are different, e.g. <b>00/01/0000 00:00:00</b> is valid duration, but is not 
     a valid date/time. Either date part or time part can be omitted. It will be defaulted to zero value
 
-**$SubDuration(duration1,duration2)** : subtracts *duration2* from *duration1*
+<b>$SubDuration(duration1,duration2)</b> : subtracts <i>duration2</i> from <i>duration1</i>
 
-**$MulDuration(duration,number)** : multiplies *duration* by floating point or integer *number*, e.g. *$MulDuration(\<Time\>,\<Play Count\>)*
+<b>$MulDuration(duration,number)</b> : multiplies <i>duration</i> by floating point or integer <i>number</i>, e.g. <i>$MulDuration(\<Time\>,\<Play Count\>)</i>
 
-**$SubDateTime(datetime1,datetime2)** : subtracts *datetime2* from *datetime1*. Returns duration
+<b>$SubDateTime(datetime1,datetime2)</b> : subtracts <i>datetime2</i> from <i>datetime1</i>. Returns duration
 
-**$NumberOfDays(datetime1,datetime2)** : returns the number of days between *datetime1* and *datetime2*
+<b>$NumberOfDays(datetime1,datetime2)</b> : returns the number of days between <i>datetime1</i> and <i>datetime2</i>
 
-**$AddDurationToDateTime(datetime,duration)** : adds *duration* to *datetime*
+<b>$AddDurationToDateTime(datetime,duration)</b> : adds <i>duration</i> to <i>datetime</i>
 
-**$SubDurationFromDateTime(datetime,duration)** : subtracts *duration* from *datetime*
+<b>$SubDurationFromDateTime(datetime,duration)</b> : subtracts <i>duration</i> from <i>datetime</i>
 
-**$SentenceCase(string,sentence\_separators)** : where ***sentence\_separators*** is the list of characters after which the words will become 
-    capitalized. Characters in the ***sentence\_separators*** list may be separated by spaces or not separated at all. For example, these two 
-    character lists mean the same: "**. , -**" and "**.,-**". A dot, followed by a space, is always treated as a sentence separator. You can omit the last 
-    parameter simply by putting the closing parenthesis earlier, i.e., *$SentenceCase(string)*
+<b>$SentenceCase(string,sentence\_separators)</b> : where <b><i>sentence\_separators</i></b> is the list of characters after which 
+    the words will become capitalized. Characters in the <b><i>sentence\_separators</i></b> list may be separated by spaces or 
+    not separated at all. For example, these two character lists mean the same: "<b>. , -</b>" and "<b>.,-</b>". A dot, followed by 
+    a space, is always treated as a sentence separator. You can omit the last parameter simply by putting the closing 
+    parenthesis earlier, i.e., <i>$SentenceCase(string)</i>
 
-**$TitleCase(string,lower\_case\_words,word\_separators,lower\_case\_between\_chars\_opening\_list,lower\_case\_between\_chars\_closing\_list,lower\_case\_after\_chars)** : 
-    where *lower\_case\_words* is the list of words separated by spaces, which will become lowercase (*always except for the first word* 
-    and *except for the last words if not lowercase by other parameters*). *word\_separators* is the list of characters after which the words will be 
-    capitalized. *lower\_case\_between\_chars\_opening\_list* and *lower\_case\_between\_chars\_closing\_list* are the lists of characters *between* 
-    which the words become lowercase. The number of characters in both lists must be the same; the opening and closing characters are paired by 
-    their position in the lists (the lists may be, e.g., "**( \[ {**" and "**) \] }**"). *lower\_case\_after\_chars* consists of a list of characters, *after* which 
-    the words become lowercase (e.g., **'** for something like "Someone#8202;**'**&#8202;s"). *The first word* will *always* be capitalized. 
-    It’s recommended to enclose the last four lists into quotes (e.g., **"\& . -"**). Characters in all character lists may be separated by spaces or not separated at all. 
-    For example, these two character lists mean the same: "**. , -**" and "**.,-**". You can omit any parameter except for the first one, using 
-    a single character **\`** *not* surrounded by spaces to pass empty parameter. You can *safely use* character **\`** in its literal meaning 
-    if it’s typed in the list *along with other characters*. To use *the single character* **\`** in its literal meaning (*not* as an omitted 
-    parameter) type "**\\\`**", and to use *the single character* **\\** in its literal meaning type "**\\\\**". You can omit any number of 
-    end parameters simply by putting closing parenthesis earlier, e.g., *$TitleCase(string,lower\_case\_words,word\_separators)*
+<b>$TitleCase(string,lower\_case\_words,word\_separators,lower\_case\_between\_chars\_opening\_list,lower\_case\_between\_chars\_closing\_list,lower\_case\_after\_chars)</b> : 
+    where <i>lower\_case\_words</i> is the list of words separated by spaces, which will become lowercase 
+    (<i>always except for the first word</i> and <i>except for the last words if not lowercase by other parameters</i>). 
+    <i>word\_separators</i> is the list of characters after which the words will be 
+    capitalized. <i>lower\_case\_between\_chars\_opening\_list</i> and <i>lower\_case\_between\_chars\_closing\_list</i> are 
+    the lists of characters <i>between</i> which the words become lowercase. The number of characters in both lists must be 
+    the same; the opening and closing characters are paired by their position in the lists (the lists may 
+    be, e.g., "<b>( \[ {</b>" and "<b>) \] }</b>"). <i>lower\_case\_after\_chars</i> consists of a list of characters, <i>after</i> which the words 
+    become lowercase (e.g., <b>'</b> for something like "Someone#8202;<b>'</b>&#8202;s"). <i>The first word</i> will <i>always</i> be capitalized. 
+    It’s recommended to enclose the last four lists into quotes (e.g., <b>"\& . -"</b>). Characters in all character lists may be separated 
+    by spaces or not separated at all. For example, these two character lists mean the same: "<b>. , -</b>" and "<b>.,-</b>". You can omit 
+    any parameter except for the first one, using a single character <b>\`</b> <i>not</i> surrounded by spaces to pass empty parameter. 
+    You can <i>safely use</i> character <b>\`</b> in its literal meaning if it’s typed in the list <i>along with other characters</i>. 
+    To use <i>the single character</i> <b>\`</b> in its literal meaning (<i>not</i> as an omitted parameter) type "<b>\\\`</b>", and to use 
+    <i>the single character</i> <b>\\</b> in its literal meaning type "<b>\\\\</b>". You can omit any number of end parameters simply 
+    by putting closing parenthesis earlier, e.g., <i>$TitleCase(string,lower\_case\_words,word\_separators)</i>
 
-**$Sqrt(number)** : square root. May be useful for collecting some library statistics (in conjunction with LR functions)
+<b>$Sqrt(number)</b> : square root. May be useful for collecting some library statistics (in conjunction with LR functions)
 
-**$eq(number1,number2)** : compares two integer or fractional numbers, determines if *number1* is **eq**ual to *number2*, 
-    e.g. *$eq(1.0,1)* returns "**T**"
+<b>$eq(number1,number2)</b> : compares two integer or fractional numbers, determines if <i>number1</i> is <b>eq</b>ual to <i>number2</i>, 
+    e.g. <i>$eq(1.0,1)</i> returns "<b>T</b>"
 
-**$ne(number1,number2)** : returns "**T**" if *number1* is **n**ot **e**qual to *number2*, otherwise returns "**F**"
+<b>$ne(number1,number2)</b> : returns "<b>T</b>" if <i>number1</i> is <b>n</b>ot <b>e</b>qual to <i>number2</i>, otherwise returns "<b>F</b>"
 
-**$gt(number1,number2)** : returns "**T**" if *number1* is **g**reater **t**han *number2*, otherwise returns "**F**"
+<b>$gt(number1,number2)</b> : returns "<b>T</b>" if <i>number1</i> is <b>g</b>reater <b>t</b>han <i>number2</i>, otherwise returns "<b>F</b>"
 
-**$lt(number1,number2)** : returns "**T**" if *number1* is **l**ess **t**han to *number2*, otherwise returns "**F**"
+<b>$lt(number1,number2)</b> : returns "<b>T</b>" if <i>number1</i> is <b>l</b>ess <b>t</b>han to <i>number2</i>, otherwise returns "<b>F</b>"
 
-**$ge(number1,number2)** : returns "**T**" if *number1* is **g**reater than or **e**qual to to *number2*, otherwise returns "**F**"
+<b>$ge(number1,number2)</b> : returns "<b>T</b>" if <i>number1</i> is <b>g</b>reater than or <b>e</b>qual to to <i>number2</i>, otherwise returns "<b>F</b>"
 
-**$le(number1,number2)** : returns "**T**" if *number1* is **l**ess than or **e**qual to *number2*, otherwise returns "**F**"
+<b>$le(number1,number2)</b> : returns "<b>T</b>" if <i>number1</i> is <b>l</b>ess than or <b>e</b>qual to <i>number2</i>, otherwise returns "<b>F</b>"
 
-**$Round(number,number\_of\_digits\_after\_decimal\_point)** : *$Round(4.28,1)* returns **4.3**, and *$Round(5.2,0)* returns **5**
+<b>$Round(number,number\_of\_digits\_after\_decimal\_point)</b> : <i>$Round(4.28,1)</i> returns <b>4.3</b>, and <i>$Round(5.2,0)</i> returns <b>5</b>
 
-**$RoundUp(number,number\_of\_digits\_after\_decimal\_point)** : *$RoundUp(5.2,0)* returns **6**
+<b>$RoundUp(number,number\_of\_digits\_after\_decimal\_point)</b> : <i>$RoundUp(5.2,0)</i> returns <b>6</b>
 
-**$RoundDown(number,number\_of\_digits\_after\_decimal\_point)** : *$RoundDown(4.28,1)* returns **4.2**
+<b>$RoundDown(number,number\_of\_digits\_after\_decimal\_point)</b> : <i>$RoundDown(4.28,1)</i> returns <b>4.2</b>
 
-**$Name(\<URL\>)** : returns file name without extension and path to file. Type *\<URL\>* exactly like this, don't use other function 
+<b>$Name(\<URL\>)</b> : returns file name without extension and path to file. Type <i>\<URL\></i> exactly like this, don't use other function 
     argument value
 
-**$DateCreated(\<URL\>)** : returns creation date/time of music file (*not* last modification date/time)
+<b>$DateCreated(\<URL\>)</b> : returns creation date/time of music file (<i>not</i> last modification date/time)
 
-**$Char(hexadecimal\_code)** : returns Unicode character with given *hexadecimal\_code*, e.g. *$Char(a7)* returns "**§**" (U+00A7)
+<b>$Char(hexadecimal\_code)</b> : returns Unicode character with given <i>hexadecimal\_code</i>, e.g. <i>$Char(a7)</i> returns "<b>§</b>" (U+00A7)
 
-**$CharN(hexadecimal\_code,decimal\_number\_of\_times)** : returns Unicode character with given *hexadecimal\_code* repeated 
-    the given number of times, e.g. *$CharN(a7,3)* returns "**§§§**" (U+00A7 repeated 3 times)
+<b>$CharN(hexadecimal\_code,decimal\_number\_of\_times)</b> : returns Unicode character with given <i>hexadecimal\_code</i> repeated 
+    the given number of times, e.g. <i>$CharN(a7,3)</i> returns "<b>§§§</b>" (U+00A7 repeated 3 times)
 
-**$TagContainsAnyString(\<URL\>,tag\_name,string1\|string2\|etc.)** : returns "**T**" if tag contains any of the strings separated by \|, otherwise 
-    returns "**F**". *tag\_name* must be written without angle brackets, e.g. *$TagContainsAnyString(\<URL\>,Lyrics,water\|river)*
+<b>$TagContainsAnyString(\<URL\>,tag\_name,string1\|string2\|etc.)</b> : returns "<b>T</b>" if tag contains any of the strings separated by \|, otherwise 
+    returns "<b>F</b>". <i>tag\_name</i> must be written without angle brackets, e.g. <i>$TagContainsAnyString(\<URL\>,Lyrics,water\|river)</i>
 
-**$TagContainsAllStrings(\<URL\>,tag\_name,string1\|string2\|etc.)** : returns "**T**" if tag contains all strings separated by \|, otherwise returns "**F**"
+<b>$TagContainsAllStrings(\<URL\>,tag\_name,string1\|string2\|etc.)</b> : returns "<b>T</b>" if tag contains all strings separated by \|, otherwise returns "<b>F</b>"
 </pre>
