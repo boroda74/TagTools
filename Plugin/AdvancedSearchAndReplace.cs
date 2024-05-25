@@ -1295,7 +1295,7 @@ namespace MusicBeePlugin
 
                 parameter0 = ChangeCase.ChangeWordsCase(parameter0, ChangeCase.ChangeCaseOptions.LowerCase, null, false,
                     null, SavedSettings.wordSeparatorsAsr.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries));
-                string result = ChangeCase.ChangeWordsCase(parameter0, ChangeCase.ChangeCaseOptions.SentenceCase, exceptionWords, false,
+                string result = ChangeCase.ChangeSentenceCase(parameter0, exceptionWords, false,
                     SavedSettings.exceptionCharsAsr.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
                     SavedSettings.leftExceptionCharsAsr.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
                     SavedSettings.rightExceptionCharsAsr.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
