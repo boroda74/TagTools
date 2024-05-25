@@ -11,8 +11,7 @@ You can use special functions in substitution fields of "Advanced Search \& Repl
 <b>\@tc[[string;;ignored_words]]</b> : returns Title Cased string except for <b><i>ignored_words</i></b> separated 
     by spaces, e.g <b><i>\@tc[[$1;;a the an&gt;]]</i></b> will return title cased (except for words "a", "the", "an") first 
     captured in search pattern string, and <b><i>\@tc[[$1]]</i></b> will return title cased string, not using 
-    any <b><i>ignored_words</i></b>. <b><i>ignored_words</i></b> will be unchanged, <i>not become lowercase</i>\! To lowercase 
-    them, use: <b><i>\@tc[[@lc[[string]];;ignored_words]]</i></b>. The first and the last words will be title cased always
+    any <b><i>ignored_words</i></b>. <b><i>ignored_words</i></b> will be lowercase. The first and the last words will be title cased always
 
 <b>\@lc[[string;;ignored_words]]</b> : returns lower cased string except for <b><i>ignored_words</i></b>
 
