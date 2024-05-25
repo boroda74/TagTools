@@ -2177,19 +2177,14 @@ namespace MusicBeePlugin
 
 
             //First char may be some symbol like "<", let's search for the second char in this case
-            bool searchedCharIsLetter = ChangeCase.IsCharCaseSensitive(e.KeyChar);
-            string firstLetter = e.KeyChar.ToString().ToLower();
+            string searchedLetter = e.KeyChar.ToString().ToLower();
 
-            foreach (string tagName in customComboBox.Items)
+
+            for (int searchedIndex = 0; searchedIndex < 2; searchedIndex++)
             {
-                if (tagName.Length > 0 && tagName[0].ToString().ToLower() == firstLetter)
+                foreach (string tagName in customComboBox.Items)
                 {
-                    customComboBox.SelectedItem = tagName;
-                    return;
-                }
-                else if (searchedCharIsLetter && !ChangeCase.IsCharCaseSensitive(tagName[0]))
-                {
-                    if (tagName.Length > 1 && tagName[1].ToString().ToLower() == firstLetter)
+                    if (tagName.Length > searchedIndex && tagName[searchedIndex].ToString().ToLower() == searchedLetter)
                     {
                         customComboBox.SelectedItem = tagName;
                         return;

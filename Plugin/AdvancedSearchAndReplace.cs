@@ -416,6 +416,7 @@ namespace MusicBeePlugin
 
         public enum TagType
         {
+            Undefined = -1, //****** remove  carefully!!!!
             NotUsed = 0,
             Readonly = 1,
             Writable = 2,
@@ -744,6 +745,25 @@ namespace MusicBeePlugin
                 savedPreset.hotkeyAssigned = false;
 
                 file.Close();
+
+
+                if (savedPreset.parameterTagTypeNew == TagType.Undefined) //***** remove later!!!
+                    savedPreset.parameterTagTypeNew = TagType.NotUsed;
+
+                if (savedPreset.parameterTag2TypeNew == TagType.Undefined)
+                    savedPreset.parameterTag2TypeNew = TagType.NotUsed;
+
+                if (savedPreset.parameterTag3TypeNew == TagType.Undefined)
+                    savedPreset.parameterTag3TypeNew = TagType.NotUsed;
+
+                if (savedPreset.parameterTag4TypeNew == TagType.Undefined)
+                    savedPreset.parameterTag4TypeNew = TagType.NotUsed;
+
+                if (savedPreset.parameterTag5TypeNew == TagType.Undefined)
+                    savedPreset.parameterTag5TypeNew = TagType.NotUsed;
+
+                if (savedPreset.parameterTag6TypeNew == TagType.Undefined)
+                    savedPreset.parameterTag6TypeNew = TagType.NotUsed;
 
                 return savedPreset;
             }
@@ -3067,8 +3087,8 @@ namespace MusicBeePlugin
                     presetListLastSelectedIndex = -1;
                     refreshPresetList(preset.guid);
                 }
-                else if (preset.getName() != backedUpPresetName || descriptionBox.Text != GetDictValue(preset.descriptions, Language)
-                    || preset.userPreset != backedUpPreset.userPreset || preset.customizedByUser != backedUpPreset.customizedByUser)
+                else// if (preset.getName() != backedUpPresetName || descriptionBox.Text != GetDictValue(preset.descriptions, Language)
+                    //|| preset.userPreset != backedUpPreset.userPreset || preset.customizedByUser != backedUpPreset.customizedByUser)
                 {
                     refreshPresetList(preset.guid);
                 }

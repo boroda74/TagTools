@@ -26,6 +26,7 @@ namespace MusicBeePlugin
         private CustomComboBox rightExceptionCharsBoxCustom;
         private CustomComboBox wordSeparatorsBoxCustom;
 
+        private bool rightExceptionCharsBoxLeaving = false;
 
         private readonly DataGridViewCellStyle unchangedCellStyle = new DataGridViewCellStyle(UnchangedCellStyle);
         private readonly DataGridViewCellStyle changedCellStyle = new DataGridViewCellStyle(ChangedCellStyle);
@@ -1088,12 +1089,20 @@ namespace MusicBeePlugin
 
         private void rightExceptionCharsBox_Leave(object sender, EventArgs e)
         {
+            if (rightExceptionCharsBoxLeaving)
+                return;
+
+
             rightExceptionCharsBoxCustom.Text = Regex.Replace(rightExceptionCharsBoxCustom.Text.Trim(' '), @"\s{2,}", " ");
 
             if (this.ActiveControl != leftExceptionCharsBoxCustom && !CheckIfTheSameNumberOfCharsInStrings(leftExceptionCharsBoxCustom.Text, rightExceptionCharsBoxCustom.Text))
             {
+                rightExceptionCharsBoxLeaving = true;
+
                 MessageBox.Show(MbForm, MsgCsTheNumberOfOpeningExceptionCharactersMustBe,
                     string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                rightExceptionCharsBoxLeaving = false;
 
                 rightExceptionCharsBoxCustom.Focus();
                 rightExceptionCharsBoxCustom.SelectionStart = rightExceptionCharsBoxCustom.Text.Length + 1;

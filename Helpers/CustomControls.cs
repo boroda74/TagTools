@@ -138,6 +138,7 @@ namespace MusicBeePlugin
             listBox.IntegralHeight = false;
             listBox.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom;
             listBox.Margin = new Padding(0, 0, 0, 0);
+            listBox.TabStop = false;
 
             listBox.SelectedIndex = -1;
 
@@ -274,6 +275,7 @@ namespace MusicBeePlugin
             textBox.Margin = new Padding(0, 0, 0, 0);
             textBox.Size = new Size(comboBox.Width - customScrollBarInitialWidth, textBox.Height);
             textBox.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
+            textBox.TabStop = false;
 
             if (comboBox.DropDownStyle == ComboBoxStyle.DropDownList)
                 textBox.Click += button_Click;
@@ -301,8 +303,8 @@ namespace MusicBeePlugin
             button.Image = Plugin.DownArrowComboBoxImage;
             button.TabStop = false;
 
-            //button.Click += button_Click;//******
-            button.GotFocus += Button_GotFocus;
+            //button.Click += button_Click;//****
+            button.GotFocus += button_Click;
 
             ownerForm.skinControl(button);
             button.FlatAppearance.BorderColor = ownerForm.narrowScrollBarBackColor;
@@ -351,6 +353,7 @@ namespace MusicBeePlugin
             CopyComboBoxEventHandlers(comboBox, this);
 
 
+            this.GotFocus += CustomComboBox_GotFocus;
             this.SizeChanged += customComboBox_SizeChanged;
             customComboBox_SizeChanged(this, null);
 
@@ -372,6 +375,11 @@ namespace MusicBeePlugin
             this.Location = location;
 
             ownerForm.namesComboBoxes.Add(this.Name, this);
+        }
+
+        private void CustomComboBox_GotFocus(object sender, EventArgs e)
+        {
+            textBox.Focus();
         }
 
         public new void Dispose()
@@ -844,11 +852,16 @@ namespace MusicBeePlugin
             {
                 int index = listBox.SelectedIndex;
                 listBox.SelectedIndex = -1;
-                SelectedIndex = index;
                 textBox.Focus();
-            }
+                dropDown.Close();
 
-            dropDown.Close();
+                SelectedIndex = index;
+            }
+            else
+            {
+                textBox.Focus();
+                dropDown.Close();
+            }
         }
 
         private void listBox_MouseMove(object sender, MouseEventArgs e)
@@ -870,12 +883,6 @@ namespace MusicBeePlugin
             dropDownClosedTime = DateTime.UtcNow;
 
             base.Events[EVENT_DROPDOWNCLOSED]?.DynamicInvoke(this, null);
-        }
-
-        private void Button_GotFocus(object sender, EventArgs e)
-        {
-
-            button_Click(null, null);
         }
 
         private void button_Click(object sender, EventArgs e)
