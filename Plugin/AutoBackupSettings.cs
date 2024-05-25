@@ -131,7 +131,7 @@ namespace MusicBeePlugin
             if (!customTrackIdTagWarningShown && UseCustomTrackIdTag != SavedSettings.useCustomTrackIdTag)
             {
                 customTrackIdTagWarningShown = true;
-                MessageBox.Show(this, MsgBrCreateNewBaselineBackupBeforeMusicBeeRestart, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, MsgBrCreateNewBaselineBackupOrRestoreTagsBeforeMusicBeeRestart, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
@@ -149,7 +149,7 @@ namespace MusicBeePlugin
             if (!customTrackIdTagWarningShown && UseCustomTrackIdTag && CustomTrackIdTag != SavedSettings.customTrackIdTag)
             {
                 customTrackIdTagWarningShown = true;
-                MessageBox.Show(this, MsgBrCreateNewBaselineBackupBeforeMusicBeeRestart, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, MsgBrCreateNewBaselineBackupOrRestoreTagsBeforeMusicBeeRestart, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 

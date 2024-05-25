@@ -940,7 +940,7 @@ namespace MusicBeePlugin
         internal static string MsgBrCreateBaselineWarning;
         internal static string MsgBrBackupBaselineFileDoesntExist;
         internal static string MsgBrThisIsTheBackupOfDifferentLibrary;
-        internal static string MsgBrCreateNewBaselineBackupBeforeMusicBeeRestart;
+        internal static string MsgBrCreateNewBaselineBackupOrRestoreTagsBeforeMusicBeeRestart;
 
         internal static string MsgUnsupportedMusicBeeFontType;
 
@@ -971,7 +971,7 @@ namespace MusicBeePlugin
         internal static string CtlAsrAllTagsCellTooTip;
         internal static string MsgAsrPresetsUsingAllTagsPseudoTagNameCannotBeAutoApplied;
 
-        internal static string SbAutoBackuping;
+        internal static string SbAutoBackingUp;
         internal static string SbMovingBackupsToNewFolder;
         internal static string SbMakingTagBackup;
         internal static string SbRestoringTagsFromBackup;
@@ -979,7 +979,7 @@ namespace MusicBeePlugin
         internal static string SbMovingBackups;
         internal static string SbDeletingBackups;
         internal static string SbTagAutoBackupSkipped;
-        internal static string SbCompairingTags;
+        internal static string SbComparingTags;
 
         internal static string CtlWarning;
         internal static string CtlMusicBeeBackupType;
@@ -2892,8 +2892,8 @@ namespace MusicBeePlugin
 
         internal static void RegularAutoBackup(object state)
         {
-            MbApiInterface.MB_SetBackgroundTaskMessage(SbAutoBackuping);
-            BackupIndex.saveBackup(BrGetAutoBackupDirectory(SavedSettings.autoBackupDirectory) + @"\" + BrGetDefaultBackupFilename(SavedSettings.autoBackupPrefix), SbAutoBackuping, true);
+            MbApiInterface.MB_SetBackgroundTaskMessage(SbAutoBackingUp);
+            BackupIndex.saveBackup(BrGetAutoBackupDirectory(SavedSettings.autoBackupDirectory) + @"\" + BrGetDefaultBackupFilename(SavedSettings.autoBackupPrefix), SbAutoBackingUp, true);
 
 
             decimal autodeleteKeepNumberOfDays = SavedSettings.autodeleteKeepNumberOfDays > 0 ? SavedSettings.autodeleteKeepNumberOfDays : 1000000;
@@ -3078,6 +3078,7 @@ namespace MusicBeePlugin
                 File.Delete(BrGetBackupFilenameWithoutExtension(dialog.FileName) + ".mbc");
 
             MbApiInterface.MB_CreateParameterisedBackgroundTask(BackupIndex.saveBackupAsync, new object[] { BrGetBackupFilenameWithoutExtension(dialog.FileName), SbMakingTagBackup, false }, MbForm);
+            
             dialog.Dispose();
         }
 
@@ -3092,9 +3093,22 @@ namespace MusicBeePlugin
 
             if (dialog.ShowDialog(MbForm) == DialogResult.Cancel) return;
 
-            MbApiInterface.MB_SetBackgroundTaskMessage(SbRestoringTagsFromBackup);
+            if (UseCustomTrackIdTag)
+            {
+                bool useCustomTrackIdTag = UseCustomTrackIdTag;
+                int customTrackIdTag = CustomTrackIdTag;
 
+                //Let's cache previous value in case of baseline backup creation failure (which is handled inside (BackupIndex.saveBackupAsync())
+                UseCustomTrackIdTag = SavedSettings.useCustomTrackIdTag;
+                CustomTrackIdTag = SavedSettings.customTrackIdTag;
+
+                SavedSettings.useCustomTrackIdTag = useCustomTrackIdTag;
+                SavedSettings.customTrackIdTag = customTrackIdTag;
+            }
+
+            MbApiInterface.MB_SetBackgroundTaskMessage(SbRestoringTagsFromBackup);
             MbApiInterface.MB_CreateParameterisedBackgroundTask(BackupIndex.LoadBackupAsync, new object[] { BrGetBackupFilenameWithoutExtension(dialog.FileName), SbRestoringTagsFromBackup, false }, MbForm);
+
             dialog.Dispose();
         }
 
@@ -3109,9 +3123,22 @@ namespace MusicBeePlugin
 
             if (dialog.ShowDialog(MbForm) == DialogResult.Cancel) return;
 
-            MbApiInterface.MB_SetBackgroundTaskMessage(SbRestoringTagsFromBackup);
+            if (UseCustomTrackIdTag)
+            {
+                bool useCustomTrackIdTag = UseCustomTrackIdTag;
+                int customTrackIdTag = CustomTrackIdTag;
 
+                //Let's cache previous value in case of baseline backup creation failure (which is handled inside (BackupIndex.saveBackupAsync())
+                UseCustomTrackIdTag = SavedSettings.useCustomTrackIdTag;
+                CustomTrackIdTag = SavedSettings.customTrackIdTag;
+
+                SavedSettings.useCustomTrackIdTag = useCustomTrackIdTag;
+                SavedSettings.customTrackIdTag = customTrackIdTag;
+            }
+
+            MbApiInterface.MB_SetBackgroundTaskMessage(SbRestoringTagsFromBackup);
             MbApiInterface.MB_CreateParameterisedBackgroundTask(BackupIndex.LoadBackupAsync, new object[] { BrGetBackupFilenameWithoutExtension(dialog.FileName), SbRestoringTagsFromBackup, true }, MbForm);
+
             dialog.Dispose();
         }
 
@@ -3149,7 +3176,8 @@ namespace MusicBeePlugin
             File.Move(BrGetBackupFilenameWithoutExtension(openDialog.FileName) + ".mbc", BrGetBackupFilenameWithoutExtension(saveDialog.FileName) + ".mbc");
 
             MbApiInterface.MB_SetBackgroundTaskMessage(string.Empty);
-            openDialog.Dispose();
+            
+            openDialog.Dispose();//****** check everywhere!!!!!
             saveDialog.Dispose();
         }
 
@@ -3194,6 +3222,7 @@ namespace MusicBeePlugin
             }
 
             MbApiInterface.MB_SetBackgroundTaskMessage(string.Empty);
+            
             openDialog.Dispose();
             saveDialog.Dispose();
         }
@@ -3257,7 +3286,7 @@ namespace MusicBeePlugin
                 bool useCustomTrackIdTag = UseCustomTrackIdTag;
                 int customTrackIdTag = CustomTrackIdTag;
 
-                //Let's cache previous value in case of baseline backup creation failure
+                //Let's cache previous value in case of baseline backup creation failure (which is handled inside (BackupIndex.saveBackupAsync())
                 UseCustomTrackIdTag = SavedSettings.useCustomTrackIdTag;
                 CustomTrackIdTag = SavedSettings.customTrackIdTag;
 
@@ -3266,6 +3295,7 @@ namespace MusicBeePlugin
             }
 
             MbApiInterface.MB_CreateParameterisedBackgroundTask(BackupIndex.saveBackupAsync, new object[] { BrGetBackupFilenameWithoutExtension(dialog.FileName), SbMakingTagBackup, false }, MbForm);
+            
             dialog.Dispose();
         }
 
@@ -3296,6 +3326,7 @@ namespace MusicBeePlugin
             }
 
             MbApiInterface.MB_SetBackgroundTaskMessage(string.Empty);
+            
             dialog.Dispose();
         }
 
@@ -3766,7 +3797,7 @@ namespace MusicBeePlugin
                 "All further backups are incremental relative to baseline. " +
                 "If you have changed very much tags incremental backups may become too large. This command will delete ALL incremental backups " +
                 "of CURRENT library and will create new backup baseline if you continue. ";
-            MsgBrCreateNewBaselineBackupBeforeMusicBeeRestart = "You must create new baseline backup before MusicBee restart for the change of this option to take effect!";
+            MsgBrCreateNewBaselineBackupOrRestoreTagsBeforeMusicBeeRestart = "You must create new baseline backup or restore tags BEFORE MUSICBEE RESTART for the change of this option to take effect!";
 
             MsgMsrGiveNameToAsrPreset = "Give a name to preset!";
             MsgMsrAreYouSureYouWantToSaveAsrPreset = "Do you want to save ASR preset named \"%%PRESETNAME%%\"?";
@@ -3816,7 +3847,7 @@ namespace MusicBeePlugin
                 "be auto-executed, nor can be applied via hotkey!";
 
 
-            SbAutoBackuping = "Autosaving tag backup...";
+            SbAutoBackingUp = "Autosaving tag backup...";
             SbMovingBackupsToNewFolder = "Moving backups to new folder...";
             SbMakingTagBackup = "Making tag backup...";
             SbRestoringTagsFromBackup = "Restoring tags from backup...";
@@ -3824,7 +3855,7 @@ namespace MusicBeePlugin
             SbMovingBackups = "Moving backups...";
             SbDeletingBackups = "Deleting backup(s)...";
             SbTagAutoBackupSkipped = "Tag auto-backup skipped (no changes since last tag backup)";
-            SbCompairingTags = "Comparing tags with baseline... ";
+            SbComparingTags = "Comparing tags with baseline... ";
 
             CtlWarning = "WARNING!";
             CtlMusicBeeBackupType = "MusicBee Tag Backup|*.xml";
@@ -4469,7 +4500,7 @@ namespace MusicBeePlugin
                     "Все последующие архивы являются разницей с опорным архивом. " +
                     "Если было изменено очень много тегов, то разностные архивы могут стать очень большими. Эта команда удалит " +
                     "ВСЕ разностные архивы ТЕКУЩЕЙ библиотеки и создаст новый опорный архив. ";
-                MsgBrCreateNewBaselineBackupBeforeMusicBeeRestart = "Требуется создать новый опорный архив до перезапуска MusicBee, что изменение этой настройки вступило в силу!";
+                MsgBrCreateNewBaselineBackupOrRestoreTagsBeforeMusicBeeRestart = "Требуется создать новый опорный архив или восстановить теги ДО ПЕРЕЗАПУСКА MUSICBEE, чтобы изменение этой настройки вступило в силу!";
 
                 MsgMsrGiveNameToAsrPreset = "Задайте название пресета!";
                 MsgMsrAreYouSureYouWantToSaveAsrPreset = "Сохранить пресет дополнительного поиска и замены под названием \"%%PRESETNAME%%\"?";
@@ -4519,7 +4550,7 @@ namespace MusicBeePlugin
                     "не могут применяться ни автоматически, ни при помощи комбинации клавиш!";
 
 
-                SbAutoBackuping = "Автосохранение архива тегов...";
+                SbAutoBackingUp = "Автосохранение архива тегов...";
                 SbMovingBackupsToNewFolder = "Идет перемещение архивов в новую папку...";
                 SbMakingTagBackup = "Сохранение архива тегов...";
                 SbRestoringTagsFromBackup = "Идет восстановление тегов из архива...";
@@ -4527,7 +4558,7 @@ namespace MusicBeePlugin
                 SbMovingBackups = "Идет перемещение архивов...";
                 SbDeletingBackups = "Идет удаление архивов...";
                 SbTagAutoBackupSkipped = "Автоархивирование тегов пропущено (не было изменений с момента последней архивации)";
-                SbCompairingTags = "Идет сравнение тегов с основным архивом... ";
+                SbComparingTags = "Идет сравнение тегов с основным архивом... ";
 
                 CtlWarning = "ПРЕДУПРЕЖДЕНИЕ!";
                 CtlMusicBeeBackupType = "Архив тегов MusicBee|*.xml";

@@ -280,7 +280,7 @@ namespace MusicBeePlugin
                     if (lastShownCount < percentage)
                     {
                         lastShownCount = percentage;
-                        MbApiInterface.MB_SetBackgroundTaskMessage(SbCompairingTags + percentage + "%");
+                        MbApiInterface.MB_SetBackgroundTaskMessage(SbComparingTags + percentage + "%");
                     }
 
                     if (baseline.tracks.TryGetValue(trackId, out SerializableDictionary<int, string> baselineTags)) //Found current track in baseline
@@ -574,6 +574,10 @@ namespace MusicBeePlugin
             {
                 saveBackup(backupName, statusBarText, isAutoCreated);
             }
+            catch (System.Threading.ThreadAbortException)
+            {
+                //Nothing to do, just let's cancel the task.
+            }
             catch (Exception ex) //Maybe *baseline backup* failure. Let's restore cached values.
             {
                 if (CustomTrackIdTag > 0)
@@ -686,20 +690,29 @@ namespace MusicBeePlugin
             bool restoreForEntireLibrary = (bool)(parameters as object[])[2];
 
             lock (OpenedForms)
-            {
                 NumberOfNativeMbBackgroundTasks++;
-            }
 
             try
             {
                 LoadBackup(backupName, statusBarText, restoreForEntireLibrary);
             }
-            catch (System.Threading.ThreadAbortException) { }
+            catch (System.Threading.ThreadAbortException) 
+            {
+                //Nothing to do, just let's cancel the task.
+            }
+            catch (Exception ex) //Maybe *baseline backup* failure. Let's restore cached values.
+            {
+                if (CustomTrackIdTag > 0)
+                {
+                    SavedSettings.useCustomTrackIdTag = UseCustomTrackIdTag;
+                    SavedSettings.customTrackIdTag = CustomTrackIdTag;
+                }
+
+                throw ex;
+            }
 
             lock (OpenedForms)
-            {
                 NumberOfNativeMbBackgroundTasks--;
-            }
         }
 
         internal static void LoadBackup(string backupName, string statusBarText, bool restoreForEntireLibrary)
@@ -755,7 +768,7 @@ namespace MusicBeePlugin
                     }
 
                     string currentFile = files[fileCounter];
-                    int trackId = GetPersistentTrackIdInt(currentFile, SavedSettings.useCustomTrackIdTag);
+                    int trackId = GetPersistentTrackIdInt(currentFile, UseCustomTrackIdTag);
 
                     bool tagsWereSet = false;
                     for (int i = 0; i < tagIds.Count; i++)
