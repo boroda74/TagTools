@@ -719,6 +719,7 @@ namespace MusicBeePlugin
                 FilterIndex = 0
             };
             if (dialog.ShowDialog(this) == DialogResult.Cancel) return;
+            dialog.Dispose();
 
             fileNameTextBoxCustom.Text = dialog.FileName;
         }

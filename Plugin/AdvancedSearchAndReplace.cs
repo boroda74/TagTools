@@ -3892,6 +3892,7 @@ namespace MusicBeePlugin
             if (dialog.ShowDialog(this) == DialogResult.Cancel) return;
 
             exportPreset(preset, dialog.FileName);
+            dialog.Dispose();
         }
 
         private void buttonExportUser_Click(object sender, EventArgs e)
@@ -3937,6 +3938,8 @@ namespace MusicBeePlugin
                 string presetFilePath = @"\\?\" + Path.Combine(dialog.SelectedPath, "!" + MSR.guid.ToString("B") + AsrPresetExtension);
                 exportPreset(MSR, presetFilePath);
             }
+
+            dialog.Dispose();
         }
 
         internal void import()
@@ -3950,6 +3953,7 @@ namespace MusicBeePlugin
             };
 
             if (dialog.ShowDialog(this) == DialogResult.Cancel) return;
+            dialog.Dispose();
 
 
             Guid selectedPresetGuid = Guid.Empty;

@@ -1564,6 +1564,7 @@ namespace MusicBeePlugin
             }
             else if (dataType == DataType.DateTime)
             {
+                //Let's try to parse as year
                 if (arg.Length == 4 && !arg.Contains(":") && !arg.Contains("/") && !arg.Contains("-") && !arg.Contains("."))
                 {
                     result.resultD = (new DateTime(int.Parse(arg), 1, 1) - ConvertStringsResult.ReferenceDt - ConvertStringsResult.ReferenceTsOffset).TotalMilliseconds;
@@ -1571,17 +1572,31 @@ namespace MusicBeePlugin
 
                     return result;
                 }
-                else if (arg.Length < 6 && arg.Contains(":") && !arg.Contains("/") && !arg.Contains("-") && !arg.Contains("."))
+                //Let's try to parse as short duration (without date)
+                else if (arg.Length < 9 && arg.Contains(":") && !arg.Contains("/") && !arg.Contains("-") && !arg.Contains("."))
                 {
-                    return ConvertStrings(arg, ResultType.TimeSpan, DataType.String);
+                    string[] ts1 = arg.Split(':');
+                    TimeSpan time;
+
+                    time = TimeSpan.FromSeconds(Convert.ToInt32(ts1[ts1.Length - 1]));
+                    time += TimeSpan.FromMinutes(Convert.ToInt32(ts1[ts1.Length - 2]));
+                    if (ts1.Length > 2)
+                        time += TimeSpan.FromHours(Convert.ToInt32(ts1[ts1.Length - 3]));
+
+                    result.resultD = time.TotalMilliseconds;
+                    result.resultType = ResultType.TimeSpan;
+
+                    return result;
                 }
                 else if (DateTime.TryParse(arg, out DateTime datetime))
                 {
+                    //Let's try to parse as long duration (with date)
                     if (datetime.Year < 1900)
                     {
                         result.resultD = TimeSpan.Parse(arg).TotalMilliseconds;
                         result.resultType = ResultType.TimeSpan;
                     }
+                    //Let's try to parse as date/time
                     else
                     {
                         result.resultD = (datetime - ConvertStringsResult.ReferenceDt - ConvertStringsResult.ReferenceTsOffset).TotalMilliseconds;
@@ -1601,64 +1616,39 @@ namespace MusicBeePlugin
                 if (dataType != DataType.String)
                     throw new Exception("Unsupported data type: " + dataType + "!");
 
-                try //Let's try to parse as short duration (without date)
+                try //Let's try to parse as date/time
                 {
-                    if (arg.Length < 6 && arg.Contains(':') && !arg.Contains('/') && !arg.Contains('-') && !arg.Contains('.'))
-                    {
-                        string[] ts1 = arg.Split(':');
-                        TimeSpan time;
+                    var datetime = DateTime.Parse(arg);
+                    if (datetime.Year < 1900)
+                        throw new Exception(); //Let's try to parse as timespan again (as full timespan format including date)
 
-                        time = TimeSpan.FromSeconds(Convert.ToInt32(ts1[ts1.Length - 1]));
-                        time += TimeSpan.FromMinutes(Convert.ToInt32(ts1[ts1.Length - 2]));
-                        if (ts1.Length > 2)
-                            time += TimeSpan.FromHours(Convert.ToInt32(ts1[ts1.Length - 3]));
+                    result.resultD = (datetime - ConvertStringsResult.ReferenceDt - ConvertStringsResult.ReferenceTsOffset).TotalMilliseconds;
+                    result.resultType = ResultType.DateTime;
 
-                        result.resultD = time.TotalMilliseconds;
-                        result.resultType = ResultType.TimeSpan;
-
-                        return result;
-                    }
-                    else
-                    {
-                        throw new Exception(); //Go to parsing as date/time
-                    }
+                    return result;
                 }
                 catch
                 {
-                    try //Let's try to parse as date/time
+                    try
                     {
-                        var datetime = DateTime.Parse(arg);
-                        if (datetime.Year < 1900)
-                            throw new Exception(); //Let's try to parse as timespan again (as full timespan format including date)
+                        //Let's try to parse as timespan again (as full timespan format including date)
+                        if (arg.Length > 5 && (arg.IndexOf('/') != arg.LastIndexOf('/')
+                            || arg.IndexOf('-') != arg.LastIndexOf('-') || arg.IndexOf('.') != arg.LastIndexOf('.')))
+                        {
+                            result.resultD = TimeSpan.Parse(arg).TotalMilliseconds;
+                            result.resultType = ResultType.TimeSpan;
 
-                        result.resultD = (datetime - ConvertStringsResult.ReferenceDt - ConvertStringsResult.ReferenceTsOffset).TotalMilliseconds;
-                        result.resultType = ResultType.DateTime;
-
-                        return result;
+                            return result;
+                        }
+                        else
+                        {
+                            throw new Exception(); //Go to parsing as number
+                        }
                     }
                     catch
                     {
-                        try
-                        {
-                            //Let's try to parse as timespan again (as full timespan format including date)
-                            if (arg.Length > 5 && (arg.IndexOf('/') != arg.LastIndexOf('/')
-                                || arg.IndexOf('-') != arg.LastIndexOf('-') || arg.IndexOf('.') != arg.LastIndexOf('.')))
-                            {
-                                result.resultD = TimeSpan.Parse(arg).TotalSeconds;
-                                result.resultType = ResultType.TimeSpan;
-
-                                return result;
-                            }
-                            else
-                            {
-                                throw new Exception(); //Go to parsing as number
-                            }
-                        }
-                        catch
-                        {
-                            //Let's try to parse as number if there were no replacements
-                            return ConvertStrings(arg, ResultType.AutoDouble, DataType.String, true);
-                        }
+                        //Let's try to parse as number if there were no replacements
+                        return ConvertStrings(arg, ResultType.AutoDouble, DataType.String, true);
                     }
                 }
             }
@@ -4622,16 +4612,21 @@ namespace MusicBeePlugin
                 SavedSettings.reportsPresets.CopyTo(SavedSettings.reportPresets, 0);
             }
 
-            //Let's remove all predefined presets and recreate them from scratch
-            int existingPredefinedCount = 0;
+            //Let's remove all predefined presets and recreate them from scratch (except for allowed user customizations)
+            SortedDictionary<Guid, ReportPreset> existingPredefinedPresets = new SortedDictionary<Guid, ReportPreset>(); //<permanentGuid, ReportPreset>
+
+            int existingPredefinedPresetCount = 0;
             for (int i = 0; i < SavedSettings.reportPresets.Length; i++)
             {
                 if (!SavedSettings.reportPresets[i].userPreset)
-                    existingPredefinedCount++;
+                {
+                    existingPredefinedPresets.Add(SavedSettings.reportPresets[i].permanentGuid, SavedSettings.reportPresets[i]);
+                    existingPredefinedPresetCount++;
+                }
             }
 
             int presetCounter = 0;
-            var reportPresets = new ReportPreset[SavedSettings.reportPresets.Length - existingPredefinedCount + PredefinedReportPresetCount];
+            var reportPresets = new ReportPreset[SavedSettings.reportPresets.Length - existingPredefinedPresetCount + PredefinedReportPresetCount];
             foreach (var reportPreset in SavedSettings.reportPresets)
             {
                 if (reportPreset.userPreset)
@@ -4677,27 +4672,10 @@ namespace MusicBeePlugin
             for (int i = 0; i < destinationTags.Length; i++)
                 destinationTags[i] = NullTagName;
 
-            libraryReportsPreset = new ReportPreset
-            {
-                groupings = groupings,
-                functions = functions,
-                totals = true,
-                name = LibraryTotalsPresetName.ToUpper(),
-                userPreset = false,
-
-                destinationTags = destinationTags,
-                functionIds = functionIds,
-                conditionField = groupings[0].parameterName,
-                comparison = Comparison.IsGreaterOrEqual,
-
-                exportedTrackListName = ExportedTrackList,
-                fileFormatIndex = LrReportFormat.HtmlDocument
-            };
-
-            libraryReportsPreset.sourceTags = new string[functions.Length];
-            for (int i = 0; i < functions.Length; i++)
-                libraryReportsPreset.sourceTags[i] = GetColumnName(functions[i].parameterName, functions[i].parameter2Name,
-                    functions[i].functionType, null, false, null, false, false, true);
+            //Let's copy allowed user customizations from existing predefined preset (if it exists)
+            Guid presetPermanentGuid = Guid.Parse("450A95FE-E660-44B7-B34C-1169C9466493");
+            libraryReportsPreset = GetCreatePredefinedPreset(presetPermanentGuid, LibraryTotalsPresetName, existingPredefinedPresets,
+                groupings, functions, destinationTags, functionIds);
 
             reportPresets[presetCounter++] = libraryReportsPreset;
 
@@ -4745,27 +4723,10 @@ namespace MusicBeePlugin
             for (int i = 0; i < destinationTags.Length; i++)
                 destinationTags[i] = NullTagName;
 
-            libraryReportsPreset = new ReportPreset
-            {
-                groupings = groupings,
-                functions = functions,
-                totals = true,
-                name = LibraryAveragesPresetName.ToUpper(),
-                userPreset = false,
-
-                destinationTags = destinationTags,
-                functionIds = functionIds,
-                conditionField = groupings[0].parameterName,
-                comparison = Comparison.IsGreaterOrEqual,
-
-                exportedTrackListName = ExportedTrackList,
-                fileFormatIndex = LrReportFormat.HtmlDocument
-            };
-
-            libraryReportsPreset.sourceTags = new string[functions.Length];
-            for (int i = 0; i < functions.Length; i++)
-                libraryReportsPreset.sourceTags[i] = GetColumnName(functions[i].parameterName, functions[i].parameter2Name,
-                    functions[i].functionType, null, false, null, false, false, true);
+            //Let's copy allowed user customizations from existing predefined preset (if it exists)
+            presetPermanentGuid = Guid.Parse("2759C09A-B982-4FC5-9872-FBD27A4D8F5E");
+            libraryReportsPreset = GetCreatePredefinedPreset(presetPermanentGuid, LibraryAveragesPresetName, existingPredefinedPresets,
+                groupings, functions, destinationTags, functionIds);
 
             reportPresets[presetCounter++] = libraryReportsPreset;
 
@@ -4791,23 +4752,10 @@ namespace MusicBeePlugin
             for (int i = 0; i < destinationTags.Length; i++) //-V3116
                 destinationTags[i] = NullTagName;
 
-            libraryReportsPreset = new ReportPreset
-            {
-                groupings = groupings,
-                functions = functions,
-                totals = false,
-                name = CDBookletPresetName.ToUpper(),
-                userPreset = false,
-
-                sourceTags = new string[0],
-                destinationTags = destinationTags,
-                functionIds = functionIds,
-                conditionField = groupings[0].parameterName,
-                comparison = Comparison.IsGreaterOrEqual,
-
-                exportedTrackListName = ExportedTrackList,
-                fileFormatIndex = LrReportFormat.HtmlDocumentCdBooklet
-            };
+            //Let's copy allowed user customizations from existing predefined preset (if it exists)
+            presetPermanentGuid = Guid.Parse("C7EACE32-B70F-4E5E-BEF1-2D10BE3B74E5");
+            libraryReportsPreset = GetCreatePredefinedPreset(presetPermanentGuid, CDBookletPresetName, existingPredefinedPresets,
+                groupings, functions, destinationTags, functionIds);
 
             reportPresets[presetCounter++] = libraryReportsPreset;
 
@@ -4832,23 +4780,10 @@ namespace MusicBeePlugin
             for (int i = 0; i < destinationTags.Length; i++) //-V3116
                 destinationTags[i] = NullTagName;
 
-            libraryReportsPreset = new ReportPreset
-            {
-                groupings = groupings,
-                functions = functions,
-                totals = false,
-                name = AlbumsAndTracksPresetName.ToUpper(),
-                userPreset = false,
-
-                sourceTags = new string[0],
-                destinationTags = destinationTags,
-                functionIds = functionIds,
-                conditionField = groupings[0].parameterName,
-                comparison = Comparison.IsGreaterOrEqual,
-
-                exportedTrackListName = ExportedTrackList,
-                fileFormatIndex = LrReportFormat.HtmlDocumentByAlbums
-            };
+            //Let's copy allowed user customizations from existing predefined preset (if it exists)
+            presetPermanentGuid = Guid.Parse("F14133BF-7D9E-403F-B2F2-B3A2BE669BC8");
+            libraryReportsPreset = GetCreatePredefinedPreset(presetPermanentGuid, AlbumsAndTracksPresetName, existingPredefinedPresets,
+                groupings, functions, destinationTags, functionIds);
 
             reportPresets[presetCounter++] = libraryReportsPreset;
 
@@ -4871,26 +4806,10 @@ namespace MusicBeePlugin
             for (int i = 0; i < destinationTags.Length; i++) //-V3116
                 destinationTags[i] = NullTagName;
 
-            libraryReportsPreset = new ReportPreset
-            {
-                groupings = groupings,
-                functions = functions,
-                totals = false,
-                name = AlbumGridPresetName.ToUpper(),
-                userPreset = false,
-
-                sourceTags = new string[0],
-                destinationTags = destinationTags,
-                functionIds = functionIds,
-                conditionField = groupings[0].parameterName,
-                comparison = Comparison.IsGreaterOrEqual,
-
-                resizeArtwork = true,
-                newArtworkSize = 60,
-
-                exportedTrackListName = ExportedTrackList,
-                fileFormatIndex = LrReportFormat.HtmlDocumentAlbumGrid
-            };
+            //Let's copy allowed user customizations from existing predefined preset (if it exists)
+            presetPermanentGuid = Guid.Parse("FA3D3B21-9B80-4C6C-AC67-1D8FC2A3CEBA");
+            libraryReportsPreset = GetCreatePredefinedPreset(presetPermanentGuid, AlbumGridPresetName, existingPredefinedPresets,
+                groupings, functions, destinationTags, functionIds);
 
             reportPresets[presetCounter++] = libraryReportsPreset;
 
@@ -6645,7 +6564,7 @@ namespace MusicBeePlugin
 
         public string CustomFunc_MulDuration(string duration, string number)
         {
-            return TimeSpan.FromSeconds(Math.Round(double.Parse(number) * TimeSpan.Parse(duration).TotalSeconds)).ToString();
+            return TimeSpan.FromMilliseconds(Math.Round(double.Parse(number) * TimeSpan.Parse(duration).TotalMilliseconds)).ToString();
         }
 
         public string CustomFunc_SubDateTime(string datetime1, string datetime2)

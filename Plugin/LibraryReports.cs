@@ -554,7 +554,9 @@ namespace MusicBeePlugin
                 {
                     _parameterName = value;
 
-                    dataType = MbApiInterface.Setting_GetDataType(GetTagId(_parameterName));
+                    var tagId = GetTagId(_parameterName);
+                    var propId = GetPropId(_parameterName);
+                    dataType = MbApiInterface.Setting_GetDataType(tagId);
 
                     if (dataType == DataType.Number)
                     {
@@ -563,6 +565,10 @@ namespace MusicBeePlugin
                     else if (dataType == DataType.Rating)
                     {
                         resultType = ResultType.Double;
+                    }
+                    else if (propId == FilePropertyType.Duration)
+                    {
+                        resultType = ResultType.TimeSpan;
                     }
                     else if (dataType == DataType.DateTime)
                     {
@@ -959,6 +965,57 @@ namespace MusicBeePlugin
                     splitGroupingsExist |= !string.IsNullOrWhiteSpace(keyValue.Value.splitter);
                 }
             }
+        }
+
+        public static ReportPreset GetCreatePredefinedPreset(Guid presetPermanentGuid, string presetName, //----
+            SortedDictionary<Guid, ReportPreset> existingPredefinedPresets,
+            PresetColumnAttributes[] groupings, PresetColumnAttributes[] functions,
+            string[] destinationTags, string[] functionIds
+            )
+        {
+            if (existingPredefinedPresets.TryGetValue(presetPermanentGuid, out var libraryReportsPreset))
+            {
+                libraryReportsPreset.groupings = groupings;
+                libraryReportsPreset.functions = functions;
+
+                libraryReportsPreset.name = presetName.ToUpper();
+
+                if (libraryReportsPreset.destinationTags.Length != destinationTags.Length)
+                {
+                    libraryReportsPreset.destinationTags = destinationTags;
+                    libraryReportsPreset.functionIds = functionIds;
+                    libraryReportsPreset.conditionField = groupings[0].parameterName;
+                    libraryReportsPreset.comparison = Comparison.IsGreaterOrEqual;
+                }
+            }
+            else
+            {
+                libraryReportsPreset = new ReportPreset()
+                {
+
+                    permanentGuid = presetPermanentGuid,
+                    groupings = groupings,
+                    functions = functions,
+                    totals = true,
+                    name = presetName.ToUpper(),
+                    userPreset = false,
+
+                    destinationTags = destinationTags,
+                    functionIds = functionIds,
+                    conditionField = groupings[0].parameterName,
+                    comparison = Comparison.IsGreaterOrEqual,
+
+                    exportedTrackListName = ExportedTrackList,
+                    fileFormatIndex = LrReportFormat.HtmlDocument,
+                };
+            }
+
+            libraryReportsPreset.sourceTags = new string[functions.Length];
+            for (int i = 0; i < functions.Length; i++)
+                libraryReportsPreset.sourceTags[i] = GetColumnName(functions[i].parameterName, functions[i].parameter2Name,
+                    functions[i].functionType, null, false, null, false, false, true);
+
+            return libraryReportsPreset;
         }
 
         public struct ReportPresetReference
@@ -1377,7 +1434,7 @@ namespace MusicBeePlugin
                     for (int i = 0; i < enumerators.Length; i++)
                         groupingValues[i] = lastValues[i];
 
-                    composedGroupings.Add(string.Join(MultipleItemsSplitterId.ToString(), groupingValues));
+                    composedGroupings.AddUnique(string.Join(MultipleItemsSplitterId.ToString(), groupingValues));
 
 
                     if (totals)
@@ -1385,7 +1442,7 @@ namespace MusicBeePlugin
                         for (int j = groupingValues.Length - 1; j >= 0; j--)
                         {
                             groupingValues[j] = TotalsString;
-                            composedGroupings.Add(string.Join(MultipleItemsSplitterId.ToString(), groupingValues));
+                            composedGroupings.AddUnique(string.Join(MultipleItemsSplitterId.ToString(), groupingValues));
                         }
                     }
                 }
@@ -2652,7 +2709,7 @@ namespace MusicBeePlugin
                 queriedFilesDict.AddSkip(file);
 
 
-            processFileGroupings(queriedFilesDict, interactive, functionId, queryOnlyGroupings, lastSeqNumInOrder,
+            processFileGroupings(queriedFilesDict, interactive, functionId, queryOnlyGroupings, lastSeqNumInOrder, 
                         tags, queriedActualGroupingsTagIds, queriedActualGroupingsPropIds,
                         actualSplitGroupingTagsList, cachedFilesActualComposedSplitGroupingTagsList,
                         cachedFilesActualGroupingTags, cachedFilesActualGroupingTagsRaw,
@@ -2758,7 +2815,7 @@ namespace MusicBeePlugin
                     newFilesDict.AddSkip(file);
 
 
-            processFileGroupings(newFilesDict, interactive, functionId, false, lastSeqNumInOrder,
+            processFileGroupings(newFilesDict, interactive, functionId, false, lastSeqNumInOrder, 
                         null, queriedActualGroupingsTagIds, queriedActualGroupingsPropIds,
                         actualSplitGroupingTagsList, cachedFilesActualComposedSplitGroupingTagsList,
                         cachedFilesActualGroupingTags, cachedFilesActualGroupingTagsRaw,
@@ -2769,10 +2826,6 @@ namespace MusicBeePlugin
 
             tags.Clear(); //Let's resets aggregated functions
 
-
-            List<string>[] actualGroupingTagsList = new List<string>[groupings.Count];
-            for (int f = 0; f < actualGroupingTagsList.Length; f++)
-                actualGroupingTagsList[f] = new List<string>();
 
             string[] functionTags = new string[functionsDict.Count];
             string[] parameter2Tags = new string[functionsDict.Count];
@@ -2845,40 +2898,32 @@ namespace MusicBeePlugin
                     affectedFilesDict.AddSkip(currentFile);
 
 
-                for (int f = 0; f < actualGroupingTagsList.Length; f++)
-                    actualGroupingTagsList[f].Clear();
+                int j = -1;
+                foreach (var attribs in functionsDict.Values)
+                {
+                    j++;
+
+                    MetaDataType tagId = GetTagId(attribs.parameterName);
+                    FilePropertyType propId = GetPropId(attribs.parameterName);
+
+                    functionTags[j] = getTagValue(currentFile, tagId, propId, false);
+
+                    if (attribs.functionType == LrFunctionType.Average || attribs.functionType == LrFunctionType.AverageCount)
+                    {
+                        tagId = GetTagId(attribs.parameter2Name);
+                        propId = GetPropId(attribs.parameter2Name);
+
+                        parameter2Tags[j] = getTagValue(currentFile, tagId, propId, false);
+                    }
+                    else
+                    {
+                        parameter2Tags[j] = null;
+                    }
+                }
 
 
                 var composedActualSplitGroupingTagsList = cachedFilesActualComposedSplitGroupingTagsList[trackId];
-
-                foreach (var composedActualSplitGroupingTags in composedActualSplitGroupingTagsList)
-                {
-                    int j = -1;
-                    foreach (var attribs in functionsDict.Values)
-                    {
-                        j++;
-
-                        MetaDataType tagId = GetTagId(attribs.parameterName);
-                        FilePropertyType propId = GetPropId(attribs.parameterName);
-
-                        functionTags[j] = getTagValue(currentFile, tagId, propId, false);
-
-                        if (attribs.functionType == LrFunctionType.Average || attribs.functionType == LrFunctionType.AverageCount)
-                        {
-                            tagId = GetTagId(attribs.parameter2Name);
-                            propId = GetPropId(attribs.parameter2Name);
-
-                            parameter2Tags[j] = getTagValue(currentFile, tagId, propId, false);
-                        }
-                        else
-                        {
-                            parameter2Tags[j] = null;
-                        }
-                    }
-
-
-                    tags.add(currentFile, composedActualSplitGroupingTagsList, functionsDict, functionTags, parameter2Tags);
-                }
+                tags.add(currentFile, composedActualSplitGroupingTagsList, functionsDict, functionTags, parameter2Tags);
             }
 
 
@@ -4728,6 +4773,8 @@ namespace MusicBeePlugin
 
                 fileDirectoryPath = Regex.Replace(dialog.FileName, @"^(.*\\).*\..*", "$1"); //File directory path including ending \
                 reportOnlyFileName = Regex.Replace(dialog.FileName, @"^.*\\(.*)\..*", "$1"); //Filename without path to file and extension
+
+                dialog.Dispose();
 
                 selectedPreset.exportedTrackListName = reportOnlyFileName;
 

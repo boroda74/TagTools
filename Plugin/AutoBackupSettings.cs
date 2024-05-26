@@ -168,6 +168,7 @@ namespace MusicBeePlugin
             if (dialog.ShowDialog(this) == DialogResult.Cancel) return;
 
             autoBackupFolderTextBox.Text = dialog.SelectedPath;
+            dialog.Dispose();
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
