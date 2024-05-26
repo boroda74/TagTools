@@ -59,10 +59,10 @@ namespace MusicBeePlugin
                 autoBackupCheckBox.Checked = true;
 
             if (SavedSettings.autodeleteKeepNumberOfDays != 0)
-                autodeleteOldCheckBox.Checked = true;
+                autoDeleteOldCheckBox.Checked = true;
 
             if (SavedSettings.autodeleteKeepNumberOfFiles != 0)
-                autodeleteManyCheckBox.Checked = true;
+                autoDeleteManyCheckBox.Checked = true;
 
             dontSkipAutoBackupsIfPlayCountsChangedCheckBox.Checked = SavedSettings.dontSkipAutoBackupsIfOnlyPlayCountsChanged;
 
@@ -86,30 +86,30 @@ namespace MusicBeePlugin
             autoBackupCheckBox.Checked = !autoBackupCheckBox.Checked;
         }
 
-        private void autodeleteOldCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void autoDeleteOldCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (autodeleteOldCheckBox.Checked)
+            if (autoDeleteOldCheckBox.Checked)
                 numberOfDaysNumericUpDown.Enable(true);
             else
                 numberOfDaysNumericUpDown.Enable(false);
         }
 
-        private void autodeleteOldCheckBoxLabel_Click(object sender, EventArgs e)
+        private void autoDeleteOldCheckBoxLabel_Click(object sender, EventArgs e)
         {
-            autodeleteOldCheckBox.Checked = !autodeleteOldCheckBox.Checked;
+            autoDeleteOldCheckBox.Checked = !autoDeleteOldCheckBox.Checked;
         }
 
-        private void autodeleteManyCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void autoDeleteManyCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (autodeleteManyCheckBox.Checked)
+            if (autoDeleteManyCheckBox.Checked)
                 numberOfFilesNumericUpDown.Enable(true);
             else
                 numberOfFilesNumericUpDown.Enable(false);
         }
 
-        private void autodeleteManyCheckBoxLabel_Click(object sender, EventArgs e)
+        private void autoDeleteManyCheckBoxLabel_Click(object sender, EventArgs e)
         {
-            autodeleteManyCheckBox.Checked = !autodeleteManyCheckBox.Checked;
+            autoDeleteManyCheckBox.Checked = !autoDeleteManyCheckBox.Checked;
         }
 
         private void dontSkipAutoBackupsIfPlayCountsChangedLabel_Click(object sender, EventArgs e)
@@ -131,7 +131,7 @@ namespace MusicBeePlugin
             if (!customTrackIdTagWarningShown && UseCustomTrackIdTag != SavedSettings.useCustomTrackIdTag)
             {
                 customTrackIdTagWarningShown = true;
-                MessageBox.Show(this, MsgBrCreateNewBaselineBackupOrRestoreTagsBeforeMusicBeeRestart, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, MsgBrCreateNewBaselineBackupOrRestoreTagsFromAnotherLibraryBeforeMusicBeeRestart, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
@@ -149,7 +149,7 @@ namespace MusicBeePlugin
             if (!customTrackIdTagWarningShown && UseCustomTrackIdTag && CustomTrackIdTag != SavedSettings.customTrackIdTag)
             {
                 customTrackIdTagWarningShown = true;
-                MessageBox.Show(this, MsgBrCreateNewBaselineBackupOrRestoreTagsBeforeMusicBeeRestart, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, MsgBrCreateNewBaselineBackupOrRestoreTagsFromAnotherLibraryBeforeMusicBeeRestart, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
@@ -183,12 +183,12 @@ namespace MusicBeePlugin
             else
                 SavedSettings.autoBackupInterval = 0;
 
-            if (autodeleteOldCheckBox.Checked)
+            if (autoDeleteOldCheckBox.Checked)
                 SavedSettings.autodeleteKeepNumberOfDays = numberOfDaysNumericUpDown.Value;
             else
                 SavedSettings.autodeleteKeepNumberOfDays = 0;
 
-            if (autodeleteManyCheckBox.Checked)
+            if (autoDeleteManyCheckBox.Checked)
                 SavedSettings.autodeleteKeepNumberOfFiles = numberOfFilesNumericUpDown.Value;
             else
                 SavedSettings.autodeleteKeepNumberOfFiles = 0;

@@ -710,6 +710,7 @@ namespace MusicBeePlugin
         internal static string RenameMoveBackupName;
         internal static string MoveBackupsName;
         internal static string CreateNewBaselineName;
+        internal static string createEmptyBaselineRestoreTagsForEntireLibraryName;
         internal static string DeleteBackupsName;
         internal static string AutoBackupSettingsName;
 
@@ -721,6 +722,7 @@ namespace MusicBeePlugin
         private static string RenameMoveBackupDescription;
         private static string MoveBackupsDescription;
         private static string CreateNewBaselineDescription;
+        private static string createEmptyBaselineRestoreTagsForEntireLibraryDescription;
         private static string DeleteBackupsDescription;
         private static string AutoBackupSettingsDescription;
 
@@ -940,7 +942,8 @@ namespace MusicBeePlugin
         internal static string MsgBrCreateBaselineWarning;
         internal static string MsgBrBackupBaselineFileDoesntExist;
         internal static string MsgBrThisIsTheBackupOfDifferentLibrary;
-        internal static string MsgBrCreateNewBaselineBackupOrRestoreTagsBeforeMusicBeeRestart;
+        internal static string MsgBrCreateNewBaselineBackupOrRestoreTagsFromAnotherLibraryBeforeMusicBeeRestart;
+        internal static string MsgBrCreateNewBaseline;
 
         internal static string MsgUnsupportedMusicBeeFontType;
 
@@ -2883,7 +2886,7 @@ namespace MusicBeePlugin
         internal static void RegularAutoBackup(object state)
         {
             MbApiInterface.MB_SetBackgroundTaskMessage(SbAutoBackingUp);
-            BackupIndex.saveBackup(BrGetAutoBackupDirectory(SavedSettings.autoBackupDirectory) + @"\" + BrGetDefaultBackupFilename(SavedSettings.autoBackupPrefix), SbAutoBackingUp, true);
+            BackupIndex.saveBackup(BrGetAutoBackupDirectory(SavedSettings.autoBackupDirectory) + @"\" + BrGetDefaultBackupFilename(SavedSettings.autoBackupPrefix), SbAutoBackingUp, true, false);
 
 
             decimal autodeleteKeepNumberOfDays = SavedSettings.autodeleteKeepNumberOfDays > 0 ? SavedSettings.autodeleteKeepNumberOfDays : 1000000;
@@ -3067,7 +3070,7 @@ namespace MusicBeePlugin
             if (File.Exists(BrGetBackupFilenameWithoutExtension(dialog.FileName) + ".mbc"))
                 File.Delete(BrGetBackupFilenameWithoutExtension(dialog.FileName) + ".mbc");
 
-            MbApiInterface.MB_CreateParameterisedBackgroundTask(BackupIndex.saveBackupAsync, new object[] { BrGetBackupFilenameWithoutExtension(dialog.FileName), SbMakingTagBackup, false }, MbForm);
+            MbApiInterface.MB_CreateParameterisedBackgroundTask(BackupIndex.saveBackupAsync, new object[] { BrGetBackupFilenameWithoutExtension(dialog.FileName), SbMakingTagBackup, false, false }, MbForm);
             
             dialog.Dispose();
         }
@@ -3083,25 +3086,13 @@ namespace MusicBeePlugin
 
             if (dialog.ShowDialog(MbForm) == DialogResult.Cancel) return;
 
-            if (UseCustomTrackIdTag)
-            {
-                bool useCustomTrackIdTag = UseCustomTrackIdTag;
-                int customTrackIdTag = CustomTrackIdTag;
-
-                //Let's cache previous value in case of baseline backup creation failure (which is handled inside (BackupIndex.saveBackupAsync())
-                UseCustomTrackIdTag = SavedSettings.useCustomTrackIdTag;
-                CustomTrackIdTag = SavedSettings.customTrackIdTag;
-
-                SavedSettings.useCustomTrackIdTag = useCustomTrackIdTag;
-                SavedSettings.customTrackIdTag = customTrackIdTag;
-            }
-
             MbApiInterface.MB_SetBackgroundTaskMessage(SbRestoringTagsFromBackup);
-            MbApiInterface.MB_CreateParameterisedBackgroundTask(BackupIndex.LoadBackupAsync, new object[] { BrGetBackupFilenameWithoutExtension(dialog.FileName), SbRestoringTagsFromBackup, false }, MbForm);
+            MbApiInterface.MB_CreateParameterisedBackgroundTask(BackupIndex.LoadBackupAsync, new object[] { BrGetBackupFilenameWithoutExtension(dialog.FileName), SbRestoringTagsFromBackup, false, false }, MbForm);
 
             dialog.Dispose();
         }
 
+        //EventArgs e == null means "restore from another lbrary, don't ask confirmation"
         internal void restoreTagsForEntireLibraryEventHandler(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog
@@ -3113,21 +3104,8 @@ namespace MusicBeePlugin
 
             if (dialog.ShowDialog(MbForm) == DialogResult.Cancel) return;
 
-            if (UseCustomTrackIdTag)
-            {
-                bool useCustomTrackIdTag = UseCustomTrackIdTag;
-                int customTrackIdTag = CustomTrackIdTag;
-
-                //Let's cache previous value in case of baseline backup creation failure (which is handled inside (BackupIndex.saveBackupAsync())
-                UseCustomTrackIdTag = SavedSettings.useCustomTrackIdTag;
-                CustomTrackIdTag = SavedSettings.customTrackIdTag;
-
-                SavedSettings.useCustomTrackIdTag = useCustomTrackIdTag;
-                SavedSettings.customTrackIdTag = customTrackIdTag;
-            }
-
             MbApiInterface.MB_SetBackgroundTaskMessage(SbRestoringTagsFromBackup);
-            MbApiInterface.MB_CreateParameterisedBackgroundTask(BackupIndex.LoadBackupAsync, new object[] { BrGetBackupFilenameWithoutExtension(dialog.FileName), SbRestoringTagsFromBackup, true }, MbForm);
+            MbApiInterface.MB_CreateParameterisedBackgroundTask(BackupIndex.LoadBackupAsync, new object[] { BrGetBackupFilenameWithoutExtension(dialog.FileName), SbRestoringTagsFromBackup, true, e == null }, MbForm);
 
             dialog.Dispose();
         }
@@ -3167,7 +3145,7 @@ namespace MusicBeePlugin
 
             MbApiInterface.MB_SetBackgroundTaskMessage(string.Empty);
             
-            openDialog.Dispose();//****** check everywhere!!!!!
+            openDialog.Dispose();
             saveDialog.Dispose();
         }
 
@@ -3217,9 +3195,12 @@ namespace MusicBeePlugin
             saveDialog.Dispose();
         }
 
+
+        //EventArgs e == null means "create empty baseline backup"
         internal void createNewBaselineEventHandler(object sender, EventArgs e)
         {
-            MessageBox.Show(MbForm, MsgBrCreateBaselineWarning, CtlWarning, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            if (e != null)
+                MessageBox.Show(MbForm, MsgBrCreateBaselineWarning, CtlWarning, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
 
             SaveFileDialog dialog = new SaveFileDialog
@@ -3284,9 +3265,19 @@ namespace MusicBeePlugin
                 SavedSettings.customTrackIdTag = customTrackIdTag;
             }
 
-            MbApiInterface.MB_CreateParameterisedBackgroundTask(BackupIndex.saveBackupAsync, new object[] { BrGetBackupFilenameWithoutExtension(dialog.FileName), SbMakingTagBackup, false }, MbForm);
+            MbApiInterface.MB_CreateParameterisedBackgroundTask(BackupIndex.saveBackupAsync, new object[] { BrGetBackupFilenameWithoutExtension(dialog.FileName), SbMakingTagBackup, false, e == null }, MbForm);
             
             dialog.Dispose();
+        }
+
+        internal void createEmptyBaselineRestoreTagsForEntireLibraryEventHandler(object sender, EventArgs e)
+        {
+            //createNewBaselineEventHandler(sender, NULL) means "create empty baseline backup"
+            createNewBaselineEventHandler(sender, null);
+            //restoreTagsForEntireLibraryEventHandler(sender, NULL) means "restore from another lbrary, don't ask confirmation"
+            restoreTagsForEntireLibraryEventHandler(sender, null);
+
+            MessageBox.Show(MbForm, MsgBrCreateNewBaseline, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
         internal void deleteBackupsEventHandler(object sender, EventArgs e)
@@ -3440,6 +3431,7 @@ namespace MusicBeePlugin
             RenameMoveBackupName = "Rename or Move Backup...";
             MoveBackupsName = "Move Backup(s)...";
             CreateNewBaselineName = "Create New Baseline of Current Library...";
+            createEmptyBaselineRestoreTagsForEntireLibraryName = "Create Empty Baseline and Restore Tags from Another Library...";
             DeleteBackupsName = "Delete Backup(s)...";
             AutoBackupSettingsName = "(Auto)backup Settings...";
 
@@ -3451,6 +3443,7 @@ namespace MusicBeePlugin
             RenameMoveBackupDescription = TagToolsHotkeyDescription + "Rename or Move Backup";
             MoveBackupsDescription = TagToolsHotkeyDescription + "Move Backup(s)";
             CreateNewBaselineDescription = TagToolsHotkeyDescription + "Create New Baseline of Current Library";
+            createEmptyBaselineRestoreTagsForEntireLibraryDescription = TagToolsHotkeyDescription + "Create Empty Baseline and Restore Tags from Another Library";
             DeleteBackupsDescription = TagToolsHotkeyDescription + "Delete Backup(s)";
             AutoBackupSettingsDescription = TagToolsHotkeyDescription + "(Auto)backup Settings";
 
@@ -3787,7 +3780,9 @@ namespace MusicBeePlugin
                 "All further backups are incremental relative to baseline. " +
                 "If you have changed very much tags incremental backups may become too large. This command will delete ALL incremental backups " +
                 "of CURRENT library and will create new backup baseline if you continue. ";
-            MsgBrCreateNewBaselineBackupOrRestoreTagsBeforeMusicBeeRestart = "You must create new baseline backup or restore tags BEFORE MUSICBEE RESTART for the change of this option to take effect!";
+            MsgBrCreateNewBaselineBackupOrRestoreTagsFromAnotherLibraryBeforeMusicBeeRestart = "You must create new baseline backup or restore tags from ANOTHER library " +
+                "BEFORE MUSICBEE RESTART for the change of this option to take effect!";
+            MsgBrCreateNewBaseline = "It is recommended to create a new baseline after putting the tags in order!";
 
             MsgMsrGiveNameToAsrPreset = "Give a name to preset!";
             MsgMsrAreYouSureYouWantToSaveAsrPreset = "Do you want to save ASR preset named \"%%PRESETNAME%%\"?";
@@ -4184,6 +4179,7 @@ namespace MusicBeePlugin
                 RenameMoveBackupName = "Переименовать или переместить архив...";
                 MoveBackupsName = "Переместить архив(ы)...";
                 CreateNewBaselineName = "Создать новый опорный архив текущей библиотеки...";
+                createEmptyBaselineRestoreTagsForEntireLibraryName = "Создать пустой опорный архив и восстановить теги для всех треков из другой библиотеки...";
                 DeleteBackupsName = "Удалить архив(ы)...";
                 AutoBackupSettingsName = "Настройки (авто)архивации...";
 
@@ -4195,6 +4191,7 @@ namespace MusicBeePlugin
                 RenameMoveBackupDescription = TagToolsHotkeyDescription + "Переименовать или переместить архив";
                 MoveBackupsDescription = TagToolsHotkeyDescription + "Переместить архив(ы)";
                 CreateNewBaselineDescription = TagToolsHotkeyDescription + "Создать новый опорный архив текущей библиотеки";
+                createEmptyBaselineRestoreTagsForEntireLibraryDescription = TagToolsHotkeyDescription + "Создать пустой опорный архив и восстановить теги для всех треков из другой библиотеки";
                 DeleteBackupsDescription = TagToolsHotkeyDescription + "Удалить архив(ы)";
                 AutoBackupSettingsDescription = TagToolsHotkeyDescription + "Настройки (авто)архивации";
 
@@ -4490,7 +4487,9 @@ namespace MusicBeePlugin
                     "Все последующие архивы являются разницей с опорным архивом. " +
                     "Если было изменено очень много тегов, то разностные архивы могут стать очень большими. Эта команда удалит " +
                     "ВСЕ разностные архивы ТЕКУЩЕЙ библиотеки и создаст новый опорный архив. ";
-                MsgBrCreateNewBaselineBackupOrRestoreTagsBeforeMusicBeeRestart = "Требуется создать новый опорный архив или восстановить теги ДО ПЕРЕЗАПУСКА MUSICBEE, чтобы изменение этой настройки вступило в силу!";
+                MsgBrCreateNewBaselineBackupOrRestoreTagsFromAnotherLibraryBeforeMusicBeeRestart = "Требуется создать новый опорный архив или восстановить теги из ДРУГОЙ библиотеки " +
+                    "ДО ПЕРЕЗАПУСКА MUSICBEE, чтобы изменение этой настройки вступило в силу!";
+                MsgBrCreateNewBaseline = "Рекомендуется создать новый опорный архив после наведения порядка в тегах!";
 
                 MsgMsrGiveNameToAsrPreset = "Задайте название пресета!";
                 MsgMsrAreYouSureYouWantToSaveAsrPreset = "Сохранить пресет дополнительного поиска и замены под названием \"%%PRESETNAME%%\"?";
@@ -6312,18 +6311,20 @@ namespace MusicBeePlugin
             if (!SavedSettings.dontShowBackupRestore)
             {
                 AddMenuItem(TagToolsSubmenu, "-", null, null);
-                AddMenuItem(TagToolsSubmenu, BackupRestoreMenuSectionName, null, null, false);
-                AddMenuItem(TagToolsSubmenu, TagHistoryName, TagHistoryDescription, tagHistoryEventHandler);
-                AddMenuItem(TagToolsSubmenu, "-", null, null);
-                AddMenuItem(TagToolsSubmenu, BackupTagsName, BackupTagsDescription, backupTagsEventHandler);
-                AddMenuItem(TagToolsSubmenu, RestoreTagsName, RestoreTagsDescription, restoreTagsEventHandler);
-                AddMenuItem(TagToolsSubmenu, RestoreTagsForEntireLibraryName, RestoreTagsForEntireLibraryDescription, restoreTagsForEntireLibraryEventHandler);
-                AddMenuItem(TagToolsSubmenu, RenameMoveBackupName, RenameMoveBackupDescription, renameMoveBackupEventHandler);
-                AddMenuItem(TagToolsSubmenu, MoveBackupsName, MoveBackupsDescription, moveBackupsEventHandler);
-                AddMenuItem(TagToolsSubmenu, CreateNewBaselineName, CreateNewBaselineDescription, createNewBaselineEventHandler);
-                AddMenuItem(TagToolsSubmenu, DeleteBackupsName, DeleteBackupsDescription, deleteBackupsEventHandler);
-                AddMenuItem(TagToolsSubmenu, "-", null, null);
-                AddMenuItem(TagToolsSubmenu, AutoBackupSettingsName, AutoBackupSettingsDescription, autoBackupSettingsEventHandler);
+
+                var backupRestoreSubenu = AddMenuItem(TagToolsSubmenu, BackupRestoreMenuSectionName, null, null);
+                AddMenuItem(backupRestoreSubenu, TagHistoryName, TagHistoryDescription, tagHistoryEventHandler);
+                AddMenuItem(backupRestoreSubenu, "-", null, null);
+                AddMenuItem(backupRestoreSubenu, BackupTagsName, BackupTagsDescription, backupTagsEventHandler);
+                AddMenuItem(backupRestoreSubenu, RestoreTagsName, RestoreTagsDescription, restoreTagsEventHandler);
+                AddMenuItem(backupRestoreSubenu, RestoreTagsForEntireLibraryName, RestoreTagsForEntireLibraryDescription, restoreTagsForEntireLibraryEventHandler);
+                AddMenuItem(backupRestoreSubenu, RenameMoveBackupName, RenameMoveBackupDescription, renameMoveBackupEventHandler);
+                AddMenuItem(backupRestoreSubenu, MoveBackupsName, MoveBackupsDescription, moveBackupsEventHandler);
+                AddMenuItem(backupRestoreSubenu, CreateNewBaselineName, CreateNewBaselineDescription, createNewBaselineEventHandler);
+                AddMenuItem(backupRestoreSubenu, createEmptyBaselineRestoreTagsForEntireLibraryName, createEmptyBaselineRestoreTagsForEntireLibraryDescription, createEmptyBaselineRestoreTagsForEntireLibraryEventHandler);
+                AddMenuItem(backupRestoreSubenu, DeleteBackupsName, DeleteBackupsDescription, deleteBackupsEventHandler);
+                AddMenuItem(backupRestoreSubenu, "-", null, null);
+                AddMenuItem(backupRestoreSubenu, AutoBackupSettingsName, AutoBackupSettingsDescription, autoBackupSettingsEventHandler);
             }
 
             AddMenuItem(TagToolsSubmenu, "-", null, null);

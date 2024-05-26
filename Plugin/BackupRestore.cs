@@ -569,10 +569,11 @@ namespace MusicBeePlugin
             string backupName = (parameters as object[])[0] as string;
             string statusBarText = (parameters as object[])[1] as string;
             bool isAutoCreated = (bool)(parameters as object[])[2];
+            bool createEmptyBackup = (bool)(parameters as object[])[3];
 
             try
             {
-                saveBackup(backupName, statusBarText, isAutoCreated);
+                saveBackup(backupName, statusBarText, isAutoCreated, createEmptyBackup);
             }
             catch (System.Threading.ThreadAbortException)
             {
@@ -590,85 +591,89 @@ namespace MusicBeePlugin
             }
         }
 
-        internal void saveBackup(string backupName, string statusBarText, bool isAutoCreated)
+        internal void saveBackup(string backupName, string statusBarText, bool isAutoCreated, bool createEmptyBackup)
         {
             System.Threading.Thread.CurrentThread.Priority = System.Threading.ThreadPriority.Lowest;
 
             TempTracksNeededToBeBackedUp.Clear();
 
-            if (MbApiInterface.Library_QueryFilesEx("domain=Library", out string[] files))
+            string[] files;
+
+            if (createEmptyBackup)
+                files = Array.Empty<string>();
+            else if (!MbApiInterface.Library_QueryFilesEx("domain=Library", out files))
+                return;
+
+            string currentFile;
+            string libraryName = BrGetCurrentLibraryName();
+            string libraryTrackId;
+            string[] libraryTags;
+
+            lock (TracksNeededToBeBackedUp)
             {
-                string currentFile;
-                string libraryName = BrGetCurrentLibraryName();
-                string libraryTrackId;
-                string[] libraryTags;
+                List<string> tagNames = new List<string>();
+                FillListByTagNames(tagNames, false, true, false);
 
-                lock (TracksNeededToBeBackedUp)
+                List<MetaDataType> tagIds = new List<MetaDataType>();
+                for (int i = 0; i < tagNames.Count; i++)
+                    tagIds.Add(GetTagId(tagNames[i]));
+
+                Backup backup = new Backup(isAutoCreated);
+
+                int lastShownCount = 0;
+                for (int fileCounter = 0; fileCounter < files.Length; fileCounter++)
                 {
-                    List<string> tagNames = new List<string>();
-                    FillListByTagNames(tagNames, false, true, false);
-
-                    List<MetaDataType> tagIds = new List<MetaDataType>();
-                    for (int i = 0; i < tagNames.Count; i++)
-                        tagIds.Add(GetTagId(tagNames[i]));
-
-                    Backup backup = new Backup(isAutoCreated);
-
-                    int lastShownCount = 0;
-                    for (int fileCounter = 0; fileCounter < files.Length; fileCounter++)
+                    int percentage = 100 * fileCounter / files.Length;
+                    if (lastShownCount < percentage)
                     {
-                        int percentage = 100 * fileCounter / files.Length;
-                        if (lastShownCount < percentage)
-                        {
-                            lastShownCount = percentage;
-                            MbApiInterface.MB_SetBackgroundTaskMessage(statusBarText + " " + percentage + "% (" + backupName + ")");
-                        }
+                        lastShownCount = percentage;
+                        MbApiInterface.MB_SetBackgroundTaskMessage(statusBarText + " " + percentage + "% (" + backupName + ")");
+                    }
 
-                        currentFile = files[fileCounter];
-                        string trackIdString = GetPersistentTrackId(currentFile, false);
-                        int trackId = int.Parse(trackIdString);
+                    currentFile = files[fileCounter];
+                    string trackIdString = GetPersistentTrackId(currentFile, false);
+                    int trackId = int.Parse(trackIdString);
 
-                        if (SavedSettings.useCustomTrackIdTag)
-                        {
-                            SetFileTag(currentFile, (MetaDataType)SavedSettings.customTrackIdTag, trackIdString, true);
-                            CommitTagsToFile(currentFile, true, true);
-                        }
-
-
-                        if (!BackupIsAlwaysNeeded && !TracksNeededToBeBackedUp.ContainsKey(trackId))
-                            continue;
-
-
-                        libraryTrackId = AddLibraryNameToTrackId(libraryName, trackIdString);
-                        libraryTags = GetFileTags(currentFile, tagIds);
-
-                        for (int i = 0; i < tagIds.Count; i++)
-                        {
-                            if (SavedSettings.backupArtworks || tagIds[i] != MetaDataType.Artwork)
-                                backup.setValue(libraryTags[i], trackId, (int)tagIds[i]);
-                        }
-
-                        if (!TryGetValue(libraryTrackId, out SerializableDictionary<string, bool> trackBackups))
-                        {
-                            trackBackups = new SerializableDictionary<string, bool>();
-                            Add(libraryTrackId, trackBackups);
-                        }
-
-                        trackBackups.AddSkip(backup.guid);
+                    if (SavedSettings.useCustomTrackIdTag)
+                    {
+                        SetFileTag(currentFile, (MetaDataType)SavedSettings.customTrackIdTag, trackIdString, true);
+                        CommitTagsToFile(currentFile, true, true);
                     }
 
 
-                    backup.save(backupName);
+                    if (!BackupIsAlwaysNeeded && !TracksNeededToBeBackedUp.ContainsKey(trackId))
+                        continue;
 
 
-                    FileStream stream = File.Open(BrGetAutoBackupDirectory(SavedSettings.autoBackupDirectory) + @"\" + BackupIndexFileName, FileMode.Create, FileAccess.Write, FileShare.None);
-                    StreamWriter file = new StreamWriter(stream, Encoding.UTF8);
-                    XmlSerializer backupIndexSerializer = new XmlSerializer(typeof(BackupIndex));
+                    libraryTrackId = AddLibraryNameToTrackId(libraryName, trackIdString);
+                    libraryTags = GetFileTags(currentFile, tagIds);
 
-                    backupIndexSerializer.Serialize(file, this);
+                    for (int i = 0; i < tagIds.Count; i++)
+                    {
+                        if (SavedSettings.backupArtworks || tagIds[i] != MetaDataType.Artwork)
+                            backup.setValue(libraryTags[i], trackId, (int)tagIds[i]);
+                    }
 
-                    file.Close();
+                    if (!TryGetValue(libraryTrackId, out SerializableDictionary<string, bool> trackBackups))
+                    {
+                        trackBackups = new SerializableDictionary<string, bool>();
+                        Add(libraryTrackId, trackBackups);
+                    }
+
+                    trackBackups.AddSkip(backup.guid);
                 }
+
+
+                backup.save(backupName);
+
+
+                FileStream stream = File.Open(BrGetAutoBackupDirectory(SavedSettings.autoBackupDirectory) + @"\" + BackupIndexFileName, FileMode.Create, FileAccess.Write, FileShare.None);
+                StreamWriter file = new StreamWriter(stream, Encoding.UTF8);
+                XmlSerializer backupIndexSerializer = new XmlSerializer(typeof(BackupIndex));
+
+                backupIndexSerializer.Serialize(file, this);
+
+                file.Close();
             }
 
 
@@ -688,13 +693,14 @@ namespace MusicBeePlugin
             string backupName = (parameters as object[])[0] as string;
             string statusBarText = (parameters as object[])[1] as string;
             bool restoreForEntireLibrary = (bool)(parameters as object[])[2];
+            bool restoreFromAnotherLibrary = (bool)(parameters as object[])[3];
 
             lock (OpenedForms)
                 NumberOfNativeMbBackgroundTasks++;
 
             try
             {
-                LoadBackup(backupName, statusBarText, restoreForEntireLibrary);
+                LoadBackup(backupName, statusBarText, restoreForEntireLibrary, restoreFromAnotherLibrary);
             }
             catch (System.Threading.ThreadAbortException) 
             {
@@ -715,7 +721,7 @@ namespace MusicBeePlugin
                 NumberOfNativeMbBackgroundTasks--;
         }
 
-        internal static void LoadBackup(string backupName, string statusBarText, bool restoreForEntireLibrary)
+        internal static void LoadBackup(string backupName, string statusBarText, bool restoreForEntireLibrary, bool restoreFromAnotherLibrary)
         {
             System.Threading.Thread.CurrentThread.Priority = System.Threading.ThreadPriority.Lowest;
 
@@ -731,13 +737,18 @@ namespace MusicBeePlugin
             if (backup == null)
                 return;
 
-            if (backup.libraryName != BrGetCurrentLibraryName())
+            if (!restoreFromAnotherLibrary && backup.libraryName != BrGetCurrentLibraryName())
             {
                 System.Media.SystemSounds.Hand.Play();
                 MbApiInterface.MB_SetBackgroundTaskMessage("");
 
-                if (MessageBox.Show(MbForm, MsgBrThisIsTheBackupOfDifferentLibrary, string.Empty, MessageBoxButtons.YesNo) == DialogResult.No) ;
-                return;
+                var result = (DialogResult)MbForm.Invoke(new Func<DialogResult>(() =>
+                {
+                    return MessageBox.Show(MbForm, MsgBrThisIsTheBackupOfDifferentLibrary, string.Empty,
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2);
+                }));
+
+                if (result == DialogResult.No) return;
             }
 
 
@@ -745,7 +756,11 @@ namespace MusicBeePlugin
             {
                 if (files.Length == 0)
                 {
-                    MessageBox.Show(MbForm, MsgNoTracksSelected);
+                    MbForm.Invoke(new Action(() =>
+                    {
+                        MessageBox.Show(MbForm, MsgNoTracksSelected);
+                    }));
+
                     return;
                 }
 

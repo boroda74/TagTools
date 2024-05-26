@@ -967,7 +967,7 @@ namespace MusicBeePlugin
             }
         }
 
-        public static ReportPreset GetCreatePredefinedPreset(Guid presetPermanentGuid, string presetName, //----
+        public static ReportPreset GetCreatePredefinedPreset(Guid presetPermanentGuid, string presetName, 
             SortedDictionary<Guid, ReportPreset> existingPredefinedPresets,
             PresetColumnAttributes[] groupings, PresetColumnAttributes[] functions,
             string[] destinationTags, string[] functionIds

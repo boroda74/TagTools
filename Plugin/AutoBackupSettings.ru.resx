@@ -161,10 +161,10 @@
   <data name="autoBackupPeriodLabel.Text" xml:space="preserve">
     <value>дней.</value>
   </data>
-  <data name="autodeleteOldCheckBox.ToolTip" xml:space="preserve">
+  <data name="autoDeleteOldCheckBox.ToolTip" xml:space="preserve">
     <value>Только автоматические архивы текущей библиотеки будут удаляться</value>
   </data>
-  <data name="autodeleteManyCheckBox.ToolTip" xml:space="preserve">
+  <data name="autoDeleteManyCheckBox.ToolTip" xml:space="preserve">
     <value>Только автоматические архивы текущей библиотеки будут удаляться</value>
   </data>
   <data name="numberOfFilesNumericUpDown.Location" type="System.Drawing.Point, System.Drawing">
@@ -173,7 +173,7 @@
   <data name="autodeleteOldLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 15</value>
   </data>
-  <data name="autodeleteOldLabel.Text" xml:space="preserve">
+  <data name="autoDeleteOldLabel.Text" xml:space="preserve">
     <value>минут.</value>
   </data>
   <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
@@ -206,19 +206,19 @@
   <data name="autodeleteOldCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>228, 15</value>
   </data>
-  <data name="autodeleteOldCheckBoxLabel.Text" xml:space="preserve">
+  <data name="autoDeleteOldCheckBoxLabel.Text" xml:space="preserve">
     <value>Автоматически удалять архивы старше:</value>
   </data>
-  <data name="autodeleteOldCheckBoxLabel.ToolTip" xml:space="preserve">
+  <data name="autoDeleteOldCheckBoxLabel.ToolTip" xml:space="preserve">
     <value>Только автоматические архивы текущей библиотеки будут удаляться</value>
   </data>
   <data name="autodeleteManyCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>458, 15</value>
   </data>
-  <data name="autodeleteManyCheckBoxLabel.Text" xml:space="preserve">
+  <data name="autoDeleteManyCheckBoxLabel.Text" xml:space="preserve">
     <value>Автоматически удалять старые архивы, если общее архивов число больше, чем:</value>
   </data>
-  <data name="autodeleteManyCheckBoxLabel.ToolTip" xml:space="preserve">
+  <data name="autoDeleteManyCheckBoxLabel.ToolTip" xml:space="preserve">
     <value>Только автоматические архивы текущей библиотеки будут удаляться</value>
   </data>
   <data name="dontTryToGuessLibraryNameCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">

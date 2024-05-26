@@ -517,7 +517,11 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>cmd.exe /c rmdir /s /q "D:\LatPaths\MusicBee Portable Development\Plugins\ru"
-xcopy.exe "D:\Архив\Плейеры\.MusicBee\.MusicBee Portable Development\Plugins\Tagging-Tools-Compiled\mb_TagTools.*" "D:\LatPaths\MusicBee Portable Development\Plugins\" /y</PostBuildEvent>
+xcopy.exe "D:\LatPaths\MusicBee Portable Development\Plugins\Tagging-Tools-Compiled\mb_TagTools.*" "D:\LatPaths\MusicBee Portable Development\Plugins\" /y</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>cmd.exe /c rmdir /s /q "D:\LatPaths\MusicBee Portable Development\Plugins\ru"
+cmd.exe /c del /q "D:\LatPaths\MusicBee Portable Development\Plugins\Tagging-Tools-Compiled\*.*"</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
