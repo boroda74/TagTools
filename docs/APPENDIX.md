@@ -10,7 +10,7 @@ MS VS 2022 project, C#. Most people don't need this.
 
 ### Backup download
 
-[![Image](https://a.fsdn.com/con/app/sf-download-button)](<https://sourceforge.net/projects/tag-tools/files/latest/download> "target=\"\_blank\"")
+[![Download Additional Tagging Tools](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/additional-tagging-tools/files/latest/download)
 
 **OR:**
 

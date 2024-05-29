@@ -1948,9 +1948,13 @@ namespace MusicBeePlugin
                     {
                         //Lets replace string hashes in the Artwork column with images.
                         string stringHash = row[artworkField];
+                        Bitmap pic;
 
-                        if (!artworks.TryGetValue(stringHash, out Bitmap pic))
-                            pic = artworks[DefaultArtworkHash];
+                        lock (artworks)
+                        {
+                            if (!artworks.TryGetValue(stringHash, out pic))
+                                pic = artworks[DefaultArtworkHash];
+                        }
 
                         if (previewTable.RowCount > 0)
                         {
@@ -1989,10 +1993,13 @@ namespace MusicBeePlugin
             artwork?.Dispose();
             artwork = null;
 
-            foreach (var pair in artworks)
-                pair.Value.Dispose();
+            lock (artworks)
+            {
+                foreach (var pair in artworks)
+                    pair.Value.Dispose();
 
-            artworks.Clear();
+                artworks.Clear();
+            }
         }
 
         private void resetLocalsAndUiControls()
@@ -2233,7 +2240,8 @@ namespace MusicBeePlugin
                     try { hash = md5.ComputeHash(tc.ConvertTo(pic, typeof(byte[])) as byte[]); }
                     catch { hash = md5.ComputeHash(new byte[] { 0x00 }); }
 
-                    artworks.AddReplace(DefaultArtworkHash, pic);
+                    lock (artworks)
+                        artworks.AddReplace(DefaultArtworkHash, pic);
                 }
             }
 
@@ -2286,7 +2294,9 @@ namespace MusicBeePlugin
                 }
 
                 string Base64StringHash = GetResizedArtworkBase64Hash(ref pic);
-                artworks.AddReplace(Base64StringHash, pic);
+    
+                lock (artworks)
+                    artworks.AddReplace(Base64StringHash, pic);
 
                 return Base64StringHash;
             }
@@ -2709,13 +2719,15 @@ namespace MusicBeePlugin
                 queriedFilesDict.AddSkip(file);
 
 
-            processFileGroupings(queriedFilesDict, interactive, functionId, queryOnlyGroupings, lastSeqNumInOrder, 
+            if (!processFileGroupings(queriedFilesDict, interactive, functionId, queryOnlyGroupings, groupings, lastSeqNumInOrder, 
                         tags, queriedActualGroupingsTagIds, queriedActualGroupingsPropIds,
                         actualSplitGroupingTagsList, cachedFilesActualComposedSplitGroupingTagsList,
                         cachedFilesActualGroupingTags, cachedFilesActualGroupingTagsRaw,
                         dependentGroupingColumns, queriedGroupingTagsRaw, //-V3080
                         queriedActualGroupingTags, queriedActualGroupingTagsRaw, //-V3080
-                        queriedNativeTagNames);
+                        queriedNativeTagNames))
+                
+                return String.Empty;
 
 
             if (queryOnlyGroupings)
@@ -2815,13 +2827,15 @@ namespace MusicBeePlugin
                     newFilesDict.AddSkip(file);
 
 
-            processFileGroupings(newFilesDict, interactive, functionId, false, lastSeqNumInOrder, 
+            if (!processFileGroupings(newFilesDict, interactive, functionId, false, groupings, lastSeqNumInOrder, 
                         null, queriedActualGroupingsTagIds, queriedActualGroupingsPropIds,
                         actualSplitGroupingTagsList, cachedFilesActualComposedSplitGroupingTagsList,
                         cachedFilesActualGroupingTags, cachedFilesActualGroupingTagsRaw,
                         dependentGroupingColumns, queriedGroupingTagsRaw,
                         queriedActualGroupingTags, queriedActualGroupingTagsRaw,
-                        queriedNativeTagNames);
+                        queriedNativeTagNames))
+
+                return String.Empty;
 
 
             tags.Clear(); //Let's resets aggregated functions
@@ -2943,7 +2957,8 @@ namespace MusicBeePlugin
                 return applyPresetResults(affectedFiles, tags, cachedFilesActualComposedSplitGroupingTagsList, interactive, saveResultsToTags, functionId, filterResults);
         }
 
-        private void processFileGroupings(SortedDictionary<string, bool> queriedFilesDict, bool interactive, string functionId, bool queryOnlyGroupings, int lastSeqNumInOrder,
+        private bool processFileGroupings(SortedDictionary<string, bool> queriedFilesDict, bool interactive, string functionId, bool queryOnlyGroupings,
+            PresetColumnAttributesDict groupings, int lastSeqNumInOrder,
             AggregatedTags tags, MetaDataType[] queriedActualGroupingsTagIds, FilePropertyType[] queriedActualGroupingsPropIds,
             List<string>[] actualSplitGroupingTagsList, SortedDictionary<int, List<string>> cachedFilesActualComposedSplitGroupingTagsList,
             SortedDictionary<int, string[]> cachedFilesActualGroupingTags, SortedDictionary<int, string[]> cachedFilesActualGroupingTagsRaw,
@@ -2958,6 +2973,12 @@ namespace MusicBeePlugin
             foreach (string currentFile in queriedFilesDict.Keys)
             {
                 n++;
+
+                if (backgroundTaskIsCanceled)
+                {
+                    clearAppliedPresetCache();
+                    return false;
+                }
 
                 int trackId = GetPersistentTrackIdInt(currentFile);
 
@@ -3071,7 +3092,7 @@ namespace MusicBeePlugin
             }
 
 
-            return;
+            return true;
         }
 
 
@@ -3177,7 +3198,7 @@ namespace MusicBeePlugin
                     {
                         rows.Add(row);
 
-                        if (++groupingIndex % 100 == 0)
+                        if (++groupingIndex % 16 == 0)
                         {
                             SetStatusbarTextForFileOperations(LibraryReportsGeneratingPreviewSbText, true, groupingIndex, groupingsCount, appliedPreset.getName(), 0);
                             Invoke(addRowsToTable, rows);
@@ -3297,7 +3318,7 @@ namespace MusicBeePlugin
                         rows.Add(row);
 
                         //MusicBeePlugin.SetStatusbarTextForFileOperations(LibraryReportsGeneratingPreviewCommandSbText, true, groupingsCount, totalGroupingsCount, appliedPreset.getName());
-                        if (groupingsCount % 100 == 0)
+                        if (groupingsCount % 16 == 0)
                         {
                             SetStatusbarTextForFileOperations(LibraryReportsGeneratingPreviewSbText, true, groupingsCount, totalGroupingsCount, appliedPreset.getName(), 0);
                             Invoke(addRowsToTable, rows);
@@ -4627,10 +4648,16 @@ namespace MusicBeePlugin
             if (!presetIsLoading && previewTable.RowCount == 0)
                 presetTabControl.SelectedTab = tabPage1;
 
+            if (backgroundTaskIsWorking())
+            {
+                backgroundTaskIsCanceled = true;
+                while (BackgroundTaskIsInProgress) ;
+                backgroundTaskIsCanceled = false;
+            }
+
             if (previewTable.RowCount > 0)
             {
                 previewTable.RowCount = 0;
-
                 UpdateCustomScrollBars(previewTable);
             }
 
@@ -4951,7 +4978,8 @@ namespace MusicBeePlugin
 
                 if (base64Artwork == string.Empty) //There are various artworks
                 {
-                    pic = artworks[DefaultArtworkHash];
+                    lock (artworks)
+                        pic = artworks[DefaultArtworkHash];
                 }
                 else //All tracks have the same artwork
                 {
@@ -5051,13 +5079,17 @@ namespace MusicBeePlugin
                             prevAlbumArtist = groupingsValues[albumArtistField]; //-V3106
                             prevAlbum = groupingsValues[albumField]; //-V3106
                             document.beginAlbumArtist(groupingsValues[albumArtistField], groupingsValues.Length - 2 + functionsDict.Count); //-V3106
-                            document.beginAlbum(groupingsValues[albumField], artworks[groupingsValues[artworkField]], groupingsValues[artworkField], albumTrackCounts[i]); //-V3106
+    
+                            lock (artworks)
+                                document.beginAlbum(groupingsValues[albumField], artworks[groupingsValues[artworkField]], groupingsValues[artworkField], albumTrackCounts[i]); //-V3106
                         }
                         else if (prevAlbum != groupingsValues[albumField]) //-V3106
                         {
                             i++;
                             prevAlbum = groupingsValues[albumField]; //-V3106
-                            document.beginAlbum(groupingsValues[albumField], artworks[groupingsValues[artworkField]], groupingsValues[artworkField], albumTrackCounts[i]); //-V3106
+    
+                            lock (artworks)
+                                document.beginAlbum(groupingsValues[albumField], artworks[groupingsValues[artworkField]], groupingsValues[artworkField], albumTrackCounts[i]); //-V3106
                         }
                     }
 
@@ -5071,7 +5103,9 @@ namespace MusicBeePlugin
                     }
                     else if (selectedPreset.fileFormatIndex == LrReportFormat.HtmlDocumentAlbumGrid) //Album grid
                     {
-                        pic = artworks[groupingsValues[artworkField]];
+                        lock (artworks)
+                            pic = artworks[groupingsValues[artworkField]];
+    
                         string albumLabel = groupingsValues[0];
 
                         for (int l = 3; l < groupingsValues.Length; l++) //groupingsValues: 1st value MUST BE album name, 2nd value MUST BE artwork
@@ -5090,7 +5124,8 @@ namespace MusicBeePlugin
                                 || selectedPreset.fileFormatIndex == LrReportFormat.HtmlDocument
                                 || selectedPreset.fileFormatIndex == LrReportFormat.HtmlTable)) //Export images
                             {
-                                pic = artworks[groupingsValues[artworkField]];
+                                lock (artworks)
+                                    pic = artworks[groupingsValues[artworkField]];
 
                                 height = pic.Height;
 

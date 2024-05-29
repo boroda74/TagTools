@@ -4179,7 +4179,7 @@ namespace MusicBeePlugin
                 RenameMoveBackupName = "Переименовать или переместить архив...";
                 MoveBackupsName = "Переместить архив(ы)...";
                 CreateNewBaselineName = "Создать новый опорный архив текущей библиотеки...";
-                createEmptyBaselineRestoreTagsForEntireLibraryName = "Создать пустой опорный архив и восстановить теги для всех треков из другой библиотеки...";
+                createEmptyBaselineRestoreTagsForEntireLibraryName = "Создать пустой опорный архив и восстановить теги из другой библиотеки...";
                 DeleteBackupsName = "Удалить архив(ы)...";
                 AutoBackupSettingsName = "Настройки (авто)архивации...";
 
@@ -4191,7 +4191,7 @@ namespace MusicBeePlugin
                 RenameMoveBackupDescription = TagToolsHotkeyDescription + "Переименовать или переместить архив";
                 MoveBackupsDescription = TagToolsHotkeyDescription + "Переместить архив(ы)";
                 CreateNewBaselineDescription = TagToolsHotkeyDescription + "Создать новый опорный архив текущей библиотеки";
-                createEmptyBaselineRestoreTagsForEntireLibraryDescription = TagToolsHotkeyDescription + "Создать пустой опорный архив и восстановить теги для всех треков из другой библиотеки";
+                createEmptyBaselineRestoreTagsForEntireLibraryDescription = TagToolsHotkeyDescription + "Создать пустой опорный архив и восстановить теги из другой библиотеки";
                 DeleteBackupsDescription = TagToolsHotkeyDescription + "Удалить архив(ы)";
                 AutoBackupSettingsDescription = TagToolsHotkeyDescription + "Настройки (авто)архивации";
 
