@@ -474,6 +474,13 @@ namespace MusicBeePlugin
             public TagType parameterTag5TypeNew = TagType.NotUsed;
             public TagType parameterTag6TypeNew = TagType.NotUsed;
 
+            public TagType parameterTagType = TagType.NotUsed; //****** make primary and the only later !!!!
+            public TagType parameterTag2Type= TagType.NotUsed;
+            public TagType parameterTag3Type = TagType.NotUsed;
+            public TagType parameterTag4Type = TagType.NotUsed;
+            public TagType parameterTag5Type = TagType.NotUsed;
+            public TagType parameterTag6Type = TagType.NotUsed;
+
             public int parameterTagId;
             public int parameterTag2Id;
             public int parameterTag3Id;
@@ -631,6 +638,13 @@ namespace MusicBeePlugin
                 parameterTag5TypeNew = originalPreset.parameterTag5TypeNew;
                 parameterTag6TypeNew = originalPreset.parameterTag6TypeNew;
 
+                parameterTagType = originalPreset.parameterTagType;
+                parameterTag2Type = originalPreset.parameterTag2Type;
+                parameterTag3Type = originalPreset.parameterTag3Type;
+                parameterTag4Type = originalPreset.parameterTag4Type;
+                parameterTag5Type = originalPreset.parameterTag5Type;
+                parameterTag6Type = originalPreset.parameterTag6Type;
+
                 parameterTagId = originalPreset.parameterTagId;
                 parameterTag2Id = originalPreset.parameterTag2Id;
                 parameterTag3Id = originalPreset.parameterTag3Id;
@@ -682,7 +696,7 @@ namespace MusicBeePlugin
                 limitation5 = originalPreset.limitation5;
             }
 
-            public string getHotkeyChar()
+            private string getHotkeyChar()
             {
                 if (!hotkeyAssigned)
                     return string.Empty;
@@ -692,7 +706,7 @@ namespace MusicBeePlugin
                     return "";
             }
 
-            public string getHotkeyPostfix()
+            private string getHotkeyPostfix()
             {
                 string hotkeyChar = getHotkeyChar();
 
@@ -764,6 +778,17 @@ namespace MusicBeePlugin
 
                 if (savedPreset.parameterTag6TypeNew == TagType.Undefined)
                     savedPreset.parameterTag6TypeNew = TagType.NotUsed;
+
+
+                savedPreset.parameterTagType = savedPreset.parameterTagTypeNew;
+                savedPreset.parameterTag2Type= savedPreset.parameterTag2TypeNew;
+                savedPreset.parameterTag3Type = savedPreset.parameterTag3TypeNew;
+                savedPreset.parameterTag4Type = savedPreset.parameterTag4TypeNew;
+                savedPreset.parameterTag5Type = savedPreset.parameterTag5TypeNew;
+                savedPreset.parameterTag6Type = savedPreset.parameterTag6TypeNew;
+
+
+                savedPreset.savePreset(Path.Combine(PresetsPath, savedPreset.getSafeFileName() + AsrPresetExtension)); //******* remove later !!!!
 
                 return savedPreset;
             }
