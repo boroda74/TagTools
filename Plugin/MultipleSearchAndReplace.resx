@@ -135,9 +135,9 @@
   <data name="templateTable.ColumnHeadersHeight" type="System.Int32, mscorlib">
     <value>29</value>
   </data>
-  <metadata name="SearchTag.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="SearchTag.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="SearchTag.HeaderText" xml:space="preserve">
     <value>Search tag</value>
   </data>
@@ -147,9 +147,9 @@
   <data name="SearchTag.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="RegEx.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="RegEx.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="RegEx.HeaderText" xml:space="preserve">
     <value>(*)</value>
   </data>
@@ -162,9 +162,9 @@
   <data name="RegEx.Width" type="System.Int32, mscorlib">
     <value>30</value>
   </data>
-  <metadata name="CaseSensitive.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="CaseSensitive.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="CaseSensitive.HeaderText" xml:space="preserve">
     <value>Aa</value>
   </data>
@@ -172,32 +172,32 @@
     <value>30</value>
   </data>
   <data name="CaseSensitive.ToolTipText" xml:space="preserve">
-    <value>Case sensitive search</value>
+    <value>Case-sensitive search</value>
   </data>
   <data name="CaseSensitive.Width" type="System.Int32, mscorlib">
     <value>30</value>
   </data>
-  <metadata name="SearchFor.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="SearchFor.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="SearchFor.HeaderText" xml:space="preserve">
     <value>Search for</value>
   </data>
   <data name="SearchFor.MinimumWidth" type="System.Int32, mscorlib">
     <value>50</value>
   </data>
-  <metadata name="ReplaceWith.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="ReplaceWith.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="ReplaceWith.HeaderText" xml:space="preserve">
     <value>Replace with</value>
   </data>
   <data name="ReplaceWith.MinimumWidth" type="System.Int32, mscorlib">
     <value>50</value>
   </data>
-  <metadata name="Position.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="Position.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="Position.HeaderText" xml:space="preserve">
     <value>Позиция</value>
   </data>
@@ -210,12 +210,12 @@
   <data name="templateTable.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <metadata name="dirtyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="dirtyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>17, 17</value>
-  </metadata>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <data name="$this.Localizable" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="buttonPreview.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
@@ -321,9 +321,9 @@
   <data name="buttonDeleteSaved.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
   </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>165, 17</value>
-  </metadata>
+  </data>
   <data name="buttonDeleteSaved.ToolTip" xml:space="preserve">
     <value>Delete ASR preset</value>
   </data>
@@ -1780,36 +1780,36 @@ criteria, all of which must match the search results.</value>
   <data name="previewTable.ColumnHeadersHeight" type="System.Int32, mscorlib">
     <value>29</value>
   </data>
-  <metadata name="Track.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="Track.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="Track.HeaderText" xml:space="preserve">
     <value>Track</value>
   </data>
   <data name="Track.MinimumWidth" type="System.Int32, mscorlib">
     <value>40</value>
   </data>
-  <metadata name="OriginalTag.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="OriginalTag.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="OriginalTag.HeaderText" xml:space="preserve">
     <value>Original tag value</value>
   </data>
   <data name="OriginalTag.MinimumWidth" type="System.Int32, mscorlib">
     <value>25</value>
   </data>
-  <metadata name="NewTag.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="NewTag.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="NewTag.HeaderText" xml:space="preserve">
     <value>New tag value</value>
   </data>
   <data name="NewTag.MinimumWidth" type="System.Int32, mscorlib">
     <value>25</value>
   </data>
-  <metadata name="FileColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="FileColumn.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="FileColumn.HeaderText" xml:space="preserve">
     <value>File</value>
   </data>
@@ -1890,5 +1890,8 @@ criteria, all of which must match the search results.</value>
   </data>
   <data name="&gt;&gt;splitContainer1.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="buttonDeleteSaved.Text" xml:space="preserve">
+    <value>❌</value>
   </data>
 </root>

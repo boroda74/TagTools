@@ -85,8 +85,8 @@ namespace MusicBeePlugin
     partial class Plugin
     {
         #region Members
-        internal static bool DeveloperMode = false;
-        private static bool Uninstalled = false;
+        internal static bool DeveloperMode;
+        private static bool Uninstalled;
 
         internal static MusicBeeApiInterface MbApiInterface;
         private static readonly PluginInfo About = new PluginInfo();
@@ -96,7 +96,9 @@ namespace MusicBeePlugin
         internal static ToolStripMenuItem OpenedFormsSubmenu;
 
         //Skinning
-        internal static bool PluginClosing = false;//***
+        internal static bool PluginClosing;//***
+
+        internal static float ButtonHeightDpiFontScaling = 1;
 
         internal static Color FormForeColor;
         internal static Color FormBackColor;
@@ -104,6 +106,8 @@ namespace MusicBeePlugin
 
         internal static Color ControlHighlightForeColor;
         internal static Color ControlHighlightBackColor;
+
+        internal static bool UseNativeButtonPaint = true;
 
         internal static Color ButtonFocusedBorderColor;
         internal static Color ButtonBorderColor;
@@ -123,6 +127,7 @@ namespace MusicBeePlugin
         internal static Color InputControlForeColor;
         internal static Color InputControlBackColor;
         internal static Color InputControlBorderColor;
+        internal static Color InputControlFocusedBorderColor;
 
         internal static Color InputControlDimmedForeColor;
         internal static Color InputControlDimmedBackColor;
@@ -137,7 +142,7 @@ namespace MusicBeePlugin
         internal static Color SplitterColor;
 
 
-        internal static readonly Color NoColor = Color.FromArgb(-1);
+        internal static readonly Color NoColor = Color.FromArgb(-2); //****
 
         internal static Color ScrollBarBackColor = NoColor;
         internal static Color ScrollBarBorderColor = NoColor;
@@ -146,6 +151,8 @@ namespace MusicBeePlugin
         internal static Color ScrollBarThumbAndSpansForeColor = NoColor;
         internal static Color ScrollBarThumbAndSpansBackColor = NoColor;
         internal static Color ScrollBarThumbAndSpansBorderColor = NoColor;
+
+        internal static Color ScrollBarFocusedBorderColor = NoColor;
 
 
         //Themed colors for ASR/LR
@@ -177,8 +184,8 @@ namespace MusicBeePlugin
         internal static Bitmap ThumbRightImage;
 
 
-        internal static Bitmap ButtonRemoveImage;
-        internal static Bitmap ButtonSetImage;
+        //internal static Bitmap ButtonSetImage;
+        //internal static Bitmap DisabledButtonSetImage;
 
         internal static Bitmap CheckedState;
         internal static Bitmap UncheckedState;
@@ -231,8 +238,8 @@ namespace MusicBeePlugin
         internal static string DisabledState = "-";
 
 
-        internal static string LrCachedFunctionResultPresetSeparator = "\ufffc"; //Object replacement character, it hardly will be used in tags
-        internal static string LrCachedFunctionResultLibraryPathHashSeparator = "\ufffd";//"\u2061"; //Function application character, it hardly will be used in tags
+        internal static string LrCachedFunctionResultPresetSeparator = "\ufffc"; //Object replacement character, it will be hardly used in tags
+        internal static string LrCachedFunctionResultLibraryPathHashSeparator = "\ufffd";//Replacement character //"\u2061"; //Function application character, it will be hardly used in tags
         internal static string LrCurrentLibraryPathHash = null;
         internal static int LrLastAskedCacheFillLibraryPathHash = -1;
 
@@ -251,14 +258,14 @@ namespace MusicBeePlugin
         internal static List<PluginWindowTemplate> OpenedForms = new List<PluginWindowTemplate>();
         internal static int NumberOfNativeMbBackgroundTasks = 0;
 
-        private static bool PrioritySet = false; //MusicBeePlugin's background thread priority must be set to "lower"
+        private static bool PrioritySet; //MusicBeePlugin's background thread priority must be set to "lower"
 
         internal static bool DisablePlaySoundOnce = false;
 
         internal static bool BackupIsAlwaysNeeded = true;
         internal static SortedDictionary<int, bool> TracksNeededToBeBackedUp = new SortedDictionary<int, bool>();
         internal static SortedDictionary<int, bool> TempTracksNeededToBeBackedUp = new SortedDictionary<int, bool>();
-        internal static int UpdatedTracksForBackupCount = 0;
+        internal static int UpdatedTracksForBackupCount;
         internal const int MaxUpdatedTracksCount = 5000;
 
         internal static string MusicName;
@@ -271,20 +278,17 @@ namespace MusicBeePlugin
         internal static SortedDictionary<string, FilePropertyType> PropNamesIds = new SortedDictionary<string, FilePropertyType>();
         internal static Dictionary<FilePropertyType, string> PropIdsNames = new Dictionary<FilePropertyType, string>();
 
-        private delegate void AutoApplyDelegate(object currentFileObj, object tagToolsPluginObj);
-        private readonly AutoApplyDelegate autoApplyDelegate = AsrAutoApplyPresets;
-
         private static readonly List<string> FilesUpdatedByPlugin = new List<string>();
         private static readonly List<string> ChangedFiles = new List<string>();
 
-        private static System.Threading.Timer PeriodicUiRefreshTimer = null;
-        private static System.Threading.Timer DelayedStatusbarTextClearingTimer = null;
-        private static bool UiRefreshingIsNeeded = false;
+        private static System.Threading.Timer PeriodicUiRefreshTimer;
+        private static System.Threading.Timer DelayedStatusBarTextClearingTimer;
+        private static bool UiRefreshingIsNeeded;
         private static TimeSpan RefreshUI_Delay = new TimeSpan(0, 0, 5);
         internal static DateTime LastUI_Refresh = DateTime.MinValue;
         private static readonly object LastUI_RefreshLocker = new object();
 
-        internal static System.Threading.Timer PeriodicAutoBackupTimer = null;
+        internal static System.Threading.Timer PeriodicAutoBackupTimer;
 
         internal static Button EmptyButton;
         internal static Form EmptyForm;
@@ -295,18 +299,17 @@ namespace MusicBeePlugin
         internal static string Language;
         internal static string PluginsPath;
 
-        private static string PluginSettingsFileName = "mb_TagTools.settings.xml";
+        private static readonly string PluginSettingsFileName = "mb_TagTools.settings.xml";
         private static string PluginSettingsFilePath;
 
-        private static string PluginHelpFileName = "Additional-Tagging-Tools";
+        private static readonly string PluginHelpFileName = "Additional-Tagging-Tools";
         private static string PluginHelpFilePath;
 
         internal const string BackupIndexFileName = ".Master Tag Index.mbi";
         internal static string BackupDefaultPrefix = "Tag Backup ";
         internal static BackupIndex BackupIndex;
 
-        internal const int StatusbarTextUpdateInterval = 50;
-        internal static char[] FilesSeparators = { '\u0000' };
+        internal const int StatusBarTextUpdateInterval = 50;
 
         internal static List<Preset> AsrAutoAppliedPresets = new List<Preset>();
         internal const string AsrPresetsDirectory = "ASR Presets";
@@ -321,7 +324,9 @@ namespace MusicBeePlugin
 
         internal static SortedDictionary<Guid, bool> AllLrPresetGuidsInUse = new SortedDictionary<Guid, bool>(); //<guid, false>: NOT permanentGuid!
         internal static SortedDictionary<int, string> LrTrackCacheNeededToBeUpdated = new SortedDictionary<int, string>(); //<Track persistent id, URL>
+        internal static SortedDictionary<int, string> LrDeletedTrackCacheNeededToBeUpdated = new SortedDictionary<int, string>(); //<Track persistent id, URL>
         internal static string[] LrTrackCacheNeededToBeUpdatedWorkingCopy; //URL[]
+        internal static string[] LrDeletedTrackCacheNeededToBeUpdatedWorkingCopy; //URL[]
         internal static Thread UpdateFunctionCacheThread = null;
         internal static readonly TimeSpan FunctionCacheUpdateDelay = new TimeSpan(0, 0, 5); //Every 5 secs. //****
         internal static readonly TimeSpan FunctionCacheClearingDelay = new TimeSpan(0, 1, 0); //Every 1 min. //****
@@ -330,14 +335,14 @@ namespace MusicBeePlugin
         internal static readonly int TagsCacheClearingGroupingsCountThreshold = 20_000;
 
 
-        internal static LibraryReports LibraryReportsCommandForHotkeys = null;
+        internal static LibraryReports LibraryReportsCommandForHotkeys;
         internal static ReportPreset[] ReportPresetsWithHotkeys = new ReportPreset[MaximumNumberOfLrHotkeys];
         internal static int LrPresetsWithHotkeysCount = 0;
 
-        internal static LibraryReports LibraryReportsCommandForAutoApplying = null;
+        internal static LibraryReports LibraryReportsCommandForAutoApplying;
         internal static List<ReportPreset> ReportPresetsForAutoApplying = new List<ReportPreset>();
 
-        internal static LibraryReports LibraryReportsCommandForFunctionIds = null;
+        internal static LibraryReports LibraryReportsCommandForFunctionIds;
         internal static SortedDictionary<string, ReportPreset> IdsReportPresets = new SortedDictionary<string, ReportPreset>();
         internal static bool ReportPresetIdsAreInitialized = false;
 
@@ -359,12 +364,12 @@ namespace MusicBeePlugin
         internal static ToolStripMenuItem TagToolsSubmenu;
         internal static ToolStripMenuItem TagToolsContextSubmenu;
 
-        internal static ToolStripMenuItem CopyTagsToClipboardUsingMenuItem = null;
-        internal static ToolStripMenuItem CopyTagsToClipboardUsingContextMenuItem = null;
-        internal static ToolStripMenuItem AsrPresetsMenuItem = null;
-        internal static ToolStripMenuItem AsrPresetsContextMenuItem = null;
-        internal static ToolStripMenuItem LrPresetsMenuItem = null;
-        internal static ToolStripMenuItem LrPresetsContextMenuItem = null;
+        internal static ToolStripMenuItem CopyTagsToClipboardUsingMenuItem;
+        internal static ToolStripMenuItem CopyTagsToClipboardUsingContextMenuItem;
+        internal static ToolStripMenuItem AsrPresetsMenuItem;
+        internal static ToolStripMenuItem AsrPresetsContextMenuItem;
+        internal static ToolStripMenuItem LrPresetsMenuItem;
+        internal static ToolStripMenuItem LrPresetsContextMenuItem;
 
         private int InitialSkipCount;
         #endregion
@@ -453,9 +458,9 @@ namespace MusicBeePlugin
             public bool dontShowCopyTag;
             public bool dontShowSwapTags;
             public bool dontShowChangeCase;
-            public bool dontShowReencodeTag;
+            public bool dontShowReEncodeTag;
             public bool dontShowLibraryReports;
-            public bool dontShowAutorate;
+            public bool dontShowAutoRate;
             public bool dontShowAsr;
             public bool dontShowCAR;
             public bool dontShowCT;
@@ -494,7 +499,6 @@ namespace MusicBeePlugin
             public string swapTagsDestinationTagName;
 
             public string initialEncodingName;
-            public string usedEncodingName;
             public string reencodeTagSourceTagName;
 
             public bool onlyIfDestinationIsEmpty;
@@ -502,30 +506,30 @@ namespace MusicBeePlugin
             public bool smartOperation;
             public bool appendSource;
             public bool addSource;
-            public string[] customText;
-            public string[] appendedText;
-            public string[] addedText;
+            public object[] customText;
+            public object[] appendedText;
+            public object[] addedText;
 
 
             public int changeCaseFlag;
 
             public bool useExceptionWords;
             public bool useOnlyWords;
-            public string[] exceptionWords;
+            public object[] exceptionWords;
             public string exceptionWordsAsr;
 
             public bool useExceptionChars;
-            public string[] exceptionChars;
+            public object[] exceptionChars;
             public string exceptionCharsAsr;
 
             public bool useExceptionCharPairs;
-            public string[] leftExceptionChars;
+            public object[] leftExceptionChars;
             public string leftExceptionCharsAsr;
-            public string[] rightExceptionChars;
+            public object[] rightExceptionChars;
             public string rightExceptionCharsAsr;
 
             public bool useWordSeparators;
-            public string[] wordSeparators;
+            public object[] wordSeparators;
             public string wordSeparatorsAsr;
 
             public bool alwaysCapitalize1stWord = true;
@@ -618,8 +622,8 @@ namespace MusicBeePlugin
             public string autoBackupDirectory;
             public string autoBackupPrefix;
             public decimal autoBackupInterval;
-            public decimal autodeleteKeepNumberOfDays;
-            public decimal autodeleteKeepNumberOfFiles;
+            public decimal autoDeleteKeepNumberOfDays;
+            public decimal autoDeleteKeepNumberOfFiles;
             public bool useCustomTrackIdTag;
             public int customTrackIdTag;
 
@@ -629,7 +633,7 @@ namespace MusicBeePlugin
             public int[] displayedTags;
             public bool dontAutoSelectDisplayedTags;
 
-            public string[] lastSelectedFolders;
+            public object[] lastSelectedFolders;
 
             public bool backupArtworks;
             public bool dontTryToGuessLibraryName;
@@ -673,8 +677,8 @@ namespace MusicBeePlugin
         internal static string CopyTagName;
         internal static string SwapTagsName;
         internal static string ChangeCaseName;
-        internal static string ReencodeTagName;
-        internal static string ReencodeTagsName;
+        internal static string ReEncodeTagName;
+        internal static string ReEncodeTagsName;
         internal static string LibraryReportsName;
         internal static string AutoRateName;
         internal static string AsrName;
@@ -689,8 +693,8 @@ namespace MusicBeePlugin
         private static string CopyTagDescription;
         private static string SwapTagsDescription;
         private static string ChangeCaseDescription;
-        private static string ReencodeTagDescription;
-        private static string ReencodeTagsDescription;
+        private static string ReEncodeTagDescription;
+        private static string ReEncodeTagsDescription;
         private static string LibraryReportsDescription;
         private static string AutoRateDescription;
         private static string AsrDescription;
@@ -731,7 +735,7 @@ namespace MusicBeePlugin
         internal static string CopyTagSbText;
         internal static string SwapTagsSbText;
         internal static string ChangeCaseSbText;
-        internal static string ReencodeTagSbText;
+        internal static string ReEncodeTagSbText;
         internal static string LibraryReportsSbText;
         internal static string LibraryReportsGeneratingPreviewSbText;
         internal static string ApplyingLrPresetSbText;
@@ -970,6 +974,8 @@ namespace MusicBeePlugin
         internal static string ExMaskAndImageMustBeTheSameSize;
 
 
+        internal static string CtlAutoRateCalculating;
+
         internal static string CtlAsrCellTooTip;
         internal static string CtlAsrAllTagsCellTooTip;
         internal static string MsgAsrPresetsUsingAllTagsPseudoTagNameCannotBeAutoApplied;
@@ -1040,7 +1046,7 @@ namespace MusicBeePlugin
 
             if (MbApiInterface.Playlist_QueryPlaylists())
             {
-                string playlist = MbApiInterface.Playlist_QueryGetNextPlaylist();
+                var playlist = MbApiInterface.Playlist_QueryGetNextPlaylist();
 
                 if (!string.IsNullOrEmpty(playlist))
                     libraryPath = Regex.Replace(playlist, @"^(.*)\\Playlists\\.*", "$1");
@@ -1066,7 +1072,7 @@ namespace MusicBeePlugin
         internal static string GetPluralForm(string sentence, int number)
         {
             int form;
-            int remainder = number % 10;
+            var remainder = number % 10;
 
             if (number == 0) //Here may be special form like "No files" instead of "0 files"
                 form = 5;
@@ -1099,8 +1105,8 @@ namespace MusicBeePlugin
 
         internal static string AddLeadingSpaces(int number, int spacesCount, int zerosCount = 1)
         {
-            string leadingZerosNumber = number.ToString("D" + spacesCount);
-            string leadingSpaces = string.Empty;
+            var leadingZerosNumber = number.ToString("D" + spacesCount);
+            var leadingSpaces = string.Empty;
             int maxZerosIndex;
             for (maxZerosIndex = 0; maxZerosIndex < spacesCount - zerosCount; maxZerosIndex++)
             {
@@ -1211,10 +1217,10 @@ namespace MusicBeePlugin
 
             internal int compare(ConvertStringsResult comparedResult) //-1: less than comparedResult, 0: equal to comparedResult, +1: greater than comparedResult
             {
-                double value = getResult();
-                double comparedValue = comparedResult.getResult();
+                var value = getResult();
+                var comparedValue = comparedResult.getResult();
 
-                if (value == double.NegativeInfinity || comparedValue == double.NegativeInfinity) //Let's compare as strings
+                if (double.IsNegativeInfinity(value) || double.IsNegativeInfinity(comparedValue)) //Let's compare as strings
                 {
                     return resultS.CompareTo(comparedResult.resultS);
                 }
@@ -1231,7 +1237,7 @@ namespace MusicBeePlugin
 
             internal double getResult() //Returns double for any numeric (number/duration/date-time) result or NegativeInfinity for any not numeric one
             {
-                if (items1.Count != 0) //Its "Average count" function
+                if (items1.Count != 0) //It's "Average count" function
                 {
                     return (double)items1.Count / items.Count;
                 }
@@ -1239,7 +1245,7 @@ namespace MusicBeePlugin
                 {
                     if (items.Count == 0)
                         return double.NegativeInfinity;
-                    else //Its "average" function
+                    else //It's "average" function
                         return resultD / items.Count;
                 }
                 else if (resultType == ResultType.ItemCount) //Items count
@@ -1250,34 +1256,34 @@ namespace MusicBeePlugin
                 {
                     if (items.Count == 0)
                         return resultD;
-                    else //Its "average" function
+                    else //It's "average" function
                         return resultD / items.Count;
                 }
                 else if (resultType == ResultType.TimeSpan) //Timespan
                 {
                     if (items.Count == 0)
                         return resultD;
-                    else //Its "average" function
+                    else //It's "average" function
                         return resultD / items.Count;
                 }
                 else if (resultType == ResultType.DateTime) //Datetime
                 {
                     if (items.Count == 0)
                         return resultD;
-                    else //Its "average" function
+                    else //It's "average" function
                         return resultD / items.Count;
                 }
                 else if (resultType == ResultType.Year) //Datetime (year only)
                 {
                     if (items.Count == 0)
                         return resultD;
-                    else //Its "average" function
+                    else //It's "average" function
                         return resultD / items.Count;
                 }
                 //else if (resultType >= ResultType.AutoDouble && resultType < ResultType.UnknownOrString) //(Auto)double, year or date-time (milliseconds from 1900-01-01), timespan (milliseconds)
                 //{
                 //    double value = resultD;
-                //    if (items != null && items.Count != 0) //Its "average" function
+                //    if (items != null && items.Count != 0) //It's "average" function
                 //        value /= items.Count;
 
                 //    return value;
@@ -1304,9 +1310,9 @@ namespace MusicBeePlugin
                 }
 
 
-                double result = getResult();
+                var result = getResult();
 
-                if (result == double.NegativeInfinity)
+                if (double.IsNegativeInfinity(result))
                 {
                     resultType = ResultType.ParsingError;
 
@@ -1314,13 +1320,13 @@ namespace MusicBeePlugin
                 }
                 else if (resultType == ResultType.ItemCount || resultType == ResultType.Double || resultType == ResultType.AutoDouble) //Item count or double. It's numeric result. Let's format it.
                 {
-                    int mulDivFactor = GetMulDivFactor(mulDivFactorRepr);
+                    var mulDivFactor = GetMulDivFactor(mulDivFactorRepr);
                     if (mulDivFactor != 1 && operation == 0)
                         result /= mulDivFactor;
                     else if (mulDivFactor != 1 && operation == 1)
                         result *= mulDivFactor;
 
-                    int precisionDigits = GetPrecisionDigits(precisionDigitsRepr);
+                    var precisionDigits = GetPrecisionDigits(precisionDigitsRepr);
                     if (precisionDigits >= 0)
                         return resultDPrefix + Math.Round((decimal)result, precisionDigits).ToString("F" + precisionDigits) + resultDSpace + appendedText + resultDPostfix;
                     else
@@ -1349,7 +1355,7 @@ namespace MusicBeePlugin
         {
             string stringnumber;
 
-            string fractionalpart = Regex.Replace(input, @"^(\D*?)(\d+)(\.|\,)?(\d*?)(\s*)" + units + @"(\D.*)$", "$4", RegexOptions.IgnoreCase);
+            var fractionalpart = Regex.Replace(input, @"^(\D*?)(\d+)(\.|\,)?(\d*?)(\s*)" + units + @"(\D.*)$", "$4", RegexOptions.IgnoreCase);
             if (fractionalpart == string.Empty || fractionalpart == input)
                 stringnumber = Regex.Replace(input, @"^(\D*?)(\d+)(\.|\,)?(\d*?)(\s*)" + units + @"(\D.*)$", "$2", RegexOptions.IgnoreCase);
             else
@@ -1358,19 +1364,19 @@ namespace MusicBeePlugin
             if (stringnumber == input)
                 return (double.NegativeInfinity, null, null, null);
 
-            string prefix = Regex.Replace(input, @"^(\D*?)(\d+)(\.|\,)?(\d*?)(\s*)" + units + @"(\D.*)$", "$1", RegexOptions.IgnoreCase);
+            var prefix = Regex.Replace(input, @"^(\D*?)(\d+)(\.|\,)?(\d*?)(\s*)" + units + @"(\D.*)$", "$1", RegexOptions.IgnoreCase);
             if (prefix == input)
                 prefix = string.Empty;
 
-            string space = Regex.Replace(input, @"^(\D*?)(\d+)(\.|\,)?(\d*?)(\s*)" + units + @"(\D.*)$", "$5", RegexOptions.IgnoreCase);
+            var space = Regex.Replace(input, @"^(\D*?)(\d+)(\.|\,)?(\d*?)(\s*)" + units + @"(\D.*)$", "$5", RegexOptions.IgnoreCase);
             if (space == input)
                 space = string.Empty;
 
-            string postfix = Regex.Replace(input, @"^(\D*?)(\d+)(\.|\,)?(\d*?)(\s*)" + units + @"(\D.*)$", "$7", RegexOptions.IgnoreCase);
+            var postfix = Regex.Replace(input, @"^(\D*?)(\d+)(\.|\,)?(\d*?)(\s*)" + units + @"(\D.*)$", "$7", RegexOptions.IgnoreCase);
             if (postfix == input)
                 postfix = string.Empty;
 
-            if (double.TryParse(stringnumber, out double number))
+            if (double.TryParse(stringnumber, out var number))
                 return ((number * multiplicator), prefix, space, postfix);
             else
                 return (double.NegativeInfinity, null, null, null);
@@ -1380,28 +1386,28 @@ namespace MusicBeePlugin
         {
             string stringnumber;
 
-            string fractionalpart = Regex.Replace(input, @"^(\D*?)(\d+)(\.|\,)?(\d*?)(\s*)(\D*)$", "$4", RegexOptions.IgnoreCase);
+            var fractionalpart = Regex.Replace(input, @"^(\D*?)(\d+)(\.|\,)?(\d*?)(\s*)(\D*)$", "$4", RegexOptions.IgnoreCase);
             if (fractionalpart == string.Empty || fractionalpart == input)
                 stringnumber = Regex.Replace(input, @"^(\D*?)(\d+)(\.|\,)?(\d*?)(\s*)(\D*)$", "$2", RegexOptions.IgnoreCase);
             else
                 stringnumber = Regex.Replace(input, @"^(\D*?)(\d+)(\.|\,)?(\d*?)(\s*)(\D*)$", "$2" + LocalizedDecimalPoint + "$4", RegexOptions.IgnoreCase);
 
-            string prefix = Regex.Replace(input, @"^(\D*?)(\d+)(\.|\,)?(\d*?)(\s*)(\D*)$", "$1", RegexOptions.IgnoreCase);
+            var prefix = Regex.Replace(input, @"^(\D*?)(\d+)(\.|\,)?(\d*?)(\s*)(\D*)$", "$1", RegexOptions.IgnoreCase);
 
             if (!string.IsNullOrWhiteSpace(prefix)) //Probably prefixed string must not br treated as number at all //***
                 return (double.NegativeInfinity, null, null, null);
             if (prefix == input)
                 prefix = string.Empty;
 
-            string space = Regex.Replace(input, @"^(\D*?)(\d+)(\.|\,)?(\d*?)(\s*)(\D*)$", "$5", RegexOptions.IgnoreCase);
+            var space = Regex.Replace(input, @"^(\D*?)(\d+)(\.|\,)?(\d*?)(\s*)(\D*)$", "$5", RegexOptions.IgnoreCase);
             if (space == input)
                 space = string.Empty;
 
-            string postfix = Regex.Replace(input, @"^(\D*?)(\d+)(\.|\,)?(\d*?)(\s*)(\D*)$", "$6", RegexOptions.IgnoreCase);
+            var postfix = Regex.Replace(input, @"^(\D*?)(\d+)(\.|\,)?(\d*?)(\s*)(\D*)$", "$6", RegexOptions.IgnoreCase);
             if (postfix == input)
                 postfix = string.Empty;
 
-            if (double.TryParse(stringnumber, out double number))
+            if (double.TryParse(stringnumber, out var number))
                 return (number, prefix, space, postfix);
             else
                 return (double.NegativeInfinity, null, null, null);
@@ -1409,9 +1415,10 @@ namespace MusicBeePlugin
 
         internal static ConvertStringsResult ConvertStrings(string arg, ResultType resultType, DataType dataType, bool replacements = false)
         {
-            ConvertStringsResult result = new ConvertStringsResult(resultType, dataType);
-
-            result.resultS = arg;
+            var result = new ConvertStringsResult(resultType, dataType)
+            {
+                resultS = arg
+            };
 
             if (arg == string.Empty)
             {
@@ -1437,9 +1444,9 @@ namespace MusicBeePlugin
 
             if (replacements)
             {
-                string unitsK = "(k|к";
-                string unitsM = "(m|м";
-                string unitsG = "(g|г";
+                var unitsK = "(k|к";
+                var unitsM = "(m|м";
+                var unitsG = "(g|г";
 
                 if (!string.IsNullOrWhiteSpace(SavedSettings.unitK))
                     unitsK = "|" + SavedSettings.unitK;
@@ -1454,7 +1461,7 @@ namespace MusicBeePlugin
                 unitsM += ")";
                 unitsG += ")";
 
-                double number = double.NegativeInfinity;
+                var number = double.NegativeInfinity;
 
                 string numberprefix = null;
                 string numberspace = null;
@@ -1467,7 +1474,7 @@ namespace MusicBeePlugin
 
 
                 (numbertemp, numberprefixtemp, numberspacetemp, numberpostfixtemp) = ParseNumberAndMeasurementUnits(arg, unitsG, 1_099_511_627_776);
-                if (numbertemp != double.NegativeInfinity)
+                if (!double.IsNegativeInfinity(numbertemp))
                 {
                     number = numbertemp;
                     numberprefix = numberprefixtemp;
@@ -1477,7 +1484,7 @@ namespace MusicBeePlugin
                 else
                 {
                     (numbertemp, numberprefixtemp, numberspacetemp, numberpostfixtemp) = ParseNumberAndMeasurementUnits(arg, unitsM, 1_048_576);
-                    if (numbertemp != double.NegativeInfinity)
+                    if (!double.IsNegativeInfinity(numbertemp))
                     {
                         number = numbertemp;
                         numberprefix = numberprefixtemp;
@@ -1487,7 +1494,7 @@ namespace MusicBeePlugin
                     else
                     {
                         (numbertemp, numberprefixtemp, numberspacetemp, numberpostfixtemp) = ParseNumberAndMeasurementUnits(arg, unitsK, 1024);
-                        if (numbertemp != double.NegativeInfinity)
+                        if (!double.IsNegativeInfinity(numbertemp))
                         {
                             number = numbertemp;
                             numberprefix = numberprefixtemp;
@@ -1496,10 +1503,10 @@ namespace MusicBeePlugin
                         }
                         else
                         {
-                            if (number == double.NegativeInfinity)
+                            if (double.IsNegativeInfinity(number))
                             {
                                 (numbertemp, numberprefixtemp, numberspacetemp, numberpostfixtemp) = ParseNumber(arg);
-                                if (numbertemp != double.NegativeInfinity)
+                                if (!double.IsNegativeInfinity(numbertemp))
                                 {
                                     number = numbertemp;
                                     numberprefix = numberprefixtemp;
@@ -1512,7 +1519,7 @@ namespace MusicBeePlugin
                 }
 
 
-                if (number != double.NegativeInfinity)
+                if (!double.IsNegativeInfinity(number))
                 {
                     result.resultD = number;
                     result.resultDPrefix = numberprefix;
@@ -1578,10 +1585,9 @@ namespace MusicBeePlugin
                 //Let's try to parse as short duration (without date)
                 else if (arg.Length < 9 && arg.Contains(":") && !arg.Contains("/") && !arg.Contains("-") && !arg.Contains("."))
                 {
-                    string[] ts1 = arg.Split(':');
-                    TimeSpan time;
+                    var ts1 = arg.Split(':');
 
-                    time = TimeSpan.FromSeconds(Convert.ToInt32(ts1[ts1.Length - 1]));
+                    var time = TimeSpan.FromSeconds(Convert.ToInt32(ts1[ts1.Length - 1]));
                     time += TimeSpan.FromMinutes(Convert.ToInt32(ts1[ts1.Length - 2]));
                     if (ts1.Length > 2)
                         time += TimeSpan.FromHours(Convert.ToInt32(ts1[ts1.Length - 3]));
@@ -1591,7 +1597,7 @@ namespace MusicBeePlugin
 
                     return result;
                 }
-                else if (DateTime.TryParse(arg, out DateTime datetime))
+                else if (DateTime.TryParse(arg, out var datetime))
                 {
                     //Let's try to parse as long duration (with date)
                     if (datetime.Year < 1900)
@@ -1719,7 +1725,7 @@ namespace MusicBeePlugin
 
                 if (comparedColumnIndex != -1)
                 {
-                    int comparison = CompareStrings((x as DataGridViewRow).Cells[comparedColumnIndex].Value as string, (y as DataGridViewRow).Cells[comparedColumnIndex].Value as string);
+                    var comparison = CompareStrings((x as DataGridViewRow).Cells[comparedColumnIndex].Value as string, (y as DataGridViewRow).Cells[comparedColumnIndex].Value as string); //-V3156
                     if (comparison > 0)
                         return 1;
                     else if (comparison < 0)
@@ -1743,11 +1749,9 @@ namespace MusicBeePlugin
             {
                 if (tagCounterIndex != -1)
                 {
-                    int comparation;
-
-                    for (int i = 0; i < tagCounterIndex; i++)
+                    for (var i = 0; i < tagCounterIndex; i++)
                     {
-                        comparation = CompareStrings(x[i], y[i], ResultType.Double, DataType.Number);
+                        var comparation = CompareStrings(x[i], y[i], ResultType.Double, DataType.Number);
 
                         if (comparation > 0)
                             return 1;
@@ -1766,13 +1770,13 @@ namespace MusicBeePlugin
 
         internal static void UpdateTrackForBackup(string trackUrl)
         {
-            string nodeName = MbApiInterface.Library_GetFileTag(trackUrl, (MetaDataType)42);
+            var nodeName = MbApiInterface.Library_GetFileTag(trackUrl, (MetaDataType)42);
 
             if (nodeName != MusicName)
                 return;
 
 
-            int trackId = GetPersistentTrackIdInt(trackUrl, false);
+            var trackId = GetPersistentTrackIdInt(trackUrl);
 
             if (UpdatedTracksForBackupCount < MaxUpdatedTracksCount)
             {
@@ -1794,18 +1798,13 @@ namespace MusicBeePlugin
 
         internal static string GetTrackRepresentation(string currentFile)
         {
-            string trackRepresentation = string.Empty;
-            string displayedArtist;
-            string album;
-            string title;
-            string diskNo;
-            string trackNo;
+            var trackRepresentation = string.Empty;
 
-            displayedArtist = GetFileTag(currentFile, DisplayedArtistId);
-            album = GetFileTag(currentFile, MetaDataType.Album);
-            title = GetFileTag(currentFile, MetaDataType.TrackTitle);
-            diskNo = GetFileTag(currentFile, MetaDataType.DiscNo);
-            trackNo = GetFileTag(currentFile, MetaDataType.TrackNo);
+            var displayedArtist = GetFileTag(currentFile, DisplayedArtistId);
+            var album = GetFileTag(currentFile, MetaDataType.Album);
+            var title = GetFileTag(currentFile, MetaDataType.TrackTitle);
+            var diskNo = GetFileTag(currentFile, MetaDataType.DiscNo);
+            var trackNo = GetFileTag(currentFile, MetaDataType.TrackNo);
 
             trackRepresentation += diskNo;
             trackRepresentation += (trackRepresentation == string.Empty) ? (trackNo) : ("-" + trackNo);
@@ -1819,7 +1818,7 @@ namespace MusicBeePlugin
 
         internal static string GetTrackRepresentation(string[] tags, string[] tags2, string[] tagNames, bool previewSortTags)
         {
-            string trackRepresentation = string.Empty;
+            var trackRepresentation = string.Empty;
 
             trackRepresentation += tags[12]; //12 - track number
             trackRepresentation += (trackRepresentation == string.Empty) ? tags[28] : ("-" + tags[28]); //28 - disk number
@@ -1831,7 +1830,7 @@ namespace MusicBeePlugin
 
             trackRepresentation += " (";
 
-            for (int i = 0; i < tags.Length; i++)
+            for (var i = 0; i < tags.Length; i++)
             {
                 if (i == 12)
                     continue;
@@ -1871,7 +1870,7 @@ namespace MusicBeePlugin
         internal static SwappedTags SwapTags(string sourceTagValue, string destinationTagValue, MetaDataType sourceTagId, MetaDataType destinationTagId,
             bool smartOperation, bool appendSourceToDestination = false, string appendedText = "", bool addSourceToDestination = false, string addedText = "")
         {
-            SwappedTags swappedTags = new SwappedTags();
+            var swappedTags = new SwappedTags();
             string appendedValue;
 
             if (smartOperation)
@@ -1914,7 +1913,7 @@ namespace MusicBeePlugin
 
                 if (sourceTagId == destinationTagId) //Smart conversion of multiple items of one tag
                 {
-                    if (ReplaceMSIds(sourceTagValue) == sourceTagValue) //No MS ids, its a single item
+                    if (ReplaceMSIds(sourceTagValue) == sourceTagValue) //No MS ids, it's a single item
                     {
                         appendedValue = ReplaceMSChars(sourceTagValue);
                     }
@@ -1970,7 +1969,7 @@ namespace MusicBeePlugin
 
         internal static void CustomComboBoxLeave(CustomComboBox comboBox, string newValue = null)
         {
-            string comboBoxText = (newValue ?? comboBox.Text);
+            var comboBoxText = (newValue ?? comboBox.Text);
 
             if (string.IsNullOrWhiteSpace(comboBoxText))
                 return;
@@ -1987,7 +1986,7 @@ namespace MusicBeePlugin
 
         internal static void ComboBoxLeave(ComboBox comboBox, string newValue = null)
         {
-            string comboBoxText = (newValue ?? comboBox.Text);
+            var comboBoxText = (newValue ?? comboBox.Text);
 
             if (string.IsNullOrWhiteSpace(comboBoxText))
                 return;
@@ -2026,11 +2025,6 @@ namespace MusicBeePlugin
         internal static string GetFileTag(string sourceFileUrl, MetaDataType tagId, bool normalizeTrackRatingTo0_100Range = false)
         {
             string tag = string.Empty;
-            string rawArtist = string.Empty;
-            string multiArtist = string.Empty;
-            string rawComposer = string.Empty;
-            string multiComposer = string.Empty;
-
 
             switch (tagId)
             {
@@ -2045,7 +2039,7 @@ namespace MusicBeePlugin
                     }
                     catch (Exception ex)
                     {
-                        SetStatusbarText(ex.Message, false);
+                        SetStatusBarText(ex.Message, false);
                         return string.Empty;
                     }
 
@@ -2059,8 +2053,8 @@ namespace MusicBeePlugin
                     break;
 
                 case ArtistArtistsId:
-                    rawArtist = MbApiInterface.Library_GetFileTag(sourceFileUrl, MetaDataType.Artist);
-                    multiArtist = MbApiInterface.Library_GetFileTag(sourceFileUrl, MetaDataType.MultiArtist);
+                    var rawArtist = MbApiInterface.Library_GetFileTag(sourceFileUrl, MetaDataType.Artist);
+                    var multiArtist = MbApiInterface.Library_GetFileTag(sourceFileUrl, MetaDataType.MultiArtist);
 
                     if (multiArtist != string.Empty)
                         tag = multiArtist;
@@ -2073,8 +2067,8 @@ namespace MusicBeePlugin
                     break;
 
                 case ComposerComposersId:
-                    rawComposer = MbApiInterface.Library_GetFileTag(sourceFileUrl, MetaDataType.Composer);
-                    multiComposer = MbApiInterface.Library_GetFileTag(sourceFileUrl, MetaDataType.MultiComposer);
+                    var rawComposer = MbApiInterface.Library_GetFileTag(sourceFileUrl, MetaDataType.Composer);
+                    var multiComposer = MbApiInterface.Library_GetFileTag(sourceFileUrl, MetaDataType.MultiComposer);
 
                     if (multiComposer != string.Empty)
                         tag = multiComposer;
@@ -2139,20 +2133,16 @@ namespace MusicBeePlugin
             }
 
 
-            if (tag == null)
-                tag = string.Empty;
-
-
-            return tag;
+            return tag ?? string.Empty;
         }
 
         internal static string[] GetFileTags(string sourceFileUrl, List<MetaDataType> tagIds)
         {
-            MetaDataType[] tagIds2 = tagIds.ToArray();
+            var tagIds2 = tagIds.ToArray();
 
-            for (int i = 0; i < tagIds2.Length; i++)
+            for (var i = 0; i < tagIds2.Length; i++)
             {
-                MetaDataType tagId = tagIds2[i];
+                var tagId = tagIds2[i];
 
                 switch (tagId)
                 {
@@ -2212,13 +2202,13 @@ namespace MusicBeePlugin
 
 
 
-            if (!MbApiInterface.Library_GetFileTags(sourceFileUrl, tagIds2, out string[] tags))
-                return new string[0];
+            if (!MbApiInterface.Library_GetFileTags(sourceFileUrl, tagIds2, out var tags))
+                return Array.Empty<string>();
 
 
-            for (int i = 0; i < tagIds.Count; i++)
+            for (var i = 0; i < tagIds.Count; i++)
             {
-                MetaDataType tagId = tagIds[i];
+                var tagId = tagIds[i];
 
                 switch (tagId)
                 {
@@ -2280,8 +2270,6 @@ namespace MusicBeePlugin
         //Method returns "T" if tag was really changed and "F" otherwise
         internal static bool SetFileTag(string sourceFileUrl, MetaDataType tagId, string value, bool updateOnlyChangedTags = false)
         {
-            string multiArtist = string.Empty;
-            string multiComposer = string.Empty;
             bool result1;
             bool result2;
 
@@ -2300,7 +2288,7 @@ namespace MusicBeePlugin
                 }
                 catch (Exception ex)
                 {
-                    SetStatusbarText(ex.Message, false);
+                    SetStatusBarText(ex.Message, false);
                     return false;
                 }
 
@@ -2331,7 +2319,7 @@ namespace MusicBeePlugin
                     return true;
 
                 case DisplayedArtistId:
-                    multiArtist = MbApiInterface.Library_GetFileTag(sourceFileUrl, MetaDataType.MultiArtist);
+                    var multiArtist = MbApiInterface.Library_GetFileTag(sourceFileUrl, MetaDataType.MultiArtist);
                     result1 = MbApiInterface.Library_SetFileTag(sourceFileUrl, MetaDataType.Artist, value);
                     result2 = MbApiInterface.Library_SetFileTag(sourceFileUrl, MetaDataType.MultiArtist, multiArtist);
                     return result1 && result2;
@@ -2343,7 +2331,7 @@ namespace MusicBeePlugin
                         return MbApiInterface.Library_SetFileTag(sourceFileUrl, MetaDataType.MultiArtist, value);
 
                 case DisplayedComposerId:
-                    multiComposer = MbApiInterface.Library_GetFileTag(sourceFileUrl, MetaDataType.MultiComposer);
+                    var multiComposer = MbApiInterface.Library_GetFileTag(sourceFileUrl, MetaDataType.MultiComposer);
                     result1 = MbApiInterface.Library_SetFileTag(sourceFileUrl, MetaDataType.Composer, value);
                     result2 = MbApiInterface.Library_SetFileTag(sourceFileUrl, MetaDataType.MultiComposer, multiComposer);
                     return result1 && result2;
@@ -2359,10 +2347,10 @@ namespace MusicBeePlugin
 
                     if (!string.IsNullOrWhiteSpace(value))
                     {
-                        System.ComponentModel.TypeConverter tc = System.ComponentModel.TypeDescriptor.GetConverter(typeof(Bitmap));
-                        Bitmap bitmapImage = tc.ConvertFrom(Convert.FromBase64String(value)) as Bitmap;
+                        var tc = System.ComponentModel.TypeDescriptor.GetConverter(typeof(Bitmap));
+                        var bitmapImage = tc.ConvertFrom(Convert.FromBase64String(value)) as Bitmap;
 
-                        MemoryStream tempJpeg = new MemoryStream();
+                        var tempJpeg = new MemoryStream();
                         bitmapImage.Save(tempJpeg, ImageFormat.Png);
 
                         imageData = tempJpeg.ToArray();
@@ -2397,7 +2385,7 @@ namespace MusicBeePlugin
 
         internal static bool CommitTagsToFile(string sourceFileUrl, bool ignoreFutureTagsChangedEvent = false, bool updateOnlyChangedTags = false)
         {
-            bool result = false;
+            var result = false;
 
             if (updateOnlyChangedTags)
             {
@@ -2451,7 +2439,7 @@ namespace MusicBeePlugin
             }
             else
             {
-                bool refresh = false;
+                var refresh = false;
 
                 lock (LastUI_RefreshLocker)
                 {
@@ -2481,14 +2469,14 @@ namespace MusicBeePlugin
             }
         }
 
-        internal static void SetStatusbarText(string newMessage, bool autoClear)
+        internal static void SetStatusBarText(string newMessage, bool autoClear)
         {
             if (autoClear)
             {
                 if (LastMessage != newMessage)
                     MbApiInterface.MB_SetBackgroundTaskMessage(newMessage);
 
-                DelayedStatusbarTextClearingTimer = new System.Threading.Timer(delayedStatusbarTextClearing, null, (int)RefreshUI_Delay.TotalMilliseconds * 2, 0);
+                DelayedStatusBarTextClearingTimer = new System.Threading.Timer(delayedStatusBarTextClearing, null, (int)RefreshUI_Delay.TotalMilliseconds * 2, 0);
             }
             else if (LastMessage != newMessage)
             {
@@ -2497,10 +2485,10 @@ namespace MusicBeePlugin
             }
         }
 
-        private static void delayedStatusbarTextClearing(object state)
+        private static void delayedStatusBarTextClearing(object state)
         {
             MbApiInterface.MB_SetBackgroundTaskMessage(string.Empty);
-            DelayedStatusbarTextClearingTimer.Dispose();
+            DelayedStatusBarTextClearingTimer.Dispose();
         }
 
         internal static string RemoveMSIdAtTheEndOfString(string value)
@@ -2562,13 +2550,13 @@ namespace MusicBeePlugin
             if (tagName == SequenceNumberName) //TagId not used for this pseudo-tag, but it must be not 0 for compatibility with LR 
                 return (MetaDataType)10000;
 
-            if (TagNamesIds.TryGetValue(tagName, out MetaDataType tagId))
+            if (TagNamesIds.TryGetValue(tagName, out var tagId))
             {
                 return tagId;
             }
             else
             {
-                if (PropNamesIds.TryGetValue(tagName, out FilePropertyType propId))
+                if (PropNamesIds.TryGetValue(tagName, out var propId))
                 {
                     return (MetaDataType)propId;
                 }
@@ -2605,7 +2593,7 @@ namespace MusicBeePlugin
             }
 
 
-            if (TagIdsNames.TryGetValue(tagId, out string tagName))
+            if (TagIdsNames.TryGetValue(tagId, out var tagName))
             {
                 return tagName;
             }
@@ -2631,7 +2619,7 @@ namespace MusicBeePlugin
         {
             string prefix;
 
-            if (!TagNamesIds.TryGetValue(tagName, out MetaDataType tagId))
+            if (!TagNamesIds.TryGetValue(tagName, out var tagId))
                 return GetPropPrefix(tagName);
 
 
@@ -2710,13 +2698,13 @@ namespace MusicBeePlugin
         internal static void FillListByTagNames(System.Collections.IList list, bool addReadOnlyTagsAlso = false, bool addArtworkAlso = false,
             bool addNullAlso = true, bool addTagPrefixes = false, bool addAllTagsPseudoTagAlso = false, bool addDateCreatedAlso = true, bool addCustomTagsOnly = false)
         {
-            foreach (string tagName in TagNamesIds.Keys)
+            foreach (var tagName in TagNamesIds.Keys)
             {
                 if (addCustomTagsOnly && !CustomTagNames.Contains(tagName))
                     continue;
 
 
-                string prefix = string.Empty;
+                var prefix = string.Empty;
 
                 if (addTagPrefixes)
                     prefix = GetTagPrefix(tagName);
@@ -2736,7 +2724,7 @@ namespace MusicBeePlugin
 
         internal static FilePropertyType GetPropId(string propName)
         {
-            if (PropNamesIds.TryGetValue(propName, out FilePropertyType propId))
+            if (PropNamesIds.TryGetValue(propName, out var propId))
             {
                 return propId;
             }
@@ -2748,7 +2736,7 @@ namespace MusicBeePlugin
 
         internal static string GetPropName(FilePropertyType propId)
         {
-            if (PropIdsNames.TryGetValue(propId, out string propName))
+            if (PropIdsNames.TryGetValue(propId, out var propName))
             {
                 return propName;
             }
@@ -2760,12 +2748,12 @@ namespace MusicBeePlugin
 
         internal static void FillListByPropNames(System.Collections.IList list, bool addTagMarker = false)
         {
-            string marker = string.Empty;
+            var marker = string.Empty;
 
             if (addTagMarker)
                 marker = GetPropPrefix(null);
 
-            foreach (string propName in PropNamesIds.Keys)
+            foreach (var propName in PropNamesIds.Keys)
                 list.Add(marker + propName);
         }
 
@@ -2785,13 +2773,13 @@ namespace MusicBeePlugin
 
             if (LastCommandSbText == string.Empty)
             {
-                SetStatusbarText(string.Empty, false);
+                SetStatusBarText(string.Empty, false);
                 return;
             }
             else if (LastCommandSbText == "<CUESHEET>")
             {
                 System.Media.SystemSounds.Exclamation.Play();
-                SetStatusbarText(CtlWholeCuesheetWillBeReencoded, false);
+                SetStatusBarText(CtlWholeCuesheetWillBeReencoded, false);
                 return;
             }
             else if (finalStatus == null)
@@ -2799,20 +2787,20 @@ namespace MusicBeePlugin
                 string sbText;
 
                 if (LastPreview)
-                    sbText = LastCommandSbText + ": " + "100% (" + LastFileCounter + " " + SbItemNames + ") " + SbRead;
+                    sbText = LastCommandSbText + ": " + "100% (" + LastFileCounter  + Resources.Space + SbItemNames + ") " + SbRead;
                 else
-                    sbText = LastCommandSbText + ": " + "100% (" + LastFileCounter + " " + SbItemNames + ") " + SbUpdated;
+                    sbText = LastCommandSbText + ": " + "100% (" + LastFileCounter  + Resources.Space + SbItemNames + ") " + SbUpdated;
 
                 //if (lastPreview)
                 //   sbText = LastCommandSbText + ": 100% " + sbRead;
                 //else
                 //   sbText = LastCommandSbText + ": 100% " + sbUpdated;
 
-                SetStatusbarText(sbText, autoClear);
+                SetStatusBarText(sbText, autoClear);
             }
             else
             {
-                SetStatusbarText(GenegateStatusbarTextForFileOperations(LastCommandSbText, LastPreview, LastFileCounter, LastFileCounterTotal, finalStatus), autoClear);
+                SetStatusBarText(GenegateStatusBarTextForFileOperations(LastCommandSbText, LastPreview, LastFileCounter, LastFileCounterTotal, finalStatus), autoClear);
             }
 
 
@@ -2820,7 +2808,7 @@ namespace MusicBeePlugin
                 SbItemNames = SbFiles;
         }
 
-        internal static string GenegateStatusbarTextForFileOperations(string commandSbText, bool preview, int fileCounter1Based, int filesTotal, string currentFile = null)
+        internal static string GenegateStatusBarTextForFileOperations(string commandSbText, bool preview, int fileCounter1Based, int filesTotal, string currentFile = null)
         {
             string sbText;
 
@@ -2845,7 +2833,7 @@ namespace MusicBeePlugin
             return sbText;
         }
 
-        internal static void SetStatusbarTextForFileOperations(string commandSbText, bool preview, int fileCounter0Based, int filesTotal, string currentFile = null, int updatePercentage = 10)
+        internal static void SetStatusBarTextForFileOperations(string commandSbText, bool preview, int fileCounter0Based, int filesTotal, string currentFile = null, int updatePercentage = 10)
         {
             LastCommandSbText = commandSbText;
             LastPreview = preview;
@@ -2855,16 +2843,16 @@ namespace MusicBeePlugin
             if (fileCounter0Based < 2)
                 LastFileCounterThreshold = 0;
 
-            bool update = false;
+            var update = false;
             if (filesTotal == 0 || (fileCounter0Based - LastFileCounterThreshold) / (float)filesTotal >= updatePercentage / 100f)
             {
                 update = true;
                 LastFileCounterThreshold = fileCounter0Based;
             }
 
-            if (updatePercentage == 0 || update || fileCounter0Based % StatusbarTextUpdateInterval == 0)
+            if (updatePercentage == 0 || update || fileCounter0Based % StatusBarTextUpdateInterval == 0)
             {
-                SetStatusbarText(GenegateStatusbarTextForFileOperations(commandSbText, preview, fileCounter0Based, filesTotal, currentFile), false);
+                SetStatusBarText(GenegateStatusBarTextForFileOperations(commandSbText, preview, fileCounter0Based, filesTotal, currentFile), false);
             }
         }
 
@@ -2889,19 +2877,19 @@ namespace MusicBeePlugin
             BackupIndex.saveBackup(BrGetAutoBackupDirectory(SavedSettings.autoBackupDirectory) + @"\" + BrGetDefaultBackupFilename(SavedSettings.autoBackupPrefix), SbAutoBackingUp, true, false);
 
 
-            decimal autodeleteKeepNumberOfDays = SavedSettings.autodeleteKeepNumberOfDays > 0 ? SavedSettings.autodeleteKeepNumberOfDays : 1000000;
-            decimal autodeleteKeepNumberOfFiles = SavedSettings.autodeleteKeepNumberOfFiles > 0 ? SavedSettings.autodeleteKeepNumberOfFiles : 1000000;
+            var autoDeleteKeepNumberOfDays = SavedSettings.autoDeleteKeepNumberOfDays > 0 ? SavedSettings.autoDeleteKeepNumberOfDays : 1000000;
+            var autoDeleteKeepNumberOfFiles = SavedSettings.autoDeleteKeepNumberOfFiles > 0 ? SavedSettings.autoDeleteKeepNumberOfFiles : 1000000;
 
-            string[] files = Directory.GetFiles(BrGetAutoBackupDirectory(SavedSettings.autoBackupDirectory), "*.mbc", SearchOption.TopDirectoryOnly);
-            SortedDictionary<int, string> filesWithNegativeDates = new SortedDictionary<int, string>();
-            SortedDictionary<string, DateTime> fileCreationDates = new SortedDictionary<string, DateTime>();
+            var files = Directory.GetFiles(BrGetAutoBackupDirectory(SavedSettings.autoBackupDirectory), "*.mbc", SearchOption.TopDirectoryOnly);
+            var filesWithNegativeDates = new SortedDictionary<int, string>();
+            var fileCreationDates = new SortedDictionary<string, DateTime>();
 
-            BackupCache backupCache = new BackupCache();
-            string currentLibraryName = BrGetCurrentLibraryName();
+            BackupCache backupCache;
+            var currentLibraryName = BrGetCurrentLibraryName();
 
-            for (int i = 0; i < files.Length; i++)
+            for (var i = 0; i < files.Length; i++)
             {
-                string backupFilenameWithoutExtension = BrGetBackupFilenameWithoutExtension(files[i]);
+                var backupFilenameWithoutExtension = BrGetBackupFilenameWithoutExtension(files[i]);
 
                 backupCache = BackupCache.Load(backupFilenameWithoutExtension);
                 if (backupCache == null)
@@ -2909,8 +2897,8 @@ namespace MusicBeePlugin
 
                 if (backupCache.isAutoCreated && backupCache.libraryName == currentLibraryName)
                 {
-                    int negativeDate = -((backupCache.creationDate.Year * 10000 + backupCache.creationDate.Month * 100 + backupCache.creationDate.Day) * 1000000 +
-                        backupCache.creationDate.Hour * 10000 + backupCache.creationDate.Minute * 100 + backupCache.creationDate.Second);
+                    var negativeDate = -((backupCache.creationDate.Year * 10000 + backupCache.creationDate.Month * 100 + backupCache.creationDate.Day) * 1000000 +
+                                         backupCache.creationDate.Hour * 10000 + backupCache.creationDate.Minute * 100 + backupCache.creationDate.Second);
 
                     filesWithNegativeDates.Add(negativeDate, backupFilenameWithoutExtension);
                     fileCreationDates.Add(backupFilenameWithoutExtension, backupCache.creationDate);
@@ -2918,32 +2906,32 @@ namespace MusicBeePlugin
             }
 
 
-            List<string> backupsToDelete = new List<string>();
-            DateTime now = DateTime.UtcNow;
+            var backupsToDelete = new List<string>();
+            var now = DateTime.UtcNow;
 
             foreach (var fileWithNegativeDate in filesWithNegativeDates)
             {
-                if (now - fileCreationDates[fileWithNegativeDate.Value] > new TimeSpan((int)autodeleteKeepNumberOfDays, 0, 0, 0))
+                if (now - fileCreationDates[fileWithNegativeDate.Value] > new TimeSpan((int)autoDeleteKeepNumberOfDays, 0, 0, 0))
                     backupsToDelete.Add(fileWithNegativeDate.Value);
             }
 
 
-            int keptCount = 1;
+            var keptCount = 1;
             foreach (var fileWithNegativeDate in filesWithNegativeDates)
             {
-                if (keptCount > autodeleteKeepNumberOfFiles)
+                if (keptCount > autoDeleteKeepNumberOfFiles)
                     backupsToDelete.AddUnique(fileWithNegativeDate.Value);
                 else
                     keptCount++;
             }
 
 
-            foreach (string backup in backupsToDelete)
+            foreach (var backup in backupsToDelete)
             {
                 backupCache = BackupCache.Load(backup);
                 if (backupCache == null)
                 {
-                    SetStatusbarText(SbBackupRestoreCantDeleteBackupFile, false);
+                    SetStatusBarText(SbBackupRestoreCantDeleteBackupFile, false);
 
                     if (SavedSettings.playCanceledSound)
                         System.Media.SystemSounds.Hand.Play();
@@ -2970,61 +2958,61 @@ namespace MusicBeePlugin
 
         internal void copyTagEventHandler(object sender, EventArgs e)
         {
-            CopyTag tagToolsForm = new CopyTag(this);
+            var tagToolsForm = new CopyTag(this);
             PluginWindowTemplate.Display(tagToolsForm);
         }
 
         internal void swapTagsEventHandler(object sender, EventArgs e)
         {
-            SwapTags tagToolsForm = new SwapTags(this);
+            var tagToolsForm = new SwapTags(this);
             PluginWindowTemplate.Display(tagToolsForm);
         }
 
         internal void changeCaseEventHandler(object sender, EventArgs e)
         {
-            ChangeCase tagToolsForm = new ChangeCase(this);
+            var tagToolsForm = new ChangeCase(this);
             PluginWindowTemplate.Display(tagToolsForm);
         }
 
         internal void reencodeTagEventHandler(object sender, EventArgs e)
         {
-            ReencodeTag tagToolsForm = new ReencodeTag(this);
+            var tagToolsForm = new ReEncodeTag(this);
             PluginWindowTemplate.Display(tagToolsForm);
         }
 
         internal void reencodeTagsEventHandler(object sender, EventArgs e)
         {
-            ReencodeTags tagToolsForm = new ReencodeTags(this);
+            var tagToolsForm = new ReEncodeTags(this);
             PluginWindowTemplate.Display(tagToolsForm);
         }
 
         internal void libraryReportsEventHandler(object sender, EventArgs e)
         {
-            LibraryReports tagToolsForm = new LibraryReports(this);
+            var tagToolsForm = new LibraryReports(this);
             PluginWindowTemplate.Display(tagToolsForm);
         }
 
         internal void autoRateEventHandler(object sender, EventArgs e)
         {
-            AutoRate tagToolsForm = new AutoRate(this);
+            var tagToolsForm = new AutoRate(this);
             PluginWindowTemplate.Display(tagToolsForm);
         }
 
         internal void asrEventHandler(object sender, EventArgs e)
         {
-            AdvancedSearchAndReplace tagToolsForm = new AdvancedSearchAndReplace(this);
+            var tagToolsForm = new AdvancedSearchAndReplace(this);
             PluginWindowTemplate.Display(tagToolsForm);
         }
 
         internal void carEventHandler(object sender, EventArgs e)
         {
-            CalculateAverageAlbumRating tagToolsForm = new CalculateAverageAlbumRating(this);
+            var tagToolsForm = new CalculateAverageAlbumRating(this);
             PluginWindowTemplate.Display(tagToolsForm);
         }
 
         internal void copyTagsToClipboardEventHandler(object sender, EventArgs e)
         {
-            CopyTagsToClipboard tagToolsForm = new CopyTagsToClipboard(this);
+            var tagToolsForm = new CopyTagsToClipboard(this);
             PluginWindowTemplate.Display(tagToolsForm);
         }
 
@@ -3035,7 +3023,7 @@ namespace MusicBeePlugin
 
         internal void multipleSearchReplaceEventHandler(object sender, EventArgs e)
         {
-            MultipleSearchAndReplace tagToolsForm = new MultipleSearchAndReplace(this);
+            var tagToolsForm = new MultipleSearchAndReplace(this);
             PluginWindowTemplate.Display(tagToolsForm);
         }
 
@@ -3043,7 +3031,7 @@ namespace MusicBeePlugin
         {
             lock (OpenedForms)
             {
-                foreach (PluginWindowTemplate form in OpenedForms)
+                foreach (var form in OpenedForms)
                 {
                     if (!form.Visible || form.WindowState == FormWindowState.Minimized)
                         PluginWindowTemplate.Display(form);
@@ -3053,7 +3041,7 @@ namespace MusicBeePlugin
 
         internal void backupTagsEventHandler(object sender, EventArgs e)
         {
-            SaveFileDialog dialog = new SaveFileDialog
+            var dialog = new SaveFileDialog
             {
                 Title = CtlSaveBackupTitle,
                 Filter = CtlMusicBeeBackupType,
@@ -3077,7 +3065,7 @@ namespace MusicBeePlugin
 
         internal void restoreTagsEventHandler(object sender, EventArgs e)
         {
-            OpenFileDialog dialog = new OpenFileDialog
+            var dialog = new OpenFileDialog
             {
                 Title = CtlRestoreBackupTitle,
                 Filter = CtlMusicBeeBackupType,
@@ -3095,7 +3083,7 @@ namespace MusicBeePlugin
         //EventArgs e == null means "restore from another lbrary, don't ask confirmation"
         internal void restoreTagsForEntireLibraryEventHandler(object sender, EventArgs e)
         {
-            OpenFileDialog dialog = new OpenFileDialog
+            var dialog = new OpenFileDialog
             {
                 Title = CtlRestoreBackupTitle,
                 Filter = CtlMusicBeeBackupType,
@@ -3112,7 +3100,7 @@ namespace MusicBeePlugin
 
         internal void renameMoveBackupEventHandler(object sender, EventArgs e)
         {
-            OpenFileDialog openDialog = new OpenFileDialog
+            var openDialog = new OpenFileDialog
             {
                 Title = CtlRenameSelectBackupTitle,
                 Filter = CtlMusicBeeBackupType,
@@ -3121,7 +3109,7 @@ namespace MusicBeePlugin
 
             if (openDialog.ShowDialog(MbForm) == DialogResult.Cancel) return;
 
-            SaveFileDialog saveDialog = new SaveFileDialog
+            var saveDialog = new SaveFileDialog
             {
                 Title = CtlRenameSaveBackupTitle,
                 Filter = CtlMusicBeeBackupType,
@@ -3151,7 +3139,7 @@ namespace MusicBeePlugin
 
         internal void moveBackupsEventHandler(object sender, EventArgs e)
         {
-            OpenFileDialog openDialog = new OpenFileDialog
+            var openDialog = new OpenFileDialog
             {
                 Title = CtlMoveSelectBackupsTitle,
                 Filter = CtlMusicBeeBackupType,
@@ -3161,7 +3149,7 @@ namespace MusicBeePlugin
 
             if (openDialog.ShowDialog(MbForm) == DialogResult.Cancel) return;
 
-            SaveFileDialog saveDialog = new SaveFileDialog
+            var saveDialog = new SaveFileDialog
             {
                 Title = CtlMoveSaveBackupsTitle,
                 Filter = "|*.destinationfolder",
@@ -3171,8 +3159,8 @@ namespace MusicBeePlugin
 
             if (saveDialog.ShowDialog(MbForm) == DialogResult.Cancel) return;
 
-            string sourceFolder = Regex.Replace(openDialog.FileNames[0], @"(.*)\\.*", "$1");
-            string destinationFolder = Regex.Replace(saveDialog.FileName, @"(.*)\\.*", "$1");
+            var sourceFolder = Regex.Replace(openDialog.FileNames[0], @"(.*)\\.*", "$1");
+            var destinationFolder = Regex.Replace(saveDialog.FileName, @"(.*)\\.*", "$1");
 
             if (sourceFolder == destinationFolder) return;
 
@@ -3203,7 +3191,7 @@ namespace MusicBeePlugin
                 MessageBox.Show(MbForm, MsgBrCreateBaselineWarning, CtlWarning, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
 
-            SaveFileDialog dialog = new SaveFileDialog
+            var dialog = new SaveFileDialog
             {
                 Title = CtlSaveBackupTitle,
                 Filter = CtlMusicBeeBackupType,
@@ -3216,17 +3204,15 @@ namespace MusicBeePlugin
 
             lock (TracksNeededToBeBackedUp)
             {
-                //Lets delete all incremental backups of current library
-                string currentLibraryName = BrGetCurrentLibraryName();
-                string[] files = Directory.GetFiles(BrGetAutoBackupDirectory(SavedSettings.autoBackupDirectory), "*.mbc", SearchOption.TopDirectoryOnly);
+                //Let's delete all incremental backups of current library
+                var currentLibraryName = BrGetCurrentLibraryName();
+                var files = Directory.GetFiles(BrGetAutoBackupDirectory(SavedSettings.autoBackupDirectory), "*.mbc", SearchOption.TopDirectoryOnly);
 
-                BackupCache backupCache = new BackupCache();
-
-                for (int i = 0; i < files.Length; i++)
+                for (var i = 0; i < files.Length; i++)
                 {
-                    string backupFilenameWithoutExtension = BrGetBackupFilenameWithoutExtension(files[i]);
+                    var backupFilenameWithoutExtension = BrGetBackupFilenameWithoutExtension(files[i]);
 
-                    backupCache = BackupCache.Load(backupFilenameWithoutExtension);
+                    var backupCache = BackupCache.Load(backupFilenameWithoutExtension);
 
                     if (backupCache == null || backupCache.libraryName == currentLibraryName)
                     {
@@ -3238,12 +3224,12 @@ namespace MusicBeePlugin
                     }
                 }
 
-                //Lets delete baseline
+                //Let's delete baseline
                 File.Delete(BrGetBackupBaselineFilename());
             }
 
 
-            //Now lets create new baseline
+            //Now let's create new baseline
             MbApiInterface.MB_SetBackgroundTaskMessage(SbMakingTagBackup);
 
             if (File.Exists(dialog.FileName))
@@ -3254,8 +3240,8 @@ namespace MusicBeePlugin
 
             if (UseCustomTrackIdTag)
             {
-                bool useCustomTrackIdTag = UseCustomTrackIdTag;
-                int customTrackIdTag = CustomTrackIdTag;
+                var useCustomTrackIdTag = UseCustomTrackIdTag;
+                var customTrackIdTag = CustomTrackIdTag;
 
                 //Let's cache previous value in case of baseline backup creation failure (which is handled inside (BackupIndex.saveBackupAsync())
                 UseCustomTrackIdTag = SavedSettings.useCustomTrackIdTag;
@@ -3282,7 +3268,7 @@ namespace MusicBeePlugin
 
         internal void deleteBackupsEventHandler(object sender, EventArgs e)
         {
-            OpenFileDialog dialog = new OpenFileDialog
+            var dialog = new OpenFileDialog
             {
                 Title = CtlDeleteBackupsTitle,
                 Filter = CtlMusicBeeBackupType,
@@ -3294,10 +3280,9 @@ namespace MusicBeePlugin
 
             MbApiInterface.MB_SetBackgroundTaskMessage(SbDeletingBackups);
 
-            BackupCache backupCache = new BackupCache();
             foreach (var filename in dialog.FileNames)
             {
-                backupCache = BackupCache.Load(BrGetBackupFilenameWithoutExtension(filename));
+                var backupCache = BackupCache.Load(BrGetBackupFilenameWithoutExtension(filename));
 
                 if (backupCache != null)
                     BackupIndex.deleteBackup(backupCache);
@@ -3313,13 +3298,13 @@ namespace MusicBeePlugin
 
         internal void autoBackupSettingsEventHandler(object sender, EventArgs e)
         {
-            AutoBackupSettings tagToolsForm = new AutoBackupSettings(this);
+            var tagToolsForm = new AutoBackupSettings(this);
             PluginWindowTemplate.Display(tagToolsForm);
         }
 
         internal void tagHistoryEventHandler(object sender, EventArgs e)
         {
-            if (MbApiInterface.Library_QueryFilesEx("domain=SelectedFiles", out string[] files))
+            if (MbApiInterface.Library_QueryFilesEx("domain=SelectedFiles", out var files))
             {
                 //if (files.Length > 1)
                 //{
@@ -3333,12 +3318,12 @@ namespace MusicBeePlugin
                     return;
                 }
 
-                int[] trackIds = new int[files.Length];
-                for (int i = 0; i < files.Length; i++)
+                var trackIds = new int[files.Length];
+                for (var i = 0; i < files.Length; i++)
                     trackIds[i] = GetPersistentTrackIdInt(files[i], true);
 
 
-                TagHistory tagToolsForm = new TagHistory(this, files, trackIds);
+                var tagToolsForm = new TagHistory(this, files, trackIds);
                 PluginWindowTemplate.Display(tagToolsForm, true);
             }
         }
@@ -3346,7 +3331,7 @@ namespace MusicBeePlugin
         internal void compareTracksEventHandler(object sender, EventArgs e)
         {
 
-            if (MbApiInterface.Library_QueryFilesEx("domain=SelectedFiles", out string[] files))
+            if (MbApiInterface.Library_QueryFilesEx("domain=SelectedFiles", out var files))
             {
                 if (files.Length < 2)
                 {
@@ -3355,7 +3340,7 @@ namespace MusicBeePlugin
                 }
 
 
-                CompareTracks tagToolsForm = new CompareTracks(this, files);
+                var tagToolsForm = new CompareTracks(this, files);
                 PluginWindowTemplate.Display(tagToolsForm, true);
             }
         }
@@ -3394,8 +3379,8 @@ namespace MusicBeePlugin
             CopyTagName = "Copy Tag...";
             SwapTagsName = "Swap Tags...";
             ChangeCaseName = "Change Case...";
-            ReencodeTagName = "Reencode Tag...";
-            ReencodeTagsName = "Reencode Tags...";
+            ReEncodeTagName = "Reencode Tag...";
+            ReEncodeTagsName = "Reencode Tags...";
             LibraryReportsName = "Library Reports...";
             AutoRateName = "Auto Rate Tracks...";
             AsrName = "Advanced Search && Replace...";
@@ -3410,8 +3395,8 @@ namespace MusicBeePlugin
             CopyTagDescription = TagToolsHotkeyDescription + "Copy Tag";
             SwapTagsDescription = TagToolsHotkeyDescription + "Swap Tags";
             ChangeCaseDescription = TagToolsHotkeyDescription + "Change Case";
-            ReencodeTagDescription = TagToolsHotkeyDescription + "Reencode Tag";
-            ReencodeTagsDescription = TagToolsHotkeyDescription + "Reencode Tags";
+            ReEncodeTagDescription = TagToolsHotkeyDescription + "Reencode Tag";
+            ReEncodeTagsDescription = TagToolsHotkeyDescription + "Reencode Tags";
             LibraryReportsDescription = TagToolsHotkeyDescription + "Library Reports";
             LrPresetHotkeyDescription = TagToolsHotkeyDescription;
             AutoRateDescription = TagToolsHotkeyDescription + "Auto Rate Tracks";
@@ -3452,7 +3437,7 @@ namespace MusicBeePlugin
             CopyTagSbText = "Copying tag";
             SwapTagsSbText = "Swapping tags";
             ChangeCaseSbText = "Changing case";
-            ReencodeTagSbText = "Reencoding tags";
+            ReEncodeTagSbText = "Reencoding tags";
             LibraryReportsSbText = "Generating report";
             LibraryReportsGeneratingPreviewSbText = "Generating preview";
             ApplyingLrPresetSbText = "Applying LR preset";
@@ -3507,8 +3492,8 @@ namespace MusicBeePlugin
 
 
             //Let's determine casing rules for genre category as an example
-            ChangeCase.ChangeCaseOptions changeCaseMode = ChangeCase.ChangeCaseOptions.SentenceCase;
-            string[] genreCategory = MbApiInterface.Setting_GetFieldName(MetaDataType.GenreCategory).Split(' ');
+            var changeCaseMode = ChangeCase.ChangeCaseOptions.SentenceCase;
+            var genreCategory = MbApiInterface.Setting_GetFieldName(MetaDataType.GenreCategory).Split(' ');
             if (char.ToUpper(genreCategory[genreCategory.Length - 1][0]) == genreCategory[genreCategory.Length - 1][0])
                 changeCaseMode = ChangeCase.ChangeCaseOptions.TitleCase;
 
@@ -3523,7 +3508,7 @@ namespace MusicBeePlugin
             DisplayedComposerName = ChangeCase.ChangeWordsCase(DisplayedComposerName, changeCaseMode);
             DisplayedComposerName = DisplayedComposerName.Remove(DisplayedComposerName.Length - 1);
 
-            string localizedDisplayedAlbumArtist = MbApiInterface.MB_GetLocalisation("aSplit.msg.diar", "display {0}:");
+            var localizedDisplayedAlbumArtist = MbApiInterface.MB_GetLocalisation("aSplit.msg.diar", "display {0}:");
             localizedDisplayedAlbumArtist = Regex.Replace(localizedDisplayedAlbumArtist, @"^(.*?)\s?\{0\}\:?\s?(.*)", " ($1$2)");
             DisplayedAlbumArtistName = MbApiInterface.Setting_GetFieldName(MetaDataType.AlbumArtist) + localizedDisplayedAlbumArtist;
 
@@ -3579,7 +3564,7 @@ namespace MusicBeePlugin
                 "Shift-double-click row border to auto-size all rows. \n" +
                 "Alt-resize the row to change the height of all rows. ";
 
-            SbBrokenPresetRetrievalChain = "Broken preset retrieval chain for LR preset: %%PRESETNAME%%! Check out the preset chain!";
+            SbBrokenPresetRetrievalChain = "Broken preset retrieval chain for LR preset: %%PRESET-NAME%%! Check out the preset chain!";
 
             OKButtonName = "Proceed";
             StopButtonName = "Stop";
@@ -3630,12 +3615,12 @@ namespace MusicBeePlugin
                 "or \"plays per day\" virtual tag. You should set \"plays per day\" threshold values for every rating number \n" +
                 "you want to be assigned to tracks. Thresholds are evaluated for track in descending order: from 5 star rating \n" +
                 "to 0.5 star rating. \"Plays per day\" virtual tag can be evaluated for every track independent of rest of library, \n" +
-                "so its possible to automatically update auto rating if playing track is changed. \n" +
-                "Also its possible to update auto rating manually for selected tracks or automatically for entire library \n" +
+                "so it's possible to automatically update auto rating if playing track is changed. \n" +
+                "Also it's possible to update auto rating manually for selected tracks or automatically for entire library \n" +
                 "on MusicBee startup. ";
             MsgAutoCalculationOfThresholdsDescription = "Auto calculation of thresholds is another way to set up auto ratings. This option allows you to set desirable weights \n" +
-                "of auto rating values in your library. Actual weights may differ from desirable values because its not always possible \n" +
-                "to satisfy desirable weights (suppose all your tracks have the same \"plays per day\" value, its obvious that there is no way to split \n" +
+                "of auto rating values in your library. Actual weights may differ from desirable values because it's not always possible \n" +
+                "to satisfy desirable weights (suppose all your tracks have the same \"plays per day\" value, it's obvious that there is no way to split \n" +
                 "your library into several parts on the basis of \"plays per day\" value). Actual weights are displayed next to desired weights after calculation is made. \n" +
                 "Because calculation of thresholds is time consuming operation it cannot be done automatically on any event except for MusicBee startup. ";
 
@@ -3693,11 +3678,11 @@ namespace MusicBeePlugin
             MsgPresetsWereDeleted = " preset{;s;s} {was;were;were} deleted.";
 
 
-            string msgLrCachedPresetsInitialFilling = "These functions will use these tags as the cache. If you change some tags or add new tracks " +
-                "to the library, this cache will dynamically update. However, it’s HIGHLY RECOMMENDED first to fill this cache for all existing " +
-                "tracks/current tags in the current library to avoid UI slowdowns and freezes when using MusicBee regularly. \n\n" +
-                "Do you want to execute all affected presets automatically now? " +
-                "This may take a while.";
+            var msgLrCachedPresetsInitialFilling = "These functions will use these tags as the cache. If you change some tags or add new tracks " +
+                                                   "to the library, this cache will dynamically update. However, it’s HIGHLY RECOMMENDED first to fill this cache for all existing " +
+                                                   "tracks/current tags in the current library to avoid UI slowdowns and freezes when using MusicBee regularly. \n\n" +
+                                                   "Do you want to execute all affected presets automatically now? " +
+                                                   "This may take a while.";
 
             MsgLrCachedPresetsChanged = "You have created or changed %%CHANGED-PRESET-COUNT%% LR preset{;s;s}, which use{s;;} LR functions " +
                 "with assigned IDs AND saved to tags. " + msgLrCachedPresetsInitialFilling;
@@ -3750,8 +3735,8 @@ namespace MusicBeePlugin
             SbItems = "record(s)";
             SbItemNames = SbFiles;
 
-            SbAsrPresetIsApplied = "ASR preset is applied: %%PRESETNAME%%";
-            SbAsrPresetsAreApplied = "ASR presets are applied: %%PRESETCOUNT%%";
+            SbAsrPresetIsApplied = "ASR preset is applied: %%PRESET-NAME%%";
+            SbAsrPresetsAreApplied = "ASR presets are applied: %%PRESET-COUNT%%";
 
             SbLrHotkeysAreAssignedIncorrectly = "LR hotkey is assigned incorrectly!";
             SbIncorrectLrFunctionId = "Incorrect LR function ID: ";
@@ -3785,10 +3770,10 @@ namespace MusicBeePlugin
             MsgBrCreateNewBaseline = "It is recommended to create a new baseline after putting the tags in order!";
 
             MsgMsrGiveNameToAsrPreset = "Give a name to preset!";
-            MsgMsrAreYouSureYouWantToSaveAsrPreset = "Do you want to save ASR preset named \"%%PRESETNAME%%\"?";
-            MsgMsrAreYouSureYouWantToOverwriteAsrPreset = "Do you want to overwrite ASR preset \"%%PRESETNAME%%\"?";
-            MsgMsrAreYouSureYouWantToOverwriteRenameAsrPreset = "Do you want to overwrite ASR preset \"%%PRESETNAME%%\", and rename it to \"%%NEWPRESETNAME%%\"?";
-            MsgMsrAreYouSureYouWantToDeleteAsrPreset = "Do you want to delete ASR preset \"%%PRESETNAME%%\"?";
+            MsgMsrAreYouSureYouWantToSaveAsrPreset = "Do you want to save ASR preset named \"%%PRESET-NAME%%\"?";
+            MsgMsrAreYouSureYouWantToOverwriteAsrPreset = "Do you want to overwrite ASR preset \"%%PRESET-NAME%%\"?";
+            MsgMsrAreYouSureYouWantToOverwriteRenameAsrPreset = "Do you want to overwrite ASR preset \"%%PRESET-NAME%%\", and rename it to \"%%NEWPRESETNAME%%\"?";
+            MsgMsrAreYouSureYouWantToDeleteAsrPreset = "Do you want to delete ASR preset \"%%PRESET-NAME%%\"?";
             MsgAsrPredefinedPresetsCantBeChanged = "Predefined presets can't be changed. Preset editor will open in read-only mode.\n\n"
                 + "Do you want to disable this warning?";
             MsgMsrSavePreset = "Save Preset";
@@ -3820,6 +3805,8 @@ namespace MusicBeePlugin
             ExMaskAndImageMustBeTheSameSize = "Mask and image must be the same size!";
 
 
+            CtlAutoRateCalculating = "Calculating...";
+
             CtlAsrCellTooTip = "Unchecked rows won't be processed\n" +
                 "\n" +
                 "Shift-click checks/unchecks all rows containing the same tags as in this row";
@@ -3828,7 +3815,7 @@ namespace MusicBeePlugin
                 "Shift-click checks/unchecks all rows containing the same tag\n" +
                 "\n" +
                 "Ctrl-click adds/removes the tag referred in the row to/from proceeded or preserved tags";
-            MsgAsrPresetsUsingAllTagsPseudoTagNameCannotBeAutoApplied = "Can't execute preset %%PRESETNAME%%! ASR presets using %%AllTagsPseudoTagName%% cannot " +
+            MsgAsrPresetsUsingAllTagsPseudoTagNameCannotBeAutoApplied = "Can't execute preset %%PRESET-NAME%%! ASR presets using %%AllTagsPseudoTagName%% cannot " +
                 "be auto-executed, nor can be applied via hotkey!";
 
 
@@ -3875,7 +3862,7 @@ namespace MusicBeePlugin
             SavedSettings = new PluginSettings
             {
 
-                //Lets set initial defaults
+                //Let's set initial defaults
                 reportPresets = null,
 
                 smartOperation = true,
@@ -3890,15 +3877,15 @@ namespace MusicBeePlugin
             #endregion
 
             #region Reading settings
-            //Lets try to read defaults for controls from settings file
+            //Let's try to read defaults for controls from settings file
             PluginSettingsFilePath = Path.Combine(MbApiInterface.Setting_GetPersistentStoragePath(), PluginSettingsFileName);
 
-            Encoding unicode = Encoding.UTF8;
+            var unicode = Encoding.UTF8;
 
             if (File.Exists(PluginSettingsFilePath + ".new-format")) //********* Simplify later!!!!!!
             {
-                FileStream stream = File.Open(PluginSettingsFilePath, FileMode.OpenOrCreate, FileAccess.Read, FileShare.None);
-                StreamReader file = new StreamReader(stream, unicode);
+                var stream = File.Open(PluginSettingsFilePath, FileMode.OpenOrCreate, FileAccess.Read, FileShare.None);
+                var file = new StreamReader(stream, unicode);
 
                 XmlSerializer controlsDefaultsSerializer = null;
                 try
@@ -3917,14 +3904,14 @@ namespace MusicBeePlugin
                 catch
                 {
                     //Ignore...
-                };
+                }
 
                 file.Close();
             }
             else //******* remove later!!!!
             {
-                FileStream stream = File.Open(PluginSettingsFilePath, FileMode.OpenOrCreate, FileAccess.Read, FileShare.None);
-                StreamReader file = new StreamReader(stream, unicode);
+                var stream = File.Open(PluginSettingsFilePath, FileMode.OpenOrCreate, FileAccess.Read, FileShare.None);
+                var file = new StreamReader(stream, unicode);
 
                 XmlSerializer controlsDefaultsSerializer = null;
                 try
@@ -3938,13 +3925,13 @@ namespace MusicBeePlugin
 
                 try
                 {
-                    SavedSettingsType oldSavedSettings = (SavedSettingsType)controlsDefaultsSerializer.Deserialize(file);
+                    var oldSavedSettings = (SavedSettingsType)controlsDefaultsSerializer.Deserialize(file);
                     oldSavedSettings.CopyPropsTo(ref SavedSettings);
                 }
                 catch
                 {
                     //Ignore...
-                };
+                }
 
                 file.Close();
             }
@@ -3961,7 +3948,7 @@ namespace MusicBeePlugin
 
             if (SavedSettings.exceptionWords == null || SavedSettings.exceptionWords.Length < 10)
             {
-                SavedSettings.exceptionWords = new string[10];
+                SavedSettings.exceptionWords = new object[10];
                 SavedSettings.exceptionWords[0] = "the a an and or not";
                 SavedSettings.exceptionWords[1] = "a al an and as at but by de for in la le mix nor of on or remix the to vs. y ze feat.";
                 SavedSettings.exceptionWords[2] = "U2 UB40";
@@ -3979,7 +3966,7 @@ namespace MusicBeePlugin
 
             if (SavedSettings.exceptionChars == null || SavedSettings.exceptionChars.Length < 10)
             {
-                SavedSettings.exceptionChars = new string[10];
+                SavedSettings.exceptionChars = new object[10];
                 SavedSettings.exceptionChars[0] = "\" ' ( [ { /";
                 SavedSettings.exceptionChars[1] = string.Empty;
                 SavedSettings.exceptionChars[2] = string.Empty;
@@ -3995,7 +3982,7 @@ namespace MusicBeePlugin
             if (SavedSettings.leftExceptionChars == null || SavedSettings.rightExceptionChars == null
                 || SavedSettings.leftExceptionChars.Length < 10 || SavedSettings.rightExceptionChars.Length < 10)
             {
-                SavedSettings.leftExceptionChars = new string[10];
+                SavedSettings.leftExceptionChars = new object[10];
                 SavedSettings.leftExceptionChars[0] = "( [ {";
                 SavedSettings.leftExceptionChars[1] = string.Empty;
                 SavedSettings.leftExceptionChars[2] = string.Empty;
@@ -4007,7 +3994,7 @@ namespace MusicBeePlugin
                 SavedSettings.leftExceptionChars[8] = string.Empty;
                 SavedSettings.leftExceptionChars[9] = string.Empty;
 
-                SavedSettings.rightExceptionChars = new string[10];
+                SavedSettings.rightExceptionChars = new object[10];
                 SavedSettings.rightExceptionChars[0] = ") ] }";
                 SavedSettings.rightExceptionChars[1] = string.Empty;
                 SavedSettings.rightExceptionChars[2] = string.Empty;
@@ -4025,7 +4012,7 @@ namespace MusicBeePlugin
 
             if (SavedSettings.wordSeparators == null || SavedSettings.wordSeparators.Length < 10)
             {
-                SavedSettings.wordSeparators = new string[10];
+                SavedSettings.wordSeparators = new object[10];
                 SavedSettings.wordSeparators[0] = "& .";
                 SavedSettings.wordSeparators[1] = string.Empty;
                 SavedSettings.wordSeparators[2] = string.Empty;
@@ -4043,7 +4030,7 @@ namespace MusicBeePlugin
 
             if (SavedSettings.customText == null || SavedSettings.customText.Length < 10)
             {
-                SavedSettings.customText = new string[10];
+                SavedSettings.customText = new object[10];
                 SavedSettings.customText[0] = string.Empty;
                 SavedSettings.customText[1] = string.Empty;
                 SavedSettings.customText[2] = string.Empty;
@@ -4058,7 +4045,7 @@ namespace MusicBeePlugin
 
             if (SavedSettings.appendedText == null || SavedSettings.appendedText.Length < 10)
             {
-                SavedSettings.appendedText = new string[10];
+                SavedSettings.appendedText = new object[10];
                 SavedSettings.appendedText[0] = string.Empty;
                 SavedSettings.appendedText[1] = string.Empty;
                 SavedSettings.appendedText[2] = string.Empty;
@@ -4073,7 +4060,7 @@ namespace MusicBeePlugin
 
             if (SavedSettings.addedText == null || SavedSettings.addedText.Length < 10)
             {
-                SavedSettings.addedText = new string[10];
+                SavedSettings.addedText = new object[10];
                 SavedSettings.addedText[0] = string.Empty;
                 SavedSettings.addedText[1] = string.Empty;
                 SavedSettings.addedText[2] = string.Empty;
@@ -4125,7 +4112,7 @@ namespace MusicBeePlugin
 
             if (Language == "ru")
             {
-                //Lets redefine localizable strings
+                //Let's redefine localizable strings
 
                 //MusicBeePlugin localizable strings
                 PluginName = "Дополнительные инструменты";
@@ -4142,8 +4129,8 @@ namespace MusicBeePlugin
                 CopyTagName = "Копировать тег...";
                 SwapTagsName = "Поменять местами два тега...";
                 ChangeCaseName = "Изменить регистр тега...";
-                ReencodeTagName = "Изменить кодировку тега...";
-                ReencodeTagsName = "Изменить кодировку тегов...";
+                ReEncodeTagName = "Изменить кодировку тега...";
+                ReEncodeTagsName = "Изменить кодировку тегов...";
                 LibraryReportsName = "Отчеты по библиотеке...";
                 AutoRateName = "Автоматически установить рейтинги...";
                 AsrName = "Дополнительный поиск и замена...";
@@ -4158,8 +4145,8 @@ namespace MusicBeePlugin
                 CopyTagDescription = TagToolsHotkeyDescription + "Копировать тег";
                 SwapTagsDescription = TagToolsHotkeyDescription + "Поменять местами два тега";
                 ChangeCaseDescription = TagToolsHotkeyDescription + "Изменить регистр тега";
-                ReencodeTagDescription = TagToolsHotkeyDescription + "Изменить кодировку тега";
-                ReencodeTagsDescription = TagToolsHotkeyDescription + "Изменить кодировку тегов";
+                ReEncodeTagDescription = TagToolsHotkeyDescription + "Изменить кодировку тега";
+                ReEncodeTagsDescription = TagToolsHotkeyDescription + "Изменить кодировку тегов";
                 LibraryReportsDescription = TagToolsHotkeyDescription + "Отчеты по библиотеке";
                 LrPresetHotkeyDescription = TagToolsHotkeyDescription;
                 AutoRateDescription = TagToolsHotkeyDescription + "Автоматически установить рейтинги";
@@ -4200,7 +4187,7 @@ namespace MusicBeePlugin
                 CopyTagSbText = "Копирование тегов";
                 SwapTagsSbText = "Обмен тегов местами";
                 ChangeCaseSbText = "Изменение регистра тега";
-                ReencodeTagSbText = "Изменение кодировки тегов";
+                ReEncodeTagSbText = "Изменение кодировки тегов";
                 LibraryReportsSbText = "Формирование отчета";
                 LibraryReportsGeneratingPreviewSbText = "Формирование предварительного просмотра";
                 ApplyingLrPresetSbText = "Применение пресета ОБ";
@@ -4284,7 +4271,7 @@ namespace MusicBeePlugin
                     "Двойной щелчок с нажатой клавишей Shift по границе строки устанавливает авто-размер всех строк. \n" +
                     "Изменение размера строки с нажатой клавишей Alt изменит размер всех строк. ";
 
-                SbBrokenPresetRetrievalChain = "Нарушенная цепочка пресетов для получения списка треков для для пресета ОБ: %%PRESETNAME%%! Проверьте цепочку пресетов!";
+                SbBrokenPresetRetrievalChain = "Нарушенная цепочка пресетов для получения списка треков для для пресета ОБ: %%PRESET-NAME%%! Проверьте цепочку пресетов!";
 
                 OKButtonName = "Применить";
                 StopButtonName = "Остановить";
@@ -4456,8 +4443,8 @@ namespace MusicBeePlugin
                 SbItems = "записей";
                 SbItemNames = SbFiles;
 
-                SbAsrPresetIsApplied = "Применен пресет дополнительного поиска и замены: %%PRESETNAME%%";
-                SbAsrPresetsAreApplied = "Применены пресеты дополнительного поиска и замены: %%PRESETCOUNT%%";
+                SbAsrPresetIsApplied = "Применен пресет дополнительного поиска и замены: %%PRESET-NAME%%";
+                SbAsrPresetsAreApplied = "Применены пресеты дополнительного поиска и замены: %%PRESET-COUNT%%";
 
                 SbLrHotkeysAreAssignedIncorrectly = "Комбинация клавиш пресета ОБ назначена некорректно!";
                 SbIncorrectLrFunctionId = "Некорректный ID функции ОБ: ";
@@ -4492,10 +4479,10 @@ namespace MusicBeePlugin
                 MsgBrCreateNewBaseline = "Рекомендуется создать новый опорный архив после наведения порядка в тегах!";
 
                 MsgMsrGiveNameToAsrPreset = "Задайте название пресета!";
-                MsgMsrAreYouSureYouWantToSaveAsrPreset = "Сохранить пресет дополнительного поиска и замены под названием \"%%PRESETNAME%%\"?";
-                MsgMsrAreYouSureYouWantToOverwriteAsrPreset = "Перезаписать пресет дополнительного поиска и замены \"%%PRESETNAME%%\"?";
-                MsgMsrAreYouSureYouWantToOverwriteRenameAsrPreset = "Перезаписать пресет дополнительного поиска и замены \"%%PRESETNAME%%\", переименовав его в \"%%NEWPRESETNAME%%\"?";
-                MsgMsrAreYouSureYouWantToDeleteAsrPreset = "Удалить пресет дополнительного поиска и замены \"%%PRESETNAME%%\"?";
+                MsgMsrAreYouSureYouWantToSaveAsrPreset = "Сохранить пресет дополнительного поиска и замены под названием \"%%PRESET-NAME%%\"?";
+                MsgMsrAreYouSureYouWantToOverwriteAsrPreset = "Перезаписать пресет дополнительного поиска и замены \"%%PRESET-NAME%%\"?";
+                MsgMsrAreYouSureYouWantToOverwriteRenameAsrPreset = "Перезаписать пресет дополнительного поиска и замены \"%%PRESET-NAME%%\", переименовав его в \"%%NEWPRESETNAME%%\"?";
+                MsgMsrAreYouSureYouWantToDeleteAsrPreset = "Удалить пресет дополнительного поиска и замены \"%%PRESET-NAME%%\"?";
                 MsgAsrPredefinedPresetsCantBeChanged = "Стандартные пресеты нельзя изменять. Редактор пресетов будет открыт в режиме просмотра.\n\n"
                     + "Отключить показ этого предупреждения?";
                 MsgMsrSavePreset = "Сохранить пресет";
@@ -4526,6 +4513,8 @@ namespace MusicBeePlugin
                 ExImpossibleToStretchThumb = "Невозможно масштабировать ползунок полосы прокрутки. Пустая ссылка на изображение ползунка.";
                 ExMaskAndImageMustBeTheSameSize = "Маска и изображение должны быть одинакового размера!";
 
+                
+                CtlAutoRateCalculating = "Идет расчет...";
 
                 CtlAsrCellTooTip = "Неотмеченные строки не будут обработаны\n" +
                     "\n" +
@@ -4535,7 +4524,7 @@ namespace MusicBeePlugin
                     "Щелчок при нажатой клавише Shift отметит/снимет отметку во всех строках, содержащих тот же тег\n" +
                     "\n" +
                     "Щелчок при нажатой клавише Ctrl добавит/удалит тег, указанный в строке, к списку/из списка обрабатываемых/исключенных тегов";
-                MsgAsrPresetsUsingAllTagsPseudoTagNameCannotBeAutoApplied = "Невозможно применить пресет %%PRESETNAME%%! Пресеты ДПЗ, использующие псевдо-тег %%AllTagsPseudoTagName%%, " +
+                MsgAsrPresetsUsingAllTagsPseudoTagNameCannotBeAutoApplied = "Невозможно применить пресет %%PRESET-NAME%%! Пресеты ДПЗ, использующие псевдо-тег %%AllTagsPseudoTagName%%, " +
                     "не могут применяться ни автоматически, ни при помощи комбинации клавиш!";
 
 
@@ -4546,7 +4535,7 @@ namespace MusicBeePlugin
                 SbRenamingMovingBackup = "Идет переименование/перемещение архива...";
                 SbMovingBackups = "Идет перемещение архивов...";
                 SbDeletingBackups = "Идет удаление архивов...";
-                SbTagAutoBackupSkipped = "Автоархивирование тегов пропущено (не было изменений с момента последней архивации)";
+                SbTagAutoBackupSkipped = "Авто-архивирование тегов пропущено (не было изменений с момента последней архивации)";
                 SbComparingTags = "Идет сравнение тегов с основным архивом... ";
 
                 CtlWarning = "ПРЕДУПРЕЖДЕНИЕ!";
@@ -4603,7 +4592,7 @@ namespace MusicBeePlugin
 
             if (SavedSettings.reportPresets == null && SavedSettings.reportsPresets == null)
             {
-                SavedSettings.reportPresets = new ReportPreset[0];
+                SavedSettings.reportPresets = Array.Empty<ReportPreset>();
             }
             else if (SavedSettings.reportPresets == null) //******** remove later!!!!!
             {
@@ -4612,10 +4601,10 @@ namespace MusicBeePlugin
             }
 
             //Let's remove all predefined presets and recreate them from scratch (except for allowed user customizations)
-            SortedDictionary<Guid, ReportPreset> existingPredefinedPresets = new SortedDictionary<Guid, ReportPreset>(); //<permanentGuid, ReportPreset>
+            var existingPredefinedPresets = new SortedDictionary<Guid, ReportPreset>(); //<permanentGuid, ReportPreset>
 
-            int existingPredefinedPresetCount = 0;
-            for (int i = 0; i < SavedSettings.reportPresets.Length; i++)
+            var existingPredefinedPresetCount = 0;
+            for (var i = 0; i < SavedSettings.reportPresets.Length; i++)
             {
                 if (!SavedSettings.reportPresets[i].userPreset)
                 {
@@ -4624,7 +4613,7 @@ namespace MusicBeePlugin
                 }
             }
 
-            int presetCounter = 0;
+            var presetCounter = 0;
             var reportPresets = new ReportPreset[SavedSettings.reportPresets.Length - existingPredefinedPresetCount + PredefinedReportPresetCount];
             foreach (var reportPreset in SavedSettings.reportPresets)
             {
@@ -4633,47 +4622,42 @@ namespace MusicBeePlugin
             }
 
 
-            ReportPreset libraryReportsPreset;
-
-            PresetColumnAttributes[] groupings = new PresetColumnAttributes[3];
-            PresetColumnAttributes[] functions = new PresetColumnAttributes[9];
-
-            string[] destinationTags;
-            string[] functionIds;
+            var groupings = new PresetColumnAttributes[3];
+            var functions = new PresetColumnAttributes[9];
 
 
             //Library Totals
-            groupings[0] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Genre), null, null, false);
-            groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { string.Empty }, DisplayedAlbumArtistName, null, null, false);
-            groupings[2] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Album), null, null, false);
+            groupings[0] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Genre), null, null, false);
+            groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, DisplayedAlbumArtistName, null, null, false);
+            groupings[2] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Album), null, null, false);
 
-            for (int f = 0; f < groupings.Length; f++)
-                groupings[f].columnIndices = new int[] { f };
-
-
-            functions[0] = new PresetColumnAttributes(LrFunctionType.Count, new string[] { string.Empty }, DisplayedAlbumArtistName, null, null, false);
-            functions[1] = new PresetColumnAttributes(LrFunctionType.Count, new string[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Genre), null, null, false);
-            functions[2] = new PresetColumnAttributes(LrFunctionType.Count, new string[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Year), null, null, false);
-            functions[3] = new PresetColumnAttributes(LrFunctionType.Count, new string[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Album), null, null, false);
-            functions[4] = new PresetColumnAttributes(LrFunctionType.Count, new string[] { string.Empty }, MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url), null, null, false);
-            functions[5] = new PresetColumnAttributes(LrFunctionType.Sum, new string[] { string.Empty }, MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Duration), null, null, false);
-            functions[6] = new PresetColumnAttributes(LrFunctionType.Sum, new string[] { string.Empty }, MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Size), null, null, false);
-            functions[7] = new PresetColumnAttributes(LrFunctionType.Sum, new string[] { string.Empty }, MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.PlayCount), null, null, false);
-            functions[8] = new PresetColumnAttributes(LrFunctionType.Sum, new string[] { string.Empty }, MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.SkipCount), null, null, false);
-
-            for (int f = 0; f < functions.Length; f++)
-                functions[f].columnIndices = new int[] { groupings.Length + f };
+            for (var f = 0; f < groupings.Length; f++)
+                groupings[f].columnIndices = new[] { f };
 
 
-            functionIds = new string[functions.Length];
+            functions[0] = new PresetColumnAttributes(LrFunctionType.Count, new[] { string.Empty }, DisplayedAlbumArtistName, null, null, false);
+            functions[1] = new PresetColumnAttributes(LrFunctionType.Count, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Genre), null, null, false);
+            functions[2] = new PresetColumnAttributes(LrFunctionType.Count, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Year), null, null, false);
+            functions[3] = new PresetColumnAttributes(LrFunctionType.Count, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Album), null, null, false);
+            functions[4] = new PresetColumnAttributes(LrFunctionType.Count, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url), null, null, false);
+            functions[5] = new PresetColumnAttributes(LrFunctionType.Sum, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Duration), null, null, false);
+            functions[6] = new PresetColumnAttributes(LrFunctionType.Sum, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Size), null, null, false);
+            functions[7] = new PresetColumnAttributes(LrFunctionType.Sum, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.PlayCount), null, null, false);
+            functions[8] = new PresetColumnAttributes(LrFunctionType.Sum, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.SkipCount), null, null, false);
 
-            destinationTags = new string[functions.Length];
-            for (int i = 0; i < destinationTags.Length; i++)
+            for (var f = 0; f < functions.Length; f++)
+                functions[f].columnIndices = new[] { groupings.Length + f };
+
+
+            var functionIds = new string[functions.Length];
+
+            var destinationTags = new string[functions.Length];
+            for (var i = 0; i < destinationTags.Length; i++)
                 destinationTags[i] = NullTagName;
 
             //Let's copy allowed user customizations from existing predefined preset (if it exists)
-            Guid presetPermanentGuid = Guid.Parse("450A95FE-E660-44B7-B34C-1169C9466493");
-            libraryReportsPreset = GetCreatePredefinedPreset(presetPermanentGuid, LibraryTotalsPresetName, existingPredefinedPresets,
+            var presetPermanentGuid = Guid.Parse("450A95FE-E660-44B7-B34C-1169C9466493");
+            var libraryReportsPreset = GetCreatePredefinedPreset(presetPermanentGuid, LibraryTotalsPresetName, existingPredefinedPresets,
                 groupings, functions, destinationTags, functionIds);
 
             reportPresets[presetCounter++] = libraryReportsPreset;
@@ -4683,43 +4667,43 @@ namespace MusicBeePlugin
             groupings = new PresetColumnAttributes[3];
             functions = new PresetColumnAttributes[10];
 
-            groupings[0] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Genre), null, null, false);
-            groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { string.Empty }, DisplayedAlbumArtistName, null, null, false);
-            groupings[2] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Album), null, null, false);
+            groupings[0] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Genre), null, null, false);
+            groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, DisplayedAlbumArtistName, null, null, false);
+            groupings[2] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Album), null, null, false);
 
-            for (int f = 0; f < groupings.Length; f++)
-                groupings[f].columnIndices = new int[] { f };
+            for (var f = 0; f < groupings.Length; f++)
+                groupings[f].columnIndices = new[] { f };
 
 
-            functions[0] = new PresetColumnAttributes(LrFunctionType.AverageCount, new string[] { string.Empty },
+            functions[0] = new PresetColumnAttributes(LrFunctionType.AverageCount, new[] { string.Empty },
                 MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url), MbApiInterface.Setting_GetFieldName(MetaDataType.Artist), null, false);
-            functions[1] = new PresetColumnAttributes(LrFunctionType.AverageCount, new string[] { string.Empty },
+            functions[1] = new PresetColumnAttributes(LrFunctionType.AverageCount, new[] { string.Empty },
                 MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url), MbApiInterface.Setting_GetFieldName(MetaDataType.Album), null, false);
-            functions[2] = new PresetColumnAttributes(LrFunctionType.AverageCount, new string[] { string.Empty },
+            functions[2] = new PresetColumnAttributes(LrFunctionType.AverageCount, new[] { string.Empty },
                 MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url), MbApiInterface.Setting_GetFieldName(MetaDataType.Genre), null, false);
-            functions[3] = new PresetColumnAttributes(LrFunctionType.AverageCount, new string[] { string.Empty },
+            functions[3] = new PresetColumnAttributes(LrFunctionType.AverageCount, new[] { string.Empty },
                 MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url), MbApiInterface.Setting_GetFieldName(MetaDataType.Year), null, false);
-            functions[4] = new PresetColumnAttributes(LrFunctionType.Average, new string[] { string.Empty },
+            functions[4] = new PresetColumnAttributes(LrFunctionType.Average, new[] { string.Empty },
                 MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Bitrate), MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url), null, false);
-            functions[5] = new PresetColumnAttributes(LrFunctionType.Average, new string[] { string.Empty },
+            functions[5] = new PresetColumnAttributes(LrFunctionType.Average, new[] { string.Empty },
                 MbApiInterface.Setting_GetFieldName(MetaDataType.Rating), MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url), null, false);
-            functions[6] = new PresetColumnAttributes(LrFunctionType.Average, new string[] { string.Empty },
+            functions[6] = new PresetColumnAttributes(LrFunctionType.Average, new[] { string.Empty },
                 MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Duration), MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url), null, false);
-            functions[7] = new PresetColumnAttributes(LrFunctionType.Average, new string[] { string.Empty },
+            functions[7] = new PresetColumnAttributes(LrFunctionType.Average, new[] { string.Empty },
                 MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Size), MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url), null, false);
-            functions[8] = new PresetColumnAttributes(LrFunctionType.Average, new string[] { string.Empty },
+            functions[8] = new PresetColumnAttributes(LrFunctionType.Average, new[] { string.Empty },
                 MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.PlayCount), MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url), null, false);
-            functions[9] = new PresetColumnAttributes(LrFunctionType.Average, new string[] { string.Empty },
+            functions[9] = new PresetColumnAttributes(LrFunctionType.Average, new[] { string.Empty },
                 MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.SkipCount), MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url), null, false);
 
-            for (int f = 0; f < functions.Length; f++)
-                functions[f].columnIndices = new int[] { groupings.Length + f };
+            for (var f = 0; f < functions.Length; f++)
+                functions[f].columnIndices = new[] { groupings.Length + f };
 
 
             functionIds = new string[functions.Length];
 
             destinationTags = new string[functions.Length];
-            for (int i = 0; i < destinationTags.Length; i++)
+            for (var i = 0; i < destinationTags.Length; i++)
                 destinationTags[i] = NullTagName;
 
             //Let's copy allowed user customizations from existing predefined preset (if it exists)
@@ -4732,23 +4716,23 @@ namespace MusicBeePlugin
 
             //CD Booklet
             groupings = new PresetColumnAttributes[6];
-            functions = new PresetColumnAttributes[0];
+            functions = Array.Empty<PresetColumnAttributes>();
 
             groupings[0] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { null }, SequenceNumberName, null, null, false);
-            groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { string.Empty }, DisplayedAlbumArtistName, null, null, false);
-            groupings[2] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Album), null, null, false);
+            groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, DisplayedAlbumArtistName, null, null, false);
+            groupings[2] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Album), null, null, false);
             groupings[3] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { null }, MbApiInterface.Setting_GetFieldName(MetaDataType.Artwork), null, null, false);
-            groupings[4] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.TrackTitle), null, null, false);
-            groupings[5] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { string.Empty }, MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Duration), null, null, false);
+            groupings[4] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.TrackTitle), null, null, false);
+            groupings[5] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Duration), null, null, false);
 
-            for (int f = 0; f < groupings.Length; f++)
-                groupings[f].columnIndices = new int[] { f };
+            for (var f = 0; f < groupings.Length; f++)
+                groupings[f].columnIndices = new[] { f };
 
 
             functionIds = new string[functions.Length];
 
             destinationTags = new string[functions.Length];
-            for (int i = 0; i < destinationTags.Length; i++) //-V3116
+            for (var i = 0; i < destinationTags.Length; i++) //-V3116
                 destinationTags[i] = NullTagName;
 
             //Let's copy allowed user customizations from existing predefined preset (if it exists)
@@ -4761,22 +4745,22 @@ namespace MusicBeePlugin
 
             //Albums and Tracks
             groupings = new PresetColumnAttributes[5];
-            functions = new PresetColumnAttributes[0];
+            functions = Array.Empty<PresetColumnAttributes>();
 
-            groupings[0] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { string.Empty }, DisplayedAlbumArtistName, null, null, false);
-            groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Album), null, null, false);
+            groupings[0] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, DisplayedAlbumArtistName, null, null, false);
+            groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Album), null, null, false);
             groupings[2] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { null }, MbApiInterface.Setting_GetFieldName(MetaDataType.Artwork), null, null, false);
-            groupings[3] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.TrackNo), null, null, false);
-            groupings[4] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.TrackTitle), null, null, false);
+            groupings[3] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.TrackNo), null, null, false);
+            groupings[4] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.TrackTitle), null, null, false);
 
-            for (int f = 0; f < groupings.Length; f++)
-                groupings[f].columnIndices = new int[] { f };
+            for (var f = 0; f < groupings.Length; f++)
+                groupings[f].columnIndices = new[] { f };
 
 
             functionIds = new string[functions.Length];
 
             destinationTags = new string[functions.Length];
-            for (int i = 0; i < destinationTags.Length; i++) //-V3116
+            for (var i = 0; i < destinationTags.Length; i++) //-V3116
                 destinationTags[i] = NullTagName;
 
             //Let's copy allowed user customizations from existing predefined preset (if it exists)
@@ -4789,20 +4773,20 @@ namespace MusicBeePlugin
 
             //Album Grid
             groupings = new PresetColumnAttributes[3];
-            functions = new PresetColumnAttributes[0];
+            functions = Array.Empty<PresetColumnAttributes>();
 
-            groupings[0] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Album), null, null, false);
-            groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { string.Empty }, DisplayedAlbumArtistName, null, null, false);
+            groupings[0] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Album), null, null, false);
+            groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, DisplayedAlbumArtistName, null, null, false);
             groupings[2] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { null }, MbApiInterface.Setting_GetFieldName(MetaDataType.Artwork), null, null, false);
 
-            for (int f = 0; f < groupings.Length; f++)
-                groupings[f].columnIndices = new int[] { f };
+            for (var f = 0; f < groupings.Length; f++)
+                groupings[f].columnIndices = new[] { f };
 
 
             functionIds = new string[functions.Length];
 
             destinationTags = new string[functions.Length];
-            for (int i = 0; i < destinationTags.Length; i++) //-V3116
+            for (var i = 0; i < destinationTags.Length; i++) //-V3116
                 destinationTags[i] = NullTagName;
 
             //Let's copy allowed user customizations from existing predefined preset (if it exists)
@@ -4835,7 +4819,7 @@ namespace MusicBeePlugin
             SavedSettings.reportPresets = reportPresets;
 
 
-            //Lets reset invalid defaults for controls
+            //Let's reset invalid defaults for controls
             if (SavedSettings.closeShowHiddenWindows == 0)
                 SavedSettings.closeShowHiddenWindows = 1;
 
@@ -4884,14 +4868,14 @@ namespace MusicBeePlugin
 
             if (SavedSettings.copyTagsTagSets == null)
             {
-                List<string> tagNameList = new List<string>();
+                var tagNameList = new List<string>();
                 FillListByTagNames(tagNameList, false, false, false, false, false, false);
                 //FillListWithProps(tagNameList);
 
                 tagNameList.RemoveExisting("Sort Artist");
                 tagNameList.RemoveExisting("Sort Album Artist");
 
-                List<int> tagIdList = new List<int>();
+                var tagIdList = new List<int>();
                 foreach (var tagName in tagNameList)
                     tagIdList.Add((int)GetTagId(tagName));
 
@@ -4980,7 +4964,7 @@ namespace MusicBeePlugin
             }
             else
             {
-                for (int i = 0; i < SavedSettings.copyTagsTagSets.Length; i++)
+                for (var i = 0; i < SavedSettings.copyTagsTagSets.Length; i++)
                     SavedSettings.copyTagsTagSets[i].setPosition = i + 1;
             }
             #endregion
@@ -5013,7 +4997,7 @@ namespace MusicBeePlugin
             About.ReceiveNotifications = (ReceiveNotificationFlags.PlayerEvents | ReceiveNotificationFlags.TagEvents);
             About.ConfigurationPanelHeight = 0;   //height in pixels that musicbee should reserve in a panel for config settings. When set, a handle to an empty panel will be passed to the Configure function
 
-            int pluginBuildTime = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Revision;
+            var pluginBuildTime = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Revision;
 
             PluginVersion = PluginVersionString + About.VersionMajor + "." + About.VersionMinor + "." + About.Revision + "." + pluginBuildTime;
             #endregion
@@ -5031,7 +5015,7 @@ namespace MusicBeePlugin
             //keep in mind the panel width is scaled according to the font the user has selected
             //if about.ConfigurationPanelHeight is set to 0, you can display your own popup window
 
-            Settings tagToolsForm = new Settings(this);
+            var tagToolsForm = new Settings(this);
             PluginWindowTemplate.Display(tagToolsForm, true);
 
             SaveSettings();
@@ -5040,13 +5024,13 @@ namespace MusicBeePlugin
         }
 
         //called by MusicBee when the user clicks Apply or Save in the MusicBee Preferences screen.
-        //its up to you to figure out whether anything has changed and needs updating
+        //It's up to you to figure out whether anything has changed and needs updating
         public void SaveSettings()
         {
-            Encoding unicode = Encoding.UTF8;
+            var unicode = Encoding.UTF8;
 
-            FileStream stream = File.Open(PluginSettingsFilePath + ".new-format", FileMode.Create, FileAccess.Write, FileShare.None); //********* remove later!!!
-            StreamWriter file = new StreamWriter(stream, unicode);
+            var stream = File.Open(PluginSettingsFilePath + ".new-format", FileMode.Create, FileAccess.Write, FileShare.None); //********* remove later!!!
+            var file = new StreamWriter(stream, unicode);
 
             file.Close();
 
@@ -5054,8 +5038,8 @@ namespace MusicBeePlugin
             stream = File.Open(PluginSettingsFilePath, FileMode.Create, FileAccess.Write, FileShare.None);
             file = new StreamWriter(stream, unicode);
 
-            XmlSerializer controlsDefaultsSerializer = new XmlSerializer(typeof(PluginSettings));
-            controlsDefaultsSerializer.Serialize(file, (PluginSettings)SavedSettings);
+            var controlsDefaultsSerializer = new XmlSerializer(typeof(PluginSettings));
+            controlsDefaultsSerializer.Serialize(file, SavedSettings);
 
             file.Close();
         }
@@ -5074,7 +5058,7 @@ namespace MusicBeePlugin
             {
                 PluginClosing = true;
 
-                for (int i = OpenedForms.Count - 1; i >= 0; i--)
+                for (var i = OpenedForms.Count - 1; i >= 0; i--)
                 {
                     OpenedForms[i].backgroundTaskIsCanceled = true;
                     OpenedForms[i].Close();
@@ -5103,7 +5087,7 @@ namespace MusicBeePlugin
         //uninstall this plugin - clean up any persisted files
         public void Uninstall()
         {
-            //Lets delete backups
+            //Let's delete backups
             if (Directory.Exists(BrGetAutoBackupDirectory(SavedSettings.autoBackupDirectory)))
             {
                 if (PeriodicAutoBackupTimer != null)
@@ -5117,23 +5101,23 @@ namespace MusicBeePlugin
             }
 
 
-            //Lets delete settings file
+            //Let's delete settings file
             if (File.Exists(PluginSettingsFilePath))
             {
                 File.Delete(PluginSettingsFilePath);
             }
 
 
-            //Lets delete working presets files
+            //Let's delete working presets files
             if (Directory.Exists(PresetsPath))
             {
                 Directory.Delete(PresetsPath, true);
             }
 
 
-            //Lets try to delete predefined presets files (this can't be done by plugin if it's
+            //Let's try to delete predefined presets files (this can't be done by plugin if it's
             //installed to "C:\Program Files (x86)\MusicBee\Plugins" folder)
-            string presetsPath = Path.Combine(PluginsPath, AsrPresetsDirectory);
+            var presetsPath = Path.Combine(PluginsPath, AsrPresetsDirectory);
 
             try
             {
@@ -5142,28 +5126,34 @@ namespace MusicBeePlugin
                     Directory.Delete(presetsPath, true);
                 }
             }
-            catch { };
+            catch
+            {
+                //Ignored...
+            }
 
             Uninstalled = true;
         }
 
-        private void autoApplyAsrUpdateLrCache(string sourceFileUrl)
+        private void autoApplyAsrUpdateLrCache(string sourceFileUrl, string deletedFile = null)
         {
             if (!SavedSettings.dontShowAsr || !SavedSettings.dontShowLibraryReports)
             {
-                bool autoApplyAsrUpdateLrCache = false;
+                var autoApplyAsrUpdateLrCache = false;
 
-                lock (FilesUpdatedByPlugin)
+                if (sourceFileUrl != null)
                 {
-                    if (!FilesUpdatedByPlugin.RemoveExisting(sourceFileUrl))
-                        autoApplyAsrUpdateLrCache = true;
+                    lock (FilesUpdatedByPlugin)
+                    {
+                        if (!FilesUpdatedByPlugin.RemoveExisting(sourceFileUrl))
+                            autoApplyAsrUpdateLrCache = true;
+                    }
+
+                    if (autoApplyAsrUpdateLrCache && !SavedSettings.dontShowAsr)
+                        AsrAutoApplyPresets(sourceFileUrl);
                 }
 
-                if (autoApplyAsrUpdateLrCache && !SavedSettings.dontShowAsr)
-                    AsrAutoApplyPresets(sourceFileUrl, this);
-
                 if (autoApplyAsrUpdateLrCache && !SavedSettings.dontShowLibraryReports)
-                    LrNotifyFileTagsChanged(sourceFileUrl);
+                    LrNotifyFileTagsChanged(sourceFileUrl, deletedFile);
             }
         }
 
@@ -5226,11 +5216,11 @@ namespace MusicBeePlugin
 
                     if (SavedSettings.lastSkippedTagId != 0)
                     {
-                        int newSkipCount = Convert.ToInt32(MbApiInterface.Library_GetFileProperty(sourceFileUrl, FilePropertyType.SkipCount));
+                        var newSkipCount = Convert.ToInt32(MbApiInterface.Library_GetFileProperty(sourceFileUrl, FilePropertyType.SkipCount));
                         if (newSkipCount != InitialSkipCount)
                         {
                             string lastSkippedDate;
-                            DateTime now = DateTime.Now;
+                            var now = DateTime.Now;
 
                             if (SavedSettings.lastSkippedDateFormat == 0)
                                 lastSkippedDate = now.ToString("d");
@@ -5252,6 +5242,10 @@ namespace MusicBeePlugin
 
                     if (!SavedSettings.dontShowBackupRestore && SavedSettings.dontSkipAutoBackupsIfOnlyPlayCountsChanged)
                         UpdateTrackForBackup(sourceFileUrl);
+
+                    break;
+                case NotificationType.FileDeleting:                
+                    autoApplyAsrUpdateLrCache(null, sourceFileUrl);
 
                     break;
                 case NotificationType.TagsChanged:
@@ -5315,9 +5309,6 @@ namespace MusicBeePlugin
             ThumbRightImage?.Dispose();
 
 
-            ButtonRemoveImage?.Dispose();
-            ButtonSetImage?.Dispose();
-
             CheckedState?.Dispose();
             UncheckedState?.Dispose();
 
@@ -5368,6 +5359,25 @@ namespace MusicBeePlugin
             MissingArtwork?.Dispose();
         }
 
+        internal static Color GetButtonBackColor()
+        {
+            var buttonBackCode = MbApiInterface.Setting_GetSkinElementColour((SkinElement)2, ElementState.ElementStateDefault, ElementComponent.ComponentBackground);
+            Color buttonBackColor;
+
+            //const float ButtonBackgroundWeight = LightDimmedWeight;
+            const float ButtonBackgroundWeight = 1;
+            if (buttonBackCode == 0) //Unsupported by older API
+                //buttonBackColor = GetWeightedColor(Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinTrackAndArtistPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBackground)), AccentColor, ButtonBackgroundWeight);
+                buttonBackColor = GetWeightedColor(FormBackColor, AccentColor, ButtonBackgroundWeight);
+            else if (buttonBackCode == -1) //Windows color scheme
+                buttonBackColor = InputPanelBackColor;
+            else
+                buttonBackColor = Color.FromArgb(buttonBackCode);
+
+
+            return buttonBackColor;
+        }
+
         internal void prepareThemedBitmapsAndColors()
         {
             //Skin controls
@@ -5384,6 +5394,7 @@ namespace MusicBeePlugin
             InputControlForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
             InputControlBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
             InputControlBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentBorder));
+            InputControlFocusedBorderColor = GetWeightedColor(InputControlBorderColor, InputControlForeColor);
 
             if (!SavedSettings.dontUseSkinColors)
             {
@@ -5397,30 +5408,19 @@ namespace MusicBeePlugin
                 FormBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
                 FormBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBorder));
 
-                InputControlDimmedForeColor = GetWeightedColor(InputControlForeColor, InputPanelBackColor, DimmedWeight);
-                InputControlDimmedBackColor = GetWeightedColor(InputPanelBackColor, FormBackColor, DimmedWeight);
+                InputControlDimmedForeColor = GetWeightedColor(InputControlForeColor, FormBackColor, DimmedWeight);
+                InputControlDimmedBackColor = GetWeightedColor(InputControlBackColor, FormBackColor, DimmedWeight);
 
 
                 //SKINNING BUTTONS (ESPECIALLY DISABLED BUTTONS)
                 //Below: (SkinElement)2 - BUTTON??? enum code //****
 
                 //Back colors
-                int buttonBackCode = MbApiInterface.Setting_GetSkinElementColour((SkinElement)2, ElementState.ElementStateDefault, ElementComponent.ComponentBackground);
-                Color buttonBackColor;
+                Color buttonBackColor = GetButtonBackColor();
 
-                //const float ButtonBackgroundWeight = LightDimmedWeight;
-                const float ButtonBackgroundWeight = 1;
-                if (buttonBackCode == 0) //Unsupported by older API
-                    //buttonBackColor = GetWeightedColor(Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinTrackAndArtistPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBackground)), AccentColor, ButtonBackgroundWeight);
-                    buttonBackColor = GetWeightedColor(FormBackColor, AccentColor, ButtonBackgroundWeight);
-                else if (buttonBackCode == -1) //Windows color scheme
-                    buttonBackColor = SystemColors.Control;
-                else
-                    buttonBackColor = Color.FromArgb(buttonBackCode);
-
-                Color buttonBackLightDimmedAccentColor = GetWeightedColor(buttonBackColor, AccentColor, LightDimmedWeight);
-                Color buttonBackDimmedAccentColor = GetWeightedColor(buttonBackColor, AccentColor, DimmedWeight);
-                Color buttonBackDeepDimmedAccentColor = GetWeightedColor(buttonBackColor, AccentColor, DeepDimmedWeight);
+                var buttonBackLightDimmedAccentColor = GetWeightedColor(buttonBackColor, AccentColor, LightDimmedWeight);
+                var buttonBackDimmedAccentColor = GetWeightedColor(buttonBackColor, AccentColor, DimmedWeight);
+                var buttonBackDeepDimmedAccentColor = GetWeightedColor(buttonBackColor, AccentColor, DeepDimmedWeight);
 
 
                 ButtonBackColor = buttonBackColor;
@@ -5443,7 +5443,10 @@ namespace MusicBeePlugin
 
 
                 //Fore colors
-                int buttonForeCode = MbApiInterface.Setting_GetSkinElementColour((SkinElement)2, ElementState.ElementStateDefault, ElementComponent.ComponentForeground);
+                var buttonForeCode = MbApiInterface.Setting_GetSkinElementColour((SkinElement)2, ElementState.ElementStateDefault, ElementComponent.ComponentForeground);
+                if (buttonForeCode != -1)
+                    UseNativeButtonPaint = false;
+
                 Color buttonForeColor;
 
                 if (buttonForeCode == 0) //Unsupported by older API
@@ -5453,16 +5456,16 @@ namespace MusicBeePlugin
                 else
                     buttonForeColor = Color.FromArgb(buttonForeCode);
 
-                Color buttonLightForeDimmedColor = GetWeightedColor(buttonForeColor, ButtonBackColor, LightDimmedWeight);
-                Color buttonForeDimmedColor = GetWeightedColor(buttonForeColor, ButtonBackColor, DimmedWeight);
-                Color buttonForeDeepDimmedColor = GetWeightedColor(buttonForeColor, ButtonBackColor, DeepDimmedWeight);
+                var buttonLightForeDimmedColor = GetWeightedColor(buttonForeColor, ButtonBackColor, LightDimmedWeight);
+                var buttonForeDimmedColor = GetWeightedColor(buttonForeColor, ButtonBackColor, DimmedWeight);
+                var buttonForeDeepDimmedColor = GetWeightedColor(buttonForeColor, ButtonBackColor, DeepDimmedWeight);
 
                 ButtonForeColor = buttonForeColor;
-                ButtonDisabledForeColor = GetWeightedColor(ButtonForeColor, ButtonDisabledBackColor, 0.5f);
+                ButtonDisabledForeColor = GetWeightedColor(ButtonForeColor, ButtonDisabledBackColor);
 
 
                 //Border colors
-                int buttonBorderCode = MbApiInterface.Setting_GetSkinElementColour((SkinElement)2, ElementState.ElementStateDefault, ElementComponent.ComponentBorder);
+                var buttonBorderCode = MbApiInterface.Setting_GetSkinElementColour((SkinElement)2, ElementState.ElementStateDefault, ElementComponent.ComponentBorder);
                 Color buttonBorderColor;
 
                 if (buttonBorderCode == 0) //Unsupported by older API
@@ -5476,11 +5479,11 @@ namespace MusicBeePlugin
                 ButtonFocusedBorderColor = GetWeightedColor(ButtonBorderColor, ButtonForeColor);
 
 
-                ControlHighlightBackColor = buttonBackLightDimmedAccentColor;
+                ControlHighlightBackColor = buttonBackColor; //*** buttonBackLightDimmedAccentColor;
                 ControlHighlightForeColor = buttonForeColor;
 
-                float avgForeBrightness = GetAverageBrightness(ControlHighlightForeColor);
-                float avgBackBrightness = GetAverageBrightness(ControlHighlightBackColor);
+                var avgForeBrightness = GetAverageBrightness(ControlHighlightForeColor);
+                var avgBackBrightness = GetAverageBrightness(ControlHighlightBackColor);
                 if (Math.Abs(avgForeBrightness - avgBackBrightness) < 0.35f)
                 {
                     if (avgForeBrightness < 0.5f)
@@ -5493,7 +5496,7 @@ namespace MusicBeePlugin
             {
                 //Color windowsAccentColor = GetWindowColorizationColor(true);
 
-                Color backColorNotSkinned = SystemColors.Control;
+                var backColorNotSkinned = SystemColors.Control;
                 AccentColor = SystemColors.ControlText;
 
                 DimmedAccentColor = GetWeightedColor(AccentColor, backColorNotSkinned, DimmedWeight); //This is not used at the moment
@@ -5524,11 +5527,13 @@ namespace MusicBeePlugin
             ScrollBarBorderColor = DeepDimmedAccentColor;
             NarrowScrollBarBackColor = InputControlBackColor;
             ScrollBarThumbAndSpansForeColor = GetWeightedColor(AccentColor, InputPanelBackColor, ScrollBarsForeWeight);//***
-            //ScrollBarThumbAndSpansBackColor = InputPanelBackColor;
-            //ScrollBarThumbAndSpansBorderColor = InputPanelBackColor;
+            ScrollBarThumbAndSpansBackColor = InputControlBackColor;
+            ScrollBarThumbAndSpansBorderColor = InputControlBackColor;
+
+            ScrollBarFocusedBorderColor = GetWeightedColor(ScrollBarBorderColor, ScrollBarThumbAndSpansForeColor);
 
 
-            Color sampleColor = SystemColors.Highlight;
+            var sampleColor = SystemColors.Highlight;
             DimmedHighlight = GetHighlightColor(sampleColor, AccentColor, FormBackColor);
 
 
@@ -5543,49 +5548,48 @@ namespace MusicBeePlugin
             var scalingSampleForm = new PluginSampleWindow(this);
             scalingSampleForm.dontShowForm = true;
             scalingSampleForm.Show();
-            float dpiScaling = scalingSampleForm.dpiScaling;
-            float buttonHeightDpiFontScaling = scalingSampleForm.getButtonHeightDpiFontScaling();
+            var dpiScaling = scalingSampleForm.dpiScaling;
+            ButtonHeightDpiFontScaling = scalingSampleForm.getButtonHeightDpiFontScaling();
             scalingSampleForm.Close();
-            scalingSampleForm = null;
 
 
-            //Splitter is invisible by default. Lets draw it.
+            //Splitter is invisible by default. Let's draw it.
             SplitterColor = GetWeightedColor(SystemColors.Desktop, AccentColor, 0.8f);//***
 
             Bitmap oldBitmap;
 
             if (!SavedSettings.dontUseSkinColors) //It's in case if skinned & not skinned buttons use different flat styles
             {
-                int scaledPx = (int)Math.Round(dpiScaling);
-                SbBorderWidth = 1; //Units: px (not yet DPI scaled, scaling will done below)
+                var scaledPx = (int)Math.Round(dpiScaling);
+                SbBorderWidth = 1; //Units: px (not yet DPI scaled, scaling will be done below)
 
-                int scrollBarImagesWidth = ControlsTools.GetCustomScrollBarInitialWidth(dpiScaling, 0);
-                int comboBoxDownArrowSize = (int)Math.Round(dpiScaling * 1.238f * Plugin.ScrollBarWidth);
+                var scrollBarImagesWidth = ControlsTools.GetCustomScrollBarInitialWidth(dpiScaling, 0);
+                var comboBoxDownArrowSize = (int)Math.Round(dpiScaling * 1.238f * ScrollBarWidth);
 
                 SbBorderWidth *= scaledPx; //HERE IS DPI scaling of SbBorderWidth
 
-                int size = (int)Math.Round(17f * buttonHeightDpiFontScaling);
+                var size = (int)Math.Round(17f * ButtonHeightDpiFontScaling);
 
-                int wideHeight = (int)Math.Round(15f * buttonHeightDpiFontScaling);
-                int wideWidth = (int)Math.Round(30f * buttonHeightDpiFontScaling);
+                var wideHeight = (int)Math.Round(15f * ButtonHeightDpiFontScaling);
+                var wideWidth = (int)Math.Round(30f * ButtonHeightDpiFontScaling);
 
-                int midHeight = (int)Math.Round(15f * buttonHeightDpiFontScaling);
-                int midWidth = (int)Math.Round(15f * buttonHeightDpiFontScaling);
-                int midWideWidth = (int)Math.Round(30f * buttonHeightDpiFontScaling);
-                int midWiderWidth = (int)Math.Round(32f * buttonHeightDpiFontScaling);
+                var midHeight = (int)Math.Round(15f * ButtonHeightDpiFontScaling);
+                var midWidth = (int)Math.Round(15f * ButtonHeightDpiFontScaling);
+                var midWideWidth = (int)Math.Round(30f * ButtonHeightDpiFontScaling);
+                var midWiderWidth = (int)Math.Round(32f * ButtonHeightDpiFontScaling);
 
-                int midWidestWidth = (int)Math.Round(43f * buttonHeightDpiFontScaling);
+                var midWidestWidth = (int)Math.Round(43f * ButtonHeightDpiFontScaling);
 
-                int smallSize = (int)Math.Round(15f * buttonHeightDpiFontScaling);
+                var smallSize = (int)Math.Round(15f * ButtonHeightDpiFontScaling);
 
                 oldBitmap = DownArrowComboBoxImage;
-                DownArrowComboBoxImage = GetSolidImageByBitmapMask(ScrollBarThumbAndSpansForeColor, Resources.down_arrow_combobox_b,
-                    comboBoxDownArrowSize, comboBoxDownArrowSize);
+                DownArrowComboBoxImage = GetSolidImageByBitmapMask(ScrollBarThumbAndSpansForeColor, 
+                    Resources.down_arrow_combobox_b, comboBoxDownArrowSize, comboBoxDownArrowSize);
                 oldBitmap?.Dispose();
 
                 oldBitmap = UpArrowImage;
-                UpArrowImage = GetSolidImageByBitmapMask(ScrollBarThumbAndSpansForeColor, Resources.up_arrow_b,
-                    scrollBarImagesWidth, scrollBarImagesWidth);
+                UpArrowImage = GetSolidImageByBitmapMask(ScrollBarThumbAndSpansForeColor, 
+                    Resources.up_arrow_b, scrollBarImagesWidth, scrollBarImagesWidth);
                 oldBitmap?.Dispose();
 
                 oldBitmap = DownArrowImage;
@@ -5594,7 +5598,8 @@ namespace MusicBeePlugin
 
                 //EITHER:
                 oldBitmap = ThumbMiddleVerticalImage;
-                ThumbMiddleVerticalImage = GetSolidImageByBitmapMask(ScrollBarThumbAndSpansForeColor, Resources.thumb_middle_vertical_c,
+                ThumbMiddleVerticalImage = GetSolidImageByBitmapMask(ScrollBarThumbAndSpansForeColor, 
+                    Resources.thumb_middle_vertical_c,
                     scrollBarImagesWidth - 3 * scaledPx, Resources.thumb_middle_vertical_c.Height, //Here middle thumb image is without right transparent part
                     true, InterpolationMode.NearestNeighbor);
                 oldBitmap?.Dispose();
@@ -5614,7 +5619,8 @@ namespace MusicBeePlugin
 
 
                 oldBitmap = LeftArrowImage;
-                LeftArrowImage = GetSolidImageByBitmapMask(ScrollBarThumbAndSpansForeColor, Resources.left_arrow_b, scrollBarImagesWidth, scrollBarImagesWidth);
+                LeftArrowImage = GetSolidImageByBitmapMask(ScrollBarThumbAndSpansForeColor, 
+                    Resources.left_arrow_b, scrollBarImagesWidth, scrollBarImagesWidth);
                 oldBitmap?.Dispose();
 
                 oldBitmap = RightArrowImage;
@@ -5623,7 +5629,8 @@ namespace MusicBeePlugin
 
                 //EITHER:
                 oldBitmap = ThumbMiddleHorizontalImage;
-                ThumbMiddleHorizontalImage = GetSolidImageByBitmapMask(ScrollBarThumbAndSpansForeColor, Resources.thumb_middle_horizontal_c,
+                ThumbMiddleHorizontalImage = GetSolidImageByBitmapMask(ScrollBarThumbAndSpansForeColor, 
+                    Resources.thumb_middle_horizontal_c,
                     Resources.thumb_middle_horizontal_c.Width, scrollBarImagesWidth - 3 * scaledPx, //Here middle thumb image is without bottom transparent part
                     true, InterpolationMode.NearestNeighbor);
                 oldBitmap?.Dispose();
@@ -5640,17 +5647,6 @@ namespace MusicBeePlugin
 
                 //ThumbRightImage = MirrorBitmap(ThumbLeftImage, true);
                 //ThemedBitmapAddRef(EmptyForm, ThumbRightImage);
-
-
-                oldBitmap = ButtonRemoveImage;
-                ButtonRemoveImage = GetSolidImageByBitmapMask(ButtonForeColor, Resources.uncheck_mark,
-                    size, size);
-                oldBitmap?.Dispose();
-
-                oldBitmap = ButtonSetImage;
-                ButtonSetImage = GetSolidImageByBitmapMask(ButtonForeColor, Resources.check_mark,
-                    size, size);
-                oldBitmap?.Dispose();
 
 
                 oldBitmap = WarningWide;
@@ -5696,17 +5692,17 @@ namespace MusicBeePlugin
 
 
                 oldBitmap = Gear;
-                Gear = GetSolidImageByBitmapMask(ButtonForeColor, Resources.gear, size, size);
+                Gear = GetSolidImageByBitmapMask(ButtonForeColor, ButtonBackColor, Resources.gear, size, size);
                 oldBitmap?.Dispose();
             }
             else
             {
                 SbBorderWidth = 0; //Units: px; scroll bars not skinned
 
-                int size = (int)Math.Round(20f * ((buttonHeightDpiFontScaling - 1) * 1.4f + 1));
-                int wideHeight = (int)Math.Round(15f * buttonHeightDpiFontScaling);
-                int wideWidth = (int)Math.Round(30f * buttonHeightDpiFontScaling);
-                int smallSize = (int)Math.Round(15f * buttonHeightDpiFontScaling);
+                var size = (int)Math.Round(20f * ((ButtonHeightDpiFontScaling - 1) * 1.4f + 1));
+                var wideHeight = (int)Math.Round(15f * ButtonHeightDpiFontScaling);
+                var wideWidth = (int)Math.Round(30f * ButtonHeightDpiFontScaling);
+                var smallSize = (int)Math.Round(15f * ButtonHeightDpiFontScaling);
 
 
                 UpArrowImage = null;
@@ -5715,45 +5711,33 @@ namespace MusicBeePlugin
                 ThumbMiddleVerticalImage = null;
 
 
-                oldBitmap = ButtonRemoveImage;
-                ButtonRemoveImage = GetSolidImageByBitmapMask(ButtonForeColor, Resources.uncheck_mark,
-                    size, size);
-                oldBitmap?.Dispose();
-
-                oldBitmap = ButtonSetImage;
-                ButtonSetImage = GetSolidImageByBitmapMask(ButtonForeColor, Resources.check_mark,
-                    size, size);
-                oldBitmap?.Dispose();
-
                 oldBitmap = WarningWide;
-                WarningWide = ScaleBitmap(Resources.warning_wide, PixelFormat.Format32bppArgb, InterpolationMode.HighQualityBicubic,
-                    wideWidth, wideHeight);
+                WarningWide = ScaleBitmap(Resources.warning_wide, PixelFormat.Format32bppArgb, InterpolationMode.HighQualityBicubic, wideWidth, wideHeight);
                 oldBitmap?.Dispose();
 
                 oldBitmap = Warning;
-                Warning = ScaleBitmap(Resources.warning, PixelFormat.Format32bppArgb, InterpolationMode.HighQualityBicubic,
-                    smallSize, smallSize);
+                Warning = ScaleBitmap(Resources.warning, PixelFormat.Format32bppArgb, InterpolationMode.HighQualityBicubic, smallSize, smallSize);
                 oldBitmap?.Dispose();
 
                 oldBitmap = Gear;
-                Gear = GetSolidImageByBitmapMask(ButtonForeColor, Resources.gear,
-                    size, size);
+                Gear = GetSolidImageByBitmapMask(ButtonForeColor, ButtonBackColor, Resources.gear, size, size);
                 oldBitmap?.Dispose();
             }
 
 
             //ASR
-            int markSize = (int)Math.Round(15f * buttonHeightDpiFontScaling);
+            var markSize = (int)Math.Round(15f * ButtonHeightDpiFontScaling);
 
             oldBitmap = CheckedState;
             CheckedState = GetSolidImageByBitmapMask(AccentColor, Resources.check_mark, markSize, markSize);
             oldBitmap?.Dispose();
 
             oldBitmap = UncheckedState;
-            UncheckedState = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, AccentBackWeight), Resources.uncheck_mark, markSize, markSize);
+            UncheckedState = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, AccentBackWeight), FormBackColor, 
+                Resources.uncheck_mark, markSize, markSize);
             oldBitmap?.Dispose();
 
-            int pictureSize = (int)Math.Round(19f * buttonHeightDpiFontScaling);
+            var pictureSize = (int)Math.Round(19f * ButtonHeightDpiFontScaling);
 
             oldBitmap = Search;
             Search = GetSolidImageByBitmapMask(AccentColor, Resources.search, pictureSize, pictureSize);
@@ -5765,7 +5749,8 @@ namespace MusicBeePlugin
             oldBitmap?.Dispose();
 
             oldBitmap = AutoAppliedPresetsDimmed;
-            AutoAppliedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), Resources.auto_applied_presets, pictureSize, pictureSize);
+            AutoAppliedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), 
+                Resources.auto_applied_presets, pictureSize, pictureSize);
             oldBitmap?.Dispose();
 
             oldBitmap = PredefinedPresetsAccent;
@@ -5773,7 +5758,8 @@ namespace MusicBeePlugin
             oldBitmap?.Dispose();
 
             oldBitmap = PredefinedPresetsDimmed;
-            PredefinedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), Resources.predefined_presets, pictureSize, pictureSize);
+            PredefinedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), 
+                Resources.predefined_presets, pictureSize, pictureSize);
             oldBitmap?.Dispose();
 
             oldBitmap = CustomizedPresetsAccent;
@@ -5781,7 +5767,8 @@ namespace MusicBeePlugin
             oldBitmap?.Dispose();
 
             oldBitmap = CustomizedPresetsDimmed;
-            CustomizedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), Resources.customized_presets, pictureSize, pictureSize);
+            CustomizedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), 
+                Resources.customized_presets, pictureSize, pictureSize);
             oldBitmap?.Dispose();
 
             oldBitmap = UserPresetsAccent;
@@ -5789,7 +5776,8 @@ namespace MusicBeePlugin
             oldBitmap?.Dispose();
 
             oldBitmap = UserPresetsDimmed;
-            UserPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), Resources.user_presets, pictureSize, pictureSize);
+            UserPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), 
+                Resources.user_presets, pictureSize, pictureSize);
             oldBitmap?.Dispose();
 
             oldBitmap = PlaylistPresetsAccent;
@@ -5797,7 +5785,8 @@ namespace MusicBeePlugin
             oldBitmap?.Dispose();
 
             oldBitmap = PlaylistPresetsDimmed;
-            PlaylistPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), Resources.playlist_presets, pictureSize, pictureSize);
+            PlaylistPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), 
+                Resources.playlist_presets, pictureSize, pictureSize);
             oldBitmap?.Dispose();
 
             oldBitmap = FunctionIdPresetsAccent;
@@ -5805,7 +5794,8 @@ namespace MusicBeePlugin
             oldBitmap?.Dispose();
 
             oldBitmap = FunctionIdPresetsDimmed;
-            FunctionIdPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), Resources.function_id_presets, pictureSize, pictureSize);
+            FunctionIdPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), 
+                Resources.function_id_presets, pictureSize, pictureSize);
             oldBitmap?.Dispose();
 
             oldBitmap = HotkeyPresetsAccent;
@@ -5813,7 +5803,8 @@ namespace MusicBeePlugin
             oldBitmap?.Dispose();
 
             oldBitmap = HotkeyPresetsDimmed;
-            HotkeyPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), Resources.hotkey_presets, pictureSize, pictureSize);
+            HotkeyPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), 
+                Resources.hotkey_presets, pictureSize, pictureSize);
             oldBitmap?.Dispose();
 
             oldBitmap = UncheckAllFiltersAccent;
@@ -5821,12 +5812,13 @@ namespace MusicBeePlugin
             oldBitmap?.Dispose();
 
             oldBitmap = UncheckAllFiltersDimmed;
-            UncheckAllFiltersDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), Resources.uncheck_all_preset_filters, pictureSize, pictureSize);
+            UncheckAllFiltersDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), 
+                Resources.uncheck_all_preset_filters, pictureSize, pictureSize);
             oldBitmap?.Dispose();
 
 
             //LR
-            int pictogramSize = (int)Math.Round(23f * buttonHeightDpiFontScaling);
+            var pictogramSize = (int)Math.Round(23f * ButtonHeightDpiFontScaling);
 
             oldBitmap = Window;
             Window = ScaleBitmap(Resources.window, pictogramSize, pictogramSize);
@@ -5865,32 +5857,32 @@ namespace MusicBeePlugin
                 UnchangedCellStyle.SelectionBackColor = SystemColors.Highlight;
             }
 
-            Color ChangedForeColor = Color.FromKnownColor(KnownColor.Red);
-            Color PreservedTagsForeColor = Color.FromKnownColor(KnownColor.Blue);
-            Color PreservedTagValuesForeColor = Color.FromKnownColor(KnownColor.Green);
+            var ChangedForeColor = Color.FromKnownColor(KnownColor.Red);
+            var PreservedTagsForeColor = Color.FromKnownColor(KnownColor.Blue);
+            var PreservedTagValuesForeColor = Color.FromKnownColor(KnownColor.Green);
 
 
             //CHANGED STYLE
             ChangedCellStyle.BackColor = UnchangedCellStyle.BackColor;
             ChangedCellStyle.SelectionBackColor = UnchangedCellStyle.SelectionBackColor;
 
-            float scale = 1.5f;//***
-            float shift = 50f;//***
-            float threshold = 175f;
+            var scale = 1.5f;//***
+            var shift = 50f;//***
+            var threshold = 175f;
 
-            Color backColor = ChangedCellStyle.BackColor;
+            var backColor = ChangedCellStyle.BackColor;
             float br = backColor.R;
             float bg = backColor.G;
             float bb = backColor.B;
 
-            float bbrt = (br + bg + bb) / 3f;
+            var bbrt = (br + bg + bb) / 3f;
 
-            Color foreColor = ChangedForeColor;
+            var foreColor = ChangedForeColor;
             float r = foreColor.R;
             float g = foreColor.G;
             float b = foreColor.B;
 
-            float brt = (r + g + b) / 3f;
+            var brt = (r + g + b) / 3f;
 
             if (Math.Abs(brt - bbrt) < threshold)
             {
@@ -6237,7 +6229,7 @@ namespace MusicBeePlugin
             if (hotkeyDescription != null)
                 MbApiInterface.MB_RegisterCommand(hotkeyDescription, handler);
 
-            ToolStripItem menuItem = menuItemGroup.DropDown.Items.Add(itemName, null, handler);
+            var menuItem = menuItemGroup.DropDown.Items.Add(itemName, null, handler);
             menuItem.Enabled = enabled;
             menuItem.Tag = form;
 
@@ -6260,10 +6252,10 @@ namespace MusicBeePlugin
             if (!SavedSettings.dontShowCopyTag) AddMenuItem(TagToolsSubmenu, CopyTagName, CopyTagDescription, copyTagEventHandler);
             if (!SavedSettings.dontShowSwapTags) AddMenuItem(TagToolsSubmenu, SwapTagsName, SwapTagsDescription, swapTagsEventHandler);
             if (!SavedSettings.dontShowChangeCase) AddMenuItem(TagToolsSubmenu, ChangeCaseName, ChangeCaseDescription, changeCaseEventHandler);
-            if (!SavedSettings.dontShowReencodeTag)
+            if (!SavedSettings.dontShowReEncodeTag)
             {
-                AddMenuItem(TagToolsSubmenu, ReencodeTagName, ReencodeTagDescription, reencodeTagEventHandler);
-                AddMenuItem(TagToolsSubmenu, ReencodeTagsName, ReencodeTagsDescription, reencodeTagsEventHandler);
+                AddMenuItem(TagToolsSubmenu, ReEncodeTagName, ReEncodeTagDescription, reencodeTagEventHandler);
+                AddMenuItem(TagToolsSubmenu, ReEncodeTagsName, ReEncodeTagsDescription, reencodeTagsEventHandler);
             }
             if (!SavedSettings.dontShowLibraryReports)
             {
@@ -6274,7 +6266,7 @@ namespace MusicBeePlugin
                     RegisterLrPresetsHotkeysAndMenuItems(this);
                 }
             }
-            if (!SavedSettings.dontShowAutorate) AddMenuItem(TagToolsSubmenu, AutoRateName, AutoRateDescription, autoRateEventHandler);
+            if (!SavedSettings.dontShowAutoRate) AddMenuItem(TagToolsSubmenu, AutoRateName, AutoRateDescription, autoRateEventHandler);
             if (!SavedSettings.dontShowAsr)
             {
                 AddMenuItem(TagToolsSubmenu, AsrName, AsrDescription, asrEventHandler);
@@ -6313,7 +6305,7 @@ namespace MusicBeePlugin
                 AddMenuItem(TagToolsSubmenu, "-", null, null);
 
                 var backupRestoreSubenu = AddMenuItem(TagToolsSubmenu, BackupRestoreMenuSectionName, null, null);
-                AddMenuItem(backupRestoreSubenu, TagHistoryName, TagHistoryDescription, tagHistoryEventHandler);
+                AddMenuItem(backupRestoreSubenu, TagHistoryName, TagHistoryDescription, tagHistoryEventHandler); //-V3080
                 AddMenuItem(backupRestoreSubenu, "-", null, null);
                 AddMenuItem(backupRestoreSubenu, BackupTagsName, BackupTagsDescription, backupTagsEventHandler);
                 AddMenuItem(backupRestoreSubenu, RestoreTagsName, RestoreTagsDescription, restoreTagsEventHandler);
@@ -6649,7 +6641,7 @@ namespace MusicBeePlugin
 
 
             if (!string.IsNullOrWhiteSpace(exceptionWordsString))
-                exceptionWords = exceptionWordsString.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                exceptionWords = exceptionWordsString.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
             if (!string.IsNullOrWhiteSpace(wordSeparatorsString))
                 wordSeparators = ChangeCase.GetCharsInString(wordSeparatorsString);
@@ -6665,7 +6657,7 @@ namespace MusicBeePlugin
 
             input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.LowerCase);
 
-            string result = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.TitleCase, exceptionWords, false,
+            var result = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.TitleCase, exceptionWords, false,
                 exceptionChars, leftExceptionChars, rightExceptionChars, wordSeparators, true, true);
 
             return result;
@@ -6679,7 +6671,7 @@ namespace MusicBeePlugin
                 sentenceSeparators = ChangeCase.GetCharsInString(sentenceSeparatorsString);
 
             input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.LowerCase);
-            string result = ChangeCase.ChangeSentenceCase(input, null, false, null, null, null, sentenceSeparators, true, false);
+            var result = ChangeCase.ChangeSentenceCase(input, null, false, null, null, null, sentenceSeparators, true);
 
             return result;
         }
@@ -6691,7 +6683,7 @@ namespace MusicBeePlugin
 
         public string CustomFunc_DateCreated(string url)
         {
-            FileInfo fileInfo = new FileInfo(url);
+            var fileInfo = new FileInfo(url);
             if (fileInfo.Exists)
                 return fileInfo.CreationTime.ToString("d");
             else
@@ -6700,19 +6692,19 @@ namespace MusicBeePlugin
 
         public string CustomFunc_Char(string code)
         {
-            ushort charcode = ushort.Parse(code, System.Globalization.NumberStyles.HexNumber);
+            var charcode = ushort.Parse(code, System.Globalization.NumberStyles.HexNumber);
             return ((char)charcode).ToString();
         }
 
         public string CustomFunc_CharN(string code, string timesString)
         {
-            ushort charcode = ushort.Parse(code, System.Globalization.NumberStyles.HexNumber);
-            string character = ((char)charcode).ToString();
+            var charcode = ushort.Parse(code, System.Globalization.NumberStyles.HexNumber);
+            var character = ((char)charcode).ToString();
 
-            string sequence = string.Empty;
+            var sequence = string.Empty;
 
-            int times = int.Parse(timesString);
-            for (int i = 0; i < times; i++)
+            var times = int.Parse(timesString);
+            for (var i = 0; i < times; i++)
                 sequence += character;
 
             return sequence;
@@ -6720,12 +6712,12 @@ namespace MusicBeePlugin
 
         public string CustomFunc_TagContainsAnyString(string url, string tagName, string text)
         {
-            MetaDataType tagId = GetTagId(tagName);
+            var tagId = GetTagId(tagName);
 
-            string tagValue = GetFileTag(url, tagId);
-            string[] textParts = text.Split('|');
+            var tagValue = GetFileTag(url, tagId);
+            var textParts = text.Split('|');
 
-            foreach (string textPart in textParts)
+            foreach (var textPart in textParts)
             {
                 if (Regex.IsMatch(tagValue, textPart, RegexOptions.IgnoreCase))
                     return "T";
@@ -6736,13 +6728,13 @@ namespace MusicBeePlugin
 
         public string CustomFunc_TagContainsAllStrings(string url, string tagName, string text)
         {
-            MetaDataType tagId = GetTagId(tagName);
+            var tagId = GetTagId(tagName);
 
-            string tagValue = GetFileTag(url, tagId);
-            string[] textParts = text.Split('|');
+            var tagValue = GetFileTag(url, tagId);
+            var textParts = text.Split('|');
 
-            string result = "T";
-            foreach (string textPart in textParts)
+            var result = "T";
+            foreach (var textPart in textParts)
             {
                 if (!Regex.IsMatch(tagValue, textPart, RegexOptions.IgnoreCase))
                 {

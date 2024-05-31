@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
+using MusicBeePlugin.Properties;
 using static MusicBeePlugin.Plugin;
 
 namespace MusicBeePlugin
@@ -42,7 +43,7 @@ namespace MusicBeePlugin
         private string appendedText;
         private string addedText;
 
-        private string[] files = new string[0];
+        private string[] files = Array.Empty<string>();
         private readonly List<string[]> tags = new List<string[]>();
         private string[] fileTags;
 
@@ -77,11 +78,11 @@ namespace MusicBeePlugin
             appendCheckBox.Checked = SavedSettings.appendSource;
             addCheckBox.Checked = SavedSettings.addSource;
 
-            fileNameTextBoxCustom.Text = SavedSettings.customText[0];
+            fileNameTextBoxCustom.Text = SavedSettings.customText[0] as string;
             fileNameTextBoxCustom.AddRange(SavedSettings.customText);
-            appendedTextBoxCustom.Text = SavedSettings.appendedText[0];
+            appendedTextBoxCustom.Text = SavedSettings.appendedText[0] as string;
             appendedTextBoxCustom.AddRange(SavedSettings.appendedText);
-            addedTextBoxCustom.Text = SavedSettings.addedText[0];
+            addedTextBoxCustom.Text = SavedSettings.addedText[0] as string;
             addedTextBoxCustom.AddRange(SavedSettings.addedText);
 
             appendedTextBoxCustom.Enable(appendCheckBox.Checked);
@@ -89,12 +90,12 @@ namespace MusicBeePlugin
 
             var headerCellStyle = new DataGridViewCellStyle(HeaderCellStyle);
 
-            DataGridViewCheckBoxHeaderCell cbHeader = new DataGridViewCheckBoxHeaderCell();
+            var cbHeader = new DataGridViewCheckBoxHeaderCell();
             cbHeader.Style = headerCellStyle;
             cbHeader.setState(true);
-            cbHeader.OnCheckBoxClicked += new CheckBoxClickedHandler(cbHeader_OnCheckBoxClicked);
+            cbHeader.OnCheckBoxClicked += cbHeader_OnCheckBoxClicked;
 
-            DataGridViewCheckBoxColumn colCB = new DataGridViewCheckBoxColumn
+            var colCB = new DataGridViewCheckBoxColumn
             {
                 HeaderCell = cbHeader,
                 ThreeState = true,
@@ -130,14 +131,14 @@ namespace MusicBeePlugin
             button_GotFocus(AcceptButton, null); //Let's mark active button
         }
 
-        private void previewTable_AddRowToTable(string[] row)
+        private void previewTable_AddRowToTable(object[] row)
         {
             if (backgroundTaskIsWorking())
                 previewTable.Rows.Add(row);
 
             previewTableFormatRow(previewTable.RowCount - 1);
 
-            if (previewTable.RowCount % 16 == 0)
+            if ((previewTable.RowCount & 0x1f) == 0)
                 UpdateCustomScrollBars(previewTable);
         }
 
@@ -189,39 +190,32 @@ namespace MusicBeePlugin
 
             files = null;
             if (!MbApiInterface.Library_QueryFilesEx("domain=SelectedFiles", out files))
-                files = new string[0];
+                files = Array.Empty<string>();
 
 
             if (sourceTagIsTextFile)
             {
-                System.IO.Stream stream;
-                stream = new System.IO.FileStream(fileNameTextBoxCustom.Text, System.IO.FileMode.Open);
+                System.IO.Stream stream = new System.IO.FileStream(fileNameTextBoxCustom.Text, System.IO.FileMode.Open);
 
-                byte[] buffer = new byte[stream.Length];
+                var buffer = new byte[stream.Length];
 
-                Encoding encoding = Encoding.Default; //Current ANSI encoding
+                var encoding = Encoding.Default; //Current ANSI encoding
 
-                Encoding utf8 = Encoding.UTF8;
-                Encoding unicode = Encoding.Unicode;
-                Encoding bigEndianUnicode = Encoding.BigEndianUnicode;
+                var utf8 = Encoding.UTF8;
+                var unicode = Encoding.Unicode;
+                var bigEndianUnicode = Encoding.BigEndianUnicode;
 
-                stream.Read(buffer, 0, (int)stream.Length);
+                var count = stream.Read(buffer, 0, (int)stream.Length);
                 stream.Close();
 
-                if (buffer[0] == unicode.GetPreamble()[0] && buffer[1] == unicode.GetPreamble()[1])
-                {
+                if (count > 1 && buffer[0] == unicode.GetPreamble()[0] && buffer[1] == unicode.GetPreamble()[1])
                     encoding = unicode;
-                }
-                else if (buffer[0] == bigEndianUnicode.GetPreamble()[0] && buffer[1] == bigEndianUnicode.GetPreamble()[1])
-                {
+                else if (count > 1 && buffer[0] == bigEndianUnicode.GetPreamble()[0] && buffer[1] == bigEndianUnicode.GetPreamble()[1])
                     encoding = bigEndianUnicode;
-                }
-                else if (buffer[0] == utf8.GetPreamble()[0] && buffer[1] == utf8.GetPreamble()[1])
-                {
+                else if (count > 1 && buffer[0] == utf8.GetPreamble()[0] && buffer[1] == utf8.GetPreamble()[1])
                     encoding = utf8;
-                }
 
-                fileTags = encoding.GetString(buffer).Split(new string[] { "\r\n" }, StringSplitOptions.None);
+                fileTags = encoding.GetString(buffer).Split(new[] { Resources.MsgDoubleNewLine }, StringSplitOptions.None);
 
                 if (fileTags.Length != files.Length)
                 {
@@ -241,7 +235,7 @@ namespace MusicBeePlugin
                     return false;
                 }
 
-                fileTags = Clipboard.GetText().Split(new string[] { "\r\n" }, StringSplitOptions.None);
+                fileTags = Clipboard.GetText().Split(new[] { Resources.MsgDoubleNewLine }, StringSplitOptions.None);
 
                 if (fileTags.Length != files.Length)
                 {
@@ -277,13 +271,11 @@ namespace MusicBeePlugin
             }
             else
             {
-                string[] tag;
-
                 tags.Clear();
 
-                for (int fileCounter = 0; fileCounter < previewTable.Rows.Count; fileCounter++)
+                for (var fileCounter = 0; fileCounter < previewTable.Rows.Count; fileCounter++)
                 {
-                    tag = new string[3];
+                    var tag = new string[3];
 
                     tag[0] = (string)previewTable.Rows[fileCounter].Cells[0].Value;
                     tag[1] = (string)previewTable.Rows[fileCounter].Cells[1].Value;
@@ -298,32 +290,26 @@ namespace MusicBeePlugin
 
         private void previewChanges()
         {
-            string currentFile;
-            SwappedTags swappedTags;
+            var stripNotChangedLines = SavedSettings.dontIncludeInPreviewLinesWithoutChangedTags;
 
-            string sourceTagValue;
-            string destinationTagValue;
-
-            string isChecked;
-
-            bool stripNotChangedLines = SavedSettings.dontIncludeInPreviewLinesWithoutChangedTags;
-
-            string track;
+            // ReSharper disable once RedundantAssignment
             string[] row = { "Checked", "File", "Track", "SupposedDestinationTag", "SupposedDestinationTagT", "OriginalDestinationTag", "OriginalDestinationTagT", "NewTag", "NewTagT" };
+            // ReSharper disable once RedundantAssignment
             string[] tag = { "Checked", "file", "newTag" };
 
-            int count = 0;
-            for (int fileCounter = 0; fileCounter < files.Length; fileCounter++)
+            var count = 0;
+            for (var fileCounter = 0; fileCounter < files.Length; fileCounter++)
             {
                 if (backgroundTaskIsCanceled)
                     return;
 
                 count++;
 
-                currentFile = files[fileCounter];
+                var currentFile = files[fileCounter];
 
-                SetStatusbarTextForFileOperations(CopyTagSbText, true, fileCounter, files.Length, currentFile);
+                SetStatusBarTextForFileOperations(CopyTagSbText, true, fileCounter, files.Length, currentFile);
 
+                string sourceTagValue;
                 if (sourceTagIsTextFile || sourceTagIsClipboard)
                 {
                     sourceTagValue = fileTags[fileCounter];
@@ -341,13 +327,14 @@ namespace MusicBeePlugin
                     sourceTagValue = MbApiInterface.Library_GetFileProperty(currentFile, sourcePropId);
                 }
 
-                destinationTagValue = GetFileTag(currentFile, destinationTagId);
+                var destinationTagValue = GetFileTag(currentFile, destinationTagId);
 
-                track = GetTrackRepresentation(currentFile);
+                var track = GetTrackRepresentation(currentFile);
 
-                swappedTags = SwapTags(sourceTagValue, destinationTagValue, sourceTagId, destinationTagId,
+                var swappedTags = SwapTags(sourceTagValue, destinationTagValue, sourceTagId, destinationTagId,
                     smartOperation, appendSource, appendedText, addSource, addedText);
 
+                string isChecked;
                 if (sourceTagValue == destinationTagValue && stripNotChangedLines)
                     continue;
                 else if (onlyIfDestinationEmpty && destinationTagValue != string.Empty && stripNotChangedLines)
@@ -405,31 +392,27 @@ namespace MusicBeePlugin
 
         private void applyChanges()
         {
-            string currentFile;
-            string newTag;
-            string isChecked;
-
             if (tags.Count == 0)
                 previewChanges();
 
-            for (int i = 0; i < tags.Count; i++)
+            for (var i = 0; i < tags.Count; i++)
             {
                 if (backgroundTaskIsCanceled)
                     return;
 
-                isChecked = tags[i][0];
+                var isChecked = tags[i][0];
 
                 if (isChecked == "T")
                 {
-                    currentFile = tags[i][1];
-                    newTag = tags[i][2];
+                    var currentFile = tags[i][1];
+                    var newTag = tags[i][2];
 
 
                     tags[i][0] = string.Empty;
 
                     Invoke(processRowOfTable, new object[] { i });
 
-                    SetStatusbarTextForFileOperations(CopyTagSbText, false, i, tags.Count, currentFile);
+                    SetStatusBarTextForFileOperations(CopyTagSbText, false, i, tags.Count, currentFile);
 
                     SetFileTag(currentFile, destinationTagId, newTag);
                     CommitTagsToFile(currentFile);
@@ -523,7 +506,7 @@ namespace MusicBeePlugin
 
         private void sourceTagList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            bool test = (sourceTagListCustom.Text == TextFileTagName);
+            var test = (sourceTagListCustom.Text == TextFileTagName);
             fileNameLabel.Enable(test);
             test = (sourceTagListCustom.Text == TextFileTagName);
             fileNameTextBoxCustom.Enable(test);
@@ -543,7 +526,7 @@ namespace MusicBeePlugin
             }
             else
             {
-                int selectedIndex = sourceTagListCustom.SelectedIndex;
+                var selectedIndex = sourceTagListCustom.SelectedIndex;
 
                 sourceTagListCustom.ItemsClear();
 
@@ -582,7 +565,7 @@ namespace MusicBeePlugin
                 else
                     row.Cells[0].Value = "T";
 
-                DataGridViewCellEventArgs e = new DataGridViewCellEventArgs(0, row.Index);
+                var e = new DataGridViewCellEventArgs(0, row.Index);
                 previewTable_CellContentClick(null, e);
             }
         }
@@ -594,7 +577,7 @@ namespace MusicBeePlugin
                 string newTagValue;
                 string newTagTValue;
 
-                string isChecked = (string)previewTable.Rows[e.RowIndex].Cells[0].Value;
+                var isChecked = (string)previewTable.Rows[e.RowIndex].Cells[0].Value;
 
                 if (isChecked == "T")
                 {
@@ -653,7 +636,7 @@ namespace MusicBeePlugin
 
         internal override void enableQueryingOrUpdatingButtons()
         {
-            buttonOK.Enable(previewIsGenerated || SavedSettings.allowCommandExecutionWithoutPreview);
+            buttonOK.Enable((previewIsGenerated && !previewIsStopped) || SavedSettings.allowCommandExecutionWithoutPreview);
             buttonPreview.Enable(true);
         }
 
@@ -685,7 +668,7 @@ namespace MusicBeePlugin
 
             if ((string)previewTable.Rows[rowIndex].Cells[0].Value != "T")
             {
-                for (int columnIndex = 1; columnIndex < previewTable.ColumnCount; columnIndex++)
+                for (var columnIndex = 1; columnIndex < previewTable.ColumnCount; columnIndex++)
                 {
                     if (previewTable.Columns[columnIndex].Visible)
                         previewTable.Rows[rowIndex].Cells[columnIndex].Style = dimmedCellStyle;
@@ -695,7 +678,7 @@ namespace MusicBeePlugin
             }
 
 
-            for (int columnIndex = 1; columnIndex < previewTable.ColumnCount; columnIndex++)
+            for (var columnIndex = 1; columnIndex < previewTable.ColumnCount; columnIndex++)
             {
                 if (columnIndex == 8)
                 {
@@ -713,7 +696,7 @@ namespace MusicBeePlugin
 
         private void browseButton_Click(object sender, EventArgs e)
         {
-            OpenFileDialog dialog = new OpenFileDialog
+            var dialog = new OpenFileDialog
             {
                 Filter = CtlCopyTagFilter,
                 FilterIndex = 0
@@ -726,7 +709,7 @@ namespace MusicBeePlugin
 
         private void buttonSettings_Click(object sender, EventArgs e)
         {
-            QuickSettings settings = new QuickSettings(TagToolsPlugin);
+            var settings = new QuickSettings(TagToolsPlugin);
             Display(settings, true);
         }
 
@@ -768,7 +751,7 @@ namespace MusicBeePlugin
 
         private void CopyTag_Load(object sender, EventArgs e)
         {
-            (int, int, int, int, int, int, int) value = loadWindowLayout();
+            var value = loadWindowLayout();
 
             if (value.Item1 != 0)
             {

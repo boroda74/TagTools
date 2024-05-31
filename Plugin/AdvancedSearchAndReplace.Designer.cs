@@ -26,13 +26,12 @@ namespace MusicBeePlugin
                 if (allTagsWarningTimer != null)
                     allTagsWarningTimer.Dispose();
 
-                warning.Dispose();
-                warningWide.Dispose();
-                checkedState.Dispose();
-                uncheckedState.Dispose();
+                warning?.Dispose();
+                warningWide?.Dispose();
+                checkedState?.Dispose();
+                uncheckedState?.Dispose();
 
-
-                tagNameFont.Dispose();
+                tagNameFont?.Dispose();
             }
 
             base.Dispose(disposing);
@@ -202,15 +201,15 @@ namespace MusicBeePlugin
 
             //MusicBee
             this.presetList = new CustomCheckedListBox(Plugin.SavedSettings.dontUseSkinColors);
-            this.searchTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.customTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.customText2Box = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.customText3Box = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.customText4Box = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.idTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.preserveTagValuesTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.processPreserveTagsTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.descriptionBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
+            this.searchTextBox = ControlsTools.CreateMusicBeeTextBox();
+            this.customTextBox = ControlsTools.CreateMusicBeeTextBox();
+            this.customText2Box = ControlsTools.CreateMusicBeeTextBox();
+            this.customText3Box = ControlsTools.CreateMusicBeeTextBox();
+            this.customText4Box = ControlsTools.CreateMusicBeeTextBox();
+            this.idTextBox = ControlsTools.CreateMusicBeeTextBox();
+            this.preserveTagValuesTextBox = ControlsTools.CreateMusicBeeTextBox();
+            this.processPreserveTagsTextBox = ControlsTools.CreateMusicBeeTextBox();
+            this.descriptionBox = ControlsTools.CreateMusicBeeTextBox();
 
 
             InterpolationMode defaultInterpolationMode = InterpolationMode.HighQualityBicubic;
@@ -603,7 +602,7 @@ namespace MusicBeePlugin
             //
             resources.ApplyResources(this.userPresetPictureBox, "userPresetPictureBox");
             this.dirtyErrorProvider.SetIconAlignment(this.userPresetPictureBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("userPresetPictureBox.IconAlignment"))));
-            this.userPresetPictureBox.Image = global::MusicBeePlugin.Properties.Resources.clear_button_15;
+            this.userPresetPictureBox.Image = global::MusicBeePlugin.Properties.Resources.user_presets;
             this.userPresetPictureBox.Name = "userPresetPictureBox";
             this.userPresetPictureBox.TabStop = false;
             this.userPresetPictureBox.Tag = "#userPresetLabel@square-control@small-picture";
@@ -619,7 +618,7 @@ namespace MusicBeePlugin
             //
             resources.ApplyResources(this.customizedPresetPictureBox, "customizedPresetPictureBox");
             this.dirtyErrorProvider.SetIconAlignment(this.customizedPresetPictureBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("customizedPresetPictureBox.IconAlignment"))));
-            this.customizedPresetPictureBox.Image = global::MusicBeePlugin.Properties.Resources.clear_button_15;
+            this.customizedPresetPictureBox.Image = global::MusicBeePlugin.Properties.Resources.customized_presets;
             this.customizedPresetPictureBox.Name = "customizedPresetPictureBox";
             this.customizedPresetPictureBox.TabStop = false;
             this.customizedPresetPictureBox.Tag = "#customizedPresetLabel@square-control@small-picture";
@@ -680,7 +679,6 @@ namespace MusicBeePlugin
             //
             resources.ApplyResources(this.clearIdButton, "clearIdButton");
             this.dirtyErrorProvider.SetIconAlignment(this.clearIdButton, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("clearIdButton.IconAlignment"))));
-            this.clearIdButton.Image = global::MusicBeePlugin.Properties.Resources.clear_button_15;
             this.clearIdButton.Name = "clearIdButton";
             this.clearIdButton.Tag = "@pinned-to-parent-x@non-defaultable@square-control";
             this.toolTip1.SetToolTip(this.clearIdButton, resources.GetString("clearIdButton.ToolTip"));
@@ -1237,7 +1235,6 @@ namespace MusicBeePlugin
             //
             resources.ApplyResources(this.clearSearchButton, "clearSearchButton");
             this.dirtyErrorProvider.SetIconAlignment(this.clearSearchButton, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("clearSearchButton.IconAlignment"))));
-            this.clearSearchButton.Image = global::MusicBeePlugin.Properties.Resources.clear_button_15;
             this.clearSearchButton.Name = "clearSearchButton";
             this.clearSearchButton.Tag = "@non-defaultable@square-control";
             this.toolTip1.SetToolTip(this.clearSearchButton, resources.GetString("clearSearchButton.ToolTip"));
@@ -1346,6 +1343,17 @@ namespace MusicBeePlugin
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).EndInit();
             this.ResumeLayout(false);
 
+            //MusicBee
+            new TextBoxBorder(this.searchTextBox);
+            new TextBoxBorder(this.customTextBox);
+            new TextBoxBorder(this.customText2Box);
+            new TextBoxBorder(this.customText3Box);
+            new TextBoxBorder(this.customText4Box);
+            new TextBoxBorder(this.idTextBox);
+            new TextBoxBorder(this.preserveTagValuesTextBox);
+            new TextBoxBorder(this.processPreserveTagsTextBox);
+            new TextBoxBorder(this.descriptionBox);
+            //~MusicBee
         }
 
         #endregion

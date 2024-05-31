@@ -441,9 +441,9 @@
   <data name="&gt;&gt;toggleCaseRadioButton.ZOrder" xml:space="preserve">
     <value>17</value>
   </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>165, 17</value>
-  </metadata>
+  </data>
   <data name="exceptionCharsBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
@@ -507,36 +507,36 @@
   <data name="buttonPreview.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <metadata name="dirtyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="dirtyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>17, 17</value>
-  </metadata>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <data name="$this.Localizable" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>7, 15</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>984, 361</value>
   </data>
-  <metadata name="File.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="File.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
-  <metadata name="Track.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <data name="Track.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
-  <metadata name="OriginalTag.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <data name="OriginalTag.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
-  <metadata name="OriginalTagT.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <data name="OriginalTagT.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
-  <metadata name="NewTag.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <data name="NewTag.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
-  <metadata name="NewTagT.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <data name="NewTagT.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="previewTable.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
@@ -799,7 +799,7 @@ They are paired by their position on the list</value>
     <value>4</value>
   </data>
   <data name="removeExceptionButton.Text" xml:space="preserve">
-    <value> </value>
+    <value>❌</value>
   </data>
   <data name="removeExceptionButton.ToolTip" xml:space="preserve">
     <value>Remove entered exception list from the history (if there is exact match)</value>
@@ -1609,9 +1609,6 @@ already generated, but not yet saved "New tag"</value>
   <data name="$this.Text" xml:space="preserve">
     <value>Change Case</value>
   </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>165, 17</value>
-  </metadata>
   <data name="$this.ToolTip" xml:space="preserve">
     <value>Open plugin settings</value>
   </data>
@@ -2307,9 +2304,6 @@ already generated, but not yet saved "New tag"</value>
   <data name="&gt;&gt;buttonPreview.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
-  <metadata name="File.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <data name="File.HeaderText" xml:space="preserve">
     <value>File</value>
   </data>
@@ -2319,18 +2313,12 @@ already generated, but not yet saved "New tag"</value>
   <data name="File.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="Track.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <data name="Track.HeaderText" xml:space="preserve">
     <value>Track</value>
   </data>
   <data name="Track.MinimumWidth" type="System.Int32, mscorlib">
     <value>50</value>
   </data>
-  <metadata name="OriginalTag.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <data name="OriginalTag.HeaderText" xml:space="preserve">
     <value>Original Tag</value>
   </data>
@@ -2340,18 +2328,12 @@ already generated, but not yet saved "New tag"</value>
   <data name="OriginalTag.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="OriginalTagT.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <data name="OriginalTagT.HeaderText" xml:space="preserve">
     <value>Original tag value</value>
   </data>
   <data name="OriginalTagT.MinimumWidth" type="System.Int32, mscorlib">
     <value>25</value>
   </data>
-  <metadata name="NewTag.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <data name="NewTag.HeaderText" xml:space="preserve">
     <value>New Tag</value>
   </data>
@@ -2361,9 +2343,6 @@ already generated, but not yet saved "New tag"</value>
   <data name="NewTag.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="NewTagT.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <data name="NewTagT.HeaderText" xml:space="preserve">
     <value>New tag value</value>
   </data>

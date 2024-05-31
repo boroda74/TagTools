@@ -304,6 +304,7 @@ namespace MusicBeePlugin
         [StructLayout(LayoutKind.Sequential)]
         public class PluginInfo
         {
+            // ReSharper disable once MemberHidesStaticFromOuterClass
             public short PluginInfoVersion; //-V3085
             public PluginType Type;
             public string Name;
@@ -313,7 +314,9 @@ namespace MusicBeePlugin
             public short VersionMajor;
             public short VersionMinor;
             public short Revision;
+            // ReSharper disable once MemberHidesStaticFromOuterClass
             public short MinInterfaceVersion; //-V3085
+            // ReSharper disable once MemberHidesStaticFromOuterClass
             public short MinApiRevision; //-V3085
             public ReceiveNotificationFlags ReceiveNotifications;
             public int ConfigurationPanelHeight;

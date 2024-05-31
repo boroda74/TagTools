@@ -1,6 +1,6 @@
 ﻿namespace MusicBeePlugin
 {
-    partial class ReencodeTags
+    partial class ReEncodeTags
     {
         ///<summary>
         ///Требуется переменная конструктора.
@@ -30,7 +30,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReencodeTags));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReEncodeTags));
             this.buttonPreview = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
@@ -118,7 +118,7 @@
             this.previewTable.Name = "previewTable";
             this.previewTable.RowHeadersVisible = false;
             this.previewTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.previewTable.Tag = "#ReencodeTags&ReencodeTags@pinned-to-parent-x";
+            this.previewTable.Tag = "#ReEncodeTags&ReEncodeTags@pinned-to-parent-x";
             this.previewTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.previewTable_CellContentClick);
             this.previewTable.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.previewTable_CellContentDoubleClick);
             // 
@@ -196,7 +196,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.buttonSettings, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonSettings.IconAlignment"))));
             this.buttonSettings.Image = global::MusicBeePlugin.Properties.Resources.gear_15;
             this.buttonSettings.Name = "buttonSettings";
-            this.buttonSettings.Tag = "#buttonPreview@non-defaultable@square-control";
+            this.buttonSettings.Tag = "#buttonPreview@non-defaultable@square-button";
             this.buttonSettings.Click += new System.EventHandler(this.buttonSettings_Click);
             // 
             // previewSortTagsСheckBox
@@ -231,9 +231,9 @@
             this.controlsPanel.Controls.Add(this.initialEncodingList);
             this.controlsPanel.Controls.Add(this.label2);
             this.controlsPanel.Name = "controlsPanel";
-            this.controlsPanel.Tag = "#ReencodeTags&previewTable@pinned-to-parent-x";
+            this.controlsPanel.Tag = "#ReEncodeTags&previewTable@pinned-to-parent-x";
             // 
-            // ReencodeTags
+            // ReEncodeTags
             // 
             this.AcceptButton = this.buttonPreview;
             resources.ApplyResources(this, "$this");
@@ -241,9 +241,9 @@
             this.CancelButton = this.buttonCancel;
             this.Controls.Add(this.previewTable);
             this.Controls.Add(this.controlsPanel);
-            this.Name = "ReencodeTags";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ReencodeTags_FormClosing);
-            this.Load += new System.EventHandler(this.ReencodeTags_Load);
+            this.Name = "ReEncodeTags";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ReEncodeTags_FormClosing);
+            this.Load += new System.EventHandler(this.ReEncodeTags_Load);
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).EndInit();
             this.controlsPanel.ResumeLayout(false);

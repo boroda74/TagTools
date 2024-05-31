@@ -121,12 +121,14 @@
   <data name="splitContainer1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <metadata name="dirtyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="dirtyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>9, 9</value>
-  </metadata>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.Localizable" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="buttonPreview.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
@@ -139,7 +141,6 @@
   <data name="buttonPreview.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonPreview.Location" type="System.Drawing.Point, System.Drawing">
     <value>512, 32</value>
   </data>
@@ -149,16 +150,15 @@
   <data name="buttonPreview.Size" type="System.Drawing.Size, System.Drawing">
     <value>130, 23</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="buttonPreview.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
   <data name="buttonPreview.Text" xml:space="preserve">
     <value>Preview</value>
   </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>157, 9</value>
-  </metadata>
+  </data>
   <data name="buttonPreview.ToolTip" xml:space="preserve">
     <value>Preview report for DISPLAYED tracks</value>
   </data>
@@ -247,7 +247,7 @@
     <value>12</value>
   </data>
   <data name="autoApplyPresetsLabel.Text" xml:space="preserve">
-    <value>Export tags to file for use in 3d party applications. Table is sorted by grouping tags from left to right when "Preview" button is clicked. Ticked presets are auto-executed on MusicBee startup. ~Presets ticked for auto-execution: %%TICKEDPRESETS%%~Auto-execution of presets is disabled in plugin settings. </value>
+    <value>Export tags to file for use in 3d party applications. Table is sorted by grouping tags from left to right when "Preview" button is clicked. Ticked presets are auto-executed on MusicBee startup. ~Presets ticked for auto-execution: %%TICKED-PRESETS%%~Auto-execution of presets is disabled in plugin settings. </value>
   </data>
   <data name="&gt;&gt;autoApplyPresetsLabel.Name" xml:space="preserve">
     <value>autoApplyPresetsLabel</value>
@@ -3080,9 +3080,9 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="expressionsDataGridView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <metadata name="expressionsDataGridViewCheckedColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="expressionsDataGridViewCheckedColumn.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="expressionsDataGridViewCheckedColumn.HeaderText" xml:space="preserve">
     <value />
   </data>
@@ -3095,9 +3095,9 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="expressionsDataGridViewCheckedColumn.Width" type="System.Int32, mscorlib">
     <value>25</value>
   </data>
-  <metadata name="expressionsDataGridViewExpressionColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="expressionsDataGridViewExpressionColumn.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="expressionsDataGridViewExpressionColumn.HeaderText" xml:space="preserve">
     <value>Expression</value>
   </data>
@@ -3105,7 +3105,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>100</value>
   </data>
   <data name="expressionsDataGridViewExpressionColumn.ToolTipText" xml:space="preserve">
-    <value>You have unchecked the last expression for the field:\\%%FIELDNAME%%\\Do you want to delete the field?</value>
+    <value>You have unchecked the last expression for the field:\\%%FIELD-NAME%%\\Do you want to delete the field?</value>
   </data>
   <data name="expressionsDataGridView.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
@@ -3137,9 +3137,9 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="tagsDataGridView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left</value>
   </data>
-  <metadata name="tagsDataGridViewCheckedColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="tagsDataGridViewCheckedColumn.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="tagsDataGridViewCheckedColumn.HeaderText" xml:space="preserve">
     <value />
   </data>
@@ -3152,9 +3152,9 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="tagsDataGridViewCheckedColumn.Width" type="System.Int32, mscorlib">
     <value>25</value>
   </data>
-  <metadata name="tagsDataGridViewFunctionColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="tagsDataGridViewFunctionColumn.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="tagsDataGridViewFunctionColumn.HeaderText" xml:space="preserve">
     <value>Function</value>
   </data>
@@ -3162,23 +3162,23 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>80</value>
   </data>
   <data name="tagsDataGridViewFunctionColumn.ToolTipText" xml:space="preserve">
-    <value>The field:\\%%FIELDNAME%%\\already exists. Do you want to replace the field?</value>
+    <value>The field:\\%%FIELD-NAME%%\\already exists. Do you want to replace the field?</value>
   </data>
   <data name="tagsDataGridViewFunctionColumn.Width" type="System.Int32, mscorlib">
     <value>80</value>
   </data>
-  <metadata name="tagsDataGridViewTagColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="tagsDataGridViewTagColumn.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="tagsDataGridViewTagColumn.HeaderText" xml:space="preserve">
     <value>Tag</value>
   </data>
   <data name="tagsDataGridViewTagColumn.MinimumWidth" type="System.Int32, mscorlib">
     <value>100</value>
   </data>
-  <metadata name="tagsDataGridViewInfoColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="tagsDataGridViewInfoColumn.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="tagsDataGridViewInfoColumn.HeaderText" xml:space="preserve">
     <value>Info</value>
   </data>
@@ -3903,7 +3903,7 @@ You can refer to any tag in an LR expression using the MusicBee generic &lt;Tag 
     <value>100</value>
   </data>
   <data name="dataGridViewTextBoxColumn1.ToolTipText" xml:space="preserve">
-    <value>You have unchecked the last expression for the field:\\%%FIELDNAME%%\\Do you want to delete the field?</value>
+    <value>You have unchecked the last expression for the field:\\%%FIELD-NAME%%\\Do you want to delete the field?</value>
   </data>
   <data name="dataGridViewCheckBoxColumn2.HeaderText" xml:space="preserve">
     <value />
@@ -3924,7 +3924,7 @@ You can refer to any tag in an LR expression using the MusicBee generic &lt;Tag 
     <value>80</value>
   </data>
   <data name="dataGridViewTextBoxColumn2.ToolTipText" xml:space="preserve">
-    <value>The field:\\%%FIELDNAME%%\\already exists. Do you want to replace the field?</value>
+    <value>The field:\\%%FIELD-NAME%%\\already exists. Do you want to replace the field?</value>
   </data>
   <data name="dataGridViewTextBoxColumn2.Width" type="System.Int32, mscorlib">
     <value>80</value>
@@ -3943,5 +3943,11 @@ You can refer to any tag in an LR expression using the MusicBee generic &lt;Tag 
   </data>
   <data name="dataGridViewTextBoxColumn4.ToolTipText" xml:space="preserve">
     <value>Multiple item splitter for groupings, or "per tag" tag for functions</value>
+  </data>
+  <data name="buttonClearExpression.Text" xml:space="preserve">
+    <value>❌</value>
+  </data>
+  <data name="clearIdButton.Text" xml:space="preserve">
+    <value>❌</value>
   </data>
 </root>

@@ -306,7 +306,7 @@
             this.buttonSettings.Image = global::MusicBeePlugin.Properties.Resources.gear_15;
             resources.ApplyResources(this.buttonSettings, "buttonSettings");
             this.buttonSettings.Name = "buttonSettings";
-            this.buttonSettings.Tag = "@non-defaultable@square-control";
+            this.buttonSettings.Tag = "@non-defaultable@square-button";
             this.toolTip1.SetToolTip(this.buttonSettings, resources.GetString("buttonSettings.ToolTip"));
             this.buttonSettings.Click += new System.EventHandler(this.buttonSettings_Click);
             // 
@@ -337,7 +337,6 @@
             // removeExceptionButton
             // 
             resources.ApplyResources(this.removeExceptionButton, "removeExceptionButton");
-            this.removeExceptionButton.Image = global::MusicBeePlugin.Properties.Resources.clear_button_15;
             this.removeExceptionButton.Name = "removeExceptionButton";
             this.removeExceptionButton.Tag = "#fieldsPanel@pinned-to-parent-x@non-defaultable";
             this.toolTip1.SetToolTip(this.removeExceptionButton, resources.GetString("removeExceptionButton.ToolTip"));

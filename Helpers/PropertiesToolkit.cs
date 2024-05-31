@@ -62,7 +62,7 @@ namespace ExtensionMethods
             if (IsProperty(member))
             {
                 var prop = (System.Reflection.PropertyInfo)member;
-                result = prop.GetValue(obj, prop.GetIndexParameters().Count() == 1 ? new object[] { null } : null);
+                result = prop.GetValue(obj, prop.GetIndexParameters().Length == 1 ? new object[] { null } : null);
             }
             else if (IsField(member))
             {
@@ -94,7 +94,7 @@ namespace ExtensionMethods
 
         private static bool IsType(System.Type type, System.Type targetType)
         {
-            return type.Equals(targetType) || type.IsSubclassOf(targetType);
+            return type == targetType || type.IsSubclassOf(targetType); //******** check if type == targetType works ALWAYS !!!!!
         }
 
         private static List<System.Reflection.MemberInfo> GetMembers(System.Type type)

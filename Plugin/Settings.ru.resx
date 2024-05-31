@@ -118,38 +118,17 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>889, 6</value>
-  </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Отмена</value>
-  </data>
-  <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>781, 6</value>
-  </data>
-  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>666, 15</value>
   </data>
   <data name="label6.Text" xml:space="preserve">
     <value>Настройки дополнительных инструментов (при изменении некоторых настроек потребуется перезапуск MusicBee)</value>
   </data>
-  <data name="versionLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 10</value>
-  </data>
   <data name="versionLabel.Text" xml:space="preserve">
     <value>Версия: </value>
   </data>
-  <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>947, 112</value>
-  </data>
-  <data name="playTickedAsrPresetSoundCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>449, 15</value>
-  </data>
   <data name="playTickedAsrPresetSoundCheckBoxLabel.Text" xml:space="preserve">
     <value>Проиграть звук при отметке пресета ДПЗ/ОБ для автоматического применения</value>
-  </data>
-  <data name="playStoppedSoundCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>466, 15</value>
   </data>
   <data name="playStoppedSoundCheckBoxLabel.Text" xml:space="preserve">
     <value>Проиграть системный звук "Стоп", когда фоновая задача отменена пользователем</value>
@@ -379,16 +358,16 @@
   <data name="showCARCheckBoxLabel.Text" xml:space="preserve">
     <value>Включить команду "Рассчитать средний рейтинг альбомов"</value>
   </data>
-  <data name="Asr.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="showAsrCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>514, 15</value>
   </data>
-  <data name="Asr.Text" xml:space="preserve">
+  <data name="showAsrCheckBoxLabel.Text" xml:space="preserve">
     <value>Включить команды "Дополнительные поиск и замена" / "Множественный поиск и замена"</value>
   </data>
-  <data name="showAutorateCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="showAutoRateCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>328, 15</value>
   </data>
-  <data name="showAutorateCheckBoxLabel.Text" xml:space="preserve">
+  <data name="showAutoRateCheckBoxLabel.Text" xml:space="preserve">
     <value>Включить команду "Автоматически установить рейтинги"</value>
   </data>
   <data name="showLibraryReportsCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
@@ -398,10 +377,10 @@
     <value>Включить команду "Отчеты по библиотеке"
 </value>
   </data>
-  <data name="showReencodeTagCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="showReEncodeTagCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>265, 15</value>
   </data>
-  <data name="showReencodeTagCheckBoxLabel.Text" xml:space="preserve">
+  <data name="showReEncodeTagCheckBoxLabel.Text" xml:space="preserve">
     <value>Включить команду "Изменить кодировку тега"</value>
   </data>
   <data name="showChangeCaseCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">

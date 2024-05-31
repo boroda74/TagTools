@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using MusicBeePlugin.Properties;
 using static MusicBeePlugin.Plugin;
 
 namespace MusicBeePlugin
@@ -22,10 +23,10 @@ namespace MusicBeePlugin
             {
                 if (File.Exists(BrGetAutoBackupDirectory(SavedSettings.autoBackupDirectory) + @"\" + BackupIndexFileName))
                 {
-                    FileStream stream = File.Open(BrGetAutoBackupDirectory(SavedSettings.autoBackupDirectory) + @"\" + BackupIndexFileName, FileMode.Open, FileAccess.Read, FileShare.None);
-                    StreamReader file = new StreamReader(stream, Encoding.UTF8);
+                    var stream = File.Open(BrGetAutoBackupDirectory(SavedSettings.autoBackupDirectory) + @"\" + BackupIndexFileName, FileMode.Open, FileAccess.Read, FileShare.None);
+                    var file = new StreamReader(stream, Encoding.UTF8);
 
-                    System.Xml.Serialization.XmlSerializer backupSerializer = new System.Xml.Serialization.XmlSerializer(typeof(BackupIndex));
+                    var backupSerializer = new XmlSerializer(typeof(BackupIndex));
 
                     try
                     {
@@ -57,7 +58,7 @@ namespace MusicBeePlugin
             {
                 if (MbApiInterface.Playlist_QueryPlaylists())
                 {
-                    string playlist = MbApiInterface.Playlist_QueryGetNextPlaylist();
+                    var playlist = MbApiInterface.Playlist_QueryGetNextPlaylist();
 
                     if (!string.IsNullOrEmpty(playlist))
                         libraryName = Regex.Replace(playlist, @"^.*\\([^\\]*)\\Playlists\\.*", "$1");
@@ -84,9 +85,9 @@ namespace MusicBeePlugin
 
         internal static string BrGetDefaultBackupFilename(string prefix)
         {
-            DateTime now = DateTime.Now;
+            var now = DateTime.Now;
 
-            return BrGetCurrentLibraryName() + prefix + now.Year.ToString("D4") + "-" + now.Month.ToString("D2") + "-" + now.Day.ToString("D2") + " "
+            return BrGetCurrentLibraryName() + prefix + now.Year.ToString("D4") + "-" + now.Month.ToString("D2") + "-" + now.Day.ToString("D2")  + Resources.Space
                 + now.Hour.ToString("D2") + "." + now.Minute.ToString("D2") + "." + now.Second.ToString("D2");
         }
 
@@ -100,8 +101,8 @@ namespace MusicBeePlugin
 
         internal static string BrGetBackupDateTime(Backup backup)
         {
-            DateTime backupDate = backup.creationDate.ToLocalTime();
-            return backupDate.Year.ToString("D4") + "-" + backupDate.Month.ToString("D2") + "-" + backupDate.Day.ToString("D2") + " "
+            var backupDate = backup.creationDate.ToLocalTime();
+            return backupDate.Year.ToString("D4") + "-" + backupDate.Month.ToString("D2") + "-" + backupDate.Day.ToString("D2")  + Resources.Space
                 + backupDate.Hour.ToString("D2") + ":" + backupDate.Minute.ToString("D2"); // + "." + backupDate.Second.ToString("D2");
         }
 
@@ -131,10 +132,10 @@ namespace MusicBeePlugin
 
         public void ReadXml(System.Xml.XmlReader reader)
         {
-            XmlSerializer keySerializer = new XmlSerializer(typeof(TKey));
-            XmlSerializer valueSerializer = new XmlSerializer(typeof(TValue));
+            var keySerializer = new XmlSerializer(typeof(TKey));
+            var valueSerializer = new XmlSerializer(typeof(TValue));
 
-            bool wasEmpty = reader.IsEmptyElement;
+            var wasEmpty = reader.IsEmptyElement;
             reader.Read();
 
             if (wasEmpty)
@@ -142,8 +143,8 @@ namespace MusicBeePlugin
 
             while (reader.NodeType != System.Xml.XmlNodeType.EndElement)
             {
-                TKey key = (TKey)keySerializer.Deserialize(reader);
-                TValue value = (TValue)valueSerializer.Deserialize(reader);
+                var key = (TKey)keySerializer.Deserialize(reader);
+                var value = (TValue)valueSerializer.Deserialize(reader);
 
                 Add(key, value);
             }
@@ -152,10 +153,10 @@ namespace MusicBeePlugin
 
         public void WriteXml(System.Xml.XmlWriter writer)
         {
-            XmlSerializer keySerializer = new XmlSerializer(typeof(TKey));
-            XmlSerializer valueSerializer = new XmlSerializer(typeof(TValue));
+            var keySerializer = new XmlSerializer(typeof(TKey));
+            var valueSerializer = new XmlSerializer(typeof(TValue));
 
-            foreach (KeyValuePair<TKey, TValue> pair in this)
+            foreach (var pair in this)
             {
                 keySerializer.Serialize(writer, pair.Key);
                 valueSerializer.Serialize(writer, pair.Value);
@@ -170,14 +171,14 @@ namespace MusicBeePlugin
         public string guid;
         public string libraryName;
 
-        public BackupCache() : base()
+        public BackupCache()
         {
             creationDate = DateTime.UtcNow;
             guid = Guid.NewGuid().ToString();
             libraryName = BrGetCurrentLibraryName();
         }
 
-        public BackupCache(BackupCache source, bool isAutoCreated) : base()
+        public BackupCache(BackupCache source, bool isAutoCreated)
         {
             this.isAutoCreated = isAutoCreated;
             creationDate = source.creationDate;
@@ -188,8 +189,8 @@ namespace MusicBeePlugin
         internal virtual void save(string fileName)
         {
             Stream stream = File.Open(fileName + ".mbc", FileMode.Create, FileAccess.Write, FileShare.None);
-            StreamWriter file = new StreamWriter(stream, Encoding.UTF8);
-            XmlSerializer serializer = new XmlSerializer(typeof(BackupCache));
+            var file = new StreamWriter(stream, Encoding.UTF8);
+            var serializer = new XmlSerializer(typeof(BackupCache));
 
             serializer.Serialize(file, this);
 
@@ -198,9 +199,9 @@ namespace MusicBeePlugin
 
         internal static BackupCache Load(string fileName)
         {
-            FileStream stream = File.Open(fileName + ".mbc", FileMode.Open, FileAccess.Read, FileShare.None);
-            StreamReader file = new StreamReader(stream, Encoding.UTF8);
-            XmlSerializer serializer = new XmlSerializer(typeof(BackupCache));
+            var stream = File.Open(fileName + ".mbc", FileMode.Open, FileAccess.Read, FileShare.None);
+            var file = new StreamReader(stream, Encoding.UTF8);
+            var serializer = new XmlSerializer(typeof(BackupCache));
             BackupCache backupCache;
 
             try
@@ -227,19 +228,14 @@ namespace MusicBeePlugin
         public List<string> incrementalBackups = new List<string>(); //This field in used by baseline files only
         public SerializableDictionary<int, SerializableDictionary<int, string>> tracks = new SerializableDictionary<int, SerializableDictionary<int, string>>();
 
-        public Backup() : base()
-        {
-            return;
-        }
-
         public Backup(Backup backup, bool isAutoCreated) : base(backup, isAutoCreated)
         {
-            return;
+            //Nothing...
         }
 
-        public Backup(bool isAutoCreated) : base()
+        public Backup(bool isAutoCreated)
         {
-            base.isAutoCreated = isAutoCreated;
+            this.isAutoCreated = isAutoCreated;
             guid = Guid.NewGuid().ToString();
             libraryName = BrGetCurrentLibraryName();
         }
@@ -247,8 +243,8 @@ namespace MusicBeePlugin
         internal override void save(string fileName)
         {
             Backup baseline;
-            Backup incrementalBackup = new Backup(this, isAutoCreated);
-            string baselineFilename = BrGetBackupBaselineFilename();
+            var incrementalBackup = new Backup(this, isAutoCreated);
+            var baselineFilename = BrGetBackupBaselineFilename();
 
             if (File.Exists(baselineFilename + ".bbl")) //Backup baseline file exists
             {
@@ -257,45 +253,45 @@ namespace MusicBeePlugin
                     return;
 
 
-                List<string> tagNames = new List<string>();
+                var tagNames = new List<string>();
                 FillListByTagNames(tagNames, false, true, false);
 
-                List<MetaDataType> tagIds = new List<MetaDataType>();
-                for (int i = 0; i < tagNames.Count; i++)
+                var tagIds = new List<MetaDataType>();
+                for (var i = 0; i < tagNames.Count; i++)
                     tagIds.Add(GetTagId(tagNames[i]));
 
 
-                SerializableDictionary<int, string> tagsForIncrementalBackup;
+                const int percentageStep = 5;
+                var lastShownPercentage = 0;
 
-
-                int fileCounter = 0;
-                int totalFiles = tracks.Count;
+                var fileCounter = 0;
+                var totalFiles = tracks.Count;
                 foreach (var track in tracks)
                 {
-                    int trackId = track.Key;
-                    bool trackNeedsToBeBackuped = true;
+                    var trackId = track.Key;
+                    var trackNeedsToBeBackedUp = true;
 
-                    int lastShownCount = 0;
-                    int percentage = 100 * fileCounter / totalFiles;
-                    if (lastShownCount < percentage)
+                    var percentage = 100 * fileCounter / totalFiles;
+                    if (lastShownPercentage + percentageStep < percentage)
                     {
-                        lastShownCount = percentage;
+                        lastShownPercentage = percentage;
                         MbApiInterface.MB_SetBackgroundTaskMessage(SbComparingTags + percentage + "%");
                     }
 
-                    if (baseline.tracks.TryGetValue(trackId, out SerializableDictionary<int, string> baselineTags)) //Found current track in baseline
+                    SerializableDictionary<int, string> tagsForIncrementalBackup;
+                    if (baseline.tracks.TryGetValue(trackId, out var baselineTags)) //Found current track in baseline
                     {
-                        trackNeedsToBeBackuped = false;
+                        trackNeedsToBeBackedUp = false;
                         tagsForIncrementalBackup = new SerializableDictionary<int, string>();
 
-                        for (int m = 0; m < tagIds.Count; m++)
+                        for (var m = 0; m < tagIds.Count; m++)
                         {
-                            baselineTags.TryGetValue((int)tagIds[m], out string baseValue);
-                            track.Value.TryGetValue((int)tagIds[m], out string backupValue);
+                            baselineTags.TryGetValue((int)tagIds[m], out var baseValue);
+                            track.Value.TryGetValue((int)tagIds[m], out var backupValue);
 
                             if (backupValue != baseValue)
                             {
-                                trackNeedsToBeBackuped = true;
+                                trackNeedsToBeBackedUp = true;
                                 tagsForIncrementalBackup.Add((int)tagIds[m], backupValue);
                             }
                         }
@@ -304,20 +300,19 @@ namespace MusicBeePlugin
                     {
                         tagsForIncrementalBackup = new SerializableDictionary<int, string>();
 
-                        for (int m = 0; m < tagIds.Count; m++)
+                        for (var m = 0; m < tagIds.Count; m++)
                         {
-                            track.Value.TryGetValue((int)tagIds[m], out string backupValue);
+                            track.Value.TryGetValue((int)tagIds[m], out var backupValue);
 
                             if (backupValue != null)
-                            {
-                                trackNeedsToBeBackuped = true;
                                 tagsForIncrementalBackup.Add((int)tagIds[m], backupValue);
-                            }
+                            else
+                                trackNeedsToBeBackedUp = false;
                         }
                     }
 
 
-                    if (trackNeedsToBeBackuped)
+                    if (trackNeedsToBeBackedUp)
                     {
                         incrementalBackup.tracks.Add(trackId, tagsForIncrementalBackup);
                         TempTracksNeededToBeBackedUp.Add(trackId, false);
@@ -349,10 +344,10 @@ namespace MusicBeePlugin
             baseline.incrementalBackups.Add(incrementalBackup.guid);
 
 
-            //Lets save baseline first
+            //Let's save baseline first
             Stream streamBbl = File.Open(baselineFilename + ".bbl", FileMode.Create, FileAccess.Write, FileShare.None);
-            StreamWriter fileBbl = new StreamWriter(streamBbl, Encoding.UTF8);
-            XmlSerializer serializerBbl = new XmlSerializer(typeof(Backup));
+            var fileBbl = new StreamWriter(streamBbl, Encoding.UTF8);
+            var serializerBbl = new XmlSerializer(typeof(Backup));
 
             serializerBbl.Serialize(fileBbl, baseline);
 
@@ -360,17 +355,17 @@ namespace MusicBeePlugin
 
 
 
-            //Lets save incremental backup
+            //Let's save incremental backup
             Stream stream = File.Open(fileName + ".xml", FileMode.Create, FileAccess.Write, FileShare.None);
-            StreamWriter file = new StreamWriter(stream, Encoding.UTF8);
-            XmlSerializer serializer = new XmlSerializer(typeof(Backup));
+            var file = new StreamWriter(stream, Encoding.UTF8);
+            var serializer = new XmlSerializer(typeof(Backup));
 
             serializer.Serialize(file, incrementalBackup);
 
             file.Close();
 
 
-            BackupCache backupCache = new BackupCache(incrementalBackup, isAutoCreated);
+            var backupCache = new BackupCache(incrementalBackup, isAutoCreated);
             backupCache.save(fileName);
 
             System.Threading.Thread.Sleep(2000);
@@ -380,7 +375,7 @@ namespace MusicBeePlugin
 
         internal static Backup Load(string fileName, string backupFileExtension = ".xml")
         {
-            string baselineFilename = BrGetBackupBaselineFilename();
+            var baselineFilename = BrGetBackupBaselineFilename();
 
             if (!File.Exists(baselineFilename + ".bbl")) //Backup baseline file doesn't exist
             {
@@ -389,9 +384,9 @@ namespace MusicBeePlugin
             }
 
 
-            FileStream stream = File.Open(fileName + backupFileExtension, FileMode.Open, FileAccess.Read, FileShare.None);
-            StreamReader file = new StreamReader(stream, Encoding.UTF8);
-            XmlSerializer backupSerializer = new XmlSerializer(typeof(Backup));
+            var stream = File.Open(fileName + backupFileExtension, FileMode.Open, FileAccess.Read, FileShare.None);
+            var file = new StreamReader(stream, Encoding.UTF8);
+            var backupSerializer = new XmlSerializer(typeof(Backup));
             Backup incrementalBackup;
 
             try
@@ -402,7 +397,7 @@ namespace MusicBeePlugin
             {
                 file.Close();
 
-                MessageBox.Show(MbForm, MsgBrBackupIsCorrupted.Replace("%%FILENAME%%", fileName) + "\n\n" + ex.Message);
+                MessageBox.Show(MbForm, MsgBrBackupIsCorrupted.Replace("%%FILENAME%%", fileName) + Resources.MsgDoubleNewLine + ex.Message);
 
                 return null;
             }
@@ -412,19 +407,19 @@ namespace MusicBeePlugin
 
             if (backupFileExtension != ".bbl") //We are loading incremental backup
             {
-                Backup baseline = Load(baselineFilename, ".bbl");
+                var baseline = Load(baselineFilename, ".bbl");
                 if (baseline == null)
                     return null;
 
                 foreach (var incTrack in incrementalBackup.tracks)
                 {
-                    if (baseline.tracks.TryGetValue(incTrack.Key, out SerializableDictionary<int, string> tags)) //Track exists in baseline
+                    if (baseline.tracks.TryGetValue(incTrack.Key, out var tags)) //Track exists in baseline
                     {
                         var incTags = incTrack.Value;
 
                         foreach (var incTagId in incTags.Keys)
                         {
-                            string incValue = incTags[incTagId];
+                            var incValue = incTags[incTagId];
 
                             if (incValue != null && incValue != "_x0000_")
                                 tags.AddReplace(incTagId, incValue);
@@ -446,9 +441,9 @@ namespace MusicBeePlugin
 
         internal static Backup LoadIncrementalBackupOnly(string fileName)
         {
-            FileStream stream = File.Open(fileName + ".xml", FileMode.Open, FileAccess.Read, FileShare.None);
-            StreamReader file = new StreamReader(stream, Encoding.UTF8);
-            XmlSerializer backupSerializer = new XmlSerializer(typeof(Backup));
+            var stream = File.Open(fileName + ".xml", FileMode.Open, FileAccess.Read, FileShare.None);
+            var file = new StreamReader(stream, Encoding.UTF8);
+            var backupSerializer = new XmlSerializer(typeof(Backup));
             Backup incrementalBackup;
 
             try
@@ -459,7 +454,7 @@ namespace MusicBeePlugin
             {
                 file.Close();
 
-                MessageBox.Show(MbForm, MsgBrBackupIsCorrupted.Replace("%%FILENAME%%", fileName) + "\n\n" + ex.Message);
+                MessageBox.Show(MbForm, MsgBrBackupIsCorrupted.Replace("%%FILENAME%%", fileName) + Resources.MsgDoubleNewLine + ex.Message);
 
                 return null;
             }
@@ -482,10 +477,10 @@ namespace MusicBeePlugin
 
         internal string getValue(int trackId, int tagId)
         {
-            if (!tracks.TryGetValue(trackId, out SerializableDictionary<int, string> tags))
+            if (!tracks.TryGetValue(trackId, out var tags))
                 return null;
 
-            tags.TryGetValue(tagId, out string value);
+            tags.TryGetValue(tagId, out var value);
 
             if (value != null)
                 return DecodeValue(value);
@@ -495,10 +490,10 @@ namespace MusicBeePlugin
 
         internal string getIncValue(int trackId, int tagId, Backup baseline)
         {
-            if (!tracks.TryGetValue(trackId, out SerializableDictionary<int, string> tags))
+            if (!tracks.TryGetValue(trackId, out var tags))
                 return baseline.getValue(trackId, tagId);
 
-            tags.TryGetValue(tagId, out string value);
+            tags.TryGetValue(tagId, out var value);
 
             if (value != null)
                 return DecodeValue(value);
@@ -552,7 +547,7 @@ namespace MusicBeePlugin
         {
             value = EncodeValue(value);
 
-            if (!tracks.TryGetValue(trackId, out SerializableDictionary<int, string> tags))
+            if (!tracks.TryGetValue(trackId, out var tags))
             {
                 tags = new SerializableDictionary<int, string>();
                 tracks.Add(trackId, tags);
@@ -566,10 +561,14 @@ namespace MusicBeePlugin
     {
         internal void saveBackupAsync(object parameters)
         {
-            string backupName = (parameters as object[])[0] as string;
-            string statusBarText = (parameters as object[])[1] as string;
-            bool isAutoCreated = (bool)(parameters as object[])[2];
-            bool createEmptyBackup = (bool)(parameters as object[])[3];
+            // ReSharper disable once PossibleNullReferenceException
+            var backupName = (parameters as object[])[0] as string;
+            // ReSharper disable once PossibleNullReferenceException
+            var statusBarText = (parameters as object[])[1] as string;
+            // ReSharper disable once PossibleNullReferenceException
+            var isAutoCreated = (bool)(parameters as object[])[2];
+            // ReSharper disable once PossibleNullReferenceException
+            var createEmptyBackup = (bool)(parameters as object[])[3];
 
             try
             {
@@ -579,7 +578,7 @@ namespace MusicBeePlugin
             {
                 //Nothing to do, just let's cancel the task.
             }
-            catch (Exception ex) //Maybe *baseline backup* failure. Let's restore cached values.
+            catch //Maybe *baseline backup* failure. Let's restore cached values.
             {
                 if (CustomTrackIdTag > 0)
                 {
@@ -587,7 +586,7 @@ namespace MusicBeePlugin
                     SavedSettings.customTrackIdTag = CustomTrackIdTag;
                 }
 
-                throw ex;
+                throw;
             }
         }
 
@@ -604,35 +603,32 @@ namespace MusicBeePlugin
             else if (!MbApiInterface.Library_QueryFilesEx("domain=Library", out files))
                 return;
 
-            string currentFile;
-            string libraryName = BrGetCurrentLibraryName();
-            string libraryTrackId;
-            string[] libraryTags;
+            var libraryName = BrGetCurrentLibraryName();
 
             lock (TracksNeededToBeBackedUp)
             {
-                List<string> tagNames = new List<string>();
+                var tagNames = new List<string>();
                 FillListByTagNames(tagNames, false, true, false);
 
-                List<MetaDataType> tagIds = new List<MetaDataType>();
-                for (int i = 0; i < tagNames.Count; i++)
+                var tagIds = new List<MetaDataType>();
+                for (var i = 0; i < tagNames.Count; i++)
                     tagIds.Add(GetTagId(tagNames[i]));
 
-                Backup backup = new Backup(isAutoCreated);
+                var backup = new Backup(isAutoCreated);
 
-                int lastShownCount = 0;
-                for (int fileCounter = 0; fileCounter < files.Length; fileCounter++)
+                var lastShownCount = 0;
+                for (var fileCounter = 0; fileCounter < files.Length; fileCounter++)
                 {
-                    int percentage = 100 * fileCounter / files.Length;
+                    var percentage = 100 * fileCounter / files.Length;
                     if (lastShownCount < percentage)
                     {
                         lastShownCount = percentage;
-                        MbApiInterface.MB_SetBackgroundTaskMessage(statusBarText + " " + percentage + "% (" + backupName + ")");
+                        MbApiInterface.MB_SetBackgroundTaskMessage(statusBarText  + Resources.Space + percentage + "% (" + backupName + ")");
                     }
 
-                    currentFile = files[fileCounter];
-                    string trackIdString = GetPersistentTrackId(currentFile, false);
-                    int trackId = int.Parse(trackIdString);
+                    var currentFile = files[fileCounter];
+                    var trackIdString = GetPersistentTrackId(currentFile);
+                    var trackId = int.Parse(trackIdString);
 
                     if (SavedSettings.useCustomTrackIdTag)
                     {
@@ -645,16 +641,16 @@ namespace MusicBeePlugin
                         continue;
 
 
-                    libraryTrackId = AddLibraryNameToTrackId(libraryName, trackIdString);
-                    libraryTags = GetFileTags(currentFile, tagIds);
+                    var libraryTrackId = AddLibraryNameToTrackId(libraryName, trackIdString);
+                    var libraryTags = GetFileTags(currentFile, tagIds);
 
-                    for (int i = 0; i < tagIds.Count; i++)
+                    for (var i = 0; i < tagIds.Count; i++)
                     {
                         if (SavedSettings.backupArtworks || tagIds[i] != MetaDataType.Artwork)
                             backup.setValue(libraryTags[i], trackId, (int)tagIds[i]);
                     }
 
-                    if (!TryGetValue(libraryTrackId, out SerializableDictionary<string, bool> trackBackups))
+                    if (!TryGetValue(libraryTrackId, out var trackBackups))
                     {
                         trackBackups = new SerializableDictionary<string, bool>();
                         Add(libraryTrackId, trackBackups);
@@ -667,9 +663,9 @@ namespace MusicBeePlugin
                 backup.save(backupName);
 
 
-                FileStream stream = File.Open(BrGetAutoBackupDirectory(SavedSettings.autoBackupDirectory) + @"\" + BackupIndexFileName, FileMode.Create, FileAccess.Write, FileShare.None);
-                StreamWriter file = new StreamWriter(stream, Encoding.UTF8);
-                XmlSerializer backupIndexSerializer = new XmlSerializer(typeof(BackupIndex));
+                var stream = File.Open(BrGetAutoBackupDirectory(SavedSettings.autoBackupDirectory) + @"\" + BackupIndexFileName, FileMode.Create, FileAccess.Write, FileShare.None);
+                var file = new StreamWriter(stream, Encoding.UTF8);
+                var backupIndexSerializer = new XmlSerializer(typeof(BackupIndex));
 
                 backupIndexSerializer.Serialize(file, this);
 
@@ -690,10 +686,10 @@ namespace MusicBeePlugin
 
         internal static void LoadBackupAsync(object parameters)
         {
-            string backupName = (parameters as object[])[0] as string;
-            string statusBarText = (parameters as object[])[1] as string;
-            bool restoreForEntireLibrary = (bool)(parameters as object[])[2];
-            bool restoreFromAnotherLibrary = (bool)(parameters as object[])[3];
+            var backupName = (parameters as object[])[0] as string;
+            var statusBarText = (parameters as object[])[1] as string;
+            var restoreForEntireLibrary = (bool)(parameters as object[])[2];
+            var restoreFromAnotherLibrary = (bool)(parameters as object[])[3];
 
             lock (OpenedForms)
                 NumberOfNativeMbBackgroundTasks++;
@@ -706,7 +702,7 @@ namespace MusicBeePlugin
             {
                 //Nothing to do, just let's cancel the task.
             }
-            catch (Exception ex) //Maybe *baseline backup* failure. Let's restore cached values.
+            catch //Maybe *baseline backup* failure. Let's restore cached values.
             {
                 if (CustomTrackIdTag > 0)
                 {
@@ -714,7 +710,7 @@ namespace MusicBeePlugin
                     SavedSettings.customTrackIdTag = CustomTrackIdTag;
                 }
 
-                throw ex;
+                throw;
             }
 
             lock (OpenedForms)
@@ -733,7 +729,7 @@ namespace MusicBeePlugin
                 query = "domain=SelectedFiles";
 
 
-            Backup backup = Backup.Load(backupName);
+            var backup = Backup.Load(backupName);
             if (backup == null)
                 return;
 
@@ -742,17 +738,14 @@ namespace MusicBeePlugin
                 System.Media.SystemSounds.Hand.Play();
                 MbApiInterface.MB_SetBackgroundTaskMessage("");
 
-                var result = (DialogResult)MbForm.Invoke(new Func<DialogResult>(() =>
-                {
-                    return MessageBox.Show(MbForm, MsgBrThisIsTheBackupOfDifferentLibrary, string.Empty,
-                        MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2);
-                }));
+                var result = (DialogResult)MbForm.Invoke(new Func<DialogResult>(() => MessageBox.Show(MbForm, MsgBrThisIsTheBackupOfDifferentLibrary, string.Empty,
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2)));
 
                 if (result == DialogResult.No) return;
             }
 
 
-            if (MbApiInterface.Library_QueryFilesEx(query, out string[] files))
+            if (MbApiInterface.Library_QueryFilesEx(query, out var files))
             {
                 if (files.Length == 0)
                 {
@@ -765,30 +758,30 @@ namespace MusicBeePlugin
                 }
 
 
-                List<string> tagNames = new List<string>();
+                var tagNames = new List<string>();
                 FillListByTagNames(tagNames, false, true, false);
 
-                List<MetaDataType> tagIds = new List<MetaDataType>();
-                for (int i = 0; i < tagNames.Count; i++)
+                var tagIds = new List<MetaDataType>();
+                for (var i = 0; i < tagNames.Count; i++)
                     tagIds.Add(GetTagId(tagNames[i]));
 
-                int lastShownCount = 0;
-                for (int fileCounter = 0; fileCounter < files.Length; fileCounter++)
+                var lastShownCount = 0;
+                for (var fileCounter = 0; fileCounter < files.Length; fileCounter++)
                 {
-                    int percentage = 100 * fileCounter / files.Length;
+                    var percentage = 100 * fileCounter / files.Length;
                     if (lastShownCount < percentage)
                     {
                         lastShownCount = percentage;
-                        MbApiInterface.MB_SetBackgroundTaskMessage(statusBarText + " " + percentage + "% (" + backupName + ")");
+                        MbApiInterface.MB_SetBackgroundTaskMessage(statusBarText  + Resources.Space + percentage + "% (" + backupName + ")");
                     }
 
-                    string currentFile = files[fileCounter];
-                    int trackId = GetPersistentTrackIdInt(currentFile, UseCustomTrackIdTag);
+                    var currentFile = files[fileCounter];
+                    var trackId = GetPersistentTrackIdInt(currentFile, UseCustomTrackIdTag);
 
-                    bool tagsWereSet = false;
-                    for (int i = 0; i < tagIds.Count; i++)
+                    var tagsWereSet = false;
+                    for (var i = 0; i < tagIds.Count; i++)
                     {
-                        string tagValue = backup.getValue(trackId, (int)tagIds[i]);
+                        var tagValue = backup.getValue(trackId, (int)tagIds[i]);
 
                         if (tagValue != null)
                             tagsWereSet |= SetFileTag(currentFile, tagIds[i], tagValue, true);
@@ -812,7 +805,7 @@ namespace MusicBeePlugin
 
         internal SerializableDictionary<string, bool> getBackupGuidsForTrack(string libraryName, int trackId)
         {
-            if (!TryGetValue(AddLibraryNameToTrackId(libraryName, trackId.ToString()), out SerializableDictionary<string, bool> trackBackups))
+            if (!TryGetValue(AddLibraryNameToTrackId(libraryName, trackId.ToString()), out var trackBackups))
                 trackBackups = new SerializableDictionary<string, bool>();
 
             return trackBackups;
@@ -843,26 +836,26 @@ namespace MusicBeePlugin
 
 
 
-            string baselineFilename = BrGetBackupBaselineFilename(backupCache.libraryName);
+            var baselineFilename = BrGetBackupBaselineFilename(backupCache.libraryName);
 
             if (File.Exists(baselineFilename + ".bbl")) //Backup baseline file exists
             {
-                Backup baseline = Backup.Load(baselineFilename, ".bbl");
+                var baseline = Backup.Load(baselineFilename, ".bbl");
                 if (baseline == null)
                     return;
 
                 baseline.incrementalBackups.Remove(backupCache.guid);
 
-                if (baseline.incrementalBackups.Count == 0) //Lets delete baseline file
+                if (baseline.incrementalBackups.Count == 0) //Let's delete baseline file
                 {
                     File.Delete(baselineFilename + ".bbl");
                 }
-                else //Lets save baseline first
+                else //Let's save baseline first
                 {
                     Stream streamBbl = File.Open(baselineFilename + ".bbl", FileMode.Create, FileAccess.Write, FileShare.None);
-                    StreamWriter fileBbl = new StreamWriter(streamBbl, Encoding.UTF8);
+                    var fileBbl = new StreamWriter(streamBbl, Encoding.UTF8);
 
-                    System.Xml.Serialization.XmlSerializer serializerBbl = new System.Xml.Serialization.XmlSerializer(typeof(Backup));
+                    var serializerBbl = new XmlSerializer(typeof(Backup));
 
                     serializerBbl.Serialize(fileBbl, baseline);
 
@@ -872,10 +865,10 @@ namespace MusicBeePlugin
 
 
 
-            FileStream stream = File.Open(BrGetAutoBackupDirectory(SavedSettings.autoBackupDirectory) + @"\" + BackupIndexFileName, FileMode.Create, FileAccess.Write, FileShare.None);
-            StreamWriter file = new StreamWriter(stream, Encoding.UTF8);
+            var stream = File.Open(BrGetAutoBackupDirectory(SavedSettings.autoBackupDirectory) + @"\" + BackupIndexFileName, FileMode.Create, FileAccess.Write, FileShare.None);
+            var file = new StreamWriter(stream, Encoding.UTF8);
 
-            XmlSerializer backupIndexSerializer = new XmlSerializer(typeof(BackupIndex));
+            var backupIndexSerializer = new XmlSerializer(typeof(BackupIndex));
 
             backupIndexSerializer.Serialize(file, this);
 

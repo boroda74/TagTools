@@ -81,11 +81,11 @@
             this.useMusicBeeFontCheckBox = new System.Windows.Forms.CheckBox();
             this.useSkinColorsCheckBoxLabel = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.showReencodeTagCheckBox = new System.Windows.Forms.CheckBox();
+            this.showReEncodeTagCheckBox = new System.Windows.Forms.CheckBox();
             this.showChangeCaseCheckBox = new System.Windows.Forms.CheckBox();
             this.showLibraryReportsCheckBox = new System.Windows.Forms.CheckBox();
             this.showCopyTagCheckBox = new System.Windows.Forms.CheckBox();
-            this.showAutorateCheckBox = new System.Windows.Forms.CheckBox();
+            this.showAutoRateCheckBox = new System.Windows.Forms.CheckBox();
             this.showSwapTagsCheckBox = new System.Windows.Forms.CheckBox();
             this.showAsrCheckBox = new System.Windows.Forms.CheckBox();
             this.showShowHiddenWindowsCheckBox = new System.Windows.Forms.CheckBox();
@@ -104,9 +104,9 @@
             this.showCTCheckBoxLabel = new System.Windows.Forms.Label();
             this.showCARCheckBoxLabel = new System.Windows.Forms.Label();
             this.showAsrCheckBoxLabel = new System.Windows.Forms.Label();
-            this.showAutorateCheckBoxLabel = new System.Windows.Forms.Label();
+            this.showAutoRateCheckBoxLabel = new System.Windows.Forms.Label();
             this.showLibraryReportsCheckBoxLabel = new System.Windows.Forms.Label();
-            this.showReencodeTagCheckBoxLabel = new System.Windows.Forms.Label();
+            this.showReEncodeTagCheckBoxLabel = new System.Windows.Forms.Label();
             this.showChangeCaseCheckBoxLabel = new System.Windows.Forms.Label();
             this.showSwapTagsCheckBoxLabel = new System.Windows.Forms.Label();
             this.showCopyTagCheckBoxLabel = new System.Windows.Forms.Label();
@@ -140,13 +140,13 @@
             this.SuspendLayout();
 
             //MusicBee
-            this.unitKBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.unitMBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.unitGBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.customFontTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.preservedTagValuesLegendTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.preservedTagsLegendTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.changedLegendTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
+            this.unitKBox = ControlsTools.CreateMusicBeeTextBox();
+            this.unitMBox = ControlsTools.CreateMusicBeeTextBox();
+            this.unitGBox = ControlsTools.CreateMusicBeeTextBox();
+            this.customFontTextBox = ControlsTools.CreateMusicBeeTextBox();
+            this.preservedTagValuesLegendTextBox = ControlsTools.CreateMusicBeeTextBox();
+            this.preservedTagsLegendTextBox = ControlsTools.CreateMusicBeeTextBox();
+            this.changedLegendTextBox = ControlsTools.CreateMusicBeeTextBox();
             //~MusicBee
 
             //
@@ -538,13 +538,13 @@
             this.label8.Name = "label8";
             this.toolTip1.SetToolTip(this.label8, resources.GetString("label8.ToolTip"));
             //
-            //showReencodeTagCheckBox
+            //showReEncodeTagCheckBox
             //
-            resources.ApplyResources(this.showReencodeTagCheckBox, "showReencodeTagCheckBox");
-            this.showReencodeTagCheckBox.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.showReencodeTagCheckBox.Name = "showReencodeTagCheckBox";
-            this.showReencodeTagCheckBox.Tag = "#showReencodeTagCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.showReencodeTagCheckBox, resources.GetString("showReencodeTagCheckBox.ToolTip"));
+            resources.ApplyResources(this.showReEncodeTagCheckBox, "showReEncodeTagCheckBox");
+            this.showReEncodeTagCheckBox.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.showReEncodeTagCheckBox.Name = "showReEncodeTagCheckBox";
+            this.showReEncodeTagCheckBox.Tag = "#showReEncodeTagCheckBoxLabel";
+            this.toolTip1.SetToolTip(this.showReEncodeTagCheckBox, resources.GetString("showReEncodeTagCheckBox.ToolTip"));
             //
             //showChangeCaseCheckBox
             //
@@ -570,13 +570,13 @@
             this.showCopyTagCheckBox.Tag = "#showCopyTagCheckBoxLabel";
             this.toolTip1.SetToolTip(this.showCopyTagCheckBox, resources.GetString("showCopyTagCheckBox.ToolTip"));
             //
-            //showAutorateCheckBox
+            //showAutoRateCheckBox
             //
-            resources.ApplyResources(this.showAutorateCheckBox, "showAutorateCheckBox");
-            this.showAutorateCheckBox.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.showAutorateCheckBox.Name = "showAutorateCheckBox";
-            this.showAutorateCheckBox.Tag = "#showAutorateCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.showAutorateCheckBox, resources.GetString("showAutorateCheckBox.ToolTip"));
+            resources.ApplyResources(this.showAutoRateCheckBox, "showAutoRateCheckBox");
+            this.showAutoRateCheckBox.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.showAutoRateCheckBox.Name = "showAutoRateCheckBox";
+            this.showAutoRateCheckBox.Tag = "#showAutoRateCheckBoxLabel";
+            this.toolTip1.SetToolTip(this.showAutoRateCheckBox, resources.GetString("showAutoRateCheckBox.ToolTip"));
             //
             //showSwapTagsCheckBox
             //
@@ -653,12 +653,12 @@
             this.groupBox1.Controls.Add(this.showCARCheckBox);
             this.groupBox1.Controls.Add(this.showAsrCheckBoxLabel);
             this.groupBox1.Controls.Add(this.showAsrCheckBox);
-            this.groupBox1.Controls.Add(this.showAutorateCheckBoxLabel);
-            this.groupBox1.Controls.Add(this.showAutorateCheckBox);
+            this.groupBox1.Controls.Add(this.showAutoRateCheckBoxLabel);
+            this.groupBox1.Controls.Add(this.showAutoRateCheckBox);
             this.groupBox1.Controls.Add(this.showLibraryReportsCheckBoxLabel);
             this.groupBox1.Controls.Add(this.showLibraryReportsCheckBox);
-            this.groupBox1.Controls.Add(this.showReencodeTagCheckBoxLabel);
-            this.groupBox1.Controls.Add(this.showReencodeTagCheckBox);
+            this.groupBox1.Controls.Add(this.showReEncodeTagCheckBoxLabel);
+            this.groupBox1.Controls.Add(this.showReEncodeTagCheckBox);
             this.groupBox1.Controls.Add(this.showChangeCaseCheckBoxLabel);
             this.groupBox1.Controls.Add(this.showChangeCaseCheckBox);
             this.groupBox1.Controls.Add(this.showSwapTagsCheckBoxLabel);
@@ -748,12 +748,12 @@
             this.toolTip1.SetToolTip(this.showAsrCheckBoxLabel, resources.GetString("showAsrCheckBoxLabel.ToolTip"));
             this.showAsrCheckBoxLabel.Click += new System.EventHandler(this.showAsrCheckBoxLabel_Click);
             //
-            //showAutorateCheckBoxLabel
+            //showAutoRateCheckBoxLabel
             //
-            resources.ApplyResources(this.showAutorateCheckBoxLabel, "showAutorateCheckBoxLabel");
-            this.showAutorateCheckBoxLabel.Name = "showAutorateCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.showAutorateCheckBoxLabel, resources.GetString("showAutorateCheckBoxLabel.ToolTip"));
-            this.showAutorateCheckBoxLabel.Click += new System.EventHandler(this.showAutorateCheckBoxLabel_Click);
+            resources.ApplyResources(this.showAutoRateCheckBoxLabel, "showAutoRateCheckBoxLabel");
+            this.showAutoRateCheckBoxLabel.Name = "showAutoRateCheckBoxLabel";
+            this.toolTip1.SetToolTip(this.showAutoRateCheckBoxLabel, resources.GetString("showAutoRateCheckBoxLabel.ToolTip"));
+            this.showAutoRateCheckBoxLabel.Click += new System.EventHandler(this.showAutoRateCheckBoxLabel_Click);
             //
             //showLibraryReportsCheckBoxLabel
             //
@@ -762,12 +762,12 @@
             this.toolTip1.SetToolTip(this.showLibraryReportsCheckBoxLabel, resources.GetString("showLibraryReportsCheckBoxLabel.ToolTip"));
             this.showLibraryReportsCheckBoxLabel.Click += new System.EventHandler(this.showLibraryReportsCheckBoxLabel_Click);
             //
-            //showReencodeTagCheckBoxLabel
+            //showReEncodeTagCheckBoxLabel
             //
-            resources.ApplyResources(this.showReencodeTagCheckBoxLabel, "showReencodeTagCheckBoxLabel");
-            this.showReencodeTagCheckBoxLabel.Name = "showReencodeTagCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.showReencodeTagCheckBoxLabel, resources.GetString("showReencodeTagCheckBoxLabel.ToolTip"));
-            this.showReencodeTagCheckBoxLabel.Click += new System.EventHandler(this.showReencodeTagCheckBoxLabel_Click);
+            resources.ApplyResources(this.showReEncodeTagCheckBoxLabel, "showReEncodeTagCheckBoxLabel");
+            this.showReEncodeTagCheckBoxLabel.Name = "showReEncodeTagCheckBoxLabel";
+            this.toolTip1.SetToolTip(this.showReEncodeTagCheckBoxLabel, resources.GetString("showReEncodeTagCheckBoxLabel.ToolTip"));
+            this.showReEncodeTagCheckBoxLabel.Click += new System.EventHandler(this.showReEncodeTagCheckBoxLabel_Click);
             //
             //showChangeCaseCheckBoxLabel
             //
@@ -949,6 +949,15 @@
             this.ResumeLayout(false);
             this.PerformLayout();
 
+            //MusicBee
+            new TextBoxBorder(this.unitKBox);
+            new TextBoxBorder(this.unitMBox);
+            new TextBoxBorder(this.unitGBox);
+            new TextBoxBorder(this.customFontTextBox);
+            new TextBoxBorder(this.preservedTagValuesLegendTextBox);
+            new TextBoxBorder(this.preservedTagsLegendTextBox);
+            new TextBoxBorder(this.changedLegendTextBox);
+            //~MusicBee
         }
 
         #endregion
@@ -975,11 +984,11 @@
         private System.Windows.Forms.RadioButton showHiddenCommandWindowsRadioButton;
         private System.Windows.Forms.CheckBox highlightChangedTagsCheckBox;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.CheckBox showReencodeTagCheckBox;
+        private System.Windows.Forms.CheckBox showReEncodeTagCheckBox;
         private System.Windows.Forms.CheckBox showChangeCaseCheckBox;
         private System.Windows.Forms.CheckBox showLibraryReportsCheckBox;
         private System.Windows.Forms.CheckBox showCopyTagCheckBox;
-        private System.Windows.Forms.CheckBox showAutorateCheckBox;
+        private System.Windows.Forms.CheckBox showAutoRateCheckBox;
         private System.Windows.Forms.CheckBox showSwapTagsCheckBox;
         private System.Windows.Forms.CheckBox showAsrCheckBox;
         private System.Windows.Forms.CheckBox showShowHiddenWindowsCheckBox;
@@ -1003,11 +1012,11 @@
         private System.Windows.Forms.Label showSwapTagsCheckBoxLabel;
         private System.Windows.Forms.Label showCopyTagCheckBoxLabel;
         private System.Windows.Forms.Label showLibraryReportsCheckBoxLabel;
-        private System.Windows.Forms.Label showReencodeTagCheckBoxLabel;
+        private System.Windows.Forms.Label showReEncodeTagCheckBoxLabel;
         private System.Windows.Forms.Label showChangeCaseCheckBoxLabel;
         private System.Windows.Forms.Label showCARCheckBoxLabel;
         private System.Windows.Forms.Label showAsrCheckBoxLabel;
-        private System.Windows.Forms.Label showAutorateCheckBoxLabel;
+        private System.Windows.Forms.Label showAutoRateCheckBoxLabel;
         private System.Windows.Forms.Label contextMenuCheckBoxLabel;
         private System.Windows.Forms.Label showBackupRestoreCheckBoxLabel;
         private System.Windows.Forms.Label showShowHiddenWindowsCheckBoxLabel;

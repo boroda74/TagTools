@@ -7,7 +7,7 @@ using static MusicBeePlugin.Plugin;
 
 namespace MusicBeePlugin
 {
-    public partial class ReencodeTags : PluginWindowTemplate
+    public partial class ReEncodeTags : PluginWindowTemplate
     {
         private CustomComboBox initialEncodingListCustom;
         private CustomComboBox usedEncodingListCustom;
@@ -21,10 +21,10 @@ namespace MusicBeePlugin
         private delegate void UpdateCustomScrollBarsDelegate(DataGridView dataGridView);
         private UpdateCustomScrollBarsDelegate updateCustomScrollBars;
 
-        private string[] files = new string[0];
-        private List<string[]> currentTracks = new List<string[]>();
-        private List<string[]> newTracks = new List<string[]>();
-        private List<string> cuesheetTracks = new List<string>();
+        private string[] files = Array.Empty<string>();
+        private readonly List<string[]> currentTracks = new List<string[]>();
+        private readonly List<string[]> newTracks = new List<string[]>();
+        private readonly List<string> cuesheetTracks = new List<string>();
 
         private Encoding defaultEncoding;
         private Encoding originalEncoding;
@@ -32,7 +32,7 @@ namespace MusicBeePlugin
 
         private bool previewSortTags;
 
-        internal ReencodeTags(Plugin plugin) : base(plugin)
+        internal ReEncodeTags(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
         }
@@ -48,9 +48,9 @@ namespace MusicBeePlugin
             buttonSettings.Image = ReplaceBitmap(buttonSettings.Image, Gear);
 
             defaultEncoding = Encoding.Default;
-            EncodingInfo[] encodings = Encoding.GetEncodings();
+            var encodings = Encoding.GetEncodings();
 
-            for (int i = 1; i < encodings.Length; i++)
+            for (var i = 1; i < encodings.Length; i++)
             {
                 initialEncodingListCustom.Items.Add(encodings[i].Name);
                 usedEncodingListCustom.Items.Add(encodings[i].Name);
@@ -67,12 +67,12 @@ namespace MusicBeePlugin
 
             var headerCellStyle = new DataGridViewCellStyle(HeaderCellStyle);
 
-            DataGridViewCheckBoxHeaderCell cbHeader = new DataGridViewCheckBoxHeaderCell();
+            var cbHeader = new DataGridViewCheckBoxHeaderCell();
             cbHeader.Style = headerCellStyle;
             cbHeader.setState(true);
-            cbHeader.OnCheckBoxClicked += new CheckBoxClickedHandler(cbHeader_OnCheckBoxClicked);
+            cbHeader.OnCheckBoxClicked += cbHeader_OnCheckBoxClicked;
 
-            DataGridViewCheckBoxColumn colCB = new DataGridViewCheckBoxColumn
+            var colCB = new DataGridViewCheckBoxColumn
             {
                 HeaderCell = cbHeader,
                 ThreeState = true,
@@ -106,11 +106,11 @@ namespace MusicBeePlugin
             button_GotFocus(AcceptButton, null); //Let's mark active button
         }
 
-        private void previewTable_AddRowToTable(string[] row)
+        private void previewTable_AddRowToTable(object[] row)
         {
             previewTable.Rows.Add(row);
 
-            if (previewTable.RowCount % 16 == 0)
+            if ((previewTable.RowCount & 0x1f) == 0)
                 UpdateCustomScrollBars(previewTable);
         }
 
@@ -123,7 +123,7 @@ namespace MusicBeePlugin
         {
             try
             {
-                byte[] usedBytes = usedEncoding.GetBytes(source);
+                var usedBytes = usedEncoding.GetBytes(source);
                 return originalEncoding.GetString(usedBytes);
             }
             catch
@@ -159,7 +159,7 @@ namespace MusicBeePlugin
 
             files = null;
             if (!MbApiInterface.Library_QueryFilesEx("domain=SelectedFiles", out files))
-                files = new string[0];
+                files = Array.Empty<string>();
 
             if (files.Length == 0)
             {
@@ -180,7 +180,7 @@ namespace MusicBeePlugin
             }
             else
             {
-                for (int fileCounter = 0; fileCounter < previewTable.Rows.Count; fileCounter++)
+                for (var fileCounter = 0; fileCounter < previewTable.Rows.Count; fileCounter++)
                 {
                     if ((string)previewTable.Rows[fileCounter].Cells[0].Value == "T")
                     {
@@ -198,38 +198,37 @@ namespace MusicBeePlugin
 
         private void previewChanges()
         {
-            string currentFile;
-
+            // ReSharper disable once RedundantAssignment
             string[] row = { "Checked", "File", "OriginalTrack", "NewTrack" };
 
-            int numberOfWritableTags = TagIdsNames.Count - ReadonlyTagsNames.Length - 1;
+            var numberOfWritableTags = TagIdsNames.Count - ReadonlyTagsNames.Length - 1;
 
-            bool wasCuesheet = false;
-            for (int fileCounter = 0; fileCounter < files.Length; fileCounter++)
+            var wasCuesheet = false;
+            for (var fileCounter = 0; fileCounter < files.Length; fileCounter++)
             {
                 if (backgroundTaskIsCanceled)
                     return;
 
-                currentFile = files[fileCounter];
+                var currentFile = files[fileCounter];
 
-                SetStatusbarTextForFileOperations(ReencodeTagSbText, true, fileCounter, files.Length, currentFile);
+                SetStatusBarTextForFileOperations(ReEncodeTagSbText, true, fileCounter, files.Length, currentFile);
 
-                string[] currentTags = new string[numberOfWritableTags + 2];
+                var currentTags = new string[numberOfWritableTags + 2];
                 currentTags[0] = "T";
                 currentTags[1] = currentFile;
 
-                string[] newTags = new string[numberOfWritableTags + 2];
+                var newTags = new string[numberOfWritableTags + 2];
                 newTags[0] = "T";
                 newTags[1] = currentFile;
 
                 if (GetFileTag(currentFile, MetaDataType.Cuesheet) != string.Empty)
                     wasCuesheet = true;
 
-                string[] tagNames = new string[numberOfWritableTags + 2];
-                int j = 0;
+                var tagNames = new string[numberOfWritableTags + 2];
+                var j = 0;
                 foreach (var tagIdName in TagIdsNames)
                 {
-                    for (int i = 0; i < ReadonlyTagsNames.Length; i++)
+                    for (var i = 0; i < ReadonlyTagsNames.Length; i++)
                         if (ReadonlyTagsNames[i] == tagIdName.Value || MetaDataType.Artwork == tagIdName.Key)
                             goto loopEnd;
 
@@ -273,38 +272,36 @@ namespace MusicBeePlugin
 
         private void applyChanges()
         {
-            string currentFile;
-            string isChecked;
-
             if (newTracks.Count == 0)
                 previewChanges();
 
             cuesheetTracks.Clear();
 
-            for (int i = 0; i < currentTracks.Count; i++)
+            for (var i = 0; i < currentTracks.Count; i++)
             {
                 if (backgroundTaskIsCanceled)
                     return;
 
-                isChecked = newTracks[i][0];
+                var isChecked = newTracks[i][0];
 
                 if (isChecked == "T")
                 {
-                    currentFile = newTracks[i][1];
+                    var currentFile = newTracks[i][1];
 
                     currentTracks[i][0] = string.Empty;
 
+                    // ReSharper disable once RedundantExplicitParamsArrayCreation
                     Invoke(processRowOfTable, new object[] { i });
 
-                    SetStatusbarTextForFileOperations(ReencodeTagSbText, false, i, newTracks.Count, currentFile);
+                    SetStatusBarTextForFileOperations(ReEncodeTagSbText, false, i, newTracks.Count, currentFile);
 
-                    string cuesheet = GetFileTag(currentFile, MetaDataType.Cuesheet);
+                    var cuesheet = GetFileTag(currentFile, MetaDataType.Cuesheet);
                     if (cuesheet == string.Empty)
                     {
-                        int j = 0;
+                        var j = 0;
                         foreach (var tagIdName in TagIdsNames)
                         {
-                            for (int k = 0; k < ReadonlyTagsNames.Length; k++)
+                            for (var k = 0; k < ReadonlyTagsNames.Length; k++)
                                 if (ReadonlyTagsNames[k] == tagIdName.Value)
                                     goto loopEnd;
 
@@ -376,7 +373,7 @@ namespace MusicBeePlugin
                 else
                     row.Cells[0].Value = "T";
 
-                DataGridViewCellEventArgs e = new DataGridViewCellEventArgs(0, row.Index);
+                var e = new DataGridViewCellEventArgs(0, row.Index);
                 previewTable_CellContentClick(null, e);
             }
         }
@@ -386,9 +383,8 @@ namespace MusicBeePlugin
             if (e.ColumnIndex == 0)
             {
                 string sourceTagValue;
-                string newTagValue;
 
-                string isChecked = (string)previewTable.Rows[e.RowIndex].Cells[0].Value;
+                var isChecked = (string)previewTable.Rows[e.RowIndex].Cells[0].Value;
 
                 if (isChecked == "T")
                 {
@@ -404,7 +400,7 @@ namespace MusicBeePlugin
 
                     sourceTagValue = (string)previewTable.Rows[e.RowIndex].Cells[2].Value;
 
-                    newTagValue = reencodeTag(sourceTagValue);
+                    var newTagValue = reencodeTag(sourceTagValue);
 
                     previewTable.Rows[e.RowIndex].Cells[3].Value = newTagValue;
                 }
@@ -433,7 +429,7 @@ namespace MusicBeePlugin
 
         internal override void enableQueryingOrUpdatingButtons()
         {
-            buttonOK.Enable(previewIsGenerated || SavedSettings.allowCommandExecutionWithoutPreview);
+            buttonOK.Enable((previewIsGenerated && !previewIsStopped) || SavedSettings.allowCommandExecutionWithoutPreview);
             buttonPreview.Enable(true);
         }
 
@@ -451,13 +447,16 @@ namespace MusicBeePlugin
                 {
                     MessageBox.Show(this, (string)previewTable.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
                 }
-                catch { };
+                catch
+                {
+                    // ignored
+                }
             }
         }
 
-        private void ReencodeTags_Load(object sender, EventArgs e)
+        private void ReEncodeTags_Load(object sender, EventArgs e)
         {
-            (int, int, int, int, int, int, int) value = loadWindowLayout();
+            var value = loadWindowLayout();
 
             if (value.Item1 != 0)
             {
@@ -471,14 +470,14 @@ namespace MusicBeePlugin
             }
         }
 
-        private void ReencodeTags_FormClosing(object sender, FormClosingEventArgs e)
+        private void ReEncodeTags_FormClosing(object sender, FormClosingEventArgs e)
         {
             saveWindowLayout(previewTable.Columns[1].Width, previewTable.Columns[2].Width);
         }
 
         private void buttonSettings_Click(object sender, EventArgs e)
         {
-            QuickSettings settings = new QuickSettings(TagToolsPlugin);
+            var settings = new QuickSettings(TagToolsPlugin);
             Display(settings, true);
         }
     }

@@ -11,6 +11,9 @@ internal static class NativeMethods
 
     internal const int WS_HSCROLL = 0x00100000;
     internal const int WS_VSCROLL = 0x00200000;
+    internal const int WS_BORDER = 0x00800000;
+    
+    internal const int WS_EX_CLIENTEDGE = 0x00000200;
 
     internal const int EM_LINESCROLL = 0x00B6;
 
@@ -24,6 +27,7 @@ internal static class NativeMethods
 
     internal const int WM_HSCROLL = 0x114;
     internal const int WM_VSCROLL = 0x115;
+    internal const int WM_NCPAINT = 0x0085;
 
     internal const int SB_HORZ = 0;
     internal const int SB_VERT = 1;
@@ -82,7 +86,35 @@ internal static class NativeMethods
 
 
     [DllImport("user32.dll")]
-    internal extern static int SetWindowLong(IntPtr hwnd, int nIndex, uint newLong);
+    internal static extern IntPtr GetWindowDC(IntPtr hWnd);
+    
+    [DllImport("user32.dll")]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    internal static extern bool ReleaseDC(IntPtr hWnd, IntPtr hDC);
+
+    [DllImport("user32.dll")]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    internal static extern bool RedrawWindow(IntPtr hWnd, IntPtr lprcUpdate, IntPtr hrgnUpdate, RedrawWindowFlags flags);
+
+    [Flags()]
+    public enum RedrawWindowFlags : uint
+    {
+        Invalidate = 0X1,
+        InternalPaint = 0X2,
+        Erase = 0X4,
+        Validate = 0X8,
+        NoInternalPaint = 0X10,
+        NoErase = 0X20,
+        NoChildren = 0X40,
+        AllChildren = 0X80,
+        UpdateNow = 0X100,
+        EraseNow = 0X200,
+        Frame = 0X400,
+        NoFrame = 0X800
+    }
+
+    [DllImport("user32.dll")]
+    internal static extern int SetWindowLong(IntPtr hwnd, int nIndex, uint newLong);
 
     [DllImport("user32.dll", EntryPoint = "GetWindowLong")]
     private static extern IntPtr GetWindowLongPtr32(IntPtr hWnd, int nIndex);
@@ -112,7 +144,7 @@ internal static class NativeMethods
 
     internal static void HideScrollBar(IntPtr handle, int wBar)
     {
-        int style = (int)GetWindowLong(handle, GWL_STYLE);
+        var style = (int)GetWindowLong(handle, GWL_STYLE);
 
         if (wBar == SB_HORZ)
             style = style & (~WS_HSCROLL);
@@ -124,9 +156,12 @@ internal static class NativeMethods
         SetWindowLong(handle, GWL_STYLE, (uint)style);
     }
 
+    [DllImport("gdi32.dll", CharSet = CharSet.Auto, SetLastError = true, ExactSpelling = true)]
+    internal static extern int BitBlt(IntPtr hDC, int x, int y, int nWidth, int nHeight, IntPtr hSrcDC, int xSrc, int ySrc, int dwRop);
+
     [DllImport("user32")]
     [return: MarshalAs(UnmanagedType.Bool)]
-    internal extern static bool GetCaretPos(out Point p);
+    internal static extern bool GetCaretPos(out Point p);
 
     [DllImport("user32", CallingConvention = CallingConvention.Winapi)]
     [return: MarshalAs(UnmanagedType.Bool)]

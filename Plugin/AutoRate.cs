@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Threading;
 using System.Windows.Forms;
 using static MusicBeePlugin.Plugin;
 
@@ -13,7 +14,7 @@ namespace MusicBeePlugin
         private CustomComboBox playsPerDayTagListCustom;
 
 
-        private string[] files = new string[0];
+        private string[] files = Array.Empty<string>();
 
         private static int NumberOfFiles;
         private decimal actSumOfPercentage;
@@ -27,13 +28,13 @@ namespace MusicBeePlugin
         {
             if (SavedSettings.calculateThresholdsAtStartUp || SavedSettings.autoRateAtStartUp)
             {
-                using (AutoRate tagToolsForm = new AutoRate(plugin))
+                using (var tagToolsForm = new AutoRate(plugin))
                     tagToolsForm.switchOperation(tagToolsForm.onStartup, EmptyButton, EmptyButton, EmptyButton, EmptyButton, true, null);
             }
 
             if (SavedSettings.calculateAlbumRatingAtStartUp)
             {
-                using (CalculateAverageAlbumRating tagToolsForm = new CalculateAverageAlbumRating(plugin))
+                using (var tagToolsForm = new CalculateAverageAlbumRating(plugin))
                     tagToolsForm.calculateAlbumRatingForAllTracks();
             }
         }
@@ -104,10 +105,10 @@ namespace MusicBeePlugin
             playsPerDayTagListCustom.Text = GetTagName(SavedSettings.playsPerDayTagId);
 
             storePlaysPerDayCheckBox.Checked = SavedSettings.storePlaysPerDay;
-
             autoRateAtStartUpCheckBox.Checked = SavedSettings.autoRateAtStartUp;
-            notifyWhenAutoratingCompletedCheckBox.Checked = SavedSettings.notifyWhenAutoratingCompleted;
+            notifyWhenAutoRatingCompletedCheckBox.Checked = SavedSettings.notifyWhenAutoratingCompleted;
             calculateThresholdsAtStartUpCheckBox.Checked = SavedSettings.calculateThresholdsAtStartUp;
+
             autoRateOnTrackPropertiesCheckBox.Checked = SavedSettings.autoRateOnTrackProperties;
             baseRatingTrackBar.Value = SavedSettings.defaultRating;
 
@@ -145,7 +146,13 @@ namespace MusicBeePlugin
             perCent1UpDown.Value = SavedSettings.perCent1;
             perCent05UpDown.Value = SavedSettings.perCent05;
 
-            getStatistics();
+            maxPlaysPerDayBox.Text = CtlAutoRateCalculating;
+            avgPlaysPerDayBox.Text = CtlAutoRateCalculating;
+            labelTotalTracks.Text = CtlAutoRateCalculating;
+
+            Thread statistics = new Thread(getStatistics);
+            statistics.Start();
+
             calcActSumOfPercentage();
 
             perCentN_ValueChanged(perCent5UpDown, checkBox5, perCentLabel5, SavedSettings.actualPerCent5);
@@ -295,12 +302,13 @@ namespace MusicBeePlugin
 
         internal static void AutoRateLive(string currentFile)
         {
-            MetaDataType autoRateTagId = SavedSettings.autoRateTagId;
-            MetaDataType playsPerDayTagId = SavedSettings.playsPerDayTagId;
+            var autoRateTagId = SavedSettings.autoRateTagId;
+            var playsPerDayTagId = SavedSettings.playsPerDayTagId;
 
             int autoRating;
-            double playsPerDay = GetPlaysPerDay(currentFile);
+            var playsPerDay = GetPlaysPerDay(currentFile);
 
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (playsPerDay == -1)
                 autoRating = SavedSettings.defaultRating;
             else
@@ -341,20 +349,18 @@ namespace MusicBeePlugin
 
         internal void autoRateOnStartup()
         {
-            string currentFile;
-
             files = null;
             if (!MbApiInterface.Library_QueryFilesEx("domain=Library", out files))
-                files = new string[0];
+                files = Array.Empty<string>();
 
-            for (int fileCounter = 0; fileCounter < files.Length; fileCounter++)
+            for (var fileCounter = 0; fileCounter < files.Length; fileCounter++)
             {
                 if (backgroundTaskIsCanceled)
                     return;
 
-                currentFile = files[fileCounter];
+                var currentFile = files[fileCounter];
 
-                SetStatusbarTextForFileOperations(AutoRateSbText, false, fileCounter, files.Length, currentFile);
+                SetStatusBarTextForFileOperations(AutoRateSbText, false, fileCounter, files.Length, currentFile);
 
                 AutoRateLive(currentFile);
             }
@@ -374,7 +380,7 @@ namespace MusicBeePlugin
 
             files = null;
             if (!MbApiInterface.Library_QueryFilesEx("domain=SelectedFiles", out files))
-                files = new string[0];
+                files = Array.Empty<string>();
 
             if (files.Length == 0)
             {
@@ -389,16 +395,14 @@ namespace MusicBeePlugin
 
         private void autoRateNow()
         {
-            string currentFile;
-
-            for (int fileCounter = 0; fileCounter < files.Length; fileCounter++)
+            for (var fileCounter = 0; fileCounter < files.Length; fileCounter++)
             {
                 if (backgroundTaskIsCanceled)
                     return;
 
-                currentFile = files[fileCounter];
+                var currentFile = files[fileCounter];
 
-                SetStatusbarTextForFileOperations(AutoRateSbText, false, fileCounter, files.Length, currentFile);
+                SetStatusBarTextForFileOperations(AutoRateSbText, false, fileCounter, files.Length, currentFile);
 
                 AutoRateLive(currentFile);
             }
@@ -408,18 +412,27 @@ namespace MusicBeePlugin
 
         private static double GetPlaysPerDay(string currentFile)
         {
-            double daysSinceAdded = 0;
-            double daysSinceLastPlayed = 0;
+            double daysSinceAdded;
+            double daysSinceLastPlayed;
 
-            int played = Convert.ToInt32(MbApiInterface.Library_GetFileProperty(currentFile, FilePropertyType.PlayCount));
-            int skipped = Convert.ToInt32(MbApiInterface.Library_GetFileProperty(currentFile, FilePropertyType.SkipCount));
+            var played = Convert.ToInt32(MbApiInterface.Library_GetFileProperty(currentFile, FilePropertyType.PlayCount));
+            var skipped = Convert.ToInt32(MbApiInterface.Library_GetFileProperty(currentFile, FilePropertyType.SkipCount));
             double derivedPlayed = played - skipped;
 
             if (derivedPlayed < 0)
                 derivedPlayed = 0;
 
-            try { daysSinceAdded = (DateTime.Parse(string.Empty + MbApiInterface.Library_GetFileProperty(currentFile, FilePropertyType.DateAdded)) - DateTime.Now).TotalDays; }
-            catch (FormatException) { daysSinceAdded = 0; }
+            try
+            {
+                daysSinceAdded =
+                    (DateTime.Parse(string.Empty +
+                                    MbApiInterface.Library_GetFileProperty(currentFile, FilePropertyType.DateAdded)) -
+                     DateTime.Now).TotalDays;
+            }
+            catch (FormatException)
+            {
+                daysSinceAdded = 0;
+            }
 
             try
             {
@@ -430,7 +443,7 @@ namespace MusicBeePlugin
             }
             catch (FormatException) { daysSinceLastPlayed = 0; }
 
-            double daysPlayed = daysSinceLastPlayed - daysSinceAdded;
+            var daysPlayed = daysSinceLastPlayed - daysSinceAdded;
 
             if (daysPlayed < 0)
                 daysPlayed = 0;
@@ -443,7 +456,7 @@ namespace MusicBeePlugin
 
         private void getStatistics()
         {
-            string currentFile;
+            Thread.CurrentThread.Priority = ThreadPriority.Lowest;
 
             double totalPlaysPerDay = 0;
             NumberOfFiles = 0;
@@ -453,14 +466,15 @@ namespace MusicBeePlugin
 
             files = null;
             if (!MbApiInterface.Library_QueryFilesEx("domain=Library", out files))
-                files = new string[0];
+                files = Array.Empty<string>();
 
-            for (int fileCounter = 0; fileCounter < files.Length; fileCounter++)
+            for (var fileCounter = 0; fileCounter < files.Length; fileCounter++)
             {
-                currentFile = files[fileCounter];
+                var currentFile = files[fileCounter];
 
-                double playsPerDay = GetPlaysPerDay(currentFile);
+                var playsPerDay = GetPlaysPerDay(currentFile);
 
+                // ReSharper disable once CompareOfFloatsByEqualityOperator
                 if (playsPerDay != -1)
                 {
                     NumberOfFiles++;
@@ -476,9 +490,16 @@ namespace MusicBeePlugin
                 avgPlaysPerDay = totalPlaysPerDay / NumberOfFiles;
             }
 
-            maxPlaysPerDayBox.Text = ConvertDoubleToString(maxPlaysPerDay);
-            avgPlaysPerDayBox.Text = ConvertDoubleToString(avgPlaysPerDay);
-            labelTotalTracks.Text = MsgNumberOfPlayedTracks + NumberOfFiles;
+
+            Invoke(new Action(() =>
+            {
+                maxPlaysPerDayBox.Text = ConvertDoubleToString(maxPlaysPerDay);
+                avgPlaysPerDayBox.Text = ConvertDoubleToString(avgPlaysPerDay);
+                labelTotalTracks.Text = MsgNumberOfPlayedTracks + NumberOfFiles;
+            }));
+
+            if (!SavedSettings.dontPlayCompletedSound)
+                System.Media.SystemSounds.Asterisk.Play();
         }
 
         internal void onStartup()
@@ -489,29 +510,28 @@ namespace MusicBeePlugin
 
         internal void calculateThresholds()
         {
-            string currentFile;
-
             NumberOfFiles = 0;
-            SortedDictionary<double, int> playsPerDayStatistics = new SortedDictionary<double, int>();
+            var playsPerDayStatistics = new SortedDictionary<double, int>();
 
             files = null;
             if (!MbApiInterface.Library_QueryFilesEx("domain=Library", out files))
-                files = new string[0];
+                files = Array.Empty<string>();
 
-            for (int fileCounter = 0; fileCounter < files.Length; fileCounter++)
+            for (var fileCounter = 0; fileCounter < files.Length; fileCounter++)
             {
                 if (backgroundTaskIsCanceled)
                     return;
 
-                currentFile = files[fileCounter];
+                var currentFile = files[fileCounter];
 
-                double playsPerDay = GetPlaysPerDay(currentFile);
+                var playsPerDay = GetPlaysPerDay(currentFile);
 
+                // ReSharper disable once CompareOfFloatsByEqualityOperator
                 if (playsPerDay != -1)
                 {
                     NumberOfFiles++;
 
-                    if (playsPerDayStatistics.TryGetValue(-playsPerDay, out int statistics))
+                    if (playsPerDayStatistics.TryGetValue(-playsPerDay, out var statistics))
                         playsPerDayStatistics.Remove(-playsPerDay);
 
                     playsPerDayStatistics.Add(-playsPerDay, ++statistics);
@@ -540,15 +560,15 @@ namespace MusicBeePlugin
             SavedSettings.actualPerCent1 = -1;
             SavedSettings.actualPerCent05 = -1;
 
-            int statisticsSum = 0;
-            int assignedFilesNumber = 0;
+            var statisticsSum = 0;
+            var assignedFilesNumber = 0;
 
-            foreach (double playsPerDay in playsPerDayStatistics.Keys)
+            foreach (var playsPerDay in playsPerDayStatistics.Keys)
             {
                 if (backgroundTaskIsCanceled)
                     return;
 
-                playsPerDayStatistics.TryGetValue(playsPerDay, out int statistics);
+                playsPerDayStatistics.TryGetValue(playsPerDay, out var statistics);
                 statisticsSum += statistics;
 
                 if (SavedSettings.perCent5 != 0 && SavedSettings.threshold5 == 0)
@@ -729,7 +749,7 @@ namespace MusicBeePlugin
             SavedSettings.playsPerDayTagId = GetTagId(playsPerDayTagListCustom.Text);
 
             SavedSettings.autoRateAtStartUp = autoRateAtStartUpCheckBox.Checked;
-            SavedSettings.notifyWhenAutoratingCompleted = notifyWhenAutoratingCompletedCheckBox.Checked;
+            SavedSettings.notifyWhenAutoratingCompleted = notifyWhenAutoRatingCompletedCheckBox.Checked;
             SavedSettings.calculateThresholdsAtStartUp = calculateThresholdsAtStartUpCheckBox.Checked;
             SavedSettings.autoRateOnTrackProperties = autoRateOnTrackPropertiesCheckBox.Checked;
             SavedSettings.defaultRating = baseRatingTrackBar.Value;
@@ -925,13 +945,13 @@ namespace MusicBeePlugin
             if (actualPerCent == -1)
             {
                 perCentLabel.Text = "% (~" + Math.Round(NumberOfFiles * perCent.Value / 100, 0) + MsgTracks;
-                Font font = new Font(perCentLabel.Font, FontStyle.Regular);
+                var font = new Font(perCentLabel.Font, FontStyle.Regular);
                 perCentLabel.Font = font;
             }
             else
             {
                 perCentLabel.Text = MsgActualPercent + actualPerCent + "% (~" + Math.Round(NumberOfFiles * actualPerCent / 100, 0) + MsgTracks;
-                Font font = new Font(perCentLabel.Font, FontStyle.Bold);
+                var font = new Font(perCentLabel.Font, FontStyle.Bold);
                 perCentLabel.Font = font;
             }
         }
@@ -1024,7 +1044,7 @@ namespace MusicBeePlugin
 
         private void autoRateAtStartUp_CheckedChanged(object sender, EventArgs e)
         {
-            notifyWhenAutoratingCompletedCheckBox.Enable(autoRateAtStartUpCheckBox.Checked);
+            notifyWhenAutoRatingCompletedCheckBox.Enable(autoRateAtStartUpCheckBox.Checked);
         }
 
         private void autoRateAtStartUpCheckBoxLabel_Click(object sender, EventArgs e)
@@ -1089,17 +1109,17 @@ namespace MusicBeePlugin
             sinceAddedCheckBox.Checked = !sinceAddedCheckBox.Checked;
         }
 
-        private void notifyWhenAutoratingCompletedCheckBoxLabel_Click(object sender, EventArgs e)
+        private void notifyWhenAutoRatingCompletedCheckBoxLabel_Click(object sender, EventArgs e)
         {
-            if (!notifyWhenAutoratingCompletedCheckBox.IsEnabled())
+            if (!notifyWhenAutoRatingCompletedCheckBox.IsEnabled())
                 return;
 
-            notifyWhenAutoratingCompletedCheckBox.Checked = !notifyWhenAutoratingCompletedCheckBox.Checked;
+            notifyWhenAutoRatingCompletedCheckBox.Checked = !notifyWhenAutoRatingCompletedCheckBox.Checked;
         }
 
         private void buttonSettings_Click(object sender, EventArgs e)
         {
-            QuickSettings settings = new QuickSettings(TagToolsPlugin);
+            var settings = new QuickSettings(TagToolsPlugin);
             Display(settings, true);
         }
     }

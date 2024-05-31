@@ -244,7 +244,7 @@
     <value>0, 168</value>
   </data>
   <data name="tagSetComboBox.ToolTip" xml:space="preserve">
-    <value>Choosed tags will be automatically saved for selected tag set. 
+    <value>Chosen tags will be automatically saved for selected tag set. 
 To rename tag set just type new name in this box. </value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">

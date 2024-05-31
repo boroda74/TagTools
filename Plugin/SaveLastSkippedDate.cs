@@ -23,7 +23,7 @@ namespace MusicBeePlugin
             lastSkippedDateFormatTagListCustom = namesComboBoxes["lastSkippedDateFormatTagList"];
 
 
-            DateTime sampleDateTime = new DateTime(2022, 12, 31, 14, 30, 15);
+            var sampleDateTime = new DateTime(2022, 12, 31, 14, 30, 15);
             lastSkippedDateFormatTagListCustom.Items.Add(sampleDateTime.ToString("d"));
             lastSkippedDateFormatTagListCustom.Items.Add(sampleDateTime.ToString("g"));
             lastSkippedDateFormatTagListCustom.Items.Add(sampleDateTime.ToString("G"));

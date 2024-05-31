@@ -2,6 +2,7 @@
 using System;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using MusicBeePlugin.Properties;
 using static MusicBeePlugin.Plugin;
 
 namespace MusicBeePlugin
@@ -89,9 +90,9 @@ namespace MusicBeePlugin
             showCopyTagCheckBox.Checked = !SavedSettings.dontShowCopyTag;
             showSwapTagsCheckBox.Checked = !SavedSettings.dontShowSwapTags;
             showChangeCaseCheckBox.Checked = !SavedSettings.dontShowChangeCase;
-            showReencodeTagCheckBox.Checked = !SavedSettings.dontShowReencodeTag;
+            showReEncodeTagCheckBox.Checked = !SavedSettings.dontShowReEncodeTag;
             showLibraryReportsCheckBox.Checked = !SavedSettings.dontShowLibraryReports;
-            showAutorateCheckBox.Checked = !SavedSettings.dontShowAutorate;
+            showAutoRateCheckBox.Checked = !SavedSettings.dontShowAutoRate;
             showAsrCheckBox.Checked = !SavedSettings.dontShowAsr;
             showCARCheckBox.Checked = !SavedSettings.dontShowCAR;
             showCTCheckBox.Checked = !SavedSettings.dontShowCT;
@@ -120,7 +121,7 @@ namespace MusicBeePlugin
                     );
             }
 
-            customFontTextBox.Text = customFont.Name + " " + customFont.Style + " " + customFont.Size + " pt";
+            customFontTextBox.Text = customFont.Name + Resources.Space + customFont.Style  + Resources.Space + customFont.Size + Resources.FontPt;
             customFontTextBox.Text = customFontTextBox.Text.Replace(", ", " ").Replace("bold Bold", "bold");
             customFontButton.Enable(useCustomFontCheckBox.Checked);
 
@@ -145,7 +146,7 @@ namespace MusicBeePlugin
 
         private void saveSettings()
         {
-            bool sizesColorsChanged = false;
+            var sizesColorsChanged = false;
 
             if (SavedSettings.dontUseSkinColors == useSkinColorsCheckBox.Checked)
                 sizesColorsChanged = true;
@@ -155,7 +156,7 @@ namespace MusicBeePlugin
                 sizesColorsChanged = true;
             else if (SavedSettings.useCustomFont && SavedSettings.pluginFontFamilyName != customFont.FontFamily.Name)
                 sizesColorsChanged = true;
-            else if (SavedSettings.useCustomFont && SavedSettings.pluginFontSize != customFont.Size)
+            else if (SavedSettings.useCustomFont && Math.Abs(SavedSettings.pluginFontSize - customFont.Size) < 0.5)
                 sizesColorsChanged = true;
             else if (SavedSettings.useCustomFont && SavedSettings.pluginFontStyle != customFont.Style)
                 sizesColorsChanged = true;
@@ -168,9 +169,9 @@ namespace MusicBeePlugin
             SavedSettings.dontShowCopyTag = !showCopyTagCheckBox.Checked;
             SavedSettings.dontShowSwapTags = !showSwapTagsCheckBox.Checked;
             SavedSettings.dontShowChangeCase = !showChangeCaseCheckBox.Checked;
-            SavedSettings.dontShowReencodeTag = !showReencodeTagCheckBox.Checked;
+            SavedSettings.dontShowReEncodeTag = !showReEncodeTagCheckBox.Checked;
             SavedSettings.dontShowLibraryReports = !showLibraryReportsCheckBox.Checked;
-            SavedSettings.dontShowAutorate = !showAutorateCheckBox.Checked;
+            SavedSettings.dontShowAutoRate = !showAutoRateCheckBox.Checked;
             SavedSettings.dontShowAsr = !showAsrCheckBox.Checked;
             SavedSettings.dontShowCAR = !showCARCheckBox.Checked;
             SavedSettings.dontShowCT = !showCTCheckBox.Checked;
@@ -233,7 +234,7 @@ namespace MusicBeePlugin
 
         private void saveLastSkippedButton_Click(object sender, EventArgs e)
         {
-            SaveLastSkippedDate tagToolsForm = new SaveLastSkippedDate(TagToolsPlugin);
+            var tagToolsForm = new SaveLastSkippedDate(TagToolsPlugin);
             Display(tagToolsForm, true);
         }
 
@@ -267,9 +268,9 @@ namespace MusicBeePlugin
             showChangeCaseCheckBox.Checked = !showChangeCaseCheckBox.Checked;
         }
 
-        private void showReencodeTagCheckBoxLabel_Click(object sender, EventArgs e)
+        private void showReEncodeTagCheckBoxLabel_Click(object sender, EventArgs e)
         {
-            showReencodeTagCheckBox.Checked = !showReencodeTagCheckBox.Checked;
+            showReEncodeTagCheckBox.Checked = !showReEncodeTagCheckBox.Checked;
         }
 
         private void showLibraryReportsCheckBoxLabel_Click(object sender, EventArgs e)
@@ -277,9 +278,9 @@ namespace MusicBeePlugin
             showLibraryReportsCheckBox.Checked = !showLibraryReportsCheckBox.Checked;
         }
 
-        private void showAutorateCheckBoxLabel_Click(object sender, EventArgs e)
+        private void showAutoRateCheckBoxLabel_Click(object sender, EventArgs e)
         {
-            showAutorateCheckBox.Checked = !showAutorateCheckBox.Checked;
+            showAutoRateCheckBox.Checked = !showAutoRateCheckBox.Checked;
         }
 
         private void showAsrCheckBoxLabel_Click(object sender, EventArgs e)
@@ -345,7 +346,7 @@ namespace MusicBeePlugin
 
         private void customFontButton_Click(object sender, EventArgs e)
         {
-            FontDialog customFontDialog = new FontDialog();
+            var customFontDialog = new FontDialog();
             customFontDialog.Font = customFont;
             customFontDialog.ShowApply = false;
             customFontDialog.FontMustExist = true;
@@ -360,7 +361,7 @@ namespace MusicBeePlugin
             {
                 customFont.Dispose();
                 customFont = customFontDialog.Font.Clone() as System.Drawing.Font;
-                customFontTextBox.Text = customFont.Name + " " + customFont.Style + " " + customFont.Size + " pt";
+                customFontTextBox.Text = customFont.Name  + Resources.Space + customFont.Style  + Resources.Space + customFont.Size + Resources.FontPt;
                 customFontTextBox.Text = customFontTextBox.Text.Replace(", ", " ").Replace("bold Bold", "bold");
             }
         }

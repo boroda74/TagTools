@@ -176,7 +176,7 @@
   <data name="label8.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;showReencodeTagCheckBoxLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;showReEncodeTagCheckBoxLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;includePreservedTagValuesCheckBox.Type" xml:space="preserve">
@@ -270,7 +270,7 @@
   <data name="&gt;&gt;showHiddenCommandWindowsRadioButtonLabel.Name" xml:space="preserve">
     <value>showHiddenCommandWindowsRadioButtonLabel</value>
   </data>
-  <data name="showAutorateCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+  <data name="showAutoRateCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="allowAsrLrPresetAutoExecutionCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
@@ -306,7 +306,7 @@
   <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>
   </data>
-  <data name="showReencodeTagCheckBoxLabel.ToolTip" xml:space="preserve">
+  <data name="showReEncodeTagCheckBoxLabel.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="closeHiddenCommandWindowsRadioButtonLabel.Text" xml:space="preserve">
@@ -402,7 +402,7 @@
   <data name="customFontTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>193, 23</value>
   </data>
-  <data name="showReencodeTagCheckBox.Text" xml:space="preserve">
+  <data name="showReEncodeTagCheckBox.Text" xml:space="preserve">
     <value> </value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
@@ -462,7 +462,7 @@
   <data name="legendLabel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI Semibold, 9pt, style=Bold</value>
   </data>
-  <data name="showReencodeTagCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+  <data name="showReEncodeTagCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="&gt;&gt;buttonCancel.Type" xml:space="preserve">
@@ -477,7 +477,7 @@
   <data name="legendGroupBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 7, 3</value>
   </data>
-  <data name="&gt;&gt;showAutorateCheckBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;showAutoRateCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="showShowHiddenWindowsCheckBox.Text" xml:space="preserve">
@@ -618,7 +618,7 @@
   <data name="&gt;&gt;showCopyTagCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="showAutorateCheckBox.Text" xml:space="preserve">
+  <data name="showAutoRateCheckBox.Text" xml:space="preserve">
     <value> </value>
   </data>
   <data name="useCustomFontCheckBox.TabIndex" type="System.Int32, mscorlib">
@@ -726,7 +726,7 @@
   <data name="groupBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>7, 6, 7, 3</value>
   </data>
-  <data name="showReencodeTagCheckBox.ToolTip" xml:space="preserve">
+  <data name="showReEncodeTagCheckBox.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="showCopyTagCheckBox.AutoSize" type="System.Boolean, mscorlib">
@@ -738,7 +738,7 @@
   <data name="&gt;&gt;showCARCheckBox.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
-  <data name="&gt;&gt;showAutorateCheckBoxLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;showAutoRateCheckBoxLabel.Parent" xml:space="preserve">
     <value>groupBox1</value>
   </data>
   <data name="includePreservedTagValuesCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
@@ -873,7 +873,7 @@
   <data name="versionLabel.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="showReencodeTagCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="showReEncodeTagCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 19</value>
   </data>
   <data name="&gt;&gt;showChangeCaseCheckBoxLabel.Name" xml:space="preserve">
@@ -927,7 +927,7 @@
   <data name="&gt;&gt;includeNotChangedTagsCheckBox.Parent" xml:space="preserve">
     <value>groupBox5</value>
   </data>
-  <data name="showAutorateCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+  <data name="showAutoRateCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
   </data>
   <data name="playTickedAsrPresetSoundCheckBox.TabIndex" type="System.Int32, mscorlib">
@@ -1062,7 +1062,7 @@
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>7, 15</value>
   </data>
-  <data name="&gt;&gt;showReencodeTagCheckBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;showReEncodeTagCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="useMusicBeeFontCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
@@ -1113,7 +1113,7 @@
   <data name="&gt;&gt;useCustomFontCheckBox.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
-  <data name="showAutorateCheckBox.AutoSize" type="System.Boolean, mscorlib">
+  <data name="showAutoRateCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="&gt;&gt;playTickedAsrPresetSoundCheckBox.Type" xml:space="preserve">
@@ -1176,7 +1176,7 @@
   <data name="showCTCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="showReencodeTagCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="showReEncodeTagCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 84</value>
   </data>
   <data name="&gt;&gt;showCARCheckBoxLabel.Name" xml:space="preserve">
@@ -1257,7 +1257,7 @@
   <data name="showAsrCheckBoxLabel.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="showAutorateCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="showAutoRateCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 19</value>
   </data>
   <data name="&gt;&gt;buttonOK.ZOrder" xml:space="preserve">
@@ -1296,10 +1296,10 @@
   <data name="includeNotChangedTagsCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="showReencodeTagCheckBox.AutoSize" type="System.Boolean, mscorlib">
+  <data name="showReEncodeTagCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="showAutorateCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="showAutoRateCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="&gt;&gt;contextMenuCheckBoxLabel.Parent" xml:space="preserve">
@@ -1404,7 +1404,7 @@
   <data name="label2.Text" xml:space="preserve">
     <value>Unit of thousands (e.g. "K" for "Kilo"):</value>
   </data>
-  <data name="&gt;&gt;showAutorateCheckBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;showAutoRateCheckBox.ZOrder" xml:space="preserve">
     <value>17</value>
   </data>
   <data name="showLibraryReportsCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -1446,10 +1446,10 @@
   <data name="useCustomFontCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>107, 15</value>
   </data>
-  <data name="&gt;&gt;showReencodeTagCheckBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;showReEncodeTagCheckBox.Parent" xml:space="preserve">
     <value>groupBox1</value>
   </data>
-  <data name="showAutorateCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="showAutoRateCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>165, 15</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
@@ -1497,8 +1497,8 @@
   <data name="&gt;&gt;versionLabel.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;showReencodeTagCheckBox.Name" xml:space="preserve">
-    <value>showReencodeTagCheckBox</value>
+  <data name="&gt;&gt;showReEncodeTagCheckBox.Name" xml:space="preserve">
+    <value>showReEncodeTagCheckBox</value>
   </data>
   <data name="playStartedSoundCheckBoxLabel.Text" xml:space="preserve">
     <value>Play system "Exclamation" sound when background task is started</value>
@@ -1512,7 +1512,7 @@
   <data name="&gt;&gt;useSkinColorsCheckBox.Parent" xml:space="preserve">
     <value>groupBox2</value>
   </data>
-  <data name="&gt;&gt;showAutorateCheckBoxLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;showAutoRateCheckBoxLabel.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
   <data name="showCARCheckBox.Size" type="System.Drawing.Size, System.Drawing">
@@ -1539,8 +1539,8 @@
   <data name="minimizePluginWindowsCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="&gt;&gt;showAutorateCheckBox.Name" xml:space="preserve">
-    <value>showAutorateCheckBox</value>
+  <data name="&gt;&gt;showAutoRateCheckBox.Name" xml:space="preserve">
+    <value>showAutoRateCheckBox</value>
   </data>
   <data name="&gt;&gt;highlightChangedTagsCheckBoxLabel.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -1557,8 +1557,8 @@
   <data name="label4.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;showAutorateCheckBoxLabel.Name" xml:space="preserve">
-    <value>showAutorateCheckBoxLabel</value>
+  <data name="&gt;&gt;showAutoRateCheckBoxLabel.Name" xml:space="preserve">
+    <value>showAutoRateCheckBoxLabel</value>
   </data>
   <data name="legendLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1755,7 +1755,7 @@
   <data name="&gt;&gt;unitMBox.Name" xml:space="preserve">
     <value>unitMBox</value>
   </data>
-  <data name="showAutorateCheckBox.TabIndex" type="System.Int32, mscorlib">
+  <data name="showAutoRateCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
   </data>
   <data name="&gt;&gt;tabControl1.Type" xml:space="preserve">
@@ -1821,7 +1821,7 @@
   <data name="contextMenuCheckBox.Text" xml:space="preserve">
     <value> </value>
   </data>
-  <data name="showReencodeTagCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="showReEncodeTagCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>27, 84</value>
   </data>
   <data name="buttonsPanel.TabIndex" type="System.Int32, mscorlib">
@@ -1941,7 +1941,7 @@
   <data name="saveLastSkippedButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>338, 6</value>
   </data>
-  <data name="&gt;&gt;showAutorateCheckBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;showAutoRateCheckBox.Parent" xml:space="preserve">
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;allowCommandExecutionWithoutPreviewCheckBoxLabel.Type" xml:space="preserve">
@@ -1972,7 +1972,7 @@
     <value>Enable "Compare Tracks" command</value>
   </data>
   <data name="label11.Text" xml:space="preserve">
-    <value> "Library Reports" command (not required for English Windows localization, case insensitive) </value>
+    <value> "Library Reports" command (not required for English Windows localization, case-insensitive) </value>
   </data>
   <data name="playStoppedSoundCheckBoxLabel.ToolTip" xml:space="preserve">
     <value />
@@ -2004,7 +2004,7 @@
   <data name="&gt;&gt;useMusicBeeFontCheckBox.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
-  <data name="showAutorateCheckBoxLabel.Text" xml:space="preserve">
+  <data name="showAutoRateCheckBoxLabel.Text" xml:space="preserve">
     <value>Enable "Auto Rate" command</value>
   </data>
   <data name="showHiddenCommandWindowsRadioButton.Location" type="System.Drawing.Point, System.Drawing">
@@ -2022,7 +2022,7 @@
   <data name="label5.Text" xml:space="preserve">
     <value>**  Plugin windows reopening is required for the changed settings to take effect</value>
   </data>
-  <data name="&gt;&gt;showReencodeTagCheckBoxLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;showReEncodeTagCheckBoxLabel.ZOrder" xml:space="preserve">
     <value>20</value>
   </data>
   <data name="&gt;&gt;contextMenuCheckBoxLabel.Type" xml:space="preserve">
@@ -2055,7 +2055,7 @@
   <data name="&gt;&gt;useCustomFontCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="showAutorateCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="showAutoRateCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>27, 126</value>
   </data>
   <data name="&gt;&gt;buttonsPanel.Type" xml:space="preserve">
@@ -2217,11 +2217,11 @@
   <data name="&gt;&gt;allowAsrLrPresetAutoExecutionCheckBoxLabel.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;showReencodeTagCheckBoxLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;showReEncodeTagCheckBoxLabel.Parent" xml:space="preserve">
     <value>groupBox1</value>
   </data>
-  <data name="&gt;&gt;showReencodeTagCheckBoxLabel.Name" xml:space="preserve">
-    <value>showReencodeTagCheckBoxLabel</value>
+  <data name="&gt;&gt;showReEncodeTagCheckBoxLabel.Name" xml:space="preserve">
+    <value>showReEncodeTagCheckBoxLabel</value>
   </data>
   <data name="label5.ToolTip" xml:space="preserve">
     <value />
@@ -2262,7 +2262,7 @@
   <data name="&gt;&gt;label11.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="showAutorateCheckBox.ToolTip" xml:space="preserve">
+  <data name="showAutoRateCheckBox.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="&gt;&gt;showSwapTagsCheckBoxLabel.Parent" xml:space="preserve">
@@ -2334,7 +2334,7 @@
   <data name="preservedTagValuesLegendTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="showReencodeTagCheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="showReEncodeTagCheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="showChangeCaseCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -2478,7 +2478,7 @@
   <data name="&gt;&gt;customFontButton.Name" xml:space="preserve">
     <value>customFontButton</value>
   </data>
-  <data name="showAutorateCheckBoxLabel.ToolTip" xml:space="preserve">
+  <data name="showAutoRateCheckBoxLabel.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="$this.Text" xml:space="preserve">
@@ -2580,10 +2580,10 @@
   <data name="playStoppedSoundCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 19</value>
   </data>
-  <data name="showAutorateCheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="showAutoRateCheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="showReencodeTagCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="showReEncodeTagCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>204, 15</value>
   </data>
   <data name="&gt;&gt;closeHiddenCommandWindowsRadioButtonLabel.Name" xml:space="preserve">
@@ -2775,7 +2775,7 @@
   <data name="&gt;&gt;contextMenuCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;showReencodeTagCheckBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;showReEncodeTagCheckBox.ZOrder" xml:space="preserve">
     <value>21</value>
   </data>
   <data name="&gt;&gt;tabPage2.ZOrder" xml:space="preserve">
@@ -2793,7 +2793,7 @@
   <data name="versionLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>7, 0, 3, 11</value>
   </data>
-  <data name="&gt;&gt;showAutorateCheckBoxLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;showAutoRateCheckBoxLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="buttonsPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -2883,7 +2883,7 @@
   <data name="contextMenuCheckBoxLabel.Text" xml:space="preserve">
     <value>Show commands in context menu</value>
   </data>
-  <data name="showReencodeTagCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+  <data name="showReEncodeTagCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
   <data name="&gt;&gt;showCTCheckBoxLabel.Name" xml:space="preserve">
@@ -2928,7 +2928,7 @@
   <data name="&gt;&gt;unitsPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="showReencodeTagCheckBoxLabel.Text" xml:space="preserve">
+  <data name="showReEncodeTagCheckBoxLabel.Text" xml:space="preserve">
     <value>Enable "Reencode Tag(s)" commands</value>
   </data>
   <data name="playTickedAsrPresetSoundCheckBox.ToolTip" xml:space="preserve">
@@ -2973,7 +2973,7 @@
   <data name="&gt;&gt;customFontButton.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="showReencodeTagCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="showReEncodeTagCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="showHiddenCommandWindowsRadioButtonLabel.ToolTip" xml:space="preserve">
@@ -3033,7 +3033,7 @@
   <data name="&gt;&gt;label4.Parent" xml:space="preserve">
     <value>groupBox4</value>
   </data>
-  <data name="showAutorateCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="showAutoRateCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 126</value>
   </data>
   <data name="&gt;&gt;label10.Parent" xml:space="preserve">
@@ -3060,7 +3060,7 @@
   <data name="&gt;&gt;showCopyTagCheckBoxLabel.Parent" xml:space="preserve">
     <value>groupBox1</value>
   </data>
-  <data name="showReencodeTagCheckBox.TabIndex" type="System.Int32, mscorlib">
+  <data name="showReEncodeTagCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
   <data name="playTickedAsrPresetSoundCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">

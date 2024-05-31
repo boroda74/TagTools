@@ -31,12 +31,12 @@ namespace MusicBeePlugin
             }
             else if (presetCheckStatusIsSenseless && !presetCheckStatusIsBroken)
             {
-                toolTip1.SetToolTip(useAnotherPresetAsSourceCheckBox, UseAnotherPresetAsSourceToolTip + "\n\n" + UseAnotherPresetAsSourceIsSenselessToolTip.ToUpper() +
-                    "\n\n" + UseAnotherPresetAsSourceCheckPresetChainToolTip.ToUpper());
-                toolTip1.SetToolTip(useAnotherPresetAsSourceCheckBoxLabel, UseAnotherPresetAsSourceToolTip + "\n\n" + UseAnotherPresetAsSourceIsSenselessToolTip.ToUpper() +
-                    "\n\n" + UseAnotherPresetAsSourceCheckPresetChainToolTip.ToUpper());
-                toolTip1.SetToolTip(presetChainIsWrongPictureBox, UseAnotherPresetAsSourceToolTip + "\n\n" + UseAnotherPresetAsSourceIsSenselessToolTip.ToUpper() +
-                    "\n\n" + UseAnotherPresetAsSourceCheckPresetChainToolTip.ToUpper());
+                toolTip1.SetToolTip(useAnotherPresetAsSourceCheckBox, UseAnotherPresetAsSourceToolTip + Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceIsSenselessToolTip.ToUpper() +
+                    Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceCheckPresetChainToolTip.ToUpper());
+                toolTip1.SetToolTip(useAnotherPresetAsSourceCheckBoxLabel, UseAnotherPresetAsSourceToolTip + Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceIsSenselessToolTip.ToUpper() +
+                    Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceCheckPresetChainToolTip.ToUpper());
+                toolTip1.SetToolTip(presetChainIsWrongPictureBox, UseAnotherPresetAsSourceToolTip + Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceIsSenselessToolTip.ToUpper() +
+                    Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceCheckPresetChainToolTip.ToUpper());
                 presetChainIsWrongPictureBox.Image = error;
                 SetComboBoxCue(foundPresetRefs, selectedPresetRef.name);
 
@@ -44,12 +44,12 @@ namespace MusicBeePlugin
             }
             else if (!presetCheckStatusIsSenseless && presetCheckStatusIsBroken)
             {
-                toolTip1.SetToolTip(useAnotherPresetAsSourceCheckBox, UseAnotherPresetAsSourceToolTip + "\n\n" + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper() +
-                    "\n\n" + UseAnotherPresetAsSourceCheckPresetChainToolTip.ToUpper());
-                toolTip1.SetToolTip(useAnotherPresetAsSourceCheckBoxLabel, UseAnotherPresetAsSourceToolTip + "\n\n" + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper() +
-                    "\n\n" + UseAnotherPresetAsSourceCheckPresetChainToolTip.ToUpper());
-                toolTip1.SetToolTip(presetChainIsWrongPictureBox, UseAnotherPresetAsSourceToolTip + "\n\n" + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper() +
-                    "\n\n" + UseAnotherPresetAsSourceCheckPresetChainToolTip.ToUpper());
+                toolTip1.SetToolTip(useAnotherPresetAsSourceCheckBox, UseAnotherPresetAsSourceToolTip + Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper() +
+                    Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceCheckPresetChainToolTip.ToUpper());
+                toolTip1.SetToolTip(useAnotherPresetAsSourceCheckBoxLabel, UseAnotherPresetAsSourceToolTip + Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper() +
+                    Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceCheckPresetChainToolTip.ToUpper());
+                toolTip1.SetToolTip(presetChainIsWrongPictureBox, UseAnotherPresetAsSourceToolTip + Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper() +
+                    Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceCheckPresetChainToolTip.ToUpper());
                 presetChainIsWrongPictureBox.Image = fatalError;
                 SetComboBoxCue(foundPresetRefs, selectedPresetRef.name);
 
@@ -57,12 +57,12 @@ namespace MusicBeePlugin
             }
             else //if (relatedPresetsCheckStatusIsSenseless && relatedPresetsCheckStatusIsBroken)
             {
-                toolTip1.SetToolTip(useAnotherPresetAsSourceCheckBox, UseAnotherPresetAsSourceToolTip + "\n\n" + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper() +
-                    "\n\n" + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper() + "\n\n" + UseAnotherPresetAsSourceCheckPresetChainToolTip.ToUpper());
-                toolTip1.SetToolTip(useAnotherPresetAsSourceCheckBoxLabel, UseAnotherPresetAsSourceToolTip + "\n\n" + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper() +
-                    "\n\n" + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper() + "\n\n" + UseAnotherPresetAsSourceCheckPresetChainToolTip.ToUpper());
-                toolTip1.SetToolTip(presetChainIsWrongPictureBox, UseAnotherPresetAsSourceToolTip + "\n\n" + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper() +
-                    "\n\n" + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper() + "\n\n" + UseAnotherPresetAsSourceCheckPresetChainToolTip.ToUpper());
+                toolTip1.SetToolTip(useAnotherPresetAsSourceCheckBox, UseAnotherPresetAsSourceToolTip + Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper() +
+                    Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper() + Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceCheckPresetChainToolTip.ToUpper());
+                toolTip1.SetToolTip(useAnotherPresetAsSourceCheckBoxLabel, UseAnotherPresetAsSourceToolTip + Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper() +
+                    Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper() + Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceCheckPresetChainToolTip.ToUpper());
+                toolTip1.SetToolTip(presetChainIsWrongPictureBox, UseAnotherPresetAsSourceToolTip + Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper() +
+                    Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper() + Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceCheckPresetChainToolTip.ToUpper());
                 presetChainIsWrongPictureBox.Image = errorFatalError;
                 SetComboBoxCue(foundPresetRefs, selectedPresetRef.name);
 
@@ -70,34 +70,34 @@ namespace MusicBeePlugin
             }
         }
 
-        //ON CANGING CONDITION/FILTERING:
+        //ON CHANGING CONDITION/FILTERING:
         //  conditionCheckBox_CheckedChanged(), useAnotherPresetAsSourceCheckBox_CheckedChanged(), useAnotherPresetAsSourceComboBox_SelectedIndexChanged()
         private void checkAdjustAllPresetChainsUI()
         {
-            (bool allPresetsCheckStatusIsSenseless, bool allPresetsCheckStatusIsBroken) = checkAllPresetChains(true);
+            var (presetsCheckStatusIsSenseless, presetsCheckStatusIsBroken) = checkAllPresetChains(true);
 
 
-            buttonSaveClose.Enable(!allPresetsCheckStatusIsSenseless && !allPresetsCheckStatusIsBroken);
+            buttonSaveClose.Enable(!presetsCheckStatusIsSenseless && !presetsCheckStatusIsBroken);
 
-            if (!allPresetsCheckStatusIsSenseless && !allPresetsCheckStatusIsBroken)
+            if (!presetsCheckStatusIsSenseless && !presetsCheckStatusIsBroken)
             {
                 toolTip1.SetToolTip(buttonClose, buttonCloseToolTip);
                 buttonClose.Image = unsavedChanges ? warningWide : Resources.transparent_15;
             }
-            else if (allPresetsCheckStatusIsSenseless && !allPresetsCheckStatusIsBroken)
+            else if (presetsCheckStatusIsSenseless && !presetsCheckStatusIsBroken)
             {
-                toolTip1.SetToolTip(buttonClose, buttonCloseToolTip + "\n\n" + UseAnotherPresetAsSourceIsSenselessToolTip.ToUpper());
+                toolTip1.SetToolTip(buttonClose, buttonCloseToolTip + Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceIsSenselessToolTip.ToUpper());
                 buttonClose.Image = errorWide;
             }
-            else if (!allPresetsCheckStatusIsSenseless && allPresetsCheckStatusIsBroken)
+            else if (!presetsCheckStatusIsSenseless && presetsCheckStatusIsBroken)
             {
-                toolTip1.SetToolTip(buttonClose, buttonCloseToolTip + "\n\n" + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper());
+                toolTip1.SetToolTip(buttonClose, buttonCloseToolTip + Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper());
                 buttonClose.Image = fatalErrorWide;
             }
             else //if (relatedPresetsCheckStatusIsSenseless && relatedPresetsCheckStatusIsBroken)
             {
-                toolTip1.SetToolTip(buttonClose, buttonCloseToolTip + "\n\n" + UseAnotherPresetAsSourceIsSenselessToolTip.ToUpper()
-                    + "\n\n" + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper());
+                toolTip1.SetToolTip(buttonClose, buttonCloseToolTip + Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceIsSenselessToolTip.ToUpper()
+                    + Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper());
                 buttonClose.Image = errorFatalErrorWide;
             }
         }
@@ -112,14 +112,14 @@ namespace MusicBeePlugin
 
             var currentPresets = getReportPresetsArrayUI();
 
-            bool presetCheckStatusIsSenseless = false;
-            bool presetCheckStatusIsBroken = false;
+            var presetCheckStatusIsSenseless = false;
+            var presetCheckStatusIsBroken = false;
 
             foreach (var preset in currentPresets)
             {
                 if (preset != referringPreset)
                 {
-                    (bool relatedPresetsCheckStatusIsAppropriateForConditionalFiltering, bool relatedPresetsCheckStatusIsSenseless, bool relatedPresetsCheckStatusIsBroken) =
+                    var (relatedPresetsCheckStatusIsAppropriateForConditionalFiltering, relatedPresetsCheckStatusIsSenseless, relatedPresetsCheckStatusIsBroken) =
                         checkPresetChainDeeper(currentPresets, preset, referringPreset, false);
 
                     if (relatedPresetsCheckStatusIsAppropriateForConditionalFiltering)
@@ -167,32 +167,31 @@ namespace MusicBeePlugin
             var senselessReferringPresetGuids = new SortedDictionary<Guid, bool>();
             var brokenReferringPresetGuids = new SortedDictionary<Guid, bool>();
 
-            bool allPresetsCheckStatusIsSenseless = false;
-            bool allPresetsCheckStatusIsBroken = false;
+            var presetsCheckStatusIsSenseless = false;
+            var presetsCheckStatusIsBroken = false;
 
             foreach (var preset in currentPresets)
             {
-                (_, bool presetCheckStatusIsSenseless, bool presetCheckStatusIsBroken) = checkPresetChainDeeper(currentPresets, preset, null, updateStatuses,
+                var (_, presetCheckStatusIsSenseless, presetCheckStatusIsBroken) = checkPresetChainDeeper(currentPresets, preset, null, updateStatuses,
                     senselessReferringPresetGuids, brokenReferringPresetGuids);
 
-                allPresetsCheckStatusIsSenseless |= presetCheckStatusIsSenseless;
-                allPresetsCheckStatusIsBroken |= presetCheckStatusIsBroken;
+                presetsCheckStatusIsSenseless |= presetCheckStatusIsSenseless;
+                presetsCheckStatusIsBroken |= presetCheckStatusIsBroken;
             }
 
             if (updateStatuses)
                 presetList.Refresh();
 
-            return (allPresetsCheckStatusIsSenseless, allPresetsCheckStatusIsBroken);
+            return (presetsCheckStatusIsSenseless, presetsCheckStatusIsBroken);
         }
 
         //SERVICE FUNCTION
         //RETURNS RESULTS IN:
         //  referredReferencingPresetGuids
-        private void findNewReferencingPresetGuidsInternal(ReportPreset[] currentPresets,
-            SortedDictionary<Guid, SortedDictionary<Guid, bool>> referredReferencingPresetGuids,
+        private void findNewReferencingPresetGuidsInternal(SortedDictionary<Guid, SortedDictionary<Guid, bool>> referredReferencingPresetGuids,
             SortedDictionary<Guid, bool> referencingPresetGuids, Guid referredPresetGuid)
         {
-            SortedDictionary<Guid, bool> newReferencingPresetGuids = new SortedDictionary<Guid, bool>();
+            var newReferencingPresetGuids = new SortedDictionary<Guid, bool>();
 
             if (referredReferencingPresetGuids.TryGetValue(referredPresetGuid, out var referredPresetReferencingPresetGuids))
             {
@@ -207,18 +206,15 @@ namespace MusicBeePlugin
             if (newReferencingPresetGuids.Count > 0)
             {
                 foreach (var newReferredPresetGuid in newReferencingPresetGuids.Keys)
-                    findNewReferencingPresetGuidsInternal(currentPresets, referredReferencingPresetGuids, referencingPresetGuids, newReferredPresetGuid);
+                    findNewReferencingPresetGuidsInternal(referredReferencingPresetGuids, referencingPresetGuids, newReferredPresetGuid);
             }
-
-
-            return;
         }
 
         //SERVICE FUNCTION
         private List<ReportPreset> findReferencingPresetsInternal(ReportPreset[] currentPresets, ReportPreset referredPreset)
         {
             //referencingPresetGuids: <referred preset permanentGuid, <referencing preset permanentGuid, false>>
-            SortedDictionary<Guid, SortedDictionary<Guid, bool>> referredReferencingPresetGuids = new SortedDictionary<Guid, SortedDictionary<Guid, bool>>();
+            var referredReferencingPresetGuids = new SortedDictionary<Guid, SortedDictionary<Guid, bool>>();
 
             SortedDictionary<Guid, bool> referencingPresetGuids;
 
@@ -240,10 +236,10 @@ namespace MusicBeePlugin
             referencingPresetGuids = new SortedDictionary<Guid, bool>();
 
             if (referredReferencingPresetGuids.ContainsKey(referredPreset.permanentGuid))
-                findNewReferencingPresetGuidsInternal(currentPresets, referredReferencingPresetGuids, referencingPresetGuids, referredPreset.permanentGuid);
+                findNewReferencingPresetGuidsInternal(referredReferencingPresetGuids, referencingPresetGuids, referredPreset.permanentGuid);
 
 
-            List<ReportPreset> referencingPresets = new List<ReportPreset>();
+            var referencingPresets = new List<ReportPreset>();
             foreach (var preset in currentPresets)
             {
                 if (referencingPresetGuids.ContainsKey(preset.permanentGuid))
@@ -286,7 +282,7 @@ namespace MusicBeePlugin
                     return;
                 }
 
-                ReportPreset referredPreset = referringPreset.anotherPresetAsSource.findPreset(currentPresets); //It's senseless, must never happen
+                var referredPreset = referringPreset.anotherPresetAsSource.findPreset(currentPresets); //It's senseless, must never happen
                 if (referredPreset == null)
                 {
                     senselessReferringPresetGuids.AddSkip(referringPreset.permanentGuid);
@@ -352,8 +348,8 @@ namespace MusicBeePlugin
         private (bool, bool) checkRelatedPresetsChain(ReportPreset initialPreset, ReportPreset currentPreset,
             bool updateInitialPresetReferencingChainCheckStatus, bool updateInitialPresetReferredChainCheckStatus)
         {
-            bool initialPresetsCheckStatusIsSenseless = false;
-            bool initialPresetsCheckStatusIsBroken = false;
+            var initialPresetsCheckStatusIsSenseless = false;
+            var initialPresetsCheckStatusIsBroken = false;
 
 
             if (initialPreset != null)
@@ -361,10 +357,10 @@ namespace MusicBeePlugin
                 var currentPresets = getReportPresetsArrayUI();
                 var referencingPresets = findReferencingPresetsInternal(currentPresets, initialPreset);
 
-                SortedDictionary<Guid, bool> senselessReferringPresetGuids = new SortedDictionary<Guid, bool>();
-                SortedDictionary<Guid, bool> brokenReferringPresetGuids = new SortedDictionary<Guid, bool>();
+                var senselessReferringPresetGuids = new SortedDictionary<Guid, bool>();
+                var brokenReferringPresetGuids = new SortedDictionary<Guid, bool>();
 
-                (_, bool relatedPresetsCheckStatusIsSenseless, bool relatedPresetsCheckStatusIsBroken) = checkPresetChainDeeper(currentPresets, initialPreset, currentPreset,
+                var (_, relatedPresetsCheckStatusIsSenseless, relatedPresetsCheckStatusIsBroken) = checkPresetChainDeeper(currentPresets, initialPreset, currentPreset,
                     updateInitialPresetReferencingChainCheckStatus,
                     senselessReferringPresetGuids, brokenReferringPresetGuids);
 
@@ -397,16 +393,13 @@ namespace MusicBeePlugin
         //RETURNS:
         //  presetsCheckStatusIsSenseless = true: reference chain is senseless (there is !conditionIsChecked),
         //  presetsCheckStatusIsBroken = true: reference chain is bad (looped references)
-        private (bool, bool) checkAdjustFilteringPreset()
+        private void checkAdjustFilteringPresetUI()
         {
-            bool presetCheckStatusIsSenseless = false;
-            bool presetCheckStatusIsBroken = false;
-
             if (selectedPreset != null)
             {
                 setPresetChanged();
 
-                (presetCheckStatusIsSenseless, presetCheckStatusIsBroken) = checkRelatedPresetsChain(selectedPreset, selectedPreset, true, true);
+                var (presetCheckStatusIsSenseless, presetCheckStatusIsBroken) = checkRelatedPresetsChain(selectedPreset, selectedPreset, true, true);
 
                 if (useAnotherPresetAsSourceComboBoxCustom.SelectedItem == null)
                     adjustFilteringPresetUI(useAnotherPresetAsSourceComboBoxCustom, default,
@@ -415,8 +408,6 @@ namespace MusicBeePlugin
                     adjustFilteringPresetUI(useAnotherPresetAsSourceComboBoxCustom, (ReportPresetReference)useAnotherPresetAsSourceComboBoxCustom.SelectedItem,
                         presetCheckStatusIsSenseless, presetCheckStatusIsBroken);
             }
-
-            return (presetCheckStatusIsSenseless, presetCheckStatusIsBroken);
         }
         #endregion
     }

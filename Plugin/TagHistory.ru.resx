@@ -118,79 +118,26 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>971, 7</value>
-  </data>
-  <data name="buttonOK.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 23</value>
-  </data>
   <data name="buttonOK.Text" xml:space="preserve">
     <value>Применить</value>
-  </data>
-  <data name="buttonOK.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1119, 7</value>
-  </data>
-  <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 23</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Закрыть</value>
   </data>
-  <data name="buttonCancel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Library.HeaderText" xml:space="preserve">
     <value>Библиотека</value>
-  </data>
-  <data name="dataGridViewCellStyle2.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        Qk32AgAAAAAAADYAAAAoAAAADgAAABAAAAABABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEgoTGw8bGw8bGw8bGw8bGw8bGw8bG
-        w8bGw8bGw8bGw8bGw8bGw8YAAAAAAISChP///////////////////////////////////////////8bD
-        xgAAAAAAhIKE////////////////////////////////////////////xsPGAAAAAACEgoT/////////
-        ///////////////////////////////////Gw8YAAAAAAISChP//////////////////////////////
-        /////////////8bDxgAAAAAAhIKE////////////AAD/AAD/////////AAD/AAD/////////xsPGAAAA
-        AACEgoT///////////////8AAP8AAP8AAP8AAP/////////////Gw8YAAAAAAISChP//////////////
-        /////wAA/wAA/////////////////8bDxgAAAAAAhIKE////////////////AAD/AAD/AAD/AAD/////
-        ////////xsPGAAAAAACEgoT///////////8AAP8AAP////////8AAP8AAP/////////Gw8YAAAAAAISC
-        hP///////////////////////////////////////////8bDxgAAAAAAhIKE////////////////////
-        ////////////////////////xsPGAAAAAACEgoT/////////////////////////////////////////
-        ///Gw8YAAAAAAISChP///////////////////////////////////////////8bDxgAAAAAAhIKEhIKE
-        hIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEAAA=
-</value>
-  </data>
-  <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1254, 214</value>
-  </data>
-  <data name="previewTable.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 15</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>Искать архивы в папке:</value>
   </data>
-  <data name="label3.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="searchFolderTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>573, 23</value>
-  </data>
-  <data name="searchFolderTextBox.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="browseButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>584, 33</value>
   </data>
   <data name="browseButton.Text" xml:space="preserve">
     <value>Открыть...</value>
-  </data>
-  <data name="browseButton.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="forLastLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>681, 37</value>
@@ -201,14 +148,8 @@
   <data name="forLastLabel.Text" xml:space="preserve">
     <value>среди последних</value>
   </data>
-  <data name="forLastLabel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="numberOfBackupsNumericUpDown.Location" type="System.Drawing.Point, System.Drawing">
     <value>790, 33</value>
-  </data>
-  <data name="numberOfBackupsNumericUpDown.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="backupsLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>890, 37</value>
@@ -219,9 +160,6 @@
   <data name="backupsLabel.Text" xml:space="preserve">
     <value>архивов</value>
   </data>
-  <data name="backupsLabel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="rereadButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>953, 33</value>
   </data>
@@ -230,9 +168,6 @@
   </data>
   <data name="rereadButton.Text" xml:space="preserve">
     <value>Повторить поиск</value>
-  </data>
-  <data name="rereadButton.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="restoreSelectedButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>140, 23</value>
@@ -297,35 +232,20 @@
   <data name="label4.Text" xml:space="preserve">
     <value>Теги для трека:</value>
   </data>
-  <data name="label4.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="trackListComboBox.Items" xml:space="preserve">
     <value>(Выбранные треки)</value>
   </data>
   <data name="trackListComboBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>1089, 23</value>
   </data>
-  <data name="trackListComboBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="optionsPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>1126, 60</value>
-  </data>
-  <data name="optionsPanel.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="placeholderLabel3.Location" type="System.Drawing.Point, System.Drawing">
     <value>882, 11</value>
   </data>
-  <data name="placeholderLabel3.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="controlsPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>1264, 37</value>
-  </data>
-  <data name="controlsPanel.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>1264, 311</value>
@@ -335,8 +255,5 @@
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>История тегов</value>
-  </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
   </data>
 </root>

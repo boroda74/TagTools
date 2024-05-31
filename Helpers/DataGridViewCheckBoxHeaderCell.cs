@@ -9,16 +9,12 @@ namespace MusicBeePlugin
     {
         private Point checkBoxLocation;
         private Size checkBoxSize;
-        private bool checkedState = false;
-        private Point cellLocation = new Point();
+        private bool checkedState;
+        private Point cellLocation;
         private System.Windows.Forms.VisualStyles.CheckBoxState cbState =
             System.Windows.Forms.VisualStyles.CheckBoxState.UncheckedNormal;
 
         public event CheckBoxClickedHandler OnCheckBoxClicked;
-
-        public DataGridViewCheckBoxHeaderCell()
-        {
-        }
 
         protected override void Paint(Graphics graphics,
             Rectangle clipBounds,
@@ -37,8 +33,8 @@ namespace MusicBeePlugin
                 formattedValue, errorText, cellStyle,
                 advancedBorderStyle, paintParts);
 
-            Point p = new Point();
-            Size s = CheckBoxRenderer.GetGlyphSize(graphics,
+            var p = new Point();
+            var s = CheckBoxRenderer.GetGlyphSize(graphics,
             System.Windows.Forms.VisualStyles.CheckBoxState.UncheckedNormal);
 
             p.X = cellBounds.Location.X + (cellBounds.Width / 2) - (s.Width / 2) - 1;
@@ -78,7 +74,7 @@ namespace MusicBeePlugin
 
         protected override void OnMouseClick(DataGridViewCellMouseEventArgs e)
         {
-            Point p = new Point(e.X + cellLocation.X, e.Y + cellLocation.Y);
+            var p = new Point(e.X + cellLocation.X, e.Y + cellLocation.Y);
 
             if (p.X >= checkBoxLocation.X && p.X <=
                 checkBoxLocation.X + checkBoxSize.Width

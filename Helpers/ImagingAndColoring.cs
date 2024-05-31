@@ -2,20 +2,20 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using System.Windows.Forms;
+using static NativeMethods;
 
 
 namespace MusicBeePlugin
 {
     internal class AlphaBlendedImage
     {
-        Bitmap _image = null;
-        Bitmap _mask = null;
-        Bitmap _preparedMask = null;
-        Bitmap _finalMaskedImage = null;
+        private readonly Bitmap _image;
+        private readonly Bitmap _mask;
+        private Bitmap _preparedMask;
+        private Bitmap _finalMaskedOrBlendedImage;
 
-        Color _maskColor = Plugin.NoColor;
-        bool _invertedMask = true;
-        Color _backColor = Plugin.NoColor;
+        private readonly bool? _invertedMaskOrMaskIsImageToBlend = true; //true: inverted mask, false: not inverted mask, null: mask is image to blend
 
         ~AlphaBlendedImage()
         {
@@ -30,37 +30,15 @@ namespace MusicBeePlugin
             _mask = Create32bppImageAndClearAlpha(mask);
         }
 
-        internal AlphaBlendedImage(Bitmap image, Bitmap mask, bool invertedMask)
+        internal AlphaBlendedImage(Bitmap image, Bitmap mask, bool? invertedMaskOrMaskIsImageToBlend) : this(image, mask)
         {
-            _image = Create32bppImageAndClearAlpha(image);
-            _mask = Create32bppImageAndClearAlpha(mask);
-            _maskColor = Plugin.NoColor;
-            _invertedMask = invertedMask;
-            _backColor = Plugin.NoColor;
-        }
-
-        internal AlphaBlendedImage(Bitmap image, Bitmap mask, bool invertedMask, Color maskColor)
-        {
-            _image = Create32bppImageAndClearAlpha(image);
-            _mask = Create32bppImageAndClearAlpha(mask);
-            _maskColor = maskColor;
-            _invertedMask = invertedMask;
-            _backColor = Plugin.NoColor;
-        }
-
-        internal AlphaBlendedImage(Bitmap image, Bitmap mask, Color maskColor, bool invertedMask, Color backColor)
-        {
-            _image = Create32bppImageAndClearAlpha(image);
-            _mask = Create32bppImageAndClearAlpha(mask);
-            _maskColor = maskColor;
-            _invertedMask = invertedMask;
-            _backColor = backColor;
+            _invertedMaskOrMaskIsImageToBlend = invertedMaskOrMaskIsImageToBlend;
         }
 
         internal Bitmap AlphaBlendImages()
         {
             PrepareMaskImage();
-            return _finalMaskedImage;
+            return _finalMaskedOrBlendedImage;
         }
 
         #region This is ugly stuff
@@ -74,115 +52,121 @@ namespace MusicBeePlugin
                 }
                 else
                 {
-                    _finalMaskedImage = Create32bppImageAndClearAlpha(_image);
+                    _finalMaskedOrBlendedImage = Create32bppImageAndClearAlpha(_image);
 
-                    BitmapData finalBmpData = _finalMaskedImage.LockBits(new Rectangle(0, 0, _finalMaskedImage.Width, _finalMaskedImage.Height), ImageLockMode.ReadWrite, _finalMaskedImage.PixelFormat);
-                    byte[] finalMaskedImageRGBAData = new byte[Math.Abs(finalBmpData.Stride) * finalBmpData.Height];
+                    var finalBmpData = _finalMaskedOrBlendedImage.LockBits(new Rectangle(0, 0, _finalMaskedOrBlendedImage.Width, _finalMaskedOrBlendedImage.Height), ImageLockMode.ReadWrite, _finalMaskedOrBlendedImage.PixelFormat);
+                    var finalMaskedImageRGBAData = new byte[Math.Abs(finalBmpData.Stride) * finalBmpData.Height];
                     System.Runtime.InteropServices.Marshal.Copy(finalBmpData.Scan0, finalMaskedImageRGBAData, 0, finalMaskedImageRGBAData.Length);
 
-                    BitmapData preparedMaskBmpData = _preparedMask.LockBits(new Rectangle(0, 0, _preparedMask.Width, _preparedMask.Height), ImageLockMode.ReadOnly, _preparedMask.PixelFormat);
-                    byte[] preparedMaskRGBAData = new byte[Math.Abs(preparedMaskBmpData.Stride) * preparedMaskBmpData.Height];
+                    var preparedMaskBmpData = _preparedMask.LockBits(new Rectangle(0, 0, _preparedMask.Width, _preparedMask.Height), ImageLockMode.ReadOnly, _preparedMask.PixelFormat);
+                    var preparedMaskRGBAData = new byte[Math.Abs(preparedMaskBmpData.Stride) * preparedMaskBmpData.Height];
                     System.Runtime.InteropServices.Marshal.Copy(preparedMaskBmpData.Scan0, preparedMaskRGBAData, 0, preparedMaskRGBAData.Length);
 
                     //copy the mask to the Alpha layer
-                    for (int i = 0; i + 2 < finalMaskedImageRGBAData.Length; i += 4)
-                    {
-                        if (_maskColor.ToArgb() == -1 && _backColor.ToArgb() == -1)
-                        {
-                            //copy the mask to the Alpha layer
-                            finalMaskedImageRGBAData[i + 3] = preparedMaskRGBAData[i];
-                        }
-                        else if (_backColor.ToArgb() == -1)
-                        {
-                            double rgbDataR = Math.Round((double)_maskColor.R * preparedMaskRGBAData[i] / 255
-                                + (double)finalMaskedImageRGBAData[i] * (255 - preparedMaskRGBAData[i]) / 255);
-                            double rgbDataG = Math.Round((double)_maskColor.G * preparedMaskRGBAData[i] / 255
-                                + (double)finalMaskedImageRGBAData[i + 1] * (255 - preparedMaskRGBAData[i]) / 255);
-                            double rgbDataB = Math.Round((double)_maskColor.B * preparedMaskRGBAData[i] / 255
-                                + (double)finalMaskedImageRGBAData[i + 2] * (255 - preparedMaskRGBAData[i]) / 255);
-
-
-                            if (rgbDataR < 0)
-                                rgbDataR = 0;
-                            else if (rgbDataR > 255)
-                                rgbDataR = 255;
-
-                            if (rgbDataG < 0)
-                                rgbDataG = 0;
-                            else if (rgbDataG > 255)
-                                rgbDataG = 255;
-
-                            if (rgbDataB < 0)
-                                rgbDataB = 0;
-                            else if (rgbDataB > 255)
-                                rgbDataB = 255;
-
-                            finalMaskedImageRGBAData[i] = (byte)rgbDataR;
-                            finalMaskedImageRGBAData[i + 1] = (byte)rgbDataG;
-                            finalMaskedImageRGBAData[i + 2] = (byte)rgbDataB;
-                            finalMaskedImageRGBAData[i + 3] = 255; //Alpha
-                        }
-                        else
-                        {
-                            double rgbDataR = Math.Round((double)_maskColor.R * preparedMaskRGBAData[i] / 255
-                                + (double)_backColor.R * (255 - preparedMaskRGBAData[i]) / 255);
-                            double rgbDataG = Math.Round((double)_maskColor.G * preparedMaskRGBAData[i] / 255
-                                + (double)_backColor.G * (255 - preparedMaskRGBAData[i]) / 255);
-                            double rgbDataB = Math.Round((double)_maskColor.B * preparedMaskRGBAData[i] / 255
-                                + (double)_backColor.B * (255 - preparedMaskRGBAData[i]) / 255);
-
-
-                            if (rgbDataR < 0)
-                                rgbDataR = 0;
-                            else if (rgbDataR > 255)
-                                rgbDataR = 255;
-
-                            if (rgbDataG < 0)
-                                rgbDataG = 0;
-                            else if (rgbDataG > 255)
-                                rgbDataG = 255;
-
-                            if (rgbDataB < 0)
-                                rgbDataB = 0;
-                            else if (rgbDataB > 255)
-                                rgbDataB = 255;
-
-                            finalMaskedImageRGBAData[i] = (byte)rgbDataR;
-                            finalMaskedImageRGBAData[i + 1] = (byte)rgbDataG;
-                            finalMaskedImageRGBAData[i + 2] = (byte)rgbDataB;
-                            finalMaskedImageRGBAData[i + 3] = 255; //Alpha
-                        }
-                    }
+                    for (var i = 0; i + 2 < finalMaskedImageRGBAData.Length; i += 4)
+                        finalMaskedImageRGBAData[i + 3] = preparedMaskRGBAData[i + 3]; //Alpha
 
                     System.Runtime.InteropServices.Marshal.Copy(finalMaskedImageRGBAData, 0, finalBmpData.Scan0, finalMaskedImageRGBAData.Length);
 
-                    _finalMaskedImage.UnlockBits(finalBmpData);
+                    _finalMaskedOrBlendedImage.UnlockBits(finalBmpData);
                     _preparedMask.UnlockBits(preparedMaskBmpData);
+                }
+            }
+        }
+
+        private void BlendImages()
+        {
+            if (_image != null && _mask != null)
+            {
+                if (_image.Width != _mask.Width || _image.Height != _mask.Height)
+                {
+                    throw new BadImageFormatException(Plugin.ExMaskAndImageMustBeTheSameSize);
+                }
+                else
+                {
+                    _finalMaskedOrBlendedImage = Create32bppImageAndClearAlpha(_image);
+
+                    var finalBmpData = _finalMaskedOrBlendedImage.LockBits(new Rectangle(0, 0, _finalMaskedOrBlendedImage.Width, _finalMaskedOrBlendedImage.Height), ImageLockMode.ReadWrite, _finalMaskedOrBlendedImage.PixelFormat);
+                    var finalBlendedImageRGBAData = new byte[Math.Abs(finalBmpData.Stride) * finalBmpData.Height];
+                    System.Runtime.InteropServices.Marshal.Copy(finalBmpData.Scan0, finalBlendedImageRGBAData, 0, finalBlendedImageRGBAData.Length);
+
+                    var image2BmpData = _mask.LockBits(new Rectangle(0, 0, _mask.Width, _mask.Height), ImageLockMode.ReadOnly, _mask.PixelFormat);
+                    var image2RGBAData = new byte[Math.Abs(image2BmpData.Stride) * image2BmpData.Height];
+                    System.Runtime.InteropServices.Marshal.Copy(image2BmpData.Scan0, image2RGBAData, 0, image2RGBAData.Length);
+
+                    //copy the mask to the Alpha layer
+                    for (var i = 0; i + 2 < finalBlendedImageRGBAData.Length; i += 4)
+                    {
+                        double rgbDataR = Math.Round((double)finalBlendedImageRGBAData[i] * finalBlendedImageRGBAData[i + 3] / 255
+                                                     + (double)image2RGBAData[i] * image2RGBAData[i + 3] / 255);
+                        double rgbDataG = Math.Round((double)finalBlendedImageRGBAData[i + 1] * finalBlendedImageRGBAData[i + 3] / 255
+                                                     + (double)image2RGBAData[i + 1] * image2RGBAData[i + 3] / 255);
+                        double rgbDataB = Math.Round((double)finalBlendedImageRGBAData[i + 2] * finalBlendedImageRGBAData[i + 3] / 255
+                                                     + (double)image2RGBAData[i + 2] * image2RGBAData[i + 3] / 255);
+                        double rgbDataA = Math.Round((double)finalBlendedImageRGBAData[i + 3]  * image2RGBAData[i + 3] / 255);
+
+
+                        if (rgbDataR < 0)
+                            rgbDataR = 0;
+                        else if (rgbDataR > 255)
+                            rgbDataR = 255;
+
+                        if (rgbDataG < 0)
+                            rgbDataG = 0;
+                        else if (rgbDataG > 255)
+                            rgbDataG = 255;
+
+                        if (rgbDataB < 0)
+                            rgbDataB = 0;
+                        else if (rgbDataB > 255)
+                            rgbDataB = 255;
+
+                        if (rgbDataA < 0)
+                            rgbDataA = 0;
+                        else if (rgbDataA > 255)
+                            rgbDataA = 255;
+
+
+                        finalBlendedImageRGBAData[i] = (byte)rgbDataR;
+                        finalBlendedImageRGBAData[i + 1] = (byte)rgbDataG;
+                        finalBlendedImageRGBAData[i + 2] = (byte)rgbDataB;
+                        finalBlendedImageRGBAData[i + 3] = (byte)rgbDataA; //Alpha
+                    }
+
+                    System.Runtime.InteropServices.Marshal.Copy(finalBlendedImageRGBAData, 0, finalBmpData.Scan0, finalBlendedImageRGBAData.Length);
+
+                    _finalMaskedOrBlendedImage.UnlockBits(finalBmpData);
+                    _preparedMask.UnlockBits(image2BmpData);
                 }
             }
         }
 
         private void PrepareMaskImage()
         {
-            if (_mask != null)
+            if (_invertedMaskOrMaskIsImageToBlend == null && _mask != null)
+            {
+                if (_image != null)
+                    BlendImages();
+            }
+            else if (_mask != null)
             {
                 _preparedMask = Create32bppImageAndClearAlpha(_mask);
 
-                BitmapData bmpData = _preparedMask.LockBits(new Rectangle(0, 0, _preparedMask.Width, _preparedMask.Height), ImageLockMode.ReadWrite, _preparedMask.PixelFormat);
+                var bmpData = _preparedMask.LockBits(new Rectangle(0, 0, _preparedMask.Width, _preparedMask.Height), ImageLockMode.ReadWrite, _preparedMask.PixelFormat);
 
-                byte[] preparedMaskRGBData = new byte[Math.Abs(bmpData.Stride) * bmpData.Height];
+                var preparedMaskRGBData = new byte[Math.Abs(bmpData.Stride) * bmpData.Height];
 
                 System.Runtime.InteropServices.Marshal.Copy(bmpData.Scan0, preparedMaskRGBData, 0, preparedMaskRGBData.Length);
 
 
-                bool opaque = false;
+                var opaque = false;
                 //int OpacityThreshold = trackBar1.Value;
-                for (int i = 0; i + 2 < preparedMaskRGBData.Length; i += 4)
+                for (var i = 0; i + 2 < preparedMaskRGBData.Length; i += 4)
                 {
                     //convert to brightness R=0.30 G=0.59 B=0.11
-                    float brightnessF = 0.3f * preparedMaskRGBData[i] + 0.59f * preparedMaskRGBData[i + 1] + 0.11f * preparedMaskRGBData[i + 2];
+                    var brightnessF = 0.3f * preparedMaskRGBData[i] + 0.59f * preparedMaskRGBData[i + 1] + 0.11f * preparedMaskRGBData[i + 2];
 
-                    if (_invertedMask)
+                    if (_invertedMaskOrMaskIsImageToBlend == true)
                         brightnessF = 255 - brightnessF;
 
                     if (brightnessF < 0)
@@ -190,8 +174,9 @@ namespace MusicBeePlugin
                     else if (brightnessF > 255)
                         brightnessF = 255;
 
-                    byte brightness = (byte)Math.Round(brightnessF);
+                    var brightness = (byte)Math.Round(brightnessF);
 
+                    // ReSharper disable once ConditionIsAlwaysTrueOrFalse
                     if (opaque) //-V3022
                         brightness = (brightnessF < 420/* MUST BE "some constant" - OpacityThreshold*/) ? byte.MinValue : byte.MaxValue; //**** greyLevelF LESS THAN 420 ???
 
@@ -212,14 +197,14 @@ namespace MusicBeePlugin
         private Bitmap Create32bppImageAndClearAlpha(Bitmap tmpImage)
         {
             //declare the new image that will be returned by the function
-            Bitmap returnedImage = new Bitmap(tmpImage.Width, tmpImage.Height, PixelFormat.Format32bppArgb);
+            var returnedImage = new Bitmap(tmpImage.Width, tmpImage.Height, PixelFormat.Format32bppArgb);
 
             //create a graphics instance to draw the original image in the new one
-            Rectangle rect = new Rectangle(0, 0, tmpImage.Width, tmpImage.Height);
-            Graphics g = Graphics.FromImage(returnedImage);
+            var rect = new Rectangle(0, 0, tmpImage.Width, tmpImage.Height);
+            var g = Graphics.FromImage(returnedImage);
 
-            //create an image attribe to force a clearing of the alpha layer
-            ImageAttributes imageAttributes = new ImageAttributes();
+            //create an image attribs to force a clearing of the alpha layer
+            var imageAttributes = new ImageAttributes();
             float[][] colorMatrixElements = {
                         new float[] {1,0,0,0,0},
                         new float[] {0,1,0,0,0},
@@ -227,7 +212,7 @@ namespace MusicBeePlugin
                         new float[] {0,0,0,0,0},
                         new float[] {0,0,0,1,1}};
 
-            ColorMatrix colorMatrix = new ColorMatrix(colorMatrixElements);
+            var colorMatrix = new ColorMatrix(colorMatrixElements);
             imageAttributes.SetColorMatrix(colorMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
 
             //draw the original image 
@@ -250,9 +235,9 @@ namespace MusicBeePlugin
             b = Math.Max(0D, Math.Min(1D, b));
             a = Math.Max(0, Math.Min(255, a));
 
-            double r = 0D;
-            double g = 0D;
-            double bl = 0D;
+            var r = 0D;
+            var g = 0D;
+            var bl = 0D;
 
             if (Math.Abs(s) < tolerance)
                 r = g = bl = b;
@@ -260,15 +245,15 @@ namespace MusicBeePlugin
             {
                 //the argb wheel consists of 6 sectors. Figure out which sector
                 //you're in.
-                double sectorPos = h / 60D;
-                int sectorNumber = (int)Math.Floor(sectorPos);
+                var sectorPos = h / 60D;
+                var sectorNumber = (int)Math.Floor(sectorPos);
                 //get the fractional part of the sector
-                double fractionalSector = sectorPos - sectorNumber;
+                var fractionalSector = sectorPos - sectorNumber;
 
                 //calculate values for the three axes of the argb.
-                double p = b * (1D - s);
-                double q = b * (1D - (s * fractionalSector));
-                double t = b * (1D - (s * (1D - fractionalSector)));
+                var p = b * (1D - s);
+                var q = b * (1D - (s * fractionalSector));
+                var t = b * (1D - (s * (1D - fractionalSector)));
 
                 //assign the fractional colors to r, g, and b based on the sector
                 //the angle is in.
@@ -316,20 +301,20 @@ namespace MusicBeePlugin
 
         internal static Color GetHighlightColor(Color highlightColor, Color sampleColor, Color backColor, float highlightWeight = 0.80f)//***
         {
-            float highlightHue = highlightColor.GetHue();
-            float highlightSat = highlightColor.GetSaturation();
-            float highlightBr = highlightColor.GetBrightness();
+            var highlightHue = highlightColor.GetHue();
+            var highlightSat = highlightColor.GetSaturation();
+            var highlightBr = highlightColor.GetBrightness();
 
-            float sampleHue = sampleColor.GetHue();
-            float sampleSat = sampleColor.GetSaturation();
-            float sampleBr = sampleColor.GetBrightness();
+            var sampleHue = sampleColor.GetHue();
+            var sampleSat = sampleColor.GetSaturation();
+            var sampleBr = sampleColor.GetBrightness();
 
-            float backBr = backColor.GetBrightness();
+            var backBr = backColor.GetBrightness();
 
-            float resultHue = (highlightHue * highlightWeight * highlightSat * highlightBr + sampleHue * (1 - highlightWeight) * sampleSat * sampleBr)
-                / (highlightWeight * highlightSat * highlightBr + (1 - highlightWeight) * sampleSat * sampleBr);
-            float resultSat = highlightSat * 0.3f + sampleSat * 0.7f;
-            float resultBr = highlightBr * highlightWeight + sampleBr * (1 - highlightWeight);
+            var resultHue = (highlightHue * highlightWeight * highlightSat * highlightBr + sampleHue * (1 - highlightWeight) * sampleSat * sampleBr)
+                            / (highlightWeight * highlightSat * highlightBr + (1 - highlightWeight) * sampleSat * sampleBr);
+            var resultSat = highlightSat * 0.3f + sampleSat * 0.7f;
+            var resultBr = highlightBr * highlightWeight + sampleBr * (1 - highlightWeight);
 
             if (Math.Abs(resultBr - backBr) < 0.3)
             {
@@ -339,24 +324,44 @@ namespace MusicBeePlugin
                     resultBr += Math.Abs(resultBr - backBr);
             }
 
-            Color resultColor = HsbToRgb(resultHue, resultSat, resultBr);
+            var resultColor = HsbToRgb(resultHue, resultSat, resultBr);
 
             return resultColor;
         }
 
         internal static Color GetWeightedColor(Color sampleColor1, Color sampleColor2, float sampleColor1Weight = 0.5f)//***
         {
-            int resultR = (int)Math.Round(sampleColor1.R * sampleColor1Weight + sampleColor2.R * (1 - sampleColor1Weight));
-            int resultG = (int)Math.Round(sampleColor1.G * sampleColor1Weight + sampleColor2.G * (1 - sampleColor1Weight));
-            int resultB = (int)Math.Round(sampleColor1.B * sampleColor1Weight + sampleColor2.B * (1 - sampleColor1Weight));
+            var resultR = (int)Math.Round(sampleColor1.R * sampleColor1Weight + sampleColor2.R * (1 - sampleColor1Weight));
+            var resultG = (int)Math.Round(sampleColor1.G * sampleColor1Weight + sampleColor2.G * (1 - sampleColor1Weight));
+            var resultB = (int)Math.Round(sampleColor1.B * sampleColor1Weight + sampleColor2.B * (1 - sampleColor1Weight));
 
             resultR = resultR > 255 ? 255 : resultR;
             resultG = resultG > 255 ? 255 : resultG;
             resultB = resultB > 255 ? 255 : resultB;
 
-            Color resultColor = Color.FromArgb(resultR, resultG, resultB);
+            var resultColor = Color.FromArgb(resultR, resultG, resultB);
 
             return resultColor;
+        }
+
+        internal static Color GetColorAt(Control control, Point location)
+        {
+            Bitmap controlPixel = new Bitmap(1, 1, PixelFormat.Format32bppArgb);
+            using (Graphics gdest = Graphics.FromImage(controlPixel))
+            {
+                using (Graphics gbtn = Graphics.FromHwnd(IntPtr.Zero))
+                {
+                    var screenLocation = control.PointToScreen(location);
+
+                    IntPtr hSrcDC = gbtn.GetHdc();
+                    IntPtr hDC = gdest.GetHdc();
+                    int retval = BitBlt(hDC, 0, 0, 1, 1, hSrcDC, screenLocation.X, screenLocation.Y, (int)CopyPixelOperation.SourceCopy);
+                    gdest.ReleaseHdc();
+                    gbtn.ReleaseHdc();
+                }
+            }
+
+            return controlPixel.GetPixel(0, 0);
         }
 
         internal static Color GetInvertedColor(Color sampleColor)
@@ -376,20 +381,20 @@ namespace MusicBeePlugin
 
         internal static Color InvertAverageBrightness(Color sampleColor1)
         {
-            float invAvgBr = (1 - ((GetAverageBrightness(sampleColor1) - 0.5f) * 2)) / 2.02f;
+            var invAvgBr = (1 - ((GetAverageBrightness(sampleColor1) - 0.5f) * 2)) / 2.02f;
             return Color.FromArgb(sampleColor1.A, (int)Math.Round(sampleColor1.R * invAvgBr), (int)Math.Round(sampleColor1.G * invAvgBr), (int)Math.Round(sampleColor1.B * invAvgBr));
         }
 
         internal static Color GetBitmapAverageColor(Bitmap img)
         {
             int avgR = 0, avgG = 0, avgB = 0;
-            int blurPixelCount = 0;
+            var blurPixelCount = 0;
 
-            for (int y = 0; y < img.Height; y++)
+            for (var y = 0; y < img.Height; y++)
             {
-                for (int x = 0; x < img.Width; x++)
+                for (var x = 0; x < img.Width; x++)
                 {
-                    Color pixel = img.GetPixel(x, y);
+                    var pixel = img.GetPixel(x, y);
                     avgR += pixel.R;
                     avgG += pixel.G;
                     avgB += pixel.B;
@@ -397,6 +402,8 @@ namespace MusicBeePlugin
                     blurPixelCount++;
                 }
             }
+
+            blurPixelCount = blurPixelCount == 0 ? 1 : blurPixelCount;
 
             avgR = avgR * 3 / 2 / blurPixelCount; //-V3064
             avgR = avgR > 255 ? 255 : avgR;
@@ -413,24 +420,25 @@ namespace MusicBeePlugin
 
         internal static Bitmap GetSolidImageByBitmapMask(Color foreColor, Bitmap maskBitmap)
         {
-            Bitmap templateBitmap = new Bitmap(maskBitmap.Width, maskBitmap.Height, PixelFormat.Format32bppArgb);
+            var templateBitmap = new Bitmap(maskBitmap.Width, maskBitmap.Height, PixelFormat.Format32bppArgb);
 
-            using (Graphics gfx = Graphics.FromImage(templateBitmap))
+            using (var gfx = Graphics.FromImage(templateBitmap))
                 gfx.Clear(foreColor);
 
-            AlphaBlendedImage alphaBlendedImage = new AlphaBlendedImage(templateBitmap, maskBitmap);
+            var alphaBlendedImage = new AlphaBlendedImage(templateBitmap, maskBitmap);
 
             templateBitmap.Dispose();
 
             return alphaBlendedImage.AlphaBlendImages();
         }
 
-        internal static Bitmap GetSolidImageByBitmapMask(Color foreColor, Bitmap maskBitmap, int newWidth, int newHeight,
-            bool invertedMask = true, InterpolationMode interpolationMode = InterpolationMode.HighQualityBicubic)
+        internal static Bitmap GetSolidImageByBitmapMask(Color foreColor, Bitmap maskBitmap, 
+            int newWidth, int newHeight, bool invertedMask = true, 
+            InterpolationMode interpolationMode = InterpolationMode.HighQualityBicubic)
         {
-            Bitmap scaledForeColorFilledBitmap = FillBitmapByColor(foreColor, PixelFormat.Format32bppArgb, newWidth, newHeight);
-            Bitmap scaledMaskBitmap = ScaleBitmap(maskBitmap, PixelFormat.Format32bppArgb, interpolationMode, newWidth, newHeight);
-            AlphaBlendedImage alphaBlendedImage = new AlphaBlendedImage(scaledForeColorFilledBitmap, scaledMaskBitmap, invertedMask);
+            var scaledForeColorFilledBitmap = FillBitmapByColor(foreColor, PixelFormat.Format32bppArgb, newWidth, newHeight);
+            var scaledMaskBitmap = ScaleBitmap(maskBitmap, PixelFormat.Format32bppArgb, interpolationMode, newWidth, newHeight);
+            var alphaBlendedImage = new AlphaBlendedImage(scaledForeColorFilledBitmap, scaledMaskBitmap, invertedMask);
 
             scaledForeColorFilledBitmap.Dispose();
             scaledMaskBitmap.Dispose();
@@ -442,23 +450,28 @@ namespace MusicBeePlugin
             int newWidth, int newHeight, bool invertedMask = true,
             InterpolationMode interpolationMode = InterpolationMode.HighQualityBicubic)
         {
-            Bitmap scaledForeColorFilledBitmap = FillBitmapByColor(foreColor, PixelFormat.Format32bppArgb, newWidth, newHeight);
-            Bitmap scaledMaskBitmap = ScaleBitmap(maskBitmap, PixelFormat.Format32bppArgb, interpolationMode, newWidth, newHeight);
-            AlphaBlendedImage alphaBlendedImage = new AlphaBlendedImage(scaledForeColorFilledBitmap, scaledMaskBitmap, foreColor, invertedMask, backColor);
+            var scaledForeColorFilledBitmap = FillBitmapByColor(foreColor, PixelFormat.Format32bppArgb, newWidth, newHeight);
+            var scaledBackColorFilledBitmap = FillBitmapByColor(backColor, PixelFormat.Format32bppArgb, newWidth, newHeight);
+
+            var scaledMaskBitmap = ScaleBitmap(maskBitmap, PixelFormat.Format32bppArgb, interpolationMode, newWidth, newHeight);
+            var alphaBlendedImage = new AlphaBlendedImage(scaledForeColorFilledBitmap, scaledMaskBitmap);
+
+            var blendedImage = new AlphaBlendedImage(alphaBlendedImage.AlphaBlendImages(), scaledBackColorFilledBitmap, null);
 
             scaledForeColorFilledBitmap.Dispose();
             scaledMaskBitmap.Dispose();
 
-            return alphaBlendedImage.AlphaBlendImages();
+            return blendedImage.AlphaBlendImages();
         }
 
-        internal static Bitmap ApplyMaskToImage(Bitmap image, Bitmap maskBitmap, int newWidth, int newHeight, bool invertedMask)
+        internal static Bitmap ApplyMaskToImage(Bitmap image, Bitmap maskBitmap, 
+            int newWidth, int newHeight, bool invertedMask)
         {
-            Bitmap scaledImage = ScaleBitmap(image, PixelFormat.Format32bppArgb, InterpolationMode.HighQualityBicubic,
+            var scaledImage = ScaleBitmap(image, PixelFormat.Format32bppArgb, InterpolationMode.HighQualityBicubic,
                 newWidth, newHeight);
-            Bitmap scaledMaskBitmap = ScaleBitmap(maskBitmap, PixelFormat.Format32bppArgb, InterpolationMode.HighQualityBicubic,
+            var scaledMaskBitmap = ScaleBitmap(maskBitmap, PixelFormat.Format32bppArgb, InterpolationMode.HighQualityBicubic,
                 newWidth, newHeight);
-            AlphaBlendedImage alphaBlendedImage = new AlphaBlendedImage(scaledImage, scaledMaskBitmap, invertedMask);
+            var alphaBlendedImage = new AlphaBlendedImage(scaledImage, scaledMaskBitmap, invertedMask);
 
             scaledImage.Dispose();
             scaledMaskBitmap.Dispose();
@@ -468,8 +481,8 @@ namespace MusicBeePlugin
 
         internal static Bitmap ScaleBitmap(Bitmap bitmap, int newWidth, int newHeight)
         {
-            Bitmap scaledBitmap = new Bitmap(newWidth, newHeight, bitmap.PixelFormat);
-            using (Graphics gfx = Graphics.FromImage(scaledBitmap))
+            var scaledBitmap = new Bitmap(newWidth, newHeight, bitmap.PixelFormat);
+            using (var gfx = Graphics.FromImage(scaledBitmap))
             {
                 gfx.InterpolationMode = InterpolationMode.HighQualityBicubic;
                 gfx.DrawImage(bitmap, -1, -1, newWidth + 1, newHeight + 1);
@@ -480,8 +493,8 @@ namespace MusicBeePlugin
 
         internal static Bitmap ScaleBitmap(Bitmap bitmap, PixelFormat pixelFormat, InterpolationMode interpolationMode, int newWidth, int newHeight)
         {
-            Bitmap scaledBitmap = new Bitmap(newWidth, newHeight, pixelFormat);
-            using (Graphics gfx = Graphics.FromImage(scaledBitmap))
+            var scaledBitmap = new Bitmap(newWidth, newHeight, pixelFormat);
+            using (var gfx = Graphics.FromImage(scaledBitmap))
             {
                 gfx.InterpolationMode = interpolationMode;
                 gfx.DrawImage(bitmap, -1, -1, newWidth + 1, newHeight + 1);
@@ -493,8 +506,8 @@ namespace MusicBeePlugin
         //rotationAngle measurement units: degrees
         internal static Bitmap RotateBitmap(Bitmap bitmap, int rotationAngle)
         {
-            Bitmap rotatedBitmap = new Bitmap(bitmap.Width, bitmap.Height, bitmap.PixelFormat);
-            using (Graphics gfx = Graphics.FromImage(rotatedBitmap))
+            var rotatedBitmap = new Bitmap(bitmap.Width, bitmap.Height, bitmap.PixelFormat);
+            using (var gfx = Graphics.FromImage(rotatedBitmap))
             {
                 gfx.InterpolationMode = InterpolationMode.HighQualityBicubic;
 
@@ -513,7 +526,7 @@ namespace MusicBeePlugin
 
         internal static Bitmap MirrorBitmap(Bitmap bitmap, bool mirrorVertically)
         {
-            Bitmap mirroredBitmap = new Bitmap(bitmap);
+            var mirroredBitmap = new Bitmap(bitmap);
 
             //Mirroring
             if (mirrorVertically)
@@ -526,8 +539,8 @@ namespace MusicBeePlugin
 
         internal static Bitmap FillBitmapByColor(Color backColor, PixelFormat pixelFormat, int newWidth, int newHeight)
         {
-            Bitmap filledBitmap = new Bitmap(newWidth, newHeight, pixelFormat);
-            using (Graphics gfx = Graphics.FromImage(filledBitmap))
+            var filledBitmap = new Bitmap(newWidth, newHeight, pixelFormat);
+            using (var gfx = Graphics.FromImage(filledBitmap))
             {
                 gfx.InterpolationMode = InterpolationMode.NearestNeighbor;
                 gfx.Clear(backColor);

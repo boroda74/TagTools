@@ -661,7 +661,7 @@
     <value>Segoe UI Semibold, 9pt, style=Bold</value>
   </data>
   <data name="groupBox1Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, -1</value>
+    <value>16, 2</value>
   </data>
   <data name="groupBox1Label.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 15</value>
@@ -711,9 +711,9 @@
   <data name="label38.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
   </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>17, 17</value>
-  </metadata>
+  </data>
   <data name="label38.ToolTip" xml:space="preserve">
     <value>Append replaced value to the end of:</value>
   </data>
@@ -966,7 +966,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>NoControl</value>
   </data>
   <data name="groupBox2Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, -1</value>
+    <value>16, 2</value>
   </data>
   <data name="groupBox2Label.Size" type="System.Drawing.Size, System.Drawing">
     <value>108, 15</value>
@@ -1499,7 +1499,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>NoControl</value>
   </data>
   <data name="groupBox3Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, -1</value>
+    <value>16, 2</value>
   </data>
   <data name="groupBox3Label.Size" type="System.Drawing.Size, System.Drawing">
     <value>108, 15</value>
@@ -3639,7 +3639,7 @@ Replace only if the destination tag is empty when checked
     <value>NoControl</value>
   </data>
   <data name="groupBox4Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, -1</value>
+    <value>16, 2</value>
   </data>
   <data name="groupBox4Label.Size" type="System.Drawing.Size, System.Drawing">
     <value>108, 15</value>
@@ -3992,37 +3992,37 @@ Replace only if the destination tag is empty when checked
   <data name="groupBox5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="label15.AutoSize" type="System.Boolean, mscorlib">
+  <data name="groupBox5Label.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="label15.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="groupBox5Label.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI Semibold, 9pt, style=Bold</value>
   </data>
-  <data name="label15.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="groupBox5Label.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="label15.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, -1</value>
+  <data name="groupBox5Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 2</value>
   </data>
-  <data name="label15.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="groupBox5Label.Size" type="System.Drawing.Size, System.Drawing">
     <value>108, 15</value>
   </data>
-  <data name="label15.TabIndex" type="System.Int32, mscorlib">
+  <data name="groupBox5Label.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
   </data>
-  <data name="label15.Text" xml:space="preserve">
+  <data name="groupBox5Label.Text" xml:space="preserve">
     <value>  Step 5 (optional)  </value>
   </data>
-  <data name="&gt;&gt;label15.Name" xml:space="preserve">
-    <value>label15</value>
+  <data name="&gt;&gt;groupBox5Label.Name" xml:space="preserve">
+    <value>groupBox5Label</value>
   </data>
-  <data name="&gt;&gt;label15.Type" xml:space="preserve">
+  <data name="&gt;&gt;groupBox5Label.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label15.Parent" xml:space="preserve">
+  <data name="&gt;&gt;groupBox5Label.Parent" xml:space="preserve">
     <value>groupBox5</value>
   </data>
-  <data name="&gt;&gt;label15.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;groupBox5Label.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel7.ColumnCount" type="System.Int32, mscorlib">
@@ -5106,7 +5106,7 @@ Replace only if the destination tag is empty when checked
     <value>24</value>
   </data>
   <data name="ignoreCaseCheckBoxLabel.Text" xml:space="preserve">
-    <value>Case insensitive</value>
+    <value>Case-insensitive</value>
   </data>
   <data name="&gt;&gt;ignoreCaseCheckBoxLabel.Name" xml:space="preserve">
     <value>ignoreCaseCheckBoxLabel</value>
@@ -5156,9 +5156,9 @@ Replace only if the destination tag is empty when checked
   <data name="textBoxTableLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="descriptionBox" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,Absolute,20" /&gt;&lt;Rows Styles="Percent,100,Absolute,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="$this.Localizable" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>7, 15</value>
   </data>

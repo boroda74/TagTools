@@ -13,7 +13,7 @@ namespace MusicBeePlugin
 
         private MetaDataType sourceTagId;
         private MetaDataType destinationTagId;
-        private string[] files = new string[0];
+        private string[] files = Array.Empty<string>();
 
         internal SwapTags(Plugin plugin) : base(plugin)
         {
@@ -51,7 +51,7 @@ namespace MusicBeePlugin
 
             files = null;
             if (!MbApiInterface.Library_QueryFilesEx("domain=SelectedFiles", out files))
-                files = new string[0];
+                files = Array.Empty<string>();
 
             if (files.Length == 0)
             {
@@ -66,24 +66,19 @@ namespace MusicBeePlugin
 
         private void swapTags()
         {
-            string currentFile;
-            string sourceTagValue;
-            string destinationTagValue;
-            SwappedTags swappedTags;
-
-            for (int fileCounter = 0; fileCounter < files.Length; fileCounter++)
+            for (var fileCounter = 0; fileCounter < files.Length; fileCounter++)
             {
                 if (backgroundTaskIsCanceled)
                     return;
 
-                currentFile = files[fileCounter];
+                var currentFile = files[fileCounter];
 
-                SetStatusbarTextForFileOperations(SwapTagsSbText, false, fileCounter, files.Length, currentFile);
+                SetStatusBarTextForFileOperations(SwapTagsSbText, false, fileCounter, files.Length, currentFile);
 
-                sourceTagValue = GetFileTag(currentFile, sourceTagId);
-                destinationTagValue = GetFileTag(currentFile, destinationTagId);
+                var sourceTagValue = GetFileTag(currentFile, sourceTagId);
+                var destinationTagValue = GetFileTag(currentFile, destinationTagId);
 
-                swappedTags = SwapTags(sourceTagValue, destinationTagValue, sourceTagId, destinationTagId, smartOperationCheckBox.Checked);
+                var swappedTags = SwapTags(sourceTagValue, destinationTagValue, sourceTagId, destinationTagId, smartOperationCheckBox.Checked);
 
                 if (sourceTagId != destinationTagId)
                     SetFileTag(currentFile, destinationTagId, swappedTags.newDestinationTagValue);

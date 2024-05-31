@@ -221,7 +221,7 @@
             this.dirtyErrorProvider.SetIconPadding(this.buttonSettings, ((int)(resources.GetObject("buttonSettings.IconPadding"))));
             this.buttonSettings.Image = global::MusicBeePlugin.Properties.Resources.gear_15;
             this.buttonSettings.Name = "buttonSettings";
-            this.buttonSettings.Tag = "#buttonCancel&CalculateAverageAlbumRating@non-defaultable@square-control";
+            this.buttonSettings.Tag = "#buttonCancel&CalculateAverageAlbumRating@non-defaultable@square-button";
             this.buttonSettings.Click += new System.EventHandler(this.buttonSettings_Click);
             // 
             // CalculateAverageAlbumRating

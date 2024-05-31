@@ -146,7 +146,7 @@
             this.searchedPattern4Box = new System.Windows.Forms.TextBox();
             this.label29 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.label15 = new System.Windows.Forms.Label();
+            this.groupBox5Label = new System.Windows.Forms.Label();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.replacedTag5List = new System.Windows.Forms.ComboBox();
             this.label35 = new System.Windows.Forms.Label();
@@ -199,22 +199,22 @@
             this.SuspendLayout();
 
             //MusicBee
-            this.nameBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.descriptionBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.customTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.customText2Box = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.customText3Box = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.customText4Box = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.searchedPatternBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.replacedPatternBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.searchedPattern2Box = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.replacedPattern2Box = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.searchedPattern3Box = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.replacedPattern3Box = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.searchedPattern4Box = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.replacedPattern4Box = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.searchedPattern5Box = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.replacedPattern5Box = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
+            this.nameBox = ControlsTools.CreateMusicBeeTextBox();
+            this.descriptionBox = ControlsTools.CreateMusicBeeTextBox();
+            this.customTextBox = ControlsTools.CreateMusicBeeTextBox();
+            this.customText2Box = ControlsTools.CreateMusicBeeTextBox();
+            this.customText3Box = ControlsTools.CreateMusicBeeTextBox();
+            this.customText4Box = ControlsTools.CreateMusicBeeTextBox();
+            this.searchedPatternBox = ControlsTools.CreateMusicBeeTextBox();
+            this.replacedPatternBox = ControlsTools.CreateMusicBeeTextBox();
+            this.searchedPattern2Box = ControlsTools.CreateMusicBeeTextBox();
+            this.replacedPattern2Box = ControlsTools.CreateMusicBeeTextBox();
+            this.searchedPattern3Box = ControlsTools.CreateMusicBeeTextBox();
+            this.replacedPattern3Box = ControlsTools.CreateMusicBeeTextBox();
+            this.searchedPattern4Box = ControlsTools.CreateMusicBeeTextBox();
+            this.replacedPattern4Box = ControlsTools.CreateMusicBeeTextBox();
+            this.searchedPattern5Box = ControlsTools.CreateMusicBeeTextBox();
+            this.replacedPattern5Box = ControlsTools.CreateMusicBeeTextBox();
             //~MusicBee
 
             //
@@ -995,7 +995,7 @@
             //groupBox5
             //
             resources.ApplyResources(this.groupBox5, "groupBox5");
-            this.groupBox5.Controls.Add(this.label15);
+            this.groupBox5.Controls.Add(this.groupBox5Label);
             this.groupBox5.Controls.Add(this.tableLayoutPanel7);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.TabStop = false;
@@ -1003,8 +1003,8 @@
             //
             //label15
             //
-            resources.ApplyResources(this.label15, "label15");
-            this.label15.Name = "label15";
+            resources.ApplyResources(this.groupBox5Label, "groupBox5Label");
+            this.groupBox5Label.Name = "groupBox5Label";
             //
             //tableLayoutPanel7
             //
@@ -1305,7 +1305,25 @@
             this.textBoxTableLayoutPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
-
+            
+            //MusicBee
+            new TextBoxBorder(this.nameBox);
+            new TextBoxBorder(this.descriptionBox);
+            new TextBoxBorder(this.customTextBox);
+            new TextBoxBorder(this.customText2Box);
+            new TextBoxBorder(this.customText3Box);
+            new TextBoxBorder(this.customText4Box);
+            new TextBoxBorder(this.searchedPatternBox);
+            new TextBoxBorder(this.replacedPatternBox);
+            new TextBoxBorder(this.searchedPattern2Box);
+            new TextBoxBorder(this.replacedPattern2Box);
+            new TextBoxBorder(this.searchedPattern3Box);
+            new TextBoxBorder(this.replacedPattern3Box);
+            new TextBoxBorder(this.searchedPattern4Box);
+            new TextBoxBorder(this.replacedPattern4Box);
+            new TextBoxBorder(this.searchedPattern5Box);
+            new TextBoxBorder(this.replacedPattern5Box);
+            //~MusicBee
         }
 
         #endregion
@@ -1449,7 +1467,7 @@
         private System.Windows.Forms.Label groupBox2Label;
         private System.Windows.Forms.Label groupBox3Label;
         private System.Windows.Forms.Label groupBox4Label;
-        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label groupBox5Label;
         private System.Windows.Forms.TableLayoutPanel textBoxTableLayoutPanel;
     }
 }

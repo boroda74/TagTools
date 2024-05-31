@@ -22,41 +22,22 @@ namespace MusicBeePlugin
 
             if (disposing)
             {
-                if (periodicCacheClearingTimer != null)
-                    periodicCacheClearingTimer.Dispose();
+                periodicCacheClearingTimer?.Dispose();
 
-                if (totalsFont != null)
-                    totalsFont.Dispose();
+                totalsFont?.Dispose();
 
-                if (warningWide != null)
-                    warningWide.Dispose();
+                warningWide?.Dispose();
+                errorWide?.Dispose();
+                fatalErrorWide?.Dispose();
+                errorFatalErrorWide?.Dispose();
 
-                if (errorWide != null)
-                    errorWide.Dispose();
+                warning?.Dispose();
+                error?.Dispose();
+                fatalError?.Dispose();
+                errorFatalError?.Dispose();
 
-                if (fatalErrorWide != null)
-                    fatalErrorWide.Dispose();
-
-                if (errorFatalErrorWide != null)
-                    errorFatalErrorWide.Dispose();
-
-                if (warning != null)
-                    warning.Dispose();
-
-                if (error != null)
-                    error.Dispose();
-
-                if (fatalError != null)
-                    fatalError.Dispose();
-
-                if (errorFatalError != null)
-                    errorFatalError.Dispose();
-
-                if (DefaultArtwork != null)
-                    DefaultArtwork.Dispose();
-
-                if (artwork != null)
-                    artwork.Dispose();
+                DefaultArtwork?.Dispose();
+                artwork?.Dispose();
             }
 
             base.Dispose(disposing);
@@ -191,10 +172,10 @@ namespace MusicBeePlugin
 
             //MusicBee
             this.presetList = new CustomCheckedListBox(Plugin.SavedSettings.dontUseSkinColors);
-            this.presetNameTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.appendTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.idTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.expressionTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
+            this.presetNameTextBox = ControlsTools.CreateMusicBeeTextBox();
+            this.appendTextBox = ControlsTools.CreateMusicBeeTextBox();
+            this.idTextBox = ControlsTools.CreateMusicBeeTextBox();
+            this.expressionTextBox = ControlsTools.CreateMusicBeeTextBox();
             //~MusicBee
 
             // 
@@ -387,7 +368,6 @@ namespace MusicBeePlugin
             // 
             resources.ApplyResources(this.clearIdButton, "clearIdButton");
             this.dirtyErrorProvider.SetIconAlignment(this.clearIdButton, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("clearIdButton.IconAlignment"))));
-            this.clearIdButton.Image = global::MusicBeePlugin.Properties.Resources.clear_button_15;
             this.clearIdButton.Name = "clearIdButton";
             this.clearIdButton.Tag = "#splitContainer1@non-defaultable@square-control";
             this.toolTip1.SetToolTip(this.clearIdButton, resources.GetString("clearIdButton.ToolTip"));
@@ -691,7 +671,7 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.buttonSettings, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonSettings.IconAlignment"))));
             this.buttonSettings.Image = global::MusicBeePlugin.Properties.Resources.gear_15;
             this.buttonSettings.Name = "buttonSettings";
-            this.buttonSettings.Tag = "@non-defaultable@square-control";
+            this.buttonSettings.Tag = "@non-defaultable@square-button";
             this.toolTip1.SetToolTip(this.buttonSettings, resources.GetString("buttonSettings.ToolTip"));
             this.buttonSettings.Click += new System.EventHandler(this.buttonSettings_Click);
             // 
@@ -1097,10 +1077,9 @@ namespace MusicBeePlugin
             // buttonClearExpression
             // 
             this.dirtyErrorProvider.SetIconAlignment(this.buttonClearExpression, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonClearExpression.IconAlignment"))));
-            this.buttonClearExpression.Image = global::MusicBeePlugin.Properties.Resources.clear_button_15;
             resources.ApplyResources(this.buttonClearExpression, "buttonClearExpression");
             this.buttonClearExpression.Name = "buttonClearExpression";
-            this.buttonClearExpression.Tag = "@pinned-to-parent-x@non-defaultable@square-control";
+            this.buttonClearExpression.Tag = "@pinned-to-parent-x@non-defaultable@square-button";
             this.toolTip1.SetToolTip(this.buttonClearExpression, resources.GetString("buttonClearExpression.ToolTip"));
             this.buttonClearExpression.Click += new System.EventHandler(this.buttonClearExpression_Click);
             // 
@@ -1210,6 +1189,12 @@ namespace MusicBeePlugin
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).EndInit();
             this.ResumeLayout(false);
 
+            //MusicBee
+            new TextBoxBorder(this.presetNameTextBox);
+            new TextBoxBorder(this.appendTextBox);
+            new TextBoxBorder(this.idTextBox);
+            new TextBoxBorder(this.expressionTextBox);
+            //~MusicBee
         }
 
         #endregion

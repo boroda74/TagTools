@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using MusicBeePlugin.Properties;
 using static MusicBeePlugin.LibraryReports;
 using static MusicBeePlugin.Plugin;
 
@@ -14,7 +15,7 @@ namespace MusicBeePlugin
         protected Dictionary<ReportPreset, int> allCurrentPresets;
         protected ReportPreset[] newOrChangedCachedPresets;
 
-        protected string exceptionText = null;
+        protected string exceptionText;
         protected string progressInfo;
 
         internal LrFunctionPrecaching(Plugin plugin) : base(plugin)
@@ -45,21 +46,21 @@ namespace MusicBeePlugin
                 anotherLrPresetCompleteTimer.Dispose();
             }
 
-            Thread workingThread = new Thread(calculatePresets);
+            var workingThread = new Thread(calculatePresets);
             workingThread.Start();
         }
 
-        internal bool precachePresets(ReportPreset[] allCurrentPresets, List<ReportPreset> newOrChangedCachedPresets)
+        internal bool precachePresets(ReportPreset[] currentPresets, List<ReportPreset> newOrChangedPresets)
         {
-            lock (allCurrentPresets)
+            lock (currentPresets)
             {
-                this.allCurrentPresets = new Dictionary<ReportPreset, int>();
-                for (int i = 0; i < allCurrentPresets.Length; i++)
-                    this.allCurrentPresets.Add(new ReportPreset(allCurrentPresets[i], true), i);
+                allCurrentPresets = new Dictionary<ReportPreset, int>();
+                for (var i = 0; i < currentPresets.Length; i++)
+                    allCurrentPresets.Add(new ReportPreset(currentPresets[i], true), i);
             }
 
-            this.newOrChangedCachedPresets = new ReportPreset[newOrChangedCachedPresets.Count];
-            newOrChangedCachedPresets.CopyTo(this.newOrChangedCachedPresets, 0);
+            newOrChangedCachedPresets = new ReportPreset[newOrChangedPresets.Count];
+            newOrChangedPresets.CopyTo(newOrChangedCachedPresets, 0);
 
             Display(this, true);
 
@@ -89,18 +90,18 @@ namespace MusicBeePlugin
             LibraryReportsCommandForFunctionIds.backgroundTaskIsCanceled = false;
             //progressInfoLabel.Text = progressInfo;
 
-            List<ReportPreset> processedPresets = new List<ReportPreset>();
+            var processedPresets = new List<ReportPreset>();
 
-            DateTime startTime = DateTime.UtcNow;
+            var startTime = DateTime.UtcNow;
             Thread.CurrentThread.Priority = ThreadPriority.Normal;
 
-            ReportPreset[] reportPresetsBackup = LibraryReportsCommandForFunctionIds.reportPresets;
+            var reportPresetsBackup = LibraryReportsCommandForFunctionIds.reportPresets;
             var unitedReportPresets = LibraryReportsCommandForFunctionIds.reportPresets.Union(newOrChangedCachedPresets);
 
             LibraryReportsCommandForFunctionIds.reportPresets = unitedReportPresets.ToArray();
 
 
-            for (int i = 0; i < newOrChangedCachedPresets.Length; i++)
+            for (var i = 0; i < newOrChangedCachedPresets.Length; i++)
             {
                 if (LibraryReportsCommandForFunctionIds.backgroundTaskIsCanceled)
                 {
@@ -114,18 +115,18 @@ namespace MusicBeePlugin
 
                 try
                 {
-                    DateTime now = DateTime.UtcNow;
-                    TimeSpan elapsed = now - startTime;
+                    var now = DateTime.UtcNow;
+                    var elapsed = now - startTime;
 
-                    string status = progressInfo + "\n\n" + newOrChangedCachedPresets[i].getName() + "\n\n" + (i + 1) + "/" + newOrChangedCachedPresets.Length
-                        + CtlLrElapsed + elapsed.Hours + ":" + elapsed.Minutes + ":" + elapsed.Seconds;
+                    var status = progressInfo + Resources.MsgDoubleNewLine + newOrChangedCachedPresets[i].getName() + Resources.MsgDoubleNewLine + (i + 1) + "/" + newOrChangedCachedPresets.Length
+                                 + CtlLrElapsed + elapsed.Hours + ":" + elapsed.Minutes + ":" + elapsed.Seconds;
 
                     Invoke(new Action(() => { progressInfoLabel.Text = status; }));
 
                     lock (LrPresetExecutionLocker)
                     {
                         LibraryReportsCommandForFunctionIds.appliedPreset = newOrChangedCachedPresets[i];
-                        LibraryReportsCommandForFunctionIds.executePreset(null, false, true, null, false, true);
+                        LibraryReportsCommandForFunctionIds.executePreset(null, null, false, true, null, false, true);
                     }
                 }
                 catch (ThreadAbortException)
@@ -151,17 +152,12 @@ namespace MusicBeePlugin
 
             BackgroundTaskIsInProgress = false;
 
-            List<ReportPreset> doNotChangeSavedPresets = new List<ReportPreset>();
-            List<ReportPreset> savePresets = new List<ReportPreset>();
+            var doNotChangeSavedPresets = new List<ReportPreset>();
+            var savePresets = new List<ReportPreset>();
 
-            int j = -1;
-            foreach (var preset in this.allCurrentPresets.Keys)
+            foreach (var preset in allCurrentPresets.Keys)
             {
-                j++;
-                bool savePreset = true;
-
-                if (!newOrChangedCachedPresets.Contains(preset) && !processedPresets.Contains(preset))
-                    savePreset = false;
+                bool savePreset = !(!newOrChangedCachedPresets.Contains(preset) && !processedPresets.Contains(preset));
 
                 if (savePreset)
                 {
@@ -169,10 +165,13 @@ namespace MusicBeePlugin
                 }
                 else
                 {
-                    foreach (var savedPreset in SavedSettings.reportPresets)
+                    lock (SavedSettings.reportPresets)
                     {
-                        if (savedPreset.permanentGuid == preset.permanentGuid) //Can't be saved, but there is saved copy (it's not new preset). Let's resave this copy.
-                            doNotChangeSavedPresets.Add(savedPreset);
+                        foreach (var savedPreset in SavedSettings.reportPresets)
+                        {
+                            if (savedPreset.permanentGuid == preset.permanentGuid) //Can't be saved, but there is saved copy (it's not new preset). Let's resave this copy.
+                                doNotChangeSavedPresets.Add(savedPreset);
+                        }
                     }
                 }
             }
@@ -182,10 +181,10 @@ namespace MusicBeePlugin
             {
                 SavedSettings.reportPresets = new ReportPreset[savePresets.Count + doNotChangeSavedPresets.Count];
 
-                for (int i = 0; i < savePresets.Count; i++)
+                for (var i = 0; i < savePresets.Count; i++)
                     SavedSettings.reportPresets[i] = new ReportPreset(savePresets[i], true);
 
-                for (int i = 0; i < doNotChangeSavedPresets.Count; i++)
+                for (var i = 0; i < doNotChangeSavedPresets.Count; i++)
                     SavedSettings.reportPresets[savePresets.Count + i] = doNotChangeSavedPresets[i];
             }
 
@@ -193,10 +192,10 @@ namespace MusicBeePlugin
 
             RefreshPanels(true);
             SetResultingSbText();
-            Invoke(new Action(() => { Close(); }));
+            Invoke(new Action(Close));
         }
 
-        private void buttonCancel_Click(object sender, System.EventArgs e)
+        private void buttonCancel_Click(object sender, EventArgs e)
         {
             LibraryReportsCommandForFunctionIds.backgroundTaskIsCanceled = true;
             buttonCancel.Enable(false);

@@ -29,7 +29,7 @@ namespace MusicBeePlugin
         private int rowHeadersWidth;
         private int defaultColumnWidth;
 
-        private bool ignoreAutoSelectTagsCheckBoxCheckedEvent = false;
+        private bool ignoreAutoSelectTagsCheckBoxCheckedEvent;
 
         private readonly Dictionary<int, object> buffer = new Dictionary<int, object>();
         private Bitmap bufferArtwork;
@@ -48,7 +48,7 @@ namespace MusicBeePlugin
             FillListByTagNames(tagNames, false, true, false);
 
             tagIds = new List<MetaDataType>();
-            for (int i = 0; i < tagNames.Count; i++)
+            for (var i = 0; i < tagNames.Count; i++)
                 tagIds.Add(GetTagId(tagNames[i]));
 
 
@@ -66,7 +66,7 @@ namespace MusicBeePlugin
             if (!SavedSettings.dontAutoSelectDisplayedTags || SavedSettings.displayedTags == null)
             {
                 displayedTags = new int[tagIds.Count];
-                for (int i = 0; i < tagIds.Count; i++)
+                for (var i = 0; i < tagIds.Count; i++)
                     displayedTags[i] = (int)tagIds[i];
 
                 SavedSettings.displayedTags = displayedTags;
@@ -106,7 +106,7 @@ namespace MusicBeePlugin
 
             artworkRow = -1;
 
-            for (int j = 0; j < reallyDisplayedTags.Count; j++)
+            for (var j = 0; j < reallyDisplayedTags.Count; j++)
             {
                 previewTable.Rows[j].HeaderCell.Value = GetTagName((MetaDataType)reallyDisplayedTags[j]);
 
@@ -125,7 +125,7 @@ namespace MusicBeePlugin
 
                 if (reallyDisplayedTags.Count == 0)
                 {
-                    DataGridViewColumn newColumn = columnTemplate.Clone() as DataGridViewColumn;
+                    var newColumn = columnTemplate.Clone() as DataGridViewColumn;
                     newColumn.HeaderText = string.Empty;
                     newColumn.ToolTipText = string.Empty;
                     newColumn.Width = defaultColumnWidth;
@@ -150,9 +150,9 @@ namespace MusicBeePlugin
                 }
                 else
                 {
-                    for (int trackNo = 0; trackNo < cachedTracks.Count; trackNo++)
+                    for (var trackNo = 0; trackNo < cachedTracks.Count; trackNo++)
                     {
-                        DataGridViewColumn newColumn = columnTemplate.Clone() as DataGridViewColumn;
+                        var newColumn = columnTemplate.Clone() as DataGridViewColumn;
                         newColumn.HeaderText = string.Empty + (trackNo + 1);
                         newColumn.ToolTipText = trackUrls[trackNo];
                         newColumn.Width = defaultColumnWidth;
@@ -168,10 +168,10 @@ namespace MusicBeePlugin
                         }
 
 
-                        for (int j = 0; j < reallyDisplayedTags.Count; j++)
+                        for (var j = 0; j < reallyDisplayedTags.Count; j++)
                         {
-                            int tagPosition = 0;
-                            for (int i = 0; i < displayedTags.Length; i++)
+                            var tagPosition = 0;
+                            for (var i = 0; i < displayedTags.Length; i++)
                             {
                                 if (displayedTags[i] == reallyDisplayedTags[j])
                                 {
@@ -180,7 +180,7 @@ namespace MusicBeePlugin
                                 }
                             }
 
-                            string tagValue = cachedTracks[trackNo][tagPosition];
+                            var tagValue = cachedTracks[trackNo][tagPosition];
 
                             if (j != artworkRow)
                             {
@@ -211,12 +211,12 @@ namespace MusicBeePlugin
             {
                 cachedTracks = new List<List<string>>();
 
-                for (int i = 0; i < trackUrls.Length; i++)
+                for (var i = 0; i < trackUrls.Length; i++)
                 {
                     var cachedTrack = new List<string>();
                     cachedTracks.Add(cachedTrack);
 
-                    for (int j = 0; j < displayedTags.Length; j++)
+                    for (var j = 0; j < displayedTags.Length; j++)
                     {
                         cachedTrack.Add(GetFileTag(trackUrls[i], (MetaDataType)displayedTags[j]));
                     }
@@ -239,14 +239,14 @@ namespace MusicBeePlugin
 
             if (!SavedSettings.dontAutoSelectDisplayedTags)
             {
-                List<int> reallyDisplayedTags2 = new List<int>();
+                var reallyDisplayedTags2 = new List<int>();
 
 
-                for (int j = displayedTags.Length - 1; j >= 0; j--)
+                for (var j = displayedTags.Length - 1; j >= 0; j--)
                 {
-                    for (int i = cachedTracks.Count - 1; i >= 0; i--)
+                    for (var i = cachedTracks.Count - 1; i >= 0; i--)
                     {
-                        for (int k = cachedTracks.Count - 1; k >= 0; k--)
+                        for (var k = cachedTracks.Count - 1; k >= 0; k--)
                         {
                             if (cachedTracks[i][j] != cachedTracks[k][j])
                             {
@@ -261,25 +261,25 @@ namespace MusicBeePlugin
                 }
 
 
-                for (int j = reallyDisplayedTags2.Count - 1; j >= 0; j--)
+                for (var j = reallyDisplayedTags2.Count - 1; j >= 0; j--)
                     reallyDisplayedTags.Add(reallyDisplayedTags2[j]);
             }
             else
             {
-                for (int j = 0; j < displayedTags.Length; j++)
+                for (var j = 0; j < displayedTags.Length; j++)
                     reallyDisplayedTags.Add(displayedTags[j]);
             }
 
 
             if (!SavedSettings.dontAutoSelectDisplayedTags)
             {
-                for (int i = cachedTracks.Count - 1; i >= 0; i--)
+                for (var i = cachedTracks.Count - 1; i >= 0; i--)
                 {
-                    bool trackHaveDifferences = false;
+                    var trackHaveDifferences = false;
 
-                    for (int j = displayedTags.Length - 1; j >= 0; j--)
+                    for (var j = displayedTags.Length - 1; j >= 0; j--)
                     {
-                        for (int k = cachedTracks.Count - 1; k >= 0; k--)
+                        for (var k = cachedTracks.Count - 1; k >= 0; k--)
                         {
                             if (cachedTracks[i][j] != cachedTracks[k][j])
                             {
@@ -289,7 +289,7 @@ namespace MusicBeePlugin
                         }
                     }
 
-                breakpoint:
+                    breakpoint:
                     if (!trackHaveDifferences)
                     {
                         cachedTracks.RemoveAt(i);
@@ -308,9 +308,9 @@ namespace MusicBeePlugin
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < trackUrls.Length; i++)
+            for (var i = 0; i < trackUrls.Length; i++)
             {
-                for (int j = 0; j < reallyDisplayedTags.Count; j++)
+                for (var j = 0; j < reallyDisplayedTags.Count; j++)
                 {
                     if (j == artworkRow)
                         SetFileTag(trackUrls[i], (MetaDataType)reallyDisplayedTags[j], (string)previewTable.Rows[j].Cells[i].Tag);
@@ -353,7 +353,7 @@ namespace MusicBeePlugin
             {
                 //rememberColumnAsDefaultWidthCheckBox.Checked = false;
 
-                for (int i = 0; i < previewTable.ColumnCount; i++)
+                for (var i = 0; i < previewTable.ColumnCount; i++)
                 {
                     previewTable.Columns[i].Width = e.Column.Width;
 
@@ -367,11 +367,11 @@ namespace MusicBeePlugin
         {
             if (previewTable.SelectedCells.Count > 1)
             {
-                for (int j = 0; j < previewTable.RowCount; j++)
+                for (var j = 0; j < previewTable.RowCount; j++)
                 {
-                    int selectedRawCellsCount = 0;
+                    var selectedRawCellsCount = 0;
 
-                    for (int i = 0; i < previewTable.ColumnCount; i++)
+                    for (var i = 0; i < previewTable.ColumnCount; i++)
                     {
                         if (previewTable.Rows[j].Cells[i].Selected)
                             selectedRawCellsCount++;
@@ -379,7 +379,7 @@ namespace MusicBeePlugin
 
                     if (selectedRawCellsCount > 1)
                     {
-                        for (int i = 0; i < previewTable.ColumnCount; i++)
+                        for (var i = 0; i < previewTable.ColumnCount; i++)
                         {
                             if (previewTable.Rows[j].Cells[i].Selected)
                             {
@@ -399,13 +399,13 @@ namespace MusicBeePlugin
         {
             if (e.ColumnIndex > -1)
             {
-                for (int j = 0; j < previewTable.RowCount; j++)
-                    for (int i = 1; i < previewTable.ColumnCount; i++)
+                for (var j = 0; j < previewTable.RowCount; j++)
+                    for (var i = 1; i < previewTable.ColumnCount; i++)
                         previewTable.Rows[j].Cells[i].Selected = false;
             }
 
 
-            for (int j = 0; j < previewTable.RowCount; j++)
+            for (var j = 0; j < previewTable.RowCount; j++)
                 previewTable.Rows[j].Cells[e.ColumnIndex].Selected = true;
         }
 
@@ -432,7 +432,7 @@ namespace MusicBeePlugin
                 selectTagsButton.Enable(false);
 
                 displayedTags = new int[tagIds.Count];
-                for (int i = 0; i < tagIds.Count; i++)
+                for (var i = 0; i < tagIds.Count; i++)
                     displayedTags[i] = (int)tagIds[i];
             }
             else
@@ -454,9 +454,9 @@ namespace MusicBeePlugin
         {
             buffer.Clear();
 
-            for (int j = 0; j < previewTable.RowCount; j++)
+            for (var j = 0; j < previewTable.RowCount; j++)
             {
-                for (int i = 0; i < previewTable.ColumnCount; i++)
+                for (var i = 0; i < previewTable.ColumnCount; i++)
                 {
                     if (j == artworkRow)
                     {
@@ -500,9 +500,9 @@ namespace MusicBeePlugin
 
         private void buttonClear_Click(object sender, EventArgs e)
         {
-            for (int j = 0; j < previewTable.RowCount; j++)
+            for (var j = 0; j < previewTable.RowCount; j++)
             {
-                for (int i = 0; i < previewTable.ColumnCount; i++)
+                for (var i = 0; i < previewTable.ColumnCount; i++)
                 {
                     if (previewTable.Rows[j].Cells[i].Selected)
                     {

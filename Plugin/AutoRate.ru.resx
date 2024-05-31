@@ -117,42 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="buttonOK.Error" xml:space="preserve">
-    <value />
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="buttonOK.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="buttonOK.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="buttonOK.Text" xml:space="preserve">
     <value>Установить рейтинг выбранных файлов</value>
   </data>
-  <data name="buttonOK.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1246, 597</value>
-  </data>
-  <data name="buttonSettings.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonSettings.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="buttonSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1092, 8</value>
-  </data>
-  <data name="groupBox1Label.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="groupBox1Label.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
   <data name="groupBox1Label.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -1369,8 +1339,8 @@
 нее будет высокое значение "Числа воспроизведений в день". 
 
 Иногда лучше использовать эту опцию, чтобы трактовать "Число воспроизведений в день" как
-среднее чило вопроизведений в день с момента довления в библиотеку до текущего 
-момента (не важно, когда композиция была поледний раз проиграна). 
+среднее число воспроизведений в день с момента добавления в библиотеку до текущего 
+момента (не важно, когда композиция была последний раз проиграна). 
 
 Рекомендуется "автоматически устанавливать рейтинги при запуске", если вы хотите использовать 
 эту опцию потому, что "число воспроизведений в день во время существования в библиотеке" меняется 
@@ -1393,8 +1363,8 @@
 нее будет высокое значение "Числа воспроизведений в день". 
 
 Иногда лучше использовать эту опцию, чтобы трактовать "Число воспроизведений в день" как
-среднее чило вопроизведений в день с момента довления в библиотеку до текущего 
-момента (не важно, когда композиция была поледний раз проиграна). 
+среднее число воспроизведений в день с момента добавления в библиотеку до текущего 
+момента (не важно, когда композиция была последний раз проиграна). 
 
 Рекомендуется "автоматически устанавливать рейтинги при запуске", если вы хотите использовать 
 эту опцию потому, что "число воспроизведений в день во время существования в библиотеке" меняется 
@@ -1430,40 +1400,40 @@
   <data name="autoRateOnTrackPropertiesCheckBox.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="notifyWhenAutoratingCompletedCheckBoxLabel.Error" xml:space="preserve">
+  <data name="notifyWhenAutoRatingCompletedCheckBoxLabel.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="notifyWhenAutoratingCompletedCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+  <data name="notifyWhenAutoRatingCompletedCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="notifyWhenAutoratingCompletedCheckBoxLabel.IconPadding" type="System.Int32, mscorlib">
+  <data name="notifyWhenAutoRatingCompletedCheckBoxLabel.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="notifyWhenAutoratingCompletedCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="notifyWhenAutoRatingCompletedCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>356, 68</value>
   </data>
-  <data name="notifyWhenAutoratingCompletedCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="notifyWhenAutoRatingCompletedCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>159, 15</value>
   </data>
-  <data name="notifyWhenAutoratingCompletedCheckBoxLabel.Text" xml:space="preserve">
+  <data name="notifyWhenAutoRatingCompletedCheckBoxLabel.Text" xml:space="preserve">
     <value>Оповестить по завершении</value>
   </data>
-  <data name="notifyWhenAutoratingCompletedCheckBoxLabel.ToolTip" xml:space="preserve">
+  <data name="notifyWhenAutoRatingCompletedCheckBoxLabel.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="notifyWhenAutoratingCompletedCheckBox.Error" xml:space="preserve">
+  <data name="notifyWhenAutoRatingCompletedCheckBox.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="notifyWhenAutoratingCompletedCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+  <data name="notifyWhenAutoRatingCompletedCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="notifyWhenAutoratingCompletedCheckBox.IconPadding" type="System.Int32, mscorlib">
+  <data name="notifyWhenAutoRatingCompletedCheckBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="notifyWhenAutoratingCompletedCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="notifyWhenAutoRatingCompletedCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>331, 68</value>
   </data>
-  <data name="notifyWhenAutoratingCompletedCheckBox.ToolTip" xml:space="preserve">
+  <data name="notifyWhenAutoRatingCompletedCheckBox.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="autoRateAtStartUpCheckBoxLabel.Error" xml:space="preserve">

@@ -118,14 +118,8 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="buttonPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>242, 5</value>
-  </data>
   <data name="buttonPreview.Text" xml:space="preserve">
     <value>Просмотр</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1139, 361</value>
   </data>
   <data name="Track.HeaderText" xml:space="preserve">
     <value>Трек</value>
@@ -141,12 +135,6 @@
   </data>
   <data name="NewTagT.HeaderText" xml:space="preserve">
     <value>Новое значение</value>
-  </data>
-  <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1124, 184</value>
-  </data>
-  <data name="buttonAsrWordSeparators.Location" type="System.Drawing.Point, System.Drawing">
-    <value>458, 113</value>
   </data>
   <data name="buttonAsrWordSeparators.Text" xml:space="preserve">
     <value>ДПЗ</value>
@@ -318,13 +306,13 @@
     <value>Кроме слов между символами:</value>
   </data>
   <data name="exceptionCharPairsCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value>Эта опция запретит любые изменения слов находящихся между указаннами парами символов</value>
+    <value>Эта опция запретит любые изменения слов находящихся между указанными парами символов</value>
   </data>
   <data name="exceptionCharPairsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>209, 90</value>
   </data>
   <data name="exceptionCharPairsCheckBox.ToolTip" xml:space="preserve">
-    <value>Эта опция запретит любые изменения слов находящихся между указаннами парами символов</value>
+    <value>Эта опция запретит любые изменения слов находящихся между указанными парами символов</value>
   </data>
   <data name="exceptionCharsCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>237, 63</value>
@@ -430,9 +418,6 @@
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Изменение регистра</value>
-  </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="dirtyErrorProvider.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

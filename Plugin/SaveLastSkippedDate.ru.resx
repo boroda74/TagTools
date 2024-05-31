@@ -118,44 +118,17 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="lastSkippedTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>312, 5</value>
-  </data>
-  <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>444, 61</value>
-  </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Отмена</value>
-  </data>
-  <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>348, 61</value>
   </data>
   <data name="buttonOK.Text" xml:space="preserve">
     <value>ОК</value>
   </data>
-  <data name="saveLastSkippedCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 8</value>
-  </data>
-  <data name="dateTimeFormatLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>135, 15</value>
-  </data>
   <data name="dateTimeFormatLabel.Text" xml:space="preserve">
     <value>Формат даты/времени:</value>
   </data>
-  <data name="lastSkippedDateFormatTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>312, 32</value>
-  </data>
-  <data name="saveLastSkippedCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>249, 15</value>
-  </data>
   <data name="saveLastSkippedCheckBoxLabel.Text" xml:space="preserve">
     <value>Сохранять дату последнего пропуска трека:</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>544, 89</value>
-  </data>
-  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>560, 128</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Сохранять дату последнего пропуска трека</value>

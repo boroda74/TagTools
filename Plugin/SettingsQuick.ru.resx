@@ -118,32 +118,17 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="playTickedAsrPresetSoundCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>449, 15</value>
-  </data>
   <data name="playTickedAsrPresetSoundCheckBoxLabel.Text" xml:space="preserve">
     <value>Проиграть звук при отметке пресета ДПЗ/ОБ для автоматического применения</value>
-  </data>
-  <data name="playStoppedSoundCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>466, 15</value>
   </data>
   <data name="playStoppedSoundCheckBoxLabel.Text" xml:space="preserve">
     <value>Проиграть системный звук "Стоп", когда фоновая задача отменена пользователем</value>
   </data>
-  <data name="playStartedSoundCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>435, 15</value>
-  </data>
   <data name="playStartedSoundCheckBoxLabel.Text" xml:space="preserve">
     <value>Проиграть системный звук "Восклицание", когда фоновая задача начинается</value>
   </data>
-  <data name="playCompletedSoundCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>500, 15</value>
-  </data>
   <data name="playCompletedSoundCheckBoxLabel.Text" xml:space="preserve">
     <value>Проиграть системный звук "Звездочка", когда фоновая задача завершается/остановлена</value>
-  </data>
-  <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 15</value>
   </data>
   <data name="label9.Text" xml:space="preserve">
     <value> Звуки </value>

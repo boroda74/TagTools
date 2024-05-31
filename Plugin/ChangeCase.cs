@@ -26,7 +26,7 @@ namespace MusicBeePlugin
         private CustomComboBox rightExceptionCharsBoxCustom;
         private CustomComboBox wordSeparatorsBoxCustom;
 
-        private bool rightExceptionCharsBoxLeaving = false;
+        private bool rightExceptionCharsBoxLeaving;
 
         private readonly DataGridViewCellStyle unchangedCellStyle = new DataGridViewCellStyle(UnchangedCellStyle);
         private readonly DataGridViewCellStyle changedCellStyle = new DataGridViewCellStyle(ChangedCellStyle);
@@ -40,7 +40,7 @@ namespace MusicBeePlugin
         private delegate void UpdateCustomScrollBarsDelegate(DataGridView dataGridView);
         private UpdateCustomScrollBarsDelegate updateCustomScrollBars;
 
-        private string[] files = new string[0];
+        private string[] files = Array.Empty<string>();
         private readonly List<string[]> tags = new List<string[]>();
         private MetaDataType sourceTagId;
 
@@ -73,22 +73,21 @@ namespace MusicBeePlugin
             sourceTagListCustom = namesComboBoxes["sourceTagList"];
 
             exceptionWordsBoxCustom = namesComboBoxes["exceptionWordsBox"];
-            exceptionWordsBoxCustom.Leave += new EventHandler(exceptionWordsBox_Leave);
+            exceptionWordsBoxCustom.Leave += exceptionWordsBox_Leave;
 
             exceptionCharsBoxCustom = namesComboBoxes["exceptionCharsBox"];
-            exceptionCharsBoxCustom.Leave += new EventHandler(exceptionCharsBox_Leave);
+            exceptionCharsBoxCustom.Leave += exceptionCharsBox_Leave;
 
             leftExceptionCharsBoxCustom = namesComboBoxes["leftExceptionCharsBox"];
-            leftExceptionCharsBoxCustom.Leave += new EventHandler(leftExceptionCharsBox_Leave);
+            leftExceptionCharsBoxCustom.Leave += leftExceptionCharsBox_Leave;
 
             rightExceptionCharsBoxCustom = namesComboBoxes["rightExceptionCharsBox"];
-            rightExceptionCharsBoxCustom.Leave += new EventHandler(rightExceptionCharsBox_Leave);
+            rightExceptionCharsBoxCustom.Leave += rightExceptionCharsBox_Leave;
 
             wordSeparatorsBoxCustom = namesComboBoxes["wordSeparatorsBox"];
-            wordSeparatorsBoxCustom.Leave += new EventHandler(wordSeparatorsBox_Leave);
+            wordSeparatorsBoxCustom.Leave += wordSeparatorsBox_Leave;
 
-
-            removeExceptionButton.Image = ReplaceBitmap(removeExceptionButton.Image, ButtonRemoveImage);
+            
             buttonSettings.Image = ReplaceBitmap(buttonSettings.Image, Gear);
 
             FillListByTagNames(sourceTagListCustom.Items);
@@ -99,21 +98,21 @@ namespace MusicBeePlugin
             exceptionWordsCheckBox.Checked = SavedSettings.useExceptionWords;
             onlyWordsCheckBox.Checked = SavedSettings.useOnlyWords;
             exceptionWordsBoxCustom.AddRange(SavedSettings.exceptionWords);
-            exceptionWordsBoxCustom.Text = SavedSettings.exceptionWords[0];
+            exceptionWordsBoxCustom.Text = SavedSettings.exceptionWords[0] as string;
 
             exceptionCharsCheckBox.Checked = SavedSettings.useExceptionChars;
             exceptionCharsBoxCustom.AddRange(SavedSettings.exceptionChars);
-            exceptionCharsBoxCustom.Text = SavedSettings.exceptionChars[0];
+            exceptionCharsBoxCustom.Text = SavedSettings.exceptionChars[0] as string;
 
             exceptionCharPairsCheckBox.Checked = SavedSettings.useExceptionCharPairs;
             leftExceptionCharsBoxCustom.AddRange(SavedSettings.leftExceptionChars);
-            leftExceptionCharsBoxCustom.Text = SavedSettings.leftExceptionChars[0];
+            leftExceptionCharsBoxCustom.Text = SavedSettings.leftExceptionChars[0] as string;
             rightExceptionCharsBoxCustom.AddRange(SavedSettings.rightExceptionChars);
-            rightExceptionCharsBoxCustom.Text = SavedSettings.rightExceptionChars[0];
+            rightExceptionCharsBoxCustom.Text = SavedSettings.rightExceptionChars[0] as string;
 
             wordSeparatorsCheckBox.Checked = SavedSettings.useWordSeparators;
             wordSeparatorsBoxCustom.AddRange(SavedSettings.wordSeparators);
-            wordSeparatorsBoxCustom.Text = SavedSettings.wordSeparators[0];
+            wordSeparatorsBoxCustom.Text = SavedSettings.wordSeparators[0] as string;
 
             alwaysCapitalize1stWordCheckBox.Checked = SavedSettings.alwaysCapitalize1stWord;
             alwaysCapitalizeLastWordCheckBox.Checked = SavedSettings.alwaysCapitalizeLastWord;
@@ -127,12 +126,12 @@ namespace MusicBeePlugin
 
             var headerCellStyle = new DataGridViewCellStyle(HeaderCellStyle);
 
-            DataGridViewCheckBoxHeaderCell cbHeader = new DataGridViewCheckBoxHeaderCell();
+            var cbHeader = new DataGridViewCheckBoxHeaderCell();
             cbHeader.Style = headerCellStyle;
             cbHeader.setState(true);
-            cbHeader.OnCheckBoxClicked += new CheckBoxClickedHandler(cbHeader_OnCheckBoxClicked);
+            cbHeader.OnCheckBoxClicked += cbHeader_OnCheckBoxClicked;
 
-            DataGridViewCheckBoxColumn colCB = new DataGridViewCheckBoxColumn
+            var colCB = new DataGridViewCheckBoxColumn
             {
                 HeaderCell = cbHeader,
                 ThreeState = true,
@@ -198,12 +197,12 @@ namespace MusicBeePlugin
             else return 5;
         }
 
-        private void previewTable_AddRowToTable(string[] row)
+        private void previewTable_AddRowToTable(object[] row)
         {
             previewTable.Rows.Add(row);
             previewTableFormatRow(previewTable.RowCount - 1);
 
-            if (previewTable.RowCount % 16 == 0)
+            if ((previewTable.RowCount & 0x1f) == 0)
                 UpdateCustomScrollBars(previewTable);
         }
 
@@ -215,21 +214,21 @@ namespace MusicBeePlugin
 
         internal static string ChangeSubstringCase(string substring, ChangeCaseOptions changeCaseOption, bool isTheFirstWord)
         {
-            string newSubstring = string.Empty;
+            var newSubstring = string.Empty;
 
             switch (changeCaseOption)
             {
                 case ChangeCaseOptions.SentenceCase:
                     if (isTheFirstWord)
-                        newSubstring = ChangeSubstringCase(substring, ChangeCaseOptions.TitleCase, isTheFirstWord);
+                        newSubstring = ChangeSubstringCase(substring, ChangeCaseOptions.TitleCase, true);
                     else
-                        newSubstring = ChangeSubstringCase(substring, ChangeCaseOptions.LowerCase, isTheFirstWord);
+                        newSubstring = ChangeSubstringCase(substring, ChangeCaseOptions.LowerCase, false);
 
                     break;
                 case ChangeCaseOptions.TitleCase:
-                    bool isTheFirstChar = true;
+                    var isTheFirstChar = true;
 
-                    foreach (char currentChar in substring)
+                    foreach (var currentChar in substring)
                     {
                         if (isTheFirstChar)
                         {
@@ -247,7 +246,7 @@ namespace MusicBeePlugin
                     newSubstring = substring.ToUpper();
                     break;
                 case ChangeCaseOptions.ToggleCase:
-                    foreach (char currentChar in substring)
+                    foreach (var currentChar in substring)
                     {
                         if ((string.Empty + currentChar).ToUpper() == (string.Empty + currentChar)) //Char is uppercased
                             newSubstring += (string.Empty + currentChar).ToLower();
@@ -272,7 +271,7 @@ namespace MusicBeePlugin
         {
             item = string.Empty + item; //It converts null to string
 
-            foreach (string currentItem in array)
+            foreach (var currentItem in array)
                 if (item.ToLower() == currentItem.ToLower()) return true;
 
             return false;
@@ -287,7 +286,7 @@ namespace MusicBeePlugin
         {
             item = string.Empty + item; //It converts null to string
 
-            for (int i = 0; i < array.Length; i++)
+            for (var i = 0; i < array.Length; i++)
                 if (item.ToLower() == array[i].ToLower()) return i;
 
             return -1;
@@ -301,33 +300,33 @@ namespace MusicBeePlugin
         internal static string ChangeWordsCase(string source, ChangeCaseOptions changeCaseOption, string[] exceptionWords = null, bool useWhiteList = false, string[] exceptionChars = null,
             string[] leftExceptionChars = null, string[] rightExceptionChars = null, string[] wordSeparators = null, bool alwaysCapitalize1stWord = false, bool alwaysCapitalizeLastWord = false)
         {
-            string newString = string.Empty;
-            string currentWord = string.Empty;
-            char prevChar = '\u0000';
-            bool wasCharException = false;
-            bool isTheFirstWord = true;
-            List<char> encounteredLeftExceptionChars = new List<char>();
+            var newString = string.Empty;
+            var currentWord = string.Empty;
+            var prevChar = '\u0000';
+            var wasCharException = false;
+            var isTheFirstWord = true;
+            var encounteredLeftExceptionChars = new List<char>();
 
             if (exceptionWords == null)
-                exceptionWords = new string[0];
+                exceptionWords = Array.Empty<string>();
 
             if (exceptionChars == null)
-                exceptionChars = new string[0];
+                exceptionChars = Array.Empty<string>();
 
             if (leftExceptionChars == null)
-                leftExceptionChars = new string[0];
+                leftExceptionChars = Array.Empty<string>();
 
             if (rightExceptionChars == null)
-                rightExceptionChars = new string[0];
+                rightExceptionChars = Array.Empty<string>();
 
             if (wordSeparators == null)
-                wordSeparators = new string[0];
+                wordSeparators = Array.Empty<string>();
 
 
-            foreach (char currentChar in source)
+            foreach (var currentChar in source)
             {
                 //Let's try to remove "between chars" changing case exception from encounteredLeftExceptionChars and mark wasCharException
-                int rightIndex = ItemIndexInArray(currentChar, rightExceptionChars);
+                var rightIndex = ItemIndexInArray(currentChar, rightExceptionChars);
                 if (rightIndex >= 0 && rightIndex < encounteredLeftExceptionChars.Count)
                 {
                     if (encounteredLeftExceptionChars[rightIndex].ToString() == leftExceptionChars[rightIndex])
@@ -411,27 +410,27 @@ namespace MusicBeePlugin
         internal static string ChangeSentenceCase(string source, string[] exceptionWords = null, bool useWhiteList = false, string[] exceptionChars = null,
             string[] leftExceptionChars = null, string[] rightExceptionChars = null, string[] sentenceSeparators = null, bool alwaysCapitalize1stWord = false, bool alwaysCapitalizeLastWord = false)
         {
-            string newString = string.Empty;
-            string currentSentence = string.Empty;
-            char prevChar = '\u0000';
+            var newString = string.Empty;
+            var currentSentence = string.Empty;
+            var prevChar = '\u0000';
 
             if (exceptionWords == null)
-                exceptionWords = new string[0];
+                exceptionWords = Array.Empty<string>();
 
             if (exceptionChars == null)
-                exceptionChars = new string[0];
+                exceptionChars = Array.Empty<string>();
 
             if (leftExceptionChars == null)
-                leftExceptionChars = new string[0];
+                leftExceptionChars = Array.Empty<string>();
 
             if (rightExceptionChars == null)
-                rightExceptionChars = new string[0];
+                rightExceptionChars = Array.Empty<string>();
 
             if (sentenceSeparators == null)
-                sentenceSeparators = new string[0];
+                sentenceSeparators = Array.Empty<string>();
 
 
-            foreach (char currentChar in source)
+            foreach (var currentChar in source)
             {
                 if ((prevChar == '.' && currentChar == ' ') || currentChar == MultipleItemsSplitterId || (IsItemContainedInArray(prevChar, sentenceSeparators) && currentChar == ' ')) //Beginning of new sentence
                 {
@@ -454,28 +453,29 @@ namespace MusicBeePlugin
             return newString;
         }
 
-        private string changeCase(string source, int changeCaseOptions, string[] exceptionWords, bool useWhiteList, string[] exceptionChars,
-            string[] leftExceptionChars, string[] rightExceptionChars, string[] wordSeparators, bool alwaysCapitalize1stWord, bool alwaysCapitalizeLastWord)
+        private string changeCase(string source, int changeCaseOptions, string[] exceptionWordsArg, bool useWhiteListArg, string[] exceptionCharsArg,
+            string[] leftExceptionCharsArg, string[] rightExceptionCharsArg, string[] wordSeparatorsArg, 
+            bool alwaysCapitalize1stWordArg, bool alwaysCapitalizeLastWordArg)
         {
             if (changeCaseOptions == 1) //Splitting to sentences
             {
-                return ChangeSentenceCase(source, exceptionWords, useWhiteList, exceptionChars, leftExceptionChars,
-                    rightExceptionChars, wordSeparators, alwaysCapitalize1stWord, alwaysCapitalizeLastWord);
+                return ChangeSentenceCase(source, exceptionWordsArg, useWhiteListArg, exceptionCharsArg, leftExceptionCharsArg,
+                    rightExceptionCharsArg, wordSeparatorsArg, alwaysCapitalize1stWordArg, alwaysCapitalizeLastWordArg);
             }
             else //Splitting to words
             {
                 if (changeCaseOptions == 2)
-                    return ChangeWordsCase(source, ChangeCaseOptions.LowerCase, exceptionWords, useWhiteList, exceptionChars,
-                        leftExceptionChars, rightExceptionChars, wordSeparators, alwaysCapitalize1stWord, alwaysCapitalizeLastWord);
+                    return ChangeWordsCase(source, ChangeCaseOptions.LowerCase, exceptionWordsArg, useWhiteListArg, exceptionCharsArg,
+                        leftExceptionCharsArg, rightExceptionCharsArg, wordSeparatorsArg, alwaysCapitalize1stWordArg, alwaysCapitalizeLastWordArg);
                 else if (changeCaseOptions == 3)
-                    return ChangeWordsCase(source, ChangeCaseOptions.UpperCase, exceptionWords, useWhiteList, exceptionChars,
-                        leftExceptionChars, rightExceptionChars, wordSeparators, alwaysCapitalize1stWord, alwaysCapitalizeLastWord);
+                    return ChangeWordsCase(source, ChangeCaseOptions.UpperCase, exceptionWordsArg, useWhiteListArg, exceptionCharsArg,
+                        leftExceptionCharsArg, rightExceptionCharsArg, wordSeparatorsArg, alwaysCapitalize1stWordArg, alwaysCapitalizeLastWordArg);
                 else if (changeCaseOptions == 4)
-                    return ChangeWordsCase(source, ChangeCaseOptions.TitleCase, exceptionWords, useWhiteList, exceptionChars,
-                        leftExceptionChars, rightExceptionChars, wordSeparators, alwaysCapitalize1stWord, alwaysCapitalizeLastWord);
+                    return ChangeWordsCase(source, ChangeCaseOptions.TitleCase, exceptionWordsArg, useWhiteListArg, exceptionCharsArg,
+                        leftExceptionCharsArg, rightExceptionCharsArg, wordSeparatorsArg, alwaysCapitalize1stWordArg, alwaysCapitalizeLastWordArg);
                 else //if (changeCaseOptions == 5)
-                    return ChangeWordsCase(source, ChangeCaseOptions.ToggleCase, exceptionWords, useWhiteList, exceptionChars,
-                        leftExceptionChars, rightExceptionChars, wordSeparators, alwaysCapitalize1stWord, alwaysCapitalizeLastWord);
+                    return ChangeWordsCase(source, ChangeCaseOptions.ToggleCase, exceptionWordsArg, useWhiteListArg, exceptionCharsArg,
+                        leftExceptionCharsArg, rightExceptionCharsArg, wordSeparatorsArg, alwaysCapitalize1stWordArg, alwaysCapitalizeLastWordArg);
             }
         }
 
@@ -483,6 +483,7 @@ namespace MusicBeePlugin
         {
             tags.Clear();
             previewTable.RowCount = 0;
+            // ReSharper disable once PossibleNullReferenceException
             (previewTable.Columns[0].HeaderCell as DataGridViewCheckBoxHeaderCell).setState(true);
 
             UpdateCustomScrollBars(previewTable);
@@ -510,28 +511,28 @@ namespace MusicBeePlugin
             alwaysCapitalizeLastWord = alwaysCapitalizeLastWordCheckBox.Checked;
 
             if (exceptionWordsCheckBox.IsEnabled() && exceptionWordsCheckBox.Checked)
-                exceptionWords = exceptionWordsBoxCustom.Text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                exceptionWords = exceptionWordsBoxCustom.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
             if (onlyWordsCheckBox.IsEnabled() && onlyWordsCheckBox.Checked)
-                exceptionWords = exceptionWordsBoxCustom.Text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                exceptionWords = exceptionWordsBoxCustom.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
             if (exceptionCharsCheckBox.IsEnabled() && exceptionCharsCheckBox.Checked)
-                exceptionChars = exceptionCharsBoxCustom.Text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                exceptionChars = exceptionCharsBoxCustom.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
             if (exceptionCharPairsCheckBox.IsEnabled() && exceptionCharPairsCheckBox.Checked)
             {
-                leftExceptionChars = leftExceptionCharsBoxCustom.Text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                rightExceptionChars = rightExceptionCharsBoxCustom.Text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                leftExceptionChars = leftExceptionCharsBoxCustom.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                rightExceptionChars = rightExceptionCharsBoxCustom.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             }
 
             if (wordSeparatorsCheckBox.IsEnabled() && wordSeparatorsCheckBox.Checked)
-                wordSeparators = wordSeparatorsBoxCustom.Text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                wordSeparators = wordSeparatorsBoxCustom.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
             sourceTagId = GetTagId(sourceTagListCustom.Text);
 
             files = null;
             if (!MbApiInterface.Library_QueryFilesEx("domain=SelectedFiles", out files))
-                files = new string[0];
+                files = Array.Empty<string>();
 
             if (files.Length == 0)
             {
@@ -552,13 +553,11 @@ namespace MusicBeePlugin
             }
             else
             {
-                string[] tag;
-
                 tags.Clear();
 
-                for (int fileCounter = 0; fileCounter < previewTable.Rows.Count; fileCounter++)
+                for (var fileCounter = 0; fileCounter < previewTable.Rows.Count; fileCounter++)
                 {
-                    tag = new string[3];
+                    var tag = new string[3];
 
                     tag[0] = (string)previewTable.Rows[fileCounter].Cells[0].Value;
                     tag[1] = (string)previewTable.Rows[fileCounter].Cells[1].Value;
@@ -573,38 +572,32 @@ namespace MusicBeePlugin
 
         private void previewChanges()
         {
-            string currentFile;
-            string sourceTagValue;
-            string sourceTagTValue;
-            string newTagValue;
-            string newTagTValue;
+            var stripNotChangedLines = SavedSettings.dontIncludeInPreviewLinesWithoutChangedTags;
 
-            string isChecked;
-
-            bool stripNotChangedLines = SavedSettings.dontIncludeInPreviewLinesWithoutChangedTags;
-
-            string track;
+            // ReSharper disable once RedundantAssignment
             string[] row = { "Checked", "File", "Track", "OriginalTag", "OriginalTagT", "NewTag", "NewTagT" };
+            // ReSharper disable once RedundantAssignment
             string[] tag = { "Checked", "file", "newTag" };
 
-            for (int fileCounter = 0; fileCounter < files.Length; fileCounter++)
+            for (var fileCounter = 0; fileCounter < files.Length; fileCounter++)
             {
                 if (backgroundTaskIsCanceled)
                     return;
 
-                currentFile = files[fileCounter];
+                var currentFile = files[fileCounter];
 
-                SetStatusbarTextForFileOperations(ChangeCaseSbText, true, fileCounter, files.Length, currentFile);
+                SetStatusBarTextForFileOperations(ChangeCaseSbText, true, fileCounter, files.Length, currentFile);
 
-                sourceTagValue = GetFileTag(currentFile, sourceTagId);
-                sourceTagTValue = GetTagRepresentation(sourceTagValue);
-                newTagValue = changeCase(sourceTagValue, changeCaseFlag, exceptionWords, useWhiteList, exceptionChars,
+                var sourceTagValue = GetFileTag(currentFile, sourceTagId);
+                var sourceTagTValue = GetTagRepresentation(sourceTagValue);
+                var newTagValue = changeCase(sourceTagValue, changeCaseFlag, exceptionWords, useWhiteList, exceptionChars,
                     leftExceptionChars, rightExceptionChars, wordSeparators, alwaysCapitalize1stWord, alwaysCapitalizeLastWord);
-                newTagTValue = GetTagRepresentation(newTagValue);
+                var newTagTValue = GetTagRepresentation(newTagValue);
 
-                track = GetTrackRepresentation(currentFile);
+                var track = GetTrackRepresentation(currentFile);
 
 
+                string isChecked;
                 if (sourceTagValue == newTagValue && stripNotChangedLines)
                     continue;
                 else if (sourceTagValue == newTagValue)
@@ -642,9 +635,6 @@ namespace MusicBeePlugin
 
         private void reapplyRules()
         {
-            string newTagValue;
-            string newTagTValue;
-
             if (previewTable.Rows.Count == 0)
             {
                 MessageBox.Show(this, MsgPreviewIsNotGeneratedNothingToChange, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -661,29 +651,29 @@ namespace MusicBeePlugin
             wordSeparators = null;
 
             if (exceptionWordsCheckBox.IsEnabled() && exceptionWordsCheckBox.Checked)
-                exceptionWords = exceptionWordsBoxCustom.Text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                exceptionWords = exceptionWordsBoxCustom.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             else if (exceptionWordsCheckBox.IsEnabled() && onlyWordsCheckBox.Checked)
-                exceptionWords = exceptionWordsBoxCustom.Text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                exceptionWords = exceptionWordsBoxCustom.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
             if (exceptionCharsCheckBox.IsEnabled() && exceptionCharsCheckBox.Checked)
-                exceptionChars = exceptionCharsBoxCustom.Text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                exceptionChars = exceptionCharsBoxCustom.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
             if (exceptionCharPairsCheckBox.IsEnabled() && exceptionCharPairsCheckBox.Checked)
             {
-                leftExceptionChars = leftExceptionCharsBoxCustom.Text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                rightExceptionChars = rightExceptionCharsBoxCustom.Text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                leftExceptionChars = leftExceptionCharsBoxCustom.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                rightExceptionChars = rightExceptionCharsBoxCustom.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             }
 
             if (wordSeparatorsCheckBox.IsEnabled() && wordSeparatorsCheckBox.Checked)
-                wordSeparators = wordSeparatorsBoxCustom.Text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                wordSeparators = wordSeparatorsBoxCustom.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-            for (int i = 0; i < previewTable.Rows.Count; i++)
+            for (var i = 0; i < previewTable.Rows.Count; i++)
             {
                 if ((string)previewTable.Rows[i].Cells[0].Value == "T")
                 {
-                    newTagValue = changeCase((string)previewTable.Rows[i].Cells[5].Value, changeCaseFlag, exceptionWords, useWhiteList, exceptionChars,
+                    var newTagValue = changeCase((string)previewTable.Rows[i].Cells[5].Value, changeCaseFlag, exceptionWords, useWhiteList, exceptionChars,
                         leftExceptionChars, rightExceptionChars, wordSeparators, alwaysCapitalize1stWord, alwaysCapitalizeLastWord);
-                    newTagTValue = GetTagRepresentation(newTagValue);
+                    var newTagTValue = GetTagRepresentation(newTagValue);
 
                     previewTable.Rows[i].Cells[5].Value = newTagValue;
                     previewTable.Rows[i].Cells[6].Value = newTagTValue;
@@ -693,30 +683,26 @@ namespace MusicBeePlugin
 
         private void applyChanges()
         {
-            string currentFile;
-            string newTagValue;
-            string isChecked;
-
             if (tags.Count == 0)
                 previewChanges();
 
-            for (int i = 0; i < tags.Count; i++)
+            for (var i = 0; i < tags.Count; i++)
             {
                 if (backgroundTaskIsCanceled)
                     return;
 
-                isChecked = tags[i][0];
+                var isChecked = tags[i][0];
 
                 if (isChecked == "T")
                 {
-                    currentFile = tags[i][1];
-                    newTagValue = tags[i][2];
+                    var currentFile = tags[i][1];
+                    var newTagValue = tags[i][2];
 
                     tags[i][0] = string.Empty;
 
                     Invoke(processRowOfTable, new object[] { i });
 
-                    SetStatusbarTextForFileOperations(ChangeCaseSbText, false, i, tags.Count, currentFile);
+                    SetStatusBarTextForFileOperations(ChangeCaseSbText, false, i, tags.Count, currentFile);
 
                     SetFileTag(currentFile, sourceTagId, newTagValue);
                     CommitTagsToFile(currentFile);
@@ -835,7 +821,7 @@ namespace MusicBeePlugin
                 rightExceptionCharsBoxCustom.Enable(true);
                 exceptionCharPairsCheckBox.Checked = true;
 
-                this.ActiveControl = rightExceptionCharsBoxCustom;
+                ActiveControl = rightExceptionCharsBoxCustom;
                 rightExceptionCharsBox_Leave(null, null);
             }
             else
@@ -880,7 +866,7 @@ namespace MusicBeePlugin
                 else
                     row.Cells[0].Value = "T";
 
-                DataGridViewCellEventArgs e = new DataGridViewCellEventArgs(0, row.Index);
+                var e = new DataGridViewCellEventArgs(0, row.Index);
                 previewTable_CellContentClick(null, e);
             }
         }
@@ -892,7 +878,7 @@ namespace MusicBeePlugin
 
             if ((string)previewTable.Rows[rowIndex].Cells[0].Value != "T")
             {
-                for (int columnIndex = 1; columnIndex < previewTable.ColumnCount; columnIndex++)
+                for (var columnIndex = 1; columnIndex < previewTable.ColumnCount; columnIndex++)
                 {
                     if (previewTable.Columns[columnIndex].Visible)
                         previewTable.Rows[rowIndex].Cells[columnIndex].Style = dimmedCellStyle;
@@ -902,7 +888,7 @@ namespace MusicBeePlugin
             }
 
 
-            for (int columnIndex = 1; columnIndex < previewTable.ColumnCount; columnIndex++)
+            for (var columnIndex = 1; columnIndex < previewTable.ColumnCount; columnIndex++)
             {
                 if (columnIndex == 6)
                 {
@@ -924,18 +910,15 @@ namespace MusicBeePlugin
             if (e.ColumnIndex == 0)
             {
                 string sourceTagValue;
-                string sourceTagTValue;
-                string newTagValue;
-                string newTagTValue;
 
-                string isChecked = (string)previewTable.Rows[e.RowIndex].Cells[0].Value;
+                var isChecked = (string)previewTable.Rows[e.RowIndex].Cells[0].Value;
 
                 if (isChecked == "T")
                 {
                     previewTable.Rows[e.RowIndex].Cells[0].Value = "F";
 
                     sourceTagValue = (string)previewTable.Rows[e.RowIndex].Cells[3].Value;
-                    sourceTagTValue = (string)previewTable.Rows[e.RowIndex].Cells[4].Value;
+                    var sourceTagTValue = (string)previewTable.Rows[e.RowIndex].Cells[4].Value;
 
                     previewTable.Rows[e.RowIndex].Cells[5].Value = sourceTagValue;
                     previewTable.Rows[e.RowIndex].Cells[6].Value = sourceTagTValue;
@@ -952,29 +935,29 @@ namespace MusicBeePlugin
                     wordSeparators = null;
 
                     if (exceptionWordsCheckBox.IsEnabled() && exceptionWordsCheckBox.Checked)
-                        exceptionWords = exceptionWordsBoxCustom.Text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                        exceptionWords = exceptionWordsBoxCustom.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                     else if (onlyWordsCheckBox.IsEnabled() && onlyWordsCheckBox.Checked)
-                        exceptionWords = exceptionWordsBoxCustom.Text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                        exceptionWords = exceptionWordsBoxCustom.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
                     if (exceptionCharsCheckBox.IsEnabled() && exceptionCharsCheckBox.Checked)
-                        exceptionChars = exceptionCharsBoxCustom.Text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                        exceptionChars = exceptionCharsBoxCustom.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
                     if (exceptionCharPairsCheckBox.IsEnabled() && exceptionCharPairsCheckBox.Checked)
                     {
-                        leftExceptionChars = leftExceptionCharsBoxCustom.Text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                        rightExceptionChars = rightExceptionCharsBoxCustom.Text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                        leftExceptionChars = leftExceptionCharsBoxCustom.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                        rightExceptionChars = rightExceptionCharsBoxCustom.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                     }
 
                     if (wordSeparatorsCheckBox.IsEnabled() && wordSeparatorsCheckBox.Checked)
-                        wordSeparators = wordSeparatorsBoxCustom.Text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                        wordSeparators = wordSeparatorsBoxCustom.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
                     previewTable.Rows[e.RowIndex].Cells[0].Value = "T";
 
                     sourceTagValue = (string)previewTable.Rows[e.RowIndex].Cells[3].Value;
 
-                    newTagValue = changeCase(sourceTagValue, changeCaseFlag, exceptionWords, useWhiteList, exceptionChars,
+                    var newTagValue = changeCase(sourceTagValue, changeCaseFlag, exceptionWords, useWhiteList, exceptionChars,
                         leftExceptionChars, rightExceptionChars, wordSeparators, alwaysCapitalize1stWord, alwaysCapitalizeLastWord);
-                    newTagTValue = GetTagRepresentation(newTagValue);
+                    var newTagTValue = GetTagRepresentation(newTagValue);
 
                     previewTable.Rows[e.RowIndex].Cells[5].Value = newTagValue;
                     previewTable.Rows[e.RowIndex].Cells[6].Value = newTagTValue;
@@ -1005,7 +988,7 @@ namespace MusicBeePlugin
 
         internal override void enableQueryingOrUpdatingButtons()
         {
-            buttonOK.Enable(previewIsGenerated || SavedSettings.allowCommandExecutionWithoutPreview);
+            buttonOK.Enable((previewIsGenerated && !previewIsStopped) || SavedSettings.allowCommandExecutionWithoutPreview);
             buttonPreview.Enable(true);
             buttonReapply.Enable(true);
         }
@@ -1041,14 +1024,14 @@ namespace MusicBeePlugin
                 return null;
 
             //Let's count the number of chars except for spaces
-            int count = 0;
-            foreach (char ch in text)
+            var count = 0;
+            foreach (var ch in text)
                 if (ch != ' ')
                     count++;
 
-            string[] chars = new string[count];
+            var chars = new string[count];
             count = 0;
-            foreach (char ch in text)
+            foreach (var ch in text)
                 if (ch != ' ')
                     chars[count++] = ch.ToString();
 
@@ -1064,10 +1047,10 @@ namespace MusicBeePlugin
             else if (text1 == null && text2 == null)
                 return true;
 
-            string[] leftItems = GetCharsInString(text1);
-            string[] rightItems = GetCharsInString(text2);
+            var leftItems = GetCharsInString(text1);
+            var rightItems = GetCharsInString(text2);
 
-            if (leftItems.Length != rightItems.Length)
+            if (leftItems.Length != rightItems.Length) //-V3080
                 return false;
 
             return true;
@@ -1077,7 +1060,7 @@ namespace MusicBeePlugin
         {
             leftExceptionCharsBoxCustom.Text = Regex.Replace(leftExceptionCharsBoxCustom.Text.Trim(' '), @"\s{2,}", " ");
 
-            if (this.ActiveControl != rightExceptionCharsBoxCustom && !CheckIfTheSameNumberOfCharsInStrings(leftExceptionCharsBoxCustom.Text, rightExceptionCharsBoxCustom.Text))
+            if (ActiveControl != rightExceptionCharsBoxCustom && !CheckIfTheSameNumberOfCharsInStrings(leftExceptionCharsBoxCustom.Text, rightExceptionCharsBoxCustom.Text))
             {
                 rightExceptionCharsBoxCustom.Focus();
                 rightExceptionCharsBoxCustom.SelectionStart = rightExceptionCharsBoxCustom.Text.Length + 1;
@@ -1095,7 +1078,7 @@ namespace MusicBeePlugin
 
             rightExceptionCharsBoxCustom.Text = Regex.Replace(rightExceptionCharsBoxCustom.Text.Trim(' '), @"\s{2,}", " ");
 
-            if (this.ActiveControl != leftExceptionCharsBoxCustom && !CheckIfTheSameNumberOfCharsInStrings(leftExceptionCharsBoxCustom.Text, rightExceptionCharsBoxCustom.Text))
+            if (ActiveControl != leftExceptionCharsBoxCustom && !CheckIfTheSameNumberOfCharsInStrings(leftExceptionCharsBoxCustom.Text, rightExceptionCharsBoxCustom.Text))
             {
                 rightExceptionCharsBoxLeaving = true;
 
@@ -1162,7 +1145,7 @@ namespace MusicBeePlugin
 
         private void removeExceptionButton_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < exceptionWordsBoxCustom.Items.Count; i++)
+            for (var i = 0; i < exceptionWordsBoxCustom.Items.Count; i++)
             {
                 if (exceptionWordsBoxCustom.Items[i].ToString() == exceptionWordsBoxCustom.Text)
                 {
@@ -1199,7 +1182,7 @@ namespace MusicBeePlugin
 
         private void buttonSettings_Click(object sender, EventArgs e)
         {
-            QuickSettings settings = new QuickSettings(TagToolsPlugin);
+            var settings = new QuickSettings(TagToolsPlugin);
             Display(settings, true);
         }
 
@@ -1221,7 +1204,7 @@ namespace MusicBeePlugin
 
         private void ChangeCase_Load(object sender, EventArgs e)
         {
-            (int, int, int, int, int, int, int) value = loadWindowLayout();
+            var value = loadWindowLayout();
 
             if (value.Item1 != 0)
             {

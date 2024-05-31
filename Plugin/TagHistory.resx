@@ -881,18 +881,6 @@
   <data name="placeholderLabel3.Text" xml:space="preserve">
     <value>               PH</value>
   </data>
-  <data name="&gt;&gt;placeholderLabel3.Name" xml:space="preserve">
-    <value>placeholderLabel3</value>
-  </data>
-  <data name="&gt;&gt;placeholderLabel3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;placeholderLabel3.Parent" xml:space="preserve">
-    <value>controlsPanel</value>
-  </data>
-  <data name="&gt;&gt;placeholderLabel3.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>

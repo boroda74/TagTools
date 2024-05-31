@@ -88,10 +88,10 @@ namespace MusicBeePlugin
 
 
             //Tags
-            bool wereErrors = false;
-            Encoding unicode1 = Encoding.UTF8;
-            System.IO.FileStream stream1 = System.IO.File.Open(System.IO.Path.Combine(MbApiInterface.Setting_GetPersistentStoragePath(), "TagTools.TagNamesErrorLog.txt"), System.IO.FileMode.Create, System.IO.FileAccess.Write, System.IO.FileShare.None);
-            System.IO.StreamWriter file1 = new System.IO.StreamWriter(stream1, unicode1);
+            var wereErrors = false;
+            var unicode1 = Encoding.UTF8;
+            var stream1 = System.IO.File.Open(System.IO.Path.Combine(MbApiInterface.Setting_GetPersistentStoragePath(), "TagTools.TagNamesErrorLog.txt"), System.IO.FileMode.Create, System.IO.FileAccess.Write, System.IO.FileShare.None);
+            var file1 = new System.IO.StreamWriter(stream1, unicode1);
 
             TagNamesIds.Clear();
             TagIdsNames.Clear();
@@ -1399,9 +1399,9 @@ namespace MusicBeePlugin
             TagIdsNames.Add(DateCreatedTagId, DateCreatedTagName);
 
             wereErrors = false;
-            Encoding unicode2 = Encoding.UTF8;
-            System.IO.FileStream stream2 = System.IO.File.Open(System.IO.Path.Combine(MbApiInterface.Setting_GetPersistentStoragePath(), "TagTools.PropNamesErrorLog.txt"), System.IO.FileMode.Create, System.IO.FileAccess.Write, System.IO.FileShare.None);
-            System.IO.StreamWriter file2 = new System.IO.StreamWriter(stream2, unicode2);
+            var unicode2 = Encoding.UTF8;
+            var stream2 = System.IO.File.Open(System.IO.Path.Combine(MbApiInterface.Setting_GetPersistentStoragePath(), "TagTools.PropNamesErrorLog.txt"), System.IO.FileMode.Create, System.IO.FileAccess.Write, System.IO.FileShare.None);
+            var file2 = new System.IO.StreamWriter(stream2, unicode2);
 
             PropNamesIds.Clear();
             PropIdsNames.Clear();

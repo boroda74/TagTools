@@ -26,8 +26,8 @@ namespace ExtensionMethods
 
         private static object GetControlEventKey(this Control c, string eventName)
         {
-            Type type = c.GetType();
-            FieldInfo eventKeyField = TryGetStaticNonPublicFieldInfo(type, eventName);
+            var type = c.GetType();
+            var eventKeyField = TryGetStaticNonPublicFieldInfo(type, eventName);
 
             if (eventKeyField == null)
             {
@@ -41,7 +41,7 @@ namespace ExtensionMethods
 
         private static FieldInfo TryGetStaticNonPublicFieldInfo(this Type type, string eventName)
         {
-            FieldInfo eventKeyField = GetStaticNonPublicFieldInfo(type, "Event" + eventName);
+            var eventKeyField = GetStaticNonPublicFieldInfo(type, "Event" + eventName);
 
             if (eventKeyField == null && eventName.EndsWith("Changed"))
                 eventKeyField = GetStaticNonPublicFieldInfo(type, "Event" + eventName.Remove(eventName.Length - 7)); //remove "Changed"
@@ -67,11 +67,11 @@ namespace ExtensionMethods
 
         private static EventHandlerList GetControlEventHandlerList(this Control c)
         {
-            Type type = c.GetType();
-            PropertyInfo pi = type.GetProperty("Events",
+            var type = c.GetType();
+            var pi = type.GetProperty("Events",
                BindingFlags.NonPublic | BindingFlags.Instance);
 
-            return pi.GetValue(c, null) as EventHandlerList;
+            return pi == null ? null : pi.GetValue(c, null) as EventHandlerList;
         }
 
         internal static void FireEvent(this object targetObject, string eventName, EventArgs e)
@@ -90,9 +90,9 @@ namespace ExtensionMethods
              */
 
             //Event thrower method name //e.g. OnTextChanged
-            string methodName = "On" + eventName;
+            var methodName = "On" + eventName;
 
-            MethodInfo mi = targetObject.GetType().GetMethod(
+            var mi = targetObject.GetType().GetMethod(
                   methodName,
                   BindingFlags.Instance | BindingFlags.NonPublic);
 

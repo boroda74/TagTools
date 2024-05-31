@@ -118,23 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>600, 63</value>
-  </data>
   <data name="buttonOK.Text" xml:space="preserve">
     <value>Применить</value>
   </data>
-  <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>708, 63</value>
-  </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Закрыть</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>814, 93</value>
-  </data>
-  <data name="smartOperationCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>691, 15</value>
   </data>
   <data name="smartOperationCheckBoxLabel.Text" xml:space="preserve">
     <value>Умный обмен (играет роль только при работе с тегами "Исполнитель"/"Композитор", содержащими несколько значений)</value>
@@ -149,9 +137,6 @@
     <value>Каждый байт исходного тега (включая служебные символы, обозначающие роли исполнителей) 
 будет сохранен, если эта опция отключена, однако это может быть полезно только 
 при обмене значения тега с временным тегом</value>
-  </data>
-  <data name="forTracksLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>563, 9</value>
   </data>
   <data name="forTracksLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 15</value>

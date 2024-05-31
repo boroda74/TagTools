@@ -124,12 +124,12 @@ namespace MusicBeePlugin
             this.sinceAddedCheckBox = new System.Windows.Forms.CheckBox();
             this.sinceAddedCheckBoxLabel = new System.Windows.Forms.Label();
             this.buttonSettings = new System.Windows.Forms.Button();
-            this.notifyWhenAutoratingCompletedCheckBox = new System.Windows.Forms.CheckBox();
+            this.notifyWhenAutoRatingCompletedCheckBox = new System.Windows.Forms.CheckBox();
             this.playsPerDayTagList = new System.Windows.Forms.ComboBox();
             this.storePlaysPerDayCheckBox = new System.Windows.Forms.CheckBox();
             this.storePlaysPerDayCheckBoxLabel = new System.Windows.Forms.Label();
             this.autoRateAtStartUpCheckBoxLabel = new System.Windows.Forms.Label();
-            this.notifyWhenAutoratingCompletedCheckBoxLabel = new System.Windows.Forms.Label();
+            this.notifyWhenAutoRatingCompletedCheckBoxLabel = new System.Windows.Forms.Label();
             this.autoRateOnTrackPropertiesCheckBoxLabel = new System.Windows.Forms.Label();
             this.holdsAtStartUpCheckBoxLabel = new System.Windows.Forms.Label();
             this.dirtyErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
@@ -150,18 +150,18 @@ namespace MusicBeePlugin
             this.SuspendLayout();
 
             //MusicBee
-            this.threshold05Box = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.threshold1Box = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.threshold15Box = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.threshold2Box = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.threshold25Box = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.threshold3Box = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.threshold35Box = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.threshold4Box = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.threshold45Box = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.threshold5Box = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.maxPlaysPerDayBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.avgPlaysPerDayBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
+            this.threshold05Box = ControlsTools.CreateMusicBeeTextBox();
+            this.threshold1Box = ControlsTools.CreateMusicBeeTextBox();
+            this.threshold15Box = ControlsTools.CreateMusicBeeTextBox();
+            this.threshold2Box = ControlsTools.CreateMusicBeeTextBox();
+            this.threshold25Box = ControlsTools.CreateMusicBeeTextBox();
+            this.threshold3Box = ControlsTools.CreateMusicBeeTextBox();
+            this.threshold35Box = ControlsTools.CreateMusicBeeTextBox();
+            this.threshold4Box = ControlsTools.CreateMusicBeeTextBox();
+            this.threshold45Box = ControlsTools.CreateMusicBeeTextBox();
+            this.threshold5Box = ControlsTools.CreateMusicBeeTextBox();
+            this.maxPlaysPerDayBox = ControlsTools.CreateMusicBeeTextBox();
+            this.avgPlaysPerDayBox = ControlsTools.CreateMusicBeeTextBox();
             //~MusicBee
 
             // 
@@ -1222,19 +1222,19 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconPadding(this.buttonSettings, ((int)(resources.GetObject("buttonSettings.IconPadding"))));
             this.buttonSettings.Image = global::MusicBeePlugin.Properties.Resources.gear_15;
             this.buttonSettings.Name = "buttonSettings";
-            this.buttonSettings.Tag = "@non-defaultable@square-control";
+            this.buttonSettings.Tag = "@non-defaultable@square-button";
             this.toolTip1.SetToolTip(this.buttonSettings, resources.GetString("buttonSettings.ToolTip"));
             this.buttonSettings.Click += new System.EventHandler(this.buttonSettings_Click);
             // 
-            // notifyWhenAutoratingCompletedCheckBox
+            // notifyWhenAutoRatingCompletedCheckBox
             // 
-            resources.ApplyResources(this.notifyWhenAutoratingCompletedCheckBox, "notifyWhenAutoratingCompletedCheckBox");
-            this.dirtyErrorProvider.SetError(this.notifyWhenAutoratingCompletedCheckBox, resources.GetString("notifyWhenAutoratingCompletedCheckBox.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.notifyWhenAutoratingCompletedCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("notifyWhenAutoratingCompletedCheckBox.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.notifyWhenAutoratingCompletedCheckBox, ((int)(resources.GetObject("notifyWhenAutoratingCompletedCheckBox.IconPadding"))));
-            this.notifyWhenAutoratingCompletedCheckBox.Name = "notifyWhenAutoratingCompletedCheckBox";
-            this.notifyWhenAutoratingCompletedCheckBox.Tag = "#notifyWhenAutoratingCompletedCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.notifyWhenAutoratingCompletedCheckBox, resources.GetString("notifyWhenAutoratingCompletedCheckBox.ToolTip"));
+            resources.ApplyResources(this.notifyWhenAutoRatingCompletedCheckBox, "notifyWhenAutoRatingCompletedCheckBox");
+            this.dirtyErrorProvider.SetError(this.notifyWhenAutoRatingCompletedCheckBox, resources.GetString("notifyWhenAutoRatingCompletedCheckBox.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.notifyWhenAutoRatingCompletedCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("notifyWhenAutoRatingCompletedCheckBox.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.notifyWhenAutoRatingCompletedCheckBox, ((int)(resources.GetObject("notifyWhenAutoRatingCompletedCheckBox.IconPadding"))));
+            this.notifyWhenAutoRatingCompletedCheckBox.Name = "notifyWhenAutoRatingCompletedCheckBox";
+            this.notifyWhenAutoRatingCompletedCheckBox.Tag = "#notifyWhenAutoRatingCompletedCheckBoxLabel";
+            this.toolTip1.SetToolTip(this.notifyWhenAutoRatingCompletedCheckBox, resources.GetString("notifyWhenAutoRatingCompletedCheckBox.ToolTip"));
             // 
             // playsPerDayTagList
             // 
@@ -1280,20 +1280,20 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.autoRateAtStartUpCheckBoxLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("autoRateAtStartUpCheckBoxLabel.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.autoRateAtStartUpCheckBoxLabel, ((int)(resources.GetObject("autoRateAtStartUpCheckBoxLabel.IconPadding"))));
             this.autoRateAtStartUpCheckBoxLabel.Name = "autoRateAtStartUpCheckBoxLabel";
-            this.autoRateAtStartUpCheckBoxLabel.Tag = "#notifyWhenAutoratingCompletedCheckBox";
+            this.autoRateAtStartUpCheckBoxLabel.Tag = "#notifyWhenAutoRatingCompletedCheckBox";
             this.toolTip1.SetToolTip(this.autoRateAtStartUpCheckBoxLabel, resources.GetString("autoRateAtStartUpCheckBoxLabel.ToolTip"));
             this.autoRateAtStartUpCheckBoxLabel.Click += new System.EventHandler(this.autoRateAtStartUpCheckBoxLabel_Click);
             // 
-            // notifyWhenAutoratingCompletedCheckBoxLabel
+            // notifyWhenAutoRatingCompletedCheckBoxLabel
             // 
-            resources.ApplyResources(this.notifyWhenAutoratingCompletedCheckBoxLabel, "notifyWhenAutoratingCompletedCheckBoxLabel");
-            this.dirtyErrorProvider.SetError(this.notifyWhenAutoratingCompletedCheckBoxLabel, resources.GetString("notifyWhenAutoratingCompletedCheckBoxLabel.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.notifyWhenAutoratingCompletedCheckBoxLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("notifyWhenAutoratingCompletedCheckBoxLabel.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.notifyWhenAutoratingCompletedCheckBoxLabel, ((int)(resources.GetObject("notifyWhenAutoratingCompletedCheckBoxLabel.IconPadding"))));
-            this.notifyWhenAutoratingCompletedCheckBoxLabel.Name = "notifyWhenAutoratingCompletedCheckBoxLabel";
-            this.notifyWhenAutoratingCompletedCheckBoxLabel.Tag = "";
-            this.toolTip1.SetToolTip(this.notifyWhenAutoratingCompletedCheckBoxLabel, resources.GetString("notifyWhenAutoratingCompletedCheckBoxLabel.ToolTip"));
-            this.notifyWhenAutoratingCompletedCheckBoxLabel.Click += new System.EventHandler(this.notifyWhenAutoratingCompletedCheckBoxLabel_Click);
+            resources.ApplyResources(this.notifyWhenAutoRatingCompletedCheckBoxLabel, "notifyWhenAutoRatingCompletedCheckBoxLabel");
+            this.dirtyErrorProvider.SetError(this.notifyWhenAutoRatingCompletedCheckBoxLabel, resources.GetString("notifyWhenAutoRatingCompletedCheckBoxLabel.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.notifyWhenAutoRatingCompletedCheckBoxLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("notifyWhenAutoRatingCompletedCheckBoxLabel.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.notifyWhenAutoRatingCompletedCheckBoxLabel, ((int)(resources.GetObject("notifyWhenAutoRatingCompletedCheckBoxLabel.IconPadding"))));
+            this.notifyWhenAutoRatingCompletedCheckBoxLabel.Name = "notifyWhenAutoRatingCompletedCheckBoxLabel";
+            this.notifyWhenAutoRatingCompletedCheckBoxLabel.Tag = "";
+            this.toolTip1.SetToolTip(this.notifyWhenAutoRatingCompletedCheckBoxLabel, resources.GetString("notifyWhenAutoRatingCompletedCheckBoxLabel.ToolTip"));
+            this.notifyWhenAutoRatingCompletedCheckBoxLabel.Click += new System.EventHandler(this.notifyWhenAutoRatingCompletedCheckBoxLabel_Click);
             // 
             // autoRateOnTrackPropertiesCheckBoxLabel
             // 
@@ -1345,8 +1345,8 @@ namespace MusicBeePlugin
             this.Controls.Add(this.sinceAddedCheckBox);
             this.Controls.Add(this.autoRateOnTrackPropertiesCheckBoxLabel);
             this.Controls.Add(this.autoRateOnTrackPropertiesCheckBox);
-            this.Controls.Add(this.notifyWhenAutoratingCompletedCheckBoxLabel);
-            this.Controls.Add(this.notifyWhenAutoratingCompletedCheckBox);
+            this.Controls.Add(this.notifyWhenAutoRatingCompletedCheckBoxLabel);
+            this.Controls.Add(this.notifyWhenAutoRatingCompletedCheckBox);
             this.Controls.Add(this.autoRateAtStartUpCheckBoxLabel);
             this.Controls.Add(this.autoRateAtStartUpCheckBox);
             this.Controls.Add(this.buttonCancel);
@@ -1380,6 +1380,20 @@ namespace MusicBeePlugin
             this.ResumeLayout(false);
             this.PerformLayout();
 
+            //MusicBee
+            new TextBoxBorder(this.threshold05Box);
+            new TextBoxBorder(this.threshold1Box);
+            new TextBoxBorder(this.threshold15Box);
+            new TextBoxBorder(this.threshold2Box);
+            new TextBoxBorder(this.threshold25Box);
+            new TextBoxBorder(this.threshold3Box);
+            new TextBoxBorder(this.threshold35Box);
+            new TextBoxBorder(this.threshold4Box);
+            new TextBoxBorder(this.threshold45Box);
+            new TextBoxBorder(this.threshold5Box);
+            new TextBoxBorder(this.maxPlaysPerDayBox);
+            new TextBoxBorder(this.avgPlaysPerDayBox);
+            //~MusicBee
         }
 
         #endregion
@@ -1460,14 +1474,14 @@ namespace MusicBeePlugin
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label labelTotalTracks;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.CheckBox notifyWhenAutoratingCompletedCheckBox;
+        private System.Windows.Forms.CheckBox notifyWhenAutoRatingCompletedCheckBox;
         private System.Windows.Forms.ComboBox playsPerDayTagList;
         private System.Windows.Forms.CheckBox storePlaysPerDayCheckBox;
         private System.Windows.Forms.CheckBox sinceAddedCheckBox;
         private System.Windows.Forms.ErrorProvider dirtyErrorProvider;
         private Label autoRateAtStartUpCheckBoxLabel;
         private Label storePlaysPerDayCheckBoxLabel;
-        private Label notifyWhenAutoratingCompletedCheckBoxLabel;
+        private Label notifyWhenAutoRatingCompletedCheckBoxLabel;
         private Label autoRateOnTrackPropertiesCheckBoxLabel;
         private Label sinceAddedCheckBoxLabel;
         private Label checkBox5Label;

@@ -118,21 +118,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="buttonPreview.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="buttonPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 23</value>
-  </data>
   <data name="buttonPreview.Text" xml:space="preserve">
     <value>Просмотр</value>
-  </data>
-  <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>185, 16</value>
-  </data>
-  <data name="buttonClose.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 23</value>
   </data>
   <data name="buttonClose.Text" xml:space="preserve">
     <value>Закрыть</value>
@@ -140,14 +128,8 @@
   <data name="buttonClose.ToolTip" xml:space="preserve">
     <value>Есть несохраненные изменения</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1177, 661</value>
-  </data>
-  <data name="autoApplyPresetsLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1152, 45</value>
-  </data>
   <data name="autoApplyPresetsLabel.Text" xml:space="preserve">
-    <value>Выберите пресет, чтобы изменить его или применить к выбранным трекам. ~Отметьте пресеты, чтобы они автоматически применялись при редактировании/обновлении тегов или при добавлении треков в библиотеку. ~Щелкните здесь, чтобы увидеть только отмеченные пресеты. ~Отмечено для автоматического применения: %%TICKEDPRESETS%%~Пресеты, использующие псевдо-тег &lt;ВСЕ ТЕГИ&gt;, не могут быть отмечены для автоматического применения, и им не могут быть назначены комбинации клавиш~Автоматическое применение пресетов отключено в настройках плагина. </value>
+    <value>Выберите пресет, чтобы изменить его или применить к выбранным трекам. ~Отметьте пресеты, чтобы они автоматически применялись при редактировании/обновлении тегов или при добавлении треков в библиотеку. ~Щелкните здесь, чтобы увидеть только отмеченные пресеты. ~Отмечено для автоматического применения: %%TICKED-PRESETS%%~Пресеты, использующие псевдо-тег &lt;ВСЕ ТЕГИ&gt;, не могут быть отмечены для автоматического применения, и им не могут быть назначены комбинации клавиш~Автоматическое применение пресетов отключено в настройках плагина. </value>
   </data>
   <data name="filterComboBox.Items" xml:space="preserve">
     <value>(Без фильтра)</value>
@@ -443,7 +425,7 @@
     <value>597, 6</value>
   </data>
   <data name="tickedOnlyPictureBox.ToolTip" xml:space="preserve">
-    <value>Щелкните, чтобы видеть только автоприменяемые пресеты
+    <value>Щелкните, чтобы видеть только авто-применяемые пресеты
 Щелкните, удерживая клавишу Ctrl, чтобы добавить этот фильтр к существующим или отключить его
 
 Пресеты должны соответствовать ВСЕМ выбранным фильтрам ОДНОВРЕМЕННО</value>
@@ -1105,7 +1087,7 @@
     <value>Не изменять значения тегов:</value>
   </data>
   <data name="labelPreserveTagValues.ToolTip" xml:space="preserve">
-    <value>Никогда не изменять эти значения тегов (разделенные ;;), независимо от того, в каких тегах они встречаютя</value>
+    <value>Никогда не изменять эти значения тегов (разделенные ;;), независимо от того, в каких тегах они встречаются</value>
   </data>
   <data name="buttonSelectPreservedTags.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -1117,7 +1099,7 @@
     <value>401, 23</value>
   </data>
   <data name="processPreserveTagsTextBox.ToolTip" xml:space="preserve">
-    <value>Обрабатывать только указанные теги (если указаны, иначе - все) ИЛИ вегда пропускать указанные. Разделяйте названия тегов ;
+    <value>Обрабатывать только указанные теги (если указаны, иначе - все) ИЛИ всегда пропускать указанные. Разделяйте названия тегов ;
 
 Щелчок по флажкам при нажатой клавише Ctrl в левой части предварительного просмотра добавит/удалит тег, указанный в строке, к списку/из списка обрабатываемых/исключенных тегов
 </value>
@@ -1129,7 +1111,7 @@
     <value>Обрабатывать теги</value>
   </data>
   <data name="buttonProcessPreserveTags.ToolTip" xml:space="preserve">
-    <value>Обрабатывать только указанные теги (если указаны, иначе - все) ИЛИ вегда пропускать указанные. Разделяйте названия тегов ;
+    <value>Обрабатывать только указанные теги (если указаны, иначе - все) ИЛИ всегда пропускать указанные. Разделяйте названия тегов ;
 
 Щелчок по флажкам при нажатой клавише Ctrl в левой части предварительного просмотра добавит/удалит тег, указанный в строке, к списку/из списка обрабатываемых/исключенных тегов</value>
   </data>
@@ -1385,14 +1367,8 @@
   <data name="applyToPlayingTrackCheckBoxLabel.Text" xml:space="preserve">
     <value>Применить к проигрываемому треку</value>
   </data>
-  <data name="applyToPlayingTrackCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="applyToPlayingTrackCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>332, 33</value>
-  </data>
-  <data name="applyToPlayingTrackCheckBox.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="assignHotkeyCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>

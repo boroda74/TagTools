@@ -118,29 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="autoBackupFolderTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>177, 8</value>
-  </data>
-  <data name="autoBackupFolderTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>604, 23</value>
-  </data>
-  <data name="browseButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>791, 8</value>
-  </data>
   <data name="browseButton.Text" xml:space="preserve">
     <value>Просмотр...</value>
   </data>
-  <data name="autoBackupFolderLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>161, 15</value>
-  </data>
   <data name="autoBackupFolderLabel.Text" xml:space="preserve">
-    <value>Папка авторезервирования:</value>
-  </data>
-  <data name="autoBackupPrefixLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>344, 40</value>
-  </data>
-  <data name="autoBackupPrefixLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>367, 15</value>
+    <value>Папка авто-резервирования:</value>
   </data>
   <data name="autoBackupPrefixLabel.Text" xml:space="preserve">
     <value>    Префикс имен файлов для автоматически созданных архивов:</value>
@@ -149,8 +131,8 @@
     <value>720, 37</value>
   </data>
   <data name="autoBackupCheckBox.ToolTip" xml:space="preserve">
-    <value>Автоархивирование будет пропущено, если содержание текущей библиотеки и какие-либо теги 
-не изменилсь с момента последнего ручного или автоматического архивирования. </value>
+    <value>Авто-архивирование будет пропущено, если содержание текущей библиотеки и какие-либо теги 
+не изменились с момента последнего ручного или автоматического архивирования. </value>
   </data>
   <data name="autoBackupNumericUpDown.Location" type="System.Drawing.Point, System.Drawing">
     <value>184, 37</value>
@@ -170,7 +152,7 @@
   <data name="numberOfFilesNumericUpDown.Location" type="System.Drawing.Point, System.Drawing">
     <value>503, 93</value>
   </data>
-  <data name="autodeleteOldLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="autoDeleteOldLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 15</value>
   </data>
   <data name="autoDeleteOldLabel.Text" xml:space="preserve">
@@ -196,14 +178,14 @@
     <value>139, 15</value>
   </data>
   <data name="autoBackupCheckBoxLabel.Text" xml:space="preserve">
-    <value>Автоархивация каждые:</value>
+    <value>Авто-архивация каждые:</value>
   </data>
   <data name="autoBackupCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value>Автоархивирование будет пропущено, если содержание текущей библиотеки и какие-либо теги 
+    <value>Авто-архивирование будет пропущено, если содержание текущей библиотеки и какие-либо теги 
 не изменилсь с момента последнего ручного или автоматического архивирования. 
 </value>
   </data>
-  <data name="autodeleteOldCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="autoDeleteOldCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>228, 15</value>
   </data>
   <data name="autoDeleteOldCheckBoxLabel.Text" xml:space="preserve">
@@ -212,7 +194,7 @@
   <data name="autoDeleteOldCheckBoxLabel.ToolTip" xml:space="preserve">
     <value>Только автоматические архивы текущей библиотеки будут удаляться</value>
   </data>
-  <data name="autodeleteManyCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="autoDeleteManyCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>458, 15</value>
   </data>
   <data name="autoDeleteManyCheckBoxLabel.Text" xml:space="preserve">
@@ -255,7 +237,7 @@
 MusicBee, зависящих от библиотеки. По этой причине вы не можете восстановить теги 
 в библиотеку, отличную от той, из которой были созданы резервные копии тегов. Если 
 вы отметите эту опцию, плагин сохранит копию идентификаторов треков в выбранном вами 
-своем теге и будет восстановливать резервные копии тегов, используя этот тег для идентификации 
+своем теге и будет восстанавливать резервные копии тегов, используя этот тег для идентификации 
 треков вместо фактических идентификаторов треков.
 
 Это позволит вам восстановить теги в новую библиотеку, содержащую те же треки, если вы воссоздавали 
@@ -271,7 +253,7 @@ MusicBee, зависящих от библиотеки. По этой причи
 MusicBee, зависящих от библиотеки. По этой причине вы не можете восстановить теги 
 в библиотеку, отличную от той, из которой были созданы резервные копии тегов. Если 
 вы отметите эту опцию, плагин сохранит копию идентификаторов треков в выбранном вами 
-своем теге и будет восстановливать резервные копии тегов, используя этот тег для идентификации 
+своем теге и будет восстанавливать резервные копии тегов, используя этот тег для идентификации 
 треков вместо фактических идентификаторов треков.
 
 Это позволит вам восстановить теги в новую библиотеку, содержащую те же треки, если вы воссоздавали 
@@ -290,7 +272,7 @@ MusicBee, зависящих от библиотеки. По этой причи
 MusicBee, зависящих от библиотеки. По этой причине вы не можете восстановить теги 
 в библиотеку, отличную от той, из которой были созданы резервные копии тегов. Если 
 вы отметите эту опцию, плагин сохранит копию идентификаторов треков в выбранном вами 
-своем теге и будет восстановливать резервные копии тегов, используя этот тег для идентификации 
+своем теге и будет восстанавливать резервные копии тегов, используя этот тег для идентификации 
 треков вместо фактических идентификаторов треков.
 
 Это позволит вам восстановить теги в новую библиотеку, содержащую те же треки, если вы воссоздавали 
@@ -302,7 +284,7 @@ MusicBee, зависящих от библиотеки. По этой причи
     <value>576, 15</value>
   </data>
   <data name="dontSkipAutoBackupsIfPlayCountsChangedLabel.Text" xml:space="preserve">
-    <value>Не пропускать автоархивирование, даже если изменились только счетчики проигрываний/пропусков</value>
+    <value>Не пропускать авто-архивирование, даже если изменились только счетчики проигрываний/пропусков</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>880, 4</value>

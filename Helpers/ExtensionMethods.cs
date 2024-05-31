@@ -231,7 +231,7 @@ namespace ExtensionMethods
         {
             if (value == null) //-V3111
             {
-                for (int i = 0; i < array.Length; i++)
+                for (var i = 0; i < array.Length; i++)
                 {
                     if (array[i] == null) //-V3111
                         return i;
@@ -240,8 +240,8 @@ namespace ExtensionMethods
                 return -1;
             }
 
-            EqualityComparer<T> @default = EqualityComparer<T>.Default;
-            for (int i = 0; i < array.Length; i++)
+            var @default = EqualityComparer<T>.Default;
+            for (var i = 0; i < array.Length; i++)
             {
                 if (@default.Equals(array[i], value))
                     return i;
@@ -254,7 +254,7 @@ namespace ExtensionMethods
         {
             if (value == null) //-V3111
             {
-                for (int i = array.Length - 1; i >= 0; i--)
+                for (var i = array.Length - 1; i >= 0; i--)
                 {
                     if (array[i] == null) //-V3111
                         return i;
@@ -263,8 +263,8 @@ namespace ExtensionMethods
                 return -1;
             }
 
-            EqualityComparer<T> @default = EqualityComparer<T>.Default;
-            for (int i = array.Length - 1; i >= 0; i--)
+            var @default = EqualityComparer<T>.Default;
+            for (var i = array.Length - 1; i >= 0; i--)
             {
                 if (@default.Equals(array[i], value))
                     return i;
@@ -281,9 +281,9 @@ namespace ExtensionMethods
             if (keepColumnWidths == null)
                 dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 
-            for (int i = 0; i < dataGridView.ColumnCount; i++)
+            for (var i = 0; i < dataGridView.ColumnCount; i++)
             {
-                int columnWidth = dataGridView.Columns[i].Width;
+                var columnWidth = dataGridView.Columns[i].Width;
                 dataGridView.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
                 if (keepColumnWidths != false)
                     dataGridView.Columns[i].Width = columnWidth;
@@ -292,19 +292,19 @@ namespace ExtensionMethods
 
         internal static void SetColumnsAutoSizeFill(this DataGridView dataGridView)
         {
-            for (int i = 0; i < dataGridView.ColumnCount; i++)
+            for (var i = 0; i < dataGridView.ColumnCount; i++)
                 dataGridView.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
         internal static void SetColumnsAutoSizeAllCells(this DataGridView dataGridView)
         {
-            for (int i = 0; i < dataGridView.ColumnCount; i++)
+            for (var i = 0; i < dataGridView.ColumnCount; i++)
                 dataGridView.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
         }
 
         internal static void SetColumnsAutoSizeAllCellsLastFill(this DataGridView dataGridView)
         {
-            for (int i = 0; i < dataGridView.ColumnCount - 1; i++)
+            for (var i = 0; i < dataGridView.ColumnCount - 1; i++)
                 dataGridView.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
             dataGridView.Columns[dataGridView.ColumnCount - 1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -315,15 +315,15 @@ namespace ExtensionMethods
     {
         internal static int GetCaretPosition(this TextBox textBox)
         {
-            GetCaretPos(out Point caret);
+            GetCaretPos(out var caret);
             return textBox.GetCharIndexFromPosition(caret);
         }
 
         internal static int GetScrollPosition(this TextBox textBox)
         {
-            Point lowPoint = new Point(5, 5);
-            int charOnFirstVisibleLine = textBox.GetCharIndexFromPosition(lowPoint);
-            int firstVisibleLine = textBox.GetLineFromCharIndex(charOnFirstVisibleLine);
+            var lowPoint = new Point(5, 5);
+            var charOnFirstVisibleLine = textBox.GetCharIndexFromPosition(lowPoint);
+            var firstVisibleLine = textBox.GetLineFromCharIndex(charOnFirstVisibleLine);
             return firstVisibleLine;
         }
 
@@ -367,8 +367,8 @@ namespace ExtensionMethods
         {
             foreach (Control control in parent.Controls)
             {
-                if (control is Button)
-                    (control as Button).Enable(!state);
+                if (control is Button button)
+                    button.Enable(!state);
                 else if (control.GetType().IsSubclassOf(typeof(TextBox)) || control is TextBox)
                     (control as TextBox).ReadOnly = state;
                 else if (control.GetType().IsSubclassOf(typeof(CustomComboBox)) || control is CustomComboBox)
@@ -422,7 +422,25 @@ namespace ExtensionMethods
                     control.ForeColor = enabledColor;
                 else
                     control.ForeColor = disabledColor;
+                
+                return;
+            }
 
+
+            if (control is TextBox || control is ListBox || control is CustomComboBox)
+            {
+                if (state)
+                {
+                    control.Enabled = true;
+                    control.ForeColor = enabledColor;
+                }
+                else
+                {
+                    control.ForeColor = disabledColor;
+                    control.Enabled = false;
+                }
+
+                PluginWindowTemplate.InputControl_EnabledChanged(control, null);
                 return;
             }
 

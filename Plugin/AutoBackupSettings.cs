@@ -12,7 +12,7 @@ namespace MusicBeePlugin
         private decimal initialAutoBackupInterval;
         private string initialAutoBackupDirectory;
 
-        private bool customTrackIdTagWarningShown = false;
+        private bool customTrackIdTagWarningShown;
 
         internal AutoBackupSettings(Plugin plugin) : base(plugin)
         {
@@ -52,16 +52,16 @@ namespace MusicBeePlugin
             autoBackupPrefixTextBox.Text = SavedSettings.autoBackupPrefix;
 
             autoBackupNumericUpDown.Value = SavedSettings.autoBackupInterval;
-            numberOfDaysNumericUpDown.Value = SavedSettings.autodeleteKeepNumberOfDays;
-            numberOfFilesNumericUpDown.Value = SavedSettings.autodeleteKeepNumberOfFiles;
+            numberOfDaysNumericUpDown.Value = SavedSettings.autoDeleteKeepNumberOfDays;
+            numberOfFilesNumericUpDown.Value = SavedSettings.autoDeleteKeepNumberOfFiles;
 
             if (SavedSettings.autoBackupInterval != 0)
                 autoBackupCheckBox.Checked = true;
 
-            if (SavedSettings.autodeleteKeepNumberOfDays != 0)
+            if (SavedSettings.autoDeleteKeepNumberOfDays != 0)
                 autoDeleteOldCheckBox.Checked = true;
 
-            if (SavedSettings.autodeleteKeepNumberOfFiles != 0)
+            if (SavedSettings.autoDeleteKeepNumberOfFiles != 0)
                 autoDeleteManyCheckBox.Checked = true;
 
             dontSkipAutoBackupsIfPlayCountsChangedCheckBox.Checked = SavedSettings.dontSkipAutoBackupsIfOnlyPlayCountsChanged;
@@ -160,7 +160,7 @@ namespace MusicBeePlugin
 
         private void browseButton_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog dialog = new FolderBrowserDialog
+            var dialog = new FolderBrowserDialog
             {
                 SelectedPath = autoBackupFolderTextBox.Text
             };
@@ -173,7 +173,7 @@ namespace MusicBeePlugin
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            string driveLetter = MbApiInterface.Setting_GetPersistentStoragePath().Substring(0, 2);
+            var driveLetter = MbApiInterface.Setting_GetPersistentStoragePath().Substring(0, 2);
 
             SavedSettings.autoBackupDirectory = autoBackupFolderTextBox.Text.Replace(MbApiInterface.Setting_GetPersistentStoragePath(), string.Empty).Replace(driveLetter, string.Empty);
             SavedSettings.autoBackupPrefix = autoBackupPrefixTextBox.Text;
@@ -184,14 +184,14 @@ namespace MusicBeePlugin
                 SavedSettings.autoBackupInterval = 0;
 
             if (autoDeleteOldCheckBox.Checked)
-                SavedSettings.autodeleteKeepNumberOfDays = numberOfDaysNumericUpDown.Value;
+                SavedSettings.autoDeleteKeepNumberOfDays = numberOfDaysNumericUpDown.Value;
             else
-                SavedSettings.autodeleteKeepNumberOfDays = 0;
+                SavedSettings.autoDeleteKeepNumberOfDays = 0;
 
             if (autoDeleteManyCheckBox.Checked)
-                SavedSettings.autodeleteKeepNumberOfFiles = numberOfFilesNumericUpDown.Value;
+                SavedSettings.autoDeleteKeepNumberOfFiles = numberOfFilesNumericUpDown.Value;
             else
-                SavedSettings.autodeleteKeepNumberOfFiles = 0;
+                SavedSettings.autoDeleteKeepNumberOfFiles = 0;
 
             SavedSettings.dontSkipAutoBackupsIfOnlyPlayCountsChanged = dontSkipAutoBackupsIfPlayCountsChangedCheckBox.Checked;
 
@@ -209,20 +209,26 @@ namespace MusicBeePlugin
                     if (!System.IO.Directory.Exists(BrGetAutoBackupDirectory(SavedSettings.autoBackupDirectory)))
                         System.IO.Directory.CreateDirectory(BrGetAutoBackupDirectory(SavedSettings.autoBackupDirectory));
 
-                    string[] files = System.IO.Directory.GetFileSystemEntries(BrGetAutoBackupDirectory(initialAutoBackupDirectory));
-                    for (int i = 0; i < files.Length; i++)
+                    var files = System.IO.Directory.GetFileSystemEntries(BrGetAutoBackupDirectory(initialAutoBackupDirectory));
+                    for (var i = 0; i < files.Length; i++)
                         try
                         {
                             System.IO.Directory.Move(files[i], BrGetAutoBackupDirectory(SavedSettings.autoBackupDirectory) + @"\" + BrGetBackupSafeFilename(files[i]));
                         }
-                        catch { };
+                        catch
+                        {
+                            // ignored
+                        }
 
 
                     try
                     {
                         System.IO.Directory.Delete(BrGetAutoBackupDirectory(initialAutoBackupDirectory));
                     }
-                    catch { };
+                    catch
+                    {
+                        // ignored
+                    }
                 }
 
                 MbApiInterface.MB_SetBackgroundTaskMessage(string.Empty);

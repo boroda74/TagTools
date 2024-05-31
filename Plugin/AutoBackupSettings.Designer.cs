@@ -43,7 +43,7 @@
             this.numberOfDaysNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.autoDeleteManyCheckBox = new System.Windows.Forms.CheckBox();
             this.numberOfFilesNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.autodeleteOldLabel = new System.Windows.Forms.Label();
+            this.autoDeleteOldLabel = new System.Windows.Forms.Label();
             this.buttonClose = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
             this.backupArtworksCheckBox = new System.Windows.Forms.CheckBox();
@@ -67,8 +67,8 @@
             this.SuspendLayout();
 
             //MusicBee
-            this.autoBackupFolderTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.autoBackupPrefixTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
+            this.autoBackupFolderTextBox = ControlsTools.CreateMusicBeeTextBox();
+            this.autoBackupPrefixTextBox = ControlsTools.CreateMusicBeeTextBox();
             //~MusicBee
 
             // 
@@ -146,7 +146,7 @@
             0,
             0});
             this.numberOfDaysNumericUpDown.Name = "numberOfDaysNumericUpDown";
-            this.numberOfDaysNumericUpDown.Tag = "#autodeleteOldLabel";
+            this.numberOfDaysNumericUpDown.Tag = "#autoDeleteOldLabel";
             // 
             // autoDeleteManyCheckBox
             // 
@@ -166,10 +166,10 @@
             0});
             this.numberOfFilesNumericUpDown.Name = "numberOfFilesNumericUpDown";
             // 
-            // autodeleteOldLabel
+            // autoDeleteOldLabel
             // 
-            resources.ApplyResources(this.autodeleteOldLabel, "autodeleteOldLabel");
-            this.autodeleteOldLabel.Name = "autodeleteOldLabel";
+            resources.ApplyResources(this.autoDeleteOldLabel, "autoDeleteOldLabel");
+            this.autoDeleteOldLabel.Name = "autoDeleteOldLabel";
             // 
             // buttonClose
             // 
@@ -318,7 +318,7 @@
             this.Controls.Add(this.numberOfFilesNumericUpDown);
             this.Controls.Add(this.autoDeleteManyCheckBoxLabel);
             this.Controls.Add(this.autoDeleteManyCheckBox);
-            this.Controls.Add(this.autodeleteOldLabel);
+            this.Controls.Add(this.autoDeleteOldLabel);
             this.Controls.Add(this.numberOfDaysNumericUpDown);
             this.Controls.Add(this.autoDeleteOldCheckBoxLabel);
             this.Controls.Add(this.autoDeleteOldCheckBox);
@@ -340,6 +340,10 @@
             this.ResumeLayout(false);
             this.PerformLayout();
 
+            //MusicBee
+            new TextBoxBorder(this.autoBackupFolderTextBox);
+            new TextBoxBorder(this.autoBackupPrefixTextBox);
+            //~MusicBee
         }
 
         #endregion
@@ -355,7 +359,7 @@
         private System.Windows.Forms.NumericUpDown numberOfDaysNumericUpDown;
         private System.Windows.Forms.CheckBox autoDeleteManyCheckBox;
         private System.Windows.Forms.NumericUpDown numberOfFilesNumericUpDown;
-        private System.Windows.Forms.Label autodeleteOldLabel;
+        private System.Windows.Forms.Label autoDeleteOldLabel;
         private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.CheckBox backupArtworksCheckBox;

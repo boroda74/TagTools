@@ -2,6 +2,7 @@
 using System;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using MusicBeePlugin.Properties;
 using static MusicBeePlugin.Plugin;
 
 namespace MusicBeePlugin
@@ -105,7 +106,7 @@ namespace MusicBeePlugin
                     );
             }
 
-            customFontTextBox.Text = customFont.Name + " " + customFont.Style + " " + customFont.Size + " pt";
+            customFontTextBox.Text = customFont.Name + Resources.Space + customFont.Style + Resources.Space + customFont.Size + Resources.FontPt;
             customFontTextBox.Text = customFontTextBox.Text.Replace(", ", " ").Replace("bold Bold", "bold");
             customFontButton.Enable(useCustomFontCheckBox.Checked);
 
@@ -126,7 +127,7 @@ namespace MusicBeePlugin
 
         private void saveSettings()
         {
-            bool sizesColorsChanged = false;
+            var sizesColorsChanged = false;
 
             if (SavedSettings.dontUseSkinColors == useSkinColorsCheckBox.Checked)
                 sizesColorsChanged = true;
@@ -136,7 +137,7 @@ namespace MusicBeePlugin
                 sizesColorsChanged = true;
             else if (SavedSettings.useCustomFont && SavedSettings.pluginFontFamilyName != customFont.FontFamily.Name)
                 sizesColorsChanged = true;
-            else if (SavedSettings.useCustomFont && SavedSettings.pluginFontSize != customFont.Size)
+            else if (SavedSettings.useCustomFont && Math.Abs(SavedSettings.pluginFontSize - customFont.Size) < 0.5)
                 sizesColorsChanged = true;
             else if (SavedSettings.useCustomFont && SavedSettings.pluginFontStyle != customFont.Style)
                 sizesColorsChanged = true;
@@ -194,7 +195,7 @@ namespace MusicBeePlugin
 
         private void saveLastSkippedButton_Click(object sender, EventArgs e)
         {
-            SaveLastSkippedDate tagToolsForm = new SaveLastSkippedDate(TagToolsPlugin);
+            var tagToolsForm = new SaveLastSkippedDate(TagToolsPlugin);
             Display(tagToolsForm, true);
         }
 
@@ -244,7 +245,7 @@ namespace MusicBeePlugin
 
         private void customFontButton_Click(object sender, EventArgs e)
         {
-            FontDialog customFontDialog = new FontDialog();
+            var customFontDialog = new FontDialog();
             customFontDialog.Font = customFont;
             customFontDialog.ShowApply = false;
             customFontDialog.FontMustExist = true;
@@ -259,7 +260,7 @@ namespace MusicBeePlugin
             {
                 customFont.Dispose();
                 customFont = customFontDialog.Font.Clone() as System.Drawing.Font;
-                customFontTextBox.Text = customFont.Name + " " + customFont.Style + " " + customFont.Size + " pt";
+                customFontTextBox.Text = customFont.Name  + Resources.Space + customFont.Style  + Resources.Space + customFont.Size + Resources.FontPt;
                 customFontTextBox.Text = customFontTextBox.Text.Replace(", ", " ").Replace("bold Bold", "bold");
             }
         }

@@ -201,7 +201,7 @@
             //
             resources.ApplyResources(this.buttonCopy, "buttonCopy");
             this.buttonCopy.Name = "buttonCopy";
-            this.buttonCopy.Tag = "@square-control";
+            this.buttonCopy.Tag = "@square-button";
             this.toolTip1.SetToolTip(this.buttonCopy, resources.GetString("buttonCopy.ToolTip"));
             this.buttonCopy.Click += new System.EventHandler(this.buttonCopy_Click);
             //
@@ -209,7 +209,7 @@
             //
             resources.ApplyResources(this.buttonPaste, "buttonPaste");
             this.buttonPaste.Name = "buttonPaste";
-            this.buttonPaste.Tag = "@square-control";
+            this.buttonPaste.Tag = "@square-button";
             this.toolTip1.SetToolTip(this.buttonPaste, resources.GetString("buttonPaste.ToolTip"));
             this.buttonPaste.Click += new System.EventHandler(this.buttonPaste_Click);
             //
@@ -217,7 +217,7 @@
             //
             resources.ApplyResources(this.buttonClear, "buttonClear");
             this.buttonClear.Name = "buttonClear";
-            this.buttonClear.Tag = "@square-control";
+            this.buttonClear.Tag = "@square-button";
             this.toolTip1.SetToolTip(this.buttonClear, resources.GetString("buttonClear.ToolTip"));
             this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
             //

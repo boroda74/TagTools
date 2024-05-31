@@ -174,8 +174,8 @@
   <data name="checkBox3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;notifyWhenAutoratingCompletedCheckBoxLabel.Name" xml:space="preserve">
-    <value>notifyWhenAutoratingCompletedCheckBoxLabel</value>
+  <data name="&gt;&gt;notifyWhenAutoRatingCompletedCheckBoxLabel.Name" xml:space="preserve">
+    <value>notifyWhenAutoRatingCompletedCheckBoxLabel</value>
   </data>
   <data name="checkBox25.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 19</value>
@@ -333,7 +333,7 @@
   <data name="maxPlaysPerDayBox.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="notifyWhenAutoratingCompletedCheckBox.IconPadding" type="System.Int32, mscorlib">
+  <data name="notifyWhenAutoRatingCompletedCheckBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="label22.Error" xml:space="preserve">
@@ -459,7 +459,7 @@
   <data name="&gt;&gt;buttonCalculate.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;notifyWhenAutoratingCompletedCheckBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;notifyWhenAutoRatingCompletedCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="labelTotalTracks.Font" type="System.Drawing.Font, System.Drawing">
@@ -630,7 +630,7 @@
   <data name="autoRateAtStartUpCheckBoxLabel.Text" xml:space="preserve">
     <value>Auto rate on startup</value>
   </data>
-  <data name="notifyWhenAutoratingCompletedCheckBoxLabel.Error" xml:space="preserve">
+  <data name="notifyWhenAutoRatingCompletedCheckBoxLabel.Error" xml:space="preserve">
     <value />
   </data>
   <data name="perCent1UpDown.Size" type="System.Drawing.Size, System.Drawing">
@@ -747,7 +747,7 @@
   <data name="&gt;&gt;checkBox45.Name" xml:space="preserve">
     <value>checkBox45</value>
   </data>
-  <data name="notifyWhenAutoratingCompletedCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+  <data name="notifyWhenAutoRatingCompletedCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="&gt;&gt;label24.ZOrder" xml:space="preserve">
@@ -789,7 +789,7 @@
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>13, 15</value>
   </data>
-  <data name="notifyWhenAutoratingCompletedCheckBox.AutoSize" type="System.Boolean, mscorlib">
+  <data name="notifyWhenAutoRatingCompletedCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="&gt;&gt;LabelFive.Parent" xml:space="preserve">
@@ -1242,8 +1242,8 @@
   <data name="label27.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;notifyWhenAutoratingCompletedCheckBox.Name" xml:space="preserve">
-    <value>notifyWhenAutoratingCompletedCheckBox</value>
+  <data name="&gt;&gt;notifyWhenAutoRatingCompletedCheckBox.Name" xml:space="preserve">
+    <value>notifyWhenAutoRatingCompletedCheckBox</value>
   </data>
   <data name="avgPlaysPerDayBox.ToolTip" xml:space="preserve">
     <value />
@@ -1695,7 +1695,7 @@
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>13, 15</value>
   </data>
-  <data name="notifyWhenAutoratingCompletedCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+  <data name="notifyWhenAutoRatingCompletedCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
   <data name="groupBox2Label.TabIndex" type="System.Int32, mscorlib">
@@ -1860,7 +1860,7 @@
   <data name="checkBox35Label.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
-  <data name="notifyWhenAutoratingCompletedCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+  <data name="notifyWhenAutoRatingCompletedCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
   <data name="baseRatingTrackBar.Size" type="System.Drawing.Size, System.Drawing">
@@ -2055,7 +2055,7 @@
   <data name="&gt;&gt;checkBox45Label.ZOrder" xml:space="preserve">
     <value>40</value>
   </data>
-  <data name="&gt;&gt;notifyWhenAutoratingCompletedCheckBoxLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;notifyWhenAutoRatingCompletedCheckBoxLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label24.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -2268,7 +2268,7 @@
   <data name="&gt;&gt;threshold25Box.Parent" xml:space="preserve">
     <value>groupBox2</value>
   </data>
-  <data name="notifyWhenAutoratingCompletedCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="notifyWhenAutoRatingCompletedCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 19</value>
   </data>
   <data name="label7.IconPadding" type="System.Int32, mscorlib">
@@ -2304,7 +2304,7 @@
   <data name="&gt;&gt;checkBox15.ZOrder" xml:space="preserve">
     <value>17</value>
   </data>
-  <data name="&gt;&gt;notifyWhenAutoratingCompletedCheckBoxLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;notifyWhenAutoRatingCompletedCheckBoxLabel.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
   <data name="&gt;&gt;storePlaysPerDayCheckBoxLabel.Parent" xml:space="preserve">
@@ -3152,7 +3152,7 @@
   <data name="perCent05UpDown.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
   </data>
-  <data name="notifyWhenAutoratingCompletedCheckBoxLabel.ToolTip" xml:space="preserve">
+  <data name="notifyWhenAutoRatingCompletedCheckBoxLabel.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="perCent25UpDown.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
@@ -3293,7 +3293,7 @@
   <data name="&gt;&gt;label27.Name" xml:space="preserve">
     <value>label27</value>
   </data>
-  <data name="notifyWhenAutoratingCompletedCheckBox.ToolTip" xml:space="preserve">
+  <data name="notifyWhenAutoRatingCompletedCheckBox.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="&gt;&gt;checkBox2Label.Type" xml:space="preserve">
@@ -3512,7 +3512,7 @@
   <data name="label22.Location" type="System.Drawing.Point, System.Drawing">
     <value>349, 112</value>
   </data>
-  <data name="notifyWhenAutoratingCompletedCheckBox.Error" xml:space="preserve">
+  <data name="notifyWhenAutoRatingCompletedCheckBox.Error" xml:space="preserve">
     <value />
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
@@ -3666,7 +3666,7 @@ should change every day for each track in this case.
   <data name="perCentLabel15.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 15</value>
   </data>
-  <data name="notifyWhenAutoratingCompletedCheckBox.Text" xml:space="preserve">
+  <data name="notifyWhenAutoRatingCompletedCheckBox.Text" xml:space="preserve">
     <value> </value>
   </data>
   <data name="checkBox2Label.IconPadding" type="System.Int32, mscorlib">
@@ -3705,7 +3705,7 @@ should change every day for each track in this case.
   <data name="&gt;&gt;autoRatingTagList.ZOrder" xml:space="preserve">
     <value>26</value>
   </data>
-  <data name="notifyWhenAutoratingCompletedCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+  <data name="notifyWhenAutoRatingCompletedCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
   <data name="checkBox15Label.Text" xml:space="preserve">
@@ -3894,7 +3894,7 @@ should change every day for each track in this case.
   <data name="perCent35UpDown.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 23</value>
   </data>
-  <data name="notifyWhenAutoratingCompletedCheckBox.TabIndex" type="System.Int32, mscorlib">
+  <data name="notifyWhenAutoRatingCompletedCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
   <data name="&gt;&gt;buttonOK.Type" xml:space="preserve">
@@ -4017,7 +4017,7 @@ should change every day for each track in this case. </value>
   <data name="baseRatingTrackBar.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="notifyWhenAutoratingCompletedCheckBoxLabel.IconPadding" type="System.Int32, mscorlib">
+  <data name="notifyWhenAutoRatingCompletedCheckBoxLabel.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="LabelFive.Location" type="System.Drawing.Point, System.Drawing">
@@ -4095,7 +4095,7 @@ should change every day for each track in this case. </value>
   <data name="label25.Location" type="System.Drawing.Point, System.Drawing">
     <value>349, 193</value>
   </data>
-  <data name="notifyWhenAutoratingCompletedCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="notifyWhenAutoRatingCompletedCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>204, 15</value>
   </data>
   <data name="autoRateAtStartUpCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
@@ -4122,7 +4122,7 @@ should change every day for each track in this case. </value>
   <data name="checkBox4.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 85</value>
   </data>
-  <data name="notifyWhenAutoratingCompletedCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="notifyWhenAutoRatingCompletedCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
   </data>
   <data name="checkBox05.Text" xml:space="preserve">
@@ -4263,7 +4263,7 @@ should change every day for each track in this case. </value>
   <data name="buttonCalculate.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="notifyWhenAutoratingCompletedCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="notifyWhenAutoRatingCompletedCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>204, 68</value>
   </data>
   <data name="label26.TabIndex" type="System.Int32, mscorlib">
@@ -4302,7 +4302,7 @@ should change every day for each track in this case. </value>
   <data name="perCentLabel05.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="notifyWhenAutoratingCompletedCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="notifyWhenAutoRatingCompletedCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="label28.Location" type="System.Drawing.Point, System.Drawing">
@@ -4395,7 +4395,7 @@ should change every day for each track in this case. </value>
   <data name="perCentLabel45.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;notifyWhenAutoratingCompletedCheckBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;notifyWhenAutoRatingCompletedCheckBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;storePlaysPerDayCheckBox.ZOrder" xml:space="preserve">
@@ -4488,7 +4488,7 @@ should change every day for each track in this case. </value>
   <data name="threshold3Box.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="notifyWhenAutoratingCompletedCheckBoxLabel.Text" xml:space="preserve">
+  <data name="notifyWhenAutoRatingCompletedCheckBoxLabel.Text" xml:space="preserve">
     <value>Notify when auto rating is completed</value>
   </data>
   <data name="storePlaysPerDayCheckBoxLabel.ToolTip" xml:space="preserve">
@@ -4587,7 +4587,7 @@ should change every day for each track in this case. </value>
   <data name="avgPlaysPerDayBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>200, 325</value>
   </data>
-  <data name="&gt;&gt;notifyWhenAutoratingCompletedCheckBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;notifyWhenAutoRatingCompletedCheckBox.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
   <data name="checkBox5Label.IconPadding" type="System.Int32, mscorlib">
@@ -4662,7 +4662,7 @@ should change every day for each track in this case. </value>
   <data name="&gt;&gt;label29.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="notifyWhenAutoratingCompletedCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="notifyWhenAutoRatingCompletedCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>179, 68</value>
   </data>
   <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
@@ -4782,7 +4782,7 @@ should change every day for each track in this case. </value>
   <data name="perCentLabel45.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;notifyWhenAutoratingCompletedCheckBoxLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;notifyWhenAutoRatingCompletedCheckBoxLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label4.Name" xml:space="preserve">

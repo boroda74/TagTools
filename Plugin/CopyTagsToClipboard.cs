@@ -12,14 +12,14 @@ namespace MusicBeePlugin
         private CustomComboBox tagSetComboBoxCustom;
 
 
-        private bool ignoreTagSetComboBoxTextChanged = false;
+        private bool ignoreTagSetComboBoxTextChanged;
 
-        private string[] availableTags = null;
-        private string[] prefixedTags = null;
-        private string[] prefixedUnselectedTags = null;
-        private string[] prefixedSelectedTags = null;
-        private string[] selectedTags = null;
-        private readonly bool returnSelectedTags = false;
+        private string[] availableTags;
+        private string[] prefixedTags;
+        private object[] prefixedUnselectedTags;
+        private object[] prefixedSelectedTags;
+        private string[] selectedTags;
+        private readonly bool returnSelectedTags;
 
         internal CopyTagsToClipboard(Plugin plugin) : base(plugin)
         {
@@ -32,6 +32,12 @@ namespace MusicBeePlugin
             Text = formTitle;
             buttonOK.Text = copyButtonName;
             returnSelectedTags = true;
+        }
+
+        public sealed override string Text
+        {
+            get { return base.Text; }
+            set { base.Text = value; }
         }
 
 
@@ -65,7 +71,7 @@ namespace MusicBeePlugin
 
         internal static string[] SelectTags(Plugin plugin, string formTitle, string copyButtonName, string[] preselectedTags, bool addArtworkAlso, bool addDateCreatedAlso)
         {
-            CopyTagsToClipboard form = new CopyTagsToClipboard(plugin, formTitle, copyButtonName);
+            var form = new CopyTagsToClipboard(plugin, formTitle, copyButtonName);
 
             form.selectedTags = preselectedTags.Clone() as string[];
             form.fillTags(false, addArtworkAlso, addDateCreatedAlso);
@@ -76,17 +82,17 @@ namespace MusicBeePlugin
 
         internal static int[] SelectTags(Plugin plugin, string formTitle, string copyButtonName, int[] preselectedTags, bool addArtworkAlso, bool addDateCreatedAlso)
         {
-            CopyTagsToClipboard form = new CopyTagsToClipboard(plugin, formTitle, copyButtonName);
+            var form = new CopyTagsToClipboard(plugin, formTitle, copyButtonName);
 
             form.selectedTags = new string[preselectedTags.Length];
-            for (int i = 0; i < preselectedTags.Length; i++)
+            for (var i = 0; i < preselectedTags.Length; i++)
                 form.selectedTags[i] = GetTagName((MetaDataType)preselectedTags[i]);
 
             form.fillTags(false, addArtworkAlso, addDateCreatedAlso);
             Display(form, true);
 
-            int[] selectedTagIds = new int[form.selectedTags.Length];
-            for (int i = 0; i < form.selectedTags.Length; i++)
+            var selectedTagIds = new int[form.selectedTags.Length];
+            for (var i = 0; i < form.selectedTags.Length; i++)
                 selectedTagIds[i] = (int)GetTagId(form.selectedTags[i]);
 
             return selectedTagIds;
@@ -96,33 +102,33 @@ namespace MusicBeePlugin
         {
             selectedTags = new string[checkedSourceTagList.Items.Count];
 
-            for (int i = 0; i < checkedSourceTagList.Items.Count; i++)
+            for (var i = 0; i < checkedSourceTagList.Items.Count; i++)
                 selectedTags[i] = checkedSourceTagList.Items[i].ToString().Substring(2);
         }
 
         private void prepareAvailableTags(bool addReadonlyTagsAlso, bool addArtworkAlso, bool addDateCreatedAlso)
         {
-            List<string> availableTagList = new List<string>();
+            var availableTagList = new List<string>();
             FillListByTagNames(availableTagList, addReadonlyTagsAlso, addArtworkAlso, false, false, false, addDateCreatedAlso);
 
             if (addReadonlyTagsAlso)
-                FillListByPropNames(availableTagList, false);
+                FillListByPropNames(availableTagList);
 
             availableTags = availableTagList.ToArray();
 
             prefixedTags = new string[availableTags.Length];
-            for (int i = 0; i < availableTags.Length; i++)
+            for (var i = 0; i < availableTags.Length; i++)
                 prefixedTags[i] = GetTagPrefix(availableTags[i]) + availableTags[i];
         }
 
         private void fillPreparedTags()
         {
-            prefixedSelectedTags = new string[selectedTags.Length];
-            for (int i = 0; i < selectedTags.Length; i++)
+            prefixedSelectedTags = new object[selectedTags.Length];
+            for (var i = 0; i < selectedTags.Length; i++)
                 prefixedSelectedTags[i] = GetTagPrefix(selectedTags[i]) + selectedTags[i];
 
 
-            prefixedUnselectedTags = prefixedTags.Except(prefixedSelectedTags).ToArray();
+            prefixedUnselectedTags = (string[])prefixedTags.Except(prefixedSelectedTags).ToArray();
 
             checkedSourceTagList.Items.Clear();
             sourceTagList.Items.Clear();
@@ -144,17 +150,17 @@ namespace MusicBeePlugin
         {
             selectedTags = new string[SavedSettings.copyTagsTagSets[tagSetId].tagIds.Length];
 
-            for (int i = 0; i < SavedSettings.copyTagsTagSets[SavedSettings.lastInteractiveTagSet].tagIds.Length; i++)
+            for (var i = 0; i < SavedSettings.copyTagsTagSets[SavedSettings.lastInteractiveTagSet].tagIds.Length; i++)
             {
-                int tagId = SavedSettings.copyTagsTagSets[SavedSettings.lastInteractiveTagSet].tagIds[i];
+                var tagId = SavedSettings.copyTagsTagSets[SavedSettings.lastInteractiveTagSet].tagIds[i];
                 if (tagId == 0)
                 {
                     MessageBox.Show(MbForm, "Tag set \"" + tagSetComboBoxCustom.Text + "\" is corrupted!");
-                    SavedSettings.copyTagsTagSets[SavedSettings.lastInteractiveTagSet].tagIds = new int[0];
+                    SavedSettings.copyTagsTagSets[SavedSettings.lastInteractiveTagSet].tagIds = Array.Empty<int>();
                     return;
                 }
 
-                string tagName = GetTagName((MetaDataType)tagId);
+                var tagName = GetTagName((MetaDataType)tagId);
                 selectedTags[i] = tagName;
             }
 
@@ -163,8 +169,8 @@ namespace MusicBeePlugin
 
         internal static bool CopyTagsToClipboardUsingTagSet(int tagSet)
         {
-            if (!MbApiInterface.Library_QueryFilesEx("domain=SelectedFiles", out string[] files))
-                files = new string[0];
+            if (!MbApiInterface.Library_QueryFilesEx("domain=SelectedFiles", out var files))
+                files = Array.Empty<string>();
 
 
             if (files.Length == 0)
@@ -175,14 +181,14 @@ namespace MusicBeePlugin
 
             SavedSettings.lastTagSet = tagSet;
 
-            string clipboardText = string.Empty;
+            var clipboardText = string.Empty;
 
 
             //Let's copy tag names as the 1st row
-            string tagNames = string.Empty;
-            for (int i = 0; i < SavedSettings.copyTagsTagSets[tagSet].tagIds.Length; i++)
+            var tagNames = string.Empty;
+            for (var i = 0; i < SavedSettings.copyTagsTagSets[tagSet].tagIds.Length; i++)
             {
-                string tag = GetTagName((MetaDataType)SavedSettings.copyTagsTagSets[tagSet].tagIds[i]);
+                var tag = GetTagName((MetaDataType)SavedSettings.copyTagsTagSets[tagSet].tagIds[i]);
                 tag += '\t';
 
                 tagNames += tag;
@@ -193,12 +199,12 @@ namespace MusicBeePlugin
             clipboardText += tagNames + '\n';
 
 
-            foreach (string file in files)
+            foreach (var file in files)
             {
-                string tags = string.Empty;
-                for (int i = 0; i < SavedSettings.copyTagsTagSets[tagSet].tagIds.Length; i++)
+                var tags = string.Empty;
+                for (var i = 0; i < SavedSettings.copyTagsTagSets[tagSet].tagIds.Length; i++)
                 {
-                    string tag = GetFileTag(file, (MetaDataType)SavedSettings.copyTagsTagSets[tagSet].tagIds[i]);
+                    var tag = GetFileTag(file, (MetaDataType)SavedSettings.copyTagsTagSets[tagSet].tagIds[i]);
                     tag = tag.Replace('\u0000', '\u0006').Replace('\u000D', '\u0007').Replace('\u000A', '\u0008');
                     tag += '\t';
 
@@ -228,13 +234,13 @@ namespace MusicBeePlugin
 
         private void saveCurrentIds()
         {
-            int displayedArtistOffset = 0;
-            int displayedComposerOffset = 0;
-            List<int> checkedIds = new List<int>();
+            var displayedArtistOffset = 0;
+            var displayedComposerOffset = 0;
+            var checkedIds = new List<int>();
 
-            for (int i = 0; i < checkedSourceTagList.Items.Count; i++)
+            for (var i = 0; i < checkedSourceTagList.Items.Count; i++)
             {
-                int id = (int)GetTagId(checkedSourceTagList.Items[i] as string);
+                var id = (int)GetTagId(checkedSourceTagList.Items[i] as string);
 
                 checkedIds.Add(id);
 
@@ -345,12 +351,12 @@ namespace MusicBeePlugin
 
             ignoreTagSetComboBoxTextChanged = true;
 
-            string prefix = SavedSettings.copyTagsTagSets[SavedSettings.lastInteractiveTagSet].getPrefix();
+            var prefix = SavedSettings.copyTagsTagSets[SavedSettings.lastInteractiveTagSet].getPrefix();
 
             if (!tagSetComboBoxCustom.Text.StartsWith(prefix))
             {
-                int matchingLength = 0;
-                for (int i = 1; i <= prefix.Length && i <= tagSetComboBoxCustom.Text.Length; i++)
+                var matchingLength = 0;
+                for (var i = 1; i <= prefix.Length && i <= tagSetComboBoxCustom.Text.Length; i++)
                 {
                     if (prefix.Substring(0, i) == tagSetComboBoxCustom.Text.Substring(0, i))
                         matchingLength = i;
@@ -358,7 +364,7 @@ namespace MusicBeePlugin
                         break;
                 }
 
-                int selectionStart = tagSetComboBoxCustom.SelectionStart;
+                var selectionStart = tagSetComboBoxCustom.SelectionStart;
                 if (matchingLength > 0)
                 {
                     tagSetComboBoxCustom.Text = prefix + tagSetComboBoxCustom.Text.Substring(matchingLength);
@@ -386,7 +392,7 @@ namespace MusicBeePlugin
             if (checkUncheckAllCheckBox.Checked)
                 selectedTags = availableTags.Clone() as string[];
             else
-                selectedTags = new string[0];
+                selectedTags = Array.Empty<string>();
 
             fillPreparedTags();
 

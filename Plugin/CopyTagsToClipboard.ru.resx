@@ -118,29 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>440, 32</value>
-  </data>
   <data name="buttonOK.Text" xml:space="preserve">
     <value>Копировать</value>
   </data>
-  <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>548, 32</value>
-  </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Закрыть</value>
-  </data>
-  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>642, 343</value>
-  </data>
-  <data name="sourceTagList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>622, 131</value>
-  </data>
-  <data name="checkedSourceTagList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>622, 131</value>
-  </data>
-  <data name="uncheckedSourceTagLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>97, 15</value>
   </data>
   <data name="uncheckedSourceTagLabel.Text" xml:space="preserve">
     <value>Доступные теги:</value>

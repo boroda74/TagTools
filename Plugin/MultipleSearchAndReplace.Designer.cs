@@ -17,7 +17,7 @@
             {
                 components.Dispose();
             }
-
+            
             base.Dispose(disposing);
         }
 
@@ -81,7 +81,7 @@
             this.SuspendLayout();
 
             //MusicBee
-            this.templateNameTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
+            this.templateNameTextBox = ControlsTools.CreateMusicBeeTextBox();
             //~MusicBee            
 
             // 
@@ -331,7 +331,7 @@
             resources.ApplyResources(this.buttonUp, "buttonUp");
             this.dirtyErrorProvider.SetIconAlignment(this.buttonUp, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonUp.IconAlignment"))));
             this.buttonUp.Name = "buttonUp";
-            this.buttonUp.Tag = "#buttonDown@non-defaultable@square-control@pinned-to-parent-x";
+            this.buttonUp.Tag = "#buttonDown@non-defaultable@square-button@pinned-to-parent-x";
             this.buttonUp.Click += new System.EventHandler(this.buttonUp_Click);
             // 
             // buttonDown
@@ -339,7 +339,7 @@
             resources.ApplyResources(this.buttonDown, "buttonDown");
             this.dirtyErrorProvider.SetIconAlignment(this.buttonDown, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonDown.IconAlignment"))));
             this.buttonDown.Name = "buttonDown";
-            this.buttonDown.Tag = "#buttonAdd@non-defaultable@square-control";
+            this.buttonDown.Tag = "#buttonAdd@non-defaultable@square-button";
             this.buttonDown.Click += new System.EventHandler(this.buttonDown_Click);
             // 
             // loadComboBox
@@ -379,7 +379,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.buttonSettings, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonSettings.IconAlignment"))));
             this.buttonSettings.Image = global::MusicBeePlugin.Properties.Resources.gear_15;
             this.buttonSettings.Name = "buttonSettings";
-            this.buttonSettings.Tag = "#buttonPreview@square-control";
+            this.buttonSettings.Tag = "#buttonPreview@square-button";
             this.toolTip1.SetToolTip(this.buttonSettings, resources.GetString("buttonSettings.ToolTip"));
             this.buttonSettings.Click += new System.EventHandler(this.buttonSettings_Click);
             // 
@@ -388,9 +388,8 @@
             resources.ApplyResources(this.buttonDeleteSaved, "buttonDeleteSaved");
             this.buttonDeleteSaved.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.dirtyErrorProvider.SetIconAlignment(this.buttonDeleteSaved, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonDeleteSaved.IconAlignment"))));
-            this.buttonDeleteSaved.Image = global::MusicBeePlugin.Properties.Resources.clear_button_15;
             this.buttonDeleteSaved.Name = "buttonDeleteSaved";
-            this.buttonDeleteSaved.Tag = "#controlsPanel@non-defaultable@square-control";
+            this.buttonDeleteSaved.Tag = "#controlsPanel@non-defaultable@square-button";
             this.toolTip1.SetToolTip(this.buttonDeleteSaved, resources.GetString("buttonDeleteSaved.ToolTip"));
             this.buttonDeleteSaved.Click += new System.EventHandler(this.buttonDeleteSaved_Click);
             // 
@@ -475,6 +474,9 @@
             this.controlsPanel.PerformLayout();
             this.ResumeLayout(false);
 
+            //MusicBee
+            new TextBoxBorder(this.templateNameTextBox);
+            //~MusicBee            
         }
 
         #endregion

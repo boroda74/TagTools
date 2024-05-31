@@ -33,7 +33,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
-    <AssemblyVersion>8.2.8915.27463</AssemblyVersion>
+    <AssemblyVersion>8.2.8917.36853</AssemblyVersion>
     <ShouldCreateLogs>True</ShouldCreateLogs>
     <AdvancedSettingsExpanded>True</AdvancedSettingsExpanded>
     <UpdateAssemblyVersion>False</UpdateAssemblyVersion>
@@ -260,11 +260,11 @@
     <Compile Include="Plugin\LRFunctionPrecaching.Designer.cs">
       <DependentUpon>LRFunctionPrecaching.cs</DependentUpon>
     </Compile>
-    <Compile Include="Plugin\ReencodeTag.cs">
+    <Compile Include="Plugin\ReEncodeTag.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Plugin\ReencodeTag.designer.cs">
-      <DependentUpon>ReencodeTag.cs</DependentUpon>
+    <Compile Include="Plugin\ReEncodeTag.designer.cs">
+      <DependentUpon>ReEncodeTag.cs</DependentUpon>
     </Compile>
     <Compile Include="Plugin\CompareTracks.cs">
       <SubType>Form</SubType>
@@ -321,11 +321,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Plugin\ReencodeTags.cs">
+    <Compile Include="Plugin\ReEncodeTags.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Plugin\ReencodeTags.Designer.cs">
-      <DependentUpon>ReencodeTags.cs</DependentUpon>
+    <Compile Include="Plugin\ReEncodeTags.Designer.cs">
+      <DependentUpon>ReEncodeTags.cs</DependentUpon>
     </Compile>
     <Compile Include="Plugin\Settings.cs">
       <SubType>Form</SubType>
@@ -373,6 +373,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Plugin\ASRPresetEditor.ru.resx">
       <DependentUpon>ASRPresetEditor.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Plugin\AutoBackupSettings.ru.resx">
       <DependentUpon>AutoBackupSettings.cs</DependentUpon>
@@ -414,6 +415,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Plugin\LRFunctionPrecaching.ru.resx">
       <DependentUpon>LRFunctionPrecaching.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Plugin\MultipleSearchAndReplace.resx">
       <DependentUpon>MultipleSearchAndReplace.cs</DependentUpon>
@@ -426,12 +428,12 @@
     <EmbeddedResource Include="Plugin\LRFunctionPrecaching.resx">
       <DependentUpon>LRFunctionPrecaching.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Plugin\ReencodeTag.resx">
-      <DependentUpon>ReencodeTag.cs</DependentUpon>
+    <EmbeddedResource Include="Plugin\ReEncodeTag.resx">
+      <DependentUpon>ReEncodeTag.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Plugin\ReencodeTag.ru.resx">
-      <DependentUpon>ReencodeTag.cs</DependentUpon>
+    <EmbeddedResource Include="Plugin\ReEncodeTag.ru.resx">
+      <DependentUpon>ReEncodeTag.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Plugin\CompareTracks.resx">
@@ -448,6 +450,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Plugin\SaveLastSkippedDate.ru.resx">
       <DependentUpon>SaveLastSkippedDate.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Plugin\SettingsQuick.resx">
       <DependentUpon>SettingsQuick.cs</DependentUpon>
@@ -467,6 +470,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Plugin\CopyTagsToClipboard.ru.resx">
       <DependentUpon>CopyTagsToClipboard.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Plugin\CopyTagsToClipboard.resx">
       <DependentUpon>CopyTagsToClipboard.cs</DependentUpon>
@@ -489,12 +493,12 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Plugin\ReencodeTags.resx">
-      <DependentUpon>ReencodeTags.cs</DependentUpon>
+    <EmbeddedResource Include="Plugin\ReEncodeTags.resx">
+      <DependentUpon>ReEncodeTags.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Plugin\ReencodeTags.ru.resx">
-      <DependentUpon>ReencodeTags.cs</DependentUpon>
+    <EmbeddedResource Include="Plugin\ReEncodeTags.ru.resx">
+      <DependentUpon>ReEncodeTags.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Plugin\Settings.resx">
@@ -563,8 +567,6 @@
     <None Include="Properties\Resources\warning.png" />
     <None Include="Properties\Resources\gear-15.png" />
     <None Include="Properties\Resources\transparent-15.png" />
-    <None Include="Properties\Resources\set-button-15.png" />
-    <None Include="Properties\Resources\clear-button-15.png" />
     <None Include="Properties\Resources\uncheck-mark.png" />
     <None Include="Properties\Resources\uncheck-all-preset-filters.png" />
     <None Include="Properties\Resources\hotkey-presets.png" />

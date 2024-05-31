@@ -96,10 +96,10 @@
             this.SuspendLayout();
 
             //MusicBee
-            this.customFontTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.preservedTagValuesLegendTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.preservedTagsLegendTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            this.changedLegendTextBox = (System.Windows.Forms.TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
+            this.customFontTextBox = ControlsTools.CreateMusicBeeTextBox();
+            this.preservedTagValuesLegendTextBox = ControlsTools.CreateMusicBeeTextBox();
+            this.preservedTagsLegendTextBox = ControlsTools.CreateMusicBeeTextBox();
+            this.changedLegendTextBox = ControlsTools.CreateMusicBeeTextBox();
             //~MusicBee
 
             //
@@ -539,6 +539,7 @@
             this.saveLastSkippedButton.Name = "saveLastSkippedButton";
             this.saveLastSkippedButton.Tag = "#buttonOK@pinned-to-parent-y";
             this.toolTip1.SetToolTip(this.saveLastSkippedButton, resources.GetString("saveLastSkippedButton.ToolTip"));
+            this.saveLastSkippedButton.Click += new System.EventHandler(this.saveLastSkippedButton_Click);
             //
             //versionLabel
             //
@@ -578,6 +579,12 @@
             this.ResumeLayout(false);
             this.PerformLayout();
 
+            //MusicBee
+            new TextBoxBorder(this.customFontTextBox);
+            new TextBoxBorder(this.preservedTagValuesLegendTextBox);
+            new TextBoxBorder(this.preservedTagsLegendTextBox);
+            new TextBoxBorder(this.changedLegendTextBox);
+            //~MusicBee
         }
 
         #endregion

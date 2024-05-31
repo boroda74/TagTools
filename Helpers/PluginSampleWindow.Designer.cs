@@ -37,7 +37,7 @@
             //
             resources.ApplyResources(this.squareButton, "squareButton");
             this.squareButton.Name = "squareButton";
-            this.squareButton.Tag = "@square-control";
+            this.squareButton.Tag = "@square-button";
             this.squareButton.UseVisualStyleBackColor = true;
             //
             //PluginSampleWindow

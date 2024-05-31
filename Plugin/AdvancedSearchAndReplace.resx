@@ -121,15 +121,17 @@
   <data name="splitContainer1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <metadata name="dirtyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="dirtyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>137, 9</value>
-  </metadata>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.Localizable" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
-  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <data name="$this.TrayHeight" type="System.Int32, mscorlib">
     <value>48</value>
-  </metadata>
+  </data>
   <data name="buttonPreview.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Right</value>
   </data>
@@ -142,7 +144,6 @@
   <data name="buttonPreview.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonPreview.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 43</value>
   </data>
@@ -152,7 +153,6 @@
   <data name="buttonPreview.Size" type="System.Drawing.Size, System.Drawing">
     <value>126, 23</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="buttonPreview.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
@@ -201,9 +201,9 @@
   <data name="buttonClose.Text" xml:space="preserve">
     <value>Close</value>
   </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>36, 9</value>
-  </metadata>
+  </data>
   <data name="buttonClose.ToolTip" xml:space="preserve">
     <value>There are unsaved changes</value>
   </data>
@@ -247,7 +247,7 @@
     <value>0</value>
   </data>
   <data name="autoApplyPresetsLabel.Text" xml:space="preserve">
-    <value>Select preset below to edit it or execute it for selected tracks. ~Tick presets to automatically execute them if track tags are edited/updated or new tracks are added to library. ~Click here to see ticked presets only. ~Presets ticked for auto-execution: %%TICKEDPRESETS%%~Presets containing &lt;ALL TAGS&gt; pseudo-tag can't be auto-executed, nor can be assigned hotkey to~Auto-execution of presets is disabled in plugin settings. </value>
+    <value>Select preset below to edit it or execute it for selected tracks. ~Tick presets to automatically execute them if track tags are edited/updated or new tracks are added to library. ~Click here to see ticked presets only. ~Presets ticked for auto-execution: %%TICKED-PRESETS%%~Presets containing &lt;ALL TAGS&gt; pseudo-tag can't be auto-executed, nor can be assigned hotkey to~Auto-execution of presets is disabled in plugin settings. </value>
   </data>
   <data name="&gt;&gt;autoApplyPresetsLabel.Name" xml:space="preserve">
     <value>autoApplyPresetsLabel</value>
@@ -1805,7 +1805,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>1</value>
   </data>
   <data name="preserveTagValuesTextBox.ToolTip" xml:space="preserve">
-    <value>Any tag value, which equals to one of entered in this field values, won't be changed. Separate tag values by ;;</value>
+    <value>Any tag value, which equals to one of typed in this field values, won't be changed. Separate tag values by ;;</value>
   </data>
   <data name="&gt;&gt;preserveTagValuesTextBox.Name" xml:space="preserve">
     <value>preserveTagValuesTextBox</value>
@@ -3963,18 +3963,18 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="previewTable.ColumnHeadersHeight" type="System.Int32, mscorlib">
     <value>29</value>
   </data>
-  <metadata name="PresetGuid.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="PresetGuid.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="PresetGuid.HeaderText" xml:space="preserve">
     <value>Preset GUID</value>
   </data>
   <data name="PresetGuid.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="File.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="File.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="File.HeaderText" xml:space="preserve">
     <value>File</value>
   </data>
@@ -3984,9 +3984,9 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="File.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="Track.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="Track.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="Track.HeaderText" xml:space="preserve">
     <value>Track</value>
   </data>
@@ -3996,9 +3996,9 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="Track.ToolTipText" xml:space="preserve">
     <value>Track representation</value>
   </data>
-  <metadata name="TagName1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="TagName1.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="TagName1.HeaderText" xml:space="preserve">
     <value>Tag name</value>
   </data>
@@ -4011,9 +4011,9 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="TagName1.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="OriginalTag1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="OriginalTag1.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="OriginalTag1.HeaderText" xml:space="preserve">
     <value>Orig. tag value</value>
   </data>
@@ -4026,9 +4026,9 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="OriginalTag1.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="NewTag1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="NewTag1.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="NewTag1.HeaderText" xml:space="preserve">
     <value>New tag value</value>
   </data>
@@ -4041,9 +4041,9 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="NewTag1.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="TagName2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="TagName2.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="TagName2.HeaderText" xml:space="preserve">
     <value>Tag name</value>
   </data>
@@ -4056,9 +4056,9 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="TagName2.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="OriginalTag2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="OriginalTag2.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="OriginalTag2.HeaderText" xml:space="preserve">
     <value>Orig. tag value</value>
   </data>
@@ -4071,9 +4071,9 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="OriginalTag2.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="NewTag2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="NewTag2.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="NewTag2.HeaderText" xml:space="preserve">
     <value>New tag value</value>
   </data>
@@ -4086,9 +4086,9 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="NewTag2.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="TagName3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="TagName3.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="TagName3.HeaderText" xml:space="preserve">
     <value>Tag name</value>
   </data>
@@ -4101,9 +4101,9 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="TagName3.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="OriginalTag3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="OriginalTag3.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="OriginalTag3.HeaderText" xml:space="preserve">
     <value>Orig. tag value</value>
   </data>
@@ -4116,9 +4116,9 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="OriginalTag3.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="NewTag3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="NewTag3.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="NewTag3.HeaderText" xml:space="preserve">
     <value>New tag value</value>
   </data>
@@ -4131,9 +4131,9 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="NewTag3.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="TagName4.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="TagName4.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="TagName4.HeaderText" xml:space="preserve">
     <value>Tag name</value>
   </data>
@@ -4146,9 +4146,9 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="TagName4.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="OriginalTag4.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="OriginalTag4.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="OriginalTag4.HeaderText" xml:space="preserve">
     <value>Orig. tag value</value>
   </data>
@@ -4161,9 +4161,9 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="OriginalTag4.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="NewTag4.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="NewTag4.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="NewTag4.HeaderText" xml:space="preserve">
     <value>New tag value</value>
   </data>
@@ -4176,9 +4176,9 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="NewTag4.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="TagName5.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="TagName5.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="TagName5.HeaderText" xml:space="preserve">
     <value>Tag name</value>
   </data>
@@ -4191,9 +4191,9 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="TagName5.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="OriginalTag5.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="OriginalTag5.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="OriginalTag5.HeaderText" xml:space="preserve">
     <value>Orig. tag value</value>
   </data>
@@ -4206,9 +4206,9 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="OriginalTag5.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="NewTag5.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="NewTag5.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="NewTag5.HeaderText" xml:space="preserve">
     <value>New tag value</value>
   </data>
@@ -4221,9 +4221,9 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="NewTag5.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="OddEven.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="OddEven.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="OddEven.HeaderText" xml:space="preserve">
     <value>·/·</value>
   </data>
@@ -4956,5 +4956,11 @@ If you have deleted some predefined presets, then they won't be reinstalled</val
   </data>
   <data name="&gt;&gt;splitContainer1.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="clearIdButton.Text" xml:space="preserve">
+    <value>❌</value>
+  </data>
+  <data name="clearSearchButton.Text" xml:space="preserve">
+    <value>❌</value>
   </data>
 </root>

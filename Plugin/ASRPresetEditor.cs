@@ -40,13 +40,13 @@ namespace MusicBeePlugin
 
         private Preset preset;
         private bool readOnly;
-        private bool settingsSaved = false;
+        private bool settingsSaved;
         private string currentLanguage;
 
-        private bool fillTagComboBoxes = false;
+        private bool fillTagComboBoxes;
 
         private static string WritableAllTagsLocalizedItem;
-        private Bitmap warning = null;
+        private Bitmap warning;
 
         internal AsrPresetEditor(Plugin plugin) : base(plugin)
         {
@@ -112,10 +112,10 @@ namespace MusicBeePlugin
 
             currentLanguage = null;
 
-            bool englishIsAvailable = false;
-            bool nativeLanguageIsAvailable = false;
+            var englishIsAvailable = false;
+            var nativeLanguageIsAvailable = false;
 
-            foreach (string language in preset.names.Keys)
+            foreach (var language in preset.names.Keys)
             {
                 languagesCustom.Items.Add(language);
 
@@ -239,7 +239,7 @@ namespace MusicBeePlugin
                 customText4Box.ReadOnly = !customText4CheckBox.Checked;
             }
 
-            descriptionBox.TextChanged += new System.EventHandler(descriptionBox_TextChanged);
+            descriptionBox.TextChanged += descriptionBox_TextChanged;
 
 
             if (useSkinColors)
@@ -394,8 +394,8 @@ namespace MusicBeePlugin
                 return;
 
 
-            string prevName = nameBox.Text;
-            string prevDescription = descriptionBox.Text;
+            var prevName = nameBox.Text;
+            var prevDescription = descriptionBox.Text;
 
             SetDictValue(preset.names, currentLanguage, prevName);
             SetDictValue(preset.descriptions, currentLanguage, prevDescription);
@@ -452,8 +452,8 @@ namespace MusicBeePlugin
 
         private void FillTagComboBox(CustomComboBox tagList, bool isSearchTag)
         {
-            int searchFlag = isSearchTag ? 1 : 0;
-            string tagName = tagList.Text;
+            var searchFlag = isSearchTag ? 1 : 0;
+            var tagName = tagList.Text;
 
             tagList.ItemsClear();
 
@@ -507,12 +507,12 @@ namespace MusicBeePlugin
                 tagList.SelectedIndex = 0;
         }
 
-        private void parameterTagTypeChanged(CustomComboBox parameterTagTypeList, PictureBox pictureBox, CustomComboBox parameterTagList,
+        private void parameterTagTypeChanged(CustomComboBox parameterTagTypeComboBox, PictureBox pictureBox, CustomComboBox parameterTagComboBox,
             Label tagLabel, CustomComboBox parameterTagTypeList2 = null, Label tagTypeLabel2 = null)
         {
-            string parameterTagName = parameterTagList.Text;
+            var parameterTagName = parameterTagComboBox.Text;
 
-            TagType tagType = (TagType)parameterTagTypeList.SelectedIndex;
+            var tagType = (TagType)parameterTagTypeComboBox.SelectedIndex;
 
             if (tagType == TagType.WritableAllowAllTags)
                 pictureBox.Image = warning;
@@ -525,7 +525,7 @@ namespace MusicBeePlugin
             if (tagType == TagType.WritableAllowAllTags) //Let's disable entering <ALL TAGS> pseudo-tag directly in preset editor for safety reasons !!!
                 tagType = TagType.Writable;
 
-            FillParameterTagList(tagType, parameterTagName, parameterTagList, tagLabel);
+            FillParameterTagList(tagType, parameterTagName, parameterTagComboBox, tagLabel);
 
 
             if (fillTagComboBoxes)

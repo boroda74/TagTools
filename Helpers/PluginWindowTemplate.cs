@@ -14,7 +14,7 @@ namespace MusicBeePlugin
     public partial class PluginWindowTemplate : Form
     {
         protected bool modal;
-        protected bool fixedSize = false;
+        protected bool fixedSize;
         protected FormWindowState windowState;
         protected int left;
         protected int top;
@@ -44,8 +44,8 @@ namespace MusicBeePlugin
         internal Dictionary<Control, Control> controlsReferencesY = new Dictionary<Control, Control>();
         protected Dictionary<Control, Control> controlsReferencedY = new Dictionary<Control, Control>();
 
-        internal List<Button> nonDefaultableButtons = new List<Button>();
-        protected bool artificiallyFocusedAcceptButton = false;
+        internal List<Button> nonDefaultingButtons = new List<Button>();
+        protected bool artificiallyFocusedAcceptButton;
 
         protected List<Control> pinnedToParentControlsX = new List<Control>();
         protected List<Control> leftRightAnchoredControls = new List<Control>();
@@ -66,9 +66,9 @@ namespace MusicBeePlugin
 
 
         //Font & colors
-        protected bool useSkinColors = false;
-        protected bool useMusicBeeFont = false;
-        protected bool useCustomFont = false;
+        protected bool useSkinColors;
+        protected bool useMusicBeeFont;
+        protected bool useCustomFont;
 
         private Font workingFont;
 
@@ -106,15 +106,15 @@ namespace MusicBeePlugin
 
         protected static Plugin TagToolsPlugin;
 
-        private Thread backgroundThread = null;
+        private Thread backgroundThread;
         protected ThreadStart job;
 
-        internal volatile bool backgroundTaskIsScheduled = false;
-        internal volatile bool backgroundTaskIsNativeMB = false;
-        internal volatile bool backgroundTaskIsCanceled = false;
+        internal volatile bool backgroundTaskIsScheduled;
+        internal volatile bool backgroundTaskIsNativeMB;
+        internal volatile bool backgroundTaskIsCanceled;
 
-        internal volatile bool previewIsStopped = false;
-        internal volatile bool previewIsGenerated = false;
+        internal volatile bool previewIsStopped;
+        internal volatile bool previewIsGenerated;
 
         protected Button clickedButton;
         protected Button previewButton;
@@ -123,8 +123,6 @@ namespace MusicBeePlugin
         protected string okButtonText;
         protected string previewButtonText;
         protected string closeButtonText;
-
-        protected bool ignoreLabelEnabledChanged = false;
 
         internal PluginWindowTemplate()
         {
@@ -164,9 +162,9 @@ namespace MusicBeePlugin
             comboBox.ClearCue();
         }
 
-        internal void comboBox_EnabledChanged(object sender, System.EventArgs e)
+        internal void comboBox_EnabledChanged(object sender, EventArgs e)
         {
-            ComboBox comboBox = sender as ComboBox;
+            var comboBox = sender as ComboBox;
 
             if (dropDownStyleComboBox.Contains(comboBox))
             {
@@ -174,8 +172,8 @@ namespace MusicBeePlugin
                 {
                     comboBox.DropDownStyle = ComboBoxStyle.DropDown;
 
-                    if (comboBox.Text == string.Empty && controlCueBanners.ContainsKey(comboBox))
-                        comboBox.Text = controlCueBanners[comboBox];
+                    if (comboBox.Text == string.Empty && controlCueBanners.TryGetValue(comboBox, out var banner))
+                        comboBox.Text = banner;
                 }
                 else
                 {
@@ -186,9 +184,9 @@ namespace MusicBeePlugin
 
         private void comboBox_DrawItem(object sender, DrawItemEventArgs e)
         {
-            ComboBox comboBox = sender as ComboBox;
+            var comboBox = sender as ComboBox;
 
-            int index = e.Index;
+            var index = e.Index;
 
             Color foreColor;
             Color backColor;
@@ -243,18 +241,18 @@ namespace MusicBeePlugin
 
         private void tabControl_DrawItem(object sender, DrawItemEventArgs e)
         {
-            TabPage page = (sender as TabControl).TabPages[e.Index];
-            Rectangle paddedBounds = e.Bounds;
-            int yOffset = (e.State == DrawItemState.Selected) ? -2 : 1;
+            var page = (sender as TabControl).TabPages[e.Index];
+            var paddedBounds = e.Bounds;
+            var yOffset = (e.State == DrawItemState.Selected) ? -2 : 1;
             paddedBounds.Offset(1, yOffset);
 
             e.Graphics.FillRectangle(new SolidBrush(page.BackColor), e.Bounds);
             TextRenderer.DrawText(e.Graphics, page.Text, e.Font, paddedBounds, page.ForeColor);
         }
 
-        internal void button_EnabledChanged(object sender, System.EventArgs e)
+        internal void button_EnabledChanged(object sender, EventArgs e)
         {
-            Button button = sender as Button;
+            var button = sender as Button;
 
             if (button.IsEnabled() && button == AcceptButton)
                 button_GotFocus(sender, e);
@@ -268,7 +266,7 @@ namespace MusicBeePlugin
         {
             if (useSkinColors && button != null)
             {
-                Button acceptButton = AcceptButton as Button;
+                var acceptButton = AcceptButton as Button;
 
                 //Default button
                 if (button.IsEnabled() && button == acceptButton)
@@ -283,14 +281,20 @@ namespace MusicBeePlugin
                 //   button.ForeColor = _buttonForeColor;
                 //   button.BackColor = _buttonBackColor;
                 //}
+                //Combo box button
+                else if (button.IsEnabled() && button.Parent is CustomComboBox)
+                {
+                    button.ForeColor = buttonForeColor;
+                    button.BackColor = narrowScrollBarBackColor;
+                }
                 //Generic button
-                else if (button.IsEnabled() && button.FlatAppearance.BorderColor == buttonBorderColor)
+                else if (button.IsEnabled())
                 {
                     button.ForeColor = buttonForeColor;
                     button.BackColor = buttonBackColor;
                 }
-                //Combo box button
-                else if (button.IsEnabled())
+                //Combo box disabled button
+                else if (button.Parent is CustomComboBox)
                 {
                     button.ForeColor = buttonForeColor;
                     button.BackColor = narrowScrollBarBackColor;
@@ -305,10 +309,10 @@ namespace MusicBeePlugin
             }
         }
 
-        internal void button_GotFocus(object sender, System.EventArgs e)
+        internal void button_GotFocus(object sender, EventArgs e)
         {
-            Button button = sender as Button;
-            Button acceptButton = AcceptButton as Button;
+            var button = sender as Button;
+            var acceptButton = AcceptButton as Button;
 
             if (button == lastSelectedControl)
             {
@@ -322,7 +326,7 @@ namespace MusicBeePlugin
             }
             else if (acceptButton != button) //Not accept button clicked
             {
-                if (!nonDefaultableButtons.Contains(button)) //It's defaultable button
+                if (!nonDefaultingButtons.Contains(button)) //It's defaultable button
                 {
                     lastSelectedControl = button;
                     AcceptButton = button;
@@ -347,19 +351,19 @@ namespace MusicBeePlugin
             setButtonColors(button);
         }
 
-        internal void button_LostFocus(object sender, System.EventArgs e)
+        internal void button_LostFocus(object sender, EventArgs e)
         {
             setButtonColors(sender as Button);
         }
 
         internal void button_Paint(object sender, PaintEventArgs e)
         {
-            Button button = sender as Button;
+            var button = sender as Button;
 
-            string text = buttonLabels[button];
+            var text = buttonLabels[button];
 
             //Set flags to center text on the button.
-            TextFormatFlags flags = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.WordBreak;   //center the text
+            var flags = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.WordBreak;   //center the text
 
             //Render the text onto the button.
             TextRenderer.DrawText(e.Graphics, text, button.Font, e.ClipRectangle, button.ForeColor, flags);
@@ -367,8 +371,8 @@ namespace MusicBeePlugin
 
         internal void button_TextChanged(object sender, EventArgs e)
         {
-            Button button = sender as Button;
-            string text = button.Text;
+            var button = sender as Button;
+            var text = button.Text;
 
             if (!string.IsNullOrEmpty(text))
             {
@@ -382,7 +386,7 @@ namespace MusicBeePlugin
             }
         }
 
-        internal void control_Enter(object sender, System.EventArgs e)
+        internal void control_Enter(object sender, EventArgs e)
         {
             var control = sender as Control;
             if (!(control is Button) && !control.GetType().IsSubclassOf(typeof(Button)) && control.Controls.Count == 0)
@@ -393,8 +397,8 @@ namespace MusicBeePlugin
         //then the same for Y, then scaled/moved marks and remarks
         internal static (Control[], int[], Control[], int[], bool, bool, bool, bool, string[]) GetReferredControlsControlLevelMarksRemarks(Control control)
         {
-            (_, _, _, bool scaledMovedL, bool scaledMovedR, bool scaledMovedT, bool scaledMovedB, string[] remarks) = GetControlTagReferredNamesMarksRemarks(control);
-            (Control[] controls2X, int[] levelsX, Control[] controls2Y, int[] levelsY) = GetReferredControls(control);
+            var (_, _, _, scaledMovedL, scaledMovedR, scaledMovedT, scaledMovedB, remarks) = GetControlTagReferredNamesMarksRemarks(control);
+            var (controls2X, levelsX, controls2Y, levelsY) = GetReferredControls(control);
 
             return (controls2X, levelsX, controls2Y, levelsY, scaledMovedL, scaledMovedR, scaledMovedT, scaledMovedB, remarks);
         }
@@ -434,20 +438,20 @@ namespace MusicBeePlugin
             bool scaledMovedL = false, bool scaledMovedR = false, bool scaledMovedT = false, bool scaledMovedB = false,
             string[] control2NamesX = null, string[] control2NamesY = null, params string[] remarks)
         {
-            (_, string[] oldControl2NamesXArray, string[] oldControl2NamesYArray, bool scaledMovedOldL, bool scaledMovedOldR, bool scaledMovedOldT, bool scaledMovedOldB, string[] oldRemarks) =
+            var (_, oldControl2NamesXArray, oldControl2NamesYArray, scaledMovedOldL, scaledMovedOldR, scaledMovedOldT, scaledMovedOldB, oldRemarks) =
                 GetControlTagReferredNamesMarksRemarks(control);
 
-            List<string> oldControl2NamesX = oldControl2NamesXArray.ToList();
-            List<string> oldControl2NamesY = oldControl2NamesYArray.ToList();
+            var oldControl2NamesX = oldControl2NamesXArray.ToList();
+            var oldControl2NamesY = oldControl2NamesYArray.ToList();
 
 
             if (control2NamesX != null)
             {
-                for (int i = 0; i < control2NamesX.Length; i++)
+                for (var i = 0; i < control2NamesX.Length; i++)
                     oldControl2NamesX.AddUnique(control2NamesX[i]);
             }
 
-            string control2NameX = string.Empty;
+            var control2NameX = string.Empty;
             foreach (var controlName in oldControl2NamesX)
                 control2NameX += "|" + controlName;
 
@@ -456,11 +460,11 @@ namespace MusicBeePlugin
 
             if (control2NamesY != null)
             {
-                for (int i = 0; i < control2NamesY.Length; i++)
+                for (var i = 0; i < control2NamesY.Length; i++)
                     oldControl2NamesY.AddUnique(control2NamesY[i]);
             }
 
-            string control2NameY = string.Empty;
+            var control2NameY = string.Empty;
             foreach (var controlName in oldControl2NamesY)
                 control2NameY += "|" + controlName;
 
@@ -503,23 +507,22 @@ namespace MusicBeePlugin
         //Returns initial tag value, referred X control names array, referred Y control names array, moved-scaled marks and array of custom remarks
         internal static (string, string[], string[], bool, bool, bool, bool, string[]) GetControlTagReferredNamesMarksRemarks(Control control)
         {
-            if (control.Tag == null || !(control.Tag is string))
-                return (string.Empty, new string[0], new string[0], false, false, false, false, new string[0]);
+            if (control.Tag == null || !(control.Tag is string controlTag))
+                return (string.Empty, Array.Empty<string>(), Array.Empty<string>(), false, false, false, false, Array.Empty<string>());
 
-            string controlTag = control.Tag as string;
-            bool scaledMovedL = controlTag.Contains("#scaled-moved-left");
-            bool scaledMovedR = controlTag.Contains("#scaled-moved-right");
-            bool scaledMovedT = controlTag.Contains("#scaled-moved-top");
-            bool scaledMovedB = controlTag.Contains("#scaled-moved-bottom");
+            var scaledMovedL = controlTag.Contains("#scaled-moved-left");
+            var scaledMovedR = controlTag.Contains("#scaled-moved-right");
+            var scaledMovedT = controlTag.Contains("#scaled-moved-top");
+            var scaledMovedB = controlTag.Contains("#scaled-moved-bottom");
             controlTag = controlTag.Replace("#scaled-moved-left", string.Empty);
             controlTag = controlTag.Replace("#scaled-moved-right", string.Empty);
             controlTag = controlTag.Replace("#scaled-moved-top", string.Empty);
             controlTag = controlTag.Replace("#scaled-moved-bottom", string.Empty);
 
-            string tagValue = controlTag;
-            string remarks = string.Empty;
-            string control2NameX = controlTag;
-            string control2NameY = string.Empty;
+            var tagValue = controlTag;
+            var remarks = string.Empty;
+            var control2NameX = controlTag;
+            var control2NameY = string.Empty;
 
             //Optional tag value by itself
             if (controlTag.Contains("#"))
@@ -548,11 +551,11 @@ namespace MusicBeePlugin
                 tagValue = tagValue.Replace("@" + remarks, string.Empty);
             }
 
-            var control2NamesX = control2NameX.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
-            var control2NamesY = control2NameY.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
+            var control2NamesX = control2NameX.Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
+            var control2NamesY = control2NameY.Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
 
             if (remarks == string.Empty)
-                return (tagValue, control2NamesX, control2NamesY, scaledMovedL, scaledMovedR, scaledMovedT, scaledMovedB, new string[0]);
+                return (tagValue, control2NamesX, control2NamesY, scaledMovedL, scaledMovedR, scaledMovedT, scaledMovedB, Array.Empty<string>());
             else
                 return (tagValue, control2NamesX, control2NamesY, scaledMovedL, scaledMovedR, scaledMovedT, scaledMovedB, remarks.Split('@'));
         }
@@ -562,10 +565,10 @@ namespace MusicBeePlugin
             if (string.IsNullOrEmpty(control2Name))
                 return (null, 0);
 
-            int levelX = 0;
-            Control control2X = control.Parent.Controls[control2Name];
+            var levelX = 0;
+            var control2X = control.Parent.Controls[control2Name];
 
-            Control parent = control.Parent;
+            var parent = control.Parent;
             while (control2X == null && parent != null)
             {
                 levelX++;
@@ -586,23 +589,23 @@ namespace MusicBeePlugin
         //Returns X referred controls array, int - array of scrolledControl levelX if control2X is ancestor, otherwise 0, then the same for Y
         internal static (Control[], int[], Control[], int[]) GetReferredControls(Control control)
         {
-            (_, string[] control2NamesX, string[] control2NamesY, _, _, _, _, _) =
+            var (_, control2NamesX, control2NamesY, _, _, _, _, _) =
                 GetControlTagReferredNamesMarksRemarks(control);
 
-            Control[] controls2X = new Control[control2NamesX.Length];
-            int[] levelsX = new int[control2NamesX.Length];
-            for (int i = 0; i < control2NamesX.Length; i++)
+            var controls2X = new Control[control2NamesX.Length];
+            var levelsX = new int[control2NamesX.Length];
+            for (var i = 0; i < control2NamesX.Length; i++)
             {
-                (Control control2X, int levelX) = GetReferredControlByName(control, control2NamesX[i]);
+                var (control2X, levelX) = GetReferredControlByName(control, control2NamesX[i]);
                 controls2X[i] = control2X;
                 levelsX[i] = levelX;
             }
 
-            Control[] controls2Y = new Control[control2NamesY.Length];
-            int[] levelsY = new int[control2NamesY.Length];
-            for (int i = 0; i < control2NamesY.Length; i++)
+            var controls2Y = new Control[control2NamesY.Length];
+            var levelsY = new int[control2NamesY.Length];
+            for (var i = 0; i < control2NamesY.Length; i++)
             {
-                (Control control2Y, int levelY) = GetReferredControlByName(control, control2NamesY[i]);
+                var (control2Y, levelY) = GetReferredControlByName(control, control2NamesY[i]);
                 controls2Y[i] = control2Y;
                 levelsY[i] = levelY;
             }
@@ -613,6 +616,7 @@ namespace MusicBeePlugin
         internal static Size GetControlSize(Control control)
         {
             if (control.GetType().IsSubclassOf(typeof(Form)) || control is Form)
+                // ReSharper disable once PossibleNullReferenceException
                 return (control as Form).ClientSize;
             else
                 return control.Size;
@@ -624,12 +628,12 @@ namespace MusicBeePlugin
                 return 0;
 
 
-            string control2Name = control2.Name;
+            var control2Name = control2.Name;
 
-            int level = 0;
+            var level = 0;
 
             Control foundParent = null;
-            Control parent = control.Parent;
+            var parent = control.Parent;
             while (foundParent == null && parent != null)
             {
                 level++;
@@ -652,7 +656,7 @@ namespace MusicBeePlugin
                 return (0, GetControlSize(control.Parent).Width, control.Parent.Padding.Left, control.Parent.Padding.Right);
 
 
-            int levelX = GetControlLevel(control, control2X);
+            var levelX = GetControlLevel(control, control2X);
 
             if (levelX > 0)
                 return (GetControlSize(control2X).Width, GetControlSize(control2X).Width, control2X.Padding.Right, control2X.Padding.Left); //-V3125
@@ -666,7 +670,7 @@ namespace MusicBeePlugin
                 return (0, GetControlSize(control.Parent).Height, control.Parent.Padding.Top, control.Parent.Padding.Bottom);
 
 
-            int levelY = GetControlLevel(control, control2Y);
+            var levelY = GetControlLevel(control, control2Y);
 
             if (levelY > 0)
                 return (GetControlSize(control2Y).Height, GetControlSize(control2Y).Height, control2Y.Padding.Bottom, control2Y.Padding.Top); //-V3125
@@ -714,7 +718,7 @@ namespace MusicBeePlugin
 
         internal static float GetYCenteredToY2(float controlHeight, float refControlY, Control control2X)
         {
-            float control2MiddleY = refControlY + control2X.Height / 2f;
+            var control2MiddleY = refControlY + control2X.Height / 2f;
             return control2MiddleY - controlHeight / 2f;
         }
 
@@ -732,20 +736,20 @@ namespace MusicBeePlugin
 
         internal int getLabelY(Control control)
         {
-            float controlNewY = control.Top - (control.Height - control.Height / vDpiFontScaling) / 2;
+            var controlNewY = control.Top - (control.Height - control.Height / vDpiFontScaling) / 2;
             return (int)Math.Round(controlNewY);
         }
 
         internal int getPictureBoxY(Control control, float scale)
         {
-            float controlNewY = control.Top - (control.Height - control.Height / scale) / 2;
+            var controlNewY = control.Top - (control.Height - control.Height / scale) / 2;
             return (int)Math.Round(controlNewY);
         }
 
         internal int getPictureBoxY(float controlHeight, Control control2X)
         {
-            float heightDifference = controlHeight - control2X.Height;
-            float controlNewY = GetYCenteredToY2(controlHeight, control2X.Top, control2X);
+            var heightDifference = controlHeight - control2X.Height;
+            var controlNewY = GetYCenteredToY2(controlHeight, control2X.Top, control2X);
 
             controlNewY -= heightDifference / 6 / vDpiFontScaling; //****
             controlNewY += controlHeight * 0.07f;
@@ -761,7 +765,7 @@ namespace MusicBeePlugin
             else
             {
                 float heightDifference = control.Height - control2X.Height;
-                float controlNewY = GetYCenteredToY2(control.Height, control2X.Top, control2X);
+                var controlNewY = GetYCenteredToY2(control.Height, control2X.Top, control2X);
 
                 controlNewY -= heightDifference / 6 / vDpiFontScaling; //****
                 controlNewY += control.Height * 0.07f;
@@ -775,7 +779,7 @@ namespace MusicBeePlugin
             if (control.GetType().IsSubclassOf(typeof(Form)) || control is Form)
                 return;
 
-            string stringTag = control.Tag as string;
+            var stringTag = control.Tag as string;
 
             if (control.GetType().IsSubclassOf(typeof(Button)) || control is Button)
             {
@@ -796,8 +800,17 @@ namespace MusicBeePlugin
 
 
             //Control that was initially square (before AUTO-scaling)
-            if (stringTag?.Contains("@square-control") == true)
+            if (stringTag?.Contains("@square-control") == true || stringTag?.Contains("@square-button") == true)
             {
+                //Let's change auto-scaled button height to auto-scaled height of generic controls, not buttons
+                // ReSharper disable once CompareOfFloatsByEqualityOperator
+                if (control is Button && !stringTag.Contains("@square-button") && ButtonHeightDpiFontScaling != 1)
+                {
+                    int initialHeight = control.Height;
+                    control.Height = (int)Math.Round(control.Height * vDpiFontScaling / ((ButtonHeightDpiFontScaling - 1) * dpiScaling + 1));
+                    control.Top -= (int)Math.Round((control.Height - initialHeight) / 2f);
+                }
+
                 if ((control.Anchor & AnchorStyles.Right) != 0)
                 {
                     if (control.Width > control.Height)
@@ -822,10 +835,10 @@ namespace MusicBeePlugin
             const float checkBoxRadioButtonAndPictureBoxOffsetCompensationX = -7f;//****
 
 
-            controlsReferencedX.TryGetValue(control, out Control referringControlX);
+            controlsReferencedX.TryGetValue(control, out var referringControlX);
 
-            (Control[] controls2X, int[] levelsX, _, _, bool scaledMovedL, bool scaledMovedR, bool scaledMovedT, _, string[] remarks) = GetReferredControlsControlLevelMarksRemarks(control);
-            bool pinnedToParentX = remarks.Contains("pinned-to-parent-x");
+            var (controls2X, levelsX, _, _, scaledMovedL, scaledMovedR, scaledMovedT, _, remarks) = GetReferredControlsControlLevelMarksRemarks(control);
+            var pinnedToParentX = remarks.Contains("pinned-to-parent-x");
 
 
             //control is left & right anchored. Let's move/scale it at the end (in another function).
@@ -855,7 +868,7 @@ namespace MusicBeePlugin
                 return;
             else if (control2XIndex == -1)
             {
-                for (int i = 0; i < controls2X.Length; i++)
+                for (var i = 0; i < controls2X.Length; i++)
                     moveScaleControlDependentReferringControlsX(control, i);
 
                 return;
@@ -871,8 +884,8 @@ namespace MusicBeePlugin
                 return;
 
 
-            bool scaledMovedL2 = true;
-            bool scaledMovedR2 = true;
+            var scaledMovedL2 = true;
+            var scaledMovedR2 = true;
 
             if (controls2X[control2XIndex] != null)
                 (_, _, _, scaledMovedL2, scaledMovedR2, _, _, _) = GetControlTagReferredNamesMarksRemarks(controls2X[control2XIndex]);
@@ -1006,7 +1019,7 @@ namespace MusicBeePlugin
                         else
                             controlXPlaceholder = getRightAnchoredControlX(control, control.Width, controls2X[control2XIndex], pinnedToParentX, levelsX[control2XIndex]);
 
-                        int distance = controlXPlaceholder - controls2X[control2XIndex].Left;
+                        var distance = controlXPlaceholder - controls2X[control2XIndex].Left;
                         controls2X[control2XIndex].Left = control.Left - distance;
 
                         scaledMovedL2 = true;
@@ -1058,10 +1071,10 @@ namespace MusicBeePlugin
                 return;
 
 
-            controlsReferencedY.TryGetValue(control, out Control referringControlY);
+            controlsReferencedY.TryGetValue(control, out var referringControlY);
 
-            (_, _, Control[] controls2Y, int[] levelsY, _, _, bool scaledMovedT, bool scaledMovedB, string[] remarks) = GetReferredControlsControlLevelMarksRemarks(control);
-            bool pinnedToParentY = remarks.Contains("pinned-to-parent-y");
+            var (_, _, controls2Y, levelsY, _, _, scaledMovedT, scaledMovedB, remarks) = GetReferredControlsControlLevelMarksRemarks(control);
+            var pinnedToParentY = remarks.Contains("pinned-to-parent-y");
 
             //control is top & bottom anchored. Let's move/scale it at the end (in another function).
             if ((control.Anchor & AnchorStyles.Top) != 0 && (control.Anchor & AnchorStyles.Bottom) != 0)
@@ -1089,7 +1102,7 @@ namespace MusicBeePlugin
                 return;
             else if (control2YIndex == -1)
             {
-                for (int i = 0; i < controls2Y.Length; i++)
+                for (var i = 0; i < controls2Y.Length; i++)
                     moveScaleControlDependentReferringControlsY(control, i);
 
                 return;
@@ -1105,8 +1118,8 @@ namespace MusicBeePlugin
                 return;
 
 
-            bool scaledMovedT2 = true;
-            bool scaledMovedB2 = true;
+            var scaledMovedT2 = true;
+            var scaledMovedB2 = true;
 
             if (controls2Y[control2YIndex] != null)
                 (_, _, _, _, _, scaledMovedT2, scaledMovedB2, _) = GetControlTagReferredNamesMarksRemarks(controls2Y[control2YIndex]);
@@ -1147,8 +1160,8 @@ namespace MusicBeePlugin
                     {
                         if (!scaledMovedT2)
                         {
-                            float middleY = control.Top + control.Height / 2f;
-                            float newControlT2 = middleY - controls2Y[control2YIndex].Height / 2f + vDpiFontScaling * 2f;
+                            var middleY = control.Top + control.Height / 2f;
+                            var newControlT2 = middleY - controls2Y[control2YIndex].Height / 2f + vDpiFontScaling * 2f;
 
                             controls2Y[control2YIndex].Top = (int)Math.Round(newControlT2);
                             scaledMovedT2 = true;
@@ -1204,16 +1217,16 @@ namespace MusicBeePlugin
                 controlsReferencedX.TryGetValue(control, out var controlReferencing);
                 controlsReferencesX.TryGetValue(control, out var controlReference);
 
-                (_, _, _, _, _, _, _, string[] remarks) = GetControlTagReferredNamesMarksRemarks(control);
-                bool pinnedToParentX = remarks.Contains("pinned-to-parent-x");
-                int controlReferencingLevel = GetControlLevel(controlReferencing, control);
+                var (_, _, _, _, _, _, _, remarks) = GetControlTagReferredNamesMarksRemarks(control);
+                var pinnedToParentX = remarks.Contains("pinned-to-parent-x");
+                var controlReferencingLevel = GetControlLevel(controlReferencing, control);
 
                 int controlRNew;
 
                 if (controlReferencing != null && controlReferencingLevel == 0 && controlReference != null)
                 {
-                    (_, int controlReferencingRight, _, int controlReferencingMarginRight) = GetControl2LeftRightMarginsOrParent0WidthPaddings(control, controlReferencing, pinnedToParentX);
-                    (int controlReferenceLeft, _, int controlReferenceMarginLeft, _) = GetControl2LeftRightMarginsOrParent0WidthPaddings(control, controlReference, pinnedToParentX);
+                    var (_, controlReferencingRight, _, controlReferencingMarginRight) = GetControl2LeftRightMarginsOrParent0WidthPaddings(control, controlReferencing, pinnedToParentX);
+                    var (controlReferenceLeft, _, controlReferenceMarginLeft, _) = GetControl2LeftRightMarginsOrParent0WidthPaddings(control, controlReference, pinnedToParentX);
 
                     controlRNew = controlReferenceLeft - (controlReferenceMarginLeft + control.Margin.Right);
                     control.Left = controlReferencingRight + (controlReferencingMarginRight + control.Margin.Left);
@@ -1222,7 +1235,7 @@ namespace MusicBeePlugin
                 }
                 else if (controlReferencing != null && controlReferencingLevel == 0 && controlReference == null)
                 {
-                    (int controlReferencingLeft, _, _, int controlReferencingMarginRight) = GetControl2LeftRightMarginsOrParent0WidthPaddings(control, controlReferencing, pinnedToParentX);
+                    var (controlReferencingLeft, _, _, controlReferencingMarginRight) = GetControl2LeftRightMarginsOrParent0WidthPaddings(control, controlReferencing, pinnedToParentX);
 
                     controlRNew = control.Left + control.Width;
                     control.Left = controlReferencingLeft + (controlReferencingMarginRight + control.Margin.Left);
@@ -1230,7 +1243,7 @@ namespace MusicBeePlugin
                 }
                 else if ((controlReferencing == null || controlReferencingLevel > 0) && controlReference != null)
                 {
-                    (int controlReferenceLeft, int controlReferenceRight, int controlReferenceMarginLeft, int controlReferenceMarginRight) = GetControl2LeftRightMarginsOrParent0WidthPaddings(control, controlReference, pinnedToParentX);
+                    var (controlReferenceLeft, controlReferenceRight, controlReferenceMarginLeft, controlReferenceMarginRight) = GetControl2LeftRightMarginsOrParent0WidthPaddings(control, controlReference, pinnedToParentX);
 
                     if (pinnedToParentX && GetControlLevel(control, controlReference) > 0) //Pinned to controlReference (i.e. controlReference is a scrolledControl)
                     {
@@ -1248,7 +1261,7 @@ namespace MusicBeePlugin
                 }
                 else //if (controlReferencing == null && controlReference == null)
                 {
-                    //Nothing to do. Lets keep auto-scaled scaling/position... 
+                    //Nothing to do. Let's keep auto-scaled scaling/position... 
                 }
             }
         }
@@ -1260,16 +1273,16 @@ namespace MusicBeePlugin
                 controlsReferencedY.TryGetValue(control, out var controlReferencing);
                 controlsReferencesY.TryGetValue(control, out var controlReference);
 
-                (_, _, _, _, _, _, _, string[] remarks) = GetControlTagReferredNamesMarksRemarks(control);
-                bool pinnedToParentY = remarks.Contains("pinned-to-parent-y");
-                int controlReferencingLevel = GetControlLevel(controlReferencing, control);
+                var (_, _, _, _, _, _, _, remarks) = GetControlTagReferredNamesMarksRemarks(control);
+                var pinnedToParentY = remarks.Contains("pinned-to-parent-y");
+                var controlReferencingLevel = GetControlLevel(controlReferencing, control);
 
                 int controlRNew;
 
                 if (controlReferencing != null && controlReferencingLevel == 0 && controlReference != null)
                 {
-                    (_, int controlReferencingBottom, _, int controlReferencingMarginBottom) = GetControl2TopBottomMarginsOrParent0HeightPaddings(control, controlReferencing, pinnedToParentY);
-                    (int controlReferenceTop, _, int controlReferenceMarginTop, _) = GetControl2TopBottomMarginsOrParent0HeightPaddings(control, controlReference, pinnedToParentY);
+                    var (_, controlReferencingBottom, _, controlReferencingMarginBottom) = GetControl2TopBottomMarginsOrParent0HeightPaddings(control, controlReferencing, pinnedToParentY);
+                    var (controlReferenceTop, _, controlReferenceMarginTop, _) = GetControl2TopBottomMarginsOrParent0HeightPaddings(control, controlReference, pinnedToParentY);
 
                     controlRNew = controlReferenceTop - (controlReferenceMarginTop + control.Margin.Bottom);
                     control.Top = controlReferencingBottom + (controlReferencingMarginBottom + control.Margin.Top);
@@ -1278,7 +1291,7 @@ namespace MusicBeePlugin
                 }
                 else if (controlReferencing != null && controlReferencingLevel == 0 && controlReference == null)
                 {
-                    (int controlReferencingTop, _, _, int controlReferencingMarginBottom) = GetControl2TopBottomMarginsOrParent0HeightPaddings(control, controlReferencing, pinnedToParentY);
+                    var (controlReferencingTop, _, _, controlReferencingMarginBottom) = GetControl2TopBottomMarginsOrParent0HeightPaddings(control, controlReferencing, pinnedToParentY);
 
                     controlRNew = control.Top + control.Height;
                     control.Top = controlReferencingTop + (controlReferencingMarginBottom + control.Margin.Top);
@@ -1286,7 +1299,7 @@ namespace MusicBeePlugin
                 }
                 else if ((controlReferencing == null || controlReferencingLevel > 0) && controlReference != null)
                 {
-                    (int controlReferenceTop, int controlReferenceBottom, int controlReferenceMarginTop, int controlReferenceMarginBottom) = GetControl2TopBottomMarginsOrParent0HeightPaddings(control, controlReference, pinnedToParentY);
+                    var (controlReferenceTop, controlReferenceBottom, controlReferenceMarginTop, controlReferenceMarginBottom) = GetControl2TopBottomMarginsOrParent0HeightPaddings(control, controlReference, pinnedToParentY);
 
                     if (pinnedToParentY && GetControlLevel(control, controlReference) > 0) //Pinned to controlReference (i.e. controlReference is a scrolledControl)
                     {
@@ -1304,17 +1317,17 @@ namespace MusicBeePlugin
                 }
                 else //if (controlReferencing == null && controlReference == null)
                 {
-                    //Nothing to do. Lets keep auto-scaled scaling/position... 
+                    //Nothing to do. Let's keep auto-scaled scaling/position... 
                 }
             }
         }
 
         protected void dgvCustomVScrollBar_SetThumbTop(DataGridView dataGridView, CustomVScrollBar customVScrollBar)
         {
-            int nRowRange = dataGridView.RowCount - dataGridView.DisplayedRowCount(false);
-            (int _, int nPixelRange, _, _, _) = customVScrollBar.GetMetrics();
+            var nRowRange = dataGridView.RowCount - dataGridView.DisplayedRowCount(false);
+            var (_, nPixelRange, _, _, _) = customVScrollBar.GetMetrics();
 
-            int firstDisplayedScrollingRowIndex = dataGridView.FirstDisplayedScrollingRowIndex;
+            var firstDisplayedScrollingRowIndex = dataGridView.FirstDisplayedScrollingRowIndex;
             if (nRowRange > 0)
                 customVScrollBar.SetThumbTop((int)Math.Round((float)firstDisplayedScrollingRowIndex * nPixelRange / nRowRange));
         }
@@ -1352,10 +1365,10 @@ namespace MusicBeePlugin
 
             if (dataGridView.RowCount > 0)
             {
-                int nRowRange = dataGridView.RowCount - dataGridView.DisplayedRowCount(false);
-                (_, int nPixelRange, _, _, _) = customVScrollBar.GetMetrics();
+                var nRowRange = dataGridView.RowCount - dataGridView.DisplayedRowCount(false);
+                var (_, nPixelRange, _, _, _) = customVScrollBar.GetMetrics();
 
-                int newFirstDisplayedScrollingRowIndex = dataGridView.FirstDisplayedScrollingRowIndex;
+                var newFirstDisplayedScrollingRowIndex = dataGridView.FirstDisplayedScrollingRowIndex;
                 if (nPixelRange > 0)
                     newFirstDisplayedScrollingRowIndex = (int)Math.Round((float)nRowRange * customVScrollBar.GetThumbTop() / nPixelRange);
 
@@ -1383,7 +1396,7 @@ namespace MusicBeePlugin
 
                 if (dataGridView.RowCount > 0)
                 {
-                    int lastTopDisplayedRow = dataGridView.RowCount - dataGridView.DisplayedRowCount(true);
+                    var lastTopDisplayedRow = dataGridView.RowCount - dataGridView.DisplayedRowCount(true);
                     if (lastTopDisplayedRow < 0)
                         lastTopDisplayedRow = 0;
 
@@ -1448,13 +1461,13 @@ namespace MusicBeePlugin
 
             if (listBox.Items.Count > 0)
             {
-                (int totalColumns, int visibleColumns, int visible1stColumnItems) = GetListBoxMetrics(listBox);
+                var (totalColumns, visibleColumns, visible1stColumnItems) = GetListBoxMetrics(listBox);
 
-                int nColumnRange = totalColumns - visibleColumns;
-                (_, int nPixelRange, _, _, _) = customHScrollBar.GetMetrics();
+                var nColumnRange = totalColumns - visibleColumns;
+                var (_, nPixelRange, _, _, _) = customHScrollBar.GetMetrics();
 
-                int firstVisibleColumnIndex = listBox.TopIndex / visible1stColumnItems;
-                int newFirstVisibleColumnIndex = firstVisibleColumnIndex;
+                var firstVisibleColumnIndex = listBox.TopIndex / visible1stColumnItems;
+                var newFirstVisibleColumnIndex = firstVisibleColumnIndex;
                 if (nPixelRange > 0)
                     newFirstVisibleColumnIndex = (int)Math.Round((float)nColumnRange * customHScrollBar.GetThumbLeft()
                         / nPixelRange);
@@ -1480,12 +1493,12 @@ namespace MusicBeePlugin
 
             if (listBox.Items.Count > 0)
             {
-                (_, _, int visible1stColumnItems) = GetListBoxMetrics(listBox);
+                var (_, _, visible1stColumnItems) = GetListBoxMetrics(listBox);
 
-                int nRowRange = listBox.Items.Count - visible1stColumnItems;
-                (_, int nPixelRange, _, _, _) = customVScrollBar.GetMetrics();
+                var nRowRange = listBox.Items.Count - visible1stColumnItems;
+                var (_, nPixelRange, _, _, _) = customVScrollBar.GetMetrics();
 
-                int newFirstDisplayedScrollingItemIndex = listBox.TopIndex;
+                var newFirstDisplayedScrollingItemIndex = listBox.TopIndex;
                 if (nPixelRange > 0)
                     newFirstDisplayedScrollingItemIndex = (int)Math.Round((float)nRowRange * customVScrollBar.GetThumbTop() / nPixelRange);
 
@@ -1502,7 +1515,7 @@ namespace MusicBeePlugin
         {
             var listBox = sender as ListBox;
 
-            (_, _, int visible1stColumnItems) = GetListBoxMetrics(listBox);
+            var (_, _, visible1stColumnItems) = GetListBoxMetrics(listBox);
 
             int delta;
             if (listBox.MultiColumn)
@@ -1546,22 +1559,22 @@ namespace MusicBeePlugin
             if (listBox.MultiColumn)
             {
                 CustomHScrollBar customHScrollBar = null;
-                if (listBox is CustomListBox)
-                    customHScrollBar = (listBox as CustomListBox).hScrollBar;
-                else if (listBox is CustomCheckedListBox)
-                    customHScrollBar = (listBox as CustomCheckedListBox).hScrollBar;
+                if (listBox is CustomListBox box)
+                    customHScrollBar = box.hScrollBar;
+                else if (listBox is CustomCheckedListBox checkedListBox)
+                    customHScrollBar = checkedListBox.hScrollBar;
 
                 if (customHScrollBar == null)
                     return;
 
-                (int totalColumns, int visibleColumns, int visible1stColumnItems) = GetListBoxMetrics(listBox);
+                var (totalColumns, visibleColumns, visible1stColumnItems) = GetListBoxMetrics(listBox);
 
-                int nRowRange = totalColumns - visibleColumns;
+                var nRowRange = totalColumns - visibleColumns;
 
 
-                (_, int nPixelRange, _, _, _) = customHScrollBar.GetMetrics();
+                var (_, nPixelRange, _, _, _) = customHScrollBar.GetMetrics();
 
-                int nThumbLeft = 0;
+                var nThumbLeft = 0;
                 if (nRowRange > 0)
                     nThumbLeft = (int)Math.Round(((float)listBox.TopIndex / visible1stColumnItems) * nPixelRange / nRowRange);
 
@@ -1570,22 +1583,22 @@ namespace MusicBeePlugin
             else
             {
                 CustomVScrollBar customVScrollBar = null;
-                if (listBox is CustomListBox)
-                    customVScrollBar = (listBox as CustomListBox).vScrollBar;
-                else if (listBox is CustomCheckedListBox)
-                    customVScrollBar = (listBox as CustomCheckedListBox).vScrollBar;
+                if (listBox is CustomListBox box)
+                    customVScrollBar = box.vScrollBar;
+                else if (listBox is CustomCheckedListBox checkedListBox)
+                    customVScrollBar = checkedListBox.vScrollBar;
 
                 if (customVScrollBar == null)
                     return;
 
-                (_, _, int visible1stColumnItems) = GetListBoxMetrics(listBox);
+                var (_, _, visible1stColumnItems) = GetListBoxMetrics(listBox);
 
-                int nRowRange = listBox.Items.Count - visible1stColumnItems;
+                var nRowRange = listBox.Items.Count - visible1stColumnItems;
 
 
-                (_, int nPixelRange, _, _, _) = customVScrollBar.GetMetrics();
+                var (_, nPixelRange, _, _, _) = customVScrollBar.GetMetrics();
 
-                int nThumbTop = 0;
+                var nThumbTop = 0;
                 if (nRowRange > 0)
                     nThumbTop = (int)Math.Round((float)listBox.TopIndex * nPixelRange / nRowRange);
 
@@ -1596,15 +1609,15 @@ namespace MusicBeePlugin
         //Returns: totalLines, visibleLines, visible1stColumnItems
         internal static (int, int, int) GetListBoxMetrics(ListBox listBox)
         {
-            int totalColumns = 1;
-            int visibleColumns = 1;
+            var totalColumns = 1;
+            var visibleColumns = 1;
 
-            int maxVisibleColumnItems = listBox.ClientSize.Height / listBox.ItemHeight;
+            var maxVisibleColumnItems = listBox.ClientSize.Height / listBox.ItemHeight;
             int visible1stColumnItems;
 
             if (listBox.MultiColumn)
             {
-                int columnWidth = listBox.ColumnWidth;
+                var columnWidth = listBox.ColumnWidth;
 
                 if (columnWidth > 0)
                     visibleColumns = listBox.ClientSize.Width / columnWidth;
@@ -1635,7 +1648,7 @@ namespace MusicBeePlugin
         {
             var listBox = scrolledControl as ListBox;
 
-            (int totalColumns, int visibleColumns, int visible1stColumnItems) = GetListBoxMetrics(listBox); //-V3149
+            var (totalColumns, visibleColumns, visible1stColumnItems) = GetListBoxMetrics(listBox); //-V3149
 
             if (refScrollBar is CustomHScrollBar && totalColumns > 0)
                 return (0, totalColumns, visibleColumns);
@@ -1661,14 +1674,14 @@ namespace MusicBeePlugin
 
             if (textBox.Text.Length > 0)
             {
-                (int totalLines, int visibleLines) = GetTextBoxMetrics(textBox);
+                var (totalLines, visibleLines) = GetTextBoxMetrics(textBox);
 
-                int nRowRange = totalLines - visibleLines;
-                (_, int nPixelRange, _, _, _) = customVScrollBar.GetMetrics();
+                var nRowRange = totalLines - visibleLines;
+                var (_, nPixelRange, _, _, _) = customVScrollBar.GetMetrics();
 
-                int scrollPosition = textBox.GetScrollPosition();
+                var scrollPosition = textBox.GetScrollPosition();
 
-                int newFirstDisplayedLine = scrollPosition;
+                var newFirstDisplayedLine = scrollPosition;
                 if (nPixelRange > 0)
                     newFirstDisplayedLine = (int)Math.Round((float)nRowRange * customVScrollBar.GetThumbTop()
                         / nPixelRange);
@@ -1692,14 +1705,14 @@ namespace MusicBeePlugin
 
             if (textBox.Text.Length > 0)
             {
-                (int totalLines, int visibleLines) = GetTextBoxMetrics(textBox);
+                var (totalLines, visibleLines) = GetTextBoxMetrics(textBox);
 
-                int nRowRange = totalLines - visibleLines;
-                (_, int nPixelRange, _, _, _) = customVScrollBar.GetMetrics();
+                var nRowRange = totalLines - visibleLines;
+                var (_, nPixelRange, _, _, _) = customVScrollBar.GetMetrics();
 
-                int scrollPosition = textBox.ScrollPosition;
+                var scrollPosition = textBox.ScrollPosition;
 
-                int newFirstDisplayedLine = scrollPosition;
+                var newFirstDisplayedLine = scrollPosition;
                 if (nPixelRange > 0)
                     newFirstDisplayedLine = (int)Math.Round((float)nRowRange * customVScrollBar.GetThumbTop()
                         / nPixelRange);
@@ -1720,10 +1733,10 @@ namespace MusicBeePlugin
             else
                 delta = -e.Delta / 8;
 
-            if (sender is CustomTextBox)
+            if (sender is CustomTextBox box)
             {
-                (sender as CustomTextBox).Scroll(delta);
-                customTextBoxScrolled(sender as CustomTextBox, null);
+                box.Scroll(delta);
+                customTextBoxScrolled(box, null);
             }
             else
             {
@@ -1737,12 +1750,11 @@ namespace MusicBeePlugin
             if (e.Button != MouseButtons.Left)
                 return;
 
-            if (sender is CustomTextBox)
+            if (sender is CustomTextBox customTextBox)
             {
-                var customTextBox = sender as CustomTextBox;
                 customTextBox.UpdateCaretPositionForScrolling(customTextBox.GetCaretPosition());
 
-                customTextBoxScrolled(sender as CustomTextBox, null);
+                customTextBoxScrolled(customTextBox, null);
             }
             else
             {
@@ -1755,12 +1767,11 @@ namespace MusicBeePlugin
             if ((MouseButtons & MouseButtons.Left) == 0)
                 return;
 
-            if (sender is CustomTextBox)
+            if (sender is CustomTextBox customTextBox)
             {
-                var customTextBox = sender as CustomTextBox;
                 customTextBox.UpdateCaretPositionForScrolling(customTextBox.GetCaretPosition());
 
-                customTextBoxScrolled(sender as CustomTextBox, null);
+                customTextBoxScrolled(customTextBox, null);
             }
             else
             {
@@ -1776,9 +1787,8 @@ namespace MusicBeePlugin
                 || e.KeyData == Keys.PageUp || e.KeyData == Keys.PageDown || e.KeyData == Keys.Home || e.KeyData == Keys.End
                 || e.KeyData == Keys.Up || e.KeyData == Keys.Down || e.KeyData == Keys.Left || e.KeyData == Keys.Right)
             {
-                if (sender is CustomTextBox)
+                if (sender is CustomTextBox customTextBox)
                 {
-                    var customTextBox = sender as CustomTextBox;
                     customTextBox.UpdateCaretPositionForScrolling(textBox.GetCaretPosition());
                     customTextBoxScrolled(customTextBox, null);
                 }
@@ -1791,14 +1801,15 @@ namespace MusicBeePlugin
 
         private void textBoxScrolled(TextBox textBox, EventArgs e)
         {
-            var customVScrollBar = ControlsTools.FindControlChild<CustomVScrollBar>(textBox.Parent);
+            var customVScrollBar = ControlsTools.FindControlChild<CustomVScrollBar>(textBox.Parent) 
+                                   ?? ControlsTools.FindControlChild<CustomVScrollBar>(textBox.Parent.Parent);
 
-            (int totalLines, int visibleLines) = GetTextBoxMetrics(textBox);
-            int nRowRange = totalLines - visibleLines;
+            var (totalLines, visibleLines) = GetTextBoxMetrics(textBox);
+            var nRowRange = totalLines - visibleLines;
 
-            (_, int nPixelRange, _, _, _) = customVScrollBar.GetMetrics(); //-V3080
+            var (_, nPixelRange, _, _, _) = customVScrollBar.GetMetrics(); //-V3080
 
-            int nThumbTop = 0;
+            var nThumbTop = 0;
             if (nRowRange > 0)
                 nThumbTop = (int)Math.Round((float)textBox.GetScrollPosition() * nPixelRange / nRowRange);
 
@@ -1809,12 +1820,12 @@ namespace MusicBeePlugin
         {
             var customVScrollBar = textBox.vScrollBar;
 
-            (int totalLines, int visibleLines) = GetTextBoxMetrics(textBox);
-            int nRowRange = totalLines - visibleLines;
+            var (totalLines, visibleLines) = GetTextBoxMetrics(textBox);
+            var nRowRange = totalLines - visibleLines;
 
-            (_, int nPixelRange, _, _, _) = customVScrollBar.GetMetrics();
+            var (_, nPixelRange, _, _, _) = customVScrollBar.GetMetrics();
 
-            int nThumbTop = 0;
+            var nThumbTop = 0;
             if (nRowRange > 0)
                 nThumbTop = (int)Math.Round((float)textBox.ScrollPosition * nPixelRange / nRowRange);
 
@@ -1824,11 +1835,11 @@ namespace MusicBeePlugin
         //Returns: totalLines, visibleLines
         internal static (int, int) GetTextBoxMetrics(TextBox textBox)
         {
-            int totalLines = textBox.GetLineFromCharIndex(textBox.Text.Length - 1) + 1;
+            var totalLines = textBox.GetLineFromCharIndex(textBox.Text.Length - 1) + 1;
             int visibleLines;
 
-            int lineHeight = TextRenderer.MeasureText("X", textBox.Font).Height;
-            int maxVisibleLines = textBox.ClientSize.Height / lineHeight;
+            var lineHeight = TextRenderer.MeasureText("X", textBox.Font).Height;
+            var maxVisibleLines = textBox.ClientSize.Height / lineHeight;
 
 
             if (totalLines > maxVisibleLines)
@@ -1844,7 +1855,7 @@ namespace MusicBeePlugin
         {
             var textBox = scrolledControl as TextBox;
 
-            (int totalLines, int visibleLines) = GetTextBoxMetrics(textBox); //-V3149
+            var (totalLines, visibleLines) = GetTextBoxMetrics(textBox); //-V3149
 
             if (refScrollBar is CustomVScrollBar && totalLines > 0)
                 return (0, totalLines, visibleLines);
@@ -1858,7 +1869,7 @@ namespace MusicBeePlugin
         {
             var hScrollBar = ControlsTools.FindControlChild<HScrollBar>(dataGridView);
             var customHScrollBar = ControlsTools.FindControlChild<CustomHScrollBar>(dataGridView);
-            int customHScrollBarVisibleHeight = 0;
+            var customHScrollBarVisibleHeight = 0;
 
 
             if (customHScrollBar != null)
@@ -1874,7 +1885,7 @@ namespace MusicBeePlugin
 
             var vScrollBar = ControlsTools.FindControlChild<VScrollBar>(dataGridView);
             var customVScrollBar = ControlsTools.FindControlChild<CustomVScrollBar>(dataGridView);
-            int customVScrollBarVisibleWidth = 0;
+            var customVScrollBarVisibleWidth = 0;
 
 
             if (customVScrollBar != null)
@@ -1893,24 +1904,24 @@ namespace MusicBeePlugin
 
         private static (CustomHScrollBar, int, CustomVScrollBar, int) UpdateClbCustomScrollBarsInternal(ListBox listBox)
         {
-            int customHScrollBarVisibleHeight = 0;
-            int customVScrollBarVisibleWidth = 0;
+            var customHScrollBarVisibleHeight = 0;
+            var customVScrollBarVisibleWidth = 0;
 
 
-            (int totalColumns, int visibleColumns, int visible1stColumnItems) = GetListBoxMetrics(listBox);
+            var (totalColumns, visibleColumns, visible1stColumnItems) = GetListBoxMetrics(listBox);
 
             CustomHScrollBar hScrollBar = null;
             CustomVScrollBar vScrollBar = null;
 
-            if (listBox is CustomListBox)
+            if (listBox is CustomListBox customListBox)
             {
-                hScrollBar = (listBox as CustomListBox).hScrollBar;
-                vScrollBar = (listBox as CustomListBox).vScrollBar;
+                hScrollBar = customListBox.hScrollBar;
+                vScrollBar = customListBox.vScrollBar;
             }
-            else if (listBox is CustomCheckedListBox)
+            else if (listBox is CustomCheckedListBox box)
             {
-                hScrollBar = (listBox as CustomCheckedListBox).hScrollBar;
-                vScrollBar = (listBox as CustomCheckedListBox).vScrollBar;
+                hScrollBar = box.hScrollBar;
+                vScrollBar = box.vScrollBar;
             }
 
             if (listBox.MultiColumn && hScrollBar != null)
@@ -1935,7 +1946,7 @@ namespace MusicBeePlugin
 
         private static CustomVScrollBar UpdateTbCustomScrollBarsInternal(TextBox textBox)
         {
-            (int totalLines, int visibleLines) = GetTextBoxMetrics(textBox);
+            var (totalLines, visibleLines) = GetTextBoxMetrics(textBox);
 
             var vScrollBar = ControlsTools.FindControlChild<CustomVScrollBar>(textBox.Parent);
 
@@ -1951,7 +1962,7 @@ namespace MusicBeePlugin
 
         private static CustomVScrollBar UpdateCtbCustomScrollBarsInternal(CustomTextBox textBox)
         {
-            (int totalLines, int visibleLines) = GetTextBoxMetrics(textBox);
+            var (totalLines, visibleLines) = GetTextBoxMetrics(textBox);
 
             var vScrollBar = textBox.vScrollBar;
 
@@ -1968,31 +1979,31 @@ namespace MusicBeePlugin
         internal static void UpdateCustomScrollBars(Control scrolledControl)
         {
             CustomHScrollBar customHScrollBar = null;
-            int customHScrollBarVisibleHeight = 0;
+            var customHScrollBarVisibleHeight = 0;
             CustomVScrollBar customVScrollBar = null;
-            int customVScrollBarVisibleWidth = 0;
+            var customVScrollBarVisibleWidth = 0;
 
-            if (scrolledControl is DataGridView)
+            if (scrolledControl is DataGridView view)
             {
                 (customHScrollBar, customHScrollBarVisibleHeight, customVScrollBar, customVScrollBarVisibleWidth)
-                    = UpdateDgvCustomScrollBarsInternal(scrolledControl as DataGridView);
+                    = UpdateDgvCustomScrollBarsInternal(view);
             }
             else if (scrolledControl is CustomListBox || scrolledControl is CustomCheckedListBox)
             {
                 (customHScrollBar, customHScrollBarVisibleHeight, customVScrollBar, customVScrollBarVisibleWidth)
                     = UpdateClbCustomScrollBarsInternal(scrolledControl as ListBox);
             }
-            else if (scrolledControl is CustomTextBox)
+            else if (scrolledControl is CustomTextBox control)
             {
                 customVScrollBarVisibleWidth = 1; //Must be > 0 to make vert. scroll bar visible 
                 customVScrollBar
-                    = UpdateCtbCustomScrollBarsInternal(scrolledControl as CustomTextBox);
+                    = UpdateCtbCustomScrollBarsInternal(control);
             }
-            else if (scrolledControl is TextBox)
+            else if (scrolledControl is TextBox box)
             {
                 customVScrollBarVisibleWidth = 1; //Must be > 0 to make vert. scroll bar visible 
                 customVScrollBar
-                    = UpdateTbCustomScrollBarsInternal(scrolledControl as TextBox);
+                    = UpdateTbCustomScrollBarsInternal(box);
             }
 
 
@@ -2022,14 +2033,12 @@ namespace MusicBeePlugin
         //Returns Minimum, Maximum, LargeChange
         internal static (int, int, int) GetScrollBarMetrics(Control scrolledControl, Control refScrollBar)
         {
-            if (refScrollBar is HScrollBar)
+            if (refScrollBar is HScrollBar bar)
             {
-                var scrollBar = refScrollBar as HScrollBar;
-                return (scrollBar.Minimum, scrollBar.Maximum, scrollBar.LargeChange);
+                return (bar.Minimum, bar.Maximum, bar.LargeChange);
             }
-            else if (refScrollBar is VScrollBar)
+            else if (refScrollBar is VScrollBar scrollBar)
             {
-                var scrollBar = refScrollBar as VScrollBar;
                 return (scrollBar.Minimum, scrollBar.Maximum, scrollBar.LargeChange);
             }
 
@@ -2065,22 +2074,18 @@ namespace MusicBeePlugin
 
         private void customScrollBarCustomListBox_SizeChanged(object sender, EventArgs e)
         {
-            if (sender is CustomListBox)
+            if (sender is CustomListBox box)
             {
-                var listBox = sender as CustomListBox;
+                var customHScrollBar = box.hScrollBar;
+                customHScrollBar?.ResetMetricsSize(box.Width);
 
-                var customHScrollBar = listBox.hScrollBar;
-                customHScrollBar?.ResetMetricsSize(listBox.Width);
+                var customVScrollBar = box.vScrollBar;
+                customVScrollBar?.ResetMetricsSize(box.Height);
 
-                var customVScrollBar = listBox.vScrollBar;
-                customVScrollBar?.ResetMetricsSize(listBox.Height);
-
-                listBox.Invalidate();
+                box.Invalidate();
             }
-            else if (sender is CustomCheckedListBox)
+            else if (sender is CustomCheckedListBox listBox)
             {
-                var listBox = sender as CustomCheckedListBox;
-
                 var customHScrollBar = listBox.hScrollBar;
                 customHScrollBar?.ResetMetricsSize(listBox.Width);
 
@@ -2096,6 +2101,16 @@ namespace MusicBeePlugin
             var textBox = sender as TextBox;
 
             var customVScrollBar = ControlsTools.FindControlChild<CustomVScrollBar>(textBox.Parent);
+            customVScrollBar.ResetMetricsSize(textBox.Height); //-V3080
+
+            textBox.Invalidate();
+        }
+
+        private void customScrollBarTextBoxBorder_SizeChanged(object sender, EventArgs e)
+        {
+            var textBox = sender as TextBox;
+
+            var customVScrollBar = ControlsTools.FindControlChild<CustomVScrollBar>(textBox.Parent.Parent);
             customVScrollBar.ResetMetricsSize(textBox.Height); //-V3080
 
             textBox.Invalidate();
@@ -2120,7 +2135,7 @@ namespace MusicBeePlugin
             Application.DoEvents();
         }
 
-        protected void inputControl_EnabledChanged(object sender, EventArgs e)
+        internal static void InputControl_EnabledChanged(object sender, EventArgs e)
         {
             if ((sender as Control).IsEnabled())
                 (sender as Control).BackColor = InputControlBackColor;
@@ -2130,7 +2145,7 @@ namespace MusicBeePlugin
 
         internal static Control FindFocusedControl(Control control)
         {
-            ContainerControl container = control as ContainerControl;
+            var container = control as ContainerControl;
             while (container != null)
             {
                 control = container.ActiveControl;
@@ -2144,18 +2159,18 @@ namespace MusicBeePlugin
         {
             CustomComboBox customComboBox;
 
-            if (sender is ToolStripDropDown toolStripDropDown) //Tt's opened custom combo box list
+            if (sender is ToolStripDropDown toolStripDropDown) //It's opened custom combo box list
             {
                 customComboBox = toolStripDropDown.Tag as CustomComboBox;
             }
             else if (sender is Control control)
             {
-                Control focusedControl = FindFocusedControl(control);
+                var focusedControl = FindFocusedControl(control);
 
-                if (!(focusedControl.Parent is CustomComboBox))
+                if (!(focusedControl.Parent is CustomComboBox box))
                     return null;
 
-                customComboBox = focusedControl.Parent as CustomComboBox;
+                customComboBox = box;
             }
             else
             {
@@ -2170,17 +2185,17 @@ namespace MusicBeePlugin
 
         internal void CustomComboBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            CustomComboBox customComboBox = getKeyEventCustomComboBox(sender);
+            var customComboBox = getKeyEventCustomComboBox(sender);
 
             if (customComboBox == null)
                 return;
 
 
             //First char may be some symbol like "<", let's search for the second char in this case
-            string searchedLetter = e.KeyChar.ToString().ToLower();
+            var searchedLetter = e.KeyChar.ToString().ToLower();
 
 
-            for (int searchedIndex = 0; searchedIndex < 2; searchedIndex++)
+            for (var searchedIndex = 0; searchedIndex < 2; searchedIndex++)
             {
                 foreach (string tagName in customComboBox.Items)
                 {
@@ -2197,7 +2212,7 @@ namespace MusicBeePlugin
         internal void CustomComboBox_KeyDown(object sender, KeyEventArgs e)
         {
             var form = sender as Form;
-            CustomComboBox customComboBox = getKeyEventCustomComboBox(sender);
+            var customComboBox = getKeyEventCustomComboBox(sender);
 
             if (customComboBox == null)
                 return;
@@ -2259,6 +2274,14 @@ namespace MusicBeePlugin
                     button.FlatStyle = FlatStyle.Standard;
                     buttonLabels.AddReplace(button, button.Text);
                 }
+                else if (UseNativeButtonPaint && !(button.Parent is CustomComboBox))
+                {
+                    button.ForeColor = ButtonForeColor;
+                    button.BackColor = ButtonBackColor;
+
+                    button.FlatStyle = FlatStyle.Standard;
+                    buttonLabels.AddReplace(button, button.Text);
+                }
                 else
                 {
                     button.FlatStyle = FlatStyle.Flat;
@@ -2286,10 +2309,10 @@ namespace MusicBeePlugin
             {
                 if (control is CustomListBox || control is CustomCheckedListBox || control is CustomTextBox)
                 {
-                    TableLayoutPanel parent = control.Parent as TableLayoutPanel;
+                    var parent = control.Parent as TableLayoutPanel;
 
                     parent.ColumnStyles[1].Width = 0; //-V3149
-                    TableLayoutPanelCellPosition cellPosition = parent.GetCellPosition(control);
+                    var cellPosition = parent.GetCellPosition(control);
                     parent.RowStyles[cellPosition.Row + 1].Height = 0;
                 }
                 else if (control is TextBox textBox && control.Parent is TableLayoutPanel parent)
@@ -2297,7 +2320,7 @@ namespace MusicBeePlugin
                     if (textBox.Multiline)
                     {
                         parent.ColumnStyles[1].Width = 0;
-                        TableLayoutPanelCellPosition cellPosition = parent.GetCellPosition(control);
+                        var cellPosition = parent.GetCellPosition(control);
                         parent.RowStyles[cellPosition.Row + 1].Height = 0;
                     }
                 }
@@ -2305,7 +2328,7 @@ namespace MusicBeePlugin
                 {
                     if (comboBox.DropDownStyle == ComboBoxStyle.DropDown || comboBox.DropDownStyle == ComboBoxStyle.DropDownList)
                     {
-                        CustomComboBox customComboBox = new CustomComboBox(this, comboBox, false);
+                        var customComboBox = new CustomComboBox(this, comboBox, false);
 
                         customComboBox.comboBox.FlatStyle = FlatStyle.System;
 
@@ -2331,7 +2354,11 @@ namespace MusicBeePlugin
             }
 
 
-            if (control is CheckBox checkBox)
+            if (control is TextBoxBorder textBoxBorder)
+            {
+                skinControl(textBoxBorder.textBox);
+            }
+            else if (control is CheckBox checkBox)
             {
                 checkBox.BackColor = FormBackColor;
                 checkBox.ForeColor = FormForeColor;
@@ -2345,7 +2372,7 @@ namespace MusicBeePlugin
 
                 radioButton.FlatStyle = FlatStyle.System;
             }
-            else if (control is Label || control is LinkLabel)
+            else if (control is Label)
             {
                 control.BackColor = FormBackColor;
 
@@ -2355,8 +2382,8 @@ namespace MusicBeePlugin
                 }
                 else
                 {
-                    Color stdColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanelLabel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
-                    control.ForeColor = GetHighlightColor(control.ForeColor, stdColor, FormBackColor, 0.80f);
+                    var stdColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanelLabel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
+                    control.ForeColor = GetHighlightColor(control.ForeColor, stdColor, FormBackColor);
                 }
             }
             else if (control is GroupBox groupBox)
@@ -2369,8 +2396,8 @@ namespace MusicBeePlugin
                 }
                 else
                 {
-                    Color stdColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanelLabel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
-                    groupBox.ForeColor = GetHighlightColor(control.ForeColor, stdColor, FormBackColor, 0.80f);
+                    var stdColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanelLabel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
+                    groupBox.ForeColor = GetHighlightColor(control.ForeColor, stdColor, FormBackColor);
                 }
 
                 groupBox.FlatStyle = FlatStyle.Standard;
@@ -2396,44 +2423,22 @@ namespace MusicBeePlugin
                     comboBox.FlatStyle = FlatStyle.Flat;
                 }
             }
-            else if (control is TextBox || control is CustomTextBox)
+            else if (control is TextBox textBox)
             {
-                var textBox = control as TextBox;
-
                 textBox.BackColor = InputControlBackColor;
                 textBox.ForeColor = InputControlForeColor;
 
                 textBox.BorderStyle = BorderStyle.FixedSingle;
 
-                textBox.EnabledChanged += inputControl_EnabledChanged;
-
                 if (textBox.Multiline)
                 {
-                    if (textBox is CustomTextBox)
+                    if (textBox.Parent is TableLayoutPanel)
                     {
                         textBox.ScrollBars = ScrollBars.None;
                         textBox.WordWrap = true;
 
-                        CustomVScrollBar customVScrollBar = new CustomVScrollBar(this, textBox, GetTextBoxScrollBarMetrics, borderWidth);
-                        customVScrollBar.CreateBrushes();
-
-                        customVScrollBar.SmallChange = 3;
-                        customVScrollBar.Scroll += ctbCustomVScrollBar_Scroll;
-                        customVScrollBar.ValueChanged += ctbCustomVScrollBar_ValueChanged;
-
-                        textBox.MouseUp += customOrStandardTextBox_MouseUp;
-                        textBox.MouseMove += customOrStandardTextBox_MouseMove;
-                        textBox.KeyDown += customOrStandardTextBox_KeyUpDown;
-                        textBox.KeyUp += customOrStandardTextBox_KeyUpDown;
-                        textBox.MouseWheel += customOrStandardTextBox_MouseWheel;
-                        textBox.SizeChanged += customScrollBarCustomTextBox_SizeChanged;
-                    }
-                    else if (textBox.Parent is TableLayoutPanel)
-                    {
-                        textBox.ScrollBars = ScrollBars.None;
-                        textBox.WordWrap = true;
-
-                        CustomVScrollBar customVScrollBar = new CustomVScrollBar(this, textBox, GetTextBoxScrollBarMetrics, borderWidth);
+                        var customVScrollBar =
+                            new CustomVScrollBar(this, textBox, GetTextBoxScrollBarMetrics, borderWidth);
                         customVScrollBar.CreateBrushes();
 
                         customVScrollBar.SmallChange = 3;
@@ -2447,6 +2452,48 @@ namespace MusicBeePlugin
                         textBox.MouseWheel += customOrStandardTextBox_MouseWheel;
                         textBox.SizeChanged += customScrollBarTextBox_SizeChanged;
                     }
+                    else if (textBox.Parent is TextBoxBorder)
+                    {
+                        if (textBox.Parent?.Parent is TableLayoutPanel)
+                        {
+                            textBox.ScrollBars = ScrollBars.None;
+                            textBox.WordWrap = true;
+
+                            var customVScrollBar =
+                                new CustomVScrollBar(this, textBox, GetTextBoxScrollBarMetrics, borderWidth);
+                            customVScrollBar.CreateBrushes();
+
+                            customVScrollBar.SmallChange = 3;
+                            customVScrollBar.Scroll += tbCustomVScrollBar_Scroll;
+                            customVScrollBar.ValueChanged += tbCustomVScrollBar_ValueChanged;
+
+                            textBox.MouseUp += customOrStandardTextBox_MouseUp;
+                            textBox.MouseMove += customOrStandardTextBox_MouseMove;
+                            textBox.KeyDown += customOrStandardTextBox_KeyUpDown;
+                            textBox.KeyUp += customOrStandardTextBox_KeyUpDown;
+                            textBox.MouseWheel += customOrStandardTextBox_MouseWheel;
+                            textBox.SizeChanged += customScrollBarTextBoxBorder_SizeChanged;
+                        }
+                    }
+                    else if (control is CustomTextBox)
+                    {
+                        textBox.ScrollBars = ScrollBars.None;
+                        textBox.WordWrap = true;
+
+                        var customVScrollBar = new CustomVScrollBar(this, textBox, GetTextBoxScrollBarMetrics, borderWidth);
+                        customVScrollBar.CreateBrushes();
+
+                        customVScrollBar.SmallChange = 3;
+                        customVScrollBar.Scroll += ctbCustomVScrollBar_Scroll;
+                        customVScrollBar.ValueChanged += ctbCustomVScrollBar_ValueChanged;
+
+                        textBox.MouseUp += customOrStandardTextBox_MouseUp;
+                        textBox.MouseMove += customOrStandardTextBox_MouseMove;
+                        textBox.KeyDown += customOrStandardTextBox_KeyUpDown;
+                        textBox.KeyUp += customOrStandardTextBox_KeyUpDown;
+                        textBox.MouseWheel += customOrStandardTextBox_MouseWheel;
+                        textBox.SizeChanged += customScrollBarCustomTextBox_SizeChanged;
+                    }
                 }
             }
             else if ((control is ListBox || control.GetType().IsSubclassOf(typeof(ListBox))) && control.Parent is TableLayoutPanel)
@@ -2459,15 +2506,13 @@ namespace MusicBeePlugin
                 listBox.HorizontalScrollbar = false;
                 listBox.BorderStyle = BorderStyle.FixedSingle;
 
-                listBox.EnabledChanged += inputControl_EnabledChanged;
-
                 if (listBox is ListBox || listBox is CheckedListBox)
                     NativeMethods.HideScrollBar(listBox.Handle, NativeMethods.SB_BOTH);
 
 
                 if (listBox.MultiColumn)
                 {
-                    CustomHScrollBar customHScrollBar = new CustomHScrollBar(this, listBox, GetListBoxScrollBarMetrics);
+                    var customHScrollBar = new CustomHScrollBar(this, listBox, GetListBoxScrollBarMetrics);
                     customHScrollBar.CreateBrushes();
 
                     customHScrollBar.Scroll += listBoxCustomHScrollBar_Scroll;
@@ -2483,7 +2528,7 @@ namespace MusicBeePlugin
                 }
                 else
                 {
-                    CustomVScrollBar customVScrollBar = new CustomVScrollBar(this, listBox, GetListBoxScrollBarMetrics, borderWidth);
+                    var customVScrollBar = new CustomVScrollBar(this, listBox, GetListBoxScrollBarMetrics, borderWidth);
                     customVScrollBar.CreateBrushes();
 
                     customVScrollBar.Scroll += listBoxCustomVScrollBar_Scroll;
@@ -2517,7 +2562,7 @@ namespace MusicBeePlugin
                 var hScrollBar = ControlsTools.FindControlChild<HScrollBar>(dataGridView);
                 var vScrollBar = ControlsTools.FindControlChild<VScrollBar>(dataGridView);
 
-                CustomHScrollBar customHScrollBar = new CustomHScrollBar(this, dataGridView, GetScrollBarMetrics, hScrollBar);
+                var customHScrollBar = new CustomHScrollBar(this, dataGridView, GetScrollBarMetrics, hScrollBar);
                 customHScrollBar.CreateBrushes();
                 hScrollBar.Visible = false; //-V3080
 
@@ -2527,7 +2572,7 @@ namespace MusicBeePlugin
                 hScrollBar.VisibleChanged += scrollBar_VisibleChanged;
 
 
-                CustomVScrollBar customVScrollBar = new CustomVScrollBar(this, dataGridView, GetScrollBarMetrics, 0, vScrollBar);
+                var customVScrollBar = new CustomVScrollBar(this, dataGridView, GetScrollBarMetrics, 0, vScrollBar);
                 customVScrollBar.CreateBrushes();
                 vScrollBar.Visible = false; //-V3080
 
@@ -2546,21 +2591,19 @@ namespace MusicBeePlugin
                 control.BackColor = FormBackColor;
                 control.ForeColor = AccentColor;
             }
-
-            return;
         }
 
         internal void fillControlsReferencesRemarks()
         {
-            for (int i = allControls.Count - 1; i >= 0; i--)
+            for (var i = allControls.Count - 1; i >= 0; i--)
             {
                 var control = allControls[i];
 
-                (Control[] controls2X, _, Control[] controls2Y, _, _, _, _, _, string[] remarks) = GetReferredControlsControlLevelMarksRemarks(control);
+                var (controls2X, _, controls2Y, _, _, _, _, _, remarks) = GetReferredControlsControlLevelMarksRemarks(control);
 
                 if (controls2X != null)
                 {
-                    for (int j = 0; j < controls2X.Length; j++)
+                    for (var j = 0; j < controls2X.Length; j++)
                     {
                         controlsReferencesX.AddReplace(control, controls2X[j]);
                         controlsReferencedX.AddReplace(controls2X[j], control);
@@ -2573,7 +2616,7 @@ namespace MusicBeePlugin
 
                 if (controls2Y != null)
                 {
-                    for (int j = 0; j < controls2Y.Length; j++)
+                    for (var j = 0; j < controls2Y.Length; j++)
                     {
                         controlsReferencesY.AddReplace(control, controls2Y[j]);
                         controlsReferencedY.AddReplace(controls2Y[j], control);
@@ -2585,7 +2628,7 @@ namespace MusicBeePlugin
 
 
                 if (remarks.Contains("non-defaultable"))
-                    nonDefaultableButtons.AddUnique(control as Button);
+                    nonDefaultingButtons.AddUnique(control as Button);
             }
         }
 
@@ -2621,13 +2664,13 @@ namespace MusicBeePlugin
             fillControlsReferencesRemarks();
 
 
-            for (int i = allControls.Count - 1; i >= 0; i--)
+            for (var i = allControls.Count - 1; i >= 0; i--)
                 preMoveScaleControl(allControls[i]);
 
-            for (int i = allControls.Count - 1; i >= 0; i--)
+            for (var i = allControls.Count - 1; i >= 0; i--)
                 moveScaleControlDependentReferringControlsX(allControls[i]);
 
-            for (int i = allControls.Count - 1; i >= 0; i--)
+            for (var i = allControls.Count - 1; i >= 0; i--)
                 moveScaleControlDependentReferringControlsY(allControls[i]);
 
 
@@ -2635,13 +2678,13 @@ namespace MusicBeePlugin
             scaleMoveTopBottomAnchoredControls();
 
 
-            for (int i = allControls.Count - 1; i >= 0; i--)
+            for (var i = allControls.Count - 1; i >= 0; i--)
                 skinControl(allControls[i]);
 
             if (useSkinColors)
             {
-                this.KeyPress += CustomComboBox_KeyPress;
-                this.KeyDown += CustomComboBox_KeyDown;
+                KeyPress += CustomComboBox_KeyPress;
+                KeyDown += CustomComboBox_KeyDown;
             }
         }
 
@@ -2656,13 +2699,13 @@ namespace MusicBeePlugin
 
             if (!fixedSize)
             {
-                int maxWidth = 0;
+                var maxWidth = 0;
                 if (sameMinMaxWidth)
                     maxWidth = MinimumSize.Width;
                 else if (initialMaximumSize.Width != 0)
                     maxWidth = (int)Math.Round(initialMaximumSize.Width * hDpiFormScaling);
 
-                int maxHeight = 0;
+                var maxHeight = 0;
                 if (sameMinMaxHeight)
                     maxHeight = MinimumSize.Height;
                 else if (initialMaximumSize.Height != 0)
@@ -2682,6 +2725,7 @@ namespace MusicBeePlugin
             }
         }
 
+        [Flags]
         public enum FontEquality
         {
             DifferentFontUnits = -1,
@@ -2710,8 +2754,8 @@ namespace MusicBeePlugin
 
             FontEquality fontNameEquality;
 
-            string lcFontName = font1.Name.ToLower();
-            bool isSymbolFont = lcFontName.Contains("icons") || lcFontName.Contains("mdl2") || lcFontName.Contains("symbol");
+            var lcFontName = font1.Name.ToLower();
+            var isSymbolFont = lcFontName.Contains("icons") || lcFontName.Contains("mdl2") || lcFontName.Contains("symbol");
 
             lcFontName = font2.Name.ToLower();
             isSymbolFont |= lcFontName.Contains("icons") || lcFontName.Contains("mdl2") || lcFontName.Contains("symbol");
@@ -2728,7 +2772,7 @@ namespace MusicBeePlugin
             {
                 return FontEquality.DifferentFontUnits;
             }
-            else if (isSymbolFont && font1.Size == font2.Size)
+            else if (isSymbolFont && Math.Abs(font1.Size - font2.Size) < 0.5)
             {
                 return FontEquality.EqualSizes | FontEquality.SymbolStyles | fontNameEquality;
             }
@@ -2736,11 +2780,11 @@ namespace MusicBeePlugin
             {
                 return FontEquality.SymbolStyles | fontNameEquality;
             }
-            else if (font1.Style == font2.Style && font1.Size == font2.Size && font1.GdiVerticalFont == font2.GdiVerticalFont)
+            else if (font1.Style == font2.Style && Math.Abs(font1.Size - font2.Size) < 0.5 && font1.GdiVerticalFont == font2.GdiVerticalFont)
             {
                 return FontEquality.EqualSizesStyles | fontNameEquality;
             }
-            else if (font1.Size == font2.Size && font1.GdiVerticalFont == font2.GdiVerticalFont)
+            else if (Math.Abs(font1.Size - font2.Size) < 0.5 && font1.GdiVerticalFont == font2.GdiVerticalFont)
             {
                 return FontEquality.EqualSizes | fontNameEquality;
             }
@@ -2752,24 +2796,23 @@ namespace MusicBeePlugin
 
         protected void scaleForm()
         {
-            List<Control> ownFontControls = new List<Control>();
+            var ownFontControls = new List<Control>();
 
-            for (int i = 0; i < allControls.Count; i++) //Required for correct DPI scaling
+            for (var i = 0; i < allControls.Count; i++) //Required for correct DPI scaling
             {
                 var control = allControls[i];
 
                 var fontEquality = CompareFonts(control.Font, Font);
-                bool sameFonts = (fontEquality == FontEquality.Equal);
+                var sameFonts = (fontEquality == FontEquality.Equal);
 
-                if (!sameFonts)
+                if (!sameFonts || control is TextBox || control is CustomTextBox)
                     ownFontControls.Add(control);
 
                 if (control.GetType().IsSubclassOf(typeof(ContainerControl)))
                     (control as ContainerControl).AutoScaleMode = AutoScaleMode.Inherit;
 
-                if (control is SplitContainer) //Let's remember initial properties to scale them manually later
+                if (control is SplitContainer sc) //Let's remember initial properties to scale them manually later
                 {
-                    SplitContainer sc = control as SplitContainer;
                     SplitContainerScalingAttributes scsa = default;
                     scsa.splitContainer = sc;
                     scsa.panel1MinSize = sc.Panel1MinSize;
@@ -2781,8 +2824,8 @@ namespace MusicBeePlugin
             }
 
 
-            bool sameMinMaxWidth = false;
-            bool sameMinMaxHeight = false;
+            var sameMinMaxWidth = false;
+            var sameMinMaxHeight = false;
 
             if ((Tag as string)?.Contains("@min-max-width-same") == true)
                 sameMinMaxWidth = true;
@@ -2792,20 +2835,20 @@ namespace MusicBeePlugin
 
             var resources = new ResourceManager(GetType());
 
-            object resource = resources.GetObject("$this.MaximumSize");
-            Size initialMaximumSize = resource == null ? new Size(0, 0) : (Size)resource;
+            var resource = resources.GetObject("$this.MaximumSize");
+            var initialMaximumSize = resource == null ? new Size(0, 0) : (Size)resource;
             resource = resources.GetObject("$this.MinimumSize");
-            Size initialMinimumSize = resource == null ? new Size(0, 0) : (Size)resource;
+            var initialMinimumSize = resource == null ? new Size(0, 0) : (Size)resource;
             resource = resources.GetObject("$this.ClientSize");
-            Size initialClientSize = resource == null ? new Size(0, 0) : (Size)resource;
+            var initialClientSize = resource == null ? new Size(0, 0) : (Size)resource;
             resource = resources.GetObject("$this.Font");
-            Font initialFormFont = resource == null ? Font : resource as Font;
+            var initialFormFont = resource == null ? Font : resource as Font;
 
 
             MaximumSize = new Size(0, 0); //Let's temporary remove max. size restrictions
 
 
-            FontEquality mbThisFormFontInitialEquality = CompareFonts(Font, initialFormFont);
+            var mbThisFormFontInitialEquality = CompareFonts(Font, initialFormFont);
 
             if (useMusicBeeFont || useCustomFont || mbThisFormFontInitialEquality != FontEquality.Equal)
             {
@@ -2815,7 +2858,7 @@ namespace MusicBeePlugin
                 }
                 else if (useCustomFont)
                 {
-                    workingFont = new System.Drawing.Font(
+                    workingFont = new Font(
                         SavedSettings.pluginFontFamilyName,
                         SavedSettings.pluginFontSize,
                         SavedSettings.pluginFontStyle
@@ -2826,10 +2869,10 @@ namespace MusicBeePlugin
                     workingFont = Font;
                 }
 
-                FontEquality workingFontThisFormFontEquality = CompareFonts(workingFont, initialFormFont);
+                var workingFontThisFormFontEquality = CompareFonts(workingFont, initialFormFont);
 
 
-                for (int i = allControls.Count - 1; i >= 0; i--) //Required for correct DPI scaling
+                for (var i = allControls.Count - 1; i >= 0; i--) //Required for correct DPI scaling
                     allControls[i].SuspendLayout();
 
                 SuspendLayout();
@@ -2884,7 +2927,7 @@ namespace MusicBeePlugin
                 }
 
 
-                for (int i = 0; i < allControls.Count; i++) //Required for correct DPI scaling
+                for (var i = 0; i < allControls.Count; i++) //Required for correct DPI scaling
                 {
                     allControls[i].ResumeLayout(false);
                     allControls[i].PerformLayout();
@@ -2917,7 +2960,7 @@ namespace MusicBeePlugin
         {
             if (modal && MaximumSize.Height != 0 && !fixedSize)
             {
-                int maximizedHeight = MaximumSize.Height;
+                var maximizedHeight = MaximumSize.Height;
 
                 if (maximizedHeight > Screen.FromControl(this).WorkingArea.Height)
                     maximizedHeight = Screen.FromControl(this).WorkingArea.Height;
@@ -3020,8 +3063,8 @@ namespace MusicBeePlugin
             }
             else
             {
-                int screenWidth = Screen.FromControl(this).WorkingArea.Width;
-                int screenHeight = Screen.FromControl(this).WorkingArea.Height;
+                var screenWidth = Screen.FromControl(this).WorkingArea.Width;
+                var screenHeight = Screen.FromControl(this).WorkingArea.Height;
 
                 left = (screenWidth - width) / 2;
                 top = (screenHeight - height) / 2;
@@ -3063,7 +3106,7 @@ namespace MusicBeePlugin
         {
             lock (OpenedForms)
             {
-                foreach (PluginWindowTemplate form in OpenedForms)
+                foreach (var form in OpenedForms)
                 {
                     if (form.GetType() == newForm.GetType())
                     {
@@ -3121,7 +3164,7 @@ namespace MusicBeePlugin
 
         private void PluginWindowTemplate_Shown(object sender, EventArgs e)
         {
-            for (int i = allControls.Count - 1; i >= 0; i--)
+            for (var i = allControls.Count - 1; i >= 0; i--)
             {
                 if (allControls[i].Focused && allControls[i].Controls.Count == 0)
                 {
@@ -3139,17 +3182,17 @@ namespace MusicBeePlugin
             if (SavedSettings.not1stTimeUsage)
                 return;
 
-            if (this.GetType() == typeof(Settings))
+            if (GetType() == typeof(Settings))
                 return;
 
-            if (this.GetType() == typeof(QuickSettings))
+            if (GetType() == typeof(QuickSettings))
                 return;
 
             SavedSettings.not1stTimeUsage = true;
             var result = MessageBox.Show(MbForm, Msg1stTimeUsage, string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
             if (result == DialogResult.Yes)
             {
-                Settings tagToolsForm = new Settings(TagToolsPlugin);
+                var tagToolsForm = new Settings(TagToolsPlugin);
                 Display(tagToolsForm, true);
             }
         }
@@ -3267,7 +3310,7 @@ namespace MusicBeePlugin
 
         protected WindowSettingsType findCreateSavedWindowSettings(bool createIfAbsent)
         {
-            string fullName = GetType().FullName;
+            var fullName = GetType().FullName;
             WindowSettingsType currentWindowSettings = null;
 
             foreach (var windowSettings in SavedSettings.windowsSettings)
@@ -3316,13 +3359,13 @@ namespace MusicBeePlugin
 
         protected (int, int, int, int, int, int, int) loadWindowLayout()
         {
-            int column1Width = 0;
-            int column2Width = 0;
-            int column3Width = 0;
-            int splitterDistance = 0;
-            int table2column1Width = 0;
-            int table2column2Width = 0;
-            int table2column3Width = 0;
+            var column1Width = 0;
+            var column2Width = 0;
+            var column3Width = 0;
+            var splitterDistance = 0;
+            var table2column1Width = 0;
+            var table2column2Width = 0;
+            var table2column3Width = 0;
 
             var windowSettings = findCreateSavedWindowSettings(false);
 
@@ -3361,8 +3404,8 @@ namespace MusicBeePlugin
                 }
 
 
-                int width2 = (int)Math.Round(width / hDpiFormScaling);
-                int height2 = (int)Math.Round(height / vDpiFormScaling);
+                var width2 = (int)Math.Round(width / hDpiFormScaling);
+                var height2 = (int)Math.Round(height / vDpiFormScaling);
 
                 if (width2 == 0)
                 {
@@ -3383,13 +3426,13 @@ namespace MusicBeePlugin
                 }
 
 
-                int left2 = (int)Math.Round(left / hDpiFormScaling);
+                var left2 = (int)Math.Round(left / hDpiFormScaling);
                 if (Math.Abs(left2 - currentWindowSettings.x) <= 1) //1px
                 {
                     left2 = currentWindowSettings.x;
                 }
 
-                int top2 = (int)Math.Round(top / vDpiFormScaling);
+                var top2 = (int)Math.Round(top / vDpiFormScaling);
                 if (Math.Abs(top2 - currentWindowSettings.y) <= 1) //1px
                 {
                     top2 = currentWindowSettings.y;
@@ -3417,21 +3460,21 @@ namespace MusicBeePlugin
 
             if (column1Width != 0)
             {
-                int column1Width2 = (int)Math.Round(column1Width / hDpiFontScaling);
+                var column1Width2 = (int)Math.Round(column1Width / hDpiFontScaling);
                 if (100f * Math.Abs(column1Width2 - currentWindowSettings.column1Width) / column1Width2 < 0.5f) //-V3080
                     column1Width2 = currentWindowSettings.column1Width;
 
                 currentWindowSettings.column1Width = column1Width2;
 
 
-                int column2Width2 = (int)Math.Round(column2Width / hDpiFontScaling);
+                var column2Width2 = (int)Math.Round(column2Width / hDpiFontScaling);
                 if (100f * Math.Abs(column2Width2 - currentWindowSettings.column1Width) / column2Width2 < 0.5f)
                     column2Width2 = currentWindowSettings.column2Width;
 
                 currentWindowSettings.column2Width = column2Width2;
 
 
-                int column3Width2 = (int)Math.Round(column3Width / hDpiFontScaling);
+                var column3Width2 = (int)Math.Round(column3Width / hDpiFontScaling);
                 if (100f * Math.Abs(column3Width2 - currentWindowSettings.column3Width) / column3Width2 < 0.5f)
                     column3Width2 = currentWindowSettings.column3Width;
 
@@ -3440,21 +3483,21 @@ namespace MusicBeePlugin
 
             if (table2column1Width != 0)
             {
-                int table2column1Width2 = (int)Math.Round(table2column1Width / hDpiFontScaling);
+                var table2column1Width2 = (int)Math.Round(table2column1Width / hDpiFontScaling);
                 if (100f * Math.Abs(table2column1Width2 - currentWindowSettings.table2column1Width) / table2column1Width2 < 0.5f)
                     table2column1Width2 = currentWindowSettings.table2column1Width;
 
                 currentWindowSettings.table2column1Width = table2column1Width2;
 
 
-                int table2column2Width2 = (int)Math.Round(table2column2Width / hDpiFontScaling);
+                var table2column2Width2 = (int)Math.Round(table2column2Width / hDpiFontScaling);
                 if (100f * Math.Abs(table2column2Width2 - currentWindowSettings.table2column1Width) / table2column2Width2 < 0.5f)
                     table2column2Width2 = currentWindowSettings.table2column2Width;
 
                 currentWindowSettings.table2column2Width = table2column2Width2;
 
 
-                int table2column3Width2 = (int)Math.Round(table2column3Width / hDpiFontScaling);
+                var table2column3Width2 = (int)Math.Round(table2column3Width / hDpiFontScaling);
                 if (100f * Math.Abs(table2column3Width2 - currentWindowSettings.table2column3Width) / table2column3Width2 < 0.5f)
                     table2column3Width2 = currentWindowSettings.table2column3Width;
 
@@ -3463,7 +3506,7 @@ namespace MusicBeePlugin
 
             if (splitterDistance != 0)
             {
-                int splitterDistance2 = (int)Math.Round(splitterDistance / vDpiFontScaling);
+                var splitterDistance2 = (int)Math.Round(splitterDistance / vDpiFontScaling);
                 if (100f * Math.Abs(splitterDistance2 - currentWindowSettings.splitterDistance) / splitterDistance2 < 0.5f)
                     splitterDistance2 = currentWindowSettings.splitterDistance;
 
@@ -3473,7 +3516,7 @@ namespace MusicBeePlugin
 
         private void serializedOperation()
         {
-            bool taskWasStarted = false;
+            var taskWasStarted = false;
 
             InitializeSbText();
 
@@ -3593,7 +3636,7 @@ namespace MusicBeePlugin
                 }
                 else
                 {
-                    Thread workingThread = new Thread(serializedOperation);
+                    var workingThread = new Thread(serializedOperation);
                     workingThread.Start();
                 }
 
@@ -3644,7 +3687,7 @@ namespace MusicBeePlugin
         {
             lock (OpenedForms)
             {
-                foreach (PluginWindowTemplate form in OpenedForms)
+                foreach (var form in OpenedForms)
                 {
                     if (backgroundTaskIsNativeMB && form != clickedForm && !(form.backgroundTaskIsNativeMB && form.backgroundTaskIsScheduled && !form.backgroundTaskIsCanceled))
                     {
@@ -3679,6 +3722,7 @@ namespace MusicBeePlugin
                 }
 
                 enableDisablePreviewOptionControls(false);
+                enableQueryingOrUpdatingButtons();
             }
         }
 
@@ -3686,7 +3730,7 @@ namespace MusicBeePlugin
         {
             lock (OpenedForms)
             {
-                foreach (PluginWindowTemplate form in OpenedForms)
+                foreach (var form in OpenedForms)
                 {
                     if (backgroundTaskIsNativeMB && form != clickedForm) //Updating operation
                     {
@@ -3701,8 +3745,7 @@ namespace MusicBeePlugin
                     }
                 }
 
-                clickedForm.disableQueryingButtons();
-                clickedForm.enableQueryingOrUpdatingButtons();
+                disableQueryingButtons();
 
                 if (backgroundTaskIsNativeMB) //Updating operation
                 {
@@ -3747,6 +3790,7 @@ namespace MusicBeePlugin
                 }
 
                 enableDisablePreviewOptionControls(true);
+                enableQueryingOrUpdatingButtons();
             }
         }
 
@@ -3778,6 +3822,7 @@ namespace MusicBeePlugin
                 previewIsGenerated = false;
                 clickedButton.Text = PreviewButtonName;
                 enableDisablePreviewOptionControls(true);
+                enableQueryingOrUpdatingButtons();
             }
         }
     }
