@@ -136,7 +136,7 @@ namespace MusicBeePlugin
                     System.Runtime.InteropServices.Marshal.Copy(finalBlendedImageRGBAData, 0, finalBmpData.Scan0, finalBlendedImageRGBAData.Length);
 
                     _finalMaskedOrBlendedImage.UnlockBits(finalBmpData);
-                    _preparedMask.UnlockBits(image2BmpData);
+                    _mask.UnlockBits(image2BmpData);
                 }
             }
         }
