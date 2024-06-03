@@ -106,7 +106,7 @@ namespace MusicBeePlugin
                     );
             }
 
-            customFontTextBox.Text = customFont.Name + Resources.Space + customFont.Style + Resources.Space + customFont.Size + Resources.FontPt;
+            customFontTextBox.Text = customFont.Name + " " + customFont.Style + " " + customFont.Size + " pt.";
             customFontTextBox.Text = customFontTextBox.Text.Replace(", ", " ").Replace("bold Bold", "bold");
             customFontButton.Enable(useCustomFontCheckBox.Checked);
 
@@ -127,20 +127,20 @@ namespace MusicBeePlugin
 
         private void saveSettings()
         {
-            var sizesColorsChanged = false;
+            SizesColorsChanged = false;
 
             if (SavedSettings.dontUseSkinColors == useSkinColorsCheckBox.Checked)
-                sizesColorsChanged = true;
+                SizesColorsChanged = true;
             else if (SavedSettings.useMusicBeeFont != useMusicBeeFontCheckBox.Checked)
-                sizesColorsChanged = true;
+                SizesColorsChanged = true;
             else if (SavedSettings.useCustomFont != useCustomFontCheckBox.Checked)
-                sizesColorsChanged = true;
+                SizesColorsChanged = true;
             else if (SavedSettings.useCustomFont && SavedSettings.pluginFontFamilyName != customFont.FontFamily.Name)
-                sizesColorsChanged = true;
+                SizesColorsChanged = true;
             else if (SavedSettings.useCustomFont && Math.Abs(SavedSettings.pluginFontSize - customFont.Size) < 0.5)
-                sizesColorsChanged = true;
+                SizesColorsChanged = true;
             else if (SavedSettings.useCustomFont && SavedSettings.pluginFontStyle != customFont.Style)
-                sizesColorsChanged = true;
+                SizesColorsChanged = true;
 
             SavedSettings.allowAsrLrPresetAutoExecution = allowAsrLrPresetAutoExecutionCheckBox.Checked;
             SavedSettings.allowCommandExecutionWithoutPreview = allowCommandExecutionWithoutPreviewCheckBox.Checked;
@@ -170,16 +170,13 @@ namespace MusicBeePlugin
 
             TagToolsPlugin.SaveSettings();
 
+
             AdvancedSearchAndReplace.InitAsr();
             LibraryReports.InitLr();
             TagToolsPlugin.InitBackupRestore();
 
             TagToolsPlugin.addPluginContextMenuItems();
             TagToolsPlugin.addPluginMenuItems();
-
-            //Let's recreate themed bitmaps and plugin colors if needed
-            if (sizesColorsChanged)
-                TagToolsPlugin.prepareThemedBitmapsAndColors();
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
@@ -260,7 +257,7 @@ namespace MusicBeePlugin
             {
                 customFont.Dispose();
                 customFont = customFontDialog.Font.Clone() as System.Drawing.Font;
-                customFontTextBox.Text = customFont.Name  + Resources.Space + customFont.Style  + Resources.Space + customFont.Size + Resources.FontPt;
+                customFontTextBox.Text = customFont.Name  + " " + customFont.Style  + " " + customFont.Size + " pt.";
                 customFontTextBox.Text = customFontTextBox.Text.Replace(", ", " ").Replace("bold Bold", "bold");
             }
         }

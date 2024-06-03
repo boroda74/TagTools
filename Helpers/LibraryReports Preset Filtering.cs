@@ -31,12 +31,12 @@ namespace MusicBeePlugin
             }
             else if (presetCheckStatusIsSenseless && !presetCheckStatusIsBroken)
             {
-                toolTip1.SetToolTip(useAnotherPresetAsSourceCheckBox, UseAnotherPresetAsSourceToolTip + Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceIsSenselessToolTip.ToUpper() +
-                    Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceCheckPresetChainToolTip.ToUpper());
-                toolTip1.SetToolTip(useAnotherPresetAsSourceCheckBoxLabel, UseAnotherPresetAsSourceToolTip + Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceIsSenselessToolTip.ToUpper() +
-                    Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceCheckPresetChainToolTip.ToUpper());
-                toolTip1.SetToolTip(presetChainIsWrongPictureBox, UseAnotherPresetAsSourceToolTip + Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceIsSenselessToolTip.ToUpper() +
-                    Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceCheckPresetChainToolTip.ToUpper());
+                toolTip1.SetToolTip(useAnotherPresetAsSourceCheckBox, UseAnotherPresetAsSourceToolTip + "\n\n" + UseAnotherPresetAsSourceIsSenselessToolTip.ToUpper() +
+                    "\n\n" + UseAnotherPresetAsSourceCheckPresetChainToolTip.ToUpper());
+                toolTip1.SetToolTip(useAnotherPresetAsSourceCheckBoxLabel, UseAnotherPresetAsSourceToolTip + "\n\n" + UseAnotherPresetAsSourceIsSenselessToolTip.ToUpper() +
+                    "\n\n" + UseAnotherPresetAsSourceCheckPresetChainToolTip.ToUpper());
+                toolTip1.SetToolTip(presetChainIsWrongPictureBox, UseAnotherPresetAsSourceToolTip + "\n\n" + UseAnotherPresetAsSourceIsSenselessToolTip.ToUpper() +
+                    "\n\n" + UseAnotherPresetAsSourceCheckPresetChainToolTip.ToUpper());
                 presetChainIsWrongPictureBox.Image = error;
                 SetComboBoxCue(foundPresetRefs, selectedPresetRef.name);
 
@@ -44,12 +44,12 @@ namespace MusicBeePlugin
             }
             else if (!presetCheckStatusIsSenseless && presetCheckStatusIsBroken)
             {
-                toolTip1.SetToolTip(useAnotherPresetAsSourceCheckBox, UseAnotherPresetAsSourceToolTip + Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper() +
-                    Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceCheckPresetChainToolTip.ToUpper());
-                toolTip1.SetToolTip(useAnotherPresetAsSourceCheckBoxLabel, UseAnotherPresetAsSourceToolTip + Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper() +
-                    Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceCheckPresetChainToolTip.ToUpper());
-                toolTip1.SetToolTip(presetChainIsWrongPictureBox, UseAnotherPresetAsSourceToolTip + Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper() +
-                    Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceCheckPresetChainToolTip.ToUpper());
+                toolTip1.SetToolTip(useAnotherPresetAsSourceCheckBox, UseAnotherPresetAsSourceToolTip + "\n\n" + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper() +
+                    "\n\n" + UseAnotherPresetAsSourceCheckPresetChainToolTip.ToUpper());
+                toolTip1.SetToolTip(useAnotherPresetAsSourceCheckBoxLabel, UseAnotherPresetAsSourceToolTip + "\n\n" + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper() +
+                    "\n\n" + UseAnotherPresetAsSourceCheckPresetChainToolTip.ToUpper());
+                toolTip1.SetToolTip(presetChainIsWrongPictureBox, UseAnotherPresetAsSourceToolTip + "\n\n" + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper() +
+                    "\n\n" + UseAnotherPresetAsSourceCheckPresetChainToolTip.ToUpper());
                 presetChainIsWrongPictureBox.Image = fatalError;
                 SetComboBoxCue(foundPresetRefs, selectedPresetRef.name);
 
@@ -57,12 +57,12 @@ namespace MusicBeePlugin
             }
             else //if (relatedPresetsCheckStatusIsSenseless && relatedPresetsCheckStatusIsBroken)
             {
-                toolTip1.SetToolTip(useAnotherPresetAsSourceCheckBox, UseAnotherPresetAsSourceToolTip + Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper() +
-                    Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper() + Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceCheckPresetChainToolTip.ToUpper());
-                toolTip1.SetToolTip(useAnotherPresetAsSourceCheckBoxLabel, UseAnotherPresetAsSourceToolTip + Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper() +
-                    Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper() + Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceCheckPresetChainToolTip.ToUpper());
-                toolTip1.SetToolTip(presetChainIsWrongPictureBox, UseAnotherPresetAsSourceToolTip + Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper() +
-                    Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper() + Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceCheckPresetChainToolTip.ToUpper());
+                toolTip1.SetToolTip(useAnotherPresetAsSourceCheckBox, UseAnotherPresetAsSourceToolTip + "\n\n" + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper() +
+                    "\n\n" + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper() + "\n\n" + UseAnotherPresetAsSourceCheckPresetChainToolTip.ToUpper());
+                toolTip1.SetToolTip(useAnotherPresetAsSourceCheckBoxLabel, UseAnotherPresetAsSourceToolTip + "\n\n" + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper() +
+                    "\n\n" + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper() + "\n\n" + UseAnotherPresetAsSourceCheckPresetChainToolTip.ToUpper());
+                toolTip1.SetToolTip(presetChainIsWrongPictureBox, UseAnotherPresetAsSourceToolTip + "\n\n" + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper() +
+                    "\n\n" + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper() + "\n\n" + UseAnotherPresetAsSourceCheckPresetChainToolTip.ToUpper());
                 presetChainIsWrongPictureBox.Image = errorFatalError;
                 SetComboBoxCue(foundPresetRefs, selectedPresetRef.name);
 
@@ -86,18 +86,18 @@ namespace MusicBeePlugin
             }
             else if (presetsCheckStatusIsSenseless && !presetsCheckStatusIsBroken)
             {
-                toolTip1.SetToolTip(buttonClose, buttonCloseToolTip + Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceIsSenselessToolTip.ToUpper());
+                toolTip1.SetToolTip(buttonClose, buttonCloseToolTip + "\n\n" + UseAnotherPresetAsSourceIsSenselessToolTip.ToUpper());
                 buttonClose.Image = errorWide;
             }
             else if (!presetsCheckStatusIsSenseless && presetsCheckStatusIsBroken)
             {
-                toolTip1.SetToolTip(buttonClose, buttonCloseToolTip + Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper());
+                toolTip1.SetToolTip(buttonClose, buttonCloseToolTip + "\n\n" + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper());
                 buttonClose.Image = fatalErrorWide;
             }
             else //if (relatedPresetsCheckStatusIsSenseless && relatedPresetsCheckStatusIsBroken)
             {
-                toolTip1.SetToolTip(buttonClose, buttonCloseToolTip + Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceIsSenselessToolTip.ToUpper()
-                    + Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper());
+                toolTip1.SetToolTip(buttonClose, buttonCloseToolTip + "\n\n" + UseAnotherPresetAsSourceIsSenselessToolTip.ToUpper()
+                    + "\n\n" + UseAnotherPresetAsSourceIsInBrokenChainToolTip.ToUpper());
                 buttonClose.Image = errorFatalErrorWide;
             }
         }

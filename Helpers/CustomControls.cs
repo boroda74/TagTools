@@ -61,19 +61,59 @@ namespace MusicBeePlugin
             }
         }
 
-        internal static void DrawTextBoxBorder(TextBoxBorder textBoxBorder)
+        internal static void DrawTextBoxBorder(object sender, EventArgs e)
         {
-            using (var graphics = textBoxBorder.CreateGraphics())
+            if (sender is TextBox textBox)
             {
-                if (!textBoxBorder.textBox.Enabled)
-                    ControlPaint.DrawBorder(graphics, new Rectangle(0, 0, textBoxBorder.Width, textBoxBorder.Height),
-                        Plugin.InputControlBorderColor, ButtonBorderStyle.Solid);
-                else if (textBoxBorder.ContainsFocus)
-                    ControlPaint.DrawBorder(graphics, new Rectangle(0, 0, textBoxBorder.Width, textBoxBorder.Height),
-                        Plugin.InputControlFocusedBorderColor, ButtonBorderStyle.Solid);
-                else
-                    ControlPaint.DrawBorder(graphics, new Rectangle(0, 0, textBoxBorder.Width, textBoxBorder.Height),
-                        Plugin.InputControlDimmedForeColor, ButtonBorderStyle.Solid);
+                if (textBox.Parent is TextBoxBorder textBoxBorder)
+                {
+                    using (var graphics = textBoxBorder.CreateGraphics())
+                    {
+                        if (textBox.Multiline)
+                        {
+                            if (!textBoxBorder.textBox.Enabled)
+                                ControlPaint.DrawBorder(graphics, new Rectangle(0, 0, textBoxBorder.Width, textBoxBorder.Height),
+                                    Plugin.ScrollBarBorderColor, ButtonBorderStyle.Solid);
+                            else if (textBoxBorder.ContainsFocus)
+                                ControlPaint.DrawBorder(graphics, new Rectangle(0, 0, textBoxBorder.Width, textBoxBorder.Height),
+                                    Plugin.ScrollBarFocusedBorderColor, ButtonBorderStyle.Solid);
+                            else
+                                ControlPaint.DrawBorder(graphics, new Rectangle(0, 0, textBoxBorder.Width, textBoxBorder.Height),
+                                    Plugin.ScrollBarBorderColor, ButtonBorderStyle.Solid);
+                        }
+                        else
+                        {
+                            if (!textBoxBorder.textBox.Enabled)
+                                ControlPaint.DrawBorder(graphics, new Rectangle(0, 0, textBoxBorder.Width, textBoxBorder.Height),
+                                    Plugin.InputControlBorderColor, ButtonBorderStyle.Solid);
+                            else if (textBoxBorder.ContainsFocus)
+                                ControlPaint.DrawBorder(graphics, new Rectangle(0, 0, textBoxBorder.Width, textBoxBorder.Height),
+                                    Plugin.InputPanelBackColor, ButtonBorderStyle.Solid);
+                            else
+                                ControlPaint.DrawBorder(graphics, new Rectangle(0, 0, textBoxBorder.Width, textBoxBorder.Height),
+                                    Plugin.InputPanelBackColor, ButtonBorderStyle.Solid);
+                        }
+                    }
+                }
+            }
+        }
+
+        internal static void DrawBorder(Control control)
+        {
+            if (control.Parent is TextBoxBorder textBoxBorder)
+            {
+                using (var graphics = control.CreateGraphics())
+                {
+                    if (!textBoxBorder.textBox.Enabled)
+                        ControlPaint.DrawBorder(graphics, new Rectangle(0, 0, textBoxBorder.Width, textBoxBorder.Height),
+                            Plugin.InputPanelBorderColor, ButtonBorderStyle.Solid);
+                    else if (textBoxBorder.ContainsFocus)
+                        ControlPaint.DrawBorder(graphics, new Rectangle(0, 0, textBoxBorder.Width, textBoxBorder.Height),
+                            Plugin.ScrollBarFocusedBorderColor, ButtonBorderStyle.Solid);
+                    else
+                        ControlPaint.DrawBorder(graphics, new Rectangle(0, 0, textBoxBorder.Width, textBoxBorder.Height),
+                            Plugin.ScrollBarBorderColor, ButtonBorderStyle.Solid);
+                }
             }
         }
 
@@ -141,12 +181,17 @@ namespace MusicBeePlugin
                 layoutPanel.SetCellPosition(this, cellPosition);
 
             Resize += TextBoxBorder_Resize;
+            Paint += TextBoxBorder_Paint;
             GotFocus += (sender, args) => { textBox.Focus(); };
 
-            textBox.Resize += TextBox_Resize;
-            textBox.Paint += (sender, args) => { ControlsTools.DrawTextBoxBorder(this); };
+            textBox.Paint += ControlsTools.DrawTextBoxBorder;
 
             ResizeRedraw = true;
+        }
+
+        private void TextBoxBorder_Paint(object sender, PaintEventArgs e)
+        {
+            ControlsTools.DrawTextBoxBorder((sender as TextBoxBorder).textBox, e);
         }
 
         private void TextBoxBorder_Resize(object sender, EventArgs e)
@@ -163,7 +208,7 @@ namespace MusicBeePlugin
     public class CustomComboBox : UserControl
     {
         private readonly Color borderColorDisabled = Plugin.ScrollBarBackColor;
-        private readonly Color borderColorActive = Plugin.ScrollBarBackColor;
+        private readonly Color borderColorActive = Plugin.ScrollBarFocusedBorderColor;
         private readonly Color borderColor = Plugin.ScrollBarBackColor;
 
 
@@ -1114,9 +1159,9 @@ namespace MusicBeePlugin
 
     public class CustomListBox : ListBox
     {
-        private readonly Color borderColorDisabled = Plugin.InputControlBorderColor;
-        private readonly Color borderColorActive = Plugin.InputControlFocusedBorderColor;
-        private readonly Color borderColor = Plugin.InputControlBorderColor;
+        private readonly Color borderColorDisabled = Plugin.ScrollBarBorderColor;
+        private readonly Color borderColorActive = Plugin.ScrollBarFocusedBorderColor;
+        private readonly Color borderColor = Plugin.ScrollBarBorderColor;
 
         private readonly int scaledPx = -10000;
         private readonly int customScrollBarInitialWidth;
@@ -1323,9 +1368,9 @@ namespace MusicBeePlugin
 
     public class CustomCheckedListBox : CheckedListBox
     {
-        private readonly Color borderColorDisabled = Plugin.InputControlBorderColor;
-        private readonly Color borderColorActive = Plugin.InputControlFocusedBorderColor;
-        private readonly Color borderColor = Plugin.InputControlBorderColor;
+        private readonly Color borderColorDisabled = Plugin.ScrollBarBorderColor;
+        private readonly Color borderColorActive = Plugin.ScrollBarFocusedBorderColor;
+        private readonly Color borderColor = Plugin.ScrollBarBorderColor;
 
         private readonly bool showScroll;
 
@@ -1448,7 +1493,7 @@ namespace MusicBeePlugin
             if (processPaintMessages)
             {
                 base.OnPaint(e);
-                DrawBorder(e.Graphics);
+                //DrawBorder(e.Graphics);
 
                 if (hScrollBar?.Visible == true)
                     hScrollBar.Invalidate();

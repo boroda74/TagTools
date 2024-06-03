@@ -33,7 +33,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
-    <AssemblyVersion>8.2.8918.20969</AssemblyVersion>
+    <AssemblyVersion>8.2.8920.28965</AssemblyVersion>
     <ShouldCreateLogs>True</ShouldCreateLogs>
     <AdvancedSettingsExpanded>True</AdvancedSettingsExpanded>
     <UpdateAssemblyVersion>False</UpdateAssemblyVersion>
@@ -583,11 +583,10 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>cmd.exe /c rmdir /s /q "D:\LatPaths\MusicBee Portable Development\Plugins\ru"
-xcopy.exe "D:\LatPaths\MusicBee Portable Development\Plugins\Tagging-Tools-Compiled\mb_TagTools.*" "D:\LatPaths\MusicBee Portable Development\Plugins\" /y</PostBuildEvent>
+    <PostBuildEvent>xcopy.exe "D:\LatPaths\MusicBee Portable Development\Plugins\Tagging-Tools-Compiled\mb_TagTools.*" "D:\LatPaths\MusicBee Portable Development\Plugins\" /y</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>cmd.exe /c rmdir /s /q "D:\LatPaths\MusicBee Portable Development\Plugins\ru"
+    <PreBuildEvent>cmd.exe /c rmdir /s /q "D:\LatPaths\MusicBee Portable Development\Plugins\Tagging-Tools-Compiled\ru"
 cmd.exe /c del /q "D:\LatPaths\MusicBee Portable Development\Plugins\Tagging-Tools-Compiled\*.*"</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

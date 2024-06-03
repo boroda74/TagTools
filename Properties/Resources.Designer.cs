@@ -161,15 +161,6 @@ namespace MusicBeePlugin.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на  pt..
-        /// </summary>
-        internal static string FontPt {
-            get {
-                return ResourceManager.GetString("FontPt", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap function_id_presets {
@@ -230,17 +221,6 @@ namespace MusicBeePlugin.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на 
-        ///
-        ///.
-        /// </summary>
-        internal static string MsgDoubleNewLine {
-            get {
-                return ResourceManager.GetString("MsgDoubleNewLine", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap multiple_artworks {
@@ -287,15 +267,6 @@ namespace MusicBeePlugin.Properties {
             get {
                 object obj = ResourceManager.GetObject("search", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на  .
-        /// </summary>
-        internal static string Space {
-            get {
-                return ResourceManager.GetString("Space", resourceCulture);
             }
         }
         

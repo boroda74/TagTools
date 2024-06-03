@@ -31,27 +31,36 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PluginSampleWindow));
             this.squareButton = new System.Windows.Forms.Button();
+            this.textBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
-            //
-            //squareButton
-            //
+            // 
+            // squareButton
+            // 
             resources.ApplyResources(this.squareButton, "squareButton");
             this.squareButton.Name = "squareButton";
             this.squareButton.Tag = "@square-button";
             this.squareButton.UseVisualStyleBackColor = true;
-            //
-            //PluginSampleWindow
-            //
+            // 
+            // textBox
+            // 
+            resources.ApplyResources(this.textBox, "textBox");
+            this.textBox.Name = "textBox";
+            // 
+            // PluginSampleWindow
+            // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.textBox);
             this.Controls.Add(this.squareButton);
             this.Name = "PluginSampleWindow";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.Button squareButton;
+        private System.Windows.Forms.TextBox textBox;
     }
 }

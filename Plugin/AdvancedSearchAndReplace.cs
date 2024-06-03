@@ -34,10 +34,14 @@ namespace MusicBeePlugin
 
 
         private const int tableColumnCount = 20; //IT'S COLUMN COUNT OF "previewTable" !!!
+        const int ColumnsTrackWidth = 400;
+
 
         private static bool IgnoreFilterComboBoxSelectedIndexChanged;
 
         private bool ignoreSplitterMovedEvent = true;
+
+        private bool previewTableLeftMouseButtonPressed = false;
 
         private bool processPresetChanges = true;
         private bool ignoreCheckedPresetEvent = true;
@@ -189,6 +193,12 @@ namespace MusicBeePlugin
             hotkeyPictureBox.Image = ReplaceBitmap(hotkeyPictureBox.Image, HotkeyPresetsDimmed);
             uncheckAllFiltersPictureBox.Image = ReplaceBitmap(uncheckAllFiltersPictureBox.Image, UncheckAllFiltersDimmed);
 
+            clearSearchButton.Text = string.Empty;
+            clearSearchButton.Image = ReplaceBitmap(clearSearchButton.Image, ClearField);
+
+            clearIdButton.Text = string.Empty;
+            clearIdButton.Image = ReplaceBitmap(clearIdButton.Image, ClearField);
+
             buttonSettings.Image = ReplaceBitmap(buttonSettings.Image, Gear);
 
             //Setting themed colors
@@ -281,7 +291,6 @@ namespace MusicBeePlugin
             previewTable.Columns[17].HeaderCell.Style = headerCellStyle;
             previewTable.Columns[18].HeaderCell.Style = headerCellStyle;
             previewTable.Columns[19].HeaderCell.Style = headerCellStyle;
-
 
             previewTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 
@@ -392,21 +401,22 @@ namespace MusicBeePlugin
 
             SetComboBoxCue(filterComboBoxCustom, CtlMixedFilters);
 
-
             presetList.SelectedIndex = -1;
             presetList_SelectedIndexChanged(null, null);
 
 
             showAutoApplyingWarningIfRequired();
 
+
+            Enable(true, autoApplyPresetsLabel);
+
+
             ignoreCheckedPresetEvent = true;
             processPresetChanges = true;
 
             UpdateCustomScrollBars(presetList);
 
-
-            Enable(true, autoApplyPresetsLabel);
-
+            descriptionBox.Refresh();
 
             button_GotFocus(AcceptButton, null); //Let's mark active button
         }
@@ -596,12 +606,12 @@ namespace MusicBeePlugin
                     var name = langName.Value ?? string.Empty;
 
                     if (!string.IsNullOrEmpty(presetNamePrefix) && !name.StartsWith(presetNamePrefix))
-                        name = presetNamePrefix  + Resources.Space + name;
+                        name = presetNamePrefix  + " " + name;
                     else if (!string.IsNullOrEmpty(presetNamePrefix))
                         name = presetNamePrefix + name;
 
                     if (!string.IsNullOrEmpty(presetNameSuffix) && !name.EndsWith(presetNameSuffix))
-                        name += Resources.Space + presetNameSuffix;
+                        name += " " + presetNameSuffix;
                     else if (!string.IsNullOrEmpty(presetNameSuffix))
                         name += presetNameSuffix;
 
@@ -710,7 +720,7 @@ namespace MusicBeePlugin
                 if (hotkeyChar == string.Empty)
                     return hotkeyChar;
                 else
-                    return Resources.Space + hotkeyChar;
+                    return " " + hotkeyChar;
             }
 
             public string getHotkeyDescription()
@@ -1187,20 +1197,20 @@ namespace MusicBeePlugin
                 //}
 
 
-                var ITUNNORM = (Resources.Space + soundCheck1000.ToString("X8"));
-                ITUNNORM += (Resources.Space + soundCheck1000.ToString("X8"));
+                var ITUNNORM = (" " + soundCheck1000.ToString("X8"));
+                ITUNNORM += (" " + soundCheck1000.ToString("X8"));
 
-                ITUNNORM += (Resources.Space + soundCheck1000.ToString("X8"));
-                ITUNNORM += (Resources.Space + soundCheck1000.ToString("X8"));
+                ITUNNORM += (" " + soundCheck1000.ToString("X8"));
+                ITUNNORM += (" " + soundCheck1000.ToString("X8"));
 
-                ITUNNORM += (Resources.Space + soundCheck1000.ToString("X8"));
-                ITUNNORM += (Resources.Space + soundCheck1000.ToString("X8"));
+                ITUNNORM += (" " + soundCheck1000.ToString("X8"));
+                ITUNNORM += (" " + soundCheck1000.ToString("X8"));
 
-                ITUNNORM += (Resources.Space + soundCheck1000.ToString("X8"));
-                ITUNNORM += (Resources.Space + soundCheck1000.ToString("X8"));
+                ITUNNORM += (" " + soundCheck1000.ToString("X8"));
+                ITUNNORM += (" " + soundCheck1000.ToString("X8"));
 
-                ITUNNORM += (Resources.Space + soundCheck1000.ToString("X8"));
-                ITUNNORM += (Resources.Space + soundCheck1000.ToString("X8"));
+                ITUNNORM += (" " + soundCheck1000.ToString("X8"));
+                ITUNNORM += (" " + soundCheck1000.ToString("X8"));
 
                 return ITUNNORM;
             }
@@ -1880,7 +1890,7 @@ namespace MusicBeePlugin
                 }
                 else
                 {
-                    plugin.clipboardText += Resources.MsgDoubleNewLine + value;
+                    plugin.clipboardText += "\r\n" + value;
                     return true;
                 }
             }
@@ -1929,24 +1939,8 @@ namespace MusicBeePlugin
 
         private void previewTable_UpdateTable()
         {
-            bool failed = true;
-            while (failed)
-            {
-                try
-                {
-                    previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                    previewTable.AutoResizeColumns();
-                    previewTable.AutoResizeRows();
-                    failed = false;
-                }
-                catch
-                {
-                    //Let's retry...
-                    Thread.Sleep(500);
-                }
-            }
-
             UpdateCustomScrollBars(previewTable);
+            previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
             if (previewTable.RowCount > 0)
                 previewTable.CurrentCell = previewTable.Rows[0].Cells[0];
@@ -2523,7 +2517,7 @@ namespace MusicBeePlugin
                     return false;
                 }
 
-                fileTags = Clipboard.GetText().Replace(Resources.MsgDoubleNewLine, "\r").Replace("\n", "\r").Split(new[] { "\r" }, StringSplitOptions.None);
+                fileTags = Clipboard.GetText().Replace("\r\n", "\r").Replace("\n", "\r").Split(new[] { "\r" }, StringSplitOptions.None);
 
                 if (fileTags.Length != files.Length)
                 {
@@ -2543,21 +2537,7 @@ namespace MusicBeePlugin
             }
             else
             {
-                bool failed = true;
-                while (failed)
-                {
-                    try
-                    {
-                        previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
-                        failed = false;
-                    }
-                    catch
-                    {
-                        //Let's retry...
-                        Thread.Sleep(500);
-                    }
-                }
-
+                previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
                 return true;
             }
         }
@@ -3182,8 +3162,6 @@ namespace MusicBeePlugin
 
         private void saveSettings()
         {
-            saveColumnWidths(selectedPreset);
-
             var savedPresetPaths = new SortedDictionary<string, bool>();
             var countedPresetFilenames = new SortedDictionary<string, int>();
             foreach (var preset in presetsWorkingCopy.Values)
@@ -3432,6 +3410,7 @@ namespace MusicBeePlugin
                 return false;
         }
 
+        //Returns if column weights have been changed from saved settings
         internal void nameColumns()
         {
             if (selectedPreset == null)
@@ -3455,6 +3434,27 @@ namespace MusicBeePlugin
 
                 return;
             }
+
+
+            previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+
+            if (selectedPreset.columnWeights == null)
+                selectedPreset.columnWeights = new List<float>();
+
+            if (selectedPreset.columnWeights.Count < 4 || !(selectedPreset.columnWeights[1] > 0))
+            {
+                selectedPreset.columnWeights.Clear();
+            }
+            else if ((int)selectedPreset.columnWeights[3] == selectedPreset.columnWeights[3])
+            {
+                previewTable.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                previewTable.Columns[3].Width = (int)selectedPreset.columnWeights[3];
+            }
+
+            for (int i = 0; i < selectedPreset.columnWeights.Count - 1; i++)
+                if (!(selectedPreset.columnWeights[i] > 0))
+                    selectedPreset.columnWeights[i] = 20;
 
 
             if (allTagsReplaceIdsCount == 0)
@@ -3482,14 +3482,14 @@ namespace MusicBeePlugin
 
                 if (selectedPreset.columnWeights.Count > 3)
                 {
-                    previewTable.Columns[3].FillWeight = selectedPreset.columnWeights[0];
+                    //previewTable.Columns[3].FillWeight = selectedPreset.columnWeights[0];
                     previewTable.Columns[4].FillWeight = selectedPreset.columnWeights[1];
                     previewTable.Columns[5].FillWeight = selectedPreset.columnWeights[2];
-                    previewTable.Columns[6].FillWeight = selectedPreset.columnWeights[3];
+                    //previewTable.Columns[6].FillWeight = selectedPreset.columnWeights[3]; //****
                 }
                 else
                 {
-                    previewTable.Columns[3].Width = 737;
+                    previewTable.Columns[3].Width = ColumnsTrackWidth;
                     previewTable.Columns[4].Width = 100;
                     previewTable.Columns[5].Width = 100;
                     previewTable.Columns[6].Width = 100;
@@ -3781,9 +3781,10 @@ namespace MusicBeePlugin
 
         private void presetListSelectedIndexChanged(int index)
         {
-            saveColumnWidths(selectedPreset);
+            if (presetListLastSelectedIndex != -2) //It's during form init
+                Enable(false, autoApplyPresetsLabel);
 
-            if (index == -1)
+            if (index < 0)
             {
                 selectedPreset = null;
                 backedUpPreset = null;
@@ -3817,6 +3818,9 @@ namespace MusicBeePlugin
 
                 enableDisablePreviewOptionControls(true, true);
                 disableQueryingOrUpdatingButtons();
+
+                if (presetListLastSelectedIndex != -2) //It's during form init
+                    Enable(true, autoApplyPresetsLabel);
             }
             else
             {
@@ -3916,6 +3920,9 @@ namespace MusicBeePlugin
 
                 enableDisablePreviewOptionControls(true, true);
                 enableQueryingOrUpdatingButtons();
+                
+                if (presetListLastSelectedIndex != -2) //It's during form init
+                    Enable(true, autoApplyPresetsLabel);
             }
 
             //Preset referring <All Tags> must not be checked for auto-execution. This function call shows icons on tag labels
@@ -5070,6 +5077,26 @@ namespace MusicBeePlugin
             }
         }
 
+        private void PreviewTable_MouseDown(object sender, MouseEventArgs e)
+        {
+            previewTableLeftMouseButtonPressed = true;
+        }
+
+        private void PreviewTable_MouseUp(object sender, MouseEventArgs e)
+        {
+            previewTableLeftMouseButtonPressed = false;
+        }
+
+        private void PreviewTable_MouseLeave(object sender, EventArgs e)
+        {
+            previewTableLeftMouseButtonPressed = false;
+        }
+
+        private void previewTable_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
+        {
+            saveColumnWidths(selectedPreset);
+        }
+
         private void previewTableFormatRow(int rowIndex)
         {
             previewTable.Rows[rowIndex].Cells[0].ToolTipText = CellTooTip;
@@ -5516,7 +5543,7 @@ namespace MusicBeePlugin
                     autoApplyPresetsLabel.Text = EditApplyText + AutoApplyText + "\n"
                     + NowTickedText.ToUpper().Replace("%%TICKED-PRESETS%%", autoAppliedPresetCount.ToString());
 
-                    toolTip1.SetToolTip(autoApplyPresetsLabel, EditApplyText + "\n" + AutoApplyText + Resources.MsgDoubleNewLine
+                    toolTip1.SetToolTip(autoApplyPresetsLabel, EditApplyText + "\n" + AutoApplyText + "\n\n"
                         + ClickHereText.ToUpper() + "\n" + NowTickedText.ToUpper().Replace("%%TICKED-PRESETS%%", autoAppliedPresetCount.ToString()));
                 }
                 else
@@ -5524,7 +5551,7 @@ namespace MusicBeePlugin
                     autoApplyPresetsLabel.Text = EditApplyText + AutoApplyDisabledText.ToUpper() + "\n"
                     + NowTickedText.ToUpper().Replace("%%TICKED-PRESETS%%", autoAppliedPresetCount.ToString());
 
-                    toolTip1.SetToolTip(autoApplyPresetsLabel, EditApplyText + "\n" + AutoApplyDisabledText.ToUpper() + Resources.MsgDoubleNewLine
+                    toolTip1.SetToolTip(autoApplyPresetsLabel, EditApplyText + "\n" + AutoApplyDisabledText.ToUpper() + "\n\n"
                         + ClickHereText.ToUpper() + "\n" + NowTickedText.ToUpper().Replace("%%TICKED-PRESETS%%", autoAppliedPresetCount.ToString()));
                 }
 
@@ -5684,13 +5711,40 @@ namespace MusicBeePlugin
 
         private void saveColumnWidths(Preset savedPreset)
         {
-            if (savedPreset == null)
+            if (savedPreset == null || !processPresetChanges || !previewTableLeftMouseButtonPressed || backgroundTaskIsWorking())
                 return;
 
-            savedPreset.columnWeights.Clear();
-            for (var i = 3; i < previewTable.ColumnCount; i++)
+
+            if (savedPreset.columnWeights == null)
+                savedPreset.columnWeights = new List<float>();
+
+            if (savedPreset.columnWeights.Count != previewTable.ColumnCount)
             {
-                savedPreset.columnWeights.Add(previewTable.Columns[i].FillWeight);
+                savedPreset.columnWeights.Clear();
+                for (var i = 0; i < previewTable.ColumnCount; i++)
+                    savedPreset.columnWeights.Add(previewTable.Columns[i].FillWeight);
+            }
+            else
+            {
+                for (var i = 0; i < previewTable.ColumnCount; i++)
+                    savedPreset.columnWeights[i] = previewTable.Columns[i].FillWeight;
+            }
+
+
+            bool failed = true;
+            while (failed)
+            {
+                try
+                {
+                    previewTable.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                    savedPreset.columnWeights[3] = previewTable.Columns[3].Width;
+                    failed = false;
+                }
+                catch
+                {
+                    //Let's retry...
+                    Thread.Sleep(500);
+                }
             }
         }
 
@@ -5859,7 +5913,11 @@ namespace MusicBeePlugin
 
         private void AdvancedSearchAndReplace_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!PluginClosing && unsavedChanges)
+            if (!processPresetChanges)
+            {
+                e.Cancel = true;
+            }
+            else if (!PluginClosing && unsavedChanges)
             {
                 var lastAnswer = SavedSettings.unsavedChangesConfirmationLastAnswer;
                 var confirmationButtons = MessageBoxButtons.YesNo;

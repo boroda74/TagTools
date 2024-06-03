@@ -118,7 +118,7 @@ namespace MusicBeePlugin
                     var now = DateTime.UtcNow;
                     var elapsed = now - startTime;
 
-                    var status = progressInfo + Resources.MsgDoubleNewLine + newOrChangedCachedPresets[i].getName() + Resources.MsgDoubleNewLine + (i + 1) + "/" + newOrChangedCachedPresets.Length
+                    var status = progressInfo + "\n\n" + newOrChangedCachedPresets[i].getName() + "\n\n" + (i + 1) + "/" + newOrChangedCachedPresets.Length
                                  + CtlLrElapsed + elapsed.Hours + ":" + elapsed.Minutes + ":" + elapsed.Seconds;
 
                     Invoke(new Action(() => { progressInfoLabel.Text = status; }));

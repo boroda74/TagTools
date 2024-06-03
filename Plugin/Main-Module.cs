@@ -99,6 +99,10 @@ namespace MusicBeePlugin
         internal static bool PluginClosing;//***
 
         internal static float ButtonHeightDpiFontScaling = 1;
+        internal static float TextBoxHeightDpiFontScaling = 1;
+        internal static float DpiScaling = 1;
+
+        internal static bool SizesColorsChanged = true;
 
         internal static Color FormForeColor;
         internal static Color FormBackColor;
@@ -207,6 +211,7 @@ namespace MusicBeePlugin
         internal static Bitmap Search;
         internal static Bitmap Window;
 
+        internal static Bitmap ClearField;
         internal static Bitmap Gear;
 
         internal static Bitmap AutoAppliedPresetsAccent;
@@ -2787,9 +2792,9 @@ namespace MusicBeePlugin
                 string sbText;
 
                 if (LastPreview)
-                    sbText = LastCommandSbText + ": " + "100% (" + LastFileCounter  + Resources.Space + SbItemNames + ") " + SbRead;
+                    sbText = LastCommandSbText + ": " + "100% (" + LastFileCounter  + " " + SbItemNames + ") " + SbRead;
                 else
-                    sbText = LastCommandSbText + ": " + "100% (" + LastFileCounter  + Resources.Space + SbItemNames + ") " + SbUpdated;
+                    sbText = LastCommandSbText + ": " + "100% (" + LastFileCounter  + " " + SbItemNames + ") " + SbUpdated;
 
                 //if (lastPreview)
                 //   sbText = LastCommandSbText + ": 100% " + sbRead;
@@ -3408,7 +3413,7 @@ namespace MusicBeePlugin
             PasteTagsFromClipboardDescription = TagToolsHotkeyDescription + "Paste Tags from Clipboard";
             CopyTagsToClipboardUsingMenuDescription = "Copy Tags to Clipboard Using Tag Set";
             MsrCommandDescription = TagToolsHotkeyDescription + "Multiple Search & Replace";
-            ShowHiddenWindowsDescription = TagToolsHotkeyDescription + "Show Hidden MusicBeePlugin Windows";
+            ShowHiddenWindowsDescription = TagToolsHotkeyDescription + "Show hidden/restore minimized plugin windows";
 
             BackupTagsName = "Backup Tags for All Tracks...";
             RestoreTagsName = "Restore Tags for Selected Tracks...";
@@ -5173,6 +5178,10 @@ namespace MusicBeePlugin
                 case NotificationType.PluginStartup:
                     //perform startup initialization
 
+                    MissingArtwork = Resources.missing_artwork;
+                    DefaultArtwork = MissingArtwork;
+
+
                     //ASR & LR init
                     InitAsr();
                     InitLr();
@@ -5181,14 +5190,8 @@ namespace MusicBeePlugin
                     InitBackupRestore();
 
 
-                    MissingArtwork = Resources.missing_artwork;
-                    DefaultArtwork = MissingArtwork;
-
-                    //Let's prepare themed bitmaps for controls
-                    prepareThemedBitmapsAndColors();
-
                     //Let's create plugin main and context menu items
-                    MbForm.Invoke((MethodInvoker)delegate { addPluginContextMenuItems(); addPluginMenuItems(); });
+                    MbForm.Invoke((MethodInvoker)delegate { GetButtonTextBoxDpiFontScaling();  addPluginContextMenuItems(); addPluginMenuItems(); });
 
 
                     //Let's refresh MusicBee UI every 5 sec if there are any tags changed by plugin since last refresh
@@ -5378,8 +5381,23 @@ namespace MusicBeePlugin
             return buttonBackColor;
         }
 
+
+        internal void GetButtonTextBoxDpiFontScaling()
+        {
+            var scalingSampleForm = new PluginSampleWindow(this);
+            scalingSampleForm.dontShowForm = true;
+            scalingSampleForm.Show();
+            DpiScaling = scalingSampleForm.dpiScaling;
+            (ButtonHeightDpiFontScaling, TextBoxHeightDpiFontScaling) = scalingSampleForm.getButtonHeightDpiFontScaling();
+            scalingSampleForm.Close();
+        }
+
         internal void prepareThemedBitmapsAndColors()
         {
+            //if (!SizesColorsChanged) //Don't work! Why? //****
+            //    return;
+
+
             //Skin controls
             const float AccentBackWeight = 0.70f;
             const float LightDimmedWeight = 0.90f;
@@ -5387,184 +5405,177 @@ namespace MusicBeePlugin
             const float DeepDimmedWeight = 0.32f;
             const float ScrollBarsForeWeight = 0.75f;//***
 
-            InputPanelForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
-            InputPanelBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
-            InputPanelBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBorder));
+            if (SizesColorsChanged)
+            { 
+                InputPanelForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
+                InputPanelBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
+                InputPanelBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBorder));
 
-            InputControlForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
-            InputControlBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
-            InputControlBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentBorder));
-            InputControlFocusedBorderColor = GetWeightedColor(InputControlBorderColor, InputControlForeColor);
+                InputControlForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
+                InputControlBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
+                InputControlBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentBorder));
+                InputControlFocusedBorderColor = GetWeightedColor(InputControlBorderColor, InputControlForeColor);
 
-            if (!SavedSettings.dontUseSkinColors)
-            {
-                AccentColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
-                AccentSelectedColor = NoColor; //****
-
-                DimmedAccentColor = GetWeightedColor(AccentColor, InputPanelBackColor, DimmedWeight);
-                DeepDimmedAccentColor = GetWeightedColor(AccentColor, InputPanelBackColor, DeepDimmedWeight);
-
-                FormForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
-                FormBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
-                FormBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBorder));
-
-                InputControlDimmedForeColor = GetWeightedColor(InputControlForeColor, FormBackColor, DimmedWeight);
-                InputControlDimmedBackColor = GetWeightedColor(InputControlBackColor, FormBackColor, DimmedWeight);
-
-
-                //SKINNING BUTTONS (ESPECIALLY DISABLED BUTTONS)
-                //Below: (SkinElement)2 - BUTTON??? enum code //****
-
-                //Back colors
-                Color buttonBackColor = GetButtonBackColor();
-
-                var buttonBackLightDimmedAccentColor = GetWeightedColor(buttonBackColor, AccentColor, LightDimmedWeight);
-                var buttonBackDimmedAccentColor = GetWeightedColor(buttonBackColor, AccentColor, DimmedWeight);
-                var buttonBackDeepDimmedAccentColor = GetWeightedColor(buttonBackColor, AccentColor, DeepDimmedWeight);
-
-
-                ButtonBackColor = buttonBackColor;
-                ButtonDisabledBackColor = ButtonBackColor;
-
-                const float MouseOverButtonBackColor = 0.535f;
-                ButtonMouseOverBackColor = GetWeightedColor(ButtonBackColor, FormBackColor, MouseOverButtonBackColor);
-
-                //***
-                //float avgForeBrightness = GetAverageBrightness(_buttonBackColor);
-                //float avgBackBrightness = GetAverageBrightness(_buttonBackColor);
-                //if (Math.Abs(avgForeBrightness - avgBackBrightness) < 0.5f)
-                //{
-                //   if (avgBackBrightness < 0.5f)
-                //       _buttonDisabledBackColor = GetWeightedColor(_buttonBackColor, Color.Black, 0.6f);
-                //   else
-                //       _buttonDisabledBackColor = GetWeightedColor(_buttonBackColor, Color.White, 0.6f);
-                //}
-                //***
-
-
-                //Fore colors
-                var buttonForeCode = MbApiInterface.Setting_GetSkinElementColour((SkinElement)2, ElementState.ElementStateDefault, ElementComponent.ComponentForeground);
-                if (buttonForeCode != -1)
-                    UseNativeButtonPaint = false;
-
-                Color buttonForeColor;
-
-                if (buttonForeCode == 0) //Unsupported by older API
-                    buttonForeColor = AccentColor;
-                else if (buttonForeCode == -1) //Windows color scheme
-                    buttonForeColor = SystemColors.ControlText;
-                else
-                    buttonForeColor = Color.FromArgb(buttonForeCode);
-
-                var buttonLightForeDimmedColor = GetWeightedColor(buttonForeColor, ButtonBackColor, LightDimmedWeight);
-                var buttonForeDimmedColor = GetWeightedColor(buttonForeColor, ButtonBackColor, DimmedWeight);
-                var buttonForeDeepDimmedColor = GetWeightedColor(buttonForeColor, ButtonBackColor, DeepDimmedWeight);
-
-                ButtonForeColor = buttonForeColor;
-                ButtonDisabledForeColor = GetWeightedColor(ButtonForeColor, ButtonDisabledBackColor);
-
-
-                //Border colors
-                var buttonBorderCode = MbApiInterface.Setting_GetSkinElementColour((SkinElement)2, ElementState.ElementStateDefault, ElementComponent.ComponentBorder);
-                Color buttonBorderColor;
-
-                if (buttonBorderCode == 0) //Unsupported by older API
-                    buttonBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBorder));
-                else if (buttonBorderCode == -1) //Windows color scheme
-                    buttonBorderColor = SystemColors.ControlText;
-                else
-                    buttonBorderColor = Color.FromArgb(buttonBorderCode);
-
-                ButtonBorderColor = buttonBorderColor;
-                ButtonFocusedBorderColor = GetWeightedColor(ButtonBorderColor, ButtonForeColor);
-
-
-                ControlHighlightBackColor = buttonBackColor; //*** buttonBackLightDimmedAccentColor;
-                ControlHighlightForeColor = buttonForeColor;
-
-                var avgForeBrightness = GetAverageBrightness(ControlHighlightForeColor);
-                var avgBackBrightness = GetAverageBrightness(ControlHighlightBackColor);
-                if (Math.Abs(avgForeBrightness - avgBackBrightness) < 0.35f)
+                if (!SavedSettings.dontUseSkinColors)
                 {
-                    if (avgForeBrightness < 0.5f)
-                        ControlHighlightForeColor = GetWeightedColor(ControlHighlightForeColor, Color.Black, 0.4f);
+                    AccentColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
+                    AccentSelectedColor = NoColor; //****
+
+                    DimmedAccentColor = GetWeightedColor(AccentColor, InputPanelBackColor, DimmedWeight);
+                    DeepDimmedAccentColor = GetWeightedColor(AccentColor, InputPanelBackColor, DeepDimmedWeight);
+
+                    FormForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
+                    FormBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
+                    FormBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBorder));
+
+                    InputControlDimmedForeColor = GetWeightedColor(InputControlForeColor, FormBackColor, DimmedWeight);
+                    InputControlDimmedBackColor = GetWeightedColor(InputControlBackColor, FormBackColor, DimmedWeight);
+
+
+                    //SKINNING BUTTONS (ESPECIALLY DISABLED BUTTONS)
+                    //Below: (SkinElement)2 - BUTTON??? enum code //****
+
+                    //Back colors
+                    Color buttonBackColor = GetButtonBackColor();
+
+                    var buttonBackLightDimmedAccentColor = GetWeightedColor(buttonBackColor, AccentColor, LightDimmedWeight);
+                    var buttonBackDimmedAccentColor = GetWeightedColor(buttonBackColor, AccentColor, DimmedWeight);
+                    var buttonBackDeepDimmedAccentColor = GetWeightedColor(buttonBackColor, AccentColor, DeepDimmedWeight);
+
+
+                    ButtonBackColor = buttonBackColor;
+                    ButtonDisabledBackColor = ButtonBackColor;
+
+                    const float MouseOverButtonBackColor = 0.535f;
+                    ButtonMouseOverBackColor = GetWeightedColor(ButtonBackColor, FormBackColor, MouseOverButtonBackColor);
+
+                    //***
+                    //float avgForeBrightness = GetAverageBrightness(_buttonBackColor);
+                    //float avgBackBrightness = GetAverageBrightness(_buttonBackColor);
+                    //if (Math.Abs(avgForeBrightness - avgBackBrightness) < 0.5f)
+                    //{
+                    //   if (avgBackBrightness < 0.5f)
+                    //       _buttonDisabledBackColor = GetWeightedColor(_buttonBackColor, Color.Black, 0.6f);
+                    //   else
+                    //       _buttonDisabledBackColor = GetWeightedColor(_buttonBackColor, Color.White, 0.6f);
+                    //}
+                    //***
+
+
+                    //Fore colors
+                    var buttonForeCode = MbApiInterface.Setting_GetSkinElementColour((SkinElement)2, ElementState.ElementStateDefault, ElementComponent.ComponentForeground);
+                    if (buttonForeCode != -1)
+                        UseNativeButtonPaint = false;
+
+                    Color buttonForeColor;
+
+                    if (buttonForeCode == 0) //Unsupported by older API
+                        buttonForeColor = AccentColor;
+                    else if (buttonForeCode == -1) //Windows color scheme
+                        buttonForeColor = SystemColors.ControlText;
                     else
-                        ControlHighlightForeColor = GetWeightedColor(ControlHighlightForeColor, Color.White, 0.4f);
+                        buttonForeColor = Color.FromArgb(buttonForeCode);
+
+                    var buttonLightForeDimmedColor = GetWeightedColor(buttonForeColor, ButtonBackColor, LightDimmedWeight);
+                    var buttonForeDimmedColor = GetWeightedColor(buttonForeColor, ButtonBackColor, DimmedWeight);
+                    var buttonForeDeepDimmedColor = GetWeightedColor(buttonForeColor, ButtonBackColor, DeepDimmedWeight);
+
+                    ButtonForeColor = buttonForeColor;
+                    ButtonDisabledForeColor = GetWeightedColor(ButtonForeColor, ButtonDisabledBackColor);
+
+
+                    //Border colors
+                    var buttonBorderCode = MbApiInterface.Setting_GetSkinElementColour((SkinElement)2, ElementState.ElementStateDefault, ElementComponent.ComponentBorder);
+                    Color buttonBorderColor;
+
+                    if (buttonBorderCode == 0) //Unsupported by older API
+                        buttonBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBorder));
+                    else if (buttonBorderCode == -1) //Windows color scheme
+                        buttonBorderColor = SystemColors.ControlText;
+                    else
+                        buttonBorderColor = Color.FromArgb(buttonBorderCode);
+
+                    ButtonBorderColor = buttonBorderColor;
+                    ButtonFocusedBorderColor = GetWeightedColor(ButtonBorderColor, ButtonForeColor);
+
+
+                    ControlHighlightBackColor = buttonBackColor; //*** buttonBackLightDimmedAccentColor;
+                    ControlHighlightForeColor = buttonForeColor;
+
+                    var avgForeBrightness = GetAverageBrightness(ControlHighlightForeColor);
+                    var avgBackBrightness = GetAverageBrightness(ControlHighlightBackColor);
+                    if (Math.Abs(avgForeBrightness - avgBackBrightness) < 0.35f)
+                    {
+                        if (avgForeBrightness < 0.5f)
+                            ControlHighlightForeColor = GetWeightedColor(ControlHighlightForeColor, Color.Black, 0.4f);
+                        else
+                            ControlHighlightForeColor = GetWeightedColor(ControlHighlightForeColor, Color.White, 0.4f);
+                    }
                 }
+                else
+                {
+                    //Color windowsAccentColor = GetWindowColorizationColor(true);
+
+                    var backColorNotSkinned = SystemColors.Control;
+                    AccentColor = SystemColors.ControlText;
+
+                    DimmedAccentColor = GetWeightedColor(AccentColor, backColorNotSkinned, DimmedWeight); //This is not used at the moment
+                    DeepDimmedAccentColor = GetWeightedColor(AccentColor, backColorNotSkinned, DeepDimmedWeight); //This is not used at the moment
+
+                    FormBackColor = SystemColors.Control;
+                    FormForeColor = SystemColors.ControlText; //This is not used at the moment
+
+                    //Skinning buttons (especially disabled buttons)
+                    //ButtonFocusedBorderColor = windowsAccentColor;
+                    ButtonFocusedBorderColor = ButtonBorderColor; //This is not used at the moment
+                    ButtonBorderColor = SystemColors.ActiveBorder; //This is not used at the moment
+
+                    ButtonBackColor = SystemColors.ButtonFace; //This is not used at the moment
+                    ButtonForeColor = SystemColors.ControlText; //This is not used at the moment
+
+                    ButtonDisabledBackColor = SystemColors.ActiveBorder; //This is not used at the moment
+                    ButtonDisabledForeColor = SystemColors.GrayText; //This is not used at the moment
+
+
+                    ControlHighlightBackColor = SystemColors.ButtonFace; //This is not used at the moment
+                    ControlHighlightForeColor = SystemColors.ControlText; //This is not used at the moment
+                }
+
+
+
+                ScrollBarBackColor = InputControlBackColor;
+                ScrollBarBorderColor = DeepDimmedAccentColor;
+                NarrowScrollBarBackColor = InputControlBackColor;
+                ScrollBarThumbAndSpansForeColor = GetWeightedColor(AccentColor, InputPanelBackColor, ScrollBarsForeWeight);//***
+                ScrollBarThumbAndSpansBackColor = InputControlBackColor;
+                ScrollBarThumbAndSpansBorderColor = InputControlBackColor;
+
+                ScrollBarFocusedBorderColor = GetWeightedColor(ScrollBarBorderColor, ScrollBarThumbAndSpansForeColor);
+
+
+                var sampleColor = SystemColors.Highlight;
+                DimmedHighlight = GetHighlightColor(sampleColor, AccentColor, FormBackColor);
+
+
+                //Setting default & making themed colors
+                HighlightColor = Color.Red;
+                UntickedColor = AccentColor;
+
+                TickedColor = GetHighlightColor(HighlightColor, sampleColor, FormBackColor, 0.5f);
+
+                //Splitter is invisible by default. Let's draw it.
+                SplitterColor = GetWeightedColor(SystemColors.Desktop, AccentColor, 0.8f);//***
             }
-            else
-            {
-                //Color windowsAccentColor = GetWindowColorizationColor(true);
-
-                var backColorNotSkinned = SystemColors.Control;
-                AccentColor = SystemColors.ControlText;
-
-                DimmedAccentColor = GetWeightedColor(AccentColor, backColorNotSkinned, DimmedWeight); //This is not used at the moment
-                DeepDimmedAccentColor = GetWeightedColor(AccentColor, backColorNotSkinned, DeepDimmedWeight); //This is not used at the moment
-
-                FormBackColor = SystemColors.Control;
-                FormForeColor = SystemColors.ControlText; //This is not used at the moment
-
-                //Skinning buttons (especially disabled buttons)
-                //ButtonFocusedBorderColor = windowsAccentColor;
-                ButtonFocusedBorderColor = ButtonBorderColor; //This is not used at the moment
-                ButtonBorderColor = SystemColors.ActiveBorder; //This is not used at the moment
-
-                ButtonBackColor = SystemColors.ButtonFace; //This is not used at the moment
-                ButtonForeColor = SystemColors.ControlText; //This is not used at the moment
-
-                ButtonDisabledBackColor = SystemColors.ActiveBorder; //This is not used at the moment
-                ButtonDisabledForeColor = SystemColors.GrayText; //This is not used at the moment
-
-
-                ControlHighlightBackColor = SystemColors.ButtonFace; //This is not used at the moment
-                ControlHighlightForeColor = SystemColors.ControlText; //This is not used at the moment
-            }
-
-
-
-            ScrollBarBackColor = InputControlBackColor;
-            ScrollBarBorderColor = DeepDimmedAccentColor;
-            NarrowScrollBarBackColor = InputControlBackColor;
-            ScrollBarThumbAndSpansForeColor = GetWeightedColor(AccentColor, InputPanelBackColor, ScrollBarsForeWeight);//***
-            ScrollBarThumbAndSpansBackColor = InputControlBackColor;
-            ScrollBarThumbAndSpansBorderColor = InputControlBackColor;
-
-            ScrollBarFocusedBorderColor = GetWeightedColor(ScrollBarBorderColor, ScrollBarThumbAndSpansForeColor);
-
-
-            var sampleColor = SystemColors.Highlight;
-            DimmedHighlight = GetHighlightColor(sampleColor, AccentColor, FormBackColor);
-
-
-            //Setting default & making themed colors
-            HighlightColor = Color.Red;
-            UntickedColor = AccentColor;
-
-            TickedColor = GetHighlightColor(HighlightColor, sampleColor, FormBackColor, 0.5f);
 
 
             //Making themed bitmaps
-            var scalingSampleForm = new PluginSampleWindow(this);
-            scalingSampleForm.dontShowForm = true;
-            scalingSampleForm.Show();
-            var dpiScaling = scalingSampleForm.dpiScaling;
-            ButtonHeightDpiFontScaling = scalingSampleForm.getButtonHeightDpiFontScaling();
-            scalingSampleForm.Close();
-
-
-            //Splitter is invisible by default. Let's draw it.
-            SplitterColor = GetWeightedColor(SystemColors.Desktop, AccentColor, 0.8f);//***
-
-            Bitmap oldBitmap;
-
             if (!SavedSettings.dontUseSkinColors) //It's in case if skinned & not skinned buttons use different flat styles
             {
-                var scaledPx = (int)Math.Round(dpiScaling);
+                var scaledPx = (int)Math.Round(DpiScaling);
                 SbBorderWidth = 1; //Units: px (not yet DPI scaled, scaling will be done below)
 
-                var scrollBarImagesWidth = ControlsTools.GetCustomScrollBarInitialWidth(dpiScaling, 0);
-                var comboBoxDownArrowSize = (int)Math.Round(dpiScaling * 1.238f * ScrollBarWidth);
+                var scrollBarImagesWidth = ControlsTools.GetCustomScrollBarInitialWidth(DpiScaling, 0);
+                var comboBoxDownArrowSize = (int)Math.Round(DpiScaling * 1.238f * ScrollBarWidth);
 
                 SbBorderWidth *= scaledPx; //HERE IS DPI scaling of SbBorderWidth
 
@@ -5582,28 +5593,24 @@ namespace MusicBeePlugin
 
                 var smallSize = (int)Math.Round(15f * ButtonHeightDpiFontScaling);
 
-                oldBitmap = DownArrowComboBoxImage;
-                DownArrowComboBoxImage = GetSolidImageByBitmapMask(ScrollBarThumbAndSpansForeColor, 
+                DownArrowComboBoxImage?.Dispose();
+                DownArrowComboBoxImage = GetSolidImageByBitmapMask(ScrollBarThumbAndSpansForeColor,
                     Resources.down_arrow_combobox_b, comboBoxDownArrowSize, comboBoxDownArrowSize);
-                oldBitmap?.Dispose();
 
-                oldBitmap = UpArrowImage;
+                UpArrowImage?.Dispose();
                 UpArrowImage = GetSolidImageByBitmapMask(ScrollBarThumbAndSpansForeColor, 
                     Resources.up_arrow_b, scrollBarImagesWidth, scrollBarImagesWidth);
-                oldBitmap?.Dispose();
-
-                oldBitmap = DownArrowImage;
+                
+                DownArrowImage?.Dispose();
                 DownArrowImage = MirrorBitmap(UpArrowImage, true);
-                oldBitmap?.Dispose();
-
+                
                 //EITHER:
-                oldBitmap = ThumbMiddleVerticalImage;
+                ThumbMiddleVerticalImage?.Dispose();
                 ThumbMiddleVerticalImage = GetSolidImageByBitmapMask(ScrollBarThumbAndSpansForeColor, 
                     Resources.thumb_middle_vertical_c,
                     scrollBarImagesWidth - 3 * scaledPx, Resources.thumb_middle_vertical_c.Height, //Here middle thumb image is without right transparent part
                     true, InterpolationMode.NearestNeighbor);
-                oldBitmap?.Dispose();
-
+                
 
                 //OR:
                 //ThumbTopImage = GetSolidImageByBitmapMask(_scrollBarThumbAndSpansForeColor, Resources.thumb_top_b,
@@ -5618,23 +5625,20 @@ namespace MusicBeePlugin
                 //ThemedBitmapAddRef(EmptyForm, ThumbBottomImage);
 
 
-                oldBitmap = LeftArrowImage;
+                LeftArrowImage?.Dispose();
                 LeftArrowImage = GetSolidImageByBitmapMask(ScrollBarThumbAndSpansForeColor, 
                     Resources.left_arrow_b, scrollBarImagesWidth, scrollBarImagesWidth);
-                oldBitmap?.Dispose();
-
-                oldBitmap = RightArrowImage;
+                
+                RightArrowImage?.Dispose();
                 RightArrowImage = MirrorBitmap(LeftArrowImage, false);
-                oldBitmap?.Dispose();
-
+                
                 //EITHER:
-                oldBitmap = ThumbMiddleHorizontalImage;
+                ThumbMiddleHorizontalImage?.Dispose();
                 ThumbMiddleHorizontalImage = GetSolidImageByBitmapMask(ScrollBarThumbAndSpansForeColor, 
                     Resources.thumb_middle_horizontal_c,
                     Resources.thumb_middle_horizontal_c.Width, scrollBarImagesWidth - 3 * scaledPx, //Here middle thumb image is without bottom transparent part
                     true, InterpolationMode.NearestNeighbor);
-                oldBitmap?.Dispose();
-
+                
 
                 //OR:
                 //ThumbLeftImage = GetSolidImageByBitmapMask(_scrollBarThumbAndSpansForeColor, Resources.thumb_left_b,
@@ -5649,52 +5653,43 @@ namespace MusicBeePlugin
                 //ThemedBitmapAddRef(EmptyForm, ThumbRightImage);
 
 
-                oldBitmap = WarningWide;
+                WarningWide?.Dispose();
                 WarningWide = ScaleBitmap(Resources.warning_wide, PixelFormat.Format32bppArgb, InterpolationMode.HighQualityBicubic,
                     wideWidth, wideHeight);
-                oldBitmap?.Dispose();
-
-                oldBitmap = ErrorWide;
+                
+                ErrorWide?.Dispose();
                 ErrorWide = ScaleBitmap(Resources.error_wide, PixelFormat.Format32bppArgb, InterpolationMode.HighQualityBicubic,
                     midWideWidth, midHeight);
-                oldBitmap?.Dispose();
-
-                oldBitmap = FatalErrorWide;
+                
+                FatalErrorWide?.Dispose();
                 FatalErrorWide = ScaleBitmap(Resources.fatal_error_wide, PixelFormat.Format32bppArgb, InterpolationMode.HighQualityBicubic,
                     midWideWidth, midHeight);
-                oldBitmap?.Dispose();
-
-                oldBitmap = ErrorFatalErrorWide;
+                
+                ErrorFatalErrorWide?.Dispose();
                 ErrorFatalErrorWide = ScaleBitmap(Resources.error_fatal_error_wide, PixelFormat.Format32bppArgb, InterpolationMode.HighQualityBicubic,
                     midWidestWidth, midHeight);
-                oldBitmap?.Dispose();
+                
 
-
-                oldBitmap = Warning;
+                Warning?.Dispose();
                 Warning = ScaleBitmap(Resources.warning, PixelFormat.Format32bppArgb, InterpolationMode.HighQualityBicubic,
                     smallSize, smallSize);
-                oldBitmap?.Dispose();
-
-                oldBitmap = Error;
+                
+                Error?.Dispose();
                 Error = ScaleBitmap(Resources.error, PixelFormat.Format32bppArgb, InterpolationMode.HighQualityBicubic,
                     midWidth, midHeight);
-                oldBitmap?.Dispose();
-
-                oldBitmap = FatalError;
+                
+                FatalError?.Dispose();
                 FatalError = ScaleBitmap(Resources.fatal_error, PixelFormat.Format32bppArgb, InterpolationMode.HighQualityBicubic,
                     midWidth, midHeight);
-                oldBitmap?.Dispose();
-
-                oldBitmap = ErrorFatalError;
+                
+                ErrorFatalError?.Dispose();
                 ErrorFatalError = ScaleBitmap(Resources.error_fatal_error, PixelFormat.Format32bppArgb, InterpolationMode.HighQualityBicubic,
                     midWiderWidth, midHeight);
-                oldBitmap?.Dispose();
+                
 
-
-                oldBitmap = Gear;
-                Gear = GetSolidImageByBitmapMask(ButtonForeColor, ButtonBackColor, Resources.gear, size, size);
-                oldBitmap?.Dispose();
-            }
+                Gear?.Dispose();
+                Gear = GetSolidImageByBitmapMask(ButtonForeColor, Resources.gear, size, size);
+                            }
             else
             {
                 SbBorderWidth = 0; //Units: px; scroll bars not skinned
@@ -5711,119 +5706,99 @@ namespace MusicBeePlugin
                 ThumbMiddleVerticalImage = null;
 
 
-                oldBitmap = WarningWide;
+                WarningWide?.Dispose();
                 WarningWide = ScaleBitmap(Resources.warning_wide, PixelFormat.Format32bppArgb, InterpolationMode.HighQualityBicubic, wideWidth, wideHeight);
-                oldBitmap?.Dispose();
-
-                oldBitmap = Warning;
+                
+                Warning?.Dispose();
                 Warning = ScaleBitmap(Resources.warning, PixelFormat.Format32bppArgb, InterpolationMode.HighQualityBicubic, smallSize, smallSize);
-                oldBitmap?.Dispose();
 
-                oldBitmap = Gear;
-                Gear = GetSolidImageByBitmapMask(ButtonForeColor, ButtonBackColor, Resources.gear, size, size);
-                oldBitmap?.Dispose();
+                Gear?.Dispose();
+                Gear = GetSolidImageByBitmapMask(ButtonForeColor, Resources.gear, size, size);
+
+                ClearField?.Dispose();
+                ClearField = GetSolidImageByBitmapMask(ButtonForeColor, Resources.uncheck_mark, size, size);
             }
 
 
             //ASR
             var markSize = (int)Math.Round(15f * ButtonHeightDpiFontScaling);
 
-            oldBitmap = CheckedState;
+            CheckedState?.Dispose();
             CheckedState = GetSolidImageByBitmapMask(AccentColor, Resources.check_mark, markSize, markSize);
-            oldBitmap?.Dispose();
-
-            oldBitmap = UncheckedState;
-            UncheckedState = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, AccentBackWeight), FormBackColor, 
+            
+            UncheckedState?.Dispose();
+            UncheckedState = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, AccentBackWeight), 
                 Resources.uncheck_mark, markSize, markSize);
-            oldBitmap?.Dispose();
-
+            
             var pictureSize = (int)Math.Round(19f * ButtonHeightDpiFontScaling);
 
-            oldBitmap = Search;
+            Search?.Dispose();
             Search = GetSolidImageByBitmapMask(AccentColor, Resources.search, pictureSize, pictureSize);
-            oldBitmap?.Dispose();
+            
 
-
-            oldBitmap = AutoAppliedPresetsAccent;
+            AutoAppliedPresetsAccent?.Dispose();
             AutoAppliedPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.auto_applied_presets, pictureSize, pictureSize);
-            oldBitmap?.Dispose();
-
-            oldBitmap = AutoAppliedPresetsDimmed;
+            
+            AutoAppliedPresetsDimmed?.Dispose();
             AutoAppliedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), 
                 Resources.auto_applied_presets, pictureSize, pictureSize);
-            oldBitmap?.Dispose();
-
-            oldBitmap = PredefinedPresetsAccent;
+            
+            PredefinedPresetsAccent?.Dispose();
             PredefinedPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.predefined_presets, pictureSize, pictureSize);
-            oldBitmap?.Dispose();
-
-            oldBitmap = PredefinedPresetsDimmed;
+            
+            PredefinedPresetsDimmed?.Dispose();
             PredefinedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), 
                 Resources.predefined_presets, pictureSize, pictureSize);
-            oldBitmap?.Dispose();
-
-            oldBitmap = CustomizedPresetsAccent;
+            
+            CustomizedPresetsAccent?.Dispose();
             CustomizedPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.customized_presets, pictureSize, pictureSize);
-            oldBitmap?.Dispose();
-
-            oldBitmap = CustomizedPresetsDimmed;
+            
+            CustomizedPresetsDimmed?.Dispose();
             CustomizedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), 
                 Resources.customized_presets, pictureSize, pictureSize);
-            oldBitmap?.Dispose();
-
-            oldBitmap = UserPresetsAccent;
+            
+            UserPresetsAccent?.Dispose();
             UserPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.user_presets, pictureSize, pictureSize);
-            oldBitmap?.Dispose();
-
-            oldBitmap = UserPresetsDimmed;
+            
+            UserPresetsDimmed?.Dispose();
             UserPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), 
                 Resources.user_presets, pictureSize, pictureSize);
-            oldBitmap?.Dispose();
-
-            oldBitmap = PlaylistPresetsAccent;
+            
+            PlaylistPresetsAccent?.Dispose();
             PlaylistPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.playlist_presets, pictureSize, pictureSize);
-            oldBitmap?.Dispose();
-
-            oldBitmap = PlaylistPresetsDimmed;
+            
+            PlaylistPresetsDimmed?.Dispose();
             PlaylistPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), 
                 Resources.playlist_presets, pictureSize, pictureSize);
-            oldBitmap?.Dispose();
-
-            oldBitmap = FunctionIdPresetsAccent;
+            
+            FunctionIdPresetsAccent?.Dispose();
             FunctionIdPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.function_id_presets, pictureSize, pictureSize);
-            oldBitmap?.Dispose();
-
-            oldBitmap = FunctionIdPresetsDimmed;
+            
+            FunctionIdPresetsDimmed?.Dispose();
             FunctionIdPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), 
                 Resources.function_id_presets, pictureSize, pictureSize);
-            oldBitmap?.Dispose();
-
-            oldBitmap = HotkeyPresetsAccent;
+            
+            HotkeyPresetsAccent?.Dispose();
             HotkeyPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.hotkey_presets, pictureSize, pictureSize);
-            oldBitmap?.Dispose();
-
-            oldBitmap = HotkeyPresetsDimmed;
+            
+            HotkeyPresetsDimmed?.Dispose();
             HotkeyPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), 
                 Resources.hotkey_presets, pictureSize, pictureSize);
-            oldBitmap?.Dispose();
-
-            oldBitmap = UncheckAllFiltersAccent;
+            
+            UncheckAllFiltersAccent?.Dispose();
             UncheckAllFiltersAccent = GetSolidImageByBitmapMask(AccentColor, Resources.uncheck_all_preset_filters, pictureSize, pictureSize);
-            oldBitmap?.Dispose();
-
-            oldBitmap = UncheckAllFiltersDimmed;
+            
+            UncheckAllFiltersDimmed?.Dispose();
             UncheckAllFiltersDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), 
                 Resources.uncheck_all_preset_filters, pictureSize, pictureSize);
-            oldBitmap?.Dispose();
-
+            
 
             //LR
             var pictogramSize = (int)Math.Round(23f * ButtonHeightDpiFontScaling);
 
-            oldBitmap = Window;
+            Window?.Dispose();
             Window = ScaleBitmap(Resources.window, pictogramSize, pictogramSize);
-            oldBitmap?.Dispose();
-
+            
 
             HeaderCellStyle.Alignment = DataGridViewContentAlignment.TopLeft;
 
@@ -6222,6 +6197,9 @@ namespace MusicBeePlugin
             }
 
             PreservedTagValueCellStyle.SelectionForeColor = Color.FromArgb(255, (int)Math.Round(r), (int)Math.Round(g), (int)Math.Round(b));
+
+
+            SizesColorsChanged = false;
         }
 
         internal static ToolStripMenuItem AddMenuItem(ToolStripMenuItem menuItemGroup, string itemName, string hotkeyDescription, EventHandler handler, bool enabled = true, Form form = null)

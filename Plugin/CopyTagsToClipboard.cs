@@ -63,6 +63,8 @@ namespace MusicBeePlugin
 
                 prepareAvailableTags(true, true, true);
                 tagSetComboBox_DropDownClosed(null, null);
+
+                buttonOK.Enable(checkedSourceTagList.Items.Count > 0);
             }
 
 
@@ -128,7 +130,7 @@ namespace MusicBeePlugin
                 prefixedSelectedTags[i] = GetTagPrefix(selectedTags[i]) + selectedTags[i];
 
 
-            prefixedUnselectedTags = (string[])prefixedTags.Except(prefixedSelectedTags).ToArray();
+            prefixedUnselectedTags = prefixedTags.Except(prefixedSelectedTags).ToArray();
 
             checkedSourceTagList.Items.Clear();
             sourceTagList.Items.Clear();
@@ -310,7 +312,7 @@ namespace MusicBeePlugin
             }
 
             saveCurrentIds();
-            //buttonOK.IsEnabled() = returnSelectedTags || checkedSourceTagList.Items.Count > 0;
+            buttonOK.Enable(true);
 
             UpdateCustomScrollBars(sourceTagList);
             UpdateCustomScrollBars(checkedSourceTagList);

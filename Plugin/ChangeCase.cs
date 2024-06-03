@@ -87,7 +87,10 @@ namespace MusicBeePlugin
             wordSeparatorsBoxCustom = namesComboBoxes["wordSeparatorsBox"];
             wordSeparatorsBoxCustom.Leave += wordSeparatorsBox_Leave;
 
-            
+
+            removeExceptionButton.Text = string.Empty;
+            removeExceptionButton.Image = ReplaceBitmap(removeExceptionButton.Image, ClearField);
+
             buttonSettings.Image = ReplaceBitmap(buttonSettings.Image, Gear);
 
             FillListByTagNames(sourceTagListCustom.Items);

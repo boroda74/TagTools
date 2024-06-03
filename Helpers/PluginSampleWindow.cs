@@ -8,9 +8,9 @@
         }
 
         //Returns: button height DPI/font scaling factor
-        internal float getButtonHeightDpiFontScaling()
+        internal (float, float) getButtonHeightDpiFontScaling()
         {
-            return squareButton.Height / 23f;
+            return (squareButton.Height / 23f, textBox.Height / 23F);
         }
     }
 }

@@ -64,6 +64,10 @@ namespace MusicBeePlugin
 
             //Setting themed images
             autoApplyPictureBox.Image = ReplaceBitmap(autoApplyPictureBox.Image, AutoAppliedPresetsAccent);
+
+            buttonDeleteSaved.Text = string.Empty;
+            buttonDeleteSaved.Image = ReplaceBitmap(buttonDeleteSaved.Image, ClearField);
+
             buttonSettings.Image = ReplaceBitmap(buttonSettings.Image, Gear);
 
 

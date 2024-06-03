@@ -449,9 +449,14 @@ namespace ExtensionMethods
 
             if (control is CheckBox || control is RadioButton)
             {
-                (control.FindForm() as PluginWindowTemplate).controlsReferencesX.TryGetValue(control, out var control2);
-                if (control2 != null && control2 is Label)
-                    control2.Enable(state);
+                var form = control.FindForm() as PluginWindowTemplate;
+
+                if (form != null)
+                {
+                    form.controlsReferencesX.TryGetValue(control, out var control2);
+                    if (control2 is Label label)
+                        label.Enable(state);
+                }
             }
         }
 

@@ -87,7 +87,7 @@ namespace MusicBeePlugin
         {
             var now = DateTime.Now;
 
-            return BrGetCurrentLibraryName() + prefix + now.Year.ToString("D4") + "-" + now.Month.ToString("D2") + "-" + now.Day.ToString("D2")  + Resources.Space
+            return BrGetCurrentLibraryName() + prefix + now.Year.ToString("D4") + "-" + now.Month.ToString("D2") + "-" + now.Day.ToString("D2")  + " "
                 + now.Hour.ToString("D2") + "." + now.Minute.ToString("D2") + "." + now.Second.ToString("D2");
         }
 
@@ -102,7 +102,7 @@ namespace MusicBeePlugin
         internal static string BrGetBackupDateTime(Backup backup)
         {
             var backupDate = backup.creationDate.ToLocalTime();
-            return backupDate.Year.ToString("D4") + "-" + backupDate.Month.ToString("D2") + "-" + backupDate.Day.ToString("D2")  + Resources.Space
+            return backupDate.Year.ToString("D4") + "-" + backupDate.Month.ToString("D2") + "-" + backupDate.Day.ToString("D2")  + " "
                 + backupDate.Hour.ToString("D2") + ":" + backupDate.Minute.ToString("D2"); // + "." + backupDate.Second.ToString("D2");
         }
 
@@ -227,6 +227,11 @@ namespace MusicBeePlugin
     {
         public List<string> incrementalBackups = new List<string>(); //This field in used by baseline files only
         public SerializableDictionary<int, SerializableDictionary<int, string>> tracks = new SerializableDictionary<int, SerializableDictionary<int, string>>();
+
+        public Backup()
+        {
+            //Nothing...
+        }
 
         public Backup(Backup backup, bool isAutoCreated) : base(backup, isAutoCreated)
         {
@@ -397,7 +402,7 @@ namespace MusicBeePlugin
             {
                 file.Close();
 
-                MessageBox.Show(MbForm, MsgBrBackupIsCorrupted.Replace("%%FILENAME%%", fileName) + Resources.MsgDoubleNewLine + ex.Message);
+                MessageBox.Show(MbForm, MsgBrBackupIsCorrupted.Replace("%%FILENAME%%", fileName) + "\n\n" + ex.Message);
 
                 return null;
             }
@@ -454,7 +459,7 @@ namespace MusicBeePlugin
             {
                 file.Close();
 
-                MessageBox.Show(MbForm, MsgBrBackupIsCorrupted.Replace("%%FILENAME%%", fileName) + Resources.MsgDoubleNewLine + ex.Message);
+                MessageBox.Show(MbForm, MsgBrBackupIsCorrupted.Replace("%%FILENAME%%", fileName) + "\n\n" + ex.Message);
 
                 return null;
             }
@@ -559,6 +564,11 @@ namespace MusicBeePlugin
 
     public class BackupIndex : SerializableDictionary<string, SerializableDictionary<string, bool>>
     {
+        public BackupIndex()
+        {
+            //Nothing...
+        }
+
         internal void saveBackupAsync(object parameters)
         {
             // ReSharper disable once PossibleNullReferenceException
@@ -623,7 +633,7 @@ namespace MusicBeePlugin
                     if (lastShownCount < percentage)
                     {
                         lastShownCount = percentage;
-                        MbApiInterface.MB_SetBackgroundTaskMessage(statusBarText  + Resources.Space + percentage + "% (" + backupName + ")");
+                        MbApiInterface.MB_SetBackgroundTaskMessage(statusBarText  + " " + percentage + "% (" + backupName + ")");
                     }
 
                     var currentFile = files[fileCounter];
@@ -772,7 +782,7 @@ namespace MusicBeePlugin
                     if (lastShownCount < percentage)
                     {
                         lastShownCount = percentage;
-                        MbApiInterface.MB_SetBackgroundTaskMessage(statusBarText  + Resources.Space + percentage + "% (" + backupName + ")");
+                        MbApiInterface.MB_SetBackgroundTaskMessage(statusBarText  + " " + percentage + "% (" + backupName + ")");
                     }
 
                     var currentFile = files[fileCounter];

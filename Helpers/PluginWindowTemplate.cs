@@ -134,6 +134,7 @@ namespace MusicBeePlugin
             InitializeComponent();
 
             TagToolsPlugin = plugin;
+            TagToolsPlugin.prepareThemedBitmapsAndColors();
         }
 
         internal bool backgroundTaskIsWorking()
@@ -804,11 +805,11 @@ namespace MusicBeePlugin
             {
                 //Let's change auto-scaled button height to auto-scaled height of generic controls, not buttons
                 // ReSharper disable once CompareOfFloatsByEqualityOperator
-                if (control is Button && !stringTag.Contains("@square-button") && ButtonHeightDpiFontScaling != 1)
+                if (control is Button && !stringTag.Contains("@square-button") && (ButtonHeightDpiFontScaling != 1 || TextBoxHeightDpiFontScaling != 1))
                 {
                     int initialHeight = control.Height;
-                    control.Height = (int)Math.Round(control.Height * vDpiFontScaling / ((ButtonHeightDpiFontScaling - 1) * dpiScaling + 1));
-                    control.Top -= (int)Math.Round((control.Height - initialHeight) / 2f);
+                    control.Height = (int)Math.Round(control.Height * TextBoxHeightDpiFontScaling / ButtonHeightDpiFontScaling);
+                    control.Top -= (int)Math.Round((control.Height - initialHeight + 1f) / 2f, MidpointRounding.ToEven);
                 }
 
                 if ((control.Anchor & AnchorStyles.Right) != 0)
@@ -2167,7 +2168,7 @@ namespace MusicBeePlugin
             {
                 var focusedControl = FindFocusedControl(control);
 
-                if (!(focusedControl.Parent is CustomComboBox box))
+                if (focusedControl == null || !(focusedControl.Parent is CustomComboBox box))
                     return null;
 
                 customComboBox = box;

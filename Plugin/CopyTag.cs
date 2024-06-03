@@ -215,7 +215,7 @@ namespace MusicBeePlugin
                 else if (count > 1 && buffer[0] == utf8.GetPreamble()[0] && buffer[1] == utf8.GetPreamble()[1])
                     encoding = utf8;
 
-                fileTags = encoding.GetString(buffer).Split(new[] { Resources.MsgDoubleNewLine }, StringSplitOptions.None);
+                fileTags = encoding.GetString(buffer).Split(new[] { "\r\n" }, StringSplitOptions.None);
 
                 if (fileTags.Length != files.Length)
                 {
@@ -235,7 +235,7 @@ namespace MusicBeePlugin
                     return false;
                 }
 
-                fileTags = Clipboard.GetText().Split(new[] { Resources.MsgDoubleNewLine }, StringSplitOptions.None);
+                fileTags = Clipboard.GetText().Split(new[] { "\r\n" }, StringSplitOptions.None);
 
                 if (fileTags.Length != files.Length)
                 {

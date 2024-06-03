@@ -336,6 +336,12 @@ namespace MusicBeePlugin
                 DontUseSplitter = (multipleItemsSplitterComboBoxCustom.Items[0] as string).TrimStart(' ');
 
             //Setting themed images
+            buttonClearExpression.Text = string.Empty;
+            buttonClearExpression.Image = ReplaceBitmap(buttonClearExpression.Image, ClearField);
+
+            clearIdButton.Text = string.Empty;
+            clearIdButton.Image = ReplaceBitmap(clearIdButton.Image, ClearField);
+
             openReportCheckBoxPicture.Image = ReplaceBitmap(openReportCheckBoxPicture.Image, Window);
             buttonSettings.Image = ReplaceBitmap(buttonSettings.Image, Gear);
 
@@ -1198,7 +1204,7 @@ namespace MusicBeePlugin
                 if (hotkeyChar == string.Empty)
                     return hotkeyChar;
                 else
-                    return Resources.Space + hotkeyChar;
+                    return " " + hotkeyChar;
             }
 
             internal string getHotkeyDescription()
@@ -1953,7 +1959,7 @@ namespace MusicBeePlugin
                             previewTable.Rows[previewTable.RowCount - 1].Cells[i].Style.Font = totalsFont;
 
                         if (previewTable.RowCount > 0)
-                            previewTable.Rows[previewTable.RowCount - 1].Cells[i].ToolTipText = row[i] + Resources.MsgDoubleNewLine + LrCellToolTip;
+                            previewTable.Rows[previewTable.RowCount - 1].Cells[i].ToolTipText = row[i] + "\n\n" + LrCellToolTip;
 
                         if (maxWidths[i] < row[i].Length)
                             maxWidths[i] = row[i].Length;
@@ -4367,7 +4373,7 @@ namespace MusicBeePlugin
                     throw new Exception(ExThisFieldAlreadyDefinedInPreset);
                 else
                 {
-                    if (MessageBox.Show(this, MsgDoYouWantToReplaceTheField.Replace(@"\\", Resources.MsgDoubleNewLine).Replace("%%FIELD-NAME%%", simpleColumnName),
+                    if (MessageBox.Show(this, MsgDoYouWantToReplaceTheField.Replace(@"\\", "\n\n").Replace("%%FIELD-NAME%%", simpleColumnName),
                     string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                         return false;
                     else //Confirmed replacement
@@ -5997,12 +6003,12 @@ namespace MusicBeePlugin
 
                     string message;
                     if (presetsCheckStatusIsSenseless && !presetsCheckStatusIsBroken)
-                        message = UseAnotherPresetAsSourceIsSenselessToolTip.Replace("\r", string.Empty) + Resources.MsgDoubleNewLine;
+                        message = UseAnotherPresetAsSourceIsSenselessToolTip.Replace("\r", string.Empty) + "\n\n";
                     else if (!presetsCheckStatusIsSenseless && presetsCheckStatusIsBroken)
-                        message = UseAnotherPresetAsSourceIsInBrokenChainToolTip.Replace("\r", string.Empty) + Resources.MsgDoubleNewLine;
+                        message = UseAnotherPresetAsSourceIsInBrokenChainToolTip.Replace("\r", string.Empty) + "\n\n";
                     else //if (relatedPresetsCheckStatusIsSenseless && relatedPresetsCheckStatusIsBroken)
                         message = UseAnotherPresetAsSourceIsSenselessToolTip.Replace("\r", string.Empty)
-                            + Resources.MsgDoubleNewLine + UseAnotherPresetAsSourceIsInBrokenChainToolTip.Replace("\r", string.Empty) + Resources.MsgDoubleNewLine;
+                            + "\n\n" + UseAnotherPresetAsSourceIsInBrokenChainToolTip.Replace("\r", string.Empty) + "\n\n";
 
                     result = MessageBox.Show(this, message + MsgLrDoYouWantToCloseTheWindowWithoutSavingChanges.ToUpper(),
                         string.Empty, confirmationButtons, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
@@ -6327,7 +6333,7 @@ namespace MusicBeePlugin
 
                 if (expressionsDataGridView.RowCount == 1)
                 {
-                    if (MessageBox.Show(this, MsgDoYouWantToDeleteTheField.Replace(@"\\", Resources.MsgDoubleNewLine)
+                    if (MessageBox.Show(this, MsgDoYouWantToDeleteTheField.Replace(@"\\", "\n\n")
                         .Replace("%%FIELD-NAME%%", commonAttr.getColumnName(false, false, false)),
                         string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                         return;
@@ -6536,6 +6542,8 @@ namespace MusicBeePlugin
 
         private void presetListSelectedIndexChanged(int index)
         {
+            Enable(false, autoApplyPresetsLabel);
+
             functionsDict.Clear(); //As soon as possible because availability of some UI controls depends on it
 
             if (selectedPreset != null && selectedPreset.useAnotherPresetAsSource && selectedPreset.anotherPresetAsSource.permanentGuid == Guid.Empty)
@@ -6603,7 +6611,10 @@ namespace MusicBeePlugin
                 trimValuesBackup = false;
 
                 enableDisablePreviewOptionControls(true);
+
                 disableQueryingOrUpdatingButtons();
+                
+                Enable(true, autoApplyPresetsLabel);
 
                 UpdateCustomScrollBars(presetList);
                 UpdateCustomScrollBars(previewTable);
@@ -6612,9 +6623,6 @@ namespace MusicBeePlugin
 
                 return;
             }
-
-
-            Enable(false, autoApplyPresetsLabel);
 
 
             selectedPreset = presetList.SelectedItem as ReportPreset;
@@ -6752,9 +6760,7 @@ namespace MusicBeePlugin
             enableDisablePreviewOptionControls(true);
             enableQueryingOrUpdatingButtons();
 
-
             Enable(true, autoApplyPresetsLabel);
-
 
             UpdateCustomScrollBars(presetList);
             UpdateCustomScrollBars(previewTable);
@@ -7446,7 +7452,7 @@ namespace MusicBeePlugin
 
         protected override void getRow(int height)
         {
-            text += Resources.MsgDoubleNewLine;
+            text += "\r\n";
         }
     }
 
@@ -7868,12 +7874,12 @@ namespace MusicBeePlugin
             text = "<td class=xl1>" + seqNum.ToString("D2") + ".";
 
             if (albumArtist != null)
-                text += Resources.Space + albumArtist + " &#x25C6;";
+                text += " " + albumArtist + " &#x25C6;";
 
             if (album != null)
-                text += Resources.Space + album + " &#x25C6;";
+                text += " " + album + " &#x25C6;";
 
-            text += Resources.Space + title + "</td>";
+            text += " " + title + "</td>";
 
             text += "<td class=xl2>" + duration + "</td>";
         }

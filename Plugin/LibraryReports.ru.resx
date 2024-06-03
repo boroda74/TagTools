@@ -117,13 +117,24 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="buttonPreview.Location" type="System.Drawing.Point, System.Drawing">
+    <value>556, 32</value>
+  </data>
+  <data name="buttonPreview.Size" type="System.Drawing.Size, System.Drawing">
+    <value>170, 23</value>
+  </data>
   <data name="buttonPreview.Text" xml:space="preserve">
     <value>Просмотр</value>
   </data>
   <data name="buttonPreview.ToolTip" xml:space="preserve">
     <value>Сформировать отчет для ОТОБРАЖАЕМЫХ треков</value>
+  </data>
+  <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
+    <value>911, 32</value>
+  </data>
+  <data name="buttonClose.Size" type="System.Drawing.Size, System.Drawing">
+    <value>170, 23</value>
   </data>
   <data name="buttonClose.Text" xml:space="preserve">
     <value>Закрыть</value>
@@ -132,7 +143,7 @@
     <value>Есть не сохраненные изменения</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1284, 611</value>
+    <value>1286, 613</value>
   </data>
   <data name="autoApplyPresetsLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>1271, 45</value>
@@ -140,7 +151,6 @@
   <data name="autoApplyPresetsLabel.Text" xml:space="preserve">
     <value>Экспорт тегов в файл для использования в сторонних приложениях. Таблица сортируется по группирующим тегам слева направо после нажатия кнопки "Просмотр". Отмеченные пресеты автоматически применятются при запуске MusicBee. ~Отмечено для автоматического применения: %%TICKED-PRESETS%%~Автоматическое применение пресетов отключено в настройках плагина. </value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>1300, 650</value>
   </data>
@@ -891,7 +901,7 @@
     <value>Сохранить поле</value>
   </data>
   <data name="buttonFilterResults.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1094, 113</value>
+    <value>1092, 113</value>
   </data>
   <data name="buttonFilterResults.Size" type="System.Drawing.Size, System.Drawing">
     <value>170, 23</value>
@@ -921,7 +931,7 @@
     <value>Экспортировать/сохранять только, если тег</value>
   </data>
   <data name="buttonExport.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1094, 86</value>
+    <value>1092, 86</value>
   </data>
   <data name="buttonExport.Size" type="System.Drawing.Size, System.Drawing">
     <value>170, 23</value>
@@ -987,7 +997,7 @@
     <value>739, 59</value>
   </data>
   <data name="formatComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>525, 23</value>
+    <value>523, 23</value>
   </data>
   <data name="formatComboBox.ToolTip" xml:space="preserve">
     <value>Формат экспортируемого отчета</value>
@@ -1030,7 +1040,7 @@
 Проверьте цепочку пресетов!</value>
   </data>
   <data name="buttonSaveClose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>916, 32</value>
+    <value>1092, 32</value>
   </data>
   <data name="buttonSaveClose.Size" type="System.Drawing.Size, System.Drawing">
     <value>170, 23</value>
@@ -1045,7 +1055,7 @@
 </value>
   </data>
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>738, 32</value>
+    <value>733, 32</value>
   </data>
   <data name="buttonOK.Size" type="System.Drawing.Size, System.Drawing">
     <value>170, 23</value>
@@ -1057,10 +1067,7 @@
     <value>Применить пресет к ВЫБРАННЫМ трекам</value>
   </data>
   <data name="buttonSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>518, 32</value>
-  </data>
-  <data name="buttonSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 23</value>
+    <value>509, 32</value>
   </data>
   <data name="buttonSettings.ToolTip" xml:space="preserve">
     <value>Открыть быстрые настройки</value>
@@ -1145,9 +1152,6 @@
   </data>
   <data name="presetList.Size" type="System.Drawing.Size, System.Drawing">
     <value>1236, 129</value>
-  </data>
-  <data name="presetList.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="listBoxTableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>1264, 149</value>
@@ -1255,12 +1259,6 @@
   <data name="multipleItemsSplitterComboBox.ToolTip" xml:space="preserve">
     <value>Разбивать значения тега группировки по указанному разделителю</value>
   </data>
-  <data name="multipleItemsSplitterLabel.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="multipleItemsSplitterLabel.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="multipleItemsSplitterLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>604, 9</value>
   </data>
@@ -1345,9 +1343,6 @@
   <data name="buttonsPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>471, 34</value>
   </data>
-  <data name="tabPage2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 24</value>
-  </data>
   <data name="tabPage2.Size" type="System.Drawing.Size, System.Drawing">
     <value>1246, 166</value>
   </data>
@@ -1363,6 +1358,7 @@
   <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
     <value>1270, 553</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
     <value>344</value>
   </data>

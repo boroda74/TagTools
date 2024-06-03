@@ -1266,7 +1266,7 @@ namespace MusicBeePlugin
             {
                 MessageBox.Show(MbForm, "Some tag names are duplicated. See \"" +
                     System.IO.Path.Combine(MbApiInterface.Setting_GetPersistentStoragePath(), "TagTools.TagNamesErrorLog.txt")
-                    + "\" file for details. MusicBeePlugin is not properly initialized.",
+                    + "\" file for details. AT&RT plugin is not properly initialized.",
                     string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
@@ -1541,7 +1541,7 @@ namespace MusicBeePlugin
             {
                 MessageBox.Show(MbForm, "Some track property names are duplicated. See \"" +
                     System.IO.Path.Combine(MbApiInterface.Setting_GetPersistentStoragePath(), "TagTools.PropNamesErrorLog.txt")
-                    + "\" file for details. MusicBeePlugin is not properly initialized.",
+                    + "\" file for details. AT&RT plugin is not properly initialized.",
                     string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
