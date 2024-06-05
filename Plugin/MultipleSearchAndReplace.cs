@@ -65,6 +65,7 @@ namespace MusicBeePlugin
             //Setting themed images
             autoApplyPictureBox.Image = ReplaceBitmap(autoApplyPictureBox.Image, AutoAppliedPresetsAccent);
 
+            buttonLabels[buttonDeleteSaved] = string.Empty;
             buttonDeleteSaved.Text = string.Empty;
             buttonDeleteSaved.Image = ReplaceBitmap(buttonDeleteSaved.Image, ClearField);
 
@@ -115,7 +116,7 @@ namespace MusicBeePlugin
             addRowToTable = previewTable_AddRowToTable;
             processRowOfTable = previewTable_ProcessRowOfTable;
 
-            updateCustomScrollBars = UpdateCustomScrollBars;
+            this.updateCustomScrollBars = base.updateCustomScrollBars;
 
 
             customMSR = null;
@@ -159,7 +160,7 @@ namespace MusicBeePlugin
             previewTableFormatRow(previewTable.RowCount - 1);
 
             if ((previewTable.RowCount & 0x1f) == 0)
-                UpdateCustomScrollBars(previewTable);
+                base.updateCustomScrollBars(this.previewTable);
         }
 
         private void previewTable_ProcessRowOfTable(int rowIndex)
@@ -174,7 +175,7 @@ namespace MusicBeePlugin
             templates.Clear();
             previewTable.RowCount = 0;
 
-            UpdateCustomScrollBars(previewTable);
+            base.updateCustomScrollBars(this.previewTable);
 
             if (previewIsGenerated)
             {

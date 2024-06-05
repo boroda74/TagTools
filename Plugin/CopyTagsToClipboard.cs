@@ -138,8 +138,8 @@ namespace MusicBeePlugin
             checkedSourceTagList.Items.AddRange(prefixedSelectedTags);
             sourceTagList.Items.AddRange(prefixedUnselectedTags);
 
-            UpdateCustomScrollBars(sourceTagList);
-            UpdateCustomScrollBars(checkedSourceTagList);
+            updateCustomScrollBars(sourceTagList);
+            updateCustomScrollBars(checkedSourceTagList);
         }
 
         private void fillTags(bool addReadonlyTagsAlso, bool addArtworkAlso, bool addDateCreatedAlso)
@@ -299,8 +299,8 @@ namespace MusicBeePlugin
             saveCurrentIds();
             buttonOK.Enable(returnSelectedTags || checkedSourceTagList.Items.Count > 0);
 
-            UpdateCustomScrollBars(sourceTagList);
-            UpdateCustomScrollBars(checkedSourceTagList);
+            updateCustomScrollBars(sourceTagList);
+            updateCustomScrollBars(checkedSourceTagList);
         }
 
         private void sourceTagList_SelectedIndexChanged(object sender, EventArgs e)
@@ -314,8 +314,8 @@ namespace MusicBeePlugin
             saveCurrentIds();
             buttonOK.Enable(true);
 
-            UpdateCustomScrollBars(sourceTagList);
-            UpdateCustomScrollBars(checkedSourceTagList);
+            updateCustomScrollBars(sourceTagList);
+            updateCustomScrollBars(checkedSourceTagList);
         }
 
         private void tagSetComboBox_DropDownClosed(object sender, EventArgs e)

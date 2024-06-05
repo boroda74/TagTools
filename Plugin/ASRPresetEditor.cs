@@ -676,13 +676,13 @@ namespace MusicBeePlugin
 
         private void descriptionBox_TextChanged(object sender, EventArgs e)
         {
-            UpdateCustomScrollBars(descriptionBox);
+            updateCustomScrollBars(descriptionBox);
             descriptionBox.ScrollToCaret();
         }
 
         private void AsrPresetEditor_Load(object sender, EventArgs e)
         {
-            UpdateCustomScrollBars(descriptionBox);
+            updateCustomScrollBars(descriptionBox);
         }
     }
 }

@@ -134,7 +134,6 @@ namespace MusicBeePlugin
             InitializeComponent();
 
             TagToolsPlugin = plugin;
-            TagToolsPlugin.prepareThemedBitmapsAndColors();
         }
 
         internal bool backgroundTaskIsWorking()
@@ -1395,38 +1394,19 @@ namespace MusicBeePlugin
                 else
                     delta = -e.Delta;
 
-                if (dataGridView.RowCount > 0)
-                {
-                    var lastTopDisplayedRow = dataGridView.RowCount - dataGridView.DisplayedRowCount(true);
-                    if (lastTopDisplayedRow < 0)
-                        lastTopDisplayedRow = 0;
-
-                    if (dataGridView.FirstDisplayedScrollingRowIndex + delta < 0)
-                        dataGridView.FirstDisplayedScrollingRowIndex = 0;
-                    else if (dataGridView.FirstDisplayedScrollingRowIndex + delta > lastTopDisplayedRow)
-                        dataGridView.FirstDisplayedScrollingRowIndex = lastTopDisplayedRow;
-                    else
-                        dataGridView.FirstDisplayedScrollingRowIndex += delta;
-                }
+                customVScrollBar.Value += delta;
             }
             else if ((ModifierKeys & Keys.Shift) != 0 || !customVScrollBar.Visible)
             {
-                if ((ModifierKeys & Keys.Alt) == 0)
-                    delta = -e.Delta / 2; //****
-                else
-                    delta = -e.Delta * 2;
-
-                if (dataGridView.ColumnCount > 0)
+                var customHScrollBar = ControlsTools.FindControlChild<CustomHScrollBar>(dataGridView);
+                if (customHScrollBar.Visible)
                 {
-                    if (dataGridView.HorizontalScrollingOffset + delta < 0)
-                        dataGridView.HorizontalScrollingOffset = 0;
-                    else if (dataGridView.HorizontalScrollingOffset + delta > dataGridView.RowHeadersWidth +
-                        dataGridView.Columns.GetColumnsWidth(DataGridViewElementStates.Visible) - 1)
-
-                        dataGridView.HorizontalScrollingOffset = dataGridView.RowHeadersWidth +
-                        dataGridView.Columns.GetColumnsWidth(DataGridViewElementStates.Visible) - 1;
+                    if ((ModifierKeys & Keys.Alt) == 0)
+                        delta = -e.Delta / 2; //****
                     else
-                        dataGridView.HorizontalScrollingOffset += delta;
+                        delta = -e.Delta * 2;
+
+                    customHScrollBar.Value += delta;
                 }
             }
 
@@ -1875,11 +1855,11 @@ namespace MusicBeePlugin
 
             if (customHScrollBar != null)
             {
-                customHScrollBar.Minimum = hScrollBar.Minimum; //-V3080
+                customHScrollBar.Minimum = 0; //-V3080
                 customHScrollBar.Maximum = hScrollBar.Maximum;
                 customHScrollBar.LargeChange = hScrollBar.LargeChange;
 
-                if (hScrollBar.Maximum > hScrollBar.LargeChange)
+                if (customHScrollBar.Maximum > customHScrollBar.LargeChange)
                     customHScrollBarVisibleHeight = customHScrollBar.Height;
             }
 
@@ -1895,7 +1875,7 @@ namespace MusicBeePlugin
                 customVScrollBar.Maximum = vScrollBar.Maximum;
                 customVScrollBar.LargeChange = vScrollBar.LargeChange;
 
-                if (vScrollBar.Maximum > vScrollBar.LargeChange)
+                if (customVScrollBar.Maximum > customVScrollBar.LargeChange)
                     customVScrollBarVisibleWidth = customVScrollBar.Width;
             }
 
@@ -1977,6 +1957,12 @@ namespace MusicBeePlugin
             return vScrollBar;
         }
 
+        internal void updateCustomScrollBars(Control scrolledControl)
+        {
+            if (useSkinColors)
+                UpdateCustomScrollBars(scrolledControl);
+        }
+
         internal static void UpdateCustomScrollBars(Control scrolledControl)
         {
             CustomHScrollBar customHScrollBar = null;
@@ -2013,6 +1999,7 @@ namespace MusicBeePlugin
                 customHScrollBar.AdjustReservedSpace(customVScrollBarVisibleWidth);
                 customHScrollBar.ResetMetricsSize(scrolledControl.Width);
                 customHScrollBar.Visible = (customHScrollBarVisibleHeight > 0);
+                customHScrollBar.Invalidate();
             }
 
             if (customVScrollBar != null)
@@ -2024,12 +2011,43 @@ namespace MusicBeePlugin
 
                 customVScrollBar.ResetMetricsSize(scrolledControl.Height);
                 customVScrollBar.Visible = (customVScrollBarVisibleWidth > 0);
+                customVScrollBar.Invalidate();
             }
 
 
             scrolledControl.Invalidate();
             Application.DoEvents();
         }
+
+        //Returns Minimum, Maximum, LargeChange
+        internal static (int, int, int) GetDataGridViewScrollBarMetrics(Control scrolledControl, Control customScrollBar)
+        {
+            var dataGridView = scrolledControl as DataGridView;
+
+            if (customScrollBar is CustomHScrollBar hScrollBar)
+            {
+                int maximum = dataGridView.Columns.GetColumnsWidth(DataGridViewElementStates.Visible);
+                int largeChange = 0;
+
+                if (dataGridView.ColumnCount > 0)
+                    largeChange = dataGridView.Columns.GetColumnsWidth(DataGridViewElementStates.Displayed);
+
+                return (0, maximum, largeChange);
+            }
+            else if (customScrollBar is CustomVScrollBar vScrollBar)
+            {
+                int maximum = dataGridView.Rows.GetRowsHeight(DataGridViewElementStates.Visible);
+                int largeChange = 0;
+
+                if (dataGridView.ColumnCount > 0)
+                    largeChange = dataGridView.Rows.GetRowsHeight(DataGridViewElementStates.Displayed);
+
+                return (0, maximum, largeChange);
+            }
+
+            throw new Exception("Invalid reference scroll bar class: " + customScrollBar.GetType());
+        }
+
 
         //Returns Minimum, Maximum, LargeChange
         internal static (int, int, int) GetScrollBarMetrics(Control scrolledControl, Control refScrollBar)
@@ -2240,6 +2258,8 @@ namespace MusicBeePlugin
 
         internal void skinControl(Control control, int borderWidth = -1)
         {
+            WaitPreparedThemedBitmapsAndColors();
+
             //if (control.GetType().IsSubclassOf(typeof(TabControl)) || control is TabControl)
             //{
             //   TabControl tabControl = control as TabControl;
@@ -2316,13 +2336,22 @@ namespace MusicBeePlugin
                     var cellPosition = parent.GetCellPosition(control);
                     parent.RowStyles[cellPosition.Row + 1].Height = 0;
                 }
-                else if (control is TextBox textBox && control.Parent is TableLayoutPanel parent)
+                else if (control is TextBox textBox && control.Parent is TableLayoutPanel textBoxParent)
                 {
                     if (textBox.Multiline)
                     {
-                        parent.ColumnStyles[1].Width = 0;
-                        var cellPosition = parent.GetCellPosition(control);
-                        parent.RowStyles[cellPosition.Row + 1].Height = 0;
+                        textBoxParent.ColumnStyles[1].Width = 0;
+                        var cellPosition = textBoxParent.GetCellPosition(control);
+                        textBoxParent.RowStyles[cellPosition.Row + 1].Height = 0;
+                    }
+                }
+                else if (control is TextBoxBorder textBoxBorder1 && control.Parent is TableLayoutPanel textBoxBorderParent)
+                {
+                    if (textBoxBorder1.textBox.Multiline)
+                    {
+                        textBoxBorderParent.ColumnStyles[1].Width = 0;
+                        var cellPosition = textBoxBorderParent.GetCellPosition(control);
+                        textBoxBorderParent.RowStyles[cellPosition.Row + 1].Height = 0;
                     }
                 }
                 else if (control is ComboBox comboBox)
@@ -2355,9 +2384,9 @@ namespace MusicBeePlugin
             }
 
 
-            if (control is TextBoxBorder textBoxBorder)
+            if (control is TextBoxBorder textBoxBorder2)
             {
-                skinControl(textBoxBorder.textBox);
+                skinControl(textBoxBorder2.textBox);
             }
             else if (control is CheckBox checkBox)
             {
@@ -2497,7 +2526,7 @@ namespace MusicBeePlugin
                     }
                 }
             }
-            else if ((control is ListBox || control.GetType().IsSubclassOf(typeof(ListBox))) && control.Parent is TableLayoutPanel)
+            else if (control is ListBox)
             {
                 var listBox = control as ListBox;
 

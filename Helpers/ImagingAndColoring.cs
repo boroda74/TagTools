@@ -53,7 +53,7 @@ namespace MusicBeePlugin
                 }
                 else
                 {
-                    _finalMaskedImage = new Bitmap(_image); //****
+                    _finalMaskedImage = new Bitmap(_image);
 
                     var finalBmpData = _finalMaskedImage.LockBits(new Rectangle(0, 0, _finalMaskedImage.Width, _finalMaskedImage.Height), ImageLockMode.ReadWrite, _finalMaskedImage.PixelFormat);
                     var finalMaskedImageRGBAData = new byte[Math.Abs(finalBmpData.Stride) * finalBmpData.Height];
@@ -360,8 +360,11 @@ namespace MusicBeePlugin
             var alphaBlendedImage = new AlphaBlendedImage(templateBitmap, maskBitmap);
 
             templateBitmap.Dispose();
+            var blendedImage = alphaBlendedImage.AlphaBlendImages();
+            var scaledBitmap = SafeCopyBitmap(blendedImage);
+            blendedImage.Dispose();
 
-            return alphaBlendedImage.AlphaBlendImages();
+            return scaledBitmap;
         }
 
         internal static Bitmap GetSolidImageByBitmapMask(Color foreColor, Bitmap maskBitmap, 
@@ -375,7 +378,11 @@ namespace MusicBeePlugin
             scaledForeColorFilledBitmap.Dispose();
             scaledMaskBitmap.Dispose();
 
-            return alphaBlendedImage.AlphaBlendImages();
+            var blendedImage = alphaBlendedImage.AlphaBlendImages();
+            var scaledBitmap = SafeCopyBitmap(blendedImage);
+            blendedImage.Dispose();
+
+            return scaledBitmap;
         }
 
         internal static Bitmap GetSolidImageByBitmapMask(Color foreColor, Color backColor, Bitmap maskBitmap,
@@ -463,7 +470,12 @@ namespace MusicBeePlugin
         internal static Bitmap ApplyMaskToImage(Bitmap image, Bitmap maskBitmap, bool invertedMask)
         {
             var alphaBlendedImage = new AlphaBlendedImage(image, maskBitmap, invertedMask);
-            return alphaBlendedImage.AlphaBlendImages();
+
+            var blendedImage = alphaBlendedImage.AlphaBlendImages();
+            var scaledBitmap = SafeCopyBitmap(blendedImage);
+            blendedImage.Dispose();
+
+            return scaledBitmap;
         }
 
         internal static Bitmap ApplyMaskToImage(Bitmap image, Bitmap maskBitmap, 
@@ -478,7 +490,11 @@ namespace MusicBeePlugin
             scaledImage.Dispose();
             scaledMaskBitmap.Dispose();
 
-            return alphaBlendedImage.AlphaBlendImages();
+            var blendedImage = alphaBlendedImage.AlphaBlendImages();
+            var scaledBitmap = SafeCopyBitmap(blendedImage);
+            blendedImage.Dispose();
+
+            return scaledBitmap;
         }
 
         internal static Bitmap ScaleBitmap(Bitmap bitmap, int newWidth, int newHeight)
@@ -488,6 +504,18 @@ namespace MusicBeePlugin
             {
                 gfx.InterpolationMode = InterpolationMode.HighQualityBicubic;
                 gfx.DrawImage(bitmap, -1, -1, newWidth + 1, newHeight + 1);
+            }
+
+            return scaledBitmap;
+        }
+
+        internal static Bitmap SafeCopyBitmap(Bitmap bitmap)
+        {
+            var scaledBitmap = new Bitmap(bitmap.Width, bitmap.Height, bitmap.PixelFormat);
+            using (var gfx = Graphics.FromImage(scaledBitmap))
+            {
+                gfx.InterpolationMode = InterpolationMode.NearestNeighbor;
+                gfx.DrawImage(bitmap, 0, 0, bitmap.Width, bitmap.Height);
             }
 
             return scaledBitmap;

@@ -207,7 +207,7 @@ namespace MusicBeePlugin
             anotherLrPresetCompleteTimer.Dispose();
 
             while (LibraryReportsCommandForFunctionIds.backgroundTaskIsScheduled)
-                Thread.Sleep(500);
+                Thread.Sleep(ActionRetryDelay);
 
             Close();
         }

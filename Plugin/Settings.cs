@@ -2,7 +2,6 @@
 using System;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using MusicBeePlugin.Properties;
 using static MusicBeePlugin.Plugin;
 
 namespace MusicBeePlugin
@@ -161,6 +160,7 @@ namespace MusicBeePlugin
             else if (SavedSettings.useCustomFont && SavedSettings.pluginFontStyle != customFont.Style)
                 SizesColorsChanged = true;
 
+
             SavedSettings.allowAsrLrPresetAutoExecution = allowAsrLrPresetAutoExecutionCheckBox.Checked;
             SavedSettings.allowCommandExecutionWithoutPreview = allowCommandExecutionWithoutPreviewCheckBox.Checked;
 
@@ -206,6 +206,9 @@ namespace MusicBeePlugin
             SavedSettings.unitK = unitKBox.Text;
             SavedSettings.unitM = unitMBox.Text;
             SavedSettings.unitG = unitGBox.Text;
+
+            TagToolsPlugin.getButtonTextBoxDpiFontScaling();
+            TagToolsPlugin.prepareThemedBitmapsAndColors();
 
             TagToolsPlugin.SaveSettings();
 

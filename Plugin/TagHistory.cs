@@ -231,7 +231,7 @@ namespace MusicBeePlugin
                     fillTagNamesInTableInternal(i, reuseTagValues);
             }
 
-            UpdateCustomScrollBars(previewTable);
+            updateCustomScrollBars(previewTable);
         }
 
         private void fillTagNamesInTableInternal(int trackIndex, bool reuseTagValues)
@@ -862,7 +862,7 @@ namespace MusicBeePlugin
                 }
             }
 
-            UpdateCustomScrollBars(previewTable);
+            updateCustomScrollBars(previewTable);
         }
 
         private void previewTableCellFormatting(int trackIndex, int columnIndex, int rowIndex)

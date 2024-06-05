@@ -205,7 +205,7 @@ namespace MusicBeePlugin
                     }
                 }
 
-                UpdateCustomScrollBars(previewTable);
+                updateCustomScrollBars(previewTable);
             }
             else
             {

@@ -38,13 +38,15 @@ namespace MusicBeePlugin
 
         internal static int GetCustomScrollBarInitialWidth(float dpiScaling, int sbBorderWidth)
         {
-            return (int)Math.Round(dpiScaling * (Plugin.ScrollBarWidth + 2 * sbBorderWidth));
+            return (int)Math.Round(dpiScaling * Plugin.ScrollBarWidth) + 2 * (int)Math.Round(dpiScaling * sbBorderWidth);
         }
 
         internal static TextBox CreateMusicBeeTextBox()
         {
             var textBox = (TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-            textBox.Resize += TextBox_Resize;
+
+            if (!Plugin.SavedSettings.dontUseSkinColors)
+                textBox.Resize += TextBox_Resize;
 
             return textBox;
         }
@@ -140,6 +142,10 @@ namespace MusicBeePlugin
 
         public TextBoxBorder(TextBox textBox)
         {
+            if (Plugin.SavedSettings.dontUseSkinColors)
+                return;
+
+
             this.textBox = textBox;
 
             ControlsTools.TextBox_Resize(textBox, null);
@@ -300,7 +306,7 @@ namespace MusicBeePlugin
             tableLayoutPanel.RowStyles.Add(rowStyle1);
 
             
-            listBox = new CustomListBox(customScrollBarInitialWidth - (int)Math.Round(ownerForm.dpiScaling * 3 - 2.9f), scaledPx, false, 
+            listBox = new CustomListBox(customScrollBarInitialWidth - (int)Math.Round((ownerForm.dpiScaling - 1) * 8), scaledPx, false, 
                 Plugin.ScrollBarBackColor, Plugin.ScrollBarBackColor, Plugin.ScrollBarBackColor);
 
             listBox.Font = Font;
@@ -332,7 +338,6 @@ namespace MusicBeePlugin
 
             EnabledChanged += OnEnabledChanged;
             VisibleChanged += OnVisibleChanged;
-            Paint += (sender, args) => { ControlsTools.DrawBorder(this, borderColor, borderColorActive, borderColorDisabled); };
         }
 
         public CustomComboBox(PluginWindowTemplate ownerForm, ComboBox comboBoxRef, bool skinned, Color borderColor, Color borderColorDisabled, Color borderColorActive)
@@ -346,6 +351,8 @@ namespace MusicBeePlugin
 
         private void init(PluginWindowTemplate ownerForm, ComboBox comboBox)
         {
+            this.Paint += (sender, args) => { ControlsTools.DrawBorder(this, borderColor, borderColorActive, borderColorDisabled); };
+            
             scaledPx = ownerForm.scaledPx;
             textBox = null;
             button = null;
@@ -421,8 +428,8 @@ namespace MusicBeePlugin
             this.comboBox = null;
 
             initialDropDownWidth = comboBox.DropDownWidth;
-            if (comboBox.DropDownWidth < comboBox.Width)
-                initialDropDownWidth = comboBox.Width;
+            //if (comboBox.DropDownWidth < comboBox.Width)
+            //    initialDropDownWidth = comboBox.Width;
 
             var dropDownWidth = comboBox.DropDownWidth;
             if (comboBox.DropDownWidth < comboBox.Width)
@@ -485,7 +492,7 @@ namespace MusicBeePlugin
             button.Text = string.Empty;
             button.ImageAlign = ContentAlignment.MiddleCenter;
             button.TextImageRelation = TextImageRelation.Overlay;
-            button.Image = Plugin.ReplaceBitmap(button.Image, Plugin.DownArrowComboBoxImage);
+            button.Image = Plugin.CopyBitmap(Plugin.DownArrowComboBoxImage);
             button.TabStop = false;
 
             //button.Click += button_Click;//****
@@ -541,8 +548,7 @@ namespace MusicBeePlugin
             listBox.Click += listBox_ItemChosen;
             listBox.ItemsChanged += listBox_ItemsChanged;
 
-            listBox.MinimumSize = new Size(dropDownWidth, 2);
-            listBox.MaximumSize = new Size(dropDownWidth, initialDropDownHeight);
+            listBox.AdjustHeight(dropDownWidth, initialDropDownHeight);
 
 
             CopyComboBoxEventHandlers(comboBox, this);
@@ -984,15 +990,7 @@ namespace MusicBeePlugin
 
         private void customComboBox_SizeChanged(object sender, EventArgs e)
         {
-            if (comboBox == null)
-            {
-                var dropDownWidth = Width;
-                if (dropDownWidth < initialDropDownWidth)
-                    dropDownWidth = initialDropDownWidth;
-
-                listBox.AdjustHeight(dropDownWidth, initialDropDownHeight);
-            }
-            else
+            if (comboBox != null)
             {
                 if (Width < initialDropDownWidth)
                     comboBox.DropDownWidth = initialDropDownWidth;
@@ -1058,6 +1056,16 @@ namespace MusicBeePlugin
 
             if (DateTime.UtcNow - dropDownClosedTime > DropDownAutoCloseThreshold)
             {
+                var dropDownWidth = Width;
+                if (dropDownWidth < initialDropDownWidth)
+                    dropDownWidth = initialDropDownWidth;
+
+                if (listBox.GetItemsHeight() > initialDropDownHeight)
+                    listBox.AdjustWidth(dropDownWidth, true);
+                else
+                    listBox.AdjustWidth(dropDownWidth, false);
+
+
                 listBox.SelectedIndex = lastSelectedIndex;
 
                 var textBoxScreenLocation = textBox.PointToScreen(textBox.Location);
@@ -1202,11 +1210,17 @@ namespace MusicBeePlugin
             this.borderColor = borderColor;
         }
 
+        public int GetItemsHeight()
+        {
+            return ItemHeight * Items.Count + 3 * scaledPx;
+        }
+
         public void AdjustHeight(int dropDownWidth, int initialDropDownHeight)
         {
             if (scaledPx > 0)
             {
-                var itemsHeight = ItemHeight * Items.Count + 3 * scaledPx;
+                bool scrollBarVisible;
+                var itemsHeight = GetItemsHeight();
 
                 if (itemsHeight > initialDropDownHeight)
                 {
@@ -1223,7 +1237,7 @@ namespace MusicBeePlugin
                         vScrollBar.ResetMetricsSize(initialDropDownHeight);
                     }
 
-                    vScrollBar.Visible = true;
+                    scrollBarVisible = true;
                 }
                 else
                 {
@@ -1238,25 +1252,32 @@ namespace MusicBeePlugin
                         Height = itemsHeight;
                     }
 
-                    vScrollBar.Visible = false;
+                    scrollBarVisible = false;
                 }
 
-
-                if (vScrollBar.Visible)
-                {
-                    MinimumSize = new Size(dropDownWidth - customScrollBarInitialWidth, 2);
-                    MaximumSize = new Size(dropDownWidth - customScrollBarInitialWidth, MaximumSize.Height);
-                }
-                else
-                {
-                    MinimumSize = new Size(dropDownWidth, 2);
-                    MaximumSize = new Size(dropDownWidth, MaximumSize.Height);
-                }
+                vScrollBar.Visible = scrollBarVisible;
+                AdjustWidth(dropDownWidth, scrollBarVisible);
 
 
-                if (Width != MinimumSize.Width)
-                    Width = MinimumSize.Width;
             }
+        }
+
+        public void AdjustWidth(int dropDownWidth, bool scrollBarVisible)
+        {
+            if (scrollBarVisible)
+            {
+                MinimumSize = new Size(dropDownWidth - customScrollBarInitialWidth, 2);
+                MaximumSize = new Size(dropDownWidth - customScrollBarInitialWidth, MaximumSize.Height);
+            }
+            else
+            {
+                MinimumSize = new Size(dropDownWidth, 2);
+                MaximumSize = new Size(dropDownWidth, MaximumSize.Height);
+            }
+
+
+            if (Width != MinimumSize.Width)
+                Width = MinimumSize.Width;
         }
 
         protected override CreateParams CreateParams
@@ -1265,11 +1286,13 @@ namespace MusicBeePlugin
             {
                 var cp = base.CreateParams;
 
-                cp.ExStyle &= ~WS_EX_CLIENTEDGE;
-                cp.Style |= WS_BORDER;
-
                 if (!showScroll)
+                {
+                    cp.ExStyle &= ~WS_EX_CLIENTEDGE;
+                    cp.Style |= WS_BORDER;
+
                     cp.Style = cp.Style & ~WS_HSCROLL & ~WS_VSCROLL;
+                }
 
                 return cp;
             }
@@ -1312,7 +1335,7 @@ namespace MusicBeePlugin
                 if (ItemsChanged != null)
                     ItemsChanged(this, EventArgs.Empty); //-V3083
 
-            if (m.Msg == WM_NCPAINT) 
+            if (m.Msg == WM_NCPAINT && !showScroll) 
             {
                 WmNcPaint(ref m);
                 return;
@@ -1408,11 +1431,13 @@ namespace MusicBeePlugin
             {
                 var cp = base.CreateParams;
 
-                cp.ExStyle &= ~WS_EX_CLIENTEDGE;
-                cp.Style |= WS_BORDER;
-
                 if (!showScroll)
+                {
+                    cp.ExStyle &= ~WS_EX_CLIENTEDGE;
+                    cp.Style |= WS_BORDER;
+
                     cp.Style = cp.Style & ~WS_HSCROLL & ~WS_VSCROLL;
+                }
 
                 return cp;
             }
@@ -1455,7 +1480,7 @@ namespace MusicBeePlugin
                 if (ItemsChanged != null)
                     ItemsChanged(this, EventArgs.Empty); //-V3083
 
-            if (m.Msg == WM_NCPAINT) 
+            if (m.Msg == WM_NCPAINT && !showScroll) 
             {
                 WmNcPaint(ref m);
                 return;
@@ -1532,8 +1557,8 @@ namespace MusicBeePlugin
 
         public Control ScrolledControl;
 
+        private Control refScrollBar;
         private readonly GetScrollBarMetricsDelegate GetExternalMetrics;
-        private readonly Control refScrollBar;
 
         //private Image moUpArrowImage_Over;
         //private Image moUpArrowImage_Down;
@@ -1637,17 +1662,15 @@ namespace MusicBeePlugin
             scrollBarThumbAndSpansBorderColor = Plugin.ScrollBarThumbAndSpansBorderColor;
 
 
-            UpArrowImage = Plugin.ReplaceBitmap(UpArrowImage, Plugin.UpArrowImage);
-            DownArrowImage = Plugin.ReplaceBitmap(DownArrowImage, Plugin.DownArrowImage);
+            UpArrowImage = Plugin.CopyBitmap(Plugin.UpArrowImage);
+            DownArrowImage = Plugin.CopyBitmap(Plugin.DownArrowImage);
 
-            ThumbTopImage = Plugin.ReplaceBitmap(ThumbTopImage, Plugin.ThumbTopImage);
-            ThumbMiddleImage = Plugin.ReplaceBitmap(ThumbMiddleImage, Plugin.ThumbMiddleVerticalImage);
-            ThumbBottomImage = Plugin.ReplaceBitmap(ThumbBottomImage, Plugin.ThumbBottomImage);
+            ThumbTopImage = Plugin.CopyBitmap(Plugin.ThumbTopImage);
+            ThumbMiddleImage = Plugin.CopyBitmap(Plugin.ThumbMiddleVerticalImage);
+            ThumbBottomImage = Plugin.CopyBitmap(Plugin.ThumbBottomImage);
 
             GetExternalMetrics = getScrollBarMetrics;
             ScrolledControl = scrolledControl;
-
-            this.refScrollBar = refScrollBar ?? this;
 
             if (borderWidth == -1)
             {
@@ -1672,6 +1695,7 @@ namespace MusicBeePlugin
 
             if (refScrollBar != null) //scrolledControlIsParent has own scroll bar CONTROLS, which must be replaced
             {
+                this.refScrollBar = refScrollBar;
                 Visible = false;
 
                 reservedBordersSpace = 2 * scaledPx;
@@ -1696,6 +1720,7 @@ namespace MusicBeePlugin
             }
             else //custom scroll bars will be placed on the right to/below scrolledControlIsParent in the tableLayoutPanel
             {
+                this.refScrollBar = this;
                 Visible = true;
 
                 reservedBordersSpace = 0;
@@ -2042,7 +2067,7 @@ namespace MusicBeePlugin
             //draw top image
             //+1 scaled px nTop offset due to scroll bar top border
             //-2 scaled px of width for scroll bar left/right borders
-            e.Graphics.DrawImage(upArrowImageArg, new Rectangle(new Point(sbBorderWidth + offsetX,
+            e.Graphics.DrawImage(upArrowImageArg, new Rectangle(new Point(offsetX + (initialWidth - upArrowImageArg.Width) / 2, 
                 sbBorderWidth + upImageAdditionalTopHeight),
                 new Size(upArrowImageArg.Width, upArrowImageArg.Height)));
 
@@ -2069,20 +2094,21 @@ namespace MusicBeePlugin
                 {
                     if (thumbTopImageArg != null)
                     {
-                        e.Graphics.DrawImage(thumbTopImageArg, new Rectangle(sbBorderWidth + offsetX, nTop,
+                        e.Graphics.DrawImage(thumbTopImageArg, new Rectangle(offsetX + (initialWidth - thumbTopImageArg.Width) / 2, nTop,
                             thumbTopImageArg.Width, thumbTopImageArg.Height));
                     }
 
                     nTop += thumbTopBottomImageHeight;
 
-                    Plugin.DrawRepeatedImage(e.Graphics, thumbMiddleImageArg, sbBorderWidth + offsetX, nTop,
+                    Plugin.DrawRepeatedImage(e.Graphics, thumbMiddleImageArg, offsetX 
+                        + (int)Math.Round((initialWidth - 1.375d * thumbMiddleImageArg.Width) / 2), nTop,
                         thumbMiddleImageArg.Width, nThumbHeight - 2 * thumbTopBottomImageHeight, true, false);
 
                     nTop += nThumbHeight - 2 * thumbTopBottomImageHeight;
 
                     if (thumbTopImageArg != null) //Both thumbTopImageArg & thumbBottomImageArg must be null if thumbTopImageArg is null
                     {
-                        e.Graphics.DrawImage(thumbBottomImageArg, new Rectangle(sbBorderWidth + offsetX, nTop,
+                        e.Graphics.DrawImage(thumbBottomImageArg, new Rectangle(offsetX + (initialWidth - thumbBottomImageArg.Width) / 2, nTop,
                         thumbBottomImageArg.Width, thumbBottomImageArg.Height));
                     }
                 }
@@ -2090,7 +2116,8 @@ namespace MusicBeePlugin
                 {
                     nTop += nSpanHeight;
 
-                    e.Graphics.DrawImage(thumbMiddleImageArg, new Rectangle(sbBorderWidth + offsetX, nTop,
+                    e.Graphics.DrawImage(thumbMiddleImageArg, new Rectangle(offsetX 
+                        + (int)Math.Round((initialWidth - 1.375d * thumbMiddleImageArg.Width) / 2), nTop,
                         thumbMiddleImageArg.Width, thumbMiddleImageArg.Height));
                 }
             }
@@ -2107,7 +2134,7 @@ namespace MusicBeePlugin
             //draw bottom image
             //-1 scaled px vertical offset due to scroll bar bottom border
             //-2 scaled px of width for scroll bar left/right borders
-            e.Graphics.DrawImage(downArrowImageArg, new Rectangle(new Point(sbBorderWidth + offsetX,
+            e.Graphics.DrawImage(downArrowImageArg, new Rectangle(new Point(offsetX + (initialWidth - downArrowImageArg.Width) / 2,
                 Height - downArrowImageArg.Height
                 - upImageAdditionalTopHeight - sbBorderWidth),
                 new Size(downArrowImageArg.Width, downArrowImageArg.Height)));
@@ -2343,8 +2370,8 @@ namespace MusicBeePlugin
 
         public Control ScrolledControl;
 
+        private Control refScrollBar;
         private readonly GetScrollBarMetricsDelegate GetExternalMetrics;
-        private readonly Control refScrollBar;
 
         //private Image moLeftArrowImage_Over;
         //private Image moLeftArrowImage_Right;
@@ -2447,17 +2474,15 @@ namespace MusicBeePlugin
             scrollBarThumbAndSpansBorderColor = Plugin.ScrollBarThumbAndSpansBorderColor;
 
 
-            LeftArrowImage = Plugin.ReplaceBitmap(LeftArrowImage, Plugin.LeftArrowImage);
-            RightArrowImage = Plugin.ReplaceBitmap(RightArrowImage, Plugin.RightArrowImage);
+            LeftArrowImage = Plugin.CopyBitmap(Plugin.LeftArrowImage);
+            RightArrowImage = Plugin.CopyBitmap(Plugin.RightArrowImage);
 
-            ThumbLeftImage = Plugin.ReplaceBitmap(ThumbLeftImage, Plugin.ThumbLeftImage);
-            ThumbMiddleImage = Plugin.ReplaceBitmap(ThumbMiddleImage, Plugin.ThumbMiddleHorizontalImage);
-            ThumbRightImage = Plugin.ReplaceBitmap(ThumbRightImage, Plugin.ThumbRightImage);
+            ThumbLeftImage = Plugin.CopyBitmap(Plugin.ThumbLeftImage);
+            ThumbMiddleImage = Plugin.CopyBitmap(Plugin.ThumbMiddleHorizontalImage);
+            ThumbRightImage = Plugin.CopyBitmap(Plugin.ThumbRightImage);
 
             GetExternalMetrics = getScrollBarMetrics;
             ScrolledControl = scrolledControl;
-
-            this.refScrollBar = refScrollBar ?? this;
 
             var dpiScaling = (ownerForm as PluginWindowTemplate).dpiScaling;
             scaledPx = (ownerForm as PluginWindowTemplate).scaledPx;
@@ -2472,6 +2497,7 @@ namespace MusicBeePlugin
 
             if (refScrollBar != null) //scrolledControlIsParent has own scroll bar CONTROLS, which must be replaced
             {
+                this.refScrollBar = refScrollBar;
                 Visible = false;
 
                 sbBorderWidth = 0;
@@ -2497,6 +2523,7 @@ namespace MusicBeePlugin
             }
             else //custom scroll bars will be placed on the right to/below scrolledControlIsParent
             {
+                this.refScrollBar = this;
                 Visible = true;
 
                 sbBorderWidth = Plugin.SbBorderWidth;
@@ -2838,7 +2865,7 @@ namespace MusicBeePlugin
             //+1 scaled px nLeft offset due to scroll bar left border
             //-2 scaled px of height for scroll bar top/bottom borders
             e.Graphics.DrawImage(leftArrowImageArg, new Rectangle(new Point(sbBorderWidth + leftImageAdditionalLeftWidth,
-                sbBorderWidth + offsetY),
+                offsetY + (initialHeight - leftArrowImageArg.Height) / 2),
                 new Size(leftArrowImageArg.Width, leftArrowImageArg.Height)));
 
             var nLeft = thumbLeft;
@@ -2864,20 +2891,21 @@ namespace MusicBeePlugin
                 {
                     if (thumbLeftImageArg != null)
                     {
-                        e.Graphics.DrawImage(thumbLeftImageArg, new Rectangle(nLeft, sbBorderWidth + offsetY,
+                        e.Graphics.DrawImage(thumbLeftImageArg, new Rectangle(nLeft, offsetY + (initialHeight - leftArrowImageArg.Height) / 2,
                             thumbLeftImageArg.Width, thumbLeftImageArg.Height));
                     }
 
                     nLeft += thumbLeftRightImageWidth;
 
-                    Plugin.DrawRepeatedImage(e.Graphics, thumbMiddleImageArg, nLeft, sbBorderWidth + offsetY,
+                    Plugin.DrawRepeatedImage(e.Graphics, thumbMiddleImageArg, nLeft, 
+                        offsetY + (int)Math.Round((initialHeight - 1.375d * thumbMiddleImageArg.Height) / 2),
                         nThumbWidth - 2 * thumbLeftRightImageWidth, thumbMiddleImageArg.Height, false, true);
 
                     nLeft += nThumbWidth - 2 * thumbLeftRightImageWidth;
 
                     if (thumbLeftImageArg != null) //Both thumbLeftImageArg & thumbRightImageArg must be null if thumbLeftImageArg is null
                     {
-                        e.Graphics.DrawImage(thumbRightImageArg, new Rectangle(nLeft, sbBorderWidth + offsetY,
+                        e.Graphics.DrawImage(thumbRightImageArg, new Rectangle(nLeft, offsetY + (initialHeight - leftArrowImageArg.Height) / 2,
                         thumbRightImageArg.Width, thumbRightImageArg.Height));
                     }
                 }
@@ -2885,7 +2913,8 @@ namespace MusicBeePlugin
                 {
                     nLeft += nSpanWidth;
 
-                    e.Graphics.DrawImage(thumbMiddleImageArg, new Rectangle(nLeft, sbBorderWidth + offsetY,
+                    e.Graphics.DrawImage(thumbMiddleImageArg, new Rectangle(nLeft, 
+                        offsetY + (int)Math.Round((initialHeight - 1.375d * thumbMiddleImageArg.Height) / 2),
                         thumbMiddleImageArg.Width, thumbMiddleImageArg.Height));
                 }
             }
@@ -2903,7 +2932,7 @@ namespace MusicBeePlugin
             //-1 scaled px Horizontal offset due to scroll bar right border
             //-2 scaled px of height for scroll bar top/bottom borders
             e.Graphics.DrawImage(rightArrowImageArg, new Rectangle(new Point(Width - rightArrowImageArg.Width
-                - leftImageAdditionalLeftWidth - sbBorderWidth, sbBorderWidth + offsetY),
+                - leftImageAdditionalLeftWidth - sbBorderWidth, offsetY + (initialHeight - leftArrowImageArg.Height) / 2),
                 new Size(rightArrowImageArg.Width, rightArrowImageArg.Height)));
         }
 

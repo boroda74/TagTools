@@ -107,7 +107,7 @@ namespace MusicBeePlugin
             addRowToTable = previewTable_AddRowToTable;
             processRowOfTable = previewTable_ProcessRowOfTable;
 
-            updateCustomScrollBars = UpdateCustomScrollBars;
+            this.updateCustomScrollBars = base.updateCustomScrollBars;
 
 
             enableDisablePreviewOptionControls(true, true);
@@ -122,7 +122,7 @@ namespace MusicBeePlugin
             previewTableFormatRow(previewTable.RowCount - 1);
 
             if ((previewTable.RowCount & 0x1f) == 0)
-                UpdateCustomScrollBars(previewTable);
+                base.updateCustomScrollBars(this.previewTable);
         }
 
         private void previewTable_ProcessRowOfTable(int rowIndex)
@@ -150,7 +150,7 @@ namespace MusicBeePlugin
             previewTable.RowCount = 0;
             (previewTable.Columns[0].HeaderCell as DataGridViewCheckBoxHeaderCell).setState(true);
 
-            UpdateCustomScrollBars(previewTable);
+            base.updateCustomScrollBars(this.previewTable);
 
             if (previewIsGenerated)
             {

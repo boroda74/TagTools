@@ -283,12 +283,15 @@ namespace MusicBeePlugin
         internal LibraryReports(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
-
         }
 
         protected override void initializeForm()
         {
             base.initializeForm();
+
+
+            previewTable.ColumnWidthChanged += previewTable_ColumnWidthChanged;
+
             Enable(false, autoApplyPresetsLabel);
 
 
@@ -336,9 +339,11 @@ namespace MusicBeePlugin
                 DontUseSplitter = (multipleItemsSplitterComboBoxCustom.Items[0] as string).TrimStart(' ');
 
             //Setting themed images
+            buttonLabels[buttonClearExpression] = string.Empty;
             buttonClearExpression.Text = string.Empty;
             buttonClearExpression.Image = ReplaceBitmap(buttonClearExpression.Image, ClearField);
 
+            buttonLabels[clearIdButton] = string.Empty;
             clearIdButton.Text = string.Empty;
             clearIdButton.Image = ReplaceBitmap(clearIdButton.Image, ClearField);
 
@@ -1937,7 +1942,7 @@ namespace MusicBeePlugin
                     catch
                     {
                         //Let's retry...
-                        Thread.Sleep(500);
+                        Thread.Sleep(ActionRetryDelay);
                     }
                 }
 
@@ -1986,7 +1991,7 @@ namespace MusicBeePlugin
                 }
             }
 
-            UpdateCustomScrollBars(previewTable);
+            updateCustomScrollBars(previewTable);
         }
 
         private void previewTable_UpdateTable()
@@ -2010,11 +2015,11 @@ namespace MusicBeePlugin
                 catch
                 {
                     //Let's retry...
-                    Thread.Sleep(500);
+                    Thread.Sleep(ActionRetryDelay);
                 }
             }
 
-            UpdateCustomScrollBars(previewTable);
+            updateCustomScrollBars(previewTable);
 
             if (previewTable.RowCount > 0)
                 previewTable.CurrentCell = previewTable.Rows[0].Cells[0];
@@ -2046,10 +2051,10 @@ namespace MusicBeePlugin
             expressionsDataGridView.RowCount = 0;
 
 
-            UpdateCustomScrollBars(presetList);
-            UpdateCustomScrollBars(previewTable);
-            UpdateCustomScrollBars(tagsDataGridView);
-            UpdateCustomScrollBars(expressionsDataGridView);
+            updateCustomScrollBars(presetList);
+            updateCustomScrollBars(previewTable);
+            updateCustomScrollBars(tagsDataGridView);
+            updateCustomScrollBars(expressionsDataGridView);
 
 
             expressionBackup = string.Empty;
@@ -3924,7 +3929,7 @@ namespace MusicBeePlugin
 
 
                 if (BackgroundTaskIsInProgress) //-V3029
-                    Thread.Sleep(500);//****
+                    Thread.Sleep(ActionRetryDelay);
 
                 if (BackgroundTaskIsInProgress)
                     goto loop_end;
@@ -4720,7 +4725,7 @@ namespace MusicBeePlugin
                 backgroundTaskIsCanceled = true;
 
                 while (BackgroundTaskIsInProgress) 
-                    Thread.Sleep(500);
+                    Thread.Sleep(ActionRetryDelay);
 
                 backgroundTaskIsCanceled = false;
             }
@@ -4738,11 +4743,11 @@ namespace MusicBeePlugin
                     catch
                     {
                         //Let's retry...
-                        Thread.Sleep(500);
+                        Thread.Sleep(ActionRetryDelay);
                     }
                 }
 
-                UpdateCustomScrollBars(previewTable);
+                updateCustomScrollBars(previewTable);
             }
 
             if (previewIsGenerated)
@@ -5955,14 +5960,14 @@ namespace MusicBeePlugin
 
             if (backgroundTaskIsWorking())
             {
-                UpdateCustomScrollBars(previewTable);
+                updateCustomScrollBars(previewTable);
 
                 return;
             }
 
             if (previewTable.ColumnCount == 0)
             {
-                UpdateCustomScrollBars(previewTable);
+                updateCustomScrollBars(previewTable);
 
                 //MessageBox.Show(this, plugin.msgNoTagsSelected);
                 return;
@@ -5983,7 +5988,7 @@ namespace MusicBeePlugin
 
             resultsAreFiltered = !resultsAreFiltered;
 
-            UpdateCustomScrollBars(previewTable);
+            updateCustomScrollBars(previewTable);
 
             buttonFilterResultsChangeLabel();
         }
@@ -6196,9 +6201,9 @@ namespace MusicBeePlugin
                 setColumnSaved();
                 setPresetChanged();
 
-                UpdateCustomScrollBars(previewTable);
-                UpdateCustomScrollBars(tagsDataGridView);
-                UpdateCustomScrollBars(expressionsDataGridView);
+                updateCustomScrollBars(previewTable);
+                updateCustomScrollBars(tagsDataGridView);
+                updateCustomScrollBars(expressionsDataGridView);
             }
         }
 
@@ -6218,9 +6223,9 @@ namespace MusicBeePlugin
                         var attribs = groupingsDict[id];
                         removeColumn(attribs.parameterName, null, LrFunctionType.Grouping, attribs.splitter, attribs.trimValues, attribs.expression);
 
-                        UpdateCustomScrollBars(previewTable);
-                        UpdateCustomScrollBars(tagsDataGridView);
-                        UpdateCustomScrollBars(expressionsDataGridView);
+                        updateCustomScrollBars(previewTable);
+                        updateCustomScrollBars(tagsDataGridView);
+                        updateCustomScrollBars(expressionsDataGridView);
                     }
                 }
                 else
@@ -6231,9 +6236,9 @@ namespace MusicBeePlugin
                         var attribs = functionsDict[id];
                         removeColumn(attribs.parameterName, attribs.parameter2Name, attribs.functionType, null, false, attribs.expression);
 
-                        UpdateCustomScrollBars(previewTable);
-                        UpdateCustomScrollBars(tagsDataGridView);
-                        UpdateCustomScrollBars(expressionsDataGridView);
+                        updateCustomScrollBars(previewTable);
+                        updateCustomScrollBars(tagsDataGridView);
+                        updateCustomScrollBars(expressionsDataGridView);
                     }
                 }
             }
@@ -6267,7 +6272,7 @@ namespace MusicBeePlugin
 
             enableDisablePreviewOptionControls(true);
 
-            UpdateCustomScrollBars(expressionsDataGridView);
+            updateCustomScrollBars(expressionsDataGridView);
         }
 
         private void tagsDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -6342,9 +6347,9 @@ namespace MusicBeePlugin
                 var expression = (string)expressionsDataGridView.Rows[e.RowIndex].Cells[1].Tag;
                 removeColumn(commonAttr.parameterName, commonAttr.parameter2Name, commonAttr.functionType, commonAttr.splitter, commonAttr.trimValues, expression);
 
-                UpdateCustomScrollBars(previewTable);
-                UpdateCustomScrollBars(tagsDataGridView);
-                UpdateCustomScrollBars(expressionsDataGridView);
+                updateCustomScrollBars(previewTable);
+                updateCustomScrollBars(tagsDataGridView);
+                updateCustomScrollBars(expressionsDataGridView);
             }
         }
 
@@ -6616,10 +6621,10 @@ namespace MusicBeePlugin
                 
                 Enable(true, autoApplyPresetsLabel);
 
-                UpdateCustomScrollBars(presetList);
-                UpdateCustomScrollBars(previewTable);
-                UpdateCustomScrollBars(tagsDataGridView);
-                UpdateCustomScrollBars(expressionsDataGridView);
+                updateCustomScrollBars(presetList);
+                updateCustomScrollBars(previewTable);
+                updateCustomScrollBars(tagsDataGridView);
+                updateCustomScrollBars(expressionsDataGridView);
 
                 return;
             }
@@ -6762,10 +6767,10 @@ namespace MusicBeePlugin
 
             Enable(true, autoApplyPresetsLabel);
 
-            UpdateCustomScrollBars(presetList);
-            UpdateCustomScrollBars(previewTable);
-            UpdateCustomScrollBars(tagsDataGridView);
-            UpdateCustomScrollBars(expressionsDataGridView);
+            updateCustomScrollBars(presetList);
+            updateCustomScrollBars(previewTable);
+            updateCustomScrollBars(tagsDataGridView);
+            updateCustomScrollBars(expressionsDataGridView);
         }
 
         private void conditionCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -7286,6 +7291,8 @@ namespace MusicBeePlugin
 
                 previewTable.AutoResizeRows();
             }
+
+            updateCustomScrollBars(previewTable);
         }
 
         private void previewTable_RowHeightChanged(object sender, DataGridViewRowEventArgs e)
@@ -7300,6 +7307,8 @@ namespace MusicBeePlugin
                     if (i != e.Row.Index && previewTable.Rows[i].Height < e.Row.Height)
                         previewTable.Rows[i].Height = e.Row.Height;
             }
+
+            updateCustomScrollBars(previewTable);
         }
 
         private void smartOperationCheckBoxLabel_Click(object sender, EventArgs e)
