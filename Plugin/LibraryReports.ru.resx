@@ -759,6 +759,30 @@
         ngDxxx4A8MYeAPBMPgD4AD4A/AB+AP8B/gD///4A///+AP///gA=
 </value>
   </data>
+  <data name="hidePreviewCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>514, 9</value>
+  </data>
+  <data name="hidePreviewCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>132, 15</value>
+  </data>
+  <data name="hidePreviewCheckBoxLabel.Text" xml:space="preserve">
+    <value>Скрыть предпросмотр</value>
+  </data>
+  <data name="hidePreviewCheckBoxLabel.ToolTip" xml:space="preserve">
+    <value>Используйте эту опцию для очень больших отчетов, чтобы избежать исключений «Недостаточно памяти»
+Также эта опция значительно ускоряет вычисление отчета
+Отчет будет создан, но не будет отображен
+Вы сможете экспортировать созданный отчет в файл как обычно</value>
+  </data>
+  <data name="hidePreviewCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>494, 9</value>
+  </data>
+  <data name="hidePreviewCheckBox.ToolTip" xml:space="preserve">
+    <value>Используйте эту опцию для очень больших отчетов, чтобы избежать исключений «Недостаточно памяти»
+Также эта опция значительно ускоряет вычисление отчета
+Отчет будет создан, но не будет отображен
+Вы сможете экспортировать созданный отчет в файл как обычно</value>
+  </data>
   <data name="presetChainIsWrongPictureBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>618, 63</value>
   </data>
@@ -1218,6 +1242,11 @@
   </data>
   <data name="tagsDataGridView.Size" type="System.Drawing.Size, System.Drawing">
     <value>765, 100</value>
+  </data>
+  <data name="tagsDataGridView.ToolTip" xml:space="preserve">
+    <value>Порядок колонок в отчете соответствует порядку, в котором они были добавлены, но 
+эта таблица отсортирована в алфавитном порядке для упрощения навигации. Не перепутайте. 
+Смотрите реальный порядок колонок в таблице предварительного просмотра.</value>
   </data>
   <data name="expressionTextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>189, 34</value>

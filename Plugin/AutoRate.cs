@@ -106,7 +106,7 @@ namespace MusicBeePlugin
 
             storePlaysPerDayCheckBox.Checked = SavedSettings.storePlaysPerDay;
             autoRateAtStartUpCheckBox.Checked = SavedSettings.autoRateAtStartUp;
-            notifyWhenAutoRatingCompletedCheckBox.Checked = SavedSettings.notifyWhenAutoratingCompleted;
+            notifyWhenAutoRatingCompletedCheckBox.Checked = SavedSettings.notifyWhenAutoRatingCompleted;
             calculateThresholdsAtStartUpCheckBox.Checked = SavedSettings.calculateThresholdsAtStartUp;
 
             autoRateOnTrackPropertiesCheckBox.Checked = SavedSettings.autoRateOnTrackProperties;
@@ -369,7 +369,7 @@ namespace MusicBeePlugin
 
             SetResultingSbText();
 
-            if (SavedSettings.notifyWhenAutoratingCompleted) MessageBox.Show(this, MsgBackgroundTaskIsCompleted, string.Empty,
+            if (SavedSettings.notifyWhenAutoRatingCompleted) MessageBox.Show(this, MsgBackgroundTaskIsCompleted, string.Empty,
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -749,7 +749,7 @@ namespace MusicBeePlugin
             SavedSettings.playsPerDayTagId = GetTagId(playsPerDayTagListCustom.Text);
 
             SavedSettings.autoRateAtStartUp = autoRateAtStartUpCheckBox.Checked;
-            SavedSettings.notifyWhenAutoratingCompleted = notifyWhenAutoRatingCompletedCheckBox.Checked;
+            SavedSettings.notifyWhenAutoRatingCompleted = notifyWhenAutoRatingCompletedCheckBox.Checked;
             SavedSettings.calculateThresholdsAtStartUp = calculateThresholdsAtStartUpCheckBox.Checked;
             SavedSettings.autoRateOnTrackProperties = autoRateOnTrackPropertiesCheckBox.Checked;
             SavedSettings.defaultRating = baseRatingTrackBar.Value;

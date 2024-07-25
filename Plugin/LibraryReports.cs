@@ -206,7 +206,7 @@ namespace MusicBeePlugin
         private Guid lastCachedAppliedPresetGuid;
         internal ReportPreset[] reportPresets;
         private static readonly List<Guid> PresetsProcessedByFunctionCacheUpdate = new List<Guid>(); //<ReportPreset.guid>
-
+        private bool hidePreview;
 
         private bool[] columnsRightAlignment; //Cache for preview table/exported report 
         private ResultType[] columnTypes; //Cache for preview table/exported report 
@@ -332,8 +332,6 @@ namespace MusicBeePlugin
             //var addedHeight = 4; //Some appropriate value, greater than the field's default of 2
             //heightField.SetValue(presetList, addedHeight); //Where "presetList" is your CheckedListBox
 
-            previewTable.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
-
 
             if (DontUseSplitter == null)
                 DontUseSplitter = (multipleItemsSplitterComboBoxCustom.Items[0] as string).TrimStart(' ');
@@ -374,6 +372,8 @@ namespace MusicBeePlugin
                 autoApplyPresetsLabel.ForeColor = TickedColor;
             }
 
+
+            hidePreviewCheckBox.Checked = SavedSettings.hideLrPreview;
 
             //Clearing "source preset is missing" check box image
             useAnotherPresetAsSourceCheckBox.Image = Resources.transparent_15;
@@ -530,7 +530,7 @@ namespace MusicBeePlugin
             tagsDataGridView.Columns[1].Width = (int)Math.Round(tagsDataGridView.Columns[1].Width * hDpiFontScaling);
 
             presetListLastSelectedIndex = -2;
-            presetList_SelectedIndexChanged(null, null);
+            presetList_SelectedIndexChanged(null, null); //Enable(true, autoApplyPresetsLabel) is called at the end of presetList_SelectedIndexChanged(null, null)
 
 
             openReportCheckBox.Checked = SavedSettings.openReportAfterExporting;
@@ -538,9 +538,6 @@ namespace MusicBeePlugin
 
             addRowsToTable = previewTable_AddRowsToTable;
             updateTable = previewTable_UpdateTable;
-
-
-            Enable(true, autoApplyPresetsLabel);
 
 
             button_GotFocus(AcceptButton, null); //Let's mark active button
@@ -1906,6 +1903,10 @@ namespace MusicBeePlugin
 
         private void previewTable_AddRowsToTable(List<string[]> rows)
         {
+            if (hidePreview)
+                return;
+
+
             if (previewTable.RowCount == 0) //There are no rows in preview table yet, so let's adjust column text alignment according to data type
             {
                 (columnTypes, columnsRightAlignment) = getColumnTypesRightAlignment();
@@ -1996,6 +1997,10 @@ namespace MusicBeePlugin
 
         private void previewTable_UpdateTable()
         {
+            if (hidePreview)
+                return;
+
+
             bool failed = true;
             while (failed)
             {
@@ -4810,9 +4815,6 @@ namespace MusicBeePlugin
 
             backgroundTaskIsCanceled = false;
 
-            if (!checkPreview())
-                return;
-
             var j = -1;
             foreach (var attribs in groupingsDict.Values)
             {
@@ -4919,6 +4921,11 @@ namespace MusicBeePlugin
 
 
             var tags = cachedPresetsTags[selectedPreset.guid];
+            if (!checkPreview(tags))
+                return;
+
+            (_, var docColumnsRightAlignment) = getColumnTypesRightAlignment();
+
 
             //Album artists/Albums for HTML grouped by albums, Album artists/sequence number of album artist for CD Booklets [Albums]
             var albumArtistsAlbums = new SortedDictionary<string, List<string>>();
@@ -5220,10 +5227,10 @@ namespace MusicBeePlugin
                             else if (l == artworkField && selectedPreset.fileFormatIndex != LrReportFormat.HtmlDocumentByAlbums
                                 && selectedPreset.fileFormatIndex != LrReportFormat.HtmlDocument
                                 && selectedPreset.fileFormatIndex != LrReportFormat.HtmlTable) //Export image hashes
-                                document.addCellToRow(groupingsValues[artworkField], attribs.getColumnName(true, true, true), columnsRightAlignment[l],
+                                document.addCellToRow(groupingsValues[artworkField], attribs.getColumnName(true, true, true), docColumnsRightAlignment[l],
                                     l == albumArtistField, l == albumField);
                             else //It's not the artwork column
-                                document.addCellToRow(groupingsValues[l], attribs.getColumnName(true, true, true), columnsRightAlignment[l],
+                                document.addCellToRow(groupingsValues[l], attribs.getColumnName(true, true, true), docColumnsRightAlignment[l],
                                     l == albumArtistField, l == albumField);
                         }
 
@@ -5234,7 +5241,7 @@ namespace MusicBeePlugin
 
                             document.addCellToRow(AggregatedTags.GetField(keyValue.Key, keyValue.Value, groupingsDict.Count + l, groupingsDict,
                                 operations[l], mulDivFactors[l], precisionDigits[l], appendTexts[l]),
-                                attribs.getColumnName(true, true, true), columnsRightAlignment[groupingsDict.Count + l], false, false);
+                                attribs.getColumnName(true, true, true), docColumnsRightAlignment[groupingsDict.Count + l], false, false);
                         }
                     }
                     else //It's a CD booklet
@@ -5382,12 +5389,12 @@ namespace MusicBeePlugin
                 System.IO.Directory.Delete(imagesDirectoryPath, true);
         }
 
-        private bool checkPreview()
+        private bool checkPreview(AggregatedTags tags)
         {
             if (backgroundTaskIsWorking())
                 return false;
 
-            if (previewTable.RowCount == 0)
+            if (tags.Count == 0)
             {
                 MessageBox.Show(this, MsgPreviewIsNotGeneratedNothingToSave, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
@@ -5541,6 +5548,8 @@ namespace MusicBeePlugin
             if (selectedPreset == null)
                 enable = false;
 
+
+            hidePreviewCheckBox.Enable(enable && !previewIsGenerated);
 
             buttonCopyPreset.Enable(enable);
             buttonDeletePreset.Enable(enable && selectedPreset.userPreset); //-V3125
@@ -5926,6 +5935,7 @@ namespace MusicBeePlugin
 
         private void buttonPreview_Click(object sender, EventArgs e)
         {
+            hidePreview = hidePreviewCheckBox.Checked;
             clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewTrackList, buttonPreview, buttonExport, buttonClose);
         }
 
@@ -6767,6 +6777,7 @@ namespace MusicBeePlugin
 
             Enable(true, autoApplyPresetsLabel);
 
+
             updateCustomScrollBars(presetList);
             updateCustomScrollBars(previewTable);
             updateCustomScrollBars(tagsDataGridView);
@@ -7341,6 +7352,18 @@ namespace MusicBeePlugin
                 selectedPreset.fileFormatIndex = (LrReportFormat)formatComboBoxCustom.SelectedIndex + 1;
                 setPresetChanged();
             }
+        }
+
+        private void hidePreviewCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            if (hidePreviewCheckBox.IsEnabled())
+                hidePreviewCheckBox.Checked = !hidePreviewCheckBox.Checked;
+        }
+
+        private void hidePreviewCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            previewTable.Visible = !hidePreviewCheckBox.Checked;
+            SavedSettings.hideLrPreview = hidePreviewCheckBox.Checked;
         }
     }
 

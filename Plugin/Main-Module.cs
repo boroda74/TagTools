@@ -554,13 +554,14 @@ namespace MusicBeePlugin
             public string multipleItemsSplitterChar2;
 
             public string exportedLastFolder;
+            public bool hideLrPreview;
 
             public MetaDataType autoRateTagId;
             public bool storePlaysPerDay;
             public MetaDataType playsPerDayTagId;
 
             public bool autoRateAtStartUp;
-            public bool notifyWhenAutoratingCompleted;
+            public bool notifyWhenAutoRatingCompleted;
             public bool calculateThresholdsAtStartUp;
             public bool autoRateOnTrackProperties;
             public bool sinceAdded;
@@ -6571,24 +6572,45 @@ namespace MusicBeePlugin
                 return "F";
         }
 
+        private string removeLeadingZerosFromDuration(string duration)
+        {
+            if (duration.Contains('.'))
+                return duration;
+
+            if (duration.Length > 6) //e.g. > :01:22
+                duration = duration.TrimStart('0');
+
+            if (duration.StartsWith(":"))
+                duration = duration.TrimStart(':');
+            else
+                return duration;
+
+            duration = duration.TrimStart('0');
+
+            if (duration.StartsWith(":")) //e.g. :12
+                return "0" + duration;
+            else
+                return duration;
+        }
+
         public string CustomFunc_AddDuration(string duration1, string duration2)
         {
-            return (TimeSpan.Parse(duration1) + TimeSpan.Parse(duration2)).ToString();
+            return removeLeadingZerosFromDuration((TimeSpan.Parse(duration1) + TimeSpan.Parse(duration2)).ToString());
         }
 
         public string CustomFunc_SubDuration(string duration1, string duration2)
         {
-            return (TimeSpan.Parse(duration1) - TimeSpan.Parse(duration2)).ToString();
+            return removeLeadingZerosFromDuration((TimeSpan.Parse(duration1) - TimeSpan.Parse(duration2)).ToString());
         }
 
         public string CustomFunc_MulDuration(string duration, string number)
         {
-            return TimeSpan.FromMilliseconds(Math.Round(double.Parse(number) * TimeSpan.Parse(duration).TotalMilliseconds)).ToString();
+            return removeLeadingZerosFromDuration(TimeSpan.FromMilliseconds(Math.Round(double.Parse(number) * TimeSpan.Parse(duration).TotalMilliseconds)).ToString());
         }
 
         public string CustomFunc_SubDateTime(string datetime1, string datetime2)
         {
-            return (DateTime.Parse(datetime1) - DateTime.Parse(datetime2)).ToString();
+            return removeLeadingZerosFromDuration((DateTime.Parse(datetime1) - DateTime.Parse(datetime2)).ToString());
         }
 
         public string CustomFunc_NumberOfDays(string datetime1, string datetime2)
@@ -6611,63 +6633,63 @@ namespace MusicBeePlugin
             return (DateTime.Parse(datetime) - TimeSpan.Parse(duration)).ToString();
         }
 
+        public string CustomFunc_Seconds(string duration)
+        {
+            duration = Regex.Replace(duration, @"^(\d+)$", "00:00:$1");
+            duration = Regex.Replace(duration, @"^(\d+:\d+)$", "00:$1");
+            return TimeSpan.Parse(duration).TotalSeconds.ToString();
+        }
+
+        public string CustomFunc_DurationFromSeconds(string seconds)
+        {
+            string duration = TimeSpan.FromSeconds(double.Parse(seconds)).ToString();
+            return removeLeadingZerosFromDuration(duration);
+        }
+
         public string CustomFunc_Now()
         {
             return DateTime.Now.ToString();
         }
 
-        public string CustomFunc_TitleCase(string input, string exceptionWordsString, string wordSeparatorsString,
+        public string CustomFunc_TitleCase(string input, string lowerCaseWordsString, string upperCaseWordsString, string wordSeparatorsString,
             string leftExceptionCharsString, string rightExceptionCharsString, string exceptionCharsString)
         {
-            string[] exceptionWords = null;
+            string[] lowerCaseWords = null;
+            string[] upperCaseWords = null;
             string[] wordSeparators = null;
             string[] leftExceptionChars = null;
             string[] rightExceptionChars = null;
             string[] exceptionChars = null;
 
 
-            if (exceptionWordsString == @"\\")
-                exceptionWordsString = @"\";
-            else if (exceptionWordsString == @"\`")
-                exceptionWordsString = @"`";
-            else if (exceptionWordsString == @"`")
-                exceptionWordsString = null;
+            if (lowerCaseWordsString == "`")
+                lowerCaseWordsString = null;
 
-            if (wordSeparatorsString == @"\\")
-                wordSeparatorsString = @"\";
-            else if (wordSeparatorsString == @"\`")
-                wordSeparatorsString = @"`";
-            else if (wordSeparatorsString == @"`")
+            if (upperCaseWordsString == "`")
+                upperCaseWordsString = null;
+
+            if (wordSeparatorsString == "`")
                 wordSeparatorsString = null;
 
-            if (leftExceptionCharsString == @"\\")
-                leftExceptionCharsString = @"\";
-            else if (leftExceptionCharsString == @"\`")
-                leftExceptionCharsString = @"`";
-            else if (leftExceptionCharsString == @"`")
+            if (leftExceptionCharsString == "`")
                 leftExceptionCharsString = null;
 
-            if (rightExceptionCharsString == @"\\")
-                rightExceptionCharsString = @"\";
-            else if (rightExceptionCharsString == @"\`")
-                rightExceptionCharsString = @"`";
-            else if (rightExceptionCharsString == @"`")
+            if (rightExceptionCharsString == "`")
                 rightExceptionCharsString = null;
 
-            if (exceptionCharsString == @"\\")
-                exceptionCharsString = @"\";
-            else if (exceptionCharsString == @"\`")
-                exceptionCharsString = @"`";
-            else if (exceptionCharsString == @"`")
-                exceptionCharsString = null;
+            if (!string.IsNullOrWhiteSpace(exceptionCharsString))
+                exceptionChars = ChangeCase.GetCharsInString(exceptionCharsString);
 
 
             if (!ChangeCase.CheckIfTheSameNumberOfCharsInStrings(leftExceptionCharsString, rightExceptionCharsString))
                 return CtlLrError;
 
 
-            if (!string.IsNullOrWhiteSpace(exceptionWordsString))
-                exceptionWords = exceptionWordsString.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            if (!string.IsNullOrWhiteSpace(lowerCaseWordsString))
+                lowerCaseWords = lowerCaseWordsString.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+            if (!string.IsNullOrWhiteSpace(upperCaseWordsString))
+                upperCaseWords = upperCaseWordsString.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
             if (!string.IsNullOrWhiteSpace(wordSeparatorsString))
                 wordSeparators = ChangeCase.GetCharsInString(wordSeparatorsString);
@@ -6681,23 +6703,32 @@ namespace MusicBeePlugin
             if (!string.IsNullOrWhiteSpace(exceptionCharsString))
                 exceptionChars = ChangeCase.GetCharsInString(exceptionCharsString);
 
-            input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.LowerCase);
+            input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.UpperCase);
+            input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.LowerCase, upperCaseWords);
 
-            var result = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.TitleCase, exceptionWords, false,
+            var result = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.TitleCase, lowerCaseWords.Union(upperCaseWords).ToArray(), false,
                 exceptionChars, leftExceptionChars, rightExceptionChars, wordSeparators, true, true);
 
             return result;
         }
 
-        public string CustomFunc_SentenceCase(string input, string sentenceSeparatorsString)
+        public string CustomFunc_SentenceCase(string input, string upperCaseWordsString, string sentenceSeparatorsString)
         {
+            string[] upperCaseWords = null;
             string[] sentenceSeparators = null;
+
+            if (upperCaseWordsString == "`")
+                upperCaseWordsString = null;
+
+            if (!string.IsNullOrWhiteSpace(upperCaseWordsString))
+                upperCaseWords = upperCaseWordsString.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
             if (!string.IsNullOrWhiteSpace(sentenceSeparatorsString))
                 sentenceSeparators = ChangeCase.GetCharsInString(sentenceSeparatorsString);
 
-            input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.LowerCase);
-            var result = ChangeCase.ChangeSentenceCase(input, null, false, null, null, null, sentenceSeparators, true);
+            input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.UpperCase);
+            input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.LowerCase, upperCaseWords);
+            var result = ChangeCase.ChangeSentenceCase(input, upperCaseWords, false, null, null, null, sentenceSeparators, true);
 
             return result;
         }

@@ -57,6 +57,8 @@ namespace MusicBeePlugin
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.hidePreviewCheckBoxLabel = new System.Windows.Forms.Label();
+            this.hidePreviewCheckBox = new System.Windows.Forms.CheckBox();
             this.presetChainIsWrongPictureBox = new System.Windows.Forms.PictureBox();
             this.smartOperationCheckBoxLabel = new System.Windows.Forms.Label();
             this.smartOperationCheckBox = new System.Windows.Forms.CheckBox();
@@ -225,6 +227,8 @@ namespace MusicBeePlugin
             // panel1
             // 
             resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.Controls.Add(this.hidePreviewCheckBoxLabel);
+            this.panel1.Controls.Add(this.hidePreviewCheckBox);
             this.panel1.Controls.Add(this.presetChainIsWrongPictureBox);
             this.panel1.Controls.Add(this.smartOperationCheckBoxLabel);
             this.panel1.Controls.Add(this.smartOperationCheckBox);
@@ -281,6 +285,28 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconPadding(this.panel1, ((int)(resources.GetObject("panel1.IconPadding"))));
             this.panel1.Name = "panel1";
             this.toolTip1.SetToolTip(this.panel1, resources.GetString("panel1.ToolTip"));
+            // 
+            // hidePreviewCheckBoxLabel
+            // 
+            resources.ApplyResources(this.hidePreviewCheckBoxLabel, "hidePreviewCheckBoxLabel");
+            this.dirtyErrorProvider.SetError(this.hidePreviewCheckBoxLabel, resources.GetString("hidePreviewCheckBoxLabel.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.hidePreviewCheckBoxLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("hidePreviewCheckBoxLabel.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.hidePreviewCheckBoxLabel, ((int)(resources.GetObject("hidePreviewCheckBoxLabel.IconPadding"))));
+            this.hidePreviewCheckBoxLabel.Name = "hidePreviewCheckBoxLabel";
+            this.hidePreviewCheckBoxLabel.Tag = "";
+            this.toolTip1.SetToolTip(this.hidePreviewCheckBoxLabel, resources.GetString("hidePreviewCheckBoxLabel.ToolTip"));
+            this.hidePreviewCheckBoxLabel.Click += new System.EventHandler(this.hidePreviewCheckBoxLabel_Click);
+            // 
+            // hidePreviewCheckBox
+            // 
+            resources.ApplyResources(this.hidePreviewCheckBox, "hidePreviewCheckBox");
+            this.dirtyErrorProvider.SetError(this.hidePreviewCheckBox, resources.GetString("hidePreviewCheckBox.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.hidePreviewCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("hidePreviewCheckBox.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.hidePreviewCheckBox, ((int)(resources.GetObject("hidePreviewCheckBox.IconPadding"))));
+            this.hidePreviewCheckBox.Name = "hidePreviewCheckBox";
+            this.hidePreviewCheckBox.Tag = "#hidePreviewCheckBoxLabel";
+            this.toolTip1.SetToolTip(this.hidePreviewCheckBox, resources.GetString("hidePreviewCheckBox.ToolTip"));
+            this.hidePreviewCheckBox.CheckedChanged += new System.EventHandler(this.hidePreviewCheckBox_CheckedChanged);
             // 
             // presetChainIsWrongPictureBox
             // 
@@ -888,6 +914,7 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.SetIconAlignment(this.presetNameTextBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("presetNameTextBox.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.presetNameTextBox, ((int)(resources.GetObject("presetNameTextBox.IconPadding"))));
             this.presetNameTextBox.Name = "presetNameTextBox";
+            this.presetNameTextBox.Tag = "#hidePreviewCheckBox";
             this.toolTip1.SetToolTip(this.presetNameTextBox, resources.GetString("presetNameTextBox.ToolTip"));
             this.presetNameTextBox.Leave += new System.EventHandler(this.presetNameTextBox_Leave);
             // 
@@ -1517,5 +1544,7 @@ namespace MusicBeePlugin
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private Label hidePreviewCheckBoxLabel;
+        private CheckBox hidePreviewCheckBox;
     }
 }

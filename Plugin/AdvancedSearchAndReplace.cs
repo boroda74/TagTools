@@ -1553,6 +1553,77 @@ namespace MusicBeePlugin
             }
         }
 
+        private class SortInvolvedPeopleByRoles : Function
+        {
+            internal SortInvolvedPeopleByRoles()
+            {
+                functionName = "sortinvolvedpeoplebyrole";
+            }
+
+            internal override void multiEvaluate1(string currentFile, ref string tagValue)
+            {
+                var args = Regex.Matches(tagValue, @"\\@" + functionName + @"\[\[(.*)\]\]");
+
+                for (var i = 0; i < args.Count; i++)
+                {
+                    var rawArg = Regex.Replace(args[i].Value, @"\\@" + functionName + @"\[\[(.*)\]\]", "$1");
+                    var arg = rawArg.Replace("\u000E", "[").Replace("\u000F", "]").Replace("\u0010", ",").Replace("\u0011", @"\");
+                    var result = calculate(currentFile, arg);
+                    tagValue = Regex.Replace(tagValue, @"\\@" + functionName + @"\[\[" + Regex.Escape(rawArg) + @"\]\]", result, RegexOptions.IgnoreCase);
+                }
+            }
+
+            protected override string calculate(string currentFile, string parameter0, string parameter1 = null) //-V3065
+            {
+                CustomText1 = Regex.Replace(CustomText1, "; ", ";");
+                var artists = parameter0.Replace("\u000E", "[").Replace("\u000F", "]").Split(new[] { "\u0000" }, StringSplitOptions.RemoveEmptyEntries);
+                var roles = CustomText1.Split(new[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
+                var involvedPeople = new List<string>();
+
+                for (var i = 0; i < artists.Length; i++)
+                {
+                    involvedPeople.Add(artists[i]);
+                    artists[i] = null;
+                }
+
+                if (involvedPeople.Count == 0)
+                    return parameter0;
+
+
+                for (var i = 0; i < involvedPeople.Count; i++)
+                {
+                    for (var j = 0; j < roles.Length; j++)
+                    {
+                        if (Regex.IsMatch(involvedPeople[i], @".*\(" + roles[j] + @"\).*"))
+                        {
+                            involvedPeople[i] = j.ToString("D3") + involvedPeople[i];
+                            break;
+                        }
+                    }
+                }
+
+                for (var i = 0; i < involvedPeople.Count; i++)
+                {
+                    if (involvedPeople[i][0] != '0')
+                        involvedPeople[i] = "999" + involvedPeople[i];
+                }
+
+                involvedPeople.Sort();
+
+                var newArtists = string.Empty;
+
+                var personNo = 0;
+                for (var i = 0; i < artists.Length; i++)
+                {
+                    newArtists += involvedPeople[personNo++].Remove(0, 3) + "\u0000";
+                }
+
+                newArtists = newArtists.Remove(newArtists.Length - 1, 1);
+
+                return newArtists;
+            }
+        }
+
         private class SearchReplace : Function
         {
             internal SearchReplace()
@@ -2006,6 +2077,9 @@ namespace MusicBeePlugin
 
                 Function sortperformers = new SortPerformers();
                 value = sortperformers.evaluate(currentFile, value);
+
+                Function sortinvolvedpeoplebyrole = new SortInvolvedPeopleByRoles();
+                value = sortinvolvedpeoplebyrole.evaluate(currentFile, value);
 
                 Function searchreplace = new SearchReplace();
                 value = searchreplace.evaluate(currentFile, value);
