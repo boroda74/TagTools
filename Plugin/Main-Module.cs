@@ -6706,7 +6706,18 @@ namespace MusicBeePlugin
             input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.UpperCase);
             input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.LowerCase, upperCaseWords);
 
-            var result = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.TitleCase, lowerCaseWords.Union(upperCaseWords).ToArray(), false,
+
+            string[] exceptedWords = null;
+
+            if (lowerCaseWords != null && upperCaseWords == null)
+                exceptedWords = lowerCaseWords;
+            else if (lowerCaseWords == null && upperCaseWords != null)
+                exceptedWords = upperCaseWords;
+            else if (lowerCaseWords != null && upperCaseWords != null)
+                exceptedWords = lowerCaseWords.Union(upperCaseWords).ToArray();
+
+
+            var result = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.TitleCase, exceptedWords, false,
                 exceptionChars, leftExceptionChars, rightExceptionChars, wordSeparators, true, true);
 
             return result;
