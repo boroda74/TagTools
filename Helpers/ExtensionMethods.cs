@@ -276,30 +276,41 @@ namespace ExtensionMethods
 
     internal static class DataGridViewExtensions
     {
-        internal static void DisableColumnsAutoSize(this DataGridView dataGridView, bool? keepColumnWidths)
+        internal static void DisableColumnsAutoSize(this DataGridView dataGridView, bool keepColumnWidths)
         {
-            if (keepColumnWidths == null)
-                dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-
             for (var i = 0; i < dataGridView.ColumnCount; i++)
             {
                 var columnWidth = dataGridView.Columns[i].Width;
                 dataGridView.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-                if (keepColumnWidths != false)
+                if (keepColumnWidths)
                     dataGridView.Columns[i].Width = columnWidth;
             }
+
+            dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
         }
 
         internal static void SetColumnsAutoSizeFill(this DataGridView dataGridView)
         {
+            dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
             for (var i = 0; i < dataGridView.ColumnCount; i++)
                 dataGridView.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
         internal static void SetColumnsAutoSizeAllCells(this DataGridView dataGridView)
         {
+            dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
             for (var i = 0; i < dataGridView.ColumnCount; i++)
                 dataGridView.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+        }
+
+        internal static void SetColumnsAutoSizeHeaders(this DataGridView dataGridView)
+        {
+            dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader;
+
+            for (var i = 0; i < dataGridView.ColumnCount; i++)
+                dataGridView.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
         }
 
         internal static void SetColumnsAutoSizeAllCellsLastFill(this DataGridView dataGridView)

@@ -6558,6 +6558,7 @@ namespace MusicBeePlugin
         private void presetListSelectedIndexChanged(int index)
         {
             Enable(false, autoApplyPresetsLabel);
+            previewTable.Enabled = true;
 
             functionsDict.Clear(); //As soon as possible because availability of some UI controls depends on it
 
@@ -6654,8 +6655,6 @@ namespace MusicBeePlugin
             presetNameTextBox.ReadOnly = !selectedPreset.userPreset;
 
 
-            previewTable.DisableColumnsAutoSize(null);
-
             presetNameTextBox.Text = selectedPreset.name ?? string.Empty;
 
             FillListByTagNames(destinationTagListCustom.Items);
@@ -6674,6 +6673,9 @@ namespace MusicBeePlugin
                 return;
             }
 
+
+            previewTable.SetColumnsAutoSizeHeaders();
+
             foreach (var attribs in dict.Values)
             {
                 addColumn(attribs.parameterName, null, LrFunctionType.Grouping,
@@ -6689,6 +6691,8 @@ namespace MusicBeePlugin
                 addColumn(attribs.parameterName, attribs.parameter2Name, attribs.functionType,
                     null, false, attribs.expression);
             }
+
+            previewTable.DisableColumnsAutoSize(true);
 
 
             functionComboBoxCustom.SelectedIndex = 0;
