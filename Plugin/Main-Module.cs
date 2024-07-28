@@ -331,9 +331,23 @@ namespace MusicBeePlugin
 
         internal static SortedDictionary<Guid, bool> AllLrPresetGuidsInUse = new SortedDictionary<Guid, bool>(); //<guid, false>: NOT permanentGuid!
         internal static SortedDictionary<int, string> LrTrackCacheNeededToBeUpdated = new SortedDictionary<int, string>(); //<Track persistent id, URL>
-        internal static SortedDictionary<int, string> LrDeletedTrackCacheNeededToBeUpdated = new SortedDictionary<int, string>(); //<Track persistent id, URL>
+        internal static SortedDictionary<Guid, SortedDictionary<int, SortedDictionary<string, bool>[]>> PresetChangingGroupingTagsRaw //Dictionaries of tags values,
+                                                                                                                                         //arrays of groupings per track id
+                                                                                                                                         //per preset
+            = new SortedDictionary<Guid, SortedDictionary<int, SortedDictionary<string, bool>[]>>();
+        internal static SortedDictionary<Guid, SortedDictionary<int, SortedDictionary<string, bool>[]>> PresetChangingActualGroupingTags //********
+            = new SortedDictionary<Guid, SortedDictionary<int, SortedDictionary<string, bool>[]>>();
+        internal static SortedDictionary<Guid, SortedDictionary<int, SortedDictionary<string, bool>[]>> PresetChangingActualGroupingTagsRaw
+            = new SortedDictionary<Guid, SortedDictionary<int, SortedDictionary<string, bool>[]>>();
+
         internal static string[] LrTrackCacheNeededToBeUpdatedWorkingCopy; //URL[]
-        internal static string[] LrDeletedTrackCacheNeededToBeUpdatedWorkingCopy; //URL[]
+        internal static SortedDictionary<Guid, SortedDictionary<string, bool>[]> ChangingGroupingTagsRawWorkingCopy  //Dictionaries of tags values,
+            = new SortedDictionary<Guid, SortedDictionary<string, bool>[]>();                                        //arrays of groupings per processed preset
+        internal static SortedDictionary<Guid, SortedDictionary<string, bool>[]> ChangingActualGroupingTagsWorkingCopy   //********
+            = new SortedDictionary<Guid, SortedDictionary<string, bool>[]>();
+        internal static SortedDictionary<Guid, SortedDictionary<string, bool>[]> ChangingActualGroupingTagsRawWorkingCopy
+            = new SortedDictionary<Guid, SortedDictionary<string, bool>[]>();
+
         internal static Thread UpdateFunctionCacheThread = null;
         internal static readonly TimeSpan FunctionCacheUpdateDelay = new TimeSpan(0, 0, 5); //Every 5 secs. //****
         internal static readonly TimeSpan FunctionCacheClearingDelay = new TimeSpan(0, 1, 0); //Every 1 min. //****
@@ -522,7 +536,7 @@ namespace MusicBeePlugin
 
             public bool useExceptionWords;
             public bool useOnlyWords;
-            public object[] exceptionWords;
+            public object[] exceptedWords;
             public string exceptionWordsAsr;
 
             public bool useExceptionChars;
@@ -539,8 +553,8 @@ namespace MusicBeePlugin
             public object[] wordSeparators;
             public string wordSeparatorsAsr;
 
-            public bool alwaysCapitalize1stWord = true;
-            public bool alwaysCapitalizeLastWord;
+            public bool? alwaysCapitalize1stWord = true;
+            public bool? alwaysCapitalizeLastWord = false;
 
 
             public ReportPreset[] reportsPresets; //***** delete it later!!!!
@@ -962,6 +976,8 @@ namespace MusicBeePlugin
         internal static string CtlNewAsrPreset;
         internal static string CtlAsrSyntaxError;
 
+        internal static string CtlAsrPresetEditorPleaseWait;
+
         internal static string CtlLrPresetAutoName;
         internal static string CtlLrInvalidPresetFormatAutoName;
         internal static string CtlLrError;
@@ -1030,6 +1046,45 @@ namespace MusicBeePlugin
 
 
         #region Common methods/functions
+        internal static CheckState GetNextCheckState(CheckState state)
+        {
+            switch (state)
+            {
+                case CheckState.Checked:
+                    return CheckState.Indeterminate;
+                case CheckState.Indeterminate:
+                    return CheckState.Unchecked;
+                default:
+                    return CheckState.Checked;
+            }
+        }
+
+        internal static CheckState GetCheckState(bool? state)
+        {
+            switch (state)
+            {
+                case true:
+                    return CheckState.Checked;
+                case false:
+                    return CheckState.Unchecked;
+                default:
+                    return CheckState.Indeterminate;
+            }
+        }
+
+        internal static bool? GetBoolFromCheckState(CheckState state)
+        {
+            switch (state)
+            {
+                case CheckState.Checked:
+                    return true;
+                case CheckState.Unchecked:
+                    return false;
+                default:
+                    return null;
+            }
+        }
+
         internal static string GetPersistentTrackId(string currentFile, bool useCustomTrackIdTag = false)
         {
             if (useCustomTrackIdTag && SavedSettings.useCustomTrackIdTag && SavedSettings.customTrackIdTag > 0)
@@ -2717,16 +2772,30 @@ namespace MusicBeePlugin
                 if (addTagPrefixes)
                     prefix = GetTagPrefix(tagName);
 
-                if (addArtworkAlso && tagName == ArtworkName)
-                    list.Add(prefix + tagName);
-                else if (addDateCreatedAlso && tagName == DateCreatedTagName)
-                    list.Add(prefix + tagName);
-                else if (addAllTagsPseudoTagAlso && tagName == AllTagsPseudoTagName)
-                    list.Add(prefix + tagName);
-                else if (addNullAlso && tagName == NullTagName)
-                    list.Add(prefix + tagName);
+                if (tagName == ArtworkName)
+                {
+                    if (addArtworkAlso)
+                        list.Add(prefix + tagName);
+                }
+                else if (tagName == DateCreatedTagName)
+                {
+                    if (addDateCreatedAlso)
+                        list.Add(prefix + tagName);
+                }
+                else if (tagName == AllTagsPseudoTagName)
+                {
+                    if (addAllTagsPseudoTagAlso)
+                        list.Add(prefix + tagName);
+                }
+                else if (tagName == NullTagName)
+                {
+                    if (addNullAlso)
+                        list.Add(prefix + tagName);
+                }
                 else if (addReadOnlyTagsAlso || !ChangeCase.IsItemContainedInArray(tagName, ReadonlyTagsNames))
+                {
                     list.Add(prefix + tagName);
+                }
             }
         }
 
@@ -3793,6 +3862,8 @@ namespace MusicBeePlugin
             CtlNewAsrPreset = "<New ASR Preset>";
             CtlAsrSyntaxError = "SYNTAX ERROR!";
 
+            CtlAsrPresetEditorPleaseWait = " PLEASE WAIT! ";
+
             CtlLrPresetAutoName = "(Auto preset name)";
             CtlLrInvalidPresetFormatAutoName = "Invalid preset format!";
             CtlLrError = "ERROR!";
@@ -3954,19 +4025,19 @@ namespace MusicBeePlugin
             if (SavedSettings.windowsSettings == null)
                 SavedSettings.windowsSettings = new List<WindowSettingsType>();
 
-            if (SavedSettings.exceptionWords == null || SavedSettings.exceptionWords.Length < 10)
+            if (SavedSettings.exceptedWords == null || SavedSettings.exceptedWords.Length < 10)
             {
-                SavedSettings.exceptionWords = new object[10];
-                SavedSettings.exceptionWords[0] = "the a an and or not";
-                SavedSettings.exceptionWords[1] = "a al an and as at but by de for in la le mix nor of on or remix the to vs. y ze feat.";
-                SavedSettings.exceptionWords[2] = "U2 UB40";
-                SavedSettings.exceptionWords[3] = string.Empty;
-                SavedSettings.exceptionWords[4] = string.Empty;
-                SavedSettings.exceptionWords[5] = string.Empty;
-                SavedSettings.exceptionWords[6] = string.Empty;
-                SavedSettings.exceptionWords[7] = string.Empty;
-                SavedSettings.exceptionWords[8] = string.Empty;
-                SavedSettings.exceptionWords[9] = string.Empty;
+                SavedSettings.exceptedWords = new object[10];
+                SavedSettings.exceptedWords[0] = "the a an and or not";
+                SavedSettings.exceptedWords[1] = "a al an and as at but by de for in la le mix nor of on or remix the to vs. y ze feat.";
+                SavedSettings.exceptedWords[2] = "U2 UB40";
+                SavedSettings.exceptedWords[3] = string.Empty;
+                SavedSettings.exceptedWords[4] = string.Empty;
+                SavedSettings.exceptedWords[5] = string.Empty;
+                SavedSettings.exceptedWords[6] = string.Empty;
+                SavedSettings.exceptedWords[7] = string.Empty;
+                SavedSettings.exceptedWords[8] = string.Empty;
+                SavedSettings.exceptedWords[9] = string.Empty;
             }
 
             if (SavedSettings.exceptionWordsAsr == null)
@@ -4501,6 +4572,8 @@ namespace MusicBeePlugin
 
                 CtlNewAsrPreset = "<Новый пресет ДПЗ>";
                 CtlAsrSyntaxError = "СИНТАКСИЧЕСКАЯ ОШИБКА!";
+
+                CtlAsrPresetEditorPleaseWait = " НЕМНОГО ПОДОЖТИТЕ! ";
 
                 CtlLrPresetAutoName = "(Автоматическое имя)";
                 CtlLrInvalidPresetFormatAutoName = "Некорректный формат пресета!";
@@ -5142,26 +5215,26 @@ namespace MusicBeePlugin
             Uninstalled = true;
         }
 
-        private void autoApplyAsrUpdateLrCache(string sourceFileUrl, string deletedFile = null)
+        private void autoApplyAsrUpdateLrCache(string newChangedFileUrl, string changingFile = null)
         {
             if (!SavedSettings.dontShowAsr || !SavedSettings.dontShowLibraryReports)
             {
                 var autoApplyAsrUpdateLrCache = false;
 
-                if (sourceFileUrl != null)
+                if (newChangedFileUrl != null)
                 {
                     lock (FilesUpdatedByPlugin)
                     {
-                        if (!FilesUpdatedByPlugin.RemoveExisting(sourceFileUrl))
+                        if (!FilesUpdatedByPlugin.RemoveExisting(newChangedFileUrl))
                             autoApplyAsrUpdateLrCache = true;
                     }
 
                     if (autoApplyAsrUpdateLrCache && !SavedSettings.dontShowAsr)
-                        AsrAutoApplyPresets(sourceFileUrl);
+                        AsrAutoApplyPresets(newChangedFileUrl);
                 }
 
                 if (autoApplyAsrUpdateLrCache && !SavedSettings.dontShowLibraryReports)
-                    LrNotifyFileTagsChanged(sourceFileUrl, deletedFile);
+                    LrNotifyFileTagsChanged(newChangedFileUrl, changingFile);
             }
         }
 
@@ -5256,13 +5329,16 @@ namespace MusicBeePlugin
                         UpdateTrackForBackup(sourceFileUrl);
 
                     break;
-                case NotificationType.FileDeleting:                
+                case NotificationType.TagsChanging:
                     autoApplyAsrUpdateLrCache(null, sourceFileUrl);
+
+                    break;
+                case NotificationType.FileRemovedFromLibrary:
+                    autoApplyAsrUpdateLrCache(sourceFileUrl);
 
                     break;
                 case NotificationType.TagsChanged:
                 case NotificationType.ReplayGainChanged:
-                //case NotificationType.FileAddedToInbox:
                 case NotificationType.FileAddedToLibrary:
                     autoApplyAsrUpdateLrCache(sourceFileUrl);
 
@@ -6677,9 +6753,6 @@ namespace MusicBeePlugin
             if (rightExceptionCharsString == "`")
                 rightExceptionCharsString = null;
 
-            if (!string.IsNullOrWhiteSpace(exceptionCharsString))
-                exceptionChars = ChangeCase.GetCharsInString(exceptionCharsString);
-
 
             if (!ChangeCase.CheckIfTheSameNumberOfCharsInStrings(leftExceptionCharsString, rightExceptionCharsString))
                 return CtlLrError;
@@ -6703,9 +6776,6 @@ namespace MusicBeePlugin
             if (!string.IsNullOrWhiteSpace(exceptionCharsString))
                 exceptionChars = ChangeCase.GetCharsInString(exceptionCharsString);
 
-            input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.UpperCase);
-            input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.LowerCase, upperCaseWords);
-
 
             string[] exceptedWords = null;
 
@@ -6717,8 +6787,21 @@ namespace MusicBeePlugin
                 exceptedWords = lowerCaseWords.Union(upperCaseWords).ToArray();
 
 
-            var result = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.TitleCase, exceptedWords, false,
+            input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.LowerCase, null, false,
+                null, null, null, wordSeparators, false, false);
+
+            input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.TitleCase, null, false,
+                null, leftExceptionChars, rightExceptionChars, wordSeparators, true, true);
+
+            input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.LowerCase, lowerCaseWords, true,
                 exceptionChars, leftExceptionChars, rightExceptionChars, wordSeparators, true, true);
+
+            input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.TitleCase, exceptedWords, false,
+                exceptionChars, leftExceptionChars, rightExceptionChars, wordSeparators, true, true);
+
+
+            var result = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.UpperCase, upperCaseWords, true,
+                null, null, null, wordSeparators, null, null);
 
             return result;
         }

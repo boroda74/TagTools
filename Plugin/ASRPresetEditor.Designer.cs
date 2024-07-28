@@ -18,12 +18,12 @@
                 components.Dispose();
             }
 
+            base.Dispose(disposing);
+
             if (disposing)
             {
                 warning?.Dispose();
             }
-
-            base.Dispose(disposing);
         }
 
         #region Код, автоматически созданный конструктором форм Windows
@@ -217,100 +217,100 @@
             this.replacedPattern5Box = ControlsTools.CreateMusicBeeTextBox();
             //~MusicBee
 
-            //
-            //label1
-            //
+            // 
+            // label1
+            // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
             this.label1.Tag = "@pinned-to-parent-x";
-            //
-            //nameBox
-            //
+            // 
+            // nameBox
+            // 
             resources.ApplyResources(this.nameBox, "nameBox");
             this.nameBox.Name = "nameBox";
             this.nameBox.Tag = "#AsrPresetEditor";
-            //
-            //label2
-            //
+            // 
+            // label2
+            // 
             resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
             this.label2.Tag = "@pinned-to-parent-x";
-            //
-            //descriptionBox
-            //
+            // 
+            // descriptionBox
+            // 
             resources.ApplyResources(this.descriptionBox, "descriptionBox");
             this.descriptionBox.Name = "descriptionBox";
             this.descriptionBox.Tag = "";
-            //
-            //label3
-            //
+            // 
+            // label3
+            // 
             resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
-            //
-            //searchedPatternBox
-            //
+            // 
+            // searchedPatternBox
+            // 
             resources.ApplyResources(this.searchedPatternBox, "searchedPatternBox");
             this.searchedPatternBox.Name = "searchedPatternBox";
-            //
-            //label4
-            //
+            // 
+            // label4
+            // 
             resources.ApplyResources(this.label4, "label4");
             this.label4.Name = "label4";
-            //
-            //searchedTagList
-            //
+            // 
+            // searchedTagList
+            // 
             resources.ApplyResources(this.searchedTagList, "searchedTagList");
             this.searchedTagList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.searchedTagList.DropDownWidth = 250;
             this.searchedTagList.FormattingEnabled = true;
             this.searchedTagList.Name = "searchedTagList";
-            //
-            //replacedTagList
-            //
+            // 
+            // replacedTagList
+            // 
             resources.ApplyResources(this.replacedTagList, "replacedTagList");
             this.replacedTagList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.replacedTagList.DropDownWidth = 250;
             this.replacedTagList.FormattingEnabled = true;
             this.replacedTagList.Name = "replacedTagList";
-            //
-            //label5
-            //
+            // 
+            // label5
+            // 
             resources.ApplyResources(this.label5, "label5");
             this.label5.Name = "label5";
-            //
-            //replacedPatternBox
-            //
+            // 
+            // replacedPatternBox
+            // 
             resources.ApplyResources(this.replacedPatternBox, "replacedPatternBox");
             this.replacedPatternBox.Name = "replacedPatternBox";
-            //
-            //label6
-            //
+            // 
+            // label6
+            // 
             resources.ApplyResources(this.label6, "label6");
             this.label6.Name = "label6";
-            //
-            //buttonOK
-            //
+            // 
+            // buttonOK
+            // 
             resources.ApplyResources(this.buttonOK, "buttonOK");
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Tag = "#buttonCancel@pinned-to-parent-y";
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
-            //
-            //buttonCancel
-            //
+            // 
+            // buttonCancel
+            // 
             resources.ApplyResources(this.buttonCancel, "buttonCancel");
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Tag = "#AsrPresetEditor@non-defaultable@pinned-to-parent-y";
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
-            //
-            //ignoreCaseCheckBox
-            //
+            // 
+            // ignoreCaseCheckBox
+            // 
             resources.ApplyResources(this.ignoreCaseCheckBox, "ignoreCaseCheckBox");
             this.ignoreCaseCheckBox.Name = "ignoreCaseCheckBox";
             this.ignoreCaseCheckBox.Tag = "#ignoreCaseCheckBoxLabel@pinned-to-parent-x";
-            //
-            //linkLabel1
-            //
+            // 
+            // linkLabel1
+            // 
             this.linkLabel1.ActiveLinkColor = System.Drawing.SystemColors.MenuHighlight;
             resources.ApplyResources(this.linkLabel1, "linkLabel1");
             this.linkLabel1.DisabledLinkColor = System.Drawing.SystemColors.GrayText;
@@ -318,23 +318,23 @@
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.TabStop = true;
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
-            //
-            //groupBox1
-            //
+            // 
+            // groupBox1
+            // 
             resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Controls.Add(this.groupBox1Label);
             this.groupBox1.Controls.Add(this.tableLayoutPanel3);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             this.groupBox1.Tag = "#AsrPresetEditor@pinned-to-parent-x";
-            //
-            //groupBox1Label
-            //
+            // 
+            // groupBox1Label
+            // 
             resources.ApplyResources(this.groupBox1Label, "groupBox1Label");
             this.groupBox1Label.Name = "groupBox1Label";
-            //
-            //tableLayoutPanel3
-            //
+            // 
+            // tableLayoutPanel3
+            // 
             resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
             this.tableLayoutPanel3.Controls.Add(this.replacedTagList, 5, 1);
             this.tableLayoutPanel3.Controls.Add(this.label38, 4, 1);
@@ -349,54 +349,54 @@
             this.tableLayoutPanel3.Controls.Add(this.searchedPatternBox, 1, 0);
             this.tableLayoutPanel3.Controls.Add(this.label3, 0, 0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            //
-            //label38
-            //
+            // 
+            // label38
+            // 
             resources.ApplyResources(this.label38, "label38");
             this.label38.Name = "label38";
             this.toolTip1.SetToolTip(this.label38, resources.GetString("label38.ToolTip"));
-            //
-            //appendCheckBox
-            //
+            // 
+            // appendCheckBox
+            // 
             resources.ApplyResources(this.appendCheckBox, "appendCheckBox");
             this.appendCheckBox.Name = "appendCheckBox";
             this.toolTip1.SetToolTip(this.appendCheckBox, resources.GetString("appendCheckBox.ToolTip"));
-            //
-            //label37
-            //
+            // 
+            // label37
+            // 
             resources.ApplyResources(this.label37, "label37");
             this.label37.Name = "label37";
             this.toolTip1.SetToolTip(this.label37, resources.GetString("label37.ToolTip"));
-            //
-            //condition1CheckBox
-            //
+            // 
+            // condition1CheckBox
+            // 
             resources.ApplyResources(this.condition1CheckBox, "condition1CheckBox");
             this.condition1CheckBox.Name = "condition1CheckBox";
             this.condition1CheckBox.ThreeState = true;
             this.toolTip1.SetToolTip(this.condition1CheckBox, resources.GetString("condition1CheckBox.ToolTip"));
-            //
-            //customTextBox
-            //
+            // 
+            // customTextBox
+            // 
             resources.ApplyResources(this.customTextBox, "customTextBox");
             this.customTextBox.Name = "customTextBox";
             this.toolTip1.SetToolTip(this.customTextBox, resources.GetString("customTextBox.ToolTip"));
-            //
-            //groupBox2
-            //
+            // 
+            // groupBox2
+            // 
             resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Controls.Add(this.groupBox2Label);
             this.groupBox2.Controls.Add(this.tableLayoutPanel4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             this.groupBox2.Tag = "#AsrPresetEditor@pinned-to-parent-x";
-            //
-            //groupBox2Label
-            //
+            // 
+            // groupBox2Label
+            // 
             resources.ApplyResources(this.groupBox2Label, "groupBox2Label");
             this.groupBox2Label.Name = "groupBox2Label";
-            //
-            //tableLayoutPanel4
-            //
+            // 
+            // tableLayoutPanel4
+            // 
             resources.ApplyResources(this.tableLayoutPanel4, "tableLayoutPanel4");
             this.tableLayoutPanel4.Controls.Add(this.replacedTag2List, 5, 1);
             this.tableLayoutPanel4.Controls.Add(this.label40, 4, 1);
@@ -411,94 +411,94 @@
             this.tableLayoutPanel4.Controls.Add(this.searchedPattern2Box, 1, 0);
             this.tableLayoutPanel4.Controls.Add(this.label7, 0, 0);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            //
-            //replacedTag2List
-            //
+            // 
+            // replacedTag2List
+            // 
             resources.ApplyResources(this.replacedTag2List, "replacedTag2List");
             this.replacedTag2List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.replacedTag2List.DropDownWidth = 250;
             this.replacedTag2List.FormattingEnabled = true;
             this.replacedTag2List.Name = "replacedTag2List";
-            //
-            //label40
-            //
+            // 
+            // label40
+            // 
             resources.ApplyResources(this.label40, "label40");
             this.label40.Name = "label40";
             this.toolTip1.SetToolTip(this.label40, resources.GetString("label40.ToolTip"));
-            //
-            //append2CheckBox
-            //
+            // 
+            // append2CheckBox
+            // 
             resources.ApplyResources(this.append2CheckBox, "append2CheckBox");
             this.append2CheckBox.Name = "append2CheckBox";
             this.toolTip1.SetToolTip(this.append2CheckBox, resources.GetString("append2CheckBox.ToolTip"));
-            //
-            //label10
-            //
+            // 
+            // label10
+            // 
             resources.ApplyResources(this.label10, "label10");
             this.label10.Name = "label10";
-            //
-            //replacedPattern2Box
-            //
+            // 
+            // replacedPattern2Box
+            // 
             resources.ApplyResources(this.replacedPattern2Box, "replacedPattern2Box");
             this.replacedPattern2Box.Name = "replacedPattern2Box";
-            //
-            //label8
-            //
+            // 
+            // label8
+            // 
             resources.ApplyResources(this.label8, "label8");
             this.label8.Name = "label8";
-            //
-            //searchedTag2List
-            //
+            // 
+            // searchedTag2List
+            // 
             resources.ApplyResources(this.searchedTag2List, "searchedTag2List");
             this.searchedTag2List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.searchedTag2List.DropDownWidth = 250;
             this.searchedTag2List.FormattingEnabled = true;
             this.searchedTag2List.Name = "searchedTag2List";
-            //
-            //label39
-            //
+            // 
+            // label39
+            // 
             resources.ApplyResources(this.label39, "label39");
             this.label39.Name = "label39";
             this.toolTip1.SetToolTip(this.label39, resources.GetString("label39.ToolTip"));
-            //
-            //condition2CheckBox
-            //
+            // 
+            // condition2CheckBox
+            // 
             resources.ApplyResources(this.condition2CheckBox, "condition2CheckBox");
             this.condition2CheckBox.Name = "condition2CheckBox";
             this.condition2CheckBox.ThreeState = true;
             this.toolTip1.SetToolTip(this.condition2CheckBox, resources.GetString("condition2CheckBox.ToolTip"));
-            //
-            //label9
-            //
+            // 
+            // label9
+            // 
             resources.ApplyResources(this.label9, "label9");
             this.label9.Name = "label9";
-            //
-            //searchedPattern2Box
-            //
+            // 
+            // searchedPattern2Box
+            // 
             resources.ApplyResources(this.searchedPattern2Box, "searchedPattern2Box");
             this.searchedPattern2Box.Name = "searchedPattern2Box";
-            //
-            //label7
-            //
+            // 
+            // label7
+            // 
             resources.ApplyResources(this.label7, "label7");
             this.label7.Name = "label7";
-            //
-            //groupBox3
-            //
+            // 
+            // groupBox3
+            // 
             resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Controls.Add(this.groupBox3Label);
             this.groupBox3.Controls.Add(this.tableLayoutPanel5);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
             this.groupBox3.Tag = "#AsrPresetEditor@pinned-to-parent-x";
-            //
-            //groupBox3Label
-            //
+            // 
+            // groupBox3Label
+            // 
             resources.ApplyResources(this.groupBox3Label, "groupBox3Label");
             this.groupBox3Label.Name = "groupBox3Label";
-            //
-            //tableLayoutPanel5
-            //
+            // 
+            // tableLayoutPanel5
+            // 
             resources.ApplyResources(this.tableLayoutPanel5, "tableLayoutPanel5");
             this.tableLayoutPanel5.Controls.Add(this.replacedTag3List, 5, 1);
             this.tableLayoutPanel5.Controls.Add(this.label42, 4, 1);
@@ -513,120 +513,120 @@
             this.tableLayoutPanel5.Controls.Add(this.searchedPattern3Box, 1, 0);
             this.tableLayoutPanel5.Controls.Add(this.label11, 0, 0);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
-            //
-            //replacedTag3List
-            //
+            // 
+            // replacedTag3List
+            // 
             resources.ApplyResources(this.replacedTag3List, "replacedTag3List");
             this.replacedTag3List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.replacedTag3List.DropDownWidth = 250;
             this.replacedTag3List.FormattingEnabled = true;
             this.replacedTag3List.Name = "replacedTag3List";
-            //
-            //label42
-            //
+            // 
+            // label42
+            // 
             resources.ApplyResources(this.label42, "label42");
             this.label42.Name = "label42";
             this.toolTip1.SetToolTip(this.label42, resources.GetString("label42.ToolTip"));
-            //
-            //append3CheckBox
-            //
+            // 
+            // append3CheckBox
+            // 
             resources.ApplyResources(this.append3CheckBox, "append3CheckBox");
             this.append3CheckBox.Name = "append3CheckBox";
             this.toolTip1.SetToolTip(this.append3CheckBox, resources.GetString("append3CheckBox.ToolTip"));
-            //
-            //label14
-            //
+            // 
+            // label14
+            // 
             resources.ApplyResources(this.label14, "label14");
             this.label14.Name = "label14";
-            //
-            //replacedPattern3Box
-            //
+            // 
+            // replacedPattern3Box
+            // 
             resources.ApplyResources(this.replacedPattern3Box, "replacedPattern3Box");
             this.replacedPattern3Box.Name = "replacedPattern3Box";
-            //
-            //label12
-            //
+            // 
+            // label12
+            // 
             resources.ApplyResources(this.label12, "label12");
             this.label12.Name = "label12";
-            //
-            //searchedTag3List
-            //
+            // 
+            // searchedTag3List
+            // 
             resources.ApplyResources(this.searchedTag3List, "searchedTag3List");
             this.searchedTag3List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.searchedTag3List.DropDownWidth = 250;
             this.searchedTag3List.FormattingEnabled = true;
             this.searchedTag3List.Name = "searchedTag3List";
-            //
-            //label41
-            //
+            // 
+            // label41
+            // 
             resources.ApplyResources(this.label41, "label41");
             this.label41.Name = "label41";
             this.toolTip1.SetToolTip(this.label41, resources.GetString("label41.ToolTip"));
-            //
-            //condition3CheckBox
-            //
+            // 
+            // condition3CheckBox
+            // 
             resources.ApplyResources(this.condition3CheckBox, "condition3CheckBox");
             this.condition3CheckBox.Name = "condition3CheckBox";
             this.condition3CheckBox.ThreeState = true;
             this.toolTip1.SetToolTip(this.condition3CheckBox, resources.GetString("condition3CheckBox.ToolTip"));
-            //
-            //label13
-            //
+            // 
+            // label13
+            // 
             resources.ApplyResources(this.label13, "label13");
             this.label13.Name = "label13";
-            //
-            //searchedPattern3Box
-            //
+            // 
+            // searchedPattern3Box
+            // 
             resources.ApplyResources(this.searchedPattern3Box, "searchedPattern3Box");
             this.searchedPattern3Box.Name = "searchedPattern3Box";
-            //
-            //label11
-            //
+            // 
+            // label11
+            // 
             resources.ApplyResources(this.label11, "label11");
             this.label11.Name = "label11";
-            //
-            //languages
-            //
+            // 
+            // languages
+            // 
             this.languages.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.languages.FormattingEnabled = true;
             resources.ApplyResources(this.languages, "languages");
             this.languages.Name = "languages";
             this.languages.Tag = "@pinned-to-parent-x";
             this.languages.SelectedIndexChanged += new System.EventHandler(this.languages_SelectedIndexChanged);
-            //
-            //guidBox
-            //
+            // 
+            // guidBox
+            // 
             resources.ApplyResources(this.guidBox, "guidBox");
             this.guidBox.Name = "guidBox";
             this.guidBox.ReadOnly = true;
             this.guidBox.Tag = "#modifiedLabel";
-            //
-            //guidLabel
-            //
+            // 
+            // guidLabel
+            // 
             resources.ApplyResources(this.guidLabel, "guidLabel");
             this.guidLabel.Name = "guidLabel";
             this.guidLabel.Tag = "@pinned-to-parent-x";
-            //
-            //modifiedLabel
-            //
+            // 
+            // modifiedLabel
+            // 
             resources.ApplyResources(this.modifiedLabel, "modifiedLabel");
             this.modifiedLabel.Name = "modifiedLabel";
             this.modifiedLabel.Tag = "#modifiedBox";
-            //
-            //modifiedBox
-            //
+            // 
+            // modifiedBox
+            // 
             resources.ApplyResources(this.modifiedBox, "modifiedBox");
             this.modifiedBox.Name = "modifiedBox";
             this.modifiedBox.ReadOnly = true;
-            //
-            //userPresetCheckBox
-            //
+            // 
+            // userPresetCheckBox
+            // 
             resources.ApplyResources(this.userPresetCheckBox, "userPresetCheckBox");
             this.userPresetCheckBox.Name = "userPresetCheckBox";
             this.userPresetCheckBox.Tag = "#userPresetCheckBoxLabel";
-            //
-            //parameterTagTypeList
-            //
+            // 
+            // parameterTagTypeList
+            // 
             resources.ApplyResources(this.parameterTagTypeList, "parameterTagTypeList");
             this.parameterTagTypeList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.parameterTagTypeList.FormattingEnabled = true;
@@ -637,9 +637,9 @@
             resources.GetString("parameterTagTypeList.Items3")});
             this.parameterTagTypeList.Name = "parameterTagTypeList";
             this.parameterTagTypeList.SelectedIndexChanged += new System.EventHandler(this.parameterTagTypeList_SelectedIndexChanged);
-            //
-            //parameterTag2TypeList
-            //
+            // 
+            // parameterTag2TypeList
+            // 
             resources.ApplyResources(this.parameterTag2TypeList, "parameterTag2TypeList");
             this.parameterTag2TypeList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.parameterTag2TypeList.FormattingEnabled = true;
@@ -650,9 +650,9 @@
             resources.GetString("parameterTag2TypeList.Items3")});
             this.parameterTag2TypeList.Name = "parameterTag2TypeList";
             this.parameterTag2TypeList.SelectedIndexChanged += new System.EventHandler(this.parameterTag2TypeList_SelectedIndexChanged);
-            //
-            //parameterTag3TypeList
-            //
+            // 
+            // parameterTag3TypeList
+            // 
             resources.ApplyResources(this.parameterTag3TypeList, "parameterTag3TypeList");
             this.parameterTag3TypeList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.parameterTag3TypeList.FormattingEnabled = true;
@@ -663,221 +663,221 @@
             resources.GetString("parameterTag3TypeList.Items3")});
             this.parameterTag3TypeList.Name = "parameterTag3TypeList";
             this.parameterTag3TypeList.SelectedIndexChanged += new System.EventHandler(this.parameterTag3TypeList_SelectedIndexChanged);
-            //
-            //customTextCheckBox
-            //
+            // 
+            // customTextCheckBox
+            // 
             resources.ApplyResources(this.customTextCheckBox, "customTextCheckBox");
             this.customTextCheckBox.Name = "customTextCheckBox";
             this.customTextCheckBox.Tag = "customTextCheckBoxLabel";
             this.toolTip1.SetToolTip(this.customTextCheckBox, resources.GetString("customTextCheckBox.ToolTip"));
             this.customTextCheckBox.CheckedChanged += new System.EventHandler(this.customTextChecked_CheckedChanged);
-            //
-            //toolTip1
-            //
+            // 
+            // toolTip1
+            // 
             this.toolTip1.AutoPopDelay = 10000;
             this.toolTip1.InitialDelay = 1500;
             this.toolTip1.ReshowDelay = 100;
-            //
-            //customText2CheckBox
-            //
+            // 
+            // customText2CheckBox
+            // 
             resources.ApplyResources(this.customText2CheckBox, "customText2CheckBox");
             this.customText2CheckBox.Name = "customText2CheckBox";
             this.customText2CheckBox.Tag = "customText2CheckBoxLabel";
             this.toolTip1.SetToolTip(this.customText2CheckBox, resources.GetString("customText2CheckBox.ToolTip"));
             this.customText2CheckBox.CheckedChanged += new System.EventHandler(this.customText2CheckBox_CheckedChanged);
-            //
-            //customText2Box
-            //
+            // 
+            // customText2Box
+            // 
             resources.ApplyResources(this.customText2Box, "customText2Box");
             this.customText2Box.Name = "customText2Box";
             this.toolTip1.SetToolTip(this.customText2Box, resources.GetString("customText2Box.ToolTip"));
-            //
-            //customText4CheckBox
-            //
+            // 
+            // customText4CheckBox
+            // 
             resources.ApplyResources(this.customText4CheckBox, "customText4CheckBox");
             this.customText4CheckBox.Name = "customText4CheckBox";
             this.customText4CheckBox.Tag = "customText4CheckBoxLabel";
             this.toolTip1.SetToolTip(this.customText4CheckBox, resources.GetString("customText4CheckBox.ToolTip"));
             this.customText4CheckBox.CheckedChanged += new System.EventHandler(this.customText4CheckBox_CheckedChanged);
-            //
-            //customText4Box
-            //
+            // 
+            // customText4Box
+            // 
             resources.ApplyResources(this.customText4Box, "customText4Box");
             this.customText4Box.Name = "customText4Box";
             this.toolTip1.SetToolTip(this.customText4Box, resources.GetString("customText4Box.ToolTip"));
-            //
-            //customText3CheckBox
-            //
+            // 
+            // customText3CheckBox
+            // 
             resources.ApplyResources(this.customText3CheckBox, "customText3CheckBox");
             this.customText3CheckBox.Name = "customText3CheckBox";
             this.customText3CheckBox.Tag = "customText3CheckBoxLabel";
             this.toolTip1.SetToolTip(this.customText3CheckBox, resources.GetString("customText3CheckBox.ToolTip"));
             this.customText3CheckBox.CheckedChanged += new System.EventHandler(this.customText3CheckBox_CheckedChanged);
-            //
-            //customText3Box
-            //
+            // 
+            // customText3Box
+            // 
             resources.ApplyResources(this.customText3Box, "customText3Box");
             this.customText3Box.Name = "customText3Box";
             this.toolTip1.SetToolTip(this.customText3Box, resources.GetString("customText3Box.ToolTip"));
-            //
-            //append4CheckBox
-            //
+            // 
+            // append4CheckBox
+            // 
             resources.ApplyResources(this.append4CheckBox, "append4CheckBox");
             this.append4CheckBox.Name = "append4CheckBox";
             this.toolTip1.SetToolTip(this.append4CheckBox, resources.GetString("append4CheckBox.ToolTip"));
-            //
-            //append5CheckBox
-            //
+            // 
+            // append5CheckBox
+            // 
             resources.ApplyResources(this.append5CheckBox, "append5CheckBox");
             this.append5CheckBox.Name = "append5CheckBox";
             this.toolTip1.SetToolTip(this.append5CheckBox, resources.GetString("append5CheckBox.ToolTip"));
-            //
-            //condition4CheckBox
-            //
+            // 
+            // condition4CheckBox
+            // 
             resources.ApplyResources(this.condition4CheckBox, "condition4CheckBox");
             this.condition4CheckBox.Name = "condition4CheckBox";
             this.condition4CheckBox.ThreeState = true;
             this.toolTip1.SetToolTip(this.condition4CheckBox, resources.GetString("condition4CheckBox.ToolTip"));
-            //
-            //condition5CheckBox
-            //
+            // 
+            // condition5CheckBox
+            // 
             resources.ApplyResources(this.condition5CheckBox, "condition5CheckBox");
             this.condition5CheckBox.Name = "condition5CheckBox";
             this.condition5CheckBox.ThreeState = true;
             this.toolTip1.SetToolTip(this.condition5CheckBox, resources.GetString("condition5CheckBox.ToolTip"));
-            //
-            //customTextCheckBoxLabel
-            //
+            // 
+            // customTextCheckBoxLabel
+            // 
             resources.ApplyResources(this.customTextCheckBoxLabel, "customTextCheckBoxLabel");
             this.customTextCheckBoxLabel.Name = "customTextCheckBoxLabel";
             this.toolTip1.SetToolTip(this.customTextCheckBoxLabel, resources.GetString("customTextCheckBoxLabel.ToolTip"));
             this.customTextCheckBoxLabel.Click += new System.EventHandler(this.customTextCheckBoxLabel_Click);
-            //
-            //customText3CheckBoxLabel
-            //
+            // 
+            // customText3CheckBoxLabel
+            // 
             resources.ApplyResources(this.customText3CheckBoxLabel, "customText3CheckBoxLabel");
             this.customText3CheckBoxLabel.Name = "customText3CheckBoxLabel";
             this.toolTip1.SetToolTip(this.customText3CheckBoxLabel, resources.GetString("customText3CheckBoxLabel.ToolTip"));
             this.customText3CheckBoxLabel.Click += new System.EventHandler(this.customText3CheckBoxLabel_Click);
-            //
-            //customText2CheckBoxLabel
-            //
+            // 
+            // customText2CheckBoxLabel
+            // 
             resources.ApplyResources(this.customText2CheckBoxLabel, "customText2CheckBoxLabel");
             this.customText2CheckBoxLabel.Name = "customText2CheckBoxLabel";
             this.toolTip1.SetToolTip(this.customText2CheckBoxLabel, resources.GetString("customText2CheckBoxLabel.ToolTip"));
             this.customText2CheckBoxLabel.Click += new System.EventHandler(this.customText2CheckBoxLabel_Click);
-            //
-            //customText4CheckBoxLabel
-            //
+            // 
+            // customText4CheckBoxLabel
+            // 
             resources.ApplyResources(this.customText4CheckBoxLabel, "customText4CheckBoxLabel");
             this.customText4CheckBoxLabel.Name = "customText4CheckBoxLabel";
             this.toolTip1.SetToolTip(this.customText4CheckBoxLabel, resources.GetString("customText4CheckBoxLabel.ToolTip"));
             this.customText4CheckBoxLabel.Click += new System.EventHandler(this.customText4CheckBoxLabel_Click);
-            //
-            //label43
-            //
+            // 
+            // label43
+            // 
             resources.ApplyResources(this.label43, "label43");
             this.label43.Name = "label43";
             this.toolTip1.SetToolTip(this.label43, resources.GetString("label43.ToolTip"));
-            //
-            //label44
-            //
+            // 
+            // label44
+            // 
             resources.ApplyResources(this.label44, "label44");
             this.label44.Name = "label44";
             this.toolTip1.SetToolTip(this.label44, resources.GetString("label44.ToolTip"));
-            //
-            //label45
-            //
+            // 
+            // label45
+            // 
             resources.ApplyResources(this.label45, "label45");
             this.label45.Name = "label45";
             this.toolTip1.SetToolTip(this.label45, resources.GetString("label45.ToolTip"));
-            //
-            //label46
-            //
+            // 
+            // label46
+            // 
             resources.ApplyResources(this.label46, "label46");
             this.label46.Name = "label46";
             this.toolTip1.SetToolTip(this.label46, resources.GetString("label46.ToolTip"));
-            //
-            //parameterTag3List
-            //
+            // 
+            // parameterTag3List
+            // 
             resources.ApplyResources(this.parameterTag3List, "parameterTag3List");
             this.parameterTag3List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.parameterTag3List.DropDownWidth = 250;
             this.parameterTag3List.FormattingEnabled = true;
             this.parameterTag3List.Name = "parameterTag3List";
-            //
-            //label21
-            //
+            // 
+            // label21
+            // 
             resources.ApplyResources(this.label21, "label21");
             this.label21.Name = "label21";
-            //
-            //parameterTag2List
-            //
+            // 
+            // parameterTag2List
+            // 
             resources.ApplyResources(this.parameterTag2List, "parameterTag2List");
             this.parameterTag2List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.parameterTag2List.DropDownWidth = 250;
             this.parameterTag2List.FormattingEnabled = true;
             this.parameterTag2List.Name = "parameterTag2List";
-            //
-            //label22
-            //
+            // 
+            // label22
+            // 
             resources.ApplyResources(this.label22, "label22");
             this.label22.Name = "label22";
-            //
-            //parameterTagList
-            //
+            // 
+            // parameterTagList
+            // 
             resources.ApplyResources(this.parameterTagList, "parameterTagList");
             this.parameterTagList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.parameterTagList.DropDownWidth = 250;
             this.parameterTagList.FormattingEnabled = true;
             this.parameterTagList.Name = "parameterTagList";
-            //
-            //label23
-            //
+            // 
+            // label23
+            // 
             resources.ApplyResources(this.label23, "label23");
             this.label23.Name = "label23";
-            //
-            //label20
-            //
+            // 
+            // label20
+            // 
             resources.ApplyResources(this.label20, "label20");
             this.label20.Name = "label20";
-            //
-            //parameterTag6List
-            //
+            // 
+            // parameterTag6List
+            // 
             resources.ApplyResources(this.parameterTag6List, "parameterTag6List");
             this.parameterTag6List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.parameterTag6List.DropDownWidth = 250;
             this.parameterTag6List.FormattingEnabled = true;
             this.parameterTag6List.Name = "parameterTag6List";
-            //
-            //label24
-            //
+            // 
+            // label24
+            // 
             resources.ApplyResources(this.label24, "label24");
             this.label24.Name = "label24";
-            //
-            //parameterTag5List
-            //
+            // 
+            // parameterTag5List
+            // 
             resources.ApplyResources(this.parameterTag5List, "parameterTag5List");
             this.parameterTag5List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.parameterTag5List.DropDownWidth = 250;
             this.parameterTag5List.FormattingEnabled = true;
             this.parameterTag5List.Name = "parameterTag5List";
-            //
-            //label25
-            //
+            // 
+            // label25
+            // 
             resources.ApplyResources(this.label25, "label25");
             this.label25.Name = "label25";
-            //
-            //parameterTag4List
-            //
+            // 
+            // parameterTag4List
+            // 
             resources.ApplyResources(this.parameterTag4List, "parameterTag4List");
             this.parameterTag4List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.parameterTag4List.DropDownWidth = 250;
             this.parameterTag4List.FormattingEnabled = true;
             this.parameterTag4List.Name = "parameterTag4List";
-            //
-            //parameterTag6TypeList
-            //
+            // 
+            // parameterTag6TypeList
+            // 
             resources.ApplyResources(this.parameterTag6TypeList, "parameterTag6TypeList");
             this.parameterTag6TypeList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.parameterTag6TypeList.FormattingEnabled = true;
@@ -888,9 +888,9 @@
             resources.GetString("parameterTag6TypeList.Items3")});
             this.parameterTag6TypeList.Name = "parameterTag6TypeList";
             this.parameterTag6TypeList.SelectedIndexChanged += new System.EventHandler(this.parameterTag6TypeList_SelectedIndexChanged);
-            //
-            //parameterTag5TypeList
-            //
+            // 
+            // parameterTag5TypeList
+            // 
             resources.ApplyResources(this.parameterTag5TypeList, "parameterTag5TypeList");
             this.parameterTag5TypeList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.parameterTag5TypeList.FormattingEnabled = true;
@@ -901,9 +901,9 @@
             resources.GetString("parameterTag5TypeList.Items3")});
             this.parameterTag5TypeList.Name = "parameterTag5TypeList";
             this.parameterTag5TypeList.SelectedIndexChanged += new System.EventHandler(this.parameterTag5TypeList_SelectedIndexChanged);
-            //
-            //parameterTag4TypeList
-            //
+            // 
+            // parameterTag4TypeList
+            // 
             resources.ApplyResources(this.parameterTag4TypeList, "parameterTag4TypeList");
             this.parameterTag4TypeList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.parameterTag4TypeList.FormattingEnabled = true;
@@ -914,23 +914,23 @@
             resources.GetString("parameterTag4TypeList.Items3")});
             this.parameterTag4TypeList.Name = "parameterTag4TypeList";
             this.parameterTag4TypeList.SelectedIndexChanged += new System.EventHandler(this.parameterTag4TypeList_SelectedIndexChanged);
-            //
-            //groupBox4
-            //
+            // 
+            // groupBox4
+            // 
             resources.ApplyResources(this.groupBox4, "groupBox4");
             this.groupBox4.Controls.Add(this.groupBox4Label);
             this.groupBox4.Controls.Add(this.tableLayoutPanel6);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.TabStop = false;
             this.groupBox4.Tag = "#AsrPresetEditor@pinned-to-parent-x";
-            //
-            //groupBox4Label
-            //
+            // 
+            // groupBox4Label
+            // 
             resources.ApplyResources(this.groupBox4Label, "groupBox4Label");
             this.groupBox4Label.Name = "groupBox4Label";
-            //
-            //tableLayoutPanel6
-            //
+            // 
+            // tableLayoutPanel6
+            // 
             resources.ApplyResources(this.tableLayoutPanel6, "tableLayoutPanel6");
             this.tableLayoutPanel6.Controls.Add(this.replacedTag4List, 5, 1);
             this.tableLayoutPanel6.Controls.Add(this.label44, 4, 1);
@@ -945,69 +945,69 @@
             this.tableLayoutPanel6.Controls.Add(this.searchedPattern4Box, 1, 0);
             this.tableLayoutPanel6.Controls.Add(this.label29, 0, 0);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
-            //
-            //replacedTag4List
-            //
+            // 
+            // replacedTag4List
+            // 
             resources.ApplyResources(this.replacedTag4List, "replacedTag4List");
             this.replacedTag4List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.replacedTag4List.DropDownWidth = 250;
             this.replacedTag4List.FormattingEnabled = true;
             this.replacedTag4List.Name = "replacedTag4List";
-            //
-            //label31
-            //
+            // 
+            // label31
+            // 
             resources.ApplyResources(this.label31, "label31");
             this.label31.Name = "label31";
-            //
-            //replacedPattern4Box
-            //
+            // 
+            // replacedPattern4Box
+            // 
             resources.ApplyResources(this.replacedPattern4Box, "replacedPattern4Box");
             this.replacedPattern4Box.Name = "replacedPattern4Box";
-            //
-            //label30
-            //
+            // 
+            // label30
+            // 
             resources.ApplyResources(this.label30, "label30");
             this.label30.Name = "label30";
-            //
-            //searchedTag4List
-            //
+            // 
+            // searchedTag4List
+            // 
             resources.ApplyResources(this.searchedTag4List, "searchedTag4List");
             this.searchedTag4List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.searchedTag4List.DropDownWidth = 250;
             this.searchedTag4List.FormattingEnabled = true;
             this.searchedTag4List.Name = "searchedTag4List";
-            //
-            //label32
-            //
+            // 
+            // label32
+            // 
             resources.ApplyResources(this.label32, "label32");
             this.label32.Name = "label32";
-            //
-            //searchedPattern4Box
-            //
+            // 
+            // searchedPattern4Box
+            // 
             resources.ApplyResources(this.searchedPattern4Box, "searchedPattern4Box");
             this.searchedPattern4Box.Name = "searchedPattern4Box";
-            //
-            //label29
-            //
+            // 
+            // label29
+            // 
             resources.ApplyResources(this.label29, "label29");
             this.label29.Name = "label29";
-            //
-            //groupBox5
-            //
+            // 
+            // groupBox5
+            // 
             resources.ApplyResources(this.groupBox5, "groupBox5");
             this.groupBox5.Controls.Add(this.groupBox5Label);
             this.groupBox5.Controls.Add(this.tableLayoutPanel7);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.TabStop = false;
             this.groupBox5.Tag = "#AsrPresetEditor@pinned-to-parent-x";
-            //
-            //label15
-            //
+            // 
+            // groupBox5Label
+            // 
             resources.ApplyResources(this.groupBox5Label, "groupBox5Label");
             this.groupBox5Label.Name = "groupBox5Label";
-            //
-            //tableLayoutPanel7
-            //
+            // 
+            // tableLayoutPanel7
+            // 
             resources.ApplyResources(this.tableLayoutPanel7, "tableLayoutPanel7");
             this.tableLayoutPanel7.Controls.Add(this.replacedTag5List, 5, 1);
             this.tableLayoutPanel7.Controls.Add(this.label46, 4, 1);
@@ -1022,67 +1022,67 @@
             this.tableLayoutPanel7.Controls.Add(this.searchedPattern5Box, 1, 0);
             this.tableLayoutPanel7.Controls.Add(this.label33, 0, 0);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
-            //
-            //replacedTag5List
-            //
+            // 
+            // replacedTag5List
+            // 
             resources.ApplyResources(this.replacedTag5List, "replacedTag5List");
             this.replacedTag5List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.replacedTag5List.DropDownWidth = 250;
             this.replacedTag5List.FormattingEnabled = true;
             this.replacedTag5List.Name = "replacedTag5List";
-            //
-            //label35
-            //
+            // 
+            // label35
+            // 
             resources.ApplyResources(this.label35, "label35");
             this.label35.Name = "label35";
-            //
-            //replacedPattern5Box
-            //
+            // 
+            // replacedPattern5Box
+            // 
             resources.ApplyResources(this.replacedPattern5Box, "replacedPattern5Box");
             this.replacedPattern5Box.Name = "replacedPattern5Box";
-            //
-            //label34
-            //
+            // 
+            // label34
+            // 
             resources.ApplyResources(this.label34, "label34");
             this.label34.Name = "label34";
-            //
-            //searchedTag5List
-            //
+            // 
+            // searchedTag5List
+            // 
             resources.ApplyResources(this.searchedTag5List, "searchedTag5List");
             this.searchedTag5List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.searchedTag5List.DropDownWidth = 250;
             this.searchedTag5List.FormattingEnabled = true;
             this.searchedTag5List.Name = "searchedTag5List";
-            //
-            //label36
-            //
+            // 
+            // label36
+            // 
             resources.ApplyResources(this.label36, "label36");
             this.label36.Name = "label36";
-            //
-            //searchedPattern5Box
-            //
+            // 
+            // searchedPattern5Box
+            // 
             resources.ApplyResources(this.searchedPattern5Box, "searchedPattern5Box");
             this.searchedPattern5Box.Name = "searchedPattern5Box";
-            //
-            //label33
-            //
+            // 
+            // label33
+            // 
             resources.ApplyResources(this.label33, "label33");
             this.label33.Name = "label33";
-            //
-            //customizedByUserCheckBox
-            //
+            // 
+            // customizedByUserCheckBox
+            // 
             resources.ApplyResources(this.customizedByUserCheckBox, "customizedByUserCheckBox");
             this.customizedByUserCheckBox.Name = "customizedByUserCheckBox";
             this.customizedByUserCheckBox.Tag = "#customizedByUserCheckBoxLabel";
-            //
-            //removePresetCheckBox
-            //
+            // 
+            // removePresetCheckBox
+            // 
             resources.ApplyResources(this.removePresetCheckBox, "removePresetCheckBox");
             this.removePresetCheckBox.Name = "removePresetCheckBox";
             this.removePresetCheckBox.Tag = "#removePresetCheckBoxLabel";
-            //
-            //tableLayoutPanel1
-            //
+            // 
+            // tableLayoutPanel1
+            // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
             this.tableLayoutPanel1.Controls.Add(this.parameterTag6List, 9, 2);
             this.tableLayoutPanel1.Controls.Add(this.label20, 8, 2);
@@ -1116,75 +1116,75 @@
             this.tableLayoutPanel1.Controls.Add(this.pictureBox17, 0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.Tag = "#AsrPresetEditor@pinned-to-parent-x";
-            //
-            //label26
-            //
+            // 
+            // label26
+            // 
             resources.ApplyResources(this.label26, "label26");
             this.label26.Name = "label26";
-            //
-            //pictureBox26
-            //
+            // 
+            // pictureBox26
+            // 
             resources.ApplyResources(this.pictureBox26, "pictureBox26");
             this.pictureBox26.Name = "pictureBox26";
             this.pictureBox26.TabStop = false;
-            //
-            //label27
-            //
+            // 
+            // label27
+            // 
             resources.ApplyResources(this.label27, "label27");
             this.label27.Name = "label27";
-            //
-            //pictureBox27
-            //
+            // 
+            // pictureBox27
+            // 
             resources.ApplyResources(this.pictureBox27, "pictureBox27");
             this.pictureBox27.Name = "pictureBox27";
             this.pictureBox27.TabStop = false;
-            //
-            //label28
-            //
+            // 
+            // label28
+            // 
             resources.ApplyResources(this.label28, "label28");
             this.label28.Name = "label28";
-            //
-            //pictureBox28
-            //
+            // 
+            // pictureBox28
+            // 
             resources.ApplyResources(this.pictureBox28, "pictureBox28");
             this.pictureBox28.Name = "pictureBox28";
             this.pictureBox28.TabStop = false;
-            //
-            //label19
-            //
+            // 
+            // label19
+            // 
             resources.ApplyResources(this.label19, "label19");
             this.label19.Name = "label19";
-            //
-            //pictureBox19
-            //
+            // 
+            // pictureBox19
+            // 
             resources.ApplyResources(this.pictureBox19, "pictureBox19");
             this.pictureBox19.Name = "pictureBox19";
             this.pictureBox19.TabStop = false;
-            //
-            //label18
-            //
+            // 
+            // label18
+            // 
             resources.ApplyResources(this.label18, "label18");
             this.label18.Name = "label18";
-            //
-            //pictureBox18
-            //
+            // 
+            // pictureBox18
+            // 
             resources.ApplyResources(this.pictureBox18, "pictureBox18");
             this.pictureBox18.Name = "pictureBox18";
             this.pictureBox18.TabStop = false;
-            //
-            //label17
-            //
+            // 
+            // label17
+            // 
             resources.ApplyResources(this.label17, "label17");
             this.label17.Name = "label17";
-            //
-            //pictureBox17
-            //
+            // 
+            // pictureBox17
+            // 
             resources.ApplyResources(this.pictureBox17, "pictureBox17");
             this.pictureBox17.Name = "pictureBox17";
             this.pictureBox17.TabStop = false;
-            //
-            //tableLayoutPanel2
-            //
+            // 
+            // tableLayoutPanel2
+            // 
             resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
             this.tableLayoutPanel2.Controls.Add(this.customText4Box, 5, 1);
             this.tableLayoutPanel2.Controls.Add(this.customText4CheckBoxLabel, 4, 1);
@@ -1200,44 +1200,44 @@
             this.tableLayoutPanel2.Controls.Add(this.customTextCheckBox, 0, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.Tag = "#AsrPresetEditor@pinned-to-parent-x";
-            //
-            //removePresetCheckBoxLabel
-            //
+            // 
+            // removePresetCheckBoxLabel
+            // 
             resources.ApplyResources(this.removePresetCheckBoxLabel, "removePresetCheckBoxLabel");
             this.removePresetCheckBoxLabel.Name = "removePresetCheckBoxLabel";
             this.removePresetCheckBoxLabel.Tag = "#customizedByUserCheckBox";
             this.removePresetCheckBoxLabel.Click += new System.EventHandler(this.removePresetCheckBoxLabel_Click);
-            //
-            //customizedByUserCheckBoxLabel
-            //
+            // 
+            // customizedByUserCheckBoxLabel
+            // 
             resources.ApplyResources(this.customizedByUserCheckBoxLabel, "customizedByUserCheckBoxLabel");
             this.customizedByUserCheckBoxLabel.Name = "customizedByUserCheckBoxLabel";
             this.customizedByUserCheckBoxLabel.Tag = "#userPresetCheckBox";
             this.customizedByUserCheckBoxLabel.Click += new System.EventHandler(this.customizedByUserCheckBoxLabel_Click);
-            //
-            //userPresetCheckBoxLabel
-            //
+            // 
+            // userPresetCheckBoxLabel
+            // 
             resources.ApplyResources(this.userPresetCheckBoxLabel, "userPresetCheckBoxLabel");
             this.userPresetCheckBoxLabel.Name = "userPresetCheckBoxLabel";
             this.userPresetCheckBoxLabel.Tag = "#AsrPresetEditor@pinned-to-parent-x";
             this.userPresetCheckBoxLabel.Click += new System.EventHandler(this.userPresetCheckBoxLabel_Click);
-            //
-            //ignoreCaseCheckBoxLabel
-            //
+            // 
+            // ignoreCaseCheckBoxLabel
+            // 
             resources.ApplyResources(this.ignoreCaseCheckBoxLabel, "ignoreCaseCheckBoxLabel");
             this.ignoreCaseCheckBoxLabel.Name = "ignoreCaseCheckBoxLabel";
             this.ignoreCaseCheckBoxLabel.Tag = "@pinned-to-parent-y";
             this.ignoreCaseCheckBoxLabel.Click += new System.EventHandler(this.ignoreCaseCheckBoxLabel_Click);
-            //
-            //textBoxTableLayoutPanel
-            //
+            // 
+            // textBoxTableLayoutPanel
+            // 
             resources.ApplyResources(this.textBoxTableLayoutPanel, "textBoxTableLayoutPanel");
             this.textBoxTableLayoutPanel.Controls.Add(this.descriptionBox, 0, 0);
             this.textBoxTableLayoutPanel.Name = "textBoxTableLayoutPanel";
             this.textBoxTableLayoutPanel.Tag = "#AsrPresetEditor";
-            //
-            //AsrPresetEditor
-            //
+            // 
+            // AsrPresetEditor
+            // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
@@ -1268,9 +1268,11 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox5);
+            this.DoubleBuffered = true;
             this.Name = "AsrPresetEditor";
             this.Tag = "@min-max-height-same";
             this.Load += new System.EventHandler(this.AsrPresetEditor_Load);
+            this.Shown += new System.EventHandler(this.AsrPresetEditor_Shown);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
@@ -1305,7 +1307,7 @@
             this.textBoxTableLayoutPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
-            
+
             //MusicBee
             new TextBoxBorder(this.nameBox);
             new TextBoxBorder(this.descriptionBox);

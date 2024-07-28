@@ -1243,11 +1243,11 @@ namespace MusicBeePlugin
                 if (parameter1 == null)
                     parameter1 = SavedSettings.exceptionWordsAsr;
 
-                var exceptionWords = parameter1.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                var exceptedWords = parameter1.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
                 parameter0 = ChangeCase.ChangeWordsCase(parameter0, ChangeCase.ChangeCaseOptions.LowerCase);
 
-                var result = ChangeCase.ChangeWordsCase(parameter0, ChangeCase.ChangeCaseOptions.TitleCase, exceptionWords, false,
+                var result = ChangeCase.ChangeWordsCase(parameter0, ChangeCase.ChangeCaseOptions.TitleCase, exceptedWords, false,
                     SavedSettings.exceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
                     SavedSettings.leftExceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
                     SavedSettings.rightExceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
@@ -1269,9 +1269,9 @@ namespace MusicBeePlugin
                 if (parameter1 == null)
                     parameter1 = SavedSettings.exceptionWordsAsr;
 
-                var exceptionWords = parameter1.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                var exceptedWords = parameter1.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-                var result = ChangeCase.ChangeWordsCase(parameter0, ChangeCase.ChangeCaseOptions.LowerCase, exceptionWords, false,
+                var result = ChangeCase.ChangeWordsCase(parameter0, ChangeCase.ChangeCaseOptions.LowerCase, exceptedWords, false,
                     SavedSettings.exceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
                     SavedSettings.leftExceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
                     SavedSettings.rightExceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
@@ -1293,9 +1293,9 @@ namespace MusicBeePlugin
                 if (parameter1 == null)
                     parameter1 = SavedSettings.exceptionWordsAsr;
 
-                var exceptionWords = parameter1.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                var exceptedWords = parameter1.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-                var result = ChangeCase.ChangeWordsCase(parameter0, ChangeCase.ChangeCaseOptions.UpperCase, exceptionWords, false,
+                var result = ChangeCase.ChangeWordsCase(parameter0, ChangeCase.ChangeCaseOptions.UpperCase, exceptedWords, false,
                     SavedSettings.exceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
                     SavedSettings.leftExceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
                     SavedSettings.rightExceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
@@ -1317,11 +1317,11 @@ namespace MusicBeePlugin
                 if (parameter1 == null)
                     parameter1 = SavedSettings.exceptionWordsAsr;
 
-                var exceptionWords = parameter1.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                var exceptedWords = parameter1.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
                 parameter0 = ChangeCase.ChangeWordsCase(parameter0, ChangeCase.ChangeCaseOptions.LowerCase, null, false,
                     null, SavedSettings.wordSeparatorsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries));
-                var result = ChangeCase.ChangeSentenceCase(parameter0, exceptionWords, false,
+                var result = ChangeCase.ChangeSentenceCase(parameter0, exceptedWords, false,
                     SavedSettings.exceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
                     SavedSettings.leftExceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
                     SavedSettings.rightExceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
@@ -1516,7 +1516,7 @@ namespace MusicBeePlugin
                 {
                     for (var j = 0; j < roles.Length; j++)
                     {
-                        if (Regex.IsMatch(performersList[i], @".*\(" + roles[j] + @"\).*"))
+                        if (Regex.IsMatch(performersList[i], @"^.*\(" + roles[j] + @"\).*"))
                         {
                             performersList[i] = j.ToString("D3") + performersList[i];
                             break;
@@ -1576,15 +1576,16 @@ namespace MusicBeePlugin
             protected override string calculate(string currentFile, string parameter0, string parameter1 = null) //-V3065
             {
                 CustomText1 = Regex.Replace(CustomText1, "; ", ";");
-                var artists = parameter0.Replace("\u000E", "[").Replace("\u000F", "]").Split(new[] { "\u0000" }, StringSplitOptions.RemoveEmptyEntries);
+                var people = parameter0.Replace("\u000E", "[").Replace("\u000F", "]").Replace("; ", ";").Replace(": ", ":").Split(new[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
                 var roles = CustomText1.Split(new[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
                 var involvedPeople = new List<string>();
 
-                for (var i = 0; i < artists.Length; i++)
+                for (var i = 0; i < people.Length; i++)
                 {
-                    involvedPeople.Add(artists[i]);
-                    artists[i] = null;
+                    involvedPeople.Add(people[i]);
                 }
+
+                people = null;
 
                 if (involvedPeople.Count == 0)
                     return parameter0;
@@ -1594,7 +1595,7 @@ namespace MusicBeePlugin
                 {
                     for (var j = 0; j < roles.Length; j++)
                     {
-                        if (Regex.IsMatch(involvedPeople[i], @".*\(" + roles[j] + @"\).*"))
+                        if (Regex.IsMatch(involvedPeople[i], "^" + roles[j] + ":.*"))
                         {
                             involvedPeople[i] = j.ToString("D3") + involvedPeople[i];
                             break;
@@ -1610,17 +1611,17 @@ namespace MusicBeePlugin
 
                 involvedPeople.Sort();
 
-                var newArtists = string.Empty;
+                var newPeople = string.Empty;
 
                 var personNo = 0;
-                for (var i = 0; i < artists.Length; i++)
+                for (var i = 0; i < involvedPeople.Count; i++)
                 {
-                    newArtists += involvedPeople[personNo++].Remove(0, 3) + "\u0000";
+                    newPeople += involvedPeople[personNo++].Remove(0, 3) + ";";
                 }
 
-                newArtists = newArtists.Remove(newArtists.Length - 1, 1);
+                newPeople = newPeople.Remove(newPeople.Length - 1, 1);
 
-                return newArtists;
+                return newPeople;
             }
         }
 

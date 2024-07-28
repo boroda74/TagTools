@@ -18,6 +18,8 @@
                 components.Dispose();
             }
 
+            base.Dispose(disposing);
+
             if (disposing)
             {
                 customFont.Dispose();
@@ -563,6 +565,7 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label6);
+            this.DoubleBuffered = true;
             this.Name = "PluginQuickSettings";
             this.Tag = "@min-max-width-same@min-max-height-same";
             this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));

@@ -376,7 +376,12 @@ namespace MusicBeePlugin
             PlaylistDeleted = 39,
             SelectedFileChanged = 41,
             SelectedNodeChanged = 42,
-            SelectedFilterChanged = 43
+            SelectedFilterChanged = 43,
+
+            //Notifications below are added by me
+            FileRemovedFromLibrary = 44,
+            FileRemovedFromInbox = 45,
+            FileRenamed = 46
         }
 
         public enum PluginCloseReason

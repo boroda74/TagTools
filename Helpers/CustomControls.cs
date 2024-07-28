@@ -587,6 +587,8 @@ namespace MusicBeePlugin
         {
             if (disposing)
             {
+                base.Dispose(disposing); //*******
+
                 if (textBox != null)
                     textBox.Dispose();
 
@@ -602,8 +604,6 @@ namespace MusicBeePlugin
                 if (comboBox != null)
                     comboBox.Dispose();
             }
-
-            base.Dispose(disposing);
         }
 
         ~CustomComboBox()

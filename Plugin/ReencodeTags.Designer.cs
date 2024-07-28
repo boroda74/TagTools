@@ -241,6 +241,7 @@
             this.CancelButton = this.buttonCancel;
             this.Controls.Add(this.previewTable);
             this.Controls.Add(this.controlsPanel);
+            this.DoubleBuffered = true;
             this.Name = "ReEncodeTags";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ReEncodeTags_FormClosing);
             this.Load += new System.EventHandler(this.ReEncodeTags_Load);

@@ -20,11 +20,11 @@
 
             if (disposing)
             {
+                base.Dispose(disposing);
+
                 foreach (var customCombox in namesComboBoxes.Values)
                     customCombox.Dispose();
             }
-
-            base.Dispose(disposing);
         }
 
         #region Код, автоматически созданный конструктором форм Windows
@@ -37,11 +37,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PluginWindowTemplate));
             this.SuspendLayout();
-            //
-            //PluginWindowTemplate
-            //
+            // 
+            // PluginWindowTemplate
+            // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.DoubleBuffered = true;
             this.KeyPreview = true;
             this.Name = "PluginWindowTemplate";
             this.ShowInTaskbar = false;

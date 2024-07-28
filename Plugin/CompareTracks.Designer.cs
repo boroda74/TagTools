@@ -18,6 +18,8 @@
                 components.Dispose();
             }
 
+            base.Dispose(disposing);
+
             if (disposing)
             {
                 emptyArtwork.Dispose();
@@ -26,8 +28,6 @@
                 columnTemplate.Dispose();
                 artworkCellTemplate.Dispose();
             }
-
-            base.Dispose(disposing);
         }
 
         #region Код, автоматически созданный конструктором форм Windows
@@ -249,6 +249,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.previewTable);
             this.Controls.Add(this.toolsPanel);
+            this.DoubleBuffered = true;
             this.Name = "CompareTracks";
             this.Tag = "";
             this.Load += new System.EventHandler(this.CompareTracks_Load);

@@ -459,6 +459,7 @@
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.controlsPanel);
             this.HelpButton = true;
+            this.DoubleBuffered = true;
             this.Name = "MultipleSearchAndReplace";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MultipleSearchAndReplace_FormClosing);
             this.Load += new System.EventHandler(this.MultipleSearchAndReplace_Load);

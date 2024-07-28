@@ -126,7 +126,7 @@ namespace MusicBeePlugin
                     lock (LrPresetExecutionLocker)
                     {
                         LibraryReportsCommandForFunctionIds.appliedPreset = newOrChangedCachedPresets[i];
-                        LibraryReportsCommandForFunctionIds.executePreset(null, null, false, true, null, false, true);
+                        LibraryReportsCommandForFunctionIds.executePreset(null, false, true, null, false, true);
                     }
                 }
                 catch (ThreadAbortException)

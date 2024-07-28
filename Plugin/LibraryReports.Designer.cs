@@ -20,6 +20,8 @@ namespace MusicBeePlugin
                 components.Dispose();
             }
 
+            base.Dispose(disposing);
+
             if (disposing)
             {
                 periodicCacheClearingTimer?.Dispose();
@@ -39,8 +41,6 @@ namespace MusicBeePlugin
                 DefaultArtwork?.Dispose();
                 artwork?.Dispose();
             }
-
-            base.Dispose(disposing);
         }
 
         #region Код, автоматически созданный конструктором форм Windows
@@ -1413,6 +1413,7 @@ namespace MusicBeePlugin
             this.CancelButton = this.buttonClose;
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.autoApplyPresetsLabel);
+            this.DoubleBuffered = true;
             this.Name = "LibraryReports";
             this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LibraryReports_FormClosing);

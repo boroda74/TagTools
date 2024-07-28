@@ -1358,6 +1358,7 @@ namespace MusicBeePlugin
             this.Controls.Add(this.calculateThresholdsAtStartUpCheckBox);
             this.Controls.Add(this.autoRatingTagList);
             this.Controls.Add(this.label4);
+            this.DoubleBuffered = true;
             this.Name = "AutoRate";
             this.Tag = "@min-max-width-same@min-max-height-same";
             this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));

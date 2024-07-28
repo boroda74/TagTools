@@ -18,6 +18,8 @@
                 components.Dispose();
             }
 
+            base.Dispose(disposing);
+
             if (disposing)
             {
                 emptyArtwork.Dispose();
@@ -25,8 +27,6 @@
                 columnTemplate.Dispose();
                 artworkCellTemplate.Dispose();
             }
-
-            base.Dispose(disposing);
         }
 
         #region Код, автоматически созданный конструктором форм Windows
@@ -338,6 +338,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.optionsPanel);
+            this.DoubleBuffered = true;
             this.Name = "TagHistory";
             this.Load += new System.EventHandler(this.TagHistory_Load);
             this.Shown += new System.EventHandler(this.TagHistoryPlugin_Shown);

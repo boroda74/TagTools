@@ -133,6 +133,7 @@
             this.Controls.Add(this.withTagLabel);
             this.Controls.Add(this.sourceTagList);
             this.Controls.Add(this.SwapTagLabel);
+            this.DoubleBuffered = true;
             this.Name = "SwapTags";
             this.Tag = "@min-max-width-same@min-max-height-same";
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).EndInit();

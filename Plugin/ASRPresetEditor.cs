@@ -44,6 +44,8 @@ namespace MusicBeePlugin
         private string currentLanguage;
 
         private bool fillTagComboBoxes;
+        private string FormTitleBarText = null;
+        private int SearchedReplacedTagsFillingStepNumber = 0;
 
         private static string WritableAllTagsLocalizedItem;
         private Bitmap warning;
@@ -210,11 +212,11 @@ namespace MusicBeePlugin
             append4CheckBox.Checked = preset.append4;
             append5CheckBox.Checked = preset.append5;
 
-            condition1CheckBox.CheckState = getThreeStateChecked(preset.limitation1);
-            condition2CheckBox.CheckState = getThreeStateChecked(preset.limitation2);
-            condition3CheckBox.CheckState = getThreeStateChecked(preset.limitation3);
-            condition4CheckBox.CheckState = getThreeStateChecked(preset.limitation4);
-            condition5CheckBox.CheckState = getThreeStateChecked(preset.limitation5);
+            condition1CheckBox.CheckState = GetCheckState(preset.limitation1);
+            condition2CheckBox.CheckState = GetCheckState(preset.limitation2);
+            condition3CheckBox.CheckState = GetCheckState(preset.limitation3);
+            condition4CheckBox.CheckState = GetCheckState(preset.limitation4);
+            condition5CheckBox.CheckState = GetCheckState(preset.limitation5);
 
             languagesCustom.Text = Language;
 
@@ -262,26 +264,6 @@ namespace MusicBeePlugin
 
 
             button_GotFocus(AcceptButton, null); //Let's mark active button
-        }
-
-        private CheckState getThreeStateChecked(bool? state)
-        {
-            if (state == true)
-                return CheckState.Checked;
-            else if (state == false)
-                return CheckState.Unchecked;
-            else
-                return CheckState.Indeterminate;
-        }
-
-        private bool? getThreeStateBool(CheckState state)
-        {
-            if (state == CheckState.Checked)
-                return true;
-            else if (state == CheckState.Unchecked)
-                return false;
-            else
-                return null;
         }
 
         internal bool editPreset(Preset preset, bool openAsReadOnly)
@@ -362,11 +344,11 @@ namespace MusicBeePlugin
             preset.append4 = append4CheckBox.Checked;
             preset.append5 = append5CheckBox.Checked;
 
-            preset.limitation1 = getThreeStateBool(condition1CheckBox.CheckState);
-            preset.limitation2 = getThreeStateBool(condition2CheckBox.CheckState);
-            preset.limitation3 = getThreeStateBool(condition3CheckBox.CheckState);
-            preset.limitation4 = getThreeStateBool(condition4CheckBox.CheckState);
-            preset.limitation5 = getThreeStateBool(condition5CheckBox.CheckState);
+            preset.limitation1 = GetBoolFromCheckState(condition1CheckBox.CheckState);
+            preset.limitation2 = GetBoolFromCheckState(condition2CheckBox.CheckState);
+            preset.limitation3 = GetBoolFromCheckState(condition3CheckBox.CheckState);
+            preset.limitation4 = GetBoolFromCheckState(condition4CheckBox.CheckState);
+            preset.limitation5 = GetBoolFromCheckState(condition5CheckBox.CheckState);
 
             return true;
         }
@@ -510,6 +492,9 @@ namespace MusicBeePlugin
         private void parameterTagTypeChanged(CustomComboBox parameterTagTypeComboBox, PictureBox pictureBox, CustomComboBox parameterTagComboBox,
             Label tagLabel, CustomComboBox parameterTagTypeList2 = null, Label tagTypeLabel2 = null)
         {
+            if (FormTitleBarText != null)
+                this.Text = FormTitleBarText + CtlAsrPresetEditorPleaseWait + "(" + SearchedReplacedTagsFillingStepNumber++ + "/10)";
+
             var parameterTagName = parameterTagComboBox.Text;
 
             var tagType = (TagType)parameterTagTypeComboBox.SelectedIndex;
@@ -531,16 +516,47 @@ namespace MusicBeePlugin
             if (fillTagComboBoxes)
             {
                 FillTagComboBox(searchedTagListCustom, true);
+                if (FormTitleBarText != null)
+                    this.Text = FormTitleBarText + CtlAsrPresetEditorPleaseWait + "(" + SearchedReplacedTagsFillingStepNumber++ + "/10)";
+
                 FillTagComboBox(searchedTag2ListCustom, true);
+                if (FormTitleBarText != null)
+                    this.Text = FormTitleBarText + CtlAsrPresetEditorPleaseWait + "(" + SearchedReplacedTagsFillingStepNumber++ + "/10)";
+
                 FillTagComboBox(searchedTag3ListCustom, true);
+                if (FormTitleBarText != null)
+                    this.Text = FormTitleBarText + CtlAsrPresetEditorPleaseWait + "(" + SearchedReplacedTagsFillingStepNumber++ + "/10)";
+
                 FillTagComboBox(searchedTag4ListCustom, true);
+                if (FormTitleBarText != null)
+                    this.Text = FormTitleBarText + CtlAsrPresetEditorPleaseWait + "(" + SearchedReplacedTagsFillingStepNumber++ + "/10)";
+
                 FillTagComboBox(searchedTag5ListCustom, true);
+                if (FormTitleBarText != null)
+                    this.Text = FormTitleBarText + CtlAsrPresetEditorPleaseWait + "(" + SearchedReplacedTagsFillingStepNumber++ + "/10)";
+
+
 
                 FillTagComboBox(replacedTagListCustom, false);
+                if (FormTitleBarText != null)
+                    this.Text = FormTitleBarText + CtlAsrPresetEditorPleaseWait + "(" + SearchedReplacedTagsFillingStepNumber++ + "/10)";
+
                 FillTagComboBox(replacedTag2ListCustom, false);
+                if (FormTitleBarText != null)
+                    this.Text = FormTitleBarText + CtlAsrPresetEditorPleaseWait + "(" + SearchedReplacedTagsFillingStepNumber++ + "/10)";
+
                 FillTagComboBox(replacedTag3ListCustom, false);
+                if (FormTitleBarText != null)
+                    this.Text = FormTitleBarText + CtlAsrPresetEditorPleaseWait + "(" + SearchedReplacedTagsFillingStepNumber++ + "/10)";
+
                 FillTagComboBox(replacedTag4ListCustom, false);
+                if (FormTitleBarText != null)
+                    this.Text = FormTitleBarText + CtlAsrPresetEditorPleaseWait + "(" + SearchedReplacedTagsFillingStepNumber++ + "/10)";
+
                 FillTagComboBox(replacedTag5ListCustom, false);
+                if (FormTitleBarText != null)
+                    this.Text = FormTitleBarText + CtlAsrPresetEditorPleaseWait + "(" + SearchedReplacedTagsFillingStepNumber++ + "/10)";
+
             }
         }
 
@@ -683,6 +699,45 @@ namespace MusicBeePlugin
         private void AsrPresetEditor_Load(object sender, EventArgs e)
         {
             updateCustomScrollBars(descriptionBox);
+        }
+
+        private void AsrPresetEditor_Shown(object sender, EventArgs e)
+        {
+            FormTitleBarText = this.Text;
+            this.Text = FormTitleBarText + CtlAsrPresetEditorPleaseWait + "(0/9)";
+
+            Enable(false, null);
+
+            searchedTagListCustom.Enable(false);
+            replacedTagListCustom.Enable(false);
+            searchedTag2ListCustom.Enable(false);
+            replacedTag2ListCustom.Enable(false);
+            searchedTag3ListCustom.Enable(false);
+            replacedTag3ListCustom.Enable(false);
+            searchedTag4ListCustom.Enable(false);
+            replacedTag4ListCustom.Enable(false);
+            searchedTag5ListCustom.Enable(false);
+            replacedTag5ListCustom.Enable(false);
+
+
+            parameterTagTypeList_SelectedIndexChanged(null, null);
+
+
+            searchedTagListCustom.Enable(true);
+            replacedTagListCustom.Enable(true);
+            searchedTag2ListCustom.Enable(true);
+            replacedTag2ListCustom.Enable(true);
+            searchedTag3ListCustom.Enable(true);
+            replacedTag3ListCustom.Enable(true);
+            searchedTag4ListCustom.Enable(true);
+            replacedTag4ListCustom.Enable(true);
+            searchedTag5ListCustom.Enable(true);
+            replacedTag5ListCustom.Enable(true);
+
+            Enable(true, null);
+            this.Text = FormTitleBarText;
+
+            FormTitleBarText = null;
         }
     }
 }

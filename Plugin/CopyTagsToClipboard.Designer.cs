@@ -187,6 +187,7 @@ namespace MusicBeePlugin
             this.Controls.Add(this.tagSetComboBox);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.DoubleBuffered = true;
             this.Name = "CopyTagsToClipboard";
             this.Tag = "";
             this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));

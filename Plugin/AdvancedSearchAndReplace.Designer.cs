@@ -22,6 +22,8 @@ namespace MusicBeePlugin
                 components.Dispose();
             }
 
+            base.Dispose(disposing);
+
             if (disposing)
             {
                 if (allTagsWarningTimer != null)
@@ -34,8 +36,6 @@ namespace MusicBeePlugin
 
                 tagNameFont?.Dispose();
             }
-
-            base.Dispose(disposing);
         }
 
         #region Код, автоматически созданный конструктором форм Windows
@@ -1555,6 +1555,7 @@ namespace MusicBeePlugin
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.autoApplyPresetsLabel);
             this.Controls.Add(this.filtersPanel);
+            this.DoubleBuffered = true;
             this.Name = "AdvancedSearchAndReplace";
             this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AdvancedSearchAndReplace_FormClosing);

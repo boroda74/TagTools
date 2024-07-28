@@ -59,6 +59,7 @@
             this.CancelButton = this.buttonCancel;
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.progressInfoLabel);
+            this.DoubleBuffered = true;
             this.Name = "LrFunctionPrecaching";
             this.Tag = "@min-max-width-same@min-max-height-same";
             this.Shown += new System.EventHandler(this.LrFunctionPrecaching_Shown);

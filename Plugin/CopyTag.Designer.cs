@@ -389,6 +389,7 @@
             this.Controls.Add(this.sourceTagList);
             this.Controls.Add(this.copyTagLabel);
             this.Controls.Add(this.fieldsPanel);
+            this.DoubleBuffered = true;
             this.Name = "CopyTag";
             this.Tag = "";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CopyTag_FormClosing);
