@@ -209,6 +209,21 @@ namespace MusicBeePlugin
         {
             Size = textBox.Size;
         }
+
+        protected override void Dispose(bool disposing)
+        {
+           base.Dispose(disposing); //*******
+
+           if (disposing)
+            {
+                textBox?.Dispose();
+            }
+        }
+
+        ~TextBoxBorder()
+        {
+            Dispose(false);
+        }
     }
 
     public class CustomComboBox : UserControl
@@ -585,24 +600,15 @@ namespace MusicBeePlugin
 
         protected override void Dispose(bool disposing)
         {
+            base.Dispose(disposing); //*******
+
             if (disposing)
             {
-                base.Dispose(disposing); //*******
-
-                if (textBox != null)
-                    textBox.Dispose();
-
-                if (button != null)
-                    button.Dispose();
-
-                if (listBox != null)
-                    listBox.Dispose();
-
-                if (dropDown != null)
-                    dropDown.Dispose();
-
-                if (comboBox != null)
-                    comboBox.Dispose();
+                textBox?.Dispose();
+                button?.Dispose();
+                listBox?.Dispose();
+                dropDown?.Dispose();
+                comboBox?.Dispose();
             }
         }
 
@@ -1163,6 +1169,21 @@ namespace MusicBeePlugin
             if (vScrollBar?.Visible == true)
                 vScrollBar.Invalidate();
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing); //*******
+
+            if (disposing)
+            {
+                vScrollBar?.Dispose();
+            }
+        }
+
+        ~CustomTextBox()
+        {
+            Dispose(false);
+        }
     }
 
     public class CustomListBox : ListBox
@@ -1257,8 +1278,6 @@ namespace MusicBeePlugin
 
                 vScrollBar.Visible = scrollBarVisible;
                 AdjustWidth(dropDownWidth, scrollBarVisible);
-
-
             }
         }
 
@@ -1386,6 +1405,22 @@ namespace MusicBeePlugin
         private void InitializeComponent()
         {
             //Nothing for now...
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing); //*******
+
+            if (disposing)
+            {
+                hScrollBar?.Dispose();
+                vScrollBar?.Dispose();
+            }
+        }
+
+        ~CustomListBox()
+        {
+            Dispose(false);
         }
     }
 
@@ -1532,6 +1567,22 @@ namespace MusicBeePlugin
         {
             //Nothing for now...
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing); //*******
+
+            if (disposing)
+            {
+                hScrollBar?.Dispose();
+                vScrollBar?.Dispose();
+            }
+        }
+
+        ~CustomCheckedListBox()
+        {
+            Dispose(false);
+        }
     }
 
 
@@ -1615,25 +1666,24 @@ namespace MusicBeePlugin
 
         protected override void Dispose(bool disposing)
         {
+            base.Dispose(disposing);
+
             if (disposing)
             {
-                if (scrollBarBackBrush != null)
-                    scrollBarBackBrush.Dispose();
+                scrollBarBackBrush?.Dispose();
+                scrollBarBorderBrush?.Dispose();
+                narrowScrollBarBackBrush?.Dispose();
+                scrollBarThumbAndSpansBackBrush?.Dispose();
+                scrollBarThumbAndSpansBorderBrush?.Dispose();
 
-                if (scrollBarBorderBrush != null)
-                    scrollBarBorderBrush.Dispose();
+                UpArrowImage?.Dispose();
+                DownArrowImage?.Dispose();
 
-                if (narrowScrollBarBackBrush != null)
-                    narrowScrollBarBackBrush.Dispose();
+                ThumbTopImage?.Dispose();
+                ThumbMiddleImage?.Dispose();
+                ThumbBottomImage?.Dispose();
 
-                if (scrollBarThumbAndSpansBackBrush != null)
-                    scrollBarThumbAndSpansBackBrush.Dispose();
-
-                if (scrollBarThumbAndSpansBorderBrush != null)
-                    scrollBarThumbAndSpansBorderBrush.Dispose();
             }
-
-            base.Dispose(disposing);
         }
 
         ~CustomVScrollBar()
@@ -1759,7 +1809,7 @@ namespace MusicBeePlugin
                 Dock = DockStyle.Fill;
             }
 
-            smallChange = 25;
+            smallChange = 5;
             Value = 0;
 
             SizeChanged += customScrollBar_SizeChanged;
@@ -2428,25 +2478,23 @@ namespace MusicBeePlugin
 
         protected override void Dispose(bool disposing)
         {
+            base.Dispose(disposing);
+
             if (disposing)
             {
-                if (scrollBarBackBrush != null)
-                    scrollBarBackBrush.Dispose();
+                scrollBarBackBrush?.Dispose();
+                scrollBarBorderBrush?.Dispose();
+                narrowScrollBarBackBrush?.Dispose();
+                scrollBarThumbAndSpansBackBrush?.Dispose();
+                scrollBarThumbAndSpansBorderBrush?.Dispose();
 
-                if (scrollBarBorderBrush != null)
-                    scrollBarBorderBrush.Dispose();
+                LeftArrowImage?.Dispose();
+                RightArrowImage?.Dispose();
 
-                if (narrowScrollBarBackBrush != null)
-                    narrowScrollBarBackBrush.Dispose();
-
-                if (scrollBarThumbAndSpansBackBrush != null)
-                    scrollBarThumbAndSpansBackBrush.Dispose();
-
-                if (scrollBarThumbAndSpansBorderBrush != null)
-                    scrollBarThumbAndSpansBorderBrush.Dispose();
+                ThumbLeftImage?.Dispose();
+                ThumbMiddleImage?.Dispose();
+                ThumbRightImage?.Dispose();
             }
-
-            base.Dispose(disposing);
         }
 
         ~CustomHScrollBar()
@@ -2554,7 +2602,7 @@ namespace MusicBeePlugin
                 Dock = DockStyle.Fill;
             }
 
-            smallChange = 25;
+            smallChange = 5;
             Value = 0;
 
             SizeChanged += customScrollBar_SizeChanged;
