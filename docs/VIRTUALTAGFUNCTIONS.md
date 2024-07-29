@@ -57,12 +57,13 @@ e.g. $NumberOfDays(\<Year\>,\<Original Year\>) or $SubDateTime(\<Date Added\>,01
     opening and closing characters are paired by their position in the lists (the lists may be, e.g., 
     "<b>( \[ {</b>" and "<b>) \] }</b>"). <b><i>sentence_separators</i></b>, is the list of characters after which the words will become 
     capitalized (switching off all exceptions, e.g. <b><i>lower_case_words</i></b>, besides the words from the 
-    <b><i>upper_case_words</i></b>). <b><i>The first word</i></b> will <b><i>always</i></b> be capitalized (besides the words from the <b><i>upper_case_words</i></b>). It’s recommended to enclose the last four lists into quotes (e.g., <b>"\& . -"</b>). 
-    Characters in all character lists may be separated by spaces or not separated at all. For example, these 
-    two character lists mean the same: "<b>. , -</b>" and "<b>.,-</b>". You can omit any parameter except for the first one, 
-    using a single character <b>`</b> <b><i>not</i></b> surrounded by spaces to pass empty parameter. You can <b><i>safely use</i></b> character <b>`</b> 
-    in its literal meaning if it’s typed in the list <b><i>along with other characters</i></b> or using a single character <b>`</b> 
-    <b><i>surrounded</i></b> by spaces. 
+    <b><i>upper_case_words</i></b>). <b><i>The first word</i></b> will <b><i>always</i></b> be capitalized (besides the words from the <b><i>upper_case_words</i></b>). 
+    It’s recommended to enclose the last four lists into quotes (e.g., <b>"\& . -"</b>). Characters in all character 
+    lists may be separated by spaces or not separated at all. For example, these two character lists mean 
+    the same: "<b>. , -</b>" and "<b>.,-</b>". You can omit any parameter except for the first one, using a single 
+    character <b>`</b> <b><i>not</i></b> surrounded by spaces to pass empty parameter. You can <b><i>safely use</i></b> character <b>`</b> in its literal 
+    meaning if it’s typed in the list <b><i>along with other characters</i></b> or using a single character <b>`</b> <b><i>surrounded</i></b> by 
+    spaces. 
   
     If you are using the plugin with MusicBee 3.6 or later, then you can omit any number of end parameters 
     simply by putting closing parenthesis earlier, e.g., <b><i>$TitleCase(string,lower_case_words,word_separators)</i></b>
