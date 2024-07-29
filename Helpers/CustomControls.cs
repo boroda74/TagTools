@@ -1809,7 +1809,7 @@ namespace MusicBeePlugin
                 Dock = DockStyle.Fill;
             }
 
-            smallChange = 5;
+            smallChange = 5; //****
             Value = 0;
 
             SizeChanged += customScrollBar_SizeChanged;
@@ -2602,7 +2602,7 @@ namespace MusicBeePlugin
                 Dock = DockStyle.Fill;
             }
 
-            smallChange = 5;
+            smallChange = 5; //****
             Value = 0;
 
             SizeChanged += customScrollBar_SizeChanged;

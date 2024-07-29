@@ -68,7 +68,7 @@ To use this function open library reports window, create one or more presets, ea
 
 **Make sure that you haven't accidentally checked some "Library Reports" presets for auto-execution.** You will see a warning message at the top of "Library Reports" window if any presets are marked as auto-executed:
 
-[Auto-executed preset view example](LRAUTO-EXECUTIONFILTERING.md)
+[View auto-executed preset example](LRAUTO-EXECUTIONFILTERING.md)
 
 ### Auto Rate
 
@@ -104,7 +104,7 @@ To use this function open ASR window, select preset and define preset id (any st
 
 **Make sure that you haven't accidentally checked some "Advanced Search \& Replace" presets for auto-execution.** You will see a warning message at the top of the ASR window if any presets are marked as auto-executed:
 
-[Auto-executed preset view example](ASRAUTO-EXECUTIONFILTERING.md)
+[View auto-executed preset example](ASRAUTO-EXECUTIONFILTERING.md)
 
 ### Multiple Search \& Replace
 
@@ -150,4 +150,4 @@ To define date type of custom tag, open MusicBee menu\Edit\Preferences\Tags (1)\
 
 ***
 
-Copyright © boroda 2012-2024. Help version 8.2.240725
+Copyright © boroda 2012-2024. Help version 8.3.240729

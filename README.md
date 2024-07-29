@@ -6,15 +6,11 @@ Plugin requires MusicBee version **3.5** or higher.
 
 *Note:*
 
-If you are familiar with the plugin quick update process, you can always download *the latest plugin version [here][1]* (NOTE: this latest version always requires the latest version of MusicBee, which sometimes may be available as a beta). Copy all files from the archive “mb_TagTools_latest.zip” to the MusicBee “Plugins” folder, overwriting existing files.
+If you are familiar with the plugin quick update process, you can always [download latest plugin version here](https://www.mediafire.com/file/h2t08o9562efboi/mb\_TagTools\_latest.zip/file"target=\"\_blank\"") (NOTE: this latest version always requires the latest version of MusicBee which sometimes may be available as a beta. The latest MusicBee version was **3.6** at the time of writing this help file). Copy the file "mb\_TagTools.dll" from the archive "mb\_TagTools\_latest.zip" to MusicBee "Plugins" folder, and overwrite the existing file.
 
 *Note:*
 
-Plugin's advanced features are very sophisticated and can be confusing, though basic ones are pretty simple to use. But you can disable almost any part of plugin functionality (of course, you can re-enable any part later). Disabling any plugin menu item in settings hides not only the menu item itself but also turns off the entire corresponding plugin functionality.
-
-*Note:*
-
-Pay attention to tool tips over buttons/fields in plugin windows. Use help: Tools> Additional Tagging & Reporting Tools> Help.
+Pay attention to tool tips over buttons/fields in plugin windows.
 
 #### Plugin adding/updating/removing
 
@@ -22,7 +18,7 @@ Extract content of the downloaded archive to a temporary folder of your choice. 
 
 #### This help file has been last updated on:
 
-**2024-07-25**
+**2024-07-29**
 
 # Content
 
@@ -38,4 +34,4 @@ Extract content of the downloaded archive to a temporary folder of your choice. 
 
 ***
 
-Copyright © boroda 2012-2024. Help version 8.2.240725
+Copyright © boroda 2012-2024. Help version 8.3.240729
