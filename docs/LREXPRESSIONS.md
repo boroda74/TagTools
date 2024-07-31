@@ -16,4 +16,4 @@ You can refer to any tag in an LR expression using the MusicBee generic \<Tag Na
 
 ***
 
-Copyright © boroda 2012-2024. Help version 8.3.240729
+Copyright © boroda 2012-2024. Help version 8.3.240731

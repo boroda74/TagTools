@@ -22,4 +22,4 @@ This project has been checked by PVS-Studio.
 
 ***
 
-Copyright © boroda 2012-2024. Help version 8.3.240729
+Copyright © boroda 2012-2024. Help version 8.3.240731

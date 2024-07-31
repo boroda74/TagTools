@@ -27,4 +27,4 @@ You can use special functions in substitution fields of "Advanced Search \& Repl
 
 ***
 
-Copyright © boroda 2012-2024. Help version 8.3.240729
+Copyright © boroda 2012-2024. Help version 8.3.240731

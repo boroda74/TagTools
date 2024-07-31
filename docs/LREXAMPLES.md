@@ -14,4 +14,4 @@ If you want to get the total duration of all tracks of artist of displayed track
 
 ***
 
-Copyright © boroda 2012-2024. Help version 8.3.240729
+Copyright © boroda 2012-2024. Help version 8.3.240731

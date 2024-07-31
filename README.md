@@ -34,4 +34,4 @@ Extract content of the downloaded archive to a temporary folder of your choice. 
 
 ***
 
-Copyright © boroda 2012-2024. Help version 8.3.240729
+Copyright © boroda 2012-2024. Help version 8.3.240731

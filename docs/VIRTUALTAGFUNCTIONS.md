@@ -42,10 +42,10 @@ e.g. $NumberOfDays(\<Year\>,\<Original Year\>) or $SubDateTime(\<Date Added\>,01
   
     If you are using the plugin with MusicBee 3.6 or later, then you can omit any number of end parameters 
     simply by putting closing parenthesis earlier, e.g., <b><i>$SentenceCase(string)</i></b> 
-    or <b><i>$SentenceCase(string,sentence_separators)</i></b>
+    or <b><i>$SentenceCase(string,upper_case_words)</i></b>
 
 <b>$TitleCase(string,lower_case_words,upper_case_words,word_separators,
-    lower_case_between_chars_opening_list,lower_case_between_chars_closing_list,lower_case_after_chars)</b> : where 
+    lower_case_between_chars_opening_list,lower_case_between_chars_closing_list,sentence_separators)</b> : where 
     <b><i>lower_case_words</i></b> is the list of words separated by spaces, which will become lowercase (<b><i>always except for 
     the first word</i></b> and <b><i>except for the last words</i></b> if not lowercase by <b><i>other parameters</i></b>). <b><i>upper_case_words</i></b> will 
     become uppercase. This rule <i>overrides all other rules</i>. <b><i>word_separators</i></b> is the list of characters after which 
@@ -63,7 +63,7 @@ e.g. $NumberOfDays(\<Year\>,\<Original Year\>) or $SubDateTime(\<Date Added\>,01
     spaces. 
   
     If you are using the plugin with MusicBee 3.6 or later, then you can omit any number of end parameters 
-    simply by putting closing parenthesis earlier, e.g., <b><i>$TitleCase(string,lower_case_words,word_separators)</i></b>
+    simply by putting closing parenthesis earlier, e.g., <b><i>$TitleCase(string,lower_case_words,upper_case_words)</i></b>
 
 <b>$Sqrt(number)</b> : square root. May be useful for collecting some library statistics (in conjunction with 
     LR functions)
@@ -108,4 +108,4 @@ e.g. $NumberOfDays(\<Year\>,\<Original Year\>) or $SubDateTime(\<Date Added\>,01
 
 ***
 
-Copyright © boroda 2012-2024. Help version 8.3.240729
+Copyright © boroda 2012-2024. Help version 8.3.240731
