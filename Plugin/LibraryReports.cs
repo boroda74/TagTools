@@ -53,62 +53,66 @@ namespace MusicBeePlugin
         private AddRowsToTable addRowsToTable;
         private UpdateTable updateTable;
 
-        private System.Threading.Timer periodicCacheClearingTimer;
+        private System.Threading.Timer periodicCacheClearingTimer = null;
+        private static bool DelayedFunctionCacheUpdatePrioritySet = false;
 
         private void periodicCacheClearing(object state)//****
         {
             if ((PluginClosing || SavedSettings.dontShowLibraryReports || cachedPresetsTags.Count > PresetCacheCountThreshold)
                 && !BackgroundTaskIsInProgress)
             {
-                if (cachedPresetsTags.Count > PresetCacheCountCriticalThreshold)
+                lock (cachedPresetsTags)
                 {
-                    lastCachedAppliedPresetGuid = Guid.NewGuid();
-                    cachedAppliedPresetGuids.Clear();
-
-                    cachedPresetsTags.Clear();
-
-                    cachedPresetsGroupingsTagIds.Clear();
-                    cachedPresetsGroupingsPropIds.Clear();
-                    cachedPresetsActualGroupingsTagIds.Clear();
-                    cachedPresetsActualGroupingsPropIds.Clear();
-                    cachedPresetsNativeTagNames.Clear();
-
-                    cachedPresetsFilesActualComposedSplitGroupingTagsList.Clear();
-                    cachedPresetsFilesActualGroupingTags.Clear();
-                    cachedPresetsFilesActualGroupingTagsRaw.Clear();
-
-                    clearArtworks();
-                }
-                else
-                {
-                    var clearedSome = false;
-
-                    foreach (var guid in cachedAppliedPresetGuids.Keys)
+                    if (cachedPresetsTags.Count > PresetCacheCountCriticalThreshold)
                     {
-                        if (cachedPresetsTags.Count > TagsCacheClearingGroupingsCountThreshold || !AllLrPresetGuidsInUse.ContainsKey(guid))
-                        {
-                            clearedSome = true;
+                        lastCachedAppliedPresetGuid = Guid.NewGuid();
+                        cachedAppliedPresetGuids.Clear();
 
-                            if (guid == lastCachedAppliedPresetGuid)
-                                lastCachedAppliedPresetGuid = Guid.NewGuid();
+                        cachedPresetsTags.Clear();
 
-                            cachedAppliedPresetGuids.Remove(guid);
+                        cachedPresetsGroupingsTagIds.Clear();
+                        cachedPresetsGroupingsPropIds.Clear();
+                        cachedPresetsActualGroupingsTagIds.Clear();
+                        cachedPresetsActualGroupingsPropIds.Clear();
+                        cachedPresetsNativeTagNames.Clear();
 
-                            cachedPresetsTags.Remove(guid);
+                        cachedPresetsFilesActualComposedSplitGroupingTagsList.Clear();
+                        cachedPresetsFilesActualGroupingTags.Clear();
+                        cachedPresetsFilesActualGroupingTagsRaw.Clear();
 
-                            cachedPresetsGroupingsTagIds.Remove(guid);
-                            cachedPresetsGroupingsPropIds.Remove(guid);
-                            cachedPresetsActualGroupingsTagIds.Remove(guid);
-                            cachedPresetsActualGroupingsPropIds.Remove(guid);
-                            cachedPresetsNativeTagNames.Remove(guid);
-                            cachedPresetsFilesActualGroupingTags.Remove(guid);
-                            cachedPresetsFilesActualGroupingTagsRaw.Remove(guid);
-                            cachedPresetsFilesActualComposedSplitGroupingTagsList.Remove(guid);
-                        }
-                    }
-
-                    if (clearedSome)
                         clearArtworks();
+                    }
+                    else
+                    {
+                        var clearedSome = false;
+
+                        foreach (var guid in cachedAppliedPresetGuids.Keys)
+                        {
+                            if (cachedPresetsTags.Count > TagsCacheClearingGroupingsCountThreshold || !AllLrPresetGuidsInUse.ContainsKey(guid))
+                            {
+                                clearedSome = true;
+
+                                if (guid == lastCachedAppliedPresetGuid)
+                                    lastCachedAppliedPresetGuid = Guid.NewGuid();
+
+                                cachedAppliedPresetGuids.Remove(guid);
+
+                                cachedPresetsTags.Remove(guid);
+
+                                cachedPresetsGroupingsTagIds.Remove(guid);
+                                cachedPresetsGroupingsPropIds.Remove(guid);
+                                cachedPresetsActualGroupingsTagIds.Remove(guid);
+                                cachedPresetsActualGroupingsPropIds.Remove(guid);
+                                cachedPresetsNativeTagNames.Remove(guid);
+                                cachedPresetsFilesActualGroupingTags.Remove(guid);
+                                cachedPresetsFilesActualGroupingTagsRaw.Remove(guid);
+                                cachedPresetsFilesActualComposedSplitGroupingTagsList.Remove(guid);
+                            }
+                        }
+
+                        if (clearedSome)
+                            clearArtworks();
+                    }
                 }
             }
 
@@ -2033,6 +2037,50 @@ namespace MusicBeePlugin
                 previewTable.CurrentCell = previewTable.Rows[0].Cells[0];
         }
 
+        internal void updateLrCacheForRenamedTrack(string oldFilenameNewFilename)
+        {
+            string[] filenames = oldFilenameNewFilename.Split('\0');
+            int newTrackId = GetPersistentTrackIdInt(filenames[1]);
+
+            foreach (var guidTags in cachedPresetsTags)
+            {
+                if (guidTags.Value.TryGetValue(filenames[0], out var tags))
+                {
+                    guidTags.Value.Remove(filenames[0]);
+                    guidTags.Value.Add(filenames[1], tags);
+                }
+            }
+
+
+            lock (FilesUpdatedByPlugin)
+            {
+                if (FilesUpdatedByPlugin.Contains(filenames[0]))
+                {
+                    FilesUpdatedByPlugin.Remove(filenames[0]);
+                    FilesUpdatedByPlugin.Add(filenames[1]);
+                }
+            }
+
+
+            lock (ChangedFiles)
+            {
+                if (ChangedFiles.Contains(filenames[0]))
+                {
+                    ChangedFiles.Remove(filenames[0]);
+                    ChangedFiles.Add(filenames[1]);
+                }
+            }
+
+
+            lock (LrTrackCacheNeededToBeUpdated)
+                LrTrackCacheNeededToBeUpdated.ReplaceExisting(newTrackId, filenames[1]);
+
+            lock (LrTrackCacheNeededToBeUpdatedWorkingCopy)
+                for (int i = 0; i < LrTrackCacheNeededToBeUpdatedWorkingCopy.Length; i++)
+                    if (LrTrackCacheNeededToBeUpdatedWorkingCopy[i] == filenames[0])
+                        LrTrackCacheNeededToBeUpdatedWorkingCopy[i] = filenames[1];
+        }
+
         private void clearArtworks()
         {
             artwork?.Dispose();
@@ -2376,22 +2424,28 @@ namespace MusicBeePlugin
         private void updateAppliedPresetCache(AggregatedTags tags, SortedDictionary<int, string[]> filesGroupingTags, SortedDictionary<int, string[]> filesGroupingTagsRaw,
             SortedDictionary<int, List<string>> filesActualComposedGroupingTags)
         {
-            lastCachedAppliedPresetGuid = appliedPreset.guid;
-            cachedAppliedPresetGuids.AddSkip(appliedPreset.guid);
-            cachedPresetsTags.AddReplace(appliedPreset.guid, tags);
-            cachedPresetsFilesActualGroupingTags.AddReplace(appliedPreset.guid, filesGroupingTags);
-            cachedPresetsFilesActualGroupingTagsRaw.AddReplace(appliedPreset.guid, filesGroupingTagsRaw);
-            cachedPresetsFilesActualComposedSplitGroupingTagsList.AddReplace(appliedPreset.guid, filesActualComposedGroupingTags);
+            lock (cachedPresetsTags)
+            {
+                lastCachedAppliedPresetGuid = appliedPreset.guid;
+                cachedAppliedPresetGuids.AddSkip(appliedPreset.guid);
+                cachedPresetsTags.AddReplace(appliedPreset.guid, tags);
+                cachedPresetsFilesActualGroupingTags.AddReplace(appliedPreset.guid, filesGroupingTags);
+                cachedPresetsFilesActualGroupingTagsRaw.AddReplace(appliedPreset.guid, filesGroupingTagsRaw);
+                cachedPresetsFilesActualComposedSplitGroupingTagsList.AddReplace(appliedPreset.guid, filesActualComposedGroupingTags);
+            }
         }
 
         private void clearAppliedPresetCache()
         {
-            lastCachedAppliedPresetGuid = Guid.NewGuid();
-            cachedAppliedPresetGuids.RemoveExisting(appliedPreset.guid);
-            cachedPresetsTags.RemoveExisting(appliedPreset.guid);
-            cachedPresetsFilesActualGroupingTags.RemoveExisting(appliedPreset.guid);
-            cachedPresetsFilesActualGroupingTagsRaw.RemoveExisting(appliedPreset.guid);
-            cachedPresetsFilesActualComposedSplitGroupingTagsList.RemoveExisting(appliedPreset.guid);
+            lock (cachedPresetsTags)
+            {
+                lastCachedAppliedPresetGuid = Guid.NewGuid();
+                cachedAppliedPresetGuids.RemoveExisting(appliedPreset.guid);
+                cachedPresetsTags.RemoveExisting(appliedPreset.guid);
+                cachedPresetsFilesActualGroupingTags.RemoveExisting(appliedPreset.guid);
+                cachedPresetsFilesActualGroupingTagsRaw.RemoveExisting(appliedPreset.guid);
+                cachedPresetsFilesActualComposedSplitGroupingTagsList.RemoveExisting(appliedPreset.guid);
+            }
         }
 
         private string getTagValue(string file, MetaDataType tagId, FilePropertyType propId, bool getRawValues)
@@ -2502,7 +2556,7 @@ namespace MusicBeePlugin
 
                 if (returnValue == null)
                 {
-                    if (queriedFiles == null)
+                    if (queriedFiles == null && readOtherwiseProcessExcludedGroupingTags != false) //Not recalculating preset based on cached tags
                     {
                         queryEntireLibrary = true;
 
@@ -2697,32 +2751,54 @@ namespace MusicBeePlugin
             }
 
 
-            if (!cachedPresetsTags.TryGetValue(appliedPreset.guid, out var tags))
+            AggregatedTags tags;
+            SortedDictionary<int, string[]> cachedFilesActualGroupingTags;
+            SortedDictionary<int, string[]> cachedFilesActualGroupingTagsRaw;
+            SortedDictionary<int, List<string>> cachedFilesActualComposedSplitGroupingTagsList;
+
+            lock (cachedPresetsTags)
             {
-                tags = new AggregatedTags();
-                cachedPresetsTags.Add(appliedPreset.guid, tags);
+                if (!cachedPresetsTags.TryGetValue(appliedPreset.guid, out tags))
+                {
+                    tags = new AggregatedTags();
+                    cachedPresetsTags.Add(appliedPreset.guid, tags);
+                }
+
+
+                if (!cachedPresetsFilesActualGroupingTags.TryGetValue(appliedPreset.guid, out cachedFilesActualGroupingTags))
+                {
+                    cachedFilesActualGroupingTags = new SortedDictionary<int, string[]>(); //<URLs, Grouping tag[]s>
+                    cachedPresetsFilesActualGroupingTags.Add(appliedPreset.guid, cachedFilesActualGroupingTags);
+                }
+
+                if (!cachedPresetsFilesActualGroupingTagsRaw.TryGetValue(appliedPreset.guid, out cachedFilesActualGroupingTagsRaw))
+                {
+                    cachedFilesActualGroupingTagsRaw = new SortedDictionary<int, string[]>(); //<URLs, Grouping tag[]s>
+                    cachedPresetsFilesActualGroupingTagsRaw.Add(appliedPreset.guid, cachedFilesActualGroupingTagsRaw);
+                }
+
+                if (!cachedPresetsFilesActualComposedSplitGroupingTagsList.TryGetValue(appliedPreset.guid, out cachedFilesActualComposedSplitGroupingTagsList))
+                {
+                    cachedFilesActualComposedSplitGroupingTagsList = new SortedDictionary<int, List<string>>(); //<URL, List of <composed groupings>>
+                    cachedPresetsFilesActualComposedSplitGroupingTagsList.Add(appliedPreset.guid, cachedFilesActualComposedSplitGroupingTagsList);
+                }
+
+
+                if (forceCacheUpdate && readOtherwiseProcessExcludedGroupingTags != false)
+                {
+                    for (int k = 0; k < queriedFiles.Length; k++)
+                    {
+                        int trackId = GetPersistentTrackIdInt(queriedFiles[k]);
+
+                        cachedFilesActualGroupingTags.RemoveExisting(trackId);
+                        cachedFilesActualGroupingTagsRaw.RemoveExisting(trackId);
+                        cachedFilesActualComposedSplitGroupingTagsList.RemoveExisting(trackId);
+                    }
+                }
             }
 
-            if (!cachedPresetsFilesActualGroupingTags.TryGetValue(appliedPreset.guid, out var cachedFilesActualGroupingTags))
-            {
-                cachedFilesActualGroupingTags = new SortedDictionary<int, string[]>(); //<URLs, Grouping tag[]s>
-                cachedPresetsFilesActualGroupingTags.Add(appliedPreset.guid, cachedFilesActualGroupingTags);
-            }
 
-            if (!cachedPresetsFilesActualGroupingTagsRaw.TryGetValue(appliedPreset.guid, out var cachedFilesActualGroupingTagsRaw))
-            {
-                cachedFilesActualGroupingTagsRaw = new SortedDictionary<int, string[]>(); //<URLs, Grouping tag[]s>
-                cachedPresetsFilesActualGroupingTagsRaw.Add(appliedPreset.guid, cachedFilesActualGroupingTagsRaw);
-            }
-
-            if (!cachedPresetsFilesActualComposedSplitGroupingTagsList.TryGetValue(appliedPreset.guid, out var cachedFilesActualComposedSplitGroupingTagsList))
-            {
-                cachedFilesActualComposedSplitGroupingTagsList = new SortedDictionary<int, List<string>>(); //<URL, List of <composed groupings>>
-                cachedPresetsFilesActualComposedSplitGroupingTagsList.Add(appliedPreset.guid, cachedFilesActualComposedSplitGroupingTagsList);
-            }
-
-
-            if (!queryOnlyGroupings && queriedGroupingTagsRaw == null) //Use dictionaries as local variables (not reading tags and not recalculating changed tags)
+            if (!queryOnlyGroupings && queriedGroupingTagsRaw == null) //Use dictionaries as local variables (not reading tags, and not recalculating changed tags)
             {
                 PrepareGroupingTagDictionaries(
                             appliedPreset,
@@ -2748,12 +2824,12 @@ namespace MusicBeePlugin
 
             var queriedFilesDict = new SortedDictionary<string, bool>();
 
-            foreach (var file in queriedFiles)
-                queriedFilesDict.AddSkip(file);
+            if (readOtherwiseProcessExcludedGroupingTags != false) //queriedFiles == null if readOtherwiseProcessExcludedGroupingTags == false
+                foreach (var file in queriedFiles)
+                    queriedFilesDict.AddSkip(file);
 
 
-            if (readOtherwiseProcessExcludedGroupingTags != false) //Either queriedGroupingTagsRaw, queriedActualGroupingTags & queriedActualGroupingTagsRaw
-                                                                   //are local variables or must be returned
+            if (readOtherwiseProcessExcludedGroupingTags != false) //Not recalculating preset based on cached grouping tags
             {
                 if (!processFileGroupings(queriedFilesDict, interactive, functionId, queryOnlyGroupings, groupings, lastSeqNumInOrder,
                         tags, queriedActualGroupingsTagIds, queriedActualGroupingsPropIds,
@@ -2769,6 +2845,11 @@ namespace MusicBeePlugin
                     queriedActualGroupingTagsRaw = null;
 
                     return String.Empty;
+                }
+                else if (readOtherwiseProcessExcludedGroupingTags == true) //Tags changing. Let's clear cache of aggregated tags to be changed soon
+                {
+                    for (int k = 0; k < queriedFiles.Length; k++)
+                        tags.RemoveExisting(queriedFiles[k]);
                 }
             }
 
@@ -2787,9 +2868,10 @@ namespace MusicBeePlugin
 
                 return "...";
             }
-            else if (readOtherwiseProcessExcludedGroupingTags == true) //Let's return tags, which won't be relevant soon (either will be changed or track will be removed)
-                                                                       //Grouping tags are returned through queriedGroupingTagsRaw, queriedActualGroupingTags and
-                                                                       //queriedActualGroupingTagsRaw
+            //Let's return tags, which may not be relevant soon (either will be changed or track will be removed)
+            //Grouping tags are returned through queriedGroupingTagsRaw, queriedActualGroupingTags and
+            //queriedActualGroupingTagsRaw
+            else if (readOtherwiseProcessExcludedGroupingTags == true)
             {
                 return null;
             }
@@ -2797,10 +2879,12 @@ namespace MusicBeePlugin
 
             string[] potentiallyAffectedFiles;
 
-            if (queryEntireLibrary)
+            if (queryEntireLibrary && readOtherwiseProcessExcludedGroupingTags != false) //Not recalculating preset based on cached grouping tags
             {
                 potentiallyAffectedFiles = queriedFiles;
             }
+            //If recalculating preset based on cached grouping tags, then queriedGroupingTagsRaw, queriedActualGroupingTags & queriedActualGroupingTagsRaw
+            //are passed as parameters
             else
             {
                 var query = @"<SmartPlaylist><Source Type=""1""><Conditions CombineMethod=""All"">";
@@ -2838,6 +2922,11 @@ namespace MusicBeePlugin
                     updateAppliedPresetCache(tags, cachedFilesActualGroupingTags, cachedFilesActualGroupingTagsRaw, cachedFilesActualComposedSplitGroupingTagsList);
                     return string.Empty;
                 }
+
+                //Recalculating preset based on cached grouping tags passed as parameters
+                //via queriedGroupingTagsRaw, queriedActualGroupingTags & queriedActualGroupingTagsRaw
+                if (readOtherwiseProcessExcludedGroupingTags == false)
+                    queriedFiles = potentiallyAffectedFiles;
             }
 
 
@@ -2870,7 +2959,7 @@ namespace MusicBeePlugin
                 }
             }
 
-            loop_exit:
+        loop_exit:
             if (cachedTagsAreRelevant)
             {
                 updateAppliedPresetCache(tags, cachedFilesActualGroupingTags, cachedFilesActualGroupingTagsRaw, cachedFilesActualComposedSplitGroupingTagsList);
@@ -3137,15 +3226,6 @@ namespace MusicBeePlugin
                         cachedFilesActualGroupingTagsRaw.AddReplace(trackId, actualGroupingTagsRaw);
                     }
                 }
-
-
-                if (interactive)
-                    SetStatusBarTextForFileOperations(LibraryReportsSbText, true, n, queriedFilesDict.Count, appliedPreset.getName());
-                else if (functionId == null)
-                    SetStatusBarTextForFileOperations(ApplyingLrPresetSbText, true, n, queriedFilesDict.Count, appliedPreset.getName());
-
-                if (queryOnlyGroupings)
-                    tags.add(currentFile, composedActualSplitGroupingTagsList, null, null, null);
             }
 
 
@@ -3719,16 +3799,14 @@ namespace MusicBeePlugin
                                 var cachedResult = GetFileTag(queriedFiles[i], destinationTagIds[j]);
                                 var fullNewResult = getAllLibrariesFunctionResultsInternal(cachedResult, result);
 
-                                SetFileTag(queriedFiles[i], destinationTagIds[j], fullNewResult, true);
-                                tagsSet = true;
+                                tagsSet = SetFileTag(queriedFiles[i], destinationTagIds[j], fullNewResult, true);
                             }
                             else if (destinationTagIds[j] > 0)
                             {
                                 var result = AggregatedTags.GetField(composedActualGroupingTags, fileFunctionResults, groupingsDict.Count + j, groupingsDict,
                                     operations[j], mulDivFactors[j], precisionDigits[j], appendTexts[j]);
 
-                                SetFileTag(queriedFiles[i], destinationTagIds[j], result, true);
-                                tagsSet = true;
+                                tagsSet = SetFileTag(queriedFiles[i], destinationTagIds[j], result, true);
                             }
                         }
 
@@ -3746,8 +3824,7 @@ namespace MusicBeePlugin
                                 var cachedResult = GetFileTag(queriedFiles[i], destinationTagIds[j]);
                                 var fullNewResult = getAllLibrariesFunctionResultsInternal(cachedResult, string.Empty);
 
-                                SetFileTag(queriedFiles[i], destinationTagIds[j], fullNewResult, true);
-                                tagsSet = true;
+                                tagsSet = SetFileTag(queriedFiles[i], destinationTagIds[j], fullNewResult, true);
                             }
                         }
 
@@ -3968,11 +4045,12 @@ namespace MusicBeePlugin
 
                                 LibraryReportsCommandForFunctionIds.appliedPreset = idPreset.Value;
 
-                                //******* queriedGroupingTagsRaw, queriedActualGroupingTags, queriedActualGroupingTagsRaw may be nulled. check this!
-                                //Let's remember grouping tag value, which must be changed soon (it's now TagsChanging notification, let's process these tags on TagsChanged)
+                                //queriedGroupingTagsRaw, queriedActualGroupingTags, queriedActualGroupingTagsRaw may be nulled. Check this! //*****
+                                //Let's remember grouping tag value, which must be changed soon (it's now TagsChanging notification, let's process these
+                                //tags on TagsChanged notification)
                                 LibraryReportsCommandForFunctionIds.executePreset(
                                     new string[] { changingFile },
-                                    false, true, null, false, true, queriedGroupingTagsRaw, queriedActualGroupingTags, queriedActualGroupingTagsRaw, true);
+                                    false, true, null, false, false, queriedGroupingTagsRaw, queriedActualGroupingTags, queriedActualGroupingTagsRaw, true);
                             }
                         }
                     }
@@ -3982,118 +4060,126 @@ namespace MusicBeePlugin
             }
         }
 
-        internal static void UpdateFunctionCacheLoop()
+        internal static void DelayedFunctionCacheUpdate(object state)
         {
             if (!ReportPresetIdsAreInitialized)
                 return;
             else if (IdsReportPresets.Count == 0)
                 return;
 
-            Thread.CurrentThread.Priority = ThreadPriority.Lowest;
-
-
-            while (!PluginClosing && ReportPresetIdsAreInitialized && IdsReportPresets.Count > 0)
+            if (!DelayedFunctionCacheUpdatePrioritySet)
             {
-                var skipFunctionsUpdate = true;
+                DelayedFunctionCacheUpdatePrioritySet = true;
+                Thread.CurrentThread.Priority = ThreadPriority.Lowest;
+            }
 
-                lock (LrTrackCacheNeededToBeUpdated)
+
+
+            var skipFunctionsUpdate = true;
+
+            lock (LrTrackCacheNeededToBeUpdated)
+            {
+                if (LrTrackCacheNeededToBeUpdatedWorkingCopy != null)
                 {
-                    if (LrTrackCacheNeededToBeUpdatedWorkingCopy != null)
-                    {
-                        skipFunctionsUpdate = false;
-                    }
-                    else if (LrTrackCacheNeededToBeUpdated.Count > 0)
-                    {
-                        skipFunctionsUpdate = false;
+                    skipFunctionsUpdate = false;
+                }
+                else if (LrTrackCacheNeededToBeUpdated.Count > 0)
+                {
+                    skipFunctionsUpdate = false;
 
-                        if (PresetChangingGroupingTagsRaw.Count > 0)
+                    if (PresetChangingGroupingTagsRaw.Count > 0)
+                    {
+                        foreach (var idPreset in IdsReportPresets)
                         {
-                            foreach (var idPreset in IdsReportPresets)
+                            lock (PresetChangingGroupingTagsRaw)
                             {
-                                lock (PresetChangingGroupingTagsRaw)
+                                PresetChangingGroupingTagsRaw.TryGetValue(idPreset.Value.guid, out var filesQueriedGroupingTagsRaw);
+                                PresetChangingActualGroupingTags.TryGetValue(idPreset.Value.guid, out var filesQueriedActualGroupingTags);
+                                PresetChangingActualGroupingTagsRaw.TryGetValue(idPreset.Value.guid, out var filesQueriedActualGroupingTagsRaw);
+
+                                if (filesQueriedGroupingTagsRaw != null)
                                 {
-                                    PresetChangingGroupingTagsRaw.TryGetValue(idPreset.Value.guid, out var filesQueriedGroupingTagsRaw);
-                                    PresetChangingActualGroupingTags.TryGetValue(idPreset.Value.guid, out var filesQueriedActualGroupingTags);
-                                    PresetChangingActualGroupingTagsRaw.TryGetValue(idPreset.Value.guid, out var filesQueriedActualGroupingTagsRaw);
-
-                                    if (filesQueriedGroupingTagsRaw != null)
+                                    foreach (int trackId in filesQueriedGroupingTagsRaw.Keys)
                                     {
-                                        foreach (int trackId in filesQueriedGroupingTagsRaw.Keys)
+                                        if (LrTrackCacheNeededToBeUpdated.TryGetValue(trackId, out var trackUrl))
                                         {
-                                            if (LrTrackCacheNeededToBeUpdated.TryGetValue(trackId, out var trackUrl))
+                                            var queriedGroupingTagsRaw = filesQueriedGroupingTagsRaw[trackId];
+                                            var queriedActualGroupingTags = filesQueriedActualGroupingTags[trackId];
+                                            var queriedActualGroupingTagsRaw = filesQueriedActualGroupingTagsRaw[trackId];
+
+
+                                            filesQueriedActualGroupingTagsRaw.Remove(trackId);
+                                            filesQueriedActualGroupingTags.Remove(trackId);
+                                            filesQueriedActualGroupingTagsRaw.Remove(trackId);
+
+                                            if (filesQueriedActualGroupingTagsRaw.Count == 0)
                                             {
-                                                var queriedGroupingTagsRaw = filesQueriedGroupingTagsRaw[trackId];
-                                                var queriedActualGroupingTags = filesQueriedActualGroupingTags[trackId];
-                                                var queriedActualGroupingTagsRaw = filesQueriedActualGroupingTagsRaw[trackId];
+                                                PresetChangingGroupingTagsRaw.Remove(idPreset.Value.guid);
+                                                PresetChangingActualGroupingTags.Remove(idPreset.Value.guid);
+                                                PresetChangingActualGroupingTagsRaw.Remove(idPreset.Value.guid);
+                                            }
 
 
-                                                filesQueriedActualGroupingTagsRaw.Remove(trackId);
-                                                filesQueriedActualGroupingTags.Remove(trackId);
-                                                filesQueriedActualGroupingTagsRaw.Remove(trackId);
+                                            if (!ChangingGroupingTagsRawWorkingCopy.TryGetValue(idPreset.Value.guid, 
+                                                out var existingQueriedGroupingTagsRaw))
+                                            {
+                                                existingQueriedGroupingTagsRaw = new SortedDictionary<string, bool>[queriedGroupingTagsRaw.Length];
+                                                for (int j = 0; j < existingQueriedGroupingTagsRaw.Length; j++)
+                                                    existingQueriedGroupingTagsRaw[j] = new SortedDictionary<string, bool>();
 
-                                                if (filesQueriedActualGroupingTagsRaw.Count == 0)
-                                                {
-                                                    PresetChangingGroupingTagsRaw.Remove(idPreset.Value.guid);
-                                                    PresetChangingActualGroupingTags.Remove(idPreset.Value.guid);
-                                                    PresetChangingActualGroupingTagsRaw.Remove(idPreset.Value.guid);
-                                                }
+                                                ChangingGroupingTagsRawWorkingCopy.Add(idPreset.Value.guid, existingQueriedGroupingTagsRaw);
+                                            }
 
+                                            if (!ChangingActualGroupingTagsWorkingCopy.TryGetValue(idPreset.Value.guid, 
+                                                out var existingQueriedActualGroupingTags))
+                                            {
+                                                existingQueriedActualGroupingTags = new SortedDictionary<string, bool>[queriedActualGroupingTags.Length];
+                                                for (int j = 0; j < existingQueriedActualGroupingTags.Length; j++)
+                                                    existingQueriedActualGroupingTags[j] = new SortedDictionary<string, bool>();
 
-                                                if (!ChangingGroupingTagsRawWorkingCopy.TryGetValue(idPreset.Value.guid, 
-                                                    out var existingQueriedGroupingTagsRaw))
-                                                {
-                                                    existingQueriedGroupingTagsRaw = new SortedDictionary<string, bool>[queriedGroupingTagsRaw.Length];
-                                                    ChangingGroupingTagsRawWorkingCopy.Add(idPreset.Value.guid, existingQueriedGroupingTagsRaw);
-                                                }
+                                                ChangingActualGroupingTagsWorkingCopy.Add(idPreset.Value.guid, existingQueriedActualGroupingTags);
+                                            }
 
-                                                if (!ChangingActualGroupingTagsWorkingCopy.TryGetValue(idPreset.Value.guid, 
-                                                    out var existingQueriedActualGroupingTags))
-                                                {
-                                                    existingQueriedActualGroupingTags = new SortedDictionary<string, bool>[queriedActualGroupingTags.Length];
-                                                    ChangingActualGroupingTagsWorkingCopy.Add(idPreset.Value.guid, existingQueriedActualGroupingTags);
-                                                }
+                                            if (!ChangingActualGroupingTagsRawWorkingCopy.TryGetValue(idPreset.Value.guid, 
+                                                out var existingQueriedActualGroupingTagsRaw))
+                                            {
+                                                existingQueriedActualGroupingTagsRaw = new SortedDictionary<string, bool>[queriedActualGroupingTagsRaw.Length];
+                                                for (int j = 0; j < existingQueriedActualGroupingTagsRaw.Length; j++)
+                                                    existingQueriedActualGroupingTagsRaw[j] = new SortedDictionary<string, bool>();
 
-                                                if (!ChangingActualGroupingTagsRawWorkingCopy.TryGetValue(idPreset.Value.guid, 
-                                                    out var existingQueriedActualGroupingTagsRaw))
-                                                {
-                                                    existingQueriedActualGroupingTagsRaw = new SortedDictionary<string, bool>[queriedActualGroupingTagsRaw.Length];
-                                                    ChangingActualGroupingTagsRawWorkingCopy.Add(idPreset.Value.guid, existingQueriedActualGroupingTagsRaw);
-                                                }
+                                                ChangingActualGroupingTagsRawWorkingCopy.Add(idPreset.Value.guid, existingQueriedActualGroupingTagsRaw);
+                                            }
 
 
-                                                for (int j = 0; j < queriedGroupingTagsRaw.Length; j++)
-                                                {
-                                                    foreach (var groupingValue in queriedGroupingTagsRaw[j].Keys)
-                                                    {
-                                                        existingQueriedGroupingTagsRaw[j].AddSkip(groupingValue);
-                                                    }
-                                                }
+                                            for (int j = 0; j < queriedGroupingTagsRaw.Length; j++)
+                                            {
+                                                foreach (var groupingValue in queriedGroupingTagsRaw[j].Keys)
+                                                    existingQueriedGroupingTagsRaw[j].AddSkip(groupingValue);
+                                            }
 
-                                                for (int j = 0; j < queriedActualGroupingTags.Length; j++)
-                                                {
-                                                    foreach (var groupingValue in queriedActualGroupingTags[j].Keys)
-                                                    {
-                                                        existingQueriedActualGroupingTags[j].AddSkip(groupingValue);
-                                                    }
-                                                }
+                                            for (int j = 0; j < queriedActualGroupingTags.Length; j++)
+                                            {
+                                                foreach (var groupingValue in queriedActualGroupingTags[j].Keys)
+                                                    existingQueriedActualGroupingTags[j].AddSkip(groupingValue);
+                                            }
 
-                                                for (int j = 0; j < queriedActualGroupingTagsRaw.Length; j++)
-                                                {
-                                                    foreach (var groupingValue in queriedActualGroupingTagsRaw[j].Keys)
-                                                    {
-                                                        existingQueriedActualGroupingTagsRaw[j].AddSkip(groupingValue);
-                                                    }
-                                                }
+                                            for (int j = 0; j < queriedActualGroupingTagsRaw.Length; j++)
+                                            {
+                                                foreach (var groupingValue in queriedActualGroupingTagsRaw[j].Keys)
+                                                    existingQueriedActualGroupingTagsRaw[j].AddSkip(groupingValue);
                                             }
                                         }
                                     }
                                 }
                             }
                         }
+                    }
 
 
-                        LrTrackCacheNeededToBeUpdatedWorkingCopy = new string[LrTrackCacheNeededToBeUpdated.Count];
+                    LrTrackCacheNeededToBeUpdatedWorkingCopy = new string[LrTrackCacheNeededToBeUpdated.Count];
 
+                    lock (LrTrackCacheNeededToBeUpdatedWorkingCopy)
+                    {
                         int i = 0;
                         foreach (var changedFile in LrTrackCacheNeededToBeUpdated.Values)
                             LrTrackCacheNeededToBeUpdatedWorkingCopy[i++] = changedFile;
@@ -4131,16 +4217,16 @@ namespace MusicBeePlugin
 
                                 LibraryReportsCommandForFunctionIds.appliedPreset = idPreset.Value;
 
+                                LibraryReportsCommandForFunctionIds.executePreset(null, false, true, null, false, true,
+                                    queriedChangingGroupingTagsRawWorkingCopy,
+                                    queriedChangingActualGroupingTagsWorkingCopy,
+                                    queriedChangingActualGroupingTagsRawWorkingCopy,
+                                    false);
+
                                 LibraryReportsCommandForFunctionIds.executePreset(
                                     LrTrackCacheNeededToBeUpdatedWorkingCopy,
                                     false, true, null, false, true);
 
-
-                                LibraryReportsCommandForFunctionIds.executePreset(null, false, true, null, false, true, 
-                                    queriedChangingGroupingTagsRawWorkingCopy, 
-                                    queriedChangingActualGroupingTagsWorkingCopy, 
-                                    queriedChangingActualGroupingTagsRawWorkingCopy, 
-                                    false);
 
 
                                 if (removeGroupings)
@@ -4162,7 +4248,7 @@ namespace MusicBeePlugin
                 RefreshPanels();
 
             loop_end:
-                Thread.Sleep(FunctionCacheUpdateDelay);
+                ; //Let's wait for the next timer event
             }
         }
 
@@ -4405,6 +4491,8 @@ namespace MusicBeePlugin
         {
             lock (IdsReportPresets)
             {
+                UpdateFunctionCacheTimer?.Dispose();
+
                 ReportPresetIdsAreInitialized = false;
 
                 lock (IdsReportPresets)
@@ -4440,10 +4528,7 @@ namespace MusicBeePlugin
 
 
             if (IdsReportPresets.Count > 0)
-            {
-                UpdateFunctionCacheThread = new Thread(UpdateFunctionCacheLoop);
-                UpdateFunctionCacheThread.Start();
-            }
+                UpdateFunctionCacheTimer = new System.Threading.Timer(DelayedFunctionCacheUpdate, null, FunctionCacheUpdateDelay, FunctionCacheUpdateDelay);
         }
 
         private static void InitLrPresetsAutoApplying()

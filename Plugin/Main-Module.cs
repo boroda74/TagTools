@@ -285,8 +285,8 @@ namespace MusicBeePlugin
         internal static SortedDictionary<string, FilePropertyType> PropNamesIds = new SortedDictionary<string, FilePropertyType>();
         internal static Dictionary<FilePropertyType, string> PropIdsNames = new Dictionary<FilePropertyType, string>();
 
-        private static readonly List<string> FilesUpdatedByPlugin = new List<string>();
-        private static readonly List<string> ChangedFiles = new List<string>();
+        internal static readonly List<string> FilesUpdatedByPlugin = new List<string>();
+        internal static readonly List<string> ChangedFiles = new List<string>();
 
         private static System.Threading.Timer PeriodicUiRefreshTimer;
         private static System.Threading.Timer DelayedStatusBarTextClearingTimer;
@@ -332,23 +332,23 @@ namespace MusicBeePlugin
         internal static SortedDictionary<Guid, bool> AllLrPresetGuidsInUse = new SortedDictionary<Guid, bool>(); //<guid, false>: NOT permanentGuid!
         internal static SortedDictionary<int, string> LrTrackCacheNeededToBeUpdated = new SortedDictionary<int, string>(); //<Track persistent id, URL>
         internal static SortedDictionary<Guid, SortedDictionary<int, SortedDictionary<string, bool>[]>> PresetChangingGroupingTagsRaw //Dictionaries of tags values,
-                                                                                                                                         //arrays of groupings per track id
-                                                                                                                                         //per preset
+                                                                                                                                      //arrays of groupings per track id
+                                                                                                                                      //per preset
             = new SortedDictionary<Guid, SortedDictionary<int, SortedDictionary<string, bool>[]>>();
-        internal static SortedDictionary<Guid, SortedDictionary<int, SortedDictionary<string, bool>[]>> PresetChangingActualGroupingTags //********
+        internal static SortedDictionary<Guid, SortedDictionary<int, SortedDictionary<string, bool>[]>> PresetChangingActualGroupingTags
             = new SortedDictionary<Guid, SortedDictionary<int, SortedDictionary<string, bool>[]>>();
         internal static SortedDictionary<Guid, SortedDictionary<int, SortedDictionary<string, bool>[]>> PresetChangingActualGroupingTagsRaw
             = new SortedDictionary<Guid, SortedDictionary<int, SortedDictionary<string, bool>[]>>();
 
         internal static string[] LrTrackCacheNeededToBeUpdatedWorkingCopy; //URL[]
         internal static SortedDictionary<Guid, SortedDictionary<string, bool>[]> ChangingGroupingTagsRawWorkingCopy  //Dictionaries of tags values,
-            = new SortedDictionary<Guid, SortedDictionary<string, bool>[]>();                                        //arrays of groupings per processed preset
-        internal static SortedDictionary<Guid, SortedDictionary<string, bool>[]> ChangingActualGroupingTagsWorkingCopy   //********
+            = new SortedDictionary<Guid, SortedDictionary<string, bool>[]>();                                        //arrays of groupings per preset
+        internal static SortedDictionary<Guid, SortedDictionary<string, bool>[]> ChangingActualGroupingTagsWorkingCopy
             = new SortedDictionary<Guid, SortedDictionary<string, bool>[]>();
         internal static SortedDictionary<Guid, SortedDictionary<string, bool>[]> ChangingActualGroupingTagsRawWorkingCopy
             = new SortedDictionary<Guid, SortedDictionary<string, bool>[]>();
 
-        internal static Thread UpdateFunctionCacheThread = null;
+        internal static System.Threading.Timer UpdateFunctionCacheTimer = null;
         internal static readonly TimeSpan FunctionCacheUpdateDelay = new TimeSpan(0, 0, 5); //Every 5 secs. //****
         internal static readonly TimeSpan FunctionCacheClearingDelay = new TimeSpan(0, 1, 0); //Every 1 min. //****
         internal static readonly int PresetCacheCountThreshold = 10;
@@ -1304,7 +1304,8 @@ namespace MusicBeePlugin
                 {
                     return (double)items1.Count / items.Count;
                 }
-                else if ((resultType >= ResultType.UnknownOrString && resultType < ResultType.ParsingError) || resultType == ResultType.UseOtherResults) //Must never happen? //****
+                //Must never happen? //****
+                else if ((resultType >= ResultType.UnknownOrString && resultType < ResultType.ParsingError) || resultType == ResultType.UseOtherResults)
                 {
                     if (items.Count == 0)
                         return double.NegativeInfinity;
@@ -1343,7 +1344,8 @@ namespace MusicBeePlugin
                     else //It's "average" function
                         return resultD / items.Count;
                 }
-                //else if (resultType >= ResultType.AutoDouble && resultType < ResultType.UnknownOrString) //(Auto)double, year or date-time (milliseconds from 1900-01-01), timespan (milliseconds)
+                //(Auto)double, year or date-time (milliseconds from 1900-01-01), timespan (milliseconds)
+                //else if (resultType >= ResultType.AutoDouble && resultType < ResultType.UnknownOrString)
                 //{
                 //    double value = resultD;
                 //    if (items != null && items.Count != 0) //It's "average" function
@@ -5233,6 +5235,13 @@ namespace MusicBeePlugin
                         AsrAutoApplyPresets(newChangedFileUrl);
                 }
 
+                if (changingFile != null)
+                {
+                    if (!FilesUpdatedByPlugin.Contains(changingFile))
+                        autoApplyAsrUpdateLrCache = true;
+                }
+
+
                 if (autoApplyAsrUpdateLrCache && !SavedSettings.dontShowLibraryReports)
                     LrNotifyFileTagsChanged(newChangedFileUrl, changingFile);
             }
@@ -5335,6 +5344,11 @@ namespace MusicBeePlugin
                     break;
                 case NotificationType.FileRemovedFromLibrary:
                     autoApplyAsrUpdateLrCache(sourceFileUrl);
+
+                    break;
+                case NotificationType.FileRenamed:
+                    if (LibraryReportsCommandForFunctionIds != null)
+                        LibraryReportsCommandForFunctionIds.updateLrCacheForRenamedTrack(sourceFileUrl);
 
                     break;
                 case NotificationType.TagsChanged:

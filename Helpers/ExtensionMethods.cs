@@ -130,6 +130,20 @@ namespace ExtensionMethods
             }
         }
 
+        internal static bool ReplaceExisting<T1, T2>(this SortedDictionary<T1, T2> dictionary, T1 key, T2 newValue)
+        {
+            if (dictionary.ContainsKey(key))
+            {
+                dictionary.Remove(key);
+                dictionary.Add(key, newValue);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
 
         internal static bool AddReplaceUi(this ColumnAttributesDict dictionary, string key, ColumnAttributes value, Button button, CheckBox checkBox)
         {

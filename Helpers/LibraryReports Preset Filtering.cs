@@ -144,11 +144,11 @@ namespace MusicBeePlugin
         //  Report chain in reportChain
         internal static void FillPresetFilteringChain(ReportPreset[] currentReports, SortedDictionary<Guid, bool> reportChain, ReportPreset initialPreset)
         {
+            reportChain.AddSkip(initialPreset.guid);
+
             if (initialPreset.useAnotherPresetAsSource)
             {
-                reportChain.AddSkip(initialPreset.guid);
                 var nextPreset = initialPreset.anotherPresetAsSource.findPreset(currentReports);
-
                 FillPresetFilteringChain(currentReports, reportChain, nextPreset); //-V3080
             }
         }

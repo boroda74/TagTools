@@ -68,18 +68,15 @@ namespace MusicBeePlugin
 
             if (exceptionText != null)
             {
-                LibraryReportsCommandForFunctionIds.backgroundTaskIsCanceled = false;
                 MessageBox.Show(this, exceptionText, null, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             else if (LibraryReportsCommandForFunctionIds.backgroundTaskIsCanceled)
             {
-                LibraryReportsCommandForFunctionIds.backgroundTaskIsCanceled = false;
                 return false;
             }
             else
             {
-                LibraryReportsCommandForFunctionIds.backgroundTaskIsCanceled = false;
                 return true;
             }
         }
