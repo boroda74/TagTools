@@ -333,23 +333,21 @@ namespace MusicBeePlugin
             {
                 //Delayed reset of char exception (to skip spaces after exception chars if any)
                 if (wasCharException && IsCharCaseSensitive(currentChar) && (IsItemContainedInArray(prevChar, wordSeparators) 
-                    || prevChar == ' ' || prevChar == MultipleItemsSplitterId))
+                    || prevChar == ' ' || prevChar == MultipleItemsSplitterId || ItemIndexInArray(prevChar, rightExceptionChars) >= 0))
                     resetCharException = true;
 
 
                 //Let's try to remove "between chars" changing case exception from encounteredLeftExceptionChars and mark wasCharException
                 var rightIndex = ItemIndexInArray(currentChar, rightExceptionChars);
-                if (rightIndex >= 0 && rightIndex < encounteredLeftExceptionChars.Count)
+                if (rightIndex >= 0 && ItemIndexInArray(encounteredLeftExceptionChars[encounteredLeftExceptionChars.Count - 1], leftExceptionChars) == rightIndex)
                 {
-                    if (encounteredLeftExceptionChars[rightIndex].ToString() == leftExceptionChars[rightIndex])
-                    {
                         wasCharException = true;
-                        encounteredLeftExceptionChars.RemoveAt(rightIndex);
-                    }
+                        encounteredLeftExceptionChars.RemoveAt(encounteredLeftExceptionChars.Count - 1);
                 }
 
 
-                if (IsItemContainedInArray(currentChar, wordSeparators) || currentChar == ' ' || currentChar == MultipleItemsSplitterId) //Possible end of word
+                if (IsItemContainedInArray(currentChar, wordSeparators) || currentChar == ' ' || currentChar == MultipleItemsSplitterId 
+                    || ItemIndexInArray(currentChar, rightExceptionChars) >= 0) //Possible end of word
                 {
                     if (!IsItemContainedInArray(prevChar, wordSeparators) && prevChar != ' ' && prevChar != MultipleItemsSplitterId) //End of word
                     {
@@ -370,6 +368,13 @@ namespace MusicBeePlugin
                         }
 
 
+                        if (resetCharException)
+                        {
+                            resetCharException = false;
+                            wasCharException = false;
+                        }
+
+
                         if (alwaysCapitalize1stWord == true && isTheFirstWord) //Always Capitalize 1st word in tag if this option is checked
                             newString = newString + ChangeSubstringCase(currentWord, ChangeCaseOptions.TitleCase, true) + currentChar;
                         else if (alwaysCapitalize1stWord == null && isTheFirstWord && IsItemContainedInArray(currentWord, exceptedWords) && !useWhiteList) //Ignore changing case (for UPPERCASE excepted words)
@@ -382,12 +387,6 @@ namespace MusicBeePlugin
 
                         currentWord = string.Empty; //Beginning of new word
                         isTheFirstWord = false;
-
-                        if (resetCharException)
-                        {
-                            resetCharException = false;
-                            wasCharException = false;
-                        }
                     }
                     else //Not the end of word, several repeating word splitters
                     {
@@ -396,32 +395,60 @@ namespace MusicBeePlugin
                 }
                 else //Not the end of word
                 {
-                    if (IsItemContainedInArray(currentChar, exceptionChars)) //Ignore changing case later
-                        wasCharException = true;
+                    if (currentWord == string.Empty && IsCharCaseSensitive(currentChar)) //Beginning of new word
+                    {
+                        if (IsItemContainedInArray(currentChar, exceptionChars)) //Ignore changing case later
+                            wasCharException = true;
 
-                    if (IsItemContainedInArray(currentChar, leftExceptionChars)) //Ignore changing case later
-                        encounteredLeftExceptionChars.Add(currentChar);
+                        if (IsItemContainedInArray(currentChar, leftExceptionChars)) //Ignore changing case later
+                            encounteredLeftExceptionChars.Add(currentChar);
 
-                    currentWord += currentChar;
+                        currentWord += currentChar;
+                    }
+                    else if (currentWord == string.Empty) //Several repeating symbols between words
+                    {
+                        if (IsItemContainedInArray(currentChar, exceptionChars)) //Ignore changing case later
+                            wasCharException = true;
+
+                        if (IsItemContainedInArray(currentChar, leftExceptionChars)) //Ignore changing case later
+                            encounteredLeftExceptionChars.Add(currentChar);
+
+                        newString += currentChar;
+                    }
+                    else //Letter or symbol in the middle of the word
+                    {
+                        currentWord += currentChar;
+                    }
                 }
 
                 prevChar = currentChar;
             }
 
             //String is ended, so last currentWord IS a word
-            if (!IsItemContainedInArray(currentWord, exceptedWords) && useWhiteList) //Ignore changing case if the word is not contained in whitelist, otherwise proceed as usual
+            if (resetCharException)
+            {
+                resetCharException = false;
+                wasCharException = false;
+            }
+
+            //Ignore changing case if the word is not contained in whitelist, otherwise proceed as usual
+            if (!IsItemContainedInArray(currentWord, exceptedWords) && useWhiteList) 
             {
                 newString += currentWord;
             }
             else
             {
-                if (alwaysCapitalizeLastWord == true && !wasCharException && encounteredLeftExceptionChars.Count == 0) //Always Capitalize last word if this option is checked, but there was no character exception
+                //Always Capitalize last word if this option is checked, but there was no character exception
+                if (alwaysCapitalizeLastWord == true && !wasCharException && encounteredLeftExceptionChars.Count == 0) 
                     newString += ChangeSubstringCase(currentWord, ChangeCaseOptions.TitleCase, true);
-                else if (alwaysCapitalizeLastWord == null && IsItemContainedInArray(currentWord, exceptedWords) && !useWhiteList) //Ignore changing case (for UPPERCASE excepted words)
+                //Ignore changing case (for UPPERCASE excepted words)
+                else if (alwaysCapitalizeLastWord == null && IsItemContainedInArray(currentWord, exceptedWords) && !useWhiteList) 
                     newString += ChangeSubstringCase(currentWord, ChangeCaseOptions.TitleCase, true);
-                else if (wasCharException || (IsItemContainedInArray(currentWord, exceptedWords) && !useWhiteList) || encounteredLeftExceptionChars.Count > 0) //Ignore changing case
+                //Ignore changing case
+                else if (wasCharException || (IsItemContainedInArray(currentWord, exceptedWords) && !useWhiteList) || encounteredLeftExceptionChars.Count > 0) 
                     newString += currentWord;
-                else //Change case
+                //Change case
+                else
                     newString += ChangeSubstringCase(currentWord, changeCaseOption, isTheFirstWord);
             }
 
