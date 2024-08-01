@@ -5457,7 +5457,7 @@ namespace MusicBeePlugin
         {
             presetList.Enable(!backgroundTaskIsScheduled);
 
-            buttonOK.Enable(((previewIsGenerated && !previewIsStopped) || SavedSettings.allowCommandExecutionWithoutPreview) && !selectedPresetUsesAllTags);
+            buttonOK.Enable(((previewIsGenerated && !previewIsStopped) || (SavedSettings.allowCommandExecutionWithoutPreview) && !selectedPresetUsesAllTags));
             buttonPreview.Enable(true);
         }
 
