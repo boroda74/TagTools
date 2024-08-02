@@ -549,9 +549,9 @@ namespace MusicBeePlugin
             public object[] rightExceptionChars;
             public string rightExceptionCharsAsr;
 
-            public bool useWordSeparators;
-            public object[] wordSeparators;
-            public string wordSeparatorsAsr;
+            public bool useSentenceSeparators;
+            public object[] sentenceSeparators;
+            public string sentenceSeparatorsAsr;
 
             public bool? alwaysCapitalize1stWord = true;
             public bool? alwaysCapitalizeLastWord = false;
@@ -1029,6 +1029,8 @@ namespace MusicBeePlugin
         internal static string CtlMixedValues;
         internal static string CtlMixedValuesSameAsInLibrary;
         internal static string CtlMixedValuesDifferentFromLibrary;
+
+        internal static string CtlTags;
 
         internal static string MsgNotAllowedSymbols;
         internal static string MsgPresetExists;
@@ -3926,6 +3928,8 @@ namespace MusicBeePlugin
             CtlMixedValuesSameAsInLibrary = "Same as in library";
             CtlMixedValuesDifferentFromLibrary = "Different from library";
 
+            CtlTags = "Tags";
+
             MsgNotAllowedSymbols = "Only ASCII letters, numbers and symbols - : _ . are allowed!";
             MsgPresetExists = "Preset with ID %%ID%% already exists!";
 
@@ -3953,7 +3957,7 @@ namespace MusicBeePlugin
                 useExceptionWords = false,
 
                 useExceptionChars = false,
-                useWordSeparators = false,
+                useSentenceSeparators = false,
             };
             #endregion
 
@@ -4091,23 +4095,23 @@ namespace MusicBeePlugin
             if (SavedSettings.exceptionCharsAsr == null)
                 SavedSettings.exceptionCharsAsr = string.Empty;
 
-            if (SavedSettings.wordSeparators == null || SavedSettings.wordSeparators.Length < 10)
+            if (SavedSettings.sentenceSeparators == null || SavedSettings.sentenceSeparators.Length < 10)
             {
-                SavedSettings.wordSeparators = new object[10];
-                SavedSettings.wordSeparators[0] = "& .";
-                SavedSettings.wordSeparators[1] = string.Empty;
-                SavedSettings.wordSeparators[2] = string.Empty;
-                SavedSettings.wordSeparators[3] = string.Empty;
-                SavedSettings.wordSeparators[4] = string.Empty;
-                SavedSettings.wordSeparators[5] = string.Empty;
-                SavedSettings.wordSeparators[6] = string.Empty;
-                SavedSettings.wordSeparators[7] = string.Empty;
-                SavedSettings.wordSeparators[8] = string.Empty;
-                SavedSettings.wordSeparators[9] = string.Empty;
+                SavedSettings.sentenceSeparators = new object[10];
+                SavedSettings.sentenceSeparators[0] = ".";
+                SavedSettings.sentenceSeparators[1] = string.Empty;
+                SavedSettings.sentenceSeparators[2] = string.Empty;
+                SavedSettings.sentenceSeparators[3] = string.Empty;
+                SavedSettings.sentenceSeparators[4] = string.Empty;
+                SavedSettings.sentenceSeparators[5] = string.Empty;
+                SavedSettings.sentenceSeparators[6] = string.Empty;
+                SavedSettings.sentenceSeparators[7] = string.Empty;
+                SavedSettings.sentenceSeparators[8] = string.Empty;
+                SavedSettings.sentenceSeparators[9] = string.Empty;
             }
 
-            if (SavedSettings.wordSeparatorsAsr == null)
-                SavedSettings.wordSeparatorsAsr = ".";
+            if (SavedSettings.sentenceSeparatorsAsr == null)
+                SavedSettings.sentenceSeparatorsAsr = ".";
 
             if (SavedSettings.customText == null || SavedSettings.customText.Length < 10)
             {
@@ -4637,6 +4641,8 @@ namespace MusicBeePlugin
                 CtlMixedValuesSameAsInLibrary = "Совпадает с библиотекой";
                 CtlMixedValuesDifferentFromLibrary = "Отличается от библиотеки";
 
+                CtlTags = "Теги";
+
                 MsgNotAllowedSymbols = "Разрешены только буквы ASCII, числа и символы - : _ .!";
                 MsgPresetExists = "Пресет с ID-ом %%ID%% уже существует!";
 
@@ -4653,7 +4659,7 @@ namespace MusicBeePlugin
 
                 //exceptions = "the a an and or not";
                 //exceptionChars = "\" ' ( { [ /";
-                //wordSeparators = "&";
+                //sentenceSeparators = "&";
 
                 BackupDefaultPrefix = "Архив тегов ";
                 AsrPresetNaming = "Пресет ДПЗ";
@@ -6741,12 +6747,11 @@ namespace MusicBeePlugin
             return DateTime.Now.ToString();
         }
 
-        public string CustomFunc_TitleCase(string input, string lowerCaseWordsString, string upperCaseWordsString, string wordSeparatorsString,
+        public string CustomFunc_TitleCase(string input, string lowerCaseWordsString, string upperCaseWordsString, 
             string leftExceptionCharsString, string rightExceptionCharsString, string exceptionCharsString)
         {
             string[] lowerCaseWords = null;
             string[] upperCaseWords = null;
-            string[] wordSeparators = null;
             string[] leftExceptionChars = null;
             string[] rightExceptionChars = null;
             string[] exceptionChars = null;
@@ -6757,9 +6762,6 @@ namespace MusicBeePlugin
 
             if (upperCaseWordsString == "`")
                 upperCaseWordsString = null;
-
-            if (wordSeparatorsString == "`")
-                wordSeparatorsString = null;
 
             if (leftExceptionCharsString == "`")
                 leftExceptionCharsString = null;
@@ -6777,9 +6779,6 @@ namespace MusicBeePlugin
 
             if (!string.IsNullOrWhiteSpace(upperCaseWordsString))
                 upperCaseWords = upperCaseWordsString.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-
-            if (!string.IsNullOrWhiteSpace(wordSeparatorsString))
-                wordSeparators = ChangeCase.GetCharsInString(wordSeparatorsString);
 
             if (!string.IsNullOrWhiteSpace(leftExceptionCharsString))
                 leftExceptionChars = ChangeCase.GetCharsInString(leftExceptionCharsString);
@@ -6801,21 +6800,20 @@ namespace MusicBeePlugin
                 exceptedWords = lowerCaseWords.Union(upperCaseWords).ToArray();
 
 
-            input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.LowerCase, null, false,
-                null, null, null, wordSeparators, false, false);
+            input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.LowerCase);
 
-            input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.TitleCase, null, false,
-                null, leftExceptionChars, rightExceptionChars, wordSeparators, true, true);
+            input = ChangeCase.ChangeSentenceCase(input, ChangeCase.ChangeCaseOptions.TitleCase, null, false,
+                null, leftExceptionChars, rightExceptionChars, exceptionChars, true, true);
 
-            input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.LowerCase, lowerCaseWords, true,
-                exceptionChars, leftExceptionChars, rightExceptionChars, wordSeparators, true, true);
+            input = ChangeCase.ChangeSentenceCase(input, ChangeCase.ChangeCaseOptions.LowerCase, lowerCaseWords, true,
+                exceptionChars, leftExceptionChars, rightExceptionChars, exceptionChars, true, true);
 
-            input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.TitleCase, exceptedWords, false,
-                exceptionChars, leftExceptionChars, rightExceptionChars, wordSeparators, true, true);
+            input = ChangeCase.ChangeSentenceCase(input, ChangeCase.ChangeCaseOptions.TitleCase, exceptedWords, false,
+                exceptionChars, leftExceptionChars, rightExceptionChars, exceptionChars, true, true);
 
 
             var result = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.UpperCase, upperCaseWords, true,
-                null, null, null, wordSeparators, null, null);
+                null, null, null, null, null);
 
             return result;
         }
@@ -6836,7 +6834,8 @@ namespace MusicBeePlugin
 
             input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.UpperCase);
             input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.LowerCase, upperCaseWords);
-            var result = ChangeCase.ChangeSentenceCase(input, upperCaseWords, false, null, null, null, sentenceSeparators, true);
+            var result = ChangeCase.ChangeSentenceCase(input, ChangeCase.ChangeCaseOptions.SentenceCase, upperCaseWords, false, null, null, null, sentenceSeparators, 
+                true, false);
 
             return result;
         }

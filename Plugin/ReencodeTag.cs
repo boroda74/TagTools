@@ -23,9 +23,6 @@ namespace MusicBeePlugin
         private AddRowToTable addRowToTable;
         private ProcessRowOfTable processRowOfTable;
 
-        private delegate void UpdateCustomScrollBarsDelegate(DataGridView dataGridView);
-        private UpdateCustomScrollBarsDelegate updateCustomScrollBars;
-
         private string[] files = Array.Empty<string>();
         private readonly List<string[]> tags = new List<string[]>();
         private MetaDataType sourceTagId;
@@ -107,8 +104,6 @@ namespace MusicBeePlugin
             addRowToTable = previewTable_AddRowToTable;
             processRowOfTable = previewTable_ProcessRowOfTable;
 
-            this.updateCustomScrollBars = base.updateCustomScrollBars;
-
 
             enableDisablePreviewOptionControls(true, true);
             enableQueryingOrUpdatingButtons();
@@ -121,6 +116,7 @@ namespace MusicBeePlugin
             previewTable.Rows.Add(row);
             previewTableFormatRow(previewTable.RowCount - 1);
 
+            previewTable.FirstDisplayedScrollingRowIndex = previewTable.RowCount - 1;
             if ((previewTable.RowCount & 0x1f) == 0)
                 base.updateCustomScrollBars(this.previewTable);
         }
@@ -262,7 +258,7 @@ namespace MusicBeePlugin
                 previewIsGenerated = true;
             }
 
-            Invoke(updateCustomScrollBars, previewTable);
+            Invoke(new Action(() => { updateCustomScrollBars(previewTable); }));
             SetResultingSbText();
         }
 
@@ -319,6 +315,12 @@ namespace MusicBeePlugin
         {
             clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewChanges, (Button)sender, buttonOK, buttonCancel);
             enableQueryingOrUpdatingButtons();
+
+            if (previewTable.RowCount > 0)
+            {
+                var vScrollBar = ControlsTools.FindControlChild<VScrollBar>(previewTable);
+                vScrollBar.Value = vScrollBar.Maximum;
+            }
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)

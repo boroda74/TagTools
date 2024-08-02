@@ -1372,9 +1372,16 @@ namespace MusicBeePlugin
                 if (nPixelRange > 0)
                     newFirstDisplayedScrollingRowIndex = (int)Math.Round((float)nRowRange * customVScrollBar.GetThumbTop() / nPixelRange);
 
+
                 customVScrollBar.SettingParentScroll = true;
-                dataGridView.FirstDisplayedScrollingRowIndex = newFirstDisplayedScrollingRowIndex;
+
+                if (newFirstDisplayedScrollingRowIndex >= dataGridView.RowCount)
+                    dataGridView.FirstDisplayedScrollingRowIndex = dataGridView.RowCount - 1;
+                else
+                    dataGridView.FirstDisplayedScrollingRowIndex = newFirstDisplayedScrollingRowIndex;
+
                 customVScrollBar.SettingParentScroll = false; //-V3008
+
 
                 customVScrollBar.Invalidate();
                 dataGridView.Invalidate();
@@ -1970,10 +1977,10 @@ namespace MusicBeePlugin
             CustomVScrollBar customVScrollBar = null;
             var customVScrollBarVisibleWidth = 0;
 
-            if (scrolledControl is DataGridView view)
+            if (scrolledControl is DataGridView dataGridView)
             {
                 (customHScrollBar, customHScrollBarVisibleHeight, customVScrollBar, customVScrollBarVisibleWidth)
-                    = UpdateDgvCustomScrollBarsInternal(view);
+                    = UpdateDgvCustomScrollBarsInternal(dataGridView);
             }
             else if (scrolledControl is CustomListBox || scrolledControl is CustomCheckedListBox)
             {
@@ -3614,7 +3621,8 @@ namespace MusicBeePlugin
             }
         }
 
-        internal void switchOperation(ThreadStart operation, Button clickedButton, Button okButton, Button previewButton, Button closeButton, bool backgroundTaskIsNativeMB, PrepareOperation prepareOperation)
+        internal void switchOperation(ThreadStart operation, Button clickedButton, Button okButton, Button previewButton, Button closeButton, 
+            bool backgroundTaskIsNativeMB, PrepareOperation prepareOperation)
         {
             if (backgroundTaskIsScheduled && backgroundTaskIsCanceled) //Let's restart operation
             {
@@ -3662,7 +3670,6 @@ namespace MusicBeePlugin
                     }
 
                     MbApiInterface.MB_CreateBackgroundTask(serializedOperation, this);
-                    //MbApiInterface.MB_CreateBackgroundTask(serializedOperation, this);
                 }
                 else
                 {
@@ -3838,7 +3845,7 @@ namespace MusicBeePlugin
         }
 
         //clearPreview = 0: //--- ??? //****** What is this?
-        protected void clickOnPreviewButton(DataGridView previewTable, PrepareOperation prepareOperation, ThreadStart operation,
+        protected void clickOnPreviewButton(DataGridView previewTable, PrepareOperation prepareOperation, ThreadStart operation, 
             Button clickedButton, Button okButton, Button closeButton, int clearPreview = 0)
         {
             if ((previewTable.Rows.Count == 0 || backgroundTaskIsWorking() || clearPreview == 2) && clearPreview != 1)

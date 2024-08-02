@@ -54,6 +54,9 @@ namespace MusicBeePlugin
 
             var headerCellStyle = new DataGridViewCellStyle(HeaderCellStyle);
 
+            previewTable.TopLeftHeaderCell.Style = headerCellStyle;
+            previewTable.TopLeftHeaderCell.Value = CtlTags;
+
             previewTable.RowHeadersDefaultCellStyle = headerCellStyle;
 
             previewTable.Columns[0].HeaderCell.Style = headerCellStyle;
@@ -321,7 +324,8 @@ namespace MusicBeePlugin
                 CommitTagsToFile(trackUrls[i]);
             }
 
-            MbApiInterface.MB_RefreshPanels();
+            RefreshPanels(true);
+            Close();
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)

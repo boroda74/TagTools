@@ -95,7 +95,9 @@ namespace MusicBeePlugin
                 tagIds.Add(GetTagId(tagNames[i]));
 
             previewTable.TopLeftHeaderCell.Style = headerCellStyle;
-            previewTable.RowsDefaultCellStyle = headerCellStyle;
+            previewTable.TopLeftHeaderCell.Value = CtlTags;
+
+            previewTable.RowHeadersDefaultCellStyle = headerCellStyle;
 
             previewTable.Columns[0].HeaderCell.Style = headerCellStyle;
             previewTable.Columns[1].HeaderCell.Style = headerCellStyle;

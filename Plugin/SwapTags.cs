@@ -113,7 +113,7 @@ namespace MusicBeePlugin
 
             saveSettings();
             if (prepareBackgroundTask())
-                switchOperation(swapTags, (Button)sender, buttonOK, EmptyButton, buttonCancel, true, null);
+                switchOperation(swapTags, (Button)sender, buttonOK, buttonOK, buttonCancel, true, null);
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)

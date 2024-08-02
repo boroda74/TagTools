@@ -39,14 +39,11 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TagHistory));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.previewTable = new System.Windows.Forms.DataGridView();
-            this.Library = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ImageCellTemplate = new System.Windows.Forms.DataGridViewImageColumn();
             this.label3 = new System.Windows.Forms.Label();
             this.searchFolderTextBox = new System.Windows.Forms.ComboBox();
             this.browseButton = new System.Windows.Forms.Button();
@@ -69,6 +66,9 @@
             this.optionsPanel = new System.Windows.Forms.Panel();
             this.controlsPanel = new System.Windows.Forms.Panel();
             this.placeholderLabel3 = new System.Windows.Forms.Label();
+            this.Library = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ImageCellTemplate = new System.Windows.Forms.DataGridViewImageColumn();
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfBackupsNumericUpDown)).BeginInit();
             this.optionsPanel.SuspendLayout();
@@ -99,14 +99,14 @@
             this.previewTable.BackgroundColor = System.Drawing.SystemColors.Window;
             this.previewTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.previewTable.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.previewTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.previewTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.previewTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Library,
             this.Column1,
@@ -123,33 +123,6 @@
             this.previewTable.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.previewTable_ColumnWidthChanged);
             this.previewTable.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.previewTable_DataError);
             this.previewTable.SelectionChanged += new System.EventHandler(this.previewTable_SelectionChanged);
-            // 
-            // Library
-            // 
-            this.Library.Frozen = true;
-            resources.ApplyResources(this.Library, "Library");
-            this.Library.Name = "Library";
-            this.Library.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Column1
-            // 
-            resources.ApplyResources(this.Column1, "Column1");
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // ImageCellTemplate
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle4.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle4.NullValue")));
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.ImageCellTemplate.DefaultCellStyle = dataGridViewCellStyle4;
-            resources.ApplyResources(this.ImageCellTemplate, "ImageCellTemplate");
-            this.ImageCellTemplate.Image = global::MusicBeePlugin.Properties.Resources.search;
-            this.ImageCellTemplate.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.ImageCellTemplate.Name = "ImageCellTemplate";
-            this.ImageCellTemplate.ReadOnly = true;
             // 
             // label3
             // 
@@ -327,6 +300,36 @@
             this.placeholderLabel3.Name = "placeholderLabel3";
             this.placeholderLabel3.Tag = "";
             // 
+            // Library
+            // 
+            this.Library.FillWeight = 1F;
+            this.Library.Frozen = true;
+            resources.ApplyResources(this.Library, "Library");
+            this.Library.Name = "Library";
+            this.Library.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Column1
+            // 
+            this.Column1.FillWeight = 1F;
+            resources.ApplyResources(this.Column1, "Column1");
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // ImageCellTemplate
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle2.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle2.NullValue")));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.ImageCellTemplate.DefaultCellStyle = dataGridViewCellStyle2;
+            this.ImageCellTemplate.FillWeight = 1F;
+            resources.ApplyResources(this.ImageCellTemplate, "ImageCellTemplate");
+            this.ImageCellTemplate.Image = global::MusicBeePlugin.Properties.Resources.search;
+            this.ImageCellTemplate.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.ImageCellTemplate.Name = "ImageCellTemplate";
+            this.ImageCellTemplate.ReadOnly = true;
+            // 
             // TagHistory
             // 
             this.AcceptButton = this.buttonOK;
@@ -374,13 +377,13 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox trackListComboBox;
         private System.Windows.Forms.Button undoButton;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Library;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewImageColumn ImageCellTemplate;
         private System.Windows.Forms.CheckBox autoSelectTagsCheckBox;
         private System.Windows.Forms.Label rememberColumnAsDefaultWidthCheckBoxLabel;
         private System.Windows.Forms.Panel optionsPanel;
         private System.Windows.Forms.Panel controlsPanel;
         private System.Windows.Forms.Label placeholderLabel3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Library;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewImageColumn ImageCellTemplate;
     }
 }

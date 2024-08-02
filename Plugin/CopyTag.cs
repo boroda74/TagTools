@@ -26,9 +26,6 @@ namespace MusicBeePlugin
         private AddRowToTable addRowToTable;
         private ProcessRowOfTable processRowOfTable;
 
-        private delegate void UpdateCustomScrollBarsDelegate(DataGridView dataGridView);
-        private UpdateCustomScrollBarsDelegate updateCustomScrollBars;
-
         private MetaDataType sourceTagId;
         private FilePropertyType sourcePropId;
         private MetaDataType destinationTagId;
@@ -121,8 +118,6 @@ namespace MusicBeePlugin
             addRowToTable = previewTable_AddRowToTable;
             processRowOfTable = previewTable_ProcessRowOfTable;
 
-            this.updateCustomScrollBars = base.updateCustomScrollBars;
-
 
             enableDisablePreviewOptionControls(true, true);
             enableQueryingOrUpdatingButtons();
@@ -138,6 +133,7 @@ namespace MusicBeePlugin
 
             previewTableFormatRow(previewTable.RowCount - 1);
 
+            previewTable.FirstDisplayedScrollingRowIndex = previewTable.RowCount - 1;
             if ((previewTable.RowCount & 0x1f) == 0)
                 base.updateCustomScrollBars(this.previewTable);
         }
@@ -386,7 +382,7 @@ namespace MusicBeePlugin
                 previewIsGenerated = true;
             }
 
-            Invoke(updateCustomScrollBars, previewTable);
+            Invoke(new Action(() => { updateCustomScrollBars(previewTable); }));
             SetResultingSbText();
         }
 

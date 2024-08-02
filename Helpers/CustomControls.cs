@@ -212,7 +212,7 @@ namespace MusicBeePlugin
 
         protected override void Dispose(bool disposing)
         {
-           base.Dispose(disposing); //*******
+           base.Dispose(disposing);
 
            if (disposing)
             {
@@ -600,7 +600,7 @@ namespace MusicBeePlugin
 
         protected override void Dispose(bool disposing)
         {
-            base.Dispose(disposing); //*******
+            base.Dispose(disposing);
 
             if (disposing)
             {
@@ -1172,7 +1172,7 @@ namespace MusicBeePlugin
 
         protected override void Dispose(bool disposing)
         {
-            base.Dispose(disposing); //*******
+            base.Dispose(disposing);
 
             if (disposing)
             {
@@ -1409,7 +1409,7 @@ namespace MusicBeePlugin
 
         protected override void Dispose(bool disposing)
         {
-            base.Dispose(disposing); //*******
+            base.Dispose(disposing);
 
             if (disposing)
             {
@@ -1570,7 +1570,7 @@ namespace MusicBeePlugin
 
         protected override void Dispose(bool disposing)
         {
-            base.Dispose(disposing); //*******
+            base.Dispose(disposing);
 
             if (disposing)
             {
@@ -1603,6 +1603,7 @@ namespace MusicBeePlugin
         private readonly int upImageAdditionalBottomHeight = 4; //4px, will be scaled according to DPI in constructor
         private int offsetX;
 
+        private System.Threading.Timer thumbUpDownRepeater;
 
         public bool SettingParentScroll;
 
@@ -1642,6 +1643,9 @@ namespace MusicBeePlugin
 
         private bool thumbDown;
         private bool thumbDragging;
+
+        private bool upArrowDown;
+        private bool downArrowDown;
 
         public event EventHandler ValueChanged;
 
@@ -2231,34 +2235,11 @@ namespace MusicBeePlugin
             ResumeLayout(false);
         }
 
-        private void CustomScrollBar_MouseDown(object sender, MouseEventArgs e)
+        private void moveThumbUpDown(object state)
         {
-            var ptPoint = PointToClient(Cursor.Position);
-
             var (nRealRange, nPixelRange, nTrackHeight, nThumbHeight, fThumbHeight) = GetMetrics();
 
-            var nTop = thumbTop;
-            nTop += UpArrowImage.Height + upImageAdditionalTopHeight + upImageAdditionalBottomHeight
-                + sbBorderWidth; //+1 scaled px to top shift below due to top border
-
-
-            var thumbRect = new Rectangle(new Point(sbBorderWidth + offsetX, nTop),
-                new Size(initialWidth - 2 * sbBorderWidth, nThumbHeight));
-            var uparrowRect = new Rectangle(new Point(sbBorderWidth + offsetX, sbBorderWidth),
-                new Size(initialWidth - 2 * sbBorderWidth, (UpArrowImage.Height
-                + upImageAdditionalTopHeight + upImageAdditionalBottomHeight)));
-            var downarrowRect = new Rectangle(new Point(sbBorderWidth + offsetX, UpArrowImage.Height
-                + upImageAdditionalTopHeight + upImageAdditionalBottomHeight + sbBorderWidth + nTrackHeight),
-                new Size(initialWidth - 2 * sbBorderWidth, UpArrowImage.Height
-                + upImageAdditionalTopHeight + upImageAdditionalBottomHeight));
-
-            if (thumbRect.Contains(ptPoint))
-            {
-                //hit the thumb
-                clickPoint = (ptPoint.Y - nTop);
-                thumbDown = true;
-            }
-            else if (uparrowRect.Contains(ptPoint))
+            if (upArrowDown)
             {
                 if (nRealRange > 0)
                 {
@@ -2274,13 +2255,10 @@ namespace MusicBeePlugin
                         var fValue = fPerc * (maximum - minimum);
 
                         value = (int)Math.Round(fValue);
-
-                        if (ValueChanged != null)
-                            ValueChanged(this, null);
                     }
                 }
             }
-            else if (downarrowRect.Contains(ptPoint))
+            else if (downArrowDown)
             {
                 if (nRealRange > 0)
                 {
@@ -2296,11 +2274,57 @@ namespace MusicBeePlugin
                         var fValue = fPerc * (maximum - minimum);
 
                         value = (int)Math.Round(fValue);
-
-                        if (ValueChanged != null)
-                            ValueChanged(this, null);
                     }
                 }
+            }
+
+            Plugin.MbForm.Invoke(new Action(() => {
+                if (ValueChanged != null)
+                    ValueChanged(this, null);
+            }));
+        }
+
+        private void CustomScrollBar_MouseDown(object sender, MouseEventArgs e)
+        {
+            var ptPoint = PointToClient(Cursor.Position);
+
+            var (nRealRange, nPixelRange, nTrackHeight, nThumbHeight, fThumbHeight) = GetMetrics();
+
+            var nTop = thumbTop;
+            nTop += UpArrowImage.Height + upImageAdditionalTopHeight + upImageAdditionalBottomHeight
+                + sbBorderWidth; //+1 scaled px to top shift below due to top border
+
+
+            var thumbRect = new Rectangle(new Point(sbBorderWidth + offsetX, nTop),
+                new Size(initialWidth - 2 * sbBorderWidth, nThumbHeight));
+
+            var uparrowRect = new Rectangle(new Point(sbBorderWidth + offsetX, sbBorderWidth),
+                new Size(initialWidth - 2 * sbBorderWidth, (UpArrowImage.Height
+                + upImageAdditionalTopHeight + upImageAdditionalBottomHeight)));
+
+            var downarrowRect = new Rectangle(new Point(sbBorderWidth + offsetX, UpArrowImage.Height
+                + upImageAdditionalTopHeight + upImageAdditionalBottomHeight + sbBorderWidth + nTrackHeight),
+                new Size(initialWidth - 2 * sbBorderWidth, UpArrowImage.Height
+                + upImageAdditionalTopHeight + upImageAdditionalBottomHeight));
+
+            upArrowDown = false;
+            downArrowDown = false;
+
+            if (thumbRect.Contains(ptPoint))
+            {
+                //hit the thumb
+                clickPoint = (ptPoint.Y - nTop);
+                thumbDown = true;
+            }
+            else if (uparrowRect.Contains(ptPoint))
+            {
+                upArrowDown = true;
+                thumbUpDownRepeater = new System.Threading.Timer(moveThumbUpDown, null, 0, 50);
+            }
+            else if (downarrowRect.Contains(ptPoint))
+            {
+                downArrowDown = true;
+                thumbUpDownRepeater = new System.Threading.Timer(moveThumbUpDown, null, 0, 50);
             }
             else if (thumbRect.Top > ptPoint.Y && thumbRect.Left < ptPoint.X && thumbRect.Left + thumbRect.Width > ptPoint.X)
             {
@@ -2354,6 +2378,11 @@ namespace MusicBeePlugin
         {
             thumbDown = false;
             thumbDragging = false;
+            upArrowDown = false;
+            downArrowDown = false;
+
+            thumbUpDownRepeater?.Dispose();
+            thumbUpDownRepeater = null;
         }
 
         private void MoveThumb(int y)
@@ -2415,6 +2444,7 @@ namespace MusicBeePlugin
         private readonly int leftImageAdditionalRightWidth = 4; //4px, will be scaled according to DPI in constructor
         private int offsetY;
 
+        private System.Threading.Timer thumbLeftRightRepeater;
 
         public bool SettingParentScroll;
 
@@ -2454,6 +2484,9 @@ namespace MusicBeePlugin
 
         private bool thumbDown;
         private bool thumbDragging;
+
+        private bool leftArrowDown;
+        private bool rightArrowDown;
 
         public event EventHandler ValueChanged;
 
@@ -3025,6 +3058,61 @@ namespace MusicBeePlugin
             ResumeLayout(false);
         }
 
+        private void moveThumbLeftRight(object state)
+        {
+            var (nRealRange, nPixelRange, nTrackWidth, nThumbWidth, fThumbWidth) = GetMetrics();
+
+            if (leftArrowDown)
+            {
+                if (nRealRange > 0)
+                {
+                    if (nPixelRange > 0)
+                    {
+                        if (thumbLeft - smallChange < 0)
+                            thumbLeft = 0;
+                        else
+                            thumbLeft -= smallChange;
+
+                        //figure out value
+                        var fPerc = (float)thumbLeft / nPixelRange;
+                        var fValue = fPerc * (maximum - minimum);
+
+                        value = (int)Math.Round(fValue);
+
+                        if (ValueChanged != null)
+                            ValueChanged(this, null);
+                    }
+                }
+            }
+            else if (rightArrowDown)
+            {
+                if (nRealRange > 0)
+                {
+                    if (nPixelRange > 0)
+                    {
+                        if (thumbLeft + smallChange > nPixelRange)
+                            thumbLeft = nPixelRange;
+                        else
+                            thumbLeft += smallChange;
+
+                        //figure out value
+                        var fPerc = (float)thumbLeft / nPixelRange;
+                        var fValue = fPerc * (maximum - minimum);
+
+                        value = (int)Math.Round(fValue);
+
+                        if (ValueChanged != null)
+                            ValueChanged(this, null);
+                    }
+                }
+            }
+
+            Plugin.MbForm.Invoke(new Action(() => {
+                if (ValueChanged != null)
+                    ValueChanged(this, null);
+            }));
+        }
+
         private void CustomScrollBar_MouseDown(object sender, MouseEventArgs e)
         {
             var ptPoint = PointToClient(Cursor.Position);
@@ -3055,47 +3143,13 @@ namespace MusicBeePlugin
             }
             else if (leftarrowRect.Contains(ptPoint))
             {
-                if (nRealRange > 0)
-                {
-                    if (nPixelRange > 0)
-                    {
-                        if (thumbLeft - smallChange < 0)
-                            thumbLeft = 0;
-                        else
-                            thumbLeft -= smallChange;
-
-                        //figure out value
-                        var fPerc = (float)thumbLeft / nPixelRange;
-                        var fValue = fPerc * (maximum - minimum);
-
-                        value = (int)Math.Round(fValue);
-
-                        if (ValueChanged != null)
-                            ValueChanged(this, null);
-                    }
-                }
+                leftArrowDown = true;
+                thumbLeftRightRepeater = new System.Threading.Timer(moveThumbLeftRight, null, 0, 50);
             }
             else if (rightarrowRect.Contains(ptPoint))
             {
-                if (nRealRange > 0)
-                {
-                    if (nPixelRange > 0)
-                    {
-                        if (thumbLeft + smallChange > nPixelRange)
-                            thumbLeft = nPixelRange;
-                        else
-                            thumbLeft += smallChange;
-
-                        //figure out value
-                        var fPerc = (float)thumbLeft / nPixelRange;
-                        var fValue = fPerc * (maximum - minimum);
-
-                        value = (int)Math.Round(fValue);
-
-                        if (ValueChanged != null)
-                            ValueChanged(this, null);
-                    }
-                }
+                rightArrowDown = true;
+                thumbLeftRightRepeater = new System.Threading.Timer(moveThumbLeftRight, null, 0, 50);
             }
             else if (thumbRect.Left > ptPoint.X && thumbRect.Top < ptPoint.Y && thumbRect.Top + thumbRect.Height > ptPoint.Y)
             {
@@ -3149,6 +3203,11 @@ namespace MusicBeePlugin
         {
             thumbDown = false;
             thumbDragging = false;
+            leftArrowDown = false; 
+            rightArrowDown = false;
+
+            thumbLeftRightRepeater?.Dispose();
+            thumbLeftRightRepeater = null;
         }
 
         private void MoveThumb(int x)

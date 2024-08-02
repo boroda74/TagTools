@@ -145,21 +145,21 @@
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
     <value>1129, 187</value>
   </data>
-  <data name="buttonAsrWordSeparators.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="buttonAsrSentenceSeparators.Location" type="System.Drawing.Point, System.Drawing">
     <value>441, 113</value>
   </data>
-  <data name="buttonAsrWordSeparators.Text" xml:space="preserve">
+  <data name="buttonAsrSentenceSeparators.Text" xml:space="preserve">
     <value>ДПЗ</value>
   </data>
-  <data name="buttonAsrWordSeparators.ToolTip" xml:space="preserve">
+  <data name="buttonAsrSentenceSeparators.ToolTip" xml:space="preserve">
     <value>Установить разделители слов как значение по умолчанию 
 для Дополнительного поиска и замены
 </value>
   </data>
-  <data name="wordSeparatorsBox.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="sentenceSeparatorsBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>429, 23</value>
   </data>
-  <data name="wordSeparatorsBox.ToolTip" xml:space="preserve">
+  <data name="sentenceSeparatorsBox.ToolTip" xml:space="preserve">
     <value>Символы в этом списке должны быть разделены пробелами</value>
   </data>
   <data name="buttonAsrExceptWordsBetweenSymbols.Location" type="System.Drawing.Point, System.Drawing">
@@ -298,23 +298,24 @@
   <data name="alwaysCapitalize1stWordCheckBox.ToolTip" xml:space="preserve">
     <value>Промежуточное состояние: Всегда начинать с заглавной буквы первое слово, кроме исключенных слов (для исключенных слов в ВЕРХНЕМ РЕГИСТРЕ)</value>
   </data>
-  <data name="wordSeparatorsCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="sentenceSeparatorsCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>237, 117</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="wordSeparatorsCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="sentenceSeparatorsCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 30, 0</value>
   </data>
-  <data name="wordSeparatorsCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="sentenceSeparatorsCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>327, 15</value>
   </data>
-  <data name="wordSeparatorsCheckBoxLabel.Text" xml:space="preserve">
+  <data name="sentenceSeparatorsCheckBoxLabel.Text" xml:space="preserve">
     <value>Символы, которые считать разделителями предложений:</value>
   </data>
-  <data name="wordSeparatorsCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value>Символы, которые считать разделителями слов:</value>
+  <data name="sentenceSeparatorsCheckBoxLabel.ToolTip" xml:space="preserve">
+    <value>Символы (с пробелом(ами) или без после них), которые следует использовать в качестве разделителей предложений
+Точка, ЗА КОТОРОЙ СЛЕДУЕТ ПРОБЕЛ(Ы), всегда означает конец предложения</value>
   </data>
-  <data name="wordSeparatorsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="sentenceSeparatorsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>209, 117</value>
   </data>
   <data name="exceptionCharPairsCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
@@ -439,6 +440,9 @@
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Изменение регистра</value>
+  </data>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="dirtyErrorProvider.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

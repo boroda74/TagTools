@@ -1247,11 +1247,11 @@ namespace MusicBeePlugin
 
                 parameter0 = ChangeCase.ChangeWordsCase(parameter0, ChangeCase.ChangeCaseOptions.LowerCase);
 
-                var result = ChangeCase.ChangeWordsCase(parameter0, ChangeCase.ChangeCaseOptions.TitleCase, exceptedWords, false,
+                var result = ChangeCase.ChangeSentenceCase(parameter0, ChangeCase.ChangeCaseOptions.TitleCase, exceptedWords, false,
                     SavedSettings.exceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
                     SavedSettings.leftExceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
                     SavedSettings.rightExceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
-                    SavedSettings.wordSeparatorsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries), true, true);
+                    SavedSettings.sentenceSeparatorsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries), true, true);
 
                 return result;
             }
@@ -1271,11 +1271,11 @@ namespace MusicBeePlugin
 
                 var exceptedWords = parameter1.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-                var result = ChangeCase.ChangeWordsCase(parameter0, ChangeCase.ChangeCaseOptions.LowerCase, exceptedWords, false,
+                var result = ChangeCase.ChangeSentenceCase(parameter0, ChangeCase.ChangeCaseOptions.LowerCase, exceptedWords, false,
                     SavedSettings.exceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
                     SavedSettings.leftExceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
                     SavedSettings.rightExceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
-                    SavedSettings.wordSeparatorsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries), true);
+                    SavedSettings.sentenceSeparatorsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries), false, false);
 
                 return result;
             }
@@ -1295,11 +1295,11 @@ namespace MusicBeePlugin
 
                 var exceptedWords = parameter1.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-                var result = ChangeCase.ChangeWordsCase(parameter0, ChangeCase.ChangeCaseOptions.UpperCase, exceptedWords, false,
+                var result = ChangeCase.ChangeSentenceCase(parameter0, ChangeCase.ChangeCaseOptions.UpperCase, exceptedWords, false,
                     SavedSettings.exceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
                     SavedSettings.leftExceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
                     SavedSettings.rightExceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
-                    SavedSettings.wordSeparatorsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries), true);
+                    SavedSettings.sentenceSeparatorsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries), false, false);
 
                 return result;
             }
@@ -1319,13 +1319,13 @@ namespace MusicBeePlugin
 
                 var exceptedWords = parameter1.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-                parameter0 = ChangeCase.ChangeWordsCase(parameter0, ChangeCase.ChangeCaseOptions.LowerCase, null, false,
-                    null, SavedSettings.wordSeparatorsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries));
-                var result = ChangeCase.ChangeSentenceCase(parameter0, exceptedWords, false,
+                parameter0 = ChangeCase.ChangeWordsCase(parameter0, ChangeCase.ChangeCaseOptions.LowerCase);
+
+                var result = ChangeCase.ChangeSentenceCase(parameter0, ChangeCase.ChangeCaseOptions.SentenceCase, exceptedWords, false, 
                     SavedSettings.exceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
                     SavedSettings.leftExceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
                     SavedSettings.rightExceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
-                    SavedSettings.wordSeparatorsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries), true);
+                    SavedSettings.sentenceSeparatorsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries), true, false);
 
                 return result;
             }
@@ -2000,7 +2000,7 @@ namespace MusicBeePlugin
 
             previewTableFormatRow(previewTable.RowCount - 1);
 
-
+            previewTable.FirstDisplayedScrollingRowIndex = previewTable.RowCount - 1;
             if ((previewTable.RowCount & 0x1f) == 0)
                 updateCustomScrollBars(previewTable);
         }
@@ -2017,7 +2017,10 @@ namespace MusicBeePlugin
             previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
             if (previewTable.RowCount > 0)
+            {
+                previewTable.FirstDisplayedScrollingRowIndex = previewTable.RowCount - 1;
                 previewTable.CurrentCell = previewTable.Rows[0].Cells[0];
+            }
         }
 
         internal static string Replace(string currentFile, string value, string searchedPattern, string replacedPattern, bool ignoreCase, out bool match)
@@ -3321,6 +3324,9 @@ namespace MusicBeePlugin
         private void buttonPreview_Click(object sender, EventArgs e)
         {
             clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewChanges, (Button)sender, buttonOK, buttonClose);
+
+            if (previewTable.RowCount > 0)
+                previewTable.FirstDisplayedScrollingRowIndex = previewTable.RowCount - 1;
         }
 
         private void buttonSaveClose_Click(object sender, EventArgs e)
