@@ -119,13 +119,35 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>225, 5</value>
+    <value>350, 5</value>
   </data>
   <data name="buttonPreview.Text" xml:space="preserve">
     <value>Просмотр</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1141, 363</value>
+    <value>1266, 363</value>
+  </data>
+  <data name="ignoreSingleLetterExceptedWordsCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>932, 144</value>
+  </data>
+  <data name="ignoreSingleLetterExceptedWordsCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>291, 15</value>
+  </data>
+  <data name="ignoreSingleLetterExceptedWordsCheckBoxLabel.Text" xml:space="preserve">
+    <value>Игнорировать исключенные слова из одной буквы</value>
+  </data>
+  <data name="ignoreSingleLetterExceptedWordsCheckBoxLabel.ToolTip" xml:space="preserve">
+    <value>Игнорировать исключенные слова, состоящие из одной буквы за которыми следует точка, за которой НЕ следует пробел, 
+или слова, которым предшествует точка и за которыми следует точка, чтобы не изменять регистр аббревиатур (например, 
+"A.K.A.", даже если список исключенных слов содержит артикль "a")</value>
+  </data>
+  <data name="ignoreSingleLetterExceptedWordsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>904, 144</value>
+  </data>
+  <data name="ignoreSingleLetterExceptedWordsCheckBox.ToolTip" xml:space="preserve">
+    <value>Игнорировать исключенные слова, состоящие из одной буквы за которыми следует точка, за которой НЕ следует пробел, 
+или слова, которым предшествует точка и за которыми следует точка, чтобы не изменять регистр аббревиатур (например, 
+"A.K.A.", даже если список исключенных слов содержит артикль "a")</value>
   </data>
   <data name="Track.HeaderText" xml:space="preserve">
     <value>Трек</value>
@@ -143,10 +165,10 @@
     <value>Новое значение</value>
   </data>
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1129, 187</value>
+    <value>1254, 187</value>
   </data>
   <data name="buttonAsrSentenceSeparators.Location" type="System.Drawing.Point, System.Drawing">
-    <value>441, 113</value>
+    <value>566, 113</value>
   </data>
   <data name="buttonAsrSentenceSeparators.Text" xml:space="preserve">
     <value>ДПЗ</value>
@@ -157,13 +179,13 @@
 </value>
   </data>
   <data name="sentenceSeparatorsBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>429, 23</value>
+    <value>554, 23</value>
   </data>
   <data name="sentenceSeparatorsBox.ToolTip" xml:space="preserve">
     <value>Символы в этом списке должны быть разделены пробелами</value>
   </data>
   <data name="buttonAsrExceptWordsBetweenSymbols.Location" type="System.Drawing.Point, System.Drawing">
-    <value>441, 86</value>
+    <value>566, 86</value>
   </data>
   <data name="buttonAsrExceptWordsBetweenSymbols.Text" xml:space="preserve">
     <value>ДПЗ</value>
@@ -173,10 +195,10 @@
 для Дополнительного поиска и замены</value>
   </data>
   <data name="rightExceptionCharsBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>217, 1</value>
+    <value>279, 1</value>
   </data>
   <data name="rightExceptionCharsBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>213, 23</value>
+    <value>276, 23</value>
   </data>
   <data name="rightExceptionCharsBox.ToolTip" xml:space="preserve">
     <value>Символы в этом списке должны быть разделены пробелами
@@ -185,7 +207,7 @@
 Они представляют собой пары в соответствии с их позицией в списке</value>
   </data>
   <data name="leftExceptionCharsBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>213, 23</value>
+    <value>275, 23</value>
   </data>
   <data name="leftExceptionCharsBox.ToolTip" xml:space="preserve">
     <value>Символы в этом списке должны быть разделены пробелами
@@ -194,10 +216,10 @@
 Они представляют собой пары в соответствии с их позицией в списке</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>430, 25</value>
+    <value>555, 25</value>
   </data>
   <data name="buttonAsrExceptWordsAfterSymbols.Location" type="System.Drawing.Point, System.Drawing">
-    <value>441, 59</value>
+    <value>566, 59</value>
   </data>
   <data name="buttonAsrExceptWordsAfterSymbols.Text" xml:space="preserve">
     <value>ДПЗ</value>
@@ -207,25 +229,25 @@
 для Дополнительного поиска и замены</value>
   </data>
   <data name="exceptionCharsBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>429, 23</value>
+    <value>554, 23</value>
   </data>
   <data name="exceptionCharsBox.ToolTip" xml:space="preserve">
     <value>Символы в этом списке должны быть разделены пробелами</value>
   </data>
   <data name="removeExceptionButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>441, 32</value>
+    <value>566, 32</value>
   </data>
   <data name="removeExceptionButton.ToolTip" xml:space="preserve">
     <value>Удалить введенный список исключений из истории (если есть точное совпадение)</value>
   </data>
   <data name="exceptionWordsBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>429, 23</value>
+    <value>554, 23</value>
   </data>
   <data name="exceptionWordsBox.ToolTip" xml:space="preserve">
     <value>Слова в этом списке должны быть разделены пробелами</value>
   </data>
   <data name="buttonAsrExceptedWords.Location" type="System.Drawing.Point, System.Drawing">
-    <value>403, 14</value>
+    <value>528, 14</value>
   </data>
   <data name="buttonAsrExceptedWords.Text" xml:space="preserve">
     <value>ДПЗ</value>
@@ -235,7 +257,7 @@
 для Дополнительного поиска и замены</value>
   </data>
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>333, 5</value>
+    <value>458, 5</value>
   </data>
   <data name="buttonOK.Text" xml:space="preserve">
     <value>Применить</value>
@@ -257,10 +279,10 @@
     <value>594, 0</value>
   </data>
   <data name="fieldsPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>542, 141</value>
+    <value>667, 141</value>
   </data>
   <data name="alwaysCapitalizeLastWordCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>622, 144</value>
+    <value>575, 144</value>
   </data>
   <data name="alwaysCapitalizeLastWordCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>300, 15</value>
@@ -273,7 +295,7 @@
 Промежуточное состояние: Всегда начинать с заглавной буквы последнее слово, кроме исключенных слов (для исключенных слов в ВЕРХНЕМ РЕГИСТРЕ)</value>
   </data>
   <data name="alwaysCapitalizeLastWordCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>594, 144</value>
+    <value>547, 144</value>
   </data>
   <data name="alwaysCapitalizeLastWordCheckBox.ToolTip" xml:space="preserve">
     <value>Последнее слово не будет изменено после или между символами исключения
@@ -436,13 +458,10 @@
     <value>Изменить регистр тега</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>1155, 400</value>
+    <value>1280, 400</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Изменение регистра</value>
-  </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="dirtyErrorProvider.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1047,7 +1066,7 @@
 </value>
   </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>441, 5</value>
+    <value>566, 5</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Закрыть</value>

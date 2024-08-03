@@ -555,6 +555,7 @@ namespace MusicBeePlugin
 
             public bool? alwaysCapitalize1stWord = true;
             public bool? alwaysCapitalizeLastWord = false;
+            public bool ignoreSingleLetterExceptedWords;
 
 
             public ReportPreset[] reportsPresets; //***** delete it later!!!!
@@ -6747,7 +6748,7 @@ namespace MusicBeePlugin
             return DateTime.Now.ToString();
         }
 
-        public string CustomFunc_TitleCase(string input, string lowerCaseWordsString, string upperCaseWordsString, 
+        public string CustomFunc_TitleCase(string input, string lowerCaseWordsString, string upperCaseWordsString, //******* abbreviations!!!!
             string leftExceptionCharsString, string rightExceptionCharsString, string exceptionCharsString)
         {
             string[] lowerCaseWords = null;
@@ -6806,10 +6807,10 @@ namespace MusicBeePlugin
                 null, leftExceptionChars, rightExceptionChars, exceptionChars, true, true);
 
             input = ChangeCase.ChangeSentenceCase(input, ChangeCase.ChangeCaseOptions.LowerCase, lowerCaseWords, true,
-                exceptionChars, leftExceptionChars, rightExceptionChars, exceptionChars, true, true);
+                null, leftExceptionChars, rightExceptionChars, exceptionChars, null, null, true);
 
-            input = ChangeCase.ChangeSentenceCase(input, ChangeCase.ChangeCaseOptions.TitleCase, exceptedWords, false,
-                exceptionChars, leftExceptionChars, rightExceptionChars, exceptionChars, true, true);
+            //input = ChangeCase.ChangeSentenceCase(input, ChangeCase.ChangeCaseOptions.TitleCase, exceptedWords, false,//**********
+            //    exceptionChars, leftExceptionChars, rightExceptionChars, exceptionChars, true, true, true);
 
 
             var result = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.UpperCase, upperCaseWords, true,
@@ -6818,7 +6819,7 @@ namespace MusicBeePlugin
             return result;
         }
 
-        public string CustomFunc_SentenceCase(string input, string upperCaseWordsString, string sentenceSeparatorsString)
+        public string CustomFunc_SentenceCase(string input, string upperCaseWordsString, string sentenceSeparatorsString) //******* abbreviations!!!!
         {
             string[] upperCaseWords = null;
             string[] sentenceSeparators = null;
@@ -6835,7 +6836,7 @@ namespace MusicBeePlugin
             input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.UpperCase);
             input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.LowerCase, upperCaseWords);
             var result = ChangeCase.ChangeSentenceCase(input, ChangeCase.ChangeCaseOptions.SentenceCase, upperCaseWords, false, null, null, null, sentenceSeparators, 
-                true, false);
+                true, false, true);
 
             return result;
         }

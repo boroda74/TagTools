@@ -238,6 +238,8 @@ namespace MusicBeePlugin
         private int scaledPx = 1;
         private string cue = string.Empty;
 
+        private PluginWindowTemplate ownerForm;
+
         public ComboBox comboBox;
 
         private TextBox textBox;
@@ -367,13 +369,13 @@ namespace MusicBeePlugin
         private void init(PluginWindowTemplate ownerForm, ComboBox comboBox)
         {
             this.Paint += (sender, args) => { ControlsTools.DrawBorder(this, borderColor, borderColorActive, borderColorDisabled); };
-            
-            scaledPx = ownerForm.scaledPx;
-            textBox = null;
-            button = null;
-            listBox = null;
-            dropDown = null;
-            initialDropDownWidth = comboBox.DropDownWidth;
+
+            this.scaledPx = ownerForm.scaledPx;
+            this.textBox = null;
+            this.button = null;
+            this.listBox = null;
+            this.dropDown = null;
+            this.initialDropDownWidth = comboBox.DropDownWidth;
 
             var parent = comboBox.Parent;
             var index = parent.Controls.IndexOf(comboBox);
@@ -383,15 +385,15 @@ namespace MusicBeePlugin
             if (parent is TableLayoutPanel panel)
                 cellPosition = panel.GetCellPosition(comboBox);
 
-            Font = comboBox.Font;
-            Margin = comboBox.Margin;
-            Padding = new Padding(0, 0, 0, 0);
+            this.Font = comboBox.Font;
+            this.Margin = comboBox.Margin;
+            this.Padding = new Padding(0, 0, 0, 0);
 
-            Anchor = comboBox.Anchor;
-            TabIndex = comboBox.TabIndex;
-            TabStop = comboBox.TabStop;
-            Tag = comboBox.Tag;
-            Name = comboBox.Name;
+            this.Anchor = comboBox.Anchor;
+            this.TabIndex = comboBox.TabIndex;
+            this.TabStop = comboBox.TabStop;
+            this.Tag = comboBox.Tag;
+            this.Name = comboBox.Name;
 
 
             this.comboBox = (ComboBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.ComboBox);
@@ -400,18 +402,18 @@ namespace MusicBeePlugin
             foreach (var item in comboBox.Items)
                 this.comboBox.Items.Add(item);
 
-            this.comboBox.Font = Font;
+            this.comboBox.Font = this.Font;
 
             this.comboBox.Location = new Point(0, 0);
             this.comboBox.Margin = new Padding(0, 0, 0, 0);
             this.comboBox.Size = new Size(comboBox.Width, comboBox.Height);
             this.comboBox.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
 
-            Size = new Size(this.comboBox.Width, this.comboBox.Height + 1);
+            this.Size = new Size(this.comboBox.Width, this.comboBox.Height + 1);
 
-            Controls.Add(this.comboBox);
+            this.Controls.Add(this.comboBox);
 
-            DropDownStyle = comboBox.DropDownStyle;
+            this.DropDownStyle = comboBox.DropDownStyle;
 
 
             CopyComboBoxEventHandlers(comboBox, this.comboBox);
@@ -425,6 +427,7 @@ namespace MusicBeePlugin
             ownerForm.allControls.Insert(allControlsIndex, this);
 
             parent.Controls.RemoveAt(index);
+            comboBox.Tag = null;
             comboBox.Dispose();
 
             parent.Controls.Add(this);
@@ -432,17 +435,19 @@ namespace MusicBeePlugin
             if (parent is TableLayoutPanel layoutPanel)
                 layoutPanel.SetCellPosition(this, cellPosition);
 
-            Location = location;
+            this.Location = location;
 
             ownerForm.namesComboBoxes.Add(Name, this);
         }
 
         private void initSkinned(PluginWindowTemplate ownerForm, ComboBox comboBox)
         {
-            scaledPx = ownerForm.scaledPx;
-            this.comboBox = null;
+            this.ownerForm = ownerForm;
+            this.comboBox = comboBox;
 
-            initialDropDownWidth = comboBox.DropDownWidth;
+            this.scaledPx = ownerForm.scaledPx;
+
+            this.initialDropDownWidth = comboBox.DropDownWidth;
             //if (comboBox.DropDownWidth < comboBox.Width)
             //    initialDropDownWidth = comboBox.Width;
 
@@ -450,9 +455,9 @@ namespace MusicBeePlugin
             if (comboBox.DropDownWidth < comboBox.Width)
                 dropDownWidth = comboBox.Width;
 
-            initialDropDownHeight = comboBox.DropDownHeight + 3 * scaledPx;
+            this.initialDropDownHeight = comboBox.DropDownHeight + 3 * scaledPx;
             if (comboBox.DropDownHeight == 106)
-                initialDropDownHeight = comboBox.ItemHeight * 20 + 3 * scaledPx;
+                this.initialDropDownHeight = comboBox.ItemHeight * 20 + 3 * scaledPx;
 
             var parent = comboBox.Parent;
             var index = parent.Controls.IndexOf(comboBox);
@@ -462,73 +467,73 @@ namespace MusicBeePlugin
             if (parent is TableLayoutPanel panel)
                 cellPosition = panel.GetCellPosition(comboBox);
 
-            Font = comboBox.Font;
-            ForeColor = Plugin.InputControlForeColor;
-            BackColor = Plugin.InputControlBackColor;
-            Margin = comboBox.Margin;
-            Padding = new Padding(0, 0, 0, 0);
-            Anchor = comboBox.Anchor;
-            TabIndex = comboBox.TabIndex;
-            TabStop = comboBox.TabStop;
-            Tag = comboBox.Tag;
-            Name = comboBox.Name;
+            this.Font = comboBox.Font;
+            this.ForeColor = Plugin.InputControlForeColor;
+            this.BackColor = Plugin.InputControlBackColor;
+            this.Margin = comboBox.Margin;
+            this.Padding = new Padding(0, 0, 0, 0);
+            this.Anchor = comboBox.Anchor;
+            this.TabIndex = comboBox.TabIndex;
+            this.TabStop = comboBox.TabStop;
+            this.Tag = comboBox.Tag;
+            this.Name = comboBox.Name;
 
 
             var customScrollBarInitialWidth = ControlsTools.GetCustomScrollBarInitialWidth(ownerForm.dpiScaling, Plugin.SbBorderWidth);
 
-            textBox = (TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
+            this.textBox = (TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
 
-            textBox.Font = Font;
-            textBox.Location = new Point(0, 0);
-            textBox.Margin = new Padding(0, 0, 0, 0);
-            textBox.Size = new Size(comboBox.Width - customScrollBarInitialWidth - 1, textBox.Height);
-            textBox.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
-            textBox.TabStop = false;
+            this.textBox.Font = this.Font;
+            this.textBox.Location = new Point(0, 0);
+            this.textBox.Margin = new Padding(0, 0, 0, 0);
+            this.textBox.Size = new Size(comboBox.Width - customScrollBarInitialWidth - 1, this.textBox.Height);
+            this.textBox.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
+            this.textBox.TabStop = false;
 
             if (comboBox.DropDownStyle == ComboBoxStyle.DropDownList)
-                textBox.Click += button_Click;
+                this.textBox.Click += button_Click;
 
-            textBox.KeyPress += ownerForm.CustomComboBox_KeyPress;
-            textBox.KeyDown += ownerForm.CustomComboBox_KeyDown;
+            this.textBox.KeyPress += ownerForm.CustomComboBox_KeyPress;
+            this.textBox.KeyDown += ownerForm.CustomComboBox_KeyDown;
 
-            Size = new Size(comboBox.Width, textBox.Height);
-
-
-            button = new Button();
-            button.Font = Font;
-
-            button.Margin = new Padding(0, 0, 0, 0);
-
-            button.Location = new Point(comboBox.Width - customScrollBarInitialWidth - 1, 1);
-            button.Size = new Size(customScrollBarInitialWidth, textBox.Height - 2);
+            this.Size = new Size(comboBox.Width, this.textBox.Height);
 
 
-            button.Anchor = AnchorStyles.Right | AnchorStyles.Top;
-            button.Text = string.Empty;
-            button.ImageAlign = ContentAlignment.MiddleCenter;
-            button.TextImageRelation = TextImageRelation.Overlay;
-            button.Image = Plugin.CopyBitmap(Plugin.DownArrowComboBoxImage);
-            button.TabStop = false;
+            this.button = new Button();
+            this.button.Font = this.Font;
+
+            this.button.Margin = new Padding(0, 0, 0, 0);
+
+            this.button.Location = new Point(comboBox.Width - customScrollBarInitialWidth - 1, 1);
+            this.button.Size = new Size(customScrollBarInitialWidth, this.textBox.Height - 2);
+
+
+            this.button.Anchor = AnchorStyles.Right | AnchorStyles.Top;
+            this.button.Text = string.Empty;
+            this.button.ImageAlign = ContentAlignment.MiddleCenter;
+            this.button.TextImageRelation = TextImageRelation.Overlay;
+            this.button.Image = Plugin.CopyBitmap(Plugin.DownArrowComboBoxImage);
+            this.button.TabStop = false;
 
             //button.Click += button_Click;//****
-            button.GotFocus += button_Click;
+            this.button.GotFocus += button_Click;
 
 
-            Controls.Add(button);
-            Controls.Add(textBox);
+            this.Controls.Add(button);
+            this.Controls.Add(textBox);
 
-            ownerForm.nonDefaultingButtons.Add(button);
+            ownerForm.nonDefaultingButtons.Add(this.button);
             
 
-            ownerForm.skinControl(button);
-            button.FlatAppearance.BorderColor = Plugin.ScrollBarBackColor;
+            ownerForm.skinControl(this.button);
+            this.button.FlatAppearance.BorderColor = Plugin.ScrollBarBackColor;
 
-            ownerForm.skinControl(textBox);
+            ownerForm.skinControl(this.textBox);
 
 
-            var textBoxRectangle = new Rectangle(1, 1, textBox.Width - 2, textBox.Height - 2);
+            var textBoxRectangle = new Rectangle(1, 1, this.textBox.Width - 2, this.textBox.Height - 2);
             var textBoxRegion = new Region(textBoxRectangle);
-            textBox.Region = textBoxRegion;
+            this.textBox.Region = textBoxRegion;
 
 
             var dropDownControl = getDropDown(ownerForm, customScrollBarInitialWidth);
@@ -539,48 +544,50 @@ namespace MusicBeePlugin
             controlHost.Margin = new Padding(0, 0, 0, 0);
 
 
-            dropDown = new ToolStripDropDown();
-            dropDown.Font = Font;
-            dropDown.BackColor = textBox.BackColor;
-            dropDown.ForeColor = textBox.ForeColor;
-            dropDown.Padding = new Padding(0, 0, 0, 0);
-            dropDown.Margin = new Padding(0, 0, 0, 0);
-            dropDown.AutoSize = true;
-            dropDown.DropShadowEnabled = true;
-            dropDown.Items.Add(controlHost);
+            this.dropDown = new ToolStripDropDown();
+            this.dropDown.Font = this.Font;
+            this.dropDown.BackColor = this.textBox.BackColor;
+            this.dropDown.ForeColor = this.textBox.ForeColor;
+            this.dropDown.Padding = new Padding(0, 0, 0, 0);
+            this.dropDown.Margin = new Padding(0, 0, 0, 0);
+            this.dropDown.AutoSize = true;
+            this.dropDown.DropShadowEnabled = true;
+            this.dropDown.Items.Add(controlHost);
 
-            dropDown.Tag = this;
+            this.dropDown.Tag = this;
 
-            dropDown.Closed += dropDown_Closed;
-            dropDown.KeyPress += ownerForm.CustomComboBox_KeyPress;
-            dropDown.KeyDown += ownerForm.CustomComboBox_KeyDown;
+            this.dropDown.Closed += dropDown_Closed;
+            this.dropDown.KeyPress += ownerForm.CustomComboBox_KeyPress;
+            this.dropDown.KeyDown += ownerForm.CustomComboBox_KeyDown;
 
 
             foreach (var item in comboBox.Items)
-                listBox.Items.Add(item);
+                this.listBox.Items.Add(item);
 
-            listBox.MouseMove += listBox_MouseMove;
-            listBox.Click += listBox_ItemChosen;
-            listBox.ItemsChanged += listBox_ItemsChanged;
+            this.listBox.MouseMove += listBox_MouseMove;
+            this.listBox.Click += listBox_ItemChosen;
+            this.listBox.ItemsChanged += listBox_ItemsChanged;
 
-            listBox.AdjustHeight(dropDownWidth, initialDropDownHeight);
+            this.listBox.AdjustHeight(dropDownWidth, this.initialDropDownHeight);
 
 
             CopyComboBoxEventHandlers(comboBox, this);
 
 
-            GotFocus += CustomComboBox_GotFocus;
-            SizeChanged += customComboBox_SizeChanged;
+            this.GotFocus += CustomComboBox_GotFocus;
+            this.SizeChanged += customComboBox_SizeChanged;
             customComboBox_SizeChanged(this, null);
 
-            DropDownStyle = comboBox.DropDownStyle;
+            this.DropDownStyle = comboBox.DropDownStyle;
 
             var allControlsIndex = ownerForm.allControls.IndexOf(comboBox);
             ownerForm.allControls.RemoveAt(allControlsIndex);
             ownerForm.allControls.Insert(allControlsIndex, this);
 
             parent.Controls.RemoveAt(index);
-            comboBox.Dispose();
+            comboBox.Tag = null;
+            comboBox.Name = null;
+            //comboBox.Dispose();
 
 
             parent.Controls.Add(this);
@@ -588,7 +595,7 @@ namespace MusicBeePlugin
             if (parent is TableLayoutPanel layoutPanel)
                 layoutPanel.SetCellPosition(this, cellPosition);
 
-            Location = location;
+            this.Location = location;
 
             ownerForm.namesComboBoxes.Add(Name, this);
         }
@@ -634,7 +641,7 @@ namespace MusicBeePlugin
 
         public void AddRange(object[] items)
         {
-            if (comboBox == null)
+            if (listBox != null)
                 listBox.Items.AddRange(items);
             else
                 comboBox.Items.AddRange(items);
@@ -642,7 +649,7 @@ namespace MusicBeePlugin
 
         public void ItemsClear()
         {
-            if (comboBox == null)
+            if (listBox != null)
                 listBox.Items.Clear();
             else
                 comboBox.Items.Clear();
@@ -654,7 +661,7 @@ namespace MusicBeePlugin
         {
             get
             {
-                if (comboBox == null)
+                if (listBox != null)
                     return listBox.Items;
                 else
                     return comboBox.Items;
@@ -663,7 +670,7 @@ namespace MusicBeePlugin
 
         public string GetItemText(object item)
         {
-            if (comboBox == null)
+            if (listBox != null)
                 return listBox.GetItemText(item);
             else
                 return comboBox.GetItemText(item);
@@ -673,7 +680,7 @@ namespace MusicBeePlugin
         {
             get
             {
-                if (comboBox == null && ReadOnly && button.IsEnabled())
+                if (textBox != null && ReadOnly && button.IsEnabled())
                     return true;
                 else
                     return false;
@@ -684,7 +691,7 @@ namespace MusicBeePlugin
         {
             get
             {
-                if (comboBox == null)
+                if (listBox != null)
                     return listBox.Sorted;
                 else
                     return comboBox.Sorted;
@@ -692,7 +699,7 @@ namespace MusicBeePlugin
 
             set
             {
-                if (comboBox == null)
+                if (listBox != null)
                     listBox.Sorted = value;
                 else
                     comboBox.Sorted = value;
@@ -703,7 +710,7 @@ namespace MusicBeePlugin
         {
             get
             {
-                if (comboBox == null)
+                if (textBox != null)
                     return textBox.SelectionStart;
                 else
                     return comboBox.SelectionStart;
@@ -711,7 +718,7 @@ namespace MusicBeePlugin
 
             set
             {
-                if (comboBox == null)
+                if (textBox != null)
                     textBox.SelectionStart = value;
                 else
                     comboBox.SelectionStart = value;
@@ -722,7 +729,7 @@ namespace MusicBeePlugin
         {
             get
             {
-                if (comboBox == null)
+                if (textBox != null)
                     return textBox.SelectionLength;
                 else
                     return comboBox.SelectionLength;
@@ -730,7 +737,7 @@ namespace MusicBeePlugin
 
             set
             {
-                if (comboBox == null)
+                if (textBox != null)
                     textBox.SelectionLength = value;
                 else
                     comboBox.SelectionLength = value;
@@ -741,7 +748,7 @@ namespace MusicBeePlugin
         {
             var index = IndexOfText(value);
 
-            if (comboBox == null)
+            if (textBox != null)
             {
                 if (index == -1 && string.IsNullOrEmpty(value) && textBox.ReadOnly)
                 {
@@ -778,7 +785,7 @@ namespace MusicBeePlugin
         {
             get
             {
-                if (comboBox == null)
+                if (textBox != null)
                     return textBox.Text;
                 else
                     return comboBox.Text;
@@ -786,9 +793,9 @@ namespace MusicBeePlugin
 
             set
             {
-                if (comboBox == null && textBox.Text != value)
+                if (textBox != null && textBox.Text != value)
                     SetText(value);
-                else if (comboBox != null && comboBox.Text != value)
+                else if (textBox == null && comboBox.Text != value)
                     SetText(value);
             }
         }
@@ -797,7 +804,7 @@ namespace MusicBeePlugin
         {
             get
             {
-                if (comboBox == null)
+                if (listBox != null)
                     return listBox.SelectedIndex;
                 else
                     return comboBox.SelectedIndex;
@@ -805,7 +812,7 @@ namespace MusicBeePlugin
 
             set
             {
-                if (comboBox == null && lastSelectedIndex != value)
+                if (listBox != null && lastSelectedIndex != value)
                 {
                     listBox.SelectedIndex = value;
                     lastSelectedIndex = value;
@@ -817,7 +824,7 @@ namespace MusicBeePlugin
 
                     Events[EVENT_SELECTEDINDEXCHANGED]?.DynamicInvoke(this, null);
                 }
-                else if (comboBox != null && comboBox.SelectedIndex != value)
+                else if (listBox == null && comboBox.SelectedIndex != value)
                 {
                     comboBox.SelectedIndex = value;
 
@@ -835,7 +842,7 @@ namespace MusicBeePlugin
         {
             get
             {
-                if (comboBox == null)
+                if (listBox != null)
                     return listBox.SelectedItem;
                 else
                     return comboBox.SelectedItem;
@@ -843,7 +850,7 @@ namespace MusicBeePlugin
 
             set
             {
-                if (comboBox == null && listBox.SelectedItem != value)
+                if (listBox != null && listBox.SelectedItem != value)
                 {
                     listBox.SelectedItem = value;
                     lastSelectedIndex = listBox.SelectedIndex;
@@ -855,7 +862,7 @@ namespace MusicBeePlugin
 
                     Events[EVENT_SELECTEDITEMCHANGED]?.DynamicInvoke(this, null);
                 }
-                else if (comboBox != null && comboBox.SelectedItem != value)
+                else if (listBox == null && comboBox.SelectedItem != value)
                 {
                     comboBox.SelectedItem = value;
 
@@ -871,7 +878,7 @@ namespace MusicBeePlugin
         {
             get
             {
-                if (comboBox == null)
+                if (textBox != null)
                     return textBoxReadOnlyCache;
                 else
                     return comboBox.DropDownStyle == ComboBoxStyle.DropDownList;
@@ -881,7 +888,7 @@ namespace MusicBeePlugin
             {
                 textBoxReadOnlyCache = value;
 
-                if (comboBox == null)
+                if (textBox != null)
                     textBox.ReadOnly = value;
                 else if (value)
                     comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -894,7 +901,7 @@ namespace MusicBeePlugin
         {
             if (state)
             {
-                if (comboBox == null)
+                if (textBox != null)
                 {
                     textBoxReadOnlyCache = textBox.ReadOnly;
                     textBox.ReadOnly = true;
@@ -907,7 +914,7 @@ namespace MusicBeePlugin
             }
             else
             {
-                if (comboBox == null)
+                if (textBox != null)
                 {
                     textBox.ReadOnly = textBoxReadOnlyCache;
                     button.Enable(true);
@@ -921,7 +928,7 @@ namespace MusicBeePlugin
 
         internal bool IsReallyEnabled()
         {
-            if (comboBox == null)
+            if (textBox != null)
                 return button.IsEnabled();
             else
                 return comboBox.IsEnabled();
@@ -929,7 +936,7 @@ namespace MusicBeePlugin
 
         private void OnVisibleChanged(object sender, EventArgs e)
         {
-            if (comboBox == null)
+            if (textBox != null)
             {
                 textBox.Visible = Visible;
                 button.Visible = Visible;
@@ -951,7 +958,7 @@ namespace MusicBeePlugin
         {
             get
             {
-                if (comboBox == null)
+                if (textBox != null)
                     return textBoxReadOnlyCache ? ComboBoxStyle.DropDownList : ComboBoxStyle.DropDown;
                 else
                     return comboBox.DropDownStyle;
@@ -959,9 +966,9 @@ namespace MusicBeePlugin
 
             set
             {
-                if (comboBox != null && comboBox.DropDownStyle == value)
+                if (textBox == null && comboBox.DropDownStyle == value)
                     ;
-                else if (comboBox != null && comboBox.DropDownStyle != value)
+                else if (textBox == null && comboBox.DropDownStyle != value)
                     comboBox.DropDownStyle = value;
                 else if (value == ComboBoxStyle.DropDown)
                     ReadOnly = false;
@@ -996,12 +1003,18 @@ namespace MusicBeePlugin
 
         private void customComboBox_SizeChanged(object sender, EventArgs e)
         {
-            if (comboBox != null)
+            if (textBox == null)
             {
                 if (Width < initialDropDownWidth)
                     comboBox.DropDownWidth = initialDropDownWidth;
                 else
                     comboBox.DropDownWidth = Width;
+            }
+            else
+            {
+                var textBoxRectangle = new Rectangle(1, 1, textBox.Width - 2, textBox.Height - 2);
+                var textBoxRegion = new Region(textBoxRectangle);
+                textBox.Region = textBoxRegion;
             }
         }
 
@@ -1100,7 +1113,7 @@ namespace MusicBeePlugin
             if (forceCue)
                 SelectedIndex = -1;
 
-            if (comboBox == null)
+            if (textBox != null)
             {
                 this.cue = cue;
                 if (listBox.SelectedIndex == -1)

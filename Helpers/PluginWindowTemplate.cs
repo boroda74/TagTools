@@ -2391,6 +2391,7 @@ namespace MusicBeePlugin
             }
 
 
+            //useSkinColors == true here
             if (control is TextBoxBorder textBoxBorder2)
             {
                 skinControl(textBoxBorder2.textBox);

@@ -51,6 +51,7 @@ namespace MusicBeePlugin
         private string[] sentenceSeparators;
         private bool? alwaysCapitalize1stWord;
         private bool? alwaysCapitalizeLastWord;
+        private bool ignoreSingleLetterExceptedWords;
 
         internal ChangeCase(Plugin plugin) : base(plugin)
         {
@@ -111,6 +112,8 @@ namespace MusicBeePlugin
 
             alwaysCapitalize1stWordCheckBox.CheckState = GetCheckState(SavedSettings.alwaysCapitalize1stWord);
             alwaysCapitalizeLastWordCheckBox.CheckState = GetCheckState(SavedSettings.alwaysCapitalizeLastWord);
+
+            ignoreSingleLetterExceptedWordsCheckBox.Checked = SavedSettings.ignoreSingleLetterExceptedWords;
 
             exceptWordsCheckBox_CheckedChanged(null, null);
             exceptCharsCheckBox_CheckedChanged(null, null);
@@ -253,15 +256,23 @@ namespace MusicBeePlugin
             return newSubstring;
         }
 
-        internal static bool IsCharASymbol(char item)
+        internal static bool IsCharASymbol(char character)
         {
-            if ((string.Empty + item).ToLower() == (string.Empty + item).ToUpper())
+            if (char.IsLetter(character)) //Letters
             {
-                switch (item)
+                return false;
+            }
+            else if (System.Globalization.CharUnicodeInfo.GetUnicodeCategory(character) == System.Globalization.UnicodeCategory.NonSpacingMark) //Diacritics
+            {
+                return false;
+            }
+            else //if ((string.Empty + item).ToLower() == (string.Empty + item).ToUpper()) //******
+            {
+                switch (character)
                 {
                     case '\'':
                         return false;
-                    case '`':
+                    case '’':
                         return false;
                     case '0':
                         return false;
@@ -283,14 +294,16 @@ namespace MusicBeePlugin
                         return false;
                     case '9':
                         return false;
+                    //case 'ß':
+                    //    return false;
                     default:
                         return true;
                 }
             }
-            else
-            {
-                return false;
-            }
+            //else
+            //{
+            //    return false;
+            //}
         }
 
         internal static bool IsItemContainedInArray(string item, string[] array)
@@ -298,7 +311,19 @@ namespace MusicBeePlugin
             item = string.Empty + item; //It converts null to string
 
             foreach (var currentItem in array)
-                if (item.ToLower() == currentItem.ToLower()) return true;
+            {
+                if (currentItem.ToLower() == "*rn") //Roman numerals
+                {
+                    if (Regex.Replace(item, @"^([IiVvXxLlⅢⅣⅤⅥⅦⅧⅨⅩⅪⅫⅬⅭⅮⅯⅰⅱⅲⅳⅴⅵⅶⅷⅸⅹⅺⅻⅼⅽⅾⅿↀↁↂↃↄↅↆↇↈ]{2,})$", string.Empty) == string.Empty)
+                        return true;
+                    else
+                        return false;
+                }
+                else if (item.ToLower() == currentItem.ToLower())
+                {
+                    return true;
+                }
+            }
 
             return false;
         }
@@ -325,13 +350,15 @@ namespace MusicBeePlugin
 
         internal static string ChangeWordsCase(string source, ChangeCaseOptions changeCaseOption, string[] exceptedWords = null, bool useWhiteList = false, 
             string[] exceptionChars = null, string[] leftExceptionChars = null, string[] rightExceptionChars = null, 
-            bool? alwaysCapitalize1stWord = false, bool? alwaysCapitalizeLastWord = false)
+            bool? alwaysCapitalize1stWord = false, bool? alwaysCapitalizeLastWord = false, bool ignoreSingleLetterExceptedWords = false)
         {
             var newString = string.Empty;
             var currentWord = string.Empty;
+            var prePrevChar = '\u0000';
             var prevChar = '\u0000';
             var wasCharException = false;
             var resetCharException = false;
+            var wasSingleLetterWordCharException = false;
             var isTheFirstWord = true;
             var encounteredLeftExceptionChars = new List<char>();
 
@@ -351,17 +378,29 @@ namespace MusicBeePlugin
             foreach (var currentChar in source)
             {
                 //Delayed reset of char exception (to skip spaces after exception chars if any)
-                if (wasCharException && !IsCharASymbol(currentChar) && (prevChar == ' ' || prevChar == MultipleItemsSplitterId || ItemIndexInArray(prevChar, rightExceptionChars) >= 0))
+                if (wasCharException && !IsCharASymbol(currentChar) && (prevChar == ' ' || prevChar == MultipleItemsSplitterId 
+                    || ItemIndexInArray(prevChar, rightExceptionChars) >= 0))
                     resetCharException = true;
 
-                //Char exception
-                if (IsCharASymbol(currentChar))
+                //Let's exclude abbreviations even if they are contained in exceptedWords list (e.g. "A." if exceptedWords contains the article "a")
+                if (ignoreSingleLetterExceptedWords && currentChar == '.' && currentWord.Length == 1)//*******
                 {
-                    if (IsItemContainedInArray(currentChar, exceptionChars)) //Ignore changing case later
-                        wasCharException = true;
+                    wasSingleLetterWordCharException = true;
+                }
+                else
+                {
+                    if (prePrevChar != '.')
+                        wasSingleLetterWordCharException = false;
 
-                    if (IsItemContainedInArray(currentChar, leftExceptionChars)) //Ignore changing case later
-                        encounteredLeftExceptionChars.Add(currentChar);
+                    //Char exception
+                    if (IsCharASymbol(currentChar))
+                    {
+                        if (IsItemContainedInArray(currentChar, exceptionChars)) //Ignore changing case later
+                            wasCharException = true;
+
+                        if (IsItemContainedInArray(currentChar, leftExceptionChars)) //Ignore changing case later
+                            encounteredLeftExceptionChars.Add(currentChar);
+                    }
                 }
 
                 //Let's try to remove "between chars" changing case exception from encounteredLeftExceptionChars and mark wasCharException
@@ -383,11 +422,17 @@ namespace MusicBeePlugin
                         //Ignore changing case (for UPPERCASE excepted words)
                         else if (alwaysCapitalize1stWord == null && isTheFirstWord && IsItemContainedInArray(currentWord, exceptedWords) && !useWhiteList) 
                             newString = newString + currentWord + currentChar;
-                        //Ignore changing case
-                        else if (wasCharException || (IsItemContainedInArray(currentWord, exceptedWords) && !useWhiteList) || encounteredLeftExceptionChars.Count > 0) 
+                        //Ignore changing case for abbreviations even if they are contained in exceptedWords list (e.g. "A." if exceptedWords contains the article "a")
+                        else if (wasSingleLetterWordCharException)
                             newString = newString + currentWord + currentChar;
+                        //Ignore changing case
+                        else if (wasCharException || (IsItemContainedInArray(currentWord, exceptedWords) && !useWhiteList) || encounteredLeftExceptionChars.Count > 0)
+                            newString = newString + currentWord + currentChar;
+                        //Change case if alwaysCapitalize1stWord == null and isTheFirstWord == true 
+                        else if (alwaysCapitalize1stWord == null && isTheFirstWord)
+                            newString = newString + ChangeSubstringCase(currentWord, ChangeCaseOptions.TitleCase, true) + currentChar;
                         //Ignore changing case if the word is not contained in whitelist, otherwise proceed as usual
-                        else if (!IsItemContainedInArray(currentWord, exceptedWords) && useWhiteList) 
+                        else if (!IsItemContainedInArray(currentWord, exceptedWords) && useWhiteList)
                             newString = newString + currentWord + currentChar;
                         //Change case
                         else
@@ -418,8 +463,11 @@ namespace MusicBeePlugin
                         currentWord += currentChar;
                 }
 
+
+                prePrevChar = prevChar;
                 prevChar = currentChar;
             }
+
 
             //String is ended, so last currentWord IS a word
             if (resetCharException)
@@ -441,9 +489,18 @@ namespace MusicBeePlugin
                 //Ignore changing case (for UPPERCASE excepted words)
                 else if (alwaysCapitalizeLastWord == null && IsItemContainedInArray(currentWord, exceptedWords) && !useWhiteList) 
                     newString += ChangeSubstringCase(currentWord, ChangeCaseOptions.TitleCase, true);
+                //Ignore changing case for abbreviations even if they are contained in exceptedWords list (e.g. "A." if exceptedWords contains the article "a")
+                else if (wasSingleLetterWordCharException)
+                    newString += currentWord;
                 //Ignore changing case
                 else if (wasCharException || (IsItemContainedInArray(currentWord, exceptedWords) && !useWhiteList) || encounteredLeftExceptionChars.Count > 0) 
                     newString += currentWord;
+                //Change case if alwaysCapitalize1stWord == null and isTheFirstWord == true 
+                else if (alwaysCapitalize1stWord == null && isTheFirstWord)
+                    newString = newString + ChangeSubstringCase(currentWord, ChangeCaseOptions.TitleCase, true);
+                //Ignore changing case if the word is not contained in whitelist, otherwise proceed as usual
+                else if (!IsItemContainedInArray(currentWord, exceptedWords) && useWhiteList)
+                    newString = newString + currentWord;
                 //Change case
                 else
                     newString += ChangeSubstringCase(currentWord, changeCaseOption, isTheFirstWord);
@@ -452,11 +509,14 @@ namespace MusicBeePlugin
             return newString;
         }
 
-        internal static string ChangeSentenceCase(string source, ChangeCaseOptions changeCaseOption, string[] exceptedWords = null, bool useWhiteList = false, string[] exceptionChars = null,
-            string[] leftExceptionChars = null, string[] rightExceptionChars = null, string[] sentenceSeparators = null, bool? alwaysCapitalize1stWord = true, bool? alwaysCapitalizeLastWord = true)
+        internal static string ChangeSentenceCase(string source, ChangeCaseOptions changeCaseOption, string[] exceptedWords = null, bool useWhiteList = false, 
+            string[] exceptionChars = null, string[] leftExceptionChars = null, string[] rightExceptionChars = null, string[] sentenceSeparators = null, 
+            bool? alwaysCapitalize1stWord = true, bool? alwaysCapitalizeLastWord = true, bool ignoreSingleLetterExceptedWords = false)
         {
             var newString = string.Empty;
             var currentSentence = string.Empty;
+            var wasSingleLetterWordCharException = false;
+            var prePrevChar = '\u0000';
             var prevChar = '\u0000';
 
             if (exceptedWords == null)
@@ -478,8 +538,23 @@ namespace MusicBeePlugin
             bool wasEndOfSentence = false;
             foreach (var currentChar in source)
             {
-                if (currentChar == MultipleItemsSplitterId || (prevChar == '.' && currentChar == ' ') || IsItemContainedInArray(currentChar, sentenceSeparators)) //Beginning of new sentence
-                    wasEndOfSentence = true;
+                //Let's exclude abbreviations even if they are contained in exceptedWords list (e.g. "A." if exceptedWords contains the article "a")
+                if (ignoreSingleLetterExceptedWords && currentChar == '.' && !IsCharASymbol(prevChar))//*******
+                {
+                    wasSingleLetterWordCharException = true;
+                }
+                else
+                {
+                    if (prePrevChar != '.')
+                        wasSingleLetterWordCharException = false;
+
+                    //Beginning of new sentence
+                    if (currentChar == MultipleItemsSplitterId || IsItemContainedInArray(currentChar, sentenceSeparators))
+                        wasEndOfSentence = true;
+                    //Beginning of new sentence
+                    else if (prevChar == '.' && currentChar == ' ' && !wasSingleLetterWordCharException)
+                        wasEndOfSentence = true;
+                }
 
 
                 if (wasEndOfSentence && currentChar == ' ') //Not the beginning of new sentence
@@ -491,7 +566,7 @@ namespace MusicBeePlugin
                     wasEndOfSentence = false;
 
                     newString += ChangeWordsCase(currentSentence, changeCaseOption, exceptedWords, useWhiteList, exceptionChars,
-                        leftExceptionChars, rightExceptionChars, alwaysCapitalize1stWord, alwaysCapitalizeLastWord);
+                        leftExceptionChars, rightExceptionChars, alwaysCapitalize1stWord, alwaysCapitalizeLastWord, ignoreSingleLetterExceptedWords);
 
                     currentSentence = currentChar.ToString();
                 }
@@ -500,35 +575,37 @@ namespace MusicBeePlugin
                     currentSentence += currentChar;
                 }
 
+
+                prePrevChar = prevChar;
                 prevChar = currentChar;
             }
 
             //String is ended, so last currentSentence IS a sentence
             newString += ChangeWordsCase(currentSentence, changeCaseOption, exceptedWords, useWhiteList, exceptionChars, leftExceptionChars,
-                rightExceptionChars, alwaysCapitalize1stWord, alwaysCapitalizeLastWord);
+                rightExceptionChars, alwaysCapitalize1stWord, alwaysCapitalizeLastWord, ignoreSingleLetterExceptedWords);
 
             return newString;
         }
 
         private string changeCase(string source, int changeCaseOptions, string[] exceptionWordsArg, bool useWhiteListArg, string[] exceptionCharsArg,
             string[] leftExceptionCharsArg, string[] rightExceptionCharsArg, string[] sentenceSeparatorsArg, 
-            bool? alwaysCapitalize1stWordArg, bool? alwaysCapitalizeLastWordArg)
+            bool? alwaysCapitalize1stWordArg, bool? alwaysCapitalizeLastWordArg, bool ignoreSingleLetterExceptedWordsArg)
         {
             if (changeCaseOptions == 1)
                 return ChangeSentenceCase(source, ChangeCaseOptions.SentenceCase, exceptionWordsArg, useWhiteListArg, exceptionCharsArg, leftExceptionCharsArg,
-                    rightExceptionCharsArg, sentenceSeparatorsArg, alwaysCapitalize1stWordArg, alwaysCapitalizeLastWordArg);
+                    rightExceptionCharsArg, sentenceSeparatorsArg, alwaysCapitalize1stWordArg, alwaysCapitalizeLastWordArg, ignoreSingleLetterExceptedWordsArg);
             else if (changeCaseOptions == 2)
                 return ChangeSentenceCase(source, ChangeCaseOptions.LowerCase, exceptionWordsArg, useWhiteListArg, exceptionCharsArg,
-                    leftExceptionCharsArg, rightExceptionCharsArg, sentenceSeparatorsArg, alwaysCapitalize1stWordArg, alwaysCapitalizeLastWordArg);
+                    leftExceptionCharsArg, rightExceptionCharsArg, sentenceSeparatorsArg, alwaysCapitalize1stWordArg, alwaysCapitalizeLastWordArg, ignoreSingleLetterExceptedWordsArg);
             else if (changeCaseOptions == 3)
                 return ChangeSentenceCase(source, ChangeCaseOptions.UpperCase, exceptionWordsArg, useWhiteListArg, exceptionCharsArg,
-                    leftExceptionCharsArg, rightExceptionCharsArg, sentenceSeparatorsArg, alwaysCapitalize1stWordArg, alwaysCapitalizeLastWordArg);
+                    leftExceptionCharsArg, rightExceptionCharsArg, sentenceSeparatorsArg, alwaysCapitalize1stWordArg, alwaysCapitalizeLastWordArg, ignoreSingleLetterExceptedWordsArg);
             else if (changeCaseOptions == 4)
                 return ChangeSentenceCase(source, ChangeCaseOptions.TitleCase, exceptionWordsArg, useWhiteListArg, exceptionCharsArg,
-                    leftExceptionCharsArg, rightExceptionCharsArg, sentenceSeparatorsArg, alwaysCapitalize1stWordArg, alwaysCapitalizeLastWordArg);
+                    leftExceptionCharsArg, rightExceptionCharsArg, sentenceSeparatorsArg, alwaysCapitalize1stWordArg, alwaysCapitalizeLastWordArg, ignoreSingleLetterExceptedWordsArg);
             else //if (changeCaseOptions == 5)
                 return ChangeSentenceCase(source, ChangeCaseOptions.ToggleCase, exceptionWordsArg, useWhiteListArg, exceptionCharsArg,
-                    leftExceptionCharsArg, rightExceptionCharsArg, sentenceSeparatorsArg, alwaysCapitalize1stWordArg, alwaysCapitalizeLastWordArg);
+                    leftExceptionCharsArg, rightExceptionCharsArg, sentenceSeparatorsArg, alwaysCapitalize1stWordArg, alwaysCapitalizeLastWordArg, ignoreSingleLetterExceptedWordsArg);
         }
 
         private bool prepareBackgroundPreview()
@@ -559,8 +636,9 @@ namespace MusicBeePlugin
             leftExceptionChars = null;
             rightExceptionChars = null;
             sentenceSeparators = null;
-            alwaysCapitalize1stWord = alwaysCapitalize1stWordCheckBox.Checked;
-            alwaysCapitalizeLastWord = alwaysCapitalizeLastWordCheckBox.Checked;
+            alwaysCapitalize1stWord = GetBoolFromCheckState(alwaysCapitalize1stWordCheckBox.CheckState);
+            alwaysCapitalizeLastWord = GetBoolFromCheckState(alwaysCapitalizeLastWordCheckBox.CheckState);
+            ignoreSingleLetterExceptedWords = ignoreSingleLetterExceptedWordsCheckBox.Checked;
 
             if (exceptionWordsCheckBox.IsEnabled() && exceptionWordsCheckBox.Checked)
                 exceptedWords = exceptionWordsBoxCustom.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
@@ -643,7 +721,7 @@ namespace MusicBeePlugin
                 var sourceTagValue = GetFileTag(currentFile, sourceTagId);
                 var sourceTagTValue = GetTagRepresentation(sourceTagValue);
                 var newTagValue = changeCase(sourceTagValue, changeCaseFlag, exceptedWords, useWhiteList, exceptionChars,
-                    leftExceptionChars, rightExceptionChars, sentenceSeparators, alwaysCapitalize1stWord, alwaysCapitalizeLastWord);
+                    leftExceptionChars, rightExceptionChars, sentenceSeparators, alwaysCapitalize1stWord, alwaysCapitalizeLastWord, ignoreSingleLetterExceptedWords);
                 var newTagTValue = GetTagRepresentation(newTagValue);
 
                 var track = GetTrackRepresentation(currentFile);
@@ -724,7 +802,7 @@ namespace MusicBeePlugin
                 if ((string)previewTable.Rows[i].Cells[0].Value == "T")
                 {
                     var newTagValue = changeCase((string)previewTable.Rows[i].Cells[5].Value, changeCaseFlag, exceptedWords, useWhiteList, exceptionChars,
-                        leftExceptionChars, rightExceptionChars, sentenceSeparators, alwaysCapitalize1stWord, alwaysCapitalizeLastWord);
+                        leftExceptionChars, rightExceptionChars, sentenceSeparators, alwaysCapitalize1stWord, alwaysCapitalizeLastWord, ignoreSingleLetterExceptedWords);
                     var newTagTValue = GetTagRepresentation(newTagValue);
 
                     previewTable.Rows[i].Cells[5].Value = newTagValue;
@@ -789,6 +867,8 @@ namespace MusicBeePlugin
 
             SavedSettings.alwaysCapitalize1stWord = GetBoolFromCheckState(alwaysCapitalize1stWordCheckBox.CheckState);
             SavedSettings.alwaysCapitalizeLastWord = GetBoolFromCheckState(alwaysCapitalizeLastWordCheckBox.CheckState);
+
+            SavedSettings.ignoreSingleLetterExceptedWords = ignoreSingleLetterExceptedWordsCheckBox.Checked;
 
             TagToolsPlugin.SaveSettings();
         }
@@ -1011,7 +1091,7 @@ namespace MusicBeePlugin
                     sourceTagValue = (string)previewTable.Rows[e.RowIndex].Cells[3].Value;
 
                     var newTagValue = changeCase(sourceTagValue, changeCaseFlag, exceptedWords, useWhiteList, exceptionChars,
-                        leftExceptionChars, rightExceptionChars, sentenceSeparators, alwaysCapitalize1stWord, alwaysCapitalizeLastWord);
+                        leftExceptionChars, rightExceptionChars, sentenceSeparators, alwaysCapitalize1stWord, alwaysCapitalizeLastWord, ignoreSingleLetterExceptedWords);
                     var newTagTValue = GetTagRepresentation(newTagValue);
 
                     previewTable.Rows[e.RowIndex].Cells[5].Value = newTagValue;
@@ -1252,6 +1332,14 @@ namespace MusicBeePlugin
                 return;
 
             alwaysCapitalizeLastWordCheckBox.CheckState = GetNextCheckState(alwaysCapitalizeLastWordCheckBox.CheckState);
+        }
+
+        private void ignoreSingleLetterExceptedWordsCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            if (!ignoreSingleLetterExceptedWordsCheckBox.IsEnabled())
+                return;
+
+            ignoreSingleLetterExceptedWordsCheckBox.Checked = !ignoreSingleLetterExceptedWordsCheckBox.Checked;
         }
 
         private void ChangeCase_Load(object sender, EventArgs e)
