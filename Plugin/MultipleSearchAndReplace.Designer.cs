@@ -39,7 +39,7 @@
             this.SearchFor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ReplaceWith = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Position = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.previewTable = new System.Windows.Forms.DataGridView();
+            previewTable = new System.Windows.Forms.DataGridView();
             this.Track = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OriginalTag = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NewTag = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -74,7 +74,7 @@
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.templateTable)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.previewTable)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(previewTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.autoApplyPictureBox)).BeginInit();
             this.controlsPanel.SuspendLayout();
@@ -99,7 +99,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.splitContainer1.Panel2.Controls.Add(this.previewTable);
+            this.splitContainer1.Panel2.Controls.Add(previewTable);
             this.splitContainer1.Tag = "#MultipleSearchAndReplace&MultipleSearchAndReplace@pinned-to-parent-x";
             this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
             // 
@@ -173,22 +173,22 @@
             // 
             // previewTable
             // 
-            this.previewTable.AllowUserToAddRows = false;
-            this.previewTable.AllowUserToDeleteRows = false;
-            this.previewTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.previewTable.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.previewTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            resources.ApplyResources(this.previewTable, "previewTable");
-            this.previewTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            previewTable.AllowUserToAddRows = false;
+            previewTable.AllowUserToDeleteRows = false;
+            previewTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            previewTable.BackgroundColor = System.Drawing.SystemColors.Window;
+            previewTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            resources.ApplyResources(previewTable, "previewTable");
+            previewTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Track,
             this.OriginalTag,
             this.NewTag,
             this.FileColumn});
-            this.dirtyErrorProvider.SetIconAlignment(this.previewTable, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("previewTable.IconAlignment"))));
-            this.previewTable.MultiSelect = false;
-            this.previewTable.Name = "previewTable";
-            this.previewTable.RowHeadersVisible = false;
-            this.previewTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dirtyErrorProvider.SetIconAlignment(previewTable, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("previewTable.IconAlignment"))));
+            previewTable.MultiSelect = false;
+            previewTable.Name = "previewTable";
+            previewTable.RowHeadersVisible = false;
+            previewTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             // 
             // Track
             // 
@@ -468,7 +468,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.templateTable)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.previewTable)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(previewTable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.autoApplyPictureBox)).EndInit();
             this.controlsPanel.ResumeLayout(false);

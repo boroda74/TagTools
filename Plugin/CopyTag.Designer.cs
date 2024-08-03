@@ -40,7 +40,7 @@
             this.buttonCancel = new System.Windows.Forms.Button();
             this.appendCheckBox = new System.Windows.Forms.CheckBox();
             this.buttonPreview = new System.Windows.Forms.Button();
-            this.previewTable = new System.Windows.Forms.DataGridView();
+            previewTable = new System.Windows.Forms.DataGridView();
             this.File = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Track = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SupposedDestinationTag = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -67,7 +67,7 @@
             this.addCheckBoxLabel = new System.Windows.Forms.Label();
             this.fieldsPanel = new System.Windows.Forms.Panel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.previewTable)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(previewTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).BeginInit();
             this.fieldsPanel.SuspendLayout();
             this.SuspendLayout();
@@ -150,13 +150,13 @@
             // 
             // previewTable
             // 
-            this.previewTable.AllowUserToAddRows = false;
-            this.previewTable.AllowUserToDeleteRows = false;
-            resources.ApplyResources(this.previewTable, "previewTable");
-            this.previewTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.previewTable.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.previewTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.previewTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            previewTable.AllowUserToAddRows = false;
+            previewTable.AllowUserToDeleteRows = false;
+            resources.ApplyResources(previewTable, "previewTable");
+            previewTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            previewTable.BackgroundColor = System.Drawing.SystemColors.Window;
+            previewTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            previewTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.File,
             this.Track,
             this.SupposedDestinationTag,
@@ -165,14 +165,14 @@
             this.OriginalDestinationTagT,
             this.NewTag,
             this.NewTagT});
-            this.previewTable.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dirtyErrorProvider.SetIconAlignment(this.previewTable, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("previewTable.IconAlignment"))));
-            this.previewTable.MultiSelect = false;
-            this.previewTable.Name = "previewTable";
-            this.previewTable.RowHeadersVisible = false;
-            this.previewTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.previewTable.Tag = "#CopyTag&CopyTag@pinned-to-parent-x";
-            this.previewTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.previewTable_CellContentClick);
+            previewTable.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dirtyErrorProvider.SetIconAlignment(previewTable, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("previewTable.IconAlignment"))));
+            previewTable.MultiSelect = false;
+            previewTable.Name = "previewTable";
+            previewTable.RowHeadersVisible = false;
+            previewTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            previewTable.Tag = "#CopyTag&CopyTag@pinned-to-parent-x";
+            previewTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.previewTable_CellContentClick);
             // 
             // File
             // 
@@ -372,7 +372,7 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.Controls.Add(this.previewTable);
+            this.Controls.Add(previewTable);
             this.Controls.Add(this.addCheckBoxLabel);
             this.Controls.Add(this.addCheckBox);
             this.Controls.Add(this.appendCheckBoxLabel);
@@ -394,7 +394,7 @@
             this.Tag = "";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CopyTag_FormClosing);
             this.Load += new System.EventHandler(this.CopyTag_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.previewTable)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(previewTable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).EndInit();
             this.fieldsPanel.ResumeLayout(false);
             this.fieldsPanel.PerformLayout();

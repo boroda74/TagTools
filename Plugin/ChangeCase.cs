@@ -23,11 +23,11 @@ namespace MusicBeePlugin
         private CustomComboBox sourceTagListCustom;
         private CustomComboBox exceptionWordsBoxCustom;
         private CustomComboBox exceptionCharsBoxCustom;
-        private CustomComboBox leftExceptionCharsBoxCustom;
-        private CustomComboBox rightExceptionCharsBoxCustom;
+        private CustomComboBox openingExceptionCharsBoxCustom;
+        private CustomComboBox closingExceptionCharsBoxCustom;
         private CustomComboBox sentenceSeparatorsBoxCustom;
 
-        private bool rightExceptionCharsBoxLeaving;
+        private bool closingExceptionCharsBoxLeaving;
 
         private readonly DataGridViewCellStyle unchangedCellStyle = new DataGridViewCellStyle(UnchangedCellStyle);
         private readonly DataGridViewCellStyle changedCellStyle = new DataGridViewCellStyle(ChangedCellStyle);
@@ -46,8 +46,8 @@ namespace MusicBeePlugin
         private bool useWhiteList;
         private string[] exceptedWords;
         private string[] exceptionChars;
-        private string[] leftExceptionChars;
-        private string[] rightExceptionChars;
+        private string[] openingExceptionChars;
+        private string[] closingExceptionChars;
         private string[] sentenceSeparators;
         private bool? alwaysCapitalize1stWord;
         private bool? alwaysCapitalizeLastWord;
@@ -70,11 +70,11 @@ namespace MusicBeePlugin
             exceptionCharsBoxCustom = namesComboBoxes["exceptionCharsBox"];
             exceptionCharsBoxCustom.Leave += exceptionCharsBox_Leave;
 
-            leftExceptionCharsBoxCustom = namesComboBoxes["leftExceptionCharsBox"];
-            leftExceptionCharsBoxCustom.Leave += leftExceptionCharsBox_Leave;
+            openingExceptionCharsBoxCustom = namesComboBoxes["openingExceptionCharsBox"];
+            openingExceptionCharsBoxCustom.Leave += openingExceptionCharsBox_Leave;
 
-            rightExceptionCharsBoxCustom = namesComboBoxes["rightExceptionCharsBox"];
-            rightExceptionCharsBoxCustom.Leave += rightExceptionCharsBox_Leave;
+            closingExceptionCharsBoxCustom = namesComboBoxes["closingExceptionCharsBox"];
+            closingExceptionCharsBoxCustom.Leave += closingExceptionCharsBox_Leave;
 
             sentenceSeparatorsBoxCustom = namesComboBoxes["sentenceSeparatorsBox"];
             sentenceSeparatorsBoxCustom.Leave += sentenceSeparatorsBox_Leave;
@@ -101,10 +101,10 @@ namespace MusicBeePlugin
             exceptionCharsBoxCustom.Text = SavedSettings.exceptionChars[0] as string;
 
             exceptionCharPairsCheckBox.Checked = SavedSettings.useExceptionCharPairs;
-            leftExceptionCharsBoxCustom.AddRange(SavedSettings.leftExceptionChars);
-            leftExceptionCharsBoxCustom.Text = SavedSettings.leftExceptionChars[0] as string;
-            rightExceptionCharsBoxCustom.AddRange(SavedSettings.rightExceptionChars);
-            rightExceptionCharsBoxCustom.Text = SavedSettings.rightExceptionChars[0] as string;
+            openingExceptionCharsBoxCustom.AddRange(SavedSettings.openingExceptionChars);
+            openingExceptionCharsBoxCustom.Text = SavedSettings.openingExceptionChars[0] as string;
+            closingExceptionCharsBoxCustom.AddRange(SavedSettings.closingExceptionChars);
+            closingExceptionCharsBoxCustom.Text = SavedSettings.closingExceptionChars[0] as string;
 
             sentenceSeparatorsCheckBox.Checked = SavedSettings.useSentenceSeparators;
             sentenceSeparatorsBoxCustom.AddRange(SavedSettings.sentenceSeparators);
@@ -200,7 +200,7 @@ namespace MusicBeePlugin
 
             previewTable.FirstDisplayedScrollingRowIndex = previewTable.RowCount - 1;
             if ((previewTable.RowCount & 0x1f) == 0)
-                base.updateCustomScrollBars(this.previewTable);
+                updateCustomScrollBars(previewTable);
         }
 
         private void previewTable_ProcessRowOfTable(int rowIndex)
@@ -266,7 +266,7 @@ namespace MusicBeePlugin
             {
                 return false;
             }
-            else //if ((string.Empty + item).ToLower() == (string.Empty + item).ToUpper()) //******
+            else
             {
                 switch (character)
                 {
@@ -294,16 +294,10 @@ namespace MusicBeePlugin
                         return false;
                     case '9':
                         return false;
-                    //case 'ß':
-                    //    return false;
                     default:
                         return true;
                 }
             }
-            //else
-            //{
-            //    return false;
-            //}
         }
 
         internal static bool IsItemContainedInArray(string item, string[] array)
@@ -348,19 +342,27 @@ namespace MusicBeePlugin
             return ItemIndexInArray(item.ToString(), array);
         }
 
-        internal static string ChangeWordsCase(string source, ChangeCaseOptions changeCaseOption, string[] exceptedWords = null, bool useWhiteList = false, 
-            string[] exceptionChars = null, string[] leftExceptionChars = null, string[] rightExceptionChars = null, 
+        internal static string ChangeWordsCase(string source, ChangeCaseOptions changeCaseOption)
+        {
+            List<char> encounteredLeftExceptionChars = null;
+            bool wasCharException = false;
+            return ChangeWordsCase(source, changeCaseOption, ref encounteredLeftExceptionChars, ref wasCharException);
+        }
+
+        internal static string ChangeWordsCase(string source, ChangeCaseOptions changeCaseOption, ref List<char> encounteredLeftExceptionChars, ref bool wasCharException, string[] exceptedWords = null, bool useWhiteList = false, 
+            string[] exceptionChars = null, string[] openingExceptionChars = null, string[] closingExceptionChars = null, 
             bool? alwaysCapitalize1stWord = false, bool? alwaysCapitalizeLastWord = false, bool ignoreSingleLetterExceptedWords = false)
         {
             var newString = string.Empty;
             var currentWord = string.Empty;
             var prePrevChar = '\u0000';
             var prevChar = '\u0000';
-            var wasCharException = false;
             var resetCharException = false;
             var wasSingleLetterWordCharException = false;
             var isTheFirstWord = true;
-            var encounteredLeftExceptionChars = new List<char>();
+
+            if (encounteredLeftExceptionChars == null)
+                encounteredLeftExceptionChars = new List<char>();//*********
 
             if (exceptedWords == null)
                 exceptedWords = Array.Empty<string>();
@@ -368,22 +370,22 @@ namespace MusicBeePlugin
             if (exceptionChars == null)
                 exceptionChars = Array.Empty<string>();
 
-            if (leftExceptionChars == null)
-                leftExceptionChars = Array.Empty<string>();
+            if (openingExceptionChars == null)
+                openingExceptionChars = Array.Empty<string>();
 
-            if (rightExceptionChars == null)
-                rightExceptionChars = Array.Empty<string>();
+            if (closingExceptionChars == null)
+                closingExceptionChars = Array.Empty<string>();
 
 
             foreach (var currentChar in source)
             {
                 //Delayed reset of char exception (to skip spaces after exception chars if any)
                 if (wasCharException && !IsCharASymbol(currentChar) && (prevChar == ' ' || prevChar == MultipleItemsSplitterId 
-                    || ItemIndexInArray(prevChar, rightExceptionChars) >= 0))
+                    || ItemIndexInArray(prevChar, closingExceptionChars) >= 0))
                     resetCharException = true;
 
                 //Let's exclude abbreviations even if they are contained in exceptedWords list (e.g. "A." if exceptedWords contains the article "a")
-                if (ignoreSingleLetterExceptedWords && currentChar == '.' && currentWord.Length == 1)//*******
+                if (ignoreSingleLetterExceptedWords && currentChar == '.' && currentWord.Length == 1)
                 {
                     wasSingleLetterWordCharException = true;
                 }
@@ -398,21 +400,21 @@ namespace MusicBeePlugin
                         if (IsItemContainedInArray(currentChar, exceptionChars)) //Ignore changing case later
                             wasCharException = true;
 
-                        if (IsItemContainedInArray(currentChar, leftExceptionChars)) //Ignore changing case later
+                        if (IsItemContainedInArray(currentChar, openingExceptionChars)) //Ignore changing case later
                             encounteredLeftExceptionChars.Add(currentChar);
                     }
                 }
 
                 //Let's try to remove "between chars" changing case exception from encounteredLeftExceptionChars and mark wasCharException
-                var rightIndex = ItemIndexInArray(currentChar, rightExceptionChars);
-                if (rightIndex >= 0 && ItemIndexInArray(encounteredLeftExceptionChars[encounteredLeftExceptionChars.Count - 1], leftExceptionChars) == rightIndex)
+                var closingIndex = ItemIndexInArray(currentChar, closingExceptionChars);
+                if (closingIndex >= 0 && ItemIndexInArray(encounteredLeftExceptionChars[encounteredLeftExceptionChars.Count - 1], openingExceptionChars) == closingIndex)
                 {
                         wasCharException = true;
                         encounteredLeftExceptionChars.RemoveAt(encounteredLeftExceptionChars.Count - 1);
                 }
 
 
-                if (IsCharASymbol(currentChar) || ItemIndexInArray(currentChar, rightExceptionChars) >= 0) //Possible end of word
+                if (IsCharASymbol(currentChar) || ItemIndexInArray(currentChar, closingExceptionChars) >= 0) //Possible end of word
                 {
                     if (!IsCharASymbol(prevChar)) //End of word
                     {
@@ -510,14 +512,15 @@ namespace MusicBeePlugin
         }
 
         internal static string ChangeSentenceCase(string source, ChangeCaseOptions changeCaseOption, string[] exceptedWords = null, bool useWhiteList = false, 
-            string[] exceptionChars = null, string[] leftExceptionChars = null, string[] rightExceptionChars = null, string[] sentenceSeparators = null, 
+            string[] exceptionChars = null, string[] openingExceptionChars = null, string[] closingExceptionChars = null, string[] sentenceSeparators = null, 
             bool? alwaysCapitalize1stWord = true, bool? alwaysCapitalizeLastWord = true, bool ignoreSingleLetterExceptedWords = false)
         {
             var newString = string.Empty;
             var currentSentence = string.Empty;
-            var wasSingleLetterWordCharException = false;
             var prePrevChar = '\u0000';
             var prevChar = '\u0000';
+            var wasCharException = false;
+            var wasSingleLetterWordCharException = false;
 
             if (exceptedWords == null)
                 exceptedWords = Array.Empty<string>();
@@ -525,21 +528,23 @@ namespace MusicBeePlugin
             if (exceptionChars == null)
                 exceptionChars = Array.Empty<string>();
 
-            if (leftExceptionChars == null)
-                leftExceptionChars = Array.Empty<string>();
+            if (openingExceptionChars == null)
+                openingExceptionChars = Array.Empty<string>();
 
-            if (rightExceptionChars == null)
-                rightExceptionChars = Array.Empty<string>();
+            if (closingExceptionChars == null)
+                closingExceptionChars = Array.Empty<string>();
 
             if (sentenceSeparators == null)
                 sentenceSeparators = Array.Empty<string>();
+
+            List<char> encounteredLeftExceptionChars = new List<char>();
 
 
             bool wasEndOfSentence = false;
             foreach (var currentChar in source)
             {
                 //Let's exclude abbreviations even if they are contained in exceptedWords list (e.g. "A." if exceptedWords contains the article "a")
-                if (ignoreSingleLetterExceptedWords && currentChar == '.' && !IsCharASymbol(prevChar))//*******
+                if (ignoreSingleLetterExceptedWords && currentChar == '.' && !IsCharASymbol(prevChar))
                 {
                     wasSingleLetterWordCharException = true;
                 }
@@ -548,14 +553,33 @@ namespace MusicBeePlugin
                     if (prePrevChar != '.')
                         wasSingleLetterWordCharException = false;
 
-                    //Beginning of new sentence
-                    if (currentChar == MultipleItemsSplitterId || IsItemContainedInArray(currentChar, sentenceSeparators))
-                        wasEndOfSentence = true;
-                    //Beginning of new sentence
-                    else if (prevChar == '.' && currentChar == ' ' && !wasSingleLetterWordCharException)
-                        wasEndOfSentence = true;
+                    //Char exception
+                    if (IsCharASymbol(currentChar))
+                    {
+                        if (IsItemContainedInArray(currentChar, openingExceptionChars)) //Ignore changing case later
+                            encounteredLeftExceptionChars.Add(currentChar);
+                    }
+
+                    //Let's ignore sentence separators between opening & closing exception chars
+                    if (encounteredLeftExceptionChars.Count == 0)
+                    {
+                        //Beginning of new sentence
+                        if (currentChar == MultipleItemsSplitterId || IsItemContainedInArray(currentChar, sentenceSeparators))
+                            wasEndOfSentence = true;
+                        //Beginning of new sentence
+                        else if (prevChar == '.' && currentChar == ' ' && !wasSingleLetterWordCharException)
+                            wasEndOfSentence = true;
+                    }
                 }
 
+
+                //Let's try to remove "between chars" changing case exception from encounteredLeftExceptionChars and mark wasCharException
+                var closingIndex = ItemIndexInArray(currentChar, closingExceptionChars);
+                if (closingIndex >= 0 && ItemIndexInArray(encounteredLeftExceptionChars[encounteredLeftExceptionChars.Count - 1], openingExceptionChars) == closingIndex)
+                {
+                    wasCharException = true;
+                    encounteredLeftExceptionChars.RemoveAt(encounteredLeftExceptionChars.Count - 1);
+                }
 
                 if (wasEndOfSentence && currentChar == ' ') //Not the beginning of new sentence
                 {
@@ -565,8 +589,8 @@ namespace MusicBeePlugin
                 {
                     wasEndOfSentence = false;
 
-                    newString += ChangeWordsCase(currentSentence, changeCaseOption, exceptedWords, useWhiteList, exceptionChars,
-                        leftExceptionChars, rightExceptionChars, alwaysCapitalize1stWord, alwaysCapitalizeLastWord, ignoreSingleLetterExceptedWords);
+                    newString += ChangeWordsCase(currentSentence, changeCaseOption, ref encounteredLeftExceptionChars, ref wasCharException, exceptedWords, useWhiteList, exceptionChars,
+                        openingExceptionChars, closingExceptionChars, alwaysCapitalize1stWord, alwaysCapitalizeLastWord, ignoreSingleLetterExceptedWords);
 
                     currentSentence = currentChar.ToString();
                 }
@@ -581,31 +605,31 @@ namespace MusicBeePlugin
             }
 
             //String is ended, so last currentSentence IS a sentence
-            newString += ChangeWordsCase(currentSentence, changeCaseOption, exceptedWords, useWhiteList, exceptionChars, leftExceptionChars,
-                rightExceptionChars, alwaysCapitalize1stWord, alwaysCapitalizeLastWord, ignoreSingleLetterExceptedWords);
+            newString += ChangeWordsCase(currentSentence, changeCaseOption, ref encounteredLeftExceptionChars, ref wasCharException, exceptedWords, useWhiteList, exceptionChars, openingExceptionChars,
+                closingExceptionChars, alwaysCapitalize1stWord, alwaysCapitalizeLastWord, ignoreSingleLetterExceptedWords);
 
             return newString;
         }
 
         private string changeCase(string source, int changeCaseOptions, string[] exceptionWordsArg, bool useWhiteListArg, string[] exceptionCharsArg,
-            string[] leftExceptionCharsArg, string[] rightExceptionCharsArg, string[] sentenceSeparatorsArg, 
+            string[] openingExceptionCharsArg, string[] closingExceptionCharsArg, string[] sentenceSeparatorsArg, 
             bool? alwaysCapitalize1stWordArg, bool? alwaysCapitalizeLastWordArg, bool ignoreSingleLetterExceptedWordsArg)
         {
             if (changeCaseOptions == 1)
-                return ChangeSentenceCase(source, ChangeCaseOptions.SentenceCase, exceptionWordsArg, useWhiteListArg, exceptionCharsArg, leftExceptionCharsArg,
-                    rightExceptionCharsArg, sentenceSeparatorsArg, alwaysCapitalize1stWordArg, alwaysCapitalizeLastWordArg, ignoreSingleLetterExceptedWordsArg);
+                return ChangeSentenceCase(source, ChangeCaseOptions.SentenceCase, exceptionWordsArg, useWhiteListArg, exceptionCharsArg, openingExceptionCharsArg,
+                    closingExceptionCharsArg, sentenceSeparatorsArg, alwaysCapitalize1stWordArg, alwaysCapitalizeLastWordArg, ignoreSingleLetterExceptedWordsArg);
             else if (changeCaseOptions == 2)
                 return ChangeSentenceCase(source, ChangeCaseOptions.LowerCase, exceptionWordsArg, useWhiteListArg, exceptionCharsArg,
-                    leftExceptionCharsArg, rightExceptionCharsArg, sentenceSeparatorsArg, alwaysCapitalize1stWordArg, alwaysCapitalizeLastWordArg, ignoreSingleLetterExceptedWordsArg);
+                    openingExceptionCharsArg, closingExceptionCharsArg, sentenceSeparatorsArg, alwaysCapitalize1stWordArg, alwaysCapitalizeLastWordArg, ignoreSingleLetterExceptedWordsArg);
             else if (changeCaseOptions == 3)
                 return ChangeSentenceCase(source, ChangeCaseOptions.UpperCase, exceptionWordsArg, useWhiteListArg, exceptionCharsArg,
-                    leftExceptionCharsArg, rightExceptionCharsArg, sentenceSeparatorsArg, alwaysCapitalize1stWordArg, alwaysCapitalizeLastWordArg, ignoreSingleLetterExceptedWordsArg);
+                    openingExceptionCharsArg, closingExceptionCharsArg, sentenceSeparatorsArg, alwaysCapitalize1stWordArg, alwaysCapitalizeLastWordArg, ignoreSingleLetterExceptedWordsArg);
             else if (changeCaseOptions == 4)
                 return ChangeSentenceCase(source, ChangeCaseOptions.TitleCase, exceptionWordsArg, useWhiteListArg, exceptionCharsArg,
-                    leftExceptionCharsArg, rightExceptionCharsArg, sentenceSeparatorsArg, alwaysCapitalize1stWordArg, alwaysCapitalizeLastWordArg, ignoreSingleLetterExceptedWordsArg);
+                    openingExceptionCharsArg, closingExceptionCharsArg, sentenceSeparatorsArg, alwaysCapitalize1stWordArg, alwaysCapitalizeLastWordArg, ignoreSingleLetterExceptedWordsArg);
             else //if (changeCaseOptions == 5)
                 return ChangeSentenceCase(source, ChangeCaseOptions.ToggleCase, exceptionWordsArg, useWhiteListArg, exceptionCharsArg,
-                    leftExceptionCharsArg, rightExceptionCharsArg, sentenceSeparatorsArg, alwaysCapitalize1stWordArg, alwaysCapitalizeLastWordArg, ignoreSingleLetterExceptedWordsArg);
+                    openingExceptionCharsArg, closingExceptionCharsArg, sentenceSeparatorsArg, alwaysCapitalize1stWordArg, alwaysCapitalizeLastWordArg, ignoreSingleLetterExceptedWordsArg);
         }
 
         private bool prepareBackgroundPreview()
@@ -615,7 +639,7 @@ namespace MusicBeePlugin
             // ReSharper disable once PossibleNullReferenceException
             (previewTable.Columns[0].HeaderCell as DataGridViewCheckBoxHeaderCell).setState(true);
 
-            base.updateCustomScrollBars(this.previewTable);
+            updateCustomScrollBars(previewTable);
 
             if (previewIsGenerated)
             {
@@ -633,8 +657,8 @@ namespace MusicBeePlugin
             useWhiteList = onlyWordsCheckBox.Checked;
             exceptedWords = null;
             exceptionChars = null;
-            leftExceptionChars = null;
-            rightExceptionChars = null;
+            openingExceptionChars = null;
+            closingExceptionChars = null;
             sentenceSeparators = null;
             alwaysCapitalize1stWord = GetBoolFromCheckState(alwaysCapitalize1stWordCheckBox.CheckState);
             alwaysCapitalizeLastWord = GetBoolFromCheckState(alwaysCapitalizeLastWordCheckBox.CheckState);
@@ -651,8 +675,8 @@ namespace MusicBeePlugin
 
             if (exceptionCharPairsCheckBox.IsEnabled() && exceptionCharPairsCheckBox.Checked)
             {
-                leftExceptionChars = leftExceptionCharsBoxCustom.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                rightExceptionChars = rightExceptionCharsBoxCustom.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                openingExceptionChars = openingExceptionCharsBoxCustom.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                closingExceptionChars = closingExceptionCharsBoxCustom.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             }
 
             if (sentenceSeparatorsCheckBox.IsEnabled() && sentenceSeparatorsCheckBox.Checked)
@@ -721,7 +745,7 @@ namespace MusicBeePlugin
                 var sourceTagValue = GetFileTag(currentFile, sourceTagId);
                 var sourceTagTValue = GetTagRepresentation(sourceTagValue);
                 var newTagValue = changeCase(sourceTagValue, changeCaseFlag, exceptedWords, useWhiteList, exceptionChars,
-                    leftExceptionChars, rightExceptionChars, sentenceSeparators, alwaysCapitalize1stWord, alwaysCapitalizeLastWord, ignoreSingleLetterExceptedWords);
+                    openingExceptionChars, closingExceptionChars, sentenceSeparators, alwaysCapitalize1stWord, alwaysCapitalizeLastWord, ignoreSingleLetterExceptedWords);
                 var newTagTValue = GetTagRepresentation(newTagValue);
 
                 var track = GetTrackRepresentation(currentFile);
@@ -776,8 +800,8 @@ namespace MusicBeePlugin
             useWhiteList = onlyWordsCheckBox.Checked;
             exceptedWords = null;
             exceptionChars = null;
-            leftExceptionChars = null;
-            rightExceptionChars = null;
+            openingExceptionChars = null;
+            closingExceptionChars = null;
             sentenceSeparators = null;
 
             if (exceptionWordsCheckBox.IsEnabled() && exceptionWordsCheckBox.Checked)
@@ -790,8 +814,8 @@ namespace MusicBeePlugin
 
             if (exceptionCharPairsCheckBox.IsEnabled() && exceptionCharPairsCheckBox.Checked)
             {
-                leftExceptionChars = leftExceptionCharsBoxCustom.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                rightExceptionChars = rightExceptionCharsBoxCustom.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                openingExceptionChars = openingExceptionCharsBoxCustom.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                closingExceptionChars = closingExceptionCharsBoxCustom.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             }
 
             if (sentenceSeparatorsCheckBox.IsEnabled() && sentenceSeparatorsCheckBox.Checked)
@@ -802,7 +826,7 @@ namespace MusicBeePlugin
                 if ((string)previewTable.Rows[i].Cells[0].Value == "T")
                 {
                     var newTagValue = changeCase((string)previewTable.Rows[i].Cells[5].Value, changeCaseFlag, exceptedWords, useWhiteList, exceptionChars,
-                        leftExceptionChars, rightExceptionChars, sentenceSeparators, alwaysCapitalize1stWord, alwaysCapitalizeLastWord, ignoreSingleLetterExceptedWords);
+                        openingExceptionChars, closingExceptionChars, sentenceSeparators, alwaysCapitalize1stWord, alwaysCapitalizeLastWord, ignoreSingleLetterExceptedWords);
                     var newTagTValue = GetTagRepresentation(newTagValue);
 
                     previewTable.Rows[i].Cells[5].Value = newTagValue;
@@ -859,8 +883,8 @@ namespace MusicBeePlugin
             exceptionCharsBoxCustom.Items.CopyTo(SavedSettings.exceptionChars, 0);
 
             SavedSettings.useExceptionCharPairs = exceptionCharPairsCheckBox.Checked;
-            leftExceptionCharsBoxCustom.Items.CopyTo(SavedSettings.leftExceptionChars, 0);
-            rightExceptionCharsBoxCustom.Items.CopyTo(SavedSettings.rightExceptionChars, 0);
+            openingExceptionCharsBoxCustom.Items.CopyTo(SavedSettings.openingExceptionChars, 0);
+            closingExceptionCharsBoxCustom.Items.CopyTo(SavedSettings.closingExceptionChars, 0);
 
             SavedSettings.useSentenceSeparators = sentenceSeparatorsCheckBox.Checked;
             sentenceSeparatorsBoxCustom.Items.CopyTo(SavedSettings.sentenceSeparators, 0);
@@ -950,19 +974,19 @@ namespace MusicBeePlugin
 
         private void exceptionCharPairsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (!exceptionCharPairsCheckBox.Checked && !CheckIfTheSameNumberOfCharsInStrings(leftExceptionCharsBoxCustom.Text, rightExceptionCharsBoxCustom.Text))
+            if (!exceptionCharPairsCheckBox.Checked && !CheckIfTheSameNumberOfCharsInStrings(openingExceptionCharsBoxCustom.Text, closingExceptionCharsBoxCustom.Text))
             {
-                leftExceptionCharsBoxCustom.Enable(true);
-                rightExceptionCharsBoxCustom.Enable(true);
+                openingExceptionCharsBoxCustom.Enable(true);
+                closingExceptionCharsBoxCustom.Enable(true);
                 exceptionCharPairsCheckBox.Checked = true;
 
-                ActiveControl = rightExceptionCharsBoxCustom;
-                rightExceptionCharsBox_Leave(null, null);
+                ActiveControl = closingExceptionCharsBoxCustom;
+                closingExceptionCharsBox_Leave(null, null);
             }
             else
             {
-                leftExceptionCharsBoxCustom.Enable(exceptionCharPairsCheckBox.Checked);
-                rightExceptionCharsBoxCustom.Enable(exceptionCharPairsCheckBox.Checked);
+                openingExceptionCharsBoxCustom.Enable(exceptionCharPairsCheckBox.Checked);
+                closingExceptionCharsBoxCustom.Enable(exceptionCharPairsCheckBox.Checked);
                 buttonAsrExceptWordsBetweenSymbols.Enable(exceptionCharPairsCheckBox.Checked);
             }
         }
@@ -1065,8 +1089,8 @@ namespace MusicBeePlugin
                     useWhiteList = onlyWordsCheckBox.Checked;
                     exceptedWords = null;
                     exceptionChars = null;
-                    leftExceptionChars = null;
-                    rightExceptionChars = null;
+                    openingExceptionChars = null;
+                    closingExceptionChars = null;
                     sentenceSeparators = null;
 
                     if (exceptionWordsCheckBox.IsEnabled() && exceptionWordsCheckBox.Checked)
@@ -1079,8 +1103,8 @@ namespace MusicBeePlugin
 
                     if (exceptionCharPairsCheckBox.IsEnabled() && exceptionCharPairsCheckBox.Checked)
                     {
-                        leftExceptionChars = leftExceptionCharsBoxCustom.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                        rightExceptionChars = rightExceptionCharsBoxCustom.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                        openingExceptionChars = openingExceptionCharsBoxCustom.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                        closingExceptionChars = closingExceptionCharsBoxCustom.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                     }
 
                     if (sentenceSeparatorsCheckBox.IsEnabled() && sentenceSeparatorsCheckBox.Checked)
@@ -1091,7 +1115,7 @@ namespace MusicBeePlugin
                     sourceTagValue = (string)previewTable.Rows[e.RowIndex].Cells[3].Value;
 
                     var newTagValue = changeCase(sourceTagValue, changeCaseFlag, exceptedWords, useWhiteList, exceptionChars,
-                        leftExceptionChars, rightExceptionChars, sentenceSeparators, alwaysCapitalize1stWord, alwaysCapitalizeLastWord, ignoreSingleLetterExceptedWords);
+                        openingExceptionChars, closingExceptionChars, sentenceSeparators, alwaysCapitalize1stWord, alwaysCapitalizeLastWord, ignoreSingleLetterExceptedWords);
                     var newTagTValue = GetTagRepresentation(newTagValue);
 
                     previewTable.Rows[e.RowIndex].Cells[5].Value = newTagValue;
@@ -1191,43 +1215,43 @@ namespace MusicBeePlugin
             return true;
         }
 
-        private void leftExceptionCharsBox_Leave(object sender, EventArgs e)
+        private void openingExceptionCharsBox_Leave(object sender, EventArgs e)
         {
-            leftExceptionCharsBoxCustom.Text = Regex.Replace(leftExceptionCharsBoxCustom.Text.Trim(' '), @"\s{2,}", " ");
+            openingExceptionCharsBoxCustom.Text = Regex.Replace(openingExceptionCharsBoxCustom.Text.Trim(' '), @"\s{2,}", " ");
 
-            if (ActiveControl != rightExceptionCharsBoxCustom && !CheckIfTheSameNumberOfCharsInStrings(leftExceptionCharsBoxCustom.Text, rightExceptionCharsBoxCustom.Text))
+            if (ActiveControl != closingExceptionCharsBoxCustom && !CheckIfTheSameNumberOfCharsInStrings(openingExceptionCharsBoxCustom.Text, closingExceptionCharsBoxCustom.Text))
             {
-                rightExceptionCharsBoxCustom.Focus();
-                rightExceptionCharsBoxCustom.SelectionStart = rightExceptionCharsBoxCustom.Text.Length + 1;
-                rightExceptionCharsBoxCustom.SelectionLength = 0;
+                closingExceptionCharsBoxCustom.Focus();
+                closingExceptionCharsBoxCustom.SelectionStart = closingExceptionCharsBoxCustom.Text.Length + 1;
+                closingExceptionCharsBoxCustom.SelectionLength = 0;
             }
 
-            CustomComboBoxLeave(leftExceptionCharsBoxCustom);
+            CustomComboBoxLeave(openingExceptionCharsBoxCustom);
         }
 
-        private void rightExceptionCharsBox_Leave(object sender, EventArgs e)
+        private void closingExceptionCharsBox_Leave(object sender, EventArgs e)
         {
-            if (rightExceptionCharsBoxLeaving)
+            if (closingExceptionCharsBoxLeaving)
                 return;
 
 
-            rightExceptionCharsBoxCustom.Text = Regex.Replace(rightExceptionCharsBoxCustom.Text.Trim(' '), @"\s{2,}", " ");
+            closingExceptionCharsBoxCustom.Text = Regex.Replace(closingExceptionCharsBoxCustom.Text.Trim(' '), @"\s{2,}", " ");
 
-            if (ActiveControl != leftExceptionCharsBoxCustom && !CheckIfTheSameNumberOfCharsInStrings(leftExceptionCharsBoxCustom.Text, rightExceptionCharsBoxCustom.Text))
+            if (ActiveControl != openingExceptionCharsBoxCustom && !CheckIfTheSameNumberOfCharsInStrings(openingExceptionCharsBoxCustom.Text, closingExceptionCharsBoxCustom.Text))
             {
-                rightExceptionCharsBoxLeaving = true;
+                closingExceptionCharsBoxLeaving = true;
 
                 MessageBox.Show(MbForm, MsgCsTheNumberOfOpeningExceptionCharactersMustBe,
                     string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                rightExceptionCharsBoxLeaving = false;
+                closingExceptionCharsBoxLeaving = false;
 
-                rightExceptionCharsBoxCustom.Focus();
-                rightExceptionCharsBoxCustom.SelectionStart = rightExceptionCharsBoxCustom.Text.Length + 1;
-                rightExceptionCharsBoxCustom.SelectionLength = 0;
+                closingExceptionCharsBoxCustom.Focus();
+                closingExceptionCharsBoxCustom.SelectionStart = closingExceptionCharsBoxCustom.Text.Length + 1;
+                closingExceptionCharsBoxCustom.SelectionLength = 0;
             }
 
-            CustomComboBoxLeave(rightExceptionCharsBoxCustom);
+            CustomComboBoxLeave(closingExceptionCharsBoxCustom);
         }
 
         private void casingRuleRadioButton_CheckedChanged(object sender, EventArgs e)
@@ -1303,8 +1327,8 @@ namespace MusicBeePlugin
 
         private void buttonAsrExceptWordsBetweenSymbols_Click(object sender, EventArgs e)
         {
-            SavedSettings.leftExceptionCharsAsr = leftExceptionCharsBoxCustom.Text;
-            SavedSettings.rightExceptionCharsAsr = rightExceptionCharsBoxCustom.Text;
+            SavedSettings.openingExceptionCharsAsr = openingExceptionCharsBoxCustom.Text;
+            SavedSettings.closingExceptionCharsAsr = closingExceptionCharsBoxCustom.Text;
         }
 
         private void buttonAsrSentenceSeparators_Click(object sender, EventArgs e)

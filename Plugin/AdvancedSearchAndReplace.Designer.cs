@@ -108,7 +108,7 @@ namespace MusicBeePlugin
             this.listBoxTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.presetList = new System.Windows.Forms.CheckedListBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.previewTable = new System.Windows.Forms.DataGridView();
+            previewTable = new System.Windows.Forms.DataGridView();
             this.PresetGuid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.File = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Track = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -184,7 +184,7 @@ namespace MusicBeePlugin
             this.textBoxTableLayoutPanel.SuspendLayout();
             this.listBoxTableLayoutPanel.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.previewTable)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(previewTable)).BeginInit();
             this.settingsProcessingGroupBox.SuspendLayout();
             this.presetManagementGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.uncheckAllFiltersPictureBox)).BeginInit();
@@ -951,7 +951,7 @@ namespace MusicBeePlugin
             // panel2
             // 
             resources.ApplyResources(this.panel2, "panel2");
-            this.panel2.Controls.Add(this.previewTable);
+            this.panel2.Controls.Add(previewTable);
             this.panel2.Controls.Add(this.settingsProcessingGroupBox);
             this.panel2.Controls.Add(this.presetManagementGroupBox);
             this.dirtyErrorProvider.SetError(this.panel2, resources.GetString("panel2.Error"));
@@ -963,14 +963,14 @@ namespace MusicBeePlugin
             // 
             // previewTable
             // 
-            resources.ApplyResources(this.previewTable, "previewTable");
-            this.previewTable.AllowUserToAddRows = false;
-            this.previewTable.AllowUserToDeleteRows = false;
-            this.previewTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.previewTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.previewTable.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.previewTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.previewTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            resources.ApplyResources(previewTable, "previewTable");
+            previewTable.AllowUserToAddRows = false;
+            previewTable.AllowUserToDeleteRows = false;
+            previewTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            previewTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            previewTable.BackgroundColor = System.Drawing.SystemColors.Window;
+            previewTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            previewTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.PresetGuid,
             this.File,
             this.Track,
@@ -990,20 +990,20 @@ namespace MusicBeePlugin
             this.OriginalTag5,
             this.NewTag5,
             this.OddEven});
-            this.previewTable.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dirtyErrorProvider.SetError(this.previewTable, resources.GetString("previewTable.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.previewTable, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("previewTable.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.previewTable, ((int)(resources.GetObject("previewTable.IconPadding"))));
-            this.previewTable.MultiSelect = false;
-            this.previewTable.Name = "previewTable";
-            this.previewTable.RowHeadersVisible = false;
-            this.previewTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.toolTip1.SetToolTip(this.previewTable, resources.GetString("previewTable.ToolTip"));
-            this.previewTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.previewTable_CellContentClick);
-            this.previewTable.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(previewTable_ColumnWidthChanged);
-            this.previewTable.MouseLeave += new System.EventHandler(PreviewTable_MouseLeave);
-            this.previewTable.MouseDown += new System.Windows.Forms.MouseEventHandler(PreviewTable_MouseDown);
-            this.previewTable.MouseUp += new System.Windows.Forms.MouseEventHandler(PreviewTable_MouseUp);
+            previewTable.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dirtyErrorProvider.SetError(previewTable, resources.GetString("previewTable.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(previewTable, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("previewTable.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(previewTable, ((int)(resources.GetObject("previewTable.IconPadding"))));
+            previewTable.MultiSelect = false;
+            previewTable.Name = "previewTable";
+            previewTable.RowHeadersVisible = false;
+            previewTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.toolTip1.SetToolTip(previewTable, resources.GetString("previewTable.ToolTip"));
+            previewTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.previewTable_CellContentClick);
+            previewTable.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(previewTable_ColumnWidthChanged);
+            previewTable.MouseLeave += new System.EventHandler(PreviewTable_MouseLeave);
+            previewTable.MouseDown += new System.Windows.Forms.MouseEventHandler(PreviewTable_MouseDown);
+            previewTable.MouseUp += new System.Windows.Forms.MouseEventHandler(PreviewTable_MouseUp);
             // 
             // PresetGuid
             // 
@@ -1587,7 +1587,7 @@ namespace MusicBeePlugin
             this.textBoxTableLayoutPanel.PerformLayout();
             this.listBoxTableLayoutPanel.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.previewTable)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(previewTable)).EndInit();
             this.settingsProcessingGroupBox.ResumeLayout(false);
             this.settingsProcessingGroupBox.PerformLayout();
             this.presetManagementGroupBox.ResumeLayout(false);

@@ -107,6 +107,10 @@ namespace MusicBeePlugin
             if (reallyDisplayedTags.Count > 1)
                 previewTable.RowCount = reallyDisplayedTags.Count;
 
+
+            updateCustomScrollBars(previewTable);
+
+
             artworkRow = -1;
 
             for (var j = 0; j < reallyDisplayedTags.Count; j++)
@@ -171,6 +175,10 @@ namespace MusicBeePlugin
                         }
 
 
+                        updateCustomScrollBars(previewTable);
+                        SetStatusBarTextForFileOperations(CompareTracksSbText, true, trackNo, cachedTracks.Count);
+
+
                         for (var j = 0; j < reallyDisplayedTags.Count; j++)
                         {
                             var tagPosition = 0;
@@ -208,7 +216,9 @@ namespace MusicBeePlugin
                     }
                 }
 
+
                 updateCustomScrollBars(previewTable);
+                SetResultingSbText();
             }
             else
             {

@@ -44,7 +44,7 @@
             this.exceptionCharsBox = new System.Windows.Forms.ComboBox();
             this.sentenceSeparatorsBox = new System.Windows.Forms.ComboBox();
             this.buttonPreview = new System.Windows.Forms.Button();
-            this.previewTable = new System.Windows.Forms.DataGridView();
+            previewTable = new System.Windows.Forms.DataGridView();
             this.File = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Track = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OriginalTag = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -79,14 +79,14 @@
             this.fieldsPanel = new System.Windows.Forms.Panel();
             this.buttonAsrExceptWordsBetweenSymbols = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.rightExceptionCharsBox = new System.Windows.Forms.ComboBox();
-            this.leftExceptionCharsBox = new System.Windows.Forms.ComboBox();
+            this.closingExceptionCharsBox = new System.Windows.Forms.ComboBox();
+            this.openingExceptionCharsBox = new System.Windows.Forms.ComboBox();
             this.exceptionCharPairsCheckBoxLabel = new System.Windows.Forms.Label();
             this.exceptionCharPairsCheckBox = new System.Windows.Forms.CheckBox();
             this.ignoreSingleLetterExceptedWordsCheckBoxLabel = new System.Windows.Forms.Label();
             this.ignoreSingleLetterExceptedWordsCheckBox = new System.Windows.Forms.CheckBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.previewTable)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(previewTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).BeginInit();
             this.fieldsPanel.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -244,30 +244,30 @@
             // 
             // previewTable
             // 
-            resources.ApplyResources(this.previewTable, "previewTable");
-            this.previewTable.AllowUserToAddRows = false;
-            this.previewTable.AllowUserToDeleteRows = false;
-            this.previewTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.previewTable.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.previewTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.previewTable.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            this.previewTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            resources.ApplyResources(previewTable, "previewTable");
+            previewTable.AllowUserToAddRows = false;
+            previewTable.AllowUserToDeleteRows = false;
+            previewTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            previewTable.BackgroundColor = System.Drawing.SystemColors.Window;
+            previewTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            previewTable.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+            previewTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.File,
             this.Track,
             this.OriginalTag,
             this.OriginalTagT,
             this.NewTag,
             this.NewTagT});
-            this.dirtyErrorProvider.SetError(this.previewTable, resources.GetString("previewTable.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.previewTable, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("previewTable.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.previewTable, ((int)(resources.GetObject("previewTable.IconPadding"))));
-            this.previewTable.MultiSelect = false;
-            this.previewTable.Name = "previewTable";
-            this.previewTable.RowHeadersVisible = false;
-            this.previewTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.previewTable.Tag = "#ChangeCase&ChangeCase@pinned-to-parent-x";
-            this.toolTip1.SetToolTip(this.previewTable, resources.GetString("previewTable.ToolTip"));
-            this.previewTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.previewTable_CellContentClick);
+            this.dirtyErrorProvider.SetError(previewTable, resources.GetString("previewTable.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(previewTable, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("previewTable.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(previewTable, ((int)(resources.GetObject("previewTable.IconPadding"))));
+            previewTable.MultiSelect = false;
+            previewTable.Name = "previewTable";
+            previewTable.RowHeadersVisible = false;
+            previewTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            previewTable.Tag = "#ChangeCase&ChangeCase@pinned-to-parent-x";
+            this.toolTip1.SetToolTip(previewTable, resources.GetString("previewTable.ToolTip"));
+            previewTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.previewTable_CellContentClick);
             // 
             // File
             // 
@@ -617,8 +617,8 @@
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.rightExceptionCharsBox, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.leftExceptionCharsBox, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.closingExceptionCharsBox, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.openingExceptionCharsBox, 0, 0);
             this.dirtyErrorProvider.SetError(this.tableLayoutPanel1, resources.GetString("tableLayoutPanel1.Error"));
             this.dirtyErrorProvider.SetIconAlignment(this.tableLayoutPanel1, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("tableLayoutPanel1.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.tableLayoutPanel1, ((int)(resources.GetObject("tableLayoutPanel1.IconPadding"))));
@@ -626,27 +626,27 @@
             this.tableLayoutPanel1.Tag = "#buttonAsrExceptWordsBetweenSymbols";
             this.toolTip1.SetToolTip(this.tableLayoutPanel1, resources.GetString("tableLayoutPanel1.ToolTip"));
             // 
-            // rightExceptionCharsBox
+            // closingExceptionCharsBox
             // 
-            resources.ApplyResources(this.rightExceptionCharsBox, "rightExceptionCharsBox");
-            this.dirtyErrorProvider.SetError(this.rightExceptionCharsBox, resources.GetString("rightExceptionCharsBox.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.rightExceptionCharsBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("rightExceptionCharsBox.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.rightExceptionCharsBox, ((int)(resources.GetObject("rightExceptionCharsBox.IconPadding"))));
-            this.rightExceptionCharsBox.Name = "rightExceptionCharsBox";
-            this.rightExceptionCharsBox.Tag = "";
-            this.toolTip1.SetToolTip(this.rightExceptionCharsBox, resources.GetString("rightExceptionCharsBox.ToolTip"));
-            this.rightExceptionCharsBox.Leave += new System.EventHandler(this.rightExceptionCharsBox_Leave);
+            resources.ApplyResources(this.closingExceptionCharsBox, "closingExceptionCharsBox");
+            this.dirtyErrorProvider.SetError(this.closingExceptionCharsBox, resources.GetString("closingExceptionCharsBox.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.closingExceptionCharsBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("closingExceptionCharsBox.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.closingExceptionCharsBox, ((int)(resources.GetObject("closingExceptionCharsBox.IconPadding"))));
+            this.closingExceptionCharsBox.Name = "closingExceptionCharsBox";
+            this.closingExceptionCharsBox.Tag = "";
+            this.toolTip1.SetToolTip(this.closingExceptionCharsBox, resources.GetString("closingExceptionCharsBox.ToolTip"));
+            this.closingExceptionCharsBox.Leave += new System.EventHandler(this.closingExceptionCharsBox_Leave);
             // 
-            // leftExceptionCharsBox
+            // openingExceptionCharsBox
             // 
-            resources.ApplyResources(this.leftExceptionCharsBox, "leftExceptionCharsBox");
-            this.dirtyErrorProvider.SetError(this.leftExceptionCharsBox, resources.GetString("leftExceptionCharsBox.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.leftExceptionCharsBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("leftExceptionCharsBox.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.leftExceptionCharsBox, ((int)(resources.GetObject("leftExceptionCharsBox.IconPadding"))));
-            this.leftExceptionCharsBox.Name = "leftExceptionCharsBox";
-            this.leftExceptionCharsBox.Tag = "";
-            this.toolTip1.SetToolTip(this.leftExceptionCharsBox, resources.GetString("leftExceptionCharsBox.ToolTip"));
-            this.leftExceptionCharsBox.Leave += new System.EventHandler(this.leftExceptionCharsBox_Leave);
+            resources.ApplyResources(this.openingExceptionCharsBox, "openingExceptionCharsBox");
+            this.dirtyErrorProvider.SetError(this.openingExceptionCharsBox, resources.GetString("openingExceptionCharsBox.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.openingExceptionCharsBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("openingExceptionCharsBox.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.openingExceptionCharsBox, ((int)(resources.GetObject("openingExceptionCharsBox.IconPadding"))));
+            this.openingExceptionCharsBox.Name = "openingExceptionCharsBox";
+            this.openingExceptionCharsBox.Tag = "";
+            this.toolTip1.SetToolTip(this.openingExceptionCharsBox, resources.GetString("openingExceptionCharsBox.ToolTip"));
+            this.openingExceptionCharsBox.Leave += new System.EventHandler(this.openingExceptionCharsBox_Leave);
             // 
             // exceptionCharPairsCheckBoxLabel
             // 
@@ -704,7 +704,7 @@
             this.CancelButton = this.buttonCancel;
             this.Controls.Add(this.ignoreSingleLetterExceptedWordsCheckBoxLabel);
             this.Controls.Add(this.ignoreSingleLetterExceptedWordsCheckBox);
-            this.Controls.Add(this.previewTable);
+            this.Controls.Add(previewTable);
             this.Controls.Add(this.fieldsPanel);
             this.Controls.Add(this.alwaysCapitalizeLastWordCheckBoxLabel);
             this.Controls.Add(this.alwaysCapitalizeLastWordCheckBox);
@@ -739,7 +739,7 @@
             this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ChangeCase_FormClosing);
             this.Load += new System.EventHandler(this.ChangeCase_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.previewTable)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(previewTable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).EndInit();
             this.fieldsPanel.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -799,9 +799,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn NewTagT;
         private System.Windows.Forms.Label exceptionCharPairsCheckBoxLabel;
         private System.Windows.Forms.CheckBox exceptionCharPairsCheckBox;
-        private System.Windows.Forms.ComboBox leftExceptionCharsBox;
+        private System.Windows.Forms.ComboBox openingExceptionCharsBox;
         private System.Windows.Forms.Button buttonAsrExceptWordsBetweenSymbols;
-        private System.Windows.Forms.ComboBox rightExceptionCharsBox;
+        private System.Windows.Forms.ComboBox closingExceptionCharsBox;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label ignoreSingleLetterExceptedWordsCheckBoxLabel;
         private System.Windows.Forms.CheckBox ignoreSingleLetterExceptedWordsCheckBox;

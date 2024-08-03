@@ -210,7 +210,7 @@
   <data name="&gt;&gt;lowerCaseRadioButton.ZOrder" xml:space="preserve">
     <value>25</value>
   </data>
-  <data name="rightExceptionCharsBox.IconPadding" type="System.Int32, mscorlib">
+  <data name="closingExceptionCharsBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
@@ -237,7 +237,7 @@
   <data name="exceptionWordsCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>180, 36</value>
   </data>
-  <data name="&gt;&gt;rightExceptionCharsBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;closingExceptionCharsBox.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="&gt;&gt;buttonSettings.Type" xml:space="preserve">
@@ -246,8 +246,8 @@
   <data name="&gt;&gt;onlyWordsCheckBox.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
-  <data name="&gt;&gt;leftExceptionCharsBox.Name" xml:space="preserve">
-    <value>leftExceptionCharsBox</value>
+  <data name="&gt;&gt;openingExceptionCharsBox.Name" xml:space="preserve">
+    <value>openingExceptionCharsBox</value>
   </data>
   <data name="upperCaseRadioButtonLabel.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -303,7 +303,7 @@
   <data name="exceptionCharsBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;leftExceptionCharsBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;openingExceptionCharsBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ignoreSingleLetterExceptedWordsCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
@@ -396,8 +396,8 @@
   <data name="buttonAsrExceptWordsBetweenSymbols.Text" xml:space="preserve">
     <value>ASR</value>
   </data>
-  <data name="&gt;&gt;rightExceptionCharsBox.Name" xml:space="preserve">
-    <value>rightExceptionCharsBox</value>
+  <data name="&gt;&gt;closingExceptionCharsBox.Name" xml:space="preserve">
+    <value>closingExceptionCharsBox</value>
   </data>
   <data name="previewTable.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -449,7 +449,7 @@ word list contains the article "a")</value>
   <data name="buttonReapply.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="rightExceptionCharsBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+  <data name="closingExceptionCharsBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
   <data name="label1.ToolTip" xml:space="preserve">
@@ -539,7 +539,7 @@ word list contains the article "a")</value>
   <data name="&gt;&gt;titleCaseRadioButtonLabel.Name" xml:space="preserve">
     <value>titleCaseRadioButtonLabel</value>
   </data>
-  <data name="leftExceptionCharsBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="openingExceptionCharsBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
   <data name="toggleCaseRadioButtonLabel.Size" type="System.Drawing.Size, System.Drawing">
@@ -575,7 +575,7 @@ word list contains the article "a")</value>
   <data name="$this.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;leftExceptionCharsBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;openingExceptionCharsBox.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
   <data name="forSelectedTracksLabel.Size" type="System.Drawing.Size, System.Drawing">
@@ -596,7 +596,7 @@ word list contains the article "a")</value>
   <data name="exceptionCharsCheckBox.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="rightExceptionCharsBox.Error" xml:space="preserve">
+  <data name="closingExceptionCharsBox.Error" xml:space="preserve">
     <value />
   </data>
   <data name="sentenceSeparatorsCheckBox.Text" xml:space="preserve">
@@ -704,7 +704,7 @@ word list contains the article "a")</value>
   <data name="&gt;&gt;upperCaseRadioButton.ZOrder" xml:space="preserve">
     <value>23</value>
   </data>
-  <data name="rightExceptionCharsBox.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="closingExceptionCharsBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>220, 1</value>
   </data>
   <data name="lowerCaseRadioButtonLabel.Error" xml:space="preserve">
@@ -752,7 +752,7 @@ word list contains the article "a")</value>
   <data name="sentenceCaseRadioButtonLabel.Text" xml:space="preserve">
     <value>Sentence case</value>
   </data>
-  <data name="leftExceptionCharsBox.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="openingExceptionCharsBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>216, 23</value>
   </data>
   <data name="buttonSettings.Size" type="System.Drawing.Size, System.Drawing">
@@ -779,7 +779,7 @@ word list contains the article "a")</value>
   <data name="buttonPreview.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
-  <data name="rightExceptionCharsBox.TabIndex" type="System.Int32, mscorlib">
+  <data name="closingExceptionCharsBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="toggleCaseRadioButtonLabel.IconPadding" type="System.Int32, mscorlib">
@@ -791,7 +791,7 @@ word list contains the article "a")</value>
   <data name="&gt;&gt;exceptionWordsCheckBoxLabel.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
-  <data name="leftExceptionCharsBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="openingExceptionCharsBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 1, 2, 1</value>
   </data>
   <data name="dirtyErrorProvider.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -1492,7 +1492,7 @@ word list contains the article "a")</value>
   <data name="upperCaseRadioButton.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;leftExceptionCharsBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;openingExceptionCharsBox.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="ignoreSingleLetterExceptedWordsCheckBox.Size" type="System.Drawing.Size, System.Drawing">
@@ -1504,7 +1504,7 @@ word list contains the article "a")</value>
   <data name="&gt;&gt;forSelectedTracksLabel.ZOrder" xml:space="preserve">
     <value>28</value>
   </data>
-  <data name="rightExceptionCharsBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="closingExceptionCharsBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 1, 0, 1</value>
   </data>
   <data name="&gt;&gt;toggleCaseRadioButtonLabel.ZOrder" xml:space="preserve">
@@ -1657,7 +1657,7 @@ word list contains the article "a")</value>
   <data name="exceptionCharsBox.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="rightExceptionCharsBox.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="closingExceptionCharsBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>217, 23</value>
   </data>
   <data name="exceptionCharPairsCheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -1718,7 +1718,7 @@ word list contains the article "a")</value>
     <value>986, 363</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="rightExceptionCharsBox" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="leftExceptionCharsBox" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50,Percent,50" /&gt;&lt;Rows Styles="Percent,100,Absolute,25" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="closingExceptionCharsBox" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="openingExceptionCharsBox" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50,Percent,50" /&gt;&lt;Rows Styles="Percent,100,Absolute,25" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="alwaysCapitalize1stWordCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1884,10 +1884,10 @@ Intermediate state: Always capitalize the last word besides the excepted words (
   <data name="&gt;&gt;exceptionCharsCheckBoxLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="leftExceptionCharsBox.IconPadding" type="System.Int32, mscorlib">
+  <data name="openingExceptionCharsBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="leftExceptionCharsBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+  <data name="openingExceptionCharsBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
   <data name="buttonCancel.TabIndex" type="System.Int32, mscorlib">
@@ -1905,7 +1905,7 @@ Intermediate state: Always capitalize the last word besides the excepted words (
   <data name="buttonAsrExceptWordsAfterSymbols.Text" xml:space="preserve">
     <value>ASR</value>
   </data>
-  <data name="rightExceptionCharsBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="closingExceptionCharsBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
   <data name="&gt;&gt;buttonCancel.Name" xml:space="preserve">
@@ -2002,7 +2002,7 @@ already generated, but not yet saved "New tag", not saving anything to tags</val
   <data name="alwaysCapitalize1stWordCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 25, 0</value>
   </data>
-  <data name="&gt;&gt;rightExceptionCharsBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;closingExceptionCharsBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="sentenceSeparatorsBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
@@ -2249,7 +2249,7 @@ A dot FOLLOWED by space(s) always indicates the end of sentence</value>
   <data name="&gt;&gt;buttonReapply.Parent" xml:space="preserve">
     <value>fieldsPanel</value>
   </data>
-  <data name="leftExceptionCharsBox.ToolTip" xml:space="preserve">
+  <data name="openingExceptionCharsBox.ToolTip" xml:space="preserve">
     <value>Symbols in this field must be separated by spaces
 The number of symbols in the left and right lists must be the same
 The order of symbols in the left and in the right lists is important
@@ -2312,7 +2312,7 @@ They are paired by their position on the list</value>
   <data name="&gt;&gt;File.Name" xml:space="preserve">
     <value>File</value>
   </data>
-  <data name="rightExceptionCharsBox.ToolTip" xml:space="preserve">
+  <data name="closingExceptionCharsBox.ToolTip" xml:space="preserve">
     <value>Symbols in this field must be separated by spaces
 The number of symbols in the left and right lists must be the same
 The order of symbols in the left and in the right lists is important
@@ -2519,7 +2519,7 @@ word list contains the article "a")</value>
   <data name="label1.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="leftExceptionCharsBox.TabIndex" type="System.Int32, mscorlib">
+  <data name="openingExceptionCharsBox.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="&gt;&gt;onlyWordsCheckBox.Name" xml:space="preserve">
@@ -2657,7 +2657,7 @@ word list contains the article "a")</value>
   <data name="ignoreSingleLetterExceptedWordsCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
     <value>30</value>
   </data>
-  <data name="leftExceptionCharsBox.Error" xml:space="preserve">
+  <data name="openingExceptionCharsBox.Error" xml:space="preserve">
     <value />
   </data>
   <data name="upperCaseRadioButtonLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
@@ -2723,7 +2723,7 @@ word list contains the article "a")</value>
   <data name="&gt;&gt;ignoreSingleLetterExceptedWordsCheckBoxLabel.Name" xml:space="preserve">
     <value>ignoreSingleLetterExceptedWordsCheckBoxLabel</value>
   </data>
-  <data name="leftExceptionCharsBox.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="openingExceptionCharsBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 1</value>
   </data>
   <data name="&gt;&gt;toggleCaseRadioButton.ZOrder" xml:space="preserve">
@@ -2879,7 +2879,7 @@ word list contains the article "a")</value>
   <data name="&gt;&gt;buttonReapply.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
-  <data name="&gt;&gt;rightExceptionCharsBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;closingExceptionCharsBox.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
   <data name="alwaysCapitalizeLastWordCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">

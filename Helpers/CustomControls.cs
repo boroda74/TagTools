@@ -2550,7 +2550,7 @@ namespace MusicBeePlugin
 
         //refScrollBar must be null if scrolledControl is not a parent of custom scroll bar & scroll bar must be placed below scrolledControl
         public CustomHScrollBar(Form ownerForm, Control scrolledControl,
-            GetScrollBarMetricsDelegate getScrollBarMetrics, Control refScrollBar = null)
+            GetScrollBarMetricsDelegate getScrollBarMetrics, Control refScrollBar = null, bool useSelfAsRefScrollBar = false)
         {
             InitializeComponent();
 
@@ -2589,16 +2589,23 @@ namespace MusicBeePlugin
             leftImageAdditionalLeftWidth = (int)Math.Round(dpiScaling * leftImageAdditionalLeftWidth);
             leftImageAdditionalRightWidth = (int)Math.Round(dpiScaling * leftImageAdditionalRightWidth);
 
-            if (refScrollBar != null) //scrolledControlIsParent has own scroll bar CONTROLS, which must be replaced
+            if (refScrollBar != null || useSelfAsRefScrollBar) //scrolledControlIsParent has own scroll bar CONTROLS, which must be replaced
             {
-                this.refScrollBar = refScrollBar;
+                if (useSelfAsRefScrollBar)
+                    this.refScrollBar = this;
+                else
+                    this.refScrollBar = refScrollBar;
+
                 Visible = false;
 
                 sbBorderWidth = 0;
                 reservedBordersSpace = 2 * scaledPx;
 
                 initialHeight = ControlsTools.GetCustomScrollBarInitialWidth(dpiScaling, sbBorderWidth);
-                Height = refScrollBar.Height;
+                if (useSelfAsRefScrollBar)
+                    Height = initialHeight;
+                else
+                    Height = refScrollBar.Height;
 
                 ResetMetricsSize(ScrolledControl.Width);
                 AdjustReservedSpace(0);
@@ -2609,7 +2616,8 @@ namespace MusicBeePlugin
 
                 offsetY = Height - initialHeight;
 
-                refScrollBar.Visible = false;
+                if (refScrollBar != null)
+                    refScrollBar.Visible = false;
 
                 Left = scaledPx;
                 Top = ScrolledControl.Height - Height - scaledPx;
@@ -3091,9 +3099,6 @@ namespace MusicBeePlugin
                         var fValue = fPerc * (maximum - minimum);
 
                         value = (int)Math.Round(fValue);
-
-                        if (ValueChanged != null)
-                            ValueChanged(this, null);
                     }
                 }
             }
@@ -3113,9 +3118,6 @@ namespace MusicBeePlugin
                         var fValue = fPerc * (maximum - minimum);
 
                         value = (int)Math.Round(fValue);
-
-                        if (ValueChanged != null)
-                            ValueChanged(this, null);
                     }
                 }
             }

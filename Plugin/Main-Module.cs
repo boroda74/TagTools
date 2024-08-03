@@ -544,10 +544,10 @@ namespace MusicBeePlugin
             public string exceptionCharsAsr;
 
             public bool useExceptionCharPairs;
-            public object[] leftExceptionChars;
-            public string leftExceptionCharsAsr;
-            public object[] rightExceptionChars;
-            public string rightExceptionCharsAsr;
+            public object[] openingExceptionChars;
+            public string openingExceptionCharsAsr;
+            public object[] closingExceptionChars;
+            public string closingExceptionCharsAsr;
 
             public bool useSentenceSeparators;
             public object[] sentenceSeparators;
@@ -758,6 +758,7 @@ namespace MusicBeePlugin
         internal static string CopyTagSbText;
         internal static string SwapTagsSbText;
         internal static string ChangeCaseSbText;
+        internal static string CompareTracksSbText;
         internal static string ReEncodeTagSbText;
         internal static string LibraryReportsSbText;
         internal static string LibraryReportsGeneratingPreviewSbText;
@@ -3423,7 +3424,7 @@ namespace MusicBeePlugin
 
 
                 var tagToolsForm = new CompareTracks(this, files);
-                PluginWindowTemplate.Display(tagToolsForm, true);
+                PluginWindowTemplate.Display(tagToolsForm);
             }
         }
 
@@ -3519,6 +3520,7 @@ namespace MusicBeePlugin
             CopyTagSbText = "Copying tag";
             SwapTagsSbText = "Swapping tags";
             ChangeCaseSbText = "Changing case";
+            CompareTracksSbText = "Comparing tracks";
             ReEncodeTagSbText = "Reencoding tags";
             LibraryReportsSbText = "Generating report";
             LibraryReportsGeneratingPreviewSbText = "Generating preview";
@@ -4065,32 +4067,32 @@ namespace MusicBeePlugin
                 SavedSettings.exceptionChars[9] = string.Empty;
             }
 
-            if (SavedSettings.leftExceptionChars == null || SavedSettings.rightExceptionChars == null
-                || SavedSettings.leftExceptionChars.Length < 10 || SavedSettings.rightExceptionChars.Length < 10)
+            if (SavedSettings.openingExceptionChars == null || SavedSettings.closingExceptionChars == null
+                || SavedSettings.openingExceptionChars.Length < 10 || SavedSettings.closingExceptionChars.Length < 10)
             {
-                SavedSettings.leftExceptionChars = new object[10];
-                SavedSettings.leftExceptionChars[0] = "( [ {";
-                SavedSettings.leftExceptionChars[1] = string.Empty;
-                SavedSettings.leftExceptionChars[2] = string.Empty;
-                SavedSettings.leftExceptionChars[3] = string.Empty;
-                SavedSettings.leftExceptionChars[4] = string.Empty;
-                SavedSettings.leftExceptionChars[5] = string.Empty;
-                SavedSettings.leftExceptionChars[6] = string.Empty;
-                SavedSettings.leftExceptionChars[7] = string.Empty;
-                SavedSettings.leftExceptionChars[8] = string.Empty;
-                SavedSettings.leftExceptionChars[9] = string.Empty;
+                SavedSettings.openingExceptionChars = new object[10];
+                SavedSettings.openingExceptionChars[0] = "( [ {";
+                SavedSettings.openingExceptionChars[1] = string.Empty;
+                SavedSettings.openingExceptionChars[2] = string.Empty;
+                SavedSettings.openingExceptionChars[3] = string.Empty;
+                SavedSettings.openingExceptionChars[4] = string.Empty;
+                SavedSettings.openingExceptionChars[5] = string.Empty;
+                SavedSettings.openingExceptionChars[6] = string.Empty;
+                SavedSettings.openingExceptionChars[7] = string.Empty;
+                SavedSettings.openingExceptionChars[8] = string.Empty;
+                SavedSettings.openingExceptionChars[9] = string.Empty;
 
-                SavedSettings.rightExceptionChars = new object[10];
-                SavedSettings.rightExceptionChars[0] = ") ] }";
-                SavedSettings.rightExceptionChars[1] = string.Empty;
-                SavedSettings.rightExceptionChars[2] = string.Empty;
-                SavedSettings.rightExceptionChars[3] = string.Empty;
-                SavedSettings.rightExceptionChars[4] = string.Empty;
-                SavedSettings.rightExceptionChars[5] = string.Empty;
-                SavedSettings.rightExceptionChars[6] = string.Empty;
-                SavedSettings.rightExceptionChars[7] = string.Empty;
-                SavedSettings.rightExceptionChars[8] = string.Empty;
-                SavedSettings.rightExceptionChars[9] = string.Empty;
+                SavedSettings.closingExceptionChars = new object[10];
+                SavedSettings.closingExceptionChars[0] = ") ] }";
+                SavedSettings.closingExceptionChars[1] = string.Empty;
+                SavedSettings.closingExceptionChars[2] = string.Empty;
+                SavedSettings.closingExceptionChars[3] = string.Empty;
+                SavedSettings.closingExceptionChars[4] = string.Empty;
+                SavedSettings.closingExceptionChars[5] = string.Empty;
+                SavedSettings.closingExceptionChars[6] = string.Empty;
+                SavedSettings.closingExceptionChars[7] = string.Empty;
+                SavedSettings.closingExceptionChars[8] = string.Empty;
+                SavedSettings.closingExceptionChars[9] = string.Empty;
             }
 
             if (SavedSettings.exceptionCharsAsr == null)
@@ -4273,6 +4275,7 @@ namespace MusicBeePlugin
                 CopyTagSbText = "Копирование тегов";
                 SwapTagsSbText = "Обмен тегов местами";
                 ChangeCaseSbText = "Изменение регистра тега";
+                CompareTracksSbText = "Сравнение треков";
                 ReEncodeTagSbText = "Изменение кодировки тегов";
                 LibraryReportsSbText = "Формирование отчета";
                 LibraryReportsGeneratingPreviewSbText = "Формирование предварительного просмотра";
@@ -6553,120 +6556,205 @@ namespace MusicBeePlugin
 
         public string CustomFunc_Random(string max_number)
         {
-            return RandomGenerator.Next(int.Parse(max_number) + 1).ToString("D" + Math.Ceiling((decimal)Math.Log10(float.Parse(max_number) + 1)));
+            try
+            {
+                return RandomGenerator.Next(int.Parse(max_number) + 1).ToString("D" + Math.Ceiling((decimal)Math.Log10(float.Parse(max_number) + 1)));
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
 
         public string CustomFunc_Round(string number, string number_of_digits)
         {
-            number = number.Replace('.', LocalizedDecimalPoint);
-            number_of_digits = number_of_digits.Replace('.', LocalizedDecimalPoint);
+            try
+            { 
+                number = number.Replace('.', LocalizedDecimalPoint);
+                number_of_digits = number_of_digits.Replace('.', LocalizedDecimalPoint);
 
-            if (int.Parse(number_of_digits) > 0)
-                return Math.Round(decimal.Parse(number), int.Parse(number_of_digits)).ToString("F" + number_of_digits);
-            else
-                return Math.Round(decimal.Parse(number), int.Parse(number_of_digits)).ToString();
+                if (int.Parse(number_of_digits) > 0)
+                    return Math.Round(decimal.Parse(number), int.Parse(number_of_digits)).ToString("F" + number_of_digits);
+                else
+                    return Math.Round(decimal.Parse(number), int.Parse(number_of_digits)).ToString();
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
 
         public string CustomFunc_RoundUp(string number, string number_of_digits)
         {
-            number = number.Replace('.', LocalizedDecimalPoint);
-            number_of_digits = number_of_digits.Replace('.', LocalizedDecimalPoint);
+            try
+            {
+                number = number.Replace('.', LocalizedDecimalPoint);
+                number_of_digits = number_of_digits.Replace('.', LocalizedDecimalPoint);
 
-            if (int.Parse(number_of_digits) > 0)
-                return (Math.Ceiling(decimal.Parse(number) * (decimal)Math.Pow(10, int.Parse(number_of_digits))) / (decimal)Math.Pow(10, int.Parse(number_of_digits))).ToString();
-            else
-                return Math.Ceiling(decimal.Parse(number)).ToString();
+                if (int.Parse(number_of_digits) > 0)
+                    return (Math.Ceiling(decimal.Parse(number) * (decimal)Math.Pow(10, int.Parse(number_of_digits))) / (decimal)Math.Pow(10, int.Parse(number_of_digits))).ToString();
+                else
+                    return Math.Ceiling(decimal.Parse(number)).ToString();
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
 
         public string CustomFunc_RoundDown(string number, string number_of_digits)
         {
-            number = number.Replace('.', LocalizedDecimalPoint);
-            number_of_digits = number_of_digits.Replace('.', LocalizedDecimalPoint);
+            try
+            {
+                number = number.Replace('.', LocalizedDecimalPoint);
+                number_of_digits = number_of_digits.Replace('.', LocalizedDecimalPoint);
 
-            if (int.Parse(number_of_digits) > 0)
-                return (Math.Floor(decimal.Parse(number) * (decimal)Math.Pow(10, int.Parse(number_of_digits))) / (decimal)Math.Pow(10, int.Parse(number_of_digits))).ToString();
-            else
-                return Math.Floor(decimal.Parse(number)).ToString();
+                if (int.Parse(number_of_digits) > 0)
+                    return (Math.Floor(decimal.Parse(number) * (decimal)Math.Pow(10, int.Parse(number_of_digits))) / (decimal)Math.Pow(10, int.Parse(number_of_digits))).ToString();
+                else
+                    return Math.Floor(decimal.Parse(number)).ToString();
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
 
         public string CustomFunc_Sqrt(string number)
         {
-            number = number.Replace('.', LocalizedDecimalPoint);
+            try
+            {
+                number = number.Replace('.', LocalizedDecimalPoint);
 
-            return Math.Sqrt(float.Parse(number)).ToString();
+                return Math.Sqrt(float.Parse(number)).ToString();
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
 
         public string CustomFunc_Log(string number)
         {
-            number = number.Replace('.', LocalizedDecimalPoint);
+            try
+            {
+                number = number.Replace('.', LocalizedDecimalPoint);
 
-            return Math.Log10(double.Parse(number)).ToString();
+                return Math.Log10(double.Parse(number)).ToString();
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
 
         public string CustomFunc_eq(string number1, string number2)
         {
-            number1 = number1.Replace('.', LocalizedDecimalPoint);
-            number2 = number2.Replace('.', LocalizedDecimalPoint);
+            try
+            {
+                number1 = number1.Replace('.', LocalizedDecimalPoint);
+                number2 = number2.Replace('.', LocalizedDecimalPoint);
 
-            if (decimal.Parse(number1) == decimal.Parse(number2))
-                return "T";
-            else
-                return "F";
+                if (decimal.Parse(number1) == decimal.Parse(number2))
+                    return "T";
+                else
+                    return "F";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
 
         public string CustomFunc_ne(string number1, string number2)
         {
-            number1 = number1.Replace('.', LocalizedDecimalPoint);
-            number2 = number2.Replace('.', LocalizedDecimalPoint);
+            try
+            {
+                number1 = number1.Replace('.', LocalizedDecimalPoint);
+                number2 = number2.Replace('.', LocalizedDecimalPoint);
 
-            if (decimal.Parse(number1) != decimal.Parse(number2))
-                return "T";
-            else
-                return "F";
+                if (decimal.Parse(number1) != decimal.Parse(number2))
+                    return "T";
+                else
+                    return "F";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+
         }
 
         public string CustomFunc_gt(string number1, string number2)
         {
-            number1 = number1.Replace('.', LocalizedDecimalPoint);
-            number2 = number2.Replace('.', LocalizedDecimalPoint);
+            try
+            {
+                number1 = number1.Replace('.', LocalizedDecimalPoint);
+                number2 = number2.Replace('.', LocalizedDecimalPoint);
 
-            if (decimal.Parse(number1) > decimal.Parse(number2))
-                return "T";
-            else
-                return "F";
+                if (decimal.Parse(number1) > decimal.Parse(number2))
+                    return "T";
+                else
+                    return "F";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
 
         public string CustomFunc_lt(string number1, string number2)
         {
-            number1 = number1.Replace('.', LocalizedDecimalPoint);
-            number2 = number2.Replace('.', LocalizedDecimalPoint);
+            try
+            {
+                number1 = number1.Replace('.', LocalizedDecimalPoint);
+                number2 = number2.Replace('.', LocalizedDecimalPoint);
 
-            if (decimal.Parse(number1) < decimal.Parse(number2))
-                return "T";
-            else
-                return "F";
+                if (decimal.Parse(number1) < decimal.Parse(number2))
+                    return "T";
+                else
+                    return "F";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
 
         public string CustomFunc_ge(string number1, string number2)
         {
-            number1 = number1.Replace('.', LocalizedDecimalPoint);
-            number2 = number2.Replace('.', LocalizedDecimalPoint);
+            try
+            {
+                number1 = number1.Replace('.', LocalizedDecimalPoint);
+                number2 = number2.Replace('.', LocalizedDecimalPoint);
 
-            if (decimal.Parse(number1) >= decimal.Parse(number2))
-                return "T";
-            else
-                return "F";
+                if (decimal.Parse(number1) >= decimal.Parse(number2))
+                    return "T";
+                else
+                    return "F";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
 
         public string CustomFunc_le(string number1, string number2)
         {
-            number1 = number1.Replace('.', LocalizedDecimalPoint);
-            number2 = number2.Replace('.', LocalizedDecimalPoint);
+            try
+            {
+                number1 = number1.Replace('.', LocalizedDecimalPoint);
+                number2 = number2.Replace('.', LocalizedDecimalPoint);
 
-            if (decimal.Parse(number1) <= decimal.Parse(number2))
-                return "T";
-            else
-                return "F";
+                if (decimal.Parse(number1) <= decimal.Parse(number2))
+                    return "T";
+                else
+                    return "F";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
 
         private string removeLeadingZerosFromDuration(string duration)
@@ -6692,55 +6780,116 @@ namespace MusicBeePlugin
 
         public string CustomFunc_AddDuration(string duration1, string duration2)
         {
-            return removeLeadingZerosFromDuration((TimeSpan.Parse(duration1) + TimeSpan.Parse(duration2)).ToString());
+            try
+            {
+                return removeLeadingZerosFromDuration((TimeSpan.Parse(duration1) + TimeSpan.Parse(duration2)).ToString());
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
 
         public string CustomFunc_SubDuration(string duration1, string duration2)
         {
-            return removeLeadingZerosFromDuration((TimeSpan.Parse(duration1) - TimeSpan.Parse(duration2)).ToString());
+            try
+            {
+                return removeLeadingZerosFromDuration((TimeSpan.Parse(duration1) - TimeSpan.Parse(duration2)).ToString());
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
 
         public string CustomFunc_MulDuration(string duration, string number)
         {
-            return removeLeadingZerosFromDuration(TimeSpan.FromMilliseconds(Math.Round(double.Parse(number) * TimeSpan.Parse(duration).TotalMilliseconds)).ToString());
+            try
+            {
+                return removeLeadingZerosFromDuration(TimeSpan.FromMilliseconds(Math.Round(double.Parse(number) * TimeSpan.Parse(duration).TotalMilliseconds)).ToString());
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
 
         public string CustomFunc_SubDateTime(string datetime1, string datetime2)
         {
-            return removeLeadingZerosFromDuration((DateTime.Parse(datetime1) - DateTime.Parse(datetime2)).ToString());
+            try
+            {
+                return removeLeadingZerosFromDuration((DateTime.Parse(datetime1) - DateTime.Parse(datetime2)).ToString());
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
 
         public string CustomFunc_NumberOfDays(string datetime1, string datetime2)
         {
-            if (datetime2.Length == 4)
+            try
             {
-                datetime2 = (new DateTime(int.Parse(datetime2), 01, 01)).ToString();
-            }
+                if (datetime2.Length == 4)
+                    datetime2 = (new DateTime(int.Parse(datetime2), 01, 01)).ToString();
 
-            return Math.Floor((DateTime.Parse(datetime1) - DateTime.Parse(datetime2)).TotalDays).ToString();
+                return Math.Floor((DateTime.Parse(datetime1) - DateTime.Parse(datetime2)).TotalDays).ToString();
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
 
         public string CustomFunc_AddDurationToDateTime(string datetime, string duration)
         {
-            return (DateTime.Parse(datetime) + TimeSpan.Parse(duration)).ToString();
+            try
+            {
+                return (DateTime.Parse(datetime) + TimeSpan.Parse(duration)).ToString();
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
 
         public string CustomFunc_SubDurationFromDateTime(string datetime, string duration)
         {
-            return (DateTime.Parse(datetime) - TimeSpan.Parse(duration)).ToString();
+            try
+            {
+                return (DateTime.Parse(datetime) - TimeSpan.Parse(duration)).ToString();
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
 
         public string CustomFunc_Seconds(string duration)
         {
-            duration = Regex.Replace(duration, @"^(\d+)$", "00:00:$1");
-            duration = Regex.Replace(duration, @"^(\d+:\d+)$", "00:$1");
-            return TimeSpan.Parse(duration).TotalSeconds.ToString();
+            try
+            {
+                duration = Regex.Replace(duration, @"^(\d+)$", "00:00:$1");
+                duration = Regex.Replace(duration, @"^(\d+:\d+)$", "00:$1");
+                return TimeSpan.Parse(duration).TotalSeconds.ToString();
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
 
         public string CustomFunc_DurationFromSeconds(string seconds)
         {
-            string duration = TimeSpan.FromSeconds(double.Parse(seconds)).ToString();
-            return removeLeadingZerosFromDuration(duration);
+            try
+            {
+                string duration = TimeSpan.FromSeconds(double.Parse(seconds)).ToString();
+                return removeLeadingZerosFromDuration(duration);
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
 
         public string CustomFunc_Now()
@@ -6749,96 +6898,115 @@ namespace MusicBeePlugin
         }
 
         public string CustomFunc_TitleCase(string input, string lowerCaseWordsString, string upperCaseWordsString, //******* abbreviations!!!!
-            string leftExceptionCharsString, string rightExceptionCharsString, string exceptionCharsString)
+            string openingExceptionCharsString, string closingExceptionCharsString, string exceptionCharsString)
         {
-            string[] lowerCaseWords = null;
-            string[] upperCaseWords = null;
-            string[] leftExceptionChars = null;
-            string[] rightExceptionChars = null;
-            string[] exceptionChars = null;
+            try
+            {
+                string[] lowerCaseWords = null;
+                string[] upperCaseWords = null;
+                string[] openingExceptionChars = null;
+                string[] closingExceptionChars = null;
+                string[] exceptionChars = null;
 
 
-            if (lowerCaseWordsString == "`")
-                lowerCaseWordsString = null;
+                if (lowerCaseWordsString == "`")
+                    lowerCaseWordsString = null;
 
-            if (upperCaseWordsString == "`")
-                upperCaseWordsString = null;
+                if (upperCaseWordsString == "`")
+                    upperCaseWordsString = null;
 
-            if (leftExceptionCharsString == "`")
-                leftExceptionCharsString = null;
+                if (openingExceptionCharsString == "`")
+                    openingExceptionCharsString = null;
 
-            if (rightExceptionCharsString == "`")
-                rightExceptionCharsString = null;
-
-
-            if (!ChangeCase.CheckIfTheSameNumberOfCharsInStrings(leftExceptionCharsString, rightExceptionCharsString))
-                return CtlLrError;
+                if (closingExceptionCharsString == "`")
+                    closingExceptionCharsString = null;
 
 
-            if (!string.IsNullOrWhiteSpace(lowerCaseWordsString))
-                lowerCaseWords = lowerCaseWordsString.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-
-            if (!string.IsNullOrWhiteSpace(upperCaseWordsString))
-                upperCaseWords = upperCaseWordsString.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-
-            if (!string.IsNullOrWhiteSpace(leftExceptionCharsString))
-                leftExceptionChars = ChangeCase.GetCharsInString(leftExceptionCharsString);
-
-            if (!string.IsNullOrWhiteSpace(rightExceptionCharsString))
-                rightExceptionChars = ChangeCase.GetCharsInString(rightExceptionCharsString);
-
-            if (!string.IsNullOrWhiteSpace(exceptionCharsString))
-                exceptionChars = ChangeCase.GetCharsInString(exceptionCharsString);
+                if (!ChangeCase.CheckIfTheSameNumberOfCharsInStrings(openingExceptionCharsString, closingExceptionCharsString))
+                    return CtlLrError;
 
 
-            string[] exceptedWords = null;
+                if (!string.IsNullOrWhiteSpace(lowerCaseWordsString))
+                    lowerCaseWords = lowerCaseWordsString.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-            if (lowerCaseWords != null && upperCaseWords == null)
-                exceptedWords = lowerCaseWords;
-            else if (lowerCaseWords == null && upperCaseWords != null)
-                exceptedWords = upperCaseWords;
-            else if (lowerCaseWords != null && upperCaseWords != null)
-                exceptedWords = lowerCaseWords.Union(upperCaseWords).ToArray();
+                if (!string.IsNullOrWhiteSpace(upperCaseWordsString))
+                    upperCaseWords = upperCaseWordsString.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
+                if (!string.IsNullOrWhiteSpace(openingExceptionCharsString))
+                    openingExceptionChars = ChangeCase.GetCharsInString(openingExceptionCharsString);
 
-            input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.LowerCase);
+                if (!string.IsNullOrWhiteSpace(closingExceptionCharsString))
+                    closingExceptionChars = ChangeCase.GetCharsInString(closingExceptionCharsString);
 
-            input = ChangeCase.ChangeSentenceCase(input, ChangeCase.ChangeCaseOptions.TitleCase, null, false,
-                null, leftExceptionChars, rightExceptionChars, exceptionChars, true, true);
-
-            input = ChangeCase.ChangeSentenceCase(input, ChangeCase.ChangeCaseOptions.LowerCase, lowerCaseWords, true,
-                null, leftExceptionChars, rightExceptionChars, exceptionChars, null, null, true);
-
-            //input = ChangeCase.ChangeSentenceCase(input, ChangeCase.ChangeCaseOptions.TitleCase, exceptedWords, false,//**********
-            //    exceptionChars, leftExceptionChars, rightExceptionChars, exceptionChars, true, true, true);
+                if (!string.IsNullOrWhiteSpace(exceptionCharsString))
+                    exceptionChars = ChangeCase.GetCharsInString(exceptionCharsString);
 
 
-            var result = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.UpperCase, upperCaseWords, true,
-                null, null, null, null, null);
+                string[] exceptedWords = null;
 
-            return result;
+                if (lowerCaseWords != null && upperCaseWords == null)
+                    exceptedWords = lowerCaseWords;
+                else if (lowerCaseWords == null && upperCaseWords != null)
+                    exceptedWords = upperCaseWords;
+                else if (lowerCaseWords != null && upperCaseWords != null)
+                    exceptedWords = lowerCaseWords.Union(upperCaseWords).ToArray();
+
+
+                input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.LowerCase);
+
+                input = ChangeCase.ChangeSentenceCase(input, ChangeCase.ChangeCaseOptions.TitleCase, null, false,
+                    null, openingExceptionChars, closingExceptionChars, exceptionChars, true, true);
+
+                input = ChangeCase.ChangeSentenceCase(input, ChangeCase.ChangeCaseOptions.LowerCase, lowerCaseWords, true,
+                    null, openingExceptionChars, closingExceptionChars, exceptionChars, null, null, true);
+
+
+                List<char> encounteredLeftExceptionChars = null;
+                bool wasCharException = false;
+
+                var result = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.UpperCase, ref encounteredLeftExceptionChars, ref wasCharException, upperCaseWords, true,
+                    null, null, null, null, null);
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
 
         public string CustomFunc_SentenceCase(string input, string upperCaseWordsString, string sentenceSeparatorsString) //******* abbreviations!!!!
         {
-            string[] upperCaseWords = null;
-            string[] sentenceSeparators = null;
+            try
+            {
+                string[] upperCaseWords = null;
+                string[] sentenceSeparators = null;
 
-            if (upperCaseWordsString == "`")
-                upperCaseWordsString = null;
+                if (upperCaseWordsString == "`")
+                    upperCaseWordsString = null;
 
-            if (!string.IsNullOrWhiteSpace(upperCaseWordsString))
-                upperCaseWords = upperCaseWordsString.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                if (!string.IsNullOrWhiteSpace(upperCaseWordsString))
+                    upperCaseWords = upperCaseWordsString.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-            if (!string.IsNullOrWhiteSpace(sentenceSeparatorsString))
-                sentenceSeparators = ChangeCase.GetCharsInString(sentenceSeparatorsString);
+                if (!string.IsNullOrWhiteSpace(sentenceSeparatorsString))
+                    sentenceSeparators = ChangeCase.GetCharsInString(sentenceSeparatorsString);
 
-            input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.UpperCase);
-            input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.LowerCase, upperCaseWords);
-            var result = ChangeCase.ChangeSentenceCase(input, ChangeCase.ChangeCaseOptions.SentenceCase, upperCaseWords, false, null, null, null, sentenceSeparators, 
-                true, false, true);
+                input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.UpperCase);
 
-            return result;
+                List<char> encounteredLeftExceptionChars = null;
+                bool wasCharException = false;
+
+                input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.LowerCase, ref encounteredLeftExceptionChars, ref wasCharException, upperCaseWords);
+
+                var result = ChangeCase.ChangeSentenceCase(input, ChangeCase.ChangeCaseOptions.SentenceCase, upperCaseWords, false, null, null, null, sentenceSeparators,
+                    true, false, true);
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
 
         public string CustomFunc_Name(string parameter)
@@ -6857,22 +7025,36 @@ namespace MusicBeePlugin
 
         public string CustomFunc_Char(string code)
         {
-            var charcode = ushort.Parse(code, System.Globalization.NumberStyles.HexNumber);
-            return ((char)charcode).ToString();
+            try
+            {
+                var charcode = ushort.Parse(code, System.Globalization.NumberStyles.HexNumber);
+                return ((char)charcode).ToString();
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
 
         public string CustomFunc_CharN(string code, string timesString)
         {
-            var charcode = ushort.Parse(code, System.Globalization.NumberStyles.HexNumber);
-            var character = ((char)charcode).ToString();
+            try
+            {
+                var charcode = ushort.Parse(code, System.Globalization.NumberStyles.HexNumber);
+                var character = ((char)charcode).ToString();
 
-            var sequence = string.Empty;
+                var sequence = string.Empty;
 
-            var times = int.Parse(timesString);
-            for (var i = 0; i < times; i++)
-                sequence += character;
+                var times = int.Parse(timesString);
+                for (var i = 0; i < times; i++)
+                    sequence += character;
 
-            return sequence;
+                return sequence;
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
 
         public string CustomFunc_TagContainsAnyString(string url, string tagName, string text)
@@ -6884,7 +7066,9 @@ namespace MusicBeePlugin
 
             foreach (var textPart in textParts)
             {
-                if (Regex.IsMatch(tagValue, textPart, RegexOptions.IgnoreCase))
+                var escTextPart = Regex.Escape(textPart);
+
+                if (Regex.IsMatch(tagValue, escTextPart, RegexOptions.IgnoreCase))
                     return "T";
             }
 
@@ -6901,14 +7085,13 @@ namespace MusicBeePlugin
             var result = "T";
             foreach (var textPart in textParts)
             {
-                if (!Regex.IsMatch(tagValue, textPart, RegexOptions.IgnoreCase))
-                {
-                    result = "F";
-                    break;
-                }
+                var escTextPart = Regex.Escape(textPart);
+
+                if (!Regex.IsMatch(tagValue, escTextPart, RegexOptions.IgnoreCase))
+                    return "F";
             }
 
-            return result;
+            return "T";
         }
         #endregion
     }

@@ -43,7 +43,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.previewTable = new System.Windows.Forms.DataGridView();
+            previewTable = new System.Windows.Forms.DataGridView();
             this.label3 = new System.Windows.Forms.Label();
             this.searchFolderTextBox = new System.Windows.Forms.ComboBox();
             this.browseButton = new System.Windows.Forms.Button();
@@ -69,7 +69,7 @@
             this.Library = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ImageCellTemplate = new System.Windows.Forms.DataGridViewImageColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.previewTable)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(previewTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfBackupsNumericUpDown)).BeginInit();
             this.optionsPanel.SuspendLayout();
             this.controlsPanel.SuspendLayout();
@@ -92,13 +92,13 @@
             // 
             // previewTable
             // 
-            this.previewTable.AllowUserToAddRows = false;
-            this.previewTable.AllowUserToDeleteRows = false;
-            resources.ApplyResources(this.previewTable, "previewTable");
-            this.previewTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.previewTable.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.previewTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.previewTable.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+            previewTable.AllowUserToAddRows = false;
+            previewTable.AllowUserToDeleteRows = false;
+            resources.ApplyResources(previewTable, "previewTable");
+            previewTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            previewTable.BackgroundColor = System.Drawing.SystemColors.Window;
+            previewTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            previewTable.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F);
@@ -106,23 +106,23 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.previewTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.previewTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            previewTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            previewTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Library,
             this.Column1,
             this.ImageCellTemplate});
-            this.previewTable.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
-            this.previewTable.Name = "previewTable";
-            this.previewTable.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.previewTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.previewTable.Tag = "#TagHistory&controlsPanel";
-            this.previewTable.RowHeadersWidthChanged += new System.EventHandler(this.previewTable_RowHeadersWidthChanged);
-            this.previewTable.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.previewTable_CellEndEdit);
-            this.previewTable.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.previewTable_CellFormatting);
-            this.previewTable.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.previewTable_ColumnHeaderMouseClick);
-            this.previewTable.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.previewTable_ColumnWidthChanged);
-            this.previewTable.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.previewTable_DataError);
-            this.previewTable.SelectionChanged += new System.EventHandler(this.previewTable_SelectionChanged);
+            previewTable.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
+            previewTable.Name = "previewTable";
+            previewTable.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            previewTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            previewTable.Tag = "#TagHistory&controlsPanel";
+            previewTable.RowHeadersWidthChanged += new System.EventHandler(this.previewTable_RowHeadersWidthChanged);
+            previewTable.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.previewTable_CellEndEdit);
+            previewTable.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.previewTable_CellFormatting);
+            previewTable.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.previewTable_ColumnHeaderMouseClick);
+            previewTable.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.previewTable_ColumnWidthChanged);
+            previewTable.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.previewTable_DataError);
+            previewTable.SelectionChanged += new System.EventHandler(this.previewTable_SelectionChanged);
             // 
             // label3
             // 
@@ -337,7 +337,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
             this.Controls.Add(this.controlsPanel);
-            this.Controls.Add(this.previewTable);
+            this.Controls.Add(previewTable);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.optionsPanel);
@@ -345,7 +345,7 @@
             this.Name = "TagHistory";
             this.Load += new System.EventHandler(this.TagHistory_Load);
             this.Shown += new System.EventHandler(this.TagHistoryPlugin_Shown);
-            ((System.ComponentModel.ISupportInitialize)(this.previewTable)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(previewTable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfBackupsNumericUpDown)).EndInit();
             this.optionsPanel.ResumeLayout(false);
             this.optionsPanel.PerformLayout();

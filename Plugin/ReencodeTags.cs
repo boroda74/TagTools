@@ -107,7 +107,7 @@ namespace MusicBeePlugin
 
             previewTable.FirstDisplayedScrollingRowIndex = previewTable.RowCount - 1;
             if ((previewTable.RowCount & 0x1f) == 0)
-                base.updateCustomScrollBars(this.previewTable);
+                updateCustomScrollBars(previewTable);
         }
 
         private void previewTable_ProcessRowOfTable(int row)
@@ -135,7 +135,7 @@ namespace MusicBeePlugin
             previewTable.RowCount = 0;
             (previewTable.Columns[0].HeaderCell as DataGridViewCheckBoxHeaderCell).setState(true);
 
-            base.updateCustomScrollBars(this.previewTable);
+            updateCustomScrollBars(previewTable);
 
             if (previewIsGenerated)
             {

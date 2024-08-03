@@ -194,22 +194,22 @@
     <value>Установить списки символов как значение по умолчанию 
 для Дополнительного поиска и замены</value>
   </data>
-  <data name="rightExceptionCharsBox.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="closingExceptionCharsBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>279, 1</value>
   </data>
-  <data name="rightExceptionCharsBox.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="closingExceptionCharsBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>276, 23</value>
   </data>
-  <data name="rightExceptionCharsBox.ToolTip" xml:space="preserve">
+  <data name="closingExceptionCharsBox.ToolTip" xml:space="preserve">
     <value>Символы в этом списке должны быть разделены пробелами
 Количество символов в левом и правом списках должно быть одинаковым
 Порядок символов в левом и правом списках важен
 Они представляют собой пары в соответствии с их позицией в списке</value>
   </data>
-  <data name="leftExceptionCharsBox.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="openingExceptionCharsBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>275, 23</value>
   </data>
-  <data name="leftExceptionCharsBox.ToolTip" xml:space="preserve">
+  <data name="openingExceptionCharsBox.ToolTip" xml:space="preserve">
     <value>Символы в этом списке должны быть разделены пробелами
 Количество символов в левом и правом списках должно быть одинаковым
 Порядок символов в левом и правом списках важен

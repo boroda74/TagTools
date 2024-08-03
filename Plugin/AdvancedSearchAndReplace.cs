@@ -1249,8 +1249,8 @@ namespace MusicBeePlugin
 
                 var result = ChangeCase.ChangeSentenceCase(parameter0, ChangeCase.ChangeCaseOptions.TitleCase, exceptedWords, false,
                     SavedSettings.exceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
-                    SavedSettings.leftExceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
-                    SavedSettings.rightExceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
+                    SavedSettings.openingExceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
+                    SavedSettings.closingExceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
                     SavedSettings.sentenceSeparatorsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries), true, true);
 
                 return result;
@@ -1273,8 +1273,8 @@ namespace MusicBeePlugin
 
                 var result = ChangeCase.ChangeSentenceCase(parameter0, ChangeCase.ChangeCaseOptions.LowerCase, exceptedWords, false,
                     SavedSettings.exceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
-                    SavedSettings.leftExceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
-                    SavedSettings.rightExceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
+                    SavedSettings.openingExceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
+                    SavedSettings.closingExceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
                     SavedSettings.sentenceSeparatorsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries), false, false);
 
                 return result;
@@ -1297,8 +1297,8 @@ namespace MusicBeePlugin
 
                 var result = ChangeCase.ChangeSentenceCase(parameter0, ChangeCase.ChangeCaseOptions.UpperCase, exceptedWords, false,
                     SavedSettings.exceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
-                    SavedSettings.leftExceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
-                    SavedSettings.rightExceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
+                    SavedSettings.openingExceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
+                    SavedSettings.closingExceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
                     SavedSettings.sentenceSeparatorsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries), false, false);
 
                 return result;
@@ -1323,8 +1323,8 @@ namespace MusicBeePlugin
 
                 var result = ChangeCase.ChangeSentenceCase(parameter0, ChangeCase.ChangeCaseOptions.SentenceCase, exceptedWords, false, 
                     SavedSettings.exceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
-                    SavedSettings.leftExceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
-                    SavedSettings.rightExceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
+                    SavedSettings.openingExceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
+                    SavedSettings.closingExceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
                     SavedSettings.sentenceSeparatorsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries), true, false);
 
                 return result;

@@ -1341,11 +1341,20 @@ namespace MusicBeePlugin
         {
             var customHScrollBar = sender as CustomHScrollBar;
             var dataGridView = customHScrollBar.Parent as DataGridView;
+            var value = customHScrollBar.Value;
+            var largeChange = customHScrollBar.LargeChange;
+            var maximum = customHScrollBar.Maximum;
+            var form = customHScrollBar.FindForm();
 
-            if (dataGridView.ColumnCount > 0)
+            if (dataGridView.ColumnCount > 0 && form != null && form.WindowState != FormWindowState.Minimized)
             {
                 customHScrollBar.SettingParentScroll = true;
-                dataGridView.HorizontalScrollingOffset = customHScrollBar.GetThumbLeft();
+
+                if (maximum == 0)
+                    dataGridView.HorizontalScrollingOffset = 0;
+                else
+                    dataGridView.HorizontalScrollingOffset = (int)(((float)maximum - largeChange) * value / maximum);
+
                 customHScrollBar.SettingParentScroll = false;
 
                 customHScrollBar.Invalidate();
@@ -1362,8 +1371,10 @@ namespace MusicBeePlugin
         {
             var customVScrollBar = sender as CustomVScrollBar;
             var dataGridView = customVScrollBar.Parent as DataGridView;
+            var thumbTop = customVScrollBar.GetThumbTop();
+            var form = customVScrollBar.FindForm();
 
-            if (dataGridView.RowCount > 0)
+            if (dataGridView.RowCount > 0 && form !=null && form.WindowState != FormWindowState.Minimized && thumbTop >= 0)
             {
                 var nRowRange = dataGridView.RowCount - dataGridView.DisplayedRowCount(false);
                 var (_, nPixelRange, _, _, _) = customVScrollBar.GetMetrics();
@@ -1397,9 +1408,9 @@ namespace MusicBeePlugin
             if ((ModifierKeys & Keys.Shift) == 0 && customVScrollBar.Visible) //-V3080
             {
                 if ((ModifierKeys & Keys.Alt) == 0)
-                    delta = -e.Delta / 16; //****
+                    delta = -e.Delta / 4; //****
                 else
-                    delta = -e.Delta;
+                    delta = -e.Delta * 4;
 
                 customVScrollBar.Value += delta;
             }
@@ -1409,9 +1420,9 @@ namespace MusicBeePlugin
                 if (customHScrollBar.Visible)
                 {
                     if ((ModifierKeys & Keys.Alt) == 0)
-                        delta = -e.Delta / 2; //****
+                        delta = -e.Delta * 2; //****
                     else
-                        delta = -e.Delta * 2;
+                        delta = -e.Delta * 32;
 
                     customHScrollBar.Value += delta;
                 }
@@ -1427,12 +1438,20 @@ namespace MusicBeePlugin
             if (e.ScrollOrientation == ScrollOrientation.HorizontalScroll)
             {
                 var customHScrollBar = ControlsTools.FindControlChild<CustomHScrollBar>(dataGridView);
+
+                if (customHScrollBar.SettingParentScroll)
+                    return;
+
                 customHScrollBar.SetThumbLeft(dataGridView.HorizontalScrollingOffset); //-V3080
 
             }
             else //if (e.ScrollOrientation == ScrollOrientation.VerticalScroll)
             {
                 var customVScrollBar = ControlsTools.FindControlChild<CustomVScrollBar>(dataGridView);
+
+                if (customVScrollBar.SettingParentScroll)
+                    return;
+
                 dgvCustomVScrollBar_SetThumbTop(dataGridView, customVScrollBar); //-V3080
             }
         }
@@ -1647,7 +1666,7 @@ namespace MusicBeePlugin
             else if (refScrollBar is CustomVScrollBar)
                 return (0, 1, 1);
 
-            throw new Exception("Invalid scroll bar class: " + refScrollBar.GetType());
+            throw new Exception("Invalid scroll bar class: " + refScrollBar.GetType().FullName);
         }
 
         protected void tbCustomVScrollBar_Scroll(object sender, EventArgs e)
@@ -1850,7 +1869,7 @@ namespace MusicBeePlugin
             else if (refScrollBar is CustomVScrollBar)
                 return (0, 1, 1);
 
-            throw new Exception("Invalid scroll bar class: " + refScrollBar.GetType());
+            throw new Exception("Invalid scroll bar class: " + refScrollBar.GetType().FullName);
         }
 
         private static (CustomHScrollBar, int, CustomVScrollBar, int) UpdateDgvCustomScrollBarsInternal(DataGridView dataGridView)
@@ -1862,9 +1881,10 @@ namespace MusicBeePlugin
 
             if (customHScrollBar != null)
             {
-                customHScrollBar.Minimum = 0; //-V3080
-                customHScrollBar.Maximum = hScrollBar.Maximum;
-                customHScrollBar.LargeChange = hScrollBar.LargeChange;
+                (_, int maximum, int largeChange) = GetDataGridViewScrollBarMetrics(dataGridView, customHScrollBar);
+                customHScrollBar.Minimum = 0;
+                customHScrollBar.Maximum = maximum;
+                customHScrollBar.LargeChange = largeChange;
 
                 if (customHScrollBar.Maximum > customHScrollBar.LargeChange)
                     customHScrollBarVisibleHeight = customHScrollBar.Height;
@@ -1878,9 +1898,10 @@ namespace MusicBeePlugin
 
             if (customVScrollBar != null)
             {
-                customVScrollBar.Minimum = vScrollBar.Minimum; //-V3080
-                customVScrollBar.Maximum = vScrollBar.Maximum;
-                customVScrollBar.LargeChange = vScrollBar.LargeChange;
+                (_, int maximum, int largeChange) = GetDataGridViewVScrollBarMetrics(dataGridView, vScrollBar);
+                customVScrollBar.Minimum = 0;
+                customVScrollBar.Maximum = maximum;
+                customVScrollBar.LargeChange = largeChange;
 
                 if (customVScrollBar.Maximum > customVScrollBar.LargeChange)
                     customVScrollBarVisibleWidth = customVScrollBar.Width;
@@ -2052,23 +2073,17 @@ namespace MusicBeePlugin
                 return (0, maximum, largeChange);
             }
 
-            throw new Exception("Invalid reference scroll bar class: " + customScrollBar.GetType());
+            throw new Exception("Invalid reference scroll bar class: " + customScrollBar.GetType().FullName);
         }
 
 
         //Returns Minimum, Maximum, LargeChange
-        internal static (int, int, int) GetScrollBarMetrics(Control scrolledControl, Control refScrollBar)
+        internal static (int, int, int) GetDataGridViewVScrollBarMetrics(Control scrolledControl, Control refScrollBar)
         {
-            if (refScrollBar is HScrollBar bar)
-            {
-                return (bar.Minimum, bar.Maximum, bar.LargeChange);
-            }
-            else if (refScrollBar is VScrollBar scrollBar)
-            {
+            if (refScrollBar is VScrollBar scrollBar)
                 return (scrollBar.Minimum, scrollBar.Maximum, scrollBar.LargeChange);
-            }
 
-            throw new Exception("Invalid reference scroll bar class: " + refScrollBar.GetType());
+            throw new Exception("Invalid reference scroll bar class: " + refScrollBar.GetType().FullName);
         }
 
         private void customScrollBarParent_SizeChanged(object sender, EventArgs e)
@@ -2600,7 +2615,7 @@ namespace MusicBeePlugin
                 var hScrollBar = ControlsTools.FindControlChild<HScrollBar>(dataGridView);
                 var vScrollBar = ControlsTools.FindControlChild<VScrollBar>(dataGridView);
 
-                var customHScrollBar = new CustomHScrollBar(this, dataGridView, GetScrollBarMetrics, hScrollBar);
+                var customHScrollBar = new CustomHScrollBar(this, dataGridView, GetDataGridViewScrollBarMetrics, null, true);
                 customHScrollBar.CreateBrushes();
                 hScrollBar.Visible = false; //-V3080
 
@@ -2610,7 +2625,7 @@ namespace MusicBeePlugin
                 hScrollBar.VisibleChanged += scrollBar_VisibleChanged;
 
 
-                var customVScrollBar = new CustomVScrollBar(this, dataGridView, GetScrollBarMetrics, 0, vScrollBar);
+                var customVScrollBar = new CustomVScrollBar(this, dataGridView, GetDataGridViewVScrollBarMetrics, 0, vScrollBar);
                 customVScrollBar.CreateBrushes();
                 vScrollBar.Visible = false; //-V3080
 
