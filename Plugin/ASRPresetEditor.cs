@@ -344,11 +344,11 @@ namespace MusicBeePlugin
             preset.append4 = append4CheckBox.Checked;
             preset.append5 = append5CheckBox.Checked;
 
-            preset.limitation1 = GetBoolFromCheckState(condition1CheckBox.CheckState);
-            preset.limitation2 = GetBoolFromCheckState(condition2CheckBox.CheckState);
-            preset.limitation3 = GetBoolFromCheckState(condition3CheckBox.CheckState);
-            preset.limitation4 = GetBoolFromCheckState(condition4CheckBox.CheckState);
-            preset.limitation5 = GetBoolFromCheckState(condition5CheckBox.CheckState);
+            preset.limitation1 = GetNullableBoolFromCheckState(condition1CheckBox.CheckState);
+            preset.limitation2 = GetNullableBoolFromCheckState(condition2CheckBox.CheckState);
+            preset.limitation3 = GetNullableBoolFromCheckState(condition3CheckBox.CheckState);
+            preset.limitation4 = GetNullableBoolFromCheckState(condition4CheckBox.CheckState);
+            preset.limitation5 = GetNullableBoolFromCheckState(condition5CheckBox.CheckState);
 
             return true;
         }

@@ -376,18 +376,6 @@
   <data name="exceptionCharsCheckBox.ToolTip" xml:space="preserve">
     <value>Эта опция запретит любые изменения слов следующих после указанных символов</value>
   </data>
-  <data name="onlyWordsCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>374, 36</value>
-  </data>
-  <data name="onlyWordsCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>122, 15</value>
-  </data>
-  <data name="onlyWordsCheckBoxLabel.Text" xml:space="preserve">
-    <value>или только в словах:</value>
-  </data>
-  <data name="onlyWordsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>346, 36</value>
-  </data>
   <data name="exceptionWordsCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>237, 36</value>
   </data>
@@ -398,13 +386,16 @@
     <value>Кроме слов</value>
   </data>
   <data name="exceptionWordsCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value>Эта опция запретит любые изменения указанных слов. Например, UB40 останется UB40 независимо от остальных настроек команды.</value>
+    <value>Только в словах</value>
   </data>
   <data name="exceptionWordsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>209, 36</value>
   </data>
   <data name="exceptionWordsCheckBox.ToolTip" xml:space="preserve">
-    <value>Эта опция запретит любые изменения указанных слов. Например, UB40 останется UB40 независимо от остальных настроек команды.</value>
+    <value>Эта опция запретит любые изменения указанных слов. Например, UB40 
+останется UB40 независимо от остальных настроек команды.
+
+Промежуточное состояние: изменить регистр только введенных слов.</value>
   </data>
   <data name="toggleCaseRadioButtonLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 15</value>

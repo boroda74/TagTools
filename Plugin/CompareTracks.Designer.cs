@@ -46,13 +46,13 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            previewTable = new System.Windows.Forms.DataGridView();
+            this.previewTable = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ImageCellTemplate = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.selectTagsButton = new System.Windows.Forms.Button();
+            this.buttonSelectTags = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.rememberColumnAsDefaultWidthCheckBox = new System.Windows.Forms.CheckBox();
             this.autoSelectTagsCheckBox = new System.Windows.Forms.CheckBox();
@@ -62,7 +62,7 @@
             this.buttonClear = new System.Windows.Forms.Button();
             this.toolsPanel = new System.Windows.Forms.Panel();
             this.placeholderLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(previewTable)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.previewTable)).BeginInit();
             this.toolsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -85,13 +85,13 @@
             // 
             // previewTable
             // 
-            resources.ApplyResources(previewTable, "previewTable");
-            previewTable.AllowUserToAddRows = false;
-            previewTable.AllowUserToDeleteRows = false;
-            previewTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            previewTable.BackgroundColor = System.Drawing.SystemColors.Window;
-            previewTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            previewTable.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+            resources.ApplyResources(this.previewTable, "previewTable");
+            this.previewTable.AllowUserToAddRows = false;
+            this.previewTable.AllowUserToDeleteRows = false;
+            this.previewTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.previewTable.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.previewTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.previewTable.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9F);
@@ -99,8 +99,8 @@
             dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            previewTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
-            previewTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.previewTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.previewTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.ImageCellTemplate});
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
@@ -110,9 +110,9 @@
             dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            previewTable.DefaultCellStyle = dataGridViewCellStyle7;
-            previewTable.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
-            previewTable.Name = "previewTable";
+            this.previewTable.DefaultCellStyle = dataGridViewCellStyle7;
+            this.previewTable.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
+            this.previewTable.Name = "previewTable";
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
             dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 9F);
@@ -120,16 +120,16 @@
             dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            previewTable.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
-            previewTable.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            previewTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            previewTable.Tag = "#CompareTracks&CompareTracks@pinned-to-parent-x@pinned-to-parent-y";
-            this.toolTip1.SetToolTip(previewTable, resources.GetString("previewTable.ToolTip"));
-            previewTable.RowHeadersWidthChanged += new System.EventHandler(this.previewTable_RowHeadersWidthChanged);
-            previewTable.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.previewTable_ColumnHeaderMouseClick);
-            previewTable.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.previewTable_ColumnWidthChanged);
-            previewTable.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.previewTable_DataError);
-            previewTable.SelectionChanged += new System.EventHandler(this.previewTable_SelectionChanged);
+            this.previewTable.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            this.previewTable.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.previewTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.previewTable.Tag = "#CompareTracks&CompareTracks@pinned-to-parent-x@pinned-to-parent-y";
+            this.toolTip1.SetToolTip(this.previewTable, resources.GetString("previewTable.ToolTip"));
+            this.previewTable.RowHeadersWidthChanged += new System.EventHandler(this.previewTable_RowHeadersWidthChanged);
+            this.previewTable.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.previewTable_ColumnHeaderMouseClick);
+            this.previewTable.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.previewTable_ColumnWidthChanged);
+            this.previewTable.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.previewTable_DataError);
+            this.previewTable.SelectionChanged += new System.EventHandler(this.previewTable_SelectionChanged);
             // 
             // Column1
             // 
@@ -165,13 +165,13 @@
             resources.ApplyResources(this.dataGridViewTextBoxColumn3, "dataGridViewTextBoxColumn3");
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             // 
-            // selectTagsButton
+            // buttonSelectTags
             // 
-            resources.ApplyResources(this.selectTagsButton, "selectTagsButton");
-            this.selectTagsButton.Name = "selectTagsButton";
-            this.selectTagsButton.Tag = "#rememberColumnAsDefaultWidthCheckBox@non-defaultable";
-            this.toolTip1.SetToolTip(this.selectTagsButton, resources.GetString("selectTagsButton.ToolTip"));
-            this.selectTagsButton.Click += new System.EventHandler(this.selectTagsButton_Click);
+            resources.ApplyResources(this.buttonSelectTags, "buttonSelectTags");
+            this.buttonSelectTags.Name = "buttonSelectTags";
+            this.buttonSelectTags.Tag = "#rememberColumnAsDefaultWidthCheckBox@non-defaultable";
+            this.toolTip1.SetToolTip(this.buttonSelectTags, resources.GetString("buttonSelectTags.ToolTip"));
+            this.buttonSelectTags.Click += new System.EventHandler(this.buttonSelectTags_Click);
             // 
             // toolTip1
             // 
@@ -235,7 +235,7 @@
             this.toolsPanel.Controls.Add(this.buttonCopy);
             this.toolsPanel.Controls.Add(this.rememberColumnAsDefaultWidthCheckBoxLabel);
             this.toolsPanel.Controls.Add(this.rememberColumnAsDefaultWidthCheckBox);
-            this.toolsPanel.Controls.Add(this.selectTagsButton);
+            this.toolsPanel.Controls.Add(this.buttonSelectTags);
             this.toolsPanel.Controls.Add(this.autoSelectTagsCheckBox);
             this.toolsPanel.Controls.Add(this.placeholderLabel);
             this.toolsPanel.Name = "toolsPanel";
@@ -253,7 +253,7 @@
             this.AcceptButton = this.buttonOK;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(previewTable);
+            this.Controls.Add(this.previewTable);
             this.Controls.Add(this.toolsPanel);
             this.DoubleBuffered = true;
             this.Name = "CompareTracks";
@@ -261,7 +261,7 @@
             this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.Load += new System.EventHandler(this.CompareTracks_Load);
             this.Shown += new System.EventHandler(this.CompareTracks_Shown);
-            ((System.ComponentModel.ISupportInitialize)(previewTable)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.previewTable)).EndInit();
             this.toolsPanel.ResumeLayout(false);
             this.toolsPanel.PerformLayout();
             this.ResumeLayout(false);
@@ -275,7 +275,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.Button selectTagsButton;
+        private System.Windows.Forms.Button buttonSelectTags;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.CheckBox rememberColumnAsDefaultWidthCheckBox;
         private System.Windows.Forms.CheckBox autoSelectTagsCheckBox;

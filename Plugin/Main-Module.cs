@@ -340,7 +340,7 @@ namespace MusicBeePlugin
         internal static SortedDictionary<Guid, SortedDictionary<int, SortedDictionary<string, bool>[]>> PresetChangingActualGroupingTagsRaw
             = new SortedDictionary<Guid, SortedDictionary<int, SortedDictionary<string, bool>[]>>();
 
-        internal static string[] LrTrackCacheNeededToBeUpdatedWorkingCopy; //URL[]
+        internal static string[] LrTrackCacheNeededToBeUpdatedWorkingCopy = new string[0]; //URL[]
         internal static SortedDictionary<Guid, SortedDictionary<string, bool>[]> ChangingGroupingTagsRawWorkingCopy  //Dictionaries of tags values,
             = new SortedDictionary<Guid, SortedDictionary<string, bool>[]>();                                        //arrays of groupings per preset
         internal static SortedDictionary<Guid, SortedDictionary<string, bool>[]> ChangingActualGroupingTagsWorkingCopy
@@ -534,8 +534,7 @@ namespace MusicBeePlugin
 
             public int changeCaseFlag;
 
-            public bool useExceptionWords;
-            public bool useOnlyWords;
+            public bool? useExceptionWords; //false: don't use; true: don't change case of excepted words; null: change case only of excepted words
             public object[] exceptedWords;
             public string exceptionWordsAsr;
 
@@ -767,6 +766,7 @@ namespace MusicBeePlugin
         internal static string AsrSbText;
         internal static string CarSbText;
         internal static string MsrSbText;
+        internal static string TagHistorySbText;
 
         internal static string AnotherLrPresetIsRunningSbText;
         internal static string CtlAnotherLrPresetIsRunning;
@@ -1076,7 +1076,7 @@ namespace MusicBeePlugin
             }
         }
 
-        internal static bool? GetBoolFromCheckState(CheckState state)
+        internal static bool? GetNullableBoolFromCheckState(CheckState state)
         {
             switch (state)
             {
@@ -3389,25 +3389,13 @@ namespace MusicBeePlugin
         {
             if (MbApiInterface.Library_QueryFilesEx("domain=SelectedFiles", out var files))
             {
-                //if (files.Length > 1)
-                //{
-                //   MessageBox.Show(MusicBeePlugin.MbForm, msgSelectOneTrackOnly);
-                //   return;
-                //}
-
-                if (files.Length == 0)
-                {
-                    MessageBox.Show(MbForm, MsgSelectTracks, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    return;
-                }
-
                 var trackIds = new int[files.Length];
                 for (var i = 0; i < files.Length; i++)
                     trackIds[i] = GetPersistentTrackIdInt(files[i], true);
 
 
                 var tagToolsForm = new TagHistory(this, files, trackIds);
-                PluginWindowTemplate.Display(tagToolsForm, true);
+                PluginWindowTemplate.Display(tagToolsForm);
             }
         }
 
@@ -3529,6 +3517,7 @@ namespace MusicBeePlugin
             AsrSbText = "Advanced searching and replacing";
             CarSbText = "Calculating average album rating";
             MsrSbText = "Multiple searching and replacing";
+            TagHistorySbText = "Tag history";
 
             AnotherLrPresetIsRunningSbText = "Another library reports preset is running. Can't proceed!";
             CtlAnotherLrPresetIsRunning = "Another library reports preset is running. Please wait until it is completed...";
@@ -4284,6 +4273,7 @@ namespace MusicBeePlugin
                 AsrSbText = "Дополнительный поиск и замена";
                 CarSbText = "Расчет среднего рейтинга альбомов";
                 MsrSbText = "Множественный поиск и замена";
+                TagHistorySbText = "История тегов";
 
                 AnotherLrPresetIsRunningSbText = "Другой отчет ОБ уже запущен. Невозможно применить отчет!";
                 CtlAnotherLrPresetIsRunning = "Другой отчет ОБ уже запущен. Подождите завершения его работы...";

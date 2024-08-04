@@ -118,8 +118,14 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
+    <value>968, 7</value>
+  </data>
   <data name="buttonOK.Text" xml:space="preserve">
     <value>Применить</value>
+  </data>
+  <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1100, 7</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Закрыть</value>
@@ -127,20 +133,43 @@
   <data name="Library.HeaderText" xml:space="preserve">
     <value>Библиотека</value>
   </data>
+  <data name="dataGridViewCellStyle4.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        Qk32AgAAAAAAADYAAAAoAAAADgAAABAAAAABABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEgoTGw8bGw8bGw8bGw8bGw8bGw8bG
+        w8bGw8bGw8bGw8bGw8bGw8YAAAAAAISChP///////////////////////////////////////////8bD
+        xgAAAAAAhIKE////////////////////////////////////////////xsPGAAAAAACEgoT/////////
+        ///////////////////////////////////Gw8YAAAAAAISChP//////////////////////////////
+        /////////////8bDxgAAAAAAhIKE////////////AAD/AAD/////////AAD/AAD/////////xsPGAAAA
+        AACEgoT///////////////8AAP8AAP8AAP8AAP/////////////Gw8YAAAAAAISChP//////////////
+        /////wAA/wAA/////////////////8bDxgAAAAAAhIKE////////////////AAD/AAD/AAD/AAD/////
+        ////////xsPGAAAAAACEgoT///////////8AAP8AAP////////8AAP8AAP/////////Gw8YAAAAAAISC
+        hP///////////////////////////////////////////8bDxgAAAAAAhIKE////////////////////
+        ////////////////////////xsPGAAAAAACEgoT/////////////////////////////////////////
+        ///Gw8YAAAAAAISChP///////////////////////////////////////////8bDxgAAAAAAhIKEhIKE
+        hIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEAAA=
+</value>
+  </data>
+  <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1219, 214</value>
+  </data>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>136, 15</value>
+  </data>
   <data name="label3.Text" xml:space="preserve">
     <value>Искать архивы в папке:</value>
   </data>
   <data name="searchFolderTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>573, 23</value>
+    <value>538, 23</value>
   </data>
   <data name="browseButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>584, 33</value>
+    <value>549, 33</value>
   </data>
   <data name="browseButton.Text" xml:space="preserve">
     <value>Открыть...</value>
   </data>
   <data name="forLastLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>681, 37</value>
+    <value>646, 37</value>
   </data>
   <data name="forLastLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>101, 15</value>
@@ -149,10 +178,10 @@
     <value>среди последних</value>
   </data>
   <data name="numberOfBackupsNumericUpDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>790, 33</value>
+    <value>755, 33</value>
   </data>
   <data name="backupsLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>890, 37</value>
+    <value>855, 37</value>
   </data>
   <data name="backupsLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>52, 15</value>
@@ -161,7 +190,7 @@
     <value>архивов</value>
   </data>
   <data name="rereadButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>953, 33</value>
+    <value>918, 33</value>
   </data>
   <data name="rereadButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>140, 23</value>
@@ -169,25 +198,25 @@
   <data name="rereadButton.Text" xml:space="preserve">
     <value>Повторить поиск</value>
   </data>
-  <data name="restoreSelectedButton.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="buttonRestoreSelected.Size" type="System.Drawing.Size, System.Drawing">
     <value>140, 23</value>
   </data>
-  <data name="restoreSelectedButton.Text" xml:space="preserve">
+  <data name="buttonRestoreSelected.Text" xml:space="preserve">
     <value>Восстановить</value>
   </data>
-  <data name="restoreSelectedButton.ToolTip" xml:space="preserve">
+  <data name="buttonRestoreSelected.ToolTip" xml:space="preserve">
     <value>Скопировать выделенные ячейки архивов в колонку библиотеки</value>
   </data>
-  <data name="selectTagsButton.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="buttonSelectTags.Location" type="System.Drawing.Point, System.Drawing">
     <value>326, 7</value>
   </data>
-  <data name="selectTagsButton.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="buttonSelectTags.Size" type="System.Drawing.Size, System.Drawing">
     <value>140, 23</value>
   </data>
-  <data name="selectTagsButton.Text" xml:space="preserve">
+  <data name="buttonSelectTags.Text" xml:space="preserve">
     <value>Выбрать теги...</value>
   </data>
-  <data name="selectTagsButton.ToolTip" xml:space="preserve">
+  <data name="buttonSelectTags.ToolTip" xml:space="preserve">
     <value>Выбрать отображаемые теги</value>
   </data>
   <data name="rememberColumnAsDefaultWidthCheckBox.Location" type="System.Drawing.Point, System.Drawing">
@@ -196,16 +225,16 @@
   <data name="rememberColumnAsDefaultWidthCheckBox.ToolTip" xml:space="preserve">
     <value>Включите этот флажок и измените ширину любой колонки, чтобы установить эту новую ширину в качестве новой ширины по умолчанию</value>
   </data>
-  <data name="undoButton.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="buttonUndo.Location" type="System.Drawing.Point, System.Drawing">
     <value>156, 7</value>
   </data>
-  <data name="undoButton.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="buttonUndo.Size" type="System.Drawing.Size, System.Drawing">
     <value>140, 23</value>
   </data>
-  <data name="undoButton.Text" xml:space="preserve">
+  <data name="buttonUndo.Text" xml:space="preserve">
     <value>Отменить все</value>
   </data>
-  <data name="undoButton.ToolTip" xml:space="preserve">
+  <data name="buttonUndo.ToolTip" xml:space="preserve">
     <value>Восстановить колонку библиотеки</value>
   </data>
   <data name="autoSelectTagsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
@@ -236,22 +265,22 @@
     <value>(Выбранные треки)</value>
   </data>
   <data name="trackListComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1089, 23</value>
+    <value>1054, 23</value>
   </data>
   <data name="optionsPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1126, 60</value>
-  </data>
-  <data name="placeholderLabel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>882, 11</value>
+    <value>1091, 60</value>
   </data>
   <data name="controlsPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1264, 37</value>
+    <value>1229, 37</value>
+  </data>
+  <data name="placeholderLabel3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>858, 11</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1264, 311</value>
+    <value>1231, 313</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>1280, 350</value>
+    <value>1245, 350</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>История тегов</value>

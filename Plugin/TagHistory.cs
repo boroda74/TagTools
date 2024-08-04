@@ -64,6 +64,10 @@ namespace MusicBeePlugin
 
         private bool ignoreAutoSelectTagsCheckBoxCheckedEvent;
 
+        private bool? generatePreview = false; //false: stop generating preview; true: preview is generated; null: generating preview is stopped, ready to regenerate it
+        private bool closeFormOnStoppingPreview = false;
+        private int savedTagsTrackIndex = -1;
+
         internal TagHistory(Plugin plugin, string[] trackUrls, int[] trackIds) : base(plugin)
         {
             InitializeComponent();
@@ -79,13 +83,6 @@ namespace MusicBeePlugin
             searchFolderTextBoxCustom = namesComboBoxes["searchFolderTextBox"];
             trackListComboBoxCustom = namesComboBoxes["trackListComboBox"];
 
-
-            if (trackUrls.Length == 0)
-            {
-                MessageBox.Show(MbForm, MsgNoTracksSelected, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                Close();
-                return;
-            }
 
             tagNames = new List<string>();
             FillListByTagNames(tagNames, false, true, false, false, false, false);
@@ -117,6 +114,7 @@ namespace MusicBeePlugin
             if (SavedSettings.lastSelectedFolders == null)
             {
                 SavedSettings.lastSelectedFolders = new object[10];
+
                 SavedSettings.lastSelectedFolders[0] = BrGetAutoBackupDirectory(SavedSettings.autoBackupDirectory);
                 SavedSettings.lastSelectedFolders[1] = string.Empty;
                 SavedSettings.lastSelectedFolders[2] = string.Empty;
@@ -203,6 +201,10 @@ namespace MusicBeePlugin
                 if (reallyDisplayedTags.Count > 1)
                     previewTable.RowCount = reallyDisplayedTags.Count;
 
+
+                updateCustomScrollBars(previewTable);
+
+
                 artworkRow = -1;
 
                 for (var j = 0; j < reallyDisplayedTags.Count; j++)
@@ -232,8 +234,6 @@ namespace MusicBeePlugin
                 for (var i = 1; i < trackUrls.Length + 1; i++)
                     fillTagNamesInTableInternal(i, reuseTagValues);
             }
-
-            updateCustomScrollBars(previewTable);
         }
 
         private void fillTagNamesInTableInternal(int trackIndex, bool reuseTagValues)
@@ -319,12 +319,26 @@ namespace MusicBeePlugin
             {
                 fillTagNamesInTable(trackIndex, reuseTagValues);
 
+                generatePreview = true;
+                buttonOK.Enable(true);
+                buttonCancel.Enable(true);
+
+                buttonRestoreSelected.Enable(false);
+                buttonUndo.Enable(false);
+
+                this.Enable(true, null);
+
+
                 if (!reuseTagValues)
+                {
                     previewTable.ColumnCount = 1;
+                    updateCustomScrollBars(previewTable);
+                }
 
                 if (reallyDisplayedTags.Count == 0)
                 {
                     previewTable.RowCount = 1;
+                    updateCustomScrollBars(previewTable);
 
                     previewTable.Rows[0].HeaderCell.Style = headerCellStyle;
                     previewTable.Rows[0].HeaderCell.Value = CtlNoDifferences;
@@ -337,9 +351,6 @@ namespace MusicBeePlugin
                     {
                         previewTable.Rows[0].Cells[0].Value = new Bitmap(1, 1);
                     }
-
-                    restoreSelectedButton.Enable(false);
-                    undoButton.Enable(false);
                 }
                 else
                 {
@@ -347,13 +358,50 @@ namespace MusicBeePlugin
                     {
                         if (trackIndex > 0)
                         {
+                            SetStatusBarTextForFileOperations(TagHistorySbText, true, 0, 1);
+
                             fillTableInternalReuseCache(backupIndex, trackIndex);
                             fillTableInternalReuseCacheFinal(backupIndex);
+
+                            updateCustomScrollBars(previewTable);
+                            SetResultingSbText();
                         }
                         else
                         {
                             for (var i = 1; i < trackUrls.Length + 1; i++)
+                            {
+                                if (generatePreview != true)
+                                {
+                                    currentTags = new string[trackUrls.Length + 1, reallyDisplayedTags.Count];
+                                    cachedBackups = null;
+                                    tagValues = null;
+                                    tagHashes = null;
+
+
+                                    var columnTemplateCopy = columnTemplate.Clone() as DataGridViewColumn;
+                                    columnTemplateCopy.Width = defaultColumnWidth;
+
+                                    previewTable.Columns.Insert(0, columnTemplateCopy);
+                                    previewTable.ColumnCount = 1;
+
+                                    generatePreview = null;
+                                    buttonOK.Enable(true);
+
+                                    buttonRestoreSelected.Enable(true);
+                                    buttonUndo.Enable(true);
+
+                                    if (closeFormOnStoppingPreview)
+                                        Close();
+
+                                    return;
+                                }
+
+
                                 fillTableInternalReuseCache(backupIndex, i);
+
+                                updateCustomScrollBars(previewTable);
+                                SetStatusBarTextForFileOperations(TagHistorySbText, true, i, trackUrls.Length);
+                            }
 
                             fillTableInternalReuseCacheFinal(backupIndex);
                         }
@@ -361,14 +409,37 @@ namespace MusicBeePlugin
 
                     previewTableFormat();
 
-                    restoreSelectedButton.Enable(true);
-                    undoButton.Enable(true);
+                    generatePreview = false;
+
+                    if (reallyDisplayedTags.Count == 0)
+                    {
+                        buttonOK.Enable(false);
+                        buttonOK.Text = PreviewButtonName;
+                    }
+                    else
+                    {
+                        buttonOK.Text = OKButtonName;
+
+                        buttonRestoreSelected.Enable(true);
+                        buttonUndo.Enable(true);
+                    }
+
+                    updateCustomScrollBars(previewTable);
+                    SetResultingSbText();
                 }
             }
             else
             {
+                buttonRestoreSelected.Enable(false);
+                buttonUndo.Enable(false);
+
+                this.Enable(false, null);
+
+                buttonCancel.Enable(false);
+                buttonOK.Enable(false);
+                buttonOK.Text = StopButtonName;
+
                 fillTableFillCache(folder, includeSubfolders, maxBackupCount, trackIndex);
-                Enabled = true;
             }
         }
 
@@ -457,6 +528,7 @@ namespace MusicBeePlugin
                 newColumn.Width = defaultColumnWidth;
 
                 previewTable.Columns.Add(newColumn);
+                updateCustomScrollBars(previewTable);
             }
         }
 
@@ -464,7 +536,25 @@ namespace MusicBeePlugin
         {
             if (!System.IO.Directory.Exists(folder))
             {
+                generatePreview = false;
+
+                if (reallyDisplayedTags.Count == 0)
+                {
+                    buttonOK.Enable(false);
+                    buttonOK.Text = PreviewButtonName;
+                }
+                else
+                {
+                    buttonOK.Text = OKButtonName;
+
+                    buttonRestoreSelected.Enable(false);
+                    buttonUndo.Enable(false);
+                }
+
+                this.Enable(true, null);
+
                 MessageBox.Show(this, MsgBrFolderDoesntExists, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
                 return;
             }
 
@@ -488,7 +578,26 @@ namespace MusicBeePlugin
             {
                 var backupCache = BackupCache.Load(BrGetBackupFilenameWithoutExtension(backupCacheFile));
                 if (backupCache == null)
+                {
+                    generatePreview = false;
+
+                    if (reallyDisplayedTags.Count == 0)
+                    {
+                        buttonOK.Enable(false);
+                        buttonOK.Text = PreviewButtonName;
+                    }
+                    else
+                    {
+                        buttonOK.Text = OKButtonName;
+
+                        buttonRestoreSelected.Enable(false);
+                        buttonUndo.Enable(false);
+                    }
+
+                    this.Enable(true, null);
+
                     return;
+                }
 
                 if (backupGuids.ContainsKey(backupCache.guid))
                 {
@@ -536,6 +645,7 @@ namespace MusicBeePlugin
 
 
             getReallyDisplayedTags(trackIndex, false);
+
             fillTable(folder, includeSubfolders, maxBackupCount, trackIndex, true, false);
 
             if (!SavedSettings.dontPlayCompletedSound)
@@ -681,7 +791,7 @@ namespace MusicBeePlugin
             SavedSettings.displayedTags = displayedTags;
             SavedSettings.rowHeadersWidth = rowHeadersWidth;
             SavedSettings.defaultColumnWidth = defaultColumnWidth;
-            //SavedSettings.DontAutoSelectDisplayedTags = !autoSelectTagsCheckBox.Checked;
+            SavedSettings.dontAutoSelectDisplayedTags = !autoSelectTagsCheckBox.Checked;
 
             searchFolderTextBoxCustom.Items.CopyTo(SavedSettings.lastSelectedFolders, 0);
 
@@ -696,25 +806,64 @@ namespace MusicBeePlugin
             CommitTagsToFile(trackUrls[trackIndex - 1]);
         }
 
-        private void buttonOK_Click(object sender, EventArgs e)
+        private void applyChanges()
         {
-            if (trackListComboBoxCustom.SelectedIndex > 0)
+            if (savedTagsTrackIndex > 0)
             {
-                saveTags(trackListComboBoxCustom.SelectedIndex);
+                SetStatusBarTextForFileOperations(TagHistorySbText, false, 0, 1, trackUrls[savedTagsTrackIndex - 1]);
+                saveTags(savedTagsTrackIndex);
             }
             else
             {
-                for (var i = 1; i < trackUrls.Length + 1; i++)
-                    saveTags(i);
+                for (var i = 0; i < trackUrls.Length; i++)
+                {
+                    if (backgroundTaskIsCanceled)
+                        return;
+
+                    SetStatusBarTextForFileOperations(TagHistorySbText, false, i, trackUrls.Length, trackUrls[i]);
+                    saveTags(i + 1);
+                }
             }
 
-            MbApiInterface.MB_RefreshPanels();
+            RefreshPanels(true);
+            SetResultingSbText();
+        }
+
+        private void buttonOK_Click(object sender, EventArgs e)
+        {
+            if (generatePreview == true) //Clicking "Stop" button
+            {
+                buttonCancel.Enable(false);
+                buttonOK.Enable(false);
+                buttonOK.Text = PreviewButtonName;
+
+                generatePreview = null;
+                return;
+            }
+            else if (generatePreview == null) //Clicking "Preview" button
+            {
+                fillTable(searchFolderTextBoxCustom.Text, false, (int)numberOfBackupsNumericUpDown.Value, trackListComboBoxCustom.SelectedIndex, false, false);
+                return;
+            }
+
+
+            savedTagsTrackIndex = trackListComboBoxCustom.SelectedIndex;
+            switchOperation(applyChanges, (Button)sender, buttonOK, null, buttonCancel, true, null, true);
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             saveSettings();
-            Close();
+
+            if (generatePreview == true)
+            {
+                closeFormOnStoppingPreview = true;
+                generatePreview = null;
+            }
+            else
+            {
+                Close();
+            }
         }
 
         private void browseButton_Click(object sender, EventArgs e)
@@ -819,7 +968,7 @@ namespace MusicBeePlugin
             }
         }
 
-        private void selectTagsButton_Click(object sender, EventArgs e)
+        private void buttonSelectTags_Click(object sender, EventArgs e)
         {
             displayedTags = CopyTagsToClipboard.SelectTags(TagToolsPlugin, SelectDisplayedTagsWindowTitle, SelectButtonName, displayedTags, SavedSettings.backupArtworks, false);
             fillTable(searchFolderTextBoxCustom.Text, false, (int)numberOfBackupsNumericUpDown.Value, trackListComboBoxCustom.SelectedIndex, false, false);
@@ -832,26 +981,29 @@ namespace MusicBeePlugin
                 return;
 
 
-            tagValues[1, e.RowIndex].Clear();
-            tagValues[1, e.RowIndex].AddSkip(newValue);
-
-            if (trackListComboBoxCustom.SelectedIndex > 0)
+            if (tagValues.GetLength(1) > 0)
             {
-                currentTags[trackListComboBoxCustom.SelectedIndex, e.RowIndex] = newValue;
-            }
-            else
-            {
-                for (var i = 0; i < currentTags.GetLength(0); i++)
-                    currentTags[i, e.RowIndex] = newValue;
-            }
+                tagValues[1, e.RowIndex].Clear();
+                tagValues[1, e.RowIndex].AddSkip(newValue);
 
-            calculateHashes(1, e.RowIndex);
-            previewTableCellFormatting(trackListComboBoxCustom.SelectedIndex, 0, e.RowIndex);
+                if (trackListComboBoxCustom.SelectedIndex > 0)
+                {
+                    currentTags[trackListComboBoxCustom.SelectedIndex, e.RowIndex] = newValue;
+                }
+                else
+                {
+                    for (var i = 0; i < currentTags.GetLength(0); i++)
+                        currentTags[i, e.RowIndex] = newValue;
+                }
+
+                calculateHashes(1, e.RowIndex);
+                previewTableCellFormatting(trackListComboBoxCustom.SelectedIndex, 0, e.RowIndex);
+            }
         }
 
         private void previewTable_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            //Nothing at the moment
+            //Nothing at the moment...
         }
 
         private void previewTableFormat()
@@ -1066,7 +1218,8 @@ namespace MusicBeePlugin
 
         private void TagHistoryPlugin_Shown(object sender, EventArgs e)
         {
-            Enabled = false;
+            previewTable.ColumnCount = 1;
+            Refresh();
             fillTable(searchFolderTextBoxCustom.Text, false, (int)numberOfBackupsNumericUpDown.Value, 0, false, false);
         }
 
@@ -1081,7 +1234,7 @@ namespace MusicBeePlugin
 
             if (autoSelectTagsCheckBox.Checked)
             {
-                selectTagsButton.Enable(false);
+                buttonSelectTags.Enable(false);
 
                 var offset = 0;
                 displayedTags = new int[tagIds.Count - 1]; //-V3171
@@ -1093,7 +1246,7 @@ namespace MusicBeePlugin
             }
             else
             {
-                selectTagsButton.Enable(true);
+                buttonSelectTags.Enable(true);
 
                 displayedTags = SavedSettings.displayedTags;
             }

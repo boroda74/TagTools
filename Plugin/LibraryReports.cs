@@ -4079,7 +4079,7 @@ namespace MusicBeePlugin
 
             lock (LrTrackCacheNeededToBeUpdated)
             {
-                if (LrTrackCacheNeededToBeUpdatedWorkingCopy != null)
+                if (LrTrackCacheNeededToBeUpdatedWorkingCopy.Length != 0)
                 {
                     skipFunctionsUpdate = false;
                 }
@@ -4242,7 +4242,7 @@ namespace MusicBeePlugin
 
                 BackgroundTaskIsInProgress = false;
 
-                LrTrackCacheNeededToBeUpdatedWorkingCopy = null;
+                LrTrackCacheNeededToBeUpdatedWorkingCopy = new string[0];
                 PresetsProcessedByFunctionCacheUpdate.Clear();
 
                 RefreshPanels();

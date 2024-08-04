@@ -53,6 +53,9 @@ namespace MusicBeePlugin
         private bool? alwaysCapitalizeLastWord;
         private bool ignoreSingleLetterExceptedWords;
 
+        private string changeOnlyWordsText;
+        private string exceptForWordsText;
+
         internal ChangeCase(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
@@ -86,13 +89,18 @@ namespace MusicBeePlugin
 
             buttonSettings.Image = ReplaceBitmap(buttonSettings.Image, Gear);
 
+
+            changeOnlyWordsText = toolTip1.GetToolTip(exceptionWordsCheckBoxLabel);
+            exceptForWordsText = exceptionWordsCheckBoxLabel.Text;
+            toolTip1.SetToolTip(exceptionWordsCheckBoxLabel, toolTip1.GetToolTip(exceptionWordsCheckBox));
+
+
             FillListByTagNames(sourceTagListCustom.Items);
             sourceTagListCustom.Text = SavedSettings.changeCaseSourceTagName;
 
             setChangeCaseOptionsRadioButtons(SavedSettings.changeCaseFlag);
 
-            exceptionWordsCheckBox.Checked = SavedSettings.useExceptionWords;
-            onlyWordsCheckBox.Checked = SavedSettings.useOnlyWords;
+            exceptionWordsCheckBox.CheckState = GetCheckState(SavedSettings.useExceptionWords);
             exceptionWordsBoxCustom.AddRange(SavedSettings.exceptedWords);
             exceptionWordsBoxCustom.Text = SavedSettings.exceptedWords[0] as string;
 
@@ -115,7 +123,7 @@ namespace MusicBeePlugin
 
             ignoreSingleLetterExceptedWordsCheckBox.Checked = SavedSettings.ignoreSingleLetterExceptedWords;
 
-            exceptWordsCheckBox_CheckedChanged(null, null);
+            exceptWordsCheckBox_CheckStateChanged(null, null);
             exceptCharsCheckBox_CheckedChanged(null, null);
             exceptionCharPairsCheckBox_CheckedChanged(null, null);
             sentenceSeparatorsCheckBox_CheckedChanged(null, null);
@@ -362,7 +370,7 @@ namespace MusicBeePlugin
             var isTheFirstWord = true;
 
             if (encounteredLeftExceptionChars == null)
-                encounteredLeftExceptionChars = new List<char>();//*********
+                encounteredLeftExceptionChars = new List<char>();
 
             if (exceptedWords == null)
                 exceptedWords = Array.Empty<string>();
@@ -654,20 +662,17 @@ namespace MusicBeePlugin
 
             changeCaseFlag = getChangeCaseOptionsRadioButtons();
 
-            useWhiteList = onlyWordsCheckBox.Checked;
+            useWhiteList = exceptionWordsCheckBox.CheckState == CheckState.Indeterminate;
             exceptedWords = null;
             exceptionChars = null;
             openingExceptionChars = null;
             closingExceptionChars = null;
             sentenceSeparators = null;
-            alwaysCapitalize1stWord = GetBoolFromCheckState(alwaysCapitalize1stWordCheckBox.CheckState);
-            alwaysCapitalizeLastWord = GetBoolFromCheckState(alwaysCapitalizeLastWordCheckBox.CheckState);
+            alwaysCapitalize1stWord = GetNullableBoolFromCheckState(alwaysCapitalize1stWordCheckBox.CheckState);
+            alwaysCapitalizeLastWord = GetNullableBoolFromCheckState(alwaysCapitalizeLastWordCheckBox.CheckState);
             ignoreSingleLetterExceptedWords = ignoreSingleLetterExceptedWordsCheckBox.Checked;
 
-            if (exceptionWordsCheckBox.IsEnabled() && exceptionWordsCheckBox.Checked)
-                exceptedWords = exceptionWordsBoxCustom.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-
-            if (onlyWordsCheckBox.IsEnabled() && onlyWordsCheckBox.Checked)
+            if (exceptionWordsCheckBox.IsEnabled() && exceptionWordsCheckBox.CheckState != CheckState.Unchecked)
                 exceptedWords = exceptionWordsBoxCustom.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
             if (exceptionCharsCheckBox.IsEnabled() && exceptionCharsCheckBox.Checked)
@@ -797,16 +802,14 @@ namespace MusicBeePlugin
 
             changeCaseFlag = getChangeCaseOptionsRadioButtons();
 
-            useWhiteList = onlyWordsCheckBox.Checked;
+            useWhiteList = exceptionWordsCheckBox.CheckState == CheckState.Indeterminate;
             exceptedWords = null;
             exceptionChars = null;
             openingExceptionChars = null;
             closingExceptionChars = null;
             sentenceSeparators = null;
 
-            if (exceptionWordsCheckBox.IsEnabled() && exceptionWordsCheckBox.Checked)
-                exceptedWords = exceptionWordsBoxCustom.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            else if (exceptionWordsCheckBox.IsEnabled() && onlyWordsCheckBox.Checked)
+            if (exceptionWordsCheckBox.IsEnabled() && exceptionWordsCheckBox.CheckState != CheckState.Unchecked)
                 exceptedWords = exceptionWordsBoxCustom.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
             if (exceptionCharsCheckBox.IsEnabled() && exceptionCharsCheckBox.Checked)
@@ -875,8 +878,7 @@ namespace MusicBeePlugin
             SavedSettings.changeCaseSourceTagName = sourceTagListCustom.Text;
             SavedSettings.changeCaseFlag = getChangeCaseOptionsRadioButtons();
 
-            SavedSettings.useExceptionWords = exceptionWordsCheckBox.Checked;
-            SavedSettings.useOnlyWords = onlyWordsCheckBox.Checked;
+            SavedSettings.useExceptionWords = GetNullableBoolFromCheckState(exceptionWordsCheckBox.CheckState);
             exceptionWordsBoxCustom.Items.CopyTo(SavedSettings.exceptedWords, 0);
 
             SavedSettings.useExceptionChars = exceptionCharsCheckBox.Checked;
@@ -889,8 +891,8 @@ namespace MusicBeePlugin
             SavedSettings.useSentenceSeparators = sentenceSeparatorsCheckBox.Checked;
             sentenceSeparatorsBoxCustom.Items.CopyTo(SavedSettings.sentenceSeparators, 0);
 
-            SavedSettings.alwaysCapitalize1stWord = GetBoolFromCheckState(alwaysCapitalize1stWordCheckBox.CheckState);
-            SavedSettings.alwaysCapitalizeLastWord = GetBoolFromCheckState(alwaysCapitalizeLastWordCheckBox.CheckState);
+            SavedSettings.alwaysCapitalize1stWord = GetNullableBoolFromCheckState(alwaysCapitalize1stWordCheckBox.CheckState);
+            SavedSettings.alwaysCapitalizeLastWord = GetNullableBoolFromCheckState(alwaysCapitalizeLastWordCheckBox.CheckState);
 
             SavedSettings.ignoreSingleLetterExceptedWords = ignoreSingleLetterExceptedWordsCheckBox.Checked;
 
@@ -915,7 +917,6 @@ namespace MusicBeePlugin
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
-            exceptionWordsBoxCustom.Items.CopyTo(SavedSettings.exceptedWords, 0);
             Close();
         }
 
@@ -924,13 +925,15 @@ namespace MusicBeePlugin
             reapplyRules();
         }
 
-        private void exceptWordsCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void exceptWordsCheckBox_CheckStateChanged(object sender, EventArgs e)
         {
-            exceptionWordsBoxCustom.Enable(exceptionWordsCheckBox.Checked || onlyWordsCheckBox.Checked);
-            removeExceptionButton.Enable(exceptionWordsCheckBox.Checked || onlyWordsCheckBox.Checked);
+            exceptionWordsBoxCustom.Enable(exceptionWordsCheckBox.IsEnabled() && exceptionWordsCheckBox.CheckState != CheckState.Unchecked);
+            removeExceptionButton.Enable(exceptionWordsCheckBox.IsEnabled() && exceptionWordsCheckBox.CheckState != CheckState.Unchecked);
 
-            if (exceptionWordsCheckBox.Checked)
-                onlyWordsCheckBox.Checked = false;
+            if (exceptionWordsCheckBox.CheckState == CheckState.Indeterminate)
+                exceptionWordsCheckBoxLabel.Text = changeOnlyWordsText;
+            else
+                exceptionWordsCheckBoxLabel.Text = exceptForWordsText;
         }
 
         private void exceptionWordsCheckBoxLabel_Click(object sender, EventArgs e)
@@ -938,24 +941,7 @@ namespace MusicBeePlugin
             if (!exceptionWordsCheckBox.IsEnabled())
                 return;
 
-            exceptionWordsCheckBox.Checked = !exceptionWordsCheckBox.Checked;
-        }
-
-        private void onlyWordsCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            exceptionWordsBoxCustom.Enable(exceptionWordsCheckBox.Checked || onlyWordsCheckBox.Checked);
-            removeExceptionButton.Enable(exceptionWordsCheckBox.Checked || onlyWordsCheckBox.Checked);
-
-            if (onlyWordsCheckBox.Checked)
-                exceptionWordsCheckBox.Checked = false;
-        }
-
-        private void onlyWordsCheckBoxLabel_Click(object sender, EventArgs e)
-        {
-            if (!onlyWordsCheckBox.IsEnabled())
-                return;
-
-            onlyWordsCheckBox.Checked = !onlyWordsCheckBox.Checked;
+            exceptionWordsCheckBox.CheckState = GetNextCheckState(exceptionWordsCheckBox.CheckState);
         }
 
         private void exceptCharsCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -1086,16 +1072,14 @@ namespace MusicBeePlugin
                 {
                     changeCaseFlag = getChangeCaseOptionsRadioButtons();
 
-                    useWhiteList = onlyWordsCheckBox.Checked;
+                    useWhiteList = exceptionWordsCheckBox.CheckState == CheckState.Indeterminate;
                     exceptedWords = null;
                     exceptionChars = null;
                     openingExceptionChars = null;
                     closingExceptionChars = null;
                     sentenceSeparators = null;
 
-                    if (exceptionWordsCheckBox.IsEnabled() && exceptionWordsCheckBox.Checked)
-                        exceptedWords = exceptionWordsBoxCustom.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                    else if (onlyWordsCheckBox.IsEnabled() && onlyWordsCheckBox.Checked)
+                    if (exceptionWordsCheckBox.IsEnabled() && exceptionWordsCheckBox.CheckState != CheckState.Unchecked)
                         exceptedWords = exceptionWordsBoxCustom.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
                     if (exceptionCharsCheckBox.IsEnabled() && exceptionCharsCheckBox.Checked)

@@ -116,6 +116,8 @@ namespace MusicBeePlugin
         internal volatile bool previewIsStopped;
         internal volatile bool previewIsGenerated;
 
+        private bool closeFormOnCompletion = false;
+
         protected Button clickedButton;
         protected Button previewButton;
         protected Button closeButton;
@@ -3575,14 +3577,14 @@ namespace MusicBeePlugin
 
             try
             {
-                if (backgroundTaskIsCanceled)
+                if (backgroundTaskIsCanceled) //Let's skip this queued operation
                 {
                     if (DisablePlaySoundOnce)
                         DisablePlaySoundOnce = false;
                     else if (SavedSettings.playCanceledSound)
                         System.Media.SystemSounds.Hand.Play();
                 }
-                else
+                else //Let's start operation
                 {
                     if (DisablePlaySoundOnce)
                         DisablePlaySoundOnce = false;
@@ -3627,19 +3629,25 @@ namespace MusicBeePlugin
 
                 SetResultingSbText();
 
-                if (!Visible)
+                if (closeFormOnCompletion)
+                {
+                    Invoke(new Action(() => { Close(); }));
+                }
+                else if (!Visible)
                 {
                     if (SavedSettings.closeShowHiddenWindows == 1)
-                        Close();
+                        Invoke(new Action(() => { Close(); }));
                     else
-                        Visible = true;
+                        Invoke(new Action(() => { Visible = true; }));
                 }
             }
         }
 
         internal void switchOperation(ThreadStart operation, Button clickedButton, Button okButton, Button previewButton, Button closeButton, 
-            bool backgroundTaskIsNativeMB, PrepareOperation prepareOperation)
+            bool backgroundTaskIsNativeMB, PrepareOperation prepareOperation, bool closeFormOnCompletion = false)
         {
+            this.closeFormOnCompletion = closeFormOnCompletion;
+
             if (backgroundTaskIsScheduled && backgroundTaskIsCanceled) //Let's restart operation
             {
                 backgroundTaskIsCanceled = false;
@@ -3668,15 +3676,15 @@ namespace MusicBeePlugin
             {
                 this.backgroundTaskIsNativeMB = backgroundTaskIsNativeMB;
 
-                backgroundTaskIsCanceled = false;
-                backgroundTaskIsScheduled = true;
-                backgroundThread = null;
+                this.backgroundTaskIsCanceled = false;
+                this.backgroundTaskIsScheduled = true;
+                this.backgroundThread = null;
 
                 this.clickedButton = clickedButton;
                 this.previewButton = previewButton;
                 this.closeButton = closeButton;
 
-                job = operation;
+                this.job = operation;
 
                 if (this.backgroundTaskIsNativeMB)
                 {
@@ -3693,7 +3701,9 @@ namespace MusicBeePlugin
                     workingThread.Start();
                 }
 
-                buttonLabels.TryGetValue(previewButton, out previewButtonText);
+                if (previewButton != null)
+                    buttonLabels.TryGetValue(previewButton, out previewButtonText);
+
                 buttonLabels.TryGetValue(okButton, out okButtonText);
                 buttonLabels.TryGetValue(closeButton, out closeButtonText);
 
@@ -3804,13 +3814,16 @@ namespace MusicBeePlugin
                 {
                     clickedButton.Text = okButtonText;
 
-                    if (previewIsGenerated)
-                        previewButton.Text = ClearButtonName;
-                    else
-                        previewButton.Text = PreviewButtonName;
+                    if (previewButton != null)
+                    {
+                        if (previewIsGenerated)
+                            previewButton.Text = ClearButtonName;
+                        else
+                            previewButton.Text = PreviewButtonName;
+                    }
 
                     if (backgroundTaskIsScheduled)
-                        previewButton.Enable(false);
+                        previewButton?.Enable(false);
                     else if (buttonLabels.ContainsKey(closeButton))
                         closeButton.Text = closeButtonText;
                 }
