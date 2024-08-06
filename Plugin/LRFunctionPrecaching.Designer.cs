@@ -32,7 +32,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LrFunctionPrecaching));
             this.progressInfoLabel = new System.Windows.Forms.Label();
-            this.buttonCancel = new System.Windows.Forms.Button();
+            this.buttonClose = new System.Windows.Forms.Button();
             this.anotherLrPresetCompleteTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
@@ -42,22 +42,22 @@
             this.progressInfoLabel.Name = "progressInfoLabel";
             this.progressInfoLabel.Tag = "#LrFunctionPrecaching&LrFunctionPrecaching@pinned-to-parent-x@pinned-to-parent-y";
             // 
-            // buttonCancel
+            // buttonClose
             // 
-            resources.ApplyResources(this.buttonCancel, "buttonCancel");
-            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Tag = "#LrFunctionPrecaching&LrFunctionPrecaching";
-            this.buttonCancel.UseVisualStyleBackColor = true;
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            resources.ApplyResources(this.buttonClose, "buttonClose");
+            this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.buttonClose.Name = "buttonClose";
+            this.buttonClose.Tag = "#LrFunctionPrecaching&LrFunctionPrecaching";
+            this.buttonClose.UseVisualStyleBackColor = true;
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
             // LrFunctionPrecaching
             // 
-            this.AcceptButton = this.buttonCancel;
+            this.AcceptButton = this.buttonClose;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.buttonCancel;
-            this.Controls.Add(this.buttonCancel);
+            this.CancelButton = this.buttonClose;
+            this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.progressInfoLabel);
             this.DoubleBuffered = true;
             this.Name = "LrFunctionPrecaching";
@@ -70,7 +70,7 @@
         #endregion
 
         private System.Windows.Forms.Label progressInfoLabel;
-        private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.Timer anotherLrPresetCompleteTimer;
     }
 }

@@ -124,10 +124,10 @@
   <data name="buttonPreview.Text" xml:space="preserve">
     <value>Просмотр</value>
   </data>
-  <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
     <value>496, 5</value>
   </data>
-  <data name="buttonCancel.Text" xml:space="preserve">
+  <data name="buttonClose.Text" xml:space="preserve">
     <value>Закрыть</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">

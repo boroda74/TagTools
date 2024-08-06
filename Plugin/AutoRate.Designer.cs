@@ -15,6 +15,22 @@ namespace MusicBeePlugin
         ///<param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
         protected override void Dispose(bool disposing)
         {
+            if (disposing)
+            {
+                threshold05Box.Parent?.Dispose();
+                threshold1Box.Parent?.Dispose();
+                threshold15Box.Parent?.Dispose();
+                threshold2Box.Parent?.Dispose();
+                threshold25Box.Parent?.Dispose();
+                threshold3Box.Parent?.Dispose();
+                threshold35Box.Parent?.Dispose();
+                threshold4Box.Parent?.Dispose();
+                threshold45Box.Parent?.Dispose();
+                threshold5Box.Parent?.Dispose();
+                maxPlaysPerDayBox.Parent?.Dispose();
+                avgPlaysPerDayBox.Parent?.Dispose();
+            }
+
             if (disposing && (components != null))
             {
                 components.Dispose();
@@ -33,7 +49,7 @@ namespace MusicBeePlugin
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AutoRate));
-            this.buttonCancel = new System.Windows.Forms.Button();
+            this.buttonClose = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.autoRatingTagList = new System.Windows.Forms.ComboBox();
@@ -165,17 +181,17 @@ namespace MusicBeePlugin
             //~MusicBee
 
             // 
-            // buttonCancel
+            // buttonClose
             // 
-            resources.ApplyResources(this.buttonCancel, "buttonCancel");
-            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.dirtyErrorProvider.SetError(this.buttonCancel, resources.GetString("buttonCancel.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.buttonCancel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonCancel.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.buttonCancel, ((int)(resources.GetObject("buttonCancel.IconPadding"))));
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Tag = "#AutoRate@non-defaultable";
-            this.toolTip1.SetToolTip(this.buttonCancel, resources.GetString("buttonCancel.ToolTip"));
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            resources.ApplyResources(this.buttonClose, "buttonClose");
+            this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.dirtyErrorProvider.SetError(this.buttonClose, resources.GetString("buttonClose.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.buttonClose, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonClose.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.buttonClose, ((int)(resources.GetObject("buttonClose.IconPadding"))));
+            this.buttonClose.Name = "buttonClose";
+            this.buttonClose.Tag = "#AutoRate@non-defaultable";
+            this.toolTip1.SetToolTip(this.buttonClose, resources.GetString("buttonClose.ToolTip"));
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
             // buttonOK
             // 
@@ -1329,7 +1345,7 @@ namespace MusicBeePlugin
             this.AcceptButton = this.buttonOK;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.buttonCancel;
+            this.CancelButton = this.buttonClose;
             this.Controls.Add(this.buttonSettings);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
@@ -1349,7 +1365,7 @@ namespace MusicBeePlugin
             this.Controls.Add(this.notifyWhenAutoRatingCompletedCheckBox);
             this.Controls.Add(this.autoRateAtStartUpCheckBoxLabel);
             this.Controls.Add(this.autoRateAtStartUpCheckBox);
-            this.Controls.Add(this.buttonCancel);
+            this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.playsPerDayTagList);
             this.Controls.Add(this.storePlaysPerDayCheckBoxLabel);
@@ -1380,26 +1396,11 @@ namespace MusicBeePlugin
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
-            //MusicBee
-            new TextBoxBorder(this.threshold05Box);
-            new TextBoxBorder(this.threshold1Box);
-            new TextBoxBorder(this.threshold15Box);
-            new TextBoxBorder(this.threshold2Box);
-            new TextBoxBorder(this.threshold25Box);
-            new TextBoxBorder(this.threshold3Box);
-            new TextBoxBorder(this.threshold35Box);
-            new TextBoxBorder(this.threshold4Box);
-            new TextBoxBorder(this.threshold45Box);
-            new TextBoxBorder(this.threshold5Box);
-            new TextBoxBorder(this.maxPlaysPerDayBox);
-            new TextBoxBorder(this.avgPlaysPerDayBox);
-            //~MusicBee
         }
 
         #endregion
 
-        private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox autoRatingTagList;

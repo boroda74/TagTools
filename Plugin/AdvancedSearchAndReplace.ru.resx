@@ -139,12 +139,6 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>1179, 663</value>
   </data>
-  <data name="autoApplyPresetsLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1151, 45</value>
-  </data>
-  <data name="autoApplyPresetsLabel.Text" xml:space="preserve">
-    <value>Выберите пресет, чтобы изменить его или применить к выбранным трекам. ~Отметьте пресеты, чтобы они автоматически применялись при редактировании/обновлении тегов или при добавлении треков в библиотеку. ~Щелкните здесь, чтобы увидеть только отмеченные пресеты. ~Отмечено для автоматического применения: %%TICKED-PRESETS%%~Пресеты, использующие псевдо-тег &lt;ВСЕ ТЕГИ&gt;, не могут быть отмечены для автоматического применения, и им не могут быть назначены комбинации клавиш~Автоматическое применение пресетов отключено в настройках плагина. </value>
-  </data>
   <data name="filterComboBox.Items" xml:space="preserve">
     <value>(Без фильтра)</value>
   </data>
@@ -450,10 +444,6 @@
   <data name="buttonSettings.ToolTip" xml:space="preserve">
     <value>Открыть быстрые настройки</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="clearSearchButton.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
   <data name="clearSearchButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>508, 4</value>
   </data>
@@ -466,11 +456,14 @@
   <data name="searchTextBox.ToolTip" xml:space="preserve">
     <value>Введите часть имени пресета или просто несколько слов из имени пресета, чтобы отфильтровать список</value>
   </data>
-  <data name="filtersPanel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
   <data name="filtersPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>1166, 31</value>
+  </data>
+  <data name="autoApplyPresetsLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1151, 48</value>
+  </data>
+  <data name="autoApplyPresetsLabel.Text" xml:space="preserve">
+    <value>Выберите пресет, чтобы изменить его или применить к выбранным трекам. ~Отметьте пресеты, чтобы они автоматически применялись при редактировании/обновлении тегов или при добавлении треков в библиотеку. ~Щелкните здесь, чтобы увидеть только отмеченные пресеты. ~Отмечено для автоматического применения: %%TICKED-PRESETS%%~Пресеты, использующие псевдо-тег &lt;ВСЕ ТЕГИ&gt;, не могут быть отмечены для автоматического применения, и им не могут быть назначены комбинации клавиш~Автоматическое применение пресетов отключено в настройках плагина. </value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>1193, 700</value>
@@ -1080,9 +1073,6 @@
         ngDxxx4A8MYeAPBMPgD4AD4A/AB+AP8B/gD///4A///+AP///gA=
 </value>
   </data>
-  <data name="splitContainer1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
   <data name="preserveTagValuesTextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>757, 2</value>
   </data>
@@ -1104,9 +1094,6 @@
   <data name="labelPreserveTagValues.ToolTip" xml:space="preserve">
     <value>Никогда не изменять эти значения тегов (разделенные ;;), независимо от того, в каких тегах они встречаются</value>
   </data>
-  <data name="buttonSelectPreservedTags.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
   <data name="buttonSelectPreservedTags.Location" type="System.Drawing.Point, System.Drawing">
     <value>559, 1</value>
   </data>
@@ -1119,9 +1106,6 @@
 Щелчок по флажкам при нажатой клавише Ctrl в левой части предварительного просмотра добавит/удалит тег, указанный в строке, к списку/из списка обрабатываемых/исключенных тегов
 </value>
   </data>
-  <data name="buttonProcessPreserveTags.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
   <data name="buttonProcessPreserveTags.Text" xml:space="preserve">
     <value>Обрабатывать теги</value>
   </data>
@@ -1129,9 +1113,6 @@
     <value>Обрабатывать только указанные теги (если указаны, иначе - все) ИЛИ всегда пропускать указанные. Разделяйте названия тегов ;
 
 Щелчок по флажкам при нажатой клавише Ctrl в левой части предварительного просмотра добавит/удалит тег, указанный в строке, к списку/из списка обрабатываемых/исключенных тегов</value>
-  </data>
-  <data name="tableLayoutPanel3.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
   </data>
   <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
     <value>1162, 27</value>
@@ -1141,9 +1122,6 @@
   </data>
   <data name="customText4Box.Size" type="System.Drawing.Size, System.Drawing">
     <value>476, 23</value>
-  </data>
-  <data name="customText4Label.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
   </data>
   <data name="customText4Label.Location" type="System.Drawing.Point, System.Drawing">
     <value>585, 28</value>
@@ -1160,9 +1138,6 @@
   <data name="customText3Box.Size" type="System.Drawing.Size, System.Drawing">
     <value>476, 23</value>
   </data>
-  <data name="customText3Label.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
   <data name="customText3Label.Size" type="System.Drawing.Size, System.Drawing">
     <value>91, 25</value>
   </data>
@@ -1174,9 +1149,6 @@
   </data>
   <data name="customText2Box.Size" type="System.Drawing.Size, System.Drawing">
     <value>476, 23</value>
-  </data>
-  <data name="customText2Label.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
   </data>
   <data name="customText2Label.Location" type="System.Drawing.Point, System.Drawing">
     <value>585, 1</value>
@@ -1193,23 +1165,17 @@
   <data name="customTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>476, 23</value>
   </data>
-  <data name="customTextLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
   <data name="customTextLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>91, 25</value>
   </data>
   <data name="customTextLabel.Text" xml:space="preserve">
     <value>&lt;Свой текст 1&gt;</value>
   </data>
-  <data name="tableLayoutPanel2.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
     <value>1162, 54</value>
   </data>
   <data name="parameterTag6List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>847, 28</value>
+    <value>847, 30</value>
   </data>
   <data name="parameterTag6List.Size" type="System.Drawing.Size, System.Drawing">
     <value>309, 23</value>
@@ -1223,14 +1189,11 @@
   <data name="labelTag6.Text" xml:space="preserve">
     <value>&lt;Тег 6&gt;</value>
   </data>
-  <data name="pictureTag6.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
   <data name="pictureTag6.Location" type="System.Drawing.Point, System.Drawing">
     <value>778, 33</value>
   </data>
   <data name="parameterTag5List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>460, 28</value>
+    <value>460, 30</value>
   </data>
   <data name="parameterTag5List.Size" type="System.Drawing.Size, System.Drawing">
     <value>308, 23</value>
@@ -1244,14 +1207,11 @@
   <data name="labelTag5.Text" xml:space="preserve">
     <value>&lt;Тег 5&gt;</value>
   </data>
-  <data name="pictureTag5.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
   <data name="pictureTag5.Location" type="System.Drawing.Point, System.Drawing">
     <value>391, 33</value>
   </data>
   <data name="parameterTag4List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>73, 28</value>
+    <value>73, 30</value>
   </data>
   <data name="parameterTag4List.Size" type="System.Drawing.Size, System.Drawing">
     <value>308, 23</value>
@@ -1262,11 +1222,8 @@
   <data name="labelTag4.Text" xml:space="preserve">
     <value>&lt;Тег 4&gt;</value>
   </data>
-  <data name="pictureTag4.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
   <data name="parameterTag3List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>847, 1</value>
+    <value>847, 3</value>
   </data>
   <data name="parameterTag3List.Size" type="System.Drawing.Size, System.Drawing">
     <value>309, 23</value>
@@ -1280,14 +1237,11 @@
   <data name="labelTag3.Text" xml:space="preserve">
     <value>&lt;Тег 3&gt;</value>
   </data>
-  <data name="pictureTag3.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
   <data name="pictureTag3.Location" type="System.Drawing.Point, System.Drawing">
     <value>778, 6</value>
   </data>
   <data name="parameterTag2List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>460, 1</value>
+    <value>460, 3</value>
   </data>
   <data name="parameterTag2List.Size" type="System.Drawing.Size, System.Drawing">
     <value>308, 23</value>
@@ -1301,14 +1255,11 @@
   <data name="labelTag2.Text" xml:space="preserve">
     <value>&lt;Тег 2&gt;</value>
   </data>
-  <data name="pictureTag2.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
   <data name="pictureTag2.Location" type="System.Drawing.Point, System.Drawing">
     <value>391, 6</value>
   </data>
   <data name="parameterTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>73, 1</value>
+    <value>73, 3</value>
   </data>
   <data name="parameterTagList.Size" type="System.Drawing.Size, System.Drawing">
     <value>308, 23</value>
@@ -1321,12 +1272,6 @@
   </data>
   <data name="labelTag.ToolTip" xml:space="preserve">
     <value>Этот пресет использует псевдо-тег &lt;ВСЕ ТЕГИ&gt;. БУДЬТЕ ОСТОРОЖНЫ!</value>
-  </data>
-  <data name="pictureTag.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="tableLayoutPanel1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>1162, 54</value>
@@ -1355,9 +1300,6 @@
   <data name="customizedPresetPictureBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>840, 34</value>
   </data>
-  <data name="favoriteCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
   <data name="favoriteCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>608, 34</value>
   </data>
@@ -1370,9 +1312,6 @@
   <data name="favoriteCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>587, 33</value>
   </data>
-  <data name="applyToPlayingTrackCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
   <data name="applyToPlayingTrackCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>358, 34</value>
   </data>
@@ -1384,9 +1323,6 @@
   </data>
   <data name="applyToPlayingTrackCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>332, 33</value>
-  </data>
-  <data name="assignHotkeyCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
   </data>
   <data name="assignHotkeyCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>283, 15</value>
@@ -1434,9 +1370,6 @@
   <data name="playlistComboBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>363, 23</value>
   </data>
-  <data name="conditionCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
   <data name="conditionCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>394, 15</value>
   </data>
@@ -1449,9 +1382,6 @@
   <data name="textBoxTableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>1139, 58</value>
   </data>
-  <data name="descriptionGroupBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
   <data name="descriptionGroupBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 15</value>
   </data>
@@ -1461,29 +1391,17 @@
   <data name="descriptionGroupBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>1151, 81</value>
   </data>
-  <data name="panel1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>1166, 277</value>
   </data>
-  <data name="presetList.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
   <data name="presetList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1132, 88</value>
+    <value>1132, 90</value>
   </data>
   <data name="listBoxTableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1152, 108</value>
-  </data>
-  <data name="tableLayoutPanel4.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>1152, 110</value>
   </data>
   <data name="tableLayoutPanel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1166, 385</value>
-  </data>
-  <data name="splitContainer1.Panel1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>1166, 387</value>
   </data>
   <data name="Track.HeaderText" xml:space="preserve">
     <value>Трек</value>
@@ -1582,7 +1500,7 @@
     <value>Нечетные/четные треки</value>
   </data>
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1152, 98</value>
+    <value>1152, 95</value>
   </data>
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
     <value>185, 43</value>
@@ -1747,14 +1665,8 @@
   <data name="presetManagementGroupBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>778, 75</value>
   </data>
-  <data name="panel2.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1166, 187</value>
-  </data>
-  <data name="splitContainer1.Panel2.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+    <value>1166, 185</value>
   </data>
   <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
     <value>1166, 575</value>

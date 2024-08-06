@@ -1,4 +1,5 @@
 ﻿using ExtensionMethods;
+
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -7,6 +8,7 @@ using System.Resources;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
+
 using static MusicBeePlugin.Plugin;
 
 namespace MusicBeePlugin
@@ -66,7 +68,7 @@ namespace MusicBeePlugin
 
 
         //Font & colors
-        protected bool useSkinColors;
+        internal readonly bool useSkinColors;
         protected bool useMusicBeeFont;
         protected bool useCustomFont;
 
@@ -136,6 +138,7 @@ namespace MusicBeePlugin
             InitializeComponent();
 
             TagToolsPlugin = plugin;
+            useSkinColors = !SavedSettings.dontUseSkinColors; //************* dontUseSkinColors -> useSkinColors !!!!
         }
 
         internal bool backgroundTaskIsWorking()
@@ -205,7 +208,7 @@ namespace MusicBeePlugin
                 foreColor = DimmedAccentColor;
                 backColor = comboBox.BackColor;
             }
-            else //if (comboBox.IsEnabled())
+            else //if (control.IsEnabled())
             {
                 foreColor = comboBox.ForeColor;
                 backColor = comboBox.BackColor;
@@ -264,53 +267,6 @@ namespace MusicBeePlugin
                 button_LostFocus(sender, e);
         }
 
-        protected void setButtonColors(Button button)
-        {
-            if (useSkinColors && button != null)
-            {
-                var acceptButton = AcceptButton as Button;
-
-                //Default button
-                if (button.IsEnabled() && button == acceptButton)
-                {
-                    button.ForeColor = controlHighlightForeColor;
-                    button.BackColor = controlHighlightBackColor;
-                }
-                //else if (button.IsEnabled() && button.Focused) //****
-                //{
-                //   button.FlatAppearance.BorderColor = ButtonFocusedBorderColor;
-                //
-                //   button.ForeColor = _buttonForeColor;
-                //   button.BackColor = _buttonBackColor;
-                //}
-                //Combo box button
-                else if (button.IsEnabled() && button.Parent is CustomComboBox)
-                {
-                    button.ForeColor = buttonForeColor;
-                    button.BackColor = narrowScrollBarBackColor;
-                }
-                //Generic button
-                else if (button.IsEnabled())
-                {
-                    button.ForeColor = buttonForeColor;
-                    button.BackColor = buttonBackColor;
-                }
-                //Combo box disabled button
-                else if (button.Parent is CustomComboBox)
-                {
-                    button.ForeColor = buttonForeColor;
-                    button.BackColor = narrowScrollBarBackColor;
-                }
-                //Generic disabled button
-                else
-                {
-
-                    button.ForeColor = buttonDisabledForeColor;
-                    button.BackColor = buttonDisabledBackColor;
-                }
-            }
-        }
-
         internal void button_GotFocus(object sender, EventArgs e)
         {
             var button = sender as Button;
@@ -350,12 +306,12 @@ namespace MusicBeePlugin
             }
 
 
-            setButtonColors(button);
+            setSkinnedControlColors(button, null);
         }
 
         internal void button_LostFocus(object sender, EventArgs e)
         {
-            setButtonColors(sender as Button);
+            setSkinnedControlColors(sender as Button, null);
         }
 
         internal void button_Paint(object sender, PaintEventArgs e)
@@ -1376,7 +1332,7 @@ namespace MusicBeePlugin
             var thumbTop = customVScrollBar.GetThumbTop();
             var form = customVScrollBar.FindForm();
 
-            if (dataGridView.RowCount > 0 && form !=null && form.WindowState != FormWindowState.Minimized && thumbTop >= 0)
+            if (dataGridView.RowCount > 0 && form != null && form.WindowState != FormWindowState.Minimized && thumbTop >= 0)
             {
                 var nRowRange = dataGridView.RowCount - dataGridView.DisplayedRowCount(false);
                 var (_, nPixelRange, _, _, _) = customVScrollBar.GetMetrics();
@@ -1810,7 +1766,7 @@ namespace MusicBeePlugin
 
         private void textBoxScrolled(TextBox textBox, EventArgs e)
         {
-            var customVScrollBar = ControlsTools.FindControlChild<CustomVScrollBar>(textBox.Parent) 
+            var customVScrollBar = ControlsTools.FindControlChild<CustomVScrollBar>(textBox.Parent)
                                    ?? ControlsTools.FindControlChild<CustomVScrollBar>(textBox.Parent.Parent);
 
             var (totalLines, visibleLines) = GetTextBoxMetrics(textBox);
@@ -2178,14 +2134,6 @@ namespace MusicBeePlugin
             Application.DoEvents();
         }
 
-        internal static void InputControl_EnabledChanged(object sender, EventArgs e)
-        {
-            if ((sender as Control).IsEnabled())
-                (sender as Control).BackColor = InputControlBackColor;
-            else
-                (sender as Control).BackColor = InputControlDimmedBackColor;
-        }
-
         internal static Control FindFocusedControl(Control control)
         {
             var container = control as ContainerControl;
@@ -2280,6 +2228,216 @@ namespace MusicBeePlugin
 
         }
 
+        //Returns: enabled fore & back colors, disabled fore & back colors
+        internal void setSkinnedControlColors(Control control, bool? state) //***********
+        {
+            if (useSkinColors)
+            {
+                if (control is Button button)
+                {
+                    if (button != null)
+                    {
+                        var acceptButton = AcceptButton as Button;
+
+                        //Default button
+                        if ((control.IsEnabled() && state == null) || state == true && button == acceptButton)
+                        {
+                            button.ForeColor = controlHighlightForeColor;
+                            button.BackColor = controlHighlightBackColor;
+                            button.FlatAppearance.BorderColor = ButtonFocusedBorderColor;
+                        }
+                        //else if ((control.IsEnabled() && state == null) || state == true && button.Focused) //****
+                        //{
+                        //   button.ForeColor = _buttonForeColor;
+                        //   button.BackColor = _buttonBackColor;
+                        //   button.FlatAppearance.BorderColor = ButtonFocusedBorderColor;
+                        //}
+                        //Combo box button
+                        else if ((control.IsEnabled() && state == null) || state == true && button.Parent is CustomComboBox)
+                        {
+                            button.ForeColor = buttonForeColor;
+                            button.BackColor = narrowScrollBarBackColor;
+                            button.FlatAppearance.BorderColor = ScrollBarBackColor;
+                        }
+                        //Generic button
+                        else if ((control.IsEnabled() && state == null) || state == true)
+                        {
+                            button.ForeColor = buttonForeColor;
+                            button.BackColor = buttonBackColor;
+                            button.FlatAppearance.BorderColor = ButtonBorderColor;
+                        }
+
+
+                        //Combo box disabled button
+                        else if (button.Parent is CustomComboBox)
+                        {
+                            button.ForeColor = buttonForeColor;
+                            button.BackColor = InputPanelBackColor; //****
+                            //button.BackColor = narrowScrollBarBackColor;
+                            button.FlatAppearance.BorderColor = ButtonBorderColor;
+                        }
+                        //Generic disabled button
+                        else
+                        {
+
+                            button.ForeColor = buttonDisabledForeColor;
+                            button.BackColor = buttonDisabledBackColor;
+                            button.FlatAppearance.BorderColor = ButtonBorderColor;
+                        }
+                    }
+                }
+                else if (control is CheckBox)
+                {
+                    if ((control.IsEnabled() && state == null) || state == true)
+                        control.ForeColor = FormForeColor;
+                    else
+                        control.ForeColor = DimmedAccentColor;
+
+                    control.BackColor = FormBackColor;
+                }
+                else if (control is RadioButton)
+                {
+                    if ((control.IsEnabled() && state == null) || state == true)
+                        control.ForeColor = FormForeColor;
+                    else
+                        control.ForeColor = DimmedAccentColor;
+
+                    control.BackColor = FormBackColor;
+                }
+                else if (control is Label)
+                {
+                    if ((control.IsEnabled() && state == null) || state == true)
+                    {
+                        if (control.ForeColor == SystemColors.ControlText)
+                        {
+                            control.ForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanelLabel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
+                        }
+                        else
+                        {
+                            var stdColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanelLabel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
+                            control.ForeColor = GetHighlightColor(control.ForeColor, stdColor, FormBackColor);
+                        }
+                    }
+                    else
+                    {
+                        control.ForeColor = DimmedAccentColor;
+                    }
+
+                    control.BackColor = FormBackColor;
+                }
+                else if (control is GroupBox)
+                {
+                    if ((control.IsEnabled() && state == null) || state == true)
+                    {
+                        if (control.ForeColor == SystemColors.ControlText)
+                        {
+                            control.ForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanelLabel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
+                        }
+                        else
+                        {
+                            var stdColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanelLabel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
+                            control.ForeColor = GetHighlightColor(control.ForeColor, stdColor, FormBackColor);
+                        }
+                    }
+                    else
+                    {
+                        control.ForeColor = DimmedAccentColor;
+                    }
+
+                    control.BackColor = FormBackColor;
+                }
+                else if (control is NumericUpDown)
+                {
+                    control.BackColor = InputControlBackColor;//******
+                    control.ForeColor = InputControlForeColor;
+                }
+                else if (control is CustomComboBox customComboBox)
+                {
+                    if ((control.IsEnabled() && state == null) || state == true)
+                        customComboBox.SetColors(InputControlForeColor, InputControlBackColor);
+                    else
+                        customComboBox.SetColors(DimmedAccentColor, InputPanelBackColor); //****
+                        //customComboBox.SetColors(DimmedAccentColor, InputControlDimmedBackColor);
+                }
+                else if (control is ComboBox comboBox && comboBox.DropDownStyle == ComboBoxStyle.Simple)
+                {
+                    if ((control.IsEnabled() && state == null) || state == true)
+                    {
+                        comboBox.ForeColor = InputControlForeColor;
+                        comboBox.BackColor = InputControlBackColor;
+                    }
+                    else
+                    {
+                        comboBox.ForeColor = DimmedAccentColor;
+                        comboBox.BackColor = InputPanelBackColor; //****
+                        //comboBox.BackColor = InputControlDimmedBackColor;
+                    }
+                }
+                else if (control is TextBox)
+                {
+                    if ((control.IsEnabled() && state == null) || state == true)
+                    {
+                        control.ForeColor = InputControlForeColor;
+                        control.BackColor = InputControlBackColor;
+                    }
+                    else
+                    {
+                        control.ForeColor = DimmedAccentColor;
+                        control.BackColor = InputPanelBackColor; //****
+                        //control.BackColor = InputControlDimmedBackColor;
+                    }
+                }
+                else if (control is ListBox)
+                {
+                    if ((control.IsEnabled() && state == null) || state == true)
+                    {
+                        control.ForeColor = InputControlForeColor;
+                        control.BackColor = InputControlBackColor;
+                    }
+                    else
+                    {
+                        control.ForeColor = DimmedAccentColor;
+                        control.BackColor = InputPanelBackColor; //****
+                        //control.BackColor = InputControlDimmedBackColor;
+                    }
+                }
+                else if (control is DataGridView)
+                {
+                    control.BackColor = HeaderCellStyle.BackColor;
+                    control.ForeColor = HeaderCellStyle.ForeColor;
+                }
+                else
+                {
+                    if ((control.IsEnabled() && state == null) || state == true)
+                    {
+                        control.ForeColor = AccentColor;
+                    }
+                    else
+                    {
+                        control.ForeColor = DimmedAccentColor;
+                    }
+
+                    control.BackColor = FormBackColor;
+                }
+            }
+            else
+            {
+                if (control is Label)
+                {
+                    if ((control.IsEnabled() && state == null) || state == true)
+                    {
+                        if (control.ForeColor == SystemColors.ControlText)
+                            control.ForeColor = SystemColors.GrayText;
+                    }
+                    else
+                    {
+                        if (control.ForeColor == SystemColors.GrayText)
+                            control.ForeColor = SystemColors.ControlText;
+                    }
+                }
+            }
+        }
+
         internal void skinControl(Control control, int borderWidth = -1)
         {
             WaitPreparedThemedBitmapsAndColors();
@@ -2321,8 +2479,7 @@ namespace MusicBeePlugin
                 }
                 else if (UseNativeButtonPaint && !(button.Parent is CustomComboBox))
                 {
-                    button.ForeColor = ButtonForeColor;
-                    button.BackColor = ButtonBackColor;
+                    setSkinnedControlColors(button, null);
 
                     button.FlatStyle = FlatStyle.Standard;
                     buttonLabels.AddReplace(button, button.Text);
@@ -2331,7 +2488,6 @@ namespace MusicBeePlugin
                 {
                     button.FlatStyle = FlatStyle.Flat;
                     button.FlatAppearance.BorderSize = 1;
-                    button.FlatAppearance.BorderColor = ButtonBorderColor;
                     button.FlatAppearance.MouseOverBackColor = ButtonMouseOverBackColor;
                     button.FlatAppearance.MouseDownBackColor = ButtonMouseOverBackColor;
 
@@ -2340,7 +2496,7 @@ namespace MusicBeePlugin
 
                     button.Text = string.Empty;
 
-                    setButtonColors(button);
+                    setSkinnedControlColors(button, null);
                 }
 
                 return;
@@ -2369,9 +2525,9 @@ namespace MusicBeePlugin
                         textBoxParent.RowStyles[cellPosition.Row + 1].Height = 0;
                     }
                 }
-                else if (control is TextBoxBorder textBoxBorder1 && control.Parent is TableLayoutPanel textBoxBorderParent)
+                else if (control is ControlBorder controlBorder && controlBorder.control is TextBox textBox1 && control.Parent is TableLayoutPanel textBoxBorderParent)
                 {
-                    if (textBoxBorder1.textBox.Multiline)
+                    if (textBox1.Multiline)
                     {
                         textBoxBorderParent.ColumnStyles[1].Width = 0;
                         var cellPosition = textBoxBorderParent.GetCellPosition(control);
@@ -2409,80 +2565,35 @@ namespace MusicBeePlugin
 
 
             //useSkinColors == true here
-            if (control is TextBoxBorder textBoxBorder2)
+            if (control is ControlBorder textBoxBorder2)
             {
-                skinControl(textBoxBorder2.textBox);
+                skinControl(textBoxBorder2.control);
             }
             else if (control is CheckBox checkBox)
             {
-                checkBox.BackColor = FormBackColor;
-                checkBox.ForeColor = FormForeColor;
-
                 checkBox.FlatStyle = FlatStyle.System;
             }
             else if (control is RadioButton radioButton)
             {
-                radioButton.BackColor = FormBackColor;
-                radioButton.ForeColor = FormForeColor;
-
                 radioButton.FlatStyle = FlatStyle.System;
-            }
-            else if (control is Label)
-            {
-                control.BackColor = FormBackColor;
-
-                if (control.ForeColor == SystemColors.ControlText)
-                {
-                    control.ForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanelLabel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
-                }
-                else
-                {
-                    var stdColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanelLabel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
-                    control.ForeColor = GetHighlightColor(control.ForeColor, stdColor, FormBackColor);
-                }
             }
             else if (control is GroupBox groupBox)
             {
-                groupBox.BackColor = FormBackColor;
-
-                if (groupBox.ForeColor == SystemColors.ControlText)
-                {
-                    groupBox.ForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanelLabel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
-                }
-                else
-                {
-                    var stdColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanelLabel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
-                    groupBox.ForeColor = GetHighlightColor(control.ForeColor, stdColor, FormBackColor);
-                }
-
                 groupBox.FlatStyle = FlatStyle.Standard;
             }
             else if (control is NumericUpDown numericUpDown)
             {
-                numericUpDown.BackColor = InputControlBackColor;
-                numericUpDown.ForeColor = InputControlForeColor;
-
                 numericUpDown.BorderStyle = BorderStyle.FixedSingle;
             }
             else if (control is ComboBox comboBox)
             {
                 if (comboBox.DropDownStyle == ComboBoxStyle.DropDown || comboBox.DropDownStyle == ComboBoxStyle.DropDownList)
-                {
                     new CustomComboBox(this, comboBox, true);
-                }
                 else
-                {
-                    comboBox.BackColor = InputControlBackColor;
-                    comboBox.ForeColor = InputControlForeColor;
-
                     comboBox.FlatStyle = FlatStyle.Flat;
-                }
             }
             else if (control is TextBox textBox)
             {
-                textBox.BackColor = InputControlBackColor;
-                textBox.ForeColor = InputControlForeColor;
-
                 textBox.BorderStyle = BorderStyle.FixedSingle;
 
                 if (textBox.Multiline)
@@ -2492,8 +2603,7 @@ namespace MusicBeePlugin
                         textBox.ScrollBars = ScrollBars.None;
                         textBox.WordWrap = true;
 
-                        var customVScrollBar =
-                            new CustomVScrollBar(this, textBox, GetTextBoxScrollBarMetrics, borderWidth);
+                        var customVScrollBar = new CustomVScrollBar(this, textBox, GetTextBoxScrollBarMetrics, borderWidth);
                         customVScrollBar.CreateBrushes();
 
                         customVScrollBar.SmallChange = 3;
@@ -2507,15 +2617,14 @@ namespace MusicBeePlugin
                         textBox.MouseWheel += customOrStandardTextBox_MouseWheel;
                         textBox.SizeChanged += customScrollBarTextBox_SizeChanged;
                     }
-                    else if (textBox.Parent is TextBoxBorder)
+                    else if (textBox.Parent is ControlBorder)
                     {
                         if (textBox.Parent?.Parent is TableLayoutPanel)
                         {
                             textBox.ScrollBars = ScrollBars.None;
                             textBox.WordWrap = true;
 
-                            var customVScrollBar =
-                                new CustomVScrollBar(this, textBox, GetTextBoxScrollBarMetrics, borderWidth);
+                            var customVScrollBar = new CustomVScrollBar(this, textBox, GetTextBoxScrollBarMetrics, borderWidth);
                             customVScrollBar.CreateBrushes();
 
                             customVScrollBar.SmallChange = 3;
@@ -2554,9 +2663,6 @@ namespace MusicBeePlugin
             else if (control is ListBox)
             {
                 var listBox = control as ListBox;
-
-                listBox.BackColor = InputControlBackColor; //-V3149
-                listBox.ForeColor = InputControlForeColor;
 
                 listBox.HorizontalScrollbar = false;
                 listBox.BorderStyle = BorderStyle.FixedSingle;
@@ -2602,9 +2708,6 @@ namespace MusicBeePlugin
             {
                 dataGridView.ScrollBars = ScrollBars.Both;
 
-                dataGridView.BackColor = HeaderCellStyle.BackColor;
-                dataGridView.ForeColor = HeaderCellStyle.ForeColor;
-
                 dataGridView.EnableHeadersVisualStyles = false;
                 dataGridView.BorderStyle = BorderStyle.FixedSingle;
                 dataGridView.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
@@ -2641,11 +2744,8 @@ namespace MusicBeePlugin
                 dataGridView.MouseWheel += dataGridView_MouseWheel;
                 dataGridView.SizeChanged += customScrollBarParent_SizeChanged;
             }
-            else
-            {
-                control.BackColor = FormBackColor;
-                control.ForeColor = AccentColor;
-            }
+
+            setSkinnedControlColors(control, null);
         }
 
         internal void fillControlsReferencesRemarks()
@@ -3052,7 +3152,6 @@ namespace MusicBeePlugin
 
             scaledPx = (int)Math.Round(dpiScaling);
 
-            useSkinColors = !SavedSettings.dontUseSkinColors;
             useMusicBeeFont = SavedSettings.useMusicBeeFont;
             useCustomFont = SavedSettings.useCustomFont;
 
@@ -3631,7 +3730,8 @@ namespace MusicBeePlugin
 
                 if (closeFormOnCompletion)
                 {
-                    Invoke(new Action(() => { Close(); }));
+                    Invoke(new Action(() => { enableDisablePreviewOptionControls(false); disableQueryingOrUpdatingButtons(); })); //Or see below. Not sure what's better.
+                    //Invoke(new Action(() => { Close(); })); //****
                 }
                 else if (!Visible)
                 {
@@ -3643,10 +3743,11 @@ namespace MusicBeePlugin
             }
         }
 
-        internal void switchOperation(ThreadStart operation, Button clickedButton, Button okButton, Button previewButton, Button closeButton, 
+        internal void switchOperation(ThreadStart operation, Button clickedButton, Button okButton, Button previewButton, Button closeButton,
             bool backgroundTaskIsNativeMB, PrepareOperation prepareOperation, bool closeFormOnCompletion = false)
         {
             this.closeFormOnCompletion = closeFormOnCompletion;
+
 
             if (backgroundTaskIsScheduled && backgroundTaskIsCanceled) //Let's restart operation
             {
@@ -3672,8 +3773,12 @@ namespace MusicBeePlugin
 
                 stopButtonClicked(this, prepareOperation);
             }
-            else //if (!backgroundTaskIsScheduled)
+            else //if (!backgroundTaskIsScheduled) //Let's start operation
             {
+                buttonLabels.TryGetValue(previewButton, out previewButtonText);
+                buttonLabels.TryGetValue(okButton, out okButtonText);
+                buttonLabels.TryGetValue(closeButton, out closeButtonText);
+
                 this.backgroundTaskIsNativeMB = backgroundTaskIsNativeMB;
 
                 this.backgroundTaskIsCanceled = false;
@@ -3700,12 +3805,6 @@ namespace MusicBeePlugin
                     var workingThread = new Thread(serializedOperation);
                     workingThread.Start();
                 }
-
-                if (previewButton != null)
-                    buttonLabels.TryGetValue(previewButton, out previewButtonText);
-
-                buttonLabels.TryGetValue(okButton, out okButtonText);
-                buttonLabels.TryGetValue(closeButton, out closeButtonText);
 
                 queryingOrUpdatingButtonClick(this);
             }
@@ -3814,16 +3913,13 @@ namespace MusicBeePlugin
                 {
                     clickedButton.Text = okButtonText;
 
-                    if (previewButton != null)
-                    {
-                        if (previewIsGenerated)
-                            previewButton.Text = ClearButtonName;
-                        else
-                            previewButton.Text = PreviewButtonName;
-                    }
+                    if (previewIsGenerated)
+                        previewButton.Text = ClearButtonName;
+                    else
+                        previewButton.Text = PreviewButtonName;
 
                     if (backgroundTaskIsScheduled)
-                        previewButton?.Enable(false);
+                        previewButton.Enable(false);
                     else if (buttonLabels.ContainsKey(closeButton))
                         closeButton.Text = closeButtonText;
                 }
@@ -3842,14 +3938,9 @@ namespace MusicBeePlugin
                         backgroundTaskIsCanceled = true;
 
                         if (previewIsGenerated && !previewIsStopped)
-                        {
                             clickedButton.Text = ClearButtonName;
-                        }
                         else
-                        {
-                            previewIsStopped = false;
                             clickedButton.Text = previewButtonText;
-                        }
 
                         closeButton.Enable(true);
                     }
@@ -3874,23 +3965,40 @@ namespace MusicBeePlugin
         }
 
         //clearPreview = 0: //--- ??? //****** What is this?
-        protected void clickOnPreviewButton(DataGridView previewTable, PrepareOperation prepareOperation, ThreadStart operation, 
-            Button clickedButton, Button okButton, Button closeButton, int clearPreview = 0)
+        //checkMinimumColumnCount = -1: check if row count > 0, checkMinimumColumnCount >= 0: don't check rown count, check if column count > checkMinimumColumnCount
+        protected void clickOnPreviewButton(DataGridView previewTable, PrepareOperation prepareOperation, ThreadStart operation,
+            Button previewButton, Button okButton, Button closeButton, int clearPreview = 0, int checkMinimumColumnCount = -1)
         {
-            if ((previewTable.Rows.Count == 0 || backgroundTaskIsWorking() || clearPreview == 2) && clearPreview != 1)
+            //checkColumnCountInsteadOfRowCount == true for "Tag History"/"Compare Tracks"
+            if (((checkMinimumColumnCount == -1 && previewTable.RowCount == 0) || (checkMinimumColumnCount >= 0 && previewTable.ColumnCount <= checkMinimumColumnCount)
+                || backgroundTaskIsWorking() || clearPreview == 2) && clearPreview != 1)
             {
-                if (prepareOperation())
-                    switchOperation(operation, clickedButton, okButton, clickedButton, closeButton, false, prepareOperation);
+                if (previewIsStopped)
+                    previewIsGenerated = false;
+
+                previewIsStopped = false;
+
+                if (prepareOperation != null)
+                {
+                    if (prepareOperation())
+                        switchOperation(operation, previewButton, okButton, previewButton, closeButton, false, prepareOperation);
+                }
+                else
+                {
+                    switchOperation(operation, previewButton, okButton, previewButton, closeButton, false, prepareOperation);
+                }
             }
             else
             {
-                prepareOperation();
+                if (prepareOperation != null)
+                    prepareOperation();
+
                 previewIsGenerated = false;
-                clickedButton.Text = PreviewButtonName;
+                previewIsStopped = false;
+                previewButton.Text = PreviewButtonName;
                 enableDisablePreviewOptionControls(true);
                 enableQueryingOrUpdatingButtons();
             }
         }
     }
 }
-

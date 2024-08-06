@@ -120,7 +120,7 @@
   <data name="progressInfoLabel.Text" xml:space="preserve">
     <value>Предварительное кеширование пресета: </value>
   </data>
-  <data name="buttonCancel.Text" xml:space="preserve">
+  <data name="buttonClose.Text" xml:space="preserve">
     <value>Отмена</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />

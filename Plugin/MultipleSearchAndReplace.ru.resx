@@ -120,7 +120,7 @@
   <data name="buttonPreview.Text" xml:space="preserve">
     <value>Просмотр</value>
   </data>
-  <data name="buttonCancel.Text" xml:space="preserve">
+  <data name="buttonClose.Text" xml:space="preserve">
     <value>Закрыть</value>
   </data>
   <data name="buttonDeleteSaved.ToolTip" xml:space="preserve">

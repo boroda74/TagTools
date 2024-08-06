@@ -43,81 +43,63 @@ namespace MusicBeePlugin
 
         internal static TextBox CreateMusicBeeTextBox()
         {
-            var textBox = (TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
-
-            if (!Plugin.SavedSettings.dontUseSkinColors)
-                textBox.Resize += TextBox_Resize;
-
-            return textBox;
+            return (TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
         }
 
-        internal static void TextBox_Resize(object sender, EventArgs e)
+        internal static void Control_Resize(object sender, EventArgs e)
         {
-            if (sender is TextBox textBox)
+            if (sender is Control control)
             {
-                var textBoxRectangle = new Rectangle(1, 1, textBox.Width - 2, textBox.Height - 2);
-                var textBoxRegion = new Region(textBoxRectangle);
-                textBox.Region = textBoxRegion;
+                var controlRectangle = new Rectangle(1, 1, control.Width - 2, control.Height - 2);
+                var controlRegion = new Region(controlRectangle);
+                control.Region = controlRegion;
 
-                textBox.Refresh();
+                control.Refresh();
             }
         }
 
-        internal static void DrawTextBoxBorder(object sender, EventArgs e)
+        internal static void Control_LocationChanged(object sender, EventArgs e)
         {
-            if (sender is TextBox textBox)
-            {
-                if (textBox.Parent is TextBoxBorder textBoxBorder)
-                {
-                    using (var graphics = textBoxBorder.CreateGraphics())
-                    {
-                        if (textBox.Multiline)
-                        {
-                            if (!textBoxBorder.textBox.Enabled)
-                                ControlPaint.DrawBorder(graphics, new Rectangle(0, 0, textBoxBorder.Width, textBoxBorder.Height),
-                                    Plugin.ScrollBarBorderColor, ButtonBorderStyle.Solid);
-                            else if (textBoxBorder.ContainsFocus)
-                                ControlPaint.DrawBorder(graphics, new Rectangle(0, 0, textBoxBorder.Width, textBoxBorder.Height),
-                                    Plugin.ScrollBarFocusedBorderColor, ButtonBorderStyle.Solid);
-                            else
-                                ControlPaint.DrawBorder(graphics, new Rectangle(0, 0, textBoxBorder.Width, textBoxBorder.Height),
-                                    Plugin.ScrollBarBorderColor, ButtonBorderStyle.Solid);
-                        }
-                        else
-                        {
-                            if (!textBoxBorder.textBox.Enabled)
-                                ControlPaint.DrawBorder(graphics, new Rectangle(0, 0, textBoxBorder.Width, textBoxBorder.Height),
-                                    Plugin.InputControlBorderColor, ButtonBorderStyle.Solid);
-                            else if (textBoxBorder.ContainsFocus)
-                                ControlPaint.DrawBorder(graphics, new Rectangle(0, 0, textBoxBorder.Width, textBoxBorder.Height),
-                                    Plugin.InputPanelBackColor, ButtonBorderStyle.Solid);
-                            else
-                                ControlPaint.DrawBorder(graphics, new Rectangle(0, 0, textBoxBorder.Width, textBoxBorder.Height),
-                                    Plugin.InputPanelBackColor, ButtonBorderStyle.Solid);
-                        }
-                    }
-                }
-            }
+            var control = sender as Control;
+            var controlBorder = control.Parent as ControlBorder;
+
+            if (!controlBorder.getIgnoreControl_LocationChanged())
+                controlBorder.changeControlBorderLocation();
         }
 
-        internal static void DrawBorder(Control control)
-        {
-            if (control.Parent is TextBoxBorder textBoxBorder)
-            {
-                using (var graphics = control.CreateGraphics())
-                {
-                    if (!textBoxBorder.textBox.Enabled)
-                        ControlPaint.DrawBorder(graphics, new Rectangle(0, 0, textBoxBorder.Width, textBoxBorder.Height),
-                            Plugin.InputPanelBorderColor, ButtonBorderStyle.Solid);
-                    else if (textBoxBorder.ContainsFocus)
-                        ControlPaint.DrawBorder(graphics, new Rectangle(0, 0, textBoxBorder.Width, textBoxBorder.Height),
-                            Plugin.ScrollBarFocusedBorderColor, ButtonBorderStyle.Solid);
-                    else
-                        ControlPaint.DrawBorder(graphics, new Rectangle(0, 0, textBoxBorder.Width, textBoxBorder.Height),
-                            Plugin.ScrollBarBorderColor, ButtonBorderStyle.Solid);
-                }
-            }
-        }
+        //internal static void DrawTextBoxBorder(TextBox textBox)
+        //{
+        //    if (textBox.Parent is ControlBorder textBoxBorder)
+        //    {
+        //        using (var graphics = textBoxBorder.CreateGraphics())
+        //        {
+        //            if (textBox.Multiline)
+        //            {
+        //                if (!textBoxBorder.control.Enabled)
+        //                    ControlPaint.DrawBorder(graphics, new Rectangle(0, 0, textBoxBorder.Width, textBoxBorder.Height),
+        //                        Plugin.ScrollBarBorderColor, ButtonBorderStyle.Solid);
+        //                else if (textBoxBorder.ContainsFocus)
+        //                    ControlPaint.DrawBorder(graphics, new Rectangle(0, 0, textBoxBorder.Width, textBoxBorder.Height),
+        //                        Plugin.ScrollBarFocusedBorderColor, ButtonBorderStyle.Solid);
+        //                else
+        //                    ControlPaint.DrawBorder(graphics, new Rectangle(0, 0, textBoxBorder.Width, textBoxBorder.Height),
+        //                        Plugin.ScrollBarBorderColor, ButtonBorderStyle.Solid);
+        //            }
+        //            else
+        //            {
+        //                if (!textBoxBorder.control.Enabled)
+        //                    ControlPaint.DrawBorder(graphics, new Rectangle(0, 0, textBoxBorder.Width, textBoxBorder.Height),
+        //                        Plugin.ButtonBorderColor, ButtonBorderStyle.Solid);
+        //                else if (textBoxBorder.ContainsFocus)
+        //                    ControlPaint.DrawBorder(graphics, new Rectangle(0, 0, textBoxBorder.Width, textBoxBorder.Height),
+        //                        Plugin.InputPanelBackColor, ButtonBorderStyle.Solid);
+        //                else
+        //                    ControlPaint.DrawBorder(graphics, new Rectangle(0, 0, textBoxBorder.Width, textBoxBorder.Height),
+        //                        Plugin.InputPanelBackColor, ButtonBorderStyle.Solid);
+        //            }
+        //        }
+        //    }
+        //}
 
         internal static void DrawBorder(Control control, Color color, Color focusedColor, Color disabledColor)
         {
@@ -134,80 +116,105 @@ namespace MusicBeePlugin
                         ButtonBorderStyle.Solid);
             }
         }
+
+        internal static void DrawBorder(Control control)
+        {
+            DrawBorder(control, Plugin.ButtonBorderColor, Plugin.ButtonBorderColor, Plugin.ButtonBorderColor);
+        }
     }
 
-    public sealed class TextBoxBorder : UserControl
+    public sealed class ControlBorder : UserControl
     {
-        internal readonly TextBox textBox;
+        internal readonly Control control;
+        private bool ignoreControl_LocationChanged = false;
 
-        public TextBoxBorder(TextBox textBox)
+        public ControlBorder(Control control)
         {
             if (Plugin.SavedSettings.dontUseSkinColors)
                 return;
 
 
-            this.textBox = textBox;
+            this.control = control;
 
-            ControlsTools.TextBox_Resize(textBox, null);
+            Name = control.Name;
+            Tag = control.Tag;
+            control.Tag = null;
 
-            Name = textBox.Name;
-            Tag = textBox.Tag;
-            textBox.Tag = null;
-
-            Location = textBox.Location;
-            Size = textBox.Size;
-            Anchor = textBox.Anchor;
-            Dock = textBox.Dock;
-            Margin = textBox.Margin;
+            Location = control.Location;
+            Size = control.Size;
+            Anchor = control.Anchor;
+            Dock = control.Dock;
+            Margin = control.Margin;
             Padding = Padding.Empty;
 
-            TabIndex = textBox.TabIndex;
-            TabStop = textBox.TabStop;
+            TabIndex = control.TabIndex;
+            TabStop = control.TabStop;
 
-            var parent = textBox.Parent;
-            var index = parent.Controls.IndexOf(textBox);
+            var parent = control.Parent;
+            var index = parent.Controls.IndexOf(control);
 
             TableLayoutPanelCellPosition cellPosition = default;
             if (parent is TableLayoutPanel panel)
-                cellPosition = panel.GetCellPosition(textBox);
+                cellPosition = panel.GetCellPosition(control);
 
             parent.Controls.RemoveAt(index);
-            Controls.Add(textBox);
+            Controls.Add(control);
 
-            textBox.Margin = Padding.Empty;
-            textBox.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
-            textBox.Left = 0;
-            textBox.Top = 0;
-            textBox.Dock = DockStyle.None;
-            textBox.TabStop = false;
+            control.Margin = Padding.Empty;
+            control.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
+            control.Left = 0;
+            control.Top = 0;
+            control.Dock = DockStyle.None;
+            control.TabStop = false;
+            control.LocationChanged += ControlsTools.Control_LocationChanged;
+            control.SizeChanged += ControlsTools.Control_Resize;
 
             parent.Controls.Add(this);
             parent.Controls.SetChildIndex(this, index);
             if (parent is TableLayoutPanel layoutPanel)
                 layoutPanel.SetCellPosition(this, cellPosition);
 
-            Resize += TextBoxBorder_Resize;
-            Paint += TextBoxBorder_Paint;
-            GotFocus += (sender, args) => { textBox.Focus(); };
-
-            textBox.Paint += ControlsTools.DrawTextBoxBorder;
+            Resize += ControlBorder_Resize;
+            Paint += ControlBorder_Paint;
+            GotFocus += (sender, args) => { control.Focus(); };
 
             ResizeRedraw = true;
+
+            ControlBorder_Resize(null, null);
         }
 
-        private void TextBoxBorder_Paint(object sender, PaintEventArgs e)
+        internal bool getIgnoreControl_LocationChanged()
         {
-            ControlsTools.DrawTextBoxBorder((sender as TextBoxBorder).textBox, e);
+            return ignoreControl_LocationChanged;
         }
 
-        private void TextBoxBorder_Resize(object sender, EventArgs e)
+        internal void changeControlBorderLocation()
         {
-            textBox.Size = Size;
+            if (control.Left != 0)
+                Left = control.Left;
+
+            if (control.Top != 0)
+                Top = control.Top;
+
+            ignoreControl_LocationChanged = true;
+            control.Left = 0;
+            control.Top = 0;
+            ignoreControl_LocationChanged = false;
         }
 
-        private void TextBox_Resize(object sender, EventArgs e)
+        private void ControlBorder_Paint(object sender, PaintEventArgs e)
         {
-            Size = textBox.Size;
+            ControlsTools.DrawBorder(sender as Control);
+        }
+
+        private void ControlBorder_Resize(object sender, EventArgs e)
+        {
+            control.Size = Size;
+        }
+
+        private void Control_Resize(object sender, EventArgs e)
+        {
+            Size = control.Size;
         }
 
         protected override void Dispose(bool disposing)
@@ -216,11 +223,11 @@ namespace MusicBeePlugin
 
            if (disposing)
             {
-                textBox?.Dispose();
+                control?.Dispose();
             }
         }
 
-        ~TextBoxBorder()
+        ~ControlBorder()
         {
             Dispose(false);
         }
@@ -232,13 +239,15 @@ namespace MusicBeePlugin
         private readonly Color borderColorActive = Plugin.ScrollBarFocusedBorderColor;
         private readonly Color borderColor = Plugin.ScrollBarBackColor;
 
+        private Bitmap downArrowComboBoxImage;
+        private Bitmap disabledDownArrowComboBoxImage;
 
         public int lastSelectedIndex = -1;
 
         private int scaledPx = 1;
         private string cue = string.Empty;
 
-        private PluginWindowTemplate ownerForm;
+        internal readonly PluginWindowTemplate ownerForm;
 
         public ComboBox comboBox;
 
@@ -300,7 +309,7 @@ namespace MusicBeePlugin
         }
 
 
-        private TableLayoutPanel getDropDown(PluginWindowTemplate ownerForm, int customScrollBarInitialWidth)
+        private TableLayoutPanel getDropDown(int customScrollBarInitialWidth)
         {
             var tableLayoutPanel = new TableLayoutPanel();
 
@@ -342,16 +351,18 @@ namespace MusicBeePlugin
             return tableLayoutPanel;
         }
 
-        public CustomComboBox(PluginWindowTemplate ownerForm, ComboBox comboBoxRef, bool skinned)
+        public CustomComboBox(PluginWindowTemplate ownerForm, ComboBox comboBox, bool skinned)
         {
             SetStyle(ControlStyles.ResizeRedraw, true);
             //SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             //SetStyle(ControlStyles.DoubleBuffer, true);
 
+            this.ownerForm = ownerForm;
+
             if (skinned)
-                initSkinned(ownerForm, comboBoxRef);
+                initSkinned(comboBox);
             else
-                init(ownerForm, comboBoxRef);
+                init(comboBox);
 
             EnabledChanged += OnEnabledChanged;
             VisibleChanged += OnVisibleChanged;
@@ -366,10 +377,8 @@ namespace MusicBeePlugin
         }
 
 
-        private void init(PluginWindowTemplate ownerForm, ComboBox comboBox)
+        private void init(ComboBox comboBox)
         {
-            this.Paint += (sender, args) => { ControlsTools.DrawBorder(this, borderColor, borderColorActive, borderColorDisabled); };
-
             this.scaledPx = ownerForm.scaledPx;
             this.textBox = null;
             this.button = null;
@@ -409,7 +418,7 @@ namespace MusicBeePlugin
             this.comboBox.Size = new Size(comboBox.Width, comboBox.Height);
             this.comboBox.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
 
-            this.Size = new Size(this.comboBox.Width, this.comboBox.Height + 1);
+            this.Size = new Size(this.comboBox.Width, this.comboBox.Height + 1);//******
 
             this.Controls.Add(this.comboBox);
 
@@ -437,15 +446,15 @@ namespace MusicBeePlugin
 
             this.Location = location;
 
-            ownerForm.namesComboBoxes.Add(Name, this);
+            ownerForm.namesComboBoxes.AddReplace(Name, this);
         }
 
-        private void initSkinned(PluginWindowTemplate ownerForm, ComboBox comboBox)
+        private void initSkinned(ComboBox comboBox)
         {
-            this.ownerForm = ownerForm;
-            this.comboBox = comboBox;
-
             this.scaledPx = ownerForm.scaledPx;
+
+            downArrowComboBoxImage = Plugin.CopyBitmap(Plugin.DownArrowComboBoxImage);
+            disabledDownArrowComboBoxImage = Plugin.CopyBitmap(Plugin.DisabledDownArrowComboBoxImage);
 
             this.initialDropDownWidth = comboBox.DropDownWidth;
             //if (comboBox.DropDownWidth < comboBox.Width)
@@ -498,21 +507,21 @@ namespace MusicBeePlugin
 
             this.Size = new Size(comboBox.Width, this.textBox.Height);
 
-
             this.button = new Button();
             this.button.Font = this.Font;
 
             this.button.Margin = new Padding(0, 0, 0, 0);
 
-            this.button.Location = new Point(comboBox.Width - customScrollBarInitialWidth - 1, 1);
-            this.button.Size = new Size(customScrollBarInitialWidth, this.textBox.Height - 2);
+            this.button.Location = new Point(comboBox.Width - customScrollBarInitialWidth - 2, 0);
+            this.button.Size = new Size(customScrollBarInitialWidth + 2, this.textBox.Height);
+            //this.button.Region = new Region(new Rectangle(0, 1, button.Width - 1, button.Height - 2));//********
 
 
             this.button.Anchor = AnchorStyles.Right | AnchorStyles.Top;
             this.button.Text = string.Empty;
             this.button.ImageAlign = ContentAlignment.MiddleCenter;
             this.button.TextImageRelation = TextImageRelation.Overlay;
-            this.button.Image = Plugin.CopyBitmap(Plugin.DownArrowComboBoxImage);
+            this.button.Image = downArrowComboBoxImage;
             this.button.TabStop = false;
 
             //button.Click += button_Click;//****
@@ -526,8 +535,6 @@ namespace MusicBeePlugin
             
 
             ownerForm.skinControl(this.button);
-            this.button.FlatAppearance.BorderColor = Plugin.ScrollBarBackColor;
-
             ownerForm.skinControl(this.textBox);
 
 
@@ -536,7 +543,7 @@ namespace MusicBeePlugin
             this.textBox.Region = textBoxRegion;
 
 
-            var dropDownControl = getDropDown(ownerForm, customScrollBarInitialWidth);
+            var dropDownControl = getDropDown(customScrollBarInitialWidth);
             var controlHost = new ToolStripControlHost(dropDownControl);
             controlHost.Font = Font;
             controlHost.AutoSize = true;
@@ -574,6 +581,7 @@ namespace MusicBeePlugin
             CopyComboBoxEventHandlers(comboBox, this);
 
 
+            this.Paint += ControlBorder_Paint;
             this.GotFocus += CustomComboBox_GotFocus;
             this.SizeChanged += customComboBox_SizeChanged;
             customComboBox_SizeChanged(this, null);
@@ -585,9 +593,7 @@ namespace MusicBeePlugin
             ownerForm.allControls.Insert(allControlsIndex, this);
 
             parent.Controls.RemoveAt(index);
-            comboBox.Tag = null;
-            comboBox.Name = null;
-            //comboBox.Dispose();
+            comboBox.Dispose();
 
 
             parent.Controls.Add(this);
@@ -597,7 +603,7 @@ namespace MusicBeePlugin
 
             this.Location = location;
 
-            ownerForm.namesComboBoxes.Add(Name, this);
+            ownerForm.namesComboBoxes.AddReplace(Name, this);
         }
 
         private void CustomComboBox_GotFocus(object sender, EventArgs e)
@@ -949,9 +955,17 @@ namespace MusicBeePlugin
 
         internal void OnEnabledChanged(object sender, EventArgs e)
         {
-            comboBox?.Enable(Enabled);
-            textBox?.Enable(Enabled);
-            button?.Enable(Enabled);
+            if (textBox != null)
+            {
+                customComboBox_SizeChanged_ForButton();
+
+                textBox.Enabled = Enabled;
+                button.Enabled = Enabled;
+            }
+            else
+            {
+                comboBox.Enable(Enabled);
+            }
         }
 
         public ComboBoxStyle DropDownStyle
@@ -1001,6 +1015,27 @@ namespace MusicBeePlugin
             }
         }
 
+        private void ControlBorder_Paint(object sender, PaintEventArgs e)
+        {
+            ControlsTools.DrawBorder(sender as Control);
+        }
+
+        internal void customComboBox_SizeChanged_ForButton()
+        {
+            ownerForm.setSkinnedControlColors(button, null);
+
+            if (Enabled)//*********
+            {
+                //this.button.Region = new Region(new Rectangle(0, 0, button.Width, button.Height));//********
+                button.Image = downArrowComboBoxImage;
+            }
+            else
+            {
+                //this.button.Region = new Region(new Rectangle(0, 1, button.Width - 1, button.Height - 2));//*******
+                button.Image = disabledDownArrowComboBoxImage;
+            }
+        }
+
         private void customComboBox_SizeChanged(object sender, EventArgs e)
         {
             if (textBox == null)
@@ -1012,6 +1047,8 @@ namespace MusicBeePlugin
             }
             else
             {
+                customComboBox_SizeChanged_ForButton();
+
                 var textBoxRectangle = new Rectangle(1, 1, textBox.Width - 2, textBox.Height - 2);
                 var textBoxRegion = new Region(textBoxRectangle);
                 textBox.Region = textBoxRegion;
@@ -1105,6 +1142,15 @@ namespace MusicBeePlugin
                 {   //show above
                     dropDown.Show(textBoxScreenLocation, ToolStripDropDownDirection.AboveRight);
                 }
+            }
+        }
+
+        public void SetColors(Color foreColor, Color backColor)
+        {
+            if (textBox != null)
+            {
+                textBox.ForeColor = foreColor;
+                textBox.BackColor = backColor;
             }
         }
 
@@ -1566,7 +1612,7 @@ namespace MusicBeePlugin
             if (processPaintMessages)
             {
                 base.OnPaint(e);
-                //DrawBorder(e.Graphics);
+                DrawBorder(e.Graphics);
 
                 if (hScrollBar?.Visible == true)
                     hScrollBar.Invalidate();

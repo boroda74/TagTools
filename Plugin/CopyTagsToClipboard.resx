@@ -143,7 +143,7 @@
   <data name="&gt;&gt;checkUncheckAllCheckBoxLabel.Name" xml:space="preserve">
     <value>checkUncheckAllCheckBoxLabel</value>
   </data>
-  <data name="buttonCancel.TabIndex" type="System.Int32, mscorlib">
+  <data name="buttonClose.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
@@ -207,7 +207,7 @@
   <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="buttonCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="buttonClose.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="&gt;&gt;infoLabel.ZOrder" xml:space="preserve">
@@ -219,7 +219,7 @@
   <data name="&gt;&gt;tagSetComboBox.Name" xml:space="preserve">
     <value>tagSetComboBox</value>
   </data>
-  <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;buttonClose.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
@@ -256,7 +256,7 @@ To rename tag set just type new name in this box. </value>
   <data name="checkUncheckAllCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 4, 4, 4</value>
   </data>
-  <data name="&gt;&gt;buttonCancel.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonClose.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
@@ -292,13 +292,13 @@ To rename tag set just type new name in this box. </value>
   <data name="&gt;&gt;uncheckedSourceTagLabel.Name" xml:space="preserve">
     <value>uncheckedSourceTagLabel</value>
   </data>
-  <data name="buttonCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="buttonClose.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
-  <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
     <value>390, 32</value>
   </data>
-  <data name="buttonCancel.ToolTip" xml:space="preserve">
+  <data name="buttonClose.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="&gt;&gt;checkUncheckAllCheckBox.Type" xml:space="preserve">
@@ -313,8 +313,8 @@ To rename tag set just type new name in this box. </value>
   <data name="checkUncheckAllCheckBoxLabel.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;buttonCancel.Name" xml:space="preserve">
-    <value>buttonCancel</value>
+  <data name="&gt;&gt;buttonClose.Name" xml:space="preserve">
+    <value>buttonClose</value>
   </data>
   <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 4, 0</value>
@@ -346,7 +346,7 @@ To rename tag set just type new name in this box. </value>
   <data name="checkedSourceTagLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 3</value>
   </data>
-  <data name="buttonCancel.Text" xml:space="preserve">
+  <data name="buttonClose.Text" xml:space="preserve">
     <value>Close</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
@@ -451,7 +451,7 @@ To rename tag set just type new name in this box. </value>
   <data name="controlsPanel.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="buttonCancel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="buttonClose.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 6, 7</value>
   </data>
   <data name="&gt;&gt;label1.Type" xml:space="preserve">
@@ -502,7 +502,7 @@ To rename tag set just type new name in this box. </value>
   <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="buttonClose.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 23</value>
   </data>
   <data name="checkUncheckAllCheckBox.TabIndex" type="System.Int32, mscorlib">
@@ -550,7 +550,7 @@ To rename tag set just type new name in this box. </value>
   <data name="&gt;&gt;uncheckedSourceTagLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonCancel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;buttonClose.Parent" xml:space="preserve">
     <value>controlsPanel</value>
   </data>
   <data name="&gt;&gt;checkedSourceTagList.ZOrder" xml:space="preserve">

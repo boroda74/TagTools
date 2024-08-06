@@ -115,6 +115,7 @@ namespace MusicBeePlugin
 
         internal static Color ButtonFocusedBorderColor;
         internal static Color ButtonBorderColor;
+        internal static Color ButtonDisabledBorderColor;
 
         internal static Color ButtonForeColor;
         internal static Color ButtonBackColor;
@@ -170,6 +171,7 @@ namespace MusicBeePlugin
         internal static int SbBorderWidth = 1; //scaledPx;
 
 
+        internal static Bitmap DisabledDownArrowComboBoxImage;
         internal static Bitmap DownArrowComboBoxImage;
 
         internal static Bitmap UpArrowImage;
@@ -311,6 +313,8 @@ namespace MusicBeePlugin
 
         private static readonly string PluginHelpFileName = "Additional-Tagging-Tools";
         private static string PluginHelpFilePath;
+
+        private static readonly string PluginWebPage = "https://getmusicbee.com/addons/plugins/49/additional-tagging-amp-reporting-tools/";
 
         internal const string BackupIndexFileName = ".Master Tag Index.mbi";
         internal static string BackupDefaultPrefix = "Tag Backup ";
@@ -690,6 +694,8 @@ namespace MusicBeePlugin
         private static string PluginDescription;
 
         private static string PluginHelpString;
+        private static string PluginWebPageString;
+        private static string PluginWebPageToolTip;
         private static string PluginVersionString;
 
         private static string OpenWindowsMenuSectionName;
@@ -1028,6 +1034,7 @@ namespace MusicBeePlugin
         internal static string CtlSelectThisFolder;
         internal static string CtlNoBackupData;
         internal static string CtlNoDifferences;
+        internal static string CtlNoPreview;
         internal static string CtlMixedValues;
         internal static string CtlMixedValuesSameAsInLibrary;
         internal static string CtlMixedValuesDifferentFromLibrary;
@@ -3420,6 +3427,11 @@ namespace MusicBeePlugin
         {
             Process.Start(PluginHelpFilePath);
         }
+
+        internal void webPageEventHandler(object sender, EventArgs e)
+        {
+            Process.Start(PluginWebPage);
+        }
         #endregion
 
         #region Main plugin initialization
@@ -3441,6 +3453,8 @@ namespace MusicBeePlugin
             PluginDescription = "Adds some tagging & reporting tools to MusicBee";
 
             PluginHelpString = "Help...";
+            PluginWebPageString = "Plugin Web Page..."; ;
+            PluginWebPageToolTip = "Open Plugin Web Page (to check/download the latest version";
             PluginVersionString = "Version: ";
 
             OpenWindowsMenuSectionName = "OPEN WINDOWS";
@@ -3916,6 +3930,7 @@ namespace MusicBeePlugin
             CtlSelectThisFolder = "[SELECT THIS FOLDER]";
             CtlNoBackupData = "<No backup data>";
             CtlNoDifferences = "<No differences>";
+            CtlNoPreview = "<No preview>";
             CtlMixedValues = "(Mixed values)";
             CtlMixedValuesSameAsInLibrary = "Same as in library";
             CtlMixedValuesDifferentFromLibrary = "Different from library";
@@ -4197,6 +4212,8 @@ namespace MusicBeePlugin
                 PluginDescription = "Плагин добавляет дополнительные инструменты для работы с тегами";
 
                 PluginHelpString = "Справка...";
+                PluginWebPageString = "Веб-страница плагина..."; ;
+                PluginWebPageToolTip = "Открыть веб-страницу плагина (для проверки/загрузки последней версии)";
                 PluginVersionString = "Версия: ";
 
                 OpenWindowsMenuSectionName = "ОТКРЫТЫЕ ОКНА";
@@ -4631,6 +4648,7 @@ namespace MusicBeePlugin
                 CtlSelectThisFolder = "[ВЫБРАТЬ ЭТУ ПАПКУ]";
                 CtlNoBackupData = "<Нет архивных данных>";
                 CtlNoDifferences = "<Нет отличий>";
+                CtlNoPreview = "<Предварительный просмотр не сформирован>";
                 CtlMixedValues = "(Разные значения)";
                 CtlMixedValuesSameAsInLibrary = "Совпадает с библиотекой";
                 CtlMixedValuesDifferentFromLibrary = "Отличается от библиотеки";
@@ -5277,9 +5295,10 @@ namespace MusicBeePlugin
 
                     //Let's create plugin main and context menu items
                     MbForm.Invoke((MethodInvoker)delegate 
-                    { 
+                    {
                         getButtonTextBoxDpiFontScaling(); 
                         prepareThemedBitmapsAndColors(); 
+
                         addPluginContextMenuItems(); 
                         addPluginMenuItems(); 
                     });
@@ -5401,6 +5420,7 @@ namespace MusicBeePlugin
 
         internal static void DisposePluginBitmaps()
         {
+            DisabledDownArrowComboBoxImage?.Dispose();
             DownArrowComboBoxImage?.Dispose();
 
             UpArrowImage?.Dispose();
@@ -5609,6 +5629,7 @@ namespace MusicBeePlugin
 
                 ButtonBorderColor = buttonBorderColor;
                 ButtonFocusedBorderColor = GetWeightedColor(ButtonBorderColor, ButtonForeColor);
+                ButtonDisabledBorderColor = GetWeightedColor(ButtonBorderColor, ButtonForeColor, 0.25f);
 
 
                 ControlHighlightBackColor = buttonBackColor; //*** buttonBackLightDimmedAccentColor;
@@ -5717,6 +5738,15 @@ namespace MusicBeePlugin
 
                 var scrollBarImagesWidth = ControlsTools.GetCustomScrollBarInitialWidth(DpiScaling, 0); //Second arg. must be: SbBorderWidth /= scaledPx//*****
                 var comboBoxDownArrowSize = (int)Math.Round(DpiScaling * 1.238f * ScrollBarWidth);
+
+
+                DisabledDownArrowComboBoxImage?.Dispose();
+                if (GetAverageBrightness(ButtonBackColor) >= 0.5)
+                    DisabledDownArrowComboBoxImage = GetSolidImageByBitmapMask(Color.Black,
+                        Resources.down_arrow_combobox_b, comboBoxDownArrowSize, comboBoxDownArrowSize);
+                else
+                    DisabledDownArrowComboBoxImage = GetSolidImageByBitmapMask(Color.White,
+                        Resources.down_arrow_combobox_b, comboBoxDownArrowSize, comboBoxDownArrowSize);
 
 
                 DownArrowComboBoxImage?.Dispose();
@@ -6359,6 +6389,7 @@ namespace MusicBeePlugin
         internal void addPluginMenuItems() //Must be called AFTER InitLr() and InitAsr(), addPluginContextMenuItems()!
         {
             TagToolsSubmenu.DropDown.Items.Clear();
+            TagToolsSubmenu.DropDown.ShowItemToolTips = true;
 
             OpenedFormsSubmenu = AddMenuItem(TagToolsSubmenu, OpenWindowsMenuSectionName, null, null);
             MbApiInterface.MB_RegisterCommand(ShowHiddenWindowsDescription, showHiddenEventHandler);
@@ -6438,6 +6469,7 @@ namespace MusicBeePlugin
 
             AddMenuItem(TagToolsSubmenu, "-", null, null);
             AddMenuItem(TagToolsSubmenu, PluginHelpString, null, helpEventHandler);
+            AddMenuItem(TagToolsSubmenu, PluginWebPageString, null, webPageEventHandler).ToolTipText = PluginWebPageToolTip;
             AddMenuItem(TagToolsSubmenu, PluginVersion, null, null, false);
         }
 

@@ -304,10 +304,10 @@
   <data name="buttonsPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>986, 35</value>
   </data>
-  <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
     <value>881, 6</value>
   </data>
-  <data name="buttonCancel.Text" xml:space="preserve">
+  <data name="buttonClose.Text" xml:space="preserve">
     <value>Отмена</value>
   </data>
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">

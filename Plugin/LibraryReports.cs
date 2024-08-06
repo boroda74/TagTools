@@ -290,16 +290,20 @@ namespace MusicBeePlugin
         internal LibraryReports(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
+
+            new ControlBorder(this.presetNameTextBox);
+            new ControlBorder(this.appendTextBox);
+            new ControlBorder(this.idTextBox);
+            new ControlBorder(this.expressionTextBox);
         }
 
         protected override void initializeForm()
         {
             base.initializeForm();
+            Enable(false, autoApplyPresetsLabel);
 
 
             previewTable.ColumnWidthChanged += previewTable_ColumnWidthChanged;
-
-            Enable(false, autoApplyPresetsLabel);
 
 
             precisionDigitsComboBoxCustom = namesComboBoxes["precisionDigitsComboBox"];
@@ -522,6 +526,8 @@ namespace MusicBeePlugin
             resizeArtworkCheckBox.Checked = false;
             newArtworkSizeUpDown.Value = 300;
 
+            openReportCheckBox.Checked = SavedSettings.openReportAfterExporting;
+
 
             tagsDataGridView.Columns[0].HeaderCell.Style = headerCellStyle;
             tagsDataGridView.Columns[1].HeaderCell.Style = headerCellStyle;
@@ -537,11 +543,13 @@ namespace MusicBeePlugin
             tagsDataGridView.Columns[1].Width = (int)Math.Round(tagsDataGridView.Columns[1].Width * hDpiFontScaling);
 
             presetListLastSelectedIndex = -2;
-            presetList_SelectedIndexChanged(null, null); //Enable(true, autoApplyPresetsLabel) is called at the end of presetList_SelectedIndexChanged(null, null)
+            presetList_SelectedIndexChanged(null, null);
 
 
-            openReportCheckBox.Checked = SavedSettings.openReportAfterExporting;
+            Enable(true, autoApplyPresetsLabel);
 
+
+            updateCustomScrollBars(presetList);
 
             addRowsToTable = previewTable_AddRowsToTable;
             updateTable = previewTable_UpdateTable;
@@ -1940,7 +1948,7 @@ namespace MusicBeePlugin
 
                 
                 bool failed = true;
-                while (failed)
+                while (failed && backgroundTaskIsWorking() && !previewIsStopped)
                 {
                     try
                     {
@@ -1954,46 +1962,49 @@ namespace MusicBeePlugin
                     }
                 }
 
-                if (artworkField == -1)
-                    previewTable.Rows[previewTable.RowCount - 1].Resizable = DataGridViewTriState.True;
-                else
-                    previewTable.Rows[previewTable.RowCount - 1].Resizable = DataGridViewTriState.False;
-
-
-                for (var i = 0; i < previewTable.ColumnCount; i++)
+                if (backgroundTaskIsWorking() && !previewIsStopped)
                 {
-                    if (backgroundTaskIsCanceled)
-                        break;
-
-
-                    if (i != artworkField)
-                    {
-                        if (row[i].StartsWith(CtlAllTags) && previewTable.RowCount > 0)
-                            previewTable.Rows[previewTable.RowCount - 1].Cells[i].Style.Font = totalsFont;
-
-                        if (previewTable.RowCount > 0)
-                            previewTable.Rows[previewTable.RowCount - 1].Cells[i].ToolTipText = row[i] + "\n\n" + LrCellToolTip;
-
-                        if (maxWidths[i] < row[i].Length)
-                            maxWidths[i] = row[i].Length;
-                    }
+                    if (artworkField == -1)
+                        previewTable.Rows[previewTable.RowCount - 1].Resizable = DataGridViewTriState.True;
                     else
+                        previewTable.Rows[previewTable.RowCount - 1].Resizable = DataGridViewTriState.False;
+
+
+                    for (var i = 0; i < previewTable.ColumnCount; i++)
                     {
-                        //Let's replace string hashes in the Artwork column with images.
-                        var stringHash = row[artworkField];
-                        Bitmap pic;
+                        if (backgroundTaskIsCanceled)
+                            break;
 
-                        lock (artworks)
+
+                        if (i != artworkField)
                         {
-                            if (!artworks.TryGetValue(stringHash, out pic))
-                                pic = artworks[DefaultArtworkHash];
+                            if (row[i].StartsWith(CtlAllTags) && previewTable.RowCount > 0)
+                                previewTable.Rows[previewTable.RowCount - 1].Cells[i].Style.Font = totalsFont;
+
+                            if (previewTable.RowCount > 0)
+                                previewTable.Rows[previewTable.RowCount - 1].Cells[i].ToolTipText = row[i] + "\n\n" + LrCellToolTip;
+
+                            if (maxWidths[i] < row[i].Length)
+                                maxWidths[i] = row[i].Length;
                         }
-
-                        if (previewTable.RowCount > 0)
+                        else
                         {
-                            previewTable.Rows[previewTable.RowCount - 1].Cells[artworkField].ValueType = typeof(Bitmap);
-                            previewTable.Rows[previewTable.RowCount - 1].Cells[artworkField].Value = pic;
-                            previewTable.Rows[previewTable.RowCount - 1].MinimumHeight = PreviewTableDefaultArtworkSize;
+                            //Let's replace string hashes in the Artwork column with images.
+                            var stringHash = row[artworkField];
+                            Bitmap pic;
+
+                            lock (artworks)
+                            {
+                                if (!artworks.TryGetValue(stringHash, out pic))
+                                    pic = artworks[DefaultArtworkHash];
+                            }
+
+                            if (previewTable.RowCount > 0)
+                            {
+                                previewTable.Rows[previewTable.RowCount - 1].Cells[artworkField].ValueType = typeof(Bitmap);
+                                previewTable.Rows[previewTable.RowCount - 1].Cells[artworkField].Value = pic;
+                                previewTable.Rows[previewTable.RowCount - 1].MinimumHeight = PreviewTableDefaultArtworkSize;
+                            }
                         }
                     }
                 }
@@ -6835,8 +6846,8 @@ namespace MusicBeePlugin
 
         private void presetListSelectedIndexChanged(int index)
         {
-            Enable(false, autoApplyPresetsLabel);
-            previewTable.Enabled = true;
+            if (presetListLastSelectedIndex != -2) //It's during form init
+                Enable(false, autoApplyPresetsLabel);
 
             functionsDict.Clear(); //As soon as possible because availability of some UI controls depends on it
 
@@ -6907,8 +6918,9 @@ namespace MusicBeePlugin
                 enableDisablePreviewOptionControls(true);
 
                 disableQueryingOrUpdatingButtons();
-                
-                Enable(true, autoApplyPresetsLabel);
+
+                if (presetListLastSelectedIndex != -2) //It's during form init
+                    Enable(true, autoApplyPresetsLabel);
 
                 updateCustomScrollBars(presetList);
                 updateCustomScrollBars(previewTable);
@@ -7057,7 +7069,8 @@ namespace MusicBeePlugin
             enableDisablePreviewOptionControls(true);
             enableQueryingOrUpdatingButtons();
 
-            Enable(true, autoApplyPresetsLabel);
+            if (presetListLastSelectedIndex != -2) //It's during form init
+                Enable(true, autoApplyPresetsLabel);
 
 
             updateCustomScrollBars(presetList);

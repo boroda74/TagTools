@@ -67,6 +67,11 @@ namespace MusicBeePlugin
         internal QuickSettings(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
+
+            new ControlBorder(this.customFontTextBox);
+            new ControlBorder(this.preservedTagValuesLegendTextBox);
+            new ControlBorder(this.preservedTagsLegendTextBox);
+            new ControlBorder(this.changedLegendTextBox);
         }
 
         protected override void initializeForm()
@@ -188,7 +193,7 @@ namespace MusicBeePlugin
             Close();
         }
 
-        private void buttonCancel_Click(object sender, EventArgs e)
+        private void buttonClose_Click(object sender, EventArgs e)
         {
             Close();
         }

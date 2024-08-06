@@ -118,17 +118,35 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="autoBackupFolderTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>161, 8</value>
+  </data>
+  <data name="autoBackupFolderTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>700, 23</value>
+  </data>
+  <data name="browseButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>869, 8</value>
+  </data>
   <data name="browseButton.Text" xml:space="preserve">
     <value>Просмотр...</value>
   </data>
+  <data name="autoBackupFolderLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>166, 15</value>
+  </data>
   <data name="autoBackupFolderLabel.Text" xml:space="preserve">
     <value>Папка авто-резервирования:</value>
+  </data>
+  <data name="autoBackupPrefixLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>367, 15</value>
   </data>
   <data name="autoBackupPrefixLabel.Text" xml:space="preserve">
     <value>    Префикс имен файлов для автоматически созданных архивов:</value>
   </data>
   <data name="autoBackupPrefixTextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>720, 37</value>
+  </data>
+  <data name="autoBackupPrefixTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>249, 23</value>
   </data>
   <data name="autoBackupCheckBox.ToolTip" xml:space="preserve">
     <value>Авто-архивирование будет пропущено, если содержание текущей библиотеки и какие-либо теги 
@@ -159,13 +177,13 @@
     <value>минут.</value>
   </data>
   <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>791, 181</value>
+    <value>869, 181</value>
   </data>
   <data name="buttonClose.Text" xml:space="preserve">
     <value>Отмена</value>
   </data>
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>683, 181</value>
+    <value>761, 181</value>
   </data>
   <data name="backupArtworksCheckBox.ToolTip" xml:space="preserve">
     <value>ВНИМАНИЕ! Эта опция затрагивает, как ручное, так и автоматическое архивирование.</value>
@@ -175,7 +193,7 @@
 Иногда предположение названия библиотеки работает некорректно.</value>
   </data>
   <data name="autoBackupCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>139, 15</value>
+    <value>144, 15</value>
   </data>
   <data name="autoBackupCheckBoxLabel.Text" xml:space="preserve">
     <value>Авто-архивация каждые:</value>
@@ -224,7 +242,7 @@
     <value>ВНИМАНИЕ! Эта опция затрагивает, как ручное, так и автоматическое архивирование.</value>
   </data>
   <data name="storeTrackIdsInCustomTagCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>368, 157</value>
+    <value>442, 157</value>
   </data>
   <data name="storeTrackIdsInCustomTagCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>350, 15</value>
@@ -246,7 +264,7 @@ MusicBee, зависящих от библиотеки. По этой причи
 Убедитесь, что этот свой тег хранится в теге файла, а не в базе данных MusicBee.</value>
   </data>
   <data name="storeTrackIdsInCustomTagCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>341, 157</value>
+    <value>415, 157</value>
   </data>
   <data name="storeTrackIdsInCustomTagCheckBox.ToolTip" xml:space="preserve">
     <value>Архивация/восстановление тегов основано на внутренних идентификаторах треков 
@@ -262,7 +280,7 @@ MusicBee, зависящих от библиотеки. По этой причи
 Убедитесь, что этот свой тег хранится в теге файла, а не в базе данных MusicBee.</value>
   </data>
   <data name="trackIdTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>726, 154</value>
+    <value>804, 154</value>
   </data>
   <data name="trackIdTagList.Size" type="System.Drawing.Size, System.Drawing">
     <value>165, 23</value>
@@ -281,16 +299,16 @@ MusicBee, зависящих от библиотеки. По этой причи
 Убедитесь, что этот свой тег хранится в теге файла, а не в базе данных MusicBee.</value>
   </data>
   <data name="dontSkipAutoBackupsIfPlayCountsChangedLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>576, 15</value>
+    <value>581, 15</value>
   </data>
   <data name="dontSkipAutoBackupsIfPlayCountsChangedLabel.Text" xml:space="preserve">
     <value>Не пропускать авто-архивирование, даже если изменились только счетчики проигрываний/пропусков</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>880, 4</value>
+    <value>958, 4</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>899, 212</value>
+    <value>979, 214</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>915, 251</value>

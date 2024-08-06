@@ -175,7 +175,7 @@ namespace MusicBeePlugin
             if (!MbApiInterface.Library_QueryFilesEx("domain=DisplayedFiles", out files))
                 files = Array.Empty<string>();
 
-            switchOperation(calculateAlbumRating, buttonOK, EmptyButton, EmptyButton, buttonCancel, true, null);
+            switchOperation(calculateAlbumRating, buttonOK, EmptyButton, EmptyButton, buttonClose, true, null);
         }
 
         internal void calculateAlbumRatingForAllTracks()
@@ -254,7 +254,7 @@ namespace MusicBeePlugin
         {
             foreach (var control in allControls)
             {
-                if (control != buttonOK && control != buttonCancel)
+                if (control != buttonOK && control != buttonClose)
                     control.Enable(enable);
             }
         }
@@ -299,7 +299,7 @@ namespace MusicBeePlugin
             calculateAlbumRatingForDisplayedTracks();
         }
 
-        private void buttonCancel_Click(object sender, EventArgs e)
+        private void buttonClose_Click(object sender, EventArgs e)
         {
             Close();
         }

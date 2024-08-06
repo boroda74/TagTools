@@ -22,6 +22,19 @@ namespace MusicBeePlugin
         internal AutoRate(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
+
+            new ControlBorder(this.threshold05Box);
+            new ControlBorder(this.threshold1Box);
+            new ControlBorder(this.threshold15Box);
+            new ControlBorder(this.threshold2Box);
+            new ControlBorder(this.threshold25Box);
+            new ControlBorder(this.threshold3Box);
+            new ControlBorder(this.threshold35Box);
+            new ControlBorder(this.threshold4Box);
+            new ControlBorder(this.threshold45Box);
+            new ControlBorder(this.threshold5Box);
+            new ControlBorder(this.maxPlaysPerDayBox);
+            new ControlBorder(this.avgPlaysPerDayBox);
         }
 
         internal static void AutoRateOnStartup(Plugin plugin)
@@ -796,11 +809,11 @@ namespace MusicBeePlugin
             if (checkSettings())
             {
                 if (prepareBackgroundTask())
-                    switchOperation(autoRateNow, (Button)sender, EmptyButton, EmptyButton, buttonCancel, true, null);
+                    switchOperation(autoRateNow, sender as Button, EmptyButton, EmptyButton, buttonClose, true, null);
             }
         }
 
-        private void buttonCancel_Click(object sender, EventArgs e)
+        private void buttonClose_Click(object sender, EventArgs e)
         {
             Close();
         }
@@ -1066,7 +1079,7 @@ namespace MusicBeePlugin
         {
             foreach (var control in allControls)
             {
-                if (control != buttonOK && control != buttonCancel)
+                if (control != buttonOK && control != buttonClose)
                     control.Enable(enable);
             }
         }

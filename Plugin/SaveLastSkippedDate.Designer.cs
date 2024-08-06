@@ -31,7 +31,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SaveLastSkippedDate));
             this.lastSkippedTagList = new System.Windows.Forms.ComboBox();
-            this.buttonCancel = new System.Windows.Forms.Button();
+            this.buttonClose = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
             this.saveLastSkippedCheckBox = new System.Windows.Forms.CheckBox();
             this.dateTimeFormatLabel = new System.Windows.Forms.Label();
@@ -49,19 +49,19 @@
             this.lastSkippedTagList.Name = "lastSkippedTagList";
             this.lastSkippedTagList.Tag = "#SaveLastSkippedDate";
             //
-            //buttonCancel
+            //buttonClose
             //
-            resources.ApplyResources(this.buttonCancel, "buttonCancel");
-            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Tag = "#SaveLastSkippedDate&SaveLastSkippedDate@non-defaultable";
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            resources.ApplyResources(this.buttonClose, "buttonClose");
+            this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.buttonClose.Name = "buttonClose";
+            this.buttonClose.Tag = "#SaveLastSkippedDate&SaveLastSkippedDate@non-defaultable";
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             //
             //buttonOK
             //
             resources.ApplyResources(this.buttonOK, "buttonOK");
             this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Tag = "#buttonCancel&SaveLastSkippedDate";
+            this.buttonOK.Tag = "#buttonClose&SaveLastSkippedDate";
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             //
             //saveLastSkippedCheckBox
@@ -102,8 +102,8 @@
             this.AcceptButton = this.buttonOK;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.buttonCancel;
-            this.Controls.Add(this.buttonCancel);
+            this.CancelButton = this.buttonClose;
+            this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.lastSkippedDateFormatTagList);
             this.Controls.Add(this.dateTimeFormatLabel);
@@ -122,7 +122,7 @@
 
         #endregion
         private System.Windows.Forms.ComboBox lastSkippedTagList;
-        private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.CheckBox saveLastSkippedCheckBox;
         private System.Windows.Forms.ComboBox lastSkippedDateFormatTagList;

@@ -17,6 +17,9 @@ namespace MusicBeePlugin
         internal AutoBackupSettings(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
+
+            new ControlBorder(this.autoBackupFolderTextBox);
+            new ControlBorder(this.autoBackupPrefixTextBox);
         }
 
         protected override void initializeForm()

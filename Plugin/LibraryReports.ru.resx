@@ -146,7 +146,7 @@
     <value>1286, 613</value>
   </data>
   <data name="autoApplyPresetsLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1271, 45</value>
+    <value>1271, 48</value>
   </data>
   <data name="autoApplyPresetsLabel.Text" xml:space="preserve">
     <value>Экспорт тегов в файл для использования в сторонних приложениях. Таблица сортируется по группирующим тегам слева направо после нажатия кнопки "Просмотр". Отмеченные пресеты автоматически применятются при запуске MusicBee. ~Отмечено для автоматического применения: %%TICKED-PRESETS%%~Автоматическое применение пресетов отключено в настройках плагина. </value>
@@ -1121,7 +1121,7 @@
     <value>Новый пресет</value>
   </data>
   <data name="useHotkeyForSelectedTracksCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1069, 9</value>
+    <value>1042, 9</value>
   </data>
   <data name="useHotkeyForSelectedTracksCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>190, 15</value>
@@ -1133,13 +1133,13 @@
     <value>Назначить комбинацию клавиш для применения к выделенным трекам, или в противном случае, ко всей библиотеке</value>
   </data>
   <data name="useHotkeyForSelectedTracksCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1048, 9</value>
+    <value>1021, 9</value>
   </data>
   <data name="useHotkeyForSelectedTracksCheckBox.ToolTip" xml:space="preserve">
     <value>Назначить комбинацию клавиш для применения к выделенным трекам, или в противном случае, ко всей библиотеке</value>
   </data>
   <data name="assignHotkeyCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>737, 9</value>
+    <value>715, 9</value>
   </data>
   <data name="assignHotkeyCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>292, 15</value>
@@ -1154,7 +1154,7 @@
 Потребуется заново назначить комбинацию клавиш, если изменится название пресета</value>
   </data>
   <data name="assignHotkeyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>717, 9</value>
+    <value>695, 9</value>
   </data>
   <data name="assignHotkeyCheckBox.ToolTip" xml:space="preserve">
     <value>Сначала включите комбинацию клавиш для одного или нескольких пресетов, потом закройте это окно и 

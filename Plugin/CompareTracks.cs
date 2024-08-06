@@ -15,6 +15,7 @@ namespace MusicBeePlugin
         private List<string> tagNames;
         private List<MetaDataType> tagIds;
         private int[] displayedTags;
+        private int[] displayedTagsBackup;
         private List<int> reallyDisplayedTags;
 
         private readonly Bitmap emptyArtwork = new Bitmap(1, 1);
@@ -30,9 +31,6 @@ namespace MusicBeePlugin
         private int defaultColumnWidth;
 
         private bool ignoreAutoSelectTagsCheckBoxCheckedEvent;
-
-        private bool? generatePreview = false; //false: stop generating preview; true: preview is generated; null: generating preview is stopped, ready to regenerate it
-        private bool closeFormOnStoppingPreview = false;
 
         private readonly Dictionary<int, object> buffer = new Dictionary<int, object>();
         private Bitmap bufferArtwork;
@@ -69,7 +67,7 @@ namespace MusicBeePlugin
             artworkCellTemplate = previewTable.Columns[1].CellTemplate;
 
 
-            if (!SavedSettings.dontAutoSelectDisplayedTags || SavedSettings.displayedTags == null)
+            if (SavedSettings.displayedTags == null)
             {
                 displayedTags = new int[tagIds.Count];
                 for (var i = 0; i < tagIds.Count; i++)
@@ -110,10 +108,6 @@ namespace MusicBeePlugin
             if (reallyDisplayedTags.Count > 1)
                 previewTable.RowCount = reallyDisplayedTags.Count;
 
-
-            updateCustomScrollBars(previewTable);
-
-
             artworkRow = -1;
 
             for (var j = 0; j < reallyDisplayedTags.Count; j++)
@@ -123,168 +117,37 @@ namespace MusicBeePlugin
                 if ((MetaDataType)reallyDisplayedTags[j] == MetaDataType.Artwork)
                     artworkRow = j;
             }
+
+            updateCustomScrollBars(previewTable);
         }
 
-        private void fillTable(bool reuseCache)
+        private bool fillTable(bool reuseCache)
         {
             if (reuseCache)
             {
                 fillTagNamesInTable();
 
-                generatePreview = true;
-                buttonOK.Enable(true);
-                buttonCancel.Enable(true);
-
-                buttonCopy.Enable(false);
-                buttonPaste.Enable(false);
-                buttonClear.Enable(false);
+                enableQueryingOrUpdatingButtons();
 
                 this.Enable(true, null);
 
 
                 if (reallyDisplayedTags.Count == 0)
                 {
-                    var newColumn = columnTemplate.Clone() as DataGridViewColumn;
-                    newColumn.HeaderText = string.Empty;
-                    newColumn.ToolTipText = string.Empty;
-                    newColumn.Width = defaultColumnWidth;
-
-                    previewTable.Columns.Insert(0, newColumn);
-                    previewTable.ColumnCount = 1;
-
-
-                    previewTable.RowCount = 1;
-                    updateCustomScrollBars(previewTable);
-
-                    previewTable.Rows[0].HeaderCell.Value = CtlNoDifferences;
-
-                    if (artworkRow != 0)
-                    {
-                        previewTable.Rows[0].Cells[0].Value = null;
-                    }
-                    else
-                    {
-                        previewTable.Rows[0].Cells[0].Value = new Bitmap(1, 1);
-                        previewTable.Rows[0].Cells[0].Tag = string.Empty;
-                    }
+                    resetPreviewTable(true, true);
+                    return false;
                 }
                 else
                 {
-                    for (var trackNo = 0; trackNo < cachedTracks.Count; trackNo++)
-                    {
-                        if (generatePreview != true)
-                        {
-                            cachedTracks = null;
-                            buffer.Clear();
-
-                            var columnTemplateCopy = columnTemplate.Clone() as DataGridViewColumn;
-                            columnTemplateCopy.Width = defaultColumnWidth;
-
-                            previewTable.Columns.Insert(0, columnTemplateCopy);
-                            previewTable.ColumnCount = 1;
-
-                            generatePreview = null;
-                            buttonOK.Enable(true);
-                            buttonCancel.Enable(true);
-
-                            buttonCopy.Enable(true);
-                            buttonPaste.Enable(true);
-                            buttonClear.Enable(true);
-
-                            if (closeFormOnStoppingPreview)
-                                Close();
-
-                            return;
-                        }
-
-
-                        var newColumn = columnTemplate.Clone() as DataGridViewColumn;
-                        newColumn.HeaderText = string.Empty + (trackNo + 1);
-                        newColumn.ToolTipText = trackUrls[trackNo];
-                        newColumn.Width = defaultColumnWidth;
-
-                        if (trackNo == 0)
-                        {
-                            previewTable.Columns.Insert(0, newColumn);
-                            previewTable.ColumnCount = 1;
-                        }
-                        else
-                        {
-                            previewTable.Columns.Add(newColumn);
-                        }
-
-
-                        updateCustomScrollBars(previewTable);
-                        SetStatusBarTextForFileOperations(CompareTracksSbText, true, trackNo, cachedTracks.Count);
-
-
-                        for (var j = 0; j < reallyDisplayedTags.Count; j++)
-                        {
-                            var tagPosition = 0;
-                            for (var i = 0; i < displayedTags.Length; i++)
-                            {
-                                if (displayedTags[i] == reallyDisplayedTags[j])
-                                {
-                                    tagPosition = i;
-                                    break;
-                                }
-                            }
-
-                            var tagValue = cachedTracks[trackNo][tagPosition];
-
-                            if (j != artworkRow)
-                            {
-                                previewTable.Rows[j].Cells[trackNo].Value = tagValue;
-                            }
-                            else
-                            {
-                                Bitmap artwork;
-
-                                if (tagValue == string.Empty)
-                                    artwork = emptyArtwork;
-                                else
-                                    artwork = typeConverter.ConvertFrom(Convert.FromBase64String(tagValue)) as Bitmap;
-
-
-                                previewTable.Rows[j].Cells[trackNo] = artworkCellTemplate.Clone() as DataGridViewCell;
-                                previewTable.Rows[j].Cells[trackNo].Value = artwork;
-                                previewTable.Rows[j].Cells[trackNo].Tag = tagValue;
-                                previewTable.Rows[j].Cells[trackNo].ReadOnly = true;
-                            }
-                        }
-                    }
+                    return true;
                 }
-
-                generatePreview = false;
-
-                if (reallyDisplayedTags.Count == 0)
-                {
-                    buttonOK.Enable(false);
-                    buttonOK.Text = PreviewButtonName;
-                }
-                else
-                {
-                    buttonOK.Text = OKButtonName;
-
-                    buttonCopy.Enable(true);
-                    buttonPaste.Enable(true);
-                    buttonClear.Enable(true);
-                }
-
-                updateCustomScrollBars(previewTable);
-                SetResultingSbText();
             }
             else
             {
-                buttonCopy.Enable(false);
-                buttonPaste.Enable(false);
-                buttonClear.Enable(false);
-
                 this.Enable(false, null);
 
-                buttonCancel.Enable(false);
-                buttonOK.Enable(false);
-                buttonOK.Text = StopButtonName;
+                enableDisablePreviewOptionControls(false);
+                disableQueryingOrUpdatingButtons();
 
                 cachedTracks = new List<List<string>>();
 
@@ -303,27 +166,179 @@ namespace MusicBeePlugin
 
                 getReallyDisplayedTags();
 
-                if (reallyDisplayedTags.Count == 0)
+                return fillTable(true);
+            }
+        }
+
+        private void resetPreviewTable(bool resetRows, bool noReallyDisplayedTagsOtherwiseNoPreview)
+        {
+            previewIsGenerated = false;
+            cachedTracks = null;
+            buffer.Clear();
+
+
+            buttonOK.Enable(false);
+
+            var newColumn = columnTemplate.Clone() as DataGridViewColumn;
+            newColumn.Width = defaultColumnWidth;
+
+            if (resetRows)
+            {
+                previewTable.RowCount = 1;
+
+                if (noReallyDisplayedTagsOtherwiseNoPreview)
+                    previewTable.Rows[0].HeaderCell.Value = CtlNoDifferences;
+                else
+                    previewTable.Rows[0].HeaderCell.Value = CtlNoPreview;
+            }
+
+            previewTable.Columns.Insert(0, newColumn);
+            previewTable.ColumnCount = 1;
+
+            updateCustomScrollBars(previewTable);
+            SetStatusBarText(string.Empty, false);
+
+            enableQueryingOrUpdatingButtons();
+            enableDisablePreviewOptionControls(true);
+        }
+
+        private void addTrackColumn(int trackNo)
+        {
+            if (!backgroundTaskIsWorking() || previewIsStopped)
+                return;
+
+            try
+            {
+                var newColumn = columnTemplate.Clone() as DataGridViewColumn;
+                newColumn.HeaderText = (trackNo + 1).ToString();
+                newColumn.ToolTipText = trackUrls[trackNo];
+                newColumn.Width = defaultColumnWidth;
+
+                if (trackNo == 0)
                 {
-                    generatePreview = null;
-                    cachedTracks = null;
-                    buffer.Clear();
-                    buttonOK.Text = PreviewButtonName;
-                    previewTable.ColumnCount = 0;
+                    previewTable.Columns.Insert(0, newColumn);
+                    previewTable.ColumnCount = 1;
+                }
+                else
+                {
+                    previewTable.Columns.Add(newColumn);
+                }
+            }
+            catch
+            {
+                //Generating preview is stopped. There is some .Net bug. Let's ignore.
+            }
+
+
+            if ((previewTable.ColumnCount & 0x1f) == 0)
+                updateCustomScrollBars(previewTable);
+
+            SetStatusBarTextForFileOperations(CompareTracksSbText, true, trackNo, cachedTracks.Count);
+        }
+
+        private void setTrackTags(int trackNo, string[] tagValues)
+        {
+            if (!backgroundTaskIsWorking() || previewIsStopped)
+                return;
+
+            for (var j = 0; j < reallyDisplayedTags.Count; j++)
+            {
+                if (j != artworkRow)
+                {
+                    previewTable.Rows[j].Cells[trackNo].Value = tagValues[j];
+                }
+                else
+                {
+                    Bitmap artwork;
+
+                    if (tagValues[j] == string.Empty)
+                        artwork = emptyArtwork;
+                    else
+                        artwork = typeConverter.ConvertFrom(Convert.FromBase64String(tagValues[j])) as Bitmap;
+
+
+                    previewTable.Rows[j].Cells[trackNo] = artworkCellTemplate.Clone() as DataGridViewCell;
+                    previewTable.Rows[j].Cells[trackNo].Value = artwork;
+                    previewTable.Rows[j].Cells[trackNo].Tag = tagValues[j];
+                    previewTable.Rows[j].Cells[trackNo].ReadOnly = true;
+                }
+            }
+        }
+
+        private void resetFormToGeneratedPreview()
+        {
+            enableDisablePreviewOptionControls(true);
+
+            updateCustomScrollBars(previewTable);
+            SetResultingSbText();
+        }
+
+        internal bool prepareBackgroundPreview()
+        {
+            enableDisablePreviewOptionControls(false);
+
+            if (previewIsGenerated)
+            {
+                resetPreviewTable(true, false);
+                enableDisablePreviewOptionControls(true);
+                return true;
+            }
+
+            resetPreviewTable(false, false);
+
+            return fillTable(false);
+        }
+
+        private void previewChanges()
+        {
+            string[] tagValues = new string[reallyDisplayedTags.Count];
+
+            previewIsGenerated = true;
+
+            for (var trackNo = 0; trackNo < cachedTracks.Count; trackNo++)
+            {
+                if (backgroundTaskIsCanceled || previewIsStopped)
+                {
+                    Invoke(new Action(() => { resetPreviewTable(false, false); }));
+                    return;
                 }
 
-                fillTable(true);
 
-                if (!SavedSettings.dontPlayCompletedSound)
-                    System.Media.SystemSounds.Asterisk.Play();
+                Invoke(new Action(() => { addTrackColumn(trackNo); }));
+
+                for (var j = 0; j < reallyDisplayedTags.Count; j++)
+                {
+                    if (backgroundTaskIsCanceled || previewIsStopped)
+                    {
+                        Invoke(new Action(() => { resetPreviewTable(false, false); }));
+                        return;
+                    }
+
+
+                    var tagPosition = 0;
+                    for (var i = 0; i < displayedTags.Length; i++)
+                    {
+                        if (displayedTags[i] == reallyDisplayedTags[j])
+                        {
+                            tagPosition = i;
+                            break;
+                        }
+                    }
+
+                    tagValues[j] = cachedTracks[trackNo][tagPosition];
+                }
+
+                Invoke(new Action(() => { setTrackTags(trackNo, tagValues); }));
             }
+
+            Invoke(new Action(() => { resetFormToGeneratedPreview(); }));
         }
 
         private void getReallyDisplayedTags()
         {
             reallyDisplayedTags = new List<int>();
 
-            if (!SavedSettings.dontAutoSelectDisplayedTags)
+            if (autoSelectTagsCheckBox.Checked)
             {
                 var reallyDisplayedTags2 = new List<int>();
 
@@ -336,11 +351,8 @@ namespace MusicBeePlugin
                         {
                             if (cachedTracks[i][j] != cachedTracks[k][j])
                             {
-                                if (!reallyDisplayedTags2.Contains(displayedTags[j]))
-                                {
-                                    reallyDisplayedTags2.Add(displayedTags[j]);
+                                if (reallyDisplayedTags2.AddUnique(displayedTags[j]))
                                     break;
-                                }
                             }
                         }
                     }
@@ -357,7 +369,7 @@ namespace MusicBeePlugin
             }
 
 
-            if (!SavedSettings.dontAutoSelectDisplayedTags)
+            if (autoSelectTagsCheckBox.Checked)
             {
                 for (var i = cachedTracks.Count - 1; i >= 0; i--)
                 {
@@ -390,6 +402,8 @@ namespace MusicBeePlugin
             SavedSettings.rowHeadersWidth = rowHeadersWidth;
             SavedSettings.defaultColumnWidth = defaultColumnWidth;
             SavedSettings.dontAutoSelectDisplayedTags = !autoSelectTagsCheckBox.Checked;
+
+            TagToolsPlugin.SaveSettings();
         }
 
         private void applyChanges()
@@ -421,47 +435,106 @@ namespace MusicBeePlugin
             SetResultingSbText();
         }
 
-        private void buttonOK_Click(object sender, EventArgs e)
+        internal override void enableDisablePreviewOptionControls(bool enable, bool dontChangeDisabled = false)
         {
-            if (generatePreview == true) //Clicking "Stop" button
-            {
-                buttonCancel.Enable(false);
-                buttonOK.Enable(false);
-                buttonOK.Text = PreviewButtonName;
-
-                generatePreview = null;
-                return;
-            }
-            else if (generatePreview == null) //Clicking "Preview" button
-            {
-                fillTable(false);
-                return;
-            }
-
-
-            switchOperation(applyChanges, (Button)sender, buttonOK, null, buttonCancel, true, null, true);
+            autoSelectTagsCheckBox.Enable(enable);
+            buttonSelectTags.Enable(enable && !autoSelectTagsCheckBox.Checked);
+            rememberColumnAsDefaultWidthCheckBox.Enable(enable);
+            buttonCopy.Enable(enable);
+            buttonPaste.Enable(enable);
+            buttonClear.Enable(enable);
         }
 
-        private void buttonCancel_Click(object sender, EventArgs e)
+        internal override void enableQueryingOrUpdatingButtons()
+        {
+            buttonOK.Enable((previewIsGenerated && !previewIsStopped) || SavedSettings.allowCommandExecutionWithoutPreview);
+            buttonPreview.Enable(true);
+        }
+
+        internal override void disableQueryingOrUpdatingButtons()
+        {
+            buttonOK.Enable(false);
+            buttonPreview.Enable(false);
+        }
+
+        private void buttonPreview_Click(object sender, EventArgs e)
+        {
+            clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewChanges, buttonPreview, buttonOK, buttonClose, 0, 1);
+        }
+
+        private void buttonOK_Click(object sender, EventArgs e)
+        {
+            switchOperation(applyChanges, buttonOK, buttonOK, buttonPreview, buttonClose, true, null, true);
+        }
+
+        private void buttonClose_Click(object sender, EventArgs e)
         {
             saveSettings();
+            Close();
+        }
 
-            if (generatePreview == true)
+        private bool areOldAndNewDisplayedTagsDifferent(int[] oldTags, int[] newTags)
+        {
+            if (newTags.Length != oldTags.Length)
             {
-                closeFormOnStoppingPreview = true;
-                generatePreview = null;
+                return true;
             }
             else
             {
-                Close();
+                bool newTagsAreDifferent = false;
+                for (int i = 0; i < newTags.Length; i++)
+                {
+                    if (newTags[i] != oldTags[i])
+                    {
+                        newTagsAreDifferent = true;
+                        break;
+                    }
+                }
+
+                if (newTagsAreDifferent)
+                    return true;
+                else
+                    return false;
             }
         }
 
         private void buttonSelectTags_Click(object sender, EventArgs e)
         {
-            buffer.Clear();
-            displayedTags = CopyTagsToClipboard.SelectTags(TagToolsPlugin, SelectDisplayedTagsWindowTitle, SelectButtonName, displayedTags, true, true);
-            fillTable(false);
+            var newDisplayedTags = CopyTagsToClipboard.SelectTags(TagToolsPlugin, SelectDisplayedTagsWindowTitle, SelectButtonName, displayedTags, true, true);
+            if (areOldAndNewDisplayedTagsDifferent(displayedTags, newDisplayedTags))
+            {
+                displayedTags = newDisplayedTags;
+                resetPreviewTable(true, false);
+                clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewChanges, buttonPreview, buttonOK, buttonClose, 0, 1);
+            }
+        }
+
+        private void autoSelectTagsCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (autoSelectTagsCheckBox.Checked)
+            {
+                buttonSelectTags.Enable(false);
+
+                displayedTagsBackup = displayedTags;
+                displayedTags = new int[tagIds.Count];
+
+                for (var i = 0; i < tagIds.Count; i++)
+                    displayedTags[i] = (int)tagIds[i];
+            }
+            else
+            {
+                buttonSelectTags.Enable(true);
+
+                displayedTags = displayedTagsBackup;
+            }
+
+
+            if (ignoreAutoSelectTagsCheckBoxCheckedEvent)
+                return;
+
+
+            resetPreviewTable(true, false);
+            clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewChanges, buttonPreview, buttonOK, buttonClose, 0, 1);
         }
 
         private void previewTable_RowHeadersWidthChanged(object sender, EventArgs e)
@@ -545,36 +618,7 @@ namespace MusicBeePlugin
         {
             previewTable.ColumnCount = 1;
             Refresh();
-            fillTable(false);
-        }
-
-        private void autoSelectTagsCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            buffer.Clear();
-
-            SavedSettings.dontAutoSelectDisplayedTags = !autoSelectTagsCheckBox.Checked;
-
-            if (autoSelectTagsCheckBox.Checked)
-            {
-                buttonSelectTags.Enable(false);
-
-                displayedTags = new int[tagIds.Count];
-                for (var i = 0; i < tagIds.Count; i++)
-                    displayedTags[i] = (int)tagIds[i];
-            }
-            else
-            {
-                buttonSelectTags.Enable(true);
-
-                displayedTags = SavedSettings.displayedTags;
-            }
-
-
-            if (ignoreAutoSelectTagsCheckBoxCheckedEvent)
-                return;
-
-
-            fillTable(false);
+            clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewChanges, buttonPreview, buttonOK, buttonClose, 0, 1);
         }
 
         private void buttonCopy_Click(object sender, EventArgs e)
@@ -650,6 +694,9 @@ namespace MusicBeePlugin
 
         private void rememberColumnAsDefaultWidthCheckBoxLabel_Click(object sender, EventArgs e)
         {
+            if (!rememberColumnAsDefaultWidthCheckBox.IsEnabled())
+                return;
+
             rememberColumnAsDefaultWidthCheckBox.Checked = !rememberColumnAsDefaultWidthCheckBox.Checked;
         }
 

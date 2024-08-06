@@ -53,6 +53,23 @@ namespace MusicBeePlugin
         internal AsrPresetEditor(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
+
+            new ControlBorder(this.nameBox);
+            new ControlBorder(this.descriptionBox);
+            new ControlBorder(this.customTextBox);
+            new ControlBorder(this.customText2Box);
+            new ControlBorder(this.customText3Box);
+            new ControlBorder(this.customText4Box);
+            new ControlBorder(this.searchedPatternBox);
+            new ControlBorder(this.replacedPatternBox);
+            new ControlBorder(this.searchedPattern2Box);
+            new ControlBorder(this.replacedPattern2Box);
+            new ControlBorder(this.searchedPattern3Box);
+            new ControlBorder(this.replacedPattern3Box);
+            new ControlBorder(this.searchedPattern4Box);
+            new ControlBorder(this.replacedPattern4Box);
+            new ControlBorder(this.searchedPattern5Box);
+            new ControlBorder(this.replacedPattern5Box);
         }
 
         protected override void initializeForm()
@@ -94,7 +111,7 @@ namespace MusicBeePlugin
             {
                 this.MakeReadonly(true);
 
-                buttonCancel.Enable(true);
+                buttonClose.Enable(true);
                 buttonOK.Enable(true);
                 linkLabel1.Enable(true);
                 tableLayoutPanel1.MakeReadonly(false);
@@ -359,7 +376,7 @@ namespace MusicBeePlugin
             Close();
         }
 
-        private void buttonCancel_Click(object sender, EventArgs e)
+        private void buttonClose_Click(object sender, EventArgs e)
         {
             settingsSaved = false;
             Close();

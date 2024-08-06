@@ -103,9 +103,21 @@ namespace MusicBeePlugin
 
         private void previewTable_AddRowToTable(object[] row)
         {
-            previewTable.Rows.Add(row);
+            if (backgroundTaskIsWorking() && !previewIsStopped)
+            {
+                try
+                {
+                    previewTable.Rows.Add(row);
+                }
+                catch
+                {
+                    //Generating preview is stopped. There is some .Net bug. Let's ignore.
+                }
+            }
 
-            previewTable.FirstDisplayedScrollingRowIndex = previewTable.RowCount - 1;
+            if (previewTable.RowCount > 0)
+                previewTable.FirstDisplayedScrollingRowIndex = previewTable.RowCount - 1;
+
             if ((previewTable.RowCount & 0x1f) == 0)
                 updateCustomScrollBars(previewTable);
         }
@@ -343,12 +355,12 @@ namespace MusicBeePlugin
         {
             saveSettings();
             if (prepareBackgroundTask())
-                switchOperation(applyChanges, (Button)sender, buttonOK, buttonPreview, buttonCancel, true, null);
+                switchOperation(applyChanges, sender as Button, buttonOK, buttonPreview, buttonClose, true, null);
         }
 
         private void buttonPreview_Click(object sender, EventArgs e)
         {
-            clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewChanges, (Button)sender, buttonOK, buttonCancel);
+            clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewChanges, sender as Button, buttonOK, buttonClose);
             enableQueryingOrUpdatingButtons();
 
             if (previewTable.RowCount > 0)
@@ -358,7 +370,7 @@ namespace MusicBeePlugin
             }
         }
 
-        private void buttonCancel_Click(object sender, EventArgs e)
+        private void buttonClose_Click(object sender, EventArgs e)
         {
             Close();
         }

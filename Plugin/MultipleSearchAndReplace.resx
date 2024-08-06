@@ -135,9 +135,9 @@
   <data name="templateTable.ColumnHeadersHeight" type="System.Int32, mscorlib">
     <value>29</value>
   </data>
-  <data name="SearchTag.UserAddedColumn" type="System.Boolean, mscorlib">
+  <metadata name="SearchTag.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
+  </metadata>
   <data name="SearchTag.HeaderText" xml:space="preserve">
     <value>Search tag</value>
   </data>
@@ -147,9 +147,9 @@
   <data name="SearchTag.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="RegEx.UserAddedColumn" type="System.Boolean, mscorlib">
+  <metadata name="RegEx.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
+  </metadata>
   <data name="RegEx.HeaderText" xml:space="preserve">
     <value>(*)</value>
   </data>
@@ -162,9 +162,9 @@
   <data name="RegEx.Width" type="System.Int32, mscorlib">
     <value>30</value>
   </data>
-  <data name="CaseSensitive.UserAddedColumn" type="System.Boolean, mscorlib">
+  <metadata name="CaseSensitive.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
+  </metadata>
   <data name="CaseSensitive.HeaderText" xml:space="preserve">
     <value>Aa</value>
   </data>
@@ -177,27 +177,27 @@
   <data name="CaseSensitive.Width" type="System.Int32, mscorlib">
     <value>30</value>
   </data>
-  <data name="SearchFor.UserAddedColumn" type="System.Boolean, mscorlib">
+  <metadata name="SearchFor.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
+  </metadata>
   <data name="SearchFor.HeaderText" xml:space="preserve">
     <value>Search for</value>
   </data>
   <data name="SearchFor.MinimumWidth" type="System.Int32, mscorlib">
     <value>50</value>
   </data>
-  <data name="ReplaceWith.UserAddedColumn" type="System.Boolean, mscorlib">
+  <metadata name="ReplaceWith.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
+  </metadata>
   <data name="ReplaceWith.HeaderText" xml:space="preserve">
     <value>Replace with</value>
   </data>
   <data name="ReplaceWith.MinimumWidth" type="System.Int32, mscorlib">
     <value>50</value>
   </data>
-  <data name="Position.UserAddedColumn" type="System.Boolean, mscorlib">
+  <metadata name="Position.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
+  </metadata>
   <data name="Position.HeaderText" xml:space="preserve">
     <value>Позиция</value>
   </data>
@@ -210,12 +210,12 @@
   <data name="templateTable.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="dirtyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing">
+  <metadata name="dirtyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
-  </data>
-  <data name="$this.Localizable" type="System.Boolean, mscorlib">
+  </metadata>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
+  </metadata>
   <data name="buttonPreview.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
@@ -258,44 +258,44 @@
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>7, 15</value>
   </data>
-  <data name="buttonCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="buttonClose.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="buttonCancel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+  <data name="buttonClose.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
   </data>
-  <data name="buttonCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="buttonClose.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
     <value>828, 5</value>
   </data>
-  <data name="buttonCancel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="buttonClose.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 6, 4</value>
   </data>
-  <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="buttonClose.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 23</value>
   </data>
-  <data name="buttonCancel.TabIndex" type="System.Int32, mscorlib">
+  <data name="buttonClose.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="buttonCancel.Text" xml:space="preserve">
+  <data name="buttonClose.Text" xml:space="preserve">
     <value>Close</value>
   </data>
-  <data name="&gt;&gt;buttonCancel.Name" xml:space="preserve">
-    <value>buttonCancel</value>
+  <data name="&gt;&gt;buttonClose.Name" xml:space="preserve">
+    <value>buttonClose</value>
   </data>
-  <data name="&gt;&gt;buttonCancel.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonClose.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonCancel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;buttonClose.Parent" xml:space="preserve">
     <value>controlsPanel</value>
   </data>
-  <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;buttonClose.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>934, 461</value>
+    <value>936, 463</value>
   </data>
   <data name="controlsPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -321,9 +321,12 @@
   <data name="buttonDeleteSaved.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
   </data>
-  <data name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing">
-    <value>165, 17</value>
+  <data name="buttonDeleteSaved.Text" xml:space="preserve">
+    <value>❌</value>
   </data>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>165, 17</value>
+  </metadata>
   <data name="buttonDeleteSaved.ToolTip" xml:space="preserve">
     <value>Delete ASR preset</value>
   </data>
@@ -422,10 +425,10 @@ later for auto-execution or assign hotkey to it</value>
     <value>NoControl</value>
   </data>
   <data name="autoApplyPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>582, 34</value>
+    <value>585, 34</value>
   </data>
   <data name="autoApplyPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 0, 4</value>
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="autoApplyPictureBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>19, 19</value>
@@ -461,10 +464,10 @@ later for auto-execution or assign hotkey to it</value>
     <value>NoControl</value>
   </data>
   <data name="autoApplyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>532, 36</value>
+    <value>565, 36</value>
   </data>
   <data name="autoApplyCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 4, 4, 4</value>
+    <value>12, 4, 12, 4</value>
   </data>
   <data name="autoApplyCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 19</value>
@@ -503,7 +506,7 @@ later for auto-execution or assign hotkey to it</value>
     <value>4, 4, 4, 4</value>
   </data>
   <data name="templateNameTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>198, 23</value>
+    <value>231, 23</value>
   </data>
   <data name="templateNameTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -638,10 +641,10 @@ later for auto-execution or assign hotkey to it</value>
     <value>NoControl</value>
   </data>
   <data name="buttonDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>37, 32</value>
+    <value>31, 32</value>
   </data>
   <data name="buttonDown.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 6, 4</value>
+    <value>0, 4, 6, 4</value>
   </data>
   <data name="buttonDown.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 23</value>
@@ -677,7 +680,7 @@ later for auto-execution or assign hotkey to it</value>
     <value>6, 32</value>
   </data>
   <data name="buttonUp.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 4, 4, 4</value>
+    <value>6, 4, 2, 4</value>
   </data>
   <data name="buttonUp.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 23</value>
@@ -983,39 +986,6 @@ criteria, all of which must match the search results.</value>
   <data name="&gt;&gt;fromTagLabel.ZOrder" xml:space="preserve">
     <value>20</value>
   </data>
-  <data name="placeholderLabel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="placeholderLabel1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="placeholderLabel1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="placeholderLabel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>567, 36</value>
-  </data>
-  <data name="placeholderLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 15</value>
-  </data>
-  <data name="placeholderLabel1.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="placeholderLabel1.Text" xml:space="preserve">
-    <value>pppp</value>
-  </data>
-  <data name="&gt;&gt;placeholderLabel1.Name" xml:space="preserve">
-    <value>placeholderLabel1</value>
-  </data>
-  <data name="&gt;&gt;placeholderLabel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;placeholderLabel1.Parent" xml:space="preserve">
-    <value>controlsPanel</value>
-  </data>
-  <data name="&gt;&gt;placeholderLabel1.ZOrder" xml:space="preserve">
-    <value>21</value>
-  </data>
   <data name="controlsPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -1043,6 +1013,9 @@ criteria, all of which must match the search results.</value>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
@@ -1051,6 +1024,78 @@ criteria, all of which must match the search results.</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Multiple Search &amp; Replace</value>
+  </data>
+  <data name="&gt;&gt;dirtyErrorProvider.Name" xml:space="preserve">
+    <value>dirtyErrorProvider</value>
+  </data>
+  <data name="&gt;&gt;dirtyErrorProvider.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ErrorProvider, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolTip1.Name" xml:space="preserve">
+    <value>toolTip1</value>
+  </data>
+  <data name="&gt;&gt;toolTip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewComboBoxColumn1.Name" xml:space="preserve">
+    <value>dataGridViewComboBoxColumn1</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewComboBoxColumn1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewComboBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewCheckBoxColumn1.Name" xml:space="preserve">
+    <value>dataGridViewCheckBoxColumn1</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewCheckBoxColumn1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewCheckBoxColumn2.Name" xml:space="preserve">
+    <value>dataGridViewCheckBoxColumn2</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewCheckBoxColumn2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn1.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn1</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn2.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn2</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn3.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn3</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn4.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn4</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn5.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn5</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn6.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn6</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn7.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn7</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;SearchTag.Name" xml:space="preserve">
     <value>SearchTag</value>
@@ -1112,23 +1157,11 @@ criteria, all of which must match the search results.</value>
   <data name="&gt;&gt;FileColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;dirtyErrorProvider.Name" xml:space="preserve">
-    <value>dirtyErrorProvider</value>
-  </data>
-  <data name="&gt;&gt;dirtyErrorProvider.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ErrorProvider, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolTip1.Name" xml:space="preserve">
-    <value>toolTip1</value>
-  </data>
-  <data name="&gt;&gt;toolTip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MultipleSearchAndReplace</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=8.3.8984.4910, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="dirtyErrorProvider.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1780,36 +1813,36 @@ criteria, all of which must match the search results.</value>
   <data name="previewTable.ColumnHeadersHeight" type="System.Int32, mscorlib">
     <value>29</value>
   </data>
-  <data name="Track.UserAddedColumn" type="System.Boolean, mscorlib">
+  <metadata name="Track.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
+  </metadata>
   <data name="Track.HeaderText" xml:space="preserve">
     <value>Track</value>
   </data>
   <data name="Track.MinimumWidth" type="System.Int32, mscorlib">
     <value>40</value>
   </data>
-  <data name="OriginalTag.UserAddedColumn" type="System.Boolean, mscorlib">
+  <metadata name="OriginalTag.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
+  </metadata>
   <data name="OriginalTag.HeaderText" xml:space="preserve">
     <value>Original tag value</value>
   </data>
   <data name="OriginalTag.MinimumWidth" type="System.Int32, mscorlib">
     <value>25</value>
   </data>
-  <data name="NewTag.UserAddedColumn" type="System.Boolean, mscorlib">
+  <metadata name="NewTag.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
+  </metadata>
   <data name="NewTag.HeaderText" xml:space="preserve">
     <value>New tag value</value>
   </data>
   <data name="NewTag.MinimumWidth" type="System.Int32, mscorlib">
     <value>25</value>
   </data>
-  <data name="FileColumn.UserAddedColumn" type="System.Boolean, mscorlib">
+  <metadata name="FileColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
+  </metadata>
   <data name="FileColumn.HeaderText" xml:space="preserve">
     <value>File</value>
   </data>
@@ -1891,7 +1924,100 @@ criteria, all of which must match the search results.</value>
   <data name="&gt;&gt;splitContainer1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="buttonDeleteSaved.Text" xml:space="preserve">
-    <value>❌</value>
+  <data name="dataGridViewComboBoxColumn1.HeaderText" xml:space="preserve">
+    <value>Search tag</value>
+  </data>
+  <data name="dataGridViewComboBoxColumn1.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="dataGridViewComboBoxColumn1.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="dataGridViewCheckBoxColumn1.HeaderText" xml:space="preserve">
+    <value>(*)</value>
+  </data>
+  <data name="dataGridViewCheckBoxColumn1.MinimumWidth" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
+  <data name="dataGridViewCheckBoxColumn1.ToolTipText" xml:space="preserve">
+    <value>Use regular expressions</value>
+  </data>
+  <data name="dataGridViewCheckBoxColumn1.Width" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
+  <data name="dataGridViewCheckBoxColumn2.HeaderText" xml:space="preserve">
+    <value>Aa</value>
+  </data>
+  <data name="dataGridViewCheckBoxColumn2.MinimumWidth" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
+  <data name="dataGridViewCheckBoxColumn2.ToolTipText" xml:space="preserve">
+    <value>Case-sensitive search</value>
+  </data>
+  <data name="dataGridViewCheckBoxColumn2.Width" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
+    <value>Search for</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn1.MinimumWidth" type="System.Int32, mscorlib">
+    <value>50</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn1.Width" type="System.Int32, mscorlib">
+    <value>430</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
+    <value>Replace with</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn2.MinimumWidth" type="System.Int32, mscorlib">
+    <value>50</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn2.Width" type="System.Int32, mscorlib">
+    <value>429</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn3.HeaderText" xml:space="preserve">
+    <value>Позиция</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn3.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn3.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn4.HeaderText" xml:space="preserve">
+    <value>Track</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn4.MinimumWidth" type="System.Int32, mscorlib">
+    <value>40</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn4.Width" type="System.Int32, mscorlib">
+    <value>408</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn5.HeaderText" xml:space="preserve">
+    <value>Original tag value</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn5.MinimumWidth" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn5.Width" type="System.Int32, mscorlib">
+    <value>256</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn6.HeaderText" xml:space="preserve">
+    <value>New tag value</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn6.MinimumWidth" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn6.Width" type="System.Int32, mscorlib">
+    <value>255</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn7.HeaderText" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn7.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn7.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
 </root>

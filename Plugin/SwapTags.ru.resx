@@ -121,7 +121,7 @@
   <data name="buttonOK.Text" xml:space="preserve">
     <value>Применить</value>
   </data>
-  <data name="buttonCancel.Text" xml:space="preserve">
+  <data name="buttonClose.Text" xml:space="preserve">
     <value>Закрыть</value>
   </data>
   <data name="smartOperationCheckBoxLabel.Text" xml:space="preserve">

@@ -15,6 +15,14 @@ namespace MusicBeePlugin
         ///<param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
         protected override void Dispose(bool disposing)
         {
+            if (disposing)
+            {
+                presetNameTextBox?.Parent?.Dispose();
+                appendTextBox?.Parent?.Dispose();
+                idTextBox?.Parent?.Dispose();
+                expressionTextBox?.Parent?.Dispose();
+            }
+
             if (disposing && (components != null))
             {
                 components.Dispose();
@@ -115,7 +123,7 @@ namespace MusicBeePlugin
             this.panel2 = new System.Windows.Forms.Panel();
             this.presetTabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            previewTable = new System.Windows.Forms.DataGridView();
+            this.previewTable = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.multipleItemsSplitterTrimCheckBoxLabel = new System.Windows.Forms.Label();
             this.multipleItemsSplitterTrimCheckBox = new System.Windows.Forms.CheckBox();
@@ -164,7 +172,7 @@ namespace MusicBeePlugin
             this.panel2.SuspendLayout();
             this.presetTabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(previewTable)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.previewTable)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.expressionsDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tagsDataGridView)).BeginInit();
@@ -967,7 +975,7 @@ namespace MusicBeePlugin
             // tabPage1
             // 
             resources.ApplyResources(this.tabPage1, "tabPage1");
-            this.tabPage1.Controls.Add(previewTable);
+            this.tabPage1.Controls.Add(this.previewTable);
             this.dirtyErrorProvider.SetError(this.tabPage1, resources.GetString("tabPage1.Error"));
             this.dirtyErrorProvider.SetIconAlignment(this.tabPage1, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("tabPage1.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.tabPage1, ((int)(resources.GetObject("tabPage1.IconPadding"))));
@@ -976,12 +984,12 @@ namespace MusicBeePlugin
             // 
             // previewTable
             // 
-            resources.ApplyResources(previewTable, "previewTable");
-            previewTable.AllowUserToAddRows = false;
-            previewTable.AllowUserToDeleteRows = false;
-            previewTable.BackgroundColor = System.Drawing.SystemColors.Window;
-            previewTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            previewTable.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+            resources.ApplyResources(this.previewTable, "previewTable");
+            this.previewTable.AllowUserToAddRows = false;
+            this.previewTable.AllowUserToDeleteRows = false;
+            this.previewTable.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.previewTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.previewTable.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F);
@@ -989,22 +997,22 @@ namespace MusicBeePlugin
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            previewTable.DefaultCellStyle = dataGridViewCellStyle1;
-            previewTable.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dirtyErrorProvider.SetError(previewTable, resources.GetString("previewTable.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(previewTable, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("previewTable.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(previewTable, ((int)(resources.GetObject("previewTable.IconPadding"))));
-            previewTable.MultiSelect = false;
-            previewTable.Name = "previewTable";
-            previewTable.RowHeadersVisible = false;
-            previewTable.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            previewTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.toolTip1.SetToolTip(previewTable, resources.GetString("previewTable.ToolTip"));
-            previewTable.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.previewTable_CellClick);
-            previewTable.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.previewTable_ColumnHeaderMouseClick);
-            previewTable.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.previewTable_ColumnWidthChanged);
-            previewTable.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.previewTable_DataError);
-            previewTable.RowHeightChanged += new System.Windows.Forms.DataGridViewRowEventHandler(this.previewTable_RowHeightChanged);
+            this.previewTable.DefaultCellStyle = dataGridViewCellStyle1;
+            this.previewTable.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dirtyErrorProvider.SetError(this.previewTable, resources.GetString("previewTable.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.previewTable, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("previewTable.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.previewTable, ((int)(resources.GetObject("previewTable.IconPadding"))));
+            this.previewTable.MultiSelect = false;
+            this.previewTable.Name = "previewTable";
+            this.previewTable.RowHeadersVisible = false;
+            this.previewTable.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.previewTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.toolTip1.SetToolTip(this.previewTable, resources.GetString("previewTable.ToolTip"));
+            this.previewTable.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.previewTable_CellClick);
+            this.previewTable.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.previewTable_ColumnHeaderMouseClick);
+            this.previewTable.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.previewTable_ColumnWidthChanged);
+            this.previewTable.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.previewTable_DataError);
+            this.previewTable.RowHeightChanged += new System.Windows.Forms.DataGridViewRowEventHandler(this.previewTable_RowHeightChanged);
             // 
             // tabPage2
             // 
@@ -1432,7 +1440,7 @@ namespace MusicBeePlugin
             this.panel2.ResumeLayout(false);
             this.presetTabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(previewTable)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.previewTable)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.expressionsDataGridView)).EndInit();
@@ -1441,12 +1449,6 @@ namespace MusicBeePlugin
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).EndInit();
             this.ResumeLayout(false);
 
-            //MusicBee
-            new TextBoxBorder(this.presetNameTextBox);
-            new TextBoxBorder(this.appendTextBox);
-            new TextBoxBorder(this.idTextBox);
-            new TextBoxBorder(this.expressionTextBox);
-            //~MusicBee
         }
 
         #endregion

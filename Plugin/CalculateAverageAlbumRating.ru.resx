@@ -117,74 +117,42 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="buttonOK.Size" type="System.Drawing.Size, System.Drawing">
+    <value>360, 23</value>
+  </data>
   <data name="buttonOK.Text" xml:space="preserve">
     <value>Рассчитать средний рейтинг альбомов сейчас</value>
   </data>
-  <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>759, 147</value>
+  <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
+    <value>824, 147</value>
   </data>
-  <data name="buttonCancel.Text" xml:space="preserve">
+  <data name="buttonClose.Text" xml:space="preserve">
     <value>Закрыть</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>869, 177</value>
-  </data>
-  <data name="buttonSettings.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonSettings.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>936, 179</value>
   </data>
   <data name="buttonSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>715, 147</value>
-  </data>
-  <data name="buttonSave.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonSave.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="buttonSave.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>780, 147</value>
   </data>
   <data name="buttonSave.Location" type="System.Drawing.Point, System.Drawing">
-    <value>357, 147</value>
+    <value>392, 147</value>
   </data>
   <data name="buttonSave.Size" type="System.Drawing.Size, System.Drawing">
-    <value>325, 23</value>
+    <value>360, 23</value>
   </data>
   <data name="buttonSave.Text" xml:space="preserve">
     <value>Сохранить настройки</value>
   </data>
-  <data name="albumRatingTagList.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="albumRatingTagList.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="albumRatingTagList.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="albumRatingTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>669, 116</value>
+    <value>734, 116</value>
   </data>
   <data name="albumRatingTagList.Size" type="System.Drawing.Size, System.Drawing">
     <value>190, 23</value>
   </data>
-  <data name="label3.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label3.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="label3.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>462, 119</value>
+    <value>527, 119</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>199, 15</value>
@@ -192,29 +160,11 @@
   <data name="label3.Text" xml:space="preserve">
     <value>Рейтинг альбомов хранится в теге:</value>
   </data>
-  <data name="trackRatingTagList.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="trackRatingTagList.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="trackRatingTagList.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="trackRatingTagList.Location" type="System.Drawing.Point, System.Drawing">
     <value>195, 116</value>
   </data>
   <data name="trackRatingTagList.Size" type="System.Drawing.Size, System.Drawing">
     <value>190, 23</value>
-  </data>
-  <data name="label2.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label2.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="label2.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>181, 15</value>
@@ -222,62 +172,17 @@
   <data name="label2.Text" xml:space="preserve">
     <value>Рейтинг треков хранится в теге:</value>
   </data>
-  <data name="calculateAlbumRatingAtTagsChangedCheckBoxLabel.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="calculateAlbumRatingAtTagsChangedCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="calculateAlbumRatingAtTagsChangedCheckBoxLabel.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="calculateAlbumRatingAtTagsChangedCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>499, 15</value>
   </data>
   <data name="calculateAlbumRatingAtTagsChangedCheckBoxLabel.Text" xml:space="preserve">
     <value>Автоматически рассчитывать средний рейтинг альбомов при изменении рейтинга трека</value>
   </data>
-  <data name="calculateAlbumRatingAtTagsChangedCheckBox.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="calculateAlbumRatingAtTagsChangedCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="calculateAlbumRatingAtTagsChangedCheckBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="considerUnratedCheckBoxLabel.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="considerUnratedCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="considerUnratedCheckBoxLabel.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="considerUnratedCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>333, 15</value>
   </data>
   <data name="considerUnratedCheckBoxLabel.Text" xml:space="preserve">
     <value>Считать треки без рейтинга треками с нулевым рейтингом</value>
-  </data>
-  <data name="considerUnratedCheckBox.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="considerUnratedCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="considerUnratedCheckBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="notifyWhenCalculationCompletedCheckBoxLabel.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="notifyWhenCalculationCompletedCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="notifyWhenCalculationCompletedCheckBoxLabel.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="notifyWhenCalculationCompletedCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>560, 38</value>
@@ -288,38 +193,11 @@
   <data name="notifyWhenCalculationCompletedCheckBoxLabel.Text" xml:space="preserve">
     <value>Оповестить по завершении</value>
   </data>
-  <data name="calculateAlbumRatingAtStartUpCheckBoxLabel.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="calculateAlbumRatingAtStartUpCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="calculateAlbumRatingAtStartUpCheckBoxLabel.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="calculateAlbumRatingAtStartUpCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>483, 15</value>
   </data>
   <data name="calculateAlbumRatingAtStartUpCheckBoxLabel.Text" xml:space="preserve">
     <value>Автоматически рассчитывать средний рейтинг альбомов при запуске для всех треков</value>
-  </data>
-  <data name="calculateAlbumRatingAtStartUpCheckBox.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="calculateAlbumRatingAtStartUpCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="calculateAlbumRatingAtStartUpCheckBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="label1.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="label1.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>376, 15</value>
@@ -328,7 +206,7 @@
     <value>Рассчитать средний рейтинг альбомов для отображаемых треков</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>885, 216</value>
+    <value>950, 216</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Рассчитать средний рейтинг альбомов</value>
@@ -934,15 +812,6 @@
         AAAAAAAA///+AP///gD///4A///+AP4A/gD8AH4A+Dg+APD8HgDx/h4A8f8eAOPBngDjwZ4A48GeAOPH
         ngDxxx4A8MYeAPBMPgD4AD4A/AB+AP8B/gD///4A///+AP///gA=
 </value>
-  </data>
-  <data name="notifyWhenCalculationCompletedCheckBox.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="notifyWhenCalculationCompletedCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="notifyWhenCalculationCompletedCheckBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="notifyWhenCalculationCompletedCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>541, 38</value>

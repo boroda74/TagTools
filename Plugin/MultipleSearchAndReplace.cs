@@ -48,6 +48,8 @@ namespace MusicBeePlugin
         internal MultipleSearchAndReplace(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
+
+            new ControlBorder(this.templateNameTextBox);
         }
 
         protected override void initializeForm()
@@ -139,22 +141,67 @@ namespace MusicBeePlugin
             button_GotFocus(AcceptButton, null); //Let's mark active button
         }
 
-        internal override void preMoveScaleControl(Control control)
+        private void moveScaleButtonAdd()//******
         {
-            if (control.Name == "loadComboBoxCustom")
-                loadComboBoxCustom.Width -= (int)Math.Round(7 * loadComboBoxCustom.Margin.Left - 7 * loadComboBoxCustom.Margin.Left / hDpiFontScaling);
+            buttonAdd.Left = sourceTagList.Left;
+        }
 
-            base.preMoveScaleControl(control);
+        private void moveScaleButtonDelete()//******
+        {
+            buttonDelete.Left = sourceTagList.Left + sourceTagList.Width - buttonDelete.Width;
+        }
+
+        private void moveScaleAutoApplyCheckBox()//******
+        {
+            autoApplyCheckBox.Left = buttonSave.Left - autoApplyCheckBox.Width - autoApplyCheckBox.Margin.Right - buttonSave.Margin.Left;
+        }
+
+        private void moveScaleTemplateNameTextBox()//******
+        {
+            templateNameTextBox.Left = destinationTagList.Left;
+            templateNameTextBox.Width = autoApplyCheckBox.Left - templateNameTextBox.Left - templateNameTextBox.Margin.Right - autoApplyCheckBox.Margin.Left;
+        }
+
+        private void moveScalePresetLabel()//******
+        {
+            presetLabel.Left = templateNameTextBox.Left - presetLabel.Width - presetLabel.Margin.Right - templateNameTextBox.Margin.Left;
+        }
+
+        private void moveScaleAutoApplyPictureBox()//******
+        {
+            autoApplyPictureBox.Left = buttonSave.Left - autoApplyPictureBox.Width - autoApplyPictureBox.Margin.Right - buttonSave.Margin.Left;
+            autoApplyPictureBox.Top = buttonSave.Top + (int)Math.Round((buttonSave.Height - autoApplyPictureBox.Height) / 1.5f);
+        }
+
+        private void moveScaleButtonSave()
+        {
+            buttonSave.Left = buttonPreview.Left;
+        }
+
+        private void moveScaleLoadComboBoxCustom()
+        {
+            loadComboBoxCustom.Left = buttonOK.Left;//*******
+            loadComboBoxCustom.Width = buttonDeleteSaved.Left - loadComboBoxCustom.Left - loadComboBoxCustom.Margin.Right - buttonDeleteSaved.Margin.Left;
         }
 
         private void previewTable_AddRowToTable(object[] row)
         {
-            if (backgroundTaskIsWorking())
-                previewTable.Rows.Add(row);
+            if (backgroundTaskIsWorking() && !previewIsStopped)
+            {
+                try
+                {
+                    previewTable.Rows.Add(row);
+                    previewTableFormatRow(previewTable.RowCount - 1);
+                }
+                catch
+                {
+                    //Generating preview is stopped. There is some .Net bug. Let's ignore.
+                }
+            }
 
-            previewTableFormatRow(previewTable.RowCount - 1);
+            if (previewTable.RowCount > 0)
+                previewTable.FirstDisplayedScrollingRowIndex = previewTable.RowCount - 1;
 
-            previewTable.FirstDisplayedScrollingRowIndex = previewTable.RowCount - 1;
             if ((previewTable.RowCount & 0x1f) == 0)
                 updateCustomScrollBars(previewTable);
         }
@@ -535,7 +582,7 @@ namespace MusicBeePlugin
             {
                 saveSettings();
                 if (prepareBackgroundTask())
-                    switchOperation(applyChanges, (Button)sender, buttonOK, buttonPreview, buttonCancel, true, null);
+                    switchOperation(applyChanges, sender as Button, buttonOK, buttonPreview, buttonClose, true, null);
             }
         }
 
@@ -543,11 +590,11 @@ namespace MusicBeePlugin
         {
             if (searchOnlyCheckBox.Checked)
             {
-                clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewChanges, (Button)sender, buttonOK, buttonCancel, 2);
+                clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewChanges, sender as Button, buttonOK, buttonClose, 2);
             }
             else
             {
-                clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewChanges, (Button)sender, buttonOK, buttonCancel);
+                clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewChanges, sender as Button, buttonOK, buttonClose);
                 enableQueryingOrUpdatingButtons();
 
                 if (previewTable.RowCount > 0)
@@ -555,7 +602,7 @@ namespace MusicBeePlugin
             }
         }
 
-        private void buttonCancel_Click(object sender, EventArgs e)
+        private void buttonClose_Click(object sender, EventArgs e)
         {
             Close();
         }
@@ -1069,7 +1116,7 @@ namespace MusicBeePlugin
         private void SearchOnlyCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             enableDisablePreviewOptionControls(true);
-            clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewChanges, buttonPreview, buttonOK, buttonCancel, 1);
+            clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewChanges, buttonPreview, buttonOK, buttonClose, 1);
         }
 
         private void buttonDeleteSaved_Click(object sender, EventArgs e)
@@ -1163,7 +1210,17 @@ namespace MusicBeePlugin
             ignoreSplitterMovedEvent = false; //-V3008
 
 
-            placeholderLabel1.Visible = false;
+            moveScaleButtonAdd();
+            moveScaleButtonDelete();
+
+
+            moveScaleButtonSave();//******
+            moveScaleAutoApplyCheckBox();
+            moveScaleTemplateNameTextBox();
+            moveScalePresetLabel();
+            moveScaleAutoApplyPictureBox();
+
+            moveScaleLoadComboBoxCustom();
         }
 
         private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)

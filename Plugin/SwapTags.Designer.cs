@@ -34,7 +34,7 @@
             this.SwapTagLabel = new System.Windows.Forms.Label();
             this.sourceTagList = new System.Windows.Forms.ComboBox();
             this.withTagLabel = new System.Windows.Forms.Label();
-            this.buttonCancel = new System.Windows.Forms.Button();
+            this.buttonClose = new System.Windows.Forms.Button();
             this.forTracksLabel = new System.Windows.Forms.Label();
             this.buttonOK = new System.Windows.Forms.Button();
             this.destinationTagList = new System.Windows.Forms.ComboBox();
@@ -66,13 +66,13 @@
             this.withTagLabel.Name = "withTagLabel";
             this.withTagLabel.Tag = "#destinationTagList";
             // 
-            // buttonCancel
+            // buttonClose
             // 
-            resources.ApplyResources(this.buttonCancel, "buttonCancel");
-            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Tag = "#SwapTags&SwapTags@non-defaultable";
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            resources.ApplyResources(this.buttonClose, "buttonClose");
+            this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.buttonClose.Name = "buttonClose";
+            this.buttonClose.Tag = "#SwapTags&SwapTags@non-defaultable";
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
             // forTracksLabel
             // 
@@ -85,7 +85,7 @@
             this.dirtyErrorProvider.SetError(this.buttonOK, resources.GetString("buttonOK.Error"));
             this.dirtyErrorProvider.SetIconAlignment(this.buttonOK, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonOK.IconAlignment"))));
             this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Tag = "#buttonCancel&SwapTags";
+            this.buttonOK.Tag = "#buttonClose&SwapTags";
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // destinationTagList
@@ -123,10 +123,10 @@
             this.AcceptButton = this.buttonOK;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.buttonCancel;
+            this.CancelButton = this.buttonClose;
             this.Controls.Add(this.smartOperationCheckBoxLabel);
             this.Controls.Add(this.smartOperationCheckBox);
-            this.Controls.Add(this.buttonCancel);
+            this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.forTracksLabel);
             this.Controls.Add(this.destinationTagList);
@@ -147,7 +147,7 @@
         private System.Windows.Forms.Label SwapTagLabel;
         private System.Windows.Forms.ComboBox sourceTagList;
         private System.Windows.Forms.Label withTagLabel;
-        private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.Label forTracksLabel;
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.ComboBox destinationTagList;

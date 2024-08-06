@@ -13,6 +13,17 @@
         ///<param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
         protected override void Dispose(bool disposing)
         {
+            if (disposing)
+            {
+                unitKBox.Parent?.Dispose();
+                unitMBox.Parent?.Dispose();
+                unitGBox.Parent?.Dispose();
+                customFontTextBox.Parent?.Dispose();
+                preservedTagValuesLegendTextBox.Parent?.Dispose();
+                preservedTagsLegendTextBox.Parent?.Dispose();
+                changedLegendTextBox.Parent?.Dispose();
+            }
+
             if (disposing && (components != null))
             {
                 components.Dispose();
@@ -36,7 +47,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Settings));
-            this.buttonCancel = new System.Windows.Forms.Button();
+            this.buttonClose = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.versionLabel = new System.Windows.Forms.Label();
@@ -152,21 +163,21 @@
             //~MusicBee
 
             //
-            //buttonCancel
+            //buttonClose
             //
-            resources.ApplyResources(this.buttonCancel, "buttonCancel");
-            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Tag = "@pinned-to-parent-x@pinned-to-parent-y@non-defaultable";
-            this.toolTip1.SetToolTip(this.buttonCancel, resources.GetString("buttonCancel.ToolTip"));
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            resources.ApplyResources(this.buttonClose, "buttonClose");
+            this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.buttonClose.Name = "buttonClose";
+            this.buttonClose.Tag = "@pinned-to-parent-x@pinned-to-parent-y@non-defaultable";
+            this.toolTip1.SetToolTip(this.buttonClose, resources.GetString("buttonClose.ToolTip"));
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             //
             //buttonOK
             //
             resources.ApplyResources(this.buttonOK, "buttonOK");
             this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Tag = "#buttonCancel@pinned-to-parent-y";
+            this.buttonOK.Tag = "#buttonClose@pinned-to-parent-y";
             this.toolTip1.SetToolTip(this.buttonOK, resources.GetString("buttonOK.ToolTip"));
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             //
@@ -880,7 +891,7 @@
             //buttonsPanel
             //
             resources.ApplyResources(this.buttonsPanel, "buttonsPanel");
-            this.buttonsPanel.Controls.Add(this.buttonCancel);
+            this.buttonsPanel.Controls.Add(this.buttonClose);
             this.buttonsPanel.Controls.Add(this.buttonOK);
             this.buttonsPanel.Controls.Add(this.saveLastSkippedButton);
             this.buttonsPanel.Controls.Add(this.versionLabel);
@@ -920,7 +931,7 @@
             this.AcceptButton = this.buttonOK;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.buttonCancel;
+            this.CancelButton = this.buttonClose;
             this.Controls.Add(this.buttonsPanel);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label5);
@@ -951,21 +962,11 @@
             this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
-
-            //MusicBee
-            new TextBoxBorder(this.unitKBox);
-            new TextBoxBorder(this.unitMBox);
-            new TextBoxBorder(this.unitGBox);
-            new TextBoxBorder(this.customFontTextBox);
-            new TextBoxBorder(this.preservedTagValuesLegendTextBox);
-            new TextBoxBorder(this.preservedTagsLegendTextBox);
-            new TextBoxBorder(this.changedLegendTextBox);
-            //~MusicBee
         }
 
         #endregion
 
-        private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label versionLabel;

@@ -13,6 +13,26 @@
         ///<param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
         protected override void Dispose(bool disposing)
         {
+            if (disposing)
+            {
+                nameBox.Parent?.Dispose();
+                descriptionBox.Parent?.Dispose();
+                customTextBox.Parent?.Dispose();
+                customText2Box.Parent?.Dispose();
+                customText3Box.Parent?.Dispose();
+                customText4Box.Parent?.Dispose();
+                searchedPatternBox.Parent?.Dispose();
+                replacedPatternBox.Parent?.Dispose();
+                searchedPattern2Box.Parent?.Dispose();
+                replacedPattern2Box.Parent?.Dispose();
+                searchedPattern3Box.Parent?.Dispose();
+                replacedPattern3Box.Parent?.Dispose();
+                searchedPattern4Box.Parent?.Dispose();
+                replacedPattern4Box.Parent?.Dispose();
+                searchedPattern5Box.Parent?.Dispose();
+                replacedPattern5Box.Parent?.Dispose();
+            }
+
             if (disposing && (components != null))
             {
                 components.Dispose();
@@ -49,7 +69,7 @@
             this.replacedPatternBox = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.buttonOK = new System.Windows.Forms.Button();
-            this.buttonCancel = new System.Windows.Forms.Button();
+            this.buttonClose = new System.Windows.Forms.Button();
             this.ignoreCaseCheckBox = new System.Windows.Forms.CheckBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -292,16 +312,16 @@
             // 
             resources.ApplyResources(this.buttonOK, "buttonOK");
             this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Tag = "#buttonCancel@pinned-to-parent-y";
+            this.buttonOK.Tag = "#buttonClose@pinned-to-parent-y";
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
-            // buttonCancel
+            // buttonClose
             // 
-            resources.ApplyResources(this.buttonCancel, "buttonCancel");
-            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Tag = "#AsrPresetEditor@non-defaultable@pinned-to-parent-y";
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            resources.ApplyResources(this.buttonClose, "buttonClose");
+            this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.buttonClose.Name = "buttonClose";
+            this.buttonClose.Tag = "#AsrPresetEditor@non-defaultable@pinned-to-parent-y";
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
             // ignoreCaseCheckBox
             // 
@@ -1240,7 +1260,7 @@
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.buttonCancel;
+            this.CancelButton = this.buttonClose;
             this.Controls.Add(this.textBoxTableLayoutPanel);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
@@ -1259,7 +1279,7 @@
             this.Controls.Add(this.languages);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.buttonCancel);
+            this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.ignoreCaseCheckBoxLabel);
             this.Controls.Add(this.ignoreCaseCheckBox);
@@ -1307,25 +1327,6 @@
             this.textBoxTableLayoutPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
-
-            //MusicBee
-            new TextBoxBorder(this.nameBox);
-            new TextBoxBorder(this.descriptionBox);
-            new TextBoxBorder(this.customTextBox);
-            new TextBoxBorder(this.customText2Box);
-            new TextBoxBorder(this.customText3Box);
-            new TextBoxBorder(this.customText4Box);
-            new TextBoxBorder(this.searchedPatternBox);
-            new TextBoxBorder(this.replacedPatternBox);
-            new TextBoxBorder(this.searchedPattern2Box);
-            new TextBoxBorder(this.replacedPattern2Box);
-            new TextBoxBorder(this.searchedPattern3Box);
-            new TextBoxBorder(this.replacedPattern3Box);
-            new TextBoxBorder(this.searchedPattern4Box);
-            new TextBoxBorder(this.replacedPattern4Box);
-            new TextBoxBorder(this.searchedPattern5Box);
-            new TextBoxBorder(this.replacedPattern5Box);
-            //~MusicBee
         }
 
         #endregion
@@ -1343,7 +1344,7 @@
         private System.Windows.Forms.TextBox replacedPatternBox;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button buttonOK;
-        private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.CheckBox ignoreCaseCheckBox;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.GroupBox groupBox1;

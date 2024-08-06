@@ -425,63 +425,46 @@ namespace ExtensionMethods
 
         internal static void EnableInternal(this Control control, bool state)
         {
-            Color enabledColor;
-            Color disabledColor;
+            PluginWindowTemplate form;
+
+            if (control.Parent is CustomComboBox customComboBox)
+                return;
 
 
-            if (Plugin.SavedSettings.dontUseSkinColors)
+            if (control is TextBox || control is ListBox)
             {
-                enabledColor = SystemColors.ControlText;
-                disabledColor = SystemColors.GrayText;
+                form = control.FindForm() as PluginWindowTemplate;
+                form.setSkinnedControlColors(control, state);
+
+                control.Enabled = state;
+                return;
             }
-            else
+            
+            if (control is CustomComboBox customComboBox1)
             {
-                enabledColor = Plugin.AccentColor;
-                disabledColor = Plugin.DimmedAccentColor;
+                form = customComboBox1.ownerForm;
+                form.setSkinnedControlColors(control, state);
+
+                control.Enabled = state;
+                return;
             }
+
+
+            form = control.FindForm() as PluginWindowTemplate;
+            form.setSkinnedControlColors(control, state);
 
 
             if (control is Label)
-            {
-                if (state)
-                    control.ForeColor = enabledColor;
-                else
-                    control.ForeColor = disabledColor;
-                
                 return;
-            }
-
-
-            if (control is TextBox || control is ListBox || control is CustomComboBox)
-            {
-                if (state)
-                {
-                    control.Enabled = true;
-                    control.ForeColor = enabledColor;
-                }
-                else
-                {
-                    control.ForeColor = disabledColor;
-                    control.Enabled = false;
-                }
-
-                PluginWindowTemplate.InputControl_EnabledChanged(control, null);
-                return;
-            }
 
 
             control.Enabled = state;
 
             if (control is CheckBox || control is RadioButton)
             {
-                var form = control.FindForm() as PluginWindowTemplate;
-
-                if (form != null)
-                {
-                    form.controlsReferencesX.TryGetValue(control, out var control2);
-                    if (control2 is Label label)
-                        label.Enable(state);
-                }
+                form.controlsReferencesX.TryGetValue(control, out var control2);
+                if (control2 is Label label)
+                    label.Enable(state);
             }
         }
 

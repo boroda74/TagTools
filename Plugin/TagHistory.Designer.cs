@@ -42,7 +42,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonOK = new System.Windows.Forms.Button();
-            this.buttonCancel = new System.Windows.Forms.Button();
+            this.buttonClose = new System.Windows.Forms.Button();
             this.previewTable = new System.Windows.Forms.DataGridView();
             this.Library = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -68,6 +68,7 @@
             this.trackListComboBox = new System.Windows.Forms.ComboBox();
             this.optionsPanel = new System.Windows.Forms.Panel();
             this.controlsPanel = new System.Windows.Forms.Panel();
+            this.buttonPreview = new System.Windows.Forms.Button();
             this.placeholderLabel3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfBackupsNumericUpDown)).BeginInit();
@@ -79,18 +80,18 @@
             // 
             resources.ApplyResources(this.buttonOK, "buttonOK");
             this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Tag = "#buttonCancel";
+            this.buttonOK.Tag = "#buttonClose";
             this.toolTip1.SetToolTip(this.buttonOK, resources.GetString("buttonOK.ToolTip"));
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
-            // buttonCancel
+            // buttonClose
             // 
-            resources.ApplyResources(this.buttonCancel, "buttonCancel");
-            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Tag = "#controlsPanel@non-defaultable";
-            this.toolTip1.SetToolTip(this.buttonCancel, resources.GetString("buttonCancel.ToolTip"));
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            resources.ApplyResources(this.buttonClose, "buttonClose");
+            this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.buttonClose.Name = "buttonClose";
+            this.buttonClose.Tag = "#controlsPanel@non-defaultable";
+            this.toolTip1.SetToolTip(this.buttonClose, resources.GetString("buttonClose.ToolTip"));
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
             // previewTable
             // 
@@ -325,7 +326,8 @@
             // controlsPanel
             // 
             resources.ApplyResources(this.controlsPanel, "controlsPanel");
-            this.controlsPanel.Controls.Add(this.buttonCancel);
+            this.controlsPanel.Controls.Add(this.buttonPreview);
+            this.controlsPanel.Controls.Add(this.buttonClose);
             this.controlsPanel.Controls.Add(this.buttonOK);
             this.controlsPanel.Controls.Add(this.rememberColumnAsDefaultWidthCheckBoxLabel);
             this.controlsPanel.Controls.Add(this.rememberColumnAsDefaultWidthCheckBox);
@@ -337,6 +339,14 @@
             this.controlsPanel.Name = "controlsPanel";
             this.controlsPanel.Tag = "#TagHistory&TagHistory";
             this.toolTip1.SetToolTip(this.controlsPanel, resources.GetString("controlsPanel.ToolTip"));
+            // 
+            // buttonPreview
+            // 
+            resources.ApplyResources(this.buttonPreview, "buttonPreview");
+            this.buttonPreview.Name = "buttonPreview";
+            this.buttonPreview.Tag = "#buttonOK";
+            this.toolTip1.SetToolTip(this.buttonPreview, resources.GetString("buttonPreview.ToolTip"));
+            this.buttonPreview.Click += new System.EventHandler(this.buttonPreview_Click);
             // 
             // placeholderLabel3
             // 
@@ -350,7 +360,7 @@
             this.AcceptButton = this.buttonOK;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.buttonCancel;
+            this.CancelButton = this.buttonClose;
             this.Controls.Add(this.controlsPanel);
             this.Controls.Add(this.previewTable);
             this.Controls.Add(this.label3);
@@ -374,7 +384,7 @@
 
         #endregion
         private System.Windows.Forms.Button buttonOK;
-        private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.DataGridView previewTable;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
@@ -401,5 +411,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Library;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewImageColumn ImageCellTemplate;
+        private System.Windows.Forms.Button buttonPreview;
     }
 }

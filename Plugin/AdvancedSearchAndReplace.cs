@@ -143,6 +143,16 @@ namespace MusicBeePlugin
         internal AdvancedSearchAndReplace(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
+
+            new ControlBorder(this.searchTextBox);
+            new ControlBorder(this.customTextBox);
+            new ControlBorder(this.customText2Box);
+            new ControlBorder(this.customText3Box);
+            new ControlBorder(this.customText4Box);
+            new ControlBorder(this.idTextBox);
+            new ControlBorder(this.preserveTagValuesTextBox);
+            new ControlBorder(this.processPreserveTagsTextBox);
+            new ControlBorder(this.descriptionBox);
         }
 
         protected override void initializeForm()
@@ -1981,7 +1991,7 @@ namespace MusicBeePlugin
         private void previewTable_AddRowToTable(object[] row, object changeTypes)
         {
             bool failed = true;
-            while (failed)
+            while (failed && backgroundTaskIsWorking() && !previewIsStopped)
             {
                 try
                 {
@@ -1995,12 +2005,17 @@ namespace MusicBeePlugin
                 }
             }
 
-            for (var i = 0; i < 5; i++)
-                previewTable.Rows[previewTable.RowCount - 1].Cells[6 + i * 3].Tag = ((ChangesDetectionResult[])changeTypes)[i];
+            if (backgroundTaskIsWorking() && !previewIsStopped)
+            {
+                for (var i = 0; i < 5; i++)
+                    previewTable.Rows[previewTable.RowCount - 1].Cells[6 + i * 3].Tag = ((ChangesDetectionResult[])changeTypes)[i];
 
-            previewTableFormatRow(previewTable.RowCount - 1);
+                previewTableFormatRow(previewTable.RowCount - 1);
+            }
 
-            previewTable.FirstDisplayedScrollingRowIndex = previewTable.RowCount - 1;
+            if (previewTable.RowCount > 0)
+                previewTable.FirstDisplayedScrollingRowIndex = previewTable.RowCount - 1;
+
             if ((previewTable.RowCount & 0x1f) == 0)
                 updateCustomScrollBars(previewTable);
         }
@@ -3318,12 +3333,12 @@ namespace MusicBeePlugin
         private void buttonOK_Click(object sender, EventArgs e)
         {
             if (prepareBackgroundTask())
-                switchOperation(applyToSelected, (Button)sender, buttonOK, buttonPreview, buttonClose, true, null);
+                switchOperation(applyToSelected, sender as Button, buttonOK, buttonPreview, buttonClose, true, null);
         }
 
         private void buttonPreview_Click(object sender, EventArgs e)
         {
-            clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewChanges, (Button)sender, buttonOK, buttonClose);
+            clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewChanges, sender as Button, buttonOK, buttonClose);
 
             if (previewTable.RowCount > 0)
                 previewTable.FirstDisplayedScrollingRowIndex = previewTable.RowCount - 1;
@@ -4003,7 +4018,7 @@ namespace MusicBeePlugin
 
                 enableDisablePreviewOptionControls(true, true);
                 enableQueryingOrUpdatingButtons();
-                
+
                 if (presetListLastSelectedIndex != -2) //It's during form init
                     Enable(true, autoApplyPresetsLabel);
             }

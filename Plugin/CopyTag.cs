@@ -128,12 +128,22 @@ namespace MusicBeePlugin
 
         private void previewTable_AddRowToTable(object[] row)
         {
-            if (backgroundTaskIsWorking())
-                previewTable.Rows.Add(row);
+            if (backgroundTaskIsWorking() && !previewIsStopped)
+            {
+                try
+                {
+                    previewTable.Rows.Add(row);
+                    previewTableFormatRow(previewTable.RowCount - 1);
+                }
+                catch
+                {
+                    //Generating preview is stopped. There is some .Net bug. Let's ignore.
+                }
+            }
 
-            previewTableFormatRow(previewTable.RowCount - 1);
+            if (previewTable.RowCount > 0)
+                previewTable.FirstDisplayedScrollingRowIndex = previewTable.RowCount - 1;
 
-            previewTable.FirstDisplayedScrollingRowIndex = previewTable.RowCount - 1;
             if ((previewTable.RowCount & 0x1f) == 0)
                 updateCustomScrollBars(previewTable);
         }
@@ -293,13 +303,10 @@ namespace MusicBeePlugin
             // ReSharper disable once RedundantAssignment
             string[] tag = { "Checked", "file", "newTag" };
 
-            var count = 0;
             for (var fileCounter = 0; fileCounter < files.Length; fileCounter++)
             {
                 if (backgroundTaskIsCanceled)
                     return;
-
-                count++;
 
                 var currentFile = files[fileCounter];
 
@@ -312,7 +319,7 @@ namespace MusicBeePlugin
                 }
                 else if (sourceTagIsSN)
                 {
-                    sourceTagValue = count.ToString();
+                    sourceTagValue = fileCounter.ToString();
                 }
                 else if (sourcePropId == 0)
                 {
@@ -448,7 +455,7 @@ namespace MusicBeePlugin
 
             saveSettings();
             if (prepareBackgroundTask())
-                switchOperation(applyChanges, (Button)sender, buttonOK, buttonPreview, buttonCancel, true, null);
+                switchOperation(applyChanges, sender as Button, buttonOK, buttonPreview, buttonClose, true, null);
         }
 
         private void buttonPreview_Click(object sender, EventArgs e)
@@ -459,11 +466,11 @@ namespace MusicBeePlugin
                 return;
             }
 
-            clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewChanges, (Button)sender, buttonOK, buttonCancel);
+            clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewChanges, sender as Button, buttonOK, buttonClose);
             enableQueryingOrUpdatingButtons();
         }
 
-        private void buttonCancel_Click(object sender, EventArgs e)
+        private void buttonClose_Click(object sender, EventArgs e)
         {
             Close();
         }

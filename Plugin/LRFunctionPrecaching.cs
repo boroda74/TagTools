@@ -192,10 +192,10 @@ namespace MusicBeePlugin
             Invoke(new Action(Close));
         }
 
-        private void buttonCancel_Click(object sender, EventArgs e)
+        private void buttonClose_Click(object sender, EventArgs e)
         {
             LibraryReportsCommandForFunctionIds.backgroundTaskIsCanceled = true;
-            buttonCancel.Enable(false);
+            buttonClose.Enable(false);
 
             progressInfo += CtlWaitUntilPresetIsCompleted;
             progressInfoLabel.Text += progressInfo;

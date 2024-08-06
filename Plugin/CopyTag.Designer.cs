@@ -37,7 +37,7 @@
             this.destinationTagList = new System.Windows.Forms.ComboBox();
             this.forSelectedTracksLabel = new System.Windows.Forms.Label();
             this.buttonOK = new System.Windows.Forms.Button();
-            this.buttonCancel = new System.Windows.Forms.Button();
+            this.buttonClose = new System.Windows.Forms.Button();
             this.appendCheckBox = new System.Windows.Forms.CheckBox();
             this.buttonPreview = new System.Windows.Forms.Button();
             this.previewTable = new System.Windows.Forms.DataGridView();
@@ -136,21 +136,21 @@
             this.dirtyErrorProvider.SetIconAlignment(this.buttonOK, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonOK.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.buttonOK, ((int)(resources.GetObject("buttonOK.IconPadding"))));
             this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Tag = "#buttonCancel";
+            this.buttonOK.Tag = "#buttonClose";
             this.toolTip1.SetToolTip(this.buttonOK, resources.GetString("buttonOK.ToolTip"));
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
-            // buttonCancel
+            // buttonClose
             // 
-            resources.ApplyResources(this.buttonCancel, "buttonCancel");
-            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.dirtyErrorProvider.SetError(this.buttonCancel, resources.GetString("buttonCancel.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.buttonCancel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonCancel.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.buttonCancel, ((int)(resources.GetObject("buttonCancel.IconPadding"))));
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Tag = "#fieldsPanel@non-defaultable";
-            this.toolTip1.SetToolTip(this.buttonCancel, resources.GetString("buttonCancel.ToolTip"));
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            resources.ApplyResources(this.buttonClose, "buttonClose");
+            this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.dirtyErrorProvider.SetError(this.buttonClose, resources.GetString("buttonClose.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.buttonClose, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonClose.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.buttonClose, ((int)(resources.GetObject("buttonClose.IconPadding"))));
+            this.buttonClose.Name = "buttonClose";
+            this.buttonClose.Tag = "#fieldsPanel@non-defaultable";
+            this.toolTip1.SetToolTip(this.buttonClose, resources.GetString("buttonClose.ToolTip"));
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
             // appendCheckBox
             // 
@@ -435,7 +435,7 @@
             this.fieldsPanel.Controls.Add(this.browseButton);
             this.fieldsPanel.Controls.Add(this.fileNameTextBox);
             this.fieldsPanel.Controls.Add(this.fileNameLabel);
-            this.fieldsPanel.Controls.Add(this.buttonCancel);
+            this.fieldsPanel.Controls.Add(this.buttonClose);
             this.fieldsPanel.Controls.Add(this.buttonOK);
             this.fieldsPanel.Controls.Add(this.buttonPreview);
             this.fieldsPanel.Controls.Add(this.buttonSettings);
@@ -451,7 +451,7 @@
             this.AcceptButton = this.buttonPreview;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.buttonCancel;
+            this.CancelButton = this.buttonClose;
             this.Controls.Add(this.previewTable);
             this.Controls.Add(this.addCheckBoxLabel);
             this.Controls.Add(this.addCheckBox);
@@ -492,7 +492,7 @@
         private System.Windows.Forms.ComboBox destinationTagList;
         private System.Windows.Forms.Label forSelectedTracksLabel;
         private System.Windows.Forms.Button buttonOK;
-        private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.CheckBox appendCheckBox;
         private System.Windows.Forms.Button buttonPreview;
         private System.Windows.Forms.DataGridView previewTable;

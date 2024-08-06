@@ -34,7 +34,7 @@
             this.notifyWhenCalculationCompletedCheckBox = new System.Windows.Forms.CheckBox();
             this.calculateAlbumRatingAtStartUpCheckBox = new System.Windows.Forms.CheckBox();
             this.buttonSave = new System.Windows.Forms.Button();
-            this.buttonCancel = new System.Windows.Forms.Button();
+            this.buttonClose = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.considerUnratedCheckBox = new System.Windows.Forms.CheckBox();
@@ -80,16 +80,16 @@
             this.buttonSave.Tag = "#&CalculateAverageAlbumRating@non-defaultable";
             this.buttonSave.Click += new System.EventHandler(this.button1_Click);
             // 
-            // buttonCancel
+            // buttonClose
             // 
-            resources.ApplyResources(this.buttonCancel, "buttonCancel");
-            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.dirtyErrorProvider.SetError(this.buttonCancel, resources.GetString("buttonCancel.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.buttonCancel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonCancel.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.buttonCancel, ((int)(resources.GetObject("buttonCancel.IconPadding"))));
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Tag = "#CalculateAverageAlbumRating&CalculateAverageAlbumRating@non-defaultable";
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            resources.ApplyResources(this.buttonClose, "buttonClose");
+            this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.dirtyErrorProvider.SetError(this.buttonClose, resources.GetString("buttonClose.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.buttonClose, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonClose.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.buttonClose, ((int)(resources.GetObject("buttonClose.IconPadding"))));
+            this.buttonClose.Name = "buttonClose";
+            this.buttonClose.Tag = "#CalculateAverageAlbumRating&CalculateAverageAlbumRating@non-defaultable";
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
             // buttonOK
             // 
@@ -221,7 +221,7 @@
             this.dirtyErrorProvider.SetIconPadding(this.buttonSettings, ((int)(resources.GetObject("buttonSettings.IconPadding"))));
             this.buttonSettings.Image = global::MusicBeePlugin.Properties.Resources.gear_15;
             this.buttonSettings.Name = "buttonSettings";
-            this.buttonSettings.Tag = "#buttonCancel&CalculateAverageAlbumRating@non-defaultable@square-button";
+            this.buttonSettings.Tag = "#buttonClose&CalculateAverageAlbumRating@non-defaultable@square-button";
             this.buttonSettings.Click += new System.EventHandler(this.buttonSettings_Click);
             // 
             // CalculateAverageAlbumRating
@@ -229,9 +229,9 @@
             this.AcceptButton = this.buttonOK;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.buttonCancel;
+            this.CancelButton = this.buttonClose;
             this.Controls.Add(this.buttonSettings);
-            this.Controls.Add(this.buttonCancel);
+            this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.albumRatingTagList);
@@ -261,7 +261,7 @@
         private System.Windows.Forms.CheckBox notifyWhenCalculationCompletedCheckBox;
         private System.Windows.Forms.CheckBox calculateAlbumRatingAtStartUpCheckBox;
         private System.Windows.Forms.Button buttonSave;
-        private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox considerUnratedCheckBox;

@@ -301,7 +301,7 @@
     <value>MiddleLeft</value>
   </data>
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1029, 174</value>
+    <value>1029, 177</value>
   </data>
   <data name="buttonsPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>447, 34</value>
@@ -415,7 +415,7 @@
     <value>True</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1062, 324</value>
+    <value>1062, 323</value>
   </data>
   <data name="labelFunction.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
@@ -534,7 +534,7 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>sourceFieldComboBox</value>
   </data>
   <data name="listBoxTableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1062, 129</value>
+    <value>1062, 128</value>
   </data>
   <data name="buttonCopyPreset.ToolTip" xml:space="preserve">
     <value />
@@ -552,7 +552,7 @@ Unchecking this may only be relevant in the case of using multiple item splitter
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=8.2.8972.37266, Culture=neutral, PublicKeyToken=null</value>
+    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=8.3.8984.16483, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="sourceFieldComboBox.Error" xml:space="preserve">
     <value />
@@ -1137,7 +1137,7 @@ alphabetically to simplify navigation. Don’t be confused. See the real column 
     <value>4, 62</value>
   </data>
   <data name="autoApplyPresetsLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 4</value>
+    <value>13, 6</value>
   </data>
   <data name="appendTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>49</value>
@@ -1266,7 +1266,7 @@ alphabetically to simplify navigation. Don’t be confused. See the real column 
     <value>tabPage2</value>
   </data>
   <data name="expressionsDataGridView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>447, 119</value>
+    <value>447, 121</value>
   </data>
   <data name="&gt;&gt;buttonSaveClose.ZOrder" xml:space="preserve">
     <value>41</value>
@@ -2301,7 +2301,7 @@ Check out the preset chain!</value>
     <value>NoControl</value>
   </data>
   <data name="presetList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1034, 109</value>
+    <value>1034, 108</value>
   </data>
   <data name="buttonDeletePreset.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2574,7 +2574,7 @@ Check out the preset chain!</value>
     <value />
   </data>
   <data name="splitContainer1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 51</value>
+    <value>5, 54</value>
   </data>
   <data name="&gt;&gt;buttonClearExpression.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -2619,7 +2619,7 @@ Check out the preset chain!</value>
     <value>47</value>
   </data>
   <data name="useHotkeyForSelectedTracksCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>10, 4, 4, 4</value>
   </data>
   <data name="useAnotherPresetAsSourceCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2826,7 +2826,7 @@ Check out the preset chain!</value>
     <value>panel1</value>
   </data>
   <data name="autoApplyPresetsLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1046, 45</value>
+    <value>1046, 48</value>
   </data>
   <data name="useAnotherPresetAsSourceCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
@@ -2850,7 +2850,7 @@ Check out the preset chain!</value>
     <value>0</value>
   </data>
   <data name="presetTabControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1046, 213</value>
+    <value>1046, 214</value>
   </data>
   <data name="buttonClearExpression.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 5</value>
@@ -2865,7 +2865,7 @@ Check out the preset chain!</value>
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="assignHotkeyCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+    <value>4, 0, 0, 0</value>
   </data>
   <data name="&gt;&gt;buttonFilterResults.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -3099,7 +3099,7 @@ Check out the preset chain!</value>
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="assignHotkeyCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>627, 9</value>
+    <value>629, 9</value>
   </data>
   <data name="&gt;&gt;useAnotherPresetAsSourceCheckBoxLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -3276,7 +3276,7 @@ Check out the preset chain!</value>
     <value>0</value>
   </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1062, 226</value>
+    <value>1062, 227</value>
   </data>
   <data name="&gt;&gt;labelFunctionId.Parent" xml:space="preserve">
     <value>panel1</value>
@@ -3414,7 +3414,7 @@ Check out the preset chain!</value>
     <value>TopLeft</value>
   </data>
   <data name="autoApplyPresetsLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>13, 4, 13, 0</value>
+    <value>13, 6, 13, 0</value>
   </data>
   <data name="newArtworkSizeUpDown.Location" type="System.Drawing.Point, System.Drawing">
     <value>388, 86</value>
@@ -3534,7 +3534,7 @@ Check out the preset chain!</value>
     <value>1000 (K)</value>
   </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 129</value>
+    <value>0, 128</value>
   </data>
   <data name="openReportCheckBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3678,7 +3678,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>0, 0, 0, 0</value>
   </data>
   <data name="tabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1038, 185</value>
+    <value>1038, 186</value>
   </data>
   <data name="previewTable.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -3882,10 +3882,10 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>13</value>
   </data>
   <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
-    <value>324</value>
+    <value>323</value>
   </data>
   <data name="tagsDataGridView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>580, 119</value>
+    <value>580, 121</value>
   </data>
   <data name="hidePreviewCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>442, 9</value>
@@ -4168,7 +4168,7 @@ You can refer to any tag in an LR expression using the MusicBee generic &lt;Tag 
     <value>100</value>
   </data>
   <data name="useHotkeyForSelectedTracksCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>890, 9</value>
+    <value>869, 9</value>
   </data>
   <data name="buttonSaveClose.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
@@ -4255,7 +4255,7 @@ You can refer to any tag in an LR expression using the MusicBee generic &lt;Tag 
     <value>0</value>
   </data>
   <data name="useHotkeyForSelectedTracksCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 8, 0</value>
+    <value>4, 0, 30, 0</value>
   </data>
   <data name="openReportCheckBoxLabel.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -4276,7 +4276,7 @@ You can refer to any tag in an LR expression using the MusicBee generic &lt;Tag 
     <value>261, 23</value>
   </data>
   <data name="tabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1038, 185</value>
+    <value>1038, 186</value>
   </data>
   <data name="useAnotherPresetAsSourceCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -4369,7 +4369,7 @@ You can refer to any tag in an LR expression using the MusicBee generic &lt;Tag 
     <value>97, 15</value>
   </data>
   <data name="assignHotkeyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>607, 9</value>
+    <value>609, 9</value>
   </data>
   <data name="expressionLabel.Error" xml:space="preserve">
     <value />
@@ -4588,7 +4588,7 @@ You will be able to export the generated report to a file as usual</value>
     <value>20</value>
   </data>
   <data name="useHotkeyForSelectedTracksCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>911, 9</value>
+    <value>890, 9</value>
   </data>
   <data name="buttonPreview.Text" xml:space="preserve">
     <value>Preview</value>
