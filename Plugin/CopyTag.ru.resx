@@ -119,34 +119,28 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>280, 5</value>
+    <value>132, 5</value>
   </data>
   <data name="buttonPreview.Text" xml:space="preserve">
     <value>Просмотр</value>
   </data>
   <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>496, 5</value>
+    <value>348, 5</value>
   </data>
   <data name="buttonClose.Text" xml:space="preserve">
     <value>Закрыть</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1061, 368</value>
+    <value>1094, 361</value>
   </data>
   <data name="Track.HeaderText" xml:space="preserve">
     <value>Трек</value>
   </data>
-  <data name="OriginalDestinationTagT.HeaderText" xml:space="preserve">
-    <value>Исходное значение</value>
-  </data>
-  <data name="NewTag.HeaderText" xml:space="preserve">
-    <value>Новый тег З</value>
-  </data>
-  <data name="NewTagT.HeaderText" xml:space="preserve">
+  <data name="NewDestinationTagValueNormalized.HeaderText" xml:space="preserve">
     <value>Новое значение</value>
   </data>
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1049, 221</value>
+    <value>1082, 214</value>
   </data>
   <data name="addCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>424, 15</value>
@@ -164,10 +158,10 @@
     <value>343, 63</value>
   </data>
   <data name="onlyIfSourceNotEmptyCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>231, 15</value>
+    <value>278, 15</value>
   </data>
   <data name="onlyIfSourceNotEmptyCheckBoxLabel.Text" xml:space="preserve">
-    <value>или только если тег-источник не пустой</value>
+    <value>Копировать, только если тег-источник не пустой</value>
   </data>
   <data name="onlyIfSourceNotEmptyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>321, 63</value>
@@ -226,25 +220,25 @@
     <value>170, 23</value>
   </data>
   <data name="addedTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>596, 23</value>
+    <value>448, 23</value>
   </data>
   <data name="appendedTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>596, 23</value>
+    <value>448, 23</value>
   </data>
-  <data name="browseButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>496, 59</value>
+  <data name="buttonBrowse.Location" type="System.Drawing.Point, System.Drawing">
+    <value>348, 59</value>
   </data>
-  <data name="browseButton.Text" xml:space="preserve">
+  <data name="buttonBrowse.Text" xml:space="preserve">
     <value>Открыть...</value>
   </data>
   <data name="fileNameTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>213, 59</value>
+    <value>109, 59</value>
   </data>
   <data name="fileNameTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>277, 23</value>
+    <value>233, 23</value>
   </data>
   <data name="fileNameLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>133, 63</value>
+    <value>29, 63</value>
   </data>
   <data name="fileNameLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 15</value>
@@ -253,25 +247,25 @@
     <value>Имя файла:</value>
   </data>
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>388, 5</value>
+    <value>240, 5</value>
   </data>
   <data name="buttonOK.Text" xml:space="preserve">
     <value>Применить</value>
   </data>
   <data name="buttonSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>234, 5</value>
+    <value>86, 5</value>
   </data>
   <data name="buttonSettings.ToolTip" xml:space="preserve">
     <value>Открыть быстрые настройки</value>
   </data>
   <data name="fieldsPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>459, 0</value>
+    <value>640, 0</value>
   </data>
   <data name="fieldsPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>598, 140</value>
+    <value>450, 140</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>1075, 400</value>
+    <value>1110, 400</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Копирование тега</value>

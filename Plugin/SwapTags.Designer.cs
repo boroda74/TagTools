@@ -136,6 +136,7 @@
             this.DoubleBuffered = true;
             this.Name = "SwapTags";
             this.Tag = "@min-max-width-same@min-max-height-same";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SwapTags_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

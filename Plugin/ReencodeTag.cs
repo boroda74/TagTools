@@ -18,14 +18,10 @@ namespace MusicBeePlugin
         private readonly DataGridViewCellStyle changedCellStyle = new DataGridViewCellStyle(ChangedCellStyle);
         private readonly DataGridViewCellStyle dimmedCellStyle = new DataGridViewCellStyle(DimmedCellStyle);
 
-        private delegate void AddRowToTable(string[] row);
-        private delegate void ProcessRowOfTable(int row);
-        private AddRowToTable addRowToTable;
-        private ProcessRowOfTable processRowOfTable;
-
         private string[] files = Array.Empty<string>();
         private readonly List<string[]> tags = new List<string[]>();
         private MetaDataType sourceTagId;
+        private List<bool> processedRowList = new List<bool>(); //Indices of processed tracks
 
         private Encoding defaultEncoding;
         private Encoding originalEncoding;
@@ -101,42 +97,11 @@ namespace MusicBeePlugin
 
             previewTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 
-            addRowToTable = previewTable_AddRowToTable;
-            processRowOfTable = previewTable_ProcessRowOfTable;
-
-
             enableDisablePreviewOptionControls(true, true);
             enableQueryingOrUpdatingButtons();
 
+
             button_GotFocus(AcceptButton, null); //Let's mark active button
-        }
-
-        private void previewTable_AddRowToTable(object[] row)
-        {
-            if (backgroundTaskIsWorking() && !previewIsStopped)
-            {
-                try
-                {
-                    previewTable.Rows.Add(row);
-                    previewTableFormatRow(previewTable.RowCount - 1);
-                }
-                catch
-                {
-                    //Generating preview is stopped. There is some .Net bug. Let's ignore.
-                }
-            }
-
-            if (previewTable.RowCount > 0)
-                previewTable.FirstDisplayedScrollingRowIndex = previewTable.RowCount - 1;
-
-            if ((previewTable.RowCount & 0x1f) == 0)
-                updateCustomScrollBars(previewTable);
-        }
-
-        private void previewTable_ProcessRowOfTable(int rowIndex)
-        {
-            previewTable.Rows[rowIndex].Cells[0].Value = null;
-            previewTableFormatRow(rowIndex);
         }
 
         private string reencode(string source)
@@ -152,17 +117,111 @@ namespace MusicBeePlugin
             }
         }
 
-        private bool prepareBackgroundPreview()
+        private void previewTable_ProcessRowsOfTable(List<bool> processedRowList)
         {
+            for (int i = 0; i < processedRowList.Count; i++)
+            {
+                previewTable.CurrentCell = previewTable.Rows[i].Cells[0];
+
+                if (processedRowList[i])
+                    previewTable.Rows[i].Cells[0].Value = null;
+
+                previewTableFormatRow(previewTable, i);
+            }
+        }
+
+        private void resetPreviewData()
+        {
+            backgroundTaskIsStopping = false;
+            backgroundTaskIsStoppedOrCancelled = false;
+
             tags.Clear();
             previewTable.RowCount = 0;
             (previewTable.Columns[0].HeaderCell as DataGridViewCheckBoxHeaderCell).setState(true);
 
             updateCustomScrollBars(previewTable);
+            SetStatusBarText(string.Empty, false);
+
+            enableQueryingOrUpdatingButtons();
+            enableDisablePreviewOptionControls(true);
+
+            if (closeFormOnStopping && ignoreClosingForm && backgroundTaskIsScheduled)
+            {
+                ignoreClosingForm = false;
+                Close();
+            }
+
+            if (backgroundTaskIsScheduled)
+                ignoreClosingForm = false;
+        }
+
+        private void resetFormToGeneratedPreview()
+        {
+            previewTable.AllowUserToResizeColumns = true;
+            previewTable.AllowUserToResizeRows = true;
+            foreach (DataGridViewColumn column in previewTable.Columns)
+                column.SortMode = DataGridViewColumnSortMode.Automatic;
+
+
+            backgroundTaskIsScheduled = false;
+            backgroundTaskIsStopping = false;
+            backgroundTaskIsStoppedOrCancelled = false;
+
+            enableDisablePreviewOptionControls(true);
+            enableQueryingOrUpdatingButtons();
+
+            updateCustomScrollBars(previewTable);
+            SetResultingSbText();
+
+            if (closeFormOnStopping)
+            {
+                ignoreClosingForm = false;
+                Close();
+            }
+
+            ignoreClosingForm = false;
+        }
+
+        private bool applyingChangesStopped()
+        {
+            previewTable.AllowUserToResizeColumns = true;
+            previewTable.AllowUserToResizeRows = true;
+            foreach (DataGridViewColumn column in previewTable.Columns)
+                column.SortMode = DataGridViewColumnSortMode.Automatic;
+
+
+
+            backgroundTaskIsScheduled = false;
+            backgroundTaskIsStopping = false;
+            backgroundTaskIsStoppedOrCancelled = false;
+            closeFormOnStopping = false;
+
+            previewTable_ProcessRowsOfTable(processedRowList);
+
+            SetResultingSbText();
+
+            if (closeFormOnStopping)
+            {
+                ignoreClosingForm = false;
+                Close();
+            }
+
+            ignoreClosingForm = false;
+
+            return true;
+        }
+
+        private bool prepareBackgroundPreview()
+        {
+            resetPreviewData();
+
+            if (backgroundTaskIsStopping)
+                backgroundTaskIsStoppedOrCancelled = true;
 
             if (previewIsGenerated)
             {
                 previewIsGenerated = false;
+                enableDisablePreviewOptionControls(true);
                 return true;
             }
 
@@ -171,16 +230,20 @@ namespace MusicBeePlugin
             if (backgroundTaskIsWorking())
                 return true;
 
+
+            previewTable.AllowUserToResizeColumns = false;
+            previewTable.AllowUserToResizeRows = false;
+            foreach (DataGridViewColumn column in previewTable.Columns)
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+
+
             sourceTagId = GetTagId(sourceTagListCustom.Text);
             originalEncoding = Encoding.GetEncoding(initialEncodingListCustom.Text);
             usedEncoding = Encoding.GetEncoding(usedEncodingListCustom.Text);
 
 
-            files = null;
-            if (!MbApiInterface.Library_QueryFilesEx("domain=SelectedFiles", out files))
-                files = Array.Empty<string>();
-
-            if (files.Length == 0)
+            MbApiInterface.Library_QueryFilesEx("domain=SelectedFiles", out files);
+            if (files == null || files.Length == 0)
             {
                 MessageBox.Show(this, MsgNoTracksSelected, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
@@ -193,24 +256,35 @@ namespace MusicBeePlugin
 
         private bool prepareBackgroundTask()
         {
+            if (backgroundTaskIsWorking())
+                return false;
+
             if (previewTable.Rows.Count == 0)
             {
                 return prepareBackgroundPreview();
             }
             else
             {
+                previewTable.AllowUserToResizeColumns = false;
+                previewTable.AllowUserToResizeRows = false;
+                foreach (DataGridViewColumn column in previewTable.Columns)
+                    column.SortMode = DataGridViewColumnSortMode.NotSortable;
+
+
                 tags.Clear();
 
                 for (var fileCounter = 0; fileCounter < previewTable.Rows.Count; fileCounter++)
                 {
                     var tag = new string[3];
 
-                    tag[0] = (string)previewTable.Rows[fileCounter].Cells[0].Value;
-                    tag[1] = (string)previewTable.Rows[fileCounter].Cells[1].Value;
-                    tag[2] = (string)previewTable.Rows[fileCounter].Cells[4].Value;
+                    tag[0] = previewTable.Rows[fileCounter].Cells[0].Value as string;
+                    tag[1] = previewTable.Rows[fileCounter].Cells[1].Value as string;
+                    tag[2] = previewTable.Rows[fileCounter].Cells[4].Value as string;
 
                     tags.Add(tag);
                 }
+
+                ignoreClosingForm = true;
 
                 return true;
             }
@@ -218,17 +292,24 @@ namespace MusicBeePlugin
 
         private void previewChanges()
         {
-            var stripNotChangedLines = SavedSettings.dontIncludeInPreviewLinesWithoutChangedTags;
+            previewIsGenerated = true;
 
-            // ReSharper disable once RedundantAssignment
-            string[] row = { "Checked", "File", "Track", "OriginalTag", "NewTag" };
-            // ReSharper disable once RedundantAssignment
-            string[] tag = { "Checked", "file", "newTag" };
+            List<string[]> rows = new List<string[]>();
+            var stripNotChangedLines = SavedSettings.dontIncludeInPreviewLinesWithoutChangedTags;
 
             for (var fileCounter = 0; fileCounter < files.Length; fileCounter++)
             {
-                if (backgroundTaskIsCanceled)
+                if (checkStoppingStatus())
+                {
+                    Invoke(new Action(() => { stopButtonClickedMethod(prepareBackgroundPreview); }));
                     return;
+                }
+
+
+                // ReSharper disable once RedundantAssignment
+                string[] row = { "Checked", "File", "Track", "OriginalTag", "NewTag" };
+                // ReSharper disable once RedundantAssignment
+                string[] tag = { "Checked", "file", "newTag" };
 
                 var currentFile = files[fileCounter];
 
@@ -248,14 +329,12 @@ namespace MusicBeePlugin
                 else
                     isChecked = "T";
 
-                tag = new string[3];
-
                 tag[0] = isChecked;
                 tag[1] = currentFile;
                 tag[2] = newTagValue;
 
+                tags.Add(tag);
 
-                row = new string[5];
 
                 row[0] = isChecked;
                 row[1] = currentFile;
@@ -263,26 +342,36 @@ namespace MusicBeePlugin
                 row[3] = sourceTagValue;
                 row[4] = newTagValue;
 
-                Invoke(addRowToTable, new object[] { row });
+                rows.Add(row);
 
-                tags.Add(tag);
 
-                previewIsGenerated = true;
+                int rowCountToFormat1 = 0;
+                Invoke(new Action(() => { rowCountToFormat1 = AddRowsToTable(this, previewTable, rows, false, true); }));
+                Invoke(new Action(() => { FormatChangedTags(this, previewTable, rowCountToFormat1, previewTableFormatRow); }));
             }
 
-            Invoke(new Action(() => { updateCustomScrollBars(previewTable); }));
-            SetResultingSbText();
+            int rowCountToFormat2 = 0;
+            Invoke(new Action(() => { rowCountToFormat2 = AddRowsToTable(this, previewTable, rows, true, true); }));
+            Invoke(new Action(() => { FormatChangedTags(this, previewTable, rowCountToFormat2, previewTableFormatRow); checkStoppedStatus(); resetFormToGeneratedPreview(); }));
         }
 
         private void applyChanges()
         {
             if (tags.Count == 0)
-                previewChanges();
+                throw new Exception("Something went wrong! Empty 'tags' local variable (must be filled on generating preview.)");
+
+            processedRowList.Clear(); //Indices of processed tracks
+            Invoke(new Action(() => { previewTable.CurrentCell = previewTable.Rows[0].Cells[0]; }));
+            Invoke(new Action(() => { previewTable.FirstDisplayedCell = previewTable.CurrentCell; }));
 
             for (var i = 0; i < tags.Count; i++)
             {
-                if (backgroundTaskIsCanceled)
+                if (checkStoppingStatus())
+                {
+                    Invoke(new Action(() => { stopButtonClickedMethod(applyingChangesStopped); }));
                     return;
+                }
+
 
                 var isChecked = tags[i][0];
 
@@ -293,17 +382,21 @@ namespace MusicBeePlugin
 
                     tags[i][0] = string.Empty;
 
-                    Invoke(processRowOfTable, new object[] { i });
-
+                    processedRowList.Add(true);
                     SetStatusBarTextForFileOperations(ReEncodeTagSbText, false, i, tags.Count, currentFile);
 
                     SetFileTag(currentFile, sourceTagId, newTag);
                     CommitTagsToFile(currentFile);
                 }
+                else
+                {
+                    processedRowList.Add(false);
+                }
             }
 
-            RefreshPanels(true);
+            Invoke(new Action(() => { applyingChangesStopped(); }));
 
+            RefreshPanels(true);
             SetResultingSbText();
         }
 
@@ -325,14 +418,7 @@ namespace MusicBeePlugin
 
         private void buttonPreview_Click(object sender, EventArgs e)
         {
-            clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewChanges, sender as Button, buttonOK, buttonClose);
-            enableQueryingOrUpdatingButtons();
-
-            if (previewTable.RowCount > 0)
-            {
-                var vScrollBar = ControlsTools.FindControlChild<VScrollBar>(previewTable);
-                vScrollBar.Value = vScrollBar.Maximum;
-            }
+            ignoreClosingForm = clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewChanges, buttonPreview, buttonOK, buttonClose);
         }
 
         private void buttonClose_Click(object sender, EventArgs e)
@@ -363,13 +449,13 @@ namespace MusicBeePlugin
             {
                 string sourceTagValue;
 
-                var isChecked = (string)previewTable.Rows[e.RowIndex].Cells[0].Value;
+                var isChecked = previewTable.Rows[e.RowIndex].Cells[0].Value as string;
 
                 if (isChecked == "T")
                 {
                     previewTable.Rows[e.RowIndex].Cells[0].Value = "F";
 
-                    sourceTagValue = (string)previewTable.Rows[e.RowIndex].Cells[3].Value;
+                    sourceTagValue = previewTable.Rows[e.RowIndex].Cells[3].Value as string;
 
                     previewTable.Rows[e.RowIndex].Cells[4].Value = sourceTagValue;
                 }
@@ -377,46 +463,46 @@ namespace MusicBeePlugin
                 {
                     previewTable.Rows[e.RowIndex].Cells[0].Value = "T";
 
-                    sourceTagValue = (string)previewTable.Rows[e.RowIndex].Cells[3].Value;
+                    sourceTagValue = previewTable.Rows[e.RowIndex].Cells[3].Value as string;
 
                     var newTagValue = reencode(sourceTagValue);
 
                     previewTable.Rows[e.RowIndex].Cells[4].Value = newTagValue;
                 }
 
-                previewTableFormatRow(e.RowIndex);
+                previewTableFormatRow(previewTable, e.RowIndex);
             }
         }
 
-        private void previewTableFormatRow(int rowIndex)
+        private void previewTableFormatRow(DataGridView dataGridView, int rowIndex)
         {
             if (SavedSettings.dontHighlightChangedTags)
                 return;
 
-            if ((string)previewTable.Rows[rowIndex].Cells[0].Value != "T")
+            if ((string)dataGridView.Rows[rowIndex].Cells[0].Value != "T")
             {
-                for (var columnIndex = 1; columnIndex < previewTable.ColumnCount; columnIndex++)
+                for (var columnIndex = 1; columnIndex < dataGridView.ColumnCount; columnIndex++)
                 {
-                    if (previewTable.Columns[columnIndex].Visible)
-                        previewTable.Rows[rowIndex].Cells[columnIndex].Style = dimmedCellStyle;
+                    if (dataGridView.Columns[columnIndex].Visible)
+                        dataGridView.Rows[rowIndex].Cells[columnIndex].Style = dimmedCellStyle;
                 }
 
                 return;
             }
 
 
-            for (var columnIndex = 1; columnIndex < previewTable.ColumnCount; columnIndex++)
+            for (var columnIndex = 1; columnIndex < dataGridView.ColumnCount; columnIndex++)
             {
                 if (columnIndex == 4)
                 {
-                    if ((string)previewTable.Rows[rowIndex].Cells[3].Value == (string)previewTable.Rows[rowIndex].Cells[4].Value)
-                        previewTable.Rows[rowIndex].Cells[4].Style = unchangedCellStyle;
+                    if ((string)dataGridView.Rows[rowIndex].Cells[3].Value == (string)dataGridView.Rows[rowIndex].Cells[4].Value)
+                        dataGridView.Rows[rowIndex].Cells[4].Style = unchangedCellStyle;
                     else
-                        previewTable.Rows[rowIndex].Cells[4].Style = changedCellStyle;
+                        dataGridView.Rows[rowIndex].Cells[4].Style = changedCellStyle;
                 }
                 else
                 {
-                    previewTable.Rows[rowIndex].Cells[columnIndex].Style = unchangedCellStyle;
+                    dataGridView.Rows[rowIndex].Cells[columnIndex].Style = unchangedCellStyle;
                 }
             }
         }
@@ -444,7 +530,7 @@ namespace MusicBeePlugin
 
         internal override void enableQueryingOrUpdatingButtons()
         {
-            buttonOK.Enable((previewIsGenerated && !previewIsStopped) || SavedSettings.allowCommandExecutionWithoutPreview);
+            buttonOK.Enable((previewIsGenerated || SavedSettings.allowCommandExecutionWithoutPreview) && !backgroundTaskIsStopping && (!backgroundTaskIsWorking() || backgroundTaskIsNativeMB));
             buttonPreview.Enable(true);
         }
 
@@ -454,33 +540,43 @@ namespace MusicBeePlugin
             buttonPreview.Enable(false);
         }
 
+        private void buttonSettings_Click(object sender, EventArgs e)
+        {
+            var settings = new QuickSettings(TagToolsPlugin);
+            Display(settings, true);
+        }
+
         private void ReEncodeTagPlugin_Load(object sender, EventArgs e)
         {
             var value = loadWindowLayout();
 
             if (value.Item1 != 0)
             {
-                previewTable.Columns[2].Width = (int)Math.Round(value.Item1 * hDpiFontScaling);
-                previewTable.Columns[3].Width = (int)Math.Round(value.Item2 * hDpiFontScaling);
-                previewTable.Columns[4].Width = (int)Math.Round(value.Item3 * hDpiFontScaling);
-            }
-            else
-            {
-                previewTable.Columns[2].Width = (int)Math.Round(previewTable.Columns[2].Width * hDpiFontScaling);
-                previewTable.Columns[3].Width = (int)Math.Round(previewTable.Columns[3].Width * hDpiFontScaling);
-                previewTable.Columns[4].Width = (int)Math.Round(previewTable.Columns[4].Width * hDpiFontScaling);
+                previewTable.Columns[2].FillWeight = value.Item1;
+                previewTable.Columns[3].FillWeight = value.Item2;
+                previewTable.Columns[4].FillWeight = value.Item3;
             }
         }
 
         private void ReEncodeTagPlugin_FormClosing(object sender, FormClosingEventArgs e)
         {
-            saveWindowLayout(previewTable.Columns[2].Width, previewTable.Columns[3].Width, previewTable.Columns[4].Width);
-        }
+            if (ignoreClosingForm)
+            {
+                if (!backgroundTaskIsNativeMB)
+                {
+                    closeFormOnStopping = true;
+                    buttonClose.Enable(false);
+                }
 
-        private void buttonSettings_Click(object sender, EventArgs e)
-        {
-            var settings = new QuickSettings(TagToolsPlugin);
-            Display(settings, true);
+                backgroundTaskIsStopping = true;
+                SetStatusBarText(ReEncodeTagSbText + SbTextStoppingCurrentOperation, false);
+
+                e.Cancel = true;
+            }
+            else
+            {
+                saveWindowLayout(previewTable.Columns[2].Width, previewTable.Columns[3].Width, previewTable.Columns[4].Width);
+            }
         }
     }
 }

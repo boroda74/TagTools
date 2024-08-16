@@ -73,6 +73,12 @@ namespace MusicBeePlugin
             dontTryToGuessLibraryNameCheckBox.Checked = SavedSettings.dontTryToGuessLibraryName;
 
 
+            autoBackupCheckBox_CheckedChanged(null, null);
+            autoDeleteOldCheckBox_CheckedChanged(null, null);
+            autoDeleteManyCheckBox_CheckedChanged(null, null);
+            storeTrackIdsInCustomTagCheckBox_CheckedChanged(null, null);
+
+
             button_GotFocus(AcceptButton, null); //Let's mark active button
         }
 
@@ -161,7 +167,7 @@ namespace MusicBeePlugin
             backupArtworksCheckBox.Checked = !backupArtworksCheckBox.Checked;
         }
 
-        private void browseButton_Click(object sender, EventArgs e)
+        private void buttonBrowse_Click(object sender, EventArgs e)
         {
             var dialog = new FolderBrowserDialog
             {
@@ -205,7 +211,7 @@ namespace MusicBeePlugin
 
             if (initialAutoBackupDirectory != SavedSettings.autoBackupDirectory)
             {
-                MbApiInterface.MB_SetBackgroundTaskMessage(SbMovingBackupsToNewFolder);
+                SetStatusBarText(SbMovingBackupsToNewFolder, false);
 
                 lock (TracksNeededToBeBackedUp)
                 {
@@ -234,7 +240,7 @@ namespace MusicBeePlugin
                     }
                 }
 
-                MbApiInterface.MB_SetBackgroundTaskMessage(string.Empty);
+                SetStatusBarText(string.Empty, false);
             }
 
             SavedSettings.backupArtworks = backupArtworksCheckBox.Checked;

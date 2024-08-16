@@ -9,11 +9,38 @@ internal static class NativeMethods
 
     internal const int GWL_STYLE = -16;
 
-    internal const int WS_HSCROLL = 0x00100000;
-    internal const int WS_VSCROLL = 0x00200000;
+
+    internal const int SB_HORZ = 0;
+    internal const int SB_VERT = 1;
+    internal const int SB_BOTH = 3;
+    internal const int SB_PAGERIGHT = 3;
+    internal const int SB_THUMBPOSITION = 4;
+    internal const int SB_THUMBTRACK = 5;
+
+    internal const int WM_HSCROLL = 0x114;
+    internal const int WM_VSCROLL = 0x115; //****
+    internal const int WM_SCROLL = 276; // Horizontal scroll
+    //internal const int WM_VSCROLL = 277; // Vertical scroll
+
+    internal const int SB_LINEUP = 0; // Scrolls one line up
+    internal const int SB_LINELEFT = 0;// Scrolls one cell left
+    internal const int SB_LINEDOWN = 1; // Scrolls one line down
+    internal const int SB_LINERIGHT = 1;// Scrolls one cell right
+    internal const int SB_PAGEUP = 2; // Scrolls one page up
+    internal const int SB_PAGELEFT = 2;// Scrolls one page left
+    internal const int SB_PAGEDOWN = 3; // Scrolls one page down
+    internal const int SB_PAGERIGTH = 3; // Scrolls one page right
+    internal const int SB_PAGETOP = 6; // Scrolls to the upper left
+    internal const int SB_LEFT = 6; // Scrolls to the left
+    internal const int SB_PAGEBOTTOM = 7; // Scrolls to the upper right
+    internal const int SB_RIGHT = 7; // Scrolls to the right
+    internal const int SB_ENDSCROLL = 8; // Ends scroll
+
     internal const int WS_BORDER = 0x00800000;
     
     internal const int WS_EX_CLIENTEDGE = 0x00000200;
+    internal const int WS_HSCROLL = 0x00100000;
+    internal const int WS_VSCROLL = 0x00200000;
 
     internal const int EM_LINESCROLL = 0x00B6;
 
@@ -25,23 +52,7 @@ internal static class NativeMethods
     internal const int LB_DELETESTRING = 0x182;
     internal const int LB_RESETCONTENT = 0x184;
 
-    internal const int WM_HSCROLL = 0x114;
-    internal const int WM_VSCROLL = 0x115;
     internal const int WM_NCPAINT = 0x0085;
-
-    internal const int SB_HORZ = 0;
-    internal const int SB_VERT = 1;
-    internal const int SB_BOTH = 3;
-
-    internal const int SB_LINELEFT = 0;
-    internal const int SB_LINERIGHT = 1;
-    internal const int SB_PAGELEFT = 2;
-    internal const int SB_PAGERIGHT = 3;
-    internal const int SB_THUMBPOSITION = 4;
-    internal const int SB_THUMBTRACK = 5;
-    internal const int SB_LEFT = 6;
-    internal const int SB_RIGHT = 7;
-    internal const int SB_ENDSCROLL = 8;
 
     internal const int SIF_TRACKPOS = 0x10;
     internal const int SIF_RANGE = 0x1;

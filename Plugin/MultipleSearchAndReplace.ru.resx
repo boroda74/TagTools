@@ -117,17 +117,54 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="buttonPreview.Location" type="System.Drawing.Point, System.Drawing">
+    <value>702, 5</value>
+  </data>
   <data name="buttonPreview.Text" xml:space="preserve">
     <value>Просмотр</value>
+  </data>
+  <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
+    <value>918, 5</value>
   </data>
   <data name="buttonClose.Text" xml:space="preserve">
     <value>Закрыть</value>
   </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>1024, 461</value>
+  </data>
+  <data name="smartOperationCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 15</value>
+  </data>
+  <data name="smartOperationCheckBoxLabel.Text" xml:space="preserve">
+    <value>Умная замена</value>
+  </data>
+  <data name="smartOperationCheckBoxLabel.ToolTip" xml:space="preserve">
+    <value>Эта опция важна только для работы команды с несколькими исполнителями/композиторами в треке. 
+Каждый байт исходного тега (включая служебные символы, обозначающие роли артистов) будет сохранен 
+если эта опция не отмечена, однако это может быть полезно только в том случае, если теги 
+источника и назначения совпадают.</value>
+  </data>
+  <data name="smartOperationCheckBox.ToolTip" xml:space="preserve">
+    <value>Эта опция важна только для работы команды с несколькими исполнителями/композиторами в треке. 
+Каждый байт исходного тега (включая служебные символы, обозначающие роли артистов) будет сохранен 
+если эта опция не отмечена, однако это может быть полезно только в том случае, если теги 
+источника и назначения совпадают.</value>
+  </data>
+  <data name="buttonDeleteSaved.Location" type="System.Drawing.Point, System.Drawing">
+    <value>995, 32</value>
+  </data>
   <data name="buttonDeleteSaved.ToolTip" xml:space="preserve">
     <value>Удалить пресет дополнительного поиска и замены</value>
   </data>
+  <data name="loadComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>811, 32</value>
+  </data>
   <data name="loadComboBox.ToolTip" xml:space="preserve">
     <value>Загрузить пресет</value>
+  </data>
+  <data name="buttonSave.Location" type="System.Drawing.Point, System.Drawing">
+    <value>702, 32</value>
   </data>
   <data name="buttonSave.Text" xml:space="preserve">
     <value>Сохранить</value>
@@ -137,18 +174,23 @@
 поиска и замены, чтобы позже отметить его для автоматического 
 применения или назначить ему комбинацию клавиш</value>
   </data>
+  <data name="autoApplyPictureBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>675, 34</value>
+  </data>
   <data name="autoApplyPictureBox.ToolTip" xml:space="preserve">
     <value>Сохранить пресет дополнительного поиска и замены как автоматически применяемый</value>
+  </data>
+  <data name="autoApplyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>655, 36</value>
   </data>
   <data name="autoApplyCheckBox.ToolTip" xml:space="preserve">
     <value>Сохранить пресет дополнительного поиска и замены как автоматически применяемый</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="templateNameTextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>325, 32</value>
   </data>
   <data name="templateNameTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>200, 23</value>
+    <value>314, 23</value>
   </data>
   <data name="templateNameTextBox.ToolTip" xml:space="preserve">
     <value>Название пресета</value>
@@ -171,24 +213,17 @@
   <data name="buttonAdd.Text" xml:space="preserve">
     <value>Добавить</value>
   </data>
+  <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
+    <value>810, 5</value>
+  </data>
   <data name="buttonOK.Text" xml:space="preserve">
     <value>Применить</value>
   </data>
+  <data name="buttonSettings.Location" type="System.Drawing.Point, System.Drawing">
+    <value>655, 5</value>
+  </data>
   <data name="buttonSettings.ToolTip" xml:space="preserve">
     <value>Открыть быстрые настройки</value>
-  </data>
-  <data name="searchOnlyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>430, 22</value>
-  </data>
-  <data name="searchOnlyCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 19</value>
-  </data>
-  <data name="searchOnlyCheckBox.Text" xml:space="preserve">
-    <value>ТОЛЬКО ПОИСК</value>
-  </data>
-  <data name="searchOnlyCheckBox.ToolTip" xml:space="preserve">
-    <value>В режиме «ТОЛЬКО ПОИСК» вы можете ввести несколько критериев 
-поиска, все из которых должны подходить для результатов поиска.</value>
   </data>
   <data name="toTagLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 15</value>
@@ -197,7 +232,7 @@
     <value>в тег</value>
   </data>
   <data name="autoDestinationTagCheckBox.ToolTip" xml:space="preserve">
-    <value>Устанавливать тег назначения такой же, как тег источника</value>
+    <value>Всегда использовать тот же тег назначения, что и тег источника</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="fromTagLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
@@ -208,6 +243,12 @@
   </data>
   <data name="fromTagLabel.Text" xml:space="preserve">
     <value>Из тега</value>
+  </data>
+  <data name="controlsPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1024, 60</value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>1040, 500</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Множественный поиск и замена</value>
@@ -829,6 +870,9 @@
   <data name="ReplaceWith.HeaderText" xml:space="preserve">
     <value>Заменить на</value>
   </data>
+  <data name="templateTable.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1012, 189</value>
+  </data>
   <data name="Track.HeaderText" xml:space="preserve">
     <value>Трек</value>
   </data>
@@ -837,5 +881,11 @@
   </data>
   <data name="NewTag.HeaderText" xml:space="preserve">
     <value>Новое значение</value>
+  </data>
+  <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1012, 204</value>
+  </data>
+  <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1012, 396</value>
   </data>
 </root>

@@ -26,7 +26,7 @@ namespace MusicBeePlugin
             CustomTagNames[12] = MbApiInterface.Setting_GetFieldName(MetaDataType.Custom13);
             CustomTagNames[13] = MbApiInterface.Setting_GetFieldName(MetaDataType.Custom14);
             CustomTagNames[14] = MbApiInterface.Setting_GetFieldName(MetaDataType.Custom15);
-            CustomTagNames[15] = MbApiInterface.Setting_GetFieldName(MetaDataType.Custom16);
+            CustomTagNames[15] = MbApiInterface.Setting_GetFieldName(MetaDataType.Custom16);//***************** new custom tags in MB 3.6!!!
 
 
             //Read only tags

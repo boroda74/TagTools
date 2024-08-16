@@ -124,10 +124,10 @@
   <data name="autoBackupFolderTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>700, 23</value>
   </data>
-  <data name="browseButton.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="buttonBrowse.Location" type="System.Drawing.Point, System.Drawing">
     <value>869, 8</value>
   </data>
-  <data name="browseButton.Text" xml:space="preserve">
+  <data name="buttonBrowse.Text" xml:space="preserve">
     <value>Просмотр...</value>
   </data>
   <data name="autoBackupFolderLabel.Size" type="System.Drawing.Size, System.Drawing">

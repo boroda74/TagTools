@@ -117,9 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="previewTable.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;onlyIfDestinationEmptyCheckBoxLabel.Parent" xml:space="preserve">
     <value>$this</value>
@@ -132,20 +131,30 @@
   <data name="addedTextBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
   </data>
+  <data name="&gt;&gt;SupposedDestinationTagValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;onlyIfDestinationEmptyCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="dataGridViewTextBoxColumn2.Width" type="System.Int32, mscorlib">
+    <value>468</value>
   </data>
   <data name="&gt;&gt;fileNameLabel.Parent" xml:space="preserve">
     <value>fieldsPanel</value>
   </data>
+  <data name="buttonClose.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 6, 4</value>
+  </data>
   <data name="copyTagLabel.Error" xml:space="preserve">
     <value />
   </data>
+  <data name="&gt;&gt;buttonBrowse.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;forSelectedTracksLabel.ZOrder" xml:space="preserve">
     <value>11</value>
-  </data>
-  <data name="buttonClose.Error" xml:space="preserve">
-    <value />
   </data>
   <data name="appendCheckBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -156,20 +165,20 @@
   <data name="&gt;&gt;appendCheckBox.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;toolTip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn5.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn5</value>
   </data>
   <data name="&gt;&gt;buttonOK.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="fileNameLabel.ToolTip" xml:space="preserve">
-    <value />
+  <data name="dataGridViewTextBoxColumn3.MinimumWidth" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
-  <data name="appendedTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 86</value>
+  <data name="&gt;&gt;onlyIfSourceNotEmptyCheckBoxLabel.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="previewTable.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;dataGridViewTextBoxColumn4.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn4</value>
   </data>
   <data name="addCheckBoxLabel.ToolTip" xml:space="preserve">
     <value />
@@ -189,26 +198,35 @@
   <data name="&gt;&gt;forTagLabel.Name" xml:space="preserve">
     <value>forTagLabel</value>
   </data>
+  <data name="SupposedDestinationTagValue.HeaderText" xml:space="preserve">
+    <value>Supposed destination tag value</value>
+  </data>
   <data name="File.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>2</value>
   </data>
-  <data name="onlyIfSourceNotEmptyCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="addCheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="NewTag.Visible" type="System.Boolean, mscorlib">
+  <data name="onlyIfDestinationEmptyCheckBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="previewTable.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SupposedDestinationTagValue.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
-  </data>
-  <data name="&gt;&gt;forSelectedTracksLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="appendCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 90</value>
   </data>
-  <data name="&gt;&gt;browseButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="smartOperationCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>28, 36</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="appendCheckBoxLabel.Text" xml:space="preserve">
+    <value>Append source tag to the end of destination tag placing between them:</value>
   </data>
   <data name="sourceTagList.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -216,26 +234,26 @@
   <data name="appendedTextBox.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="fileNameTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="onlyIfDestinationEmptyCheckBox.Error" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;appendCheckBox.Name" xml:space="preserve">
     <value>appendCheckBox</value>
   </data>
-  <data name="SupposedDestinationTagT.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="appendedTextBox.IconPadding" type="System.Int32, mscorlib">
+  <data name="addedTextBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="smartOperationCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="buttonSettings.Error" xml:space="preserve">
-    <value />
+  <data name="destinationTagList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="fileNameLabel.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
+  </data>
+  <data name="onlyIfSourceNotEmptyCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="fieldsPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 0, 0, 0</value>
@@ -249,20 +267,26 @@
   <data name="fileNameLabel.Text" xml:space="preserve">
     <value>Filename:</value>
   </data>
-  <data name="onlyIfDestinationEmptyCheckBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="&gt;&gt;buttonBrowse.Parent" xml:space="preserve">
+    <value>fieldsPanel</value>
   </data>
-  <data name="&gt;&gt;OriginalDestinationTag.Name" xml:space="preserve">
-    <value>OriginalDestinationTag</value>
+  <data name="onlyIfDestinationEmptyCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="fileNameTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>266, 23</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn8.HeaderText" xml:space="preserve">
+    <value>New tag value</value>
   </data>
   <data name="fileNameLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
   </data>
-  <data name="&gt;&gt;SupposedDestinationTag.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;NewDestinationTagValueNormalized.Name" xml:space="preserve">
+    <value>NewDestinationTagValueNormalized</value>
   </data>
-  <data name="fieldsPanel.ToolTip" xml:space="preserve">
-    <value />
+  <data name="SupposedDestinationTagValueNormalized.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;addCheckBox.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -273,41 +297,32 @@
   <data name="buttonSettings.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;previewTable.Name" xml:space="preserve">
-    <value>previewTable</value>
-  </data>
   <data name="onlyIfSourceNotEmptyCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 15</value>
-  </data>
-  <data name="browseButton.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>198, 15</value>
   </data>
   <data name="Track.MinimumWidth" type="System.Int32, mscorlib">
-    <value>50</value>
+    <value>200</value>
   </data>
   <data name="&gt;&gt;appendCheckBoxLabel.Name" xml:space="preserve">
     <value>appendCheckBoxLabel</value>
   </data>
-  <data name="NewTagT.MinimumWidth" type="System.Int32, mscorlib">
-    <value>25</value>
-  </data>
-  <data name="browseButton.Text" xml:space="preserve">
-    <value>Browse...</value>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Copy Tag</value>
   </data>
   <data name="appendedTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="browseButton.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
   <data name="buttonPreview.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="SupposedDestinationTag.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
   <data name="&gt;&gt;buttonOK.ZOrder" xml:space="preserve">
     <value>6</value>
+  </data>
+  <data name="fileNameLabel.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn3.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn3</value>
   </data>
   <data name="&gt;&gt;onlyIfSourceNotEmptyCheckBoxLabel.Name" xml:space="preserve">
     <value>onlyIfSourceNotEmptyCheckBoxLabel</value>
@@ -315,20 +330,17 @@
   <data name="sourceTagList.Location" type="System.Drawing.Point, System.Drawing">
     <value>66, 5</value>
   </data>
-  <data name="forSelectedTracksLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>410, 9</value>
+  <data name="&gt;&gt;appendedTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;previewTable.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="OriginalDestinationTag.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
   <data name="appendedTextBox.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="addCheckBox.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;addCheckBox.Name" xml:space="preserve">
+    <value>addCheckBox</value>
   </data>
   <data name="onlyIfDestinationEmptyCheckBoxLabel.Text" xml:space="preserve">
     <value>Copy only if destination tag is empty</value>
@@ -339,23 +351,23 @@
   <data name="previewTable.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
   </data>
-  <data name="&gt;&gt;buttonClose.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="OriginalDestinationTagValueNormalized.MinimumWidth" type="System.Int32, mscorlib">
+    <value>100</value>
   </data>
   <data name="previewTable.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="&gt;&gt;buttonClose.Parent" xml:space="preserve">
-    <value>fieldsPanel</value>
-  </data>
-  <data name="buttonClose.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 23</value>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="onlyIfDestinationEmptyCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="appendCheckBox.Text" xml:space="preserve">
     <value> </value>
+  </data>
+  <data name="&gt;&gt;OriginalDestinationTagValue.Name" xml:space="preserve">
+    <value>OriginalDestinationTagValue</value>
   </data>
   <data name="&gt;&gt;fileNameLabel.ZOrder" xml:space="preserve">
     <value>4</value>
@@ -375,11 +387,14 @@
   <data name="&gt;&gt;smartOperationCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;sourceTagList.ZOrder" xml:space="preserve">
-    <value>14</value>
+  <data name="dataGridViewTextBoxColumn7.HeaderText" xml:space="preserve">
+    <value>NewTag</value>
   </data>
   <data name="smartOperationCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn7.Width" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="forSelectedTracksLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
@@ -387,8 +402,8 @@
   <data name="smartOperationCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="browseButton.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>TopLeft</value>
+  <data name="dataGridViewTextBoxColumn4.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;fieldsPanel.Parent" xml:space="preserve">
     <value>$this</value>
@@ -396,11 +411,14 @@
   <data name="previewTable.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
   </data>
-  <data name="&gt;&gt;NewTag.Name" xml:space="preserve">
-    <value>NewTag</value>
+  <data name="buttonClose.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 23</value>
   </data>
   <data name="forTagLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>214, 9</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn1.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="onlyIfDestinationEmptyCheckBoxLabel.ToolTip" xml:space="preserve">
     <value />
@@ -411,6 +429,9 @@
   <data name="addCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
   </data>
+  <data name="buttonBrowse.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="appendCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -418,13 +439,10 @@
     <value>onlyIfDestinationEmptyCheckBoxLabel</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>952, 368</value>
+    <value>944, 361</value>
   </data>
-  <data name="&gt;&gt;onlyIfDestinationEmptyCheckBox.Name" xml:space="preserve">
-    <value>onlyIfDestinationEmptyCheckBox</value>
-  </data>
-  <data name="&gt;&gt;appendCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="buttonBrowse.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="appendCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -432,20 +450,23 @@
   <data name="addCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>7, 4, 4, 4</value>
   </data>
-  <data name="onlyIfSourceNotEmptyCheckBox.Error" xml:space="preserve">
-    <value />
-  </data>
   <data name="fieldsPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>433, 0</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn5.HeaderText" xml:space="preserve">
+    <value>OriginalDestinationTag</value>
   </data>
   <data name="&gt;&gt;previewTable.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="&gt;&gt;buttonBrowse.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="onlyIfSourceNotEmptyCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
   </data>
-  <data name="buttonClose.ToolTip" xml:space="preserve">
-    <value />
+  <data name="dataGridViewTextBoxColumn3.Width" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="appendCheckBoxLabel.ToolTip" xml:space="preserve">
     <value />
@@ -459,14 +480,8 @@
   <data name="&gt;&gt;addedTextBox.Parent" xml:space="preserve">
     <value>fieldsPanel</value>
   </data>
-  <data name="appendCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>28, 90</value>
-  </data>
   <data name="onlyIfSourceNotEmptyCheckBoxLabel.Error" xml:space="preserve">
     <value />
-  </data>
-  <data name="&gt;&gt;addCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="buttonSettings.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -477,11 +492,11 @@
   <data name="fileNameLabel.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="browseButton.Error" xml:space="preserve">
-    <value />
+  <data name="dataGridViewTextBoxColumn3.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
-  <data name="destinationTagList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="onlyIfSourceNotEmptyCheckBox.Error" xml:space="preserve">
+    <value />
   </data>
   <data name="addCheckBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -489,8 +504,8 @@
   <data name="&gt;&gt;buttonOK.Parent" xml:space="preserve">
     <value>fieldsPanel</value>
   </data>
-  <data name="fileNameTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>274, 23</value>
+  <data name="forSelectedTracksLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>410, 9</value>
   </data>
   <data name="smartOperationCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>440, 15</value>
@@ -498,11 +513,17 @@
   <data name="&gt;&gt;sourceTagList.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
+  <data name="&gt;&gt;buttonOK.Name" xml:space="preserve">
+    <value>buttonOK</value>
+  </data>
   <data name="addCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
   </data>
   <data name="&gt;&gt;fieldsPanel.ZOrder" xml:space="preserve">
     <value>16</value>
+  </data>
+  <data name="OriginalDestinationTagValue.HeaderText" xml:space="preserve">
+    <value>Original destination tag value</value>
   </data>
   <data name="buttonOK.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -516,11 +537,23 @@
   <data name="&gt;&gt;copyTagLabel.Name" xml:space="preserve">
     <value>copyTagLabel</value>
   </data>
+  <data name="buttonBrowse.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
+  </data>
   <data name="sourceTagList.Size" type="System.Drawing.Size, System.Drawing">
     <value>140, 23</value>
   </data>
   <data name="fileNameLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="&gt;&gt;addCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;NewDestinationTagValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="onlyIfSourceNotEmptyCheckBoxLabel.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="buttonPreview.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -531,14 +564,20 @@
   <data name="fileNameLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="appendedTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>504, 23</value>
+  </data>
   <data name="File.HeaderText" xml:space="preserve">
     <value>File</value>
   </data>
-  <data name="&gt;&gt;buttonSettings.Name" xml:space="preserve">
-    <value>buttonSettings</value>
+  <data name="dataGridViewTextBoxColumn5.MinimumWidth" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="forSelectedTracksLabel.Text" xml:space="preserve">
     <value>for selected tracks</value>
+  </data>
+  <data name="&gt;&gt;forSelectedTracksLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="addCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 19</value>
@@ -546,14 +585,14 @@
   <data name="smartOperationCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 19</value>
   </data>
-  <data name="SupposedDestinationTag.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="appendCheckBox.Error" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;destinationTagList.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="onlyIfDestinationEmptyCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 4, 4, 4</value>
+  <data name="SupposedDestinationTagValue.MinimumWidth" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="copyTagLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -561,8 +600,11 @@
   <data name="&gt;&gt;sourceTagList.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="OriginalDestinationTag.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="appendCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;onlyIfSourceNotEmptyCheckBoxLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="smartOperationCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -582,6 +624,9 @@
   <data name="&gt;&gt;appendCheckBoxLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
+  <data name="onlyIfDestinationEmptyCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 4, 4, 4</value>
+  </data>
   <data name="destinationTagList.Size" type="System.Drawing.Size, System.Drawing">
     <value>140, 23</value>
   </data>
@@ -590,6 +635,9 @@
   </data>
   <data name="&gt;&gt;fileNameLabel.Name" xml:space="preserve">
     <value>fileNameLabel</value>
+  </data>
+  <data name="SupposedDestinationTagValueNormalized.HeaderText" xml:space="preserve">
+    <value>Supposed normalized destination tag value</value>
   </data>
   <data name="&gt;&gt;onlyIfDestinationEmptyCheckBox.Parent" xml:space="preserve">
     <value>$this</value>
@@ -603,26 +651,23 @@
   <data name="addCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="NewTag.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
   <data name="addCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;buttonOK.Name" xml:space="preserve">
-    <value>buttonOK</value>
+  <data name="dataGridViewTextBoxColumn3.HeaderText" xml:space="preserve">
+    <value>SupposedDestinationTag</value>
   </data>
-  <data name="&gt;&gt;Track.Type" xml:space="preserve">
+  <data name="SupposedDestinationTagValueNormalized.MinimumWidth" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;SupposedDestinationTagValueNormalized.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;NewTag.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="appendCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>28, 90</value>
   </data>
   <data name="previewTable.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 0, 6, 6</value>
-  </data>
-  <data name="appendCheckBox.Error" xml:space="preserve">
-    <value />
   </data>
   <data name="addCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -633,11 +678,14 @@
   <data name="appendedTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 6, 4</value>
   </data>
-  <data name="addCheckBoxLabel.Text" xml:space="preserve">
-    <value>Add source tag to the beginning of destination tag placing between them:</value>
-  </data>
   <data name="&gt;&gt;dirtyErrorProvider.Name" xml:space="preserve">
     <value>dirtyErrorProvider</value>
+  </data>
+  <data name="&gt;&gt;sourceTagList.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;SupposedDestinationTagValueNormalized.Name" xml:space="preserve">
+    <value>SupposedDestinationTagValueNormalized</value>
   </data>
   <data name="buttonPreview.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -645,8 +693,14 @@
   <data name="appendCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="fileNameLabel.Error" xml:space="preserve">
-    <value />
+  <data name="buttonBrowse.Location" type="System.Drawing.Point, System.Drawing">
+    <value>404, 59</value>
+  </data>
+  <data name="fileNameTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="appendCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
   </data>
   <data name="smartOperationCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -654,11 +708,17 @@
   <data name="forTagLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>38, 15</value>
   </data>
-  <data name="browseButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 23</value>
+  <data name="&gt;&gt;buttonClose.Name" xml:space="preserve">
+    <value>buttonClose</value>
   </data>
-  <data name="appendCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>TopLeft</value>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn6.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn6</value>
+  </data>
+  <data name="buttonPreview.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="addedTextBox.Error" xml:space="preserve">
     <value />
@@ -666,20 +726,32 @@
   <data name="forSelectedTracksLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="&gt;&gt;buttonClose.Parent" xml:space="preserve">
+    <value>fieldsPanel</value>
+  </data>
   <data name="&gt;&gt;dirtyErrorProvider.Type" xml:space="preserve">
     <value>System.Windows.Forms.ErrorProvider, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;File.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonClose.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="dataGridViewTextBoxColumn6.HeaderText" xml:space="preserve">
+    <value>Original tag value</value>
   </data>
   <data name="Track.HeaderText" xml:space="preserve">
     <value>Track</value>
   </data>
   <data name="appendCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
+  </data>
+  <data name="&gt;&gt;NewDestinationTagValue.Name" xml:space="preserve">
+    <value>NewDestinationTagValue</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn1.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn1</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn1.Width" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="&gt;&gt;smartOperationCheckBoxLabel.ZOrder" xml:space="preserve">
     <value>9</value>
@@ -693,8 +765,8 @@
   <data name="&gt;&gt;appendCheckBoxLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;onlyIfSourceNotEmptyCheckBoxLabel.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;addCheckBoxLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -702,26 +774,29 @@
   <data name="onlyIfDestinationEmptyCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="&gt;&gt;browseButton.Parent" xml:space="preserve">
-    <value>fieldsPanel</value>
-  </data>
   <data name="buttonPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>197, 5</value>
+    <value>189, 5</value>
   </data>
   <data name="appendedTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="&gt;&gt;smartOperationCheckBoxLabel.Name" xml:space="preserve">
-    <value>smartOperationCheckBoxLabel</value>
+  <data name="buttonBrowse.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;OriginalDestinationTagValueNormalized.Name" xml:space="preserve">
+    <value>OriginalDestinationTagValueNormalized</value>
   </data>
   <data name="buttonOK.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>412, 5</value>
+  <data name="dataGridViewTextBoxColumn4.MinimumWidth" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="&gt;&gt;onlyIfSourceNotEmptyCheckBox.ZOrder" xml:space="preserve">
     <value>6</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn7.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="onlyIfSourceNotEmptyCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 19</value>
@@ -738,11 +813,14 @@
   <data name="&gt;&gt;forSelectedTracksLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
+  <data name="onlyIfSourceNotEmptyCheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="buttonOK.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="sourceTagList.ToolTip" xml:space="preserve">
-    <value />
+  <data name="OriginalDestinationTagValue.MinimumWidth" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="forTagLabel.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -753,11 +831,11 @@
   <data name="buttonOK.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;addCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="NewTag.HeaderText" xml:space="preserve">
-    <value>NewTag</value>
+  <data name="appendedTextBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="smartOperationCheckBoxLabel.ToolTip" xml:space="preserve">
     <value>Every byte of the source tag (including the service characters that identify the roles of the artists) 
@@ -767,6 +845,12 @@ for copying it to a temporary tag
   </data>
   <data name="addedTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
+  </data>
+  <data name="buttonBrowse.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="buttonBrowse.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;appendCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -786,6 +870,9 @@ for copying it to a temporary tag
   <data name="addedTextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 113</value>
   </data>
+  <data name="buttonBrowse.Error" xml:space="preserve">
+    <value />
+  </data>
   <data name="&gt;&gt;File.Name" xml:space="preserve">
     <value>File</value>
   </data>
@@ -798,14 +885,17 @@ for copying it to a temporary tag
   <data name="&gt;&gt;buttonPreview.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;addCheckBox.Name" xml:space="preserve">
-    <value>addCheckBox</value>
-  </data>
   <data name="onlyIfSourceNotEmptyCheckBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="forTagLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
+  </data>
+  <data name="addedTextBox.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="buttonClose.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="buttonOK.Text" xml:space="preserve">
     <value>Proceed</value>
@@ -819,8 +909,14 @@ for copying it to a temporary tag
   <data name="addedTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 6, 4</value>
   </data>
-  <data name="appendCheckBoxLabel.Text" xml:space="preserve">
-    <value>Append source tag to the end of destination tag placing between them:</value>
+  <data name="dataGridViewTextBoxColumn4.Width" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="NewDestinationTagValue.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="buttonBrowse.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 23</value>
   </data>
   <data name="buttonPreview.Error" xml:space="preserve">
     <value>Error!</value>
@@ -834,6 +930,9 @@ for copying it to a temporary tag
   <data name="&gt;&gt;smartOperationCheckBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
+  <data name="NewDestinationTagValue.HeaderText" xml:space="preserve">
+    <value>New normalized destination tag value</value>
+  </data>
   <data name="onlyIfSourceNotEmptyCheckBoxLabel.ToolTip" xml:space="preserve">
     <value />
   </data>
@@ -846,23 +945,32 @@ for copying it to a temporary tag
   <data name="&gt;&gt;fieldsPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;toolTip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;forTagLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
+  <data name="dataGridViewTextBoxColumn8.MinimumWidth" type="System.Int32, mscorlib">
+    <value>50</value>
+  </data>
   <data name="File.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn2.MinimumWidth" type="System.Int32, mscorlib">
+    <value>100</value>
   </data>
   <data name="&gt;&gt;buttonPreview.Parent" xml:space="preserve">
     <value>fieldsPanel</value>
   </data>
   <data name="buttonSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>153, 5</value>
+    <value>145, 5</value>
   </data>
   <data name="smartOperationCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
   </data>
-  <data name="NewTagT.HeaderText" xml:space="preserve">
-    <value>New tag value</value>
+  <data name="forTagLabel.Error" xml:space="preserve">
+    <value />
   </data>
   <data name="fieldsPanel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -870,16 +978,13 @@ for copying it to a temporary tag
   <data name="forSelectedTracksLabel.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="buttonClose.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
   <data name="onlyIfDestinationEmptyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 63</value>
   </data>
   <data name="buttonSettings.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;OriginalDestinationTagT.Type" xml:space="preserve">
+  <data name="&gt;&gt;OriginalDestinationTagValue.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="sourceTagList.TabIndex" type="System.Int32, mscorlib">
@@ -894,44 +999,44 @@ for copying it to a temporary tag
   <data name="&gt;&gt;forSelectedTracksLabel.Name" xml:space="preserve">
     <value>forSelectedTracksLabel</value>
   </data>
+  <data name="dataGridViewTextBoxColumn1.MinimumWidth" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
+    <value>Track</value>
+  </data>
   <data name="sourceTagList.Error" xml:space="preserve">
     <value />
   </data>
   <data name="appendCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>384, 15</value>
   </data>
+  <data name="&gt;&gt;buttonClose.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
   <data name="buttonOK.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
+  </data>
+  <data name="&gt;&gt;smartOperationCheckBoxLabel.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;smartOperationCheckBox.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
-  <data name="&gt;&gt;browseButton.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="OriginalDestinationTag.HeaderText" xml:space="preserve">
-    <value>OriginalDestinationTag</value>
+  <data name="&gt;&gt;buttonSettings.Name" xml:space="preserve">
+    <value>buttonSettings</value>
   </data>
   <data name="copyTagLabel.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;NewTagT.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;browseButton.Name" xml:space="preserve">
-    <value>browseButton</value>
-  </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>CopyTag</value>
-  </data>
-  <data name="&gt;&gt;SupposedDestinationTagT.Name" xml:space="preserve">
-    <value>SupposedDestinationTagT</value>
   </data>
   <data name="sourceTagList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
-  <data name="onlyIfDestinationEmptyCheckBox.Error" xml:space="preserve">
-    <value />
+  <data name="dataGridViewTextBoxColumn4.HeaderText" xml:space="preserve">
+    <value>Supposed destination tag value</value>
   </data>
   <data name="buttonPreview.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 23</value>
@@ -948,8 +1053,11 @@ for copying it to a temporary tag
   <data name="onlyIfSourceNotEmptyCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="buttonClose.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
+    <value>404, 5</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="appendCheckBoxLabel.Error" xml:space="preserve">
     <value />
@@ -957,11 +1065,17 @@ for copying it to a temporary tag
   <data name="copyTagLabel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;onlyIfSourceNotEmptyCheckBoxLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;appendCheckBoxLabel.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="buttonClose.Error" xml:space="preserve">
+    <value />
   </data>
   <data name="smartOperationCheckBox.Text" xml:space="preserve">
     <value> </value>
+  </data>
+  <data name="OriginalDestinationTagValue.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="destinationTagList.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
@@ -969,14 +1083,20 @@ for copying it to a temporary tag
   <data name="onlyIfDestinationEmptyCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>28, 63</value>
   </data>
+  <data name="buttonClose.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="buttonPreview.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;buttonPreview.Name" xml:space="preserve">
-    <value>buttonPreview</value>
+  <data name="fileNameLabel.Error" xml:space="preserve">
+    <value />
   </data>
-  <data name="onlyIfSourceNotEmptyCheckBoxLabel.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="&gt;&gt;addCheckBoxLabel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="NewDestinationTagValueNormalized.HeaderText" xml:space="preserve">
+    <value>New tag value</value>
   </data>
   <data name="forSelectedTracksLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -984,17 +1104,17 @@ for copying it to a temporary tag
   <data name="buttonOK.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
   </data>
-  <data name="&gt;&gt;OriginalDestinationTagT.Name" xml:space="preserve">
-    <value>OriginalDestinationTagT</value>
+  <data name="&gt;&gt;SupposedDestinationTagValue.Name" xml:space="preserve">
+    <value>SupposedDestinationTagValue</value>
   </data>
   <data name="&gt;&gt;addCheckBoxLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;buttonClose.Name" xml:space="preserve">
-    <value>buttonClose</value>
+  <data name="appendCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
   </data>
-  <data name="OriginalDestinationTagT.MinimumWidth" type="System.Int32, mscorlib">
-    <value>25</value>
+  <data name="onlyIfDestinationEmptyCheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="smartOperationCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>7, 4, 4, 4</value>
@@ -1005,17 +1125,17 @@ for copying it to a temporary tag
   <data name="onlyIfDestinationEmptyCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
   <data name="fileNameTextBox.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="$this.ToolTip" xml:space="preserve">
+  <data name="buttonSettings.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="browseButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 6, 4</value>
+  <data name="dataGridViewTextBoxColumn6.MinimumWidth" type="System.Int32, mscorlib">
+    <value>50</value>
+  </data>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="onlyIfSourceNotEmptyCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -1026,8 +1146,8 @@ for copying it to a temporary tag
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>960, 400</value>
   </data>
-  <data name="destinationTagList.Error" xml:space="preserve">
-    <value />
+  <data name="dataGridViewTextBoxColumn5.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="onlyIfSourceNotEmptyCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1050,20 +1170,14 @@ for copying it to a temporary tag
   <data name="&gt;&gt;fileNameTextBox.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="browseButton.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="forTagLabel.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="fieldsPanel.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="buttonClose.Text" xml:space="preserve">
+    <value>Close</value>
   </data>
   <data name="&gt;&gt;onlyIfSourceNotEmptyCheckBoxLabel.ZOrder" xml:space="preserve">
     <value>5</value>
-  </data>
-  <data name="SupposedDestinationTag.HeaderText" xml:space="preserve">
-    <value>SupposedDestinationTag</value>
   </data>
   <data name="onlyIfDestinationEmptyCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
@@ -1086,29 +1200,32 @@ for copying it to a temporary tag
   <data name="buttonPreview.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="fieldsPanel.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="addCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="&gt;&gt;toolTip1.Name" xml:space="preserve">
-    <value>toolTip1</value>
+  <data name="destinationTagList.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="fieldsPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="appendedTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 86</value>
   </data>
   <data name="onlyIfDestinationEmptyCheckBoxLabel.Error" xml:space="preserve">
     <value />
   </data>
   <data name="onlyIfSourceNotEmptyCheckBoxLabel.Text" xml:space="preserve">
-    <value>or only if source tag is not empty</value>
+    <value>Copy only if source tag is not empty</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn8.Width" type="System.Int32, mscorlib">
+    <value>234</value>
   </data>
   <data name="onlyIfSourceNotEmptyCheckBox.Text" xml:space="preserve">
     <value> </value>
   </data>
   <data name="fileNameLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 15</value>
-  </data>
-  <data name="&gt;&gt;NewTagT.Name" xml:space="preserve">
-    <value>NewTagT</value>
   </data>
   <data name="fieldsPanel.Error" xml:space="preserve">
     <value />
@@ -1119,8 +1236,8 @@ for copying it to a temporary tag
   <data name="&gt;&gt;fieldsPanel.Name" xml:space="preserve">
     <value>fieldsPanel</value>
   </data>
-  <data name="SupposedDestinationTagT.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn7.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn7</value>
   </data>
   <data name="addCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -1140,23 +1257,23 @@ for copying it to a temporary tag
   <data name="&gt;&gt;appendCheckBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="buttonClose.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
   <data name="&gt;&gt;smartOperationCheckBoxLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="copyTagLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
   </data>
-  <data name="forTagLabel.Error" xml:space="preserve">
-    <value />
-  </data>
   <data name="addCheckBoxLabel.Error" xml:space="preserve">
     <value />
   </data>
+  <data name="dataGridViewTextBoxColumn6.Width" type="System.Int32, mscorlib">
+    <value>234</value>
+  </data>
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>304, 5</value>
+    <value>296, 5</value>
   </data>
   <data name="&gt;&gt;fileNameLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1164,8 +1281,8 @@ for copying it to a temporary tag
   <data name="forSelectedTracksLabel.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="addedTextBox.ToolTip" xml:space="preserve">
-    <value />
+  <data name="NewDestinationTagValueNormalized.MinimumWidth" type="System.Int32, mscorlib">
+    <value>100</value>
   </data>
   <data name="forSelectedTracksLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1173,17 +1290,17 @@ for copying it to a temporary tag
   <data name="smartOperationCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 36</value>
   </data>
-  <data name="&gt;&gt;copyTagLabel.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn2.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn2</value>
   </data>
-  <data name="browseButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>412, 59</value>
+  <data name="dataGridViewTextBoxColumn7.MinimumWidth" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
-  <data name="&gt;&gt;SupposedDestinationTagT.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;onlyIfDestinationEmptyCheckBox.Name" xml:space="preserve">
+    <value>onlyIfDestinationEmptyCheckBox</value>
   </data>
-  <data name="browseButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;previewTable.Name" xml:space="preserve">
+    <value>previewTable</value>
   </data>
   <data name="onlyIfDestinationEmptyCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>201, 15</value>
@@ -1191,17 +1308,20 @@ for copying it to a temporary tag
   <data name="destinationTagList.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="buttonOK.Error" xml:space="preserve">
-    <value />
+  <data name="OriginalDestinationTagValueNormalized.HeaderText" xml:space="preserve">
+    <value>Original tag value</value>
   </data>
   <data name="&gt;&gt;previewTable.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="buttonClose.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
   </data>
   <data name="&gt;&gt;appendedTextBox.Parent" xml:space="preserve">
     <value>fieldsPanel</value>
   </data>
   <data name="fieldsPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>517, 140</value>
+    <value>509, 140</value>
   </data>
   <data name="&gt;&gt;appendedTextBox.Name" xml:space="preserve">
     <value>appendedTextBox</value>
@@ -1811,23 +1931,26 @@ for copying it to a temporary tag
         ngDxxx4A8MYeAPBMPgD4AD4A/AB+AP8B/gD///4A///+AP///gA=
 </value>
   </data>
-  <data name="onlyIfDestinationEmptyCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="appendCheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;addCheckBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
+  <data name="copyTagLabel.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="forTagLabel.Text" xml:space="preserve">
     <value>to tag</value>
   </data>
-  <data name="buttonSettings.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+  <data name="smartOperationCheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="buttonClose.Text" xml:space="preserve">
-    <value>Close</value>
+  <data name="buttonClose.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="appendedTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>512, 23</value>
+  <data name="addCheckBox.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;sourceTagList.Name" xml:space="preserve">
     <value>sourceTagList</value>
@@ -1838,28 +1961,31 @@ for copying it to a temporary tag
   <data name="previewTable.ColumnHeadersHeight" type="System.Int32, mscorlib">
     <value>29</value>
   </data>
-  <data name="browseButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="&gt;&gt;OriginalDestinationTagValueNormalized.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="buttonPreview.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="NewDestinationTagValue.MinimumWidth" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;Track.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="buttonClose.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>7, 15</value>
   </data>
-  <data name="OriginalDestinationTagT.HeaderText" xml:space="preserve">
-    <value>Original tag value</value>
-  </data>
   <data name="&gt;&gt;addCheckBoxLabel.Name" xml:space="preserve">
     <value>addCheckBoxLabel</value>
   </data>
-  <data name="buttonClose.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 6, 4</value>
+  <data name="fileNameTextBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>TopLeft</value>
   </data>
-  <data name="&gt;&gt;SupposedDestinationTag.Name" xml:space="preserve">
-    <value>SupposedDestinationTag</value>
+  <data name="fieldsPanel.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="&gt;&gt;OriginalDestinationTag.Type" xml:space="preserve">
+  <data name="&gt;&gt;dataGridViewTextBoxColumn4.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="forTagLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
@@ -1868,11 +1994,17 @@ for copying it to a temporary tag
   <data name="destinationTagList.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="&gt;&gt;toolTip1.Name" xml:space="preserve">
+    <value>toolTip1</value>
+  </data>
   <data name="&gt;&gt;smartOperationCheckBox.Name" xml:space="preserve">
     <value>smartOperationCheckBox</value>
   </data>
-  <data name="&gt;&gt;smartOperationCheckBoxLabel.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;buttonBrowse.Name" xml:space="preserve">
+    <value>buttonBrowse</value>
+  </data>
+  <data name="sourceTagList.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="onlyIfDestinationEmptyCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -1881,13 +2013,13 @@ for copying it to a temporary tag
     <value />
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=8.3.8981.42911, Culture=neutral, PublicKeyToken=null</value>
+    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=8.3.8992.36712, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="smartOperationCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="fileNameTextBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>TopLeft</value>
+  <data name="onlyIfDestinationEmptyCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 19</value>
   </data>
   <data name="&gt;&gt;Track.Name" xml:space="preserve">
     <value>Track</value>
@@ -1895,14 +2027,20 @@ for copying it to a temporary tag
   <data name="onlyIfSourceNotEmptyCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="buttonBrowse.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 6, 4</value>
+  </data>
   <data name="fileNameLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
   </data>
   <data name="onlyIfDestinationEmptyCheckBox.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="SupposedDestinationTagT.HeaderText" xml:space="preserve">
-    <value>Supposed destination tag value</value>
+  <data name="addCheckBoxLabel.Text" xml:space="preserve">
+    <value>Add source tag to the beginning of destination tag placing between them:</value>
+  </data>
+  <data name="&gt;&gt;buttonClose.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="smartOperationCheckBoxLabel.Text" xml:space="preserve">
     <value>Smart copy (important only for working with multiple artists/composers per track)</value>
@@ -1919,14 +2057,20 @@ for copying it to a temporary tag
   <data name="&gt;&gt;buttonSettings.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
+  <data name="buttonOK.Error" xml:space="preserve">
+    <value />
+  </data>
   <data name="addCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>28, 117</value>
   </data>
   <data name="buttonSettings.ToolTip" xml:space="preserve">
     <value>Open quick settings</value>
   </data>
-  <data name="copyTagLabel.ToolTip" xml:space="preserve">
-    <value />
+  <data name="dataGridViewTextBoxColumn5.Width" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="smartOperationCheckBox.ToolTip" xml:space="preserve">
     <value>Every byte of the source tag (including the service characters that identify the roles of the artists) 
@@ -1942,41 +2086,41 @@ for copying it to a temporary tag</value>
   <data name="onlyIfSourceNotEmptyCheckBox.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;appendedTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="buttonClose.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Copy Tag</value>
+  <data name="&gt;&gt;copyTagLabel.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="addedTextBox.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="&gt;&gt;NewDestinationTagValueNormalized.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="addedTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>512, 23</value>
+    <value>504, 23</value>
   </data>
   <data name="onlyIfSourceNotEmptyCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
-  <data name="buttonClose.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>TopLeft</value>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn8.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn8</value>
   </data>
-  <data name="appendCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+  <data name="previewTable.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;fileNameTextBox.Parent" xml:space="preserve">
     <value>fieldsPanel</value>
   </data>
-  <data name="appendCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
+  <data name="&gt;&gt;smartOperationCheckBoxLabel.Name" xml:space="preserve">
+    <value>smartOperationCheckBoxLabel</value>
   </data>
   <data name="appendCheckBoxLabel.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="onlyIfDestinationEmptyCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 19</value>
+  <data name="buttonSettings.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
   </data>
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>939, 221</value>
+    <value>931, 214</value>
   </data>
   <data name="buttonOK.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 23</value>
@@ -1984,31 +2128,31 @@ for copying it to a temporary tag</value>
   <data name="sourceTagList.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
   </data>
-  <data name="buttonClose.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;buttonPreview.Name" xml:space="preserve">
+    <value>buttonPreview</value>
   </data>
+  <data name="buttonBrowse.Text" xml:space="preserve">
+    <value>Browse...</value>
+  </data>
+  <data name="fieldsPanel.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <metadata name="NewDestinationTagValue.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>140, 17</value>
   </metadata>
-  <metadata name="SupposedDestinationTag.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="OriginalDestinationTagValueNormalized.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="SupposedDestinationTagT.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="NewTagT.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="OriginalDestinationTagValue.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="NewTag.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="OriginalDestinationTag.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="OriginalDestinationTagT.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="SupposedDestinationTagValue.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="Track.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -2016,6 +2160,12 @@ for copying it to a temporary tag</value>
   </metadata>
   <metadata name="dirtyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
+  </metadata>
+  <metadata name="SupposedDestinationTagValueNormalized.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="NewDestinationTagValueNormalized.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
   </metadata>
   <metadata name="File.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

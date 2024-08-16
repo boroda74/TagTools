@@ -23,21 +23,21 @@ namespace MusicBeePlugin
     public class WindowSettingsType
     {
         public string className;
-        public int x;
-        public int y;
-        public int w;
-        public int h;
-        public bool max;
+        public int x = 0;
+        public int y = 0;
+        public int w = 0;
+        public int h = 0;
+        public bool max = false;
 
-        public int column1Width;
-        public int column2Width;
-        public int column3Width;
+        public int column1Width = 0;
+        public int column2Width = 0;
+        public int column3Width = 0;
 
-        public int splitterDistance;
+        public int splitterDistance = 0;
 
-        public int table2column1Width;
-        public int table2column2Width;
-        public int table2column3Width;
+        public int table2column1Width = 0;
+        public int table2column2Width = 0;
+        public int table2column3Width = 0;
     }
 
     public class TagSetType
@@ -249,7 +249,7 @@ namespace MusicBeePlugin
 
         internal static string LrCachedFunctionResultPresetSeparator = "\ufffc"; //Object replacement character, it will be hardly used in tags
         internal static string LrCachedFunctionResultLibraryPathHashSeparator = "\ufffd";//Replacement character, it will be hardly used in tags
-        internal static string LrCurrentLibraryPathHash = null;
+        internal static string LrCurrentLibraryPathHash;
         internal static int LrLastAskedCacheFillLibraryPathHash = -1;
 
         internal static object LrPresetExecutionLocker = new object();
@@ -281,7 +281,7 @@ namespace MusicBeePlugin
 
         private static string LastMessage = string.Empty;
 
-        internal static SortedDictionary<string, MetaDataType> TagNamesIds = new SortedDictionary<string, MetaDataType>();
+        internal static Dictionary<string, MetaDataType> TagNamesIds = new Dictionary<string, MetaDataType>();
         internal static Dictionary<MetaDataType, string> TagIdsNames = new Dictionary<MetaDataType, string>();
 
         internal static SortedDictionary<string, FilePropertyType> PropNamesIds = new SortedDictionary<string, FilePropertyType>();
@@ -293,7 +293,7 @@ namespace MusicBeePlugin
         private static System.Threading.Timer PeriodicUiRefreshTimer;
         private static System.Threading.Timer DelayedStatusBarTextClearingTimer;
         private static bool UiRefreshingIsNeeded;
-        private static TimeSpan RefreshUI_Delay = new TimeSpan(0, 0, 5);
+        internal static readonly int RefreshUI_Delay = 5000; //Milliseconds, i.e. 5000 is 5 secs.;
         internal static DateTime LastUI_Refresh = DateTime.MinValue;
         private static readonly object LastUI_RefreshLocker = new object();
 
@@ -320,7 +320,7 @@ namespace MusicBeePlugin
         internal static string BackupDefaultPrefix = "Tag Backup ";
         internal static BackupIndex BackupIndex;
 
-        internal const int StatusBarTextUpdateInterval = 50;
+        internal const int StatusBarTextUpdateInterval = 0x1f; //Must be the power of 2
 
         internal static List<Preset> AsrAutoAppliedPresets = new List<Preset>();
         internal const string AsrPresetsDirectory = "ASR Presets";
@@ -334,7 +334,11 @@ namespace MusicBeePlugin
 
 
         internal static SortedDictionary<Guid, bool> AllLrPresetGuidsInUse = new SortedDictionary<Guid, bool>(); //<guid, false>: NOT permanentGuid!
+
         internal static SortedDictionary<int, string> LrTrackCacheNeededToBeUpdated = new SortedDictionary<int, string>(); //<Track persistent id, URL>
+        internal static DateTime LrTrackCacheNeededToBeUpdatedLastAddedTime = DateTime.MinValue;//*********
+        internal static TimeSpan LrTrackCacheNeededToBeUpdatedAccumulationPeriod = TimeSpan.FromMilliseconds(2000); //2 secs.
+
         internal static SortedDictionary<Guid, SortedDictionary<int, SortedDictionary<string, bool>[]>> PresetChangingGroupingTagsRaw //Dictionaries of tags values,
                                                                                                                                       //arrays of groupings per track id
                                                                                                                                       //per preset
@@ -653,13 +657,21 @@ namespace MusicBeePlugin
             public bool useCustomTrackIdTag;
             public int customTrackIdTag;
 
-            public int rowHeadersWidth;
-            public int defaultColumnWidth;
-            public decimal defaultTagHistoryNumberOfBackups;
-            public int[] displayedTags;
-            public bool dontAutoSelectDisplayedTags;
 
-            public object[] lastSelectedFolders;
+            public object[] thLastSelectedFolders;
+            public decimal thDefaultTagHistoryNumberOfBackups;
+
+            public int thRowHeadersWidth;
+            public int thDefaultColumnWidth;
+            public int[] thDisplayedTags;
+            public bool thDontAutoSelectDisplayedTags;
+
+            public int ctRowHeadersWidth;
+            public int ctDefaultColumnWidth;
+            public int[] ctDisplayedTags;
+            public bool ctDontAutoSelectDisplayedTags;
+
+
 
             public bool backupArtworks;
             public bool dontTryToGuessLibraryName;
@@ -765,14 +777,31 @@ namespace MusicBeePlugin
         internal static string ChangeCaseSbText;
         internal static string CompareTracksSbText;
         internal static string ReEncodeTagSbText;
+        internal static string ApplyingLrPresetSbText;
+        internal static string AsrSbText;
+        internal static string MsrSbText;
+
         internal static string LibraryReportsSbText;
         internal static string LibraryReportsGeneratingPreviewSbText;
-        internal static string ApplyingLrPresetSbText;
-        internal static string AutoRateSbText;
-        internal static string AsrSbText;
+
         internal static string CarSbText;
-        internal static string MsrSbText;
+
+        internal static string AutoRateSbText;
+        internal static string AutoRateSbTextCalculatingThresholds;
+        internal static string AutoRateSbTextCalculatingActualPercentagesCalculatingThresholds;//*********
+
         internal static string TagHistorySbText;
+        internal static string TagHistorySbTextFillingLibraryTagValues;
+        internal static string TagHistorySbTextEnumeratingBackups;
+        internal static string TagHistorySbTextLoadingBackupIndexCache;
+        internal static string TagHistorySbTextLoadingBaselineBackup;
+        internal static string TagHistorySbTextLoadingIncrementalBackups;
+
+        internal static string PasteTagsSbText;
+
+        internal static string SbTextPerformingServiceOperations;
+        internal static string SbTextPreparingPreviewTable;
+        internal static string SbTextStoppingCurrentOperation;
 
         internal static string AnotherLrPresetIsRunningSbText;
         internal static string CtlAnotherLrPresetIsRunning;
@@ -828,16 +857,14 @@ namespace MusicBeePlugin
 
         internal static string SbBrokenPresetRetrievalChain;
 
-        internal static string OKButtonName;
-        internal static string StopButtonName;
-        internal static string CancelButtonName;
-        internal static string HideButtonName;
-        internal static string PreviewButtonName;
-        internal static string ClearButtonName;
-        internal static string FindButtonName;
-        internal static string SelectFoundButtonName;
-        internal static string OriginalTagHeaderTextTagValue;
-        internal static string OriginalTagHeaderText;
+        internal static string ButtonOKName;
+        internal static string ButtonStopName;
+        internal static string ButtonCancelName;
+        internal static string ButtonHideName;
+        internal static string ButtonPreviewName;
+        internal static string ButtonClearName;
+        internal static string ButtonFindName;
+        internal static string ButtonSelectFoundName;
 
         internal static string TableCellError;
 
@@ -955,8 +982,6 @@ namespace MusicBeePlugin
         internal static string CtlDirtyError1mf;
         internal static string CtlDirtyError2sf;
         internal static string CtlDirtyError2mf;
-
-        internal static string MsgSelectTracks;
 
         internal static string MsgCtSelectAtLeast2Tracks;
 
@@ -1146,11 +1171,11 @@ namespace MusicBeePlugin
         internal static string GetPluralForm(string sentence, int number)
         {
             int form;
-            var remainder = number % 10;
+            var remainder = number % 100;
 
             if (number == 0) //Here may be special form like "No files" instead of "0 files"
                 form = 5;
-            else if (number >= 5 && number <= 20)
+            else if (remainder >= 5 && remainder <= 20)
                 form = 5;
             else if (remainder == 0)
                 form = 5;
@@ -1196,11 +1221,11 @@ namespace MusicBeePlugin
         internal struct SwappedTags
         {
             internal string newDestinationTagValue;
-            internal string newDestinationTagTValue;
-            internal string destinationTagTValue;
+            internal string newDestinationNormalizedTagValue; //Removed role ids for 'Artist' tag, multiple item splitters for 'Artist' & 'Composer' tags
+            internal string destinationNormalizedTagValue; //Removed role ids for 'Artist' tag, multiple item splitters for 'Artist' & 'Composer' tags
             internal string newSourceTagValue;
-            internal string newSourceTagTValue;
-            internal string sourceTagTValue;
+            internal string newSourceNormalizedTagValue; //Removed role ids for 'Artist' tag, multiple item splitters for 'Artist' & 'Composer' tags
+            internal string sourceNormalizedTagValue; //Removed role ids for 'Artist' tag, multiple item splitters for 'Artist' & 'Composer' tags
         }
 
         internal static int GetMulDivFactor(string representation)
@@ -1247,6 +1272,7 @@ namespace MusicBeePlugin
             DateTime = 3,
             TimeSpan = 4,
 
+            AverageCount = 49,
             ItemCount = 50,
             UnknownOrString = 51,
 
@@ -1311,11 +1337,15 @@ namespace MusicBeePlugin
 
             internal double getResult() //Returns double for any numeric (number/duration/date-time) result or NegativeInfinity for any not numeric one
             {
-                if (items1.Count != 0) //It's "Average count" function
+                if (resultType == ResultType.AverageCount && items1.Count != 0) //It's "Average count" function
                 {
                     return (double)items1.Count / items.Count;
                 }
-                //Must never happen? //****
+                else if (resultType == ResultType.AverageCount && items.Count == 0 && items1.Count == 0) //It's "Average count" function
+                {
+                    return 0;
+                }
+                //Must never happen? //******************
                 else if ((resultType >= ResultType.UnknownOrString && resultType < ResultType.ParsingError) || resultType == ResultType.UseOtherResults)
                 {
                     if (items.Count == 0)
@@ -1394,7 +1424,7 @@ namespace MusicBeePlugin
 
                     return CtlLrInvalidValue;
                 }
-                else if (resultType == ResultType.ItemCount || resultType == ResultType.Double || resultType == ResultType.AutoDouble) //Item count or double. It's numeric result. Let's format it.
+                else if (resultType == ResultType.ItemCount || resultType == ResultType.AverageCount || resultType == ResultType.Double || resultType == ResultType.AutoDouble) //Item count or double. It's numeric result. Let's format it.
                 {
                     var mulDivFactor = GetMulDivFactor(mulDivFactorRepr);
                     if (mulDivFactor != 1 && operation == 0)
@@ -1817,6 +1847,43 @@ namespace MusicBeePlugin
         }
 
 
+        internal class StringArrayComparer : IComparer<string[]>
+        {
+            internal int tagCounterIndex = -1;
+
+            public int Compare(string[] x, string[] y)
+            {
+                if (tagCounterIndex != -1)
+                {
+                    for (var i = 0; i < tagCounterIndex; i++)
+                    {
+                        if (x == null && y == null)
+                            return 0;
+                        else if (x == null)
+                            return -1;
+                        else if (y == null)
+                            return 1;
+                        else if (x[i] == y[i])
+                            return 0;
+
+
+                        var comparation = Comparer<string>.Default.Compare(x[i], y[i]);
+
+                        if (comparation > 0)
+                            return 1;
+                        else if (comparation < 0)
+                            return -1;
+                    }
+
+                    return 0;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
+
         internal class TextTableComparer : IComparer<string[]>
         {
             internal int tagCounterIndex = -1;
@@ -1827,6 +1894,16 @@ namespace MusicBeePlugin
                 {
                     for (var i = 0; i < tagCounterIndex; i++)
                     {
+                        if (x == null && y == null)
+                            return 0;
+                        else if (x == null)
+                            return -1;
+                        else if (y == null)
+                            return 1;
+                        else if (x[i] == y[i])
+                            return 0;
+
+
                         var comparation = CompareStrings(x[i], y[i], ResultType.Double, DataType.Number);
 
                         if (comparation > 0)
@@ -1885,7 +1962,7 @@ namespace MusicBeePlugin
             trackRepresentation += diskNo;
             trackRepresentation += (trackRepresentation == string.Empty) ? (trackNo) : ("-" + trackNo);
             trackRepresentation += (trackRepresentation == string.Empty) ? string.Empty : ". ";
-            trackRepresentation += (trackRepresentation == string.Empty) ? (displayedArtist) : (". " + displayedArtist);
+            trackRepresentation += displayedArtist;
             trackRepresentation += (trackRepresentation == string.Empty) ? (album) : (" - " + album);
             trackRepresentation += (trackRepresentation == string.Empty) ? (title) : (" - " + title);
 
@@ -1947,96 +2024,94 @@ namespace MusicBeePlugin
             bool smartOperation, bool appendSourceToDestination = false, string appendedText = "", bool addSourceToDestination = false, string addedText = "")
         {
             var swappedTags = new SwappedTags();
-            string appendedValue;
+            string appendedAddedValue;
 
             if (smartOperation)
             {
                 if (appendSourceToDestination)
                 {
                     if (destinationTagId == ArtistArtistsId)
-                        appendedValue = ReplaceMSChars(appendedText) + RemoveMSIdAtTheEndOfString(sourceTagValue);
+                        appendedAddedValue = ReplaceMSChars(appendedText) + RemoveMSIdAtTheEndOfString(sourceTagValue);
                     else if (destinationTagId == ComposerComposersId)
-                        appendedValue = ReplaceMSChars(appendedText) + RemoveMSIdAtTheEndOfString(RemoveRoleIds(sourceTagValue));
+                        appendedAddedValue = ReplaceMSChars(appendedText) + RemoveMSIdAtTheEndOfString(RemoveRoleIds(sourceTagValue));
                     else
-                        appendedValue = appendedText + GetTagRepresentation(sourceTagValue);
+                        appendedAddedValue = appendedText + GetTagRepresentation(sourceTagValue);
 
-                    swappedTags.newDestinationTagValue = RemoveMSIdAtTheEndOfString(destinationTagValue) + appendedValue;
+                    swappedTags.newDestinationTagValue = RemoveMSIdAtTheEndOfString(destinationTagValue) + appendedAddedValue;
                 }
                 else if (addSourceToDestination)
                 {
                     if (destinationTagId == ArtistArtistsId)
-                        appendedValue = RemoveMSIdAtTheEndOfString(sourceTagValue) + ReplaceMSChars(addedText);
+                        appendedAddedValue = RemoveMSIdAtTheEndOfString(sourceTagValue) + ReplaceMSChars(addedText);
                     else if (destinationTagId == ComposerComposersId)
-                        appendedValue = RemoveMSIdAtTheEndOfString(RemoveRoleIds(sourceTagValue)) + ReplaceMSChars(addedText);
+                        appendedAddedValue = RemoveMSIdAtTheEndOfString(RemoveRoleIds(sourceTagValue)) + ReplaceMSChars(addedText);
                     else
-                        appendedValue = GetTagRepresentation(sourceTagValue) + addedText;
+                        appendedAddedValue = GetTagRepresentation(sourceTagValue) + addedText;
 
-                    swappedTags.newDestinationTagValue = appendedValue + RemoveMSIdAtTheEndOfString(destinationTagValue);
+                    swappedTags.newDestinationTagValue = appendedAddedValue + RemoveMSIdAtTheEndOfString(destinationTagValue);
                 }
                 else
                 {
                     if (destinationTagId == ArtistArtistsId)
-                        appendedValue = RemoveMSIdAtTheEndOfString(sourceTagValue);
+                        appendedAddedValue = RemoveMSIdAtTheEndOfString(sourceTagValue);
                     else if (destinationTagId == ComposerComposersId)
-                        appendedValue = RemoveMSIdAtTheEndOfString(RemoveRoleIds(sourceTagValue));
+                        appendedAddedValue = RemoveMSIdAtTheEndOfString(RemoveRoleIds(sourceTagValue));
                     else
-                        appendedValue = GetTagRepresentation(sourceTagValue);
+                        appendedAddedValue = GetTagRepresentation(sourceTagValue);
 
-                    swappedTags.newDestinationTagValue = appendedValue;
+                    swappedTags.newDestinationTagValue = appendedAddedValue;
                 }
-                swappedTags.newDestinationTagTValue = ReplaceMSIds(RemoveRoleIds(swappedTags.newDestinationTagValue));
-                swappedTags.destinationTagTValue = GetTagRepresentation(destinationTagValue);
+
+                swappedTags.newDestinationNormalizedTagValue = ReplaceMSIds(RemoveRoleIds(swappedTags.newDestinationTagValue));
+                swappedTags.destinationNormalizedTagValue = GetTagRepresentation(destinationTagValue);
 
                 if (sourceTagId == destinationTagId) //Smart conversion of multiple items of one tag
                 {
                     if (ReplaceMSIds(sourceTagValue) == sourceTagValue) //No MS ids, it's a single item
-                    {
-                        appendedValue = ReplaceMSChars(sourceTagValue);
-                    }
+                        appendedAddedValue = ReplaceMSChars(sourceTagValue);
                     else //Multiple items
-                    {
-                        appendedValue = GetTagRepresentation(sourceTagValue);
-                    }
+                        appendedAddedValue = GetTagRepresentation(sourceTagValue);
                 }
                 else //Normal swapping
                 {
                     if (sourceTagId == ArtistArtistsId)
-                        appendedValue = RemoveMSIdAtTheEndOfString(destinationTagValue);
+                        appendedAddedValue = RemoveMSIdAtTheEndOfString(destinationTagValue);
                     else if (sourceTagId == ComposerComposersId)
-                        appendedValue = RemoveMSIdAtTheEndOfString(RemoveRoleIds(destinationTagValue));
+                        appendedAddedValue = RemoveMSIdAtTheEndOfString(RemoveRoleIds(destinationTagValue));
                     else
-                        appendedValue = GetTagRepresentation(destinationTagValue);
+                        appendedAddedValue = GetTagRepresentation(destinationTagValue);
                 }
 
-                swappedTags.newSourceTagValue = appendedValue;
-                swappedTags.newSourceTagTValue = ReplaceMSIds(RemoveRoleIds(swappedTags.newSourceTagValue));
-                swappedTags.sourceTagTValue = GetTagRepresentation(sourceTagValue);
+                swappedTags.newSourceTagValue = appendedAddedValue;
+                swappedTags.newSourceNormalizedTagValue = ReplaceMSIds(RemoveRoleIds(swappedTags.newSourceTagValue));
+                swappedTags.sourceNormalizedTagValue = GetTagRepresentation(sourceTagValue);
             }
             else
             {
                 if (appendSourceToDestination)
                 {
-                    appendedValue = appendedText + sourceTagValue;
-                    swappedTags.newDestinationTagValue = destinationTagValue + appendedValue;
+                    appendedAddedValue = appendedText + sourceTagValue;
+                    swappedTags.newDestinationTagValue = destinationTagValue + appendedAddedValue;
                 }
                 else if (addSourceToDestination)
                 {
-                    appendedValue = sourceTagValue + addedText;
-                    swappedTags.newDestinationTagValue = appendedValue + destinationTagValue;
+                    appendedAddedValue = sourceTagValue + addedText;
+                    swappedTags.newDestinationTagValue = appendedAddedValue + destinationTagValue;
                 }
                 else
                 {
-                    appendedValue = sourceTagValue;
-                    swappedTags.newDestinationTagValue = appendedValue;
+                    appendedAddedValue = sourceTagValue;
+                    swappedTags.newDestinationTagValue = appendedAddedValue;
                 }
-                swappedTags.newDestinationTagTValue = swappedTags.newDestinationTagValue;
-                swappedTags.destinationTagTValue = destinationTagValue;
+
+                swappedTags.newDestinationNormalizedTagValue = swappedTags.newDestinationTagValue;
+                swappedTags.destinationNormalizedTagValue = destinationTagValue;
 
 
-                appendedValue = destinationTagValue;
-                swappedTags.newSourceTagValue = appendedValue;
-                swappedTags.newSourceTagTValue = swappedTags.newSourceTagValue;
-                swappedTags.sourceTagTValue = sourceTagValue;
+                appendedAddedValue = destinationTagValue;
+                swappedTags.newSourceTagValue = appendedAddedValue;
+                swappedTags.newSourceNormalizedTagValue = swappedTags.newSourceTagValue;
+                swappedTags.sourceNormalizedTagValue = sourceTagValue;
             }
 
 
@@ -2519,7 +2594,7 @@ namespace MusicBeePlugin
 
                 lock (LastUI_RefreshLocker)
                 {
-                    if (DateTime.UtcNow - LastUI_Refresh >= RefreshUI_Delay)
+                    if ((DateTime.UtcNow - LastUI_Refresh).TotalMilliseconds >= RefreshUI_Delay)
                     {
                         LastUI_Refresh = DateTime.UtcNow;
                         refresh = true;
@@ -2542,22 +2617,6 @@ namespace MusicBeePlugin
                 {
                     UiRefreshingIsNeeded = true;
                 }
-            }
-        }
-
-        internal static void SetStatusBarText(string newMessage, bool autoClear)
-        {
-            if (autoClear)
-            {
-                if (LastMessage != newMessage)
-                    MbApiInterface.MB_SetBackgroundTaskMessage(newMessage);
-
-                DelayedStatusBarTextClearingTimer = new System.Threading.Timer(delayedStatusBarTextClearing, null, (int)RefreshUI_Delay.TotalMilliseconds * 2, 0);
-            }
-            else if (LastMessage != newMessage)
-            {
-                MbApiInterface.MB_SetBackgroundTaskMessage(newMessage);
-                LastMessage = newMessage;
             }
         }
 
@@ -2856,8 +2915,29 @@ namespace MusicBeePlugin
 
         }
 
+        internal static void SetStatusBarText(string newMessage, bool autoClear)
+        {
+            if (autoClear)
+            {
+                if (newMessage != null && newMessage != LastMessage)
+                    MbApiInterface.MB_SetBackgroundTaskMessage(newMessage);
+
+                LastMessage = newMessage;
+                DelayedStatusBarTextClearingTimer = new System.Threading.Timer(delayedStatusBarTextClearing, null, RefreshUI_Delay * 2, 0);
+            }
+            else if (newMessage != null && newMessage != LastMessage)
+            {
+                MbApiInterface.MB_SetBackgroundTaskMessage(newMessage);
+                LastMessage = newMessage;
+            }
+        }
+
         internal static void SetResultingSbText(string finalStatus = null, bool autoClear = true, bool sbSetFilesAsItems = false)
         {
+            if (LastPreview)
+                SetStatusBarText(string.Empty, false);
+
+
             if (sbSetFilesAsItems)
                 SbItemNames = SbItems;
 
@@ -2872,25 +2952,9 @@ namespace MusicBeePlugin
                 SetStatusBarText(CtlWholeCuesheetWillBeReencoded, false);
                 return;
             }
-            else if (finalStatus == null)
-            {
-                string sbText;
-
-                if (LastPreview)
-                    sbText = LastCommandSbText + ": " + "100% (" + LastFileCounter  + " " + SbItemNames + ") " + SbRead;
-                else
-                    sbText = LastCommandSbText + ": " + "100% (" + LastFileCounter  + " " + SbItemNames + ") " + SbUpdated;
-
-                //if (lastPreview)
-                //   sbText = LastCommandSbText + ": 100% " + sbRead;
-                //else
-                //   sbText = LastCommandSbText + ": 100% " + sbUpdated;
-
-                SetStatusBarText(sbText, autoClear);
-            }
             else
             {
-                SetStatusBarText(GenegateStatusBarTextForFileOperations(LastCommandSbText, LastPreview, LastFileCounter, LastFileCounterTotal, finalStatus), autoClear);
+                SetStatusBarText(GenerateStatusBarTextForFileOperations(LastCommandSbText, LastPreview, LastFileCounter, LastFileCounterTotal, finalStatus), autoClear);
             }
 
 
@@ -2898,7 +2962,7 @@ namespace MusicBeePlugin
                 SbItemNames = SbFiles;
         }
 
-        internal static string GenegateStatusBarTextForFileOperations(string commandSbText, bool preview, int fileCounter1Based, int filesTotal, string currentFile = null)
+        internal static string GenerateStatusBarTextForFileOperations(string commandSbText, bool preview, int fileCounter1Based, int filesTotal, string info = null)
         {
             string sbText;
 
@@ -2917,8 +2981,8 @@ namespace MusicBeePlugin
                     sbText = commandSbText + " (" + SbUpdating + "): " + Math.Round(100d * fileCounter1Based / filesTotal, 0) + "%";
             }
 
-            if (currentFile != null)
-                sbText += " (" + currentFile + ")";
+            if (info != null)
+                sbText += " (" + info + ")";
 
             return sbText;
         }
@@ -2940,9 +3004,9 @@ namespace MusicBeePlugin
                 LastFileCounterThreshold = fileCounter0Based;
             }
 
-            if (updatePercentage == 0 || update || fileCounter0Based % StatusBarTextUpdateInterval == 0)
+            if (updatePercentage == 0 || update || fileCounter0Based  == 0 || (fileCounter0Based & StatusBarTextUpdateInterval) == 0)
             {
-                SetStatusBarText(GenegateStatusBarTextForFileOperations(commandSbText, preview, fileCounter0Based, filesTotal, currentFile), false);
+                SetStatusBarText(GenerateStatusBarTextForFileOperations(commandSbText, preview, fileCounter0Based, filesTotal, currentFile), false);
             }
         }
 
@@ -2963,7 +3027,7 @@ namespace MusicBeePlugin
 
         internal static void RegularAutoBackup(object state)
         {
-            MbApiInterface.MB_SetBackgroundTaskMessage(SbAutoBackingUp);
+            SetStatusBarText(SbAutoBackingUp, false);
             BackupIndex.saveBackup(BrGetAutoBackupDirectory(SavedSettings.autoBackupDirectory) + @"\" + BrGetDefaultBackupFilename(SavedSettings.autoBackupPrefix), SbAutoBackingUp, true, false);
 
 
@@ -3035,7 +3099,7 @@ namespace MusicBeePlugin
                 File.Delete(backup + ".mbc");
             }
 
-            MbApiInterface.MB_SetBackgroundTaskMessage(string.Empty);
+            SetStatusBarText(string.Empty, false);
         }
         #endregion
 
@@ -3141,7 +3205,7 @@ namespace MusicBeePlugin
 
             if (dialog.ShowDialog(MbForm) == DialogResult.Cancel) return;
 
-            MbApiInterface.MB_SetBackgroundTaskMessage(SbMakingTagBackup);
+            SetStatusBarText(SbMakingTagBackup, false);
 
             if (File.Exists(dialog.FileName))
                 File.Delete(dialog.FileName);
@@ -3164,7 +3228,7 @@ namespace MusicBeePlugin
 
             if (dialog.ShowDialog(MbForm) == DialogResult.Cancel) return;
 
-            MbApiInterface.MB_SetBackgroundTaskMessage(SbRestoringTagsFromBackup);
+            SetStatusBarText(SbRestoringTagsFromBackup, false);
             MbApiInterface.MB_CreateParameterisedBackgroundTask(BackupIndex.LoadBackupAsync, new object[] { BrGetBackupFilenameWithoutExtension(dialog.FileName), SbRestoringTagsFromBackup, false, false }, MbForm);
 
             dialog.Dispose();
@@ -3182,7 +3246,7 @@ namespace MusicBeePlugin
 
             if (dialog.ShowDialog(MbForm) == DialogResult.Cancel) return;
 
-            MbApiInterface.MB_SetBackgroundTaskMessage(SbRestoringTagsFromBackup);
+            SetStatusBarText(SbRestoringTagsFromBackup, false);
             MbApiInterface.MB_CreateParameterisedBackgroundTask(BackupIndex.LoadBackupAsync, new object[] { BrGetBackupFilenameWithoutExtension(dialog.FileName), SbRestoringTagsFromBackup, true, e == null }, MbForm);
 
             dialog.Dispose();
@@ -3211,7 +3275,7 @@ namespace MusicBeePlugin
 
             if (openDialog.FileName == saveDialog.FileName) return;
 
-            MbApiInterface.MB_SetBackgroundTaskMessage(SbRenamingMovingBackup);
+            SetStatusBarText(SbRenamingMovingBackup, false);
 
             if (File.Exists(saveDialog.FileName))
                 File.Delete(saveDialog.FileName);
@@ -3221,8 +3285,8 @@ namespace MusicBeePlugin
             File.Move(openDialog.FileName, saveDialog.FileName);
             File.Move(BrGetBackupFilenameWithoutExtension(openDialog.FileName) + ".mbc", BrGetBackupFilenameWithoutExtension(saveDialog.FileName) + ".mbc");
 
-            MbApiInterface.MB_SetBackgroundTaskMessage(string.Empty);
-            
+            SetStatusBarText(string.Empty, false);
+
             openDialog.Dispose();
             saveDialog.Dispose();
         }
@@ -3254,7 +3318,7 @@ namespace MusicBeePlugin
 
             if (sourceFolder == destinationFolder) return;
 
-            MbApiInterface.MB_SetBackgroundTaskMessage(SbMovingBackups);
+            SetStatusBarText(SbMovingBackups, false);
 
             foreach (var filename in openDialog.SafeFileNames)
             {
@@ -3267,8 +3331,8 @@ namespace MusicBeePlugin
                 File.Move(BrGetBackupFilenameWithoutExtension(sourceFolder + @"\" + filename) + ".mbc", BrGetBackupFilenameWithoutExtension(destinationFolder + @"\" + filename) + ".mbc");
             }
 
-            MbApiInterface.MB_SetBackgroundTaskMessage(string.Empty);
-            
+            SetStatusBarText(string.Empty, false);
+
             openDialog.Dispose();
             saveDialog.Dispose();
         }
@@ -3320,7 +3384,7 @@ namespace MusicBeePlugin
 
 
             //Now let's create new baseline
-            MbApiInterface.MB_SetBackgroundTaskMessage(SbMakingTagBackup);
+            SetStatusBarText(SbMakingTagBackup, false);
 
             if (File.Exists(dialog.FileName))
                 File.Delete(dialog.FileName);
@@ -3368,7 +3432,7 @@ namespace MusicBeePlugin
 
             if (dialog.ShowDialog(MbForm) == DialogResult.Cancel) return;
 
-            MbApiInterface.MB_SetBackgroundTaskMessage(SbDeletingBackups);
+            SetStatusBarText(SbDeletingBackups, false);
 
             foreach (var filename in dialog.FileNames)
             {
@@ -3381,8 +3445,8 @@ namespace MusicBeePlugin
                 File.Delete(BrGetBackupFilenameWithoutExtension(filename) + ".mbc");
             }
 
-            MbApiInterface.MB_SetBackgroundTaskMessage(string.Empty);
-            
+            SetStatusBarText(string.Empty, false);
+
             dialog.Dispose();
         }
 
@@ -3404,6 +3468,10 @@ namespace MusicBeePlugin
                 var tagToolsForm = new TagHistory(this, files, trackIds);
                 PluginWindowTemplate.Display(tagToolsForm);
             }
+            else
+            {
+                MessageBox.Show(MbForm, MsgNoTracksSelected, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
         internal void compareTracksEventHandler(object sender, EventArgs e)
@@ -3420,6 +3488,10 @@ namespace MusicBeePlugin
 
                 var tagToolsForm = new CompareTracks(this, files);
                 PluginWindowTemplate.Display(tagToolsForm);
+            }
+            else
+            {
+                MessageBox.Show(MbForm, MsgCtSelectAtLeast2Tracks, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
@@ -3454,7 +3526,7 @@ namespace MusicBeePlugin
 
             PluginHelpString = "Help...";
             PluginWebPageString = "Plugin Web Page..."; ;
-            PluginWebPageToolTip = "Open Plugin Web Page (to check/download the latest version";
+            PluginWebPageToolTip = "Open Plugin Web Page (to check/download the latest version)";
             PluginVersionString = "Version: ";
 
             OpenWindowsMenuSectionName = "OPEN WINDOWS";
@@ -3527,11 +3599,29 @@ namespace MusicBeePlugin
             LibraryReportsSbText = "Generating report";
             LibraryReportsGeneratingPreviewSbText = "Generating preview";
             ApplyingLrPresetSbText = "Applying LR preset";
-            AutoRateSbText = "Auto rating tracks";
             AsrSbText = "Advanced searching and replacing";
-            CarSbText = "Calculating average album rating";
             MsrSbText = "Multiple searching and replacing";
+
+            CarSbText = "Calculating average album rating";
+
+            AutoRateSbText = "Auto rating tracks";
+            AutoRateSbTextCalculatingThresholds = ": calculating thresholds for the track ";
+            AutoRateSbTextCalculatingActualPercentagesCalculatingThresholds = ": calculating actual percentages & thresholds...";
+
             TagHistorySbText = "Tag history";
+            TagHistorySbTextFillingLibraryTagValues = ": filling library tag values for the track ";
+            TagHistorySbTextEnumeratingBackups = ": enumerating backups";
+            TagHistorySbTextLoadingBackupIndexCache = ": loading backup index cache";
+            TagHistorySbTextLoadingBaselineBackup = ": loading baseline backup...";
+            TagHistorySbTextLoadingIncrementalBackups = ": loading incremental backups";
+
+            PasteTagsSbText = "Pasting tags from clipboard";
+
+            SbTextPerformingServiceOperations = ": performing service operations...";
+            SbTextPreparingPreviewTable = ": preparing preview table...";
+            SbTextStoppingCurrentOperation = ": cancelling current operation...";
+
+
 
             AnotherLrPresetIsRunningSbText = "Another library reports preset is running. Can't proceed!";
             CtlAnotherLrPresetIsRunning = "Another library reports preset is running. Please wait until it is completed...";
@@ -3653,16 +3743,14 @@ namespace MusicBeePlugin
 
             SbBrokenPresetRetrievalChain = "Broken preset retrieval chain for LR preset: %%PRESET-NAME%%! Check out the preset chain!";
 
-            OKButtonName = "Proceed";
-            StopButtonName = "Stop";
-            CancelButtonName = "Cancel";
-            HideButtonName = "Hide";
-            PreviewButtonName = "Preview";
-            ClearButtonName = "Clear";
-            FindButtonName = "Find";
-            SelectFoundButtonName = "Select found";
-            OriginalTagHeaderTextTagValue = "Tag value";
-            OriginalTagHeaderText = "Original tag";
+            ButtonOKName = "Proceed";
+            ButtonStopName = "Stop";
+            ButtonCancelName = "Cancel";
+            ButtonHideName = "Hide";
+            ButtonPreviewName = "Preview";
+            ButtonClearName = "Clear";
+            ButtonFindName = "Find";
+            ButtonSelectFoundName = "Select found";
 
             TableCellError = "#Error!";
 
@@ -3840,9 +3928,8 @@ namespace MusicBeePlugin
             CtlDirtyError2mf = " background file updating operations is running/scheduled. \n" +
                 "Preview results may be not accurate. ";
 
-            MsgSelectTracks = "Select a tracks!";
-
-            MsgBrMasterBackupIndexIsCorrupted = "Master tag backup index is corrupted! All existing at the moment backups are not available any more in \"Tag history\" command.";
+            MsgBrMasterBackupIndexIsCorrupted = "Master tag backup index is corrupted! All existing at the moment backups are not available anymore in any Backup & Restore commands.\r\n" +
+                "Do you want to delete all backups in \"%%BACKUP-FOLDER%%\" folder?";
             MsgBrBackupIsCorrupted = "Backup \"%%FILENAME%%\" is corrupted or is not valid MusicBee backup!";
             MsgBrFolderDoesntExists = "Folder doesn't exist!";
             MsgCtSelectAtLeast2Tracks = "Select at least 2 tracks to compare!";
@@ -4182,8 +4269,8 @@ namespace MusicBeePlugin
             if (!Directory.Exists(BrGetAutoBackupDirectory(SavedSettings.autoBackupDirectory)))
                 Directory.CreateDirectory(BrGetAutoBackupDirectory(SavedSettings.autoBackupDirectory));
 
-            if (SavedSettings.defaultTagHistoryNumberOfBackups < 1)
-                SavedSettings.defaultTagHistoryNumberOfBackups = 10;
+            if (SavedSettings.thDefaultTagHistoryNumberOfBackups < 1)
+                SavedSettings.thDefaultTagHistoryNumberOfBackups = 10;
 
             if (SavedSettings.defaultAsrPresetsExportFolder == null)
                 SavedSettings.defaultAsrPresetsExportFolder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
@@ -4286,11 +4373,26 @@ namespace MusicBeePlugin
                 LibraryReportsSbText = "Формирование отчета";
                 LibraryReportsGeneratingPreviewSbText = "Формирование предварительного просмотра";
                 ApplyingLrPresetSbText = "Применение пресета ОБ";
-                AutoRateSbText = "Автоматическая установка рейтингов";
                 AsrSbText = "Дополнительный поиск и замена";
-                CarSbText = "Расчет среднего рейтинга альбомов";
                 MsrSbText = "Множественный поиск и замена";
+                CarSbText = "Расчет среднего рейтинга альбомов";
+
+                AutoRateSbText = "Автоматическая установка рейтингов";
+                AutoRateSbTextCalculatingThresholds = ": расчет пороговых значений";
+                AutoRateSbTextCalculatingActualPercentagesCalculatingThresholds = ": расчет действительных процентов треков для установки рейтингов и пороговых значений...";
+
                 TagHistorySbText = "История тегов";
+                TagHistorySbTextFillingLibraryTagValues = ": заполнение таблицы предпросмотра значениями тегов библиотеки для трека ";
+                TagHistorySbTextEnumeratingBackups = ":  поиск архивов";
+                TagHistorySbTextLoadingBackupIndexCache = ": загрузка кеша индекса архивов";
+                TagHistorySbTextLoadingBaselineBackup = ": загрузка опорного архива...";
+                TagHistorySbTextLoadingIncrementalBackups = ": загрузка разностных архивов";
+
+                PasteTagsSbText = "Вставка тегов из буфера обмена";
+
+                SbTextPerformingServiceOperations = ": выполнение служебных операций...";
+                SbTextPreparingPreviewTable = ": подготовка таблицы предпросмотра...";
+                SbTextStoppingCurrentOperation = ": отмена текущей операции...";
 
                 AnotherLrPresetIsRunningSbText = "Другой отчет ОБ уже запущен. Невозможно применить отчет!";
                 CtlAnotherLrPresetIsRunning = "Другой отчет ОБ уже запущен. Подождите завершения его работы...";
@@ -4369,16 +4471,14 @@ namespace MusicBeePlugin
 
                 SbBrokenPresetRetrievalChain = "Нарушенная цепочка пресетов для получения списка треков для для пресета ОБ: %%PRESET-NAME%%! Проверьте цепочку пресетов!";
 
-                OKButtonName = "Применить";
-                StopButtonName = "Остановить";
-                CancelButtonName = "Отменить";
-                HideButtonName = "Скрыть";
-                PreviewButtonName = "Просмотр";
-                ClearButtonName = "Очистить";
-                FindButtonName = "Найти";
-                SelectFoundButtonName = "Выбрать найденное";
-                OriginalTagHeaderTextTagValue = "Значение тега";
-                OriginalTagHeaderText = "Исходное значение";
+                ButtonOKName = "Применить";
+                ButtonStopName = "Остановить";
+                ButtonCancelName = "Отменить";
+                ButtonHideName = "Скрыть";
+                ButtonPreviewName = "Просмотр";
+                ButtonClearName = "Очистить";
+                ButtonFindName = "Найти";
+                ButtonSelectFoundName = "Выбрать найденное";
 
                 TableCellError = "#Ошибка!";
 
@@ -4414,24 +4514,24 @@ namespace MusicBeePlugin
                     "\" в качестве тега-источника имеет смысл только при включенной опции \"Добавить тег источника в конец тега получателя' для добавления какого-то " +
                     "текста  к тегу-получателю. Обработка не выполнена.";
                 MsgBackgroundTaskIsCompleted = "Фоновая задача плагина \"Дополнительные инструменты\" завершена.";
-                MsgThresholdsDescription = "Автоматическая установка рейтингов основана на среднем числе воспроизведений композиции в день \n" +
+                MsgThresholdsDescription = "Автоматическая установка рейтингов основана на среднем числе воспроизведений треков в день \n" +
                     "(на виртуальном теге \"число воспроизведений в день\"). Вам следует установить пороговые значения \"числа воспроизведений в день\" для каждого значения рейтинга, \n" +
-                    "которое может быть назначено композициям. Пороговые значения оцениваются в убывающем порядке: от рейтинга 5 звездочек \n" +
-                    "до рейтинга 0.5 звездочки. Тег \"число воспроизведений в день\" может быть рассчитан для каждой композиции независимо от остальной библиотеки, \n" +
-                    "так что возможно автоматическое обновление рейтинга при смене композиции. Также возможно рассчитать рейтинги для выбранных композиций \n" +
-                    "командой \"Установить рейтинги\" или для всех композиций библиотеки при запуске MusicBee. ";
+                    "которое может быть назначено трекам. Пороговые значения оцениваются в убывающем порядке: от рейтинга 5 звездочек \n" +
+                    "до рейтинга 0.5 звездочки. Тег \"число воспроизведений в день\" может быть рассчитан для каждого трека независимо от остальной библиотеки, \n" +
+                    "так что возможно автоматическое обновление рейтинга при смене трека. Также возможно рассчитать рейтинги для выбранных треков \n" +
+                    "командой \"Установить рейтинги\" или для всех треков библиотеки при запуске MusicBee. ";
                 MsgAutoCalculationOfThresholdsDescription = "Автоматический расчет пороговых значений \"числа воспроизведений в день\" - это еще один способ установки авто-рейтингов. \n" +
                     "Эта опция позволяет вам установить желаемый процент каждого значения рейтинга в библиотеке. Действительные проценты значений рейтингов могут отличаться \n" +
-                    "от желаемых, поскольку не всегда можно разбить композиции библиотеки на несколько групп (предположим все композиции библиотеки имеют одинаковое \n" +
-                    "значение \"числа воспроизведений в день\", очевидно не существует способа разбить все композиции на группы, исходя из значений \"числа воспроизведений в день\". \n" +
+                    "от желаемых, поскольку не всегда можно разбить треки библиотеки на несколько групп (предположим, все треки библиотеки имеют одинаковое \n" +
+                    "значение \"числа воспроизведений в день\", очевидно не существует способа разбить все треки на группы, исходя из значений \"числа воспроизведений в день\". \n" +
                     "Действительные проценты отображаются справа от желаемых процентов после вычисления пороговых значений. Поскольку вычисление пороговых значений требует заметного \n" +
                     "времени, то оно не может производиться автоматически, кроме как при запуске MusicBee. ";
 
-                MsgNumberOfPlayedTracks = "Число когда либо воспроизводившихся композиций: ";
+                MsgNumberOfPlayedTracks = "Число когда либо воспроизводившихся треков: ";
                 MsgIncorrectSumOfWeights = "Сумма всех процентов должна быть равна 100% или меньше!";
                 MsgSum = "Сумма: ";
-                MsgNumberOfNotRatedTracks = "% композиций с нулевым рейтингом)";
-                MsgTracks = " композиций)";
+                MsgNumberOfNotRatedTracks = "% треков с нулевым рейтингом)";
+                MsgTracks = " треков)";
                 MsgActualPercent = "% / Действ.: ";
                 MsgIncorrectPresetName = "Некорректное название пресета или пресет с таким названием уже существует.";
 
@@ -4557,10 +4657,8 @@ namespace MusicBeePlugin
                 CtlDirtyError2mf = " фоновых операций обновления файлов. \n" +
                     "Результаты предварительного просмотра могут быть не точны. ";
 
-                MsgSelectTracks = "Выберите треки!";
-
                 MsgBrMasterBackupIndexIsCorrupted = "Основной индекс архива тегов поврежден! Все существующие на данный момент архивы " +
-                    "будут не доступны в команде \"История тегов\".";
+                    "будут не доступны во всех командах \"Архивации и восстановления\". Удалить все архивы из папки \"%%BACKUP-FOLDER%%\"?";
                 MsgBrBackupIsCorrupted = "Архив \"%%FILENAME%%\" или поврежден, или не является архивом MusicBee!";
                 MsgBrFolderDoesntExists = "Папка не существует!";
                 MsgCtSelectAtLeast2Tracks = "Выберите по меньшей мере 2 трека для сравнения!";
@@ -4951,7 +5049,7 @@ namespace MusicBeePlugin
                 SavedSettings.swapTagsDestinationTagName = GetTagName(MetaDataType.TrackTitle);
 
             if (SavedSettings.autoRateTagId == 0)
-                SavedSettings.autoRateTagId = MetaDataType.Custom9;
+                SavedSettings.autoRateTagId = MetaDataType.Rating;
             if (SavedSettings.playsPerDayTagId == 0)
                 SavedSettings.playsPerDayTagId = MetaDataType.Custom8;
             if (!(SavedSettings.checkBox5 || SavedSettings.checkBox45 || SavedSettings.checkBox4 || SavedSettings.checkBox35 || SavedSettings.checkBox3
@@ -5161,7 +5259,7 @@ namespace MusicBeePlugin
 
                 for (var i = OpenedForms.Count - 1; i >= 0; i--)
                 {
-                    OpenedForms[i].backgroundTaskIsCanceled = true;
+                    OpenedForms[i].backgroundTaskIsStopping = true;
                     OpenedForms[i].Close();
                 }
             }
@@ -5285,12 +5383,20 @@ namespace MusicBeePlugin
                     DefaultArtwork = MissingArtwork;
 
 
+                    //Before LR init
+                    LrCurrentLibraryPathHash = GetStringHash(GetCurrentLibraryPath());
+
                     //ASR & LR init
                     InitAsr();
                     InitLr();
 
                     //(Auto)backup init
                     InitBackupRestore();
+
+
+                    //MusicBee is closing before plugin has been initialized
+                    if (MbForm.Disposing || MbForm.IsDisposed)
+                        return;
 
 
                     //Let's create plugin main and context menu items
@@ -5322,6 +5428,10 @@ namespace MusicBeePlugin
                     break;
                 case NotificationType.TrackChanged:
                     InitialSkipCount = Convert.ToInt32(MbApiInterface.Library_GetFileProperty(sourceFileUrl, FilePropertyType.SkipCount));
+
+                    break;
+                case NotificationType.LibrarySwitched:
+                    LrCurrentLibraryPathHash = GetStringHash(GetCurrentLibraryPath());
 
                     break;
                 case NotificationType.PlayCountersChanged:
@@ -5561,7 +5671,7 @@ namespace MusicBeePlugin
                 FormBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBorder));
 
                 InputControlDimmedForeColor = GetWeightedColor(InputControlForeColor, FormBackColor, DimmedWeight);
-                InputControlDimmedBackColor = GetWeightedColor(InputControlBackColor, FormBackColor, DimmedWeight);
+                InputControlDimmedBackColor = GetWeightedColor(InputControlBackColor, FormBackColor, 0.25f);//****
 
 
                 //SKINNING BUTTONS (ESPECIALLY DISABLED BUTTONS)
@@ -6405,16 +6515,6 @@ namespace MusicBeePlugin
                 AddMenuItem(TagToolsSubmenu, ReEncodeTagName, ReEncodeTagDescription, reencodeTagEventHandler);
                 AddMenuItem(TagToolsSubmenu, ReEncodeTagsName, ReEncodeTagsDescription, reencodeTagsEventHandler);
             }
-            if (!SavedSettings.dontShowLibraryReports)
-            {
-                AddMenuItem(TagToolsSubmenu, LibraryReportsName, LibraryReportsDescription, libraryReportsEventHandler);
-                if (LrPresetsWithHotkeysCount > 0)
-                {
-                    LrPresetsMenuItem = AddMenuItem(TagToolsSubmenu, LibraryReportsName.Replace("...", string.Empty), null, null);
-                    RegisterLrPresetsHotkeysAndMenuItems(this);
-                }
-            }
-            if (!SavedSettings.dontShowAutoRate) AddMenuItem(TagToolsSubmenu, AutoRateName, AutoRateDescription, autoRateEventHandler);
             if (!SavedSettings.dontShowAsr)
             {
                 AddMenuItem(TagToolsSubmenu, AsrName, AsrDescription, asrEventHandler);
@@ -6425,8 +6525,18 @@ namespace MusicBeePlugin
                 }
                 AddMenuItem(TagToolsSubmenu, MsrName, MsrCommandDescription, multipleSearchReplaceEventHandler);
             }
-            if (!SavedSettings.dontShowCAR) AddMenuItem(TagToolsSubmenu, CarName, CarDescription, carEventHandler);
+            if (!SavedSettings.dontShowLibraryReports)
+            {
+                AddMenuItem(TagToolsSubmenu, LibraryReportsName, LibraryReportsDescription, libraryReportsEventHandler);
+                if (LrPresetsWithHotkeysCount > 0)
+                {
+                    LrPresetsMenuItem = AddMenuItem(TagToolsSubmenu, LibraryReportsName.Replace("...", string.Empty), null, null);
+                    RegisterLrPresetsHotkeysAndMenuItems(this);
+                }
+            }
             if (!SavedSettings.dontShowCT) AddMenuItem(TagToolsSubmenu, CompareTracksName, CompareTracksDescription, compareTracksEventHandler);
+            if (!SavedSettings.dontShowAutoRate) AddMenuItem(TagToolsSubmenu, AutoRateName, AutoRateDescription, autoRateEventHandler);
+            if (!SavedSettings.dontShowCAR) AddMenuItem(TagToolsSubmenu, CarName, CarDescription, carEventHandler);
 
 
             AddMenuItem(TagToolsSubmenu, "-", null, null);
@@ -6557,6 +6667,27 @@ namespace MusicBeePlugin
         #endregion
 
         #region Plugin's additional virtual tag functions
+        private string removeLeadingZerosFromDuration(string duration)
+        {
+            if (duration.Contains('.'))
+                return duration;
+
+            if (duration.Length > 6) //e.g. > :01:22
+                duration = duration.TrimStart('0');
+
+            if (duration.StartsWith(":"))
+                duration = duration.TrimStart(':');
+            else
+                return duration;
+
+            duration = duration.TrimStart('0');
+
+            if (duration.StartsWith(":")) //e.g. :12
+                return "0" + duration;
+            else
+                return duration;
+        }
+
         public string CustomFunc_ASR(string url, string presetId)
         {
             if (SavedSettings.dontShowAsr)
@@ -6779,27 +6910,6 @@ namespace MusicBeePlugin
             }
         }
 
-        private string removeLeadingZerosFromDuration(string duration)
-        {
-            if (duration.Contains('.'))
-                return duration;
-
-            if (duration.Length > 6) //e.g. > :01:22
-                duration = duration.TrimStart('0');
-
-            if (duration.StartsWith(":"))
-                duration = duration.TrimStart(':');
-            else
-                return duration;
-
-            duration = duration.TrimStart('0');
-
-            if (duration.StartsWith(":")) //e.g. :12
-                return "0" + duration;
-            else
-                return duration;
-        }
-
         public string CustomFunc_AddDuration(string duration1, string duration2)
         {
             try
@@ -6919,16 +7029,17 @@ namespace MusicBeePlugin
             return DateTime.Now.ToString();
         }
 
-        public string CustomFunc_TitleCase(string input, string lowerCaseWordsString, string upperCaseWordsString, //******* abbreviations!!!!
-            string openingExceptionCharsString, string closingExceptionCharsString, string exceptionCharsString)
+        public string CustomFunc_TitleCase(string input, string lowerCaseWordsString, string upperCaseWordsString, 
+            string lowerCaseWordsBetweenBracketsString, string sentenceSeparatorsString)
         {
             try
             {
                 string[] lowerCaseWords = null;
                 string[] upperCaseWords = null;
+                string[] lowerCaseWordsBetweenBrackets = null;
                 string[] openingExceptionChars = null;
                 string[] closingExceptionChars = null;
-                string[] exceptionChars = null;
+                string[] sentenceSeparators = null;
 
 
                 if (lowerCaseWordsString == "`")
@@ -6937,15 +7048,19 @@ namespace MusicBeePlugin
                 if (upperCaseWordsString == "`")
                     upperCaseWordsString = null;
 
-                if (openingExceptionCharsString == "`")
-                    openingExceptionCharsString = null;
+                if (lowerCaseWordsBetweenBracketsString == "`")
+                    lowerCaseWordsBetweenBracketsString = null;
 
-                if (closingExceptionCharsString == "`")
-                    closingExceptionCharsString = null;
+                if (sentenceSeparatorsString == "`")
+                    sentenceSeparatorsString = null;
 
 
-                if (!ChangeCase.CheckIfTheSameNumberOfCharsInStrings(openingExceptionCharsString, closingExceptionCharsString))
-                    return CtlLrError;
+                string openingExceptionCharsString = "( [ {";
+                string closingExceptionCharsString = ") ] }";
+
+
+                //if (!ChangeCase.CheckIfTheSameNumberOfCharsInStrings(openingExceptionCharsString, closingExceptionCharsString))
+                //    return CtlLrError;
 
 
                 if (!string.IsNullOrWhiteSpace(lowerCaseWordsString))
@@ -6954,14 +7069,18 @@ namespace MusicBeePlugin
                 if (!string.IsNullOrWhiteSpace(upperCaseWordsString))
                     upperCaseWords = upperCaseWordsString.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
+                if (!string.IsNullOrWhiteSpace(lowerCaseWordsBetweenBracketsString))
+                    lowerCaseWordsBetweenBrackets = lowerCaseWordsBetweenBracketsString.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+                if (!string.IsNullOrWhiteSpace(sentenceSeparatorsString))
+                    sentenceSeparators = ChangeCase.GetCharsInString(sentenceSeparatorsString);
+
+
                 if (!string.IsNullOrWhiteSpace(openingExceptionCharsString))
                     openingExceptionChars = ChangeCase.GetCharsInString(openingExceptionCharsString);
 
                 if (!string.IsNullOrWhiteSpace(closingExceptionCharsString))
                     closingExceptionChars = ChangeCase.GetCharsInString(closingExceptionCharsString);
-
-                if (!string.IsNullOrWhiteSpace(exceptionCharsString))
-                    exceptionChars = ChangeCase.GetCharsInString(exceptionCharsString);
 
 
                 string[] exceptedWords = null;
@@ -6977,15 +7096,19 @@ namespace MusicBeePlugin
                 input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.LowerCase);
 
                 input = ChangeCase.ChangeSentenceCase(input, ChangeCase.ChangeCaseOptions.TitleCase, null, false,
-                    null, openingExceptionChars, closingExceptionChars, exceptionChars, true, true);
+                    null, null, null, sentenceSeparators, true, true);
 
                 input = ChangeCase.ChangeSentenceCase(input, ChangeCase.ChangeCaseOptions.LowerCase, lowerCaseWords, true,
-                    null, openingExceptionChars, closingExceptionChars, exceptionChars, null, null, true);
+                    null, null, null, sentenceSeparators, null, null, true);
 
 
                 List<char> encounteredLeftExceptionChars = null;
                 bool wasCharException = false;
+                input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.LowerCase, ref encounteredLeftExceptionChars, ref wasCharException, lowerCaseWordsBetweenBrackets, true, 
+                    null, openingExceptionChars, closingExceptionChars, false, false, false);
 
+                encounteredLeftExceptionChars = null;
+                wasCharException = false;
                 var result = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.UpperCase, ref encounteredLeftExceptionChars, ref wasCharException, upperCaseWords, true,
                     null, null, null, null, null);
 

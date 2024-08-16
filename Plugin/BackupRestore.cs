@@ -6,7 +6,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml.Serialization;
-using MusicBeePlugin.Properties;
 using static MusicBeePlugin.Plugin;
 
 namespace MusicBeePlugin
@@ -21,12 +20,15 @@ namespace MusicBeePlugin
             //(Auto)backup init
             if (!SavedSettings.dontShowBackupRestore)
             {
-                if (File.Exists(BrGetAutoBackupDirectory(SavedSettings.autoBackupDirectory) + @"\" + BackupIndexFileName))
+                string autoBackupDirectoryFullPath = BrGetAutoBackupDirectory(SavedSettings.autoBackupDirectory);
+
+                if (File.Exists(autoBackupDirectoryFullPath + @"\" + BackupIndexFileName))
                 {
-                    var stream = File.Open(BrGetAutoBackupDirectory(SavedSettings.autoBackupDirectory) + @"\" + BackupIndexFileName, FileMode.Open, FileAccess.Read, FileShare.None);
+                    var stream = File.Open(autoBackupDirectoryFullPath + @"\" + BackupIndexFileName, FileMode.Open, FileAccess.Read, FileShare.None);
                     var file = new StreamReader(stream, Encoding.UTF8);
 
                     var backupSerializer = new XmlSerializer(typeof(BackupIndex));
+                    DialogResult deleteAllBackups = DialogResult.No;
 
                     try
                     {
@@ -34,11 +36,26 @@ namespace MusicBeePlugin
                     }
                     catch
                     {
-                        MessageBox.Show(MbForm, MsgBrMasterBackupIndexIsCorrupted, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         BackupIndex = new BackupIndex();
-                    }
 
-                    file.Close();
+                        var result = (DialogResult)MbForm.Invoke(new Func<DialogResult>(() => MessageBox.Show(MbForm, MsgBrMasterBackupIndexIsCorrupted.Replace("%%BACKUP-FOLDER%%", autoBackupDirectoryFullPath), 
+                            string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)));
+                    }
+                    finally
+                    {
+                        file.Close();
+
+                        if (deleteAllBackups == DialogResult.Yes)
+                        {
+                            var fsEntries = Directory.EnumerateFiles(BrGetAutoBackupDirectory(SavedSettings.autoBackupDirectory));
+                            foreach (string fsEntry in fsEntries)
+                                File.Delete(fsEntry);
+
+                            fsEntries = Directory.EnumerateDirectories(BrGetAutoBackupDirectory(SavedSettings.autoBackupDirectory));
+                            foreach (string fsEntry in fsEntries)
+                                Directory.Delete(fsEntry, true);
+                        }
+                    }
                 }
                 else
                 {
@@ -168,13 +185,13 @@ namespace MusicBeePlugin
     {
         public bool isAutoCreated;
         public DateTime creationDate;
-        public string guid;
+        public Guid guid;
         public string libraryName;
 
         public BackupCache()
         {
             creationDate = DateTime.UtcNow;
-            guid = Guid.NewGuid().ToString();
+            guid = Guid.NewGuid();
             libraryName = BrGetCurrentLibraryName();
         }
 
@@ -212,7 +229,9 @@ namespace MusicBeePlugin
             {
                 file.Close();
 
-                MessageBox.Show(MbForm, MsgBrBackupIsCorrupted.Replace("%%FILENAME%%", fileName));
+                MbForm.Invoke(new Action(() => {
+                    MessageBox.Show(MbForm, MsgBrBackupIsCorrupted.Replace("%%FILENAME%%", fileName));
+                }));
 
                 return null;
             }
@@ -225,7 +244,7 @@ namespace MusicBeePlugin
 
     public class Backup : BackupCache
     {
-        public List<string> incrementalBackups = new List<string>(); //This field in used by baseline files only
+        public List<Guid> incrementalBackups = new List<Guid>(); //This field in used by baseline files only
         public SerializableDictionary<int, SerializableDictionary<int, string>> tracks = new SerializableDictionary<int, SerializableDictionary<int, string>>();
 
         public Backup()
@@ -241,7 +260,7 @@ namespace MusicBeePlugin
         public Backup(bool isAutoCreated)
         {
             this.isAutoCreated = isAutoCreated;
-            guid = Guid.NewGuid().ToString();
+            guid = Guid.NewGuid();
             libraryName = BrGetCurrentLibraryName();
         }
 
@@ -280,7 +299,7 @@ namespace MusicBeePlugin
                     if (lastShownPercentage + percentageStep < percentage)
                     {
                         lastShownPercentage = percentage;
-                        MbApiInterface.MB_SetBackgroundTaskMessage(SbComparingTags + percentage + "%");
+                        SetStatusBarText(SbComparingTags + percentage + "%", false);
                     }
 
                     SerializableDictionary<int, string> tagsForIncrementalBackup;
@@ -327,12 +346,9 @@ namespace MusicBeePlugin
 
                 if (isAutoCreated && incrementalBackup.tracks.Count == 0)
                 {
-                    MbApiInterface.MB_SetBackgroundTaskMessage(SbTagAutoBackupSkipped);
-
+                    SetStatusBarText(SbTagAutoBackupSkipped, false);
                     System.Threading.Thread.Sleep(2000);
-
-                    MbApiInterface.MB_SetBackgroundTaskMessage("");
-
+                    SetStatusBarText(string.Empty, false);
                     return;
                 }
             }
@@ -375,7 +391,7 @@ namespace MusicBeePlugin
 
             System.Threading.Thread.Sleep(2000);
 
-            MbApiInterface.MB_SetBackgroundTaskMessage("");
+            SetStatusBarText(string.Empty, false);
         }
 
         internal static Backup Load(string fileName, string backupFileExtension = ".xml")
@@ -384,7 +400,10 @@ namespace MusicBeePlugin
 
             if (!File.Exists(baselineFilename + ".bbl")) //Backup baseline file doesn't exist
             {
-                MessageBox.Show(MbForm, MsgBrBackupBaselineFileDoesntExist.Replace("%%FILENAME%%", baselineFilename + ".bbl"));
+                MbForm.Invoke(new Action(() => {
+                    MessageBox.Show(MbForm, MsgBrBackupBaselineFileDoesntExist.Replace("%%FILENAME%%", baselineFilename + ".bbl"));
+                }));
+
                 return null;
             }
 
@@ -402,7 +421,9 @@ namespace MusicBeePlugin
             {
                 file.Close();
 
-                MessageBox.Show(MbForm, MsgBrBackupIsCorrupted.Replace("%%FILENAME%%", fileName) + "\n\n" + ex.Message);
+                MbForm.Invoke(new Action(() => {
+                    MessageBox.Show(MbForm, MsgBrBackupIsCorrupted.Replace("%%FILENAME%%", fileName) + "\n\n" + ex.Message);
+                }));
 
                 return null;
             }
@@ -459,7 +480,7 @@ namespace MusicBeePlugin
             {
                 file.Close();
 
-                MessageBox.Show(MbForm, MsgBrBackupIsCorrupted.Replace("%%FILENAME%%", fileName) + "\n\n" + ex.Message);
+                MbForm.Invoke(new Action(() => { MessageBox.Show(MbForm, MsgBrBackupIsCorrupted.Replace("%%FILENAME%%", fileName) + "\n\n" + ex.Message); }));
 
                 return null;
             }
@@ -562,7 +583,8 @@ namespace MusicBeePlugin
         }
     }
 
-    public class BackupIndex : SerializableDictionary<string, SerializableDictionary<string, bool>>
+    //<library name + trackId, backup Guid>
+    public class BackupIndex : SerializableDictionary<string, SerializableDictionary<Guid, bool>>
     {
         public BackupIndex()
         {
@@ -633,7 +655,7 @@ namespace MusicBeePlugin
                     if (lastShownCount < percentage)
                     {
                         lastShownCount = percentage;
-                        MbApiInterface.MB_SetBackgroundTaskMessage(statusBarText  + " " + percentage + "% (" + backupName + ")");
+                        SetStatusBarText(statusBarText  + " " + percentage + "% (" + backupName + ")", false);
                     }
 
                     var currentFile = files[fileCounter];
@@ -662,7 +684,7 @@ namespace MusicBeePlugin
 
                     if (!TryGetValue(libraryTrackId, out var trackBackups))
                     {
-                        trackBackups = new SerializableDictionary<string, bool>();
+                        trackBackups = new SerializableDictionary<Guid, bool>();
                         Add(libraryTrackId, trackBackups);
                     }
 
@@ -691,7 +713,7 @@ namespace MusicBeePlugin
             if (!SavedSettings.dontPlayCompletedSound && !isAutoCreated)
                 System.Media.SystemSounds.Asterisk.Play();
 
-            MbApiInterface.MB_SetBackgroundTaskMessage("");
+            SetStatusBarText(string.Empty, false);
         }
 
         internal static void LoadBackupAsync(object parameters)
@@ -746,7 +768,7 @@ namespace MusicBeePlugin
             if (!restoreFromAnotherLibrary && backup.libraryName != BrGetCurrentLibraryName())
             {
                 System.Media.SystemSounds.Hand.Play();
-                MbApiInterface.MB_SetBackgroundTaskMessage("");
+                SetStatusBarText(string.Empty, false);
 
                 var result = (DialogResult)MbForm.Invoke(new Func<DialogResult>(() => MessageBox.Show(MbForm, MsgBrThisIsTheBackupOfDifferentLibrary, string.Empty,
                     MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2)));
@@ -755,53 +777,51 @@ namespace MusicBeePlugin
             }
 
 
-            if (MbApiInterface.Library_QueryFilesEx(query, out var files))
+            MbApiInterface.Library_QueryFilesEx(query, out var files);
+            if (files == null || files.Length == 0)
             {
-                if (files.Length == 0)
+                MbForm.Invoke(new Action(() =>
                 {
-                    MbForm.Invoke(new Action(() =>
-                    {
-                        MessageBox.Show(MbForm, MsgNoTracksSelected);
-                    }));
+                    MessageBox.Show(MbForm, MsgNoTracksSelected);
+                }));
 
-                    return;
+                return;
+            }
+
+
+            var tagNames = new List<string>();
+            FillListByTagNames(tagNames, false, true, false);
+
+            var tagIds = new List<MetaDataType>();
+            for (var i = 0; i < tagNames.Count; i++)
+                tagIds.Add(GetTagId(tagNames[i]));
+
+            var lastShownCount = 0;
+            for (var fileCounter = 0; fileCounter < files.Length; fileCounter++)
+            {
+                var percentage = 100 * fileCounter / files.Length;
+                if (lastShownCount < percentage)
+                {
+                    lastShownCount = percentage;
+                    SetStatusBarText(statusBarText  + " " + percentage + "% (" + backupName + ")", false);
                 }
 
+                var currentFile = files[fileCounter];
+                var trackId = GetPersistentTrackIdInt(currentFile, UseCustomTrackIdTag);
 
-                var tagNames = new List<string>();
-                FillListByTagNames(tagNames, false, true, false);
-
-                var tagIds = new List<MetaDataType>();
-                for (var i = 0; i < tagNames.Count; i++)
-                    tagIds.Add(GetTagId(tagNames[i]));
-
-                var lastShownCount = 0;
-                for (var fileCounter = 0; fileCounter < files.Length; fileCounter++)
+                var tagsWereSet = false;
+                for (var i = 0; i < tagIds.Count; i++)
                 {
-                    var percentage = 100 * fileCounter / files.Length;
-                    if (lastShownCount < percentage)
-                    {
-                        lastShownCount = percentage;
-                        MbApiInterface.MB_SetBackgroundTaskMessage(statusBarText  + " " + percentage + "% (" + backupName + ")");
-                    }
+                    var tagValue = backup.getValue(trackId, (int)tagIds[i]);
 
-                    var currentFile = files[fileCounter];
-                    var trackId = GetPersistentTrackIdInt(currentFile, UseCustomTrackIdTag);
+                    if (tagValue != null)
+                        tagsWereSet |= SetFileTag(currentFile, tagIds[i], tagValue, true);
+                }
 
-                    var tagsWereSet = false;
-                    for (var i = 0; i < tagIds.Count; i++)
-                    {
-                        var tagValue = backup.getValue(trackId, (int)tagIds[i]);
-
-                        if (tagValue != null)
-                            tagsWereSet |= SetFileTag(currentFile, tagIds[i], tagValue, true);
-                    }
-
-                    if (tagsWereSet)
-                    {
-                        UpdateTrackForBackup(currentFile);
-                        CommitTagsToFile(currentFile);
-                    }
+                if (tagsWereSet)
+                {
+                    UpdateTrackForBackup(currentFile);
+                    CommitTagsToFile(currentFile);
                 }
             }
 
@@ -809,14 +829,14 @@ namespace MusicBeePlugin
             if (!SavedSettings.dontPlayCompletedSound)
                 System.Media.SystemSounds.Asterisk.Play();
 
-            MbApiInterface.MB_SetBackgroundTaskMessage("");
-            MbApiInterface.MB_RefreshPanels();
+            SetStatusBarText(string.Empty, false);
+            RefreshPanels(true);
         }
 
-        internal SerializableDictionary<string, bool> getBackupGuidsForTrack(string libraryName, int trackId)
+        internal SerializableDictionary<Guid, bool> getBackupGuidsForTrack(string libraryName, int trackId)
         {
             if (!TryGetValue(AddLibraryNameToTrackId(libraryName, trackId.ToString()), out var trackBackups))
-                trackBackups = new SerializableDictionary<string, bool>();
+                trackBackups = new SerializableDictionary<Guid, bool>();
 
             return trackBackups;
         }

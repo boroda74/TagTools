@@ -17,7 +17,11 @@ namespace MusicBeePlugin
         private string[] files = Array.Empty<string>();
 
         private static int NumberOfFiles;
-        private decimal actSumOfPercentage;
+        private decimal actualSumOfPercentages;
+
+        private bool calculateActualSumOfPercentageOnCalculatingThresholds = false;
+
+        private System.Threading.Timer statisticsTimer;
 
         internal AutoRate(Plugin plugin) : base(plugin)
         {
@@ -35,6 +39,17 @@ namespace MusicBeePlugin
             new ControlBorder(this.threshold5Box);
             new ControlBorder(this.maxPlaysPerDayBox);
             new ControlBorder(this.avgPlaysPerDayBox);
+
+            new ControlBorder(this.perCent05UpDown);
+            new ControlBorder(this.perCent1UpDown);
+            new ControlBorder(this.perCent15UpDown);
+            new ControlBorder(this.perCent2UpDown);
+            new ControlBorder(this.perCent25UpDown);
+            new ControlBorder(this.perCent3UpDown);
+            new ControlBorder(this.perCent35UpDown);
+            new ControlBorder(this.perCent4UpDown);
+            new ControlBorder(this.perCent45UpDown);
+            new ControlBorder(this.perCent5UpDown);
         }
 
         internal static void AutoRateOnStartup(Plugin plugin)
@@ -92,30 +107,15 @@ namespace MusicBeePlugin
             toolTip1.SetToolTip(buttonCalculate, MsgAutoCalculationOfThresholdsDescription);
 
 
+            FillListByTagNames(autoRatingTagListCustom.Items, false, false, false, false, false, false, true);
             autoRatingTagListCustom.Items.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Rating));
             autoRatingTagListCustom.Items.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.RatingAlbum));
-
-            autoRatingTagListCustom.Items.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Custom1));
-            autoRatingTagListCustom.Items.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Custom2));
-            autoRatingTagListCustom.Items.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Custom3));
-            autoRatingTagListCustom.Items.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Custom4));
-            autoRatingTagListCustom.Items.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Custom5));
-            autoRatingTagListCustom.Items.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Custom6));
-            autoRatingTagListCustom.Items.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Custom7));
-            autoRatingTagListCustom.Items.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Custom8));
-            autoRatingTagListCustom.Items.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Custom9));
             autoRatingTagListCustom.Text = GetTagName(SavedSettings.autoRateTagId);
 
-            playsPerDayTagListCustom.Items.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Custom1));
-            playsPerDayTagListCustom.Items.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Custom2));
-            playsPerDayTagListCustom.Items.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Custom3));
-            playsPerDayTagListCustom.Items.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Custom4));
-            playsPerDayTagListCustom.Items.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Custom5));
-            playsPerDayTagListCustom.Items.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Custom6));
-            playsPerDayTagListCustom.Items.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Custom7));
-            playsPerDayTagListCustom.Items.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Custom8));
-            playsPerDayTagListCustom.Items.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Custom9));
+
+            FillListByTagNames(playsPerDayTagListCustom.Items, false, false, false, false, false, false, true);
             playsPerDayTagListCustom.Text = GetTagName(SavedSettings.playsPerDayTagId);
+
 
             storePlaysPerDayCheckBox.Checked = SavedSettings.storePlaysPerDay;
             autoRateAtStartUpCheckBox.Checked = SavedSettings.autoRateAtStartUp;
@@ -161,29 +161,13 @@ namespace MusicBeePlugin
 
             maxPlaysPerDayBox.Text = CtlAutoRateCalculating;
             avgPlaysPerDayBox.Text = CtlAutoRateCalculating;
-            labelTotalTracks.Text = CtlAutoRateCalculating;
-
-            Thread statistics = new Thread(getStatistics);
-            statistics.Start();
-
-            calcActSumOfPercentage();
-
-            perCentN_ValueChanged(perCent5UpDown, checkBox5, perCentLabel5, SavedSettings.actualPerCent5);
-            perCentN_ValueChanged(perCent45UpDown, checkBox45, perCentLabel45, SavedSettings.actualPerCent45);
-            perCentN_ValueChanged(perCent4UpDown, checkBox4, perCentLabel4, SavedSettings.actualPerCent4);
-            perCentN_ValueChanged(perCent35UpDown, checkBox35, perCentLabel35, SavedSettings.actualPerCent35);
-            perCentN_ValueChanged(perCent3UpDown, checkBox3, perCentLabel3, SavedSettings.actualPerCent3);
-            perCentN_ValueChanged(perCent25UpDown, checkBox25, perCentLabel25, SavedSettings.actualPerCent25);
-            perCentN_ValueChanged(perCent2UpDown, checkBox2, perCentLabel2, SavedSettings.actualPerCent2);
-            perCentN_ValueChanged(perCent15UpDown, checkBox15, perCentLabel15, SavedSettings.actualPerCent15);
-            perCentN_ValueChanged(perCent1UpDown, checkBox1, perCentLabel1, SavedSettings.actualPerCent1);
-            perCentN_ValueChanged(perCent05UpDown, checkBox05, perCentLabel05, SavedSettings.actualPerCent05);
+            labelTotalTracks.Text += CtlAutoRateCalculating.ToLower();
 
 
             button_GotFocus(AcceptButton, null); //Let's mark active button
         }
 
-        private decimal sumOfPercentage()
+        private decimal sumOfPercentages()
         {
             decimal sumOfPercentageVariable = 0;
 
@@ -201,90 +185,103 @@ namespace MusicBeePlugin
             return sumOfPercentageVariable;
         }
 
-        private void calcActSumOfPercentage()
+        private void calculateActualSumOfPercentages()
         {
-            actSumOfPercentage = -1;
+            ignoreClosingForm = true;
+
+            actualSumOfPercentages = -1;
 
             if (SavedSettings.actualPerCent5 != -1)
             {
-                if (actSumOfPercentage == -1)
-                    actSumOfPercentage = SavedSettings.actualPerCent5;
+                if (actualSumOfPercentages == -1)
+                    actualSumOfPercentages = SavedSettings.actualPerCent5;
                 else
-                    actSumOfPercentage += SavedSettings.actualPerCent5;
+                    actualSumOfPercentages += SavedSettings.actualPerCent5;
             }
 
             if (SavedSettings.actualPerCent45 != -1)
             {
-                if (actSumOfPercentage == -1)
-                    actSumOfPercentage = SavedSettings.actualPerCent45;
+                if (actualSumOfPercentages == -1)
+                    actualSumOfPercentages = SavedSettings.actualPerCent45;
                 else
-                    actSumOfPercentage += SavedSettings.actualPerCent45;
+                    actualSumOfPercentages += SavedSettings.actualPerCent45;
             }
 
             if (SavedSettings.actualPerCent4 != -1)
             {
-                if (actSumOfPercentage == -1)
-                    actSumOfPercentage = SavedSettings.actualPerCent4;
+                if (actualSumOfPercentages == -1)
+                    actualSumOfPercentages = SavedSettings.actualPerCent4;
                 else
-                    actSumOfPercentage += SavedSettings.actualPerCent4;
+                    actualSumOfPercentages += SavedSettings.actualPerCent4;
             }
 
             if (SavedSettings.actualPerCent35 != -1)
             {
-                if (actSumOfPercentage == -1)
-                    actSumOfPercentage = SavedSettings.actualPerCent35;
+                if (actualSumOfPercentages == -1)
+                    actualSumOfPercentages = SavedSettings.actualPerCent35;
                 else
-                    actSumOfPercentage += SavedSettings.actualPerCent35;
+                    actualSumOfPercentages += SavedSettings.actualPerCent35;
             }
 
             if (SavedSettings.actualPerCent3 != -1)
             {
-                if (actSumOfPercentage == -1)
-                    actSumOfPercentage = SavedSettings.actualPerCent3;
+                if (actualSumOfPercentages == -1)
+                    actualSumOfPercentages = SavedSettings.actualPerCent3;
                 else
-                    actSumOfPercentage += SavedSettings.actualPerCent3;
+                    actualSumOfPercentages += SavedSettings.actualPerCent3;
             }
 
             if (SavedSettings.actualPerCent25 != -1)
             {
-                if (actSumOfPercentage == -1)
-                    actSumOfPercentage = SavedSettings.actualPerCent25;
+                if (actualSumOfPercentages == -1)
+                    actualSumOfPercentages = SavedSettings.actualPerCent25;
                 else
-                    actSumOfPercentage += SavedSettings.actualPerCent25;
+                    actualSumOfPercentages += SavedSettings.actualPerCent25;
             }
 
             if (SavedSettings.actualPerCent2 != -1)
             {
-                if (actSumOfPercentage == -1)
-                    actSumOfPercentage = SavedSettings.actualPerCent2;
+                if (actualSumOfPercentages == -1)
+                    actualSumOfPercentages = SavedSettings.actualPerCent2;
                 else
-                    actSumOfPercentage += SavedSettings.actualPerCent2;
+                    actualSumOfPercentages += SavedSettings.actualPerCent2;
             }
 
             if (SavedSettings.actualPerCent15 != -1)
             {
-                if (actSumOfPercentage == -1)
-                    actSumOfPercentage = SavedSettings.actualPerCent15;
+                if (actualSumOfPercentages == -1)
+                    actualSumOfPercentages = SavedSettings.actualPerCent15;
                 else
-                    actSumOfPercentage += SavedSettings.actualPerCent15;
+                    actualSumOfPercentages += SavedSettings.actualPerCent15;
             }
 
             if (SavedSettings.actualPerCent1 != -1)
             {
-                if (actSumOfPercentage == -1)
-                    actSumOfPercentage = SavedSettings.actualPerCent1;
+                if (actualSumOfPercentages == -1)
+                    actualSumOfPercentages = SavedSettings.actualPerCent1;
                 else
-                    actSumOfPercentage += SavedSettings.actualPerCent1;
+                    actualSumOfPercentages += SavedSettings.actualPerCent1;
             }
 
             if (SavedSettings.actualPerCent05 != -1)
             {
-                if (actSumOfPercentage == -1)
-                    actSumOfPercentage = SavedSettings.actualPerCent05;
+                if (actualSumOfPercentages == -1)
+                    actualSumOfPercentages = SavedSettings.actualPerCent05;
                 else
-                    actSumOfPercentage += SavedSettings.actualPerCent05;
+                    actualSumOfPercentages += SavedSettings.actualPerCent05;
             }
 
+
+            if (checkStoppingStatus())
+            {
+                backgroundTaskIsStoppedOrCancelled = true;
+                Invoke(new Action(() => { closeFormOnOperationStoppingCompletionIfRequired(); }));
+                return;
+            }
+
+
+            if (calculateActualSumOfPercentageOnCalculatingThresholds)
+                Invoke(new Action(() => { fillThresholdsPercentagesUi(); }));
         }
 
         private static double RoundPlaysPerDay(double value)
@@ -362,14 +359,18 @@ namespace MusicBeePlugin
 
         internal void autoRateOnStartup()
         {
-            files = null;
             if (!MbApiInterface.Library_QueryFilesEx("domain=Library", out files))
                 files = Array.Empty<string>();
 
             for (var fileCounter = 0; fileCounter < files.Length; fileCounter++)
             {
-                if (backgroundTaskIsCanceled)
+                if (checkStoppingStatus())
+                {
+                    SetStatusBarText(null, true);
+                    backgroundTaskIsStoppedOrCancelled = true;
                     return;
+                }
+
 
                 var currentFile = files[fileCounter];
 
@@ -379,39 +380,69 @@ namespace MusicBeePlugin
             }
 
             RefreshPanels(true);
-
             SetResultingSbText();
 
             if (SavedSettings.notifyWhenAutoRatingCompleted) MessageBox.Show(this, MsgBackgroundTaskIsCompleted, string.Empty,
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        private bool applyingChangesStopped()
+        {
+            backgroundTaskIsScheduled = false;
+            backgroundTaskIsStopping = false;
+            backgroundTaskIsStoppedOrCancelled = false;
+            closeFormOnStopping = false;
+            ignoreClosingForm = false;
+
+            SetResultingSbText();
+
+            return true;
+        }
+
+        private void closeFormOnOperationStoppingCompletionIfRequired()
+        {
+            backgroundTaskIsScheduled = false;
+            SetStatusBarText(null, true);
+
+
+            if (closeFormOnStopping)
+            {
+                ignoreClosingForm = false;
+                Close();
+                return;
+            }
+
+            enableDisablePreviewOptionControls(true);
+            ignoreClosingForm = false;
+        }
+
         private bool prepareBackgroundTask()
         {
             if (backgroundTaskIsWorking())
-                return true;
+                return false;
 
-            files = null;
-            if (!MbApiInterface.Library_QueryFilesEx("domain=SelectedFiles", out files))
-                files = Array.Empty<string>();
-
-            if (files.Length == 0)
+            MbApiInterface.Library_QueryFilesEx("domain=SelectedFiles", out files);
+            if (files == null || files.Length == 0)
             {
                 MessageBox.Show(this, MsgNoTracksSelected, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
-            else
-            {
-                return true;
-            }
+
+            ignoreClosingForm = true;
+
+            return true;
         }
 
         private void autoRateNow()
         {
             for (var fileCounter = 0; fileCounter < files.Length; fileCounter++)
             {
-                if (backgroundTaskIsCanceled)
+                if (checkStoppingStatus())
+                {
+                    Invoke(new Action(() => { stopButtonClickedMethod(applyingChangesStopped); }));
                     return;
+                }
+
 
                 var currentFile = files[fileCounter];
 
@@ -420,7 +451,10 @@ namespace MusicBeePlugin
                 AutoRateLive(currentFile);
             }
 
+            RefreshPanels(true);
             SetResultingSbText();
+
+            Invoke(new Action(() => { closeFormOnOperationStoppingCompletionIfRequired(); }));
         }
 
         private static double GetPlaysPerDay(string currentFile)
@@ -467,9 +501,13 @@ namespace MusicBeePlugin
                 return -1;
         }
 
-        private void getStatistics()
+        private void getStatistics(object state)
         {
+            statisticsTimer?.Dispose();
+            statisticsTimer = null;
+
             Thread.CurrentThread.Priority = ThreadPriority.Lowest;
+
 
             double totalPlaysPerDay = 0;
             NumberOfFiles = 0;
@@ -477,12 +515,15 @@ namespace MusicBeePlugin
             double maxPlaysPerDay = 0;
             double avgPlaysPerDay = 0;
 
-            files = null;
             if (!MbApiInterface.Library_QueryFilesEx("domain=Library", out files))
                 files = Array.Empty<string>();
 
             for (var fileCounter = 0; fileCounter < files.Length; fileCounter++)
             {
+                if (checkStoppingStatus())
+                    return;
+
+
                 var currentFile = files[fileCounter];
 
                 var playsPerDay = GetPlaysPerDay(currentFile);
@@ -504,12 +545,19 @@ namespace MusicBeePlugin
             }
 
 
-            Invoke(new Action(() =>
+            if (checkStoppingStatus())
+                return;
+
+
+            if (!Disposing && !IsDisposed)
             {
-                maxPlaysPerDayBox.Text = ConvertDoubleToString(maxPlaysPerDay);
-                avgPlaysPerDayBox.Text = ConvertDoubleToString(avgPlaysPerDay);
-                labelTotalTracks.Text = MsgNumberOfPlayedTracks + NumberOfFiles;
-            }));
+                Invoke(new Action(() =>
+                {
+                    maxPlaysPerDayBox.Text = ConvertDoubleToString(maxPlaysPerDay);
+                    avgPlaysPerDayBox.Text = ConvertDoubleToString(avgPlaysPerDay);
+                    labelTotalTracks.Text = MsgNumberOfPlayedTracks + NumberOfFiles;
+                }));
+            }
 
             if (!SavedSettings.dontPlayCompletedSound)
                 System.Media.SystemSounds.Asterisk.Play();
@@ -523,21 +571,30 @@ namespace MusicBeePlugin
 
         internal void calculateThresholds()
         {
+            ignoreClosingForm = true;
+
+            buttonNormalizePercentages_Click(null, null);
+
             NumberOfFiles = 0;
             var playsPerDayStatistics = new SortedDictionary<double, int>();
 
-            files = null;
             if (!MbApiInterface.Library_QueryFilesEx("domain=Library", out files))
                 files = Array.Empty<string>();
 
             for (var fileCounter = 0; fileCounter < files.Length; fileCounter++)
             {
-                if (backgroundTaskIsCanceled)
+                if (checkStoppingStatus())
+                {
+                    backgroundTaskIsStoppedOrCancelled = true;
+                    Invoke(new Action(() => { closeFormOnOperationStoppingCompletionIfRequired(); }));
                     return;
+                }
+
 
                 var currentFile = files[fileCounter];
-
                 var playsPerDay = GetPlaysPerDay(currentFile);
+
+                SetStatusBarText(AutoRateSbText + AutoRateSbTextCalculatingThresholds + (fileCounter + 1) + "/" + files.Length, false);
 
                 // ReSharper disable once CompareOfFloatsByEqualityOperator
                 if (playsPerDay != -1)
@@ -576,10 +633,17 @@ namespace MusicBeePlugin
             var statisticsSum = 0;
             var assignedFilesNumber = 0;
 
+            SetStatusBarText(AutoRateSbText + AutoRateSbTextCalculatingActualPercentagesCalculatingThresholds, false);
+
             foreach (var playsPerDay in playsPerDayStatistics.Keys)
             {
-                if (backgroundTaskIsCanceled)
+                if (checkStoppingStatus())
+                {
+                    backgroundTaskIsStoppedOrCancelled = true;
+                    Invoke(new Action(() => { closeFormOnOperationStoppingCompletionIfRequired(); }));
                     return;
+                }
+
 
                 playsPerDayStatistics.TryGetValue(playsPerDay, out var statistics);
                 statisticsSum += statistics;
@@ -739,11 +803,19 @@ namespace MusicBeePlugin
                     //MusicBeePlugin.savedSettings.threshold05 = 0;
                 }
             }
+
+
+            SetStatusBarText(null, true);
+
+            if (calculateActualSumOfPercentageOnCalculatingThresholds)
+                calculateActualSumOfPercentages();
+
+            Invoke(new Action(() => { closeFormOnOperationStoppingCompletionIfRequired(); }));
         }
 
         private bool checkSettings()
         {
-            if (sumOfPercentage() > 100)
+            if (sumOfPercentages() != 100)
             {
                 MessageBox.Show(this, MsgIncorrectSumOfWeights, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
@@ -756,6 +828,7 @@ namespace MusicBeePlugin
         {
             if (!checkSettings())
                 return false;
+
 
             SavedSettings.autoRateTagId = GetTagId(autoRatingTagListCustom.Text);
             SavedSettings.storePlaysPerDay = storePlaysPerDayCheckBox.Checked;
@@ -809,8 +882,15 @@ namespace MusicBeePlugin
             if (checkSettings())
             {
                 if (prepareBackgroundTask())
-                    switchOperation(autoRateNow, sender as Button, EmptyButton, EmptyButton, buttonClose, true, null);
+                    switchOperation(autoRateNow, buttonOK, buttonOK, EmptyButton, buttonClose, true, null);
             }
+        }
+
+        private void buttonCalculate_Click(object sender, EventArgs e)
+        {
+            ignoreClosingForm = true;
+            calculateActualSumOfPercentageOnCalculatingThresholds = true;
+            switchOperation(calculateThresholds, EmptyButton, buttonOK, EmptyButton, buttonClose, false, null);
         }
 
         private void buttonClose_Click(object sender, EventArgs e)
@@ -818,12 +898,12 @@ namespace MusicBeePlugin
             Close();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonSaveSettings_Click(object sender, EventArgs e)
         {
             saveSettings();
         }
 
-        private void checkBoxN_CheckedChanged(TextBox threshold, CheckBox checkBox, NumericUpDown perCent)
+        private void checkBoxN_CheckedChanged(NumericUpDown threshold, CheckBox checkBox, NumericUpDown perCent)
         {
             threshold.Enable(checkBox.Checked);
             if (checkBox.Checked)
@@ -946,14 +1026,11 @@ namespace MusicBeePlugin
             else
                 checkBox.Checked = true;
 
-            if (actSumOfPercentage == -1)
-            {
-                labelSum.Text = MsgSum + sumOfPercentage() + "% (" + (100 - sumOfPercentage()) + MsgNumberOfNotRatedTracks;
-            }
+            if (actualSumOfPercentages == -1)
+                labelSum.Text = MsgSum + sumOfPercentages() + "% (" + (100 - sumOfPercentages()) + MsgNumberOfNotRatedTracks;
             else
-            {
-                labelSum.Text = MsgSum + sumOfPercentage() + MsgActualPercent + actSumOfPercentage + "% (" + (100 - actSumOfPercentage) + MsgNumberOfNotRatedTracks;
-            }
+                labelSum.Text = MsgSum + sumOfPercentages() + MsgActualPercent + actualSumOfPercentages + "% (" + (100 - actualSumOfPercentages) + MsgNumberOfNotRatedTracks;
+
 
             if (actualPerCent == -1)
             {
@@ -1019,14 +1096,8 @@ namespace MusicBeePlugin
             perCentN_ValueChanged(perCent05UpDown, checkBox05, perCentLabel05, SavedSettings.actualPerCent05);
         }
 
-        private void buttonCalculate_Click(object sender, EventArgs e)
+        private void fillThresholdsPercentagesUi()
         {
-            if (!saveSettings())
-                return;
-
-            calculateThresholds();
-            calcActSumOfPercentage();
-
             threshold5Box.Text = ConvertDoubleToString(SavedSettings.threshold5);
             threshold45Box.Text = ConvertDoubleToString(SavedSettings.threshold45);
             threshold4Box.Text = ConvertDoubleToString(SavedSettings.threshold4);
@@ -1052,7 +1123,7 @@ namespace MusicBeePlugin
 
         private void threshold_TextChanged(object sender, EventArgs e)
         {
-            (sender as TextBox).Text = ConvertDoubleToString(RoundPlaysPerDay((sender as TextBox).Text));
+            (sender as NumericUpDown).Text = ConvertDoubleToString(RoundPlaysPerDay((sender as NumericUpDown).Text));
         }
 
         private void autoRateAtStartUp_CheckedChanged(object sender, EventArgs e)
@@ -1079,7 +1150,7 @@ namespace MusicBeePlugin
         {
             foreach (var control in allControls)
             {
-                if (control != buttonOK && control != buttonClose)
+                if (control != buttonSettings && control != buttonClose)
                     control.Enable(enable);
             }
         }
@@ -1097,14 +1168,12 @@ namespace MusicBeePlugin
 
         internal override void enableQueryingOrUpdatingButtons()
         {
-            buttonOK.Enable(true);
-            buttonCalculate.Enable(true);
+            buttonOK.Enable(true && (backgroundTaskIsNativeMB || !backgroundTaskIsWorking()));
         }
 
         internal override void disableQueryingOrUpdatingButtons()
         {
             buttonOK.Enable(false);
-            buttonCalculate.Enable(false);
         }
 
         private void holdsAtStartUpCheckBoxLabel_Click(object sender, EventArgs e)
@@ -1134,6 +1203,63 @@ namespace MusicBeePlugin
         {
             var settings = new QuickSettings(TagToolsPlugin);
             Display(settings, true);
+        }
+
+        private void buttonNormalizePercentages_Click(object sender, EventArgs e)
+        {
+            decimal fullPercentageSum = sumOfPercentages();
+
+            perCent05UpDown.Value = Math.Round(perCent05UpDown.Value * 100 / fullPercentageSum);
+            perCent1UpDown.Value = Math.Round(perCent1UpDown.Value * 100 / fullPercentageSum);
+            perCent15UpDown.Value = Math.Round(perCent15UpDown.Value * 100 / fullPercentageSum);
+            perCent2UpDown.Value = Math.Round(perCent2UpDown.Value * 100 / fullPercentageSum);
+            perCent25UpDown.Value = Math.Round(perCent25UpDown.Value * 100 / fullPercentageSum);
+            perCent3UpDown.Value = Math.Round(perCent3UpDown.Value * 100 / fullPercentageSum);
+            perCent35UpDown.Value = Math.Round(perCent35UpDown.Value * 100 / fullPercentageSum);
+            perCent4UpDown.Value = Math.Round(perCent4UpDown.Value * 100 / fullPercentageSum);
+            perCent45UpDown.Value = Math.Round(perCent45UpDown.Value * 100 / fullPercentageSum);
+            perCent5UpDown.Value = Math.Round(perCent5UpDown.Value * 100 / fullPercentageSum);
+
+            fullPercentageSum = sumOfPercentages();
+            if (fullPercentageSum != 100)
+                perCent5UpDown.Value += 100 - fullPercentageSum;
+
+
+            SavedSettings.perCent5 = perCent5UpDown.Value;
+            SavedSettings.perCent45 = perCent45UpDown.Value;
+            SavedSettings.perCent4 = perCent4UpDown.Value;
+            SavedSettings.perCent35 = perCent35UpDown.Value;
+            SavedSettings.perCent3 = perCent3UpDown.Value;
+            SavedSettings.perCent25 = perCent25UpDown.Value;
+            SavedSettings.perCent2 = perCent2UpDown.Value;
+            SavedSettings.perCent15 = perCent15UpDown.Value;
+            SavedSettings.perCent1 = perCent1UpDown.Value;
+            SavedSettings.perCent05 = perCent05UpDown.Value;
+
+            calculateActualSumOfPercentages();
+        }
+
+        protected override void childClassFormShown()
+        {
+            ignoreClosingForm = true;
+            statisticsTimer = new System.Threading.Timer(getStatistics, null, RefreshUI_Delay, Timeout.Infinite);
+        }
+
+        private void AutoRate_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (ignoreClosingForm)
+            {
+                if (!backgroundTaskIsNativeMB)
+                {
+                    closeFormOnStopping = true;
+                    buttonClose.Enable(false);
+                }
+
+                backgroundTaskIsStopping = true;
+                SetStatusBarText(AutoRateSbText + SbTextStoppingCurrentOperation, false);
+
+                e.Cancel = true;
+            }
         }
     }
 }

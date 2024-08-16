@@ -22,11 +22,11 @@
 
             if (disposing)
             {
-                emptyArtwork.Dispose();
+                emptyArtwork?.Dispose();
                 bufferArtwork?.Dispose();
             
-                columnTemplate.Dispose();
-                artworkCellTemplate.Dispose();
+                columnTemplate?.Dispose();
+                artworkCellTemplate?.Dispose();
             }
         }
 
@@ -72,7 +72,6 @@
             resources.ApplyResources(this.buttonOK, "buttonOK");
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Tag = "#buttonClose";
-            this.toolTip1.SetToolTip(this.buttonOK, resources.GetString("buttonOK.ToolTip"));
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // buttonClose
@@ -81,14 +80,13 @@
             this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Tag = "#toolsPanel@non-defaultable@pinned-to-parent-x";
-            this.toolTip1.SetToolTip(this.buttonClose, resources.GetString("buttonClose.ToolTip"));
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
             // previewTable
             // 
-            resources.ApplyResources(this.previewTable, "previewTable");
             this.previewTable.AllowUserToAddRows = false;
             this.previewTable.AllowUserToDeleteRows = false;
+            resources.ApplyResources(this.previewTable, "previewTable");
             this.previewTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.previewTable.BackgroundColor = System.Drawing.SystemColors.Window;
             this.previewTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -112,7 +110,6 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.previewTable.DefaultCellStyle = dataGridViewCellStyle3;
-            this.previewTable.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
             this.previewTable.Name = "previewTable";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
@@ -125,7 +122,6 @@
             this.previewTable.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.previewTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.previewTable.Tag = "#CompareTracks&CompareTracks@pinned-to-parent-x@pinned-to-parent-y";
-            this.toolTip1.SetToolTip(this.previewTable, resources.GetString("previewTable.ToolTip"));
             this.previewTable.RowHeadersWidthChanged += new System.EventHandler(this.previewTable_RowHeadersWidthChanged);
             this.previewTable.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.previewTable_ColumnHeaderMouseClick);
             this.previewTable.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.previewTable_ColumnWidthChanged);
@@ -242,25 +238,22 @@
             this.toolsPanel.Controls.Add(this.placeholderLabel);
             this.toolsPanel.Name = "toolsPanel";
             this.toolsPanel.Tag = "#CompareTracks&CompareTracks@pinned-to-parent-x@pinned-to-parent-y";
-            this.toolTip1.SetToolTip(this.toolsPanel, resources.GetString("toolsPanel.ToolTip"));
             // 
             // buttonPreview
             // 
             resources.ApplyResources(this.buttonPreview, "buttonPreview");
             this.buttonPreview.Name = "buttonPreview";
             this.buttonPreview.Tag = "#buttonOK";
-            this.toolTip1.SetToolTip(this.buttonPreview, resources.GetString("buttonPreview.ToolTip"));
             this.buttonPreview.Click += new System.EventHandler(this.buttonPreview_Click);
             // 
             // placeholderLabel
             // 
             resources.ApplyResources(this.placeholderLabel, "placeholderLabel");
             this.placeholderLabel.Name = "placeholderLabel";
-            this.toolTip1.SetToolTip(this.placeholderLabel, resources.GetString("placeholderLabel.ToolTip"));
             // 
             // CompareTracks
             // 
-            this.AcceptButton = this.buttonOK;
+            this.AcceptButton = this.buttonPreview;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.previewTable);
@@ -268,7 +261,7 @@
             this.DoubleBuffered = true;
             this.Name = "CompareTracks";
             this.Tag = "";
-            this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CompareTracks_FormClosing);
             this.Load += new System.EventHandler(this.CompareTracks_Load);
             this.Shown += new System.EventHandler(this.CompareTracks_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).EndInit();

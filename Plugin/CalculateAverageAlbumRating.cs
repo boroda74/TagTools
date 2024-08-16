@@ -44,15 +44,85 @@ namespace MusicBeePlugin
             button_GotFocus(AcceptButton, null); //Let's mark active button
         }
 
-        internal void calculateAlbumRating()
+        private void calculateAlbumRating(List<string[]>  tags, int prevRow, int currentTagsIndex)
+        {
+            double sumRating = 0;
+            double avgRating;
+            int numberOfTracks = 0;
+
+            for (var j = prevRow; j < currentTagsIndex; j++)
+            {
+                if (!string.IsNullOrEmpty(tags[j][2]) || SavedSettings.considerUnrated)
+                {
+                    sumRating += ConvertStrings(tags[j][2], ResultType.Double, DataType.Rating).resultD;
+                    numberOfTracks++;
+                }
+            }
+
+            if (numberOfTracks == 0)
+                avgRating = 0;
+            else
+                avgRating = Math.Round(sumRating / 10 / numberOfTracks) * 10;
+
+            for (var j = prevRow; j < currentTagsIndex; j++)
+            {
+                string currentFile = tags[j][3];
+
+                SetFileTag(currentFile, GetTagId(SavedSettings.albumRatingTagName), avgRating.ToString(), true);
+                CommitTagsToFile(currentFile, false, true);
+
+                SetStatusBarTextForFileOperations(CarSbText, false, j, tags.Count, currentFile);
+            }
+
+            return;
+        }
+
+        private bool applyingChangesStopped()
+        {
+            backgroundTaskIsScheduled = false;
+            backgroundTaskIsStopping = false;
+            backgroundTaskIsStoppedOrCancelled = false;
+            closeFormOnStopping = false;
+            ignoreClosingForm = false;
+
+            SetResultingSbText();
+
+            return true;
+        }
+
+        private void closeFormOnOperationStoppingCompletionIfRequired()
+        {
+            backgroundTaskIsScheduled = false;
+            SetStatusBarText(null, true);
+
+
+            if (!Disposing && !IsDisposed)
+            {
+                if (closeFormOnStopping)
+                {
+                    ignoreClosingForm = false;
+                    Close();
+                }
+
+                enableDisablePreviewOptionControls(true);
+            }
+
+            ignoreClosingForm = false;
+        }
+
+        internal void calculateAlbumsRatings()
         {
             var tags = new List<string[]>();
             string currentFile;
 
             for (var fileCounter = 0; fileCounter < files.Length; fileCounter++)
             {
-                if (backgroundTaskIsCanceled)
+                if (checkStoppingStatus())
+                {
+                    Invoke(new Action(() => { stopButtonClickedMethod(applyingChangesStopped); }));
                     return;
+                }
+
 
                 currentFile = files[fileCounter];
 
@@ -70,25 +140,25 @@ namespace MusicBeePlugin
 
             SetStatusBarText(CarSbText + " (" + SbSorting + ")", false);
 
-            var textTableComparator = new TextTableComparer
+            var stringArrayComparer = new StringArrayComparer
             {
                 tagCounterIndex = 2
             };
 
-            tags.Sort(textTableComparator);
+            tags.Sort(stringArrayComparer);
 
             var prevAlbumArtist = string.Empty;
             var prevAlbum = string.Empty;
             var prevRow = 0;
 
-            double sumRating;
-            int numberOfTracks;
-            double avgRating;
-
             for (var i = 0; i < tags.Count; i++)
             {
-                if (backgroundTaskIsCanceled)
+                if (checkStoppingStatus())
+                {
+                    Invoke(new Action(() => { stopButtonClickedMethod(applyingChangesStopped); }));
                     return;
+                }
+
 
                 var currentAlbumArtist = tags[i][0];
                 var currentAlbum = tags[i][1];
@@ -101,32 +171,7 @@ namespace MusicBeePlugin
 
                 if (prevAlbumArtist != currentAlbumArtist || prevAlbum != currentAlbum)
                 {
-                    sumRating = 0;
-                    numberOfTracks = 0;
-
-                    for (var j = prevRow; j < i; j++)
-                    {
-                        if (!string.IsNullOrEmpty(tags[j][2]) || SavedSettings.considerUnrated)
-                        {
-                            sumRating += ConvertStrings(tags[j][2], ResultType.Double, DataType.Rating).resultD;
-                            numberOfTracks++;
-                        }
-                    }
-
-                    if (numberOfTracks == 0)
-                        avgRating = 0;
-                    else
-                        avgRating = Math.Round(sumRating / 10 / numberOfTracks) * 10;
-
-                    for (var j = prevRow; j < i; j++)
-                    {
-                        currentFile = tags[j][3];
-
-                        SetFileTag(currentFile, GetTagId(SavedSettings.albumRatingTagName), avgRating.ToString(), true);
-                        CommitTagsToFile(currentFile, false, true);
-
-                        SetStatusBarTextForFileOperations(CarSbText, false, j, tags.Count, currentFile);
-                    }
+                    calculateAlbumRating(tags, prevRow, i);
 
                     prevAlbumArtist = currentAlbumArtist;
                     prevAlbum = currentAlbum;
@@ -134,57 +179,35 @@ namespace MusicBeePlugin
                 }
             }
 
-            sumRating = 0;
-            numberOfTracks = 0;
-
-            for (var j = prevRow; j < tags.Count; j++)
-            {
-                if (!string.IsNullOrEmpty(tags[j][2]) || SavedSettings.considerUnrated)
-                {
-                    sumRating += ConvertStrings(tags[j][2], ResultType.Double, DataType.Rating).resultD;
-                    numberOfTracks++;
-                }
-            }
-
-            if (numberOfTracks == 0)
-                avgRating = 0;
-            else
-                avgRating = Math.Round(sumRating / 10 / numberOfTracks) * 10;
-
-            for (var j = prevRow; j < tags.Count; j++)
-            {
-                currentFile = tags[j][3];
-
-                SetFileTag(currentFile, GetTagId(SavedSettings.albumRatingTagName), avgRating.ToString(), true);
-                CommitTagsToFile(currentFile, false, true);
-
-                SetStatusBarTextForFileOperations(CarSbText, false, j, tags.Count, currentFile);
-            }
+            calculateAlbumRating(tags, prevRow, tags.Count);
 
             RefreshPanels(true);
-
             SetResultingSbText();
 
             if (SavedSettings.notifyWhenCalculationCompleted) MessageBox.Show(this, MsgBackgroundTaskIsCompleted,
                 string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            Invoke(new Action(() => { closeFormOnOperationStoppingCompletionIfRequired(); }));
         }
 
-        internal void calculateAlbumRatingForDisplayedTracks()
+        internal void calculateAlbumRatingForSelectedTracks()
         {
-            files = null;
-            if (!MbApiInterface.Library_QueryFilesEx("domain=DisplayedFiles", out files))
-                files = Array.Empty<string>();
+            MbApiInterface.Library_QueryFilesEx("domain=SelectedFiles", out files);
+            if (files == null || files.Length == 0)
+            {
+                MessageBox.Show(MbForm, MsgNoTracksSelected, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
 
-            switchOperation(calculateAlbumRating, buttonOK, EmptyButton, EmptyButton, buttonClose, true, null);
+            switchOperation(calculateAlbumsRatings, buttonOK, buttonOK, EmptyButton, buttonClose, true, null);
         }
 
         internal void calculateAlbumRatingForAllTracks()
         {
-            files = null;
             if (!MbApiInterface.Library_QueryFilesEx("domain=Library", out files))
                 files = Array.Empty<string>();
 
-            switchOperation(calculateAlbumRating, buttonOK, EmptyButton, EmptyButton, EmptyButton, true, null);
+            switchOperation(calculateAlbumsRatings, EmptyButton, EmptyButton, EmptyButton, EmptyButton, true, null);
         }
 
         internal static void CalculateAlbumRatingForAlbum(string currentFile)
@@ -254,7 +277,7 @@ namespace MusicBeePlugin
         {
             foreach (var control in allControls)
             {
-                if (control != buttonOK && control != buttonClose)
+                if (control != buttonOK && control != buttonSettings && control != buttonClose)
                     control.Enable(enable);
             }
         }
@@ -296,7 +319,8 @@ namespace MusicBeePlugin
         private void buttonOK_Click(object sender, EventArgs e)
         {
             saveSettings();
-            calculateAlbumRatingForDisplayedTracks();
+            ignoreClosingForm = true;
+            calculateAlbumRatingForSelectedTracks();
         }
 
         private void buttonClose_Click(object sender, EventArgs e)
@@ -304,7 +328,7 @@ namespace MusicBeePlugin
             Close();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonSaveSettings_Click(object sender, EventArgs e)
         {
             saveSettings();
         }
@@ -333,6 +357,23 @@ namespace MusicBeePlugin
         {
             var settings = new QuickSettings(TagToolsPlugin);
             Display(settings, true);
+        }
+
+        private void CalculateAverageAlbumRating_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (ignoreClosingForm)
+            {
+                if (!backgroundTaskIsNativeMB)
+                {
+                    closeFormOnStopping = true;
+                    buttonClose.Enable(false);
+                }
+
+                backgroundTaskIsStopping = true;
+                SetStatusBarText(AutoRateSbText + SbTextStoppingCurrentOperation, false);
+
+                e.Cancel = true;
+            }
         }
     }
 }

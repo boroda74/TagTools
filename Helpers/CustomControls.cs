@@ -46,10 +46,12 @@ namespace MusicBeePlugin
             return (TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
         }
 
-        internal static void Control_Resize(object sender, EventArgs e)
+        internal static void BorderedControl_Resize(object sender, EventArgs e)
         {
             if (sender is Control control)
             {
+                control.Parent.Size = control.Size;
+
                 var controlRectangle = new Rectangle(1, 1, control.Width - 2, control.Height - 2);
                 var controlRegion = new Region(controlRectangle);
                 control.Region = controlRegion;
@@ -58,7 +60,7 @@ namespace MusicBeePlugin
             }
         }
 
-        internal static void Control_LocationChanged(object sender, EventArgs e)
+        internal static void BorderedControl_LocationChanged(object sender, EventArgs e)
         {
             var control = sender as Control;
             var controlBorder = control.Parent as ControlBorder;
@@ -67,7 +69,7 @@ namespace MusicBeePlugin
                 controlBorder.changeControlBorderLocation();
         }
 
-        //internal static void DrawTextBoxBorder(TextBox textBox)
+        //internal static void DrawTextBoxBorder(TextBox textBox) //****
         //{
         //    if (textBox.Parent is ControlBorder textBoxBorder)
         //    {
@@ -160,27 +162,31 @@ namespace MusicBeePlugin
             parent.Controls.RemoveAt(index);
             Controls.Add(control);
 
+
             control.Margin = Padding.Empty;
-            control.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
             control.Left = 0;
             control.Top = 0;
             control.Dock = DockStyle.None;
             control.TabStop = false;
-            control.LocationChanged += ControlsTools.Control_LocationChanged;
-            control.SizeChanged += ControlsTools.Control_Resize;
+            control.LocationChanged += ControlsTools.BorderedControl_LocationChanged;
+            control.SizeChanged += ControlsTools.BorderedControl_Resize;
 
             parent.Controls.Add(this);
             parent.Controls.SetChildIndex(this, index);
             if (parent is TableLayoutPanel layoutPanel)
                 layoutPanel.SetCellPosition(this, cellPosition);
 
-            Resize += ControlBorder_Resize;
-            Paint += ControlBorder_Paint;
+
+            if (control is TextBox textBox && textBox.Multiline)
+                control.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
+            else
+                control.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
+
+
+            Paint += controlBorder_Paint;
             GotFocus += (sender, args) => { control.Focus(); };
 
             ResizeRedraw = true;
-
-            ControlBorder_Resize(null, null);
         }
 
         internal bool getIgnoreControl_LocationChanged()
@@ -202,19 +208,9 @@ namespace MusicBeePlugin
             ignoreControl_LocationChanged = false;
         }
 
-        private void ControlBorder_Paint(object sender, PaintEventArgs e)
+        private void controlBorder_Paint(object sender, PaintEventArgs e)
         {
             ControlsTools.DrawBorder(sender as Control);
-        }
-
-        private void ControlBorder_Resize(object sender, EventArgs e)
-        {
-            control.Size = Size;
-        }
-
-        private void Control_Resize(object sender, EventArgs e)
-        {
-            Size = control.Size;
         }
 
         protected override void Dispose(bool disposing)
@@ -242,8 +238,6 @@ namespace MusicBeePlugin
         private Bitmap downArrowComboBoxImage;
         private Bitmap disabledDownArrowComboBoxImage;
 
-        public int lastSelectedIndex = -1;
-
         private int scaledPx = 1;
         private string cue = string.Empty;
 
@@ -254,6 +248,7 @@ namespace MusicBeePlugin
         private TextBox textBox;
         private Button button;
         private CustomListBox listBox;
+        private int lastSelectedIndex = -1;
 
         private bool textBoxReadOnlyCache;
 
@@ -319,7 +314,7 @@ namespace MusicBeePlugin
             tableLayoutPanel.AutoSize = true;
             tableLayoutPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
 
-            var columnStyle0 = new ColumnStyle(SizeType.AutoSize, 100f);
+            var columnStyle0 = new ColumnStyle(SizeType.Percent, 100f);
             var columnStyle1 = new ColumnStyle(SizeType.Absolute, customScrollBarInitialWidth);
 
             tableLayoutPanel.ColumnStyles.Add(columnStyle0);
@@ -331,8 +326,8 @@ namespace MusicBeePlugin
             tableLayoutPanel.RowStyles.Add(rowStyle0);
             tableLayoutPanel.RowStyles.Add(rowStyle1);
 
-            
-            listBox = new CustomListBox(customScrollBarInitialWidth - (int)Math.Round((ownerForm.dpiScaling - 1) * 8), scaledPx, false, 
+
+            listBox = new CustomListBox(customScrollBarInitialWidth - (int)Math.Round((ownerForm.dpiScaling - 1) * 8), scaledPx, false,
                 Plugin.ScrollBarBackColor, Plugin.ScrollBarBackColor, Plugin.ScrollBarBackColor);
 
             listBox.Font = Font;
@@ -758,21 +753,19 @@ namespace MusicBeePlugin
             {
                 if (index == -1 && string.IsNullOrEmpty(value) && textBox.ReadOnly)
                 {
-                    textBox.ForeColor = Plugin.InputControlForeColor;
                     textBox.Text = cue;
                 }
                 else if (index == -1 && string.IsNullOrEmpty(value) && !textBox.ReadOnly)
                 {
-                    textBox.ForeColor = Plugin.InputControlDimmedForeColor;
                     textBox.Text = cue;
                 }
                 else
                 {
-                    textBox.ForeColor = Plugin.InputControlForeColor;
                     textBox.Text = value;
-
                     SelectedIndex = index;
                 }
+
+                SetColors(null);
 
                 this.FireEvent("TextChanged", null);
             }
@@ -820,8 +813,8 @@ namespace MusicBeePlugin
             {
                 if (listBox != null && lastSelectedIndex != value)
                 {
-                    listBox.SelectedIndex = value;
                     lastSelectedIndex = value;
+                    listBox.SelectedIndex = value;
 
                     if (value != -1)
                         Text = listBox.Items[value].ToString();
@@ -856,10 +849,9 @@ namespace MusicBeePlugin
 
             set
             {
-                if (listBox != null && listBox.SelectedItem != value)
+                if (listBox != null && (listBox.SelectedIndex == -1 || listBox.Items[listBox.SelectedIndex] != value))
                 {
                     listBox.SelectedItem = value;
-                    lastSelectedIndex = listBox.SelectedIndex;
 
                     if (value != null)
                         Text = value.ToString();
@@ -1068,20 +1060,10 @@ namespace MusicBeePlugin
 
         public void listBox_ItemChosen(object sender, EventArgs e)
         {
-            if (listBox.SelectedIndex >= 0)
-            {
-                var index = listBox.SelectedIndex;
-                listBox.SelectedIndex = -1;
-                textBox.Focus();
-                dropDown.Close();
+            textBox.Focus();
+            dropDown.Close();
 
-                SelectedIndex = index;
-            }
-            else
-            {
-                textBox.Focus();
-                dropDown.Close();
-            }
+            SelectedIndex = listBox.SelectedIndex;
         }
 
         private void listBox_MouseMove(object sender, MouseEventArgs e)
@@ -1121,8 +1103,11 @@ namespace MusicBeePlugin
                 else
                     listBox.AdjustWidth(dropDownWidth, false);
 
+                listBox.AdjustHeight(dropDownWidth, initialDropDownHeight);
 
-                listBox.SelectedIndex = lastSelectedIndex;
+                var index = IndexOfText(textBox.Text);
+                if (listBox.SelectedItem.ToString() != textBox.Text && index >= 0)
+                    listBox.SelectedItem = textBox.Text;
 
                 var textBoxScreenLocation = textBox.PointToScreen(textBox.Location);
 
@@ -1131,26 +1116,46 @@ namespace MusicBeePlugin
                 pt.Offset(0, textBox.Height);
 
                 //determine if it will fit on the screen below the textbox
-                var dropdownSize = dropDown.GetPreferredSize(Size.Empty);
-                var dropdownBounds = new Rectangle(pt, dropdownSize);
+                var dropdownBounds = new Rectangle(pt, listBox.Size);
 
                 if (dropdownBounds.Bottom <= Screen.GetWorkingArea(dropdownBounds).Bottom)
-                {   //show below
+                    //show below
                     dropDown.Show(pt, ToolStripDropDownDirection.BelowRight);
-                }
                 else
-                {   //show above
+                    //show above
                     dropDown.Show(textBoxScreenLocation, ToolStripDropDownDirection.AboveRight);
-                }
+
+                listBox.Focus();
+            }
+            else
+            {
+                textBox.Focus();
             }
         }
 
-        public void SetColors(Color foreColor, Color backColor)
+        public void SetColors(bool? enabled)
         {
             if (textBox != null)
             {
-                textBox.ForeColor = foreColor;
-                textBox.BackColor = backColor;
+                enabled = (Enabled && enabled == null) || enabled == true;
+
+                if (enabled == true)
+                {
+                    if (listBox.SelectedIndex == -1 && (string.IsNullOrEmpty(textBox.Text) || textBox.Text == cue) && textBox.ReadOnly) //Let's show cue for readonly mode if cue is defined
+                        textBox.ForeColor = Plugin.InputControlForeColor;
+                    else if (listBox.SelectedIndex == -1 && (string.IsNullOrEmpty(textBox.Text) || textBox.Text == cue) && !textBox.ReadOnly) //Let's show cue for editable mode if cue is defined
+                        textBox.ForeColor = Plugin.InputControlDimmedForeColor;
+                    else //Not readonly
+                        textBox.ForeColor = Plugin.InputControlForeColor;
+
+                    textBox.BackColor = Plugin.InputControlBackColor;
+                }
+                else //Disabled
+                {
+                    textBox.ForeColor = Plugin.DimmedAccentColor;
+                    textBox.BackColor = Plugin.InputPanelBackColor;
+                    //textBox.BackColor = Plugin.InputControlDimmedBackColor; //****
+                }
             }
         }
 
@@ -1327,11 +1332,11 @@ namespace MusicBeePlugin
                         (Parent as TableLayoutPanel).ColumnStyles[1].Width = 0;
 
                     if (MaximumSize.Height != itemsHeight)
-                    {
                         MaximumSize = new Size(MaximumSize.Width, itemsHeight);
-                        Height = itemsHeight;
-                    }
 
+                    if (Height != itemsHeight)
+                        Height = itemsHeight;
+ 
                     scrollBarVisible = false;
                 }
 
@@ -1692,7 +1697,7 @@ namespace MusicBeePlugin
         private Brush scrollBarThumbAndSpansBorderBrush;
 
         private int largeChange = 50;
-        private int smallChange;
+        private int smallChange = 5;
         private int minimum;
         private int maximum = 100;
         private int value;
@@ -1757,7 +1762,7 @@ namespace MusicBeePlugin
 
         //refScrollBar must be null if scrolledControl is not a parent of custom scroll bar & scroll bar must be placed on the right to scrolledControl
         public CustomVScrollBar(Form ownerForm, Control scrolledControl,
-            GetScrollBarMetricsDelegate getScrollBarMetrics, int borderWidth, Control refScrollBar = null)
+            GetScrollBarMetricsDelegate getScrollBarMetrics, int borderWidth, Control refScrollBar = null, bool useSelfAsRefScrollBar = false)
         {
             InitializeComponent();
 
@@ -1806,15 +1811,23 @@ namespace MusicBeePlugin
             upImageAdditionalTopHeight = (int)Math.Round(dpiScaling * upImageAdditionalTopHeight);
             upImageAdditionalBottomHeight = (int)Math.Round(dpiScaling * upImageAdditionalBottomHeight);
 
-            if (refScrollBar != null) //scrolledControlIsParent has own scroll bar CONTROLS, which must be replaced
+            if (refScrollBar != null || useSelfAsRefScrollBar) //scrolledControlIsParent has own scroll bar CONTROLS, which must be replaced
             {
-                this.refScrollBar = refScrollBar;
+                if (useSelfAsRefScrollBar)
+                    this.refScrollBar = this;
+                else
+                    this.refScrollBar = refScrollBar;
+
                 Visible = false;
 
                 reservedBordersSpace = 2 * scaledPx;
 
                 initialWidth = ControlsTools.GetCustomScrollBarInitialWidth(dpiScaling, sbBorderWidth);
-                Width = refScrollBar.Width;
+
+                if (refScrollBar != null)
+                    Width = refScrollBar.Width;
+                else
+                    Width = initialWidth;
 
                 ResetMetricsSize(ScrolledControl.Height);
                 AdjustReservedSpace(0);
@@ -1825,7 +1838,8 @@ namespace MusicBeePlugin
 
                 offsetX = Width - initialWidth;
 
-                refScrollBar.Visible = false;
+                if (refScrollBar != null && !useSelfAsRefScrollBar)
+                    refScrollBar.Visible = false;
 
                 Top = scaledPx;
                 Left = ScrolledControl.Width - Width - scaledPx;
@@ -1872,7 +1886,6 @@ namespace MusicBeePlugin
                 Dock = DockStyle.Fill;
             }
 
-            smallChange = 5; //****
             Value = 0;
 
             SizeChanged += customScrollBar_SizeChanged;
@@ -2533,7 +2546,7 @@ namespace MusicBeePlugin
         private Brush scrollBarThumbAndSpansBorderBrush;
 
         private int largeChange = 50;
-        private int smallChange;
+        private int smallChange = 20;
         private int minimum;
         private int maximum = 100;
         private int value;
@@ -2648,10 +2661,11 @@ namespace MusicBeePlugin
                 reservedBordersSpace = 2 * scaledPx;
 
                 initialHeight = ControlsTools.GetCustomScrollBarInitialWidth(dpiScaling, sbBorderWidth);
-                if (useSelfAsRefScrollBar)
-                    Height = initialHeight;
-                else
+
+                if (refScrollBar != null)
                     Height = refScrollBar.Height;
+                else
+                    Width = initialHeight;
 
                 ResetMetricsSize(ScrolledControl.Width);
                 AdjustReservedSpace(0);
@@ -2662,7 +2676,7 @@ namespace MusicBeePlugin
 
                 offsetY = Height - initialHeight;
 
-                if (refScrollBar != null)
+                if (refScrollBar != null && !useSelfAsRefScrollBar)
                     refScrollBar.Visible = false;
 
                 Left = scaledPx;
@@ -2702,7 +2716,6 @@ namespace MusicBeePlugin
                 Dock = DockStyle.Fill;
             }
 
-            smallChange = 5; //****
             Value = 0;
 
             SizeChanged += customScrollBar_SizeChanged;

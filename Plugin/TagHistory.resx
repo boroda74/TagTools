@@ -117,174 +117,111 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="buttonOK.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="buttonOK.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1116, 313</value>
+  <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
+    <value>853, 7</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="label4.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="buttonOK.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 7</value>
   </data>
-  <data name="dataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
-    <value>Track</value>
-  </data>
-  <data name="&gt;&gt;searchFolderTextBox.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="buttonRestoreSelected.Text" xml:space="preserve">
-    <value>Restore selected</value>
-  </data>
-  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="buttonClose.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="buttonOK.Size" type="System.Drawing.Size, System.Drawing">
     <value>124, 23</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="previewTable.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="rememberColumnAsDefaultWidthCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="autoSelectTagsCheckBox.ToolTip" xml:space="preserve">
-    <value>Automatically select displayed tags and don't show backups, which have no differences with current tags</value>
-  </data>
-  <data name="backupsLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="&gt;&gt;rereadButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="autoSelectTagsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>271, 10</value>
-  </data>
-  <data name="&gt;&gt;controlsPanel.ZOrder" xml:space="preserve">
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="buttonOK.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="dataGridViewTextBoxColumn1.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
+  <data name="buttonOK.Text" xml:space="preserve">
+    <value>Proceed</value>
   </data>
-  <data name="trackListComboBox.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;label4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="searchFolderTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>493, 23</value>
-  </data>
-  <data name="dataGridViewTextBoxColumn2.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;optionsPanel.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;optionsPanel.Name" xml:space="preserve">
-    <value>optionsPanel</value>
-  </data>
-  <data name="&gt;&gt;buttonRestoreSelected.Name" xml:space="preserve">
-    <value>buttonRestoreSelected</value>
-  </data>
-  <data name="Column1.ToolTipText" xml:space="preserve">
-    <value>Some tooltip</value>
-  </data>
-  <data name="&gt;&gt;buttonPreview.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;autoSelectTagsCheckBox.Parent" xml:space="preserve">
-    <value>controlsPanel</value>
-  </data>
-  <data name="forLastLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>43, 15</value>
-  </data>
-  <data name="&gt;&gt;backupsLabel.Parent" xml:space="preserve">
-    <value>optionsPanel</value>
-  </data>
-  <data name="label4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 0, 4, 0</value>
-  </data>
-  <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>987, 7</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn1.Name" xml:space="preserve">
-    <value>dataGridViewTextBoxColumn1</value>
-  </data>
-  <data name="buttonRestoreSelected.ToolTip" xml:space="preserve">
-    <value>Copy selected backup cells to library column</value>
+  <data name="&gt;&gt;buttonOK.Name" xml:space="preserve">
+    <value>buttonOK</value>
   </data>
   <data name="&gt;&gt;buttonOK.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;buttonOK.Parent" xml:space="preserve">
+    <value>controlsPanel</value>
   </data>
-  <data name="&gt;&gt;buttonUndo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;buttonOK.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
-  <data name="previewTable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 60</value>
-  </data>
-  <data name="buttonRestoreSelected.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="optionsPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="buttonSelectTags.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="browseButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>505, 33</value>
-  </data>
-  <data name="forLastLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="searchFolderTextBox.MaxDropDownItems" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;forLastLabel.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="browseButton.Text" xml:space="preserve">
-    <value>Browse...</value>
-  </data>
-  <data name="&gt;&gt;toolTip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="browseButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="&gt;&gt;rememberColumnAsDefaultWidthCheckBox.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="dataGridViewTextBoxColumn3.Width" type="System.Int32, mscorlib">
-    <value>192</value>
-  </data>
-  <data name="placeholderLabel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>635, 11</value>
-  </data>
-  <data name="dataGridViewTextBoxColumn2.Width" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="numberOfBackupsNumericUpDown.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="buttonClose.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="trackListComboBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 5, 4</value>
+  <data name="buttonClose.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="buttonSelectTags.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+  <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
+    <value>985, 7</value>
   </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn3.Name" xml:space="preserve">
-    <value>dataGridViewTextBoxColumn3</value>
+  <data name="buttonClose.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 5, 7</value>
   </data>
-  <data name="rememberColumnAsDefaultWidthCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 19</value>
+  <data name="buttonClose.Size" type="System.Drawing.Size, System.Drawing">
+    <value>124, 23</value>
   </data>
-  <data name="forLastLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+  <data name="buttonClose.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
   </data>
+  <data name="buttonClose.Text" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="&gt;&gt;buttonClose.Name" xml:space="preserve">
+    <value>buttonClose</value>
+  </data>
+  <data name="&gt;&gt;buttonClose.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonClose.Parent" xml:space="preserve">
+    <value>controlsPanel</value>
+  </data>
+  <data name="&gt;&gt;buttonClose.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="previewTable.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="previewTable.ColumnHeadersHeight" type="System.Int32, mscorlib">
+    <value>29</value>
+  </data>
+  <metadata name="Library.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="Library.HeaderText" xml:space="preserve">
+    <value>Library</value>
+  </data>
+  <data name="Library.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="Library.Width" type="System.Int32, mscorlib">
+    <value>200</value>
+  </data>
+  <metadata name="Column1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="Column1.HeaderText" xml:space="preserve">
+    <value>2016-09-15 05:47</value>
+  </data>
+  <data name="Column1.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="Column1.ToolTipText" xml:space="preserve">
+    <value>Some tooltip</value>
+  </data>
+  <data name="Column1.Width" type="System.Int32, mscorlib">
+    <value>200</value>
+  </data>
+  <metadata name="ImageCellTemplate.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="dataGridViewCellStyle2.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         Qk32AgAAAAAAADYAAAAoAAAADgAAABAAAAABABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -302,290 +239,404 @@
         hIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEAAA=
 </value>
   </data>
-  <data name="numberOfBackupsNumericUpDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>657, 33</value>
+  <data name="ImageCellTemplate.HeaderText" xml:space="preserve">
+    <value>Image Cell Template</value>
   </data>
-  <data name="buttonRestoreSelected.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 7</value>
+  <data name="ImageCellTemplate.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
-  <data name="buttonSelectTags.Size" type="System.Drawing.Size, System.Drawing">
-    <value>124, 23</value>
+  <data name="ImageCellTemplate.Width" type="System.Int32, mscorlib">
+    <value>200</value>
   </data>
-  <data name="&gt;&gt;buttonRestoreSelected.Parent" xml:space="preserve">
-    <value>controlsPanel</value>
+  <data name="previewTable.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 60</value>
   </data>
-  <data name="&gt;&gt;previewTable.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="Library.HeaderText" xml:space="preserve">
-    <value>Library</value>
-  </data>
-  <data name="placeholderLabel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>68, 15</value>
-  </data>
-  <data name="rereadButton.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;numberOfBackupsNumericUpDown.Parent" xml:space="preserve">
-    <value>optionsPanel</value>
-  </data>
-  <data name="&gt;&gt;buttonOK.Parent" xml:space="preserve">
-    <value>controlsPanel</value>
-  </data>
-  <data name="numberOfBackupsNumericUpDown.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="placeholderLabel3.Text" xml:space="preserve">
-    <value>               PH</value>
-  </data>
-  <data name="&gt;&gt;forLastLabel.Name" xml:space="preserve">
-    <value>forLastLabel</value>
-  </data>
-  <data name="buttonPreview.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="autoSelectTagsCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="rereadButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="rememberColumnAsDefaultWidthCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>448, 11</value>
-  </data>
-  <data name="buttonPreview.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="placeholderLabel3.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="backupsLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 37</value>
-  </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value>Search for backups in folder</value>
-  </data>
-  <data name="searchFolderTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="trackListComboBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="placeholderLabel3.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="forLastLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>602, 37</value>
-  </data>
-  <data name="trackListComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="&gt;&gt;buttonClose.Name" xml:space="preserve">
-    <value>buttonClose</value>
-  </data>
-  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="label4.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;backupsLabel.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="rememberColumnAsDefaultWidthCheckBoxLabel.Text" xml:space="preserve">
-    <value>Set changed column width as new default</value>
-  </data>
-  <data name="dataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
-    <value>OriginalTag</value>
-  </data>
-  <data name="&gt;&gt;numberOfBackupsNumericUpDown.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="previewTable.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 0, 5, 0</value>
   </data>
   <data name="previewTable.RowHeadersWidth" type="System.Int32, mscorlib">
     <value>210</value>
   </data>
-  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1104, 212</value>
   </data>
-  <data name="&gt;&gt;label3.Name" xml:space="preserve">
-    <value>label3</value>
+  <data name="previewTable.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
-  <data name="&gt;&gt;numberOfBackupsNumericUpDown.Name" xml:space="preserve">
-    <value>numberOfBackupsNumericUpDown</value>
+  <data name="&gt;&gt;previewTable.Name" xml:space="preserve">
+    <value>previewTable</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>TagHistory</value>
+  <data name="&gt;&gt;previewTable.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;previewTable.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;previewTable.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="label3.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 37</value>
+  </data>
+  <data name="label3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 0, 4, 0</value>
+  </data>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>154, 15</value>
   </data>
   <data name="label3.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="buttonOK.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="label3.Text" xml:space="preserve">
+    <value>Search for backups in folder</value>
+  </data>
+  <data name="&gt;&gt;label3.Name" xml:space="preserve">
+    <value>label3</value>
+  </data>
+  <data name="&gt;&gt;label3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="searchFolderComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="searchFolderComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 33</value>
+  </data>
+  <data name="searchFolderComboBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="searchFolderComboBox.MaxDropDownItems" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="searchFolderComboBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>491, 23</value>
+  </data>
+  <data name="searchFolderComboBox.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;searchFolderComboBox.Name" xml:space="preserve">
+    <value>searchFolderComboBox</value>
+  </data>
+  <data name="&gt;&gt;searchFolderComboBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;searchFolderComboBox.Parent" xml:space="preserve">
+    <value>optionsPanel</value>
+  </data>
+  <data name="&gt;&gt;searchFolderComboBox.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="buttonBrowse.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="&gt;&gt;rememberColumnAsDefaultWidthCheckBoxLabel.Name" xml:space="preserve">
-    <value>rememberColumnAsDefaultWidthCheckBoxLabel</value>
+  <data name="buttonBrowse.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="buttonBrowse.Location" type="System.Drawing.Point, System.Drawing">
+    <value>503, 33</value>
+  </data>
+  <data name="buttonBrowse.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="buttonBrowse.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 23</value>
+  </data>
+  <data name="buttonBrowse.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="buttonBrowse.Text" xml:space="preserve">
+    <value>Browse...</value>
+  </data>
+  <data name="&gt;&gt;buttonBrowse.Name" xml:space="preserve">
+    <value>buttonBrowse</value>
+  </data>
+  <data name="&gt;&gt;buttonBrowse.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonBrowse.Parent" xml:space="preserve">
+    <value>optionsPanel</value>
+  </data>
+  <data name="&gt;&gt;buttonBrowse.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
+    <value>Track</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn1.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn1.Width" type="System.Int32, mscorlib">
+    <value>383</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
+    <value>OriginalTag</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn2.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn2.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn2.Width" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn3.HeaderText" xml:space="preserve">
+    <value>Original tag</value>
   </data>
   <data name="dataGridViewTextBoxColumn3.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn3.Width" type="System.Int32, mscorlib">
+    <value>192</value>
+  </data>
+  <data name="forLastLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="forLastLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="forLastLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>600, 37</value>
+  </data>
+  <data name="forLastLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="forLastLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 15</value>
+  </data>
+  <data name="forLastLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="forLastLabel.Text" xml:space="preserve">
+    <value>for last</value>
+  </data>
+  <data name="&gt;&gt;forLastLabel.Name" xml:space="preserve">
+    <value>forLastLabel</value>
+  </data>
+  <data name="&gt;&gt;forLastLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;forLastLabel.Parent" xml:space="preserve">
+    <value>optionsPanel</value>
+  </data>
+  <data name="&gt;&gt;forLastLabel.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="numberOfBackupsNumericUpDown.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="numberOfBackupsNumericUpDown.Location" type="System.Drawing.Point, System.Drawing">
+    <value>655, 33</value>
+  </data>
+  <data name="numberOfBackupsNumericUpDown.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="numberOfBackupsNumericUpDown.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 23</value>
+  </data>
+  <data name="numberOfBackupsNumericUpDown.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;numberOfBackupsNumericUpDown.Name" xml:space="preserve">
+    <value>numberOfBackupsNumericUpDown</value>
+  </data>
+  <data name="&gt;&gt;numberOfBackupsNumericUpDown.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;numberOfBackupsNumericUpDown.Parent" xml:space="preserve">
+    <value>optionsPanel</value>
+  </data>
+  <data name="&gt;&gt;numberOfBackupsNumericUpDown.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="backupsLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="backupsLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="backupsLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>755, 37</value>
+  </data>
+  <data name="backupsLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="backupsLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 15</value>
+  </data>
+  <data name="backupsLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="backupsLabel.Text" xml:space="preserve">
+    <value>backups</value>
+  </data>
+  <data name="&gt;&gt;backupsLabel.Name" xml:space="preserve">
+    <value>backupsLabel</value>
+  </data>
+  <data name="&gt;&gt;backupsLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;backupsLabel.Parent" xml:space="preserve">
+    <value>optionsPanel</value>
+  </data>
+  <data name="&gt;&gt;backupsLabel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="rereadButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="rereadButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rereadButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>819, 33</value>
+  </data>
+  <data name="rereadButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 5, 4</value>
+  </data>
+  <data name="rereadButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>124, 23</value>
+  </data>
+  <data name="rereadButton.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
   <data name="rereadButton.Text" xml:space="preserve">
     <value>Reread now</value>
   </data>
-  <data name="&gt;&gt;buttonUndo.Parent" xml:space="preserve">
-    <value>controlsPanel</value>
-  </data>
-  <data name="forLastLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="buttonSelectTags.ToolTip" xml:space="preserve">
-    <value>Select displayed tags</value>
-  </data>
-  <data name="&gt;&gt;autoSelectTagsCheckBox.Name" xml:space="preserve">
-    <value>autoSelectTagsCheckBox</value>
-  </data>
-  <data name="buttonSelectTags.Text" xml:space="preserve">
-    <value>Select tags...</value>
-  </data>
-  <data name="&gt;&gt;buttonSelectTags.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="searchFolderTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Tag History</value>
-  </data>
-  <data name="controlsPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1116, 37</value>
-  </data>
-  <data name="placeholderLabel3.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
   <data name="&gt;&gt;rereadButton.Name" xml:space="preserve">
     <value>rereadButton</value>
   </data>
-  <data name="trackListComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>941, 23</value>
-  </data>
-  <data name="trackListComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 5</value>
-  </data>
-  <data name="&gt;&gt;buttonPreview.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="controlsPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 274</value>
-  </data>
-  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="buttonUndo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="numberOfBackupsNumericUpDown.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 23</value>
-  </data>
-  <data name="searchFolderTextBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;buttonClose.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="controlsPanel.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="rememberColumnAsDefaultWidthCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="buttonClose.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="rereadButton.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;buttonOK.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>7, 15</value>
-  </data>
-  <data name="&gt;&gt;browseButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;rereadButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;rereadButton.Parent" xml:space="preserve">
     <value>optionsPanel</value>
   </data>
-  <data name="buttonPreview.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 7</value>
+  <data name="&gt;&gt;rereadButton.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
-  <data name="buttonUndo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 7</value>
+  <data name="buttonRestoreSelected.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>1130, 350</value>
+  <data name="buttonRestoreSelected.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 7</value>
   </data>
-  <data name="browseButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 23</value>
+  <data name="buttonRestoreSelected.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 4, 4, 7</value>
   </data>
-  <data name="buttonOK.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="buttonRestoreSelected.Size" type="System.Drawing.Size, System.Drawing">
     <value>124, 23</value>
   </data>
-  <data name="dataGridViewTextBoxColumn2.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
+  <data name="buttonRestoreSelected.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="buttonRestoreSelected.Text" xml:space="preserve">
+    <value>Restore selected</value>
+  </data>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="buttonRestoreSelected.ToolTip" xml:space="preserve">
+    <value>Copy selected backup cells to library column</value>
+  </data>
+  <data name="&gt;&gt;buttonRestoreSelected.Name" xml:space="preserve">
+    <value>buttonRestoreSelected</value>
+  </data>
+  <data name="&gt;&gt;buttonRestoreSelected.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonRestoreSelected.Parent" xml:space="preserve">
+    <value>controlsPanel</value>
+  </data>
+  <data name="&gt;&gt;buttonRestoreSelected.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="buttonSelectTags.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="buttonSelectTags.Location" type="System.Drawing.Point, System.Drawing">
+    <value>294, 7</value>
   </data>
   <data name="buttonSelectTags.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 7</value>
   </data>
-  <data name="&gt;&gt;optionsPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="buttonSelectTags.Size" type="System.Drawing.Size, System.Drawing">
+    <value>124, 23</value>
   </data>
-  <data name="rereadButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="&gt;&gt;browseButton.Parent" xml:space="preserve">
-    <value>optionsPanel</value>
-  </data>
-  <data name="&gt;&gt;buttonOK.Name" xml:space="preserve">
-    <value>buttonOK</value>
-  </data>
-  <data name="optionsPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>950, 60</value>
-  </data>
-  <data name="rememberColumnAsDefaultWidthCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="previewTable.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="optionsPanel.TabIndex" type="System.Int32, mscorlib">
+  <data name="buttonSelectTags.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="autoSelectTagsCheckBox.Text" xml:space="preserve">
+  <data name="buttonSelectTags.Text" xml:space="preserve">
+    <value>Select tags...</value>
+  </data>
+  <data name="buttonSelectTags.ToolTip" xml:space="preserve">
+    <value>Select displayed tags</value>
+  </data>
+  <data name="&gt;&gt;buttonSelectTags.Name" xml:space="preserve">
+    <value>buttonSelectTags</value>
+  </data>
+  <data name="&gt;&gt;buttonSelectTags.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonSelectTags.Parent" xml:space="preserve">
+    <value>controlsPanel</value>
+  </data>
+  <data name="&gt;&gt;buttonSelectTags.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="rememberColumnAsDefaultWidthCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rememberColumnAsDefaultWidthCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>426, 10</value>
+  </data>
+  <data name="rememberColumnAsDefaultWidthCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="rememberColumnAsDefaultWidthCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 19</value>
+  </data>
+  <data name="rememberColumnAsDefaultWidthCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="rememberColumnAsDefaultWidthCheckBox.Text" xml:space="preserve">
     <value> </value>
   </data>
-  <data name="buttonPreview.Text" xml:space="preserve">
-    <value>Preview</value>
+  <data name="rememberColumnAsDefaultWidthCheckBox.ToolTip" xml:space="preserve">
+    <value>Tick this option and change the width of any column to set this width as new default</value>
   </data>
-  <data name="&gt;&gt;searchFolderTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;rememberColumnAsDefaultWidthCheckBox.Name" xml:space="preserve">
+    <value>rememberColumnAsDefaultWidthCheckBox</value>
   </data>
-  <data name="backupsLabel.Text" xml:space="preserve">
-    <value>backups</value>
+  <data name="&gt;&gt;rememberColumnAsDefaultWidthCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="browseButton.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="&gt;&gt;rememberColumnAsDefaultWidthCheckBox.Parent" xml:space="preserve">
+    <value>controlsPanel</value>
   </data>
-  <data name="buttonClose.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;rememberColumnAsDefaultWidthCheckBox.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="buttonUndo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="buttonUndo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>137, 7</value>
+  </data>
+  <data name="buttonUndo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 7</value>
   </data>
   <data name="buttonUndo.Size" type="System.Drawing.Size, System.Drawing">
     <value>124, 23</value>
@@ -593,459 +644,340 @@
   <data name="buttonUndo.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=8.3.8983.26986, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;previewTable.Name" xml:space="preserve">
-    <value>previewTable</value>
-  </data>
-  <data name="&gt;&gt;placeholderLabel3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="buttonRestoreSelected.Size" type="System.Drawing.Size, System.Drawing">
-    <value>124, 23</value>
-  </data>
-  <data name="browseButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="rememberColumnAsDefaultWidthCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value>Tick this option and change the width of any column to set this width as new default</value>
-  </data>
-  <data name="autoSelectTagsCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="dataGridViewCellStyle4.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        Qk32AgAAAAAAADYAAAAoAAAADgAAABAAAAABABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEgoTGw8bGw8bGw8bGw8bGw8bGw8bG
-        w8bGw8bGw8bGw8bGw8bGw8YAAAAAAISChP///////////////////////////////////////////8bD
-        xgAAAAAAhIKE////////////////////////////////////////////xsPGAAAAAACEgoT/////////
-        ///////////////////////////////////Gw8YAAAAAAISChP//////////////////////////////
-        /////////////8bDxgAAAAAAhIKE////////////AAD/AAD/////////AAD/AAD/////////xsPGAAAA
-        AACEgoT///////////////8AAP8AAP8AAP8AAP/////////////Gw8YAAAAAAISChP//////////////
-        /////wAA/wAA/////////////////8bDxgAAAAAAhIKE////////////////AAD/AAD/AAD/AAD/////
-        ////////xsPGAAAAAACEgoT///////////8AAP8AAP////////8AAP8AAP/////////Gw8YAAAAAAISC
-        hP///////////////////////////////////////////8bDxgAAAAAAhIKE////////////////////
-        ////////////////////////xsPGAAAAAACEgoT/////////////////////////////////////////
-        ///Gw8YAAAAAAISChP///////////////////////////////////////////8bDxgAAAAAAhIKEhIKE
-        hIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEAAA=
-</value>
-  </data>
-  <data name="&gt;&gt;previewTable.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Library.Name" xml:space="preserve">
-    <value>Library</value>
-  </data>
-  <data name="Column1.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="buttonClose.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="buttonOK.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 7</value>
-  </data>
-  <data name="&gt;&gt;searchFolderTextBox.Parent" xml:space="preserve">
-    <value>optionsPanel</value>
-  </data>
-  <data name="&gt;&gt;controlsPanel.Name" xml:space="preserve">
-    <value>controlsPanel</value>
-  </data>
-  <data name="backupsLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="&gt;&gt;placeholderLabel3.Parent" xml:space="preserve">
-    <value>controlsPanel</value>
-  </data>
-  <data name="Column1.HeaderText" xml:space="preserve">
-    <value>2016-09-15 05:47</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;buttonRestoreSelected.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="dataGridViewTextBoxColumn1.Width" type="System.Int32, mscorlib">
-    <value>383</value>
-  </data>
-  <data name="ImageCellTemplate.HeaderText" xml:space="preserve">
-    <value>Image Cell Template</value>
-  </data>
-  <data name="rememberColumnAsDefaultWidthCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;rememberColumnAsDefaultWidthCheckBox.Parent" xml:space="preserve">
-    <value>controlsPanel</value>
-  </data>
-  <data name="Library.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>855, 7</value>
-  </data>
-  <data name="&gt;&gt;backupsLabel.Name" xml:space="preserve">
-    <value>backupsLabel</value>
-  </data>
-  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 15</value>
-  </data>
-  <data name="rememberColumnAsDefaultWidthCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>228, 15</value>
+  <data name="buttonUndo.Text" xml:space="preserve">
+    <value>Undo all changes</value>
   </data>
   <data name="buttonUndo.ToolTip" xml:space="preserve">
     <value>Restore all library cells from current tags</value>
   </data>
-  <data name="&gt;&gt;previewTable.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;buttonUndo.Name" xml:space="preserve">
+    <value>buttonUndo</value>
   </data>
-  <data name="&gt;&gt;buttonClose.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;buttonUndo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="browseButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label3.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="buttonClose.Text" xml:space="preserve">
-    <value>Close</value>
-  </data>
-  <data name="rememberColumnAsDefaultWidthCheckBox.ToolTip" xml:space="preserve">
-    <value>Tick this option and change the width of any column to set this width as new default</value>
-  </data>
-  <data name="buttonClose.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 5, 7</value>
-  </data>
-  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 8</value>
-  </data>
-  <data name="&gt;&gt;forLastLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="autoSelectTagsCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 19</value>
-  </data>
-  <data name="buttonPreview.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;rememberColumnAsDefaultWidthCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="buttonRestoreSelected.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="label3.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="numberOfBackupsNumericUpDown.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="forLastLabel.Text" xml:space="preserve">
-    <value>for last</value>
-  </data>
-  <data name="controlsPanel.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;buttonUndo.Parent" xml:space="preserve">
+    <value>controlsPanel</value>
   </data>
   <data name="&gt;&gt;buttonUndo.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="&gt;&gt;numberOfBackupsNumericUpDown.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="autoSelectTagsCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="&gt;&gt;autoSelectTagsCheckBox.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="autoSelectTagsCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="autoSelectTagsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>271, 10</value>
+  </data>
+  <data name="autoSelectTagsCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
-  <data name="&gt;&gt;searchFolderTextBox.Name" xml:space="preserve">
-    <value>searchFolderTextBox</value>
-  </data>
-  <data name="trackListComboBox.Items" xml:space="preserve">
-    <value>(Selected tracks)</value>
-  </data>
-  <data name="backupsLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>757, 37</value>
-  </data>
-  <data name="label4.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;label3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;autoSelectTagsCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;placeholderLabel3.Name" xml:space="preserve">
-    <value>placeholderLabel3</value>
-  </data>
-  <data name="&gt;&gt;backupsLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ImageCellTemplate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;optionsPanel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;buttonPreview.Parent" xml:space="preserve">
-    <value>controlsPanel</value>
-  </data>
-  <data name="previewTable.ColumnHeadersHeight" type="System.Int32, mscorlib">
-    <value>29</value>
-  </data>
-  <data name="&gt;&gt;toolTip1.Name" xml:space="preserve">
-    <value>toolTip1</value>
-  </data>
-  <data name="rereadButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>821, 33</value>
-  </data>
-  <data name="placeholderLabel3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="buttonUndo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>137, 7</value>
-  </data>
-  <data name="buttonRestoreSelected.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 4, 4, 7</value>
-  </data>
-  <data name="buttonSelectTags.Location" type="System.Drawing.Point, System.Drawing">
-    <value>294, 7</value>
-  </data>
-  <data name="buttonPreview.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="buttonUndo.Text" xml:space="preserve">
-    <value>Undo all changes</value>
-  </data>
-  <data name="previewTable.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 0, 5, 0</value>
-  </data>
-  <data name="&gt;&gt;buttonPreview.Name" xml:space="preserve">
-    <value>buttonPreview</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn2.Name" xml:space="preserve">
-    <value>dataGridViewTextBoxColumn2</value>
-  </data>
-  <data name="&gt;&gt;Column1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;buttonSelectTags.Name" xml:space="preserve">
-    <value>buttonSelectTags</value>
-  </data>
-  <data name="&gt;&gt;trackListComboBox.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;forLastLabel.Parent" xml:space="preserve">
-    <value>optionsPanel</value>
-  </data>
-  <data name="ImageCellTemplate.Width" type="System.Int32, mscorlib">
-    <value>200</value>
-  </data>
-  <data name="Library.Width" type="System.Int32, mscorlib">
-    <value>200</value>
-  </data>
-  <data name="&gt;&gt;buttonSelectTags.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1106, 214</value>
-  </data>
-  <data name="label4.Text" xml:space="preserve">
-    <value>Tag history for track</value>
-  </data>
-  <data name="&gt;&gt;browseButton.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;browseButton.Name" xml:space="preserve">
-    <value>browseButton</value>
-  </data>
-  <data name="label3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 0, 4, 0</value>
-  </data>
-  <data name="&gt;&gt;rememberColumnAsDefaultWidthCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="searchFolderTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 33</value>
-  </data>
-  <data name="forLastLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="backupsLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 15</value>
-  </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>154, 15</value>
-  </data>
-  <data name="ImageCellTemplate.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="controlsPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left, Right</value>
-  </data>
-  <data name="rememberColumnAsDefaultWidthCheckBox.Text" xml:space="preserve">
-    <value> </value>
-  </data>
-  <data name="buttonOK.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="autoSelectTagsCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 19</value>
   </data>
   <data name="autoSelectTagsCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;buttonSelectTags.Parent" xml:space="preserve">
+  <data name="autoSelectTagsCheckBox.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="autoSelectTagsCheckBox.ToolTip" xml:space="preserve">
+    <value>Automatically select displayed tags and don't show backups, which have no differences with current tags</value>
+  </data>
+  <data name="&gt;&gt;autoSelectTagsCheckBox.Name" xml:space="preserve">
+    <value>autoSelectTagsCheckBox</value>
+  </data>
+  <data name="&gt;&gt;autoSelectTagsCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;autoSelectTagsCheckBox.Parent" xml:space="preserve">
     <value>controlsPanel</value>
   </data>
-  <data name="buttonPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>723, 7</value>
-  </data>
-  <data name="&gt;&gt;rememberColumnAsDefaultWidthCheckBoxLabel.Parent" xml:space="preserve">
-    <value>controlsPanel</value>
-  </data>
-  <data name="controlsPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="&gt;&gt;controlsPanel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;placeholderLabel3.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;buttonRestoreSelected.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="autoSelectTagsCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;Library.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="rereadButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 5, 4</value>
-  </data>
-  <data name="&gt;&gt;trackListComboBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="optionsPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>166, 0</value>
-  </data>
-  <data name="forLastLabel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;rememberColumnAsDefaultWidthCheckBox.Name" xml:space="preserve">
-    <value>rememberColumnAsDefaultWidthCheckBox</value>
-  </data>
-  <data name="buttonClose.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="backupsLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="buttonOK.Text" xml:space="preserve">
-    <value>Proceed</value>
-  </data>
-  <data name="rememberColumnAsDefaultWidthCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>426, 10</value>
-  </data>
-  <data name="&gt;&gt;buttonUndo.Name" xml:space="preserve">
-    <value>buttonUndo</value>
+  <data name="&gt;&gt;autoSelectTagsCheckBox.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <data name="rememberColumnAsDefaultWidthCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="Column1.Width" type="System.Int32, mscorlib">
-    <value>200</value>
-  </data>
   <data name="rememberColumnAsDefaultWidthCheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="numberOfBackupsNumericUpDown.ToolTip" xml:space="preserve">
-    <value />
+  <data name="rememberColumnAsDefaultWidthCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>448, 11</value>
   </data>
-  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="rememberColumnAsDefaultWidthCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
-  <data name="previewTable.ToolTip" xml:space="preserve">
-    <value />
+  <data name="rememberColumnAsDefaultWidthCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>228, 15</value>
   </data>
-  <data name="optionsPanel.ToolTip" xml:space="preserve">
-    <value />
+  <data name="rememberColumnAsDefaultWidthCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
-  <data name="buttonOK.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="rememberColumnAsDefaultWidthCheckBoxLabel.Text" xml:space="preserve">
+    <value>Set changed column width as new default</value>
   </data>
-  <data name="backupsLabel.ToolTip" xml:space="preserve">
-    <value />
+  <data name="rememberColumnAsDefaultWidthCheckBoxLabel.ToolTip" xml:space="preserve">
+    <value>Tick this option and change the width of any column to set this width as new default</value>
   </data>
-  <data name="&gt;&gt;trackListComboBox.Name" xml:space="preserve">
-    <value>trackListComboBox</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="browseButton.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="optionsPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="searchFolderTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;controlsPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Column1.Name" xml:space="preserve">
-    <value>Column1</value>
-  </data>
-  <data name="dataGridViewTextBoxColumn3.HeaderText" xml:space="preserve">
-    <value>Original tag</value>
-  </data>
-  <data name="&gt;&gt;buttonClose.Parent" xml:space="preserve">
-    <value>controlsPanel</value>
-  </data>
-  <data name="rememberColumnAsDefaultWidthCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="buttonOK.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;trackListComboBox.Parent" xml:space="preserve">
-    <value>optionsPanel</value>
-  </data>
-  <data name="&gt;&gt;ImageCellTemplate.Name" xml:space="preserve">
-    <value>ImageCellTemplate</value>
-  </data>
-  <data name="rereadButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>124, 23</value>
-  </data>
-  <data name="buttonPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>124, 23</value>
-  </data>
-  <data name="&gt;&gt;rereadButton.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;rememberColumnAsDefaultWidthCheckBoxLabel.Name" xml:space="preserve">
+    <value>rememberColumnAsDefaultWidthCheckBoxLabel</value>
   </data>
   <data name="&gt;&gt;rememberColumnAsDefaultWidthCheckBoxLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;rememberColumnAsDefaultWidthCheckBoxLabel.Parent" xml:space="preserve">
+    <value>controlsPanel</value>
+  </data>
+  <data name="&gt;&gt;rememberColumnAsDefaultWidthCheckBoxLabel.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="label4.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 8</value>
+  </data>
+  <data name="label4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 0, 4, 0</value>
+  </data>
+  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 15</value>
+  </data>
+  <data name="label4.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Tag history for track</value>
+  </data>
   <data name="&gt;&gt;label4.Name" xml:space="preserve">
     <value>label4</value>
   </data>
-  <metadata name="Library.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="&gt;&gt;label4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="trackListComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="trackListComboBox.Items" xml:space="preserve">
+    <value>(Selected tracks)</value>
+  </data>
+  <data name="trackListComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 5</value>
+  </data>
+  <data name="trackListComboBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 5, 4</value>
+  </data>
+  <data name="trackListComboBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>939, 23</value>
+  </data>
+  <data name="trackListComboBox.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;trackListComboBox.Name" xml:space="preserve">
+    <value>trackListComboBox</value>
+  </data>
+  <data name="&gt;&gt;trackListComboBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;trackListComboBox.Parent" xml:space="preserve">
+    <value>optionsPanel</value>
+  </data>
+  <data name="&gt;&gt;trackListComboBox.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="optionsPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="optionsPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>166, 0</value>
+  </data>
+  <data name="optionsPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="optionsPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>948, 60</value>
+  </data>
+  <data name="optionsPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;optionsPanel.Name" xml:space="preserve">
+    <value>optionsPanel</value>
+  </data>
+  <data name="&gt;&gt;optionsPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;optionsPanel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;optionsPanel.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="controlsPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
+  <data name="buttonPreview.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="buttonPreview.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="buttonPreview.Location" type="System.Drawing.Point, System.Drawing">
+    <value>721, 7</value>
+  </data>
+  <data name="buttonPreview.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 7</value>
+  </data>
+  <data name="buttonPreview.Size" type="System.Drawing.Size, System.Drawing">
+    <value>124, 23</value>
+  </data>
+  <data name="buttonPreview.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="buttonPreview.Text" xml:space="preserve">
+    <value>Preview</value>
+  </data>
+  <data name="&gt;&gt;buttonPreview.Name" xml:space="preserve">
+    <value>buttonPreview</value>
+  </data>
+  <data name="&gt;&gt;buttonPreview.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonPreview.Parent" xml:space="preserve">
+    <value>controlsPanel</value>
+  </data>
+  <data name="&gt;&gt;buttonPreview.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="placeholderLabel3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
+  </data>
+  <data name="placeholderLabel3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="placeholderLabel3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>635, 11</value>
+  </data>
+  <data name="placeholderLabel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 15</value>
+  </data>
+  <data name="placeholderLabel3.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="placeholderLabel3.Text" xml:space="preserve">
+    <value>               PH</value>
+  </data>
+  <data name="&gt;&gt;placeholderLabel3.Name" xml:space="preserve">
+    <value>placeholderLabel3</value>
+  </data>
+  <data name="&gt;&gt;placeholderLabel3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;placeholderLabel3.Parent" xml:space="preserve">
+    <value>controlsPanel</value>
+  </data>
+  <data name="&gt;&gt;placeholderLabel3.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="controlsPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 272</value>
+  </data>
+  <data name="controlsPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="controlsPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1114, 37</value>
+  </data>
+  <data name="controlsPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;controlsPanel.Name" xml:space="preserve">
+    <value>controlsPanel</value>
+  </data>
+  <data name="&gt;&gt;controlsPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;controlsPanel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;controlsPanel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="Column1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="ImageCellTemplate.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>7, 15</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>1114, 311</value>
+  </data>
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>1130, 350</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Tag History</value>
+  </data>
+  <data name="&gt;&gt;Library.Name" xml:space="preserve">
+    <value>Library</value>
+  </data>
+  <data name="&gt;&gt;Library.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Column1.Name" xml:space="preserve">
+    <value>Column1</value>
+  </data>
+  <data name="&gt;&gt;Column1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ImageCellTemplate.Name" xml:space="preserve">
+    <value>ImageCellTemplate</value>
+  </data>
+  <data name="&gt;&gt;ImageCellTemplate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn1.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn1</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn2.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn2</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn3.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn3</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolTip1.Name" xml:space="preserve">
+    <value>toolTip1</value>
+  </data>
+  <data name="&gt;&gt;toolTip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>TagHistory</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=8.3.8991.27714, Culture=neutral, PublicKeyToken=null</value>
+  </data>
 </root>

@@ -171,11 +171,8 @@ namespace MusicBeePlugin
 
         internal static bool CopyTagsToClipboardUsingTagSet(int tagSet)
         {
-            if (!MbApiInterface.Library_QueryFilesEx("domain=SelectedFiles", out var files))
-                files = Array.Empty<string>();
-
-
-            if (files.Length == 0)
+            MbApiInterface.Library_QueryFilesEx("domain=SelectedFiles", out var files);
+            if (files == null || files.Length == 0)
             {
                 MessageBox.Show(MbForm, MsgNoTracksSelected, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;

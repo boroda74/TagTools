@@ -21,11 +21,6 @@ namespace MusicBeePlugin
         private readonly DataGridViewCellStyle changedCellStyle = new DataGridViewCellStyle(ChangedCellStyle);
         private readonly DataGridViewCellStyle dimmedCellStyle = new DataGridViewCellStyle(DimmedCellStyle);
 
-        private delegate void AddRowToTable(string[] row);
-        private delegate void ProcessRowOfTable(int row);
-        private AddRowToTable addRowToTable;
-        private ProcessRowOfTable processRowOfTable;
-
         private MetaDataType sourceTagId;
         private FilePropertyType sourcePropId;
         private MetaDataType destinationTagId;
@@ -34,16 +29,17 @@ namespace MusicBeePlugin
         private FilePropertyType[] sourcePropIds;
         private string[] sourceTagNames;
 
+        private bool smartOperation;
+
         private string[] files = Array.Empty<string>();
         private readonly List<string[]> tags = new List<string[]>();
         private readonly List<string[]> templates = new List<string[]>();
+        private List<bool> processedRowList = new List<bool>(); //Indices of processed tracks
 
         private bool ignoreSplitterMovedEvent = true;
         //private bool ignoreTemplateNameTextBoxTextChanged = false;
 
         private Preset customMSR;
-
-        private bool searchOnly;
 
         internal MultipleSearchAndReplace(Plugin plugin) : base(plugin)
         {
@@ -77,18 +73,15 @@ namespace MusicBeePlugin
             FillListByTagNames(sourceTagListCustom.Items, true, false, false);
             sourceTagListCustom.Text = SavedSettings.copySourceTagName;
 
-            FillListByTagNames(((DataGridViewComboBoxColumn)templateTable.Columns[0]).Items, true, false, false);
+            smartOperationCheckBox.Checked = SavedSettings.smartOperation;
 
 
             var headerCellStyle = new DataGridViewCellStyle(HeaderCellStyle);
 
+            templateTable.Columns[0].HeaderCell.Style = headerCellStyle;
             templateTable.Columns[1].HeaderCell.Style = headerCellStyle;
             templateTable.Columns[2].HeaderCell.Style = headerCellStyle;
             templateTable.Columns[3].HeaderCell.Style = headerCellStyle;
-            templateTable.Columns[4].HeaderCell.Style = headerCellStyle;
-
-            templateTable.Columns[1].Width = (int)Math.Round(templateTable.Columns[1].Width * hDpiFontScaling);
-            templateTable.Columns[2].Width = (int)Math.Round(templateTable.Columns[1].Width * hDpiFontScaling);
 
             var cbHeader = new DataGridViewCheckBoxHeaderCell();
             cbHeader.Style = headerCellStyle;
@@ -111,9 +104,6 @@ namespace MusicBeePlugin
             previewTable.Columns[1].HeaderCell.Style = headerCellStyle;
             previewTable.Columns[2].HeaderCell.Style = headerCellStyle;
             previewTable.Columns[3].HeaderCell.Style = headerCellStyle;
-
-            addRowToTable = previewTable_AddRowToTable;
-            processRowOfTable = previewTable_ProcessRowOfTable;
 
 
             customMSR = null;
@@ -141,33 +131,33 @@ namespace MusicBeePlugin
             button_GotFocus(AcceptButton, null); //Let's mark active button
         }
 
-        private void moveScaleButtonAdd()//******
+        private void moveScaleButtonAdd()
         {
             buttonAdd.Left = sourceTagList.Left;
         }
 
-        private void moveScaleButtonDelete()//******
+        private void moveScaleButtonDelete()
         {
             buttonDelete.Left = sourceTagList.Left + sourceTagList.Width - buttonDelete.Width;
         }
 
-        private void moveScaleAutoApplyCheckBox()//******
+        private void moveScaleAutoApplyCheckBox()
         {
             autoApplyCheckBox.Left = buttonSave.Left - autoApplyCheckBox.Width - autoApplyCheckBox.Margin.Right - buttonSave.Margin.Left;
         }
 
-        private void moveScaleTemplateNameTextBox()//******
+        private void moveScaleTemplateNameTextBox()
         {
             templateNameTextBox.Left = destinationTagList.Left;
-            templateNameTextBox.Width = autoApplyCheckBox.Left - templateNameTextBox.Left - templateNameTextBox.Margin.Right - autoApplyCheckBox.Margin.Left;
+            templateNameTextBox.Width = autoApplyCheckBox.Left - destinationTagList.Left - templateNameTextBox.Margin.Right - autoApplyCheckBox.Margin.Left;
         }
 
-        private void moveScalePresetLabel()//******
+        private void moveScalePresetLabel()
         {
             presetLabel.Left = templateNameTextBox.Left - presetLabel.Width - presetLabel.Margin.Right - templateNameTextBox.Margin.Left;
         }
 
-        private void moveScaleAutoApplyPictureBox()//******
+        private void moveScaleAutoApplyPictureBox()
         {
             autoApplyPictureBox.Left = buttonSave.Left - autoApplyPictureBox.Width - autoApplyPictureBox.Margin.Right - buttonSave.Margin.Left;
             autoApplyPictureBox.Top = buttonSave.Top + (int)Math.Round((buttonSave.Height - autoApplyPictureBox.Height) / 1.5f);
@@ -180,49 +170,117 @@ namespace MusicBeePlugin
 
         private void moveScaleLoadComboBoxCustom()
         {
-            loadComboBoxCustom.Left = buttonOK.Left;//*******
+            loadComboBoxCustom.Left = buttonOK.Left;
             loadComboBoxCustom.Width = buttonDeleteSaved.Left - loadComboBoxCustom.Left - loadComboBoxCustom.Margin.Right - buttonDeleteSaved.Margin.Left;
         }
 
-        private void previewTable_AddRowToTable(object[] row)
+        private void previewTable_ProcessRowsOfTable(List<bool> processedRowList)
         {
-            if (backgroundTaskIsWorking() && !previewIsStopped)
+            for (int i = 0; i < processedRowList.Count; i++)
             {
-                try
-                {
-                    previewTable.Rows.Add(row);
-                    previewTableFormatRow(previewTable.RowCount - 1);
-                }
-                catch
-                {
-                    //Generating preview is stopped. There is some .Net bug. Let's ignore.
-                }
+                previewTable.CurrentCell = previewTable.Rows[i].Cells[0];
+
+                if (processedRowList[i])
+                    previewTable.Rows[i].Cells[0].Value = null;
+
+                previewTableFormatRow(previewTable, i);
             }
-
-            if (previewTable.RowCount > 0)
-                previewTable.FirstDisplayedScrollingRowIndex = previewTable.RowCount - 1;
-
-            if ((previewTable.RowCount & 0x1f) == 0)
-                updateCustomScrollBars(previewTable);
         }
 
-        private void previewTable_ProcessRowOfTable(int rowIndex)
+        private void resetPreviewData()
         {
-            previewTable.Rows[rowIndex].Cells[0].Value = null;
-            previewTableFormatRow(rowIndex);
+            backgroundTaskIsStopping = false;
+            backgroundTaskIsStoppedOrCancelled = false;
+
+            tags.Clear();
+            templates.Clear();
+            previewTable.RowCount = 0;
+            (previewTable.Columns[0].HeaderCell as DataGridViewCheckBoxHeaderCell).setState(true);
+
+            updateCustomScrollBars(previewTable);
+            SetStatusBarText(string.Empty, false);
+
+            enableQueryingOrUpdatingButtons();
+            enableDisablePreviewOptionControls(true);
+
+            if (closeFormOnStopping && ignoreClosingForm && backgroundTaskIsScheduled)
+            {
+                ignoreClosingForm = false;
+                Close();
+            }
+
+            if (backgroundTaskIsScheduled)
+                ignoreClosingForm = false;
+        }
+
+        private void resetFormToGeneratedPreview()
+        {
+            previewTable.AllowUserToResizeColumns = true;
+            previewTable.AllowUserToResizeRows = true;
+            foreach (DataGridViewColumn column in previewTable.Columns)
+                column.SortMode = DataGridViewColumnSortMode.Automatic;
+
+
+
+            backgroundTaskIsScheduled = false;
+            backgroundTaskIsStopping = false;
+            backgroundTaskIsStoppedOrCancelled = false;
+
+            enableDisablePreviewOptionControls(true);
+            enableQueryingOrUpdatingButtons();
+
+            updateCustomScrollBars(previewTable);
+            SetResultingSbText();
+
+            if (closeFormOnStopping)
+            {
+                ignoreClosingForm = false;
+                Close();
+            }
+
+            ignoreClosingForm = false;
+        }
+
+        private bool applyingChangesStopped()
+        {
+            previewTable.AllowUserToResizeColumns = true;
+            previewTable.AllowUserToResizeRows = true;
+            foreach (DataGridViewColumn column in previewTable.Columns)
+                column.SortMode = DataGridViewColumnSortMode.Automatic;
+
+
+
+            backgroundTaskIsScheduled = false;
+            backgroundTaskIsStopping = false;
+            backgroundTaskIsStoppedOrCancelled = false;
+            closeFormOnStopping = false;
+
+            previewTable_ProcessRowsOfTable(processedRowList);
+
+            SetResultingSbText();
+
+            if (closeFormOnStopping)
+            {
+                ignoreClosingForm = false;
+                Close();
+            }
+
+            ignoreClosingForm = false;
+
+            return true;
         }
 
         private bool prepareBackgroundPreview()
         {
-            tags.Clear();
-            templates.Clear();
-            previewTable.RowCount = 0;
+            resetPreviewData();
 
-            updateCustomScrollBars(previewTable);
+            if (backgroundTaskIsStopping)
+                backgroundTaskIsStoppedOrCancelled = true;
 
-            if (previewIsGenerated)
+            if (previewIsGenerated && !backgroundTaskIsWorking())
             {
                 previewIsGenerated = false;
+                enableDisablePreviewOptionControls(true);
                 return true;
             }
 
@@ -231,7 +289,12 @@ namespace MusicBeePlugin
             if (backgroundTaskIsWorking())
                 return true;
 
-            searchOnly = searchOnlyCheckBox.Checked;
+
+            previewTable.AllowUserToResizeColumns = false;
+            previewTable.AllowUserToResizeRows = false;
+            foreach (DataGridViewColumn column in previewTable.Columns)
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+
 
             sourceTagId = 0;
             sourcePropId = 0;
@@ -240,48 +303,18 @@ namespace MusicBeePlugin
             sourceTagIds = null;
             sourcePropIds = null;
             sourceTagNames = null;
-            if (searchOnly)
-            {
-                sourceTagIds = new MetaDataType[templateTable.Rows.Count];
-                sourcePropIds = new FilePropertyType[templateTable.Rows.Count];
-                sourceTagNames = new string[templateTable.Rows.Count];
 
-                for (var i = 0; i < templateTable.Rows.Count; i++)
-                {
-                    sourceTagIds[i] = GetTagId(string.Empty + templateTable.Rows[i].Cells[0].Value);
-                    sourcePropIds[i] = GetPropId(string.Empty + templateTable.Rows[i].Cells[0].Value);
-                    sourceTagNames[i] = string.Empty + templateTable.Rows[i].Cells[0].Value;
-                }
-            }
-            else
-            {
-                sourceTagId = GetTagId(sourceTagListCustom.Text);
-                sourcePropId = GetPropId(sourceTagListCustom.Text);
-                destinationTagId = GetTagId(destinationTagListCustom.Text);
-            }
+            sourceTagId = GetTagId(sourceTagListCustom.Text);
+            sourcePropId = GetPropId(sourceTagListCustom.Text);
+            destinationTagId = GetTagId(destinationTagListCustom.Text);
+
+            smartOperation = smartOperationCheckBox.Checked;
 
 
-            files = null;
-            if (searchOnly)
-            {
-                if (!MbApiInterface.Library_QueryFilesEx("domain=DisplayedFiles", out files))
-                    files = Array.Empty<string>();
-            }
-            else
-            {
-                {
-                    if (!MbApiInterface.Library_QueryFilesEx("domain=SelectedFiles", out files))
-                        files = Array.Empty<string>();
-                }
-            }
+            MbApiInterface.Library_QueryFilesEx("domain=SelectedFiles", out files);
 
 
-            if (files.Length == 0 && searchOnly)
-            {
-                MessageBox.Show(this, MsgNoTracksDisplayed, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return false;
-            }
-            else if (files.Length == 0 && !searchOnly)
+            if (files == null || files.Length == 0)
             {
                 MessageBox.Show(this, MsgNoTracksSelected, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
@@ -290,13 +323,12 @@ namespace MusicBeePlugin
             {
                 for (var i = 0; i < templateTable.Rows.Count; i++)
                 {
-                    var template = new string[5];
+                    var template = new string[4];
 
                     template[0] = string.Empty + templateTable.Rows[i].Cells[0].Value;
                     template[1] = string.Empty + templateTable.Rows[i].Cells[1].Value;
                     template[2] = string.Empty + templateTable.Rows[i].Cells[2].Value;
                     template[3] = string.Empty + templateTable.Rows[i].Cells[3].Value;
-                    template[4] = string.Empty + templateTable.Rows[i].Cells[4].Value;
 
                     templates.Add(template);
                 }
@@ -307,24 +339,35 @@ namespace MusicBeePlugin
 
         private bool prepareBackgroundTask()
         {
+            if (backgroundTaskIsWorking())
+                return false;
+
             if (previewTable.Rows.Count == 0)
             {
                 return prepareBackgroundPreview();
             }
             else
             {
+                previewTable.AllowUserToResizeColumns = false;
+                previewTable.AllowUserToResizeRows = false;
+                foreach (DataGridViewColumn column in previewTable.Columns)
+                    column.SortMode = DataGridViewColumnSortMode.NotSortable;
+
+
                 tags.Clear();
 
                 for (var fileCounter = 0; fileCounter < previewTable.Rows.Count; fileCounter++)
                 {
                     var tag = new string[5];
 
-                    tag[0] = (string)previewTable.Rows[fileCounter].Cells[0].Value;
-                    tag[3] = (string)previewTable.Rows[fileCounter].Cells[3].Value;
-                    tag[4] = (string)previewTable.Rows[fileCounter].Cells[4].Value;
+                    tag[0] = previewTable.Rows[fileCounter].Cells[0].Value as string;
+                    tag[3] = previewTable.Rows[fileCounter].Cells[3].Value as string;
+                    tag[4] = previewTable.Rows[fileCounter].Cells[4].Value as string;
 
                     tags.Add(tag);
                 }
+
+                ignoreClosingForm = true;
 
                 return true;
             }
@@ -332,17 +375,21 @@ namespace MusicBeePlugin
 
         private void previewChanges()
         {
-            var stripNotChangedLines = SavedSettings.dontIncludeInPreviewLinesWithoutChangedTags;
+            previewIsGenerated = true;
 
             string sourceTagValue = null;
-            // ReSharper disable once RedundantAssignment
-            string[] row = { "Checked", "Track", "oldTag", "newTag", "File" };
+            var stripNotChangedLines = SavedSettings.dontIncludeInPreviewLinesWithoutChangedTags;
 
             for (var fileCounter = 0; fileCounter < files.Length; fileCounter++)
             {
-                if (backgroundTaskIsCanceled)
+                if (checkStoppingStatus())
+                {
+                    Invoke(new Action(() => { stopButtonClickedMethod(prepareBackgroundPreview); }));
                     return;
+                }
 
+
+                string[] row = { "Checked", "Track", "oldTag", "newTag", "File" };
                 var currentFile = files[fileCounter];
 
                 SetStatusBarTextForFileOperations(MsrSbText, true, fileCounter, files.Length, currentFile);
@@ -350,193 +397,99 @@ namespace MusicBeePlugin
                 var track = GetTrackRepresentation(currentFile);
                 row = new string[5];
 
-                if (searchOnly)
-                {
-                    var tagValues = new List<string>();
-                    var tagNames = new List<string>();
-
-                    var areChanges = true;
-                    var i = 0;
-                    while (i < sourceTagIds.Length && areChanges)
-                    {
-                        if (sourcePropIds[i] == 0)
-                        {
-                            sourceTagValue = GetFileTag(currentFile, sourceTagIds[i]);
-                        }
-                        else
-                        {
-                            sourceTagValue = MbApiInterface.Library_GetFileProperty(currentFile, sourcePropIds[i]);
-                        }
-                        var sourceTagName = sourceTagNames[i];
-
-                        try
-                        {
-                            var template1 = templates[i][1];
-                            var template2 = templates[i][2];
-                            var template3 = templates[i][3];
-
-                            string newSourceTagValue;
-                            if (template1 == "T" && template2 == "T") //Regex/case-sensitive
-                            {
-                                newSourceTagValue = Replace(currentFile, sourceTagValue, template3, string.Empty, false, out _);
-                            }
-                            else if (template1 == "T" && template2 == "F") //Regex/case-insensitive
-                            {
-                                newSourceTagValue = Replace(currentFile, sourceTagValue, template3, string.Empty, true, out _);
-                            }
-                            else if (template1 == "F" && template2 == "T") //Case-sensitive
-                            {
-                                template3 = Regex.Escape(template3);
-                                newSourceTagValue = Replace(currentFile, sourceTagValue, template3, string.Empty, false, out _);
-                            }
-                            else //Case-insensitive
-                            {
-                                template3 = Regex.Escape(template3);
-                                newSourceTagValue = Replace(currentFile, sourceTagValue, template3, string.Empty, true, out _);
-                            }
-
-                            if (sourceTagValue == newSourceTagValue)
-                            {
-                                areChanges = false;
-                            }
-                            else
-                            {
-                                tagValues.Add(sourceTagValue);
-                                tagNames.Add(sourceTagName);
-                            }
-                        }
-                        catch
-                        {
-                            sourceTagValue = CtlAsrSyntaxError;
-                            tagValues.Add(sourceTagValue);
-                            tagNames.Add(sourceTagName);
-                        }
-
-                        i++;
-                    }
-
-                    if (areChanges)
-                    {
-                        if (tagValues.Count == 1)
-                        {
-                            row[0] = "T";
-                            row[1] = track;
-                            row[2] = sourceTagValue;
-                            row[3] = string.Empty;
-                            row[4] = currentFile;
-
-                            Invoke(addRowToTable, new object[] { row });
-                            tags.Add(row);
-                        }
-                        else
-                        {
-                            row[0] = "T";
-                            row[1] = track;
-                            row[2] = string.Empty;
-                            row[3] = string.Empty;
-                            row[4] = currentFile;
-
-                            Invoke(addRowToTable, new object[] { row });
-                            tags.Add(row);
-
-                            for (var j = 0; j < tagValues.Count; j++)
-                            {
-                                {
-                                    row[0] = null;
-                                    row[1] = "            " + tagNames[j];
-                                    row[2] = tagValues[j];
-                                    row[3] = string.Empty;
-                                    row[4] = string.Empty;
-
-                                    Invoke(addRowToTable, new object[] { row });
-                                    tags.Add(row);
-                                }
-                            }
-                        }
-                    }
-                }
+                if (sourcePropId == 0)
+                    sourceTagValue = GetFileTag(currentFile, sourceTagId);
                 else
+                    sourceTagValue = MbApiInterface.Library_GetFileProperty(currentFile, sourcePropId);
+
+                var destinationTagValue = GetFileTag(currentFile, destinationTagId);
+                var swappedTags = SwapTags(sourceTagValue, destinationTagValue, sourceTagId, destinationTagId, smartOperation);
+
+
+                string newDestinationTagValue1 = null;
+                string newDestinationTagValue2 = swappedTags.newSourceNormalizedTagValue;
+
+                foreach (var template in templates)
                 {
-                    if (sourcePropId == 0)
+                    try
                     {
-                        sourceTagValue = GetFileTag(currentFile, sourceTagId);
-                    }
-                    else
-                    {
-                        sourceTagValue = MbApiInterface.Library_GetFileProperty(currentFile, sourcePropId);
-                    }
+                        var template1 = template[0];
+                        var template2 = template[1];
+                        var template3 = template[2];
+                        var template4 = template[3];
 
-                    var destinationTagValue = GetFileTag(currentFile, destinationTagId);
-
-                    string newDestinationTagValue1 = null;
-                    var newDestinationTagValue2 = sourceTagValue;
-                    foreach (var template in templates)
-                    {
-                        try
+                        if (template1 == "T" && template2 == "T") //Regex/case-sensitive
                         {
-                            var template1 = template[1];
-                            var template2 = template[2];
-                            var template3 = template[3];
-                            var template4 = template[4];
-
-                            if (template1 == "T" && template2 == "T") //Regex/case-sensitive
-                            {
-                                newDestinationTagValue1 = Replace(currentFile, newDestinationTagValue2, template3, template4, false, out _);
-                            }
-                            else if (template1 == "T" && template2 == "F") //Regex/case-insensitive
-                            {
-                                newDestinationTagValue1 = Replace(currentFile, newDestinationTagValue2, template3, template4, true, out _);
-                            }
-                            else if (template1 == "F" && template2 == "T") //Case-sensitive
-                            {
-                                template3 = Regex.Escape(template[3]);
-                                newDestinationTagValue1 = Replace(currentFile, newDestinationTagValue2, template3, template4, false, out _);
-                            }
-                            else //Case-insensitive
-                            {
-                                template3 = Regex.Escape(template[3]);
-                                newDestinationTagValue1 = Replace(currentFile, newDestinationTagValue2, template3, template4, true, out _);
-                            }
-
-                            newDestinationTagValue2 = newDestinationTagValue1;
+                            newDestinationTagValue1 = Replace(currentFile, newDestinationTagValue2, template3, template4, false, out _);
                         }
-                        catch
+                        else if (template1 == "T" && template2 == "F") //Regex/case-insensitive
                         {
-                            newDestinationTagValue1 = CtlAsrSyntaxError;
-                            break;
+                            newDestinationTagValue1 = Replace(currentFile, newDestinationTagValue2, template3, template4, true, out _);
                         }
+                        else if (template1 == "F" && template2 == "T") //Case-sensitive
+                        {
+                            template3 = Regex.Escape(template3);
+                            newDestinationTagValue1 = Replace(currentFile, newDestinationTagValue2, template3, template4, false, out _);
+                        }
+                        else //Case-insensitive
+                        {
+                            template3 = Regex.Escape(template3);
+                            newDestinationTagValue1 = Replace(currentFile, newDestinationTagValue2, template3, template4, true, out _);
+                        }
+
+                        newDestinationTagValue2 = newDestinationTagValue1;
                     }
-
-                    if (destinationTagValue == newDestinationTagValue1 && stripNotChangedLines)
-                        continue;
-
-
-                    row[0] = (destinationTagValue == newDestinationTagValue1 ? "F" : "T");
-                    row[1] = track;
-                    row[2] = destinationTagValue;
-                    row[3] = newDestinationTagValue1;
-                    row[4] = currentFile;
-
-                    Invoke(addRowToTable, new object[] { row });
-                    tags.Add(row);
+                    catch
+                    {
+                        newDestinationTagValue1 = CtlAsrSyntaxError;
+                        break;
+                    }
                 }
 
-                previewIsGenerated = true;
+                string isChecked;
+                if (swappedTags.destinationNormalizedTagValue == newDestinationTagValue1 && stripNotChangedLines)
+                    continue;
+                else if (swappedTags.destinationNormalizedTagValue == newDestinationTagValue1)
+                    isChecked = "F";
+                else
+                    isChecked = "T";
+
+
+                row[0] = isChecked;
+                row[1] = track;
+                row[2] = swappedTags.destinationNormalizedTagValue;
+                row[3] = newDestinationTagValue1;
+                row[4] = currentFile;
+
+                tags.Add(row);
+
+                int rowCountToFormat1 = 0;
+                Invoke(new Action(() => { rowCountToFormat1 = AddRowsToTable(this, previewTable, tags, false, true); }));
+                Invoke(new Action(() => { FormatChangedTags(this, previewTable, rowCountToFormat1, previewTableFormatRow); }));
             }
 
-            Invoke(new Action(() => { updateCustomScrollBars(previewTable); }));
-            SetResultingSbText();
+            int rowCountToFormat3 = 0;
+            Invoke(new Action(() => { rowCountToFormat3 = AddRowsToTable(this, previewTable, tags, true, true); }));
+            Invoke(new Action(() => { FormatChangedTags(this, previewTable, rowCountToFormat3, previewTableFormatRow); checkStoppedStatus(); resetFormToGeneratedPreview(); }));
         }
 
         private void applyChanges()
         {
             if (tags.Count == 0)
-                previewChanges();
+                throw new Exception("Something went wrong! Empty 'tags' local variable (must be filled on generating preview.)");
+
+            processedRowList.Clear(); //Indices of processed tracks
+            Invoke(new Action(() => { previewTable.CurrentCell = previewTable.Rows[0].Cells[0]; }));
+            Invoke(new Action(() => { previewTable.FirstDisplayedCell = previewTable.CurrentCell; }));
 
             for (var i = 0; i < tags.Count; i++)
             {
-                if (backgroundTaskIsCanceled || !backgroundTaskIsScheduled)
+                if (checkStoppingStatus())
+                {
+                    Invoke(new Action(() => { stopButtonClickedMethod(applyingChangesStopped); }));
                     return;
+                }
+
 
                 var isChecked = tags[i][0];
 
@@ -549,18 +502,22 @@ namespace MusicBeePlugin
                     {
                         tags[i][0] = string.Empty;
 
-                        Invoke(processRowOfTable, new object[] { i });
-
+                        processedRowList.Add(true);
                         SetStatusBarTextForFileOperations(MsrSbText, false, i, tags.Count, currentFile);
 
                         SetFileTag(currentFile, destinationTagId, newTag);
                         CommitTagsToFile(currentFile);
                     }
                 }
+                else
+                {
+                    processedRowList.Add(false);
+                }
             }
 
-            RefreshPanels(true);
+            Invoke(new Action(() => { applyingChangesStopped(); }));
 
+            RefreshPanels(true);
             SetResultingSbText();
         }
 
@@ -568,38 +525,21 @@ namespace MusicBeePlugin
         {
             SavedSettings.copySourceTagName = sourceTagListCustom.Text;
             SavedSettings.copyDestinationTagName = destinationTagListCustom.Text;
+            SavedSettings.smartOperation = smartOperationCheckBox.Checked;
 
             TagToolsPlugin.SaveSettings();
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            if (searchOnlyCheckBox.Checked)
-            {
-                //***
-            }
-            else
-            {
-                saveSettings();
-                if (prepareBackgroundTask())
-                    switchOperation(applyChanges, sender as Button, buttonOK, buttonPreview, buttonClose, true, null);
-            }
+            saveSettings();
+            if (prepareBackgroundTask())
+                switchOperation(applyChanges, sender as Button, buttonOK, buttonPreview, buttonClose, true, null);
         }
 
         private void buttonPreview_Click(object sender, EventArgs e)
         {
-            if (searchOnlyCheckBox.Checked)
-            {
-                clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewChanges, sender as Button, buttonOK, buttonClose, 2);
-            }
-            else
-            {
-                clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewChanges, sender as Button, buttonOK, buttonClose);
-                enableQueryingOrUpdatingButtons();
-
-                if (previewTable.RowCount > 0)
-                    previewTable.FirstDisplayedScrollingRowIndex = previewTable.RowCount - 1;
-            }
+            ignoreClosingForm = clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewChanges, buttonPreview, buttonOK, buttonClose);
         }
 
         private void buttonClose_Click(object sender, EventArgs e)
@@ -622,7 +562,7 @@ namespace MusicBeePlugin
         {
             if (e.ColumnIndex == 0)
             {
-                var isChecked = (string)previewTable.Rows[e.RowIndex].Cells[0].Value;
+                var isChecked = previewTable.Rows[e.RowIndex].Cells[0].Value as string;
 
                 if (isChecked == "T")
                 {
@@ -633,45 +573,31 @@ namespace MusicBeePlugin
                     previewTable.Rows[e.RowIndex].Cells[0].Value = "T";
                 }
 
-                previewTableFormatRow(e.RowIndex);
+                previewTableFormatRow(previewTable, e.RowIndex);
             }
         }
 
         internal override void enableDisablePreviewOptionControls(bool enable, bool dontChangeDisabled = false)
         {
             var initiallyEnabled = enable;
-            enable = (enable && previewTable.Rows.Count == 0) || searchOnlyCheckBox.Checked;
+            enable = (enable && previewTable.Rows.Count == 0);
 
-            searchOnlyCheckBox.Enable(initiallyEnabled && !backgroundTaskIsWorking());
-
-            templateNameTextBox.Enable(enable && !searchOnlyCheckBox.Checked);
+            templateNameTextBox.Enable(enable);
             //ignoreTemplateNameTextBoxTextChanged = true;
             templateNameTextBox_TextChanged(null, null);
             //ignoreTemplateNameTextBoxTextChanged = false;
 
-            sourceTagListCustom.Enable(enable && !searchOnlyCheckBox.Checked);
-            destinationTagListCustom.Enable(enable && !autoDestinationTagCheckBox.Checked && !searchOnlyCheckBox.Checked);
-            fromTagLabel.Enable(enable && !searchOnlyCheckBox.Checked);
-            toTagLabel.Enable(enable && !searchOnlyCheckBox.Checked);
-            presetLabel.Enable(enable && !searchOnlyCheckBox.Checked);
-            buttonSave.Enable(enable && !searchOnlyCheckBox.Checked);
-            loadComboBoxCustom.Enable(enable && !searchOnlyCheckBox.Checked);
+            sourceTagListCustom.Enable(enable);
+            destinationTagListCustom.Enable(enable && !autoDestinationTagCheckBox.Checked);
+            fromTagLabel.Enable(enable);
+            toTagLabel.Enable(enable);
+            presetLabel.Enable(enable);
+            buttonSave.Enable(enable);
+            loadComboBoxCustom.Enable(enable);
             buttonAdd.Enable(enable);
             templateTable.Enable(enable);
-            autoDestinationTagCheckBox.Enable(enable && !searchOnlyCheckBox.Checked);
-
-            ReplaceWith.Visible = !searchOnlyCheckBox.Checked;
-            NewTag.Visible = !searchOnlyCheckBox.Checked;
-            if (searchOnlyCheckBox.Checked)
-            {
-                OriginalTag.HeaderText = OriginalTagHeaderTextTagValue;
-                SearchTag.Visible = true;
-            }
-            else
-            {
-                OriginalTag.HeaderText = OriginalTagHeaderText;
-                SearchTag.Visible = false;
-            }
+            autoDestinationTagCheckBox.Enable(enable);
+            smartOperationCheckBox.Enable(enable);
 
             if (templateTable.Rows.Count == 1)
             {
@@ -681,31 +607,19 @@ namespace MusicBeePlugin
             }
             else
             {
-                buttonUp.Enable(enable && !searchOnlyCheckBox.Checked);
-                buttonDown.Enable(enable && !searchOnlyCheckBox.Checked);
+                buttonUp.Enable(enable);
+                buttonDown.Enable(enable);
                 buttonDelete.Enable(enable);
             }
 
-            if (searchOnlyCheckBox.Checked)
+            if (initiallyEnabled)
             {
-                buttonOK.Enable(initiallyEnabled && (previewTable.Rows.Count > 0));
-                buttonOK.Text = SelectFoundButtonName;
-                if (!backgroundTaskIsWorking())
-                {
-                    buttonPreview.Text = FindButtonName;
-                }
-            }
-            else if (initiallyEnabled)
-            {
-                buttonOK.Text = OKButtonName;
+                buttonOK.Text = ButtonOKName;
+
                 if (previewTable.Rows.Count == 0)
-                {
-                    buttonPreview.Text = PreviewButtonName;
-                }
+                    buttonPreview.Text = ButtonPreviewName;
                 else
-                {
-                    buttonPreview.Text = ClearButtonName;
-                }
+                    buttonPreview.Text = ButtonClearName;
             }
         }
 
@@ -722,7 +636,7 @@ namespace MusicBeePlugin
 
         internal override void enableQueryingOrUpdatingButtons()
         {
-            buttonOK.Enable((previewIsGenerated && !previewIsStopped) || SavedSettings.allowCommandExecutionWithoutPreview);
+            buttonOK.Enable((previewIsGenerated || SavedSettings.allowCommandExecutionWithoutPreview) && !backgroundTaskIsStopping && (!backgroundTaskIsWorking() || backgroundTaskIsNativeMB));
             buttonPreview.Enable(true);
         }
 
@@ -732,35 +646,35 @@ namespace MusicBeePlugin
             buttonPreview.Enable(false);
         }
 
-        private void previewTableFormatRow(int rowIndex)
+        private void previewTableFormatRow(DataGridView dataGridView, int rowIndex)
         {
             if (SavedSettings.dontHighlightChangedTags)
                 return;
 
-            if ((string)previewTable.Rows[rowIndex].Cells[0].Value != "T")
+            if ((string)dataGridView.Rows[rowIndex].Cells[0].Value != "T")
             {
-                for (var columnIndex = 1; columnIndex < previewTable.ColumnCount; columnIndex++)
+                for (var columnIndex = 1; columnIndex < dataGridView.ColumnCount; columnIndex++)
                 {
-                    if (previewTable.Columns[columnIndex].Visible)
-                        previewTable.Rows[rowIndex].Cells[columnIndex].Style = dimmedCellStyle;
+                    if (dataGridView.Columns[columnIndex].Visible)
+                        dataGridView.Rows[rowIndex].Cells[columnIndex].Style = dimmedCellStyle;
                 }
 
                 return;
             }
 
 
-            for (var columnIndex = 1; columnIndex < previewTable.ColumnCount; columnIndex++)
+            for (var columnIndex = 1; columnIndex < dataGridView.ColumnCount; columnIndex++)
             {
                 if (columnIndex == 3)
                 {
-                    if ((string)previewTable.Rows[rowIndex].Cells[3].Value == (string)previewTable.Rows[rowIndex].Cells[2].Value)
-                        previewTable.Rows[rowIndex].Cells[3].Style = unchangedCellStyle;
+                    if ((string)dataGridView.Rows[rowIndex].Cells[3].Value == (string)dataGridView.Rows[rowIndex].Cells[2].Value)
+                        dataGridView.Rows[rowIndex].Cells[3].Style = unchangedCellStyle;
                     else
-                        previewTable.Rows[rowIndex].Cells[3].Style = changedCellStyle;
+                        dataGridView.Rows[rowIndex].Cells[3].Style = changedCellStyle;
                 }
                 else
                 {
-                    previewTable.Rows[rowIndex].Cells[columnIndex].Style = unchangedCellStyle;
+                    dataGridView.Rows[rowIndex].Cells[columnIndex].Style = unchangedCellStyle;
                 }
             }
         }
@@ -858,7 +772,8 @@ namespace MusicBeePlugin
             var query = string.Empty;
             for (var i = 0; i < templateTable.Rows.Count; i++)
             {
-                query += EncodeSearchReplaceTemplate(string.Empty + templateTable.Rows[i].Cells[3].Value, string.Empty + templateTable.Rows[i].Cells[4].Value, (string)templateTable.Rows[i].Cells[1].Value == "T", (string)templateTable.Rows[i].Cells[2].Value == "T") + "|";
+                query += EncodeSearchReplaceTemplate(string.Empty + templateTable.Rows[i].Cells[2].Value, string.Empty + templateTable.Rows[i].Cells[3].Value, 
+                    (string)templateTable.Rows[i].Cells[0].Value == "T", (string)templateTable.Rows[i].Cells[1].Value == "T") + "|";
             }
 
             query = query.Remove(query.Length - 1);
@@ -942,25 +857,17 @@ namespace MusicBeePlugin
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             templateTable.Rows.Add();
-            if (templateTable.Rows.Count == 1)
-            {
-                templateTable.Rows[templateTable.Rows.Count - 1].Cells[0].Value = SavedSettings.copySourceTagName;
-            }
-            else
-            {
-                templateTable.Rows[templateTable.Rows.Count - 1].Cells[0].Value = templateTable.Rows[templateTable.Rows.Count - 2].Cells[0].Value;
-            }
-            templateTable.Rows[templateTable.Rows.Count - 1].Cells[5].Value = templateTable.Rows.Count.ToString("D8");
+            templateTable.Rows[templateTable.Rows.Count - 1].Cells[4].Value = templateTable.Rows.Count.ToString("D8");
+            templateTable.Rows[templateTable.Rows.Count - 1].Cells[0].Value = "F";
             templateTable.Rows[templateTable.Rows.Count - 1].Cells[1].Value = "F";
-            templateTable.Rows[templateTable.Rows.Count - 1].Cells[2].Value = "F";
             templateTable.Rows[templateTable.Rows.Count - 1].Selected = true;
 
 
             if (templateTable.Rows.Count > 1)
             {
                 buttonDelete.Enable(true);
-                buttonUp.Enable(!searchOnlyCheckBox.Checked);
-                buttonDown.Enable(!searchOnlyCheckBox.Checked);
+                buttonUp.Enable(true);
+                buttonDown.Enable(true);
             }
         }
 
@@ -976,7 +883,7 @@ namespace MusicBeePlugin
 
                 for (var i = 0; i < templateTable.Rows.Count; i++)
                 {
-                    templateTable.Rows[i].Cells[5].Value = i.ToString("D8");
+                    templateTable.Rows[i].Cells[4].Value = i.ToString("D8");
                 }
 
                 if (templateTable.Rows.Count < 2)
@@ -994,9 +901,9 @@ namespace MusicBeePlugin
 
             if (index > 0)
             {
-                templateTable.Rows[index].Cells[5].Value = (index - 1).ToString("D8");
-                templateTable.Rows[index - 1].Cells[5].Value = index.ToString("D8");
-                templateTable.Sort(templateTable.Columns[5], System.ComponentModel.ListSortDirection.Ascending);
+                templateTable.Rows[index].Cells[4].Value = (index - 1).ToString("D8");
+                templateTable.Rows[index - 1].Cells[4].Value = index.ToString("D8");
+                templateTable.Sort(templateTable.Columns[4], System.ComponentModel.ListSortDirection.Ascending);
             }
         }
 
@@ -1006,9 +913,9 @@ namespace MusicBeePlugin
 
             if (index < templateTable.Rows.Count - 1)
             {
-                templateTable.Rows[index].Cells[5].Value = (index + 1).ToString("D8");
-                templateTable.Rows[index + 1].Cells[5].Value = index.ToString("D8");
-                templateTable.Sort(templateTable.Columns[5], System.ComponentModel.ListSortDirection.Ascending);
+                templateTable.Rows[index].Cells[4].Value = (index + 1).ToString("D8");
+                templateTable.Rows[index + 1].Cells[4].Value = index.ToString("D8");
+                templateTable.Sort(templateTable.Columns[4], System.ComponentModel.ListSortDirection.Ascending);
             }
         }
 
@@ -1051,36 +958,36 @@ namespace MusicBeePlugin
                 {
                     pair = query.Substring(2).Split('/');
 
+                    templateTable.Rows[templateTable.Rows.Count - 1].Cells[0].Value = "T";
                     templateTable.Rows[templateTable.Rows.Count - 1].Cells[1].Value = "T";
-                    templateTable.Rows[templateTable.Rows.Count - 1].Cells[2].Value = "T";
                 }
                 else if (query.Length > 0 && query[0] == '*') //Case-insensitive/regexes
                 {
                     pair = query.Substring(1).Split('/');
 
-                    templateTable.Rows[templateTable.Rows.Count - 1].Cells[1].Value = "T";
-                    templateTable.Rows[templateTable.Rows.Count - 1].Cells[2].Value = "F";
+                    templateTable.Rows[templateTable.Rows.Count - 1].Cells[0].Value = "T";
+                    templateTable.Rows[templateTable.Rows.Count - 1].Cells[1].Value = "F";
                 }
                 else if (query.Length > 0 && query[0] == '#') //Case-sensitive
                 {
                     pair = query.Substring(1).Split('/');
 
-                    templateTable.Rows[templateTable.Rows.Count - 1].Cells[1].Value = "F";
-                    templateTable.Rows[templateTable.Rows.Count - 1].Cells[2].Value = "T";
+                    templateTable.Rows[templateTable.Rows.Count - 1].Cells[0].Value = "F";
+                    templateTable.Rows[templateTable.Rows.Count - 1].Cells[1].Value = "T";
                 }
                 else //Case-insensitive
                 {
                     pair = query.Split('/');
 
+                    templateTable.Rows[templateTable.Rows.Count - 1].Cells[0].Value = "F";
                     templateTable.Rows[templateTable.Rows.Count - 1].Cells[1].Value = "F";
-                    templateTable.Rows[templateTable.Rows.Count - 1].Cells[2].Value = "F";
                 }
 
                 pair[0] = pair[0].Replace(@"\#", "#").Replace(@"\L", "/").Replace(@"\V", "|").Replace(@"\X", "*").Replace(@"\\", @"\");
                 pair[1] = pair[1].Replace(@"\#", "#").Replace(@"\L", "/").Replace(@"\V", "|").Replace(@"\X", "*").Replace(@"\\", @"\").Replace(@"\T", @"$");
 
-                templateTable.Rows[templateTable.Rows.Count - 1].Cells[3].Value = pair[0];
-                templateTable.Rows[templateTable.Rows.Count - 1].Cells[4].Value = pair[1];
+                templateTable.Rows[templateTable.Rows.Count - 1].Cells[2].Value = pair[0];
+                templateTable.Rows[templateTable.Rows.Count - 1].Cells[3].Value = pair[1];
             }
         }
 
@@ -1099,7 +1006,7 @@ namespace MusicBeePlugin
             }
             else
             {
-                destinationTagListCustom.Enable(!searchOnlyCheckBox.Checked);
+                destinationTagListCustom.Enable(true);
             }
         }
 
@@ -1116,7 +1023,7 @@ namespace MusicBeePlugin
         private void SearchOnlyCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             enableDisablePreviewOptionControls(true);
-            clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewChanges, buttonPreview, buttonOK, buttonClose, 1);
+            clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewChanges, buttonPreview, buttonOK, buttonClose, true);
         }
 
         private void buttonDeleteSaved_Click(object sender, EventArgs e)
@@ -1155,74 +1062,6 @@ namespace MusicBeePlugin
             TagToolsPlugin.SaveSettings();
         }
 
-        private void MultipleSearchAndReplace_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            saveWindowLayout(templateTable.Columns[0].Width, templateTable.Columns[3].Width, templateTable.Columns[4].Width,
-                0,
-                previewTable.Columns[1].Width, previewTable.Columns[2].Width, previewTable.Columns[3].Width);
-        }
-
-        private void MultipleSearchAndReplace_Load(object sender, EventArgs e)
-        {
-            var value = loadWindowLayout();
-
-            if (value.Item1 != 0)
-            {
-                templateTable.Columns[0].Width = (int)Math.Round(value.Item1 * hDpiFontScaling);
-                templateTable.Columns[3].Width = (int)Math.Round(value.Item2 * hDpiFontScaling);
-                templateTable.Columns[4].Width = (int)Math.Round(value.Item3 * hDpiFontScaling);
-
-                previewTable.Columns[1].Width = (int)Math.Round(value.Item5 * hDpiFontScaling);
-                previewTable.Columns[2].Width = (int)Math.Round(value.Item6 * hDpiFontScaling);
-                previewTable.Columns[3].Width = (int)Math.Round(value.Item7 * hDpiFontScaling);
-            }
-            else
-            {
-                templateTable.Columns[0].Width = (int)Math.Round(templateTable.Columns[0].Width * hDpiFontScaling);
-                templateTable.Columns[3].Width = (int)Math.Round(templateTable.Columns[3].Width * hDpiFontScaling);
-                templateTable.Columns[4].Width = (int)Math.Round(templateTable.Columns[4].Width * hDpiFontScaling);
-
-                previewTable.Columns[1].Width = (int)Math.Round(previewTable.Columns[0].Width * hDpiFontScaling);
-                previewTable.Columns[2].Width = (int)Math.Round(previewTable.Columns[1].Width * hDpiFontScaling);
-                previewTable.Columns[3].Width = (int)Math.Round(previewTable.Columns[2].Width * hDpiFontScaling);
-            }
-
-
-            ignoreSplitterMovedEvent = true;
-
-            //Let's scale split containers manually (auto-scaling is improper)
-            foreach (var scsa in splitContainersScalingAttributes)
-            {
-                var sc = scsa.splitContainer;
-                sc.Panel1MinSize = (int)Math.Round(scsa.panel1MinSize * vDpiFontScaling);
-                sc.Panel2MinSize = (int)Math.Round(scsa.panel2MinSize * vDpiFontScaling);
-
-                if (value.Item4 != 0)
-                {
-                    sc.SplitterDistance = (int)Math.Round(value.Item4 * vDpiFontScaling);
-                }
-                else
-                {
-                    sc.SplitterDistance = (int)Math.Round(scsa.splitterDistance * vDpiFontScaling);
-                }
-            }
-
-            ignoreSplitterMovedEvent = false; //-V3008
-
-
-            moveScaleButtonAdd();
-            moveScaleButtonDelete();
-
-
-            moveScaleButtonSave();//******
-            moveScaleAutoApplyCheckBox();
-            moveScaleTemplateNameTextBox();
-            moveScalePresetLabel();
-            moveScaleAutoApplyPictureBox();
-
-            moveScaleLoadComboBoxCustom();
-        }
-
         private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
         {
             if (!ignoreSplitterMovedEvent)
@@ -1238,6 +1077,83 @@ namespace MusicBeePlugin
         private void autoApplyPictureBox_Click(object sender, EventArgs e)
         {
             autoApplyCheckBox.Checked = !autoApplyCheckBox.Checked;
+        }
+
+        private void smartOperationCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            if (!smartOperationCheckBox.IsEnabled())
+                return;
+
+            smartOperationCheckBox.Checked = !smartOperationCheckBox.Checked;
+        }
+
+        private void MultipleSearchAndReplace_Load(object sender, EventArgs e)
+        {
+            var value = loadWindowLayout();
+
+            if (value.Item1 != 0)
+            {
+                templateTable.Columns[3].FillWeight = value.Item1;
+                templateTable.Columns[4].FillWeight = value.Item2;
+
+                previewTable.Columns[1].FillWeight = value.Item5;
+                previewTable.Columns[2].FillWeight = value.Item6;
+                previewTable.Columns[3].FillWeight = value.Item7;
+            }
+
+
+            ignoreSplitterMovedEvent = true;
+
+            //Let's scale split containers manually (auto-scaling is improper)
+            foreach (var scsa in splitContainersScalingAttributes)
+            {
+                var sc = scsa.splitContainer;
+                sc.Panel1MinSize = (int)Math.Round(scsa.panel1MinSize * vDpiFontScaling);
+                sc.Panel2MinSize = (int)Math.Round(scsa.panel2MinSize * vDpiFontScaling);
+
+                if (value.Item4 != 0)
+                    sc.SplitterDistance = (int)Math.Round(value.Item4 * vDpiFontScaling);
+                else
+                    sc.SplitterDistance = (int)Math.Round(scsa.splitterDistance * vDpiFontScaling);
+            }
+
+            ignoreSplitterMovedEvent = false; //-V3008
+
+
+            moveScaleButtonAdd();
+            moveScaleButtonDelete();
+
+
+            moveScaleButtonSave();
+            moveScaleAutoApplyCheckBox();
+            moveScaleTemplateNameTextBox();
+            moveScalePresetLabel();
+            moveScaleAutoApplyPictureBox();
+
+            moveScaleLoadComboBoxCustom();
+        }
+
+        private void MultipleSearchAndReplace_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (ignoreClosingForm)
+            {
+                if (!backgroundTaskIsNativeMB)
+                {
+                    closeFormOnStopping = true;
+                    buttonClose.Enable(false);
+                }
+
+                backgroundTaskIsStopping = true;
+                SetStatusBarText(MsrSbText + SbTextStoppingCurrentOperation, false);
+
+                e.Cancel = true;
+            }
+            else
+            {
+                saveWindowLayout(templateTable.Columns[3].Width, templateTable.Columns[4].Width, 0, 
+                    0,
+                    previewTable.Columns[1].Width, previewTable.Columns[2].Width, previewTable.Columns[3].Width);
+            }
         }
     }
 }

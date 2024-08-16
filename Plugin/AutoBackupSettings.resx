@@ -159,13 +159,13 @@
   <data name="numberOfFilesNumericUpDown.Location" type="System.Drawing.Point, System.Drawing">
     <value>453, 93</value>
   </data>
-  <data name="browseButton.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="buttonBrowse.Location" type="System.Drawing.Point, System.Drawing">
     <value>615, 8</value>
   </data>
   <data name="autoBackupNumericUpDown.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="browseButton.Text" xml:space="preserve">
+  <data name="buttonBrowse.Text" xml:space="preserve">
     <value>Browse...</value>
   </data>
   <data name="dontSkipAutoBackupsIfPlayCountsChangedLabel.Size" type="System.Drawing.Size, System.Drawing">
@@ -174,7 +174,7 @@
   <data name="autoDeleteOldCheckBox.ToolTip" xml:space="preserve">
     <value>Only auto-backups of current library will be deleted</value>
   </data>
-  <data name="&gt;&gt;browseButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonBrowse.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="autoBackupPeriodLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
@@ -231,7 +231,7 @@
   <data name="&gt;&gt;autoBackupFolderTextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;browseButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;buttonBrowse.ZOrder" xml:space="preserve">
     <value>25</value>
   </data>
   <data name="autoDeleteOldLabel.Location" type="System.Drawing.Point, System.Drawing">
@@ -240,7 +240,7 @@
   <data name="&gt;&gt;autoBackupNumericUpDown.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="browseButton.TabIndex" type="System.Int32, mscorlib">
+  <data name="buttonBrowse.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
   </data>
   <data name="&gt;&gt;buttonOK.ZOrder" xml:space="preserve">
@@ -358,7 +358,7 @@ Make sure that this custom tag is stored in the file tag, not in the MusicBee da
   <data name="&gt;&gt;storeTrackIdsInCustomTagCheckBox.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="browseButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="buttonBrowse.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
@@ -406,7 +406,7 @@ Make sure that this custom tag is stored in the file tag, not in the MusicBee da
   <data name="&gt;&gt;autoDeleteOldCheckBoxLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="browseButton.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="buttonBrowse.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 23</value>
   </data>
   <data name="storeTrackIdsInCustomTagCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
@@ -571,7 +571,7 @@ Make sure that this custom tag is stored in the file tag, not in the MusicBee da
   <data name="autoBackupFolderTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="&gt;&gt;browseButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;buttonBrowse.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="autoBackupPrefixTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
@@ -766,8 +766,8 @@ Sometimes guessing current library name may work incorrectly.
   <data name="autoDeleteManyCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;browseButton.Name" xml:space="preserve">
-    <value>browseButton</value>
+  <data name="&gt;&gt;buttonBrowse.Name" xml:space="preserve">
+    <value>buttonBrowse</value>
   </data>
   <data name="autoDeleteManyCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -900,7 +900,7 @@ Make sure that this custom tag is stored in the file tag, not in the MusicBee da
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="browseButton.ToolTip" xml:space="preserve">
+  <data name="buttonBrowse.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="dontSkipAutoBackupsIfPlayCountsChangedCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
@@ -990,7 +990,7 @@ Make sure that this custom tag is stored in the file tag, not in the MusicBee da
   <data name="&gt;&gt;toolTip1.Name" xml:space="preserve">
     <value>toolTip1</value>
   </data>
-  <data name="browseButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="buttonBrowse.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 8, 4</value>
   </data>
   <data name="&gt;&gt;autoBackupPrefixLabel.Name" xml:space="preserve">

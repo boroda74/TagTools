@@ -118,26 +118,32 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 143</value>
+  </data>
   <data name="buttonOK.Size" type="System.Drawing.Size, System.Drawing">
     <value>360, 23</value>
   </data>
   <data name="buttonOK.Text" xml:space="preserve">
     <value>Рассчитать средний рейтинг альбомов сейчас</value>
   </data>
+  <data name="buttonOK.ToolTip" xml:space="preserve">
+    <value>Рассчитать средний рейтинг альбомов для выбранных треков</value>
+  </data>
   <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>824, 147</value>
+    <value>822, 145</value>
   </data>
   <data name="buttonClose.Text" xml:space="preserve">
     <value>Закрыть</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>936, 179</value>
+    <value>934, 177</value>
   </data>
   <data name="buttonSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>780, 147</value>
+    <value>778, 145</value>
   </data>
   <data name="buttonSave.Location" type="System.Drawing.Point, System.Drawing">
-    <value>392, 147</value>
+    <value>392, 145</value>
   </data>
   <data name="buttonSave.Size" type="System.Drawing.Size, System.Drawing">
     <value>360, 23</value>
@@ -146,13 +152,13 @@
     <value>Сохранить настройки</value>
   </data>
   <data name="albumRatingTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>734, 116</value>
+    <value>732, 116</value>
   </data>
   <data name="albumRatingTagList.Size" type="System.Drawing.Size, System.Drawing">
     <value>190, 23</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>527, 119</value>
+    <value>525, 119</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>199, 15</value>

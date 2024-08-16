@@ -71,7 +71,7 @@ namespace MusicBeePlugin
                 MessageBox.Show(this, exceptionText, null, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            else if (LibraryReportsCommandForFunctionIds.backgroundTaskIsCanceled)
+            else if (LibraryReportsCommandForFunctionIds.backgroundTaskIsStopping)
             {
                 return false;
             }
@@ -84,7 +84,7 @@ namespace MusicBeePlugin
         private void calculatePresets()
         {
             LibraryReportsCommandForFunctionIds.backgroundTaskIsScheduled = true;
-            LibraryReportsCommandForFunctionIds.backgroundTaskIsCanceled = false;
+            LibraryReportsCommandForFunctionIds.backgroundTaskIsStopping = false;
             //progressInfoLabel.Text = progressInfo;
 
             var processedPresets = new List<ReportPreset>();
@@ -100,7 +100,7 @@ namespace MusicBeePlugin
 
             for (var i = 0; i < newOrChangedCachedPresets.Length; i++)
             {
-                if (LibraryReportsCommandForFunctionIds.backgroundTaskIsCanceled)
+                if (LibraryReportsCommandForFunctionIds.backgroundTaskIsStopping)
                 {
                     if (DisablePlaySoundOnce)
                         DisablePlaySoundOnce = false;
@@ -123,19 +123,21 @@ namespace MusicBeePlugin
                     lock (LrPresetExecutionLocker)
                     {
                         LibraryReportsCommandForFunctionIds.appliedPreset = newOrChangedCachedPresets[i];
+                        LibraryReportsCommandForFunctionIds.backgroundTaskIsNativeMB = true;
+
                         LibraryReportsCommandForFunctionIds.executePreset(null, false, true, null, false, true);
                     }
                 }
                 catch (ThreadAbortException)
                 {
-                    LibraryReportsCommandForFunctionIds.backgroundTaskIsCanceled = true;
+                    LibraryReportsCommandForFunctionIds.backgroundTaskIsStopping = true;
 
                     //Let's just stop the thread...
                     break;
                 }
                 catch (Exception ex)
                 {
-                    LibraryReportsCommandForFunctionIds.backgroundTaskIsCanceled = true;
+                    LibraryReportsCommandForFunctionIds.backgroundTaskIsStopping = true;
 
                     exceptionText = ex.Message;
                     break;
@@ -194,7 +196,7 @@ namespace MusicBeePlugin
 
         private void buttonClose_Click(object sender, EventArgs e)
         {
-            LibraryReportsCommandForFunctionIds.backgroundTaskIsCanceled = true;
+            LibraryReportsCommandForFunctionIds.backgroundTaskIsStopping = true;
             buttonClose.Enable(false);
 
             progressInfo += CtlWaitUntilPresetIsCompleted;

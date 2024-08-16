@@ -156,7 +156,7 @@ namespace MusicBeePlugin
             else if (englishIsAvailable)
                 currentLanguage = "en";
             else
-                currentLanguage = (string)languagesCustom.Items[0];
+                currentLanguage = languagesCustom.Items[0] as string;
 
             nameBox.Text = GetDictValue(preset.names, currentLanguage);
             descriptionBox.Text = GetDictValue(preset.descriptions, currentLanguage);
@@ -400,7 +400,7 @@ namespace MusicBeePlugin
             SetDictValue(preset.descriptions, currentLanguage, prevDescription);
 
 
-            currentLanguage = (string)languagesCustom.SelectedItem;
+            currentLanguage = languagesCustom.SelectedItem as string;
             nameBox.Text = GetDictValue(preset.names, currentLanguage);
             descriptionBox.Text = GetDictValue(preset.descriptions, currentLanguage);
 

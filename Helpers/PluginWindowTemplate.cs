@@ -1,6 +1,6 @@
 ﻿using ExtensionMethods;
-
 using System;
+using System.Reflection;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -8,8 +8,8 @@ using System.Resources;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
-
 using static MusicBeePlugin.Plugin;
+using System.Linq.Expressions;
 
 namespace MusicBeePlugin
 {
@@ -41,10 +41,10 @@ namespace MusicBeePlugin
         internal SortedDictionary<string, CustomComboBox> namesComboBoxes = new SortedDictionary<string, CustomComboBox>();
 
         internal Dictionary<Control, Control> controlsReferencesX = new Dictionary<Control, Control>();
-        protected Dictionary<Control, Control> controlsReferencedX = new Dictionary<Control, Control>();
+        internal Dictionary<Control, Control> controlsReferencedX = new Dictionary<Control, Control>();
 
         internal Dictionary<Control, Control> controlsReferencesY = new Dictionary<Control, Control>();
-        protected Dictionary<Control, Control> controlsReferencedY = new Dictionary<Control, Control>();
+        internal Dictionary<Control, Control> controlsReferencedY = new Dictionary<Control, Control>();
 
         internal List<Button> nonDefaultingButtons = new List<Button>();
         protected bool artificiallyFocusedAcceptButton;
@@ -99,11 +99,14 @@ namespace MusicBeePlugin
 
 
         //BACKGROUND TASKS PROCESSING
-        private delegate void StopButtonClicked(PluginWindowTemplate clickedForm, PrepareOperation prepareOperation);
-        private delegate void TaskStarted();
+        internal delegate void StopButtonClicked(PrepareOperation prepareOperation);
+        internal delegate void TaskStarted();
         public delegate bool PrepareOperation();
 
-        private StopButtonClicked stopButtonClicked;
+        internal delegate void DataGridViewFormatChangedTags(DataGridView dataGridView, int rowIndex);
+
+
+        private volatile bool isStopButtonAlreadyClicked = false;
         private TaskStarted taskStarted;
 
         protected static Plugin TagToolsPlugin;
@@ -113,20 +116,22 @@ namespace MusicBeePlugin
 
         internal volatile bool backgroundTaskIsScheduled;
         internal volatile bool backgroundTaskIsNativeMB;
-        internal volatile bool backgroundTaskIsCanceled;
+        internal volatile bool backgroundTaskIsStopping;
 
-        internal volatile bool previewIsStopped;
+        internal volatile bool backgroundTaskIsStoppedOrCancelled;
         internal volatile bool previewIsGenerated;
+        protected volatile int checkMinimumColumnCount = -1;
 
-        private bool closeFormOnCompletion = false;
+        protected volatile bool closeFormOnStopping = false;
+        protected volatile bool ignoreClosingForm = false;
 
         protected Button clickedButton;
         protected Button previewButton;
         protected Button closeButton;
 
-        protected string okButtonText;
-        protected string previewButtonText;
-        protected string closeButtonText;
+        protected string buttonOKName;
+        protected string buttonPreviewName;
+        protected string buttonCloseName;
 
         internal PluginWindowTemplate()
         {
@@ -138,12 +143,12 @@ namespace MusicBeePlugin
             InitializeComponent();
 
             TagToolsPlugin = plugin;
-            useSkinColors = !SavedSettings.dontUseSkinColors; //************* dontUseSkinColors -> useSkinColors !!!!
+            useSkinColors = !SavedSettings.dontUseSkinColors;
         }
 
-        internal bool backgroundTaskIsWorking()
+        internal bool backgroundTaskIsWorking() //Check seprate backgroundTaskIsStopped everywhere!!!
         {
-            if (backgroundTaskIsScheduled && !backgroundTaskIsCanceled)
+            if (backgroundTaskIsScheduled && !backgroundTaskIsStoppedOrCancelled)
                 return true;
 
             return false;
@@ -270,7 +275,7 @@ namespace MusicBeePlugin
         internal void button_GotFocus(object sender, EventArgs e)
         {
             var button = sender as Button;
-            var acceptButton = AcceptButton as Button;
+            var acceptButton = AcceptButton as Button; //************* AcceptButton can be null!!!!
 
             if (button == lastSelectedControl)
             {
@@ -311,7 +316,8 @@ namespace MusicBeePlugin
 
         internal void button_LostFocus(object sender, EventArgs e)
         {
-            setSkinnedControlColors(sender as Button, null);
+            if (sender != null)
+                setSkinnedControlColors(sender as Button, null);
         }
 
         internal void button_Paint(object sender, PaintEventArgs e)
@@ -325,6 +331,7 @@ namespace MusicBeePlugin
 
             //Render the text onto the button.
             TextRenderer.DrawText(e.Graphics, text, button.Font, e.ClipRectangle, button.ForeColor, flags);
+            Application.DoEvents();//************
         }
 
         internal void button_TextChanged(object sender, EventArgs e)
@@ -339,7 +346,8 @@ namespace MusicBeePlugin
                 if (useSkinColors)
                 {
                     button.Text = string.Empty;
-                    button.Refresh();
+                    button.Invalidate();//***********
+                    Application.DoEvents();//************
                 }
             }
         }
@@ -1280,16 +1288,6 @@ namespace MusicBeePlugin
             }
         }
 
-        protected void dgvCustomVScrollBar_SetThumbTop(DataGridView dataGridView, CustomVScrollBar customVScrollBar)
-        {
-            var nRowRange = dataGridView.RowCount - dataGridView.DisplayedRowCount(false);
-            var (_, nPixelRange, _, _, _) = customVScrollBar.GetMetrics();
-
-            var firstDisplayedScrollingRowIndex = dataGridView.FirstDisplayedScrollingRowIndex;
-            if (nRowRange > 0)
-                customVScrollBar.SetThumbTop((int)Math.Round((float)firstDisplayedScrollingRowIndex * nPixelRange / nRowRange));
-        }
-
         protected void dgvCustomHScrollBar_Scroll(object sender, EventArgs e)
         {
             dgvCustomHScrollBar_ValueChanged(sender, e);
@@ -1325,33 +1323,39 @@ namespace MusicBeePlugin
             dgvCustomVScrollBar_ValueChanged(sender, e);
         }
 
+        protected void setDgvVerticalOffset(DataGridView dataGridView, int offset)
+        {
+            try
+            {
+                PropertyInfo verticalOffset = dataGridView.GetType().GetProperty("VerticalOffset", BindingFlags.NonPublic | BindingFlags.Instance);
+                verticalOffset.SetValue(dataGridView, offset, null);
+            }
+            catch
+            {
+                //Let's ignore...
+            }
+        }
+
         protected void dgvCustomVScrollBar_ValueChanged(object sender, EventArgs e)
         {
             var customVScrollBar = sender as CustomVScrollBar;
             var dataGridView = customVScrollBar.Parent as DataGridView;
-            var thumbTop = customVScrollBar.GetThumbTop();
+            var value = customVScrollBar.Value;
+            var largeChange = customVScrollBar.LargeChange;
+            var maximum = customVScrollBar.Maximum;
             var form = customVScrollBar.FindForm();
+            var vScrollBar = ControlsTools.FindControlChild<VScrollBar>(dataGridView);
 
-            if (dataGridView.RowCount > 0 && form != null && form.WindowState != FormWindowState.Minimized && thumbTop >= 0)
+            if (dataGridView.RowCount > 0 && form != null && form.WindowState != FormWindowState.Minimized)
             {
-                var nRowRange = dataGridView.RowCount - dataGridView.DisplayedRowCount(false);
-                var (_, nPixelRange, _, _, _) = customVScrollBar.GetMetrics();
-
-                var newFirstDisplayedScrollingRowIndex = dataGridView.FirstDisplayedScrollingRowIndex;
-                if (nPixelRange > 0)
-                    newFirstDisplayedScrollingRowIndex = (int)Math.Round((float)nRowRange * customVScrollBar.GetThumbTop() / nPixelRange);
-
-
                 customVScrollBar.SettingParentScroll = true;
 
-                if (newFirstDisplayedScrollingRowIndex >= dataGridView.RowCount)
-                    dataGridView.FirstDisplayedScrollingRowIndex = dataGridView.RowCount - 1;
-                else
-                    dataGridView.FirstDisplayedScrollingRowIndex = newFirstDisplayedScrollingRowIndex;
+                if (maximum > 0)
+                    setDgvVerticalOffset(dataGridView, (int)(((float)maximum - largeChange) * value / maximum) + 1);
 
-                customVScrollBar.SettingParentScroll = false; //-V3008
+                customVScrollBar.SettingParentScroll = false;
 
-
+                vScrollBar.Visible = false;
                 customVScrollBar.Invalidate();
                 dataGridView.Invalidate();
             }
@@ -1410,7 +1414,7 @@ namespace MusicBeePlugin
                 if (customVScrollBar.SettingParentScroll)
                     return;
 
-                dgvCustomVScrollBar_SetThumbTop(dataGridView, customVScrollBar); //-V3080
+                customVScrollBar.SetThumbTop(dataGridView.VerticalScrollingOffset); //-V3080
             }
         }
 
@@ -1830,19 +1834,27 @@ namespace MusicBeePlugin
             throw new Exception("Invalid scroll bar class: " + refScrollBar.GetType().FullName);
         }
 
-        private static (CustomHScrollBar, int, CustomVScrollBar, int) UpdateDgvCustomScrollBarsInternal(DataGridView dataGridView)
+        private static (CustomHScrollBar, int, CustomVScrollBar, int, bool) UpdateDgvCustomScrollBarsInternal(DataGridView dataGridView)
         {
             var hScrollBar = ControlsTools.FindControlChild<HScrollBar>(dataGridView);
             var customHScrollBar = ControlsTools.FindControlChild<CustomHScrollBar>(dataGridView);
             var customHScrollBarVisibleHeight = 0;
 
 
+            bool customHScrollBarMetricsChanged = false;
+
             if (customHScrollBar != null)
             {
                 (_, int maximum, int largeChange) = GetDataGridViewScrollBarMetrics(dataGridView, customHScrollBar);
-                customHScrollBar.Minimum = 0;
-                customHScrollBar.Maximum = maximum;
-                customHScrollBar.LargeChange = largeChange;
+
+                if (customHScrollBar.Maximum != maximum || customHScrollBar.LargeChange != largeChange)
+                {
+                    customHScrollBarMetricsChanged = true;
+
+                    customHScrollBar.Minimum = 0;
+                    customHScrollBar.Maximum = maximum;
+                    customHScrollBar.LargeChange = largeChange;
+                }
 
                 if (customHScrollBar.Maximum > customHScrollBar.LargeChange)
                     customHScrollBarVisibleHeight = customHScrollBar.Height;
@@ -1854,19 +1866,27 @@ namespace MusicBeePlugin
             var customVScrollBarVisibleWidth = 0;
 
 
+            bool customVScrollBarMetricsChanged = false;
+
             if (customVScrollBar != null)
             {
-                (_, int maximum, int largeChange) = GetDataGridViewVScrollBarMetrics(dataGridView, vScrollBar);
-                customVScrollBar.Minimum = 0;
-                customVScrollBar.Maximum = maximum;
-                customVScrollBar.LargeChange = largeChange;
+                (_, int maximum, int largeChange) = GetDataGridViewScrollBarMetrics(dataGridView, customVScrollBar);
+
+                if (customVScrollBar.Maximum != maximum || customVScrollBar.LargeChange != largeChange)
+                {
+                    customVScrollBarMetricsChanged = true;
+
+                    customVScrollBar.Minimum = 0;
+                    customVScrollBar.Maximum = maximum;
+                    customVScrollBar.LargeChange = largeChange;
+                }
 
                 if (customVScrollBar.Maximum > customVScrollBar.LargeChange)
                     customVScrollBarVisibleWidth = customVScrollBar.Width;
             }
 
 
-            return (customHScrollBar, customHScrollBarVisibleHeight, customVScrollBar, customVScrollBarVisibleWidth);
+            return (customHScrollBar, customHScrollBarVisibleHeight, customVScrollBar, customVScrollBarVisibleWidth, customHScrollBarMetricsChanged || customVScrollBarMetricsChanged);
         }
 
         private static (CustomHScrollBar, int, CustomVScrollBar, int) UpdateClbCustomScrollBarsInternal(ListBox listBox)
@@ -1943,22 +1963,34 @@ namespace MusicBeePlugin
             return vScrollBar;
         }
 
-        internal void updateCustomScrollBars(Control scrolledControl)
+        //Use -1 for columnOrItemCount/rowCount to always redraw horizontal/vertical scroll bars; 0 to never redraw them
+        internal void updateCustomScrollBars(Control scrolledControl, int columnCount = -1, int rowCount = -1)//***********
         {
             if (useSkinColors)
-                UpdateCustomScrollBars(scrolledControl);
+                UpdateCustomScrollBars(scrolledControl, columnCount, rowCount);
         }
 
-        internal static void UpdateCustomScrollBars(Control scrolledControl)
+        //Use -1 for columnOrItemCount/rowCount to always redraw horizontal/vertical scroll bars; 0 to never redraw them
+        internal static void UpdateCustomScrollBars(Control scrolledControl, int columnOrItemCount = -1, int rowCount = -1)//***********
         {
             CustomHScrollBar customHScrollBar = null;
-            var customHScrollBarVisibleHeight = 0;
+            int customHScrollBarVisibleHeight = 0;
+
             CustomVScrollBar customVScrollBar = null;
-            var customVScrollBarVisibleWidth = 0;
+            int customVScrollBarVisibleWidth = 0;
+
+            bool customScrollBarsMetricsChanged = false;
+
+
+            if (columnOrItemCount == 0)
+                rowCount = -1;
+            else if (rowCount == 0)
+                columnOrItemCount = -1;
+
 
             if (scrolledControl is DataGridView dataGridView)
             {
-                (customHScrollBar, customHScrollBarVisibleHeight, customVScrollBar, customVScrollBarVisibleWidth)
+                (customHScrollBar, customHScrollBarVisibleHeight, customVScrollBar, customVScrollBarVisibleWidth, customScrollBarsMetricsChanged)//********** customScrollBarsMetricsChanged to all other Update() funcs.
                     = UpdateDgvCustomScrollBarsInternal(dataGridView);
             }
             else if (scrolledControl is CustomListBox || scrolledControl is CustomCheckedListBox)
@@ -1980,7 +2012,11 @@ namespace MusicBeePlugin
             }
 
 
-            if (customHScrollBar != null)
+            if (columnOrItemCount != -1 && ((columnOrItemCount - 1) & 0x1f) != 0) //Let's skip scroll bar redraw
+            {
+                customScrollBarsMetricsChanged = false;
+            }
+            else if (customHScrollBar != null && customScrollBarsMetricsChanged)
             {
                 customHScrollBar.AdjustReservedSpace(customVScrollBarVisibleWidth);
                 customHScrollBar.ResetMetricsSize(scrolledControl.Width);
@@ -1988,7 +2024,11 @@ namespace MusicBeePlugin
                 customHScrollBar.Invalidate();
             }
 
-            if (customVScrollBar != null)
+            if (rowCount != -1 && ((rowCount - 1) & 0x1f) != 0) //Let's skip scroll bar redraw
+            {
+                customScrollBarsMetricsChanged = false;
+            }
+            else if (customHScrollBar != null && customScrollBarsMetricsChanged)
             {
                 if (customHScrollBar?.Visible == true)
                     customVScrollBar.AdjustReservedSpace(0);
@@ -2001,8 +2041,11 @@ namespace MusicBeePlugin
             }
 
 
-            scrolledControl.Invalidate();
-            Application.DoEvents();
+            if (customScrollBarsMetricsChanged)
+            {
+                scrolledControl.Invalidate();
+                Application.DoEvents();
+            }
         }
 
         //Returns Minimum, Maximum, LargeChange
@@ -2013,9 +2056,11 @@ namespace MusicBeePlugin
             if (customScrollBar is CustomHScrollBar hScrollBar)
             {
                 int maximum = dataGridView.Columns.GetColumnsWidth(DataGridViewElementStates.Visible);
-                int largeChange = 0;
-
-                if (dataGridView.ColumnCount > 0)
+                
+                int largeChange = maximum;
+                if (dataGridView.ColumnCount > 0 && dataGridView.DisplayedColumnCount(false) < dataGridView.Columns.GetColumnCount(DataGridViewElementStates.Visible))
+                    largeChange = dataGridView.Columns.GetColumnsWidth(DataGridViewElementStates.Displayed) - (int)(dataGridView.Columns[dataGridView.ColumnCount - 1].Width / 1f);
+                else if (dataGridView.ColumnCount > 0)
                     largeChange = dataGridView.Columns.GetColumnsWidth(DataGridViewElementStates.Displayed);
 
                 return (0, maximum, largeChange);
@@ -2023,10 +2068,16 @@ namespace MusicBeePlugin
             else if (customScrollBar is CustomVScrollBar vScrollBar)
             {
                 int maximum = dataGridView.Rows.GetRowsHeight(DataGridViewElementStates.Visible);
-                int largeChange = 0;
 
-                if (dataGridView.ColumnCount > 0)
+                int largeChange = maximum;
+                if (dataGridView.RowCount > 0 && dataGridView.DisplayedRowCount(false) < dataGridView.Rows.GetRowCount(DataGridViewElementStates.Visible))
+                    largeChange = dataGridView.Rows.GetRowsHeight(DataGridViewElementStates.Displayed) - (int)(dataGridView.Rows[dataGridView.RowCount - 1].Height / 1f);
+                else if (dataGridView.RowCount > 0)
                     largeChange = dataGridView.Rows.GetRowsHeight(DataGridViewElementStates.Displayed);
+
+
+                //if (dataGridView.RowCount > 0)//**********
+                //    largeChange = (int)((float)maximum * dataGridView.DisplayedRowCount(false) / dataGridView.RowCount);
 
                 return (0, maximum, largeChange);
             }
@@ -2036,13 +2087,13 @@ namespace MusicBeePlugin
 
 
         //Returns Minimum, Maximum, LargeChange
-        internal static (int, int, int) GetDataGridViewVScrollBarMetrics(Control scrolledControl, Control refScrollBar)
-        {
-            if (refScrollBar is VScrollBar scrollBar)
-                return (scrollBar.Minimum, scrollBar.Maximum, scrollBar.LargeChange);
+        //internal static (int, int, int) GetDataGridViewVScrollBarMetrics(Control scrolledControl, Control refScrollBar) //*******
+        //{
+        //    if (refScrollBar is VScrollBar scrollBar)
+        //        return (scrollBar.Minimum, scrollBar.Maximum, scrollBar.LargeChange);
 
-            throw new Exception("Invalid reference scroll bar class: " + refScrollBar.GetType().FullName);
-        }
+        //    throw new Exception("Invalid reference scroll bar class: " + refScrollBar.GetType().FullName);
+        //}
 
         private void customScrollBarParent_SizeChanged(object sender, EventArgs e)
         {
@@ -2127,11 +2178,35 @@ namespace MusicBeePlugin
 
         protected void scrollBar_VisibleChanged(object sender, EventArgs e)
         {
-            var scrollBar = sender as Control;
-            scrollBar.Visible = false;
+            var control = sender as Control;
 
-            scrollBar.Invalidate();
-            Application.DoEvents();
+            if (control.Visible)
+            {
+                if (sender is HScrollBar hScrollBar)
+                {
+                    var customHScrollBar = ControlsTools.FindControlChild<CustomHScrollBar>(hScrollBar.Parent);
+
+                    hScrollBar.Visible = false;
+                    hScrollBar.Invalidate();
+
+                    customHScrollBar.Visible = true;
+                    customHScrollBar.Invalidate();
+
+                    Application.DoEvents();
+                }
+                else if (sender is VScrollBar vScrollBar)
+                {
+                    var customVScrollBar = ControlsTools.FindControlChild<CustomVScrollBar>(vScrollBar.Parent);
+
+                    vScrollBar.Visible = false;
+                    vScrollBar.Invalidate();
+
+                    customVScrollBar.Visible = true;
+                    customVScrollBar.Invalidate();
+
+                    Application.DoEvents();
+                }
+            }
         }
 
         internal static Control FindFocusedControl(Control control)
@@ -2144,6 +2219,70 @@ namespace MusicBeePlugin
             }
 
             return control;
+        }
+
+        //Returns the number of rows, which require formatting changed tags, 0 if no formatting is required
+        internal static int AddRowsToTable(PluginWindowTemplate form, DataGridView dataGridView, List<string[]> rowList, bool itsLastRowRange, bool selectLastRow)//*********
+        {
+            int rowListCount = rowList.Count;
+
+            if (rowListCount > 0)
+            {
+                if (itsLastRowRange || ((rowListCount & 0x1f) == 0))
+                {
+                    int startRowIndex = dataGridView.RowCount;
+
+                    var rows = new DataGridViewRow[rowListCount];
+
+                    for (int i = 0; i < rowListCount; i++)
+                    {
+                        DataGridViewRow row = new DataGridViewRow();
+                        row.CreateCells(dataGridView);
+
+                        for (int j = 0; j < rowList[i].Length; j++)
+                            row.Cells[j].Value = rowList[i][j];
+
+                        rows[i] = row;
+                    }
+
+                    rowList.Clear();
+                    dataGridView.Rows.AddRange(rows);
+
+                    if (selectLastRow)
+                        dataGridView.CurrentCell = dataGridView[0, dataGridView.RowCount - 1];
+
+                    if (form.useSkinColors)
+                        UpdateCustomScrollBars(dataGridView, 1, dataGridView.RowCount);
+
+                    return rowListCount;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            else
+            {
+                if (form.useSkinColors)
+                    UpdateCustomScrollBars(dataGridView);
+
+                return 0;
+            }
+        }
+
+        internal static void FormatChangedTags(PluginWindowTemplate form, DataGridView dataGridView, int rowCountToFormat,//********
+            DataGridViewFormatChangedTags dataGridViewFormatChangedTags = null)
+        {
+            if (dataGridViewFormatChangedTags != null)
+                for (int j = dataGridView.RowCount - rowCountToFormat; j < dataGridView.RowCount; j++)
+                    dataGridViewFormatChangedTags(dataGridView, j);
+
+
+            if (dataGridView.RowCount > 0)
+                dataGridView.FirstDisplayedCell = dataGridView.CurrentCell;
+
+            if (form.useSkinColors)
+                UpdateCustomScrollBars(dataGridView, 1, dataGridView.RowCount);
         }
 
         protected CustomComboBox getKeyEventCustomComboBox(object sender)
@@ -2229,18 +2368,18 @@ namespace MusicBeePlugin
         }
 
         //Returns: enabled fore & back colors, disabled fore & back colors
-        internal void setSkinnedControlColors(Control control, bool? state) //***********
+        internal void setSkinnedControlColors(Control control, bool? enable) //***********
         {
             if (useSkinColors)
             {
-                if (control is Button button)
+                if (control is Button button && control != null)
                 {
                     if (button != null)
                     {
                         var acceptButton = AcceptButton as Button;
 
                         //Default button
-                        if ((control.IsEnabled() && state == null) || state == true && button == acceptButton)
+                        if ((control.IsEnabled() && enable == null) || enable == true && button == acceptButton)
                         {
                             button.ForeColor = controlHighlightForeColor;
                             button.BackColor = controlHighlightBackColor;
@@ -2253,14 +2392,14 @@ namespace MusicBeePlugin
                         //   button.FlatAppearance.BorderColor = ButtonFocusedBorderColor;
                         //}
                         //Combo box button
-                        else if ((control.IsEnabled() && state == null) || state == true && button.Parent is CustomComboBox)
+                        else if ((control.IsEnabled() && enable == null) || enable == true && button.Parent is CustomComboBox)
                         {
                             button.ForeColor = buttonForeColor;
                             button.BackColor = narrowScrollBarBackColor;
                             button.FlatAppearance.BorderColor = ScrollBarBackColor;
                         }
                         //Generic button
-                        else if ((control.IsEnabled() && state == null) || state == true)
+                        else if ((control.IsEnabled() && enable == null) || enable == true)
                         {
                             button.ForeColor = buttonForeColor;
                             button.BackColor = buttonBackColor;
@@ -2288,7 +2427,7 @@ namespace MusicBeePlugin
                 }
                 else if (control is CheckBox)
                 {
-                    if ((control.IsEnabled() && state == null) || state == true)
+                    if ((control.IsEnabled() && enable == null) || enable == true)
                         control.ForeColor = FormForeColor;
                     else
                         control.ForeColor = DimmedAccentColor;
@@ -2297,7 +2436,7 @@ namespace MusicBeePlugin
                 }
                 else if (control is RadioButton)
                 {
-                    if ((control.IsEnabled() && state == null) || state == true)
+                    if ((control.IsEnabled() && enable == null) || enable == true)
                         control.ForeColor = FormForeColor;
                     else
                         control.ForeColor = DimmedAccentColor;
@@ -2306,62 +2445,35 @@ namespace MusicBeePlugin
                 }
                 else if (control is Label)
                 {
-                    if ((control.IsEnabled() && state == null) || state == true)
+                    if ((control.IsEnabled() && enable == null) || enable == true)
                     {
-                        if (control.ForeColor == SystemColors.ControlText)
-                        {
-                            control.ForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanelLabel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
-                        }
+                        if (control.ForeColor == FormForeColor || control.ForeColor == AccentColor || control.ForeColor == DimmedAccentColor)
+                            control.ForeColor = AccentColor;
                         else
-                        {
-                            var stdColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanelLabel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
-                            control.ForeColor = GetHighlightColor(control.ForeColor, stdColor, FormBackColor);
-                        }
+                            control.ForeColor = GetHighlightColor(control.ForeColor, AccentColor, FormBackColor);
                     }
                     else
                     {
-                        control.ForeColor = DimmedAccentColor;
+                        if (control.ForeColor == FormForeColor || control.ForeColor == AccentColor || control.ForeColor == DimmedAccentColor)
+                            control.ForeColor = DimmedAccentColor;
+                        else
+                            control.ForeColor = GetHighlightColor(control.ForeColor, DimmedAccentColor, FormBackColor);
                     }
 
                     control.BackColor = FormBackColor;
                 }
-                else if (control is GroupBox)
+                else if (control is GroupBox || control is SplitContainer || control is Panel)
                 {
-                    if ((control.IsEnabled() && state == null) || state == true)
-                    {
-                        if (control.ForeColor == SystemColors.ControlText)
-                        {
-                            control.ForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanelLabel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
-                        }
-                        else
-                        {
-                            var stdColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanelLabel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
-                            control.ForeColor = GetHighlightColor(control.ForeColor, stdColor, FormBackColor);
-                        }
-                    }
-                    else
-                    {
-                        control.ForeColor = DimmedAccentColor;
-                    }
-
-                    control.BackColor = FormBackColor;
-                }
-                else if (control is NumericUpDown)
-                {
-                    control.BackColor = InputControlBackColor;//******
-                    control.ForeColor = InputControlForeColor;
+                    //foreach (Control child in control.Controls)
+                    //    setSkinnedControlColors(child, enable);
                 }
                 else if (control is CustomComboBox customComboBox)
                 {
-                    if ((control.IsEnabled() && state == null) || state == true)
-                        customComboBox.SetColors(InputControlForeColor, InputControlBackColor);
-                    else
-                        customComboBox.SetColors(DimmedAccentColor, InputPanelBackColor); //****
-                        //customComboBox.SetColors(DimmedAccentColor, InputControlDimmedBackColor);
+                    customComboBox.SetColors(enable);
                 }
                 else if (control is ComboBox comboBox && comboBox.DropDownStyle == ComboBoxStyle.Simple)
                 {
-                    if ((control.IsEnabled() && state == null) || state == true)
+                    if ((control.IsEnabled() && enable == null) || enable == true)
                     {
                         comboBox.ForeColor = InputControlForeColor;
                         comboBox.BackColor = InputControlBackColor;
@@ -2369,27 +2481,51 @@ namespace MusicBeePlugin
                     else
                     {
                         comboBox.ForeColor = DimmedAccentColor;
-                        comboBox.BackColor = InputPanelBackColor; //****
-                        //comboBox.BackColor = InputControlDimmedBackColor;
+                        comboBox.BackColor = InputPanelBackColor;
+                        //comboBox.BackColor = InputControlDimmedBackColor; //****
                     }
                 }
-                else if (control is TextBox)
+                else if (control is NumericUpDown numericUpDown)
                 {
-                    if ((control.IsEnabled() && state == null) || state == true)
+                    if (((control.IsEnabled() && enable == null) || enable == true) && !numericUpDown.ReadOnly)
                     {
                         control.ForeColor = InputControlForeColor;
                         control.BackColor = InputControlBackColor;
                     }
+                    else if ((control.IsEnabled() && enable == null) || enable == true) //Enabled, but readonly
+                    {
+                        control.ForeColor = AccentColor;
+                        control.BackColor = InputControlDimmedBackColor;
+                    }
                     else
                     {
                         control.ForeColor = DimmedAccentColor;
-                        control.BackColor = InputPanelBackColor; //****
-                        //control.BackColor = InputControlDimmedBackColor;
+                        control.BackColor = InputPanelBackColor;
+                        //control.BackColor = InputControlDimmedBackColor; //****
+                    }
+                }
+                else if (control is TextBox textBox)
+                {
+                    if (((control.IsEnabled() && enable == null) || enable == true) && !textBox.ReadOnly)
+                    {
+                        control.ForeColor = InputControlForeColor;
+                        control.BackColor = InputControlBackColor;
+                    }
+                    else if ((control.IsEnabled() && enable == null) || enable == true) //Enabled, but readonly
+                    {
+                        control.ForeColor = AccentColor;
+                        control.BackColor = InputControlDimmedBackColor;
+                    }
+                    else
+                    {
+                        control.ForeColor = DimmedAccentColor;
+                        control.BackColor = InputPanelBackColor;
+                        //control.BackColor = InputControlDimmedBackColor; //****
                     }
                 }
                 else if (control is ListBox)
                 {
-                    if ((control.IsEnabled() && state == null) || state == true)
+                    if ((control.IsEnabled() && enable == null) || enable == true)
                     {
                         control.ForeColor = InputControlForeColor;
                         control.BackColor = InputControlBackColor;
@@ -2397,8 +2533,8 @@ namespace MusicBeePlugin
                     else
                     {
                         control.ForeColor = DimmedAccentColor;
-                        control.BackColor = InputPanelBackColor; //****
-                        //control.BackColor = InputControlDimmedBackColor;
+                        control.BackColor = InputPanelBackColor;
+                        //control.BackColor = InputControlDimmedBackColor; //****
                     }
                 }
                 else if (control is DataGridView)
@@ -2408,32 +2544,12 @@ namespace MusicBeePlugin
                 }
                 else
                 {
-                    if ((control.IsEnabled() && state == null) || state == true)
-                    {
+                    if ((control.IsEnabled() && enable == null) || enable == true)
                         control.ForeColor = AccentColor;
-                    }
                     else
-                    {
                         control.ForeColor = DimmedAccentColor;
-                    }
 
                     control.BackColor = FormBackColor;
-                }
-            }
-            else
-            {
-                if (control is Label)
-                {
-                    if ((control.IsEnabled() && state == null) || state == true)
-                    {
-                        if (control.ForeColor == SystemColors.ControlText)
-                            control.ForeColor = SystemColors.GrayText;
-                    }
-                    else
-                    {
-                        if (control.ForeColor == SystemColors.GrayText)
-                            control.ForeColor = SystemColors.ControlText;
-                    }
                 }
             }
         }
@@ -2706,6 +2822,12 @@ namespace MusicBeePlugin
             }
             else if (control is DataGridView dataGridView)
             {
+                //Let's turn on data grid view double buffering
+                Type dgvType = dataGridView.GetType();//****
+                PropertyInfo pi = dgvType.GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
+                pi.SetValue(dataGridView, true, null);
+
+
                 dataGridView.ScrollBars = ScrollBars.Both;
 
                 dataGridView.EnableHeadersVisualStyles = false;
@@ -2720,7 +2842,7 @@ namespace MusicBeePlugin
                 var hScrollBar = ControlsTools.FindControlChild<HScrollBar>(dataGridView);
                 var vScrollBar = ControlsTools.FindControlChild<VScrollBar>(dataGridView);
 
-                var customHScrollBar = new CustomHScrollBar(this, dataGridView, GetDataGridViewScrollBarMetrics, null, true);
+                var customHScrollBar = new CustomHScrollBar(this, dataGridView, GetDataGridViewScrollBarMetrics, hScrollBar, true);
                 customHScrollBar.CreateBrushes();
                 hScrollBar.Visible = false; //-V3080
 
@@ -2730,7 +2852,7 @@ namespace MusicBeePlugin
                 hScrollBar.VisibleChanged += scrollBar_VisibleChanged;
 
 
-                var customVScrollBar = new CustomVScrollBar(this, dataGridView, GetDataGridViewVScrollBarMetrics, 0, vScrollBar);
+                var customVScrollBar = new CustomVScrollBar(this, dataGridView, GetDataGridViewScrollBarMetrics, 0, vScrollBar, true);
                 customVScrollBar.CreateBrushes();
                 vScrollBar.Visible = false; //-V3080
 
@@ -3140,7 +3262,6 @@ namespace MusicBeePlugin
                         enableQueryingButtons();
                 }
 
-                stopButtonClicked = stopButtonClickedMethod;
                 taskStarted = taskStartedMethod;
 
                 TagToolsPlugin.fillTagNames();
@@ -3235,6 +3356,12 @@ namespace MusicBeePlugin
 
         protected void showFormInternal()
         {
+            if (PluginClosing)
+                return;
+
+            while (MbForm.Disposing)
+                Thread.Sleep(ActionRetryDelay);
+
             if (MbForm.IsDisposed)
                 MbForm = FromHandle(MbApiInterface.MB_GetWindowHandle()) as Form;
 
@@ -3316,6 +3443,11 @@ namespace MusicBeePlugin
             initializeForm();
         }
 
+        protected virtual void childClassFormShown()
+        {
+            //Must be implemented in child classes...
+        }
+
         private void PluginWindowTemplate_Shown(object sender, EventArgs e)
         {
             for (var i = allControls.Count - 1; i >= 0; i--)
@@ -3332,6 +3464,8 @@ namespace MusicBeePlugin
             Activate();
             SetBounds(left, top, width, height);
             ignoreSizePositionChanges = false;
+
+            childClassFormShown();
 
             if (SavedSettings.not1stTimeUsage)
                 return;
@@ -3423,7 +3557,7 @@ namespace MusicBeePlugin
 
         private void PluginWindowTemplate_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (backgroundTaskIsScheduled)
+            if (backgroundTaskIsScheduled && backgroundTaskIsNativeMB && closeButton.IsEnabled())
             {
                 e.Cancel = true;
                 Hide();
@@ -3562,35 +3696,23 @@ namespace MusicBeePlugin
                 var height2 = (int)Math.Round(height / vDpiFormScaling);
 
                 if (width2 == 0)
-                {
                     width2 = currentWindowSettings.w; //-V3080
-                }
                 else if (100d * Math.Abs(width2 - currentWindowSettings.w) / width2 < 0.5d) //0.5%
-                {
                     width2 = currentWindowSettings.w;
-                }
 
                 if (height2 == 0)
-                {
                     height2 = currentWindowSettings.h;
-                }
                 else if (100d * Math.Abs(height2 - currentWindowSettings.h) / height2 < 0.5d) //0.5%
-                {
                     height2 = currentWindowSettings.h;
-                }
 
 
                 var left2 = (int)Math.Round(left / hDpiFormScaling);
                 if (Math.Abs(left2 - currentWindowSettings.x) <= 1) //1px
-                {
                     left2 = currentWindowSettings.x;
-                }
 
                 var top2 = (int)Math.Round(top / vDpiFormScaling);
                 if (Math.Abs(top2 - currentWindowSettings.y) <= 1) //1px
-                {
                     top2 = currentWindowSettings.y;
-                }
 
 
 
@@ -3622,7 +3744,7 @@ namespace MusicBeePlugin
 
 
                 var column2Width2 = (int)Math.Round(column2Width / hDpiFontScaling);
-                if (100f * Math.Abs(column2Width2 - currentWindowSettings.column1Width) / column2Width2 < 0.5f)
+                if (100f * Math.Abs(column2Width2 - currentWindowSettings.column2Width) / column2Width2 < 0.5f)
                     column2Width2 = currentWindowSettings.column2Width;
 
                 currentWindowSettings.column2Width = column2Width2;
@@ -3645,7 +3767,7 @@ namespace MusicBeePlugin
 
 
                 var table2column2Width2 = (int)Math.Round(table2column2Width / hDpiFontScaling);
-                if (100f * Math.Abs(table2column2Width2 - currentWindowSettings.table2column1Width) / table2column2Width2 < 0.5f)
+                if (100f * Math.Abs(table2column2Width2 - currentWindowSettings.table2column2Width) / table2column2Width2 < 0.5f)
                     table2column2Width2 = currentWindowSettings.table2column2Width;
 
                 currentWindowSettings.table2column2Width = table2column2Width2;
@@ -3676,7 +3798,7 @@ namespace MusicBeePlugin
 
             try
             {
-                if (backgroundTaskIsCanceled) //Let's skip this queued operation
+                if (backgroundTaskIsStopping || backgroundTaskIsStoppedOrCancelled || !backgroundTaskIsScheduled) //Let's skip this queued operation
                 {
                     if (DisablePlaySoundOnce)
                         DisablePlaySoundOnce = false;
@@ -3703,9 +3825,9 @@ namespace MusicBeePlugin
             }
             catch (ThreadAbortException)
             {
-                backgroundTaskIsCanceled = true;
+                backgroundTaskIsStopping = true;
             }
-            finally
+            finally//*********
             {
                 lock (taskStarted)
                 {
@@ -3715,43 +3837,48 @@ namespace MusicBeePlugin
                         System.Media.SystemSounds.Asterisk.Play();
 
                     backgroundTaskIsScheduled = false;
-                    backgroundTaskIsCanceled = false;
+                    backgroundTaskIsStopping = false;
 
                     if (backgroundTaskIsNativeMB && taskWasStarted)
                         NumberOfNativeMbBackgroundTasks--;
                 }
 
-                if (clickedButton != EmptyButton)
-                    Invoke(stopButtonClicked, new object[] { this, null });
-
-                RefreshPanels(true);
-
-                SetResultingSbText();
-
-                if (closeFormOnCompletion)
+                if (!closeFormOnStopping && !Disposing && !IsDisposed)
                 {
-                    Invoke(new Action(() => { enableDisablePreviewOptionControls(false); disableQueryingOrUpdatingButtons(); })); //Or see below. Not sure what's better.
-                    //Invoke(new Action(() => { Close(); })); //****
-                }
-                else if (!Visible)
-                {
-                    if (SavedSettings.closeShowHiddenWindows == 1)
-                        Invoke(new Action(() => { Close(); }));
-                    else
-                        Invoke(new Action(() => { Visible = true; }));
+                    RefreshPanels(true);
+                    SetResultingSbText();
+
+                    try
+                    {
+                        if (clickedButton != EmptyButton && !isStopButtonAlreadyClicked)//********
+                            Invoke(new Action(() => { stopButtonClickedMethod(null); }));
+
+                        if (!Visible && !isStopButtonAlreadyClicked)
+                        {
+                            if (SavedSettings.closeShowHiddenWindows == 1)
+                                Invoke(new Action(() => { Close(); }));
+                            else
+                                Invoke(new Action(() => { Visible = true; }));
+                        }
+                    }
+                    catch (System.InvalidOperationException)
+                    {
+                        ; //Still disposing. Let's ignore...
+                    }
                 }
             }
         }
 
         internal void switchOperation(ThreadStart operation, Button clickedButton, Button okButton, Button previewButton, Button closeButton,
-            bool backgroundTaskIsNativeMB, PrepareOperation prepareOperation, bool closeFormOnCompletion = false)
+            bool backgroundTaskIsNativeMB, PrepareOperation prepareOperation, bool disableCloseButtonOnPreview = false, int checkMinimumColumnCount = -1)
         {
-            this.closeFormOnCompletion = closeFormOnCompletion;
+            this.checkMinimumColumnCount = checkMinimumColumnCount;
 
-
-            if (backgroundTaskIsScheduled && backgroundTaskIsCanceled) //Let's restart operation
+            if (backgroundTaskIsScheduled && backgroundTaskIsStopping) //Let's restart operation
             {
-                backgroundTaskIsCanceled = false;
+                isStopButtonAlreadyClicked = false;
+                backgroundTaskIsStopping = false;
+                backgroundTaskIsStoppedOrCancelled = false;
 
                 lock (OpenedForms)
                 {
@@ -3759,11 +3886,11 @@ namespace MusicBeePlugin
                         NumberOfNativeMbBackgroundTasks++;
                 }
 
-                queryingOrUpdatingButtonClick(this);
+                queryingOrUpdatingButtonClick(disableCloseButtonOnPreview);
             }
-            else if (backgroundTaskIsScheduled && !backgroundTaskIsCanceled) //Let's stop operation
+            else if (backgroundTaskIsScheduled && !backgroundTaskIsStopping) //Let's stop operation
             {
-                backgroundTaskIsCanceled = true;
+                backgroundTaskIsStopping = true;
 
                 lock (OpenedForms)
                 {
@@ -3771,42 +3898,45 @@ namespace MusicBeePlugin
                         NumberOfNativeMbBackgroundTasks--;
                 }
 
-                stopButtonClicked(this, prepareOperation);
+                stopButtonClickedMethod(prepareOperation);
             }
             else //if (!backgroundTaskIsScheduled) //Let's start operation
             {
-                buttonLabels.TryGetValue(previewButton, out previewButtonText);
-                buttonLabels.TryGetValue(okButton, out okButtonText);
-                buttonLabels.TryGetValue(closeButton, out closeButtonText);
+                buttonLabels.TryGetValue(previewButton, out buttonPreviewName);
+                buttonLabels.TryGetValue(okButton, out buttonOKName);
+                buttonLabels.TryGetValue(closeButton, out buttonCloseName);
 
                 this.backgroundTaskIsNativeMB = backgroundTaskIsNativeMB;
 
-                this.backgroundTaskIsCanceled = false;
-                this.backgroundTaskIsScheduled = true;
-                this.backgroundThread = null;
+                isStopButtonAlreadyClicked = false;
+                backgroundTaskIsStopping = false;
+                backgroundTaskIsStoppedOrCancelled = false;
+                backgroundTaskIsScheduled = true;
+                backgroundThread = null;
 
                 this.clickedButton = clickedButton;
                 this.previewButton = previewButton;
                 this.closeButton = closeButton;
 
-                this.job = operation;
+                job = operation;
 
                 if (this.backgroundTaskIsNativeMB)
                 {
+                    queryingOrUpdatingButtonClick(false);
+
                     lock (OpenedForms)
-                    {
                         NumberOfNativeMbBackgroundTasks++;
-                    }
 
                     MbApiInterface.MB_CreateBackgroundTask(serializedOperation, this);
                 }
                 else
                 {
+                    queryingOrUpdatingButtonClick(disableCloseButtonOnPreview);
+
                     var workingThread = new Thread(serializedOperation);
                     workingThread.Start();
                 }
 
-                queryingOrUpdatingButtonClick(this);
             }
         }
 
@@ -3845,65 +3975,68 @@ namespace MusicBeePlugin
             //Implemented in derived classes... 
         }
 
-        internal void queryingOrUpdatingButtonClick(PluginWindowTemplate clickedForm)
+        internal void queryingOrUpdatingButtonClick(bool disableCloseButtonOnPreview = true)
         {
             lock (OpenedForms)
             {
                 foreach (var form in OpenedForms)
                 {
-                    if (backgroundTaskIsNativeMB && form != clickedForm && !(form.backgroundTaskIsNativeMB && form.backgroundTaskIsScheduled && !form.backgroundTaskIsCanceled))
-                    {
+                    if (backgroundTaskIsNativeMB && form != this && !(form.backgroundTaskIsNativeMB && form.backgroundTaskIsScheduled && !form.backgroundTaskIsStoppedOrCancelled))//********
                         form.disableQueryingButtons();
-                    }
                 }
 
                 if (backgroundTaskIsNativeMB) //Updating operation
                 {
-                    clickedForm.enableQueryingButtons();
-                    clickedForm.disableQueryingOrUpdatingButtons();
+                    enableQueryingButtons();
+                    //disableQueryingOrUpdatingButtons();//***********
 
-                    okButtonText = buttonLabels[clickedButton];
-                    clickedButton.Text = CancelButtonName;
-                    clickedButton.Enable(true);
-
-                    if (buttonLabels.TryGetValue(closeButton, out closeButtonText))
+                    if (clickedButton != EmptyButton)
                     {
-                        closeButton.Text = HideButtonName;
-                        closeButton.Enable(true);
+                        buttonOKName = buttonLabels[clickedButton];
+                        clickedButton.Text = ButtonCancelName;
+                        clickedButton.Enable(true);
+
+                        if (buttonLabels.TryGetValue(closeButton, out buttonCloseName))
+                        {
+                            closeButton.Text = ButtonHideName;
+                            closeButton.Enable(true);
+                        }
                     }
                 }
                 else //Querying operation
                 {
-                    clickedForm.disableQueryingOrUpdatingButtons();
+                    //disableQueryingOrUpdatingButtons();//***********
 
-                    clickedButton.Text = StopButtonName;
+                    clickedButton.Text = ButtonStopName;
                     clickedButton.Enable(true);
 
-                    if (buttonLabels.ContainsKey(closeButton))
+                    if (disableCloseButtonOnPreview && buttonLabels.ContainsKey(closeButton))
                         closeButton.Enable(false);
                 }
 
                 enableDisablePreviewOptionControls(false);
                 enableQueryingOrUpdatingButtons();
+
+                if (backgroundTaskIsNativeMB)
+                    previewButton.Enable(false);
             }
         }
 
-        internal void stopButtonClickedMethod(PluginWindowTemplate clickedForm, PrepareOperation prepareOperation)
+        internal void stopButtonClickedMethod(PrepareOperation prepareOperation)
         {
+            if (isStopButtonAlreadyClicked)
+                return;
+
             lock (OpenedForms)
             {
                 foreach (var form in OpenedForms)
                 {
-                    if (backgroundTaskIsNativeMB && form != clickedForm) //Updating operation
+                    if (backgroundTaskIsNativeMB && form != this) //Updating operation
                     {
-                        if (NumberOfNativeMbBackgroundTasks > 0 && !(form.backgroundTaskIsNativeMB && form.backgroundTaskIsScheduled && !form.backgroundTaskIsCanceled))
-                        {
+                        if (NumberOfNativeMbBackgroundTasks > 0 && !(form.backgroundTaskIsNativeMB && form.backgroundTaskIsScheduled && !form.backgroundTaskIsStoppedOrCancelled))
                             form.disableQueryingButtons();
-                        }
                         else
-                        {
                             form.enableQueryingButtons();
-                        }
                     }
                 }
 
@@ -3911,43 +4044,49 @@ namespace MusicBeePlugin
 
                 if (backgroundTaskIsNativeMB) //Updating operation
                 {
-                    clickedButton.Text = okButtonText;
+                    clickedButton.Text = buttonOKName;
 
-                    if (previewIsGenerated)
-                        previewButton.Text = ClearButtonName;
+                    if (previewIsGenerated)//*******
+                        previewButton.Text = ButtonClearName;
                     else
-                        previewButton.Text = PreviewButtonName;
+                        previewButton.Text = buttonPreviewName;
 
-                    if (backgroundTaskIsScheduled)
-                        previewButton.Enable(false);
-                    else if (buttonLabels.ContainsKey(closeButton))
-                        closeButton.Text = closeButtonText;
+                    if (buttonLabels.ContainsKey(closeButton))
+                        closeButton.Text = buttonCloseName;
+
+                    enableQueryingOrUpdatingButtons();
+                    
+                    backgroundTaskIsStopping = true;
+                    backgroundTaskIsStoppedOrCancelled = false;
                 }
                 else //Querying operation
                 {
-                    if (prepareOperation != null)
+                    if (backgroundTaskIsScheduled)
+                        disableQueryingOrUpdatingButtons();
+                    else
+                        enableQueryingOrUpdatingButtons();
+
+                    if (prepareOperation != null && backgroundTaskIsStopping)
                     {
                         prepareOperation();
                         previewIsGenerated = false;
-                        backgroundTaskIsCanceled = true;
-                        clickedButton.Text = PreviewButtonName;
-                        previewIsStopped = true;
+                        backgroundTaskIsStopping = false;
+                        backgroundTaskIsStoppedOrCancelled = false;
+                        clickedButton.Text = buttonPreviewName;
                     }
                     else
                     {
-                        backgroundTaskIsCanceled = true;
-
-                        if (previewIsGenerated && !previewIsStopped)
-                            clickedButton.Text = ClearButtonName;
+                        if (previewIsGenerated)
+                            clickedButton.Text = ButtonClearName;
                         else
-                            clickedButton.Text = previewButtonText;
+                            clickedButton.Text = buttonPreviewName;
+
+                        backgroundTaskIsStopping = false;
+                        backgroundTaskIsStoppedOrCancelled = false;//*********
 
                         closeButton.Enable(true);
                     }
                 }
-
-                enableDisablePreviewOptionControls(true);
-                enableQueryingOrUpdatingButtons();
             }
         }
 
@@ -3958,35 +4097,79 @@ namespace MusicBeePlugin
                 if (backgroundTaskIsNativeMB) //Updating operation
                 {
                     enableQueryingButtons();
-
-                    clickedButton.Text = StopButtonName;
+                    clickedButton.Text = ButtonStopName;
+                    previewButton.Enable(false);
                 }
             }
         }
 
-        //clearPreview = 0: //--- ??? //****** What is this?
-        //checkMinimumColumnCount = -1: check if row count > 0, checkMinimumColumnCount >= 0: don't check rown count, check if column count > checkMinimumColumnCount
-        protected void clickOnPreviewButton(DataGridView previewTable, PrepareOperation prepareOperation, ThreadStart operation,
-            Button previewButton, Button okButton, Button closeButton, int clearPreview = 0, int checkMinimumColumnCount = -1)
+        protected bool checkStoppingStatus()
+        {
+            if (PluginClosing)
+                return true;
+            else if (backgroundTaskIsScheduled && (backgroundTaskIsStopping || backgroundTaskIsStoppedOrCancelled))
+                return true;
+            else
+                return false;
+        }
+
+        protected bool checkStoppedStatus()//******* must be called only in GUI thread!!!
+        {
+            if (backgroundTaskIsScheduled && backgroundTaskIsStoppedOrCancelled)
+            {
+                enableDisablePreviewOptionControls(true);
+                enableQueryingOrUpdatingButtons();
+
+                if (backgroundTaskIsNativeMB && backgroundTaskIsScheduled)
+                    previewButton.Enable(false);
+
+                return true;
+            }
+
+            if (!backgroundTaskIsScheduled)
+            {
+                enableDisablePreviewOptionControls(true);
+                enableQueryingOrUpdatingButtons();
+
+                return true;
+            }
+
+            return false;
+        }
+
+        //checkMinimumColumnCount = -1: check if row count > 0, checkMinimumColumnCount >= 0: don't check rows count, check if column count > checkMinimumColumnCount
+        //Returns: true if preview is started (closing current form must be temporary disabled), otherwise returns false
+        protected bool clickOnPreviewButton(DataGridView previewTable, PrepareOperation prepareOperation, ThreadStart operation,
+            Button previewButton, Button okButton, Button closeButton, bool clearPreview = false, int checkMinimumColumnCount = -1, bool disableCloseButtonOnPreview = false)//******** remove disableCloseButtonOnPreview?
         {
             //checkColumnCountInsteadOfRowCount == true for "Tag History"/"Compare Tracks"
-            if (((checkMinimumColumnCount == -1 && previewTable.RowCount == 0) || (checkMinimumColumnCount >= 0 && previewTable.ColumnCount <= checkMinimumColumnCount)
-                || backgroundTaskIsWorking() || clearPreview == 2) && clearPreview != 1)
+            if ((((checkMinimumColumnCount == -1 && previewTable.RowCount == 0) || (checkMinimumColumnCount >= 0 && previewTable.ColumnCount <= checkMinimumColumnCount)
+                && !backgroundTaskIsWorking())) && !clearPreview)
             {
-                if (previewIsStopped)
-                    previewIsGenerated = false;
-
-                previewIsStopped = false;
+                previewIsGenerated = false;
 
                 if (prepareOperation != null)
                 {
                     if (prepareOperation())
-                        switchOperation(operation, previewButton, okButton, previewButton, closeButton, false, prepareOperation);
+                    {
+                        switchOperation(operation, previewButton, okButton, previewButton, closeButton, false, prepareOperation, disableCloseButtonOnPreview, checkMinimumColumnCount);
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
                 else
                 {
-                    switchOperation(operation, previewButton, okButton, previewButton, closeButton, false, prepareOperation);
+                    switchOperation(operation, previewButton, okButton, previewButton, closeButton, false, null, disableCloseButtonOnPreview, checkMinimumColumnCount);
+                    return true;
                 }
+            }
+            else if (backgroundTaskIsWorking())//*******
+            {
+                backgroundTaskIsStopping = true;
+                return true;
             }
             else
             {
@@ -3994,10 +4177,13 @@ namespace MusicBeePlugin
                     prepareOperation();
 
                 previewIsGenerated = false;
-                previewIsStopped = false;
-                previewButton.Text = PreviewButtonName;
+                backgroundTaskIsStopping = false;
+                backgroundTaskIsStoppedOrCancelled = false;
+                previewButton.Text = ButtonPreviewName;
                 enableDisablePreviewOptionControls(true);
                 enableQueryingOrUpdatingButtons();
+
+                return false;
             }
         }
     }

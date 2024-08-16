@@ -319,10 +319,15 @@ namespace MusicBeePlugin
 
             if (Math.Abs(resultBr - backBr) < 0.3)
             {
-                if (backBr > 0.5)
-                    resultBr -= Math.Abs(resultBr - backBr);
+                if (backBr > 0.5f)
+                    resultBr = 0.5f - resultBr;
                 else
-                    resultBr += Math.Abs(resultBr - backBr);
+                    resultBr = 0.5f + resultBr;
+
+                if (resultBr > 1)
+                    resultBr = 1;
+                else if (resultBr < 0)
+                    resultBr = 0;
             }
 
             var resultColor = HsbToRgb(resultHue, resultSat, resultBr);

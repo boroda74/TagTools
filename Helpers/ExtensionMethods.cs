@@ -388,18 +388,18 @@ namespace ExtensionMethods
 
     internal static class ReadonlyControls
     {
-        internal static void MakeReadonly(this Control parent, bool state)
+        internal static void MakeReadonly(this Control parent, bool enable)
         {
             foreach (Control control in parent.Controls)
             {
                 if (control is Button button)
-                    button.Enable(!state);
+                    button.Enable(!enable);
                 else if (control.GetType().IsSubclassOf(typeof(TextBox)) || control is TextBox)
-                    (control as TextBox).ReadOnly = state;
+                    (control as TextBox).ReadOnly = enable;
                 else if (control.GetType().IsSubclassOf(typeof(CustomComboBox)) || control is CustomComboBox)
-                    (control as CustomComboBox).ForceReadonly(state);
+                    (control as CustomComboBox).ForceReadonly(enable);
                 else if (control.GetType().IsSubclassOf(typeof(ListBox)) || control is ListBox)
-                    (control as ListBox).Enable(!state);
+                    (control as ListBox).Enable(!enable);
                 else if (control is GroupBox)
                     ; //Nothing...
                 else if (control is TableLayoutPanel)
@@ -409,62 +409,80 @@ namespace ExtensionMethods
                 else
                     control.Enable(false);
 
-                control.MakeReadonly(state);
+                control.MakeReadonly(enable);
             }
         }
 
-        internal static void Enable(this Control control, bool state)
+        internal static void Enable(this Control control, bool enable)
         {
             if (string.IsNullOrEmpty(control.AccessibleDescription))
-                control.EnableInternal(state);
-            else if (state && control.AccessibleDescription == Plugin.DisabledState)
+                control.EnableInternal(enable);
+            else if (enable && control.AccessibleDescription == Plugin.DisabledState)
                 control.AccessibleDescription = Plugin.EnabledState;
-            else if (!state && control.AccessibleDescription == Plugin.EnabledState)
+            else if (!enable && control.AccessibleDescription == Plugin.EnabledState)
                 control.AccessibleDescription = Plugin.DisabledState;
         }
 
-        internal static void EnableInternal(this Control control, bool state)
+        internal static void EnableInternal(this Control control, bool enable)
         {
-            PluginWindowTemplate form;
+            var form = control.FindForm() as PluginWindowTemplate;
 
-            if (control.Parent is CustomComboBox customComboBox)
+            if (control is GroupBox || control is SplitContainer || control is Panel)
+            {
+                foreach (Control child in control.Controls)
+                    child.Enable(enable);
+
+                return;
+            }
+
+            if (control.Parent is CustomComboBox)
                 return;
 
+
+            if (control is CustomComboBox customComboBox)
+            {
+                form = customComboBox.ownerForm;
+
+                if (form == null || form.Disposing || form.IsDisposed)
+                    return;
+
+                form.setSkinnedControlColors(control, enable);
+                control.Enabled = enable;
+                return;
+            }
+
+
+            if (form == null || form.Disposing || form.IsDisposed)
+                return;
 
             if (control is TextBox || control is ListBox)
             {
-                form = control.FindForm() as PluginWindowTemplate;
-                form.setSkinnedControlColors(control, state);
-
-                control.Enabled = state;
-                return;
-            }
-            
-            if (control is CustomComboBox customComboBox1)
-            {
-                form = customComboBox1.ownerForm;
-                form.setSkinnedControlColors(control, state);
-
-                control.Enabled = state;
+                form.setSkinnedControlColors(control, enable);
+                control.Enabled = enable;
                 return;
             }
 
-
-            form = control.FindForm() as PluginWindowTemplate;
-            form.setSkinnedControlColors(control, state);
 
 
             if (control is Label)
+            {
+                form.controlsReferencedX.TryGetValue(control, out var control2);
+                if (!(control2 is CheckBox || control2 is RadioButton))
+                    form.setSkinnedControlColors(control, enable);
+
                 return;
+            }
 
 
-            control.Enabled = state;
+            form.setSkinnedControlColors(control, enable);
+
+            control.Enabled = enable;
 
             if (control is CheckBox || control is RadioButton)
             {
                 form.controlsReferencesX.TryGetValue(control, out var control2);
                 if (control2 is Label label)
-                    label.Enable(state);
+                    label.Enable(enable);
             }
         }
 

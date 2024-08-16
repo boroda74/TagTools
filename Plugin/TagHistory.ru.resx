@@ -119,13 +119,13 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1005, 7</value>
+    <value>1003, 7</value>
   </data>
   <data name="buttonOK.Text" xml:space="preserve">
     <value>Применить</value>
   </data>
   <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1137, 7</value>
+    <value>1135, 7</value>
   </data>
   <data name="buttonClose.Text" xml:space="preserve">
     <value>Закрыть</value>
@@ -151,7 +151,7 @@
 </value>
   </data>
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1256, 214</value>
+    <value>1254, 212</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>136, 15</value>
@@ -159,17 +159,17 @@
   <data name="label3.Text" xml:space="preserve">
     <value>Искать архивы в папке:</value>
   </data>
-  <data name="searchFolderTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>547, 23</value>
+  <data name="searchFolderComboBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>545, 23</value>
   </data>
-  <data name="browseButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>558, 33</value>
+  <data name="buttonBrowse.Location" type="System.Drawing.Point, System.Drawing">
+    <value>556, 33</value>
   </data>
-  <data name="browseButton.Text" xml:space="preserve">
+  <data name="buttonBrowse.Text" xml:space="preserve">
     <value>Открыть...</value>
   </data>
   <data name="forLastLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>663, 37</value>
+    <value>661, 37</value>
   </data>
   <data name="forLastLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>101, 15</value>
@@ -178,10 +178,10 @@
     <value>среди последних</value>
   </data>
   <data name="numberOfBackupsNumericUpDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>772, 33</value>
+    <value>770, 33</value>
   </data>
   <data name="backupsLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>872, 37</value>
+    <value>870, 37</value>
   </data>
   <data name="backupsLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>52, 15</value>
@@ -190,7 +190,7 @@
     <value>архивов</value>
   </data>
   <data name="rereadButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>955, 33</value>
+    <value>953, 33</value>
   </data>
   <data name="rereadButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>140, 23</value>
@@ -269,16 +269,19 @@
     <value>(Выбранные треки)</value>
   </data>
   <data name="trackListComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1091, 23</value>
+    <value>1089, 23</value>
   </data>
   <data name="optionsPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1100, 60</value>
+    <value>1098, 60</value>
+  </data>
+  <data name="controlsPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 270</value>
   </data>
   <data name="controlsPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1266, 37</value>
+    <value>1264, 37</value>
   </data>
   <data name="buttonPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>873, 7</value>
+    <value>871, 7</value>
   </data>
   <data name="buttonPreview.Text" xml:space="preserve">
     <value>Просмотр</value>
@@ -287,7 +290,7 @@
     <value>728, 11</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1266, 313</value>
+    <value>1264, 311</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>1280, 350</value>

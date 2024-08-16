@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="splitContainer1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 84</value>
+    <value>4, 84</value>
   </data>
   <data name="splitContainer1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 0, 5, 5</value>
@@ -154,7 +154,7 @@
     <value>4, 1, 6, 1</value>
   </data>
   <data name="preserveTagValuesTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>332, 23</value>
+    <value>331, 23</value>
   </data>
   <data name="preserveTagValuesTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -341,7 +341,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>1</value>
   </data>
   <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>972, 27</value>
+    <value>971, 27</value>
   </data>
   <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -371,7 +371,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>Left, Right</value>
   </data>
   <data name="customText4Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>591, 29</value>
+    <value>590, 29</value>
   </data>
   <data name="customText4Box.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 6, 1</value>
@@ -404,7 +404,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="customText4Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>490, 28</value>
+    <value>489, 28</value>
   </data>
   <data name="customText4Label.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 0, 1</value>
@@ -443,7 +443,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>4, 1, 6, 1</value>
   </data>
   <data name="customText3Box.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 23</value>
+    <value>374, 23</value>
   </data>
   <data name="customText3Box.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -503,7 +503,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>Left, Right</value>
   </data>
   <data name="customText2Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>591, 2</value>
+    <value>590, 2</value>
   </data>
   <data name="customText2Box.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 6, 1</value>
@@ -536,7 +536,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="customText2Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>490, 1</value>
+    <value>489, 1</value>
   </data>
   <data name="customText2Label.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 0, 1</value>
@@ -575,7 +575,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>4, 1, 6, 1</value>
   </data>
   <data name="customTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 23</value>
+    <value>374, 23</value>
   </data>
   <data name="customTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -641,7 +641,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>2</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>972, 54</value>
+    <value>971, 54</value>
   </data>
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -671,13 +671,13 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>Left, Right</value>
   </data>
   <data name="parameterTag6List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>722, 30</value>
+    <value>720, 30</value>
   </data>
   <data name="parameterTag6List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 6, 1</value>
   </data>
   <data name="parameterTag6List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 23</value>
+    <value>245, 23</value>
   </data>
   <data name="parameterTag6List.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -704,7 +704,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="labelTag6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>668, 28</value>
+    <value>666, 28</value>
   </data>
   <data name="labelTag6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 0, 1</value>
@@ -740,7 +740,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="pictureTag6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>652, 33</value>
+    <value>650, 33</value>
   </data>
   <data name="pictureTag6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 0, 0</value>
@@ -770,13 +770,13 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>Left, Right</value>
   </data>
   <data name="parameterTag5List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>398, 30</value>
+    <value>397, 30</value>
   </data>
   <data name="parameterTag5List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 6, 1</value>
   </data>
   <data name="parameterTag5List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 23</value>
+    <value>243, 23</value>
   </data>
   <data name="parameterTag5List.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -803,7 +803,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="labelTag5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>344, 28</value>
+    <value>343, 28</value>
   </data>
   <data name="labelTag5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 0, 1</value>
@@ -839,7 +839,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="pictureTag5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>328, 33</value>
+    <value>327, 33</value>
   </data>
   <data name="pictureTag5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 0, 0</value>
@@ -875,7 +875,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>4, 1, 6, 1</value>
   </data>
   <data name="parameterTag4List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 23</value>
+    <value>243, 23</value>
   </data>
   <data name="parameterTag4List.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -968,13 +968,13 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>Left, Right</value>
   </data>
   <data name="parameterTag3List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>722, 3</value>
+    <value>720, 3</value>
   </data>
   <data name="parameterTag3List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 6, 1</value>
   </data>
   <data name="parameterTag3List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 23</value>
+    <value>245, 23</value>
   </data>
   <data name="parameterTag3List.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1001,7 +1001,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="labelTag3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>668, 1</value>
+    <value>666, 1</value>
   </data>
   <data name="labelTag3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 0, 1</value>
@@ -1037,7 +1037,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="pictureTag3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>652, 6</value>
+    <value>650, 6</value>
   </data>
   <data name="pictureTag3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 0, 0</value>
@@ -1067,13 +1067,13 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>Left, Right</value>
   </data>
   <data name="parameterTag2List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>398, 3</value>
+    <value>397, 3</value>
   </data>
   <data name="parameterTag2List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 6, 1</value>
   </data>
   <data name="parameterTag2List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 23</value>
+    <value>243, 23</value>
   </data>
   <data name="parameterTag2List.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1100,7 +1100,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="labelTag2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>344, 1</value>
+    <value>343, 1</value>
   </data>
   <data name="labelTag2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 0, 1</value>
@@ -1136,7 +1136,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="pictureTag2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>328, 6</value>
+    <value>327, 6</value>
   </data>
   <data name="pictureTag2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 0, 0</value>
@@ -1172,7 +1172,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>4, 1, 6, 1</value>
   </data>
   <data name="parameterTagList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 23</value>
+    <value>243, 23</value>
   </data>
   <data name="parameterTagList.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1274,7 +1274,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>2</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>972, 54</value>
+    <value>971, 54</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -1304,7 +1304,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="userPresetLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>879, 34</value>
+    <value>878, 34</value>
   </data>
   <data name="userPresetLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 6, 0</value>
@@ -1337,7 +1337,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="userPresetPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>863, 34</value>
+    <value>862, 34</value>
   </data>
   <data name="userPresetPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>10, 3, 4, 3</value>
@@ -1373,7 +1373,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="customizedPresetLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>715, 34</value>
+    <value>714, 34</value>
   </data>
   <data name="customizedPresetLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 0, 0</value>
@@ -1406,7 +1406,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="customizedPresetPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>699, 34</value>
+    <value>698, 34</value>
   </data>
   <data name="customizedPresetPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -1656,7 +1656,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>NoControl</value>
   </data>
   <data name="clearIdButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>947, 5</value>
+    <value>946, 5</value>
   </data>
   <data name="clearIdButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 3, 6, 3</value>
@@ -1689,7 +1689,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>Top, Right</value>
   </data>
   <data name="idTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>802, 5</value>
+    <value>801, 5</value>
   </data>
   <data name="idTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -1725,7 +1725,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>NoControl</value>
   </data>
   <data name="idLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>625, 9</value>
+    <value>624, 9</value>
   </data>
   <data name="idLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>20, 0, 0, 0</value>
@@ -1761,7 +1761,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>4, 3, 4, 3</value>
   </data>
   <data name="playlistComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>263, 23</value>
+    <value>262, 23</value>
   </data>
   <data name="playlistComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1869,7 +1869,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>Vertical</value>
   </data>
   <data name="descriptionBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>930, 56</value>
+    <value>929, 56</value>
   </data>
   <data name="descriptionBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1899,7 +1899,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>2</value>
   </data>
   <data name="textBoxTableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>950, 56</value>
+    <value>949, 56</value>
   </data>
   <data name="textBoxTableLayoutPanel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1959,7 +1959,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>6, 0, 6, 7</value>
   </data>
   <data name="descriptionGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>962, 79</value>
+    <value>961, 79</value>
   </data>
   <data name="descriptionGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -1977,13 +1977,13 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>19</value>
   </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 110</value>
+    <value>0, 108</value>
   </data>
   <data name="panel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>976, 277</value>
+    <value>975, 277</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2022,7 +2022,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>True</value>
   </data>
   <data name="presetList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>942, 90</value>
+    <value>941, 88</value>
   </data>
   <data name="presetList.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2049,7 +2049,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>2</value>
   </data>
   <data name="listBoxTableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>962, 110</value>
+    <value>961, 108</value>
   </data>
   <data name="listBoxTableLayoutPanel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2079,7 +2079,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>2</value>
   </data>
   <data name="tableLayoutPanel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>976, 387</value>
+    <value>975, 385</value>
   </data>
   <data name="tableLayoutPanel4.TabIndex" type="System.Int32, mscorlib">
     <value>163</value>
@@ -2406,7 +2406,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>51</value>
   </data>
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>962, 99</value>
+    <value>961, 101</value>
   </data>
   <data name="previewTable.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -2517,7 +2517,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>2</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>989, 663</value>
+    <value>987, 661</value>
   </data>
   <data name="filtersPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -2550,10 +2550,10 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>Hotkey assigned</value>
   </data>
   <data name="filterComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>783, 4</value>
+    <value>781, 4</value>
   </data>
   <data name="filterComboBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 3, 7, 3</value>
+    <value>4, 3, 6, 3</value>
   </data>
   <data name="filterComboBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>186, 23</value>
@@ -2606,7 +2606,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="uncheckAllFiltersPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>739, 6</value>
+    <value>737, 6</value>
   </data>
   <data name="uncheckAllFiltersPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -2664,7 +2664,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="hotkeyPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>697, 6</value>
+    <value>695, 6</value>
   </data>
   <data name="hotkeyPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -2735,7 +2735,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="functionIdPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>667, 6</value>
+    <value>665, 6</value>
   </data>
   <data name="functionIdPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -2797,7 +2797,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="playlistPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>637, 6</value>
+    <value>635, 6</value>
   </data>
   <data name="playlistPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -2860,7 +2860,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="userPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>607, 6</value>
+    <value>605, 6</value>
   </data>
   <data name="userPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -2924,7 +2924,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="customizedPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>577, 6</value>
+    <value>575, 6</value>
   </data>
   <data name="customizedPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -2982,7 +2982,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="predefinedPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>547, 6</value>
+    <value>545, 6</value>
   </data>
   <data name="predefinedPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -3050,7 +3050,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="tickedOnlyPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>517, 6</value>
+    <value>515, 6</value>
   </data>
   <data name="tickedOnlyPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -3089,7 +3089,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="buttonSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>473, 4</value>
+    <value>471, 4</value>
   </data>
   <data name="buttonSettings.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -3122,7 +3122,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="clearSearchButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>430, 4</value>
+    <value>428, 4</value>
   </data>
   <data name="clearSearchButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 3, 4, 3</value>
@@ -3161,7 +3161,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>4, 3, 4, 3</value>
   </data>
   <data name="searchTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 23</value>
+    <value>386, 23</value>
   </data>
   <data name="searchTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3218,7 +3218,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>5, 0, 5, 0</value>
   </data>
   <data name="filtersPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>976, 32</value>
+    <value>974, 32</value>
   </data>
   <data name="filtersPanel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -3245,13 +3245,13 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="autoApplyPresetsLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 6</value>
+    <value>11, 6</value>
   </data>
   <data name="autoApplyPresetsLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>12, 6, 12, 0</value>
+    <value>11, 6, 12, 0</value>
   </data>
   <data name="autoApplyPresetsLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>962, 48</value>
+    <value>961, 48</value>
   </data>
   <data name="autoApplyPresetsLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3413,7 +3413,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>AdvancedSearchAndReplace</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=8.3.8984.16483, Culture=neutral, PublicKeyToken=null</value>
+    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=8.3.8989.22091, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="dirtyErrorProvider.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -4104,7 +4104,7 @@ Ctrl-click to save preset definitions without closing this window</value>
     <value>NoControl</value>
   </data>
   <data name="settingsProcessingLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>55, -1</value>
+    <value>74, -1</value>
   </data>
   <data name="settingsProcessingLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -4134,7 +4134,7 @@ Ctrl-click to save preset definitions without closing this window</value>
     <value>4</value>
   </data>
   <data name="settingsProcessingGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>694, 3</value>
+    <value>693, 3</value>
   </data>
   <data name="settingsProcessingGroupBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -4529,7 +4529,7 @@ If you have deleted some predefined presets, then they won't be reinstalled</val
     <value>NoControl</value>
   </data>
   <data name="presetManagementLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, -1</value>
+    <value>279, -1</value>
   </data>
   <data name="presetManagementLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -4592,7 +4592,7 @@ If you have deleted some predefined presets, then they won't be reinstalled</val
     <value>0, 0</value>
   </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>976, 189</value>
+    <value>975, 189</value>
   </data>
   <data name="panel2.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -4625,10 +4625,10 @@ If you have deleted some predefined presets, then they won't be reinstalled</val
     <value>170</value>
   </data>
   <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>976, 579</value>
+    <value>975, 577</value>
   </data>
   <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
-    <value>387</value>
+    <value>385</value>
   </data>
   <data name="splitContainer1.SplitterWidth" type="System.Int32, mscorlib">
     <value>3</value>

@@ -38,7 +38,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AutoBackupSettings));
             this.autoBackupFolderTextBox = new System.Windows.Forms.TextBox();
-            this.browseButton = new System.Windows.Forms.Button();
+            this.buttonBrowse = new System.Windows.Forms.Button();
             this.autoBackupFolderLabel = new System.Windows.Forms.Label();
             this.autoBackupPrefixLabel = new System.Windows.Forms.Label();
             this.autoBackupPrefixTextBox = new System.Windows.Forms.TextBox();
@@ -83,16 +83,16 @@
             resources.ApplyResources(this.autoBackupFolderTextBox, "autoBackupFolderTextBox");
             this.autoBackupFolderTextBox.Name = "autoBackupFolderTextBox";
             this.autoBackupFolderTextBox.ReadOnly = true;
-            this.autoBackupFolderTextBox.Tag = "#browseButton";
+            this.autoBackupFolderTextBox.Tag = "#buttonBrowse";
             this.toolTip1.SetToolTip(this.autoBackupFolderTextBox, resources.GetString("autoBackupFolderTextBox.ToolTip"));
             // 
-            // browseButton
+            // buttonBrowse
             // 
-            resources.ApplyResources(this.browseButton, "browseButton");
-            this.browseButton.Name = "browseButton";
-            this.browseButton.Tag = "#AutoBackupSettings@non-defaultable";
-            this.toolTip1.SetToolTip(this.browseButton, resources.GetString("browseButton.ToolTip"));
-            this.browseButton.Click += new System.EventHandler(this.browseButton_Click);
+            resources.ApplyResources(this.buttonBrowse, "buttonBrowse");
+            this.buttonBrowse.Name = "buttonBrowse";
+            this.buttonBrowse.Tag = "#AutoBackupSettings@non-defaultable";
+            this.toolTip1.SetToolTip(this.buttonBrowse, resources.GetString("buttonBrowse.ToolTip"));
+            this.buttonBrowse.Click += new System.EventHandler(this.buttonBrowse_Click);
             // 
             // autoBackupFolderLabel
             // 
@@ -349,7 +349,7 @@
             this.Controls.Add(this.autoBackupNumericUpDown);
             this.Controls.Add(this.autoBackupCheckBoxLabel);
             this.Controls.Add(this.autoBackupCheckBox);
-            this.Controls.Add(this.browseButton);
+            this.Controls.Add(this.buttonBrowse);
             this.Controls.Add(this.autoBackupFolderTextBox);
             this.Controls.Add(this.autoBackupFolderLabel);
             this.Controls.Add(this.dontSkipAutoBackupsIfPlayCountsChangedCheckBoxLabel);
@@ -366,7 +366,7 @@
 
         #endregion
         private System.Windows.Forms.Label autoBackupFolderLabel;
-        private System.Windows.Forms.Button browseButton;
+        private System.Windows.Forms.Button buttonBrowse;
         private System.Windows.Forms.TextBox autoBackupFolderTextBox;
         private System.Windows.Forms.Label autoBackupPrefixLabel;
         private System.Windows.Forms.TextBox autoBackupPrefixTextBox;

@@ -1,45 +1,54 @@
 ﻿using System;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace MusicBeePlugin
 {
     partial class Plugin
     {
-        //If files is NOT null then paste tags matching by paths automatically (and fileTags must be NOT null also)
-        internal static bool PasteTagsFromClipboard(string[] files = null, string[] fileTags = null)
+        internal static void PasteTagsFromClipboard()
         {
-            var autoPaste = files != null;
-
-            if (!autoPaste)
-            {
-                if (!MbApiInterface.Library_QueryFilesEx("domain=SelectedFiles", out files))
-                    files = Array.Empty<string>();
-            }
-
-
-            if (files.Length == 0)
-            {
-                MessageBox.Show(MbForm, MsgNoTracksSelected, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return false;
-            }
-
-
             if (!Clipboard.ContainsText())
             {
                 MessageBox.Show(MbForm, MsgClipboardDoesntContainText, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return false;
+                return;
             }
 
-            if (!autoPaste)
-                fileTags = System.Windows.Clipboard.GetText().Split(new[] { '\n' }, StringSplitOptions.None);
+            MbApiInterface.Library_QueryFilesEx("domain=SelectedFiles", out var files);
+
+
+            if (files == null || files.Length == 0)
+            {
+                MessageBox.Show(MbForm, MsgNoTracksSelected, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+
+            var fileTags = System.Windows.Clipboard.GetText().Split(new[] { '\n' }, StringSplitOptions.None);
 
             if (fileTags.Length < 2) //1st row must be tag names, 2nd row and further are tag values
             {
                 MessageBox.Show(MbForm, MsgClipboardDoesntContainTags, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return false;
+                return;
             }
 
 
+            Thread workingTread = new Thread(PasteTagsFromClipboardParameterizedThreadStart);
+            workingTread.Start(new string[][] { files, fileTags });
+        }
+
+        //If files is NOT null then paste tags matching by paths automatically (and fileTags must be NOT null also)
+        internal static void PasteTagsFromClipboardParameterizedThreadStart(object data)
+        {
+            Thread.CurrentThread.Priority = ThreadPriority.BelowNormal;
+
+            string[] files = (data as string[][])[0];
+            string[] fileTags = (data as string[][])[1];
+            PasteTagsFromClipboardInternal(files, fileTags, false);
+        }
+
+        internal static void PasteTagsFromClipboardInternal(string[] files, string[] fileTags, bool autoPaste)
+        {
             var allTagNames = fileTags[0].Trim('\r');
             var tagNames = allTagNames.Split(new[] { '\t' }, StringSplitOptions.None);
             var tagIds = new int[tagNames.Length];
@@ -51,8 +60,12 @@ namespace MusicBeePlugin
 
                 if (tagIds[k] == 0)
                 {
-                    MessageBox.Show(MbForm, MsgUnknownTagNameInClipboard.Replace("%%TAG-NAME%%", tagName), string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    return false;
+                    MbForm.Invoke(new Action(() =>
+                    {
+                        MessageBox.Show(MbForm, MsgUnknownTagNameInClipboard.Replace("%%TAG-NAME%%", tagName), string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }));
+
+                    return;
                 }
             }
 
@@ -77,8 +90,14 @@ namespace MusicBeePlugin
 
             if (matchTagIndex > -1 && !autoPaste)
             {
-                var matchTracksResult = MessageBox.Show(MbForm, MsgMatchTracksByPathQuestion.Replace("%%MATCH-TAG-NAME%%", matchTagName),
-                    string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+                var matchTracksResult = DialogResult.Yes;
+
+                MbForm.Invoke(new Action(() =>
+                {
+                    matchTracksResult = MessageBox.Show(MbForm, MsgMatchTracksByPathQuestion.Replace("%%MATCH-TAG-NAME%%", matchTagName),
+                        string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+                }));
+
 
                 if (matchTracksResult == DialogResult.No)
                     matchTagIndex = -1;
@@ -90,24 +109,34 @@ namespace MusicBeePlugin
             {
                 if ((fileTags.Length == 2 && files.Length > 1) || (fileTags.Length - 1 != files.Length && matchTagIndex > -1))
                 {
-                    var pasteAnywayResult = MessageBox.Show(MbForm, MsgNumberOfTagsInClipboardDoesntCorrespondToNumberOfSelectedTracks
-                                                                        .Replace("%%FILE-TAGS-LENGTH%%", (fileTags.Length - 1).ToString())
-                                                                        .Replace("%%SELECTED-FILES-COUNT%%", files.Length.ToString()) +
-                                                                    MsgDoYouWantToPasteTagsAnyway,
-                        string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+                    var pasteAnywayResult = DialogResult.No;
+
+                    MbForm.Invoke(new Action(() =>
+                    {
+                        pasteAnywayResult = MessageBox.Show(MbForm, MsgNumberOfTagsInClipboardDoesntCorrespondToNumberOfSelectedTracks
+                                                                            .Replace("%%FILE-TAGS-LENGTH%%", (fileTags.Length - 1).ToString())
+                                                                            .Replace("%%SELECTED-FILES-COUNT%%", files.Length.ToString()) +
+                                                                        MsgDoYouWantToPasteTagsAnyway,
+                            string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+                    }));
+
 
                     if (pasteAnywayResult == DialogResult.Yes)
                         multiplePasting = true;
                     else
-                        return false;
+                        return;
                 }
                 else if (fileTags.Length - 1 != files.Length)
                 {
-                    MessageBox.Show(MbForm, MsgNumberOfTagsInClipboardDoesntCorrespondToNumberOfSelectedTracks
-                            .Replace("%%FILE-TAGS-LENGTH%%", (fileTags.Length - 1).ToString())
-                            .Replace("%%SELECTED-FILES-COUNT%%", files.Length.ToString()),
-                        string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    return false;
+                    MbForm.Invoke(new Action(() =>
+                    {
+                        MessageBox.Show(MbForm, MsgNumberOfTagsInClipboardDoesntCorrespondToNumberOfSelectedTracks
+                                .Replace("%%FILE-TAGS-LENGTH%%", (fileTags.Length - 1).ToString())
+                                .Replace("%%SELECTED-FILES-COUNT%%", files.Length.ToString()),
+                            string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }));
+
+                    return;
                 }
             }
 
@@ -116,7 +145,21 @@ namespace MusicBeePlugin
             var notMatchedTracks = 0;
             for (var i = 0; i < files.Length; i++)
             {
+                if (PluginClosing)
+                    return;
+
+                while (MbForm.Disposing)
+                    Thread.Sleep(ActionRetryDelay);
+
+                if (MbForm.IsDisposed)
+                    MbForm = Control.FromHandle(MbApiInterface.MB_GetWindowHandle()) as Form;
+
                 var file = files[i];
+
+
+                if ((i & 0x1f) == 0)
+                    SetStatusBarTextForFileOperations(PasteTagsSbText, false, i, files.Length, file);
+
 
                 var trackMatched = false;
                 string[] tags = null;
@@ -126,11 +169,15 @@ namespace MusicBeePlugin
 
                     if (tagIds.Length != tags.Length)
                     {
-                        MessageBox.Show(MbForm, MsgWrongNumberOfCopiedTags
-                                .Replace("%%CLIPBOARD-TAGS-COUNT%%", tags.Length.ToString())
-                                .Replace("%%CLIPBOARD-LINE%%", (multiplePasting ? 1 : i + 1).ToString()),
-                            string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        return false;
+                        MbForm.Invoke(new Action(() =>
+                        {
+                            MessageBox.Show(MbForm, MsgWrongNumberOfCopiedTags
+                                    .Replace("%%CLIPBOARD-TAGS-COUNT%%", tags.Length.ToString())
+                                    .Replace("%%CLIPBOARD-LINE%%", (multiplePasting ? 1 : i + 1).ToString()),
+                                string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        }));
+
+                        return;
                     }
                 }
                 else
@@ -143,11 +190,15 @@ namespace MusicBeePlugin
 
                         if (tagIds.Length != tags.Length)
                         {
-                            MessageBox.Show(MbForm, MsgWrongNumberOfCopiedTags
-                                    .Replace("%%CLIPBOARD-TAGS-COUNT%%", tags.Length.ToString())
-                                    .Replace("%%CLIPBOARD-LINE%%", l.ToString()),
-                                string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            return false;
+                            MbForm.Invoke(new Action(() =>
+                            {
+                                MessageBox.Show(MbForm, MsgWrongNumberOfCopiedTags
+                                        .Replace("%%CLIPBOARD-TAGS-COUNT%%", tags.Length.ToString())
+                                        .Replace("%%CLIPBOARD-LINE%%", l.ToString()),
+                                    string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            }));
+
+                            return;
                         }
 
                         var matchTag = tags[matchTagIndex];
@@ -182,27 +233,29 @@ namespace MusicBeePlugin
                 }
             }
 
+
+            SetResultingSbText();
+
+
             if (matchTagIndex == -1 || autoPaste)
-                MbApiInterface.MB_RefreshPanels();
+                RefreshPanels(true);
 
             var continuePasteResult = DialogResult.Yes;
             if (!autoPaste && matchTagIndex > -1)
             {
-                continuePasteResult = MessageBox.Show(MbForm, MsgTracksSelectedMatchedNotMatched
-                        .Replace("%%SELECTED-TRACKS%%", files.Length.ToString())
-                        .Replace("%%CLIPBOARD-TRACKS%%", (fileTags.Length - 1).ToString())
-                        .Replace("%%MATCHED-TRACKS%%", matchedTracks.ToString())
-                        .Replace("%%NOT-MATCHED-TRACKS%%", notMatchedTracks.ToString()),
-                    string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                MbForm.Invoke(new Action(() =>
+                {
+                    continuePasteResult = MessageBox.Show(MbForm, MsgTracksSelectedMatchedNotMatched
+                            .Replace("%%SELECTED-TRACKS%%", files.Length.ToString())
+                            .Replace("%%CLIPBOARD-TRACKS%%", (fileTags.Length - 1).ToString())
+                            .Replace("%%MATCHED-TRACKS%%", matchedTracks.ToString())
+                            .Replace("%%NOT-MATCHED-TRACKS%%", notMatchedTracks.ToString()),
+                        string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                }));
             }
 
             if (!autoPaste && matchTagIndex > -1 && continuePasteResult == DialogResult.Yes)
-                return PasteTagsFromClipboard(files, fileTags);
-            else if (!autoPaste && matchTagIndex > -1)
-                return false;
-
-
-            return true;
+                PasteTagsFromClipboardInternal(files, fileTags, true);
         }
     }
 }

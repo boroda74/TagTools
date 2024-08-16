@@ -38,7 +38,16 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MultipleSearchAndReplace));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.templateTable = new System.Windows.Forms.DataGridView();
+            this.RegEx = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.CaseSensitive = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.SearchFor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ReplaceWith = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Position = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.previewTable = new System.Windows.Forms.DataGridView();
+            this.Track = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OriginalTag = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NewTag = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FileColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dirtyErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
@@ -56,12 +65,13 @@
             this.buttonDown = new System.Windows.Forms.Button();
             this.loadComboBox = new System.Windows.Forms.ComboBox();
             this.autoDestinationTagCheckBox = new System.Windows.Forms.CheckBox();
-            this.searchOnlyCheckBox = new System.Windows.Forms.CheckBox();
             this.buttonSettings = new System.Windows.Forms.Button();
             this.buttonDeleteSaved = new System.Windows.Forms.Button();
+            this.smartOperationCheckBox = new System.Windows.Forms.CheckBox();
             this.autoApplyCheckBox = new System.Windows.Forms.CheckBox();
             this.autoApplyPictureBox = new System.Windows.Forms.PictureBox();
             this.controlsPanel = new System.Windows.Forms.Panel();
+            this.smartOperationCheckBoxLabel = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.dataGridViewComboBoxColumn1 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -73,16 +83,6 @@
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SearchTag = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.RegEx = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.CaseSensitive = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.SearchFor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ReplaceWith = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Position = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Track = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OriginalTag = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NewTag = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FileColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -126,7 +126,6 @@
             this.templateTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             resources.ApplyResources(this.templateTable, "templateTable");
             this.templateTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.SearchTag,
             this.RegEx,
             this.CaseSensitive,
             this.SearchFor,
@@ -137,6 +136,48 @@
             this.templateTable.Name = "templateTable";
             this.templateTable.RowHeadersVisible = false;
             this.templateTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            // 
+            // RegEx
+            // 
+            this.RegEx.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.RegEx.FalseValue = "F";
+            this.RegEx.FillWeight = 1F;
+            resources.ApplyResources(this.RegEx, "RegEx");
+            this.RegEx.Name = "RegEx";
+            this.RegEx.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.RegEx.TrueValue = "T";
+            // 
+            // CaseSensitive
+            // 
+            this.CaseSensitive.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.CaseSensitive.FalseValue = "F";
+            this.CaseSensitive.FillWeight = 1F;
+            resources.ApplyResources(this.CaseSensitive, "CaseSensitive");
+            this.CaseSensitive.Name = "CaseSensitive";
+            this.CaseSensitive.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.CaseSensitive.TrueValue = "T";
+            // 
+            // SearchFor
+            // 
+            this.SearchFor.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            resources.ApplyResources(this.SearchFor, "SearchFor");
+            this.SearchFor.Name = "SearchFor";
+            this.SearchFor.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // ReplaceWith
+            // 
+            this.ReplaceWith.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            resources.ApplyResources(this.ReplaceWith, "ReplaceWith");
+            this.ReplaceWith.Name = "ReplaceWith";
+            this.ReplaceWith.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Position
+            // 
+            this.Position.FillWeight = 1F;
+            resources.ApplyResources(this.Position, "Position");
+            this.Position.Name = "Position";
+            this.Position.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Position.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // previewTable
             // 
@@ -156,6 +197,35 @@
             this.previewTable.Name = "previewTable";
             this.previewTable.RowHeadersVisible = false;
             this.previewTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            // 
+            // Track
+            // 
+            this.Track.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Track.FillWeight = 40F;
+            resources.ApplyResources(this.Track, "Track");
+            this.Track.Name = "Track";
+            this.Track.ReadOnly = true;
+            // 
+            // OriginalTag
+            // 
+            this.OriginalTag.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.OriginalTag.FillWeight = 25F;
+            resources.ApplyResources(this.OriginalTag, "OriginalTag");
+            this.OriginalTag.Name = "OriginalTag";
+            this.OriginalTag.ReadOnly = true;
+            // 
+            // NewTag
+            // 
+            this.NewTag.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.NewTag.FillWeight = 25F;
+            resources.ApplyResources(this.NewTag, "NewTag");
+            this.NewTag.Name = "NewTag";
+            // 
+            // FileColumn
+            // 
+            this.FileColumn.FillWeight = 1F;
+            resources.ApplyResources(this.FileColumn, "FileColumn");
+            this.FileColumn.Name = "FileColumn";
             // 
             // dirtyErrorProvider
             // 
@@ -251,6 +321,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.destinationTagList, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("destinationTagList.IconAlignment"))));
             resources.ApplyResources(this.destinationTagList, "destinationTagList");
             this.destinationTagList.Name = "destinationTagList";
+            this.destinationTagList.Tag = "#smartOperationCheckBox";
             // 
             // buttonAdd
             // 
@@ -307,14 +378,6 @@
             this.toolTip1.SetToolTip(this.autoDestinationTagCheckBox, resources.GetString("autoDestinationTagCheckBox.ToolTip"));
             this.autoDestinationTagCheckBox.CheckedChanged += new System.EventHandler(this.autoDestinationTagCheckBox_CheckedChanged);
             // 
-            // searchOnlyCheckBox
-            // 
-            resources.ApplyResources(this.searchOnlyCheckBox, "searchOnlyCheckBox");
-            this.dirtyErrorProvider.SetIconAlignment(this.searchOnlyCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("searchOnlyCheckBox.IconAlignment"))));
-            this.searchOnlyCheckBox.Name = "searchOnlyCheckBox";
-            this.toolTip1.SetToolTip(this.searchOnlyCheckBox, resources.GetString("searchOnlyCheckBox.ToolTip"));
-            this.searchOnlyCheckBox.CheckedChanged += new System.EventHandler(this.SearchOnlyCheckBox_CheckedChanged);
-            // 
             // buttonSettings
             // 
             resources.ApplyResources(this.buttonSettings, "buttonSettings");
@@ -334,6 +397,14 @@
             this.buttonDeleteSaved.Tag = "#controlsPanel@non-defaultable@square-button";
             this.toolTip1.SetToolTip(this.buttonDeleteSaved, resources.GetString("buttonDeleteSaved.ToolTip"));
             this.buttonDeleteSaved.Click += new System.EventHandler(this.buttonDeleteSaved_Click);
+            // 
+            // smartOperationCheckBox
+            // 
+            resources.ApplyResources(this.smartOperationCheckBox, "smartOperationCheckBox");
+            this.dirtyErrorProvider.SetIconAlignment(this.smartOperationCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("smartOperationCheckBox.IconAlignment"))));
+            this.smartOperationCheckBox.Name = "smartOperationCheckBox";
+            this.smartOperationCheckBox.Tag = "#smartOperationCheckBoxLabel";
+            this.toolTip1.SetToolTip(this.smartOperationCheckBox, resources.GetString("smartOperationCheckBox.ToolTip"));
             // 
             // autoApplyCheckBox
             // 
@@ -355,6 +426,8 @@
             // controlsPanel
             // 
             resources.ApplyResources(this.controlsPanel, "controlsPanel");
+            this.controlsPanel.Controls.Add(this.smartOperationCheckBoxLabel);
+            this.controlsPanel.Controls.Add(this.smartOperationCheckBox);
             this.controlsPanel.Controls.Add(this.buttonDeleteSaved);
             this.controlsPanel.Controls.Add(this.loadComboBox);
             this.controlsPanel.Controls.Add(this.buttonSave);
@@ -370,7 +443,6 @@
             this.controlsPanel.Controls.Add(this.buttonOK);
             this.controlsPanel.Controls.Add(this.buttonPreview);
             this.controlsPanel.Controls.Add(this.buttonSettings);
-            this.controlsPanel.Controls.Add(this.searchOnlyCheckBox);
             this.controlsPanel.Controls.Add(this.destinationTagList);
             this.controlsPanel.Controls.Add(this.toTagLabel);
             this.controlsPanel.Controls.Add(this.autoDestinationTagCheckBox);
@@ -378,6 +450,13 @@
             this.controlsPanel.Controls.Add(this.fromTagLabel);
             this.controlsPanel.Name = "controlsPanel";
             this.controlsPanel.Tag = "#MultipleSearchAndReplace&splitContainer1@pinned-to-parent-x";
+            // 
+            // smartOperationCheckBoxLabel
+            // 
+            resources.ApplyResources(this.smartOperationCheckBoxLabel, "smartOperationCheckBoxLabel");
+            this.smartOperationCheckBoxLabel.Name = "smartOperationCheckBoxLabel";
+            this.toolTip1.SetToolTip(this.smartOperationCheckBoxLabel, resources.GetString("smartOperationCheckBoxLabel.ToolTip"));
+            this.smartOperationCheckBoxLabel.Click += new System.EventHandler(this.smartOperationCheckBoxLabel_Click);
             // 
             // toolTip1
             // 
@@ -457,78 +536,6 @@
             resources.ApplyResources(this.dataGridViewTextBoxColumn7, "dataGridViewTextBoxColumn7");
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             // 
-            // SearchTag
-            // 
-            this.SearchTag.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
-            this.SearchTag.FillWeight = 60F;
-            resources.ApplyResources(this.SearchTag, "SearchTag");
-            this.SearchTag.MaxDropDownItems = 15;
-            this.SearchTag.Name = "SearchTag";
-            this.SearchTag.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.SearchTag.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // RegEx
-            // 
-            this.RegEx.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.RegEx.FalseValue = "F";
-            this.RegEx.FillWeight = 15F;
-            resources.ApplyResources(this.RegEx, "RegEx");
-            this.RegEx.Name = "RegEx";
-            this.RegEx.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.RegEx.TrueValue = "T";
-            // 
-            // CaseSensitive
-            // 
-            this.CaseSensitive.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.CaseSensitive.FalseValue = "F";
-            this.CaseSensitive.FillWeight = 15F;
-            resources.ApplyResources(this.CaseSensitive, "CaseSensitive");
-            this.CaseSensitive.Name = "CaseSensitive";
-            this.CaseSensitive.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.CaseSensitive.TrueValue = "T";
-            // 
-            // SearchFor
-            // 
-            resources.ApplyResources(this.SearchFor, "SearchFor");
-            this.SearchFor.Name = "SearchFor";
-            this.SearchFor.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // ReplaceWith
-            // 
-            resources.ApplyResources(this.ReplaceWith, "ReplaceWith");
-            this.ReplaceWith.Name = "ReplaceWith";
-            this.ReplaceWith.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Position
-            // 
-            resources.ApplyResources(this.Position, "Position");
-            this.Position.Name = "Position";
-            // 
-            // Track
-            // 
-            this.Track.FillWeight = 40F;
-            resources.ApplyResources(this.Track, "Track");
-            this.Track.Name = "Track";
-            this.Track.ReadOnly = true;
-            // 
-            // OriginalTag
-            // 
-            this.OriginalTag.FillWeight = 25F;
-            resources.ApplyResources(this.OriginalTag, "OriginalTag");
-            this.OriginalTag.Name = "OriginalTag";
-            this.OriginalTag.ReadOnly = true;
-            // 
-            // NewTag
-            // 
-            this.NewTag.FillWeight = 25F;
-            resources.ApplyResources(this.NewTag, "NewTag");
-            this.NewTag.Name = "NewTag";
-            // 
-            // FileColumn
-            // 
-            resources.ApplyResources(this.FileColumn, "FileColumn");
-            this.FileColumn.Name = "FileColumn";
-            // 
             // MultipleSearchAndReplace
             // 
             this.AcceptButton = this.buttonPreview;
@@ -553,6 +560,7 @@
             this.controlsPanel.ResumeLayout(false);
             this.controlsPanel.PerformLayout();
             this.ResumeLayout(false);
+
         }
 
         #endregion
@@ -566,7 +574,6 @@
         private System.Windows.Forms.PictureBox autoApplyPictureBox;
         private System.Windows.Forms.CheckBox autoApplyCheckBox;
         private System.Windows.Forms.Button buttonDeleteSaved;
-        private System.Windows.Forms.CheckBox searchOnlyCheckBox;
         private System.Windows.Forms.CheckBox autoDestinationTagCheckBox;
         private System.Windows.Forms.ComboBox loadComboBox;
         private System.Windows.Forms.Button buttonDown;
@@ -583,16 +590,6 @@
         private System.Windows.Forms.Button buttonPreview;
         private System.Windows.Forms.Button buttonSettings;
         private System.Windows.Forms.Panel controlsPanel;
-        private System.Windows.Forms.DataGridViewComboBoxColumn SearchTag;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn RegEx;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn CaseSensitive;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SearchFor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ReplaceWith;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Position;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Track;
-        private System.Windows.Forms.DataGridViewTextBoxColumn OriginalTag;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NewTag;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FileColumn;
         private System.Windows.Forms.DataGridViewComboBoxColumn dataGridViewComboBoxColumn1;
         private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
         private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn2;
@@ -603,5 +600,16 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Track;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OriginalTag;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NewTag;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FileColumn;
+        private System.Windows.Forms.Label smartOperationCheckBoxLabel;
+        private System.Windows.Forms.CheckBox smartOperationCheckBox;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn RegEx;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn CaseSensitive;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SearchFor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ReplaceWith;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Position;
     }
 }

@@ -13,6 +13,7 @@ namespace MusicBeePlugin
 
         private MetaDataType sourceTagId;
         private MetaDataType destinationTagId;
+        private bool smartOperation;
         private string[] files = Array.Empty<string>();
 
         internal SwapTags(Plugin plugin) : base(plugin)
@@ -38,22 +39,21 @@ namespace MusicBeePlugin
 
             enableQueryingOrUpdatingButtons();
 
+
             button_GotFocus(AcceptButton, null); //Let's mark active button
         }
 
         private bool prepareBackgroundTask()
         {
             if (backgroundTaskIsWorking())
-                return true;
+                return false;
 
             sourceTagId = GetTagId(sourceTagListCustom.Text);
             destinationTagId = GetTagId(destinationTagListCustom.Text);
+            smartOperation = smartOperationCheckBox.Checked;
 
-            files = null;
-            if (!MbApiInterface.Library_QueryFilesEx("domain=SelectedFiles", out files))
-                files = Array.Empty<string>();
-
-            if (files.Length == 0)
+            MbApiInterface.Library_QueryFilesEx("domain=SelectedFiles", out files);
+            if (files == null || files.Length == 0)
             {
                 MessageBox.Show(this, MsgNoTracksSelected, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
@@ -64,12 +64,36 @@ namespace MusicBeePlugin
             }
         }
 
+        private bool applyingChangesStopped()
+        {
+            backgroundTaskIsScheduled = false;
+            backgroundTaskIsStopping = false;
+            backgroundTaskIsStoppedOrCancelled = false;
+            closeFormOnStopping = false;
+
+            SetResultingSbText();
+
+            if (closeFormOnStopping)
+            {
+                ignoreClosingForm = false;
+                Close();
+            }
+
+            ignoreClosingForm = false;
+
+            return true;
+        }
+
         private void swapTags()
         {
             for (var fileCounter = 0; fileCounter < files.Length; fileCounter++)
             {
-                if (backgroundTaskIsCanceled)
+                if (checkStoppingStatus())
+                {
+                    Invoke(new Action(() => { stopButtonClickedMethod(applyingChangesStopped); }));
                     return;
+                }
+
 
                 var currentFile = files[fileCounter];
 
@@ -78,17 +102,18 @@ namespace MusicBeePlugin
                 var sourceTagValue = GetFileTag(currentFile, sourceTagId);
                 var destinationTagValue = GetFileTag(currentFile, destinationTagId);
 
-                var swappedTags = SwapTags(sourceTagValue, destinationTagValue, sourceTagId, destinationTagId, smartOperationCheckBox.Checked);
+                var swappedTags = SwapTags(sourceTagValue, destinationTagValue, sourceTagId, destinationTagId, smartOperation);
 
                 if (sourceTagId != destinationTagId)
-                    SetFileTag(currentFile, destinationTagId, swappedTags.newDestinationTagValue);
+                    SetFileTag(currentFile, destinationTagId, swappedTags.newDestinationNormalizedTagValue);
 
-                SetFileTag(currentFile, sourceTagId, swappedTags.newSourceTagValue);
+                SetFileTag(currentFile, sourceTagId, swappedTags.newSourceNormalizedTagValue);
                 CommitTagsToFile(currentFile);
             }
 
-            RefreshPanels(true);
+            Invoke(new Action(() => { applyingChangesStopped(); }));
 
+            RefreshPanels(true);
             SetResultingSbText();
         }
 
@@ -104,16 +129,20 @@ namespace MusicBeePlugin
         private void buttonOK_Click(object sender, EventArgs e)
         {
             if (sourceTagListCustom.Text == destinationTagListCustom.Text)
+            {
                 if (!smartOperationCheckBox.Checked || !(GetTagId(sourceTagListCustom.Text) == ArtistArtistsId || GetTagId(sourceTagListCustom.Text) == ComposerComposersId))
                 {
                     MessageBox.Show(this, MsgSwapTagsSourceAndDestinationTagsAreTheSame,
                         null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
+            }
+
+            ignoreClosingForm = true;
 
             saveSettings();
             if (prepareBackgroundTask())
-                switchOperation(swapTags, sender as Button, buttonOK, buttonOK, buttonClose, true, null);
+                switchOperation(swapTags, sender as Button, buttonOK, EmptyButton, buttonClose, true, null);
         }
 
         private void buttonClose_Click(object sender, EventArgs e)
@@ -145,6 +174,17 @@ namespace MusicBeePlugin
         private void smartOperationCheckBoxLabel_Click(object sender, EventArgs e)
         {
             smartOperationCheckBox.Checked = !smartOperationCheckBox.Checked;
+        }
+
+        private void SwapTags_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (ignoreClosingForm)
+            {
+                backgroundTaskIsStopping = true;
+                SetStatusBarText(SwapTagsSbText + SbTextStoppingCurrentOperation, false);
+
+                e.Cancel = true;
+            }
         }
     }
 }
