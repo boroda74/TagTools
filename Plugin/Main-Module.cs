@@ -6688,6 +6688,80 @@ namespace MusicBeePlugin
                 return duration;
         }
 
+        public string[] CustomFunctionHelpText(bool shortText)//----------------
+        {
+            if (shortText)
+                return new string[]
+                {
+                    "$ASR(<URL>,preset_id)",
+                    "$LR(<URL>,preset_id)",
+                    "$Random(max_number)",
+                    "$Round(number,number_of_digits)",
+                    "$RoundUp(number,number_of_digits)",
+                    "$RoundDown(number,number_of_digits)",
+                    "$Sqrt(number)",
+                    "$Log(number)",
+                    "$eq(number1,number2)",
+                    "$ne(number1,number2)",
+                    "$gt(number1,number2)",
+                    "$lt(number1,number2)",
+                    "$ge(number1,number2)",
+                    "$le(number1,number2)",
+                    "$SubDuration(duration1,duration2)",
+                    "$MulDuration(duration,number)",
+                    "$SubDateTime(datetime1,datetime2)",
+                    "$NumberOfDays(datetime1,datetime2)",
+                    "$AddDurationToDateTime(datetime,duration)",
+                    "$SubDurationFromDateTime(datetime,duration)",
+                    "$Seconds(duration)",
+                    "$DurationFromSeconds(seconds)",
+                    "$Now()",
+                    "$TitleCase(field[,lower_case_words[,upper_case_words[,lower_case_words_between_brackets[,sentence_separators]]]])",
+                    "$SentenceCase(field[,upper_case_words[,sentence_separators]])",
+                    "$Name(file_path)",
+                    "$Char(hex_code)",
+                    "$CharN(hex_code,number_of_times)",
+                    "$TagContainsAnyString(<URL>,field_name,strings)",
+                    "$TagContainsAllStrings(<URL>,field_name,strings)",
+                };
+            else
+            {
+                return new string[]
+                {
+                    "$ASR(<URL>,preset_id)",
+                    "$LR(<URL>,preset_id)",
+                    "$Random(max_number)",
+                    "$Round(<field>,number_of_digits)",
+                    "$RoundUp(<field>,number_of_digits)",
+                    "$RoundDown(<field>,number_of_digits)",
+                    "$Sqrt(<field>)",
+                    "$Log(<field>)",
+                    "$eq(<field1>,number)",
+                    "$ne(<field1>,number)",
+                    "$gt(<field1>,number)",
+                    "$lt(<field1>,number)",
+                    "$ge(<field1>,number)",
+                    "$le(<field1>,number)",
+                    "$SubDuration(<virtual_tag>,duration)",
+                    "$MulDuration(<virtual_tag_or_track_time>,number)",
+                    "$SubDateTime(<field>,datetime)",
+                    "$NumberOfDays(<filed1>,<filed2>)",
+                    "$AddDurationToDateTime(<filed>,<virtual_tag>)",
+                    "$SubDurationFromDateTime(<filed>,<virtual_tag>)",
+                    "$Seconds(<virtual_tag_or_track_time>)",
+                    "$DurationFromSeconds(seconds)",
+                    "$Now()",
+                    "$TitleCase(<field>,\"lower case words\",\"upper case words\",\"lower case words between brackets\",\"sentence separators\")",
+                    "$SentenceCase(<field>,\"upper case words\",\"sentence separators\")",
+                    "$Name(<URL>)",
+                    "$Char(hex_code)",
+                    "$CharN(hex_code,number_of_times)",
+                    "$TagContainsAnyString(<URL>,field_name,string1|string2|etc)",
+                    "$TagContainsAllStrings(<URL>,field_name,string1|string2|etc)",
+                };
+	        }
+        }
+
         public string CustomFunc_ASR(string url, string presetId)
         {
             if (SavedSettings.dontShowAsr)
@@ -7154,9 +7228,9 @@ namespace MusicBeePlugin
             }
         }
 
-        public string CustomFunc_Name(string parameter)
+        public string CustomFunc_Name(string url)
         {
-            return Regex.Replace(parameter, @"^(.*\\)?(.*)\..*", "$2");
+            return Regex.Replace(url, @"^(.*\\)?(.*)\..*", "$2");
         }
 
         public string CustomFunc_DateCreated(string url)
@@ -7168,11 +7242,11 @@ namespace MusicBeePlugin
                 return string.Empty;
         }
 
-        public string CustomFunc_Char(string code)
+        public string CustomFunc_Char(string hexCode)
         {
             try
             {
-                var charcode = ushort.Parse(code, System.Globalization.NumberStyles.HexNumber);
+                var charcode = ushort.Parse(hexCode, System.Globalization.NumberStyles.HexNumber);
                 return ((char)charcode).ToString();
             }
             catch (Exception ex)
@@ -7181,11 +7255,11 @@ namespace MusicBeePlugin
             }
         }
 
-        public string CustomFunc_CharN(string code, string timesString)
+        public string CustomFunc_CharN(string hexCode, string timesString)
         {
             try
             {
-                var charcode = ushort.Parse(code, System.Globalization.NumberStyles.HexNumber);
+                var charcode = ushort.Parse(hexCode, System.Globalization.NumberStyles.HexNumber);
                 var character = ((char)charcode).ToString();
 
                 var sequence = string.Empty;

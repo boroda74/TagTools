@@ -9,9 +9,10 @@ You can use special functions in substitution fields of "Advanced Search \& Repl
     <b><i>\@char[[2f]]</i></b> returns <b><i>"/"</b></i>
 
 <b>\@tc[[string;;ignored_words]]</b> : returns Title Cased string except for <b><i>ignored_words</i></b> separated by 
-    spaces, e.g <b><i>\@tc[[$1;;a the an\>]]</i></b> will return title cased (except for words "a", "the", "an") first captured in 
-    search pattern string, and <b><i>\@tc[[$1]]</i></b> will return title cased string, not using any <b><i>ignored_words</i></b>, 
-    which will be <i>lowercase</i>. <i>The first and the last words</i> will be <i>title cased always</i>
+    spaces, e.g <b><i>\@tc[[$1;;a the an\>]]</i></b> will return title cased (except for words "a", "the", "an",   
+    which will be <i>lowercase</i>) first captured in search pattern string, and <b><i>\@tc[[$1]]</i></b> will return   
+    title cased string, not using any <b><i>ignored_words</i></b>. <i>The first and the last words</i> will be <i>title   
+    cased always</i>
 
 <b>\@lc[[string;;ignored_words]]</b> : returns lower cased string except for <b><i>ignored_words</i></b>, which <i>won't be changed</i>
 
@@ -27,4 +28,4 @@ You can use special functions in substitution fields of "Advanced Search \& Repl
 
 ***
 
-Copyright © boroda 2012-2024. Help version 8.3.240731
+Copyright © boroda 2012-2024. Help version 9.0.240819

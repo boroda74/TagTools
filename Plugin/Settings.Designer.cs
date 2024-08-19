@@ -160,6 +160,9 @@
             this.preservedTagValuesLegendTextBox = ControlsTools.CreateMusicBeeTextBox();
             this.preservedTagsLegendTextBox = ControlsTools.CreateMusicBeeTextBox();
             this.changedLegendTextBox = ControlsTools.CreateMusicBeeTextBox();
+
+            if (useSkinColors)//------------
+                this.tabControl1 = new FlatTabControl();
             //~MusicBee
 
             // 

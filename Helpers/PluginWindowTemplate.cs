@@ -249,17 +249,6 @@ namespace MusicBeePlugin
             e.DrawFocusRectangle();
         }
 
-        private void tabControl_DrawItem(object sender, DrawItemEventArgs e)
-        {
-            var page = (sender as TabControl).TabPages[e.Index];
-            var paddedBounds = e.Bounds;
-            var yOffset = (e.State == DrawItemState.Selected) ? -2 : 1;
-            paddedBounds.Offset(1, yOffset);
-
-            e.Graphics.FillRectangle(new SolidBrush(page.BackColor), e.Bounds);
-            TextRenderer.DrawText(e.Graphics, page.Text, e.Font, paddedBounds, page.ForeColor);
-        }
-
         internal void button_EnabledChanged(object sender, EventArgs e)
         {
             var button = sender as Button;
@@ -2537,28 +2526,31 @@ namespace MusicBeePlugin
                     control.BackColor = HeaderCellStyle.BackColor;
                     control.ForeColor = HeaderCellStyle.ForeColor;
                 }
-                else if (control is TabControl tabControl)
+                else if (control is FlatTabControl tabControl)
                 {
                     if ((control.IsEnabled() && enable == null) || enable == true)
                     {
-                        control.ForeColor = AccentColor;
-                        control.BackColor = FormBackColor;
+                        tabControl.ForeColor = AccentColor;
+                        tabControl.myBackColor = InputPanelBackColor;
+                        tabControl.myBorderColor = InputPanelBorderColor;//--------------
 
                         foreach (TabPage child in tabControl.TabPages)
                         {
                             child.ForeColor = AccentColor;
-                            child.BackColor = FormBackColor;
+                            child.BackColor = InputPanelBackColor;
+                            //child.myBorderColor = InputPanelBorderColor;//--------------
                         }
                     }
                     else
                     {
-                        control.ForeColor = DimmedAccentColor;
-                        control.BackColor = FormBackColor;
+                        tabControl.ForeColor = DimmedAccentColor;
+                        tabControl.BackColor = InputPanelBackColor;
 
                         foreach (TabPage child in tabControl.TabPages)
                         {
                             child.ForeColor = DimmedAccentColor;
-                            child.BackColor = FormBackColor;
+                            child.BackColor = InputPanelBackColor;
+                            //child.myBorderColor = InputPanelBorderColor;//--------------
                         }
                     }
                 }
@@ -2582,14 +2574,6 @@ namespace MusicBeePlugin
         internal void skinControl(Control control, int borderWidth = -1)
         {
             WaitPreparedThemedBitmapsAndColors();
-
-            //if (control.GetType().IsSubclassOf(typeof(TabControl)) || control is TabControl)
-            //{
-            //   TabControl tabControl = control as TabControl;
-            //   tabControl.DrawItem += form.TabControl_DrawItem;
-            //
-            //   return;
-            //}
 
             if (control is SplitContainer splitContainer)
             {
@@ -2809,7 +2793,7 @@ namespace MusicBeePlugin
                 listBox.BorderStyle = BorderStyle.FixedSingle;
 
                 if (listBox is ListBox || listBox is CheckedListBox)
-                    NativeMethods.HideScrollBar(listBox.Handle, NativeMethods.SB_BOTH);
+                    global::NativeMethods.HideScrollBar(listBox.Handle, global::NativeMethods.SB_BOTH);
 
 
                 if (listBox.MultiColumn)

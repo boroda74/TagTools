@@ -18,7 +18,7 @@ Extract content of the downloaded archive to a temporary folder of your choice. 
 
 #### This help file has been last updated on:
 
-**2024-07-29**
+**2024-08-19**
 
 # Content
 
@@ -34,4 +34,4 @@ Extract content of the downloaded archive to a temporary folder of your choice. 
 
 ***
 
-Copyright © boroda 2012-2024. Help version 8.3.240731
+Copyright © boroda 2012-2024. Help version 9.0.240819

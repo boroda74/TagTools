@@ -33,7 +33,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
-    <AssemblyVersion>9.0.8997.162</AssemblyVersion>
+    <AssemblyVersion>9.0.8997.41198</AssemblyVersion>
     <ShouldCreateLogs>True</ShouldCreateLogs>
     <AdvancedSettingsExpanded>True</AdvancedSettingsExpanded>
     <UpdateAssemblyVersion>False</UpdateAssemblyVersion>
@@ -195,6 +195,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\FlatTabControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Helpers\PropertiesToolkit.cs" />
     <Compile Include="Helpers\LibraryReports Preset Filtering.cs">
       <SubType>Form</SubType>
@@ -359,6 +362,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Helpers\FlatTabControl.resx">
+      <DependentUpon>FlatTabControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Plugin\AdvancedSearchAndReplace.resx">
       <DependentUpon>AdvancedSearchAndReplace.cs</DependentUpon>
       <SubType>Designer</SubType>

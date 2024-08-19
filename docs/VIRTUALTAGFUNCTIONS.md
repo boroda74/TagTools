@@ -44,15 +44,12 @@ e.g. $NumberOfDays(\<Year\>,\<Original Year\>) or $SubDateTime(\<Date Added\>,01
     simply by putting closing parenthesis earlier, e.g., <b><i>$SentenceCase(string)</i></b> 
     or <b><i>$SentenceCase(string,upper_case_words)</i></b>
 
-<b>$TitleCase(string,lower_case_words,upper_case_words,word_separators,
-    lower_case_between_chars_opening_list,lower_case_between_chars_closing_list,sentence_separators)</b> : where 
+<b>$TitleCase(string,lower_case_words,upper_case_words,lower_case_words_between_brackets,sentence_separators)</b> : where 
     <b><i>lower_case_words</i></b> is the list of words separated by spaces, which will become lowercase (<b><i>always except for 
     the first word</i></b> and <b><i>except for the last words</i></b> if not lowercase by <b><i>other parameters</i></b>). <b><i>upper_case_words</i></b> will 
-    become uppercase. This rule <i>overrides all other rules</i>. <b><i>word_separators</i></b> is the list of characters after which 
-    the words will be capitalized. <b><i>lower_case_between_chars_opening_list</i></b> and <b><i>lower_case_between_chars_closing_list</i></b> 
-    are the lists of characters <b><i>between</i></b> which the words become lowercase. The number of characters in both lists 
-    must be the same; the opening and closing characters are paired by their position in the lists (the lists 
-    may be, e.g., "<b>( \[ {</b>" and "<b>) \] }</b>"). <b><i>sentence_separators</i></b>, is the list of characters after which the words 
+    become uppercase. This rule <i>overrides all other rules</i>. <b><i>lower_case_words_between_brackets</i></b> is the list of words   
+    separated by spaces, which will become lowercase between round, square and curly brackets,   
+    i.e., "<b>( [ {</b>" and "<b>) ] }</b>"). <b><i>sentence_separators</i></b>, is the list of characters after which the words 
     will become capitalized (switching off all exceptions, e.g. <b><i>lower_case_words</i></b>, besides the words from the 
     <b><i>upper_case_words</i></b>). <b><i>The first word</i></b> will <b><i>always</i></b> be capitalized (besides the words from the <b><i>upper_case_words</i></b>). 
     It’s recommended to enclose the last four lists into quotes (e.g., <b>"\& . -"</b>). Characters in all character 
@@ -108,4 +105,4 @@ e.g. $NumberOfDays(\<Year\>,\<Original Year\>) or $SubDateTime(\<Date Added\>,01
 
 ***
 
-Copyright © boroda 2012-2024. Help version 8.3.240731
+Copyright © boroda 2012-2024. Help version 9.0.240819
