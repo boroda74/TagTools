@@ -363,7 +363,7 @@ namespace MusicBeePlugin
         {
             if (ignoreClosingForm)
             {
-                if (!backgroundTaskIsNativeMB)
+                if (!backgroundTaskIsUpdatingTags)
                 {
                     closeFormOnStopping = true;
                     buttonClose.Enable(false);

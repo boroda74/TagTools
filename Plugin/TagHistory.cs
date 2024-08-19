@@ -616,6 +616,22 @@ namespace MusicBeePlugin
 
         private void resetPreviewData(bool noReallyDisplayedTagsOtherwiseNoPreview)
         {
+            if (backgroundTaskIsStopping || backgroundTaskIsStoppedOrCancelled || !backgroundTaskIsScheduled)//------------- check!!!
+            {
+                previewTable.AllowUserToResizeColumns = true;
+                previewTable.AllowUserToResizeRows = true;
+                foreach (DataGridViewColumn column in previewTable.Columns)
+                    column.SortMode = DataGridViewColumnSortMode.Automatic;
+            }
+            else
+            {
+                previewTable.AllowUserToResizeColumns = false;
+                previewTable.AllowUserToResizeRows = false;
+                foreach (DataGridViewColumn column in previewTable.Columns)
+                    column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+
+
             backgroundTaskIsStopping = false;//---------
             backgroundTaskIsStoppedOrCancelled = false;
 
@@ -1012,7 +1028,7 @@ namespace MusicBeePlugin
 
         internal override void enableQueryingOrUpdatingButtons()
         {
-            buttonOK.Enable(previewIsGenerated && !backgroundTaskIsStopping && (!backgroundTaskIsWorking() || backgroundTaskIsNativeMB));
+            buttonOK.Enable(previewIsGenerated && !backgroundTaskIsStopping && (!backgroundTaskIsWorking() || backgroundTaskIsUpdatingTags));
             buttonPreview.Enable(true);
             rereadButton.Enable(previewIsGenerated && !backgroundTaskIsStopping && !backgroundTaskIsWorking());
         }
@@ -1532,7 +1548,7 @@ namespace MusicBeePlugin
         {
             if (ignoreClosingForm)
             {
-                if (!backgroundTaskIsNativeMB)
+                if (!backgroundTaskIsUpdatingTags)
                 {
                     closeFormOnStopping = true;
                     buttonClose.Enable(false);

@@ -122,25 +122,6 @@ namespace MusicBeePlugin
             this.presetList = new System.Windows.Forms.CheckedListBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.previewTable = new System.Windows.Forms.DataGridView();
-            this.PresetGuid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.File = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Track = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TagName1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OriginalTag1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NewTag1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TagName2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OriginalTag2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NewTag2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TagName3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OriginalTag3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NewTag3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TagName4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OriginalTag4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NewTag4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TagName5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OriginalTag5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NewTag5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OddEven = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.settingsProcessingGroupBox = new System.Windows.Forms.GroupBox();
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonPreview = new System.Windows.Forms.Button();
@@ -176,6 +157,25 @@ namespace MusicBeePlugin
             this.searchPictureBox = new System.Windows.Forms.PictureBox();
             this.filtersPanel = new System.Windows.Forms.Panel();
             this.dirtyErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.PresetGuid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.File = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Track = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TagName1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OriginalTag1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NewTag1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TagName2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OriginalTag2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NewTag2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TagName3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OriginalTag3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NewTag3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TagName4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OriginalTag4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NewTag4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TagName5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OriginalTag5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NewTag5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OddEven = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -776,119 +776,6 @@ namespace MusicBeePlugin
             this.previewTable.MouseLeave += new System.EventHandler(this.PreviewTable_MouseLeave);
             this.previewTable.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PreviewTable_MouseUp);
             // 
-            // PresetGuid
-            // 
-            resources.ApplyResources(this.PresetGuid, "PresetGuid");
-            this.PresetGuid.Name = "PresetGuid";
-            // 
-            // File
-            // 
-            this.File.FillWeight = 7.191176F;
-            resources.ApplyResources(this.File, "File");
-            this.File.Name = "File";
-            // 
-            // Track
-            // 
-            this.Track.FillWeight = 60F;
-            resources.ApplyResources(this.Track, "Track");
-            this.Track.Name = "Track";
-            // 
-            // TagName1
-            // 
-            this.TagName1.FillWeight = 24.52376F;
-            resources.ApplyResources(this.TagName1, "TagName1");
-            this.TagName1.Name = "TagName1";
-            // 
-            // OriginalTag1
-            // 
-            this.OriginalTag1.FillWeight = 24.52376F;
-            resources.ApplyResources(this.OriginalTag1, "OriginalTag1");
-            this.OriginalTag1.Name = "OriginalTag1";
-            // 
-            // NewTag1
-            // 
-            this.NewTag1.FillWeight = 24.52376F;
-            resources.ApplyResources(this.NewTag1, "NewTag1");
-            this.NewTag1.Name = "NewTag1";
-            // 
-            // TagName2
-            // 
-            this.TagName2.FillWeight = 24.52376F;
-            resources.ApplyResources(this.TagName2, "TagName2");
-            this.TagName2.Name = "TagName2";
-            // 
-            // OriginalTag2
-            // 
-            this.OriginalTag2.FillWeight = 24.52376F;
-            resources.ApplyResources(this.OriginalTag2, "OriginalTag2");
-            this.OriginalTag2.Name = "OriginalTag2";
-            // 
-            // NewTag2
-            // 
-            this.NewTag2.FillWeight = 24.52376F;
-            resources.ApplyResources(this.NewTag2, "NewTag2");
-            this.NewTag2.Name = "NewTag2";
-            // 
-            // TagName3
-            // 
-            this.TagName3.FillWeight = 24.52376F;
-            resources.ApplyResources(this.TagName3, "TagName3");
-            this.TagName3.Name = "TagName3";
-            // 
-            // OriginalTag3
-            // 
-            this.OriginalTag3.FillWeight = 24.52376F;
-            resources.ApplyResources(this.OriginalTag3, "OriginalTag3");
-            this.OriginalTag3.Name = "OriginalTag3";
-            // 
-            // NewTag3
-            // 
-            this.NewTag3.FillWeight = 24.52376F;
-            resources.ApplyResources(this.NewTag3, "NewTag3");
-            this.NewTag3.Name = "NewTag3";
-            // 
-            // TagName4
-            // 
-            this.TagName4.FillWeight = 24.52376F;
-            resources.ApplyResources(this.TagName4, "TagName4");
-            this.TagName4.Name = "TagName4";
-            // 
-            // OriginalTag4
-            // 
-            this.OriginalTag4.FillWeight = 24.52376F;
-            resources.ApplyResources(this.OriginalTag4, "OriginalTag4");
-            this.OriginalTag4.Name = "OriginalTag4";
-            // 
-            // NewTag4
-            // 
-            this.NewTag4.FillWeight = 24.52376F;
-            resources.ApplyResources(this.NewTag4, "NewTag4");
-            this.NewTag4.Name = "NewTag4";
-            // 
-            // TagName5
-            // 
-            this.TagName5.FillWeight = 24.52376F;
-            resources.ApplyResources(this.TagName5, "TagName5");
-            this.TagName5.Name = "TagName5";
-            // 
-            // OriginalTag5
-            // 
-            this.OriginalTag5.FillWeight = 24.52376F;
-            resources.ApplyResources(this.OriginalTag5, "OriginalTag5");
-            this.OriginalTag5.Name = "OriginalTag5";
-            // 
-            // NewTag5
-            // 
-            this.NewTag5.FillWeight = 24.52376F;
-            resources.ApplyResources(this.NewTag5, "NewTag5");
-            this.NewTag5.Name = "NewTag5";
-            // 
-            // OddEven
-            // 
-            this.OddEven.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            resources.ApplyResources(this.OddEven, "OddEven");
-            this.OddEven.Name = "OddEven";
-            // 
             // settingsProcessingGroupBox
             // 
             resources.ApplyResources(this.settingsProcessingGroupBox, "settingsProcessingGroupBox");
@@ -1210,6 +1097,122 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.ContainerControl = this;
             resources.ApplyResources(this.dirtyErrorProvider, "dirtyErrorProvider");
             // 
+            // PresetGuid
+            // 
+            this.PresetGuid.FillWeight = 1F;
+            resources.ApplyResources(this.PresetGuid, "PresetGuid");
+            this.PresetGuid.Name = "PresetGuid";
+            // 
+            // File
+            // 
+            this.File.FillWeight = 1F;
+            resources.ApplyResources(this.File, "File");
+            this.File.Name = "File";
+            // 
+            // Track
+            // 
+            this.Track.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Track.FillWeight = 60F;
+            resources.ApplyResources(this.Track, "Track");
+            this.Track.Name = "Track";
+            // 
+            // TagName1
+            // 
+            this.TagName1.FillWeight = 24.52376F;
+            resources.ApplyResources(this.TagName1, "TagName1");
+            this.TagName1.Name = "TagName1";
+            // 
+            // OriginalTag1
+            // 
+            this.OriginalTag1.FillWeight = 24.52376F;
+            resources.ApplyResources(this.OriginalTag1, "OriginalTag1");
+            this.OriginalTag1.Name = "OriginalTag1";
+            // 
+            // NewTag1
+            // 
+            this.NewTag1.FillWeight = 24.52376F;
+            resources.ApplyResources(this.NewTag1, "NewTag1");
+            this.NewTag1.Name = "NewTag1";
+            // 
+            // TagName2
+            // 
+            this.TagName2.FillWeight = 24.52376F;
+            resources.ApplyResources(this.TagName2, "TagName2");
+            this.TagName2.Name = "TagName2";
+            // 
+            // OriginalTag2
+            // 
+            this.OriginalTag2.FillWeight = 24.52376F;
+            resources.ApplyResources(this.OriginalTag2, "OriginalTag2");
+            this.OriginalTag2.Name = "OriginalTag2";
+            // 
+            // NewTag2
+            // 
+            this.NewTag2.FillWeight = 24.52376F;
+            resources.ApplyResources(this.NewTag2, "NewTag2");
+            this.NewTag2.Name = "NewTag2";
+            // 
+            // TagName3
+            // 
+            this.TagName3.FillWeight = 24.52376F;
+            resources.ApplyResources(this.TagName3, "TagName3");
+            this.TagName3.Name = "TagName3";
+            // 
+            // OriginalTag3
+            // 
+            this.OriginalTag3.FillWeight = 24.52376F;
+            resources.ApplyResources(this.OriginalTag3, "OriginalTag3");
+            this.OriginalTag3.Name = "OriginalTag3";
+            // 
+            // NewTag3
+            // 
+            this.NewTag3.FillWeight = 24.52376F;
+            resources.ApplyResources(this.NewTag3, "NewTag3");
+            this.NewTag3.Name = "NewTag3";
+            // 
+            // TagName4
+            // 
+            this.TagName4.FillWeight = 24.52376F;
+            resources.ApplyResources(this.TagName4, "TagName4");
+            this.TagName4.Name = "TagName4";
+            // 
+            // OriginalTag4
+            // 
+            this.OriginalTag4.FillWeight = 24.52376F;
+            resources.ApplyResources(this.OriginalTag4, "OriginalTag4");
+            this.OriginalTag4.Name = "OriginalTag4";
+            // 
+            // NewTag4
+            // 
+            this.NewTag4.FillWeight = 24.52376F;
+            resources.ApplyResources(this.NewTag4, "NewTag4");
+            this.NewTag4.Name = "NewTag4";
+            // 
+            // TagName5
+            // 
+            this.TagName5.FillWeight = 24.52376F;
+            resources.ApplyResources(this.TagName5, "TagName5");
+            this.TagName5.Name = "TagName5";
+            // 
+            // OriginalTag5
+            // 
+            this.OriginalTag5.FillWeight = 24.52376F;
+            resources.ApplyResources(this.OriginalTag5, "OriginalTag5");
+            this.OriginalTag5.Name = "OriginalTag5";
+            // 
+            // NewTag5
+            // 
+            this.NewTag5.FillWeight = 24.52376F;
+            resources.ApplyResources(this.NewTag5, "NewTag5");
+            this.NewTag5.Name = "NewTag5";
+            // 
+            // OddEven
+            // 
+            this.OddEven.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.OddEven.FillWeight = 1F;
+            resources.ApplyResources(this.OddEven, "OddEven");
+            this.OddEven.Name = "OddEven";
+            // 
             // AdvancedSearchAndReplace
             // 
             this.AcceptButton = this.buttonPreview;
@@ -1323,25 +1326,6 @@ namespace MusicBeePlugin
         private System.Windows.Forms.Button buttonCopy;
         private System.Windows.Forms.DataGridView previewTable;
         private System.Windows.Forms.CheckBox favoriteCheckBox;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PresetGuid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn File;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Track;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TagName1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn OriginalTag1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NewTag1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TagName2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn OriginalTag2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NewTag2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TagName3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn OriginalTag3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NewTag3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TagName4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn OriginalTag4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NewTag4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TagName5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn OriginalTag5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NewTag5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn OddEven;
         private System.Windows.Forms.Button buttonSettings;
         private System.Windows.Forms.Label conditionCheckBoxLabel;
         private System.Windows.Forms.Label applyToPlayingTrackCheckBoxLabel;
@@ -1388,5 +1372,24 @@ namespace MusicBeePlugin
         private System.Windows.Forms.Panel filtersPanel;
         private System.Windows.Forms.TableLayoutPanel listBoxTableLayoutPanel;
         private System.Windows.Forms.TableLayoutPanel textBoxTableLayoutPanel;
+        private DataGridViewTextBoxColumn PresetGuid;
+        private DataGridViewTextBoxColumn File;
+        private DataGridViewTextBoxColumn Track;
+        private DataGridViewTextBoxColumn TagName1;
+        private DataGridViewTextBoxColumn OriginalTag1;
+        private DataGridViewTextBoxColumn NewTag1;
+        private DataGridViewTextBoxColumn TagName2;
+        private DataGridViewTextBoxColumn OriginalTag2;
+        private DataGridViewTextBoxColumn NewTag2;
+        private DataGridViewTextBoxColumn TagName3;
+        private DataGridViewTextBoxColumn OriginalTag3;
+        private DataGridViewTextBoxColumn NewTag3;
+        private DataGridViewTextBoxColumn TagName4;
+        private DataGridViewTextBoxColumn OriginalTag4;
+        private DataGridViewTextBoxColumn NewTag4;
+        private DataGridViewTextBoxColumn TagName5;
+        private DataGridViewTextBoxColumn OriginalTag5;
+        private DataGridViewTextBoxColumn NewTag5;
+        private DataGridViewTextBoxColumn OddEven;
     }
 }

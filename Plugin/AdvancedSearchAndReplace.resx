@@ -2126,6 +2126,9 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="PresetGuid.HeaderText" xml:space="preserve">
     <value>Preset GUID</value>
   </data>
+  <data name="PresetGuid.MinimumWidth" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
   <data name="PresetGuid.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -2136,7 +2139,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>File</value>
   </data>
   <data name="File.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>2</value>
   </data>
   <data name="File.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -3283,6 +3286,18 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
   <data name="$this.Text" xml:space="preserve">
     <value>Advanced Search &amp; Replace</value>
   </data>
+  <data name="&gt;&gt;toolTip1.Name" xml:space="preserve">
+    <value>toolTip1</value>
+  </data>
+  <data name="&gt;&gt;toolTip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dirtyErrorProvider.Name" xml:space="preserve">
+    <value>dirtyErrorProvider</value>
+  </data>
+  <data name="&gt;&gt;dirtyErrorProvider.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ErrorProvider, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;PresetGuid.Name" xml:space="preserve">
     <value>PresetGuid</value>
   </data>
@@ -3397,23 +3412,11 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
   <data name="&gt;&gt;OddEven.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolTip1.Name" xml:space="preserve">
-    <value>toolTip1</value>
-  </data>
-  <data name="&gt;&gt;toolTip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dirtyErrorProvider.Name" xml:space="preserve">
-    <value>dirtyErrorProvider</value>
-  </data>
-  <data name="&gt;&gt;dirtyErrorProvider.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ErrorProvider, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>AdvancedSearchAndReplace</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=8.3.8989.22091, Culture=neutral, PublicKeyToken=null</value>
+    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=9.0.8996.40710, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="dirtyErrorProvider.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

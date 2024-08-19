@@ -5400,14 +5400,14 @@ namespace MusicBeePlugin
 
 
                     //Let's create plugin main and context menu items
-                    MbForm.Invoke((MethodInvoker)delegate 
+                    MbForm.Invoke(new Action(() => 
                     {
                         getButtonTextBoxDpiFontScaling(); 
                         prepareThemedBitmapsAndColors(); 
 
                         addPluginContextMenuItems(); 
                         addPluginMenuItems(); 
-                    });
+                    }));
 
 
                     //Let's refresh MusicBee UI every 5 sec if there are any tags changed by plugin since last refresh

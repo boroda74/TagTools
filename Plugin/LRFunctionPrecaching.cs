@@ -123,7 +123,7 @@ namespace MusicBeePlugin
                     lock (LrPresetExecutionLocker)
                     {
                         LibraryReportsCommandForFunctionIds.appliedPreset = newOrChangedCachedPresets[i];
-                        LibraryReportsCommandForFunctionIds.backgroundTaskIsNativeMB = true;
+                        LibraryReportsCommandForFunctionIds.backgroundTaskIsUpdatingTags = true;
 
                         LibraryReportsCommandForFunctionIds.executePreset(null, false, true, null, false, true);
                     }

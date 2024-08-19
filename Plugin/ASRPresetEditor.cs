@@ -223,17 +223,29 @@ namespace MusicBeePlugin
             replacedTag4ListCustom.Text = AsrGetTagName(preset.replacedTag4Id);
             replacedTag5ListCustom.Text = AsrGetTagName(preset.replacedTag5Id);
 
-            appendCheckBox.Checked = preset.append;
+            add1CheckBox.Checked = preset.add;
+            add2CheckBox.Checked = preset.add2;
+            add3CheckBox.Checked = preset.add3;
+            add4CheckBox.Checked = preset.add4;
+            add5CheckBox.Checked = preset.add5;
+
+            append1CheckBox.Checked = preset.append;
             append2CheckBox.Checked = preset.append2;
             append3CheckBox.Checked = preset.append3;
             append4CheckBox.Checked = preset.append4;
             append5CheckBox.Checked = preset.append5;
 
-            condition1CheckBox.CheckState = GetCheckState(preset.limitation1);
-            condition2CheckBox.CheckState = GetCheckState(preset.limitation2);
-            condition3CheckBox.CheckState = GetCheckState(preset.limitation3);
-            condition4CheckBox.CheckState = GetCheckState(preset.limitation4);
-            condition5CheckBox.CheckState = GetCheckState(preset.limitation5);
+            condition1SneCheckBox.Checked = preset.sneLimitation1;
+            condition2SneCheckBox.Checked = preset.sneLimitation2;
+            condition3SneCheckBox.Checked = preset.sneLimitation3;
+            condition4SneCheckBox.Checked = preset.sneLimitation4;
+            condition5SneCheckBox.Checked = preset.sneLimitation5;
+
+            condition1DneCheckBox.Checked = preset.dneLimitation1;
+            condition2DneCheckBox.Checked = preset.dneLimitation2;
+            condition3DneCheckBox.Checked = preset.dneLimitation3;
+            condition4DneCheckBox.Checked = preset.dneLimitation4;
+            condition5DneCheckBox.Checked = preset.dneLimitation5;
 
             languagesCustom.Text = Language;
 
@@ -355,17 +367,30 @@ namespace MusicBeePlugin
             preset.customText4 = customText4Box.Text;
             preset.customText4Checked = customText4CheckBox.Checked;
 
-            preset.append = appendCheckBox.Checked;
+
+            preset.add = add1CheckBox.Checked;
+            preset.add2 = add2CheckBox.Checked;
+            preset.add3 = add3CheckBox.Checked;
+            preset.add4 = add4CheckBox.Checked;
+            preset.add5 = add5CheckBox.Checked;
+
+            preset.append = append1CheckBox.Checked;
             preset.append2 = append2CheckBox.Checked;
             preset.append3 = append3CheckBox.Checked;
             preset.append4 = append4CheckBox.Checked;
             preset.append5 = append5CheckBox.Checked;
 
-            preset.limitation1 = GetNullableBoolFromCheckState(condition1CheckBox.CheckState);
-            preset.limitation2 = GetNullableBoolFromCheckState(condition2CheckBox.CheckState);
-            preset.limitation3 = GetNullableBoolFromCheckState(condition3CheckBox.CheckState);
-            preset.limitation4 = GetNullableBoolFromCheckState(condition4CheckBox.CheckState);
-            preset.limitation5 = GetNullableBoolFromCheckState(condition5CheckBox.CheckState);
+            preset.sneLimitation1 = condition1SneCheckBox.Checked;
+            preset.sneLimitation2 = condition2SneCheckBox.Checked;
+            preset.sneLimitation3 = condition3SneCheckBox.Checked;
+            preset.sneLimitation4 = condition4SneCheckBox.Checked;
+            preset.sneLimitation5 = condition5SneCheckBox.Checked;
+
+            preset.dneLimitation1 = condition1DneCheckBox.Checked;
+            preset.dneLimitation2 = condition2DneCheckBox.Checked;
+            preset.dneLimitation3 = condition3DneCheckBox.Checked;
+            preset.dneLimitation4 = condition4DneCheckBox.Checked;
+            preset.dneLimitation5 = condition5DneCheckBox.Checked;
 
             return true;
         }

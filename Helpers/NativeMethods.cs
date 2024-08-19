@@ -205,7 +205,7 @@ internal static class NativeMethods
         //handing off the reset of the combobox selected value to a delegate method - using methodinvoker on the forms main thread is an efficient to do this
         //see https://msdn.microsoft.com/en-us/library/system.windows.forms.methodinvoker(v=vs.110).aspx
         if (!comboBox.Items.Contains(cue))
-            comboBox.FindForm().BeginInvoke((MethodInvoker)delegate { comboBox.Text = cue; });
+            comboBox.FindForm().BeginInvoke(new Action(() => { comboBox.Text = cue; }));
         else
             comboBox.Text = cue;
 

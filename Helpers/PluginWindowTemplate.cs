@@ -115,7 +115,7 @@ namespace MusicBeePlugin
         protected ThreadStart job;
 
         internal volatile bool backgroundTaskIsScheduled;
-        internal volatile bool backgroundTaskIsNativeMB;
+        internal volatile bool backgroundTaskIsUpdatingTags;
         internal volatile bool backgroundTaskIsStopping;
 
         internal volatile bool backgroundTaskIsStoppedOrCancelled;
@@ -2462,11 +2462,6 @@ namespace MusicBeePlugin
 
                     control.BackColor = FormBackColor;
                 }
-                else if (control is GroupBox || control is SplitContainer || control is Panel)
-                {
-                    //foreach (Control child in control.Controls)
-                    //    setSkinnedControlColors(child, enable);
-                }
                 else if (control is CustomComboBox customComboBox)
                 {
                     customComboBox.SetColors(enable);
@@ -2541,6 +2536,36 @@ namespace MusicBeePlugin
                 {
                     control.BackColor = HeaderCellStyle.BackColor;
                     control.ForeColor = HeaderCellStyle.ForeColor;
+                }
+                else if (control is TabControl tabControl)
+                {
+                    if ((control.IsEnabled() && enable == null) || enable == true)
+                    {
+                        control.ForeColor = AccentColor;
+                        control.BackColor = FormBackColor;
+
+                        foreach (TabPage child in tabControl.TabPages)
+                        {
+                            child.ForeColor = AccentColor;
+                            child.BackColor = FormBackColor;
+                        }
+                    }
+                    else
+                    {
+                        control.ForeColor = DimmedAccentColor;
+                        control.BackColor = FormBackColor;
+
+                        foreach (TabPage child in tabControl.TabPages)
+                        {
+                            child.ForeColor = DimmedAccentColor;
+                            child.BackColor = FormBackColor;
+                        }
+                    }
+                }
+                else if (control is GroupBox || control is SplitContainer || control is Panel)
+                {
+                    //foreach (Control child in control.Controls)
+                    //    setSkinnedControlColors(child, enable);
                 }
                 else
                 {
@@ -3557,7 +3582,7 @@ namespace MusicBeePlugin
 
         private void PluginWindowTemplate_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (backgroundTaskIsScheduled && backgroundTaskIsNativeMB && closeButton.IsEnabled())
+            if (backgroundTaskIsScheduled && backgroundTaskIsUpdatingTags && closeButton.IsEnabled())
             {
                 e.Cancel = true;
                 Hide();
@@ -3839,7 +3864,7 @@ namespace MusicBeePlugin
                     backgroundTaskIsScheduled = false;
                     backgroundTaskIsStopping = false;
 
-                    if (backgroundTaskIsNativeMB && taskWasStarted)
+                    if (backgroundTaskIsUpdatingTags && taskWasStarted)
                         NumberOfNativeMbBackgroundTasks--;
                 }
 
@@ -3882,7 +3907,7 @@ namespace MusicBeePlugin
 
                 lock (OpenedForms)
                 {
-                    if (this.backgroundTaskIsNativeMB)
+                    if (this.backgroundTaskIsUpdatingTags)
                         NumberOfNativeMbBackgroundTasks++;
                 }
 
@@ -3894,7 +3919,7 @@ namespace MusicBeePlugin
 
                 lock (OpenedForms)
                 {
-                    if (this.backgroundTaskIsNativeMB)
+                    if (this.backgroundTaskIsUpdatingTags)
                         NumberOfNativeMbBackgroundTasks--;
                 }
 
@@ -3906,7 +3931,7 @@ namespace MusicBeePlugin
                 buttonLabels.TryGetValue(okButton, out buttonOKName);
                 buttonLabels.TryGetValue(closeButton, out buttonCloseName);
 
-                this.backgroundTaskIsNativeMB = backgroundTaskIsNativeMB;
+                this.backgroundTaskIsUpdatingTags = backgroundTaskIsNativeMB;
 
                 isStopButtonAlreadyClicked = false;
                 backgroundTaskIsStopping = false;
@@ -3920,7 +3945,7 @@ namespace MusicBeePlugin
 
                 job = operation;
 
-                if (this.backgroundTaskIsNativeMB)
+                if (this.backgroundTaskIsUpdatingTags)
                 {
                     queryingOrUpdatingButtonClick(false);
 
@@ -3981,11 +4006,11 @@ namespace MusicBeePlugin
             {
                 foreach (var form in OpenedForms)
                 {
-                    if (backgroundTaskIsNativeMB && form != this && !(form.backgroundTaskIsNativeMB && form.backgroundTaskIsScheduled && !form.backgroundTaskIsStoppedOrCancelled))//********
+                    if (backgroundTaskIsUpdatingTags && form != this && !(form.backgroundTaskIsUpdatingTags && form.backgroundTaskIsScheduled && !form.backgroundTaskIsStoppedOrCancelled))//********
                         form.disableQueryingButtons();
                 }
 
-                if (backgroundTaskIsNativeMB) //Updating operation
+                if (backgroundTaskIsUpdatingTags) //Updating operation
                 {
                     enableQueryingButtons();
                     //disableQueryingOrUpdatingButtons();//***********
@@ -4017,8 +4042,36 @@ namespace MusicBeePlugin
                 enableDisablePreviewOptionControls(false);
                 enableQueryingOrUpdatingButtons();
 
-                if (backgroundTaskIsNativeMB)
+                if (backgroundTaskIsUpdatingTags)
                     previewButton.Enable(false);
+            }
+        }
+
+        internal void nonInteractiveUpdatingTaskStopped()
+        {
+
+            lock (OpenedForms)
+            {
+                foreach (var form in OpenedForms)
+                {
+                    if (backgroundTaskIsUpdatingTags && form != this) //Updating operation
+                    {
+                        if (NumberOfNativeMbBackgroundTasks > 0 && !(form.backgroundTaskIsUpdatingTags && form.backgroundTaskIsScheduled && !form.backgroundTaskIsStoppedOrCancelled))
+                            form.disableQueryingButtons();
+                        else
+                            form.enableQueryingButtons();
+                    }
+                }
+
+                if (backgroundTaskIsUpdatingTags) //Updating operation
+                {
+                    backgroundTaskIsStopping = true;
+                    backgroundTaskIsStoppedOrCancelled = false;
+                }
+                else
+                {
+                    throw new Exception("Something went wrong! Non-interactive preview operation!");
+                }
             }
         }
 
@@ -4031,9 +4084,9 @@ namespace MusicBeePlugin
             {
                 foreach (var form in OpenedForms)
                 {
-                    if (backgroundTaskIsNativeMB && form != this) //Updating operation
+                    if (backgroundTaskIsUpdatingTags && form != this) //Updating operation
                     {
-                        if (NumberOfNativeMbBackgroundTasks > 0 && !(form.backgroundTaskIsNativeMB && form.backgroundTaskIsScheduled && !form.backgroundTaskIsStoppedOrCancelled))
+                        if (NumberOfNativeMbBackgroundTasks > 0 && !(form.backgroundTaskIsUpdatingTags && form.backgroundTaskIsScheduled && !form.backgroundTaskIsStoppedOrCancelled))
                             form.disableQueryingButtons();
                         else
                             form.enableQueryingButtons();
@@ -4042,7 +4095,7 @@ namespace MusicBeePlugin
 
                 disableQueryingButtons();
 
-                if (backgroundTaskIsNativeMB) //Updating operation
+                if (backgroundTaskIsUpdatingTags) //Updating operation
                 {
                     clickedButton.Text = buttonOKName;
 
@@ -4094,7 +4147,7 @@ namespace MusicBeePlugin
         {
             lock (OpenedForms)
             {
-                if (backgroundTaskIsNativeMB) //Updating operation
+                if (backgroundTaskIsUpdatingTags) //Updating operation
                 {
                     enableQueryingButtons();
                     clickedButton.Text = ButtonStopName;
@@ -4120,7 +4173,7 @@ namespace MusicBeePlugin
                 enableDisablePreviewOptionControls(true);
                 enableQueryingOrUpdatingButtons();
 
-                if (backgroundTaskIsNativeMB && backgroundTaskIsScheduled)
+                if (backgroundTaskIsUpdatingTags && backgroundTaskIsScheduled)
                     previewButton.Enable(false);
 
                 return true;

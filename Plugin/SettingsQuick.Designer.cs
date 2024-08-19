@@ -127,7 +127,7 @@
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
-            this.groupBox3.Tag = "#PluginQuickSettings@pinned-to-parent-x";
+            this.groupBox3.Tag = "#QuickSettings@pinned-to-parent-x";
             this.toolTip1.SetToolTip(this.groupBox3, resources.GetString("groupBox3.ToolTip"));
             //
             //playTickedAsrPresetSoundCheckBoxLabel
@@ -246,7 +246,7 @@
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
-            this.groupBox2.Tag = "#PluginQuickSettings@pinned-to-parent-x";
+            this.groupBox2.Tag = "#QuickSettings@pinned-to-parent-x";
             this.toolTip1.SetToolTip(this.groupBox2, resources.GetString("groupBox2.ToolTip"));
             //
             //legendGroupBox
@@ -425,7 +425,7 @@
             this.groupBox5.Controls.Add(this.label10);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.TabStop = false;
-            this.groupBox5.Tag = "#PluginQuickSettings@pinned-to-parent-x";
+            this.groupBox5.Tag = "#QuickSettings@pinned-to-parent-x";
             this.toolTip1.SetToolTip(this.groupBox5, resources.GetString("groupBox5.ToolTip"));
             //
             //includePreservedTagValuesCheckBoxLabel
@@ -522,7 +522,7 @@
             this.buttonsPanel.Controls.Add(this.saveLastSkippedButton);
             this.buttonsPanel.Controls.Add(this.versionLabel);
             this.buttonsPanel.Name = "buttonsPanel";
-            this.buttonsPanel.Tag = "#PluginQuickSettings&PluginQuickSettings@pinned-to-parent-x";
+            this.buttonsPanel.Tag = "#QuickSettings&QuickSettings@pinned-to-parent-x";
             this.toolTip1.SetToolTip(this.buttonsPanel, resources.GetString("buttonsPanel.ToolTip"));
             //
             //buttonClose
@@ -574,7 +574,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label6);
             this.DoubleBuffered = true;
-            this.Name = "PluginQuickSettings";
+            this.Name = "QuickSettings";
             this.Tag = "@min-max-width-same@min-max-height-same";
             this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.groupBox3.ResumeLayout(false);

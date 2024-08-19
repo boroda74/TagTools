@@ -1,6 +1,7 @@
 ﻿using ExtensionMethods;
 using MusicBeePlugin.Properties;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -2981,7 +2982,7 @@ namespace MusicBeePlugin
                     if (interactive)
                     {
                         Invoke(new Action(() => { 
-                            if (backgroundTaskIsNativeMB) 
+                            if (backgroundTaskIsUpdatingTags) 
                                 stopButtonClickedMethod(applyingChangesStopped); 
                             else 
                                 stopButtonClickedMethod(prepareBackgroundPreview); 
@@ -3112,7 +3113,7 @@ namespace MusicBeePlugin
                     if (interactive)
                     {
                         Invoke(new Action(() => {
-                            if (backgroundTaskIsNativeMB)
+                            if (backgroundTaskIsUpdatingTags)
                                 stopButtonClickedMethod(applyingChangesStopped);
                             else
                                 stopButtonClickedMethod(prepareBackgroundPreview);
@@ -3282,7 +3283,7 @@ namespace MusicBeePlugin
                         if (interactive)
                         {
                             Invoke(new Action(() => {
-                                if (backgroundTaskIsNativeMB)
+                                if (backgroundTaskIsUpdatingTags)
                                     stopButtonClickedMethod(applyingChangesStopped);
                                 else
                                     stopButtonClickedMethod(prepareBackgroundPreview);
@@ -3354,7 +3355,7 @@ namespace MusicBeePlugin
                             if (interactive)
                             {
                                 Invoke(new Action(() => {
-                                    if (backgroundTaskIsNativeMB)
+                                    if (backgroundTaskIsUpdatingTags)
                                         stopButtonClickedMethod(applyingChangesStopped);
                                     else
                                         stopButtonClickedMethod(prepareBackgroundPreview);
@@ -3798,12 +3799,21 @@ namespace MusicBeePlugin
 
                 if (checkStoppingStatus())
                 {
-                    Invoke(new Action(() => {
-                        if (backgroundTaskIsNativeMB)
-                            stopButtonClickedMethod(applyingChangesStopped);
-                        else
-                            stopButtonClickedMethod(prepareBackgroundPreview);
-                    }));
+                    if (interactive)
+                    {
+                        Invoke(new Action(() =>
+                        {
+                            if (backgroundTaskIsUpdatingTags)
+                                stopButtonClickedMethod(applyingChangesStopped);
+                            else
+                                stopButtonClickedMethod(prepareBackgroundPreview);
+                        }));
+                    }
+                    else
+                    {
+                        nonInteractiveUpdatingTaskStopped();
+                    }
+
                     return;
                 }
 
@@ -3877,14 +3887,20 @@ namespace MusicBeePlugin
                     CommitTagsToFile(queriedFiles[i], true, true);
             }
 
-            if (backgroundTaskIsNativeMB)
+            if (interactive)
             {
-                Invoke(new Action(() => {
+                Invoke(new Action(() =>
+                {
+                    if (backgroundTaskIsUpdatingTags)
                         stopButtonClickedMethod(applyingChangesStopped);
+                    else
+                        stopButtonClickedMethod(prepareBackgroundPreview);
                 }));
-                return;
             }
-
+            else
+            {
+                nonInteractiveUpdatingTaskStopped();
+            }
 
 
             if (interactive || !forceCacheUpdate)
@@ -3952,7 +3968,7 @@ namespace MusicBeePlugin
                         lock (LrPresetExecutionLocker)
                         {
                             appliedPreset = autoLibraryReportsPreset;
-                            backgroundTaskIsNativeMB = true;
+                            backgroundTaskIsUpdatingTags = true;
                             executePreset(null, false, true, null, false, true);
                         }
                     }
@@ -3975,7 +3991,7 @@ namespace MusicBeePlugin
                 {
                     Thread.CurrentThread.Priority = ThreadPriority.Lowest;
 
-                    backgroundTaskIsNativeMB = true;
+                    backgroundTaskIsUpdatingTags = true;
                     executePreset(null, false, true, null, false, true);
                 }
                 catch (ThreadAbortException)
@@ -4005,7 +4021,7 @@ namespace MusicBeePlugin
                     }
                     else
                     {
-                        backgroundTaskIsNativeMB = true;
+                        backgroundTaskIsUpdatingTags = true;
                         executePreset(selectedFiles, false, true, null, false, true);
                     }
                 }
@@ -4093,7 +4109,7 @@ namespace MusicBeePlugin
                                 }
 
                                 LibraryReportsCommandForFunctionIds.appliedPreset = idPreset.Value;
-                                LibraryReportsCommandForFunctionIds.backgroundTaskIsNativeMB = false;
+                                LibraryReportsCommandForFunctionIds.backgroundTaskIsUpdatingTags = false;
 
                                 //queriedGroupingTagsRaw, queriedActualGroupingTags, queriedActualGroupingTagsRaw may be nulled. Check this! //*****
                                 //Let's remember grouping tag value, which must be changed soon (it's now TagsChanging notification, let's process these
@@ -4266,7 +4282,7 @@ namespace MusicBeePlugin
 
 
                                 LibraryReportsCommandForFunctionIds.appliedPreset = idPreset.Value;
-                                LibraryReportsCommandForFunctionIds.backgroundTaskIsNativeMB = false;
+                                LibraryReportsCommandForFunctionIds.backgroundTaskIsUpdatingTags = true;
 
                                 LibraryReportsCommandForFunctionIds.executePreset(null, false, true, null, false, true,
                                     queriedChangingGroupingTagsRawWorkingCopy,
@@ -4274,7 +4290,7 @@ namespace MusicBeePlugin
                                     queriedChangingActualGroupingTagsRawWorkingCopy,
                                     false);
 
-                                LibraryReportsCommandForFunctionIds.backgroundTaskIsNativeMB = true;
+                                //LibraryReportsCommandForFunctionIds.backgroundTaskIsNativeMB = true;
 
                                 LibraryReportsCommandForFunctionIds.executePreset(
                                     LrTrackCacheNeededToBeUpdatedWorkingCopy,
@@ -4347,7 +4363,7 @@ namespace MusicBeePlugin
             {
                 form.reportPresets = reportPresets;
                 form.appliedPreset = preset;
-                form.backgroundTaskIsNativeMB = true;
+                form.backgroundTaskIsUpdatingTags = true;
 
                 form.switchOperation(form.applyReportPresetToSelectedTracks, form.buttonOK, form.buttonOK, form.buttonPreview, form.buttonClose, true, null);
             }
@@ -4355,7 +4371,7 @@ namespace MusicBeePlugin
             {
                 LibraryReportsCommandForHotkeys.reportPresets = reportPresets;
                 LibraryReportsCommandForHotkeys.appliedPreset = preset;
-                LibraryReportsCommandForHotkeys.backgroundTaskIsNativeMB = true;
+                LibraryReportsCommandForHotkeys.backgroundTaskIsUpdatingTags = true;
 
                 if (preset.applyToSelectedTracks)
                     MbApiInterface.MB_CreateBackgroundTask(LibraryReportsCommandForHotkeys.applyReportPresetToSelectedTracks, null);
@@ -4388,7 +4404,7 @@ namespace MusicBeePlugin
 
 
             LibraryReportsCommandForFunctionIds.appliedPreset = preset;
-            LibraryReportsCommandForFunctionIds.backgroundTaskIsNativeMB = true;
+            LibraryReportsCommandForFunctionIds.backgroundTaskIsUpdatingTags = true;
 
             var returnValue = LibraryReportsCommandForFunctionIds.getCachedFunctionResult(calculatedFile, functionId);
 
@@ -5062,6 +5078,22 @@ namespace MusicBeePlugin
 
         private void resetPreviewData()
         {
+            if (backgroundTaskIsStopping || backgroundTaskIsStoppedOrCancelled || !backgroundTaskIsScheduled)//------------- check!!!
+            {
+                previewTable.AllowUserToResizeColumns = true;
+                previewTable.AllowUserToResizeRows = true;
+                foreach (DataGridViewColumn column in previewTable.Columns)
+                    column.SortMode = DataGridViewColumnSortMode.Automatic;
+            }
+            else
+            {
+                previewTable.AllowUserToResizeColumns = false;
+                previewTable.AllowUserToResizeRows = false;
+                foreach (DataGridViewColumn column in previewTable.Columns)
+                    column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+
+
             backgroundTaskIsStopping = false;
             backgroundTaskIsStoppedOrCancelled = false;
 
@@ -5085,8 +5117,10 @@ namespace MusicBeePlugin
 
         private void resetFormToGeneratedPreview()
         {
-            previewTable.AllowUserToResizeColumns = true;
+            previewTable.AllowUserToResizeColumns = true;//-----------------
             previewTable.AllowUserToResizeRows = true;
+            foreach (DataGridViewColumn column in previewTable.Columns)
+                column.SortMode = DataGridViewColumnSortMode.Automatic;//----------------- Not for all commands!!!!
 
 
             backgroundTaskIsScheduled = false;
@@ -5116,8 +5150,10 @@ namespace MusicBeePlugin
 
         private bool applyingChangesStopped()
         {
-            previewTable.AllowUserToResizeColumns = true;
+            previewTable.AllowUserToResizeColumns = true;//-----------------
             previewTable.AllowUserToResizeRows = true;
+            foreach (DataGridViewColumn column in previewTable.Columns)
+                column.SortMode = DataGridViewColumnSortMode.Automatic;
 
 
             backgroundTaskIsScheduled = false;
@@ -5181,7 +5217,7 @@ namespace MusicBeePlugin
 
             reportPresets = getReportPresetsArrayUI();
             appliedPreset = selectedPreset;
-            backgroundTaskIsNativeMB = false;
+            backgroundTaskIsUpdatingTags = false;
 
             return true;
         }
@@ -6045,9 +6081,9 @@ namespace MusicBeePlugin
             presetList.Enable(!backgroundTaskIsScheduled && (newColumn == false));
 
             (allPresetsCheckStatusIsSenseless, allPresetsCheckStatusIsBroken) = checkAllPresetChains(false);
-            buttonSaveClose.Enable(!allPresetsCheckStatusIsSenseless && !allPresetsCheckStatusIsBroken && (!backgroundTaskIsNativeMB || !backgroundTaskIsWorking()));
+            buttonSaveClose.Enable(!allPresetsCheckStatusIsSenseless && !allPresetsCheckStatusIsBroken && (!backgroundTaskIsUpdatingTags || !backgroundTaskIsWorking()));
 
-            buttonOK.Enable((previewIsGenerated || SavedSettings.allowCommandExecutionWithoutPreview) && !backgroundTaskIsStopping && (!backgroundTaskIsWorking() || backgroundTaskIsNativeMB) && functionsDict.Count > 0);
+            buttonOK.Enable((previewIsGenerated || SavedSettings.allowCommandExecutionWithoutPreview) && !backgroundTaskIsStopping && (!backgroundTaskIsWorking() || backgroundTaskIsUpdatingTags) && functionsDict.Count > 0);
             buttonPreview.Enable(true);
         }
 
@@ -6405,7 +6441,7 @@ namespace MusicBeePlugin
 
             appliedPreset = selectedPreset;
             reportPresets = getReportPresetsArrayUI();
-            backgroundTaskIsNativeMB = false;
+            backgroundTaskIsUpdatingTags = false;
 
             prepareConditionRelatedLocals();
 
@@ -6454,7 +6490,7 @@ namespace MusicBeePlugin
         {
             if  (ignoreClosingForm)
             {
-                if (!backgroundTaskIsNativeMB)
+                if (!backgroundTaskIsUpdatingTags)
                 {
                     closeFormOnStopping = true;
                     buttonClose.Enable(false);
@@ -6992,8 +7028,7 @@ namespace MusicBeePlugin
 
         private void presetListSelectedIndexChanged(int index)
         {
-            if (presetListLastSelectedIndex != -2) //It's during form init
-                Enable(false, autoApplyPresetsLabel);
+            Enable(false, autoApplyPresetsLabel);
 
             functionsDict.Clear(); //As soon as possible because availability of some UI controls depends on it
 
@@ -7065,8 +7100,7 @@ namespace MusicBeePlugin
 
                 disableQueryingOrUpdatingButtons();
 
-                if (presetListLastSelectedIndex != -2) //It's during form init
-                    Enable(true, autoApplyPresetsLabel);
+                Enable(true, autoApplyPresetsLabel);
 
                 updateCustomScrollBars(presetList);
                 updateCustomScrollBars(previewTable);
@@ -7215,8 +7249,7 @@ namespace MusicBeePlugin
             enableDisablePreviewOptionControls(true);
             enableQueryingOrUpdatingButtons();
 
-            if (presetListLastSelectedIndex != -2) //It's during form init
-                Enable(true, autoApplyPresetsLabel);
+            Enable(true, autoApplyPresetsLabel);
 
 
             updateCustomScrollBars(presetList);

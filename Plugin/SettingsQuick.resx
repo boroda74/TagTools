@@ -1183,7 +1183,7 @@
     <value />
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>PluginQuickSettings</value>
+    <value>QuickSettings</value>
   </data>
   <data name="highlightChangedTagsCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 19</value>

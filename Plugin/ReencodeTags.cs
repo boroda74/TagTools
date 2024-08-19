@@ -76,6 +76,8 @@ namespace MusicBeePlugin
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.None
             };
 
+            previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
             previewTable.Columns.Insert(0, colCB);
 
             previewTable.Columns[2].HeaderCell.Style = headerCellStyle;
@@ -119,6 +121,24 @@ namespace MusicBeePlugin
 
         private void resetPreviewData()
         {
+            if (previewIsGenerated)//------------- check!!!
+            {
+                previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+                previewTable.AllowUserToResizeColumns = true;
+                previewTable.AllowUserToResizeRows = true;
+                foreach (DataGridViewColumn column in previewTable.Columns)
+                    column.SortMode = DataGridViewColumnSortMode.Automatic;
+            }
+            else
+            {
+                previewTable.AllowUserToResizeColumns = false;
+                previewTable.AllowUserToResizeRows = false;
+                foreach (DataGridViewColumn column in previewTable.Columns)
+                    column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+
+
             backgroundTaskIsStopping = false;
             backgroundTaskIsStoppedOrCancelled = false;
 
@@ -145,6 +165,8 @@ namespace MusicBeePlugin
 
         private void resetFormToGeneratedPreview()
         {
+            previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
             previewTable.AllowUserToResizeColumns = true;
             previewTable.AllowUserToResizeRows = true;
             foreach (DataGridViewColumn column in previewTable.Columns)
@@ -238,6 +260,7 @@ namespace MusicBeePlugin
             }
             else
             {
+                previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 return true;
             }
         }
@@ -523,7 +546,7 @@ namespace MusicBeePlugin
 
         internal override void enableQueryingOrUpdatingButtons()
         {
-            buttonOK.Enable((previewIsGenerated || SavedSettings.allowCommandExecutionWithoutPreview) && !backgroundTaskIsStopping && (!backgroundTaskIsWorking() || backgroundTaskIsNativeMB));
+            buttonOK.Enable((previewIsGenerated || SavedSettings.allowCommandExecutionWithoutPreview) && !backgroundTaskIsStopping && (!backgroundTaskIsWorking() || backgroundTaskIsUpdatingTags));
             buttonPreview.Enable(true);
         }
 
@@ -569,7 +592,7 @@ namespace MusicBeePlugin
         {
             if (ignoreClosingForm)
             {
-                if (!backgroundTaskIsNativeMB)
+                if (!backgroundTaskIsUpdatingTags)
                 {
                     closeFormOnStopping = true;
                     buttonClose.Enable(false);

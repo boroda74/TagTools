@@ -1168,7 +1168,7 @@ namespace MusicBeePlugin
 
         internal override void enableQueryingOrUpdatingButtons()
         {
-            buttonOK.Enable(true && (backgroundTaskIsNativeMB || !backgroundTaskIsWorking()));
+            buttonOK.Enable(true && (backgroundTaskIsUpdatingTags || !backgroundTaskIsWorking()));
         }
 
         internal override void disableQueryingOrUpdatingButtons()
@@ -1249,7 +1249,7 @@ namespace MusicBeePlugin
         {
             if (ignoreClosingForm)
             {
-                if (!backgroundTaskIsNativeMB)
+                if (!backgroundTaskIsUpdatingTags)
                 {
                     closeFormOnStopping = true;
                     buttonClose.Enable(false);

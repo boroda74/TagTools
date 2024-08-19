@@ -278,6 +278,8 @@ namespace MusicBeePlugin
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.None,
             };
 
+            previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
             previewTable.Columns.Insert(0, colCB);
             previewTable.Columns[1].HeaderCell.Style = headerCellStyle;
             previewTable.Columns[2].HeaderCell.Style = headerCellStyle;
@@ -536,17 +538,29 @@ namespace MusicBeePlugin
             public int replacedTag5Id;
             public string replacedPattern5;
 
+            public bool add;
+            public bool add2;
+            public bool add3;
+            public bool add4;
+            public bool add5;
+
             public bool append;
             public bool append2;
             public bool append3;
             public bool append4;
             public bool append5;
 
-            public bool? limitation1;
-            public bool? limitation2;
-            public bool? limitation3;
-            public bool? limitation4;
-            public bool? limitation5;
+            public bool sneLimitation1;
+            public bool sneLimitation2;
+            public bool sneLimitation3;
+            public bool sneLimitation4;
+            public bool sneLimitation5;
+
+            public bool dneLimitation1;
+            public bool dneLimitation2;
+            public bool dneLimitation3;
+            public bool dneLimitation4;
+            public bool dneLimitation5;
 
             public Preset()
             {
@@ -693,17 +707,29 @@ namespace MusicBeePlugin
                 replacedTag5Id = originalPreset.replacedTag5Id;
                 replacedPattern5 = originalPreset.replacedPattern5;
 
+                add = originalPreset.add;
+                add2 = originalPreset.add2;
+                add3 = originalPreset.add3;
+                add4 = originalPreset.add4;
+                add5 = originalPreset.add5;
+
                 append = originalPreset.append;
                 append2 = originalPreset.append2;
                 append3 = originalPreset.append3;
                 append4 = originalPreset.append4;
                 append5 = originalPreset.append5;
 
-                limitation1 = originalPreset.limitation1;
-                limitation2 = originalPreset.limitation2;
-                limitation3 = originalPreset.limitation3;
-                limitation4 = originalPreset.limitation4;
-                limitation5 = originalPreset.limitation5;
+                sneLimitation1 = originalPreset.sneLimitation1;
+                sneLimitation2 = originalPreset.sneLimitation2;
+                sneLimitation3 = originalPreset.sneLimitation3;
+                sneLimitation4 = originalPreset.sneLimitation4;
+                sneLimitation5 = originalPreset.sneLimitation5;
+
+                dneLimitation1 = originalPreset.dneLimitation1;
+                dneLimitation2 = originalPreset.dneLimitation2;
+                dneLimitation3 = originalPreset.dneLimitation3;
+                dneLimitation4 = originalPreset.dneLimitation4;
+                dneLimitation5 = originalPreset.dneLimitation5;
             }
 
             private string getHotkeyChar()
@@ -2170,7 +2196,8 @@ namespace MusicBeePlugin
 
         internal static void SetReplacedTag(string currentFile, AdvancedSearchAndReplace asrCommand,
             int searchedTagId, int replacedTagId, string searchedPattern, string replacedPattern,
-            string preserveValues, string preserveTags, string processTags, bool ignoreCase, bool append, bool? limitation,
+            string preserveValues, string preserveTags, string processTags, bool ignoreCase, 
+            bool add, bool append, bool sneLimitation, bool dneLimitation,
             out string searchedTagValue, out string replacedTagValue, out string originalReplacedTagValue,
             out bool replacedTagValuePreserved, out bool replacedTagPreserved)
         {
@@ -2189,7 +2216,7 @@ namespace MusicBeePlugin
             originalReplacedTagValue = GetTag(currentFile, asrCommand, replacedTagId);
 
 
-            if (searchedTagValue == string.Empty && limitation == false) //Don't replace with empty values
+            if (string.IsNullOrEmpty(searchedTagValue) && sneLimitation) //Don't replace with empty values if the option is checked
             {
                 replacedTagValue = originalReplacedTagValue;
                 replacedTagPreserved = false;
@@ -2198,7 +2225,7 @@ namespace MusicBeePlugin
             }
 
 
-            if (originalReplacedTagValue != string.Empty && limitation == true) //Don't replace not empty values
+            if (!string.IsNullOrEmpty(originalReplacedTagValue) && dneLimitation) //Don't replace not empty values if the option is checked
             {
                 replacedTagValue = originalReplacedTagValue;
                 replacedTagPreserved = false;
@@ -2217,6 +2244,7 @@ namespace MusicBeePlugin
                 return;
             }
 
+
             if (!string.IsNullOrWhiteSpace(preserveTags) && (";" + preserveTags + ";").Contains(";" + replacedTagName + ";"))
             {
                 replacedTagPreserved = true;
@@ -2224,7 +2252,9 @@ namespace MusicBeePlugin
                 replacedTagValue = originalReplacedTagValue;
                 return;
             }
+
             replacedTagPreserved = false;
+
 
             if (!string.IsNullOrWhiteSpace(preserveValues) && (";;" + preserveValues + ";;").Contains(";;" + originalReplacedTagValue + ";;"))
             {
@@ -2232,11 +2262,15 @@ namespace MusicBeePlugin
                 replacedTagValue = originalReplacedTagValue;
                 return;
             }
+
             replacedTagValuePreserved = false;
 
 
             replacedTagValue = Replace(currentFile, searchedTagValue, searchedPattern, replacedPattern, ignoreCase, out _);
 
+
+            if (add)
+                replacedTagValue = replacedTagValue + originalReplacedTagValue;
 
             if (append)
                 replacedTagValue = originalReplacedTagValue + replacedTagValue;
@@ -2269,7 +2303,7 @@ namespace MusicBeePlugin
             SetReplacedTag(currentFile, asrCommand, preset.searchedTagId, preset.replacedTagId,
                 preset.replaceVariable(preset.searchedPattern, true), preset.replaceVariable(preset.replacedPattern, false),
                 preset.preserveValues, preserveTags, processTags,
-                preset.ignoreCase, preset.append, preset.limitation1,
+                preset.ignoreCase, preset.add, preset.append, preset.sneLimitation1, preset.dneLimitation1, 
                 out searchedAndReplacedTags.searchedTagValue, out searchedAndReplacedTags.replacedTagValue, out searchedAndReplacedTags.originalReplacedTagValue,
                 out searchedAndReplacedTags.replacedTagValuePreserved, out searchedAndReplacedTags.replacedTagPreserved);
 
@@ -2280,7 +2314,7 @@ namespace MusicBeePlugin
             SetReplacedTag(currentFile, asrCommand, preset.searchedTag2Id, preset.replacedTag2Id,
                 preset.replaceVariable(preset.searchedPattern2, true), preset.replaceVariable(preset.replacedPattern2, false),
                 preset.preserveValues, preserveTags, processTags,
-                preset.ignoreCase, preset.append2, preset.limitation2,
+                preset.ignoreCase, preset.add2, preset.append2, preset.sneLimitation2, preset.dneLimitation2,
                 out searchedAndReplacedTags.searchedTag2Value, out searchedAndReplacedTags.replacedTag2Value, out searchedAndReplacedTags.originalReplacedTag2Value,
                 out searchedAndReplacedTags.replacedTag2ValuePreserved, out searchedAndReplacedTags.replacedTag2Preserved);
 
@@ -2291,7 +2325,7 @@ namespace MusicBeePlugin
             SetReplacedTag(currentFile, asrCommand, preset.searchedTag3Id, preset.replacedTag3Id,
                 preset.replaceVariable(preset.searchedPattern3, true), preset.replaceVariable(preset.replacedPattern3, false),
                 preset.preserveValues, preserveTags, processTags,
-                preset.ignoreCase, preset.append3, preset.limitation3,
+                preset.ignoreCase, preset.add3, preset.append3, preset.sneLimitation3, preset.dneLimitation3,
                 out searchedAndReplacedTags.searchedTag3Value, out searchedAndReplacedTags.replacedTag3Value, out searchedAndReplacedTags.originalReplacedTag3Value,
                 out searchedAndReplacedTags.replacedTag3ValuePreserved, out searchedAndReplacedTags.replacedTag3Preserved);
 
@@ -2302,7 +2336,7 @@ namespace MusicBeePlugin
             SetReplacedTag(currentFile, asrCommand, preset.searchedTag4Id, preset.replacedTag4Id,
                 preset.replaceVariable(preset.searchedPattern4, true), preset.replaceVariable(preset.replacedPattern4, false),
                 preset.preserveValues, preserveTags, processTags,
-                preset.ignoreCase, preset.append4, preset.limitation4,
+                preset.ignoreCase, preset.add4, preset.append4, preset.sneLimitation4, preset.dneLimitation4,
                 out searchedAndReplacedTags.searchedTag4Value, out searchedAndReplacedTags.replacedTag4Value, out searchedAndReplacedTags.originalReplacedTag4Value,
                 out searchedAndReplacedTags.replacedTag4ValuePreserved, out searchedAndReplacedTags.replacedTag4Preserved);
 
@@ -2313,7 +2347,7 @@ namespace MusicBeePlugin
             SetReplacedTag(currentFile, asrCommand, preset.searchedTag5Id, preset.replacedTag5Id,
                 preset.replaceVariable(preset.searchedPattern5, true), preset.replaceVariable(preset.replacedPattern5, false),
                 preset.preserveValues, preserveTags, processTags,
-                preset.ignoreCase, preset.append5, preset.limitation5,
+                preset.ignoreCase, preset.add5, preset.append5, preset.sneLimitation5, preset.dneLimitation5,
                 out searchedAndReplacedTags.searchedTag5Value, out searchedAndReplacedTags.replacedTag5Value, out searchedAndReplacedTags.originalReplacedTag5Value,
                 out searchedAndReplacedTags.replacedTag5ValuePreserved, out searchedAndReplacedTags.replacedTag5Preserved);
 
@@ -2553,8 +2587,10 @@ namespace MusicBeePlugin
 
         private void resetPreviewData()
         {
-            if (backgroundTaskIsStopping || backgroundTaskIsStoppedOrCancelled || !backgroundTaskIsScheduled)//------------- check!!!
+            if (previewIsGenerated)//------------- check!!!
             {
+                previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
                 previewTable.AllowUserToResizeColumns = true;
                 previewTable.AllowUserToResizeRows = true;
                 foreach (DataGridViewColumn column in previewTable.Columns)
@@ -2594,10 +2630,12 @@ namespace MusicBeePlugin
 
         private void resetFormToGeneratedPreview()
         {
-            previewTable.AllowUserToResizeColumns = true;//-----------------
+            previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            previewTable.AllowUserToResizeColumns = true;
             previewTable.AllowUserToResizeRows = true;
             foreach (DataGridViewColumn column in previewTable.Columns)
-                column.SortMode = DataGridViewColumnSortMode.Automatic;//----------------- Not for all commands!!!!
+                column.SortMode = DataGridViewColumnSortMode.Automatic;
 
 
             backgroundTaskIsScheduled = false;
@@ -2621,6 +2659,12 @@ namespace MusicBeePlugin
 
         private bool applyingChangesStopped()
         {
+            previewTable.AllowUserToResizeColumns = true;
+            previewTable.AllowUserToResizeRows = true;
+            foreach (DataGridViewColumn column in previewTable.Columns)
+                column.SortMode = DataGridViewColumnSortMode.Automatic;
+
+
             backgroundTaskIsScheduled = false;
             backgroundTaskIsStopping = false;
             backgroundTaskIsStoppedOrCancelled = false;
@@ -2652,10 +2696,6 @@ namespace MusicBeePlugin
 
             if (backgroundTaskIsWorking())
                 return true;
-
-
-            previewTable.AllowUserToResizeColumns = false;//--------------------
-            previewTable.AllowUserToResizeRows = false;
 
 
             var allWritableTagNames = new List<string>();
@@ -3138,7 +3178,7 @@ namespace MusicBeePlugin
 
             int rowCountToFormat2 = 0;
             Invoke(new Action(() => { rowCountToFormat2 = previewTable_AddRowsToTable(rowList, true, changeTypesList); }));
-            Invoke(new Action(() => { previewTableFormatRows(rowCountToFormat2); }));
+            Invoke(new Action(() => { previewTableFormatRows(rowCountToFormat2); checkStoppedStatus(); resetFormToGeneratedPreview(); }));
         }
 
         private void applyToSelected()
@@ -3615,19 +3655,21 @@ namespace MusicBeePlugin
             if (selectedPreset.columnWeights == null)
                 selectedPreset.columnWeights = new List<float>();
 
-            if (selectedPreset.columnWeights.Count < 4 || !(selectedPreset.columnWeights[1] > 0))
-            {
+            if (selectedPreset.columnWeights.Count < 3 + 3 || !(selectedPreset.columnWeights[3] > 0)) //3 fixed size or invisible columns + minimum 3 real columns
                 selectedPreset.columnWeights.Clear();
-            }
-            else if ((int)selectedPreset.columnWeights[3] == selectedPreset.columnWeights[3])
-            {
-                previewTable.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-                previewTable.Columns[3].Width = (int)selectedPreset.columnWeights[3];
-            }
 
             for (int i = 0; i < selectedPreset.columnWeights.Count - 1; i++)
+            {
                 if (!(selectedPreset.columnWeights[i] > 0))
-                    selectedPreset.columnWeights[i] = 20;
+                {
+                    if (i < 3) //Fixed size or invisible columns
+                        selectedPreset.columnWeights[i] = 1;
+                    else if (i == 3) //Track representation
+                        selectedPreset.columnWeights[i] = 100;
+                    else
+                        selectedPreset.columnWeights[i] = 30;
+                }
+            }
 
 
             if (allTagsReplaceIdsCount == 0)
@@ -3653,12 +3695,12 @@ namespace MusicBeePlugin
                     previewTable.Columns[6].Visible = true;
                 }
 
-                if (selectedPreset.columnWeights.Count > 3)
+                if (selectedPreset.columnWeights.Count > 3 + 3) //3 fixed size or invisible columns + minimum 3 real columns
                 {
-                    //previewTable.Columns[3].FillWeight = selectedPreset.columnWeights[0];
-                    previewTable.Columns[4].FillWeight = selectedPreset.columnWeights[1];
-                    previewTable.Columns[5].FillWeight = selectedPreset.columnWeights[2];
-                    //previewTable.Columns[6].FillWeight = selectedPreset.columnWeights[3]; //****
+                    previewTable.Columns[3].FillWeight = selectedPreset.columnWeights[3];
+                    previewTable.Columns[4].FillWeight = selectedPreset.columnWeights[4];
+                    previewTable.Columns[5].FillWeight = selectedPreset.columnWeights[5];
+                    previewTable.Columns[6].FillWeight = selectedPreset.columnWeights[6]; //****
                 }
                 else
                 {
@@ -3706,11 +3748,11 @@ namespace MusicBeePlugin
                         previewTable.Columns[8].Visible = false;
                     }
 
-                    if (selectedPreset.columnWeights.Count > 6)
+                    if (selectedPreset.columnWeights.Count > 3 + 6) //3 fixed size or invisible columns + 6 real columns
                     {
-                        previewTable.Columns[7].FillWeight = selectedPreset.columnWeights[4];
-                        previewTable.Columns[8].FillWeight = selectedPreset.columnWeights[5];
-                        previewTable.Columns[9].FillWeight = selectedPreset.columnWeights[6];
+                        previewTable.Columns[7].FillWeight = selectedPreset.columnWeights[7];
+                        previewTable.Columns[8].FillWeight = selectedPreset.columnWeights[8];
+                        previewTable.Columns[9].FillWeight = selectedPreset.columnWeights[9];
                     }
 
 
@@ -3739,11 +3781,11 @@ namespace MusicBeePlugin
                             previewTable.Columns[11].Visible = false;
                         }
 
-                        if (selectedPreset.columnWeights.Count > 9)
+                        if (selectedPreset.columnWeights.Count > 3 + 9) //3 fixed size or invisible columns + 9 real columns
                         {
-                            previewTable.Columns[10].FillWeight = selectedPreset.columnWeights[7];
-                            previewTable.Columns[11].FillWeight = selectedPreset.columnWeights[8];
-                            previewTable.Columns[12].FillWeight = selectedPreset.columnWeights[9];
+                            previewTable.Columns[10].FillWeight = selectedPreset.columnWeights[10];
+                            previewTable.Columns[11].FillWeight = selectedPreset.columnWeights[11];
+                            previewTable.Columns[12].FillWeight = selectedPreset.columnWeights[12];
                         }
 
 
@@ -3772,11 +3814,11 @@ namespace MusicBeePlugin
                                 previewTable.Columns[14].Visible = false;
                             }
 
-                            if (selectedPreset.columnWeights.Count > 12)
+                            if (selectedPreset.columnWeights.Count > 3 + 12) //3 fixed size or invisible columns + 12 real columns
                             {
-                                previewTable.Columns[13].FillWeight = selectedPreset.columnWeights[10];
-                                previewTable.Columns[14].FillWeight = selectedPreset.columnWeights[11];
-                                previewTable.Columns[15].FillWeight = selectedPreset.columnWeights[12];
+                                previewTable.Columns[13].FillWeight = selectedPreset.columnWeights[13];
+                                previewTable.Columns[14].FillWeight = selectedPreset.columnWeights[14];
+                                previewTable.Columns[15].FillWeight = selectedPreset.columnWeights[15];
                             }
 
 
@@ -3805,11 +3847,11 @@ namespace MusicBeePlugin
                                     previewTable.Columns[17].Visible = false;
                                 }
 
-                                if (selectedPreset.columnWeights.Count > 15)
+                                if (selectedPreset.columnWeights.Count > 3 + 15) //3 fixed size or invisible columns + 15 real columns
                                 {
-                                    previewTable.Columns[16].FillWeight = selectedPreset.columnWeights[13];
-                                    previewTable.Columns[17].FillWeight = selectedPreset.columnWeights[14];
-                                    previewTable.Columns[18].FillWeight = selectedPreset.columnWeights[15];
+                                    previewTable.Columns[16].FillWeight = selectedPreset.columnWeights[16];
+                                    previewTable.Columns[17].FillWeight = selectedPreset.columnWeights[17];
+                                    previewTable.Columns[18].FillWeight = selectedPreset.columnWeights[18];
                                 }
                             }
                             else
@@ -3954,8 +3996,7 @@ namespace MusicBeePlugin
 
         private void presetListSelectedIndexChanged(int index)
         {
-            if (presetListLastSelectedIndex != -2) //It's during form init
-                Enable(false, autoApplyPresetsLabel);
+            Enable(false, autoApplyPresetsLabel);
 
             if (index < 0)
             {
@@ -3992,8 +4033,7 @@ namespace MusicBeePlugin
                 enableDisablePreviewOptionControls(true, true);
                 disableQueryingOrUpdatingButtons();
 
-                if (presetListLastSelectedIndex != -2) //It's during form init
-                    Enable(true, autoApplyPresetsLabel);
+                Enable(true, autoApplyPresetsLabel);
             }
             else
             {
@@ -4094,8 +4134,7 @@ namespace MusicBeePlugin
                 enableDisablePreviewOptionControls(true, true);
                 enableQueryingOrUpdatingButtons();
 
-                if (presetListLastSelectedIndex != -2) //It's during form init
-                    Enable(true, autoApplyPresetsLabel);
+                Enable(true, autoApplyPresetsLabel);
             }
 
             //Preset referring <All Tags> must not be checked for auto-execution. This function call shows icons on tag labels
@@ -5563,7 +5602,7 @@ namespace MusicBeePlugin
         {
             presetList.Enable(!backgroundTaskIsWorking());
 
-            buttonOK.Enable((previewIsGenerated || (SavedSettings.allowCommandExecutionWithoutPreview && !selectedPresetUsesAllTags)) && !backgroundTaskIsStopping && (!backgroundTaskIsWorking() || backgroundTaskIsNativeMB));
+            buttonOK.Enable((previewIsGenerated || (SavedSettings.allowCommandExecutionWithoutPreview && !selectedPresetUsesAllTags)) && !backgroundTaskIsStopping && (!backgroundTaskIsWorking() || backgroundTaskIsUpdatingTags));
             buttonPreview.Enable(true);
         }
 
@@ -5893,28 +5932,21 @@ namespace MusicBeePlugin
             {
                 savedPreset.columnWeights.Clear();
                 for (var i = 0; i < previewTable.ColumnCount; i++)
-                    savedPreset.columnWeights.Add(previewTable.Columns[i].FillWeight);
+                {
+                    if (previewTable.Columns[i].Visible)
+                        savedPreset.columnWeights.Add(previewTable.Columns[i].Width);
+                    else
+                        savedPreset.columnWeights.Add(1);//------------
+                }
             }
             else
             {
                 for (var i = 0; i < previewTable.ColumnCount; i++)
-                    savedPreset.columnWeights[i] = previewTable.Columns[i].FillWeight;
-            }
-
-
-            bool failed = true;
-            while (failed)
-            {
-                try
                 {
-                    previewTable.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-                    savedPreset.columnWeights[3] = previewTable.Columns[3].Width;
-                    failed = false;
-                }
-                catch
-                {
-                    //Let's retry...
-                    Thread.Sleep(ActionRetryDelay);
+                    if (previewTable.Columns[i].Visible)
+                        savedPreset.columnWeights[i] = previewTable.Columns[i].Width;
+                    else
+                        savedPreset.columnWeights[i] = 1;//------------
                 }
             }
         }
@@ -6360,7 +6392,7 @@ namespace MusicBeePlugin
             }
             else if (ignoreClosingForm)
             {
-                if (!backgroundTaskIsNativeMB)
+                if (!backgroundTaskIsUpdatingTags)
                 {
                     closeFormOnStopping = true;
                     buttonClose.Enable(false);
