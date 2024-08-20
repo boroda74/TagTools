@@ -26,6 +26,7 @@ namespace MusicBeePlugin
 		private const int nMargin = 5;
         private Color mBackColor = SystemColors.Control;
         private Color mBorderColor = SystemColors.ControlDark;
+        private bool suspendPainting = false; // There is a freeze on maximizing form, let's turn off redrawing temporary
 
         public FlatTabControl()
 		{
@@ -77,14 +78,13 @@ namespace MusicBeePlugin
 
 		protected override void OnPaint(PaintEventArgs e)
 		{
-			base.OnPaint(e); 
-			
+			base.OnPaint(e);
 			DrawControl(e.Graphics);
 		}
 
 		internal void DrawControl(Graphics g)
 		{
-			if (!Visible)
+			if (!Visible || suspendPainting)
 				return;
 
 			Rectangle TabControlArea = this.ClientRectangle;
@@ -473,7 +473,7 @@ namespace MusicBeePlugin
 			}
 		}
 
-		new public TabAlignment Alignment
+		public new TabAlignment Alignment
 		{
 			get {return base.Alignment;}
 			set {
@@ -485,24 +485,31 @@ namespace MusicBeePlugin
 		}
 
 		[Browsable(false)]
-		new public bool Multiline
+		public new bool Multiline
 		{
 			get {return base.Multiline;}
 			set {base.Multiline = false;}
 		}
 
         [Browsable(true)]
-        new public Color myBackColor
+        public override Color BackColor
         {
             get { return mBackColor; }
             set { mBackColor = value; this.Invalidate(); }
         }
 
         [Browsable(true)]
-        new public Color myBorderColor
+        public Color BorderColor
         {
             get { return mBorderColor; }
             set { mBorderColor = value; this.Invalidate(); }
+        }
+
+        [Browsable(false)]
+        public bool SuspendPainting // There is a freeze on maximizing form, let's turn off redrawing temporary
+        {
+            get { return suspendPainting; }
+            set { suspendPainting = value; if (value) this.Invalidate(); }
         }
         #endregion
 

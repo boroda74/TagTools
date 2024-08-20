@@ -147,45 +147,6 @@
   <data name="buttonSettings.Location" type="System.Drawing.Point, System.Drawing">
     <value>1084, 8</value>
   </data>
-  <data name="buttonNormalizePercentages.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonNormalizePercentages.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="buttonNormalizePercentages.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="buttonNormalizePercentages.Location" type="System.Drawing.Point, System.Drawing">
-    <value>410, 28</value>
-  </data>
-  <data name="buttonNormalizePercentages.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 23</value>
-  </data>
-  <data name="buttonNormalizePercentages.Text" xml:space="preserve">
-    <value>Нормализовать %</value>
-  </data>
-  <data name="buttonNormalizePercentages.ToolTip" xml:space="preserve">
-    <value>Привести сумму процентов к 100</value>
-  </data>
-  <data name="groupBox1Label.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="groupBox1Label.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="groupBox1Label.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="groupBox1Label.Size" type="System.Drawing.Size, System.Drawing">
-    <value>429, 15</value>
-  </data>
-  <data name="groupBox1Label.Text" xml:space="preserve">
-    <value> Укажите какой процент библиотеки должен иметь определенный рейтинг </value>
-  </data>
-  <data name="groupBox1Label.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="buttonCalculate.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
@@ -468,6 +429,45 @@
   <data name="perCent5UpDown.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="buttonNormalizePercentages.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="buttonNormalizePercentages.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="buttonNormalizePercentages.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="buttonNormalizePercentages.Location" type="System.Drawing.Point, System.Drawing">
+    <value>410, 28</value>
+  </data>
+  <data name="buttonNormalizePercentages.Size" type="System.Drawing.Size, System.Drawing">
+    <value>141, 23</value>
+  </data>
+  <data name="buttonNormalizePercentages.Text" xml:space="preserve">
+    <value>Нормализовать %</value>
+  </data>
+  <data name="buttonNormalizePercentages.ToolTip" xml:space="preserve">
+    <value>Привести сумму процентов к 100</value>
+  </data>
+  <data name="groupBox1Label.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="groupBox1Label.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="groupBox1Label.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="groupBox1Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>429, 15</value>
+  </data>
+  <data name="groupBox1Label.Text" xml:space="preserve">
+    <value> Укажите какой процент библиотеки должен иметь определенный рейтинг </value>
+  </data>
+  <data name="groupBox1Label.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="groupBox1.Error" xml:space="preserve">
     <value />
   </data>
@@ -484,24 +484,6 @@
     <value>559, 383</value>
   </data>
   <data name="groupBox1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="groupBox2Label.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="groupBox2Label.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="groupBox2Label.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="groupBox2Label.Size" type="System.Drawing.Size, System.Drawing">
-    <value>276, 15</value>
-  </data>
-  <data name="groupBox2Label.Text" xml:space="preserve">
-    <value> Пороговые значения для установки рейтингов </value>
-  </data>
-  <data name="groupBox2Label.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="avgPlaysPerDayBox.Error" xml:space="preserve">
@@ -855,72 +837,6 @@
   <data name="label24.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="threshold25Box.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="threshold25Box.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="threshold25Box.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="threshold25Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>249, 163</value>
-  </data>
-  <data name="threshold25Box.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="checkBox25Label.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="checkBox25Label.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="checkBox25Label.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="checkBox25Label.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 15</value>
-  </data>
-  <data name="checkBox25Label.Text" xml:space="preserve">
-    <value>Установить 2,5 звездочки, если:</value>
-  </data>
-  <data name="checkBox25Label.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="checkBox25.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="checkBox25.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="checkBox25.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="checkBox25.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label23.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label23.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleRight</value>
-  </data>
-  <data name="label23.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="label23.Location" type="System.Drawing.Point, System.Drawing">
-    <value>398, 139</value>
-  </data>
-  <data name="label23.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 15</value>
-  </data>
-  <data name="label23.Text" xml:space="preserve">
-    <value>или больше воспроизведений в день</value>
-  </data>
-  <data name="label23.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="threshold3Box.Error" xml:space="preserve">
     <value />
   </data>
@@ -1228,6 +1144,90 @@
     <value>0</value>
   </data>
   <data name="checkBox5.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="groupBox2Label.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="groupBox2Label.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="groupBox2Label.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="groupBox2Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>276, 15</value>
+  </data>
+  <data name="groupBox2Label.Text" xml:space="preserve">
+    <value> Пороговые значения для установки рейтингов </value>
+  </data>
+  <data name="groupBox2Label.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="threshold25Box.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="threshold25Box.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="threshold25Box.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="threshold25Box.Location" type="System.Drawing.Point, System.Drawing">
+    <value>249, 163</value>
+  </data>
+  <data name="threshold25Box.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="checkBox25Label.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="checkBox25Label.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="checkBox25Label.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="checkBox25Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 15</value>
+  </data>
+  <data name="checkBox25Label.Text" xml:space="preserve">
+    <value>Установить 2,5 звездочки, если:</value>
+  </data>
+  <data name="checkBox25Label.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="checkBox25.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="checkBox25.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="checkBox25.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="checkBox25.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="label23.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="label23.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="label23.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label23.Location" type="System.Drawing.Point, System.Drawing">
+    <value>398, 139</value>
+  </data>
+  <data name="label23.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 15</value>
+  </data>
+  <data name="label23.Text" xml:space="preserve">
+    <value>или больше воспроизведений в день</value>
+  </data>
+  <data name="label23.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="groupBox2.Error" xml:space="preserve">

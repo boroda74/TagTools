@@ -98,12 +98,6 @@
             this.buttonOK = new System.Windows.Forms.Button();
             this.saveLastSkippedButton = new System.Windows.Forms.Button();
             this.versionLabel = new System.Windows.Forms.Label();
-            this.groupBox3.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.legendGroupBox.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            this.buttonsPanel.SuspendLayout();
-            this.SuspendLayout();
 
             //MusicBee
             this.customFontTextBox = ControlsTools.CreateMusicBeeTextBox();
@@ -112,6 +106,12 @@
             this.changedLegendTextBox = ControlsTools.CreateMusicBeeTextBox();
             //~MusicBee
 
+            this.groupBox3.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.legendGroupBox.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.buttonsPanel.SuspendLayout();
+            this.SuspendLayout();
             //
             //groupBox3
             //

@@ -67,6 +67,7 @@
             this.dontSkipAutoBackupsIfPlayCountsChangedCheckBox = new System.Windows.Forms.CheckBox();
             this.dontSkipAutoBackupsIfPlayCountsChangedLabel = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.emptyLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.autoBackupNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfDaysNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfFilesNumericUpDown)).BeginInit();
@@ -192,7 +193,7 @@
             resources.ApplyResources(this.buttonClose, "buttonClose");
             this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Tag = "#AutoBackupSettings@non-defaultable@pinned-to-parent-y";
+            this.buttonClose.Tag = "#AutoBackupSettings@non-defaultable";
             this.toolTip1.SetToolTip(this.buttonClose, resources.GetString("buttonClose.ToolTip"));
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
@@ -200,7 +201,7 @@
             // 
             resources.ApplyResources(this.buttonOK, "buttonOK");
             this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Tag = "#buttonClose@pinned-to-parent-y";
+            this.buttonOK.Tag = "#buttonClose";
             this.toolTip1.SetToolTip(this.buttonOK, resources.GetString("buttonOK.ToolTip"));
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
@@ -318,12 +319,19 @@
             this.groupBox1.TabStop = false;
             this.toolTip1.SetToolTip(this.groupBox1, resources.GetString("groupBox1.ToolTip"));
             // 
+            // emptyLabel
+            // 
+            resources.ApplyResources(this.emptyLabel, "emptyLabel");
+            this.emptyLabel.Name = "emptyLabel";
+            this.toolTip1.SetToolTip(this.emptyLabel, resources.GetString("emptyLabel.ToolTip"));
+            // 
             // AutoBackupSettings
             // 
             this.AcceptButton = this.buttonOK;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonClose;
+            this.Controls.Add(this.emptyLabel);
             this.Controls.Add(this.trackIdTagList);
             this.Controls.Add(this.storeTrackIdsInCustomTagCheckBoxLabel);
             this.Controls.Add(this.storeTrackIdsInCustomTagCheckBox);
@@ -362,6 +370,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numberOfFilesNumericUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion
@@ -395,5 +404,6 @@
         private System.Windows.Forms.Label storeTrackIdsInCustomTagCheckBoxLabel;
         private System.Windows.Forms.CheckBox storeTrackIdsInCustomTagCheckBox;
         private System.Windows.Forms.ComboBox trackIdTagList;
+        private System.Windows.Forms.Label emptyLabel;
     }
 }

@@ -3575,7 +3575,7 @@ namespace MusicBeePlugin
             CreateNewBaselineName = "Create New Baseline of Current Library...";
             createEmptyBaselineRestoreTagsForEntireLibraryName = "Create Empty Baseline and Restore Tags from Another Library...";
             DeleteBackupsName = "Delete Backup(s)...";
-            AutoBackupSettingsName = "(Auto)backup Settings...";
+            AutoBackupSettingsName = "(Auto)Backup Settings...";
 
             TagHistoryName = "Tag History....";
 
@@ -3587,7 +3587,7 @@ namespace MusicBeePlugin
             CreateNewBaselineDescription = TagToolsHotkeyDescription + "Create New Baseline of Current Library";
             createEmptyBaselineRestoreTagsForEntireLibraryDescription = TagToolsHotkeyDescription + "Create Empty Baseline and Restore Tags from Another Library";
             DeleteBackupsDescription = TagToolsHotkeyDescription + "Delete Backup(s)";
-            AutoBackupSettingsDescription = TagToolsHotkeyDescription + "(Auto)backup Settings";
+            AutoBackupSettingsDescription = TagToolsHotkeyDescription + "(Auto)Backup Settings";
 
             TagHistoryDescription = TagToolsHotkeyDescription + "Tag History";
 
@@ -3959,7 +3959,7 @@ namespace MusicBeePlugin
             CtlNewAsrPreset = "<New ASR Preset>";
             CtlAsrSyntaxError = "SYNTAX ERROR!";
 
-            CtlAsrPresetEditorPleaseWait = " PLEASE WAIT! ";
+            CtlAsrPresetEditorPleaseWait = ". PLEASE WAIT! ";
 
             CtlLrPresetAutoName = "(Auto preset name)";
             CtlLrInvalidPresetFormatAutoName = "Invalid preset format!";
@@ -4688,7 +4688,7 @@ namespace MusicBeePlugin
                 CtlNewAsrPreset = "<Новый пресет ДПЗ>";
                 CtlAsrSyntaxError = "СИНТАКСИЧЕСКАЯ ОШИБКА!";
 
-                CtlAsrPresetEditorPleaseWait = " НЕМНОГО ПОДОЖТИТЕ! ";
+                CtlAsrPresetEditorPleaseWait = ". НЕМНОГО ПОДОЖТИТЕ! ";
 
                 CtlLrPresetAutoName = "(Автоматическое имя)";
                 CtlLrInvalidPresetFormatAutoName = "Некорректный формат пресета!";

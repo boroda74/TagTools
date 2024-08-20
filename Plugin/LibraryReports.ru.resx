@@ -143,10 +143,10 @@
     <value>Есть не сохраненные изменения</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1286, 613</value>
+    <value>1284, 611</value>
   </data>
   <data name="autoApplyPresetsLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1271, 48</value>
+    <value>1269, 48</value>
   </data>
   <data name="autoApplyPresetsLabel.Text" xml:space="preserve">
     <value>Экспорт тегов в файл для использования в сторонних приложениях. Таблица сортируется по группирующим тегам слева направо после нажатия кнопки "Просмотр". Отмеченные пресеты автоматически применятются при запуске MusicBee. ~Отмечено для автоматического применения: %%TICKED-PRESETS%%~Автоматическое применение пресетов отключено в настройках плагина. </value>
@@ -1169,58 +1169,28 @@
     <value>Введите название пресета (в противном случае оно будет сформировано автоматически)</value>
   </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 149</value>
+    <value>0, 147</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>1272, 195</value>
   </data>
   <data name="presetList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1236, 129</value>
+    <value>1236, 127</value>
   </data>
   <data name="listBoxTableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1264, 149</value>
+    <value>1264, 147</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1270, 344</value>
+    <value>1268, 342</value>
   </data>
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1237, 157</value>
+    <value>1242, 163</value>
   </data>
   <data name="tabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1246, 166</value>
+    <value>1244, 166</value>
   </data>
   <data name="tabPage1.Text" xml:space="preserve">
-    <value>Просмотр</value>
-  </data>
-  <data name="multipleItemsSplitterTrimCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>923, 9</value>
-  </data>
-  <data name="multipleItemsSplitterTrimCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 15</value>
-  </data>
-  <data name="multipleItemsSplitterTrimCheckBoxLabel.Text" xml:space="preserve">
-    <value>Удалять непечатные символы</value>
-  </data>
-  <data name="multipleItemsSplitterTrimCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>902, 8</value>
-  </data>
-  <data name="multipleItemsSplitterTrimCheckBox.ToolTip" xml:space="preserve">
-    <value>Удалять все начальные и конечные непечатные символы (например, пробелы) из разделенных элементов</value>
-  </data>
-  <data name="expressionsDataGridViewCheckedColumn.ToolTipText" xml:space="preserve">
-    <value>Снимите отметку, чтобы удалить колонку выражения из пресета</value>
-  </data>
-  <data name="expressionsDataGridViewExpressionColumn.HeaderText" xml:space="preserve">
-    <value>Выражение</value>
-  </data>
-  <data name="expressionsDataGridViewExpressionColumn.ToolTipText" xml:space="preserve">
-    <value>Вы сняли отметку с последнего выражения для поля:\\%%FIELD-NAME%%\\Вы хотите удалить это поле?</value>
-  </data>
-  <data name="expressionsDataGridView.Location" type="System.Drawing.Point, System.Drawing">
-    <value>773, 62</value>
-  </data>
-  <data name="expressionsDataGridView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>471, 100</value>
+    <value>Просмотр  </value>
   </data>
   <data name="tagsDataGridViewCheckedColumn.ToolTipText" xml:space="preserve">
     <value>Снимите отметку, чтобы удалить группировку/функцию из пресета</value>
@@ -1240,19 +1210,41 @@
   <data name="tagsDataGridViewInfoColumn.ToolTipText" xml:space="preserve">
     <value>Разделитель элементов для группировок или тег, относительно которого считается среднее, для функций</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tagsDataGridView.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
   <data name="tagsDataGridView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>765, 100</value>
+    <value>707, 102</value>
   </data>
   <data name="tagsDataGridView.ToolTip" xml:space="preserve">
     <value>Порядок колонок в отчете соответствует порядку, в котором они были добавлены, но 
 эта таблица отсортирована в алфавитном порядке для упрощения навигации. Не перепутайте. 
 Смотрите реальный порядок колонок в таблице предварительного просмотра.</value>
   </data>
+  <data name="expressionsDataGridViewCheckedColumn.ToolTipText" xml:space="preserve">
+    <value>Снимите отметку, чтобы удалить колонку выражения из пресета</value>
+  </data>
+  <data name="expressionsDataGridViewExpressionColumn.HeaderText" xml:space="preserve">
+    <value>Выражение</value>
+  </data>
+  <data name="expressionsDataGridViewExpressionColumn.ToolTipText" xml:space="preserve">
+    <value>Вы сняли отметку с последнего выражения для поля:\\%%FIELD-NAME%%\\Вы хотите удалить это поле?</value>
+  </data>
+  <data name="expressionsDataGridView.Location" type="System.Drawing.Point, System.Drawing">
+    <value>707, 61</value>
+  </data>
+  <data name="expressionsDataGridView.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="expressionsDataGridView.Size" type="System.Drawing.Size, System.Drawing">
+    <value>535, 102</value>
+  </data>
   <data name="expressionTextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>189, 34</value>
   </data>
   <data name="expressionTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>580, 23</value>
+    <value>516, 23</value>
   </data>
   <data name="expressionTextBox.Text" xml:space="preserve">
     <value>(Без выражения)</value>
@@ -1270,41 +1262,8 @@
 Выражение вычисляется после разбиения группировок на элементы
 и перед вычислением агрегатных функций</value>
   </data>
-  <data name="multipleItemsSplitterComboBox.Items" xml:space="preserve">
-    <value> (не использовать)</value>
-  </data>
-  <data name="multipleItemsSplitterComboBox.Items1" xml:space="preserve">
-    <value> \0 (например, для нескольких исполнителей в теге "Исполнитель")</value>
-  </data>
-  <data name="multipleItemsSplitterComboBox.Items2" xml:space="preserve">
-    <value> ; (например, для нескольких жанров в теге "Жанр")</value>
-  </data>
-  <data name="multipleItemsSplitterComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>758, 6</value>
-  </data>
-  <data name="multipleItemsSplitterComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 23</value>
-  </data>
-  <data name="multipleItemsSplitterComboBox.ToolTip" xml:space="preserve">
-    <value>Разбивать значения тега группировки по указанному разделителю</value>
-  </data>
-  <data name="multipleItemsSplitterLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>604, 9</value>
-  </data>
-  <data name="multipleItemsSplitterLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 15</value>
-  </data>
-  <data name="multipleItemsSplitterLabel.Text" xml:space="preserve">
-    <value>Разделитель элементов:</value>
-  </data>
-  <data name="multipleItemsSplitterLabel.ToolTip" xml:space="preserve">
-    <value>Разбивать значения тега группировки по указанному разделителю</value>
-  </data>
-  <data name="parameter2ComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>636, 6</value>
-  </data>
   <data name="parameter2Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>574, 9</value>
+    <value>633, 8</value>
   </data>
   <data name="parameter2Label.Size" type="System.Drawing.Size, System.Drawing">
     <value>39, 15</value>
@@ -1313,10 +1272,13 @@
     <value>на тег</value>
   </data>
   <data name="sourceTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>310, 6</value>
+    <value>333, 5</value>
+  </data>
+  <data name="sourceTagList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>292, 23</value>
   </data>
   <data name="forTagLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>260, 9</value>
+    <value>296, 8</value>
   </data>
   <data name="forTagLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>29, 15</value>
@@ -1325,7 +1287,7 @@
     <value>тега</value>
   </data>
   <data name="functionComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 23</value>
+    <value>220, 23</value>
   </data>
   <data name="labelFunction.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 15</value>
@@ -1333,8 +1295,11 @@
   <data name="labelFunction.Text" xml:space="preserve">
     <value>Функция</value>
   </data>
+  <data name="panel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>705, 61</value>
+  </data>
   <data name="buttonUpdateFunction.Location" type="System.Drawing.Point, System.Drawing">
-    <value>351, 5</value>
+    <value>413, 34</value>
   </data>
   <data name="buttonUpdateFunction.Text" xml:space="preserve">
     <value>Сохранить :  Обновить </value>
@@ -1342,14 +1307,32 @@
   <data name="buttonUpdateFunction.ToolTip" xml:space="preserve">
     <value>Сохранить определение новой колонки:Обновить определение колонки</value>
   </data>
+  <data name="multipleItemsSplitterTrimCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>330, 8</value>
+  </data>
+  <data name="multipleItemsSplitterTrimCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>173, 15</value>
+  </data>
+  <data name="multipleItemsSplitterTrimCheckBoxLabel.Text" xml:space="preserve">
+    <value>Удалять непечатные символы</value>
+  </data>
   <data name="buttonAddFunction.Location" type="System.Drawing.Point, System.Drawing">
-    <value>223, 5</value>
+    <value>285, 34</value>
   </data>
   <data name="buttonAddFunction.Text" xml:space="preserve">
     <value>Добавить:Отказаться</value>
   </data>
   <data name="buttonAddFunction.ToolTip" xml:space="preserve">
     <value>Добавить определение новой колонки:Отказаться от изменений</value>
+  </data>
+  <data name="multipleItemsSplitterTrimCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>307, 8</value>
+  </data>
+  <data name="multipleItemsSplitterTrimCheckBox.ToolTip" xml:space="preserve">
+    <value>Удалять все начальные и конечные непечатные символы (например, пробелы) из разделенных элементов</value>
+  </data>
+  <data name="buttonHelp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>88, 34</value>
   </data>
   <data name="buttonHelp.Text" xml:space="preserve">
     <value>Справка</value>
@@ -1363,32 +1346,68 @@
 
 Вы можете ссылаться на любой тег в выражении ОБ, используя общую конструкцию MusicBee &lt;Название тега&gt;, или ссылаться на текущий тег группировки/функции (который уже может быть одним из разделенных значениий тега, если разделитель для этого тега задан) как \@</value>
   </data>
+  <data name="multipleItemsSplitterComboBox.Items" xml:space="preserve">
+    <value> (не использовать)</value>
+  </data>
+  <data name="multipleItemsSplitterComboBox.Items1" xml:space="preserve">
+    <value> \0 (например, для нескольких исполнителей в теге "Исполнитель")</value>
+  </data>
+  <data name="multipleItemsSplitterComboBox.Items2" xml:space="preserve">
+    <value> ; (например, для нескольких жанров в теге "Жанр")</value>
+  </data>
+  <data name="multipleItemsSplitterComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>163, 5</value>
+  </data>
+  <data name="multipleItemsSplitterComboBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>136, 23</value>
+  </data>
+  <data name="multipleItemsSplitterComboBox.ToolTip" xml:space="preserve">
+    <value>Разбивать значения тега группировки по указанному разделителю</value>
+  </data>
+  <data name="multipleItemsSplitterLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 8</value>
+  </data>
+  <data name="multipleItemsSplitterLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>140, 15</value>
+  </data>
+  <data name="multipleItemsSplitterLabel.Text" xml:space="preserve">
+    <value>Разделитель элементов:</value>
+  </data>
+  <data name="multipleItemsSplitterLabel.ToolTip" xml:space="preserve">
+    <value>Разбивать значения тега группировки по указанному разделителю</value>
+  </data>
+  <data name="buttonClearExpression.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 34</value>
+  </data>
   <data name="buttonClearExpression.ToolTip" xml:space="preserve">
     <value>Очистить выражение</value>
   </data>
   <data name="buttonsPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>773, 29</value>
+    <value>709, 0</value>
   </data>
   <data name="buttonsPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>471, 34</value>
+    <value>533, 61</value>
+  </data>
+  <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1242, 163</value>
   </data>
   <data name="tabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1246, 166</value>
+    <value>1244, 166</value>
   </data>
   <data name="tabPage2.Text" xml:space="preserve">
-    <value>Определения колонок</value>
+    <value>Определения колонок  </value>
   </data>
   <data name="presetTabControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1254, 194</value>
+    <value>1252, 194</value>
   </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1270, 206</value>
+    <value>1268, 206</value>
   </data>
   <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1270, 553</value>
+    <value>1268, 551</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
-    <value>344</value>
+    <value>342</value>
   </data>
 </root>

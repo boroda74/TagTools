@@ -3996,7 +3996,8 @@ namespace MusicBeePlugin
 
         private void presetListSelectedIndexChanged(int index)
         {
-            Enable(false, autoApplyPresetsLabel);
+            if (presetListLastSelectedIndex != -2) //It's during form init
+                Enable(false, autoApplyPresetsLabel);
 
             if (index < 0)
             {
@@ -4033,7 +4034,8 @@ namespace MusicBeePlugin
                 enableDisablePreviewOptionControls(true, true);
                 disableQueryingOrUpdatingButtons();
 
-                Enable(true, autoApplyPresetsLabel);
+                if (presetListLastSelectedIndex != -2) //It's during form init
+                    Enable(true, autoApplyPresetsLabel);
             }
             else
             {
@@ -4134,7 +4136,8 @@ namespace MusicBeePlugin
                 enableDisablePreviewOptionControls(true, true);
                 enableQueryingOrUpdatingButtons();
 
-                Enable(true, autoApplyPresetsLabel);
+                if (presetListLastSelectedIndex != -2) //It's during form init
+                    Enable(true, autoApplyPresetsLabel);
             }
 
             //Preset referring <All Tags> must not be checked for auto-execution. This function call shows icons on tag labels

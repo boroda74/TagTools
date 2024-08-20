@@ -332,7 +332,7 @@
             // 
             resources.ApplyResources(this.buttonOK, "buttonOK");
             this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Tag = "#buttonClose@pinned-to-parent-y";
+            this.buttonOK.Tag = "#buttonClose";
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // buttonClose
@@ -340,7 +340,7 @@
             resources.ApplyResources(this.buttonClose, "buttonClose");
             this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Tag = "#AsrPresetEditor@non-defaultable@pinned-to-parent-y";
+            this.buttonClose.Tag = "#AsrPresetEditor@non-defaultable";
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
             // ignoreCaseCheckBox

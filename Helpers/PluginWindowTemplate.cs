@@ -9,7 +9,6 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 using static MusicBeePlugin.Plugin;
-using System.Linq.Expressions;
 
 namespace MusicBeePlugin
 {
@@ -142,11 +141,14 @@ namespace MusicBeePlugin
         {
             InitializeComponent();
 
+            this.SetStyle(ControlStyles.DoubleBuffer, true);//-----
+            this.SetStyle(ControlStyles.ResizeRedraw, true);
+
             TagToolsPlugin = plugin;
             useSkinColors = !SavedSettings.dontUseSkinColors;
         }
 
-        internal bool backgroundTaskIsWorking() //Check seprate backgroundTaskIsStopped everywhere!!!
+        internal bool backgroundTaskIsWorking() //******** Check separate backgroundTaskIsStopped everywhere!!!
         {
             if (backgroundTaskIsScheduled && !backgroundTaskIsStoppedOrCancelled)
                 return true;
@@ -367,25 +369,44 @@ namespace MusicBeePlugin
                     continue;
 
 
-                if (!control.HasChildren)
+                if (control is ListBox)
                 {
-                    if (state)
-                    {
-                        if (control.AccessibleDescription != DisabledState)
-                            control.EnableInternal(true);
+                    var customHScrollBar = ControlsTools.FindControlChild<CustomHScrollBar>(control.Parent);
+                    EnableControl(customHScrollBar, state);
 
-                        control.AccessibleDescription = string.Empty;
-                    }
-                    else
-                    {
-                        if (control.IsEnabled())
-                            control.AccessibleDescription = EnabledState;
-                        else
-                            control.AccessibleDescription = DisabledState;
+                    var customVScrollBar = ControlsTools.FindControlChild<CustomVScrollBar>(control.Parent);
+                    EnableControl(customVScrollBar, state);
 
-                        control.EnableInternal(false);
-                    }
+                    EnableControl(control, state);
                 }
+                else if (!control.HasChildren || control is CustomComboBox)
+                {
+                    EnableControl(control, state);
+                }
+            }
+        }
+
+        private static void EnableControl(Control control, bool state)
+        {
+            if (control == null)
+                return;
+
+
+            if (state)
+            {
+                if (control.AccessibleDescription != DisabledState)
+                    control.EnableInternal(true);
+
+                control.AccessibleDescription = string.Empty;
+            }
+            else
+            {
+                if (control.IsEnabled())
+                    control.AccessibleDescription = EnabledState;
+                else
+                    control.AccessibleDescription = DisabledState;
+
+                control.EnableInternal(false);
             }
         }
 
@@ -2531,8 +2552,8 @@ namespace MusicBeePlugin
                     if ((control.IsEnabled() && enable == null) || enable == true)
                     {
                         tabControl.ForeColor = AccentColor;
-                        tabControl.myBackColor = InputPanelBackColor;
-                        tabControl.myBorderColor = InputPanelBorderColor;//--------------
+                        tabControl.BackColor = InputPanelBackColor;
+                        tabControl.BorderColor = InputPanelBorderColor;//--------------
 
                         foreach (TabPage child in tabControl.TabPages)
                         {
@@ -2545,6 +2566,7 @@ namespace MusicBeePlugin
                     {
                         tabControl.ForeColor = DimmedAccentColor;
                         tabControl.BackColor = InputPanelBackColor;
+                        tabControl.BorderColor = InputPanelBorderColor;//--------------
 
                         foreach (TabPage child in tabControl.TabPages)
                         {
@@ -2690,9 +2712,27 @@ namespace MusicBeePlugin
 
 
             //useSkinColors == true here
-            if (control is ControlBorder textBoxBorder2)
+            if (control is ControlBorder textBoxBorder)
             {
-                skinControl(textBoxBorder2.control);
+                skinControl(textBoxBorder.control);
+            }
+            else if (control is FlatTabControl flatTabControl)
+            {
+                flatTabControl.Left -= 2;
+                flatTabControl.Width += 4;
+
+                flatTabControl.Top -= 2;//---------------- incorrect dpi scaling!!!
+                flatTabControl.Height += 4;
+
+                for (int i = 0; i < flatTabControl.TabCount; i++)
+                {
+                    int top = flatTabControl.TabPages[i].Padding.Top;
+                    int bottom = flatTabControl.TabPages[i].Padding.Bottom;
+                    int left = flatTabControl.TabPages[i].Padding.Left;
+                    int right = flatTabControl.TabPages[i].Padding.Right;
+
+                    flatTabControl.TabPages[i].Padding = new Padding(left + 1, top - 1, right - 2, bottom - 1);
+                }
             }
             else if (control is CheckBox checkBox)
             {
@@ -2874,6 +2914,15 @@ namespace MusicBeePlugin
                 dataGridView.Scroll += dataGridView_Scroll;
                 dataGridView.MouseWheel += dataGridView_MouseWheel;
                 dataGridView.SizeChanged += customScrollBarParent_SizeChanged;
+
+                if (dataGridView.Parent is FlatTabControl)
+                {
+
+                }
+                else if (dataGridView.Parent is FlatTabControl || dataGridView.Parent?.Parent is FlatTabControl)
+                {
+
+                }
             }
 
             setSkinnedControlColors(control, null);
@@ -3457,6 +3506,63 @@ namespace MusicBeePlugin
             //Must be implemented in child classes...
         }
 
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+        }
+
+        protected virtual void OnMaximizing()
+        {
+            //...
+        }
+
+        protected virtual void OnMaximized()
+        {
+            //...
+        }
+
+        protected virtual void OnRestoring()
+        {
+            //...
+        }
+
+        protected virtual void OnRestored()
+        {
+            //...
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            const int WM_SYSCOMMAND = 0x0112;
+            const int SC_MAXIMIZE = 0xF030;
+            const int SC_MINIMIZE = 0xF020;
+            const int SC_RESTORE = 0xF120;
+
+            // Call before - don't use when "call after" is used
+            // depending on the needs may be called before, after or even never (see below)
+            // base.WndProc(ref m);
+
+            if (m.Msg == WM_SYSCOMMAND)
+            {
+                /// <see cref="https://learn.microsoft.com/en-us/windows/win32/menurc/wm-syscommand"/>
+                /// Quote:
+                /// In WM_SYSCOMMAND messages, the four low - order bits of the wParam parameter 
+                /// are used internally by the system.To obtain the correct result when testing 
+                /// the value of wParam, an application must combine the value 0xFFF0 with the 
+                /// wParam value by using the bitwise AND operator.
+                int wParam = (m.WParam.ToInt32() & 0xFFF0);
+
+                if (wParam == SC_MAXIMIZE)//---------
+                    OnMaximizing();
+                else if (wParam == SC_MINIMIZE)
+                    ; //Nothing for now...
+                else if (wParam == SC_RESTORE)
+                    OnRestoring();
+            }
+
+            // Call after - don't use when "call before" is used
+            base.WndProc(ref m);
+        }
         private void PluginWindowTemplate_Shown(object sender, EventArgs e)
         {
             for (var i = allControls.Count - 1; i >= 0; i--)
@@ -3534,6 +3640,8 @@ namespace MusicBeePlugin
                     top = RestoreBounds.Top;
                     width = RestoreBounds.Width;
                     height = RestoreBounds.Height;
+
+                    OnMaximized();
                 }
                 else if (Left + Width >= 0 && Top + Height >= 0)
                 {
@@ -3541,6 +3649,8 @@ namespace MusicBeePlugin
                     top = Top;
                     width = Width;
                     height = Height;
+
+                    OnRestored();
                 }
 
                 Refresh();
@@ -3879,9 +3989,18 @@ namespace MusicBeePlugin
         }
 
         internal void switchOperation(ThreadStart operation, Button clickedButton, Button okButton, Button previewButton, Button closeButton,
-            bool backgroundTaskIsNativeMB, PrepareOperation prepareOperation, bool disableCloseButtonOnPreview = false, int checkMinimumColumnCount = -1)
+            bool backgroundTaskIsUpdatingTags, PrepareOperation prepareOperation, bool disableCloseButtonOnPreview = false, int checkMinimumColumnCount = -1)
         {
+            buttonLabels.TryGetValue(previewButton, out buttonPreviewName);
+            buttonLabels.TryGetValue(okButton, out buttonOKName);
+            buttonLabels.TryGetValue(closeButton, out buttonCloseName);
+
+            this.clickedButton = clickedButton;
+            this.previewButton = previewButton;
+            this.closeButton = closeButton;
+
             this.checkMinimumColumnCount = checkMinimumColumnCount;
+
 
             if (backgroundTaskIsScheduled && backgroundTaskIsStopping) //Let's restart operation
             {
@@ -3911,21 +4030,13 @@ namespace MusicBeePlugin
             }
             else //if (!backgroundTaskIsScheduled) //Let's start operation
             {
-                buttonLabels.TryGetValue(previewButton, out buttonPreviewName);
-                buttonLabels.TryGetValue(okButton, out buttonOKName);
-                buttonLabels.TryGetValue(closeButton, out buttonCloseName);
-
-                this.backgroundTaskIsUpdatingTags = backgroundTaskIsNativeMB;
+                this.backgroundTaskIsUpdatingTags = backgroundTaskIsUpdatingTags;
 
                 isStopButtonAlreadyClicked = false;
                 backgroundTaskIsStopping = false;
                 backgroundTaskIsStoppedOrCancelled = false;
                 backgroundTaskIsScheduled = true;
                 backgroundThread = null;
-
-                this.clickedButton = clickedButton;
-                this.previewButton = previewButton;
-                this.closeButton = closeButton;
 
                 job = operation;
 

@@ -161,10 +161,20 @@ namespace MusicBeePlugin
 
             maxPlaysPerDayBox.Text = CtlAutoRateCalculating;
             avgPlaysPerDayBox.Text = CtlAutoRateCalculating;
-            labelTotalTracks.Text += CtlAutoRateCalculating.ToLower();
+            labelTotalTracks.Text = MsgNumberOfPlayedTracks  + CtlAutoRateCalculating.ToLower();
 
 
             button_GotFocus(AcceptButton, null); //Let's mark active button
+        }
+
+        protected bool checkStoppingCollectingStatisticsStatus()
+        {
+            if (PluginClosing)
+                return true;
+            else if (backgroundTaskIsStopping || backgroundTaskIsStoppedOrCancelled)
+                return true;
+            else
+                return false;
         }
 
         private decimal sumOfPercentages()
@@ -275,13 +285,13 @@ namespace MusicBeePlugin
             if (checkStoppingStatus())
             {
                 backgroundTaskIsStoppedOrCancelled = true;
-                Invoke(new Action(() => { closeFormOnOperationStoppingCompletionIfRequired(); }));
+                MbForm.Invoke(new Action(() => { closeFormOnOperationStoppingCompletionIfRequired(); }));
                 return;
             }
 
 
             if (calculateActualSumOfPercentageOnCalculatingThresholds)
-                Invoke(new Action(() => { fillThresholdsPercentagesUi(); }));
+                MbForm.Invoke(new Action(() => { fillThresholdsPercentagesUi(); }));
         }
 
         private static double RoundPlaysPerDay(double value)
@@ -405,6 +415,9 @@ namespace MusicBeePlugin
             SetStatusBarText(null, true);
 
 
+            if (Disposing || IsDisposed)
+                return;
+
             if (closeFormOnStopping)
             {
                 ignoreClosingForm = false;
@@ -439,7 +452,7 @@ namespace MusicBeePlugin
             {
                 if (checkStoppingStatus())
                 {
-                    Invoke(new Action(() => { stopButtonClickedMethod(applyingChangesStopped); }));
+                    MbForm.Invoke(new Action(() => { stopButtonClickedMethod(applyingChangesStopped); }));
                     return;
                 }
 
@@ -454,7 +467,7 @@ namespace MusicBeePlugin
             RefreshPanels(true);
             SetResultingSbText();
 
-            Invoke(new Action(() => { closeFormOnOperationStoppingCompletionIfRequired(); }));
+            MbForm.Invoke(new Action(() => { closeFormOnOperationStoppingCompletionIfRequired(); }));
         }
 
         private static double GetPlaysPerDay(string currentFile)
@@ -520,8 +533,15 @@ namespace MusicBeePlugin
 
             for (var fileCounter = 0; fileCounter < files.Length; fileCounter++)
             {
-                if (checkStoppingStatus())
+                if (checkStoppingCollectingStatisticsStatus())
+                {
+                    backgroundTaskIsStoppedOrCancelled = true;
+                    MbForm.Invoke(new Action(() => { closeFormOnOperationStoppingCompletionIfRequired(); }));
                     return;
+                }
+
+                if ((fileCounter & 0x1f) == 0)
+                    MbForm.Invoke(new Action(() => { labelTotalTracks.Text = MsgNumberOfPlayedTracks + CtlAutoRateCalculating.ToLower() + " ("  + (100 * (fileCounter + 1) / files.Length) + "%)"; }));
 
 
                 var currentFile = files[fileCounter];
@@ -545,19 +565,15 @@ namespace MusicBeePlugin
             }
 
 
-            if (checkStoppingStatus())
-                return;
 
-
-            if (!Disposing && !IsDisposed)
+            MbForm.Invoke(new Action(() =>
             {
-                Invoke(new Action(() =>
-                {
-                    maxPlaysPerDayBox.Text = ConvertDoubleToString(maxPlaysPerDay);
-                    avgPlaysPerDayBox.Text = ConvertDoubleToString(avgPlaysPerDay);
-                    labelTotalTracks.Text = MsgNumberOfPlayedTracks + NumberOfFiles;
-                }));
-            }
+                maxPlaysPerDayBox.Text = ConvertDoubleToString(maxPlaysPerDay);
+                avgPlaysPerDayBox.Text = ConvertDoubleToString(avgPlaysPerDay);
+                labelTotalTracks.Text = MsgNumberOfPlayedTracks + NumberOfFiles;
+
+                closeFormOnOperationStoppingCompletionIfRequired();
+            }));
 
             if (!SavedSettings.dontPlayCompletedSound)
                 System.Media.SystemSounds.Asterisk.Play();
@@ -586,7 +602,7 @@ namespace MusicBeePlugin
                 if (checkStoppingStatus())
                 {
                     backgroundTaskIsStoppedOrCancelled = true;
-                    Invoke(new Action(() => { closeFormOnOperationStoppingCompletionIfRequired(); }));
+                    MbForm.Invoke(new Action(() => { closeFormOnOperationStoppingCompletionIfRequired(); }));
                     return;
                 }
 
@@ -640,7 +656,7 @@ namespace MusicBeePlugin
                 if (checkStoppingStatus())
                 {
                     backgroundTaskIsStoppedOrCancelled = true;
-                    Invoke(new Action(() => { closeFormOnOperationStoppingCompletionIfRequired(); }));
+                    MbForm.Invoke(new Action(() => { closeFormOnOperationStoppingCompletionIfRequired(); }));
                     return;
                 }
 
@@ -810,7 +826,7 @@ namespace MusicBeePlugin
             if (calculateActualSumOfPercentageOnCalculatingThresholds)
                 calculateActualSumOfPercentages();
 
-            Invoke(new Action(() => { closeFormOnOperationStoppingCompletionIfRequired(); }));
+            MbForm.Invoke(new Action(() => { closeFormOnOperationStoppingCompletionIfRequired(); }));
         }
 
         private bool checkSettings()
@@ -1242,7 +1258,7 @@ namespace MusicBeePlugin
         protected override void childClassFormShown()
         {
             ignoreClosingForm = true;
-            statisticsTimer = new System.Threading.Timer(getStatistics, null, RefreshUI_Delay, Timeout.Infinite);
+            statisticsTimer = new System.Threading.Timer(getStatistics, null, 1000, Timeout.Infinite);
         }
 
         private void AutoRate_FormClosing(object sender, FormClosingEventArgs e)
@@ -1251,6 +1267,7 @@ namespace MusicBeePlugin
             {
                 if (!backgroundTaskIsUpdatingTags)
                 {
+                    backgroundTaskIsStopping = true;
                     closeFormOnStopping = true;
                     buttonClose.Enable(false);
                 }

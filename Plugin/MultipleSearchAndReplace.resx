@@ -217,7 +217,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>682, 5</value>
+    <value>702, 5</value>
   </data>
   <data name="buttonPreview.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -256,7 +256,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>898, 5</value>
+    <value>918, 5</value>
   </data>
   <data name="buttonClose.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 6, 4</value>
@@ -283,7 +283,7 @@
     <value>13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1004, 461</value>
+    <value>1024, 461</value>
   </data>
   <data name="controlsPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -380,7 +380,7 @@ if this option is unchecked; however, this may be useful only if the source and 
     <value>NoControl</value>
   </data>
   <data name="buttonDeleteSaved.Location" type="System.Drawing.Point, System.Drawing">
-    <value>975, 32</value>
+    <value>995, 32</value>
   </data>
   <data name="buttonDeleteSaved.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 6, 4</value>
@@ -419,7 +419,7 @@ if this option is unchecked; however, this may be useful only if the source and 
     <value>TopLeft</value>
   </data>
   <data name="loadComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>791, 32</value>
+    <value>811, 32</value>
   </data>
   <data name="loadComboBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 4, 4, 4</value>
@@ -455,7 +455,7 @@ if this option is unchecked; however, this may be useful only if the source and 
     <value>NoControl</value>
   </data>
   <data name="buttonSave.Location" type="System.Drawing.Point, System.Drawing">
-    <value>682, 32</value>
+    <value>702, 32</value>
   </data>
   <data name="buttonSave.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -492,7 +492,7 @@ later for auto-execution or assign hotkey to it</value>
     <value>NoControl</value>
   </data>
   <data name="autoApplyPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>655, 34</value>
+    <value>675, 34</value>
   </data>
   <data name="autoApplyPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -531,7 +531,7 @@ later for auto-execution or assign hotkey to it</value>
     <value>NoControl</value>
   </data>
   <data name="autoApplyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>635, 36</value>
+    <value>655, 36</value>
   </data>
   <data name="autoApplyCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>12, 4, 12, 4</value>
@@ -573,7 +573,7 @@ later for auto-execution or assign hotkey to it</value>
     <value>4, 4, 4, 4</value>
   </data>
   <data name="templateNameTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>301, 23</value>
+    <value>321, 23</value>
   </data>
   <data name="templateNameTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -780,7 +780,7 @@ later for auto-execution or assign hotkey to it</value>
     <value>NoControl</value>
   </data>
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>790, 5</value>
+    <value>810, 5</value>
   </data>
   <data name="buttonOK.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -816,7 +816,7 @@ later for auto-execution or assign hotkey to it</value>
     <value>NoControl</value>
   </data>
   <data name="buttonSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>635, 5</value>
+    <value>655, 5</value>
   </data>
   <data name="buttonSettings.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 20, 4</value>
@@ -1014,7 +1014,7 @@ later for auto-execution or assign hotkey to it</value>
     <value>0, 0, 0, 0</value>
   </data>
   <data name="controlsPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1004, 60</value>
+    <value>1024, 60</value>
   </data>
   <data name="controlsPanel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1038,7 +1038,7 @@ later for auto-execution or assign hotkey to it</value>
     <value>4, 4, 4, 4</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>1020, 500</value>
+    <value>1040, 500</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Multiple Search &amp; Replace</value>
@@ -1173,7 +1173,7 @@ later for auto-execution or assign hotkey to it</value>
     <value>MultipleSearchAndReplace</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=8.3.8992.5722, Culture=neutral, PublicKeyToken=null</value>
+    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=9.0.8998.24067, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="dirtyErrorProvider.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1790,7 +1790,7 @@ later for auto-execution or assign hotkey to it</value>
     <value>51</value>
   </data>
   <data name="templateTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>992, 189</value>
+    <value>1012, 189</value>
   </data>
   <data name="templateTable.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1880,7 +1880,7 @@ later for auto-execution or assign hotkey to it</value>
     <value>51</value>
   </data>
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>992, 204</value>
+    <value>1012, 204</value>
   </data>
   <data name="previewTable.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1913,7 +1913,7 @@ later for auto-execution or assign hotkey to it</value>
     <value>177</value>
   </data>
   <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>992, 396</value>
+    <value>1012, 396</value>
   </data>
   <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
     <value>189</value>

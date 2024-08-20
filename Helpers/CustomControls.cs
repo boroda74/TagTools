@@ -945,14 +945,14 @@ namespace MusicBeePlugin
             }
         }
 
-        internal void OnEnabledChanged(object sender, EventArgs e)
+        private void OnEnabledChanged(object sender, EventArgs e)
         {
             if (textBox != null)
             {
                 customComboBox_SizeChanged_ForButton();
 
-                textBox.Enabled = Enabled;
-                button.Enabled = Enabled;
+                textBox.Enable(Enabled);
+                button.Enable(Enabled);
             }
             else
             {
@@ -1106,7 +1106,7 @@ namespace MusicBeePlugin
                 listBox.AdjustHeight(dropDownWidth, initialDropDownHeight);
 
                 var index = IndexOfText(textBox.Text);
-                if (listBox.SelectedItem.ToString() != textBox.Text && index >= 0)
+                if ((listBox.SelectedItem == null || listBox.SelectedItem.ToString() != textBox.Text) && index >= 0)
                     listBox.SelectedItem = textBox.Text;
 
                 var textBoxScreenLocation = textBox.PointToScreen(textBox.Location);

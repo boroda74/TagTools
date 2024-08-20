@@ -139,6 +139,20 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+
+            //MusicBee
+            this.unitKBox = ControlsTools.CreateMusicBeeTextBox();
+            this.unitMBox = ControlsTools.CreateMusicBeeTextBox();
+            this.unitGBox = ControlsTools.CreateMusicBeeTextBox();
+            this.customFontTextBox = ControlsTools.CreateMusicBeeTextBox();
+            this.preservedTagValuesLegendTextBox = ControlsTools.CreateMusicBeeTextBox();
+            this.preservedTagsLegendTextBox = ControlsTools.CreateMusicBeeTextBox();
+            this.changedLegendTextBox = ControlsTools.CreateMusicBeeTextBox();
+
+            if (useSkinColors)
+                this.tabControl1 = new FlatTabControl();
+            //~MusicBee
+
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.unitsPanel.SuspendLayout();
@@ -151,20 +165,6 @@
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.SuspendLayout();
-
-            //MusicBee
-            this.unitKBox = ControlsTools.CreateMusicBeeTextBox();
-            this.unitMBox = ControlsTools.CreateMusicBeeTextBox();
-            this.unitGBox = ControlsTools.CreateMusicBeeTextBox();
-            this.customFontTextBox = ControlsTools.CreateMusicBeeTextBox();
-            this.preservedTagValuesLegendTextBox = ControlsTools.CreateMusicBeeTextBox();
-            this.preservedTagsLegendTextBox = ControlsTools.CreateMusicBeeTextBox();
-            this.changedLegendTextBox = ControlsTools.CreateMusicBeeTextBox();
-
-            if (useSkinColors)//------------
-                this.tabControl1 = new FlatTabControl();
-            //~MusicBee
-
             // 
             // buttonClose
             // 

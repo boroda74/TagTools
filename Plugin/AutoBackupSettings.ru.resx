@@ -177,13 +177,13 @@
     <value>минут.</value>
   </data>
   <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>869, 181</value>
+    <value>869, 183</value>
   </data>
   <data name="buttonClose.Text" xml:space="preserve">
     <value>Отмена</value>
   </data>
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>761, 181</value>
+    <value>761, 183</value>
   </data>
   <data name="backupArtworksCheckBox.ToolTip" xml:space="preserve">
     <value>ВНИМАНИЕ! Эта опция затрагивает, как ручное, так и автоматическое архивирование.</value>
@@ -305,13 +305,16 @@ MusicBee, зависящих от библиотеки. По этой причи
     <value>Не пропускать авто-архивирование, даже если изменились только счетчики проигрываний/пропусков</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>958, 4</value>
+    <value>965, 4</value>
+  </data>
+  <data name="emptyLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>969, 138</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>979, 214</value>
+    <value>979, 219</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>915, 251</value>
+    <value>995, 258</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Настройки (авто)архивации</value>

@@ -183,6 +183,8 @@ namespace MusicBeePlugin
         private string buttonCloseToolTip;
         private int presetListLastSelectedIndex = -2;
 
+        private int presetTabControlSelectedIndex = 0;
+
         private bool ignoreSplitterMovedEvent = true;
 
         private ReportPreset selectedPreset;
@@ -541,14 +543,42 @@ namespace MusicBeePlugin
             presetListLastSelectedIndex = -2;
             presetList_SelectedIndexChanged(null, null);
 
+            Resize += LibraryReports_Resize;
+
             updateCustomScrollBars(presetList);
 
 
             Enable(true, autoApplyPresetsLabel);
 
 
-
             button_GotFocus(AcceptButton, null); //Let's mark active button
+        }
+
+        private void LibraryReports_Resize(object sender, EventArgs e)
+        {
+            autoApplyPresetsLabel.Invalidate();
+        }
+
+        protected override void OnMaximizing()//----
+        {
+            presetTabControlSelectedIndex = presetTabControl.SelectedIndex;
+            presetTabControl.SelectedIndex = 0;
+        }
+
+        protected override void OnMaximized()
+        {
+            //presetTabControl.SelectedIndex = presetTabControlSelectedIndex;
+        }
+
+        protected override void OnRestoring()
+        {
+            presetTabControlSelectedIndex = presetTabControl.SelectedIndex;
+            presetTabControl.SelectedIndex = 0;
+        }
+
+        protected override void OnRestored()
+        {
+            //presetTabControl.SelectedIndex = presetTabControlSelectedIndex;
         }
 
         public class ColumnAttributesBase
@@ -4290,7 +4320,7 @@ namespace MusicBeePlugin
                                     queriedChangingActualGroupingTagsRawWorkingCopy,
                                     false);
 
-                                //LibraryReportsCommandForFunctionIds.backgroundTaskIsNativeMB = true;
+                                //LibraryReportsCommandForFunctionIds.backgroundTaskIsUpdatingTags = true;
 
                                 LibraryReportsCommandForFunctionIds.executePreset(
                                     LrTrackCacheNeededToBeUpdatedWorkingCopy,
@@ -7028,7 +7058,8 @@ namespace MusicBeePlugin
 
         private void presetListSelectedIndexChanged(int index)
         {
-            Enable(false, autoApplyPresetsLabel);
+            if (presetListLastSelectedIndex != -2) //It's during form init
+                Enable(false, autoApplyPresetsLabel);
 
             functionsDict.Clear(); //As soon as possible because availability of some UI controls depends on it
 
@@ -7086,6 +7117,7 @@ namespace MusicBeePlugin
                 newArtworkSizeUpDown.Enable(false);
 
                 sourceFieldComboBox_SelectedIndexChanged(null, null);
+                functionComboBox_SelectedIndexChanged(null, null);
 
                 previewTable.ColumnCount = 0;
                 tagsDataGridView.RowCount = 0;
@@ -7100,7 +7132,8 @@ namespace MusicBeePlugin
 
                 disableQueryingOrUpdatingButtons();
 
-                Enable(true, autoApplyPresetsLabel);
+                if (presetListLastSelectedIndex != -2) //It's during form init
+                    Enable(true, autoApplyPresetsLabel);
 
                 updateCustomScrollBars(presetList);
                 updateCustomScrollBars(previewTable);
@@ -7249,7 +7282,8 @@ namespace MusicBeePlugin
             enableDisablePreviewOptionControls(true);
             enableQueryingOrUpdatingButtons();
 
-            Enable(true, autoApplyPresetsLabel);
+            if (presetListLastSelectedIndex != -2) //It's during form init
+                Enable(true, autoApplyPresetsLabel);
 
 
             updateCustomScrollBars(presetList);
