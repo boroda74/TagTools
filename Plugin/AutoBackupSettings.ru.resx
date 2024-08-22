@@ -177,13 +177,13 @@
     <value>минут.</value>
   </data>
   <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>869, 183</value>
+    <value>869, 185</value>
   </data>
   <data name="buttonClose.Text" xml:space="preserve">
     <value>Отмена</value>
   </data>
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>761, 183</value>
+    <value>761, 185</value>
   </data>
   <data name="backupArtworksCheckBox.ToolTip" xml:space="preserve">
     <value>ВНИМАНИЕ! Эта опция затрагивает, как ручное, так и автоматическое архивирование.</value>
@@ -311,10 +311,10 @@ MusicBee, зависящих от библиотеки. По этой причи
     <value>969, 138</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>979, 219</value>
+    <value>981, 219</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>995, 258</value>
+    <value>995, 256</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Настройки (авто)архивации</value>

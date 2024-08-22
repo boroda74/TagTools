@@ -69,7 +69,7 @@
             // 
             resources.ApplyResources(this.buttonSave, "buttonSave");
             this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Tag = "#&CalculateAverageAlbumRating@non-defaultable";
+            this.buttonSave.Tag = "@non-defaultable";
             this.buttonSave.Click += new System.EventHandler(this.buttonSaveSettings_Click);
             // 
             // buttonClose
@@ -77,15 +77,15 @@
             resources.ApplyResources(this.buttonClose, "buttonClose");
             this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Tag = "#CalculateAverageAlbumRating&CalculateAverageAlbumRating@non-defaultable";
+            this.buttonClose.Tag = "#CalculateAverageAlbumRating@non-defaultable";
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
             // buttonOK
             // 
-            resources.ApplyResources(this.buttonOK, "buttonOK");
             this.dirtyErrorProvider.SetError(this.buttonOK, resources.GetString("buttonOK.Error"));
+            resources.ApplyResources(this.buttonOK, "buttonOK");
             this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Tag = "#buttonSave&CalculateAverageAlbumRating@pinned-to-parent-x";
+            this.buttonOK.Tag = "#buttonSave@pinned-to-parent-x";
             this.toolTip1.SetToolTip(this.buttonOK, resources.GetString("buttonOK.ToolTip"));
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
@@ -174,7 +174,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.buttonSettings, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("buttonSettings.IconAlignment"))));
             this.buttonSettings.Image = global::MusicBeePlugin.Properties.Resources.gear_15;
             this.buttonSettings.Name = "buttonSettings";
-            this.buttonSettings.Tag = "#buttonClose&CalculateAverageAlbumRating@non-defaultable@square-button";
+            this.buttonSettings.Tag = "#buttonClose@non-defaultable@square-button";
             this.buttonSettings.Click += new System.EventHandler(this.buttonSettings_Click);
             // 
             // CalculateAverageAlbumRating

@@ -38,7 +38,7 @@ namespace MusicBeePlugin
                     {
                         BackupIndex = new BackupIndex();
 
-                        var result = (DialogResult)MbForm.Invoke(new Func<DialogResult>(() => MessageBox.Show(MbForm, MsgBrMasterBackupIndexIsCorrupted.Replace("%%BACKUP-FOLDER%%", autoBackupDirectoryFullPath), 
+                        deleteAllBackups = (DialogResult)MbForm.Invoke(new Func<DialogResult>(() => MessageBox.Show(MbForm, MsgBrMasterBackupIndexIsCorrupted.Replace("%%BACKUP-FOLDER%%", autoBackupDirectoryFullPath), 
                             string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)));
                     }
                     finally

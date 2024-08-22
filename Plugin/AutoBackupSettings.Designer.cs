@@ -68,16 +68,16 @@
             this.dontSkipAutoBackupsIfPlayCountsChangedLabel = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.emptyLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.autoBackupNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numberOfDaysNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numberOfFilesNumericUpDown)).BeginInit();
-            this.SuspendLayout();
 
             //MusicBee
             this.autoBackupFolderTextBox = ControlsTools.CreateMusicBeeTextBox();
             this.autoBackupPrefixTextBox = ControlsTools.CreateMusicBeeTextBox();
             //~MusicBee
 
+            ((System.ComponentModel.ISupportInitialize)(this.autoBackupNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numberOfDaysNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numberOfFilesNumericUpDown)).BeginInit();
+            this.SuspendLayout();
             // 
             // autoBackupFolderTextBox
             // 

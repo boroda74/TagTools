@@ -1,7 +1,6 @@
 ﻿using ExtensionMethods;
 using MusicBeePlugin.Properties;
 using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -182,8 +181,6 @@ namespace MusicBeePlugin
         private bool unsavedChanges;
         private string buttonCloseToolTip;
         private int presetListLastSelectedIndex = -2;
-
-        private int presetTabControlSelectedIndex = 0;
 
         private bool ignoreSplitterMovedEvent = true;
 
@@ -543,8 +540,6 @@ namespace MusicBeePlugin
             presetListLastSelectedIndex = -2;
             presetList_SelectedIndexChanged(null, null);
 
-            Resize += LibraryReports_Resize;
-
             updateCustomScrollBars(presetList);
 
 
@@ -552,33 +547,6 @@ namespace MusicBeePlugin
 
 
             button_GotFocus(AcceptButton, null); //Let's mark active button
-        }
-
-        private void LibraryReports_Resize(object sender, EventArgs e)
-        {
-            autoApplyPresetsLabel.Invalidate();
-        }
-
-        protected override void OnMaximizing()//----
-        {
-            presetTabControlSelectedIndex = presetTabControl.SelectedIndex;
-            presetTabControl.SelectedIndex = 0;
-        }
-
-        protected override void OnMaximized()
-        {
-            //presetTabControl.SelectedIndex = presetTabControlSelectedIndex;
-        }
-
-        protected override void OnRestoring()
-        {
-            presetTabControlSelectedIndex = presetTabControl.SelectedIndex;
-            presetTabControl.SelectedIndex = 0;
-        }
-
-        protected override void OnRestored()
-        {
-            //presetTabControl.SelectedIndex = presetTabControlSelectedIndex;
         }
 
         public class ColumnAttributesBase
@@ -1273,7 +1241,7 @@ namespace MusicBeePlugin
             {
                 var hotkeyChar = getHotkeyChar();
 
-                if (hotkeyChar == string.Empty)
+                if (string.IsNullOrEmpty(hotkeyChar))
                     return hotkeyChar;
                 else
                     return " " + hotkeyChar;
@@ -1349,12 +1317,12 @@ namespace MusicBeePlugin
                 }
 
                 foreach (var attribs in grDictRef.Values)
-                    autoName += (autoName == string.Empty ? string.Empty : ", ") + attribs.getColumnName(true, true, true);
+                    autoName += (string.IsNullOrEmpty(autoName) ? string.Empty : ", ") + attribs.getColumnName(true, true, true);
 
                 foreach (var attribs in fnDictRef.Values)
-                    autoName += (autoName == string.Empty ? string.Empty : ", ") + attribs.getColumnName(true, true, true);
+                    autoName += (string.IsNullOrEmpty(autoName) ? string.Empty : ", ") + attribs.getColumnName(true, true, true);
 
-                if (autoName == string.Empty)
+                if (string.IsNullOrEmpty(autoName))
                     autoName = EmptyPresetName;
             }
         }
@@ -1829,7 +1797,7 @@ namespace MusicBeePlugin
 
             internal static string[] GetGroupings(KeyValuePair<string, ConvertStringsResult[]> keyValue, ColumnAttributesDict groupings)
             {
-                if (keyValue.Key == string.Empty)
+                if (string.IsNullOrEmpty(keyValue.Key))
                 {
                     return Array.Empty<string>();
                 }
@@ -1847,7 +1815,7 @@ namespace MusicBeePlugin
 
             internal static string[] GetGroupings(string composedGroupings, ColumnAttributesDict groupings)
             {
-                if (composedGroupings == string.Empty)
+                if (string.IsNullOrEmpty(composedGroupings))
                 {
                     return Array.Empty<string>();
                 }
@@ -2378,7 +2346,7 @@ namespace MusicBeePlugin
             {
                 try
                 {
-                    if (artworkBase64 != string.Empty)
+                    if (!string.IsNullOrEmpty(artworkBase64))
                         pic = tc.ConvertFrom(Convert.FromBase64String(artworkBase64)) as Bitmap;
                     else
                         pic = new Bitmap(DefaultArtwork);
@@ -4721,7 +4689,7 @@ namespace MusicBeePlugin
         private bool addColumn(string fieldName, string parameter2Name, LrFunctionType type, string splitter, bool trimValues, string expression)
         {
             if (splitter == DontUseSplitter)
-                splitter = "";
+                splitter = string.Empty;
 
             if (fieldName == ArtworkName || fieldName == SequenceNumberName)
             {
@@ -4985,7 +4953,7 @@ namespace MusicBeePlugin
                     {
                         if ((string)expressionsDataGridView.Rows[j].Cells[1].Tag == expressionBackup)
                         {
-                            expressionsDataGridView.Rows[j].Cells[1].Value = (expression == string.Empty ? NoExpressionText : expression);
+                            expressionsDataGridView.Rows[j].Cells[1].Value = (string.IsNullOrEmpty(expression) ? NoExpressionText : expression);
                             expressionsDataGridView.Rows[j].Cells[1].Tag = expression;
                             break;
                         }
@@ -6316,11 +6284,11 @@ namespace MusicBeePlugin
             if (presetList.SelectedIndex == -1)
                 return;
 
-            SetMultipleItemsSplitterComboBoxCue(splitterBackup);
+            SetMultipleItemsSplitterComboBoxText(splitterBackup);
 
             if (sourceFieldComboBoxCustom.SelectedIndex == -1)
             {
-                if (idTextBox.Text != string.Empty)
+                if (!string.IsNullOrEmpty(idTextBox.Text))
                 {
                     MessageBox.Show(this, MsgFirstSelectWhichFieldYouWantToAssignFunctionIdTo, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     idTextBox.Text = string.Empty;
@@ -6329,7 +6297,7 @@ namespace MusicBeePlugin
                 return;
             }
 
-            if (idTextBox.Text == string.Empty)
+            if (string.IsNullOrEmpty(idTextBox.Text))
             {
                 savedFunctionIds[sourceFieldComboBoxCustom.SelectedIndex] = string.Empty;
 
@@ -6345,7 +6313,7 @@ namespace MusicBeePlugin
             allowedRemoved = Regex.Replace(allowedRemoved, @"_", string.Empty);
             allowedRemoved = Regex.Replace(allowedRemoved, @"\:", string.Empty);
 
-            if (allowedRemoved != string.Empty)
+            if (!string.IsNullOrEmpty(allowedRemoved))
             {
                 MessageBox.Show(this, MsgNotAllowedSymbols, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 savedFunctionIds[sourceFieldComboBoxCustom.SelectedIndex] = string.Empty;
@@ -6628,7 +6596,7 @@ namespace MusicBeePlugin
             else if (this.newColumn != false) //Discarding changes
             {
                 expressionTextBox.Text = expressionBackup;
-                SetMultipleItemsSplitterComboBoxCue(splitterBackup);
+                SetMultipleItemsSplitterComboBoxText(splitterBackup);
                 multipleItemsSplitterTrimCheckBox.Checked = trimValuesBackup;
 
 
@@ -6693,7 +6661,7 @@ namespace MusicBeePlugin
             buttonUpdateFunction.Image = Resources.transparent_15;
 
             expressionTextBox.Text = expressionBackup;
-            SetMultipleItemsSplitterComboBoxCue(splitterBackup);
+            SetMultipleItemsSplitterComboBoxText(splitterBackup);
             multipleItemsSplitterTrimCheckBox.Checked = trimValuesBackup;
 
             enableDisablePreviewOptionControls(true);
@@ -6770,7 +6738,7 @@ namespace MusicBeePlugin
                 functionComboBoxCustom.SelectedIndex = (int)commonAttr.functionType;
                 sourceTagListCustom.SelectedItem = commonAttr.parameterName;
                 parameter2ComboBoxCustom.SelectedItem = commonAttr.parameter2Name;
-                SetMultipleItemsSplitterComboBoxCue(commonAttr.splitter);
+                SetMultipleItemsSplitterComboBoxText(commonAttr.splitter);
                 multipleItemsSplitterTrimCheckBox.Checked = commonAttr.trimValues;
 
 
@@ -6811,7 +6779,7 @@ namespace MusicBeePlugin
             {
                 expressionsDataGridView.Rows.Add();
                 expressionsDataGridView.Rows[expressionsDataGridView.RowCount - 1].Cells[0].Value = "T";
-                expressionsDataGridView.Rows[expressionsDataGridView.RowCount - 1].Cells[1].Value = (expr == string.Empty ? NoExpressionText : expr);
+                expressionsDataGridView.Rows[expressionsDataGridView.RowCount - 1].Cells[1].Value = string.IsNullOrEmpty(expr) ? NoExpressionText : expr;
                 expressionsDataGridView.Rows[expressionsDataGridView.RowCount - 1].Cells[1].Tag = expr;
 
                 if (selectedPreset?.userPreset == true)
@@ -6906,26 +6874,25 @@ namespace MusicBeePlugin
             setColumnChanged(null);
         }
 
-        internal void SetMultipleItemsSplitterComboBoxCue(string cue)
+        internal void SetMultipleItemsSplitterComboBoxText(string text)
         {
-            if (destinationTagListCustom.SelectedIndex <= 0 && idTextBox.Text == string.Empty)
+            if (destinationTagListCustom.SelectedIndex <= 0 && string.IsNullOrEmpty(idTextBox.Text))
             {
                 enableDisableItemSplitter(true);
+                if (string.IsNullOrEmpty(text))
+                    text = DontUseSplitter;
             }
             else
             {
                 enableDisableItemSplitter(false);
-                cue = null;
+                text = DontUseSplitter;
             }
 
 
-            if (string.IsNullOrEmpty(cue))
-                SetComboBoxCue(multipleItemsSplitterComboBoxCustom, DontUseSplitter, true);
-            else
-                SetComboBoxCue(multipleItemsSplitterComboBoxCustom, cue, true);
+            multipleItemsSplitterComboBoxCustom.SetText(text, true);
         }
 
-        private string multipleItemsSplitterComboBoxValueChanged()
+        private string getMultipleItemsSplitterComboBoxValue()
         {
             if (multipleItemsSplitterComboBoxCustom.SelectedItem == null)
                 return null;
@@ -6956,13 +6923,14 @@ namespace MusicBeePlugin
 
         private void multipleItemsSplitterComboBox_DropDownClosed(object sender, EventArgs e)
         {
-            var text = multipleItemsSplitterComboBoxValueChanged();
+            var text = getMultipleItemsSplitterComboBoxValue();
 
             if (text == null)
                 return;
 
 
-            SetMultipleItemsSplitterComboBoxCue(text);
+            SetMultipleItemsSplitterComboBoxText(text);
+
 
             if (text == splitterBackup || newColumn == true)
                 return;
@@ -7076,7 +7044,7 @@ namespace MusicBeePlugin
             {
                 setColumnSaved();
 
-                SetComboBoxCue(multipleItemsSplitterComboBoxCustom, DontUseSplitter);
+                multipleItemsSplitterComboBoxCustom.SetText(string.Empty, false);
 
                 selectedPreset = null;
 
@@ -7098,7 +7066,7 @@ namespace MusicBeePlugin
                 comparedFieldListCustom.Text = string.Empty;
                 sourceFieldComboBoxCustom.Text = string.Empty;
                 destinationTagListCustom.Text = string.Empty;
-                functionComboBoxCustom.Text = string.Empty;
+                functionComboBoxCustom.SelectedIndex = -1;
                 parameter2ComboBoxCustom.Text = string.Empty;
                 sourceTagListCustom.Text = string.Empty;
 
@@ -7168,6 +7136,8 @@ namespace MusicBeePlugin
             var columnCount = prepareDict(dict, null, selectedPreset.groupings, 0);
             if (columnCount == -1)
             {
+                multipleItemsSplitterComboBoxCustom.SetText(string.Empty, false);
+
                 enableDisablePreviewOptionControls(true);
                 enableQueryingOrUpdatingButtons();
 
@@ -7198,14 +7168,19 @@ namespace MusicBeePlugin
             previewTable.DisableColumnsAutoSize(true);
 
 
-            functionComboBoxCustom.SelectedIndex = 0;
-            functionComboBox_SelectedIndexChanged(null, null);
-            sourceTagListCustom.SelectedIndex = 0;
-            sourceTagList_SelectedIndexChanged(null, null);
-            parameter2ComboBoxCustom.SelectedIndex = 0;
-            parameter2ComboBox_SelectedIndexChanged(null, null);
-            multipleItemsSplitterTrimCheckBox.Checked = false;
-            multipleItemsSplitterTrimCheckBox_CheckedChanged(null, null);
+            //functionComboBoxCustom.SelectedIndex = 0;
+            //functionComboBox_SelectedIndexChanged(null, null);
+            //sourceTagListCustom.SelectedIndex = 0;
+            //sourceTagList_SelectedIndexChanged(null, null);
+
+            //if (parameter2ComboBoxCustom.SelectedIndex == -1)
+            //    parameter2ComboBoxCustom.SelectedItem = GetPropName(FilePropertyType.Url);
+
+            //parameter2ComboBox_SelectedIndexChanged(null, null);
+            
+            //SetMultipleItemsSplitterComboBoxText(firstSplitter);//------------
+            //multipleItemsSplitterTrimCheckBox.Checked = false;
+            //multipleItemsSplitterTrimCheckBox_CheckedChanged(null, null);
 
             savedFunctionIds.Clear();
             savedFunctionIds.AddRange(selectedPreset.functionIds);
@@ -7276,6 +7251,14 @@ namespace MusicBeePlugin
                 splitterBackup = string.Empty;
                 trimValuesBackup = false;
             }
+
+
+            if (parameter2ComboBoxCustom.SelectedIndex == -1)//---------
+                parameter2ComboBoxCustom.SelectedItem = GetPropName(FilePropertyType.Url);
+
+            parameter2ComboBox_SelectedIndexChanged(null, null);
+
+
 
             setColumnSaved();
 
@@ -7352,7 +7335,7 @@ namespace MusicBeePlugin
 
         private void destinationTagList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SetMultipleItemsSplitterComboBoxCue(splitterBackup);
+            SetMultipleItemsSplitterComboBoxText(splitterBackup);
 
             if (sourceFieldComboBoxCustom.SelectedIndex >= 0)
             {
@@ -7968,7 +7951,7 @@ namespace MusicBeePlugin
 
         internal override void addCellToRow(string cell, string cellName, bool rightAlign, bool dontOutput1, bool dontOutput2)
         {
-            if (text != string.Empty)
+            if (!string.IsNullOrEmpty(text))
             {
                 text += "\t" + cell;
             }
@@ -7980,7 +7963,7 @@ namespace MusicBeePlugin
 
         internal override void addCellToRow(Bitmap cell, string cellName, string imageHash, int width, int height)
         {
-            if (text != string.Empty)
+            if (!string.IsNullOrEmpty(text))
             {
                 text += "\tARTWORK";
             }
@@ -8007,7 +7990,7 @@ namespace MusicBeePlugin
 
         internal override void addCellToRow(string cell, string cellName, bool rightAlign, bool dontOutput1, bool dontOutput2)
         {
-            if (text != string.Empty)
+            if (!string.IsNullOrEmpty(text))
             {
                 text += (delimiter + "\"" + cell.Replace("\"", "\"\"") + "\"");
             }
@@ -8019,7 +8002,7 @@ namespace MusicBeePlugin
 
         internal override void addCellToRow(Bitmap cell, string cellName, string imageHash, int width, int height)
         {
-            if (text != string.Empty)
+            if (!string.IsNullOrEmpty(text))
             {
                 text += (delimiter + "\"ARTWORK\"");
             }

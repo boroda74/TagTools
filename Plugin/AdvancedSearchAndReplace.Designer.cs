@@ -176,42 +176,6 @@ namespace MusicBeePlugin
             this.OriginalTag5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NewTag5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OddEven = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
-            this.tableLayoutPanel4.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureTag6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureTag5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureTag4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureTag3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureTag2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureTag)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userPresetPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.customizedPresetPictureBox)).BeginInit();
-            this.descriptionGroupBox.SuspendLayout();
-            this.textBoxTableLayoutPanel.SuspendLayout();
-            this.listBoxTableLayoutPanel.SuspendLayout();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.previewTable)).BeginInit();
-            this.settingsProcessingGroupBox.SuspendLayout();
-            this.presetManagementGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.uncheckAllFiltersPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.hotkeyPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.functionIdPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.playlistPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.customizedPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.predefinedPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tickedOnlyPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchPictureBox)).BeginInit();
-            this.filtersPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).BeginInit();
-            this.SuspendLayout();
 
             //MusicBee
             this.presetList = new CustomCheckedListBox(Plugin.SavedSettings.dontUseSkinColors);
@@ -261,6 +225,42 @@ namespace MusicBeePlugin
             ((InterpolatedBox)uncheckAllFiltersPictureBox).Interpolation = defaultInterpolationMode;
             //~MusicBee
 
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureTag6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureTag5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureTag4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureTag3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureTag2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureTag)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userPresetPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.customizedPresetPictureBox)).BeginInit();
+            this.descriptionGroupBox.SuspendLayout();
+            this.textBoxTableLayoutPanel.SuspendLayout();
+            this.listBoxTableLayoutPanel.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.previewTable)).BeginInit();
+            this.settingsProcessingGroupBox.SuspendLayout();
+            this.presetManagementGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.uncheckAllFiltersPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hotkeyPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.functionIdPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.playlistPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.customizedPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.predefinedPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tickedOnlyPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchPictureBox)).BeginInit();
+            this.filtersPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).BeginInit();
+            this.SuspendLayout();
             // 
             // splitContainer1
             // 

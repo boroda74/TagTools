@@ -51,9 +51,9 @@ namespace MusicBeePlugin
             initialEncodingListCustom.Text = SavedSettings.initialEncodingName;
             //usedEncodingListCustom.Text = SavedSettings.usedEncodingName;
 
-            if (initialEncodingListCustom.Text == string.Empty)
+            if (string.IsNullOrEmpty(initialEncodingListCustom.Text))
                 initialEncodingListCustom.Text = defaultEncoding.WebName;
-            if (usedEncodingListCustom.Text == string.Empty)
+            if (string.IsNullOrEmpty(usedEncodingListCustom.Text))
                 usedEncodingListCustom.Text = defaultEncoding.WebName;
 
 
@@ -327,7 +327,7 @@ namespace MusicBeePlugin
                 newTags[0] = "T";
                 newTags[1] = currentFile;
 
-                if (GetFileTag(currentFile, MetaDataType.Cuesheet) != string.Empty)
+                if (!string.IsNullOrEmpty(GetFileTag(currentFile, MetaDataType.Cuesheet)))
                     wasCuesheet = true;
 
                 var tagNames = new string[numberOfWritableTags + 2];
@@ -409,7 +409,7 @@ namespace MusicBeePlugin
                     SetStatusBarTextForFileOperations(ReEncodeTagSbText, false, i, newTracks.Count, currentFile);
 
                     var cuesheet = GetFileTag(currentFile, MetaDataType.Cuesheet);
-                    if (cuesheet == string.Empty)
+                    if (string.IsNullOrEmpty(cuesheet))
                     {
                         var j = 0;
                         foreach (var tagIdName in TagIdsNames)

@@ -60,9 +60,9 @@ namespace MusicBeePlugin
             initialEncodingListCustom.Text = SavedSettings.initialEncodingName;
             //usedEncodingListCustom.Text = SavedSettings.usedEncodingName;
 
-            if (initialEncodingListCustom.Text == string.Empty)
+            if (string.IsNullOrEmpty(initialEncodingListCustom.Text))
                 initialEncodingListCustom.Text = defaultEncoding.WebName;
-            if (usedEncodingListCustom.Text == string.Empty)
+            if (string.IsNullOrEmpty(usedEncodingListCustom.Text))
                 usedEncodingListCustom.Text = defaultEncoding.WebName;
 
 

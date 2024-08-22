@@ -428,15 +428,15 @@ namespace MusicBeePlugin
                 string isChecked;
                 if (swappedTags.destinationNormalizedTagValue == swappedTags.newDestinationNormalizedTagValue && stripNotChangedLines)//******** check all command that use SwapTags()!!!!
                     continue;
-                else if (onlyIfDestinationEmpty && swappedTags.destinationNormalizedTagValue != string.Empty && stripNotChangedLines)
+                else if (onlyIfDestinationEmpty && !string.IsNullOrEmpty(swappedTags.destinationNormalizedTagValue) && stripNotChangedLines)
                     continue;
-                else if (onlyIfSourceNotEmpty && swappedTags.sourceNormalizedTagValue == string.Empty && stripNotChangedLines)
+                else if (onlyIfSourceNotEmpty && string.IsNullOrEmpty(swappedTags.sourceNormalizedTagValue) && stripNotChangedLines)
                     continue;
                 else if (swappedTags.destinationNormalizedTagValue == swappedTags.newDestinationNormalizedTagValue)
                     isChecked = "F";
-                else if (onlyIfDestinationEmpty && swappedTags.destinationNormalizedTagValue != string.Empty)
+                else if (onlyIfDestinationEmpty && !string.IsNullOrEmpty(swappedTags.destinationNormalizedTagValue))
                     isChecked = "F";
-                else if (onlyIfSourceNotEmpty && swappedTags.sourceNormalizedTagValue == string.Empty)
+                else if (onlyIfSourceNotEmpty && string.IsNullOrEmpty(swappedTags.sourceNormalizedTagValue))
                     isChecked = "F";
                 else
                     isChecked = "T";

@@ -39,66 +39,66 @@
             this.saveLastSkippedCheckBoxLabel = new System.Windows.Forms.Label();
             this.placeholderCheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
-            //
-            //lastSkippedTagList
-            //
+            // 
+            // lastSkippedTagList
+            // 
             resources.ApplyResources(this.lastSkippedTagList, "lastSkippedTagList");
             this.lastSkippedTagList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.lastSkippedTagList.DropDownWidth = 250;
             this.lastSkippedTagList.FormattingEnabled = true;
             this.lastSkippedTagList.Name = "lastSkippedTagList";
             this.lastSkippedTagList.Tag = "#SaveLastSkippedDate";
-            //
-            //buttonClose
-            //
+            // 
+            // buttonClose
+            // 
             resources.ApplyResources(this.buttonClose, "buttonClose");
             this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Tag = "#SaveLastSkippedDate&SaveLastSkippedDate@non-defaultable";
+            this.buttonClose.Tag = "#SaveLastSkippedDate@non-defaultable";
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
-            //
-            //buttonOK
-            //
+            // 
+            // buttonOK
+            // 
             resources.ApplyResources(this.buttonOK, "buttonOK");
             this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Tag = "#buttonClose&SaveLastSkippedDate";
+            this.buttonOK.Tag = "#buttonClose";
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
-            //
-            //saveLastSkippedCheckBox
-            //
+            // 
+            // saveLastSkippedCheckBox
+            // 
             resources.ApplyResources(this.saveLastSkippedCheckBox, "saveLastSkippedCheckBox");
             this.saveLastSkippedCheckBox.Name = "saveLastSkippedCheckBox";
             this.saveLastSkippedCheckBox.Tag = "#saveLastSkippedCheckBoxLabel";
             this.saveLastSkippedCheckBox.CheckedChanged += new System.EventHandler(this.saveLastSkippedCheckBox_CheckedChanged);
-            //
-            //dateTimeFormatLabel
-            //
+            // 
+            // dateTimeFormatLabel
+            // 
             resources.ApplyResources(this.dateTimeFormatLabel, "dateTimeFormatLabel");
             this.dateTimeFormatLabel.Name = "dateTimeFormatLabel";
-            //
-            //lastSkippedDateFormatTagList
-            //
+            // 
+            // lastSkippedDateFormatTagList
+            // 
             resources.ApplyResources(this.lastSkippedDateFormatTagList, "lastSkippedDateFormatTagList");
             this.lastSkippedDateFormatTagList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.lastSkippedDateFormatTagList.DropDownWidth = 250;
             this.lastSkippedDateFormatTagList.FormattingEnabled = true;
             this.lastSkippedDateFormatTagList.Name = "lastSkippedDateFormatTagList";
             this.lastSkippedDateFormatTagList.Tag = "#SaveLastSkippedDate";
-            //
-            //saveLastSkippedCheckBoxLabel
-            //
+            // 
+            // saveLastSkippedCheckBoxLabel
+            // 
             resources.ApplyResources(this.saveLastSkippedCheckBoxLabel, "saveLastSkippedCheckBoxLabel");
             this.saveLastSkippedCheckBoxLabel.Name = "saveLastSkippedCheckBoxLabel";
             this.saveLastSkippedCheckBoxLabel.Click += new System.EventHandler(this.saveLastSkippedCheckBoxLabel_Click);
-            //
-            //placeholderCheckBox
-            //
+            // 
+            // placeholderCheckBox
+            // 
             resources.ApplyResources(this.placeholderCheckBox, "placeholderCheckBox");
             this.placeholderCheckBox.Name = "placeholderCheckBox";
             this.placeholderCheckBox.Tag = "#dateTimeFormatLabel";
-            //
-            //SaveLastSkippedDate
-            //
+            // 
+            // SaveLastSkippedDate
+            // 
             this.AcceptButton = this.buttonOK;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

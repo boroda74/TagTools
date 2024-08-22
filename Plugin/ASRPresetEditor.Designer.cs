@@ -1401,7 +1401,7 @@
             // 
             resources.ApplyResources(this.ignoreCaseCheckBoxLabel, "ignoreCaseCheckBoxLabel");
             this.ignoreCaseCheckBoxLabel.Name = "ignoreCaseCheckBoxLabel";
-            this.ignoreCaseCheckBoxLabel.Tag = "@pinned-to-parent-y";
+            this.ignoreCaseCheckBoxLabel.Tag = "";
             this.ignoreCaseCheckBoxLabel.Click += new System.EventHandler(this.ignoreCaseCheckBoxLabel_Click);
             // 
             // textBoxTableLayoutPanel

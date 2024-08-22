@@ -143,7 +143,7 @@
     <value>Есть не сохраненные изменения</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1284, 611</value>
+    <value>1286, 613</value>
   </data>
   <data name="autoApplyPresetsLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>1269, 48</value>
@@ -1190,7 +1190,22 @@
     <value>1244, 166</value>
   </data>
   <data name="tabPage1.Text" xml:space="preserve">
-    <value>Просмотр  </value>
+    <value>Просмотр</value>
+  </data>
+  <data name="expressionsDataGridViewCheckedColumn.ToolTipText" xml:space="preserve">
+    <value>Снимите отметку, чтобы удалить колонку выражения из пресета</value>
+  </data>
+  <data name="expressionsDataGridViewExpressionColumn.HeaderText" xml:space="preserve">
+    <value>Выражение</value>
+  </data>
+  <data name="expressionsDataGridViewExpressionColumn.ToolTipText" xml:space="preserve">
+    <value>Вы сняли отметку с последнего выражения для поля:\\%%FIELD-NAME%%\\Вы хотите удалить это поле?</value>
+  </data>
+  <data name="expressionsDataGridView.Location" type="System.Drawing.Point, System.Drawing">
+    <value>723, 0</value>
+  </data>
+  <data name="expressionsDataGridView.Size" type="System.Drawing.Size, System.Drawing">
+    <value>521, 105</value>
   </data>
   <data name="tagsDataGridViewCheckedColumn.ToolTipText" xml:space="preserve">
     <value>Снимите отметку, чтобы удалить группировку/функцию из пресета</value>
@@ -1210,44 +1225,88 @@
   <data name="tagsDataGridViewInfoColumn.ToolTipText" xml:space="preserve">
     <value>Разделитель элементов для группировок или тег, относительно которого считается среднее, для функций</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="tagsDataGridView.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
   <data name="tagsDataGridView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>707, 102</value>
+    <value>719, 105</value>
   </data>
   <data name="tagsDataGridView.ToolTip" xml:space="preserve">
     <value>Порядок колонок в отчете соответствует порядку, в котором они были добавлены, но 
 эта таблица отсортирована в алфавитном порядке для упрощения навигации. Не перепутайте. 
 Смотрите реальный порядок колонок в таблице предварительного просмотра.</value>
   </data>
-  <data name="expressionsDataGridViewCheckedColumn.ToolTipText" xml:space="preserve">
-    <value>Снимите отметку, чтобы удалить колонку выражения из пресета</value>
+  <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1244, 105</value>
   </data>
-  <data name="expressionsDataGridViewExpressionColumn.HeaderText" xml:space="preserve">
-    <value>Выражение</value>
+  <data name="buttonAddFunction.Location" type="System.Drawing.Point, System.Drawing">
+    <value>996, 34</value>
   </data>
-  <data name="expressionsDataGridViewExpressionColumn.ToolTipText" xml:space="preserve">
-    <value>Вы сняли отметку с последнего выражения для поля:\\%%FIELD-NAME%%\\Вы хотите удалить это поле?</value>
+  <data name="buttonAddFunction.Text" xml:space="preserve">
+    <value>Добавить:Отказаться</value>
   </data>
-  <data name="expressionsDataGridView.Location" type="System.Drawing.Point, System.Drawing">
-    <value>707, 61</value>
+  <data name="buttonAddFunction.ToolTip" xml:space="preserve">
+    <value>Добавить определение новой колонки:Отказаться от изменений</value>
   </data>
-  <data name="expressionsDataGridView.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
+  <data name="buttonUpdateFunction.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1124, 34</value>
   </data>
-  <data name="expressionsDataGridView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>535, 102</value>
+  <data name="buttonUpdateFunction.Text" xml:space="preserve">
+    <value>Сохранить :  Обновить </value>
+  </data>
+  <data name="buttonUpdateFunction.ToolTip" xml:space="preserve">
+    <value>Сохранить определение новой колонки:Обновить определение колонки</value>
+  </data>
+  <data name="multipleItemsSplitterLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>672, 8</value>
+  </data>
+  <data name="multipleItemsSplitterLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>140, 15</value>
+  </data>
+  <data name="multipleItemsSplitterLabel.Text" xml:space="preserve">
+    <value>Разделитель элементов:</value>
+  </data>
+  <data name="multipleItemsSplitterLabel.ToolTip" xml:space="preserve">
+    <value>Разбивать значения тега группировки по указанному разделителю</value>
+  </data>
+  <data name="multipleItemsSplitterTrimCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>987, 8</value>
+  </data>
+  <data name="multipleItemsSplitterTrimCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>173, 15</value>
+  </data>
+  <data name="multipleItemsSplitterTrimCheckBoxLabel.Text" xml:space="preserve">
+    <value>Удалять непечатные символы</value>
   </data>
   <data name="expressionTextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>189, 34</value>
   </data>
   <data name="expressionTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>516, 23</value>
+    <value>409, 23</value>
   </data>
   <data name="expressionTextBox.Text" xml:space="preserve">
     <value>(Без выражения)</value>
+  </data>
+  <data name="multipleItemsSplitterTrimCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>964, 8</value>
+  </data>
+  <data name="multipleItemsSplitterTrimCheckBox.ToolTip" xml:space="preserve">
+    <value>Удалять все начальные и конечные непечатные символы (например, пробелы) из разделенных элементов</value>
+  </data>
+  <data name="multipleItemsSplitterComboBox.Items" xml:space="preserve">
+    <value> (не использовать)</value>
+  </data>
+  <data name="multipleItemsSplitterComboBox.Items1" xml:space="preserve">
+    <value> \0 (например, для нескольких исполнителей в теге "Исполнитель")</value>
+  </data>
+  <data name="multipleItemsSplitterComboBox.Items2" xml:space="preserve">
+    <value> ; (например, для нескольких жанров в теге "Жанр")</value>
+  </data>
+  <data name="multipleItemsSplitterComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>820, 5</value>
+  </data>
+  <data name="multipleItemsSplitterComboBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>136, 23</value>
+  </data>
+  <data name="multipleItemsSplitterComboBox.ToolTip" xml:space="preserve">
+    <value>Разбивать значения тега группировки по указанному разделителю</value>
   </data>
   <data name="expressionLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>175, 15</value>
@@ -1262,77 +1321,18 @@
 Выражение вычисляется после разбиения группировок на элементы
 и перед вычислением агрегатных функций</value>
   </data>
-  <data name="parameter2Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>633, 8</value>
+  <data name="buttonClearExpression.Location" type="System.Drawing.Point, System.Drawing">
+    <value>602, 34</value>
   </data>
-  <data name="parameter2Label.Size" type="System.Drawing.Size, System.Drawing">
-    <value>39, 15</value>
-  </data>
-  <data name="parameter2Label.Text" xml:space="preserve">
-    <value>на тег</value>
-  </data>
-  <data name="sourceTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>333, 5</value>
-  </data>
-  <data name="sourceTagList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>292, 23</value>
-  </data>
-  <data name="forTagLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>296, 8</value>
-  </data>
-  <data name="forTagLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 15</value>
-  </data>
-  <data name="forTagLabel.Text" xml:space="preserve">
-    <value>тега</value>
-  </data>
-  <data name="functionComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>220, 23</value>
-  </data>
-  <data name="labelFunction.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 15</value>
-  </data>
-  <data name="labelFunction.Text" xml:space="preserve">
-    <value>Функция</value>
-  </data>
-  <data name="panel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>705, 61</value>
-  </data>
-  <data name="buttonUpdateFunction.Location" type="System.Drawing.Point, System.Drawing">
-    <value>413, 34</value>
-  </data>
-  <data name="buttonUpdateFunction.Text" xml:space="preserve">
-    <value>Сохранить :  Обновить </value>
-  </data>
-  <data name="buttonUpdateFunction.ToolTip" xml:space="preserve">
-    <value>Сохранить определение новой колонки:Обновить определение колонки</value>
-  </data>
-  <data name="multipleItemsSplitterTrimCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>330, 8</value>
-  </data>
-  <data name="multipleItemsSplitterTrimCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 15</value>
-  </data>
-  <data name="multipleItemsSplitterTrimCheckBoxLabel.Text" xml:space="preserve">
-    <value>Удалять непечатные символы</value>
-  </data>
-  <data name="buttonAddFunction.Location" type="System.Drawing.Point, System.Drawing">
-    <value>285, 34</value>
-  </data>
-  <data name="buttonAddFunction.Text" xml:space="preserve">
-    <value>Добавить:Отказаться</value>
-  </data>
-  <data name="buttonAddFunction.ToolTip" xml:space="preserve">
-    <value>Добавить определение новой колонки:Отказаться от изменений</value>
-  </data>
-  <data name="multipleItemsSplitterTrimCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>307, 8</value>
-  </data>
-  <data name="multipleItemsSplitterTrimCheckBox.ToolTip" xml:space="preserve">
-    <value>Удалять все начальные и конечные непечатные символы (например, пробелы) из разделенных элементов</value>
+  <data name="buttonClearExpression.ToolTip" xml:space="preserve">
+    <value>Очистить выражение</value>
   </data>
   <data name="buttonHelp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>88, 34</value>
+    <value>721, 34</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="buttonHelp.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 153, 4</value>
   </data>
   <data name="buttonHelp.Text" xml:space="preserve">
     <value>Справка</value>
@@ -1346,56 +1346,44 @@
 
 Вы можете ссылаться на любой тег в выражении ОБ, используя общую конструкцию MusicBee &lt;Название тега&gt;, или ссылаться на текущий тег группировки/функции (который уже может быть одним из разделенных значениий тега, если разделитель для этого тега задан) как \@</value>
   </data>
-  <data name="multipleItemsSplitterComboBox.Items" xml:space="preserve">
-    <value> (не использовать)</value>
+  <data name="parameter2Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>606, 8</value>
   </data>
-  <data name="multipleItemsSplitterComboBox.Items1" xml:space="preserve">
-    <value> \0 (например, для нескольких исполнителей в теге "Исполнитель")</value>
+  <data name="parameter2Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 15</value>
   </data>
-  <data name="multipleItemsSplitterComboBox.Items2" xml:space="preserve">
-    <value> ; (например, для нескольких жанров в теге "Жанр")</value>
+  <data name="parameter2Label.Text" xml:space="preserve">
+    <value>на тег</value>
   </data>
-  <data name="multipleItemsSplitterComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>163, 5</value>
+  <data name="sourceTagList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>342, 5</value>
   </data>
-  <data name="multipleItemsSplitterComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 23</value>
+  <data name="labelFunction.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 15</value>
   </data>
-  <data name="multipleItemsSplitterComboBox.ToolTip" xml:space="preserve">
-    <value>Разбивать значения тега группировки по указанному разделителю</value>
+  <data name="labelFunction.Text" xml:space="preserve">
+    <value>Функция</value>
   </data>
-  <data name="multipleItemsSplitterLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 8</value>
+  <data name="forTagLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>296, 8</value>
   </data>
-  <data name="multipleItemsSplitterLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 15</value>
+  <data name="forTagLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>29, 15</value>
   </data>
-  <data name="multipleItemsSplitterLabel.Text" xml:space="preserve">
-    <value>Разделитель элементов:</value>
+  <data name="forTagLabel.Text" xml:space="preserve">
+    <value>тега</value>
   </data>
-  <data name="multipleItemsSplitterLabel.ToolTip" xml:space="preserve">
-    <value>Разбивать значения тега группировки по указанному разделителю</value>
+  <data name="parameter2ComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>660, 5</value>
   </data>
-  <data name="buttonClearExpression.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 34</value>
-  </data>
-  <data name="buttonClearExpression.ToolTip" xml:space="preserve">
-    <value>Очистить выражение</value>
-  </data>
-  <data name="buttonsPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>709, 0</value>
-  </data>
-  <data name="buttonsPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>533, 61</value>
-  </data>
-  <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1242, 163</value>
+  <data name="functionComboBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>220, 23</value>
   </data>
   <data name="tabPage2.Size" type="System.Drawing.Size, System.Drawing">
     <value>1244, 166</value>
   </data>
   <data name="tabPage2.Text" xml:space="preserve">
-    <value>Определения колонок  </value>
+    <value>Определения колонок</value>
   </data>
   <data name="presetTabControl.Size" type="System.Drawing.Size, System.Drawing">
     <value>1252, 194</value>

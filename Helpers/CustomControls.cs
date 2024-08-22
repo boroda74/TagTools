@@ -136,6 +136,9 @@ namespace MusicBeePlugin
                 return;
 
 
+            var form = control.FindForm() as PluginWindowTemplate;
+            form.controlBorders.AddUnique(this);
+
             this.control = control;
 
             Name = control.Name;
@@ -215,9 +218,9 @@ namespace MusicBeePlugin
 
         protected override void Dispose(bool disposing)
         {
-           base.Dispose(disposing);
+            base.Dispose(disposing);
 
-           if (disposing)
+            if (disposing)
             {
                 control?.Dispose();
             }
@@ -243,7 +246,7 @@ namespace MusicBeePlugin
 
         internal readonly PluginWindowTemplate ownerForm;
 
-        public ComboBox comboBox;
+        public readonly ComboBox comboBox;
 
         private TextBox textBox;
         private Button button;
@@ -349,15 +352,20 @@ namespace MusicBeePlugin
         public CustomComboBox(PluginWindowTemplate ownerForm, ComboBox comboBox, bool skinned)
         {
             SetStyle(ControlStyles.ResizeRedraw, true);
-            //SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-            //SetStyle(ControlStyles.DoubleBuffer, true);
+            SetStyle(ControlStyles.DoubleBuffer, true);
 
             this.ownerForm = ownerForm;
 
             if (skinned)
+            {
+                this.comboBox = null;
                 initSkinned(comboBox);
+            }
             else
+            {
+                this.comboBox = (ComboBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.ComboBox);
                 init(comboBox);
+            }
 
             EnabledChanged += OnEnabledChanged;
             VisibleChanged += OnVisibleChanged;
@@ -400,7 +408,6 @@ namespace MusicBeePlugin
             this.Name = comboBox.Name;
 
 
-            this.comboBox = (ComboBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.ComboBox);
             this.comboBox.DropDownStyle = comboBox.DropDownStyle;
 
             foreach (var item in comboBox.Items)
@@ -417,14 +424,14 @@ namespace MusicBeePlugin
 
             this.Controls.Add(this.comboBox);
 
-            this.DropDownStyle = comboBox.DropDownStyle;
-
 
             CopyComboBoxEventHandlers(comboBox, this.comboBox);
 
 
             SizeChanged += customComboBox_SizeChanged;
             customComboBox_SizeChanged(this, null);
+
+            this.DropDownStyle = comboBox.DropDownStyle;
 
             var allControlsIndex = ownerForm.allControls.IndexOf(comboBox);
             ownerForm.allControls.RemoveAt(allControlsIndex);
@@ -745,38 +752,52 @@ namespace MusicBeePlugin
             }
         }
 
-        public void SetText(string value)
+        public void SetText(string value, bool forceDropDownListText)
         {
             var index = IndexOfText(value);
 
             if (textBox != null)
             {
-                if (index == -1 && string.IsNullOrEmpty(value) && textBox.ReadOnly)
-                {
-                    textBox.Text = cue;
-                }
-                else if (index == -1 && string.IsNullOrEmpty(value) && !textBox.ReadOnly)
-                {
-                    textBox.Text = cue;
-                }
-                else
-                {
+                var oldText = textBox.Text;
+
+                listBox.SelectedIndex = index;
+
+                if (forceDropDownListText || index >= 0 || DropDownStyle == ComboBoxStyle.DropDown)
                     textBox.Text = value;
-                    SelectedIndex = index;
-                }
+                else //if (!forceDropDownListText && index == -1 && DropDownStyle == ComboBoxStyle.DropDownList)
+                    textBox.Text = cue;
 
                 SetColors(null);
 
-                this.FireEvent("TextChanged", null);
+                if (oldText != value)
+                    this.FireEvent("TextChanged", null);
             }
             else//if (comboBox != null)
             {
-                if (index == -1 && DropDownStyle == ComboBoxStyle.DropDown)
-                    comboBox.Text = value;
-                else
-                    SelectedIndex = index;
+                var oldText = comboBox.Text;
 
-                this.FireEvent("TextChanged", null);
+                if (!forceDropDownListText || index >= 0)
+                {
+                    comboBox.SetCue(cue);
+                    comboBox.Text = value;
+                }
+                else if (DropDownStyle == ComboBoxStyle.DropDownList) //&& forceDropDownListText && index == -1
+                {
+                    comboBox.SetCue(value);
+                    comboBox.Text = string.Empty; //Let's show cue
+                }
+                else //if (DropDownStyle == ComboBoxStyle.DropDown && forceDropDownListText && index == -1)
+                {
+                    comboBox.SetCue(cue);
+
+                    // handing off the reset of the ComboBox selected value to a delegate method - using MethodInvoker on the forms main thread is an efficient to do this
+                    // see https://msdn.microsoft.com/en-us/library/system.windows.forms.methodinvoker(v=vs.110).aspx
+                    BeginInvoke(new Action(() => { comboBox.Text = value; }));
+                }
+
+
+                if (oldText != value)
+                    this.FireEvent("TextChanged", null);
             }
         }
 
@@ -793,9 +814,9 @@ namespace MusicBeePlugin
             set
             {
                 if (textBox != null && textBox.Text != value)
-                    SetText(value);
+                    SetText(value, false);
                 else if (textBox == null && comboBox.Text != value)
-                    SetText(value);
+                    SetText(value, false);
             }
         }
 
@@ -1060,10 +1081,10 @@ namespace MusicBeePlugin
 
         public void listBox_ItemChosen(object sender, EventArgs e)
         {
+            SelectedIndex = listBox.SelectedIndex;
+
             textBox.Focus();
             dropDown.Close();
-
-            SelectedIndex = listBox.SelectedIndex;
         }
 
         private void listBox_MouseMove(object sender, MouseEventArgs e)
@@ -1145,7 +1166,7 @@ namespace MusicBeePlugin
                         textBox.ForeColor = Plugin.InputControlForeColor;
                     else if (listBox.SelectedIndex == -1 && (string.IsNullOrEmpty(textBox.Text) || textBox.Text == cue) && !textBox.ReadOnly) //Let's show cue for editable mode if cue is defined
                         textBox.ForeColor = Plugin.InputControlDimmedForeColor;
-                    else //Not readonly
+                    else //No cue, just "Text"
                         textBox.ForeColor = Plugin.InputControlForeColor;
 
                     textBox.BackColor = Plugin.InputControlBackColor;
@@ -1159,21 +1180,14 @@ namespace MusicBeePlugin
             }
         }
 
-        public void SetCue(string cue, bool forceCue)
+        public void SetCue(string cue)
         {
-            if (forceCue)
-                SelectedIndex = -1;
+            this.cue = cue;
 
             if (textBox != null)
-            {
-                this.cue = cue;
-                if (listBox.SelectedIndex == -1)
-                    SetText(string.Empty);
-            }
+                textBox.SetCue(cue);
             else
-            {
                 comboBox.SetCue(cue);
-            }
         }
     }
 

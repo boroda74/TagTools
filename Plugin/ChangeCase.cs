@@ -551,9 +551,9 @@ namespace MusicBeePlugin
                 }
                 else //Not the end of word
                 {
-                    if (currentWord == string.Empty && !IsCharASymbol(currentChar)) //Beginning of new word
+                    if (string.IsNullOrEmpty(currentWord) && !IsCharASymbol(currentChar)) //Beginning of new word
                         currentWord += currentChar;
-                    else if (currentWord == string.Empty) //Several repeating symbols between words
+                    else if (string.IsNullOrEmpty(currentWord)) //Several repeating symbols between words
                         newString += currentChar;
                     else //Letter or symbol in the middle of the word
                         currentWord += currentChar;

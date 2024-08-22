@@ -241,9 +241,7 @@ namespace MusicBeePlugin
 
             asrIdsPresetGuids = new SortedDictionary<string, Guid>();
             foreach (var pair in IdsAsrPresets)
-            {
                 asrIdsPresetGuids.Add(pair.Key, pair.Value.guid);
-            }
 
 
             var entireText = autoApplyPresetsLabel.Text;
@@ -746,7 +744,7 @@ namespace MusicBeePlugin
             {
                 var hotkeyChar = getHotkeyChar();
 
-                if (hotkeyChar == string.Empty)
+                if (string.IsNullOrEmpty(hotkeyChar))
                     return hotkeyChar;
                 else
                     return " " + hotkeyChar;
@@ -762,7 +760,7 @@ namespace MusicBeePlugin
                 var changedPostfix = changed ? " ⚠" : string.Empty;
 
                 return (favorite ? "♥ " : string.Empty) + GetDictValue(names, Language) + (getCustomizationsFlag() ? " " : string.Empty) + (userPreset ? " " : string.Empty)
-                    + (condition ? " " : string.Empty) + (id != string.Empty ? " " : string.Empty) + getHotkeyPostfix() + changedPostfix;
+                    + (condition ? " " : string.Empty) + (!string.IsNullOrEmpty(id) ? " " : string.Empty) + getHotkeyPostfix() + changedPostfix;
             }
 
             public string getName(bool getEnglishName = false)
@@ -1984,7 +1982,7 @@ namespace MusicBeePlugin
                 if (plugin == null)
                     return false;
 
-                if (plugin.clipboardText == string.Empty)
+                if (string.IsNullOrEmpty(plugin.clipboardText))
                 {
                     plugin.clipboardText += value;
                     return true;
@@ -2073,7 +2071,7 @@ namespace MusicBeePlugin
         internal static string Replace(string currentFile, string value, string searchedPattern, string replacedPattern, bool ignoreCase, out bool match)
         {
             match = false;
-            if (searchedPattern == string.Empty)
+            if (string.IsNullOrEmpty(searchedPattern))
                 return value;
 
 
@@ -2201,7 +2199,7 @@ namespace MusicBeePlugin
             out string searchedTagValue, out string replacedTagValue, out string originalReplacedTagValue,
             out bool replacedTagValuePreserved, out bool replacedTagPreserved)
         {
-            if (searchedPattern == string.Empty)
+            if (string.IsNullOrEmpty(searchedPattern))
             {
                 searchedTagValue = string.Empty;
                 replacedTagValue = string.Empty;
@@ -2364,27 +2362,27 @@ namespace MusicBeePlugin
 
             SetTags.Clear();
 
-            if (preset.searchedPattern != string.Empty)
+            if (!string.IsNullOrEmpty(preset.searchedPattern))
             {
                 SetFileTag(currentFile, (MetaDataType)preset.substituteTagId(preset.replacedTagId),
                     searchedAndReplacedTags.replacedTagValue, true, asrCommand);
 
-                if (preset.searchedPattern2 != string.Empty)
+                if (!string.IsNullOrEmpty(preset.searchedPattern2))
                 {
                     SetFileTag(currentFile, (MetaDataType)preset.substituteTagId(preset.replacedTag2Id),
                         searchedAndReplacedTags.replacedTag2Value, true, asrCommand);
 
-                    if (preset.searchedPattern3 != string.Empty)
+                    if (!string.IsNullOrEmpty(preset.searchedPattern3))
                     {
                         SetFileTag(currentFile, (MetaDataType)preset.substituteTagId(preset.replacedTag3Id),
                             searchedAndReplacedTags.replacedTag3Value, true, asrCommand);
 
-                        if (preset.searchedPattern4 != string.Empty)
+                        if (!string.IsNullOrEmpty(preset.searchedPattern4))
                         {
                             SetFileTag(currentFile, (MetaDataType)preset.substituteTagId(preset.replacedTag4Id),
                                 searchedAndReplacedTags.replacedTag4Value, true, asrCommand);
 
-                            if (preset.searchedPattern5 != string.Empty)
+                            if (!string.IsNullOrEmpty(preset.searchedPattern5))
                             {
                                 SetFileTag(currentFile, (MetaDataType)preset.substituteTagId(preset.replacedTag5Id),
                                     searchedAndReplacedTags.replacedTag5Value, true, asrCommand);
@@ -2999,27 +2997,27 @@ namespace MusicBeePlugin
             var result4 = ChangesDetectionResult.NoExclusionsDetected;
             var result5 = ChangesDetectionResult.NoExclusionsDetected;
 
-            if (processingPreset.searchedPattern == string.Empty || DetectTempTag(processingPreset.replacedTagId))
+            if (string.IsNullOrEmpty(processingPreset.searchedPattern) || DetectTempTag(processingPreset.replacedTagId))
                 result1 = ChangesDetectionResult.Ignore;
             else if (searchedAndReplacedTags.originalReplacedTagValue == searchedAndReplacedTags.replacedTagValue)
                 result1 = DetectPresetStepChanges(searchedAndReplacedTags.replacedTagPreserved, searchedAndReplacedTags.replacedTagValuePreserved);
 
-            if (processingPreset.searchedPattern2 == string.Empty || DetectTempTag(processingPreset.replacedTag2Id))
+            if (string.IsNullOrEmpty(processingPreset.searchedPattern2) || DetectTempTag(processingPreset.replacedTag2Id))
                 result2 = ChangesDetectionResult.Ignore;
             else if (searchedAndReplacedTags.originalReplacedTag2Value == searchedAndReplacedTags.replacedTag2Value)
                 result2 = DetectPresetStepChanges(searchedAndReplacedTags.replacedTag2Preserved, searchedAndReplacedTags.replacedTag2ValuePreserved);
 
-            if (processingPreset.searchedPattern3 == string.Empty || DetectTempTag(processingPreset.replacedTag3Id))
+            if (string.IsNullOrEmpty(processingPreset.searchedPattern3) || DetectTempTag(processingPreset.replacedTag3Id))
                 result3 = ChangesDetectionResult.Ignore;
             else if (searchedAndReplacedTags.originalReplacedTag3Value == searchedAndReplacedTags.replacedTag3Value)
                 result3 = DetectPresetStepChanges(searchedAndReplacedTags.replacedTag3Preserved, searchedAndReplacedTags.replacedTag3ValuePreserved);
 
-            if (processingPreset.searchedPattern4 == string.Empty || DetectTempTag(processingPreset.replacedTag4Id))
+            if (string.IsNullOrEmpty(processingPreset.searchedPattern4) || DetectTempTag(processingPreset.replacedTag4Id))
                 result4 = ChangesDetectionResult.Ignore;
             else if (searchedAndReplacedTags.originalReplacedTag4Value == searchedAndReplacedTags.replacedTag4Value)
                 result4 = DetectPresetStepChanges(searchedAndReplacedTags.replacedTag4Preserved, searchedAndReplacedTags.replacedTag4ValuePreserved);
 
-            if (processingPreset.searchedPattern5 == string.Empty || DetectTempTag(processingPreset.replacedTag5Id))
+            if (string.IsNullOrEmpty(processingPreset.searchedPattern5) || DetectTempTag(processingPreset.replacedTag5Id))
                 result5 = ChangesDetectionResult.Ignore;
             else if (searchedAndReplacedTags.originalReplacedTag5Value == searchedAndReplacedTags.replacedTag5Value)
                 result5 = DetectPresetStepChanges(searchedAndReplacedTags.replacedTag5Preserved, searchedAndReplacedTags.replacedTag5ValuePreserved);
@@ -3677,7 +3675,7 @@ namespace MusicBeePlugin
             else
                 previewTable.Columns[19].Visible = true;
 
-            if (selectedPreset.searchedPattern != string.Empty)
+            if (!string.IsNullOrEmpty(selectedPreset.searchedPattern))
             {
                 previewTable.Columns[4].Visible = allTagsPresetParameterTagMask[0];
                 previewTable.Columns[4].HeaderText = TagNameText;
@@ -3723,7 +3721,7 @@ namespace MusicBeePlugin
                 }
 
 
-                if (selectedPreset.searchedPattern2 != string.Empty)
+                if (!string.IsNullOrEmpty(selectedPreset.searchedPattern2))
                 {
                     previewTable.Columns[7].Visible = allTagsPresetParameterTagMask[1];
                     previewTable.Columns[7].HeaderText = TagNameText;
@@ -3756,7 +3754,7 @@ namespace MusicBeePlugin
                     }
 
 
-                    if (selectedPreset.searchedPattern3 != string.Empty)
+                    if (!string.IsNullOrEmpty(selectedPreset.searchedPattern3))
                     {
                         previewTable.Columns[10].Visible = allTagsPresetParameterTagMask[2];
                         previewTable.Columns[10].HeaderText = TagNameText;
@@ -3789,7 +3787,7 @@ namespace MusicBeePlugin
                         }
 
 
-                        if (selectedPreset.searchedPattern4 != string.Empty)
+                        if (!string.IsNullOrEmpty(selectedPreset.searchedPattern4))
                         {
                             previewTable.Columns[13].Visible = allTagsPresetParameterTagMask[3];
                             previewTable.Columns[13].HeaderText = TagNameText;
@@ -3822,7 +3820,7 @@ namespace MusicBeePlugin
                             }
 
 
-                            if (selectedPreset.searchedPattern5 != string.Empty)
+                            if (!string.IsNullOrEmpty(selectedPreset.searchedPattern5))
                             {
                                 previewTable.Columns[16].Visible = allTagsPresetParameterTagMask[4];
                                 previewTable.Columns[16].HeaderText = TagNameText;
@@ -3836,8 +3834,8 @@ namespace MusicBeePlugin
                                 }
                                 else
                                 {
-                                    previewTable.Columns[17].Visible = (previewTable.Columns[14].HeaderText != string.Empty);
-                                    previewTable.Columns[18].Visible = (previewTable.Columns[14].HeaderText != string.Empty);
+                                    previewTable.Columns[17].Visible = !string.IsNullOrEmpty(previewTable.Columns[14].HeaderText);
+                                    previewTable.Columns[18].Visible = !string.IsNullOrEmpty(previewTable.Columns[14].HeaderText);
                                 }
 
                                 if (previewTable.Columns[17].HeaderText == previewTable.Columns[14].HeaderText)
@@ -4593,7 +4591,7 @@ namespace MusicBeePlugin
             if (numberOfErrors > 0)
                 message += AddLeadingSpaces(numberOfErrors, 4) + GetPluralForm(MsgPresetsFailedToUpdate, numberOfErrors);
 
-            if (message == string.Empty)
+            if (string.IsNullOrEmpty(message))
             {
                 message = MsgPresetsNotFound;
             }
@@ -5828,7 +5826,7 @@ namespace MusicBeePlugin
             {
                 return;
             }
-            else if (idTextBox.Text == string.Empty)
+            else if (string.IsNullOrEmpty(idTextBox.Text))
             {
                 asrIdsPresetGuids.RemoveExisting(selectedPreset.id);
 
@@ -5845,7 +5843,7 @@ namespace MusicBeePlugin
             allowedRemoved = Regex.Replace(allowedRemoved, @"_", string.Empty);
             allowedRemoved = Regex.Replace(allowedRemoved, @"\:", string.Empty);
 
-            if (allowedRemoved != string.Empty)
+            if (!string.IsNullOrEmpty(allowedRemoved))
             {
                 MessageBox.Show(this, MsgNotAllowedSymbols, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 

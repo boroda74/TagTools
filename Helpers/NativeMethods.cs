@@ -191,6 +191,11 @@ internal static class NativeMethods
 
     internal static void SetCue(this TextBox textBox, string cue)
     {
+        if (cue == null)
+            cue = string.Empty;
+        else
+            cue = cue.TrimStart(' ');
+
         SendMessage(textBox.Handle, (uint)EM_SETCUEBANNER, Zero, cue);
     }
 
@@ -201,14 +206,8 @@ internal static class NativeMethods
 
     internal static void SetCue(this ComboBox comboBox, string cue)
     {
-        cue = cue.TrimStart(' ');
-
-        //handing off the reset of the combobox selected value to a delegate method - using methodinvoker on the forms main thread is an efficient to do this
-        //see https://msdn.microsoft.com/en-us/library/system.windows.forms.methodinvoker(v=vs.110).aspx
-        if (!comboBox.Items.Contains(cue))
-            comboBox.FindForm().BeginInvoke(new Action(() => { comboBox.Text = cue; }));
-        else
-            comboBox.Text = cue;
+        if (cue == null)
+            cue = string.Empty;
 
         SendMessage(comboBox.Handle, (uint)CB_SETCUEBANNER, Zero, cue);
     }

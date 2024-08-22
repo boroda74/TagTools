@@ -98,6 +98,16 @@ namespace MusicBeePlugin
 
             try
             {
+                file1.WriteLine("Adding " + NullTagName + " / " + NullTagId);
+                TagNamesIds.Add(NullTagName, NullTagId);
+            }
+            catch (ArgumentException)
+            {
+                wereErrors = true;
+                file1.WriteLine("Cant add " + NullTagName + " / " + NullTagId);
+            }
+            try
+            {
                 file1.WriteLine("Adding " + AllTagsPseudoTagName + " / " + AllTagsPseudoTagId);
                 TagNamesIds.Add(AllTagsPseudoTagName, AllTagsPseudoTagId);
             }
@@ -801,16 +811,6 @@ namespace MusicBeePlugin
             }
             try
             {
-                file1.WriteLine("Adding " + NullTagName + " / " + NullTagId);
-                TagNamesIds.Add(NullTagName, NullTagId);
-            }
-            catch (ArgumentException)
-            {
-                wereErrors = true;
-                file1.WriteLine("Cant add " + NullTagName + " / " + NullTagId);
-            }
-            try
-            {
                 file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Custom1) + " / " + MetaDataType.Custom1);
                 TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Custom1), MetaDataType.Custom1);
             }
@@ -1273,6 +1273,9 @@ namespace MusicBeePlugin
             file1.Close();
 
 
+            TagIdsNames.Add(AllTagsPseudoTagId, AllTagsPseudoTagName);
+            TagIdsNames.Add(NullTagId, NullTagName);
+
             TagIdsNames.Add(MetaDataType.TrackTitle, MbApiInterface.Setting_GetFieldName(MetaDataType.TrackTitle));
             TagIdsNames.Add(MetaDataType.Album, AlbumTagName);
             TagIdsNames.Add(MetaDataType.AlbumArtist, DisplayedAlbumArtistName);
@@ -1342,9 +1345,6 @@ namespace MusicBeePlugin
             TagIdsNames.Add(LyricsId, LyricsName);
             TagIdsNames.Add(SynchronisedLyricsId, SynchronisedLyricsName);
             TagIdsNames.Add(UnsynchronisedLyricsId, UnsynchronisedLyricsName);
-
-            TagIdsNames.Add(AllTagsPseudoTagId, AllTagsPseudoTagName);
-            TagIdsNames.Add(NullTagId, NullTagName);
 
             TagIdsNames.Add(MetaDataType.Custom1, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom1));
             TagIdsNames.Add(MetaDataType.Custom2, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom2));

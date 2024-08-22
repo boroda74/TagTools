@@ -1462,7 +1462,7 @@ namespace MusicBeePlugin
             string stringnumber;
 
             var fractionalpart = Regex.Replace(input, @"^(\D*?)(\d+)(\.|\,)?(\d*?)(\s*)" + units + @"(\D.*)$", "$4", RegexOptions.IgnoreCase);
-            if (fractionalpart == string.Empty || fractionalpart == input)
+            if (string.IsNullOrEmpty(fractionalpart) || fractionalpart == input)
                 stringnumber = Regex.Replace(input, @"^(\D*?)(\d+)(\.|\,)?(\d*?)(\s*)" + units + @"(\D.*)$", "$2", RegexOptions.IgnoreCase);
             else
                 stringnumber = Regex.Replace(input, @"^(\D*?)(\d+)(\.|\,)?(\d*?)(\s*)" + units + @"(\D.*)$", "$2" + LocalizedDecimalPoint + "$4", RegexOptions.IgnoreCase);
@@ -1493,7 +1493,7 @@ namespace MusicBeePlugin
             string stringnumber;
 
             var fractionalpart = Regex.Replace(input, @"^(\D*?)(\d+)(\.|\,)?(\d*?)(\s*)(\D*)$", "$4", RegexOptions.IgnoreCase);
-            if (fractionalpart == string.Empty || fractionalpart == input)
+            if (string.IsNullOrEmpty(fractionalpart) || fractionalpart == input)
                 stringnumber = Regex.Replace(input, @"^(\D*?)(\d+)(\.|\,)?(\d*?)(\s*)(\D*)$", "$2", RegexOptions.IgnoreCase);
             else
                 stringnumber = Regex.Replace(input, @"^(\D*?)(\d+)(\.|\,)?(\d*?)(\s*)(\D*)$", "$2" + LocalizedDecimalPoint + "$4", RegexOptions.IgnoreCase);
@@ -1526,7 +1526,7 @@ namespace MusicBeePlugin
                 resultS = arg
             };
 
-            if (arg == string.Empty)
+            if (string.IsNullOrEmpty(arg))
             {
                 result.resultD = 0;
                 result.resultS = string.Empty;
@@ -1960,11 +1960,11 @@ namespace MusicBeePlugin
             var trackNo = GetFileTag(currentFile, MetaDataType.TrackNo);
 
             trackRepresentation += diskNo;
-            trackRepresentation += (trackRepresentation == string.Empty) ? (trackNo) : ("-" + trackNo);
-            trackRepresentation += (trackRepresentation == string.Empty) ? string.Empty : ". ";
+            trackRepresentation += string.IsNullOrEmpty(trackRepresentation) ? (trackNo) : ("-" + trackNo);
+            trackRepresentation += string.IsNullOrEmpty(trackRepresentation) ? string.Empty : ". ";
             trackRepresentation += displayedArtist;
-            trackRepresentation += (trackRepresentation == string.Empty) ? (album) : (" - " + album);
-            trackRepresentation += (trackRepresentation == string.Empty) ? (title) : (" - " + title);
+            trackRepresentation += string.IsNullOrEmpty(trackRepresentation) ? (album) : (" - " + album);
+            trackRepresentation += string.IsNullOrEmpty(trackRepresentation) ? (title) : (" - " + title);
 
             return trackRepresentation;
         }
@@ -1974,12 +1974,12 @@ namespace MusicBeePlugin
             var trackRepresentation = string.Empty;
 
             trackRepresentation += tags[12]; //12 - track number
-            trackRepresentation += (trackRepresentation == string.Empty) ? tags[28] : ("-" + tags[28]); //28 - disk number
-            trackRepresentation += (trackRepresentation == string.Empty) ? string.Empty : ". ";
+            trackRepresentation += string.IsNullOrEmpty(trackRepresentation) ? tags[28] : ("-" + tags[28]); //28 - disk number
+            trackRepresentation += string.IsNullOrEmpty(trackRepresentation) ? string.Empty : ". ";
 
             trackRepresentation += tags[5]; //5 - Album artist or artist
-            trackRepresentation += (trackRepresentation == string.Empty) ? tags[3] : (" - " + tags[3]); //3 - album name
-            trackRepresentation += (trackRepresentation == string.Empty) ? tags[2] : (" - " + tags[2]); //2 - track tiltle
+            trackRepresentation += string.IsNullOrEmpty(trackRepresentation) ? tags[3] : (" - " + tags[3]); //3 - album name
+            trackRepresentation += string.IsNullOrEmpty(trackRepresentation) ? tags[2] : (" - " + tags[2]); //2 - track tiltle
 
             trackRepresentation += " (";
 
@@ -2207,7 +2207,7 @@ namespace MusicBeePlugin
                     var rawArtist = MbApiInterface.Library_GetFileTag(sourceFileUrl, MetaDataType.Artist);
                     var multiArtist = MbApiInterface.Library_GetFileTag(sourceFileUrl, MetaDataType.MultiArtist);
 
-                    if (multiArtist != string.Empty)
+                    if (!string.IsNullOrEmpty(multiArtist))
                         tag = multiArtist;
                     else
                         tag = rawArtist;
@@ -2221,7 +2221,7 @@ namespace MusicBeePlugin
                     var rawComposer = MbApiInterface.Library_GetFileTag(sourceFileUrl, MetaDataType.Composer);
                     var multiComposer = MbApiInterface.Library_GetFileTag(sourceFileUrl, MetaDataType.MultiComposer);
 
-                    if (multiComposer != string.Empty)
+                    if (!string.IsNullOrEmpty(multiComposer))
                         tag = multiComposer;
                     else
                         tag = rawComposer;
@@ -2248,7 +2248,7 @@ namespace MusicBeePlugin
 
                     if (normalizeTrackRatingTo0_100Range)
                     {
-                        if (tag != string.Empty)
+                        if (!string.IsNullOrEmpty(tag))
                         {
                             if (!decimal.TryParse(tag, out var rating))
                                 rating = 0;
@@ -2373,7 +2373,7 @@ namespace MusicBeePlugin
                         break;
 
                     case ComposerComposersId:
-                        if (tags[i] == string.Empty)
+                        if (string.IsNullOrEmpty(tags[i]))
                             tags[i] = MbApiInterface.Library_GetFileTag(sourceFileUrl, MetaDataType.Composer);
                         break;
 
@@ -2941,7 +2941,7 @@ namespace MusicBeePlugin
             if (sbSetFilesAsItems)
                 SbItemNames = SbItems;
 
-            if (LastCommandSbText == string.Empty)
+            if (string.IsNullOrEmpty(LastCommandSbText))
             {
                 SetStatusBarText(string.Empty, false);
                 return;
@@ -6688,7 +6688,7 @@ namespace MusicBeePlugin
                 return duration;
         }
 
-        public string[] CustomFunctionHelpText(bool shortText)//----------------
+        public string[] CustomFunctionHelpText(bool shortText)//****
         {
             if (shortText)
                 return new string[]
@@ -6767,7 +6767,7 @@ namespace MusicBeePlugin
             if (SavedSettings.dontShowAsr)
                 return "ASR is disabled!";
 
-            if (presetId == string.Empty)
+            if (string.IsNullOrEmpty(presetId))
                 return string.Empty;
 
             return GetLastReplacedTag(url, IdsAsrPresets[presetId]) ?? string.Empty;

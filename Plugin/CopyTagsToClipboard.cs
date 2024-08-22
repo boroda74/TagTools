@@ -220,7 +220,7 @@ namespace MusicBeePlugin
 
             clipboardText = clipboardText.Remove(clipboardText.Length - 1);
 
-            //if (clipboardText == string.Empty)
+            //if (string.IsNullOrEmpty(clipboardText))
             //   clipboardText = "\u0000";
 
 

@@ -26,7 +26,7 @@ namespace MusicBeePlugin
 		private const int nMargin = 5;
         private Color mBackColor = SystemColors.Control;
         private Color mBorderColor = SystemColors.ControlDark;
-        private bool suspendPainting = false; // There is a freeze on maximizing form, let's turn off redrawing temporary
+		private StringAlignment tabTextAlignment = StringAlignment.Near;
 
         public FlatTabControl()
 		{
@@ -84,7 +84,7 @@ namespace MusicBeePlugin
 
 		internal void DrawControl(Graphics g)
 		{
-			if (!Visible || suspendPainting)
+			if (!Visible)
 				return;
 
 			Rectangle TabControlArea = this.ClientRectangle;
@@ -171,15 +171,23 @@ namespace MusicBeePlugin
 			Point[] pt = new Point[7];
 			if (this.Alignment == TabAlignment.Top)
 			{
-				pt[0] = new Point(recBounds.Left, recBounds.Bottom);
-				pt[1] = new Point(recBounds.Left, recBounds.Top + 3);
-				pt[2] = new Point(recBounds.Left + 3, recBounds.Top);
-				pt[3] = new Point(recBounds.Right - 3, recBounds.Top);
-				pt[4] = new Point(recBounds.Right, recBounds.Top + 3);
-				pt[5] = new Point(recBounds.Right, recBounds.Bottom);
-				pt[6] = new Point(recBounds.Left, recBounds.Bottom);
-			}
-			else
+				//pt[0] = new Point(recBounds.Left, recBounds.Bottom);
+				//pt[1] = new Point(recBounds.Left, recBounds.Top + 3);
+				//pt[2] = new Point(recBounds.Left + 3, recBounds.Top);
+				//pt[3] = new Point(recBounds.Right - 3, recBounds.Top);
+				//pt[4] = new Point(recBounds.Right, recBounds.Top + 3);
+				//pt[5] = new Point(recBounds.Right, recBounds.Bottom);
+				//pt[6] = new Point(recBounds.Left, recBounds.Bottom);
+
+                pt[0] = new Point(recBounds.Left, recBounds.Bottom);//------
+                pt[1] = new Point(recBounds.Left, recBounds.Top + 3);
+                pt[2] = new Point(recBounds.Left + 3, recBounds.Top);
+                pt[3] = new Point(recBounds.Right - 3, recBounds.Top);
+                pt[4] = new Point(recBounds.Right, recBounds.Top + 3);
+                pt[5] = new Point(recBounds.Right, recBounds.Bottom);
+                pt[6] = new Point(recBounds.Left, recBounds.Bottom);
+            }
+            else
 			{
 				pt[0] = new Point(recBounds.Left, recBounds.Top);
 				pt[1] = new Point(recBounds.Right, recBounds.Top);
@@ -254,16 +262,22 @@ namespace MusicBeePlugin
 			//----------------------------
 			// draw string
 			StringFormat stringFormat = new StringFormat();
-			stringFormat.Alignment = StringAlignment.Center;  
+			stringFormat.Alignment = tabTextAlignment;  
 			stringFormat.LineAlignment = StringAlignment.Center;
 
 			br = new SolidBrush(tabPage.ForeColor);
 
-			g.DrawString(tabPage.Text, Font, br, tabTextArea, stringFormat);
-			//----------------------------
-		}
+            if (tabTextAlignment == StringAlignment.Near)
+                g.DrawString("  " + tabPage.Text, Font, br, tabTextArea, stringFormat);
+            else if (tabTextAlignment == StringAlignment.Far)
+                g.DrawString(tabPage.Text + "  ", Font, br, tabTextArea, stringFormat);
+			else
+                g.DrawString(tabPage.Text, Font, br, tabTextArea, stringFormat);
 
-		internal void DrawIcons(Graphics g)
+            //----------------------------
+        }
+
+        internal void DrawIcons(Graphics g)
 		{
 			if ((leftRightImages == null) || (leftRightImages.Images.Count != 4))
 				return;
@@ -505,16 +519,15 @@ namespace MusicBeePlugin
             set { mBorderColor = value; this.Invalidate(); }
         }
 
-        [Browsable(false)]
-        public bool SuspendPainting // There is a freeze on maximizing form, let's turn off redrawing temporary
+        [Browsable(true)]
+        public StringAlignment TabTextAlignment
         {
-            get { return suspendPainting; }
-            set { suspendPainting = value; if (value) this.Invalidate(); }
+            get { return tabTextAlignment; }
+            set { tabTextAlignment = value; this.Invalidate(); }
         }
         #endregion
 
         #region TabpageExCollectionEditor
-
         internal class TabpageExCollectionEditor : CollectionEditor
 		{
 			public TabpageExCollectionEditor(System.Type type): base(type)
@@ -526,7 +539,6 @@ namespace MusicBeePlugin
 				return typeof(TabPage);
 			}
 		}
-        
 		#endregion
 	}
 

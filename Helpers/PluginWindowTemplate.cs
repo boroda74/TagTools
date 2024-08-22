@@ -85,10 +85,10 @@ namespace MusicBeePlugin
         protected Color buttonDisabledBackColor;
 
 
-        //Skin button labels for rendering disabled buttons & combo boxes
+        //Skin button labels for rendering disabled buttons, combo boxes & contol borders
         protected Dictionary<Button, string> buttonLabels = new Dictionary<Button, string>();
         protected Dictionary<Control, string> controlCueBanners = new Dictionary<Control, string>();
-        protected List<ComboBox> dropDownStyleComboBox = new List<ComboBox>();
+        internal List<ControlBorder> controlBorders = new List<ControlBorder>();
 
         protected Control lastSelectedControl;
 
@@ -156,10 +156,12 @@ namespace MusicBeePlugin
             return false;
         }
 
-        internal void SetComboBoxCue(CustomComboBox comboBox, string cue, bool forceCue = false)
+        internal void SetComboBoxCue(CustomComboBox comboBox, string cue)
         {
-            controlCueBanners.AddReplace(comboBox, cue);
-            comboBox.SetCue(cue, forceCue);
+            if (comboBox.comboBox != null)
+                controlCueBanners.AddReplace(comboBox.comboBox, cue);
+
+            comboBox.SetCue(cue);
         }
 
         internal void SetComboBoxCue(ComboBox comboBox, string cue)
@@ -172,26 +174,6 @@ namespace MusicBeePlugin
         {
             controlCueBanners.RemoveExisting(comboBox);
             comboBox.ClearCue();
-        }
-
-        internal void comboBox_EnabledChanged(object sender, EventArgs e)
-        {
-            var comboBox = sender as ComboBox;
-
-            if (dropDownStyleComboBox.Contains(comboBox))
-            {
-                if (comboBox.IsEnabled())
-                {
-                    comboBox.DropDownStyle = ComboBoxStyle.DropDown;
-
-                    if (comboBox.Text == string.Empty && controlCueBanners.TryGetValue(comboBox, out var banner))
-                        comboBox.Text = banner;
-                }
-                else
-                {
-                    comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-                }
-            }
         }
 
         private void comboBox_DrawItem(object sender, DrawItemEventArgs e)
@@ -322,7 +304,6 @@ namespace MusicBeePlugin
 
             //Render the text onto the button.
             TextRenderer.DrawText(e.Graphics, text, button.Font, e.ClipRectangle, button.ForeColor, flags);
-            Application.DoEvents();//************
         }
 
         internal void button_TextChanged(object sender, EventArgs e)
@@ -337,8 +318,7 @@ namespace MusicBeePlugin
                 if (useSkinColors)
                 {
                     button.Text = string.Empty;
-                    button.Invalidate();//***********
-                    Application.DoEvents();//************
+                    button.Invalidate();
                 }
             }
         }
@@ -530,7 +510,7 @@ namespace MusicBeePlugin
             var control2NamesX = control2NameX.Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
             var control2NamesY = control2NameY.Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
 
-            if (remarks == string.Empty)
+            if (string.IsNullOrEmpty(remarks))
                 return (tagValue, control2NamesX, control2NamesY, scaledMovedL, scaledMovedR, scaledMovedT, scaledMovedB, Array.Empty<string>());
             else
                 return (tagValue, control2NamesX, control2NamesY, scaledMovedL, scaledMovedR, scaledMovedT, scaledMovedB, remarks.Split('@'));
@@ -2692,14 +2672,6 @@ namespace MusicBeePlugin
                         //For rendering high contrast cue banners. Works with DropDownLists only.
                         customComboBox.comboBox.DrawItem += comboBox_DrawItem;
                         customComboBox.comboBox.DrawMode = DrawMode.OwnerDrawFixed;
-
-                        if (comboBox.DropDownStyle == ComboBoxStyle.DropDown) //DropDown looks ugly if disabled. Let's handle this
-                        {
-                            dropDownStyleComboBox.Add(customComboBox.comboBox);
-
-                            customComboBox.comboBox.EnabledChanged += comboBox_EnabledChanged;
-                            comboBox_EnabledChanged(customComboBox.comboBox, null);
-                        }
                     }
                     else
                     {
@@ -2721,7 +2693,7 @@ namespace MusicBeePlugin
                 flatTabControl.Left -= 2;
                 flatTabControl.Width += 4;
 
-                flatTabControl.Top -= 2;//---------------- incorrect dpi scaling!!!
+                flatTabControl.Top -= 2;
                 flatTabControl.Height += 4;
 
                 for (int i = 0; i < flatTabControl.TabCount; i++)
@@ -3503,12 +3475,7 @@ namespace MusicBeePlugin
 
         protected virtual void childClassFormShown()
         {
-            //Must be implemented in child classes...
-        }
-
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            base.OnPaint(e);
+            //Must be implemented in child classes. It is called before main processing of PluginWindowTemplate_Shown().
         }
 
         protected virtual void OnMaximizing()
@@ -3552,7 +3519,7 @@ namespace MusicBeePlugin
                 /// wParam value by using the bitwise AND operator.
                 int wParam = (m.WParam.ToInt32() & 0xFFF0);
 
-                if (wParam == SC_MAXIMIZE)//---------
+                if (wParam == SC_MAXIMIZE)
                     OnMaximizing();
                 else if (wParam == SC_MINIMIZE)
                     ; //Nothing for now...

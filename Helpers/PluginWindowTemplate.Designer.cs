@@ -22,8 +22,11 @@
             {
                 base.Dispose(disposing);
 
-                foreach (var customCombox in namesComboBoxes.Values)
-                    customCombox.Dispose();
+                foreach (var customComboBox in namesComboBoxes.Values)
+                    customComboBox.Dispose();
+
+                foreach (var controlBorder in controlBorders)
+                    controlBorder.Dispose();
             }
         }
 

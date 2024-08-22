@@ -221,7 +221,7 @@ namespace MusicBeePlugin
                 {
                     Bitmap artwork;
 
-                    if (tagValues[j] == string.Empty)
+                    if (string.IsNullOrEmpty(tagValues[j]))
                         artwork = emptyArtwork;
                     else
                         artwork = typeConverter.ConvertFrom(Convert.FromBase64String(tagValues[j])) as Bitmap;

@@ -117,30 +117,24 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
+    <value>887, 6</value>
+  </data>
   <data name="buttonClose.Text" xml:space="preserve">
     <value>Отмена</value>
   </data>
-  <data name="buttonClose.ToolTip" xml:space="preserve">
-    <value />
+  <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
+    <value>779, 6</value>
   </data>
-  <data name="buttonOK.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>651, 15</value>
   </data>
   <data name="label6.Text" xml:space="preserve">
     <value>Настройки дополнительных инструментов (при изменении некоторых настроек потребуется перезапуск MusicBee)</value>
   </data>
-  <data name="label6.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="versionLabel.Text" xml:space="preserve">
     <value>Версия: </value>
-  </data>
-  <data name="versionLabel.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="playTickedAsrPresetSoundCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>449, 15</value>
@@ -148,23 +142,11 @@
   <data name="playTickedAsrPresetSoundCheckBoxLabel.Text" xml:space="preserve">
     <value>Проиграть звук при отметке пресета ДПЗ/ОБ для автоматического применения</value>
   </data>
-  <data name="playTickedAsrPresetSoundCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="playTickedAsrPresetSoundCheckBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="playStoppedSoundCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>466, 15</value>
   </data>
   <data name="playStoppedSoundCheckBoxLabel.Text" xml:space="preserve">
     <value>Проиграть системный звук "Стоп", когда фоновая задача отменена пользователем</value>
-  </data>
-  <data name="playStoppedSoundCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="playStoppedSoundCheckBox.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="playStartedSoundCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>435, 15</value>
@@ -172,23 +154,11 @@
   <data name="playStartedSoundCheckBoxLabel.Text" xml:space="preserve">
     <value>Проиграть системный звук "Восклицание", когда фоновая задача начинается</value>
   </data>
-  <data name="playStartedSoundCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="playStartedSoundCheckBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="playCompletedSoundCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>500, 15</value>
   </data>
   <data name="playCompletedSoundCheckBoxLabel.Text" xml:space="preserve">
     <value>Проиграть системный звук "Звездочка", когда фоновая задача завершается/остановлена</value>
-  </data>
-  <data name="playCompletedSoundCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="playCompletedSoundCheckBox.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>45, 15</value>
@@ -196,11 +166,8 @@
   <data name="label9.Text" xml:space="preserve">
     <value> Звуки </value>
   </data>
-  <data name="label9.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="groupBox3.ToolTip" xml:space="preserve">
-    <value />
+  <data name="groupBox4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>878, 110</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>339, 15</value>
@@ -208,17 +175,11 @@
   <data name="label4.Text" xml:space="preserve">
     <value>Единица измерения миллиардов (например, "Г" для "Гига"):</value>
   </data>
-  <data name="label4.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>343, 15</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>Единица измерения миллионов (например, "М" для "Мега"):</value>
-  </data>
-  <data name="label3.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>308, 15</value>
@@ -226,38 +187,14 @@
   <data name="label2.Text" xml:space="preserve">
     <value>Единица измерения тысяч (например, "К" для "Кило"):</value>
   </data>
-  <data name="label2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
     <value>640, 15</value>
   </data>
   <data name="label11.Text" xml:space="preserve">
     <value> Команда "Отчеты по библиотеке" (не нужно для русской и английской локализации Windows, регистр не важен) </value>
   </data>
-  <data name="label11.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="unitGBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="unitMBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="unitKBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="unitsPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>436, 0</value>
-  </data>
-  <data name="unitsPanel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="groupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>878, 110</value>
-  </data>
-  <data name="groupBox4.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="saveLastSkippedButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>483, 6</value>
@@ -268,23 +205,17 @@
   <data name="saveLastSkippedButton.Text" xml:space="preserve">
     <value>Сохранять дату последнего пропуска трека...</value>
   </data>
-  <data name="saveLastSkippedButton.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="useSkinColorsCheckBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="closeHiddenCommandWindowsRadioButton.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="showHiddenCommandWindowsRadioButton.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="highlightChangedTagsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>640, 21</value>
   </data>
-  <data name="highlightChangedTagsCheckBox.ToolTip" xml:space="preserve">
-    <value />
+  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>947, 142</value>
+  </data>
+  <data name="legendGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>640, 39</value>
+  </data>
+  <data name="legendGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>297, 93</value>
   </data>
   <data name="preservedTagValuesLegendTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>279, 19</value>
@@ -292,17 +223,11 @@
   <data name="preservedTagValuesLegendTextBox.Text" xml:space="preserve">
     <value>Пропущенные значения тегов</value>
   </data>
-  <data name="preservedTagValuesLegendTextBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="preservedTagsLegendTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>279, 19</value>
   </data>
   <data name="preservedTagsLegendTextBox.Text" xml:space="preserve">
     <value>Пропущенные теги</value>
-  </data>
-  <data name="preservedTagsLegendTextBox.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="changedLegendTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>279, 19</value>
@@ -319,18 +244,6 @@
   <data name="legendLabel.Text" xml:space="preserve">
     <value> Цвета предварительного просмотра </value>
   </data>
-  <data name="legendLabel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="legendGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>640, 39</value>
-  </data>
-  <data name="legendGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>297, 93</value>
-  </data>
-  <data name="legendGroupBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="highlightChangedTagsCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>661, 21</value>
   </data>
@@ -340,17 +253,11 @@
   <data name="highlightChangedTagsCheckBoxLabel.Text" xml:space="preserve">
     <value>Подсвечивать измененные теги</value>
   </data>
-  <data name="highlightChangedTagsCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="showHiddenCommandWindowsRadioButtonLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>466, 15</value>
   </data>
   <data name="showHiddenCommandWindowsRadioButtonLabel.Text" xml:space="preserve">
     <value>Показывать скрытое окно плагина, когда его фоновая задача завершена/прервана</value>
-  </data>
-  <data name="showHiddenCommandWindowsRadioButtonLabel.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="closeHiddenCommandWindowsRadioButtonLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>459, 15</value>
@@ -358,35 +265,20 @@
   <data name="closeHiddenCommandWindowsRadioButtonLabel.Text" xml:space="preserve">
     <value>Закрывать скрытое окно плагина, когда его фоновая задача завершена/прервана</value>
   </data>
-  <data name="closeHiddenCommandWindowsRadioButtonLabel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="minimizePluginWindowsCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>361, 15</value>
   </data>
   <data name="minimizePluginWindowsCheckBoxLabel.Text" xml:space="preserve">
     <value>Минимизировать окна плагина, вместо того чтобы скрывать их</value>
   </data>
-  <data name="minimizePluginWindowsCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="minimizePluginWindowsCheckBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="customFontButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>610, 39</value>
-  </data>
-  <data name="customFontButton.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="customFontTextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>428, 39</value>
   </data>
   <data name="customFontTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>176, 23</value>
-  </data>
-  <data name="customFontTextBox.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="useCustomFontCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>254, 42</value>
@@ -397,14 +289,8 @@
   <data name="useCustomFontCheckBoxLabel.Text" xml:space="preserve">
     <value>Использовать свой шрифт **</value>
   </data>
-  <data name="useCustomFontCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="useCustomFontCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>233, 42</value>
-  </data>
-  <data name="useCustomFontCheckBox.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="useMusicBeeFontCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>193, 15</value>
@@ -412,20 +298,11 @@
   <data name="useMusicBeeFontCheckBoxLabel.Text" xml:space="preserve">
     <value>Использовать шрифт MusicBee **</value>
   </data>
-  <data name="useMusicBeeFontCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="useMusicBeeFontCheckBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="useSkinColorsCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>162, 15</value>
   </data>
   <data name="useSkinColorsCheckBoxLabel.Text" xml:space="preserve">
     <value>Использовать цвета темы **</value>
-  </data>
-  <data name="useSkinColorsCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 15</value>
@@ -433,53 +310,11 @@
   <data name="label8.Text" xml:space="preserve">
     <value> Оформление </value>
   </data>
-  <data name="label8.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>947, 142</value>
-  </data>
-  <data name="groupBox2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="showReEncodeTagCheckBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="showChangeCaseCheckBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="showLibraryReportsCheckBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="showCopyTagCheckBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="showAutoRateCheckBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="showSwapTagsCheckBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="showAsrCheckBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="showShowHiddenWindowsCheckBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="showCARCheckBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="showBackupRestoreCheckBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="contextMenuCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>410, 63</value>
   </data>
-  <data name="contextMenuCheckBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="showCTCheckBox.ToolTip" xml:space="preserve">
-    <value />
+  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>947, 258</value>
   </data>
   <data name="contextMenuCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>431, 63</value>
@@ -490,9 +325,6 @@
   <data name="contextMenuCheckBoxLabel.Text" xml:space="preserve">
     <value>Показывать команды в контекстном меню</value>
   </data>
-  <data name="contextMenuCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="allowCommandExecutionWithoutPreviewCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>431, 42</value>
   </data>
@@ -502,14 +334,8 @@
   <data name="allowCommandExecutionWithoutPreviewCheckBoxLabel.Text" xml:space="preserve">
     <value>Разрешить выполнение команд без предварительного просмотра изменений *</value>
   </data>
-  <data name="allowCommandExecutionWithoutPreviewCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="allowCommandExecutionWithoutPreviewCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>410, 42</value>
-  </data>
-  <data name="allowCommandExecutionWithoutPreviewCheckBox.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="allowAsrLrPresetAutoExecutionCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>431, 21</value>
@@ -520,14 +346,8 @@
   <data name="allowAsrLrPresetAutoExecutionCheckBoxLabel.Text" xml:space="preserve">
     <value>Разрешить автоматическое применение пресетов ДПЗ/ОБ</value>
   </data>
-  <data name="allowAsrLrPresetAutoExecutionCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="allowAsrLrPresetAutoExecutionCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>410, 21</value>
-  </data>
-  <data name="allowAsrLrPresetAutoExecutionCheckBox.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="showShowHiddenWindowsCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>481, 15</value>
@@ -535,17 +355,11 @@
   <data name="showShowHiddenWindowsCheckBoxLabel.Text" xml:space="preserve">
     <value>Показывать в меню пункт "Показать скрытые/восстановить свернутые окна плагина"</value>
   </data>
-  <data name="showShowHiddenWindowsCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="showBackupRestoreCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>279, 15</value>
   </data>
   <data name="showBackupRestoreCheckBoxLabel.Text" xml:space="preserve">
     <value>Включить команды архивации и восстановления</value>
-  </data>
-  <data name="showBackupRestoreCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="showCTCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>211, 15</value>
@@ -553,17 +367,11 @@
   <data name="showCTCheckBoxLabel.Text" xml:space="preserve">
     <value>Включить команду "Сравнить треки"</value>
   </data>
-  <data name="showCTCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="showCARCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>340, 15</value>
   </data>
   <data name="showCARCheckBoxLabel.Text" xml:space="preserve">
     <value>Включить команду "Рассчитать средний рейтинг альбомов"</value>
-  </data>
-  <data name="showCARCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="showAsrCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>514, 15</value>
@@ -571,17 +379,11 @@
   <data name="showAsrCheckBoxLabel.Text" xml:space="preserve">
     <value>Включить команды "Дополнительные поиск и замена" / "Множественный поиск и замена"</value>
   </data>
-  <data name="showAsrCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="showAutoRateCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>328, 15</value>
   </data>
   <data name="showAutoRateCheckBoxLabel.Text" xml:space="preserve">
     <value>Включить команду "Автоматически установить рейтинги"</value>
-  </data>
-  <data name="showAutoRateCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="showLibraryReportsCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>251, 15</value>
@@ -590,17 +392,11 @@
     <value>Включить команду "Отчеты по библиотеке"
 </value>
   </data>
-  <data name="showLibraryReportsCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="showReEncodeTagCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>265, 15</value>
   </data>
   <data name="showReEncodeTagCheckBoxLabel.Text" xml:space="preserve">
     <value>Включить команду "Изменить кодировку тега"</value>
-  </data>
-  <data name="showReEncodeTagCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="showChangeCaseCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>250, 15</value>
@@ -608,17 +404,11 @@
   <data name="showChangeCaseCheckBoxLabel.Text" xml:space="preserve">
     <value>Включить команду "Изменить регистр тега"</value>
   </data>
-  <data name="showChangeCaseCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="showSwapTagsCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>277, 15</value>
   </data>
   <data name="showSwapTagsCheckBoxLabel.Text" xml:space="preserve">
     <value>Включить команду "Поменять местами два тега"</value>
-  </data>
-  <data name="showSwapTagsCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="showCopyTagCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>209, 15</value>
@@ -626,23 +416,14 @@
   <data name="showCopyTagCheckBoxLabel.Text" xml:space="preserve">
     <value>Включить команду "Копировать тег"</value>
   </data>
-  <data name="showCopyTagCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>117, 15</value>
   </data>
   <data name="label7.Text" xml:space="preserve">
     <value> Выберите команды</value>
   </data>
-  <data name="label7.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>947, 258</value>
-  </data>
-  <data name="groupBox1.ToolTip" xml:space="preserve">
-    <value />
+  <data name="groupBox5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>878, 90</value>
   </data>
   <data name="includePreservedTagValuesCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>769, 15</value>
@@ -650,23 +431,11 @@
   <data name="includePreservedTagValuesCheckBoxLabel.Text" xml:space="preserve">
     <value>Включать в предварительный просмотр строки, содержащие только игнорированные значения тегов (Дополнительный поиск и замена)</value>
   </data>
-  <data name="includePreservedTagValuesCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="includePreservedTagValuesCheckBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="includePreservedTagsCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>709, 15</value>
   </data>
   <data name="includePreservedTagsCheckBoxLabel.Text" xml:space="preserve">
     <value>Включать в предварительный просмотр строки, содержащие только игнорированные теги (Дополнительный поиск и замена)</value>
-  </data>
-  <data name="includePreservedTagsCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="includePreservedTagsCheckBox.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="includeNotChangedTagsCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>544, 15</value>
@@ -674,26 +443,11 @@
   <data name="includeNotChangedTagsCheckBoxLabel.Text" xml:space="preserve">
     <value>Включать в предварительный просмотр строки, не содержащие измененные теги (все команды)</value>
   </data>
-  <data name="includeNotChangedTagsCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="includeNotChangedTagsCheckBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
     <value>149, 15</value>
   </data>
   <data name="label10.Text" xml:space="preserve">
     <value> Фильтрация результатов </value>
-  </data>
-  <data name="label10.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="groupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>878, 90</value>
-  </data>
-  <data name="groupBox5.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>424, 15</value>
@@ -701,17 +455,11 @@
   <data name="label1.Text" xml:space="preserve">
     <value>*  Требуется перезапуск MusicBee, чтобы новые настройки вступили в силу</value>
   </data>
-  <data name="label1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>476, 15</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
     <value>**  Требуется заново открыть окна плагина, чтобы новые настройки вступили в силу</value>
-  </data>
-  <data name="label5.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="buttonsPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 624</value>
@@ -719,8 +467,8 @@
   <data name="buttonsPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>994, 35</value>
   </data>
-  <data name="buttonsPanel.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>980, 565</value>
   </data>
   <data name="tabPage1.Size" type="System.Drawing.Size, System.Drawing">
     <value>972, 537</value>
@@ -728,34 +476,19 @@
   <data name="tabPage1.Text" xml:space="preserve">
     <value>Поведение</value>
   </data>
-  <data name="tabPage1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="tabPage2.Size" type="System.Drawing.Size, System.Drawing">
     <value>972, 537</value>
   </data>
   <data name="tabPage2.Text" xml:space="preserve">
     <value>Обработка</value>
   </data>
-  <data name="tabPage2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>980, 565</value>
-  </data>
-  <data name="tabControl1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>994, 661</value>
+    <value>996, 663</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>1010, 700</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Настройки</value>
-  </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
   </data>
 </root>

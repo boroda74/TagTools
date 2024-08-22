@@ -431,10 +431,10 @@ namespace MusicBeePlugin
             nameBox.Text = GetDictValue(preset.names, currentLanguage);
             descriptionBox.Text = GetDictValue(preset.descriptions, currentLanguage);
 
-            if (nameBox.Text == string.Empty)
+            if (string.IsNullOrEmpty(nameBox.Text))
                 nameBox.Text = prevName;
 
-            if (descriptionBox.Text == string.Empty)
+            if (string.IsNullOrEmpty(descriptionBox.Text))
                 descriptionBox.Text = prevDescription;
         }
 

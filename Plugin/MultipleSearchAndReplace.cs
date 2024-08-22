@@ -871,7 +871,7 @@ namespace MusicBeePlugin
             //if (!ignoreTemplateNameTextBoxTextChanged)
             //   loadComboBoxCustom.SelectedIndex = 0;
 
-            if (templateNameTextBox.Text == string.Empty)
+            if (string.IsNullOrEmpty(templateNameTextBox.Text))
                 buttonSave.Enable(false);
             else
                 buttonSave.Enable(true);

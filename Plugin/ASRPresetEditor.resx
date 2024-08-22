@@ -361,7 +361,7 @@
     <value>Left, Right</value>
   </data>
   <data name="searchedTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>800, 3</value>
+    <value>800, 2</value>
   </data>
   <data name="searchedTagList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
@@ -388,7 +388,7 @@
     <value>Left, Right</value>
   </data>
   <data name="replacedTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>800, 31</value>
+    <value>800, 30</value>
   </data>
   <data name="replacedTagList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
@@ -517,7 +517,7 @@
     <value>3</value>
   </data>
   <data name="buttonOK.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
+    <value>Top, Right</value>
   </data>
   <data name="buttonOK.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -550,7 +550,7 @@
     <value>19</value>
   </data>
   <data name="buttonClose.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
+    <value>Top, Right</value>
   </data>
   <data name="buttonClose.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -581,9 +581,6 @@
   </data>
   <data name="&gt;&gt;buttonClose.ZOrder" xml:space="preserve">
     <value>18</value>
-  </data>
-  <data name="ignoreCaseCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
   </data>
   <data name="ignoreCaseCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1255,7 +1252,7 @@
     <value>Left, Right</value>
   </data>
   <data name="replacedTag2List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>800, 31</value>
+    <value>800, 30</value>
   </data>
   <data name="replacedTag2List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
@@ -1393,7 +1390,7 @@
     <value>Left, Right</value>
   </data>
   <data name="searchedTag2List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>800, 3</value>
+    <value>800, 2</value>
   </data>
   <data name="searchedTag2List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
@@ -1966,7 +1963,7 @@
     <value>Left, Right</value>
   </data>
   <data name="replacedTag3List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>800, 31</value>
+    <value>800, 30</value>
   </data>
   <data name="replacedTag3List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
@@ -2104,7 +2101,7 @@
     <value>Left, Right</value>
   </data>
   <data name="searchedTag3List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>800, 3</value>
+    <value>800, 2</value>
   </data>
   <data name="searchedTag3List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
@@ -2734,7 +2731,7 @@
     <value>writable +&lt;all tags&gt;</value>
   </data>
   <data name="parameterTagTypeList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>89, 3</value>
+    <value>89, 2</value>
   </data>
   <data name="parameterTagTypeList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -2773,7 +2770,7 @@
     <value>writable (incl. &lt;All Tags&gt;)</value>
   </data>
   <data name="parameterTag2TypeList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>581, 3</value>
+    <value>581, 2</value>
   </data>
   <data name="parameterTag2TypeList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -2812,7 +2809,7 @@
     <value>writable (incl. &lt;All Tags&gt;)</value>
   </data>
   <data name="parameterTag3TypeList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>89, 30</value>
+    <value>89, 29</value>
   </data>
   <data name="parameterTag3TypeList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -3962,7 +3959,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>Left, Right</value>
   </data>
   <data name="parameterTag3List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>351, 30</value>
+    <value>351, 29</value>
   </data>
   <data name="parameterTag3List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
@@ -4028,7 +4025,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>Left, Right</value>
   </data>
   <data name="parameterTag2List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>843, 3</value>
+    <value>843, 2</value>
   </data>
   <data name="parameterTag2List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
@@ -4094,7 +4091,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>Left, Right</value>
   </data>
   <data name="parameterTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>351, 3</value>
+    <value>351, 2</value>
   </data>
   <data name="parameterTagList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
@@ -4199,7 +4196,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>Left, Right</value>
   </data>
   <data name="parameterTag6List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>843, 57</value>
+    <value>843, 56</value>
   </data>
   <data name="parameterTag6List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
@@ -4265,7 +4262,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>Left, Right</value>
   </data>
   <data name="parameterTag5List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>351, 57</value>
+    <value>351, 56</value>
   </data>
   <data name="parameterTag5List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
@@ -4331,7 +4328,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>Left, Right</value>
   </data>
   <data name="parameterTag4List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>843, 30</value>
+    <value>843, 29</value>
   </data>
   <data name="parameterTag4List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
@@ -4370,7 +4367,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>writable (incl. &lt;All Tags&gt;)</value>
   </data>
   <data name="parameterTag6TypeList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>581, 57</value>
+    <value>581, 56</value>
   </data>
   <data name="parameterTag6TypeList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -4409,7 +4406,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>writable (incl. &lt;All Tags&gt;)</value>
   </data>
   <data name="parameterTag5TypeList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>89, 57</value>
+    <value>89, 56</value>
   </data>
   <data name="parameterTag5TypeList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -4448,7 +4445,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>writable (incl. &lt;All Tags&gt;)</value>
   </data>
   <data name="parameterTag4TypeList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>581, 30</value>
+    <value>581, 29</value>
   </data>
   <data name="parameterTag4TypeList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -4517,7 +4514,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>Left, Right</value>
   </data>
   <data name="replacedTag4List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>800, 31</value>
+    <value>800, 30</value>
   </data>
   <data name="replacedTag4List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
@@ -4610,7 +4607,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>Left, Right</value>
   </data>
   <data name="searchedTag4List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>800, 3</value>
+    <value>800, 2</value>
   </data>
   <data name="searchedTag4List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
@@ -4880,7 +4877,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>Left, Right</value>
   </data>
   <data name="replacedTag5List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>800, 31</value>
+    <value>800, 30</value>
   </data>
   <data name="replacedTag5List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
@@ -4973,7 +4970,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>Left, Right</value>
   </data>
   <data name="searchedTag5List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>800, 3</value>
+    <value>800, 2</value>
   </data>
   <data name="searchedTag5List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
@@ -5932,9 +5929,6 @@ Replace only if the destination tag is empty when checked</value>
   <data name="&gt;&gt;userPresetCheckBoxLabel.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="ignoreCaseCheckBoxLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
-  </data>
   <data name="ignoreCaseCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -6008,7 +6002,7 @@ Replace only if the destination tag is empty when checked</value>
     <value>7, 15</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1004, 726</value>
+    <value>1006, 728</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -6035,6 +6029,6 @@ Replace only if the destination tag is empty when checked</value>
     <value>AsrPresetEditor</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=9.0.8998.24767, Culture=neutral, PublicKeyToken=null</value>
+    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=9.0.9000.11525, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
