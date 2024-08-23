@@ -162,7 +162,7 @@ namespace MusicBeePlugin
 
             //MusicBee
             if (useSkinColors)
-                this.presetTabControl = new FlatTabControl(); //--------------------
+                this.presetTabControl = new FlatTabControl();
 
             this.presetList = new CustomCheckedListBox(Plugin.SavedSettings.dontUseSkinColors);
             this.presetNameTextBox = ControlsTools.CreateMusicBeeTextBox();

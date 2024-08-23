@@ -1,13 +1,15 @@
-﻿using ExtensionMethods;
-using System;
-using System.Reflection;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Resources;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
+
+using ExtensionMethods;
+
 using static MusicBeePlugin.Plugin;
 
 namespace MusicBeePlugin
@@ -141,14 +143,14 @@ namespace MusicBeePlugin
         {
             InitializeComponent();
 
-            this.SetStyle(ControlStyles.DoubleBuffer, true);//-----
+            this.SetStyle(ControlStyles.DoubleBuffer, true);
             this.SetStyle(ControlStyles.ResizeRedraw, true);
 
             TagToolsPlugin = plugin;
             useSkinColors = !SavedSettings.dontUseSkinColors;
         }
 
-        internal bool backgroundTaskIsWorking() //******** Check separate backgroundTaskIsStopped everywhere!!!
+        internal bool backgroundTaskIsWorking()
         {
             if (backgroundTaskIsScheduled && !backgroundTaskIsStoppedOrCancelled)
                 return true;
@@ -248,7 +250,7 @@ namespace MusicBeePlugin
         internal void button_GotFocus(object sender, EventArgs e)
         {
             var button = sender as Button;
-            var acceptButton = AcceptButton as Button; //************* AcceptButton can be null!!!!
+            var acceptButton = AcceptButton as Button;
 
             if (button == lastSelectedControl)
             {
@@ -1831,7 +1833,7 @@ namespace MusicBeePlugin
             var customHScrollBarVisibleHeight = 0;
 
 
-            bool customHScrollBarMetricsChanged = false;
+            bool customScrollBarsMetricsChanged = false;
 
             if (customHScrollBar != null)
             {
@@ -1839,7 +1841,7 @@ namespace MusicBeePlugin
 
                 if (customHScrollBar.Maximum != maximum || customHScrollBar.LargeChange != largeChange)
                 {
-                    customHScrollBarMetricsChanged = true;
+                    customScrollBarsMetricsChanged = true;
 
                     customHScrollBar.Minimum = 0;
                     customHScrollBar.Maximum = maximum;
@@ -1856,15 +1858,13 @@ namespace MusicBeePlugin
             var customVScrollBarVisibleWidth = 0;
 
 
-            bool customVScrollBarMetricsChanged = false;
-
             if (customVScrollBar != null)
             {
                 (_, int maximum, int largeChange) = GetDataGridViewScrollBarMetrics(dataGridView, customVScrollBar);
 
                 if (customVScrollBar.Maximum != maximum || customVScrollBar.LargeChange != largeChange)
                 {
-                    customVScrollBarMetricsChanged = true;
+                    customScrollBarsMetricsChanged = true;
 
                     customVScrollBar.Minimum = 0;
                     customVScrollBar.Maximum = maximum;
@@ -1876,10 +1876,10 @@ namespace MusicBeePlugin
             }
 
 
-            return (customHScrollBar, customHScrollBarVisibleHeight, customVScrollBar, customVScrollBarVisibleWidth, customHScrollBarMetricsChanged || customVScrollBarMetricsChanged);
+            return (customHScrollBar, customHScrollBarVisibleHeight, customVScrollBar, customVScrollBarVisibleWidth, customScrollBarsMetricsChanged);
         }
 
-        private static (CustomHScrollBar, int, CustomVScrollBar, int) UpdateClbCustomScrollBarsInternal(ListBox listBox)
+        private static (CustomHScrollBar, int, CustomVScrollBar, int, bool) UpdateClbCustomScrollBarsInternal(ListBox listBox)
         {
             var customHScrollBarVisibleHeight = 0;
             var customVScrollBarVisibleWidth = 0;
@@ -1890,78 +1890,103 @@ namespace MusicBeePlugin
             CustomHScrollBar hScrollBar = null;
             CustomVScrollBar vScrollBar = null;
 
+            bool customScrollBarsMetricsChanged = false;
+
             if (listBox is CustomListBox customListBox)
             {
                 hScrollBar = customListBox.hScrollBar;
                 vScrollBar = customListBox.vScrollBar;
             }
-            else if (listBox is CustomCheckedListBox box)
+            else if (listBox is CustomCheckedListBox customCheckedListBox)
             {
-                hScrollBar = box.hScrollBar;
-                vScrollBar = box.vScrollBar;
+                hScrollBar = customCheckedListBox.hScrollBar;
+                vScrollBar = customCheckedListBox.vScrollBar;
             }
 
             if (listBox.MultiColumn && hScrollBar != null)
             {
-                hScrollBar.Minimum = 0;
-                hScrollBar.Maximum = totalColumns;
-                hScrollBar.LargeChange = visibleColumns;
+                if (hScrollBar.Maximum != totalColumns || hScrollBar.LargeChange != visibleColumns)
+                {
+                    customScrollBarsMetricsChanged = true;
+
+                    hScrollBar.Minimum = 0;
+                    hScrollBar.Maximum = totalColumns;
+                    hScrollBar.LargeChange = visibleColumns;
+                }
 
                 customHScrollBarVisibleHeight = hScrollBar.Height;
             }
             else if (vScrollBar != null)
             {
-                vScrollBar.Minimum = 0;
-                vScrollBar.Maximum = listBox.Items.Count;
-                vScrollBar.LargeChange = visible1stColumnItems;
+                if (vScrollBar.Maximum != listBox.Items.Count || vScrollBar.LargeChange != visible1stColumnItems)
+                {
+                    customScrollBarsMetricsChanged = true;
+
+                    vScrollBar.Minimum = 0;
+                    vScrollBar.Maximum = listBox.Items.Count;
+                    vScrollBar.LargeChange = visible1stColumnItems;
+                }
 
                 customVScrollBarVisibleWidth = vScrollBar.Width;
             }
 
-            return (hScrollBar, customHScrollBarVisibleHeight, vScrollBar, customVScrollBarVisibleWidth);
+            return (hScrollBar, customHScrollBarVisibleHeight, vScrollBar, customVScrollBarVisibleWidth, customScrollBarsMetricsChanged);
         }
 
-        private static CustomVScrollBar UpdateTbCustomScrollBarsInternal(TextBox textBox)
+        private static (CustomVScrollBar, bool) UpdateTbCustomScrollBarsInternal(TextBox textBox)
         {
             var (totalLines, visibleLines) = GetTextBoxMetrics(textBox);
 
             var vScrollBar = ControlsTools.FindControlChild<CustomVScrollBar>(textBox.Parent);
+            bool textBoxScrollBarsMetricsChanged = false;
+
 
             if (vScrollBar != null)
             {
-                vScrollBar.Minimum = 0;
-                vScrollBar.Maximum = totalLines;
-                vScrollBar.LargeChange = visibleLines;
+                if (vScrollBar.Maximum != totalLines || vScrollBar.LargeChange != visibleLines)
+                {
+                    textBoxScrollBarsMetricsChanged = true;
+
+                    vScrollBar.Minimum = 0;
+                    vScrollBar.Maximum = totalLines;
+                    vScrollBar.LargeChange = visibleLines;
+                }
             }
 
-            return vScrollBar;
+            return (vScrollBar, textBoxScrollBarsMetricsChanged);
         }
 
-        private static CustomVScrollBar UpdateCtbCustomScrollBarsInternal(CustomTextBox textBox)
+        private static (CustomVScrollBar, bool) UpdateCtbCustomScrollBarsInternal(CustomTextBox textBox)
         {
             var (totalLines, visibleLines) = GetTextBoxMetrics(textBox);
 
             var vScrollBar = textBox.vScrollBar;
+            bool customScrollBarsMetricsChanged = false;
 
             if (vScrollBar != null)
             {
-                vScrollBar.Minimum = 0;
-                vScrollBar.Maximum = totalLines;
-                vScrollBar.LargeChange = visibleLines;
+                if (vScrollBar.Maximum != totalLines || vScrollBar.LargeChange != visibleLines)
+                {
+                    customScrollBarsMetricsChanged = true;
+
+                    vScrollBar.Minimum = 0;
+                    vScrollBar.Maximum = totalLines;
+                    vScrollBar.LargeChange = visibleLines;
+                }
             }
 
-            return vScrollBar;
+            return (vScrollBar, customScrollBarsMetricsChanged);
         }
 
         //Use -1 for columnOrItemCount/rowCount to always redraw horizontal/vertical scroll bars; 0 to never redraw them
-        internal void updateCustomScrollBars(Control scrolledControl, int columnCount = -1, int rowCount = -1)//***********
+        internal void updateCustomScrollBars(Control scrolledControl, int columnCount = -1, int rowCount = -1)
         {
             if (useSkinColors)
                 UpdateCustomScrollBars(scrolledControl, columnCount, rowCount);
         }
 
         //Use -1 for columnOrItemCount/rowCount to always redraw horizontal/vertical scroll bars; 0 to never redraw them
-        internal static void UpdateCustomScrollBars(Control scrolledControl, int columnOrItemCount = -1, int rowCount = -1)//***********
+        internal static void UpdateCustomScrollBars(Control scrolledControl, int columnOrItemCount = -1, int rowCount = -1)
         {
             CustomHScrollBar customHScrollBar = null;
             int customHScrollBarVisibleHeight = 0;
@@ -1980,25 +2005,39 @@ namespace MusicBeePlugin
 
             if (scrolledControl is DataGridView dataGridView)
             {
-                (customHScrollBar, customHScrollBarVisibleHeight, customVScrollBar, customVScrollBarVisibleWidth, customScrollBarsMetricsChanged)//********** customScrollBarsMetricsChanged to all other Update() funcs.
+                bool dataGridViewScrollBarsMetricsChanged;
+
+                (customHScrollBar, customHScrollBarVisibleHeight, customVScrollBar, customVScrollBarVisibleWidth, dataGridViewScrollBarsMetricsChanged)
                     = UpdateDgvCustomScrollBarsInternal(dataGridView);
+
+                customScrollBarsMetricsChanged |= dataGridViewScrollBarsMetricsChanged;
             }
             else if (scrolledControl is CustomListBox || scrolledControl is CustomCheckedListBox)
             {
-                (customHScrollBar, customHScrollBarVisibleHeight, customVScrollBar, customVScrollBarVisibleWidth)
+                bool listBoxScrollBarsMetricsChanged;
+
+                (customHScrollBar, customHScrollBarVisibleHeight, customVScrollBar, customVScrollBarVisibleWidth, listBoxScrollBarsMetricsChanged)
                     = UpdateClbCustomScrollBarsInternal(scrolledControl as ListBox);
+
+                customScrollBarsMetricsChanged |= listBoxScrollBarsMetricsChanged;
             }
             else if (scrolledControl is CustomTextBox control)
             {
+                bool customTextBoxScrollBarsMetricsChanged;
+
                 customVScrollBarVisibleWidth = 1; //Must be > 0 to make vert. scroll bar visible 
-                customVScrollBar
-                    = UpdateCtbCustomScrollBarsInternal(control);
+                (customVScrollBar, customTextBoxScrollBarsMetricsChanged) = UpdateCtbCustomScrollBarsInternal(control);
+
+                customScrollBarsMetricsChanged |= customTextBoxScrollBarsMetricsChanged;
             }
-            else if (scrolledControl is TextBox box)
+            else if (scrolledControl is TextBox textBox)
             {
+                bool textBoxScrollBarsMetricsChanged;
+
                 customVScrollBarVisibleWidth = 1; //Must be > 0 to make vert. scroll bar visible 
-                customVScrollBar
-                    = UpdateTbCustomScrollBarsInternal(box);
+                (customVScrollBar, textBoxScrollBarsMetricsChanged) = UpdateTbCustomScrollBarsInternal(textBox);
+
+                customScrollBarsMetricsChanged |= textBoxScrollBarsMetricsChanged;
             }
 
 
@@ -2046,7 +2085,7 @@ namespace MusicBeePlugin
             if (customScrollBar is CustomHScrollBar hScrollBar)
             {
                 int maximum = dataGridView.Columns.GetColumnsWidth(DataGridViewElementStates.Visible);
-                
+
                 int largeChange = maximum;
                 if (dataGridView.ColumnCount > 0 && dataGridView.DisplayedColumnCount(false) < dataGridView.Columns.GetColumnCount(DataGridViewElementStates.Visible))
                     largeChange = dataGridView.Columns.GetColumnsWidth(DataGridViewElementStates.Displayed) - (int)(dataGridView.Columns[dataGridView.ColumnCount - 1].Width / 1f);
@@ -2065,10 +2104,6 @@ namespace MusicBeePlugin
                 else if (dataGridView.RowCount > 0)
                     largeChange = dataGridView.Rows.GetRowsHeight(DataGridViewElementStates.Displayed);
 
-
-                //if (dataGridView.RowCount > 0)//**********
-                //    largeChange = (int)((float)maximum * dataGridView.DisplayedRowCount(false) / dataGridView.RowCount);
-
                 return (0, maximum, largeChange);
             }
 
@@ -2077,7 +2112,7 @@ namespace MusicBeePlugin
 
 
         //Returns Minimum, Maximum, LargeChange
-        //internal static (int, int, int) GetDataGridViewVScrollBarMetrics(Control scrolledControl, Control refScrollBar) //*******
+        //internal static (int, int, int) GetDataGridViewVScrollBarMetrics(Control scrolledControl, Control refScrollBar) //****
         //{
         //    if (refScrollBar is VScrollBar scrollBar)
         //        return (scrollBar.Minimum, scrollBar.Maximum, scrollBar.LargeChange);
@@ -2212,7 +2247,7 @@ namespace MusicBeePlugin
         }
 
         //Returns the number of rows, which require formatting changed tags, 0 if no formatting is required
-        internal static int AddRowsToTable(PluginWindowTemplate form, DataGridView dataGridView, List<string[]> rowList, bool itsLastRowRange, bool selectLastRow)//*********
+        internal static int AddRowsToTable(PluginWindowTemplate form, DataGridView dataGridView, List<string[]> rowList, bool itsLastRowRange, bool selectLastRow)
         {
             int rowListCount = rowList.Count;
 
@@ -2260,8 +2295,7 @@ namespace MusicBeePlugin
             }
         }
 
-        internal static void FormatChangedTags(PluginWindowTemplate form, DataGridView dataGridView, int rowCountToFormat,//********
-            DataGridViewFormatChangedTags dataGridViewFormatChangedTags = null)
+        internal static void FormatChangedTags(PluginWindowTemplate form, DataGridView dataGridView, int rowCountToFormat, DataGridViewFormatChangedTags dataGridViewFormatChangedTags = null)
         {
             if (dataGridViewFormatChangedTags != null)
                 for (int j = dataGridView.RowCount - rowCountToFormat; j < dataGridView.RowCount; j++)
@@ -2358,7 +2392,7 @@ namespace MusicBeePlugin
         }
 
         //Returns: enabled fore & back colors, disabled fore & back colors
-        internal void setSkinnedControlColors(Control control, bool? enable) //***********
+        internal void setSkinnedControlColors(Control control, bool? enable) //****
         {
             if (useSkinColors)
             {
@@ -2533,26 +2567,26 @@ namespace MusicBeePlugin
                     {
                         tabControl.ForeColor = AccentColor;
                         tabControl.BackColor = InputPanelBackColor;
-                        tabControl.BorderColor = InputPanelBorderColor;//--------------
+                        tabControl.BorderColor = InputPanelBorderColor;
 
                         foreach (TabPage child in tabControl.TabPages)
                         {
                             child.ForeColor = AccentColor;
                             child.BackColor = InputPanelBackColor;
-                            //child.myBorderColor = InputPanelBorderColor;//--------------
+                            //child.myBorderColor = InputPanelBorderColor;
                         }
                     }
                     else
                     {
                         tabControl.ForeColor = DimmedAccentColor;
                         tabControl.BackColor = InputPanelBackColor;
-                        tabControl.BorderColor = InputPanelBorderColor;//--------------
+                        tabControl.BorderColor = InputPanelBorderColor;
 
                         foreach (TabPage child in tabControl.TabPages)
                         {
                             child.ForeColor = DimmedAccentColor;
                             child.BackColor = InputPanelBackColor;
-                            //child.myBorderColor = InputPanelBorderColor;//--------------
+                            //child.myBorderColor = InputPanelBorderColor;
                         }
                     }
                 }
@@ -3389,11 +3423,11 @@ namespace MusicBeePlugin
             if (PluginClosing)
                 return;
 
-            while (MbForm.Disposing)
+            while (MbForm.Disposing || !MbForm.IsHandleCreated)
                 Thread.Sleep(ActionRetryDelay);
 
             if (MbForm.IsDisposed)
-                MbForm = FromHandle(MbApiInterface.MB_GetWindowHandle()) as Form;
+                MbForm = Control.FromHandle(MbApiInterface.MB_GetWindowHandle()) as Form;
 
             if (modal)
                 base.ShowDialog(MbForm);
@@ -3913,7 +3947,7 @@ namespace MusicBeePlugin
             {
                 backgroundTaskIsStopping = true;
             }
-            finally//*********
+            finally
             {
                 lock (taskStarted)
                 {
@@ -3929,14 +3963,14 @@ namespace MusicBeePlugin
                         NumberOfNativeMbBackgroundTasks--;
                 }
 
-                if (!closeFormOnStopping && !Disposing && !IsDisposed)
+                if (!closeFormOnStopping && !Disposing && !IsDisposed && IsHandleCreated)
                 {
                     RefreshPanels(true);
                     SetResultingSbText();
 
                     try
                     {
-                        if (clickedButton != EmptyButton && !isStopButtonAlreadyClicked)//********
+                        if (clickedButton != EmptyButton && !isStopButtonAlreadyClicked)
                             Invoke(new Action(() => { stopButtonClickedMethod(null); }));
 
                         if (!Visible && !isStopButtonAlreadyClicked)
@@ -3947,7 +3981,7 @@ namespace MusicBeePlugin
                                 Invoke(new Action(() => { Visible = true; }));
                         }
                     }
-                    catch (System.InvalidOperationException)
+                    catch (InvalidOperationException)
                     {
                         ; //Still disposing. Let's ignore...
                     }
@@ -3956,7 +3990,7 @@ namespace MusicBeePlugin
         }
 
         internal void switchOperation(ThreadStart operation, Button clickedButton, Button okButton, Button previewButton, Button closeButton,
-            bool backgroundTaskIsUpdatingTags, PrepareOperation prepareOperation, bool disableCloseButtonOnPreview = false, int checkMinimumColumnCount = -1)
+            bool backgroundTaskIsUpdatingTags, PrepareOperation prepareOperation, int checkMinimumColumnCount = -1)
         {
             buttonLabels.TryGetValue(previewButton, out buttonPreviewName);
             buttonLabels.TryGetValue(okButton, out buttonOKName);
@@ -3981,7 +4015,7 @@ namespace MusicBeePlugin
                         NumberOfNativeMbBackgroundTasks++;
                 }
 
-                queryingOrUpdatingButtonClick(disableCloseButtonOnPreview);
+                queryingOrUpdatingButtonClick();
             }
             else if (backgroundTaskIsScheduled && !backgroundTaskIsStopping) //Let's stop operation
             {
@@ -4009,7 +4043,7 @@ namespace MusicBeePlugin
 
                 if (this.backgroundTaskIsUpdatingTags)
                 {
-                    queryingOrUpdatingButtonClick(false);
+                    queryingOrUpdatingButtonClick();
 
                     lock (OpenedForms)
                         NumberOfNativeMbBackgroundTasks++;
@@ -4018,7 +4052,7 @@ namespace MusicBeePlugin
                 }
                 else
                 {
-                    queryingOrUpdatingButtonClick(disableCloseButtonOnPreview);
+                    queryingOrUpdatingButtonClick();
 
                     var workingThread = new Thread(serializedOperation);
                     workingThread.Start();
@@ -4062,20 +4096,19 @@ namespace MusicBeePlugin
             //Implemented in derived classes... 
         }
 
-        internal void queryingOrUpdatingButtonClick(bool disableCloseButtonOnPreview = true)
+        internal void queryingOrUpdatingButtonClick()
         {
             lock (OpenedForms)
             {
                 foreach (var form in OpenedForms)
                 {
-                    if (backgroundTaskIsUpdatingTags && form != this && !(form.backgroundTaskIsUpdatingTags && form.backgroundTaskIsScheduled && !form.backgroundTaskIsStoppedOrCancelled))//********
+                    if (backgroundTaskIsUpdatingTags && form != this && !(form.backgroundTaskIsUpdatingTags && form.backgroundTaskIsScheduled && !form.backgroundTaskIsStoppedOrCancelled))
                         form.disableQueryingButtons();
                 }
 
                 if (backgroundTaskIsUpdatingTags) //Updating operation
                 {
                     enableQueryingButtons();
-                    //disableQueryingOrUpdatingButtons();//***********
 
                     if (clickedButton != EmptyButton)
                     {
@@ -4092,13 +4125,8 @@ namespace MusicBeePlugin
                 }
                 else //Querying operation
                 {
-                    //disableQueryingOrUpdatingButtons();//***********
-
                     clickedButton.Text = ButtonStopName;
                     clickedButton.Enable(true);
-
-                    if (disableCloseButtonOnPreview && buttonLabels.ContainsKey(closeButton))
-                        closeButton.Enable(false);
                 }
 
                 enableDisablePreviewOptionControls(false);
@@ -4161,7 +4189,7 @@ namespace MusicBeePlugin
                 {
                     clickedButton.Text = buttonOKName;
 
-                    if (previewIsGenerated)//*******
+                    if (previewIsGenerated)
                         previewButton.Text = ButtonClearName;
                     else
                         previewButton.Text = buttonPreviewName;
@@ -4170,7 +4198,7 @@ namespace MusicBeePlugin
                         closeButton.Text = buttonCloseName;
 
                     enableQueryingOrUpdatingButtons();
-                    
+
                     backgroundTaskIsStopping = true;
                     backgroundTaskIsStoppedOrCancelled = false;
                 }
@@ -4197,7 +4225,7 @@ namespace MusicBeePlugin
                             clickedButton.Text = buttonPreviewName;
 
                         backgroundTaskIsStopping = false;
-                        backgroundTaskIsStoppedOrCancelled = false;//*********
+                        backgroundTaskIsStoppedOrCancelled = false;
 
                         closeButton.Enable(true);
                     }
@@ -4228,7 +4256,7 @@ namespace MusicBeePlugin
                 return false;
         }
 
-        protected bool checkStoppedStatus()//******* must be called only in GUI thread!!!
+        protected bool checkStoppedStatus()
         {
             if (backgroundTaskIsScheduled && backgroundTaskIsStoppedOrCancelled)
             {
@@ -4255,7 +4283,7 @@ namespace MusicBeePlugin
         //checkMinimumColumnCount = -1: check if row count > 0, checkMinimumColumnCount >= 0: don't check rows count, check if column count > checkMinimumColumnCount
         //Returns: true if preview is started (closing current form must be temporary disabled), otherwise returns false
         protected bool clickOnPreviewButton(DataGridView previewTable, PrepareOperation prepareOperation, ThreadStart operation,
-            Button previewButton, Button okButton, Button closeButton, bool clearPreview = false, int checkMinimumColumnCount = -1, bool disableCloseButtonOnPreview = false)//******** remove disableCloseButtonOnPreview?
+            Button previewButton, Button okButton, Button closeButton, bool clearPreview = false, int checkMinimumColumnCount = -1)
         {
             //checkColumnCountInsteadOfRowCount == true for "Tag History"/"Compare Tracks"
             if ((((checkMinimumColumnCount == -1 && previewTable.RowCount == 0) || (checkMinimumColumnCount >= 0 && previewTable.ColumnCount <= checkMinimumColumnCount)
@@ -4267,7 +4295,7 @@ namespace MusicBeePlugin
                 {
                     if (prepareOperation())
                     {
-                        switchOperation(operation, previewButton, okButton, previewButton, closeButton, false, prepareOperation, disableCloseButtonOnPreview, checkMinimumColumnCount);
+                        switchOperation(operation, previewButton, okButton, previewButton, closeButton, false, prepareOperation, checkMinimumColumnCount);
                         return true;
                     }
                     else
@@ -4277,11 +4305,11 @@ namespace MusicBeePlugin
                 }
                 else
                 {
-                    switchOperation(operation, previewButton, okButton, previewButton, closeButton, false, null, disableCloseButtonOnPreview, checkMinimumColumnCount);
+                    switchOperation(operation, previewButton, okButton, previewButton, closeButton, false, null, checkMinimumColumnCount);
                     return true;
                 }
             }
-            else if (backgroundTaskIsWorking())//*******
+            else if (backgroundTaskIsWorking())
             {
                 backgroundTaskIsStopping = true;
                 return true;

@@ -1,9 +1,11 @@
-﻿using ExtensionMethods;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+
+using ExtensionMethods;
+
 using static MusicBeePlugin.Plugin;
 
 namespace MusicBeePlugin
@@ -237,7 +239,8 @@ namespace MusicBeePlugin
 
         private void resetPreviewData(bool noReallyDisplayedTagsOtherwiseNoPreview)
         {
-            if (backgroundTaskIsStopping || backgroundTaskIsStoppedOrCancelled || !backgroundTaskIsScheduled)
+            //if (backgroundTaskIsStopping || backgroundTaskIsStoppedOrCancelled || !backgroundTaskIsScheduled)//------------- check!!!
+            if (previewIsGenerated)
             {
                 previewTable.AllowUserToResizeColumns = true;
                 previewTable.AllowUserToResizeRows = true;
@@ -461,7 +464,7 @@ namespace MusicBeePlugin
                         }
                     }
 
-                    breakpoint:
+                breakpoint:
                     if (!trackHaveDifferences)
                     {
                         cachedTracks.RemoveAt(i);
@@ -501,9 +504,9 @@ namespace MusicBeePlugin
                 for (var j = 0; j < reallyDisplayedTags.Count; j++)
                 {
                     if (j == artworkRow)
-                        SetFileTag(currentFile, (MetaDataType)reallyDisplayedTags[j], (string)previewTable.Rows[j].Cells[i].Tag);
+                        SetFileTag(currentFile, (MetaDataType)reallyDisplayedTags[j], previewTable.Rows[j].Cells[i].Tag as string);
                     else
-                        SetFileTag(currentFile, (MetaDataType)reallyDisplayedTags[j], (string)previewTable.Rows[j].Cells[i].Value);
+                        SetFileTag(currentFile, (MetaDataType)reallyDisplayedTags[j], previewTable.Rows[j].Cells[i].Value as string);
                 }
 
                 CommitTagsToFile(currentFile);
@@ -541,13 +544,13 @@ namespace MusicBeePlugin
 
         private void buttonPreview_Click(object sender, EventArgs e)
         {
-            ignoreClosingForm = clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewChanges, buttonPreview, buttonOK, buttonClose, false, 1, false);
+            ignoreClosingForm = clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewChanges, buttonPreview, buttonOK, buttonClose, false, 1);
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
             ignoreClosingForm = true;
-            switchOperation(applyChanges, buttonOK, buttonOK, buttonPreview, buttonClose, true, null, false);
+            switchOperation(applyChanges, buttonOK, buttonOK, buttonPreview, buttonClose, true, null);
         }
 
         private void buttonClose_Click(object sender, EventArgs e)

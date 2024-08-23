@@ -1,7 +1,9 @@
-﻿using ExtensionMethods;
-using MusicBeePlugin.Properties;
-using System;
+﻿using System;
 using System.Collections.Generic;
+
+using ExtensionMethods;
+
+using MusicBeePlugin.Properties;
 
 namespace MusicBeePlugin
 {

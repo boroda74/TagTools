@@ -1,8 +1,10 @@
-﻿using ExtensionMethods;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
+
+using ExtensionMethods;
+
 using static MusicBeePlugin.Plugin;
 
 namespace MusicBeePlugin
@@ -133,7 +135,7 @@ namespace MusicBeePlugin
 
         private void resetPreviewData()
         {
-            if (previewIsGenerated)//------------- check!!!
+            if (previewIsGenerated)
             {
                 previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 

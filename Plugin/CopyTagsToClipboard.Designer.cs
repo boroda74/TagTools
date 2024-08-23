@@ -48,15 +48,15 @@ namespace MusicBeePlugin
             this.checkUncheckAllCheckBoxLabel = new System.Windows.Forms.Label();
             this.controlsPanel = new System.Windows.Forms.Panel();
             this.infoLabel = new System.Windows.Forms.Label();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.controlsPanel.SuspendLayout();
-            this.SuspendLayout();
 
             //MusicBee
             this.checkedSourceTagList = new CustomListBox(Plugin.SavedSettings.dontUseSkinColors);
             this.sourceTagList = new CustomListBox(Plugin.SavedSettings.dontUseSkinColors);
             //~MusicBee
 
+            this.tableLayoutPanel1.SuspendLayout();
+            this.controlsPanel.SuspendLayout();
+            this.SuspendLayout();
             // 
             // buttonOK
             // 

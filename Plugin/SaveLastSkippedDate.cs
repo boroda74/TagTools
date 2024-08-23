@@ -1,5 +1,7 @@
-﻿using ExtensionMethods;
-using System;
+﻿using System;
+
+using ExtensionMethods;
+
 using static MusicBeePlugin.Plugin;
 
 namespace MusicBeePlugin

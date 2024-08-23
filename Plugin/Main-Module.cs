@@ -1,6 +1,4 @@
-﻿using ExtensionMethods;
-using MusicBeePlugin.Properties;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -13,6 +11,11 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+
+using ExtensionMethods;
+
+using MusicBeePlugin.Properties;
+
 using static MusicBeePlugin.AdvancedSearchAndReplace;
 using static MusicBeePlugin.LibraryReports;
 
@@ -336,7 +339,7 @@ namespace MusicBeePlugin
         internal static SortedDictionary<Guid, bool> AllLrPresetGuidsInUse = new SortedDictionary<Guid, bool>(); //<guid, false>: NOT permanentGuid!
 
         internal static SortedDictionary<int, string> LrTrackCacheNeededToBeUpdated = new SortedDictionary<int, string>(); //<Track persistent id, URL>
-        internal static DateTime LrTrackCacheNeededToBeUpdatedLastAddedTime = DateTime.MinValue;//*********
+        internal static DateTime LrTrackCacheNeededToBeUpdatedLastAddedTime = DateTime.MinValue;
         internal static TimeSpan LrTrackCacheNeededToBeUpdatedAccumulationPeriod = TimeSpan.FromMilliseconds(2000); //2 secs.
 
         internal static SortedDictionary<Guid, SortedDictionary<int, SortedDictionary<string, bool>[]>> PresetChangingGroupingTagsRaw //Dictionaries of tags values,
@@ -788,7 +791,7 @@ namespace MusicBeePlugin
 
         internal static string AutoRateSbText;
         internal static string AutoRateSbTextCalculatingThresholds;
-        internal static string AutoRateSbTextCalculatingActualPercentagesCalculatingThresholds;//*********
+        internal static string AutoRateSbTextCalculatingActualPercentagesCalculatingThresholds;
 
         internal static string TagHistorySbText;
         internal static string TagHistorySbTextFillingLibraryTagValues;
@@ -3004,7 +3007,7 @@ namespace MusicBeePlugin
                 LastFileCounterThreshold = fileCounter0Based;
             }
 
-            if (updatePercentage == 0 || update || fileCounter0Based  == 0 || (fileCounter0Based & StatusBarTextUpdateInterval) == 0)
+            if (updatePercentage == 0 || update || fileCounter0Based == 0 || (fileCounter0Based & StatusBarTextUpdateInterval) == 0)
             {
                 SetStatusBarText(GenerateStatusBarTextForFileOperations(commandSbText, preview, fileCounter0Based, filesTotal, currentFile), false);
             }
@@ -3213,7 +3216,7 @@ namespace MusicBeePlugin
                 File.Delete(BrGetBackupFilenameWithoutExtension(dialog.FileName) + ".mbc");
 
             MbApiInterface.MB_CreateParameterisedBackgroundTask(BackupIndex.saveBackupAsync, new object[] { BrGetBackupFilenameWithoutExtension(dialog.FileName), SbMakingTagBackup, false, false }, MbForm);
-            
+
             dialog.Dispose();
         }
 
@@ -3406,7 +3409,7 @@ namespace MusicBeePlugin
             }
 
             MbApiInterface.MB_CreateParameterisedBackgroundTask(BackupIndex.saveBackupAsync, new object[] { BrGetBackupFilenameWithoutExtension(dialog.FileName), SbMakingTagBackup, false, e == null }, MbForm);
-            
+
             dialog.Dispose();
         }
 
@@ -4709,7 +4712,7 @@ namespace MusicBeePlugin
                 ExImpossibleToStretchThumb = "Невозможно масштабировать ползунок полосы прокрутки. Пустая ссылка на изображение ползунка.";
                 ExMaskAndImageMustBeTheSameSize = "Маска и изображение должны быть одинакового размера!";
 
-                
+
                 CtlAutoRateCalculating = "Идет расчет...";
 
                 CtlAsrCellTooTip = "Неотмеченные строки не будут обработаны\n" +
@@ -5395,18 +5398,18 @@ namespace MusicBeePlugin
 
 
                     //MusicBee is closing before plugin has been initialized
-                    if (MbForm.Disposing || MbForm.IsDisposed)
+                    if (MbForm.Disposing || MbForm.IsDisposed || !MbForm.IsHandleCreated)
                         return;
 
 
                     //Let's create plugin main and context menu items
-                    MbForm.Invoke(new Action(() => 
+                    MbForm.Invoke(new Action(() =>
                     {
-                        getButtonTextBoxDpiFontScaling(); 
-                        prepareThemedBitmapsAndColors(); 
+                        getButtonTextBoxDpiFontScaling();
+                        prepareThemedBitmapsAndColors();
 
-                        addPluginContextMenuItems(); 
-                        addPluginMenuItems(); 
+                        addPluginContextMenuItems();
+                        addPluginMenuItems();
                     }));
 
 
@@ -5846,7 +5849,7 @@ namespace MusicBeePlugin
 
                 var smallSize = (int)Math.Round(15f * ButtonHeightDpiFontScaling);
 
-                var scrollBarImagesWidth = ControlsTools.GetCustomScrollBarInitialWidth(DpiScaling, 0); //Second arg. must be: SbBorderWidth /= scaledPx//*****
+                var scrollBarImagesWidth = ControlsTools.GetCustomScrollBarInitialWidth(DpiScaling, 0); //Second arg. must be: SbBorderWidth /= scaledPx//****
                 var comboBoxDownArrowSize = (int)Math.Round(DpiScaling * 1.238f * ScrollBarWidth);
 
 
@@ -6004,80 +6007,80 @@ namespace MusicBeePlugin
 
             CheckedState?.Dispose();
             CheckedState = GetSolidImageByBitmapMask(AccentColor, Resources.check_mark, markSize, markSize);
-            
+
             UncheckedState?.Dispose();
-            UncheckedState = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, AccentBackWeight), 
+            UncheckedState = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, AccentBackWeight),
                 Resources.uncheck_mark, markSize, markSize);
-            
+
             var pictureSize = (int)Math.Round(19f * ButtonHeightDpiFontScaling);
 
             Search?.Dispose();
             Search = GetSolidImageByBitmapMask(AccentColor, Resources.search, pictureSize, pictureSize);
-            
+
 
             AutoAppliedPresetsAccent?.Dispose();
             AutoAppliedPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.auto_applied_presets, pictureSize, pictureSize);
-            
+
             AutoAppliedPresetsDimmed?.Dispose();
-            AutoAppliedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), 
+            AutoAppliedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight),
                 Resources.auto_applied_presets, pictureSize, pictureSize);
-            
+
             PredefinedPresetsAccent?.Dispose();
             PredefinedPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.predefined_presets, pictureSize, pictureSize);
-            
+
             PredefinedPresetsDimmed?.Dispose();
-            PredefinedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), 
+            PredefinedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight),
                 Resources.predefined_presets, pictureSize, pictureSize);
-            
+
             CustomizedPresetsAccent?.Dispose();
             CustomizedPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.customized_presets, pictureSize, pictureSize);
-            
+
             CustomizedPresetsDimmed?.Dispose();
-            CustomizedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), 
+            CustomizedPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight),
                 Resources.customized_presets, pictureSize, pictureSize);
-            
+
             UserPresetsAccent?.Dispose();
             UserPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.user_presets, pictureSize, pictureSize);
-            
+
             UserPresetsDimmed?.Dispose();
-            UserPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), 
+            UserPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight),
                 Resources.user_presets, pictureSize, pictureSize);
-            
+
             PlaylistPresetsAccent?.Dispose();
             PlaylistPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.playlist_presets, pictureSize, pictureSize);
-            
+
             PlaylistPresetsDimmed?.Dispose();
-            PlaylistPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), 
+            PlaylistPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight),
                 Resources.playlist_presets, pictureSize, pictureSize);
-            
+
             FunctionIdPresetsAccent?.Dispose();
             FunctionIdPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.function_id_presets, pictureSize, pictureSize);
-            
+
             FunctionIdPresetsDimmed?.Dispose();
-            FunctionIdPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), 
+            FunctionIdPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight),
                 Resources.function_id_presets, pictureSize, pictureSize);
-            
+
             HotkeyPresetsAccent?.Dispose();
             HotkeyPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.hotkey_presets, pictureSize, pictureSize);
-            
+
             HotkeyPresetsDimmed?.Dispose();
-            HotkeyPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), 
+            HotkeyPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight),
                 Resources.hotkey_presets, pictureSize, pictureSize);
-            
+
             UncheckAllFiltersAccent?.Dispose();
             UncheckAllFiltersAccent = GetSolidImageByBitmapMask(AccentColor, Resources.uncheck_all_preset_filters, pictureSize, pictureSize);
-            
+
             UncheckAllFiltersDimmed?.Dispose();
-            UncheckAllFiltersDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight), 
+            UncheckAllFiltersDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight),
                 Resources.uncheck_all_preset_filters, pictureSize, pictureSize);
-            
+
 
             //LR
             var pictogramSize = (int)Math.Round(23f * ButtonHeightDpiFontScaling);
 
             Window?.Dispose();
             Window = ScaleBitmap(Resources.window, PixelFormat.Format32bppArgb, InterpolationMode.HighQualityBicubic, pictogramSize, pictogramSize);
-            
+
 
             HeaderCellStyle.Alignment = DataGridViewContentAlignment.TopLeft;
 
@@ -6759,7 +6762,7 @@ namespace MusicBeePlugin
                     "$TagContainsAnyString(<URL>,field_name,string1|string2|etc)",
                     "$TagContainsAllStrings(<URL>,field_name,string1|string2|etc)",
                 };
-	        }
+            }
         }
 
         public string CustomFunc_ASR(string url, string presetId)
@@ -6796,7 +6799,7 @@ namespace MusicBeePlugin
         public string CustomFunc_Round(string number, string number_of_digits)
         {
             try
-            { 
+            {
                 number = number.Replace('.', LocalizedDecimalPoint);
                 number_of_digits = number_of_digits.Replace('.', LocalizedDecimalPoint);
 
@@ -7103,7 +7106,7 @@ namespace MusicBeePlugin
             return DateTime.Now.ToString();
         }
 
-        public string CustomFunc_TitleCase(string input, string lowerCaseWordsString, string upperCaseWordsString, 
+        public string CustomFunc_TitleCase(string input, string lowerCaseWordsString, string upperCaseWordsString,
             string lowerCaseWordsBetweenBracketsString, string sentenceSeparatorsString)
         {
             try
@@ -7178,7 +7181,7 @@ namespace MusicBeePlugin
 
                 List<char> encounteredLeftExceptionChars = null;
                 bool wasCharException = false;
-                input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.LowerCase, ref encounteredLeftExceptionChars, ref wasCharException, lowerCaseWordsBetweenBrackets, true, 
+                input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.LowerCase, ref encounteredLeftExceptionChars, ref wasCharException, lowerCaseWordsBetweenBrackets, true,
                     null, openingExceptionChars, closingExceptionChars, false, false, false);
 
                 encounteredLeftExceptionChars = null;
@@ -7194,7 +7197,7 @@ namespace MusicBeePlugin
             }
         }
 
-        public string CustomFunc_SentenceCase(string input, string upperCaseWordsString, string sentenceSeparatorsString) //******* abbreviations!!!!
+        public string CustomFunc_SentenceCase(string input, string upperCaseWordsString, string sentenceSeparatorsString)
         {
             try
             {

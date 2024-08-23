@@ -1,7 +1,9 @@
-﻿using ExtensionMethods;
-using System;
+﻿using System;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+
+using ExtensionMethods;
+
 using static MusicBeePlugin.Plugin;
 
 namespace MusicBeePlugin
@@ -128,7 +130,7 @@ namespace MusicBeePlugin
                     );
             }
 
-            customFontTextBox.Text = customFont.Name + " " + customFont.Style  + " " + customFont.Size + " pt.";
+            customFontTextBox.Text = customFont.Name + " " + customFont.Style + " " + customFont.Size + " pt.";
             customFontTextBox.Text = customFontTextBox.Text.Replace(", ", " ").Replace("bold Bold", "bold");
             customFontButton.Enable(useCustomFontCheckBox.Checked);
 
@@ -369,7 +371,7 @@ namespace MusicBeePlugin
             {
                 customFont.Dispose();
                 customFont = customFontDialog.Font.Clone() as System.Drawing.Font;
-                customFontTextBox.Text = customFont.Name  + " " + customFont.Style  + " " + customFont.Size + " pt.";
+                customFontTextBox.Text = customFont.Name + " " + customFont.Style + " " + customFont.Size + " pt.";
                 customFontTextBox.Text = customFontTextBox.Text.Replace(", ", " ").Replace("bold Bold", "bold");
             }
         }

@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
+
 using static NativeMethods;
 
 
@@ -437,8 +438,8 @@ namespace MusicBeePlugin
             return alphaBlendedImage.AlphaBlendImages();
         }
 
-        internal static Bitmap GetSolidImageByBitmapMask(Color foreColor, Bitmap maskBitmap, 
-            int newWidth, int newHeight, bool invertedMask = true, 
+        internal static Bitmap GetSolidImageByBitmapMask(Color foreColor, Bitmap maskBitmap,
+            int newWidth, int newHeight, bool invertedMask = true,
             InterpolationMode interpolationMode = InterpolationMode.HighQualityBicubic)
         {
             var scaledForeColorFilledBitmap = FillBitmapByColor(foreColor, PixelFormat.Format32bppArgb, newWidth, newHeight);
@@ -468,7 +469,7 @@ namespace MusicBeePlugin
         {
             if (foreImage != null && backImage != null)
             {
-                if (foreImage.Width != backImage.Width || foreImage.Height != backImage.Height 
+                if (foreImage.Width != backImage.Width || foreImage.Height != backImage.Height
                                                 || foreImage.PixelFormat != PixelFormat.Format32bppArgb || backImage.PixelFormat != PixelFormat.Format32bppArgb)
                 {
                     throw new BadImageFormatException(Plugin.ExMaskAndImageMustBeTheSameSize + " REQUIED PIXEL FORMAT: " + PixelFormat.Format32bppArgb);
@@ -491,7 +492,7 @@ namespace MusicBeePlugin
             return alphaBlendedImage.AlphaBlendImages();
         }
 
-        internal static Bitmap ApplyMaskToImage(Bitmap image, Bitmap maskBitmap, 
+        internal static Bitmap ApplyMaskToImage(Bitmap image, Bitmap maskBitmap,
             int newWidth, int newHeight, bool invertedMask)
         {
             var scaledImage = ScaleBitmap(image, PixelFormat.Format32bppArgb, InterpolationMode.HighQualityBicubic,

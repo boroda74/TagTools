@@ -1,15 +1,17 @@
-﻿using ExtensionMethods;
-using MusicBeePlugin.Properties;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+
+using ExtensionMethods;
+
+using MusicBeePlugin.Properties;
+
 using static MusicBeePlugin.Plugin;
 
 
@@ -485,7 +487,7 @@ namespace MusicBeePlugin
             public TagType parameterTag6TypeNew = TagType.NotUsed;
 
             public TagType parameterTagType = TagType.NotUsed; //****** make primary and the only later !!!!
-            public TagType parameterTag2Type= TagType.NotUsed;
+            public TagType parameterTag2Type = TagType.NotUsed;
             public TagType parameterTag3Type = TagType.NotUsed;
             public TagType parameterTag4Type = TagType.NotUsed;
             public TagType parameterTag5Type = TagType.NotUsed;
@@ -621,7 +623,7 @@ namespace MusicBeePlugin
                     var name = langName.Value ?? string.Empty;
 
                     if (!string.IsNullOrEmpty(presetNamePrefix) && !name.StartsWith(presetNamePrefix))
-                        name = presetNamePrefix  + " " + name;
+                        name = presetNamePrefix + " " + name;
                     else if (!string.IsNullOrEmpty(presetNamePrefix))
                         name = presetNamePrefix + name;
 
@@ -815,7 +817,7 @@ namespace MusicBeePlugin
 
 
                 savedPreset.parameterTagType = savedPreset.parameterTagTypeNew;
-                savedPreset.parameterTag2Type= savedPreset.parameterTag2TypeNew;
+                savedPreset.parameterTag2Type = savedPreset.parameterTag2TypeNew;
                 savedPreset.parameterTag3Type = savedPreset.parameterTag3TypeNew;
                 savedPreset.parameterTag4Type = savedPreset.parameterTag4TypeNew;
                 savedPreset.parameterTag5Type = savedPreset.parameterTag5TypeNew;
@@ -1344,9 +1346,9 @@ namespace MusicBeePlugin
 
                 var exceptedWords = parameter1.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-                parameter0 = ChangeCase.ChangeWordsCase(parameter0, ChangeCase.ChangeCaseOptions.LowerCase);//**************************
+                parameter0 = ChangeCase.ChangeWordsCase(parameter0, ChangeCase.ChangeCaseOptions.LowerCase);
 
-                var result = ChangeCase.ChangeSentenceCase(parameter0, ChangeCase.ChangeCaseOptions.SentenceCase, exceptedWords, false, 
+                var result = ChangeCase.ChangeSentenceCase(parameter0, ChangeCase.ChangeCaseOptions.SentenceCase, exceptedWords, false,
                     SavedSettings.exceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
                     SavedSettings.openingExceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
                     SavedSettings.closingExceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
@@ -2194,7 +2196,7 @@ namespace MusicBeePlugin
 
         internal static void SetReplacedTag(string currentFile, AdvancedSearchAndReplace asrCommand,
             int searchedTagId, int replacedTagId, string searchedPattern, string replacedPattern,
-            string preserveValues, string preserveTags, string processTags, bool ignoreCase, 
+            string preserveValues, string preserveTags, string processTags, bool ignoreCase,
             bool add, bool append, bool sneLimitation, bool dneLimitation,
             out string searchedTagValue, out string replacedTagValue, out string originalReplacedTagValue,
             out bool replacedTagValuePreserved, out bool replacedTagPreserved)
@@ -2301,7 +2303,7 @@ namespace MusicBeePlugin
             SetReplacedTag(currentFile, asrCommand, preset.searchedTagId, preset.replacedTagId,
                 preset.replaceVariable(preset.searchedPattern, true), preset.replaceVariable(preset.replacedPattern, false),
                 preset.preserveValues, preserveTags, processTags,
-                preset.ignoreCase, preset.add, preset.append, preset.sneLimitation1, preset.dneLimitation1, 
+                preset.ignoreCase, preset.add, preset.append, preset.sneLimitation1, preset.dneLimitation1,
                 out searchedAndReplacedTags.searchedTagValue, out searchedAndReplacedTags.replacedTagValue, out searchedAndReplacedTags.originalReplacedTagValue,
                 out searchedAndReplacedTags.replacedTagValuePreserved, out searchedAndReplacedTags.replacedTagPreserved);
 
@@ -2585,7 +2587,7 @@ namespace MusicBeePlugin
 
         private void resetPreviewData()
         {
-            if (previewIsGenerated)//------------- check!!!
+            if (previewIsGenerated)
             {
                 previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
@@ -5161,7 +5163,7 @@ namespace MusicBeePlugin
 
                 lock (Presets)
                 {
-                    var combinationPreset = presetProcessingCopies[(string)previewTable.Rows[rowIndex].Cells[1].Value];
+                    var combinationPreset = presetProcessingCopies[previewTable.Rows[rowIndex].Cells[1].Value as string];
                     var currentFile = previewTable.Rows[rowIndex].Cells[2].Value as string;
                     var searchedAndReplacedTags = GetReplacedTags(currentFile, ref combinationPreset, this, false);
 
@@ -5272,7 +5274,7 @@ namespace MusicBeePlugin
 
                         for (var i = 0; i < 5; i++)
                         {
-                            if ((string)previewTable.Rows[j].Cells[4 + i * 3].Value != invokedTags[i])
+                            if (previewTable.Rows[j].Cells[4 + i * 3].Value as string != invokedTags[i])
                             {
                                 processRow = false;
                                 break;
@@ -5323,7 +5325,7 @@ namespace MusicBeePlugin
                 {
                     if (previewTable.Rows[rowIndex].Cells[columnIndex].Visible)
                     {
-                        if ((string)previewTable.Rows[rowIndex].Cells[0].Value == "T")
+                        if (previewTable.Rows[rowIndex].Cells[0].Value as string == "T")
                             previewTable.Rows[rowIndex].Cells[columnIndex].Style = unchangedCellStyle;
                         else
                             previewTable.Rows[rowIndex].Cells[columnIndex].Style = dimmedCellStyle;
@@ -5365,7 +5367,7 @@ namespace MusicBeePlugin
 
                         if (previewTable.Columns[8].Visible)
                         {
-                            if ((string)cell.Value == (string)previewTable.Rows[rowIndex].Cells[8].Value)
+                            if (cell.Value as string == previewTable.Rows[rowIndex].Cells[8].Value as string)
                                 cell.Style = unchangedCellStyle;
                             else
                                 cell.Style = changedCellStyle;
@@ -5380,7 +5382,7 @@ namespace MusicBeePlugin
                             cell.Style = preservedTagCellStyle;
                         else if ((ChangesDetectionResult)previewTable.Rows[rowIndex].Cells[3].Tag == ChangesDetectionResult.PreservedTagValuesDetected)
                             cell.Style = preservedTagValueCellStyle;
-                        else if ((string)cell.Value == (string)previewTable.Rows[rowIndex].Cells[2].Value)
+                        else if (cell.Value as string == previewTable.Rows[rowIndex].Cells[2].Value as string)
                             cell.Style = unchangedCellStyle;
                         else
                             cell.Style = changedCellStyle;
@@ -5402,7 +5404,7 @@ namespace MusicBeePlugin
 
                         if (previewTable.Columns[11].Visible)
                         {
-                            if ((string)cell.Value == (string)previewTable.Rows[rowIndex].Cells[11].Value)
+                            if (cell.Value as string == previewTable.Rows[rowIndex].Cells[11].Value as string)
                                 cell.Style = unchangedCellStyle;
                             else
                                 cell.Style = changedCellStyle;
@@ -5424,7 +5426,7 @@ namespace MusicBeePlugin
                             cell.Style = preservedTagCellStyle;
                         else if ((ChangesDetectionResult)previewTable.Rows[rowIndex].Cells[i + 1].Tag == ChangesDetectionResult.PreservedTagValuesDetected)
                             cell.Style = preservedTagValueCellStyle;
-                        else if ((string)cell.Value == (string)previewTable.Rows[rowIndex].Cells[i].Value)
+                        else if (cell.Value as string == previewTable.Rows[rowIndex].Cells[i].Value as string)
                             cell.Style = unchangedCellStyle;
                         else
                             cell.Style = changedCellStyle;
@@ -5446,7 +5448,7 @@ namespace MusicBeePlugin
 
                         if (previewTable.Columns[11].Visible)
                         {
-                            if ((string)cell.Value == (string)previewTable.Rows[rowIndex].Cells[14].Value)
+                            if (cell.Value as string == previewTable.Rows[rowIndex].Cells[14].Value as string)
                                 cell.Style = unchangedCellStyle;
                             else
                                 cell.Style = changedCellStyle;
@@ -5468,7 +5470,7 @@ namespace MusicBeePlugin
                             cell.Style = preservedTagCellStyle;
                         else if ((ChangesDetectionResult)previewTable.Rows[rowIndex].Cells[i + 1].Tag == ChangesDetectionResult.PreservedTagValuesDetected)
                             cell.Style = preservedTagValueCellStyle;
-                        else if ((string)cell.Value == (string)previewTable.Rows[rowIndex].Cells[i].Value)
+                        else if (cell.Value as string == previewTable.Rows[rowIndex].Cells[i].Value as string)
                             cell.Style = unchangedCellStyle;
                         else
                             cell.Style = changedCellStyle;
@@ -5490,7 +5492,7 @@ namespace MusicBeePlugin
 
                         if (previewTable.Columns[11].Visible)
                         {
-                            if ((string)cell.Value == (string)previewTable.Rows[rowIndex].Cells[17].Value)
+                            if (cell.Value as string == previewTable.Rows[rowIndex].Cells[17].Value as string)
                                 cell.Style = unchangedCellStyle;
                             else
                                 cell.Style = changedCellStyle;
@@ -5512,7 +5514,7 @@ namespace MusicBeePlugin
                             cell.Style = preservedTagCellStyle;
                         else if ((ChangesDetectionResult)previewTable.Rows[rowIndex].Cells[i + 1].Tag == ChangesDetectionResult.PreservedTagValuesDetected)
                             cell.Style = preservedTagValueCellStyle;
-                        else if ((string)cell.Value == (string)previewTable.Rows[rowIndex].Cells[i].Value)
+                        else if (cell.Value as string == previewTable.Rows[rowIndex].Cells[i].Value as string)
                             cell.Style = unchangedCellStyle;
                         else
                             cell.Style = changedCellStyle;
@@ -5937,7 +5939,7 @@ namespace MusicBeePlugin
                     if (previewTable.Columns[i].Visible)
                         savedPreset.columnWeights.Add(previewTable.Columns[i].Width);
                     else
-                        savedPreset.columnWeights.Add(1);//------------
+                        savedPreset.columnWeights.Add(1);
                 }
             }
             else
@@ -5947,7 +5949,7 @@ namespace MusicBeePlugin
                     if (previewTable.Columns[i].Visible)
                         savedPreset.columnWeights[i] = previewTable.Columns[i].Width;
                     else
-                        savedPreset.columnWeights[i] = 1;//------------
+                        savedPreset.columnWeights[i] = 1;
                 }
             }
         }

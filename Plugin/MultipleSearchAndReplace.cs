@@ -1,9 +1,11 @@
-﻿using ExtensionMethods;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+
+using ExtensionMethods;
+
 using static MusicBeePlugin.AdvancedSearchAndReplace;
 using static MusicBeePlugin.Plugin;
 
@@ -190,7 +192,7 @@ namespace MusicBeePlugin
 
         private void resetPreviewData()
         {
-            if (previewIsGenerated)//------------- check!!!
+            if (previewIsGenerated)
             {
                 previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
@@ -795,7 +797,7 @@ namespace MusicBeePlugin
             var query = string.Empty;
             for (var i = 0; i < templateTable.Rows.Count; i++)
             {
-                query += EncodeSearchReplaceTemplate(string.Empty + templateTable.Rows[i].Cells[2].Value, string.Empty + templateTable.Rows[i].Cells[3].Value, 
+                query += EncodeSearchReplaceTemplate(string.Empty + templateTable.Rows[i].Cells[2].Value, string.Empty + templateTable.Rows[i].Cells[3].Value,
                     (string)templateTable.Rows[i].Cells[0].Value == "T", (string)templateTable.Rows[i].Cells[1].Value == "T") + "|";
             }
 
@@ -1173,7 +1175,7 @@ namespace MusicBeePlugin
             }
             else
             {
-                saveWindowLayout(templateTable.Columns[3].Width, templateTable.Columns[4].Width, 0, 
+                saveWindowLayout(templateTable.Columns[3].Width, templateTable.Columns[4].Width, 0,
                     0,
                     previewTable.Columns[1].Width, previewTable.Columns[2].Width, previewTable.Columns[3].Width);
             }

@@ -1,6 +1,4 @@
-﻿using ExtensionMethods;
-using MusicBeePlugin.Properties;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -10,6 +8,11 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
+
+using ExtensionMethods;
+
+using MusicBeePlugin.Properties;
+
 using static MusicBeePlugin.Plugin;
 
 namespace MusicBeePlugin
@@ -220,13 +223,13 @@ namespace MusicBeePlugin
         private readonly SortedDictionary<Guid, string[]> cachedPresetsNativeTagNames = new SortedDictionary<Guid, string[]>();
 
         //<Preset GUID, <TrackId, Grouping tags[]>>
-        private readonly SortedDictionary<Guid, SortedDictionary<int, string[]>> cachedPresetsFilesActualGroupingTags 
+        private readonly SortedDictionary<Guid, SortedDictionary<int, string[]>> cachedPresetsFilesActualGroupingTags
             = new SortedDictionary<Guid, SortedDictionary<int, string[]>>();
         //<Preset GUID, <TrackId, Grouping tags[]>>
-        private readonly SortedDictionary<Guid, SortedDictionary<int, string[]>> cachedPresetsFilesActualGroupingTagsRaw 
+        private readonly SortedDictionary<Guid, SortedDictionary<int, string[]>> cachedPresetsFilesActualGroupingTagsRaw
             = new SortedDictionary<Guid, SortedDictionary<int, string[]>>();
         //<Preset GUID, <TrackId, List of <composed groupings>>>
-        private readonly SortedDictionary<Guid, SortedDictionary<int, List<string>>> cachedPresetsFilesActualComposedSplitGroupingTagsList 
+        private readonly SortedDictionary<Guid, SortedDictionary<int, List<string>>> cachedPresetsFilesActualComposedSplitGroupingTagsList
             = new SortedDictionary<Guid, SortedDictionary<int, List<string>>>();
 
 
@@ -558,8 +561,8 @@ namespace MusicBeePlugin
             {
                 get { return _functionType; }
 
-                set 
-                { 
+                set
+                {
                     _functionType = value;
 
                     if (_functionType == LrFunctionType.Count)
@@ -1007,7 +1010,7 @@ namespace MusicBeePlugin
             }
         }
 
-        public static ReportPreset GetCreatePredefinedPreset(Guid presetPermanentGuid, string presetName, 
+        public static ReportPreset GetCreatePredefinedPreset(Guid presetPermanentGuid, string presetName,
             SortedDictionary<Guid, ReportPreset> existingPredefinedPresets,
             PresetColumnAttributes[] groupings, PresetColumnAttributes[] functions,
             string[] destinationTags, string[] functionIds
@@ -2136,7 +2139,7 @@ namespace MusicBeePlugin
                     presetDictRef.AddSkip(attribsSet[i].getShortId(), attribsSet[i]);
 
 
-            repeat_again:
+                repeat_again:
             if (columnIndex <= maxColumnIndex)
             {
                 for (var i = 0; i < attribsSet.Length; i++)
@@ -2357,7 +2360,7 @@ namespace MusicBeePlugin
                 }
 
                 var Base64StringHash = GetResizedArtworkBase64Hash(ref pic);
-    
+
                 lock (artworks)
                     artworks.AddReplace(Base64StringHash, pic);
 
@@ -2943,7 +2946,7 @@ namespace MusicBeePlugin
                     newFilesDict.AddSkip(file);
 
 
-            if (!processFileGroupings(newFilesDict, interactive, functionId, false, groupings, lastSeqNumInOrder, 
+            if (!processFileGroupings(newFilesDict, interactive, functionId, false, groupings, lastSeqNumInOrder,
                     null, queriedActualGroupingsTagIds, queriedActualGroupingsPropIds,
                     actualSplitGroupingTagsList, cachedFilesActualComposedSplitGroupingTagsList,
                     cachedFilesActualGroupingTags, cachedFilesActualGroupingTagsRaw,
@@ -2979,12 +2982,13 @@ namespace MusicBeePlugin
 
                     if (interactive)
                     {
-                        Invoke(new Action(() => { 
-                            if (backgroundTaskIsUpdatingTags) 
-                                stopButtonClickedMethod(applyingChangesStopped); 
-                            else 
-                                stopButtonClickedMethod(prepareBackgroundPreview); 
-                            }));
+                        Invoke(new Action(() =>
+                        {
+                            if (backgroundTaskIsUpdatingTags)
+                                stopButtonClickedMethod(applyingChangesStopped);
+                            else
+                                stopButtonClickedMethod(prepareBackgroundPreview);
+                        }));
                     }
                     else
                     {
@@ -3110,7 +3114,8 @@ namespace MusicBeePlugin
 
                     if (interactive)
                     {
-                        Invoke(new Action(() => {
+                        Invoke(new Action(() =>
+                        {
                             if (backgroundTaskIsUpdatingTags)
                                 stopButtonClickedMethod(applyingChangesStopped);
                             else
@@ -3280,7 +3285,8 @@ namespace MusicBeePlugin
 
                         if (interactive)
                         {
-                            Invoke(new Action(() => {
+                            Invoke(new Action(() =>
+                            {
                                 if (backgroundTaskIsUpdatingTags)
                                     stopButtonClickedMethod(applyingChangesStopped);
                                 else
@@ -3352,7 +3358,8 @@ namespace MusicBeePlugin
 
                             if (interactive)
                             {
-                                Invoke(new Action(() => {
+                                Invoke(new Action(() =>
+                                {
                                     if (backgroundTaskIsUpdatingTags)
                                         stopButtonClickedMethod(applyingChangesStopped);
                                     else
@@ -3906,9 +3913,9 @@ namespace MusicBeePlugin
         }
 
         //Dictionaries of tags values, arrays of groupings
-        protected static void PrepareGroupingTagDictionaries(ReportPreset preset, 
-            ref SortedDictionary<string, bool>[] queriedGroupingTagsRaw, 
-            ref SortedDictionary< string, bool> [] queriedActualGroupingTags, 
+        protected static void PrepareGroupingTagDictionaries(ReportPreset preset,
+            ref SortedDictionary<string, bool>[] queriedGroupingTagsRaw,
+            ref SortedDictionary<string, bool>[] queriedActualGroupingTags,
             ref SortedDictionary<string, bool>[] queriedActualGroupingTagsRaw
             )
         {
@@ -4049,7 +4056,7 @@ namespace MusicBeePlugin
                     if (!LrTrackCacheNeededToBeUpdated.AddSkip(trackId, newChangedFile))
                         LrTrackCacheNeededToBeUpdatedLastAddedTime = DateTime.UtcNow;
             }
-            
+
             if (changingFile != null)
             {
                 while (BackgroundTaskIsInProgress) //-V3029
@@ -4184,7 +4191,7 @@ namespace MusicBeePlugin
                                             }
 
 
-                                            if (!ChangingGroupingTagsRawWorkingCopy.TryGetValue(idPreset.Value.guid, 
+                                            if (!ChangingGroupingTagsRawWorkingCopy.TryGetValue(idPreset.Value.guid,
                                                 out var existingQueriedGroupingTagsRaw))
                                             {
                                                 existingQueriedGroupingTagsRaw = new SortedDictionary<string, bool>[queriedGroupingTagsRaw.Length];
@@ -4194,7 +4201,7 @@ namespace MusicBeePlugin
                                                 ChangingGroupingTagsRawWorkingCopy.Add(idPreset.Value.guid, existingQueriedGroupingTagsRaw);
                                             }
 
-                                            if (!ChangingActualGroupingTagsWorkingCopy.TryGetValue(idPreset.Value.guid, 
+                                            if (!ChangingActualGroupingTagsWorkingCopy.TryGetValue(idPreset.Value.guid,
                                                 out var existingQueriedActualGroupingTags))
                                             {
                                                 existingQueriedActualGroupingTags = new SortedDictionary<string, bool>[queriedActualGroupingTags.Length];
@@ -4204,7 +4211,7 @@ namespace MusicBeePlugin
                                                 ChangingActualGroupingTagsWorkingCopy.Add(idPreset.Value.guid, existingQueriedActualGroupingTags);
                                             }
 
-                                            if (!ChangingActualGroupingTagsRawWorkingCopy.TryGetValue(idPreset.Value.guid, 
+                                            if (!ChangingActualGroupingTagsRawWorkingCopy.TryGetValue(idPreset.Value.guid,
                                                 out var existingQueriedActualGroupingTagsRaw))
                                             {
                                                 existingQueriedActualGroupingTagsRaw = new SortedDictionary<string, bool>[queriedActualGroupingTagsRaw.Length];
@@ -4951,7 +4958,7 @@ namespace MusicBeePlugin
 
                     for (var j = 0; j < expressionsDataGridView.ColumnCount; j++)
                     {
-                        if ((string)expressionsDataGridView.Rows[j].Cells[1].Tag == expressionBackup)
+                        if (expressionsDataGridView.Rows[j].Cells[1].Tag as string == expressionBackup)
                         {
                             expressionsDataGridView.Rows[j].Cells[1].Value = (string.IsNullOrEmpty(expression) ? NoExpressionText : expression);
                             expressionsDataGridView.Rows[j].Cells[1].Tag = expression;
@@ -5076,7 +5083,8 @@ namespace MusicBeePlugin
 
         private void resetPreviewData()
         {
-            if (backgroundTaskIsStopping || backgroundTaskIsStoppedOrCancelled || !backgroundTaskIsScheduled)//------------- check!!!
+            //if (backgroundTaskIsStopping || backgroundTaskIsStoppedOrCancelled || !backgroundTaskIsScheduled)//------------- check!!!
+            if (previewIsGenerated)
             {
                 previewTable.AllowUserToResizeColumns = true;
                 previewTable.AllowUserToResizeRows = true;
@@ -5115,10 +5123,10 @@ namespace MusicBeePlugin
 
         private void resetFormToGeneratedPreview()
         {
-            previewTable.AllowUserToResizeColumns = true;//-----------------
+            previewTable.AllowUserToResizeColumns = true;
             previewTable.AllowUserToResizeRows = true;
             foreach (DataGridViewColumn column in previewTable.Columns)
-                column.SortMode = DataGridViewColumnSortMode.Automatic;//----------------- Not for all commands!!!!
+                column.SortMode = DataGridViewColumnSortMode.Automatic;
 
 
             backgroundTaskIsScheduled = false;
@@ -5148,7 +5156,7 @@ namespace MusicBeePlugin
 
         private bool applyingChangesStopped()
         {
-            previewTable.AllowUserToResizeColumns = true;//-----------------
+            previewTable.AllowUserToResizeColumns = true;
             previewTable.AllowUserToResizeRows = true;
             foreach (DataGridViewColumn column in previewTable.Columns)
                 column.SortMode = DataGridViewColumnSortMode.Automatic;
@@ -5209,7 +5217,7 @@ namespace MusicBeePlugin
 
             previewTable.AllowUserToResizeColumns = false;
             previewTable.AllowUserToResizeRows = false;
-            
+
 
             maxWidths = new int[previewTable.ColumnCount];
 
@@ -5617,7 +5625,7 @@ namespace MusicBeePlugin
                             prevAlbumArtist = groupingsValues[albumArtistField]; //-V3106
                             prevAlbum = groupingsValues[albumField]; //-V3106
                             document.beginAlbumArtist(groupingsValues[albumArtistField], groupingsValues.Length - 2 + functionsDict.Count); //-V3106
-    
+
                             lock (artworks)
                                 document.beginAlbum(groupingsValues[albumField], artworks[groupingsValues[artworkField]], groupingsValues[artworkField], albumTrackCounts[i]); //-V3106
                         }
@@ -5625,7 +5633,7 @@ namespace MusicBeePlugin
                         {
                             i++;
                             prevAlbum = groupingsValues[albumField]; //-V3106
-    
+
                             lock (artworks)
                                 document.beginAlbum(groupingsValues[albumField], artworks[groupingsValues[artworkField]], groupingsValues[artworkField], albumTrackCounts[i]); //-V3106
                         }
@@ -5643,7 +5651,7 @@ namespace MusicBeePlugin
                     {
                         lock (artworks)
                             pic = artworks[groupingsValues[artworkField]];
-    
+
                         var albumLabel = groupingsValues[0];
 
                         for (var l = 3; l < groupingsValues.Length; l++) //groupingsValues: 1st value MUST BE album name, 2nd value MUST BE artwork
@@ -6486,7 +6494,7 @@ namespace MusicBeePlugin
 
         private void LibraryReports_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if  (ignoreClosingForm)
+            if (ignoreClosingForm)
             {
                 if (!backgroundTaskIsUpdatingTags)
                 {
@@ -7168,20 +7176,6 @@ namespace MusicBeePlugin
             previewTable.DisableColumnsAutoSize(true);
 
 
-            //functionComboBoxCustom.SelectedIndex = 0;
-            //functionComboBox_SelectedIndexChanged(null, null);
-            //sourceTagListCustom.SelectedIndex = 0;
-            //sourceTagList_SelectedIndexChanged(null, null);
-
-            //if (parameter2ComboBoxCustom.SelectedIndex == -1)
-            //    parameter2ComboBoxCustom.SelectedItem = GetPropName(FilePropertyType.Url);
-
-            //parameter2ComboBox_SelectedIndexChanged(null, null);
-            
-            //SetMultipleItemsSplitterComboBoxText(firstSplitter);//------------
-            //multipleItemsSplitterTrimCheckBox.Checked = false;
-            //multipleItemsSplitterTrimCheckBox_CheckedChanged(null, null);
-
             savedFunctionIds.Clear();
             savedFunctionIds.AddRange(selectedPreset.functionIds);
 
@@ -7253,7 +7247,7 @@ namespace MusicBeePlugin
             }
 
 
-            if (parameter2ComboBoxCustom.SelectedIndex == -1)//---------
+            if (parameter2ComboBoxCustom.SelectedIndex == -1)
                 parameter2ComboBoxCustom.SelectedItem = GetPropName(FilePropertyType.Url);
 
             parameter2ComboBox_SelectedIndexChanged(null, null);
@@ -7633,7 +7627,7 @@ namespace MusicBeePlugin
             {
                 mulDivFactorComboBoxCustom.SelectedIndex = 0;
             }
-            else 
+            else
             {
                 switch (mulDivFactorComboBoxCustom.Text)
                 {
@@ -7676,7 +7670,7 @@ namespace MusicBeePlugin
             {
                 precisionDigitsComboBoxCustom.SelectedIndex = 0;
             }
-            else 
+            else
             {
                 switch (precisionDigitsComboBoxCustom.Text)
                 {

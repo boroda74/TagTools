@@ -1,11 +1,13 @@
-﻿using ExtensionMethods;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+
+using ExtensionMethods;
+
 using static MusicBeePlugin.Plugin;
 
 namespace MusicBeePlugin
@@ -38,7 +40,7 @@ namespace MusicBeePlugin
                     {
                         BackupIndex = new BackupIndex();
 
-                        deleteAllBackups = (DialogResult)MbForm.Invoke(new Func<DialogResult>(() => MessageBox.Show(MbForm, MsgBrMasterBackupIndexIsCorrupted.Replace("%%BACKUP-FOLDER%%", autoBackupDirectoryFullPath), 
+                        deleteAllBackups = (DialogResult)MbForm.Invoke(new Func<DialogResult>(() => MessageBox.Show(MbForm, MsgBrMasterBackupIndexIsCorrupted.Replace("%%BACKUP-FOLDER%%", autoBackupDirectoryFullPath),
                             string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)));
                     }
                     finally
@@ -104,7 +106,7 @@ namespace MusicBeePlugin
         {
             var now = DateTime.Now;
 
-            return BrGetCurrentLibraryName() + prefix + now.Year.ToString("D4") + "-" + now.Month.ToString("D2") + "-" + now.Day.ToString("D2")  + " "
+            return BrGetCurrentLibraryName() + prefix + now.Year.ToString("D4") + "-" + now.Month.ToString("D2") + "-" + now.Day.ToString("D2") + " "
                 + now.Hour.ToString("D2") + "." + now.Minute.ToString("D2") + "." + now.Second.ToString("D2");
         }
 
@@ -119,7 +121,7 @@ namespace MusicBeePlugin
         internal static string BrGetBackupDateTime(Backup backup)
         {
             var backupDate = backup.creationDate.ToLocalTime();
-            return backupDate.Year.ToString("D4") + "-" + backupDate.Month.ToString("D2") + "-" + backupDate.Day.ToString("D2")  + " "
+            return backupDate.Year.ToString("D4") + "-" + backupDate.Month.ToString("D2") + "-" + backupDate.Day.ToString("D2") + " "
                 + backupDate.Hour.ToString("D2") + ":" + backupDate.Minute.ToString("D2"); // + "." + backupDate.Second.ToString("D2");
         }
 
@@ -229,7 +231,8 @@ namespace MusicBeePlugin
             {
                 file.Close();
 
-                MbForm.Invoke(new Action(() => {
+                MbForm.Invoke(new Action(() =>
+                {
                     MessageBox.Show(MbForm, MsgBrBackupIsCorrupted.Replace("%%FILENAME%%", fileName));
                 }));
 
@@ -400,7 +403,8 @@ namespace MusicBeePlugin
 
             if (!File.Exists(baselineFilename + ".bbl")) //Backup baseline file doesn't exist
             {
-                MbForm.Invoke(new Action(() => {
+                MbForm.Invoke(new Action(() =>
+                {
                     MessageBox.Show(MbForm, MsgBrBackupBaselineFileDoesntExist.Replace("%%FILENAME%%", baselineFilename + ".bbl"));
                 }));
 
@@ -421,7 +425,8 @@ namespace MusicBeePlugin
             {
                 file.Close();
 
-                MbForm.Invoke(new Action(() => {
+                MbForm.Invoke(new Action(() =>
+                {
                     MessageBox.Show(MbForm, MsgBrBackupIsCorrupted.Replace("%%FILENAME%%", fileName) + "\n\n" + ex.Message);
                 }));
 
@@ -655,7 +660,7 @@ namespace MusicBeePlugin
                     if (lastShownCount < percentage)
                     {
                         lastShownCount = percentage;
-                        SetStatusBarText(statusBarText  + " " + percentage + "% (" + backupName + ")", false);
+                        SetStatusBarText(statusBarText + " " + percentage + "% (" + backupName + ")", false);
                     }
 
                     var currentFile = files[fileCounter];
@@ -730,7 +735,7 @@ namespace MusicBeePlugin
             {
                 LoadBackup(backupName, statusBarText, restoreForEntireLibrary, restoreFromAnotherLibrary);
             }
-            catch (System.Threading.ThreadAbortException) 
+            catch (System.Threading.ThreadAbortException)
             {
                 //Nothing to do, just let's cancel the task.
             }
@@ -803,7 +808,7 @@ namespace MusicBeePlugin
                 if (lastShownCount < percentage)
                 {
                     lastShownCount = percentage;
-                    SetStatusBarText(statusBarText  + " " + percentage + "% (" + backupName + ")", false);
+                    SetStatusBarText(statusBarText + " " + percentage + "% (" + backupName + ")", false);
                 }
 
                 var currentFile = files[fileCounter];

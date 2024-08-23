@@ -1,8 +1,10 @@
-﻿using ExtensionMethods;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+
+using ExtensionMethods;
+
 using static MusicBeePlugin.Plugin;
 
 namespace MusicBeePlugin
@@ -209,7 +211,7 @@ namespace MusicBeePlugin
 
         private void resetPreviewData()
         {
-            if (previewIsGenerated)//------------- check!!!
+            if (previewIsGenerated)
             {
                 previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
@@ -281,7 +283,7 @@ namespace MusicBeePlugin
 
         private bool applyingChangesStopped()
         {
-            previewTable.AllowUserToResizeColumns = true;//-----------------
+            previewTable.AllowUserToResizeColumns = true;
             previewTable.AllowUserToResizeRows = true;
             foreach (DataGridViewColumn column in previewTable.Columns)
                 column.SortMode = DataGridViewColumnSortMode.Automatic;
@@ -443,8 +445,8 @@ namespace MusicBeePlugin
             return ChangeWordsCase(source, changeCaseOption, ref encounteredLeftExceptionChars, ref wasCharException);
         }
 
-        internal static string ChangeWordsCase(string source, ChangeCaseOptions changeCaseOption, ref List<char> encounteredLeftExceptionChars, ref bool wasCharException, string[] exceptedWords = null, bool useWhiteList = false, 
-            string[] exceptionChars = null, string[] openingExceptionChars = null, string[] closingExceptionChars = null, 
+        internal static string ChangeWordsCase(string source, ChangeCaseOptions changeCaseOption, ref List<char> encounteredLeftExceptionChars, ref bool wasCharException, string[] exceptedWords = null, bool useWhiteList = false,
+            string[] exceptionChars = null, string[] openingExceptionChars = null, string[] closingExceptionChars = null,
             bool? alwaysCapitalize1stWord = false, bool? alwaysCapitalizeLastWord = false, bool ignoreSingleLetterExceptedWords = false)
         {
             var newString = string.Empty;
@@ -474,7 +476,7 @@ namespace MusicBeePlugin
             foreach (var currentChar in source)
             {
                 //Delayed reset of char exception (to skip spaces after exception chars if any)
-                if (wasCharException && !IsCharASymbol(currentChar) && (prevChar == ' ' || prevChar == MultipleItemsSplitterId 
+                if (wasCharException && !IsCharASymbol(currentChar) && (prevChar == ' ' || prevChar == MultipleItemsSplitterId
                     || ItemIndexInArray(prevChar, closingExceptionChars) >= 0))
                     resetCharException = true;
 
@@ -503,8 +505,8 @@ namespace MusicBeePlugin
                 var closingIndex = ItemIndexInArray(currentChar, closingExceptionChars);
                 if (closingIndex >= 0 && ItemIndexInArray(encounteredLeftExceptionChars[encounteredLeftExceptionChars.Count - 1], openingExceptionChars) == closingIndex)
                 {
-                        wasCharException = true;
-                        encounteredLeftExceptionChars.RemoveAt(encounteredLeftExceptionChars.Count - 1);
+                    wasCharException = true;
+                    encounteredLeftExceptionChars.RemoveAt(encounteredLeftExceptionChars.Count - 1);
                 }
 
 
@@ -513,10 +515,10 @@ namespace MusicBeePlugin
                     if (!IsCharASymbol(prevChar)) //End of word
                     {
                         //Always Capitalize 1st word in tag if this option is checked
-                        if (alwaysCapitalize1stWord == true && isTheFirstWord) 
+                        if (alwaysCapitalize1stWord == true && isTheFirstWord)
                             newString = newString + ChangeSubstringCase(currentWord, ChangeCaseOptions.TitleCase, true) + currentChar;
                         //Ignore changing case (for UPPERCASE excepted words)
-                        else if (alwaysCapitalize1stWord == null && isTheFirstWord && IsItemContainedInArray(currentWord, exceptedWords) && !useWhiteList) 
+                        else if (alwaysCapitalize1stWord == null && isTheFirstWord && IsItemContainedInArray(currentWord, exceptedWords) && !useWhiteList)
                             newString = newString + currentWord + currentChar;
                         //Ignore changing case for abbreviations even if they are contained in exceptedWords list (e.g. "A." if exceptedWords contains the article "a")
                         else if (wasSingleLetterWordCharException)
@@ -573,23 +575,23 @@ namespace MusicBeePlugin
             }
 
             //Ignore changing case if the word is not contained in whitelist, otherwise proceed as usual
-            if (!IsItemContainedInArray(currentWord, exceptedWords) && useWhiteList) 
+            if (!IsItemContainedInArray(currentWord, exceptedWords) && useWhiteList)
             {
                 newString += currentWord;
             }
             else
             {
                 //Always Capitalize last word if this option is checked, but there was no character exception
-                if (alwaysCapitalizeLastWord == true && !wasCharException && encounteredLeftExceptionChars.Count == 0) 
+                if (alwaysCapitalizeLastWord == true && !wasCharException && encounteredLeftExceptionChars.Count == 0)
                     newString += ChangeSubstringCase(currentWord, ChangeCaseOptions.TitleCase, true);
                 //Ignore changing case (for UPPERCASE excepted words)
-                else if (alwaysCapitalizeLastWord == null && IsItemContainedInArray(currentWord, exceptedWords) && !useWhiteList) 
+                else if (alwaysCapitalizeLastWord == null && IsItemContainedInArray(currentWord, exceptedWords) && !useWhiteList)
                     newString += ChangeSubstringCase(currentWord, ChangeCaseOptions.TitleCase, true);
                 //Ignore changing case for abbreviations even if they are contained in exceptedWords list (e.g. "A." if exceptedWords contains the article "a")
                 else if (wasSingleLetterWordCharException)
                     newString += currentWord;
                 //Ignore changing case
-                else if (wasCharException || (IsItemContainedInArray(currentWord, exceptedWords) && !useWhiteList) || encounteredLeftExceptionChars.Count > 0) 
+                else if (wasCharException || (IsItemContainedInArray(currentWord, exceptedWords) && !useWhiteList) || encounteredLeftExceptionChars.Count > 0)
                     newString += currentWord;
                 //Change case if alwaysCapitalize1stWord == null and isTheFirstWord == true 
                 else if (alwaysCapitalize1stWord == null && isTheFirstWord)
@@ -605,8 +607,8 @@ namespace MusicBeePlugin
             return newString;
         }
 
-        internal static string ChangeSentenceCase(string source, ChangeCaseOptions changeCaseOption, string[] exceptedWords = null, bool useWhiteList = false, 
-            string[] exceptionChars = null, string[] openingExceptionChars = null, string[] closingExceptionChars = null, string[] sentenceSeparators = null, 
+        internal static string ChangeSentenceCase(string source, ChangeCaseOptions changeCaseOption, string[] exceptedWords = null, bool useWhiteList = false,
+            string[] exceptionChars = null, string[] openingExceptionChars = null, string[] closingExceptionChars = null, string[] sentenceSeparators = null,
             bool? alwaysCapitalize1stWord = true, bool? alwaysCapitalizeLastWord = true, bool ignoreSingleLetterExceptedWords = false)
         {
             var newString = string.Empty;
@@ -706,7 +708,7 @@ namespace MusicBeePlugin
         }
 
         private string changeCase(string source, int changeCaseOptions, string[] exceptionWordsArg, bool useWhiteListArg, string[] exceptionCharsArg,
-            string[] openingExceptionCharsArg, string[] closingExceptionCharsArg, string[] sentenceSeparatorsArg, 
+            string[] openingExceptionCharsArg, string[] closingExceptionCharsArg, string[] sentenceSeparatorsArg,
             bool? alwaysCapitalize1stWordArg, bool? alwaysCapitalizeLastWordArg, bool ignoreSingleLetterExceptedWordsArg)
         {
             if (changeCaseOptions == 1)
@@ -927,9 +929,9 @@ namespace MusicBeePlugin
 
             for (var i = 0; i < previewTable.Rows.Count; i++)
             {
-                if ((string)previewTable.Rows[i].Cells[0].Value == "T")
+                if (previewTable.Rows[i].Cells[0].Value as string == "T")
                 {
-                    var newTagValue = changeCase((string)previewTable.Rows[i].Cells[5].Value, changeCaseFlag, exceptedWords, useWhiteList, exceptionChars,
+                    var newTagValue = changeCase(previewTable.Rows[i].Cells[5].Value as string, changeCaseFlag, exceptedWords, useWhiteList, exceptionChars,
                         openingExceptionChars, closingExceptionChars, sentenceSeparators, alwaysCapitalize1stWord, alwaysCapitalizeLastWord, ignoreSingleLetterExceptedWords);
                     var newTagTValue = GetTagRepresentation(newTagValue);
 
@@ -1104,7 +1106,7 @@ namespace MusicBeePlugin
         {
             if (!sentenceSeparatorsCheckBox.IsEnabled())
                 return;
-            
+
             sentenceSeparatorsCheckBox.Checked = !sentenceSeparatorsCheckBox.Checked;
         }
 
@@ -1112,7 +1114,7 @@ namespace MusicBeePlugin
         {
             foreach (DataGridViewRow row in previewTable.Rows)
             {
-                if ((string)row.Cells[0].Value == null)
+                if (row.Cells[0].Value == null)
                     continue;
 
                 if (state)
@@ -1130,7 +1132,7 @@ namespace MusicBeePlugin
             if (SavedSettings.dontHighlightChangedTags)
                 return;
 
-            if ((string)dataGridView.Rows[rowIndex].Cells[0].Value != "T")
+            if (dataGridView.Rows[rowIndex].Cells[0].Value as string != "T")
             {
                 for (var columnIndex = 1; columnIndex < dataGridView.ColumnCount; columnIndex++)
                 {
@@ -1146,7 +1148,7 @@ namespace MusicBeePlugin
             {
                 if (columnIndex == 6)
                 {
-                    if ((string)dataGridView.Rows[rowIndex].Cells[3].Value == (string)dataGridView.Rows[rowIndex].Cells[5].Value)
+                    if (dataGridView.Rows[rowIndex].Cells[3].Value == dataGridView.Rows[rowIndex].Cells[5].Value)
                         dataGridView.Rows[rowIndex].Cells[6].Style = unchangedCellStyle;
                     else
                         dataGridView.Rows[rowIndex].Cells[6].Style = changedCellStyle;

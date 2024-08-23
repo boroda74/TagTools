@@ -1,7 +1,9 @@
-﻿using ExtensionMethods;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+
+using ExtensionMethods;
+
 using static MusicBeePlugin.Plugin;
 
 namespace MusicBeePlugin
@@ -44,7 +46,7 @@ namespace MusicBeePlugin
             button_GotFocus(AcceptButton, null); //Let's mark active button
         }
 
-        private void calculateAlbumRating(List<string[]>  tags, int prevRow, int currentTagsIndex)
+        private void calculateAlbumRating(List<string[]> tags, int prevRow, int currentTagsIndex)
         {
             double sumRating = 0;
             double avgRating;
@@ -96,7 +98,7 @@ namespace MusicBeePlugin
             SetStatusBarText(null, true);
 
 
-            if (!Disposing && !IsDisposed)
+            if (!Disposing && !IsDisposed && IsHandleCreated)
             {
                 if (closeFormOnStopping)
                 {

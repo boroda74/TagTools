@@ -1,9 +1,11 @@
-﻿using ExtensionMethods;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
+
+using ExtensionMethods;
+
 using static MusicBeePlugin.Plugin;
 
 namespace MusicBeePlugin
@@ -161,7 +163,7 @@ namespace MusicBeePlugin
 
             maxPlaysPerDayBox.Text = CtlAutoRateCalculating;
             avgPlaysPerDayBox.Text = CtlAutoRateCalculating;
-            labelTotalTracks.Text = MsgNumberOfPlayedTracks  + CtlAutoRateCalculating.ToLower();
+            labelTotalTracks.Text = MsgNumberOfPlayedTracks + CtlAutoRateCalculating.ToLower();
 
 
             button_GotFocus(AcceptButton, null); //Let's mark active button
@@ -415,7 +417,7 @@ namespace MusicBeePlugin
             SetStatusBarText(null, true);
 
 
-            if (Disposing || IsDisposed)
+            if (Disposing || IsDisposed || !IsHandleCreated)
                 return;
 
             if (closeFormOnStopping)
@@ -541,7 +543,7 @@ namespace MusicBeePlugin
                 }
 
                 if ((fileCounter & 0x1f) == 0)
-                    MbForm.Invoke(new Action(() => { labelTotalTracks.Text = MsgNumberOfPlayedTracks + CtlAutoRateCalculating.ToLower() + " ("  + (100 * (fileCounter + 1) / files.Length) + "%)"; }));
+                    MbForm.Invoke(new Action(() => { labelTotalTracks.Text = MsgNumberOfPlayedTracks + CtlAutoRateCalculating.ToLower() + " (" + (100 * (fileCounter + 1) / files.Length) + "%)"; }));
 
 
                 var currentFile = files[fileCounter];

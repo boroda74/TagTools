@@ -83,6 +83,11 @@
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+
+            //MusicBee
+            this.templateNameTextBox = ControlsTools.CreateMusicBeeTextBox();
+            //~MusicBee            
+
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -93,11 +98,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.autoApplyPictureBox)).BeginInit();
             this.controlsPanel.SuspendLayout();
             this.SuspendLayout();
-
-            //MusicBee
-            this.templateNameTextBox = ControlsTools.CreateMusicBeeTextBox();
-            //~MusicBee            
-
             // 
             // splitContainer1
             // 

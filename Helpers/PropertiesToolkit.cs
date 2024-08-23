@@ -94,7 +94,7 @@ namespace ExtensionMethods
 
         private static bool IsType(System.Type type, System.Type targetType)
         {
-            return type == targetType || type.IsSubclassOf(targetType); //******** check if type == targetType works ALWAYS !!!!!
+            return type == targetType || type.IsSubclassOf(targetType);
         }
 
         private static List<System.Reflection.MemberInfo> GetMembers(System.Type type)

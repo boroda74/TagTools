@@ -38,7 +38,7 @@ internal static class NativeMethods
     internal const int SB_ENDSCROLL = 8; // Ends scroll
 
     internal const int WS_BORDER = 0x00800000;
-    
+
     internal const int WS_EX_CLIENTEDGE = 0x00000200;
     internal const int WS_HSCROLL = 0x00100000;
     internal const int WS_VSCROLL = 0x00200000;
@@ -99,7 +99,7 @@ internal static class NativeMethods
 
     [DllImport("user32.dll")]
     internal static extern IntPtr GetWindowDC(IntPtr hWnd);
-    
+
     [DllImport("user32.dll")]
     [return: MarshalAs(UnmanagedType.Bool)]
     internal static extern bool ReleaseDC(IntPtr hWnd, IntPtr hDC);

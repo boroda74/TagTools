@@ -1,6 +1,8 @@
-﻿using ExtensionMethods;
-using System;
+﻿using System;
 using System.Windows.Forms;
+
+using ExtensionMethods;
+
 using static MusicBeePlugin.Plugin;
 
 namespace MusicBeePlugin

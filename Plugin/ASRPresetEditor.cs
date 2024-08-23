@@ -1,9 +1,12 @@
-﻿using ExtensionMethods;
-using MusicBeePlugin.Properties;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
+
+using ExtensionMethods;
+
+using MusicBeePlugin.Properties;
+
 using static MusicBeePlugin.AdvancedSearchAndReplace;
 using static MusicBeePlugin.Plugin;
 
@@ -416,7 +419,7 @@ namespace MusicBeePlugin
 
         private void languages_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (currentLanguage == null || currentLanguage == (string)languagesCustom.SelectedItem)
+            if (currentLanguage == null || currentLanguage == languagesCustom.SelectedItem as string)
                 return;
 
 

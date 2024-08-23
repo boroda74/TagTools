@@ -217,26 +217,6 @@
             this.userPresetCheckBoxLabel = new System.Windows.Forms.Label();
             this.ignoreCaseCheckBoxLabel = new System.Windows.Forms.Label();
             this.textBoxTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.groupBox1.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.tableLayoutPanel4.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.tableLayoutPanel5.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.tableLayoutPanel6.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            this.tableLayoutPanel7.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox26)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox27)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox28)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox19)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox18)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).BeginInit();
-            this.tableLayoutPanel2.SuspendLayout();
-            this.textBoxTableLayoutPanel.SuspendLayout();
-            this.SuspendLayout();
 
             //MusicBee
             this.nameBox = ControlsTools.CreateMusicBeeTextBox();
@@ -257,6 +237,26 @@
             this.replacedPattern5Box = ControlsTools.CreateMusicBeeTextBox();
             //~MusicBee
 
+            this.groupBox1.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.tableLayoutPanel5.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.tableLayoutPanel6.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.tableLayoutPanel7.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox26)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox27)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox28)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox19)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox18)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).BeginInit();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.textBoxTableLayoutPanel.SuspendLayout();
+            this.SuspendLayout();
             // 
             // label1
             // 

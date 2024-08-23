@@ -1,8 +1,10 @@
-﻿using MusicBeePlugin;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+
+using MusicBeePlugin;
+
 using static MusicBeePlugin.LibraryReports;
 using static NativeMethods;
 
@@ -443,7 +445,7 @@ namespace ExtensionMethods
             {
                 form = customComboBox.ownerForm;
 
-                if (form == null || form.Disposing || form.IsDisposed)
+                if (form == null || form.Disposing || form.IsDisposed || !form.IsHandleCreated)
                     return;
 
                 form.setSkinnedControlColors(control, enable);
@@ -452,7 +454,7 @@ namespace ExtensionMethods
             }
 
 
-            if (form == null || form.Disposing || form.IsDisposed)
+            if (form == null || form.Disposing || form.IsDisposed || !form.IsHandleCreated)
                 return;
 
             if (control is TextBox || control is ListBox)

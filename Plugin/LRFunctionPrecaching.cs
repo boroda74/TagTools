@@ -1,10 +1,11 @@
-﻿using ExtensionMethods;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using MusicBeePlugin.Properties;
+
+using ExtensionMethods;
+
 using static MusicBeePlugin.LibraryReports;
 using static MusicBeePlugin.Plugin;
 
