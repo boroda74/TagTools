@@ -133,8 +133,6 @@ namespace MusicBeePlugin
             searchFolderComboBoxCustom.AddRange(SavedSettings.thLastSelectedFolders);
             searchFolderComboBoxCustom.Text = SavedSettings.thLastSelectedFolders[0] as string;
 
-            lastSelectedFolder = SavedSettings.thLastSelectedFolders[0] as string;
-
 
             numberOfBackupsNumericUpDown.Value = SavedSettings.thDefaultTagHistoryNumberOfBackups;
 

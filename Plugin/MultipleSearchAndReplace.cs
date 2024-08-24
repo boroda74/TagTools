@@ -74,6 +74,7 @@ namespace MusicBeePlugin
 
             FillListByTagNames(sourceTagListCustom.Items, true, false, false);
             sourceTagListCustom.Text = SavedSettings.copySourceTagName;
+            sourceTagList_SelectedIndexChanged(null, null);
 
             smartOperationCheckBox.Checked = SavedSettings.smartOperation;
 
@@ -1043,12 +1044,6 @@ namespace MusicBeePlugin
         private void sourceTagList_SelectedIndexChanged(object sender, EventArgs e)
         {
             autoDestinationTagCheckBox_CheckedChanged(null, null);
-        }
-
-        private void SearchOnlyCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            enableDisablePreviewOptionControls(true);
-            clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewChanges, buttonPreview, buttonOK, buttonClose, true);
         }
 
         private void buttonDeleteSaved_Click(object sender, EventArgs e)

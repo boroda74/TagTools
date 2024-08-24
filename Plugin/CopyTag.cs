@@ -63,8 +63,10 @@ namespace MusicBeePlugin
 
             FillListByTagNames(destinationTagListCustom.Items);
             destinationTagListCustom.Text = SavedSettings.copyDestinationTagName;
+            destinationTagList_SelectedIndexChanged(null, null);
 
             sourceTagListCustom.Text = SavedSettings.copySourceTagName;
+            sourceTagList_SelectedIndexChanged(null, null);
 
             onlyIfDestinationEmptyCheckBox.Checked = SavedSettings.onlyIfDestinationIsEmpty;
             onlyIfSourceNotEmptyCheckBox.Checked = SavedSettings.onlyIfSourceNotEmpty;
