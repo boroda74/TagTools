@@ -628,7 +628,6 @@ namespace MusicBeePlugin
 
         private void resetPreviewData(bool noReallyDisplayedTagsOtherwiseNoPreview)
         {
-            //if (backgroundTaskIsStopping || backgroundTaskIsStoppedOrCancelled || !backgroundTaskIsScheduled)//------------- check!!!
             if (previewIsGenerated)
             {
                 previewTable.AllowUserToResizeColumns = true;
@@ -1124,7 +1123,7 @@ namespace MusicBeePlugin
                     }
                     else
                     {
-                        if (previewTable.Rows[j].Cells[i].Selected && (string)previewTable.Rows[j].Cells[i].Value != CtlNoBackupData)
+                        if (previewTable.Rows[j].Cells[i].Selected && previewTable.Rows[j].Cells[i].Value as string != CtlNoBackupData)
                         {
                             currentTags[savedTagsTrackIndex, j] = backupTags[i - 1][savedTagsTrackIndex, j];
 
@@ -1170,7 +1169,7 @@ namespace MusicBeePlugin
                     }
                     else
                     {
-                        if (previewTable.Rows[j].Cells[i].Selected && (string)previewTable.Rows[j].Cells[i].Value != CtlNoBackupData)
+                        if (previewTable.Rows[j].Cells[i].Selected && previewTable.Rows[j].Cells[i].Value as string != CtlNoBackupData)
                         {
                             previewTable.Rows[j].Cells[0].Value = previewTable.Rows[j].Cells[i].Value;
                             break;

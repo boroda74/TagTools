@@ -1148,7 +1148,7 @@ namespace MusicBeePlugin
             {
                 if (columnIndex == 6)
                 {
-                    if (dataGridView.Rows[rowIndex].Cells[3].Value == dataGridView.Rows[rowIndex].Cells[5].Value)
+                    if (dataGridView.Rows[rowIndex].Cells[3].Value as string == dataGridView.Rows[rowIndex].Cells[5].Value as string)
                         dataGridView.Rows[rowIndex].Cells[6].Style = unchangedCellStyle;
                     else
                         dataGridView.Rows[rowIndex].Cells[6].Style = changedCellStyle;

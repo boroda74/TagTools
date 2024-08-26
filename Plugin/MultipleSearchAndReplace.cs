@@ -74,7 +74,6 @@ namespace MusicBeePlugin
 
             FillListByTagNames(sourceTagListCustom.Items, true, false, false);
             sourceTagListCustom.Text = SavedSettings.copySourceTagName;
-            sourceTagList_SelectedIndexChanged(null, null);
 
             smartOperationCheckBox.Checked = SavedSettings.smartOperation;
 
@@ -677,7 +676,7 @@ namespace MusicBeePlugin
             if (SavedSettings.dontHighlightChangedTags)
                 return;
 
-            if ((string)dataGridView.Rows[rowIndex].Cells[0].Value != "T")
+            if (dataGridView.Rows[rowIndex].Cells[0].Value as string != "T")
             {
                 for (var columnIndex = 1; columnIndex < dataGridView.ColumnCount; columnIndex++)
                 {
@@ -693,7 +692,7 @@ namespace MusicBeePlugin
             {
                 if (columnIndex == 3)
                 {
-                    if ((string)dataGridView.Rows[rowIndex].Cells[3].Value == (string)dataGridView.Rows[rowIndex].Cells[2].Value)
+                    if (dataGridView.Rows[rowIndex].Cells[3].Value as string == dataGridView.Rows[rowIndex].Cells[2].Value as string)
                         dataGridView.Rows[rowIndex].Cells[3].Style = unchangedCellStyle;
                     else
                         dataGridView.Rows[rowIndex].Cells[3].Style = changedCellStyle;
@@ -799,7 +798,7 @@ namespace MusicBeePlugin
             for (var i = 0; i < templateTable.Rows.Count; i++)
             {
                 query += EncodeSearchReplaceTemplate(string.Empty + templateTable.Rows[i].Cells[2].Value, string.Empty + templateTable.Rows[i].Cells[3].Value,
-                    (string)templateTable.Rows[i].Cells[0].Value == "T", (string)templateTable.Rows[i].Cells[1].Value == "T") + "|";
+                    templateTable.Rows[i].Cells[0].Value as string == "T", templateTable.Rows[i].Cells[1].Value as string == "T") + "|";
             }
 
             query = query.Remove(query.Length - 1);

@@ -286,7 +286,7 @@ namespace MusicBeePlugin
 
                 for (var fileCounter = 0; fileCounter < previewTable.Rows.Count; fileCounter++)
                 {
-                    if ((string)previewTable.Rows[fileCounter].Cells[0].Value == "T")
+                    if (previewTable.Rows[fileCounter].Cells[0].Value as string == "T")
                         currentTracks[fileCounter][0] = "T";
                     else
                         currentTracks[fileCounter][0] = "F";
@@ -564,7 +564,7 @@ namespace MusicBeePlugin
             {
                 try
                 {
-                    MessageBox.Show(this, (string)previewTable.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
+                    MessageBox.Show(this, previewTable.Rows[e.RowIndex].Cells[e.ColumnIndex].Value as string);
                 }
                 catch
                 {

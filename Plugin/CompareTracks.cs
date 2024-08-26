@@ -239,7 +239,6 @@ namespace MusicBeePlugin
 
         private void resetPreviewData(bool noReallyDisplayedTagsOtherwiseNoPreview)
         {
-            //if (backgroundTaskIsStopping || backgroundTaskIsStoppedOrCancelled || !backgroundTaskIsScheduled)//------------- check!!!
             if (previewIsGenerated)
             {
                 previewTable.AllowUserToResizeColumns = true;

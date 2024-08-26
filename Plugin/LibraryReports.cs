@@ -5023,7 +5023,7 @@ namespace MusicBeePlugin
                 conditionFieldListCustom.SelectedIndex = 0;
 
 
-            if (comparedFieldListCustom.Text == (string)comparedFieldListCustom.SelectedItem)
+            if (comparedFieldListCustom.Text == comparedFieldListCustom.SelectedItem as string)
                 comparedFieldListCustom.Text = string.Empty;
 
             comparedFieldListCustom.Items.Remove(fullFieldName);
@@ -5083,7 +5083,6 @@ namespace MusicBeePlugin
 
         private void resetPreviewData()
         {
-            //if (backgroundTaskIsStopping || backgroundTaskIsStoppedOrCancelled || !backgroundTaskIsScheduled)//------------- check!!!
             if (previewIsGenerated)
             {
                 previewTable.AllowUserToResizeColumns = true;

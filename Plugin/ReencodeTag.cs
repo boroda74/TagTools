@@ -503,7 +503,7 @@ namespace MusicBeePlugin
             if (SavedSettings.dontHighlightChangedTags)
                 return;
 
-            if ((string)dataGridView.Rows[rowIndex].Cells[0].Value != "T")
+            if (dataGridView.Rows[rowIndex].Cells[0].Value as string != "T")
             {
                 for (var columnIndex = 1; columnIndex < dataGridView.ColumnCount; columnIndex++)
                 {
@@ -519,7 +519,7 @@ namespace MusicBeePlugin
             {
                 if (columnIndex == 4)
                 {
-                    if ((string)dataGridView.Rows[rowIndex].Cells[3].Value == (string)dataGridView.Rows[rowIndex].Cells[4].Value)
+                    if (dataGridView.Rows[rowIndex].Cells[3].Value as string == dataGridView.Rows[rowIndex].Cells[4].Value as string)
                         dataGridView.Rows[rowIndex].Cells[4].Style = unchangedCellStyle;
                     else
                         dataGridView.Rows[rowIndex].Cells[4].Style = changedCellStyle;

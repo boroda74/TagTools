@@ -1,6 +1,6 @@
 # ADDITIONAL TAGGING & REPORTING TOOLS PLUGIN
 
-# Additional Tagging \& Reporting Tools plugin
+## Additional Tagging \& Reporting Tools plugin
 
 Plugin requires MusicBee version **3.5** or higher.
 
@@ -12,15 +12,15 @@ If you are familiar with the plugin quick update process, you can always [downlo
 
 Pay attention to tool tips over buttons/fields in plugin windows.
 
-#### Plugin adding/updating/removing
+### Plugin adding/updating/removing
 
-Extract content of the downloaded archive to a temporary folder of your choice. See the "README FIRST\!" file inside this folder for instructions on adding/updating/removing the plugin.
+Extract content of the downloaded archive to a temporary folder of your choice. See the "README FIRST!" file inside this folder for instructions on adding/updating/removing the plugin.
 
-#### This help file has been last updated on:
+### This help file has been last updated on:
 
-**2024-08-19**
+**2024-08-26**
 
-# Content
+## Content
 
 [Additional Tagging \& Reporting](docs/ADDITIONALTAGGINGREPORTING.md)
 
@@ -32,6 +32,11 @@ Extract content of the downloaded archive to a temporary folder of your choice. 
 
 [Appendix](docs/APPENDIX.md)
 
+### SAST Tools
+
+This project has been checked by PVS-Studio.
+[PVS-Studio](<https://pvs-studio.ru/ru/pvs-studio/?utm\_source=website\&utm\_medium=github\&utm\_campaign=open\_source"target=\"\_blank\"") - static analyzer for C, C++, C#, and Java code.
+
 ***
 
-Copyright © boroda 2012-2024. Help version 9.0.240819
+Copyright © boroda 2012-2024.Help version 9.0.240826

@@ -10,7 +10,7 @@ namespace MusicBeePlugin
     /// <summary>
     /// Summary description for FlatTabControl.
     /// </summary>
-    [ToolboxBitmap(typeof(TabControl))] //----, Designer(typeof(Designers.FlatTabControlDesigner))]
+    [ToolboxBitmap(typeof(TabControl))] //---, Designer(typeof(Designers.FlatTabControlDesigner))]
 
     public class FlatTabControl : TabControl
     {

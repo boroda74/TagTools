@@ -63,10 +63,8 @@ namespace MusicBeePlugin
 
             FillListByTagNames(destinationTagListCustom.Items);
             destinationTagListCustom.Text = SavedSettings.copyDestinationTagName;
-            destinationTagList_SelectedIndexChanged(null, null);
 
             sourceTagListCustom.Text = SavedSettings.copySourceTagName;
-            sourceTagList_SelectedIndexChanged(null, null);
 
             onlyIfDestinationEmptyCheckBox.Checked = SavedSettings.onlyIfDestinationIsEmpty;
             onlyIfSourceNotEmptyCheckBox.Checked = SavedSettings.onlyIfSourceNotEmpty;
@@ -168,7 +166,7 @@ namespace MusicBeePlugin
             enableQueryingOrUpdatingButtons();
             enableDisablePreviewOptionControls(true);
 
-            if (closeFormOnStopping && ignoreClosingForm && backgroundTaskIsScheduled)//--------------------
+            if (closeFormOnStopping && ignoreClosingForm && backgroundTaskIsScheduled)
             {
                 ignoreClosingForm = false;
                 Close();
@@ -429,7 +427,7 @@ namespace MusicBeePlugin
                     smartOperation, appendSource, appendedText, addSource, addedText);
 
                 string isChecked;
-                if (swappedTags.destinationNormalizedTagValue == swappedTags.newDestinationNormalizedTagValue && stripNotChangedLines)//******** check all command that use SwapTags()!!!!
+                if (swappedTags.destinationNormalizedTagValue == swappedTags.newDestinationNormalizedTagValue && stripNotChangedLines)
                     continue;
                 else if (onlyIfDestinationEmpty && !string.IsNullOrEmpty(swappedTags.destinationNormalizedTagValue) && stripNotChangedLines)
                     continue;
@@ -791,7 +789,7 @@ namespace MusicBeePlugin
             {
                 if (columnIndex == 8)
                 {
-                    if (dataGridView.Rows[rowIndex].Cells[6].Value == dataGridView.Rows[rowIndex].Cells[8].Value)
+                    if (dataGridView.Rows[rowIndex].Cells[6].Value as string == dataGridView.Rows[rowIndex].Cells[8].Value as string)
                         dataGridView.Rows[rowIndex].Cells[8].Style = unchangedCellStyle;
                     else
                         dataGridView.Rows[rowIndex].Cells[8].Style = changedCellStyle;
