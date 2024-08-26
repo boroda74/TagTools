@@ -331,7 +331,7 @@ namespace MusicBeePlugin
             var playsPerDay = GetPlaysPerDay(currentFile);
 
             // ReSharper disable once CompareOfFloatsByEqualityOperator
-            if (playsPerDay == -1)
+            if (playsPerDay == -1) //-V3024
                 autoRating = SavedSettings.defaultRating;
             else
             {
@@ -510,7 +510,7 @@ namespace MusicBeePlugin
             if (daysPlayed < 0)
                 daysPlayed = 0;
 
-            if (daysPlayed != 0 && played != 0)
+            if (daysPlayed != 0 && played != 0) //-V3024
                 return RoundPlaysPerDay(derivedPlayed / daysPlayed);
             else
                 return -1;
@@ -551,7 +551,7 @@ namespace MusicBeePlugin
                 var playsPerDay = GetPlaysPerDay(currentFile);
 
                 // ReSharper disable once CompareOfFloatsByEqualityOperator
-                if (playsPerDay != -1)
+                if (playsPerDay != -1) //-V3024
                 {
                     NumberOfFiles++;
                     totalPlaysPerDay += playsPerDay;
@@ -615,7 +615,7 @@ namespace MusicBeePlugin
                 SetStatusBarText(AutoRateSbText + AutoRateSbTextCalculatingThresholds + (fileCounter + 1) + "/" + files.Length, false);
 
                 // ReSharper disable once CompareOfFloatsByEqualityOperator
-                if (playsPerDay != -1)
+                if (playsPerDay != -1) //-V3024
                 {
                     NumberOfFiles++;
 
@@ -666,7 +666,7 @@ namespace MusicBeePlugin
                 playsPerDayStatistics.TryGetValue(playsPerDay, out var statistics);
                 statisticsSum += statistics;
 
-                if (SavedSettings.perCent5 != 0 && SavedSettings.threshold5 == 0)
+                if (SavedSettings.perCent5 != 0 && SavedSettings.threshold5 == 0) //-V3024
                 {
                     if (((decimal)statisticsSum) / NumberOfFiles * 100 >= SavedSettings.perCent5)
                     {
@@ -676,7 +676,7 @@ namespace MusicBeePlugin
                         statisticsSum = 0;
                     }
                 }
-                else if (SavedSettings.perCent45 != 0 && SavedSettings.threshold45 == 0)
+                else if (SavedSettings.perCent45 != 0 && SavedSettings.threshold45 == 0) //-V3024
                 {
                     if (((decimal)statisticsSum) / NumberOfFiles * 100 >= SavedSettings.perCent45)
                     {
@@ -686,7 +686,7 @@ namespace MusicBeePlugin
                         statisticsSum = 0;
                     }
                 }
-                else if (SavedSettings.perCent4 != 0 && SavedSettings.threshold4 == 0)
+                else if (SavedSettings.perCent4 != 0 && SavedSettings.threshold4 == 0) //-V3024
                 {
                     if (((decimal)statisticsSum) / NumberOfFiles * 100 >= SavedSettings.perCent4)
                     {
@@ -696,7 +696,7 @@ namespace MusicBeePlugin
                         statisticsSum = 0;
                     }
                 }
-                else if (SavedSettings.perCent35 != 0 && SavedSettings.threshold35 == 0)
+                else if (SavedSettings.perCent35 != 0 && SavedSettings.threshold35 == 0) //-V3024
                 {
                     if (((decimal)statisticsSum) / NumberOfFiles * 100 >= SavedSettings.perCent35)
                     {
@@ -706,7 +706,7 @@ namespace MusicBeePlugin
                         statisticsSum = 0;
                     }
                 }
-                else if (SavedSettings.perCent3 != 0 && SavedSettings.threshold3 == 0)
+                else if (SavedSettings.perCent3 != 0 && SavedSettings.threshold3 == 0) //-V3024
                 {
                     if (((decimal)statisticsSum) / NumberOfFiles * 100 >= SavedSettings.perCent3)
                     {
@@ -716,7 +716,7 @@ namespace MusicBeePlugin
                         statisticsSum = 0;
                     }
                 }
-                else if (SavedSettings.perCent25 != 0 && SavedSettings.threshold25 == 0)
+                else if (SavedSettings.perCent25 != 0 && SavedSettings.threshold25 == 0) //-V3024
                 {
                     if (((decimal)statisticsSum) / NumberOfFiles * 100 >= SavedSettings.perCent25)
                     {
@@ -726,7 +726,7 @@ namespace MusicBeePlugin
                         statisticsSum = 0;
                     }
                 }
-                else if (SavedSettings.perCent2 != 0 && SavedSettings.threshold2 == 0)
+                else if (SavedSettings.perCent2 != 0 && SavedSettings.threshold2 == 0) //-V3024
                 {
                     if (((decimal)statisticsSum) / NumberOfFiles * 100 >= SavedSettings.perCent2)
                     {
@@ -736,7 +736,7 @@ namespace MusicBeePlugin
                         statisticsSum = 0;
                     }
                 }
-                else if (SavedSettings.perCent15 != 0 && SavedSettings.threshold15 == 0)
+                else if (SavedSettings.perCent15 != 0 && SavedSettings.threshold15 == 0) //-V3024
                 {
                     if (((decimal)statisticsSum) / NumberOfFiles * 100 >= SavedSettings.perCent15)
                     {
@@ -746,7 +746,7 @@ namespace MusicBeePlugin
                         statisticsSum = 0;
                     }
                 }
-                else if (SavedSettings.perCent1 != 0 && SavedSettings.threshold1 == 0)
+                else if (SavedSettings.perCent1 != 0 && SavedSettings.threshold1 == 0) //-V3024
                 {
                     if (((decimal)statisticsSum) / NumberOfFiles * 100 >= SavedSettings.perCent1)
                     {
@@ -756,7 +756,7 @@ namespace MusicBeePlugin
                         statisticsSum = 0;
                     }
                 }
-                else if (SavedSettings.perCent05 != 0 && SavedSettings.threshold05 == 0)
+                else if (SavedSettings.perCent05 != 0 && SavedSettings.threshold05 == 0) //-V3024
                 {
                     if (((decimal)statisticsSum) / NumberOfFiles * 100 >= SavedSettings.perCent05)
                     {
@@ -770,52 +770,52 @@ namespace MusicBeePlugin
 
             if (NumberOfFiles > assignedFilesNumber)
             {
-                if (SavedSettings.perCent5 != 0 && SavedSettings.threshold5 == 0)
+                if (SavedSettings.perCent5 != 0 && SavedSettings.threshold5 == 0) //-V3024
                 {
                     SavedSettings.actualPerCent5 = Math.Round(((decimal)(NumberOfFiles - assignedFilesNumber)) / NumberOfFiles * 100, 0);
                     //MusicBeePlugin.savedSettings.threshold5 = 0;
                 }
-                else if (SavedSettings.perCent45 != 0 && SavedSettings.threshold45 == 0)
+                else if (SavedSettings.perCent45 != 0 && SavedSettings.threshold45 == 0) //-V3024
                 {
                     SavedSettings.actualPerCent45 = Math.Round(((decimal)(NumberOfFiles - assignedFilesNumber)) / NumberOfFiles * 100, 0);
                     //MusicBeePlugin.savedSettings.threshold45 = 0;
                 }
-                else if (SavedSettings.perCent4 != 0 && SavedSettings.threshold4 == 0)
+                else if (SavedSettings.perCent4 != 0 && SavedSettings.threshold4 == 0) //-V3024
                 {
                     SavedSettings.actualPerCent4 = Math.Round(((decimal)(NumberOfFiles - assignedFilesNumber)) / NumberOfFiles * 100, 0);
                     //MusicBeePlugin.savedSettings.threshold4 = 0;
                 }
-                else if (SavedSettings.perCent35 != 0 && SavedSettings.threshold35 == 0)
+                else if (SavedSettings.perCent35 != 0 && SavedSettings.threshold35 == 0) //-V3024
                 {
                     SavedSettings.actualPerCent35 = Math.Round(((decimal)(NumberOfFiles - assignedFilesNumber)) / NumberOfFiles * 100, 0);
                     //MusicBeePlugin.savedSettings.threshold35 = 0;
                 }
-                else if (SavedSettings.perCent3 != 0 && SavedSettings.threshold3 == 0)
+                else if (SavedSettings.perCent3 != 0 && SavedSettings.threshold3 == 0) //-V3024
                 {
                     SavedSettings.actualPerCent3 = Math.Round(((decimal)(NumberOfFiles - assignedFilesNumber)) / NumberOfFiles * 100, 0);
                     //MusicBeePlugin.savedSettings.threshold3 = 0;
                 }
-                else if (SavedSettings.perCent25 != 0 && SavedSettings.threshold25 == 0)
+                else if (SavedSettings.perCent25 != 0 && SavedSettings.threshold25 == 0) //-V3024
                 {
                     SavedSettings.actualPerCent25 = Math.Round(((decimal)(NumberOfFiles - assignedFilesNumber)) / NumberOfFiles * 100, 0);
                     //MusicBeePlugin.savedSettings.threshold25 = 0;
                 }
-                else if (SavedSettings.perCent2 != 0 && SavedSettings.threshold2 == 0)
+                else if (SavedSettings.perCent2 != 0 && SavedSettings.threshold2 == 0) //-V3024
                 {
                     SavedSettings.actualPerCent2 = Math.Round(((decimal)(NumberOfFiles - assignedFilesNumber)) / NumberOfFiles * 100, 0);
                     //MusicBeePlugin.savedSettings.threshold2 = 0;
                 }
-                else if (SavedSettings.perCent15 != 0 && SavedSettings.threshold15 == 0)
+                else if (SavedSettings.perCent15 != 0 && SavedSettings.threshold15 == 0) //-V3024
                 {
                     SavedSettings.actualPerCent15 = Math.Round(((decimal)(NumberOfFiles - assignedFilesNumber)) / NumberOfFiles * 100, 0);
                     //MusicBeePlugin.savedSettings.threshold15 = 0;
                 }
-                else if (SavedSettings.perCent1 != 0 && SavedSettings.threshold1 == 0)
+                else if (SavedSettings.perCent1 != 0 && SavedSettings.threshold1 == 0) //-V3024
                 {
                     SavedSettings.actualPerCent1 = Math.Round(((decimal)(NumberOfFiles - assignedFilesNumber)) / NumberOfFiles * 100, 0);
                     //MusicBeePlugin.savedSettings.threshold1 = 0;
                 }
-                else if (SavedSettings.perCent05 != 0 && SavedSettings.threshold05 == 0)
+                else if (SavedSettings.perCent05 != 0 && SavedSettings.threshold05 == 0) //-V3024
                 {
                     SavedSettings.actualPerCent05 = Math.Round(((decimal)(NumberOfFiles - assignedFilesNumber)) / NumberOfFiles * 100, 0);
                     //MusicBeePlugin.savedSettings.threshold05 = 0;

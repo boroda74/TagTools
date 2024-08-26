@@ -481,7 +481,7 @@ namespace MusicBeePlugin
                     resetCharException = true;
 
                 //Let's exclude abbreviations even if they are contained in exceptedWords list (e.g. "A." if exceptedWords contains the article "a")
-                if (ignoreSingleLetterExceptedWords && currentChar == '.' && currentWord.Length == 1)
+                if (ignoreSingleLetterExceptedWords && currentChar == '.' && currentWord.Length == 1) //-V3095
                 {
                     wasSingleLetterWordCharException = true;
                 }
@@ -570,7 +570,7 @@ namespace MusicBeePlugin
             //String is ended, so last currentWord IS a word
             if (resetCharException)
             {
-                resetCharException = false;
+                //resetCharException = false;
                 wasCharException = false;
             }
 

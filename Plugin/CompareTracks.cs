@@ -195,9 +195,9 @@ namespace MusicBeePlugin
                     previewTable.Columns.Add(newColumn);
                 }
             }
-            catch
+            catch //-V3163 //-V5606
             {
-                //Generating preview is stopped. There is some .Net bug. Let's ignore.
+                //Generating preview is stopped. There is some .Net bug. Let's ignore. //--------
             }
 
 

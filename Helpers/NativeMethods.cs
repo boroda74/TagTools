@@ -370,10 +370,8 @@ internal class SubClass : NativeWindow
 
     private int OnSubClassedWndProc(ref Message m)
     {
-        if (SubClassedWndProc != null)
-        {
-            return this.SubClassedWndProc(ref m);
-        }
+        if (this.SubClassedWndProc != null)
+            return this.SubClassedWndProc(ref m); //-V3083 //-V5605
 
         return 0;
     }

@@ -12,13 +12,13 @@ namespace ExtensionMethods
         {
             var srcEventList = GetControlEventHandlerList(src);
             var srcEventKey = GetControlEventKey(src, eventName);
-            var srcHandlers = srcEventList[srcEventKey];
+            var srcHandlers = srcEventList[srcEventKey]; //-V3080
 
             //Copy the srcHandlers
             var destEventList = GetControlEventHandlerList(dest);
             var destEventKey = GetControlEventKey(dest, eventName);
 
-            destEventList.AddHandler(destEventKey, srcHandlers);
+            destEventList.AddHandler(destEventKey, srcHandlers); //-V3080
 
             if (deleteSrcHandlers)
                 srcEventList.RemoveHandler(srcEventKey, srcEventList[srcEventKey]);

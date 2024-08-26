@@ -105,7 +105,7 @@ namespace MusicBeePlugin
         internal static float TextBoxHeightDpiFontScaling = 1;
         internal static float DpiScaling = 1;
 
-        internal static bool SizesColorsChanged = true;
+        internal static volatile bool SizesColorsChanged = true;
 
         internal static Color FormForeColor;
         internal static Color FormBackColor;
@@ -1329,7 +1329,7 @@ namespace MusicBeePlugin
                 }
                 else
                 {
-                    if (value == comparedValue)
+                    if (value == comparedValue) //-V3024
                         return 0;
                     else if (value < comparedValue)
                         return -1;
@@ -1834,7 +1834,7 @@ namespace MusicBeePlugin
 
                 if (comparedColumnIndex != -1)
                 {
-                    var comparison = CompareStrings((x as DataGridViewRow).Cells[comparedColumnIndex].Value as string, (y as DataGridViewRow).Cells[comparedColumnIndex].Value as string); //-V3156
+                    var comparison = CompareStrings((x as DataGridViewRow).Cells[comparedColumnIndex].Value as string, (y as DataGridViewRow).Cells[comparedColumnIndex].Value as string);
                     if (comparison > 0)
                         return 1;
                     else if (comparison < 0)
@@ -4081,9 +4081,9 @@ namespace MusicBeePlugin
 
                 try
                 {
-                    SavedSettings = (PluginSettings)controlsDefaultsSerializer.Deserialize(file);
+                    SavedSettings = (PluginSettings)controlsDefaultsSerializer.Deserialize(file); //-V5611
                 }
-                catch
+                catch //-V3163 //-V5606
                 {
                     //Ignore...
                 }
@@ -4107,10 +4107,10 @@ namespace MusicBeePlugin
 
                 try
                 {
-                    var oldSavedSettings = (SavedSettingsType)controlsDefaultsSerializer.Deserialize(file);
+                    var oldSavedSettings = (SavedSettingsType)controlsDefaultsSerializer.Deserialize(file); //-V5611
                     oldSavedSettings.CopyPropsTo(ref SavedSettings);
                 }
-                catch
+                catch //-V3163 //-V5606
                 {
                     //Ignore...
                 }
@@ -4934,7 +4934,7 @@ namespace MusicBeePlugin
             functionIds = new string[functions.Length];
 
             destinationTags = new string[functions.Length];
-            for (var i = 0; i < destinationTags.Length; i++) //-V3116
+            for (var i = 0; i < destinationTags.Length; i++)
                 destinationTags[i] = NullTagName;
 
             //Let's copy allowed user customizations from existing predefined preset (if it exists)
@@ -4962,7 +4962,7 @@ namespace MusicBeePlugin
             functionIds = new string[functions.Length];
 
             destinationTags = new string[functions.Length];
-            for (var i = 0; i < destinationTags.Length; i++) //-V3116
+            for (var i = 0; i < destinationTags.Length; i++)
                 destinationTags[i] = NullTagName;
 
             //Let's copy allowed user customizations from existing predefined preset (if it exists)
@@ -4988,7 +4988,7 @@ namespace MusicBeePlugin
             functionIds = new string[functions.Length];
 
             destinationTags = new string[functions.Length];
-            for (var i = 0; i < destinationTags.Length; i++) //-V3116
+            for (var i = 0; i < destinationTags.Length; i++)
                 destinationTags[i] = NullTagName;
 
             //Let's copy allowed user customizations from existing predefined preset (if it exists)
@@ -5328,7 +5328,7 @@ namespace MusicBeePlugin
                     Directory.Delete(presetsPath, true);
                 }
             }
-            catch
+            catch //-V3163 //-V5606
             {
                 //Ignored...
             }
@@ -5455,15 +5455,15 @@ namespace MusicBeePlugin
                             else //if (SavedSettings.lastSkippedDateFormat == 2)
                                 lastSkippedDate = now.ToString("G");
 
-                            SetFileTag(sourceFileUrl, (MetaDataType)SavedSettings.lastSkippedTagId, lastSkippedDate, true);
+                            SetFileTag(sourceFileUrl, (MetaDataType)SavedSettings.lastSkippedTagId, lastSkippedDate, true); //-V5609
                             CommitTagsToFile(sourceFileUrl, false, true);
                         }
                     }
 
-                    autoApplyAsrUpdateLrCache(sourceFileUrl);
+                    autoApplyAsrUpdateLrCache(sourceFileUrl); //-V5609
 
                     if (SavedSettings.autoRateOnTrackProperties)
-                        AutoRate.AutoRateLive(sourceFileUrl);
+                        AutoRate.AutoRateLive(sourceFileUrl); //-V5609
 
 
                     if (!SavedSettings.dontShowBackupRestore && SavedSettings.dontSkipAutoBackupsIfOnlyPlayCountsChanged)
@@ -5475,7 +5475,7 @@ namespace MusicBeePlugin
 
                     break;
                 case NotificationType.FileRemovedFromLibrary:
-                    autoApplyAsrUpdateLrCache(sourceFileUrl);
+                    autoApplyAsrUpdateLrCache(sourceFileUrl); //-V5609
 
                     break;
                 case NotificationType.FileRenamed:
@@ -5486,7 +5486,7 @@ namespace MusicBeePlugin
                 case NotificationType.TagsChanged:
                 case NotificationType.ReplayGainChanged:
                 case NotificationType.FileAddedToLibrary:
-                    autoApplyAsrUpdateLrCache(sourceFileUrl);
+                    autoApplyAsrUpdateLrCache(sourceFileUrl); //-V5609
 
 
                     if (!SavedSettings.dontShowBackupRestore)
@@ -5494,12 +5494,12 @@ namespace MusicBeePlugin
 
                     break;
                 case NotificationType.RatingChanged:
-                    autoApplyAsrUpdateLrCache(sourceFileUrl);
+                    autoApplyAsrUpdateLrCache(sourceFileUrl); //-V5609
 
                     if (!SavedSettings.dontShowCAR)
                     {
                         if (SavedSettings.calculateAlbumRatingAtTagsChanged)
-                            CalculateAverageAlbumRating.CalculateAlbumRatingForAlbum(sourceFileUrl);
+                            CalculateAverageAlbumRating.CalculateAlbumRatingForAlbum(sourceFileUrl); //-V5609
                     }
 
 
@@ -6773,7 +6773,7 @@ namespace MusicBeePlugin
             if (string.IsNullOrEmpty(presetId))
                 return string.Empty;
 
-            return GetLastReplacedTag(url, IdsAsrPresets[presetId]) ?? string.Empty;
+            return GetLastReplacedTag(url, IdsAsrPresets[presetId]) ?? string.Empty; //-V5609
         }
 
         public string CustomFunc_LR(string url, string functionId)
@@ -6781,7 +6781,7 @@ namespace MusicBeePlugin
             if (SavedSettings.dontShowLibraryReports)
                 return "LR is disabled!";
 
-            return AutoCalculateReportPresetFunction(url, functionId) ?? "<null>";
+            return AutoCalculateReportPresetFunction(url, functionId) ?? "<null>"; //-V5609
         }
 
         public string CustomFunc_Random(string max_number)
@@ -7153,21 +7153,21 @@ namespace MusicBeePlugin
                     sentenceSeparators = ChangeCase.GetCharsInString(sentenceSeparatorsString);
 
 
-                if (!string.IsNullOrWhiteSpace(openingExceptionCharsString))
+                if (!string.IsNullOrWhiteSpace(openingExceptionCharsString)) //-V3022
                     openingExceptionChars = ChangeCase.GetCharsInString(openingExceptionCharsString);
 
-                if (!string.IsNullOrWhiteSpace(closingExceptionCharsString))
+                if (!string.IsNullOrWhiteSpace(closingExceptionCharsString)) //-V3022
                     closingExceptionChars = ChangeCase.GetCharsInString(closingExceptionCharsString);
 
 
-                string[] exceptedWords = null;
+                //string[] exceptedWords = null;
 
-                if (lowerCaseWords != null && upperCaseWords == null)
-                    exceptedWords = lowerCaseWords;
-                else if (lowerCaseWords == null && upperCaseWords != null)
-                    exceptedWords = upperCaseWords;
-                else if (lowerCaseWords != null && upperCaseWords != null)
-                    exceptedWords = lowerCaseWords.Union(upperCaseWords).ToArray();
+                //if (lowerCaseWords != null && upperCaseWords == null)
+                //    exceptedWords = lowerCaseWords;
+                //else if (lowerCaseWords == null && upperCaseWords != null)
+                //    exceptedWords = upperCaseWords;
+                //else if (lowerCaseWords != null && upperCaseWords != null)
+                //    exceptedWords = lowerCaseWords.Union(upperCaseWords).ToArray();
 
 
                 input = ChangeCase.ChangeWordsCase(input, ChangeCase.ChangeCaseOptions.LowerCase);
@@ -7238,7 +7238,7 @@ namespace MusicBeePlugin
 
         public string CustomFunc_DateCreated(string url)
         {
-            var fileInfo = new FileInfo(url);
+            var fileInfo = new FileInfo(url); //-V5609
             if (fileInfo.Exists)
                 return fileInfo.CreationTime.ToString("d");
             else
@@ -7283,7 +7283,7 @@ namespace MusicBeePlugin
         {
             var tagId = GetTagId(tagName);
 
-            var tagValue = GetFileTag(url, tagId);
+            var tagValue = GetFileTag(url, tagId); //-V5609
             var textParts = text.Split('|');
 
             foreach (var textPart in textParts)
@@ -7301,7 +7301,7 @@ namespace MusicBeePlugin
         {
             var tagId = GetTagId(tagName);
 
-            var tagValue = GetFileTag(url, tagId);
+            var tagValue = GetFileTag(url, tagId); //-V5609
             var textParts = text.Split('|');
 
             var result = "T";

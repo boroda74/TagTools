@@ -552,7 +552,7 @@ namespace MusicBeePlugin
                 pictureBox.Image = Resources.transparent_15;
 
 
-            FillParameterTagTypeList(tagType, parameterTagTypeList2, tagTypeLabel2); //-V3080
+            FillParameterTagTypeList(tagType, parameterTagTypeList2, tagTypeLabel2);
 
             if (tagType == TagType.WritableAllowAllTags) //Let's disable entering <ALL TAGS> pseudo-tag directly in preset editor for safety reasons !!!
                 tagType = TagType.Writable;

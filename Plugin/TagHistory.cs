@@ -140,12 +140,12 @@ namespace MusicBeePlugin
             if (SavedSettings.thDisplayedTags == null)
             {
                 var offset = 0;
-                displayedTags = new int[tagIds.Count - 1];
+                displayedTags = new int[tagIds.Count - 1]; //-V3171
                 for (var i = 0; i < tagIds.Count; i++)
                     if (tagIds[i] == MetaDataType.Artwork)
                         offset = -1;
                     else
-                        displayedTags[i + offset] = (int)tagIds[i];
+                        displayedTags[i + offset] = (int)tagIds[i]; //-V3106
 
                 SavedSettings.thDisplayedTags = displayedTags;
             }
@@ -733,7 +733,7 @@ namespace MusicBeePlugin
             return true;
         }
 
-        internal bool prepareBackgroundPreview()
+        internal bool prepareBackgroundPreview() //-V3009
         {
             resetPreviewData(false);
 
@@ -1063,7 +1063,7 @@ namespace MusicBeePlugin
             ignoreClosingForm = true;
             previewTable.AllowUserToResizeColumns = false;
             previewTable.AllowUserToResizeRows = false;
-            switchOperation(applyChanges, sender as Button, sender as Button, buttonPreview, buttonClose, true, null);
+            switchOperation(applyChanges, buttonOK, buttonOK, buttonPreview, buttonClose, true, null);
         }
 
         private void buttonClose_Click(object sender, EventArgs e)
@@ -1247,13 +1247,13 @@ namespace MusicBeePlugin
                 disableQueryingOrUpdatingButtons();
 
                 displayedTagsBackup = displayedTags;
-                displayedTags = new int[tagIds.Count - 1];
+                displayedTags = new int[tagIds.Count - 1]; //-V3171
                 var offset = 0;
                 for (var i = 0; i < tagIds.Count; i++)
                     if (tagIds[i] == MetaDataType.Artwork)
                         offset = -1;
                     else
-                        displayedTags[i + offset] = (int)tagIds[i];
+                        displayedTags[i + offset] = (int)tagIds[i]; //-V3106
 
 
                 if (ignoreAutoSelectTagsCheckBoxCheckedEvent)

@@ -139,7 +139,7 @@ namespace MusicBeePlugin
 
 
             var form = control.FindForm() as PluginWindowTemplate;
-            form.controlBorders.AddUnique(this);
+            form.controlBorders.AddUnique(this); //-V3149
 
             this.control = control;
 
@@ -1359,7 +1359,7 @@ namespace MusicBeePlugin
                 {
                     // ReSharper disable once PossibleNullReferenceException
                     // ReSharper disable once CompareOfFloatsByEqualityOperator
-                    if ((Parent as TableLayoutPanel).ColumnStyles[1].Width != vScrollBar.Width)
+                    if ((Parent as TableLayoutPanel).ColumnStyles[1].Width != vScrollBar.Width) //-V3024
                         // ReSharper disable once PossibleNullReferenceException
                         (Parent as TableLayoutPanel).ColumnStyles[1].Width = vScrollBar.Width;
 
@@ -1375,7 +1375,7 @@ namespace MusicBeePlugin
                 else
                 {
                     // ReSharper disable once PossibleNullReferenceException
-                    if ((Parent as TableLayoutPanel).ColumnStyles[1].Width != 0)
+                    if ((Parent as TableLayoutPanel).ColumnStyles[1].Width != 0) //-V3024
                         // ReSharper disable once PossibleNullReferenceException
                         (Parent as TableLayoutPanel).ColumnStyles[1].Width = 0;
 
@@ -1464,7 +1464,7 @@ namespace MusicBeePlugin
                 m.Msg == LB_RESETCONTENT)
 
                 if (ItemsChanged != null)
-                    ItemsChanged(this, EventArgs.Empty); //-V3083
+                    ItemsChanged(this, EventArgs.Empty); //-V3083 //-V5605
 
             if (m.Msg == WM_NCPAINT && !showScroll)
             {
@@ -1625,7 +1625,7 @@ namespace MusicBeePlugin
                 m.Msg == LB_RESETCONTENT)
 
                 if (ItemsChanged != null)
-                    ItemsChanged(this, EventArgs.Empty); //-V3083
+                    ItemsChanged(this, EventArgs.Empty); //-V3083 //-V5605
 
             if (m.Msg == WM_NCPAINT && !showScroll)
             {
@@ -1965,7 +1965,7 @@ namespace MusicBeePlugin
             SetThumbTopFromValueAndLargeChange();
 
             if (ValueChanged != null)
-                ValueChanged(this, null); //-V3083
+                ValueChanged(this, null); //-V3083 //-V5605
 
             Invalidate();
         }
@@ -2453,7 +2453,7 @@ namespace MusicBeePlugin
                     + upImageAdditionalTopHeight + upImageAdditionalBottomHeight + sbBorderWidth);
 
                 var fScrollPerc = 0.0f;
-                if (fScrollDistance != 0)
+                if (fScrollDistance != 0) //-V3024
                     fScrollPerc = ((float)ptPoint.Y - (UpArrowImage.Height
                         + upImageAdditionalTopHeight + upImageAdditionalBottomHeight + sbBorderWidth)) / fScrollDistance;
 
@@ -2476,7 +2476,7 @@ namespace MusicBeePlugin
                     + upImageAdditionalTopHeight + upImageAdditionalBottomHeight + sbBorderWidth);
 
                 var fScrollPerc = 0.0f;
-                if (fScrollDistance != 0)
+                if (fScrollDistance != 0) //-V3024
                     fScrollPerc = 1f - ((float)Height - 2 * (UpArrowImage.Height
                         + upImageAdditionalTopHeight + upImageAdditionalBottomHeight + sbBorderWidth) - ptPoint.Y) / fScrollDistance;
 
@@ -2795,7 +2795,7 @@ namespace MusicBeePlugin
             SetThumbLeftFromValueAndLargeChange();
 
             if (ValueChanged != null)
-                ValueChanged(this, null); //-V3083
+                ValueChanged(this, null); //-V3083 //-V5605
 
             Invalidate();
         }
@@ -3281,7 +3281,7 @@ namespace MusicBeePlugin
                     + leftImageAdditionalLeftWidth + leftImageAdditionalRightWidth + sbBorderWidth);
 
                 var fScrollPerc = 0.0f;
-                if (fScrollDistance != 0)
+                if (fScrollDistance != 0) //-V3024
                     fScrollPerc = ((float)ptPoint.X - (LeftArrowImage.Width
                         + leftImageAdditionalLeftWidth + leftImageAdditionalRightWidth + sbBorderWidth)) / fScrollDistance;
 
@@ -3304,7 +3304,7 @@ namespace MusicBeePlugin
                     + leftImageAdditionalLeftWidth + leftImageAdditionalRightWidth + sbBorderWidth);
 
                 var fScrollPerc = 0.0f;
-                if (fScrollDistance != 0)
+                if (fScrollDistance != 0) //-V3024
                     fScrollPerc = 1f - ((float)Width - 2 * (LeftArrowImage.Width
                         + leftImageAdditionalLeftWidth + leftImageAdditionalRightWidth + sbBorderWidth) - ptPoint.X) / fScrollDistance;
 

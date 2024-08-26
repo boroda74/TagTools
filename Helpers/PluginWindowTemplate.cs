@@ -121,7 +121,6 @@ namespace MusicBeePlugin
 
         internal volatile bool backgroundTaskIsStoppedOrCancelled;
         internal volatile bool previewIsGenerated;
-        protected volatile int checkMinimumColumnCount = -1;
 
         protected volatile bool closeFormOnStopping = false;
         protected volatile bool ignoreClosingForm = false;
@@ -644,7 +643,7 @@ namespace MusicBeePlugin
             }
             else if (levelX == 0)
             {
-                if (offset == 0)
+                if (offset == 0) //-V3024
                     return control2X.Left - controlNewWidth - (control.Margin.Right + control2X.Margin.Left);
                 else
                     return (int)Math.Round(control2X.Left - controlNewWidth - offset * hDpiFontScaling);
@@ -663,7 +662,7 @@ namespace MusicBeePlugin
             }
             else if (levelY == 0)
             {
-                if (offset == 0)
+                if (offset == 0) //-V3024
                     return control2Y.Top - controlNewHeight - (control.Margin.Bottom + control2Y.Margin.Top);
                 else
                     return (int)Math.Round(control2Y.Top - controlNewHeight - offset * vDpiFontScaling);
@@ -762,7 +761,7 @@ namespace MusicBeePlugin
             {
                 //Let's change auto-scaled button height to auto-scaled height of generic controls, not buttons
                 // ReSharper disable once CompareOfFloatsByEqualityOperator
-                if (control is Button && !stringTag.Contains("@square-button") && (ButtonHeightDpiFontScaling != 1 || TextBoxHeightDpiFontScaling != 1))
+                if (control is Button && !stringTag.Contains("@square-button") && (ButtonHeightDpiFontScaling != 1 || TextBoxHeightDpiFontScaling != 1)) //-V3024
                 {
                     int initialHeight = control.Height;
                     control.Height = (int)Math.Round(control.Height * TextBoxHeightDpiFontScaling / ButtonHeightDpiFontScaling);
@@ -1303,7 +1302,7 @@ namespace MusicBeePlugin
                 else
                     dataGridView.HorizontalScrollingOffset = (int)(((float)maximum - largeChange) * value / maximum);
 
-                customHScrollBar.SettingParentScroll = false;
+                customHScrollBar.SettingParentScroll = false; //-V3008
 
                 customHScrollBar.Invalidate();
                 dataGridView.Invalidate();
@@ -1322,7 +1321,7 @@ namespace MusicBeePlugin
                 PropertyInfo verticalOffset = dataGridView.GetType().GetProperty("VerticalOffset", BindingFlags.NonPublic | BindingFlags.Instance);
                 verticalOffset.SetValue(dataGridView, offset, null);
             }
-            catch
+            catch //-V3163 //-V5606
             {
                 //Let's ignore...
             }
@@ -1336,7 +1335,7 @@ namespace MusicBeePlugin
             var largeChange = customVScrollBar.LargeChange;
             var maximum = customVScrollBar.Maximum;
             var form = customVScrollBar.FindForm();
-            var vScrollBar = ControlsTools.FindControlChild<VScrollBar>(dataGridView);
+            var vScrollBar = ControlsTools.FindControlChild<VScrollBar>(dataGridView); //-V3149
 
             if (dataGridView.RowCount > 0 && form != null && form.WindowState != FormWindowState.Minimized)
             {
@@ -1345,9 +1344,9 @@ namespace MusicBeePlugin
                 if (maximum > 0)
                     setDgvVerticalOffset(dataGridView, (int)(((float)maximum - largeChange) * value / maximum) + 1);
 
-                customVScrollBar.SettingParentScroll = false;
+                customVScrollBar.SettingParentScroll = false; //-V3008
 
-                vScrollBar.Visible = false;
+                vScrollBar.Visible = false; //-V3080
                 customVScrollBar.Invalidate();
                 dataGridView.Invalidate();
             }
@@ -1371,7 +1370,7 @@ namespace MusicBeePlugin
             else if ((ModifierKeys & Keys.Shift) != 0 || !customVScrollBar.Visible)
             {
                 var customHScrollBar = ControlsTools.FindControlChild<CustomHScrollBar>(dataGridView);
-                if (customHScrollBar.Visible)
+                if (customHScrollBar.Visible) //-V3080
                 {
                     if ((ModifierKeys & Keys.Alt) == 0)
                         delta = -e.Delta * 2; //****
@@ -1393,20 +1392,20 @@ namespace MusicBeePlugin
             {
                 var customHScrollBar = ControlsTools.FindControlChild<CustomHScrollBar>(dataGridView);
 
-                if (customHScrollBar.SettingParentScroll)
+                if (customHScrollBar.SettingParentScroll) //-V3080
                     return;
 
-                customHScrollBar.SetThumbLeft(dataGridView.HorizontalScrollingOffset); //-V3080
+                customHScrollBar.SetThumbLeft(dataGridView.HorizontalScrollingOffset);
 
             }
             else //if (e.ScrollOrientation == ScrollOrientation.VerticalScroll)
             {
                 var customVScrollBar = ControlsTools.FindControlChild<CustomVScrollBar>(dataGridView);
 
-                if (customVScrollBar.SettingParentScroll)
+                if (customVScrollBar.SettingParentScroll) //-V3080
                     return;
 
-                customVScrollBar.SetThumbTop(dataGridView.VerticalScrollingOffset); //-V3080
+                customVScrollBar.SetThumbTop(dataGridView.VerticalScrollingOffset);
             }
         }
 
@@ -1768,7 +1767,7 @@ namespace MusicBeePlugin
             var (totalLines, visibleLines) = GetTextBoxMetrics(textBox);
             var nRowRange = totalLines - visibleLines;
 
-            var (_, nPixelRange, _, _, _) = customVScrollBar.GetMetrics(); //-V3080
+            var (_, nPixelRange, _, _, _) = customVScrollBar.GetMetrics();
 
             var nThumbTop = 0;
             if (nRowRange > 0)
@@ -2214,7 +2213,7 @@ namespace MusicBeePlugin
                     hScrollBar.Visible = false;
                     hScrollBar.Invalidate();
 
-                    customHScrollBar.Visible = true;
+                    customHScrollBar.Visible = true; //-V3080
                     customHScrollBar.Invalidate();
 
                     Application.DoEvents();
@@ -2226,7 +2225,7 @@ namespace MusicBeePlugin
                     vScrollBar.Visible = false;
                     vScrollBar.Invalidate();
 
-                    customVScrollBar.Visible = true;
+                    customVScrollBar.Visible = true; //-V3080
                     customVScrollBar.Invalidate();
 
                     Application.DoEvents();
@@ -2396,57 +2395,54 @@ namespace MusicBeePlugin
         {
             if (useSkinColors)
             {
-                if (control is Button button && control != null)
+                if (control is Button button) //button != null always if it is Button
                 {
-                    if (button != null)
+                    var acceptButton = AcceptButton as Button;
+
+                    //Default button
+                    if ((control.IsEnabled() && enable == null) || enable == true && button == acceptButton)
                     {
-                        var acceptButton = AcceptButton as Button;
-
-                        //Default button
-                        if ((control.IsEnabled() && enable == null) || enable == true && button == acceptButton)
-                        {
-                            button.ForeColor = controlHighlightForeColor;
-                            button.BackColor = controlHighlightBackColor;
-                            button.FlatAppearance.BorderColor = ButtonFocusedBorderColor;
-                        }
-                        //else if ((control.IsEnabled() && state == null) || state == true && button.Focused) //****
-                        //{
-                        //   button.ForeColor = _buttonForeColor;
-                        //   button.BackColor = _buttonBackColor;
-                        //   button.FlatAppearance.BorderColor = ButtonFocusedBorderColor;
-                        //}
-                        //Combo box button
-                        else if ((control.IsEnabled() && enable == null) || enable == true && button.Parent is CustomComboBox)
-                        {
-                            button.ForeColor = buttonForeColor;
-                            button.BackColor = narrowScrollBarBackColor;
-                            button.FlatAppearance.BorderColor = ScrollBarBackColor;
-                        }
-                        //Generic button
-                        else if ((control.IsEnabled() && enable == null) || enable == true)
-                        {
-                            button.ForeColor = buttonForeColor;
-                            button.BackColor = buttonBackColor;
-                            button.FlatAppearance.BorderColor = ButtonBorderColor;
-                        }
+                        button.ForeColor = controlHighlightForeColor;
+                        button.BackColor = controlHighlightBackColor;
+                        button.FlatAppearance.BorderColor = ButtonFocusedBorderColor;
+                    }
+                    //else if ((control.IsEnabled() && state == null) || state == true && button.Focused) //****
+                    //{
+                    //   button.ForeColor = _buttonForeColor;
+                    //   button.BackColor = _buttonBackColor;
+                    //   button.FlatAppearance.BorderColor = ButtonFocusedBorderColor;
+                    //}
+                    //Combo box button
+                    else if ((control.IsEnabled() && enable == null) || enable == true && button.Parent is CustomComboBox)
+                    {
+                        button.ForeColor = buttonForeColor;
+                        button.BackColor = narrowScrollBarBackColor;
+                        button.FlatAppearance.BorderColor = ScrollBarBackColor;
+                    }
+                    //Generic button
+                    else if ((control.IsEnabled() && enable == null) || enable == true)
+                    {
+                        button.ForeColor = buttonForeColor;
+                        button.BackColor = buttonBackColor;
+                        button.FlatAppearance.BorderColor = ButtonBorderColor;
+                    }
 
 
-                        //Combo box disabled button
-                        else if (button.Parent is CustomComboBox)
-                        {
-                            button.ForeColor = buttonForeColor;
-                            button.BackColor = InputPanelBackColor; //****
-                            //button.BackColor = narrowScrollBarBackColor;
-                            button.FlatAppearance.BorderColor = ButtonBorderColor;
-                        }
-                        //Generic disabled button
-                        else
-                        {
+                    //Combo box disabled button
+                    else if (button.Parent is CustomComboBox)
+                    {
+                        button.ForeColor = buttonForeColor;
+                        button.BackColor = InputPanelBackColor; //****
+                        //button.BackColor = narrowScrollBarBackColor;
+                        button.FlatAppearance.BorderColor = ButtonBorderColor;
+                    }
+                    //Generic disabled button
+                    else
+                    {
 
-                            button.ForeColor = buttonDisabledForeColor;
-                            button.BackColor = buttonDisabledBackColor;
-                            button.FlatAppearance.BorderColor = ButtonBorderColor;
-                        }
+                        button.ForeColor = buttonDisabledForeColor;
+                        button.BackColor = buttonDisabledBackColor;
+                        button.FlatAppearance.BorderColor = ButtonBorderColor;
                     }
                 }
                 else if (control is CheckBox)
@@ -2626,7 +2622,7 @@ namespace MusicBeePlugin
 
             if (control is Button button)
             {
-                buttonLabels.AddReplace(button, button.Text); //-V3156 //-V3149
+                buttonLabels.AddReplace(button, button.Text);
 
                 button.TextChanged += button_TextChanged;
                 button.GotFocus += button_GotFocus;
@@ -3818,7 +3814,7 @@ namespace MusicBeePlugin
                 if (width2 == 0)
                     width2 = currentWindowSettings.w; //-V3080
                 else if (100d * Math.Abs(width2 - currentWindowSettings.w) / width2 < 0.5d) //0.5%
-                    width2 = currentWindowSettings.w;
+                    width2 = currentWindowSettings.w; //-V3080
 
                 if (height2 == 0)
                     height2 = currentWindowSettings.h;
@@ -3981,7 +3977,7 @@ namespace MusicBeePlugin
                                 Invoke(new Action(() => { Visible = true; }));
                         }
                     }
-                    catch (InvalidOperationException)
+                    catch (InvalidOperationException) //-V3163 //-V5606
                     {
                         ; //Still disposing. Let's ignore...
                     }
@@ -3990,7 +3986,7 @@ namespace MusicBeePlugin
         }
 
         internal void switchOperation(ThreadStart operation, Button clickedButton, Button okButton, Button previewButton, Button closeButton,
-            bool backgroundTaskIsUpdatingTags, PrepareOperation prepareOperation, int checkMinimumColumnCount = -1)
+            bool backgroundTaskIsUpdatingTags, PrepareOperation prepareOperation)
         {
             buttonLabels.TryGetValue(previewButton, out buttonPreviewName);
             buttonLabels.TryGetValue(okButton, out buttonOKName);
@@ -3999,8 +3995,6 @@ namespace MusicBeePlugin
             this.clickedButton = clickedButton;
             this.previewButton = previewButton;
             this.closeButton = closeButton;
-
-            this.checkMinimumColumnCount = checkMinimumColumnCount;
 
 
             if (backgroundTaskIsScheduled && backgroundTaskIsStopping) //Let's restart operation
@@ -4285,9 +4279,9 @@ namespace MusicBeePlugin
         protected bool clickOnPreviewButton(DataGridView previewTable, PrepareOperation prepareOperation, ThreadStart operation,
             Button previewButton, Button okButton, Button closeButton, bool clearPreview = false, int checkMinimumColumnCount = -1)
         {
-            //checkColumnCountInsteadOfRowCount == true for "Tag History"/"Compare Tracks"
-            if ((((checkMinimumColumnCount == -1 && previewTable.RowCount == 0) || (checkMinimumColumnCount >= 0 && previewTable.ColumnCount <= checkMinimumColumnCount)
-                && !backgroundTaskIsWorking())) && !clearPreview)
+            //checkMinimumColumnCount >= 0 for "Tag History"/"Compare Tracks"
+            if (((checkMinimumColumnCount == -1 && previewTable.RowCount == 0) || (checkMinimumColumnCount >= 0 && previewTable.ColumnCount <= checkMinimumColumnCount))
+                && !backgroundTaskIsWorking() && !clearPreview)
             {
                 previewIsGenerated = false;
 
@@ -4295,7 +4289,7 @@ namespace MusicBeePlugin
                 {
                     if (prepareOperation())
                     {
-                        switchOperation(operation, previewButton, okButton, previewButton, closeButton, false, prepareOperation, checkMinimumColumnCount);
+                        switchOperation(operation, previewButton, okButton, previewButton, closeButton, false, prepareOperation);
                         return true;
                     }
                     else
@@ -4305,7 +4299,7 @@ namespace MusicBeePlugin
                 }
                 else
                 {
-                    switchOperation(operation, previewButton, okButton, previewButton, closeButton, false, null, checkMinimumColumnCount);
+                    switchOperation(operation, previewButton, okButton, previewButton, closeButton, false, null);
                     return true;
                 }
             }

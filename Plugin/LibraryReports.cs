@@ -2299,7 +2299,7 @@ namespace MusicBeePlugin
                     var pic = new Bitmap(DefaultArtwork);
 
                     tc = TypeDescriptor.GetConverter(typeof(Bitmap));
-                    md5 = new MD5Cng();
+                    md5 = new MD5Cng(); //-V5613
 
                     DefaultArtworkHash = GetResizedArtworkBase64Hash(ref pic);
 
@@ -2798,18 +2798,18 @@ namespace MusicBeePlugin
             var queriedFilesDict = new SortedDictionary<string, bool>();
 
             if (readOtherwiseProcessExcludedGroupingTags != false) //queriedFiles == null if readOtherwiseProcessExcludedGroupingTags == false
+            { 
                 foreach (var file in queriedFiles)
                     queriedFilesDict.AddSkip(file);
 
 
-            if (readOtherwiseProcessExcludedGroupingTags != false) //Not recalculating preset based on cached grouping tags
-            {
-                if (!processFileGroupings(queriedFilesDict, interactive, functionId, queryOnlyGroupings, groupings, lastSeqNumInOrder,
-                        tags, queriedActualGroupingsTagIds, queriedActualGroupingsPropIds,
+                //Not recalculating preset based on cached grouping tags
+                if (!processFileGroupings(queriedFilesDict, interactive, queryOnlyGroupings, groupings, lastSeqNumInOrder,
+                        queriedActualGroupingsTagIds, queriedActualGroupingsPropIds,
                         actualSplitGroupingTagsList, cachedFilesActualComposedSplitGroupingTagsList,
                         cachedFilesActualGroupingTags, cachedFilesActualGroupingTagsRaw,
-                        dependentGroupingColumns, queriedGroupingTagsRaw, //-V3080
-                        queriedActualGroupingTags, queriedActualGroupingTagsRaw, //-V3080
+                        dependentGroupingColumns, queriedGroupingTagsRaw,
+                        queriedActualGroupingTags, queriedActualGroupingTagsRaw,
                         queriedNativeTagNames))
                 {
 
@@ -2946,8 +2946,8 @@ namespace MusicBeePlugin
                     newFilesDict.AddSkip(file);
 
 
-            if (!processFileGroupings(newFilesDict, interactive, functionId, false, groupings, lastSeqNumInOrder,
-                    null, queriedActualGroupingsTagIds, queriedActualGroupingsPropIds,
+            if (!processFileGroupings(newFilesDict, interactive, false, groupings, lastSeqNumInOrder,
+                    queriedActualGroupingsTagIds, queriedActualGroupingsPropIds,
                     actualSplitGroupingTagsList, cachedFilesActualComposedSplitGroupingTagsList,
                     cachedFilesActualGroupingTags, cachedFilesActualGroupingTagsRaw,
                     dependentGroupingColumns, queriedGroupingTagsRaw,
@@ -3091,9 +3091,9 @@ namespace MusicBeePlugin
                 return applyPresetResults(affectedFiles, tags, cachedFilesActualComposedSplitGroupingTagsList, interactive, saveResultsToTags, functionId, filterResults);
         }
 
-        private bool processFileGroupings(SortedDictionary<string, bool> queriedFilesDict, bool interactive, string functionId, bool queryOnlyGroupings,
+        private bool processFileGroupings(SortedDictionary<string, bool> queriedFilesDict, bool interactive, bool queryOnlyGroupings,
             PresetColumnAttributesDict groupings, int lastSeqNumInOrder,
-            AggregatedTags tags, MetaDataType[] queriedActualGroupingsTagIds, FilePropertyType[] queriedActualGroupingsPropIds,
+            MetaDataType[] queriedActualGroupingsTagIds, FilePropertyType[] queriedActualGroupingsPropIds,
             List<string>[] actualSplitGroupingTagsList, SortedDictionary<int, List<string>> cachedFilesActualComposedSplitGroupingTagsList,
             SortedDictionary<int, string[]> cachedFilesActualGroupingTags, SortedDictionary<int, string[]> cachedFilesActualGroupingTagsRaw,
             int[] dependentGroupingColumns, SortedDictionary<string, bool>[] queriedGroupingTagsRaw,
@@ -3356,21 +3356,13 @@ namespace MusicBeePlugin
                         {
                             clearAppliedPresetCache();
 
-                            if (interactive)
+                            Invoke(new Action(() =>
                             {
-                                Invoke(new Action(() =>
-                                {
-                                    if (backgroundTaskIsUpdatingTags)
-                                        stopButtonClickedMethod(applyingChangesStopped);
-                                    else
-                                        stopButtonClickedMethod(prepareBackgroundPreview);
-                                }));
-                            }
-                            else
-                            {
-                                SetStatusBarText(null, true);
-                                backgroundTaskIsStoppedOrCancelled = true;
-                            }
+                                if (backgroundTaskIsUpdatingTags)
+                                    stopButtonClickedMethod(applyingChangesStopped);
+                                else
+                                    stopButtonClickedMethod(prepareBackgroundPreview);
+                            }));
 
                             return string.Empty;
                         }
@@ -3380,8 +3372,8 @@ namespace MusicBeePlugin
 
                         if ((++groupingIndex & 0x1f) == 0)
                         {
-                            if (!string.IsNullOrEmpty(functionId)) //Saving preset results, see check for functionId above
-                                SetStatusBarTextForFileOperations(LibraryReportsGeneratingPreviewSbText, true, groupingIndex, groupingsCount, appliedPreset.getName(), 0);
+                            //Saving preset results, see check for functionId above
+                            SetStatusBarTextForFileOperations(LibraryReportsGeneratingPreviewSbText, true, groupingIndex, groupingsCount, appliedPreset.getName(), 0);
 
                             int rowCountToFormat1 = 0;
                             Invoke(new Action(() => { rowCountToFormat1 = previewTable_AddRowsToTable(rows, false); }));
@@ -3393,13 +3385,13 @@ namespace MusicBeePlugin
                     Invoke(new Action(() => { rowCountToFormat2 = previewTable_AddRowsToTable(rows, true); }));
                     Invoke(new Action(() => { FormatChangedTags(this, previewTable, rowCountToFormat2, previewTableFormatRow); checkStoppedStatus(); resetFormToGeneratedPreview(); }));
 
-                    if (!string.IsNullOrEmpty(functionId)) //Saving preset results, see check for functionId above
-                        SetStatusBarTextForFileOperations(LibraryReportsGeneratingPreviewSbText, true, --groupingIndex, groupingsCount, appliedPreset.getName());
+                    //Saving preset results, see check for functionId above
+                    SetStatusBarTextForFileOperations(LibraryReportsGeneratingPreviewSbText, true, --groupingIndex, groupingsCount, appliedPreset.getName());
                 }
             }
 
 
-            if (saveResultsToTags && !string.IsNullOrEmpty(functionId)) //Saving preset results
+            if (saveResultsToTags && functionId == null) //Saving preset results
             {
                 SetResultingSbText(appliedPreset.getName(), true, true);
                 saveFields(queriedFiles, interactive, false, tags);
@@ -3408,7 +3400,7 @@ namespace MusicBeePlugin
             {
                 saveFields(queriedFiles, interactive, true, tags);
             }
-            else
+            else //Previewing report results
             {
                 SetResultingSbText(appliedPreset.getName(), true, true);
             }
@@ -3777,7 +3769,7 @@ namespace MusicBeePlugin
             var savedFunctionIndex = savedFunctionIds.IndexOf(functionId);
             if (savedFunctionIndex >= 0)
             {
-                var functionResult = AggregatedTags.GetField(null, functionResults, groupingsDict.Count + savedFunctionIndex, groupingsDict,  //-V3080
+                var functionResult = AggregatedTags.GetField(null, functionResults, groupingsDict.Count + savedFunctionIndex, groupingsDict, //-V3080
                     operations[savedFunctionIndex], mulDivFactors[savedFunctionIndex], precisionDigits[savedFunctionIndex], appendTexts[savedFunctionIndex]);
 
                 if (destinationTagIds[savedFunctionIndex] > 0) //destinationTagIds[savedFunctionIndex] is used as cache for function id
@@ -3979,7 +3971,7 @@ namespace MusicBeePlugin
                     }
                 }
             }
-            catch (ThreadAbortException)
+            catch (ThreadAbortException) //-V3163 //-V5606
             {
                 //Let's just stop the thread...
             }
@@ -3999,7 +3991,7 @@ namespace MusicBeePlugin
                     backgroundTaskIsUpdatingTags = true;
                     executePreset(null, false, true, null, false, true);
                 }
-                catch (ThreadAbortException)
+                catch (ThreadAbortException) //-V3163 //-V5606
                 {
                     //Let's just stop the thread...
                 }
@@ -4030,7 +4022,7 @@ namespace MusicBeePlugin
                         executePreset(selectedFiles, false, true, null, false, true);
                     }
                 }
-                catch (ThreadAbortException)
+                catch (ThreadAbortException) //-V3163 //-V5606
                 {
                     //Let's just stop the thread...
                 }
@@ -4059,7 +4051,7 @@ namespace MusicBeePlugin
 
             if (changingFile != null)
             {
-                while (BackgroundTaskIsInProgress) //-V3029
+                while (BackgroundTaskIsInProgress)
                     Thread.Sleep(ActionRetryDelay);
 
                 BackgroundTaskIsInProgress = true;
@@ -4264,7 +4256,7 @@ namespace MusicBeePlugin
                     goto loop_end;
 
 
-                if (BackgroundTaskIsInProgress) //-V3029
+                if (BackgroundTaskIsInProgress)
                     Thread.Sleep(ActionRetryDelay);
 
                 if (BackgroundTaskIsInProgress)

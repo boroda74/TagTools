@@ -319,7 +319,7 @@ namespace MusicBeePlugin
             FindUpDown();
         }
 
-        private void FlatTabControl_ControlAdded(object sender, ControlEventArgs e)
+        private void FlatTabControl_ControlAdded(object sender, ControlEventArgs e) //-V3013
         {
             FindUpDown();
             UpdateUpDown();
@@ -460,7 +460,7 @@ namespace MusicBeePlugin
         public new bool Multiline
         {
             get { return base.Multiline; }
-            set { base.Multiline = false; }
+            set { base.Multiline = false; } //-V3077
         }
 
         [Browsable(true)]

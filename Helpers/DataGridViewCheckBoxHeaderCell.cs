@@ -57,7 +57,7 @@ namespace MusicBeePlugin
             checkedState = !checkedState;
             if (OnCheckBoxClicked != null)
             {
-                OnCheckBoxClicked(checkedState); //-V3083
+                OnCheckBoxClicked(checkedState); //-V3083 //-V5605
                 DataGridView.InvalidateCell(this);
             }
         }

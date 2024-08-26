@@ -412,13 +412,13 @@ namespace MusicBeePlugin
 
             blurPixelCount = blurPixelCount == 0 ? 1 : blurPixelCount;
 
-            avgR = avgR * 3 / 2 / blurPixelCount; //-V3064
+            avgR = avgR * 3 / 2 / blurPixelCount;
             avgR = avgR > 255 ? 255 : avgR;
 
-            avgG = avgG * 3 / 2 / blurPixelCount; //-V3064
+            avgG = avgG * 3 / 2 / blurPixelCount;
             avgG = avgG > 255 ? 255 : avgG;
 
-            avgB = avgB * 3 / 2 / blurPixelCount; //-V3064
+            avgB = avgB * 3 / 2 / blurPixelCount;
             avgB = avgB > 255 ? 255 : avgB;
 
 

@@ -34,7 +34,7 @@ namespace MusicBeePlugin
 
                     try
                     {
-                        BackupIndex = (BackupIndex)backupSerializer.Deserialize(file);
+                        BackupIndex = (BackupIndex)backupSerializer.Deserialize(file); //-V5611
                     }
                     catch
                     {
@@ -162,8 +162,8 @@ namespace MusicBeePlugin
 
             while (reader.NodeType != System.Xml.XmlNodeType.EndElement)
             {
-                var key = (TKey)keySerializer.Deserialize(reader);
-                var value = (TValue)valueSerializer.Deserialize(reader);
+                var key = (TKey)keySerializer.Deserialize(reader); //-V5611
+                var value = (TValue)valueSerializer.Deserialize(reader); //-V5611
 
                 Add(key, value);
             }
@@ -225,7 +225,7 @@ namespace MusicBeePlugin
 
             try
             {
-                backupCache = (BackupCache)serializer.Deserialize(file);
+                backupCache = (BackupCache)serializer.Deserialize(file); //-V5611
             }
             catch
             {
@@ -419,7 +419,7 @@ namespace MusicBeePlugin
 
             try
             {
-                incrementalBackup = (Backup)backupSerializer.Deserialize(file);
+                incrementalBackup = (Backup)backupSerializer.Deserialize(file); //-V5611
             }
             catch (Exception ex)
             {
@@ -479,7 +479,7 @@ namespace MusicBeePlugin
 
             try
             {
-                incrementalBackup = (Backup)backupSerializer.Deserialize(file);
+                incrementalBackup = (Backup)backupSerializer.Deserialize(file); //-V5611
             }
             catch (Exception ex)
             {
@@ -611,7 +611,7 @@ namespace MusicBeePlugin
             {
                 saveBackup(backupName, statusBarText, isAutoCreated, createEmptyBackup);
             }
-            catch (System.Threading.ThreadAbortException)
+            catch (System.Threading.ThreadAbortException) //-V3163 //-V5606
             {
                 //Nothing to do, just let's cancel the task.
             }
@@ -735,7 +735,7 @@ namespace MusicBeePlugin
             {
                 LoadBackup(backupName, statusBarText, restoreForEntireLibrary, restoreFromAnotherLibrary);
             }
-            catch (System.Threading.ThreadAbortException)
+            catch (System.Threading.ThreadAbortException) //-V3163 //-V5606
             {
                 //Nothing to do, just let's cancel the task.
             }

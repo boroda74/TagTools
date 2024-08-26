@@ -420,7 +420,6 @@ namespace MusicBeePlugin
                 SetStatusBarTextForFileOperations(MsrSbText, true, fileCounter, files.Length, currentFile);
 
                 var track = GetTrackRepresentation(currentFile);
-                row = new string[5];
 
                 if (sourcePropId == 0)
                     sourceTagValue = GetFileTag(currentFile, sourceTagId);

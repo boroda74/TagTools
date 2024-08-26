@@ -148,7 +148,7 @@ namespace MusicBeePlugin
                 if (PluginClosing)
                     return;
 
-                while (MbForm.Disposing || !MbForm.IsHandleCreated)
+                while (MbForm.Disposing || !MbForm.IsHandleCreated) //-V3149
                     Thread.Sleep(ActionRetryDelay);
 
                 if (MbForm.IsDisposed)

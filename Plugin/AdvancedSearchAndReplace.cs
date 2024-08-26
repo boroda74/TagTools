@@ -788,10 +788,10 @@ namespace MusicBeePlugin
 
             public static Preset Load(string filename, XmlSerializer presetSerializer)
             {
-                var stream = System.IO.File.Open(filename, FileMode.Open, FileAccess.Read, FileShare.None);
+                var stream = System.IO.File.Open(filename, FileMode.Open, FileAccess.Read, FileShare.None); //-V5609
                 var file = new StreamReader(stream, Unicode);
 
-                var savedPreset = (Preset)presetSerializer.Deserialize(file);
+                var savedPreset = (Preset)presetSerializer.Deserialize(file); //-V5611
                 savedPreset.hotkeyAssigned = false;
 
                 file.Close();
@@ -951,7 +951,7 @@ namespace MusicBeePlugin
 
                 var presetSerializer = new XmlSerializer(typeof(Preset));
 
-                var stream = System.IO.File.Open(pathName, FileMode.Create, FileAccess.Write, FileShare.None);
+                var stream = System.IO.File.Open(pathName, FileMode.Create, FileAccess.Write, FileShare.None); //-V5609
                 var file = new StreamWriter(stream, Unicode);
 
                 presetSerializer.Serialize(file, this);
@@ -1834,7 +1834,7 @@ namespace MusicBeePlugin
                             MSR = preset;
                         }
                     }
-                    catch
+                    catch //-V3163 //-V5606
                     {
                         // ignored
                     }
@@ -1996,13 +1996,13 @@ namespace MusicBeePlugin
                 }
             }
 
-            var sourceTagValue = GetTag(sourceFileUrl, plugin, (int)tagId);
+            var sourceTagValue = GetTag(sourceFileUrl, plugin, (int)tagId); //-V5609
             SetTag((int)tagId, value);
 
             if (updateOnlyChangedTags && sourceTagValue == value)
                 return true;
             else
-                return Plugin.SetFileTag(sourceFileUrl, tagId, value);
+                return Plugin.SetFileTag(sourceFileUrl, tagId, value); //-V5609
         }
 
         private int previewTable_AddRowsToTable(List<string[]> rowList, bool itsLastRowRange, List<ChangesDetectionResult[]> changeTypes)
@@ -2449,7 +2449,7 @@ namespace MusicBeePlugin
 
                     if (conditionSatisfied)
                     {
-                        ReplaceTags(currentFile, preset); //-V3156
+                        ReplaceTags(currentFile, preset);
                         appliedPresets.AddSkip(preset.guid);
                     }
                 }
@@ -2743,16 +2743,8 @@ namespace MusicBeePlugin
             }
 
 
-            if (files.Length == 0)
-            {
-                MessageBox.Show(this, MsgNoTracksSelected, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return false;
-            }
-            else
-            {
-                previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
-                return true;
-            }
+            previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+            return true;
         }
 
         private bool prepareBackgroundTask()
@@ -3456,7 +3448,7 @@ namespace MusicBeePlugin
 
         private void buttonPreview_Click(object sender, EventArgs e)
         {
-            ignoreClosingForm = clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewChanges, sender as Button, buttonOK, buttonClose);
+            ignoreClosingForm = clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewChanges, buttonPreview, buttonOK, buttonClose);
         }
 
         private void buttonSaveClose_Click(object sender, EventArgs e)
@@ -5165,7 +5157,7 @@ namespace MusicBeePlugin
                 {
                     var combinationPreset = presetProcessingCopies[previewTable.Rows[rowIndex].Cells[1].Value as string];
                     var currentFile = previewTable.Rows[rowIndex].Cells[2].Value as string;
-                    var searchedAndReplacedTags = GetReplacedTags(currentFile, ref combinationPreset, this, false);
+                    var searchedAndReplacedTags = GetReplacedTags(currentFile, ref combinationPreset, this, false); //-V3156
 
                     newTag1Value = searchedAndReplacedTags.replacedTagValue;
                     newTag2Value = searchedAndReplacedTags.replacedTag2Value;
@@ -5699,7 +5691,13 @@ namespace MusicBeePlugin
             if (assignHotkeyCheckBox.Checked)
             {
                 var slot = FindFirstSlot(asrPresetsWithHotkeysGuids, Guid.Empty);
-                asrPresetsWithHotkeysGuids[slot] = selectedPreset.guid; //-V3106
+                if (slot == -1)
+                {
+                    MessageBox.Show(this, "Something went wrong! Couldn't find empty hotkey slot.", string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+
+                asrPresetsWithHotkeysGuids[slot] = selectedPreset.guid;
                 selectedPreset.hotkeyAssigned = true;
 
                 asrPresetsWithHotkeysCount++;
@@ -5707,7 +5705,14 @@ namespace MusicBeePlugin
             else
             {
                 var slot = FindFirstSlot(asrPresetsWithHotkeysGuids, selectedPreset.guid);
-                asrPresetsWithHotkeysGuids[slot] = Guid.Empty; //-V3106
+                if (slot == -1)
+                {
+                    MessageBox.Show(this, "Something went wrong! Couldn't find hotkey slot for preset: " + selectedPreset.getName(), 
+                        string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+
+                asrPresetsWithHotkeysGuids[slot] = Guid.Empty;
                 selectedPreset.hotkeyAssigned = false;
 
                 asrPresetsWithHotkeysCount--;

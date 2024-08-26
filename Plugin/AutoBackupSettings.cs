@@ -222,23 +222,25 @@ namespace MusicBeePlugin
 
                     var files = System.IO.Directory.GetFileSystemEntries(BrGetAutoBackupDirectory(initialAutoBackupDirectory));
                     for (var i = 0; i < files.Length; i++)
+                    {
                         try
                         {
                             System.IO.Directory.Move(files[i], BrGetAutoBackupDirectory(SavedSettings.autoBackupDirectory) + @"\" + BrGetBackupSafeFilename(files[i]));
                         }
-                        catch
+                        catch (Exception ex)
                         {
-                            // ignored
+                            MessageBox.Show(this, ex.Message, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         }
+                    }
 
 
                     try
                     {
                         System.IO.Directory.Delete(BrGetAutoBackupDirectory(initialAutoBackupDirectory));
                     }
-                    catch
+                    catch (Exception ex)
                     {
-                        // ignored
+                        MessageBox.Show(this, ex.Message, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
                 }
 

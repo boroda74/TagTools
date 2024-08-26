@@ -566,7 +566,7 @@ namespace MusicBeePlugin
                 {
                     MessageBox.Show(this, previewTable.Rows[e.RowIndex].Cells[e.ColumnIndex].Value as string);
                 }
-                catch
+                catch //-V3163 //-V5606
                 {
                     // ignored
                 }
