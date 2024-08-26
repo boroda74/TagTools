@@ -6,7 +6,7 @@ Plugin requires MusicBee version **3.5** or higher.
 
 *Note:*
 
-If you are familiar with the plugin quick update process, you can always [download latest plugin version here](https://www.mediafire.com/file/h2t08o9562efboi/mb\_TagTools\_latest.zip/file"target=\"\_blank\"") (NOTE: this latest version always requires the latest version of MusicBee which sometimes may be available as a beta. The latest MusicBee version was **3.6** at the time of writing this help file). Copy the file "mb\_TagTools.dll" from the archive "mb\_TagTools\_latest.zip" to MusicBee "Plugins" folder, and overwrite the existing file.
+If you are familiar with the plugin quick update process, you can always [download latest plugin version here](https://www.mediafire.com/file/h2t08o9562efboi/mb_TagTools_latest.zip/file) (NOTE: this latest version always requires the latest version of MusicBee which sometimes may be available as a beta. The latest MusicBee version was **3.6** at the time of writing this help file). Copy all files from the archive “mb_TagTools_latest.zip” to the MusicBee “Plugins” folder, overwriting existing files.
 
 *Note:*
 
@@ -20,7 +20,7 @@ Extract content of the downloaded archive to a temporary folder of your choice. 
 
 **2024-08-26**
 
-## Content
+### Content
 
 [Additional Tagging \& Reporting](docs/ADDITIONALTAGGINGREPORTING.md)
 
@@ -34,8 +34,7 @@ Extract content of the downloaded archive to a temporary folder of your choice. 
 
 ### SAST Tools
 
-This project has been checked by PVS-Studio.
-[PVS-Studio](<https://pvs-studio.ru/ru/pvs-studio/?utm\_source=website\&utm\_medium=github\&utm\_campaign=open\_source"target=\"\_blank\"") - static analyzer for C, C++, C#, and Java code.
+[PVS-Studio](https://pvs-studio.ru/ru/pvs-studio/?utm_source=website&utm_medium=github&utm_campaign=open_source) - static analyzer for C, C++, C#, and Java code.
 
 ***
 
