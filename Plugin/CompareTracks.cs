@@ -543,7 +543,7 @@ namespace MusicBeePlugin
 
         private void buttonPreview_Click(object sender, EventArgs e)
         {
-            ignoreClosingForm = clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewChanges, buttonPreview, buttonOK, buttonClose, false, 1);
+            ignoreClosingForm = clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewChanges, buttonPreview, buttonOK, buttonClose, false);
         }
 
         private void buttonOK_Click(object sender, EventArgs e)

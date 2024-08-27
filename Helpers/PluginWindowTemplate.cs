@@ -4274,14 +4274,11 @@ namespace MusicBeePlugin
             return false;
         }
 
-        //checkMinimumColumnCount = -1: check if row count > 0, checkMinimumColumnCount >= 0: don't check rows count, check if column count > checkMinimumColumnCount
         //Returns: true if preview is started (closing current form must be temporary disabled), otherwise returns false
         protected bool clickOnPreviewButton(DataGridView previewTable, PrepareOperation prepareOperation, ThreadStart operation,
-            Button previewButton, Button okButton, Button closeButton, bool clearPreview = false, int checkMinimumColumnCount = -1)
+            Button previewButton, Button okButton, Button closeButton, bool clearPreview = false)
         {
-            //checkMinimumColumnCount >= 0 for "Tag History"/"Compare Tracks"
-            if (((checkMinimumColumnCount == -1 && previewTable.RowCount == 0) || (checkMinimumColumnCount >= 0 && previewTable.ColumnCount <= checkMinimumColumnCount))
-                && !backgroundTaskIsWorking() && !clearPreview)
+            if (!previewIsGenerated && !backgroundTaskIsWorking() && !clearPreview)
             {
                 previewIsGenerated = false;
 
