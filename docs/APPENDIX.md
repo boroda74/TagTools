@@ -4,9 +4,10 @@
 
 Do all you want with plugin binary and source code at your own risk.
 
-### Source code
+### ASR Custom presets
 
-MS VS 2022 project, C#. Most people don't need this.
+[Some ASR user presets](https://www.mediafire.com/file/0lbn0t3n48n9rbt/Custom+Presets.zip/file), that are not included in the plugin package, but may be useful.
+
 ### Backup download
 
 [![Download Additional Tagging Tools](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/additional-tagging-tools/files/latest/download)
