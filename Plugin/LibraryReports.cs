@@ -1010,17 +1010,17 @@ namespace MusicBeePlugin
             }
         }
 
-        public static ReportPreset GetCreatePredefinedPreset(Guid presetPermanentGuid, string presetName,
+        public static ReportPreset GetCreatePredefinedPreset(Guid presetPermanentGuid, string presetName, 
             SortedDictionary<Guid, ReportPreset> existingPredefinedPresets,
             PresetColumnAttributes[] groupings, PresetColumnAttributes[] functions,
-            string[] destinationTags, string[] functionIds
+            string[] destinationTags, string[] functionIds, bool totals
             )
         {
             if (existingPredefinedPresets.TryGetValue(presetPermanentGuid, out var libraryReportsPreset))
             {
                 libraryReportsPreset.groupings = groupings;
                 libraryReportsPreset.functions = functions;
-
+                libraryReportsPreset.totals = totals;
                 libraryReportsPreset.name = presetName.ToUpper();
 
                 if (libraryReportsPreset.destinationTags.Length != destinationTags.Length)
@@ -1039,7 +1039,7 @@ namespace MusicBeePlugin
                     permanentGuid = presetPermanentGuid,
                     groupings = groupings,
                     functions = functions,
-                    totals = true,
+                    totals = totals,
                     name = presetName.ToUpper(),
                     userPreset = false,
 
@@ -2804,7 +2804,7 @@ namespace MusicBeePlugin
 
 
                 //Not recalculating preset based on cached grouping tags
-                if (!processFileGroupings(queriedFilesDict, interactive, queryOnlyGroupings, groupings, lastSeqNumInOrder,
+                if (!processFileGroupings(queriedFilesDict, interactive, queryOnlyGroupings, groupings, lastSeqNumInOrder,  
                         queriedActualGroupingsTagIds, queriedActualGroupingsPropIds,
                         actualSplitGroupingTagsList, cachedFilesActualComposedSplitGroupingTagsList,
                         cachedFilesActualGroupingTags, cachedFilesActualGroupingTagsRaw,
@@ -2830,7 +2830,7 @@ namespace MusicBeePlugin
             if (queryOnlyGroupings)
             {
                 updateAppliedPresetCache(tags, cachedFilesActualGroupingTags, cachedFilesActualGroupingTagsRaw, cachedFilesActualComposedSplitGroupingTagsList);
-                applyOnlyGroupingsPresetResults(queriedFiles, interactive, filterResults);
+                applyOnlyGroupingsPresetResults(queriedFiles, cachedFilesActualComposedSplitGroupingTagsList, interactive, filterResults);
 
                 if (readOtherwiseProcessExcludedGroupingTags == true) //Nothing to recalculate after tag changes
                 {
@@ -3091,8 +3091,8 @@ namespace MusicBeePlugin
                 return applyPresetResults(affectedFiles, tags, cachedFilesActualComposedSplitGroupingTagsList, interactive, saveResultsToTags, functionId, filterResults);
         }
 
-        private bool processFileGroupings(SortedDictionary<string, bool> queriedFilesDict, bool interactive, bool queryOnlyGroupings,
-            PresetColumnAttributesDict groupings, int lastSeqNumInOrder,
+        private bool processFileGroupings(SortedDictionary<string, bool> queriedFilesDict, bool interactive, bool queryOnlyGroupings, 
+            PresetColumnAttributesDict groupings, int lastSeqNumInOrder, 
             MetaDataType[] queriedActualGroupingsTagIds, FilePropertyType[] queriedActualGroupingsPropIds,
             List<string>[] actualSplitGroupingTagsList, SortedDictionary<int, List<string>> cachedFilesActualComposedSplitGroupingTagsList,
             SortedDictionary<int, string[]> cachedFilesActualGroupingTags, SortedDictionary<int, string[]> cachedFilesActualGroupingTagsRaw,
@@ -3233,7 +3233,6 @@ namespace MusicBeePlugin
                     }
                 }
             }
-
 
             return true;
         }
@@ -3409,7 +3408,8 @@ namespace MusicBeePlugin
             return "...";
         }
 
-        private void applyOnlyGroupingsPresetResults(string[] queriedFiles, bool interactive, bool filterResults)
+        private void applyOnlyGroupingsPresetResults(string[] queriedFiles, SortedDictionary<int, List<string>> cachedFilesActualComposedSplitGroupingTagsList, 
+            bool interactive, bool filterResults)
         //filterResults:
         //  false & interactive - Skip or undo filtering by this preset CONDITION only (if defined)
         //  true & !interactive - filter queriedFiles by another preset (lastFiles) AND by this preset condition (if defined)
@@ -3423,7 +3423,6 @@ namespace MusicBeePlugin
                 lastFiles = queriedFiles.Clone() as string[]; //queriedFiles can't be null for applyOnlyGroupingsPresetResults()
 
 
-            var tags = cachedPresetsTags[appliedPreset.guid];
             var filesActualComposedGroupingTags = cachedPresetsFilesActualComposedSplitGroupingTagsList[appliedPreset.guid];
 
             if (!interactive && filterResults) //Only for filtering by another preset (lastFiles which are now queriedFiles) AND by this preset condition
@@ -3462,8 +3461,15 @@ namespace MusicBeePlugin
 
                 var rows = new List<string[]>();
 
+                var tags = new AggregatedTags();
+                var emptyResults = new ConvertStringsResult[0];
+                foreach (var value in cachedFilesActualComposedSplitGroupingTagsList.Values)
+                    tags.add(null, value, emptyResults);
+
+
                 var groupingsCount = 0;
                 var totalGroupingsCount = tags.Count;
+
                 foreach (var keyValue in tags)
                 {
                     if (checkStoppingStatus())

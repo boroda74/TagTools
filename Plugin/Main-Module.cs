@@ -4860,7 +4860,7 @@ namespace MusicBeePlugin
             //Let's copy allowed user customizations from existing predefined preset (if it exists)
             var presetPermanentGuid = Guid.Parse("450A95FE-E660-44B7-B34C-1169C9466493");
             var libraryReportsPreset = GetCreatePredefinedPreset(presetPermanentGuid, LibraryTotalsPresetName, existingPredefinedPresets,
-                groupings, functions, destinationTags, functionIds);
+                groupings, functions, destinationTags, functionIds, true);
 
             reportPresets[presetCounter++] = libraryReportsPreset;
 
@@ -4911,7 +4911,7 @@ namespace MusicBeePlugin
             //Let's copy allowed user customizations from existing predefined preset (if it exists)
             presetPermanentGuid = Guid.Parse("2759C09A-B982-4FC5-9872-FBD27A4D8F5E");
             libraryReportsPreset = GetCreatePredefinedPreset(presetPermanentGuid, LibraryAveragesPresetName, existingPredefinedPresets,
-                groupings, functions, destinationTags, functionIds);
+                groupings, functions, destinationTags, functionIds, true);
 
             reportPresets[presetCounter++] = libraryReportsPreset;
 
@@ -4940,7 +4940,7 @@ namespace MusicBeePlugin
             //Let's copy allowed user customizations from existing predefined preset (if it exists)
             presetPermanentGuid = Guid.Parse("C7EACE32-B70F-4E5E-BEF1-2D10BE3B74E5");
             libraryReportsPreset = GetCreatePredefinedPreset(presetPermanentGuid, CDBookletPresetName, existingPredefinedPresets,
-                groupings, functions, destinationTags, functionIds);
+                groupings, functions, destinationTags, functionIds, false);
 
             reportPresets[presetCounter++] = libraryReportsPreset;
 
@@ -4968,7 +4968,7 @@ namespace MusicBeePlugin
             //Let's copy allowed user customizations from existing predefined preset (if it exists)
             presetPermanentGuid = Guid.Parse("F14133BF-7D9E-403F-B2F2-B3A2BE669BC8");
             libraryReportsPreset = GetCreatePredefinedPreset(presetPermanentGuid, AlbumsAndTracksPresetName, existingPredefinedPresets,
-                groupings, functions, destinationTags, functionIds);
+                groupings, functions, destinationTags, functionIds, false);
 
             reportPresets[presetCounter++] = libraryReportsPreset;
 
@@ -4994,7 +4994,7 @@ namespace MusicBeePlugin
             //Let's copy allowed user customizations from existing predefined preset (if it exists)
             presetPermanentGuid = Guid.Parse("FA3D3B21-9B80-4C6C-AC67-1D8FC2A3CEBA");
             libraryReportsPreset = GetCreatePredefinedPreset(presetPermanentGuid, AlbumGridPresetName, existingPredefinedPresets,
-                groupings, functions, destinationTags, functionIds);
+                groupings, functions, destinationTags, functionIds, false);
 
             reportPresets[presetCounter++] = libraryReportsPreset;
 
