@@ -178,79 +178,8 @@ namespace MusicBeePlugin
             parameterTag5TypeListCustom.SelectedIndex = (int)preset.parameterTag5Type;
             parameterTag6TypeListCustom.SelectedIndex = (int)preset.parameterTag6Type;
 
-
-            parameterTagListCustom.Text = AsrGetTagName(preset.parameterTagId);
-            parameterTag2ListCustom.Text = AsrGetTagName(preset.parameterTag2Id);
-            parameterTag3ListCustom.Text = AsrGetTagName(preset.parameterTag3Id);
-            parameterTag4ListCustom.Text = AsrGetTagName(preset.parameterTag4Id);
-            parameterTag5ListCustom.Text = AsrGetTagName(preset.parameterTag5Id);
-            parameterTag6ListCustom.Text = AsrGetTagName(preset.parameterTag6Id);
-
             fillTagComboBoxes = true;
 
-
-            customTextBox.Text = preset.customText;
-            customTextCheckBox.Checked = preset.customTextChecked;
-            customText2Box.Text = preset.customText2;
-            customText2CheckBox.Checked = preset.customText2Checked;
-            customText3Box.Text = preset.customText3;
-            customText3CheckBox.Checked = preset.customText3Checked;
-            customText4Box.Text = preset.customText4;
-            customText4CheckBox.Checked = preset.customText4Checked;
-
-
-            ignoreCaseCheckBox.Checked = preset.ignoreCase;
-
-
-            searchedPatternBox.Text = preset.searchedPattern;
-            searchedPattern2Box.Text = preset.searchedPattern2;
-            searchedPattern3Box.Text = preset.searchedPattern3;
-            searchedPattern4Box.Text = preset.searchedPattern4;
-            searchedPattern5Box.Text = preset.searchedPattern5;
-
-            replacedPatternBox.Text = preset.replacedPattern;
-            replacedPattern2Box.Text = preset.replacedPattern2;
-            replacedPattern3Box.Text = preset.replacedPattern3;
-            replacedPattern4Box.Text = preset.replacedPattern4;
-            replacedPattern5Box.Text = preset.replacedPattern5;
-
-
-            searchedTagListCustom.Text = AsrGetTagName(preset.searchedTagId);
-            searchedTag2ListCustom.Text = AsrGetTagName(preset.searchedTag2Id);
-            searchedTag3ListCustom.Text = AsrGetTagName(preset.searchedTag3Id);
-            searchedTag4ListCustom.Text = AsrGetTagName(preset.searchedTag4Id);
-            searchedTag5ListCustom.Text = AsrGetTagName(preset.searchedTag5Id);
-
-
-            replacedTagListCustom.Text = AsrGetTagName(preset.replacedTagId);
-            replacedTag2ListCustom.Text = AsrGetTagName(preset.replacedTag2Id);
-            replacedTag3ListCustom.Text = AsrGetTagName(preset.replacedTag3Id);
-            replacedTag4ListCustom.Text = AsrGetTagName(preset.replacedTag4Id);
-            replacedTag5ListCustom.Text = AsrGetTagName(preset.replacedTag5Id);
-
-            add1CheckBox.Checked = preset.add;
-            add2CheckBox.Checked = preset.add2;
-            add3CheckBox.Checked = preset.add3;
-            add4CheckBox.Checked = preset.add4;
-            add5CheckBox.Checked = preset.add5;
-
-            append1CheckBox.Checked = preset.append;
-            append2CheckBox.Checked = preset.append2;
-            append3CheckBox.Checked = preset.append3;
-            append4CheckBox.Checked = preset.append4;
-            append5CheckBox.Checked = preset.append5;
-
-            condition1SneCheckBox.Checked = preset.sneLimitation1;
-            condition2SneCheckBox.Checked = preset.sneLimitation2;
-            condition3SneCheckBox.Checked = preset.sneLimitation3;
-            condition4SneCheckBox.Checked = preset.sneLimitation4;
-            condition5SneCheckBox.Checked = preset.sneLimitation5;
-
-            condition1DneCheckBox.Checked = preset.dneLimitation1;
-            condition2DneCheckBox.Checked = preset.dneLimitation2;
-            condition3DneCheckBox.Checked = preset.dneLimitation3;
-            condition4DneCheckBox.Checked = preset.dneLimitation4;
-            condition5DneCheckBox.Checked = preset.dneLimitation5;
 
             languagesCustom.Text = Language;
 
@@ -783,6 +712,78 @@ namespace MusicBeePlugin
             this.Text = FormTitleBarText;
 
             FormTitleBarText = null;
+
+
+            parameterTagListCustom.Text = AsrGetTagName(preset.parameterTagId);
+            parameterTag2ListCustom.Text = AsrGetTagName(preset.parameterTag2Id);
+            parameterTag3ListCustom.Text = AsrGetTagName(preset.parameterTag3Id);
+            parameterTag4ListCustom.Text = AsrGetTagName(preset.parameterTag4Id);
+            parameterTag5ListCustom.Text = AsrGetTagName(preset.parameterTag5Id);
+            parameterTag6ListCustom.Text = AsrGetTagName(preset.parameterTag6Id);
+
+
+            customTextBox.Text = preset.customText;
+            customTextCheckBox.Checked = preset.customTextChecked;
+            customText2Box.Text = preset.customText2;
+            customText2CheckBox.Checked = preset.customText2Checked;
+            customText3Box.Text = preset.customText3;
+            customText3CheckBox.Checked = preset.customText3Checked;
+            customText4Box.Text = preset.customText4;
+            customText4CheckBox.Checked = preset.customText4Checked;
+
+
+            ignoreCaseCheckBox.Checked = preset.ignoreCase;
+
+
+            searchedPatternBox.Text = preset.searchedPattern;
+            searchedPattern2Box.Text = preset.searchedPattern2;
+            searchedPattern3Box.Text = preset.searchedPattern3;
+            searchedPattern4Box.Text = preset.searchedPattern4;
+            searchedPattern5Box.Text = preset.searchedPattern5;
+
+            replacedPatternBox.Text = preset.replacedPattern;
+            replacedPattern2Box.Text = preset.replacedPattern2;
+            replacedPattern3Box.Text = preset.replacedPattern3;
+            replacedPattern4Box.Text = preset.replacedPattern4;
+            replacedPattern5Box.Text = preset.replacedPattern5;
+
+
+            searchedTagListCustom.Text = AsrGetTagName(preset.searchedTagId);
+            searchedTag2ListCustom.Text = AsrGetTagName(preset.searchedTag2Id);
+            searchedTag3ListCustom.Text = AsrGetTagName(preset.searchedTag3Id);
+            searchedTag4ListCustom.Text = AsrGetTagName(preset.searchedTag4Id);
+            searchedTag5ListCustom.Text = AsrGetTagName(preset.searchedTag5Id);
+
+
+            replacedTagListCustom.Text = AsrGetTagName(preset.replacedTagId);
+            replacedTag2ListCustom.Text = AsrGetTagName(preset.replacedTag2Id);
+            replacedTag3ListCustom.Text = AsrGetTagName(preset.replacedTag3Id);
+            replacedTag4ListCustom.Text = AsrGetTagName(preset.replacedTag4Id);
+            replacedTag5ListCustom.Text = AsrGetTagName(preset.replacedTag5Id);
+
+            add1CheckBox.Checked = preset.add;
+            add2CheckBox.Checked = preset.add2;
+            add3CheckBox.Checked = preset.add3;
+            add4CheckBox.Checked = preset.add4;
+            add5CheckBox.Checked = preset.add5;
+
+            append1CheckBox.Checked = preset.append;
+            append2CheckBox.Checked = preset.append2;
+            append3CheckBox.Checked = preset.append3;
+            append4CheckBox.Checked = preset.append4;
+            append5CheckBox.Checked = preset.append5;
+
+            condition1SneCheckBox.Checked = preset.sneLimitation1;
+            condition2SneCheckBox.Checked = preset.sneLimitation2;
+            condition3SneCheckBox.Checked = preset.sneLimitation3;
+            condition4SneCheckBox.Checked = preset.sneLimitation4;
+            condition5SneCheckBox.Checked = preset.sneLimitation5;
+
+            condition1DneCheckBox.Checked = preset.dneLimitation1;
+            condition2DneCheckBox.Checked = preset.dneLimitation2;
+            condition3DneCheckBox.Checked = preset.dneLimitation3;
+            condition4DneCheckBox.Checked = preset.dneLimitation4;
+            condition5DneCheckBox.Checked = preset.dneLimitation5;
         }
     }
 }

@@ -3553,10 +3553,8 @@ namespace MusicBeePlugin
 
             if (parameterTagList.Items.Contains(selectedTagName))
                 parameterTagList.SelectedItem = selectedTagName;
-            else if (parameterTagList.Items.Count > 0)
-                parameterTagList.SelectedIndex = 0;
             else
-                parameterTagList.SelectedIndex = -1;
+                parameterTagList.SelectedItem = string.Empty;
         }
 
         private static bool DetectTempTag(int tagId)
