@@ -768,7 +768,7 @@ namespace MusicBeePlugin
                 return presetSafeFileName;
             }
 
-            public static Preset Load(string filename, XmlSerializer presetSerializer)
+            public static Preset LoadPreset(string filename, XmlSerializer presetSerializer)
             {
                 var stream = System.IO.File.Open(filename, FileMode.Open, FileAccess.Read, FileShare.None); //-V5609
                 var file = new StreamReader(stream, Unicode);
@@ -777,6 +777,31 @@ namespace MusicBeePlugin
                 savedPreset.hotkeyAssigned = false;
 
                 file.Close();
+
+
+                //Let's escape whitespaces
+                savedPreset.customText = Unescape(savedPreset.customText);
+                savedPreset.customText2 = Unescape(savedPreset.customText2);
+                savedPreset.customText3 = Unescape(savedPreset.customText3);
+                savedPreset.customText4 = Unescape(savedPreset.customText4);
+
+                savedPreset.preserveValues = Unescape(savedPreset.preserveValues);
+
+                savedPreset.processTags = Unescape(savedPreset.processTags);
+                savedPreset.preserveTags = Unescape(savedPreset.preserveTags);
+
+                savedPreset.searchedPattern = Unescape(savedPreset.searchedPattern);
+                savedPreset.searchedPattern2 = Unescape(savedPreset.searchedPattern2);
+                savedPreset.searchedPattern3 = Unescape(savedPreset.searchedPattern3);
+                savedPreset.searchedPattern4 = Unescape(savedPreset.searchedPattern4);
+                savedPreset.searchedPattern5 = Unescape(savedPreset.searchedPattern5);
+
+                savedPreset.replacedPattern = Unescape(savedPreset.replacedPattern);
+                savedPreset.replacedPattern2 = Unescape(savedPreset.replacedPattern2);
+                savedPreset.replacedPattern3 = Unescape(savedPreset.replacedPattern3);
+                savedPreset.replacedPattern4 = Unescape(savedPreset.replacedPattern4);
+                savedPreset.replacedPattern5 = Unescape(savedPreset.replacedPattern5);
+
 
                 return savedPreset;
             }
@@ -896,6 +921,22 @@ namespace MusicBeePlugin
                 parameterTag6Id = referencePreset.parameterTag6Id;
             }
 
+            public static string Escape(string input)
+            {
+                if (input == null)
+                    return null;
+
+                return input.Replace(' ', '\uFFFD').Replace('\t', '\uFFFC');
+            }
+
+            public static string Unescape(string input)
+            {
+                if (input == null)
+                    return null;
+
+                return input.Replace('\uFFFD', ' ').Replace('\uFFFC', '\t');
+            }
+
             public string savePreset(string pathName = null)
             {
                 if (pathName == null)
@@ -905,6 +946,31 @@ namespace MusicBeePlugin
 
                 var stream = System.IO.File.Open(pathName, FileMode.Create, FileAccess.Write, FileShare.None); //-V5609
                 var file = new StreamWriter(stream, Unicode);
+
+
+                //Let's escape whitespaces
+                customText = Escape(customText);
+                customText2 = Escape(customText2);
+                customText3 = Escape(customText3);
+                customText4 = Escape(customText4);
+
+                preserveValues = Escape(preserveValues);
+
+                processTags = Escape(processTags);
+                preserveTags = Escape(preserveTags);
+
+                searchedPattern = Escape(searchedPattern);
+                searchedPattern2 = Escape(searchedPattern2);
+                searchedPattern3 = Escape(searchedPattern3);
+                searchedPattern4 = Escape(searchedPattern4);
+                searchedPattern5 = Escape(searchedPattern5);
+
+                replacedPattern = Escape(replacedPattern);
+                replacedPattern2 = Escape(replacedPattern2);
+                replacedPattern3 = Escape(replacedPattern3);
+                replacedPattern4 = Escape(replacedPattern4);
+                replacedPattern5 = Escape(replacedPattern5);
+
 
                 presetSerializer.Serialize(file, this);
 
@@ -1740,7 +1806,7 @@ namespace MusicBeePlugin
 
                     try
                     {
-                        var preset = Preset.Load(presetName, presetSerializer);
+                        var preset = Preset.LoadPreset(presetName, presetSerializer);
 
                         if (preset.guid.ToString() != "ff8d53d9-526b-4b40-bbf0-848b6b892f70")
                         {
@@ -4202,7 +4268,7 @@ namespace MusicBeePlugin
             {
                 try
                 {
-                    var newPreset = Preset.Load(filename, presetSerializer);
+                    var newPreset = Preset.LoadPreset(filename, presetSerializer);
 
                     presetsWorkingCopy.TryGetValue(newPreset.guid, out var existingPreset);
 
@@ -4366,7 +4432,7 @@ namespace MusicBeePlugin
 
                     try
                     {
-                        var newPreset = Preset.Load(newPresetName, presetSerializer);
+                        var newPreset = Preset.LoadPreset(newPresetName, presetSerializer);
 
                         if (newPreset.guid.ToString() != "ff8d53d9-526b-4b40-bbf0-848b6b892f70")
                         {
