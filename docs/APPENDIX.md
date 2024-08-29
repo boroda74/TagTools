@@ -6,7 +6,7 @@ Do all you want with plugin binary and source code at your own risk.
 
 ### ASR Custom presets
 
-[Some ASR user presets](https://www.mediafire.com/file/0lbn0t3n48n9rbt/Custom+Presets.zip/file), that are not included in the plugin package, but may be useful.
+[Some ASR user presets](https://www.mediafire.com/file/ikb8wlburvvwjc9/ASR-Custom-Presets.zip/file), that are not included in the plugin package, but may be useful.
 
 ### Backup download
 
