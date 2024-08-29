@@ -4,9 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
-
 using ExtensionMethods;
-
 using static NativeMethods;
 
 namespace MusicBeePlugin
@@ -71,7 +69,7 @@ namespace MusicBeePlugin
                 controlBorder.changeControlBorderLocation();
         }
 
-        //internal static void DrawTextBoxBorder(TextBox textBox) //****
+        //internal static void DrawTextBoxBorder(TextBox textBox) //---
         //{
         //    if (textBox.Parent is ControlBorder textBoxBorder)
         //    {
@@ -79,7 +77,7 @@ namespace MusicBeePlugin
         //        {
         //            if (textBox.Multiline)
         //            {
-        //                if (!textBoxBorder.control.Enabled)
+        //                if (!textBoxBorder.control.IsEnabled())
         //                    ControlPaint.DrawBorder(graphics, new Rectangle(0, 0, textBoxBorder.Width, textBoxBorder.Height),
         //                        Plugin.ScrollBarBorderColor, ButtonBorderStyle.Solid);
         //                else if (textBoxBorder.ContainsFocus)
@@ -91,7 +89,7 @@ namespace MusicBeePlugin
         //            }
         //            else
         //            {
-        //                if (!textBoxBorder.control.Enabled)
+        //                if (!textBoxBorder.control.IsEnabled())
         //                    ControlPaint.DrawBorder(graphics, new Rectangle(0, 0, textBoxBorder.Width, textBoxBorder.Height),
         //                        Plugin.ButtonBorderColor, ButtonBorderStyle.Solid);
         //                else if (textBoxBorder.ContainsFocus)
@@ -109,7 +107,7 @@ namespace MusicBeePlugin
         {
             using (var graphics = control.CreateGraphics())
             {
-                if (!control.Enabled)
+                if (!control.IsEnabled())
                     ControlPaint.DrawBorder(graphics, new Rectangle(0, 0, control.Width, control.Height), disabledColor,
                         ButtonBorderStyle.Solid);
                 else if (control.ContainsFocus)
@@ -527,7 +525,7 @@ namespace MusicBeePlugin
             this.button.Image = downArrowComboBoxImage;
             this.button.TabStop = false;
 
-            //button.Click += button_Click;//****
+            //button.Click += button_Click;//---
             this.button.GotFocus += button_Click;
 
 
@@ -1077,7 +1075,7 @@ namespace MusicBeePlugin
         {
             ownerForm.setSkinnedControlColors(button, null);
 
-            if (Enabled)
+            if (this.IsEnabled())
                 button.Image = downArrowComboBoxImage;
             else
                 button.Image = disabledDownArrowComboBoxImage;
@@ -1192,7 +1190,7 @@ namespace MusicBeePlugin
         {
             if (textBox != null)
             {
-                enabled = (Enabled && enabled == null) || enabled == true;
+                enabled = (this.IsEnabled() && enabled == null) || enabled == true;
 
                 if (enabled == true)
                 {
@@ -1208,8 +1206,8 @@ namespace MusicBeePlugin
                 else //Disabled
                 {
                     textBox.ForeColor = Plugin.DimmedAccentColor;
-                    textBox.BackColor = Plugin.InputPanelBackColor;
-                    //textBox.BackColor = Plugin.InputControlDimmedBackColor; //****
+                    textBox.BackColor = Plugin.InputPanelBackColor; //---
+                    //textBox.BackColor = Plugin.InputControlDimmedBackColor; //---
                 }
             }
         }
@@ -1477,7 +1475,7 @@ namespace MusicBeePlugin
 
         private void DrawBorder(Graphics g)
         {
-            if (!Enabled)
+            if (!this.IsEnabled())
                 ControlPaint.DrawBorder(g, new Rectangle(0, 0, Width, Height), borderColorDisabled, ButtonBorderStyle.Solid);
             else if (ContainsFocus)
                 ControlPaint.DrawBorder(g, new Rectangle(0, 0, Width, Height), borderColorActive, ButtonBorderStyle.Solid);
@@ -1638,7 +1636,7 @@ namespace MusicBeePlugin
 
         private void DrawBorder(Graphics g)
         {
-            if (!Enabled)
+            if (!this.IsEnabled())
                 ControlPaint.DrawBorder(g, new Rectangle(0, 0, Width, Height), borderColorDisabled, ButtonBorderStyle.Solid);
             else if (ContainsFocus)
                 ControlPaint.DrawBorder(g, new Rectangle(0, 0, Width, Height), borderColorActive, ButtonBorderStyle.Solid);

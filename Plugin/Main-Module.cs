@@ -99,7 +99,7 @@ namespace MusicBeePlugin
         internal static ToolStripMenuItem OpenedFormsSubmenu;
 
         //Skinning
-        internal static bool PluginClosing;//***
+        internal static bool PluginClosing;
 
         internal static float ButtonHeightDpiFontScaling = 1;
         internal static float TextBoxHeightDpiFontScaling = 1;
@@ -150,7 +150,7 @@ namespace MusicBeePlugin
         internal static Color SplitterColor;
 
 
-        internal static readonly Color NoColor = Color.FromArgb(-2); //****
+        internal static readonly Color NoColor = Color.FromArgb(-2); //---
 
         internal static Color ScrollBarBackColor = NoColor;
         internal static Color ScrollBarBorderColor = NoColor;
@@ -360,8 +360,8 @@ namespace MusicBeePlugin
             = new SortedDictionary<Guid, SortedDictionary<string, bool>[]>();
 
         internal static System.Threading.Timer UpdateFunctionCacheTimer = null;
-        internal static readonly TimeSpan FunctionCacheUpdateDelay = new TimeSpan(0, 0, 5); //Every 5 secs. //****
-        internal static readonly TimeSpan FunctionCacheClearingDelay = new TimeSpan(0, 1, 0); //Every 1 min. //****
+        internal static readonly TimeSpan FunctionCacheUpdateDelay = new TimeSpan(0, 0, 5); //Every 5 secs. //---
+        internal static readonly TimeSpan FunctionCacheClearingDelay = new TimeSpan(0, 1, 0); //Every 1 min. //---
         internal static readonly int PresetCacheCountThreshold = 10;
         internal static readonly int PresetCacheCountCriticalThreshold = 100;
         internal static readonly int TagsCacheClearingGroupingsCountThreshold = 20_000;
@@ -470,15 +470,8 @@ namespace MusicBeePlugin
         internal static int CustomTrackIdTag;
 
 
-        [Serializable]
-        public class PluginSettings : SavedSettingsType //******* remove SavedSettingsType later!!!!!!
-        {
-
-        }
-
-        [XmlInclude(typeof(PluginSettings))]
-        [Serializable]
-        public class SavedSettingsType
+       [Serializable]
+        public class PluginSettings
         {
             public bool not1stTimeUsage;
 
@@ -568,7 +561,6 @@ namespace MusicBeePlugin
             public bool ignoreSingleLetterExceptedWords;
 
 
-            public ReportPreset[] reportsPresets; //***** delete it later!!!!
             public ReportPreset[] reportPresets;
 
             public string unitK;
@@ -842,7 +834,7 @@ namespace MusicBeePlugin
         internal static string ListItemConditionIs;
         internal static string ListItemConditionIsNot;
         internal static string ListItemConditionIsGreater;
-        internal static string ListItemConditionIsGreaterOrEqual;//***
+        internal static string ListItemConditionIsGreaterOrEqual;
         internal static string ListItemConditionIsLess;
         internal static string ListItemConditionIsLessOrEqual;
 
@@ -1348,7 +1340,7 @@ namespace MusicBeePlugin
                 {
                     return 0;
                 }
-                //Must never happen? //******************
+                //Must never happen? //-----
                 else if ((resultType >= ResultType.UnknownOrString && resultType < ResultType.ParsingError) || resultType == ResultType.UseOtherResults)
                 {
                     if (items.Count == 0)
@@ -1443,7 +1435,7 @@ namespace MusicBeePlugin
                 }
                 else if (resultType == ResultType.TimeSpan)
                 {
-                    return TimeSpan.FromMilliseconds(result).ToString("g");//***
+                    return TimeSpan.FromMilliseconds(result).ToString("g");//---
                 }
                 else if (resultType == ResultType.DateTime)
                 {
@@ -1503,7 +1495,7 @@ namespace MusicBeePlugin
 
             var prefix = Regex.Replace(input, @"^(\D*?)(\d+)(\.|\,)?(\d*?)(\s*)(\D*)$", "$1", RegexOptions.IgnoreCase);
 
-            if (!string.IsNullOrWhiteSpace(prefix)) //Probably prefixed string must not br treated as number at all //***
+            if (!string.IsNullOrWhiteSpace(prefix)) //Probably prefixed string must not br treated as number at all //---
                 return (double.NegativeInfinity, null, null, null);
             if (prefix == input)
                 prefix = string.Empty;
@@ -3722,7 +3714,7 @@ namespace MusicBeePlugin
             //ListItemConditionIsLess = "is less than";
             //ListItemConditionIsLessOrEqual = "is less than or equal to";
 
-            ListItemConditionIs = "="; //***
+            ListItemConditionIs = "="; //---
             ListItemConditionIsNot = "!=";
             ListItemConditionIsGreater = ">";
             ListItemConditionIsGreaterOrEqual = ">=";
@@ -4064,57 +4056,21 @@ namespace MusicBeePlugin
 
             var unicode = Encoding.UTF8;
 
-            if (File.Exists(PluginSettingsFilePath + ".new-format")) //********* Simplify later!!!!!!
+            var stream = File.Open(PluginSettingsFilePath, FileMode.OpenOrCreate, FileAccess.Read, FileShare.None);
+            var file = new StreamReader(stream, unicode);
+
+            XmlSerializer controlsDefaultsSerializer = new XmlSerializer(typeof(PluginSettings));
+
+            try
             {
-                var stream = File.Open(PluginSettingsFilePath, FileMode.OpenOrCreate, FileAccess.Read, FileShare.None);
-                var file = new StreamReader(stream, unicode);
-
-                XmlSerializer controlsDefaultsSerializer = null;
-                try
-                {
-                    controlsDefaultsSerializer = new XmlSerializer(typeof(PluginSettings));
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show(MbForm, e.Message, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
-                try
-                {
-                    SavedSettings = (PluginSettings)controlsDefaultsSerializer.Deserialize(file); //-V5611
-                }
-                catch //-V3163 //-V5606
-                {
-                    //Ignore...
-                }
-
-                file.Close();
+                SavedSettings = (PluginSettings)controlsDefaultsSerializer.Deserialize(file); //-V5611
             }
-            else //******* remove later!!!!
+            catch (Exception ex)
             {
-                var stream = File.Open(PluginSettingsFilePath, FileMode.OpenOrCreate, FileAccess.Read, FileShare.None);
-                var file = new StreamReader(stream, unicode);
-
-                XmlSerializer controlsDefaultsSerializer = null;
-                try
-                {
-                    controlsDefaultsSerializer = new XmlSerializer(typeof(SavedSettingsType));
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show(MbForm, e.Message, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
-                try
-                {
-                    var oldSavedSettings = (SavedSettingsType)controlsDefaultsSerializer.Deserialize(file); //-V5611
-                    oldSavedSettings.CopyPropsTo(ref SavedSettings);
-                }
-                catch //-V3163 //-V5606
-                {
-                    //Ignore...
-                }
-
+                MessageBox.Show(MbForm, ex.Message, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
                 file.Close();
             }
             #endregion
@@ -4792,15 +4748,8 @@ namespace MusicBeePlugin
                 SavedSettings.autoBackupPrefix = "Tag Auto-Backup ";
 
 
-            if (SavedSettings.reportPresets == null && SavedSettings.reportsPresets == null)
-            {
+            if (SavedSettings.reportPresets == null)
                 SavedSettings.reportPresets = Array.Empty<ReportPreset>();
-            }
-            else if (SavedSettings.reportPresets == null) //******** remove later!!!!!
-            {
-                SavedSettings.reportPresets = new ReportPreset[SavedSettings.reportsPresets.Length];
-                SavedSettings.reportsPresets.CopyTo(SavedSettings.reportPresets, 0);
-            }
 
             //Let's remove all predefined presets and recreate them from scratch (except for allowed user customizations)
             var existingPredefinedPresets = new SortedDictionary<Guid, ReportPreset>(); //<permanentGuid, ReportPreset>
@@ -4998,25 +4947,6 @@ namespace MusicBeePlugin
 
             reportPresets[presetCounter++] = libraryReportsPreset;
 
-
-            foreach (var reportPreset in reportPresets) //******* remove later !!!
-            {
-                if (reportPreset != null && reportPreset.exportedTrackListName == null)
-                    reportPreset.exportedTrackListName = ExportedTrackList;
-
-
-                if (reportPreset != null && (reportPreset.operations == null || reportPreset.operations.Length < reportPreset.functions.Length))
-                    reportPreset.operations = new int[reportPreset.functions.Length];
-
-                if (reportPreset != null && (reportPreset.mulDivFactors == null || reportPreset.mulDivFactors.Length < reportPreset.functions.Length))
-                    reportPreset.mulDivFactors = new string[reportPreset.functions.Length];
-
-                if (reportPreset != null && (reportPreset.precisionDigits == null || reportPreset.precisionDigits.Length < reportPreset.functions.Length))
-                    reportPreset.precisionDigits = new string[reportPreset.functions.Length];
-
-                if (reportPreset != null && (reportPreset.appendTexts == null || reportPreset.appendTexts.Length < reportPreset.functions.Length))
-                    reportPreset.appendTexts = new string[reportPreset.functions.Length];
-            }
 
             SavedSettings.reportPresets = reportPresets;
 
@@ -5231,14 +5161,11 @@ namespace MusicBeePlugin
         {
             var unicode = Encoding.UTF8;
 
-            var stream = File.Open(PluginSettingsFilePath + ".new-format", FileMode.Create, FileAccess.Write, FileShare.None); //********* remove later!!!
+            if (File.Exists(PluginSettingsFilePath + ".new-format")) //----- Remove later!!!
+                File.Delete(PluginSettingsFilePath + ".new-format");
+
+            var stream = File.Open(PluginSettingsFilePath, FileMode.Create, FileAccess.Write, FileShare.None);
             var file = new StreamWriter(stream, unicode);
-
-            file.Close();
-
-
-            stream = File.Open(PluginSettingsFilePath, FileMode.Create, FileAccess.Write, FileShare.None);
-            file = new StreamWriter(stream, unicode);
 
             var controlsDefaultsSerializer = new XmlSerializer(typeof(PluginSettings));
             controlsDefaultsSerializer.Serialize(file, SavedSettings);
@@ -5649,7 +5576,7 @@ namespace MusicBeePlugin
             const float LightDimmedWeight = 0.90f;
             const float DimmedWeight = 0.65f;
             const float DeepDimmedWeight = 0.32f;
-            const float ScrollBarsForeWeight = 0.75f;//***
+            const float ScrollBarsForeWeight = 0.75f; //---
 
             InputPanelForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
             InputPanelBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
@@ -5664,7 +5591,7 @@ namespace MusicBeePlugin
 
 
                 AccentColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
-                AccentSelectedColor = NoColor; //****
+                AccentSelectedColor = NoColor; //---
 
                 DimmedAccentColor = GetWeightedColor(AccentColor, InputPanelBackColor, DimmedWeight);
                 DeepDimmedAccentColor = GetWeightedColor(AccentColor, InputPanelBackColor, DeepDimmedWeight);
@@ -5674,11 +5601,11 @@ namespace MusicBeePlugin
                 FormBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBorder));
 
                 InputControlDimmedForeColor = GetWeightedColor(InputControlForeColor, FormBackColor, DimmedWeight);
-                InputControlDimmedBackColor = GetWeightedColor(InputControlBackColor, FormBackColor, 0.25f);//****
+                InputControlDimmedBackColor = GetWeightedColor(InputControlBackColor, FormBackColor, 0.25f); //---
 
 
                 //SKINNING BUTTONS (ESPECIALLY DISABLED BUTTONS)
-                //Below: (SkinElement)2 - BUTTON??? enum code //****
+                //Below: (SkinElement)2 - BUTTON??? enum code //-----
 
                 //Back colors
                 Color buttonBackColor = GetButtonBackColor();
@@ -5694,7 +5621,7 @@ namespace MusicBeePlugin
                 const float MouseOverButtonBackColor = 0.535f;
                 ButtonMouseOverBackColor = GetWeightedColor(ButtonBackColor, FormBackColor, MouseOverButtonBackColor);
 
-                //***
+                //-----
                 //float avgForeBrightness = GetAverageBrightness(_buttonBackColor);
                 //float avgBackBrightness = GetAverageBrightness(_buttonBackColor);
                 //if (Math.Abs(avgForeBrightness - avgBackBrightness) < 0.5f)
@@ -5704,7 +5631,7 @@ namespace MusicBeePlugin
                 //   else
                 //       _buttonDisabledBackColor = GetWeightedColor(_buttonBackColor, Color.White, 0.6f);
                 //}
-                //***
+                //-----
 
 
                 //Fore colors
@@ -5745,7 +5672,7 @@ namespace MusicBeePlugin
                 ButtonDisabledBorderColor = GetWeightedColor(ButtonBorderColor, ButtonForeColor, 0.25f);
 
 
-                ControlHighlightBackColor = buttonBackColor; //*** buttonBackLightDimmedAccentColor;
+                ControlHighlightBackColor = buttonBackColor; //--- buttonBackLightDimmedAccentColor;
                 ControlHighlightForeColor = buttonForeColor;
 
                 var avgForeBrightness = GetAverageBrightness(ControlHighlightForeColor);
@@ -5762,7 +5689,7 @@ namespace MusicBeePlugin
                 ScrollBarBackColor = InputControlBackColor;
                 ScrollBarBorderColor = DeepDimmedAccentColor;
                 NarrowScrollBarBackColor = InputControlBackColor;
-                ScrollBarThumbAndSpansForeColor = GetWeightedColor(AccentColor, InputPanelBackColor, ScrollBarsForeWeight);//***
+                ScrollBarThumbAndSpansForeColor = GetWeightedColor(AccentColor, InputPanelBackColor, ScrollBarsForeWeight); //---
                 ScrollBarThumbAndSpansBackColor = InputControlBackColor;
                 ScrollBarThumbAndSpansBorderColor = InputControlBackColor;
 
@@ -5806,7 +5733,7 @@ namespace MusicBeePlugin
                 ScrollBarBackColor = SystemColors.ControlText;
                 ScrollBarBorderColor = SystemColors.ControlText;
                 NarrowScrollBarBackColor = SystemColors.Window;
-                ScrollBarThumbAndSpansForeColor = SystemColors.ButtonFace;//***
+                ScrollBarThumbAndSpansForeColor = SystemColors.ButtonFace; //---
                 ScrollBarThumbAndSpansBackColor = SystemColors.Window;
                 ScrollBarThumbAndSpansBorderColor = SystemColors.ControlText;
 
@@ -5826,7 +5753,7 @@ namespace MusicBeePlugin
             TickedColor = GetHighlightColor(HighlightColor, sampleColor, FormBackColor, 0.5f);
 
             //Splitter is invisible by default. Let's draw it.
-            SplitterColor = GetWeightedColor(SystemColors.Desktop, AccentColor, 0.8f);//***
+            SplitterColor = GetWeightedColor(SystemColors.Desktop, AccentColor, 0.8f); //---
 
 
             //Making themed bitmaps
@@ -5849,7 +5776,7 @@ namespace MusicBeePlugin
 
                 var smallSize = (int)Math.Round(15f * ButtonHeightDpiFontScaling);
 
-                var scrollBarImagesWidth = ControlsTools.GetCustomScrollBarInitialWidth(DpiScaling, 0); //Second arg. must be: SbBorderWidth /= scaledPx//****
+                var scrollBarImagesWidth = ControlsTools.GetCustomScrollBarInitialWidth(DpiScaling, 0); //Second arg. must be: SbBorderWidth /= scaledPx //-----
                 var comboBoxDownArrowSize = (int)Math.Round(DpiScaling * 1.238f * ScrollBarWidth);
 
 
@@ -6123,8 +6050,8 @@ namespace MusicBeePlugin
             ChangedCellStyle.BackColor = UnchangedCellStyle.BackColor;
             ChangedCellStyle.SelectionBackColor = UnchangedCellStyle.SelectionBackColor;
 
-            var scale = 1.5f;//***
-            var shift = 50f;//***
+            var scale = 1.5f; //---
+            var shift = 50f; //---
             var threshold = 175f;
 
             var backColor = ChangedCellStyle.BackColor;
@@ -6220,7 +6147,7 @@ namespace MusicBeePlugin
             DimmedCellStyle.BackColor = UnchangedCellStyle.BackColor;
             DimmedCellStyle.SelectionBackColor = UnchangedCellStyle.SelectionBackColor;
 
-            scale = 0.2f; //Dimmed text brightness scale //***
+            scale = 0.2f; //Dimmed text brightness scale //---
 
             foreColor = UnchangedCellStyle.ForeColor;
             r = foreColor.R;
@@ -6295,7 +6222,7 @@ namespace MusicBeePlugin
             PreservedTagCellStyle.BackColor = UnchangedCellStyle.BackColor;
             PreservedTagCellStyle.SelectionBackColor = UnchangedCellStyle.SelectionBackColor;
 
-            scale = 1.5f;//***
+            scale = 1.5f; //---
 
             backColor = UnchangedCellStyle.BackColor;
             br = backColor.R;
@@ -6390,7 +6317,7 @@ namespace MusicBeePlugin
             PreservedTagValueCellStyle.BackColor = UnchangedCellStyle.BackColor;
             PreservedTagValueCellStyle.SelectionBackColor = UnchangedCellStyle.SelectionBackColor;
 
-            scale = 1.5f;//***
+            scale = 1.5f; //---
 
             backColor = UnchangedCellStyle.BackColor;
             br = backColor.R;
@@ -6691,7 +6618,7 @@ namespace MusicBeePlugin
                 return duration;
         }
 
-        public string[] CustomFunctionHelpText(bool shortText)//****
+        public string[] CustomFunctionHelpText(bool shortText) //-----
         {
             if (shortText)
                 return new string[]

@@ -498,11 +498,14 @@ namespace ExtensionMethods
                 disabledColor = Plugin.DimmedAccentColor;
 
 
-            if (control is Label)
+            if (control.AccessibleDescription == Plugin.DisabledState)
+                return false;
+            else if (control.AccessibleDescription == Plugin.EnabledState)
+                return true;
+            else if (control is Label)
                 return control.ForeColor != disabledColor;
-
-
-            return control.Enabled;
+            else
+                return control.Enabled;
         }
     }
 }

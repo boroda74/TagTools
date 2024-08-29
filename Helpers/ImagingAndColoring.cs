@@ -179,7 +179,7 @@ namespace MusicBeePlugin
 
                     // ReSharper disable once ConditionIsAlwaysTrueOrFalse
                     if (opaque) //-V3022
-                        brightness = (brightnessF < 420/* MUST BE "some constant" - OpacityThreshold*/) ? byte.MinValue : byte.MaxValue; //**** greyLevelF LESS THAN 420 ???
+                        brightness = (brightnessF < 420/* MUST BE "some constant" - OpacityThreshold*/) ? byte.MinValue : byte.MaxValue; //----- greyLevelF LESS THAN 420 ???
 
                     preparedMaskRGBData[i] = brightness;
                     preparedMaskRGBData[i + 1] = brightness;
@@ -301,7 +301,7 @@ namespace MusicBeePlugin
                     Math.Max(0, Math.Min(255, Convert.ToInt32(double.Parse($"{bl * 250D:0.00}")))));
         }
 
-        internal static Color GetHighlightColor(Color highlightColor, Color sampleColor, Color backColor, float highlightWeight = 0.80f)//***
+        internal static Color GetHighlightColor(Color highlightColor, Color sampleColor, Color backColor, float highlightWeight = 0.80f) //---
         {
             var highlightHue = highlightColor.GetHue();
             var highlightSat = highlightColor.GetSaturation();
@@ -336,7 +336,7 @@ namespace MusicBeePlugin
             return resultColor;
         }
 
-        internal static Color GetWeightedColor(Color sampleColor1, Color sampleColor2, float sampleColor1Weight = 0.5f)//***
+        internal static Color GetWeightedColor(Color sampleColor1, Color sampleColor2, float sampleColor1Weight = 0.5f) //---
         {
             var resultR = (int)Math.Round(sampleColor1.R * sampleColor1Weight + sampleColor2.R * (1 - sampleColor1Weight));
             var resultG = (int)Math.Round(sampleColor1.G * sampleColor1Weight + sampleColor2.G * (1 - sampleColor1Weight));

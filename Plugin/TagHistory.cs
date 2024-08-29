@@ -109,7 +109,7 @@ namespace MusicBeePlugin
             var sampleColor = SystemColors.HotTrack;
 
             //noBackupDataCellForeColor = sampleColor;
-            noBackupDataCellForeColor = GetWeightedColor(AccentColor, sampleColor);//***
+            noBackupDataCellForeColor = GetWeightedColor(AccentColor, sampleColor); //---
 
 
 
@@ -1565,12 +1565,12 @@ namespace MusicBeePlugin
                 {
                     closeFormOnStopping = true;
                     buttonClose.Enable(false);
+
+                    backgroundTaskIsStopping = true;
+                    SetStatusBarText(TagHistorySbText + SbTextStoppingCurrentOperation, false);
+
+                    e.Cancel = true;
                 }
-
-                backgroundTaskIsStopping = true;
-                SetStatusBarText(TagHistorySbText + SbTextStoppingCurrentOperation, false);
-
-                e.Cancel = true;
             }
         }
     }

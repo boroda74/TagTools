@@ -180,13 +180,7 @@ namespace MusicBeePlugin
 
         private void SwapTags_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (ignoreClosingForm)
-            {
-                backgroundTaskIsStopping = true;
-                SetStatusBarText(SwapTagsSbText + SbTextStoppingCurrentOperation, false);
-
-                e.Cancel = true;
-            }
+            //Nothing for this command...
         }
     }
 }

@@ -171,12 +171,12 @@ namespace MusicBeePlugin
 
             fillTagComboBoxes = false;
 
-            parameterTagTypeListCustom.SelectedIndex = (int)preset.parameterTagTypeNew;
-            parameterTag2TypeListCustom.SelectedIndex = (int)preset.parameterTag2TypeNew;
-            parameterTag3TypeListCustom.SelectedIndex = (int)preset.parameterTag3TypeNew;
-            parameterTag4TypeListCustom.SelectedIndex = (int)preset.parameterTag4TypeNew;
-            parameterTag5TypeListCustom.SelectedIndex = (int)preset.parameterTag5TypeNew;
-            parameterTag6TypeListCustom.SelectedIndex = (int)preset.parameterTag6TypeNew;
+            parameterTagTypeListCustom.SelectedIndex = (int)preset.parameterTagType;
+            parameterTag2TypeListCustom.SelectedIndex = (int)preset.parameterTag2Type;
+            parameterTag3TypeListCustom.SelectedIndex = (int)preset.parameterTag3Type;
+            parameterTag4TypeListCustom.SelectedIndex = (int)preset.parameterTag4Type;
+            parameterTag5TypeListCustom.SelectedIndex = (int)preset.parameterTag5Type;
+            parameterTag6TypeListCustom.SelectedIndex = (int)preset.parameterTag6Type;
 
 
             parameterTagListCustom.Text = AsrGetTagName(preset.parameterTagId);
@@ -347,12 +347,12 @@ namespace MusicBeePlugin
             preset.replacedTag5Id = AsrGetTagId(replacedTag5ListCustom.Text);
 
 
-            preset.parameterTagTypeNew = (TagType)parameterTagTypeListCustom.SelectedIndex;
-            preset.parameterTag2TypeNew = (TagType)parameterTag2TypeListCustom.SelectedIndex;
-            preset.parameterTag3TypeNew = (TagType)parameterTag3TypeListCustom.SelectedIndex;
-            preset.parameterTag4TypeNew = (TagType)parameterTag4TypeListCustom.SelectedIndex;
-            preset.parameterTag5TypeNew = (TagType)parameterTag5TypeListCustom.SelectedIndex;
-            preset.parameterTag6TypeNew = (TagType)parameterTag6TypeListCustom.SelectedIndex;
+            preset.parameterTagType = (TagType)parameterTagTypeListCustom.SelectedIndex;
+            preset.parameterTag2Type = (TagType)parameterTag2TypeListCustom.SelectedIndex;
+            preset.parameterTag3Type = (TagType)parameterTag3TypeListCustom.SelectedIndex;
+            preset.parameterTag4Type = (TagType)parameterTag4TypeListCustom.SelectedIndex;
+            preset.parameterTag5Type = (TagType)parameterTag5TypeListCustom.SelectedIndex;
+            preset.parameterTag6Type = (TagType)parameterTag6TypeListCustom.SelectedIndex;
 
 
             preset.parameterTagId = AsrGetTagId(parameterTagListCustom.Text);

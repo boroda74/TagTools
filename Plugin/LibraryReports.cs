@@ -54,7 +54,7 @@ namespace MusicBeePlugin
         private System.Threading.Timer periodicCacheClearingTimer = null;
         private static bool DelayedFunctionCacheUpdatePrioritySet = false;
 
-        private void periodicCacheClearing(object state)//****
+        private void periodicCacheClearing(object state) //-----
         {
             if ((PluginClosing || SavedSettings.dontShowLibraryReports || cachedPresetsTags.Count > PresetCacheCountThreshold)
                 && !BackgroundTaskIsInProgress)
@@ -134,7 +134,7 @@ namespace MusicBeePlugin
         private Font totalsFont; //Preview table font for "Totals" cells
         private int[] maxWidths;
 
-        private const int MaxColumnRepresentationLength = 80; //***
+        private const int MaxColumnRepresentationLength = 80; //---
         private const int MaxExprRepresentationLength = 40;
 
         private const int PreviewTableColumnMinimumWidth = 75;
@@ -486,7 +486,7 @@ namespace MusicBeePlugin
             expressionTextBox.SetCue(NoExpressionText);
 
 
-            lock (SavedSettings.reportPresets) //***
+            lock (SavedSettings.reportPresets) //-----
             {
                 ignoreCheckedPresetEvent = false;
                 autoAppliedPresetCount = 0;
@@ -2514,7 +2514,7 @@ namespace MusicBeePlugin
 
             string returnValue = null;
 
-            lock (SavedSettings.reportPresets) //***
+            lock (SavedSettings.reportPresets) //-----
             {
                 if (functionId != null && queriedFiles == null)
                 {
@@ -4114,7 +4114,7 @@ namespace MusicBeePlugin
                                 LibraryReportsCommandForFunctionIds.appliedPreset = idPreset.Value;
                                 LibraryReportsCommandForFunctionIds.backgroundTaskIsUpdatingTags = false;
 
-                                //queriedGroupingTagsRaw, queriedActualGroupingTags, queriedActualGroupingTagsRaw may be nulled. Check this! //*****
+                                //queriedGroupingTagsRaw, queriedActualGroupingTags, queriedActualGroupingTagsRaw may be nulled. Check this! //-----
                                 //Let's remember grouping tag value, which must be changed soon (it's now TagsChanging notification, let's process these
                                 //tags on TagsChanged notification)
                                 LibraryReportsCommandForFunctionIds.executePreset(
@@ -5504,7 +5504,7 @@ namespace MusicBeePlugin
                 if (labelHeight < (int)(fontSize * 1.3f))
                     labelHeight = (int)(fontSize * 1.3f);
 
-                const string color = "#000000";//***
+                const string color = "#000000"; //---
 
                 (document as HtmlDocumentAlbumGrid).writeHeader(color, artworkGridRowImageCount, artworkGridMaxImageSize, artworkGridMaxImageSize, labelHeight, fontSize);
             }
@@ -6498,12 +6498,12 @@ namespace MusicBeePlugin
                     closeFormOnStopping = true;
                     buttonClose.Enable(false);
                     buttonSaveClose.Enable(false);
+
+                    backgroundTaskIsStopping = true;
+                    SetStatusBarText(LibraryReportsSbText + SbTextStoppingCurrentOperation, false);
+
+                    e.Cancel = true;
                 }
-
-                backgroundTaskIsStopping = true;
-                SetStatusBarText(LibraryReportsSbText + SbTextStoppingCurrentOperation, false);
-
-                e.Cancel = true;
             }
             else if (!PluginClosing && unsavedChanges)
             {

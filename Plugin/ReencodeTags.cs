@@ -598,12 +598,12 @@ namespace MusicBeePlugin
                 {
                     closeFormOnStopping = true;
                     buttonClose.Enable(false);
+
+                    backgroundTaskIsStopping = true;
+                    SetStatusBarText(ReEncodeTagSbText + SbTextStoppingCurrentOperation, false);
+
+                    e.Cancel = true;
                 }
-
-                backgroundTaskIsStopping = true;
-                SetStatusBarText(ReEncodeTagSbText + SbTextStoppingCurrentOperation, false);
-
-                e.Cancel = true;
             }
             else
             {

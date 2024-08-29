@@ -1272,12 +1272,12 @@ namespace MusicBeePlugin
                     backgroundTaskIsStopping = true;
                     closeFormOnStopping = true;
                     buttonClose.Enable(false);
+
+                    backgroundTaskIsStopping = true;
+                    SetStatusBarText(AutoRateSbText + SbTextStoppingCurrentOperation, false);
+
+                    e.Cancel = true;
                 }
-
-                backgroundTaskIsStopping = true;
-                SetStatusBarText(AutoRateSbText + SbTextStoppingCurrentOperation, false);
-
-                e.Cancel = true;
             }
         }
     }

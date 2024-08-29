@@ -188,7 +188,7 @@ namespace MusicBeePlugin
 
             if (comboBox.IsEnabled() && comboBox.Focused && (index == -1 || (e.State & DrawItemState.Selected) != 0))
             {
-                foreColor = SystemColors.HighlightText;//****
+                foreColor = SystemColors.HighlightText; //---
                 backColor = SystemColors.Highlight;
             }
             //Disabled
@@ -686,7 +686,7 @@ namespace MusicBeePlugin
             if ((control.Anchor & AnchorStyles.Top) == 0 && (control.Anchor & AnchorStyles.Bottom) == 0) //Not vertically anchored
                 controlNewY = control.Top;
             else
-                controlNewY = control.Top - (control.Height - control.Height / vDpiFontScaling) / 4f;//***
+                controlNewY = control.Top - (control.Height - control.Height / vDpiFontScaling) / 4f; //---
 
             return (int)Math.Round(controlNewY);
         }
@@ -708,7 +708,7 @@ namespace MusicBeePlugin
             var heightDifference = controlHeight - control2X.Height;
             var controlNewY = GetYCenteredToY2(controlHeight, control2X.Top, control2X);
 
-            controlNewY -= heightDifference / 6 / vDpiFontScaling; //****
+            controlNewY -= heightDifference / 6 / vDpiFontScaling; //---
             controlNewY += controlHeight * 0.07f;
             return (int)Math.Round(controlNewY);
         }
@@ -724,7 +724,7 @@ namespace MusicBeePlugin
                 float heightDifference = control.Height - control2X.Height;
                 var controlNewY = GetYCenteredToY2(control.Height, control2X.Top, control2X);
 
-                controlNewY -= heightDifference / 6 / vDpiFontScaling; //****
+                controlNewY -= heightDifference / 6 / vDpiFontScaling; //---
                 controlNewY += control.Height * 0.07f;
                 return (int)Math.Round(controlNewY);
             }
@@ -789,7 +789,7 @@ namespace MusicBeePlugin
 
             const float smallControlOffsetX = 0.1f;
             const float checkBoxRadioButtonOffsetCompensationX = -12f;
-            const float checkBoxRadioButtonAndPictureBoxOffsetCompensationX = -7f;//****
+            const float checkBoxRadioButtonAndPictureBoxOffsetCompensationX = -7f;//---
 
 
             controlsReferencedX.TryGetValue(control, out var referringControlX);
@@ -1361,7 +1361,7 @@ namespace MusicBeePlugin
             if ((ModifierKeys & Keys.Shift) == 0 && customVScrollBar.Visible) //-V3080
             {
                 if ((ModifierKeys & Keys.Alt) == 0)
-                    delta = -e.Delta / 4; //****
+                    delta = -e.Delta / 4; //---
                 else
                     delta = -e.Delta * 4;
 
@@ -1373,7 +1373,7 @@ namespace MusicBeePlugin
                 if (customHScrollBar.Visible) //-V3080
                 {
                     if ((ModifierKeys & Keys.Alt) == 0)
-                        delta = -e.Delta * 2; //****
+                        delta = -e.Delta * 2; //---
                     else
                         delta = -e.Delta * 32;
 
@@ -1481,7 +1481,7 @@ namespace MusicBeePlugin
             if (listBox.MultiColumn)
             {
                 if ((ModifierKeys & Keys.Alt) == 0)
-                    delta = -e.Delta / 64; //****
+                    delta = -e.Delta / 64; //---
                 else
                     delta = -e.Delta / 16;
 
@@ -1497,7 +1497,7 @@ namespace MusicBeePlugin
             else
             {
                 if ((ModifierKeys & Keys.Alt) == 0)
-                    delta = -e.Delta / 16; //****
+                    delta = -e.Delta / 16; //---
                 else
                     delta = -e.Delta / 4;
 
@@ -1689,7 +1689,7 @@ namespace MusicBeePlugin
             int delta;
 
             if ((ModifierKeys & Keys.Alt) == 0)
-                delta = -e.Delta / 32; //****
+                delta = -e.Delta / 32; //---
             else
                 delta = -e.Delta / 8;
 
@@ -2111,7 +2111,7 @@ namespace MusicBeePlugin
 
 
         //Returns Minimum, Maximum, LargeChange
-        //internal static (int, int, int) GetDataGridViewVScrollBarMetrics(Control scrolledControl, Control refScrollBar) //****
+        //internal static (int, int, int) GetDataGridViewVScrollBarMetrics(Control scrolledControl, Control refScrollBar) //-----
         //{
         //    if (refScrollBar is VScrollBar scrollBar)
         //        return (scrollBar.Minimum, scrollBar.Maximum, scrollBar.LargeChange);
@@ -2391,7 +2391,7 @@ namespace MusicBeePlugin
         }
 
         //Returns: enabled fore & back colors, disabled fore & back colors
-        internal void setSkinnedControlColors(Control control, bool? enable) //****
+        internal void setSkinnedControlColors(Control control, bool? enable) //-----
         {
             if (useSkinColors)
             {
@@ -2406,7 +2406,7 @@ namespace MusicBeePlugin
                         button.BackColor = controlHighlightBackColor;
                         button.FlatAppearance.BorderColor = ButtonFocusedBorderColor;
                     }
-                    //else if ((control.IsEnabled() && state == null) || state == true && button.Focused) //****
+                    //else if ((control.IsEnabled() && state == null) || state == true && button.Focused) //-----
                     //{
                     //   button.ForeColor = _buttonForeColor;
                     //   button.BackColor = _buttonBackColor;
@@ -2432,8 +2432,8 @@ namespace MusicBeePlugin
                     else if (button.Parent is CustomComboBox)
                     {
                         button.ForeColor = buttonForeColor;
-                        button.BackColor = InputPanelBackColor; //****
-                        //button.BackColor = narrowScrollBarBackColor;
+                        button.BackColor = InputPanelBackColor; //---
+                        //button.BackColor = narrowScrollBarBackColor; //---
                         button.FlatAppearance.BorderColor = ButtonBorderColor;
                     }
                     //Generic disabled button
@@ -2496,8 +2496,8 @@ namespace MusicBeePlugin
                     else
                     {
                         comboBox.ForeColor = DimmedAccentColor;
-                        comboBox.BackColor = InputPanelBackColor;
-                        //comboBox.BackColor = InputControlDimmedBackColor; //****
+                        comboBox.BackColor = InputPanelBackColor; //---
+                        //comboBox.BackColor = InputControlDimmedBackColor; //---
                     }
                 }
                 else if (control is NumericUpDown numericUpDown)
@@ -2515,8 +2515,8 @@ namespace MusicBeePlugin
                     else
                     {
                         control.ForeColor = DimmedAccentColor;
-                        control.BackColor = InputPanelBackColor;
-                        //control.BackColor = InputControlDimmedBackColor; //****
+                        control.BackColor = InputPanelBackColor; //---
+                        //control.BackColor = InputControlDimmedBackColor; //---
                     }
                 }
                 else if (control is TextBox textBox)
@@ -2534,8 +2534,8 @@ namespace MusicBeePlugin
                     else
                     {
                         control.ForeColor = DimmedAccentColor;
-                        control.BackColor = InputPanelBackColor;
-                        //control.BackColor = InputControlDimmedBackColor; //****
+                        control.BackColor = InputPanelBackColor; //---
+                        //control.BackColor = InputControlDimmedBackColor; //---
                     }
                 }
                 else if (control is ListBox)
@@ -2548,8 +2548,8 @@ namespace MusicBeePlugin
                     else
                     {
                         control.ForeColor = DimmedAccentColor;
-                        control.BackColor = InputPanelBackColor;
-                        //control.BackColor = InputControlDimmedBackColor; //****
+                        control.BackColor = InputPanelBackColor; //---
+                        //control.BackColor = InputControlDimmedBackColor; //---
                     }
                 }
                 else if (control is DataGridView)
@@ -2874,7 +2874,7 @@ namespace MusicBeePlugin
             else if (control is DataGridView dataGridView)
             {
                 //Let's turn on data grid view double buffering
-                Type dgvType = dataGridView.GetType();//****
+                Type dgvType = dataGridView.GetType();//---
                 PropertyInfo pi = dgvType.GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
                 pi.SetValue(dataGridView, true, null);
 

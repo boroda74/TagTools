@@ -9,7 +9,7 @@ namespace MusicBeePlugin
         internal void fillTagNames()
         {
             //Custom tags
-            CustomTagNames = new string[16]; //***** Add new custom tags later!!!!
+            CustomTagNames = new string[16]; //----- Add new custom tags later!!!!
 
             CustomTagNames[0] = MbApiInterface.Setting_GetFieldName(MetaDataType.Custom1);
             CustomTagNames[1] = MbApiInterface.Setting_GetFieldName(MetaDataType.Custom2);
@@ -26,7 +26,7 @@ namespace MusicBeePlugin
             CustomTagNames[12] = MbApiInterface.Setting_GetFieldName(MetaDataType.Custom13);
             CustomTagNames[13] = MbApiInterface.Setting_GetFieldName(MetaDataType.Custom14);
             CustomTagNames[14] = MbApiInterface.Setting_GetFieldName(MetaDataType.Custom15);
-            CustomTagNames[15] = MbApiInterface.Setting_GetFieldName(MetaDataType.Custom16);//***************** new custom tags in MB 3.6!!!
+            CustomTagNames[15] = MbApiInterface.Setting_GetFieldName(MetaDataType.Custom16);//------ new custom tags in MB 3.6!!!
 
 
             //Read only tags

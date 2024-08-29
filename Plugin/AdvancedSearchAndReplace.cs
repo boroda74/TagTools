@@ -7,11 +7,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml.Serialization;
-
 using ExtensionMethods;
-
 using MusicBeePlugin.Properties;
-
 using static MusicBeePlugin.Plugin;
 
 
@@ -305,7 +302,7 @@ namespace MusicBeePlugin
 
 
             var tagNameFontSize = previewTable.DefaultCellStyle.Font.Size * 0.8f; //Maybe it's worth to adjust fine size !!!
-            tagNameFont = new Font(Font.FontFamily, tagNameFontSize, FontStyle.Bold);//***
+            tagNameFont = new Font(Font.FontFamily, tagNameFontSize, FontStyle.Bold); //---
             //tagNameFont = Font.Clone() as Font;
 
             previewTable.Columns[4].HeaderCell.Style.Font = tagNameFont;
@@ -428,7 +425,6 @@ namespace MusicBeePlugin
 
         public enum TagType
         {
-            Undefined = -1, //****** remove  carefully!!!!
             NotUsed = 0,
             Readonly = 1,
             Writable = 2,
@@ -479,14 +475,7 @@ namespace MusicBeePlugin
 
             public bool isMSRPreset;
 
-            public TagType parameterTagTypeNew = TagType.NotUsed; //****** rename to parameterTagType later !!!!
-            public TagType parameterTag2TypeNew = TagType.NotUsed;
-            public TagType parameterTag3TypeNew = TagType.NotUsed;
-            public TagType parameterTag4TypeNew = TagType.NotUsed;
-            public TagType parameterTag5TypeNew = TagType.NotUsed;
-            public TagType parameterTag6TypeNew = TagType.NotUsed;
-
-            public TagType parameterTagType = TagType.NotUsed; //****** make primary and the only later !!!!
+            public TagType parameterTagType = TagType.NotUsed;
             public TagType parameterTag2Type = TagType.NotUsed;
             public TagType parameterTag3Type = TagType.NotUsed;
             public TagType parameterTag4Type = TagType.NotUsed;
@@ -655,13 +644,6 @@ namespace MusicBeePlugin
 
                 ignoreCase = originalPreset.ignoreCase;
 
-                parameterTagTypeNew = originalPreset.parameterTagTypeNew;
-                parameterTag2TypeNew = originalPreset.parameterTag2TypeNew;
-                parameterTag3TypeNew = originalPreset.parameterTag3TypeNew;
-                parameterTag4TypeNew = originalPreset.parameterTag4TypeNew;
-                parameterTag5TypeNew = originalPreset.parameterTag5TypeNew;
-                parameterTag6TypeNew = originalPreset.parameterTag6TypeNew;
-
                 parameterTagType = originalPreset.parameterTagType;
                 parameterTag2Type = originalPreset.parameterTag2Type;
                 parameterTag3Type = originalPreset.parameterTag3Type;
@@ -796,36 +778,6 @@ namespace MusicBeePlugin
 
                 file.Close();
 
-
-                if (savedPreset.parameterTagTypeNew == TagType.Undefined) //***** remove later!!!
-                    savedPreset.parameterTagTypeNew = TagType.NotUsed;
-
-                if (savedPreset.parameterTag2TypeNew == TagType.Undefined)
-                    savedPreset.parameterTag2TypeNew = TagType.NotUsed;
-
-                if (savedPreset.parameterTag3TypeNew == TagType.Undefined)
-                    savedPreset.parameterTag3TypeNew = TagType.NotUsed;
-
-                if (savedPreset.parameterTag4TypeNew == TagType.Undefined)
-                    savedPreset.parameterTag4TypeNew = TagType.NotUsed;
-
-                if (savedPreset.parameterTag5TypeNew == TagType.Undefined)
-                    savedPreset.parameterTag5TypeNew = TagType.NotUsed;
-
-                if (savedPreset.parameterTag6TypeNew == TagType.Undefined)
-                    savedPreset.parameterTag6TypeNew = TagType.NotUsed;
-
-
-                savedPreset.parameterTagType = savedPreset.parameterTagTypeNew;
-                savedPreset.parameterTag2Type = savedPreset.parameterTag2TypeNew;
-                savedPreset.parameterTag3Type = savedPreset.parameterTag3TypeNew;
-                savedPreset.parameterTag4Type = savedPreset.parameterTag4TypeNew;
-                savedPreset.parameterTag5Type = savedPreset.parameterTag5TypeNew;
-                savedPreset.parameterTag6Type = savedPreset.parameterTag6TypeNew;
-
-
-                savedPreset.savePreset(Path.Combine(PresetsPath, savedPreset.getSafeFileName() + AsrPresetExtension)); //******* remove later !!!!
-
                 return savedPreset;
             }
 
@@ -922,7 +874,7 @@ namespace MusicBeePlugin
 
                 customizedByUser = referencePreset.customizedByUser;
 
-                applyToPlayingTrack = referencePreset.applyToPlayingTrack; //***
+                applyToPlayingTrack = referencePreset.applyToPlayingTrack; //---
                 condition = referencePreset.condition;
                 playlist = referencePreset.playlist;
                 preserveValues = referencePreset.preserveValues;
@@ -3692,7 +3644,7 @@ namespace MusicBeePlugin
                     previewTable.Columns[3].FillWeight = selectedPreset.columnWeights[3];
                     previewTable.Columns[4].FillWeight = selectedPreset.columnWeights[4];
                     previewTable.Columns[5].FillWeight = selectedPreset.columnWeights[5];
-                    previewTable.Columns[6].FillWeight = selectedPreset.columnWeights[6]; //****
+                    previewTable.Columns[6].FillWeight = selectedPreset.columnWeights[6]; //---
                 }
                 else
                 {
@@ -4062,12 +4014,12 @@ namespace MusicBeePlugin
                 }
 
 
-                FillParameterTagList(selectedPreset.parameterTagTypeNew, AsrGetTagName(selectedPreset.parameterTagId), parameterTagListCustom, labelTag);
-                FillParameterTagList(selectedPreset.parameterTag2TypeNew, AsrGetTagName(selectedPreset.parameterTag2Id), parameterTag2ListCustom, labelTag2);
-                FillParameterTagList(selectedPreset.parameterTag3TypeNew, AsrGetTagName(selectedPreset.parameterTag3Id), parameterTag3ListCustom, labelTag3);
-                FillParameterTagList(selectedPreset.parameterTag4TypeNew, AsrGetTagName(selectedPreset.parameterTag4Id), parameterTag4ListCustom, labelTag4);
-                FillParameterTagList(selectedPreset.parameterTag5TypeNew, AsrGetTagName(selectedPreset.parameterTag5Id), parameterTag5ListCustom, labelTag5);
-                FillParameterTagList(selectedPreset.parameterTag6TypeNew, AsrGetTagName(selectedPreset.parameterTag6Id), parameterTag6ListCustom, labelTag6);
+                FillParameterTagList(selectedPreset.parameterTagType, AsrGetTagName(selectedPreset.parameterTagId), parameterTagListCustom, labelTag);
+                FillParameterTagList(selectedPreset.parameterTag2Type, AsrGetTagName(selectedPreset.parameterTag2Id), parameterTag2ListCustom, labelTag2);
+                FillParameterTagList(selectedPreset.parameterTag3Type, AsrGetTagName(selectedPreset.parameterTag3Id), parameterTag3ListCustom, labelTag3);
+                FillParameterTagList(selectedPreset.parameterTag4Type, AsrGetTagName(selectedPreset.parameterTag4Id), parameterTag4ListCustom, labelTag4);
+                FillParameterTagList(selectedPreset.parameterTag5Type, AsrGetTagName(selectedPreset.parameterTag5Id), parameterTag5ListCustom, labelTag5);
+                FillParameterTagList(selectedPreset.parameterTag6Type, AsrGetTagName(selectedPreset.parameterTag6Id), parameterTag6ListCustom, labelTag6);
 
                 customTextBox.Text = selectedPreset.customTextChecked ? selectedPreset.customText : string.Empty;
                 customText2Box.Text = selectedPreset.customText2Checked ? selectedPreset.customText2 : string.Empty;
@@ -6405,12 +6357,12 @@ namespace MusicBeePlugin
                     closeFormOnStopping = true;
                     buttonClose.Enable(false);
                     buttonSaveClose.Enable(false);
+
+                    backgroundTaskIsStopping = true;
+                    SetStatusBarText(AsrSbText + SbTextStoppingCurrentOperation, false);
+
+                    e.Cancel = true;
                 }
-
-                backgroundTaskIsStopping = true;
-                SetStatusBarText(AsrSbText + SbTextStoppingCurrentOperation, false);
-
-                e.Cancel = true;
             }
             else if (!PluginClosing && unsavedChanges)
             {
