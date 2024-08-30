@@ -2,7 +2,7 @@
 
 ### License
 
-Do all you want with plugin binary and source code at your own risk.
+Public Domain.
 
 ### ASR Custom presets
 
@@ -18,4 +18,4 @@ Do all you want with plugin binary and source code at your own risk.
 
 ***
 
-Copyright © boroda 2012-2024. Help version 9.0.240827
+Copyright © boroda 2012-2024. Help version 9.0.240830

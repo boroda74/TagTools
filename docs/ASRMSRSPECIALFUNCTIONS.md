@@ -28,4 +28,4 @@ You can use special functions in substitution fields of "Advanced Search \& Repl
 
 ***
 
-Copyright © boroda 2012-2024. Help version 9.0.240827
+Copyright © boroda 2012-2024. Help version 9.0.240830

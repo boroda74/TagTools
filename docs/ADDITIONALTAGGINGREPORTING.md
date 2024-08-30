@@ -150,4 +150,4 @@ To define date type of custom tag, open MusicBee menu\Edit\Preferences\Tags (1)\
 
 ***
 
-Copyright © boroda 2012-2024. Help version 9.0.240827
+Copyright © boroda 2012-2024. Help version 9.0.240830
