@@ -948,6 +948,30 @@ namespace MusicBeePlugin
                 var file = new StreamWriter(stream, Unicode);
 
 
+                //Let's remember initial string attributes
+                string savedCustomText = customText;
+                string savedCustomText2 = customText2;
+                string savedCustomText3 = customText3;
+                string savedCustomText4 = customText4;
+
+                string savedPreserveValues = preserveValues;
+
+                string savedProcessTags = processTags;
+                string savedPreserveTags = preserveTags;
+
+                string savedSearchedPattern = searchedPattern;
+                string savedSearchedPattern2 = searchedPattern2;
+                string savedSearchedPattern3 = searchedPattern3;
+                string savedSearchedPattern4 = searchedPattern4;
+                string savedSearchedPattern5 = searchedPattern5;
+
+                string savedReplacedPattern = replacedPattern;
+                string savedReplacedPattern2 = replacedPattern2;
+                string savedReplacedPattern3 = replacedPattern3;
+                string savedReplacedPattern4 = replacedPattern4;
+                string savedReplacedPattern5 = replacedPattern5;
+
+
                 //Let's escape whitespaces
                 customText = Escape(customText);
                 customText2 = Escape(customText2);
@@ -975,6 +999,31 @@ namespace MusicBeePlugin
                 presetSerializer.Serialize(file, this);
 
                 file.Close();
+
+
+                //Let's restore initial string attributes
+                customText = savedCustomText;
+                customText2 = savedCustomText2;
+                customText3 = savedCustomText3;
+                customText4 = savedCustomText4;
+
+                preserveValues = savedPreserveValues;
+
+                processTags = savedProcessTags;
+                preserveTags = savedPreserveTags;
+
+                searchedPattern = savedSearchedPattern;
+                searchedPattern2 = savedSearchedPattern2;
+                searchedPattern3 = savedSearchedPattern3;
+                searchedPattern4 = savedSearchedPattern4;
+                searchedPattern5 = savedSearchedPattern5;
+
+                replacedPattern = savedReplacedPattern;
+                replacedPattern2 = savedReplacedPattern2;
+                replacedPattern3 = savedReplacedPattern3;
+                replacedPattern4 = savedReplacedPattern4;
+                replacedPattern5 = savedReplacedPattern5;
+
 
                 return pathName;
             }
@@ -1157,8 +1206,13 @@ namespace MusicBeePlugin
                 for (var i = 0; i < args.Count; i++)
                 {
                     var arg = Regex.Replace(args[i].Value, @"\\@" + functionName + @"\[\[(.*?)\]\]", "$1");
+
+                    //var subArgs = Regex.Matches(arg, @"\\@.*?\[\[.*?\]\]"); //-----
+                    //for (var j = 0; j < subArgs.Count; j++)
+                    //    tagValue = tagValue.Replace(subArgs[j].Value, Replace(currentFile, subArgs[j].Value, null, null, true, out _));
+
                     var result = calculate(currentFile, arg);
-                    tagValue = Regex.Replace(tagValue, @"\\@" + functionName + @"\[\[" + Regex.Escape(arg) + @"\]\]", result, RegexOptions.None);
+                    tagValue = tagValue.Replace(@"\@" + functionName + @"[[" + arg + @"]]", result);
                 }
             }
 
@@ -1171,6 +1225,15 @@ namespace MusicBeePlugin
                 {
                     var arg1 = Regex.Replace(args1[i].Value, @"\\@" + functionName + @"\[\[(.*)\;\;.*?\]\]", "$1");
                     var arg2 = Regex.Replace(args1[i].Value, @"\\@" + functionName + @"\[\[.*\;\;(.*?)\]\]", "$1");
+
+                    //var subArgs1 = Regex.Matches(arg1, @"\\@.*?\[\[.*?\]\]"); //-----
+                    //for (var j = 0; j < subArgs1.Count; j++)
+                    //    tagValue = tagValue.Replace(subArgs1[j].Value, Replace(currentFile, subArgs1[j].Value, null, null, true, out _));
+
+                    //var subArgs2 = Regex.Matches(arg2, @"\\@.*?\[\[.*?\]\]");
+                    //for (var j = 0; j < subArgs1.Count; j++)
+                    //    tagValue = tagValue.Replace(subArgs1[j].Value, Replace(currentFile, subArgs1[j].Value, null, null, true, out _));
+
                     var result = calculate(currentFile, arg1, arg2);
                     tagValue = Regex.Replace(tagValue, @"\\@" + functionName + @"\[\[" + Regex.Escape(arg1) + @"\;\;" + Regex.Escape(arg2) + @"\]\]", result, RegexOptions.None);
                 }
@@ -2097,61 +2160,121 @@ namespace MusicBeePlugin
 
             try
             {
-                match = Regex.IsMatch(value, searchedPattern, RegexOptions.IgnoreCase);
+                if (searchedPattern == null)
+                {
+                    match = true;
+                }
+                else
+                {
+                    match = Regex.IsMatch(value, searchedPattern, RegexOptions.IgnoreCase);
 
-                if (!match)
+                    if (!match)
+                        return value;
+
+
+                    replacedPattern = replacedPattern.Replace(";", "\u0011").Replace("[[", "\u0017").Replace("]]", "\u0018");
+                    replacedPattern = replacedPattern.Replace("$1", "%%1%%").Replace("$2", "%%2%%").Replace("$3", "%%3%%").Replace("$4", "%%4%%");
+                    replacedPattern = replacedPattern.Replace("$5", "%%5%%").Replace("$6", "%%6%%").Replace("$7", "%%7%%").Replace("$8", "%%8%%");
+
+                    replacedPattern = replacedPattern.Replace('$', '\u0019');
+
+                    replacedPattern = replacedPattern.Replace("%%1%%", "$1").Replace("%%2%%", "$2").Replace("%%3%%", "$3").Replace("%%4%%", "$4");
+                    replacedPattern = replacedPattern.Replace("%%5%%", "$5").Replace("%%6%%", "$6").Replace("%%7%%", "$7").Replace("%%8%%", "$8");
+
+                    if (ignoreCase)
+                        value = Regex.Replace(value, searchedPattern, replacedPattern, RegexOptions.IgnoreCase);
+                    else
+                        value = Regex.Replace(value, searchedPattern, replacedPattern, RegexOptions.None);
+
+                    value = value.Replace("\u0017", "[[").Replace("\u0018", "]]").Replace("\u0011", ";");
+                    value = value.Replace('\u0019', '$');
+                }
+
+                //Let's evaluate all supported functions
+                int maxLevel = -1;
+                int curLevel = -1;
+
+                List<int> startFunctionLevelIndices = new List<int>();
+                List<int> startFunctionIndices = new List<int>();
+
+                List<int> endBracketLevelIndices = new List<int>();
+                List<int> endBracketIndices = new List<int>();
+
+                for (int i = 0; i < value.Length; i++)
+                {
+                    if (value[i] == '@' && i > 0)
+                    {
+                        if (value.Substring(i - 1, 2) == @"\@")
+                        {
+                            startFunctionIndices.Add(i - 1);
+                            startFunctionLevelIndices.Add(++curLevel);
+
+                            if (maxLevel < curLevel)
+                                maxLevel = curLevel;
+                        }
+                    }
+
+                    if (value[i] == ']' && i > 2)
+                    {
+                        if (value.Substring(i - 1, 2) == "]]" && (value[i - 2] != ']' || value.Substring(i - 3, 2) == "]]"))
+                        {
+                            endBracketIndices.Add(i - 1);
+                            endBracketLevelIndices.Add(curLevel--);
+                        }
+                    }
+                }
+
+                if (startFunctionIndices.Count != endBracketIndices.Count)
+                    return CtlAsrSyntaxError;
+
+                if (startFunctionIndices.Count == 0)
                     return value;
 
 
-                replacedPattern = replacedPattern.Replace(";", "\u0011").Replace("[[", "\u0017").Replace("]]", "\u0018");
+                while (maxLevel >= 0)
+                {
+                    bool startFunctionLevelIndicesFound = false;
 
-                if (ignoreCase)
-                    value = Regex.Replace(value, searchedPattern, replacedPattern, RegexOptions.IgnoreCase);
-                else
-                    value = Regex.Replace(value, searchedPattern, replacedPattern, RegexOptions.None);
+                    for (int j = 0; j < startFunctionLevelIndices.Count; j++)
+                    {
+                        if (startFunctionLevelIndices[j] == maxLevel)
+                        {
+                            for (int k = 0; k < endBracketLevelIndices.Count; k++)
+                            {
+                                if (endBracketLevelIndices[k] == maxLevel)
+                                {
+                                    startFunctionLevelIndicesFound = true;
+                                    startFunctionLevelIndices[j] = -1;
+                                    endBracketLevelIndices[k] = -1;
 
-                value = value.Replace("\u0017", "[[").Replace("\u0018", "]]").Replace("\u0011", ";");
+                                    string subValue = value.Substring(startFunctionIndices[j], endBracketIndices[k] - startFunctionIndices[j] + 2);
+                                    string newSubValue = CalculateFunctions(currentFile, subValue);
 
 
-                //Let's evaluate all supported functions
-                var nullFunction = new Function();
-                value = nullFunction.evaluate(currentFile, value);
+                                    value = value.Substring(0, startFunctionIndices[j]) + newSubValue + value.Substring(endBracketIndices[k] + 2);
 
-                Function rg2sc = new Rg2sc();
-                value = rg2sc.evaluate(currentFile, value);
+                                    for (int l = 0; l < startFunctionIndices.Count; l++)
+                                    {
+                                        if (startFunctionIndices[l] > startFunctionIndices[j])
+                                            startFunctionIndices[l] -= subValue.Length - newSubValue.Length;
+                                    }
 
-                Function rg2sc4mp3 = new Rg2sc4mp3();
-                value = rg2sc4mp3.evaluate(currentFile, value);
+                                    for (int l = 0; l < endBracketIndices.Count; l++)
+                                    {
+                                        if (endBracketIndices[l] > endBracketIndices[k])
+                                            endBracketIndices[l] -= subValue.Length - newSubValue.Length;
+                                    }
 
-                Function tc = new Tc();
-                value = tc.evaluate(currentFile, value);
+                                    break;
+                                }
+                            }
 
-                Function lc = new Lc();
-                value = lc.evaluate(currentFile, value);
+                        }
+                    }
 
-                Function uc = new Uc();
-                value = uc.evaluate(currentFile, value);
-
-                Function sc = new Sc();
-                value = sc.evaluate(currentFile, value);
-
-                Function eval = new Eval();
-                value = eval.evaluate(currentFile, value);
-
-                Function char1 = new Char1();
-                value = char1.evaluate(currentFile, value);
-
-                Function repunct = new Repunct();
-                value = repunct.evaluate(currentFile, value);
-
-                Function sortperformers = new SortPerformers();
-                value = sortperformers.evaluate(currentFile, value);
-
-                Function sortinvolvedpeoplebyrole = new SortInvolvedPeopleByRoles();
-                value = sortinvolvedpeoplebyrole.evaluate(currentFile, value);
-
-                Function searchreplace = new SearchReplace();
-                value = searchreplace.evaluate(currentFile, value);
+                    if (!startFunctionLevelIndicesFound)
+                        maxLevel--;
+                }
             }
             catch (Exception)
             {
@@ -2161,6 +2284,52 @@ namespace MusicBeePlugin
             }
 
             return value;
+        }
+
+        internal static string CalculateFunctions(string currentFile, string subValue)
+        {
+            var nullFunction = new Function();
+            subValue = nullFunction.evaluate(currentFile, subValue);
+
+
+            Function rg2sc = new Rg2sc();
+            subValue = rg2sc.evaluate(currentFile, subValue);
+
+            Function rg2sc4mp3 = new Rg2sc4mp3();
+            subValue = rg2sc4mp3.evaluate(currentFile, subValue);
+
+            Function tc = new Tc();
+            subValue = tc.evaluate(currentFile, subValue);
+
+            Function lc = new Lc();
+            subValue = lc.evaluate(currentFile, subValue);
+
+            Function uc = new Uc();
+            subValue = uc.evaluate(currentFile, subValue);
+
+            Function sc = new Sc();
+            subValue = sc.evaluate(currentFile, subValue);
+
+            Function eval = new Eval();
+            subValue = eval.evaluate(currentFile, subValue);
+
+            Function char1 = new Char1();
+            subValue = char1.evaluate(currentFile, subValue);
+
+            Function repunct = new Repunct();
+            subValue = repunct.evaluate(currentFile, subValue);
+
+            Function sortperformers = new SortPerformers();
+            subValue = sortperformers.evaluate(currentFile, subValue);
+
+            Function sortinvolvedpeoplebyrole = new SortInvolvedPeopleByRoles();
+            subValue = sortinvolvedpeoplebyrole.evaluate(currentFile, subValue);
+
+            Function searchreplace = new SearchReplace();
+            subValue = searchreplace.evaluate(currentFile, subValue);
+
+
+            return subValue;
         }
 
         internal static string GetTag(string currentFile, AdvancedSearchAndReplace asrCommand, int tagId)

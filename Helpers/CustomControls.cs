@@ -341,6 +341,7 @@ namespace MusicBeePlugin
             listBox.TabStop = false;
 
             listBox.SelectedIndex = -1;
+            lastSelectedIndex = -1;
 
             tableLayoutPanel.Controls.Add(listBox, 0, 0);
 
@@ -762,6 +763,7 @@ namespace MusicBeePlugin
                 var oldSelectedItem = listBox.SelectedItem;
 
                 listBox.SelectedIndex = index;
+                lastSelectedIndex = index;
 
                 if (forceDropDownListText || index >= 0 || DropDownStyle == ComboBoxStyle.DropDown)
                     textBox.Text = value;
@@ -850,8 +852,8 @@ namespace MusicBeePlugin
                 {
                     var oldSelectedItem = listBox.SelectedItem;
 
-                    lastSelectedIndex = value;
                     listBox.SelectedIndex = value;
+                    lastSelectedIndex = value;
 
                     if (value != -1)
                         Text = listBox.Items[value].ToString();
@@ -900,6 +902,7 @@ namespace MusicBeePlugin
                     var oldSelectedItem = listBox.SelectedItem;
 
                     listBox.SelectedItem = value;
+                    lastSelectedIndex = listBox.SelectedIndex;
 
                     if (listBox.SelectedItem != null)
                         Text = listBox.SelectedItem.ToString();
@@ -1113,10 +1116,10 @@ namespace MusicBeePlugin
 
         public void listBox_ItemChosen(object sender, EventArgs e)
         {
-            SelectedIndex = listBox.SelectedIndex;
-
             textBox.Focus();
             dropDown.Close();
+
+            SelectedIndex = listBox.SelectedIndex;
         }
 
         private void listBox_MouseMove(object sender, MouseEventArgs e)
