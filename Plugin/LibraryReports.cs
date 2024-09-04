@@ -5242,19 +5242,12 @@ namespace MusicBeePlugin
             if (checkStoppingStatus())
                 return;
 
-            //try
+            for (int i = 0; i < rows.Count; i++)
             {
-                for (int i = 0; i < rows.Count; i++)
-                {
-                    for (int j = 0; j < rows.ColumnNames.Count; j++)
-                        previewTable.Rows[i].Cells[artworkField + previewTable.ColumnCount / 2] = artworkCellTemplate.Clone() as DataGridViewCell;
+                for (int j = 0; j < rows.ColumnNames.Count; j++)
+                    previewTable.Rows[i].Cells[artworkField + previewTable.ColumnCount / 2] = artworkCellTemplate.Clone() as DataGridViewCell;
 
-                }
             }
-            //catch //-V3163 //-V5606
-            //{
-            //    //Generating preview is stopped. There is some .Net bug. Let's ignore. //--------
-            //}
         }
 
         private void resetPreviewData()

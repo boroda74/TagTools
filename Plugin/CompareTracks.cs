@@ -315,19 +315,12 @@ namespace MusicBeePlugin
                 return;
 
 
-            //try
+            for (int i = 0; i < previewTable.ColumnCount; i++)
             {
-                for (int i = 0; i < previewTable.ColumnCount; i++)
-                {
-                    previewTable.Columns[i].HeaderCell.ToolTipText = trackUrls[i];
-                    previewTable.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-                    previewTable.Columns[i].Width = defaultColumnWidth;
-                }
+                previewTable.Columns[i].HeaderCell.ToolTipText = trackUrls[i];
+                previewTable.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                previewTable.Columns[i].Width = defaultColumnWidth;
             }
-            //catch //-V3163 //-V5606
-            //{
-            //    //Generating preview is stopped. There is some .Net bug. Let's ignore. //--------
-            //}
         }
 
         private void formatArtworkRow(string[] artworkTagValues)
@@ -341,16 +334,9 @@ namespace MusicBeePlugin
 
             for (int i = 0; i < cachedTracks.Count; i++)
             {
-                //try
-                {
-                    previewTable.Rows[artworkRow].Cells[i] = artworkCellTemplate.Clone() as DataGridViewCell;
-                    previewTable.Rows[artworkRow].Cells[i].Tag = artworkTagValues[i];
-                    previewTable.Rows[artworkRow].Cells[i].ReadOnly = true;
-                }
-                //catch //-V3163 //-V5606
-                //{
-                //    //Generating preview is stopped. There is some .Net bug. Let's ignore. //--------
-                //}
+                previewTable.Rows[artworkRow].Cells[i] = artworkCellTemplate.Clone() as DataGridViewCell;
+                previewTable.Rows[artworkRow].Cells[i].Tag = artworkTagValues[i];
+                previewTable.Rows[artworkRow].Cells[i].ReadOnly = true;
             }
         }
 
