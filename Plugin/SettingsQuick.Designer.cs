@@ -562,6 +562,7 @@
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.buttonClose;
             this.Controls.Add(this.buttonsPanel);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox3);

@@ -22,8 +22,11 @@
 
             if (disposing)
             {
+                source?.Dispose();
+
                 emptyArtwork?.Dispose();
 
+                libraryColumnTemplate?.Dispose();
                 columnTemplate?.Dispose();
                 artworkCellTemplate?.Dispose();
             }
@@ -95,8 +98,9 @@
             // 
             this.previewTable.AllowUserToAddRows = false;
             this.previewTable.AllowUserToDeleteRows = false;
-            resources.ApplyResources(this.previewTable, "previewTable");
+            this.previewTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
             this.previewTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            resources.ApplyResources(this.previewTable, "previewTable");
             this.previewTable.BackgroundColor = System.Drawing.SystemColors.Window;
             this.previewTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.previewTable.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
@@ -344,7 +348,6 @@
             this.AcceptButton = this.buttonOK;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.buttonClose;
             this.Controls.Add(this.controlsPanel);
             this.Controls.Add(this.previewTable);
             this.Controls.Add(this.label3);

@@ -11,8 +11,20 @@ namespace MusicBeePlugin
 {
     public partial class ReEncodeTags : PluginWindowTemplate
     {
+        public class Row
+        {
+            public string Checked { get; set; }
+            public string File { get; set; }
+            public string Track { get; set; }
+            public string NewTrack { get; set; }
+        }
+
         private CustomComboBox initialEncodingListCustom;
         private CustomComboBox usedEncodingListCustom;
+
+
+        private List<Row> rows = new List<Row>();
+        BindingSource source = new BindingSource();
 
         private string[] files = Array.Empty<string>();
         private readonly List<string[]> currentTracks = new List<string[]>();
@@ -64,7 +76,6 @@ namespace MusicBeePlugin
             var cbHeader = new DataGridViewCheckBoxHeaderCell();
             cbHeader.Style = headerCellStyle;
             cbHeader.setState(true);
-            cbHeader.OnCheckBoxClicked += cbHeader_OnCheckBoxClicked;
 
             var colCB = new DataGridViewCheckBoxColumn
             {
@@ -75,7 +86,8 @@ namespace MusicBeePlugin
                 TrueValue = "T",
                 IndeterminateValue = string.Empty,
                 Width = 25,
-                AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.None,
+                DataPropertyName = "Checked", 
             };
 
             previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -90,9 +102,14 @@ namespace MusicBeePlugin
 
             previewTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 
+            source.DataSource = rows;
+            previewTable.DataSource = source;
+
+            (previewTable.Columns[0].HeaderCell as DataGridViewCheckBoxHeaderCell).OnCheckBoxClicked += cbHeader_OnCheckBoxClicked;
+
+
             enableDisablePreviewOptionControls(true, true);
             enableQueryingOrUpdatingButtons();
-
 
             button_GotFocus(AcceptButton, null); //Let's mark active button
         }
@@ -123,30 +140,21 @@ namespace MusicBeePlugin
 
         private void resetPreviewData()
         {
-            if (previewIsGenerated)
-            {
-                previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-
-                previewTable.AllowUserToResizeColumns = true;
-                previewTable.AllowUserToResizeRows = true;
-                foreach (DataGridViewColumn column in previewTable.Columns)
-                    column.SortMode = DataGridViewColumnSortMode.Automatic;
-            }
-            else
-            {
-                previewTable.AllowUserToResizeColumns = false;
-                previewTable.AllowUserToResizeRows = false;
-                foreach (DataGridViewColumn column in previewTable.Columns)
-                    column.SortMode = DataGridViewColumnSortMode.NotSortable;
-            }
+            previewTable.AllowUserToResizeColumns = false;
+            previewTable.AllowUserToResizeRows = false;
+            foreach (DataGridViewColumn column in previewTable.Columns)
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
 
 
+            previewIsGenerated = false;
             backgroundTaskIsStopping = false;
             backgroundTaskIsStoppedOrCancelled = false;
 
             currentTracks.Clear();
             newTracks.Clear();
-            previewTable.RowCount = 0;
+            rows.Clear();
+            source.ResetBindings(false);
+
             (previewTable.Columns[0].HeaderCell as DataGridViewCheckBoxHeaderCell).setState(true);
 
             updateCustomScrollBars(previewTable);
@@ -272,7 +280,7 @@ namespace MusicBeePlugin
             if (backgroundTaskIsWorking())
                 return false;
 
-            if (previewTable.Rows.Count == 0)
+            if (rows.Count == 0)
             {
                 return prepareBackgroundPreview();
             }
@@ -284,9 +292,9 @@ namespace MusicBeePlugin
                     column.SortMode = DataGridViewColumnSortMode.NotSortable;
 
 
-                for (var fileCounter = 0; fileCounter < previewTable.Rows.Count; fileCounter++)
+                for (var fileCounter = 0; fileCounter < rows.Count; fileCounter++)
                 {
-                    if (previewTable.Rows[fileCounter].Cells[0].Value as string == "T")
+                    if (rows[fileCounter].Checked == "T")
                         currentTracks[fileCounter][0] = "T";
                     else
                         currentTracks[fileCounter][0] = "F";
@@ -302,7 +310,6 @@ namespace MusicBeePlugin
         {
             previewIsGenerated = true;
 
-            List<string[]> rows = new List<string[]>();
             var numberOfWritableTags = TagIdsNames.Count - ReadonlyTagsNames.Length - 1;
 
             var wasCuesheet = false;
@@ -316,8 +323,6 @@ namespace MusicBeePlugin
 
 
                 var currentFile = files[fileCounter];
-                // ReSharper disable once RedundantAssignment
-                string[] row = { "Checked", "File", "OriginalTrack", "NewTrack" };
 
                 SetStatusBarTextForFileOperations(ReEncodeTagSbText, true, fileCounter, files.Length, currentFile);
 
@@ -351,18 +356,19 @@ namespace MusicBeePlugin
                 }
 
 
-                row = new string[4];
-
-                row[0] = "T";
-                row[1] = currentFile;
-                row[2] = GetTrackRepresentation(currentTags, newTags, tagNames, previewSortTags);
-                row[3] = GetTrackRepresentation(newTags, currentTags, tagNames, previewSortTags);
+                Row row = new Row
+                {
+                    Checked = "T",
+                    File = currentFile,
+                    Track = GetTrackRepresentation(currentTags, newTags, tagNames, previewSortTags), 
+                    NewTrack = GetTrackRepresentation(newTags, currentTags, tagNames, previewSortTags),
+                };
 
                 rows.Add(row);
 
 
                 int rowCountToFormat1 = 0;
-                Invoke(new Action(() => { rowCountToFormat1 = AddRowsToTable(this, previewTable, rows, false, true); }));
+                Invoke(new Action(() => { rowCountToFormat1 = AddRowsToTable(this, previewTable, source, rows.Count, false, true); }));
                 Invoke(new Action(() => { FormatChangedTags(this, previewTable, rowCountToFormat1); }));
 
                 currentTracks.Add(currentTags);
@@ -370,7 +376,7 @@ namespace MusicBeePlugin
             }
 
             int rowCountToFormat2 = 0;
-            Invoke(new Action(() => { rowCountToFormat2 = AddRowsToTable(this, previewTable, rows, true, true); }));
+            Invoke(new Action(() => { rowCountToFormat2 = AddRowsToTable(this, previewTable, source, rows.Count, true, true); }));
             Invoke(new Action(() => { FormatChangedTags(this, previewTable, rowCountToFormat2); checkStoppedStatus(); resetFormToGeneratedPreview(); }));
 
             if (wasCuesheet)
@@ -482,19 +488,20 @@ namespace MusicBeePlugin
 
         private void cbHeader_OnCheckBoxClicked(bool state)
         {
-            foreach (DataGridViewRow row in previewTable.Rows)
+            for (int i = 0; i < rows.Count; i++)
             {
-                if (row.Cells[0].Value == null)
+                if (rows[0].Checked == null)
                     continue;
 
                 if (state)
-                    row.Cells[0].Value = "F";
+                    rows[0].Checked = "F";
                 else
-                    row.Cells[0].Value = "T";
-
-                var e = new DataGridViewCellEventArgs(0, row.Index);
-                previewTable_CellContentClick(null, e);
+                    rows[0].Checked = "T";
             }
+
+            source.ResetBindings(false);
+            for (int i = 0; i < rows.Count; i++)
+                previewTable_CellContentClick(previewTable, new DataGridViewCellEventArgs(0, i));
         }
 
         private void previewTable_CellContentClick(object sender, DataGridViewCellEventArgs e)

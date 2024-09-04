@@ -226,7 +226,7 @@ namespace MusicBeePlugin
             //   clipboardText = "\u0000";
 
 
-            global::NativeMethods.CloseClipboard();
+            NativeMethods.CloseClipboard();
             Clipboard.Clear();
             Clipboard.SetText(clipboardText);
 

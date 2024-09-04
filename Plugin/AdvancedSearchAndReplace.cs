@@ -16,6 +16,30 @@ namespace MusicBeePlugin
 {
     public partial class AdvancedSearchAndReplace : PluginWindowTemplate
     {
+        public class Row
+        {
+            public string Checked { get; set; }
+            public string PresetGuid { get; set; }
+            public string File { get; set; }
+            public string Track { get; set; }
+            public string TagName1 { get; set; }
+            public string OriginalTag1 { get; set; }
+            public string NewTag1 { get; set; }
+            public string TagName2 { get; set; }
+            public string OriginalTag2 { get; set; }
+            public string NewTag2 { get; set; }
+            public string TagName3 { get; set; }
+            public string OriginalTag3 { get; set; }
+            public string NewTag3 { get; set; }
+            public string TagName4 { get; set; }
+            public string OriginalTag4 { get; set; }
+            public string NewTag4 { get; set; }
+            public string TagName5 { get; set; }
+            public string OriginalTag5 { get; set; }
+            public string NewTag5 { get; set; }
+            public string OddEven { get; set; }
+        }
+
         protected bool forceCloseForms = true;
 
         private static string CustomText1;
@@ -42,7 +66,7 @@ namespace MusicBeePlugin
 
         private bool previewTableLeftMouseButtonPressed = false;
 
-        private bool processPresetChanges = true;
+        private volatile static bool ProcessPresetChanges = true;
         private bool ignoreCheckedPresetEvent = true;
         private int autoAppliedPresetCount;
 
@@ -59,6 +83,9 @@ namespace MusicBeePlugin
         private readonly DataGridViewCellStyle preservedTagCellStyle = new DataGridViewCellStyle(PreservedTagCellStyle);
         private readonly DataGridViewCellStyle preservedTagValueCellStyle = new DataGridViewCellStyle(PreservedTagValueCellStyle);
 
+
+        private List<Row> rows = new List<Row>();
+        BindingSource source = new BindingSource();
 
         private static readonly Encoding Unicode = Encoding.UTF8;
 
@@ -152,7 +179,7 @@ namespace MusicBeePlugin
         protected override void initializeForm()
         {
             base.initializeForm();
-            Enable(false, autoApplyPresetsLabel);
+            Enable(false, autoApplyPresetsLabel, presetList);
 
 
             parameterTag6ListCustom = namesComboBoxes["parameterTag6List"];
@@ -262,7 +289,6 @@ namespace MusicBeePlugin
             var cbHeader = new DataGridViewCheckBoxHeaderCell();
             cbHeader.Style = headerCellStyle;
             cbHeader.setState(true);
-            cbHeader.OnCheckBoxClicked += cbHeader_OnCheckBoxClicked;
 
             var colCB = new DataGridViewCheckBoxColumn
             {
@@ -273,6 +299,7 @@ namespace MusicBeePlugin
                 IndeterminateValue = string.Empty,
                 Width = 25,
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.None,
+                DataPropertyName = "Checked", 
             };
 
             previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -348,6 +375,11 @@ namespace MusicBeePlugin
             OrigValueText = previewTable.Columns[5].HeaderText;
             NewValueText = previewTable.Columns[6].HeaderText;
 
+            source.DataSource = rows;
+            previewTable.DataSource = source;
+
+            (previewTable.Columns[0].HeaderCell as DataGridViewCheckBoxHeaderCell).OnCheckBoxClicked += cbHeader_OnCheckBoxClicked;
+
 
             buttonClose.Image = Resources.transparent_15;
             buttonCloseToolTip = toolTip1.GetToolTip(buttonClose);
@@ -368,7 +400,7 @@ namespace MusicBeePlugin
             IgnoreFilterComboBoxSelectedIndexChanged = false;
 
 
-            processPresetChanges = false;
+            ProcessPresetChanges = false;
 
             presetList.Sorted = false;
             ignoreCheckedPresetEvent = false;
@@ -410,15 +442,15 @@ namespace MusicBeePlugin
             showAutoApplyingWarningIfRequired();
 
 
-            Enable(true, autoApplyPresetsLabel);
+            Enable(true, autoApplyPresetsLabel, presetList);
 
 
             ignoreCheckedPresetEvent = true;
-            processPresetChanges = true;
 
             updateCustomScrollBars(presetList);
 
             descriptionBox.Refresh();
+
 
             button_GotFocus(AcceptButton, null); //Let's mark active button
         }
@@ -948,82 +980,35 @@ namespace MusicBeePlugin
                 var file = new StreamWriter(stream, Unicode);
 
 
-                //Let's remember initial string attributes
-                string savedCustomText = customText;
-                string savedCustomText2 = customText2;
-                string savedCustomText3 = customText3;
-                string savedCustomText4 = customText4;
-
-                string savedPreserveValues = preserveValues;
-
-                string savedProcessTags = processTags;
-                string savedPreserveTags = preserveTags;
-
-                string savedSearchedPattern = searchedPattern;
-                string savedSearchedPattern2 = searchedPattern2;
-                string savedSearchedPattern3 = searchedPattern3;
-                string savedSearchedPattern4 = searchedPattern4;
-                string savedSearchedPattern5 = searchedPattern5;
-
-                string savedReplacedPattern = replacedPattern;
-                string savedReplacedPattern2 = replacedPattern2;
-                string savedReplacedPattern3 = replacedPattern3;
-                string savedReplacedPattern4 = replacedPattern4;
-                string savedReplacedPattern5 = replacedPattern5;
-
+                Preset savedPreset = new Preset(this);
 
                 //Let's escape whitespaces
-                customText = Escape(customText);
-                customText2 = Escape(customText2);
-                customText3 = Escape(customText3);
-                customText4 = Escape(customText4);
+                savedPreset.customText = Escape(customText);
+                savedPreset.customText2 = Escape(customText2);
+                savedPreset.customText3 = Escape(customText3);
+                savedPreset.customText4 = Escape(customText4);
 
-                preserveValues = Escape(preserveValues);
+                savedPreset.preserveValues = Escape(preserveValues);
 
-                processTags = Escape(processTags);
-                preserveTags = Escape(preserveTags);
+                savedPreset.processTags = Escape(processTags);
+                savedPreset.preserveTags = Escape(preserveTags);
 
-                searchedPattern = Escape(searchedPattern);
-                searchedPattern2 = Escape(searchedPattern2);
-                searchedPattern3 = Escape(searchedPattern3);
-                searchedPattern4 = Escape(searchedPattern4);
-                searchedPattern5 = Escape(searchedPattern5);
+                savedPreset.searchedPattern = Escape(searchedPattern);
+                savedPreset.searchedPattern2 = Escape(searchedPattern2);
+                savedPreset.searchedPattern3 = Escape(searchedPattern3);
+                savedPreset.searchedPattern4 = Escape(searchedPattern4);
+                savedPreset.searchedPattern5 = Escape(searchedPattern5);
 
-                replacedPattern = Escape(replacedPattern);
-                replacedPattern2 = Escape(replacedPattern2);
-                replacedPattern3 = Escape(replacedPattern3);
-                replacedPattern4 = Escape(replacedPattern4);
-                replacedPattern5 = Escape(replacedPattern5);
+                savedPreset.replacedPattern = Escape(replacedPattern);
+                savedPreset.replacedPattern2 = Escape(replacedPattern2);
+                savedPreset.replacedPattern3 = Escape(replacedPattern3);
+                savedPreset.replacedPattern4 = Escape(replacedPattern4);
+                savedPreset.replacedPattern5 = Escape(replacedPattern5);
 
 
-                presetSerializer.Serialize(file, this);
+                presetSerializer.Serialize(file, savedPreset);
 
                 file.Close();
-
-
-                //Let's restore initial string attributes
-                customText = savedCustomText;
-                customText2 = savedCustomText2;
-                customText3 = savedCustomText3;
-                customText4 = savedCustomText4;
-
-                preserveValues = savedPreserveValues;
-
-                processTags = savedProcessTags;
-                preserveTags = savedPreserveTags;
-
-                searchedPattern = savedSearchedPattern;
-                searchedPattern2 = savedSearchedPattern2;
-                searchedPattern3 = savedSearchedPattern3;
-                searchedPattern4 = savedSearchedPattern4;
-                searchedPattern5 = savedSearchedPattern5;
-
-                replacedPattern = savedReplacedPattern;
-                replacedPattern2 = savedReplacedPattern2;
-                replacedPattern3 = savedReplacedPattern3;
-                replacedPattern4 = savedReplacedPattern4;
-                replacedPattern5 = savedReplacedPattern5;
-
 
                 return pathName;
             }
@@ -1207,10 +1192,6 @@ namespace MusicBeePlugin
                 {
                     var arg = Regex.Replace(args[i].Value, @"\\@" + functionName + @"\[\[(.*?)\]\]", "$1");
 
-                    //var subArgs = Regex.Matches(arg, @"\\@.*?\[\[.*?\]\]"); //-----
-                    //for (var j = 0; j < subArgs.Count; j++)
-                    //    tagValue = tagValue.Replace(subArgs[j].Value, Replace(currentFile, subArgs[j].Value, null, null, true, out _));
-
                     var result = calculate(currentFile, arg);
                     tagValue = tagValue.Replace(@"\@" + functionName + @"[[" + arg + @"]]", result);
                 }
@@ -1225,14 +1206,6 @@ namespace MusicBeePlugin
                 {
                     var arg1 = Regex.Replace(args1[i].Value, @"\\@" + functionName + @"\[\[(.*)\;\;.*?\]\]", "$1");
                     var arg2 = Regex.Replace(args1[i].Value, @"\\@" + functionName + @"\[\[.*\;\;(.*?)\]\]", "$1");
-
-                    //var subArgs1 = Regex.Matches(arg1, @"\\@.*?\[\[.*?\]\]"); //-----
-                    //for (var j = 0; j < subArgs1.Count; j++)
-                    //    tagValue = tagValue.Replace(subArgs1[j].Value, Replace(currentFile, subArgs1[j].Value, null, null, true, out _));
-
-                    //var subArgs2 = Regex.Matches(arg2, @"\\@.*?\[\[.*?\]\]");
-                    //for (var j = 0; j < subArgs1.Count; j++)
-                    //    tagValue = tagValue.Replace(subArgs1[j].Value, Replace(currentFile, subArgs1[j].Value, null, null, true, out _));
 
                     var result = calculate(currentFile, arg1, arg2);
                     tagValue = Regex.Replace(tagValue, @"\\@" + functionName + @"\[\[" + Regex.Escape(arg1) + @"\;\;" + Regex.Escape(arg2) + @"\]\]", result, RegexOptions.None);
@@ -2086,45 +2059,31 @@ namespace MusicBeePlugin
                 return Plugin.SetFileTag(sourceFileUrl, tagId, value); //-V5609
         }
 
-        private int previewTable_AddRowsToTable(List<string[]> rowList, bool itsLastRowRange, List<ChangesDetectionResult[]> changeTypes)
+        private int previewTable_AddRowsToTable(List<Row> rows, int lastProcessedRowsCount, bool itsLastRowRange, List<ChangesDetectionResult[]> changeTypes)
         {
-            int rowListCount = rowList.Count;
+            int rowsCount = rows.Count;
 
-            if (rowListCount > 0)
+            if (rowsCount > 0)
             {
-                if (itsLastRowRange || (rowListCount & 0x1f) == 0)
+                if (itsLastRowRange || ((rowsCount & 0x1f) == 0))
                 {
-                    int startRowIndex = previewTable.RowCount;
+                    source.ResetBindings(false);
 
-                    var rows = new DataGridViewRow[rowListCount];
-
-                    for (int i = 0; i < rowListCount; i++)
+                    for (int i = lastProcessedRowsCount; i < rowsCount; i++)
                     {
-                        DataGridViewRow row = new DataGridViewRow();
-                        row.CreateCells(previewTable);
+                        var row = previewTable.Rows[i];
 
-                        for (int j = 0; j < rowList[i].Length; j++)
-                            row.Cells[j].Value = rowList[i][j];
-
-                        for (int j = 0; j < 5; j++)
-                            row.Cells[6 + j * 3].Tag = changeTypes[i][j];
-
-                        rows[i] = row;
+                        if (row.Cells[6].Tag == null)
+                        {
+                            for (int j = 0; j < 5; j++)
+                                row.Cells[6 + j * 3].Tag = changeTypes[i][j];
+                        }
                     }
 
-                    rowList.Clear();
-                    previewTable.Rows.AddRange(rows);
+                    if (useSkinColors)
+                        UpdateCustomScrollBars(previewTable, 1, rowsCount);
 
-
-                    for (int j = 0; j < rowListCount; j++)
-                        previewTableFormatRows(startRowIndex + j);
-
-
-                    previewTable.CurrentCell = previewTable[0, previewTable.RowCount - 1];
-
-                    updateCustomScrollBars(previewTable, 1, previewTable.RowCount);
-
-                    return rowListCount;
+                    return rowsCount - lastProcessedRowsCount;
                 }
                 else
                 {
@@ -2133,7 +2092,9 @@ namespace MusicBeePlugin
             }
             else
             {
-                updateCustomScrollBars(previewTable);
+                if (useSkinColors)
+                    UpdateCustomScrollBars(previewTable);
+
                 return 0;
             }
         }
@@ -2774,29 +2735,20 @@ namespace MusicBeePlugin
 
         private void resetPreviewData()
         {
-            if (previewIsGenerated)
-            {
-                previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-
-                previewTable.AllowUserToResizeColumns = true;
-                previewTable.AllowUserToResizeRows = true;
-                foreach (DataGridViewColumn column in previewTable.Columns)
-                    column.SortMode = DataGridViewColumnSortMode.Automatic;
-            }
-            else
-            {
-                previewTable.AllowUserToResizeColumns = false;
-                previewTable.AllowUserToResizeRows = false;
-                foreach (DataGridViewColumn column in previewTable.Columns)
-                    column.SortMode = DataGridViewColumnSortMode.NotSortable;
-            }
+            previewTable.AllowUserToResizeColumns = false;
+            previewTable.AllowUserToResizeRows = false;
+            foreach (DataGridViewColumn column in previewTable.Columns)
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
 
 
+            previewIsGenerated = false;
             backgroundTaskIsStopping = false;
             backgroundTaskIsStoppedOrCancelled = false;
 
             tags.Clear();
-            previewTable.RowCount = 0;
+            rows.Clear();
+            source.ResetBindings(false);
+
             (previewTable.Columns[0].HeaderCell as DataGridViewCheckBoxHeaderCell).setState(true);
 
             updateCustomScrollBars(previewTable);
@@ -2817,6 +2769,7 @@ namespace MusicBeePlugin
 
         private void resetFormToGeneratedPreview()
         {
+            previewTable.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCells);
             previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
             previewTable.AllowUserToResizeColumns = true;
@@ -2939,14 +2892,14 @@ namespace MusicBeePlugin
             if (backgroundTaskIsWorking())
                 return false;
 
-            if (previewTable.RowCount == 0)
+            if (rows.Count == 0)
             {
                 return prepareBackgroundPreview();
             }
             else
             {
                 for (var fileCounter = 0; fileCounter < previewTable.RowCount; fileCounter++)
-                    tags[fileCounter][0] = previewTable.Rows[fileCounter].Cells[0].Value as string;
+                    tags[fileCounter][0] = rows[fileCounter].Checked;
 
                 ignoreClosingForm = true;
 
@@ -3114,6 +3067,7 @@ namespace MusicBeePlugin
 
         public enum ChangesDetectionResult
         {
+            Null = -1,
             NoExclusionsDetected = 0,
             Skip = 1,
             PreservedTagsDetected = 2,
@@ -3219,19 +3173,12 @@ namespace MusicBeePlugin
             // ReSharper disable once RedundantAssignment
             string[] tag = { "Checked", "Preset GUID", "URL", "newTag1", "newTag2", "newTag3", "newTag4", "newTag5" };
 
-            // ReSharper disable once RedundantAssignment
-            string[] row = { "Checked", "Preset GUID", "URL", "Track",
-                "TagName1", "OriginalTag1", "NewTag1", "TagName2", "OriginalTag2", "NewTag2",
-                "TagName3", "OriginalTag3", "NewTag3", "TagName4", "OriginalTag4", "NewTag4",
-                "TagName5", "OriginalTag5", "NewTag5", "even/odd indicator" };
-
-
             presetProcessingCopies = generatePresetsForAllTagsPseudoTags(selectedPreset);
 
-            List<string[]> rowList = new List<string[]>();
             List<ChangesDetectionResult[]> changeTypesList = new List<ChangesDetectionResult[]>();
             string lastFile = null;
-            var even = true;
+            bool even = true;
+            int lastProcessedRowsCount = 0;
 
             lock (Presets)
             {
@@ -3302,35 +3249,36 @@ namespace MusicBeePlugin
                             if (allTagsReplaceIdsCount > 0 && allTagsPresetParameterTagMask[4])
                                 processedOriginalReplacedTag5Name = GetTagName((MetaDataType)processingPresetCopy.replacedTag5Id);
 
-                            row = new string[tableColumnCount];
-
-                            row[0] = (minResult == ChangesDetectionResult.NoExclusionsDetected ? "T" : "F");
-                            row[1] = processingCopyGuidPreset.Key;
-                            row[2] = currentFile;
-                            row[3] = track;
-                            row[4] = processedOriginalReplacedTagName;
-                            row[5] = searchedAndReplacedTags.originalReplacedTagValue;
-                            row[6] = searchedAndReplacedTags.replacedTagValue;
-                            row[7] = processedOriginalReplacedTag2Name;
-                            row[8] = searchedAndReplacedTags.originalReplacedTag2Value;
-                            row[9] = searchedAndReplacedTags.replacedTag2Value;
-                            row[10] = processedOriginalReplacedTag3Name;
-                            row[11] = searchedAndReplacedTags.originalReplacedTag3Value;
-                            row[12] = searchedAndReplacedTags.replacedTag3Value;
-                            row[13] = processedOriginalReplacedTag4Name;
-                            row[14] = searchedAndReplacedTags.originalReplacedTag4Value;
-                            row[15] = searchedAndReplacedTags.replacedTag4Value;
-                            row[16] = processedOriginalReplacedTag5Name;
-                            row[17] = searchedAndReplacedTags.originalReplacedTag5Value;
-                            row[18] = searchedAndReplacedTags.replacedTag5Value;
-
+                            string evenOdd = null;
 
                             if (even && allTagsReplaceIdsCount > 0)
-                                row[19] = "⬛";
+                                evenOdd = "⬛";
                             else if (allTagsReplaceIdsCount > 0)
-                                row[19] = "⭕";
-                            else
-                                row[19] = null;
+                                evenOdd = "⭕";
+
+                            Row row = new Row
+                            {
+                                Checked = minResult == ChangesDetectionResult.NoExclusionsDetected ? "T" : "F",
+                                PresetGuid = processingCopyGuidPreset.Key,
+                                File = currentFile,
+                                Track = track,
+                                TagName1 = processedOriginalReplacedTagName,
+                                OriginalTag1 = searchedAndReplacedTags.originalReplacedTagValue,
+                                NewTag1 = searchedAndReplacedTags.replacedTagValue,
+                                TagName2 = processedOriginalReplacedTag2Name,
+                                OriginalTag2 = searchedAndReplacedTags.originalReplacedTag2Value,
+                                NewTag2 = searchedAndReplacedTags.replacedTag2Value,
+                                TagName3 = processedOriginalReplacedTag3Name,
+                                OriginalTag3 = searchedAndReplacedTags.originalReplacedTag3Value,
+                                NewTag3 = searchedAndReplacedTags.replacedTag3Value,
+                                TagName4 = processedOriginalReplacedTag4Name,
+                                OriginalTag4 = searchedAndReplacedTags.originalReplacedTag4Value,
+                                NewTag4 = searchedAndReplacedTags.replacedTag4Value,
+                                TagName5 = processedOriginalReplacedTag5Name,
+                                OriginalTag5 = searchedAndReplacedTags.originalReplacedTag5Value,
+                                NewTag5 = searchedAndReplacedTags.replacedTag5Value,
+                                OddEven = evenOdd,
+                            };
 
 
                             var changeTypes = new ChangesDetectionResult[5];
@@ -3342,13 +3290,14 @@ namespace MusicBeePlugin
                             changeTypes[4] = changeType5;
 
 
-                            rowList.Add(row);
+                            rows.Add(row);
                             changeTypesList.Add(changeTypes);
 
 
                             int rowCountToFormat1 = 0;
-                            Invoke(new Action(() => { rowCountToFormat1 = previewTable_AddRowsToTable(rowList, false, changeTypesList); }));
+                            Invoke(new Action(() => { rowCountToFormat1 = previewTable_AddRowsToTable(rows, lastProcessedRowsCount, false, changeTypesList); }));
                             Invoke(new Action(() => { previewTableFormatRows(rowCountToFormat1); }));
+                            lastProcessedRowsCount += rowCountToFormat1;
                         }
                     }
                 }
@@ -3356,8 +3305,9 @@ namespace MusicBeePlugin
 
 
             int rowCountToFormat2 = 0;
-            Invoke(new Action(() => { rowCountToFormat2 = previewTable_AddRowsToTable(rowList, true, changeTypesList); }));
+            Invoke(new Action(() => { rowCountToFormat2 = previewTable_AddRowsToTable(rows, lastProcessedRowsCount, true, changeTypesList); }));
             Invoke(new Action(() => { previewTableFormatRows(rowCountToFormat2); checkStoppedStatus(); resetFormToGeneratedPreview(); }));
+            //lastProcessedRowsCount += rowCountToFormat2;
         }
 
         private void applyToSelected()
@@ -3800,8 +3750,123 @@ namespace MusicBeePlugin
                 return false;
         }
 
-        //Returns if column weights have been changed from saved settings
-        internal void nameColumns()
+        private void initPreset()
+        {
+            presetsWorkingCopy.TryGetValue((presetList.SelectedItem as Preset).guid, out selectedPreset);
+            backedUpPreset = new Preset(selectedPreset);
+
+            if (!selectedPreset.userPreset && !DeveloperMode)
+                editButtonEnabled = false;
+            else
+                editButtonEnabled = true;
+
+            descriptionBox.Text = GetDictValue(selectedPreset.descriptions, Language);
+
+            setCheckedState(userPresetPictureBox, selectedPreset.userPreset);
+            setCheckedState(customizedPresetPictureBox, selectedPreset.getCustomizationsFlag());
+
+
+            preserveTagValuesTextBox.Text = selectedPreset.preserveValues;
+
+            (allTagsReplaceIdsCount, allTagsPresetParameterTagMask) = selectedPreset.getAllTagsReplaceTagIds();
+
+            processTagsMode = selectedPreset.processTagsMode;
+            if (processTagsMode)
+            {
+                buttonProcessPreserveTags.Text = AsrProcessTagsButtonName;
+                processPreserveTagsTextBox.Text = selectedPreset.processTags;
+            }
+            else
+            {
+                buttonProcessPreserveTags.Text = AsrPreserveTagsButtonName;
+                processPreserveTagsTextBox.Text = selectedPreset.preserveTags;
+            }
+
+
+            FillParameterTagList(selectedPreset.parameterTagType, AsrGetTagName(selectedPreset.parameterTagId), parameterTagListCustom, labelTag);
+            FillParameterTagList(selectedPreset.parameterTag2Type, AsrGetTagName(selectedPreset.parameterTag2Id), parameterTag2ListCustom, labelTag2);
+            FillParameterTagList(selectedPreset.parameterTag3Type, AsrGetTagName(selectedPreset.parameterTag3Id), parameterTag3ListCustom, labelTag3);
+            FillParameterTagList(selectedPreset.parameterTag4Type, AsrGetTagName(selectedPreset.parameterTag4Id), parameterTag4ListCustom, labelTag4);
+            FillParameterTagList(selectedPreset.parameterTag5Type, AsrGetTagName(selectedPreset.parameterTag5Id), parameterTag5ListCustom, labelTag5);
+            FillParameterTagList(selectedPreset.parameterTag6Type, AsrGetTagName(selectedPreset.parameterTag6Id), parameterTag6ListCustom, labelTag6);
+
+            customTextBox.Text = selectedPreset.customTextChecked ? selectedPreset.customText : string.Empty;
+            customText2Box.Text = selectedPreset.customText2Checked ? selectedPreset.customText2 : string.Empty;
+            customText3Box.Text = selectedPreset.customText3Checked ? selectedPreset.customText3 : string.Empty;
+            customText4Box.Text = selectedPreset.customText4Checked ? selectedPreset.customText4 : string.Empty;
+
+            var hotkeyAssigned = selectedPreset.hotkeyAssigned;
+            if (asrPresetsWithHotkeysCount >= MaximumNumberOfAsrHotkeys && !hotkeyAssigned)
+            {
+                assignHotkeyCheckBox.Enable(false);
+                assignHotkeyCheckBox.Checked = false;
+            }
+            else
+            {
+                assignHotkeyCheckBox.Enable(true);
+                assignHotkeyCheckBox.Checked = hotkeyAssigned;
+            }
+
+            applyToPlayingTrackCheckBox.Checked = selectedPreset.applyToPlayingTrack;
+            favoriteCheckBox.Checked = selectedPreset.favorite;
+
+            idTextBox.Text = selectedPreset.id;
+
+
+            if (playlistComboBoxCustom.Items.Count == 0)
+            {
+                conditionCheckBox.Enable(false);
+                conditionCheckBox.Checked = false;
+            }
+            else
+            {
+                conditionCheckBox.Enable(true);
+
+                if (selectedPreset.condition)
+                {
+                    var playlistFound = false;
+                    foreach (Playlist playlist in playlistComboBoxCustom.Items)
+                    {
+                        if (playlist.playlist == selectedPreset.playlist)
+                        {
+                            playlistComboBoxCustom.SelectedItem = playlist;
+                            conditionCheckBox.Checked = true;
+                            playlistFound = true;
+                            break;
+                        }
+                    }
+
+                    if (!playlistFound)
+                        conditionCheckBox.Checked = false;
+                }
+                else
+                {
+                    conditionCheckBox.Checked = false;
+                }
+            }
+
+
+            //Preset referring <All Tags> must not be checked for auto-execution. This function call shows icons on tag labels
+            showAllTagsWarningIfRequired(selectedPreset, false);
+
+
+            enableDisablePreviewOptionControls(true, true);
+            enableQueryingOrUpdatingButtons();
+
+
+            if (presetListLastSelectedIndex != -2) //It's during form init
+            {
+                Enable(true, autoApplyPresetsLabel, null);
+                presetList.Focus();
+            }
+
+
+            updateCustomScrollBars(previewTable);
+            updateCustomScrollBars(descriptionBox);
+            descriptionBox.ScrollToTop();
+        }
+
+        private void nameColumns()
         {
             if (selectedPreset == null)
             {
@@ -4013,8 +4078,8 @@ namespace MusicBeePlugin
                                 }
                                 else
                                 {
-                                    previewTable.Columns[17].Visible = !string.IsNullOrEmpty(previewTable.Columns[14].HeaderText);
-                                    previewTable.Columns[18].Visible = !string.IsNullOrEmpty(previewTable.Columns[14].HeaderText);
+                                    previewTable.Columns[17].Visible = !string.IsNullOrEmpty(previewTable.Columns[17].HeaderText);
+                                    previewTable.Columns[18].Visible = !string.IsNullOrEmpty(previewTable.Columns[17].HeaderText);
                                 }
 
                                 if (previewTable.Columns[17].HeaderText == previewTable.Columns[14].HeaderText)
@@ -4165,168 +4230,71 @@ namespace MusicBeePlugin
             if (previewIsGenerated)
                 clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewChanges, buttonPreview, buttonOK, buttonClose);
 
-            processPresetChanges = false;
+            ProcessPresetChanges = false;
             presetListSelectedIndexChanged(presetList.SelectedIndex);
             presetListLastSelectedIndex = presetList.SelectedIndex;
-            processPresetChanges = true;
+            ProcessPresetChanges = true;
         }
 
         private void presetListSelectedIndexChanged(int index)
         {
-            if (presetListLastSelectedIndex != -2) //It's during form init
-                Enable(false, autoApplyPresetsLabel);
+            if (presetListLastSelectedIndex != -2) //It's not form init
+                Enable(false, autoApplyPresetsLabel, null);
+
+            descriptionBox.Text = string.Empty;
+
+            setCheckedState(userPresetPictureBox, false);
+            setCheckedState(customizedPresetPictureBox, false);
+
+            preserveTagValuesTextBox.Text = string.Empty;
+
+            allTagsReplaceIdsCount = 0;
+            allTagsPresetParameterTagMask = new[] { false, false, false, false, false };
+
+            processTagsMode = true;
+            buttonProcessPreserveTags.Text = AsrProcessTagsButtonName;
+            processPreserveTagsTextBox.Text = string.Empty;
+
+            parameterTagListCustom.ItemsClear();
+            parameterTag2ListCustom.ItemsClear();
+            parameterTag3ListCustom.ItemsClear();
+            parameterTag4ListCustom.ItemsClear();
+            parameterTag5ListCustom.ItemsClear();
+            parameterTag6ListCustom.ItemsClear();
+
+
+            conditionCheckBox.Checked = false;
+            assignHotkeyCheckBox.Checked = false;
+            applyToPlayingTrackCheckBox.Checked = false;
+            favoriteCheckBox.Checked = false;
+
 
             if (index < 0)
             {
                 selectedPreset = null;
                 backedUpPreset = null;
 
-                descriptionBox.Text = string.Empty;
-
-                setCheckedState(userPresetPictureBox, false);
-                setCheckedState(customizedPresetPictureBox, false);
-
-                preserveTagValuesTextBox.Text = string.Empty;
-
-                allTagsReplaceIdsCount = 0;
-                allTagsPresetParameterTagMask = new[] { false, false, false, false, false };
-
-                processTagsMode = true;
-                buttonProcessPreserveTags.Text = AsrProcessTagsButtonName;
-                processPreserveTagsTextBox.Text = string.Empty;
-
-                parameterTagListCustom.ItemsClear();
-                parameterTag2ListCustom.ItemsClear();
-                parameterTag3ListCustom.ItemsClear();
-                parameterTag4ListCustom.ItemsClear();
-                parameterTag5ListCustom.ItemsClear();
-                parameterTag6ListCustom.ItemsClear();
-
-
-                conditionCheckBox.Checked = false;
-                assignHotkeyCheckBox.Checked = false;
-                applyToPlayingTrackCheckBox.Checked = false;
-                favoriteCheckBox.Checked = false;
-
                 enableDisablePreviewOptionControls(true, true);
                 disableQueryingOrUpdatingButtons();
 
                 if (presetListLastSelectedIndex != -2) //It's during form init
-                    Enable(true, autoApplyPresetsLabel);
+                {
+                    Enable(true, autoApplyPresetsLabel, null);
+                    presetList.Focus();
+                }
+
+
+                updateCustomScrollBars(previewTable);
+                updateCustomScrollBars(descriptionBox);
+
+                if (presetListLastSelectedIndex != -2) //It's during form init
+                    Enable(true, autoApplyPresetsLabel, null);
             }
             else
             {
-                presetsWorkingCopy.TryGetValue((presetList.Items[index] as Preset).guid, out selectedPreset);
-                backedUpPreset = new Preset(selectedPreset);
-
-                if (!selectedPreset.userPreset && !DeveloperMode)
-                    editButtonEnabled = false;
-                else
-                    editButtonEnabled = true;
-
-                descriptionBox.Text = GetDictValue(selectedPreset.descriptions, Language);
-
-                setCheckedState(userPresetPictureBox, selectedPreset.userPreset);
-                setCheckedState(customizedPresetPictureBox, selectedPreset.getCustomizationsFlag());
-
-
-                preserveTagValuesTextBox.Text = selectedPreset.preserveValues;
-
-                (allTagsReplaceIdsCount, allTagsPresetParameterTagMask) = selectedPreset.getAllTagsReplaceTagIds();
-
-                processTagsMode = selectedPreset.processTagsMode;
-                if (processTagsMode)
-                {
-                    buttonProcessPreserveTags.Text = AsrProcessTagsButtonName;
-                    processPreserveTagsTextBox.Text = selectedPreset.processTags;
-                }
-                else
-                {
-                    buttonProcessPreserveTags.Text = AsrPreserveTagsButtonName;
-                    processPreserveTagsTextBox.Text = selectedPreset.preserveTags;
-                }
-
-
-                FillParameterTagList(selectedPreset.parameterTagType, AsrGetTagName(selectedPreset.parameterTagId), parameterTagListCustom, labelTag);
-                FillParameterTagList(selectedPreset.parameterTag2Type, AsrGetTagName(selectedPreset.parameterTag2Id), parameterTag2ListCustom, labelTag2);
-                FillParameterTagList(selectedPreset.parameterTag3Type, AsrGetTagName(selectedPreset.parameterTag3Id), parameterTag3ListCustom, labelTag3);
-                FillParameterTagList(selectedPreset.parameterTag4Type, AsrGetTagName(selectedPreset.parameterTag4Id), parameterTag4ListCustom, labelTag4);
-                FillParameterTagList(selectedPreset.parameterTag5Type, AsrGetTagName(selectedPreset.parameterTag5Id), parameterTag5ListCustom, labelTag5);
-                FillParameterTagList(selectedPreset.parameterTag6Type, AsrGetTagName(selectedPreset.parameterTag6Id), parameterTag6ListCustom, labelTag6);
-
-                customTextBox.Text = selectedPreset.customTextChecked ? selectedPreset.customText : string.Empty;
-                customText2Box.Text = selectedPreset.customText2Checked ? selectedPreset.customText2 : string.Empty;
-                customText3Box.Text = selectedPreset.customText3Checked ? selectedPreset.customText3 : string.Empty;
-                customText4Box.Text = selectedPreset.customText4Checked ? selectedPreset.customText4 : string.Empty;
-
-                var hotkeyAssigned = selectedPreset.hotkeyAssigned;
-                if (asrPresetsWithHotkeysCount >= MaximumNumberOfAsrHotkeys && !hotkeyAssigned)
-                {
-                    assignHotkeyCheckBox.Enable(false);
-                    assignHotkeyCheckBox.Checked = false;
-                }
-                else
-                {
-                    assignHotkeyCheckBox.Enable(true);
-                    assignHotkeyCheckBox.Checked = hotkeyAssigned;
-                }
-
-                applyToPlayingTrackCheckBox.Checked = selectedPreset.applyToPlayingTrack;
-                favoriteCheckBox.Checked = selectedPreset.favorite;
-
-                idTextBox.Text = selectedPreset.id;
-
-
-                if (playlistComboBoxCustom.Items.Count == 0)
-                {
-                    conditionCheckBox.Enable(false);
-                    conditionCheckBox.Checked = false;
-                }
-                else
-                {
-                    conditionCheckBox.Enable(true);
-
-                    if (selectedPreset.condition)
-                    {
-                        var playlistFound = false;
-                        foreach (Playlist playlist in playlistComboBoxCustom.Items)
-                        {
-                            if (playlist.playlist == selectedPreset.playlist)
-                            {
-                                playlistComboBoxCustom.SelectedItem = playlist;
-                                conditionCheckBox.Checked = true;
-                                playlistFound = true;
-                                break;
-                            }
-                        }
-
-                        if (!playlistFound)
-                            conditionCheckBox.Checked = false;
-                    }
-                    else
-                    {
-                        conditionCheckBox.Checked = false;
-                    }
-                }
-
-
-                enableDisablePreviewOptionControls(true, true);
-                enableQueryingOrUpdatingButtons();
-
-                if (presetListLastSelectedIndex != -2) //It's during form init
-                    Enable(true, autoApplyPresetsLabel);
+                initPreset();
+                nameColumns();
             }
-
-            //Preset referring <All Tags> must not be checked for auto-execution. This function call shows icons on tag labels
-            showAllTagsWarningIfRequired(selectedPreset, false);
-
-            //Let's deal with preview table
-            nameColumns();
-
-
-            updateCustomScrollBars(previewTable);
-            updateCustomScrollBars(descriptionBox);
-            descriptionBox.ScrollToTop();
         }
 
         private void exportPreset(Preset preset, string presetPathName)
@@ -4521,7 +4489,7 @@ namespace MusicBeePlugin
 
         internal void setPresetsChanged()
         {
-            if (!processPresetChanges)
+            if (!ProcessPresetChanges)
                 return;
 
             unsavedChanges = true;
@@ -4938,7 +4906,7 @@ namespace MusicBeePlugin
 
             if (showGeneralWarning)
             {
-                if (processPresetChanges)
+                if (ProcessPresetChanges)
                 {
                     System.Media.SystemSounds.Exclamation.Play();
 
@@ -5086,7 +5054,7 @@ namespace MusicBeePlugin
 
         private void parameterTag_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!processPresetChanges)
+            if (!ProcessPresetChanges)
                 return;
 
             selectedPreset.parameterTagId = AsrGetTagId(parameterTagListCustom.Text);
@@ -5098,7 +5066,7 @@ namespace MusicBeePlugin
 
         private void parameterTag2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!processPresetChanges)
+            if (!ProcessPresetChanges)
                 return;
 
             selectedPreset.parameterTag2Id = AsrGetTagId(parameterTag2ListCustom.Text);
@@ -5110,7 +5078,7 @@ namespace MusicBeePlugin
 
         private void parameterTag3_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!processPresetChanges)
+            if (!ProcessPresetChanges)
                 return;
 
             selectedPreset.parameterTag3Id = AsrGetTagId(parameterTag3ListCustom.Text);
@@ -5122,7 +5090,7 @@ namespace MusicBeePlugin
 
         private void parameterTag4_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!processPresetChanges)
+            if (!ProcessPresetChanges)
                 return;
 
             selectedPreset.parameterTag4Id = AsrGetTagId(parameterTag4ListCustom.Text);
@@ -5134,7 +5102,7 @@ namespace MusicBeePlugin
 
         private void parameterTag5_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!processPresetChanges)
+            if (!ProcessPresetChanges)
                 return;
 
             selectedPreset.parameterTag5Id = AsrGetTagId(parameterTag5ListCustom.Text);
@@ -5146,7 +5114,7 @@ namespace MusicBeePlugin
 
         private void parameterTag6_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!processPresetChanges)
+            if (!ProcessPresetChanges)
                 return;
 
             selectedPreset.parameterTag6Id = AsrGetTagId(parameterTag6ListCustom.Text);
@@ -5158,7 +5126,7 @@ namespace MusicBeePlugin
 
         private void customTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (!processPresetChanges)
+            if (!ProcessPresetChanges)
                 return;
 
             selectedPreset.customText = customTextBox.Text;
@@ -5167,7 +5135,7 @@ namespace MusicBeePlugin
 
         private void customText2Box_TextChanged(object sender, EventArgs e)
         {
-            if (!processPresetChanges)
+            if (!ProcessPresetChanges)
                 return;
 
             selectedPreset.customText2 = customText2Box.Text;
@@ -5176,7 +5144,7 @@ namespace MusicBeePlugin
 
         private void customText3Box_TextChanged(object sender, EventArgs e)
         {
-            if (!processPresetChanges)
+            if (!ProcessPresetChanges)
                 return;
 
             selectedPreset.customText3 = customText3Box.Text;
@@ -5185,7 +5153,7 @@ namespace MusicBeePlugin
 
         private void customText4Box_TextChanged(object sender, EventArgs e)
         {
-            if (!processPresetChanges)
+            if (!ProcessPresetChanges)
                 return;
 
             selectedPreset.customText4 = customText4Box.Text;
@@ -5194,7 +5162,7 @@ namespace MusicBeePlugin
 
         private void preserveTagValuesTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (!processPresetChanges)
+            if (!ProcessPresetChanges)
                 return;
 
             selectedPreset.preserveValues = preserveTagValuesTextBox.Text;
@@ -5203,7 +5171,7 @@ namespace MusicBeePlugin
 
         private void processPreserveTagsTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (!processPresetChanges)
+            if (!ProcessPresetChanges)
                 return;
 
             if (processTagsMode)
@@ -5253,7 +5221,7 @@ namespace MusicBeePlugin
 
         private void conditionCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (!processPresetChanges)
+            if (!ProcessPresetChanges)
                 return;
 
 
@@ -5282,7 +5250,7 @@ namespace MusicBeePlugin
 
         private void playlistComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!processPresetChanges)
+            if (!ProcessPresetChanges)
                 return;
 
             if (playlistComboBoxCustom.SelectedIndex >= 0)
@@ -5295,19 +5263,20 @@ namespace MusicBeePlugin
 
         private void cbHeader_OnCheckBoxClicked(bool state)
         {
-            foreach (DataGridViewRow row in previewTable.Rows)
+            for (int i = 0; i < rows.Count; i++)
             {
-                if (row.Cells[0].Value == null)
+                if (rows[0].Checked == null)
                     continue;
 
                 if (state)
-                    row.Cells[0].Value = "F";
+                    rows[0].Checked = "F";
                 else
-                    row.Cells[0].Value = "T";
-
-                var e = new DataGridViewCellEventArgs(0, row.Index);
-                previewTable_CellContentClick(null, e);
+                    rows[0].Checked = "T";
             }
+
+            source.ResetBindings(false);
+            for (int i = 0; i < rows.Count; i++)
+                previewTable_CellContentClick(previewTable, new DataGridViewCellEventArgs(0, i));
         }
 
         private void toggleRow(bool check, int rowIndex)
@@ -5515,7 +5484,9 @@ namespace MusicBeePlugin
                     if (columnIndex == 6 && previewTable.Columns[columnIndex].Visible)
                     {
                         var cell = previewTable.Rows[rowIndex].Cells[6];
-                        var changeType = (ChangesDetectionResult)cell.Tag;
+                        var changeType = ChangesDetectionResult.Null;//----------- remove ChangesDetectionResult.Null ??????
+                        //if (cell.Tag != null) //----------????? why null?
+                            changeType = (ChangesDetectionResult)cell.Tag;
 
                         if (changeType == ChangesDetectionResult.PreservedTagsDetected)
                             cell.Style = preservedTagCellStyle;
@@ -5529,13 +5500,16 @@ namespace MusicBeePlugin
                     else if (columnIndex == 9 && previewTable.Columns[columnIndex].Visible)
                     {
                         var cell = previewTable.Rows[rowIndex].Cells[9];
+                        var changeType9 = ChangesDetectionResult.Null;//-----------
+                        //if (cell.Tag != null)//------------
+                            changeType9 = (ChangesDetectionResult)cell.Tag;
 
-                        if ((ChangesDetectionResult)cell.Tag == ChangesDetectionResult.PreservedTagsDetected)
+                        if (changeType9 == ChangesDetectionResult.PreservedTagsDetected)
                         {
                             cell.Style = preservedTagCellStyle;
                             return;
                         }
-                        else if ((ChangesDetectionResult)cell.Tag == ChangesDetectionResult.PreservedTagValuesDetected)
+                        else if (changeType9 == ChangesDetectionResult.PreservedTagValuesDetected)
                         {
                             cell.Style = preservedTagValueCellStyle;
                             return;
@@ -5555,9 +5529,16 @@ namespace MusicBeePlugin
                         if (previewTable.Columns[5].Visible)
                             break;
 
-                        if ((ChangesDetectionResult)previewTable.Rows[rowIndex].Cells[3].Tag == ChangesDetectionResult.PreservedTagsDetected)
+                        var cell3 = previewTable.Rows[rowIndex].Cells[3];
+                        var changeType3 = ChangesDetectionResult.Null;//----------
+                        //if (cell3.Tag != null)//--------
+                            changeType3 = (ChangesDetectionResult)cell3.Tag;
+
+
+
+                        if (changeType3 == ChangesDetectionResult.PreservedTagsDetected)
                             cell.Style = preservedTagCellStyle;
-                        else if ((ChangesDetectionResult)previewTable.Rows[rowIndex].Cells[3].Tag == ChangesDetectionResult.PreservedTagValuesDetected)
+                        else if (changeType3 == ChangesDetectionResult.PreservedTagValuesDetected)
                             cell.Style = preservedTagValueCellStyle;
                         else if (cell.Value as string == previewTable.Rows[rowIndex].Cells[2].Value as string)
                             cell.Style = unchangedCellStyle;
@@ -5567,13 +5548,16 @@ namespace MusicBeePlugin
                     else if (columnIndex == 12 && previewTable.Columns[columnIndex].Visible)
                     {
                         var cell = previewTable.Rows[rowIndex].Cells[12];
+                        var changeType12 = ChangesDetectionResult.Null;//-----------
+                        //if (cell.Tag != null)//-------
+                            changeType12 = (ChangesDetectionResult)cell.Tag;
 
-                        if ((ChangesDetectionResult)cell.Tag == ChangesDetectionResult.PreservedTagsDetected)
+                        if (changeType12 == ChangesDetectionResult.PreservedTagsDetected)
                         {
                             cell.Style = preservedTagCellStyle;
                             return;
                         }
-                        else if ((ChangesDetectionResult)cell.Tag == ChangesDetectionResult.PreservedTagValuesDetected)
+                        else if (changeType12 == ChangesDetectionResult.PreservedTagValuesDetected)
                         {
                             cell.Style = preservedTagValueCellStyle;
                             return;
@@ -5599,9 +5583,14 @@ namespace MusicBeePlugin
                         }
                         while (i >= 5);
 
-                        if ((ChangesDetectionResult)previewTable.Rows[rowIndex].Cells[i + 1].Tag == ChangesDetectionResult.PreservedTagsDetected)
+                        var cellI = previewTable.Rows[rowIndex].Cells[i + 1];
+                        var changeTypeI = ChangesDetectionResult.Null;//-------------
+                        //if (cellI.Tag != null)//----------
+                            changeTypeI = (ChangesDetectionResult)cellI.Tag;
+
+                        if (changeTypeI == ChangesDetectionResult.PreservedTagsDetected)
                             cell.Style = preservedTagCellStyle;
-                        else if ((ChangesDetectionResult)previewTable.Rows[rowIndex].Cells[i + 1].Tag == ChangesDetectionResult.PreservedTagValuesDetected)
+                        else if (changeTypeI == ChangesDetectionResult.PreservedTagValuesDetected)
                             cell.Style = preservedTagValueCellStyle;
                         else if (cell.Value as string == previewTable.Rows[rowIndex].Cells[i].Value as string)
                             cell.Style = unchangedCellStyle;
@@ -5611,13 +5600,16 @@ namespace MusicBeePlugin
                     else if (columnIndex == 15 && previewTable.Columns[columnIndex].Visible)
                     {
                         var cell = previewTable.Rows[rowIndex].Cells[15];
+                        var changeType15 = ChangesDetectionResult.Null;//------------
+                        //if (cell.Tag != null)//-----------
+                            changeType15 = (ChangesDetectionResult)cell.Tag;
 
-                        if ((ChangesDetectionResult)cell.Tag == ChangesDetectionResult.PreservedTagsDetected)
+                        if (changeType15 == ChangesDetectionResult.PreservedTagsDetected)
                         {
                             cell.Style = preservedTagCellStyle;
                             return;
                         }
-                        else if ((ChangesDetectionResult)cell.Tag == ChangesDetectionResult.PreservedTagValuesDetected)
+                        else if (changeType15 == ChangesDetectionResult.PreservedTagValuesDetected)
                         {
                             cell.Style = preservedTagValueCellStyle;
                             return;
@@ -5643,9 +5635,14 @@ namespace MusicBeePlugin
                         }
                         while (i >= 5);
 
-                        if ((ChangesDetectionResult)previewTable.Rows[rowIndex].Cells[i + 1].Tag == ChangesDetectionResult.PreservedTagsDetected)
+                        var cellI = previewTable.Rows[rowIndex].Cells[i + 1];
+                        var changeTypeI = ChangesDetectionResult.Null;//---------
+                        //if (cellI.Tag != null)//---------------
+                            changeTypeI = (ChangesDetectionResult)cellI.Tag;
+
+                        if (changeTypeI == ChangesDetectionResult.PreservedTagsDetected)
                             cell.Style = preservedTagCellStyle;
-                        else if ((ChangesDetectionResult)previewTable.Rows[rowIndex].Cells[i + 1].Tag == ChangesDetectionResult.PreservedTagValuesDetected)
+                        else if (changeTypeI == ChangesDetectionResult.PreservedTagValuesDetected)
                             cell.Style = preservedTagValueCellStyle;
                         else if (cell.Value as string == previewTable.Rows[rowIndex].Cells[i].Value as string)
                             cell.Style = unchangedCellStyle;
@@ -5655,13 +5652,16 @@ namespace MusicBeePlugin
                     else if (columnIndex == 18 && previewTable.Columns[columnIndex].Visible)
                     {
                         var cell = previewTable.Rows[rowIndex].Cells[18];
+                        var changeType18 = ChangesDetectionResult.Null;//----------
+                        //if (cell.Tag != null)//------------
+                            changeType18 = (ChangesDetectionResult)cell.Tag;
 
-                        if ((ChangesDetectionResult)cell.Tag == ChangesDetectionResult.PreservedTagsDetected)
+                        if (changeType18 == ChangesDetectionResult.PreservedTagsDetected)
                         {
                             cell.Style = preservedTagCellStyle;
                             return;
                         }
-                        else if ((ChangesDetectionResult)cell.Tag == ChangesDetectionResult.PreservedTagValuesDetected)
+                        else if (changeType18 == ChangesDetectionResult.PreservedTagValuesDetected)
                         {
                             cell.Style = preservedTagValueCellStyle;
                             return;
@@ -5687,9 +5687,14 @@ namespace MusicBeePlugin
                         }
                         while (i >= 5);
 
-                        if ((ChangesDetectionResult)previewTable.Rows[rowIndex].Cells[i + 1].Tag == ChangesDetectionResult.PreservedTagsDetected)
+                        var cellI = previewTable.Rows[rowIndex].Cells[i + 1];
+                        var changeTypeI = ChangesDetectionResult.Null;//--------
+                        //if (cellI.Tag != null)//-------------
+                            changeTypeI = (ChangesDetectionResult)cellI.Tag;
+
+                        if (changeTypeI == ChangesDetectionResult.PreservedTagsDetected)
                             cell.Style = preservedTagCellStyle;
-                        else if ((ChangesDetectionResult)previewTable.Rows[rowIndex].Cells[i + 1].Tag == ChangesDetectionResult.PreservedTagValuesDetected)
+                        else if (changeTypeI == ChangesDetectionResult.PreservedTagValuesDetected)
                             cell.Style = preservedTagValueCellStyle;
                         else if (cell.Value as string == previewTable.Rows[rowIndex].Cells[i].Value as string)
                             cell.Style = unchangedCellStyle;
@@ -5867,7 +5872,7 @@ namespace MusicBeePlugin
 
         private void assignHotkeyCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (!processPresetChanges)
+            if (!ProcessPresetChanges)
                 return;
 
             applyToPlayingTrackCheckBox.Enable(assignHotkeyCheckBox.Checked);
@@ -6005,7 +6010,7 @@ namespace MusicBeePlugin
             }
 
 
-            if (processPresetChanges)
+            if (ProcessPresetChanges)
             {
                 showAutoApplyingWarningIfRequired();
                 setPresetsChanged();
@@ -6079,7 +6084,7 @@ namespace MusicBeePlugin
 
         private void applyToPlayingTrackCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (!processPresetChanges)
+            if (!ProcessPresetChanges)
                 return;
 
             selectedPreset.applyToPlayingTrack = applyToPlayingTrackCheckBox.Checked;
@@ -6096,7 +6101,7 @@ namespace MusicBeePlugin
 
         private void favoriteCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (!processPresetChanges)
+            if (!ProcessPresetChanges)
                 return;
 
             selectedPreset.favorite = favoriteCheckBox.Checked;
@@ -6114,7 +6119,7 @@ namespace MusicBeePlugin
 
         private void saveColumnWidths(Preset savedPreset)
         {
-            if (savedPreset == null || !processPresetChanges || !previewTableLeftMouseButtonPressed || backgroundTaskIsWorking())
+            if (savedPreset == null || !ProcessPresetChanges || !previewTableLeftMouseButtonPressed || backgroundTaskIsWorking())
                 return;
 
 
@@ -6579,7 +6584,7 @@ namespace MusicBeePlugin
 
         private void AdvancedSearchAndReplace_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!processPresetChanges)
+            if (!ProcessPresetChanges)
             {
                 e.Cancel = true;
             }

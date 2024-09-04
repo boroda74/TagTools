@@ -9,6 +9,11 @@ using static NativeMethods;
 
 namespace MusicBeePlugin
 {
+    partial class Plugin
+    {
+        internal const int ThumbMoveRepeatInterval = 200; //Milliseconds //---
+    }
+
     public static class ControlsTools
     {
         public static T FindControlChild<T>(Control container) where T : Control
@@ -68,40 +73,6 @@ namespace MusicBeePlugin
             if (!controlBorder.getIgnoreControl_LocationChanged())
                 controlBorder.changeControlBorderLocation();
         }
-
-        //internal static void DrawTextBoxBorder(TextBox textBox) //---
-        //{
-        //    if (textBox.Parent is ControlBorder textBoxBorder)
-        //    {
-        //        using (var graphics = textBoxBorder.CreateGraphics())
-        //        {
-        //            if (textBox.Multiline)
-        //            {
-        //                if (!textBoxBorder.control.IsEnabled())
-        //                    ControlPaint.DrawBorder(graphics, new Rectangle(0, 0, textBoxBorder.Width, textBoxBorder.Height),
-        //                        Plugin.ScrollBarBorderColor, ButtonBorderStyle.Solid);
-        //                else if (textBoxBorder.ContainsFocus)
-        //                    ControlPaint.DrawBorder(graphics, new Rectangle(0, 0, textBoxBorder.Width, textBoxBorder.Height),
-        //                        Plugin.ScrollBarFocusedBorderColor, ButtonBorderStyle.Solid);
-        //                else
-        //                    ControlPaint.DrawBorder(graphics, new Rectangle(0, 0, textBoxBorder.Width, textBoxBorder.Height),
-        //                        Plugin.ScrollBarBorderColor, ButtonBorderStyle.Solid);
-        //            }
-        //            else
-        //            {
-        //                if (!textBoxBorder.control.IsEnabled())
-        //                    ControlPaint.DrawBorder(graphics, new Rectangle(0, 0, textBoxBorder.Width, textBoxBorder.Height),
-        //                        Plugin.ButtonBorderColor, ButtonBorderStyle.Solid);
-        //                else if (textBoxBorder.ContainsFocus)
-        //                    ControlPaint.DrawBorder(graphics, new Rectangle(0, 0, textBoxBorder.Width, textBoxBorder.Height),
-        //                        Plugin.InputPanelBackColor, ButtonBorderStyle.Solid);
-        //                else
-        //                    ControlPaint.DrawBorder(graphics, new Rectangle(0, 0, textBoxBorder.Width, textBoxBorder.Height),
-        //                        Plugin.InputPanelBackColor, ButtonBorderStyle.Solid);
-        //            }
-        //        }
-        //    }
-        //}
 
         internal static void DrawBorder(Control control, Color color, Color focusedColor, Color disabledColor)
         {
@@ -339,6 +310,7 @@ namespace MusicBeePlugin
             listBox.Margin = new Padding(0, 0, 0, 0);
             listBox.Dock = DockStyle.Fill;
             listBox.TabStop = false;
+            listBox.Tag = this;
 
             listBox.SelectedIndex = -1;
             lastSelectedIndex = -1;
@@ -566,8 +538,6 @@ namespace MusicBeePlugin
             this.dropDown.Tag = this;
 
             this.dropDown.Closed += dropDown_Closed;
-            this.dropDown.KeyPress += ownerForm.CustomComboBox_KeyPress;
-            this.dropDown.KeyDown += ownerForm.CustomComboBox_KeyDown;
 
 
             foreach (var item in comboBox.Items)
@@ -1114,6 +1084,17 @@ namespace MusicBeePlugin
             PluginWindowTemplate.UpdateCustomScrollBars(listBox);
         }
 
+        public bool SelectCurrentDropDownItem()
+        {
+            if (textBox != null)
+            {
+                listBox_ItemChosen(null, null);
+                return true;
+            }
+
+            return false;
+        }
+
         public void listBox_ItemChosen(object sender, EventArgs e)
         {
             textBox.Focus();
@@ -1140,6 +1121,17 @@ namespace MusicBeePlugin
             dropDownClosedTime = DateTime.UtcNow;
 
             Events[EVENT_DROPDOWNCLOSED]?.DynamicInvoke(this, null);
+        }
+
+        public bool OpenDropDown()
+        {
+            if (textBox != null)
+            {
+                button_Click(null, null);
+                return true;
+            }
+
+            return false;
         }
 
         private void button_Click(object sender, EventArgs e)
@@ -1699,8 +1691,8 @@ namespace MusicBeePlugin
     }
 
 
-    //Returns Minimum, Maximum, LargeChange
-    public delegate (int, int, int) GetScrollBarMetricsDelegate(Control scrolledControl, Control refScrollBar);
+    //Returns Minimum, Maximum, SmallChange, LargeChange
+    public delegate (int, int, int, int) GetScrollBarMetricsDelegate(Control scrolledControl, Control refScrollBar);
 
     //Custom scroll bars
     public sealed class CustomVScrollBar : UserControl
@@ -1810,7 +1802,7 @@ namespace MusicBeePlugin
 
 
         //refScrollBar must be null if scrolledControl is not a parent of custom scroll bar & scroll bar must be placed on the right to scrolledControl
-        public CustomVScrollBar(Form ownerForm, Control scrolledControl,
+        public CustomVScrollBar(Form ownerForm, Control scrolledControl, int smallChange, 
             GetScrollBarMetricsDelegate getScrollBarMetrics, int borderWidth, Control refScrollBar = null, bool useSelfAsRefScrollBar = false)
         {
             InitializeComponent();
@@ -1835,6 +1827,8 @@ namespace MusicBeePlugin
             ThumbTopImage = Plugin.CopyBitmap(Plugin.ThumbTopImage);
             ThumbMiddleImage = Plugin.CopyBitmap(Plugin.ThumbMiddleVerticalImage);
             ThumbBottomImage = Plugin.CopyBitmap(Plugin.ThumbBottomImage);
+
+            this.smallChange = smallChange;
 
             GetExternalMetrics = getScrollBarMetrics;
             ScrolledControl = scrolledControl;
@@ -1955,7 +1949,7 @@ namespace MusicBeePlugin
 
 
             var fValuePerc = ((float)value - minimum) / (maximum - minimum);
-            (minimum, maximum, largeChange) = GetExternalMetrics(ScrolledControl, refScrollBar);
+            (minimum, maximum, smallChange, largeChange) = GetExternalMetrics(ScrolledControl, refScrollBar);
             value = (int)Math.Round(fValuePerc * (maximum - minimum)) + minimum;
             if (value < minimum)
                 value = minimum;
@@ -1973,10 +1967,10 @@ namespace MusicBeePlugin
 
         public void AdjustReservedSpace(int space)
         {
-            reservedSpace = space;
-            Height = initialHeight - space;
+            //reservedSpace = space; //---
+            //Height = initialHeight - space;
 
-            Invalidate();
+            //Invalidate();
         }
 
         private void customScrollBar_SizeChanged(object sender, EventArgs e)
@@ -2358,6 +2352,10 @@ namespace MusicBeePlugin
 
         private void moveThumbUpDown(object state)
         {
+            if (!downArrowDown && !upArrowDown)
+                return;
+
+
             var (nRealRange, nPixelRange, nTrackHeight, nThumbHeight, fThumbHeight) = GetMetrics();
 
             if (upArrowDown)
@@ -2441,12 +2439,12 @@ namespace MusicBeePlugin
             else if (uparrowRect.Contains(ptPoint))
             {
                 upArrowDown = true;
-                thumbUpDownRepeater = new System.Threading.Timer(moveThumbUpDown, null, 0, 50);
+                thumbUpDownRepeater = new System.Threading.Timer(moveThumbUpDown, null, 0, Plugin.ThumbMoveRepeatInterval);
             }
             else if (downarrowRect.Contains(ptPoint))
             {
                 downArrowDown = true;
-                thumbUpDownRepeater = new System.Threading.Timer(moveThumbUpDown, null, 0, 50);
+                thumbUpDownRepeater = new System.Threading.Timer(moveThumbUpDown, null, 0, Plugin.ThumbMoveRepeatInterval);
             }
             else if (thumbRect.Top > ptPoint.Y && thumbRect.Left < ptPoint.X && thumbRect.Left + thumbRect.Width > ptPoint.X)
             {
@@ -2785,7 +2783,7 @@ namespace MusicBeePlugin
 
 
             var fValuePerc = ((float)value - minimum) / (maximum - minimum);
-            (minimum, maximum, largeChange) = GetExternalMetrics(ScrolledControl, refScrollBar);
+            (minimum, maximum, smallChange, largeChange) = GetExternalMetrics(ScrolledControl, refScrollBar);
             value = (int)Math.Round(fValuePerc * (maximum - minimum)) + minimum;
             if (value < minimum)
                 value = minimum;
@@ -3201,7 +3199,7 @@ namespace MusicBeePlugin
                         if (thumbLeft - smallChange < 0)
                             thumbLeft = 0;
                         else
-                            thumbLeft -= smallChange;
+                            thumbLeft -= smallChange / 4;
 
                         //figure out value
                         var fPerc = (float)thumbLeft / nPixelRange;
@@ -3220,7 +3218,7 @@ namespace MusicBeePlugin
                         if (thumbLeft + smallChange > nPixelRange)
                             thumbLeft = nPixelRange;
                         else
-                            thumbLeft += smallChange;
+                            thumbLeft += smallChange / 4;
 
                         //figure out value
                         var fPerc = (float)thumbLeft / nPixelRange;
@@ -3269,12 +3267,12 @@ namespace MusicBeePlugin
             else if (leftarrowRect.Contains(ptPoint))
             {
                 leftArrowDown = true;
-                thumbLeftRightRepeater = new System.Threading.Timer(moveThumbLeftRight, null, 0, 50);
+                thumbLeftRightRepeater = new System.Threading.Timer(moveThumbLeftRight, null, 0, Plugin.ThumbMoveRepeatInterval);
             }
             else if (rightarrowRect.Contains(ptPoint))
             {
                 rightArrowDown = true;
-                thumbLeftRightRepeater = new System.Threading.Timer(moveThumbLeftRight, null, 0, 50);
+                thumbLeftRightRepeater = new System.Threading.Timer(moveThumbLeftRight, null, 0, Plugin.ThumbMoveRepeatInterval);
             }
             else if (thumbRect.Left > ptPoint.X && thumbRect.Top < ptPoint.Y && thumbRect.Top + thumbRect.Height > ptPoint.Y)
             {

@@ -14,6 +14,15 @@ namespace MusicBeePlugin
 {
     public partial class MultipleSearchAndReplace : PluginWindowTemplate
     {
+        public class Row
+        {
+            public string Checked { get; set; }
+            public string File { get; set; }
+            public string Track { get; set; }
+            public string OriginalTagValue { get; set; }
+            public string NewTagValue { get; set; }
+        }
+
         private CustomComboBox sourceTagListCustom;
         private CustomComboBox destinationTagListCustom;
         private CustomComboBox loadComboBoxCustom;
@@ -22,6 +31,10 @@ namespace MusicBeePlugin
         private readonly DataGridViewCellStyle unchangedCellStyle = new DataGridViewCellStyle(UnchangedCellStyle);
         private readonly DataGridViewCellStyle changedCellStyle = new DataGridViewCellStyle(ChangedCellStyle);
         private readonly DataGridViewCellStyle dimmedCellStyle = new DataGridViewCellStyle(DimmedCellStyle);
+
+
+        private List<Row> rows = new List<Row>();
+        BindingSource source = new BindingSource();
 
         private MetaDataType sourceTagId;
         private FilePropertyType sourcePropId;
@@ -88,7 +101,6 @@ namespace MusicBeePlugin
             var cbHeader = new DataGridViewCheckBoxHeaderCell();
             cbHeader.Style = headerCellStyle;
             cbHeader.setState(true);
-            cbHeader.OnCheckBoxClicked += cbHeader_OnCheckBoxClicked;
 
             var colCB = new DataGridViewCheckBoxColumn
             {
@@ -98,7 +110,8 @@ namespace MusicBeePlugin
                 TrueValue = "T",
                 IndeterminateValue = string.Empty,
                 Width = 25,
-                AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.None,
+                DataPropertyName = "Checked", 
             };
 
             previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -116,9 +129,7 @@ namespace MusicBeePlugin
             foreach (var preset in Presets)
             {
                 if (preset.Value.isMSRPreset)
-                {
                     loadComboBoxCustom.Items.Add(preset.Value);
-                }
             }
             loadComboBoxCustom.SelectedIndex = 0;
 
@@ -126,6 +137,11 @@ namespace MusicBeePlugin
 
             templateNameTextBox.Text = CtlMSR;
             templateNameTextBox.SelectionStart = CtlMSR.Length;
+
+            source.DataSource = rows;
+            previewTable.DataSource = source;
+
+            (previewTable.Columns[0].HeaderCell as DataGridViewCheckBoxHeaderCell).OnCheckBoxClicked += cbHeader_OnCheckBoxClicked;
 
 
             enableDisablePreviewOptionControls(true, true);
@@ -192,30 +208,21 @@ namespace MusicBeePlugin
 
         private void resetPreviewData()
         {
-            if (previewIsGenerated)
-            {
-                previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-
-                previewTable.AllowUserToResizeColumns = true;
-                previewTable.AllowUserToResizeRows = true;
-                foreach (DataGridViewColumn column in previewTable.Columns)
-                    column.SortMode = DataGridViewColumnSortMode.Automatic;
-            }
-            else
-            {
-                previewTable.AllowUserToResizeColumns = false;
-                previewTable.AllowUserToResizeRows = false;
-                foreach (DataGridViewColumn column in previewTable.Columns)
-                    column.SortMode = DataGridViewColumnSortMode.NotSortable;
-            }
+            previewTable.AllowUserToResizeColumns = false;
+            previewTable.AllowUserToResizeRows = false;
+            foreach (DataGridViewColumn column in previewTable.Columns)
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
 
 
+            previewIsGenerated = false;
             backgroundTaskIsStopping = false;
             backgroundTaskIsStoppedOrCancelled = false;
 
             tags.Clear();
             templates.Clear();
-            previewTable.RowCount = 0;
+            rows.Clear();
+            source.ResetBindings(false);
+
             (previewTable.Columns[0].HeaderCell as DataGridViewCheckBoxHeaderCell).setState(true);
 
             updateCustomScrollBars(previewTable);
@@ -367,7 +374,7 @@ namespace MusicBeePlugin
             if (backgroundTaskIsWorking())
                 return false;
 
-            if (previewTable.Rows.Count == 0)
+            if (rows.Count == 0)
             {
                 return prepareBackgroundPreview();
             }
@@ -385,9 +392,9 @@ namespace MusicBeePlugin
                 {
                     var tag = new string[5];
 
-                    tag[0] = previewTable.Rows[fileCounter].Cells[0].Value as string;
-                    tag[3] = previewTable.Rows[fileCounter].Cells[3].Value as string;
-                    tag[4] = previewTable.Rows[fileCounter].Cells[4].Value as string;
+                    tag[0] = rows[fileCounter].Checked;
+                    tag[3] = rows[fileCounter].NewTagValue;
+                    tag[4] = rows[fileCounter].File;
 
                     tags.Add(tag);
                 }
@@ -414,7 +421,6 @@ namespace MusicBeePlugin
                 }
 
 
-                string[] row = { "Checked", "Track", "oldTag", "newTag", "File" };
                 var currentFile = files[fileCounter];
 
                 SetStatusBarTextForFileOperations(MsrSbText, true, fileCounter, files.Length, currentFile);
@@ -479,21 +485,25 @@ namespace MusicBeePlugin
                     isChecked = "T";
 
 
-                row[0] = isChecked;
-                row[1] = track;
-                row[2] = swappedTags.destinationNormalizedTagValue;
-                row[3] = newDestinationTagValue1;
-                row[4] = currentFile;
+                Row row = new Row
+                {
+                    Checked = isChecked,
+                    File = currentFile,
+                    Track = track, 
+                    OriginalTagValue = swappedTags.destinationNormalizedTagValue,
+                    NewTagValue = newDestinationTagValue1,
+                };
 
-                tags.Add(row);
+                rows.Add(row);
+
 
                 int rowCountToFormat1 = 0;
-                Invoke(new Action(() => { rowCountToFormat1 = AddRowsToTable(this, previewTable, tags, false, true); }));
+                Invoke(new Action(() => { rowCountToFormat1 = AddRowsToTable(this, previewTable, source, rows.Count, false, true); }));
                 Invoke(new Action(() => { FormatChangedTags(this, previewTable, rowCountToFormat1, previewTableFormatRow); }));
             }
 
             int rowCountToFormat3 = 0;
-            Invoke(new Action(() => { rowCountToFormat3 = AddRowsToTable(this, previewTable, tags, true, true); }));
+            Invoke(new Action(() => { rowCountToFormat3 = AddRowsToTable(this, previewTable, source, rows.Count, true, true); }));
             Invoke(new Action(() => { FormatChangedTags(this, previewTable, rowCountToFormat3, previewTableFormatRow); checkStoppedStatus(); resetFormToGeneratedPreview(); }));
         }
 
@@ -573,13 +583,20 @@ namespace MusicBeePlugin
 
         private void cbHeader_OnCheckBoxClicked(bool state)
         {
-            foreach (DataGridViewRow row in previewTable.Rows)
+            for (int i = 0; i < rows.Count; i++)
             {
-                if (state && row.Cells[0].Value != null)
-                    row.Cells[0].Value = "T";
-                else if (row.Cells[0].Value != null)
-                    row.Cells[0].Value = "F";
+                if (rows[0].Checked == null)
+                    continue;
+
+                if (state)
+                    rows[0].Checked = "F";
+                else
+                    rows[0].Checked = "T";
             }
+
+            source.ResetBindings(false);
+            for (int i = 0; i < rows.Count; i++)
+                previewTable_CellContentClick(previewTable, new DataGridViewCellEventArgs(0, i));
         }
 
         private void previewTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -831,8 +848,8 @@ namespace MusicBeePlugin
             customMSR.isMSRPreset = true;
             customMSR.userPreset = true;
 
-            if (File.Exists(Path.Combine(PresetsPath, oldSafeFileName + AsrPresetExtension)))
-                File.Delete(Path.Combine(PresetsPath, oldSafeFileName + AsrPresetExtension));
+            if (System.IO.File.Exists(Path.Combine(PresetsPath, oldSafeFileName + AsrPresetExtension)))
+                System.IO.File.Delete(Path.Combine(PresetsPath, oldSafeFileName + AsrPresetExtension));
 
             customMSR.savePreset(Path.Combine(PresetsPath, customMSR.getSafeFileName() + AsrPresetExtension));
 
@@ -1069,7 +1086,7 @@ namespace MusicBeePlugin
                     IdsAsrPresets.Remove(pair.Key);
             }
 
-            File.Delete(Path.Combine(PresetsPath, customMSR.getSafeFileName() + AsrPresetExtension));
+            System.IO.File.Delete(Path.Combine(PresetsPath, customMSR.getSafeFileName() + AsrPresetExtension));
 
             Presets.Remove(customMSR.guid);
             loadComboBoxCustom.Items.Remove(customMSR);

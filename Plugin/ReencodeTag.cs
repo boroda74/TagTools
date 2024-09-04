@@ -11,6 +11,15 @@ namespace MusicBeePlugin
 {
     public partial class ReEncodeTag : PluginWindowTemplate
     {
+        public class Row
+        {
+            public string Checked { get; set; }
+            public string File { get; set; }
+            public string Track { get; set; }
+            public string OriginalTagValue { get; set; }
+            public string NewTagValue { get; set; }
+        }
+
         private CustomComboBox sourceTagListCustom;
         private CustomComboBox initialEncodingListCustom;
         private CustomComboBox usedEncodingListCustom;
@@ -19,6 +28,10 @@ namespace MusicBeePlugin
         private readonly DataGridViewCellStyle unchangedCellStyle = new DataGridViewCellStyle(UnchangedCellStyle);
         private readonly DataGridViewCellStyle changedCellStyle = new DataGridViewCellStyle(ChangedCellStyle);
         private readonly DataGridViewCellStyle dimmedCellStyle = new DataGridViewCellStyle(DimmedCellStyle);
+
+
+        private List<Row> rows = new List<Row>();
+        BindingSource source = new BindingSource();
 
         private string[] files = Array.Empty<string>();
         private readonly List<string[]> tags = new List<string[]>();
@@ -73,7 +86,6 @@ namespace MusicBeePlugin
             var cbHeader = new DataGridViewCheckBoxHeaderCell();
             cbHeader.Style = headerCellStyle;
             cbHeader.setState(true);
-            cbHeader.OnCheckBoxClicked += cbHeader_OnCheckBoxClicked;
 
             var colCB = new DataGridViewCheckBoxColumn
             {
@@ -84,7 +96,8 @@ namespace MusicBeePlugin
                 TrueValue = "T",
                 IndeterminateValue = string.Empty,
                 Width = 25,
-                AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.None,
+                DataPropertyName = "Checked", 
             };
 
             previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -100,9 +113,14 @@ namespace MusicBeePlugin
 
             previewTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 
+            source.DataSource = rows;
+            previewTable.DataSource = source;
+
+            (previewTable.Columns[0].HeaderCell as DataGridViewCheckBoxHeaderCell).OnCheckBoxClicked += cbHeader_OnCheckBoxClicked;
+
+
             enableDisablePreviewOptionControls(true, true);
             enableQueryingOrUpdatingButtons();
-
 
             button_GotFocus(AcceptButton, null); //Let's mark active button
         }
@@ -135,29 +153,20 @@ namespace MusicBeePlugin
 
         private void resetPreviewData()
         {
-            if (previewIsGenerated)
-            {
-                previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-
-                previewTable.AllowUserToResizeColumns = true;
-                previewTable.AllowUserToResizeRows = true;
-                foreach (DataGridViewColumn column in previewTable.Columns)
-                    column.SortMode = DataGridViewColumnSortMode.Automatic;
-            }
-            else
-            {
-                previewTable.AllowUserToResizeColumns = false;
-                previewTable.AllowUserToResizeRows = false;
-                foreach (DataGridViewColumn column in previewTable.Columns)
-                    column.SortMode = DataGridViewColumnSortMode.NotSortable;
-            }
+            previewTable.AllowUserToResizeColumns = false;
+            previewTable.AllowUserToResizeRows = false;
+            foreach (DataGridViewColumn column in previewTable.Columns)
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
 
 
+            previewIsGenerated = false;
             backgroundTaskIsStopping = false;
             backgroundTaskIsStoppedOrCancelled = false;
 
             tags.Clear();
-            previewTable.RowCount = 0;
+            rows.Clear();
+            source.ResetBindings(false);
+
             (previewTable.Columns[0].HeaderCell as DataGridViewCheckBoxHeaderCell).setState(true);
 
             updateCustomScrollBars(previewTable);
@@ -283,7 +292,7 @@ namespace MusicBeePlugin
             if (backgroundTaskIsWorking())
                 return false;
 
-            if (previewTable.Rows.Count == 0)
+            if (rows.Count == 0)
             {
                 return prepareBackgroundPreview();
             }
@@ -299,11 +308,10 @@ namespace MusicBeePlugin
 
                 for (var fileCounter = 0; fileCounter < previewTable.Rows.Count; fileCounter++)
                 {
-                    var tag = new string[3];
-
-                    tag[0] = previewTable.Rows[fileCounter].Cells[0].Value as string;
-                    tag[1] = previewTable.Rows[fileCounter].Cells[1].Value as string;
-                    tag[2] = previewTable.Rows[fileCounter].Cells[4].Value as string;
+                    string[] tag = { "Checked", "File", "NewTag" };
+                    tag[0] = rows[fileCounter].Checked;
+                    tag[1] = rows[fileCounter].File;
+                    tag[2] = rows[fileCounter].NewTagValue;
 
                     tags.Add(tag);
                 }
@@ -318,7 +326,6 @@ namespace MusicBeePlugin
         {
             previewIsGenerated = true;
 
-            List<string[]> rows = new List<string[]>();
             var stripNotChangedLines = SavedSettings.dontIncludeInPreviewLinesWithoutChangedTags;
 
             for (var fileCounter = 0; fileCounter < files.Length; fileCounter++)
@@ -329,11 +336,6 @@ namespace MusicBeePlugin
                     return;
                 }
 
-
-                // ReSharper disable once RedundantAssignment
-                string[] row = { "Checked", "File", "Track", "OriginalTag", "NewTag" };
-                // ReSharper disable once RedundantAssignment
-                string[] tag = { "Checked", "file", "newTag" };
 
                 var currentFile = files[fileCounter];
 
@@ -353,29 +355,25 @@ namespace MusicBeePlugin
                 else
                     isChecked = "T";
 
-                tag[0] = isChecked;
-                tag[1] = currentFile;
-                tag[2] = newTagValue;
-
-                tags.Add(tag);
-
-
-                row[0] = isChecked;
-                row[1] = currentFile;
-                row[2] = track;
-                row[3] = sourceTagValue;
-                row[4] = newTagValue;
+                Row row = new Row
+                {
+                    Checked = isChecked,
+                    File = currentFile,
+                    Track = track, 
+                    OriginalTagValue = sourceTagValue,
+                    NewTagValue = newTagValue,
+                };
 
                 rows.Add(row);
 
 
                 int rowCountToFormat1 = 0;
-                Invoke(new Action(() => { rowCountToFormat1 = AddRowsToTable(this, previewTable, rows, false, true); }));
+                Invoke(new Action(() => { rowCountToFormat1 = AddRowsToTable(this, previewTable, source, rows.Count, false, true); }));
                 Invoke(new Action(() => { FormatChangedTags(this, previewTable, rowCountToFormat1, previewTableFormatRow); }));
             }
 
             int rowCountToFormat2 = 0;
-            Invoke(new Action(() => { rowCountToFormat2 = AddRowsToTable(this, previewTable, rows, true, true); }));
+            Invoke(new Action(() => { rowCountToFormat2 = AddRowsToTable(this, previewTable, source, rows.Count, true, true); }));
             Invoke(new Action(() => { FormatChangedTags(this, previewTable, rowCountToFormat2, previewTableFormatRow); checkStoppedStatus(); resetFormToGeneratedPreview(); }));
         }
 
@@ -452,19 +450,20 @@ namespace MusicBeePlugin
 
         private void cbHeader_OnCheckBoxClicked(bool state)
         {
-            foreach (DataGridViewRow row in previewTable.Rows)
+            for (int i = 0; i < rows.Count; i++)
             {
-                if (row.Cells[0].Value == null)
+                if (rows[0].Checked == null)
                     continue;
 
                 if (state)
-                    row.Cells[0].Value = "F";
+                    rows[0].Checked = "F";
                 else
-                    row.Cells[0].Value = "T";
-
-                var e = new DataGridViewCellEventArgs(0, row.Index);
-                previewTable_CellContentClick(null, e);
+                    rows[0].Checked = "T";
             }
+
+            source.ResetBindings(false);
+            for (int i = 0; i < rows.Count; i++)
+                previewTable_CellContentClick(previewTable, new DataGridViewCellEventArgs(0, i));
         }
 
         private void previewTable_CellContentClick(object sender, DataGridViewCellEventArgs e)

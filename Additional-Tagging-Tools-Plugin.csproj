@@ -33,7 +33,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
-    <AssemblyVersion>9.0.9008.35356</AssemblyVersion>
+    <AssemblyVersion>9.0.9013.17362</AssemblyVersion>
     <ShouldCreateLogs>True</ShouldCreateLogs>
     <AdvancedSettingsExpanded>True</AdvancedSettingsExpanded>
     <UpdateAssemblyVersion>False</UpdateAssemblyVersion>
@@ -305,7 +305,7 @@
     <Compile Include="Plugin\CopyTag.Designer.cs">
       <DependentUpon>CopyTag.cs</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\DataGridViewCheckBoxHeaderCell.cs" />
+    <Compile Include="Helpers\DataGridViewExtensions.cs" />
     <Compile Include="Helpers\FillTagNames.cs" />
     <Compile Include="Plugin\LibraryReports.cs">
       <SubType>Form</SubType>

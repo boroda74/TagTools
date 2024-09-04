@@ -33,6 +33,7 @@ namespace MusicBeePlugin
             if (disposing)
             {
                 periodicCacheClearingTimer?.Dispose();
+                source?.Dispose();
 
                 totalsFont?.Dispose();
 
@@ -46,7 +47,9 @@ namespace MusicBeePlugin
                 fatalError?.Dispose();
                 errorFatalError?.Dispose();
 
+                artworkCellTemplate?.Dispose();
                 DefaultArtwork?.Dispose();
+                ArtworkTotals?.Dispose();
                 artwork?.Dispose();
             }
         }
@@ -61,7 +64,9 @@ namespace MusicBeePlugin
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LibraryReports));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -159,6 +164,8 @@ namespace MusicBeePlugin
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TextColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ImageColumn = new System.Windows.Forms.DataGridViewImageColumn();
 
             //MusicBee
             if (useSkinColors)
@@ -827,14 +834,17 @@ namespace MusicBeePlugin
             this.previewTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.previewTable.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             resources.ApplyResources(this.previewTable, "previewTable");
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.previewTable.DefaultCellStyle = dataGridViewCellStyle1;
+            this.previewTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.TextColumn,
+            this.ImageColumn});
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.previewTable.DefaultCellStyle = dataGridViewCellStyle3;
             this.previewTable.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dirtyErrorProvider.SetIconAlignment(this.previewTable, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("previewTable.IconAlignment"))));
             this.previewTable.MultiSelect = false;
@@ -1195,12 +1205,32 @@ namespace MusicBeePlugin
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
+            // TextColumn
+            // 
+            this.TextColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.NotSet;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.TextColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            resources.ApplyResources(this.TextColumn, "TextColumn");
+            this.TextColumn.Name = "TextColumn";
+            this.TextColumn.ReadOnly = true;
+            // 
+            // ImageColumn
+            // 
+            this.ImageColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle2.NullValue")));
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.ImageColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            resources.ApplyResources(this.ImageColumn, "ImageColumn");
+            this.ImageColumn.Name = "ImageColumn";
+            this.ImageColumn.ReadOnly = true;
+            // 
             // LibraryReports
             // 
             this.AcceptButton = this.buttonPreview;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.buttonClose;
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.autoApplyPresetsLabel);
             this.DoubleBuffered = true;
@@ -1330,5 +1360,7 @@ namespace MusicBeePlugin
         private Label multipleItemsSplitterLabel;
         private ComboBox parameter2ComboBox;
         private TableLayoutPanel tableLayoutPanel2;
+        private DataGridViewTextBoxColumn TextColumn;
+        private DataGridViewImageColumn ImageColumn;
     }
 }

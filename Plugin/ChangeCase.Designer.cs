@@ -19,6 +19,9 @@
             }
 
             base.Dispose(disposing);
+
+            if (disposing)
+                source?.Dispose();
         }
 
         #region Код, автоматически созданный конструктором форм Windows
@@ -484,12 +487,14 @@
             // 
             // File
             // 
+            this.File.DataPropertyName = "File";
             this.File.FillWeight = 1F;
             resources.ApplyResources(this.File, "File");
             this.File.Name = "File";
             // 
             // Track
             // 
+            this.Track.DataPropertyName = "Track";
             this.Track.FillWeight = 200F;
             resources.ApplyResources(this.Track, "Track");
             this.Track.Name = "Track";
@@ -497,24 +502,28 @@
             // 
             // OriginalTagValue
             // 
+            this.OriginalTagValue.DataPropertyName = "OriginalTagValue";
             this.OriginalTagValue.FillWeight = 1F;
             resources.ApplyResources(this.OriginalTagValue, "OriginalTagValue");
             this.OriginalTagValue.Name = "OriginalTagValue";
             // 
             // OriginalTagValueNormalized
             // 
+            this.OriginalTagValueNormalized.DataPropertyName = "OriginalTagValueNormalized";
             resources.ApplyResources(this.OriginalTagValueNormalized, "OriginalTagValueNormalized");
             this.OriginalTagValueNormalized.Name = "OriginalTagValueNormalized";
             this.OriginalTagValueNormalized.ReadOnly = true;
             // 
             // NewTagValue
             // 
+            this.NewTagValue.DataPropertyName = "NewTagValue";
             this.NewTagValue.FillWeight = 1F;
             resources.ApplyResources(this.NewTagValue, "NewTagValue");
             this.NewTagValue.Name = "NewTagValue";
             // 
             // NewTagValueNormalized
             // 
+            this.NewTagValueNormalized.DataPropertyName = "NewTagValueNormalized";
             resources.ApplyResources(this.NewTagValueNormalized, "NewTagValueNormalized");
             this.NewTagValueNormalized.Name = "NewTagValueNormalized";
             // 
@@ -523,7 +532,6 @@
             this.AcceptButton = this.buttonPreview;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.buttonClose;
             this.Controls.Add(this.ignoreSingleLetterExceptedWordsCheckBoxLabel);
             this.Controls.Add(this.ignoreSingleLetterExceptedWordsCheckBox);
             this.Controls.Add(this.previewTable);

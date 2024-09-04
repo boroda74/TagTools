@@ -441,9 +441,6 @@
   <data name="&gt;&gt;toggleCaseRadioButton.ZOrder" xml:space="preserve">
     <value>17</value>
   </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>165, 17</value>
-  </metadata>
   <data name="exceptionCharsBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
@@ -459,6 +456,9 @@
   <data name="exceptionCharsBox.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>165, 17</value>
+  </metadata>
   <data name="exceptionCharsBox.ToolTip" xml:space="preserve">
     <value>Symbols in this field must be separated by spaces</value>
   </data>
@@ -694,6 +694,30 @@ word list contains the article "a")</value>
   <data name="fieldsPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
+  <data name="buttonAsrSentenceSeparators.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="buttonAsrSentenceSeparators.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="buttonAsrSentenceSeparators.Location" type="System.Drawing.Point, System.Drawing">
+    <value>516, 113</value>
+  </data>
+  <data name="buttonAsrSentenceSeparators.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 6, 4</value>
+  </data>
+  <data name="buttonAsrSentenceSeparators.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 23</value>
+  </data>
+  <data name="buttonAsrSentenceSeparators.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="buttonAsrSentenceSeparators.Text" xml:space="preserve">
+    <value>ASR</value>
+  </data>
+  <data name="buttonAsrSentenceSeparators.ToolTip" xml:space="preserve">
+    <value>Set word separators as defaults for Advanced Search &amp; Replace presets</value>
+  </data>
   <data name="&gt;&gt;buttonAsrSentenceSeparators.Name" xml:space="preserve">
     <value>buttonAsrSentenceSeparators</value>
   </data>
@@ -706,6 +730,30 @@ word list contains the article "a")</value>
   <data name="&gt;&gt;buttonAsrSentenceSeparators.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="buttonAsrExceptWordsBetweenSymbols.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="buttonAsrExceptWordsBetweenSymbols.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="buttonAsrExceptWordsBetweenSymbols.Location" type="System.Drawing.Point, System.Drawing">
+    <value>516, 86</value>
+  </data>
+  <data name="buttonAsrExceptWordsBetweenSymbols.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 6, 4</value>
+  </data>
+  <data name="buttonAsrExceptWordsBetweenSymbols.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 23</value>
+  </data>
+  <data name="buttonAsrExceptWordsBetweenSymbols.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="buttonAsrExceptWordsBetweenSymbols.Text" xml:space="preserve">
+    <value>ASR</value>
+  </data>
+  <data name="buttonAsrExceptWordsBetweenSymbols.ToolTip" xml:space="preserve">
+    <value>Set symbols as defaults for Advanced Search &amp; Replace presets</value>
+  </data>
   <data name="&gt;&gt;buttonAsrExceptWordsBetweenSymbols.Name" xml:space="preserve">
     <value>buttonAsrExceptWordsBetweenSymbols</value>
   </data>
@@ -717,6 +765,93 @@ word list contains the article "a")</value>
   </data>
   <data name="&gt;&gt;buttonAsrExceptWordsBetweenSymbols.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="tableLayoutPanel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="closingExceptionCharsBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="closingExceptionCharsBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>254, 1</value>
+  </data>
+  <data name="closingExceptionCharsBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 1, 0, 1</value>
+  </data>
+  <data name="closingExceptionCharsBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>250, 23</value>
+  </data>
+  <data name="closingExceptionCharsBox.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="closingExceptionCharsBox.ToolTip" xml:space="preserve">
+    <value>Symbols in this field must be separated by spaces
+The number of symbols in the left and right lists must be the same
+The order of symbols in the left and in the right lists is important
+They are paired by their position on the list</value>
+  </data>
+  <data name="&gt;&gt;closingExceptionCharsBox.Name" xml:space="preserve">
+    <value>closingExceptionCharsBox</value>
+  </data>
+  <data name="&gt;&gt;closingExceptionCharsBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;closingExceptionCharsBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;closingExceptionCharsBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="openingExceptionCharsBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="openingExceptionCharsBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 1</value>
+  </data>
+  <data name="openingExceptionCharsBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 1, 2, 1</value>
+  </data>
+  <data name="openingExceptionCharsBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>250, 23</value>
+  </data>
+  <data name="openingExceptionCharsBox.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="openingExceptionCharsBox.ToolTip" xml:space="preserve">
+    <value>Symbols in this field must be separated by spaces
+The number of symbols in the left and right lists must be the same
+The order of symbols in the left and in the right lists is important
+They are paired by their position on the list</value>
+  </data>
+  <data name="&gt;&gt;openingExceptionCharsBox.Name" xml:space="preserve">
+    <value>openingExceptionCharsBox</value>
+  </data>
+  <data name="&gt;&gt;openingExceptionCharsBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;openingExceptionCharsBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;openingExceptionCharsBox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 85</value>
+  </data>
+  <data name="tableLayoutPanel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>504, 25</value>
+  </data>
+  <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -733,6 +868,30 @@ word list contains the article "a")</value>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="closingExceptionCharsBox" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="openingExceptionCharsBox" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50,Percent,50" /&gt;&lt;Rows Styles="Percent,100,Absolute,25" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
+  <data name="buttonAsrExceptWordsAfterSymbols.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="buttonAsrExceptWordsAfterSymbols.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="buttonAsrExceptWordsAfterSymbols.Location" type="System.Drawing.Point, System.Drawing">
+    <value>516, 59</value>
+  </data>
+  <data name="buttonAsrExceptWordsAfterSymbols.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 6, 4</value>
+  </data>
+  <data name="buttonAsrExceptWordsAfterSymbols.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 23</value>
+  </data>
+  <data name="buttonAsrExceptWordsAfterSymbols.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="buttonAsrExceptWordsAfterSymbols.Text" xml:space="preserve">
+    <value>ASR</value>
+  </data>
+  <data name="buttonAsrExceptWordsAfterSymbols.ToolTip" xml:space="preserve">
+    <value>Set symbols as defaults for Advanced Search &amp; Replace presets</value>
+  </data>
   <data name="&gt;&gt;buttonAsrExceptWordsAfterSymbols.Name" xml:space="preserve">
     <value>buttonAsrExceptWordsAfterSymbols</value>
   </data>
@@ -744,6 +903,30 @@ word list contains the article "a")</value>
   </data>
   <data name="&gt;&gt;buttonAsrExceptWordsAfterSymbols.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="removeExceptionButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="removeExceptionButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="removeExceptionButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>516, 32</value>
+  </data>
+  <data name="removeExceptionButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 6, 4</value>
+  </data>
+  <data name="removeExceptionButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 23</value>
+  </data>
+  <data name="removeExceptionButton.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="removeExceptionButton.Text" xml:space="preserve">
+    <value>❌</value>
+  </data>
+  <data name="removeExceptionButton.ToolTip" xml:space="preserve">
+    <value>Remove entered exception list from the history (if there is exact match)</value>
   </data>
   <data name="&gt;&gt;removeExceptionButton.Name" xml:space="preserve">
     <value>removeExceptionButton</value>
@@ -757,6 +940,24 @@ word list contains the article "a")</value>
   <data name="&gt;&gt;removeExceptionButton.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="exceptionWordsBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="exceptionWordsBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 32</value>
+  </data>
+  <data name="exceptionWordsBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="exceptionWordsBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>504, 23</value>
+  </data>
+  <data name="exceptionWordsBox.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="exceptionWordsBox.ToolTip" xml:space="preserve">
+    <value>Words in this field must be separated by spaces</value>
+  </data>
   <data name="&gt;&gt;exceptionWordsBox.Name" xml:space="preserve">
     <value>exceptionWordsBox</value>
   </data>
@@ -768,6 +969,33 @@ word list contains the article "a")</value>
   </data>
   <data name="&gt;&gt;exceptionWordsBox.ZOrder" xml:space="preserve">
     <value>7</value>
+  </data>
+  <data name="buttonAsrExceptedWords.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="buttonAsrExceptedWords.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="buttonAsrExceptedWords.Location" type="System.Drawing.Point, System.Drawing">
+    <value>478, 14</value>
+  </data>
+  <data name="buttonAsrExceptedWords.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 6, 4</value>
+  </data>
+  <data name="buttonAsrExceptedWords.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 23</value>
+  </data>
+  <data name="buttonAsrExceptedWords.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="buttonAsrExceptedWords.Text" xml:space="preserve">
+    <value>ASR</value>
+  </data>
+  <data name="buttonAsrExceptedWords.ToolTip" xml:space="preserve">
+    <value>Set excepted words a default for Advanced search &amp; replace presets</value>
+  </data>
+  <data name="buttonAsrExceptedWords.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;buttonAsrExceptedWords.Name" xml:space="preserve">
     <value>buttonAsrExceptedWords</value>
@@ -781,6 +1009,27 @@ word list contains the article "a")</value>
   <data name="&gt;&gt;buttonAsrExceptedWords.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
+  <data name="buttonSettings.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="buttonSettings.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="buttonSettings.Location" type="System.Drawing.Point, System.Drawing">
+    <value>178, 5</value>
+  </data>
+  <data name="buttonSettings.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="buttonSettings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 23</value>
+  </data>
+  <data name="buttonSettings.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="buttonSettings.ToolTip" xml:space="preserve">
+    <value>Open quick settings</value>
+  </data>
   <data name="&gt;&gt;buttonSettings.Name" xml:space="preserve">
     <value>buttonSettings</value>
   </data>
@@ -792,6 +1041,28 @@ word list contains the article "a")</value>
   </data>
   <data name="&gt;&gt;buttonSettings.ZOrder" xml:space="preserve">
     <value>12</value>
+  </data>
+  <data name="buttonReapply.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="buttonReapply.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 5</value>
+  </data>
+  <data name="buttonReapply.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="buttonReapply.Size" type="System.Drawing.Size, System.Drawing">
+    <value>166, 23</value>
+  </data>
+  <data name="buttonReapply.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="buttonReapply.Text" xml:space="preserve">
+    <value>Reapply rules to new tag</value>
+  </data>
+  <data name="buttonReapply.ToolTip" xml:space="preserve">
+    <value>This command will reapply casing rules (including exceptions) to 
+already generated, but not yet saved "New tag", not saving anything to tags</value>
   </data>
   <data name="&gt;&gt;buttonReapply.Name" xml:space="preserve">
     <value>buttonReapply</value>
@@ -1466,7 +1737,7 @@ Indeterminate state: change the case only of the entered words.</value>
     <value>ChangeCase</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=8.3.8989.40607, Culture=neutral, PublicKeyToken=null</value>
+    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=9.0.9009.16580, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="dirtyErrorProvider.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -2106,413 +2377,4 @@ Indeterminate state: change the case only of the entered words.</value>
   <data name="&gt;&gt;buttonPreview.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
-  <data name="buttonReapply.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="buttonReapply.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 5</value>
-  </data>
-  <data name="buttonReapply.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="buttonReapply.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 23</value>
-  </data>
-  <data name="buttonReapply.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="buttonReapply.Text" xml:space="preserve">
-    <value>Reapply rules to new tag</value>
-  </data>
-  <data name="buttonReapply.ToolTip" xml:space="preserve">
-    <value>This command will reapply casing rules (including exceptions) to 
-already generated, but not yet saved "New tag", not saving anything to tags</value>
-  </data>
-  <data name="&gt;&gt;buttonReapply.Name" xml:space="preserve">
-    <value>buttonReapply</value>
-  </data>
-  <data name="&gt;&gt;buttonReapply.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;buttonReapply.Parent" xml:space="preserve">
-    <value>fieldsPanel</value>
-  </data>
-  <data name="&gt;&gt;buttonReapply.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="buttonSettings.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="buttonSettings.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="buttonSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>178, 5</value>
-  </data>
-  <data name="buttonSettings.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="buttonSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 23</value>
-  </data>
-  <data name="buttonSettings.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="buttonSettings.ToolTip" xml:space="preserve">
-    <value>Open quick settings</value>
-  </data>
-  <data name="&gt;&gt;buttonSettings.Name" xml:space="preserve">
-    <value>buttonSettings</value>
-  </data>
-  <data name="&gt;&gt;buttonSettings.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;buttonSettings.Parent" xml:space="preserve">
-    <value>fieldsPanel</value>
-  </data>
-  <data name="&gt;&gt;buttonSettings.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="exceptionWordsBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="exceptionWordsBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 32</value>
-  </data>
-  <data name="exceptionWordsBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="exceptionWordsBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>504, 23</value>
-  </data>
-  <data name="exceptionWordsBox.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="exceptionWordsBox.ToolTip" xml:space="preserve">
-    <value>Words in this field must be separated by spaces</value>
-  </data>
-  <data name="&gt;&gt;exceptionWordsBox.Name" xml:space="preserve">
-    <value>exceptionWordsBox</value>
-  </data>
-  <data name="&gt;&gt;exceptionWordsBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;exceptionWordsBox.Parent" xml:space="preserve">
-    <value>fieldsPanel</value>
-  </data>
-  <data name="&gt;&gt;exceptionWordsBox.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="removeExceptionButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="removeExceptionButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="removeExceptionButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>516, 32</value>
-  </data>
-  <data name="removeExceptionButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 6, 4</value>
-  </data>
-  <data name="removeExceptionButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 23</value>
-  </data>
-  <data name="removeExceptionButton.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="removeExceptionButton.Text" xml:space="preserve">
-    <value>❌</value>
-  </data>
-  <data name="removeExceptionButton.ToolTip" xml:space="preserve">
-    <value>Remove entered exception list from the history (if there is exact match)</value>
-  </data>
-  <data name="&gt;&gt;removeExceptionButton.Name" xml:space="preserve">
-    <value>removeExceptionButton</value>
-  </data>
-  <data name="&gt;&gt;removeExceptionButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;removeExceptionButton.Parent" xml:space="preserve">
-    <value>fieldsPanel</value>
-  </data>
-  <data name="&gt;&gt;removeExceptionButton.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="buttonAsrExceptedWords.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="buttonAsrExceptedWords.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="buttonAsrExceptedWords.Location" type="System.Drawing.Point, System.Drawing">
-    <value>478, 14</value>
-  </data>
-  <data name="buttonAsrExceptedWords.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 6, 4</value>
-  </data>
-  <data name="buttonAsrExceptedWords.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 23</value>
-  </data>
-  <data name="buttonAsrExceptedWords.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="buttonAsrExceptedWords.Text" xml:space="preserve">
-    <value>ASR</value>
-  </data>
-  <data name="buttonAsrExceptedWords.ToolTip" xml:space="preserve">
-    <value>Set excepted words a default for Advanced search &amp; replace presets</value>
-  </data>
-  <data name="buttonAsrExceptedWords.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;buttonAsrExceptedWords.Name" xml:space="preserve">
-    <value>buttonAsrExceptedWords</value>
-  </data>
-  <data name="&gt;&gt;buttonAsrExceptedWords.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;buttonAsrExceptedWords.Parent" xml:space="preserve">
-    <value>fieldsPanel</value>
-  </data>
-  <data name="&gt;&gt;buttonAsrExceptedWords.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="buttonAsrExceptWordsAfterSymbols.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="buttonAsrExceptWordsAfterSymbols.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="buttonAsrExceptWordsAfterSymbols.Location" type="System.Drawing.Point, System.Drawing">
-    <value>516, 59</value>
-  </data>
-  <data name="buttonAsrExceptWordsAfterSymbols.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 6, 4</value>
-  </data>
-  <data name="buttonAsrExceptWordsAfterSymbols.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 23</value>
-  </data>
-  <data name="buttonAsrExceptWordsAfterSymbols.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="buttonAsrExceptWordsAfterSymbols.Text" xml:space="preserve">
-    <value>ASR</value>
-  </data>
-  <data name="buttonAsrExceptWordsAfterSymbols.ToolTip" xml:space="preserve">
-    <value>Set symbols as defaults for Advanced Search &amp; Replace presets</value>
-  </data>
-  <data name="&gt;&gt;buttonAsrExceptWordsAfterSymbols.Name" xml:space="preserve">
-    <value>buttonAsrExceptWordsAfterSymbols</value>
-  </data>
-  <data name="&gt;&gt;buttonAsrExceptWordsAfterSymbols.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;buttonAsrExceptWordsAfterSymbols.Parent" xml:space="preserve">
-    <value>fieldsPanel</value>
-  </data>
-  <data name="&gt;&gt;buttonAsrExceptWordsAfterSymbols.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="buttonAsrSentenceSeparators.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="buttonAsrSentenceSeparators.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="buttonAsrSentenceSeparators.Location" type="System.Drawing.Point, System.Drawing">
-    <value>516, 113</value>
-  </data>
-  <data name="buttonAsrSentenceSeparators.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 6, 4</value>
-  </data>
-  <data name="buttonAsrSentenceSeparators.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 23</value>
-  </data>
-  <data name="buttonAsrSentenceSeparators.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="buttonAsrSentenceSeparators.Text" xml:space="preserve">
-    <value>ASR</value>
-  </data>
-  <data name="buttonAsrSentenceSeparators.ToolTip" xml:space="preserve">
-    <value>Set word separators as defaults for Advanced Search &amp; Replace presets</value>
-  </data>
-  <data name="&gt;&gt;buttonAsrSentenceSeparators.Name" xml:space="preserve">
-    <value>buttonAsrSentenceSeparators</value>
-  </data>
-  <data name="&gt;&gt;buttonAsrSentenceSeparators.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;buttonAsrSentenceSeparators.Parent" xml:space="preserve">
-    <value>fieldsPanel</value>
-  </data>
-  <data name="&gt;&gt;buttonAsrSentenceSeparators.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="buttonAsrExceptWordsBetweenSymbols.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="buttonAsrExceptWordsBetweenSymbols.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="buttonAsrExceptWordsBetweenSymbols.Location" type="System.Drawing.Point, System.Drawing">
-    <value>516, 86</value>
-  </data>
-  <data name="buttonAsrExceptWordsBetweenSymbols.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 6, 4</value>
-  </data>
-  <data name="buttonAsrExceptWordsBetweenSymbols.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 23</value>
-  </data>
-  <data name="buttonAsrExceptWordsBetweenSymbols.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="buttonAsrExceptWordsBetweenSymbols.Text" xml:space="preserve">
-    <value>ASR</value>
-  </data>
-  <data name="buttonAsrExceptWordsBetweenSymbols.ToolTip" xml:space="preserve">
-    <value>Set symbols as defaults for Advanced Search &amp; Replace presets</value>
-  </data>
-  <data name="&gt;&gt;buttonAsrExceptWordsBetweenSymbols.Name" xml:space="preserve">
-    <value>buttonAsrExceptWordsBetweenSymbols</value>
-  </data>
-  <data name="&gt;&gt;buttonAsrExceptWordsBetweenSymbols.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;buttonAsrExceptWordsBetweenSymbols.Parent" xml:space="preserve">
-    <value>fieldsPanel</value>
-  </data>
-  <data name="&gt;&gt;buttonAsrExceptWordsBetweenSymbols.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="tableLayoutPanel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;closingExceptionCharsBox.Name" xml:space="preserve">
-    <value>closingExceptionCharsBox</value>
-  </data>
-  <data name="&gt;&gt;closingExceptionCharsBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;closingExceptionCharsBox.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;closingExceptionCharsBox.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;openingExceptionCharsBox.Name" xml:space="preserve">
-    <value>openingExceptionCharsBox</value>
-  </data>
-  <data name="&gt;&gt;openingExceptionCharsBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;openingExceptionCharsBox.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;openingExceptionCharsBox.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 85</value>
-  </data>
-  <data name="tableLayoutPanel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>504, 25</value>
-  </data>
-  <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
-    <value>fieldsPanel</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="closingExceptionCharsBox" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="openingExceptionCharsBox" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50,Percent,50" /&gt;&lt;Rows Styles="Percent,100,Absolute,25" /&gt;&lt;/TableLayoutSettings&gt;</value>
-  </data>
-  <data name="closingExceptionCharsBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="closingExceptionCharsBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>254, 1</value>
-  </data>
-  <data name="closingExceptionCharsBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 1, 0, 1</value>
-  </data>
-  <data name="closingExceptionCharsBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>250, 23</value>
-  </data>
-  <data name="closingExceptionCharsBox.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="closingExceptionCharsBox.ToolTip" xml:space="preserve">
-    <value>Symbols in this field must be separated by spaces
-The number of symbols in the left and right lists must be the same
-The order of symbols in the left and in the right lists is important
-They are paired by their position on the list</value>
-  </data>
-  <data name="&gt;&gt;closingExceptionCharsBox.Name" xml:space="preserve">
-    <value>closingExceptionCharsBox</value>
-  </data>
-  <data name="&gt;&gt;closingExceptionCharsBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;closingExceptionCharsBox.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;closingExceptionCharsBox.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="openingExceptionCharsBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="openingExceptionCharsBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 1</value>
-  </data>
-  <data name="openingExceptionCharsBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 1, 2, 1</value>
-  </data>
-  <data name="openingExceptionCharsBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>250, 23</value>
-  </data>
-  <data name="openingExceptionCharsBox.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="openingExceptionCharsBox.ToolTip" xml:space="preserve">
-    <value>Symbols in this field must be separated by spaces
-The number of symbols in the left and right lists must be the same
-The order of symbols in the left and in the right lists is important
-They are paired by their position on the list</value>
-  </data>
-  <data name="&gt;&gt;openingExceptionCharsBox.Name" xml:space="preserve">
-    <value>openingExceptionCharsBox</value>
-  </data>
-  <data name="&gt;&gt;openingExceptionCharsBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;openingExceptionCharsBox.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;openingExceptionCharsBox.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>165, 17</value>
-  </metadata>
 </root>

@@ -12,6 +12,17 @@ namespace MusicBeePlugin
 {
     public partial class CompareTracks : PluginWindowTemplate
     {
+        private DataGridViewColumn columnTemplate;
+        private DataGridViewCellStyle headerCellStyle;
+        private DataGridViewCell artworkCellTemplate;
+
+        private int rowHeadersWidth;
+        private int defaultColumnWidth;
+
+
+        private DataGridViewBoundColumnList<DataGridViewBoundColumns> rows;
+        BindingSource source = new BindingSource();
+
         private readonly string[] trackUrls;
 
         private List<string> tagNames;
@@ -25,12 +36,6 @@ namespace MusicBeePlugin
         private readonly TypeConverter typeConverter = TypeDescriptor.GetConverter(typeof(Bitmap));
 
         private List<List<string>> cachedTracks; //List of tracks in the order of trackUrls of list of displayedTags
-
-        private DataGridViewColumn columnTemplate;
-        private DataGridViewCell artworkCellTemplate;
-
-        private int rowHeadersWidth;
-        private int defaultColumnWidth;
 
         private bool ignoreAutoSelectTagsCheckBoxCheckedEvent;
 
@@ -55,7 +60,10 @@ namespace MusicBeePlugin
                 tagIds.Add(GetTagId(tagNames[i]));
 
 
-            var headerCellStyle = new DataGridViewCellStyle(HeaderCellStyle);
+            headerCellStyle = new DataGridViewCellStyle(HeaderCellStyle);
+
+            previewTable.ColumnHeadersDefaultCellStyle = headerCellStyle;
+            previewTable.RowHeadersDefaultCellStyle = headerCellStyle;
 
             previewTable.TopLeftHeaderCell.Style = headerCellStyle;
             previewTable.TopLeftHeaderCell.Value = CtlTags;
@@ -68,6 +76,7 @@ namespace MusicBeePlugin
             columnTemplate = previewTable.Columns[0].Clone() as DataGridViewColumn;
             artworkCellTemplate = previewTable.Columns[1].CellTemplate;
 
+            previewTable.DefaultCellStyle = new DataGridViewCellStyle(UnchangedCellStyle);
 
             if (SavedSettings.ctDisplayedTags == null)
             {
@@ -104,34 +113,34 @@ namespace MusicBeePlugin
             button_GotFocus(AcceptButton, null); //Let's mark active button
         }
 
-        private void fillTagNamesInTable()
+        private void detectArtworkRow()
         {
-            previewTable.RowCount = 1;
-            if (reallyDisplayedTags.Count > 1)
-                previewTable.RowCount = reallyDisplayedTags.Count;
-
             artworkRow = -1;
 
             for (var j = 0; j < reallyDisplayedTags.Count; j++)
             {
-                previewTable.Rows[j].HeaderCell.Value = GetTagName((MetaDataType)reallyDisplayedTags[j]);
-
                 if ((MetaDataType)reallyDisplayedTags[j] == MetaDataType.Artwork)
+                {
                     artworkRow = j;
+                    break;
+                }
             }
+        }
 
-            updateCustomScrollBars(previewTable);
+        private void fillTagNamesInTable()
+        {
+            for (var j = 0; j < reallyDisplayedTags.Count; j++)
+                previewTable.Rows[j].HeaderCell.Value = GetTagName((MetaDataType)reallyDisplayedTags[j]);
         }
 
         private bool fillTable(bool reuseCache)
         {
             if (reuseCache)
             {
-                fillTagNamesInTable();
-
+                detectArtworkRow();
                 enableQueryingOrUpdatingButtons();
 
-                this.Enable(true, null);
+                this.Enable(true, null, null);
 
 
                 if (reallyDisplayedTags.Count == 0)
@@ -146,7 +155,7 @@ namespace MusicBeePlugin
             }
             else
             {
-                this.Enable(false, null);
+                this.Enable(false, null, null);
 
                 enableDisablePreviewOptionControls(false);
                 disableQueryingOrUpdatingButtons();
@@ -172,98 +181,28 @@ namespace MusicBeePlugin
             }
         }
 
-        private void addTrackColumn(int trackNo)
-        {
-            if (checkStoppingStatus())
-                return;
-
-
-            try
-            {
-                var newColumn = columnTemplate.Clone() as DataGridViewColumn;
-                newColumn.HeaderText = (trackNo + 1).ToString();
-                newColumn.ToolTipText = trackUrls[trackNo];
-                newColumn.Width = defaultColumnWidth;
-
-                if (trackNo == 0)
-                {
-                    previewTable.Columns.Insert(0, newColumn);
-                    previewTable.ColumnCount = 1;
-                }
-                else
-                {
-                    previewTable.Columns.Add(newColumn);
-                }
-            }
-            catch //-V3163 //-V5606
-            {
-                //Generating preview is stopped. There is some .Net bug. Let's ignore. //--------
-            }
-
-
-            if ((previewTable.ColumnCount & 0x1f) == 0)
-                updateCustomScrollBars(previewTable);
-
-            SetStatusBarTextForFileOperations(CompareTracksSbText, true, trackNo, cachedTracks.Count);
-        }
-
-        private void setTrackTags(int trackNo, string[] tagValues)
-        {
-            for (var j = 0; j < reallyDisplayedTags.Count; j++)
-            {
-                if (checkStoppingStatus())
-                    return;
-
-
-                if (j != artworkRow)
-                {
-                    previewTable.Rows[j].Cells[trackNo].Value = tagValues[j];
-                }
-                else
-                {
-                    Bitmap artwork;
-
-                    if (string.IsNullOrEmpty(tagValues[j]))
-                        artwork = emptyArtwork;
-                    else
-                        artwork = typeConverter.ConvertFrom(Convert.FromBase64String(tagValues[j])) as Bitmap;
-
-
-                    previewTable.Rows[j].Cells[trackNo] = artworkCellTemplate.Clone() as DataGridViewCell;
-                    previewTable.Rows[j].Cells[trackNo].Value = artwork;
-                    previewTable.Rows[j].Cells[trackNo].Tag = tagValues[j];
-                    previewTable.Rows[j].Cells[trackNo].ReadOnly = true;
-                }
-            }
-        }
-
         private void resetPreviewData(bool noReallyDisplayedTagsOtherwiseNoPreview)
         {
-            if (previewIsGenerated)
-            {
-                previewTable.AllowUserToResizeColumns = true;
-                previewTable.AllowUserToResizeRows = true;
-            }
-            else
-            {
-                previewTable.AllowUserToResizeColumns = false;
-                previewTable.AllowUserToResizeRows = false;
-            }
+            previewTable.AllowUserToResizeColumns = false;
+            previewTable.AllowUserToResizeRows = false;
 
 
+            previewIsGenerated = false;
             backgroundTaskIsStopping = false;
             backgroundTaskIsStoppedOrCancelled = false;
+
+
+            previewTable.DataSource = null;//--------
 
             cachedTracks = null;
             buffer.Clear();
             artworkRow = -1;
 
+            this.Enable(true, null, null);
 
-            this.Enable(true, null);
 
-
-            var newColumn = columnTemplate.Clone() as DataGridViewColumn;
-            newColumn.Width = defaultColumnWidth;
+            previewTable.DataSource = null;
+            rows?.Clear();
 
             previewTable.RowCount = 1;
 
@@ -272,6 +211,9 @@ namespace MusicBeePlugin
             else
                 previewTable.Rows[0].HeaderCell.Value = CtlNoPreview;
 
+
+            var newColumn = columnTemplate.Clone() as DataGridViewColumn;
+            newColumn.Width = defaultColumnWidth;
 
             previewTable.ColumnCount = 1;
             previewTable.Columns.Insert(0, newColumn);
@@ -295,6 +237,8 @@ namespace MusicBeePlugin
 
         private void resetFormToGeneratedPreview()
         {
+            previewTable.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCells);
+
             previewTable.AllowUserToResizeColumns = true;
             previewTable.AllowUserToResizeRows = true;
 
@@ -365,13 +309,100 @@ namespace MusicBeePlugin
             return true;
         }
 
+        private void formatTrackColumns()
+        {
+            if (checkStoppingStatus())
+                return;
+
+
+            //try
+            {
+                for (int i = 0; i < previewTable.ColumnCount; i++)
+                {
+                    previewTable.Columns[i].HeaderCell.ToolTipText = trackUrls[i];
+                    previewTable.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                    previewTable.Columns[i].Width = defaultColumnWidth;
+                }
+            }
+            //catch //-V3163 //-V5606
+            //{
+            //    //Generating preview is stopped. There is some .Net bug. Let's ignore. //--------
+            //}
+        }
+
+        private void formatArtworkRow(string[] artworkTagValues)
+        {
+
+            if (artworkTagValues == null)
+                return;
+
+            if (checkStoppingStatus())
+                return;
+
+            for (int i = 0; i < cachedTracks.Count; i++)
+            {
+                //try
+                {
+                    previewTable.Rows[artworkRow].Cells[i] = artworkCellTemplate.Clone() as DataGridViewCell;
+                    previewTable.Rows[artworkRow].Cells[i].Tag = artworkTagValues[i];
+                    previewTable.Rows[artworkRow].Cells[i].ReadOnly = true;
+                }
+                //catch //-V3163 //-V5606
+                //{
+                //    //Generating preview is stopped. There is some .Net bug. Let's ignore. //--------
+                //}
+            }
+        }
+
+        private void addTagRow(int tagRowIndex, string[] tagValues)
+        {
+            List<object> row = new List<object>();
+
+            for (var j = 0; j < cachedTracks.Count; j++)
+            {
+                if (checkStoppingStatus())
+                    return;
+
+
+                if (tagRowIndex != artworkRow)
+                {
+                    row.Add(tagValues[j]);
+                }
+                else
+                {
+                    Bitmap artwork;
+
+                    if (string.IsNullOrEmpty(tagValues[j]))
+                        artwork = emptyArtwork;
+                    else
+                        artwork = typeConverter.ConvertFrom(Convert.FromBase64String(tagValues[j])) as Bitmap;
+
+
+                    row.Add(artwork);
+                }
+
+                SetStatusBarTextForFileOperations(CompareTracksSbText + CompareTracksSbTextTagNo + tagRowIndex + "/" + reallyDisplayedTags.Count, true, j, cachedTracks.Count);
+            }
+
+            rows.AddRow(row);
+        }
+
         private void previewChanges()
         {
             previewIsGenerated = true;
 
-            string[] tagValues = new string[reallyDisplayedTags.Count];
-
+            List<string> columnNames = new List<string>();
             for (var trackNo = 0; trackNo < cachedTracks.Count; trackNo++)
+                columnNames.Add((trackNo + 1).ToString());
+
+            rows = new DataGridViewBoundColumnList<DataGridViewBoundColumns>(columnNames);
+            source.DataSource = rows;
+
+            Invoke(new Action(() => { formatTrackColumns(); }));
+
+            string[] artworkTagValues = null;
+
+            for (var j = 0; j < reallyDisplayedTags.Count; j++)
             {
                 if (checkStoppingStatus())
                 {
@@ -380,9 +411,19 @@ namespace MusicBeePlugin
                 }
 
 
-                Invoke(new Action(() => { addTrackColumn(trackNo); }));
+                var tagPosition = 0;
+                for (var i = 0; i < displayedTags.Length; i++)
+                {
+                    if (displayedTags[i] == reallyDisplayedTags[j])
+                    {
+                        tagPosition = i;
+                        break;
+                    }
+                }
 
-                for (var j = 0; j < reallyDisplayedTags.Count; j++)
+                string[] tagValues = new string[cachedTracks.Count];
+
+                for (var trackNo = 0; trackNo < cachedTracks.Count; trackNo++)
                 {
                     if (checkStoppingStatus())
                     {
@@ -391,23 +432,24 @@ namespace MusicBeePlugin
                     }
 
 
-                    var tagPosition = 0;
-                    for (var i = 0; i < displayedTags.Length; i++)
-                    {
-                        if (displayedTags[i] == reallyDisplayedTags[j])
-                        {
-                            tagPosition = i;
-                            break;
-                        }
-                    }
-
-                    tagValues[j] = cachedTracks[trackNo][tagPosition];
+                    tagValues[trackNo] = cachedTracks[trackNo][tagPosition];
                 }
 
-                Invoke(new Action(() => { setTrackTags(trackNo, tagValues); }));
+                if (j == artworkRow)
+                    artworkTagValues = tagValues;
+
+                addTagRow(j, tagValues);
             }
 
-            Invoke(new Action(() => { checkStoppedStatus(); resetFormToGeneratedPreview(); }));
+            Invoke(new Action(() => {
+                if (previewTable.ColumnCount > 0)
+                    previewTable.Columns.RemoveAt(0);
+
+                source.ResetBindings(true); 
+                previewTable.DataSource = source; 
+                }));
+
+            Invoke(new Action(() => { formatArtworkRow(artworkTagValues); fillTagNamesInTable(); checkStoppedStatus(); resetFormToGeneratedPreview(); }));
         }
 
         private void getReallyDisplayedTags()
@@ -519,14 +561,15 @@ namespace MusicBeePlugin
 
         internal override void enableDisablePreviewOptionControls(bool enable, bool dontChangeDisabled = false)
         {
-            enable &= previewIsGenerated;
+            enable &= !backgroundTaskIsWorking();
 
             autoSelectTagsCheckBox.Enable(enable);
             buttonSelectTags.Enable(enable && !autoSelectTagsCheckBox.Checked);
             rememberColumnAsDefaultWidthCheckBox.Enable(enable);
-            buttonCopy.Enable(enable);
-            buttonPaste.Enable(enable);
-            buttonClear.Enable(enable);
+
+            buttonCopy.Enable(enable && previewIsGenerated);
+            buttonPaste.Enable(enable && previewIsGenerated);
+            buttonClear.Enable(enable && previewIsGenerated);
         }
 
         internal override void enableQueryingOrUpdatingButtons()
@@ -589,7 +632,7 @@ namespace MusicBeePlugin
             resetPreviewData(false);
 
 
-            this.Enable(false, null);
+            this.Enable(false, null, null);
             enableDisablePreviewOptionControls(false);
             disableQueryingOrUpdatingButtons();
 
@@ -599,27 +642,34 @@ namespace MusicBeePlugin
             foreach (int tagId in displayedTags)
                 reallyDisplayedTags.Add(tagId);
 
-            fillTagNamesInTable();
+            buttonPreview.Text = buttonPreviewName;
+            fillTable(true);
 
 
             enableQueryingOrUpdatingButtons();
             enableDisablePreviewOptionControls(true);
-            this.Enable(true, null);
+            this.Enable(true, null, null);
         }
 
         private void buttonSelectTags_Click(object sender, EventArgs e)
         {
+            bool previewIsGeneratedBackup = previewIsGenerated;
+
             var newDisplayedTags = CopyTagsToClipboard.SelectTags(TagToolsPlugin, SelectDisplayedTagsWindowTitle, SelectButtonName, displayedTags, true, true);
             if (areOldAndNewDisplayedTagsDifferent(displayedTags, newDisplayedTags))
             {
                 fillAllDisplayedTagNames(newDisplayedTags);
-                previewIsGenerated = false;
                 resetPreviewData(false);
+
+                if (previewIsGeneratedBackup)
+                    buttonPreview_Click(null, null);
             }
         }
 
         private void autoSelectTagsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
+            bool previewIsGeneratedBackup = previewIsGenerated;
+
             if (autoSelectTagsCheckBox.Checked)
             {
                 enableDisablePreviewOptionControls(false);
@@ -641,15 +691,16 @@ namespace MusicBeePlugin
                 }
 
 
-                previewIsGenerated = false;
                 resetPreviewData(false);
             }
             else
             {
                 fillAllDisplayedTagNames(displayedTagsBackup);
-                previewIsGenerated = false;
                 resetPreviewData(false);
             }
+
+            if (previewIsGeneratedBackup)
+                buttonPreview_Click(null, null);
         }
 
         private void previewTable_RowHeadersWidthChanged(object sender, EventArgs e)
@@ -816,7 +867,6 @@ namespace MusicBeePlugin
         private void CompareTracks_Shown(object sender, EventArgs e)
         {
             resetPreviewData(false);
-            Refresh();
         }
 
         private void CompareTracks_FormClosing(object sender, FormClosingEventArgs e)

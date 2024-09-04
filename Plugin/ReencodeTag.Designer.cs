@@ -19,6 +19,9 @@
             }
 
             base.Dispose(disposing);
+
+            if (disposing)
+                source?.Dispose();
         }
 
         #region Код, автоматически созданный конструктором форм Windows
@@ -39,17 +42,17 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.initialEncodingList = new System.Windows.Forms.ComboBox();
-            previewTable = new System.Windows.Forms.DataGridView();
-            this.File = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Track = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OriginalTag = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NewTag = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.previewTable = new System.Windows.Forms.DataGridView();
             this.usedEncodingList = new System.Windows.Forms.ComboBox();
             this.incorrectlyUsedEncodingLabel = new System.Windows.Forms.Label();
             this.dirtyErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.buttonSettings = new System.Windows.Forms.Button();
             this.controlsPanel = new System.Windows.Forms.Panel();
-            ((System.ComponentModel.ISupportInitialize)(previewTable)).BeginInit();
+            this.File = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Track = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OriginalTagValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NewTagValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.previewTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).BeginInit();
             this.controlsPanel.SuspendLayout();
             this.SuspendLayout();
@@ -115,48 +118,24 @@
             // 
             // previewTable
             // 
-            previewTable.AllowUserToAddRows = false;
-            previewTable.AllowUserToDeleteRows = false;
-            resources.ApplyResources(previewTable, "previewTable");
-            previewTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            previewTable.BackgroundColor = System.Drawing.SystemColors.Window;
-            previewTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            previewTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.previewTable.AllowUserToAddRows = false;
+            this.previewTable.AllowUserToDeleteRows = false;
+            resources.ApplyResources(this.previewTable, "previewTable");
+            this.previewTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.previewTable.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.previewTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.previewTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.File,
             this.Track,
-            this.OriginalTag,
-            this.NewTag});
-            previewTable.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            previewTable.MultiSelect = false;
-            previewTable.Name = "previewTable";
-            previewTable.RowHeadersVisible = false;
-            previewTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            previewTable.Tag = "#ReEncodeTag&ReEncodeTag@pinned-to-parent-x";
-            previewTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.previewTable_CellContentClick);
-            // 
-            // File
-            // 
-            this.File.FillWeight = 1F;
-            resources.ApplyResources(this.File, "File");
-            this.File.Name = "File";
-            // 
-            // Track
-            // 
-            this.Track.FillWeight = 75F;
-            resources.ApplyResources(this.Track, "Track");
-            this.Track.Name = "Track";
-            // 
-            // OriginalTag
-            // 
-            this.OriginalTag.FillWeight = 25F;
-            resources.ApplyResources(this.OriginalTag, "OriginalTag");
-            this.OriginalTag.Name = "OriginalTag";
-            // 
-            // NewTag
-            // 
-            this.NewTag.FillWeight = 25F;
-            resources.ApplyResources(this.NewTag, "NewTag");
-            this.NewTag.Name = "NewTag";
+            this.OriginalTagValue,
+            this.NewTagValue});
+            this.previewTable.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.previewTable.MultiSelect = false;
+            this.previewTable.Name = "previewTable";
+            this.previewTable.RowHeadersVisible = false;
+            this.previewTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.previewTable.Tag = "#ReEncodeTag&ReEncodeTag@pinned-to-parent-x";
+            this.previewTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.previewTable_CellContentClick);
             // 
             // usedEncodingList
             // 
@@ -205,19 +184,46 @@
             this.controlsPanel.Name = "controlsPanel";
             this.controlsPanel.Tag = "#ReEncodeTag&previewTable@pinned-to-parent-x";
             // 
+            // File
+            // 
+            this.File.DataPropertyName = "File";
+            this.File.FillWeight = 1F;
+            resources.ApplyResources(this.File, "File");
+            this.File.Name = "File";
+            // 
+            // Track
+            // 
+            this.Track.DataPropertyName = "Track";
+            this.Track.FillWeight = 75F;
+            resources.ApplyResources(this.Track, "Track");
+            this.Track.Name = "Track";
+            // 
+            // OriginalTagValue
+            // 
+            this.OriginalTagValue.DataPropertyName = "OriginalTagValue";
+            this.OriginalTagValue.FillWeight = 25F;
+            resources.ApplyResources(this.OriginalTagValue, "OriginalTagValue");
+            this.OriginalTagValue.Name = "OriginalTagValue";
+            // 
+            // NewTagValue
+            // 
+            this.NewTagValue.DataPropertyName = "NewTagValue";
+            this.NewTagValue.FillWeight = 25F;
+            resources.ApplyResources(this.NewTagValue, "NewTagValue");
+            this.NewTagValue.Name = "NewTagValue";
+            // 
             // ReEncodeTag
             // 
             this.AcceptButton = this.buttonPreview;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.buttonClose;
-            this.Controls.Add(previewTable);
+            this.Controls.Add(this.previewTable);
             this.Controls.Add(this.controlsPanel);
             this.DoubleBuffered = true;
             this.Name = "ReEncodeTag";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ReEncodeTagPlugin_FormClosing);
             this.Load += new System.EventHandler(this.ReEncodeTagPlugin_Load);
-            ((System.ComponentModel.ISupportInitialize)(previewTable)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.previewTable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).EndInit();
             this.controlsPanel.ResumeLayout(false);
             this.controlsPanel.PerformLayout();
@@ -239,11 +245,11 @@
         private System.Windows.Forms.ComboBox usedEncodingList;
         private System.Windows.Forms.Label incorrectlyUsedEncodingLabel;
         private System.Windows.Forms.ErrorProvider dirtyErrorProvider;
-        private System.Windows.Forms.DataGridViewTextBoxColumn File;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Track;
-        private System.Windows.Forms.DataGridViewTextBoxColumn OriginalTag;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NewTag;
         private System.Windows.Forms.Panel controlsPanel;
         private System.Windows.Forms.Button buttonSettings;
+        private System.Windows.Forms.DataGridViewTextBoxColumn File;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Track;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OriginalTagValue;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NewTagValue;
     }
 }

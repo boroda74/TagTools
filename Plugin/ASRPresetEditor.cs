@@ -78,7 +78,7 @@ namespace MusicBeePlugin
         protected override void initializeForm()
         {
             base.initializeForm();
-            Enable(false, null);
+            Enable(false, null, null);
 
 
             replacedTag5ListCustom = namesComboBoxes["replacedTag5List"];
@@ -708,7 +708,7 @@ namespace MusicBeePlugin
             searchedTag5ListCustom.Enable(true);
             replacedTag5ListCustom.Enable(true);
 
-            Enable(true, null);
+            Enable(true, null,  null);
             this.Text = FormTitleBarText;
 
             FormTitleBarText = null;

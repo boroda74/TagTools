@@ -330,7 +330,6 @@
             this.AcceptButton = this.buttonOK;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.buttonClose;
             this.Controls.Add(this.emptyLabel);
             this.Controls.Add(this.trackIdTagList);
             this.Controls.Add(this.storeTrackIdsInCustomTagCheckBoxLabel);

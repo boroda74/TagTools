@@ -90,6 +90,7 @@ namespace MusicBeePlugin
         #region Members
         internal static bool DeveloperMode;
         private static bool Uninstalled;
+        internal static volatile bool IsPluginInitialized = false;
 
         internal static MusicBeeApiInterface MbApiInterface;
         private static readonly PluginInfo About = new PluginInfo();
@@ -123,6 +124,7 @@ namespace MusicBeePlugin
         internal static Color ButtonForeColor;
         internal static Color ButtonBackColor;
 
+        internal static Color ButtonMouseOverForeColor;
         internal static Color ButtonMouseOverBackColor;
 
         internal static Color ButtonDisabledForeColor;
@@ -385,7 +387,7 @@ namespace MusicBeePlugin
         internal const char RemixerId = '\u0004';
         internal const char EndOfStringId = '\u0008';
 
-        internal const string TotalsString = "\u0001";
+        internal const string TotalsString = "\u000f";
 
         internal static string LastCommandSbText;
         private static bool LastPreview;
@@ -456,10 +458,10 @@ namespace MusicBeePlugin
         internal static DataGridViewCellStyle HeaderCellStyle = new DataGridViewHeaderCell().Style;
 
         internal static DataGridViewCellStyle UnchangedCellStyle = new DataGridViewCellStyle();
-        internal static DataGridViewCellStyle ChangedCellStyle = new DataGridViewCellStyle();
-        internal static DataGridViewCellStyle DimmedCellStyle = new DataGridViewCellStyle();
-        internal static DataGridViewCellStyle PreservedTagCellStyle = new DataGridViewCellStyle();
-        internal static DataGridViewCellStyle PreservedTagValueCellStyle = new DataGridViewCellStyle();
+        internal static DataGridViewCellStyle ChangedCellStyle;
+        internal static DataGridViewCellStyle DimmedCellStyle;
+        internal static DataGridViewCellStyle PreservedTagCellStyle;
+        internal static DataGridViewCellStyle PreservedTagValueCellStyle;
         #endregion
 
         #region Settings
@@ -691,6 +693,8 @@ namespace MusicBeePlugin
         #region Localized strings
         //Localizable strings
 
+        internal static string PluginInitializationIsNotCompleted;
+
         //Supported exported file formats
         internal static string ExportedFormats;
         internal static string ExportedTrackList;
@@ -775,15 +779,16 @@ namespace MusicBeePlugin
         internal static string ApplyingLrPresetSbText;
         internal static string AsrSbText;
         internal static string MsrSbText;
+        internal static string CarSbText;
 
         internal static string LibraryReportsSbText;
         internal static string LibraryReportsGeneratingPreviewSbText;
 
-        internal static string CarSbText;
-
         internal static string AutoRateSbText;
         internal static string AutoRateSbTextCalculatingThresholds;
         internal static string AutoRateSbTextCalculatingActualPercentagesCalculatingThresholds;
+
+        internal static string CompareTracksSbTextTagNo;
 
         internal static string TagHistorySbText;
         internal static string TagHistorySbTextFillingLibraryTagValues;
@@ -1312,8 +1317,8 @@ namespace MusicBeePlugin
 
             internal int compare(ConvertStringsResult comparedResult) //-1: less than comparedResult, 0: equal to comparedResult, +1: greater than comparedResult
             {
-                var value = getResult();
-                var comparedValue = comparedResult.getResult();
+                var value = getResult(false);
+                var comparedValue = comparedResult.getResult(false);
 
                 if (double.IsNegativeInfinity(value) || double.IsNegativeInfinity(comparedValue)) //Let's compare as strings
                 {
@@ -1330,23 +1335,23 @@ namespace MusicBeePlugin
                 }
             }
 
-            internal double getResult() //Returns double for any numeric (number/duration/date-time) result or NegativeInfinity for any not numeric one
+            internal double getResult(bool processedAverageResults) //Returns double for any numeric (number/duration/date-time) result or NegativeInfinity for any not numeric one
             {
-                if (resultType == ResultType.AverageCount && items1.Count != 0) //It's "Average count" function
+                if (resultType == ResultType.ParsingError) //Parsing error. Must never happen
+                {
+                    return double.PositiveInfinity; //Exception!
+                }
+                else if (resultType >= ResultType.AutoDouble && resultType <= ResultType.ItemCount && processedAverageResults) //It's "processed" "Average count" function result
+                {
+                    return resultD;
+                }
+                else if (resultType == ResultType.AverageCount && items1.Count != 0) //It's "Average count" function
                 {
                     return (double)items1.Count / items.Count;
                 }
-                else if (resultType == ResultType.AverageCount && items.Count == 0 && items1.Count == 0) //It's "Average count" function
+                else if (resultType == ResultType.AverageCount && items.Count == 0 && items1.Count == 0)
                 {
                     return 0;
-                }
-                //Must never happen? //-----
-                else if ((resultType >= ResultType.UnknownOrString && resultType < ResultType.ParsingError) || resultType == ResultType.UseOtherResults)
-                {
-                    if (items.Count == 0)
-                        return double.NegativeInfinity;
-                    else //It's "average" function
-                        return resultD / items.Count;
                 }
                 else if (resultType == ResultType.ItemCount) //Items count
                 {
@@ -1380,6 +1385,14 @@ namespace MusicBeePlugin
                     else //It's "average" function
                         return resultD / items.Count;
                 }
+                //Must never happen? //-----
+                else if ((resultType >= ResultType.UnknownOrString && resultType < ResultType.ParsingError) || resultType == ResultType.UseOtherResults)
+                {
+                    if (items.Count == 0)
+                        return double.NegativeInfinity; //Treat as string
+                    else //It's "average" function
+                        return resultD / items.Count;
+                }
                 //(Auto)double, year or date-time (milliseconds from 1900-01-01), timespan (milliseconds)
                 //else if (resultType >= ResultType.AutoDouble && resultType < ResultType.UnknownOrString)
                 //{
@@ -1389,14 +1402,8 @@ namespace MusicBeePlugin
 
                 //    return value;
                 //}
-                else if (resultType == ResultType.ParsingError) //Parsing error. Must never happen
-                {
-                    return double.PositiveInfinity; //Exception!
-                }
-                else
-                {
-                    return double.NegativeInfinity; //Treat as string
-                }
+
+                return double.NegativeInfinity; //Exception!
             }
 
             internal string getFormattedResult(int operation, string mulDivFactorRepr, string precisionDigitsRepr, string appendedText)
@@ -1411,7 +1418,7 @@ namespace MusicBeePlugin
                 }
 
 
-                var result = getResult();
+                var result = getResult(false);
 
                 if (double.IsNegativeInfinity(result))
                 {
@@ -1516,6 +1523,10 @@ namespace MusicBeePlugin
 
         internal static ConvertStringsResult ConvertStrings(string arg, ResultType resultType, DataType dataType, bool replacements = false)
         {
+            if (resultType >= ResultType.AutoDouble && resultType <= ResultType.ItemCount && dataType == DataType.String) //It's either number or date/time/duration. Let's right-align the column.
+                dataType = DataType.Number;
+
+
             var result = new ConvertStringsResult(resultType, dataType)
             {
                 resultS = arg
@@ -1765,7 +1776,7 @@ namespace MusicBeePlugin
         }
 
         //Returns: +1 - string1 > string2, 0 - string1 = string2, -1 - string1 < string2
-        internal static int CompareStrings(string string1, string string2, ResultType type = ResultType.UseOtherResults, DataType datatype = DataType.String)
+        internal static int CompareStrings(string string1, string string2, ResultType type = ResultType.UseOtherResults, DataType datatype = DataType.String, bool processedAverageResults = false)
         {
             ConvertStringsResult result1 = default;
             ConvertStringsResult result2 = default;
@@ -1775,58 +1786,51 @@ namespace MusicBeePlugin
                 result1 = ConvertStrings(string1, type, datatype);
                 result2 = ConvertStrings(string2, type, datatype);
 
-                if (result1.resultType > result2.resultType)
-                    type = result1.resultType;
-                else
-                    type = result2.resultType;
+                if (type == ResultType.UseOtherResults)
+                {
+                    if (result1.resultType > result2.resultType)
+                        type = result1.resultType;
+                    else
+                        type = result2.resultType;
+                }
             }
 
-            switch (type)
-            {
-                case ResultType.ItemCount:
+            double number1 = result1.getResult(processedAverageResults);
+            double number2 = result2.getResult(processedAverageResults);
 
-                    if (result1.items.Count > result2.items.Count)
-                        return 1;
-                    else if (result1.items.Count < result2.items.Count)
-                        return -1;
-                    else
-                        return 0;
-
-                case ResultType.AutoDouble:
-                case ResultType.Double:
-                case ResultType.TimeSpan:
-                case ResultType.DateTime:
-
-                    if (result1.resultD > result2.resultD)
-                        return 1;
-                    else if (result1.resultD < result2.resultD)
-                        return -1;
-                    else
-                        return 0;
-
-                case ResultType.ParsingError:
-
-                    return -1; //Let's sort parsing errors 1st for ascending order
-
-                default:
-
-                    return string.Compare(string1, string2);
-            }
+            if (number1 == double.PositiveInfinity || number2 == double.PositiveInfinity) //Parsing errors
+                return -1; //Let's sort parsing errors to the end
+            else if (number1 == double.NegativeInfinity || number2 == double.NegativeInfinity) //Strings, no parsing errors
+                return string.Compare(string1, string2);
+            else if (number1 > number2)
+                return 1;
+            else if (number1 < number2)
+                return -1;
+            else
+                return 0;
         }
 
-        internal class DataGridViewCellComparer : System.Collections.IComparer
+        internal class DataGridViewBoundColumnsComparer : System.Collections.IComparer
         {
-            internal ResultType[] resultTypes = null;
-            internal int comparedColumnIndex = -1;
+            internal ResultType[] ResultTypes = null;
+            internal int ComparedColumnIndex = -1;
+            internal bool Ascending = true;
 
             public int Compare(object x, object y)
             {
-                if (resultTypes == null)
+                if (ResultTypes == null)
                     throw new Exception("Undefined table sorting type!");
 
-                if (comparedColumnIndex != -1)
+                if (ComparedColumnIndex != -1)
                 {
-                    var comparison = CompareStrings((x as DataGridViewRow).Cells[comparedColumnIndex].Value as string, (y as DataGridViewRow).Cells[comparedColumnIndex].Value as string);
+                    var comparison = CompareStrings((x as DataGridViewBoundColumns).Columns[ComparedColumnIndex] as string, 
+                        (y as DataGridViewBoundColumns).Columns[ComparedColumnIndex] as string, 
+                        ResultTypes[ComparedColumnIndex], DataType.String , true);
+
+
+                    if (!Ascending)
+                        comparison = -comparison;
+
                     if (comparison > 0)
                         return 1;
                     else if (comparison < 0)
@@ -1840,7 +1844,6 @@ namespace MusicBeePlugin
                 }
             }
         }
-
 
         internal class StringArrayComparer : IComparer<string[]>
         {
@@ -1863,43 +1866,6 @@ namespace MusicBeePlugin
 
 
                         var comparation = Comparer<string>.Default.Compare(x[i], y[i]);
-
-                        if (comparation > 0)
-                            return 1;
-                        else if (comparation < 0)
-                            return -1;
-                    }
-
-                    return 0;
-                }
-                else
-                {
-                    return 0;
-                }
-            }
-        }
-
-        internal class TextTableComparer : IComparer<string[]>
-        {
-            internal int tagCounterIndex = -1;
-
-            public int Compare(string[] x, string[] y)
-            {
-                if (tagCounterIndex != -1)
-                {
-                    for (var i = 0; i < tagCounterIndex; i++)
-                    {
-                        if (x == null && y == null)
-                            return 0;
-                        else if (x == null)
-                            return -1;
-                        else if (y == null)
-                            return 1;
-                        else if (x[i] == y[i])
-                            return 0;
-
-
-                        var comparation = CompareStrings(x[i], y[i], ResultType.Double, DataType.Number);
 
                         if (comparation > 0)
                             return 1;
@@ -3509,6 +3475,11 @@ namespace MusicBeePlugin
 
             MbApiInterface = new MusicBeeApiInterface();
             MbApiInterface.Initialise(apiInterfacePtr);
+
+            //Better to be assigned as fast as possible
+            MissingArtwork = Resources.missing_artwork;
+            DefaultArtwork = MissingArtwork;
+            ArtworkTotals = Resources.multiple_artworks_accent;
             #endregion
 
             #region English localization
@@ -3596,12 +3567,13 @@ namespace MusicBeePlugin
             ApplyingLrPresetSbText = "Applying LR preset";
             AsrSbText = "Advanced searching and replacing";
             MsrSbText = "Multiple searching and replacing";
-
             CarSbText = "Calculating average album rating";
 
             AutoRateSbText = "Auto rating tracks";
             AutoRateSbTextCalculatingThresholds = ": calculating thresholds for the track ";
             AutoRateSbTextCalculatingActualPercentagesCalculatingThresholds = ": calculating actual percentages & thresholds...";
+
+            CompareTracksSbTextTagNo = ": Tag #";
 
             TagHistorySbText = "Tag history";
             TagHistorySbTextFillingLibraryTagValues = ": filling library tag values for the track ";
@@ -3697,6 +3669,8 @@ namespace MusicBeePlugin
             AllTagsPseudoTagName = "<ALL TAGS>";
 
             GenericTagSetName = "Tag set";
+
+            PluginInitializationIsNotCompleted = "Plugin initialization is not completed. Please wait a second.";
 
             //Supported exported file formats
             ExportedFormats = "HTML Document (grouped by albums)|*.htm|HTML Document|*.htm|Simple HTML table|*.htm|Tab delimited text|*.txt|M3U Playlist|*.m3u|" +
@@ -4340,6 +4314,8 @@ namespace MusicBeePlugin
                 AutoRateSbTextCalculatingThresholds = ": расчет пороговых значений";
                 AutoRateSbTextCalculatingActualPercentagesCalculatingThresholds = ": расчет действительных процентов треков для установки рейтингов и пороговых значений...";
 
+                CompareTracksSbTextTagNo = ": Тег №";
+
                 TagHistorySbText = "История тегов";
                 TagHistorySbTextFillingLibraryTagValues = ": заполнение таблицы предпросмотра значениями тегов библиотеки для трека ";
                 TagHistorySbTextEnumeratingBackups = ":  поиск архивов";
@@ -4399,6 +4375,7 @@ namespace MusicBeePlugin
 
                 SequenceNumberName = "№ п/п";
 
+                PluginInitializationIsNotCompleted = "Инициализация плагина не завершена. Подождите секунду.";
 
                 //Supported exported file formats
                 ExportedFormats = "Документ HTML (по альбомам)|*.htm|Документ HTML|*.htm|Простая таблица HTML|*.htm|Текст, разделенный табуляциями|*.txt|Плейлист M3U|*.m3u|" +
@@ -5114,7 +5091,6 @@ namespace MusicBeePlugin
             if (!SavedSettings.dontShowContextMenu)
                 TagToolsContextSubmenu = MbApiInterface.MB_AddMenuItem("context.Main/" + PluginMenuGroupName, null, null) as ToolStripMenuItem;
 
-
             About.PluginInfoVersion = PluginInfoVersion;
             About.Name = PluginName;
             About.Description = PluginDescription;
@@ -5176,6 +5152,8 @@ namespace MusicBeePlugin
         //MusicBee is closing the plugin (plugin is being disabled by user or MusicBee is shutting down)
         public void Close(PluginCloseReason reason)
         {
+            IsPluginInitialized = false;
+
             PeriodicUiRefreshTimer?.Dispose();
             PeriodicUiRefreshTimer = null;
 
@@ -5309,10 +5287,6 @@ namespace MusicBeePlugin
                 case NotificationType.PluginStartup:
                     //perform startup initialization
 
-                    MissingArtwork = Resources.missing_artwork;
-                    DefaultArtwork = MissingArtwork;
-
-
                     //Before LR init
                     LrCurrentLibraryPathHash = GetStringHash(GetCurrentLibraryPath());
 
@@ -5354,6 +5328,8 @@ namespace MusicBeePlugin
 
                     //Let's refresh UI
                     RefreshPanels(true, true, true);
+
+                    IsPluginInitialized = true;
 
                     break;
                 case NotificationType.TrackChanged:
@@ -5578,27 +5554,37 @@ namespace MusicBeePlugin
             const float DeepDimmedWeight = 0.32f;
             const float ScrollBarsForeWeight = 0.75f; //---
 
-            InputPanelForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
-            InputPanelBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
-            InputPanelBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBorder));
+            InputPanelForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, 
+                ElementComponent.ComponentForeground));
+            InputPanelBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, 
+                ElementComponent.ComponentBackground));
+            InputPanelBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, 
+                ElementComponent.ComponentBorder));
 
             if (!SavedSettings.dontUseSkinColors)
             {
-                InputControlForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
-                InputControlBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
-                InputControlBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, ElementComponent.ComponentBorder));
+                InputControlForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, 
+                    ElementComponent.ComponentForeground));
+                InputControlBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, 
+                    ElementComponent.ComponentBackground));
+                InputControlBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, 
+                    ElementComponent.ComponentBorder));
                 InputControlFocusedBorderColor = GetWeightedColor(InputControlBorderColor, InputControlForeColor);
 
 
-                AccentColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
+                AccentColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, 
+                    ElementComponent.ComponentForeground));
                 AccentSelectedColor = NoColor; //---
 
                 DimmedAccentColor = GetWeightedColor(AccentColor, InputPanelBackColor, DimmedWeight);
                 DeepDimmedAccentColor = GetWeightedColor(AccentColor, InputPanelBackColor, DeepDimmedWeight);
 
-                FormForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
-                FormBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
-                FormBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBorder));
+                FormForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, 
+                    ElementComponent.ComponentForeground));
+                FormBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, 
+                    ElementComponent.ComponentBackground));
+                FormBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, 
+                    ElementComponent.ComponentBorder));
 
                 InputControlDimmedForeColor = GetWeightedColor(InputControlForeColor, FormBackColor, DimmedWeight);
                 InputControlDimmedBackColor = GetWeightedColor(InputControlBackColor, FormBackColor, 0.25f); //---
@@ -5618,8 +5604,32 @@ namespace MusicBeePlugin
                 ButtonBackColor = buttonBackColor;
                 ButtonDisabledBackColor = ButtonBackColor;
 
-                const float MouseOverButtonBackColor = 0.535f;
-                ButtonMouseOverBackColor = GetWeightedColor(ButtonBackColor, FormBackColor, MouseOverButtonBackColor);
+                //START: Workaround to get color similar to button mouseover one (similarity depend on the skin) //-----
+                if (Plugin.TagToolsContextSubmenu == null)
+                    return;
+
+                TagToolsContextSubmenu.DropDown.Items.Clear();
+
+                var buttonMouseOverColorsMenuItem = AddMenuItem(TagToolsContextSubmenu, "■", null, null);
+                TagToolsContextSubmenu.DropDown.Items[0].Font = new Font("Lucida Console", 6f, FontStyle.Regular, GraphicsUnit.Millimeter);
+                TagToolsContextSubmenu.DropDown.Items[0].Select();
+                //colorTestContextSubmenu.DropDown.Show();
+                Bitmap test = new Bitmap(88, 28, PixelFormat.Format24bppRgb);
+                TagToolsContextSubmenu.DropDown.DrawToBitmap(test, new Rectangle(0, 0, 88, 28));
+
+                ButtonMouseOverForeColor = test.GetPixel((int)(40 * DpiScaling), (int)(12 * DpiScaling));
+                ButtonMouseOverBackColor = test.GetPixel(5, 5);
+
+                //colorTestContextSubmenu.DropDown.Hide();
+                TagToolsContextSubmenu.DropDown.Items.Clear();
+                buttonMouseOverColorsMenuItem.Dispose();
+                //END: Workaround to get color similar to button mouseover one (similarity depend on the skin)
+
+
+                //START: Old workaround (much worse than above) //-----
+                //const float MouseOverButtonBackColor = 0.535f;
+                //ButtonMouseOverBackColor = GetWeightedColor(ButtonBackColor, FormBackColor, MouseOverButtonBackColor);
+                //END: Old workaround (much worse than above) //-----
 
                 //-----
                 //float avgForeBrightness = GetAverageBrightness(_buttonBackColor);
@@ -6009,20 +6019,27 @@ namespace MusicBeePlugin
             Window = ScaleBitmap(Resources.window, PixelFormat.Format32bppArgb, InterpolationMode.HighQualityBicubic, pictogramSize, pictogramSize);
 
 
-            HeaderCellStyle.Alignment = DataGridViewContentAlignment.TopLeft;
+            UnchangedCellStyle.Alignment = DataGridViewContentAlignment.TopLeft;
 
             //DATAGRIDVIEW COLOR DEFINITIONS
             if (!SavedSettings.dontUseSkinColors)
             {
                 HeaderCellStyle.ForeColor = ButtonForeColor;
                 HeaderCellStyle.BackColor = DeepDimmedAccentColor;
+
                 HeaderCellStyle.SelectionForeColor = ButtonForeColor;
                 HeaderCellStyle.SelectionBackColor = DimmedAccentColor;
 
+                var selectionForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateModified,
+                    ElementComponent.ComponentForeground));
+                var selectionBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateModified,
+                    ElementComponent.ComponentBackground));
+
                 UnchangedCellStyle.ForeColor = InputControlForeColor;
                 UnchangedCellStyle.BackColor = InputControlBackColor;
-                UnchangedCellStyle.SelectionForeColor = ButtonForeColor;
-                UnchangedCellStyle.SelectionBackColor = ButtonBackColor;
+                UnchangedCellStyle.SelectionForeColor = selectionForeColor;
+                UnchangedCellStyle.SelectionBackColor = selectionBackColor;
+                UnchangedCellStyle.Alignment = DataGridViewContentAlignment.TopLeft;
 
                 if (GetBrightnessDifference(UnchangedCellStyle.SelectionBackColor, UnchangedCellStyle.BackColor) < 0.25f)
                     UnchangedCellStyle.SelectionBackColor = DeepDimmedAccentColor;
@@ -6044,6 +6061,12 @@ namespace MusicBeePlugin
             var ChangedForeColor = Color.FromKnownColor(KnownColor.Red);
             var PreservedTagsForeColor = Color.FromKnownColor(KnownColor.Blue);
             var PreservedTagValuesForeColor = Color.FromKnownColor(KnownColor.Green);
+
+
+            ChangedCellStyle = new DataGridViewCellStyle(UnchangedCellStyle);
+            DimmedCellStyle = new DataGridViewCellStyle(UnchangedCellStyle);
+            PreservedTagCellStyle = new DataGridViewCellStyle(UnchangedCellStyle);
+            PreservedTagValueCellStyle = new DataGridViewCellStyle(UnchangedCellStyle);
 
 
             //CHANGED STYLE
@@ -6517,7 +6540,6 @@ namespace MusicBeePlugin
         {
             if (TagToolsContextSubmenu == null)
                 return;
-
 
             TagToolsContextSubmenu.DropDown.Items.Clear();
 

@@ -195,22 +195,22 @@
   <data name="Track.MinimumWidth" type="System.Int32, mscorlib">
     <value>50</value>
   </data>
-  <metadata name="OriginalTag.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="OriginalTagValue.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="OriginalTag.HeaderText" xml:space="preserve">
+  <data name="OriginalTagValue.HeaderText" xml:space="preserve">
     <value>Original tag value</value>
   </data>
-  <data name="OriginalTag.MinimumWidth" type="System.Int32, mscorlib">
+  <data name="OriginalTagValue.MinimumWidth" type="System.Int32, mscorlib">
     <value>25</value>
   </data>
-  <metadata name="NewTag.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="NewTagValue.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="NewTag.HeaderText" xml:space="preserve">
+  <data name="NewTagValue.HeaderText" xml:space="preserve">
     <value>New tag value</value>
   </data>
-  <data name="NewTag.MinimumWidth" type="System.Int32, mscorlib">
+  <data name="NewTagValue.MinimumWidth" type="System.Int32, mscorlib">
     <value>25</value>
   </data>
   <data name="previewTable.Location" type="System.Drawing.Point, System.Drawing">
@@ -549,6 +549,12 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Reencode Tag</value>
   </data>
+  <data name="&gt;&gt;dirtyErrorProvider.Name" xml:space="preserve">
+    <value>dirtyErrorProvider</value>
+  </data>
+  <data name="&gt;&gt;dirtyErrorProvider.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ErrorProvider, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;File.Name" xml:space="preserve">
     <value>File</value>
   </data>
@@ -561,29 +567,23 @@
   <data name="&gt;&gt;Track.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;OriginalTag.Name" xml:space="preserve">
-    <value>OriginalTag</value>
+  <data name="&gt;&gt;OriginalTagValue.Name" xml:space="preserve">
+    <value>OriginalTagValue</value>
   </data>
-  <data name="&gt;&gt;OriginalTag.Type" xml:space="preserve">
+  <data name="&gt;&gt;OriginalTagValue.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;NewTag.Name" xml:space="preserve">
-    <value>NewTag</value>
+  <data name="&gt;&gt;NewTagValue.Name" xml:space="preserve">
+    <value>NewTagValue</value>
   </data>
-  <data name="&gt;&gt;NewTag.Type" xml:space="preserve">
+  <data name="&gt;&gt;NewTagValue.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dirtyErrorProvider.Name" xml:space="preserve">
-    <value>dirtyErrorProvider</value>
-  </data>
-  <data name="&gt;&gt;dirtyErrorProvider.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ErrorProvider, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>ReEncodeTag</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=8.1.8884.1469, Culture=neutral, PublicKeyToken=null</value>
+    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=9.0.9009.21104, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="dirtyErrorProvider.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

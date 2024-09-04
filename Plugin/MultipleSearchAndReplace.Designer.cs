@@ -24,6 +24,9 @@
             }
             
             base.Dispose(disposing);
+
+            if (disposing)
+                source?.Dispose();
         }
 
         #region Код, автоматически созданный конструктором форм Windows
@@ -44,10 +47,6 @@
             this.ReplaceWith = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Position = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.previewTable = new System.Windows.Forms.DataGridView();
-            this.Track = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OriginalTag = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NewTag = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FileColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dirtyErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
@@ -83,6 +82,10 @@
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Track = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OriginalTagValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NewTagValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.File = new System.Windows.Forms.DataGridViewTextBoxColumn();
 
             //MusicBee
             this.templateNameTextBox = ControlsTools.CreateMusicBeeTextBox();
@@ -189,43 +192,14 @@
             resources.ApplyResources(this.previewTable, "previewTable");
             this.previewTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Track,
-            this.OriginalTag,
-            this.NewTag,
-            this.FileColumn});
+            this.OriginalTagValue,
+            this.NewTagValue,
+            this.File});
             this.dirtyErrorProvider.SetIconAlignment(this.previewTable, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("previewTable.IconAlignment"))));
             this.previewTable.MultiSelect = false;
             this.previewTable.Name = "previewTable";
             this.previewTable.RowHeadersVisible = false;
             this.previewTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            // 
-            // Track
-            // 
-            this.Track.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Track.FillWeight = 40F;
-            resources.ApplyResources(this.Track, "Track");
-            this.Track.Name = "Track";
-            this.Track.ReadOnly = true;
-            // 
-            // OriginalTag
-            // 
-            this.OriginalTag.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.OriginalTag.FillWeight = 25F;
-            resources.ApplyResources(this.OriginalTag, "OriginalTag");
-            this.OriginalTag.Name = "OriginalTag";
-            this.OriginalTag.ReadOnly = true;
-            // 
-            // NewTag
-            // 
-            this.NewTag.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.NewTag.FillWeight = 25F;
-            resources.ApplyResources(this.NewTag, "NewTag");
-            this.NewTag.Name = "NewTag";
-            // 
-            // FileColumn
-            // 
-            this.FileColumn.FillWeight = 1F;
-            resources.ApplyResources(this.FileColumn, "FileColumn");
-            this.FileColumn.Name = "FileColumn";
             // 
             // dirtyErrorProvider
             // 
@@ -536,13 +510,44 @@
             resources.ApplyResources(this.dataGridViewTextBoxColumn7, "dataGridViewTextBoxColumn7");
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             // 
+            // Track
+            // 
+            this.Track.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Track.DataPropertyName = "Track";
+            this.Track.FillWeight = 40F;
+            resources.ApplyResources(this.Track, "Track");
+            this.Track.Name = "Track";
+            this.Track.ReadOnly = true;
+            // 
+            // OriginalTagValue
+            // 
+            this.OriginalTagValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.OriginalTagValue.DataPropertyName = "OriginalTagValue";
+            this.OriginalTagValue.FillWeight = 25F;
+            resources.ApplyResources(this.OriginalTagValue, "OriginalTagValue");
+            this.OriginalTagValue.Name = "OriginalTagValue";
+            this.OriginalTagValue.ReadOnly = true;
+            // 
+            // NewTagValue
+            // 
+            this.NewTagValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.NewTagValue.DataPropertyName = "NewTagValue";
+            this.NewTagValue.FillWeight = 25F;
+            resources.ApplyResources(this.NewTagValue, "NewTagValue");
+            this.NewTagValue.Name = "NewTagValue";
+            // 
+            // File
+            // 
+            this.File.DataPropertyName = "File";
+            this.File.FillWeight = 1F;
+            resources.ApplyResources(this.File, "File");
+            this.File.Name = "File";
+            // 
             // MultipleSearchAndReplace
             // 
             this.AcceptButton = this.buttonPreview;
             resources.ApplyResources(this, "$this");
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.buttonClose;
-            this.Controls.Add(this.splitContainer1);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;            this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.controlsPanel);
             this.DoubleBuffered = true;
             this.HelpButton = true;
@@ -600,10 +605,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Track;
-        private System.Windows.Forms.DataGridViewTextBoxColumn OriginalTag;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NewTag;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FileColumn;
         private System.Windows.Forms.Label smartOperationCheckBoxLabel;
         private System.Windows.Forms.CheckBox smartOperationCheckBox;
         private System.Windows.Forms.DataGridViewCheckBoxColumn RegEx;
@@ -611,5 +612,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn SearchFor;
         private System.Windows.Forms.DataGridViewTextBoxColumn ReplaceWith;
         private System.Windows.Forms.DataGridViewTextBoxColumn Position;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Track;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OriginalTagValue;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NewTagValue;
+        private System.Windows.Forms.DataGridViewTextBoxColumn File;
     }
 }

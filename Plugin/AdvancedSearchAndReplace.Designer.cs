@@ -42,6 +42,8 @@ namespace MusicBeePlugin
                 if (allTagsWarningTimer != null)
                     allTagsWarningTimer.Dispose();
 
+                source?.Dispose();
+
                 warning?.Dispose();
                 warningWide?.Dispose();
                 checkedState?.Dispose();
@@ -742,7 +744,6 @@ namespace MusicBeePlugin
             this.previewTable.AllowUserToDeleteRows = false;
             resources.ApplyResources(this.previewTable, "previewTable");
             this.previewTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.previewTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.previewTable.BackgroundColor = System.Drawing.SystemColors.Window;
             this.previewTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.previewTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -1099,12 +1100,14 @@ namespace MusicBeePlugin
             // 
             // PresetGuid
             // 
+            this.PresetGuid.DataPropertyName = "PresetGuid";
             this.PresetGuid.FillWeight = 1F;
             resources.ApplyResources(this.PresetGuid, "PresetGuid");
             this.PresetGuid.Name = "PresetGuid";
             // 
             // File
             // 
+            this.File.DataPropertyName = "File";
             this.File.FillWeight = 1F;
             resources.ApplyResources(this.File, "File");
             this.File.Name = "File";
@@ -1112,96 +1115,112 @@ namespace MusicBeePlugin
             // Track
             // 
             this.Track.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Track.DataPropertyName = "Track";
             this.Track.FillWeight = 60F;
             resources.ApplyResources(this.Track, "Track");
             this.Track.Name = "Track";
             // 
             // TagName1
             // 
+            this.TagName1.DataPropertyName = "TagName1";
             this.TagName1.FillWeight = 24.52376F;
             resources.ApplyResources(this.TagName1, "TagName1");
             this.TagName1.Name = "TagName1";
             // 
             // OriginalTag1
             // 
+            this.OriginalTag1.DataPropertyName = "OriginalTag1";
             this.OriginalTag1.FillWeight = 24.52376F;
             resources.ApplyResources(this.OriginalTag1, "OriginalTag1");
             this.OriginalTag1.Name = "OriginalTag1";
             // 
             // NewTag1
             // 
+            this.NewTag1.DataPropertyName = "NewTag1";
             this.NewTag1.FillWeight = 24.52376F;
             resources.ApplyResources(this.NewTag1, "NewTag1");
             this.NewTag1.Name = "NewTag1";
             // 
             // TagName2
             // 
+            this.TagName2.DataPropertyName = "TagName2";
             this.TagName2.FillWeight = 24.52376F;
             resources.ApplyResources(this.TagName2, "TagName2");
             this.TagName2.Name = "TagName2";
             // 
             // OriginalTag2
             // 
+            this.OriginalTag2.DataPropertyName = "OriginalTag2";
             this.OriginalTag2.FillWeight = 24.52376F;
             resources.ApplyResources(this.OriginalTag2, "OriginalTag2");
             this.OriginalTag2.Name = "OriginalTag2";
             // 
             // NewTag2
             // 
+            this.NewTag2.DataPropertyName = "NewTag2";
             this.NewTag2.FillWeight = 24.52376F;
             resources.ApplyResources(this.NewTag2, "NewTag2");
             this.NewTag2.Name = "NewTag2";
             // 
             // TagName3
             // 
+            this.TagName3.DataPropertyName = "TagName3";
             this.TagName3.FillWeight = 24.52376F;
             resources.ApplyResources(this.TagName3, "TagName3");
             this.TagName3.Name = "TagName3";
             // 
             // OriginalTag3
             // 
+            this.OriginalTag3.DataPropertyName = "OriginalTag3";
             this.OriginalTag3.FillWeight = 24.52376F;
             resources.ApplyResources(this.OriginalTag3, "OriginalTag3");
             this.OriginalTag3.Name = "OriginalTag3";
             // 
             // NewTag3
             // 
+            this.NewTag3.DataPropertyName = "NewTag3";
             this.NewTag3.FillWeight = 24.52376F;
             resources.ApplyResources(this.NewTag3, "NewTag3");
             this.NewTag3.Name = "NewTag3";
             // 
             // TagName4
             // 
+            this.TagName4.DataPropertyName = "TagName4";
             this.TagName4.FillWeight = 24.52376F;
             resources.ApplyResources(this.TagName4, "TagName4");
             this.TagName4.Name = "TagName4";
             // 
             // OriginalTag4
             // 
+            this.OriginalTag4.DataPropertyName = "OriginalTag4";
             this.OriginalTag4.FillWeight = 24.52376F;
             resources.ApplyResources(this.OriginalTag4, "OriginalTag4");
             this.OriginalTag4.Name = "OriginalTag4";
             // 
             // NewTag4
             // 
+            this.NewTag4.DataPropertyName = "NewTag4";
             this.NewTag4.FillWeight = 24.52376F;
             resources.ApplyResources(this.NewTag4, "NewTag4");
             this.NewTag4.Name = "NewTag4";
             // 
             // TagName5
             // 
+            this.TagName5.DataPropertyName = "TagName5";
             this.TagName5.FillWeight = 24.52376F;
             resources.ApplyResources(this.TagName5, "TagName5");
             this.TagName5.Name = "TagName5";
             // 
             // OriginalTag5
             // 
+            this.OriginalTag5.DataPropertyName = "OriginalTag5";
             this.OriginalTag5.FillWeight = 24.52376F;
             resources.ApplyResources(this.OriginalTag5, "OriginalTag5");
             this.OriginalTag5.Name = "OriginalTag5";
             // 
             // NewTag5
             // 
+            this.NewTag5.DataPropertyName = "NewTag5";
             this.NewTag5.FillWeight = 24.52376F;
             resources.ApplyResources(this.NewTag5, "NewTag5");
             this.NewTag5.Name = "NewTag5";
@@ -1209,6 +1228,7 @@ namespace MusicBeePlugin
             // OddEven
             // 
             this.OddEven.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.OddEven.DataPropertyName = "OddEven";
             this.OddEven.FillWeight = 1F;
             resources.ApplyResources(this.OddEven, "OddEven");
             this.OddEven.Name = "OddEven";
@@ -1218,7 +1238,6 @@ namespace MusicBeePlugin
             this.AcceptButton = this.buttonPreview;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.buttonClose;
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.filtersPanel);
             this.Controls.Add(this.autoApplyPresetsLabel);

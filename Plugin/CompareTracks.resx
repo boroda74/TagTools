@@ -199,7 +199,7 @@
     <value>Track #</value>
   </data>
   <data name="Column1.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>100</value>
   </data>
   <data name="Column1.Width" type="System.Int32, mscorlib">
     <value>200</value>
@@ -211,7 +211,7 @@
     <value>Image Cell Template</value>
   </data>
   <data name="ImageCellTemplate.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>100</value>
   </data>
   <data name="ImageCellTemplate.Width" type="System.Int32, mscorlib">
     <value>200</value>
@@ -639,18 +639,6 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Compare Tracks</value>
   </data>
-  <data name="&gt;&gt;Column1.Name" xml:space="preserve">
-    <value>Column1</value>
-  </data>
-  <data name="&gt;&gt;Column1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ImageCellTemplate.Name" xml:space="preserve">
-    <value>ImageCellTemplate</value>
-  </data>
-  <data name="&gt;&gt;ImageCellTemplate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;dataGridViewTextBoxColumn1.Name" xml:space="preserve">
     <value>dataGridViewTextBoxColumn1</value>
   </data>
@@ -675,10 +663,22 @@
   <data name="&gt;&gt;toolTip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;Column1.Name" xml:space="preserve">
+    <value>Column1</value>
+  </data>
+  <data name="&gt;&gt;Column1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ImageCellTemplate.Name" xml:space="preserve">
+    <value>ImageCellTemplate</value>
+  </data>
+  <data name="&gt;&gt;ImageCellTemplate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>CompareTracks</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=8.3.8984.20537, Culture=neutral, PublicKeyToken=null</value>
+    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=9.0.9010.13829, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

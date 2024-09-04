@@ -1073,30 +1073,6 @@ later for auto-execution or assign hotkey to it</value>
   <data name="&gt;&gt;Position.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Track.Name" xml:space="preserve">
-    <value>Track</value>
-  </data>
-  <data name="&gt;&gt;Track.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;OriginalTag.Name" xml:space="preserve">
-    <value>OriginalTag</value>
-  </data>
-  <data name="&gt;&gt;OriginalTag.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;NewTag.Name" xml:space="preserve">
-    <value>NewTag</value>
-  </data>
-  <data name="&gt;&gt;NewTag.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;FileColumn.Name" xml:space="preserve">
-    <value>FileColumn</value>
-  </data>
-  <data name="&gt;&gt;FileColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;dirtyErrorProvider.Name" xml:space="preserve">
     <value>dirtyErrorProvider</value>
   </data>
@@ -1169,11 +1145,35 @@ later for auto-execution or assign hotkey to it</value>
   <data name="&gt;&gt;dataGridViewTextBoxColumn7.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;Track.Name" xml:space="preserve">
+    <value>Track</value>
+  </data>
+  <data name="&gt;&gt;Track.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;OriginalTagValue.Name" xml:space="preserve">
+    <value>OriginalTagValue</value>
+  </data>
+  <data name="&gt;&gt;OriginalTagValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;NewTagValue.Name" xml:space="preserve">
+    <value>NewTagValue</value>
+  </data>
+  <data name="&gt;&gt;NewTagValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;File.Name" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="&gt;&gt;File.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MultipleSearchAndReplace</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=9.0.8998.24067, Culture=neutral, PublicKeyToken=null</value>
+    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=9.0.9009.21104, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="dirtyErrorProvider.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1834,34 +1834,34 @@ later for auto-execution or assign hotkey to it</value>
   <data name="Track.MinimumWidth" type="System.Int32, mscorlib">
     <value>40</value>
   </data>
-  <metadata name="OriginalTag.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="OriginalTagValue.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="OriginalTag.HeaderText" xml:space="preserve">
+  <data name="OriginalTagValue.HeaderText" xml:space="preserve">
     <value>Original tag value</value>
   </data>
-  <data name="OriginalTag.MinimumWidth" type="System.Int32, mscorlib">
+  <data name="OriginalTagValue.MinimumWidth" type="System.Int32, mscorlib">
     <value>25</value>
   </data>
-  <metadata name="NewTag.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="NewTagValue.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="NewTag.HeaderText" xml:space="preserve">
+  <data name="NewTagValue.HeaderText" xml:space="preserve">
     <value>New tag value</value>
   </data>
-  <data name="NewTag.MinimumWidth" type="System.Int32, mscorlib">
+  <data name="NewTagValue.MinimumWidth" type="System.Int32, mscorlib">
     <value>25</value>
   </data>
-  <metadata name="FileColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="File.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="FileColumn.HeaderText" xml:space="preserve">
+  <data name="File.HeaderText" xml:space="preserve">
     <value>File</value>
   </data>
-  <data name="FileColumn.MinimumWidth" type="System.Int32, mscorlib">
+  <data name="File.MinimumWidth" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="FileColumn.Visible" type="System.Boolean, mscorlib">
+  <data name="File.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="previewTable.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
