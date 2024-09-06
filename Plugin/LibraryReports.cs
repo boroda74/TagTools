@@ -5773,27 +5773,27 @@ namespace MusicBeePlugin
                 {
                     groupingCount++;
 
-                    string[] groupingsValues = (string[])AggregatedTags.GetGroupings(keyValue, groupingsDict); //It's the values (in correct order) of all groupings for current grouping set
+                    object[] groupingsValues = AggregatedTags.GetGroupings(keyValue, groupingsDict); //It's the values (in correct order) of all groupings for current grouping set
 
                     if (selectedPreset.fileFormatIndex == LrReportFormat.HtmlDocumentByAlbums)
                     {
                         if (prevAlbumArtist != groupingsValues[albumArtistField]) //-V3106
                         {
                             i++;
-                            prevAlbumArtist = groupingsValues[albumArtistField]; //-V3106
-                            prevAlbum = groupingsValues[albumField]; //-V3106
-                            document.beginAlbumArtist(groupingsValues[albumArtistField], groupingsValues.Length - 2 + functionsDict.Count); //-V3106
+                            prevAlbumArtist = groupingsValues[albumArtistField] as string; //-V3106
+                            prevAlbum = groupingsValues[albumField] as string; //-V3106
+                            document.beginAlbumArtist(groupingsValues[albumArtistField] as string, groupingsValues.Length - 2 + functionsDict.Count); //-V3106
 
                             lock (artworks)
-                                document.beginAlbum(groupingsValues[albumField], artworks[groupingsValues[artworkField]], groupingsValues[artworkField], albumTrackCounts[i]); //-V3106
+                                document.beginAlbum(groupingsValues[albumField] as string, artworks[groupingsValues[artworkField] as string], groupingsValues[artworkField] as string, albumTrackCounts[i]); //-V3106
                         }
                         else if (prevAlbum != groupingsValues[albumField]) //-V3106
                         {
                             i++;
-                            prevAlbum = groupingsValues[albumField]; //-V3106
+                            prevAlbum = groupingsValues[albumField] as string; //-V3106
 
                             lock (artworks)
-                                document.beginAlbum(groupingsValues[albumField], artworks[groupingsValues[artworkField]], groupingsValues[artworkField], albumTrackCounts[i]); //-V3106
+                                document.beginAlbum(groupingsValues[albumField] as string, artworks[groupingsValues[artworkField] as string], groupingsValues[artworkField] as string, albumTrackCounts[i]); //-V3106
                         }
                     }
 
@@ -5808,14 +5808,14 @@ namespace MusicBeePlugin
                     else if (selectedPreset.fileFormatIndex == LrReportFormat.HtmlDocumentAlbumGrid) //Album grid
                     {
                         lock (artworks)
-                            pic = artworks[groupingsValues[artworkField]];
+                            pic = artworks[groupingsValues[artworkField] as string];
 
-                        var albumLabel = groupingsValues[0];
+                        string albumLabel = groupingsValues[0] as string;
 
                         for (var l = 3; l < groupingsValues.Length; l++) //groupingsValues: 1st value MUST BE album name, 2nd value MUST BE artwork
                             albumLabel += "/" + groupingsValues[l];
 
-                        (document as HtmlDocumentAlbumGrid).addCellToRow(pic, albumLabel, groupingsValues[artworkField]);
+                        (document as HtmlDocumentAlbumGrid).addCellToRow(pic, albumLabel, groupingsValues[artworkField] as string);
                     }
                     else if (selectedPreset.fileFormatIndex != LrReportFormat.HtmlDocumentCdBooklet) //It's NOT a CD booklet
                     {
@@ -5829,19 +5829,19 @@ namespace MusicBeePlugin
                                 || selectedPreset.fileFormatIndex == LrReportFormat.HtmlTable)) //Export images
                             {
                                 lock (artworks)
-                                    pic = artworks[groupingsValues[artworkField]];
+                                    pic = artworks[groupingsValues[artworkField] as string];
 
                                 rowHeight = pic.Height;
 
-                                document.addCellToRow(pic, attribs.getColumnName(true, true, true), groupingsValues[l], pic.Width, pic.Height);
+                                document.addCellToRow(pic, attribs.getColumnName(true, true, true), groupingsValues[l] as string, pic.Width, pic.Height);
                             }
                             else if (l == artworkField && selectedPreset.fileFormatIndex != LrReportFormat.HtmlDocumentByAlbums
                                 && selectedPreset.fileFormatIndex != LrReportFormat.HtmlDocument
                                 && selectedPreset.fileFormatIndex != LrReportFormat.HtmlTable) //Export image hashes
-                                document.addCellToRow(groupingsValues[artworkField], attribs.getColumnName(true, true, true), docColumnsRightAlignment[l],
+                                document.addCellToRow(groupingsValues[artworkField] as string, attribs.getColumnName(true, true, true), docColumnsRightAlignment[l],
                                     l == albumArtistField, l == albumField);
                             else //It's not the artwork column
-                                document.addCellToRow(groupingsValues[l], attribs.getColumnName(true, true, true), docColumnsRightAlignment[l],
+                                document.addCellToRow(groupingsValues[l] as string, attribs.getColumnName(true, true, true), docColumnsRightAlignment[l],
                                     l == albumArtistField, l == albumField);
                         }
 
@@ -5861,20 +5861,20 @@ namespace MusicBeePlugin
                         {
                             if (!multipleAlbums) //1 album
                             {
-                                (document as HtmlDocumentCDBooklet).addTrack(int.Parse(groupingsValues[seqNumField]), //-V3106
-                                    null, null, groupingsValues[titleField], groupingsValues[durationField]); //-V3106
+                                (document as HtmlDocumentCDBooklet).addTrack(int.Parse(groupingsValues[seqNumField] as string), //-V3106
+                                    null, null, groupingsValues[titleField] as string, groupingsValues[durationField] as string); //-V3106
                             }
                             else //Several albums
                             {
-                                (document as HtmlDocumentCDBooklet).addTrack(int.Parse(groupingsValues[seqNumField]), //-V3106
-                                    null, groupingsValues[albumField], groupingsValues[titleField], groupingsValues[durationField]); //-V3106
+                                (document as HtmlDocumentCDBooklet).addTrack(int.Parse(groupingsValues[seqNumField] as string), //-V3106
+                                    null, groupingsValues[albumField] as string, groupingsValues[titleField] as string, groupingsValues[durationField] as string); //-V3106
                             }
                         }
                         else //Several album artists
                         {
-                            (document as HtmlDocumentCDBooklet).addTrack(int.Parse(groupingsValues[seqNumField]), //-V3106
-                                groupingsValues[albumArtistField], groupingsValues[albumField], groupingsValues[titleField], //-V3106
-                                groupingsValues[durationField]); //-V3106
+                            (document as HtmlDocumentCDBooklet).addTrack(int.Parse(groupingsValues[seqNumField] as string), //-V3106
+                                groupingsValues[albumArtistField] as string, groupingsValues[albumField] as string, groupingsValues[titleField] as string, //-V3106
+                                groupingsValues[durationField] as string); //-V3106
                         }
                     }
 
