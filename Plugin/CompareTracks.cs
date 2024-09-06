@@ -192,7 +192,7 @@ namespace MusicBeePlugin
             backgroundTaskIsStoppedOrCancelled = false;
 
 
-            previewTable.DataSource = null;//--------
+            previewTable.DataSource = null;
 
             cachedTracks = null;
             buffer.Clear();
@@ -264,15 +264,12 @@ namespace MusicBeePlugin
 
         internal bool prepareBackgroundPreview()
         {
-            resetPreviewData(false);
-
             if (backgroundTaskIsStopping)
                 backgroundTaskIsStoppedOrCancelled = true;
 
             if (previewIsGenerated)
             {
-                previewIsGenerated = false;
-                enableDisablePreviewOptionControls(true);
+                resetPreviewData(false);
                 return true;
             }
 
@@ -304,7 +301,13 @@ namespace MusicBeePlugin
             closeFormOnStopping = false;
             ignoreClosingForm = false;
 
+            RefreshPanels(true);
             SetResultingSbText();
+
+            enableDisablePreviewOptionControls(true);
+            enableQueryingButtons();
+
+            updateCustomScrollBars(previewTable);
 
             return true;
         }
@@ -432,8 +435,8 @@ namespace MusicBeePlugin
                     previewTable.Columns.RemoveAt(0);
 
                 source.ResetBindings(true); 
-                previewTable.DataSource = source; 
-                }));
+                previewTable.DataSource = source;
+            }));
 
             Invoke(new Action(() => { formatArtworkRow(artworkTagValues); fillTagNamesInTable(); checkStoppedStatus(); resetFormToGeneratedPreview(); }));
         }
@@ -540,9 +543,6 @@ namespace MusicBeePlugin
             }
 
             Invoke(new Action(() => { applyingChangesStopped(); }));
-
-            RefreshPanels(true);
-            SetResultingSbText();
         }
 
         internal override void enableDisablePreviewOptionControls(bool enable, bool dontChangeDisabled = false)
@@ -778,8 +778,11 @@ namespace MusicBeePlugin
                     {
                         if (previewTable.Rows[j].Cells[i].Selected)
                         {
-                            bufferArtwork = (Bitmap)previewTable.Rows[j].Cells[i].Value;
+                            bufferArtwork = rows[j].Columns[i] as Bitmap;
                             buffer.Add(j, previewTable.Rows[j].Cells[i].Tag);
+
+                            ClickPlayer.Play();
+
                             break;
                         }
                     }
@@ -787,7 +790,10 @@ namespace MusicBeePlugin
                     {
                         if (previewTable.Rows[j].Cells[i].Selected)
                         {
-                            buffer.Add(j, previewTable.Rows[j].Cells[i].Value);
+                            buffer.Add(j, rows[j].Columns[i]);
+
+                            ClickPlayer.Play();
+
                             break;
                         }
                     }
@@ -803,12 +809,20 @@ namespace MusicBeePlugin
                 {
                     if (rowIndexTagValue.Key == artworkRow)
                     {
-                        previewTable.Rows[rowIndexTagValue.Key].Cells[previewTable.CurrentCell.ColumnIndex].Value = bufferArtwork;
+                        rows[rowIndexTagValue.Key].Columns[previewTable.CurrentCell.ColumnIndex] = bufferArtwork;
+                        source.ResetBindings(false);
+                        fillTagNamesInTable();
                         previewTable.Rows[rowIndexTagValue.Key].Cells[previewTable.CurrentCell.ColumnIndex].Tag = rowIndexTagValue.Value;
+
+                        ClickPlayer.Play();
                     }
                     else
                     {
-                        previewTable.Rows[rowIndexTagValue.Key].Cells[previewTable.CurrentCell.ColumnIndex].Value = rowIndexTagValue.Value;
+                        rows[rowIndexTagValue.Key].Columns[previewTable.CurrentCell.ColumnIndex] = rowIndexTagValue.Value;
+                        source.ResetBindings(false);
+                        fillTagNamesInTable();
+
+                        ClickPlayer.Play();
                     }
                 }
             }
@@ -824,13 +838,24 @@ namespace MusicBeePlugin
                     {
                         if (i == artworkRow)
                         {
-                            previewTable.Rows[j].Cells[i].Value = emptyArtwork;
+                            rows[j].Columns[i] = emptyArtwork;
+                            source.ResetBindings(false);
+                            fillTagNamesInTable();
                             previewTable.Rows[j].Cells[i].Tag = string.Empty;
+
+                            ClickPlayer.Play();
+
                             break;
                         }
                         else
                         {
-                            previewTable.Rows[j].Cells[i].Value = null;
+                            rows[j].Columns[i] = null;
+                            source.ResetBindings(false);
+                            fillTagNamesInTable();
+
+                            ClickPlayer.Play();
+
+                            break;
                         }
                     }
                 }

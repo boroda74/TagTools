@@ -517,7 +517,7 @@
     <value>7, 15</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1054, 361</value>
+    <value>1056, 363</value>
   </data>
   <data name="ignoreSingleLetterExceptedWordsCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -956,7 +956,8 @@ They are paired by their position on the list</value>
     <value>3</value>
   </data>
   <data name="exceptionWordsBox.ToolTip" xml:space="preserve">
-    <value>Words in this field must be separated by spaces</value>
+    <value>Words in this field must be separated by spaces
+You can use the special pseudo-word "#RN" for Roman numerals</value>
   </data>
   <data name="&gt;&gt;exceptionWordsBox.Name" xml:space="preserve">
     <value>exceptionWordsBox</value>
@@ -1737,7 +1738,7 @@ Indeterminate state: change the case only of the entered words.</value>
     <value>ChangeCase</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=9.0.9009.16580, Culture=neutral, PublicKeyToken=null</value>
+    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=9.1.9014.38606, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="dirtyErrorProvider.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

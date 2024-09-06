@@ -34,6 +34,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReEncodeTags));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonPreview = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
@@ -227,6 +229,9 @@
             // 
             this.Track.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Track.DataPropertyName = "Track";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Track.DefaultCellStyle = dataGridViewCellStyle1;
             this.Track.FillWeight = 50F;
             resources.ApplyResources(this.Track, "Track");
             this.Track.Name = "Track";
@@ -235,6 +240,9 @@
             // 
             this.NewTrack.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.NewTrack.DataPropertyName = "NewTrack";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.NewTrack.DefaultCellStyle = dataGridViewCellStyle2;
             this.NewTrack.FillWeight = 50F;
             resources.ApplyResources(this.NewTrack, "NewTrack");
             this.NewTrack.Name = "NewTrack";

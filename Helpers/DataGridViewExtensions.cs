@@ -32,10 +32,13 @@ namespace MusicBeePlugin
             DataGridViewAdvancedBorderStyle advancedBorderStyle,
             DataGridViewPaintParts paintParts)
         {
-            base.Paint(graphics, clipBounds, cellBounds, rowIndex,
-                dataGridViewElementState, value,
-                formattedValue, errorText, cellStyle,
-                advancedBorderStyle, paintParts);
+            if (rowIndex != -2)
+            {
+                base.Paint(graphics, clipBounds, cellBounds, rowIndex,
+                    dataGridViewElementState, value,
+                    formattedValue, errorText, cellStyle,
+                    advancedBorderStyle, paintParts);
+            }
 
             var p = new Point();
             var s = CheckBoxRenderer.GetGlyphSize(graphics,
@@ -186,13 +189,15 @@ namespace MusicBeePlugin
             if (listPropertyName == null)
                 throw new Exception("List property name must not be null!");
             
-            if (columnNames != null && columnNames.Count == 0)
-                throw new Exception("Column names count must be positive number!");
+            //if (columnNames != null && columnNames.Count == 0)
+            //    throw new Exception("Column names count must be positive number!");
 
             this.listPropertyName = listPropertyName;
 
             if (columnNames != null)
                 this.ColumnNames = columnNames;
+            else
+                this.ColumnNames = new List<string>();
         }
 
         public PropertyDescriptorCollection GetItemProperties(PropertyDescriptor[] listAccessors)

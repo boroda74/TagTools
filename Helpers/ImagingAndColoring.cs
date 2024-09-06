@@ -378,7 +378,7 @@ namespace MusicBeePlugin
 
         internal static float GetBrightnessDifference(Color sampleColor1, Color sampleColor2)
         {
-            return (sampleColor1.R - sampleColor2.R + sampleColor1.G - sampleColor2.G + sampleColor1.B - sampleColor2.B) / 3.0f / 256f;
+            return Math.Abs((sampleColor1.R - sampleColor2.R + sampleColor1.G - sampleColor2.G + sampleColor1.B - sampleColor2.B) / 3.0f / 256f);
         }
 
         internal static float GetAverageBrightness(Color sampleColor1)

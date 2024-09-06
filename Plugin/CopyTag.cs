@@ -109,16 +109,14 @@ namespace MusicBeePlugin
             {
                 HeaderCell = cbHeader,
                 ThreeState = true,
-                FalseValue = "F",
-                TrueValue = "T",
+                FalseValue = Plugin.ColumnUncheckedState,
+                TrueValue = Plugin.ColumnCheckedState,
                 IndeterminateValue = string.Empty,
                 Width = 25,
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.None,
                 DataPropertyName = "Checked", 
             };
-
-            previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-
+            
             previewTable.Columns.Insert(0, colCB);
             previewTable.Columns[2].HeaderCell.Style = headerCellStyle;
             previewTable.Columns[6].HeaderCell.Style = headerCellStyle;
@@ -157,10 +155,10 @@ namespace MusicBeePlugin
 
         private void resetPreviewData()
         {
-            previewTable.AllowUserToResizeColumns = false;
-            previewTable.AllowUserToResizeRows = false;
+            previewTable.AllowUserToResizeColumns = true;
+            previewTable.AllowUserToResizeRows = true;
             foreach (DataGridViewColumn column in previewTable.Columns)
-                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+                column.SortMode = DataGridViewColumnSortMode.Automatic;
 
 
             previewIsGenerated = false;
@@ -191,13 +189,12 @@ namespace MusicBeePlugin
 
         private void resetFormToGeneratedPreview()
         {
-            previewTable.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCells);
-            previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-
             previewTable.AllowUserToResizeColumns = true;
             previewTable.AllowUserToResizeRows = true;
             foreach (DataGridViewColumn column in previewTable.Columns)
                 column.SortMode = DataGridViewColumnSortMode.Automatic;
+
+            AutoSizeTableRows(previewTable, 2);
 
 
             backgroundTaskIsScheduled = false;
@@ -249,15 +246,12 @@ namespace MusicBeePlugin
 
         internal bool prepareBackgroundPreview()
         {
-            resetPreviewData();
-
             if (backgroundTaskIsStopping)
                 backgroundTaskIsStoppedOrCancelled = true;
 
             if (previewIsGenerated)
             {
-                previewIsGenerated = false;
-                enableDisablePreviewOptionControls(true);
+                resetPreviewData();
                 return true;
             }
 
@@ -266,17 +260,14 @@ namespace MusicBeePlugin
             if (backgroundTaskIsWorking())
                 return true;
 
+            resetPreviewData();
+
+
             if (fileNameTextBoxCustom.IsEnabled() && !System.IO.File.Exists(fileNameTextBoxCustom.Text))
             {
                 MessageBox.Show(this, MsgFileNotFound, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
-
-
-            previewTable.AllowUserToResizeColumns = false;
-            previewTable.AllowUserToResizeRows = false;
-            foreach (DataGridViewColumn column in previewTable.Columns)
-                column.SortMode = DataGridViewColumnSortMode.NotSortable;
 
 
             sourceTagId = GetTagId(sourceTagListCustom.Text);
@@ -360,7 +351,12 @@ namespace MusicBeePlugin
                 fileTags = null;
             }
 
+
             previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+            previewTable.AllowUserToResizeColumns = false;
+            previewTable.AllowUserToResizeRows = false;
+            foreach (DataGridViewColumn column in previewTable.Columns)
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
 
             return true;
         }
@@ -370,34 +366,30 @@ namespace MusicBeePlugin
             if (backgroundTaskIsWorking())
                 return false;
 
-            if (rows.Count == 0)
+            if (rows.Count == 0 && !prepareBackgroundPreview())
+                return false;
+
+            previewTable.AllowUserToResizeColumns = false;
+            previewTable.AllowUserToResizeRows = false;
+            foreach (DataGridViewColumn column in previewTable.Columns)
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+
+
+            tags.Clear();
+
+            for (var fileCounter = 0; fileCounter < rows.Count; fileCounter++)
             {
-                return prepareBackgroundPreview();
+                string[] tag = { "Checked", "File", "NewTag" };
+                tag[0] = rows[fileCounter].Checked;
+                tag[1] = rows[fileCounter].File;
+                tag[2] = rows[fileCounter].NewDestinationTagValueNormalized;
+
+                tags.Add(tag);
             }
-            else
-            {
-                previewTable.AllowUserToResizeColumns = false;
-                previewTable.AllowUserToResizeRows = false;
-                foreach (DataGridViewColumn column in previewTable.Columns)
-                    column.SortMode = DataGridViewColumnSortMode.NotSortable;
 
+            ignoreClosingForm = true;
 
-                tags.Clear();
-
-                for (var fileCounter = 0; fileCounter < rows.Count; fileCounter++)
-                {
-                    string[] tag = { "Checked", "File", "NewTag" };
-                    tag[0] = rows[fileCounter].Checked;
-                    tag[1] = rows[fileCounter].File;
-                    tag[2] = rows[fileCounter].NewDestinationTagValueNormalized;
-
-                    tags.Add(tag);
-                }
-
-                ignoreClosingForm = true;
-
-                return true;
-            }
+            return true;
         }
 
         private void previewChanges()
@@ -444,13 +436,13 @@ namespace MusicBeePlugin
                 else if (onlyIfSourceNotEmpty && string.IsNullOrEmpty(swappedTags.sourceNormalizedTagValue) && stripNotChangedLines)
                     continue;
                 else if (swappedTags.destinationNormalizedTagValue == swappedTags.newDestinationNormalizedTagValue)
-                    isChecked = "F";
+                    isChecked = Plugin.ColumnUncheckedState;
                 else if (onlyIfDestinationEmpty && !string.IsNullOrEmpty(swappedTags.destinationNormalizedTagValue))
-                    isChecked = "F";
+                    isChecked = Plugin.ColumnUncheckedState;
                 else if (onlyIfSourceNotEmpty && string.IsNullOrEmpty(swappedTags.sourceNormalizedTagValue))
-                    isChecked = "F";
+                    isChecked = Plugin.ColumnUncheckedState;
                 else
-                    isChecked = "T";
+                    isChecked = Plugin.ColumnCheckedState;
 
 
                 Row row = new Row
@@ -462,8 +454,8 @@ namespace MusicBeePlugin
                     SupposedDestinationTagValueNormalized = swappedTags.newDestinationNormalizedTagValue, 
                     OriginalDestinationTagValue = destinationTagValue,  
                     OriginalDestinationTagValueNormalized = swappedTags.destinationNormalizedTagValue, 
-                    NewDestinationTagValue = isChecked == "T" ? swappedTags.newDestinationTagValue : destinationTagValue,
-                    NewDestinationTagValueNormalized = isChecked == "T" ? swappedTags.newDestinationNormalizedTagValue : swappedTags.destinationNormalizedTagValue,
+                    NewDestinationTagValue = isChecked == Plugin.ColumnCheckedState ? swappedTags.newDestinationTagValue : destinationTagValue,
+                    NewDestinationTagValueNormalized = isChecked == Plugin.ColumnCheckedState ? swappedTags.newDestinationNormalizedTagValue : swappedTags.destinationNormalizedTagValue,
                 };
 
                 rows.Add(row);
@@ -499,7 +491,7 @@ namespace MusicBeePlugin
 
                 var isChecked = tags[i][0];
 
-                if (isChecked == "T")
+                if (isChecked == Plugin.ColumnCheckedState)
                 {
                     var currentFile = tags[i][1];
                     var newTag = tags[i][2];
@@ -661,9 +653,9 @@ namespace MusicBeePlugin
                     continue;
 
                 if (state)
-                    rows[0].Checked = "F";
+                    rows[0].Checked = Plugin.ColumnUncheckedState;
                 else
-                    rows[0].Checked = "T";
+                    rows[0].Checked = Plugin.ColumnCheckedState;
             }
 
             source.ResetBindings(false);
@@ -680,9 +672,9 @@ namespace MusicBeePlugin
 
                 var isChecked = previewTable.Rows[e.RowIndex].Cells[0].Value as string;
 
-                if (isChecked == "T")
+                if (isChecked == Plugin.ColumnCheckedState)
                 {
-                    previewTable.Rows[e.RowIndex].Cells[0].Value = "F";
+                    previewTable.Rows[e.RowIndex].Cells[0].Value = Plugin.ColumnUncheckedState;
 
                     newTagValue = previewTable.Rows[e.RowIndex].Cells[5].Value as string;
                     newTagTValue = previewTable.Rows[e.RowIndex].Cells[6].Value as string;
@@ -690,9 +682,9 @@ namespace MusicBeePlugin
                     previewTable.Rows[e.RowIndex].Cells[7].Value = newTagValue;
                     previewTable.Rows[e.RowIndex].Cells[8].Value = newTagTValue;
                 }
-                else if (isChecked == "F")
+                else if (isChecked == Plugin.ColumnUncheckedState)
                 {
-                    previewTable.Rows[e.RowIndex].Cells[0].Value = "T";
+                    previewTable.Rows[e.RowIndex].Cells[0].Value = Plugin.ColumnCheckedState;
 
                     newTagValue = previewTable.Rows[e.RowIndex].Cells[3].Value as string;
                     newTagTValue = previewTable.Rows[e.RowIndex].Cells[4].Value as string;
@@ -771,7 +763,7 @@ namespace MusicBeePlugin
             if (SavedSettings.dontHighlightChangedTags)
                 return;
 
-            if (dataGridView.Rows[rowIndex].Cells[0].Value as string != "T")
+            if (dataGridView.Rows[rowIndex].Cells[0].Value as string != Plugin.ColumnCheckedState)
             {
                 for (var columnIndex = 1; columnIndex < dataGridView.ColumnCount; columnIndex++)
                 {

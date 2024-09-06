@@ -294,15 +294,13 @@ namespace MusicBeePlugin
             {
                 HeaderCell = cbHeader,
                 ThreeState = true,
-                FalseValue = "F",
-                TrueValue = "T",
+                FalseValue = Plugin.ColumnUncheckedState,
+                TrueValue = Plugin.ColumnCheckedState,
                 IndeterminateValue = string.Empty,
                 Width = 25,
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.None,
                 DataPropertyName = "Checked", 
             };
-
-            previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
             previewTable.Columns.Insert(0, colCB);
             previewTable.Columns[1].HeaderCell.Style = headerCellStyle;
@@ -2112,9 +2110,10 @@ namespace MusicBeePlugin
             }
         }
 
-        internal static string Replace(string currentFile, string value, string searchedPattern, string replacedPattern, bool ignoreCase, out bool match)
+        //ignoreCase == null: case-preserving replacements
+        internal static string Replace(string currentFile, string value, string searchedPattern, string replacedPattern, bool? ignoreCase, out bool isMatch)
         {
-            match = false;
+            isMatch = false;
             if (string.IsNullOrEmpty(searchedPattern))
                 return value;
 
@@ -2123,13 +2122,13 @@ namespace MusicBeePlugin
             {
                 if (searchedPattern == null)
                 {
-                    match = true;
+                    isMatch = true;
                 }
                 else
                 {
-                    match = Regex.IsMatch(value, searchedPattern, RegexOptions.IgnoreCase);
+                    isMatch = Regex.IsMatch(value, searchedPattern, RegexOptions.IgnoreCase);
 
-                    if (!match)
+                    if (!isMatch)
                         return value;
 
 
@@ -2142,10 +2141,51 @@ namespace MusicBeePlugin
                     replacedPattern = replacedPattern.Replace("%%1%%", "$1").Replace("%%2%%", "$2").Replace("%%3%%", "$3").Replace("%%4%%", "$4");
                     replacedPattern = replacedPattern.Replace("%%5%%", "$5").Replace("%%6%%", "$6").Replace("%%7%%", "$7").Replace("%%8%%", "$8");
 
-                    if (ignoreCase)
+                    if (ignoreCase == true)
+                    {
                         value = Regex.Replace(value, searchedPattern, replacedPattern, RegexOptions.IgnoreCase);
-                    else
+                    }
+                    else if (ignoreCase == false)
+                    {
                         value = Regex.Replace(value, searchedPattern, replacedPattern, RegexOptions.None);
+                    }
+                    else if (ignoreCase == null) //ase-preserving replacements
+                    {
+                        var matches = Regex.Matches(value, searchedPattern, RegexOptions.IgnoreCase);
+
+                        string newValue = string.Empty;
+                        for (int i = 0; i < matches.Count; i++)
+                        {
+                            var match = matches[i];
+
+                            string valueStart = value.Substring(0, match.Index);
+                            string valueEnd = value.Substring(match.Index + match.Length);
+                            string searchedValuePart = value.Substring(match.Index, match.Length);
+
+                            if (replacedPattern.Length == 0)
+                                newValue = valueStart + valueEnd;
+                            else if (searchedValuePart.ToLower() == searchedValuePart) //lower case
+                                newValue = valueStart + replacedPattern.ToLower() + valueEnd;
+                            else if (searchedValuePart.ToUpper() == searchedValuePart) //UPPER case
+                                newValue = valueStart + replacedPattern.ToUpper() + valueEnd;
+                            else if (searchedValuePart.Length > 1 && replacedPattern.Length > 1 && searchedValuePart[0].ToString().ToUpper()[0] == searchedValuePart[0] && searchedValuePart.Substring(1).ToLower() == searchedValuePart.Substring(1)) //Capitalized
+                                newValue = valueStart + replacedPattern[0].ToString().ToUpper()[0] + replacedPattern.Substring(1).ToLower() + valueEnd;
+                            else if (searchedValuePart.Length > 1 && searchedValuePart[0].ToString().ToUpper()[0] == searchedValuePart[0]) //1st & single replaced letter UPPER case
+                                newValue = valueStart + replacedPattern[0].ToString().ToUpper()[0] + valueEnd;
+                            else if (searchedValuePart.Length > 1) //1st & single replaced letter lower case
+                                newValue = valueStart + replacedPattern[0].ToString().ToLower()[0] + valueEnd;
+                            else //Replaced as is
+                                newValue = valueStart + replacedPattern + valueEnd;
+
+                            //for (int j = 0; j < replacedPattern.Length; j++)
+                            //    if (searchedCasing == 0)
+                            //        newValue += replacedPattern[j];
+
+                            //newValue = valueStart + newValue + valueEnd;
+                        }
+
+                        value = newValue;
+                    }
 
                     value = value.Replace("\u0017", "[[").Replace("\u0018", "]]").Replace("\u0011", ";");
                     value = value.Replace('\u0019', '$');
@@ -2735,10 +2775,10 @@ namespace MusicBeePlugin
 
         private void resetPreviewData()
         {
-            previewTable.AllowUserToResizeColumns = false;
-            previewTable.AllowUserToResizeRows = false;
+            previewTable.AllowUserToResizeColumns = true;//-------
+            previewTable.AllowUserToResizeRows = true;
             foreach (DataGridViewColumn column in previewTable.Columns)
-                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+                column.SortMode = DataGridViewColumnSortMode.Automatic;
 
 
             previewIsGenerated = false;
@@ -2769,13 +2809,14 @@ namespace MusicBeePlugin
 
         private void resetFormToGeneratedPreview()
         {
-            previewTable.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCells);
-            previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-
-            previewTable.AllowUserToResizeColumns = true;
+            previewTable.AllowUserToResizeColumns = true;//-------
             previewTable.AllowUserToResizeRows = true;
             foreach (DataGridViewColumn column in previewTable.Columns)
                 column.SortMode = DataGridViewColumnSortMode.Automatic;
+
+            previewTable.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCells);
+            previewTable.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+            //previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;//--------
 
 
             backgroundTaskIsScheduled = false;
@@ -2799,7 +2840,7 @@ namespace MusicBeePlugin
 
         private bool applyingChangesStopped()
         {
-            previewTable.AllowUserToResizeColumns = true;
+            previewTable.AllowUserToResizeColumns = true;//--------
             previewTable.AllowUserToResizeRows = true;
             foreach (DataGridViewColumn column in previewTable.Columns)
                 column.SortMode = DataGridViewColumnSortMode.Automatic;
@@ -2820,15 +2861,12 @@ namespace MusicBeePlugin
 
         private bool prepareBackgroundPreview()
         {
-            resetPreviewData();
-
             if (backgroundTaskIsStopping)
                 backgroundTaskIsStoppedOrCancelled = true;
 
             if (previewIsGenerated)
             {
-                previewIsGenerated = false;
-                enableDisablePreviewOptionControls(true);
+                resetPreviewData();
                 return true;
             }
 
@@ -2836,6 +2874,8 @@ namespace MusicBeePlugin
 
             if (backgroundTaskIsWorking())
                 return true;
+
+            resetPreviewData();
 
 
             var allWritableTagNames = new List<string>();
@@ -2883,7 +2923,12 @@ namespace MusicBeePlugin
             }
 
 
-            previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+            previewTable.AllowUserToResizeColumns = false; //--------
+            previewTable.AllowUserToResizeRows = false;
+            foreach (DataGridViewColumn column in previewTable.Columns)
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+
+            //previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;//------
             return true;
         }
 
@@ -2898,6 +2943,11 @@ namespace MusicBeePlugin
             }
             else
             {
+                previewTable.AllowUserToResizeColumns = false;//--------
+                previewTable.AllowUserToResizeRows = false;
+                foreach (DataGridViewColumn column in previewTable.Columns)
+                    column.SortMode = DataGridViewColumnSortMode.NotSortable;
+
                 for (var fileCounter = 0; fileCounter < previewTable.RowCount; fileCounter++)
                     tags[fileCounter][0] = rows[fileCounter].Checked;
 
@@ -3216,7 +3266,7 @@ namespace MusicBeePlugin
                         {
                             tag = new string[8];
 
-                            tag[0] = (minResult == ChangesDetectionResult.NoExclusionsDetected ? "T" : "F");
+                            tag[0] = (minResult == ChangesDetectionResult.NoExclusionsDetected ? Plugin.ColumnCheckedState : Plugin.ColumnUncheckedState);
                             tag[1] = processingCopyGuidPreset.Key;
                             tag[2] = currentFile;
                             tag[3] = searchedAndReplacedTags.replacedTagValue;
@@ -3258,7 +3308,7 @@ namespace MusicBeePlugin
 
                             Row row = new Row
                             {
-                                Checked = minResult == ChangesDetectionResult.NoExclusionsDetected ? "T" : "F",
+                                Checked = minResult == ChangesDetectionResult.NoExclusionsDetected ? Plugin.ColumnCheckedState : Plugin.ColumnUncheckedState,
                                 PresetGuid = processingCopyGuidPreset.Key,
                                 File = currentFile,
                                 Track = track,
@@ -3332,7 +3382,7 @@ namespace MusicBeePlugin
                 var combinationPreset = presetProcessingCopies[tags[i][1]];
                 var currentFile = tags[i][2];
 
-                if (isChecked == "T")
+                if (isChecked == Plugin.ColumnCheckedState)
                 {
                     lock (Presets)
                     {
@@ -3891,7 +3941,7 @@ namespace MusicBeePlugin
             }
 
 
-            previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;//-------
 
 
             if (selectedPreset.columnWeights == null)
@@ -4210,6 +4260,9 @@ namespace MusicBeePlugin
                 previewTable.Columns[17].Visible = false;
                 previewTable.Columns[18].Visible = false;
             }
+
+
+            previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;//-------
         }
 
         private void setCheckedState(PictureBox label, bool flag)
@@ -5269,9 +5322,9 @@ namespace MusicBeePlugin
                     continue;
 
                 if (state)
-                    rows[0].Checked = "F";
+                    rows[0].Checked = Plugin.ColumnUncheckedState;
                 else
-                    rows[0].Checked = "T";
+                    rows[0].Checked = Plugin.ColumnCheckedState;
             }
 
             source.ResetBindings(false);
@@ -5283,7 +5336,7 @@ namespace MusicBeePlugin
         {
             if (!check)
             {
-                previewTable.Rows[rowIndex].Cells[0].Value = "F";
+                previewTable.Rows[rowIndex].Cells[0].Value = Plugin.ColumnUncheckedState;
 
                 var sourceTag1Value = previewTable.Rows[rowIndex].Cells[5].Value as string;
                 var sourceTag2Value = previewTable.Rows[rowIndex].Cells[8].Value as string;
@@ -5299,7 +5352,7 @@ namespace MusicBeePlugin
             }
             else //if (check)
             {
-                previewTable.Rows[rowIndex].Cells[0].Value = "T";
+                previewTable.Rows[rowIndex].Cells[0].Value = Plugin.ColumnCheckedState;
 
                 string newTag1Value;
                 string newTag2Value;
@@ -5351,9 +5404,9 @@ namespace MusicBeePlugin
                 var check = true;
                 var indeterminate = false;
 
-                if (isChecked == "T")
+                if (isChecked == Plugin.ColumnCheckedState)
                     check = false;
-                else if (isChecked == "F")
+                else if (isChecked == Plugin.ColumnUncheckedState)
                     ;
                 else
                     indeterminate = true;
@@ -5471,7 +5524,7 @@ namespace MusicBeePlugin
                 {
                     if (previewTable.Rows[rowIndex].Cells[columnIndex].Visible)
                     {
-                        if (previewTable.Rows[rowIndex].Cells[0].Value as string == "T")
+                        if (previewTable.Rows[rowIndex].Cells[0].Value as string == Plugin.ColumnCheckedState)
                             previewTable.Rows[rowIndex].Cells[columnIndex].Style = unchangedCellStyle;
                         else
                             previewTable.Rows[rowIndex].Cells[columnIndex].Style = dimmedCellStyle;

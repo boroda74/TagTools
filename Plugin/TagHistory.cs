@@ -201,7 +201,121 @@ namespace MusicBeePlugin
             button_GotFocus(AcceptButton, null); //Let's mark active button
         }
 
-        private void prepareFillTable(int savedTagsTrackIndex, bool reuseTagValues)
+        //reuseTagValuesColumn == false: reread library tags of tracks; reuseTagValuesColumn == true: reuse library tags of tracks; reuseTagValuesColumn == null: reuse current tags of tracks
+        private void fillAllTracksCurrentLibraryTagValues(bool fillLibraryTags, bool? reuseTagValuesColumn)
+        {
+            if (reallyDisplayedTags.Count == 0)
+            {
+                backgroundTaskIsStopping = true;
+                return;
+            }
+
+
+            for (var j = 0; j < reallyDisplayedTags.Count; j++)
+                rows[0][j].CurrentTag = null;
+
+            for (var i = 1; i < trackUrls.Length + 1; i++)
+            {
+                SetStatusBarText(TagHistorySbText + TagHistorySbTextFillingLibraryTagValues + i + "/" + trackUrls.Length, true);
+
+                for (var j = 0; j < reallyDisplayedTags.Count; j++)
+                {
+                    if (checkStoppingStatus())
+                        return;
+
+
+                    string tagValue;
+                    string commonTagValue;
+
+                    if (artworkRow != j)
+                    {
+                        if (reuseTagValuesColumn == null)
+                            tagValue = rows[i][j].CurrentTag as string; //Reuse current tag of track
+                        else if (reuseTagValuesColumn == true)
+                            tagValue = rows[i][j].LibraryTag as string; //Reuse library tag of track
+                        else //if (reuseTagValuesColumn == false)
+                            tagValue = GetFileTag(trackUrls[i - 1], (MetaDataType)reallyDisplayedTags[j]); //Reread library tag of track
+
+                        if (rows[0][j].CurrentTag == null || rows[0][j].CurrentTag as string == tagValue)
+                            commonTagValue = tagValue;
+                        else
+                            commonTagValue = CtlMixedValues;
+
+
+                        if (fillLibraryTags)
+                        {
+                            rows[0][j].LibraryTag = commonTagValue;
+                            rows[i][j].LibraryTag = tagValue;
+                        }
+
+                        rows[0][j].CurrentTag = commonTagValue;
+                        rows[i][j].CurrentTag = tagValue;
+                    }
+                    else
+                    {
+                        if (reuseTagValuesColumn == null) //Reuse current artwork of track
+                            tagValue = artworkTagValues[i, 1];
+                        else if (reuseTagValuesColumn == true)
+                            tagValue = artworkTagValues[i, 0]; //Reuse library artwork of track
+                        else //if (reuseTagValuesColumn == false)
+                            tagValue = GetFileTag(trackUrls[i - 1], (MetaDataType)reallyDisplayedTags[j]); //Reread library artwork of track
+
+                        if (artworkTagValues[0, 1] == null || artworkTagValues[0, 1] == tagValue) //All tracks current artwork
+                            commonTagValue = tagValue;
+                        else
+                            commonTagValue = CtlMixedValues;
+
+                        if (fillLibraryTags)
+                        {
+                            artworkTagValues[0, 0] = commonTagValue; //All tracks library artwork
+                            artworkTagValues[i, 0] = commonTagValue; //Library artwork
+                        }
+
+                        artworkTagValues[0, 1] = commonTagValue; //All tracks current artwork
+                        artworkTagValues[i, 1] = commonTagValue; //Current artwork
+
+
+                        Bitmap artwork;
+                        if (reuseTagValuesColumn == null) //Reuse current artwork of track
+                            artwork = rows[i][j].CurrentTag as Bitmap;
+                        else if (reuseTagValuesColumn == true) //Reuse library artwork of track
+                            artwork = rows[i][j].LibraryTag as Bitmap;
+                        else if (string.IsNullOrEmpty(tagValue)) //if (reuseTagValuesColumn == false) //Reread library value
+                            artwork = emptyArtwork;
+                        else //if (reuseTagValuesColumn == false) //Reread library value
+                            artwork = typeConverter.ConvertFrom(Convert.FromBase64String(tagValue)) as Bitmap;
+
+
+                        Bitmap commonArtwork;
+                        if (artworkTagValues[0, 1] == null || artworkTagValues[0, 1] == tagValue) //All tracks current artwork
+                            commonArtwork = artwork;
+                        else
+                            commonArtwork = MixedArtworks;
+
+
+                        if (fillLibraryTags)
+                        {
+                            rows[0][j].LibraryTag = commonArtwork;
+                            rows[i][j].LibraryTag = artwork;
+                        }
+
+                        rows[0][j].CurrentTag = commonArtwork;
+                        rows[i][j].CurrentTag = artwork;
+                    }
+
+
+                    if (tagValue != null)
+                    {
+                        if (fillLibraryTags)
+                            tagValues[0, j].AddSkip(tagValue); //Library tag values
+
+                        tagValues[1, j].AddSkip(tagValue); //Current tag values
+                    }
+                }
+            }
+        }
+
+        private void prepareFillTable(int trackIndex, bool reuseTagValues)
         {
             if (checkStoppingStatus())
                 return;
@@ -242,14 +356,14 @@ namespace MusicBeePlugin
                 for (int backupIndex = 0; backupIndex < cachedBackups.Count; backupIndex++)
                     columnNames.Add(BrGetBackupDateTime(cachedBackups[backupIndex]));
 
-                if (savedTagsTrackIndex == 0)
+                if (trackIndex == 0)
                 {
                     for (int i = 0; i < trackUrls.Length + 1; i++)
                         rows[i] = new DataGridViewBoundColumnList<Row>(columnNames).CreateRows(cachedBackups.Count, reallyDisplayedTags.Count);
                 }
                 else
                 {
-                    rows[savedTagsTrackIndex] = new DataGridViewBoundColumnList<Row>(columnNames).CreateRows(cachedBackups.Count, reallyDisplayedTags.Count);
+                    rows[trackIndex] = new DataGridViewBoundColumnList<Row>(columnNames).CreateRows(cachedBackups.Count, reallyDisplayedTags.Count);
                 }
             }
             else
@@ -261,25 +375,19 @@ namespace MusicBeePlugin
                 }
             }
 
-            if (savedTagsTrackIndex > 0)
-                prepareFillTableInternal(savedTagsTrackIndex, 1, reuseTagValues);
-            else
-                for (var i = 1; i < trackUrls.Length + 1; i++)
-                    prepareFillTableInternal(i, trackUrls.Length, reuseTagValues);
 
+            prepareFillTableInternal(reuseTagValues);
 
             Invoke(new Action(() =>
             {
-                source.DataSource = rows[savedTagsTrackIndex];
+                source.DataSource = rows[trackIndex];
                 previewTable.DataSource = source;
                 source.ResetBindings(true);
             }));
         }
 
-        private void prepareFillTableInternal(int savedTagsTrackIndex, int totalTrackCount, bool reuseTagValues)
+        private void prepareFillTableInternal(bool reuseTagValues)
         {
-            SetStatusBarText(TagHistorySbText + TagHistorySbTextFillingLibraryTagValues + savedTagsTrackIndex + "/" + totalTrackCount, true);
-
             if (!reuseTagValues)
             {
                 tagValues = new SortedDictionary<string, bool>[cachedBackups.Count + 2, reallyDisplayedTags.Count];
@@ -290,96 +398,7 @@ namespace MusicBeePlugin
                 tagHashes = new int[cachedBackups.Count + 2, reallyDisplayedTags.Count];
             }
 
-            for (var j = 0; j < reallyDisplayedTags.Count; j++)
-            {
-                if (checkStoppingStatus())
-                    return;
-
-
-                if (reallyDisplayedTags.Count == 0)
-                {
-                    backgroundTaskIsStopping = true;
-                    return;
-                }
-
-
-
-                string tagValue;
-                string commonTagValue;
-
-                if (artworkRow != j)
-                {
-                    if (reuseTagValues)
-                        tagValue = rows[savedTagsTrackIndex][j].CurrentTag as string;
-                    else
-                        tagValue = GetFileTag(trackUrls[savedTagsTrackIndex - 1], (MetaDataType)reallyDisplayedTags[j]);
-
-                    if (rows[0][j].LibraryTag == null || rows[0][j].LibraryTag as string == tagValue)
-                        commonTagValue = tagValue;
-                    else
-                        commonTagValue = CtlMixedValues;
-
-
-                    rows[0][j].LibraryTag = commonTagValue;
-                    rows[savedTagsTrackIndex][j].LibraryTag = tagValue;
-
-                    rows[0][j].CurrentTag = commonTagValue;
-                    rows[savedTagsTrackIndex][j].CurrentTag = tagValue;
-                }
-                else
-                {
-                    if (reuseTagValues)
-                        tagValue = artworkTagValues[savedTagsTrackIndex, 0]; //Library artwork
-                    else
-                        tagValue = GetFileTag(trackUrls[savedTagsTrackIndex - 1], (MetaDataType)reallyDisplayedTags[j]);
-
-                    if (artworkTagValues[0, 0] == null || artworkTagValues[0, 0] == tagValue as string) //All tracks library artwork
-                        commonTagValue = tagValue;
-                    else
-                        commonTagValue = CtlMixedValues;
-
-                    artworkTagValues[0, 0] = commonTagValue; //All tracks library artwork
-                    artworkTagValues[savedTagsTrackIndex, 0] = commonTagValue; //Library artwork
-
-                    artworkTagValues[0, 1] = commonTagValue; //All tracks current artwork
-                    artworkTagValues[savedTagsTrackIndex, 1] = commonTagValue; //Current artwork
-
-
-                    Bitmap artwork;
-                    if (reuseTagValues)
-                    {
-                        artwork = rows[savedTagsTrackIndex][j].LibraryTag as Bitmap; //Library artwork
-                    }
-                    else
-                    {
-                        if (string.IsNullOrEmpty(tagValue))
-                            artwork = emptyArtwork;
-                        else
-                            artwork = typeConverter.ConvertFrom(Convert.FromBase64String(tagValue)) as Bitmap;
-
-                    }
-
-                    Bitmap commonArtwork;
-                    if (artworkTagValues[0, 0] == null || artworkTagValues[0, 0] == tagValue) //All tracks library artwork
-                        commonArtwork = artwork;
-                    else
-                        commonArtwork = MixedArtworks;
-
-
-                    rows[0][j].LibraryTag = commonArtwork;
-                    rows[savedTagsTrackIndex][j].LibraryTag = artwork;
-
-                    rows[0][j].CurrentTag = commonArtwork;
-                    rows[savedTagsTrackIndex][j].CurrentTag = artwork;
-                }
-
-
-                if (tagValue != null)
-                {
-                    tagValues[0, j].AddSkip(tagValue); //Library tag values
-                    tagValues[1, j].AddSkip(tagValue); //Current tag values
-                }
-            }
+            fillAllTracksCurrentLibraryTagValues(true, reuseTagValues);
         }
 
         private void calculateHashes(int backupIndex, int tagIndex)
@@ -621,50 +640,6 @@ namespace MusicBeePlugin
             }
         }
 
-        private void fillTableInternalReuseCacheFinal(int backupIndex)
-        {
-            if (checkStoppingStatus())
-                return;
-
-
-            //Let's calculate tag hashes
-            for (var i = 0; i < tagValues.GetLength(0); i++)
-            {
-                for (var j = 0; j < tagValues.GetLength(1); j++)
-                    calculateHashes(i, j);
-            }
-
-
-            fillTagNamesInTable();
-
-            for (var j = 0; j < reallyDisplayedTags.Count; j++)
-            {
-                if (checkStoppingStatus())
-                    return;
-
-
-                if (j != artworkRow)
-                {
-                    if (rows[0][j].Columns[backupIndex] == null)
-                        previewTable.Rows[j].Cells[backupIndex + 1].ToolTipText = CtlNoBackupData.Trim('(', ')');
-                    else if (rows[0][j].Columns[backupIndex] as string == CtlMixedValues)
-                            previewTable.Rows[j].Cells[backupIndex + 1].ToolTipText = CtlMixedValues.Trim('(', ')');
-                    else
-                        previewTable.Rows[j].Cells[backupIndex + 1].ToolTipText = rows[0][j].Columns[backupIndex] as string;
-                }
-                else
-                {
-                    if (artworkTagValues[0, backupIndex + 2] == null)
-                        previewTable.Rows[j].Cells[backupIndex + 1].ToolTipText = CtlNoBackupData.Trim('(', ')');
-                    else if (artworkTagValues[0, backupIndex + 2] == CtlMixedValues)
-                        previewTable.Rows[j].Cells[backupIndex + 1].ToolTipText = CtlMixedValues.Trim('(', ')');
-                    else
-                        previewTable.Rows[j].Cells[backupIndex + 1].ToolTipText = null;
-                }
-            }
-        }
-
-
         private void fillTableInternalReuseCache(int backupIndex, int trackIndex)
         {
             var backup = cachedBackups[backupIndex];
@@ -693,6 +668,49 @@ namespace MusicBeePlugin
             }
         }
 
+        private void fillTableInternalReuseCacheFinal(int backupIndex)
+        {
+            if (checkStoppingStatus())
+                return;
+
+
+            //Let's calculate tag hashes
+            for (var i = 0; i < tagValues.GetLength(0); i++)
+            {
+                for (var j = 0; j < tagValues.GetLength(1); j++)
+                    calculateHashes(i, j);
+            }
+
+
+            fillTagNamesInTable();
+
+            for (var j = 0; j < reallyDisplayedTags.Count; j++)
+            {
+                if (checkStoppingStatus())
+                    return;
+
+
+                if (j != artworkRow)
+                {
+                    if (rows[0][j].Columns[backupIndex] == null)
+                        previewTable.Rows[j].Cells[backupIndex + 1].ToolTipText = CtlNoBackupData.Trim('(', ')');
+                    else if (rows[0][j].Columns[backupIndex] as string == CtlMixedValues)
+                        previewTable.Rows[j].Cells[backupIndex + 1].ToolTipText = CtlMixedValues.Trim('(', ')');
+                    else
+                        previewTable.Rows[j].Cells[backupIndex + 1].ToolTipText = rows[0][j].Columns[backupIndex] as string;
+                }
+                else
+                {
+                    if (artworkTagValues[0, backupIndex + 2] == null)
+                        previewTable.Rows[j].Cells[backupIndex + 1].ToolTipText = CtlNoBackupData.Trim('(', ')');
+                    else if (artworkTagValues[0, backupIndex + 2] == CtlMixedValues)
+                        previewTable.Rows[j].Cells[backupIndex + 1].ToolTipText = CtlMixedValues.Trim('(', ')');
+                    else
+                        previewTable.Rows[j].Cells[backupIndex + 1].ToolTipText = null;
+                }
+            }
+        }
+
         private void formatTrackColumns()
         {
             if (checkStoppingStatus())
@@ -707,7 +725,7 @@ namespace MusicBeePlugin
             }
         }
 
-        private void formatArtworkRow(int savedTagsTrackIndex)
+        private void formatArtworkRow(int trackIndex)
         {
             if (artworkRow == -1)
                 return;
@@ -718,7 +736,7 @@ namespace MusicBeePlugin
             for (int i = 0; i < previewTable.ColumnCount; i++)
             {
                 previewTable.Rows[artworkRow].Cells[i] = artworkCellTemplate.Clone() as DataGridViewCell;
-                previewTable.Rows[artworkRow].Cells[i].Tag = artworkTagValues[savedTagsTrackIndex, i + 1];
+                previewTable.Rows[artworkRow].Cells[i].Tag = artworkTagValues[trackIndex, i + 1];
                 previewTable.Rows[artworkRow].Cells[i].ReadOnly = true;
             }
         }
@@ -735,7 +753,7 @@ namespace MusicBeePlugin
             backgroundTaskIsStopping = false;
             backgroundTaskIsStoppedOrCancelled = false;
 
-            previewTable.DataSource = null;//-------
+            previewTable.DataSource = null;
 
             cachedBackups.Clear();
             tagValues = null;
@@ -829,22 +847,26 @@ namespace MusicBeePlugin
             closeFormOnStopping = false;
             ignoreClosingForm = false;
 
+
+            RefreshPanels(true);
             SetResultingSbText();
+
+            enableDisablePreviewOptionControls(true);
+            enableQueryingButtons();
+
+            updateCustomScrollBars(previewTable);
 
             return true;
         }
 
         internal bool prepareBackgroundPreview() //-V3009
         {
-            resetPreviewData(false);
-
             if (backgroundTaskIsStopping)
                 backgroundTaskIsStoppedOrCancelled = true;
 
             if (previewIsGenerated)
             {
-                previewIsGenerated = false;
-                enableDisablePreviewOptionControls(true);
+                resetPreviewData(false);
                 return true;
             }
 
@@ -933,7 +955,7 @@ namespace MusicBeePlugin
                 {
                     if (checkStoppingStatus())
                     {
-                        Invoke(new Action(() => { stopButtonClickedMethod(prepareBackgroundPreview); }));
+                        stopButtonClickedMethod(prepareBackgroundPreview);
                         return;
                     }
 
@@ -948,7 +970,7 @@ namespace MusicBeePlugin
         }
 
         //Returns true if reallyDisplayedTags are NOT changed
-        private bool getReallyDisplayedTags(int savedTagsTrackIndex, bool compareCurrent)
+        private bool getReallyDisplayedTags(int trackIndex, bool compareCurrent)
         {
             int[] currentlyDisplayedTagIds = null;
             if (compareCurrent)
@@ -972,10 +994,10 @@ namespace MusicBeePlugin
             for (var k = 0; k < cachedBackups.Count; k++)
                 backupHaveDifferences[k] = false;
 
-            if (savedTagsTrackIndex > 0)
+            if (trackIndex > 0)
             {
-                getReallyDisplayedTagsInternal(savedTagsTrackIndex, ref backupHaveDifferences, currentlyDisplayedTagIds);
-                prepareCleanupCachedBackupsInternal(savedTagsTrackIndex, backupHaveDifferences);
+                getReallyDisplayedTagsInternal(trackIndex, ref backupHaveDifferences, currentlyDisplayedTagIds);
+                prepareCleanupCachedBackupsInternal(trackIndex, backupHaveDifferences);
                 cleanupCachedBackupsInternal(backupHaveDifferences);
             }
             else
@@ -1006,7 +1028,7 @@ namespace MusicBeePlugin
             }
         }
 
-        private void getReallyDisplayedTagsInternal(int savedTagsTrackIndex, ref bool[] backupHaveDifferences, int[] currentlyDisplayedTagIds)
+        private void getReallyDisplayedTagsInternal(int trackIndex, ref bool[] backupHaveDifferences, int[] currentlyDisplayedTagIds)
         {
             if (autoSelectTagsCheckBox.Checked)
             {
@@ -1021,7 +1043,7 @@ namespace MusicBeePlugin
 
                     for (var i = cachedBackups.Count - 1; i >= 0; i--)
                     {
-                        if (GetFileTag(trackUrls[savedTagsTrackIndex - 1], (MetaDataType)displayedTags[j]) != cachedBackups[i].getIncValue(trackIds[savedTagsTrackIndex - 1], displayedTags[j], baseline))
+                        if (GetFileTag(trackUrls[trackIndex - 1], (MetaDataType)displayedTags[j]) != cachedBackups[i].getIncValue(trackIds[trackIndex - 1], displayedTags[j], baseline))
                             reallyDisplayedTags2.AddUnique(displayedTags[j]);
                     }
 
@@ -1031,7 +1053,7 @@ namespace MusicBeePlugin
                         int currentlyDisplayedTagIndex = Array.IndexOf(currentlyDisplayedTagIds, displayedTags[j]);
 
                         if (currentlyDisplayedTagIndex >= 0
-                            && rows[savedTagsTrackIndex][currentlyDisplayedTagIndex].CurrentTag != rows[savedTagsTrackIndex][currentlyDisplayedTagIndex].LibraryTag)
+                            && rows[trackIndex][currentlyDisplayedTagIndex].CurrentTag != rows[trackIndex][currentlyDisplayedTagIndex].LibraryTag)
 
                             reallyDisplayedTags2.AddUnique(displayedTags[j]);
                     }
@@ -1048,7 +1070,7 @@ namespace MusicBeePlugin
             }
         }
 
-        private void prepareCleanupCachedBackupsInternal(int savedTagsTrackIndex, bool[] backupHaveDifferences)
+        private void prepareCleanupCachedBackupsInternal(int trackIndex, bool[] backupHaveDifferences)
         {
             if (autoSelectTagsCheckBox.Checked)
             {
@@ -1056,7 +1078,7 @@ namespace MusicBeePlugin
                 {
                     for (var j = displayedTags.Length - 1; j >= 0; j--)
                     {
-                        if (GetFileTag(trackUrls[savedTagsTrackIndex - 1], (MetaDataType)displayedTags[j]) != cachedBackups[i].getIncValue(trackIds[savedTagsTrackIndex - 1], displayedTags[j], baseline))
+                        if (GetFileTag(trackUrls[trackIndex - 1], (MetaDataType)displayedTags[j]) != cachedBackups[i].getIncValue(trackIds[trackIndex - 1], displayedTags[j], baseline))
                         {
                             backupHaveDifferences[i] = true;
                             break;
@@ -1091,17 +1113,17 @@ namespace MusicBeePlugin
             TagToolsPlugin.SaveSettings();
         }
 
-        private void saveTags(int savedTagsTrackIndex)
+        private void saveTags(int trackIndex)
         {
             for (var j = 0; j < reallyDisplayedTags.Count; j++)
             {
                 if (j != artworkRow)
-                    SetFileTag(trackUrls[savedTagsTrackIndex - 1], (MetaDataType)reallyDisplayedTags[j], rows[savedTagsTrackIndex][j].CurrentTag as string);
+                    SetFileTag(trackUrls[trackIndex - 1], (MetaDataType)reallyDisplayedTags[j], rows[trackIndex][j].CurrentTag as string);
                 else
-                    SetFileTag(trackUrls[savedTagsTrackIndex - 1], (MetaDataType)reallyDisplayedTags[j], artworkTagValues[savedTagsTrackIndex, 1]);
+                    SetFileTag(trackUrls[trackIndex - 1], (MetaDataType)reallyDisplayedTags[j], artworkTagValues[trackIndex, 1]);
             }
 
-            CommitTagsToFile(trackUrls[savedTagsTrackIndex - 1]);
+            CommitTagsToFile(trackUrls[trackIndex - 1]);
         }
 
         private void applyChanges()
@@ -1128,9 +1150,6 @@ namespace MusicBeePlugin
             }
 
             Invoke(new Action(() => { applyingChangesStopped(); }));
-
-            RefreshPanels(true);
-            SetResultingSbText();
         }
 
         internal override void enableDisablePreviewOptionControls(bool enable, bool dontChangeDisabled = false)
@@ -1206,19 +1225,18 @@ namespace MusicBeePlugin
             buttonPreview_Click(null, null);
         }
 
-        private void restoreSelected(int savedTagsTrackIndex)
+        private void restoreSelected(int trackIndex)
         {
             for (var j = 0; j < previewTable.RowCount; j++)
             {
-                for (var i = 1; i < previewTable.ColumnCount; i++)
+                for (var i = 0; i < previewTable.ColumnCount; i++)
                 {
-                    if (previewTable.Rows[j].Cells[i].Selected && cachedBackups[i - 1].getIncValue(trackIds[savedTagsTrackIndex - 1], reallyDisplayedTags[j], baseline) != null)
+                    if (previewTable.Rows[j].Cells[i].Selected && cachedBackups[i - 1].getIncValue(trackIds[trackIndex - 1], reallyDisplayedTags[j], baseline) != null)
                     {
-
-                        rows[savedTagsTrackIndex][j].CurrentTag = rows[savedTagsTrackIndex][j].Columns[i - 1];
+                        rows[trackIndex][j].CurrentTag = rows[trackIndex][j].Columns[i - 1];
 
                         if (j == artworkRow)
-                            artworkTagValues[savedTagsTrackIndex, 1] = artworkTagValues[savedTagsTrackIndex, i + 1];
+                            artworkTagValues[trackIndex, 1] = artworkTagValues[trackIndex, i + 1];
 
                         tagValues[1, j].Clear();
                         foreach (var key in tagValues[i + 1, j].Keys)
@@ -1230,9 +1248,6 @@ namespace MusicBeePlugin
                     }
                 }
             }
-
-            source.ResetBindings(false);
-            previewTableFormat();
         }
 
         private void restoreSelectedButton_Click(object sender, EventArgs e)
@@ -1248,28 +1263,41 @@ namespace MusicBeePlugin
             }
 
 
-            for (var j = 0; j < previewTable.RowCount; j++)
+            fillAllTracksCurrentLibraryTagValues(false, null);
+            source.ResetBindings(false);
+            fillTagNamesInTable();
+            previewTableFormat();
+
+            ClickPlayer.Play();
+        }
+
+        private void undoButton_Click(object sender, EventArgs e)
+        {
+            for (var j = 0; j < reallyDisplayedTags.Count; j++)
             {
-                for (var i = 1; i < previewTable.ColumnCount; i++)
+                for (var i = 0; i < trackUrls.Length + 1; i++)
+                    rows[i][j].CurrentTag = rows[trackIndex][j].LibraryTag;
+
+                tagValues[1, j].Clear();
+                foreach (var key in tagValues[0, j].Keys)
+                    tagValues[1, j].AddSkip(key);
+
+                tagHashes[1, j] = tagHashes[0, j];
+
+
+                if (j == artworkRow)
                 {
-                    if (j == artworkRow)
-                    {
-                        if (previewTable.Rows[j].Cells[i].Selected && previewTable.Rows[j].Cells[i].Value != emptyArtwork)
-                        {
-                            previewTable.Rows[j].Cells[0].Value = previewTable.Rows[j].Cells[i].Value;
-                            break;
-                        }
-                    }
-                    else
-                    {
-                        if (previewTable.Rows[j].Cells[i].Selected && previewTable.Rows[j].Cells[i].Value as string != CtlNoBackupData)
-                        {
-                            previewTable.Rows[j].Cells[0].Value = previewTable.Rows[j].Cells[i].Value;
-                            break;
-                        }
-                    }
+                    for (var i = 0; i < trackUrls.Length + 1; i++)
+                        artworkTagValues[i, 1] = artworkTagValues[i, 0];
                 }
             }
+
+            fillAllTracksCurrentLibraryTagValues(false, null);
+            source.ResetBindings(false);
+            fillTagNamesInTable();
+            previewTableFormat();
+
+            ClickPlayer.Play();
         }
 
         private bool areOldAndNewDisplayedTagsDifferent(int[] oldTags, int[] newTags)
@@ -1311,9 +1339,6 @@ namespace MusicBeePlugin
             reallyDisplayedTags.Clear();
             foreach (int tagId in displayedTags)
                 reallyDisplayedTags.Add(tagId);
-
-            fillTable(searchFolderComboBoxCustom.Text, false, (int)numberOfBackupsNumericUpDown.Value,
-                true, getReallyDisplayedTags(trackListComboBoxCustom.SelectedIndex, false));
 
 
             enableQueryingOrUpdatingButtons();
@@ -1383,6 +1408,9 @@ namespace MusicBeePlugin
 
             if (tagValues.GetLength(1) > 0)
             {
+                if (newValue == null)
+                    newValue = string.Empty;
+
                 tagValues[1, e.RowIndex].Clear();
                 tagValues[1, e.RowIndex].AddSkip(newValue);
 
@@ -1423,7 +1451,7 @@ namespace MusicBeePlugin
             updateCustomScrollBars(previewTable);
         }
 
-        private void previewTableCellFormatting(int savedTagsTrackIndex, int columnIndex, int rowIndex)
+        private void previewTableCellFormatting(int trackIndex, int columnIndex, int rowIndex)
         {
             if (tagHashes == null || columnIndex > tagHashes.GetLength(0))
                 return;
@@ -1442,9 +1470,9 @@ namespace MusicBeePlugin
                 string tagValue;
 
                 if (columnIndex == 0) //Current tags
-                    tagValue = rows[savedTagsTrackIndex][rowIndex].CurrentTag as string;
+                    tagValue = rows[trackIndex][rowIndex].CurrentTag as string;
                 else //Backup tags
-                    tagValue = rows[savedTagsTrackIndex][rowIndex].Columns[columnIndex - 1] as string;
+                    tagValue = rows[trackIndex][rowIndex].Columns[columnIndex - 1] as string;
 
 
                 if (allTagsAreEqual == null)
@@ -1463,7 +1491,7 @@ namespace MusicBeePlugin
             }
             else
             {
-                string tagValue = artworkTagValues[savedTagsTrackIndex, columnIndex + 1];
+                string tagValue = artworkTagValues[trackIndex, columnIndex + 1];
 
                 if (tagValue == CtlMixedValues)
                 {
@@ -1585,31 +1613,6 @@ namespace MusicBeePlugin
         private void previewTable_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             e.Cancel = true;
-        }
-
-        private void undoButton_Click(object sender, EventArgs e)
-        {
-            for (var j = 0; j < reallyDisplayedTags.Count; j++)
-            {
-                for (var i = 0; i < trackUrls.Length + 1; i++)
-                    rows[i][j].CurrentTag = rows[trackIndex][j].LibraryTag;
-
-                tagValues[1, j].Clear();
-                foreach (var key in tagValues[0, j].Keys)
-                    tagValues[1, j].AddSkip(key);
-
-                tagHashes[1, j] = tagHashes[0, j];
-
-
-                if (j == artworkRow)
-                {
-                    for (var i = 0; i < trackUrls.Length + 1; i++)
-                        artworkTagValues[i, 1] = artworkTagValues[i, 0];
-                }
-            }
-
-            source.ResetBindings(false);
-            previewTableFormat();
         }
 
         private void searchFolderComboBox_SelectedIndexChanged(object sender, EventArgs e)

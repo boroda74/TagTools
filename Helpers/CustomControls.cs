@@ -41,6 +41,52 @@ namespace MusicBeePlugin
             return children;
         }
 
+        internal static void DrawCheckBox(Graphics graphics, Rectangle checkBoxBounds, int borderWidth, Color backColor, Color borderColor, Color checkMarkColor, bool state)
+        {
+            Point pt = new Point(checkBoxBounds.Left + 2, checkBoxBounds.Top + 4);
+
+            const int Inflate = 4;
+
+            checkBoxBounds.Inflate(-Inflate, -Inflate);
+            checkBoxBounds.Offset(0, -1);
+
+            Rectangle checkMarkBounds = new Rectangle(checkBoxBounds.Left + 1, checkBoxBounds.Top - 2, checkBoxBounds.Width + 5, checkBoxBounds.Height + 5);
+            checkMarkBounds.Inflate(-borderWidth - 1, -borderWidth - 1);
+            checkMarkBounds.Offset(-4, 0);
+
+            if (backColor != Plugin.NoColor)
+                graphics.FillRectangle(new SolidBrush(backColor), checkBoxBounds);
+
+            if (state)
+            {
+                string marks = "";
+                string mark = marks[4].ToString();
+
+                using (Font wing = new Font("Segoe Fluent Icons", (int)Math.Round(checkBoxBounds.Height * 0.9f), FontStyle.Regular, GraphicsUnit.Pixel))
+                    graphics.DrawString(mark, wing, new SolidBrush(checkMarkColor), checkMarkBounds);
+            }
+
+            graphics.DrawRectangle(new Pen(borderColor, borderWidth), checkBoxBounds);
+        }
+
+        internal static void DrawCheckBox(Graphics graphics, Rectangle checkBoxBounds, bool state)
+        {
+            var p = new Point();
+            var s = CheckBoxRenderer.GetGlyphSize(graphics,
+            System.Windows.Forms.VisualStyles.CheckBoxState.UncheckedNormal);
+
+            p.X = checkBoxBounds.Location.X + (checkBoxBounds.Width / 2) - (s.Width / 2) - 1;
+            p.Y = checkBoxBounds.Location.Y + (checkBoxBounds.Height / 2) - (s.Height / 2) - 1;
+
+            Point checkBoxLocation = p;
+            System.Windows.Forms.VisualStyles.CheckBoxState cbState = System.Windows.Forms.VisualStyles.CheckBoxState.UncheckedNormal;
+
+            if (state)
+                cbState = System.Windows.Forms.VisualStyles.CheckBoxState.CheckedNormal;
+
+            CheckBoxRenderer.DrawCheckBox(graphics, checkBoxLocation, cbState);
+        }
+
         internal static int GetCustomScrollBarInitialWidth(float dpiScaling, int sbBorderWidth)
         {
             return (int)Math.Round(dpiScaling * Plugin.ScrollBarWidth) + 2 * (int)Math.Round(dpiScaling * sbBorderWidth);
@@ -477,6 +523,8 @@ namespace MusicBeePlugin
             if (comboBox.DropDownStyle == ComboBoxStyle.DropDownList)
                 this.textBox.Click += button_Click;
 
+            this.textBox.GotFocus += changeTextBoxBackground;
+            this.textBox.LostFocus += changeTextBoxBackground;
             this.textBox.KeyPress += ownerForm.CustomComboBox_KeyPress;
             this.textBox.KeyDown += ownerForm.CustomComboBox_KeyDown;
 
@@ -498,7 +546,7 @@ namespace MusicBeePlugin
             this.button.Image = downArrowComboBoxImage;
             this.button.TabStop = false;
 
-            //button.Click += button_Click;//---
+            //button.Click += Button_Click;//---
             this.button.GotFocus += button_Click;
 
 
@@ -537,14 +585,16 @@ namespace MusicBeePlugin
 
             this.dropDown.Tag = this;
 
-            this.dropDown.Closed += dropDown_Closed;
+            this.dropDown.Closed += DropDown_Closed;
 
 
             foreach (var item in comboBox.Items)
                 this.listBox.Items.Add(item);
 
+            this.listBox.GotFocus += changeTextBoxBackground;
+            this.listBox.LostFocus += changeTextBoxBackground;
             this.listBox.MouseMove += listBox_MouseMove;
-            this.listBox.Click += listBox_ItemChosen;
+            this.listBox.Click += ListBox_ItemChosen;
             this.listBox.ItemsChanged += listBox_ItemsChanged;
 
             this.listBox.AdjustHeight(dropDownWidth, this.initialDropDownHeight);
@@ -554,7 +604,7 @@ namespace MusicBeePlugin
 
 
             this.Paint += ControlBorder_Paint;
-            this.GotFocus += CustomComboBox_GotFocus;
+            this.GotFocus += customComboBox_GotFocus;
             this.SizeChanged += customComboBox_SizeChanged;
             customComboBox_SizeChanged(this, null);
 
@@ -578,7 +628,7 @@ namespace MusicBeePlugin
             ownerForm.namesComboBoxes.AddReplace(Name, this);
         }
 
-        private void CustomComboBox_GotFocus(object sender, EventArgs e)
+        private void customComboBox_GotFocus(object sender, EventArgs e)
         {
             textBox.Focus();
         }
@@ -927,7 +977,7 @@ namespace MusicBeePlugin
             }
         }
 
-        internal void ForceReadonly(bool state)
+        public void ForceReadonly(bool state)
         {
             if (state)
             {
@@ -956,7 +1006,7 @@ namespace MusicBeePlugin
             }
         }
 
-        internal bool IsReallyEnabled()
+        public bool IsReallyEnabled()
         {
             if (textBox != null)
                 return button.IsEnabled();
@@ -1017,7 +1067,7 @@ namespace MusicBeePlugin
             }
         }
 
-        private void CopyComboBoxEventHandlers(ComboBox refComboBox, Control destControl)
+        private static void CopyComboBoxEventHandlers(ComboBox refComboBox, Control destControl)
         {
             if (destControl is CustomComboBox customComboBox)
             {
@@ -1039,12 +1089,12 @@ namespace MusicBeePlugin
             }
         }
 
-        private void ControlBorder_Paint(object sender, PaintEventArgs e)
+        private static void ControlBorder_Paint(object sender, PaintEventArgs e)
         {
             ControlsTools.DrawBorder(sender as Control);
         }
 
-        internal void customComboBox_SizeChanged_ForButton()
+        private void customComboBox_SizeChanged_ForButton()
         {
             ownerForm.setSkinnedControlColors(button, null);
 
@@ -1088,14 +1138,14 @@ namespace MusicBeePlugin
         {
             if (textBox != null)
             {
-                listBox_ItemChosen(null, null);
+                ListBox_ItemChosen(null, null);
                 return true;
             }
 
             return false;
         }
 
-        public void listBox_ItemChosen(object sender, EventArgs e)
+        public void ListBox_ItemChosen(object sender, EventArgs e)
         {
             textBox.Focus();
             dropDown.Close();
@@ -1111,12 +1161,12 @@ namespace MusicBeePlugin
                 listBox.SelectedIndex = index;
         }
 
-        private void TextBox_GotFocus(object sender, EventArgs e)
+        private void changeTextBoxBackground(object sender, EventArgs e)//--------------
         {
-            button_Click(null, null);
+            SetColors(null);
         }
 
-        private void dropDown_Closed(object sender, EventArgs e)
+        private void DropDown_Closed(object sender, EventArgs e)
         {
             dropDownClosedTime = DateTime.UtcNow;
 
@@ -1189,20 +1239,29 @@ namespace MusicBeePlugin
 
                 if (enabled == true)
                 {
-                    if (listBox.SelectedIndex == -1 && (string.IsNullOrEmpty(textBox.Text) || textBox.Text == cue) && textBox.ReadOnly) //Let's show cue for readonly mode if cue is defined
-                        textBox.ForeColor = Plugin.InputControlForeColor;
-                    else if (listBox.SelectedIndex == -1 && (string.IsNullOrEmpty(textBox.Text) || textBox.Text == cue) && !textBox.ReadOnly) //Let's show cue for editable mode if cue is defined
-                        textBox.ForeColor = Plugin.InputControlDimmedForeColor;
-                    else //No cue, just "Text"
-                        textBox.ForeColor = Plugin.InputControlForeColor;
+                    var inputControlForeColor = Plugin.InputControlForeColor;
+                    var inputControlDimmedForeColor = Plugin.InputControlDimmedForeColor;
 
-                    textBox.BackColor = Plugin.InputControlBackColor;
+                    if (textBox.Focused && textBox.ReadOnly)
+                        inputControlForeColor = Plugin.ButtonMouseOverForeColor;
+
+                    if (listBox.SelectedIndex == -1 && (string.IsNullOrEmpty(textBox.Text) || textBox.Text == cue) && textBox.ReadOnly) //Let's show cue for readonly mode if cue is defined
+                        textBox.ForeColor = inputControlForeColor;
+                    else if (listBox.SelectedIndex == -1 && (string.IsNullOrEmpty(textBox.Text) || textBox.Text == cue) && !textBox.ReadOnly) //Let's show cue for editable mode if cue is defined
+                        textBox.ForeColor = inputControlDimmedForeColor;
+                    else //No cue, just "Text"
+                        textBox.ForeColor = inputControlForeColor;
+
+                    if (textBox.Focused && textBox.ReadOnly)
+                        textBox.BackColor = Plugin.ButtonMouseOverBackColor;
+                    else
+                        textBox.BackColor = Plugin.InputControlBackColor;
                 }
                 else //Disabled
                 {
                     textBox.ForeColor = Plugin.DimmedAccentColor;
-                    textBox.BackColor = Plugin.InputPanelBackColor; //---
-                    //textBox.BackColor = Plugin.InputControlDimmedBackColor; //---
+                    //textBox.BackColor = Plugin.InputPanelBackColor; //---
+                    textBox.BackColor = Plugin.InputControlDeepDimmedBackColor; //---
                 }
             }
         }
@@ -1300,8 +1359,7 @@ namespace MusicBeePlugin
         private readonly int scaledPx = -10000;
         private readonly int customScrollBarInitialWidth;
 
-        private readonly bool showScroll;
-        private bool processPaintMessages = true;
+        private readonly bool notSkinned;
 
         public CustomHScrollBar hScrollBar;
         public CustomVScrollBar vScrollBar;
@@ -1310,7 +1368,7 @@ namespace MusicBeePlugin
 
         public CustomListBox(bool showScroll)
         {
-            this.showScroll = showScroll;
+            this.notSkinned = showScroll;
 
             InitializeComponent();
 
@@ -1323,7 +1381,7 @@ namespace MusicBeePlugin
 
         public CustomListBox(int customScrollBarInitialWidth, int scaledPx, bool showScroll) : this(false)
         {
-            this.showScroll = showScroll;
+            this.notSkinned = showScroll;
             this.customScrollBarInitialWidth = customScrollBarInitialWidth;
             this.scaledPx = scaledPx;
         }
@@ -1336,9 +1394,21 @@ namespace MusicBeePlugin
             this.borderColor = borderColor;
         }
 
+        public new int GetItemHeight(int index)
+        {
+            return ItemHeight;
+        }
+
+        public override int ItemHeight
+        {
+            get { return this.FontHeight; }
+
+            set { this.FontHeight = value; }
+        }
+
         public int GetItemsHeight()
         {
-            return ItemHeight * Items.Count + 3 * scaledPx;
+            return ItemHeight * Items.Count;//-------- + 3 * scaledPx;
         }
 
         public void AdjustHeight(int dropDownWidth, int initialDropDownHeight)
@@ -1410,7 +1480,7 @@ namespace MusicBeePlugin
             {
                 var cp = base.CreateParams;
 
-                if (!showScroll)
+                if (!notSkinned)
                 {
                     cp.ExStyle &= ~WS_EX_CLIENTEDGE;
                     cp.Style |= WS_BORDER;
@@ -1437,18 +1507,6 @@ namespace MusicBeePlugin
         //    }
         //}
 
-        public void SuspendPainting()
-        {
-            processPaintMessages = false;
-        }
-
-        public void Repaint()
-        {
-            processPaintMessages = true;
-
-            Refresh();
-        }
-
         protected override void WndProc(ref Message m)
         {
             if (m.Msg == LB_ADDSTRING ||
@@ -1459,7 +1517,7 @@ namespace MusicBeePlugin
                 if (ItemsChanged != null)
                     ItemsChanged(this, EventArgs.Empty); //-V3083 //-V5605
 
-            if (m.Msg == WM_NCPAINT && !showScroll)
+            if (m.Msg == WM_NCPAINT && !notSkinned)
             {
                 WmNcPaint(ref m);
                 return;
@@ -1494,17 +1552,14 @@ namespace MusicBeePlugin
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (processPaintMessages)
-            {
-                base.OnPaint(e);
-                DrawBorder(e.Graphics);
+            base.OnPaint(e);
+            DrawBorder(e.Graphics);
 
-                if (hScrollBar?.Visible == true)
-                    hScrollBar.Invalidate();
+            if (hScrollBar?.Visible == true)
+                hScrollBar.Invalidate();
 
-                if (vScrollBar?.Visible == true)
-                    vScrollBar.Invalidate();
-            }
+            if (vScrollBar?.Visible == true)
+                vScrollBar.Invalidate();
         }
 
         private void InitializeComponent()
@@ -1531,13 +1586,13 @@ namespace MusicBeePlugin
 
     public class CustomCheckedListBox : CheckedListBox
     {
+        private const float ItemScale = 1.08f;
+
         private readonly Color borderColorDisabled = Plugin.ScrollBarBorderColor;
         private readonly Color borderColorActive = Plugin.ScrollBarFocusedBorderColor;
         private readonly Color borderColor = Plugin.ScrollBarBorderColor;
 
-        private readonly bool showScroll;
-
-        private bool processPaintMessages = true;
+        private readonly bool notSkinned;
 
         public CustomHScrollBar hScrollBar;
         public CustomVScrollBar vScrollBar;
@@ -1546,7 +1601,7 @@ namespace MusicBeePlugin
 
         public CustomCheckedListBox(bool showScroll)
         {
-            this.showScroll = showScroll;
+            this.notSkinned = showScroll;
 
             InitializeComponent();
 
@@ -1571,7 +1626,7 @@ namespace MusicBeePlugin
             {
                 var cp = base.CreateParams;
 
-                if (!showScroll)
+                if (!notSkinned)
                 {
                     cp.ExStyle &= ~WS_EX_CLIENTEDGE;
                     cp.Style |= WS_BORDER;
@@ -1598,16 +1653,24 @@ namespace MusicBeePlugin
         //    }
         //}
 
-        public void SuspendPainting()
+        public new int GetItemHeight(int index)
         {
-            processPaintMessages = false;
+            return ItemHeight;
+        }
+        
+        public override int ItemHeight
+        {
+            get { return (int)Math.Round(this.FontHeight * ItemScale); }
+
+            set { this.FontHeight =(int)Math.Round(value / ItemScale); }
         }
 
-        public void Repaint()
+        protected override void OnDrawItem(DrawItemEventArgs e)
         {
-            processPaintMessages = true;
-
-            Refresh();
+            if (!notSkinned) //Skinned list box
+                PluginWindowTemplate.ListBox_DrawItem(this, e);
+            else //Not skinned list box. Call the original OnDrawItem, using original colors
+                base.OnDrawItem(e);
         }
 
         protected override void WndProc(ref Message m)
@@ -1620,7 +1683,7 @@ namespace MusicBeePlugin
                 if (ItemsChanged != null)
                     ItemsChanged(this, EventArgs.Empty); //-V3083 //-V5605
 
-            if (m.Msg == WM_NCPAINT && !showScroll)
+            if (m.Msg == WM_NCPAINT && !notSkinned)
             {
                 WmNcPaint(ref m);
                 return;
@@ -1655,17 +1718,14 @@ namespace MusicBeePlugin
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (processPaintMessages)
-            {
-                base.OnPaint(e);
-                DrawBorder(e.Graphics);
+            base.OnPaint(e);
+            DrawBorder(e.Graphics);
 
-                if (hScrollBar?.Visible == true)
-                    hScrollBar.Invalidate();
+            if (hScrollBar?.Visible == true)
+                hScrollBar.Invalidate();
 
-                if (vScrollBar?.Visible == true)
-                    vScrollBar.Invalidate();
-            }
+            if (vScrollBar?.Visible == true)
+                vScrollBar.Invalidate();
         }
 
         private void InitializeComponent()

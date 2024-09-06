@@ -152,18 +152,6 @@
   <data name="Track.HeaderText" xml:space="preserve">
     <value>Трек</value>
   </data>
-  <data name="OriginalTag.HeaderText" xml:space="preserve">
-    <value>Исходный тег З</value>
-  </data>
-  <data name="OriginalTagT.HeaderText" xml:space="preserve">
-    <value>Исходное значение</value>
-  </data>
-  <data name="NewTag.HeaderText" xml:space="preserve">
-    <value>Новый тег З</value>
-  </data>
-  <data name="NewTagT.HeaderText" xml:space="preserve">
-    <value>Новое значение</value>
-  </data>
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
     <value>1324, 187</value>
   </data>
@@ -244,7 +232,8 @@
     <value>624, 23</value>
   </data>
   <data name="exceptionWordsBox.ToolTip" xml:space="preserve">
-    <value>Слова в этом списке должны быть разделены пробелами</value>
+    <value>Слова в этом списке должны быть разделены пробелами
+Для римских цифр можно использовать специальное псевдослово "#RN"</value>
   </data>
   <data name="buttonAsrExceptedWords.Location" type="System.Drawing.Point, System.Drawing">
     <value>598, 14</value>

@@ -34,6 +34,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReEncodeTag));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonPreview = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
@@ -194,6 +197,9 @@
             // Track
             // 
             this.Track.DataPropertyName = "Track";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.Track.DefaultCellStyle = dataGridViewCellStyle1;
             this.Track.FillWeight = 75F;
             resources.ApplyResources(this.Track, "Track");
             this.Track.Name = "Track";
@@ -201,6 +207,9 @@
             // OriginalTagValue
             // 
             this.OriginalTagValue.DataPropertyName = "OriginalTagValue";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.OriginalTagValue.DefaultCellStyle = dataGridViewCellStyle2;
             this.OriginalTagValue.FillWeight = 25F;
             resources.ApplyResources(this.OriginalTagValue, "OriginalTagValue");
             this.OriginalTagValue.Name = "OriginalTagValue";
@@ -208,6 +217,9 @@
             // NewTagValue
             // 
             this.NewTagValue.DataPropertyName = "NewTagValue";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.NewTagValue.DefaultCellStyle = dataGridViewCellStyle3;
             this.NewTagValue.FillWeight = 25F;
             resources.ApplyResources(this.NewTagValue, "NewTagValue");
             this.NewTagValue.Name = "NewTagValue";

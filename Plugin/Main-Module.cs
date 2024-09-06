@@ -142,6 +142,8 @@ namespace MusicBeePlugin
         internal static Color InputControlDimmedForeColor;
         internal static Color InputControlDimmedBackColor;
 
+        internal static Color InputControlDeepDimmedBackColor;
+
         internal static Color AccentColor;
         internal static Color AccentSelectedColor;
         internal static Color DimmedAccentColor;
@@ -170,6 +172,9 @@ namespace MusicBeePlugin
 
         internal static Color UntickedColor;
         internal static Color TickedColor;
+
+        internal static Color ListBoxHighlightForeColor;
+        internal static Color ListBoxHighlightSelectedForeColor;
 
 
         internal const float ScrollBarWidth = 10.6f;//Not yet DPI scaled
@@ -245,12 +250,17 @@ namespace MusicBeePlugin
         internal static Bitmap UncheckAllFiltersAccent;
         internal static Bitmap UncheckAllFiltersDimmed;
 
+        private static Stream ClickStream = Resources.click;
+        internal static System.Media.SoundPlayer ClickPlayer = new System.Media.SoundPlayer(ClickStream);
 
         internal static string EnabledState = "+";
         internal static string DisabledState = "-";
 
+        internal static string ColumnCheckedState = "T"; //----------
+        internal static string ColumnUncheckedState = "F";
 
-        internal const int ActionRetryDelay = 500; //milliseconds.
+
+        internal const int ActionRetryDelay = 500; //Milliseconds.
 
         internal static string LrCachedFunctionResultPresetSeparator = "\ufffc"; //Object replacement character, it will be hardly used in tags
         internal static string LrCachedFunctionResultLibraryPathHashSeparator = "\ufffd";//Replacement character, it will be hardly used in tags
@@ -708,6 +718,7 @@ namespace MusicBeePlugin
         private static string PluginWebPageString;
         private static string PluginWebPageToolTip;
         private static string PluginVersionString;
+        private static string PluginVersionToolTip;
 
         private static string OpenWindowsMenuSectionName;
         private static string TagToolsMenuSectionName;
@@ -1821,11 +1832,18 @@ namespace MusicBeePlugin
                 if (ResultTypes == null)
                     throw new Exception("Undefined table sorting type!");
 
+                if (x == null || y == null)
+                    return 0;
+
                 if (ComparedColumnIndex != -1)
                 {
+                    ResultType resultType = ResultType.UnknownOrString;
+                    if (ResultTypes[ComparedColumnIndex] != ResultType.UseOtherResults)
+                        resultType = ResultTypes[ComparedColumnIndex];
+
                     var comparison = CompareStrings((x as DataGridViewBoundColumns).Columns[ComparedColumnIndex] as string, 
-                        (y as DataGridViewBoundColumns).Columns[ComparedColumnIndex] as string, 
-                        ResultTypes[ComparedColumnIndex], DataType.String , true);
+                        (y as DataGridViewBoundColumns).Columns[ComparedColumnIndex] as string,
+                        resultType, DataType.String , true);
 
 
                     if (!Ascending)
@@ -2379,7 +2397,7 @@ namespace MusicBeePlugin
             return tags;
         }
 
-        //Method returns "T" if tag was really changed and "F" otherwise
+        //Method true if tag was really changed and false otherwise
         internal static bool SetFileTag(string sourceFileUrl, MetaDataType tagId, string value, bool updateOnlyChangedTags = false)
         {
             bool result1;
@@ -3465,6 +3483,15 @@ namespace MusicBeePlugin
         {
             Process.Start(PluginWebPage);
         }
+
+        internal void copyPluginVersionEventHandler(object sender, EventArgs e)
+        {
+            NativeMethods.CloseClipboard();
+            Clipboard.Clear();
+            Clipboard.SetText(PluginVersion);
+
+            ClickPlayer.Play();
+        }
         #endregion
 
         #region Main plugin initialization
@@ -3494,6 +3521,7 @@ namespace MusicBeePlugin
             PluginWebPageString = "Plugin Web Page..."; ;
             PluginWebPageToolTip = "Open Plugin Web Page (to check/download the latest version)";
             PluginVersionString = "Version: ";
+            PluginVersionToolTip = "Copy plugin version to clipboard";
 
             OpenWindowsMenuSectionName = "OPEN WINDOWS";
             TagToolsMenuSectionName = "TAGGING && REPORTING";
@@ -4235,6 +4263,7 @@ namespace MusicBeePlugin
                 PluginWebPageString = "Веб-страница плагина..."; ;
                 PluginWebPageToolTip = "Открыть веб-страницу плагина (для проверки/загрузки последней версии)";
                 PluginVersionString = "Версия: ";
+                PluginVersionToolTip = "Скопировать версию плагина в буфер обмена";
 
                 OpenWindowsMenuSectionName = "ОТКРЫТЫЕ ОКНА";
                 TagToolsMenuSectionName = "ДОПОЛНИТЕЛЬНЫЕ ИНСТРУМЕНТЫ";
@@ -5298,21 +5327,22 @@ namespace MusicBeePlugin
                     InitBackupRestore();
 
 
-                    //MusicBee is closing before plugin has been initialized
-                    if (MbForm.Disposing || MbForm.IsDisposed || !MbForm.IsHandleCreated)
-                        return;
-
-
                     //Let's create plugin main and context menu items
-                    MbForm.Invoke(new Action(() =>
+                    try
                     {
-                        getButtonTextBoxDpiFontScaling();
-                        prepareThemedBitmapsAndColors();
+                        MbForm.Invoke(new Action(() =>
+                        {
+                            getButtonTextBoxDpiFontScaling();
+                            prepareThemedBitmapsAndColors();
 
-                        addPluginContextMenuItems();
-                        addPluginMenuItems();
-                    }));
-
+                            addPluginContextMenuItems();
+                            addPluginMenuItems();
+                        }));
+                    }
+                    catch (ObjectDisposedException) //MusicBee is closing before plugin has been initialized //-----
+                    {
+                        return;
+                    }
 
                     //Let's refresh MusicBee UI every 5 sec if there are any tags changed by plugin since last refresh
                     PeriodicUiRefreshTimer = new System.Threading.Timer(RegularUiRefresh, null, RefreshUI_Delay, RefreshUI_Delay);
@@ -5586,9 +5616,6 @@ namespace MusicBeePlugin
                 FormBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, 
                     ElementComponent.ComponentBorder));
 
-                InputControlDimmedForeColor = GetWeightedColor(InputControlForeColor, FormBackColor, DimmedWeight);
-                InputControlDimmedBackColor = GetWeightedColor(InputControlBackColor, FormBackColor, 0.25f); //---
-
 
                 //SKINNING BUTTONS (ESPECIALLY DISABLED BUTTONS)
                 //Below: (SkinElement)2 - BUTTON??? enum code //-----
@@ -5604,25 +5631,43 @@ namespace MusicBeePlugin
                 ButtonBackColor = buttonBackColor;
                 ButtonDisabledBackColor = ButtonBackColor;
 
+
+                InputControlDimmedForeColor = GetWeightedColor(InputControlForeColor, FormBackColor, DimmedWeight);
+                InputControlDimmedBackColor = GetWeightedColor(InputControlBackColor, ButtonBackColor, 0.85f); //Read-only input control background //-----
+                InputControlDeepDimmedBackColor = GetWeightedColor(InputControlBackColor, ButtonBackColor, 0.36f); //Disabled input control background //-----
+
+
                 //START: Workaround to get color similar to button mouseover one (similarity depend on the skin) //-----
                 if (Plugin.TagToolsContextSubmenu == null)
                     return;
 
                 TagToolsContextSubmenu.DropDown.Items.Clear();
-
                 var buttonMouseOverColorsMenuItem = AddMenuItem(TagToolsContextSubmenu, "■", null, null);
-                TagToolsContextSubmenu.DropDown.Items[0].Font = new Font("Lucida Console", 6f, FontStyle.Regular, GraphicsUnit.Millimeter);
-                TagToolsContextSubmenu.DropDown.Items[0].Select();
-                //colorTestContextSubmenu.DropDown.Show();
-                Bitmap test = new Bitmap(88, 28, PixelFormat.Format24bppRgb);
-                TagToolsContextSubmenu.DropDown.DrawToBitmap(test, new Rectangle(0, 0, 88, 28));
+                TagToolsContextSubmenu.DropDown.Items[0].Font = new Font("Lucida Console", 20f, FontStyle.Regular, GraphicsUnit.Pixel);
+                //TagToolsContextSubmenu.DropDown.Show();
+                Bitmap testBitmap = new Bitmap(88, 28, PixelFormat.Format24bppRgb);
+                TagToolsContextSubmenu.DropDown.DrawToBitmap(testBitmap, new Rectangle(0, 0, 88, 28));
 
-                ButtonMouseOverForeColor = test.GetPixel((int)(40 * DpiScaling), (int)(12 * DpiScaling));
-                ButtonMouseOverBackColor = test.GetPixel(5, 5);
+                ButtonMouseOverForeColor = testBitmap.GetPixel(5, 5);//-----------------
 
-                //colorTestContextSubmenu.DropDown.Hide();
+
                 TagToolsContextSubmenu.DropDown.Items.Clear();
                 buttonMouseOverColorsMenuItem.Dispose();
+                testBitmap.Dispose();
+
+                buttonMouseOverColorsMenuItem = AddMenuItem(TagToolsContextSubmenu, "■", null, null);
+                TagToolsContextSubmenu.DropDown.Items[0].Select();
+                TagToolsContextSubmenu.DropDown.Items[0].Font = new Font("Lucida Console", 20f, FontStyle.Regular, GraphicsUnit.Pixel);
+                //TagToolsContextSubmenu.DropDown.Show();
+                testBitmap = new Bitmap(88, 28, PixelFormat.Format24bppRgb);
+                TagToolsContextSubmenu.DropDown.DrawToBitmap(testBitmap, new Rectangle(0, 0, 88, 28));
+                ButtonMouseOverBackColor = testBitmap.GetPixel(5, 5);
+
+                //TagToolsContextSubmenu.DropDown.Hide();
+                //TagToolsContextSubmenu = null;
+                TagToolsContextSubmenu.DropDown.Items.Clear();
+                buttonMouseOverColorsMenuItem.Dispose();
+                testBitmap.Dispose();
                 //END: Workaround to get color similar to button mouseover one (similarity depend on the skin)
 
 
@@ -5630,6 +5675,7 @@ namespace MusicBeePlugin
                 //const float MouseOverButtonBackColor = 0.535f;
                 //ButtonMouseOverBackColor = GetWeightedColor(ButtonBackColor, FormBackColor, MouseOverButtonBackColor);
                 //END: Old workaround (much worse than above) //-----
+
 
                 //-----
                 //float avgForeBrightness = GetAverageBrightness(_buttonBackColor);
@@ -5761,6 +5807,9 @@ namespace MusicBeePlugin
             UntickedColor = AccentColor;
 
             TickedColor = GetHighlightColor(HighlightColor, sampleColor, FormBackColor, 0.5f);
+
+            ListBoxHighlightForeColor = GetHighlightColor(HighlightColor, ButtonMouseOverForeColor, InputControlBackColor, 0.5f);
+            ListBoxHighlightSelectedForeColor = GetHighlightColor(HighlightColor, ButtonMouseOverForeColor, InputControlBackColor, 0.5f);
 
             //Splitter is invisible by default. Let's draw it.
             SplitterColor = GetWeightedColor(SystemColors.Desktop, AccentColor, 0.8f); //---
@@ -6030,19 +6079,21 @@ namespace MusicBeePlugin
                 HeaderCellStyle.SelectionForeColor = ButtonForeColor;
                 HeaderCellStyle.SelectionBackColor = DimmedAccentColor;
 
-                var selectionForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateModified,
-                    ElementComponent.ComponentForeground));
-                var selectionBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateModified,
-                    ElementComponent.ComponentBackground));
+                //var selectionForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateModified,
+                //    ElementComponent.ComponentForeground));
+                //var selectionBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateModified,
+                //    ElementComponent.ComponentBackground));
 
                 UnchangedCellStyle.ForeColor = InputControlForeColor;
                 UnchangedCellStyle.BackColor = InputControlBackColor;
-                UnchangedCellStyle.SelectionForeColor = selectionForeColor;
-                UnchangedCellStyle.SelectionBackColor = selectionBackColor;
+                UnchangedCellStyle.SelectionForeColor = ButtonMouseOverForeColor;
+                UnchangedCellStyle.SelectionBackColor = ButtonMouseOverBackColor;
+                //UnchangedCellStyle.SelectionForeColor = selectionForeColor;
+                //UnchangedCellStyle.SelectionBackColor = selectionBackColor;
                 UnchangedCellStyle.Alignment = DataGridViewContentAlignment.TopLeft;
 
                 if (GetBrightnessDifference(UnchangedCellStyle.SelectionBackColor, UnchangedCellStyle.BackColor) < 0.25f)
-                    UnchangedCellStyle.SelectionBackColor = DeepDimmedAccentColor;
+                    UnchangedCellStyle.SelectionBackColor = GetWeightedColor(UnchangedCellStyle.SelectionForeColor, UnchangedCellStyle.SelectionBackColor, DeepDimmedWeight);
 
                 if (GetBrightnessDifference(HeaderCellStyle.ForeColor, HeaderCellStyle.BackColor) < 0.3f)
                     HeaderCellStyle.ForeColor = InvertAverageBrightness(HeaderCellStyle.ForeColor);
@@ -6533,7 +6584,7 @@ namespace MusicBeePlugin
             AddMenuItem(TagToolsSubmenu, "-", null, null);
             AddMenuItem(TagToolsSubmenu, PluginHelpString, null, helpEventHandler);
             AddMenuItem(TagToolsSubmenu, PluginWebPageString, null, webPageEventHandler).ToolTipText = PluginWebPageToolTip;
-            AddMenuItem(TagToolsSubmenu, PluginVersion, null, null, false);
+            AddMenuItem(TagToolsSubmenu, PluginVersion, null, copyPluginVersionEventHandler).ToolTipText = PluginVersionToolTip;
         }
 
         internal void addPluginContextMenuItems() //Must be called AFTER InitLr() and InitAsr(), and BEFORE addPluginMenuItems()!
@@ -6835,9 +6886,9 @@ namespace MusicBeePlugin
                 number2 = number2.Replace('.', LocalizedDecimalPoint);
 
                 if (decimal.Parse(number1) == decimal.Parse(number2))
-                    return "T";
+                    return Plugin.ColumnCheckedState;
                 else
-                    return "F";
+                    return Plugin.ColumnUncheckedState;
             }
             catch (Exception ex)
             {
@@ -6853,9 +6904,9 @@ namespace MusicBeePlugin
                 number2 = number2.Replace('.', LocalizedDecimalPoint);
 
                 if (decimal.Parse(number1) != decimal.Parse(number2))
-                    return "T";
+                    return Plugin.ColumnCheckedState;
                 else
-                    return "F";
+                    return Plugin.ColumnUncheckedState;
             }
             catch (Exception ex)
             {
@@ -6872,9 +6923,9 @@ namespace MusicBeePlugin
                 number2 = number2.Replace('.', LocalizedDecimalPoint);
 
                 if (decimal.Parse(number1) > decimal.Parse(number2))
-                    return "T";
+                    return Plugin.ColumnCheckedState;
                 else
-                    return "F";
+                    return Plugin.ColumnUncheckedState;
             }
             catch (Exception ex)
             {
@@ -6890,9 +6941,9 @@ namespace MusicBeePlugin
                 number2 = number2.Replace('.', LocalizedDecimalPoint);
 
                 if (decimal.Parse(number1) < decimal.Parse(number2))
-                    return "T";
+                    return Plugin.ColumnCheckedState;
                 else
-                    return "F";
+                    return Plugin.ColumnUncheckedState;
             }
             catch (Exception ex)
             {
@@ -6908,9 +6959,9 @@ namespace MusicBeePlugin
                 number2 = number2.Replace('.', LocalizedDecimalPoint);
 
                 if (decimal.Parse(number1) >= decimal.Parse(number2))
-                    return "T";
+                    return Plugin.ColumnCheckedState;
                 else
-                    return "F";
+                    return Plugin.ColumnUncheckedState;
             }
             catch (Exception ex)
             {
@@ -6926,9 +6977,9 @@ namespace MusicBeePlugin
                 number2 = number2.Replace('.', LocalizedDecimalPoint);
 
                 if (decimal.Parse(number1) <= decimal.Parse(number2))
-                    return "T";
+                    return Plugin.ColumnCheckedState;
                 else
-                    return "F";
+                    return Plugin.ColumnUncheckedState;
             }
             catch (Exception ex)
             {
@@ -7240,10 +7291,10 @@ namespace MusicBeePlugin
                 var escTextPart = Regex.Escape(textPart);
 
                 if (Regex.IsMatch(tagValue, escTextPart, RegexOptions.IgnoreCase))
-                    return "T";
+                    return Plugin.ColumnCheckedState;
             }
 
-            return "F";
+            return Plugin.ColumnUncheckedState;
         }
 
         public string CustomFunc_TagContainsAllStrings(string url, string tagName, string text)
@@ -7253,16 +7304,16 @@ namespace MusicBeePlugin
             var tagValue = GetFileTag(url, tagId); //-V5609
             var textParts = text.Split('|');
 
-            var result = "T";
+            var result = Plugin.ColumnCheckedState;
             foreach (var textPart in textParts)
             {
                 var escTextPart = Regex.Escape(textPart);
 
                 if (!Regex.IsMatch(tagValue, escTextPart, RegexOptions.IgnoreCase))
-                    return "F";
+                    return Plugin.ColumnUncheckedState;
             }
 
-            return "T";
+            return Plugin.ColumnCheckedState;
         }
         #endregion
     }

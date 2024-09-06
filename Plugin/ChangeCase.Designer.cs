@@ -34,6 +34,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChangeCase));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonClose = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
             this.forSelectedTracksLabel = new System.Windows.Forms.Label();
@@ -495,6 +498,9 @@
             // Track
             // 
             this.Track.DataPropertyName = "Track";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.Track.DefaultCellStyle = dataGridViewCellStyle1;
             this.Track.FillWeight = 200F;
             resources.ApplyResources(this.Track, "Track");
             this.Track.Name = "Track";
@@ -510,6 +516,9 @@
             // OriginalTagValueNormalized
             // 
             this.OriginalTagValueNormalized.DataPropertyName = "OriginalTagValueNormalized";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.OriginalTagValueNormalized.DefaultCellStyle = dataGridViewCellStyle2;
             resources.ApplyResources(this.OriginalTagValueNormalized, "OriginalTagValueNormalized");
             this.OriginalTagValueNormalized.Name = "OriginalTagValueNormalized";
             this.OriginalTagValueNormalized.ReadOnly = true;
@@ -524,6 +533,9 @@
             // NewTagValueNormalized
             // 
             this.NewTagValueNormalized.DataPropertyName = "NewTagValueNormalized";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.NewTagValueNormalized.DefaultCellStyle = dataGridViewCellStyle3;
             resources.ApplyResources(this.NewTagValueNormalized, "NewTagValueNormalized");
             this.NewTagValueNormalized.Name = "NewTagValueNormalized";
             // 
