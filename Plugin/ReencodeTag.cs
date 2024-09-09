@@ -91,13 +91,13 @@ namespace MusicBeePlugin
             {
                 HeaderCell = cbHeader,
                 ThreeState = true,
-
                 FalseValue = Plugin.ColumnUncheckedState,
                 TrueValue = Plugin.ColumnCheckedState,
                 IndeterminateValue = string.Empty,
                 Width = 25,
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.None,
-                DataPropertyName = "Checked", 
+                Resizable = DataGridViewTriState.False,
+                DataPropertyName = "Checked",
             };
 
             previewTable.Columns.Insert(0, colCB);
@@ -151,6 +151,8 @@ namespace MusicBeePlugin
 
         private void resetPreviewData()
         {
+            previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
             previewTable.AllowUserToResizeColumns = true;
             previewTable.AllowUserToResizeRows = true;
             foreach (DataGridViewColumn column in previewTable.Columns)
@@ -190,6 +192,7 @@ namespace MusicBeePlugin
             foreach (DataGridViewColumn column in previewTable.Columns)
                 column.SortMode = DataGridViewColumnSortMode.Automatic;
 
+            previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             AutoSizeTableRows(previewTable, 2);
 
 
@@ -207,9 +210,12 @@ namespace MusicBeePlugin
             {
                 ignoreClosingForm = false;
                 Close();
+                return;
             }
 
             ignoreClosingForm = false;
+
+            previewTable.Focus();
         }
 
         private bool applyingChangesStopped()
@@ -218,6 +224,9 @@ namespace MusicBeePlugin
             previewTable.AllowUserToResizeRows = true;
             foreach (DataGridViewColumn column in previewTable.Columns)
                 column.SortMode = DataGridViewColumnSortMode.Automatic;
+
+            previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            previewTable.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
 
 
             backgroundTaskIsScheduled = false;
@@ -272,11 +281,13 @@ namespace MusicBeePlugin
             }
             else
             {
-                previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
                 previewTable.AllowUserToResizeColumns = false;
                 previewTable.AllowUserToResizeRows = false;
                 foreach (DataGridViewColumn column in previewTable.Columns)
                     column.SortMode = DataGridViewColumnSortMode.NotSortable;
+
+                previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+                previewTable.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
 
                 return true;
             }
@@ -350,7 +361,7 @@ namespace MusicBeePlugin
                 {
                     Checked = isChecked,
                     File = currentFile,
-                    Track = track, 
+                    Track = track,
                     OriginalTagValue = sourceTagValue,
                     NewTagValue = newTagValue,
                 };
@@ -360,12 +371,12 @@ namespace MusicBeePlugin
 
                 int rowCountToFormat1 = 0;
                 Invoke(new Action(() => { rowCountToFormat1 = AddRowsToTable(this, previewTable, source, rows.Count, false, true); }));
-                Invoke(new Action(() => { FormatChangedTags(this, previewTable, rowCountToFormat1, previewTableFormatRow); }));
+                Invoke(new Action(() => { FormatChangedTags(this, previewTable, rowCountToFormat1, false, previewTableFormatRow); }));
             }
 
             int rowCountToFormat2 = 0;
             Invoke(new Action(() => { rowCountToFormat2 = AddRowsToTable(this, previewTable, source, rows.Count, true, true); }));
-            Invoke(new Action(() => { FormatChangedTags(this, previewTable, rowCountToFormat2, previewTableFormatRow); checkStoppedStatus(); resetFormToGeneratedPreview(); }));
+            Invoke(new Action(() => { FormatChangedTags(this, previewTable, rowCountToFormat2, true, previewTableFormatRow); checkStoppedStatus(); resetFormToGeneratedPreview(); }));
         }
 
         private void applyChanges()
@@ -431,7 +442,7 @@ namespace MusicBeePlugin
 
         private void buttonPreview_Click(object sender, EventArgs e)
         {
-            ignoreClosingForm = clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewChanges, buttonPreview, buttonOK, buttonClose);
+            ignoreClosingForm = clickOnPreviewButton(prepareBackgroundPreview, previewChanges, buttonPreview, buttonOK, buttonClose);
         }
 
         private void buttonClose_Click(object sender, EventArgs e)
@@ -441,6 +452,10 @@ namespace MusicBeePlugin
 
         private void cbHeader_OnCheckBoxClicked(bool state)
         {
+            if (rows.Count == 0)
+                return;
+
+
             for (int i = 0; i < rows.Count; i++)
             {
                 if (rows[0].Checked == null)
@@ -452,9 +467,14 @@ namespace MusicBeePlugin
                     rows[0].Checked = Plugin.ColumnCheckedState;
             }
 
+            int firstRow = previewTable.FirstDisplayedCell.RowIndex;
+
             source.ResetBindings(false);
             for (int i = 0; i < rows.Count; i++)
-                previewTable_CellContentClick(previewTable, new DataGridViewCellEventArgs(0, i));
+                previewTableFormatRow(previewTable, i);
+
+            var firstCell = previewTable.Rows[firstRow].Cells[0];
+            previewTable.FirstDisplayedCell = firstCell;
         }
 
         private void previewTable_CellContentClick(object sender, DataGridViewCellEventArgs e)

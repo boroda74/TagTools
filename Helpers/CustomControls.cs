@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
+
 using ExtensionMethods;
+
 using static NativeMethods;
 
 namespace MusicBeePlugin
@@ -144,8 +146,20 @@ namespace MusicBeePlugin
 
     public sealed class ControlBorder : UserControl
     {
+        private readonly Color borderColorDisabled = Plugin.ScrollBarBorderColor;
+        private readonly Color borderColorActive = Plugin.ScrollBarFocusedBorderColor;
+        private readonly Color borderColor = Plugin.ScrollBarBorderColor;
+
         internal readonly Control control;
         private bool ignoreControl_LocationChanged = false;
+
+        public ControlBorder(Control control, Color borderColor, Color borderColorDisabled, Color borderColorActive) :
+            this(control)
+        {
+            this.borderColorDisabled = borderColorDisabled;
+            this.borderColorActive = borderColorActive;
+            this.borderColor = borderColor;
+        }
 
         public ControlBorder(Control control)
         {
@@ -230,7 +244,7 @@ namespace MusicBeePlugin
 
         private void controlBorder_Paint(object sender, PaintEventArgs e)
         {
-            ControlsTools.DrawBorder(sender as Control);
+            ControlsTools.DrawBorder(sender as Control, borderColor, borderColorActive, borderColorDisabled);
         }
 
         protected override void Dispose(bool disposing)
@@ -251,9 +265,9 @@ namespace MusicBeePlugin
 
     public class CustomComboBox : UserControl
     {
-        private readonly Color borderColorDisabled = Plugin.ScrollBarBackColor;
+        private readonly Color borderColorDisabled = Plugin.ScrollBarBorderColor;
         private readonly Color borderColorActive = Plugin.ScrollBarFocusedBorderColor;
-        private readonly Color borderColor = Plugin.ScrollBarBackColor;
+        private readonly Color borderColor = Plugin.ScrollBarBorderColor;
 
         private Bitmap downArrowComboBoxImage;
         private Bitmap disabledDownArrowComboBoxImage;
@@ -368,7 +382,7 @@ namespace MusicBeePlugin
             return tableLayoutPanel;
         }
 
-        public CustomComboBox(PluginWindowTemplate ownerForm, ComboBox comboBox, bool skinned)
+        public CustomComboBox(PluginWindowTemplate ownerForm, ComboBox comboBox, bool skinned, Color? borderColor = null, Color? borderColorDisabled = null, Color? borderColorActive = null)
         {
             SetStyle(ControlStyles.ResizeRedraw, true);
             SetStyle(ControlStyles.DoubleBuffer, true);
@@ -388,14 +402,15 @@ namespace MusicBeePlugin
 
             EnabledChanged += OnEnabledChanged;
             VisibleChanged += OnVisibleChanged;
-        }
 
-        public CustomComboBox(PluginWindowTemplate ownerForm, ComboBox comboBoxRef, bool skinned, Color borderColor, Color borderColorDisabled, Color borderColorActive)
-            : this(ownerForm, comboBoxRef, skinned)
-        {
-            this.borderColorDisabled = borderColorDisabled;
-            this.borderColorActive = borderColorActive;
-            this.borderColor = borderColor;
+            if (borderColorDisabled != null)
+                this.borderColorDisabled = (Color)borderColorDisabled;
+
+            if (borderColorActive != null)
+                this.borderColorActive = (Color)borderColorActive;
+
+            if (borderColor != null)
+                this.borderColor = (Color)borderColor;
         }
 
 
@@ -603,7 +618,7 @@ namespace MusicBeePlugin
             CopyComboBoxEventHandlers(comboBox, this);
 
 
-            this.Paint += ControlBorder_Paint;
+            this.Paint += controlBorder_Paint;
             this.GotFocus += customComboBox_GotFocus;
             this.SizeChanged += customComboBox_SizeChanged;
             customComboBox_SizeChanged(this, null);
@@ -639,6 +654,8 @@ namespace MusicBeePlugin
 
             if (disposing)
             {
+                Parent?.Dispose(); //ControlBorder
+
                 textBox?.Dispose();
                 button?.Dispose();
                 listBox?.Dispose();
@@ -1089,9 +1106,9 @@ namespace MusicBeePlugin
             }
         }
 
-        private static void ControlBorder_Paint(object sender, PaintEventArgs e)
+        private void controlBorder_Paint(object sender, PaintEventArgs e)
         {
-            ControlsTools.DrawBorder(sender as Control);
+            ControlsTools.DrawBorder(this, borderColor, borderColorActive, borderColorDisabled);
         }
 
         private void customComboBox_SizeChanged_ForButton()
@@ -1161,7 +1178,7 @@ namespace MusicBeePlugin
                 listBox.SelectedIndex = index;
         }
 
-        private void changeTextBoxBackground(object sender, EventArgs e)//--------------
+        private void changeTextBoxBackground(object sender, EventArgs e)//-----
         {
             SetColors(null);
         }
@@ -1279,15 +1296,27 @@ namespace MusicBeePlugin
 
     public class CustomTextBox : TextBox
     {
+        private readonly Color borderColorDisabled = Plugin.ScrollBarBorderColor;
+        private readonly Color borderColorActive = Plugin.ScrollBarFocusedBorderColor;
+        private readonly Color borderColor = Plugin.ScrollBarBorderColor;
+
         public CustomVScrollBar vScrollBar;
 
         public CustomTextBox(Color borderColor, Color borderColorDisabled, Color borderColorActive)
         {
+            SetStyle(ControlStyles.ResizeRedraw, true);
+            //SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            SetStyle(ControlStyles.DoubleBuffer, true);
+
+            this.borderColorDisabled = borderColorDisabled;
+            this.borderColorActive = borderColorActive;
+            this.borderColor = borderColor;
+
             var thisRectangle = new Rectangle(1, 1, Width - 2, Height - 2);
             var thisRegion = new Region(thisRectangle);
             Region = thisRegion;
 
-            Paint += (sender, args) => { ControlsTools.DrawBorder(this, borderColor, borderColorActive, borderColorDisabled); };
+            Paint += (sender, args) => { ControlsTools.DrawBorder(this, this.borderColor, this.borderColorActive, this.borderColorDisabled); };
         }
 
         public int ScrollPosition { get; set; }
@@ -1313,13 +1342,13 @@ namespace MusicBeePlugin
 
         //public bool ShowScrollbars //Doesn't work
         //{
-        //    get { return showScroll; }
+        //    get { return dontUseSkinColors; }
 
         //    set
         //    {
-        //        if (showScroll != value)
+        //        if (dontUseSkinColors != value)
         //        {
-        //            showScroll = value;
+        //            dontUseSkinColors = value;
         //            if (IsHandleCreated)
         //                RecreateHandle();
         //        }
@@ -1359,35 +1388,35 @@ namespace MusicBeePlugin
         private readonly int scaledPx = -10000;
         private readonly int customScrollBarInitialWidth;
 
-        private readonly bool notSkinned;
+        private readonly bool dontUseSkinColors;
 
         public CustomHScrollBar hScrollBar;
         public CustomVScrollBar vScrollBar;
 
         public event EventHandler ItemsChanged;
 
-        public CustomListBox(bool showScroll)
+        public CustomListBox(bool dontUseSkinColors)
         {
-            this.notSkinned = showScroll;
+            this.dontUseSkinColors = dontUseSkinColors;
 
             InitializeComponent();
 
             SetStyle(ControlStyles.ResizeRedraw, true);
             //SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-            //SetStyle(ControlStyles.DoubleBuffer, true);
+            SetStyle(ControlStyles.DoubleBuffer, true);
 
             //TODO: Add any initialization after the InitForm call
         }
 
-        public CustomListBox(int customScrollBarInitialWidth, int scaledPx, bool showScroll) : this(false)
+        public CustomListBox(int customScrollBarInitialWidth, int scaledPx, bool dontUseSkinColors) : this(false)
         {
-            this.notSkinned = showScroll;
+            this.dontUseSkinColors = dontUseSkinColors;
             this.customScrollBarInitialWidth = customScrollBarInitialWidth;
             this.scaledPx = scaledPx;
         }
 
-        public CustomListBox(int customScrollBarInitialWidth, int scaledPx, bool showScroll, Color borderColor, Color borderColorDisabled, Color borderColorActive)
-            : this(customScrollBarInitialWidth, scaledPx, showScroll)
+        public CustomListBox(int customScrollBarInitialWidth, int scaledPx, bool dontUseSkinColors, Color borderColor, Color borderColorDisabled, Color borderColorActive)
+            : this(customScrollBarInitialWidth, scaledPx, dontUseSkinColors)
         {
             this.borderColorDisabled = borderColorDisabled;
             this.borderColorActive = borderColorActive;
@@ -1408,7 +1437,7 @@ namespace MusicBeePlugin
 
         public int GetItemsHeight()
         {
-            return ItemHeight * Items.Count;//-------- + 3 * scaledPx;
+            return ItemHeight * Items.Count;
         }
 
         public void AdjustHeight(int dropDownWidth, int initialDropDownHeight)
@@ -1480,7 +1509,7 @@ namespace MusicBeePlugin
             {
                 var cp = base.CreateParams;
 
-                if (!notSkinned)
+                if (!dontUseSkinColors)
                 {
                     cp.ExStyle &= ~WS_EX_CLIENTEDGE;
                     cp.Style |= WS_BORDER;
@@ -1494,13 +1523,13 @@ namespace MusicBeePlugin
 
         //public bool ShowScrollbars //Doesn't work
         //{
-        //    get { return showScroll; }
+        //    get { return dontUseSkinColors; }
 
         //    set
         //    {
-        //        if (showScroll != value)
+        //        if (dontUseSkinColors != value)
         //        {
-        //            showScroll = value;
+        //            dontUseSkinColors = value;
         //            if (IsHandleCreated)
         //                RecreateHandle();
         //        }
@@ -1517,7 +1546,7 @@ namespace MusicBeePlugin
                 if (ItemsChanged != null)
                     ItemsChanged(this, EventArgs.Empty); //-V3083 //-V5605
 
-            if (m.Msg == WM_NCPAINT && !notSkinned)
+            if (m.Msg == WM_NCPAINT && !dontUseSkinColors)
             {
                 WmNcPaint(ref m);
                 return;
@@ -1592,28 +1621,28 @@ namespace MusicBeePlugin
         private readonly Color borderColorActive = Plugin.ScrollBarFocusedBorderColor;
         private readonly Color borderColor = Plugin.ScrollBarBorderColor;
 
-        private readonly bool notSkinned;
+        private readonly bool dontUseSkinColors;
 
         public CustomHScrollBar hScrollBar;
         public CustomVScrollBar vScrollBar;
 
         public event EventHandler ItemsChanged;
 
-        public CustomCheckedListBox(bool showScroll)
+        public CustomCheckedListBox(bool dontUseSkinColors)
         {
-            this.notSkinned = showScroll;
+            this.dontUseSkinColors = dontUseSkinColors;
 
             InitializeComponent();
 
             SetStyle(ControlStyles.ResizeRedraw, true);
             //SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-            //SetStyle(ControlStyles.DoubleBuffer, true);
+            SetStyle(ControlStyles.DoubleBuffer, true);//-------------
 
             //TODO: Add any initialization after the InitForm call
         }
 
-        public CustomCheckedListBox(bool showScroll, Color borderColor, Color borderColorDisabled, Color borderColorActive)
-            : this(showScroll)
+        public CustomCheckedListBox(bool dontUseSkinColors, Color borderColor, Color borderColorDisabled, Color borderColorActive)
+            : this(dontUseSkinColors)
         {
             this.borderColorDisabled = borderColorDisabled;
             this.borderColorActive = borderColorActive;
@@ -1626,7 +1655,7 @@ namespace MusicBeePlugin
             {
                 var cp = base.CreateParams;
 
-                if (!notSkinned)
+                if (!dontUseSkinColors)
                 {
                     cp.ExStyle &= ~WS_EX_CLIENTEDGE;
                     cp.Style |= WS_BORDER;
@@ -1640,13 +1669,13 @@ namespace MusicBeePlugin
 
         //public bool ShowScrollbars //Doesn't work
         //{
-        //    get { return showScroll; }
+        //    get { return dontUseSkinColors; }
 
         //    set
         //    {
-        //        if (showScroll != value)
+        //        if (dontUseSkinColors != value)
         //        {
-        //            showScroll = value;
+        //            dontUseSkinColors = value;
         //            if (IsHandleCreated)
         //                RecreateHandle();
         //        }
@@ -1657,17 +1686,17 @@ namespace MusicBeePlugin
         {
             return ItemHeight;
         }
-        
+
         public override int ItemHeight
         {
             get { return (int)Math.Round(this.FontHeight * ItemScale); }
 
-            set { this.FontHeight =(int)Math.Round(value / ItemScale); }
+            set { this.FontHeight = (int)Math.Round(value / ItemScale); }
         }
 
         protected override void OnDrawItem(DrawItemEventArgs e)
         {
-            if (!notSkinned) //Skinned list box
+            if (!dontUseSkinColors) //Skinned list box
                 PluginWindowTemplate.ListBox_DrawItem(this, e);
             else //Not skinned list box. Call the original OnDrawItem, using original colors
                 base.OnDrawItem(e);
@@ -1683,7 +1712,7 @@ namespace MusicBeePlugin
                 if (ItemsChanged != null)
                     ItemsChanged(this, EventArgs.Empty); //-V3083 //-V5605
 
-            if (m.Msg == WM_NCPAINT && !notSkinned)
+            if (m.Msg == WM_NCPAINT && !dontUseSkinColors)
             {
                 WmNcPaint(ref m);
                 return;
@@ -1862,7 +1891,7 @@ namespace MusicBeePlugin
 
 
         //refScrollBar must be null if scrolledControl is not a parent of custom scroll bar & scroll bar must be placed on the right to scrolledControl
-        public CustomVScrollBar(Form ownerForm, Control scrolledControl, int smallChange, 
+        public CustomVScrollBar(Form ownerForm, Control scrolledControl, int smallChange,
             GetScrollBarMetricsDelegate getScrollBarMetrics, int borderWidth, Control refScrollBar = null, bool useSelfAsRefScrollBar = false)
         {
             InitializeComponent();

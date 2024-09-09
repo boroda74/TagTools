@@ -176,7 +176,7 @@ namespace MusicBeePlugin
             comboBox.ClearCue();
         }
 
-        internal void listBox_MeasureItem(object sender, MeasureItemEventArgs e)//---------
+        internal void listBox_MeasureItem(object sender, MeasureItemEventArgs e)
         {
             if (!(sender is CustomListBox) && !(sender is CustomCheckedListBox))
                 e.ItemHeight = (sender as ListBox).Font.Height;
@@ -357,10 +357,12 @@ namespace MusicBeePlugin
         protected void button_MouseEnter(object sender, EventArgs e)
         {
             Button button = sender as Button;
-            if (useSkinColors && !(button.Parent is CustomComboBox))
+            if (useSkinColors && !(button.Parent is CustomComboBox) && button.IsEnabled())
                 button.FlatAppearance.BorderColor = ButtonMouseOverBackColor;
+            else if (useSkinColors && !(button.Parent is CustomComboBox))
+                button.FlatAppearance.BorderColor = ButtonBorderColor;
 
-            button.Invalidate();//------------ Refresh()????
+            button.Refresh();
         }
 
         protected void button_MouseLeave(object sender, EventArgs e)
@@ -371,7 +373,7 @@ namespace MusicBeePlugin
             else if (useSkinColors && !(button.Parent is CustomComboBox))
                 button.FlatAppearance.BorderColor = ButtonBorderColor;
 
-            button.Invalidate();//------------ Refresh()????
+            button.Refresh();
         }
 
         protected bool isMouseOverControl(Control control)
@@ -393,10 +395,23 @@ namespace MusicBeePlugin
 
             //Render the text onto the button.
             if (isMouseOverControl(sender as Control))
-                TextRenderer.DrawText(e.Graphics, text, button.Font, e.ClipRectangle, ButtonMouseOverForeColor, flags);
-            else
-                TextRenderer.DrawText(e.Graphics, text, button.Font, e.ClipRectangle, button.ForeColor, flags);
+            {
+                if (useSkinColors && !(button.Parent is CustomComboBox) && button.IsEnabled())
+                    button.FlatAppearance.BorderColor = ButtonMouseOverBackColor;
+                else if (useSkinColors && !(button.Parent is CustomComboBox))
+                    button.FlatAppearance.BorderColor = ButtonBorderColor;
 
+                TextRenderer.DrawText(e.Graphics, text, button.Font, e.ClipRectangle, ButtonMouseOverForeColor, flags);
+            }
+            else
+            {
+                if (useSkinColors && button.IsEnabled() && button == button.FindForm().AcceptButton)
+                    button.FlatAppearance.BorderColor = ButtonFocusedBorderColor;
+                else if (useSkinColors && !(button.Parent is CustomComboBox))
+                    button.FlatAppearance.BorderColor = ButtonBorderColor;
+
+                TextRenderer.DrawText(e.Graphics, text, button.Font, e.ClipRectangle, button.ForeColor, flags);
+            }
         }
 
         protected void button_TextChanged(object sender, EventArgs e)
@@ -2360,6 +2375,8 @@ namespace MusicBeePlugin
         {
             if (dataGridView.RowCount > 0)
             {
+                dataGridView.FirstDisplayedCell = dataGridView.CurrentCell;
+
                 int[] initialHeights = new int[dataGridView.RowCount];
                 for (int i = 0; i < dataGridView.RowCount; i++)
                 {
@@ -2367,29 +2384,22 @@ namespace MusicBeePlugin
                     dataGridView.Rows[i].Cells[adjustedColumnIndex].Style.WrapMode = DataGridViewTriState.False;
                 }
 
-                dataGridView.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCells);//------------
+                dataGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
 
-                bool heightChanged = false;
                 for (int i = 0; i < dataGridView.RowCount; i++)
                 {
                     if (dataGridView.Rows[i].Height > initialHeights[i])
-                    {
-                        heightChanged = true;
                         dataGridView.Rows[i].Cells[adjustedColumnIndex].Style.WrapMode = DataGridViewTriState.True;
-                    }
                 }
-
-                if (heightChanged)
-                    dataGridView.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCells);
             }
         }
 
         //Returns the number of rows, which require formatting changed tags, 0 if no formatting is required
-        internal static int AddRowsToTable(PluginWindowTemplate form, DataGridView dataGridView, BindingSource source , int rowsCount, bool itsLastRowRange, bool selectLastRow, bool resetBindingsMetadataChanged = false)
+        internal static int AddRowsToTable(PluginWindowTemplate form, DataGridView dataGridView, BindingSource source, int rowsCount, bool itsLastRowRange, bool selectLastRow, bool resetBindingsMetadataChanged = false)
         {
             if (rowsCount > 0)
             {
-                if (itsLastRowRange || ((rowsCount & 0x1f) == 0))
+                if (itsLastRowRange || (rowsCount & 0x1f) == 0)
                 {
                     source.ResetBindings(resetBindingsMetadataChanged);
 
@@ -2415,14 +2425,14 @@ namespace MusicBeePlugin
             }
         }
 
-        internal static void FormatChangedTags(PluginWindowTemplate form, DataGridView dataGridView, int rowCountToFormat, DataGridViewFormatChangedTags dataGridViewFormatChangedTags = null)
+        internal static void FormatChangedTags(PluginWindowTemplate form, DataGridView dataGridView, int rowCountToFormat, bool itsLastRowRange, DataGridViewFormatChangedTags dataGridViewFormatChangedTags = null)
         {
             if (dataGridViewFormatChangedTags != null)
                 for (int j = dataGridView.RowCount - rowCountToFormat; j < dataGridView.RowCount; j++)
                     dataGridViewFormatChangedTags(dataGridView, j);
 
 
-            if (dataGridView.RowCount > 0)
+            if (dataGridView.RowCount > 0 && (itsLastRowRange || (dataGridView.RowCount & 0x1f) == 0))
                 dataGridView.FirstDisplayedCell = dataGridView.CurrentCell;
 
             if (form.useSkinColors)
@@ -2598,7 +2608,7 @@ namespace MusicBeePlugin
 
                     if (!(button.Parent is CustomComboBox))
                     {
-                        button.FlatAppearance.MouseOverBackColor = ButtonMouseOverBackColor;//----------
+                        button.FlatAppearance.MouseOverBackColor = ButtonMouseOverBackColor;
                         button.FlatAppearance.MouseDownBackColor = ButtonMouseOverBackColor;
                     }
 
@@ -2617,11 +2627,11 @@ namespace MusicBeePlugin
                     //   button.FlatAppearance.BorderColor = ButtonFocusedBorderColor;
                     //}
                     //Combo box button
-                    else if (((control.IsEnabled() && enable == null) || enable == true) && button.Parent is CustomComboBox)//---------------------
+                    else if (((control.IsEnabled() && enable == null) || enable == true) && button.Parent is CustomComboBox)
                     {
                         button.ForeColor = buttonForeColor;
                         button.BackColor = NarrowScrollBarBackColor;
-                        button.FlatAppearance.BorderColor = ButtonBorderColor;
+                        button.FlatAppearance.BorderColor = ScrollBarBorderColor;//---
                     }
                     //Generic button
                     else if ((control.IsEnabled() && enable == null) || enable == true)
@@ -2633,11 +2643,11 @@ namespace MusicBeePlugin
 
 
                     //Combo box disabled button
-                    else if (button.Parent is CustomComboBox) //--------
+                    else if (button.Parent is CustomComboBox)
                     {
                         button.ForeColor = buttonForeColor;
                         button.BackColor = NarrowScrollBarBackColor;
-                        button.FlatAppearance.BorderColor = ButtonBorderColor;
+                        button.FlatAppearance.BorderColor = ScrollBarBorderColor;//---
 
                         //button.ForeColor = buttonForeColor;
                         //button.BackColor = InputPanelBackColor; //---
@@ -2693,7 +2703,7 @@ namespace MusicBeePlugin
                 {
                     customComboBox.SetColors(enable); //-----
                 }
-                else if (control is ComboBox comboBox && comboBox.DropDownStyle == ComboBoxStyle.Simple) //----- Owner drawing selected items !!!
+                else if (control is ComboBox comboBox && comboBox.DropDownStyle == ComboBoxStyle.Simple) //-------------- Make owner drawing selected items !!!
                 {
                     if ((control.IsEnabled() && enable == null) || enable == true)
                     {
@@ -4511,7 +4521,7 @@ namespace MusicBeePlugin
         }
 
         //Returns: true if preview is started (closing current form must be temporary disabled), otherwise returns false
-        protected bool clickOnPreviewButton(DataGridView previewTable, PrepareOperation prepareOperation, ThreadStart operation,
+        protected bool clickOnPreviewButton(PrepareOperation prepareOperation, ThreadStart operation,
             Button previewButton, Button okButton, Button closeButton, bool clearPreview = false)
         {
             if (!previewIsGenerated && !backgroundTaskIsWorking() && !clearPreview)
@@ -4549,7 +4559,7 @@ namespace MusicBeePlugin
                 if (prepareOperation != null)
                     prepareOperation();
 
-                previewIsGenerated = false; //--------
+                previewIsGenerated = false;
                 backgroundTaskIsStopping = false;
                 backgroundTaskIsStoppedOrCancelled = false;
                 previewButton.Text = ButtonPreviewName;

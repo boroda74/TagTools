@@ -708,7 +708,7 @@ namespace MusicBeePlugin
             searchedTag5ListCustom.Enable(true);
             replacedTag5ListCustom.Enable(true);
 
-            Enable(true, null,  null);
+            Enable(true, null, null);
             this.Text = FormTitleBarText;
 
             FormTitleBarText = null;

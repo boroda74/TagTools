@@ -17,19 +17,6 @@ namespace MusicBeePlugin
         ///<param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                searchTextBox.Parent?.Dispose();
-                customTextBox.Parent?.Dispose();
-                customText2Box.Parent?.Dispose();
-                customText3Box.Parent?.Dispose();
-                customText4Box.Parent?.Dispose();
-                idTextBox.Parent?.Dispose();
-                preserveTagValuesTextBox.Parent?.Dispose();
-                processPreserveTagsTextBox.Parent?.Dispose();
-                descriptionBox.Parent?.Dispose();
-            }
-
             if (disposing && (components != null))
             {
                 components.Dispose();
@@ -63,6 +50,22 @@ namespace MusicBeePlugin
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdvancedSearchAndReplace));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -1116,118 +1119,180 @@ namespace MusicBeePlugin
             // 
             this.Track.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Track.DataPropertyName = "Track";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.Track.DefaultCellStyle = dataGridViewCellStyle1;
             this.Track.FillWeight = 60F;
             resources.ApplyResources(this.Track, "Track");
             this.Track.Name = "Track";
             // 
             // TagName1
             // 
+            this.TagName1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.TagName1.DataPropertyName = "TagName1";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.TagName1.DefaultCellStyle = dataGridViewCellStyle2;
             this.TagName1.FillWeight = 24.52376F;
             resources.ApplyResources(this.TagName1, "TagName1");
             this.TagName1.Name = "TagName1";
             // 
             // OriginalTag1
             // 
+            this.OriginalTag1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.OriginalTag1.DataPropertyName = "OriginalTag1";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.OriginalTag1.DefaultCellStyle = dataGridViewCellStyle3;
             this.OriginalTag1.FillWeight = 24.52376F;
             resources.ApplyResources(this.OriginalTag1, "OriginalTag1");
             this.OriginalTag1.Name = "OriginalTag1";
             // 
             // NewTag1
             // 
+            this.NewTag1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.NewTag1.DataPropertyName = "NewTag1";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.NewTag1.DefaultCellStyle = dataGridViewCellStyle4;
             this.NewTag1.FillWeight = 24.52376F;
             resources.ApplyResources(this.NewTag1, "NewTag1");
             this.NewTag1.Name = "NewTag1";
             // 
             // TagName2
             // 
+            this.TagName2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.TagName2.DataPropertyName = "TagName2";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.TagName2.DefaultCellStyle = dataGridViewCellStyle5;
             this.TagName2.FillWeight = 24.52376F;
             resources.ApplyResources(this.TagName2, "TagName2");
             this.TagName2.Name = "TagName2";
             // 
             // OriginalTag2
             // 
+            this.OriginalTag2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.OriginalTag2.DataPropertyName = "OriginalTag2";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.OriginalTag2.DefaultCellStyle = dataGridViewCellStyle6;
             this.OriginalTag2.FillWeight = 24.52376F;
             resources.ApplyResources(this.OriginalTag2, "OriginalTag2");
             this.OriginalTag2.Name = "OriginalTag2";
             // 
             // NewTag2
             // 
+            this.NewTag2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.NewTag2.DataPropertyName = "NewTag2";
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.NewTag2.DefaultCellStyle = dataGridViewCellStyle7;
             this.NewTag2.FillWeight = 24.52376F;
             resources.ApplyResources(this.NewTag2, "NewTag2");
             this.NewTag2.Name = "NewTag2";
             // 
             // TagName3
             // 
+            this.TagName3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.TagName3.DataPropertyName = "TagName3";
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.TagName3.DefaultCellStyle = dataGridViewCellStyle8;
             this.TagName3.FillWeight = 24.52376F;
             resources.ApplyResources(this.TagName3, "TagName3");
             this.TagName3.Name = "TagName3";
             // 
             // OriginalTag3
             // 
+            this.OriginalTag3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.OriginalTag3.DataPropertyName = "OriginalTag3";
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.OriginalTag3.DefaultCellStyle = dataGridViewCellStyle9;
             this.OriginalTag3.FillWeight = 24.52376F;
             resources.ApplyResources(this.OriginalTag3, "OriginalTag3");
             this.OriginalTag3.Name = "OriginalTag3";
             // 
             // NewTag3
             // 
+            this.NewTag3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.NewTag3.DataPropertyName = "NewTag3";
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.NewTag3.DefaultCellStyle = dataGridViewCellStyle10;
             this.NewTag3.FillWeight = 24.52376F;
             resources.ApplyResources(this.NewTag3, "NewTag3");
             this.NewTag3.Name = "NewTag3";
             // 
             // TagName4
             // 
+            this.TagName4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.TagName4.DataPropertyName = "TagName4";
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.TagName4.DefaultCellStyle = dataGridViewCellStyle11;
             this.TagName4.FillWeight = 24.52376F;
             resources.ApplyResources(this.TagName4, "TagName4");
             this.TagName4.Name = "TagName4";
             // 
             // OriginalTag4
             // 
+            this.OriginalTag4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.OriginalTag4.DataPropertyName = "OriginalTag4";
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.OriginalTag4.DefaultCellStyle = dataGridViewCellStyle12;
             this.OriginalTag4.FillWeight = 24.52376F;
             resources.ApplyResources(this.OriginalTag4, "OriginalTag4");
             this.OriginalTag4.Name = "OriginalTag4";
             // 
             // NewTag4
             // 
+            this.NewTag4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.NewTag4.DataPropertyName = "NewTag4";
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.NewTag4.DefaultCellStyle = dataGridViewCellStyle13;
             this.NewTag4.FillWeight = 24.52376F;
             resources.ApplyResources(this.NewTag4, "NewTag4");
             this.NewTag4.Name = "NewTag4";
             // 
             // TagName5
             // 
+            this.TagName5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.TagName5.DataPropertyName = "TagName5";
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.TagName5.DefaultCellStyle = dataGridViewCellStyle14;
             this.TagName5.FillWeight = 24.52376F;
             resources.ApplyResources(this.TagName5, "TagName5");
             this.TagName5.Name = "TagName5";
             // 
             // OriginalTag5
             // 
+            this.OriginalTag5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.OriginalTag5.DataPropertyName = "OriginalTag5";
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.OriginalTag5.DefaultCellStyle = dataGridViewCellStyle15;
             this.OriginalTag5.FillWeight = 24.52376F;
             resources.ApplyResources(this.OriginalTag5, "OriginalTag5");
             this.OriginalTag5.Name = "OriginalTag5";
             // 
             // NewTag5
             // 
+            this.NewTag5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.NewTag5.DataPropertyName = "NewTag5";
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.NewTag5.DefaultCellStyle = dataGridViewCellStyle16;
             this.NewTag5.FillWeight = 24.52376F;
             resources.ApplyResources(this.NewTag5, "NewTag5");
             this.NewTag5.Name = "NewTag5";
             // 
             // OddEven
             // 
-            this.OddEven.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.OddEven.DataPropertyName = "OddEven";
             this.OddEven.FillWeight = 1F;
             resources.ApplyResources(this.OddEven, "OddEven");

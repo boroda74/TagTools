@@ -15,33 +15,6 @@ namespace MusicBeePlugin
         ///<param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                threshold05Box.Parent?.Dispose();
-                threshold1Box.Parent?.Dispose();
-                threshold15Box.Parent?.Dispose();
-                threshold2Box.Parent?.Dispose();
-                threshold25Box.Parent?.Dispose();
-                threshold3Box.Parent?.Dispose();
-                threshold35Box.Parent?.Dispose();
-                threshold4Box.Parent?.Dispose();
-                threshold45Box.Parent?.Dispose();
-                threshold5Box.Parent?.Dispose();
-                maxPlaysPerDayBox.Parent?.Dispose();
-                avgPlaysPerDayBox.Parent?.Dispose();
-
-                perCent05UpDown.Parent?.Dispose();
-                perCent1UpDown.Parent?.Dispose();
-                perCent15UpDown.Parent?.Dispose();
-                perCent2UpDown.Parent?.Dispose();
-                perCent25UpDown.Parent?.Dispose();
-                perCent3UpDown.Parent?.Dispose();
-                perCent35UpDown.Parent?.Dispose();
-                perCent4UpDown.Parent?.Dispose();
-                perCent45UpDown.Parent?.Dispose();
-                perCent5UpDown.Parent?.Dispose();
-            }
-
             if (disposing && (components != null))
             {
                 components.Dispose();

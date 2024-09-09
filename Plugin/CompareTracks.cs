@@ -20,7 +20,7 @@ namespace MusicBeePlugin
         private int defaultColumnWidth;
 
 
-        private DataGridViewBoundColumnList<DataGridViewBoundColumns> rows;
+        private DataGridViewBoundColumnList<DataGridViewBoundColumns> rows = new DataGridViewBoundColumnList<DataGridViewBoundColumns>();
         BindingSource source = new BindingSource();
 
         private readonly string[] trackUrls;
@@ -202,7 +202,7 @@ namespace MusicBeePlugin
 
 
             previewTable.DataSource = null;
-            rows?.Clear();
+            rows.Clear();
 
             previewTable.RowCount = 1;
 
@@ -257,9 +257,12 @@ namespace MusicBeePlugin
             {
                 ignoreClosingForm = false;
                 Close();
+                return;
             }
 
             ignoreClosingForm = false;
+
+            previewTable.Focus();
         }
 
         internal bool prepareBackgroundPreview()
@@ -430,11 +433,12 @@ namespace MusicBeePlugin
                 addTagRow(j, tagValues);
             }
 
-            Invoke(new Action(() => {
+            Invoke(new Action(() =>
+            {
                 if (previewTable.ColumnCount > 0)
                     previewTable.Columns.RemoveAt(0);
 
-                source.ResetBindings(true); 
+                source.ResetBindings(true);
                 previewTable.DataSource = source;
             }));
 
@@ -572,7 +576,7 @@ namespace MusicBeePlugin
 
         private void buttonPreview_Click(object sender, EventArgs e)
         {
-            ignoreClosingForm = clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewChanges, buttonPreview, buttonOK, buttonClose, false);
+            ignoreClosingForm = clickOnPreviewButton(prepareBackgroundPreview, previewChanges, buttonPreview, buttonOK, buttonClose, false);
         }
 
         private void buttonOK_Click(object sender, EventArgs e)

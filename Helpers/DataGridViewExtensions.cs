@@ -1,8 +1,8 @@
-﻿using System.Drawing;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace MusicBeePlugin
@@ -138,7 +138,7 @@ namespace MusicBeePlugin
     internal class DataGridViewBoundColumnList<T> : DataGridViewBoundList<T>
         where T : DataGridViewBoundColumns, new()
     {
-        public DataGridViewBoundColumnList(List<string> columnNames) : base("Columns", columnNames)
+        public DataGridViewBoundColumnList(List<string> columnNames = null) : base("Columns", columnNames)
         {
             //Nothing new...
         }
@@ -188,7 +188,7 @@ namespace MusicBeePlugin
         {
             if (listPropertyName == null)
                 throw new Exception("List property name must not be null!");
-            
+
             //if (columnNames != null && columnNames.Count == 0)
             //    throw new Exception("Column names count must be positive number!");
 
@@ -211,7 +211,7 @@ namespace MusicBeePlugin
             {
                 if (prop.Name == listPropertyName)
                     listProp = prop;
-                else 
+                else
                     newProps.Add(prop);
             }
 

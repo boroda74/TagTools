@@ -99,6 +99,13 @@ namespace MusicBeePlugin
 
         internal static ToolStripMenuItem OpenedFormsSubmenu;
 
+        internal static string EnabledState = "+";
+        internal static string DisabledState = "-";
+
+        internal static string ColumnCheckedState = "T";
+        internal static string ColumnUncheckedState = "F";
+
+
         //Skinning
         internal static bool PluginClosing;
 
@@ -250,14 +257,9 @@ namespace MusicBeePlugin
         internal static Bitmap UncheckAllFiltersAccent;
         internal static Bitmap UncheckAllFiltersDimmed;
 
+
         private static Stream ClickStream = Resources.click;
         internal static System.Media.SoundPlayer ClickPlayer = new System.Media.SoundPlayer(ClickStream);
-
-        internal static string EnabledState = "+";
-        internal static string DisabledState = "-";
-
-        internal static string ColumnCheckedState = "T"; //----------
-        internal static string ColumnUncheckedState = "F";
 
 
         internal const int ActionRetryDelay = 500; //Milliseconds.
@@ -482,7 +484,7 @@ namespace MusicBeePlugin
         internal static int CustomTrackIdTag;
 
 
-       [Serializable]
+        [Serializable]
         public class PluginSettings
         {
             public bool not1stTimeUsage;
@@ -713,6 +715,8 @@ namespace MusicBeePlugin
         internal static string PluginName;
         internal static string PluginMenuGroupName;
         private static string PluginDescription;
+
+        private static string MsgUnsupportedMbVersion;
 
         private static string PluginHelpString;
         private static string PluginWebPageString;
@@ -986,6 +990,7 @@ namespace MusicBeePlugin
         internal static string MsgFirstSixGroupingFieldsInPreviewTableShouldBe;
         internal static string MsgFirstThreeGroupingFieldsInPreviewTableShouldBe2;
         internal static string MsgResizingArtworksRequired;
+        internal static string MsgUrlFieldRequired;
 
         internal static string MsgYouMustImportStandardAsrPresetsFirst;
 
@@ -1787,22 +1792,22 @@ namespace MusicBeePlugin
         }
 
         //Returns: +1 - string1 > string2, 0 - string1 = string2, -1 - string1 < string2
-        internal static int CompareStrings(string string1, string string2, ResultType type = ResultType.UseOtherResults, DataType datatype = DataType.String, bool processedAverageResults = false)
+        internal static int CompareStrings(string string1, string string2, ResultType resulttype = ResultType.UseOtherResults, DataType datatype = DataType.String, bool processedAverageResults = false)
         {
-            ConvertStringsResult result1 = default;
-            ConvertStringsResult result2 = default;
+            ConvertStringsResult result1 = new ConvertStringsResult(resulttype, datatype);
+            ConvertStringsResult result2 = new ConvertStringsResult(resulttype, datatype);
 
-            if (type < ResultType.UnknownOrString)
+            if (resulttype < ResultType.UnknownOrString)
             {
-                result1 = ConvertStrings(string1, type, datatype);
-                result2 = ConvertStrings(string2, type, datatype);
+                result1 = ConvertStrings(string1, resulttype, datatype);
+                result2 = ConvertStrings(string2, resulttype, datatype);
 
-                if (type == ResultType.UseOtherResults)
+                if (resulttype == ResultType.UseOtherResults)
                 {
                     if (result1.resultType > result2.resultType)
-                        type = result1.resultType;
+                        resulttype = result1.resultType;
                     else
-                        type = result2.resultType;
+                        resulttype = result2.resultType;
                 }
             }
 
@@ -1841,9 +1846,9 @@ namespace MusicBeePlugin
                     if (ResultTypes[ComparedColumnIndex] != ResultType.UseOtherResults)
                         resultType = ResultTypes[ComparedColumnIndex];
 
-                    var comparison = CompareStrings((x as DataGridViewBoundColumns).Columns[ComparedColumnIndex] as string, 
+                    var comparison = CompareStrings((x as DataGridViewBoundColumns).Columns[ComparedColumnIndex] as string,
                         (y as DataGridViewBoundColumns).Columns[ComparedColumnIndex] as string,
-                        resultType, DataType.String , true);
+                        resultType, DataType.String, true);
 
 
                     if (!Ascending)
@@ -3517,6 +3522,8 @@ namespace MusicBeePlugin
             PluginMenuGroupName = "Additional Tagging && Reporting Tools";
             PluginDescription = "Adds some tagging & reporting tools to MusicBee";
 
+            MsgUnsupportedMbVersion = "\"%%PLUGIN-NAME%%\" plugin requires MusicBee 3.5 or later!";
+
             PluginHelpString = "Help...";
             PluginWebPageString = "Plugin Web Page..."; ;
             PluginWebPageToolTip = "Open Plugin Web Page (to check/download the latest version)";
@@ -3656,7 +3663,7 @@ namespace MusicBeePlugin
 
             LibraryTotalsPresetName = "Library totals";
             LibraryAveragesPresetName = "Library averages";
-            CDBookletPresetName = "CD Booklet(s)";
+            CDBookletPresetName = "CD Booklet";
             AlbumsAndTracksPresetName = "Albums & Tracks";
             AlbumGridPresetName = "Album Grid (album list)";
 
@@ -3895,6 +3902,8 @@ namespace MusicBeePlugin
             MsgFirstThreeGroupingFieldsInPreviewTableShouldBe2 = "First three grouping fields in preview table should be \"" + AlbumTagName + "\", \"" + DisplayedAlbumArtistName + "\" and \"" + ArtworkName + "\" to export " +
                 "to \"HTML Document (Album List)\"!";
             MsgResizingArtworksRequired = "Artwork resizing (more than 60px) must be turned on to use this export format!";
+            MsgUrlFieldRequired = "\"URL\" grouping field in preview table required to export" +
+                " to \"M3U playlist\"!";
 
             MsgYouMustImportStandardAsrPresetsFirst = "You must import standard ASR presets first!";
 
@@ -4259,6 +4268,8 @@ namespace MusicBeePlugin
                 PluginMenuGroupName = "Дополнительные инструменты";
                 PluginDescription = "Плагин добавляет дополнительные инструменты для работы с тегами";
 
+                MsgUnsupportedMbVersion = "Плагин \"%%PLUGIN-NAME%%\" для работы требует MusicBee 3.5 или более позднюю версию!";
+
                 PluginHelpString = "Справка...";
                 PluginWebPageString = "Веб-страница плагина..."; ;
                 PluginWebPageToolTip = "Открыть веб-страницу плагина (для проверки/загрузки последней версии)";
@@ -4592,6 +4603,7 @@ namespace MusicBeePlugin
                 MsgFirstThreeGroupingFieldsInPreviewTableShouldBe2 = "Первые три поля группировок в таблице должны быть \"" + AlbumTagName + "\", \"" + DisplayedAlbumArtistName + "\" и \"" + ArtworkName
                     + "\" для того, чтобы экспортировать теги в формат \"Документ HTML (список альбомов)\"!";
                 MsgResizingArtworksRequired = "Требуется включить изменение размеров обложек (не меньше 60 пикс.) для использования этого формата экспорта!";
+                MsgUrlFieldRequired = "Требуется группирующее поле \"URL\" в таблице для экспорта в формат \"Плейлист M3U\"!";
 
                 MsgYouMustImportStandardAsrPresetsFirst = "Сначала надо импортировать стандартные пресеты дополнительного поиска и замены!";
 
@@ -4815,7 +4827,7 @@ namespace MusicBeePlugin
             //Let's copy allowed user customizations from existing predefined preset (if it exists)
             var presetPermanentGuid = Guid.Parse("450A95FE-E660-44B7-B34C-1169C9466493");
             var libraryReportsPreset = GetCreatePredefinedPreset(presetPermanentGuid, LibraryTotalsPresetName, existingPredefinedPresets,
-                groupings, functions, destinationTags, functionIds, true);
+                groupings, functions, destinationTags, functionIds, true, LrReportFormat.HtmlDocument);
 
             reportPresets[presetCounter++] = libraryReportsPreset;
 
@@ -4866,7 +4878,7 @@ namespace MusicBeePlugin
             //Let's copy allowed user customizations from existing predefined preset (if it exists)
             presetPermanentGuid = Guid.Parse("2759C09A-B982-4FC5-9872-FBD27A4D8F5E");
             libraryReportsPreset = GetCreatePredefinedPreset(presetPermanentGuid, LibraryAveragesPresetName, existingPredefinedPresets,
-                groupings, functions, destinationTags, functionIds, true);
+                groupings, functions, destinationTags, functionIds, true, LrReportFormat.HtmlDocument);
 
             reportPresets[presetCounter++] = libraryReportsPreset;
 
@@ -4895,7 +4907,7 @@ namespace MusicBeePlugin
             //Let's copy allowed user customizations from existing predefined preset (if it exists)
             presetPermanentGuid = Guid.Parse("C7EACE32-B70F-4E5E-BEF1-2D10BE3B74E5");
             libraryReportsPreset = GetCreatePredefinedPreset(presetPermanentGuid, CDBookletPresetName, existingPredefinedPresets,
-                groupings, functions, destinationTags, functionIds, false);
+                groupings, functions, destinationTags, functionIds, false, LrReportFormat.HtmlDocumentCdBooklet);
 
             reportPresets[presetCounter++] = libraryReportsPreset;
 
@@ -4923,7 +4935,7 @@ namespace MusicBeePlugin
             //Let's copy allowed user customizations from existing predefined preset (if it exists)
             presetPermanentGuid = Guid.Parse("F14133BF-7D9E-403F-B2F2-B3A2BE669BC8");
             libraryReportsPreset = GetCreatePredefinedPreset(presetPermanentGuid, AlbumsAndTracksPresetName, existingPredefinedPresets,
-                groupings, functions, destinationTags, functionIds, false);
+                groupings, functions, destinationTags, functionIds, false, LrReportFormat.HtmlDocumentByAlbums);
 
             reportPresets[presetCounter++] = libraryReportsPreset;
 
@@ -4949,7 +4961,7 @@ namespace MusicBeePlugin
             //Let's copy allowed user customizations from existing predefined preset (if it exists)
             presetPermanentGuid = Guid.Parse("FA3D3B21-9B80-4C6C-AC67-1D8FC2A3CEBA");
             libraryReportsPreset = GetCreatePredefinedPreset(presetPermanentGuid, AlbumGridPresetName, existingPredefinedPresets,
-                groupings, functions, destinationTags, functionIds, false);
+                groupings, functions, destinationTags, functionIds, false, LrReportFormat.HtmlDocumentAlbumGrid);
 
             reportPresets[presetCounter++] = libraryReportsPreset;
 
@@ -5109,7 +5121,22 @@ namespace MusicBeePlugin
 
             #region Final initialization
             //Final initialization
-            MbForm = Control.FromHandle(MbApiInterface.MB_GetWindowHandle()) as Form;
+            try
+            {
+                MbForm = Control.FromHandle(MbApiInterface.MB_GetWindowHandle()) as Form;
+            }
+            catch //MB is already closing
+            {
+                return About;
+            }
+
+
+            if (MbApiInterface.MusicBeeVersion < MusicBeeVersion.v3_5)
+            {
+                MessageBox.Show(MsgUnsupportedMbVersion.Replace("%%PLUGIN-NAME%%", PluginName), null, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return null;
+            }
+
 
             EmptyButton = new Button();
             EmptyForm = new Form(); //For themed bitmaps disposing control
@@ -5584,36 +5611,36 @@ namespace MusicBeePlugin
             const float DeepDimmedWeight = 0.32f;
             const float ScrollBarsForeWeight = 0.75f; //---
 
-            InputPanelForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, 
+            InputPanelForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault,
                 ElementComponent.ComponentForeground));
-            InputPanelBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, 
+            InputPanelBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault,
                 ElementComponent.ComponentBackground));
-            InputPanelBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, 
+            InputPanelBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault,
                 ElementComponent.ComponentBorder));
 
             if (!SavedSettings.dontUseSkinColors)
             {
-                InputControlForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, 
+                InputControlForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault,
                     ElementComponent.ComponentForeground));
-                InputControlBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, 
+                InputControlBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault,
                     ElementComponent.ComponentBackground));
-                InputControlBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault, 
+                InputControlBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault,
                     ElementComponent.ComponentBorder));
                 InputControlFocusedBorderColor = GetWeightedColor(InputControlBorderColor, InputControlForeColor);
 
 
-                AccentColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, 
+                AccentColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault,
                     ElementComponent.ComponentForeground));
                 AccentSelectedColor = NoColor; //---
 
                 DimmedAccentColor = GetWeightedColor(AccentColor, InputPanelBackColor, DimmedWeight);
                 DeepDimmedAccentColor = GetWeightedColor(AccentColor, InputPanelBackColor, DeepDimmedWeight);
 
-                FormForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, 
+                FormForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault,
                     ElementComponent.ComponentForeground));
-                FormBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, 
+                FormBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault,
                     ElementComponent.ComponentBackground));
-                FormBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, 
+                FormBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault,
                     ElementComponent.ComponentBorder));
 
 
@@ -5648,7 +5675,7 @@ namespace MusicBeePlugin
                 Bitmap testBitmap = new Bitmap(88, 28, PixelFormat.Format24bppRgb);
                 TagToolsContextSubmenu.DropDown.DrawToBitmap(testBitmap, new Rectangle(0, 0, 88, 28));
 
-                ButtonMouseOverForeColor = testBitmap.GetPixel(5, 5);//-----------------
+                ButtonMouseOverForeColor = testBitmap.GetPixel(5, 5);
 
 
                 TagToolsContextSubmenu.DropDown.Items.Clear();
@@ -6068,9 +6095,9 @@ namespace MusicBeePlugin
             Window = ScaleBitmap(Resources.window, PixelFormat.Format32bppArgb, InterpolationMode.HighQualityBicubic, pictogramSize, pictogramSize);
 
 
+            //DATAGRIDVIEW COLOR DEFINITIONS
             UnchangedCellStyle.Alignment = DataGridViewContentAlignment.TopLeft;
 
-            //DATAGRIDVIEW COLOR DEFINITIONS
             if (!SavedSettings.dontUseSkinColors)
             {
                 HeaderCellStyle.ForeColor = ButtonForeColor;
@@ -6079,27 +6106,36 @@ namespace MusicBeePlugin
                 HeaderCellStyle.SelectionForeColor = ButtonForeColor;
                 HeaderCellStyle.SelectionBackColor = DimmedAccentColor;
 
-                //var selectionForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateModified,
-                //    ElementComponent.ComponentForeground));
-                //var selectionBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateModified,
-                //    ElementComponent.ComponentBackground));
+                var selectionForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateModified,
+                    ElementComponent.ComponentForeground));
+                var selectionBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateModified,
+                    ElementComponent.ComponentBackground));
 
                 UnchangedCellStyle.ForeColor = InputControlForeColor;
                 UnchangedCellStyle.BackColor = InputControlBackColor;
-                UnchangedCellStyle.SelectionForeColor = ButtonMouseOverForeColor;
-                UnchangedCellStyle.SelectionBackColor = ButtonMouseOverBackColor;
-                //UnchangedCellStyle.SelectionForeColor = selectionForeColor;
-                //UnchangedCellStyle.SelectionBackColor = selectionBackColor;
-                UnchangedCellStyle.Alignment = DataGridViewContentAlignment.TopLeft;
 
-                if (GetBrightnessDifference(UnchangedCellStyle.SelectionBackColor, UnchangedCellStyle.BackColor) < 0.25f)
-                    UnchangedCellStyle.SelectionBackColor = GetWeightedColor(UnchangedCellStyle.SelectionForeColor, UnchangedCellStyle.SelectionBackColor, DeepDimmedWeight);
+                if (GetBrightnessDifference(ButtonMouseOverBackColor, UnchangedCellStyle.BackColor) >= 0.15f)
+                {
+                    UnchangedCellStyle.SelectionForeColor = ButtonMouseOverForeColor;
+                    UnchangedCellStyle.SelectionBackColor = ButtonMouseOverBackColor;
+                }
+                else if (GetBrightnessDifference(selectionBackColor, UnchangedCellStyle.BackColor) >= 0.15f)
+                {
+                    UnchangedCellStyle.SelectionForeColor = selectionForeColor;
+                    UnchangedCellStyle.SelectionBackColor = selectionBackColor;
+                }
+                else
+                {
+                    UnchangedCellStyle.SelectionForeColor = GetInvertAverageBrightnessColor(selectionForeColor);
+                    UnchangedCellStyle.SelectionBackColor = GetInvertAverageBrightnessColor(selectionBackColor);
+                }
+
 
                 if (GetBrightnessDifference(HeaderCellStyle.ForeColor, HeaderCellStyle.BackColor) < 0.3f)
-                    HeaderCellStyle.ForeColor = InvertAverageBrightness(HeaderCellStyle.ForeColor);
+                    HeaderCellStyle.ForeColor = GetInvertAverageBrightnessColor(HeaderCellStyle.ForeColor);
 
                 if (GetBrightnessDifference(HeaderCellStyle.SelectionForeColor, HeaderCellStyle.SelectionBackColor) < 0.3f)
-                    HeaderCellStyle.SelectionForeColor = InvertAverageBrightness(HeaderCellStyle.SelectionForeColor);
+                    HeaderCellStyle.SelectionForeColor = GetInvertAverageBrightnessColor(HeaderCellStyle.SelectionForeColor);
             }
             else
             {
@@ -6109,9 +6145,10 @@ namespace MusicBeePlugin
                 UnchangedCellStyle.SelectionBackColor = SystemColors.Highlight;
             }
 
-            var ChangedForeColor = Color.FromKnownColor(KnownColor.Red);
-            var PreservedTagsForeColor = Color.FromKnownColor(KnownColor.Blue);
-            var PreservedTagValuesForeColor = Color.FromKnownColor(KnownColor.Green);
+            Color DimmedForeColor = ReduceColorContrast(UnchangedCellStyle.ForeColor, 0.5f);
+            Color ChangedForeColor = Color.FromKnownColor(KnownColor.Red);
+            Color PreservedTagsForeColor = Color.FromKnownColor(KnownColor.Blue);
+            Color PreservedTagValuesForeColor = Color.FromKnownColor(KnownColor.Green);
 
 
             ChangedCellStyle = new DataGridViewCellStyle(UnchangedCellStyle);
@@ -6121,365 +6158,51 @@ namespace MusicBeePlugin
 
 
             //CHANGED STYLE
-            ChangedCellStyle.BackColor = UnchangedCellStyle.BackColor;
-            ChangedCellStyle.SelectionBackColor = UnchangedCellStyle.SelectionBackColor;
+            if (GetBrightnessDifference(ChangedCellStyle.BackColor, ChangedForeColor) >= 0.15f)
+                ChangedCellStyle.ForeColor = ChangedForeColor;
+            else
+                ChangedCellStyle.ForeColor = GetInvertAverageBrightnessColor(ChangedForeColor);
 
-            var scale = 1.5f; //---
-            var shift = 50f; //---
-            var threshold = 175f;
-
-            var backColor = ChangedCellStyle.BackColor;
-            float br = backColor.R;
-            float bg = backColor.G;
-            float bb = backColor.B;
-
-            var bbrt = (br + bg + bb) / 3f;
-
-            var foreColor = ChangedForeColor;
-            float r = foreColor.R;
-            float g = foreColor.G;
-            float b = foreColor.B;
-
-            var brt = (r + g + b) / 3f;
-
-            if (Math.Abs(brt - bbrt) < threshold)
-            {
-                if (brt < 127)
-                    r = r * (brt * scale) + shift;
-                else
-                    r = r / (brt * scale) - shift;
-
-                if (brt < 127)
-                    g = g * (brt * scale) + shift;
-                else
-                    g = g / (brt * scale) - shift;
-
-                if (brt < 127)
-                    b = b * (brt * scale) + shift;
-                else
-                    b = b / (brt * scale) - shift;
-
-                r = r > 255 ? 255 : r;
-                r = r < 0 ? 0 : r;
-
-                g = g > 255 ? 255 : g;
-                g = g < 0 ? 0 : g;
-
-                b = b > 255 ? 255 : b;
-                b = b < 0 ? 0 : b;
-            }
-
-            ChangedCellStyle.ForeColor = Color.FromArgb(255, (int)Math.Round(r), (int)Math.Round(g), (int)Math.Round(b));
-
-
-            //SELECTION CHANGED STYLE
-            backColor = ChangedCellStyle.SelectionBackColor;
-            br = backColor.R;
-            bg = backColor.G;
-            bb = backColor.B;
-
-            bbrt = (br + bg + bb) / 3f;
-
-            foreColor = ChangedForeColor;
-            r = foreColor.R;
-            g = foreColor.G;
-            b = foreColor.B;
-
-            brt = (r + g + b) / 3f;
-
-            if (Math.Abs(brt - bbrt) < threshold)
-            {
-                if (brt < 127)
-                    r = r * (brt * scale) + shift;
-                else
-                    r = r / (brt * scale) - shift;
-
-                if (brt < 127)
-                    g = g * (brt * scale) + shift;
-                else
-                    g = g / (brt * scale) - shift;
-
-                if (brt < 127)
-                    b = b * (brt * scale) + shift;
-                else
-                    b = b / (brt * scale) - shift;
-
-                r = r > 255 ? 255 : r;
-                r = r < 0 ? 0 : r;
-
-                g = g > 255 ? 255 : g;
-                g = g < 0 ? 0 : g;
-
-                b = b > 255 ? 255 : b;
-                b = b < 0 ? 0 : b;
-            }
-
-            ChangedCellStyle.SelectionForeColor = Color.FromArgb(255, (int)Math.Round(r), (int)Math.Round(g), (int)Math.Round(b));
+            if (GetBrightnessDifference(ChangedCellStyle.SelectionBackColor, ChangedForeColor) >= 0.15f)
+                ChangedCellStyle.SelectionForeColor = ChangedForeColor;
+            else
+                ChangedCellStyle.SelectionForeColor = GetInvertAverageBrightnessColor(ChangedForeColor);
 
 
             //DIMMED STYLE
-            DimmedCellStyle.BackColor = UnchangedCellStyle.BackColor;
-            DimmedCellStyle.SelectionBackColor = UnchangedCellStyle.SelectionBackColor;
-
-            scale = 0.2f; //Dimmed text brightness scale //---
-
-            foreColor = UnchangedCellStyle.ForeColor;
-            r = foreColor.R;
-            g = foreColor.G;
-            b = foreColor.B;
-
-            brt = (r + g + b) / 3f;
-
-            if (brt < 127)
-            {
-                r /= scale;
-                g /= scale;
-                b /= scale;
-
-            }
+            if (GetBrightnessDifference(DimmedCellStyle.BackColor, DimmedForeColor) >= 0.15f)
+                DimmedCellStyle.ForeColor = DimmedForeColor;
             else
-            {
-                r *= scale;
-                g *= scale;
-                b *= scale;
+                DimmedCellStyle.ForeColor = GetInvertAverageBrightnessColor(DimmedForeColor);
 
-            }
-
-            r = r > 255 ? 255 : r;
-            r = r < 0 ? 0 : r;
-
-            g = g > 255 ? 255 : g;
-            g = g < 0 ? 0 : g;
-
-            b = b > 255 ? 255 : b;
-            b = b < 0 ? 0 : b;
-
-            DimmedCellStyle.ForeColor = Color.FromArgb(255, (int)Math.Round(r), (int)Math.Round(g), (int)Math.Round(b));
-
-
-            //SELECTION DIMMED STYLE
-            foreColor = UnchangedCellStyle.SelectionForeColor;
-            r = foreColor.R;
-            g = foreColor.G;
-            b = foreColor.B;
-
-            brt = (r + g + b) / 3f;
-
-            if (brt < 127)
-            {
-                r /= scale;
-                g /= scale;
-                b /= scale;
-
-            }
+            if (GetBrightnessDifference(DimmedCellStyle.SelectionBackColor, DimmedForeColor) >= 0.15f)
+                DimmedCellStyle.SelectionForeColor = DimmedForeColor;
             else
-            {
-                r *= scale;
-                g *= scale;
-                b *= scale;
-
-            }
-
-            r = r > 255 ? 255 : r;
-            r = r < 0 ? 0 : r;
-
-            g = g > 255 ? 255 : g;
-            g = g < 0 ? 0 : g;
-
-            b = b > 255 ? 255 : b;
-            b = b < 0 ? 0 : b;
-
-            DimmedCellStyle.SelectionForeColor = Color.FromArgb(255, (int)Math.Round(r), (int)Math.Round(g), (int)Math.Round(b));
+                DimmedCellStyle.SelectionForeColor = GetInvertAverageBrightnessColor(DimmedForeColor);
 
 
             //PRESERVED TAG STYLE
-            PreservedTagCellStyle.BackColor = UnchangedCellStyle.BackColor;
-            PreservedTagCellStyle.SelectionBackColor = UnchangedCellStyle.SelectionBackColor;
+            if (GetBrightnessDifference(PreservedTagCellStyle.BackColor, PreservedTagsForeColor) >= 0.15f)
+                PreservedTagCellStyle.ForeColor = PreservedTagsForeColor;
+            else
+                PreservedTagCellStyle.ForeColor = GetInvertAverageBrightnessColor(PreservedTagsForeColor);
 
-            scale = 1.5f; //---
-
-            backColor = UnchangedCellStyle.BackColor;
-            br = backColor.R;
-            bg = backColor.G;
-            bb = backColor.B;
-
-            bbrt = (br + bg + bb) / 3f;
-
-            foreColor = PreservedTagsForeColor;
-            r = foreColor.R;
-            g = foreColor.G;
-            b = foreColor.B;
-
-            brt = (r + g + b) / 3f;
-
-            if (Math.Abs(brt - bbrt) < threshold)
-            {
-                if (brt < 127)
-                    r = r * (brt * scale) + shift;
-                else
-                    r = r / (brt * scale) - shift;
-
-                if (brt < 127)
-                    g = g * (brt * scale) + shift;
-                else
-                    g = g / (brt * scale) - shift;
-
-                if (brt < 127)
-                    b = b * (brt * scale) + shift;
-                else
-                    b = b / (brt * scale) - shift;
-
-                r = r > 255 ? 255 : r;
-                r = r < 0 ? 0 : r;
-
-                g = g > 255 ? 255 : g;
-                g = g < 0 ? 0 : g;
-
-                b = b > 255 ? 255 : b;
-                b = b < 0 ? 0 : b;
-            }
-
-            PreservedTagCellStyle.ForeColor = Color.FromArgb(255, (int)Math.Round(r), (int)Math.Round(g), (int)Math.Round(b));
-
-
-            //SELECTION PRESERVED TAG STYLE
-            backColor = UnchangedCellStyle.SelectionBackColor;
-            br = backColor.R;
-            bg = backColor.G;
-            bb = backColor.B;
-
-            bbrt = (br + bg + bb) / 3f;
-
-            foreColor = PreservedTagsForeColor;
-            r = foreColor.R;
-            g = foreColor.G;
-            b = foreColor.B;
-
-            brt = (r + g + b) / 3f;
-
-            if (Math.Abs(brt - bbrt) < threshold)
-            {
-                if (brt < 127)
-                    r = r * (brt * scale) + shift;
-                else
-                    r = r / (brt * scale) - shift;
-
-                if (brt < 127)
-                    g = g * (brt * scale) + shift;
-                else
-                    g = g / (brt * scale) - shift;
-
-                if (brt < 127)
-                    b = b * (brt * scale) + shift;
-                else
-                    b = b / (brt * scale) - shift;
-
-                r = r > 255 ? 255 : r;
-                r = r < 0 ? 0 : r;
-
-                g = g > 255 ? 255 : g;
-                g = g < 0 ? 0 : g;
-
-                b = b > 255 ? 255 : b;
-                b = b < 0 ? 0 : b;
-            }
-
-            PreservedTagCellStyle.SelectionForeColor = Color.FromArgb(255, (int)Math.Round(r), (int)Math.Round(g), (int)Math.Round(b));
+            if (GetBrightnessDifference(PreservedTagCellStyle.SelectionBackColor, PreservedTagsForeColor) >= 0.15f)
+                PreservedTagCellStyle.SelectionForeColor = PreservedTagsForeColor;
+            else
+                PreservedTagCellStyle.SelectionForeColor = GetInvertAverageBrightnessColor(PreservedTagsForeColor);
 
 
             //PRESERVED TAG VALUE STYLE
-            PreservedTagValueCellStyle.BackColor = UnchangedCellStyle.BackColor;
-            PreservedTagValueCellStyle.SelectionBackColor = UnchangedCellStyle.SelectionBackColor;
+            if (GetBrightnessDifference(PreservedTagValueCellStyle.BackColor, PreservedTagValuesForeColor) >= 0.15f)
+                PreservedTagValueCellStyle.ForeColor = PreservedTagValuesForeColor;
+            else
+                PreservedTagValueCellStyle.ForeColor = GetInvertAverageBrightnessColor(PreservedTagValuesForeColor);
 
-            scale = 1.5f; //---
-
-            backColor = UnchangedCellStyle.BackColor;
-            br = backColor.R;
-            bg = backColor.G;
-            bb = backColor.B;
-
-            bbrt = (br + bg + bb) / 3f;
-
-            foreColor = PreservedTagValuesForeColor;
-            r = foreColor.R;
-            g = foreColor.G;
-            b = foreColor.B;
-
-            brt = (r + g + b) / 3f;
-
-            if (Math.Abs(brt - bbrt) < threshold)
-            {
-                if (brt < 127)
-                    r = r * (brt * scale) + shift;
-                else
-                    r = r / (brt * scale) - shift;
-
-                if (brt < 127)
-                    g = g * (brt * scale) + shift;
-                else
-                    g = g / (brt * scale) - shift;
-
-                if (brt < 127)
-                    b = b * (brt * scale) + shift;
-                else
-                    b = b / (brt * scale) - shift;
-
-                r = r > 255 ? 255 : r;
-                r = r < 0 ? 0 : r;
-
-                g = g > 255 ? 255 : g;
-                g = g < 0 ? 0 : g;
-
-                b = b > 255 ? 255 : b;
-                b = b < 0 ? 0 : b;
-            }
-
-            PreservedTagValueCellStyle.ForeColor = Color.FromArgb(255, (int)Math.Round(r), (int)Math.Round(g), (int)Math.Round(b));
-
-
-            //SELECTION PRESERVED TAG STYLE
-            backColor = UnchangedCellStyle.SelectionBackColor;
-            br = backColor.R;
-            bg = backColor.G;
-            bb = backColor.B;
-
-            bbrt = (br + bg + bb) / 3f;
-
-            foreColor = PreservedTagValuesForeColor;
-            r = foreColor.R;
-            g = foreColor.G;
-            b = foreColor.B;
-
-            brt = (r + g + b) / 3f;
-
-            if (Math.Abs(brt - bbrt) < threshold)
-            {
-                if (brt < 127)
-                    r = r * (brt * scale) + shift;
-                else
-                    r = r / (brt * scale) - shift;
-
-                if (brt < 127)
-                    g = g * (brt * scale) + shift;
-                else
-                    g = g / (brt * scale) - shift;
-
-                if (brt < 127)
-                    b = b * (brt * scale) + shift;
-                else
-                    b = b / (brt * scale) - shift;
-
-                r = r > 255 ? 255 : r;
-                r = r < 0 ? 0 : r;
-
-                g = g > 255 ? 255 : g;
-                g = g < 0 ? 0 : g;
-
-                b = b > 255 ? 255 : b;
-                b = b < 0 ? 0 : b;
-            }
-
-            PreservedTagValueCellStyle.SelectionForeColor = Color.FromArgb(255, (int)Math.Round(r), (int)Math.Round(g), (int)Math.Round(b));
+            if (GetBrightnessDifference(PreservedTagValueCellStyle.SelectionBackColor, PreservedTagValuesForeColor) >= 0.15f)
+                PreservedTagValueCellStyle.SelectionForeColor = PreservedTagValuesForeColor;
+            else
+                PreservedTagValueCellStyle.SelectionForeColor = GetInvertAverageBrightnessColor(PreservedTagValuesForeColor);
 
 
             SizesColorsChanged = false;

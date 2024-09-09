@@ -13,26 +13,6 @@
         ///<param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                nameBox.Parent?.Dispose();
-                descriptionBox.Parent?.Dispose();
-                customTextBox.Parent?.Dispose();
-                customText2Box.Parent?.Dispose();
-                customText3Box.Parent?.Dispose();
-                customText4Box.Parent?.Dispose();
-                searchedPatternBox.Parent?.Dispose();
-                replacedPatternBox.Parent?.Dispose();
-                searchedPattern2Box.Parent?.Dispose();
-                replacedPattern2Box.Parent?.Dispose();
-                searchedPattern3Box.Parent?.Dispose();
-                replacedPattern3Box.Parent?.Dispose();
-                searchedPattern4Box.Parent?.Dispose();
-                replacedPattern4Box.Parent?.Dispose();
-                searchedPattern5Box.Parent?.Dispose();
-                replacedPattern5Box.Parent?.Dispose();
-            }
-
             if (disposing && (components != null))
             {
                 components.Dispose();

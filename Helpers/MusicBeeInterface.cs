@@ -6,8 +6,8 @@ namespace MusicBeePlugin
     public partial class Plugin
     {
         public const short PluginInfoVersion = 1;
-        public const short MinInterfaceVersion = 42;
-        public const short MinApiRevision = 55;
+        public const short MinInterfaceVersion = 43;
+        public const short MinApiRevision = 57;
 
         [StructLayout(LayoutKind.Sequential)]
         public struct MusicBeeApiInterface
@@ -16,7 +16,7 @@ namespace MusicBeePlugin
             {
                 CopyMemory(ref this, apiInterfacePtr, 4);
                 if (MusicBeeVersion == MusicBeeVersion.v2_0)
-                    //MusicBee version 2.0 - Api methods > revision 25 are not available
+                    // MusicBee version 2.0 - Api methods > revision 25 are not available
                     CopyMemory(ref this, apiInterfacePtr, 456);
                 else if (MusicBeeVersion == MusicBeeVersion.v2_1)
                     CopyMemory(ref this, apiInterfacePtr, 516);
@@ -32,6 +32,8 @@ namespace MusicBeePlugin
                     CopyMemory(ref this, apiInterfacePtr, 652);
                 else if (MusicBeeVersion <= MusicBeeVersion.v3_4)
                     CopyMemory(ref this, apiInterfacePtr, 692);
+                else if (MusicBeeVersion == MusicBeeVersion.v3_4_1)
+                    CopyMemory(ref this, apiInterfacePtr, 696);
                 else
                     CopyMemory(ref this, apiInterfacePtr, Marshal.SizeOf(this));
             }
@@ -57,8 +59,12 @@ namespace MusicBeePlugin
                         return MusicBeeVersion.v3_1;
                     else if (ApiRevision < 55)
                         return MusicBeeVersion.v3_4;
-                    else
+                    else if (ApiRevision < 57)
                         return MusicBeeVersion.v3_4_1;
+                    else if (ApiRevision < 58)
+                        return MusicBeeVersion.v3_5;
+                    else
+                        return MusicBeeVersion.v3_6;
                 }
             }
             public short InterfaceVersion;
@@ -160,14 +166,14 @@ namespace MusicBeePlugin
             public NowPlayingList_GetNextIndexDelegate NowPlayingList_GetNextIndex;
             public NowPlaying_GetArtistPictureDelegate NowPlaying_GetArtistPicture;
             public NowPlaying_GetArtworkDelegate NowPlaying_GetDownloadedArtwork;
-            //api version 16
+            // api version 16
             public MB_ShowNowPlayingAssistantDelegate MB_ShowNowPlayingAssistant;
-            //api version 17
+            // api version 17
             public NowPlaying_GetLyricsDelegate NowPlaying_GetDownloadedLyrics;
-            //api version 18
+            // api version 18
             public Player_GetShowRatingTrackDelegate Player_GetShowRatingTrack;
             public Player_GetShowRatingLoveDelegate Player_GetShowRatingLove;
-            //api version 19
+            // api version 19
             public MB_CreateParameterisedBackgroundTaskDelegate MB_CreateParameterisedBackgroundTask;
             public Setting_GetLastFmUserIdDelegate Setting_GetLastFmUserId;
             public Playlist_GetNameDelegate Playlist_GetName;
@@ -178,44 +184,44 @@ namespace MusicBeePlugin
             public Library_QueryGetLookupTableValueDelegate Library_QueryGetLookupTableValue;
             public NowPlayingList_FilesActionDelegate NowPlayingList_QueueFilesNext;
             public NowPlayingList_FilesActionDelegate NowPlayingList_QueueFilesLast;
-            //api version 20
+            // api version 20
             public Setting_GetWebProxyDelegate Setting_GetWebProxy;
-            //api version 21
+            // api version 21
             public NowPlayingList_RemoveAtDelegate NowPlayingList_RemoveAt;
-            //api version 22
+            // api version 22
             public Playlist_RemoveAtDelegate Playlist_RemoveAt;
-            //api version 23
+            // api version 23
             public MB_SetPanelScrollableAreaDelegate MB_SetPanelScrollableArea;
-            //api version 24
+            // api version 24
             public MB_InvokeCommandDelegate MB_InvokeCommand;
             public MB_OpenFilterInTabDelegate MB_OpenFilterInTab;
-            //api version 25
+            // api version 25
             public MB_SetWindowSizeDelegate MB_SetWindowSize;
             public Library_GetArtistPictureDelegate Library_GetArtistPicture;
             public Pending_GetFileUrlDelegate Pending_GetFileUrl;
             public Pending_GetFilePropertyDelegate Pending_GetFileProperty;
             public Pending_GetFileTagDelegate Pending_GetFileTag;
-            //api version 26
+            // api version 26
             public Player_GetButtonEnabledDelegate Player_GetButtonEnabled;
-            //api version 27
+            // api version 27
             public NowPlayingList_MoveFilesDelegate NowPlayingList_MoveFiles;
-            //api version 28
+            // api version 28
             public Library_GetArtworkDelegate Library_GetArtworkUrl;
             public Library_GetArtistPictureThumbDelegate Library_GetArtistPictureThumb;
             public NowPlaying_GetArtworkDelegate NowPlaying_GetArtworkUrl;
             public NowPlaying_GetArtworkDelegate NowPlaying_GetDownloadedArtworkUrl;
             public NowPlaying_GetArtistPictureThumbDelegate NowPlaying_GetArtistPictureThumb;
-            //api version 29
+            // api version 29
             public Playlist_IsInListDelegate Playlist_IsInList;
-            //api version 30
+            // api version 30
             public Library_GetArtistPictureUrlsDelegate Library_GetArtistPictureUrls;
             public NowPlaying_GetArtistPictureUrlsDelegate NowPlaying_GetArtistPictureUrls;
-            //api version 31
+            // api version 31
             public Playlist_AddFilesDelegate Playlist_AppendFiles;
-            //api version 32
+            // api version 32
             public Sync_FileStartDelegate Sync_FileStart;
             public Sync_FileEndDelegate Sync_FileEnd;
-            //api version 33
+            // api version 33
             public Library_QueryFilesExDelegate Library_QueryFilesEx;
             public Library_QueryFilesExDelegate NowPlayingList_QueryFilesEx;
             public Playlist_QueryFilesExDelegate Playlist_QueryFilesEx;
@@ -230,14 +236,14 @@ namespace MusicBeePlugin
             public Library_AddFileToLibraryDelegate Library_AddFileToLibrary;
             public Playlist_DeletePlaylistDelegate Playlist_DeletePlaylist;
             public Library_GetSyncDeltaDelegate Library_GetSyncDelta;
-            //api version 35
+            // api version 35
             public Library_GetFileTagsDelegate Library_GetFileTags;
             public NowPlaying_GetFileTagsDelegate NowPlaying_GetFileTags;
             public NowPlayingList_GetFileTagsDelegate NowPlayingList_GetFileTags;
-            //api version 43
+            // api version 43
             public MB_AddTreeNodeDelegate MB_AddTreeNode;
             public MB_DownloadFileDelegate MB_DownloadFile;
-            //api version 47
+            // api version 47
             public Setting_GetFileConvertCommandLineDelegate Setting_GetFileConvertCommandLine;
             public Player_OpenStreamHandleDelegate Player_OpenStreamHandle;
             public Player_UpdatePlayStatisticsDelegate Player_UpdatePlayStatistics;
@@ -249,24 +255,29 @@ namespace MusicBeePlugin
             public MB_ShowPluginViewDelegate MB_ShowPluginView;
             public Player_GetOutputDevicesDelegate Player_GetOutputDevices;
             public Player_SetOutputDeviceDelegate Player_SetOutputDevice;
-            //api version 48
+            // api version 48
             public MB_UninistallPluginDelegate MB_UninstallPlugin;
-            //api version 50
+            // api version 50
             public Player_ActionDelegate Player_PlayPreviousAlbum;
             public Player_ActionDelegate Player_PlayNextAlbum;
-            //api version 51
+            // api version 51
             public Podcasts_QuerySubscriptionsDelegate Podcasts_QuerySubscriptions;
             public Podcasts_GetSubscriptionDelegate Podcasts_GetSubscription;
             public Podcasts_GetSubscriptionArtworkDelegate Podcasts_GetSubscriptionArtwork;
             public Podcasts_GetSubscriptionEpisodesDelegate Podcasts_GetSubscriptionEpisodes;
             public Podcasts_GetSubscriptionEpisodeDelegate Podcasts_GetSubscriptionEpisode;
-            //api version 52
+            // api version 52
             public NowPlaying_GetSoundGraphExDelegate NowPlaying_GetSoundGraphEx;
-            //api version 53
+            // api version 53
             public Sync_FileStartDelegate Sync_FileDeleteStart;
             public Sync_FileEndDelegate Sync_FileDeleteEnd;
-            //api version 55
+            // api version 55
             public MB_EvaluateDelegate MB_Evaluate;
+            // api version 57
+            public Library_GetNoArtworkDelegate Library_GetNoArtworkUrl;
+            // api version 58
+            //public FileList_ClearDelegate FileList_Clear;
+            //public FileList_AddFilesDelegate FileList_AddFiles;
         }
 
         public enum MusicBeeVersion
@@ -280,7 +291,9 @@ namespace MusicBeePlugin
             v3_0 = 6,
             v3_1 = 7,
             v3_4 = 8,
-            v3_4_1 = 9
+            v3_4_1 = 9,
+            v3_5 = 10,
+            v3_6 = 11
         }
 
         public enum PluginType
@@ -304,8 +317,7 @@ namespace MusicBeePlugin
         [StructLayout(LayoutKind.Sequential)]
         public class PluginInfo
         {
-            // ReSharper disable once MemberHidesStaticFromOuterClass
-            public short PluginInfoVersion; //-V3085
+            public short PluginInfoVersion;
             public PluginType Type;
             public string Name;
             public string Description;
@@ -314,10 +326,8 @@ namespace MusicBeePlugin
             public short VersionMajor;
             public short VersionMinor;
             public short Revision;
-            // ReSharper disable once MemberHidesStaticFromOuterClass
-            public short MinInterfaceVersion; //-V3085
-            // ReSharper disable once MemberHidesStaticFromOuterClass
-            public short MinApiRevision; //-V3085
+            public short MinInterfaceVersion;
+            public short MinApiRevision;
             public ReceiveNotificationFlags ReceiveNotifications;
             public int ConfigurationPanelHeight;
         }
@@ -334,7 +344,7 @@ namespace MusicBeePlugin
 
         public enum NotificationType
         {
-            PluginStartup = 0,          //notification sent after successful initialisation for an enabled plugin
+            PluginStartup = 0,          // notification sent after successful initialisation for an enabled plugin
             TrackChanging = 16,
             TrackChanged = 1,
             PlayStateChanged = 2,
@@ -374,11 +384,10 @@ namespace MusicBeePlugin
             PlaylistCreated = 37,
             PlaylistUpdated = 38,
             PlaylistDeleted = 39,
+            PlaylistMoved = 40,
             SelectedFileChanged = 41,
             SelectedNodeChanged = 42,
             SelectedFilterChanged = 43,
-
-            //Notifications below are added by me
             FileRemovedFromLibrary = 44,
             FileRemovedFromInbox = 45,
             FileRenamed = 46
@@ -419,7 +428,7 @@ namespace MusicBeePlugin
             Channels = 8,
             SampleRate = 9,
             Bitrate = 10,
-            Bitdepth = 183, //Added by me
+            Bitdepth = 183,
             DateModified = 11,
             DateAdded = 12,
             LastPlayed = 13,
@@ -427,7 +436,7 @@ namespace MusicBeePlugin
             SkipCount = 15,
             Duration = 16,
             Status = 21,
-            NowPlayingListIndex = 78,  //only has meaning when called from NowPlayingList_* commands
+            NowPlayingListIndex = 78,  // only has meaning when called from NowPlayingList_* commands
             ReplayGainTrack = 94,
             ReplayGainAlbum = 95
         }
@@ -437,11 +446,11 @@ namespace MusicBeePlugin
             TrackTitle = 65,
             Album = 30,
             AlbumUniqueId = 108,
-            AlbumArtist = 31,        //displayed album artist
-            AlbumArtistRaw = 34,     //stored album artist
-            Artist = 32,             //displayed artist
-            MultiArtist = 33,        //individual artists, separated by a null char
-            PrimaryArtist = 19,      //first artist from multi-artist tagged file, otherwise displayed artist
+            AlbumArtist = 31,        // displayed album artist
+            AlbumArtistRaw = 34,     // stored album artist
+            Artist = 32,             // displayed artist
+            MultiArtist = 33,        // individual artists, separated by a null char
+            PrimaryArtist = 19,      // first artist from multi-artist tagged file, otherwise displayed artist
             Artists = 144,
             ArtistsWithArtistRole = 145,
             ArtistsWithPerformerRole = 146,
@@ -449,8 +458,8 @@ namespace MusicBeePlugin
             ArtistsWithRemixerRole = 148,
             Artwork = 40,
             BeatsPerMin = 41,
-            Composer = 43,           //displayed composer
-            MultiComposer = 89,      //individual composers, separated by a null char
+            Composer = 43,           // displayed composer
+            MultiComposer = 89,      // individual composers, separated by a null char
             Comment = 44,
             Conductor = 45,
             Custom1 = 46,
@@ -469,6 +478,11 @@ namespace MusicBeePlugin
             Custom14 = 132,
             Custom15 = 133,
             Custom16 = 134,
+            Custom17 = 213,
+            Custom18 = 214,
+            Custom19 = 215,
+            Custom20 = 216,
+            Decade = 105,
             DiscNo = 52,
             DiscCount = 54,
             Encoder = 55,
@@ -516,7 +530,33 @@ namespace MusicBeePlugin
             Virtual23 = 155,
             Virtual24 = 156,
             Virtual25 = 157,
+            Virtual26 = 185,
+            Virtual27 = 186,
+            Virtual28 = 187,
+            Virtual29 = 188,
+            Virtual30 = 189,
+            Virtual31 = 190,
+            Virtual32 = 191,
+            Virtual33 = 194,
+            Virtual34 = 195,
+            Virtual35 = 196,
+            Virtual36 = 197,
+            Virtual37 = 198,
+            Virtual38 = 199,
+            Virtual39 = 200,
+            Virtual40 = 201,
+            Virtual41 = 202,
+            Virtual42 = 203,
+            Virtual43 = 204,
+            Virtual44 = 205,
+            Virtual45 = 206,
+            Virtual46 = 207,
+            Virtual47 = 208,
+            Virtual48 = 209,
+            Virtual49 = 210,
+            Virtual50 = 211,
             Year = 88,
+            YearOnly = 35,
             SortTitle = 163,
             SortAlbum = 164,
             SortAlbumArtist = 165,
@@ -533,14 +573,6 @@ namespace MusicBeePlugin
             OriginalTitle = 177,
             InstrumentsPerformers = 182,
 
-            //Tags below are added manually by me
-            Virtual26 = 185,
-            Virtual27 = 186,
-            Virtual28 = 187,
-            Virtual29 = 188,
-            Virtual30 = 189,
-            Virtual31 = 190,
-            Virtual32 = 191,
 
             Cuesheet = 18 //Added by me
         }
@@ -709,6 +741,7 @@ namespace MusicBeePlugin
         public enum SkinElement
         {
             SkinSubPanel = 0,
+            SkinButton = 2,
             SkinInputControl = 7,
             SkinInputPanel = 10,
             SkinInputPanelLabel = 14,
@@ -734,7 +767,9 @@ namespace MusicBeePlugin
             TrackAndArtistPanel = 1,
             TextBox = 3,
             ComboBox = 4,
-            MainPanel = 5
+            MainPanel = 5,
+            TabControl = 6,
+            Button = 7
         }
 
 
@@ -854,6 +889,7 @@ namespace MusicBeePlugin
         public delegate string Library_AddFileToLibraryDelegate(string sourceFileUrl, LibraryCategory category);
         public delegate bool Library_GetSyncDeltaDelegate(string[] cachedFiles, DateTime updatedSince, LibraryCategory categories, out string[] newFiles, out string[] updatedFiles, out string[] deletedFiles);
         public delegate string Library_GetLyricsDelegate(string sourceFileUrl, LyricsType type);
+        public delegate string Library_GetNoArtworkDelegate(int pictureType);
         public delegate string Library_GetArtworkDelegate(string sourceFileUrl, int index);
         public delegate bool Library_GetArtworkExDelegate(string sourceFileUrl, int index, bool retrievePictureData, out PictureLocations pictureLocations, out string pictureUrl, out byte[] imageData);
         public delegate bool Library_SetArtworkExDelegate(string sourceFileUrl, int index, byte[] imageData);
@@ -952,6 +988,8 @@ namespace MusicBeePlugin
         public delegate bool Podcasts_GetSubscriptionEpisodeDelegate(string id, int index, out string[] episode);
         public delegate string Sync_FileStartDelegate(string filename);
         public delegate void Sync_FileEndDelegate(string filename, bool success, string errorMessage);
+        //public delegate bool FileList_ClearDelegate(Control panel);
+        //public delegate bool FileList_AddFilesDelegate(Control panel, string[] urls);
 
         [System.Security.SuppressUnmanagedCodeSecurity()]
         [DllImport("kernel32.dll")]

@@ -15,14 +15,6 @@ namespace MusicBeePlugin
         ///<param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                presetNameTextBox?.Parent?.Dispose();
-                appendTextBox?.Parent?.Dispose();
-                idTextBox?.Parent?.Dispose();
-                expressionTextBox?.Parent?.Dispose();
-            }
-
             if (disposing && (components != null))
             {
                 components.Dispose();
@@ -52,7 +44,8 @@ namespace MusicBeePlugin
 
                 DefaultArtwork?.Dispose();
                 ArtworkTotals?.Dispose();
-                artwork?.Dispose();
+
+                clearArtworks();
             }
         }
 
@@ -168,6 +161,18 @@ namespace MusicBeePlugin
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TextColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ImageColumn = new System.Windows.Forms.DataGridViewImageColumn();
+
+            //MusicBee
+            if (useSkinColors)
+                this.presetTabControl = new FlatTabControl();
+
+            this.presetList = new CustomCheckedListBox(Plugin.SavedSettings.dontUseSkinColors);
+            this.presetNameTextBox = ControlsTools.CreateMusicBeeTextBox();
+            this.appendTextBox = ControlsTools.CreateMusicBeeTextBox();
+            this.idTextBox = ControlsTools.CreateMusicBeeTextBox();
+            this.expressionTextBox = ControlsTools.CreateMusicBeeTextBox();
+            //~MusicBee
+
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -188,18 +193,6 @@ namespace MusicBeePlugin
             ((System.ComponentModel.ISupportInitialize)(this.tagsDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).BeginInit();
             this.SuspendLayout();
-
-            //MusicBee
-            if (useSkinColors)
-                this.presetTabControl = new FlatTabControl();
-
-            this.presetList = new CustomCheckedListBox(Plugin.SavedSettings.dontUseSkinColors);
-            this.presetNameTextBox = ControlsTools.CreateMusicBeeTextBox();
-            this.appendTextBox = ControlsTools.CreateMusicBeeTextBox();
-            this.idTextBox = ControlsTools.CreateMusicBeeTextBox();
-            this.expressionTextBox = ControlsTools.CreateMusicBeeTextBox();
-            //~MusicBee
-
             // 
             // splitContainer1
             // 
@@ -832,8 +825,11 @@ namespace MusicBeePlugin
             // 
             this.previewTable.AllowUserToAddRows = false;
             this.previewTable.AllowUserToDeleteRows = false;
+            this.previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            this.previewTable.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
             this.previewTable.BackgroundColor = System.Drawing.SystemColors.Window;
             this.previewTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.previewTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.previewTable.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             resources.ApplyResources(this.previewTable, "previewTable");
             this.previewTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -841,7 +837,6 @@ namespace MusicBeePlugin
             this.ImageColumn});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F);
             dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -914,12 +909,12 @@ namespace MusicBeePlugin
             // expressionsDataGridViewCheckedColumn
             // 
             this.expressionsDataGridViewCheckedColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.expressionsDataGridViewCheckedColumn.FalseValue = Plugin.ColumnUncheckedState;
+            this.expressionsDataGridViewCheckedColumn.FalseValue = "F";
             resources.ApplyResources(this.expressionsDataGridViewCheckedColumn, "expressionsDataGridViewCheckedColumn");
-            this.expressionsDataGridViewCheckedColumn.IndeterminateValue = "I";
+            this.expressionsDataGridViewCheckedColumn.IndeterminateValue = "";
             this.expressionsDataGridViewCheckedColumn.Name = "expressionsDataGridViewCheckedColumn";
             this.expressionsDataGridViewCheckedColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.expressionsDataGridViewCheckedColumn.TrueValue = Plugin.ColumnCheckedState;
+            this.expressionsDataGridViewCheckedColumn.TrueValue = "T";
             // 
             // expressionsDataGridViewExpressionColumn
             // 
@@ -954,12 +949,12 @@ namespace MusicBeePlugin
             // tagsDataGridViewCheckedColumn
             // 
             this.tagsDataGridViewCheckedColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.tagsDataGridViewCheckedColumn.FalseValue = Plugin.ColumnUncheckedState;
+            this.tagsDataGridViewCheckedColumn.FalseValue = "F";
             resources.ApplyResources(this.tagsDataGridViewCheckedColumn, "tagsDataGridViewCheckedColumn");
-            this.tagsDataGridViewCheckedColumn.IndeterminateValue = "I";
+            this.tagsDataGridViewCheckedColumn.IndeterminateValue = "";
             this.tagsDataGridViewCheckedColumn.Name = "tagsDataGridViewCheckedColumn";
             this.tagsDataGridViewCheckedColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.tagsDataGridViewCheckedColumn.TrueValue = Plugin.ColumnCheckedState;
+            this.tagsDataGridViewCheckedColumn.TrueValue = "T";
             // 
             // tagsDataGridViewFunctionColumn
             // 
@@ -1159,12 +1154,10 @@ namespace MusicBeePlugin
             // dataGridViewCheckBoxColumn1
             // 
             this.dataGridViewCheckBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.dataGridViewCheckBoxColumn1.FalseValue = Plugin.ColumnUncheckedState;
             resources.ApplyResources(this.dataGridViewCheckBoxColumn1, "dataGridViewCheckBoxColumn1");
             this.dataGridViewCheckBoxColumn1.IndeterminateValue = "I";
             this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
             this.dataGridViewCheckBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewCheckBoxColumn1.TrueValue = Plugin.ColumnCheckedState;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -1175,12 +1168,10 @@ namespace MusicBeePlugin
             // dataGridViewCheckBoxColumn2
             // 
             this.dataGridViewCheckBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.dataGridViewCheckBoxColumn2.FalseValue = Plugin.ColumnUncheckedState;
             resources.ApplyResources(this.dataGridViewCheckBoxColumn2, "dataGridViewCheckBoxColumn2");
             this.dataGridViewCheckBoxColumn2.IndeterminateValue = "I";
             this.dataGridViewCheckBoxColumn2.Name = "dataGridViewCheckBoxColumn2";
             this.dataGridViewCheckBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewCheckBoxColumn2.TrueValue = Plugin.ColumnCheckedState;
             // 
             // dataGridViewTextBoxColumn2
             // 
@@ -1210,8 +1201,8 @@ namespace MusicBeePlugin
             // TextColumn
             // 
             this.TextColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.NotSet;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.TextColumn.DefaultCellStyle = dataGridViewCellStyle1;
             resources.ApplyResources(this.TextColumn, "TextColumn");
             this.TextColumn.Name = "TextColumn";
@@ -1342,13 +1333,7 @@ namespace MusicBeePlugin
         private Label hidePreviewCheckBoxLabel;
         private CheckBox hidePreviewCheckBox;
         private DataGridView expressionsDataGridView;
-        private DataGridViewCheckBoxColumn expressionsDataGridViewCheckedColumn;
-        private DataGridViewTextBoxColumn expressionsDataGridViewExpressionColumn;
         private DataGridView tagsDataGridView;
-        private DataGridViewCheckBoxColumn tagsDataGridViewCheckedColumn;
-        private DataGridViewTextBoxColumn tagsDataGridViewFunctionColumn;
-        private DataGridViewTextBoxColumn tagsDataGridViewTagColumn;
-        private DataGridViewTextBoxColumn tagsDataGridViewInfoColumn;
         private TextBox expressionTextBox;
         private Label expressionLabel;
         private Label parameter2Label;
@@ -1362,6 +1347,12 @@ namespace MusicBeePlugin
         private Label multipleItemsSplitterLabel;
         private ComboBox parameter2ComboBox;
         private TableLayoutPanel tableLayoutPanel2;
+        private DataGridViewCheckBoxColumn tagsDataGridViewCheckedColumn;
+        private DataGridViewTextBoxColumn tagsDataGridViewFunctionColumn;
+        private DataGridViewTextBoxColumn tagsDataGridViewTagColumn;
+        private DataGridViewTextBoxColumn tagsDataGridViewInfoColumn;
+        private DataGridViewCheckBoxColumn expressionsDataGridViewCheckedColumn;
+        private DataGridViewTextBoxColumn expressionsDataGridViewExpressionColumn;
         private DataGridViewTextBoxColumn TextColumn;
         private DataGridViewImageColumn ImageColumn;
     }

@@ -7,8 +7,11 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+
 using ExtensionMethods;
+
 using MusicBeePlugin.Properties;
+
 using static MusicBeePlugin.Plugin;
 
 
@@ -22,18 +25,28 @@ namespace MusicBeePlugin
             public string PresetGuid { get; set; }
             public string File { get; set; }
             public string Track { get; set; }
+
+            public ChangesDetectionResult ChangeType1;
             public string TagName1 { get; set; }
             public string OriginalTag1 { get; set; }
             public string NewTag1 { get; set; }
+
+            public ChangesDetectionResult ChangeType2;
             public string TagName2 { get; set; }
             public string OriginalTag2 { get; set; }
             public string NewTag2 { get; set; }
+
+            public ChangesDetectionResult ChangeType3;
             public string TagName3 { get; set; }
             public string OriginalTag3 { get; set; }
             public string NewTag3 { get; set; }
+
+            public ChangesDetectionResult ChangeType4;
             public string TagName4 { get; set; }
             public string OriginalTag4 { get; set; }
             public string NewTag4 { get; set; }
+
+            public ChangesDetectionResult ChangeType5;
             public string TagName5 { get; set; }
             public string OriginalTag5 { get; set; }
             public string NewTag5 { get; set; }
@@ -299,7 +312,8 @@ namespace MusicBeePlugin
                 IndeterminateValue = string.Empty,
                 Width = 25,
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.None,
-                DataPropertyName = "Checked", 
+                Resizable = DataGridViewTriState.False,
+                DataPropertyName = "Checked",
             };
 
             previewTable.Columns.Insert(0, colCB);
@@ -2057,7 +2071,7 @@ namespace MusicBeePlugin
                 return Plugin.SetFileTag(sourceFileUrl, tagId, value); //-V5609
         }
 
-        private int previewTable_AddRowsToTable(List<Row> rows, int lastProcessedRowsCount, bool itsLastRowRange, List<ChangesDetectionResult[]> changeTypes)
+        private int previewTable_AddRowsToTable(List<Row> rows, int lastProcessedRowsCount, bool itsLastRowRange)
         {
             int rowsCount = rows.Count;
 
@@ -2066,17 +2080,6 @@ namespace MusicBeePlugin
                 if (itsLastRowRange || ((rowsCount & 0x1f) == 0))
                 {
                     source.ResetBindings(false);
-
-                    for (int i = lastProcessedRowsCount; i < rowsCount; i++)
-                    {
-                        var row = previewTable.Rows[i];
-
-                        if (row.Cells[6].Tag == null)
-                        {
-                            for (int j = 0; j < 5; j++)
-                                row.Cells[6 + j * 3].Tag = changeTypes[i][j];
-                        }
-                    }
 
                     if (useSkinColors)
                         UpdateCustomScrollBars(previewTable, 1, rowsCount);
@@ -2106,7 +2109,7 @@ namespace MusicBeePlugin
                 if (processedRowList[i])
                     previewTable.Rows[i].Cells[0].Value = null;
 
-                previewTableFormatRows(i);
+                previewTableFormatRow(i);
             }
         }
 
@@ -2120,76 +2123,69 @@ namespace MusicBeePlugin
 
             try
             {
-                if (searchedPattern == null)
+                isMatch = Regex.IsMatch(value, searchedPattern, RegexOptions.IgnoreCase);
+
+                if (!isMatch)
+                    return value;
+
+
+                replacedPattern = replacedPattern.Replace(";", "\u0011").Replace("[[", "\u0017").Replace("]]", "\u0018");
+                replacedPattern = replacedPattern.Replace("$1", "%%1%%").Replace("$2", "%%2%%").Replace("$3", "%%3%%").Replace("$4", "%%4%%");
+                replacedPattern = replacedPattern.Replace("$5", "%%5%%").Replace("$6", "%%6%%").Replace("$7", "%%7%%").Replace("$8", "%%8%%");
+
+                replacedPattern = replacedPattern.Replace('$', '\u0019');
+
+                replacedPattern = replacedPattern.Replace("%%1%%", "$1").Replace("%%2%%", "$2").Replace("%%3%%", "$3").Replace("%%4%%", "$4");
+                replacedPattern = replacedPattern.Replace("%%5%%", "$5").Replace("%%6%%", "$6").Replace("%%7%%", "$7").Replace("%%8%%", "$8");
+
+                if (ignoreCase == true)
                 {
-                    isMatch = true;
+                    value = Regex.Replace(value, searchedPattern, replacedPattern, RegexOptions.IgnoreCase);
                 }
-                else
+                else if (ignoreCase == false)
                 {
-                    isMatch = Regex.IsMatch(value, searchedPattern, RegexOptions.IgnoreCase);
-
-                    if (!isMatch)
-                        return value;
-
-
-                    replacedPattern = replacedPattern.Replace(";", "\u0011").Replace("[[", "\u0017").Replace("]]", "\u0018");
-                    replacedPattern = replacedPattern.Replace("$1", "%%1%%").Replace("$2", "%%2%%").Replace("$3", "%%3%%").Replace("$4", "%%4%%");
-                    replacedPattern = replacedPattern.Replace("$5", "%%5%%").Replace("$6", "%%6%%").Replace("$7", "%%7%%").Replace("$8", "%%8%%");
-
-                    replacedPattern = replacedPattern.Replace('$', '\u0019');
-
-                    replacedPattern = replacedPattern.Replace("%%1%%", "$1").Replace("%%2%%", "$2").Replace("%%3%%", "$3").Replace("%%4%%", "$4");
-                    replacedPattern = replacedPattern.Replace("%%5%%", "$5").Replace("%%6%%", "$6").Replace("%%7%%", "$7").Replace("%%8%%", "$8");
-
-                    if (ignoreCase == true)
-                    {
-                        value = Regex.Replace(value, searchedPattern, replacedPattern, RegexOptions.IgnoreCase);
-                    }
-                    else if (ignoreCase == false)
-                    {
-                        value = Regex.Replace(value, searchedPattern, replacedPattern, RegexOptions.None);
-                    }
-                    else if (ignoreCase == null) //ase-preserving replacements
-                    {
-                        var matches = Regex.Matches(value, searchedPattern, RegexOptions.IgnoreCase);
-
-                        string newValue = string.Empty;
-                        for (int i = 0; i < matches.Count; i++)
-                        {
-                            var match = matches[i];
-
-                            string valueStart = value.Substring(0, match.Index);
-                            string valueEnd = value.Substring(match.Index + match.Length);
-                            string searchedValuePart = value.Substring(match.Index, match.Length);
-
-                            if (replacedPattern.Length == 0)
-                                newValue = valueStart + valueEnd;
-                            else if (searchedValuePart.ToLower() == searchedValuePart) //lower case
-                                newValue = valueStart + replacedPattern.ToLower() + valueEnd;
-                            else if (searchedValuePart.ToUpper() == searchedValuePart) //UPPER case
-                                newValue = valueStart + replacedPattern.ToUpper() + valueEnd;
-                            else if (searchedValuePart.Length > 1 && replacedPattern.Length > 1 && searchedValuePart[0].ToString().ToUpper()[0] == searchedValuePart[0] && searchedValuePart.Substring(1).ToLower() == searchedValuePart.Substring(1)) //Capitalized
-                                newValue = valueStart + replacedPattern[0].ToString().ToUpper()[0] + replacedPattern.Substring(1).ToLower() + valueEnd;
-                            else if (searchedValuePart.Length > 1 && searchedValuePart[0].ToString().ToUpper()[0] == searchedValuePart[0]) //1st & single replaced letter UPPER case
-                                newValue = valueStart + replacedPattern[0].ToString().ToUpper()[0] + valueEnd;
-                            else if (searchedValuePart.Length > 1) //1st & single replaced letter lower case
-                                newValue = valueStart + replacedPattern[0].ToString().ToLower()[0] + valueEnd;
-                            else //Replaced as is
-                                newValue = valueStart + replacedPattern + valueEnd;
-
-                            //for (int j = 0; j < replacedPattern.Length; j++)
-                            //    if (searchedCasing == 0)
-                            //        newValue += replacedPattern[j];
-
-                            //newValue = valueStart + newValue + valueEnd;
-                        }
-
-                        value = newValue;
-                    }
-
-                    value = value.Replace("\u0017", "[[").Replace("\u0018", "]]").Replace("\u0011", ";");
-                    value = value.Replace('\u0019', '$');
+                    value = Regex.Replace(value, searchedPattern, replacedPattern, RegexOptions.None);
                 }
+                else if (ignoreCase == null) //ase-preserving replacements
+                {
+                    var matches = Regex.Matches(value, searchedPattern, RegexOptions.IgnoreCase);
+
+                    string newValue = string.Empty;
+                    for (int i = 0; i < matches.Count; i++)
+                    {
+                        var match = matches[i];
+
+                        string valueStart = value.Substring(0, match.Index);
+                        string valueEnd = value.Substring(match.Index + match.Length);
+                        string searchedValuePart = value.Substring(match.Index, match.Length);
+
+                        if (replacedPattern.Length == 0)
+                            newValue = valueStart + valueEnd;
+                        else if (searchedValuePart.ToLower() == searchedValuePart) //lower case
+                            newValue = valueStart + replacedPattern.ToLower() + valueEnd;
+                        else if (searchedValuePart.ToUpper() == searchedValuePart) //UPPER case
+                            newValue = valueStart + replacedPattern.ToUpper() + valueEnd;
+                        else if (searchedValuePart.Length > 1 && replacedPattern.Length > 1 && searchedValuePart[0].ToString().ToUpper()[0] == searchedValuePart[0] && searchedValuePart.Substring(1).ToLower() == searchedValuePart.Substring(1)) //Capitalized
+                            newValue = valueStart + replacedPattern[0].ToString().ToUpper()[0] + replacedPattern.Substring(1).ToLower() + valueEnd;
+                        else if (searchedValuePart.Length > 1 && searchedValuePart[0].ToString().ToUpper()[0] == searchedValuePart[0]) //1st & single replaced letter UPPER case
+                            newValue = valueStart + replacedPattern[0].ToString().ToUpper()[0] + valueEnd;
+                        else if (searchedValuePart.Length > 1) //1st & single replaced letter lower case
+                            newValue = valueStart + replacedPattern[0].ToString().ToLower()[0] + valueEnd;
+                        else //Replaced as is
+                            newValue = valueStart + replacedPattern + valueEnd;
+
+                        //for (int j = 0; j < replacedPattern.Length; j++)
+                        //    if (searchedCasing == 0)
+                        //        newValue += replacedPattern[j];
+
+                        //newValue = valueStart + newValue + valueEnd;
+                    }
+
+                    value = newValue;
+                }
+
+                value = value.Replace("\u0017", "[[").Replace("\u0018", "]]").Replace("\u0011", ";");
+                value = value.Replace('\u0019', '$');
 
                 //Let's evaluate all supported functions
                 int maxLevel = -1;
@@ -2775,7 +2771,9 @@ namespace MusicBeePlugin
 
         private void resetPreviewData()
         {
-            previewTable.AllowUserToResizeColumns = true;//-------
+            previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            previewTable.AllowUserToResizeColumns = true;
             previewTable.AllowUserToResizeRows = true;
             foreach (DataGridViewColumn column in previewTable.Columns)
                 column.SortMode = DataGridViewColumnSortMode.Automatic;
@@ -2809,14 +2807,13 @@ namespace MusicBeePlugin
 
         private void resetFormToGeneratedPreview()
         {
-            previewTable.AllowUserToResizeColumns = true;//-------
+            previewTable.AllowUserToResizeColumns = true;
             previewTable.AllowUserToResizeRows = true;
             foreach (DataGridViewColumn column in previewTable.Columns)
                 column.SortMode = DataGridViewColumnSortMode.Automatic;
 
-            previewTable.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCells);
-            previewTable.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
-            //previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;//--------
+            previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            AutoSizeTableRows(previewTable, 3);
 
 
             backgroundTaskIsScheduled = false;
@@ -2833,17 +2830,23 @@ namespace MusicBeePlugin
             {
                 ignoreClosingForm = false;
                 Close();
+                return;
             }
 
             ignoreClosingForm = false;
+
+            previewTable.Focus();
         }
 
         private bool applyingChangesStopped()
         {
-            previewTable.AllowUserToResizeColumns = true;//--------
+            previewTable.AllowUserToResizeColumns = true;
             previewTable.AllowUserToResizeRows = true;
             foreach (DataGridViewColumn column in previewTable.Columns)
                 column.SortMode = DataGridViewColumnSortMode.Automatic;
+
+            previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            previewTable.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
 
 
             backgroundTaskIsScheduled = false;
@@ -2923,12 +2926,14 @@ namespace MusicBeePlugin
             }
 
 
-            previewTable.AllowUserToResizeColumns = false; //--------
+            previewTable.AllowUserToResizeColumns = false;
             previewTable.AllowUserToResizeRows = false;
             foreach (DataGridViewColumn column in previewTable.Columns)
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
 
-            //previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;//------
+            previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+            previewTable.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
+
             return true;
         }
 
@@ -2943,7 +2948,7 @@ namespace MusicBeePlugin
             }
             else
             {
-                previewTable.AllowUserToResizeColumns = false;//--------
+                previewTable.AllowUserToResizeColumns = false;
                 previewTable.AllowUserToResizeRows = false;
                 foreach (DataGridViewColumn column in previewTable.Columns)
                     column.SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -3228,7 +3233,6 @@ namespace MusicBeePlugin
             List<ChangesDetectionResult[]> changeTypesList = new List<ChangesDetectionResult[]>();
             string lastFile = null;
             bool even = true;
-            int lastProcessedRowsCount = 0;
 
             lock (Presets)
             {
@@ -3312,42 +3316,35 @@ namespace MusicBeePlugin
                                 PresetGuid = processingCopyGuidPreset.Key,
                                 File = currentFile,
                                 Track = track,
+                                ChangeType1 = changeType1,
                                 TagName1 = processedOriginalReplacedTagName,
                                 OriginalTag1 = searchedAndReplacedTags.originalReplacedTagValue,
                                 NewTag1 = searchedAndReplacedTags.replacedTagValue,
+                                ChangeType2 = changeType2,
                                 TagName2 = processedOriginalReplacedTag2Name,
                                 OriginalTag2 = searchedAndReplacedTags.originalReplacedTag2Value,
                                 NewTag2 = searchedAndReplacedTags.replacedTag2Value,
+                                ChangeType3 = changeType3,
                                 TagName3 = processedOriginalReplacedTag3Name,
                                 OriginalTag3 = searchedAndReplacedTags.originalReplacedTag3Value,
                                 NewTag3 = searchedAndReplacedTags.replacedTag3Value,
+                                ChangeType4 = changeType4,
                                 TagName4 = processedOriginalReplacedTag4Name,
                                 OriginalTag4 = searchedAndReplacedTags.originalReplacedTag4Value,
                                 NewTag4 = searchedAndReplacedTags.replacedTag4Value,
+                                ChangeType5 = changeType5,
                                 TagName5 = processedOriginalReplacedTag5Name,
                                 OriginalTag5 = searchedAndReplacedTags.originalReplacedTag5Value,
                                 NewTag5 = searchedAndReplacedTags.replacedTag5Value,
                                 OddEven = evenOdd,
                             };
 
-
-                            var changeTypes = new ChangesDetectionResult[5];
-
-                            changeTypes[0] = changeType1;
-                            changeTypes[1] = changeType2;
-                            changeTypes[2] = changeType3;
-                            changeTypes[3] = changeType4;
-                            changeTypes[4] = changeType5;
-
-
                             rows.Add(row);
-                            changeTypesList.Add(changeTypes);
 
 
                             int rowCountToFormat1 = 0;
-                            Invoke(new Action(() => { rowCountToFormat1 = previewTable_AddRowsToTable(rows, lastProcessedRowsCount, false, changeTypesList); }));
+                            Invoke(new Action(() => { rowCountToFormat1 = AddRowsToTable(this, previewTable, source, rows.Count, false, true); }));
                             Invoke(new Action(() => { previewTableFormatRows(rowCountToFormat1); }));
-                            lastProcessedRowsCount += rowCountToFormat1;
                         }
                     }
                 }
@@ -3355,9 +3352,8 @@ namespace MusicBeePlugin
 
 
             int rowCountToFormat2 = 0;
-            Invoke(new Action(() => { rowCountToFormat2 = previewTable_AddRowsToTable(rows, lastProcessedRowsCount, true, changeTypesList); }));
+            Invoke(new Action(() => { rowCountToFormat2 = AddRowsToTable(this, previewTable, source, rows.Count, true, true); }));
             Invoke(new Action(() => { previewTableFormatRows(rowCountToFormat2); checkStoppedStatus(); resetFormToGeneratedPreview(); }));
-            //lastProcessedRowsCount += rowCountToFormat2;
         }
 
         private void applyToSelected()
@@ -3635,7 +3631,7 @@ namespace MusicBeePlugin
 
         private void buttonPreview_Click(object sender, EventArgs e)
         {
-            ignoreClosingForm = clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewChanges, buttonPreview, buttonOK, buttonClose);
+            ignoreClosingForm = clickOnPreviewButton(prepareBackgroundPreview, previewChanges, buttonPreview, buttonOK, buttonClose);
         }
 
         private void buttonSaveClose_Click(object sender, EventArgs e)
@@ -3939,9 +3935,6 @@ namespace MusicBeePlugin
 
                 return;
             }
-
-
-            previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;//-------
 
 
             if (selectedPreset.columnWeights == null)
@@ -4260,9 +4253,6 @@ namespace MusicBeePlugin
                 previewTable.Columns[17].Visible = false;
                 previewTable.Columns[18].Visible = false;
             }
-
-
-            previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;//-------
         }
 
         private void setCheckedState(PictureBox label, bool flag)
@@ -4281,7 +4271,7 @@ namespace MusicBeePlugin
                 return;
 
             if (previewIsGenerated)
-                clickOnPreviewButton(previewTable, prepareBackgroundPreview, previewChanges, buttonPreview, buttonOK, buttonClose);
+                clickOnPreviewButton(prepareBackgroundPreview, previewChanges, buttonPreview, buttonOK, buttonClose);
 
             ProcessPresetChanges = false;
             presetListSelectedIndexChanged(presetList.SelectedIndex);
@@ -5316,44 +5306,35 @@ namespace MusicBeePlugin
 
         private void cbHeader_OnCheckBoxClicked(bool state)
         {
-            for (int i = 0; i < rows.Count; i++)
-            {
-                if (rows[0].Checked == null)
-                    continue;
+            if (rows.Count == 0)
+                return;
 
-                if (state)
-                    rows[0].Checked = Plugin.ColumnUncheckedState;
-                else
-                    rows[0].Checked = Plugin.ColumnCheckedState;
-            }
+
+            for (int i = 0; i < rows.Count; i++)
+                toggleRow(state, i);
+
+            int firstRow = previewTable.FirstDisplayedCell.RowIndex;
 
             source.ResetBindings(false);
-            for (int i = 0; i < rows.Count; i++)
-                previewTable_CellContentClick(previewTable, new DataGridViewCellEventArgs(0, i));
+            previewTableFormatRows(previewTable.RowCount);
+
+            var firstCell = previewTable.Rows[firstRow].Cells[0];
+            previewTable.FirstDisplayedCell = firstCell;
         }
 
         private void toggleRow(bool check, int rowIndex)
         {
             if (!check)
             {
-                previewTable.Rows[rowIndex].Cells[0].Value = Plugin.ColumnUncheckedState;
-
-                var sourceTag1Value = previewTable.Rows[rowIndex].Cells[5].Value as string;
-                var sourceTag2Value = previewTable.Rows[rowIndex].Cells[8].Value as string;
-                var sourceTag3Value = previewTable.Rows[rowIndex].Cells[11].Value as string;
-                var sourceTag4Value = previewTable.Rows[rowIndex].Cells[14].Value as string;
-                var sourceTag5Value = previewTable.Rows[rowIndex].Cells[17].Value as string;
-
-                previewTable.Rows[rowIndex].Cells[6].Value = sourceTag1Value;
-                previewTable.Rows[rowIndex].Cells[9].Value = sourceTag2Value;
-                previewTable.Rows[rowIndex].Cells[12].Value = sourceTag3Value;
-                previewTable.Rows[rowIndex].Cells[15].Value = sourceTag4Value;
-                previewTable.Rows[rowIndex].Cells[18].Value = sourceTag5Value;
+                rows[rowIndex].Checked = ColumnUncheckedState;
+                rows[rowIndex].NewTag1 = rows[rowIndex].OriginalTag1;
+                rows[rowIndex].NewTag2 = rows[rowIndex].OriginalTag2;
+                rows[rowIndex].NewTag3 = rows[rowIndex].OriginalTag3;
+                rows[rowIndex].NewTag4 = rows[rowIndex].OriginalTag4;
+                rows[rowIndex].NewTag5 = rows[rowIndex].OriginalTag5;
             }
             else //if (check)
             {
-                previewTable.Rows[rowIndex].Cells[0].Value = Plugin.ColumnCheckedState;
-
                 string newTag1Value;
                 string newTag2Value;
                 string newTag3Value;
@@ -5373,11 +5354,12 @@ namespace MusicBeePlugin
                     newTag5Value = searchedAndReplacedTags.replacedTag5Value;
                 }
 
-                previewTable.Rows[rowIndex].Cells[6].Value = newTag1Value;
-                previewTable.Rows[rowIndex].Cells[9].Value = newTag2Value;
-                previewTable.Rows[rowIndex].Cells[12].Value = newTag3Value;
-                previewTable.Rows[rowIndex].Cells[15].Value = newTag4Value;
-                previewTable.Rows[rowIndex].Cells[18].Value = newTag5Value;
+                rows[rowIndex].Checked = ColumnCheckedState;
+                rows[rowIndex].NewTag1 = newTag1Value;
+                rows[rowIndex].NewTag2 = newTag2Value;
+                rows[rowIndex].NewTag3 = newTag3Value;
+                rows[rowIndex].NewTag4 = newTag4Value;
+                rows[rowIndex].NewTag5 = newTag5Value;
             }
         }
 
@@ -5419,7 +5401,13 @@ namespace MusicBeePlugin
                 {
                     toggleRow(check, e.RowIndex);
 
-                    previewTableFormatRows(e.RowIndex);
+                    int firstRow = previewTable.FirstDisplayedCell.RowIndex;
+
+                    source.ResetBindings(false);
+                    previewTableFormatRows(previewTable.RowCount);
+
+                    var firstCell = previewTable.Rows[firstRow].Cells[0];
+                    previewTable.FirstDisplayedCell = firstCell;
                 }
                 else //Toggle checked state of all rows for the same tag(s) - 1 row can refer to up to 5 tags
                 {
@@ -5481,12 +5469,16 @@ namespace MusicBeePlugin
                         }
 
                         if (processRow)
-                        {
                             toggleRow(check, j);
-
-                            previewTableFormatRows(j);
-                        }
                     }
+
+                    int firstRow = previewTable.FirstDisplayedCell.RowIndex;
+
+                    source.ResetBindings(false);
+                    previewTableFormatRows(previewTable.RowCount);
+
+                    var firstCell = previewTable.Rows[firstRow].Cells[0];
+                    previewTable.FirstDisplayedCell = firstCell;
                 }
             }
         }
@@ -5511,251 +5503,248 @@ namespace MusicBeePlugin
             saveColumnWidths(selectedPreset);
         }
 
+        private void previewTableFormatRow(int rowIndex)
+        {
+            previewTable.Rows[rowIndex].Cells[0].ToolTipText = CellTooTip;
+
+            if (SavedSettings.dontHighlightChangedTags)
+                return;
+
+            for (var columnIndex = 1; columnIndex < previewTable.ColumnCount; columnIndex++)
+            {
+                if (previewTable.Rows[rowIndex].Cells[columnIndex].Visible)
+                {
+                    if (previewTable.Rows[rowIndex].Cells[0].Value as string == Plugin.ColumnCheckedState)
+                        previewTable.Rows[rowIndex].Cells[columnIndex].Style = unchangedCellStyle;
+                    else
+                        previewTable.Rows[rowIndex].Cells[columnIndex].Style = dimmedCellStyle;
+                }
+            }
+
+
+            for (var columnIndex = 1; columnIndex < previewTable.ColumnCount; columnIndex++)
+            {
+                if (columnIndex == 6 && previewTable.Columns[columnIndex].Visible && previewTable.Rows[rowIndex].Cells[0].Value as string == Plugin.ColumnCheckedState)
+                {
+                    var cell = previewTable.Rows[rowIndex].Cells[6];
+                    var changeType = rows[rowIndex].ChangeType1;
+
+                    if (changeType == ChangesDetectionResult.PreservedTagsDetected)
+                        cell.Style = preservedTagCellStyle;
+                    else if (changeType == ChangesDetectionResult.PreservedTagValuesDetected)
+                        cell.Style = preservedTagValueCellStyle;
+                    else if (changeType == ChangesDetectionResult.NoChangesDetected)
+                        cell.Style = unchangedCellStyle;
+                    else if (changeType == ChangesDetectionResult.NoExclusionsDetected)
+                        cell.Style = changedCellStyle;
+                }
+                else if (columnIndex == 9 && previewTable.Columns[columnIndex].Visible && previewTable.Rows[rowIndex].Cells[0].Value as string == Plugin.ColumnCheckedState)
+                {
+                    var cell = previewTable.Rows[rowIndex].Cells[9];
+                    var changeType2 = rows[rowIndex].ChangeType2;
+
+                    if (changeType2 == ChangesDetectionResult.PreservedTagsDetected)
+                    {
+                        cell.Style = preservedTagCellStyle;
+                        return;
+                    }
+                    else if (changeType2 == ChangesDetectionResult.PreservedTagValuesDetected)
+                    {
+                        cell.Style = preservedTagValueCellStyle;
+                        return;
+                    }
+
+
+                    if (previewTable.Columns[8].Visible)
+                    {
+                        if (cell.Value as string == previewTable.Rows[rowIndex].Cells[8].Value as string)
+                            cell.Style = unchangedCellStyle;
+                        else
+                            cell.Style = changedCellStyle;
+
+                        return;
+                    }
+
+                    if (previewTable.Columns[5].Visible)
+                        break;
+
+                    var changeTypeI = rows[rowIndex].ChangeType1;
+
+                    if (changeTypeI == ChangesDetectionResult.PreservedTagsDetected)
+                        cell.Style = preservedTagCellStyle;
+                    else if (changeTypeI == ChangesDetectionResult.PreservedTagValuesDetected)
+                        cell.Style = preservedTagValueCellStyle;
+                    else if (cell.Value as string == previewTable.Rows[rowIndex].Cells[5].Value as string)
+                        cell.Style = unchangedCellStyle;
+                    else
+                        cell.Style = changedCellStyle;
+                }
+                else if (columnIndex == 12 && previewTable.Columns[columnIndex].Visible && previewTable.Rows[rowIndex].Cells[0].Value as string == Plugin.ColumnCheckedState)
+                {
+                    var cell = previewTable.Rows[rowIndex].Cells[12];
+                    var changeType3 = rows[rowIndex].ChangeType3;
+
+                    if (changeType3 == ChangesDetectionResult.PreservedTagsDetected)
+                    {
+                        cell.Style = preservedTagCellStyle;
+                        return;
+                    }
+                    else if (changeType3 == ChangesDetectionResult.PreservedTagValuesDetected)
+                    {
+                        cell.Style = preservedTagValueCellStyle;
+                        return;
+                    }
+
+                    if (previewTable.Columns[11].Visible)
+                    {
+                        if (cell.Value as string == previewTable.Rows[rowIndex].Cells[11].Value as string)
+                            cell.Style = unchangedCellStyle;
+                        else
+                            cell.Style = changedCellStyle;
+
+                        return;
+                    }
+
+                    var i = 8;
+                    do
+                    {
+                        if (previewTable.Columns[i].Visible)
+                            break;
+
+                        i -= 3;
+                    }
+                    while (i >= 5);
+
+                    ChangesDetectionResult changeTypeI;
+                    if (i == 8)
+                        changeTypeI = rows[rowIndex].ChangeType2;
+                    else
+                        changeTypeI = rows[rowIndex].ChangeType1;
+
+                    if (changeTypeI == ChangesDetectionResult.PreservedTagsDetected)
+                        cell.Style = preservedTagCellStyle;
+                    else if (changeTypeI == ChangesDetectionResult.PreservedTagValuesDetected)
+                        cell.Style = preservedTagValueCellStyle;
+                    else if (cell.Value as string == previewTable.Rows[rowIndex].Cells[i].Value as string)
+                        cell.Style = unchangedCellStyle;
+                    else
+                        cell.Style = changedCellStyle;
+                }
+                else if (columnIndex == 15 && previewTable.Columns[columnIndex].Visible && previewTable.Rows[rowIndex].Cells[0].Value as string == Plugin.ColumnCheckedState)
+                {
+                    var cell = previewTable.Rows[rowIndex].Cells[15];
+                    var changeType4 = rows[rowIndex].ChangeType4;
+
+                    if (changeType4 == ChangesDetectionResult.PreservedTagsDetected)
+                    {
+                        cell.Style = preservedTagCellStyle;
+                        return;
+                    }
+                    else if (changeType4 == ChangesDetectionResult.PreservedTagValuesDetected)
+                    {
+                        cell.Style = preservedTagValueCellStyle;
+                        return;
+                    }
+
+                    if (previewTable.Columns[14].Visible)
+                    {
+                        if (cell.Value as string == previewTable.Rows[rowIndex].Cells[14].Value as string)
+                            cell.Style = unchangedCellStyle;
+                        else
+                            cell.Style = changedCellStyle;
+
+                        return;
+                    }
+
+                    var i = 11;
+                    do
+                    {
+                        if (previewTable.Columns[i].Visible)
+                            break;
+
+                        i -= 3;
+                    }
+                    while (i >= 5);
+
+                    ChangesDetectionResult changeTypeI;
+                    if (i == 11)
+                        changeTypeI = rows[rowIndex].ChangeType3;
+                    else if (i == 8)
+                        changeTypeI = rows[rowIndex].ChangeType2;
+                    else
+                        changeTypeI = rows[rowIndex].ChangeType1;
+
+                    if (changeTypeI == ChangesDetectionResult.PreservedTagsDetected)
+                        cell.Style = preservedTagCellStyle;
+                    else if (changeTypeI == ChangesDetectionResult.PreservedTagValuesDetected)
+                        cell.Style = preservedTagValueCellStyle;
+                    else if (cell.Value as string == previewTable.Rows[rowIndex].Cells[i].Value as string)
+                        cell.Style = unchangedCellStyle;
+                    else
+                        cell.Style = changedCellStyle;
+                }
+                else if (columnIndex == 18 && previewTable.Columns[columnIndex].Visible && previewTable.Rows[rowIndex].Cells[0].Value as string == Plugin.ColumnCheckedState)
+                {
+                    var cell = previewTable.Rows[rowIndex].Cells[18];
+                    var changeType5 = rows[rowIndex].ChangeType5;
+
+                    if (changeType5 == ChangesDetectionResult.PreservedTagsDetected)
+                    {
+                        cell.Style = preservedTagCellStyle;
+                        return;
+                    }
+                    else if (changeType5 == ChangesDetectionResult.PreservedTagValuesDetected)
+                    {
+                        cell.Style = preservedTagValueCellStyle;
+                        return;
+                    }
+
+                    if (previewTable.Columns[17].Visible)
+                    {
+                        if (cell.Value as string == previewTable.Rows[rowIndex].Cells[17].Value as string)
+                            cell.Style = unchangedCellStyle;
+                        else
+                            cell.Style = changedCellStyle;
+
+                        return;
+                    }
+
+                    var i = 14;
+                    do
+                    {
+                        if (previewTable.Columns[i].Visible)
+                            break;
+
+                        i -= 3;
+                    }
+                    while (i >= 5);
+
+                    ChangesDetectionResult changeTypeI;
+                    if (i == 14)
+                        changeTypeI = rows[rowIndex].ChangeType3;
+                    else if (i == 11)
+                        changeTypeI = rows[rowIndex].ChangeType2;
+                    else if (i == 8)
+                        changeTypeI = rows[rowIndex].ChangeType2;
+                    else
+                        changeTypeI = rows[rowIndex].ChangeType1;
+
+                    if (changeTypeI == ChangesDetectionResult.PreservedTagsDetected)
+                        cell.Style = preservedTagCellStyle;
+                    else if (changeTypeI == ChangesDetectionResult.PreservedTagValuesDetected)
+                        cell.Style = preservedTagValueCellStyle;
+                    else if (cell.Value as string == previewTable.Rows[rowIndex].Cells[i].Value as string)
+                        cell.Style = unchangedCellStyle;
+                    else
+                        cell.Style = changedCellStyle;
+                }
+            }
+        }
+
         private void previewTableFormatRows(int rowCountToFormat)
         {
             for (int rowIndex = previewTable.RowCount - rowCountToFormat; rowIndex < previewTable.RowCount; rowIndex++)
-            {
-                previewTable.Rows[rowIndex].Cells[0].ToolTipText = CellTooTip;
-
-                if (SavedSettings.dontHighlightChangedTags)
-                    return;
-
-                for (var columnIndex = 1; columnIndex < previewTable.ColumnCount; columnIndex++)
-                {
-                    if (previewTable.Rows[rowIndex].Cells[columnIndex].Visible)
-                    {
-                        if (previewTable.Rows[rowIndex].Cells[0].Value as string == Plugin.ColumnCheckedState)
-                            previewTable.Rows[rowIndex].Cells[columnIndex].Style = unchangedCellStyle;
-                        else
-                            previewTable.Rows[rowIndex].Cells[columnIndex].Style = dimmedCellStyle;
-                    }
-                }
-
-
-                for (var columnIndex = 1; columnIndex < previewTable.ColumnCount; columnIndex++)
-                {
-                    if (columnIndex == 6 && previewTable.Columns[columnIndex].Visible)
-                    {
-                        var cell = previewTable.Rows[rowIndex].Cells[6];
-                        var changeType = ChangesDetectionResult.Null;//----------- remove ChangesDetectionResult.Null ??????
-                        //if (cell.Tag != null) //----------????? why null?
-                            changeType = (ChangesDetectionResult)cell.Tag;
-
-                        if (changeType == ChangesDetectionResult.PreservedTagsDetected)
-                            cell.Style = preservedTagCellStyle;
-                        else if (changeType == ChangesDetectionResult.PreservedTagValuesDetected)
-                            cell.Style = preservedTagValueCellStyle;
-                        else if (changeType == ChangesDetectionResult.NoChangesDetected)
-                            cell.Style = unchangedCellStyle;
-                        else if (changeType == ChangesDetectionResult.NoExclusionsDetected)
-                            cell.Style = changedCellStyle;
-                    }
-                    else if (columnIndex == 9 && previewTable.Columns[columnIndex].Visible)
-                    {
-                        var cell = previewTable.Rows[rowIndex].Cells[9];
-                        var changeType9 = ChangesDetectionResult.Null;//-----------
-                        //if (cell.Tag != null)//------------
-                            changeType9 = (ChangesDetectionResult)cell.Tag;
-
-                        if (changeType9 == ChangesDetectionResult.PreservedTagsDetected)
-                        {
-                            cell.Style = preservedTagCellStyle;
-                            return;
-                        }
-                        else if (changeType9 == ChangesDetectionResult.PreservedTagValuesDetected)
-                        {
-                            cell.Style = preservedTagValueCellStyle;
-                            return;
-                        }
-
-
-                        if (previewTable.Columns[8].Visible)
-                        {
-                            if (cell.Value as string == previewTable.Rows[rowIndex].Cells[8].Value as string)
-                                cell.Style = unchangedCellStyle;
-                            else
-                                cell.Style = changedCellStyle;
-
-                            return;
-                        }
-
-                        if (previewTable.Columns[5].Visible)
-                            break;
-
-                        var cell3 = previewTable.Rows[rowIndex].Cells[3];
-                        var changeType3 = ChangesDetectionResult.Null;//----------
-                        //if (cell3.Tag != null)//--------
-                            changeType3 = (ChangesDetectionResult)cell3.Tag;
-
-
-
-                        if (changeType3 == ChangesDetectionResult.PreservedTagsDetected)
-                            cell.Style = preservedTagCellStyle;
-                        else if (changeType3 == ChangesDetectionResult.PreservedTagValuesDetected)
-                            cell.Style = preservedTagValueCellStyle;
-                        else if (cell.Value as string == previewTable.Rows[rowIndex].Cells[2].Value as string)
-                            cell.Style = unchangedCellStyle;
-                        else
-                            cell.Style = changedCellStyle;
-                    }
-                    else if (columnIndex == 12 && previewTable.Columns[columnIndex].Visible)
-                    {
-                        var cell = previewTable.Rows[rowIndex].Cells[12];
-                        var changeType12 = ChangesDetectionResult.Null;//-----------
-                        //if (cell.Tag != null)//-------
-                            changeType12 = (ChangesDetectionResult)cell.Tag;
-
-                        if (changeType12 == ChangesDetectionResult.PreservedTagsDetected)
-                        {
-                            cell.Style = preservedTagCellStyle;
-                            return;
-                        }
-                        else if (changeType12 == ChangesDetectionResult.PreservedTagValuesDetected)
-                        {
-                            cell.Style = preservedTagValueCellStyle;
-                            return;
-                        }
-
-                        if (previewTable.Columns[11].Visible)
-                        {
-                            if (cell.Value as string == previewTable.Rows[rowIndex].Cells[11].Value as string)
-                                cell.Style = unchangedCellStyle;
-                            else
-                                cell.Style = changedCellStyle;
-
-                            return;
-                        }
-
-                        var i = 8;
-                        do
-                        {
-                            if (previewTable.Columns[i].Visible)
-                                break;
-
-                            i -= 3;
-                        }
-                        while (i >= 5);
-
-                        var cellI = previewTable.Rows[rowIndex].Cells[i + 1];
-                        var changeTypeI = ChangesDetectionResult.Null;//-------------
-                        //if (cellI.Tag != null)//----------
-                            changeTypeI = (ChangesDetectionResult)cellI.Tag;
-
-                        if (changeTypeI == ChangesDetectionResult.PreservedTagsDetected)
-                            cell.Style = preservedTagCellStyle;
-                        else if (changeTypeI == ChangesDetectionResult.PreservedTagValuesDetected)
-                            cell.Style = preservedTagValueCellStyle;
-                        else if (cell.Value as string == previewTable.Rows[rowIndex].Cells[i].Value as string)
-                            cell.Style = unchangedCellStyle;
-                        else
-                            cell.Style = changedCellStyle;
-                    }
-                    else if (columnIndex == 15 && previewTable.Columns[columnIndex].Visible)
-                    {
-                        var cell = previewTable.Rows[rowIndex].Cells[15];
-                        var changeType15 = ChangesDetectionResult.Null;//------------
-                        //if (cell.Tag != null)//-----------
-                            changeType15 = (ChangesDetectionResult)cell.Tag;
-
-                        if (changeType15 == ChangesDetectionResult.PreservedTagsDetected)
-                        {
-                            cell.Style = preservedTagCellStyle;
-                            return;
-                        }
-                        else if (changeType15 == ChangesDetectionResult.PreservedTagValuesDetected)
-                        {
-                            cell.Style = preservedTagValueCellStyle;
-                            return;
-                        }
-
-                        if (previewTable.Columns[11].Visible)
-                        {
-                            if (cell.Value as string == previewTable.Rows[rowIndex].Cells[14].Value as string)
-                                cell.Style = unchangedCellStyle;
-                            else
-                                cell.Style = changedCellStyle;
-
-                            return;
-                        }
-
-                        var i = 11;
-                        do
-                        {
-                            if (previewTable.Columns[i].Visible)
-                                break;
-
-                            i -= 3;
-                        }
-                        while (i >= 5);
-
-                        var cellI = previewTable.Rows[rowIndex].Cells[i + 1];
-                        var changeTypeI = ChangesDetectionResult.Null;//---------
-                        //if (cellI.Tag != null)//---------------
-                            changeTypeI = (ChangesDetectionResult)cellI.Tag;
-
-                        if (changeTypeI == ChangesDetectionResult.PreservedTagsDetected)
-                            cell.Style = preservedTagCellStyle;
-                        else if (changeTypeI == ChangesDetectionResult.PreservedTagValuesDetected)
-                            cell.Style = preservedTagValueCellStyle;
-                        else if (cell.Value as string == previewTable.Rows[rowIndex].Cells[i].Value as string)
-                            cell.Style = unchangedCellStyle;
-                        else
-                            cell.Style = changedCellStyle;
-                    }
-                    else if (columnIndex == 18 && previewTable.Columns[columnIndex].Visible)
-                    {
-                        var cell = previewTable.Rows[rowIndex].Cells[18];
-                        var changeType18 = ChangesDetectionResult.Null;//----------
-                        //if (cell.Tag != null)//------------
-                            changeType18 = (ChangesDetectionResult)cell.Tag;
-
-                        if (changeType18 == ChangesDetectionResult.PreservedTagsDetected)
-                        {
-                            cell.Style = preservedTagCellStyle;
-                            return;
-                        }
-                        else if (changeType18 == ChangesDetectionResult.PreservedTagValuesDetected)
-                        {
-                            cell.Style = preservedTagValueCellStyle;
-                            return;
-                        }
-
-                        if (previewTable.Columns[11].Visible)
-                        {
-                            if (cell.Value as string == previewTable.Rows[rowIndex].Cells[17].Value as string)
-                                cell.Style = unchangedCellStyle;
-                            else
-                                cell.Style = changedCellStyle;
-
-                            return;
-                        }
-
-                        var i = 14;
-                        do
-                        {
-                            if (previewTable.Columns[i].Visible)
-                                break;
-
-                            i -= 3;
-                        }
-                        while (i >= 5);
-
-                        var cellI = previewTable.Rows[rowIndex].Cells[i + 1];
-                        var changeTypeI = ChangesDetectionResult.Null;//--------
-                        //if (cellI.Tag != null)//-------------
-                            changeTypeI = (ChangesDetectionResult)cellI.Tag;
-
-                        if (changeTypeI == ChangesDetectionResult.PreservedTagsDetected)
-                            cell.Style = preservedTagCellStyle;
-                        else if (changeTypeI == ChangesDetectionResult.PreservedTagValuesDetected)
-                            cell.Style = preservedTagValueCellStyle;
-                        else if (cell.Value as string == previewTable.Rows[rowIndex].Cells[i].Value as string)
-                            cell.Style = unchangedCellStyle;
-                        else
-                            cell.Style = changedCellStyle;
-                    }
-                }
-            }
+                previewTableFormatRow(rowIndex);
 
 
             if (previewTable.RowCount > 0)
@@ -5950,7 +5939,7 @@ namespace MusicBeePlugin
                 var slot = FindFirstSlot(asrPresetsWithHotkeysGuids, selectedPreset.guid);
                 if (slot == -1)
                 {
-                    MessageBox.Show(this, "Something went wrong! Couldn't find hotkey slot for preset: " + selectedPreset.getName(), 
+                    MessageBox.Show(this, "Something went wrong! Couldn't find hotkey slot for preset: " + selectedPreset.getName(),
                         string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }

@@ -381,15 +381,90 @@ namespace MusicBeePlugin
             return Math.Abs((sampleColor1.R - sampleColor2.R + sampleColor1.G - sampleColor2.G + sampleColor1.B - sampleColor2.B) / 3.0f / 256f);
         }
 
-        internal static float GetAverageBrightness(Color sampleColor1)
+        internal static float GetAverageBrightness(Color sampleColor)
         {
-            return (sampleColor1.R + sampleColor1.G + sampleColor1.B) / 3.0f / 256f;
+            return (sampleColor.R + sampleColor.G + sampleColor.B) / 3.0f / 255f;
         }
 
-        internal static Color InvertAverageBrightness(Color sampleColor1)
+        internal static Color GetInvertAverageBrightnessColor(Color sampleColor)
         {
-            var invAvgBr = (1 - ((GetAverageBrightness(sampleColor1) - 0.5f) * 2)) / 2.02f;
-            return Color.FromArgb(sampleColor1.A, (int)Math.Round(sampleColor1.R * invAvgBr), (int)Math.Round(sampleColor1.G * invAvgBr), (int)Math.Round(sampleColor1.B * invAvgBr));
+            float avgBr = GetAverageBrightness(sampleColor);
+
+            int R;
+            int G;
+            int B;
+
+            if (avgBr > 0.5f) //Let's decrease brightness
+            {
+                R = (int)Math.Round((sampleColor.R - 127) / 4f + 63f);
+                G = (int)Math.Round((sampleColor.G - 127) / 4f + 63f);
+                B = (int)Math.Round((sampleColor.B - 127) / 4f + 63f);
+            }
+            else //Let's increase brightness
+            {
+                R = (int)Math.Round((sampleColor.R - 127) / 4f + 191f);
+                G = (int)Math.Round((sampleColor.G - 127) / 4f + 191f);
+                B = (int)Math.Round((sampleColor.B - 127) / 4f + 191f);
+            }
+
+
+            if (R < 0)
+                R = 0;
+
+            if (G < 0)
+                G = 0;
+
+            if (B < 0)
+                B = 0;
+
+
+            if (R > 255)
+                R = 255;
+
+            if (G > 255)
+                G = 255;
+
+            if (B > 255)
+                B = 255;
+
+
+            var invertedBrightnessColor = Color.FromArgb(sampleColor.A, R, G, B);
+
+            return invertedBrightnessColor;
+        }
+
+        internal static Color ReduceColorContrast(Color sampleColor, float scale = 0.2f)
+        {
+            float r = sampleColor.R;
+            float g = sampleColor.G;
+            float b = sampleColor.B;
+
+            float brt = (r + g + b) / 3f;
+
+            if (brt < 127)
+            {
+                r /= scale;
+                g /= scale;
+                b /= scale;
+
+            }
+            else
+            {
+                r *= scale;
+                g *= scale;
+                b *= scale;
+            }
+
+            r = r > 255 ? 255 : r;
+            r = r < 0 ? 0 : r;
+
+            g = g > 255 ? 255 : g;
+            g = g < 0 ? 0 : g;
+
+            b = b > 255 ? 255 : b;
+            b = b < 0 ? 0 : b;
+
+            return Color.FromArgb(255, (int)Math.Round(r), (int)Math.Round(g), (int)Math.Round(b));
         }
 
         internal static Color GetBitmapAverageColor(Bitmap img)

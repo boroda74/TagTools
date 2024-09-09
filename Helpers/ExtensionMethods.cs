@@ -307,6 +307,10 @@ namespace ExtensionMethods
 
         internal static void SetColumnsAutoSizeFill(this DataGridView dataGridView)
         {
+            if (dataGridView.ColumnCount == 0)
+                return;
+
+
             dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
             for (var i = 0; i < dataGridView.ColumnCount; i++)
@@ -315,6 +319,10 @@ namespace ExtensionMethods
 
         internal static void SetColumnsAutoSizeAllCells(this DataGridView dataGridView)
         {
+            if (dataGridView.ColumnCount == 0)
+                return;
+
+
             dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
             for (var i = 0; i < dataGridView.ColumnCount; i++)
@@ -323,6 +331,10 @@ namespace ExtensionMethods
 
         internal static void SetColumnsAutoSizeHeaders(this DataGridView dataGridView)
         {
+            if (dataGridView.ColumnCount == 0)
+                return;
+
+
             dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader;
 
             for (var i = 0; i < dataGridView.ColumnCount; i++)
