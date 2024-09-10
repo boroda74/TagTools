@@ -32,7 +32,8 @@ e.g. $NumberOfDays(\<Year\>,\<Original Year\>) or $SubDateTime(\<Date Added\>,01
 
 <b>$SubDurationFromDateTime(datetime,duration)</b> : subtracts <b><i>duration</i></b> from <b><i>datetime</i></b>
 
-<b>$SentenceCase(string,upper_case_words,sentence_separators)</b> : <b><i>upper_case_words</i></b> will become uppercase. 
+<b>$SentenceCase(string,upper_case_words,sentence_separators)</b> : <b><i>upper_case_words</i></b> will become uppercase. You can   
+    use special pseudo-word "<b>*RN</b>" in <b><i>upper_case_words</i></b> list to uppercase <i>Roman numerals</i> (e.g., <i>III</i>, <i>VI</i>, <i>X</i>). 
     <b><i>sentence_separators</i></b> is the list of characters, after which the words will become capitalized. Characters in 
     the <b><i>sentence_separators</i></b> list may be separated by spaces or not separated at all. For example, these two 
     character lists mean the same: "<b>. , -</b>" and "<b>.,-</b>". A dot, followed by a space, is always treated as a 
@@ -45,19 +46,20 @@ e.g. $NumberOfDays(\<Year\>,\<Original Year\>) or $SubDateTime(\<Date Added\>,01
     or <b><i>$SentenceCase(string,upper_case_words)</i></b>
 
 <b>$TitleCase(string,lower_case_words,upper_case_words,lower_case_words_between_brackets,sentence_separators)</b> : where 
-    <b><i>lower_case_words</i></b> is the list of words separated by spaces, which will become lowercase (<b><i>always except for 
+    <b><i>lower_case_words</i></b> is the list of words separated by spaces, which will become lowercase (<b><i>always except for       
     the first word</i></b> and <b><i>except for the last words</i></b> if not lowercase by <b><i>other parameters</i></b>). <b><i>upper_case_words</i></b> will 
-    become uppercase. This rule <i>overrides all other rules</i>. <b><i>lower_case_words_between_brackets</i></b> is the list of words   
-    separated by spaces, which will become lowercase between round, square and curly brackets,   
-    i.e., "<b>( [ {</b>" and "<b>) ] }</b>"). <b><i>sentence_separators</i></b>, is the list of characters after which the words 
-    will become capitalized (switching off all exceptions, e.g. <b><i>lower_case_words</i></b>, besides the words from the 
-    <b><i>upper_case_words</i></b>). <b><i>The first word</i></b> will <b><i>always</i></b> be capitalized (besides the words from the <b><i>upper_case_words</i></b>). 
-    It’s recommended to enclose the last four lists into quotes (e.g., <b>"\& . -"</b>). Characters in all character 
-    lists may be separated by spaces or not separated at all. For example, these two character lists mean 
-    the same: "<b>. , -</b>" and "<b>.,-</b>". You can omit any parameter except for the first one, using a single 
-    character <b>`</b> <b><i>not</i></b> surrounded by spaces to pass empty parameter. You can <b><i>safely use</i></b> character <b>`</b> in its literal 
-    meaning if it’s typed in the list <b><i>along with other characters</i></b> or using a single character <b>`</b> <b><i>surrounded</i></b> by 
-    spaces. 
+    become uppercase. This rule <i>overrides all other rules</i>. <b><i>lower_case_words_between_brackets</i></b> is the list of words 
+    separated by spaces, which will become lowercase between round, square and curly brackets, i.e., "<b>( [ {</b>"   
+    and "<b>) ] }</b>"). You can use special pseudo-word "<b>*RN</b>" in <b><i>lower_case_words</i></b>, <b><i>upper_case_words</i></b> and   
+    <b><i>lower_case_words_between_brackets</i></b> lists to include <i>Roman numerals</i> (e.g., <i>III</i>, <i>VI</i>, <i>X</i>) in the corresponding list.   
+    <b><i>sentence_separators</i></b>, is the list of characters after which the words will become capitalized (switching off   
+    all exceptions, e.g. <b><i>lower_case_words</i></b>, besides the words from the <b><i>upper_case_words</i></b>). <b><i>The first word</i></b> will   
+    <b><i>always</i></b> be capitalized (besides the words from the <b><i>upper_case_words</i></b>). It’s recommended to enclose the last   
+    four lists into quotes (e.g., <b>"\& . -"</b>). Characters in all character lists may be separated by spaces or   
+    not separated at all. For example, these two character lists mean the same: "<b>. , -</b>" and "<b>.,-</b>". You can omit   
+    any parameter except for the first one, using a single character <b>`</b> <b><i>not</i></b> surrounded by spaces to pass empty   
+    parameter. You can <b><i>safely use</i></b> character <b>`</b> in its literal meaning if it’s typed in the list <b><i>along with other   
+    characters</i></b> or using a single character <b>`</b> <b><i>surrounded</i></b> by spaces. 
   
     If you are using the plugin with MusicBee 3.6 or later, then you can omit any number of end parameters 
     simply by putting closing parenthesis earlier, e.g., <b><i>$TitleCase(string,lower_case_words,upper_case_words)</i></b>
@@ -105,4 +107,4 @@ e.g. $NumberOfDays(\<Year\>,\<Original Year\>) or $SubDateTime(\<Date Added\>,01
 
 ***
 
-Copyright © boroda 2012-2024. Help version 9.0.240830
+Copyright © boroda 2012-2024. Help version 9.1.240910

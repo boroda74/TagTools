@@ -2371,12 +2371,12 @@ namespace MusicBeePlugin
             return control;
         }
 
+        private static System.Windows.Forms.Timer refreshTimer = new System.Windows.Forms.Timer();//---
+
         internal static void AutoSizeTableRows(DataGridView dataGridView, int adjustedColumnIndex)
         {
             if (dataGridView.RowCount > 0)
             {
-                dataGridView.FirstDisplayedCell = dataGridView.CurrentCell;
-
                 int[] initialHeights = new int[dataGridView.RowCount];
                 for (int i = 0; i < dataGridView.RowCount; i++)
                 {
@@ -2391,11 +2391,27 @@ namespace MusicBeePlugin
                     if (dataGridView.Rows[i].Height > initialHeights[i])
                         dataGridView.Rows[i].Cells[adjustedColumnIndex].Style.WrapMode = DataGridViewTriState.True;
                 }
+
+                dataGridView.Refresh();
+
+                //If DataGridView rows have different heights, then the form must be refreshed before setting FirstDisplayedCell
+                if (dataGridView.Rows.Count > 0)
+                {
+                    refreshTimer.Interval = 100;
+                    refreshTimer.Tick += (s, e) =>
+                    {
+                        dataGridView.FirstDisplayedCell = dataGridView.CurrentCell;
+                        refreshTimer.Stop();
+                    };
+
+                    refreshTimer.Start();
+                }
             }
         }
 
-        //Returns the number of rows, which require formatting changed tags, 0 if no formatting is required
-        internal static int AddRowsToTable(PluginWindowTemplate form, DataGridView dataGridView, BindingSource source, int rowsCount, bool itsLastRowRange, bool selectLastRow, bool resetBindingsMetadataChanged = false)
+        //Returns the number of rows, which require formatting changed tags (i.e. number of rows actually added to table), 0 if no formatting is required
+        internal static int AddRowsToTable(PluginWindowTemplate form, DataGridView dataGridView, BindingSource source, int rowsCount, 
+            bool itsLastRowRange, bool selectLastRow, bool resetBindingsMetadataChanged = false)
         {
             if (rowsCount > 0)
             {
@@ -2425,7 +2441,8 @@ namespace MusicBeePlugin
             }
         }
 
-        internal static void FormatChangedTags(PluginWindowTemplate form, DataGridView dataGridView, int rowCountToFormat, bool itsLastRowRange, DataGridViewFormatChangedTags dataGridViewFormatChangedTags = null)
+        internal static void FormatChangedTags(PluginWindowTemplate form, DataGridView dataGridView, int rowCountToFormat, bool itsLastRowRange, 
+            DataGridViewFormatChangedTags dataGridViewFormatChangedTags = null)
         {
             if (dataGridViewFormatChangedTags != null)
                 for (int j = dataGridView.RowCount - rowCountToFormat; j < dataGridView.RowCount; j++)

@@ -2010,6 +2010,7 @@ namespace MusicBeePlugin
             return (resultTypes, columnRightAlignments);
         }
 
+        //Returns the number of rows, which require formatting changed tags (i.e. number of rows actually added to table), 0 if no formatting is required
         private int previewTable_AddRowsToTable(BindingSource source, int rowsCount, bool itsFirstRowRange, bool itsLastRowRange)
         {
             if (hidePreview)
