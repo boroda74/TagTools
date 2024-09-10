@@ -16,10 +16,6 @@ Pay attention to tool tips over buttons/fields in plugin windows.
 
 Extract content of the downloaded archive to a temporary folder of your choice. See the "README FIRST!" file inside this folder for instructions on adding/updating/removing the plugin.
 
-### This help file has been last updated on:
-
-**2024-08-30**
-
 ### Content
 
 [Additional Tagging \& Reporting](docs/ADDITIONALTAGGINGREPORTING.md)
