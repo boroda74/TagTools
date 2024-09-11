@@ -456,9 +456,9 @@
   <data name="exceptionCharsBox.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>165, 17</value>
-  </metadata>
+  </data>
   <data name="exceptionCharsBox.ToolTip" xml:space="preserve">
     <value>Symbols in this field must be separated by spaces</value>
   </data>
@@ -507,12 +507,12 @@
   <data name="buttonPreview.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <metadata name="dirtyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="dirtyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>17, 17</value>
-  </metadata>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <data name="$this.Localizable" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>7, 15</value>
   </data>
@@ -601,9 +601,9 @@ word list contains the article "a")</value>
   <data name="previewTable.ColumnHeadersHeight" type="System.Int32, mscorlib">
     <value>29</value>
   </data>
-  <metadata name="File.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="File.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="File.HeaderText" xml:space="preserve">
     <value>File</value>
   </data>
@@ -613,18 +613,18 @@ word list contains the article "a")</value>
   <data name="File.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="Track.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="Track.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="Track.HeaderText" xml:space="preserve">
     <value>Track</value>
   </data>
   <data name="Track.MinimumWidth" type="System.Int32, mscorlib">
     <value>100</value>
   </data>
-  <metadata name="OriginalTagValue.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="OriginalTagValue.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="OriginalTagValue.HeaderText" xml:space="preserve">
     <value>Original tag value (not normalized)</value>
   </data>
@@ -634,18 +634,18 @@ word list contains the article "a")</value>
   <data name="OriginalTagValue.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="OriginalTagValueNormalized.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="OriginalTagValueNormalized.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="OriginalTagValueNormalized.HeaderText" xml:space="preserve">
     <value>Original tag value</value>
   </data>
   <data name="OriginalTagValueNormalized.MinimumWidth" type="System.Int32, mscorlib">
     <value>50</value>
   </data>
-  <metadata name="NewTagValue.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="NewTagValue.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="NewTagValue.HeaderText" xml:space="preserve">
     <value>New tag value (not normalized)</value>
   </data>
@@ -655,9 +655,9 @@ word list contains the article "a")</value>
   <data name="NewTagValue.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="NewTagValueNormalized.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="NewTagValueNormalized.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="NewTagValueNormalized.HeaderText" xml:space="preserve">
     <value>New tag value</value>
   </data>
@@ -957,7 +957,7 @@ They are paired by their position on the list</value>
   </data>
   <data name="exceptionWordsBox.ToolTip" xml:space="preserve">
     <value>Words in this field must be separated by spaces
-You can use the special pseudo-word "#RN" for Roman numerals</value>
+You can use the special pseudo-word "*RN" for Roman numerals</value>
   </data>
   <data name="&gt;&gt;exceptionWordsBox.Name" xml:space="preserve">
     <value>exceptionWordsBox</value>

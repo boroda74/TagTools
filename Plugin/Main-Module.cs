@@ -149,6 +149,7 @@ namespace MusicBeePlugin
         internal static Color InputControlDimmedForeColor;
         internal static Color InputControlDimmedBackColor;
 
+        internal static Color InputControlDeepDimmedForeColor;
         internal static Color InputControlDeepDimmedBackColor;
 
         internal static Color AccentColor;
@@ -5663,14 +5664,16 @@ namespace MusicBeePlugin
                 InputControlDimmedBackColor = GetWeightedColor(InputControlBackColor, ButtonBackColor, 0.85f); //Read-only input control background //-----
                 InputControlDeepDimmedBackColor = GetWeightedColor(InputControlBackColor, ButtonBackColor, 0.36f); //Disabled input control background //-----
 
+                InputControlDeepDimmedForeColor = IncreaseColorContrast(InputControlDeepDimmedBackColor, 1.6f); //Disabled input control foreground //-----
+
 
                 //START: Workaround to get color similar to button mouseover one (similarity depend on the skin) //-----
                 if (Plugin.TagToolsContextSubmenu == null)
                     return;
 
                 TagToolsContextSubmenu.DropDown.Items.Clear();
-                var buttonMouseOverColorsMenuItem = AddMenuItem(TagToolsContextSubmenu, "■", null, null);
-                TagToolsContextSubmenu.DropDown.Items[0].Font = new Font("Lucida Console", 20f, FontStyle.Regular, GraphicsUnit.Pixel);
+                var buttonMouseOverColorsMenuItem = AddMenuItem(TagToolsContextSubmenu, " ", null, null);
+                TagToolsContextSubmenu.DropDown.Items[0].Font = new Font(TagToolsContextSubmenu.DropDown.Items[0].Font.FontFamily, 20f, FontStyle.Regular, GraphicsUnit.Pixel);
                 //TagToolsContextSubmenu.DropDown.Show();
                 Bitmap testBitmap = new Bitmap(88, 28, PixelFormat.Format24bppRgb);
                 TagToolsContextSubmenu.DropDown.DrawToBitmap(testBitmap, new Rectangle(0, 0, 88, 28));
@@ -5976,12 +5979,14 @@ namespace MusicBeePlugin
             }
             else
             {
+                float nativeButtonScaling = ((DpiScaling - 1) * 0.32f + 1) * ButtonHeightDpiFontScaling;
+
                 SbBorderWidth = 0; //Units: px; scroll bars not skinned
 
-                var size = (int)Math.Round(19f * ButtonHeightDpiFontScaling);
-                var wideHeight = (int)Math.Round(15f * ButtonHeightDpiFontScaling);
-                var wideWidth = (int)Math.Round(30f * ButtonHeightDpiFontScaling);
-                var smallSize = (int)Math.Round(15f * ButtonHeightDpiFontScaling);
+                var size = (int)Math.Round(19f * nativeButtonScaling);
+                var wideHeight = (int)Math.Round(15f * nativeButtonScaling);
+                var wideWidth = (int)Math.Round(30f * nativeButtonScaling);
+                var smallSize = (int)Math.Round(15f * nativeButtonScaling);
 
 
                 DownArrowComboBoxImage?.Dispose();
@@ -6126,16 +6131,16 @@ namespace MusicBeePlugin
                 }
                 else
                 {
-                    UnchangedCellStyle.SelectionForeColor = GetInvertAverageBrightnessColor(selectionForeColor);
-                    UnchangedCellStyle.SelectionBackColor = GetInvertAverageBrightnessColor(selectionBackColor);
+                    UnchangedCellStyle.SelectionForeColor = GetInvertedAverageBrightnessColor(selectionForeColor);
+                    UnchangedCellStyle.SelectionBackColor = GetInvertedAverageBrightnessColor(selectionBackColor);
                 }
 
 
                 if (GetBrightnessDifference(HeaderCellStyle.ForeColor, HeaderCellStyle.BackColor) < 0.3f)
-                    HeaderCellStyle.ForeColor = GetInvertAverageBrightnessColor(HeaderCellStyle.ForeColor);
+                    HeaderCellStyle.ForeColor = GetInvertedAverageBrightnessColor(HeaderCellStyle.ForeColor);
 
                 if (GetBrightnessDifference(HeaderCellStyle.SelectionForeColor, HeaderCellStyle.SelectionBackColor) < 0.3f)
-                    HeaderCellStyle.SelectionForeColor = GetInvertAverageBrightnessColor(HeaderCellStyle.SelectionForeColor);
+                    HeaderCellStyle.SelectionForeColor = GetInvertedAverageBrightnessColor(HeaderCellStyle.SelectionForeColor);
             }
             else
             {
@@ -6145,7 +6150,7 @@ namespace MusicBeePlugin
                 UnchangedCellStyle.SelectionBackColor = SystemColors.Highlight;
             }
 
-            Color DimmedForeColor = ReduceColorContrast(UnchangedCellStyle.ForeColor, 0.5f);
+            Color DimmedForeColor = IncreaseColorContrast(UnchangedCellStyle.ForeColor, 2.0f); //---
             Color ChangedForeColor = Color.FromKnownColor(KnownColor.Red);
             Color PreservedTagsForeColor = Color.FromKnownColor(KnownColor.Blue);
             Color PreservedTagValuesForeColor = Color.FromKnownColor(KnownColor.Green);
@@ -6161,48 +6166,48 @@ namespace MusicBeePlugin
             if (GetBrightnessDifference(ChangedCellStyle.BackColor, ChangedForeColor) >= 0.15f)
                 ChangedCellStyle.ForeColor = ChangedForeColor;
             else
-                ChangedCellStyle.ForeColor = GetInvertAverageBrightnessColor(ChangedForeColor);
+                ChangedCellStyle.ForeColor = GetInvertedAverageBrightnessColor(ChangedForeColor);
 
             if (GetBrightnessDifference(ChangedCellStyle.SelectionBackColor, ChangedForeColor) >= 0.15f)
                 ChangedCellStyle.SelectionForeColor = ChangedForeColor;
             else
-                ChangedCellStyle.SelectionForeColor = GetInvertAverageBrightnessColor(ChangedForeColor);
+                ChangedCellStyle.SelectionForeColor = GetInvertedAverageBrightnessColor(ChangedForeColor);
 
 
             //DIMMED STYLE
             if (GetBrightnessDifference(DimmedCellStyle.BackColor, DimmedForeColor) >= 0.15f)
                 DimmedCellStyle.ForeColor = DimmedForeColor;
             else
-                DimmedCellStyle.ForeColor = GetInvertAverageBrightnessColor(DimmedForeColor);
+                DimmedCellStyle.ForeColor = GetInvertedAverageBrightnessColor(DimmedForeColor);
 
             if (GetBrightnessDifference(DimmedCellStyle.SelectionBackColor, DimmedForeColor) >= 0.15f)
                 DimmedCellStyle.SelectionForeColor = DimmedForeColor;
             else
-                DimmedCellStyle.SelectionForeColor = GetInvertAverageBrightnessColor(DimmedForeColor);
+                DimmedCellStyle.SelectionForeColor = GetInvertedAverageBrightnessColor(DimmedForeColor);
 
 
             //PRESERVED TAG STYLE
             if (GetBrightnessDifference(PreservedTagCellStyle.BackColor, PreservedTagsForeColor) >= 0.15f)
                 PreservedTagCellStyle.ForeColor = PreservedTagsForeColor;
             else
-                PreservedTagCellStyle.ForeColor = GetInvertAverageBrightnessColor(PreservedTagsForeColor);
+                PreservedTagCellStyle.ForeColor = GetInvertedAverageBrightnessColor(PreservedTagsForeColor);
 
             if (GetBrightnessDifference(PreservedTagCellStyle.SelectionBackColor, PreservedTagsForeColor) >= 0.15f)
                 PreservedTagCellStyle.SelectionForeColor = PreservedTagsForeColor;
             else
-                PreservedTagCellStyle.SelectionForeColor = GetInvertAverageBrightnessColor(PreservedTagsForeColor);
+                PreservedTagCellStyle.SelectionForeColor = GetInvertedAverageBrightnessColor(PreservedTagsForeColor);
 
 
             //PRESERVED TAG VALUE STYLE
             if (GetBrightnessDifference(PreservedTagValueCellStyle.BackColor, PreservedTagValuesForeColor) >= 0.15f)
                 PreservedTagValueCellStyle.ForeColor = PreservedTagValuesForeColor;
             else
-                PreservedTagValueCellStyle.ForeColor = GetInvertAverageBrightnessColor(PreservedTagValuesForeColor);
+                PreservedTagValueCellStyle.ForeColor = GetInvertedAverageBrightnessColor(PreservedTagValuesForeColor);
 
             if (GetBrightnessDifference(PreservedTagValueCellStyle.SelectionBackColor, PreservedTagValuesForeColor) >= 0.15f)
                 PreservedTagValueCellStyle.SelectionForeColor = PreservedTagValuesForeColor;
             else
-                PreservedTagValueCellStyle.SelectionForeColor = GetInvertAverageBrightnessColor(PreservedTagValuesForeColor);
+                PreservedTagValueCellStyle.SelectionForeColor = GetInvertedAverageBrightnessColor(PreservedTagValuesForeColor);
 
 
             SizesColorsChanged = false;
@@ -6393,7 +6398,7 @@ namespace MusicBeePlugin
         #endregion
 
         #region Plugin's additional virtual tag functions
-        private string removeLeadingZerosFromDuration(string duration)
+        internal static string RemoveLeadingZerosFromDuration(string duration)
         {
             if (duration.Contains('.'))
                 return duration;
@@ -6714,7 +6719,7 @@ namespace MusicBeePlugin
         {
             try
             {
-                return removeLeadingZerosFromDuration((TimeSpan.Parse(duration1) + TimeSpan.Parse(duration2)).ToString());
+                return RemoveLeadingZerosFromDuration((TimeSpan.Parse(duration1) + TimeSpan.Parse(duration2)).ToString());
             }
             catch (Exception ex)
             {
@@ -6726,7 +6731,7 @@ namespace MusicBeePlugin
         {
             try
             {
-                return removeLeadingZerosFromDuration((TimeSpan.Parse(duration1) - TimeSpan.Parse(duration2)).ToString());
+                return RemoveLeadingZerosFromDuration((TimeSpan.Parse(duration1) - TimeSpan.Parse(duration2)).ToString());
             }
             catch (Exception ex)
             {
@@ -6738,7 +6743,7 @@ namespace MusicBeePlugin
         {
             try
             {
-                return removeLeadingZerosFromDuration(TimeSpan.FromMilliseconds(Math.Round(double.Parse(number) * TimeSpan.Parse(duration).TotalMilliseconds)).ToString());
+                return RemoveLeadingZerosFromDuration(TimeSpan.FromMilliseconds(Math.Round(double.Parse(number) * TimeSpan.Parse(duration).TotalMilliseconds)).ToString());
             }
             catch (Exception ex)
             {
@@ -6750,7 +6755,7 @@ namespace MusicBeePlugin
         {
             try
             {
-                return removeLeadingZerosFromDuration((DateTime.Parse(datetime1) - DateTime.Parse(datetime2)).ToString());
+                return RemoveLeadingZerosFromDuration((DateTime.Parse(datetime1) - DateTime.Parse(datetime2)).ToString());
             }
             catch (Exception ex)
             {
@@ -6816,7 +6821,7 @@ namespace MusicBeePlugin
             try
             {
                 string duration = TimeSpan.FromSeconds(double.Parse(seconds)).ToString();
-                return removeLeadingZerosFromDuration(duration);
+                return RemoveLeadingZerosFromDuration(duration);
             }
             catch (Exception ex)
             {

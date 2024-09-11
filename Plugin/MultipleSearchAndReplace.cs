@@ -256,7 +256,7 @@ namespace MusicBeePlugin
                 column.SortMode = DataGridViewColumnSortMode.Automatic;
 
             previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            AutoSizeTableRows(previewTable, 2);
+            autoSizeTableRows(previewTable, 2);
 
 
             backgroundTaskIsScheduled = false;
@@ -477,7 +477,7 @@ namespace MusicBeePlugin
                             template3 = Regex.Escape(template3);
                             newDestinationTagValue1 = Replace(currentFile, newDestinationTagValue2, template3, template4, true, out _);
                         }
-                        else //if (template1 == Plugin.ColumnUncheckedState && template2 == string.Empty) //Case-preserving //-----
+                        else //if (template1 == Plugin.ColumnUncheckedState && template2 == string.Empty) //Case-preserving
                         {
                             template3 = Regex.Escape(template3);
                             newDestinationTagValue1 = Replace(currentFile, newDestinationTagValue2, template3, template4, null, out _);

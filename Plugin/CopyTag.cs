@@ -198,7 +198,7 @@ namespace MusicBeePlugin
                 column.SortMode = DataGridViewColumnSortMode.Automatic;
 
             previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            AutoSizeTableRows(previewTable, 2);
+            autoSizeTableRows(previewTable, 2);
 
 
             backgroundTaskIsScheduled = false;

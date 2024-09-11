@@ -272,7 +272,7 @@ namespace MusicBeePlugin
                 column.SortMode = DataGridViewColumnSortMode.Automatic;//----- Programmatic!!!
 
             previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            AutoSizeTableRows(previewTable, 2);
+            autoSizeTableRows(previewTable, 2);
 
 
             backgroundTaskIsScheduled = false;
@@ -464,7 +464,8 @@ namespace MusicBeePlugin
             return ChangeWordsCase(source, changeCaseOption, ref encounteredLeftExceptionChars, ref wasCharException);
         }
 
-        internal static string ChangeWordsCase(string source, ChangeCaseOptions changeCaseOption, ref List<char> encounteredLeftExceptionChars, ref bool wasCharException, string[] exceptedWords = null, bool useWhiteList = false,
+        internal static string ChangeWordsCase(string source, ChangeCaseOptions changeCaseOption, ref List<char> encounteredLeftExceptionChars,
+            ref bool wasCharException, string[] exceptedWords = null, bool useWhiteList = false,
             string[] exceptionChars = null, string[] openingExceptionChars = null, string[] closingExceptionChars = null,
             bool? alwaysCapitalize1stWord = false, bool? alwaysCapitalizeLastWord = false, bool ignoreSingleLetterExceptedWords = false)
         {

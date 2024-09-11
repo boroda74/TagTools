@@ -2116,6 +2116,11 @@ namespace MusicBeePlugin
         {
             lastCachedAppliedPresetGuid = Guid.NewGuid();
 
+
+            previewTable.DataSource = null;
+            rows.Clear();
+            source.DataSource = null;//----------------
+
             while (previewTable.ColumnCount > 0)
                 previewTable.Columns.RemoveAt(0);
 
@@ -2166,7 +2171,8 @@ namespace MusicBeePlugin
 
             functionComboBoxCustom.SelectedIndex = 0;
 
-            clickOnPreviewButton(prepareBackgroundPreview, previewReport, buttonPreview, buttonOK, buttonClose);
+            if (previewIsGenerated)//----------------
+                clickOnPreviewButton(prepareBackgroundPreview, previewReport, buttonPreview, buttonOK, buttonClose);
         }
 
         //Returns column count
@@ -2251,6 +2257,9 @@ namespace MusicBeePlugin
         {
             if (lastCachedAppliedPresetGuid == appliedPreset.guid)
                 return;
+
+            rows.Clear();
+            source.ResetBindings(false);
 
             groupings.Clear();
             groupingsDict.Clear();
@@ -2346,7 +2355,7 @@ namespace MusicBeePlugin
                     {
                         float SF;
 
-                        if (pic1.Width >= pic1.Height)
+                        if (pic1.Width >= pic1.Height) //-V3080
                             SF = newArtworkSize / (float)pic1.Width;
                         else
                             SF = newArtworkSize / (float)pic1.Height;
@@ -5241,8 +5250,8 @@ namespace MusicBeePlugin
             }
 
 
-            if (previewTable.ColumnCount == 0)
-                clickOnPreviewButton(prepareBackgroundPreview, previewReport, buttonPreview, buttonExport, buttonClose);
+            //if (previewTable.ColumnCount == 0)//----------------------
+            //    clickOnPreviewButton(prepareBackgroundPreview, previewReport, buttonPreview, buttonExport, buttonClose);
 
             if (!presetIsLoading)
                 setPresetChanged();
@@ -5314,7 +5323,9 @@ namespace MusicBeePlugin
             backgroundTaskIsStopping = false;
             backgroundTaskIsStoppedOrCancelled = false;
 
-            previewTable.DataSource = null;
+            rows.Clear();
+            source.DataSource = null;//-------------
+
             previewTable.RowCount = 0;
 
 
@@ -5840,14 +5851,6 @@ namespace MusicBeePlugin
             int groupingCount = 0;
             for (int k = 0; k < rows.Count; k++)
             {
-                if (checkStoppingStatus())//------------ is it possible????
-                {
-                    SetStatusBarText(null, true);
-                    backgroundTaskIsStoppedOrCancelled = true;
-                    return;
-                }
-
-
                 object[] row = new object[rows[k].Columns.Count];
                 rows[k].Columns.CopyTo(row);
 
@@ -7282,7 +7285,7 @@ namespace MusicBeePlugin
             if (presetListLastSelectedIndex == presetList.SelectedIndex)
                 return;
 
-            if (previewIsGenerated)
+            if (previewIsGenerated)//----------------
                 clickOnPreviewButton(prepareBackgroundPreview, previewReport, buttonPreview, buttonOK, buttonClose);
 
             selectedPreset = presetList.SelectedItem as ReportPreset;
@@ -7529,7 +7532,7 @@ namespace MusicBeePlugin
 
 
             presetNameTextBox.Enable(true);
-            presetNameTextBox.ReadOnly = !selectedPreset.userPreset;
+            presetNameTextBox.ReadOnly(!selectedPreset.userPreset);
             presetNameTextBox.Text = selectedPreset.name ?? string.Empty;
 
 
@@ -8590,11 +8593,11 @@ namespace MusicBeePlugin
             backgroundSize = size;
 
             trackFontSize = 8.0f;
-            albumArtistsFontSize = 30.0f;
+            albumArtistsFontSize = 15.0f;
             albumFontSize = 12.0f;
 
             fontScaling = 1;
-            if (trackCount > 25) //-----
+            if (trackCount > 25) //---
                 fontScaling = (1f - (float)(trackCount - 25) / trackCount);
 
             trackFontSize *= fontScaling;
@@ -8606,23 +8609,23 @@ namespace MusicBeePlugin
             int albumsRowCount = 0;
             foreach (var albumArtistAlbums in albumArtistsAlbums)
             {
-                albumArtistsRowCount += (albumArtistAlbums.Key.Length / 35) + (albumArtistAlbums.Key.Length % 35 > 0 ? 1 : 0);
+                albumArtistsRowCount += (albumArtistAlbums.Key.Length / 55) + (albumArtistAlbums.Key.Length % 55 > 0 ? 1 : 0);
 
                 foreach (string album in albumArtistAlbums.Value)
-                    albumsRowCount += (album.Length / 50) + (album.Length % 50 > 0 ? 1 : 0);
+                    albumsRowCount += (album.Length / 68) + (album.Length % 68 > 0 ? 1 : 0);
             }
 
-            if (albumArtistsRowCount > 5)
-                albumArtistsFontSize *= 1f - (float)(albumArtistsRowCount - 5) / albumArtistsRowCount;
+            if (albumArtistsRowCount > 10) //---
+                albumArtistsFontSize *= 1f - (float)(albumArtistsRowCount - 10) / albumArtistsRowCount;
 
             var albumArtistsFontSizeString = albumArtistsFontSize.ToString().Replace(',', '.');
 
-            if (albumsRowCount > 10)
+            if (albumsRowCount > 10) //---
                 albumFontSize *= 1f - (float)(albumsRowCount - 10) / albumsRowCount;
 
             var albumFontSizeString = albumFontSize.ToString().Replace(',', '.');
 
-            if (bitmapAverageColor.A + bitmapAverageColor.R + bitmapAverageColor.G < 127 * 3)
+            if (bitmapAverageColor.R + bitmapAverageColor.G + bitmapAverageColor.B < 127 * 3)
             {
                 trackTextColor = "#ffffff";
                 albumArtistTextColor = "#e5d179";

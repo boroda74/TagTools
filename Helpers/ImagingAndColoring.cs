@@ -386,7 +386,7 @@ namespace MusicBeePlugin
             return (sampleColor.R + sampleColor.G + sampleColor.B) / 3.0f / 255f;
         }
 
-        internal static Color GetInvertAverageBrightnessColor(Color sampleColor)
+        internal static Color GetInvertedAverageBrightnessColor(Color sampleColor)
         {
             float avgBr = GetAverageBrightness(sampleColor);
 
@@ -433,7 +433,7 @@ namespace MusicBeePlugin
             return invertedBrightnessColor;
         }
 
-        internal static Color ReduceColorContrast(Color sampleColor, float scale = 0.2f)
+        internal static Color IncreaseColorContrast(Color sampleColor, float scale = 1.2f)
         {
             float r = sampleColor.R;
             float g = sampleColor.G;
@@ -443,16 +443,16 @@ namespace MusicBeePlugin
 
             if (brt < 127)
             {
-                r /= scale;
-                g /= scale;
-                b /= scale;
+                r *= scale;
+                g *= scale;
+                b *= scale;
 
             }
             else
             {
-                r *= scale;
-                g *= scale;
-                b *= scale;
+                r /= scale;
+                g /= scale;
+                b /= scale;
             }
 
             r = r > 255 ? 255 : r;
@@ -487,13 +487,13 @@ namespace MusicBeePlugin
 
             blurPixelCount = blurPixelCount == 0 ? 1 : blurPixelCount;
 
-            avgR = avgR * 3 / 2 / blurPixelCount;
+            avgR = avgR / blurPixelCount;
             avgR = avgR > 255 ? 255 : avgR;
 
-            avgG = avgG * 3 / 2 / blurPixelCount;
+            avgG = avgG / blurPixelCount;
             avgG = avgG > 255 ? 255 : avgG;
 
-            avgB = avgB * 3 / 2 / blurPixelCount;
+            avgB = avgB / blurPixelCount;
             avgB = avgB > 255 ? 255 : avgB;
 
 

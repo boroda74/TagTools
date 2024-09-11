@@ -2813,7 +2813,7 @@ namespace MusicBeePlugin
                 column.SortMode = DataGridViewColumnSortMode.Automatic;
 
             previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            AutoSizeTableRows(previewTable, 3);
+            autoSizeTableRows(previewTable, 3);
 
 
             backgroundTaskIsScheduled = false;
@@ -5802,7 +5802,7 @@ namespace MusicBeePlugin
 
             labelPreserveTagValues.Enable(enable);
             processPreserveTagsTextBox.Enable(enable);
-            processPreserveTagsTextBox.ReadOnly = !processPreserveTagsTextBox.IsEnabled();
+            processPreserveTagsTextBox.ReadOnly(!processPreserveTagsTextBox.IsEnabled());
             preserveTagValuesTextBox.Enable(enable);
 
             buttonProcessPreserveTags.Enable(false);

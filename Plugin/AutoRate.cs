@@ -319,7 +319,15 @@ namespace MusicBeePlugin
 
         private static string ConvertDoubleToString(double value)
         {
-            return RoundPlaysPerDay(value).ToString();
+            double ppd = RoundPlaysPerDay(value);
+            string ppdString = ppd.ToString();
+
+            //string intString = Math.Floor(ppd).ToString();
+            //int max = 5;
+            //for (int i = 5; i > intString.Length; i--)
+            //    ppdString = " " + ppdString;
+
+            return ppdString;
         }
 
         internal static void AutoRateLive(string currentFile)
@@ -921,15 +929,13 @@ namespace MusicBeePlugin
             saveSettings();
         }
 
-        private void checkBoxN_CheckedChanged(NumericUpDown threshold, CheckBox checkBox, NumericUpDown perCent)
+        private void checkBoxN_CheckedChanged(NumericUpDown threshold, CheckBox checkBox, NumericUpDown perCent, bool enable = true)
         {
-            threshold.Enable(checkBox.Checked);
+            threshold.Enable(checkBox.Checked && enable);
             if (checkBox.Checked)
             {
                 if (perCent.Value == 0)
-                {
                     perCent.Value = 1;
-                }
             }
             else
             {
@@ -1167,10 +1173,19 @@ namespace MusicBeePlugin
         internal override void enableDisablePreviewOptionControls(bool enable, bool dontChangeDisabled = false)
         {
             foreach (var control in allControls)
-            {
                 if (control != buttonSettings && control != buttonClose)
                     control.Enable(enable);
-            }
+
+            checkBoxN_CheckedChanged(threshold5Box, checkBox5, perCent5UpDown, enable);
+            checkBoxN_CheckedChanged(threshold45Box, checkBox45, perCent45UpDown, enable);
+            checkBoxN_CheckedChanged(threshold4Box, checkBox4, perCent4UpDown, enable);
+            checkBoxN_CheckedChanged(threshold35Box, checkBox35, perCent35UpDown, enable);
+            checkBoxN_CheckedChanged(threshold3Box, checkBox3, perCent3UpDown, enable);
+            checkBoxN_CheckedChanged(threshold25Box, checkBox25, perCent25UpDown, enable);
+            checkBoxN_CheckedChanged(threshold2Box, checkBox2, perCent2UpDown, enable);
+            checkBoxN_CheckedChanged(threshold15Box, checkBox15, perCent15UpDown, enable);
+            checkBoxN_CheckedChanged(threshold1Box, checkBox1, perCent1UpDown, enable);
+            checkBoxN_CheckedChanged(threshold05Box, checkBox05, perCent05UpDown, enable);
         }
 
         internal override void enableQueryingButtons()

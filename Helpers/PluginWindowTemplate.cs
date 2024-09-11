@@ -50,6 +50,8 @@ namespace MusicBeePlugin
         internal List<Button> nonDefaultingButtons = new List<Button>();
         protected bool artificiallyFocusedAcceptButton;
 
+        internal SortedDictionary<string, bool> textBoxNamesEnableStatuses = new SortedDictionary<string, bool>();
+
         protected List<Control> pinnedToParentControlsX = new List<Control>();
         protected List<Control> leftRightAnchoredControls = new List<Control>();
 
@@ -156,6 +158,13 @@ namespace MusicBeePlugin
             return false;
         }
 
+        internal ToolTip getFormToolTip(string toolTipName)
+        {
+            Type type = this.GetType();
+            FieldInfo fieldInfo = type.GetField(toolTipName, BindingFlags.NonPublic | BindingFlags.Instance);
+            return fieldInfo?.GetValue(this) as ToolTip;
+        }
+
         internal void SetComboBoxCue(CustomComboBox comboBox, string cue)
         {
             if (comboBox.comboBox != null)
@@ -221,7 +230,10 @@ namespace MusicBeePlugin
             Size textSize = new Size(e.Bounds.Width - checkBoxSize, e.Bounds.Height);
             Rectangle checkBoxBounds = new Rectangle(e.Bounds.Left, e.Bounds.Top, checkBoxSize, checkBoxSize);
 
-            e.Graphics.DrawString(listBox.Items[e.Index].ToString(), e.Font, new SolidBrush(textColor), new RectangleF(textPoint, textSize));
+            if (e.Index == -1)
+                e.Graphics.DrawString(listBox.Text, e.Font, new SolidBrush(textColor), new RectangleF(textPoint, textSize));
+            else
+                e.Graphics.DrawString(listBox.Items[e.Index].ToString(), e.Font, new SolidBrush(textColor), new RectangleF(textPoint, textSize));
 
 
             //if (checkBoxSize > 0) //Variant #1
@@ -292,6 +304,11 @@ namespace MusicBeePlugin
 
             //Draw the focus rectangle if the mouse hovers over an item.
             e.DrawFocusRectangle();
+        }
+
+        internal void recolorOnReadOnlyChanged(object sender, EventArgs e)
+        {
+            setSkinnedControlColors(sender as Control, null);
         }
 
         protected void button_EnabledChanged(object sender, EventArgs e)
@@ -844,16 +861,28 @@ namespace MusicBeePlugin
         //Let's correct flaws of AUTO-scaling
         internal virtual void preMoveScaleControl(Control control)
         {
-            if (control.GetType().IsSubclassOf(typeof(Form)) || control is Form)
+            if (control is Form)
                 return;
 
             var stringTag = control.Tag as string;
 
-            if (control.GetType().IsSubclassOf(typeof(Button)) || control is Button)
+            if (control is Button)
             {
                 control.Top = getButtonY(control);
+
+                //Let's change auto-scaled button height to auto-scaled text box height
+                if (ButtonHeightDpiFontScaling != 1 || TextBoxHeightDpiFontScaling != 1) //-V3024
+                {
+                    float nativeButtonScaling = 1;
+                    if (!useSkinColors)
+                        nativeButtonScaling = (DpiScaling - 1) * 0.32f + 1;
+
+                    int initialHeight = control.Height;
+                    control.Height = (int)Math.Round(nativeButtonScaling * control.Height * TextBoxHeightDpiFontScaling / ButtonHeightDpiFontScaling);
+                    control.Top -= (int)Math.Round((control.Height - initialHeight + 1f) / 2f, MidpointRounding.ToEven);
+                }
             }
-            else if (control.GetType().IsSubclassOf(typeof(PictureBox)) || control is PictureBox)
+            else if (control is PictureBox)
             {
                 control.Width = (int)Math.Round(Math.Round(control.Width / hDpiFontScaling) * dpiScaling);
                 control.Height = (int)Math.Round(Math.Round(control.Height / vDpiFontScaling) * dpiScaling);
@@ -867,18 +896,9 @@ namespace MusicBeePlugin
             }
 
 
-            //Control that was initially square (before AUTO-scaling)
+            //Control that was initially square (BEFORE AUTO-scaling)
             if (stringTag?.Contains("@square-control") == true || stringTag?.Contains("@square-button") == true)
             {
-                //Let's change auto-scaled button height to auto-scaled height of generic controls, not buttons
-                // ReSharper disable once CompareOfFloatsByEqualityOperator
-                if (control is Button && !stringTag.Contains("@square-button") && (ButtonHeightDpiFontScaling != 1 || TextBoxHeightDpiFontScaling != 1)) //-V3024
-                {
-                    int initialHeight = control.Height;
-                    control.Height = (int)Math.Round(control.Height * TextBoxHeightDpiFontScaling / ButtonHeightDpiFontScaling);
-                    control.Top -= (int)Math.Round((control.Height - initialHeight + 1f) / 2f, MidpointRounding.ToEven);
-                }
-
                 if ((control.Anchor & AnchorStyles.Right) != 0)
                 {
                     if (control.Width > control.Height)
@@ -2371,9 +2391,9 @@ namespace MusicBeePlugin
             return control;
         }
 
-        private static System.Windows.Forms.Timer refreshTimer = new System.Windows.Forms.Timer();//---
+        private System.Windows.Forms.Timer refreshTimer = new System.Windows.Forms.Timer();
 
-        internal static void AutoSizeTableRows(DataGridView dataGridView, int adjustedColumnIndex)
+        internal void autoSizeTableRows(DataGridView dataGridView, int adjustedColumnIndex)
         {
             if (dataGridView.RowCount > 0)
             {
@@ -2410,7 +2430,7 @@ namespace MusicBeePlugin
         }
 
         //Returns the number of rows, which require formatting changed tags (i.e. number of rows actually added to table), 0 if no formatting is required
-        internal static int AddRowsToTable(PluginWindowTemplate form, DataGridView dataGridView, BindingSource source, int rowsCount, 
+        internal static int AddRowsToTable(PluginWindowTemplate form, DataGridView dataGridView, BindingSource source, int rowsCount,
             bool itsLastRowRange, bool selectLastRow, bool resetBindingsMetadataChanged = false)
         {
             if (rowsCount > 0)
@@ -2441,7 +2461,7 @@ namespace MusicBeePlugin
             }
         }
 
-        internal static void FormatChangedTags(PluginWindowTemplate form, DataGridView dataGridView, int rowCountToFormat, bool itsLastRowRange, 
+        internal static void FormatChangedTags(PluginWindowTemplate form, DataGridView dataGridView, int rowCountToFormat, bool itsLastRowRange,
             DataGridViewFormatChangedTags dataGridViewFormatChangedTags = null)
         {
             if (dataGridViewFormatChangedTags != null)
@@ -2718,7 +2738,7 @@ namespace MusicBeePlugin
                 }
                 else if (control is CustomComboBox customComboBox)
                 {
-                    customComboBox.SetColors(enable); //-----
+                    customComboBox.SetTextBoxColors(enable);
                 }
                 else if (control is ComboBox comboBox && comboBox.DropDownStyle == ComboBoxStyle.Simple) //-------------- Make owner drawing selected items !!!
                 {
@@ -2729,19 +2749,14 @@ namespace MusicBeePlugin
                     }
                     else
                     {
-                        comboBox.ForeColor = DimmedAccentColor;
+                        comboBox.ForeColor = InputControlDeepDimmedForeColor;
                         //comboBox.BackColor = InputPanelBackColor; //---
                         comboBox.BackColor = InputControlDimmedBackColor; //---
                     }
                 }
                 else if (control is NumericUpDown numericUpDown)
                 {
-                    if (((control.IsEnabled() && enable == null) || enable == true) && control.Focused && !numericUpDown.ReadOnly)
-                    {
-                        control.ForeColor = ButtonMouseOverForeColor;
-                        control.BackColor = ButtonMouseOverBackColor;
-                    }
-                    else if (((control.IsEnabled() && enable == null) || enable == true) && !numericUpDown.ReadOnly)
+                    if (((control.IsEnabled() && enable == null) || enable == true) && !numericUpDown.ReadOnly)
                     {
                         control.ForeColor = InputControlForeColor;
                         control.BackColor = InputControlBackColor;
@@ -2753,19 +2768,17 @@ namespace MusicBeePlugin
                     }
                     else //Disabled
                     {
-                        control.ForeColor = DimmedAccentColor;
-                        //control.BackColor = InputPanelBackColor; //---
+                        control.ForeColor = InputControlDeepDimmedForeColor;
                         control.BackColor = InputControlDeepDimmedBackColor; //---
                     }
                 }
+                else if (control is TextBox && control.Parent is CustomComboBox)
+                {
+                    //Colors are set by CustomComboBox
+                }
                 else if (control is TextBox textBox)
                 {
-                    if (((control.IsEnabled() && enable == null) || enable == true) && control.Focused && !textBox.ReadOnly)
-                    {
-                        control.ForeColor = ButtonMouseOverForeColor;
-                        control.BackColor = ButtonMouseOverBackColor;
-                    }
-                    else if (((control.IsEnabled() && enable == null) || enable == true) && !textBox.ReadOnly)
+                    if (((control.IsEnabled() && enable == null) || enable == true) && !textBox.ReadOnly)
                     {
                         control.ForeColor = InputControlForeColor;
                         control.BackColor = InputControlBackColor;
@@ -2777,8 +2790,7 @@ namespace MusicBeePlugin
                     }
                     else //Disabled
                     {
-                        control.ForeColor = DimmedAccentColor;
-                        //control.BackColor = InputPanelBackColor; //---
+                        control.ForeColor = InputControlDeepDimmedForeColor;
                         control.BackColor = InputControlDeepDimmedBackColor; //---
                     }
                 }
@@ -3006,6 +3018,7 @@ namespace MusicBeePlugin
             else if (control is TextBox textBox)
             {
                 textBox.BorderStyle = BorderStyle.FixedSingle;
+                textBox.ReadOnlyChanged += recolorOnReadOnlyChanged;
 
                 if (textBox.Multiline)
                 {

@@ -400,31 +400,67 @@ namespace ExtensionMethods
         }
     }
 
-    internal static class ReadonlyControls
+    internal static class ControlsAccessibilityTools
     {
-        internal static void MakeReadonly(this Control parent, bool enable)
+        internal static void ReadOnly(this Control control, bool state)
         {
-            foreach (Control control in parent.Controls)
+            if (control is Button button)
             {
-                if (control is Button button)
-                    button.Enable(!enable);
-                else if (control.GetType().IsSubclassOf(typeof(TextBox)) || control is TextBox)
-                    (control as TextBox).ReadOnly = enable;
-                else if (control.GetType().IsSubclassOf(typeof(CustomComboBox)) || control is CustomComboBox)
-                    (control as CustomComboBox).ForceReadonly(enable);
-                else if (control.GetType().IsSubclassOf(typeof(ListBox)) || control is ListBox)
-                    (control as ListBox).Enable(!enable);
-                else if (control is GroupBox)
-                    ; //Nothing...
-                else if (control is TableLayoutPanel)
-                    ; //Nothing...
-                else if (control is Panel)
-                    ; //Nothing...
-                else
-                    control.Enable(false);
-
-                control.MakeReadonly(enable);
+                button.Enable(!state);
             }
+            else if (control is TextBox textBox)
+            {
+                textBox.ReadOnly = state;
+            }
+            else if (control is NumericUpDown numericUpDown)
+            {
+                if (numericUpDown.ReadOnly != state)
+                {
+                    numericUpDown.ReadOnly = state;
+                    (numericUpDown.FindForm() as PluginWindowTemplate).recolorOnReadOnlyChanged(numericUpDown, null);
+
+                    if (state)
+                    {
+                        numericUpDown.AccessibleDefaultActionDescription = numericUpDown.Increment.ToString();
+                        numericUpDown.Increment = 0;
+                    }
+                    else if (numericUpDown.AccessibleDefaultActionDescription != null)
+                    {
+                        numericUpDown.Increment = int.Parse(numericUpDown.AccessibleDefaultActionDescription);
+                    }
+                }
+            }
+            else if (control is CustomComboBox customComboBox)
+            {
+                customComboBox.ForceReadonly(state);
+            }
+            else if (control is ListBox listBox)
+            {
+                listBox.Enable(!state);
+            }
+            else if (control is Form)
+            {
+                ; //Nothing...
+            }
+            else if (control is GroupBox)
+            {
+                ; //Nothing...
+            }
+            else if (control is TableLayoutPanel)
+            {
+                ; //Nothing...
+            }
+            else if (control is Panel)
+            {
+                ; //Nothing...
+            }
+            else
+            {
+                control.Enable(!state);
+            }
+
+            foreach (Control child in control.Controls)
+                child.ReadOnly(state);
         }
 
         internal static void Enable(this Control control, bool enable)
@@ -449,7 +485,7 @@ namespace ExtensionMethods
                 return;
             }
 
-            if (control.Parent is CustomComboBox)
+            if (control is TextBox && control.Parent is CustomComboBox)
                 return;
 
 
@@ -460,8 +496,8 @@ namespace ExtensionMethods
                 if (form == null || form.Disposing || form.IsDisposed || !form.IsHandleCreated)
                     return;
 
+                customComboBox.SetEnabled(enable);
                 form.setSkinnedControlColors(control, enable);
-                control.Enabled = enable;
                 return;
             }
 
@@ -469,14 +505,20 @@ namespace ExtensionMethods
             if (form == null || form.Disposing || form.IsDisposed || !form.IsHandleCreated)
                 return;
 
-            if (control is TextBox || control is ListBox)
+            if (control is ListBox)
             {
-                form.setSkinnedControlColors(control, enable);
                 control.Enabled = enable;
+                form.setSkinnedControlColors(control, enable);
                 return;
             }
 
-
+            if (control is TextBox || control is NumericUpDown)
+            {
+                control.ReadOnly(!enable);
+                form.textBoxNamesEnableStatuses.AddReplace(control.Name, enable);
+                form.setSkinnedControlColors(control, enable);
+                return;
+            }
 
             if (control is Label)
             {
@@ -511,13 +553,32 @@ namespace ExtensionMethods
 
 
             if (control.AccessibleDescription == Plugin.DisabledState)
+            {
                 return false;
+            }
             else if (control.AccessibleDescription == Plugin.EnabledState)
+            {
                 return true;
-            else if (control is Label)
+            }
+            else if (control is CustomComboBox customComboBox)
+            {
+                return customComboBox.GetEnabled();
+            }
+            else if (control is TextBox || control is NumericUpDown)
+            {
+                if ((control.FindForm() as PluginWindowTemplate).textBoxNamesEnableStatuses.TryGetValue(control.Name, out bool state))
+                    return state;
+                else
+                    return true;
+            }
+            else if (control is Label)//---
+            {
                 return control.ForeColor != disabledColor;
+            }
             else
+            {
                 return control.Enabled;
+            }
         }
     }
 }

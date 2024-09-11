@@ -284,7 +284,10 @@ namespace MusicBeePlugin
         private CustomListBox listBox;
         private int lastSelectedIndex = -1;
 
-        private bool textBoxReadOnlyCache;
+        private bool textBoxReadOnly;
+
+        private bool ignoreEnabledChanged = false;
+        private bool enabled;
 
         private ToolStripDropDown dropDown;
         private static readonly TimeSpan DropDownAutoCloseThreshold = TimeSpan.FromMilliseconds(250);
@@ -382,22 +385,25 @@ namespace MusicBeePlugin
             return tableLayoutPanel;
         }
 
-        public CustomComboBox(PluginWindowTemplate ownerForm, ComboBox comboBox, bool skinned, Color? borderColor = null, Color? borderColorDisabled = null, Color? borderColorActive = null)
+        public CustomComboBox(PluginWindowTemplate ownerForm, ComboBox comboBox, bool skinned,
+            Color? borderColor = null, Color? borderColorDisabled = null, Color? borderColorActive = null)
         {
             SetStyle(ControlStyles.ResizeRedraw, true);
             SetStyle(ControlStyles.DoubleBuffer, true);
 
             this.ownerForm = ownerForm;
 
+            ToolTip toolTip = ownerForm.getFormToolTip("toolTip1");
+
             if (skinned)
             {
                 this.comboBox = null;
-                initSkinned(comboBox);
+                initSkinned(comboBox, toolTip);
             }
             else
             {
                 this.comboBox = (ComboBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.ComboBox);
-                init(comboBox);
+                init(comboBox, toolTip);
             }
 
             EnabledChanged += OnEnabledChanged;
@@ -411,10 +417,13 @@ namespace MusicBeePlugin
 
             if (borderColor != null)
                 this.borderColor = (Color)borderColor;
+
+            this.Visible = comboBox.Visible;
+            this.Enabled = comboBox.Enabled;
         }
 
 
-        private void init(ComboBox comboBox)
+        private void init(ComboBox comboBox, ToolTip toolTip)
         {
             this.scaledPx = ownerForm.scaledPx;
             this.textBox = null;
@@ -441,6 +450,9 @@ namespace MusicBeePlugin
             this.Tag = comboBox.Tag;
             this.Name = comboBox.Name;
 
+
+            if (toolTip != null)
+                toolTip.SetToolTip(this.comboBox, toolTip.GetToolTip(comboBox));
 
             this.comboBox.DropDownStyle = comboBox.DropDownStyle;
 
@@ -485,7 +497,7 @@ namespace MusicBeePlugin
             ownerForm.namesComboBoxes.AddReplace(Name, this);
         }
 
-        private void initSkinned(ComboBox comboBox)
+        private void initSkinned(ComboBox comboBox, ToolTip toolTip)
         {
             this.scaledPx = ownerForm.scaledPx;
 
@@ -527,6 +539,9 @@ namespace MusicBeePlugin
             var customScrollBarInitialWidth = ControlsTools.GetCustomScrollBarInitialWidth(ownerForm.dpiScaling, Plugin.SbBorderWidth);
 
             this.textBox = (TextBox)Plugin.MbApiInterface.MB_AddPanel(null, Plugin.PluginPanelDock.TextBox);
+
+            if (toolTip != null)
+                toolTip.SetToolTip(this.textBox, toolTip.GetToolTip(comboBox));
 
             this.textBox.Font = this.Font;
             this.textBox.Location = new Point(0, 0);
@@ -807,7 +822,7 @@ namespace MusicBeePlugin
                 else //if (!forceDropDownListText && index == -1 && DropDownStyle == ComboBoxStyle.DropDownList)
                     textBox.Text = cue;
 
-                SetColors(null);
+                SetTextBoxColors(null);
 
                 if (oldText != value)
                     this.FireEvent("TextChanged", null);
@@ -976,17 +991,17 @@ namespace MusicBeePlugin
             get
             {
                 if (textBox != null)
-                    return textBoxReadOnlyCache;
+                    return textBoxReadOnly;
                 else
                     return comboBox.DropDownStyle == ComboBoxStyle.DropDownList;
             }
 
             set
             {
-                textBoxReadOnlyCache = value;
+                textBoxReadOnly = value;
 
                 if (textBox != null)
-                    textBox.ReadOnly = value;
+                    textBox.ReadOnly = value || !enabled;
                 else if (value)
                     comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
                 else
@@ -1000,7 +1015,7 @@ namespace MusicBeePlugin
             {
                 if (textBox != null)
                 {
-                    textBoxReadOnlyCache = textBox.ReadOnly;
+                    textBoxReadOnly = textBox.ReadOnly;
                     textBox.ReadOnly = true;
                     button.Enable(false);
                 }
@@ -1013,7 +1028,7 @@ namespace MusicBeePlugin
             {
                 if (textBox != null)
                 {
-                    textBox.ReadOnly = textBoxReadOnlyCache;
+                    textBox.ReadOnly = textBoxReadOnly;
                     button.Enable(true);
                 }
                 else
@@ -1025,10 +1040,7 @@ namespace MusicBeePlugin
 
         public bool IsReallyEnabled()
         {
-            if (textBox != null)
-                return button.IsEnabled();
-            else
-                return comboBox.IsEnabled();
+            return enabled;
         }
 
         private void OnVisibleChanged(object sender, EventArgs e)
@@ -1044,18 +1056,92 @@ namespace MusicBeePlugin
             }
         }
 
+        public bool GetEnabled()
+        {
+            return enabled;
+        }
+
+        public void SetTextBoxColors(bool? enable)
+        {
+            if (textBox != null)
+            {
+                enable = (this.IsEnabled() && enable == null) || enable == true;
+
+                if (enable == true)
+                {
+                    var inputControlForeColor = Plugin.InputControlForeColor;
+
+                    if (textBox.Focused && textBox.ReadOnly)
+                        inputControlForeColor = Plugin.ButtonMouseOverForeColor;
+
+                    //Let's show cue for readonly mode if cue is defined
+                    if (listBox.SelectedIndex == -1 && (string.IsNullOrEmpty(textBox.Text) || textBox.Text == cue) && textBox.ReadOnly)
+                        textBox.ForeColor = inputControlForeColor;
+                    //Let's show cue for editable mode if cue is defined
+                    else if (listBox.SelectedIndex == -1 && (string.IsNullOrEmpty(textBox.Text) || textBox.Text == cue) && !textBox.ReadOnly)
+                        textBox.ForeColor = Plugin.InputControlDimmedForeColor;
+                    //No cue, just "Text"
+                    else
+                        textBox.ForeColor = inputControlForeColor;
+
+                    if (textBox.Focused && textBox.ReadOnly)
+                        textBox.BackColor = Plugin.ButtonMouseOverBackColor;
+                    else
+                        textBox.BackColor = Plugin.InputControlBackColor;
+                }
+                else //Disabled
+                {
+                    textBox.ForeColor = Plugin.InputControlDeepDimmedForeColor;//---
+                    textBox.BackColor = Plugin.InputControlDeepDimmedBackColor; //---
+                }
+            }
+        }
+
+        public void SetCue(string cue)
+        {
+            this.cue = cue;
+
+            if (textBox != null)
+                textBox.SetCue(cue);
+            else
+                comboBox.SetCue(cue);
+        }
+
         private void OnEnabledChanged(object sender, EventArgs e)
         {
+            if (ignoreEnabledChanged)
+            {
+                ignoreEnabledChanged = false;
+                return;
+            }
+
+            enabled = Enabled;
+
+            if (!Enabled)
+            {
+                ignoreEnabledChanged = true;
+                Enabled = true;
+            };
+
+            SetEnabled(enabled);
+        }
+
+        public void SetEnabled(bool enable)
+        {
+            enabled = enable;
+
             if (textBox != null)
             {
                 customComboBox_SizeChanged_ForButton();
 
-                textBox.Enable(Enabled);
-                button.Enable(Enabled);
+                textBox.ReadOnly = ReadOnly || !enabled;
+                button.Enable(enabled);
+
+                SetTextBoxColors(enabled);
             }
             else
             {
-                comboBox.Enable(Enabled);
+                comboBox.Enable(enabled);
             }
         }
 
@@ -1064,7 +1150,7 @@ namespace MusicBeePlugin
             get
             {
                 if (textBox != null)
-                    return textBoxReadOnlyCache ? ComboBoxStyle.DropDownList : ComboBoxStyle.DropDown;
+                    return textBoxReadOnly ? ComboBoxStyle.DropDownList : ComboBoxStyle.DropDown;
                 else
                     return comboBox.DropDownStyle;
             }
@@ -1178,9 +1264,9 @@ namespace MusicBeePlugin
                 listBox.SelectedIndex = index;
         }
 
-        private void changeTextBoxBackground(object sender, EventArgs e)//-----
+        private void changeTextBoxBackground(object sender, EventArgs e)
         {
-            SetColors(null);
+            SetTextBoxColors(null);
         }
 
         private void DropDown_Closed(object sender, EventArgs e)
@@ -1246,51 +1332,6 @@ namespace MusicBeePlugin
             {
                 textBox.Focus();
             }
-        }
-
-        public void SetColors(bool? enabled)
-        {
-            if (textBox != null)
-            {
-                enabled = (this.IsEnabled() && enabled == null) || enabled == true;
-
-                if (enabled == true)
-                {
-                    var inputControlForeColor = Plugin.InputControlForeColor;
-                    var inputControlDimmedForeColor = Plugin.InputControlDimmedForeColor;
-
-                    if (textBox.Focused && textBox.ReadOnly)
-                        inputControlForeColor = Plugin.ButtonMouseOverForeColor;
-
-                    if (listBox.SelectedIndex == -1 && (string.IsNullOrEmpty(textBox.Text) || textBox.Text == cue) && textBox.ReadOnly) //Let's show cue for readonly mode if cue is defined
-                        textBox.ForeColor = inputControlForeColor;
-                    else if (listBox.SelectedIndex == -1 && (string.IsNullOrEmpty(textBox.Text) || textBox.Text == cue) && !textBox.ReadOnly) //Let's show cue for editable mode if cue is defined
-                        textBox.ForeColor = inputControlDimmedForeColor;
-                    else //No cue, just "Text"
-                        textBox.ForeColor = inputControlForeColor;
-
-                    if (textBox.Focused && textBox.ReadOnly)
-                        textBox.BackColor = Plugin.ButtonMouseOverBackColor;
-                    else
-                        textBox.BackColor = Plugin.InputControlBackColor;
-                }
-                else //Disabled
-                {
-                    textBox.ForeColor = Plugin.DimmedAccentColor;
-                    //textBox.BackColor = Plugin.InputPanelBackColor; //---
-                    textBox.BackColor = Plugin.InputControlDeepDimmedBackColor; //---
-                }
-            }
-        }
-
-        public void SetCue(string cue)
-        {
-            this.cue = cue;
-
-            if (textBox != null)
-                textBox.SetCue(cue);
-            else
-                comboBox.SetCue(cue);
         }
     }
 
@@ -1636,7 +1677,7 @@ namespace MusicBeePlugin
 
             SetStyle(ControlStyles.ResizeRedraw, true);
             //SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-            SetStyle(ControlStyles.DoubleBuffer, true);//-------------
+            //SetStyle(ControlStyles.DoubleBuffer, true);
 
             //TODO: Add any initialization after the InitForm call
         }

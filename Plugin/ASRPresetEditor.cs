@@ -114,13 +114,13 @@ namespace MusicBeePlugin
 
             if (readOnly)
             {
-                this.MakeReadonly(true);
+                this.ReadOnly(true);
 
                 buttonClose.Enable(true);
                 buttonOK.Enable(true);
                 linkLabel1.Enable(true);
-                tableLayoutPanel1.MakeReadonly(false);
-                tableLayoutPanel2.MakeReadonly(false);
+                tableLayoutPanel1.ReadOnly(false);
+                tableLayoutPanel2.ReadOnly(false);
             }
 
             guidBox.Text = preset.guid.ToString();
@@ -198,10 +198,10 @@ namespace MusicBeePlugin
                 customText3CheckBox.Enable(false);
                 customText4CheckBox.Enable(false);
 
-                customTextBox.ReadOnly = !customTextCheckBox.Checked;
-                customText2Box.ReadOnly = !customText2CheckBox.Checked;
-                customText3Box.ReadOnly = !customText3CheckBox.Checked;
-                customText4Box.ReadOnly = !customText4CheckBox.Checked;
+                customTextBox.ReadOnly(!customTextCheckBox.Checked);
+                customText2Box.ReadOnly(!customText2CheckBox.Checked);
+                customText3Box.ReadOnly(!customText3CheckBox.Checked);
+                customText4Box.ReadOnly(!customText4CheckBox.Checked);
             }
 
             descriptionBox.TextChanged += descriptionBox_TextChanged;

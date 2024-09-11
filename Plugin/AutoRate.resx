@@ -933,6 +933,9 @@
   <data name="maxPlaysPerDayBox.TabIndex" type="System.Int32, mscorlib">
     <value>43</value>
   </data>
+  <data name="maxPlaysPerDayBox.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
+  </data>
   <data name="&gt;&gt;maxPlaysPerDayBox.Name" xml:space="preserve">
     <value>maxPlaysPerDayBox</value>
   </data>
@@ -956,6 +959,9 @@
   </data>
   <data name="avgPlaysPerDayBox.TabIndex" type="System.Int32, mscorlib">
     <value>44</value>
+  </data>
+  <data name="avgPlaysPerDayBox.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
   </data>
   <data name="&gt;&gt;avgPlaysPerDayBox.Name" xml:space="preserve">
     <value>avgPlaysPerDayBox</value>
@@ -1906,7 +1912,7 @@
     <value>7, 15</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>934, 595</value>
+    <value>936, 597</value>
   </data>
   <data name="buttonSettings.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -3092,7 +3098,7 @@ should change every day for each track in this case. </value>
     <value>AutoRate</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=9.0.9009.16580, Culture=neutral, PublicKeyToken=null</value>
+    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=9.1.9019.32823, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="dirtyErrorProvider.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

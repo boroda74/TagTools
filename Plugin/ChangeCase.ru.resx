@@ -233,7 +233,7 @@
   </data>
   <data name="exceptionWordsBox.ToolTip" xml:space="preserve">
     <value>Слова в этом списке должны быть разделены пробелами
-Для римских цифр можно использовать специальное псевдослово "#RN"</value>
+Для римских цифр можно использовать специальное псевдо-слово "*RN"</value>
   </data>
   <data name="buttonAsrExceptedWords.Location" type="System.Drawing.Point, System.Drawing">
     <value>598, 14</value>
