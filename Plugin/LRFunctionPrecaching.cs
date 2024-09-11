@@ -13,20 +13,20 @@ namespace MusicBeePlugin
 {
     public partial class LrFunctionPrecaching : PluginWindowTemplate
     {
-        protected Dictionary<ReportPreset, int> allCurrentPresets;
-        protected ReportPreset[] newOrChangedCachedPresets;
+        internal protected Dictionary<ReportPreset, int> allCurrentPresets;
+        internal protected ReportPreset[] newOrChangedCachedPresets;
 
-        protected string exceptionText;
-        protected string progressInfo;
+        internal protected string exceptionText;
+        internal protected string progressInfo;
 
-        internal LrFunctionPrecaching(Plugin plugin) : base(plugin)
+        public LrFunctionPrecaching(Plugin plugin) : base(plugin)
         {
             TagToolsPlugin = plugin;
 
             InitializeComponent();
         }
 
-        protected override void initializeForm()
+        internal protected override void initializeForm()
         {
             base.initializeForm();
 

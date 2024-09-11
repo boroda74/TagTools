@@ -18,12 +18,12 @@ namespace MusicBeePlugin
         private bool smartOperation;
         private string[] files = Array.Empty<string>();
 
-        internal SwapTags(Plugin plugin) : base(plugin)
+        public SwapTags(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
         }
 
-        protected override void initializeForm()
+        internal protected override void initializeForm()
         {
             base.initializeForm();
 

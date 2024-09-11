@@ -434,7 +434,7 @@ namespace MusicBeePlugin
         #endregion
 
         #region Properties
-        [Editor(typeof(TabpageExCollectionEditor), typeof(UITypeEditor))]
+        [Editor(typeof(TabPageExCollectionEditor), typeof(UITypeEditor))]
         public new TabPageCollection TabPages
         {
             get
@@ -485,10 +485,10 @@ namespace MusicBeePlugin
         }
         #endregion
 
-        #region TabpageExCollectionEditor
-        internal class TabpageExCollectionEditor : CollectionEditor
+        #region TabPageExCollectionEditor
+        public class TabPageExCollectionEditor : CollectionEditor
         {
-            public TabpageExCollectionEditor(System.Type type) : base(type)
+            public TabPageExCollectionEditor(System.Type type) : base(type)
             {
             }
 

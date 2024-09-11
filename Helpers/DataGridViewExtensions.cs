@@ -7,9 +7,9 @@ using System.Windows.Forms;
 
 namespace MusicBeePlugin
 {
-    public delegate void CheckBoxClickedHandler(bool state);
+    internal delegate void CheckBoxClickedHandler(bool state);
 
-    public class DataGridViewCheckBoxHeaderCell : DataGridViewColumnHeaderCell
+    internal class DataGridViewCheckBoxHeaderCell : DataGridViewColumnHeaderCell
     {
         private Point checkBoxLocation;
         private Size checkBoxSize;
@@ -18,7 +18,7 @@ namespace MusicBeePlugin
         private System.Windows.Forms.VisualStyles.CheckBoxState cbState =
             System.Windows.Forms.VisualStyles.CheckBoxState.UncheckedNormal;
 
-        public event CheckBoxClickedHandler OnCheckBoxClicked;
+        internal event CheckBoxClickedHandler OnCheckBoxClicked;
 
         protected override void Paint(Graphics graphics,
             Rectangle clipBounds,
@@ -59,7 +59,7 @@ namespace MusicBeePlugin
             CheckBoxRenderer.DrawCheckBox(graphics, checkBoxLocation, cbState);
         }
 
-        public void changeState()
+        internal void changeState()
         {
             checkedState = !checkedState;
             if (OnCheckBoxClicked != null)
@@ -69,7 +69,7 @@ namespace MusicBeePlugin
             }
         }
 
-        public void setState(bool state)
+        internal void setState(bool state)
         {
             checkedState = state;
             if (OnCheckBoxClicked != null)
@@ -97,9 +97,9 @@ namespace MusicBeePlugin
 
 
 
-    internal class DataGridViewBoundColumns
+    public class DataGridViewBoundColumns
     {
-        public List<object> Columns { get; set; }
+        internal List<object> Columns { get; set; }
 
         public DataGridViewBoundColumns()
         {
@@ -113,14 +113,14 @@ namespace MusicBeePlugin
                 Columns.Add(null);
         }
 
-        public DataGridViewBoundColumns CreateColumns(int columnCount)
+        internal DataGridViewBoundColumns CreateColumns(int columnCount)
         {
             Columns = new List<object>();
             this.AddColumns(columnCount);
             return this;
         }
 
-        public DataGridViewBoundColumns AddColumns(int columnCount)
+        internal DataGridViewBoundColumns AddColumns(int columnCount)
         {
             for (int i = 0; i < columnCount; i++)
                 Columns.Add(null);
@@ -128,14 +128,14 @@ namespace MusicBeePlugin
             return this;
         }
 
-        public DataGridViewBoundColumns AddColumns(IEnumerable<object> columns)
+        internal DataGridViewBoundColumns AddColumns(IEnumerable<object> columns)
         {
             Columns.AddRange(columns);
             return this;
         }
     }
 
-    internal class DataGridViewBoundColumnList<T> : DataGridViewBoundList<T>
+    public class DataGridViewBoundColumnList<T> : DataGridViewBoundList<T>
         where T : DataGridViewBoundColumns, new()
     {
         public DataGridViewBoundColumnList(List<string> columnNames = null) : base("Columns", columnNames)
@@ -143,7 +143,7 @@ namespace MusicBeePlugin
             //Nothing new...
         }
 
-        public void Sort(Plugin.DataGridViewBoundColumnsComparer comparer)
+        internal void Sort(Plugin.DataGridViewBoundColumnsComparer comparer)
         {
             Sort((x, y) => comparer.Compare(x, y));
         }
@@ -179,9 +179,9 @@ namespace MusicBeePlugin
         }
     }
 
-    internal class DataGridViewBoundList<T> : List<T>, ITypedList
+    public class DataGridViewBoundList<T> : List<T>, ITypedList
     {
-        public List<string> ColumnNames;
+        internal List<string> ColumnNames;
         private string listPropertyName;
 
         public DataGridViewBoundList(string listPropertyName, List<string> columnNames)

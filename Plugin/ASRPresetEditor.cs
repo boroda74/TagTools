@@ -53,7 +53,7 @@ namespace MusicBeePlugin
         private static string WritableAllTagsLocalizedItem;
         private Bitmap warning;
 
-        internal AsrPresetEditor(Plugin plugin) : base(plugin)
+        public AsrPresetEditor(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
 
@@ -75,7 +75,7 @@ namespace MusicBeePlugin
             new ControlBorder(this.replacedPattern5Box);
         }
 
-        protected override void initializeForm()
+        internal protected override void initializeForm()
         {
             base.initializeForm();
             Enable(false, null, null);

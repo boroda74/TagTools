@@ -13,7 +13,7 @@ namespace MusicBeePlugin
     public partial class TagHistory : PluginWindowTemplate
     {
         //Columns: backup #
-        internal class Row : DataGridViewBoundColumns
+        public class Row : DataGridViewBoundColumns
         {
             public object LibraryTag;
 
@@ -79,7 +79,7 @@ namespace MusicBeePlugin
 
         private bool ignoreAutoSelectTagsCheckBoxCheckedEvent;
 
-        internal TagHistory(Plugin plugin, string[] trackUrls, int[] trackIds) : base(plugin)
+        public TagHistory(Plugin plugin, string[] trackUrls, int[] trackIds) : base(plugin)
         {
             InitializeComponent();
 
@@ -87,7 +87,7 @@ namespace MusicBeePlugin
             this.trackIds = trackIds;
         }
 
-        protected override void initializeForm()
+        internal protected override void initializeForm()
         {
             base.initializeForm();
 

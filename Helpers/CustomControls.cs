@@ -16,9 +16,9 @@ namespace MusicBeePlugin
         internal const int ThumbMoveRepeatInterval = 200; //Milliseconds //---
     }
 
-    public static class ControlsTools
+    internal static class ControlsTools
     {
-        public static T FindControlChild<T>(Control container) where T : Control
+        internal static T FindControlChild<T>(Control container) where T : Control
         {
             foreach (Control child in container.Controls)
             {
@@ -30,7 +30,7 @@ namespace MusicBeePlugin
             return null;
         }
 
-        public static List<T> FindControlAllChildren<T>(Control container) where T : Control
+        internal static List<T> FindControlAllChildren<T>(Control container) where T : Control
         {
             var children = new List<T>();
 
@@ -144,7 +144,7 @@ namespace MusicBeePlugin
         }
     }
 
-    public sealed class ControlBorder : UserControl
+    internal sealed class ControlBorder : UserControl
     {
         private readonly Color borderColorDisabled = Plugin.ScrollBarBorderColor;
         private readonly Color borderColorActive = Plugin.ScrollBarFocusedBorderColor;
@@ -153,7 +153,7 @@ namespace MusicBeePlugin
         internal readonly Control control;
         private bool ignoreControl_LocationChanged = false;
 
-        public ControlBorder(Control control, Color borderColor, Color borderColorDisabled, Color borderColorActive) :
+        internal ControlBorder(Control control, Color borderColor, Color borderColorDisabled, Color borderColorActive) :
             this(control)
         {
             this.borderColorDisabled = borderColorDisabled;
@@ -161,7 +161,7 @@ namespace MusicBeePlugin
             this.borderColor = borderColor;
         }
 
-        public ControlBorder(Control control)
+        internal ControlBorder(Control control)
         {
             if (Plugin.SavedSettings.dontUseSkinColors)
                 return;
@@ -263,7 +263,7 @@ namespace MusicBeePlugin
         }
     }
 
-    public class CustomComboBox : UserControl
+    internal class CustomComboBox : UserControl
     {
         private readonly Color borderColorDisabled = Plugin.ScrollBarBorderColor;
         private readonly Color borderColorActive = Plugin.ScrollBarFocusedBorderColor;
@@ -277,7 +277,7 @@ namespace MusicBeePlugin
 
         internal readonly PluginWindowTemplate ownerForm;
 
-        public readonly ComboBox comboBox;
+        internal readonly ComboBox comboBox;
 
         private TextBox textBox;
         private Button button;
@@ -298,7 +298,7 @@ namespace MusicBeePlugin
 
         private static readonly object EVENT_SELECTEDINDEXCHANGED = new object();
 
-        public event EventHandler SelectedIndexChanged
+        internal event EventHandler SelectedIndexChanged
         {
             add
             {
@@ -313,7 +313,7 @@ namespace MusicBeePlugin
 
         private static readonly object EVENT_SELECTEDITEMCHANGED = new object();
 
-        public event EventHandler SelectedItemChanged
+        internal event EventHandler SelectedItemChanged
         {
             add
             {
@@ -328,7 +328,7 @@ namespace MusicBeePlugin
 
         private static readonly object EVENT_DROPDOWNCLOSED = new object();
 
-        public event EventHandler DropDownClosed
+        internal event EventHandler DropDownClosed
         {
             add
             {
@@ -385,7 +385,7 @@ namespace MusicBeePlugin
             return tableLayoutPanel;
         }
 
-        public CustomComboBox(PluginWindowTemplate ownerForm, ComboBox comboBox, bool skinned,
+        internal CustomComboBox(PluginWindowTemplate ownerForm, ComboBox comboBox, bool skinned,
             Color? borderColor = null, Color? borderColorDisabled = null, Color? borderColorActive = null)
         {
             SetStyle(ControlStyles.ResizeRedraw, true);
@@ -685,7 +685,7 @@ namespace MusicBeePlugin
         }
 
 
-        public int IndexOfText(string text)
+        internal int IndexOfText(string text)
         {
             var index = SelectedIndex;
 
@@ -699,7 +699,7 @@ namespace MusicBeePlugin
             return -1;
         }
 
-        public void AddRange(object[] items)
+        internal void AddRange(object[] items)
         {
             if (listBox != null)
                 listBox.Items.AddRange(items);
@@ -707,7 +707,7 @@ namespace MusicBeePlugin
                 comboBox.Items.AddRange(items);
         }
 
-        public void ItemsClear()
+        internal void ItemsClear()
         {
             if (listBox != null)
                 listBox.Items.Clear();
@@ -717,7 +717,7 @@ namespace MusicBeePlugin
             SelectedIndex = -1;
         }
 
-        public IList Items
+        internal IList Items
         {
             get
             {
@@ -728,7 +728,7 @@ namespace MusicBeePlugin
             }
         }
 
-        public string GetItemText(object item)
+        internal string GetItemText(object item)
         {
             if (listBox != null)
                 return listBox.GetItemText(item);
@@ -736,7 +736,7 @@ namespace MusicBeePlugin
                 return comboBox.GetItemText(item);
         }
 
-        public bool MustKeyEventsBeHandled
+        internal bool MustKeyEventsBeHandled
         {
             get
             {
@@ -747,7 +747,7 @@ namespace MusicBeePlugin
             }
         }
 
-        public bool Sorted
+        internal bool Sorted
         {
             get
             {
@@ -766,7 +766,7 @@ namespace MusicBeePlugin
             }
         }
 
-        public int SelectionStart
+        internal int SelectionStart
         {
             get
             {
@@ -785,7 +785,7 @@ namespace MusicBeePlugin
             }
         }
 
-        public int SelectionLength
+        internal int SelectionLength
         {
             get
             {
@@ -804,7 +804,7 @@ namespace MusicBeePlugin
             }
         }
 
-        public void SetText(string value, bool forceDropDownListText)
+        internal void SetText(string value, bool forceDropDownListText)
         {
             var index = IndexOfText(value);
 
@@ -888,7 +888,7 @@ namespace MusicBeePlugin
             }
         }
 
-        public int SelectedIndex
+        internal int SelectedIndex
         {
             get
             {
@@ -936,7 +936,7 @@ namespace MusicBeePlugin
             }
         }
 
-        public object SelectedItem
+        internal object SelectedItem
         {
             get
             {
@@ -986,7 +986,7 @@ namespace MusicBeePlugin
             }
         }
 
-        public bool ReadOnly
+        internal bool ReadOnly
         {
             get
             {
@@ -1009,7 +1009,7 @@ namespace MusicBeePlugin
             }
         }
 
-        public void ForceReadonly(bool state)
+        internal void ForceReadonly(bool state)
         {
             if (state)
             {
@@ -1038,7 +1038,7 @@ namespace MusicBeePlugin
             }
         }
 
-        public bool IsReallyEnabled()
+        internal bool IsReallyEnabled()
         {
             return enabled;
         }
@@ -1056,12 +1056,12 @@ namespace MusicBeePlugin
             }
         }
 
-        public bool GetEnabled()
+        internal bool GetEnabled()
         {
             return enabled;
         }
 
-        public void SetTextBoxColors(bool? enable)
+        internal void SetTextBoxColors(bool? enable)
         {
             if (textBox != null)
             {
@@ -1097,7 +1097,7 @@ namespace MusicBeePlugin
             }
         }
 
-        public void SetCue(string cue)
+        internal void SetCue(string cue)
         {
             this.cue = cue;
 
@@ -1126,7 +1126,7 @@ namespace MusicBeePlugin
             SetEnabled(enabled);
         }
 
-        public void SetEnabled(bool enable)
+        internal void SetEnabled(bool enable)
         {
             enabled = enable;
 
@@ -1145,7 +1145,7 @@ namespace MusicBeePlugin
             }
         }
 
-        public ComboBoxStyle DropDownStyle
+        internal ComboBoxStyle DropDownStyle
         {
             get
             {
@@ -1237,7 +1237,7 @@ namespace MusicBeePlugin
             PluginWindowTemplate.UpdateCustomScrollBars(listBox);
         }
 
-        public bool SelectCurrentDropDownItem()
+        internal bool SelectCurrentDropDownItem()
         {
             if (textBox != null)
             {
@@ -1248,7 +1248,7 @@ namespace MusicBeePlugin
             return false;
         }
 
-        public void ListBox_ItemChosen(object sender, EventArgs e)
+        internal void ListBox_ItemChosen(object sender, EventArgs e)
         {
             textBox.Focus();
             dropDown.Close();
@@ -1276,7 +1276,7 @@ namespace MusicBeePlugin
             Events[EVENT_DROPDOWNCLOSED]?.DynamicInvoke(this, null);
         }
 
-        public bool OpenDropDown()
+        internal bool OpenDropDown()
         {
             if (textBox != null)
             {
@@ -1335,15 +1335,15 @@ namespace MusicBeePlugin
         }
     }
 
-    public class CustomTextBox : TextBox
+    internal class CustomTextBox : TextBox
     {
         private readonly Color borderColorDisabled = Plugin.ScrollBarBorderColor;
         private readonly Color borderColorActive = Plugin.ScrollBarFocusedBorderColor;
         private readonly Color borderColor = Plugin.ScrollBarBorderColor;
 
-        public CustomVScrollBar vScrollBar;
+        internal CustomVScrollBar vScrollBar;
 
-        public CustomTextBox(Color borderColor, Color borderColorDisabled, Color borderColorActive)
+        internal CustomTextBox(Color borderColor, Color borderColorDisabled, Color borderColorActive)
         {
             SetStyle(ControlStyles.ResizeRedraw, true);
             //SetStyle(ControlStyles.AllPaintingInWmPaint, true);
@@ -1360,20 +1360,20 @@ namespace MusicBeePlugin
             Paint += (sender, args) => { ControlsTools.DrawBorder(this, this.borderColor, this.borderColorActive, this.borderColorDisabled); };
         }
 
-        public int ScrollPosition { get; set; }
+        internal int ScrollPosition { get; set; }
 
-        public void UpdateCaretPositionForScrolling(int position)
+        internal void UpdateCaretPositionForScrolling(int position)
         {
             ScrollPosition = GetLineFromCharIndex(position);
         }
 
-        public void Scroll(int delta)
+        internal void Scroll(int delta)
         {
             ScrollPosition += delta;
             SendMessage(Handle, EM_LINESCROLL, Zero, (IntPtr)delta);
         }
 
-        public void ScrollToTop()
+        internal void ScrollToTop()
         {
             SendMessage(Handle, EM_LINESCROLL, Zero, (IntPtr)(-100000));
             vScrollBar.SetValue(0);
@@ -1381,7 +1381,7 @@ namespace MusicBeePlugin
             Invalidate();
         }
 
-        //public bool ShowScrollbars //Doesn't work
+        //internal bool ShowScrollbars //Doesn't work
         //{
         //    get { return dontUseSkinColors; }
 
@@ -1420,7 +1420,7 @@ namespace MusicBeePlugin
         }
     }
 
-    public class CustomListBox : ListBox
+    internal class CustomListBox : ListBox
     {
         private readonly Color borderColorDisabled = Plugin.ScrollBarBorderColor;
         private readonly Color borderColorActive = Plugin.ScrollBarFocusedBorderColor;
@@ -1431,12 +1431,12 @@ namespace MusicBeePlugin
 
         private readonly bool dontUseSkinColors;
 
-        public CustomHScrollBar hScrollBar;
-        public CustomVScrollBar vScrollBar;
+        internal CustomHScrollBar hScrollBar;
+        internal CustomVScrollBar vScrollBar;
 
-        public event EventHandler ItemsChanged;
+        internal event EventHandler ItemsChanged;
 
-        public CustomListBox(bool dontUseSkinColors)
+        internal CustomListBox(bool dontUseSkinColors)
         {
             this.dontUseSkinColors = dontUseSkinColors;
 
@@ -1449,14 +1449,14 @@ namespace MusicBeePlugin
             //TODO: Add any initialization after the InitForm call
         }
 
-        public CustomListBox(int customScrollBarInitialWidth, int scaledPx, bool dontUseSkinColors) : this(false)
+        internal CustomListBox(int customScrollBarInitialWidth, int scaledPx, bool dontUseSkinColors) : this(false)
         {
             this.dontUseSkinColors = dontUseSkinColors;
             this.customScrollBarInitialWidth = customScrollBarInitialWidth;
             this.scaledPx = scaledPx;
         }
 
-        public CustomListBox(int customScrollBarInitialWidth, int scaledPx, bool dontUseSkinColors, Color borderColor, Color borderColorDisabled, Color borderColorActive)
+        internal CustomListBox(int customScrollBarInitialWidth, int scaledPx, bool dontUseSkinColors, Color borderColor, Color borderColorDisabled, Color borderColorActive)
             : this(customScrollBarInitialWidth, scaledPx, dontUseSkinColors)
         {
             this.borderColorDisabled = borderColorDisabled;
@@ -1476,12 +1476,12 @@ namespace MusicBeePlugin
             set { this.FontHeight = value; }
         }
 
-        public int GetItemsHeight()
+        internal int GetItemsHeight()
         {
             return ItemHeight * Items.Count;
         }
 
-        public void AdjustHeight(int dropDownWidth, int initialDropDownHeight)
+        internal void AdjustHeight(int dropDownWidth, int initialDropDownHeight)
         {
             if (scaledPx > 0)
             {
@@ -1526,7 +1526,7 @@ namespace MusicBeePlugin
             }
         }
 
-        public void AdjustWidth(int dropDownWidth, bool scrollBarVisible)
+        internal void AdjustWidth(int dropDownWidth, bool scrollBarVisible)
         {
             if (scrollBarVisible)
             {
@@ -1562,7 +1562,7 @@ namespace MusicBeePlugin
             }
         }
 
-        //public bool ShowScrollbars //Doesn't work
+        //internal bool ShowScrollbars //Doesn't work
         //{
         //    get { return dontUseSkinColors; }
 
@@ -1654,7 +1654,7 @@ namespace MusicBeePlugin
         }
     }
 
-    public class CustomCheckedListBox : CheckedListBox
+    internal class CustomCheckedListBox : CheckedListBox
     {
         private const float ItemScale = 1.08f;
 
@@ -1664,12 +1664,12 @@ namespace MusicBeePlugin
 
         private readonly bool dontUseSkinColors;
 
-        public CustomHScrollBar hScrollBar;
-        public CustomVScrollBar vScrollBar;
+        internal CustomHScrollBar hScrollBar;
+        internal CustomVScrollBar vScrollBar;
 
-        public event EventHandler ItemsChanged;
+        internal event EventHandler ItemsChanged;
 
-        public CustomCheckedListBox(bool dontUseSkinColors)
+        internal CustomCheckedListBox(bool dontUseSkinColors)
         {
             this.dontUseSkinColors = dontUseSkinColors;
 
@@ -1682,7 +1682,7 @@ namespace MusicBeePlugin
             //TODO: Add any initialization after the InitForm call
         }
 
-        public CustomCheckedListBox(bool dontUseSkinColors, Color borderColor, Color borderColorDisabled, Color borderColorActive)
+        internal CustomCheckedListBox(bool dontUseSkinColors, Color borderColor, Color borderColorDisabled, Color borderColorActive)
             : this(dontUseSkinColors)
         {
             this.borderColorDisabled = borderColorDisabled;
@@ -1708,7 +1708,7 @@ namespace MusicBeePlugin
             }
         }
 
-        //public bool ShowScrollbars //Doesn't work
+        //internal bool ShowScrollbars //Doesn't work
         //{
         //    get { return dontUseSkinColors; }
 
@@ -1723,7 +1723,7 @@ namespace MusicBeePlugin
         //    }
         //}
 
-        public new int GetItemHeight(int index)
+        internal new int GetItemHeight(int index)
         {
             return ItemHeight;
         }
@@ -1822,10 +1822,10 @@ namespace MusicBeePlugin
 
 
     //Returns Minimum, Maximum, SmallChange, LargeChange
-    public delegate (int, int, int, int) GetScrollBarMetricsDelegate(Control scrolledControl, Control refScrollBar);
+    internal delegate (int, int, int, int) GetScrollBarMetricsDelegate(Control scrolledControl, Control refScrollBar);
 
     //Custom scroll bars
-    public sealed class CustomVScrollBar : UserControl
+    internal sealed class CustomVScrollBar : UserControl
     {
         private readonly int initialWidth;
         private int initialHeight;
@@ -1840,9 +1840,9 @@ namespace MusicBeePlugin
 
         private System.Threading.Timer thumbUpDownRepeater;
 
-        public bool SettingParentScroll;
+        internal bool SettingParentScroll;
 
-        public Control ScrolledControl;
+        internal Control ScrolledControl;
 
         private Control refScrollBar;
         private readonly GetScrollBarMetricsDelegate GetExternalMetrics;
@@ -1882,9 +1882,9 @@ namespace MusicBeePlugin
         private bool upArrowDown;
         private bool downArrowDown;
 
-        public event EventHandler ValueChanged;
+        internal event EventHandler ValueChanged;
 
-        public void CreateBrushes()
+        internal void CreateBrushes()
         {
             if (scrollBarBackColor != Plugin.NoColor)
                 scrollBarBackBrush = new SolidBrush(scrollBarBackColor);
@@ -1932,7 +1932,7 @@ namespace MusicBeePlugin
 
 
         //refScrollBar must be null if scrolledControl is not a parent of custom scroll bar & scroll bar must be placed on the right to scrolledControl
-        public CustomVScrollBar(Form ownerForm, Control scrolledControl, int smallChange,
+        internal CustomVScrollBar(Form ownerForm, Control scrolledControl, int smallChange,
             GetScrollBarMetricsDelegate getScrollBarMetrics, int borderWidth, Control refScrollBar = null, bool useSelfAsRefScrollBar = false)
         {
             InitializeComponent();
@@ -2064,7 +2064,7 @@ namespace MusicBeePlugin
             SizeChanged += customScrollBar_SizeChanged;
         }
 
-        public void ResetMetricsSize(int newParentHeight)
+        internal void ResetMetricsSize(int newParentHeight)
         {
             initialHeight = newParentHeight - reservedBordersSpace;
             Height = initialHeight - reservedSpace;
@@ -2095,7 +2095,7 @@ namespace MusicBeePlugin
             Invalidate();
         }
 
-        public void AdjustReservedSpace(int space)
+        internal void AdjustReservedSpace(int space)
         {
             //reservedSpace = space; //---
             //Height = initialHeight - space;
@@ -2109,7 +2109,7 @@ namespace MusicBeePlugin
             Invalidate();
         }
 
-        public int LargeChange
+        internal int LargeChange
         {
             get
             {
@@ -2130,7 +2130,7 @@ namespace MusicBeePlugin
             }
         }
 
-        public int SmallChange
+        internal int SmallChange
         {
             get
             {
@@ -2144,7 +2144,7 @@ namespace MusicBeePlugin
             }
         }
 
-        public int Minimum
+        internal int Minimum
         {
             get
             {
@@ -2165,7 +2165,7 @@ namespace MusicBeePlugin
             }
         }
 
-        public int Maximum
+        internal int Maximum
         {
             get
             {
@@ -2186,7 +2186,7 @@ namespace MusicBeePlugin
             }
         }
 
-        public (int, int, int, int, float) GetMetrics()
+        internal (int, int, int, int, float) GetMetrics()
         {
             var nTrackHeight = Height - 2 * (UpArrowImage.Height
                                              + upImageAdditionalTopHeight + upImageAdditionalBottomHeight)
@@ -2212,12 +2212,12 @@ namespace MusicBeePlugin
             return (nRealRange, nPixelRange, nTrackHeight, nThumbHeight, fThumbHeight);
         }
 
-        public int GetThumbTop()
+        internal int GetThumbTop()
         {
             return thumbTop;
         }
 
-        public void SetThumbTop(int thumbTop)
+        internal void SetThumbTop(int thumbTop)
         {
             if (thumbTop == this.thumbTop)
                 return;
@@ -2241,7 +2241,7 @@ namespace MusicBeePlugin
             Invalidate();
         }
 
-        public void SetThumbTopFromValueAndLargeChange()
+        internal void SetThumbTopFromValueAndLargeChange()
         {
             var (_, nPixelRange, _, _, _) = GetMetrics();
 
@@ -2255,7 +2255,7 @@ namespace MusicBeePlugin
             Invalidate();
         }
 
-        public void SetValue(int value)
+        internal void SetValue(int value)
         {
             if (SettingParentScroll)
             {
@@ -2276,7 +2276,7 @@ namespace MusicBeePlugin
             SetThumbTopFromValueAndLargeChange();
         }
 
-        public int Value
+        internal int Value
         {
             get
             {
@@ -2292,15 +2292,15 @@ namespace MusicBeePlugin
             }
         }
 
-        public Image UpArrowImage { get; set; }
+        internal Image UpArrowImage { get; set; }
 
-        public Image DownArrowImage { get; set; }
+        internal Image DownArrowImage { get; set; }
 
-        public Image ThumbTopImage { get; set; }
+        internal Image ThumbTopImage { get; set; }
 
-        public Image ThumbMiddleImage { get; set; }
+        internal Image ThumbMiddleImage { get; set; }
 
-        public Image ThumbBottomImage { get; set; }
+        internal Image ThumbBottomImage { get; set; }
 
         private void OnPaint1(PaintEventArgs e, Image upArrowImageArg, Image downArrowImageArg,
             Image thumbTopImageArg, Image thumbMiddleImageArg, Image thumbBottomImageArg, bool stretchThumbImage)
@@ -2681,7 +2681,7 @@ namespace MusicBeePlugin
         }
     }
 
-    public sealed class CustomHScrollBar : UserControl
+    internal sealed class CustomHScrollBar : UserControl
     {
         private int initialWidth;
         private readonly int initialHeight;
@@ -2696,9 +2696,9 @@ namespace MusicBeePlugin
 
         private System.Threading.Timer thumbLeftRightRepeater;
 
-        public bool SettingParentScroll;
+        internal bool SettingParentScroll;
 
-        public Control ScrolledControl;
+        internal Control ScrolledControl;
 
         private Control refScrollBar;
         private readonly GetScrollBarMetricsDelegate GetExternalMetrics;
@@ -2738,9 +2738,9 @@ namespace MusicBeePlugin
         private bool leftArrowDown;
         private bool rightArrowDown;
 
-        public event EventHandler ValueChanged;
+        internal event EventHandler ValueChanged;
 
-        public void CreateBrushes()
+        internal void CreateBrushes()
         {
             if (scrollBarBackColor != Plugin.NoColor)
                 scrollBarBackBrush = new SolidBrush(scrollBarBackColor);
@@ -2786,7 +2786,7 @@ namespace MusicBeePlugin
         }
 
         //refScrollBar must be null if scrolledControl is not a parent of custom scroll bar & scroll bar must be placed below scrolledControl
-        public CustomHScrollBar(Form ownerForm, Control scrolledControl,
+        internal CustomHScrollBar(Form ownerForm, Control scrolledControl,
             GetScrollBarMetricsDelegate getScrollBarMetrics, Control refScrollBar = null, bool useSelfAsRefScrollBar = false)
         {
             InitializeComponent();
@@ -2899,7 +2899,7 @@ namespace MusicBeePlugin
             SizeChanged += customScrollBar_SizeChanged;
         }
 
-        public void ResetMetricsSize(int newParentWidth)
+        internal void ResetMetricsSize(int newParentWidth)
         {
             initialWidth = newParentWidth - reservedBordersSpace;
             Width = initialWidth - reservedSpace;
@@ -2929,7 +2929,7 @@ namespace MusicBeePlugin
             Invalidate();
         }
 
-        public void AdjustReservedSpace(int space)
+        internal void AdjustReservedSpace(int space)
         {
             reservedSpace = space;
             Width = initialWidth - space;
@@ -2944,7 +2944,7 @@ namespace MusicBeePlugin
             Invalidate();
         }
 
-        public int LargeChange
+        internal int LargeChange
         {
             get
             {
@@ -2965,7 +2965,7 @@ namespace MusicBeePlugin
             }
         }
 
-        public int SmallChange
+        internal int SmallChange
         {
             get
             {
@@ -2979,7 +2979,7 @@ namespace MusicBeePlugin
             }
         }
 
-        public int Minimum
+        internal int Minimum
         {
             get
             {
@@ -3000,7 +3000,7 @@ namespace MusicBeePlugin
             }
         }
 
-        public int Maximum
+        internal int Maximum
         {
             get
             {
@@ -3021,7 +3021,7 @@ namespace MusicBeePlugin
             }
         }
 
-        public (int, int, int, int, float) GetMetrics()
+        internal (int, int, int, int, float) GetMetrics()
         {
             var nTrackWidth = Width - 2 * (LeftArrowImage.Width
                                            + leftImageAdditionalLeftWidth + leftImageAdditionalRightWidth)
@@ -3047,12 +3047,12 @@ namespace MusicBeePlugin
             return (nRealRange, nPixelRange, nTrackWidth, nThumbWidth, fThumbWidth);
         }
 
-        public int GetThumbLeft()
+        internal int GetThumbLeft()
         {
             return thumbLeft;
         }
 
-        public void SetThumbLeft(int thumbLeft)
+        internal void SetThumbLeft(int thumbLeft)
         {
             if (thumbLeft == this.thumbLeft)
                 return;
@@ -3076,7 +3076,7 @@ namespace MusicBeePlugin
             Invalidate();
         }
 
-        public void SetThumbLeftFromValueAndLargeChange()
+        internal void SetThumbLeftFromValueAndLargeChange()
         {
             var (_, nPixelRange, _, _, _) = GetMetrics();
 
@@ -3090,7 +3090,7 @@ namespace MusicBeePlugin
             Invalidate();
         }
 
-        public void SetValue(int value)
+        internal void SetValue(int value)
         {
             if (SettingParentScroll)
             {
@@ -3113,7 +3113,7 @@ namespace MusicBeePlugin
             Invalidate();
         }
 
-        public int Value
+        internal int Value
         {
             get
             {
@@ -3129,15 +3129,15 @@ namespace MusicBeePlugin
             }
         }
 
-        public Image LeftArrowImage { get; set; }
+        internal Image LeftArrowImage { get; set; }
 
-        public Image RightArrowImage { get; set; }
+        internal Image RightArrowImage { get; set; }
 
-        public Image ThumbLeftImage { get; set; }
+        internal Image ThumbLeftImage { get; set; }
 
-        public Image ThumbMiddleImage { get; set; }
+        internal Image ThumbMiddleImage { get; set; }
 
-        public Image ThumbRightImage { get; set; }
+        internal Image ThumbRightImage { get; set; }
 
         private void OnPaint1(PaintEventArgs e, Image leftArrowImageArg, Image rightArrowImageArg,
             Image thumbLeftImageArg, Image thumbMiddleImageArg, Image thumbRightImageArg, bool stretchThumbImage)
@@ -3510,12 +3510,12 @@ namespace MusicBeePlugin
     }
 }
 
-public class InterpolatedBox : PictureBox
+internal class InterpolatedBox : PictureBox
 {
     #region Interpolation Property
     private InterpolationMode interpolation = InterpolationMode.Default;
 
-    public InterpolationMode Interpolation
+    internal InterpolationMode Interpolation
     {
         get { return interpolation; }
         set

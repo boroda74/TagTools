@@ -58,12 +58,12 @@ namespace MusicBeePlugin
         private string[] fileTags;
         private List<bool> processedRowList = new List<bool>(); //Indices of processed tracks
 
-        internal CopyTag(Plugin plugin) : base(plugin)
+        public CopyTag(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
         }
 
-        protected override void initializeForm()
+        internal protected override void initializeForm()
         {
             base.initializeForm();
 

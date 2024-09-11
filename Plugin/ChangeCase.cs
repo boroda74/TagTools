@@ -68,12 +68,12 @@ namespace MusicBeePlugin
         private string changeOnlyWordsText;
         private string exceptForWordsText;
 
-        internal ChangeCase(Plugin plugin) : base(plugin)
+        public ChangeCase(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
         }
 
-        protected override void initializeForm()
+        internal protected override void initializeForm()
         {
             base.initializeForm();
 

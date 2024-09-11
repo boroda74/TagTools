@@ -18,11 +18,11 @@ namespace MusicBeePlugin
 {
     public partial class LibraryReports : PluginWindowTemplate
     {
-        protected bool forceCloseForms = true;
+        internal protected bool forceCloseForms = true;
 
-        internal class Row : DataGridViewBoundColumns
+        public class Row : DataGridViewBoundColumns
         {
-            public string artworkBase64;
+            internal string artworkBase64;
 
             public Row() : base()
             {
@@ -299,7 +299,7 @@ namespace MusicBeePlugin
 
 
         //Set timer for cache periodic cleanup in constructor
-        internal LibraryReports()
+        public LibraryReports()
         {
             //It's not GUI control, not a Form in this case
             //InitializeComponent();
@@ -307,7 +307,7 @@ namespace MusicBeePlugin
             periodicCacheClearingTimer = new System.Threading.Timer(periodicCacheClearing, null, FunctionCacheClearingDelay, FunctionCacheClearingDelay);
         }
 
-        internal LibraryReports(Plugin plugin) : base(plugin)
+        public LibraryReports(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
 
@@ -317,7 +317,7 @@ namespace MusicBeePlugin
             new ControlBorder(this.expressionTextBox);
         }
 
-        protected override void initializeForm()
+        internal protected override void initializeForm()
         {
             base.initializeForm();
             Enable(false, autoApplyPresetsLabel, presetList);
@@ -701,8 +701,7 @@ namespace MusicBeePlugin
                 }
             }
 
-            public ColumnAttributesBase(LrFunctionType functionType, string parameterName, string parameter2Name,
-                string splitter, bool trimValues)
+            public ColumnAttributesBase(LrFunctionType functionType, string parameterName, string parameter2Name, string splitter, bool trimValues)
             {
                 this.functionType = functionType;
                 this.parameterName = parameterName;
@@ -716,7 +715,7 @@ namespace MusicBeePlugin
                 return base.GetHashCode();
             }
 
-            public string getShortId()
+            internal string getShortId()
             {
                 return ((int)functionType).ToString("D2") + "\u0007" + ((int)GetTagId(parameterName)).ToString("D4")
                     + "\u0007" + ((int)GetTagId(parameter2Name)).ToString("D4");
@@ -769,7 +768,7 @@ namespace MusicBeePlugin
                 return base.GetHashCode();
             }
 
-            public string getUniqueId()
+            internal string getUniqueId()
             {
                 return ((int)functionType).ToString("D2") + "\u0007" + ((int)GetTagId(parameterName)).ToString("D4")
                     + "\u0007" + ((int)GetTagId(parameter2Name)).ToString("D4") + "\u0007" + (expression ?? string.Empty);
@@ -790,13 +789,13 @@ namespace MusicBeePlugin
                 return false;
             }
 
-            public string getColumnName(bool trimName, bool includeSplitterTrimInfo, bool includeExpression)
+            internal string getColumnName(bool trimName, bool includeSplitterTrimInfo, bool includeExpression)
             {
                 return GetColumnName(parameterName, parameter2Name, functionType, splitter, trimValues, expression, trimName,
                     includeSplitterTrimInfo, includeExpression);
             }
 
-            public string evaluateExpression(string url, string tagValue)
+            internal string evaluateExpression(string url, string tagValue)
             {
                 if (string.IsNullOrWhiteSpace(expression))
                 {
@@ -854,7 +853,7 @@ namespace MusicBeePlugin
                 return base.GetHashCode();
             }
 
-            public string getUniqueId(int exprIndex)
+            internal string getUniqueId(int exprIndex)
             {
                 var expression = string.Empty;
                 if (exprIndex >= 0)
@@ -889,7 +888,7 @@ namespace MusicBeePlugin
             }
 
             //returns {columnIndex, resulting tag value}, accepts int[] columnIndices: per expression for current grouping/function
-            public List<ColumnIndexTagValue> evaluateExpressions(string url, string tagValue)
+            internal List<ColumnIndexTagValue> evaluateExpressions(string url, string tagValue)
             {
                 tagValue = tagValue.Replace('\"', '\u0007');
 
@@ -914,7 +913,7 @@ namespace MusicBeePlugin
             }
 
             //<columnIndex, resulting tag value>, int[] columnIndices: per expression for current grouping/function
-            public List<ColumnIndexTagValue> getSplitValues(string url, string tagValue)
+            internal List<ColumnIndexTagValue> getSplitValues(string url, string tagValue)
             {
                 var results = new List<ColumnIndexTagValue>();
 
@@ -959,7 +958,7 @@ namespace MusicBeePlugin
             }
 
             //Returns PresetColumnAttributes[], column count
-            public (PresetColumnAttributes[], int) valuesToPresetArray(int startingColumnIndex)
+            internal (PresetColumnAttributes[], int) valuesToPresetArray(int startingColumnIndex)
             {
                 var presetAttribListRef = new List<PresetColumnAttributes>();
                 var columnCount = 0;
@@ -987,7 +986,7 @@ namespace MusicBeePlugin
                 return (presetAttribListRef.ToArray(), columnCount);
             }
 
-            public int indexOf(string searchedKey)
+            internal int indexOf(string searchedKey)
             {
                 var i = 0;
                 foreach (var key in Keys)
@@ -1001,7 +1000,7 @@ namespace MusicBeePlugin
                 return -1;
             }
 
-            public List<string> idsToList(bool getUniqueIds, List<string> list = null)
+            internal List<string> idsToList(bool getUniqueIds, List<string> list = null)
             {
                 list = list ?? new List<string>();
 
@@ -1019,7 +1018,7 @@ namespace MusicBeePlugin
                 return list;
             }
 
-            public List<string> idsToSortedList(bool getUniqueIds, List<string> list = null)
+            internal List<string> idsToSortedList(bool getUniqueIds, List<string> list = null)
             {
                 list = idsToList(getUniqueIds, list);
                 list.Sort();
@@ -1027,7 +1026,7 @@ namespace MusicBeePlugin
                 return list;
             }
 
-            public List<string> getAllIdsByShortId(string shortId)
+            internal List<string> getAllIdsByShortId(string shortId)
             {
                 var longIdsList = new List<string>();
 
@@ -1040,7 +1039,7 @@ namespace MusicBeePlugin
                 return longIdsList;
             }
 
-            public void remove(List<string> longIdsList)
+            internal void remove(List<string> longIdsList)
             {
                 foreach (var longId in longIdsList)
                     Remove(longId);
@@ -1066,7 +1065,7 @@ namespace MusicBeePlugin
             }
         }
 
-        public static ReportPreset GetCreatePredefinedPreset(Guid presetPermanentGuid, string presetName,
+        internal static ReportPreset GetCreatePredefinedPreset(Guid presetPermanentGuid, string presetName,
             SortedDictionary<Guid, ReportPreset> existingPredefinedPresets,
             PresetColumnAttributes[] groupings, PresetColumnAttributes[] functions,
             string[] destinationTags, string[] functionIds, bool totals,
@@ -1136,7 +1135,7 @@ namespace MusicBeePlugin
                 permanentGuid = referencePreset.permanentGuid;
             }
 
-            public ReportPreset findPreset(ReportPreset[] reportsPresets)
+            internal ReportPreset findPreset(ReportPreset[] reportsPresets)
             {
                 foreach (var preset in reportsPresets)
                 {
@@ -2118,8 +2117,8 @@ namespace MusicBeePlugin
 
 
             previewTable.DataSource = null;
-            rows.Clear();
             source.DataSource = null;//----------------
+            rows.Clear();
 
             while (previewTable.ColumnCount > 0)
                 previewTable.Columns.RemoveAt(0);
@@ -2259,7 +2258,8 @@ namespace MusicBeePlugin
                 return;
 
             rows.Clear();
-            source.ResetBindings(false);
+            Invoke(new Action(() => { source.ResetBindings(false); }));
+            
 
             groupings.Clear();
             groupingsDict.Clear();
@@ -3363,23 +3363,7 @@ namespace MusicBeePlugin
             }
             else if (interactive)
             {
-                List<string> columnNames = new List<string>();
-
-                foreach (var attribs in groupingsDict.Values)
-                    columnNames.Add(GetColumnName(attribs.parameterName, null, LrFunctionType.Grouping, attribs.splitter, attribs.trimValues, attribs.expression, true, true, true));
-
-                foreach (var attribs in functionsDict.Values)
-                    columnNames.Add(GetColumnName(attribs.parameterName, attribs.parameter2Name, attribs.functionType, null, false, attribs.expression, true, true, true));
-
-                rows = new DataGridViewBoundColumnList<Row>(columnNames);
-                Invoke(new Action(() =>
-                {
-                    source.DataSource = rows;
-                    previewTable.DataSource = source;
-                    formatTrackColumns();
-                }));
-
-
+                Invoke(new Action(() => { formatTrackColumns(); }));
                 composedSplitGroupingTagsReportRows = new SortedDictionary<string, object[]>();
             }
 
@@ -3583,20 +3567,8 @@ namespace MusicBeePlugin
             }
             else //if (interactive) //!interactive & !filterResults is prohibited (because only groupings never saved to tags, so it's senseless)
             {
-                List<string> columnNames = new List<string>();
-
-                foreach (var attribs in groupingsDict.Values)
-                    columnNames.Add(GetColumnName(attribs.parameterName, null, LrFunctionType.Grouping, attribs.splitter, attribs.trimValues, attribs.expression, true, true, true));
-
-                rows = new DataGridViewBoundColumnList<Row>(columnNames);
+                Invoke(new Action(() => { formatTrackColumns(); }));
                 SortedDictionary<string, object[]> composedSplitGroupingTagsReportRows = new SortedDictionary<string, object[]>();
-
-                Invoke(new Action(() =>
-                {
-                    source.DataSource = rows;
-                    previewTable.DataSource = source;
-                    formatTrackColumns();
-                }));
 
 
                 for (var i = 0; i < queriedFiles.Length; i++)
@@ -4114,7 +4086,7 @@ namespace MusicBeePlugin
         }
 
         //Dictionaries of tags values, arrays of groupings
-        protected static void PrepareGroupingTagDictionaries(ReportPreset preset,
+        internal protected static void PrepareGroupingTagDictionaries(ReportPreset preset,
             ref SortedDictionary<string, bool>[] queriedGroupingTagsRaw,
             ref SortedDictionary<string, bool>[] queriedActualGroupingTags,
             ref SortedDictionary<string, bool>[] queriedActualGroupingTagsRaw
@@ -5323,10 +5295,18 @@ namespace MusicBeePlugin
             backgroundTaskIsStopping = false;
             backgroundTaskIsStoppedOrCancelled = false;
 
-            rows.Clear();
-            source.DataSource = null;//-------------
+            List<string> columnNames = new List<string>();
 
-            previewTable.RowCount = 0;
+            foreach (var attribs in groupingsDict.Values)
+                columnNames.Add(GetColumnName(attribs.parameterName, null, LrFunctionType.Grouping, attribs.splitter, attribs.trimValues, attribs.expression, true, true, true));
+
+            foreach (var attribs in functionsDict.Values)
+                columnNames.Add(GetColumnName(attribs.parameterName, attribs.parameter2Name, attribs.functionType, null, false, attribs.expression, true, true, true));
+
+            rows = new DataGridViewBoundColumnList<Row>(columnNames);
+
+            source.DataSource = rows;
+            previewTable.DataSource = source;
 
 
             updateCustomScrollBars(previewTable);
@@ -5428,7 +5408,7 @@ namespace MusicBeePlugin
             if (previewIsGenerated)
             {
                 rows.Clear();
-                source.ResetBindings(false);
+                source.ResetBindings(false);//----------
 
                 previewIsGenerated = false;
                 enableDisablePreviewOptionControls(true);
@@ -6240,6 +6220,8 @@ namespace MusicBeePlugin
         internal override void enableDisablePreviewOptionControls(bool enable, bool dontChangeDisabled = false)
         {
             buttonAddPreset.Enable(enable);
+            //buttonSaveClose.Enable(!allPresetsCheckStatusIsSenseless && !allPresetsCheckStatusIsBroken && (!backgroundTaskIsUpdatingTags || !backgroundTaskIsWorking()));
+            buttonSaveClose.Enable(!allPresetsCheckStatusIsSenseless && !allPresetsCheckStatusIsBroken);
 
             if (selectedPreset == null)
                 enable = false;
@@ -6331,10 +6313,9 @@ namespace MusicBeePlugin
 
         internal override void enableQueryingOrUpdatingButtons()
         {
-            presetList.Enable(!backgroundTaskIsScheduled && (newColumn == false));
+            presetList.Enable(!backgroundTaskIsWorking() && (newColumn == false));
 
             (allPresetsCheckStatusIsSenseless, allPresetsCheckStatusIsBroken) = checkAllPresetChains(false);
-            buttonSaveClose.Enable(!allPresetsCheckStatusIsSenseless && !allPresetsCheckStatusIsBroken && (!backgroundTaskIsUpdatingTags || !backgroundTaskIsWorking()));
 
             buttonOK.Enable((previewIsGenerated || SavedSettings.allowCommandExecutionWithoutPreview) && !backgroundTaskIsStopping && (!backgroundTaskIsWorking() || backgroundTaskIsUpdatingTags) && functionsDict.Count > 0);
             buttonPreview.Enable(true);
@@ -6342,7 +6323,8 @@ namespace MusicBeePlugin
 
         internal override void disableQueryingOrUpdatingButtons()
         {
-            buttonSaveClose.Enable(false);
+            presetList.Enable(!backgroundTaskIsWorking());
+
             buttonOK.Enable(false);
             buttonPreview.Enable(false);
         }
@@ -8170,19 +8152,19 @@ namespace MusicBeePlugin
 
     internal abstract class ExportedDocument
     {
-        protected System.IO.FileStream stream;
-        protected Plugin plugin;
-        protected string header;
-        protected Encoding unicode = Encoding.UTF8;
-        protected string text = string.Empty;
-        protected byte[] buffer;
+        internal protected System.IO.FileStream stream;
+        internal protected Plugin plugin;
+        internal protected string header;
+        internal protected Encoding unicode = Encoding.UTF8;
+        internal protected string text = string.Empty;
+        internal protected byte[] buffer;
 
-        protected virtual void getHeader()
+        internal protected virtual void getHeader()
         {
             text = string.Empty;
         }
 
-        protected virtual void getFooter()
+        internal protected virtual void getFooter()
         {
             text = string.Empty;
         }
@@ -8226,7 +8208,7 @@ namespace MusicBeePlugin
         internal abstract void addCellToRow(string cell, string cellName, bool rightAlign, bool dontOutput1, bool dontOutput2);
         internal abstract void addCellToRow(Bitmap cell, string cellName, string imageBase64, int width, int height);
 
-        protected abstract void getRow(int height);
+        internal protected abstract void getRow(int height);
 
         internal virtual void writeRow(int height)
         {
@@ -8283,7 +8265,7 @@ namespace MusicBeePlugin
             }
         }
 
-        protected override void getRow(int height)
+        internal protected override void getRow(int height)
         {
             text += "\r\n";
         }
@@ -8341,10 +8323,10 @@ namespace MusicBeePlugin
 
     internal class HtmlTable : ExportedDocument
     {
-        protected string fileDirectoryPath;
-        protected string imagesDirectoryName;
-        protected const string defaultImageName = "Missing Artwork.png";
-        protected bool defaultImageWasExported = false;
+        internal protected string fileDirectoryPath;
+        internal protected string imagesDirectoryName;
+        internal protected const string defaultImageName = "Missing Artwork.png";
+        internal protected bool defaultImageWasExported = false;
 
         internal HtmlTable(System.IO.FileStream newStream, Plugin plugin, string presetName, string fileDirectoryPath, string imagesDirectoryName)
             : base(newStream, plugin, presetName)
@@ -8353,12 +8335,12 @@ namespace MusicBeePlugin
             this.imagesDirectoryName = imagesDirectoryName;
         }
 
-        protected override void getHeader()
+        internal protected override void getHeader()
         {
             text = "<html><head></head><header>" + header + "</header><body><table border=1>";
         }
 
-        protected override void getFooter()
+        internal protected override void getFooter()
         {
             text = "</table></body></html>";
         }
@@ -8376,7 +8358,7 @@ namespace MusicBeePlugin
             text += "<td height=" + height + " width=" + width + "> <img src=\"" + imagesDirectoryName + @"\" + imageName + "\" > </td>";
         }
 
-        protected override void getRow(int height)
+        internal protected override void getRow(int height)
         {
             text = "<tr>" + text + " </tr>";
         }
@@ -8384,7 +8366,7 @@ namespace MusicBeePlugin
 
     internal class HtmlDocumentAlbumGrid : HtmlTable
     {
-        protected bool? alternateRow;
+        internal protected bool? alternateRow;
 
         internal HtmlDocumentAlbumGrid(System.IO.FileStream newStream, Plugin plugin, string presetName, string fileDirectoryPath, string imagesDirectoryName)
             : base(newStream, plugin, presetName, fileDirectoryPath, imagesDirectoryName)
@@ -8413,13 +8395,13 @@ namespace MusicBeePlugin
             base.writeHeader();
         }
 
-        protected override void getHeader()
+        internal protected override void getHeader()
         {
             text = "<html><head><link rel=Stylesheet href=\"" + imagesDirectoryName + "\\stylesheet.css\">"
             + " </head><body><table class='header'><tr><td>" + header + "</td></tr><tr><td><table>";
         }
 
-        protected override void getFooter()
+        internal protected override void getFooter()
         {
             text = "</table></td></tr></table></body></html>";
         }
@@ -8446,7 +8428,7 @@ namespace MusicBeePlugin
 
     internal class HtmlDocument : HtmlTable
     {
-        protected bool? alternateRow;
+        internal protected bool? alternateRow;
 
         internal HtmlDocument(System.IO.FileStream newStream, Plugin plugin, string presetName, string fileDirectoryPath, string imagesDirectoryName)
             : base(newStream, plugin, presetName, fileDirectoryPath, imagesDirectoryName)
@@ -8482,7 +8464,7 @@ namespace MusicBeePlugin
 
         }
 
-        protected override void getHeader()
+        internal protected override void getHeader()
         {
             text = "<html><head><link rel=Stylesheet href=\"" + imagesDirectoryName + "\\stylesheet.css\">"
                 + " </head><header class=xl1>" + header + "</header><body>" +
@@ -8569,19 +8551,19 @@ namespace MusicBeePlugin
 
     internal class HtmlDocumentCDBooklet : HtmlTable
     {
-        protected int backgroundSize;
+        internal protected int backgroundSize;
 
-        protected float trackFontSize;
-        protected float albumArtistsFontSize;
-        protected float albumFontSize;
-        protected float fontScaling;
+        internal protected float trackFontSize;
+        internal protected float albumArtistsFontSize;
+        internal protected float albumFontSize;
+        internal protected float fontScaling;
 
-        protected string trackTextColor;
-        protected string albumArtistTextColor;
-        protected string albumArtistTextOutlineColor;
-        protected string albumTextColor;
-        protected string albumTextOutlineColor;
-        protected string backgroundColor;
+        internal protected string trackTextColor;
+        internal protected string albumArtistTextColor;
+        internal protected string albumArtistTextOutlineColor;
+        internal protected string albumTextColor;
+        internal protected string albumTextOutlineColor;
+        internal protected string backgroundColor;
 
         internal HtmlDocumentCDBooklet(System.IO.FileStream newStream, Plugin plugin, string presetName, string fileDirectoryPath, string imagesDirectoryName)
             : base(newStream, plugin, presetName, fileDirectoryPath, imagesDirectoryName)
@@ -8671,7 +8653,7 @@ namespace MusicBeePlugin
             base.writeHeader();
         }
 
-        protected override void getHeader()
+        internal protected override void getHeader()
         {
             text = "<html><head>"
                 + "<link rel=Stylesheet href='" + imagesDirectoryName + "/stylesheet.css'>"
@@ -8681,7 +8663,7 @@ namespace MusicBeePlugin
                 + "<table>";
         }
 
-        protected void getFooter(SortedDictionary<string, List<string>> albumArtistsAlbums)
+        internal protected void getFooter(SortedDictionary<string, List<string>> albumArtistsAlbums)
         {
             text = "</table></td><td width=" + backgroundSize + " height=" + backgroundSize
                 + " background='" + imagesDirectoryName + "/bg1.jpg' style='background-repeat:no-repeat;background-position:center center;'><table>";

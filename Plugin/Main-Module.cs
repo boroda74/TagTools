@@ -699,7 +699,7 @@ namespace MusicBeePlugin
             public int lastSkippedDateFormat;
         }
 
-        internal static PluginSettings SavedSettings;
+        public static PluginSettings SavedSettings;
         #endregion
 
 
@@ -1827,7 +1827,7 @@ namespace MusicBeePlugin
                 return 0;
         }
 
-        internal class DataGridViewBoundColumnsComparer : System.Collections.IComparer
+        public class DataGridViewBoundColumnsComparer : System.Collections.IComparer
         {
             internal ResultType[] ResultTypes = null;
             internal int ComparedColumnIndex = -1;
@@ -1869,7 +1869,7 @@ namespace MusicBeePlugin
             }
         }
 
-        internal class StringArrayComparer : IComparer<string[]>
+        public class StringArrayComparer : IComparer<string[]>
         {
             internal int tagCounterIndex = -1;
 

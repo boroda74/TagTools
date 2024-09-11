@@ -56,14 +56,14 @@ namespace MusicBeePlugin
 
         private Preset customMSR;
 
-        internal MultipleSearchAndReplace(Plugin plugin) : base(plugin)
+        public MultipleSearchAndReplace(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
 
             new ControlBorder(this.templateNameTextBox);
         }
 
-        protected override void initializeForm()
+        internal protected override void initializeForm()
         {
             base.initializeForm();
 

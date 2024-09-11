@@ -42,13 +42,13 @@ namespace MusicBeePlugin
         private readonly Dictionary<int, object> buffer = new Dictionary<int, object>();
         private Bitmap bufferArtwork;
 
-        internal CompareTracks(Plugin plugin, string[] files) : base(plugin)
+        public CompareTracks(Plugin plugin, string[] files) : base(plugin)
         {
             InitializeComponent();
             trackUrls = files;
         }
 
-        protected override void initializeForm()
+        internal protected override void initializeForm()
         {
             base.initializeForm();
 

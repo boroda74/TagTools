@@ -38,12 +38,12 @@ namespace MusicBeePlugin
 
         private bool previewSortTags;
 
-        internal ReEncodeTags(Plugin plugin) : base(plugin)
+        public ReEncodeTags(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
         }
 
-        protected override void initializeForm()
+        internal protected override void initializeForm()
         {
             base.initializeForm();
 

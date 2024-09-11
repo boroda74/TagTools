@@ -25,7 +25,7 @@ namespace MusicBeePlugin
 
         private System.Threading.Timer statisticsTimer;
 
-        internal AutoRate(Plugin plugin) : base(plugin)
+        public AutoRate(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
 
@@ -69,7 +69,7 @@ namespace MusicBeePlugin
             }
         }
 
-        protected override void initializeForm()
+        internal protected override void initializeForm()
         {
             base.initializeForm();
 
@@ -169,7 +169,7 @@ namespace MusicBeePlugin
             button_GotFocus(AcceptButton, null); //Let's mark active button
         }
 
-        protected bool checkStoppingCollectingStatisticsStatus()
+        internal protected bool checkStoppingCollectingStatisticsStatus()
         {
             if (PluginClosing)
                 return true;
@@ -1272,7 +1272,7 @@ namespace MusicBeePlugin
             calculateActualSumOfPercentages();
         }
 
-        protected override void childClassFormShown()
+        internal protected override void childClassFormShown()
         {
             ignoreClosingForm = true;
             statisticsTimer = new System.Threading.Timer(getStatistics, null, 1000, Timeout.Infinite);

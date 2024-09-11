@@ -3,14 +3,14 @@ using System.Linq;
 
 namespace ExtensionMethods
 {
-    public static class PropertiesToolkit
+    internal static class PropertiesToolkit
     {
         /// <summary>
         /// Copies all the matching properties and fields from 'source' to 'destination'
         /// </summary>
         /// <param name="source">The source object to copy from</param>  
         /// <param name="destination">The destination object to copy to</param>
-        public static void CopyPropsTo<T1, T2>(this T1 source, ref T2 destination)
+        internal static void CopyPropsTo<T1, T2>(this T1 source, ref T2 destination)
         {
             var sourceMembers = GetMembers(source.GetType());
             var destinationMembers = GetMembers(destination.GetType());

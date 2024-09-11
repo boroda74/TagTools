@@ -53,7 +53,7 @@ namespace MusicBeePlugin
             public string OddEven { get; set; }
         }
 
-        protected bool forceCloseForms = true;
+        internal protected bool forceCloseForms = true;
 
         private static string CustomText1;
 
@@ -189,7 +189,7 @@ namespace MusicBeePlugin
             new ControlBorder(this.descriptionBox);
         }
 
-        protected override void initializeForm()
+        internal protected override void initializeForm()
         {
             base.initializeForm();
             Enable(false, autoApplyPresetsLabel, presetList);
@@ -478,7 +478,7 @@ namespace MusicBeePlugin
 
         private const int PropMetaDataThreshold = 1000;
 
-        private enum ServiceMetaData
+        public enum ServiceMetaData
         {
             ParameterTagId1 = -101,
             ParameterTagId2 = -102,
@@ -778,7 +778,7 @@ namespace MusicBeePlugin
                     return " " + hotkeyChar;
             }
 
-            public string getHotkeyDescription()
+            internal string getHotkeyDescription()
             {
                 return AsrPresetHotkeyDescription + "⌕: " + getName() + getHotkeyPostfix();
             }
@@ -791,7 +791,7 @@ namespace MusicBeePlugin
                     + (condition ? " " : string.Empty) + (!string.IsNullOrEmpty(id) ? " " : string.Empty) + getHotkeyPostfix() + changedPostfix;
             }
 
-            public string getName(bool getEnglishName = false)
+            internal string getName(bool getEnglishName = false)
             {
                 if (getEnglishName)
                     return GetDictValue(names, "en");
@@ -799,7 +799,7 @@ namespace MusicBeePlugin
                     return GetDictValue(names, Language);
             }
 
-            public string getSafeFileName()
+            internal string getSafeFileName()
             {
                 var presetSafeFileName = getName().Replace('\\', '-').Replace('/', '-').Replace('<', '[').Replace('>', ']')
                     .Replace(" : ", " - ").Replace(": ", " - ").Replace(":", "-")
@@ -812,7 +812,7 @@ namespace MusicBeePlugin
                 return presetSafeFileName;
             }
 
-            public static Preset LoadPreset(string filename, XmlSerializer presetSerializer)
+            internal static Preset LoadPreset(string filename, XmlSerializer presetSerializer)
             {
                 var stream = System.IO.File.Open(filename, FileMode.Open, FileAccess.Read, FileShare.None); //-V5609
                 var file = new StreamReader(stream, Unicode);
@@ -850,7 +850,7 @@ namespace MusicBeePlugin
                 return savedPreset;
             }
 
-            public bool areFineCustomizationsMade(Preset referencePreset)
+            internal bool areFineCustomizationsMade(Preset referencePreset)
             {
                 var areFineCustomizationsMade = false;
 
@@ -872,7 +872,7 @@ namespace MusicBeePlugin
                 return areFineCustomizationsMade;
             }
 
-            public void setCustomizationsFlag(AdvancedSearchAndReplace form, Preset referencePreset)
+            internal void setCustomizationsFlag(AdvancedSearchAndReplace form, Preset referencePreset)
             {
                 if (referencePreset == null)
                     return;
@@ -922,12 +922,12 @@ namespace MusicBeePlugin
                 }
             }
 
-            public bool getCustomizationsFlag()
+            internal bool getCustomizationsFlag()
             {
                 return customizedByUser || (!userPreset && !string.IsNullOrWhiteSpace(preserveValues));
             }
 
-            public void copyBasicCustomizationsFrom(Preset referencePreset)
+            internal void copyBasicCustomizationsFrom(Preset referencePreset)
             {
                 favorite = referencePreset.favorite;
                 hotkeyAssigned = referencePreset.hotkeyAssigned;
@@ -937,7 +937,7 @@ namespace MusicBeePlugin
                 preserveTags = referencePreset.preserveTags;
             }
 
-            public void copyExtendedCustomizationsFrom(Preset referencePreset)
+            internal void copyExtendedCustomizationsFrom(Preset referencePreset)
             {
                 copyBasicCustomizationsFrom(referencePreset);
 
@@ -949,7 +949,7 @@ namespace MusicBeePlugin
                 preserveValues = referencePreset.preserveValues;
             }
 
-            public void copyAdvancedCustomizationsFrom(Preset referencePreset)
+            internal void copyAdvancedCustomizationsFrom(Preset referencePreset)
             {
                 copyExtendedCustomizationsFrom(referencePreset);
 
@@ -965,7 +965,7 @@ namespace MusicBeePlugin
                 parameterTag6Id = referencePreset.parameterTag6Id;
             }
 
-            public static string Escape(string input)
+            internal static string Escape(string input)
             {
                 if (input == null)
                     return null;
@@ -973,7 +973,7 @@ namespace MusicBeePlugin
                 return input.Replace(' ', '\uFFFD').Replace('\t', '\uFFFC');
             }
 
-            public static string Unescape(string input)
+            internal static string Unescape(string input)
             {
                 if (input == null)
                     return null;
@@ -981,7 +981,7 @@ namespace MusicBeePlugin
                 return input.Replace('\uFFFD', ' ').Replace('\uFFFC', '\t');
             }
 
-            public string savePreset(string pathName = null)
+            internal string savePreset(string pathName = null)
             {
                 if (pathName == null)
                     pathName = Path.Combine(@"\\?\" + PresetsPath, guid.ToString() + AsrPresetExtension);
@@ -1025,7 +1025,7 @@ namespace MusicBeePlugin
                 return pathName;
             }
 
-            public string replaceVariable(string pattern, bool isSearchPattern) //isSearchPattern: true - search (i.e. must be escaped), false - replace
+            internal string replaceVariable(string pattern, bool isSearchPattern) //isSearchPattern: true - search (i.e. must be escaped), false - replace
             {
                 CustomText1 = customText;
 
@@ -1053,7 +1053,7 @@ namespace MusicBeePlugin
                 return pattern;
             }
 
-            public bool detectAllTagsTagId(int tagId)
+            internal bool detectAllTagsTagId(int tagId)
             {
                 if (substituteTagId(tagId) == (int)AllTagsPseudoTagId)
                     return true;
@@ -1061,7 +1061,7 @@ namespace MusicBeePlugin
                     return false;
             }
 
-            public (int, bool[]) getAllTagsReplaceTagIds() //Returns (<All Tags> replace parameter Id count, <All Tags> parameter Id mask)
+            internal (int, bool[]) getAllTagsReplaceTagIds() //Returns (<All Tags> replace parameter Id count, <All Tags> parameter Id mask)
             {
                 var allTagsParameterTagMask = new bool[5];
                 allTagsParameterTagMask[0] = false;
@@ -1089,7 +1089,7 @@ namespace MusicBeePlugin
                 return (countAllTagsReplaceTagIds(), allTagsParameterTagMask);
             }
 
-            public int countAllTagsReplaceTagIds() //Counts <All Tags> replace parameter Ids
+            internal int countAllTagsReplaceTagIds() //Counts <All Tags> replace parameter Ids
             {
                 allTagsReplaceIdsCount = 0;
 
@@ -1111,7 +1111,7 @@ namespace MusicBeePlugin
                 return allTagsReplaceIdsCount;
             }
 
-            public int substituteTagId(int tagId)
+            internal int substituteTagId(int tagId)
             {
                 switch ((ServiceMetaData)tagId) //-V3002
                 {
@@ -1189,9 +1189,9 @@ namespace MusicBeePlugin
 
         private class Function
         {
-            protected string functionName = "null";
+            internal protected string functionName = "null";
 
-            protected virtual string calculate(string currentFile, string parameter0, string parameter1 = null)
+            internal protected virtual string calculate(string currentFile, string parameter0, string parameter1 = null)
             {
                 return "\u0000";
             }
@@ -1245,7 +1245,7 @@ namespace MusicBeePlugin
                 functionName = "rg2sc";
             }
 
-            protected override string calculate(string currentFile, string parameter0, string parameter1 = null) //-V3065
+            internal protected override string calculate(string currentFile, string parameter0, string parameter1 = null) //-V3065
             {
                 parameter0 = Regex.Replace(parameter0, @"(.*)\s.*", "$1");
 
@@ -1318,7 +1318,7 @@ namespace MusicBeePlugin
                 functionName = "rg2sc4mp3";
             }
 
-            protected override string calculate(string currentFile, string parameter0, string parameter1 = null)
+            internal protected override string calculate(string currentFile, string parameter0, string parameter1 = null)
             {
                 return base.calculate(currentFile, parameter0, parameter1) + "\u0000";
             }
@@ -1331,7 +1331,7 @@ namespace MusicBeePlugin
                 functionName = "tc";
             }
 
-            protected override string calculate(string currentFile, string parameter0, string parameter1 = null)
+            internal protected override string calculate(string currentFile, string parameter0, string parameter1 = null)
             {
                 if (parameter1 == null)
                     parameter1 = SavedSettings.exceptionWordsAsr;
@@ -1357,7 +1357,7 @@ namespace MusicBeePlugin
                 functionName = "lc";
             }
 
-            protected override string calculate(string currentFile, string parameter0, string parameter1 = null)
+            internal protected override string calculate(string currentFile, string parameter0, string parameter1 = null)
             {
                 if (parameter1 == null)
                     parameter1 = SavedSettings.exceptionWordsAsr;
@@ -1381,7 +1381,7 @@ namespace MusicBeePlugin
                 functionName = "uc";
             }
 
-            protected override string calculate(string currentFile, string parameter0, string parameter1 = null)
+            internal protected override string calculate(string currentFile, string parameter0, string parameter1 = null)
             {
                 if (parameter1 == null)
                     parameter1 = SavedSettings.exceptionWordsAsr;
@@ -1405,7 +1405,7 @@ namespace MusicBeePlugin
                 functionName = "sc";
             }
 
-            protected override string calculate(string currentFile, string parameter0, string parameter1 = null)
+            internal protected override string calculate(string currentFile, string parameter0, string parameter1 = null)
             {
                 if (parameter1 == null)
                     parameter1 = SavedSettings.exceptionWordsAsr;
@@ -1431,7 +1431,7 @@ namespace MusicBeePlugin
                 functionName = "eval";
             }
 
-            protected override string calculate(string currentFile, string parameter0, string parameter1 = null) //-V3065
+            internal protected override string calculate(string currentFile, string parameter0, string parameter1 = null) //-V3065
             {
                 parameter0 = parameter0.Replace("\"\"", "^^");
                 parameter0 = parameter0.Replace("\"", "&&&");
@@ -1460,7 +1460,7 @@ namespace MusicBeePlugin
                 functionName = "char";
             }
 
-            protected override string calculate(string currentFile, string parameter0, string parameter1 = null)
+            internal protected override string calculate(string currentFile, string parameter0, string parameter1 = null)
             {
                 var charcode = ushort.Parse(parameter0, System.Globalization.NumberStyles.HexNumber);
                 var character = ((char)charcode).ToString();
@@ -1489,7 +1489,7 @@ namespace MusicBeePlugin
                 functionName = "repunct";
             }
 
-            protected override string calculate(string currentFile, string parameter0, string parameter1 = null) //-V3065
+            internal protected override string calculate(string currentFile, string parameter0, string parameter1 = null) //-V3065
             {
                 parameter0 = Regex.Replace(parameter0, "\u013F", "L");
                 parameter0 = Regex.Replace(parameter0, "\u0140", "l");
@@ -1585,7 +1585,7 @@ namespace MusicBeePlugin
                 }
             }
 
-            protected override string calculate(string currentFile, string parameter0, string parameter1 = null) //-V3065
+            internal protected override string calculate(string currentFile, string parameter0, string parameter1 = null) //-V3065
             {
                 CustomText1 = Regex.Replace(CustomText1, "; ", ";");
                 var artists = parameter0.Replace("\u000E", "[").Replace("\u000F", "]").Split(new[] { "\u0000" }, StringSplitOptions.RemoveEmptyEntries);
@@ -1666,7 +1666,7 @@ namespace MusicBeePlugin
                 }
             }
 
-            protected override string calculate(string currentFile, string parameter0, string parameter1 = null) //-V3065
+            internal protected override string calculate(string currentFile, string parameter0, string parameter1 = null) //-V3065
             {
                 CustomText1 = Regex.Replace(CustomText1, "; ", ";");
                 var people = parameter0.Replace("\u000E", "[").Replace("\u000F", "]").Replace("; ", ";").Replace(": ", ":").Split(new[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
@@ -1725,7 +1725,7 @@ namespace MusicBeePlugin
                 functionName = "replace";
             }
 
-            protected override string calculate(string currentFile, string parameter0, string parameter1 = null)
+            internal protected override string calculate(string currentFile, string parameter0, string parameter1 = null)
             {
                 if (parameter1 == null)
                     return CtlAsrSyntaxError;
@@ -2043,7 +2043,7 @@ namespace MusicBeePlugin
             return -1;
         }
 
-        protected static bool SetFileTag(string sourceFileUrl, MetaDataType tagId, string value, bool updateOnlyChangedTags, AdvancedSearchAndReplace plugin)
+        internal protected static bool SetFileTag(string sourceFileUrl, MetaDataType tagId, string value, bool updateOnlyChangedTags, AdvancedSearchAndReplace plugin)
         {
             if (tagId == ClipboardTagId)
             {
@@ -3131,7 +3131,7 @@ namespace MusicBeePlugin
             Ignore = 5
         }
 
-        protected static ChangesDetectionResult DetectPresetStepChanges(bool replacedTagPreserved, bool replacedTagValuePreserved)
+        internal protected static ChangesDetectionResult DetectPresetStepChanges(bool replacedTagPreserved, bool replacedTagValuePreserved)
         {
             var leaveNotChanged = !SavedSettings.dontIncludeInPreviewLinesWithoutChangedTags;
             var leavePreservedTagsResults = !SavedSettings.dontIncludeInPreviewLinesWithPreservedTagsAsr;

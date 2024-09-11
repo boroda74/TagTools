@@ -16,7 +16,7 @@ namespace MusicBeePlugin
 
         private bool customTrackIdTagWarningShown;
 
-        internal AutoBackupSettings(Plugin plugin) : base(plugin)
+        public AutoBackupSettings(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
 
@@ -24,7 +24,7 @@ namespace MusicBeePlugin
             new ControlBorder(this.autoBackupPrefixTextBox);
         }
 
-        protected override void initializeForm()
+        internal protected override void initializeForm()
         {
             base.initializeForm();
 

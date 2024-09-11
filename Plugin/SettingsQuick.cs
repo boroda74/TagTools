@@ -15,7 +15,7 @@ namespace MusicBeePlugin
         private string selectedChangedLegendText;
         private System.Drawing.Font customFont;
 
-        protected void setCloseShowWindowsRadioButtons(int pos)
+        internal protected void setCloseShowWindowsRadioButtons(int pos)
         {
             switch (pos)
             {
@@ -28,7 +28,7 @@ namespace MusicBeePlugin
             }
         }
 
-        protected int getCloseShowWindowsRadioButtons()
+        internal protected int getCloseShowWindowsRadioButtons()
         {
             if (closeHiddenCommandWindowsRadioButton.Checked) return 1;
             else return 2;
@@ -66,7 +66,7 @@ namespace MusicBeePlugin
             preservedTagValuesLegendTextBox.BackColor = selectedLineColors ? PreservedTagValueCellStyle.SelectionBackColor : PreservedTagValueCellStyle.BackColor;
         }
 
-        internal QuickSettings(Plugin plugin) : base(plugin)
+        public QuickSettings(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
 
@@ -76,7 +76,7 @@ namespace MusicBeePlugin
             new ControlBorder(this.changedLegendTextBox);
         }
 
-        protected override void initializeForm()
+        internal protected override void initializeForm()
         {
             base.initializeForm();
 

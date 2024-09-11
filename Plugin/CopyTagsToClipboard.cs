@@ -23,12 +23,12 @@ namespace MusicBeePlugin
         private string[] selectedTags;
         private readonly bool returnSelectedTags;
 
-        internal CopyTagsToClipboard(Plugin plugin) : base(plugin)
+        public CopyTagsToClipboard(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
         }
 
-        internal CopyTagsToClipboard(Plugin plugin, string formTitle, string copyButtonName) : this(plugin)
+        public CopyTagsToClipboard(Plugin plugin, string formTitle, string copyButtonName) : this(plugin)
         {
             tagSetComboBox.Visible = false;
             Text = formTitle;
@@ -43,7 +43,7 @@ namespace MusicBeePlugin
         }
 
 
-        protected override void initializeForm()
+        internal protected override void initializeForm()
         {
             base.initializeForm();
 

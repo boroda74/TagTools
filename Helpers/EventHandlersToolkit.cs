@@ -77,14 +77,14 @@ namespace ExtensionMethods
         internal static void FireEvent(this object targetObject, string eventName, EventArgs e)
         {
             /*
-             * By convention event handlers are internally called by a protected
+             * By convention event handlers are internally called by a internal protected
              * method called OnEventName
              * e.g.
              *     internal event TextChanged
              * is triggered by
-             *     protected void OnTextChanged
+             *     internal protected void OnTextChanged
              * 
-             * If the object didn't create an OnXxxx protected method,
+             * If the object didn't create an OnXxxx internal protected method,
              * then you're screwed. But your alternative was over override
              * the method and call it - so you'd be screwed the other way too.
              */

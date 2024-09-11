@@ -12,12 +12,12 @@ namespace MusicBeePlugin
         private CustomComboBox lastSkippedDateFormatTagListCustom;
 
 
-        internal SaveLastSkippedDate(Plugin plugin) : base(plugin)
+        public SaveLastSkippedDate(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
         }
 
-        protected override void initializeForm()
+        internal protected override void initializeForm()
         {
             base.initializeForm();
 

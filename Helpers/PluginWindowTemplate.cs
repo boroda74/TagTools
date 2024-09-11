@@ -16,13 +16,13 @@ namespace MusicBeePlugin
 {
     public partial class PluginWindowTemplate : Form
     {
-        protected bool modal;
-        protected bool fixedSize;
-        protected FormWindowState windowState;
-        protected int left;
-        protected int top;
-        protected int height;
-        protected int width;
+        internal protected bool modal;
+        internal protected bool fixedSize;
+        internal protected FormWindowState windowState;
+        internal protected int left;
+        internal protected int top;
+        internal protected int height;
+        internal protected int width;
 
         internal bool dontShowForm = false;
 
@@ -48,18 +48,18 @@ namespace MusicBeePlugin
         internal Dictionary<Control, Control> controlsReferencedY = new Dictionary<Control, Control>();
 
         internal List<Button> nonDefaultingButtons = new List<Button>();
-        protected bool artificiallyFocusedAcceptButton;
+        internal protected bool artificiallyFocusedAcceptButton;
 
         internal SortedDictionary<string, bool> textBoxNamesEnableStatuses = new SortedDictionary<string, bool>();
 
-        protected List<Control> pinnedToParentControlsX = new List<Control>();
-        protected List<Control> leftRightAnchoredControls = new List<Control>();
+        internal protected List<Control> pinnedToParentControlsX = new List<Control>();
+        internal protected List<Control> leftRightAnchoredControls = new List<Control>();
 
-        protected List<Control> pinnedToParentControlsY = new List<Control>();
-        protected List<Control> topBottomAnchoredControls = new List<Control>();
+        internal protected List<Control> pinnedToParentControlsY = new List<Control>();
+        internal protected List<Control> topBottomAnchoredControls = new List<Control>();
 
 
-        protected struct SplitContainerScalingAttributes
+        internal protected struct SplitContainerScalingAttributes
         {
             internal SplitContainer splitContainer;
             internal int panel1MinSize;
@@ -67,43 +67,43 @@ namespace MusicBeePlugin
             internal int splitterDistance;
         }
 
-        protected List<SplitContainerScalingAttributes> splitContainersScalingAttributes = new List<SplitContainerScalingAttributes>();
+        internal protected List<SplitContainerScalingAttributes> splitContainersScalingAttributes = new List<SplitContainerScalingAttributes>();
 
 
         //Font & colors
         internal readonly bool useSkinColors;
-        protected bool useMusicBeeFont;
-        protected bool useCustomFont;
+        internal protected bool useMusicBeeFont;
+        internal protected bool useCustomFont;
 
         private Font workingFont;
 
 
         //Opened form cached colors (for button repainting)
-        protected Color controlHighlightForeColor;
-        protected Color controlHighlightBackColor;
-        protected Color buttonForeColor;
-        protected Color buttonBackColor;
-        protected Color buttonBorderColor;
-        protected Color buttonDisabledForeColor;
-        protected Color buttonDisabledBackColor;
+        internal protected Color controlHighlightForeColor;
+        internal protected Color controlHighlightBackColor;
+        internal protected Color buttonForeColor;
+        internal protected Color buttonBackColor;
+        internal protected Color buttonBorderColor;
+        internal protected Color buttonDisabledForeColor;
+        internal protected Color buttonDisabledBackColor;
 
 
         //Skin button labels for rendering disabled buttons, combo boxes & contol borders
-        protected Dictionary<Button, string> buttonLabels = new Dictionary<Button, string>();
-        protected Dictionary<Control, string> controlCueBanners = new Dictionary<Control, string>();
+        internal protected Dictionary<Button, string> buttonLabels = new Dictionary<Button, string>();
+        internal protected Dictionary<Control, string> controlCueBanners = new Dictionary<Control, string>();
         internal List<ControlBorder> controlBorders = new List<ControlBorder>();
 
-        protected Control lastSelectedControl;
+        internal protected Control lastSelectedControl;
 
 
         //Let's ignore size/position change events during form DPI/font scaling
-        protected bool ignoreSizePositionChanges = true;
+        internal protected bool ignoreSizePositionChanges = true;
 
 
         //BACKGROUND TASKS PROCESSING
         internal delegate void StopButtonClicked(PrepareOperation prepareOperation);
         internal delegate void TaskStarted();
-        public delegate bool PrepareOperation();
+        internal protected delegate bool PrepareOperation();
 
         internal delegate void DataGridViewFormatChangedTags(DataGridView dataGridView, int rowIndex);
 
@@ -111,10 +111,10 @@ namespace MusicBeePlugin
         private volatile bool isStopButtonAlreadyClicked = false;
         private TaskStarted taskStarted;
 
-        protected static Plugin TagToolsPlugin;
+        internal protected static Plugin TagToolsPlugin;
 
         private Thread backgroundThread;
-        protected ThreadStart job;
+        internal protected ThreadStart job;
 
         internal volatile bool backgroundTaskIsScheduled;
         internal volatile bool backgroundTaskIsUpdatingTags;
@@ -123,23 +123,23 @@ namespace MusicBeePlugin
         internal volatile bool backgroundTaskIsStoppedOrCancelled;
         internal volatile bool previewIsGenerated;
 
-        protected volatile bool closeFormOnStopping = false;
-        protected volatile bool ignoreClosingForm = false;
+        internal protected volatile bool closeFormOnStopping = false;
+        internal protected volatile bool ignoreClosingForm = false;
 
-        protected Button clickedButton;
-        protected Button previewButton;
-        protected Button closeButton;
+        internal protected Button clickedButton;
+        internal protected Button previewButton;
+        internal protected Button closeButton;
 
-        protected string buttonOKName;
-        protected string buttonPreviewName;
-        protected string buttonCloseName;
+        internal protected string buttonOKName;
+        internal protected string buttonPreviewName;
+        internal protected string buttonCloseName;
 
-        internal PluginWindowTemplate()
+        public PluginWindowTemplate()
         {
             //Some operations won't create visual forms of commands. Only they use this constructor. Let's skip component initialization in this case.
         }
 
-        internal PluginWindowTemplate(Plugin plugin)
+        public PluginWindowTemplate(Plugin plugin)
         {
             InitializeComponent();
 
@@ -249,7 +249,7 @@ namespace MusicBeePlugin
             e.DrawFocusRectangle();
         }
 
-        protected void comboBox_DrawItem(object sender, DrawItemEventArgs e)
+        internal protected void comboBox_DrawItem(object sender, DrawItemEventArgs e)
         {
             var comboBox = sender as ComboBox;
 
@@ -311,7 +311,7 @@ namespace MusicBeePlugin
             setSkinnedControlColors(sender as Control, null);
         }
 
-        protected void button_EnabledChanged(object sender, EventArgs e)
+        internal protected void button_EnabledChanged(object sender, EventArgs e)
         {
             var button = sender as Button;
 
@@ -323,7 +323,7 @@ namespace MusicBeePlugin
                 button_LostFocus(sender, e);
         }
 
-        protected void button_GotFocus(object sender, EventArgs e)
+        internal protected void button_GotFocus(object sender, EventArgs e)
         {
             var button = sender as Button;
             var acceptButton = AcceptButton as Button;
@@ -365,13 +365,13 @@ namespace MusicBeePlugin
             setSkinnedControlColors(button, null);
         }
 
-        protected void button_LostFocus(object sender, EventArgs e)
+        internal protected void button_LostFocus(object sender, EventArgs e)
         {
             if (sender != null)
                 setSkinnedControlColors(sender as Button, null);
         }
 
-        protected void button_MouseEnter(object sender, EventArgs e)
+        internal protected void button_MouseEnter(object sender, EventArgs e)
         {
             Button button = sender as Button;
             if (useSkinColors && !(button.Parent is CustomComboBox) && button.IsEnabled())
@@ -382,7 +382,7 @@ namespace MusicBeePlugin
             button.Refresh();
         }
 
-        protected void button_MouseLeave(object sender, EventArgs e)
+        internal protected void button_MouseLeave(object sender, EventArgs e)
         {
             Button button = sender as Button;
             if (useSkinColors && button.IsEnabled() && button == button.FindForm().AcceptButton)
@@ -393,7 +393,7 @@ namespace MusicBeePlugin
             button.Refresh();
         }
 
-        protected bool isMouseOverControl(Control control)
+        internal protected bool isMouseOverControl(Control control)
         {
             if (useSkinColors)
                 return control.ClientRectangle.Contains(control.PointToClient(Cursor.Position));
@@ -401,7 +401,7 @@ namespace MusicBeePlugin
                 return false;
         }
 
-        protected void button_Paint(object sender, PaintEventArgs e)
+        internal protected void button_Paint(object sender, PaintEventArgs e)
         {
             var button = sender as Button;
 
@@ -431,7 +431,7 @@ namespace MusicBeePlugin
             }
         }
 
-        protected void button_TextChanged(object sender, EventArgs e)
+        internal protected void button_TextChanged(object sender, EventArgs e)
         {
             var button = sender as Button;
             var text = button.Text;
@@ -448,7 +448,7 @@ namespace MusicBeePlugin
             }
         }
 
-        protected void control_Enter(object sender, EventArgs e)
+        internal protected void control_Enter(object sender, EventArgs e)
         {
             var control = sender as Control;
             if (!(control is Button) && !control.GetType().IsSubclassOf(typeof(Button)) && control.Controls.Count == 0)
@@ -466,7 +466,7 @@ namespace MusicBeePlugin
         }
 
 
-        protected void Enable(bool state, Control preservedControl1, Control preservedControl2)
+        internal protected void Enable(bool state, Control preservedControl1, Control preservedControl2)
         {
             foreach (var control in allControls)
             {
@@ -505,6 +505,8 @@ namespace MusicBeePlugin
             {
                 if (control.AccessibleDescription != DisabledState)
                     control.EnableInternal(true);
+                else
+                    control.EnableInternal(false);
 
                 control.AccessibleDescription = string.Empty;
             }
@@ -1410,12 +1412,12 @@ namespace MusicBeePlugin
             }
         }
 
-        protected void dgvCustomHScrollBar_Scroll(object sender, EventArgs e)
+        internal protected void dgvCustomHScrollBar_Scroll(object sender, EventArgs e)
         {
             dgvCustomHScrollBar_ValueChanged(sender, e);
         }
 
-        protected void dgvCustomHScrollBar_ValueChanged(object sender, EventArgs e)
+        internal protected void dgvCustomHScrollBar_ValueChanged(object sender, EventArgs e)
         {
             var customHScrollBar = sender as CustomHScrollBar;
             var dataGridView = customHScrollBar.Parent as DataGridView;
@@ -1443,12 +1445,12 @@ namespace MusicBeePlugin
             }
         }
 
-        protected void dgvCustomVScrollBar_Scroll(object sender, EventArgs e)
+        internal protected void dgvCustomVScrollBar_Scroll(object sender, EventArgs e)
         {
             dgvCustomVScrollBar_ValueChanged(sender, e);
         }
 
-        protected void setDgvVerticalOffset(DataGridView dataGridView, int offset)
+        internal protected void setDgvVerticalOffset(DataGridView dataGridView, int offset)
         {
             try
             {
@@ -1461,7 +1463,7 @@ namespace MusicBeePlugin
             }
         }
 
-        protected void dgvCustomVScrollBar_ValueChanged(object sender, EventArgs e)
+        internal protected void dgvCustomVScrollBar_ValueChanged(object sender, EventArgs e)
         {
             var customVScrollBar = sender as CustomVScrollBar;
             var dataGridView = customVScrollBar.Parent as DataGridView;
@@ -1546,12 +1548,12 @@ namespace MusicBeePlugin
             }
         }
 
-        protected void listBoxCustomHScrollBar_Scroll(object sender, EventArgs e)
+        internal protected void listBoxCustomHScrollBar_Scroll(object sender, EventArgs e)
         {
             listBoxCustomHScrollBar_ValueChanged(sender, e);
         }
 
-        protected void listBoxCustomHScrollBar_ValueChanged(object sender, EventArgs e)
+        internal protected void listBoxCustomHScrollBar_ValueChanged(object sender, EventArgs e)
         {
             var customHScrollBar = sender as CustomHScrollBar;
             var listBox = customHScrollBar.ScrolledControl as ListBox;
@@ -1578,12 +1580,12 @@ namespace MusicBeePlugin
             }
         }
 
-        protected void listBoxCustomVScrollBar_Scroll(object sender, EventArgs e)
+        internal protected void listBoxCustomVScrollBar_Scroll(object sender, EventArgs e)
         {
             listBoxCustomVScrollBar_ValueChanged(sender, e);
         }
 
-        protected void listBoxCustomVScrollBar_ValueChanged(object sender, EventArgs e)
+        internal protected void listBoxCustomVScrollBar_ValueChanged(object sender, EventArgs e)
         {
             var customVScrollBar = sender as CustomVScrollBar;
             var listBox = customVScrollBar.ScrolledControl as ListBox;
@@ -1652,6 +1654,10 @@ namespace MusicBeePlugin
         private void listBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             var listBox = sender as ListBox;
+
+            if (listBox.Disposing || listBox.IsDisposed)
+                return;
+
 
             if (listBox.MultiColumn)
             {
@@ -1759,12 +1765,12 @@ namespace MusicBeePlugin
             throw new Exception("Invalid scroll bar class: " + refScrollBar.GetType().FullName);
         }
 
-        protected void tbCustomVScrollBar_Scroll(object sender, EventArgs e)
+        internal protected void tbCustomVScrollBar_Scroll(object sender, EventArgs e)
         {
             tbCustomVScrollBar_ValueChanged(sender, e);
         }
 
-        protected void tbCustomVScrollBar_ValueChanged(object sender, EventArgs e)
+        internal protected void tbCustomVScrollBar_ValueChanged(object sender, EventArgs e)
         {
             var customVScrollBar = sender as CustomVScrollBar;
             var textBox = customVScrollBar.ScrolledControl as TextBox;
@@ -1790,12 +1796,12 @@ namespace MusicBeePlugin
             }
         }
 
-        protected void ctbCustomVScrollBar_Scroll(object sender, EventArgs e)
+        internal protected void ctbCustomVScrollBar_Scroll(object sender, EventArgs e)
         {
             ctbCustomVScrollBar_ValueChanged(sender, e);
         }
 
-        protected void ctbCustomVScrollBar_ValueChanged(object sender, EventArgs e)
+        internal protected void ctbCustomVScrollBar_ValueChanged(object sender, EventArgs e)
         {
             var customVScrollBar = sender as CustomVScrollBar;
             var textBox = customVScrollBar.ScrolledControl as CustomTextBox;
@@ -2346,7 +2352,7 @@ namespace MusicBeePlugin
             textBox.Invalidate();
         }
 
-        protected void scrollBar_VisibleChanged(object sender, EventArgs e)
+        internal protected void scrollBar_VisibleChanged(object sender, EventArgs e)
         {
             var control = sender as Control;
 
@@ -2476,7 +2482,7 @@ namespace MusicBeePlugin
                 UpdateCustomScrollBars(dataGridView, 1, dataGridView.RowCount);
         }
 
-        protected CustomComboBox getKeyEventCustomComboBox(object sender)
+        internal CustomComboBox getKeyEventCustomComboBox(object sender)
         {
             CustomComboBox customComboBox;
 
@@ -3289,7 +3295,7 @@ namespace MusicBeePlugin
             }
         }
 
-        protected void setInitialFormMaximumMinimumSize(Size initialMinimumSize, Size initialMaximumSize, bool sameMinMaxWidth, bool sameMinMaxHeight)
+        internal protected void setInitialFormMaximumMinimumSize(Size initialMinimumSize, Size initialMaximumSize, bool sameMinMaxWidth, bool sameMinMaxHeight)
         {
             if (sameMinMaxWidth && sameMinMaxHeight)
                 fixedSize = true;
@@ -3395,7 +3401,7 @@ namespace MusicBeePlugin
             }
         }
 
-        protected void scaleForm()
+        internal protected void scaleForm()
         {
             var ownFontControls = new List<Control>();
 
@@ -3557,7 +3563,7 @@ namespace MusicBeePlugin
             setInitialFormMaximumMinimumSize(initialMinimumSize, initialMaximumSize, sameMinMaxWidth, sameMinMaxHeight);
         }
 
-        protected void setFormMaximizedBounds()
+        internal protected void setFormMaximizedBounds()
         {
             if (modal && MaximumSize.Height != 0 && !fixedSize)
             {
@@ -3571,7 +3577,7 @@ namespace MusicBeePlugin
             }
         }
 
-        protected void initAndShow()
+        internal protected void initAndShow()
         {
             if (!dontShowForm) //If dontShowForm, then form is created to get DPI/font scaling only, won't show it, form will be disposed soon.
             {
@@ -3685,7 +3691,7 @@ namespace MusicBeePlugin
             showFormInternal();
         }
 
-        protected void showFormInternal()
+        internal protected void showFormInternal()
         {
             if (PluginClosing)
                 return;
@@ -3764,7 +3770,7 @@ namespace MusicBeePlugin
             }
         }
 
-        protected virtual void initializeForm()
+        internal protected virtual void initializeForm()
         {
             //Implemented in derived classes... 
         }
@@ -3774,27 +3780,27 @@ namespace MusicBeePlugin
             initializeForm();
         }
 
-        protected virtual void childClassFormShown()
+        internal protected virtual void childClassFormShown()
         {
             //Must be implemented in child classes. It is called before main processing of PluginWindowTemplate_Shown().
         }
 
-        protected virtual void OnMaximizing()
+        internal protected virtual void OnMaximizing()
         {
             //...
         }
 
-        protected virtual void OnMaximized()
+        internal protected virtual void OnMaximized()
         {
             //...
         }
 
-        protected virtual void OnRestoring()
+        internal protected virtual void OnRestoring()
         {
             //...
         }
 
-        protected virtual void OnRestored()
+        internal protected virtual void OnRestored()
         {
             //...
         }
@@ -3983,7 +3989,7 @@ namespace MusicBeePlugin
             }
         }
 
-        protected WindowSettingsType findCreateSavedWindowSettings(bool createIfAbsent)
+        internal protected WindowSettingsType findCreateSavedWindowSettings(bool createIfAbsent)
         {
             var fullName = GetType().FullName;
             WindowSettingsType currentWindowSettings = null;
@@ -4010,7 +4016,7 @@ namespace MusicBeePlugin
             return currentWindowSettings;
         }
 
-        protected void loadWindowSizesPositions()
+        internal protected void loadWindowSizesPositions()
         {
             var windowSettings = findCreateSavedWindowSettings(false);
 
@@ -4032,7 +4038,7 @@ namespace MusicBeePlugin
             }
         }
 
-        protected (int, int, int, int, int, int, int) loadWindowLayout()
+        internal protected (int, int, int, int, int, int, int) loadWindowLayout()
         {
             var column1Width = 0;
             var column2Width = 0;
@@ -4062,7 +4068,7 @@ namespace MusicBeePlugin
                 table2column1Width, table2column2Width, table2column3Width);
         }
 
-        protected void saveWindowSizesPositions()
+        internal protected void saveWindowSizesPositions()
         {
             if (Left + Width >= 0 && Top + Height >= 0)
             {
@@ -4117,7 +4123,7 @@ namespace MusicBeePlugin
             }
         }
 
-        protected void saveWindowLayout(int column1Width = 0, int column2Width = 0, int column3Width = 0, int splitterDistance = 0, int table2column1Width = 0, int table2column2Width = 0, int table2column3Width = 0)
+        internal protected void saveWindowLayout(int column1Width = 0, int column2Width = 0, int column3Width = 0, int splitterDistance = 0, int table2column1Width = 0, int table2column2Width = 0, int table2column3Width = 0)
         {
             var currentWindowSettings = findCreateSavedWindowSettings(true);
 
@@ -4325,7 +4331,7 @@ namespace MusicBeePlugin
             }
         }
 
-        protected string getBackgroundTasksWarning()
+        internal protected string getBackgroundTasksWarning()
         {
             if (NumberOfNativeMbBackgroundTasks == 1)
                 return CtlDirtyError1sf + NumberOfNativeMbBackgroundTasks + CtlDirtyError2sf;
@@ -4516,7 +4522,7 @@ namespace MusicBeePlugin
             }
         }
 
-        protected bool checkStoppingStatus()
+        internal protected bool checkStoppingStatus()
         {
             if (PluginClosing)
                 return true;
@@ -4526,7 +4532,7 @@ namespace MusicBeePlugin
                 return false;
         }
 
-        protected bool checkStoppedStatus()
+        internal protected bool checkStoppedStatus()
         {
             if (backgroundTaskIsScheduled && backgroundTaskIsStoppedOrCancelled)
             {
@@ -4551,7 +4557,7 @@ namespace MusicBeePlugin
         }
 
         //Returns: true if preview is started (closing current form must be temporary disabled), otherwise returns false
-        protected bool clickOnPreviewButton(PrepareOperation prepareOperation, ThreadStart operation,
+        internal protected bool clickOnPreviewButton(PrepareOperation prepareOperation, ThreadStart operation,
             Button previewButton, Button okButton, Button closeButton, bool clearPreview = false)
         {
             if (!previewIsGenerated && !backgroundTaskIsWorking() && !clearPreview)

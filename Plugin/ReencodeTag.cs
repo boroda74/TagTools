@@ -42,12 +42,12 @@ namespace MusicBeePlugin
         private Encoding originalEncoding;
         private Encoding usedEncoding;
 
-        internal ReEncodeTag(Plugin plugin) : base(plugin)
+        public ReEncodeTag(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
         }
 
-        protected override void initializeForm()
+        internal protected override void initializeForm()
         {
             base.initializeForm();
 

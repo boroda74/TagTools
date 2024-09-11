@@ -16,12 +16,12 @@ namespace MusicBeePlugin
 
         private string[] files = Array.Empty<string>();
 
-        internal CalculateAverageAlbumRating(Plugin plugin) : base(plugin)
+        public CalculateAverageAlbumRating(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
         }
 
-        protected override void initializeForm()
+        internal protected override void initializeForm()
         {
             base.initializeForm();
 
