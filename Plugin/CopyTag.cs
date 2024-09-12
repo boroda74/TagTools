@@ -819,10 +819,11 @@ namespace MusicBeePlugin
                 Filter = CtlCopyTagFilter,
                 FilterIndex = 0
             };
+
             if (dialog.ShowDialog(this) == DialogResult.Cancel) return;
-            dialog.Dispose();
 
             fileNameTextBoxCustom.Text = dialog.FileName;
+            dialog.Dispose();
         }
 
         private void buttonSettings_Click(object sender, EventArgs e)

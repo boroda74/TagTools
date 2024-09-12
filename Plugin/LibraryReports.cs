@@ -590,6 +590,7 @@ namespace MusicBeePlugin
 
             tagsDataGridView.Columns[1].Width = (int)Math.Round(tagsDataGridView.Columns[1].Width * hDpiFontScaling);
 
+
             presetListLastSelectedIndex = -2;
             presetList_SelectedIndexChanged(null, null);
 
@@ -2117,7 +2118,7 @@ namespace MusicBeePlugin
 
 
             previewTable.DataSource = null;
-            source.DataSource = null;//----------------
+            source.DataSource = null;
             rows.Clear();
 
             while (previewTable.ColumnCount > 0)
@@ -6480,6 +6481,8 @@ namespace MusicBeePlugin
 
                 var presetListSelectedIndex = presetList.SelectedIndex;
                 presetList.Items.RemoveAt(presetList.SelectedIndex);
+
+                presetListLastSelectedIndex = -1;
 
                 if (presetList.Items.Count - 1 >= presetListSelectedIndex)
                     presetList.SelectedIndex = presetListSelectedIndex;

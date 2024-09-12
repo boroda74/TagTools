@@ -4087,8 +4087,7 @@
     <value>6</value>
   </data>
   <data name="condition5SneCheckBox.ToolTip" xml:space="preserve">
-    <value>Replace only if the replacement value is not empty when unchecked
-Replace only if the destination tag is empty when checked</value>
+    <value>Replace only if the replacement value is not empty</value>
   </data>
   <data name="label6.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -6352,10 +6351,10 @@ Replace only if the destination tag is empty when checked</value>
   <data name="replacedPattern4Box.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>17, 17</value>
-  </metadata>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <data name="$this.Localizable" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
 </root>

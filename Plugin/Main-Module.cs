@@ -5673,7 +5673,8 @@ namespace MusicBeePlugin
 
                 TagToolsContextSubmenu.DropDown.Items.Clear();
                 var buttonMouseOverColorsMenuItem = AddMenuItem(TagToolsContextSubmenu, " ", null, null);
-                TagToolsContextSubmenu.DropDown.Items[0].Font = new Font(TagToolsContextSubmenu.DropDown.Items[0].Font.FontFamily, 20f, FontStyle.Regular, GraphicsUnit.Pixel);
+                TagToolsContextSubmenu.DropDown.Items[0].Font = new Font(TagToolsContextSubmenu.DropDown.Items[0].Font.FontFamily, 20f, 
+                    TagToolsContextSubmenu.DropDown.Items[0].Font.Style, GraphicsUnit.Pixel);
                 //TagToolsContextSubmenu.DropDown.Show();
                 Bitmap testBitmap = new Bitmap(88, 28, PixelFormat.Format24bppRgb);
                 TagToolsContextSubmenu.DropDown.DrawToBitmap(testBitmap, new Rectangle(0, 0, 88, 28));
@@ -5685,9 +5686,10 @@ namespace MusicBeePlugin
                 buttonMouseOverColorsMenuItem.Dispose();
                 testBitmap.Dispose();
 
-                buttonMouseOverColorsMenuItem = AddMenuItem(TagToolsContextSubmenu, "■", null, null);
+                buttonMouseOverColorsMenuItem = AddMenuItem(TagToolsContextSubmenu, " ", null, null);
                 TagToolsContextSubmenu.DropDown.Items[0].Select();
-                TagToolsContextSubmenu.DropDown.Items[0].Font = new Font("Lucida Console", 20f, FontStyle.Regular, GraphicsUnit.Pixel);
+                TagToolsContextSubmenu.DropDown.Items[0].Font = new Font(TagToolsContextSubmenu.DropDown.Items[0].Font.FontFamily, 20f,
+                    TagToolsContextSubmenu.DropDown.Items[0].Font.Style, GraphicsUnit.Pixel);
                 //TagToolsContextSubmenu.DropDown.Show();
                 testBitmap = new Bitmap(88, 28, PixelFormat.Format24bppRgb);
                 TagToolsContextSubmenu.DropDown.DrawToBitmap(testBitmap, new Rectangle(0, 0, 88, 28));

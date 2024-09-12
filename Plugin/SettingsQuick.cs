@@ -270,6 +270,8 @@ namespace MusicBeePlugin
                 customFontTextBox.Text = customFont.Name + " " + customFont.Style + " " + customFont.Size + " pt.";
                 customFontTextBox.Text = customFontTextBox.Text.Replace(", ", " ").Replace("bold Bold", "bold");
             }
+
+            customFontDialog.Dispose();
         }
 
         private void highlightChangedTagsCheckBoxLabel_Click(object sender, EventArgs e)

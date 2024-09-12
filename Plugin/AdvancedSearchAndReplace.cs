@@ -4426,7 +4426,6 @@ namespace MusicBeePlugin
             };
 
             if (dialog.ShowDialog(this) == DialogResult.Cancel) return;
-            dialog.Dispose();
 
 
             var selectedPresetGuid = Guid.Empty;
@@ -4507,6 +4506,8 @@ namespace MusicBeePlugin
                     numberOfErrors++;
                 }
             }
+
+            dialog.Dispose();
 
             refreshPresetList(selectedPresetGuid);
 
